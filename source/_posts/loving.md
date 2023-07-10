@@ -1,0 +1,582 @@
+---
+title: All is well
+date: 2009-05-20 13:14:11
+tags:
+---
+
+
+
+
+## 爱
+
+> **自信**，**坚定**
+>
+> **真诚**，**善良**
+>
+> **勇敢**
+
+
+
+
+---
+
+
+
+```
+成熟的爱情，就是在保留自己完整性和独立性的条件下，也就是保持自己个性的条件下与他人合二为一。 
+爱情可以使人克服孤寂和与世隔绝感，但同时又使人保持对自己的忠诚，保持自己的完整性和本来的面貌。
+
+
+大多数人认为爱情首先是自己能否被人爱，而不是自己有没有能力的问题。因此对他们来说，关键是：我会被人爱吗？我如何才能值得被人爱？为了达到这一目的，他们采用了各种途径。
+
+
+天真的、孩童式的爱情遵循下列原则：我爱，因为我被人爱。成熟的爱的原则是：我被人爱，因为我爱人。
+不成熟的、幼稚的爱是：我爱你，因为我需要你。而成熟的爱是：我需要你，因为我爱你。
+
+
+爱情是一种积极的，而不是消极的情绪，是人内心生长的东西，而不是被俘虏的情绪。一般来说可以用另一个说法来表达，即爱情首先是给而不是得。
+
+
+我们的感情和态度的对象不仅是其他人，也包括我们自己。对别人的态度同对我们自己的态度互不矛盾，而是平行存在。
+从这一点出发来解答我们的问题就意味着爱别人和爱我们自己不是两者择一，恰恰相反：一切有能力爱别人的人必定也爱自己。
+原则上爱自己和爱别人是不可分的。真正的爱是内在创造力的表现，包括关怀、尊重、责任心和了解诸因素。
+爱不是一种消极的冲动情绪，而是积极追求被爱人的发展和幸福，这种追求的基础是人的爱的能力。
+
+
+- 弗洛姆：爱的艺术
+```
+
+
+
+---
+
+```
+体会了后悔和遗憾，才会明白，人生的出场顺序有多重要。
+
+---
+错过了很好的相亲对象，想挽回，我们还有可能吗？ - 余无恙的回答 - 知乎
+https://www.zhihu.com/question/341872732/answer/801124328
+```
+
+
+
+
+
+---
+
+```
+当你喜欢你自己的时候，你才会由内而外散发出一种自信，散发出一种自由。
+
+- 陈果
+```
+
+
+
+```
+学会接纳自己，满足自己，爱自己。
+
+先自爱，然后才能爱人，才能得到他人真正的爱。
+而不是先得到他人的爱，然后才能觉得自己值得被爱。
+只有内在充盈的人，笃定地相信自己值得被爱的人，才不会因为贪婪而掉进“虚情假爱”的陷阱，才不会因为害怕、恐慌而控制爱人，才有机会拥有自己的“一生所爱”。
+
+---
+缺爱的人，是不是得不到真正的爱？ - 胡立的回答 - 知乎
+https://www.zhihu.com/question/345084237/answer/1547911800
+```
+
+
+
+```
+缺爱，本质上缺的是安全感和自我认同。
+或许，你早已在充斥着批评与否定的成长环境中，学会了接受世界的坚硬。
+
+所以，一旦有人对你好，卸下了你的心防，你就容易失去理智，在狂热如火的冲动中失去自我。
+
+---
+缺爱的人，是不是得不到真正的爱？ - 诗无忌的回答 - 知乎
+https://www.zhihu.com/question/345084237/answer/942658026
+```
+
+
+
+```
+多数情况下，缺爱者并不是在爱别人，而是在享受被爱的过程。
+他们狂热的付出和给予，是渴望对方能回馈同等的回报。
+他们努力讨好，是为了得到更多的喜欢和认同。
+他们患得患失，是恐惧对方收回现阶段用以满足安全感的情绪价值。
+他们利用爱的外衣，去过度补偿最深处的内在小孩对爱的渴望与诉求，来满足自己比普通人缺失的安全感和自我认同感。
+
+---
+缺爱的人，是不是得不到真正的爱？ - 谁家山泽的回答 - 知乎
+https://www.zhihu.com/question/345084237/answer/2193125819
+```
+
+
+
+```
+可以这么说，缺爱的人，并不是得不到真正的爱，是ta识别不出什么是真正的爱。
+缺爱的人，首先大概率不会好好爱自己，但是却很容易以自我为中心，是高度自恋和高度自卑的结合体。因为缺爱，导致没有从一开始就树立起健康的自信，只能自己本能地保留一点属于自己的东西，以一种显性的方式自卑，迎合别人，以一种隐性的方式自恋，总是在隐藏真实的自己，但另一方面对这个隐蔽的自己又高度认同、不容外界质疑。
+
+所以ta以后对爱的认识，总是很浅显，很幼稚，也很戏剧化。ta不知道什么是成熟的爱，更不懂爱的艺术。
+
+---
+缺爱的人，是不是得不到真正的爱？ - 知乎
+https://www.zhihu.com/question/345084237/answer/2625862613
+```
+
+
+
+```
+他的周身充满着负能量，幸福感低下，没有共情能力，不会爱自己，也不会爱别人，这样的人，你让他怎么爱伴侣，怎么爱孩子？
+
+这样的人教不会你的孩子，自信、阳光、自爱，教不会你的孩子落落大方，更教不会你的孩子成熟稳重。
+他那极度的不安，缺乏的安全感，敏感的内心，多疑的生性，是教不会你们的孩子有个稳定的情绪。
+
+例如他所承受过的苦难，煎熬，家暴，凌辱，欺压与咆哮，父母十成的权威教育。这些他都同样运用到你们的孩子身上，让你们的孩子继承了他的苦难与折磨。
+让你们的孩子，养成跟他一样的性格，胆小、懦弱、自卑与疯狂，让你们孩子的心灵跟着他的心灵一起的扭曲。
+
+从未幸福过的人，不会给别人带去幸福。
+不会爱自己的人，是学不会爱他人的！
+他们的人生多半是毁了，需要一生去治愈。
+
+他们没见过幸福的模样，没体会过正常的人生，从没爱过自己，怎么会去爱人？
+
+---
+为什么说不能喜欢原生家庭烂透了的人？ - 作家的回答 - 知乎
+https://www.zhihu.com/question/574055673/answer/3307386394
+```
+
+
+
+```
+爱是一种能力，这种能力是溢出的，甚至是转移的，爱有来源，才有去处。
+
+---
+为什么说不能喜欢原生家庭烂透了的人？ - 静枫纸鸢的回答 - 知乎
+https://www.zhihu.com/question/574055673/answer/3386556070
+```
+
+
+
+```
+因为原生家庭糟糕的人很难真正对感情做出正向的回馈。一个不懂得爱自己的人，很难懂得如何去爱别人，只会让别人相处起来很累，也很难走进你的心里。
+
+---
+为什么说不能喜欢原生家庭烂透了的人？ - 好柿花生的回答 - 知乎
+https://www.zhihu.com/question/574055673/answer/2888464589
+```
+
+
+
+```
+爱是一种能力，需要从自我理解开始。一个人如果内心空虚、缺乏自爱，就难以给予他人健康、平衡的爱，因为他们可能混淆了牺牲与爱，或者在关系中寻求自我价值的填补，而非出于纯粹的关怀和尊重。
+
+此外，不爱自己的人可能会陷入一种不健康的循环，即通过过度付出来寻求认可，这不仅可能导致个人的耗尽，也可能让对方感到压力，因为这种爱往往带有期望和条件。相反，一个自爱的人在给予爱时更加自由，他们的爱是基于对方的福祉，而非自我需求的满足。
+
+---
+为什么说先爱自己，才能爱别人呢？ - 欧耶的回答 - 知乎
+https://www.zhihu.com/question/874663189/answer/111896473952
+```
+
+
+
+```
+回到问题，我现在的想法是，不爱自己的人，自己本身就处于匮乏的状态，自己都没有满足，是不能给予别人什么东西的，这种情况下更多的是潜藏的索取，是带有条件的付出，自己带着自怜和美化的“爱”，却不自知
+
+---
+为什么说先爱自己，才能爱别人呢？ - Mox1078的回答 - 知乎
+https://www.zhihu.com/question/874663189/answer/83568392317
+```
+
+
+
+```
+因为爱自己，爱才能溢出来爱别人 对自己好才知道如何对别人好，不然投射出来的都是自己的欲望和需求。很多人爱别人是因为需要别人，是对别人有欲望，而不是爱溢出来的。只有当你不缺爱，才有能力爱别人，对别人不会有很多的期待，两个人相处起来也会相对轻松，更容易尊重他人。
+
+---
+为什么说先爱自己，才能爱别人呢？ - 沐晨新私域的回答 - 知乎
+https://www.zhihu.com/question/874663189/answer/27392720432
+```
+
+
+
+```
+没有动力最核心的原因是，你非但不爱自己，你甚至是厌恶自己的。
+绝大部分缺爱的人，内心空了一大块，这部分非但没被爱填满，反而被自卑、拧巴、懦弱、木讷这些性格缺陷填满了，更严重的，还被讨好型人格 、指责型人格 、回避依恋型人格 ，这些心理疾病所困扰。
+⽽你厌恶的，正是有性格缺陷和心理疾病的这部分⾃⼰。
+你厌恶的，唯恐避之不及，恨⾃⼰还差不多，又哪⾥来的动⼒去爱⾃⼰呢？
+
+殊不知，爱⾃⼰的第⼀步，是毫无保留地接受⾃⼰，承认⾃卑、拧巴、懦弱、⽊讷这些性格缺陷，讨好型人格、指责型人格、回避依恋型人格这些心理疾病，也是⾃⼰的⼀部分，承认它们对⾃⼰造成的伤害，并全然接受它们。
+其次，去了解它们背后的成因，找到问题的根源，是有毒的原⽣家庭 还是什么？找到了，也不必太过苛责什么，原谅它，并且释怀。
+然后，对症下药，乐观积极地去提升⾃⼰（这本身就是对⾃⼰最⼤的爱）。
+
+还有⼀个很⼤的认知误区是，很多人觉得⾃⼰缺爱，就去索取爱、占有爱、控制爱，以为这样就能填补⾃⼰爱的空⽩。
+但其实，缺爱的本质并不需要外界或他人的爱去弥补和填充，⽽是要先学会⾃爱，⾃⼰才是爱产⽣的那个源头活
+
+---
+爱自己的动力是什么? - 失语者云骧的回答 - 知乎
+https://www.zhihu.com/question/453951586/answer/2816427393
+```
+
+
+
+```
+人必其自爱也，而后人爱诸；人必其自敬也，而后人敬诸；自爱，仁之至也；自敬，礼之至也。未有不自爱敬而人爱敬之者也。
+
+---
+西汉扬雄《法言·君子》
+```
+
+
+
+[[Why Unloved People Hate Themselves](https://youtu.be/4K41tC_d_7k?si=U9WsCHZ8kLZ-D4Pv)]
+
+[[How Unloving Parents Generate Self-Hating Children](https://youtu.be/ujhn1JdOSB4?si=hROnKx0vMw8Q_sc1)]
+
+
+
+## 认识世界
+
+经济学的思维方式 - 托马斯·索维尔
+
+
+
+
+
+## 启发
+
+```
+别人眼中的你，不是真的你。你眼中的自己，也不是真的你。你眼中的别人，才是真正的你
+
+- 黑塞《悉达多》
+```
+
+
+
+```
+一、 健康与安全
+二、 自我心理调适
+三、 两性关系
+事关普通人一生真正的幸福，而其他领域的知识你尽可以了解，但请不要排在上述3类知识的前面。譬如说你可以琢磨“大国博弈”，但请不要对上述提到的3类知识完全无知的前提下去琢磨大国博弈。其次是摆正对婚姻的理解，婚姻是两个人一起携手对抗这个世界。
+
+爱人之前先爱人
+
+---
+
+ 爱情会把人内心深处的问题暴露出来，像自卑、缺乏安全感、虚荣、自私、自我为中心……自我内在问题不解决，无论遇到什么样的人都会有同样的矛盾冲突，但我们往往更容易看到别人身上的问题，却很难看到自身的问题，这导致了感情的问题不断地循环、延伸，从某方面来说，这种循环模式也就是所谓的“命运”。而突破命运的禁锢就在于不断提升对自我的认知，和自我内在提升上，当自我圆满之时，自然外在的事情也更容易圆满，感情、婚姻也会更顺利。
+
+---
+【【真爱系列1期】如何遇到对的人？如何遇到真爱？关于自爱-婚姻-与亲密关系【载脑体】婚前避坑指南】 https://www.bilibili.com/video/BV1wQ4y1E7SW/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249
+```
+
+
+
+```
+病态自卑者难以停止内心挣扎的原因有两点：一是难以放弃对理想化自我的追求；二是无法接受真实的自己。
+
+- 走出抑郁症
+```
+
+
+
+```
+什么是爱情？ 心理学家弗洛姆对爱是这样定义的： 真正的爱是内在创造力的表现， 包括关怀、 尊重、 责任和了解等诸多因素。 
+爱不是一种消极的冲动情绪， 而是积极追求所爱的人的发展和幸福， 这种追求的基础是人的爱的能力。 
+什么是成熟的爱情？ 那就是在保留自己完整性和独立性的条件下， 也就是保持自己个性的条件下， 与他人合二为一。 
+爱情是一种积极的力量， 这种力量可以冲破人与人之间的高墙并使人与人结合。 
+爱情可以使人克服孤寂和与世隔绝感， 但同时又使人保持对自己的忠诚， 保持自己的完整性和本来面貌。
+
+
+爱的目的是使爱的对象获得幸福、 发展和自由， 因此爱情首先是“给”而不是“得”。 不成熟的爱说“我爱你， 因为我需要你”； 成熟的爱说“我需要你， 因为我爱你”。
+
+
+能获得真正的爱的人必须是一个爱自己的人， 只有真正自爱（不是自恋） 的人才会去爱人。 一个不爱自己的人， 只是需要别人， 而不是爱别人。
+
+
+我们如何才能找到真爱， 而不是所谓的爱情？
+一个关键词就是“自我”， 一个没有自我的人、 一个不爱自己的人、一个没有活出自我的人， 如何能够学会爱别人？ 
+当我们一直被爱所伤，被爱所困， 首先要搞清楚我们为何不爱自己， 又是怎么把自己弄丢的。找到真爱的关键在于找回并接纳你自己， 而不是依赖别人， 并幻想被爱拯救。
+
+
+- 王宇：社交恐惧症
+```
+
+
+
+```
+The two most important days in your life are the day you are born and the day you find out why.
+
+– Mark Twain
+```
+
+
+
+```
+We have to dare to be ourselves, however frightening or strange that self may prove to be. 
+
+- May Sarton
+```
+
+
+
+```
+Fear can hold you prisoner. Hope can set you free
+
+- The Shawshank Redemption
+```
+
+
+
+```
+May Your Choices Reflect Your Hopes, Not Your Fears
+
+- Nelson Mandela
+```
+
+
+
+```
+We have to dare to be ourselves, however frightening or strange that self may prove to be. 
+
+― May Sarton
+```
+
+
+
+```
+人生不能像做菜，把所有的料都準備好了才下鍋。
+
+- 飲食男女
+
+---
+要勇敢
+```
+
+
+
+
+```
+法律学者罗翔曾说：原生家庭不好的人，慢半拍、慢几拍已经很优秀了。别责怪自己，因为在别人成长的时候，你还陷在原生家庭的内耗里。在别人搞事业的时候，你还在搞自己。
+```
+
+
+
+
+```
+对于可控的事情要保持谨慎，对于不可控的事情要保持乐观。
+```
+
+
+
+```
+事实上，你们对我的百般注解和识读，并不构成万分之一的我，却是一览无遗的你们
+
+---
+https://www.zhihu.com/question/480977318
+不要在意别人对自己的评价，不要在意那种爱随便揣测别人的人群。不要用标签去定义人，也不要被人用标签定义。
+
+心灵投射谬误（英语：mind projection fallacy）又称投射作用、投射效应，是一种非形式谬误，系指某人认为他看世界的观点反映了世界的真相。也就是，某人将他的个人感觉投射到真实世界。
+```
+
+
+
+```
+不要因爲一時的情緒而做出永久的決定
+```
+
+
+
+```
+最後記住導航裡的那句話：前方道路擁堵，但您仍在最優路線上
+
+你的方向比速度更重要
+```
+
+
+
+```
+生气的时候保持沉默
+```
+
+
+
+```
+瑞士著名心理学家卡尔·荣格说过：“人们会想尽办法，各种荒谬的办法，来避免面对自己的灵魂。
+
+但他还说过：“只有直面灵魂的人，才会觉醒。”
+```
+
+
+
+```
+We have to dare to be ourselves, however frightening or strange that self may prove to be. 
+
+― May Sarton
+```
+
+
+
+```
+Self-pity gets pretty close to paranoia and paranoia is one of the very hardest things to reverse. 
+It's a ridiculous way to behave and when you avoid it you get a great advantage over everybody else, almost everybody else, because self-pity is a standard condition and yet you can train yourself out of it.
+
+- Charlie Munger
+
+
+过度自怜可以让人近乎偏执。 偏执是最难逆转的东西之一。
+自怜总是会产生负面的影响， 它是一种错误的思维方式。 如果你们能够避开它， 你们的优势就远远大于所有其他人， 或者几乎所有其他人， 因为自怜是一种标准的反应。 你们可以通过训练来摆脱它。
+```
+
+
+
+```
+Envy is a really stupid sin because it's the only one you could never possibly have any fun at. There's a lot of pain and no fun. Why would you want to get on that trolley?
+
+- Charlie Munger
+```
+
+
+
+```
+Every mischance in life was an opportunity to learn something and your duty was not to be submerged in self-pity, but to utilize the terrible blow in a constructive fashion. 
+
+- Charlie Munger
+```
+
+
+
+```
+卡森给的确保痛苦生活的处方包括：
+1. 为了改变心情或者感觉而使用化学物质；
+2. 妒忌， 以及
+3. 怨恨。
+
+约翰逊说得好， 他说生活本已艰辛得难以下咽， 何必再将它塞进怨恨的苦涩果皮里呢。
+
+
+
+Carson's prescriptions for sure misery included:
+1) Ingesting chemicals in an effort to alter mood or perception;
+2) Envy; and
+3) Resentment.
+
+Johnson spoke well when he said that life is hard enough to swallow without squeezing in the bitter rind of resentment.
+```
+
+
+
+```
+The past was a lie, that memory has no return, that every spring gone by could never be recovered, and that the wildest and most tenacious love was an ephemeral truth in the end.
+
+- Gabriel García Márquez's One Hundred Years of Solitude
+```
+
+
+
+```
+不像考卷，所有複雜困難的問題，都能得到一個解答。真實人生裡，有些事永遠也沒有答案。
+
+- 那些年，我們一起追的女孩
+```
+
+
+
+```
+Life can only be understood backwards; but it must be lived forwards.
+
+- Soren Kierkegaard
+```
+
+
+
+
+
+```
+我有一种哲学，就是不为过去所做的事情后悔。只是设法记住你当时为什么做出那样的决定。
+
+I have a philosophy that it doesn't do any good to go and make regrets about what you did before but to try to remember how you made the decision at the time.
+
+- Richard P. Feynman, Perfectly Reasonable Deviations from the Beaten Track, p. 421
+```
+
+
+
+```
+The healthier strategy for controlling the fear of failure is to redefine the meaning of your mistakes. 
+
+People with low self-esteem consider mistakes to be an indication of a general lack of worth. Each error reaffirms their underlying belief that something is terribly wrong with them. 
+
+In chapter 10, on handling mistakes, you will explore one of the fundamental laws of human nature: that you always choose actions that seem most likely to meet your needs based on current awareness. You make the best decision you can at any point in time, given what you know and what you want. 
+
+The secret to coping with any failure is to recognize that each decision you've made was the very best one available under the circumstances.
+
+- Self-Esteem Fourth edition
+```
+
+
+
+
+
+**【圆桌派 第三季】EP24 | 失恋: 失恋是一种病**
+
+> [[https://youtu.be/ofMDWwS2X38?si=u7SCPsyFBomgPgrh](https://youtu.be/ofMDWwS2X38?si=u7SCPsyFBomgPgrh)]
+
+
+
+```
+我永远不能把我的快乐寄托在另一个人的合作上
+
+- 窦文涛
+```
+
+
+
+```
+每当有人问起，为什么我不恋爱的时候，我都以麻烦为由搪塞过去。又有人开始问我到底喜欢过谁没有，我也轻描淡写地表示否定。无数的朋友告诉我，或许是你还没碰到过真正喜欢的人吧，我却没法开口告诉他们，其实我曾经碰到过，碰得太早，以至于我没来得及分清，也没来得及弄明白
+
+- jasonwang524
+```
+
+
+
+
+
+**【圆桌派 第三季】EP04 | 爱哭: 何时你变得爱哭了**
+
+> [[https://youtu.be/oZlSd0PNhfA?si=ofTfMxk1m1MhD6AS](https://youtu.be/oZlSd0PNhfA?si=ofTfMxk1m1MhD6AS)]
+
+
+
+
+
+**【圆桌派 第四季】EP27 | 分手:拒绝的理由**
+
+> [[https://youtu.be/ovZQxSBsCMs?si=ELqoeSawVY06pHSs](https://youtu.be/ovZQxSBsCMs?si=ELqoeSawVY06pHSs)]
+
+```
+成熟的人，处事不会用人情来胁迫人家。预留人家say no 的权利，也是對别人的尊重。
+
+- Rebecca Liang
+```
+
+
+
+```
+爱哪有那么多解释，无非是心底的那片温柔属于某个人而已 
+
+- White Whale
+```
+
+
+
+
+
+**【圆桌派 第六季】 EP8 挑战：“兴致勃勃地去失败”**
+
+> [[https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9](https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9)]
+
+```g
+爱是无条件的，怎么爱是有方法的。
+
+- richcrop3950
+```

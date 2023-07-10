@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="LVS check LVS issue for circuits with customized devices  auCdl: Analog and Microwave CDL, is a netlister used for creating CDL netlist for analog circuits auLVS: Analog and Microwave LVS, is used for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EMX &amp; PeakView">
+<meta property="og:url" content="http://example.com/2022/03/15/emx-peakview/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="LVS check LVS issue for circuits with customized devices  auCdl: Analog and Microwave CDL, is a netlister used for creating CDL netlist for analog circuits auLVS: Analog and Microwave LVS, is used for">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20220330234833756.png">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20220331013735370.png">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20220331020334023.png">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20220331022224865.png">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20220630215343377.png">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20220630215630849.png">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20220501173856442.png">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20220501173930035.png">
+<meta property="og:image" content="http://example.com/2022/03/15/emx-peakview/image-20221217141519947.png">
+<meta property="article:published_time" content="2022-03-15T00:06:21.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:57.098Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="EMX">
+<meta property="article:tag" content="PeakView">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/03/15/emx-peakview/image-20220330234833756.png">
+
+
+<link rel="canonical" href="http://example.com/2022/03/15/emx-peakview/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/03/15/emx-peakview/","path":"2022/03/15/emx-peakview/","title":"EMX & PeakView"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>EMX & PeakView | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#lvs-check"><span class="nav-number">1.</span> <span class="nav-text">LVS check</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#emx-ports"><span class="nav-number">2.</span> <span class="nav-text">EMX ports</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#plain-labels"><span class="nav-number">2.1.</span> <span class="nav-text">plain labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rectangle-pins"><span class="nav-number">2.2.</span> <span class="nav-text">rectangle pins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-ports-used-for-simulation"><span class="nav-number">2.3.</span> <span class="nav-text">check ports used for
+simulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emx-synthesis-kits"><span class="nav-number">2.4.</span> <span class="nav-text">EMX Synthesis Kits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#port-order-signals"><span class="nav-number">2.5.</span> <span class="nav-text">port order (signals)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emx-device-info"><span class="nav-number">2.6.</span> <span class="nav-text">EMX device info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plot-function"><span class="nav-number">2.7.</span> <span class="nav-text">plot function</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#single-ended-inductor"><span class="nav-number">2.7.1.</span> <span class="nav-text">Single-ended inductor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#differential-impedance"><span class="nav-number">2.7.2.</span> <span class="nav-text">differential impedance</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#differential-inductor"><span class="nav-number">2.7.3.</span> <span class="nav-text">Differential inductor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#center-tapped-inductor"><span class="nav-number">2.7.4.</span> <span class="nav-text">Center-tapped inductor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#single-ended-cap"><span class="nav-number">2.7.5.</span> <span class="nav-text">Single-ended cap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#differential-cap"><span class="nav-number">2.7.6.</span> <span class="nav-text">Differential cap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tline"><span class="nav-number">2.7.7.</span> <span class="nav-text">Tline</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emx-autoplot"><span class="nav-number">2.8.</span> <span class="nav-text">EMX autoplot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#foundary-model"><span class="nav-number">2.9.</span> <span class="nav-text">foundary model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tips"><span class="nav-number">2.10.</span> <span class="nav-text">Tips</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/15/emx-peakview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="EMX & PeakView | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          EMX & PeakView
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-15 00:06:21" itemprop="dateCreated datePublished" datetime="2022-03-15T00:06:21+00:00">2022-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:57" itemprop="dateModified" datetime="2023-07-10T15:04:57+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="lvs-check">LVS check</h2>
+<p>LVS issue for circuits with customized devices</p>
+<ul>
+<li><p>auCdl: Analog and Microwave CDL, is a netlister used for creating
+CDL netlist for analog circuits</p></li>
+<li><p>auLVS: Analog and Microwave LVS, is used for analog circuit
+LVS</p></li>
+</ul>
+<h2 id="emx-ports">EMX ports</h2>
+<h3 id="plain-labels">plain labels</h3>
+<ul>
+<li><strong>pin</strong> layer</li>
+<li>uncheck <strong>Cadence pins</strong> in <strong>Advanced
+options</strong></li>
+</ul>
+<h3 id="rectangle-pins">rectangle pins</h3>
+<ul>
+<li><strong>drawing</strong> layer rectangle pin and specify
+<strong>Access Direction</strong> as intended</li>
+<li>check <strong>Cadence pins</strong> in <strong>Advanced
+options</strong></li>
+</ul>
+<blockquote>
+<p><strong>Cadence pins</strong> do NOT matter when there are only
+rectangle pin. rectangle pins are always selected as driven port.</p>
+</blockquote>
+<h3 id="check-ports-used-for-simulation">check ports used for
+simulation</h3>
+<p>use <strong>GDS view - EMX</strong></p>
+<h3 id="emx-synthesis-kits">EMX Synthesis Kits</h3>
+<p>Synthesis is a capability of the EMX <strong>Pcell</strong> library
+and uses scalable model data pre-generated by Continuum for a specific
+process and metal scheme combination.</p>
+<p>Synthesis is supported by the Pcells that are suffixed
+<strong>_scalable</strong>, and these Pcells have the additional fields
+and buttons needed for synthesis.</p>
+<h3 id="port-order-signals">port order (signals)</h3>
+<blockquote>
+<p>emxform.ils</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>type</th>
+<th><strong>Port order</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>inductor</td>
+<td>P1 P2</td>
+</tr>
+<tr class="even">
+<td>shield inductor</td>
+<td>P1 P2 SHIELD</td>
+</tr>
+<tr class="odd">
+<td>tapped inductor</td>
+<td>P1 P2 CT</td>
+</tr>
+<tr class="even">
+<td>tapped shield inductor</td>
+<td>P1 P2 CT SHIELD</td>
+</tr>
+<tr class="odd">
+<td>mom/mim capacitor</td>
+<td>P1 P2</td>
+</tr>
+<tr class="even">
+<td>tcoil</td>
+<td>P1 P2 TAP</td>
+</tr>
+<tr class="odd">
+<td>shield tcoil</td>
+<td>P1 P2 TAP SHIELD</td>
+</tr>
+<tr class="even">
+<td>tline</td>
+<td>P1 P2</td>
+</tr>
+<tr class="odd">
+<td>differential tline</td>
+<td>P1 P2 P3 P4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="emx-device-info">EMX device info</h3>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 29%" />
+<col style="width: 5%" />
+<col style="width: 22%" />
+<col style="width: 12%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>menu_selection (split with _ )</th>
+<th>num_ports</th>
+<th>modelgen_type</th>
+<th>generic_model_type</th>
+<th>plot_fn</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single-ended inductor</td>
+<td>inductor_no tap_no shield_single-ended</td>
+<td>2</td>
+<td>inductor</td>
+<td>inductor</td>
+<td>EMX_plot_se_ind</td>
+</tr>
+<tr class="even">
+<td>Differential inductor</td>
+<td>inductor_no tap_no shield_differential</td>
+<td>2</td>
+<td>inductor</td>
+<td>inductor</td>
+<td>EMX_plot_diff_ind</td>
+</tr>
+<tr class="odd">
+<td>Single-ended shield inductor</td>
+<td>inductor_no tap_with shield_single-ended</td>
+<td>3</td>
+<td>shield_inductor</td>
+<td>shield_inductor</td>
+<td>EMX_plot_se_ind</td>
+</tr>
+<tr class="even">
+<td>Differential shield inductor</td>
+<td>inductor_no tap_with shield_differential</td>
+<td>3</td>
+<td>shield_inductor</td>
+<td>shield_inductor</td>
+<td>EMX_plot_diff_ind</td>
+</tr>
+<tr class="odd">
+<td>Tapped inductor (diff mode only)</td>
+<td>inductor_with tap_no shield_differential mode only</td>
+<td>3</td>
+<td>center_tapped_inductor</td>
+<td>tapped_inductor</td>
+<td>EMX_plot_ct_ind</td>
+</tr>
+<tr class="even">
+<td>Tapped inductor (common mode too)</td>
+<td>inductor_with tap_no shield_also fit common mode</td>
+<td>3</td>
+<td>center_tapped_inductor_common_mode</td>
+<td>tapped_inductor</td>
+<td>EMX_plot_ct_ind</td>
+</tr>
+<tr class="odd">
+<td>Tapped shield inductor (diff only)</td>
+<td>inductor_with tap_with shield_differential mode only</td>
+<td>4</td>
+<td>center_tapped_well_inductor_common_mode</td>
+<td>tapped_shield_inductor</td>
+<td>EMX_plot_ct_ind</td>
+</tr>
+<tr class="even">
+<td>Single-ended cap (symm)</td>
+<td>capacitor_symmetric single-ended</td>
+<td>2</td>
+<td>complex_mom_capacitor</td>
+<td>mom_capacitor</td>
+<td>EMX_plot_se_cap</td>
+</tr>
+<tr class="odd">
+<td>Differential cap (symm)</td>
+<td>capacitor_symmetric differential</td>
+<td>2</td>
+<td>complex_mom_capacitor</td>
+<td>mom_capacitor</td>
+<td>EMX_plot_diff_cap</td>
+</tr>
+<tr class="even">
+<td>Single-ended cap (asymm)</td>
+<td>capacitor_asymmetric single-ended</td>
+<td>2</td>
+<td>complex_asymmetric_mom_capacitor</td>
+<td>mom_capacitor</td>
+<td>EMX_plot_se_cap</td>
+</tr>
+<tr class="odd">
+<td>Differential cap (asymm)</td>
+<td>capacitor_asymmetric differential</td>
+<td>2</td>
+<td>complex_asymmetric_mom_capacitor</td>
+<td>mom_capacitor</td>
+<td>EMX_plot_diff_cap</td>
+</tr>
+<tr class="even">
+<td>MiM capacitor</td>
+<td>capacitor_MiM</td>
+<td>2</td>
+<td>mim_capacitor</td>
+<td>mim_capacitor</td>
+<td>EMX_plot_se_cap</td>
+</tr>
+<tr class="odd">
+<td>Tcoil (simple model)</td>
+<td>tcoil_simple model</td>
+<td>3</td>
+<td>tcoil</td>
+<td>tcoil</td>
+<td>EMX_plot_tcoil</td>
+</tr>
+<tr class="even">
+<td>Tcoil (complex model)</td>
+<td>tcoil_complex model</td>
+<td>3</td>
+<td>complex_tcoil</td>
+<td>complex_tcoil</td>
+<td>EMX_plot_tcoil</td>
+</tr>
+<tr class="odd">
+<td>Shield tcoil</td>
+<td>tcoil_with shield</td>
+<td>4</td>
+<td>shield_complex_tcoil</td>
+<td>shield_tcoil</td>
+<td>EMX_plot_shield_tcoil</td>
+</tr>
+<tr class="even">
+<td>Transmission line</td>
+<td>transmission line_single</td>
+<td>2</td>
+<td>xline</td>
+<td>xline</td>
+<td>EMX_plot_xline</td>
+</tr>
+<tr class="odd">
+<td>Diff transmission line</td>
+<td>transmission line_coupled (differential)</td>
+<td>4</td>
+<td>coupled_xline</td>
+<td>diff_xline</td>
+<td>EMX_plot_diff_xline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="plot-function">plot function</h3>
+<blockquote>
+<p>EMX's formulation is defined in</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/path/to/EMX/share/emx/virtuoso_ui/emxinterface/emxskill/emxform.ils</span><br></pre></td></tr></table></figure>
+<p>EMX import this file at Virtuoso startup, you have to relaunch
+Virtuoso if you change this file</p>
+</blockquote>
+<h4 id="single-ended-inductor">Single-ended inductor</h4>
+<p>Both with and without shield apply</p>
+<ul>
+<li>port-1 impedance when port-2 short</li>
+</ul>
+<p><span class="math display">\[
+Z_1 = \frac{1}{Y_{11}}
+\]</span></p>
+<ul>
+<li>port-2 impedance when port-1 short</li>
+</ul>
+<p><span class="math display">\[
+Z_2 = \frac{1}{Y_{22}}
+\]</span> Then <span class="math display">\[\begin{align}
+L1 &amp;= \frac{Im(Z_1)}{2\pi f} \\
+Q1 &amp;= \frac{Im(Z_1)}{Re(Z_1)} \\
+L2 &amp;= \frac{Im(Z_2)}{2\pi f} \\
+Q2 &amp;= \frac{Im(Z_2)}{Re(Z_2)}
+\end{align}\]</span></p>
+<blockquote>
+<p>EMX only plot L1 and Q1</p>
+</blockquote>
+<h4 id="differential-impedance">differential impedance</h4>
+<p>Y parameters to Z parameters</p>
+<p><span class="math display">\[\begin{align}
+|Y| &amp;= Y_{11}*Y_{22} - Y_{12}*Y_{22} \\
+\begin{bmatrix}
+Z_{11} &amp; Z_{12}\\
+Z_{21} &amp; Z_{22}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\frac{Y_{22}}{|Y|} &amp; \frac{-Y_{12}}{|Y|}\\
+\frac{-Y_{21}}{|Y|} &amp; \frac{Y_{11}}{|Y|}
+\end{bmatrix}
+\end{align}\]</span></p>
+<p>Then <strong>differential impedance</strong> is <span
+class="math display">\[
+Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}
+\]</span></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220330234833756.png"
+alt="image-20220330234833756" /></p>
+<blockquote>
+<p>similarly, Z parameters to Y parameters <span class="math display">\[
+\begin{bmatrix}
+Y_{11} &amp; Y_{12}\\
+Y_{21} &amp; Y_{22}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{Z_{22}}{|Z|} &amp; \frac{-Z_{12}}{|Z|}\\
+\frac{-Z_{21}}{|Z|} &amp; \frac{Z_{11}}{|Z|}
+\end{bmatrix}
+\]</span> where <span class="math display">\[
+|Z| = Z_{11}Z_{22} - Z_{12}Z_{21}
+\]</span></p>
+</blockquote>
+<h4 id="differential-inductor">Differential inductor</h4>
+<p>Both with and without shield apply</p>
+<p><span class="math display">\[\begin{align}
+L_{diff} &amp;= \frac{Im(Z_{diff})}{2\pi f} \\
+Q_{diff} &amp;= \frac{Im(Z_{diff})}{Re(Z_{diff})}
+\end{align}\]</span></p>
+<h4 id="center-tapped-inductor">Center-tapped inductor</h4>
+<p><span class="math display">\[
+Y =
+\begin{bmatrix}
+Y_{11} &amp; Y_{12} &amp; Y_{13}\\
+Y_{21} &amp; Y_{22} &amp; Y_{23}\\
+Y_{31} &amp; Y_{32} &amp; Y_{33}
+\end{bmatrix}
+\]</span></p>
+<p>where port order is <code>P1 P2 CT</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(define (EMX_plot_ct_ind bgui wid what)</span><br><span class="line">  (EMX_plot_aux bgui wid what 3</span><br><span class="line">		&#x27;(&quot;Differential inductance&quot; &quot;Differential Q&quot;)</span><br><span class="line">		&#x27;(&quot;Henry&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((z (EMX_differential (nth 0 ys) (nth 1 ys) (nth 3 ys) (nth 4 ys)))</span><br><span class="line">			   (f (xval z))</span><br><span class="line">			   (L (imag z)/(2*3.14159265358979*f))</span><br><span class="line">			   (Q (imag z)/(real z)))</span><br><span class="line">		    `((,L) (,Q))))</span><br><span class="line">		&#x27;((&quot;L&quot;) (&quot;Q&quot;))))</span><br></pre></td></tr></table></figure>
+<p>Assume <code>CT</code> i.e. port 3 in S-parameter is grounded,
+<code>(z (EMX_differential (nth 0 ys) (nth 1 ys) (nth 3 ys) (nth 4 ys)))</code>
+obtain differential impedance with <span
+class="math inline">\(Y_{11}\)</span>, <span
+class="math inline">\(Y_{12}\)</span>, <span
+class="math inline">\(Y_{21}\)</span> and <span
+class="math inline">\(Y_{22}\)</span>. <span class="math display">\[
+Y =
+\begin{bmatrix}
+Y_{11} &amp; Y_{12}\\
+Y_{21} &amp; Y_{22}
+\end{bmatrix}
+\]</span> Finally, differential inductance and Q are obtained, shown as
+below</p>
+<p><span class="math display">\[\begin{align}
+L_{diff} &amp;= \frac{Im(Z_{diff})}{2\pi f} \\
+Q_{diff} &amp;= \frac{Im(Z_{diff})}{Re(Z_{diff})}
+\end{align}\]</span></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220331013735370.png"
+alt="image-20220331013735370" /></p>
+<h4 id="single-ended-cap">Single-ended cap</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(define (EMX_plot_se_cap bgui wid what)</span><br><span class="line">  (EMX_plot_aux bgui wid what 2</span><br><span class="line">		&#x27;(&quot;Capacitance&quot; &quot;Q&quot; &quot;Capacitance&quot; &quot;Q&quot;)</span><br><span class="line">		&#x27;(&quot;Farad&quot; &quot;&quot; &quot;Farad&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((z1 1.0/(nth 0 ys))</span><br><span class="line">			   (y12 (nth 1 ys))</span><br><span class="line">			   (z2 1.0/(nth 3 ys))</span><br><span class="line">			   (f (xval z1))</span><br><span class="line">			   (C1 (-1.0/(imag z1))/(2*3.14159265358979*f))</span><br><span class="line">			   (C12 -(imag y12)/(2*3.14159265358979*f))</span><br><span class="line">			   (C2 (-1.0/(imag z2))/(2*3.14159265358979*f))</span><br><span class="line">			   (Q1 -(imag z1)/(real z1))</span><br><span class="line">			   (Q12 (imag y12)/(real y12))</span><br><span class="line">			   (Q2 -(imag z2)/(real z2)))</span><br><span class="line">		    `((,C1) (,Q1) (,C12))))</span><br><span class="line">		&#x27;((&quot;Cse&quot;) (&quot;Qse&quot;) (&quot;C12&quot;))))</span><br></pre></td></tr></table></figure>
+<p>We define Port-1 impedance <span class="math inline">\(Z_1\)</span>,
+Port-2 impedance <span class="math inline">\(Z_2\)</span></p>
+<p><span class="math display">\[\begin{align}
+Z_1 &amp;= \frac {1}{Y_{11}}\\
+Z_2 &amp;= \frac {1}{Y_{22}}
+\end{align}\]</span></p>
+<p>Then single-ended cap and Q <span
+class="math display">\[\begin{align}
+C_1 &amp;= -\frac{1/Im(Z_1)}{2\pi f} \\
+Q_1 &amp;= -\frac{Im(Z_1)}{Re(Z_1)} \\
+C_2 &amp;=  -\frac{1/Im(Z_2)}{2\pi f} \\
+Q_2 &amp;= -\frac{Im(Z_2)}{Re(Z_2)} \\
+C_{12} &amp;= -\frac{Im(Y_{12})}{2\pi f}\\
+Q_{12} &amp;= \frac{Im(Y_{12})}{Re(Y_{12})}
+\end{align}\]</span></p>
+<ul>
+<li><strong>Series equivalent</strong> model is used in <span
+class="math inline">\(C_1\)</span>, <span
+class="math inline">\(Q_1\)</span>, <span
+class="math inline">\(C_2\)</span> and <span
+class="math inline">\(Q_2\)</span>
+<ul>
+<li><span class="math inline">\(Z_1 = R + \frac{1}{sC_1}\)</span> and
+<span class="math inline">\(Z_2 = R + \frac{1}{sC_2}\)</span></li>
+</ul></li>
+<li>Parallel model is used in <span
+class="math inline">\(C_{12}\)</span> and <span
+class="math inline">\(Q_{12}\)</span>
+<ul>
+<li><span class="math inline">\(Y_{12} = \frac{1}{R} +
+sC_{12}\)</span></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>EMX plot <span class="math inline">\(C_{se}\)</span>, <span
+class="math inline">\(Q_{se}\)</span> and <span
+class="math inline">\(C_{12}\)</span>, i.e. <span
+class="math inline">\(C_1\)</span>, <span
+class="math inline">\(Q_1\)</span> and <span
+class="math inline">\(C_{12}\)</span></p>
+</blockquote>
+<p><img src="/2022/03/15/emx-peakview/image-20220331020334023.png"
+alt="image-20220331020334023" /></p>
+<h4 id="differential-cap">Differential cap</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(define (EMX_plot_diff_cap bgui wid what)</span><br><span class="line">  (EMX_plot_aux bgui wid what 2</span><br><span class="line">		&#x27;(&quot;Differential capacitance&quot; &quot;Differential Q&quot;)</span><br><span class="line">		&#x27;(&quot;Farad&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((z (apply EMX_differential ys))</span><br><span class="line">			   (f (xval z))</span><br><span class="line">			   (C (-1.0/(imag z))/(2*3.14159265358979*f))</span><br><span class="line">			   (Q -(imag z)/(real z)))</span><br><span class="line">		    `((,C) (,Q))))</span><br><span class="line">		&#x27;((&quot;C&quot;) (&quot;Q&quot;))))</span><br></pre></td></tr></table></figure>
+<p>First obtain differential impedance, <span
+class="math inline">\(Z_{diff}\)</span> then apply series equivalent
+model <span class="math display">\[\begin{align}
+C_{diff} &amp;= -\frac{1/Im(Z_{diff})}{2\pi f} \\
+Q_{diff} &amp;= -\frac{Im(Z_{diff})}{Re(Z_{diff})}
+\end{align}\]</span></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220331022224865.png"
+alt="image-20220331022224865" /></p>
+<h4 id="tline">Tline</h4>
+<p>Open circuit impedance <span class="math inline">\(Z_o\)</span>,
+short circuit impedance <span class="math inline">\(Z_s\)</span> and
+characteristic impedance <span class="math inline">\(Z_0\)</span></p>
+<p><span class="math display">\[\begin{align}
+Z_o &amp;= Z_{11}\\
+Z_s &amp;= \frac{1}{Y_{11}}\\
+Z_0  &amp;= \sqrt{Z_o*Z_s}
+\end{align}\]</span></p>
+<p>propagation constant is given as <span
+class="math display">\[\begin{align}
+\gamma &amp;= \frac{1}{2}\log\left( \frac{Z_0+Z_s}{Z_0-Z_s} \right) \\
+&amp;= \alpha + j\beta
+\end{align}\]</span> where <span class="math inline">\(\alpha\)</span>
+is <strong>attenuation constant</strong> and <span
+class="math inline">\(\beta\)</span> is <strong>phase
+constant</strong></p>
+<p>The relationship between these parameter and geometry of the
+transmission line <span class="math display">\[\begin{align}
+Z_0 &amp;= \sqrt{\frac{R+j\omega L}{G+j\omega C}} \\
+\gamma &amp;= \sqrt{(G+j\omega C)(R+j\omega L)}
+\end{align}\]</span> EMX plot the real and imaginary part of <span
+class="math inline">\(Z_0\)</span>, <span
+class="math inline">\(\alpha\)</span> and <span
+class="math inline">\(\beta\)</span> of <span
+class="math inline">\(\gamma\)</span></p>
+<blockquote>
+<p><del>Note EMX plot the absolute value of <span
+class="math inline">\(\alpha\)</span> and <span
+class="math inline">\(\beta\)</span></del></p>
+</blockquote>
+<p><img src="/2022/03/15/emx-peakview/image-20220630215343377.png"
+alt="image-20220630215343377" /><img
+src="/2022/03/15/emx-peakview/image-20220630215418372.png"
+alt="image-20220630215418372" /></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220630215630849.png"
+alt="image-20220630215630849" /></p>
+<h3 id="emx-autoplot">EMX autoplot</h3>
+<blockquote>
+<p>using AC simulation, and inductor's parallel model or series
+model</p>
+<p>That is to say: both <code>sp</code> (network parameter) and
+<code>ac</code> (impedance) can be used to plot inductance, Q value.</p>
+<p>usually EMX choose <code>ac</code> method</p>
+</blockquote>
+<p><img src="/2022/03/15/emx-peakview/image-20220501173856442.png"
+alt="image-20220501173856442" /></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220501173930035.png"
+alt="image-20220501173930035" /></p>
+<blockquote>
+<p>left 2 figures are used for AC simulation, <span
+class="math inline">\(Y_{nn}\)</span> can be obtained conveniently</p>
+</blockquote>
+<h3 id="foundary-model">foundary model</h3>
+<p><img src="/2022/03/15/emx-peakview/image-20221217141519947.png"
+alt="image-20221217141519947" /></p>
+<p>for single-end capicator <span class="math display">\[\begin{align}
+Q_1 &amp;= -\frac{Im(Z_1)}{Re(Z_1)} \\
+&amp;= -\frac{Im(1/Y_{11})}{Re(1/Y_{11})} \\
+&amp;= -\frac{Im(Y_{11}^*)/|Y_{11}|^2}{Re(Y_{11}^*)/|Y_{11}|^2} \\
+&amp;= \frac{Im(Y_{11})}{Re(Y_{11})}
+\end{align}\]</span></p>
+<p>So, the EMX model and foundary model is consistent.</p>
+<h3 id="tips">Tips</h3>
+<p>Process file encryption mostly for advanced nodes, like TSMC 16nm
+Finfet, whose process file is encrypted.</p>
+<ul>
+<li>Use <code>--key=EMXkey</code> in the EMX <em>Advanced
+options</em></li>
+</ul>
+<p>GDSviewer has two options</p>
+<ul>
+<li>EMX: shows the final gds sent to EMX for simulation after it has
+been processed by EMX</li>
+<li>Raw: shows the raw gds</li>
+</ul>
+<blockquote>
+<p>If there are port name with the <code>#</code> sign, it means EMX
+sees a port but it is not in the signal list.</p>
+</blockquote>
+<p>EMX Accuracy</p>
+<ul>
+<li><p>Edge mesh: controls layout discretization in the X-Y plane</p>
+<ul>
+<li>For MoM capacitors, use the edge mesh to be the same as the width of
+the finger (for example, 0.1um).</li>
+</ul></li>
+<li><p>Thickness: controls layout discretization in the Z
+dimension</p></li>
+<li><p>3D metals: skips all 2D assumptions about conductors and their
+currents and charges</p>
+<ul>
+<li>If you set <code>3D metals</code> to <code>*</code> then all metals
+are treated as <strong>3D</strong>
+<ul>
+<li>For Inductor type structures, only thick metal needs 3D.</li>
+<li>For MoM, all layers are needed.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Ports entered in <code>Grounds</code> will cause these nets to be
+grounded; these ports will not show up in the S-parameter result.</p>
+<p>Setup Temperature</p>
+<ul>
+<li>EMX: <code>--temperature=100</code></li>
+</ul>
+<p>ParaView</p>
+<ul>
+<li>If check ParaView related options when ParaView is not setup
+properly, EMX simulation stop at <em>Creating mesh...</em> without
+waring or errors (version 6.2).</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/EMX/" rel="tag"># EMX</a>
+              <a href="/tags/PeakView/" rel="tag"># PeakView</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/14/uvm-reg-ralf/" rel="prev" title="UVM REG RALF & IP-XACT">
+                  <i class="fa fa-chevron-left"></i> UVM REG RALF & IP-XACT
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/16/hunting-jitter/" rel="next" title="What is hunting jitter ?">
+                  What is hunting jitter ? <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

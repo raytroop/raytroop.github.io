@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Convolution discrete-time \[ y[n] &#x3D; \sum_{k&#x3D;-\infty}^{+\infty}x[k]h[n-k] \] The operation on the right-hand side is known as the convolution of the sequences x[n] and h[n]. The operation of convolutio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linear Time-Invariant Systems">
+<meta property="og:url" content="http://example.com/2023/05/15/LTI/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="Convolution discrete-time \[ y[n] &#x3D; \sum_{k&#x3D;-\infty}^{+\infty}x[k]h[n-k] \] The operation on the right-hand side is known as the convolution of the sequences x[n] and h[n]. The operation of convolutio">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/05/15/LTI/image-20230516020142197.png">
+<meta property="og:image" content="http://example.com/2023/05/15/LTI/image-20230516021105696.png">
+<meta property="og:image" content="http://example.com/2023/05/15/LTI/image-20230516021627107.png">
+<meta property="og:image" content="http://example.com/2023/05/15/LTI/image-20230516022054782.png">
+<meta property="og:image" content="http://example.com/2023/05/15/LTI/image-20230516022936168.png">
+<meta property="og:image" content="http://example.com/2023/05/15/LTI/image-20230516023124056.png">
+<meta property="og:image" content="http://example.com/2023/05/15/LTI/image-20230516023759163.png">
+<meta property="og:image" content="http://example.com/2023/05/15/LTI/image-20230516030532747.png">
+<meta property="article:published_time" content="2023-05-15T23:25:31.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:56.982Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="lti">
+<meta property="article:tag" content="ctft">
+<meta property="article:tag" content="dtft">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/05/15/LTI/image-20230516020142197.png">
+
+
+<link rel="canonical" href="http://example.com/2023/05/15/LTI/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/05/15/LTI/","path":"2023/05/15/LTI/","title":"Linear Time-Invariant Systems"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linear Time-Invariant Systems | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#convolution"><span class="nav-number">1.</span> <span class="nav-text">Convolution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#discrete-time"><span class="nav-number">1.1.</span> <span class="nav-text">discrete-time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#continuous-time"><span class="nav-number">1.2.</span> <span class="nav-text">continuous-time</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eigenfunction"><span class="nav-number">2.</span> <span class="nav-text">Eigenfunction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#continuous-time-1"><span class="nav-number">2.1.</span> <span class="nav-text">continuous-time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discrete-time-1"><span class="nav-number">2.2.</span> <span class="nav-text">discrete-time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linear-combination"><span class="nav-number">2.3.</span> <span class="nav-text">linear combination</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fourier-series"><span class="nav-number">3.</span> <span class="nav-text">Fourier series</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#continuous-time-2"><span class="nav-number">3.1.</span> <span class="nav-text">continuous-time</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#conjugate-symmetry"><span class="nav-number">3.1.1.</span> <span class="nav-text">Conjugate Symmetry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parsevals-relation"><span class="nav-number">3.1.2.</span> <span class="nav-text">Parseval&#39;s Relation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discrete-time-2"><span class="nav-number">3.2.</span> <span class="nav-text">discrete-time</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#parsevals-relation-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">Parseval&#39;s Relation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-functions"><span class="nav-number">3.3.</span> <span class="nav-text">system functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#continuous-time-fourier-transform"><span class="nav-number">4.</span> <span class="nav-text">Continuous-Time Fourier
+transform</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dirichlet-conditions"><span class="nav-number">4.1.</span> <span class="nav-text">Dirichlet conditions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fourier-transform-representations-for-periodic-signals"><span class="nav-number">4.2.</span> <span class="nav-text">Fourier
+transform representations for periodic signals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#differentiation-and-integration"><span class="nav-number">4.3.</span> <span class="nav-text">Differentiation and
+Integration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parsevals-relation-2"><span class="nav-number">4.4.</span> <span class="nav-text">Parseval&#39;s Relation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#convolution-property"><span class="nav-number">4.5.</span> <span class="nav-text">Convolution Property</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discrete-time-fourier-transform"><span class="nav-number">5.</span> <span class="nav-text">Discrete-Time Fourier
+Transform</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#parsevals-relation-3"><span class="nav-number">5.1.</span> <span class="nav-text">Parseval&#39;s Relation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#convolution-property-1"><span class="nav-number">5.2.</span> <span class="nav-text">Convolution Property</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#laplace-transform"><span class="nav-number">6.</span> <span class="nav-text">Laplace transform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discrete-fourier-transform"><span class="nav-number">7.</span> <span class="nav-text">Discrete Fourier Transform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">8.</span> <span class="nav-text">reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/15/LTI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linear Time-Invariant Systems | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linear Time-Invariant Systems
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-15 23:25:31" itemprop="dateCreated datePublished" datetime="2023-05-15T23:25:31+00:00">2023-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:56" itemprop="dateModified" datetime="2023-07-10T15:04:56+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="convolution">Convolution</h2>
+<h3 id="discrete-time">discrete-time</h3>
+<p><span class="math display">\[
+y[n] = \sum_{k=-\infty}^{+\infty}x[k]h[n-k]
+\]</span></p>
+<p>The operation on the right-hand side is known as the
+<strong>convolution</strong> of the sequences <em>x[n]</em> and
+<em>h[n]</em>. The operation of convolution can be represented
+symbolically as <span class="math display">\[
+y[n] = x[n]*h[n]
+\]</span></p>
+<blockquote>
+<p>The response of an LTI system to an arbitrary input is expressed in
+terms of the system's response to the <em>unit impulse</em>.</p>
+<p>From this, we see that an LTI system is completely characterized by
+its response to a single signal, namely, its response to the <em>unit
+impulse</em>.</p>
+</blockquote>
+<h3 id="continuous-time">continuous-time</h3>
+<p><span class="math display">\[
+y(t) = \int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau
+\]</span></p>
+<p><span class="math display">\[
+y(t)=x(t)*h(t)
+\]</span></p>
+<p>As in discrete time, we see that a continuous-time LTI system is
+completely characterized by its impulse response - i.e., by its response
+to a single elementary signal, the unit impulse <span
+class="math inline">\(\delta(t)\)</span></p>
+<h2 id="eigenfunction">Eigenfunction</h2>
+<p><em>A signal</em> for which the <em>system output</em> is <em>a
+(possibly complex) constant</em> times the <em>input</em> is referred to
+as an <strong>eigenfunction</strong> of the system, and the amplitude
+factor is referred to as the system's <strong>eigenvalue</strong>.</p>
+<p><strong>Complex exponentials</strong> are eigenfunctions of LTI
+systems, that is,</p>
+<p>continuous time: <span class="math display">\[
+e^{st}\to H(s)e^{st}
+\]</span> discrete time: <span class="math display">\[
+z^n \to H(z)z^n
+\]</span></p>
+<h3 id="continuous-time-1">continuous-time</h3>
+<p>Let's prove them. For an input <span
+class="math inline">\(x(t)\)</span>, we can determine the output through
+the use of the convolution integral, so that with <span
+class="math inline">\(x(t)=e^{st}\)</span></p>
+<p><span class="math display">\[\begin{align}
+y(t) &amp;= \int_{-\infty}^{+\infty}h(\tau)x(t-\tau)d\tau \\
+&amp;=\int_{-\infty}^{+\infty}h(\tau)e^{s(t-\tau)}d\tau \\
+&amp;= e^{st}\int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
+\end{align}\]</span></p>
+<p>Assuming that the integral on the right-hand side converges, the
+response to <span class="math inline">\(e^{st}\)</span> is of the form
+<span class="math display">\[
+y(t)=H(s)e^{st}
+\]</span> where <span class="math inline">\(H(s)\)</span> is a complex
+constant whose value depends on <span class="math inline">\(s\)</span>
+and which is related to the system impulse response by <span
+class="math display">\[
+H(s)=\int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
+\]</span></p>
+<h3 id="discrete-time-1">discrete-time</h3>
+<p>Suppose that an LTI system with impulse response <span
+class="math inline">\(h[n]\)</span> has as its input the sequence <span
+class="math display">\[
+x[n] = z^n
+\]</span> Then the output of the system can be determined from the
+convolution sum as <span class="math display">\[\begin{align}
+y[n]&amp;=\sum_{k=-\infty}^{+\infty}h[k]x[n-k] \\
+&amp;=\sum_{k=-\infty}^{+\infty}h[k]z^{n-k} \\
+&amp;= z^n\sum_{k=-\infty}^{+\infty}h[k]z^{-k}
+\end{align}\]</span></p>
+<p>Assuming that the summation on the right-hand side converges, the
+output is the same compex exponential multiplied by a constant that
+depends on the value of <span class="math inline">\(z\)</span>. That is,
+<span class="math display">\[
+y[n] = H(z)z^n
+\]</span> where <span class="math display">\[
+H(z) =\sum_{k=-\infty}^{+\infty}h[k]z^{-k}
+\]</span></p>
+<h3 id="linear-combination">linear combination</h3>
+<blockquote>
+<p>For both continuous time and discrete time, if the input to an LTI
+system is represented as <em>a linear combination of complex
+exponentials</em>, then the output can also be represented as <em>a
+linear combination of the same complex exponential signals</em>.</p>
+</blockquote>
+<p>If the input to a continuous-time LTI system is represented as a
+linear combination of complex exponentials, that is, if <span
+class="math display">\[
+x(t)=\sum_k a_ke^{s_k t}
+\]</span> then the output will be <span class="math display">\[
+y(t)=\sum_k a_kH(s_k)e^{s_k t}
+\]</span> In an exactly analogous manner, if the input to a
+discrete-time LTI system is represented as a linear combination of
+complex exponentials, that is, if <span class="math display">\[
+x[n]=\sum_k a_k z_k^n
+\]</span> then the output will be <span class="math display">\[
+y[n]=\sum_k a_kH(z_k)z_k^n
+\]</span></p>
+<h2 id="fourier-series">Fourier series</h2>
+<h3 id="continuous-time-2">continuous-time</h3>
+<p>The Fourier series of a periodic continuous-time signal: <span
+class="math display">\[
+x(t)=\sum_{k=-\infty}^{+\infty}a_ke^{jk\omega _0
+t}=\sum_{k=-\infty}^{+\infty}a_ke^{jk(2\pi/T) t}
+\]</span></p>
+<p><span class="math display">\[
+a_k = \frac{1}{T}\int_T x(t)e^{-jk\omega _0 t}dt=\frac{1}{T}\int _T
+x(t)e^{-jk(2\pi/T)t}dt
+\]</span></p>
+<p>Here, we have written equivalent expressions for the Fourier series
+in terms of the <strong>fundamental frequency</strong> <span
+class="math inline">\(\omega _0\)</span> and the <strong>fundamental
+period</strong> <span class="math inline">\(T\)</span></p>
+<h4 id="conjugate-symmetry">Conjugate Symmetry</h4>
+<p>If <span class="math inline">\(x(t)\)</span>
+<strong>real</strong>-that is, when <span class="math inline">\(x(t) =
+x^*(t)\)</span>, the Fourier series coefficients will be <em>conjugate
+symmetric</em>, i.e <span class="math display">\[
+a_{-k} = a_k^*
+\]</span></p>
+<h4 id="parsevals-relation">Parseval's Relation</h4>
+<p>Parseval's relation states is that the <strong>total average
+power</strong> in a periodic signal equals the <strong>sum of the
+average powers in all of its harmonic components</strong> <span
+class="math display">\[
+\frac{1}{T}\int _T|x(t)|^2dt = \sum_{k=-\infty}^{+\infty}|a_k|^2
+\]</span></p>
+<h3 id="discrete-time-2">discrete-time</h3>
+<h4 id="parsevals-relation-1">Parseval's Relation</h4>
+<p><span class="math display">\[
+\frac{1}{N}\sum_{n=&lt;N&gt;}|x[n]|^2=\sum_{k=&lt;N&gt;}|a_k|^2
+\]</span></p>
+<h3 id="system-functions">system functions</h3>
+<p>When <span class="math inline">\(s\)</span> or <span
+class="math inline">\(z\)</span> are general complex numbers, <span
+class="math inline">\(H(s)\)</span> and <span
+class="math inline">\(H(z)\)</span> are referred to as the
+<strong>system functions</strong> of the corresponding systems.</p>
+<p>For continuous-time signals and systems, we focus on the specific
+case in which <span class="math inline">\(\Re \{s\}= 0\)</span>, so that
+<span class="math inline">\(s = j\omega\)</span>, and consequently,
+<span class="math inline">\(e^{st}\)</span> is of the form <span
+class="math inline">\(e^{j\omega t}\)</span>. <span
+class="math inline">\(H(j\omega)\)</span> viewed as a function of <span
+class="math inline">\(\omega\)</span> - is referred to as the
+<strong>frequency response</strong> of the system and is given by <span
+class="math display">\[
+H(j\omega) = \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt
+\]</span></p>
+<p>Similarly, for discrete-time signals and systems, we focus on values
+of <span class="math inline">\(z\)</span> for which <span
+class="math inline">\(|z|=1\)</span>, so that <span
+class="math inline">\(z=e^{j\omega}\)</span> and <span
+class="math inline">\(z^n\)</span> is of the form <span
+class="math inline">\(e^{j\omega n}\)</span>. Then, the frequency
+response of the system is given by <span class="math display">\[
+H(e^{j\omega}) = \sum_{n=-\infty}^{+\infty}h[n]e^{-j\omega n}
+\]</span></p>
+<blockquote>
+<p>The response of an LTI system to a <em>complex exponential</em>
+signal of the form <span class="math inline">\(e^{j\omega t}\)</span>
+(in continuous time) or <span class="math inline">\(e^{j\omega
+n}\)</span> (in discrete time) is particularly simple to express in
+terms of the <em>frequency response of the system</em></p>
+</blockquote>
+<h2 id="continuous-time-fourier-transform">Continuous-Time Fourier
+transform</h2>
+<p><span class="math display">\[
+X(j\omega) =\int_{-\infty}^{+\infty}x(t)e^{-j\omega t}dt
+\]</span></p>
+<p><span class="math display">\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{+\infty}X(j\omega)e^{j\omega
+t}d\omega
+\]</span></p>
+<blockquote>
+<p>Note system function is <span class="math display">\[
+H(j\omega) = \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt
+\]</span></p>
+</blockquote>
+<h3 id="dirichlet-conditions">Dirichlet conditions</h3>
+<p><img src="/2023/05/15/LTI/image-20230516020142197.png"
+alt="image-20230516020142197" /></p>
+<h3 id="fourier-transform-representations-for-periodic-signals">Fourier
+transform representations for periodic signals</h3>
+<p><img src="/2023/05/15/LTI/image-20230516021105696.png"
+alt="image-20230516021105696" /></p>
+<h3 id="differentiation-and-integration">Differentiation and
+Integration</h3>
+<p><span class="math display">\[
+\frac{dx(t)}{dt}\longleftrightarrow j\omega X(j\omega)
+\]</span></p>
+<p><span class="math display">\[
+\int_{-\infty}^t x(\tau)d\tau \longleftrightarrow
+\frac{1}{j\omega}X(j\omega)+\pi X(0)\delta(\omega)
+\]</span></p>
+<h3 id="parsevals-relation-2">Parseval's Relation</h3>
+<p><img src="/2023/05/15/LTI/image-20230516021627107.png"
+alt="image-20230516021627107" /></p>
+<h3 id="convolution-property">Convolution Property</h3>
+<p><img src="/2023/05/15/LTI/image-20230516022054782.png"
+alt="image-20230516022054782" /></p>
+<h2 id="discrete-time-fourier-transform">Discrete-Time Fourier
+Transform</h2>
+<p><span class="math display">\[
+X(e^{j\omega})=\sum_{n=-\infty}^{+\infty}x[n]e^{-j\omega n}
+\]</span></p>
+<p><span class="math display">\[
+x[n] = \frac{1}{2\pi}\int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega
+\]</span></p>
+<blockquote>
+<p>Note system function is <span class="math display">\[
+H(e^{j\omega}) = \sum_{n=-\infty}^{+\infty}h[n]e^{-j\omega n}
+\]</span></p>
+</blockquote>
+<h3 id="parsevals-relation-3">Parseval's Relation</h3>
+<p><img src="/2023/05/15/LTI/image-20230516022936168.png"
+alt="image-20230516022936168" /></p>
+<h3 id="convolution-property-1">Convolution Property</h3>
+<p><img src="/2023/05/15/LTI/image-20230516023124056.png"
+alt="image-20230516023124056" /></p>
+<p>we see that the <em>frequency response</em> <span
+class="math inline">\(H(e^{j\omega})\)</span> captures the change in
+complex amplitude of the Fourier transform of the input at each
+frequency <span class="math inline">\(\omega\)</span></p>
+<h2 id="laplace-transform">Laplace transform</h2>
+<p>The Laplace transform allowed us, for example, to perform transform
+analysis of unstable systems and to develop additional insights and
+tools for LTI system analysis</p>
+<p><img src="/2023/05/15/LTI/image-20230516023759163.png"
+alt="image-20230516023759163" /></p>
+<h2 id="discrete-fourier-transform">Discrete Fourier Transform</h2>
+<p><img src="/2023/05/15/LTI/image-20230516030532747.png"
+alt="image-20230516030532747" /></p>
+<p>where <span class="math inline">\(W_N=e^{-j(2\pi/N)}\)</span></p>
+<h2 id="reference">reference</h2>
+<p>Oppenheim, A.V., Willsky, A.S., &amp; Nawab, S.H. (1996). Signals
+&amp; systems (2nd ed.).</p>
+<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
+3rd edition</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/lti/" rel="tag"># lti</a>
+              <a href="/tags/ctft/" rel="tag"># ctft</a>
+              <a href="/tags/dtft/" rel="tag"># dtft</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/13/self-heating/" rel="prev" title="Self-heating Effect">
+                  <i class="fa fa-chevron-left"></i> Self-heating Effect
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/19/Precision-Techniques/" rel="next" title="Precision Techniques">
+                  Precision Techniques <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

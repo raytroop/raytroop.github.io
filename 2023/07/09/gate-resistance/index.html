@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Transit frequency \(f_T\)  aka cut-off frequency  Gate (thermal) noise    Two-Side Poly Contact &amp; folding  Both scheme yield a total distributed resistance of \(R_G&#x2F;4\) for gate noise calculation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Demystifying Gate Resistance">
+<meta property="og:url" content="http://example.com/2023/07/09/gate-resistance/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="Transit frequency \(f_T\)  aka cut-off frequency  Gate (thermal) noise    Two-Side Poly Contact &amp; folding  Both scheme yield a total distributed resistance of \(R_G&#x2F;4\) for gate noise calculation">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709102848934.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709210517475.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709211309265.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709202930102.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709212015293.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/1678671319799.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709212818351.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709222642979.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709214200878.png">
+<meta property="og:image" content="http://example.com/2023/07/09/gate-resistance/1678672522997.png">
+<meta property="article:published_time" content="2023-07-09T10:23:12.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:57.126Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="finfet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/07/09/gate-resistance/image-20230709102848934.png">
+
+
+<link rel="canonical" href="http://example.com/2023/07/09/gate-resistance/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/07/09/gate-resistance/","path":"2023/07/09/gate-resistance/","title":"Demystifying Gate Resistance"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Demystifying Gate Resistance | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#transit-frequency-f_t"><span class="nav-number">1.</span> <span class="nav-text">Transit frequency \(f_T\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gate-thermal-noise"><span class="nav-number">2.</span> <span class="nav-text">Gate (thermal) noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#two-side-poly-contact-folding"><span class="nav-number">2.1.</span> <span class="nav-text">Two-Side Poly Contact &amp;
+folding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#folding"><span class="nav-number">2.1.1.</span> <span class="nav-text">folding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#two-side-poly-contact"><span class="nav-number">2.1.2.</span> <span class="nav-text">two-side poly contact</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#four-equal-gate-fingers"><span class="nav-number">2.2.</span> <span class="nav-text">four equal gate fingers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gate-resistance-handling-by-parasitic-extraction-tools"><span class="nav-number">3.</span> <span class="nav-text">Gate
+resistance handling by parasitic extraction tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delta-gate-model"><span class="nav-number">4.</span> <span class="nav-text">\(\Delta\)
+gate model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vertical-component-of-gate-resistance"><span class="nav-number">5.</span> <span class="nav-text">Vertical component of
+gate resistance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/09/gate-resistance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Demystifying Gate Resistance | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Demystifying Gate Resistance
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-09 10:23:12" itemprop="dateCreated datePublished" datetime="2023-07-09T10:23:12+00:00">2023-07-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:57" itemprop="dateModified" datetime="2023-07-10T15:04:57+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="/2023/07/09/gate-resistance/image-20230709102848934.png"
+alt="image-20230709102848934" /></p>
+<h2 id="transit-frequency-f_t">Transit frequency <span
+class="math inline">\(f_T\)</span></h2>
+<blockquote>
+<p>aka <strong>cut-off frequency</strong></p>
+</blockquote>
+<h2 id="gate-thermal-noise">Gate (thermal) noise</h2>
+<p><img src="/2023/07/09/gate-resistance/image-20230709210517475.png"
+alt="image-20230709210517475" /></p>
+<p><img src="/2023/07/09/gate-resistance/image-20230709211309265.png"
+alt="image-20230709211309265" /></p>
+<p><img src="/2023/07/09/gate-resistance/image-20230709202930102.png"
+alt="image-20230709202930102" /></p>
+<h3 id="two-side-poly-contact-folding">Two-Side Poly Contact &amp;
+folding</h3>
+<p><img src="/2023/07/09/gate-resistance/image-20230709212015293.png"
+alt="image-20230709212015293" /></p>
+<p>Both scheme yield a total distributed resistance of <span
+class="math inline">\(R_G/4\)</span> for gate noise calculation</p>
+<h4 id="folding">folding</h4>
+<p>finger 0 <span class="math display">\[\begin{align}
+\overline{i_{tot,0}^2} &amp;= \left(\frac{g_m}{2}
+\right)^2(4kT\frac{R_G/2}{3}) \\
+&amp;= g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{2^2\cdot 2}
+\end{align}\]</span></p>
+<p>similarly finger 1 <span class="math display">\[
+\overline{i_{tot,1}^2} =
+g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{2^2\cdot 2}
+\]</span> Assuming uncorrelated <span class="math display">\[
+\overline{i_{tot}^2} = \sum_{N=0}^1\overline{i_{tot,N}^2}
+=g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{2^2\cdot 2} \cdot 2 =
+g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{2^2}
+\]</span> Generally <span class="math display">\[
+\overline{i_{tot}^2} = g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{N^2}
+\]</span> where the gate is decomposed into <span
+class="math inline">\(N\)</span> parallel fingers</p>
+<h4 id="two-side-poly-contact">two-side poly contact</h4>
+<p><img src="/2023/07/09/gate-resistance/1678671319799.png"
+alt="No alt text provided for this image" /></p>
+<p><strong>We fracture Gate poly at the center point, then we obtain 2
+segments, both have same <span
+class="math inline">\(\frac{g_m}{2}\)</span> and <span
+class="math inline">\(R_G/2\)</span>.</strong></p>
+<p>The derivation procedure is same with folding structure, i.e. plug
+<span class="math inline">\(N=2\)</span> into <span
+class="math inline">\(\overline{i_{tot}^2} =
+g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{N^2}\)</span></p>
+<p>That is <span class="math display">\[
+\overline{i_{tot}^2} = g_m^2\left(4kT\frac{R_G}{12}\right)
+\]</span> The input referred noise of gate resistance <span
+class="math display">\[
+\overline{V_{nRG}^2} = 4kT\frac{R_G}{12}
+\]</span></p>
+<h3 id="four-equal-gate-fingers">four equal gate fingers</h3>
+<p><img src="/2023/07/09/gate-resistance/image-20230709212818351.png"
+alt="image-20230709212818351" /></p>
+<p><span class="math display">\[
+\overline{i_{tot}^2} = g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{4^2}
+\]</span> Then <span class="math display">\[
+\overline{V_{nRG}^2} = \frac{\overline{i_{tot}^2}}{g_m^2}
+=4kT\frac{R_G}{48}
+\]</span></p>
+<h2 id="gate-resistance-handling-by-parasitic-extraction-tools">Gate
+resistance handling by parasitic extraction tools</h2>
+<p>They fracture the poly line at the intersection with the active
+(diffusion) layer, breaking it into <strong>"gate poly"(poly over
+active)</strong> and <strong>"field poly" (poly outside
+active)</strong></p>
+<blockquote>
+<p>gploy, fpoly</p>
+</blockquote>
+<p><img
+src="https://media.licdn.com/dms/image/D5612AQEi234MGWNNSQ/article-inline_image-shrink_1500_2232/0/1678670859052?e=1694649600&amp;v=beta&amp;t=oQHZwxPxntQ71mwB7rerd-lKz5IPs1xc5rtXpm9Gz8o"
+alt="No alt text provided for this image" /></p>
+<p>Gate poly is also fractured at the center point. Gate instance pin of
+the MOSFET (SPICE model) is connected to the center point of the gate
+poly. <strong>Gate poly is described by two parasitic resistors,
+connecting the fracture points</strong>.</p>
+<p><img src="/2023/07/09/gate-resistance/image-20230709222642979.png"
+alt="image-20230709222642979" /></p>
+<p>MOSFET extrinsic parasitic capacitance between gate poly and source /
+drain diffusion and contacts is calculated by parasitic extraction
+tools, and assigned to the nodes of the resistive networks.</p>
+<p>Different extraction tools do this differently - some tools connect
+these parasitic capacitances to the center point of the gate poly, while
+some other tools connect them to the end points of the gate poly
+resistors.</p>
+<h2 id="delta-gate-model"><span class="math inline">\(\Delta\)</span>
+gate model</h2>
+<blockquote>
+<p>This distributed network has a different AC and transient response
+than a simple lumped one-R and one-C circuit.</p>
+<p>It was shown [B. Razavi] that such RC network behaves approximately
+the same as a network with one R and one C element, where <em>C is the
+total capacitance</em>, and R=1/3 * W/L <em>rsh for single-side
+connected poly, and R=1/12 </em> W/L * rsh for double-sided connected
+poly.</p>
+<p>These coefficients - 1/3 and 1/12 - effectively enable an accurate
+reduced order model for the gate, reducing a large number of R and C
+elements to two (or three) resistors and one capacitor.</p>
+</blockquote>
+<p><strong>Gate Delta Model</strong>: where a gate is described by two
+positive and one negative resistors</p>
+<p><img src="/2023/07/09/gate-resistance/image-20230709214200878.png"
+alt="image-20230709214200878" /></p>
+<blockquote>
+<p>only applicable to contacts on gate overhangs</p>
+<p>invalid for self-aligned gate contacts, where gate contact land
+directly on top of gate, not gate overhang</p>
+</blockquote>
+<p><img src="/2023/07/09/gate-resistance/1678672522997.png"
+alt="No alt text provided for this image" /></p>
+<ol type="1">
+<li><p>1-side gate contact <span class="math display">\[
+R_{eq,1side} =R_1 \parallel (R_2+R_1)= \frac{R_G}{6}\parallel
+(-\frac{R_G}{2}+\frac{R_G}{6})=\frac{R_G}{3}
+\]</span></p></li>
+<li><p>2-side contact <span class="math display">\[
+R_{eq,2side}= R_1 \parallel R_1 = \frac{R_G}{6}\parallel \frac{R_G}{6} =
+\frac{R_G}{12}
+\]</span></p></li>
+</ol>
+<blockquote>
+<p>Some SPICE simulators have problems handling <em>negative
+resistors</em>, that's possibly why this model did not get a wide
+adoption. Some foundries and PDKs support delta gate model, while some
+others don't.</p>
+</blockquote>
+<h2 id="vertical-component-of-gate-resistance">Vertical component of
+gate resistance</h2>
+<p>In "old" technologies (pre-16nm), gate resistance was dominated by
+lateral resistance. However, in advanced technologies, multiple
+interfaces between gate material layers lead to a large vertical gate
+resistance.</p>
+<p><img
+src="https://media.licdn.com/dms/image/D5612AQFlqdXKolfMYQ/article-inline_image-shrink_1500_2232/0/1678686425859?e=1694649600&amp;v=beta&amp;t=CIYoB_Ns24B4XewPylgXVC_RQF9idKb5KhCo3Dz8HwI"
+alt="No alt text provided for this image" /></p>
+<blockquote>
+<p>It's very easy to check this in DSPF file - if gate instance pin is
+connected directly to the center of the gate poly - vertical resistance
+is not accounted for. If it is connected by a positive resistor to the
+center of the gate poly - that resistors represents the vertical gate
+resistance.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>⭐ B. Razavi, Y. Ran, and K. F. Lee, “Impact of Distributed Gate
+Resistance on the Performance of MOS Devices,” IEEE Trans. Circuits and
+Systems, Part I, pp. 750–754, Nov. 1994.</p>
+<p>⭐ Maxim Ershov, Diakopto. "Gate Resistance in IC design flow", [<a
+target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/gate-resistance-ic-design-flow-maxim-ershov">link</a>,
+<a
+target="_blank" rel="noopener" href="https://diakopto.com/wp-content/uploads/Gate-Resistance-in-IC-design-flow.pdf">pdf</a>]</p>
+<p>Saha, Samar K.. “FinFET Devices for VLSI Circuits and Systems.”
+(2020).</p>
+<p>Harpe, Pieter J. A., Andrea Baschirotto and Kofi A. A. Makinwa.
+“Hybrid ADCs, Smart sensors for the IoT, and Sub-1V and Advanced node
+analog circuit design: Advances in Analog Circuit Design 2017.”
+(2018).</p>
+<p>Chauhan, Yogesh Singh. FinFET Modeling for IC Simulation and Design:
+Using the BSIM-CMG Standard. London, UK: Academic Press, 2015.</p>
+<p>A.J.Sholten et al., "FinFET compact modelling for analogue and RF
+applications", IEDM'2010, p.190.</p>
+<p>W. Wu and M. Chan, “Gate resistance modeling of multifin MOS
+devices,” IEEE Electron Device Letters, vol. 27, no. 1, pp. 68-70, Jan.
+2006.</p>
+<p>A. L. S. Loke, C. K. Lee and B. M. Leary, "Nanoscale CMOS
+Implications on Analog/Mixed-Signal Design," 2019 IEEE Custom Integrated
+Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
+10.1109/CICC.2019.8780267.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/finfet/" rel="tag"># finfet</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/06/lptv/" rel="prev" title="LPTV systems">
+                  <i class="fa fa-chevron-left"></i> LPTV systems
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Inertial delay Inertial delay models are simulation delay models that filter pulses that are shorted than the propagation delay of Verilog gate primitives or continuous assignments (assign #5 y &#x3D; ~a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Inertial &amp; transport delays">
+<meta property="og:url" content="http://example.com/2022/03/16/inertial-and-transport-delay/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="Inertial delay Inertial delay models are simulation delay models that filter pulses that are shorted than the propagation delay of Verilog gate primitives or continuous assignments (assign #5 y &#x3D; ~a">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-16T23:23:02.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:57.142Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="verilog">
+<meta property="article:tag" content="inertial delay">
+<meta property="article:tag" content="transport delay">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/03/16/inertial-and-transport-delay/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/03/16/inertial-and-transport-delay/","path":"2022/03/16/inertial-and-transport-delay/","title":"Inertial & transport delays"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Inertial & transport delays | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#inertial-delay"><span class="nav-number">1.</span> <span class="nav-text">Inertial delay</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#continuous-assignments"><span class="nav-number">1.1.</span> <span class="nav-text">continuous assignments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#procedure-assignment---combinational-logic"><span class="nav-number">1.2.</span> <span class="nav-text">procedure assignment
+- combinational logic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#procedure-assignment---sequential-logic"><span class="nav-number">1.3.</span> <span class="nav-text">procedure assignment -
+sequential logic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transport-delay"><span class="nav-number">2.</span> <span class="nav-text">Transport delay</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nonblocking-assignment"><span class="nav-number">2.1.</span> <span class="nav-text">nonblocking assignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blocking-assignment"><span class="nav-number">2.2.</span> <span class="nav-text">blocking assignment</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/16/inertial-and-transport-delay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Inertial & transport delays | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Inertial & transport delays
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-16 23:23:02" itemprop="dateCreated datePublished" datetime="2022-03-16T23:23:02+00:00">2022-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:57" itemprop="dateModified" datetime="2023-07-10T15:04:57+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20230414232256309.png"
+alt="image-20230414232256309" /></p>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20230414232439556.png"
+alt="image-20230414232439556" /></p>
+<h2 id="inertial-delay">Inertial delay</h2>
+<p>Inertial delay models are simulation delay models that filter pulses
+that are shorted than the propagation delay of <strong>Verilog gate
+primitives</strong> or <strong>continuous assignments</strong>
+(<code>assign #5 y = ~a;</code>)</p>
+<p>​ <strong>COMBINATIONAL LOGIC ONLY !!!</strong></p>
+<blockquote>
+<ul>
+<li>Inertial delays swallow glitches</li>
+<li><strong>sequential logic</strong> implemented with <strong>procedure
+assignments</strong> DON'T follow the rule</li>
+</ul>
+</blockquote>
+<h3 id="continuous-assignments">continuous assignments</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">wire</span> out;</span><br><span class="line">	<span class="keyword">assign</span> #<span class="number">2</span><span class="variable">.5</span> out = in;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220317000509716.png"
+alt="image-20220317000509716" /></p>
+<h3 id="procedure-assignment---combinational-logic">procedure assignment
+- combinational logic</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////// combination logic ////////////////////////</span></span><br><span class="line">	<span class="keyword">always</span> @(*)</span><br><span class="line">		#<span class="number">2</span><span class="variable">.5</span> out = in;</span><br><span class="line"><span class="comment">///////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">/* the above code is same with following code</span></span><br><span class="line"><span class="comment">    	always @(*) begin</span></span><br><span class="line"><span class="comment">			#2.5;</span></span><br><span class="line"><span class="comment">			out = in;</span></span><br><span class="line"><span class="comment">		end</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220316235257361.png"
+alt="image-20220316235257361" /></p>
+<h3 id="procedure-assignment---sequential-logic">procedure assignment -
+sequential logic</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> clk;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">		clk = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">5</span>;</span><br><span class="line">		<span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">			clk = ~clk;</span><br><span class="line">			#<span class="number">5</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">//////////// sequential logic //////////////////</span></span><br><span class="line">	<span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">		#<span class="number">2</span><span class="variable">.5</span> out &lt;= in;</span><br><span class="line"><span class="comment">///////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220316235620168.png"
+alt="image-20220316235620168" /></p>
+<blockquote>
+<p>As shown above, sequential logic DON'T follow inertial delay</p>
+</blockquote>
+<h2 id="transport-delay">Transport delay</h2>
+<p>Transport delay models are simulation delay models that pass all
+pulses, including pulses that are shorter than the propagation delay of
+corresponding <strong>Verilog procedural assignments</strong></p>
+<blockquote>
+<ul>
+<li>Transport delays pass glitches, delayed in time</li>
+<li>Verilog can model RTL transport delays by adding <strong>explicit
+delays to the right-hand-side (RHS) of a nonblocking
+assignment</strong></li>
+</ul>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @(*)</span><br><span class="line">    y &lt;= #<span class="number">5</span> ~a;</span><br></pre></td></tr></table></figure>
+<h3 id="nonblocking-assignment">nonblocking assignment</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"><span class="comment">/////////////// nonblocking assignment ///</span></span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		out &lt;= #<span class="number">2</span><span class="variable">.5</span> in;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220317003146825.png"
+alt="image-20220317003146825" /></p>
+<h3 id="blocking-assignment">blocking assignment</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"><span class="comment">/////////////// blocking assignment ///</span></span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		out = #<span class="number">2</span><span class="variable">.5</span> in;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220317003819457.png"
+alt="image-20220317003819457" /></p>
+<blockquote>
+<p>It seems that new event is <strong>discarded</strong> before previous
+event is realized.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p><a
+target="_blank" rel="noopener" href="http://www.sunburst-design.com/papers/CummingsSNUG2002Boston_NBAwithDelays.pdf">Verilog
+Nonblocking Assignments With Delays, Myths &amp; Mysteries</a></p>
+<p><a
+target="_blank" rel="noopener" href="http://www.sunburst-design.com/papers/CummingsHDLCON1999_BehavioralDelays_Rev1_1.pdf">Correct
+Methods For Adding Delays To Verilog Behavioral Models</a></p>
+<p>Article (20488135) Title: Selecting Different Delay Modes in GLS
+(RAK) URL: <a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdLyEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdLyEAI</a></p>
+<p>Article (20447759) Title: Gate Level Simulation (GLS): A Quick Guide
+for Beginners URL: <a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/verilog/" rel="tag"># verilog</a>
+              <a href="/tags/inertial-delay/" rel="tag"># inertial delay</a>
+              <a href="/tags/transport-delay/" rel="tag"># transport delay</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/16/sv-rnm-101/" rel="prev" title="Real Modeling with SystemVerilog using Cadence EE_pkg 101">
+                  <i class="fa fa-chevron-left"></i> Real Modeling with SystemVerilog using Cadence EE_pkg 101
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/17/tcoil/" rel="next" title="T-coil and its application">
+                  T-coil and its application <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

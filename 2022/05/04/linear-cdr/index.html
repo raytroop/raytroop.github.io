@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="condition: Linear model of the CDR is used in a frequency lock condition and is approaching to achieve phase lock  Using this model, the power spectral density (PSD) of jitter in the recovered clock">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CDR linear model">
+<meta property="og:url" content="http://example.com/2022/05/04/linear-cdr/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="condition: Linear model of the CDR is used in a frequency lock condition and is approaching to achieve phase lock  Using this model, the power spectral density (PSD) of jitter in the recovered clock">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/05/04/linear-cdr/image-20220504101924272.png">
+<meta property="og:image" content="http://example.com/2022/05/04/linear-cdr/image-20220504104202197.png">
+<meta property="og:image" content="http://example.com/2022/05/04/linear-cdr/image-20220504110722442.png">
+<meta property="og:image" content="http://example.com/2022/05/04/linear-cdr/image-20220504110737718.png">
+<meta property="og:image" content="http://example.com/2022/05/04/linear-cdr/image-20220504114650749.png">
+<meta property="og:image" content="http://example.com/2022/05/04/linear-cdr/image-20220504120538534.png">
+<meta property="article:published_time" content="2022-05-04T10:16:23.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:57.174Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="cdr">
+<meta property="article:tag" content="jtran">
+<meta property="article:tag" content="jgen">
+<meta property="article:tag" content="jtol">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/04/linear-cdr/image-20220504101924272.png">
+
+
+<link rel="canonical" href="http://example.com/2022/05/04/linear-cdr/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/05/04/linear-cdr/","path":"2022/05/04/linear-cdr/","title":"CDR linear model"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CDR linear model | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#jitter-transfer"><span class="nav-number">1.</span> <span class="nav-text">Jitter Transfer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jitter-peaking-in-jitter-transfer-function"><span class="nav-number">2.</span> <span class="nav-text">Jitter Peaking in
+Jitter Transfer Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jitter-generation"><span class="nav-number">3.</span> <span class="nav-text">Jitter Generation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jitter-tolerance"><span class="nav-number">4.</span> <span class="nav-text">Jitter Tolerance</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/04/linear-cdr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CDR linear model | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CDR linear model
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-04 10:16:23" itemprop="dateCreated datePublished" datetime="2022-05-04T10:16:23+00:00">2022-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:57" itemprop="dateModified" datetime="2023-07-10T15:04:57+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="/2022/05/04/linear-cdr/image-20220504101924272.png"
+alt="image-20220504101924272" /></p>
+<blockquote>
+<p>condition:</p>
+<p>Linear model of the CDR is used in a <strong>frequency lock
+condition</strong> and is approaching to achieve <strong>phase
+lock</strong></p>
+</blockquote>
+<p>Using this model, the power spectral density (PSD) of jitter in the
+recovered clock <span class="math inline">\(S_{out}(f)\)</span> is <span
+class="math display">\[
+S_{out}(f)=|H_T(f)|^2S_{in}(f)+|H_G(f)|^2S_{VCO}(f)
+\]</span> Here, we assume <span
+class="math inline">\(\varphi_{in}\)</span> and <span
+class="math inline">\(\varphi_{VCO}\)</span> are uncorrelated as they
+come from independent sources.</p>
+<h4 id="jitter-transfer">Jitter Transfer</h4>
+<p><span class="math display">\[
+H_T(s) =
+\frac{\varphi_{out}(s)}{\varphi_{in}(s)}|_{\varphi_{vco}=0}=\frac{K_{PD}K_{VCO}R_s+\frac{K_{PD}K_{VCO}}{C}}{s^2+K_{PD}K_{VCO}R_s+\frac{K_{PD}K_{VCO}}{C}}
+\]</span></p>
+<p>Using below notation <span class="math display">\[\begin{align}
+\omega_n^2=\frac{K_{PD}K_{VCO}}{C} \\
+\xi=\frac{K_{PD}K_{VCO}}{2\omega_n^2}
+\end{align}\]</span></p>
+<p>We can rewrite transfer function as follows <span
+class="math display">\[
+H_T(s)=\frac{2\xi\omega_n s+\omega_n^2}{s^2+2\xi \omega_n s+\omega_n^2}
+\]</span></p>
+<blockquote>
+<p>The jitter transfer represents a <strong>low-pass filter</strong>
+whose magnitude is around 1 (0 dB) for low jitter frequencies and drops
+at 20 db/decade for frequencies above <span
+class="math inline">\(\omega_n\)</span></p>
+</blockquote>
+<p><img src="/2022/05/04/linear-cdr/image-20220504104202197.png"
+alt="image-20220504104202197" /></p>
+<ul>
+<li>the recovered clock <strong>track</strong> the <em>low-frequency
+jitter</em> of the input data</li>
+<li>the recovered clock <strong>DONT</strong> track the
+<em>high-frequency jitter</em> of the input data</li>
+</ul>
+<p>The recovered clock does not suffer from high-frequency jitter even
+though the input signal may contain high-frequency jitter, which will
+limit the CDR tolerance to high-frequency jitter.</p>
+<h4 id="jitter-peaking-in-jitter-transfer-function">Jitter Peaking in
+Jitter Transfer Function</h4>
+<p>The peak, slightly larger than 1 (0dB) implies that jitter will be
+<strong>amplified</strong> at some frequencies in the CDR, producing a
+jitter amplitude in the recovered clock, and thus also in the recovered
+data, that is slightly <strong>larger</strong> than the jitter amplitude
+in the input data.</p>
+<p>This is certainly undesirable, especially in applications such as
+repeaters.</p>
+<p><img src="/2022/05/04/linear-cdr/image-20220504110722442.png"
+alt="image-20220504110722442" /></p>
+<h4 id="jitter-generation">Jitter Generation</h4>
+<p>If the input data to the CDR is clean with no jitter, i.e., <span
+class="math inline">\(\varphi_{in}=0\)</span>, the jitter of the
+recovered clock comes directly from the VCO jitter. The transfer
+function that relates the VCO jitter to the recovered clock jitter is
+known as <strong>jitter generation</strong>. <span
+class="math display">\[
+H_G(s)=\frac{\varphi_{out}}{\varphi_{VCO}}|_{\varphi_{in}=0}=\frac{s^2}{s^2+2\xi
+\omega_n s+\omega_n^2}
+\]</span> Jitter generation is <strong>high-pass filter</strong> with
+two zeros, at zero frequency, and two poles identical to those of the
+jitter transfer function</p>
+<p><img src="/2022/05/04/linear-cdr/image-20220504110737718.png"
+alt="image-20220504110737718" /></p>
+<h4 id="jitter-tolerance">Jitter Tolerance</h4>
+<p>To quantify jitter tolerance, we often apply a sinusoidal jitter of a
+fixed frequency to the CDR input data and observe the BER of the CDR</p>
+<p>The jitter tolerance curve <strong>DONT</strong> capture a CDR's true
+tolerance to <strong>random</strong> jitter. Because we are applying
+"sinusoidal" jitter, which is <strong>deterministic</strong> signal.</p>
+<p>We can deal only with the jitter's amplitude and frequency instead of
+the PSD of the jitter thanks to deterministic sinusoidal jitter signal.
+<span class="math display">\[
+JTOL(f) = \left | \varphi_{in}(f)  \right |_{\text{pp-max}} \quad
+\text{for a fixed BER}
+\]</span> Where the subscript <span
+class="math inline">\(\text{pp-max}\)</span> indicates the maximum
+peak-to-peak amplitude. We can further expand this equation as follows
+<span class="math display">\[
+JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right| \cdot
+|\varphi_e(f)|_{pp-max}
+\]</span> <img src="/2022/05/04/linear-cdr/image-20220504114650749.png"
+alt="image-20220504114650749" /></p>
+<blockquote>
+<p>Relative jitter, <span class="math inline">\(\varphi_e\)</span> must
+be less than 1UIpp for error-free operation</p>
+</blockquote>
+<p>In an ideal CDR, the <strong>maximum peak-to-peak amplitude</strong>
+of <span class="math inline">\(|\varphi_e(f)|\)</span> is
+<strong>1UI</strong>, i.e.,<span
+class="math inline">\(|\varphi_e(f)|_{pp-max}=1UI\)</span></p>
+<p>Accordingly, jitter tolerance can be expressed in terms of the number
+of UIs as <span class="math display">\[
+JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right|\quad
+\text{[UI]}
+\]</span> Given the linear CDR model, we can write <span
+class="math display">\[
+JTOL(f)=\left| 1+\frac{K_{PD}K_{VCO}H_{LF}(f)}{j2\pi f} \right|\quad
+\text{[UI]}
+\]</span> Expand <span class="math inline">\(H_{LF}(f)\)</span> for the
+CDR, we can write <span class="math display">\[
+JTOL(f)=\left| 1-2\xi j \left(\frac{f_n}{f}\right) -
+\left(\frac{f_n}{f}\right)^2 \right|\quad \text{[UI]}
+\]</span> <img src="/2022/05/04/linear-cdr/image-20220504120538534.png"
+alt="image-20220504120538534" /></p>
+<p>At frequencies far below and above the natural frequency, the jitter
+tolerance can be approximated by the following <span
+class="math display">\[
+JTOL(f) = \left\{ \begin{array}{cl}
+\left(\frac{f_n}{f}\right)^2 &amp; : \ f\ll f_n \\
+1 &amp; : \ f\gg f_n
+\end{array} \right.
+\]</span></p>
+<ul>
+<li>the jitter tolerance at very <strong>high jitter
+frequencies</strong> is limited to <strong>1UIpp</strong>
+<ul>
+<li>This is consistent with that the recovered clock does not track the
+high-frequency jitter, limiting the maximum peak-to-peak deviation of
+the data edge from its nominal position to 1UI</li>
+<li>The circumstance, (b) jittery data with ideal clock</li>
+</ul></li>
+<li>the jitter tolerance is increased at 40dB/decade for jitter
+frequencies below <span class="math inline">\(f_c\)</span>
+<ul>
+<li>This is consistent with our obervation earlier that the recovered
+clock better tracks data jitter at lower jitter frequencies</li>
+<li>Equivalently, the data edge and the clock edge move together in the
+<strong>same direction</strong>. As a result, the relative jitter
+between the data and the clock remains small, i.e., below 1UI
+peak-to-peak</li>
+<li>The circumstance, (c) jittery data and jittery clock</li>
+</ul></li>
+</ul>
+<h4 id="reference">reference</h4>
+<p>Dalt, Nicola Da and Ali Sheikholeslami. “Understanding Jitter and
+Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cdr/" rel="tag"># cdr</a>
+              <a href="/tags/jtran/" rel="tag"># jtran</a>
+              <a href="/tags/jgen/" rel="tag"># jgen</a>
+              <a href="/tags/jtol/" rel="tag"># jtol</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/03/fix-em/" rel="prev" title="How to fix Electromigration ?">
+                  <i class="fa fa-chevron-left"></i> How to fix Electromigration ?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/04/lorentian-spectrum/" rel="next" title="Lorentian Spectrum of Oscillator Phase Noise">
+                  Lorentian Spectrum of Oscillator Phase Noise <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

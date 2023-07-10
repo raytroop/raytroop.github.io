@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="PrimeTime does not automatically identifies multicycle paths. specifying multicycle path for setup 12345set_multicycle_path 6 -from reg[26]&#x2F;CP -to reg&#x2F;D# orset_multicycle_path -setup 6 -from reg[26]&#x2F;C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multicycle Paths Constraints in PrimeTime">
+<meta property="og:url" content="http://example.com/2022/03/01/multicycle-paths/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="PrimeTime does not automatically identifies multicycle paths. specifying multicycle path for setup 12345set_multicycle_path 6 -from reg[26]&#x2F;CP -to reg&#x2F;D# orset_multicycle_path -setup 6 -from reg[26]&#x2F;C">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/03/01/multicycle-paths/image-20220301215938296.png">
+<meta property="article:published_time" content="2022-03-01T21:44:30.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:57.182Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="sta">
+<meta property="article:tag" content="primetime">
+<meta property="article:tag" content="timing exception">
+<meta property="article:tag" content="multicycle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/03/01/multicycle-paths/image-20220301215938296.png">
+
+
+<link rel="canonical" href="http://example.com/2022/03/01/multicycle-paths/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/03/01/multicycle-paths/","path":"2022/03/01/multicycle-paths/","title":"Multicycle Paths Constraints in PrimeTime"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Multicycle Paths Constraints in PrimeTime | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#specifying-multicycle-path-for-setup"><span class="nav-number">1.</span> <span class="nav-text">specifying multicycle path
+for setup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#specifying-multicycle-path-for-hold-new-data-every-6-cycles"><span class="nav-number">2.</span> <span class="nav-text">specifying
+multicycle path for hold (new data every 6 cycles)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reporting-a-multicycle-path-with-report_timing"><span class="nav-number">3.</span> <span class="nav-text">Reporting a
+multicycle path with report_timing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#timing-exceptions"><span class="nav-number">4.</span> <span class="nav-text">Timing Exceptions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ref"><span class="nav-number">5.</span> <span class="nav-text">REF</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/01/multicycle-paths/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Multicycle Paths Constraints in PrimeTime | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Multicycle Paths Constraints in PrimeTime
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-01 21:44:30" itemprop="dateCreated datePublished" datetime="2022-03-01T21:44:30+00:00">2022-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:57" itemprop="dateModified" datetime="2023-07-10T15:04:57+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>PrimeTime <em>does not</em> automatically identifies multicycle
+paths.</p>
+<h4 id="specifying-multicycle-path-for-setup">specifying multicycle path
+for setup</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set_multicycle_path <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">set_multicycle_path -setup <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># check the exception</span></span><br><span class="line">report_exception</span><br></pre></td></tr></table></figure>
+<h4
+id="specifying-multicycle-path-for-hold-new-data-every-6-cycles">specifying
+multicycle path for hold (new data every 6 cycles)</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set_multicycle_path -setup <span class="number">6</span> -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br><span class="line">set_multicycle_path -hold [<span class="keyword">expr</span> <span class="number">6</span><span class="number">-1</span>] -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/01/multicycle-paths/image-20220301215938296.png"
+alt="image-20220301215938296" /></p>
+<p>M<sub>H</sub> stands for Hold Multiplier, M<sub>S</sub> for Setup
+Multiplier. The Setup multiplier counts up with increasing clock cycles,
+the Hold Multiplier counts up with decreasing cycles. The origin (0) for
+the Hold Multiplier is always at the <code>Setup Multiplier - 1</code>
+position.</p>
+<h4 id="reporting-a-multicycle-path-with-report_timing">Reporting a
+multicycle path with report_timing</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">report_timing -exceptions all -from *reg[<span class="number">26</span>]/CP -to *reg/D</span><br></pre></td></tr></table></figure>
+<h4 id="timing-exceptions">Timing Exceptions</h4>
+<p>If certain paths are <strong>not</strong> intended to operate
+according to <em>the default setup and hold behavior assumed by the
+PrimeTime tool</em>, you need to specify those paths as timing
+exceptions. Otherwise, the tool might incorrectly report those paths as
+having timing violations.</p>
+<p>The PrimeTime tool lets you specify the following types of
+exceptions:</p>
+<ul>
+<li>False path – A path that is never sensitized due to the logic
+configuration, expected data sequence, or operating mode.</li>
+<li>Multicycle path – A path designed to take more than one clock cycle
+from launch to capture.</li>
+<li>Minimum or maximum delay path – A path that must meet a delay
+constraint that you explicitly specify as a time value.</li>
+</ul>
+<h4 id="ref">REF</h4>
+<p>PrimeTime® User Guide Version O-2018.06-SP4 Chapter 1: Introduction
+to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sta/" rel="tag"># sta</a>
+              <a href="/tags/primetime/" rel="tag"># primetime</a>
+              <a href="/tags/timing-exception/" rel="tag"># timing exception</a>
+              <a href="/tags/multicycle/" rel="tag"># multicycle</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/" rel="prev" title="Clock Edges used for Setup and Hold in PrimeTime">
+                  <i class="fa fa-chevron-left"></i> Clock Edges used for Setup and Hold in PrimeTime
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/02/Process-Corners-101/" rel="next" title="Semiconductor Process Variation 101">
+                  Semiconductor Process Variation 101 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

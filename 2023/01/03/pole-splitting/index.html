@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Generic circuit in textbook In addition to lowering the required capacitor value, Miller compensation entails a very important property: it moves the output pole away from the origin. This effect is c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pole splitting">
+<meta property="og:url" content="http://example.com/2023/01/03/pole-splitting/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="Generic circuit in textbook In addition to lowering the required capacitor value, Miller compensation entails a very important property: it moves the output pole away from the origin. This effect is c">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230103223438823.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230103230122637.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230103232837318.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230106214027323.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105221058404.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/fndRsw.drawio.svg">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105221201876.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105220034632.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105220102170.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105220119502.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105221805322.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230103231300609.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230129221424763.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105001747174.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105001758050.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105001812304.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105001849554.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105001923985.png">
+<meta property="og:image" content="http://example.com/2023/01/03/pole-splitting/image-20230105002653735.png">
+<meta property="article:published_time" content="2023-01-03T22:31:41.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:57.202Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="stability">
+<meta property="article:tag" content="miller">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/01/03/pole-splitting/image-20230103223438823.png">
+
+
+<link rel="canonical" href="http://example.com/2023/01/03/pole-splitting/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/01/03/pole-splitting/","path":"2023/01/03/pole-splitting/","title":"pole splitting"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>pole splitting | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-circuit-in-textbook"><span class="nav-number">1.</span> <span class="nav-text">Generic circuit in textbook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-circuit-with-series-switch"><span class="nav-number">2.</span> <span class="nav-text">The circuit with series
+switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#r_sw-and-r_c"><span class="nav-number">3.</span> <span class="nav-text">\(R_{sw}\) and
+\(R_c\)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vccs-model"><span class="nav-number">3.1.</span> <span class="nav-text">vccs model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#simplify-the-transfer-function"><span class="nav-number">3.2.</span> <span class="nav-text">simplify the transfer
+function</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#omit-c_o1"><span class="nav-number">3.2.1.</span> <span class="nav-text">omit \(C_{o1}\)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#more-simplification"><span class="nav-number">3.2.2.</span> <span class="nav-text">more simplification</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-dominant-pole-in-sansens-book"><span class="nav-number">4.</span> <span class="nav-text">non-dominant pole in Sansen&#39;s
+book</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exercise-of-2-stage-opamp"><span class="nav-number">5.</span> <span class="nav-text">Exercise of 2-stage opamp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/03/pole-splitting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="pole splitting | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pole splitting
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-03 22:31:41" itemprop="dateCreated datePublished" datetime="2023-01-03T22:31:41+00:00">2023-01-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:57" itemprop="dateModified" datetime="2023-07-10T15:04:57+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="generic-circuit-in-textbook">Generic circuit in textbook</h3>
+<p>In addition to <em>lowering</em> the required capacitor value, Miller
+compensation entails a very important property: it moves the output pole
+<em>away from the origin</em>. This effect is called <strong>pole
+splitting</strong></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230103223438823.png"
+alt="image-20230103223438823" /></p>
+<p>The 1st stage is replaced with Thevenin equivalent circuit , <span
+class="math inline">\(V_i \cong V_i \cdot g_{m1}R_{o1}\)</span></p>
+<p><span class="math display">\[\begin{align}
+\frac{V_i-V_{o1}}{R_{o1}} &amp;= V_{o1}\cdot sC_{o1}+(V_{o1}-V_o)\cdot
+sC_c \\
+V_{o1} &amp;= \frac{V_i+sR_{o1}C_cV_o}{1+sR_{o1}(C_{o1}+C_c)}
+\end{align}\]</span> <span class="math display">\[
+(V_{o1}-V_o)sC_c=g_{m2}V_{o1}+V_o(\frac{1}{R_{o2}+sC_L})
+\]</span> substitute <span class="math inline">\(V_{o1}\)</span>, we
+get</p>
+<p><span class="math display">\[\begin{align}
+\frac{V_o}{V_i} &amp;=
+\frac{(sC_c-g_{m2})R_{o2}}{s^2R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)+s\left\{
+R_{o1}C_c\cdot g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c) \right\}
++1} \\
+&amp;=
+\frac{g_{m2}R_{o2}(s\frac{C_c}{g_{m2}}-1)}{s^2R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)+s\left\{
+R_{o1}C_c\cdot g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c) \right\}
++1}
+\end{align}\]</span></p>
+<p>left hand plane poles</p>
+<p><span class="math display">\[\begin{align}
+\omega_1 &amp;= \frac{1}{R_{o1}C_c\cdot
+g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c)} \\
+\omega_2 &amp;= \frac{R_{o1}C_c\cdot
+g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c)}{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)}
+\end{align}\]</span></p>
+<p>and RHP (<em>right</em>-<em>hand plane</em>) zero <span
+class="math display">\[
+\omega_z=\frac{g_{m2}}{C_c}
+\]</span></p>
+<h3 id="the-circuit-with-series-switch">The circuit with series
+switch</h3>
+<p><img src="/2023/01/03/pole-splitting/image-20230103230122637.png"
+alt="image-20230103230122637" /></p>
+<p>replace <span class="math inline">\(sC_L\)</span> with <span
+class="math inline">\(1/(R_{sw}+\frac{1}{sC_L})\)</span> <span
+class="math display">\[\begin{align}
+\frac{V_{o2}}{V_i} &amp;=
+\frac{g_{m2}R_{o2}(s\frac{C_c}{g_{m2}}-1)(1+sR_{sw}C_L)}{s^3R_{o1}R_{o2}R_{sw}C_{o1}C_cC_L+s^2\left\{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)+
+\left[ R_{o1}C_c\cdot
+g_{m2}R_{o2}+R_{o2}(C_c+0)+R_{o1}(C_{o1}+C_c)\right]R_{sw}C_L
+\right\}+s\left\{ R_{o1}C_c\cdot
+g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c) +R_{sw}C_L\right\} +1}
+\end{align}\]</span> Due to <span class="math display">\[
+\frac{V_o}{V_{o2}} =
+\frac{\frac{1}{sC_L}}{R_{sw}+\frac{1}{sC_L}}=\frac{1}{1+sR_{sw}C_L}
+\]</span> Then <span class="math display">\[\begin{align}
+\frac{V_o}{V_i} &amp;= \frac{V_{o2}}{V_i} \cdot \frac{V_o}{V_{o2}} \\
+&amp;=
+\frac{g_{m2}R_{o2}(s\frac{C_c}{g_{m2}}-1)}{s^3R_{o1}R_{o2}R_{sw}C_{o1}C_cC_L+s^2\left\{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)+
+\left[ R_{o1}C_c\cdot
+g_{m2}R_{o2}+R_{o2}(C_c+0)+R_{o1}(C_{o1}+C_c)\right]R_{sw}C_L
+\right\}+s\left\{ R_{o1}C_c\cdot
+g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c) +R_{sw}C_L\right\} +1}
+\end{align}\]</span></p>
+<h3 id="r_sw-and-r_c"><span class="math inline">\(R_{sw}\)</span> and
+<span class="math inline">\(R_c\)</span></h3>
+<p><img src="/2023/01/03/pole-splitting/image-20230103232837318.png"
+alt="image-20230103232837318" /></p>
+<p><span class="math display">\[\begin{align}
+\frac{V_{o2}}{V_i}
+&amp;=-g_{m2}R_{o2}\frac{sC_c(R_c-1/g_{m2})+1}{(1+sR_{o1}C_{o1})sR_{o2}C_c+sR_{o1}\cdot
+g_{m2}R_{o2}C_c+\frac{s(R_{o2}+R_{sw})C_L+1}{sR_{sw}C_L+1}\left[(1+sR_{o1}C_{o1})(1+sR_cC_c)+sR_{o1}C_c
+\right]} \\
+&amp;=-g_{m2}R_{o2}\frac{sC_c(R_c-1/g_{m2})+1}{s^2R_{o1}R_{o2}C_{o1}C_c+sR_{o2}C_c+sR_{o1}\cdot
+g_{m2}R_{o2}C_c+\frac{s(R_{o2}+R_{sw})C_L+1}{sR_{sw}C_L+1}\left[(1+sR_{o1}C_{o1})(1+sR_cC_c)+sR_{o1}C_c
+\right]} \\
+&amp;=-g_{m2}R_{o2}\frac{\left[ sC_c(R_c-1/g_{m2})+1
+\right](sR_{sw}C_L+1)}{s^2R_{o1}R_{o2}C_{o1}C_c(sR_{sw}C_L+1)+sR_{o2}C_c(sR_{sw}C_L+1)+sR_{o1}\cdot
+g_{m2}R_{o2}C_c(sR_{sw}C_L+1)+\left[s(R_{o2}+R_{sw})C_L+1\right]\left[(1+sR_{o1}C_{o1})(1+sR_cC_c)+sR_{o1}C_c
+\right]}
+\end{align}\]</span></p>
+<p><span class="math inline">\(s^3\)</span> terms in denominator <span
+class="math display">\[
+H_3 = s^3\cdot(R_{o1}R_{o2}R_c+R_{o1}R_{o2}R_{sw} +R_{o1}R_cR_{sw})\cdot
+C_{o1}C_cC_L
+\]</span> <span class="math inline">\(s^2\)</span> terms in denominator
+<span class="math display">\[\begin{align}
+H_2
+&amp;=s^2\cdot(R_{o1}R_{o2}C_{o1}C_c+R_{o1}R_{o2}C_{o1}C_L+R_{o2}R_cC_cC_L+R_{o1}R_{o2}C_cC_L+R_{o1}R_cC_{o1}C_c\\
+&amp;+R_{o2}R_{sw}C_cC_L+R_{o1}R_{sw}C_cC_L\cdot
+g_{m2}R_{o2}+R_{o1}R_{sw}C_{o1}C_L+R_{sw}R_cC_cC_L+R_{o1}R_{sw}C_cC_L)
+\end{align}\]</span></p>
+<p><span class="math inline">\(s^1\)</span> term in denominator <span
+class="math display">\[
+H_1=s(R_{o1}\cdot
+g_{m2}R_{o2}C_c+R_{o1}C_{o1}+R_cC_c+R_{o1}C_c+R_{o2}C_c+R_{o2}C_L+R_{sw}C_L)
+\]</span> <span class="math inline">\(s^0\)</span> term in denominator
+<span class="math display">\[
+H_0=1
+\]</span> set <span class="math inline">\(R_c=0\)</span> and <span
+class="math inline">\(R_{sw}=0\)</span>, the <span
+class="math inline">\(H_*\)</span> reduced to <span
+class="math display">\[\begin{align}
+H_3 &amp;= 0 \\
+H_2 &amp;=s^2R_{o1}R_{o2}(C_{o1}C_c+C_{o1}C_L+C_cC_L) \\
+H_1&amp;=s(R_{o1}\cdot
+g_{m2}R_{o2}C_c+R_{o1}C_{o1}+R_{o1}C_c+R_{o2}C_c+R_{o2}C_L) \\
+H_0&amp;=1
+\end{align}\]</span> That is <span class="math display">\[
+H=s^2R_{o1}R_{o2}(C_{o1}C_c+C_{o1}C_L+C_cC_L)+s(R_{o1}\cdot
+g_{m2}R_{o2}C_c+R_{o1}C_{o1}+R_{o1}C_c+R_{o2}C_c+R_{o2}C_L)+1
+\]</span></p>
+<p>which is same with our previous analysis of <em>Generic circuit in
+textbook</em></p>
+<p>And we know <span class="math display">\[
+\frac{V_o}{V_{o2}}=\frac{1}{1+sR_{sw}C_L}
+\]</span> Finally, we get <span
+class="math inline">\(\frac{V_o}{V_i}\)</span> <span
+class="math display">\[\begin{align}
+\frac{V_o}{V_i} &amp;= \frac{V_{o2}}{V_i} \cdot \frac{V_o}{V_{o2}} \\
+&amp;= -g_{m2}R_{o2}\frac{\left[ sC_c(R_c-1/g_{m2})+1
+\right](sR_{sw}C_L+1)}{H_3+H_2+H_1+1} \cdot \frac{1}{1+sR_{sw}C_L} \\
+&amp;= -g_{m2}R_{o2}\frac{ sC_c(R_c-1/g_{m2})+1}{H_3+H_2+H_1+1}
+\end{align}\]</span></p>
+<p>The loop transfer function is <span class="math display">\[
+\frac{V_o}{V_i} =-g_{m1}R_{o1}g_{m2}R_{o2}\frac{
+sC_c(R_c-1/g_{m2})+1}{H_3+H_2+H_1+1}
+\]</span></p>
+<h4 id="vccs-model">vccs model</h4>
+<p><img src="/2023/01/03/pole-splitting/image-20230106214027323.png"
+alt="image-20230106214027323" /></p>
+<h4 id="simplify-the-transfer-function">simplify the transfer
+function</h4>
+<h5 id="omit-c_o1">omit <span class="math inline">\(C_{o1}\)</span></h5>
+<p>We omit <span class="math inline">\(C_{o1}\)</span> in frequency
+range of interest</p>
+<p><span class="math display">\[\begin{align}
+H_3 &amp;= 0 \\
+H_2 &amp;=s^2(R_{o2}R_c+R_{o1}R_{o2}+R_{o2}R_{sw}+R_{o1}R_{sw}\cdot
+g_{m2}R_{o2}+R_{sw}R_c+R_{o1}R_{sw})\cdot C_cC_L \\
+H_1 &amp;=s(R_{o1}\cdot
+g_{m2}R_{o2}C_c+R_cC_c+R_{o1}C_c+R_{o2}C_c+R_{o2}C_L+R_{sw}C_L) \\
+H_0 &amp;= 1
+\end{align}\]</span></p>
+<blockquote>
+<p>two poles and 1 zero</p>
+</blockquote>
+<p><img src="/2023/01/03/pole-splitting/image-20230105221058404.png"
+alt="image-20230105221058404" /></p>
+<h5 id="more-simplification">more simplification</h5>
+<p>Then, some terms can be omitted</p>
+<p><span class="math display">\[\begin{align}
+H_2 &amp;=s^2R_{o1}R_{o2}(1+g_{m2}R_{sw})\cdot C_cC_L \\
+H_1 &amp;=sR_{o1}\cdot g_{m2}R_{o2}C_c \\
+H_0 &amp;= 1
+\end{align}\]</span></p>
+<p>The poles can be deduced <span class="math display">\[\begin{align}
+\omega_1 &amp;= \frac{1}{R_{o1}\cdot g_{m2}R_{o2}C_c} \\
+\omega_2 &amp;= \frac{1}{1+g_{m2}R_{sw}}\cdot \frac{g_{m2}}{C_L} \\
+&amp;= \frac{1}{(gm_2^{-1}+R_{sw})C_L}
+\end{align}\]</span></p>
+<p>The pole <span
+class="math inline">\(\omega_2=\frac{1}{gm_2^{-1}C_L}\)</span> is
+changed to <span
+class="math inline">\(\omega_2=\frac{1}{(gm_2^{-1}+R_{sw})C_L}\)</span></p>
+<blockquote>
+<p>In order to cancell <span class="math inline">\(\omega_2\)</span>
+with <span class="math inline">\(\omega_z\)</span>, <span
+class="math inline">\(R_c\)</span> shall be increased</p>
+</blockquote>
+<p><span class="math display">\[
+R_{eq}=g_{m2}^{-1}+R_{sw}
+\]</span> <img src="/2023/01/03/pole-splitting/fndRsw.drawio.svg"
+alt="fndRsw.drawio.svg" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105221201876.png"
+alt="image-20230105221201876" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105220034632.png"
+alt="image-20230105220034632" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105220102170.png"
+alt="image-20230105220102170" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105220119502.png"
+alt="image-20230105220119502" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105221805322.png"
+alt="image-20230105221805322" /></p>
+<blockquote>
+<p><strong>omit <span class="math inline">\(C_{o1}\)</span></strong> is
+same with <strong>2nd system</strong> simplification</p>
+</blockquote>
+<h3 id="non-dominant-pole-in-sansens-book">non-dominant pole in Sansen's
+book</h3>
+<p><img src="/2023/01/03/pole-splitting/image-20230103231300609.png"
+alt="image-20230103231300609" /></p>
+<p>Following demonstrate how derive <span
+class="math inline">\(f_{nd}\)</span> from Razavi's equation. We copy
+<span class="math inline">\(\omega_2\)</span> here <span
+class="math display">\[
+\omega_2 = \frac{R_{o1}C_c\cdot
+g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c)}{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)}
+\]</span> which can be reduced as below</p>
+<p><span class="math display">\[\begin{align}
+\omega_2 &amp;= \frac{R_{o1}C_c\cdot
+g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c)}{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)}
+\\
+&amp;= \frac{R_{o1}C_c\cdot
+g_{m2}R_{o2}}{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)} \\
+&amp;= \frac{C_c\cdot g_{m2}}{C_cC_{o1}+C_LC_{o1}+C_LC_c} \\
+&amp;= \frac{g_{m2}}{C_{o1}+C_L\frac{C_{o1}}{C_c}+C_L} \\
+&amp;= \frac{g_{m2}}{C_L\frac{C_{o1}}{C_c}+C_L} \\
+&amp;= \frac{g_{m2}}{C_L} \cdot \frac{1}{1+\frac{C_{o1}}{C_c}}
+\end{align}\]</span></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230129221424763.png"
+alt="image-20230129221424763" /></p>
+<h3 id="exercise-of-2-stage-opamp">Exercise of 2-stage opamp</h3>
+<p><img src="/2023/01/03/pole-splitting/image-20230105001747174.png"
+alt="image-20230105001747174" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105001758050.png"
+alt="image-20230105001758050" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105001812304.png"
+alt="image-20230105001812304" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105001849554.png"
+alt="image-20230105001849554" /></p>
+<blockquote>
+<p><span class="math inline">\(R_{o1}\)</span> and <span
+class="math inline">\(R_{o2}\)</span> don't affect stability, if <span
+class="math inline">\(f_{nd}&gt;3\text{GBW}\)</span></p>
+<p>DC gain: <span
+class="math inline">\(g_{m1}g_{m2}R_{o1}R_{o2}\)</span></p>
+<p>dominant pole: <span
+class="math inline">\(\omega_d=\frac{1}{R_{o1}\cdot
+g_{m2}R_{o2}C_c}\)</span></p>
+</blockquote>
+<p><img src="/2023/01/03/pole-splitting/image-20230105001923985.png"
+alt="image-20230105001923985" /></p>
+<p><img src="/2023/01/03/pole-splitting/image-20230105002653735.png"
+alt="image-20230105002653735" /></p>
+<blockquote>
+<p><span
+class="math inline">\(20log_{10}(1.414^2)=6\text{dB}\)</span></p>
+</blockquote>
+<h3 id="reference">reference</h3>
+<p>Razavi, Behzad. Design of Analog CMOS Integrated Circuits. India:
+McGraw-Hill, 2017.</p>
+<p>Sansen, Willy M. Analog Design Essentials. Germany: Springer US,
+2006.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/stability/" rel="tag"># stability</a>
+              <a href="/tags/miller/" rel="tag"># miller</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/01/ADT/" rel="prev" title="Technology Characterization and ADT">
+                  <i class="fa fa-chevron-left"></i> Technology Characterization and ADT
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/01/04/gotcha-mos-ron/" rel="next" title="gotcha mos ron">
+                  gotcha mos ron <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

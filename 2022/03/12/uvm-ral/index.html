@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Within an UVM testbench a register model is used  either as a means of looking up a mirror of the current DUT hardware state or as means of accessing the hardware via the front or back door and updati">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVM Register Abstraction Layer (RAL) - overview">
+<meta property="og:url" content="http://example.com/2022/03/12/uvm-ral/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="Within an UVM testbench a register model is used  either as a means of looking up a mirror of the current DUT hardware state or as means of accessing the hardware via the front or back door and updati">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/03/12/uvm-ral/image-20220312125516500.png">
+<meta property="og:image" content="http://example.com/2022/03/12/uvm-ral/byte_addressing.drawio.svg">
+<meta property="article:published_time" content="2022-03-12T11:16:25.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:57.278Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="uvm">
+<meta property="article:tag" content="systemverilog">
+<meta property="article:tag" content="ral">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/03/12/uvm-ral/image-20220312125516500.png">
+
+
+<link rel="canonical" href="http://example.com/2022/03/12/uvm-ral/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/03/12/uvm-ral/","path":"2022/03/12/uvm-ral/","title":"UVM Register Abstraction Layer (RAL) - overview"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>UVM Register Abstraction Layer (RAL) - overview | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#register-frontdoor-write"><span class="nav-number">1.</span> <span class="nav-text">Register Frontdoor Write</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register-backdoor-write"><span class="nav-number">2.</span> <span class="nav-text">Register Backdoor Write</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register-backdoor-poke"><span class="nav-number">3.</span> <span class="nav-text">Register Backdoor Poke</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register-frontdoor-read"><span class="nav-number">4.</span> <span class="nav-text">Register Frontdoor Read</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register-backdoor-read"><span class="nav-number">5.</span> <span class="nav-text">Register Backdoor Read</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register-backdoor-peek"><span class="nav-number">6.</span> <span class="nav-text">Register Backdoor Peek</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#methods-to-handle-property-of-uvm_reg-or-uvm_reg_block"><span class="nav-number">7.</span> <span class="nav-text">Methods
+to handle property of uvm_reg or uvm_reg_block</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mirror"><span class="nav-number">7.1.</span> <span class="nav-text">mirror</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#set"><span class="nav-number">7.2.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#randomize"><span class="nav-number">7.3.</span> <span class="nav-text">randomize</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#get"><span class="nav-number">7.4.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#update"><span class="nav-number">7.5.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#predict"><span class="nav-number">7.6.</span> <span class="nav-text">predict</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#get_mirrored_value"><span class="nav-number">7.7.</span> <span class="nav-text">get_mirrored_value</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#backdoor-access"><span class="nav-number">8.</span> <span class="nav-text">Backdoor Access</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#uvm-register-classes-uvm_reg_bus_op-uvm_reg_item"><span class="nav-number">9.</span> <span class="nav-text">UVM Register
+Classes: uvm_reg_bus_op &amp; uvm_reg_item</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#registers"><span class="nav-number">10.</span> <span class="nav-text">Registers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register-maps"><span class="nav-number">11.</span> <span class="nav-text">Register Maps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register-adapter"><span class="nav-number">12.</span> <span class="nav-text">Register Adapter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prediction"><span class="nav-number">13.</span> <span class="nav-text">Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#auto-prediction"><span class="nav-number">13.1.</span> <span class="nav-text">Auto Prediction</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#explicit-prediction-recommended-approach"><span class="nav-number">13.2.</span> <span class="nav-text">Explicit Prediction
+(Recommended Approach)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#uvm_regpredict-uvm_regdo_predict"><span class="nav-number">13.2.1.</span> <span class="nav-text">uvm_reg::predict &amp;
+uvm_reg::do_predict</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#uvm_reg_fieldpredict-uvm_reg_fielddo_predict"><span class="nav-number">13.2.2.</span> <span class="nav-text">uvm_reg_field::predict
+&amp; uvm_reg_field::do_predict</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#uvm_access_e"><span class="nav-number">13.2.3.</span> <span class="nav-text">uvm_access_e</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#uvm_predict_e"><span class="nav-number">13.2.4.</span> <span class="nav-text">uvm_predict_e</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#uvm_path_e"><span class="nav-number">13.2.5.</span> <span class="nav-text">uvm_path_e</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#passive-prediction"><span class="nav-number">13.3.</span> <span class="nav-text">Passive Prediction</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/12/uvm-ral/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="UVM Register Abstraction Layer (RAL) - overview | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UVM Register Abstraction Layer (RAL) - overview
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-12 11:16:25" itemprop="dateCreated datePublished" datetime="2022-03-12T11:16:25+00:00">2022-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:57" itemprop="dateModified" datetime="2023-07-10T15:04:57+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Within an UVM testbench a register model is used</p>
+<ul>
+<li><p>either as a means of looking up a mirror of the current DUT
+hardware state</p></li>
+<li><p>or as means of accessing the hardware via the front or back
+door</p>
+<p>and updating the register model database.</p></li>
+</ul>
+<p><img src="/2022/03/12/uvm-ral/image-20220312125516500.png"
+alt="image-20220312125516500" /></p>
+<h4 id="register-frontdoor-write">Register Frontdoor Write</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.write</span>(status, value, [UVM_FRONTDOOR], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sequence sets <code>uvm_reg</code> with value</li>
+<li><code>uvm_reg</code> content is translated into bus transaction</li>
+<li>Driver gets bus transaction and writes DUT register</li>
+<li><strong>Mirror</strong> can be updated either implicitly or
+explicitly (predictor)</li>
+</ul>
+<h4 id="register-backdoor-write">Register Backdoor Write</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.write</span>(status, value, UVM_BACKDOOR, <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p><code>uvm_reg</code> uses DPI/XMR to set DUT register with value</p>
+<ul>
+<li>Physical interface is bypassed</li>
+<li>Register behavior is mimicked</li>
+</ul>
+<h4 id="register-backdoor-poke">Register Backdoor Poke</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.poke</span>(status, value, <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p><code>uvm_reg</code> used DPI/XMR to set DUT register with
+<strong>value as is</strong></p>
+<ul>
+<li>Physical interface is bypassed</li>
+<li>Register behavior is <strong>NOT</strong> mimicked</li>
+</ul>
+<hr />
+<h4 id="register-frontdoor-read">Register Frontdoor Read</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.read</span>(status, value, [UVM_FRONTDOOR], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sequence executes <code>uvm_reg</code> READ</li>
+<li><code>uvm_reg</code> is translated into bus transaction</li>
+<li>Driver gets bus transaction and read DUT register</li>
+<li>Read value is translated into <code>uvm_reg</code> data and returned
+to sequence</li>
+<li>Mirror updates</li>
+</ul>
+<h4 id="register-backdoor-read">Register Backdoor Read</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.read</span>(status, value, UVM_BACKDOOR, <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p><code>uvm_reg</code> used DPI/XMR to get DUT register value</p>
+<ul>
+<li>Physical interface is bypassed</li>
+<li>Register behavior is <strong>mimicked</strong> (acc)</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// EXECUTE READ...</span></span><br><span class="line"><span class="keyword">case</span> (rw<span class="variable">.path</span>)</span><br><span class="line"></span><br><span class="line">   <span class="comment">// ...VIA USER BACKDOOR</span></span><br><span class="line">   UVM_BACKDOOR: <span class="keyword">begin</span> </span><br><span class="line">      uvm_reg_backdoor bkdr = get_backdoor();</span><br><span class="line"></span><br><span class="line">      uvm_reg_map map = uvm_reg_map::backdoor();</span><br><span class="line">      <span class="keyword">if</span> (map<span class="variable">.get_check_on_read</span>()) exp = get();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (bkdr != <span class="literal">null</span>)</span><br><span class="line">        bkdr<span class="variable">.read</span>(rw);</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        backdoor_read(rw);</span><br><span class="line"></span><br><span class="line">      value = rw<span class="variable">.value</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Need to clear RC fields, set RS fields and mask WO fields</span></span><br><span class="line">      <span class="keyword">if</span> (rw<span class="variable">.status</span> != UVM_NOT_OK) <span class="keyword">begin</span></span><br><span class="line"></span><br><span class="line">         uvm_reg_data_t wo_mask;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">foreach</span> (m_fields[i]) <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">string</span> acc = m_fields[i]<span class="variable">.get_access</span>(uvm_reg_map::backdoor());</span><br><span class="line">            <span class="keyword">if</span> (acc == <span class="string">&quot;RC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WSRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W1SRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W0SRC&quot;</span>) <span class="keyword">begin</span></span><br><span class="line">               value &amp;= ~(((<span class="number">1</span>&lt;&lt;m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>)</span><br><span class="line">                                       &lt;&lt; m_fields[i]<span class="variable">.get_lsb_pos</span>());</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;RS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WCRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W1CRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W0CRS&quot;</span>) <span class="keyword">begin</span></span><br><span class="line">               value |= (((<span class="number">1</span>&lt;&lt;m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>)</span><br><span class="line">                                       &lt;&lt; m_fields[i]<span class="variable">.get_lsb_pos</span>());</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;WO&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOC&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WO1&quot;</span>) <span class="keyword">begin</span></span><br><span class="line">               wo_mask |= ((<span class="number">1</span>&lt;&lt;m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>)</span><br><span class="line">                                       &lt;&lt; m_fields[i]<span class="variable">.get_lsb_pos</span>();</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (value != rw<span class="variable">.value</span>[<span class="number">0</span>]) <span class="keyword">begin</span></span><br><span class="line">           uvm_reg_data_t saved;</span><br><span class="line">           saved = rw<span class="variable">.value</span>[<span class="number">0</span>];</span><br><span class="line">           rw<span class="variable">.value</span>[<span class="number">0</span>] = value;</span><br><span class="line">           <span class="keyword">if</span> (bkdr != <span class="literal">null</span>)</span><br><span class="line">              bkdr<span class="variable">.write</span>(rw);</span><br><span class="line">           <span class="keyword">else</span></span><br><span class="line">              backdoor_write(rw);</span><br><span class="line">           rw<span class="variable">.value</span>[<span class="number">0</span>] = saved;</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">         rw<span class="variable">.value</span>[<span class="number">0</span>] &amp;= ~wo_mask;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (map<span class="variable">.get_check_on_read</span>() &amp;&amp;</span><br><span class="line">            rw<span class="variable">.status</span> != UVM_NOT_OK) <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">void</span>&#x27;(do_check(exp, rw<span class="variable">.value</span>[<span class="number">0</span>], map));</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line">         </span><br><span class="line">         do_predict(rw, UVM_PREDICT_READ);</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="register-backdoor-peek">Register Backdoor Peek</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.peek</span>(status, value, <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p><code>uvm_reg</code> uses DPI/XMR to get DUT register <strong>value
+as is</strong></p>
+<ul>
+<li>Physical interface is bypassed</li>
+<li>Register behavior is <strong>NOT</strong> mimicked</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> uvm_reg::peek(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                   <span class="keyword">output</span> uvm_reg_data_t    value,</span><br><span class="line">                   <span class="keyword">input</span>  <span class="keyword">string</span>            kind = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                   <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                   <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                   <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                   <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">   uvm_reg_backdoor bkdr = get_backdoor();</span><br><span class="line">   uvm_reg_item rw;</span><br><span class="line"></span><br><span class="line">   m_fname = fname;</span><br><span class="line">   m_lineno = lineno;</span><br><span class="line">    </span><br><span class="line">   <span class="comment">// create an abstract transaction for this operation</span></span><br><span class="line">   rw = uvm_reg_item::type_id::create(<span class="string">&quot;mem_peek_item&quot;</span>,,get_full_name());</span><br><span class="line">   rw<span class="variable">.element</span>      = <span class="keyword">this</span>;</span><br><span class="line">   rw<span class="variable">.path</span>         = UVM_BACKDOOR;</span><br><span class="line">   rw<span class="variable">.element_kind</span> = UVM_REG;</span><br><span class="line">   rw<span class="variable">.kind</span>         = UVM_READ;</span><br><span class="line">   rw<span class="variable">.bd_kind</span>      = kind;</span><br><span class="line">   rw<span class="variable">.parent</span>       = parent;</span><br><span class="line">   rw<span class="variable">.extension</span>    = extension;</span><br><span class="line">   rw<span class="variable">.fname</span>        = fname;</span><br><span class="line">   rw<span class="variable">.lineno</span>       = lineno;</span><br><span class="line"></span><br><span class="line">   do_predict(rw, UVM_PREDICT_READ);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endtask</span>: peek </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="methods-to-handle-property-of-uvm_reg-or-uvm_reg_block">Methods
+to handle property of uvm_reg or uvm_reg_block</h4>
+<h5 id="mirror">mirror</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.mirror</span>(status, [check], [path], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br><span class="line">model<span class="variable">.r0</span><span class="variable">.mirro</span>(status, [check], [path], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p>Update <strong>mirrored</strong> and <strong>desired</strong>
+properties with DUT content</p>
+<h5 id="set">set</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.set</span>(value);</span><br></pre></td></tr></table></figure>
+<p>Set value in <strong>desired</strong> properties</p>
+<h5 id="randomize">randomize</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.randomize</span>();</span><br><span class="line">model<span class="variable">.r0</span><span class="variable">.randomize</span>();</span><br></pre></td></tr></table></figure>
+<p>Populate <strong>desired</strong> property with random value</p>
+<h5 id="get">get</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value = model<span class="variable">.r0</span><span class="variable">.get</span>();</span><br></pre></td></tr></table></figure>
+<p>Get value from <strong>desired</strong> property</p>
+<h5 id="update">update</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.update</span>(status, [path], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br><span class="line">model<span class="variable">.r0</span><span class="variable">.update</span>(status, [path], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p>Update <strong>DUT</strong> and <strong>mirrored</strong> property
+with <strong>desired</strong> property if <strong>mirrored</strong>
+property is different from <strong>desired</strong></p>
+<h5 id="predict">predict</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.predict</span>(value);</span><br></pre></td></tr></table></figure>
+<p>Set the value of <strong>mirrored</strong> property</p>
+<h5 id="get_mirrored_value">get_mirrored_value</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value = model<span class="variable">.r0</span><span class="variable">.get_mirrored_value</span>();</span><br></pre></td></tr></table></figure>
+<p>Get value from <strong>mirrored</strong> property</p>
+<h4 id="backdoor-access">Backdoor Access</h4>
+<ul>
+<li>Two ways to generate the backdoor access:
+<ul>
+<li>Via SystemVerilog Cross Module Reference (XMR)</li>
+<li>Via SystemVerilog DPI call</li>
+</ul></li>
+<li>Both allow register model to be part of SystemVerilog package</li>
+<li>XMR implementation is faster
+<ul>
+<li>Requires user to compile one additional file and at compile-time
+provide top level path to DUT</li>
+<li><strong>VCS only</strong></li>
+</ul></li>
+<li>DPI implementation is slower
+<ul>
+<li>No additional file is needed and top level path can be provided at
+run-time</li>
+<li>Portable to other simulators</li>
+</ul></li>
+</ul>
+<h4 id="uvm-register-classes-uvm_reg_bus_op-uvm_reg_item">UVM Register
+Classes: uvm_reg_bus_op &amp; uvm_reg_item</h4>
+<p>The generic register item is implemented as a struct in order to
+minimise the amount of memory resource it uses. The struct is defined as
+type <code>uvm_reg_bus_op</code> and this contains 6 fields:</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 26%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Type</th>
+<th>Comment/Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>addr</td>
+<td>uvm_reg_addr_t</td>
+<td>Address field, defaults to 64 bits</td>
+</tr>
+<tr class="even">
+<td>data</td>
+<td>uvm_reg_data_t</td>
+<td>Read or write data, defaults to 64 bits</td>
+</tr>
+<tr class="odd">
+<td>kind</td>
+<td>uvm_access_e</td>
+<td>UVM_READ or UVM_WRITE</td>
+</tr>
+<tr class="even">
+<td>n_bits</td>
+<td>unsigned int</td>
+<td>Number of bits being transferred</td>
+</tr>
+<tr class="odd">
+<td>byte_en</td>
+<td>uvm_reg_byte_en_t</td>
+<td>Byte enable</td>
+</tr>
+<tr class="even">
+<td>status</td>
+<td>uvm_status_e</td>
+<td>UVM_IS_OK, UVM_IS_X, UVM_NOT_OK</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">  uvm_access_e kind;	<span class="comment">// Kind of access: READ or WRITE.</span></span><br><span class="line">  uvm_reg_addr_t addr;	<span class="comment">// The bus address.</span></span><br><span class="line">  uvm_reg_data_t data;	<span class="comment">// The data to write.</span></span><br><span class="line">  <span class="comment">// The number of bits of &lt;uvm_reg_item::value&gt; being transferred by this transaction.</span></span><br><span class="line">  <span class="keyword">int</span> n_bits;	</span><br><span class="line">  uvm_reg_byte_en_t byte_en;	<span class="comment">// Enables for the byte lanes on the bus.</span></span><br><span class="line">  uvm_status_e status;	<span class="comment">// The result of the transaction: UVM_IS_OK, UVM_HAS_X, UVM_NOT_OK.</span></span><br><span class="line">&#125; uvm_reg_bus_op;</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_reg_item <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    <span class="keyword">rand</span> uvm_access_e kind;</span><br><span class="line">    <span class="keyword">rand</span> uvm_reg_data_t value[];</span><br><span class="line">    <span class="keyword">rand</span> uvm_reg_addr_t offset;</span><br><span class="line">    uvm_status_e status;</span><br><span class="line">    uvm_reg_map map;</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
+<h4 id="registers">Registers</h4>
+<p>The register class contains a <code>build</code> method which is used
+to <strong>create</strong> and <strong>configure the
+fields</strong>.</p>
+<blockquote>
+<p>this <code>build</code> method is not called by the UVM
+<code>build_phase</code>, since the register is an
+<code>uvm_object</code> rather than an <code>uvm_component</code></p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// uvm_reg constructor prototype:</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name=<span class="string">&quot;&quot;</span>,      <span class="comment">// Register name</span></span><br><span class="line">              <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bits, <span class="comment">// Register width in bits</span></span><br><span class="line">              <span class="keyword">int</span> has_coverage);   <span class="comment">// Coverage model supported by the register</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Function: new</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;ctrl_reg&quot;</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, <span class="number">32</span>, build_coverage(UVM_CVR_FIELD_VALS));</span><br><span class="line">    add_coverage(build_coverage(UVM_CVR_FIELD_VALS));</span><br><span class="line">    <span class="keyword">if</span>(has_coverage(UVM_CVR_FIELD_VALS))</span><br><span class="line">        cg_vals = <span class="keyword">new</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Function: sample_values</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="keyword">virtual</span> <span class="keyword">function</span> <span class="keyword">void</span> sample_values();</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.sample_values</span>();</span><br><span class="line">    <span class="keyword">if</span> (get_coverage(UVM_CVR_FIELD_VALS))</span><br><span class="line">        cg_vals<span class="variable">.sample</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Function: build</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="keyword">virtual</span> <span class="keyword">function</span> <span class="keyword">void</span> build();</span><br><span class="line">    ass = uvm_reg_field::type_id::create(<span class="string">&quot;ass&quot;</span>);</span><br><span class="line">    ie = uvm_reg_field::type_id::create(<span class="string">&quot;ie&quot;</span>);</span><br><span class="line">    lsb = uvm_reg_field::type_id::create(<span class="string">&quot;lsb&quot;</span>);</span><br><span class="line">    tx_neg = uvm_reg_field::type_id::create(<span class="string">&quot;tx_neg&quot;</span>);</span><br><span class="line">    rx_neg = uvm_reg_field::type_id::create(<span class="string">&quot;rx_neg&quot;</span>);</span><br><span class="line">    go_bsy = uvm_reg_field::type_id::create(<span class="string">&quot;go_bsy&quot;</span>);</span><br><span class="line">    reserved2 = uvm_reg_field::type_id::create(<span class="string">&quot;reserved2&quot;</span>);</span><br><span class="line">    char_len = uvm_reg_field::type_id::create(<span class="string">&quot;char_len&quot;</span>);</span><br><span class="line"></span><br><span class="line">    ass<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    ie<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    lsb<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">11</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    tx_neg<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    rx_neg<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    go_bsy<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    reserved2<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    char_len<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">7&#x27;b0000000</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>As shown above, Register width is <strong>32</strong> same with the
+bus width, <strong>lower 14 bit</strong> is configured.</p>
+</blockquote>
+<p><strong>RTL</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">define</span> SPI_CTRL_BIT_NB         14</span></span><br><span class="line"><span class="keyword">reg</span> [`SPI_CTRL_BIT_NB-<span class="number">1</span>:<span class="number">0</span>] ctrl;	<span class="comment">// Control and status register</span></span><br></pre></td></tr></table></figure>
+<h4 id="register-maps">Register Maps</h4>
+<p>Two purpose of the register map</p>
+<ul>
+<li>provide information on the offset of the registers, memories and/or
+register blocks</li>
+<li>identify bus agent based sequences to be executed ???</li>
+</ul>
+<blockquote>
+<p>There can be several register maps within a block, each one can
+specify a different <strong>address map</strong> and a different
+<strong>target bus agent</strong></p>
+<p>register map has to be created which the <strong>register
+block</strong> using the <code>create_map</code> method</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Prototype for the create_map method</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">function</span> uvm_reg_map create_map(<span class="keyword">string</span> name,               <span class="comment">// Name of the map handle</span></span><br><span class="line">                                uvm_reg_addr_t base_addr,  <span class="comment">// The maps base address</span></span><br><span class="line">                                <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,      <span class="comment">// Map access width in bytes</span></span><br><span class="line">                                uvm_endianness_e endian,   <span class="comment">// The endianess of the map</span></span><br><span class="line">                                <span class="keyword">bit</span> byte_addressing=<span class="number">1</span>);    <span class="comment">// Whether byte_addressing is supported</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Example:</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">AHB_map = create_map(<span class="string">&quot;AHB_map&quot;</span>, <span class="number">&#x27;h0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><p>The <strong>n_bytes</strong> parameter is the word size (bus
+width) of the bus to which the map is associated. If a register's width
+exceeds the bus width, more than one bus access is needed to read and
+write that register over that bus.</p></li>
+<li><p>he <em>byte_addressing</em> argument affects how the address is
+incremented in these consecutive accesses. For example, if
+<em>n_bytes</em>=4 and <em>byte_addressing</em>=0, then an access to a
+register that is 64-bits wide and at offset 0 will result in two bus
+accesses at addresses 0 and 1. With <em>byte_addressing</em>=1, that
+same access will result in two bus accesses at addresses 0 and 4.</p>
+<p><strong>The default for <em>byte_addressing is</em>
+1</strong></p></li>
+<li><p>The <strong>first map</strong> to be created within a register
+block is assigned to the <strong>default_map</strong> member of the
+register block</p></li>
+</ul>
+</blockquote>
+<p><img src="/2022/03/12/uvm-ral/byte_addressing.drawio.svg"
+alt="byte_addressing.drawio" /></p>
+<h4 id="register-adapter">Register Adapter</h4>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>uvm_reg_adapter</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Methods</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="even">
+<td>reg2bus</td>
+<td>Overload to convert generic register access items to target bus
+agent sequence items</td>
+</tr>
+<tr class="odd">
+<td>bus2reg</td>
+<td>Overload to convert target bus sequence items to register model
+items</td>
+</tr>
+<tr class="even">
+<td><strong>Properties (Of type bit)</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="odd">
+<td>supports_byte_enable</td>
+<td>Set to 1 if the target bus and the target bus agent supports byte
+enables, else set to 0</td>
+</tr>
+<tr class="even">
+<td>provides_responses</td>
+<td>Set to 1 if the target agent driver sends separate response
+sequence_items that require response handling</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The <strong>provides_responses</strong> bit should be set if the
+agent driver returns a separate response item (i.e.
+<code>put(response)</code>, or <code>item_done(response)</code>) from
+its request item</p>
+</blockquote>
+<h4 id="prediction">Prediction</h4>
+<p>the update, or prediction, of the register model content can occur
+using one of three models</p>
+<h5 id="auto-prediction">Auto Prediction</h5>
+<p>This mode of operation is the simplest to implement, but suffers from
+the drawback that it can only keep the register model up to date with
+<strong>the transfers that it initiates</strong>. If any other sequences
+directly access the target sequencer to update register content, or if
+there are register accesses from other DUT interfaces, then the register
+model will not be updated.</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_map::set_auto_predict(<span class="keyword">bit</span> on=<span class="number">1</span>); m_auto_predict = on; <span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Gets the auto-predict mode setting for this map.</span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">bit</span>  uvm_reg_map::get_auto_predict(); <span class="keyword">return</span> m_auto_predict; <span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>// Function: set_auto_predict</p>
+<p>//</p>
+<p>// Sets the auto-predict mode for his map.</p>
+<p>//</p>
+<p>// When <sub>on</sub> is <sub>TRUE</sub>,</p>
+<p>// the register model will automatically update its
+<strong>mirror</strong> (what it thinks should be in the DUT)</p>
+<p>immediately after any bus read or write operation via this map.
+<strong>Before</strong> a <code>uvm_reg::write</code></p>
+<p>// or <code>uvm_reg::read</code> operation returns, the register's
+<code>uvm_reg::predict</code> method is called to update</p>
+<p>the <strong>mirrored</strong> value in the register.</p>
+<p>//</p>
+<p>// When <sub>on</sub> is <sub>FALSE</sub>, bus reads and writes via
+this map do not</p>
+<p>// automatically update the mirror. For real-time updates to the
+mirror</p>
+<p>// in this mode, you connect a <code>uvm_reg_predictor</code>
+instance to the bus</p>
+<p>// monitor. The predictor takes observed bus transactions from
+the</p>
+<p>// bus monitor, looks up the associated <code>uvm_reg</code> register
+given</p>
+<p>// the address, then calls that register's
+<code>uvm_reg::predict</code> method.</p>
+<p>// While more complex, this mode will capture all register
+read/write</p>
+<p>// activity, including that not directly descendant from calls to</p>
+<p>// <code>uvm_reg::write</code> and <code>uvm_reg::read</code>.</p>
+<p>//</p>
+<p>// <strong>By default, auto-prediction is turned off</strong>.</p>
+<p>//</p>
+</blockquote>
+<p><img
+src="https://s3.amazonaws.com/cookbook.verification.academy/images/Reg_auto_predict.gif"
+alt="Reg auto predict.gif" /></p>
+<blockquote>
+<p>The register model content is updated based on the register accesses
+it initiates</p>
+</blockquote>
+<h5 id="explicit-prediction-recommended-approach">Explicit Prediction
+(Recommended Approach)</h5>
+<p>Explicit prediction is the <strong>default mode</strong> of
+prediction</p>
+<p><img
+src="https://s3.amazonaws.com/cookbook.verification.academy/images/Reg_explicit_prediction.gif"
+alt="Reg explicit prediction.gif" /></p>
+<p>The register model content is updated via the <strong>predictor
+component</strong> based on all observed bus transactions, ensuring that
+register accesses made without the register model are mirrored
+correctly. The predictor looks up the accessed register by address then
+calls its <code>predict()</code> method</p>
+<h6 id="uvm_regpredict-uvm_regdo_predict">uvm_reg::predict &amp;
+uvm_reg::do_predict</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// predict</span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">bit</span> uvm_reg::predict (uvm_reg_data_t    value,</span><br><span class="line">                               uvm_reg_byte_en_t be = -<span class="number">1</span>,</span><br><span class="line">                               uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                               uvm_path_e        path = UVM_FRONTDOOR,</span><br><span class="line">                               uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                               <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                               <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line">  uvm_reg_item rw = <span class="keyword">new</span>; </span><br><span class="line">  rw<span class="variable">.value</span>[<span class="number">0</span>] = value;</span><br><span class="line">  rw<span class="variable">.path</span> = path;</span><br><span class="line">  rw<span class="variable">.map</span> = map; </span><br><span class="line">  rw<span class="variable">.fname</span> = fname;</span><br><span class="line">  rw<span class="variable">.lineno</span> = lineno;</span><br><span class="line">  do_predict(rw, kind, be); </span><br><span class="line">  predict = (rw<span class="variable">.status</span> == UVM_NOT_OK) ? <span class="number">0</span> : <span class="number">1</span>; </span><br><span class="line"><span class="keyword">endfunction</span>: predict</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// do_predict</span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg::do_predict(uvm_reg_item      rw,  </span><br><span class="line">                                  uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                  uvm_reg_byte_en_t be = -<span class="number">1</span>); </span><br><span class="line"></span><br><span class="line">   uvm_reg_data_t reg_value = rw<span class="variable">.value</span>[<span class="number">0</span>];</span><br><span class="line">   m_fname = rw<span class="variable">.fname</span>;</span><br><span class="line">   m_lineno = rw<span class="variable">.lineno</span>;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">if</span> (rw<span class="variable">.status</span> ==UVM_IS_OK )</span><br><span class="line">   rw<span class="variable">.status</span> = UVM_IS_OK;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (m_is_busy &amp;&amp; kind == UVM_PREDICT_DIRECT) <span class="keyword">begin</span></span><br><span class="line">      `uvm_warning(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Trying to predict value of register &#x27;&quot;</span>,</span><br><span class="line">                  get_full_name(),<span class="string">&quot;&#x27; while it is being accessed&quot;</span>&#125;)</span><br><span class="line">      rw<span class="variable">.status</span> = UVM_NOT_OK;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line">   <span class="keyword">foreach</span> (m_fields[i]) <span class="keyword">begin</span></span><br><span class="line">      rw<span class="variable">.value</span>[<span class="number">0</span>] = (reg_value &gt;&gt; m_fields[i]<span class="variable">.get_lsb_pos</span>()) &amp;</span><br><span class="line">                                 ((<span class="number">1</span> &lt;&lt; m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>);</span><br><span class="line">      m_fields[i]<span class="variable">.do_predict</span>(rw, kind, be&gt;&gt;(m_fields[i]<span class="variable">.get_lsb_pos</span>()/<span class="number">8</span>));</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   rw<span class="variable">.value</span>[<span class="number">0</span>] = reg_value;</span><br><span class="line"></span><br><span class="line"><span class="keyword">endfunction</span>: do_predict</span><br></pre></td></tr></table></figure>
+<h6
+id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
+&amp; uvm_reg_field::do_predict</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// predict</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">bit</span> uvm_reg_field::predict (uvm_reg_data_t    value,</span><br><span class="line">                                     uvm_reg_byte_en_t be = -<span class="number">1</span>,</span><br><span class="line">                                     uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                     uvm_path_e        path = UVM_FRONTDOOR,</span><br><span class="line">                                     uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                                     <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                                     <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line">  uvm_reg_item rw = <span class="keyword">new</span>;</span><br><span class="line">  rw<span class="variable">.value</span>[<span class="number">0</span>] = value;</span><br><span class="line">  rw<span class="variable">.path</span> = path;</span><br><span class="line">  rw<span class="variable">.map</span> = map;</span><br><span class="line">  rw<span class="variable">.fname</span> = fname;</span><br><span class="line">  rw<span class="variable">.lineno</span> = lineno;</span><br><span class="line">  do_predict(rw, kind, be);</span><br><span class="line">  predict = (rw<span class="variable">.status</span> == UVM_NOT_OK) ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line"><span class="keyword">endfunction</span>: predict</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// do_predict</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_field::do_predict(uvm_reg_item      rw,</span><br><span class="line">                                        uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                        uvm_reg_byte_en_t be = -<span class="number">1</span>);</span><br><span class="line">   </span><br><span class="line">   uvm_reg_data_t field_val = rw<span class="variable">.value</span>[<span class="number">0</span>] &amp; ((<span class="number">1</span> &lt;&lt; m_size)-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (rw<span class="variable">.status</span> != UVM_NOT_OK)</span><br><span class="line">     rw<span class="variable">.status</span> = UVM_IS_OK;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Assume that the entire field is enabled</span></span><br><span class="line">   <span class="keyword">if</span> (!be[<span class="number">0</span>])</span><br><span class="line">     <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">   m_fname = rw<span class="variable">.fname</span>;</span><br><span class="line">   m_lineno = rw<span class="variable">.lineno</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">case</span> (kind)</span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_WRITE:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         uvm_reg_field_cb_iter cbs = <span class="keyword">new</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (rw<span class="variable">.path</span> == UVM_FRONTDOOR || rw<span class="variable">.path</span> == UVM_PREDICT)</span><br><span class="line">            field_val = XpredictX(m_mirrored, field_val, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         m_written = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">for</span> (uvm_reg_cbs cb = cbs<span class="variable">.first</span>(); cb != <span class="literal">null</span>; cb = cbs<span class="variable">.next</span>())</span><br><span class="line">            cb<span class="variable">.post_predict</span>(<span class="keyword">this</span>, m_mirrored, field_val, </span><br><span class="line">                            UVM_PREDICT_WRITE, rw<span class="variable">.path</span>, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         field_val &amp;= (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_READ:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         uvm_reg_field_cb_iter cbs = <span class="keyword">new</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (rw<span class="variable">.path</span> == UVM_FRONTDOOR || rw<span class="variable">.path</span> == UVM_PREDICT) <span class="keyword">begin</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">string</span> acc = get_access(rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (acc == <span class="string">&quot;RC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WSRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W1SRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W0SRC&quot;</span>)</span><br><span class="line">              field_val = <span class="number">0</span>;  <span class="comment">// (clear)</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;RS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WCRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W1CRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W0CRS&quot;</span>)</span><br><span class="line">              field_val = (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>; <span class="comment">// all 1&#x27;s (set)</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;WO&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOC&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WO1&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;NOACCESS&quot;</span>)</span><br><span class="line">              <span class="keyword">return</span>;</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">for</span> (uvm_reg_cbs cb = cbs<span class="variable">.first</span>(); cb != <span class="literal">null</span>; cb = cbs<span class="variable">.next</span>())</span><br><span class="line">            cb<span class="variable">.post_predict</span>(<span class="keyword">this</span>, m_mirrored, field_val,</span><br><span class="line">                            UVM_PREDICT_READ, rw<span class="variable">.path</span>, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         field_val &amp;= (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_DIRECT:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         <span class="keyword">if</span> (m_parent<span class="variable">.is_busy</span>()) <span class="keyword">begin</span></span><br><span class="line">           `uvm_warning(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Trying to predict value of field &#x27;&quot;</span>,</span><br><span class="line">              get_name(),<span class="string">&quot;&#x27; while register &#x27;&quot;</span>,m_parent<span class="variable">.get_full_name</span>(),</span><br><span class="line">              <span class="string">&quot;&#x27; is being accessed&quot;</span>&#125;)</span><br><span class="line">           rw<span class="variable">.status</span> = UVM_NOT_OK;</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// update the mirror with predicted value</span></span><br><span class="line">   m_mirrored = field_val;</span><br><span class="line">   m_desired  = field_val;</span><br><span class="line">   <span class="keyword">this</span><span class="variable">.value</span> = field_val;</span><br><span class="line"></span><br><span class="line"><span class="keyword">endfunction</span>: do_predict</span><br></pre></td></tr></table></figure>
+<h6 id="uvm_access_e">uvm_access_e</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_access_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Type of operation begin performed</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_READ     - Read operation</span></span><br><span class="line"><span class="comment">// UVM_WRITE    - Write operation</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_READ,</span><br><span class="line">      UVM_WRITE,</span><br><span class="line">      UVM_BURST_READ,</span><br><span class="line">      UVM_BURST_WRITE</span><br><span class="line">   &#125; uvm_access_e;</span><br></pre></td></tr></table></figure>
+<h6 id="uvm_predict_e">uvm_predict_e</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_predict_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// How the mirror is to be updated</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_DIRECT  - Predicted value is as-is</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_READ    - Predict based on the specified value having been read</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_WRITE   - Predict based on the specified value having been written</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_PREDICT_DIRECT,</span><br><span class="line">      UVM_PREDICT_READ,</span><br><span class="line">      UVM_PREDICT_WRITE</span><br><span class="line">   &#125; uvm_predict_e;</span><br></pre></td></tr></table></figure>
+<h6 id="uvm_path_e">uvm_path_e</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_path_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Path used for register operation</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_FRONTDOOR    - Use the front door</span></span><br><span class="line"><span class="comment">// UVM_BACKDOOR     - Use the back door</span></span><br><span class="line"><span class="comment">// UVM_PREDICT      - Operation derived from observations by a bus monitor via</span></span><br><span class="line"><span class="comment">//                    the &lt;uvm_reg_predictor&gt; class.</span></span><br><span class="line"><span class="comment">// UVM_DEFAULT_PATH - Operation specified by the context</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_FRONTDOOR,</span><br><span class="line">      UVM_BACKDOOR,</span><br><span class="line">      UVM_PREDICT,</span><br><span class="line">      UVM_DEFAULT_PATH</span><br><span class="line">   &#125; uvm_path_e;</span><br></pre></td></tr></table></figure>
+<h5 id="passive-prediction">Passive Prediction</h5>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/uvm/" rel="tag"># uvm</a>
+              <a href="/tags/systemverilog/" rel="tag"># systemverilog</a>
+              <a href="/tags/ral/" rel="tag"># ral</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/09/spf-complex-pwl/" rel="prev" title="Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model">
+                  <i class="fa fa-chevron-left"></i> Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/13/uvm-ral-src-reading/" rel="next" title="UVM Register Abstraction Layer (RAL) - source code reading">
+                  UVM Register Abstraction Layer (RAL) - source code reading <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Parallel Compensation is also known as Lead Compensation, Pole-Zero Compensation   Note: The dominant pole is at output of the first stage, i.e. \(\frac{1}{R_{EQ}C_{EQ}}\).  Pole and Zero in transfer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Parallel Compensation in Two stage amplifier">
+<meta property="og:url" content="http://example.com/2022/03/07/parallel-compensation/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="Parallel Compensation is also known as Lead Compensation, Pole-Zero Compensation   Note: The dominant pole is at output of the first stage, i.e. \(\frac{1}{R_{EQ}C_{EQ}}\).  Pole and Zero in transfer">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-07T23:48:11.000Z">
+<meta property="article:modified_time" content="2023-07-10T15:04:57.190Z">
+<meta property="article:author" content="Guo">
+<meta property="article:tag" content="stability">
+<meta property="article:tag" content="compensation">
+<meta property="article:tag" content="amplifier">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/03/07/parallel-compensation/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/03/07/parallel-compensation/","path":"2022/03/07/parallel-compensation/","title":"Parallel Compensation in Two stage amplifier"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Parallel Compensation in Two stage amplifier | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#pole-and-zero-in-transfer-function"><span class="nav-number">1.</span> <span class="nav-text">Pole and Zero in transfer
+function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#phase-margin"><span class="nav-number">2.</span> <span class="nav-text">Phase margin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/07/parallel-compensation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Parallel Compensation in Two stage amplifier | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Parallel Compensation in Two stage amplifier
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-07 23:48:11" itemprop="dateCreated datePublished" datetime="2022-03-07T23:48:11+00:00">2022-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-10 15:04:57" itemprop="dateModified" datetime="2023-07-10T15:04:57+00:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p><strong>Parallel Compensation</strong> is also known as <strong>Lead
+Compensation</strong>, <strong>Pole-Zero Compensation</strong></p>
+</blockquote>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20220307234938855.png"
+alt="image-20220307234938855" /></p>
+<p><strong>Note</strong>: The dominant pole is at output of the first
+stage, i.e. <span
+class="math inline">\(\frac{1}{R_{EQ}C_{EQ}}\)</span>.</p>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20221006001114562.png"
+alt="image-20221006001114562" /></p>
+<h4 id="pole-and-zero-in-transfer-function">Pole and Zero in transfer
+function</h4>
+<blockquote>
+<p>Design with operational amplifiers and analog integrated circuits /
+Sergio Franco, San Francisco State University. – Fourth edition</p>
+</blockquote>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20221005220854411.png"
+alt="image-20221005220854411" /></p>
+<p><span class="math display">\[
+Y = \frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}
+\]</span></p>
+<p><span class="math display">\[\begin{align}
+Z &amp;= \frac{1}{\frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}} \\
+&amp;= \frac{R_1(1+sR_cC_c)}{s^2R_1C_1R_cC_c+S(R_1C_c+R_1C_1+R_cC_c)+1}
+\end{align}\]</span> If <span class="math inline">\(p_{1c} \ll
+p_{3c}\)</span>, two real roots can be found <span
+class="math display">\[\begin{align}
+p_{1c} &amp;= \frac{1}{R_1C_c+R_1C_1+R_cC_c} \\
+p_{3c} &amp;= \frac{R_1C_c+R_1C_1+R_cC_c}{R_1C_1R_cC_c}
+\end{align}\]</span></p>
+<p>The additional zero is <span class="math display">\[
+z_c = \frac{1}{R_cC_c}
+\]</span> Given <span class="math inline">\(R_c \ll R\)</span> and <span
+class="math inline">\(C_c \gg C\)</span> <span
+class="math display">\[\begin{align}
+p_{1c} &amp;\simeq \frac{1}{R_1(C_c+C_1)} \simeq \frac{1}{R_1C_c}\\
+p_{3c} &amp;= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \simeq
+\frac{1}{R_cC_1}
+\end{align}\]</span></p>
+<p>The output pole is unchanged, which is <span class="math display">\[
+p_2 = \frac{1}{R_LC_L}
+\]</span> We usually <strong>cancel</strong> <span
+class="math inline">\(p_2\)</span> with <span
+class="math inline">\(z_c\)</span>, i.e. <span class="math display">\[
+R_cC_c=R_LC_L
+\]</span></p>
+<h4 id="phase-margin">Phase margin</h4>
+<p>unity-gain frequency <span class="math inline">\(\omega_t\)</span>
+<span class="math display">\[
+\omega_t = \frac{g_{m1}g_{m2}R_L}{C_c}
+\]</span></p>
+<ol type="1">
+<li><p>PM=45<span class="math inline">\(^o\)</span> <span
+class="math display">\[
+p_{3c} = \omega_t
+\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
+class="math inline">\(R_c\)</span> can be obtained</p>
+<p><span class="math display">\[\begin{align}
+   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot A_{DC}\cdot
+p_2}}=\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot A_{DC}}} \\
+C_c &amp;= \sqrt{\frac{A_{DC}\cdot C_1}{R_1\cdot
+p_2}}=\sqrt{\frac{A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}}
+\end{align}\]</span></p></li>
+<li><p>PM=60<span class="math inline">\(^o\)</span> <span
+class="math display">\[
+p_{3c} = 2\cdot\omega_t
+\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
+class="math inline">\(R_c\)</span> can be obtained <span
+class="math display">\[\begin{align}
+   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot 2A_{DC}\cdot p_2}} =
+\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot 2A_{DC}}} \\
+   &amp;= \sqrt{\frac{C_L}{2g_{m1}g_{m2}C_1}}\\
+C_c &amp;= \sqrt{\frac{2A_{DC}\cdot C_1}{R_1\cdot p_2}} =
+\sqrt{\frac{2A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}} \\
+&amp;= R_L\sqrt{2g_{m1}g_{m2}C_1C_L}
+\end{align}\]</span></p>
+<p>for the unity-gain frequency <span
+class="math inline">\(\omega_t\)</span> we find <span
+class="math display">\[
+\omega_t = \sqrt{\frac{1}{2}\cdot \frac{g_{m1}g_{m2}}{C_1C_L}}
+\]</span> The parallel compensation shows a remarkably good result. The
+new 0 dB frequency lies only a factor <span
+class="math inline">\(\sqrt{2}\)</span> lower than the theoretical
+maximum</p></li>
+</ol>
+<blockquote>
+<p>To increase <span class="math inline">\(\phi_m\)</span>, we need to
+<strong>raise</strong> <span class="math inline">\(C_c\)</span> a bit
+while <strong>lowering</strong> <span class="math inline">\(R_c\)</span>
+in proportion in order to maintain pole-zero cancellation. This causes
+<span class="math inline">\(p_{1c}\)</span> and <span
+class="math inline">\(p_{3c}\)</span> to split a bit further apart.</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"></span><br><span class="line">fd = <span class="number">84</span>*<span class="number">1e3</span>;	<span class="comment">% dominant freq, unit: Hz</span></span><br><span class="line">fnd = <span class="number">3.25</span>*<span class="number">1e6</span>;	<span class="comment">% unit: Hz</span></span><br><span class="line">C = <span class="number">478</span>*<span class="number">1e-15</span>;</span><br><span class="line">R = <span class="number">1</span>/fd/(<span class="number">2</span>*<span class="built_in">pi</span>)/C;</span><br><span class="line">Adc = <span class="number">10</span>^(<span class="number">80</span>/<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">ri = <span class="number">2</span>; <span class="comment">% PM=45: 1;  PM=60: 2</span></span><br><span class="line">Rc = (R/C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/ri/Adc)^<span class="number">0.5</span>; <span class="comment">% compensation resistor</span></span><br><span class="line">Cc = (ri*Adc*C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/R)^<span class="number">0.5</span>; <span class="comment">% compensation capacitor</span></span><br><span class="line"></span><br><span class="line">wzc = <span class="number">1</span>/<span class="number">2</span>/<span class="built_in">pi</span>/Rc/Cc; <span class="comment">% zero frequency</span></span><br></pre></td></tr></table></figure>
+<h4 id="reference">reference</h4>
+<p>Viola Schäffer, Designing Amplifiers for Stability, ISSCC 2021
+Tutorials</p>
+<p>R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft
+University Press, 1994.</p>
+<p>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
+Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.
+6.7 Compensation</p>
+<p>Application Note AN-1286 Compensation for the LM3478 Boost
+Controller</p>
+<p>ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 URL:
+<a
+target="_blank" rel="noopener" href="https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability%20Jan27.pdf">Lect
+1D Op-Amps Stability and Frequency Compensation Techniques</a></p>
+<p>Sergio Franco, San Francisco State University, Design with
+Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
+<p>J. H. Huijsing, 6.2.2.1 Two-GA-stage Parallel Compensation (PC),
+"Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer,
+2017"</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/stability/" rel="tag"># stability</a>
+              <a href="/tags/compensation/" rel="tag"># compensation</a>
+              <a href="/tags/amplifier/" rel="tag"># amplifier</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/06/EDI-post-mask-ECO-sparecell/" rel="prev" title="How does EDI System identify spare cells in a post-mask ECO flow?">
+                  <i class="fa fa-chevron-left"></i> How does EDI System identify spare cells in a post-mask ECO flow?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/08/sst-drv/" rel="next" title="SST Driver">
+                  SST Driver <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

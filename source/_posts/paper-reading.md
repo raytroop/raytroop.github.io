@@ -1,0 +1,60 @@
+---
+title: paper reading
+date: 2046-10-23 02:09:00
+tags:
+categories:
+mathjax: true
+---
+
+Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022
+
+![image-20250806224145281](paper-reading/image-20250806224145281.png)
+
+![8way-interleaving-Marvell-ISSCC2022.drawio](paper-reading/8way-interleaving-Marvell-ISSCC2022.drawio.svg)
+
+
+
+> [[https://sci-hub.st/10.1109/ISSCC42614.2022.9731650](https://sci-hub.st/10.1109/ISSCC42614.2022.9731650)]
+
+---
+
+P. Liu et al., "A 128Gb/s ADC/DAC Based PAM-4 Transceiver with >45dB Reach in 3nm FinFET," 2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits), Kyoto, Japan, 2025
+
+![image-20250808220954208](paper-reading/image-20250808220954208.png)
+
+![image-20250808221134749](paper-reading/image-20250808221134749.png)
+
+![RX-Clocking-Marvell-VLSI2025.drawio](paper-reading/RX-Clocking-Marvell-VLSI2025.drawio.svg)
+
+
+
+
+---
+
+
+ISSCC.2024 7.3 A 224Gbs 3pJb 40dB Insertion Loss Transceiver in 3nm FinFET CMOS
+
+> [[7.3 A 224Gbs 3pJb 40dB Insertion Loss Transceiver in 3nm FinFET CMOS https://www.bilibili.com/video/BV18hYCe7E45/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249]([7.3 A 224Gbs 3pJb 40dB Insertion Loss Transceiver in 3nm FinFET CMOS] https://www.bilibili.com/video/BV18hYCe7E45/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
+
+
+---
+
+
+ISSCC.2018 6.4 A Fully Adaptive 19-to-56Gb/s PAM-4 Wireline Transceiver with a Configurable ADC in 16nm FinFET
+
+
+> [[https://sci-hub.st/10.1109/ISSCC.2018.8310207](https://sci-hub.st/10.1109/ISSCC.2018.8310207)]
+
+
+
+---
+
+M. S. Jalali, A. Sheikholeslami, M. Kibune and H. Tamura, "A Reference-Less Single-Loop Half-Rate Binary CDR," in *IEEE Journal of Solid-State Circuits*, vol. 50, no. 9, pp. 2037-2047, Sept. 2015 [[https://www.eecg.utoronto.ca/~ali/papers/jssc2015-09.pdf](https://www.eecg.utoronto.ca/~ali/papers/jssc2015-09.pdf)]
+
+
+
+---
+
+Pisati, et.al., "Sub-250mW 1-to-56Gb/s Continuous-Range PAM-4 42.5dB IL ADC/DAC- Based Transceiver in 7nm FinFET," 2019 IEEE International Solid-State Circuits Conference (ISSCC), 2019 [[https://sci-hub.se/10.1109/ISSCC.2019.8662428](https://sci-hub.se/10.1109/ISSCC.2019.8662428)]
+

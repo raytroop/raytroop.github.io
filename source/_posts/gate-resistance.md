@@ -106,7 +106,7 @@ They fracture the poly line at the intersection with the active (diffusion) laye
 
 > gploy, fpoly
 
-![No alt text provided for this image](https://media.licdn.com/dms/image/D5612AQEi234MGWNNSQ/article-inline_image-shrink_1500_2232/0/1678670859052?e=1694649600&v=beta&t=oQHZwxPxntQ71mwB7rerd-lKz5IPs1xc5rtXpm9Gz8o)
+![No alt text provided for this image](gate-resistance/1678670859052.png)
 
 Gate poly is also fractured at the center point. Gate instance pin of the MOSFET (SPICE model) is connected to the center point of the gate poly. **Gate poly is described by two parasitic resistors, connecting the fracture points**.
 
@@ -162,7 +162,7 @@ Different extraction tools do this differently - some tools connect these parasi
 
 In "old" technologies (pre-16nm), gate resistance was dominated by lateral resistance. However, in advanced technologies, multiple interfaces between gate material layers lead to a large vertical gate resistance. 
 
-![No alt text provided for this image](https://media.licdn.com/dms/image/D5612AQFlqdXKolfMYQ/article-inline_image-shrink_1500_2232/0/1678686425859?e=1694649600&v=beta&t=CIYoB_Ns24B4XewPylgXVC_RQF9idKb5KhCo3Dz8HwI)
+![No alt text provided for this image](gate-resistance/1678686425859.png)
 
 > It's very easy to check this in DSPF file - if gate instance pin is connected directly to the center of the gate poly - vertical resistance is not accounted for. If it is connected by a positive resistor to the center of the gate poly - that resistors represents the vertical gate resistance.
 

@@ -28,6 +28,10 @@ categories:
 
 ### Accumulation-mode (A-MOS)
 
+> NMOS in NWELL, aka **NMOS in N-Well varactor**
+> 
+> **Notice: S/D and NWELL are connected togethor** in layout
+
 ![image-20230504221234639](MOS-Varactors/image-20230504221234639.png)
 
 ![image-20230504221313785](MOS-Varactors/image-20230504221313785.png)

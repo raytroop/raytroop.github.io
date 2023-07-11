@@ -8,4 +8,4 @@ categories:
 
 The repository visibility shall be `public`
 
-![image-20230701142405404](gihub-pages-deploy/image-20230701142405404.png)
+![image-20230701142405404](github-pages-deploy/image-20230701142405404.png)

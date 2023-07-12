@@ -18,16 +18,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="\[ R_{eq} &#x3D; R_1 \parallel R_2 &#x3D; 1098.64 \]  \(R_{1,eq} &#x3D; 211\) \(R_{2,eq}&#x3D;887\)">
+    <meta name="description" content="Relative Sensitivity Assuming Target \(T\) ( for example, the total resistance) is function of \(x_1,x_2,...,x_N\), then total variation can be represented as \[\begin{align} dT  &amp;&#x3D; \sum_{n&#x3D;1}^N\f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="multipath resistor sensitivity">
 <meta property="og:url" content="http://example.com/2023/07/12/res-sensitivity/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="\[ R_{eq} &#x3D; R_1 \parallel R_2 &#x3D; 1098.64 \]  \(R_{1,eq} &#x3D; 211\) \(R_{2,eq}&#x3D;887\)">
+<meta property="og:description" content="Relative Sensitivity Assuming Target \(T\) ( for example, the total resistance) is function of \(x_1,x_2,...,x_N\), then total variation can be represented as \[\begin{align} dT  &amp;&#x3D; \sum_{n&#x3D;1}^N\f">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2023/07/12/res-sensitivity/parallel_pgx.drawio.svg">
 <meta property="article:published_time" content="2023-07-12T01:26:15.000Z">
-<meta property="article:modified_time" content="2023-07-11T17:35:48.383Z">
+<meta property="article:modified_time" content="2023-07-12T15:27:20.528Z">
 <meta property="article:author" content="Guo">
 <meta property="article:tag" content="parasitic">
 <meta name="twitter:card" content="summary">
@@ -127,7 +127,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -140,6 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#relative-sensitivity"><span class="nav-number">1.</span> <span class="nav-text">Relative Sensitivity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parallel-resistors"><span class="nav-number">2.</span> <span class="nav-text">2 parallel resistors</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,15 +227,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2023-07-12 01:26:15" itemprop="dateCreated datePublished" datetime="2023-07-12T01:26:15+00:00">2023-07-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-11 17:35:48" itemprop="dateModified" datetime="2023-07-11T17:35:48+00:00">2023-07-11</time>
+      <time title="Created: 2023-07-12 01:26:15 / Modified: 15:27:20" itemprop="dateCreated datePublished" datetime="2023-07-12T01:26:15+00:00">2023-07-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,7 +250,32 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="/2023/07/12/res-sensitivity/parallel_pgx.drawio.svg"
+    <div class="post-body" itemprop="articleBody"><h2 id="relative-sensitivity">Relative Sensitivity</h2>
+<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
+the total resistance) is function of <span
+class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
+be represented as</p>
+<p><span class="math display">\[\begin{align}
+dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
+&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
+\frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>Then, we obtain relative variation <span
+class="math display">\[\begin{align}
+\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
+x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
+&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(S_{x_n}^T=\frac{\partial
+T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p><strong>relative sensitivity</strong> connect <span
+class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
+variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
+</blockquote>
+<h2 id="parallel-resistors">2 parallel resistors</h2>
+<p><img src="/2023/07/12/res-sensitivity/parallel_pgx.drawio.svg"
 alt="parallel_pgx.drawio" /> <span class="math display">\[
 R_{eq} = R_1 \parallel R_2 = 1098.64
 \]</span></p>

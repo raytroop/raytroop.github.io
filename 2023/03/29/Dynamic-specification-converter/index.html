@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://example.com/2023/03/29/Dynamic-specification-converter/VXpqU.png">
 <meta property="og:image" content="http://example.com/2023/03/29/Dynamic-specification-converter/gRE1L.png">
 <meta property="article:published_time" content="2023-03-29T23:54:37.000Z">
-<meta property="article:modified_time" content="2023-07-12T16:34:47.671Z">
+<meta property="article:modified_time" content="2023-07-12T17:07:37.950Z">
 <meta property="article:author" content="Guo">
 <meta property="article:tag" content="adc">
 <meta property="article:tag" content="dac">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#term-abbreviation"><span class="nav-number">1.</span> <span class="nav-text">Term Abbreviation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coherent-sampling"><span class="nav-number">2.</span> <span class="nav-text">Coherent Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#general-simulation-setup"><span class="nav-number">2.1.</span> <span class="nav-text">General Simulation Setup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#snr"><span class="nav-number">3.</span> <span class="nav-text">SNR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#term-abbreviation"><span class="nav-number">1.</span> <span class="nav-text">Term Abbreviation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coherent-sampling"><span class="nav-number">2.</span> <span class="nav-text">Coherent Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#irreducible-ratio"><span class="nav-number">2.1.</span> <span class="nav-text">irreducible ratio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#general-simulation-setup"><span class="nav-number">2.2.</span> <span class="nav-text">General Simulation Setup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#snr"><span class="nav-number">3.</span> <span class="nav-text">SNR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -238,7 +238,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-12 16:34:47" itemprop="dateModified" datetime="2023-07-12T16:34:47+00:00">2023-07-12</time>
+      <time title="Modified: 2023-07-12 17:07:37" itemprop="dateModified" datetime="2023-07-12T17:07:37+00:00">2023-07-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -274,31 +274,63 @@
 requires that the input- and clock-frequency generators are
 <strong>phase locked</strong>, and that the input frequency be chosen
 based on the following relationship: <span class="math display">\[
-\frac{f_{\text{IN}}}{f_{\text{SAMPLE}}}=\frac{N_{\text{WINDOW}}}{N_{\text{RECORD}}}
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
 \]</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(f_{\text{IN}}\)</span> = the desired
+<li><span class="math inline">\(f_{\text{in}}\)</span> = the desired
 input frequency</li>
-<li><span class="math inline">\(f_{\text{sample}}\)</span> = the clock
-frequency of the data converter under test</li>
-<li><span class="math inline">\(N_{\text{WINDOW}}\)</span> = the number
-of cycles in the data window (to make all samples unique, choose odd or
-prime numbers)</li>
-<li><span class="math inline">\(N_{\text{RECORD}}\)</span> = the data
-record length (for an 8192-point FFT, the data record is 8192s
-long)</li>
+<li><span class="math inline">\(f_s\)</span> = the clock frequency of
+the data converter under test</li>
+<li><span class="math inline">\(M_C\)</span> = the number of cycles in
+the data window (to make all samples unique, choose odd or prime
+numbers)</li>
+<li><span class="math inline">\(N_R\)</span> = the data record length
+(for an 8192-point FFT, the data record is 8192s long)</li>
 </ul>
 <p><span class="math display">\[\begin{align}
-f_{\text{IN}} &amp;=\frac{f_{\text{SAMPLE}}}{N_{\text{RECORD}}}\cdot
-N_{\text{WINDOW}} \\
-&amp;= f_{\text{bin}}\cdot N_{\text{WINDOW}}
+f_{\text{in}} &amp;=\frac{f_s}{N_R}\cdot M_C \\
+&amp;= f_{\text{res}}\cdot M_C
 \end{align}\]</span></p>
-<blockquote>
+<h3 id="irreducible-ratio">irreducible ratio</h3>
 <p>An <strong>irreducible ratio</strong> ensures identical code
 sequences not to be repeated multiple times. Unnecessary repetition of
 the same code is not desirable as it increases ADC test time.</p>
+<blockquote>
+<p>Given that <span class="math inline">\(\frac{M_C}{N_R}\)</span> is
+irreducible, and <span class="math inline">\(N_R\)</span> is a power of
+2, an <strong>odd number</strong> for <span
+class="math inline">\(M_C\)</span> will always produce an
+<strong>irreducible ratio</strong></p>
 </blockquote>
+<p>Assuming there is a common factor <span
+class="math inline">\(k\)</span> between <span
+class="math inline">\(M_C\)</span> and <span
+class="math inline">\(N_R\)</span>, i.e. <span
+class="math inline">\(\frac{M_C}{N_R}=\frac{k M_C&#39;}{k
+N_R&#39;}\)</span></p>
+<p>The samples (<span class="math inline">\(n\in[1, N_R]\)</span>)</p>
+<p><span class="math display">\[\begin{align}
+y[n] &amp;= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
+&amp;= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
+&amp; = \sin\left( \omega_{\text{in}} \cdot
+n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
+&amp; = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+\end{align}\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\begin{align}
+y[n+N_R&#39;] &amp;= \sin\left( 2\pi (n+N_R&#39;)\frac{M_C}{N_R} \right)
+\\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{M_C}{N_R}\right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{kM_C&#39;}{kN_R&#39;} \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C&#39; \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
+\end{align}\]</span></p>
+<p>So, the samples is repeated <span class="math inline">\(y[n] =
+y[n+N_R&#39;]\)</span>. Usually, no additional information is gained by
+repeating with the same sampling points.</p>
 <h3 id="general-simulation-setup">General Simulation Setup</h3>
 <p><span class="math display">\[
 N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}

@@ -34,25 +34,57 @@ VSWR: voltage standing-wave ratio
 
 To avoid **spectral leakage** completely, the method of **coherent sampling** is recommended. Coherent sampling requires that the input- and clock-frequency generators are **phase locked**, and that the input frequency be chosen based on the following relationship:
 $$
-\frac{f_{\text{IN}}}{f_{\text{SAMPLE}}}=\frac{N_{\text{WINDOW}}}{N_{\text{RECORD}}}
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
 $$
 
 where:
 
-- $f_{\text{IN}}$ = the desired input frequency
-- $f_{\text{sample}}$ = the clock frequency of the data converter under test
-- $N_{\text{WINDOW}}$ = the number of cycles in the data window (to make all samples unique, choose odd or prime numbers)
-- $N_{\text{RECORD}}$ = the data record length (for an 8192-point FFT, the data record is 8192s long)
+- $f_{\text{in}}$ = the desired input frequency
+- $f_s$ = the clock frequency of the data converter under test
+- $M_C$ = the number of cycles in the data window (to make all samples unique, choose odd or prime numbers)
+- $N_R$ = the data record length (for an 8192-point FFT, the data record is 8192s long)
 
 
 
 $$\begin{align}
-f_{\text{IN}} &=\frac{f_{\text{SAMPLE}}}{N_{\text{RECORD}}}\cdot N_{\text{WINDOW}} \\
-&= f_{\text{bin}}\cdot N_{\text{WINDOW}}
+f_{\text{in}} &=\frac{f_s}{N_R}\cdot M_C \\
+&= f_{\text{res}}\cdot M_C
+\end{align}$$
+
+### irreducible ratio
+
+An **irreducible ratio** ensures identical code sequences not to be repeated multiple times. Unnecessary repetition of the same code is not desirable as it increases ADC test time.
+
+> Given that $\frac{M_C}{N_R}$ is irreducible, and $N_R$ is a power of 2, an **odd number** for $M_C$ will always produce an **irreducible ratio**
+
+
+
+Assuming there is a common factor $k$ between $M_C$ and $N_R$, i.e. $\frac{M_C}{N_R}=\frac{k M_C'}{k N_R'}$
+
+The samples  ($n\in[1, N_R]$)
+
+$$\begin{align}
+y[n] &= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
+&= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
+& = \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
+& = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+\end{align}$$
+
+Then
+
+$$\begin{align}
+y[n+N_R'] &= \sin\left( 2\pi (n+N_R')\frac{M_C}{N_R} \right) \\
+& = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{M_C}{N_R}\right) \\
+& = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{kM_C'}{kN_R'} \right) \\
+& = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C' \right) \\
+& = \sin\left( 2\pi n \frac{M_C}{N_R}\right) 
 \end{align}$$
 
 
-> An **irreducible ratio** ensures identical code sequences not to be repeated multiple times. Unnecessary repetition of the same code is not desirable as it increases ADC test time.
+
+So,  the samples is repeated $y[n] = y[n+N_R']$.  Usually, no additional information is gained by repeating with the same sampling points.
+
+
 
 ### General Simulation Setup
 

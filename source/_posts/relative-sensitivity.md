@@ -36,3 +36,23 @@ $$
 &#11088; where $x_n'= S_{x_n}^T T$ is the contribution of $x_n$ in $T$
 
 &#11088; For parallel or series resistors, it can prove $\sum_{n=1}^N S_{x_n}^T = 1$ and $ \sum_{n=1}^N x_n'=T$
+
+---
+
+
+
+![parallel_pgx.drawio](relative-sensitivity/parallel_pgx.drawio.svg)
+
+Here $T= R_1 \parallel R_2 = \frac{R_1R_2}{R_1+R_2}$, and $T|_{R_1=8000, R_2=2000} = 1600$
+
+We obtain *relative sensitivity:*
+$$\begin{align}
+S_{R_1}^T & = \frac{R_2}{R_1+R_2} \\
+S_{R_2}^T & = \frac{R_1}{R_1+R_2}
+\end{align}$$
+
+The contribution of $R_1$ and $R_2$ to $T$
+$$\begin{align}
+R_1'  &= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
+R_2'  &= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
+\end{align}$$

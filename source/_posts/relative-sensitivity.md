@@ -1,5 +1,5 @@
 ---
-title: multipath resistor sensitivity
+title: Relative Sensitivity
 date: 2023-07-12 01:26:15
 tags:
 - parasitic
@@ -10,9 +10,7 @@ mathjax: true
 
 
 
-## Relative Sensitivity
-
-Assuming Target  $T$ ( for example, the total resistance) is  function of $x_1,x_2,...,x_N$, then total variation can be represented as 
+Assuming Target  $T$ ( for example, the total resistance) is  function of $x_1,x_2,...,x_N$, then total variation can be expressed as 
 
 $$\begin{align}
 dT  &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
@@ -25,30 +23,16 @@ $$\begin{align}
 &= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
 \end{align}$$
 
-where $S_{x_n}^T=\frac{\partial T}{\partial x_n}\frac{x_n}{T}$ is **relative sensitivity**
+&#11088; where $S_{x_n}^T=\frac{\partial T}{\partial x_n}\frac{x_n}{T}$ is **relative sensitivity**
 
 > **relative sensitivity** connect $\frac{dx_n}{x_n}$ with total relative variation $\frac{dT}{T}$
 
 
 
-
-
-
-
-
-
-
-## 2 parallel resistors
-
-
-
-
-
-![parallel_pgx.drawio](res-sensitivity/parallel_pgx.drawio.svg)
+And $dT$ can be expressed as 
 $$
-R_{eq} = R_1 \parallel R_2 = 1098.64
+dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N x_n'\cdot \frac{dx_n}{x_n}
 $$
+&#11088; where $x_n'= S_{x_n}^T T$ is the contribution of $x_n$ in $T$
 
-> $R_{1,eq} = 211$
->
-> $R_{2,eq}=887$
+&#11088; For parallel or series resistors, it can prove $\sum_{n=1}^N S_{x_n}^T = 1$ and $ \sum_{n=1}^N x_n'=T$

@@ -56,3 +56,15 @@ $$\begin{align}
 R_1'  &= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
 R_2'  &= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
 \end{align}$$
+
+## scholar
+**Normalized sensitivity** captures **relative sensitivity**
+
+>  change in objective per change in design variable
+
+![Normalized sensitivity](relative-sensitivity/normalized.PNG)
+
+
+## reference
+
+Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and Sensitivity Analysis [[pdf](https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf)]

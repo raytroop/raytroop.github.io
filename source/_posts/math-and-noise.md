@@ -186,7 +186,7 @@ $$
 
 An equation of the form
 $$
-x^{''} + f(x)=0
+x'' + f(x)=0
 $$
 for an arbitrary function $f(x)$ is called a **conservative equation**
 

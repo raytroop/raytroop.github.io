@@ -41,7 +41,7 @@ Two assumptions:
 
 - random trajectory perturbations in directions tangent to the isochron surface passing through $X(t)$ will never accumulate
 
-- random fluctuations in in the direction of the tangent to the stable orbit accumulate
+- random fluctuations in the direction of the tangent to the stable orbit accumulate
 
 This suggests therefore the approximation
 
@@ -51,13 +51,13 @@ $$
 
 where $\mathbf{\Delta}(t)$ represents  a small perturbation belonging to the tangent space to the isochron surface pass through $\mathbf{x}_c(t+\alpha(t))$
 
-If $\phi(X(t)$ is the asymptotic phase corresponding to trajectory point $X(t)$, the **phase noise**
+If $\phi(X(t))$ is the asymptotic phase corresponding to trajectory point $X(t)$, the **phase noise**
 
 $$
 \alpha(t) = \phi(X(t)) - t
 $$
 
-After various Ito's process, we find that the phase noise $\alpha(t)$ satisfies the scalar Ito stochastic differential equation
+After rigorous Ito's process, it can be proven that the phase noise $\alpha(t)$ satisfies the scalar Ito stochastic differential equation
 
 $$
 d\alpha(t) = \mathbf{q}_1^T(t+\alpha(t))G(\mathbf{x}_c(t+\alpha(t)))dW(t)

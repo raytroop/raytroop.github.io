@@ -13,7 +13,7 @@ mathjax: true
 
 
 
-## a long way to go
+# a long way to go
 
 &#128162; random process
 
@@ -27,7 +27,7 @@ In applying frequency-domain techniques to the analysis of random signals the na
 Unfortunately the Fourier transform of a stochastic process does not, strictly speaking, exist because it has infinite signal energy.
 
 
-## Phase Noise Model
+# Phase Noise Model
 
 Consider a stable periodic oscillator subjected to random fluctuations, so that is satisfies a vector Ito stochastic differential equation of the form
 
@@ -36,7 +36,7 @@ dX = \mathbf{f(X)}dt + G(X)dW
 $$
 
 
-### General Model
+## General Model
 Two assumptions:
 
 - random trajectory perturbations in directions tangent to the isochron surface passing through $X(t)$ will never accumulate
@@ -71,11 +71,11 @@ The equation models the *unwrapped* phase noise $\alpha(t)$, which takes values 
 
 
 
-## mathematical background
+# mathematical background
 
-### Linear systems of ODEs
+## Linear systems of ODEs
 
-#### Exact equations
+### Exact equations
 
 Suppose $F(x; y)$ is a function of two variables, which we call the **potential function**, which suggest potential energy, or electric potential ($F(x; y) = C$).
 
@@ -93,7 +93,7 @@ is called **exact** if it was obtained as $dF = 0$ for some *potential function*
 
 
 
-#### integrating factor
+### integrating factor
 
 Given a linear first order equation:
 $$
@@ -117,7 +117,7 @@ y &= e^{-\int p(x)dx}\left(  \int e^{\int p(x)dx}f(x)dx + C \right)
 
 
 
-### Nonlinear Autonomous Systems of ODEs
+## Nonlinear Autonomous Systems of ODEs
 
 We restrict our attention to a two-dimensional autonomous system
 $$\begin{align}
@@ -127,13 +127,13 @@ y' &= g(x,y)
 
 where $f(x,y)$ and $g(x,y)$ are functions of two variables, and the derivatives are taken with respect to time $t$
 
-#### critical points
+### critical points
 
 **critical points** are the points where both $f(x; y) = 0$ and $g(x; y) = 0$
 
 
 
-#### Linearization
+### Linearization
 
 we want to linearize the two functions $f(x; y)$ and $g(x; y)$ that define this system. To do so, we will replace $f$ and $g$ by the *tangent plane* approximation to the functions.
 
@@ -182,7 +182,7 @@ $$
 
 
 
-#### Conservative equations
+### Conservative equations
 
 An equation of the form
 $$
@@ -214,7 +214,7 @@ A **trajectory** for this system is a curve in the $xy$-plane that the solution 
 
 
 
-#### Hamiltonian Systems
+### Hamiltonian Systems
 
 A generalization of *conservative equations* to systems is a **Hamiltonian system**.
 
@@ -238,7 +238,7 @@ Below give the definition of  **Hamiltonian system**:
 
 
 
-#### Limit cycles
+### Limit cycles
 
 unforced nonlinear time-invariant differential systems of the form
 $$
@@ -248,11 +248,11 @@ $$
 
 For nonlinear systems, trajectories do not simply need to approach or leave a single point. They may in fact approach a larger set, such as a *circle* or *another closed curve*.
 
-##### Poincaré–Bendixson Theorem
+#### Poincaré–Bendixson Theorem
 
 
 
-#### Floquet Theory
+### Floquet Theory
 
 When a small perturbation $\mathbf{\delta}(t)$ is applied to a periodic orbit $\mathbf{x}_c(t)$ so that the oscillator position is
 $$
@@ -312,7 +312,7 @@ $$
 
 
 
-#### Chaos
+### Chaos
 
 Achaotic system is extremely sensitive to initial conditions. 
 
@@ -320,7 +320,7 @@ A small change in the initial conditions yields a very different solution after 
 
 
 
-### Riemann integral
+## Riemann integral
 
 *standard* (Riemann) integral
 $$
@@ -340,7 +340,7 @@ The Riemann integral construction; divide the function up into rectangles. Here,
 
 
 
-### Lebesgue integral
+## Lebesgue integral
 
 [[What is the difference between a Riemann and a Lebesgue integral, and why is the latter needed?](https://qr.ae/py5x6K)]
 
@@ -357,25 +357,25 @@ Lebesgue integration:
 ![image-20230702005049938](math-and-noise/image-20230702005049938.png)
 
 
-### Measure and Probabilities
+## Measure and Probabilities
 
 > Probality is a measure of the size of a set
 
-####  power set 
+###  power set 
 
-#### $\sigma$-Algebra
+### $\sigma$-Algebra
 
 or $\sigma$-field, Sigma-field
 
-#### measurable space
+### measurable space
 
 If $X$ is a set and $A$  is a $\sigma$-algebra on $X$, then the tuple $(X,A)$ is called the **measurable space** (also **Borel space**)
 
-#### probability space
+### probability space
 
-#### filtration and information flow
+### filtration and information flow
 
-#### martingale
+### martingale
 
 A stochastic process $M_t$ is a **martingale** if 
 
@@ -400,16 +400,82 @@ $$\begin{align}
 
 
 
-##### WSS process
+### WSS process
 
  A random process $X(t)$ is **wide-sense stationary** if:
 
 1. $\mu _x(t)=\text{constant}$, for all $t$, and
 2. $R_X(t_1, t_2)=R_x(t_1-t_2)$ for all $t_1, t_2$
 
+#### autocorrelation
+
+$$
+R_X(t_1, t_2) = \mathbb{E}[X(t_1)X(t_2)]
+$$
+
+#### temporal average
+
+Consider the following function:
+$$
+\hat{R_X}(\tau) = \frac{1}{2T}\int_{-T}^{T}X(t+\tau)X(t)dt
+$$
+This function is the temporal average of $X(t+\tau)X(t)$
+
+Then
+$$
+\mathbb{E}[\hat{R_X}(\tau)] = R_X(\tau)
+$$
 
 
-#### Wiener Process (or Brownian Motioan)
+#### power spectral density
+
+##### time domain
+
+Define
+$$
+P_X = \mathbb{E}\left[ \lim_{T\to \infty}\frac{1}{2T}\int_{-T}^{T}|X(t)|^2dt \right]
+$$
+Then we have $P_X = \frac{1}{2\pi}\int_{-\infty}^{\infty}S_X(\omega)d\omega$ or $P_X = \int_{-\infty}^{\infty}S_X(f)df$
+
+
+
+##### frequency domain
+
+The *power spectral density (PSD)* of a *WSS process* is defined as 
+$$
+S_X(\omega) = \lim_{T\to \infty}\frac{\mathbb{E}[|\tilde{X}_T(\omega)|^2]}{2T}
+$$
+where $\tilde{X}_T(\omega) = \int_{-T}^{T}X(t)e^{-j\omega t}dt$ is the Fourier transform of $X(t)$ limited to $[-T, T]$, Parseval's theorem is applied.
+
+
+
+That is
+$$\begin{align}
+P_X  &= \frac{1}{2\pi}\int_{-\infty}^{\infty}S_X(\omega)d\omega \\
+&= \frac{1}{2\pi}\int_{-\infty}^{\infty}\lim_{T\to \infty}\frac{\mathbb{E}[|\tilde{X}_T(\omega)|^2]}{2T}d\omega
+\end{align}$$
+
+
+
+#### Einstein-Wiener-Khinchin Theorem
+
+> The Einstein-Wiener-Khinchin theorem is a fundamental result. It states that for any *wide sense stationary process*, the power spectral density $S_X(\omega)$ is the Fourier transform of the autocorrelation function.
+
+
+
+The power spectral density $S_X(\omega)$ of a *WSS process* is
+$$
+S_X(\omega) = \int_{-\infty}^{\infty}R_X(\tau)e^{-j\omega \tau}d\tau = \mathcal{F}(R_X(\tau))
+$$
+assuming that $\int_{-\infty}^{\infty}R_X(\tau)^2d\tau \lt \infty$ so that the Fourier transform of $R_X(\tau)$ exists
+
+
+
+![image-20230715101317632](math-and-noise/image-20230715101317632.png)
+
+
+
+### Wiener Process (or Brownian Motion)
 
 > $\text{SDE} = \text{ODE} + \text{GWN}$
 >
@@ -463,7 +529,7 @@ What does it really mean?
 
 
 
-#### Ito SDE with Brownian Motion
+### Ito SDE with Brownian Motion
 
 $$
 \frac{dX_t}{dt} = f(X_t) + g(X_t)\frac{dW_t}{dt}
@@ -485,9 +551,9 @@ For SDEs, the proper representation is the **'Pathwise Stochastic Integral Repre
 
 
 
-### stochastic differential equation (SDE)
+## stochastic differential equation (SDE)
 
-#### Wiener Stochastic Integral
+### Wiener Stochastic Integral
 
 Let $L^2([0,T])$ denote the space of measurable functions $f:[0,T]\longrightarrow \mathbb{R}$ such that
 $$
@@ -510,7 +576,7 @@ $$
 \int_0^Tf(t)dB_t = f(T)B_T -\int_0^TB_tf'(t)dt
 $$
 
-#### Ito Stochastic Integral
+### Ito Stochastic Integral
 
 The biggest advantage of Ito formulation is that the evaluations of the function are totally uncorrelated with the increment, by contruction.
 
@@ -539,7 +605,7 @@ always has mean zero, and is a martingale
 
 
 
-##### quadratic variation
+#### quadratic variation
 
 
 
@@ -554,7 +620,7 @@ E\left[\int_0^T u_t dB_t\right] &= 0
 
 
 
-##### Basic Ito formula
+#### Basic Ito formula
 
 For $f$ is twice continuously differentiable on $[0, T]$, Taylor's formula written at the second order for Brownian motion reads
 $$
@@ -581,7 +647,7 @@ $$
 f(B_t) = f(B_0)+\int_0^tf'(B_s)dB_s+\frac{1}{2}\int_0^tf^{''}(B_s)ds
 $$
 
-##### Ito processes
+#### Ito processes
 
 A stochastic process $(X_t)_{t\in \mathbb{R}_+}$ that can be written as
 $$
@@ -595,7 +661,7 @@ where $(u_t)_{t\in\mathbb{R}_+}$ and $(v_t)_{t\in\mathbb{R}_+}$ are *square-inte
 
 
 
-##### Ito formula for Ito processes
+#### Ito formula for Ito processes
 
 For any Ito process $(X_t)_{t\in\mathbb{R}_+}$ and any $f$ that is continuously differentiable on $t\in[0,T]$ and twice differentiable in $x\in\mathbb{R}$, with bounded derivatives
 $$
@@ -635,7 +701,7 @@ $$
 
 
 
-##### Bivariate Ito formula
+#### Bivariate Ito formula
 
 Consider two Ito processes $(X_t)_{t\in \mathbb{R} _+}$ and $(Y_t)_{t\in \mathbb{R} _+}$ written in *integral form* as
 
@@ -660,7 +726,7 @@ df(t,X_t, Y_t) &= \frac{\partial f}{\partial t}(t,X_t,Y_t)dt + \frac{\partial f}
 &+\frac{\partial f}{\partial y}(t, X_t, Y_t)d_t + \frac{1}{2}|a_t|^2\frac{\partial ^2 f}{\partial y^2}(t, X_t, Y_t)dt + u_ta_t\frac{\partial ^2 f}{\partial x \partial y}(t,X_t,Y_t)dt
 \end{align}$$
 
-##### Ito multiplication table
+#### Ito multiplication table
 
 | $\cdot$ | $dt$ | $dB_t$ |
 | ------- | ---- | ------ |
@@ -694,7 +760,7 @@ $$\begin{align}
 
 
 
-##### Ito formula using Ito multiplication table
+#### Ito formula using Ito multiplication table
 
 with $(u_t)^2dt=(dX_t)^2$ and $X_t = v_tdt + u_tdB_t$, Ito formula's differential notation can be rewritten as 
 $$\begin{align}
@@ -718,9 +784,9 @@ where $(dX_t)^2 = |u_t|^2dt$, $(dY_t)^2=|a_t|^2dt$ and $dX_t\cdot dY_t = u_ta_td
 
 
 
-### Solving a Geometric Brownian Motion
+## Solving a Geometric Brownian Motion
 
-#### Geometric Brownian motion (GBM)
+### Geometric Brownian motion (GBM)
 
 A **geometric Brownian motion (GBM)** (also known as **exponential Brownian motion**)
 
@@ -738,7 +804,7 @@ and $\mu$ ('the percentage drift') and $\sigma$ ('the percentage volatility') ar
 
 
 
-#### solving step by step
+### solving step by step
 
 [[Quant Guild](https://youtu.be/y0s2GXREymI)]
 
@@ -796,9 +862,9 @@ S_T = S_{t_0}e^{(\mu-\frac{1}{2}\sigma^2)(T-t_0)+\sigma(W_T-W_{t_0})}
 $$
 
 
-## reference
+# reference
 
-### paper
+## paper
 
 A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in oscillators: a unifying theory and numerical methods for characterization," in IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications, vol. 47, no. 5, pp. 655-674, May 2000, doi: 10.1109/81.847872. [[pdf](https://www.researchgate.net/profile/Jaijeet-Roychowdhury/publication/3774912_Phase_noise_in_oscillators_a_unifying_theory_and_numerical_methods_for_characterisation/links/56436c0308ae54697fb2e543/Phase-noise-in-oscillators-a-unifying-theory-and-numerical-methods-for-characterisation.pdf)]
 
@@ -806,7 +872,7 @@ demir, Alper. (2000). Floquet theory and non-linear perturbation analysis for os
 
 
 
-### book
+## book
 
 &#11088; Levy, Bernard. (2020). **Random Processes with Applications to Circuits and Communications**. 10.1007/978-3-030-22297-0. 
 
@@ -842,7 +908,7 @@ Evans, Lawrence C.. **An Introduction to Stochastic Differential Equations.** (2
 
 
 
-### measure-theoretic probability theory
+## measure-theoretic probability theory
 
 Jacod, J., & Protter, P. (2004). **Probability Essentials (Second edition.)**. Springer Berlin Heidelberg.
 
@@ -856,7 +922,7 @@ Ales Cerný. **Mathematical Techniques in Finance: Tools for Incomplete Markets 
 
 
 
-### blogs
+## blogs
 
 &#11088; Prof. Dr. Maxim Ulrich, KIT. **Stochastic Calculus: Basics** [[link](https://youtube.com/playlist?list=PLyQSjcv8LwAEdNgdVnNH02-JTJfrwCt81)]
 

@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">242</span>
+        <span class="site-state-item-count">240</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,108 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/23/Global-Handles-UVM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/23/Global-Handles-UVM/" class="post-title-link" itemprop="url">Global Handles in UVM</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-23 22:33:05" itemprop="dateCreated datePublished" datetime="2022-02-23T22:33:05+00:00">2022-02-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Global handles uvm_top and factory in uvm_pkg have been removed in
-UVM-1.2 and later</p>
-</blockquote>
-<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
-UVM-1.2</h4>
-<p>Call the <strong>get() method of the class</strong> to retrieve the
-singleton handle.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
-accessing all the central UVM services such as
-<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
-<strong>uvm_report_server</strong>, etc.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -328,7 +226,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -350,7 +248,7 @@ accessing all the central UVM services such as
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="general-terminolgy">general terminolgy</h2>
+          <h2 id="general-terminology">general terminology</h2>
 <h3 id="dc-related">DC related</h3>
 <p><strong>Imax</strong> in T*'s DRC document is the maximum allowed
 <strong>DC current</strong>, which depends on <em>Length and Width</em>
@@ -423,7 +321,8 @@ and <code>acpeak/pwc</code> EM current Analysis</p>
 class="math display">\[
 r=\frac{T_d}{T_{\text{total}}}
 \]</span></p>
-<p>​ where T_{} = EMIR time window</p>
+<p>​ where <span class="math inline">\(T_{\text{total}} = \text{EMIR
+time window}\)</span></p>
 <p>​ <span class="math inline">\(T_d\)</span> = the time duration in
 microsecond of the total "On Time" period based on <code>IPWC</code></p>
 <blockquote>
@@ -478,6 +377,66 @@ alt="image-20220421203011393" /></p>
 alt="image-20220421203657123" /></p>
 <p><img src="/2022/02/23/emir-voltus-fi/image-20220421203554147.png"
 alt="image-20220421203554147" /></p>
+<h2 id="fix-electromigration">Fix Electromigration</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>wider wire</th>
+<th>downsize drivers</th>
+<th>decrease fanout</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RJ JMAX</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>JAVG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>JABSAVG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>JACPEAK</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>JACRMS</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><p>Iavg</p>
+<p>The average value of the current, which is the effective DC
+current</p></li>
+<li><p>Irms</p>
+<p>Irms rule relates to the heat or Joule-heating of metal
+lines</p></li>
+<li><p>Ipeak</p>
+<p>The main goal of the Ipeak limits is to ensure that no thermal
+breakdown could occur on single overshoot events. If the signal may not
+have a high current density but if it has a very large peak current
+density, then, local melting will happen and cause failures</p></li>
+</ul>
+</blockquote>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220503205418275.png"
+alt="image-20220503205418275" /></p>
 <h2 id="qa">QA</h2>
 <ol type="1">
 <li><p>Q. Why “length” column in EM results form doesn’t show extracted
@@ -702,6 +661,24 @@ select the file based file name or configure text file in
 <h2 id="reference">reference</h2>
 <p>AC Peak Analysis Using IPWC Rapid Adoption Kit (RAK) Product Version:
 IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020</p>
+<p>Posser, Gracieli &amp; Sapatnekar, Sachin &amp; Reis, Ricardo.
+(2017). Electromigration Inside Logic Cells.
+10.1007/978-3-319-48899-8.</p>
+<p>A. B. Kahng, S. Nath and T. S. Rosing, "On potential design impacts
+of electromigration awareness," 2013 18th Asia and South Pacific Design
+Automation Conference (ASP-DAC), 2013, pp. 527-532, doi:
+10.1109/ASPDAC.2013.6509650.</p>
+<p>Kumar, Neeraj and Mohammad S. Hashmi. “Study, analysis and modeling
+of electromigration in SRAMs.” (2014).</p>
+<p>N. S. Nagaraj, F. Cano, H. Haznedar and D. Young, "A practical
+approach to static signal electromigration analysis," Proceedings 1998
+Design and Automation Conference. 35th DAC. (Cat. No.98CH36175), 1998,
+pp. 572-577, doi: 10.1109/DAC.1998.724536.</p>
+<p>Blaauw, David &amp; Oh, Chanhee &amp; Zolotov, Vladimir &amp;
+Dasgupta, Aurobindo. (2003). Static electromigration analysis for
+on-chip signal interconnects. Computer-Aided Design of Integrated
+Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
+10.1109/TCAD.2002.805728.</p>
 
       
     </div>
@@ -764,7 +741,7 @@ IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -879,7 +856,7 @@ threads</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -999,7 +976,7 @@ variant, the it is defined as a subsequence and its
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1124,7 +1101,7 @@ target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analo
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1228,7 +1205,7 @@ Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1320,7 +1297,7 @@ target="_blank" rel="noopener" href="https://github.com/StanfordAHA/PowerDomainD
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1410,7 +1387,7 @@ alt="pma_dig_bumps.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1585,7 +1562,7 @@ i&#39;(t)=g(t)v&#39;(t)
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1672,8 +1649,93 @@ target="_blank" rel="noopener" href="https://www.master-micro.com/professional-c
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/13/completeResponse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/13/completeResponse/" class="post-title-link" itemprop="url">Complete Response used in single-pole filter model in systemverilog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-13 16:10:31" itemprop="dateCreated datePublished" datetime="2022-02-13T16:10:31+00:00">2022-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

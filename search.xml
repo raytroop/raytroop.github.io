@@ -5416,7 +5416,7 @@ href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www
   <entry>
     <title>EMIR via Voltus-Fi</title>
     <url>/2022/02/23/emir-voltus-fi/</url>
-    <content><![CDATA[<h2 id="general-terminolgy">general terminolgy</h2>
+    <content><![CDATA[<h2 id="general-terminology">general terminology</h2>
 <h3 id="dc-related">DC related</h3>
 <p><strong>Imax</strong> in T*'s DRC document is the maximum allowed
 <strong>DC current</strong>, which depends on <em>Length and Width</em>
@@ -5489,7 +5489,8 @@ and <code>acpeak/pwc</code> EM current Analysis</p>
 class="math display">\[
 r=\frac{T_d}{T_{\text{total}}}
 \]</span></p>
-<p>​ where T_{} = EMIR time window</p>
+<p>​ where <span class="math inline">\(T_{\text{total}} = \text{EMIR
+time window}\)</span></p>
 <p>​ <span class="math inline">\(T_d\)</span> = the time duration in
 microsecond of the total "On Time" period based on <code>IPWC</code></p>
 <blockquote>
@@ -5544,6 +5545,66 @@ alt="image-20220421203011393" /></p>
 alt="image-20220421203657123" /></p>
 <p><img src="/2022/02/23/emir-voltus-fi/image-20220421203554147.png"
 alt="image-20220421203554147" /></p>
+<h2 id="fix-electromigration">Fix Electromigration</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>wider wire</th>
+<th>downsize drivers</th>
+<th>decrease fanout</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RJ JMAX</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>JAVG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>JABSAVG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>JACPEAK</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>JACRMS</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><p>Iavg</p>
+<p>The average value of the current, which is the effective DC
+current</p></li>
+<li><p>Irms</p>
+<p>Irms rule relates to the heat or Joule-heating of metal
+lines</p></li>
+<li><p>Ipeak</p>
+<p>The main goal of the Ipeak limits is to ensure that no thermal
+breakdown could occur on single overshoot events. If the signal may not
+have a high current density but if it has a very large peak current
+density, then, local melting will happen and cause failures</p></li>
+</ul>
+</blockquote>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220503205418275.png"
+alt="image-20220503205418275" /></p>
 <h2 id="qa">QA</h2>
 <ol type="1">
 <li><p>Q. Why “length” column in EM results form doesn’t show extracted
@@ -5768,6 +5829,24 @@ select the file based file name or configure text file in
 <h2 id="reference">reference</h2>
 <p>AC Peak Analysis Using IPWC Rapid Adoption Kit (RAK) Product Version:
 IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020</p>
+<p>Posser, Gracieli &amp; Sapatnekar, Sachin &amp; Reis, Ricardo.
+(2017). Electromigration Inside Logic Cells.
+10.1007/978-3-319-48899-8.</p>
+<p>A. B. Kahng, S. Nath and T. S. Rosing, "On potential design impacts
+of electromigration awareness," 2013 18th Asia and South Pacific Design
+Automation Conference (ASP-DAC), 2013, pp. 527-532, doi:
+10.1109/ASPDAC.2013.6509650.</p>
+<p>Kumar, Neeraj and Mohammad S. Hashmi. “Study, analysis and modeling
+of electromigration in SRAMs.” (2014).</p>
+<p>N. S. Nagaraj, F. Cano, H. Haznedar and D. Young, "A practical
+approach to static signal electromigration analysis," Proceedings 1998
+Design and Automation Conference. 35th DAC. (Cat. No.98CH36175), 1998,
+pp. 572-577, doi: 10.1109/DAC.1998.724536.</p>
+<p>Blaauw, David &amp; Oh, Chanhee &amp; Zolotov, Vladimir &amp;
+Dasgupta, Aurobindo. (2003). Static electromigration analysis for
+on-chip signal interconnects. Computer-Aided Design of Integrated
+Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
+10.1109/TCAD.2002.805728.</p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -6935,98 +7014,6 @@ Sixth international symposium on quality electronic design (isqed'05),
         <tag>tlp</tag>
         <tag>hbm</tag>
         <tag>cdm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to fix Electromigration ?</title>
-    <url>/2022/05/03/fix-em/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>wider wire</th>
-<th>downsize drivers</th>
-<th>decrease fanout</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>RJ JMAX</td>
-<td></td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>JAVG</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>JABSAVG</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>JACPEAK</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>JACRMS</td>
-<td>✓</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<ul>
-<li><p>Iavg</p>
-<p>The average value of the current, which is the effective DC
-current</p></li>
-<li><p>Irms</p>
-<p>Irms rule relates to the heat or Joule-heating of metal
-lines</p></li>
-<li><p>Ipeak</p>
-<p>The main goal of the Ipeak limits is to ensure that no thermal
-breakdown could occur on single overshoot events. If the signal may not
-have a high current density but if it has a very large peak current
-density, then, local melting will happen and cause failures</p></li>
-</ul>
-</blockquote>
-<p><img src="/2022/05/03/fix-em/image-20220503205418275.png"
-alt="image-20220503205418275" /></p>
-<p><strong>reference</strong></p>
-<p>Posser, Gracieli &amp; Sapatnekar, Sachin &amp; Reis, Ricardo.
-(2017). Electromigration Inside Logic Cells.
-10.1007/978-3-319-48899-8.</p>
-<p>A. B. Kahng, S. Nath and T. S. Rosing, "On potential design impacts
-of electromigration awareness," 2013 18th Asia and South Pacific Design
-Automation Conference (ASP-DAC), 2013, pp. 527-532, doi:
-10.1109/ASPDAC.2013.6509650.</p>
-<p>Kumar, Neeraj and Mohammad S. Hashmi. “Study, analysis and modeling
-of electromigration in SRAMs.” (2014).</p>
-<p>N. S. Nagaraj, F. Cano, H. Haznedar and D. Young, "A practical
-approach to static signal electromigration analysis," Proceedings 1998
-Design and Automation Conference. 35th DAC. (Cat. No.98CH36175), 1998,
-pp. 572-577, doi: 10.1109/DAC.1998.724536.</p>
-<p>Blaauw, David &amp; Oh, Chanhee &amp; Zolotov, Vladimir &amp;
-Dasgupta, Aurobindo. (2003). Static electromigration analysis for
-on-chip signal interconnects. Computer-Aided Design of Integrated
-Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
-10.1109/TCAD.2002.805728.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>emir</tag>
-        <tag>layout</tag>
-        <tag>em</tag>
-        <tag>dfm</tag>
       </tags>
   </entry>
   <entry>

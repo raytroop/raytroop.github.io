@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">242</span>
+        <span class="site-state-item-count">240</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,142 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/23/Precedence-Rule-uvm-config-db/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/23/Precedence-Rule-uvm-config-db/" class="post-title-link" itemprop="url">Precedence Rule of UVM uvm_config_db::set</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-23 18:48:41" itemprop="dateCreated datePublished" datetime="2022-03-23T18:48:41+00:00">2022-03-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a
-target="_blank" rel="noopener" href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
-<h4 id="two-precedence-rules">Two Precedence rules</h4>
-<p>There are two precedence rules applicable to
-<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
-<ol type="1">
-<li>A <code>set()</code> call in <strong>a context higher up the
-component hierarchy</strong> takes precedence over a <code>set()</code>
-call that occurs lower in the hierarchical path.</li>
-<li>On having <strong>same context field</strong>, <strong>the
-last</strong> <code>set()</code> call takes precedence over the earlier
-<code>set()</code> call.</li>
-</ol>
-<h4 id="example-for-rule---1">Example for rule - 1</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>As you can see , the <code>uvm_config_db::set</code> is after the
-factory <code>type_id::create</code>, but <strong>receive_value</strong>
-is still <strong>100</strong>, I believe that <code>build_phase</code>
-of upper hierarchy finish first before create lower components.</p>
-<p>But the recommendation in literature and many web is place
-<code>uvm_config_db::set</code> before <code>create</code></p>
-</blockquote>
-<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://www.edaplayground.com/x/jgvh">[complete
-code]</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
-<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
-<p>The <code>set</code> in <code>super.build_phase</code> and
-<code>set</code> in current <code>build_phase</code> are at the
-<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
-<p>base_test</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
-<h4 id="test2---one">test2 - One</h4>
-<blockquote>
-<p><code>yapp_incr_payload_seq</code> override the
-<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
-<strong>yapp_incr_payload_seq</strong> is used.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-<h4 id="test2---two">test2 - Two</h4>
-<blockquote>
-<p>the <code>yapp_5_packets</code> in
-<code>super.build_phase(phase)</code> overide
-<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
-<strong>yapp_5_packets</strong> is used</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -362,7 +226,7 @@ code]</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,7 +375,7 @@ Data Communications</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -616,7 +480,7 @@ separately</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -785,7 +649,7 @@ https://escholarship.org/uc/item/75g8j8jt</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -876,7 +740,7 @@ I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1031,7 +895,7 @@ phase-noise analysis: Part 2 of two parts. Microwaves and Rf. 40.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1203,7 +1067,7 @@ Topics" DesignCon IBIS Summit 2011</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1366,7 +1230,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1507,7 +1371,7 @@ together
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-21 06:33:56" itemprop="dateModified" datetime="2023-07-21T06:33:56+00:00">2023-07-21</time>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1565,8 +1429,605 @@ alt="lock_range" /></p>
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/15/emx-peakview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/15/emx-peakview/" class="post-title-link" itemprop="url">EMX & PeakView</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-15 00:06:21" itemprop="dateCreated datePublished" datetime="2022-03-15T00:06:21+00:00">2022-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-22 11:09:12" itemprop="dateModified" datetime="2023-07-22T11:09:12+00:00">2023-07-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="lvs-check">LVS check</h2>
+<p>LVS issue for circuits with customized devices</p>
+<ul>
+<li><p>auCdl: Analog and Microwave CDL, is a netlister used for creating
+CDL netlist for analog circuits</p></li>
+<li><p>auLVS: Analog and Microwave LVS, is used for analog circuit
+LVS</p></li>
+</ul>
+<h2 id="emx-ports">EMX ports</h2>
+<h3 id="plain-labels">plain labels</h3>
+<ul>
+<li><strong>pin</strong> layer</li>
+<li>uncheck <strong>Cadence pins</strong> in <strong>Advanced
+options</strong></li>
+</ul>
+<h3 id="rectangle-pins">rectangle pins</h3>
+<ul>
+<li><strong>drawing</strong> layer rectangle pin and specify
+<strong>Access Direction</strong> as intended</li>
+<li>check <strong>Cadence pins</strong> in <strong>Advanced
+options</strong></li>
+</ul>
+<blockquote>
+<p><strong>Cadence pins</strong> do NOT matter when there are only
+rectangle pin. rectangle pins are always selected as driven port.</p>
+</blockquote>
+<h3 id="check-ports-used-for-simulation">check ports used for
+simulation</h3>
+<p>use <strong>GDS view - EMX</strong></p>
+<h3 id="emx-synthesis-kits">EMX Synthesis Kits</h3>
+<p>Synthesis is a capability of the EMX <strong>Pcell</strong> library
+and uses scalable model data pre-generated by Continuum for a specific
+process and metal scheme combination.</p>
+<p>Synthesis is supported by the Pcells that are suffixed
+<strong>_scalable</strong>, and these Pcells have the additional fields
+and buttons needed for synthesis.</p>
+<h3 id="port-order-signals">port order (signals)</h3>
+<blockquote>
+<p>emxform.ils</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>type</th>
+<th><strong>Port order</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>inductor</td>
+<td>P1 P2</td>
+</tr>
+<tr class="even">
+<td>shield inductor</td>
+<td>P1 P2 SHIELD</td>
+</tr>
+<tr class="odd">
+<td>tapped inductor</td>
+<td>P1 P2 CT</td>
+</tr>
+<tr class="even">
+<td>tapped shield inductor</td>
+<td>P1 P2 CT SHIELD</td>
+</tr>
+<tr class="odd">
+<td>mom/mim capacitor</td>
+<td>P1 P2</td>
+</tr>
+<tr class="even">
+<td>tcoil</td>
+<td>P1 P2 TAP</td>
+</tr>
+<tr class="odd">
+<td>shield tcoil</td>
+<td>P1 P2 TAP SHIELD</td>
+</tr>
+<tr class="even">
+<td>tline</td>
+<td>P1 P2</td>
+</tr>
+<tr class="odd">
+<td>differential tline</td>
+<td>P1 P2 P3 P4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="emx-device-info">EMX device info</h3>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 29%" />
+<col style="width: 5%" />
+<col style="width: 22%" />
+<col style="width: 12%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>menu_selection (split with _ )</th>
+<th>num_ports</th>
+<th>modelgen_type</th>
+<th>generic_model_type</th>
+<th>plot_fn</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single-ended inductor</td>
+<td>inductor_no tap_no shield_single-ended</td>
+<td>2</td>
+<td>inductor</td>
+<td>inductor</td>
+<td>EMX_plot_se_ind</td>
+</tr>
+<tr class="even">
+<td>Differential inductor</td>
+<td>inductor_no tap_no shield_differential</td>
+<td>2</td>
+<td>inductor</td>
+<td>inductor</td>
+<td>EMX_plot_diff_ind</td>
+</tr>
+<tr class="odd">
+<td>Single-ended shield inductor</td>
+<td>inductor_no tap_with shield_single-ended</td>
+<td>3</td>
+<td>shield_inductor</td>
+<td>shield_inductor</td>
+<td>EMX_plot_se_ind</td>
+</tr>
+<tr class="even">
+<td>Differential shield inductor</td>
+<td>inductor_no tap_with shield_differential</td>
+<td>3</td>
+<td>shield_inductor</td>
+<td>shield_inductor</td>
+<td>EMX_plot_diff_ind</td>
+</tr>
+<tr class="odd">
+<td>Tapped inductor (diff mode only)</td>
+<td>inductor_with tap_no shield_differential mode only</td>
+<td>3</td>
+<td>center_tapped_inductor</td>
+<td>tapped_inductor</td>
+<td>EMX_plot_ct_ind</td>
+</tr>
+<tr class="even">
+<td>Tapped inductor (common mode too)</td>
+<td>inductor_with tap_no shield_also fit common mode</td>
+<td>3</td>
+<td>center_tapped_inductor_common_mode</td>
+<td>tapped_inductor</td>
+<td>EMX_plot_ct_ind</td>
+</tr>
+<tr class="odd">
+<td>Tapped shield inductor (diff only)</td>
+<td>inductor_with tap_with shield_differential mode only</td>
+<td>4</td>
+<td>center_tapped_well_inductor_common_mode</td>
+<td>tapped_shield_inductor</td>
+<td>EMX_plot_ct_ind</td>
+</tr>
+<tr class="even">
+<td>Single-ended cap (symm)</td>
+<td>capacitor_symmetric single-ended</td>
+<td>2</td>
+<td>complex_mom_capacitor</td>
+<td>mom_capacitor</td>
+<td>EMX_plot_se_cap</td>
+</tr>
+<tr class="odd">
+<td>Differential cap (symm)</td>
+<td>capacitor_symmetric differential</td>
+<td>2</td>
+<td>complex_mom_capacitor</td>
+<td>mom_capacitor</td>
+<td>EMX_plot_diff_cap</td>
+</tr>
+<tr class="even">
+<td>Single-ended cap (asymm)</td>
+<td>capacitor_asymmetric single-ended</td>
+<td>2</td>
+<td>complex_asymmetric_mom_capacitor</td>
+<td>mom_capacitor</td>
+<td>EMX_plot_se_cap</td>
+</tr>
+<tr class="odd">
+<td>Differential cap (asymm)</td>
+<td>capacitor_asymmetric differential</td>
+<td>2</td>
+<td>complex_asymmetric_mom_capacitor</td>
+<td>mom_capacitor</td>
+<td>EMX_plot_diff_cap</td>
+</tr>
+<tr class="even">
+<td>MiM capacitor</td>
+<td>capacitor_MiM</td>
+<td>2</td>
+<td>mim_capacitor</td>
+<td>mim_capacitor</td>
+<td>EMX_plot_se_cap</td>
+</tr>
+<tr class="odd">
+<td>Tcoil (simple model)</td>
+<td>tcoil_simple model</td>
+<td>3</td>
+<td>tcoil</td>
+<td>tcoil</td>
+<td>EMX_plot_tcoil</td>
+</tr>
+<tr class="even">
+<td>Tcoil (complex model)</td>
+<td>tcoil_complex model</td>
+<td>3</td>
+<td>complex_tcoil</td>
+<td>complex_tcoil</td>
+<td>EMX_plot_tcoil</td>
+</tr>
+<tr class="odd">
+<td>Shield tcoil</td>
+<td>tcoil_with shield</td>
+<td>4</td>
+<td>shield_complex_tcoil</td>
+<td>shield_tcoil</td>
+<td>EMX_plot_shield_tcoil</td>
+</tr>
+<tr class="even">
+<td>Transmission line</td>
+<td>transmission line_single</td>
+<td>2</td>
+<td>xline</td>
+<td>xline</td>
+<td>EMX_plot_xline</td>
+</tr>
+<tr class="odd">
+<td>Diff transmission line</td>
+<td>transmission line_coupled (differential)</td>
+<td>4</td>
+<td>coupled_xline</td>
+<td>diff_xline</td>
+<td>EMX_plot_diff_xline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="plot-function">plot function</h3>
+<blockquote>
+<p>EMX's formulation is defined in</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/path/to/EMX/share/emx/virtuoso_ui/emxinterface/emxskill/emxform.ils</span><br></pre></td></tr></table></figure>
+<p>EMX import this file at Virtuoso startup, you have to relaunch
+Virtuoso if you change this file</p>
+</blockquote>
+<h4 id="single-ended-inductor">Single-ended inductor</h4>
+<p>Both with and without shield apply</p>
+<ul>
+<li>port-1 impedance when port-2 short</li>
+</ul>
+<p><span class="math display">\[
+Z_1 = \frac{1}{Y_{11}}
+\]</span></p>
+<ul>
+<li>port-2 impedance when port-1 short</li>
+</ul>
+<p><span class="math display">\[
+Z_2 = \frac{1}{Y_{22}}
+\]</span> Then <span class="math display">\[\begin{align}
+L1 &amp;= \frac{Im(Z_1)}{2\pi f} \\
+Q1 &amp;= \frac{Im(Z_1)}{Re(Z_1)} \\
+L2 &amp;= \frac{Im(Z_2)}{2\pi f} \\
+Q2 &amp;= \frac{Im(Z_2)}{Re(Z_2)}
+\end{align}\]</span></p>
+<blockquote>
+<p>EMX only plot L1 and Q1</p>
+</blockquote>
+<h4 id="differential-impedance">differential impedance</h4>
+<p>Y parameters to Z parameters</p>
+<p><span class="math display">\[\begin{align}
+|Y| &amp;= Y_{11}*Y_{22} - Y_{12}*Y_{22} \\
+\begin{bmatrix}
+Z_{11} &amp; Z_{12}\\
+Z_{21} &amp; Z_{22}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\frac{Y_{22}}{|Y|} &amp; \frac{-Y_{12}}{|Y|}\\
+\frac{-Y_{21}}{|Y|} &amp; \frac{Y_{11}}{|Y|}
+\end{bmatrix}
+\end{align}\]</span></p>
+<p>Then <strong>differential impedance</strong> is <span
+class="math display">\[
+Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}
+\]</span></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220330234833756.png"
+alt="image-20220330234833756" /></p>
+<blockquote>
+<p>similarly, Z parameters to Y parameters <span class="math display">\[
+\begin{bmatrix}
+Y_{11} &amp; Y_{12}\\
+Y_{21} &amp; Y_{22}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{Z_{22}}{|Z|} &amp; \frac{-Z_{12}}{|Z|}\\
+\frac{-Z_{21}}{|Z|} &amp; \frac{Z_{11}}{|Z|}
+\end{bmatrix}
+\]</span> where <span class="math display">\[
+|Z| = Z_{11}Z_{22} - Z_{12}Z_{21}
+\]</span></p>
+</blockquote>
+<h4 id="differential-inductor">Differential inductor</h4>
+<p>Both with and without shield apply</p>
+<p><span class="math display">\[\begin{align}
+L_{diff} &amp;= \frac{Im(Z_{diff})}{2\pi f} \\
+Q_{diff} &amp;= \frac{Im(Z_{diff})}{Re(Z_{diff})}
+\end{align}\]</span></p>
+<h4 id="center-tapped-inductor">Center-tapped inductor</h4>
+<p><span class="math display">\[
+Y =
+\begin{bmatrix}
+Y_{11} &amp; Y_{12} &amp; Y_{13}\\
+Y_{21} &amp; Y_{22} &amp; Y_{23}\\
+Y_{31} &amp; Y_{32} &amp; Y_{33}
+\end{bmatrix}
+\]</span></p>
+<p>where port order is <code>P1 P2 CT</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(define (EMX_plot_ct_ind bgui wid what)</span><br><span class="line">  (EMX_plot_aux bgui wid what 3</span><br><span class="line">		&#x27;(&quot;Differential inductance&quot; &quot;Differential Q&quot;)</span><br><span class="line">		&#x27;(&quot;Henry&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((z (EMX_differential (nth 0 ys) (nth 1 ys) (nth 3 ys) (nth 4 ys)))</span><br><span class="line">			   (f (xval z))</span><br><span class="line">			   (L (imag z)/(2*3.14159265358979*f))</span><br><span class="line">			   (Q (imag z)/(real z)))</span><br><span class="line">		    `((,L) (,Q))))</span><br><span class="line">		&#x27;((&quot;L&quot;) (&quot;Q&quot;))))</span><br></pre></td></tr></table></figure>
+<p>Assume <code>CT</code> i.e. port 3 in S-parameter is grounded,
+<code>(z (EMX_differential (nth 0 ys) (nth 1 ys) (nth 3 ys) (nth 4 ys)))</code>
+obtain differential impedance with <span
+class="math inline">\(Y_{11}\)</span>, <span
+class="math inline">\(Y_{12}\)</span>, <span
+class="math inline">\(Y_{21}\)</span> and <span
+class="math inline">\(Y_{22}\)</span>. <span class="math display">\[
+Y =
+\begin{bmatrix}
+Y_{11} &amp; Y_{12}\\
+Y_{21} &amp; Y_{22}
+\end{bmatrix}
+\]</span> Finally, differential inductance and Q are obtained, shown as
+below</p>
+<p><span class="math display">\[\begin{align}
+L_{diff} &amp;= \frac{Im(Z_{diff})}{2\pi f} \\
+Q_{diff} &amp;= \frac{Im(Z_{diff})}{Re(Z_{diff})}
+\end{align}\]</span></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220331013735370.png"
+alt="image-20220331013735370" /></p>
+<h4 id="single-ended-cap">Single-ended cap</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(define (EMX_plot_se_cap bgui wid what)</span><br><span class="line">  (EMX_plot_aux bgui wid what 2</span><br><span class="line">		&#x27;(&quot;Capacitance&quot; &quot;Q&quot; &quot;Capacitance&quot; &quot;Q&quot;)</span><br><span class="line">		&#x27;(&quot;Farad&quot; &quot;&quot; &quot;Farad&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((z1 1.0/(nth 0 ys))</span><br><span class="line">			   (y12 (nth 1 ys))</span><br><span class="line">			   (z2 1.0/(nth 3 ys))</span><br><span class="line">			   (f (xval z1))</span><br><span class="line">			   (C1 (-1.0/(imag z1))/(2*3.14159265358979*f))</span><br><span class="line">			   (C12 -(imag y12)/(2*3.14159265358979*f))</span><br><span class="line">			   (C2 (-1.0/(imag z2))/(2*3.14159265358979*f))</span><br><span class="line">			   (Q1 -(imag z1)/(real z1))</span><br><span class="line">			   (Q12 (imag y12)/(real y12))</span><br><span class="line">			   (Q2 -(imag z2)/(real z2)))</span><br><span class="line">		    `((,C1) (,Q1) (,C12))))</span><br><span class="line">		&#x27;((&quot;Cse&quot;) (&quot;Qse&quot;) (&quot;C12&quot;))))</span><br></pre></td></tr></table></figure>
+<p>We define Port-1 impedance <span class="math inline">\(Z_1\)</span>,
+Port-2 impedance <span class="math inline">\(Z_2\)</span></p>
+<p><span class="math display">\[\begin{align}
+Z_1 &amp;= \frac {1}{Y_{11}}\\
+Z_2 &amp;= \frac {1}{Y_{22}}
+\end{align}\]</span></p>
+<p>Then single-ended cap and Q <span
+class="math display">\[\begin{align}
+C_1 &amp;= -\frac{1/Im(Z_1)}{2\pi f} \\
+Q_1 &amp;= -\frac{Im(Z_1)}{Re(Z_1)} \\
+C_2 &amp;=  -\frac{1/Im(Z_2)}{2\pi f} \\
+Q_2 &amp;= -\frac{Im(Z_2)}{Re(Z_2)} \\
+C_{12} &amp;= -\frac{Im(Y_{12})}{2\pi f}\\
+Q_{12} &amp;= \frac{Im(Y_{12})}{Re(Y_{12})}
+\end{align}\]</span></p>
+<ul>
+<li><strong>Series equivalent</strong> model is used in <span
+class="math inline">\(C_1\)</span>, <span
+class="math inline">\(Q_1\)</span>, <span
+class="math inline">\(C_2\)</span> and <span
+class="math inline">\(Q_2\)</span>
+<ul>
+<li><span class="math inline">\(Z_1 = R + \frac{1}{sC_1}\)</span> and
+<span class="math inline">\(Z_2 = R + \frac{1}{sC_2}\)</span></li>
+</ul></li>
+<li>Parallel model is used in <span
+class="math inline">\(C_{12}\)</span> and <span
+class="math inline">\(Q_{12}\)</span>
+<ul>
+<li><span class="math inline">\(Y_{12} = \frac{1}{R} +
+sC_{12}\)</span></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>EMX plot <span class="math inline">\(C_{se}\)</span>, <span
+class="math inline">\(Q_{se}\)</span> and <span
+class="math inline">\(C_{12}\)</span>, i.e. <span
+class="math inline">\(C_1\)</span>, <span
+class="math inline">\(Q_1\)</span> and <span
+class="math inline">\(C_{12}\)</span></p>
+</blockquote>
+<p><img src="/2022/03/15/emx-peakview/image-20220331020334023.png"
+alt="image-20220331020334023" /></p>
+<h4 id="differential-cap">Differential cap</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(define (EMX_plot_diff_cap bgui wid what)</span><br><span class="line">  (EMX_plot_aux bgui wid what 2</span><br><span class="line">		&#x27;(&quot;Differential capacitance&quot; &quot;Differential Q&quot;)</span><br><span class="line">		&#x27;(&quot;Farad&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((z (apply EMX_differential ys))</span><br><span class="line">			   (f (xval z))</span><br><span class="line">			   (C (-1.0/(imag z))/(2*3.14159265358979*f))</span><br><span class="line">			   (Q -(imag z)/(real z)))</span><br><span class="line">		    `((,C) (,Q))))</span><br><span class="line">		&#x27;((&quot;C&quot;) (&quot;Q&quot;))))</span><br></pre></td></tr></table></figure>
+<p>First obtain differential impedance, <span
+class="math inline">\(Z_{diff}\)</span> then apply series equivalent
+model <span class="math display">\[\begin{align}
+C_{diff} &amp;= -\frac{1/Im(Z_{diff})}{2\pi f} \\
+Q_{diff} &amp;= -\frac{Im(Z_{diff})}{Re(Z_{diff})}
+\end{align}\]</span></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220331022224865.png"
+alt="image-20220331022224865" /></p>
+<h4 id="tline">Tline</h4>
+<p>Open circuit impedance <span class="math inline">\(Z_o\)</span>,
+short circuit impedance <span class="math inline">\(Z_s\)</span> and
+characteristic impedance <span class="math inline">\(Z_0\)</span></p>
+<p><span class="math display">\[\begin{align}
+Z_o &amp;= Z_{11}\\
+Z_s &amp;= \frac{1}{Y_{11}}\\
+Z_0  &amp;= \sqrt{Z_o*Z_s}
+\end{align}\]</span></p>
+<p>propagation constant is given as <span
+class="math display">\[\begin{align}
+\gamma &amp;= \frac{1}{2}\log\left( \frac{Z_0+Z_s}{Z_0-Z_s} \right) \\
+&amp;= \alpha + j\beta
+\end{align}\]</span> where <span class="math inline">\(\alpha\)</span>
+is <strong>attenuation constant</strong> and <span
+class="math inline">\(\beta\)</span> is <strong>phase
+constant</strong></p>
+<p>The relationship between these parameter and geometry of the
+transmission line <span class="math display">\[\begin{align}
+Z_0 &amp;= \sqrt{\frac{R+j\omega L}{G+j\omega C}} \\
+\gamma &amp;= \sqrt{(G+j\omega C)(R+j\omega L)}
+\end{align}\]</span> EMX plot the real and imaginary part of <span
+class="math inline">\(Z_0\)</span>, <span
+class="math inline">\(\alpha\)</span> and <span
+class="math inline">\(\beta\)</span> of <span
+class="math inline">\(\gamma\)</span></p>
+<blockquote>
+<p><del>Note EMX plot the absolute value of <span
+class="math inline">\(\alpha\)</span> and <span
+class="math inline">\(\beta\)</span></del></p>
+</blockquote>
+<p><img src="/2022/03/15/emx-peakview/image-20220630215343377.png"
+alt="image-20220630215343377" /><img
+src="/2022/03/15/emx-peakview/image-20220630215418372.png"
+alt="image-20220630215418372" /></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220630215630849.png"
+alt="image-20220630215630849" /></p>
+<h3 id="emx-autoplot">EMX autoplot</h3>
+<blockquote>
+<p>using AC simulation, and inductor's parallel model or series
+model</p>
+<p>That is to say: both <code>sp</code> (network parameter) and
+<code>ac</code> (impedance) can be used to plot inductance, Q value.</p>
+<p>usually EMX choose <code>ac</code> method</p>
+</blockquote>
+<p><img src="/2022/03/15/emx-peakview/image-20220501173856442.png"
+alt="image-20220501173856442" /></p>
+<p><img src="/2022/03/15/emx-peakview/image-20220501173930035.png"
+alt="image-20220501173930035" /></p>
+<blockquote>
+<p>left 2 figures are used for AC simulation, <span
+class="math inline">\(Y_{nn}\)</span> can be obtained conveniently</p>
+</blockquote>
+<h3 id="foundary-model">foundary model</h3>
+<p><img src="/2022/03/15/emx-peakview/image-20221217141519947.png"
+alt="image-20221217141519947" /></p>
+<p>for single-end capicator <span class="math display">\[\begin{align}
+Q_1 &amp;= -\frac{Im(Z_1)}{Re(Z_1)} \\
+&amp;= -\frac{Im(1/Y_{11})}{Re(1/Y_{11})} \\
+&amp;= -\frac{Im(Y_{11}^*)/|Y_{11}|^2}{Re(Y_{11}^*)/|Y_{11}|^2} \\
+&amp;= \frac{Im(Y_{11})}{Re(Y_{11})}
+\end{align}\]</span></p>
+<p>So, the EMX model and foundary model is consistent.</p>
+<h3 id="tips">Tips</h3>
+<p>Process file encryption mostly for advanced nodes, like TSMC 16nm
+Finfet, whose process file is encrypted.</p>
+<ul>
+<li>Use <code>--key=EMXkey</code> in the EMX <em>Advanced
+options</em></li>
+</ul>
+<p>GDSviewer has two options</p>
+<ul>
+<li>EMX: shows the final gds sent to EMX for simulation after it has
+been processed by EMX</li>
+<li>Raw: shows the raw gds</li>
+</ul>
+<blockquote>
+<p>If there are port name with the <code>#</code> sign, it means EMX
+sees a port but it is not in the signal list.</p>
+</blockquote>
+<p>EMX Accuracy</p>
+<ul>
+<li><p>Edge mesh: controls layout discretization in the X-Y plane</p>
+<ul>
+<li>For MoM capacitors, use the edge mesh to be the same as the width of
+the finger (for example, 0.1um).</li>
+</ul></li>
+<li><p>Thickness: controls layout discretization in the Z
+dimension</p></li>
+<li><p>3D metals: skips all 2D assumptions about conductors and their
+currents and charges</p>
+<ul>
+<li>If you set <code>3D metals</code> to <code>*</code> then all metals
+are treated as <strong>3D</strong>
+<ul>
+<li>For Inductor type structures, only thick metal needs 3D.</li>
+<li>For MoM, all layers are needed.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Ports entered in <code>Grounds</code> will cause these nets to be
+grounded; these ports will not show up in the S-parameter result.</p>
+<p>Setup Temperature</p>
+<ul>
+<li>EMX: <code>--temperature=100</code></li>
+</ul>
+<p>ParaView</p>
+<ul>
+<li>If check ParaView related options when ParaView is not setup
+properly, EMX simulation stop at <em>Creating mesh...</em> without
+waring or errors (version 6.2).</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

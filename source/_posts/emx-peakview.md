@@ -26,7 +26,7 @@ LVS issue for circuits with customized devices
 - **drawing** layer rectangle pin and specify **Access Direction** as intended
 - check **Cadence pins** in **Advanced options**
 
-> **Cadence pins** do NOT matter when there are only rectangle pin. rectangle pins are always selected as driven port.
+> The rectangle pins are always selected as driven port while there are **only rectangle pin**  whether **Cadence pins** checked or not. 
 
 ### check ports used for simulation
 use **GDS view - EMX**
@@ -81,7 +81,7 @@ Synthesis is supported by the Pcells that are suffixed **\_scalable**, and these
 | Transmission line                  | transmission line_single                             | 2         | xline                                   | xline                  | EMX_plot_xline        |
 | Diff transmission line             | transmission line_coupled (differential)             | 4         | coupled_xline                           | diff_xline             | EMX_plot_diff_xline   |
 
-### plot function
+## EMX plot function
 
 > EMX's formulation is defined in 
 >
@@ -93,7 +93,7 @@ Synthesis is supported by the Pcells that are suffixed **\_scalable**, and these
 
 
 
-#### Single-ended inductor
+### Single-ended inductor
 
 Both with and without shield apply
 
@@ -121,7 +121,7 @@ Q2 &= \frac{Im(Z_2)}{Re(Z_2)}
 
 
 
-#### differential impedance
+### differential impedance
 
 Y parameters to Z parameters
 
@@ -165,7 +165,7 @@ $$
 >
 > 
 
-#### Differential inductor
+### Differential inductor
 
 Both with and without shield apply
 
@@ -174,7 +174,7 @@ L_{diff} &= \frac{Im(Z_{diff})}{2\pi f} \\
 Q_{diff} &= \frac{Im(Z_{diff})}{Re(Z_{diff})}
 \end{align}$$
 
-#### Center-tapped inductor
+### Center-tapped inductor
 
 $$
 Y =
@@ -218,7 +218,7 @@ Q_{diff} &= \frac{Im(Z_{diff})}{Re(Z_{diff})}
 
 ![image-20220331013735370](emx-peakview/image-20220331013735370.png)
 
-#### Single-ended cap
+### Single-ended cap
 
 ```skill
 (define (EMX_plot_se_cap bgui wid what)
@@ -271,7 +271,7 @@ Q_{12} &= \frac{Im(Y_{12})}{Re(Y_{12})}
 
 
 
-#### Differential cap
+### Differential cap
 
 ```skill
 (define (EMX_plot_diff_cap bgui wid what)
@@ -295,7 +295,7 @@ Q_{diff} &= -\frac{Im(Z_{diff})}{Re(Z_{diff})}
 
 ![image-20220331022224865](emx-peakview/image-20220331022224865.png)
 
-#### Tline
+### Tline
 
 Open circuit impedance $Z_o$, short circuit impedance $Z_s$ and characteristic impedance $Z_0$
 
@@ -325,7 +325,7 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
 ![image-20220630215630849](emx-peakview/image-20220630215630849.png)
 
-### EMX autoplot
+## EMX autoplot
 
 > using AC simulation, and inductor's parallel model or series model
 >
@@ -341,7 +341,7 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
 
 
-### foundary model
+## Foundary model
 
 ![image-20221217141519947](emx-peakview/image-20221217141519947.png)
 
@@ -355,7 +355,7 @@ Q_1 &= -\frac{Im(Z_1)}{Re(Z_1)} \\
 
 So, the EMX model and foundary model is consistent.
 
-### Tips
+## Tips
 
 Process file encryption mostly for advanced nodes, like TSMC 16nm Finfet, whose process file is  encrypted.
 
@@ -401,3 +401,12 @@ ParaView
 
 - If check ParaView related options when ParaView is not setup properly, EMX simulation stop at  *Creating mesh...* without waring or errors (version 6.2).
 
+
+
+## reference
+
+Tips on Specifying Ports in EMX [[link](Article (20493671) Title: Tips on Specifying Ports in EMX
+URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AD4uEEAT)]
+
+Using 'Cadence pins' as ports with access direction in EMX simulations [[link](Article (20496398) Title: Using 'Cadence pins' as ports with access direction in EMX simulations
+URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]

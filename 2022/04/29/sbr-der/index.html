@@ -34,12 +34,8 @@
 <meta property="og:image" content="http://example.com/2022/04/29/sbr-der/image-20220430010336977.png">
 <meta property="og:image" content="http://example.com/2022/04/29/sbr-der/image-20220430013715680.png">
 <meta property="article:published_time" content="2022-04-29T11:25:09.000Z">
-<meta property="article:modified_time" content="2023-08-08T10:57:10.376Z">
+<meta property="article:modified_time" content="2023-08-08T16:03:41.242Z">
 <meta property="article:author" content="Guo">
-<meta property="article:tag" content="sbr">
-<meta property="article:tag" content="der">
-<meta property="article:tag" content="mer">
-<meta property="article:tag" content="eye diagram">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2022/04/29/sbr-der/image-20220429112902281.png">
 
@@ -151,7 +147,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#single-bit-response-sbr-method"><span class="nav-number">1.</span> <span class="nav-text">Single-Bit Response (SBR)
-Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#double-edge-response-der-method"><span class="nav-number">2.</span> <span class="nav-text">Double-Edge Response (DER)
+Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#another-sbr-example"><span class="nav-number">1.1.</span> <span class="nav-text">another SBR example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#double-edge-response-der-method"><span class="nav-number">2.</span> <span class="nav-text">Double-Edge Response (DER)
 Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
@@ -165,7 +161,7 @@ Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href=
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">183</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -176,7 +172,7 @@ Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href=
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-count">235</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -247,7 +243,7 @@ Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href=
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 10:57:10" itemprop="dateModified" datetime="2023-08-08T10:57:10+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -317,6 +313,14 @@ falling edge of <strong>1 bit</strong>.</p>
 </blockquote>
 <p><img src="/2022/04/29/sbr-der/image-20220429174330324.png"
 alt="image-20220429174330324" /></p>
+<h3 id="another-sbr-example">another SBR example</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">A = <span class="built_in">zeros</span>(<span class="number">10</span>,<span class="number">21</span>);</span><br><span class="line">n = [<span class="number">1</span>:<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">% post cursor</span></span><br><span class="line"><span class="keyword">for</span> m = <span class="number">1</span>:<span class="number">3</span></span><br><span class="line">    A(m, <span class="number">11</span>+n(m)) = <span class="number">0.5</span>;</span><br><span class="line">    A(m, <span class="number">11</span>-n(m)) = <span class="number">0.5</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% one</span></span><br><span class="line"><span class="keyword">for</span> m = <span class="number">4</span>:<span class="number">10</span></span><br><span class="line">    A(m, <span class="number">11</span>) = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% h0 or main cursor</span></span><br><span class="line">h0 = <span class="built_in">zeros</span>(<span class="number">1</span>, <span class="number">21</span>);</span><br><span class="line">h0(<span class="number">1</span>, <span class="number">1</span>) = <span class="number">0.5</span>;</span><br><span class="line">h0(<span class="number">1</span>, <span class="number">21</span>) = <span class="number">0.5</span>;</span><br><span class="line">out = h0;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> m = <span class="number">1</span>:<span class="number">10</span></span><br><span class="line">    out = conv(out, A(m, :), <span class="string">&quot;full&quot;</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stem(out)</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/04/29/sbr-der/143512636-0878e0fd-fe87-414c-9c73-52577eeb7593.jpg"
+alt="143512636-0878e0fd-fe87-414c-9c73-52577eeb7593" /></p>
+<p><img
+src="/2022/04/29/sbr-der/143512677-ccefdf22-4e30-4e72-9220-bbe667671e79.png"
+alt="143512677-ccefdf22-4e30-4e72-9220-bbe667671e79" /></p>
 <h2 id="double-edge-response-der-method">Double-Edge Response (DER)
 Method</h2>
 <p>To handle the more general cases, with <strong>asymmetric rising and
@@ -359,6 +363,11 @@ Accurate System Simulations.” <em>IEEE Transactions on Advanced
 Packaging</em> 31 (2008): 741-748.</p>
 <p>Shi, Rui. “Off-chip wire distribution and signal analysis.”
 (2008).</p>
+<p>X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate
+Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links,"
+in IEEE Transactions on Very Large Scale Integration (VLSI) Systems,
+vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
+10.1109/TVLSI.2021.3082208.</p>
 
     </div>
 
@@ -367,12 +376,6 @@ Packaging</em> 31 (2008): 741-748.</p>
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/sbr/" rel="tag"># sbr</a>
-              <a href="/tags/der/" rel="tag"># der</a>
-              <a href="/tags/mer/" rel="tag"># mer</a>
-              <a href="/tags/eye-diagram/" rel="tag"># eye diagram</a>
-          </div>
 
         
 

@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">183</span>
+          <span class="site-state-item-count">184</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,150 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/02/hier-conn-export-uvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/02/hier-conn-export-uvm/" class="post-title-link" itemprop="url">Hierarchical Connections and Exports UVM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-02 11:24:09" itemprop="dateCreated datePublished" datetime="2022-04-02T11:24:09+00:00">2022-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>imp</code> and <code>port</code> connectors are sufficient for
+modeling most connections, but there is third connector,
+<code>export</code>, which is used exclusively in hierarchical
+connections.</p>
+<p>Normally hierarchical routing is not required. A <code>port</code> on
+an UVC monitor can be connected directly to an <code>imp</code> in a
+scoreboard by specifying full hierarchical pathname (e.g.,
+env.agent.monitor.analysis_port). The structure of an UVC is fixed and
+so the user knows to look in the monitor component for the analysis
+ports.</p>
+<p>However the internal hierarchy of a module UVC is more arbitrary, and
+it may be convenient to route all the module UVC connectors to the top
+level to allow use without knowledge of the internal structure.</p>
+<p>On the initiator side</p>
+<ul>
+<li>ports are routed up the hierarchy via other port instances</li>
+</ul>
+<p>On the target side</p>
+<ul>
+<li>only the component which defines the communication method is allowed
+to have an <code>imp</code> instance. So we need a third object to route
+connections up the target side hierarchy - <code>export</code></li>
+</ul>
+<p>The hierarchical route must be connected at each level in the
+direction of control flow:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initiator<span class="variable">.connect</span>(target)</span><br></pre></td></tr></table></figure>
+<p>Connection rules are as follows:</p>
+<ul>
+<li><code>port</code> initiators can be connected to <code>port</code>,
+<code>export</code> or <code>imp</code> targets</li>
+<li><code>export</code> initiators can be connected to
+<code>export</code> or <code>imp</code> targets</li>
+<li><code>imp</code> cannot be connection initiator. <code>imp</code> is
+target only and is always the last connection object on a route</li>
+</ul>
+<p><strong>uvm_analysis_port</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_analysis_port # (</span><br><span class="line">   	<span class="keyword">type</span> 	T	 = 	<span class="keyword">int</span></span><br><span class="line">) <span class="keyword">extends</span> uvm_port_base # (uvm_tlm_if_base <span class="variable">#(T,T))</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_analysis_port</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_analysis_port # (</span><br><span class="line">   	<span class="keyword">type</span> 	T	 = 	<span class="keyword">int</span></span><br><span class="line">) <span class="keyword">extends</span> uvm_port_base # (uvm_tlm_if_base <span class="variable">#(T,T))</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_analysis_imp</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_analysis_imp #(</span><br><span class="line">   	<span class="keyword">type</span> 	T	 = 	<span class="keyword">int</span>,</span><br><span class="line">   	<span class="keyword">type</span> 	IMP	 = 	<span class="keyword">int</span></span><br><span class="line">) <span class="keyword">extends</span> uvm_port_base <span class="variable">#(uvm_tlm_if_base #(T,T))</span></span><br></pre></td></tr></table></figure>
+<p><strong>QA</strong></p>
+<ol type="1">
+<li><p>What are the three distinct functions of a scoreboard?</p>
+<p>Reference model, expected data storage and comparison</p></li>
+<li><p>To how many consumer components can an analysis port be
+connected?</p>
+<p>Any number, including zero</p></li>
+<li><p>What are the names of the two declarations made available by the
+following macro:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`uvm_analysis_imp_decl(_possible)</span><br></pre></td></tr></table></figure>
+<p>Subclass <code>uvm_analysis_imp_possible</code></p>
+<p>Method <code>write_possible</code></p></li>
+<li><p>Why should a scoreboard clone the data received by a
+<code>write</code> method?</p>
+<p>The <code>write</code> method only sends a reference, therefore if
+the sending component uses the same reference for every data item,
+overwriting of data in the storage function of the scoreboard is
+possible without cloning.</p></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +370,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -323,7 +467,7 @@ alt="image-20220401011543866" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:52" itemprop="dateModified" datetime="2023-08-08T16:27:52+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -427,7 +571,7 @@ alt="topo.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -570,7 +714,7 @@ forward declaration</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:40" itemprop="dateModified" datetime="2023-08-08T16:03:40+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:52" itemprop="dateModified" datetime="2023-08-08T16:27:52+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -706,7 +850,7 @@ code]</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -855,7 +999,7 @@ Data Communications</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -960,7 +1104,7 @@ separately</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1129,7 +1273,7 @@ https://escholarship.org/uc/item/75g8j8jt</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1220,7 +1364,7 @@ I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1313,178 +1457,6 @@ target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-se
 <p>Drakhlis, B.. (2001). Calculate oscillator jitter by using
 phase-noise analysis: Part 2 of two parts. Microwaves and Rf. 40.
 109-119.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/tcoil/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/17/tcoil/" class="post-title-link" itemprop="url">T-coil and its application</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-17 14:30:39" itemprop="dateCreated datePublished" datetime="2022-03-17T14:30:39+00:00">2022-03-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:03:41" itemprop="dateModified" datetime="2023-08-08T16:03:41+00:00">2023-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>Broaden the bandwidth</li>
-<li>Create a constant, resistive input impedance in the presence of a
-heavy load capacitance (ESD protection circuit)</li>
-</ul>
-<blockquote>
-<p>L<sub>1</sub> = L<sub>2</sub> for impedance matching</p>
-</blockquote>
-<p>The use of T-coils can dramatically increase the
-<strong>bandwidth</strong> and improve the <strong>return loss</strong>
-in both TXs and RXs.</p>
-<h2 id="tcoil-in-rx">Tcoil in RX</h2>
-<p><img src="/2022/03/17/tcoil/image-20220502201254057.png"
-alt="image-20220502201254057" /></p>
-<blockquote>
-<p><strong>ppwl</strong>: Independent Piece-Wise Linear Resistive
-Source</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220502201321341.png"
-alt="image-20220502201321341" /></p>
-<h2 id="simple-model">simple model</h2>
-<blockquote>
-<p>L1, L2, Km, Cb</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220502215310947.png"
-alt="image-20220502215310947" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220622224842237.png"
-alt="image-20220622224842237" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220622225709712.png"
-alt="image-20220622225709712" /></p>
-<h2 id="equivalent-model">equivalent model</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">simulator lang=spectre</span><br><span class="line">include &quot;/path/to/INDL0.scs&quot;</span><br><span class="line">subckt for_import(p0 p1 p2 gnd)</span><br><span class="line">	xmod (p0 p1 p2 gnd) INDL0</span><br><span class="line">ends for_import</span><br><span class="line"></span><br><span class="line">x_1 (p_1_1 p_1_2 p_1_3 0) for_import</span><br><span class="line">v_1_1 (p_1_1 0) vsource mag=-1</span><br><span class="line">v_1_2 (p_1_2 0) vsource mag=0</span><br><span class="line">v_1_3 (p_1_3 0) vsource mag=0</span><br><span class="line">save v_1_1:p v_1_2:p v_1_3:p</span><br><span class="line"></span><br><span class="line">x_2 (p_2_1 p_2_2 p_2_3 0) for_import</span><br><span class="line">v_2_1 (p_2_1 0) vsource mag=0</span><br><span class="line">v_2_2 (p_2_2 0) vsource mag=-1</span><br><span class="line">v_2_3 (p_2_3 0) vsource mag=0</span><br><span class="line">save v_2_1:p v_2_2:p v_2_3:p</span><br><span class="line"></span><br><span class="line">x_3 (p_3_1 p_3_2 p_3_3 0) for_import</span><br><span class="line">v_3_1 (p_3_1 0) vsource mag=0</span><br><span class="line">v_3_2 (p_3_2 0) vsource mag=0</span><br><span class="line">v_3_3 (p_3_3 0) vsource mag=-1</span><br><span class="line">save v_3_1:p v_3_2:p v_3_3:p</span><br><span class="line">Y ac start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08</span><br><span class="line"></span><br><span class="line">xsp (p_1 p_2 p_3 0) for_import</span><br><span class="line">port1 (p_1 0) port</span><br><span class="line">port2 (p_2 0) port</span><br><span class="line">port3 (p_3 0) port</span><br><span class="line">S sp start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08 ports=[ port1 port2 port3]</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/17/tcoil/image-20220503005728763.png"
-alt="image-20220503005728763" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220503005903105.png"
-alt="image-20220503005903105" /></p>
-<h3 id="emx_plot_tcoil-in-emxform.ils"><code>EMX_plot_tcoil</code> in
-<code>emxform.ils</code></h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">(define (EMX_plot_tcoil bgui wid what)</span><br><span class="line">  (needNCells &#x27;adtComplex 100000)</span><br><span class="line">  (letseq ((to_z (lambda (ys)</span><br><span class="line">		   (letseq ((y11 (EMX_matrix_ref ys 0 0))</span><br><span class="line">			    (y12 (EMX_matrix_ref ys 0 1))</span><br><span class="line">			    (y21 (EMX_matrix_ref ys 1 0))</span><br><span class="line">			    (y22 (EMX_matrix_ref ys 1 1))</span><br><span class="line">			    (det y11*y22-y12*y21)</span><br><span class="line">			    (z11 y22/det)</span><br><span class="line">			    (z12 -y12/det)</span><br><span class="line">			    (z22 y11/det))</span><br><span class="line">		     (list z11 z12 z22))))</span><br><span class="line">	   (ground</span><br><span class="line">	    (lambda (y p)</span><br><span class="line">	      (letseq ((n (EMX_matrix_rows y))</span><br><span class="line">		       (yg (make_EMX_matrix n-1)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n-1))</span><br><span class="line">		  (do ((j 0 j+1))</span><br><span class="line">		      ((j &gt;= n-1))</span><br><span class="line">		    (EMX_matrix_set yg i j (EMX_matrix_ref y i+(if (i &gt;= p) 1 0) j+(if (j &gt;= p) 1 0)))))</span><br><span class="line">		yg)))</span><br><span class="line">	   (reduce</span><br><span class="line">	    (lambda (yys)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec (car yys)))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (yyvecs (mapcar drGetWaveformYVec yys))</span><br><span class="line">		       (zz1 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz2 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz3 (drCreateVec &#x27;doublecomplex n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (let ((ys (mapcar (lambda (w) (drGetElem w i)) yyvecs)))</span><br><span class="line">		    (setq ys (ground (as_EMX_matrix 3 3 ys) 2))</span><br><span class="line">		    (let ((zz (to_z ys)))</span><br><span class="line">		      (drSetElem zz1 i (nth 0 zz))</span><br><span class="line">		      (drSetElem zz2 i (nth 1 zz))</span><br><span class="line">		      (drSetElem zz3 i (nth 2 zz)))))</span><br><span class="line">		(list (drCreateWaveform xvec zz1)</span><br><span class="line">		      (drCreateWaveform xvec zz2)</span><br><span class="line">		      (drCreateWaveform xvec zz3)))))</span><br><span class="line">	   (get_k</span><br><span class="line">	    (lambda (l12 l1122)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec l12))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (l12v (drGetWaveformYVec l12))</span><br><span class="line">		       (l1122v (drGetWaveformYVec l1122))</span><br><span class="line">		       (resultv (drCreateVec &#x27;double n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (letseq ((l12i (drGetElem l12v i))</span><br><span class="line">			   (l1122i (drGetElem l1122v i))</span><br><span class="line">			   (kk (if (l1122i &gt; 0.0)</span><br><span class="line">				   l12i/(sqrt l1122i)</span><br><span class="line">				   0.0))</span><br><span class="line">			   (k (if ((abs kk) &lt; 2.0) kk 0.0)))</span><br><span class="line">		    (drSetElem resultv i k)))</span><br><span class="line">		(drCreateWaveform xvec resultv)))))</span><br><span class="line">  (EMX_plot_aux bgui wid what 3</span><br><span class="line">		&#x27;(&quot;Inductance&quot; &quot;Q&quot; &quot;k&quot;)</span><br><span class="line">		&#x27;(&quot;Henry&quot; &quot;&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((zs (reduce ys))</span><br><span class="line">			   (z11 (nth 0 zs))</span><br><span class="line">			   (z12 (nth 1 zs))</span><br><span class="line">			   (z22 (nth 2 zs))</span><br><span class="line">			   (pi 3.14159265358979)</span><br><span class="line">			   (f (xval z11))</span><br><span class="line">			   (l11 (imag z11)/(2*pi*f))</span><br><span class="line">			   (q11 (imag z11)/(real z11))</span><br><span class="line">			   (l12 (imag z12)/(2*pi*f))</span><br><span class="line">			   (l22 (imag z22)/(2*pi*f))</span><br><span class="line">			   (q22 (imag z22)/(real z22))</span><br><span class="line">			   (k (get_k l12 l11*l22)))</span><br><span class="line">		    `((,l11 ,l22) (,q11 ,q22) (,k))))</span><br><span class="line">		&#x27;((&quot;L1&quot; &quot;L2&quot;) (&quot;Q1&quot; &quot;Q2&quot;) (&quot;k&quot;)))))</span><br></pre></td></tr></table></figure>
-<h2 id="tcoil-and-tapped-inductor">tcoil and tapped inductor</h2>
-<p>tcoil and tapped inductor share same EM simulation result, and use
-modelgen with different model formula.</p>
-<p>The relationship is <span class="math display">\[
-L_{\text{sim}} = L1_{\text{sim}}+L2_{\text{sim}}+2\times k_{\text{sim}}
-\times \sqrt{L1_{\text{sim}}\cdot L2_{\text{sim}}}
-\]</span> where <span class="math inline">\(L1_{\text{sim}}\)</span>,
-<span class="math inline">\(L2_{\text{sim}}\)</span> and <span
-class="math inline">\(k_{\text{sim}}\)</span> come from tcoil model
-result, <span class="math inline">\(L_{\text{sim}}\)</span> comes from
-tapped inductor model result</p>
-<blockquote>
-<p><span class="math inline">\(k_{\text{sim}}\)</span> in EMX have
-assumption, induce current from P1 and P2 Given Dot Convention:</p>
-<p>Same direction : k &gt; 0</p>
-<p>Opposite direction : k &lt; 0</p>
-<p>So, the <span class="math inline">\(k_{\text{sim}}\)</span> is
-negative if routing coil in same direction</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220623013225554.png"
-alt="image-20220623013225554" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220623013923263.png"
-alt="image-20220623013923263" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% EMX - shield tcoil model</span></span><br><span class="line">L1 = csvread(<span class="string">&#x27;./L1sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">L2 = csvread(<span class="string">&#x27;./L2sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">k = csvread(<span class="string">&#x27;./ksim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% EMX - Tapped shield inductor</span></span><br><span class="line">L = csvread(<span class="string">&#x27;./Lsim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">freq = L1(:, <span class="number">1</span>)/<span class="number">1e9</span>;    <span class="comment">% GHz</span></span><br><span class="line">L1 = L1(:, <span class="number">2</span>);</span><br><span class="line">L2 = L2(:, <span class="number">2</span>);</span><br><span class="line">k = -k(:, <span class="number">2</span>);   <span class="comment">% Caution: minus of EMX ksim due to same current direction</span></span><br><span class="line"></span><br><span class="line">L = L(:, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">Lcalc = L1 + L2 + <span class="number">2</span>*k.*(L1.*L2).^<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq, L*<span class="number">1e9</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(freq, Lcalc*<span class="number">1e9</span>, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Inductance (nH)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Tapped inductor model&#x27;</span>, <span class="string">&#x27;tcoil model calc&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="inverter-capacitance">Inverter capacitance</h2>
-<p><img src="/2022/03/17/tcoil/invCap.png" alt="invCap" /></p>
-<h2 id="reference">reference</h2>
-<p>B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE
-Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall
-2015.</p>
-<p>B. Razavi, "The Design of Broadband I/O Circuits [The Analog Mind],"
-IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2, pp. 6-15,
-Spring 2021.</p>
-<p>S. Galal and B. Razavi, "Broadband ESD protection circuits in CMOS
-technology," in IEEE Journal of Solid-State Circuits, vol. 38, no. 12,
-pp. 2334-2340, Dec. 2003, doi: 10.1109/JSSC.2003.818568.</p>
-<p>M. Ker and Y. Hsiao, "On-Chip ESD Protection Strategies for RF
-Circuits in CMOS Technology," 2006 8th International Conference on
-Solid-State and Integrated Circuit Technology Proceedings, 2006, pp.
-1680-1683, doi: 10.1109/ICSICT.2006.306371.</p>
-<p>M. Ker, C. Lin and Y. Hsiao, "Overview on ESD Protection Designs of
-Low-Parasitic Capacitance for RF ICs in CMOS Technologies," in IEEE
-Transactions on Device and Materials Reliability, vol. 11, no. 2, pp.
-207-218, June 2011, doi: 10.1109/TDMR.2011.2106129.</p>
-<p><a
-target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/29db/7f450d63eee941424655fb787de7d644a3c2.pdf">David
-J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers</a></p>
-<p><a target="_blank" rel="noopener" href="https://ibis.org/summits/feb11/ross.pdf">Bob Ross, "T-Coil
-Topics" DesignCon IBIS Summit 2011</a></p>
 
       
     </div>

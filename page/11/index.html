@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">183</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,513 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/18/ps-psd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/18/ps-psd/" class="post-title-link" itemprop="url">Power Spectra and Power Spectral Densities</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-18 23:53:29" itemprop="dateCreated datePublished" datetime="2022-04-18T23:53:29+00:00">2022-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-08 06:22:14" itemprop="dateModified" datetime="2023-08-08T06:22:14+00:00">2023-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>One will see the following phenomena:</p>
+<ol type="1">
+<li>A power spectrum is equal to the square of the absolute value of
+DFT.</li>
+<li>The sum of all power spectral lines in a power spectrum is equal to
+the power of the input signal.</li>
+<li>The integral of a PSD is equal to the power of the input
+signal.</li>
+</ol>
+<blockquote>
+<p>power spectrum has units of <span class="math inline">\(V^2\)</span>
+and power spectral density has units of <span
+class="math inline">\(V^2/Hz\)</span></p>
+</blockquote>
+<p><strong>Parseval's theorem</strong> is a property of the Discrete
+Fourier Transform (DFT) that states: <span class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2 = \frac{1}{N}\sum_{k=0}^{N-1}|X(k)|^2
+\]</span> Multiply both sides of the above by <span
+class="math inline">\(1/N\)</span>: <span class="math display">\[
+\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2 =
+\frac{1}{N^2}\sum_{k=0}^{N-1}|X(k)|^2
+\]</span> <span class="math inline">\(|x(n)|^2\)</span> is instantaneous
+power of a sample of the time signal. So the left side of the equation
+is just the <strong>average power</strong> of the signal over the N
+samples. <span class="math display">\[
+P_{\text{av}} = \frac{1}{N^2}\sum_{k=0}^{N-1}|X(k)|^2\text{,   }V^2
+\]</span> For the each DFT bin, we can say: <span
+class="math display">\[
+P_{\text{bin}}(k) = \frac{1}{N^2}|X(k)|^2\text{,
+k=0:N-1,  }V^2/\text{bin}
+\]</span> This is the power spectrum of the signal.</p>
+<p>Note that <span class="math inline">\(X(k)\)</span> is the
+<strong>two-sided spectrum</strong>. If <span
+class="math inline">\(x(n)\)</span> is real, then <span
+class="math inline">\(X(k)\)</span> is symmetric about <span
+class="math inline">\(fs/2\)</span>, with each side containing half of
+the power. In that case, we can choose to keep just the
+<strong>one-sided spectrum</strong>, and multiply Pbin by 2
+(<strong>except DC &amp; Nyquist</strong>):</p>
+<p><span class="math display">\[
+P_{\text{bin,one-sided}}(k) = \left\{ \begin{array}{cl}
+\frac{1}{N^2}|X(0)|^2 &amp; : \ k = 0 \\
+\frac{2}{N^2}|X(k)|^2 &amp; : \ 1 \leq k \leq N/2-1 \\
+\frac{1}{N^2}|X(N/2)|^2 &amp; : \ k = N/2
+\end{array} \right.
+\]</span></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rng default</span><br><span class="line">Fs = <span class="number">1000</span>;</span><br><span class="line">t = <span class="number">0</span>:<span class="number">1</span>/Fs:<span class="number">1</span><span class="number">-1</span>/Fs;</span><br><span class="line">x = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">100</span>*t) + <span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line">N = <span class="built_in">length</span>(x);</span><br><span class="line">xdft = fft(x);</span><br><span class="line">xsq_sum_avg = sum(x.^<span class="number">2</span>)/N;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(xdft).^<span class="number">2</span>)/N^<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>where <code>xsq_sum_avg</code> is same with
+<code>specsq_sum_avg</code></p>
+<blockquote>
+<p>For a discrete-time sequence x(n), the DFT is defined as: <span
+class="math display">\[
+X(k) = \sum_{n=0}^{N-1}x(n)e^{-j2\pi kn/N}
+\]</span> By it definition, the DFT does <strong>NOT</strong> apply to
+infinite duration signals.</p>
+</blockquote>
+<h2 id="scaling-dft-results">scaling DFT results</h2>
+<table>
+<thead>
+<tr class="header">
+<th>spectra type</th>
+<th>unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>amplitude spectrum</td>
+<td>V</td>
+</tr>
+<tr class="even">
+<td>power spectrum</td>
+<td>V^2</td>
+</tr>
+<tr class="odd">
+<td>power spectrum density</td>
+<td>V^2/Hz</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">Tutorial
+on Scaling of the Discrete Fourier Transform and the Implied Physical
+Units of the Spectra of Time-Discrete Signals <em>Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp</em></a></p>
+</blockquote>
+<p>Different scaling is needed to apply for amplitude spectrum, power
+spectrum and power spectrum density, which shown as below</p>
+<p><img src="/2022/04/18/ps-psd/image-20220427220639646.png"
+alt="image-20220427220639646" /></p>
+<blockquote>
+<p><span class="math inline">\(f_s\)</span> in Eq.(13) is <strong>sample
+rate</strong> rather than frequency resolution.</p>
+</blockquote>
+<p>And Eq.(13) can be expressed as <span class="math display">\[
+\text{PSD}(k) =\frac{1}{f_{\text{res}}\cdot
+N\sum_{n}w^2(n)}\left|X_{\omega}(k)\right|^2
+\]</span> where <span class="math inline">\(f_{\text{res}}\)</span> is
+frequency resolution</p>
+<p>We define the following two sums for normalization purposes:</p>
+<p><span class="math display">\[\begin{align}
+S_1 &amp;= \sum_{j=0}^{N-1}w_j \\
+S_2 &amp;= \sum_{j=0}^{N-1}w_j^2
+\end{align}\]</span></p>
+<p>Given Eq.(12) and Eq.(13) <span class="math display">\[\begin{align}
+\text{PS(k)} &amp;= \text{PSD(k)} \cdot \frac{f_s
+\sum_{n}w^2(n)}{(\sum_{n}\omega(n))^2} \\
+&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N
+\sum_{n}w^2(n)}{(\sum_{n}w(n))^2} \\
+&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N S_2}{S_1^2} \\
+&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \text{NENBW} \\
+&amp;= \text{PSD(k)} \cdot \text{ENBW}
+\end{align}\]</span></p>
+<p>where <strong>Normalized Equivalent Noise BandWidth</strong> is
+defined as <span class="math display">\[
+\text{NENBW} =\frac{N S_2}{S_1^2}
+\]</span> and <strong>Effective Noise BandWidth</strong> is <span
+class="math display">\[
+\text{ENBW} =f_{\text{res}} \cdot \frac{N S_2}{S_1^2}
+\]</span></p>
+<blockquote>
+<p>For Rectangular window, <span class="math inline">\(\text{ENBW}
+=f_{\text{res}}\)</span></p>
+<p>This <em>equivalent noise bandwidth</em> is required when the
+resulting spectrum is to be expressed as <em>spectral density (such as
+for noise measurements)</em>.</p>
+</blockquote>
+<p><em>Eq.(13) Example:</em></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Fs = <span class="number">1024</span>; </span><br><span class="line">t  = (<span class="number">0</span>:<span class="number">1</span>/Fs:<span class="number">1</span><span class="number">-1</span>/Fs).&#x27;; </span><br><span class="line">x  = <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*<span class="number">200</span>);</span><br><span class="line">Nx = <span class="built_in">length</span>(x);</span><br><span class="line"><span class="comment">% Window data</span></span><br><span class="line">w = hamming(Nx);	<span class="comment">% hamming window</span></span><br><span class="line">xw = x.*w; </span><br><span class="line"><span class="comment">% Calculate power</span></span><br><span class="line">nfft = Nx; </span><br><span class="line">X = fft(xw,nfft);</span><br><span class="line"></span><br><span class="line">NumUniquePts = nfft/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">Pxx1 = <span class="built_in">abs</span>(X(<span class="number">1</span>:NumUniquePts)).^<span class="number">2</span>/sum(w.^<span class="number">2</span>)/Fs;    <span class="comment">%!!! Eq.(13)</span></span><br><span class="line">Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Fx1 = (<span class="number">0</span>:NumUniquePts<span class="number">-1</span>)*Fs/nfft; </span><br><span class="line"></span><br><span class="line">[Pxx2,Fx2] = pwelch(x,w,<span class="number">0</span>,nfft,Fs);</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(Fx1,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx1),Fx2,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx2),<span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;PSD via Eq.(13)&#x27;</span>,<span class="string">&#x27;PSD via pwelch&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/04/18/ps-psd/image-20220514165525958.png"
+alt="image-20220514165525958" /></p>
+<h2 id="window-effects">window effects</h2>
+<p>It is possible to correct both the amplitude and energy content of
+the windowed signal to equal the original signal. However, both
+corrections cannot be applied simultaneously</p>
+<h3 id="amplitude-correction">Amplitude correction</h3>
+<p><em>Linear (amplitude) Spectrum</em> <span class="math display">\[
+X(k) = \frac{X_{\omega}(k)}{S_1}
+\]</span> <em>power spectrum</em> <span class="math display">\[
+\text{PS}=\frac{\left| X_{\omega}(k) \right|^2}{S_1^2}
+\]</span></p>
+<blockquote>
+<p>usage: tone amplitude</p>
+</blockquote>
+<h3 id="power-correction">Power correction</h3>
+<p><strong>power spectral density (PSD)</strong> <span
+class="math display">\[
+\text{PSD} =\frac{\left|X_{\omega}(k)\right|^2}{f_s\cdot S_2}
+\]</span></p>
+<blockquote>
+<p>We have <span class="math inline">\(\text{PSD} =
+\frac{\text{PS}}{\text{ENBW}}\)</span>, where <span
+class="math inline">\(\text{ENBW}=\frac{N \cdot
+S_2}{S_1^2}f_{\text{res}}\)</span></p>
+</blockquote>
+<p><strong>linear power spectrum</strong> <span class="math display">\[
+\text{PS}_L=\frac{|X_{\omega}(k)|^2}{N\cdot S_2}
+\]</span></p>
+<blockquote>
+<p>usage: RMS value, total power <span class="math display">\[
+\text{PS}_L(k)=\text{PSD(k)} \cdot f_{\text{res}}
+\]</span></p>
+</blockquote>
+<h3 id="window-correction-factors">Window Correction Factors</h3>
+<p>While a window helps reduce leakage (The window reduces the jumps at
+the ends of the repeated signal), the window itself distorts the data in
+two different ways:</p>
+<ul>
+<li><p><strong>Amplitude</strong> – The <em>amplitude</em> of the signal
+is reduced</p>
+<blockquote>
+<p>This is due to the fact that the window removes information in the
+signal</p>
+</blockquote></li>
+<li><p><strong>Energy</strong> – The <em>area</em> under the curve, or
+energy of the signal, is reduced</p></li>
+</ul>
+<p><img src="/2022/04/18/ps-psd/rtaImage.png" alt="rtaImage" /></p>
+<p><strong>Window correction factors</strong> are used to try and
+compensate for the effects of applying a window to data. There are both
+amplitude and energy correction factors.</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 43%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Window Type</th>
+<th>Amplitude Correction (<span class="math inline">\(K_a\)</span>)</th>
+<th>Energy Correction (<span class="math inline">\(K_e\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rectangluar</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td>hann</td>
+<td>1.9922</td>
+<td>1.6298</td>
+</tr>
+<tr class="odd">
+<td>blackman</td>
+<td>2.3903</td>
+<td>1.8155</td>
+</tr>
+<tr class="even">
+<td>kaiser</td>
+<td>1.0206</td>
+<td>1.0204</td>
+</tr>
+</tbody>
+</table>
+<p>Only the Uniform window (rectangular window), which is equivalent to
+no window, has the same amplitude and energy correction factors.</p>
+<p><span class="math display">\[\begin{align}
+X(k) &amp;= \frac{X_\omega(k)}{\sum_n w(n)} \\
+&amp;= \frac{N}{\sum_n w(n)} \frac{X_\omega(k)}{N} \\
+&amp;= K_a \cdot \frac{X_\omega(k)}{N}
+\end{align}\]</span> where <span class="math inline">\(K_a =
+\frac{N}{\sum_n \omega(n)}\)</span></p>
+<blockquote>
+<p>In literature, <strong>Coherent power gain</strong> is defined show
+below, which is close related to <span
+class="math inline">\(K_a\)</span> <span class="math display">\[
+\text{Coherent power gain (dB)} = 20 \; log_{10} \left( \frac{\sum_n
+w[n]}{N} \right)
+\]</span></p>
+</blockquote>
+<p><img src="/2022/04/18/ps-psd/amplitude-correction.png"
+alt="amplitude-correction" /></p>
+<blockquote>
+<p>With amplitude correction, by multiplying by two, the <em>peak
+value</em> of both the original and corrected spectrum match. However
+the energy content is not the same.</p>
+<p>The amplitude corrected signal (red) appears to have more energy, or
+area under the curve, than the original signal (blue).</p>
+</blockquote>
+<p><span class="math display">\[\begin{align}
+\text{PSD} &amp;=\frac{1}{f_{\text{res}}\cdot
+N\sum_{n}w^2(n)}\left|X_{\omega}(K)\right|^2 \\
+&amp;= \frac{N}{\sum_{n}w^2(n)}
+\frac{\left|X_{\omega}(K)\right|^2}{f_{\text{res}}\cdot N^2} \\
+&amp;=\left|K_e \cdot \frac{X_{\omega}(K)}{N}\right|^2 \cdot
+\frac{1}{f_{\text{res}}}
+\end{align}\]</span></p>
+<p>wherer <span class="math inline">\(K_e =
+\sqrt{\frac{N}{\sum_{n}\omega^2(n)}}\)</span></p>
+<p><img src="/2022/04/18/ps-psd/energey-correction.png"
+alt="energey-correction" /></p>
+<blockquote>
+<p>Multiplying the values in the spectrum by 1.63, rather than 2, makes
+the <em>area</em> under the curve the same for both the original signal
+(blue) and energy corrected signal (red)</p>
+</blockquote>
+<p><strong>hanning</strong>'s correction factors:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">256</span>;</span><br><span class="line">w = hanning(N);</span><br><span class="line">Ka = N/sum(w)</span><br><span class="line">Ke = <span class="built_in">sqrt</span>(N/sum(w.^<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Ka =</span><br><span class="line"></span><br><span class="line">    1.9922</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ke =</span><br><span class="line"></span><br><span class="line">    1.6298</span><br></pre></td></tr></table></figure>
+<p><strong>!!! Caution</strong>: <code>dft</code> and <code>psd</code>
+function in virtuoso</p>
+<ul>
+<li><p><code>dft</code> always return</p>
+<p><img src="/2022/04/18/ps-psd/image-20230525011604685.png"
+alt="image-20230525011604685" /></p></li>
+</ul>
+<p>To compensate windowing effect, <span
+class="math inline">\(W(n)\)</span>, the <code>dft</code> output should
+be multiplied by <span class="math inline">\(K_a\)</span>, e.g. 1.9922
+for hanning window.</p>
+<ul>
+<li><code>psd</code> function has taken into account <span
+class="math inline">\(K_e\)</span>, postprocessing is
+<strong>not</strong> needed</li>
+</ul>
+<h3 id="amplitudepower-correction-example">Amplitude,Power Correction
+Example</h3>
+<p><img src="/2022/04/18/ps-psd/image-20220518002927545.png"
+alt="image-20220518002927545" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 200 Hz, amplitude 1 and 200/3 Hz amplitude 0.3</span></span><br><span class="line">fosc = <span class="number">200</span>;</span><br><span class="line">Fs = <span class="number">8192</span>;</span><br><span class="line">Nx = Fs*<span class="number">4</span>;</span><br><span class="line">tstop = Nx/Fs;</span><br><span class="line">t  = (<span class="number">0</span>:<span class="number">1</span>/Fs:tstop<span class="number">-1</span>/Fs).&#x27;; </span><br><span class="line">x  = <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*fosc) + <span class="number">0.3</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*fosc/<span class="number">3</span>);</span><br><span class="line">Nx = <span class="built_in">length</span>(x);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% direct method, time domain</span></span><br><span class="line">P0 = sum(x.^<span class="number">2</span>)/Nx;</span><br><span class="line">xrms0 = <span class="built_in">sqrt</span>(P0);   <span class="comment">% RMS value caculated by time domain</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms0: %.4f\n&quot;</span>, xrms0);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% Window data</span></span><br><span class="line">w = hamming(Nx);	<span class="comment">% hamming window</span></span><br><span class="line"><span class="comment">%w = ones(Nx, 1);	% rectangular window</span></span><br><span class="line"></span><br><span class="line">S1= sum(w);</span><br><span class="line">S2 = sum(w.^<span class="number">2</span>);</span><br><span class="line">NENBW = Nx*S2/S1^<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">xw = x.*w; </span><br><span class="line">nfft = Nx; </span><br><span class="line">X = fft(xw,nfft);   <span class="comment">% windowed signal fft</span></span><br><span class="line">NumUniquePts = nfft/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">Fx1 = (<span class="number">0</span>:NumUniquePts<span class="number">-1</span>)*Fs/nfft;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% fft - ps -&gt; rms</span></span><br><span class="line">Xmag = <span class="built_in">abs</span>(X);</span><br><span class="line">PS1 = Xmag.^<span class="number">2</span>/S1^<span class="number">2</span>;    <span class="comment">%!!! Eq.(12)</span></span><br><span class="line">PS1 = PS1(<span class="number">1</span>:NumUniquePts);</span><br><span class="line">PS1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = PS1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Pmax_fft = <span class="built_in">max</span>(PS1);    <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;Pmax_fft: %.4f\n&quot;</span>, Pmax_fft);</span><br><span class="line"></span><br><span class="line"><span class="comment">% linear power spectrum</span></span><br><span class="line">PSL_fft = Xmag.^<span class="number">2</span>/nfft/S2;</span><br><span class="line">PSL_fft = PSL_fft(<span class="number">1</span>:NumUniquePts);</span><br><span class="line">PSL_fft = PSL_fft(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;</span><br><span class="line">Ptot_fft1 = sum(PSL_fft);</span><br><span class="line">xrms_PSL = <span class="built_in">sqrt</span>(Ptot_fft1); <span class="comment">% !!! power OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_PSL: %.4f\n&quot;</span>, xrms_PSL);</span><br><span class="line"></span><br><span class="line"><span class="comment">% use psd*fres to calculate total power</span></span><br><span class="line">Pxx1 = <span class="built_in">abs</span>(X(<span class="number">1</span>:NumUniquePts)).^<span class="number">2</span>/sum(w.^<span class="number">2</span>)/Fs;    <span class="comment">%!!! Eq.(13)</span></span><br><span class="line">Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Ptot_fft2 = sum(Pxx1*Fs/nfft);</span><br><span class="line">xrms_psd = <span class="built_in">sqrt</span>(Ptot_fft2);     <span class="comment">% !!! power OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_psd: %.4f\n&quot;</span>, xrms_psd);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%% pwelch</span></span><br><span class="line">[Pxx2,Fx2] = pwelch(x,w,<span class="number">0</span>,nfft,Fs);</span><br><span class="line">fres = Fx2(<span class="number">2</span>)-Fx2(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">PS2 = Pxx2*fres;</span><br><span class="line">Ptot_pwelch = sum(PS2);</span><br><span class="line">xrms_pwelch = <span class="built_in">sqrt</span>(Ptot_pwelch);    <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_pwelch: %.4f\n&quot;</span>, xrms_pwelch);</span><br><span class="line"></span><br><span class="line"><span class="comment">% PS = PSD * ENBW always hold</span></span><br><span class="line">ENBW = fres * NENBW;</span><br><span class="line">PS2_pwelch = Pxx2*ENBW;</span><br><span class="line">Pmax_pwelch = <span class="built_in">max</span>(PS2_pwelch);  <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;Pmax_pwelch: %.4f\n&quot;</span>, Pmax_pwelch);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot psd of two methods</span></span><br><span class="line"><span class="built_in">plot</span>(Fx1,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx1),Fx2,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx2),<span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;PSD via Eq.(13)&#x27;</span>,<span class="string">&#x27;PSD via pwelch&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB; V^2/Hz&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xrms0: 0.7383</span><br><span class="line">Pmax_fft: 0.5000</span><br><span class="line">xrms_PSL: 0.7382</span><br><span class="line">xrms_psd: 0.7382</span><br><span class="line">xrms_pwelch: 0.7382</span><br><span class="line">Pmax_pwelch: 0.5000</span><br></pre></td></tr></table></figure>
+<h2 id="rms">RMS</h2>
+<p>We may also want to know for example the RMS value of the signal, in
+order to know how much power the signal generates. This can be done
+using Parseval’s theorem.</p>
+<p>For a <strong>periodic</strong> signal, which has a discrete
+spectrum, we obtain its total RMS value by summing the included signals
+using <span class="math display">\[
+x_{\text{rms}}=\sqrt{\sum R_{xk}^2}
+\]</span> Where <span class="math inline">\(R_{xk}\)</span> is the RMS
+value of each sinusoid for <span
+class="math inline">\(k=1,2,3,...\)</span> The RMS value of a signal
+consisting of a number of sinusoids is consequently equal to <strong>the
+square root of the sum of the RMS values</strong>.</p>
+<p>This result could also be explained by noting that sinusoids of
+different frequencies are <strong>orthogonal</strong>, and can therefore
+be summed like vectors (using <em>Pythagoras’ theorem</em>)</p>
+<p>For a random signal we cannot interpret the spectrum in the same way.
+As we have stated earlier, the PSD of a random signal contains all
+frequencies in a particular frequency band, which makes it
+<em>impossible to add the frequencies up</em>. Instead, as the PSD is a
+density function, the correct interpretation is to sum the area under
+the PSD in a specific frequency range, which then is the square of the
+RMS, i.e., the mean-square value of the signal <span
+class="math display">\[
+x_{\text{rms}}=\sqrt{\int G_{xx}(f)df}=\sqrt{\text{area under the
+curve}}
+\]</span> The <strong>linear spectrum</strong>, or <strong>RMS
+spectrum</strong>, defined by <span class="math display">\[\begin{align}
+X_L(k) &amp;= \sqrt{\text{PSD(k)} \cdot f_{\text{res}}}\\
+&amp;=\sqrt{\frac{\left|X_{\omega}(k)\right|^2}{f_{\text{res}}\cdot
+N\sum_{n}\omega^2(n)} \cdot f_{\text{res}}} \\
+&amp;= \sqrt{\frac{\left|X_{\omega}(k)\right|^2}{N\sum_{n}\omega^2(n)}}
+\\
+&amp;= \sqrt{\frac{|X_{\omega}(k)|^2}{N\cdot S_2}}
+\end{align}\]</span></p>
+<p>The corresponding <strong>linear power spectrum</strong> or
+<strong>RMS power spectrum</strong> can be defined by <span
+class="math display">\[\begin{align}
+\text{PS}_L(k)&amp;=X_L(k)^2=\frac{|X_{\omega}(k)|^2}{S_1^2}\frac{S_1^2}{N\cdot
+S_2} \\
+&amp;=\text{PS}(k) \cdot \frac{S_1^2}{N\cdot S_2}
+\end{align}\]</span></p>
+<p>So, RMS can be calculated as below <span
+class="math display">\[\begin{align}
+P_{\text{tot}} &amp;= \sum \text{PS}_L(k) \\
+\text{RMS} &amp;= \sqrt{P_{\text{tot}}}
+\end{align}\]</span></p>
+<h2 id="dft-averaging">DFT averaging</h2>
+<p>we use <span class="math inline">\(N= 8*\text{nfft}\)</span> time
+samples of <span class="math inline">\(x\)</span> and set the number of
+overlapping samples to <span class="math inline">\(\text{nfft}/2 =
+512\)</span>. <code>pwelch</code> takes the DFT of <span
+class="math inline">\(\text{Navg} = 15\)</span> overlapping segments of
+<span class="math inline">\(x\)</span>, each of length <span
+class="math inline">\(\text{nfft}\)</span>, then averages the <span
+class="math inline">\(|X(k)|^2\)</span> of the DFT’s.</p>
+<p>In general, if there are an integer number of segments that cover all
+samples of N, we have <span class="math display">\[
+N = (N_{\text{avg}}-1)*D + \text{nfft}
+\]</span> where <span
+class="math inline">\(D=\text{nfft}-\text{noverlap}\)</span>. For our
+case, with <span class="math inline">\(D = \text{nfft}/2\)</span> and
+<span class="math inline">\(N/\text{nfft} = 8\)</span>, we have <span
+class="math display">\[
+N_{\text{avg}}=2*N/\text{nfft}-1=15
+\]</span> For a given number of time samples N, using overlapping
+segments lets us increase <span class="math inline">\(N_{avg}\)</span>
+compared with no overlapping. In this case, overlapping of 50% increases
+<span class="math inline">\(N_{avg}\)</span> from 8 to 15. Here is the
+Matlab code to compute the spectrum:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nfft= <span class="number">1024</span>;</span><br><span class="line">N= nfft*<span class="number">8</span>;                                <span class="comment">% number of samples in signal</span></span><br><span class="line">n= <span class="number">0</span>:N<span class="number">-1</span>;</span><br><span class="line">x= A*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*f0*n*Ts) + <span class="number">.1</span>*<span class="built_in">randn</span>(<span class="number">1</span>,N);   <span class="comment">% 1 W sinewave + noise</span></span><br><span class="line">noverlap= nfft/<span class="number">2</span>;                         <span class="comment">% number of overlapping time samples</span></span><br><span class="line">window= hanning(nfft);</span><br><span class="line">[pxx,f]= pwelch(x,window,noverlap,nfft,fs);  <span class="comment">% W/Hz  PSD</span></span><br><span class="line">PdB_bin= <span class="number">10</span>*<span class="built_in">log10</span>(pxx*fs/nfft);              <span class="comment">% dBW/bin</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/04/18/ps-psd/figure%203_99153.png"
+alt="figure 3_99153" /></p>
+<blockquote>
+<p><strong>DFT averaging</strong> reduces the variance <span
+class="math inline">\(\sigma^2\)</span> of the noise spectrum by a
+factor of <span class="math inline">\(N_{avg}\)</span>, as long as
+<code>noverlap</code> is not greater than <code>nfft/2</code></p>
+</blockquote>
+<p><img src="/2022/04/18/ps-psd/image-20220420013255660.png"
+alt="image-20220420013255660" /></p>
+<p><img src="/2022/04/18/ps-psd/image-20230526011628682.png"
+alt="image-20230526011628682" /></p>
+<h2 id="fftshift">fftshift</h2>
+<p>The result of <code>fft</code> and its index is shown as below</p>
+<p><img src="/2022/04/18/ps-psd/complexDFT_Matlab_index.png"
+alt="complexDFT_Matlab_index" /></p>
+<p>After <code>fftshift</code></p>
+<p><img src="/2022/04/18/ps-psd/FFTshift_Matlab_index_resolved.png"
+alt="FFTshift_Matlab_index_resolved" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; fftshift([<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">     <span class="number">4</span>     <span class="number">5</span>     <span class="number">6</span>     <span class="number">1</span>     <span class="number">2</span>     <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/liangsizhuang/Demonstration-DFT-PS-PSD">Demonstration-DFT-PS-PSD</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.mathworks.com/help/signal/ug/power-spectral-density-estimates-using-fft.html">mathworks,
+Power Spectral Density Estimates Using FFT</a></p>
+<p>Lyons, Richard, “Widowing Functions Improve FFT Results”, EDN, June
+1, 1998.
+https://www.edn.com/electronics-news/4383713/Windowing-Functions-Improve-FFT-Results-Part-I</p>
+<p>Rapuano, Sergio, and Harris, Fred J., An Introduction to FFT and Time
+Domain Windows, IEEE Instrumentation and Measurement Magazine, December,
+2007. https://ieeexplore.ieee.org/document/4428580</p>
+<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1004.php">Neil
+Robertson, The Power Spectrum</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1221.php">Neil
+Robertson, Use Matlab Function pwelch to Find Power Spectral Density –
+or Do It Yourself</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1211.php">Neil
+Robertson, Evaluate Window Functions for the Discrete Fourier
+Transform</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.gaussianwaves.com/2015/11/interpreting-fft-results-complex-dft-frequency-bins-and-fftshift/">Mathuranathan
+Viswanathan, Interpret FFT, complex DFT, frequency bins &amp;
+FFTShift</a></p>
+<p><a target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/47603/59253">robert
+bristow-johnson, Does windowing affect Parseval's theorem?</a></p>
+<p>Heinzel, Gerhard, A. O. Rüdiger and Roland Schilling. "Spectrum and
+spectral density estimation by the Discrete Fourier transform (DFT),
+including a comprehensive list of window functions and some new at-top
+windows." (2002). URL: <a
+target="_blank" rel="noopener" href="https://holometer.fnal.gov/GH_FFT.pdf">https://holometer.fnal.gov/GH_FFT.pdf</a></p>
+<p>Window Correction Factors URL: <a
+target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/window-correction-factors">https://community.sw.siemens.com/s/article/window-correction-factors</a></p>
+<p>Brandt, A, 2011. Noise and vibration analysis: signal analysis and
+experimental procedures. John Wiley &amp; Sons</p>
+<p>What should be the correct scaling for PSD calculation using fft.
+URL:<a
+target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/32205">https://dsp.stackexchange.com/a/32205</a></p>
+<p>POWER SPECTRAL DENSITY CALCULATION VIA MATLAB Revision C. URL: <a
+target="_blank" rel="noopener" href="http://www.vibrationdata.com/tutorials_alt/psd_mat.pdf">http://www.vibrationdata.com/tutorials_alt/psd_mat.pdf</a></p>
+<p>Jens Ahrens, Carl Andersson, Patrik Höstmad, Wolfgang Kropp,
+“Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals” in 148th
+Convention of the AES, e-Brief 56, May 2020 [ <a
+target="_blank" rel="noopener" href="http://www.soundfieldsynthesis.org/wp-content/uploads/pubs/Ahrens_etal_AES2020.pdf">pdf</a>,
+<a
+target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">web</a>
+].</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +733,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:09" itemprop="dateModified" datetime="2023-08-04T09:57:09+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:13" itemprop="dateModified" datetime="2023-08-08T06:22:13+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -642,7 +1149,7 @@ capacitance</strong></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:09" itemprop="dateModified" datetime="2023-08-04T09:57:09+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:13" itemprop="dateModified" datetime="2023-08-08T06:22:13+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -827,7 +1334,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:10" itemprop="dateModified" datetime="2023-08-04T09:57:10+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:14" itemprop="dateModified" datetime="2023-08-08T06:22:14+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -921,7 +1428,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:09" itemprop="dateModified" datetime="2023-08-04T09:57:09+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:13" itemprop="dateModified" datetime="2023-08-08T06:22:13+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1071,7 +1578,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:10" itemprop="dateModified" datetime="2023-08-04T09:57:10+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:14" itemprop="dateModified" datetime="2023-08-08T06:22:14+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1278,7 +1785,7 @@ alt="image-20220404195156776" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:09" itemprop="dateModified" datetime="2023-08-04T09:57:09+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:13" itemprop="dateModified" datetime="2023-08-08T06:22:13+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1441,7 +1948,7 @@ alt="image-20220403212529981" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:10" itemprop="dateModified" datetime="2023-08-04T09:57:10+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:14" itemprop="dateModified" datetime="2023-08-08T06:22:14+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1942,7 +2449,7 @@ FIFOs</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:09" itemprop="dateModified" datetime="2023-08-04T09:57:09+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:13" itemprop="dateModified" datetime="2023-08-08T06:22:13+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2086,7 +2593,7 @@ possible without cloning.</p></li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:10" itemprop="dateModified" datetime="2023-08-04T09:57:10+00:00">2023-08-04</time>
+      <time title="Modified: 2023-08-08 06:22:14" itemprop="dateModified" datetime="2023-08-08T06:22:14+00:00">2023-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2121,110 +2628,6 @@ alt="image-20220401011509900" /></p>
 <p><img
 src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
 alt="image-20220401011543866" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/28/complex-uvm-topo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/28/complex-uvm-topo/" class="post-title-link" itemprop="url">complex uvm project topology</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-28 20:33:44" itemprop="dateCreated datePublished" datetime="2022-03-28T20:33:44+00:00">2022-03-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-04 09:57:09" itemprop="dateModified" datetime="2023-08-04T09:57:09+00:00">2023-08-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
-alt="topo.drawio" /></p>
-<h2 id="compile">compile</h2>
-<ul>
-<li><code>-incdir</code> for all UVC's `<code>include</code></li>
-<li>all pkg.sv</li>
-<li>all if.sv</li>
-<li>all RTL DUT</li>
-<li>uvm top module</li>
-</ul>
-<h2 id="uvm-top.sv">uvm top.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
-<h2 id="rtl-top">RTL top</h2>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="pkg.sv">pkg.sv</h2>
-<p>`<code>include</code> all related uvm class in
-<strong>pgk.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
-<h2 id="if.sv">if.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
 
       
     </div>

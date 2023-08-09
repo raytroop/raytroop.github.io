@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,128 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/01/multicycle-paths/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/01/multicycle-paths/" class="post-title-link" itemprop="url">Multicycle Paths Constraints in PrimeTime</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-01 21:44:30" itemprop="dateCreated datePublished" datetime="2022-03-01T21:44:30+00:00">2022-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>PrimeTime <em>does not</em> automatically identifies multicycle
+paths.</p>
+<h4 id="specifying-multicycle-path-for-setup">specifying multicycle path
+for setup</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set_multicycle_path <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">set_multicycle_path -setup <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># check the exception</span></span><br><span class="line">report_exception</span><br></pre></td></tr></table></figure>
+<h4
+id="specifying-multicycle-path-for-hold-new-data-every-6-cycles">specifying
+multicycle path for hold (new data every 6 cycles)</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set_multicycle_path -setup <span class="number">6</span> -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br><span class="line">set_multicycle_path -hold [<span class="keyword">expr</span> <span class="number">6</span><span class="number">-1</span>] -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/01/multicycle-paths/image-20220301215938296.png"
+alt="image-20220301215938296" /></p>
+<p>M<sub>H</sub> stands for Hold Multiplier, M<sub>S</sub> for Setup
+Multiplier. The Setup multiplier counts up with increasing clock cycles,
+the Hold Multiplier counts up with decreasing cycles. The origin (0) for
+the Hold Multiplier is always at the <code>Setup Multiplier - 1</code>
+position.</p>
+<h4 id="reporting-a-multicycle-path-with-report_timing">Reporting a
+multicycle path with report_timing</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">report_timing -exceptions all -from *reg[<span class="number">26</span>]/CP -to *reg/D</span><br></pre></td></tr></table></figure>
+<h4 id="timing-exceptions">Timing Exceptions</h4>
+<p>If certain paths are <strong>not</strong> intended to operate
+according to <em>the default setup and hold behavior assumed by the
+PrimeTime tool</em>, you need to specify those paths as timing
+exceptions. Otherwise, the tool might incorrectly report those paths as
+having timing violations.</p>
+<p>The PrimeTime tool lets you specify the following types of
+exceptions:</p>
+<ul>
+<li>False path – A path that is never sensitized due to the logic
+configuration, expected data sequence, or operating mode.</li>
+<li>Multicycle path – A path designed to take more than one clock cycle
+from launch to capture.</li>
+<li>Minimum or maximum delay path – A path that must meet a delay
+constraint that you explicitly specify as a time value.</li>
+</ul>
+<h4 id="ref">REF</h4>
+<p>PrimeTime® User Guide Version O-2018.06-SP4 Chapter 1: Introduction
+to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +348,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:52" itemprop="dateModified" datetime="2023-08-08T16:27:52+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -337,7 +459,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:52" itemprop="dateModified" datetime="2023-08-08T16:27:52+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -453,7 +575,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -577,7 +699,7 @@ alt="cascode_compensation" /> <span class="math display">\[\begin{align}
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:12" itemprop="dateModified" datetime="2023-08-09T16:41:12+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -702,7 +824,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:52" itemprop="dateModified" datetime="2023-08-08T16:27:52+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -804,7 +926,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:52" itemprop="dateModified" datetime="2023-08-08T16:27:52+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1319,7 +1441,7 @@ Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:12" itemprop="dateModified" datetime="2023-08-09T16:41:12+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1434,7 +1556,7 @@ threads</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:52" itemprop="dateModified" datetime="2023-08-08T16:27:52+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1554,7 +1676,7 @@ variant, the it is defined as a subsequence and its
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1617,110 +1739,6 @@ CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference
 (CICC), 2018, pp. 1-8, doi: 10.1109/CICC.2018.8357060.</p>
 <p>Stacked MOSFETs in analog layout <a
 target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analog-layout/">https://pulsic.com/stacked-mosfets-in-analog-layout/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/15/sc_sigdet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/15/sc_sigdet/" class="post-title-link" itemprop="url">switched-capacitor circuit in signal detection circuit</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-15 16:43:13" itemprop="dateCreated datePublished" datetime="2022-02-15T16:43:13+00:00">2022-02-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/2022/02/15/sc_sigdet/sc_sigdet.drawio.svg"
-alt="sc_sigdet.drawio" /></p>
-<p><strong>phase I</strong></p>
-<p><span class="math display">\[\begin{align}
-Q_a &amp;= (V_{a0} - 0.5*(V_{ip} + V_{im}))*C + (V_{a0} - V_{th})*C \\
-Q_b &amp;= (V_{b0} - 0.5*(V_{ip} + V_{im}))*C + V_{b0}*C
-\end{align}\]</span></p>
-<p><strong>Phase II</strong></p>
-<p><span class="math display">\[\begin{align}
-Q_a &amp;= (V_{a} - V_{ip})*C + (V_{a} - V_{b})*0.5C \\
-Q_b &amp;= (V_{b} - V_{im})*C + (V_{b} - V_{a})*0.5C
-\end{align}\]</span></p>
-<p><strong>With the law of charge conservation, we get</strong></p>
-<p><span class="math display">\[\begin{equation}
-V_a - V_b = (V_{a0} - V_{b0}) + 0.5*(V_{ip} - V_{im} - V_{th})
-\end{equation}\]</span></p>
-<p><strong>REF:</strong></p>
-<p>D. A. Yokoyama-Martin et al., "A Multi-Standard Low Power 1.5-3.125
-Gb/s Serial Transceiver in 90nm CMOS," IEEE Custom Integrated Circuits
-Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
 
       
     </div>

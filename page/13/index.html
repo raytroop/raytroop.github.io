@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,161 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/phasenoise-2-jitter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/17/phasenoise-2-jitter/" class="post-title-link" itemprop="url">From phase noise to Jitter</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-17 18:58:38" itemprop="dateCreated datePublished" datetime="2022-03-17T18:58:38+00:00">2022-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-09 16:41:12" itemprop="dateModified" datetime="2023-08-09T16:41:12+00:00">2023-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>The <strong>phase noise</strong> is traditionally defined as the
+ratio of the power of the signal in 1Hz bandwidth at offset <span
+class="math inline">\(f\)</span> from the carrier <span
+class="math inline">\(P\)</span>, divided by the power of the carrier
+<span class="math display">\[
+\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
+<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
+\geqslant 0\)</span></p>
+<p>Under <strong>narrow angle assumption</strong> <span
+class="math display">\[
+S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
++\infty\right]\)</span></p>
+<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
+the variance of the absolute jitter(<span
+class="math inline">\(J_{ee}\)</span>)via integration of the
+corresponding PSD <span class="math display">\[
+J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
+\]</span></p>
+<p>And we know the relationship between absolute jitter and excess phase
+is <span class="math display">\[
+J_{ee}=\frac {\varphi}{\omega_0}
+\]</span> Considering that phase noise is normally symmetrical about the
+zero frequency, multiplied by <strong>two</strong> is shown as below
+<span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
+\]</span> where phase noise is in linear units not in logarithmic
+ones.</p>
+<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
+unit (<em>dBc</em>), we have to convert the unit before applying the
+above equation <span class="math display">\[
+\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
+\]</span> The complete equation using the simulation result of
+<em>Spectre-RF Pnoise</em> is <span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
+[dBc/Hz]}{10}}df}}{\omega_0}
+\]</span></p>
+<p>The above equation has been verified for <em>sampled pnoise</em>,
+i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
+<blockquote>
+<ul>
+<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
+Function: Jee:Integration Limits</em> can calculate it conveniently</li>
+<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
+below equation to get RMS jitter.</li>
+</ul>
+</blockquote>
+<p>One example, integrate to <span
+class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
+class="math inline">\(f_{osc} = 16GHz\)</span></p>
+<p><img
+src="/2022/03/17/phasenoise-2-jitter/image-20220415100034220.png"
+alt="image-20220415100034220" /></p>
+<p>Of course, it apply to conventional pnoise simulation.</p>
+<p>On the other hand, output rms voltage noise, <span
+class="math inline">\(V_{out,rms}\)</span> divied by slope should be
+close to <span class="math inline">\(J_{ee,rms}\)</span> <span
+class="math display">\[
+J_{ee,rms} = \frac {V_{out,rms}}{slope}
+\]</span></p>
+<p><strong>reference</strong>:</p>
+<p>Nicola Da Dalt and Ali Sheikholeslami. 2018. Understanding Jitter and
+Phase Noise: A Circuits and Systems Perspective (1st. ed.). Cambridge
+University Press, USA.</p>
+<p>Kester, Walt. (2005). Converting Oscillator Phase Noise to Time
+Jitter. [<a
+target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-seminars/tutorials/MT-008.pdf">pdf</a>]</p>
+<p>Drakhlis, B.. (2001). Calculate oscillator jitter by using
+phase-noise analysis: Part 2 of two parts. Microwaves and Rf. 40.
+109-119.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +381,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:12" itemprop="dateModified" datetime="2023-08-09T16:41:12+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -398,7 +553,7 @@ Topics" DesignCon IBIS Summit 2011</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -561,7 +716,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:12" itemprop="dateModified" datetime="2023-08-09T16:41:12+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -702,7 +857,7 @@ together
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -804,7 +959,7 @@ alt="lock_range" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1409,7 +1564,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:12" itemprop="dateModified" datetime="2023-08-09T16:41:12+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1645,7 +1800,7 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:11" itemprop="dateModified" datetime="2023-08-09T16:41:11+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1806,7 +1961,7 @@ Transceivers"</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:12" itemprop="dateModified" datetime="2023-08-09T16:41:12+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2016,7 +2171,7 @@ off.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
+      <time title="Modified: 2023-08-09 16:41:12" itemprop="dateModified" datetime="2023-08-09T16:41:12+00:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2380,316 +2535,6 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
 <h6 id="uvm_path_e">uvm_path_e</h6>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_path_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Path used for register operation</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_FRONTDOOR    - Use the front door</span></span><br><span class="line"><span class="comment">// UVM_BACKDOOR     - Use the back door</span></span><br><span class="line"><span class="comment">// UVM_PREDICT      - Operation derived from observations by a bus monitor via</span></span><br><span class="line"><span class="comment">//                    the &lt;uvm_reg_predictor&gt; class.</span></span><br><span class="line"><span class="comment">// UVM_DEFAULT_PATH - Operation specified by the context</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_FRONTDOOR,</span><br><span class="line">      UVM_BACKDOOR,</span><br><span class="line">      UVM_PREDICT,</span><br><span class="line">      UVM_DEFAULT_PATH</span><br><span class="line">   &#125; uvm_path_e;</span><br></pre></td></tr></table></figure>
 <h5 id="passive-prediction">Passive Prediction</h5>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/09/spf-complex-pwl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/09/spf-complex-pwl/" class="post-title-link" itemprop="url">Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-09 23:40:23" itemprop="dateCreated datePublished" datetime="2022-03-09T23:40:23+00:00">2022-03-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-08 16:27:53" itemprop="dateModified" datetime="2023-08-08T16:27:53+00:00">2023-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Real number modeling</strong> of analog circuits in hardware
-description languages (HDLs) has become more common as a part of
-mixed-signal SoC validation. <strong>Piecewise linear (PWL)</strong>
-waveform approximation represent analog signals and <strong>dynamically
-schedule the events</strong> for approximating the signal waveform to
-PWL segments with a well controlled error bound.</p>
-<p><img src="/2022/03/09/spf-complex-pwl/image-20220310000010013.png"
-alt="image-20220310000010013" /></p>
-<p>Definition of a piecewise liner (PWL) waveform using struct in
-Systemverilog</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="keyword">real</span> y; <span class="comment">// signal offset</span></span><br><span class="line">    <span class="keyword">real</span> slope; <span class="comment">// signal slope</span></span><br><span class="line">    <span class="keyword">real</span> t0;	<span class="comment">// time offset</span></span><br><span class="line">&#125; pwl; <span class="comment">// pwl datatype</span></span><br></pre></td></tr></table></figure>
-<h4 id="when-to-update-piecewise-model">When to update piecewise
-model</h4>
-<ol type="1">
-<li>model parameter update once new input come in</li>
-<li>error is greater than user-define tolerance <span
-class="math inline">\(e_{tol}\)</span>, trigger by <span
-class="math inline">\(\Delta T\)</span></li>
-</ol>
-<p><img src="/2022/03/09/spf-complex-pwl/tolerance_error.drawio.svg"
-alt="tolerance_error.drawio" /></p>
-<h4 id="dynamic-time-step-control">Dynamic Time Step Control</h4>
-<p>When approximating a function <span
-class="math inline">\(y(t)\)</span> to a <strong>piecewise linear
-segment</strong> for the interval <span class="math inline">\(t_0 \le
-t_0 + \Delta t\)</span>, the approximation error <span
-class="math inline">\(err\)</span> is bounded by <span
-class="math display">\[
-\left| err \right| \le \frac{1}{8}\cdot \Delta t^2 \cdot \max(\left|
-\ddot{y(t)} \right|)
-\]</span> Using Rolle's theorem for the interval <span
-class="math inline">\(t_0 \le t_0 + \Delta t\)</span>, the needed time
-step <span class="math inline">\(\Delta t\)</span> is givend by <span
-class="math display">\[
-\Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\max(\left| \ddot{y(t)}
-\right|)}}
-\]</span></p>
-<h4 id="single-pole-filter-model">Single-Pole Filter Model</h4>
-<p>The <strong>ramp</strong> input <span
-class="math inline">\(X(s)\)</span>, the single pole system Laplace
-s-domain <span class="math inline">\(H(s)\)</span> and the output
-response <span class="math inline">\(Y(s)\)</span>, <span
-class="math display">\[\begin{align}
-X(s) &amp;= \frac{a}{s} +\frac{b}{s^2} \\
-H(s) &amp;= \frac{Y(s)}{X(s)} = \frac{1}{1+\frac{s}{\omega_{1}}} \\
-Y(s) &amp;= X(s) \cdot H(s)
-\end{align}\]</span></p>
-<p>Time domain of ramp input shown as below <span
-class="math display">\[
-x(t) = a +b \cdot t
-\]</span></p>
-<ol type="1">
-<li>The output transfer function <span
-class="math display">\[\begin{align}
-Y(s) &amp;= X(s) \cdot H(s) \\
-&amp;= \frac{\omega_1}{\omega_1+s}\cdot X
-\end{align}\]</span> <span class="math display">\[
-Y\omega_1 + sY = \omega_1 X
-\]</span></li>
-<li>its differential equation <span class="math display">\[
-y(t) \cdot \omega_1+\frac{d y(t)}{dt} = \omega_1 \cdot x(t)
-\]</span></li>
-<li>Laplace transfrom two side of the above equation, <span
-class="math inline">\(y_0\)</span> is initial conditon of output, <span
-class="math inline">\(x_0=0\)</span> <span class="math display">\[
-Y\omega_1 + sY-y_0 = \omega_1 \cdot X
-\]</span> Solving <span class="math inline">\(Y(s)\)</span> <span
-class="math display">\[\begin{align}
-Y &amp;= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot X \\
-&amp;= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot
-(\frac{a}{s}+\frac{b}{s^2}) \\
-&amp;= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot
-\frac{a}{s}+\frac{\omega_1}{\omega_1+s}\cdot\frac{b}{s^2}
-\end{align}\]</span></li>
-<li>inverse Laplace transform <span class="math display">\[
-y(t) = y_0e^{-\omega_1t}+(a-a\cdot e^{-\omega_1t})+(b\cdot
-t-\frac{b}{\omega_1}+\frac{b}{\omega_1}\cdot e^{-\omega_1 t})
-\]</span></li>
-</ol>
-<blockquote>
-<p>step-1 transfer function in Laplace s-domain, which
-<strong>don't</strong> initial conditon and is only steady response.</p>
-<p>step-2 differential equation</p>
-<p>step-3 Laplace transform of <span
-class="math inline">\(Y(s)\)</span>, (the initial conditon of input
-<span class="math inline">\(X(s)\)</span> is zero, that of <span
-class="math inline">\(Y(s)\)</span> is explicit)</p>
-<p>step-4 inverse Laplace transform, with the help of Laplace transform
-table or matlab <code>syms</code> and <code>ilaplace</code> function</p>
-</blockquote>
-<p><span class="math inline">\(y(t)\)</span> has a continuous second
-derivative <span class="math inline">\(\ddot{y(t)}\)</span> <span
-class="math display">\[
-\ddot{y(t)} =(-a+\frac{b}{\omega_1}+y_0)\cdot \omega_1^2\cdot
-e^{-\omega_1t}
-\]</span> It's obvious <span class="math inline">\(\left| \ddot{y(t)}
-\right|\)</span> is a decaying function and thus the maximum value is
-<span class="math inline">\(\left| \ddot{y(t_0)} \right|\)</span> for
-the interval <span class="math inline">\(t_0 \le t_0 + \Delta
-t\)</span>. The time step <span class="math inline">\(\Delta t\)</span>
-for the error tolerance <span class="math inline">\(e_{tol}\)</span>:
-<span class="math display">\[
-\Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\left| \ddot{y(t_0)}
-\right|}}
-\]</span></p>
-<h4 id="complex-conjugate-pole-pair">Complex Conjugate Pole pair</h4>
-<p><span class="math display">\[
-H(s) = \frac{r}{s+\omega_p} + \frac{r^*}{s+\omega_p^*}
-\]</span></p>
-<p>where <span class="math inline">\(\omega_p\)</span> and <span
-class="math inline">\(r\)</span> are complex numbers, <span
-class="math inline">\(r=r_r+jr_i\)</span>, <span
-class="math inline">\(\omega_p=\omega_{pr}+j\omega_{pi}\)</span></p>
-<p>Follow the procedure as above single pole <span
-class="math display">\[
-\frac{Y(s)}{X(s)} = \frac{s\cdot r_{cs}+e}{s^2+s\cdot \omega_{p\_cs}+f}
-\]</span> where <span class="math inline">\(r_{cs}=r+r^*\)</span>, <span
-class="math inline">\(\omega_{p\_cs}=\omega_p+\omega_p^*\)</span> and
-<span class="math inline">\(e=r\omega_p^*+r^*\omega_p\)</span>, <span
-class="math inline">\(f=\omega_p\omega_p^*\)</span> implies <span
-class="math display">\[
-s^2Y(s)+s\omega_{p\_cs}Y(s)+fY(s)=(s\cdot r_{cs}+e)X(s)
-\]</span> or a differential equation <span class="math display">\[
-\frac{d^2y(t)}{dt^2}+\omega_{p\_cs}\frac{dy(t)}{dt}+fy(t)=r_{cs}\frac{dx(t)}{dt}+e\cdot
-x(t)
-\]</span> Taking Laplace transform with initial conditions <span
-class="math inline">\(y_0\)</span>, <span
-class="math inline">\(\dot{y_0}\)</span> and <span
-class="math inline">\(x_0=0\)</span>, <span class="math display">\[
-s^2-sy_0-\dot{y_0}+\omega_{p\_cs}(sY(s)-y_0)+f\cdot y(t) = r_{cs}\cdot
-(sX(s)-0)+e\cdot X(s)
-\]</span> Solving for <span class="math inline">\(Y(s)\)</span> <span
-class="math display">\[
-Y(s)=\frac{s\cdot
-y_0+\dot{y_0}+\omega_{p\_cs}y_0}{s^2+s\cdot{\omega_{p\_cs}}+f}+\frac{s\cdot{r_{cs}}+e}{s^2+s\cdot{\omega_{p\_cs}}+f}X(s)
-\]</span> With an ramp input, height <span
-class="math inline">\(a\)</span>, slope <span
-class="math inline">\(b\)</span>, i.e. <span
-class="math inline">\(X(s)=\frac{a}{s}+\frac{b}{s^2}\)</span> <span
-class="math display">\[
-Y(s)=\frac{s\cdot
-y_0+\dot{y_0}+\omega_{p\_cs}y_0}{s^2+s\cdot{\omega_{p\_cs}}+f}+\frac{s\cdot{r_{cs}}+e}{s^2+s\cdot{\omega_{p\_cs}}+f}(\frac{a}{s}+\frac{b}{s^2})
-\]</span> After inverse Laplace transform, we can get total response
-<span class="math display">\[
-y(t)=e^{-\omega_{pr}t}\cdot \left[ y_0\cdot
-\cos(\omega_{pi}t)+\frac{\dot{y_0}+y_0\omega_{pr}}{\omega_{pi}}\sin(\omega_{pi}t)+D\cdot
-\cos(\omega_{pi}t)+\frac{C-D\cdot{\omega_{pr}}}{\omega_{pi}}\sin(\omega_{pi}t)
-\right]+B+A\cdot{t}
-\]</span> where <span class="math display">\[\begin{align}
-A &amp;= \frac{e\cdot{b}}{f} \\
-B &amp;= \frac{r_{cs}\cdot{b}+a\cdot{e}-A\cdot{\omega_{p\_{cs}}}}{f} \\
-C &amp;= a\cdot{r_{cs}}-A-B\cdot{\omega_{p\_cs}} \\
-D &amp;= -B
-\end{align}\]</span></p>
-<p>As a double check, note that at <span
-class="math inline">\(t=0\)</span>, <span class="math display">\[
-y(0)=\left[ y_0 + D \right]+B=y_0
-\]</span></p>
-<p>To derive derivative, we first assume <span class="math display">\[
-y_0\cdot
-\cos(\omega_{pi}t)+\frac{\dot{y_0}+y_0\omega_{pr}}{\omega_{pi}}\sin(\omega_{pi}t)+D\cdot
-\cos(\omega_{pi}t)+\frac{C-D\cdot{\omega_{pr}}}{\omega_{pi}}\sin(\omega_{pi}t)
-= \alpha \cdot{\cos(\omega_{pi}t+\phi)}
-\]</span> The above equation implies <span
-class="math display">\[\begin{align}
-y_0+D &amp;= \alpha\cdot{\cos(\phi)} \\
-\frac{\dot{y_0}+y_0\omega_{pr}}{\omega_{pi}}+\frac{C-D\cdot{\omega_{pr}}}{\omega_{pi}}
-&amp;= -\alpha\cdot{\sin(\phi)}
-\end{align}\]</span> Then <span class="math display">\[
-\alpha^2=(y_0+D)^2+\left(\frac{\dot{y_0}+y_0\omega_{pr}}{\omega_{pi}}+\frac{C-D\cdot{\omega_{pr}}}{\omega_{pi}}
-\right)^2
-\]</span> And <span class="math inline">\(\alpha\)</span> can be used to
-estimate time step size. The total response is <span
-class="math display">\[
-y(t)=e^{-\omega_{pr}t}\cdot \alpha
-\cdot{\cos(\omega_{pi}t+\phi)}+B+A\cdot{t}
-\]</span> It's second derivative is <span class="math display">\[
-\ddot{y(t)} = \alpha\left[
-(\omega_{pr}^2-\omega_{pi}^2)e^{-\omega_{pr}t}\cos(\omega_{pi}t+\phi)+2\cdot
-\omega_{pr}\omega_{pi}e^{-\omega_{pr}t}\sin(\omega_{pi}t+\phi) \right]
-\]</span> Absolute value <span class="math display">\[
-\left| \ddot{y(t)} \right| = \left| \alpha \right| \left|
-(\omega_{pr}^2-\omega_{pi}^2)e^{-\omega_{pr}t}\cos(\omega_{pi}t+\phi)+2\cdot
-\omega_{pr}\omega_{pi}e^{-\omega_{pr}t}\sin(\omega_{pi}t+\phi) \right|
-\]</span> Define new function <span
-class="math inline">\(g_0(t)\)</span> <span class="math display">\[
-g_0(t) = \left| \alpha \right| \left|
-(\omega_{pr}^2-\omega_{pi}^2)e^{-\omega_{pr}t}\cos(\omega_{pi}t+\phi)
-\right|+2\cdot |\alpha| \left|
-\omega_{pr}\omega_{pi}e^{-\omega_{pr}t}\sin(\omega_{pi}t+\phi) \right|
-\]</span> another new funtion <span
-class="math inline">\(g_1(t)\)</span>, by equating <span
-class="math inline">\(\sin(\omega_{pi}t+\phi)\)</span> and <span
-class="math inline">\(\cos(\omega_{pi}t+\phi)\)</span> to one <span
-class="math display">\[
-g_1(t) = \left| \alpha \right| \left|
-(\omega_{pr}^2-\omega_{pi}^2)e^{-\omega_{pr}t} \right|+2\cdot |\alpha|
-\left| \omega_{pr}\omega_{pi}e^{-\omega_{pr}t} \right|
-\]</span></p>
-<p>By triangular inequality, <span class="math inline">\(g_0(t)\)</span>
-is the upper bound of <span class="math inline">\(\left| \ddot{y(t)}
-\right|\)</span>, and <span class="math inline">\(g_1(t)\)</span> is the
-upper bound of <span class="math inline">\(g_0(t)\)</span></p>
-<p>Because <span class="math inline">\(g_1(t)\)</span> is a decaying
-exponential function, Therefore, a conservative time step can be
-obtained, for inteval <span class="math inline">\(t_0 \le t_0 + \Delta
-t\)</span>, <span class="math display">\[
-\Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\left| g_1(t_0) \right|}}
-\]</span></p>
-<h4 id="one-fixed-time-step-systemverilog-model-example">One Fixed-time
-step SystemVerilog model example</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">1</span>fs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">initial</span> #<span class="number">0</span><span class="variable">.1</span> <span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">    Ir4 = (Vm - Vout) / R4;</span><br><span class="line">    Ir3 = (Vcp - Vm) / R3;</span><br><span class="line">    Ir2 = (Vcp - Vz) / R2;</span><br><span class="line"></span><br><span class="line">    Vout = Vout + Ir4 * <span class="number">0</span><span class="variable">.1</span> * (<span class="number">1</span>e-<span class="number">9</span>) / C4;</span><br><span class="line">    Vm = Vm + (Ir3 - Ir4) * <span class="number">0</span><span class="variable">.1</span> * (<span class="number">1</span>e-<span class="number">9</span>) / C3;</span><br><span class="line">    Vz = Vz + Ir2 * <span class="number">0</span><span class="variable">.1</span> * (<span class="number">1</span>e-<span class="number">9</span>) / C2;</span><br><span class="line">    Vcp = Vcp + (Icp - Ir2 - Ir3) * <span class="number">0</span><span class="variable">.1</span> * (<span class="number">1</span>e-<span class="number">9</span>) / C1;</span><br><span class="line">    last_time = <span class="built_in">$realtime</span>;</span><br><span class="line">    #<span class="number">0</span><span class="variable">.1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h4 id="acknowledgement">Acknowledgement</h4>
-<p>My colleague, Zhang Wenpian help me a lot in understanding this
-modeling method. Lots of content here are copied from Zhang's note.</p>
-<h4 id="reference">Reference</h4>
-<p>B. C. Lim and M. Horowitz, "Error Control and Limit Cycle Elimination
-in Event-Driven Piecewise Linear Analog Functional Models," in IEEE
-Transactions on Circuits and Systems I: Regular Papers, vol. 63, no. 1,
-pp. 23-33, Jan. 2016, doi: 10.1109/TCSI.2015.2512699.</p>
-<p>S. Liao and M. Horowitz, "A Verilog piecewise-linear analog behavior
-model for mixed-signal validation," Proceedings of the IEEE 2013 Custom
-Integrated Circuits Conference, 2013, pp. 1-5, doi:
-10.1109/CICC.2013.6658461.</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/StanfordVLSI/DaVE">StanfordVLSI/DaVE -
-tools regarding on analog modeling,validation, and generation</a></p>
 
       
     </div>

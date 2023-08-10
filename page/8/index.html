@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,223 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/08/snpsSimADE-StatEye/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/08/snpsSimADE-StatEye/" class="post-title-link" itemprop="url">Statistical Eye Analysis with snpsSimADE</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-08 01:07:18" itemprop="dateCreated datePublished" datetime="2022-07-08T01:07:18+00:00">2022-07-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="how-to-use-stateye-analysis-in-hspice">How to use StatEye
+Analysis in HSPICE</h2>
+<h3 id="create-netlist-with-hspiced-in-virtuoso">create netlist with
+hspiceD in Virtuoso</h3>
+<p><img src="/2022/07/08/snpsSimADE-StatEye/image-20220708011315422.png"
+alt="image-20220708011315422" /></p>
+<h3 id="modify-netlist">modify netlist</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">P1 vi 0  port=1  Z0=0 LFSR (1 0 0 100p 100p 1G 1 [5,2])</span><br><span class="line">P2 vo 0  port=2  Z0=1G</span><br><span class="line">.stateye T=1ns trf=100p incident_port=1 probe_port=2</span><br><span class="line">.probe stateye eye(2) berC(2) eyeBW(2)</span><br><span class="line">.print stateye eye(2) berC(2) eyeBW(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note both<code>Z0=0</code> and <code>Z0=1G</code> are used to remove
+port's effect, which is used as ideal voltage source and voltage
+monitor</p>
+</blockquote>
+<p><img src="/2022/07/08/snpsSimADE-StatEye/image-20220708012542135.png"
+alt="image-20220708012542135" /></p>
+<blockquote>
+<p>The <code>.probe stateye</code> command generates
+<code>netlist.stet#</code> and <code>netlist.stev#</code> for following
+purposes:</p>
+<ul>
+<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
+bathtubV(t)</li>
+<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
+bathtubV(t)</li>
+</ul>
+</blockquote>
+<h2 id="setup">setup</h2>
+<h3 id="cdsinit">.cdsinit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load( strcat( getShellEnvVar(&quot;HSPICE_HOME&quot;) &quot;/hspice/interface/snpsSimADE.ile&quot; ))</span><br></pre></td></tr></table></figure>
+<h3 id="environment-variable">environment variable</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export CDS_LOAD_ENV=CSF</span><br><span class="line">export SNPSSIMADE_LOAD_MODE=HSPICE</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>HSPICE® User Guide: Signal Integrity Modeling and Analysis, Version
+Q-2020.03, March 2020</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/01/channel-termination/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/01/channel-termination/" class="post-title-link" itemprop="url">channel and termination</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-01 08:44:42" itemprop="dateCreated datePublished" datetime="2022-07-01T08:44:42+00:00">2022-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="voltage-mode-driver">voltage mode driver</h2>
+<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
+alt="voltagemode20220704" /></p>
+<h2 id="current-mode-driver">current mode driver</h2>
+<p><img
+src="/2022/07/01/channel-termination/image-20220702003926289.png"
+alt="image-20220702003926289" /></p>
+<h2 id="reference">reference</h2>
+<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
+Conference, "T11: Basics of Equalization Techniques: Channels,
+Equalization, and Circuits"</p>
+<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
+Diverse Interconnect Applications,” IEEE Transactions on Circuits and
+Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
+2014.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +443,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -315,7 +532,7 @@ alt="image-20220630224525565" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -438,7 +655,7 @@ Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -658,7 +875,7 @@ Publishers Inc., San Francisco, CA, USA.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -866,7 +1083,7 @@ target="_blank" rel="noopener" href="https://fires.im/micro22-slides-pdf/04_hamm
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -967,7 +1184,7 @@ target="_blank" rel="noopener" href="https://www.francisz.cn/2019/07/18/sv-iff/"
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1303,7 +1520,7 @@ Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1581,7 +1798,7 @@ Sixth international symposium on quality electronic design (isqed'05),
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1657,381 +1874,6 @@ Units</li>
 </blockquote>
 <p><strong>solution:</strong></p>
 <p>uncomment <code>//import sim_pkg::*;</code> in <em>tb_top.sv</em></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/04/data-dump/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/04/data-dump/" class="post-title-link" itemprop="url">simulation data dumping</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-04 16:30:47" itemprop="dateCreated datePublished" datetime="2022-06-04T16:30:47+00:00">2022-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="fsdb">FSDB</h2>
-<h3 id="fsdbdumpfile"><code>$fsdbDumpfile</code></h3>
-<p>It specifies the FSDB file name created by the Novas object files for
-FSDB dumping. If it is not specified, then the default FSDB file name is
-"novas.fsdb".</p>
-<blockquote>
-<p>This command is valid only <strong>before</strong> executing
-<code>$fsdbDumpvars</code> and is ignored if specified after
-<code>$fsdbDumpvars</code></p>
-</blockquote>
-<h3 id="fsdbsuppress"><code>$fsdbSuppress</code></h3>
-<p>The <code>fsdbSuppress</code>utility is used to skip dumping of few
-instances, scopes, modules and signals. The
-<code>fsdbSuppress</code>utility is a system task like other fsdb
-tasks.</p>
-<blockquote>
-<p>For <code>$fsdbSuppress()</code> to be effective, it needs to be
-specified/called <strong>before</strong> <code>$fsdbDumpvars</code></p>
-</blockquote>
-<h3
-id="fsdbautoswitchdumpfile"><code>$fsdbAutoSwitchDumpfile</code></h3>
-<p>Automatically switch to a new dump file when the working FSDB file
-reaches the specified size or the specified wall time period.</p>
-<blockquote>
-<p>After the dumping is finished, a <strong>virtual FSDB file
-(*.vf)</strong> is automatically created and list all of the generated
-FSDB files with the correct sequence. Only the <strong>virtual FSDB
-file</strong>, rather than all of the FSDB files, needs to be loaded to
-view the simulation results</p>
-</blockquote>
-<p>When specified in the design to switch based on <strong>file
-size</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$fsdbAutoSwitchDumpfile(File_Size | File_Size_var, &quot;FSDB_Name&quot; |FSDB_Name_var, Number_of_Files | Number_of_Files_var[ ,&quot;log_filename&quot; | ,log_filename_var ], [&quot;+no_overwrite&quot;]);</span><br></pre></td></tr></table></figure>
-<p>When specified in the design to switch based on <strong>time
-period</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$fsdbAutoSwitchDumpfile(File_Size | File_Size_var, &quot;FSDB_Name&quot; |FSDB_Name_var, Number_of_Files | Number_of_Files_var[ ,&quot;log_filename&quot; | ,log_filename_var ], [&quot;+no_overwrite&quot;], “+by_period”);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>“+by_period”</code></p>
-</blockquote>
-<h3 id="fsdbdumpvars"><code>$fsdbDumpvars</code></h3>
-<p>This command dumps the change in signal value to the FSDB file.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$fsdbDumpvars([ depth, | &quot;level=&quot;,depth_var, ],[instance | &quot;instance=&quot;,instance_var])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>For VCS users, to include memory, MDA, packed array and structure
-information in the generated FSDB file, the <code>-debug_access</code>
-option must be included when VCS is invoked to <strong>compile the
-design</strong></p>
-</blockquote>
-<ul>
-<li><p><code>depth</code></p>
-<p>Specify how many sub-scope levels under the given scope you want to
-dump.</p>
-<ul>
-<li>Specify this argument as <strong>1</strong> to dump the signals
-under the given scope</li>
-<li>Specify this argument as <strong>0</strong> to dump all signals
-under the given scope and its descendant scopes.</li>
-</ul>
-<p>0: all signals in all scopes.</p>
-<p>1: all signals in current scope.</p>
-<p>2: all signals in the current scope and all scopes one level
-below.</p>
-<p>n: all signals in the current scope and all scopes n-1 levels
-below.</p>
-<table>
-<colgroup>
-<col style="width: 36%" />
-<col style="width: 9%" />
-<col style="width: 18%" />
-<col style="width: 36%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>tb.clk</th>
-<th>tb.u_div2.div2</th>
-<th>tb.u_div2.u_div2neg.div2neg</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>$fsdbDumpvars(0)</td>
-<td>✓</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>$fsdbDumpvars(1)</td>
-<td>✓</td>
-<td>✗</td>
-<td>✗</td>
-</tr>
-<tr class="odd">
-<td>$fsdbDumpvars(2)</td>
-<td>✓</td>
-<td>✓</td>
-<td>✗</td>
-</tr>
-<tr class="even">
-<td>$fsdbDumpvars(1, tb.u_div2)</td>
-<td>✗</td>
-<td>✓</td>
-<td>✗</td>
-</tr>
-<tr class="odd">
-<td>$fsdbDumpvars(0, tb.u_div2)</td>
-<td>✗</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> clk;</span><br><span class="line"></span><br><span class="line">	divider2 u_div2(clk);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">forever</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">100</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		 #<span class="number">10</span>;</span><br><span class="line">		 $fsdbDumpfile(<span class="string">&quot;tb.fsdb&quot;</span>);</span><br><span class="line">		 <span class="comment">//$fsdbDumpvars(0);				// same with $fsdbDumpvars(0, tb)</span></span><br><span class="line">		 <span class="comment">//$fsdbDumpvars(1);				// same with $fsdbDumpvars(1, tb)</span></span><br><span class="line">		 <span class="comment">//$fsdbDumpvars(2);				// same with $fsdbDumpvars(2, tb)</span></span><br><span class="line">		 <span class="comment">//$fsdbDumpvars(1, tb.u_div2);</span></span><br><span class="line">		 $fsdbDumpvars(<span class="number">0</span>, tb<span class="variable">.u_div2</span>);</span><br><span class="line">		 #<span class="number">80</span> <span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> divider2 (</span><br><span class="line">	<span class="keyword">input</span> clk</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">reg</span> div2;</span><br><span class="line"></span><br><span class="line">	divider2neg u_div2neg(div2);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">always</span>@(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">		div2 = ~div2;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		div2 = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> divider2neg (</span><br><span class="line">	<span class="keyword">input</span> clk</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">reg</span> div2neg;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">always</span>@(<span class="keyword">negedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">		div2neg = ~div2neg;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		div2neg= <span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><em>compile</em> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcs -full64 -kdb -debug_access+all tb.v</span><br></pre></td></tr></table></figure></p>
-<p><em>simulate</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./simv</span><br></pre></td></tr></table></figure>
-<p><em>load fsdb</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">verdi -ssf tb.fsdb</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/04/data-dump/image-20220604192421888.png"
-alt="image-20220604192421888" /></p></li>
-</ul>
-<h3
-id="fsdbdumpon-fsdbdumpoff"><code>$fsdbDumpon, $fsdbDumpoff</code></h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$fsdbDumpon([<span class="string">&quot;+fsdbfile+filename&quot;</span>])</span><br><span class="line"></span><br><span class="line">$fsdbDumpoff([<span class="string">&quot;+fsdbfile+filename&quot;</span>])</span><br></pre></td></tr></table></figure>
-<p>These FSDB dumping commands turn dumping on and off.
-<code>fsdbDumpon/fsdbDumpoff</code> has the highest priority and
-overrides all other FSDB dumping commands.</p>
-<p><code>fsdbDumpon/fsdbDumpoff</code> is not restricted to only
-<code>fsdbDumpvars</code>. If there is more than one FSDB file open for
-dumping at one simulation run, <code>fsdbDumpon/fsdbDumpoff</code> may
-only affect a specific FSDB file by specifying the specific file
-name.</p>
-<ul>
-<li><code>+fsdbfile+filename</code>: Specify the FSDB file name. If not
-specified, the default FSDB file name is "novas.fsdb"</li>
-</ul>
-<h3 id="fsdbdumpfinish"><code>$fsdbDumpFinish</code></h3>
-<p>This command closes all FSDB files in the current simulation and
-stops dumping of signals. Although all FSDB files are <em>closed
-automatically at the end of simulation</em>, this dumping command can be
-invoked to <em>explicitly</em> close the FSDB files during the
-simulation</p>
-<h2 id="vcd">VCD</h2>
-<h3 id="dumpfile"><code>$dumpfile</code></h3>
-<p>The declaration onf <code>$dumpfile</code> must come before the
-<code>$dumpvars</code> or any other system tasks that specifies
-dump.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$dumpfile</span>(<span class="string">&quot;test.vcd&quot;</span>);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>argument <strong>is necessary</strong>, there is no default value</p>
-</blockquote>
-<h3 id="dumpvars"><code>$dumpvars</code></h3>
-<p>The <code>$dumpvars</code> is used to specify which variables are to
-be dumped ( in the file mentioned by <code>$dumpfile</code>). The
-simplest way to use it is without any argument.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$dumpvars</span>(&lt;levels&gt; &lt;, &lt;module_or_variable&gt;&gt;* );</span><br></pre></td></tr></table></figure>
-<h3 id="dumplimit"><code>$dumplimit</code></h3>
-<p>It is possible that you inadvertantly generate huge file in Gigabytes
-( for examples while dumping a Gigahertz clock for one second). To
-reduce such occurrences, we may use <code>$dumplimit</code>. It usage
-is</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$dumplimit</span>(&lt;filesize&gt;);</span><br></pre></td></tr></table></figure>
-<h3 id="dumpoff-and-dumpon"><code>$dumpoff and $dumpon</code></h3>
-<p>During the simulation if you are bothered about about only during a
-certain interval then you can use <code>$dumpoff</code> and
-<code>$dumpon</code>. The following example shows its usage. It will
-dump the changes for first 100 units of time and then between 10200 and
-10400 units of time.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span></span><br><span class="line">    <span class="built_in">$monitor</span>(<span class="built_in">$time</span>, <span class="string">&quot; reset=%b,clk_out=%b&quot;</span>,reset,clk_out);</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">            <span class="built_in">$dumpfile</span>(<span class="string">&quot;clkdiv2n_tb.vcd&quot;</span>);</span><br><span class="line">            <span class="built_in">$dumpvars</span>(<span class="number">0</span>,clkdiv2n_tb); </span><br><span class="line">            #<span class="number">100</span>;</span><br><span class="line">            <span class="built_in">$dumpoff</span>;</span><br><span class="line">            #<span class="number">10200</span>; </span><br><span class="line">            <span class="built_in">$dumpon</span>;</span><br><span class="line">            #<span class="number">10400</span>;</span><br><span class="line">            <span class="built_in">$dumpoff</span>;</span><br><span class="line">    <span class="keyword">end</span> </span><br></pre></td></tr></table></figure>
-<h3 id="demo">demo</h3>
-<p>stimulus.v</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns / 1ps</span></span><br><span class="line"><span class="keyword">module</span> stimulus;</span><br><span class="line">	<span class="comment">// Inputs</span></span><br><span class="line">	<span class="keyword">reg</span> x;</span><br><span class="line">	<span class="keyword">reg</span> y;</span><br><span class="line">	<span class="comment">// Outputs</span></span><br><span class="line">	<span class="keyword">wire</span> z;</span><br><span class="line">	<span class="comment">// Instantiate the Unit Under Test (UUT)</span></span><br><span class="line">	comparator uut (</span><br><span class="line">		<span class="variable">.x</span>(x), </span><br><span class="line">		<span class="variable">.y</span>(y), </span><br><span class="line">		<span class="variable">.z</span>(z)</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="built_in">$dumpfile</span>(<span class="string">&quot;test.vcd&quot;</span>);</span><br><span class="line">		<span class="built_in">$dumpvars</span>(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">// Initialize Inputs</span></span><br><span class="line">		x = <span class="number">0</span>;</span><br><span class="line">		y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		#<span class="number">20</span> x = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">20</span> y = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">20</span> y = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">20</span> x = <span class="number">1</span>;  </span><br><span class="line">		#<span class="number">40</span> ;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="built_in">$monitor</span>(<span class="string">&quot;t=%3d x=%d,y=%d,z=%d \n&quot;</span>,<span class="built_in">$time</span>,x,y,z, );</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>comparator.v</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> comparator(</span><br><span class="line">	<span class="keyword">input</span> x,</span><br><span class="line">	<span class="keyword">input</span> y,</span><br><span class="line">	<span class="keyword">output</span> z</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">assign</span> z = (~x &amp; ~y) |(x &amp; y);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ xrun stimulus.v comparator.v -access +rwc</span><br><span class="line">$ simvision test.vcd</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>$dumpvars and $dumpfile Verilog,
-http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/04/plusargs-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/04/plusargs-verilog/" class="post-title-link" itemprop="url">plusargs in verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-04 12:29:28" itemprop="dateCreated datePublished" datetime="2022-06-04T12:29:28+00:00">2022-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-target="_blank" rel="noopener" href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-target="_blank" rel="noopener" href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
 
       
     </div>

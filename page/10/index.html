@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,308 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/13/emacs-verilog-mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/13/emacs-verilog-mode/" class="post-title-link" itemprop="url">verilog-mode.el</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-13 14:07:29" itemprop="dateCreated datePublished" datetime="2022-05-13T14:07:29+00:00">2022-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
+command</p>
+</blockquote>
+<h2 id="verilog-mode.el">verilog-mode.el</h2>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
+<blockquote>
+<p>For use with <code>--batch</code>, perform automatic expansions as a
+stand-alone tool. This sets up the appropriate Verilog mode environment,
+updates automatics with M-x verilog-auto on all command-line files, and
+saves the buffers. For proper results, multiple filenames need to be
+passed on the command line in bottom-up order.</p>
+</blockquote>
+<h3
+id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
+<blockquote>
+<p>Update automatics with M-x verilog-auto, save the buffer, and
+<em>compile</em></p>
+</blockquote>
+<h2 id="emacs">Emacs</h2>
+<h3 id="no-site-file"><code>--no-site-file</code></h3>
+<p>Another file for site-customization is <code>site-start.el</code>.
+Emacs loads this <em>before</em> the user's init file
+(<code>.emacs</code>, <code>.emacs.el</code> or
+<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
+file with the option <code>--no-site-file</code></p>
+<h3 id="batch"><code>--batch</code></h3>
+<p>The command-line option <code>--batch</code> causes Emacs to run
+noninteractively. The idea is that you specify Lisp programs to run;
+when they are finished, Emacs should exit.</p>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function;</p>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="f-func"><code>-f FUNC</code></h3>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function</p>
+<blockquote>
+<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
+</blockquote>
+<h2 id="multiple-directories">multiple directories</h2>
+<p><strong>AUTOINST</strong> only search in the file's directory
+default.</p>
+<p>You can append below <code>verilog-library-directories</code> for
+multiple directories search</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>Emacs Online Documentation <a
+target="_blank" rel="noopener" href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
+<p>Emacs verilog-mode 的使用 URL: <a
+target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/10/pll101/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/10/pll101/" class="post-title-link" itemprop="url">PLL and its blocks</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-10 19:03:52" itemprop="dateCreated datePublished" datetime="2022-05-10T19:03:52+00:00">2022-05-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="varactor">varactor</h2>
+<h3 id="how-to-simulate-the-capacitance-of-varactor">How to simulate the
+capacitance of varactor ?</h3>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+<h4 id="pss-pac">PSS + PAC</h4>
+<p><img src="/2022/05/10/pll101/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2022/05/10/pll101/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2022/05/10/pll101/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h4 id="pss-psp">PSS + PSP</h4>
+<p><img src="/2022/05/10/pll101/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2022/05/10/pll101/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h4 id="results">results</h4>
+<p><img src="/2022/05/10/pll101/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<p>They are same</p>
+<h2 id="vco">VCO</h2>
+<h3 id="phase-noise">phase noise</h3>
+<h4 id="pnoise---timeaverage">pnoise - timeaverage</h4>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2022/05/10/pll101/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2022/05/10/pll101/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2022/05/10/pll101/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h4 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h4>
+<p><img src="/2022/05/10/pll101/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2022/05/10/pll101/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2022/05/10/pll101/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h4 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h4>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2022/05/10/pll101/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2022/05/10/pll101/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2022/05/10/pll101/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +528,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -320,170 +622,6 @@ doi:10.1007/978-3-030-03238-8</p>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/08/synchronizer-metastability/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/08/synchronizer-metastability/" class="post-title-link" itemprop="url">Metastability and Synchronizer</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-08 19:28:50" itemprop="dateCreated datePublished" datetime="2022-05-08T19:28:50+00:00">2022-05-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="sequentail-logic-deal">Sequentail logic deal</h2>
-<p>We guarantee setup &amp; hold time / minimum clock width, FF
-guarantees propagation delay (clock -&gt; q delay)</p>
-<p>We can not keep our part of the deal because asynchronous signal may
-change in the setup/hold window</p>
-<p>FF enters a metastable state, as a result it does not guarantee
-propagation delay</p>
-<h2 id="what-is-a-metastable-flip-flop">What is a metastable flip
-flop?</h2>
-<blockquote>
-<p>Non-Regenerative flipflop: <strong>NOT</strong> suitable for
-synchronization</p>
-</blockquote>
-<blockquote>
-<p>Regenerative flipflop: Feedback loop must be isolated</p>
-</blockquote>
-<h2 id="probability-of-entering-a-metastable-state">Probability of
-entering a metastable state</h2>
-<h2
-id="metastability-resolution-time-constant-tau-of-flip-flops">Metastability
-resolution time constant (<span class="math inline">\(\tau\)</span>) of
-flip-flops</h2>
-<p><span class="math display">\[
-T_W = T_0 \cdot e^{-t_r/\tau}
-\]</span></p>
-<ul>
-<li><p><span class="math inline">\(T_W\)</span>: metastability window
-width for a given <span class="math inline">\(t_r\)</span> (<span
-class="math inline">\(|T_{clk}-T_d| - T_{meta}\)</span>) where <span
-class="math inline">\(T_{meta}\)</span> is the data failing point (<span
-class="math inline">\(t_r=\infty\)</span>)</p></li>
-<li><p><span class="math inline">\(T_0\)</span>: metastability window
-width at zero resolution time</p></li>
-<li><p><span class="math inline">\(t_r\)</span>: resolution time (clock
-to output delay)</p></li>
-<li><p><span class="math inline">\(\tau\)</span>: resolution time
-constant</p></li>
-</ul>
-<h2 id="recovering-from-a-metastable-state">Recovering from a metastable
-state</h2>
-<h3 id="in-a-latch">in a latch</h3>
-<h3 id="in-a-flipflop">in a flipflop</h3>
-<h2 id="probability-of-failure">Probability of failure</h2>
-<h2 id="techniques-to-improve-mtbf">Techniques to improve MTBF</h2>
-<h2 id="data-flip-flops-vs.-synchronizer-flip-flops">Data Flip-Flops Vs.
-Synchronizer Flip-Flops</h2>
-<p><img
-src="/2022/05/08/synchronizer-metastability/image-20230704230313635.png"
-alt="image-20230704230313635" /></p>
-<h2 id="reference">reference</h2>
-<p>Chen, Doris T., Deshanand P. Singh, Jeffrey Chromczak, David M.
-Lewis, Ryan Fung, David Neto and Vaughn Betz. “A comprehensive approach
-to modeling, characterizing and optimizing for metastability in FPGAs.”
-Symposium on Field Programmable Gate Arrays (2010).</p>
-<p>Jerome Cox. Synchronizers And Data FlipFlops are Different [<a
-target="_blank" rel="noopener" href="https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf">pdf</a>]</p>
-<p>J. U. Horstmann, H. W. Eichel and R. L. Coates, "Metastability
-behavior of CMOS ASIC flip-flops in theory and test," in IEEE Journal of
-Solid-State Circuits, vol. 24, no. 1, pp. 146-157, Feb. 1989, doi:
-10.1109/4.16314.</p>
-<p>Steve Golson. Synchronization and Metastability [<a
-target="_blank" rel="noopener" href="https://trilobyte.com/pdf/golson_snug14.pdf">pdf</a>]</p>
-<p>J. Reiher, M. R. Greenstreet and I. W. Jones, "Explaining
-Metastability in Real Synchronizers," 2018 24th IEEE International
-Symposium on Asynchronous Circuits and Systems (ASYNC), Vienna, Austria,
-2018, pp. 59-67, doi: 10.1109/ASYNC.2018.00024.</p>
-<p>A. Cantoni, J. Walker and T. -D. Tomlin, "Characterization of a
-Flip-Flop Metastability Measurement Method," in IEEE Transactions on
-Circuits and Systems I: Regular Papers, vol. 54, no. 5, pp. 1032-1040,
-May 2007, doi: 10.1109/TCSI.2007.895514.</p>
-<p>S. Yang, I. W. Jones and M. R. Greenstreet, "Synchronizer Performance
-in Deep Sub-Micron Technology," 2011 17th IEEE International Symposium
-on Asynchronous Circuits and Systems, Ithaca, NY, USA, 2011, pp. 33-42,
-doi: 10.1109/ASYNC.2011.19.</p>
-<p>Max Maxfield. Meandering Musings on Metastability [<a
-target="_blank" rel="noopener" href="https://www.eejournal.com/article/meandering-musings-on-metastability/">link</a>]</p>
-<p>R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE
-Design &amp; Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct.
-2011, doi: 10.1109/MDT.2011.113. [<a
-target="_blank" rel="noopener" href="https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf">pdf</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/08/glitch-hazard/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -520,7 +658,7 @@ target="_blank" rel="noopener" href="https://webee.technion.ac.il/~ran/papers/Me
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -636,7 +774,7 @@ target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -809,7 +947,7 @@ target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/le
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1139,7 +1277,7 @@ Processing</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1272,7 +1410,7 @@ alt="image-20220507122217830" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1391,7 +1529,7 @@ Ulrich L. Rohde, Noise Analysis, Then and Today</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1619,7 +1757,7 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1648,354 +1786,6 @@ running kernel:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
 <p>From the <code>yum</code> man page:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/01/sampling-dft/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/01/sampling-dft/" class="post-title-link" itemprop="url">impulse train to discrete-time sequence</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-01 01:03:18" itemprop="dateCreated datePublished" datetime="2022-05-01T01:03:18+00:00">2022-05-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>The sampling process mathematically in the two stages:</p>
-<ul>
-<li><p>impulse train modulator <span class="math display">\[
-x_s(t)=x_c(t)s(t)
-\]</span></p></li>
-<li><p>impulse train to a sequence</p></li>
-</ul>
-<p><img src="/2022/05/01/sampling-dft/image-20230519000700841.png"
-alt="image-20230519000700841" /></p>
-<h2 id="impulse-train-modulator">impulse train modulator</h2>
-<p><img src="/2022/05/01/sampling-dft/image-20230519000740312.png"
-alt="image-20230519000740312" /></p>
-<blockquote>
-<p>Arrows with length proportional to their area.</p>
-</blockquote>
-<p>The periodic impulse train is <span class="math display">\[
-s(t) = \sum_{n=-\infty}^{+\infty}\delta (t-nT)
-\]</span> where <span class="math inline">\(\delta (t)\)</span> is the
-<strong>unit</strong> impulse function, or Dirac delta function; <span
-class="math inline">\(T\)</span> is the <em>sampling period</em>, and
-its reciprocal, <span class="math inline">\(f_s=1/T\)</span>, is the
-<em>sampling frequency</em>, in samples per second.</p>
-<p>The product of <span class="math inline">\(s(t)\)</span> and <span
-class="math inline">\(x_c (t)\)</span> is therefore</p>
-<p><span class="math display">\[\begin{align}
-x_s (t) &amp;= x_c(t)s(t) \\
-&amp;= x_c(t) \sum_{n=-\infty}^{+\infty}\delta (t-nT) =
-\sum_{n=-\infty}^{+\infty}x_c(t)\delta (t-nT)
-\end{align}\]</span></p>
-<p>The impulse train sampling <span
-class="math inline">\(x_s(t)\)</span> can be expressed as <span
-class="math display">\[
-x_s(t) = \sum_{n=-\infty}^{+\infty}x_c(nT)\delta (t-nT)
-\]</span> i.e., the size (area) of the <em>impulse</em> at sample time
-<span class="math inline">\(nT\)</span> is equal to the value of the
-continuous-time signal at that time.</p>
-<h3 id="x_st-in-frequency-domain"><span
-class="math inline">\(x_s(t)\)</span> in Frequency-domain</h3>
-<p><span class="math display">\[
-X_s(j\Omega) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega -
-k\Omega_s))
-\]</span></p>
-<blockquote>
-<p>The relationship between the Fourier transforms of the input and the
-output of the <em>impulse train modulator</em></p>
-</blockquote>
-<p><img src="/2022/05/01/sampling-dft/image-20230519002317865.png"
-alt="image-20230519002317865" /></p>
-<h2 id="impulse-train-to-a-sequence">impulse train to a sequence</h2>
-<p><img src="/2022/05/01/sampling-dft/image-20230519000938294.png"
-alt="image-20230519000938294" /></p>
-<blockquote>
-<ul>
-<li><p>The <span class="math inline">\(x_s(t)\)</span> is, in a sense, a
-<em>continuous-time signal (specifically, an impulse train)</em> that is
-zero,except at integer multiples of <span
-class="math inline">\(T\)</span>.</p></li>
-<li><p>The sequence <span class="math inline">\(x[n]\)</span> is indexed
-on the integer variable <span class="math inline">\(n\)</span>, which
-introduces a *time normalization, <span
-class="math inline">\(x[n]\)</span> contains <strong>no</strong>
-explicit information about the sampling period <span
-class="math inline">\(T\)</span></p></li>
-<li><p>The samples of <span class="math inline">\(x_c(t)\)</span> are
-represented by <em>finite numbers</em> in <span
-class="math inline">\(x[n]\)</span> rather than as the *areas of
-impulses in <span class="math inline">\(x_s(t)\)</span></p></li>
-</ul>
-</blockquote>
-<p>Our eventual objective is to express <span
-class="math inline">\(X(e^{j\omega})\)</span>, the <em>discrete-time
-Fourier transform (DTFT) of the sequence <span
-class="math inline">\(x[n]\)</span></em>, in terms of <span
-class="math inline">\(X_s(j\Omega)\)</span> and <span
-class="math inline">\(X_c(j\Omega)\)</span>.</p>
-<p>Toward this end, let us consider an alternative expression for <span
-class="math inline">\(X_s(j\Omega)\)</span>, Applying the
-continuous-time Fourier transform to <span class="math inline">\(x_s(t)
-= \sum_{n=-\infty}^{+\infty}x_c(nT)\delta (t-nT)\)</span>, we obtain
-<span class="math display">\[
-X_s(j\Omega) = \sum_{n=-\infty}^{+\infty}x_c(nT)e^{-j\Omega Tn}
-\]</span> and <span class="math display">\[
-X(e^{j\omega}) =\sum_{n=-\infty}^{+\infty}x[n]e^{-j\omega n}
-\]</span> where DTFT is applied</p>
-<p>Since <span class="math display">\[
-x[n] = x_c(nT)
-\]</span> it follows that <span class="math display">\[
-X_s(j\Omega) = X(e^{j\omega})|_{\omega=\Omega T} = X(e^{j\Omega T})
-\]</span> Consequently, <span class="math display">\[
-X(e^{j\Omega T}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega -
-k\Omega_s))
-\]</span></p>
-<p>or equivalently, <span class="math display">\[
-X(e^{j\omega}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[
-j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right]
-\]</span></p>
-<blockquote>
-<p><span class="math inline">\(\omega\)</span>: radians per sample</p>
-<p><span class="math inline">\(\Omega\)</span>: radians per second</p>
-</blockquote>
-<h2 id="impulse-invariance">Impulse Invariance</h2>
-<p><span class="math display">\[
-h[n] = Th_c(nT)
-\]</span></p>
-<p>When <span class="math inline">\(h[n]\)</span> and <span
-class="math inline">\(h_c(t)\)</span> are related through the above
-equation, i.e., the impulse response of the discrete-time system is a
-<em>scaled</em>, <em>sampled</em> version of <span
-class="math inline">\(h_c(t)\)</span>, the <em>discrete-time system</em>
-is said to be an <strong>impulse-invariant</strong> version of the
-<em>continuous-time system</em>.</p>
-<p>we have <span class="math display">\[
-H(e^{j\omega}) = H_c\left(j\frac{\omega}{T}\right)
-\]</span></p>
-<h2 id="application---transfer-function">Application - Transfer
-function</h2>
-<h3 id="sampled-impulse-response">sampled impulse response</h3>
-<p>The below equation demonstrates how to obtain <strong>continuous
-Fourier Transform</strong> from <strong>DTFT</strong> . <span
-class="math display">\[
-X_c(\omega) = T \cdot X(\omega)
-\]</span></p>
-<blockquote>
-<p><span class="math inline">\(T\)</span> is sample period, follow
-previous equation</p>
-</blockquote>
-<h3 id="useful-functions">useful functions</h3>
-<ul>
-<li><p>using <code>fft</code></p>
-<p>The outputs of the DFT are <strong>samples</strong> of the
-DTFT</p></li>
-<li><p>using <code>freqz</code></p>
-<p>modeling as <strong>FIR filter</strong>, and the impulse response
-sequence of an FIR filter is the same as the sequence of filter
-coefficients, we can express the frequency response in terms of either
-the filter coefficients or the impulse response</p>
-<blockquote>
-<p><code>fft</code> is used in <code>freqz</code> internally</p>
-</blockquote></li>
-</ul>
-<h3 id="practical-example">Practical Example</h3>
-<p><strong>Question</strong>:</p>
-<p>​ How to obtain continuous system transfer function from sampled
-impulse</p>
-<p><strong>Answer</strong>:</p>
-<p>​ using above mentioned functions</p>
-<hr />
-<blockquote>
-<p>First order lowpass filter with 3-dB frequency
-<strong>1Hz</strong></p>
-</blockquote>
-<p><img src="/2022/05/01/sampling-dft/image-20220501020004068.png"
-alt="image-20220501020004068" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% continuous system</span></span><br><span class="line">s = tf(<span class="string">&#x27;s&#x27;</span>);</span><br><span class="line">h = <span class="number">2</span>*<span class="built_in">pi</span>/(<span class="number">2</span>*<span class="built_in">pi</span>+s);</span><br><span class="line">[mag, phs, wout] = bode(h);</span><br><span class="line">fct = wout(:)/<span class="number">2</span>/<span class="built_in">pi</span>;</span><br><span class="line">Hct_dB = <span class="number">20</span>*<span class="built_in">log10</span>(mag(:));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fstep = <span class="number">0.01</span>;           <span class="comment">% freq resolution</span></span><br><span class="line">fnyqst = <span class="number">100</span>;</span><br><span class="line">Ts = <span class="number">1</span>/(<span class="number">2</span>*fnyqst);</span><br><span class="line">Fs = <span class="number">1</span>/Ts;              <span class="comment">% sampling freq</span></span><br><span class="line">Ns = <span class="built_in">ceil</span>(Fs/fstep);    <span class="comment">% samping points</span></span><br><span class="line">fstep = Fs/Ns;          <span class="comment">% update fstep</span></span><br><span class="line">t = (<span class="number">0</span>:Ns<span class="number">-1</span>)*Ts;        <span class="comment">% sampling time points</span></span><br><span class="line"></span><br><span class="line">y = impulse(h, t);      <span class="comment">% impulse resp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% modelling as discrete system</span></span><br><span class="line">Y = fft(y);                 <span class="comment">% dft</span></span><br><span class="line">Hfft = Y * Ts;              <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfft_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfft(<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)));</span><br><span class="line">ffft = (<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)*fstep - fstep;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Hfir, ffir] = freqz(y, <span class="number">1</span>, [], <span class="number">1</span>/Ts);   <span class="comment">% modelling as FIR</span></span><br><span class="line">Hfir = Hfir * Ts;           <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfir_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfir));</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot</span></span><br><span class="line">semilogx(fct, Hct_dB, <span class="string">&#x27;k&#x27;</span>, ffft, Hfft_dB, <span class="string">&#x27;r.-&#x27;</span>, ffir, Hfir_dB, <span class="string">&#x27;b--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;bode(s)&#x27;</span>, <span class="string">&#x27;fft&#x27;</span>, <span class="string">&#x27;FIR model&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">xlim([<span class="number">1e-2</span> <span class="number">1e2</span>]);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response of different methods&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="fourier-transform-of-impusle-train">Fourier transform of impusle
-train</h2>
-<h3 id="periodic-continuous-time">Periodic Continuous-Time</h3>
-<p><span class="math display">\[
-x(t) = \sum_{n \in \mathbb{Z}}\delta(t-nT)\overset{FT}{\longrightarrow}
-\frac{2\pi}{T}\sum_{k\in \mathbb{Z}}\delta(\omega - k\frac{2\pi}{T})
-\]</span></p>
-<h3 id="periodic-discrete-time">Periodic Discrete-Time</h3>
-<p>Consider the periodic discrete-time impulse train <span
-class="math display">\[
-\tilde{p}[n] = \sum_{r=-\infty}^{\infty}\delta[n-rN]
-\]</span> <strong>DFS</strong> of <span
-class="math inline">\(\tilde{p}[n]\)</span> is <span
-class="math display">\[
-\tilde{P}[k] = 1,\quad \text{for all k.}
-\]</span> Therefore, the <strong>DTFT</strong> of <span
-class="math inline">\(\tilde{p}[n]\)</span> is <span
-class="math display">\[
-\tilde{P}(e^{j\omega}) =
-\frac{2\pi}{N}\sum_{k=-\infty}^{\infty}\delta\left( \omega - \frac{2\pi
-k}{N} \right)
-\]</span></p>
-<h3 id="multiplication-property-of-fourier-transform">Multiplication
-Property of Fourier Transform</h3>
-<p><span class="math display">\[
-x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
-\]</span> Then sampled signal fourier transform is <span
-class="math display">\[\begin{align}
-X_s(\omega) &amp;= \frac{1}{2\pi}X_{\delta}(\omega)*X(\omega) \\
-&amp;= \frac{1}{T} \left(\sum_{k\in \mathbb{Z}}\delta(\omega -
-k\frac{2\pi}{T})\right) * X(\omega)
-\end{align}\]</span></p>
-<p><a
-target="_blank" rel="noopener" href="https://web.stanford.edu/class/ee179/lectures/notes11.pdf">Lecture
-11: Sampling and Pulse Modulation</a></p>
-<p><img src="/2022/05/01/sampling-dft/image-20220520221108500.png"
-alt="image-20220520221108500" /></p>
-<h2 id="gotcha">Gotcha</h2>
-<p>A remarkable fact of linear systems is that the <strong>complex
-exponentials</strong> are <strong>eigenfunctions</strong> of a linear
-system, as the system output to these inputs equals the input multiplied
-by a constant factor.</p>
-<ul>
-<li>Both amplitude and phase may change</li>
-<li>but the frequency does not change</li>
-</ul>
-<p>Take the input signal to be a complex exponential of the form <span
-class="math inline">\(x(t)=Ae^{j\phi}e^{j\omega t}\)</span></p>
-<p><span class="math display">\[\begin{align}
-y(t) &amp;= h(t)*x(t) \\
-&amp;= H(j\omega)Ae^{j\phi}e^{j\omega t}
-\end{align}\]</span></p>
-<p>The frequency response at <span
-class="math inline">\(-\omega\)</span> is the <strong>complex
-conjugate</strong> of the frequency response at <span
-class="math inline">\(+\omega\)</span>, given <span
-class="math inline">\(h(t)\)</span> is real</p>
-<p><span class="math display">\[\begin{align}
-H^*(t) &amp;= \left(\int_{-\infty}^{+\infty}h(t)e^{-j\omega
-t}dt\right)^* \\
-&amp;= \int_{-\infty}^{+\infty}h^*(t)e^{+j\omega t}dt \\
-&amp;= \int_{-\infty}^{+\infty}h(t)e^{-j(-\omega t)}dt \\
-&amp;= H(-j\omega)
-\end{align}\]</span></p>
-<p>The <strong>real cosine signal</strong> is actually composed of two
-<strong>complex exponential signals</strong>: one with positive
-frequency and the other with negative <span class="math display">\[
-cos(\omega t + \phi) = \frac{e^{j(\omega t + \phi)} + e^{-j(\omega t +
-\phi)}}{2}
-\]</span></p>
-<p>The sinusoidal response is the sum of the complex-exponential
-response at the positive frequency <span
-class="math inline">\(\omega\)</span> and the response at the
-corresponding negative frequency <span
-class="math inline">\(-\omega\)</span> because of LTI systems's
-superposition property</p>
-<ul>
-<li><p>input: <span class="math display">\[\begin{align}
-x(t) &amp;= A cos(\omega t + \phi) \\
-&amp;= \frac{1}{2}Ae^{\phi}e^{\omega t} +
-\frac{1}{2}Ae^{-\phi}e^{-\omega t}
-\end{align}\]</span></p></li>
-<li><p>output with <span
-class="math inline">\(H(j\omega)=Ge^{j\theta}\)</span>: <span
-class="math display">\[\begin{align}
-y(t) &amp;= H(j\omega)\frac{1}{2}Ae^{\phi}e^{\omega t}
-+  H(-j\omega)\frac{1}{2}Ae^{-\phi}e^{-\omega t} \\
-&amp;= Ge^{j\theta}\frac{1}{2}Ae^{\phi}e^{\omega t} +
-Ge^{-j\theta}\frac{1}{2}Ae^{-\phi}e^{-\omega t} \\
-&amp;= GAcos(\omega t + \phi + \theta)
-\end{align}\]</span></p></li>
-</ul>
-<p>Its phase shift is <span class="math inline">\(\theta\)</span> and
-gain is <span class="math inline">\(G\)</span>, which is same with <span
-class="math inline">\(H(j\omega)\)</span>.</p>
-<h2 id="reference">reference</h2>
-<p>James H. McClellan, Ronald Schafer, and Mark Yoder. 2015. DSP First
-(2nd. ed.). Prentice Hall Press, USA.</p>
-<p><a target="_blank" rel="noopener" href="https://www.mathworks.com/help/matlab/ref/fft.html">fft -
-https://www.mathworks.com/help/matlab/ref/fft.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.mathworks.com/help/signal/ref/freqz.html">freqz
-- https://www.mathworks.com/help/signal/ref/freqz.html</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://www.cs.ccu.edu.tw/~wtchu/courses/2012s_DSP/Lectures/Lecture%2026%20Frequency%20Response.pdf">Wei-Ta
-Chu, 2012s_DSP - Lecture 26 Frequency Response</a></p>
-<p>Relationship between continuous-time and discrete-time Fourier
-transforms URL: <a
-target="_blank" rel="noopener" href="https://blogs.mathworks.com/steve/2010/01/18/relationship-between-continuous-time-and-discrete-time-fourier-transforms/">https://blogs.mathworks.com/steve/2010/01/18/relationship-between-continuous-time-and-discrete-time-fourier-transforms/</a></p>
-<p>Oppenheim, Alan V. and Cram. “Discrete-time signal processing : Alan
-V. Oppenheim, 3rd edition.” (2011).</p>
 
       
     </div>

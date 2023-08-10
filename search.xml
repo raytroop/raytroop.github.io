@@ -3168,6 +3168,41 @@ FFT</a></p>
       </tags>
   </entry>
   <entry>
+    <title>Calibre Runsets</title>
+    <url>/2023/08/10/calibreRunsets/</url>
+    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
+runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
+<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
+respectively.</p>
+<p>When invoked, the Calibre DRC and LVS windows automatically load the
+runset used when the last session was closed.</p>
+<blockquote>
+<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
+run. They contain only information that differs from the default
+configuration of Calibre Interactive. There is a one-to-one
+correspondence between entry lines in the runset file and fields and
+button items in the Calibre Interactive user interface. Here is as
+example of a DRC runset:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr />
+<p>The runset filename opened at startup (if no runset is specified on
+the command line) can also be specified by setting the
+<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
+and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
+for LVS. If these environment variables are set, they take precedence
+over all other runset opening behavior options.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>tsmc_template. <a
+href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
+<p>Calibre Verification User’s Manual</p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>cascode compensation</title>
     <url>/2022/11/26/cascode-compensation/</url>
     <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
@@ -14195,7 +14230,7 @@ together
   </entry>
   <entry>
     <title>Metastability and Synchronizer</title>
-    <url>/2022/05/08/synchronizer-metastability/</url>
+    <url>/2023/08/10/synchronizer-metastability/</url>
     <content><![CDATA[<h2 id="sequentail-logic-deal">Sequentail logic deal</h2>
 <p>We guarantee setup &amp; hold time / minimum clock width, FF
 guarantees propagation delay (clock -&gt; q delay)</p>
@@ -14243,14 +14278,14 @@ state</h2>
 <h2 id="data-flip-flops-vs.-synchronizer-flip-flops">Data Flip-Flops Vs.
 Synchronizer Flip-Flops</h2>
 <p><img
-src="/2022/05/08/synchronizer-metastability/image-20230704230313635.png"
+src="/2023/08/10/synchronizer-metastability/image-20230704230313635.png"
 alt="image-20230704230313635" /></p>
 <h2 id="reference">reference</h2>
 <p>Chen, Doris T., Deshanand P. Singh, Jeffrey Chromczak, David M.
 Lewis, Ryan Fung, David Neto and Vaughn Betz. “A comprehensive approach
 to modeling, characterizing and optimizing for metastability in FPGAs.”
 Symposium on Field Programmable Gate Arrays (2010).</p>
-<p>Jerome Cox. Synchronizers And Data FlipFlops are Different [<a
+<p>Jerome Cox. Synchronizers And Data Flip-Flops are Different [<a
 href="https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf">pdf</a>]</p>
 <p>J. U. Horstmann, H. W. Eichel and R. L. Coates, "Metastability
 behavior of CMOS ASIC flip-flops in theory and test," in IEEE Journal of

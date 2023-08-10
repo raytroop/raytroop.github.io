@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,354 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/01/sampling-dft/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/01/sampling-dft/" class="post-title-link" itemprop="url">impulse train to discrete-time sequence</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-01 01:03:18" itemprop="dateCreated datePublished" datetime="2022-05-01T01:03:18+00:00">2022-05-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>The sampling process mathematically in the two stages:</p>
+<ul>
+<li><p>impulse train modulator <span class="math display">\[
+x_s(t)=x_c(t)s(t)
+\]</span></p></li>
+<li><p>impulse train to a sequence</p></li>
+</ul>
+<p><img src="/2022/05/01/sampling-dft/image-20230519000700841.png"
+alt="image-20230519000700841" /></p>
+<h2 id="impulse-train-modulator">impulse train modulator</h2>
+<p><img src="/2022/05/01/sampling-dft/image-20230519000740312.png"
+alt="image-20230519000740312" /></p>
+<blockquote>
+<p>Arrows with length proportional to their area.</p>
+</blockquote>
+<p>The periodic impulse train is <span class="math display">\[
+s(t) = \sum_{n=-\infty}^{+\infty}\delta (t-nT)
+\]</span> where <span class="math inline">\(\delta (t)\)</span> is the
+<strong>unit</strong> impulse function, or Dirac delta function; <span
+class="math inline">\(T\)</span> is the <em>sampling period</em>, and
+its reciprocal, <span class="math inline">\(f_s=1/T\)</span>, is the
+<em>sampling frequency</em>, in samples per second.</p>
+<p>The product of <span class="math inline">\(s(t)\)</span> and <span
+class="math inline">\(x_c (t)\)</span> is therefore</p>
+<p><span class="math display">\[\begin{align}
+x_s (t) &amp;= x_c(t)s(t) \\
+&amp;= x_c(t) \sum_{n=-\infty}^{+\infty}\delta (t-nT) =
+\sum_{n=-\infty}^{+\infty}x_c(t)\delta (t-nT)
+\end{align}\]</span></p>
+<p>The impulse train sampling <span
+class="math inline">\(x_s(t)\)</span> can be expressed as <span
+class="math display">\[
+x_s(t) = \sum_{n=-\infty}^{+\infty}x_c(nT)\delta (t-nT)
+\]</span> i.e., the size (area) of the <em>impulse</em> at sample time
+<span class="math inline">\(nT\)</span> is equal to the value of the
+continuous-time signal at that time.</p>
+<h3 id="x_st-in-frequency-domain"><span
+class="math inline">\(x_s(t)\)</span> in Frequency-domain</h3>
+<p><span class="math display">\[
+X_s(j\Omega) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega -
+k\Omega_s))
+\]</span></p>
+<blockquote>
+<p>The relationship between the Fourier transforms of the input and the
+output of the <em>impulse train modulator</em></p>
+</blockquote>
+<p><img src="/2022/05/01/sampling-dft/image-20230519002317865.png"
+alt="image-20230519002317865" /></p>
+<h2 id="impulse-train-to-a-sequence">impulse train to a sequence</h2>
+<p><img src="/2022/05/01/sampling-dft/image-20230519000938294.png"
+alt="image-20230519000938294" /></p>
+<blockquote>
+<ul>
+<li><p>The <span class="math inline">\(x_s(t)\)</span> is, in a sense, a
+<em>continuous-time signal (specifically, an impulse train)</em> that is
+zero,except at integer multiples of <span
+class="math inline">\(T\)</span>.</p></li>
+<li><p>The sequence <span class="math inline">\(x[n]\)</span> is indexed
+on the integer variable <span class="math inline">\(n\)</span>, which
+introduces a *time normalization, <span
+class="math inline">\(x[n]\)</span> contains <strong>no</strong>
+explicit information about the sampling period <span
+class="math inline">\(T\)</span></p></li>
+<li><p>The samples of <span class="math inline">\(x_c(t)\)</span> are
+represented by <em>finite numbers</em> in <span
+class="math inline">\(x[n]\)</span> rather than as the *areas of
+impulses in <span class="math inline">\(x_s(t)\)</span></p></li>
+</ul>
+</blockquote>
+<p>Our eventual objective is to express <span
+class="math inline">\(X(e^{j\omega})\)</span>, the <em>discrete-time
+Fourier transform (DTFT) of the sequence <span
+class="math inline">\(x[n]\)</span></em>, in terms of <span
+class="math inline">\(X_s(j\Omega)\)</span> and <span
+class="math inline">\(X_c(j\Omega)\)</span>.</p>
+<p>Toward this end, let us consider an alternative expression for <span
+class="math inline">\(X_s(j\Omega)\)</span>, Applying the
+continuous-time Fourier transform to <span class="math inline">\(x_s(t)
+= \sum_{n=-\infty}^{+\infty}x_c(nT)\delta (t-nT)\)</span>, we obtain
+<span class="math display">\[
+X_s(j\Omega) = \sum_{n=-\infty}^{+\infty}x_c(nT)e^{-j\Omega Tn}
+\]</span> and <span class="math display">\[
+X(e^{j\omega}) =\sum_{n=-\infty}^{+\infty}x[n]e^{-j\omega n}
+\]</span> where DTFT is applied</p>
+<p>Since <span class="math display">\[
+x[n] = x_c(nT)
+\]</span> it follows that <span class="math display">\[
+X_s(j\Omega) = X(e^{j\omega})|_{\omega=\Omega T} = X(e^{j\Omega T})
+\]</span> Consequently, <span class="math display">\[
+X(e^{j\Omega T}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega -
+k\Omega_s))
+\]</span></p>
+<p>or equivalently, <span class="math display">\[
+X(e^{j\omega}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[
+j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right]
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(\omega\)</span>: radians per sample</p>
+<p><span class="math inline">\(\Omega\)</span>: radians per second</p>
+</blockquote>
+<h2 id="impulse-invariance">Impulse Invariance</h2>
+<p><span class="math display">\[
+h[n] = Th_c(nT)
+\]</span></p>
+<p>When <span class="math inline">\(h[n]\)</span> and <span
+class="math inline">\(h_c(t)\)</span> are related through the above
+equation, i.e., the impulse response of the discrete-time system is a
+<em>scaled</em>, <em>sampled</em> version of <span
+class="math inline">\(h_c(t)\)</span>, the <em>discrete-time system</em>
+is said to be an <strong>impulse-invariant</strong> version of the
+<em>continuous-time system</em>.</p>
+<p>we have <span class="math display">\[
+H(e^{j\omega}) = H_c\left(j\frac{\omega}{T}\right)
+\]</span></p>
+<h2 id="application---transfer-function">Application - Transfer
+function</h2>
+<h3 id="sampled-impulse-response">sampled impulse response</h3>
+<p>The below equation demonstrates how to obtain <strong>continuous
+Fourier Transform</strong> from <strong>DTFT</strong> . <span
+class="math display">\[
+X_c(\omega) = T \cdot X(\omega)
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(T\)</span> is sample period, follow
+previous equation</p>
+</blockquote>
+<h3 id="useful-functions">useful functions</h3>
+<ul>
+<li><p>using <code>fft</code></p>
+<p>The outputs of the DFT are <strong>samples</strong> of the
+DTFT</p></li>
+<li><p>using <code>freqz</code></p>
+<p>modeling as <strong>FIR filter</strong>, and the impulse response
+sequence of an FIR filter is the same as the sequence of filter
+coefficients, we can express the frequency response in terms of either
+the filter coefficients or the impulse response</p>
+<blockquote>
+<p><code>fft</code> is used in <code>freqz</code> internally</p>
+</blockquote></li>
+</ul>
+<h3 id="practical-example">Practical Example</h3>
+<p><strong>Question</strong>:</p>
+<p>​ How to obtain continuous system transfer function from sampled
+impulse</p>
+<p><strong>Answer</strong>:</p>
+<p>​ using above mentioned functions</p>
+<hr />
+<blockquote>
+<p>First order lowpass filter with 3-dB frequency
+<strong>1Hz</strong></p>
+</blockquote>
+<p><img src="/2022/05/01/sampling-dft/image-20220501020004068.png"
+alt="image-20220501020004068" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% continuous system</span></span><br><span class="line">s = tf(<span class="string">&#x27;s&#x27;</span>);</span><br><span class="line">h = <span class="number">2</span>*<span class="built_in">pi</span>/(<span class="number">2</span>*<span class="built_in">pi</span>+s);</span><br><span class="line">[mag, phs, wout] = bode(h);</span><br><span class="line">fct = wout(:)/<span class="number">2</span>/<span class="built_in">pi</span>;</span><br><span class="line">Hct_dB = <span class="number">20</span>*<span class="built_in">log10</span>(mag(:));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fstep = <span class="number">0.01</span>;           <span class="comment">% freq resolution</span></span><br><span class="line">fnyqst = <span class="number">100</span>;</span><br><span class="line">Ts = <span class="number">1</span>/(<span class="number">2</span>*fnyqst);</span><br><span class="line">Fs = <span class="number">1</span>/Ts;              <span class="comment">% sampling freq</span></span><br><span class="line">Ns = <span class="built_in">ceil</span>(Fs/fstep);    <span class="comment">% samping points</span></span><br><span class="line">fstep = Fs/Ns;          <span class="comment">% update fstep</span></span><br><span class="line">t = (<span class="number">0</span>:Ns<span class="number">-1</span>)*Ts;        <span class="comment">% sampling time points</span></span><br><span class="line"></span><br><span class="line">y = impulse(h, t);      <span class="comment">% impulse resp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% modelling as discrete system</span></span><br><span class="line">Y = fft(y);                 <span class="comment">% dft</span></span><br><span class="line">Hfft = Y * Ts;              <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfft_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfft(<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)));</span><br><span class="line">ffft = (<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)*fstep - fstep;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Hfir, ffir] = freqz(y, <span class="number">1</span>, [], <span class="number">1</span>/Ts);   <span class="comment">% modelling as FIR</span></span><br><span class="line">Hfir = Hfir * Ts;           <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfir_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfir));</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot</span></span><br><span class="line">semilogx(fct, Hct_dB, <span class="string">&#x27;k&#x27;</span>, ffft, Hfft_dB, <span class="string">&#x27;r.-&#x27;</span>, ffir, Hfir_dB, <span class="string">&#x27;b--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;bode(s)&#x27;</span>, <span class="string">&#x27;fft&#x27;</span>, <span class="string">&#x27;FIR model&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">xlim([<span class="number">1e-2</span> <span class="number">1e2</span>]);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response of different methods&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="fourier-transform-of-impusle-train">Fourier transform of impusle
+train</h2>
+<h3 id="periodic-continuous-time">Periodic Continuous-Time</h3>
+<p><span class="math display">\[
+x(t) = \sum_{n \in \mathbb{Z}}\delta(t-nT)\overset{FT}{\longrightarrow}
+\frac{2\pi}{T}\sum_{k\in \mathbb{Z}}\delta(\omega - k\frac{2\pi}{T})
+\]</span></p>
+<h3 id="periodic-discrete-time">Periodic Discrete-Time</h3>
+<p>Consider the periodic discrete-time impulse train <span
+class="math display">\[
+\tilde{p}[n] = \sum_{r=-\infty}^{\infty}\delta[n-rN]
+\]</span> <strong>DFS</strong> of <span
+class="math inline">\(\tilde{p}[n]\)</span> is <span
+class="math display">\[
+\tilde{P}[k] = 1,\quad \text{for all k.}
+\]</span> Therefore, the <strong>DTFT</strong> of <span
+class="math inline">\(\tilde{p}[n]\)</span> is <span
+class="math display">\[
+\tilde{P}(e^{j\omega}) =
+\frac{2\pi}{N}\sum_{k=-\infty}^{\infty}\delta\left( \omega - \frac{2\pi
+k}{N} \right)
+\]</span></p>
+<h3 id="multiplication-property-of-fourier-transform">Multiplication
+Property of Fourier Transform</h3>
+<p><span class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span> Then sampled signal fourier transform is <span
+class="math display">\[\begin{align}
+X_s(\omega) &amp;= \frac{1}{2\pi}X_{\delta}(\omega)*X(\omega) \\
+&amp;= \frac{1}{T} \left(\sum_{k\in \mathbb{Z}}\delta(\omega -
+k\frac{2\pi}{T})\right) * X(\omega)
+\end{align}\]</span></p>
+<p><a
+target="_blank" rel="noopener" href="https://web.stanford.edu/class/ee179/lectures/notes11.pdf">Lecture
+11: Sampling and Pulse Modulation</a></p>
+<p><img src="/2022/05/01/sampling-dft/image-20220520221108500.png"
+alt="image-20220520221108500" /></p>
+<h2 id="gotcha">Gotcha</h2>
+<p>A remarkable fact of linear systems is that the <strong>complex
+exponentials</strong> are <strong>eigenfunctions</strong> of a linear
+system, as the system output to these inputs equals the input multiplied
+by a constant factor.</p>
+<ul>
+<li>Both amplitude and phase may change</li>
+<li>but the frequency does not change</li>
+</ul>
+<p>Take the input signal to be a complex exponential of the form <span
+class="math inline">\(x(t)=Ae^{j\phi}e^{j\omega t}\)</span></p>
+<p><span class="math display">\[\begin{align}
+y(t) &amp;= h(t)*x(t) \\
+&amp;= H(j\omega)Ae^{j\phi}e^{j\omega t}
+\end{align}\]</span></p>
+<p>The frequency response at <span
+class="math inline">\(-\omega\)</span> is the <strong>complex
+conjugate</strong> of the frequency response at <span
+class="math inline">\(+\omega\)</span>, given <span
+class="math inline">\(h(t)\)</span> is real</p>
+<p><span class="math display">\[\begin{align}
+H^*(t) &amp;= \left(\int_{-\infty}^{+\infty}h(t)e^{-j\omega
+t}dt\right)^* \\
+&amp;= \int_{-\infty}^{+\infty}h^*(t)e^{+j\omega t}dt \\
+&amp;= \int_{-\infty}^{+\infty}h(t)e^{-j(-\omega t)}dt \\
+&amp;= H(-j\omega)
+\end{align}\]</span></p>
+<p>The <strong>real cosine signal</strong> is actually composed of two
+<strong>complex exponential signals</strong>: one with positive
+frequency and the other with negative <span class="math display">\[
+cos(\omega t + \phi) = \frac{e^{j(\omega t + \phi)} + e^{-j(\omega t +
+\phi)}}{2}
+\]</span></p>
+<p>The sinusoidal response is the sum of the complex-exponential
+response at the positive frequency <span
+class="math inline">\(\omega\)</span> and the response at the
+corresponding negative frequency <span
+class="math inline">\(-\omega\)</span> because of LTI systems's
+superposition property</p>
+<ul>
+<li><p>input: <span class="math display">\[\begin{align}
+x(t) &amp;= A cos(\omega t + \phi) \\
+&amp;= \frac{1}{2}Ae^{\phi}e^{\omega t} +
+\frac{1}{2}Ae^{-\phi}e^{-\omega t}
+\end{align}\]</span></p></li>
+<li><p>output with <span
+class="math inline">\(H(j\omega)=Ge^{j\theta}\)</span>: <span
+class="math display">\[\begin{align}
+y(t) &amp;= H(j\omega)\frac{1}{2}Ae^{\phi}e^{\omega t}
++  H(-j\omega)\frac{1}{2}Ae^{-\phi}e^{-\omega t} \\
+&amp;= Ge^{j\theta}\frac{1}{2}Ae^{\phi}e^{\omega t} +
+Ge^{-j\theta}\frac{1}{2}Ae^{-\phi}e^{-\omega t} \\
+&amp;= GAcos(\omega t + \phi + \theta)
+\end{align}\]</span></p></li>
+</ul>
+<p>Its phase shift is <span class="math inline">\(\theta\)</span> and
+gain is <span class="math inline">\(G\)</span>, which is same with <span
+class="math inline">\(H(j\omega)\)</span>.</p>
+<h2 id="reference">reference</h2>
+<p>James H. McClellan, Ronald Schafer, and Mark Yoder. 2015. DSP First
+(2nd. ed.). Prentice Hall Press, USA.</p>
+<p><a target="_blank" rel="noopener" href="https://www.mathworks.com/help/matlab/ref/fft.html">fft -
+https://www.mathworks.com/help/matlab/ref/fft.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.mathworks.com/help/signal/ref/freqz.html">freqz
+- https://www.mathworks.com/help/signal/ref/freqz.html</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cs.ccu.edu.tw/~wtchu/courses/2012s_DSP/Lectures/Lecture%2026%20Frequency%20Response.pdf">Wei-Ta
+Chu, 2012s_DSP - Lecture 26 Frequency Response</a></p>
+<p>Relationship between continuous-time and discrete-time Fourier
+transforms URL: <a
+target="_blank" rel="noopener" href="https://blogs.mathworks.com/steve/2010/01/18/relationship-between-continuous-time-and-discrete-time-fourier-transforms/">https://blogs.mathworks.com/steve/2010/01/18/relationship-between-continuous-time-and-discrete-time-fourier-transforms/</a></p>
+<p>Oppenheim, Alan V. and Cram. “Discrete-time signal processing : Alan
+V. Oppenheim, 3rd edition.” (2011).</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +574,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -316,7 +664,7 @@ Compliance Testing Utilizing Novel Statistical Eye Methodology.”
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,7 +852,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -681,7 +1029,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1188,7 +1536,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1604,7 +1952,7 @@ capacitance</strong></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1789,7 +2137,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1883,7 +2231,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2033,7 +2381,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:31:26" itemprop="dateModified" datetime="2023-08-10T15:31:26+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2178,169 +2526,6 @@ alt="image-20220404195052310" /></p>
 <h4 id="en_reg">en_reg</h4>
 <p><img src="/2022/04/04/reg-verifier/image-20220404195156776.png"
 alt="image-20220404195156776" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/03/functional-coverage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/03/functional-coverage/" class="post-title-link" itemprop="url">Functional Coverage Modeling</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-03 20:19:08" itemprop="dateCreated datePublished" datetime="2022-04-03T20:19:08+00:00">2022-04-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 11:02:11" itemprop="dateModified" datetime="2023-08-10T11:02:11+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="coverage-options">Coverage Options</h2>
-<ul>
-<li>Explicit (user defined)
-<ul>
-<li>Fully and clearly expressed within sources
-<ul>
-<li>Sequence and temporal coverage using assertions</li>
-<li>Data-oriented coverage using <code>covergroup</code></li>
-</ul></li>
-<li>Planned and defined by the verification team</li>
-</ul></li>
-<li>Implicit
-<ul>
-<li>Derived or computed from source
-<ul>
-<li>Code coverage measured by the simulator</li>
-</ul></li>
-<li>May be defined outside the verification team</li>
-<li>May be implied by the verification interface
-<ul>
-<li>e.g., an industry standard protocol</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
-Systemverilog</h2>
-<h3 id="assertions-for-control-oriented-coverage">Assertions for
-control-oriented coverage</h3>
-<ul>
-<li>Defined as procedural statements</li>
-<li><strong>CANNOT</strong> be defined in a class</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
-and the cover directive. It is used to cover sequences of signal values
-over time. Assertions cannot be declared or "covered" in a class
-declaration, so their use in an UVM verification environment is
-restricted to <strong>interface only</strong></p>
-</blockquote>
-<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
-data-oriented coverage</h3>
-<ul>
-<li>CAN be declared as a class member and created in class
-constructor</li>
-<li>Used in <strong>interface</strong> and module UVCs</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Data-oriented coverage uses the <code>covergroup</code> construct.
-Covergroups can be declared and created in classes, therefore they are
-essential for explicit coverage in a UVM verification environment.</p>
-</blockquote>
-<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
-<p><code>covergroup new</code> constructor is called
-<strong>directly</strong> off the declaration of the covergroup, it does
-not have a separate instance name</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<p>The <code>covergroup</code> instance must be created in the class
-constructor, not a UVM <code>build_phase</code> or other phase
-method</p>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403210225837.png"
-alt="image-20220403210225837" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
-<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
-<p>Typical module UVC coverage:</p>
-<ul>
-<li>Routing - packets flow from input ports to all legal outputs</li>
-<li>latency - all packets received within speicied delay</li>
-</ul>
-<blockquote>
-<p>The module UVC monitor receives data from the interface monitors via
-analysis ports, so the implementation of the analysis write function is
-a convenient place to put coverage code</p>
-</blockquote>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403212529981.png"
-alt="image-20220403212529981" /></p>
 
       
     </div>

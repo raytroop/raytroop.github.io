@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-count">187</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,144 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/08/run-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/08/run-test/" class="post-title-link" itemprop="url">How does UVM's run_test search testcase ?</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-08 00:53:36" itemprop="dateCreated datePublished" datetime="2022-06-08T00:53:36+00:00">2022-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>It depends on the simulator:</p>
+<ul>
+<li>QuestaSim, Xcelium: You have to <code>import</code> pkg or
+`<code>include</code> file in top testbench</li>
+<li>VCS: VCS automatically search testcase in other Compilation
+Units</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test_pkg.sv</span></span><br><span class="line"><span class="keyword">package</span> sim_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">		`uvm_component_utils(my_test)</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">			<span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">		<span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">			`uvm_info(get_type_name(), <span class="string">&quot;this is run_phase of my_test&quot;</span>, UVM_LOW)</span><br><span class="line">		<span class="keyword">endtask</span> : run_phase</span><br><span class="line">	<span class="keyword">endclass</span> : my_test</span><br><span class="line"></span><br><span class="line">	<span class="keyword">class</span> its_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">		`uvm_component_utils(its_test)</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">			<span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">		<span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">			`uvm_info(get_type_name(), <span class="string">&quot;this is run_phase of its_test&quot;</span>, UVM_LOW)</span><br><span class="line">		<span class="keyword">endtask</span> : run_phase</span><br><span class="line">	<span class="keyword">endclass</span> : its_test</span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span> : sim_pkg</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tb_top.sv</span></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="comment">//import sim_pkg::*;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		run_test();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 78%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>simulator</th>
+<th>cmd</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VCS</td>
+<td><code>vcs -sverilog -ntb_opts uvm-1.2 test_pkg.sv tb_top.sv</code><br /><code>./simv +UVM_TESTNAME=my_test</code></td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>Xcelium</td>
+<td><code>xrun -64 -uvmhome CDNS-1.2 test_pkg.sv tb_top.sv +UVM_TESTNAME=my_test</code></td>
+<td>✗</td>
+</tr>
+<tr class="odd">
+<td>QuestaSim</td>
+<td><code>vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</code><br /><code>vsim -c -do "run -all;exit" +UVM_TESTNAME=my_test work.tb_top -L $QUESTA_HOME/uvm-1.2</code></td>
+<td>✗</td>
+</tr>
+</tbody>
+</table>
+<p><em>Xcelium log:</em></p>
+<blockquote>
+<p><code>UVM_WARNING @ 0: reporter [BDTYP] Cannot create a component of type 'my_test' because it is not registered with the factory. UVM_FATAL @ 0: reporter [INVTST] Requested test from command line +UVM_TESTNAME=my_test not found. UVM_INFO /home/EDA/Cadence/XCELIUM2109/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 0: reporter [UVM/REPORT/CATCHER]</code></p>
+</blockquote>
+<p><em>QuestaSim log:</em></p>
+<blockquote>
+<p><code># UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3</code>
+<code># UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)</code>
+<code># UVM_WARNING @ 0: reporter [BDTYP] Cannot create a component of type 'my_test' because it is not registered with the factory.</code>
+<code># UVM_FATAL @ 0: reporter [INVTST] Requested test from command line +UVM_TESTNAME=my_test not found.</code>
+<code># UVM_INFO verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 0: reporter [UVM/REPORT/SERVER]</code></p>
+</blockquote>
+<p><strong>solution:</strong></p>
+<p>uncomment <code>//import sim_pkg::*;</code> in <em>tb_top.sv</em></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +364,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -488,7 +626,7 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -601,7 +739,7 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -723,7 +861,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -822,7 +960,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -935,7 +1073,7 @@ target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1177,7 +1315,7 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1297,7 +1435,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1495,7 +1633,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1655,99 +1793,6 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/59807/59253
 target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
 <p>Why remove energy at Nyquist before ifft? URL: <a
 target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/14/vpwlf-designvar/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/14/vpwlf-designvar/" class="post-title-link" itemprop="url">Design Variable in analogLib-vpwlf</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-14 11:58:32" itemprop="dateCreated datePublished" datetime="2022-05-14T11:58:32+00:00">2022-05-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>PWL File as Design Var?</code> parameter in <em>vpwlf</em> cell
-is convenient for sweep simulation or corner simulation, wherein there
-are multiple pwl files .</p>
-<p><img src="/2022/05/14/vpwlf-designvar/image-20220514121048124.png"
-alt="image-20220514121048124" /></p>
-<p>The file path should be surrounded with
-<strong>double-quotes</strong> to be protected from evaluation.</p>
-<p><img src="/2022/05/14/vpwlf-designvar/image-20220514121150988.png"
-alt="image-20220514121150988" /></p>
 
       
     </div>

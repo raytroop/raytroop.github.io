@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-count">187</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,126 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/21/Efficient-Sequence-Objection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/21/Efficient-Sequence-Objection/" class="post-title-link" itemprop="url">Efficient Sequence Objection in UVM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-21 21:55:05" itemprop="dateCreated datePublished" datetime="2022-02-21T21:55:05+00:00">2022-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Objections are handled in <strong>pre/post body</strong> decalared in
+a base sequence class</p>
+<p>This is efficient for all sequence execution options:</p>
+<ul>
+<li><p>Default sequences use body objections</p></li>
+<li><p>Test sequences use test objections</p></li>
+<li><p>Subsequences use objections of the root sequence which calls
+them</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_base_seq <span class="keyword">extends</span> uvm_sequence<span class="variable">#(yapp_packet)</span>;</span><br><span class="line">…</span><br><span class="line">    <span class="keyword">task</span> pre_body();</span><br><span class="line">        <span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">        	starting_phase<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    <span class="keyword">task</span> post_body();</span><br><span class="line">    	<span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">    		starting_phase<span class="variable">.drop_objection</span>(<span class="keyword">this</span>, get_type_name());	</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">…</span><br><span class="line"><span class="keyword">class</span> yapp012 <span class="keyword">extends</span> yapp_base_seq;</span><br><span class="line">…</span><br></pre></td></tr></table></figure>
+<p><strong>Set as default sequence of sequencer:</strong></p>
+<p>A default sequence is a root sequence, so the <strong>pre/post
+body</strong> methods are executed and objection are raised/dropped
+there</p>
+<p><strong>Test sequence:</strong></p>
+<p>A test sequence is a root sequence, so the <strong>pre/post
+body</strong> methods are executed. However, for a test sequence,
+<code>starting_phase</code> is <code>null</code> and so the objection is
+not handled in the sequence. The test must raise and drop objections</p>
+<p><strong>Subsequence:</strong></p>
+<p>Not a root sequence, so <strong>pre/post body</strong> methods are
+not executed. The root sequence which ultimately called the subsequence
+handles the objections, using one of the two options above.</p>
+<blockquote>
+<p>If a <strong>sequence</strong> is call via a <strong>`uvm_do</strong>
+variant, the it is defined as a subsequence and its
+<strong>pre/post_body()</strong> methods are not executed.</p>
+</blockquote>
+<p><strong>objection change in UVM1.2</strong></p>
+<p>Raising or dropping objections directly from
+<code>starting_phase</code> is deprecated</p>
+<ul>
+<li><p>must use <code>get_starting_phase()</code> method</p></li>
+<li><p>prevents modification of phase during sequence</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +346,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,7 +471,7 @@ target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analo
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -455,7 +575,7 @@ Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -547,7 +667,7 @@ target="_blank" rel="noopener" href="https://github.com/StanfordAHA/PowerDomainD
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -637,7 +757,7 @@ alt="pma_dig_bumps.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -812,7 +932,7 @@ i&#39;(t)=g(t)v&#39;(t)
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -943,7 +1063,7 @@ target="_blank" rel="noopener" href="https://www.master-micro.com/professional-c
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1028,7 +1148,7 @@ target="_blank" rel="noopener" href="https://www.master-micro.com/professional-c
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1120,7 +1240,7 @@ circuits.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1143,98 +1263,6 @@ circuits.</p>
     
     <div class="post-body" itemprop="articleBody">
           <div class="pdf-container" data-target="/pdfs/nonoverlapping_clocks.pdf" data-height="500px"></div>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/" class="post-title-link" itemprop="url">INL, DNL analysis of current steering DAC</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-13 10:47:59" itemprop="dateCreated datePublished" datetime="2022-02-13T10:47:59+00:00">2022-02-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="mos-mismatch">MOS mismatch</h2>
-<div class="pdf-container" data-target="/pdfs/mos_mismatch.pdf" data-height="500px"></div>
-<h2 id="current-mirror-mismatch-analysis">Current mirror mismatch
-analysis</h2>
-<div class="pdf-container" data-target="/pdfs/Current_mirror_mismatch_analysis.pdf" data-height="500px"></div>
-<h2 id="inldnl-analysis-of-current-steering-dac">INL/DNL analysis of
-current steering DAC</h2>
-<div class="pdf-container" data-target="/pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf" data-height="500px"></div>
 
       
     </div>

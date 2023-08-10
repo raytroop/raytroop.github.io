@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-count">187</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,156 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/02/sign-sign-LMS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/02/sign-sign-LMS/" class="post-title-link" itemprop="url">Sign-Sign LMS Adaptation algorithm in FFE and DFE</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-02 21:29:47" itemprop="dateCreated datePublished" datetime="2022-03-02T21:29:47+00:00">2022-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="adaptive-equalizing-link-architecture">Adaptive equalizing link
+architecture</h4>
+<p><img src="/2022/03/02/sign-sign-LMS/image-20220302213259394.png"
+alt="image-20220302213259394" /></p>
+<p>dLev: desired signal level</p>
+<p>y<sub>n</sub>: received signal at time n</p>
+<p>er<sub>n</sub>: the error slicer sample, i.e. sign(dLev -
+y<sub>n</sub>)</p>
+<p>d<sub>n-k</sub>: the data slicer sample at time n-k</p>
+<h4 id="least-mean-square-algorithm-lms">Least Mean Square Algorithm
+(LMS)</h4>
+<p>Loss function or cost function: <span
+class="math display">\[\begin{align}
+e_n^2 &amp;= (dLev - y_n)^2
+\end{align}\]</span></p>
+<p>Transmitter and channel response: <span
+class="math display">\[\begin{align}
+ytx_n &amp;= \sum_{0}^{k}\omega_n^k\ast dtx_{n-k} \\
+y_n &amp;= f_{ch}(ytx_n)
+\end{align}\]</span> <span class="math inline">\(ytx_n\)</span> is
+output of transmitter at time n; <span
+class="math inline">\(f_{ch}\)</span> is channel response, for
+simplicity, scaling factor <span class="math inline">\(\alpha\)</span>,
+(<span class="math inline">\(\alpha &gt; 0\)</span>) is enough.</p>
+<p>Update function (i.e. Gradient descent): <span
+class="math display">\[\begin{align}
+\omega_{n+1}^k = \omega_{n}^k - \frac{\eta}{2}\ast\frac{\partial
+e_n^2}{\partial \omega_{n}^k} \\
+\omega_{n+1}^k = \omega_{n}^k + \eta \ast e_n \ast\frac{\partial
+y_n}{\partial \omega_{n}^k}
+\end{align}\]</span> <span class="math inline">\(\eta\)</span> is
+learning rate or the rate of update, which is greater than zero.</p>
+<h4 id="sign-sign-lms-sslms">Sign-Sign LMS (SSLMS)</h4>
+<p><strong>Why Sign-Sign LMS</strong></p>
+<p>$ (dLev - y_n)$ and <span class="math inline">\(\frac{\partial
+y_n}{\partial \omega_{n}^k}\)</span> is hard to get in circuit, where
+the actual analog value should be obtained.</p>
+<p><img src="/2022/03/02/sign-sign-LMS/image-20220302231044136.png"
+alt="image-20220302231044136" /></p>
+<p>In <strong>SSLMS algorithm</strong>, only the polarities of samples
+are used since it is easy to detect by simple comparators. Moreover,
+recovered data by hard decision is employed instead of <span
+class="math inline">\(y_n\)</span> for more simplicity.</p>
+<p>The update function can be written as,</p>
+<p><span class="math display">\[\begin{align}
+\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(e_n) \ast
+Sign(\frac{\partial y_n}{\partial \omega_{n}^k}) \\
+\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(e_n) \ast \alpha
+\ast Sign(\frac{\partial ytx_n}{\partial \omega_{n}^k}) \\
+\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(er_n) \ast
+Sign(d_{n-k})
+\end{align}\]</span></p>
+<p>SSLMS algorithm useful for DFE adaptation.</p>
+<h4 id="reference">Reference</h4>
+<p>T11: Basics of Equalization Techniques: Channels, Equalization, and
+Circuits, 2022 IEEE International Solid-State Circuits Conference</p>
+<p>V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link
+transceiver with adaptive equalization and data recovery," in IEEE
+Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012-1026, April
+2005, doi: 10.1109/JSSC.2004.842863.</p>
+<p>Jinhyung Lee, Design of High-Speed Receiver for Video Interface with
+Adaptive Equalization; Phd thesis, August 2019. <a
+target="_blank" rel="noopener" href="http://dcollection.snu.ac.kr/common/orgView/000000157003">thesis
+link</a></p>
+<p>Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical
+Implementation, 5th edition</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +376,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -440,7 +590,7 @@ target="_blank" rel="noopener" href="https://www.tauworkshop.com/2021/speaker_sl
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -562,7 +712,7 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -673,7 +823,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -789,7 +939,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -913,7 +1063,7 @@ alt="cascode_compensation" /> <span class="math display">\[\begin{align}
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1038,7 +1188,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1140,7 +1290,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1655,7 +1805,7 @@ Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
+      <time title="Modified: 2023-08-10 15:50:58" itemprop="dateModified" datetime="2023-08-10T15:50:58+00:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1708,126 +1858,6 @@ top-down)</li>
 <li><strong>Tasks</strong> are forked into concurrent executing
 threads</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/21/Efficient-Sequence-Objection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/21/Efficient-Sequence-Objection/" class="post-title-link" itemprop="url">Efficient Sequence Objection in UVM</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-21 21:55:05" itemprop="dateCreated datePublished" datetime="2022-02-21T21:55:05+00:00">2022-02-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-10 15:50:54" itemprop="dateModified" datetime="2023-08-10T15:50:54+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Objections are handled in <strong>pre/post body</strong> decalared in
-a base sequence class</p>
-<p>This is efficient for all sequence execution options:</p>
-<ul>
-<li><p>Default sequences use body objections</p></li>
-<li><p>Test sequences use test objections</p></li>
-<li><p>Subsequences use objections of the root sequence which calls
-them</p></li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_base_seq <span class="keyword">extends</span> uvm_sequence<span class="variable">#(yapp_packet)</span>;</span><br><span class="line">…</span><br><span class="line">    <span class="keyword">task</span> pre_body();</span><br><span class="line">        <span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">        	starting_phase<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    <span class="keyword">task</span> post_body();</span><br><span class="line">    	<span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">    		starting_phase<span class="variable">.drop_objection</span>(<span class="keyword">this</span>, get_type_name());	</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">…</span><br><span class="line"><span class="keyword">class</span> yapp012 <span class="keyword">extends</span> yapp_base_seq;</span><br><span class="line">…</span><br></pre></td></tr></table></figure>
-<p><strong>Set as default sequence of sequencer:</strong></p>
-<p>A default sequence is a root sequence, so the <strong>pre/post
-body</strong> methods are executed and objection are raised/dropped
-there</p>
-<p><strong>Test sequence:</strong></p>
-<p>A test sequence is a root sequence, so the <strong>pre/post
-body</strong> methods are executed. However, for a test sequence,
-<code>starting_phase</code> is <code>null</code> and so the objection is
-not handled in the sequence. The test must raise and drop objections</p>
-<p><strong>Subsequence:</strong></p>
-<p>Not a root sequence, so <strong>pre/post body</strong> methods are
-not executed. The root sequence which ultimately called the subsequence
-handles the objections, using one of the two options above.</p>
-<blockquote>
-<p>If a <strong>sequence</strong> is call via a <strong>`uvm_do</strong>
-variant, the it is defined as a subsequence and its
-<strong>pre/post_body()</strong> methods are not executed.</p>
-</blockquote>
-<p><strong>objection change in UVM1.2</strong></p>
-<p>Raising or dropping objections directly from
-<code>starting_phase</code> is deprecated</p>
-<ul>
-<li><p>must use <code>get_starting_phase()</code> method</p></li>
-<li><p>prevents modification of phase during sequence</p></li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
 
       
     </div>

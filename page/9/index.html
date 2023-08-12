@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-count">188</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">235</span>
+        <span class="site-state-item-count">236</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,6 +181,284 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/09/esd-protection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/09/esd-protection/" class="post-title-link" itemprop="url">ESD and Protection</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-09 23:13:59" itemprop="dateCreated datePublished" datetime="2022-06-09T23:13:59+00:00">2022-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>The <strong>ESD design window</strong> is defined as the difference
+between the breakdown voltage of the functional circuit (red line) and
+the maximum signal voltage (blue line) <img
+src="/2022/06/09/esd-protection/esddesignwindow-evolution.jpg"
+alt="esddesignwindow-evolution" /></p>
+<h2 id="tlp">TLP</h2>
+<p>What makes <strong>TLP</strong> different than <strong>ESD</strong>
+?</p>
+<ul>
+<li><strong>ESD</strong> tests simulate real world events (HBM, MM,
+CDM)</li>
+<li><strong>TLP</strong> does not simulate any real-world event</li>
+<li><strong>ESD</strong> tests record failure level
+(<em>Qualification</em>)</li>
+<li><strong>TLP</strong> tests record failure level and device behavior
+(<em>Characterization</em>)</li>
+</ul>
+<blockquote>
+<p>TLP is not a qualification test, but a characterization method, which
+describes the resistance of a device for a given stimulus, aka.
+<em>Device Characterization</em></p>
+<p>Unlike ESD waveforms, TLP does not mimic any real world event</p>
+</blockquote>
+<p><img src="/2022/06/09/esd-protection/image-20220609234548431.png"
+alt="image-20220609234548431" /></p>
+<h3 id="tlp-and-curve-tracing">TLP and Curve Tracing</h3>
+<ul>
+<li>Curve Tracing is DC; TLP is a short pulse
+<ul>
+<li>Shorter pulse - Reduced duty cycle, less heating, which means higher
+voltage before failure</li>
+<li>Controlled Impedance - Allows device behavior to be observed</li>
+</ul></li>
+<li>Both measure resistance of device with increasing voltage</li>
+</ul>
+<p><img src="/2022/06/09/esd-protection/image-20220609235252444.png"
+alt="image-20220609235252444" /></p>
+<h3 id="device-characterization-with-tlp">Device Characterization with
+TLP</h3>
+<ul>
+<li>Turn-on time</li>
+<li>Snapback voltage</li>
+<li>Performance changes with rise time</li>
+</ul>
+<p><img src="/2022/06/09/esd-protection/image-20220609235427204.png"
+alt="image-20220609235427204" /></p>
+<h3 id="vf-tlp-and-cdm-differences">VF-TLP and CDM differences</h3>
+<p>Question:</p>
+<p>How well will VF-TLP results predict CDM testing performance?</p>
+<p>Answer:</p>
+<p>VF-TLP can be a guide to CDM failure levels, and provide a lot of
+understanding of a circuit's operation during CDM stressing, but simple
+correlations between VF-TLP failure current level and CDM withstand
+voltage levels are difficult to establish.</p>
+<h2 id="snapback-device">snapback device</h2>
+<p>Unfortunately, this protection concept is not effective anymore in
+advanced FinFET technology. Our analysis showed that both core and IO
+transistors are damaged at the onset of snapback in several FinFET
+processes. <img src="/2022/06/09/esd-protection/snapback.PNG"
+alt="snapback" /></p>
+<h2 id="power-clamp">power clamp</h2>
+<p>Thanks to the device scaling the area is actually reasonable.
+However, the leakage becomes the main bottleneck. <img
+src="/2022/06/09/esd-protection/bigfet-concept.jpg"
+alt="bigfet-concept" /></p>
+<h2 id="esd-diode">ESD diode</h2>
+<p><img src="/2022/06/09/esd-protection/image-20220618123654830.png"
+alt="image-20220618123654830" /></p>
+<p><img src="/2022/06/09/esd-protection/image-20220618123821117.png"
+alt="image-20220618123821117" /></p>
+<p><img src="/2022/06/09/esd-protection/image-20220618124644879.png"
+alt="image-20220618124644879" /></p>
+<blockquote>
+<p>both diode are reverse-biased in normal operation, the PN Junction
+capacitance is proportional to forward-bias voltage</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>Device</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ndio_mac</td>
+<td>N+/P-well Diode</td>
+</tr>
+<tr class="even">
+<td>pdio_mac</td>
+<td>P+/N-well Diode</td>
+</tr>
+<tr class="odd">
+<td>ndio_18_mac</td>
+<td>1.8V N+/P-well Diode</td>
+</tr>
+<tr class="even">
+<td>pdio_18_mac</td>
+<td>1.8V P+/N-well Diode</td>
+</tr>
+<tr class="odd">
+<td>ndio_hia18_mac</td>
+<td>N-HIA Diode</td>
+</tr>
+<tr class="even">
+<td>pdio_hia18_mac</td>
+<td>P-HIA Diode</td>
+</tr>
+<tr class="odd">
+<td>ndio_gated18_mac</td>
+<td>Thick Oxide N-Gated Diode</td>
+</tr>
+<tr class="even">
+<td>pdio_gated18_mac</td>
+<td>Thick Oxide P-Gated Diode</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>HIA_DIO can be used for logic or high speed circuits ESD
+protection</p>
+<p>HIA: high current application purpose (High Amp)</p>
+<p>There is no process difference between HIA_DIO and regular diode</p>
+</blockquote>
+<p><img src="/2022/06/09/esd-protection/image-20220618191312489.png"
+alt="image-20220618191312489" /></p>
+<p><img src="/2022/06/09/esd-protection/image-20220618183241535.png"
+alt="image-20220618183241535" /></p>
+<p><img src="/2022/06/09/esd-protection/image-20220618191405428.png"
+alt="image-20220618191405428" /></p>
+<table>
+<thead>
+<tr class="header">
+<th>width (W)</th>
+<th>2.020E-07</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Length (L)</strong></td>
+<td>1.922E-06</td>
+</tr>
+<tr class="even">
+<td><strong>ArrayY (Ny)</strong></td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>Perimeter (Ny*2*(W+L))</strong></td>
+<td>8.496E-06</td>
+</tr>
+<tr class="even">
+<td><strong>Area (Ny*W*L)</strong></td>
+<td>7.76488E-13</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><p>diode is drain/source originated, which is different from MOS
+(Gate originated)</p></li>
+<li><p>The perimeter of diode in DRC is different from that in PERC
+deck, where PERC excludes the the left and right edge of OD</p></li>
+</ul>
+</blockquote>
+<h3 id="mos">MOS</h3>
+<p><img src="/2022/06/09/esd-protection/image-20220618191906210.png"
+alt="image-20220618191906210" /></p>
+<p><img src="/2022/06/09/esd-protection/image-20220618192253726.png"
+alt="image-20220618192253726" /></p>
+<p><img src="/2022/06/09/esd-protection/image-20220618192325486.png"
+alt="image-20220618192325486" /></p>
+<blockquote>
+<p><code>l</code> in netlist has different definition for MOS and
+diode.</p>
+<p>MOS: length of channel</p>
+<p>diode: Gate space</p>
+</blockquote>
+<h2 id="reference">Reference</h2>
+<p>Introduction to Transmission Line Pulse (TLP), URL: <a
+target="_blank" rel="noopener" href="https://tools.thermofisher.com/content/sfs/brochures/TLP%20Presentation%20May%202009.pdf">https://tools.thermofisher.com/content/sfs/brochures/TLP%20Presentation%20May%202009.pdf</a></p>
+<p>VF-TLP and CDM differences, URL: <a
+target="_blank" rel="noopener" href="https://www.grundtech.com/app-note-vf-tlp-cdm-differences">https://www.grundtech.com/app-note-vf-tlp-cdm-differences</a></p>
+<p>ESD-Testing: HBM to very fast TLP URL: <a
+target="_blank" rel="noopener" href="https://www.thierry-lequeu.fr/data/ESREF/2004/Tut5.pdf">https://www.thierry-lequeu.fr/data/ESREF/2004/Tut5.pdf</a></p>
+<p>S. Kim et al., "Technology Scaling of ESD Devices in State of the Art
+FinFET Technologies," 2020 IEEE Custom Integrated Circuits Conference
+(CICC), 2020, pp. 1-6, doi: 10.1109/CICC48029.2020.9075899.</p>
+<p>Barth, Jon. "TLP and VFTLP Testing of Integrated Circuit ESD
+Protection." (2015). ESD protection for FinFET processes URL: <a
+target="_blank" rel="noopener" href="https://monthly-pulse.com/2021/01/19/esd-protection-for-finfet-processes/">https://monthly-pulse.com/2021/01/19/esd-protection-for-finfet-processes/</a></p>
+<p>Yuanzhong Zhou, D. Connerney, R. Carroll and T. Luk, "Modeling MOS
+snapback for circuit-level ESD simulation using BSIM3 and VBIC models,"
+Sixth international symposium on quality electronic design (isqed'05),
+2005, pp. 476-481, doi: 10.1109/ISQED.2005.81.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +504,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -364,7 +642,7 @@ Units</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -626,7 +904,7 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -739,7 +1017,7 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -861,7 +1139,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -960,7 +1238,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1073,7 +1351,7 @@ target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1315,7 +1593,7 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1435,7 +1713,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1571,228 +1849,6 @@ alt="image-20220516012200383" /></p>
 <p>Article (20500632) Title: How to simulate Random and Deterministic
 Jitters URL:
 https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/14/dc-nyquist-fft/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/14/dc-nyquist-fft/" class="post-title-link" itemprop="url">Zero(DC component) and Nyquist Component in FFT</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-14 20:56:28" itemprop="dateCreated datePublished" datetime="2022-05-14T20:56:28+00:00">2022-05-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="dc-offset">DC offset</h2>
-<p>Performing FFT to a signal with a <em>large DC offset</em> would
-often result in a big impulse around frequency 0 Hz, thus masking out
-the signals of interests with relatively small amplitude.</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
-alt="Remove_DC_Offset_Blog_10" /></p>
-<p>One method to remove DC offset from the original signal before
-performing FFT</p>
-<ul>
-<li>Subtracting the Mean of Original Signal</li>
-</ul>
-<p>You can also not filter the input, but set zero to the zero frequency
-point for FFT result.</p>
-<h2 id="nyquist-component">Nyquist component</h2>
-<p>If we go back to the definition of the DFT <span
-class="math display">\[
-X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
-(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
-\]</span> which is a real number.</p>
-<p>The discrete function <span class="math display">\[
-x[n]=\cos(\pi n)
-\]</span> is always <span class="math inline">\((-1)^n\)</span> for
-integer <span class="math inline">\(n\)</span></p>
-<p>One general sinusoid at Nyquist and has phase shift <span
-class="math inline">\(\theta\)</span>, this is <span
-class="math inline">\(T=2\)</span> and <span
-class="math inline">\(T_s=1\)</span></p>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= A \cos(\pi n + \theta) \\
-     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
-\big) \\
-     &amp;= \big(A\cos(\theta)\big) \cos(\pi
-n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
-     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
-\cdot 0 \\
-     &amp;= B \cdot (-1)^n \\
-\end{align}\]</span></p>
-<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
-<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
-n)\)</span>, then <span class="math display">\[
-B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
-\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
-<p>In other words, you <strong>CAN'T</strong> infer the signal from
-<span class="math inline">\(X(\frac{N}{2})\)</span> <span
-class="math display">\[\begin{align}
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
-\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2}
-\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
-- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
-\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
-\cos(\pi n+\theta)
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
-you <strong>wouldn't</strong> know it because <span
-class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
-\mathbb{Z}\)</span></p>
-<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
-\]</span> However, if <span
-class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N}\ast 2 \cos(\pi n+\frac{\pi}{3})
-\]</span></p>
-<p>That sort of ambiguity is the reason for the <strong>strict
-inequality</strong> of the sampling theorem's condition.</p>
-<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
-<p><strong>Both edges</strong> is used for clock waveform to evaluate
-the duty cycle distortion,</p>
-<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
-DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
-below</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
-alt="image-20220516224616908" /></p>
-<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
-component, which is <strong>0.1</strong> in follow figure</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
-alt="image-20220516233618663" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>); </span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
-Spectrum</h2>
-<p>DC and Nyquist frequency of FFT left over</p>
-<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency                    </span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period       </span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2. </span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1) </span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
-alt="image-20220514221609734" /></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
-alt="image-20220514221642170" /></p>
-<h2 id="alternative-view">Alternative View</h2>
-<p>The direct current (DC) bin (<span
-class="math inline">\(k=0\)</span>) and the bin at <span
-class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
-the Nyquist frequency are <strong>purely real and unique</strong>.</p>
-<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
-amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
-plot is shown as below with sampling frequency is <span
-class="math inline">\(20Hz\)</span></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
-alt="image-20220427172526711" /></p>
-<p>Amplitude and Phase spectrum, sampled with <span
-class="math inline">\(f_s=20\)</span> Hz</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
-alt="image-20220427174557915" /></p>
-<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
-<strong>1</strong> and its phase is <strong>0</strong> as shown as
-above, which proves the DFT and IDFT.</p>
-<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
-Parseval's theorem), which may not be the power of continuous signal.
-The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
-<strong>1</strong>, that of corresponding continuous signal is <span
-class="math inline">\(\frac{1}{2}\)</span>.</p>
-<p>Power spectrum derived from FFT provide information of samples, i.e.
-<strong>1</strong></p>
-<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
-[1 1 1 1 ...].</p>
-<h3 id="code">code</h3>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
-target="_blank" rel="noopener" href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
-<p>How to remove DC component in FFT? URL: <a
-target="_blank" rel="noopener" href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
-<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
-seem to work unless there is a phase shift URL: <a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
-<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
-target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
-<p>Why remove energy at Nyquist before ifft? URL: <a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
 
       
     </div>

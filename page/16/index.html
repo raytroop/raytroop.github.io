@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-count">188</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">235</span>
+        <span class="site-state-item-count">236</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,6 +181,121 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/21/uvm-debug-topology-config-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/21/uvm-debug-topology-config-usage/" class="post-title-link" itemprop="url">Debug topology and Check config usage in UVM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-21 22:46:42" itemprop="dateCreated datePublished" datetime="2022-02-21T22:46:42+00:00">2022-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="topology-of-the-test">Topology of the test</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// defaults to table printer</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p>The default printer policy is
+<strong>uvm_default_table_printer</strong></p>
+<p>There are three default printer policies that the uvm_pkg
+provides:</p>
+<blockquote>
+<p>uvm_default_table_printer uvm_default_tree_printer
+uvm_default_line_printer</p>
+</blockquote>
+<h4 id="check-all-configuration-settings">Check all configuration
+settings</h4>
+<p>Check all configuration settings in a components configuration table
+to determine if the setting has been used, overridden or not used. When
+<em>recurse</em> is 1 (default), configuration for this and all child
+components are recursively checked. This function is automatically
+called in the check phase, but can be manually called at any time.</p>
+<p>To get all configuration information prior to the run phase, do
+something like this in your top object:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	check_config_usage();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="uvm-phase">UVM phase</h4>
+<p><img
+src="/2022/02/21/uvm-debug-topology-config-usage/image-20220221230440017.png"
+alt="image-20220221230440017" /></p>
+<ul>
+<li><strong>Functions</strong> are executed bottom-up (Except for
+<strong>build and final phases</strong> , which are executed
+top-down)</li>
+<li><strong>Tasks</strong> are forked into concurrent executing
+threads</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +341,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:45" itemprop="dateModified" datetime="2023-08-11T11:33:45+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -346,7 +461,7 @@ variant, the it is defined as a subsequence and its
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -471,7 +586,7 @@ target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analo
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -575,7 +690,7 @@ Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -667,7 +782,7 @@ target="_blank" rel="noopener" href="https://github.com/StanfordAHA/PowerDomainD
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -757,7 +872,7 @@ alt="pma_dig_bumps.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -932,7 +1047,7 @@ i&#39;(t)=g(t)v&#39;(t)
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1063,7 +1178,7 @@ target="_blank" rel="noopener" href="https://www.master-micro.com/professional-c
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1148,7 +1263,7 @@ target="_blank" rel="noopener" href="https://www.master-micro.com/professional-c
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1178,91 +1293,6 @@ circuits.</p>
 <p>I forget where I download this slide.</p>
 </blockquote>
 <div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/13/nonoverlapping-clocks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/13/nonoverlapping-clocks/" class="post-title-link" itemprop="url">Non Overlapping Clock</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-13 10:51:49" itemprop="dateCreated datePublished" datetime="2022-02-13T10:51:49+00:00">2022-02-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="pdf-container" data-target="/pdfs/nonoverlapping_clocks.pdf" data-height="500px"></div>
 
       
     </div>

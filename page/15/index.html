@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-count">188</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">235</span>
+        <span class="site-state-item-count">236</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,6 +181,142 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/05/in-design-signoff-metalfill-innovus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/05/in-design-signoff-metalfill-innovus/" class="post-title-link" itemprop="url">In-design Sign-off Metal Fill Flow in Innovus</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-05 18:18:37" itemprop="dateCreated datePublished" datetime="2022-03-05T18:18:37+00:00">2022-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/innovus/" itemprop="url" rel="index"><span itemprop="name">innovus</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Before inserting sign-off metal fill, stream out a GDSII stream file
+of the current database. Specify the mapping file and units that match
+with the rule deck you specify while inserting metal fill. If necessary,
+include the detailed-cell (<code>-merge</code> option) Graphic Database
+System (GDS).</p>
+<p><strong>PVS:</strong></p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pvs.fill.gds</span><br><span class="line">run_pvs_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pvs.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure>
+<p><strong>Pegasus:</strong> <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pegasus.fill.gds</span><br><span class="line">run_pegasus_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pegasus.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Just replace <code>run_pvs_metal_fill</code> with
+<code>run_pegasus_metal_fill</code></p>
+</blockquote>
+<p><strong>Note</strong>: Innovus metal fill (e.g.
+<code>addMetalFill</code>, <code>addViaFill</code>, etc.) does not
+support 20nm and below node design rules. We strongly recommend the
+Pegasus/PVS metal fill solution for 20nm and below. If you have sign-off
+metal fill rule deck for 28nm and above available, we recommend you to
+move to Pegasus/PVS solution too.</p>
+<blockquote>
+<ol type="1">
+<li><p><code>trimMetalFillNearNet</code> does not check DRC rules. It
+only removes the metal fill with specified spacing</p></li>
+<li><p><strong>Do not</strong> perform ECO operations after dump in
+sign-off metal fill (by <code>run_pvs_metal_fill</code> or
+<code>run_pegasus_metal_fill</code>), especially, at 20nm and below
+nodes.</p></li>
+<li><p>If you perform an ECO action, the tool cannot get DRC clean
+because <code>trimMetalFill</code> does not support 20nm and below node
+design rules.</p></li>
+<li><p>The sign-off metal fill typically does not cause DRC issues with
+regular wires.</p></li>
+</ol>
+</blockquote>
+<p>The <code>run_pvs_metal_fill</code> command does the following:</p>
+<ul>
+<li>Runs PVS with the fill rules to create a GDSII output file.</li>
+<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
+layermap provided.</li>
+<li><strong>Loads the resulting DEF file into Innovus</strong>.</li>
+</ul>
+<p>Pegasus is similar to PVS, shown as below,</p>
+<p>The <code>run_pegasus_metal_fill</code> command does the
+following:</p>
+<ul>
+<li>Runs Pegasus with the fill rules to create a GDSII output file.</li>
+<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
+layermap provided.</li>
+<li>Loads the resulting DEF file into Innovus.</li>
+</ul>
+<p><strong>Reference:</strong></p>
+<p>Innovus User Guide, Product Version 21.12, Last Updated in November
+2021</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +362,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -376,7 +512,7 @@ Implementation, 5th edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:45" itemprop="dateModified" datetime="2023-08-11T11:33:45+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -590,7 +726,7 @@ target="_blank" rel="noopener" href="https://www.tauworkshop.com/2021/speaker_sl
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -712,7 +848,7 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -823,7 +959,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -939,7 +1075,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1063,7 +1199,7 @@ alt="cascode_compensation" /> <span class="math display">\[\begin{align}
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1188,7 +1324,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:45" itemprop="dateModified" datetime="2023-08-11T11:33:45+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1290,7 +1426,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
+      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1743,121 +1879,6 @@ Dasgupta, Aurobindo. (2003). Static electromigration analysis for
 on-chip signal interconnects. Computer-Aided Design of Integrated
 Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
 10.1109/TCAD.2002.805728.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/21/uvm-debug-topology-config-usage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/21/uvm-debug-topology-config-usage/" class="post-title-link" itemprop="url">Debug topology and Check config usage in UVM</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-21 22:46:42" itemprop="dateCreated datePublished" datetime="2022-02-21T22:46:42+00:00">2022-02-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-11 11:33:46" itemprop="dateModified" datetime="2023-08-11T11:33:46+00:00">2023-08-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="topology-of-the-test">Topology of the test</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// defaults to table printer</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p>The default printer policy is
-<strong>uvm_default_table_printer</strong></p>
-<p>There are three default printer policies that the uvm_pkg
-provides:</p>
-<blockquote>
-<p>uvm_default_table_printer uvm_default_tree_printer
-uvm_default_line_printer</p>
-</blockquote>
-<h4 id="check-all-configuration-settings">Check all configuration
-settings</h4>
-<p>Check all configuration settings in a components configuration table
-to determine if the setting has been used, overridden or not used. When
-<em>recurse</em> is 1 (default), configuration for this and all child
-components are recursively checked. This function is automatically
-called in the check phase, but can be manually called at any time.</p>
-<p>To get all configuration information prior to the run phase, do
-something like this in your top object:</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	check_config_usage();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="uvm-phase">UVM phase</h4>
-<p><img
-src="/2022/02/21/uvm-debug-topology-config-usage/image-20220221230440017.png"
-alt="image-20220221230440017" /></p>
-<ul>
-<li><strong>Functions</strong> are executed bottom-up (Except for
-<strong>build and final phases</strong> , which are executed
-top-down)</li>
-<li><strong>Tasks</strong> are forked into concurrent executing
-threads</li>
-</ul>
 
       
     </div>

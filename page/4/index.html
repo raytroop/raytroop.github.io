@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">188</span>
+          <span class="site-state-item-count">189</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,331 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/15/LTI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/15/LTI/" class="post-title-link" itemprop="url">Linear Time-Invariant Systems</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-15 23:25:31" itemprop="dateCreated datePublished" datetime="2023-05-15T23:25:31+00:00">2023-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="convolution">Convolution</h2>
+<h3 id="discrete-time">discrete-time</h3>
+<p><span class="math display">\[
+y[n] = \sum_{k=-\infty}^{+\infty}x[k]h[n-k]
+\]</span></p>
+<p>The operation on the right-hand side is known as the
+<strong>convolution</strong> of the sequences <em>x[n]</em> and
+<em>h[n]</em>. The operation of convolution can be represented
+symbolically as <span class="math display">\[
+y[n] = x[n]*h[n]
+\]</span></p>
+<blockquote>
+<p>The response of an LTI system to an arbitrary input is expressed in
+terms of the system's response to the <em>unit impulse</em>.</p>
+<p>From this, we see that an LTI system is completely characterized by
+its response to a single signal, namely, its response to the <em>unit
+impulse</em>.</p>
+</blockquote>
+<h3 id="continuous-time">continuous-time</h3>
+<p><span class="math display">\[
+y(t) = \int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau
+\]</span></p>
+<p><span class="math display">\[
+y(t)=x(t)*h(t)
+\]</span></p>
+<p>As in discrete time, we see that a continuous-time LTI system is
+completely characterized by its impulse response - i.e., by its response
+to a single elementary signal, the unit impulse <span
+class="math inline">\(\delta(t)\)</span></p>
+<h2 id="eigenfunction">Eigenfunction</h2>
+<p><em>A signal</em> for which the <em>system output</em> is <em>a
+(possibly complex) constant</em> times the <em>input</em> is referred to
+as an <strong>eigenfunction</strong> of the system, and the amplitude
+factor is referred to as the system's <strong>eigenvalue</strong>.</p>
+<p><strong>Complex exponentials</strong> are eigenfunctions of LTI
+systems, that is,</p>
+<p>continuous time: <span class="math display">\[
+e^{st}\to H(s)e^{st}
+\]</span> discrete time: <span class="math display">\[
+z^n \to H(z)z^n
+\]</span></p>
+<h3 id="continuous-time-1">continuous-time</h3>
+<p>Let's prove them. For an input <span
+class="math inline">\(x(t)\)</span>, we can determine the output through
+the use of the convolution integral, so that with <span
+class="math inline">\(x(t)=e^{st}\)</span></p>
+<p><span class="math display">\[\begin{align}
+y(t) &amp;= \int_{-\infty}^{+\infty}h(\tau)x(t-\tau)d\tau \\
+&amp;=\int_{-\infty}^{+\infty}h(\tau)e^{s(t-\tau)}d\tau \\
+&amp;= e^{st}\int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
+\end{align}\]</span></p>
+<p>Assuming that the integral on the right-hand side converges, the
+response to <span class="math inline">\(e^{st}\)</span> is of the form
+<span class="math display">\[
+y(t)=H(s)e^{st}
+\]</span> where <span class="math inline">\(H(s)\)</span> is a complex
+constant whose value depends on <span class="math inline">\(s\)</span>
+and which is related to the system impulse response by <span
+class="math display">\[
+H(s)=\int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
+\]</span></p>
+<h3 id="discrete-time-1">discrete-time</h3>
+<p>Suppose that an LTI system with impulse response <span
+class="math inline">\(h[n]\)</span> has as its input the sequence <span
+class="math display">\[
+x[n] = z^n
+\]</span> Then the output of the system can be determined from the
+convolution sum as <span class="math display">\[\begin{align}
+y[n]&amp;=\sum_{k=-\infty}^{+\infty}h[k]x[n-k] \\
+&amp;=\sum_{k=-\infty}^{+\infty}h[k]z^{n-k} \\
+&amp;= z^n\sum_{k=-\infty}^{+\infty}h[k]z^{-k}
+\end{align}\]</span></p>
+<p>Assuming that the summation on the right-hand side converges, the
+output is the same compex exponential multiplied by a constant that
+depends on the value of <span class="math inline">\(z\)</span>. That is,
+<span class="math display">\[
+y[n] = H(z)z^n
+\]</span> where <span class="math display">\[
+H(z) =\sum_{k=-\infty}^{+\infty}h[k]z^{-k}
+\]</span></p>
+<h3 id="linear-combination">linear combination</h3>
+<blockquote>
+<p>For both continuous time and discrete time, if the input to an LTI
+system is represented as <em>a linear combination of complex
+exponentials</em>, then the output can also be represented as <em>a
+linear combination of the same complex exponential signals</em>.</p>
+</blockquote>
+<p>If the input to a continuous-time LTI system is represented as a
+linear combination of complex exponentials, that is, if <span
+class="math display">\[
+x(t)=\sum_k a_ke^{s_k t}
+\]</span> then the output will be <span class="math display">\[
+y(t)=\sum_k a_kH(s_k)e^{s_k t}
+\]</span> In an exactly analogous manner, if the input to a
+discrete-time LTI system is represented as a linear combination of
+complex exponentials, that is, if <span class="math display">\[
+x[n]=\sum_k a_k z_k^n
+\]</span> then the output will be <span class="math display">\[
+y[n]=\sum_k a_kH(z_k)z_k^n
+\]</span></p>
+<h2 id="fourier-series">Fourier series</h2>
+<h3 id="continuous-time-2">continuous-time</h3>
+<p>The Fourier series of a periodic continuous-time signal: <span
+class="math display">\[
+x(t)=\sum_{k=-\infty}^{+\infty}a_ke^{jk\omega _0
+t}=\sum_{k=-\infty}^{+\infty}a_ke^{jk(2\pi/T) t}
+\]</span></p>
+<p><span class="math display">\[
+a_k = \frac{1}{T}\int_T x(t)e^{-jk\omega _0 t}dt=\frac{1}{T}\int _T
+x(t)e^{-jk(2\pi/T)t}dt
+\]</span></p>
+<p>Here, we have written equivalent expressions for the Fourier series
+in terms of the <strong>fundamental frequency</strong> <span
+class="math inline">\(\omega _0\)</span> and the <strong>fundamental
+period</strong> <span class="math inline">\(T\)</span></p>
+<h4 id="conjugate-symmetry">Conjugate Symmetry</h4>
+<p>If <span class="math inline">\(x(t)\)</span>
+<strong>real</strong>-that is, when <span class="math inline">\(x(t) =
+x^*(t)\)</span>, the Fourier series coefficients will be <em>conjugate
+symmetric</em>, i.e <span class="math display">\[
+a_{-k} = a_k^*
+\]</span></p>
+<h4 id="parsevals-relation">Parseval's Relation</h4>
+<p>Parseval's relation states is that the <strong>total average
+power</strong> in a periodic signal equals the <strong>sum of the
+average powers in all of its harmonic components</strong> <span
+class="math display">\[
+\frac{1}{T}\int _T|x(t)|^2dt = \sum_{k=-\infty}^{+\infty}|a_k|^2
+\]</span></p>
+<h3 id="discrete-time-2">discrete-time</h3>
+<h4 id="parsevals-relation-1">Parseval's Relation</h4>
+<p><span class="math display">\[
+\frac{1}{N}\sum_{n=&lt;N&gt;}|x[n]|^2=\sum_{k=&lt;N&gt;}|a_k|^2
+\]</span></p>
+<h3 id="system-functions">system functions</h3>
+<p>When <span class="math inline">\(s\)</span> or <span
+class="math inline">\(z\)</span> are general complex numbers, <span
+class="math inline">\(H(s)\)</span> and <span
+class="math inline">\(H(z)\)</span> are referred to as the
+<strong>system functions</strong> of the corresponding systems.</p>
+<p>For continuous-time signals and systems, we focus on the specific
+case in which <span class="math inline">\(\Re \{s\}= 0\)</span>, so that
+<span class="math inline">\(s = j\omega\)</span>, and consequently,
+<span class="math inline">\(e^{st}\)</span> is of the form <span
+class="math inline">\(e^{j\omega t}\)</span>. <span
+class="math inline">\(H(j\omega)\)</span> viewed as a function of <span
+class="math inline">\(\omega\)</span> - is referred to as the
+<strong>frequency response</strong> of the system and is given by <span
+class="math display">\[
+H(j\omega) = \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt
+\]</span></p>
+<p>Similarly, for discrete-time signals and systems, we focus on values
+of <span class="math inline">\(z\)</span> for which <span
+class="math inline">\(|z|=1\)</span>, so that <span
+class="math inline">\(z=e^{j\omega}\)</span> and <span
+class="math inline">\(z^n\)</span> is of the form <span
+class="math inline">\(e^{j\omega n}\)</span>. Then, the frequency
+response of the system is given by <span class="math display">\[
+H(e^{j\omega}) = \sum_{n=-\infty}^{+\infty}h[n]e^{-j\omega n}
+\]</span></p>
+<blockquote>
+<p>The response of an LTI system to a <em>complex exponential</em>
+signal of the form <span class="math inline">\(e^{j\omega t}\)</span>
+(in continuous time) or <span class="math inline">\(e^{j\omega
+n}\)</span> (in discrete time) is particularly simple to express in
+terms of the <em>frequency response of the system</em></p>
+</blockquote>
+<h2 id="continuous-time-fourier-transform">Continuous-Time Fourier
+transform</h2>
+<p><span class="math display">\[
+X(j\omega) =\int_{-\infty}^{+\infty}x(t)e^{-j\omega t}dt
+\]</span></p>
+<p><span class="math display">\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{+\infty}X(j\omega)e^{j\omega
+t}d\omega
+\]</span></p>
+<blockquote>
+<p>Note system function is <span class="math display">\[
+H(j\omega) = \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt
+\]</span></p>
+</blockquote>
+<h3 id="dirichlet-conditions">Dirichlet conditions</h3>
+<p><img src="/2023/05/15/LTI/image-20230516020142197.png"
+alt="image-20230516020142197" /></p>
+<h3 id="fourier-transform-representations-for-periodic-signals">Fourier
+transform representations for periodic signals</h3>
+<p><img src="/2023/05/15/LTI/image-20230516021105696.png"
+alt="image-20230516021105696" /></p>
+<h3 id="differentiation-and-integration">Differentiation and
+Integration</h3>
+<p><span class="math display">\[
+\frac{dx(t)}{dt}\longleftrightarrow j\omega X(j\omega)
+\]</span></p>
+<p><span class="math display">\[
+\int_{-\infty}^t x(\tau)d\tau \longleftrightarrow
+\frac{1}{j\omega}X(j\omega)+\pi X(0)\delta(\omega)
+\]</span></p>
+<h3 id="parsevals-relation-2">Parseval's Relation</h3>
+<p><img src="/2023/05/15/LTI/image-20230516021627107.png"
+alt="image-20230516021627107" /></p>
+<h3 id="convolution-property">Convolution Property</h3>
+<p><img src="/2023/05/15/LTI/image-20230516022054782.png"
+alt="image-20230516022054782" /></p>
+<h2 id="discrete-time-fourier-transform">Discrete-Time Fourier
+Transform</h2>
+<p><span class="math display">\[
+X(e^{j\omega})=\sum_{n=-\infty}^{+\infty}x[n]e^{-j\omega n}
+\]</span></p>
+<p><span class="math display">\[
+x[n] = \frac{1}{2\pi}\int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega
+\]</span></p>
+<blockquote>
+<p>Note system function is <span class="math display">\[
+H(e^{j\omega}) = \sum_{n=-\infty}^{+\infty}h[n]e^{-j\omega n}
+\]</span></p>
+</blockquote>
+<h3 id="parsevals-relation-3">Parseval's Relation</h3>
+<p><img src="/2023/05/15/LTI/image-20230516022936168.png"
+alt="image-20230516022936168" /></p>
+<h3 id="convolution-property-1">Convolution Property</h3>
+<p><img src="/2023/05/15/LTI/image-20230516023124056.png"
+alt="image-20230516023124056" /></p>
+<p>we see that the <em>frequency response</em> <span
+class="math inline">\(H(e^{j\omega})\)</span> captures the change in
+complex amplitude of the Fourier transform of the input at each
+frequency <span class="math inline">\(\omega\)</span></p>
+<h2 id="laplace-transform">Laplace transform</h2>
+<p>The Laplace transform allowed us, for example, to perform transform
+analysis of unstable systems and to develop additional insights and
+tools for LTI system analysis</p>
+<p><img src="/2023/05/15/LTI/image-20230516023759163.png"
+alt="image-20230516023759163" /></p>
+<h2 id="discrete-fourier-transform">Discrete Fourier Transform</h2>
+<p><img src="/2023/05/15/LTI/image-20230516030532747.png"
+alt="image-20230516030532747" /></p>
+<p>where <span class="math inline">\(W_N=e^{-j(2\pi/N)}\)</span></p>
+<h2 id="reference">reference</h2>
+<p>Oppenheim, A.V., Willsky, A.S., &amp; Nawab, S.H. (1996). Signals
+&amp; systems (2nd ed.).</p>
+<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
+3rd edition</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +551,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -324,7 +649,7 @@ in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -409,7 +734,7 @@ in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -554,7 +879,7 @@ Revision 7</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -742,7 +1067,7 @@ target="_blank" rel="noopener" href="https://shar.es/afO6e1">https://shar.es/afO
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -970,7 +1295,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1089,7 +1414,7 @@ target="_blank" rel="noopener" href="https://anysilicon.com/the-ultimate-guide-t
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1297,7 +1622,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1518,7 +1843,7 @@ target="_blank" rel="noopener" href="https://www.analog.com/en/technical-article
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1558,95 +1883,6 @@ class="math inline">\(C_{pb1}\)</span> remain constant</li>
 alt="image-20230220230434891" /></p>
 <p><img src="/2023/02/20/mom-wo-mx/image-20230220230331505.png"
 alt="image-20230220230331505" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/10/dont-touch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/10/dont-touch/" class="post-title-link" itemprop="url">How to preserve hand-instantiated cells</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-02-10 22:41:15" itemprop="dateCreated datePublished" datetime="2023-02-10T22:41:15+00:00">2023-02-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>To preserve the hand-instantiated cells</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
-<p>The instances whose name contain "dont_touch_" shall be preserved
-during synthesis</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
       
     </div>

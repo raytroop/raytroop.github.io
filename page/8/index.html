@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">188</span>
+          <span class="site-state-item-count">189</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,204 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/14/jtf-ojtf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/14/jtf-ojtf/" class="post-title-link" itemprop="url">JTF and OJTF</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-14 10:22:47" itemprop="dateCreated datePublished" datetime="2022-07-14T10:22:47+00:00">2022-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="concepts-of-jtf-and-ojtf">Concepts of JTF and OJTF</h2>
+<p>Simplified Block Diagram of a Clock-Recovery PLL <img
+src="/2022/07/14/jtf-ojtf/pll_block_diagram.gif"
+alt="pll_block_diagram" /></p>
+<p><strong>Jitter Transfer Function (JTF)</strong></p>
+<ul>
+<li>Input Signal Versus Recovered Clock</li>
+<li>JTF, by jitter frequency, compares how much input signal jitter is
+transferred to the <strong>output of a clock-recovery's PLL (recovered
+clock)</strong>
+<ul>
+<li>Input signal jitter that is within the clock recovery PLL's loop
+bandwidth results in jitter that is faithfully transferred (closed-loop
+gain) to the clock recovery PLL's output signal. JTF in this situation
+is approximately 1.</li>
+<li>Input signal jitter that is outside the clock recovery PLL's loop
+bandwidth results in decreasing jitter (open-loop gain) on the clock
+recovery PLL's output, because the jitter is filtered out and no longer
+reaches the PLL's VCO</li>
+</ul></li>
+</ul>
+<p><strong>Observed Jitter Transfer Function</strong></p>
+<ul>
+<li>Input Signal Versus Sampled Signal</li>
+<li>OJTF compares how much input signal jitter is transferred to the
+<strong>output of a receiver's decision making circuit</strong> as
+effected by a clock recovery's PLL. As the recovered clock is the
+reference for detecting the input signal
+<ul>
+<li>Input signal jitter that is <strong>within</strong> the clock
+recovery PLL's loop bandwidth results in jitter on the recovered clock
+which reduces the amount of jitter that can be detected. The input
+signal and clock signal are closer in phase</li>
+<li>Input signal jitter that is <strong>outside</strong> the clock
+recovery PLL's loop bandwidth results in <strong>reduced jitter on the
+recovered cloc</strong>k which increases the amount of jitter that can
+be detected. The input signal and clock signal are more out of phase.
+Jitter that is on both the input and clock signals can not detected or
+is reduced</li>
+</ul></li>
+</ul>
+<p>JTF and OJTF for 1st Order PLLs</p>
+<p><img src="/2022/07/14/jtf-ojtf/jsa_1st_order_graph.png"
+alt="jsa_1st_order_graph" /></p>
+<p><img src="/2022/07/14/jtf-ojtf/neuhelium-jtf-ojtf.png"
+alt="neuhelium-jtf-ojtf" /></p>
+<blockquote>
+<p>The observed jitter is a complement to the PLL jitter transfer
+response OJTF=1-JTF <strong>(Phase matters!)</strong></p>
+<p>OTJF gives the amount of jitter which is tracked and therefore not
+observed at the output of the CDR as a function of the jitter rate
+applied to the input.</p>
+</blockquote>
+<p><img src="/2022/07/14/jtf-ojtf/A-jtf-ojtf.png"
+alt="A-jtf-ojtf" /></p>
+<h2 id="jitter-measurement">Jitter Measurement</h2>
+<p><span class="math display">\[
+J_{\text{measured}} = JTF_{\text{DUT}} \cdot OJTF_{\text{instrument}}
+\]</span> The combination of the OJTF of a jitter measurement device and
+the JTF of the clock generator under test gives the measured jitter as a
+function of frequency.</p>
+<p><img src="/2022/07/14/jtf-ojtf/image-20220716094732273.png"
+alt="image-20220716094732273" /></p>
+<p>For example, a clock generator with a type 1, 1st order PLL measured
+with a jitter measurement device employing a golden PLL is <span
+class="math display">\[
+J_{\text{measured}} = \frac{\omega_1}{s+\omega_1}\frac{s}{s+\omega_2}
+\]</span></p>
+<p>Accurate measurement of the clock JTF requires that the OJTF cutoff
+of the jitter measurement be significantly below that of the clock JTF
+and that the measurement is compensated for the instrument's OJTF.</p>
+<p>The overall response is a band pass filter because the clock JTF is
+low pass and the jitter measurement device OJTF is high pass.</p>
+<p>The compensation for the instrument OJTF is performed by measuring
+the jitter of the reference clock at each jitter rate being tested and
+comparing the <strong>reference jitter</strong> with the <strong>jitter
+measured at the output of the DUT</strong>.</p>
+<p><img src="/2022/07/14/jtf-ojtf/jit_resp.png" alt="jtf-ojtf" /></p>
+<p>The lower the cutoff frequency of the jitter measurement device the
+better the accuracy of the measurement will be.</p>
+<p>The cutoff frequency is limited by several factors including the
+phase noise of the DUT and measurement time.</p>
+<h2 id="digital-sampling-oscilloscope">Digital Sampling
+Oscilloscope</h2>
+<p>How to analyze jitter:</p>
+<ul>
+<li>TIE (Time Interval Error) track</li>
+<li>histogram</li>
+<li>FFT</li>
+</ul>
+<p><strong>TIE track</strong> provides a direct view of how the phase of
+the clock evolves over time.</p>
+<p><strong>histogram</strong> provides valuable information about the
+long term variations in the timing.</p>
+<p><strong>FFT</strong> allows jitter at specific rates to be measured
+down to the femto-second range.</p>
+<blockquote>
+<p>Maintaining the record length at a minimum of <span
+class="math inline">\(1/10\)</span> of the inverse of the PLL loop
+bandwidth minimizes the response error</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>neuhelium, 抖动、眼图和高速数字链路分析基础 URL: <a
+target="_blank" rel="noopener" href="http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf">http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf</a></p>
+<p>Keysight JTF &amp; OJTF Concepts, <a
+target="_blank" rel="noopener" href="https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4">https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4</a></p>
+<p>Complementary Transmitter and Receiver Jitter Test Methodlogy, URL:
+<a
+target="_blank" rel="noopener" href="https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf">https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf</a></p>
+<p>SerDesDesign.com CDR_BangBang_Model URL: <a
+target="_blank" rel="noopener" href="https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf">https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf</a></p>
+<p>M. Schnecker, Jitter Transfer Measurement in Clock Circuits, LeCroy
+Corporation, DesignCon 2009. URL: <a
+target="_blank" rel="noopener" href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf">http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +424,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -332,7 +530,7 @@ alt="image-20220712090011204" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:31" itemprop="dateModified" datetime="2023-09-08T07:57:31+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -583,7 +781,7 @@ Data Communications</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -701,7 +899,7 @@ Q-2020.03, March 2020</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -800,7 +998,7 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -889,7 +1087,7 @@ alt="image-20220630224525565" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1012,7 +1210,7 @@ Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1232,7 +1430,7 @@ Publishers Inc., San Francisco, CA, USA.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1440,7 +1638,7 @@ target="_blank" rel="noopener" href="https://fires.im/micro22-slides-pdf/04_hamm
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1479,342 +1677,6 @@ alt="image-20220621182019927" /></p>
 <p><strong>reference</strong></p>
 <p>system verilog中的iff, URL: <a
 target="_blank" rel="noopener" href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/10/isf-sampler/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/10/isf-sampler/" class="post-title-link" itemprop="url">Impulse Sensitivity Function (ISF) of Periodic Sampler</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-10 19:57:01" itemprop="dateCreated datePublished" datetime="2022-06-10T19:57:01+00:00">2022-06-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>An efficient method to measure the ISFs of periodic circuits via
-periodic AC (PAC) analysis, which is available from RF circuit
-simulators such as SpectreRF and ADS</p>
-<h2 id="isf">ISF</h2>
-<h3 id="linear-time-varying-system-theory">Linear Time-varying System
-Theory</h3>
-<p>We define the ISF of the sampler as the sensitivity of its final
-output voltage to the impulse arriving at its input at different times,
-the ISF essentially describes the aperture of the sampler.</p>
-<p>An ideal sampler would have the perfect aperture, i.e. sampling the
-input voltage at exactly one point in time; thus, its ISF would be a
-Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
-where <span class="math inline">\(t_s\)</span> is when sampling
-occurs.</p>
-<p>A realistic sampler would rather capture a weighted-average of the
-input voltage over a certain time window. This weighting function is
-called the sampling aperture and is equivalent to the ISF</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
-alt="image-20220610235211500" /></p>
-<p>A <strong>time-varying impulse response</strong> <span
-class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
-response at time <span class="math inline">\(t\)</span> responding to an
-impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
-<p>In general, the ISF can be regarded as the <strong>time-varying
-impulse response</strong> evaluated at <em>one particular observation
-time</em> <span class="math inline">\(t=t_0\)</span>.</p>
-<p>The system output <span class="math inline">\(y(t)\)</span> is
-related to the input <span class="math inline">\(x(t)\)</span> as: <span
-class="math display">\[
-y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
-\]</span> Note that in a linear time-invariant (LTI) system, <span
-class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
-equation reduces to a convolution.</p>
-<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
-transform of the input signal <span class="math inline">\(x(t)\)</span>,
-i.e. <span class="math display">\[
-x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
-t}d\omega
-\]</span> Then <span class="math display">\[\begin{align}
-y(t) &amp;=
-\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-e^{j\omega\tau }d\omega \right]\cdot d\tau \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{j\omega\tau}d\tau\right]\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
-<strong>time-varying transfer function</strong>, defined as the Fourier
-transform of the time-varying impulse response. <span
-class="math display">\[
-H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau
-\]</span> And it follows that: <span class="math display">\[
-Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
-\]</span> And</p>
-<p><span class="math display">\[\begin{align}
-x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
-h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
-\end{align}\]</span></p>
-<p>For linear, periodically time-varying (LPTV) systems, <span
-class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
-class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
-<span class="math inline">\(T\)</span> is the period of the time-varying
-dynamics of the system.</p>
-<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
-t+T)\)</span>:</p>
-<p><span class="math display">\[\begin{align}
-\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
-e^{-j\omega(t+T-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
-\\
-&amp;= H(j\omega;t)
-\end{align}\]</span></p>
-<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
-<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
-in <span class="math inline">\(T\)</span>, The time-varying transfer
-function <span class="math inline">\(H(j\omega;t)\)</span> can be
-expressed in a Fourier series: <span class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
-t}
-\]</span> where <span class="math inline">\(\omega_c\)</span> is the
-fundamental frequency of the periodic system. <span
-class="math inline">\(H_m(j\omega)\)</span> represent the frequency
-response of the system at the <em>(m-th)</em> harmonic output sideband
-to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
-<blockquote>
-<p>The above equation link time-varying transfer function <span
-class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
-output</p>
-</blockquote>
-<p>The response to a periodic impulse train, that is: <span
-class="math display">\[
-x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
-\]</span> The idea is that if the impulse response of the system settles
-to zero long before the next impulse arrives, then the system response
-to this impulse train would be approximately equal to the periodic
-repetition of the true impulse response, i.e.: <span
-class="math display">\[
-y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
-\]</span> and <span class="math inline">\(y(t)\)</span> would be
-approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
-for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
-<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
-alt="yt.drawio" /></p>
-<blockquote>
-<p>Without loss of generality and for computation convenience, we set
-<span class="math inline">\(k=1\)</span> thereafter.</p>
-</blockquote>
-<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
-of the <strong>T-periodic</strong> impulse train is: <span
-class="math display">\[
-X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
-e^{-j\omega\tau}
-\]</span> Then the response <span class="math inline">\(y(t)\)</span>
-is: <span class="math display">\[
-y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
-e^{jn\omega_c\cdot(t-\tau)}
-\]</span> The expression for the approximate time-varying impulse
-response: <span class="math display">\[
-h(t,\tau) = \left\{ \begin{array}{cl}
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
-0 &amp; : \ \text{elsewhere}
-\end{array} \right.
-\]</span> Finally, the ISF <span
-class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
-class="math inline">\(h(t,\tau)\)</span> when <span
-class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
-\gt \tau\)</span> <span class="math display">\[
-\Gamma(\tau)\cong
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
-\]</span> In practice, the summations are carried out over finite ranges
-of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
-<p>For each combination of <strong>n</strong> and <strong>m</strong>,
-the PAC analysis needs to be performed to compute <span
-class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
-response to the excitation at <span
-class="math inline">\(n\omega_c\)</span></p>
-<p>The detailed procedure for characterizing the ISF of this sampler is
-outlined as follows:</p>
-<ul>
-<li><p>First, apply the proper input voltages that place the sampler in
-a metastable state and perform the periodic steady-state (PSS)
-analysis.</p></li>
-<li><p>Second, perform the PAC analysis.</p></li>
-<li><p>Third, based on the simulated PAC response, pick a time point
-<span class="math inline">\(t_0\)</span> at which the ISF is to be
-computed and derive the ISF</p></li>
-</ul>
-<p>One possible candidate for the ISF measurement point <span
-class="math inline">\(t_0\)</span> is the time at which the output
-voltage is amplified to the largest value. PAC response of the sampler
-to a small signal DC input, that is, the time-varying transfer function
-evaluated at <span class="math inline">\(\omega=0\)</span> <span
-class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
-\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
-alt="image-20220614214446328" /></p>
-<blockquote>
-<p>The total area under the ISF is the sampling gain, which is equal to
-the time-varying gain measured at <span
-class="math inline">\(t_0\)</span></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
-log</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
-alt="image-20220614214537033" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
-<p>Since both are frequency originated, time-shift is NOT needed</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
-alt="image-20220614214613574" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="remarks">Remarks</h3>
-<p><strong>pss pac setup</strong></p>
-<ul>
-<li>clock frequency should be low enough to assure system response
-settle to zero.</li>
-<li>Beat Frequency os PSS should be clock frequency</li>
-<li>For PAC setup,
-<ul>
-<li>the <code>Sweeptype</code> is <code>absolute</code></li>
-<li><code>Input Frequency Sweep Range(Hz)</code> should be large
-enough.</li>
-<li><code>Sweep Type</code> should be <code>Linear</code> and
-<code>Step Size</code> should equal <strong>PSS Beat
-Frequency(Hz)</strong></li>
-<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
-positive, negative and 0)</li>
-<li><code>Specialized Analyses</code> should be <code>None</code></li>
-</ul></li>
-</ul>
-<blockquote>
-<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
-sweep from -400G to 400G and step is 8G, which is beat frequency, here
-K=1 Eq.(9) of paper</p>
-</blockquote>
-<blockquote>
-<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
-affect "Direct Plot"'s output but also simuation data i.e. the phase
-shift(imaginary part).</p>
-</blockquote>
-<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
-<p><code>transpose</code>, <code>.'</code> cf.
-https://www.mathworks.com/help/matlab/ref/transpose.html</p>
-<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
-<p>Using shooting PSS, the steady waveform starts from
-<code>tstab+n*tperiod</code>.</p>
-<ul>
-<li><strong>pss_td.pss</strong> is one period waveform starting from
-<code>tstab+n*tperiod</code></li>
-<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
-coefficient of expanded to left and right <strong>pss_td.pss</strong>
-waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
-</ul>
-<blockquote>
-<p>We have to left-shift <code>mod(tstab, tperiod)</code>
-<code>pss_fd.pss</code> in order to align it with of
-<strong>pss_tb.pss</strong></p>
-</blockquote>
-<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
-alt="image-20220610222535614" /></p>
-<h3 id="simulation-log">simulation log</h3>
-<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
-time, though <code>Stop Time(tstab)</code> field of pss form is filled
-with <code>0.3n</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h3 id="pss-simulation-result">PSS simulation result</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
-alt="image-20220610224100135" /></p>
-<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
-alt="image-20220610225310243" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
-function analysis of periodic circuits," 2008 IEEE/ACM International
-Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
-10.1109/ICCAD.2008.4681602.</p>
 
       
     </div>

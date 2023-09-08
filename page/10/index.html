@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">188</span>
+          <span class="site-state-item-count">189</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,204 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/16/dj-rj/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/16/dj-rj/" class="post-title-link" itemprop="url">Random and Deterministic Jitters Simulation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-16 00:39:22" itemprop="dateCreated datePublished" datetime="2022-05-16T00:39:22+00:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
+alt="image-20220516004008878" /></p>
+<h2 id="deterministic-jitter">Deterministic Jitter</h2>
+<p><img src="/2022/05/16/dj-rj/image-20220516004058916.png"
+alt="image-20220516004058916" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516004206118.png"
+alt="image-20220516004206118" /></p>
+<p><code>j_Djpp</code> can be calculated by PSD,too</p>
+<p><img src="/2022/05/16/dj-rj/image-20220516004615033.png"
+alt="image-20220516004615033" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fck = <span class="number">38.4e6</span>;</span><br><span class="line">Nfft = <span class="number">15000</span>;</span><br><span class="line">fres = fck/Nfft;</span><br><span class="line">psddBc = <span class="number">-99.3343</span>;</span><br><span class="line">psBc = psddBc + <span class="number">10</span>*<span class="built_in">log10</span>(fres);	<span class="comment">% psd -&gt; ps; </span></span><br><span class="line">phrad2 = <span class="number">10</span>^(psBc/<span class="number">10</span>);</span><br><span class="line">phrms = <span class="built_in">sqrt</span>(phrad2);</span><br><span class="line">Jrms = phrms/<span class="number">2</span>/<span class="built_in">pi</span>*<span class="number">1</span>/fck;</span><br><span class="line">Jpp = <span class="number">2</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*Jrms;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jpp =</span><br><span class="line"></span><br><span class="line">   6.4038e-12</span><br></pre></td></tr></table></figure>
+<p>For DJ, we usually use peak to peak value</p>
+<blockquote>
+<p>BTW, the psd value at half of fundamental frequency (<span
+class="math inline">\(f_s/2\)</span>) is misleading and ambiguity, we
+won't use this value</p>
+</blockquote>
+<h2 id="random-jitter">Random Jitter</h2>
+<p>RJ can be accurately and efficiently measured using
+<strong>PSS/Pnoise</strong> or <strong>HB/HBnoise</strong>.</p>
+<p>Note that the <strong>transient noise</strong> can also be used to
+compute RJ;</p>
+<blockquote>
+<p>However, the computation cost is typically very high, and the
+accuracy is lesser as compared to PSS/Pnoise and HB/HBnoise.</p>
+</blockquote>
+<p>Since RJ follows a Gaussian distribution, it can be fully
+characterized using its Root-Mean-Squared value (RMS) or the standard
+deviation value (<span class="math inline">\(\sigma\)</span>)</p>
+<p>The Peak-to-Peak value of RJ (<span
+class="math inline">\(\text{RJ}_{\text{p-p}}\)</span>) can be calculated
+under certain observation conditions <span class="math display">\[
+\text{RJ}_{\text{p-p}}\equiv K \ast \text{RJ}_{\text{RMS}}
+\]</span> Here, <span class="math inline">\(K\)</span> is a constant
+determined by the BER specification of the system given in the following
+Table</p>
+<table>
+<thead>
+<tr class="header">
+<th>BER</th>
+<th>Crest factor (K)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(10^{-3}\)</span></td>
+<td>6.18</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-4}\)</span></td>
+<td>7.438</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-5}\)</span></td>
+<td>8.53</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-6}\)</span></td>
+<td>9.507</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-7}\)</span></td>
+<td>10.399</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-8}\)</span></td>
+<td>11.224</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-9}\)</span></td>
+<td>11.996</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-10}\)</span></td>
+<td>12.723</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-11}\)</span></td>
+<td>13.412</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-12}\)</span></td>
+<td>14.069</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-13}\)</span></td>
+<td>14.698</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">K = <span class="number">14.698</span>;</span><br><span class="line">Ks = K/<span class="number">2</span>;</span><br><span class="line">p = normcdf([-Ks Ks]);</span><br><span class="line">BER = <span class="number">1</span> - (p(<span class="number">2</span>)-p(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BER =</span><br><span class="line"></span><br><span class="line">   1.9962e-13</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/16/dj-rj/image-20220516160050961.png"
+alt="image-20220516160050961" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516193125490.png"
+alt="image-20220516193125490" /></p>
+<h2 id="total-jitter">Total Jitter</h2>
+<p><span class="math display">\[
+\text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} +
+\text{RJ}_{\text{p-p}}(\text{BER})
+\]</span></p>
+<p><img src="/2022/05/16/dj-rj/tj.drawio.svg" alt="tj.drawio" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516160006909.png"
+alt="image-20220516160006909" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516012200383.png"
+alt="image-20220516012200383" /></p>
+<blockquote>
+<p>In the psd of TJ, the spur is DJ and floor is RJ</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +424,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -448,7 +646,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:31" itemprop="dateModified" datetime="2023-09-08T07:57:31+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -541,7 +739,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -681,7 +879,7 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -843,7 +1041,7 @@ lesser as compared to PSS/Pnoise</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -973,7 +1171,7 @@ doi:10.1007/978-3-030-03238-8</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1089,7 +1287,7 @@ target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1262,7 +1460,7 @@ target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/le
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1592,7 +1790,7 @@ Processing</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
+      <time title="Modified: 2023-09-08 07:57:30" itemprop="dateModified" datetime="2023-09-08T07:57:30+00:00">2023-09-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1663,125 +1861,6 @@ alt="image-20220507122053948" /></p>
 <p><img src="/2022/05/07/signed-verilog/image-20220507122217830.png"
 alt="image-20220507122217830" /></p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:21:51 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n6, n7, n8, n9, n10;</span><br><span class="line"></span><br><span class="line">  nd02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n10) );</span><br><span class="line">  inv0d0 U10 ( <span class="variable">.I</span>(n10), <span class="variable">.ZN</span>(n9) );</span><br><span class="line">  nr02d0 U11 ( <span class="variable">.A1</span>(data0[<span class="number">1</span>]), <span class="variable">.A2</span>(data1[<span class="number">1</span>]), <span class="variable">.ZN</span>(n7) );</span><br><span class="line">  aor221d1 U12 ( <span class="variable">.B1</span>(n9), <span class="variable">.B2</span>(data1[<span class="number">1</span>]), <span class="variable">.C1</span>(n10), <span class="variable">.C2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(</span><br><span class="line">        n6) );</span><br><span class="line">  xn02d1 U13 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n6), <span class="variable">.ZN</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  ora21d1 U14 ( <span class="variable">.B1</span>(data1[<span class="number">0</span>]), <span class="variable">.B2</span>(data0[<span class="number">0</span>]), <span class="variable">.A</span>(n10), <span class="variable">.Z</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  aor21d1 U15 ( <span class="variable">.B1</span>(data1[<span class="number">1</span>]), <span class="variable">.B2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(n8) );</span><br><span class="line">  mx02d0 U16 ( <span class="variable">.I0</span>(n10), <span class="variable">.I1</span>(n9), <span class="variable">.S</span>(n8), <span class="variable">.Z</span>(result[<span class="number">1</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/04/lorentian-spectrum/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/04/lorentian-spectrum/" class="post-title-link" itemprop="url">Lorentian Spectrum of Oscillator Phase Noise</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-04 12:48:40" itemprop="dateCreated datePublished" datetime="2022-05-04T12:48:40+00:00">2022-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-12 05:32:22" itemprop="dateModified" datetime="2023-08-12T05:32:22+00:00">2023-08-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2022/05/04/lorentian-spectrum/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<p><strong>reference:</strong></p>
-<p>A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in
-oscillators: a unifying theory and numerical methods for
-characterization," in IEEE Transactions on Circuits and Systems I:
-Fundamental Theory and Applications, vol. 47, no. 5, pp. 655-674, May
-2000, doi: 10.1109/81.847872.</p>
-<p>Dalt, Nicola Da and Ali Sheikholeslami. “Understanding Jitter and
-Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
-<p>Rubiola, E. (2008). Phase Noise and Frequency Stability in
-Oscillators (The Cambridge RF and Microwave Engineering Series).
-Cambridge: Cambridge University Press. doi:10.1017/CBO9780511812798</p>
-<p><a
-target="_blank" rel="noopener" href="https://www.microwavejournal.com/articles/29151-noise-analysis-then-and-today">Dr.
-Ulrich L. Rohde, Noise Analysis, Then and Today</a></p>
 
       
     </div>

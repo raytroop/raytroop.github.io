@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">189</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">236</span>
+        <span class="site-state-item-count">237</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,6 +181,107 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/21/sv-iff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/21/sv-iff/" class="post-title-link" itemprop="url">SystemVerilog iff</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-21 18:12:51" itemprop="dateCreated datePublished" datetime="2022-06-21T18:12:51+00:00">2022-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<p>is equivalent to</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>iff</code> is more efficient than <code>if</code> because the
+expression is recalculated when <code>vld</code> transition rather than
+<code>clk</code>.</p>
+</blockquote>
+<p>One example, detecting the negative edge of
+<code>rtr_io.cb.frameo_n[da]</code></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
+alt="image-20220621182019927" /></p>
+<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
+<p><strong>reference</strong></p>
+<p>system verilog中的iff, URL: <a
+target="_blank" rel="noopener" href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +327,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -562,7 +663,7 @@ Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -840,7 +941,7 @@ Sixth international symposium on quality electronic design (isqed'05),
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -978,7 +1079,7 @@ Units</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1240,7 +1341,7 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1353,7 +1454,7 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1475,7 +1576,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1574,7 +1675,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1687,7 +1788,7 @@ target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
+      <time title="Modified: 2023-09-15 06:08:48" itemprop="dateModified" datetime="2023-09-15T06:08:48+00:00">2023-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1867,126 +1968,6 @@ calibration for jitter decomposition." Metrology and Measurement Systems
 jitter decomposition through its distribution tail fitting,"
 International Test Conference 1999. Proceedings (IEEE Cat.
 No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/20/bw-from-pulse-resp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/20/bw-from-pulse-resp/" class="post-title-link" itemprop="url">How to obtain channel bandwidth from pulse response</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-20 22:30:33" itemprop="dateCreated datePublished" datetime="2022-05-20T22:30:33+00:00">2022-05-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-11 13:10:43" itemprop="dateModified" datetime="2023-09-11T13:10:43+00:00">2023-09-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Convolution Property of the Fourier Transform <span
-class="math display">\[
-x(t)*h(t)\longleftrightarrow  X(\omega)H(\omega)
-\]</span> pulse response can be obtained by convolve impulse response
-with UI length rectangular <span class="math display">\[
-H(\omega) = \frac{Y_{\text{pulse}}(\omega)}{X_{\text{rect}}(\omega)} =
-\frac{Y_{\text{pulse}}(\omega)}{\text{sinc}(\omega)}
-\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Convolution Property of the Fourier Transform</span></span><br><span class="line"><span class="comment">% pulse(t) = h(t) * rect(t)</span></span><br><span class="line"><span class="comment">% -&gt; fourier transform</span></span><br><span class="line"><span class="comment">% PULSE = H * RECT</span></span><br><span class="line"><span class="comment">% FT(pulse) = sinc</span></span><br><span class="line"><span class="comment">% H = PULSE/RECT = PULSE/sinc</span></span><br><span class="line">xx = <span class="built_in">pi</span>*ui.*w(<span class="number">1</span>:plt_num);</span><br><span class="line">y_sinc = ui.*<span class="built_in">sin</span>(xx)./xx;</span><br><span class="line">y_sinc(<span class="number">1</span>) = y_sinc(<span class="number">2</span>);</span><br><span class="line">y_sinc = y_sinc/y_sinc(<span class="number">1</span>);  <span class="comment">% we dont care the absoulte gain</span></span><br><span class="line">h_ban1 = <span class="built_in">abs</span>(h(<span class="number">1</span>:plt_num))./<span class="built_in">abs</span>(y_sinc);</span><br><span class="line"></span><br><span class="line">h_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(h_ban1));</span><br><span class="line">[hmin, Index] = <span class="built_in">min</span>(<span class="built_in">abs</span>(h_dB +<span class="number">3</span> ));</span><br><span class="line">f_3dB = w(Index);</span><br><span class="line">f_3dB = f_3dB/<span class="number">1e9</span>;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223115184.png"
-alt="image-20220520223115184" /></p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223621924.png"
-alt="image-20220520223621924" /></p>
-<h2 id="sinc-function">sinc function</h2>
-<p>Notice that the complete definition of <span
-class="math inline">\(\operatorname{sinc}\)</span> on <span
-class="math inline">\(\mathbb R\)</span> is <span
-class="math display">\[
-\operatorname{Sa}(x)=\operatorname{sinc}(x) = \begin{cases} \frac{\sin
-x}{x} &amp; x\ne 0, \\ 1, &amp; x = 0, \end{cases}
-\]</span> which is <strong>continuous</strong>.</p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220521112425477.png"
-alt="image-20220521112425477" /></p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220521112722838.png"
-alt="image-20220521112722838" /></p>
-<p>To approach to real spectrum of continuous rectangular waveform,
-<span class="math inline">\(\text{NFFT}\)</span> has to be big
-enough.</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">clear;</span><br><span class="line">close all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">fs=<span class="number">500</span>; <span class="comment">%sampling frequency</span></span><br><span class="line">Ts = <span class="number">1</span>/fs;</span><br><span class="line">T=<span class="number">0.2</span>; <span class="comment">%width of the rectangule pulse in seconds</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">t=<span class="number">-0.5</span>:<span class="number">1</span>/fs:<span class="number">0.5</span>; <span class="comment">%time base</span></span><br><span class="line">x=rectpuls(t,T); <span class="comment">%generating the square wave</span></span><br><span class="line">sum(x&gt;<span class="number">0.5</span>)</span><br><span class="line">stem(t,x,<span class="string">&#x27;--k&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(t, x, <span class="string">&#x27;b.-&#x27;</span>)</span><br><span class="line">xstart = T/<span class="number">2</span>-Ts/<span class="number">2</span>;</span><br><span class="line">xend = -T/<span class="number">2</span>-Ts/<span class="number">2</span>;</span><br><span class="line"><span class="built_in">plot</span>([xstart, xstart], [<span class="number">-1</span>, <span class="number">1.02</span>], <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>([xend, xend], [<span class="number">-1</span>, <span class="number">1.02</span>], <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>([<span class="number">-0.11</span>, <span class="number">0.11</span>], [<span class="number">1</span>, <span class="number">1</span>], <span class="string">&#x27;r--&#x27;</span>)</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line">grid on;</span><br><span class="line">title([<span class="string">&#x27;Rectangular Pulse width=&#x27;</span>, num2str(T),<span class="string">&#x27;s&#x27;</span>]);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Amplitude&#x27;</span>);</span><br><span class="line">xlim([<span class="number">-0.12</span>, <span class="number">0.12</span>]);</span><br><span class="line">ylim([<span class="number">-0.05</span>, <span class="number">1.05</span>]);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line">Titer = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>];</span><br><span class="line">color = &#123;<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;b&#x27;</span>&#125;;</span><br><span class="line">formatSpec = <span class="string">&#x27;NFFT=%d&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:<span class="built_in">length</span>(Titer)</span><br><span class="line">    t=-Titer(k):Ts:Titer(k); <span class="comment">%time base</span></span><br><span class="line">    x=rectpuls(t,T); <span class="comment">%generating the square wave</span></span><br><span class="line"></span><br><span class="line">    L=<span class="built_in">length</span>(x);</span><br><span class="line">    Np = <span class="built_in">nextpow2</span>(L)<span class="number">-1</span>;</span><br><span class="line">    NFFT = <span class="number">2</span>^Np;</span><br><span class="line">    X = fftshift(fft(x,NFFT)); <span class="comment">%FFT with FFTshift for both negative &amp; positive frequencies</span></span><br><span class="line">    f = fs*(-NFFT/<span class="number">2</span>:NFFT/<span class="number">2</span><span class="number">-1</span>)/NFFT; <span class="comment">%Frequency Vector</span></span><br><span class="line">    Xc = <span class="built_in">abs</span>(X)*Ts; <span class="comment">% continuous signal spectrum</span></span><br><span class="line">    <span class="built_in">plot</span>(f, Xc, <span class="string">&quot;Color&quot;</span>,color&#123;k&#125;, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line">    legend_str&#123;k&#125; = [num2str(NFFT, formatSpec)];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"><span class="built_in">legend</span>(legend_str);</span><br><span class="line">title(<span class="string">&#x27;Magnitude of X_c (original continuous signal)&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;Magnitude |X(f)|&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong></p>
-<p>L.W. Couch, <em>Digital and Analog Communication</em>
-<em>Systems</em>, 8th Edition, Pearson, 2013.</p>
-<p><a
-target="_blank" rel="noopener" href="https://www.gaussianwaves.com/2014/07/generating-basic-signals-rectangule-pulse-and-power-spectral-density-using-fft/">Generating
-Basic signals – Rectangular Pulse and Power Spectral Density using
-FFT</a></p>
 
       
     </div>

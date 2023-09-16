@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,226 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/06/power-ground-io/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/06/power-ground-io/" class="post-title-link" itemprop="url">Power/Ground and I/O Pins</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-06 18:24:54" itemprop="dateCreated datePublished" datetime="2022-03-06T18:24:54+00:00">2022-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="power-ground-pin-information">Power / Ground Pin
+Information</h4>
+<p>In both digital and analog I/O, power and ground pins appear at the
+sub-circuit definiton, allowing user to use the I/O in voltage islands.
+They follow certain naming conventions.</p>
+<ol type="1">
+<li>digital I/O sub-circuit</li>
+</ol>
+<ul>
+<li>VDD: pre-driver core voltage (supplied by PVDD1CDGM)</li>
+<li>VSS: pre-driver ground and also global ground (supplied by
+PVDD1CDGM)</li>
+<li>VDDPST: I/O post-driver voltage, i.e. 1.8V (supplied by PVDD2CDGM or
+PVDD2POCM)</li>
+<li>VSSPOST: I/O post-driver ground (supplied by PVDD2CDGM or
+PVDD2POCM)</li>
+<li>POCCTRL: POCCTRL signal (supplied by PVDD2POCM)</li>
+</ul>
+<ol start="2" type="1">
+<li>analog I/O placed in a core voltage domain, the convention is</li>
+</ol>
+<ul>
+<li>TACVDD: analog core voltage (supplied by PVDD3ACM)</li>
+<li>TACVSS: analog core ground (supplied by PVDD3ACM)</li>
+<li>VSS: global core ground</li>
+</ul>
+<ol start="3" type="1">
+<li>analog I/O placed in an I/O voltage domain, the convention is:</li>
+</ol>
+<ul>
+<li>TAVDD: analog I/O voltage, i.e. 1.8V (supplied by PVDD3AM)</li>
+<li>TAVSS: analog I/O ground (supplied by PVDD3AM)</li>
+<li>VSS: global core ground</li>
+</ul>
+<p>Power/Ground <strong>Combo Cells</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 36%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>power/ground combo pad cell</th>
+<th>pins to be connected to bump</th>
+<th>to core side pin name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PVDD1CDGM</td>
+<td>VDD VSS</td>
+<td>VDD VSS</td>
+</tr>
+<tr class="even">
+<td>PVDD2CDGM PVDD2POCM</td>
+<td>VDDPST VSSPST</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td>PVDD3AM</td>
+<td>TAVDD TAVSS</td>
+<td>AVDD AVSS</td>
+</tr>
+<tr class="even">
+<td>PVDD3ACM</td>
+<td>TACVDD TACVSS</td>
+<td>AVDD AVSS</td>
+</tr>
+</tbody>
+</table>
+<h4 id="note-for-the-retention-mode">Note for the retention mode</h4>
+<ol type="1">
+<li>At initial state, IRTE must be <strong>0</strong> when VDD is
+off.</li>
+<li>IRTE must be kept &gt;= 10us after VDD turns on again (from the
+retention mode to the normal operation mode).</li>
+<li>IRTE can be switched only when both VDD and VDDPST are on.</li>
+</ol>
+<p><img src="/2022/03/06/power-ground-io/rention_seq.drawio.svg"
+alt="rention_seq.drawio" /></p>
+<p>When the rention function is needed, IRTE signal must come from an
+"always-on" core power domain. If you don't need the rention function,
+it is required to tie IRTE to ground. In other words, <strong>no matter
+the rention feature is needed or not, it is required to have PCBRTE in
+each domain</strong>.</p>
+<p><img
+src="/2022/03/06/power-ground-io/PCBRTE_in_digital_domain.drawio.svg"
+alt="PCBRTE_in_digital_domain.drawio" /></p>
+<p><strong>Note</strong>: PCBRTE <strong>does not</strong> need PAD
+connection.</p>
+<h4 id="internal-pins">Internal Pins</h4>
+<p>There are 3 internal global pins, i.e. <strong>ESD</strong>,
+<strong>POCCTRL</strong>, <strong>RTE</strong>, in all digital domain
+cells.</p>
+<p>In real application,</p>
+<ul>
+<li><strong>ESD pin</strong> is an internal signal and
+<strong>active</strong> in ESD event happening</li>
+<li><strong>POCCTRL</strong> is an internal signal and active in
+Power-on-control event.</li>
+</ul>
+<p>However, these special events (i.e. ESD event and Power-on-control
+event) are not modeled in NLDM kit (.lib), only normal function is
+covered, so <strong>ESD</strong> and <strong>POCCTRL</strong> pins are
+simply defined as ground in NLDM kit (.lib).</p>
+<blockquote>
+<p>These 3 global pins will be connected automatically after
+<strong>cell-to-cell abutting</strong> in physical layout.</p>
+</blockquote>
+<h4 id="power-up-sequence-in-digital-domain">Power-Up sequence in
+Digital Domain</h4>
+<p>Power up the I/O power (VDDPST) first, then the core power (VDD)</p>
+<p><img src="/2022/03/06/power-ground-io/pocctrl_seq.drawio.svg"
+alt="pocctrl_seq.drawio" /></p>
+<ol type="1">
+<li>PVDDD2POCM cell would generate Power-On-Control signal (POCCTRL) to
+have the post-driver NMOS and PMOS off, so that the crowbar current
+would not occur in the post-driver fingers when the I/O voltage is on
+while the core voltage remains off. As such, I/O cell would be in the
+Hi-Z state. when POCCTRL is on, the pll-up/down resistor is disabled and
+C is 0.</li>
+<li>The POCCTRL signal is transmitted to I/O cells through <strong>cell
+abutment</strong>. There is no need to have routing for POCCTTRL nor
+give a control signal to the POCCTRL pin any of I/O cells. Note that the
+POCCTRL signal would be cut if inserting a power-cut (PRCUT) cell.</li>
+</ol>
+<p><img
+src="/2022/03/06/power-ground-io/power-on-control-ciruit.drawio.svg"
+alt="power-on-control-ciruit.drawio" /></p>
+<h4 id="power-down-sequence-in-digital-domain">Power-Down sequence in
+Digital Domain</h4>
+<p>It's the reverse of power-up sequence.</p>
+<h4 id="use-model-in-innovus">Use model in Innovus</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> init_gnd_net <span class="string">&quot;vss_core vss DUMMY_ESD DUMMY_POCCTRL&quot;</span></span><br><span class="line"></span><br><span class="line">addInst -moduleBased u_io -ori R270 -physical -status fixed -loc <span class="number">135</span> <span class="number">994</span> -inst u_io/VDDIO_1 -cell PVDD2CDGM_H</span><br><span class="line"></span><br><span class="line">addNet u_io_RTE</span><br><span class="line">attachTerm FILLER_6 RTE u_io_RTE</span><br><span class="line">attachTerm VDDIO_1 RTE u_right_RTE</span><br><span class="line">setAttribute -skip_routing true -net u_io_RTE</span><br><span class="line"></span><br><span class="line">clearGlobalNets</span><br><span class="line">globalNetConnect DUMMY_POCCTRL -type pgpin -pin POCCTRL -singleInstance u_io/VDDDIO_1 -override</span><br><span class="line">globalNetConnect DUMMY_ESD -type pgpin -pin ESD -singleInstance u_io/VDDDIO_1 -override</span><br></pre></td></tr></table></figure>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> pins [get_object_name [get_ports *]]</span><br><span class="line"><span class="keyword">foreach</span> pin <span class="variable">$pins</span> &#123;</span><br><span class="line">	<span class="keyword">set</span> netPtr [dbGetNetByName <span class="variable">$pin</span>]</span><br><span class="line">	<span class="keyword">if</span> &#123; <span class="variable">$netPtr</span> == <span class="string">&quot;0x0&quot;</span> &#125; &#123;</span><br><span class="line">		<span class="keyword">puts</span> <span class="string">&quot;INFO: can&#x27;t find the port: $pin&quot;</span></span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		setAttribute -net <span class="variable">$pin</span> -skip_routing true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical]]] &#123;</span><br><span class="line">	setAttribute -net <span class="variable">$net</span> -skip_routing true</span><br><span class="line">	dbSet [dbGetNetByName <span class="variable">$net</span>].dontTouch true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +446,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -448,7 +668,7 @@ Convergence Checker for Oscillators</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:40" itemprop="dateModified" datetime="2023-09-16T16:35:40+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -561,7 +781,7 @@ target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/open-loop-ga
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -697,7 +917,7 @@ layermap provided.</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:40" itemprop="dateModified" datetime="2023-09-16T16:35:40+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -847,7 +1067,7 @@ Implementation, 5th edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1061,7 +1281,7 @@ target="_blank" rel="noopener" href="https://www.tauworkshop.com/2021/speaker_sl
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1183,7 +1403,7 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1294,7 +1514,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1410,7 +1630,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1490,133 +1710,8 @@ alt="cascode_compensation" /> <span class="math display">\[\begin{align}
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/24/simpleStatEye/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/24/simpleStatEye/" class="post-title-link" itemprop="url">Simple Statistical Eye using Matlab function</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-24 10:47:38" itemprop="dateCreated datePublished" datetime="2022-02-24T10:47:38+00:00">2022-02-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Generate Statistical BER with Matlab <strong>pulse2stateye</strong>
-function.</p>
-<blockquote>
-<p>Due to this function only output PDF of eye, postprocessing is needed
-which cumulative sum PDF.</p>
-</blockquote>
-<h4 id="probability-density-functionpdf-plot">Probability Density
-Function(PDF) plot</h4>
-<p><img src="/2022/02/24/simpleStatEye/PDF.jpg" alt="PDF" /></p>
-<h4 id="bit-error-rateber-plot">Bit Error Rate(BER) plot</h4>
-<p><img src="/2022/02/24/simpleStatEye/BER.jpg" alt="BER" /></p>
-<h4 id="pulse-response">pulse response</h4>
-<p><img src="/2022/02/24/simpleStatEye/image-20220502134522549.png"
-alt="image-20220502134522549" /></p>
-<blockquote>
-<p>DC shift don't affect <code>pulse2stateye</code> function
-normally</p>
-<p>Both pulse <code>[0 0 0 0 .. 0 1 0 0 0 0 0 ...]</code> and
-<code>[1 1 1 1 ... 1 0 1 1 1 1 ...]</code> can be fed into</p>
-<p><code>pulse2stateye</code> function</p>
-<p><strong>CAUTION</strong>: the <code>0</code> don't mean common
-voltage but bit <code>0</code> , which is <code>-Vpeak</code> in
-differential link</p>
-</blockquote>
-<h4 id="postprocessing-function">postprocessing function</h4>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% REF: https://www.mathworks.com/help/serdes/ref/pulse2stateye.html</span></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(<span class="built_in">size</span>(pulse, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">pulsewave = pulse(:, <span class="number">1</span>);</span><br><span class="line">pulsewave(:,<span class="number">1</span>) = pulsewave - pulsewave(<span class="number">1</span>);  <span class="comment">% DC shift, although `pulse2stateye` shift internally</span></span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line"><span class="comment">%stateye(1:200, 1:200) = 10000;</span></span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[ysize, xsize] = <span class="built_in">size</span>(stateye);</span><br><span class="line">ymid = <span class="built_in">floor</span>((ysize+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">upperEyePDF = stateye(ymid:<span class="keyword">end</span>,:); </span><br><span class="line">lowerEyePDF = stateye(ymid:<span class="number">-1</span>:<span class="number">1</span>,:); <span class="comment">% upside down</span></span><br><span class="line"></span><br><span class="line">upperEyeCDF = cumsum(upperEyePDF, <span class="number">1</span>);</span><br><span class="line">lowerEyeCDF = cumsum(lowerEyePDF, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">berlist = [<span class="number">1e-12</span>, <span class="number">1e-6</span>, <span class="number">0.01</span>];</span><br><span class="line">lenBer = <span class="built_in">length</span>(berlist);</span><br><span class="line">upperBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line">lowerBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:xsize</span><br><span class="line">        upperBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(upperEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">        lowerBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(lowerEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% shift idx to algin original stateye</span></span><br><span class="line">upperBERIdx = ymid - <span class="number">1</span> + upperBERIdx;</span><br><span class="line">lowerBERIdx = ymid + <span class="number">1</span> - lowerBERIdx;</span><br><span class="line"></span><br><span class="line">upperBERVal = vh(upperBERIdx);</span><br><span class="line">lowerBERVal = vh(lowerBERIdx);</span><br><span class="line"></span><br><span class="line">tticks = th*SymbolTime*<span class="number">1e12</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>);</span><br><span class="line">lgd = cell(lenBer*<span class="number">2</span>,<span class="number">1</span>) ;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer<span class="comment">% REF: https://www.mathworks.com/help/serdes/ref/pulse2stateye.html</span></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(<span class="built_in">size</span>(pulse, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">pulsewave = pulse(:, <span class="number">1</span>);    <span class="comment">% remove crosstalk pulse responses</span></span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[ysize, xsize] = <span class="built_in">size</span>(stateye);</span><br><span class="line">ymid = <span class="built_in">floor</span>((ysize+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">upperEyePDF = stateye(ymid:<span class="keyword">end</span>,:); </span><br><span class="line">lowerEyePDF = stateye(ymid:<span class="number">-1</span>:<span class="number">1</span>,:); <span class="comment">% upside down</span></span><br><span class="line"></span><br><span class="line">upperEyeCDF = cumsum(upperEyePDF, <span class="number">1</span>);</span><br><span class="line">lowerEyeCDF = cumsum(lowerEyePDF, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">berlist = [<span class="number">1e-12</span>, <span class="number">1e-6</span>, <span class="number">0.01</span>];</span><br><span class="line">lenBer = <span class="built_in">length</span>(berlist);</span><br><span class="line">upperBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line">lowerBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:xsize</span><br><span class="line">        upperBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(upperEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">        lowerBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(lowerEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% shift idx to algin original stateye</span></span><br><span class="line">upperBERIdx = ymid - <span class="number">1</span> + upperBERIdx;</span><br><span class="line">lowerBERIdx = ymid + <span class="number">1</span> - lowerBERIdx;</span><br><span class="line"></span><br><span class="line">upperBERVal = vh(upperBERIdx);</span><br><span class="line">lowerBERVal = vh(lowerBERIdx);</span><br><span class="line"></span><br><span class="line">tticks = th*SymbolTime*<span class="number">1e12</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>);</span><br><span class="line">lgd = cell(lenBer*<span class="number">2</span>,<span class="number">1</span>) ;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="built_in">plot</span>(tticks, upperBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span><span class="number">-1</span>&#125; = strcat(<span class="string">&#x27;BER=&#x27;</span>,num2str(berlist(<span class="built_in">i</span>)));</span><br><span class="line">    <span class="built_in">plot</span>(tticks, lowerBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span>&#125; = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(lgd)</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye BER&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave, <span class="string">&#x27;k&#x27;</span>, tt*<span class="number">1e9</span>, pulsewave-pulsewave(<span class="number">1</span>), <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;dc shift&#x27;</span>);</span><br><span class="line">xlim([<span class="number">0</span> <span class="number">10</span>]);</span><br><span class="line">ylim([<span class="number">-0.65</span> <span class="number">0.65</span>])</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">    <span class="built_in">plot</span>(tticks, upperBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span><span class="number">-1</span>&#125; = strcat(<span class="string">&#x27;BER=&#x27;</span>,num2str(berlist(<span class="built_in">i</span>)));</span><br><span class="line">    <span class="built_in">plot</span>(tticks, lowerBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span>&#125; = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(lgd)</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye BER&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h4 id="pulse-without-isi">pulse without ISI</h4>
-<blockquote>
-<p>Vp2p = 1V</p>
-</blockquote>
-<p><img src="/2022/02/24/simpleStatEye/image-20220502135551321.png"
-alt="image-20220502135551321" /></p>
-<p><img src="/2022/02/24/simpleStatEye/image-20220502135535943.png"
-alt="image-20220502135535943" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">SamplesPerSymbol = <span class="number">32</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(SamplesPerSymbol*<span class="number">16</span>, <span class="number">1</span>);</span><br><span class="line">pulsewave(<span class="number">3</span>*SamplesPerSymbol:<span class="number">4</span>*SamplesPerSymbol<span class="number">-1</span>, <span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave, <span class="string">&#x27;k&#x27;</span>, tt*<span class="number">1e9</span>, pulsewave-pulsewave(<span class="number">1</span>), <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;dc shift&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate
-Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links,"
-in IEEE Transactions on Very Large Scale Integration (VLSI) Systems,
-vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
-10.1109/TVLSI.2021.3082208.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

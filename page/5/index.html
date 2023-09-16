@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,227 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/29/Dynamic-specification-converter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/29/Dynamic-specification-converter/" class="post-title-link" itemprop="url">Dynamic Specification of Data Converter</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-03-29 23:54:37" itemprop="dateCreated datePublished" datetime="2023-03-29T23:54:37+00:00">2023-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="term-abbreviation">Term Abbreviation</h2>
+<p>SNR: signal-to-noise ratio</p>
+<p>SINAD: signal to noise and distortion</p>
+<p>ENOB: effective number of bits</p>
+<p>THD: total harmonic distortion</p>
+<p>SFDR: spurious-free dynamic range</p>
+<p>TTIMD: two-tone intermodulation distortion</p>
+<p>MTIMD: multi-tone intermodulation distortion</p>
+<p>VSWR: voltage standing-wave ratio</p>
+<h2 id="coherent-sampling">Coherent Sampling</h2>
+<p>To avoid <strong>spectral leakage</strong> completely, the method of
+<strong>coherent sampling</strong> is recommended. Coherent sampling
+requires that the input- and clock-frequency generators are
+<strong>phase locked</strong>, and that the input frequency be chosen
+based on the following relationship: <span class="math display">\[
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(f_{\text{in}}\)</span> = the desired
+input frequency</li>
+<li><span class="math inline">\(f_s\)</span> = the clock frequency of
+the data converter under test</li>
+<li><span class="math inline">\(M_C\)</span> = the number of cycles in
+the data window (to make all samples unique, choose odd or prime
+numbers)</li>
+<li><span class="math inline">\(N_R\)</span> = the data record length
+(for an 8192-point FFT, the data record is 8192s long)</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+f_{\text{in}} &amp;=\frac{f_s}{N_R}\cdot M_C \\
+&amp;= f_{\text{res}}\cdot M_C
+\end{align}\]</span></p>
+<h3 id="irreducible-ratio">irreducible ratio</h3>
+<p>An <strong>irreducible ratio</strong> ensures identical code
+sequences not to be repeated multiple times. Unnecessary repetition of
+the same code is not desirable as it increases ADC test time.</p>
+<blockquote>
+<p>Given that <span class="math inline">\(\frac{M_C}{N_R}\)</span> is
+irreducible, and <span class="math inline">\(N_R\)</span> is a power of
+2, an <strong>odd number</strong> for <span
+class="math inline">\(M_C\)</span> will always produce an
+<strong>irreducible ratio</strong></p>
+</blockquote>
+<p>Assuming there is a common factor <span
+class="math inline">\(k\)</span> between <span
+class="math inline">\(M_C\)</span> and <span
+class="math inline">\(N_R\)</span>, i.e. <span
+class="math inline">\(\frac{M_C}{N_R}=\frac{k M_C&#39;}{k
+N_R&#39;}\)</span></p>
+<p>The samples (<span class="math inline">\(n\in[1, N_R]\)</span>)</p>
+<p><span class="math display">\[\begin{align}
+y[n] &amp;= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
+&amp;= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
+&amp; = \sin\left( \omega_{\text{in}} \cdot
+n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
+&amp; = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+\end{align}\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\begin{align}
+y[n+N_R&#39;] &amp;= \sin\left( 2\pi (n+N_R&#39;)\frac{M_C}{N_R} \right)
+\\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{M_C}{N_R}\right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{kM_C&#39;}{kN_R&#39;} \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C&#39; \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
+\end{align}\]</span></p>
+<p>So, the samples is repeated <span class="math inline">\(y[n] =
+y[n+N_R&#39;]\)</span>. Usually, no additional information is gained by
+repeating with the same sampling points.</p>
+<h3 id="general-simulation-setup">General Simulation Setup</h3>
+<p><span class="math display">\[
+N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}
+\]</span> where <span class="math inline">\(F_s\)</span> is sample
+frequency, <span class="math inline">\(F_{in}\)</span> input signal
+frequency.</p>
+<p>And <span class="math inline">\(N\)</span> often is 256, 512; M is 3,
+5, 7, 11.</p>
+<h2 id="snr">SNR</h2>
+<p><img src="/2023/03/29/Dynamic-specification-converter/VXpqU.png"
+alt="VXpqU" /></p>
+<p><img src="/2023/03/29/Dynamic-specification-converter/gRE1L.png"
+alt="gRE1L" /></p>
+<h2 id="reference">reference</h2>
+<p>How to choose FFT depth for ADC performance analysis (SINAD, ENOB).
+URL:<a
+target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a></p>
+<p>Computation of Effective Number of Bits, Signal to Noise Ratio, &amp;
+Signal to Noise &amp; Distortion Ratio Using FFT. URL:<a
+target="_blank" rel="noopener" href="https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf">https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf</a></p>
+<p>Kester, Walt. (2009). Understand SINAD, ENOB, SNR, THD, THD + N, and
+SFDR so You Don't Get Lost in the Noise Floor. URL:<a
+target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf</a></p>
+<p>T. C. Hofner: Dynamic ADC testing part I. Defining and testing
+dynamic ADC parameters, Microwaves &amp; RF, 2000, vol. 39, no. 11, pp.
+75-84,162</p>
+<p>T. C. Hofner: Dynamic ADC testing part 2. Measuring and evaluating
+dynamic line parameters, Microwaves &amp; RF, 2000, vol. 39, no. 13, pp.
+78-94</p>
+<p>AN9675: A Tutorial in Coherent and Windowed Sampling with A/D
+Converters <a
+target="_blank" rel="noopener" href="https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters">https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters</a></p>
+<p>APPLICATION NOTE 3190: Coherent Sampling Calculator (CSC) <a
+target="_blank" rel="noopener" href="https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html">https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html</a></p>
+<p>Coherent Sampling (Very Brief and Simple) <a
+target="_blank" rel="noopener" href="https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple">https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple</a></p>
+<p>Signal Chain Basics #160: Making sense of coherent and noncoherent
+sampling in data-converter testing <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/">https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/</a></p>
+<p>Signal Chain Basics #104: Understanding noise in ADCs <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/">https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/</a></p>
+<p>Signal Chain Basics #101: ENOB Degradation Analysis Over Frequency
+Due to Jitter <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/">https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/</a></p>
+<p>Clock jitter analyzed in the time domain, Part 1, Texas Instruments
+Analog Applications Journal (slyt379), Aug 2010 <a
+target="_blank" rel="noopener" href="https://www.ti.com/lit/an/slyt379/slyt379.pdf">https://www.ti.com/lit/an/slyt379/slyt379.pdf</a></p>
+<p>Clock jitter analyzed in the time domain, Part 2 <a
+target="_blank" rel="noopener" href="https://www.ti.com/lit/slyt389">https://www.ti.com/lit/slyt389</a></p>
+<p>Measurement of Total Harmonic Distortion and Its Related Parameters
+using Multi-Instrument [<a
+target="_blank" rel="noopener" href="https://www.virtins.com/doc/Measurement-of-Total-Harmonic-Distortion-and-Its-Related-Parameters-using-Multi-Instrument.pdf">pdf</a>]</p>
+<p>Application Note AN-4: Understanding Data Converters' Frequency
+Domain Specifications [<a
+target="_blank" rel="noopener" href="https://www.datel.com/data/ads/adc-an4.pdf">pdf</a>]</p>
+<p>Belleman, J. (2008). From analog to digital.
+10.5170/CERN-2008-003.131. [<a
+target="_blank" rel="noopener" href="https://cds.cern.ch/record/1100535/files/p131.pdf">pdf</a>]</p>
+<p>HandWiki. Coherent sampling [<a
+target="_blank" rel="noopener" href="https://handwiki.org/wiki/Coherent_sampling">link</a>]</p>
+<p>Luis Chioye, TI. Leverage coherent sampling and FFT windows when
+evaluating SAR ADCs (Part 1) [<a
+target="_blank" rel="noopener" href="https://e2e.ti.com/blogs_/archives/b/precisionhub/posts/leverage-coherent-sampling-and-fft-windows-when-evaluating-sar-adcs-part-1">link</a>]</p>
+<p>Coherent Sampling vs. Window Sampling | Analog Devices <a
+target="_blank" rel="noopener" href="https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html">https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +447,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -328,7 +549,7 @@ alt="image-20230220230331505" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -417,7 +638,7 @@ during synthesis</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,7 +729,7 @@ alt="image-20230129223248655" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -601,7 +822,7 @@ alt="image-20230114220458438" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -742,7 +963,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -838,7 +1059,7 @@ alt="image-20230104230851475" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1165,7 +1386,7 @@ McGraw-Hill, 2017.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1271,7 +1492,7 @@ target="_blank" rel="noopener" href="https://youtu.be/FT6kKC5OdE0">https://youtu
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
+      <time title="Modified: 2023-09-16 16:35:39" itemprop="dateModified" datetime="2023-09-16T16:35:39+00:00">2023-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1315,225 +1536,8 @@ target="_blank" rel="noopener" href="https://superuser.com/q/211798">https://sup
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/14/Pole-Zero-Doublets/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/14/Pole-Zero-Doublets/" class="post-title-link" itemprop="url">Pole-Zero Doublets</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-12-14 23:27:20" itemprop="dateCreated datePublished" datetime="2022-12-14T23:27:20+00:00">2022-12-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-16 15:37:15" itemprop="dateModified" datetime="2023-09-16T15:37:15+00:00">2023-09-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Mismatch between the pole and zero frequencies leads to the
-<strong>“doublet problem”</strong>. If the pole and the zero do not
-exactly coincide, we say that they constitute a
-<strong>doublet</strong></p>
-<blockquote>
-<p>Problem 10.19 in Razavi 2nd book</p>
-</blockquote>
-<p>Suppose the open-loop transfer function of a two-stage op amp is
-expressed as <span class="math display">\[
-H_{open}(s)=\frac{A_0(1+\frac{s}{\omega_z})}{\left( 1+
-\frac{s}{\omega_{p1}}\right)\left( 1+ \frac{s}{\omega_{p2}}\right)}
-\]</span> deally, <span class="math inline">\(\omega_z=\omega_2\)</span>
-and the feedback circuit exhibits a first-order behavior, i.e., its step
-response contains a single time constant and no overshoot.</p>
-<p>Then the transfer function of the amplifier in a <em>unity-gain
-feedback loop</em> is given by <span
-class="math display">\[\begin{align}
-H_{closed}(s)
-&amp;=\frac{A_0\left(1+\frac{s}{\omega_z}\right)}{\frac{s^2}{\omega_{p1}\omega_{p2}}+\left(
-\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1} \\
-&amp;=\frac{\frac{A_0}{A_0+1}(1+\frac{s}{\omega_z})}{\frac{s^2}{\omega_{p1}\omega_{p2}(A_0+1)}+\left(
-\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)\frac{s}{A_0+1}+1}
-\end{align}\]</span></p>
-<hr />
-<p>The denominator part of <span
-class="math inline">\(H_{closed}(s)\)</span> is <span
-class="math display">\[
-D(s) = \frac{s^2}{\omega_{p1}\omega_{p2}}+\left( \frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1
-\]</span></p>
-<p>Assuming two poles (<span class="math inline">\(\omega_{pA}
-\ll\omega_{pB}\)</span>) of <span
-class="math inline">\(H_{closed}(s)\)</span> are widely spaced, <span
-class="math display">\[\begin{align}
-D(s) &amp;= \left( 1+ \frac{s}{\omega_{pA}}\right)\left( 1+
-\frac{s}{\omega_{pB}}\right)\\
-&amp;\cong \frac{s^2}{\omega_{pA}\omega_{pB}}+\frac{s}{\omega_{pA}} + 1
-\end{align}\]</span></p>
-<p>Thus, the two poles of the closed-loop transfer function of system
-are <span class="math display">\[\begin{align}
-\omega_{pA} &amp;= \frac{A_0+1}{\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}} \\
-&amp;=  \frac{(A_0+1)\omega_{p1} \omega_{p2}}{\omega_{p1} + \omega_{p2}
-+ \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}} \\
-\omega_{pB} &amp;= \omega_{p1} + \omega_{p2} +
-\frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}
-\end{align}\]</span></p>
-<hr />
-<p><strong>Assuming</strong> <span class="math inline">\(\omega_z \simeq
-\omega_{p2}\)</span> and <span class="math inline">\(\omega_{p2}\ll
-(1+A_0)\omega_{p1}\)</span> <span class="math display">\[
-\omega_{pA} = \omega_{p2}
-\]</span> and <span class="math display">\[
-\omega_{pB} = (1+A_0)\omega_{p1}
-\]</span> The closed-loop transfer function is <span
-class="math display">\[
-H_{closed}(s) =
-\frac{\frac{A_0}{A_0+1}\left(1+\frac{s}{\omega_z}\right)}{\left(1+\frac{s}{(1+A_0)\omega_{p1}}\right)\left(
-1+\frac{s}{\omega_{p2}} \right)}
-\]</span></p>
-<hr />
-<p>The step response of the closed-loop amplifier</p>
-<p>Consider the Laplace transform function of step response, <span
-class="math inline">\(X(s)=\frac{1}{s}\)</span> <span
-class="math display">\[
-Y(s)=\frac{1}{s}\times H_{closed}(s)
-\]</span> Thus, the <strong>small-signal step response</strong> of the
-closed-loop amplifer is <span class="math display">\[
-y(t)=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t)
-\]</span> Since, <span class="math inline">\(\omega_{p2}\ll
-(1+A_0)\omega_{p1}\)</span>. Therefore, rewrite the <span
-class="math inline">\(y(t)\)</span> <span class="math display">\[
-y(t)\cong
-\frac{A_0}{A_0+1}\left[1-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t)
-\]</span> The step response contains an exponential term of the form
-<span
-class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}\)</span>.
-This is an important result, indicating that if the zero does not
-exactly cancel the pole, the step response exhibits an exponential with
-an amplitude proportional to <span
-class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)\)</span>,
-which depends on the mismatch between <span
-class="math inline">\(\omega_z\)</span> and <span
-class="math inline">\(\omega_{p2}\)</span> and a time constant <span
-class="math inline">\(\tau\)</span> of <span
-class="math inline">\(\frac{1}{\omega_{p2}}\)</span> or <span
-class="math inline">\(\frac{1}{\omega_{z}}\)</span></p>
-<h3 id="perfect-pole-zero-cancellation">perfect pole-zero
-cancellation</h3>
-<p><span class="math display">\[\begin{align}
-y(t)
-&amp;=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t) \\
-&amp;= \frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}\right]u(t)
-\end{align}\]</span></p>
-<hr />
-<p><img src="/2022/12/14/Pole-Zero-Doublets/image-20230108233523345.png"
-alt="image-20230108233523345" /></p>
-<p><img src="/2022/12/14/Pole-Zero-Doublets/image-20230108234123707.png"
-alt="image-20230108234123707" /></p>
-<blockquote>
-<p>The zero comes from the mirror node</p>
-<p>Thanks to unity gain buffer, zero is alleviated for <span
-class="math inline">\(C_c\)</span></p>
-</blockquote>
-<h3 id="reference">reference</h3>
-<p>Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology,
-EE 240B – Spring 2018, Advanced Analog Integrated Circuits <a
-target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf</a></p>
-<p>Eric Chang, Prof. Elad Alon EE240B HW3 <a
-target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf</a>
-and <a
-target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf</a></p>
-<p>Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ),
-Operational Amplifiers <a
-target="_blank" rel="noopener" href="http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf">http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf</a></p>
-<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
-frequency response and settling time of operational amplifiers," in IEEE
-Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
-doi: 10.1109/JSSC.1974.1050527.</p>
-<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
-frequency response and settling time of operational amplifiers," in IEEE
-Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
-doi: 10.1109/JSSC.1974.1050527.</p>
-<p>P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a
-tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17,
-no. 6, pp. 969-982, Dec. 1982, doi: 10.1109/JSSC.1982.1051851.</p>
-<p>SERGIO FRANCO, Demystifying pole-zero doublets URL:<a
-target="_blank" rel="noopener" href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/demystifying-pole-zero-doublets/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -468,7 +468,7 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,7 +498,7 @@ with UI length rectangular <span class="math display">\[
 H(\omega) = \frac{Y_{\text{pulse}}(\omega)}{X_{\text{rect}}(\omega)} =
 \frac{Y_{\text{pulse}}(\omega)}{\text{sinc}(\omega)}
 \]</span></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Convolution Property of the Fourier Transform</span></span><br><span class="line"><span class="comment">% pulse(t) = h(t) * rect(t)</span></span><br><span class="line"><span class="comment">% -&gt; fourier transform</span></span><br><span class="line"><span class="comment">% PULSE = H * RECT</span></span><br><span class="line"><span class="comment">% FT(pulse) = sinc</span></span><br><span class="line"><span class="comment">% H = PULSE/RECT = PULSE/sinc</span></span><br><span class="line">xx = <span class="built_in">pi</span>*ui.*w(<span class="number">1</span>:plt_num);</span><br><span class="line">y_sinc = ui.*<span class="built_in">sin</span>(xx)./xx;</span><br><span class="line">y_sinc(<span class="number">1</span>) = y_sinc(<span class="number">2</span>);</span><br><span class="line">y_sinc = y_sinc/y_sinc(<span class="number">1</span>);  <span class="comment">% we dont care the absoulte gain</span></span><br><span class="line">h_ban1 = <span class="built_in">abs</span>(h(<span class="number">1</span>:plt_num))./<span class="built_in">abs</span>(y_sinc);</span><br><span class="line"></span><br><span class="line">h_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(h_ban1));</span><br><span class="line">[hmin, Index] = <span class="built_in">min</span>(<span class="built_in">abs</span>(h_dB +<span class="number">3</span> ));</span><br><span class="line">f_3dB = w(Index);</span><br><span class="line">f_3dB = f_3dB/<span class="number">1e9</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Convolution Property of the Fourier Transform</span></span><br><span class="line"><span class="comment">% pulse(t) = h(t) * rect(t)</span></span><br><span class="line"><span class="comment">% -&gt; fourier transform</span></span><br><span class="line"><span class="comment">% PULSE = H * RECT</span></span><br><span class="line"><span class="comment">% FT(RECT) = sinc</span></span><br><span class="line"><span class="comment">% H = PULSE/RECT = PULSE/sinc</span></span><br><span class="line">xx = <span class="built_in">pi</span>*ui.*w(<span class="number">1</span>:plt_num);</span><br><span class="line">y_sinc = ui.*<span class="built_in">sin</span>(xx)./xx;</span><br><span class="line">y_sinc(<span class="number">1</span>) = y_sinc(<span class="number">2</span>);</span><br><span class="line">y_sinc = y_sinc/y_sinc(<span class="number">1</span>);  <span class="comment">% we dont care the absoulte gain</span></span><br><span class="line">h_ban1 = <span class="built_in">abs</span>(h(<span class="number">1</span>:plt_num))./<span class="built_in">abs</span>(y_sinc);</span><br><span class="line"></span><br><span class="line">h_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(h_ban1));</span><br><span class="line">[hmin, Index] = <span class="built_in">min</span>(<span class="built_in">abs</span>(h_dB +<span class="number">3</span> ));</span><br><span class="line">f_3dB = w(Index);</span><br><span class="line">f_3dB = f_3dB/<span class="number">1e9</span>;</span><br></pre></td></tr></table></figure>
 <p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223115184.png"
 alt="image-20220520223115184" /></p>
 <p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223621924.png"
@@ -588,7 +588,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -786,7 +786,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1008,7 +1008,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1101,7 +1101,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1241,7 +1241,7 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1403,7 +1403,7 @@ lesser as compared to PSS/Pnoise</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1533,7 +1533,7 @@ doi:10.1007/978-3-030-03238-8</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1649,7 +1649,7 @@ target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-18 09:07:50" itemprop="dateModified" datetime="2023-09-18T09:07:50+00:00">2023-09-18</time>
+      <time title="Modified: 2023-09-21 10:21:24" itemprop="dateModified" datetime="2023-09-21T10:21:24+00:00">2023-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

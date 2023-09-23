@@ -2562,17 +2562,17 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2
   <entry>
     <title>StatEye</title>
     <url>/2023/09/23/StatEye/</url>
-    <content><![CDATA[<h2 id="matlab-pulse2stateye">Matlab <code>pulse2stateye</code></h2>
+    <content><![CDATA[<h2 id="matlab---pulse2stateye">Matlab - <code>pulse2stateye</code></h2>
 <blockquote>
 <p>Due to this function only output PDF of eye, postprocessing is needed
 which cumulative sum PDF.</p>
 </blockquote>
-<h4 id="probability-density-functionpdf-plot">Probability Density
-Function(PDF) plot</h4>
+<h3 id="probability-density-functionpdf-plot">Probability Density
+Function(PDF) plot</h3>
 <p><img src="/2023/09/23/StatEye/PDF.jpg" alt="PDF" /></p>
-<h4 id="bit-error-rateber-plot">Bit Error Rate(BER) plot</h4>
+<h3 id="bit-error-rateber-plot">Bit Error Rate(BER) plot</h3>
 <p><img src="/2023/09/23/StatEye/BER.jpg" alt="BER" /></p>
-<h4 id="pulse-response">pulse response</h4>
+<h3 id="pulse-response">pulse response</h3>
 <p><img src="/2023/09/23/StatEye/image-20220502134522549.png"
 alt="image-20220502134522549" /></p>
 <blockquote>
@@ -2585,9 +2585,9 @@ normally</p>
 voltage but bit <code>0</code> , which is <code>-Vpeak</code> in
 differential link</p>
 </blockquote>
-<h4 id="postprocessing-function">postprocessing function</h4>
+<h3 id="postprocessing-function">postprocessing function</h3>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% REF: https://www.mathworks.com/help/serdes/ref/pulse2stateye.html</span></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(<span class="built_in">size</span>(pulse, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">pulsewave = pulse(:, <span class="number">1</span>);</span><br><span class="line">pulsewave(:,<span class="number">1</span>) = pulsewave - pulsewave(<span class="number">1</span>);  <span class="comment">% DC shift, although `pulse2stateye` shift internally</span></span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line"><span class="comment">%stateye(1:200, 1:200) = 10000;</span></span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[ysize, xsize] = <span class="built_in">size</span>(stateye);</span><br><span class="line">ymid = <span class="built_in">floor</span>((ysize+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">upperEyePDF = stateye(ymid:<span class="keyword">end</span>,:); </span><br><span class="line">lowerEyePDF = stateye(ymid:<span class="number">-1</span>:<span class="number">1</span>,:); <span class="comment">% upside down</span></span><br><span class="line"></span><br><span class="line">upperEyeCDF = cumsum(upperEyePDF, <span class="number">1</span>);</span><br><span class="line">lowerEyeCDF = cumsum(lowerEyePDF, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">berlist = [<span class="number">1e-12</span>, <span class="number">1e-6</span>, <span class="number">0.01</span>];</span><br><span class="line">lenBer = <span class="built_in">length</span>(berlist);</span><br><span class="line">upperBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line">lowerBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:xsize</span><br><span class="line">        upperBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(upperEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">        lowerBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(lowerEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% shift idx to algin original stateye</span></span><br><span class="line">upperBERIdx = ymid - <span class="number">1</span> + upperBERIdx;</span><br><span class="line">lowerBERIdx = ymid + <span class="number">1</span> - lowerBERIdx;</span><br><span class="line"></span><br><span class="line">upperBERVal = vh(upperBERIdx);</span><br><span class="line">lowerBERVal = vh(lowerBERIdx);</span><br><span class="line"></span><br><span class="line">tticks = th*SymbolTime*<span class="number">1e12</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>);</span><br><span class="line">lgd = cell(lenBer*<span class="number">2</span>,<span class="number">1</span>) ;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer<span class="comment">% REF: https://www.mathworks.com/help/serdes/ref/pulse2stateye.html</span></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(<span class="built_in">size</span>(pulse, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">pulsewave = pulse(:, <span class="number">1</span>);    <span class="comment">% remove crosstalk pulse responses</span></span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[ysize, xsize] = <span class="built_in">size</span>(stateye);</span><br><span class="line">ymid = <span class="built_in">floor</span>((ysize+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">upperEyePDF = stateye(ymid:<span class="keyword">end</span>,:); </span><br><span class="line">lowerEyePDF = stateye(ymid:<span class="number">-1</span>:<span class="number">1</span>,:); <span class="comment">% upside down</span></span><br><span class="line"></span><br><span class="line">upperEyeCDF = cumsum(upperEyePDF, <span class="number">1</span>);</span><br><span class="line">lowerEyeCDF = cumsum(lowerEyePDF, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">berlist = [<span class="number">1e-12</span>, <span class="number">1e-6</span>, <span class="number">0.01</span>];</span><br><span class="line">lenBer = <span class="built_in">length</span>(berlist);</span><br><span class="line">upperBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line">lowerBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:xsize</span><br><span class="line">        upperBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(upperEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">        lowerBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(lowerEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% shift idx to algin original stateye</span></span><br><span class="line">upperBERIdx = ymid - <span class="number">1</span> + upperBERIdx;</span><br><span class="line">lowerBERIdx = ymid + <span class="number">1</span> - lowerBERIdx;</span><br><span class="line"></span><br><span class="line">upperBERVal = vh(upperBERIdx);</span><br><span class="line">lowerBERVal = vh(lowerBERIdx);</span><br><span class="line"></span><br><span class="line">tticks = th*SymbolTime*<span class="number">1e12</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>);</span><br><span class="line">lgd = cell(lenBer*<span class="number">2</span>,<span class="number">1</span>) ;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="built_in">plot</span>(tticks, upperBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span><span class="number">-1</span>&#125; = strcat(<span class="string">&#x27;BER=&#x27;</span>,num2str(berlist(<span class="built_in">i</span>)));</span><br><span class="line">    <span class="built_in">plot</span>(tticks, lowerBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span>&#125; = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(lgd)</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye BER&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave, <span class="string">&#x27;k&#x27;</span>, tt*<span class="number">1e9</span>, pulsewave-pulsewave(<span class="number">1</span>), <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;dc shift&#x27;</span>);</span><br><span class="line">xlim([<span class="number">0</span> <span class="number">10</span>]);</span><br><span class="line">ylim([<span class="number">-0.65</span> <span class="number">0.65</span>])</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">    <span class="built_in">plot</span>(tticks, upperBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span><span class="number">-1</span>&#125; = strcat(<span class="string">&#x27;BER=&#x27;</span>,num2str(berlist(<span class="built_in">i</span>)));</span><br><span class="line">    <span class="built_in">plot</span>(tticks, lowerBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span>&#125; = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(lgd)</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye BER&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h4 id="pulse-without-isi">pulse without ISI</h4>
+<h3 id="pulse-without-isi">pulse without ISI</h3>
 <blockquote>
 <p>Vp2p = 1V</p>
 </blockquote>
@@ -2596,6 +2596,39 @@ alt="image-20220502135551321" /></p>
 <p><img src="/2023/09/23/StatEye/image-20220502135535943.png"
 alt="image-20220502135535943" /></p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">SamplesPerSymbol = <span class="number">32</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(SamplesPerSymbol*<span class="number">16</span>, <span class="number">1</span>);</span><br><span class="line">pulsewave(<span class="number">3</span>*SamplesPerSymbol:<span class="number">4</span>*SamplesPerSymbol<span class="number">-1</span>, <span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave, <span class="string">&#x27;k&#x27;</span>, tt*<span class="number">1e9</span>, pulsewave-pulsewave(<span class="number">1</span>), <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;dc shift&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h2 id="hspice---snpssimade">HSPICE - <code>snpsSimADE</code></h2>
+<blockquote>
+<p>use StatEye Analysis in HSPICE</p>
+</blockquote>
+<h3 id="create-netlist-with-hspiced-in-virtuoso">create netlist with
+hspiceD in Virtuoso</h3>
+<p><img src="/2023/09/23/StatEye/image-20220708011315422.png"
+alt="image-20220708011315422" /></p>
+<h3 id="modify-netlist">modify netlist</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">P1 vi 0  port=1  Z0=0 LFSR (1 0 0 100p 100p 1G 1 [5,2])</span><br><span class="line">P2 vo 0  port=2  Z0=1G</span><br><span class="line">.stateye T=1ns trf=100p incident_port=1 probe_port=2</span><br><span class="line">.probe stateye eye(2) berC(2) eyeBW(2)</span><br><span class="line">.print stateye eye(2) berC(2) eyeBW(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note both<code>Z0=0</code> and <code>Z0=1G</code> are used to remove
+port's effect, which is used as ideal voltage source and voltage
+monitor</p>
+</blockquote>
+<p><img src="/2023/09/23/StatEye/image-20220708012542135.png"
+alt="image-20220708012542135" /></p>
+<blockquote>
+<p>The <code>.probe stateye</code> command generates
+<code>netlist.stet#</code> and <code>netlist.stev#</code> for following
+purposes:</p>
+<ul>
+<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
+bathtubV(t)</li>
+<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
+bathtubV(t)</li>
+</ul>
+</blockquote>
+<h3 id="setup">setup</h3>
+<h4 id="cdsinit">.cdsinit</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load( strcat( getShellEnvVar(&quot;HSPICE_HOME&quot;) &quot;/hspice/interface/snpsSimADE.ile&quot; ))</span><br></pre></td></tr></table></figure>
+<h4 id="environment-variable">environment variable</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export CDS_LOAD_ENV=CSF</span><br><span class="line">export SNPSSIMADE_LOAD_MODE=HSPICE</span><br></pre></td></tr></table></figure>
 <h2 id="references">references</h2>
 <p>Sanders, Anthony, Michael Resso and John D'Ambrosia. “Channel
 Compliance Testing Utilizing Novel Statistical Eye Methodology.”
@@ -2605,6 +2638,8 @@ Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links,"
 in IEEE Transactions on Very Large Scale Integration (VLSI) Systems,
 vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
 10.1109/TVLSI.2021.3082208.</p>
+<p>HSPICE® User Guide: Signal Integrity Modeling and Analysis, Version
+Q-2020.03, March 2020</p>
 ]]></content>
       <categories>
         <category>dsp</category>
@@ -13629,54 +13664,6 @@ alt="image-20220507122217830" /></p>
         <tag>verilog</tag>
         <tag>arithmetic</tag>
         <tag>signed</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Statistical Eye Analysis with snpsSimADE</title>
-    <url>/2022/07/08/snpsSimADE-StatEye/</url>
-    <content><![CDATA[<h2 id="how-to-use-stateye-analysis-in-hspice">How to use StatEye
-Analysis in HSPICE</h2>
-<h3 id="create-netlist-with-hspiced-in-virtuoso">create netlist with
-hspiceD in Virtuoso</h3>
-<p><img src="/2022/07/08/snpsSimADE-StatEye/image-20220708011315422.png"
-alt="image-20220708011315422" /></p>
-<h3 id="modify-netlist">modify netlist</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">P1 vi 0  port=1  Z0=0 LFSR (1 0 0 100p 100p 1G 1 [5,2])</span><br><span class="line">P2 vo 0  port=2  Z0=1G</span><br><span class="line">.stateye T=1ns trf=100p incident_port=1 probe_port=2</span><br><span class="line">.probe stateye eye(2) berC(2) eyeBW(2)</span><br><span class="line">.print stateye eye(2) berC(2) eyeBW(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Note both<code>Z0=0</code> and <code>Z0=1G</code> are used to remove
-port's effect, which is used as ideal voltage source and voltage
-monitor</p>
-</blockquote>
-<p><img src="/2022/07/08/snpsSimADE-StatEye/image-20220708012542135.png"
-alt="image-20220708012542135" /></p>
-<blockquote>
-<p>The <code>.probe stateye</code> command generates
-<code>netlist.stet#</code> and <code>netlist.stev#</code> for following
-purposes:</p>
-<ul>
-<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
-bathtubV(t)</li>
-<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
-bathtubV(t)</li>
-</ul>
-</blockquote>
-<h2 id="setup">setup</h2>
-<h3 id="cdsinit">.cdsinit</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load( strcat( getShellEnvVar(&quot;HSPICE_HOME&quot;) &quot;/hspice/interface/snpsSimADE.ile&quot; ))</span><br></pre></td></tr></table></figure>
-<h3 id="environment-variable">environment variable</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export CDS_LOAD_ENV=CSF</span><br><span class="line">export SNPSSIMADE_LOAD_MODE=HSPICE</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>HSPICE® User Guide: Signal Integrity Modeling and Analysis, Version
-Q-2020.03, March 2020</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-        <tag>stateye</tag>
-        <tag>spectre</tag>
-        <tag>hspice</tag>
       </tags>
   </entry>
   <entry>

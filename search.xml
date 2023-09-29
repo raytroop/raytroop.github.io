@@ -12664,24 +12664,6 @@ href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim
       </tags>
   </entry>
   <entry>
-    <title>rationalfit</title>
-    <url>/2022/06/29/rationalfit/</url>
-    <content><![CDATA[<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2022/06/29/rationalfit/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>channel</tag>
-        <tag>touchstone</tag>
-        <tag>veriloga</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Cadence&#39;s reg_verifier</title>
     <url>/2022/04/04/reg-verifier/</url>
     <content><![CDATA[<h2 id="generation">Generation</h2>
@@ -13553,6 +13535,55 @@ Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
       </tags>
   </entry>
   <entry>
+    <title>Scattering parameters</title>
+    <url>/2023/09/29/scattering/</url>
+    <content><![CDATA[<h2 id="rational-fit">Rational Fit</h2>
+<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
+<p>To resolve the convergence problem of s-parameter in Spectre
+simulator - <code>rationalfit</code> and write Verilog-A</p>
+<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
+alt="image-20220630224525565" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="z0">Z0</h2>
+<blockquote>
+<p>Remember, S-parameters <strong>don't mean much</strong> unless you
+know the value of the <strong>reference impedance </strong>(it's
+frequently called Z0).</p>
+</blockquote>
+<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
+<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
+alt="image-20220430214052538" /></p>
+<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
+alt="image-20220430214136970" /></p>
+<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
+alt="image-20220430214419283" /></p>
+<blockquote>
+<p>The default <strong>Z0</strong> exported by EMX is
+<strong>50</strong></p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p><a
+href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
+S-parameters
+(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
+<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
+Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
+<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
+rational function approximation algorithm for model generation.
+Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
+doi:10.1109/dac.1999.781313</p>
+<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
+Checker and Rational Fit Model Generator [<a
+href="Article%20(20508931)%20Title:%20Introducing%20the%20Spectre%20S-Parameter%20Quality%20Checker%20and%20Rational%20Fit%20Model%20Generator%20(Presented%20at%20the%20IEEE%20IMS%202023)%20URL:%20https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">link</a>]</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>channel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Schmitt Inverter</title>
     <url>/2023/05/11/schmitt/</url>
     <content><![CDATA[
@@ -13729,45 +13760,6 @@ alt="image-20220507122217830" /></p>
         <tag>verilog</tag>
         <tag>arithmetic</tag>
         <tag>signed</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Scattering parameters</title>
-    <url>/2023/07/27/sp/</url>
-    <content><![CDATA[<h2 id="touchstone">Touchstone</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/07/27/sp/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/07/27/sp/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/07/27/sp/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>sp</tag>
       </tags>
   </entry>
   <entry>

@@ -741,37 +741,6 @@ variant, the it is defined as a subsequence and its
       </tags>
   </entry>
   <entry>
-    <title>Global Handles in UVM</title>
-    <url>/2022/02/23/Global-Handles-UVM/</url>
-    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Global handles uvm_top and factory in uvm_pkg have been removed in
-UVM-1.2 and later</p>
-</blockquote>
-<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
-UVM-1.2</h4>
-<p>Call the <strong>get() method of the class</strong> to retrieve the
-singleton handle.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
-accessing all the central UVM services such as
-<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
-<strong>uvm_report_server</strong>, etc.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-      <tags>
-        <tag>uvm</tag>
-        <tag>systemverilog</tag>
-        <tag>dv</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Custom Design with FinFETs</title>
     <url>/2022/12/10/FinFET-Considerations/</url>
     <content><![CDATA[<h2 id="design-considerations">Design Considerations</h2>
@@ -966,6 +935,37 @@ current steering DAC</h2>
       <tags>
         <tag>dac</tag>
         <tag>mismatch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Global Handles in UVM</title>
+    <url>/2022/02/23/Global-Handles-UVM/</url>
+    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Global handles uvm_top and factory in uvm_pkg have been removed in
+UVM-1.2 and later</p>
+</blockquote>
+<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
+UVM-1.2</h4>
+<p>Call the <strong>get() method of the class</strong> to retrieve the
+singleton handle.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
+accessing all the central UVM services such as
+<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
+<strong>uvm_report_server</strong>, etc.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+      <tags>
+        <tag>uvm</tag>
+        <tag>systemverilog</tag>
+        <tag>dv</tag>
       </tags>
   </entry>
   <entry>
@@ -12636,6 +12636,9 @@ href="http://www.soundfieldsynthesis.org/wp-content/uploads/pubs/Ahrens_etal_AES
 <a
 href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">web</a>
 ].</p>
+<p>Manolakis, D., &amp; Ingle, V. (2011). <em>Applied Digital Signal
+Processing: Theory and Practice</em>. Cambridge: Cambridge University
+Press. doi:10.1017/CBO9780511835261</p>
 ]]></content>
       <categories>
         <category>dsp</category>

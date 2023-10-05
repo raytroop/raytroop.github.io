@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,184 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/06/EDI-post-mask-ECO-sparecell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/06/EDI-post-mask-ECO-sparecell/" class="post-title-link" itemprop="url">How does EDI System identify spare cells in a post-mask ECO flow?</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-06 22:56:40" itemprop="dateCreated datePublished" datetime="2022-03-06T22:56:40+00:00">2022-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/innovus/" itemprop="url" rel="index"><span itemprop="name">innovus</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4
+id="how-does-edi-system-identify-spare-cells-in-a-post-mask-eco-flow">How
+does EDI System identify spare cells in a post-mask ECO flow?</h4>
+<p>Spare cells should have a unique string in their instance name to
+identify them. Then the command <code>specifySpareGate</code> or
+<code>ecoDesign -useSpareCells patternName</code> is run to identify the
+spare instances. For example, if all spare cells have _spare_ in their
+name then they are identified using:</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">specifySpareGate -inst *_spare_*</span><br></pre></td></tr></table></figure>
+<p>OR</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ecoDesign -spareCells *_spare_* ...</span><br></pre></td></tr></table></figure>
+<p><strong>Note</strong>: if you are making <strong>manual ECO</strong>
+changes to a netlist and converting a spare cell to a logical instance,
+<strong>it's important to change the instance name</strong>. Otherwise,
+the instance may be identified as a spare cell if a future ECO is
+performed because it still has the spare cell instance name.</p>
+<h4 id="example">Example</h4>
+<h5 id="the-cell-to-be-swapped-is-unplaced">The cell to be swapped is
+unplaced</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307002842020.png"
+alt="image-20220307002842020" /></p>
+<p>pre_buf: <strong>unplaced</strong></p>
+<p>spare_buf: <strong>placed</strong></p>
+<blockquote>
+<p>innovus 49&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 50&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">specifySpareGate -inst spare_*</span><br><span class="line">ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307003059068.png"
+alt="image-20220307003059068" /></p>
+<blockquote>
+<p>innovus 55&gt; dbGet top.insts.name</p>
+<p><strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 56&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef6150</strong> 0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 57&gt; dbGet top.insts.Pstatus</p>
+<p><strong>placed</strong> fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the unplaced cell.</p>
+<h5 id="the-cell-to-be-swapped-is-placed">The cell to be swapped is
+placed</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307004654614.png"
+alt="image-20220307004654614" /></p>
+<blockquote>
+<p>innovus 62&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 63&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 64&gt; dbGet top.insts.pStatus</p>
+<p><strong>placed</strong> <strong>placed</strong> fixed fixed</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">innovus <span class="number">66</span>&gt; specifySpareGate -inst spare_*</span><br><span class="line">Specifying instance [spare_buf] as spare gate.</span><br><span class="line">Specified <span class="number">1</span> instances as spare gate.</span><br><span class="line">innovus <span class="number">67</span>&gt; ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307005254488.png"
+alt="image-20220307005254488" /></p>
+<blockquote>
+<p>innovus 68&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf pre_buf</strong> UDriver USink</p>
+<p>innovus 69&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0 0x7f7b03ef6150</strong> 0x7f7b03ef6000
+0x7f7b03ef6070</p>
+<p>innovus 70&gt; dbGet top.insts.pStatus</p>
+<p>placed placed fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the placed cell.</p>
+<h5 id="error-in-innovus-text-command-reference-21.12">Error in "Innovus
+Text Command Reference 21.12"</h5>
+<p><strong>ecoSwapSpareCell</strong></p>
+<p><del>If the cell to be swapped is unplaced, it is mapped to the spare
+cell. <code>*instName*</code> is deleted, and its connection is
+transferred to the spare cell. If the cell to be swapped is placed, it
+is swapped with the spare cell and is renamed to
+<code>*instNameSuffix*</code> if the <code>-suffix</code> option is
+used. If a suffix is not specified, the <code>*instName*</code> cell is
+renamed to <code>*spareCellInstName*</code>. The <code>*instName*</code>
+cell's connections are transferred to <code>*spareCellInstName*</code>.
+The input of <code>*instName*</code> is <code>tielo</code>, based on the
+global connection definition.</del></p>
+<p><strong>reference:</strong></p>
+<p><a
+target="_blank" rel="noopener" href="https://community.cadence.com/cadence_blogs_8/b/di/posts/answers-to-frequently-asked-questions-when-performing-ecos-in-edi-system">Answers
+to Top 10 Questions on Performing ECOs in EDI System</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html">EE
+582: Physical Design Automation of VLSI Circuits and Systems</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +404,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -446,7 +624,7 @@ Digital Domain</h4>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -668,7 +846,7 @@ Convergence Checker for Oscillators</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -781,7 +959,7 @@ target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/open-loop-ga
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -917,7 +1095,7 @@ layermap provided.</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1067,7 +1245,7 @@ Implementation, 5th edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1281,7 +1459,7 @@ target="_blank" rel="noopener" href="https://www.tauworkshop.com/2021/speaker_sl
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1403,7 +1581,7 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1514,7 +1692,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
+      <time title="Modified: 2023-10-05 15:54:51" itemprop="dateModified" datetime="2023-10-05T15:54:51+00:00">2023-10-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1586,132 +1764,8 @@ virtual clock is propagated.</p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/24/miller_zero/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/24/miller_zero/" class="post-title-link" itemprop="url">Miller Zero and How to Mitigate Impact of Zero</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-24 13:14:38" itemprop="dateCreated datePublished" datetime="2022-02-24T13:14:38+00:00">2022-02-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-05 14:29:31" itemprop="dateModified" datetime="2023-10-05T14:29:31+00:00">2023-10-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="lectures">Lectures</h4>
-<p>EE 240B: Advanced Analog Circuit Design, Prof. Bernhard E.
-Boser<br />
-<a
-target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf">OTA
-II, Multi-Stage</a></p>
-<h4 id="papers">Papers</h4>
-<p>B. K. Ahuja, "An improved frequency compensation technique for CMOS
-operational amplifiers," in IEEE Journal of Solid-State Circuits, vol.
-18, no. 6, pp. 629-633, Dec. 1983, doi: 10.1109/JSSC.1983.1052012.</p>
-<p>D. B. Ribner and M. A. Copeland, "Design techniques for cascoded CMOS
-op amps with improved PSRR and common-mode input range," in IEEE Journal
-of Solid-State Circuits, vol. 19, no. 6, pp. 919-925, Dec. 1984, doi:
-10.1109/JSSC.1984.1052246.</p>
-<p>Abo, Andrew &amp; Gray, Paul. (1999). A 1.5V, 10-bit, 14MS/s CMOS
-Pipeline Analog-to-Digital Converter.</p>
-<h4 id="books-chapters">Book's chapters</h4>
-<p>Design of analog CMOS integrated circuits, Behzad Razavi<br />
-10.5 Compensation of Two-Stage Op Amps<br />
-10.7 Other Compensation Techniques</p>
-<p>Analog Design Essentials, Willy M.C. Sansen<br />
-chapter #5 Stability of operational amplifiers - Compensation of
-positive zero</p>
-<p>Analysis and Design of Analog Integrated Circuits 5th Edition, Paul
-R. Gray, Paul J. Hurst, Stephen H. Lewis, Robert G. Meyer<br />
-9.4.3 Two-Stage MOS Amplifier Compensation</p>
-<p>CMOS Analog Circuit Design 3rd Edition, Phillip E. Allen, Douglas R.
-Holberg<br />
-6.2.2 Miller Compensation of the Two-Stage Op Amp</p>
-<h4 id="example---cascode-compensation">Example - cascode
-compensation</h4>
-<p><img src="/2022/02/24/miller_zero/cascode_compensation.PNG"
-alt="cascode_compensation" /> <span class="math display">\[\begin{align}
-\omega_{p1} &amp;= \frac {1} {R_{eq}g_{m9}R_{L}C_{c}} \\
-\omega_{p2} &amp;= \frac {g_{m4}R_{eq}g_{m9}} {C_L} \\
-\omega_z &amp;= (g_{m4}R_{eq})(\frac {g_{m9}} {C_c})
-\end{align}\]</span></p>
-<blockquote>
-<p>Figure 10.46 in Razavi's book</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

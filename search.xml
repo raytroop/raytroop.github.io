@@ -15367,6 +15367,59 @@ FIFOs</p>
       </tags>
   </entry>
   <entry>
+    <title>DC operating points during TRANSIENT analysis</title>
+    <url>/2023/10/06/tranOP/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
+Beckett</a><a
+href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
+11 years ago</a></p>
+<p>Two approaches:</p>
+<ol type="1">
+<li>On the transient options form, there's a field called "infotimes" -
+specify the times at which you want it to output the dc operating point
+data. You can then annotate the "transient operating points" from any of
+these times after the simulation, or access them via the results
+browser.</li>
+<li>Or you could get the operating point data to be continuously saved
+during the transient for selected devices - if so, create a file called
+(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
+M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
+reference the file via Setup-&gt;Model Libraries or as a "definition
+file" on Setup-&gt;Simulation Files. With this approach you can then
+find the operating point data for the selected devices in the results
+browser and plot it versus time (be cautious of saving too much though
+because this can generate a lot of data if you're not careful)</li>
+</ol>
+<p>Regards,</p>
+<p>Andrew.</p>
+</blockquote>
+<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
+alt="image-20231006110801078" /></p>
+<h2 id="transient-options-form">transient options form</h2>
+<h3 id="setup">setup</h3>
+<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
+alt="image-20231006103506475" /></p>
+<h3 id="access-1">access 1</h3>
+<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
+<strong>Annotate</strong> <span class="math inline">\(to\)</span>
+<strong>Transient Operating Points</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
+alt="image-20231006104317496" /></p>
+<h3 id="access-2">access 2</h3>
+<p><strong>tranOpTimed</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
+alt="image-20231006105236323" /></p>
+<h2 id="save.scs">save.scs</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
+alt="image-20231006110506245" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Transient noise and its application</title>
     <url>/2022/04/19/transient-noise-and-its-application/</url>
     <content><![CDATA[<h2 id="phase-noise-from-transient-noise-analysis">phase noise from

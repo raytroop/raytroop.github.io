@@ -190,6 +190,210 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/16/lptv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/16/lptv/" class="post-title-link" itemprop="url">LPTV systems</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-10-16 21:02:43 / Modified: 13:04:56" itemprop="dateCreated datePublished" datetime="2023-10-16T21:02:43+00:00">2023-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="harmonic-balance-analysis">Harmonic Balance Analysis</h2>
+<p><strong>Large-signal/small-signal analysis</strong>, or
+<strong>conversion matrix analysis</strong>, is useful for a large class
+of problems wherein a nonlinear device is driven, or "pumped" by a
+<strong>single large sinusoidal signal</strong>; another signal, much
+smaller, is applied; and we seek only the <strong>linear response to the
+small signal</strong>.</p>
+<p><img src="/2023/10/16/lptv/image-20220511203515431.png"
+alt="image-20220511203515431" /></p>
+<p>The above nonlinear element has the <span
+class="math inline">\(I/V\)</span> relationship <span
+class="math inline">\(I=f(V)\)</span>. Assuming that <span
+class="math inline">\(V\)</span> consists of the sum of a large-signal
+component <span class="math inline">\(V_0\)</span> and a small-signal
+component <span class="math inline">\(v\)</span>, with Taylor series
+<span class="math display">\[
+f(V_0+v) = f(V_0)+\frac{d}{dV}f(V)|_{V=V_0}\cdot
+v+\frac{1}{2}\frac{d^2}{dV^2}f(V)|_{V=V_0}\cdot v^2+...
+\]</span> The small-signal, incremental current is found by subtracting
+the large-signal component of the current <span class="math display">\[
+i(v)=I(V_0+v)-I(V_0)
+\]</span> If <span class="math inline">\(v \ll V_0\)</span>, <span
+class="math inline">\(v^2\)</span>, <span
+class="math inline">\(v^3\)</span>,... are negligible. Then, <span
+class="math display">\[
+i(v) = \frac{d}{dV}f(V)|_{V=V_0}\cdot v
+\]</span> <span class="math inline">\(V_0\)</span> need not be a dc
+quantity; it can be a time-varying large-signal voltage <span
+class="math inline">\(V_L(t)\)</span> and that <span
+class="math inline">\(v=v(t)\)</span>, a function of time. Then <span
+class="math display">\[
+i(t) = \frac{d}{dV}f(V)|_{V=V_L(t)}\cdot v(t)
+\]</span></p>
+<p>The above equation can be expressed as <span class="math display">\[
+i(t)=g(t)v(t)
+\]</span> where <span
+class="math inline">\(g(t)=\frac{d}{dV}f(V)|_{V=V_L(t)}\)</span></p>
+<blockquote>
+<p>If <span class="math inline">\(f(V) = V^2\)</span>, then <span
+class="math display">\[\begin{align}
+i(t) &amp;= \frac{d}{dV}V^2|_{V=V_L(t)}\cdot v(t) \\
+&amp;= 2V_L(t) \cdot v(t)
+\end{align}\]</span></p>
+</blockquote>
+<p>A nonlinear element excited by two tones, generate mixing frequencies
+<span class="math inline">\(m\omega_1+n\omega_w\)</span>, where <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(n\)</span> are integers. If one of those tones,
+<span class="math inline">\(\omega_1\)</span> has such <strong>low
+level</strong> that it does not generate harmonics and the other is a
+large-signal sinusoid at <span class="math inline">\(\omega_p\)</span>,
+then the mixing frequencies are <span
+class="math inline">\(\omega=\pm\omega_1+n\omega_p\)</span>, which shown
+in below figure</p>
+<p><img src="/2023/10/16/lptv/image-20220511211114421.png"
+alt="image-20220511211114421" /></p>
+<p>A more compact representation of the mixing frequencies is <span
+class="math display">\[
+\omega_n=\omega_0+n\omega_p
+\]</span> which includes only half of the mixing frequencies: the
+negative components of the lower sidebands and the positive components
+of the upper sidebands</p>
+<p><img src="/2023/10/16/lptv/image-20220511211336437.png"
+alt="image-20220511211336437" /></p>
+<p>The <strong>frequency-domain</strong> currents and voltages in a
+<em>time-varying</em> circuit element are related by a
+<strong>conversion matrix</strong></p>
+<p>The small-signal voltage and current can be expressed in the
+frequency notation as <span class="math display">\[
+v&#39;(t) = \sum_{n=-\infty}^{\infty}V_ne^{j\omega_nt}
+\]</span> and <span class="math display">\[
+i&#39;(t) = \sum_{n=-\infty}^{\infty}I_ne^{j\omega_nt}
+\]</span> where <span class="math inline">\(v&#39;(t)\)</span> and <span
+class="math inline">\(i&#39;(t)\)</span> are not Fourier series.</p>
+<p>The conductance waveform <span class="math inline">\(g(t)\)</span>
+can be expressed by its Fourier series, <span class="math display">\[
+g(t)=\sum_{n=-\infty}^{\infty}G_ne^{jn\omega_pt}
+\]</span> Which is harmonics of large-signal <span
+class="math inline">\(\omega_p\)</span></p>
+<p>Then the voltage and current are related by Ohm's law <span
+class="math display">\[
+i&#39;(t)=g(t)v&#39;(t)
+\]</span> Then <span class="math display">\[
+\sum_{k=-\infty}^{\infty}I_ke^{j\omega_kt}=\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}G_nV_me^{j\omega_{m+n}t}
+\]</span></p>
+<div class="pdf-container" data-target="/pdfs/hb_conversion_matrix.pdf" data-height="500px"></div>
+<h2 id="reference">reference</h2>
+<p>Prof. Shanthi Pavan. Introduction to Time - Varying Electrical
+Network. [<a
+target="_blank" rel="noopener" href="https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9">https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9</a>]</p>
+<p>R. S. Ashwin Kumar. EE698W: Analog circuits for signal processing [<a
+target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html">https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html</a>]</p>
+<p>Wereley, Norman. (1990). Analysis and control of linear periodically
+time varying systems.</p>
+<p>Hameed, S. (2017). Design and Analysis of Programmable Receiver
+Front-Ends Based on LPTV Circuits. <em>UCLA</em>. ProQuest ID:
+Hameed_ucla_0031D_15577. Merritt ID: ark:/13030/m5gb6zcz. Retrieved from
+<a
+target="_blank" rel="noopener" href="https://escholarship.org/uc/item/51q2m7bx">https://escholarship.org/uc/item/51q2m7bx</a></p>
+<p>Matt Allen. Introduction to Linear Time Periodic Systems. [<a
+target="_blank" rel="noopener" href="https://youtu.be/OCOkEFDQKTI">https://youtu.be/OCOkEFDQKTI</a>]</p>
+<p><em>Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition
+, Artech, 2003.</em></p>
+<p>RF Harmonic Balance Analysis for Nonlinear Circuits [<a
+target="_blank" rel="noopener" href="https://resources.pcb.cadence.com/blog/2019-rf-harmonic-balance-analysis-for-nonlinear-circuits">link</a>]</p>
+<p>Steer, Michael. Microwave and RF Design (Third Edition, 2019). NC
+State University, 2019.</p>
+<p>Steer, Michael. Harmonic Balance Analysis of Nonlinear RF Circuits -
+Case Study Index: CS_AmpHB [<a
+target="_blank" rel="noopener" href="https://youtu.be/BM5ZQgfb_sY?si=bjN_hMe-wvoeGHzu">link</a>]</p>
+<p>Vishal Saxena, "SpectreRF Periodic Analysis" URL:<a
+target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf">https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf</a></p>
+<p>Josh Carnes,Peter Kurahashi. "Periodic Analyses of Sampled Systems"
+URL:<a
+target="_blank" rel="noopener" href="https://slideplayer.com/slide/14865977/">https://slideplayer.com/slide/14865977/</a></p>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF. URL:<a
+target="_blank" rel="noopener" href="https://designers-guide.org/analysis/sc-filters.pdf">https://designers-guide.org/analysis/sc-filters.pdf</a></p>
+<p>Article (20482538) Title: Why is pnoise sampled(jitter) different
+than pnoise timeaverage on a driven circuit? URL:<a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009EStcUAG">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009EStcUAG</a></p>
+<p>Article (20467468) Title: The mathematics behind choosing the upper
+frequency when simulating pnoise jitter on an oscillator URL:<a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000007MnBUUA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000007MnBUUA0</a></p>
+<p>Andrew Beckett. "Simulating phase noise for PFD-CP". URL:<a
+target="_blank" rel="noopener" href="https://groups.google.com/g/comp.cad.cadence/c/NPisXTElx6E/m/XjWxKbbfh2cJ">https://groups.google.com/g/comp.cad.cadence/c/NPisXTElx6E/m/XjWxKbbfh2cJ</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/06/tranOP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -226,7 +430,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -355,7 +559,7 @@ alt="image-20231006110506245" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -452,7 +656,7 @@ target="_blank" rel="noopener" href="https://github.com/kplindegaard/smbus2/tree
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -552,7 +756,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -674,7 +878,7 @@ href="Article%20(20508931)%20Title:%20Introducing%20the%20Spectre%20S-Parameter%
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -808,7 +1012,7 @@ Integrity (SPI)</em> (2018): 1-4.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -996,7 +1200,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1165,7 +1369,7 @@ repo</a>]</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1295,7 +1499,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:52" itemprop="dateModified" datetime="2023-10-16T13:02:52+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1318,108 +1522,6 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="references">references</h2>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/perc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/08/perc/" class="post-title-link" itemprop="url">PERC</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-08 14:29:13" itemprop="dateCreated datePublished" datetime="2023-09-08T14:29:13+00:00">2023-09-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li><p>CD: current density checks</p></li>
-<li><p>P2P: point to point resistance checks</p></li>
-<li><p>LDL: logic driven layout checks, latch up related</p></li>
-<li><p>TOPO: topology, circuit connection and device size
-checks</p></li>
-</ul>
-<blockquote>
-<p>database</p>
-<ul>
-<li><p>CD, P2P, LDL : dfmdb</p></li>
-<li><p>TOPO: svdb</p></li>
-</ul>
-</blockquote>
-<h2 id="references">references</h2>
-<p>Frank Feng. New Approach For Full Chip Electrical Reliability
-Verification [<a
-target="_blank" rel="noopener" href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMFlXTm9MelV3TDNCMFlWOHhOamN6TnpWZk5qYzFNVGd6TjE4NE5ESXlOQzV3WkdZPQ==&amp;fname=1454FCFGGCPO45YTNOJCJGJGMKPKHC3534FG35YSA1GDXWFC34QOA0OOQOOKZWCDSSPOGDMP20NO4124YWB4B4LKYSMOQL0400YT34PKUWNK20FG00POUSXXYWXWOO15JCLKSWXWDCOKHG2050JCQKHCXTNPNOVSUSB4JCVW20HGJGTTWW40ZXIH5004A4GDMKJG5020OPMOJDLOML51NOFCSWROB454DGKKFCSTGCDCTXNPA4TWRKGDWW30CGKKDGB0YWLKIH05ML44WSFGQOTWOOECYWGHRKCCDD15A4XSFC14FCJGOO25WXROQLNK00JD31PKWSEC50A4SSOKHHTT">pdf</a>]</p>
 
       
     </div>

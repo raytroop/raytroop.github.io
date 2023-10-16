@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">192</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">233</span>
+        <span class="site-state-item-count">232</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,122 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/01/clocks-sta/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/01/clocks-sta/" class="post-title-link" itemprop="url">primary clock, generated clock and virtual clock in SDC</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-01 19:15:43" itemprop="dateCreated datePublished" datetime="2022-03-01T19:15:43+00:00">2022-03-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>primary clocks</strong></p>
-<ul>
-<li>Primary clocks should be created at input ports and output pins of
-black boxes.</li>
-<li>Never create clocks on hierarchy pins. Creating clocks on hierarchy
-will cause problems when reading SDF. The net timing arc becomes
-segmented at the hierarchy and PrimeTime will be unable to annotate the
-net successfully.</li>
-</ul>
-<p><strong>generated clocks</strong></p>
-<ul>
-<li>Generated clocks are generally created for waveform modifications of
-a primary clock (not including simple inversions). PrimeTime does not
-simulate a design and thus will <strong>not</strong> derive internally
-generated clocks automatically - these clocks must be created by the
-user and applied as a constraint.</li>
-<li>PrimeTime caculate source latency for generated clocks if primary
-clock is <strong>propagated</strong>, otherwise its source latency is
-zero.</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># primary clock</span></span><br><span class="line">create_clock -period <span class="number">4</span> [get_ports Clk]</span><br><span class="line">set_clock_latency -<span class="keyword">source</span> <span class="number">2</span> [get_clocks Clk]</span><br><span class="line">set_propagated_clock [get_clocks Clk]</span><br><span class="line">create_generated_clock -divide_by <span class="number">2</span> -name div_clk -<span class="keyword">source</span> [get_ports Clk] FF3/Q</span><br></pre></td></tr></table></figure>
-<p><strong>virtual clocks</strong></p>
-<ul>
-<li>Are clock objects without a source</li>
-<li>Do not clock sequential devices within the current_design</li>
-<li>Serve as references of input or output delays</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a virtual clock, vclk, for input and output delay constraints</span></span><br><span class="line">create_clock -period <span class="number">5</span> -name vclk</span><br><span class="line">set_input_delay -max <span class="number">2</span> -<span class="keyword">clock</span> vclk [get_ports in1]</span><br><span class="line">set_output_delay -max <span class="number">1</span> -<span class="keyword">clock</span> vclk [get_ports out2]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>There is <strong>no</strong> network latency to calculate, even if a
-virtual clock is propagated.</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -342,7 +226,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -466,7 +350,7 @@ alt="cascode_compensation" /> <span class="math display">\[\begin{align}
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -568,7 +452,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1083,7 +967,7 @@ Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1198,7 +1082,7 @@ threads</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1318,7 +1202,7 @@ variant, the it is defined as a subsequence and its
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1443,7 +1327,7 @@ target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analo
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1547,7 +1431,7 @@ Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1639,7 +1523,7 @@ target="_blank" rel="noopener" href="https://github.com/StanfordAHA/PowerDomainD
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1685,8 +1569,139 @@ alt="pma_dig_bumps.drawio" /></p>
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/13/offset-testbench/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/13/offset-testbench/" class="post-title-link" itemprop="url">Single ended Amplifier Offset Voltage Simulation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-13 17:11:41" itemprop="dateCreated datePublished" datetime="2022-02-13T17:11:41+00:00">2022-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="unity-gain-buffer">unity gain buffer</h3>
+<p><img src="/2022/02/13/offset-testbench/image-20220917115231508.png"
+alt="image-20220917115231508" /></p>
+<p><span class="math display">\[\begin{align}
+V_o &amp;= V_{o,dc}+A(V_p-V_m) \\
+V_o&#39; &amp;= V_{o,dc}+A(V_p+V_{os}-V_m&#39;)
+\end{align}\]</span></p>
+<p>Then, we get <span class="math display">\[
+V_{os}=\frac{V_o&#39;-V_o}{A}+(V_m&#39;-V_m)
+\]</span> Due to <span class="math inline">\(V_o=V_m\)</span> and <span
+class="math inline">\(V_o&#39;=V_m&#39;\)</span> <span
+class="math display">\[
+V_{os}=(1/A+1)\Delta{V_m}
+\]</span> or <span class="math display">\[
+V_{os}=(1/A+1)\Delta{V_o}
+\]</span> if <span class="math inline">\(A \gg 1\)</span> <span
+class="math display">\[
+V_{os}=\Delta{V_o}
+\]</span></p>
+<h3 id="non-inverting-amplifier">non-inverting amplifier</h3>
+<p><img src="/2022/02/13/offset-testbench/image-20220917115308699.png"
+alt="image-20220917115308699" /> <span
+class="math display">\[\begin{align}
+V_o &amp;= V_{o,dc}+A(V_p-V_m) \\
+V_o&#39; &amp;= V_{o,dc}+A(V_p+V_{os}-V_m&#39;) \\
+V_m &amp;= \beta V_o \\
+V_m&#39; &amp;= \beta V_o&#39;
+\end{align}\]</span></p>
+<p>we get <span class="math display">\[
+V_{os}=\frac{V_o&#39;-V_o}{A}+(V_m&#39;-V_m)
+\]</span> or <span class="math display">\[
+V_{os}=\frac{\Delta V_o}{A}+\beta \Delta V_o
+\]</span> if <span class="math inline">\(A \gg 1\)</span> <span
+class="math display">\[
+V_{os}=\beta \Delta V_o
+\]</span> or <span class="math display">\[
+V_{os}=\Delta V_m
+\]</span></p>
+<hr />
+<p><strong>Lecture 22 Variability and Mismatch of Dr. Hesham A. Omran's
+Analog IC Design</strong></p>
+<p><img src="/2022/02/13/offset-testbench/image-20221022010448797.png"
+alt="image-20221022010448797" /></p>
+<blockquote>
+<p>URL: <a
+target="_blank" rel="noopener" href="https://www.master-micro.com/professional-courses/analog-ic-design/course-resources">https://www.master-micro.com/professional-courses/analog-ic-design/course-resources</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

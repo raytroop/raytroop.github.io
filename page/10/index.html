@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">192</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">233</span>
+        <span class="site-state-item-count">232</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,119 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/04/plusargs-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/04/plusargs-verilog/" class="post-title-link" itemprop="url">plusargs in verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-04 12:29:28" itemprop="dateCreated datePublished" datetime="2022-06-04T12:29:28+00:00">2022-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-target="_blank" rel="noopener" href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-target="_blank" rel="noopener" href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -339,7 +226,7 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -461,7 +348,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -560,7 +447,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -673,7 +560,7 @@ target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -915,7 +802,7 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1035,7 +922,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1233,7 +1120,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1455,7 +1342,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1548,7 +1435,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-14 16:33:24" itemprop="dateModified" datetime="2023-10-14T16:33:24+00:00">2023-10-14</time>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1644,8 +1531,170 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/10/pll101/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/10/pll101/" class="post-title-link" itemprop="url">PLL and its blocks</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-10 19:03:52" itemprop="dateCreated datePublished" datetime="2022-05-10T19:03:52+00:00">2022-05-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-16 13:02:51" itemprop="dateModified" datetime="2023-10-16T13:02:51+00:00">2023-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="varactor">varactor</h2>
+<h3 id="how-to-simulate-the-capacitance-of-varactor">How to simulate the
+capacitance of varactor ?</h3>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+<h4 id="pss-pac">PSS + PAC</h4>
+<p><img src="/2022/05/10/pll101/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2022/05/10/pll101/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2022/05/10/pll101/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h4 id="pss-psp">PSS + PSP</h4>
+<p><img src="/2022/05/10/pll101/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2022/05/10/pll101/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h4 id="results">results</h4>
+<p><img src="/2022/05/10/pll101/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<p>They are same</p>
+<h2 id="vco">VCO</h2>
+<h3 id="phase-noise">phase noise</h3>
+<h4 id="pnoise---timeaverage">pnoise - timeaverage</h4>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2022/05/10/pll101/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2022/05/10/pll101/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2022/05/10/pll101/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h4 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h4>
+<p><img src="/2022/05/10/pll101/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2022/05/10/pll101/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2022/05/10/pll101/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h4 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h4>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2022/05/10/pll101/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2022/05/10/pll101/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2022/05/10/pll101/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

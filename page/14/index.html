@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,169 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/16/inertial-and-transport-delay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/16/inertial-and-transport-delay/" class="post-title-link" itemprop="url">Inertial & transport delays</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-16 23:23:02" itemprop="dateCreated datePublished" datetime="2022-03-16T23:23:02+00:00">2022-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20230414232256309.png"
+alt="image-20230414232256309" /></p>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20230414232439556.png"
+alt="image-20230414232439556" /></p>
+<h2 id="inertial-delay">Inertial delay</h2>
+<p>Inertial delay models are simulation delay models that filter pulses
+that are shorted than the propagation delay of <strong>Verilog gate
+primitives</strong> or <strong>continuous assignments</strong>
+(<code>assign #5 y = ~a;</code>)</p>
+<p>​ <strong>COMBINATIONAL LOGIC ONLY !!!</strong></p>
+<blockquote>
+<ul>
+<li>Inertial delays swallow glitches</li>
+<li><strong>sequential logic</strong> implemented with <strong>procedure
+assignments</strong> DON'T follow the rule</li>
+</ul>
+</blockquote>
+<h3 id="continuous-assignments">continuous assignments</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">wire</span> out;</span><br><span class="line">	<span class="keyword">assign</span> #<span class="number">2</span><span class="variable">.5</span> out = in;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220317000509716.png"
+alt="image-20220317000509716" /></p>
+<h3 id="procedure-assignment---combinational-logic">procedure assignment
+- combinational logic</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////// combination logic ////////////////////////</span></span><br><span class="line">	<span class="keyword">always</span> @(*)</span><br><span class="line">		#<span class="number">2</span><span class="variable">.5</span> out = in;</span><br><span class="line"><span class="comment">///////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">/* the above code is same with following code</span></span><br><span class="line"><span class="comment">    	always @(*) begin</span></span><br><span class="line"><span class="comment">			#2.5;</span></span><br><span class="line"><span class="comment">			out = in;</span></span><br><span class="line"><span class="comment">		end</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220316235257361.png"
+alt="image-20220316235257361" /></p>
+<h3 id="procedure-assignment---sequential-logic">procedure assignment -
+sequential logic</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> clk;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">		clk = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">5</span>;</span><br><span class="line">		<span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">			clk = ~clk;</span><br><span class="line">			#<span class="number">5</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">//////////// sequential logic //////////////////</span></span><br><span class="line">	<span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">		#<span class="number">2</span><span class="variable">.5</span> out &lt;= in;</span><br><span class="line"><span class="comment">///////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220316235620168.png"
+alt="image-20220316235620168" /></p>
+<blockquote>
+<p>As shown above, sequential logic DON'T follow inertial delay</p>
+</blockquote>
+<h2 id="transport-delay">Transport delay</h2>
+<p>Transport delay models are simulation delay models that pass all
+pulses, including pulses that are shorter than the propagation delay of
+corresponding <strong>Verilog procedural assignments</strong></p>
+<blockquote>
+<ul>
+<li>Transport delays pass glitches, delayed in time</li>
+<li>Verilog can model RTL transport delays by adding <strong>explicit
+delays to the right-hand-side (RHS) of a nonblocking
+assignment</strong></li>
+</ul>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @(*)</span><br><span class="line">    y &lt;= #<span class="number">5</span> ~a;</span><br></pre></td></tr></table></figure>
+<h3 id="nonblocking-assignment">nonblocking assignment</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"><span class="comment">/////////////// nonblocking assignment ///</span></span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		out &lt;= #<span class="number">2</span><span class="variable">.5</span> in;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220317003146825.png"
+alt="image-20220317003146825" /></p>
+<h3 id="blocking-assignment">blocking assignment</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"><span class="comment">/////////////// blocking assignment ///</span></span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		out = #<span class="number">2</span><span class="variable">.5</span> in;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/16/inertial-and-transport-delay/image-20220317003819457.png"
+alt="image-20220317003819457" /></p>
+<blockquote>
+<p>It seems that new event is <strong>discarded</strong> before previous
+event is realized.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p><a
+target="_blank" rel="noopener" href="http://www.sunburst-design.com/papers/CummingsSNUG2002Boston_NBAwithDelays.pdf">Verilog
+Nonblocking Assignments With Delays, Myths &amp; Mysteries</a></p>
+<p><a
+target="_blank" rel="noopener" href="http://www.sunburst-design.com/papers/CummingsHDLCON1999_BehavioralDelays_Rev1_1.pdf">Correct
+Methods For Adding Delays To Verilog Behavioral Models</a></p>
+<p>Article (20488135) Title: Selecting Different Delay Modes in GLS
+(RAK) URL: <a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdLyEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdLyEAI</a></p>
+<p>Article (20447759) Title: Gate Level Simulation (GLS): A Quick Guide
+for Beginners URL: <a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +389,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -367,7 +530,7 @@ together
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -469,7 +632,7 @@ alt="lock_range" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1084,7 +1247,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1320,7 +1483,7 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1481,7 +1644,7 @@ Transceivers"</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1691,7 +1854,7 @@ off.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2117,7 +2280,7 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2427,7 +2590,7 @@ tools regarding on analog modeling,validation, and generation</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2500,209 +2663,8 @@ Technology. Solid-State Circuits, IEEE Journal of. 47. 3232-3248.
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/07/parallel-compensation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/07/parallel-compensation/" class="post-title-link" itemprop="url">Parallel Compensation in Two stage amplifier</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-07 23:48:11" itemprop="dateCreated datePublished" datetime="2022-03-07T23:48:11+00:00">2022-03-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p><strong>Parallel Compensation</strong> is also known as <strong>Lead
-Compensation</strong>, <strong>Pole-Zero Compensation</strong></p>
-</blockquote>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20220307234938855.png"
-alt="image-20220307234938855" /></p>
-<p><strong>Note</strong>: The dominant pole is at output of the first
-stage, i.e. <span
-class="math inline">\(\frac{1}{R_{EQ}C_{EQ}}\)</span>.</p>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20221006001114562.png"
-alt="image-20221006001114562" /></p>
-<h4 id="pole-and-zero-in-transfer-function">Pole and Zero in transfer
-function</h4>
-<blockquote>
-<p>Design with operational amplifiers and analog integrated circuits /
-Sergio Franco, San Francisco State University. – Fourth edition</p>
-</blockquote>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20221005220854411.png"
-alt="image-20221005220854411" /></p>
-<p><span class="math display">\[
-Y = \frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}
-\]</span></p>
-<p><span class="math display">\[\begin{align}
-Z &amp;= \frac{1}{\frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}} \\
-&amp;= \frac{R_1(1+sR_cC_c)}{s^2R_1C_1R_cC_c+S(R_1C_c+R_1C_1+R_cC_c)+1}
-\end{align}\]</span> If <span class="math inline">\(p_{1c} \ll
-p_{3c}\)</span>, two real roots can be found <span
-class="math display">\[\begin{align}
-p_{1c} &amp;= \frac{1}{R_1C_c+R_1C_1+R_cC_c} \\
-p_{3c} &amp;= \frac{R_1C_c+R_1C_1+R_cC_c}{R_1C_1R_cC_c}
-\end{align}\]</span></p>
-<p>The additional zero is <span class="math display">\[
-z_c = \frac{1}{R_cC_c}
-\]</span> Given <span class="math inline">\(R_c \ll R\)</span> and <span
-class="math inline">\(C_c \gg C\)</span> <span
-class="math display">\[\begin{align}
-p_{1c} &amp;\simeq \frac{1}{R_1(C_c+C_1)} \simeq \frac{1}{R_1C_c}\\
-p_{3c} &amp;= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \simeq
-\frac{1}{R_cC_1}
-\end{align}\]</span></p>
-<p>The output pole is unchanged, which is <span class="math display">\[
-p_2 = \frac{1}{R_LC_L}
-\]</span> We usually <strong>cancel</strong> <span
-class="math inline">\(p_2\)</span> with <span
-class="math inline">\(z_c\)</span>, i.e. <span class="math display">\[
-R_cC_c=R_LC_L
-\]</span></p>
-<h4 id="phase-margin">Phase margin</h4>
-<p>unity-gain frequency <span class="math inline">\(\omega_t\)</span>
-<span class="math display">\[
-\omega_t = \frac{g_{m1}g_{m2}R_L}{C_c}
-\]</span></p>
-<ol type="1">
-<li><p>PM=45<span class="math inline">\(^o\)</span> <span
-class="math display">\[
-p_{3c} = \omega_t
-\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
-class="math inline">\(R_c\)</span> can be obtained</p>
-<p><span class="math display">\[\begin{align}
-   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot A_{DC}\cdot
-p_2}}=\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot A_{DC}}} \\
-C_c &amp;= \sqrt{\frac{A_{DC}\cdot C_1}{R_1\cdot
-p_2}}=\sqrt{\frac{A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}}
-\end{align}\]</span></p></li>
-<li><p>PM=60<span class="math inline">\(^o\)</span> <span
-class="math display">\[
-p_{3c} = 2\cdot\omega_t
-\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
-class="math inline">\(R_c\)</span> can be obtained <span
-class="math display">\[\begin{align}
-   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot 2A_{DC}\cdot p_2}} =
-\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot 2A_{DC}}} \\
-   &amp;= \sqrt{\frac{C_L}{2g_{m1}g_{m2}C_1}}\\
-C_c &amp;= \sqrt{\frac{2A_{DC}\cdot C_1}{R_1\cdot p_2}} =
-\sqrt{\frac{2A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}} \\
-&amp;= R_L\sqrt{2g_{m1}g_{m2}C_1C_L}
-\end{align}\]</span></p>
-<p>for the unity-gain frequency <span
-class="math inline">\(\omega_t\)</span> we find <span
-class="math display">\[
-\omega_t = \sqrt{\frac{1}{2}\cdot \frac{g_{m1}g_{m2}}{C_1C_L}}
-\]</span> The parallel compensation shows a remarkably good result. The
-new 0 dB frequency lies only a factor <span
-class="math inline">\(\sqrt{2}\)</span> lower than the theoretical
-maximum</p></li>
-</ol>
-<blockquote>
-<p>To increase <span class="math inline">\(\phi_m\)</span>, we need to
-<strong>raise</strong> <span class="math inline">\(C_c\)</span> a bit
-while <strong>lowering</strong> <span class="math inline">\(R_c\)</span>
-in proportion in order to maintain pole-zero cancellation. This causes
-<span class="math inline">\(p_{1c}\)</span> and <span
-class="math inline">\(p_{3c}\)</span> to split a bit further apart.</p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"></span><br><span class="line">fd = <span class="number">84</span>*<span class="number">1e3</span>;	<span class="comment">% dominant freq, unit: Hz</span></span><br><span class="line">fnd = <span class="number">3.25</span>*<span class="number">1e6</span>;	<span class="comment">% unit: Hz</span></span><br><span class="line">C = <span class="number">478</span>*<span class="number">1e-15</span>;</span><br><span class="line">R = <span class="number">1</span>/fd/(<span class="number">2</span>*<span class="built_in">pi</span>)/C;</span><br><span class="line">Adc = <span class="number">10</span>^(<span class="number">80</span>/<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">ri = <span class="number">2</span>; <span class="comment">% PM=45: 1;  PM=60: 2</span></span><br><span class="line">Rc = (R/C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/ri/Adc)^<span class="number">0.5</span>; <span class="comment">% compensation resistor</span></span><br><span class="line">Cc = (ri*Adc*C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/R)^<span class="number">0.5</span>; <span class="comment">% compensation capacitor</span></span><br><span class="line"></span><br><span class="line">wzc = <span class="number">1</span>/<span class="number">2</span>/<span class="built_in">pi</span>/Rc/Cc; <span class="comment">% zero frequency</span></span><br></pre></td></tr></table></figure>
-<h4 id="reference">reference</h4>
-<p>Viola Schäffer, Designing Amplifiers for Stability, ISSCC 2021
-Tutorials</p>
-<p>R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft
-University Press, 1994.</p>
-<p>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
-Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.
-6.7 Compensation</p>
-<p>Application Note AN-1286 Compensation for the LM3478 Boost
-Controller</p>
-<p>ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 URL:
-<a
-target="_blank" rel="noopener" href="https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability%20Jan27.pdf">Lect
-1D Op-Amps Stability and Frequency Compensation Techniques</a></p>
-<p>Sergio Franco, San Francisco State University, Design with
-Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
-<p>J. H. Huijsing, 6.2.2.1 Two-GA-stage Parallel Compensation (PC),
-"Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer,
-2017"</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

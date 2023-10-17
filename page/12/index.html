@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,183 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/19/transient-noise-and-its-application/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/19/transient-noise-and-its-application/" class="post-title-link" itemprop="url">Transient noise and its application</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-19 10:46:24" itemprop="dateCreated datePublished" datetime="2022-04-19T10:46:24+00:00">2022-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h2>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h2 id="power-spectral-density-and-phase-noise">power spectral density
+and phase noise</h2>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h3 id="result-from-pss_pnoise">result from PSS_Pnoise</h3>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h3 id="result-from-trannoise-pn-function">result from trannoise
+<code>PN</code> function</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h3 id="result-from-trannoise-psd-and-abs_jitter-function">result from
+trannoise <code>psd</code> and <code>abs_jitter</code> function</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h3 id="overlay-plot">overlay plot</h3>
+<p><img
+src="/2022/04/19/transient-noise-and-its-application/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h2 id="rms-value">RMS value</h2>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h2 id="remarks">Remarks</h2>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +403,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -737,7 +914,7 @@ Press. doi:10.1017/CBO9780511835261</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1153,7 +1330,7 @@ capacitance</strong></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:04" itemprop="dateModified" datetime="2023-10-17T15:20:04+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1338,7 +1515,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1432,7 +1609,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:04" itemprop="dateModified" datetime="2023-10-17T15:20:04+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1582,7 +1759,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1789,7 +1966,7 @@ alt="image-20220404195156776" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1952,7 +2129,7 @@ alt="image-20220403212529981" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2453,7 +2630,7 @@ FIFOs</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
+      <time title="Modified: 2023-10-17 15:20:05" itemprop="dateModified" datetime="2023-10-17T15:20:05+00:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2553,105 +2730,8 @@ possible without cloning.</p></li>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/01/rocky-nmcli-network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/01/rocky-nmcli-network/" class="post-title-link" itemprop="url">network connection using nmcli</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-01 01:05:40" itemprop="dateCreated datePublished" datetime="2022-04-01T01:05:40+00:00">2022-04-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-16 13:04:56" itemprop="dateModified" datetime="2023-10-16T13:04:56+00:00">2023-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="problem">Problem</h4>
-<p>There is no network connection and device is not managed</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli device status </span><br><span class="line">DEVICE  TYPE      STATE      CONNECTION            </span><br><span class="line">eth0    ethernet  unmanaged  --  </span><br><span class="line">lo      loopback  unmanaged  --  </span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/04/01/rocky-nmcli-network/image-20220401011509900.png"
-alt="image-20220401011509900" /></p>
-<h4 id="solution">solution</h4>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmcli networking on</span><br></pre></td></tr></table></figure>
-<p>Then, <strong>eth0</strong> is connected</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli device status </span><br><span class="line">DEVICE  TYPE      STATE      CONNECTION            </span><br><span class="line">eth0    ethernet  connected  Ethernet connection 1 </span><br><span class="line">lo      loopback  unmanaged  --  </span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
-alt="image-20220401011543866" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

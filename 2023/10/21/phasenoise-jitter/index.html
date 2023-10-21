@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Lorentian Spectrum A more precise analysis shows that the spectrum of a free-running oscillator does indeed have a Lorentian profile:  it is flat for frequencies below a given corner frequency and rol">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Phase Noise and Jitter">
+<meta property="og:url" content="http://example.com/2023/10/21/phasenoise-jitter/index.html">
+<meta property="og:site_name" content="KNOW-HOW">
+<meta property="og:description" content="Lorentian Spectrum A more precise analysis shows that the spectrum of a free-running oscillator does indeed have a Lorentian profile:  it is flat for frequencies below a given corner frequency and rol">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220504130750290.png">
+<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220415100034220.png">
+<meta property="article:published_time" content="2023-10-21T11:18:35.000Z">
+<meta property="article:modified_time" content="2023-10-21T04:05:02.732Z">
+<meta property="article:author" content="Guo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220504130750290.png">
+
+
+<link rel="canonical" href="http://example.com/2023/10/21/phasenoise-jitter/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/10/21/phasenoise-jitter/","path":"2023/10/21/phasenoise-jitter/","title":"Phase Noise and Jitter"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Phase Noise and Jitter | KNOW-HOW</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">KNOW-HOW</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#lorentian-spectrum"><span class="nav-number">1.</span> <span class="nav-text">Lorentian Spectrum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-noise-to-jitter"><span class="nav-number">2.</span> <span class="nav-text">Phase Noise to Jitter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">211</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/raytroop" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;raytroop" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:raytroop@gmail.com" title="E-Mail → mailto:raytroop@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/21/phasenoise-jitter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Phase Noise and Jitter | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Phase Noise and Jitter
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-10-21 11:18:35 / Modified: 04:05:02" itemprop="dateCreated datePublished" datetime="2023-10-21T11:18:35+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
+<p>A more precise analysis shows that the spectrum of a free-running
+oscillator does indeed have a Lorentian profile:</p>
+<ol type="1">
+<li>it is <strong>flat</strong> for frequencies below a given corner
+frequency</li>
+<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
+it.</li>
+</ol>
+<p>The spectrum of the signal <span class="math inline">\(x(t +
+α(t))\)</span> can be expressed as <span class="math display">\[
+S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
+c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
+\]</span> The integral in above equation around each harmonic is equal
+to the power of the harmonic itself <span class="math inline">\(\left|
+X_n \right|^2\)</span></p>
+<p>This means that the <strong>excess phase noise</strong>
+<strong>DONT</strong> change the energy of the signal; it just spreads
+its energy over the frequency spectrum, blurring the very sharp
+frequency impulse of an ideal noiseless oscillator.</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
+alt="image-20220504130750290" /></p>
+<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
+<p>The <strong>phase noise</strong> is traditionally defined as the
+ratio of the power of the signal in 1Hz bandwidth at offset <span
+class="math inline">\(f\)</span> from the carrier <span
+class="math inline">\(P\)</span>, divided by the power of the carrier
+<span class="math display">\[
+\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
+<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
+\geqslant 0\)</span></p>
+<p>Under <strong>narrow angle assumption</strong> <span
+class="math display">\[
+S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
++\infty\right]\)</span></p>
+<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
+the variance of the absolute jitter(<span
+class="math inline">\(J_{ee}\)</span>)via integration of the
+corresponding PSD <span class="math display">\[
+J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
+\]</span></p>
+<p>And we know the relationship between absolute jitter and excess phase
+is <span class="math display">\[
+J_{ee}=\frac {\varphi}{\omega_0}
+\]</span> Considering that phase noise is normally symmetrical about the
+zero frequency, multiplied by <strong>two</strong> is shown as below
+<span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
+\]</span> where phase noise is in linear units not in logarithmic
+ones.</p>
+<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
+unit (<em>dBc</em>), we have to convert the unit before applying the
+above equation <span class="math display">\[
+\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
+\]</span> The complete equation using the simulation result of
+<em>Spectre-RF Pnoise</em> is <span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
+[dBc/Hz]}{10}}df}}{\omega_0}
+\]</span></p>
+<p>The above equation has been verified for <em>sampled pnoise</em>,
+i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
+<blockquote>
+<ul>
+<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
+Function: Jee:Integration Limits</em> can calculate it conveniently</li>
+<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
+below equation to get RMS jitter.</li>
+</ul>
+</blockquote>
+<p>One example, integrate to <span
+class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
+class="math inline">\(f_{osc} = 16GHz\)</span></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220415100034220.png"
+alt="image-20220415100034220" /></p>
+<p>Of course, it apply to conventional pnoise simulation.</p>
+<p>On the other hand, output rms voltage noise, <span
+class="math inline">\(V_{out,rms}\)</span> divied by slope should be
+close to <span class="math inline">\(J_{ee,rms}\)</span> <span
+class="math display">\[
+J_{ee,rms} = \frac {V_{out,rms}}{slope}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p>A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in
+oscillators: a unifying theory and numerical methods for
+characterization," in IEEE Transactions on Circuits and Systems I:
+Fundamental Theory and Applications, vol. 47, no. 5, pp. 655-674, May
+2000, doi: 10.1109/81.847872.</p>
+<p>Dalt, Nicola Da and Ali Sheikholeslami. “Understanding Jitter and
+Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
+<p>Rubiola, E. (2008). Phase Noise and Frequency Stability in
+Oscillators (The Cambridge RF and Microwave Engineering Series).
+Cambridge: Cambridge University Press. doi:10.1017/CBO9780511812798</p>
+<p>Dr. Ulrich L. Rohde, Noise Analysis, Then and Today [<a
+target="_blank" rel="noopener" href="https://www.microwavejournal.com/articles/29151-noise-analysis-then-and-today">https://www.microwavejournal.com/articles/29151-noise-analysis-then-and-today</a>]</p>
+<p>Nicola Da Dalt and Ali Sheikholeslami. 2018. Understanding Jitter and
+Phase Noise: A Circuits and Systems Perspective (1st. ed.). Cambridge
+University Press, USA.</p>
+<p>Kester, Walt. (2005). Converting Oscillator Phase Noise to Time
+Jitter. [<a
+target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-seminars/tutorials/MT-008.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-008.pdf</a>]</p>
+<p>Drakhlis, B.. (2001). Calculate oscillator jitter by using
+phase-noise analysis: Part 2 of two parts. Microwaves and Rf. 40.
+109-119.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/21/ldo/" rel="prev" title="Low-Dropout Regulator">
+                  <i class="fa fa-angle-left"></i> Low-Dropout Regulator
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/21/simulation-phasenoise-jitter/" rel="next" title="Simulation Techniques for Phase Noise and Jitter">
+                  Simulation Techniques for Phase Noise and Jitter <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Guo</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

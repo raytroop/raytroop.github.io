@@ -145,18 +145,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">182</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">232</span>
+        <span class="site-state-item-count">211</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,1389 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/19/transient-noise-and-its-application/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/19/transient-noise-and-its-application/" class="post-title-link" itemprop="url">Transient noise and its application</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-19 10:46:24" itemprop="dateCreated datePublished" datetime="2022-04-19T10:46:24+00:00">2022-04-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h2>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h2 id="power-spectral-density-and-phase-noise">power spectral density
-and phase noise</h2>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h3 id="result-from-pss_pnoise">result from PSS_Pnoise</h3>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h3 id="result-from-trannoise-pn-function">result from trannoise
-<code>PN</code> function</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h3 id="result-from-trannoise-psd-and-abs_jitter-function">result from
-trannoise <code>psd</code> and <code>abs_jitter</code> function</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h3 id="overlay-plot">overlay plot</h3>
-<p><img
-src="/2022/04/19/transient-noise-and-its-application/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h2 id="rms-value">RMS value</h2>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h2 id="remarks">Remarks</h2>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/18/ps-psd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/18/ps-psd/" class="post-title-link" itemprop="url">Power Spectra and Power Spectral Densities</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-18 23:53:29" itemprop="dateCreated datePublished" datetime="2022-04-18T23:53:29+00:00">2022-04-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>One will see the following phenomena:</p>
-<ol type="1">
-<li>A power spectrum is equal to the square of the absolute value of
-DFT.</li>
-<li>The sum of all power spectral lines in a power spectrum is equal to
-the power of the input signal.</li>
-<li>The integral of a PSD is equal to the power of the input
-signal.</li>
-</ol>
-<blockquote>
-<p>power spectrum has units of <span class="math inline">\(V^2\)</span>
-and power spectral density has units of <span
-class="math inline">\(V^2/Hz\)</span></p>
-</blockquote>
-<p><strong>Parseval's theorem</strong> is a property of the Discrete
-Fourier Transform (DFT) that states: <span class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2 = \frac{1}{N}\sum_{k=0}^{N-1}|X(k)|^2
-\]</span> Multiply both sides of the above by <span
-class="math inline">\(1/N\)</span>: <span class="math display">\[
-\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2 =
-\frac{1}{N^2}\sum_{k=0}^{N-1}|X(k)|^2
-\]</span> <span class="math inline">\(|x(n)|^2\)</span> is instantaneous
-power of a sample of the time signal. So the left side of the equation
-is just the <strong>average power</strong> of the signal over the N
-samples. <span class="math display">\[
-P_{\text{av}} = \frac{1}{N^2}\sum_{k=0}^{N-1}|X(k)|^2\text{,   }V^2
-\]</span> For the each DFT bin, we can say: <span
-class="math display">\[
-P_{\text{bin}}(k) = \frac{1}{N^2}|X(k)|^2\text{,
-k=0:N-1,  }V^2/\text{bin}
-\]</span> This is the power spectrum of the signal.</p>
-<p>Note that <span class="math inline">\(X(k)\)</span> is the
-<strong>two-sided spectrum</strong>. If <span
-class="math inline">\(x(n)\)</span> is real, then <span
-class="math inline">\(X(k)\)</span> is symmetric about <span
-class="math inline">\(fs/2\)</span>, with each side containing half of
-the power. In that case, we can choose to keep just the
-<strong>one-sided spectrum</strong>, and multiply Pbin by 2
-(<strong>except DC &amp; Nyquist</strong>):</p>
-<p><span class="math display">\[
-P_{\text{bin,one-sided}}(k) = \left\{ \begin{array}{cl}
-\frac{1}{N^2}|X(0)|^2 &amp; : \ k = 0 \\
-\frac{2}{N^2}|X(k)|^2 &amp; : \ 1 \leq k \leq N/2-1 \\
-\frac{1}{N^2}|X(N/2)|^2 &amp; : \ k = N/2
-\end{array} \right.
-\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rng default</span><br><span class="line">Fs = <span class="number">1000</span>;</span><br><span class="line">t = <span class="number">0</span>:<span class="number">1</span>/Fs:<span class="number">1</span><span class="number">-1</span>/Fs;</span><br><span class="line">x = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">100</span>*t) + <span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line">N = <span class="built_in">length</span>(x);</span><br><span class="line">xdft = fft(x);</span><br><span class="line">xsq_sum_avg = sum(x.^<span class="number">2</span>)/N;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(xdft).^<span class="number">2</span>)/N^<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-<p>where <code>xsq_sum_avg</code> is same with
-<code>specsq_sum_avg</code></p>
-<blockquote>
-<p>For a discrete-time sequence x(n), the DFT is defined as: <span
-class="math display">\[
-X(k) = \sum_{n=0}^{N-1}x(n)e^{-j2\pi kn/N}
-\]</span> By it definition, the DFT does <strong>NOT</strong> apply to
-infinite duration signals.</p>
-</blockquote>
-<h2 id="scaling-dft-results">scaling DFT results</h2>
-<table>
-<thead>
-<tr class="header">
-<th>spectra type</th>
-<th>unit</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>amplitude spectrum</td>
-<td>V</td>
-</tr>
-<tr class="even">
-<td>power spectrum</td>
-<td>V^2</td>
-</tr>
-<tr class="odd">
-<td>power spectrum density</td>
-<td>V^2/Hz</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><a
-target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">Tutorial
-on Scaling of the Discrete Fourier Transform and the Implied Physical
-Units of the Spectra of Time-Discrete Signals <em>Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp</em></a></p>
-</blockquote>
-<p>Different scaling is needed to apply for amplitude spectrum, power
-spectrum and power spectrum density, which shown as below</p>
-<p><img src="/2022/04/18/ps-psd/image-20220427220639646.png"
-alt="image-20220427220639646" /></p>
-<blockquote>
-<p><span class="math inline">\(f_s\)</span> in Eq.(13) is <strong>sample
-rate</strong> rather than frequency resolution.</p>
-</blockquote>
-<p>And Eq.(13) can be expressed as <span class="math display">\[
-\text{PSD}(k) =\frac{1}{f_{\text{res}}\cdot
-N\sum_{n}w^2(n)}\left|X_{\omega}(k)\right|^2
-\]</span> where <span class="math inline">\(f_{\text{res}}\)</span> is
-frequency resolution</p>
-<p>We define the following two sums for normalization purposes:</p>
-<p><span class="math display">\[\begin{align}
-S_1 &amp;= \sum_{j=0}^{N-1}w_j \\
-S_2 &amp;= \sum_{j=0}^{N-1}w_j^2
-\end{align}\]</span></p>
-<p>Given Eq.(12) and Eq.(13) <span class="math display">\[\begin{align}
-\text{PS(k)} &amp;= \text{PSD(k)} \cdot \frac{f_s
-\sum_{n}w^2(n)}{(\sum_{n}\omega(n))^2} \\
-&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N
-\sum_{n}w^2(n)}{(\sum_{n}w(n))^2} \\
-&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N S_2}{S_1^2} \\
-&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \text{NENBW} \\
-&amp;= \text{PSD(k)} \cdot \text{ENBW}
-\end{align}\]</span></p>
-<p>where <strong>Normalized Equivalent Noise BandWidth</strong> is
-defined as <span class="math display">\[
-\text{NENBW} =\frac{N S_2}{S_1^2}
-\]</span> and <strong>Effective Noise BandWidth</strong> is <span
-class="math display">\[
-\text{ENBW} =f_{\text{res}} \cdot \frac{N S_2}{S_1^2}
-\]</span></p>
-<blockquote>
-<p>For Rectangular window, <span class="math inline">\(\text{ENBW}
-=f_{\text{res}}\)</span></p>
-<p>This <em>equivalent noise bandwidth</em> is required when the
-resulting spectrum is to be expressed as <em>spectral density (such as
-for noise measurements)</em>.</p>
-</blockquote>
-<p><em>Eq.(13) Example:</em></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Fs = <span class="number">1024</span>; </span><br><span class="line">t  = (<span class="number">0</span>:<span class="number">1</span>/Fs:<span class="number">1</span><span class="number">-1</span>/Fs).&#x27;; </span><br><span class="line">x  = <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*<span class="number">200</span>);</span><br><span class="line">Nx = <span class="built_in">length</span>(x);</span><br><span class="line"><span class="comment">% Window data</span></span><br><span class="line">w = hamming(Nx);	<span class="comment">% hamming window</span></span><br><span class="line">xw = x.*w; </span><br><span class="line"><span class="comment">% Calculate power</span></span><br><span class="line">nfft = Nx; </span><br><span class="line">X = fft(xw,nfft);</span><br><span class="line"></span><br><span class="line">NumUniquePts = nfft/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">Pxx1 = <span class="built_in">abs</span>(X(<span class="number">1</span>:NumUniquePts)).^<span class="number">2</span>/sum(w.^<span class="number">2</span>)/Fs;    <span class="comment">%!!! Eq.(13)</span></span><br><span class="line">Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Fx1 = (<span class="number">0</span>:NumUniquePts<span class="number">-1</span>)*Fs/nfft; </span><br><span class="line"></span><br><span class="line">[Pxx2,Fx2] = pwelch(x,w,<span class="number">0</span>,nfft,Fs);</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(Fx1,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx1),Fx2,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx2),<span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;PSD via Eq.(13)&#x27;</span>,<span class="string">&#x27;PSD via pwelch&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/04/18/ps-psd/image-20220514165525958.png"
-alt="image-20220514165525958" /></p>
-<h2 id="window-effects">window effects</h2>
-<p>It is possible to correct both the amplitude and energy content of
-the windowed signal to equal the original signal. However, both
-corrections cannot be applied simultaneously</p>
-<h3 id="amplitude-correction">Amplitude correction</h3>
-<p><em>Linear (amplitude) Spectrum</em> <span class="math display">\[
-X(k) = \frac{X_{\omega}(k)}{S_1}
-\]</span> <em>power spectrum</em> <span class="math display">\[
-\text{PS}=\frac{\left| X_{\omega}(k) \right|^2}{S_1^2}
-\]</span></p>
-<blockquote>
-<p>usage: tone amplitude</p>
-</blockquote>
-<h3 id="power-correction">Power correction</h3>
-<p><strong>power spectral density (PSD)</strong> <span
-class="math display">\[
-\text{PSD} =\frac{\left|X_{\omega}(k)\right|^2}{f_s\cdot S_2}
-\]</span></p>
-<blockquote>
-<p>We have <span class="math inline">\(\text{PSD} =
-\frac{\text{PS}}{\text{ENBW}}\)</span>, where <span
-class="math inline">\(\text{ENBW}=\frac{N \cdot
-S_2}{S_1^2}f_{\text{res}}\)</span></p>
-</blockquote>
-<p><strong>linear power spectrum</strong> <span class="math display">\[
-\text{PS}_L=\frac{|X_{\omega}(k)|^2}{N\cdot S_2}
-\]</span></p>
-<blockquote>
-<p>usage: RMS value, total power <span class="math display">\[
-\text{PS}_L(k)=\text{PSD(k)} \cdot f_{\text{res}}
-\]</span></p>
-</blockquote>
-<h3 id="window-correction-factors">Window Correction Factors</h3>
-<p>While a window helps reduce leakage (The window reduces the jumps at
-the ends of the repeated signal), the window itself distorts the data in
-two different ways:</p>
-<ul>
-<li><p><strong>Amplitude</strong> – The <em>amplitude</em> of the signal
-is reduced</p>
-<blockquote>
-<p>This is due to the fact that the window removes information in the
-signal</p>
-</blockquote></li>
-<li><p><strong>Energy</strong> – The <em>area</em> under the curve, or
-energy of the signal, is reduced</p></li>
-</ul>
-<p><img src="/2022/04/18/ps-psd/rtaImage.png" alt="rtaImage" /></p>
-<p><strong>Window correction factors</strong> are used to try and
-compensate for the effects of applying a window to data. There are both
-amplitude and energy correction factors.</p>
-<table>
-<colgroup>
-<col style="width: 17%" />
-<col style="width: 43%" />
-<col style="width: 39%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Window Type</th>
-<th>Amplitude Correction (<span class="math inline">\(K_a\)</span>)</th>
-<th>Energy Correction (<span class="math inline">\(K_e\)</span>)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Rectangluar</td>
-<td>1.0</td>
-<td>1.0</td>
-</tr>
-<tr class="even">
-<td>hann</td>
-<td>1.9922</td>
-<td>1.6298</td>
-</tr>
-<tr class="odd">
-<td>blackman</td>
-<td>2.3903</td>
-<td>1.8155</td>
-</tr>
-<tr class="even">
-<td>kaiser</td>
-<td>1.0206</td>
-<td>1.0204</td>
-</tr>
-</tbody>
-</table>
-<p>Only the Uniform window (rectangular window), which is equivalent to
-no window, has the same amplitude and energy correction factors.</p>
-<p><span class="math display">\[\begin{align}
-X(k) &amp;= \frac{X_\omega(k)}{\sum_n w(n)} \\
-&amp;= \frac{N}{\sum_n w(n)} \frac{X_\omega(k)}{N} \\
-&amp;= K_a \cdot \frac{X_\omega(k)}{N}
-\end{align}\]</span> where <span class="math inline">\(K_a =
-\frac{N}{\sum_n \omega(n)}\)</span></p>
-<blockquote>
-<p>In literature, <strong>Coherent power gain</strong> is defined show
-below, which is close related to <span
-class="math inline">\(K_a\)</span> <span class="math display">\[
-\text{Coherent power gain (dB)} = 20 \; log_{10} \left( \frac{\sum_n
-w[n]}{N} \right)
-\]</span></p>
-</blockquote>
-<p><img src="/2022/04/18/ps-psd/amplitude-correction.png"
-alt="amplitude-correction" /></p>
-<blockquote>
-<p>With amplitude correction, by multiplying by two, the <em>peak
-value</em> of both the original and corrected spectrum match. However
-the energy content is not the same.</p>
-<p>The amplitude corrected signal (red) appears to have more energy, or
-area under the curve, than the original signal (blue).</p>
-</blockquote>
-<p><span class="math display">\[\begin{align}
-\text{PSD} &amp;=\frac{1}{f_{\text{res}}\cdot
-N\sum_{n}w^2(n)}\left|X_{\omega}(K)\right|^2 \\
-&amp;= \frac{N}{\sum_{n}w^2(n)}
-\frac{\left|X_{\omega}(K)\right|^2}{f_{\text{res}}\cdot N^2} \\
-&amp;=\left|K_e \cdot \frac{X_{\omega}(K)}{N}\right|^2 \cdot
-\frac{1}{f_{\text{res}}}
-\end{align}\]</span></p>
-<p>wherer <span class="math inline">\(K_e =
-\sqrt{\frac{N}{\sum_{n}\omega^2(n)}}\)</span></p>
-<p><img src="/2022/04/18/ps-psd/energey-correction.png"
-alt="energey-correction" /></p>
-<blockquote>
-<p>Multiplying the values in the spectrum by 1.63, rather than 2, makes
-the <em>area</em> under the curve the same for both the original signal
-(blue) and energy corrected signal (red)</p>
-</blockquote>
-<p><strong>hanning</strong>'s correction factors:</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">256</span>;</span><br><span class="line">w = hanning(N);</span><br><span class="line">Ka = N/sum(w)</span><br><span class="line">Ke = <span class="built_in">sqrt</span>(N/sum(w.^<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Ka =</span><br><span class="line"></span><br><span class="line">    1.9922</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ke =</span><br><span class="line"></span><br><span class="line">    1.6298</span><br></pre></td></tr></table></figure>
-<p><strong>!!! Caution</strong>: <code>dft</code> and <code>psd</code>
-function in virtuoso</p>
-<ul>
-<li><p><code>dft</code> always return</p>
-<p><img src="/2022/04/18/ps-psd/image-20230525011604685.png"
-alt="image-20230525011604685" /></p></li>
-</ul>
-<p>To compensate windowing effect, <span
-class="math inline">\(W(n)\)</span>, the <code>dft</code> output should
-be multiplied by <span class="math inline">\(K_a\)</span>, e.g. 1.9922
-for hanning window.</p>
-<ul>
-<li><code>psd</code> function has taken into account <span
-class="math inline">\(K_e\)</span>, postprocessing is
-<strong>not</strong> needed</li>
-</ul>
-<h3 id="amplitudepower-correction-example">Amplitude,Power Correction
-Example</h3>
-<p><img src="/2022/04/18/ps-psd/image-20220518002927545.png"
-alt="image-20220518002927545" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 200 Hz, amplitude 1 and 200/3 Hz amplitude 0.3</span></span><br><span class="line">fosc = <span class="number">200</span>;</span><br><span class="line">Fs = <span class="number">8192</span>;</span><br><span class="line">Nx = Fs*<span class="number">4</span>;</span><br><span class="line">tstop = Nx/Fs;</span><br><span class="line">t  = (<span class="number">0</span>:<span class="number">1</span>/Fs:tstop<span class="number">-1</span>/Fs).&#x27;; </span><br><span class="line">x  = <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*fosc) + <span class="number">0.3</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*fosc/<span class="number">3</span>);</span><br><span class="line">Nx = <span class="built_in">length</span>(x);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% direct method, time domain</span></span><br><span class="line">P0 = sum(x.^<span class="number">2</span>)/Nx;</span><br><span class="line">xrms0 = <span class="built_in">sqrt</span>(P0);   <span class="comment">% RMS value caculated by time domain</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms0: %.4f\n&quot;</span>, xrms0);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% Window data</span></span><br><span class="line">w = hamming(Nx);	<span class="comment">% hamming window</span></span><br><span class="line"><span class="comment">%w = ones(Nx, 1);	% rectangular window</span></span><br><span class="line"></span><br><span class="line">S1= sum(w);</span><br><span class="line">S2 = sum(w.^<span class="number">2</span>);</span><br><span class="line">NENBW = Nx*S2/S1^<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">xw = x.*w; </span><br><span class="line">nfft = Nx; </span><br><span class="line">X = fft(xw,nfft);   <span class="comment">% windowed signal fft</span></span><br><span class="line">NumUniquePts = nfft/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">Fx1 = (<span class="number">0</span>:NumUniquePts<span class="number">-1</span>)*Fs/nfft;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% fft - ps -&gt; rms</span></span><br><span class="line">Xmag = <span class="built_in">abs</span>(X);</span><br><span class="line">PS1 = Xmag.^<span class="number">2</span>/S1^<span class="number">2</span>;    <span class="comment">%!!! Eq.(12)</span></span><br><span class="line">PS1 = PS1(<span class="number">1</span>:NumUniquePts);</span><br><span class="line">PS1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = PS1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Pmax_fft = <span class="built_in">max</span>(PS1);    <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;Pmax_fft: %.4f\n&quot;</span>, Pmax_fft);</span><br><span class="line"></span><br><span class="line"><span class="comment">% linear power spectrum</span></span><br><span class="line">PSL_fft = Xmag.^<span class="number">2</span>/nfft/S2;</span><br><span class="line">PSL_fft = PSL_fft(<span class="number">1</span>:NumUniquePts);</span><br><span class="line">PSL_fft = PSL_fft(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;</span><br><span class="line">Ptot_fft1 = sum(PSL_fft);</span><br><span class="line">xrms_PSL = <span class="built_in">sqrt</span>(Ptot_fft1); <span class="comment">% !!! power OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_PSL: %.4f\n&quot;</span>, xrms_PSL);</span><br><span class="line"></span><br><span class="line"><span class="comment">% use psd*fres to calculate total power</span></span><br><span class="line">Pxx1 = <span class="built_in">abs</span>(X(<span class="number">1</span>:NumUniquePts)).^<span class="number">2</span>/sum(w.^<span class="number">2</span>)/Fs;    <span class="comment">%!!! Eq.(13)</span></span><br><span class="line">Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Ptot_fft2 = sum(Pxx1*Fs/nfft);</span><br><span class="line">xrms_psd = <span class="built_in">sqrt</span>(Ptot_fft2);     <span class="comment">% !!! power OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_psd: %.4f\n&quot;</span>, xrms_psd);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%% pwelch</span></span><br><span class="line">[Pxx2,Fx2] = pwelch(x,w,<span class="number">0</span>,nfft,Fs);</span><br><span class="line">fres = Fx2(<span class="number">2</span>)-Fx2(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">PS2 = Pxx2*fres;</span><br><span class="line">Ptot_pwelch = sum(PS2);</span><br><span class="line">xrms_pwelch = <span class="built_in">sqrt</span>(Ptot_pwelch);    <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_pwelch: %.4f\n&quot;</span>, xrms_pwelch);</span><br><span class="line"></span><br><span class="line"><span class="comment">% PS = PSD * ENBW always hold</span></span><br><span class="line">ENBW = fres * NENBW;</span><br><span class="line">PS2_pwelch = Pxx2*ENBW;</span><br><span class="line">Pmax_pwelch = <span class="built_in">max</span>(PS2_pwelch);  <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;Pmax_pwelch: %.4f\n&quot;</span>, Pmax_pwelch);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot psd of two methods</span></span><br><span class="line"><span class="built_in">plot</span>(Fx1,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx1),Fx2,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx2),<span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;PSD via Eq.(13)&#x27;</span>,<span class="string">&#x27;PSD via pwelch&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB; V^2/Hz&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xrms0: 0.7383</span><br><span class="line">Pmax_fft: 0.5000</span><br><span class="line">xrms_PSL: 0.7382</span><br><span class="line">xrms_psd: 0.7382</span><br><span class="line">xrms_pwelch: 0.7382</span><br><span class="line">Pmax_pwelch: 0.5000</span><br></pre></td></tr></table></figure>
-<h2 id="rms">RMS</h2>
-<p>We may also want to know for example the RMS value of the signal, in
-order to know how much power the signal generates. This can be done
-using Parseval’s theorem.</p>
-<p>For a <strong>periodic</strong> signal, which has a discrete
-spectrum, we obtain its total RMS value by summing the included signals
-using <span class="math display">\[
-x_{\text{rms}}=\sqrt{\sum R_{xk}^2}
-\]</span> Where <span class="math inline">\(R_{xk}\)</span> is the RMS
-value of each sinusoid for <span
-class="math inline">\(k=1,2,3,...\)</span> The RMS value of a signal
-consisting of a number of sinusoids is consequently equal to <strong>the
-square root of the sum of the RMS values</strong>.</p>
-<p>This result could also be explained by noting that sinusoids of
-different frequencies are <strong>orthogonal</strong>, and can therefore
-be summed like vectors (using <em>Pythagoras’ theorem</em>)</p>
-<p>For a random signal we cannot interpret the spectrum in the same way.
-As we have stated earlier, the PSD of a random signal contains all
-frequencies in a particular frequency band, which makes it
-<em>impossible to add the frequencies up</em>. Instead, as the PSD is a
-density function, the correct interpretation is to sum the area under
-the PSD in a specific frequency range, which then is the square of the
-RMS, i.e., the mean-square value of the signal <span
-class="math display">\[
-x_{\text{rms}}=\sqrt{\int G_{xx}(f)df}=\sqrt{\text{area under the
-curve}}
-\]</span> The <strong>linear spectrum</strong>, or <strong>RMS
-spectrum</strong>, defined by <span class="math display">\[\begin{align}
-X_L(k) &amp;= \sqrt{\text{PSD(k)} \cdot f_{\text{res}}}\\
-&amp;=\sqrt{\frac{\left|X_{\omega}(k)\right|^2}{f_{\text{res}}\cdot
-N\sum_{n}\omega^2(n)} \cdot f_{\text{res}}} \\
-&amp;= \sqrt{\frac{\left|X_{\omega}(k)\right|^2}{N\sum_{n}\omega^2(n)}}
-\\
-&amp;= \sqrt{\frac{|X_{\omega}(k)|^2}{N\cdot S_2}}
-\end{align}\]</span></p>
-<p>The corresponding <strong>linear power spectrum</strong> or
-<strong>RMS power spectrum</strong> can be defined by <span
-class="math display">\[\begin{align}
-\text{PS}_L(k)&amp;=X_L(k)^2=\frac{|X_{\omega}(k)|^2}{S_1^2}\frac{S_1^2}{N\cdot
-S_2} \\
-&amp;=\text{PS}(k) \cdot \frac{S_1^2}{N\cdot S_2}
-\end{align}\]</span></p>
-<p>So, RMS can be calculated as below <span
-class="math display">\[\begin{align}
-P_{\text{tot}} &amp;= \sum \text{PS}_L(k) \\
-\text{RMS} &amp;= \sqrt{P_{\text{tot}}}
-\end{align}\]</span></p>
-<h2 id="dft-averaging">DFT averaging</h2>
-<p>we use <span class="math inline">\(N= 8*\text{nfft}\)</span> time
-samples of <span class="math inline">\(x\)</span> and set the number of
-overlapping samples to <span class="math inline">\(\text{nfft}/2 =
-512\)</span>. <code>pwelch</code> takes the DFT of <span
-class="math inline">\(\text{Navg} = 15\)</span> overlapping segments of
-<span class="math inline">\(x\)</span>, each of length <span
-class="math inline">\(\text{nfft}\)</span>, then averages the <span
-class="math inline">\(|X(k)|^2\)</span> of the DFT’s.</p>
-<p>In general, if there are an integer number of segments that cover all
-samples of N, we have <span class="math display">\[
-N = (N_{\text{avg}}-1)*D + \text{nfft}
-\]</span> where <span
-class="math inline">\(D=\text{nfft}-\text{noverlap}\)</span>. For our
-case, with <span class="math inline">\(D = \text{nfft}/2\)</span> and
-<span class="math inline">\(N/\text{nfft} = 8\)</span>, we have <span
-class="math display">\[
-N_{\text{avg}}=2*N/\text{nfft}-1=15
-\]</span> For a given number of time samples N, using overlapping
-segments lets us increase <span class="math inline">\(N_{avg}\)</span>
-compared with no overlapping. In this case, overlapping of 50% increases
-<span class="math inline">\(N_{avg}\)</span> from 8 to 15. Here is the
-Matlab code to compute the spectrum:</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nfft= <span class="number">1024</span>;</span><br><span class="line">N= nfft*<span class="number">8</span>;                                <span class="comment">% number of samples in signal</span></span><br><span class="line">n= <span class="number">0</span>:N<span class="number">-1</span>;</span><br><span class="line">x= A*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*f0*n*Ts) + <span class="number">.1</span>*<span class="built_in">randn</span>(<span class="number">1</span>,N);   <span class="comment">% 1 W sinewave + noise</span></span><br><span class="line">noverlap= nfft/<span class="number">2</span>;                         <span class="comment">% number of overlapping time samples</span></span><br><span class="line">window= hanning(nfft);</span><br><span class="line">[pxx,f]= pwelch(x,window,noverlap,nfft,fs);  <span class="comment">% W/Hz  PSD</span></span><br><span class="line">PdB_bin= <span class="number">10</span>*<span class="built_in">log10</span>(pxx*fs/nfft);              <span class="comment">% dBW/bin</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/04/18/ps-psd/figure%203_99153.png"
-alt="figure 3_99153" /></p>
-<blockquote>
-<p><strong>DFT averaging</strong> reduces the variance <span
-class="math inline">\(\sigma^2\)</span> of the noise spectrum by a
-factor of <span class="math inline">\(N_{avg}\)</span>, as long as
-<code>noverlap</code> is not greater than <code>nfft/2</code></p>
-</blockquote>
-<p><img src="/2022/04/18/ps-psd/image-20220420013255660.png"
-alt="image-20220420013255660" /></p>
-<p><img src="/2022/04/18/ps-psd/image-20230526011628682.png"
-alt="image-20230526011628682" /></p>
-<h2 id="fftshift">fftshift</h2>
-<p>The result of <code>fft</code> and its index is shown as below</p>
-<p><img src="/2022/04/18/ps-psd/complexDFT_Matlab_index.png"
-alt="complexDFT_Matlab_index" /></p>
-<p>After <code>fftshift</code></p>
-<p><img src="/2022/04/18/ps-psd/FFTshift_Matlab_index_resolved.png"
-alt="FFTshift_Matlab_index_resolved" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; fftshift([<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">     <span class="number">4</span>     <span class="number">5</span>     <span class="number">6</span>     <span class="number">1</span>     <span class="number">2</span>     <span class="number">3</span></span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://github.com/liangsizhuang/Demonstration-DFT-PS-PSD">Demonstration-DFT-PS-PSD</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://www.mathworks.com/help/signal/ug/power-spectral-density-estimates-using-fft.html">mathworks,
-Power Spectral Density Estimates Using FFT</a></p>
-<p>Lyons, Richard, “Widowing Functions Improve FFT Results”, EDN, June
-1, 1998. <a
-target="_blank" rel="noopener" href="https://www.edn.com/electronics-news/4383713/Windowing-Functions-Improve-FFT-Results-Part-I">https://www.edn.com/electronics-news/4383713/Windowing-Functions-Improve-FFT-Results-Part-I</a></p>
-<p>Rapuano, Sergio, and Harris, Fred J., An Introduction to FFT and Time
-Domain Windows, IEEE Instrumentation and Measurement Magazine, December,
-2007. <a
-target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/4428580">https://ieeexplore.ieee.org/document/4428580</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1004.php">Neil
-Robertson, The Power Spectrum</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1221.php">Neil
-Robertson, Use Matlab Function pwelch to Find Power Spectral Density –
-or Do It Yourself</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1211.php">Neil
-Robertson, Evaluate Window Functions for the Discrete Fourier
-Transform</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://www.gaussianwaves.com/2015/11/interpreting-fft-results-complex-dft-frequency-bins-and-fftshift/">Mathuranathan
-Viswanathan, Interpret FFT, complex DFT, frequency bins &amp;
-FFTShift</a></p>
-<p><a target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/47603/59253">robert
-bristow-johnson, Does windowing affect Parseval's theorem?</a></p>
-<p>Heinzel, Gerhard, A. O. Rüdiger and Roland Schilling. "Spectrum and
-spectral density estimation by the Discrete Fourier transform (DFT),
-including a comprehensive list of window functions and some new at-top
-windows." (2002). URL: <a
-target="_blank" rel="noopener" href="https://holometer.fnal.gov/GH_FFT.pdf">https://holometer.fnal.gov/GH_FFT.pdf</a></p>
-<p>Window Correction Factors URL: <a
-target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/window-correction-factors">https://community.sw.siemens.com/s/article/window-correction-factors</a></p>
-<p>Brandt, A, 2011. Noise and vibration analysis: signal analysis and
-experimental procedures. John Wiley &amp; Sons</p>
-<p>What should be the correct scaling for PSD calculation using fft.
-URL:<a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/32205">https://dsp.stackexchange.com/a/32205</a></p>
-<p>POWER SPECTRAL DENSITY CALCULATION VIA MATLAB Revision C. URL: <a
-target="_blank" rel="noopener" href="http://www.vibrationdata.com/tutorials_alt/psd_mat.pdf">http://www.vibrationdata.com/tutorials_alt/psd_mat.pdf</a></p>
-<p>Jens Ahrens, Carl Andersson, Patrik Höstmad, Wolfgang Kropp,
-“Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals” in 148th
-Convention of the AES, e-Brief 56, May 2020 [ <a
-target="_blank" rel="noopener" href="http://www.soundfieldsynthesis.org/wp-content/uploads/pubs/Ahrens_etal_AES2020.pdf">pdf</a>,
-<a
-target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">web</a>
-].</p>
-<p>Manolakis, D., &amp; Ingle, V. (2011). <em>Applied Digital Signal
-Processing: Theory and Practice</em>. Cambridge: Cambridge University
-Press. doi:10.1017/CBO9780511835261</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/15/dspf-saveopt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/15/dspf-saveopt/" class="post-title-link" itemprop="url">How to Save Node in DSPF?</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-15 18:23:40" itemprop="dateCreated datePublished" datetime="2022-04-15T18:23:40+00:00">2022-04-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="dspf-semantics">DSPF Semantics</h2>
-<p><code>*|DIVIDER &lt;divider&gt;</code></p>
-<p><code>&lt;divider&gt;</code> represents the hierarchical pathname
-divider. The default hierarchical character is forward slash
-(<strong>/</strong>).</p>
-<p><code>*|DELIMITER &lt;delimiter&gt;</code></p>
-<ul>
-<li><code>&lt;delimiter&gt;</code> represents the delimiter character
-used to concatenate an instance name and pin name to form an instance
-pin name.</li>
-<li>It is also represents the delimiter character used to concatenate a
-net name and subnode number to form a subnode name. The default
-character is colon (<strong>:</strong>)</li>
-</ul>
-<p><code>*|BUSBIT &lt;left_busbit_char&gt;&lt;right_busbit_char&gt;</code></p>
-<p><code>&lt;left_busbit_char&gt;</code> and
-<code>&lt;right_busbit_char&gt;</code> are used at the end of an
-identifier of an array to select a single object of the array.</p>
-<p>Objects which may be indexed include <em>nets, primary pins, and
-instance pins</em></p>
-<p><code>*|NET &lt;netName&gt; &lt;netCap&gt;</code></p>
-<ul>
-<li><code>&lt;netName&gt;</code> represents the name of a net. It can be
-a user-provided net name, the name of the driving pin, or the name of
-the driving instance pin.</li>
-<li><code>&lt;netCap&gt;</code> represents the <strong>total</strong>
-capacitance value in farads associated with the net. This may be
-comprised of capacitances to ground and capacitances to nearby
-wires.</li>
-</ul>
-<p><code>*|P &lt;pinName&gt; &lt;pinType&gt; &lt;pinCap&gt; &#123;&lt;coord&gt;&#125;</code></p>
-<ul>
-<li><code>&lt;pinName&gt;</code> represents the name of the pin.</li>
-<li><code>&lt;pinType&gt;</code> represents the type of the pin. It can
-be any of the following: <em>I (Input), O (Output), B (Bidirectional), X
-(don’t care), S (Switch), and J (Jumper)</em>.</li>
-<li><code>&lt;pinCap&gt;</code> represents the capacitance value
-associated with the pin.</li>
-<li><code>&lt;coord&gt;</code> is optional. It represents the location
-of the pin. Multiple pin locations are allowed.</li>
-</ul>
-<p><code>*|S &lt;subNodeName&gt; &#123;&lt;coord&gt;&#125;</code></p>
-<p>subnodes in the net</p>
-<ul>
-<li><code>&lt;subNodeName&gt;</code> represents the name of the subnode.
-A subnode name is obtained by concatenating the net name and a subnode
-number using the delimiter specified in the DELIMITER statement. The
-default delimiter is colon (:).</li>
-<li><code>&lt;coord&gt;</code> represents the location of the
-subnode.</li>
-</ul>
-<p><code>*|I &lt;instPinName&gt; &lt;instName&gt; &lt;pinName&gt; &lt;pinType&gt;&lt;pinCap&gt; &#123;&lt;coord&gt;?&#125;</code></p>
-<p>describes instance pins in the net</p>
-<ul>
-<li><code>&lt;instPinName&gt;</code> represents the name of the instance
-pin. An instance pin name is obtained by concatenating the
-<code>&lt;instName&gt;</code> and the <code>&lt;pinName&gt;</code> with
-a delimiting character which is specified by the DELIMITER
-statement</li>
-<li><code>&lt;instName&gt;</code> represents the name of the
-instance</li>
-</ul>
-<p><code>*|DeviceFingerDelim "@"</code></p>
-<p>MOS finger delimiter</p>
-<p>For example, <code>M8</code>'s finger is 4, then split into 4 Devices
-in DSPF</p>
-<blockquote>
-<p><code>MM8</code>, <code>MM8@2</code>, <code>MM8@3</code>,
-<code>MM8@4</code></p>
-</blockquote>
-<p>its drain terminal will be</p>
-<blockquote>
-<p><code>MM8:d</code>, <code>MM8@2:d</code>, <code>MM8@3:d</code>,
-<code>MM8@4:d</code></p>
-</blockquote>
-<h3 id="dspf-syntax">DSPF Syntax</h3>
-<p>DSPF has two sections:</p>
-<ul>
-<li><p>a <strong>net section</strong></p>
-<p>The net section consists of a series of net description blocks. Each
-net description block corresponds to a net in the physical design. A net
-description block begins with a net statement followed by pins, instance
-pins, subnodes, and parasitic resistor/capacitor
-(<code>R</code>/<code>C</code>) components that characterize the
-electrical behavior of the net.</p></li>
-<li><p>an <strong>instance section</strong></p>
-<p>The instance section consists of a series of SPICE instance
-statements. SPICE instance statements begin with an
-<code>X</code>.</p></li>
-</ul>
-<p>Each file consists of hierarchical cells and interconnects only.</p>
-<p>The DSPF format is as generic and as much like SPICE as possible.
-While native SPICE statements describe the R/C sections, some non-native
-SPICE statements complete the net descriptions. These non-native SPICE
-statements start with the notation "*|" to differentiate them from
-native SPICE statements. For native SPICE statements, a continuation
-line begins with the conventional "+" sign in the first column.</p>
-<p>The native SPICE statements used by the DSPF format are listed
-below:</p>
-<ul>
-<li><code>.SUBCKT</code> represents a subcircuit statement.</li>
-<li><code>.ENDS</code> represents the end of a subcircuit
-statement.</li>
-<li><code>R</code> represents a resistor element.</li>
-<li><code>C</code> represents a capacitor element.</li>
-<li><code>E</code> represents a voltage-controlled voltage sources
-element.</li>
-<li><code>X</code> represents an instance of a cell;</li>
-<li><code>*</code> represents a comment line unless it is
-<code>*|</code> or <code>*+</code>.</li>
-<li><code>.END</code> is an optional statement that represents the end
-of a simulation session</li>
-</ul>
-<h2 id="spectre-netlist">spectre netlist</h2>
-<p><code>hier_delimiter="."</code></p>
-<p>Used to set hierarchical delimiter. Length of
-<code>hier_delimiter</code> should not be longer than 1, except the
-leader escape character</p>
-<p><code>spfbusdelim = busdelim_schematic [busdelim_parasitic]</code></p>
-<p>This option maps the bus delimiter between schematic netlist and
-parasitic file (i.e. DSPF, SPEF, or DPF). The option defines the bus
-delimiter in the schematic netlist, and optionally the bus delimiter in
-the parasitic file. By default, the bus delimiter of the parasitic file
-is taken from the parasitic file header (i.e. <em>|BUSBIT [],
-</em>|BUS_BIT [], or *|BUS_DELIMITER []). If the bus delimiter is not
-defined in the parasitic file header, you need to specify it by using
-the spfbusdelim option in schematic netlist.</p>
-<blockquote>
-<p>Exampel</p>
-<ul>
-<li>spfbusdelim=&lt;&gt; - A&lt;1&gt; in the schematic netlist is mapped
-to A_1 in the DSPF file, if the bus delimiter header in the DSPF file is
-"_".</li>
-<li>spfbusdelim=@ [] - A@1 in the schematic netlist is mapped to to A[1]
-in the DSPF file (the bus delimiter in DSPF header will be
-ignored).</li>
-</ul>
-</blockquote>
-<h2 id="how-to-save-net-voltage-in-dspf">How to Save Net voltage in
-DSPF</h2>
-<blockquote>
-<p>!!! follow the name of net section in DSPF - prepend to top-level
-devices in the schematic with <code>X</code></p>
-</blockquote>
-<p><img src="/2022/04/15/dspf-saveopt/hierbench.drawio.svg"
-alt="hierbench.drawio" /></p>
-<p>Assume node n1...n4 are named as below in DSPF file (prefix
-<code>X</code>)</p>
-<blockquote>
-<ul>
-<li><p>n1</p>
-<p>XXosc/zip:1</p></li>
-<li><p>n2</p>
-<p>XXosc/zip:2</p></li>
-<li><p>n3</p>
-<p>XXosc/zip:3</p></li>
-<li><p>n4</p>
-<p>XXosc/zip:4</p></li>
-</ul>
-</blockquote>
-<p>To save these nodes, you can add follow code in <em>Definition
-Files</em></p>
-<p><em>saveopt.scs</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">save Xwrapper.Xvco.XXosc\/zip\:1</span><br><span class="line">save Xwrapper.Xvco.XXosc\/zip\:2</span><br><span class="line">save Xwrapper.Xvco.XXosc\/zip\:3</span><br><span class="line">save Xwrapper.Xvco.XXosc\/zip\:4</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><p>Escape character <code>\</code> is used for hierarchical pathname
-divider <code>/</code> and subnode <code>:</code></p></li>
-<li><p>By the way, <code>.</code> is hierarchical delimiter of
-Spectre</p></li>
-<li><p>Calibre always prepend one <strong>X</strong> to instance name of
-schematic in generated DSPF file</p></li>
-<li><p>The DSPF design is <em>flatten</em>, the DIVIDER character
-indicate the hierarchy</p></li>
-</ul>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save Xwrapper.Xvco.XXosc\/zip</span><br></pre></td></tr></table></figure>
-<p>The above save voltage, however I'm NOT sure which node it save.</p>
-<p>To avoid this unsure problem, the MOS terminal may be better choice
-to save.</p>
-<p>But keep in mind</p>
-<ul>
-<li>OD resistance is lumped in the FEOL model</li>
-<li>M0OD and above layer resistances are extracted by RC tool</li>
-</ul>
-<h2 id="how-to-save-current-in-dspf">How to Save Current in DSPF</h2>
-<blockquote>
-<p>!!! follow the name of instance section of DSPF - prepend to
-top-level devices in the schematic with <code>XX</code></p>
-</blockquote>
-<p>MOS in schematic: <code>Xsupply.M4</code></p>
-<p>MOS related information in DSPF (prefix <code>XX</code> in instance
-section):</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">// net section</span><br><span class="line">*|I XXsupply/MM4:d XXsupply/MM4 d B 0.0 </span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">//instance section</span><br><span class="line">XXXsupply/MM4 XXsupply/MM4:d XXsupply/MM4:g XXsupply/MM4:s XXsupply/MM4:b pch_svt_mac</span><br><span class="line">+ L=... W=... nfin=...</span><br><span class="line">+ ...</span><br></pre></td></tr></table></figure>
-<p>To save drain current:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save Xvco.XXXsupply\/MM4:d</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>&lt;instName&gt;</code> in
-<code>*|I &lt;instPinName&gt; &lt;instName&gt; &lt;pinName&gt; &lt;pinType&gt;&lt;pinCap&gt; &#123;&lt;coord&gt;?&#125;</code>
-which has prefix <code>X</code> corresponding to schematic is
-<strong>NOT </strong> the instance name in DSPF. The instance name is in
-<strong>instance section</strong> and has prefix <code>XX</code></p>
-</blockquote>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220417010807592.png"
-alt="image-20220417010807592" /></p>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220417010919588.png"
-alt="image-20220417010919588" /></p>
-<blockquote>
-<p>!!! Only work for MOS terminal current. Fail to apply to block
-pin</p>
-</blockquote>
-<h2 id="thinking-about-voltage-and-current-save">Thinking about voltage
-and current save</h2>
-<ul>
-<li>MOS device always prepend with <code>M</code></li>
-<li>To save <strong>net voltage</strong>, take account of the prefix
-<code>X</code> of top-level device</li>
-<li>To save <strong>MOS terminal</strong>, take account of the prefix
-<code>XX</code> of top-level device</li>
-</ul>
-<blockquote>
-<p>Post-layout netlists are created by layout extraction tools - Mentor
-Calibre</p>
-</blockquote>
-<h2 id="differences-between-dspf-and-schematic-names">Differences
-Between DSPF and Schematic Names</h2>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220416201019986.png"
-alt="image-20220416201019986" /></p>
-<blockquote>
-<ul>
-<li>MOS Terminal Mismatch ( ‘s’ vs ‘1’)
-<ul>
-<li>Schematic: number '1' ,'2', '3','4'</li>
-<li>DSPF: 'd', 'g', 's','b'</li>
-</ul></li>
-</ul>
-</blockquote>
-<h2 id="simrc-file">.simrc file</h2>
-<p>If DSPF files show such differences, you can set options in the
-<strong>.simrc</strong> file to <strong>update the save statement in the
-netlist</strong> so that the device names match with those in the DSPF
-file</p>
-<p>Additionally, <code>dspf_include</code> reads all the DSPF lines
-starting with <strong>* (<em>|NET, </em>|I, *|P,*|S)</strong>, while
-<code>include</code> considers all related lines as comments.</p>
-<p>Only verified to DSPF output of Mentor Calibre</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">; ensure that the netlist is recreated each time</span><br><span class="line">nlReNetlistAll=t</span><br><span class="line"></span><br><span class="line">dspfFileEnvOptions = &#x27;(</span><br><span class="line">        nil</span><br><span class="line">        spfFileNameMappingFormat &quot;cdl“</span><br><span class="line">        spfFileTermDelimiter “:”</span><br><span class="line">        spfFileHierDelimiter “/”</span><br><span class="line">        spfFileFingerDelimiter “@”</span><br><span class="line">        spfFileNetMapping “mixed”</span><br><span class="line">        spfFileTerminalMapping “lower”</span><br><span class="line">        spfFileAddPrefixToDevice t</span><br><span class="line">        spfFileAddContextSensitivePrefix t</span><br><span class="line">        spfFileDeviceDefaultPrefix “X”</span><br><span class="line">        spfFileDevicePrefixForTermCurrent “X”</span><br><span class="line">        spfFileDevicePrefixForOppoints “X“</span><br><span class="line">        </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>spfFileDevicePrefixForTermCurrent</code> and
-<code>spfFileDevicePrefixForOppoints</code> are applicable to MOS
-devices only.</p>
-</blockquote>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220418113416484.png"
-alt="image-20220418113416484" /></p>
-<blockquote>
-<p>Both <code>@</code> and <code>__</code> have been observed as Finger
-Delimiter in single DSPF . wired...</p>
-</blockquote>
-<h2 id="signal-name-saved-using-wildcard-operator">signal name saved
-using wildcard operator</h2>
-<p>How to find the signal name saved using wildcard operator with save
-statement in spectre?</p>
-<h3 id="method-1">method 1</h3>
-<p>From ADE L or ADE XL Test Editor, you can use menu <em>Simulation →
-Options → Analog→ Miscellaneous → Addition arguments
-field:<code>dump_wildcard_info=yes</code></em></p>
-<h3 id="method-2">method 2</h3>
-<p>add below in netlist file or <em>Simulation Files → Definition
-Files:<code>saveopt.scs</code></em></p>
-<p><em>saveopt.scs</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wcOption options dump_wildcard_info=yes</span><br></pre></td></tr></table></figure>
-<h3 id="saved-file">saved file</h3>
-<p>After running simulation, saved wildcard summary is save into file
-<code>&lt;netlist_file_name&gt;.wildcard.out*</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Wildcard match summary:</span><br><span class="line"></span><br><span class="line">save * nodes: 68</span><br><span class="line">    0</span><br><span class="line">    vdd!</span><br><span class="line">    I0.net10</span><br><span class="line">    I0.net15</span><br><span class="line">    I0.I8.net30</span><br></pre></td></tr></table></figure>
-<h2
-id="save-and-plot-terminal-voltage-in-ade-explorer-and-assembler">Save
-and Plot terminal voltage in ADE Explorer and Assembler</h2>
-<p><strong>.cdsinit</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">envSetVal(&quot;auCore.selection&quot; &quot;terminalSelectionType&quot; &#x27;cyclic &quot;current&quot;)</span><br></pre></td></tr></table></figure>
-<p>Available options are <strong>current</strong>,
-<strong>voltage</strong>, <strong>both</strong> or
-<strong>prompt</strong> and the default is current which matches the
-default behavior in previous releases.</p>
-<ul>
-<li>The schematic will have an <strong>ellipse</strong> annotation where
-a current probe has been saved,</li>
-<li>a <strong>V</strong> annotation for a voltage probe,</li>
-<li>and both annotations for both.</li>
-</ul>
-<blockquote>
-<p>NOTE: Starting with IC 6.1.8 ISR5, you can now set this from
-Options-&gt;Plotting/Printing</p>
-</blockquote>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220415204157341.png"
-alt="image-20220415204157341" /></p>
-<h2 id="interpreting-_noxref-entries">Interpreting _noxref Entries</h2>
-<blockquote>
-<p>You enable gate recognition in the Calibre nmLVS-H tool. Normally,
-the <strong>_noxref</strong> names are internal to the gate</p>
-</blockquote>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220416125348491.png"
-alt="image-20220416125348491" /></p>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220416125416504.png"
-alt="image-20220416125416504" /></p>
-<h2
-id="saving-net-with-hierarchy-delimiter-and-colon-in-net-name-gives-warning-spectre-8282-during-simulation">Saving
-net with hierarchy delimiter and colon (:) in net name gives WARNING
-(SPECTRE-8282) during simulation</h2>
-<h3 id="problem">Problem</h3>
-<p>I am running simulation using an spf/spef file which has a net name
-definition as shown in the below example: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// input.scs</span><br><span class="line">simulator lang=spice</span><br><span class="line">.subckt pi_rc a z</span><br><span class="line">r1 a x1a 1k</span><br><span class="line">r2 x1a x1/x1:DRN 1k</span><br><span class="line">cb x1/x1:DRN z 200f</span><br><span class="line">.ends</span><br><span class="line"></span><br><span class="line">xpi1 in 0 pi_rc</span><br><span class="line">vdd in 0 pwl (0 0 1n 0 1.1n 10)</span><br><span class="line"></span><br><span class="line">simulator lang=spectre</span><br><span class="line">myopt options hier_ambiguity=lower</span><br><span class="line">tran tran stop=2u</span><br><span class="line"></span><br><span class="line">save xpi1.x1\/x1:DRN</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>The net name is x1/x1:DRN. During the simulation, the following
-warning is reported:</p>
-<p>Warning from spectre during initial setup. <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WARNING (SPECTRE-8282): `xpi1.x1/x1&#x27; is not a device or subcircuit instance name.</span><br><span class="line">WARNING (SPECTRE-8287): Ignoring invalid item `xpi1.x1/x1:DRN&#x27; in save statement.</span><br></pre></td></tr></table></figure></p>
-<p>How can I save this net for plotting and measurements?</p>
-<h3 id="solution">Solution</h3>
-<p><strong>The colon (:) in the save statement specifies terminal
-current</strong>. So, the save statement used above is for terminal
-current and, hence, the warning messages are reported.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save xpi1.x1\/x1:DRN</span><br></pre></td></tr></table></figure>
-<p>You need to modify the save statement as below: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save xpi1.x1\/x1\:DRN</span><br></pre></td></tr></table></figure></p>
-<p>Now, run the simulation and the issue will be resolved.</p>
-<h2 id="dspf-r-vs-rcc">DSPF r vs rcc</h2>
-<p><strong>rcc</strong></p>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220618131626913.png"
-alt="image-20220618131626913" /></p>
-<p><strong>c</strong></p>
-<p><img src="/2022/04/15/dspf-saveopt/image-20220618131649065.png"
-alt="image-20220618131649065" /></p>
-<p>only <strong>c</strong> dspf give the <strong>lumped
-capacitance</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/13/VD-DRC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/13/VD-DRC/" class="post-title-link" itemprop="url">voltage-dependent DRC checks</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-13 23:16:07" itemprop="dateCreated datePublished" datetime="2022-04-13T23:16:07+00:00">2022-04-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>In T* DRC deck, it is based on the voltage recognition CAD layer and
-net connection to calculate the voltage difference between two
-neighboring nets by the following formula:</p>
-<p><span class="math display">\[
-\Delta V = \max(V_H(\text{net1})-V_L(\text{net2}),
-V_H(\text{net2})-V_L(\text{net1}))
-\]</span></p>
-<p>where <span class="math display">\[
-V_H(\text{netx}) = \max(V(\text{netx}))
-\]</span> and <span class="math display">\[
-V_L(\text{netx}) = \min(V(\text{netx}))
-\]</span></p>
-<blockquote>
-<ul>
-<li>The <span class="math inline">\(\Delta V\)</span> will be
-<strong>0</strong> if two nets are connected as same potential</li>
-<li>If <span class="math inline">\(V_L \gt V_H\)</span> <strong>on a
-net</strong>, DRC will report warning on this net</li>
-</ul>
-</blockquote>
-<h2 id="voltage-recognition-cad-layer">Voltage recognition CAD
-Layer</h2>
-<p>Two method</p>
-<ol type="1">
-<li><p>voltage text layer</p>
-<p>You place specific voltage text on specific drawing layer</p></li>
-<li><p>voltage marker layer</p>
-<p>Each voltage marker layer represent different voltage for specific
-drawing layer</p></li>
-</ol>
-<blockquote>
-<p><em>voltage text layer</em> has higher priority than <em>voltage
-marker layer</em> and is recommended</p>
-</blockquote>
-<h3 id="voltage-text-layer">voltage text layer</h3>
-<p>For example <strong>M3</strong></p>
-<table>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 8%" />
-<col style="width: 9%" />
-<col style="width: 32%" />
-<col style="width: 8%" />
-<col style="width: 31%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Process Layer</th>
-<th>CAD Layer#</th>
-<th>Voltage High</th>
-<th>Voltage High Top<br />(highest priority)</th>
-<th>Voltage Low</th>
-<th>Voltage Low Top<br />(highest priority)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M3</td>
-<td>63</td>
-<td>110</td>
-<td>112</td>
-<td>111</td>
-<td>113</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>where <strong>63</strong> is <strong>layer number</strong>,
-<strong>110 ~ 113</strong> is <strong>datatype</strong></p>
-</blockquote>
-<h3 id="voltage-marker-layer">voltage marker layer</h3>
-<p>Different data type represent different voltage, like</p>
-<table>
-<thead>
-<tr class="header">
-<th>DataType</th>
-<th>100</th>
-<th>101</th>
-<th>102</th>
-<th>...</th>
-<th>109</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Voltage</td>
-<td>0.0</td>
-<td>0.1</td>
-<td>0.2</td>
-<td>0.3</td>
-<td>0.9</td>
-</tr>
-</tbody>
-</table>
-<h2 id="example">Example</h2>
-<p><img src="/2022/04/13/VD-DRC/image-20220503171006936.png"
-alt="image-20220503171006936" /></p>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://blogs.sw.siemens.com/calibre/2015/08/18/automate-those-voltage-dependent-drc-checks/">Automate
-those voltage-dependent DRC checks! - siemens</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/13/virtuoso-bindkey/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/13/virtuoso-bindkey/" class="post-title-link" itemprop="url">Custom Bindkey of Cadence Virtuoso</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-13 17:21:33" itemprop="dateCreated datePublished" datetime="2022-04-13T17:21:33+00:00">2022-04-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="schbindkeys.il">schBindKeys.il</h2>
-<blockquote>
-<p>schematic</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alias bk hiSetBindKey</span><br><span class="line">when ( isCallable(&#x27;schGetEnv&#x27;)</span><br><span class="line">bk(&quot;Schematics&quot; &quot;Ctrl&lt;Key&gt;x&quot; &quot;schHiCreateInst(\&quot;basic\&quot; \&quot;nonConn\&quot; \&quot;symbol\&quot;)&quot;)</span><br><span class="line">bk(&quot;Schematics&quot; &quot;Ctrl&lt;Key&gt;v&quot; &quot;schHiCreateInst(\&quot;analogLib\&quot; \&quot;vdc\&quot; \&quot;symbol\&quot;)&quot;)</span><br><span class="line">bk(&quot;Schematics&quot; &quot;Ctrl&lt;Key&gt;g&quot; &quot;schHiCreateInst(\&quot;analogLib\&quot; \&quot;gnd\&quot; \&quot;symbol\&quot;)&quot;)</span><br><span class="line">bk(&quot;Schematics&quot; &quot;Shift&lt;Key&gt;9&quot; &quot;geDeleteNetProbe()&quot;)</span><br><span class="line">bk(&quot;Schematics&quot; &quot;&lt;Key&gt;0&quot; &quot;geDeleteAllProbe(getCurrentWindow()t)&quot;)</span><br><span class="line">)</span><br><span class="line">unalias bk</span><br></pre></td></tr></table></figure>
-<h2 id="lebindkeys.il">leBindKeys.il</h2>
-<blockquote>
-<p>layout</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">alias bk hiSetBindKey</span><br><span class="line">when ( isCallable(&#x27;leGetEnv)</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;1&quot; &quot;leSetEntryLayer(\&quot;M0PO\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;M0OD\&quot;) leSetEntryLayer(\&quot;VIA0\&quot;) leSetEntryLayer(list(\&quot;M1\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M1\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; M1-VIA1-M2</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;2&quot; &quot;leSetEntryLayer(\&quot;M1\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;VIA1\&quot;) leSetEntryLayer(list(\&quot;M2\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M2\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; M2-VIA2-M3</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;3&quot; &quot;leSetEntryLayer(\&quot;M2\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;VIA2\&quot;) leSetEntryLayer(list(\&quot;M3\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M3\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; M3-VIA3-M4</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;4&quot; &quot;leSetEntryLayer(\&quot;M3\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;VIA3\&quot;) leSetEntryLayer(list(\&quot;M4\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M4\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; M4-VIA4-M5</span><br><span class="line">	; select M4 layer, turn off other layer visibilty, select VIA4 M5_pin M5 and turn on them</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;5&quot; &quot;leSetEntryLayer(\&quot;M4\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;VIA4\&quot;) leSetEntryLayer(list(\&quot;M5\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M5\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; all visiable</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;0&quot; &quot;leSetAllLayerVisible(t) hiRedraw()&quot; )</span><br><span class="line">)</span><br><span class="line">unalias bk</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1609,7 +226,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1759,7 +376,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1966,7 +583,7 @@ alt="image-20220404195156776" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2129,7 +746,7 @@ alt="image-20220403212529981" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2630,7 +1247,7 @@ FIFOs</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-19 15:00:48" itemprop="dateModified" datetime="2023-10-19T15:00:48+00:00">2023-10-19</time>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2730,8 +1347,639 @@ possible without cloning.</p></li>
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/01/rocky-nmcli-network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/01/rocky-nmcli-network/" class="post-title-link" itemprop="url">network connection using nmcli</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-01 01:05:40" itemprop="dateCreated datePublished" datetime="2022-04-01T01:05:40+00:00">2022-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="problem">Problem</h4>
+<p>There is no network connection and device is not managed</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli device status </span><br><span class="line">DEVICE  TYPE      STATE      CONNECTION            </span><br><span class="line">eth0    ethernet  unmanaged  --  </span><br><span class="line">lo      loopback  unmanaged  --  </span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/04/01/rocky-nmcli-network/image-20220401011509900.png"
+alt="image-20220401011509900" /></p>
+<h4 id="solution">solution</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmcli networking on</span><br></pre></td></tr></table></figure>
+<p>Then, <strong>eth0</strong> is connected</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli device status </span><br><span class="line">DEVICE  TYPE      STATE      CONNECTION            </span><br><span class="line">eth0    ethernet  connected  Ethernet connection 1 </span><br><span class="line">lo      loopback  unmanaged  --  </span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
+alt="image-20220401011543866" /></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/28/complex-uvm-topo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/28/complex-uvm-topo/" class="post-title-link" itemprop="url">complex uvm project topology</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-28 20:33:44" itemprop="dateCreated datePublished" datetime="2022-03-28T20:33:44+00:00">2022-03-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
+alt="topo.drawio" /></p>
+<h2 id="compile">compile</h2>
+<ul>
+<li><code>-incdir</code> for all UVC's `<code>include</code></li>
+<li>all pkg.sv</li>
+<li>all if.sv</li>
+<li>all RTL DUT</li>
+<li>uvm top module</li>
+</ul>
+<h2 id="uvm-top.sv">uvm top.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
+<h2 id="rtl-top">RTL top</h2>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2 id="pkg.sv">pkg.sv</h2>
+<p>`<code>include</code> all related uvm class in
+<strong>pgk.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<h2 id="if.sv">if.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/24/pkg-import-compile-sv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/24/pkg-import-compile-sv/" class="post-title-link" itemprop="url">import package in SystemVerilog compilation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-24 21:06:54" itemprop="dateCreated datePublished" datetime="2022-03-24T21:06:54+00:00">2022-03-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="import-and-compile-order">import and compile order</h3>
+<h4 id="project">project</h4>
+<p><strong>yapp_pkg.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<p><strong>yapp_tx_monitor.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Collected Data handle</span></span><br><span class="line">  yapp_packet pkt;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Count packets collected</span></span><br><span class="line">  <span class="keyword">int</span> num_pkt_col;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_monitor)</span><br><span class="line">    `uvm_field_int(num_pkt_col, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"><span class="comment">/////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_monitor</span><br></pre></td></tr></table></figure>
+<p><strong>yapp_tx_driver.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_driver <span class="keyword">extends</span> uvm_driver <span class="variable">#(yapp_packet)</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"> <span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">int</span> num_sent;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_driver)</span><br><span class="line">    `uvm_field_int(num_sent, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Constructor - required syntax for UVM automation and utilities</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">    `uvm_info(get_type_name(), &#123;<span class="string">&quot;start of simulation for &quot;</span>, get_full_name()&#125;, UVM_HIGH)</span><br><span class="line">  <span class="keyword">endfunction</span> : start_of_simulation_phase</span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_driver </span><br></pre></td></tr></table></figure>
+<p><strong>yapp_if.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////// import package //////////////////////</span></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////    </span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Actual Signals</span></span><br><span class="line">  <span class="keyword">logic</span>              in_data_vld;</span><br><span class="line">  <span class="keyword">logic</span>              in_suspend;</span><br><span class="line">  <span class="keyword">logic</span>       [<span class="number">7</span>:<span class="number">0</span>]  in_data;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// signal for transaction recording</span></span><br><span class="line">  <span class="keyword">bit</span> monstart, drvstart;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// local storage for payload</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">7</span>:<span class="number">0</span>] payload_mem [<span class="number">0</span>:<span class="number">63</span>];</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>virtual interface is in package;</p>
+<p><code>yapp_pkg</code> is imported into interface</p>
+</blockquote>
+<blockquote>
+<p>!!!
+<code>typedef uvm_config_db#(virtual yapp_if) yapp_vif_config;</code> is
+<strong>forward declaration</strong></p>
+<p><em>A forward <code>typedef</code> declares an identifier as a type
+in advance of the full definition of that type</em></p>
+</blockquote>
+<h4 id="vcs-compile">VCS compile</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcs -full64 -R -sverilog  -ntb_opts uvm-1.2 +UVM_TESTNAME=short_yapp_012_test  -f vcs.f  </span><br></pre></td></tr></table></figure>
+<p><strong>vcs.f</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-timescale=1ns/1ns</span><br><span class="line"></span><br><span class="line">+incdir+../sv</span><br><span class="line"></span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
+<p><em>output ERROR</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Error-[SV-LCM-PND] Package not defined</span><br><span class="line">../sv/yapp_if.sv, 18</span><br><span class="line">yapp_if, &quot;yapp_pkg::&quot;</span><br><span class="line">  Package scope resolution failed. Token &#x27;yapp_pkg&#x27; is not a package. </span><br><span class="line">  Originating module &#x27;yapp_if&#x27;.</span><br><span class="line">  Move package definition before the use of the package.</span><br></pre></td></tr></table></figure>
+<h4 id="xrun-compile">xrun compile</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xrun -f xrun.f</span><br></pre></td></tr></table></figure>
+<p><strong>xrun.f</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-64</span><br><span class="line"></span><br><span class="line">-uvmhome  CDNS-1.2</span><br><span class="line"></span><br><span class="line">// incdir for include files</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">+UVM_TESTNAME=short_yapp_012_test</span><br><span class="line"></span><br><span class="line">-timescale 1ns/1ns</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
+<p><em>output Error</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">file: ../sv/yapp_if.sv</span><br><span class="line">import yapp_pkg::*;</span><br><span class="line">              |</span><br><span class="line">xmvlog: *E,NOPBIND (../sv/yapp_if.sv,18|14): Package yapp_pkg could not be bound.</span><br><span class="line">        interface worklib.yapp_if:sv</span><br><span class="line">                errors: 1, warnings: 0</span><br></pre></td></tr></table></figure>
+<h4 id="solution">solution</h4>
+<p>place <code>../sv/yapp_pkg.sv</code> before
+<code>../sv/yapp_if.sv</code>.</p>
+<blockquote>
+<p>In this particular example, <code>yapp_pkg</code> is NOT needed in
+interface. just delete <code>import yapp_pkg::*</code> is enough in
+<code>../sv/yapp_if.sv</code></p>
+</blockquote>
+<h3 id="plain-example">plain example</h3>
+<p>The order of compilation unit DON'T matter</p>
+<h4 id="project-1">project</h4>
+<p><strong>hw_top.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.clock_period</span>(<span class="number">32&#x27;d10</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">    <span class="variable">.reset</span>(reset),</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.error</span>(),</span><br><span class="line">    <span class="comment">// YAPP interface signals connection</span></span><br><span class="line">    <span class="variable">.in_data</span>(in0<span class="variable">.in_data</span>),</span><br><span class="line">    <span class="variable">.in_data_vld</span>(in0<span class="variable">.in_data_vld</span>),</span><br><span class="line">    <span class="variable">.in_suspend</span>(in0<span class="variable">.in_suspend</span>),</span><br><span class="line">    <span class="comment">// Output Channels</span></span><br><span class="line">    <span class="comment">//Channel 0   </span></span><br><span class="line">    <span class="variable">.data_0</span>(),</span><br><span class="line">    <span class="variable">.data_vld_0</span>(),</span><br><span class="line">    <span class="variable">.suspend_0</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 1   </span></span><br><span class="line">    <span class="variable">.data_1</span>(),</span><br><span class="line">    <span class="variable">.data_vld_1</span>(),</span><br><span class="line">    <span class="variable">.suspend_1</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 2   </span></span><br><span class="line">    <span class="variable">.data_2</span>(),  </span><br><span class="line">    <span class="variable">.data_vld_2</span>(),</span><br><span class="line">    <span class="variable">.suspend_2</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">// Host Interface Signals</span></span><br><span class="line">    <span class="variable">.haddr</span>(),</span><br><span class="line">    <span class="variable">.hdata</span>(),</span><br><span class="line">    <span class="variable">.hen</span>(),</span><br><span class="line">    <span class="variable">.hwr_rd</span>());</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>yapp_router.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> yapp_router (<span class="keyword">input</span> clock,                              </span><br><span class="line">                    <span class="keyword">input</span> reset,                            </span><br><span class="line">                    <span class="keyword">output</span> error,</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// Input channel</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] in_data,                           </span><br><span class="line">                    <span class="keyword">input</span> in_data_vld,                     </span><br><span class="line">                    <span class="keyword">output</span> in_suspend,</span><br><span class="line">                    <span class="comment">// Output Channels</span></span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_0,  <span class="comment">//Channel 0</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_0, </span><br><span class="line">                    <span class="keyword">input</span> suspend_0, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_1,  <span class="comment">//Channel 1</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_1, </span><br><span class="line">                    <span class="keyword">input</span> suspend_1, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_2,  <span class="comment">//Channel 2</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_2,</span><br><span class="line">                    <span class="keyword">input</span> suspend_2,</span><br><span class="line">     </span><br><span class="line">                    <span class="comment">// Host Interface Signals</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] haddr,</span><br><span class="line">                    <span class="keyword">inout</span> [<span class="number">7</span>:<span class="number">0</span>] hdata,</span><br><span class="line">                    <span class="keyword">input</span> hen,</span><br><span class="line">                    <span class="keyword">input</span> hwr_rd);                            </span><br><span class="line">...</span><br><span class="line"><span class="keyword">endmodule</span>    </span><br></pre></td></tr></table></figure>
+<h4 id="compile">compile</h4>
+<p>place <strong>hw_top.sv</strong> <em>before or after</em>
+<strong>yapp_router.sv</strong> doesn't matter, the compiler (xrun, vcs)
+can compile them successfully.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Always place package before DUT is preferred choice during
+compiling.</p>
+<h3 id="refernce">refernce</h3>
+<p><a
+target="_blank" rel="noopener" href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
+forward declaration</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/23/Precedence-Rule-uvm-config-db/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/23/Precedence-Rule-uvm-config-db/" class="post-title-link" itemprop="url">Precedence Rule of UVM uvm_config_db::set</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-23 18:48:41" itemprop="dateCreated datePublished" datetime="2022-03-23T18:48:41+00:00">2022-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a
+target="_blank" rel="noopener" href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
+<h4 id="two-precedence-rules">Two Precedence rules</h4>
+<p>There are two precedence rules applicable to
+<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
+<ol type="1">
+<li>A <code>set()</code> call in <strong>a context higher up the
+component hierarchy</strong> takes precedence over a <code>set()</code>
+call that occurs lower in the hierarchical path.</li>
+<li>On having <strong>same context field</strong>, <strong>the
+last</strong> <code>set()</code> call takes precedence over the earlier
+<code>set()</code> call.</li>
+</ol>
+<h4 id="example-for-rule---1">Example for rule - 1</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>As you can see , the <code>uvm_config_db::set</code> is after the
+factory <code>type_id::create</code>, but <strong>receive_value</strong>
+is still <strong>100</strong>, I believe that <code>build_phase</code>
+of upper hierarchy finish first before create lower components.</p>
+<p>But the recommendation in literature and many web is place
+<code>uvm_config_db::set</code> before <code>create</code></p>
+</blockquote>
+<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.edaplayground.com/x/jgvh">[complete
+code]</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
+<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
+<p>The <code>set</code> in <code>super.build_phase</code> and
+<code>set</code> in current <code>build_phase</code> are at the
+<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
+<p>base_test</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
+<h4 id="test2---one">test2 - One</h4>
+<blockquote>
+<p><code>yapp_incr_payload_seq</code> override the
+<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
+<strong>yapp_incr_payload_seq</strong> is used.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<h4 id="test2---two">test2 - Two</h4>
+<blockquote>
+<p>the <code>yapp_5_packets</code> in
+<code>super.build_phase(phase)</code> overide
+<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
+<strong>yapp_5_packets</strong> is used</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/22/z-Transform/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/22/z-Transform/" class="post-title-link" itemprop="url">The z-Transform and Its Application</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-22 09:31:24" itemprop="dateCreated datePublished" datetime="2022-03-22T09:31:24+00:00">2022-03-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="fir-equalization">FIR Equalization</h2>
+<h3 id="frequency-response">Frequency Response</h3>
+<p><img src="/2022/03/22/z-Transform/image-20220322093428287.png"
+alt="image-20220322093428287" /> <span class="math display">\[
+z = e^{j\omega T_s}
+\]</span></p>
+<h3 id="unit-impulse">Unit impulse</h3>
+<p>filter coefficients are <strong>[-0.131, 0.595, -0.274]</strong> and
+sampling period is <strong>100ps</strong></p>
+<p><img src="/2022/03/22/z-Transform/image-20220428125454912.png"
+alt="image-20220428125454912" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% Frequency response</span></span><br><span class="line">w = [<span class="number">-0.131</span>, <span class="number">0.595</span>, <span class="number">-0.274</span>];</span><br><span class="line">Ts = <span class="number">100e-12</span>;</span><br><span class="line">[mag, w] = freqz(w, <span class="number">1</span>, [], <span class="number">1</span>/Ts);</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="number">1e9</span>, <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(mag)));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% unit impulse response from transfer function</span></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">z = tf(<span class="string">&#x27;z&#x27;</span>, Ts);</span><br><span class="line">h = <span class="number">-0.131</span> + <span class="number">0.595</span>*z^(<span class="number">-1</span>) <span class="number">-0.274</span>*z^(<span class="number">-2</span>);</span><br><span class="line">[y, t] = impulse(h);</span><br><span class="line">stem(t*<span class="number">1e10</span>, y*Ts);  <span class="comment">% !!! y*Ts is essential</span></span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&quot;unit impulse response&quot;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(\times 100ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>impulse</code>:</p>
+<p>For discrete-time systems, the impulse response is the response to a
+unit area pulse of length <code>Ts</code> and height <code>1/Ts</code>,
+where <code>Ts</code> is the sample time of the system. (This pulse
+approaches <span class="math inline">\(\delta(t)\)</span> as
+<code>Ts</code> approaches zero.)</p>
+<p>Scale output:</p>
+<p>Multiply <code>impulse</code> output with sample period
+<code>Ts</code> in order to correct <code>1/Ts</code> height of
+<code>impulse</code> function.</p>
+</blockquote>
+<h3 id="psd-transformation">PSD transformation</h3>
+<p>If we have power spectrum or power spectrum density of <strong>both
+edge's absolute jitter</strong> (<span
+class="math inline">\(x(n)\)</span>) , <span
+class="math inline">\(P_{\text{xx}}\)</span></p>
+<p>Then <strong>1UI</strong> jitter is <span
+class="math inline">\(x_{\text{1UI}}(n)=x(n)-x(n-1)\)</span>, and
+<strong>Period</strong> jitter is <span
+class="math inline">\(x_{\text{Period}}(n)=x(n)-x(n-2)\)</span>, which
+can be modeled as FIR filter, <span class="math inline">\(H(\omega) =
+1-z^{-k}\)</span>, i.e. <span class="math inline">\(k=1\)</span> for
+<strong>1UI</strong> jitter and <span class="math inline">\(k=2\)</span>
+<strong>Period</strong> jitter <span
+class="math display">\[\begin{align}
+P_{\text{xx}}&#39;(\omega) &amp;= P_{\text{xx}}(\omega) \cdot \left|
+1-z^{-k}  \right|^2 \\
+&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-(e^{j\omega
+T_s})^{-k}  \right|^2 \\
+&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-e^{-j\omega T_s
+k}  \right|^2
+\end{align}\]</span></p>
+<p><img src="/2022/03/22/z-Transform/image-20220519172239916.png"
+alt="image-20220519172239916" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">clear all</span><br><span class="line">close all</span><br><span class="line">clc</span><br><span class="line"></span><br><span class="line">xf_fs = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">0.5</span>;</span><br><span class="line">k = <span class="number">1</span>;</span><br><span class="line">H_1UI = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_1UI = <span class="built_in">abs</span>(H_1UI).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_1UI);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for 1UI jitter&#x27;</span>);</span><br><span class="line"></span><br><span class="line">k = <span class="number">2</span>;</span><br><span class="line">H_period = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_period = <span class="built_in">abs</span>(H_period).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_period);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for Period jitter&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/22/z-Transform/image-20220709104127384.png"
+alt="image-20220709104127384" /> <span class="math display">\[
+x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p><a
+target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf">Sam
+Palermo, ECEN720, Lecture 7: Equalization Introduction &amp; TX FIR
+Eq</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab5_2021.pdf">Sam
+Palermo, ECEN720, Lab5 –Equalization Circuits</a></p>
+<p>B. Razavi, "The z-Transform for Analog Designers [The Analog Mind],"
+IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14,
+Summer 2020.</p>
+<p>Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial
+Data Communications</p>
+<p>Mathuranathan. Digital filter design – Introduction <a
+target="_blank" rel="noopener" href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/">https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

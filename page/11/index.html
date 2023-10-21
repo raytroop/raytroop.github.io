@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">209</span>
+        <span class="site-state-item-count">208</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,179 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/07/Overflowflag-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/07/Overflowflag-verilog/" class="post-title-link" itemprop="url">Overflow Detection in Verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-07 21:12:38" itemprop="dateCreated datePublished" datetime="2022-05-07T21:12:38+00:00">2022-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>Arithmetic operations have a potential to run into a condition known
-as <em>overflow</em>.</li>
-<li>Overflow occurs with respect to the <strong>size of the data
-type</strong> that must accommodate the result.</li>
-<li>Overflow indicates that the result was <em>too large</em> or <em>too
-small</em> to fit in the original data type.</li>
-</ul>
-<h2 id="overflow-when-adding-unsigned-number">Overflow when adding
-unsigned number</h2>
-<p>When two unsigned numbers are added, overflow occurs if</p>
-<ul>
-<li>there is a <strong>carry out</strong> of the leftmost bit.</li>
-</ul>
-<h2 id="overflow-when-adding-signed-numbers">Overflow when adding signed
-numbers</h2>
-<p>When two signed 2's complement numbers are added, overflow is
-detected if:</p>
-<ol type="1">
-<li>both operands are positive and the result is negative, or</li>
-<li>both operands are negative and the result is positive.</li>
-</ol>
-<p>Notice that when operands have <strong>opposite signs</strong>, their
-sum will never overflow. Therefore, <em>overflow can only occur when the
-operands have the same sign</em>.</p>
-<table>
-<thead>
-<tr class="header">
-<th>A</th>
-<th>B</th>
-<th>carryout_sum</th>
-<th>overflow</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>0</strong>11 (3)</td>
-<td><strong>0</strong>11 (3)</td>
-<td>0_<strong>1</strong>10 (6)</td>
-<td>overflow</td>
-</tr>
-<tr class="even">
-<td><strong>1</strong>00 (-4)</td>
-<td><strong>1</strong>00 (-4)</td>
-<td>1_<strong>0</strong>00 (-8)</td>
-<td>underflow</td>
-</tr>
-<tr class="odd">
-<td><strong>1</strong>11 (-1)</td>
-<td><strong>1</strong>10 (-2)</td>
-<td>1_<strong>1</strong>01 (-3)</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>carryout information <strong>ISN'T</strong> needed to detect
-overflow/underflow for signed number addition</p>
-</blockquote>
-<h3 id="extbitmsb">EXTBIT:MSB</h3>
-<p>extended 1bit and msb bit can be used to detect overflow or
-underflow</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span>  [<span class="number">1</span>:<span class="number">0</span>]      acc_inc;</span><br><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span>  [<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>]   acc;</span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">10</span>  :<span class="number">0</span>]   acc_w;  <span class="comment">// extend 1b for saturation</span></span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>]   acc_stat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> acc_w = acc + acc_inc;   <span class="comment">// signed arithmetic</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> acc_stat = (acc_w[<span class="number">10</span>-<span class="number">1</span> +: <span class="number">2</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;(<span class="number">10</span>-<span class="number">1</span>)&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125; : <span class="comment">// up saturation</span></span><br><span class="line">    (acc_w[<span class="number">10</span>-<span class="number">1</span> +: <span class="number">2</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;(<span class="number">10</span>-<span class="number">1</span>)&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;  :   			 <span class="comment">// down saturation</span></span><br><span class="line">    acc_w[<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code> : overflow, up saturation</p>
-<p><code>2'b10</code>: underflow, down saturation</p>
-</blockquote>
-<h2 id="s-complement-negative-number">2's complement negative
-number</h2>
-<ol type="1">
-<li>Flip all bits</li>
-<li>Add <strong>1</strong>.</li>
-</ol>
-<p>N-bit signed number <span class="math display">\[
-A = -M_{N-1}2^{N-1}+\sum_{k=0}^{N-2}M_k2^k
-\]</span> Flip all bits <span class="math display">\[\begin{align}
-A_{flip} &amp;= -(1-M_{N-1})2^{N-1} +\sum_{k=0}^{N-2}(1-M_k)2^k \\
-&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k
--2^{N-1}+\sum_{k=0}^{N-2}2^k \\
-&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k -1
-\end{align}\]</span></p>
-<p>Add <strong>1</strong> <span class="math display">\[\begin{align}
-A_- &amp;= A_{flip}+1 \\
-&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k \\
-&amp;= -A
-\end{align}\]</span></p>
-<h2 id="reference">reference</h2>
-<p>Overflow Detection: <a
-target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -399,7 +226,7 @@ target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/le
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -729,7 +556,7 @@ Processing</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -862,7 +689,7 @@ alt="image-20220507122217830" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1090,7 +917,7 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1181,7 +1008,7 @@ running kernel:</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1529,7 +1356,7 @@ V. Oppenheim, 3rd edition.” (2011).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2040,7 +1867,7 @@ Press. doi:10.1017/CBO9780511835261</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2456,7 +2283,7 @@ capacitance</strong></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2641,7 +2468,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2691,8 +2518,158 @@ those voltage-dependent DRC checks! - siemens</a></p>
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/06/butter-filter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/06/butter-filter/" class="post-title-link" itemprop="url">Butterworth filter</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-06 23:58:11" itemprop="dateCreated datePublished" datetime="2022-04-06T23:58:11+00:00">2022-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="butterworth-filter">Butterworth filter</h2>
+<blockquote>
+<p>function varargout = butter(n, Wn, varargin)</p>
+<p>% BUTTER Butterworth digital and analog filter design.</p>
+<p>% [B,A] = BUTTER(N,Wn) designs an Nth order lowpass digital</p>
+<p>% Butterworth filter and returns the filter coefficients in
+length</p>
+<p>% N+1 vectors B (numerator) and A (denominator). The coefficients</p>
+<p>% are listed in descending powers of z. The cutoff frequency</p>
+<p>% Wn must be <strong>0.0 &lt; Wn &lt; 1.0</strong>, with 1.0
+corresponding to</p>
+<p>% half the sample rate.</p>
+</blockquote>
+<p><span class="math display">\[
+w_n = \frac{f_c}{0.5f_s}
+\]</span></p>
+<p>where <span class="math inline">\(f_c\)</span> is cutoff frequency,
+<span class="math inline">\(f_s\)</span> is sampling frequency</p>
+<p><span class="math display">\[
+\Phi = \omega T_s \text { ,}\Phi \in [0,2\pi]
+\]</span></p>
+<p>Find the relationship between <span
+class="math inline">\(\omega_n\)</span> and </p>
+<p><span class="math display">\[\begin{align}
+\Phi &amp;= 2\pi f_c \frac{1}{f_s}  \\
+&amp;=\pi \frac{f_c}{0.5f_s} \\
+&amp;= \pi \omega _n
+\end{align}\]</span></p>
+<p>Given <span class="math inline">\(f_c\)</span> is 300 Hz and <span
+class="math inline">\(f_s\)</span> is 1000 Hz, we get <span
+class="math display">\[
+\omega_n = \frac{f_c}{0.5*f_s} = 0.6
+\]</span> and in <code>rad/sample</code> unit, cutoff frequency is <span
+class="math display">\[
+\Phi = \pi * \omega_n = 0.6 \pi \text {, unit: rad/sample}
+\]</span></p>
+<h3 id="z-transform">Z-transform</h3>
+<p><span class="math display">\[
+z= e^{-j\Phi}
+\]</span></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fc = <span class="number">300</span>;</span><br><span class="line">fs = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">[b,a] = butter(<span class="number">6</span>,fc/(fs/<span class="number">2</span>));</span><br><span class="line">fprintf(<span class="string">&#x27;The numerator b is:\n &#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;%g &#x27;</span>, b);</span><br><span class="line">fprintf(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;The denominator a is:\n &#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;%g &#x27;</span>, a);</span><br><span class="line">fprintf(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">freqz(b, a);</span><br><span class="line">ylim([<span class="number">-400</span>, <span class="number">100</span>])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The numerator (<code>b</code>) and denominator (<code>a</code>)
+depend on the cutoff frequency and the order; the cutoff frequency is
+denominated with <span class="math inline">\(\omega_n\)</span> . Just
+multiply the <span class="math inline">\(\pi\)</span>, we get the
+Z-transform <span class="math inline">\(\Phi\)</span> rad/sample, which
+is the plot of <code>freqz(b, a)</code></p>
+</blockquote>
+<p><img src="/2022/04/06/butter-filter/image-20220407100948965.png"
+alt="image-20220407100948965" /></p>
+<h3 id="transfer-function-with-sample-information">Transfer function
+with sample information</h3>
+<p><span class="math display">\[
+z = e^{-j\omega T_s}
+\]</span></p>
+<p><img src="/2022/04/06/butter-filter/image-20220407103451265.png"
+alt="image-20220407103451265" /></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">[h,f] = freqz(b,a,[],fs);</span><br><span class="line">hdb20 = <span class="number">20</span>*log10(abs(h));</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">plot(f, hdb20, &#x27;b&#x27;)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;DTFT <span class="keyword">with</span> freqz <span class="keyword">and</span> sample rate&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">sys = tf(b, a, <span class="number">1</span>/fs);</span><br><span class="line">[mag, phs, wout] = bode(sys);</span><br><span class="line">wout = wout(:);</span><br><span class="line">whz = wout/<span class="number">2</span>/pi;</span><br><span class="line">hdb = <span class="number">20</span>*log10(mag(:));</span><br><span class="line">plot(whz, hdb, &#x27;r-o&#x27;);</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;DTFT <span class="keyword">with</span> bode <span class="keyword">and</span> sample period&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">plot(f, hdb20,&#x27;b&#x27;, whz, hdb, &#x27;ro&#x27;);</span><br><span class="line">legend(&#x27;freqz&#x27;, &#x27;bode&#x27;)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;overlay <span class="keyword">and</span> comparision&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="time-domain-from-frequency-domain">Time Domain from Frequency
+Domain</h2>
+<p>Assume input is <strong>sampled by</strong> <span
+class="math inline">\(f_s\)</span></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">figure(<span class="number">3</span>)</span><br><span class="line">% <span class="keyword">assume</span> x is sampled by fs</span><br><span class="line">x = <span class="keyword">rand</span>(<span class="number">1</span>, <span class="number">50</span>);</span><br><span class="line">y = filter(b, a, x);</span><br><span class="line">xt = (<span class="number">1</span>:<span class="number">50</span>);</span><br><span class="line">plot(xt, x, &#x27;-s&#x27;, xt, y, &#x27;-o&#x27;)</span><br><span class="line">legend(&#x27;<span class="keyword">input</span>&#x27;, &#x27;<span class="keyword">output</span>&#x27;)</span><br><span class="line">xlabel(&#x27;Sample&#x27;)</span><br><span class="line">ylabel(&#x27;mag&#x27;)</span><br><span class="line">title(&#x27;filter in Time domain&#x27;)</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/04/06/butter-filter/image-20220407113330972.png"
+alt="image-20220407113330972" /></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

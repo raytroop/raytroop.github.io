@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">181</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">211</span>
+        <span class="site-state-item-count">209</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -315,7 +315,7 @@ during synthesis</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -406,7 +406,7 @@ alt="image-20230129223248655" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,7 +499,7 @@ alt="image-20230114220458438" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -640,7 +640,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -967,7 +967,7 @@ McGraw-Hill, 2017.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -989,7 +989,32 @@ McGraw-Hill, 2017.</p>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="thevenin-and-norton-equivalent-circuits">Thevenin and Norton
+          <h2 id="demystifying-stb-and-pstb-in-spectre">Demystifying stb and pstb
+in Spectre</h2>
+<p>All credits to my colleague, Zhang Wenpian.</p>
+<h3 id="spectres-stb-analysis">Spectre's stb analysis</h3>
+<p>Spectre <strong>stb</strong>'s "loopgain" is negative of "T" in
+paper<sup>[1]</sup> <span class="math display">\[
+T = \frac{2(AD-BC) - A + D}{2(AD-BC)-A+D-1}
+\]</span></p>
+<p>AC simulation testbench, shown as below,</p>
+<p><img src="/2023/01/01/insight/stb_pstb.drawio.svg"
+alt="stb_pstb.drawio" /></p>
+<ol type="1">
+<li><p><span class="math inline">\(I_{inj}\)</span> = 0, <span
+class="math inline">\(V_{inj}\)</span> = 1</p>
+<p>B = if, D = ve</p></li>
+<li><p><span class="math inline">\(I_{inj}\)</span> = 1, <span
+class="math inline">\(V_{inj}\)</span> = 0</p>
+<p>A = if, C = ve</p></li>
+</ol>
+<h3 id="spectres-pstb-analysis">Spectre's pstb analysis</h3>
+<p>Spectre <strong>pstb</strong> is similar to stb, just set
+<strong>pac</strong> as <strong>1</strong> instead of
+<strong>ac</strong> in current source and voltage source.</p>
+<p>This analysis just use <strong>harmonic 0</strong> transfer function
+in pac analysis, which has limitation.</p>
+<h2 id="thevenin-and-norton-equivalent-circuits">Thevenin and Norton
 Equivalent Circuits</h2>
 <h3 id="戴维南定理">戴维南定理</h3>
 <p><img src="/2023/01/01/insight/image-20231021084850078.png"
@@ -1253,6 +1278,11 @@ alt="image-20230103220933081" /></p>
 <p>small gm/ID for High ro</p>
 </blockquote>
 <h2 id="reference">reference</h2>
+<p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
+small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
+no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.</p>
+<p>Open loop gain analysis and "STB" method [<a
+target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux">https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux</a>]</p>
 <p>The Analog Designer's Toolbox (ADT) | Invited Talk by IEEE Santa
 Clara Valley Section CAS Society, <a
 target="_blank" rel="noopener" href="https://youtu.be/FT6kKC5OdE0">https://youtu.be/FT6kKC5OdE0</a></p>
@@ -1334,7 +1364,7 @@ Solid-State Circuits Magazine, Vol. 7, Issue 3, pp. 8-10, Summer
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1422,7 +1452,7 @@ target="_blank" rel="noopener" href="https://superuser.com/q/211798">https://sup
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1639,7 +1669,7 @@ target="_blank" rel="noopener" href="https://www.edn.com/demystifying-pole-zero-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1964,7 +1994,7 @@ target="_blank" rel="noopener" href="https://community.cadence.com/cadence_blogs
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

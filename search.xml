@@ -2917,13 +2917,8 @@ Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
 Publishers Inc., San Francisco, CA, USA.</p>
 ]]></content>
       <categories>
-        <category>dsp</category>
+        <category>noise</category>
       </categories>
-      <tags>
-        <tag>noise</tag>
-        <tag>sampling</tag>
-        <tag>nyquist</tag>
-      </tags>
   </entry>
   <entry>
     <title>Antenna Effect</title>
@@ -3973,8 +3968,8 @@ href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com
         <category>dsp</category>
       </categories>
       <tags>
-        <tag>nyquist</tag>
         <tag>fft</tag>
+        <tag>nyquist</tag>
       </tags>
   </entry>
   <entry>
@@ -4587,9 +4582,9 @@ href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ec
         <category>analog</category>
       </categories>
       <tags>
-        <tag>noise</tag>
         <tag>dnw</tag>
         <tag>coupling</tag>
+        <tag>noise</tag>
         <tag>substrate</tag>
       </tags>
   </entry>
@@ -6905,9 +6900,9 @@ href="https://github.com/unpingco/Python-for-Signal-Processing/blob/master/Windo
         <category>dsp</category>
       </categories>
       <tags>
-        <tag>noise</tag>
         <tag>fft</tag>
         <tag>dft</tag>
+        <tag>noise</tag>
         <tag>enbw</tag>
       </tags>
   </entry>
@@ -8058,7 +8053,32 @@ alt="pma_dig_bumps.drawio" /></p>
   <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
-    <content><![CDATA[<h2 id="thevenin-and-norton-equivalent-circuits">Thevenin and Norton
+    <content><![CDATA[<h2 id="demystifying-stb-and-pstb-in-spectre">Demystifying stb and pstb
+in Spectre</h2>
+<p>All credits to my colleague, Zhang Wenpian.</p>
+<h3 id="spectres-stb-analysis">Spectre's stb analysis</h3>
+<p>Spectre <strong>stb</strong>'s "loopgain" is negative of "T" in
+paper<sup>[1]</sup> <span class="math display">\[
+T = \frac{2(AD-BC) - A + D}{2(AD-BC)-A+D-1}
+\]</span></p>
+<p>AC simulation testbench, shown as below,</p>
+<p><img src="/2023/01/01/insight/stb_pstb.drawio.svg"
+alt="stb_pstb.drawio" /></p>
+<ol type="1">
+<li><p><span class="math inline">\(I_{inj}\)</span> = 0, <span
+class="math inline">\(V_{inj}\)</span> = 1</p>
+<p>B = if, D = ve</p></li>
+<li><p><span class="math inline">\(I_{inj}\)</span> = 1, <span
+class="math inline">\(V_{inj}\)</span> = 0</p>
+<p>A = if, C = ve</p></li>
+</ol>
+<h3 id="spectres-pstb-analysis">Spectre's pstb analysis</h3>
+<p>Spectre <strong>pstb</strong> is similar to stb, just set
+<strong>pac</strong> as <strong>1</strong> instead of
+<strong>ac</strong> in current source and voltage source.</p>
+<p>This analysis just use <strong>harmonic 0</strong> transfer function
+in pac analysis, which has limitation.</p>
+<h2 id="thevenin-and-norton-equivalent-circuits">Thevenin and Norton
 Equivalent Circuits</h2>
 <h3 id="戴维南定理">戴维南定理</h3>
 <p><img src="/2023/01/01/insight/image-20231021084850078.png"
@@ -8322,6 +8342,11 @@ alt="image-20230103220933081" /></p>
 <p>small gm/ID for High ro</p>
 </blockquote>
 <h2 id="reference">reference</h2>
+<p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
+small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
+no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.</p>
+<p>Open loop gain analysis and "STB" method [<a
+href="https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux">https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux</a>]</p>
 <p>The Analog Designer's Toolbox (ADT) | Invited Talk by IEEE Santa
 Clara Valley Section CAS Society, <a
 href="https://youtu.be/FT6kKC5OdE0">https://youtu.be/FT6kKC5OdE0</a></p>
@@ -13182,10 +13207,10 @@ V. Oppenheim, 3rd edition.” (2011).</p>
         <category>dsp</category>
       </categories>
       <tags>
-        <tag>sampling</tag>
         <tag>fft</tag>
         <tag>dft</tag>
         <tag>fir</tag>
+        <tag>sampling</tag>
         <tag>freqz</tag>
       </tags>
   </entry>
@@ -14363,49 +14388,6 @@ Technology. Solid-State Circuits, IEEE Journal of. 47. 3232-3248.
         <tag>sst</tag>
         <tag>termination</tag>
         <tag>tx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Demystifying stb and pstb in Spectre</title>
-    <url>/2022/03/06/stb-pstb-spectre/</url>
-    <content><![CDATA[<p>All credits to my colleague, Zhang Wenpian.</p>
-<h3 id="spectres-stb-analysis">Spectre's stb analysis</h3>
-<p>Spectre <strong>stb</strong>'s "loopgain" is negative of "T" in
-paper<sup>[1]</sup> <span class="math display">\[
-T = \frac{2(AD-BC) - A + D}{2(AD-BC)-A+D-1}
-\]</span></p>
-<p>AC simulation testbench, shown as below,</p>
-<p><img src="/2022/03/06/stb-pstb-spectre/stb_pstb.drawio.svg"
-alt="stb_pstb.drawio" /></p>
-<ol type="1">
-<li><p><span class="math inline">\(I_{inj}\)</span> = 0, <span
-class="math inline">\(V_{inj}\)</span> = 1</p>
-<p>B = if, D = ve</p></li>
-<li><p><span class="math inline">\(I_{inj}\)</span> = 1, <span
-class="math inline">\(V_{inj}\)</span> = 0</p>
-<p>A = if, C = ve</p></li>
-</ol>
-<h3 id="spectres-pstb-analysis">Spectre's pstb analysis</h3>
-<p>Spectre <strong>pstb</strong> is similar to stb, just set
-<strong>pac</strong> as <strong>1</strong> instead of
-<strong>ac</strong> in current source and voltage source.</p>
-<p>This analysis just use <strong>harmonic 0</strong> transfer function
-in pac analysis, which has limitation.</p>
-<h3 id="reference">reference</h3>
-<p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
-small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
-no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.</p>
-<p>Open loop gain analysis and "STB" method <a
-href="https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux">https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>stability</tag>
-        <tag>spectre</tag>
-        <tag>stb</tag>
-        <tag>pstb</tag>
       </tags>
   </entry>
   <entry>

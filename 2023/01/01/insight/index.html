@@ -18,13 +18,14 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Thevenin and Norton Equivalent Circuits 戴维南定理  等效电阻的计算方法   使用外加电源法时， 全部独立电源需要置零  诺顿定理  Lemma of Razavi \[ A_V &#x3D; -G_m R_{out} \]   Design of Analog CMOS Integrated Circuits, Second Edition - Behzad Raz">
+    <meta name="description" content="Demystifying stb and pstb in Spectre All credits to my colleague, Zhang Wenpian. Spectre&#39;s stb analysis Spectre stb&#39;s &quot;loopgain&quot; is negative of &quot;T&quot; in paper[1] \[ T &#x3D; \frac{2(AD-BC) - A + D}{2(AD-BC)-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Circuit insight">
 <meta property="og:url" content="http://example.com/2023/01/01/insight/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Thevenin and Norton Equivalent Circuits 戴维南定理  等效电阻的计算方法   使用外加电源法时， 全部独立电源需要置零  诺顿定理  Lemma of Razavi \[ A_V &#x3D; -G_m R_{out} \]   Design of Analog CMOS Integrated Circuits, Second Edition - Behzad Raz">
+<meta property="og:description" content="Demystifying stb and pstb in Spectre All credits to my colleague, Zhang Wenpian. Spectre&#39;s stb analysis Spectre stb&#39;s &quot;loopgain&quot; is negative of &quot;T&quot; in paper[1] \[ T &#x3D; \frac{2(AD-BC) - A + D}{2(AD-BC)-">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/01/01/insight/stb_pstb.drawio.svg">
 <meta property="og:image" content="http://example.com/2023/01/01/insight/image-20231021084850078.png">
 <meta property="og:image" content="http://example.com/2023/01/01/insight/image-20231021085151943.png">
 <meta property="og:image" content="http://example.com/2023/01/01/insight/image-20231021090448282.png">
@@ -53,10 +54,10 @@
 <meta property="og:image" content="http://example.com/2023/01/01/insight/image-20230102000059723.png">
 <meta property="og:image" content="http://example.com/2023/01/01/insight/image-20230103220933081.png">
 <meta property="article:published_time" content="2023-01-01T17:50:13.000Z">
-<meta property="article:modified_time" content="2023-10-21T04:05:02.664Z">
+<meta property="article:modified_time" content="2023-10-21T14:48:05.564Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/01/01/insight/image-20231021084850078.png">
+<meta name="twitter:image" content="http://example.com/2023/01/01/insight/stb_pstb.drawio.svg">
 
 
 <link rel="canonical" href="http://example.com/2023/01/01/insight/">
@@ -165,13 +166,14 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#thevenin-and-norton-equivalent-circuits"><span class="nav-number">1.</span> <span class="nav-text">Thevenin and Norton
-Equivalent Circuits</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%B4%E7%BB%B4%E5%8D%97%E5%AE%9A%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">戴维南定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E6%95%88%E7%94%B5%E9%98%BB%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">等效电阻的计算方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BA%E9%A1%BF%E5%AE%9A%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">诺顿定理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lemma-of-razavi"><span class="nav-number">1.3.1.</span> <span class="nav-text">Lemma of Razavi</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#millers-approximation-right-half-plane-zero"><span class="nav-number">2.</span> <span class="nav-text">Miller’s
-Approximation: right-half-plane zero</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-mitigate-impact-of-zero"><span class="nav-number">3.</span> <span class="nav-text">How to Mitigate Impact of
-Zero</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lectures"><span class="nav-number">3.1.</span> <span class="nav-text">Lectures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#papers"><span class="nav-number">3.2.</span> <span class="nav-text">Papers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#books-chapters"><span class="nav-number">3.3.</span> <span class="nav-text">Book&#39;s chapters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#example---cascode-compensation"><span class="nav-number">3.4.</span> <span class="nav-text">Example - cascode
-compensation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#non-overlapping-clock"><span class="nav-number">4.</span> <span class="nav-text">Non Overlapping Clock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#single-ended-amplifier-offset-voltage"><span class="nav-number">5.</span> <span class="nav-text">Single ended Amplifier
-Offset Voltage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unity-gain-buffer"><span class="nav-number">5.1.</span> <span class="nav-text">unity gain buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-inverting-amplifier"><span class="nav-number">5.2.</span> <span class="nav-text">non-inverting amplifier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gotcha-mos-ron"><span class="nav-number">6.</span> <span class="nav-text">Gotcha MOS ron</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channel-length-modulation"><span class="nav-number">7.</span> <span class="nav-text">Channel-length modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biasing-current-source-and-global-variation-monte-carlo-simulation"><span class="nav-number">8.</span> <span class="nav-text">Biasing
-current source and global variation Monte Carlo simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gmid-adt"><span class="nav-number">9.</span> <span class="nav-text">gm&#x2F;ID: ADT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">10.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#demystifying-stb-and-pstb-in-spectre"><span class="nav-number">1.</span> <span class="nav-text">Demystifying stb and pstb
+in Spectre</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spectres-stb-analysis"><span class="nav-number">1.1.</span> <span class="nav-text">Spectre&#39;s stb analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spectres-pstb-analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Spectre&#39;s pstb analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thevenin-and-norton-equivalent-circuits"><span class="nav-number">2.</span> <span class="nav-text">Thevenin and Norton
+Equivalent Circuits</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%B4%E7%BB%B4%E5%8D%97%E5%AE%9A%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">戴维南定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E6%95%88%E7%94%B5%E9%98%BB%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">等效电阻的计算方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BA%E9%A1%BF%E5%AE%9A%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">诺顿定理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lemma-of-razavi"><span class="nav-number">2.3.1.</span> <span class="nav-text">Lemma of Razavi</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#millers-approximation-right-half-plane-zero"><span class="nav-number">3.</span> <span class="nav-text">Miller’s
+Approximation: right-half-plane zero</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-mitigate-impact-of-zero"><span class="nav-number">4.</span> <span class="nav-text">How to Mitigate Impact of
+Zero</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lectures"><span class="nav-number">4.1.</span> <span class="nav-text">Lectures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#papers"><span class="nav-number">4.2.</span> <span class="nav-text">Papers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#books-chapters"><span class="nav-number">4.3.</span> <span class="nav-text">Book&#39;s chapters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#example---cascode-compensation"><span class="nav-number">4.4.</span> <span class="nav-text">Example - cascode
+compensation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#non-overlapping-clock"><span class="nav-number">5.</span> <span class="nav-text">Non Overlapping Clock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#single-ended-amplifier-offset-voltage"><span class="nav-number">6.</span> <span class="nav-text">Single ended Amplifier
+Offset Voltage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unity-gain-buffer"><span class="nav-number">6.1.</span> <span class="nav-text">unity gain buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-inverting-amplifier"><span class="nav-number">6.2.</span> <span class="nav-text">non-inverting amplifier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gotcha-mos-ron"><span class="nav-number">7.</span> <span class="nav-text">Gotcha MOS ron</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channel-length-modulation"><span class="nav-number">8.</span> <span class="nav-text">Channel-length modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biasing-current-source-and-global-variation-monte-carlo-simulation"><span class="nav-number">9.</span> <span class="nav-text">Biasing
+current source and global variation Monte Carlo simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gmid-adt"><span class="nav-number">10.</span> <span class="nav-text">gm&#x2F;ID: ADT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">11.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -184,7 +186,7 @@ current source and global variation Monte Carlo simulation</span></a></li><li cl
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">181</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -195,7 +197,7 @@ current source and global variation Monte Carlo simulation</span></a></li><li cl
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">211</span>
+        <span class="site-state-item-count">209</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -266,7 +268,7 @@ current source and global variation Monte Carlo simulation</span></a></li><li cl
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:05:02" itemprop="dateModified" datetime="2023-10-21T04:05:02+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-21 14:48:05" itemprop="dateModified" datetime="2023-10-21T14:48:05+00:00">2023-10-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,7 +289,32 @@ current source and global variation Monte Carlo simulation</span></a></li><li cl
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="thevenin-and-norton-equivalent-circuits">Thevenin and Norton
+    <div class="post-body" itemprop="articleBody"><h2 id="demystifying-stb-and-pstb-in-spectre">Demystifying stb and pstb
+in Spectre</h2>
+<p>All credits to my colleague, Zhang Wenpian.</p>
+<h3 id="spectres-stb-analysis">Spectre's stb analysis</h3>
+<p>Spectre <strong>stb</strong>'s "loopgain" is negative of "T" in
+paper<sup>[1]</sup> <span class="math display">\[
+T = \frac{2(AD-BC) - A + D}{2(AD-BC)-A+D-1}
+\]</span></p>
+<p>AC simulation testbench, shown as below,</p>
+<p><img src="/2023/01/01/insight/stb_pstb.drawio.svg"
+alt="stb_pstb.drawio" /></p>
+<ol type="1">
+<li><p><span class="math inline">\(I_{inj}\)</span> = 0, <span
+class="math inline">\(V_{inj}\)</span> = 1</p>
+<p>B = if, D = ve</p></li>
+<li><p><span class="math inline">\(I_{inj}\)</span> = 1, <span
+class="math inline">\(V_{inj}\)</span> = 0</p>
+<p>A = if, C = ve</p></li>
+</ol>
+<h3 id="spectres-pstb-analysis">Spectre's pstb analysis</h3>
+<p>Spectre <strong>pstb</strong> is similar to stb, just set
+<strong>pac</strong> as <strong>1</strong> instead of
+<strong>ac</strong> in current source and voltage source.</p>
+<p>This analysis just use <strong>harmonic 0</strong> transfer function
+in pac analysis, which has limitation.</p>
+<h2 id="thevenin-and-norton-equivalent-circuits">Thevenin and Norton
 Equivalent Circuits</h2>
 <h3 id="戴维南定理">戴维南定理</h3>
 <p><img src="/2023/01/01/insight/image-20231021084850078.png"
@@ -551,6 +578,11 @@ alt="image-20230103220933081" /></p>
 <p>small gm/ID for High ro</p>
 </blockquote>
 <h2 id="reference">reference</h2>
+<p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
+small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
+no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.</p>
+<p>Open loop gain analysis and "STB" method [<a
+target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux">https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux</a>]</p>
 <p>The Analog Designer's Toolbox (ADT) | Invited Talk by IEEE Santa
 Clara Valley Section CAS Society, <a
 target="_blank" rel="noopener" href="https://youtu.be/FT6kKC5OdE0">https://youtu.be/FT6kKC5OdE0</a></p>

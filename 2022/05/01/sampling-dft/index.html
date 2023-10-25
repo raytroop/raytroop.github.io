@@ -20,7 +20,7 @@
 
     <meta name="description" content="The sampling process mathematically in the two stages:  impulse train modulator \[ x_s(t)&#x3D;x_c(t)s(t) \] impulse train to a sequence   impulse train modulator   Arrows with length proportional to their">
 <meta property="og:type" content="article">
-<meta property="og:title" content="impulse train to discrete-time sequence">
+<meta property="og:title" content="Sampling of Continuous Time Signals">
 <meta property="og:url" content="http://example.com/2022/05/01/sampling-dft/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
 <meta property="og:description" content="The sampling process mathematically in the two stages:  impulse train modulator \[ x_s(t)&#x3D;x_c(t)s(t) \] impulse train to a sequence   impulse train modulator   Arrows with length proportional to their">
@@ -30,15 +30,9 @@
 <meta property="og:image" content="http://example.com/2022/05/01/sampling-dft/image-20230519002317865.png">
 <meta property="og:image" content="http://example.com/2022/05/01/sampling-dft/image-20230519000938294.png">
 <meta property="og:image" content="http://example.com/2022/05/01/sampling-dft/image-20220501020004068.png">
-<meta property="og:image" content="http://example.com/2022/05/01/sampling-dft/image-20220520221108500.png">
 <meta property="article:published_time" content="2022-05-01T01:03:18.000Z">
-<meta property="article:modified_time" content="2023-10-21T15:31:23.467Z">
+<meta property="article:modified_time" content="2023-10-25T16:29:56.445Z">
 <meta property="article:author" content="Guo">
-<meta property="article:tag" content="fft">
-<meta property="article:tag" content="dft">
-<meta property="article:tag" content="fir">
-<meta property="article:tag" content="sampling">
-<meta property="article:tag" content="freqz">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2022/05/01/sampling-dft/image-20230519000700841.png">
 
@@ -47,10 +41,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/05/01/sampling-dft/","path":"2022/05/01/sampling-dft/","title":"impulse train to discrete-time sequence"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/05/01/sampling-dft/","path":"2022/05/01/sampling-dft/","title":"Sampling of Continuous Time Signals"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>impulse train to discrete-time sequence | KNOW-HOW</title>
+<title>Sampling of Continuous Time Signals | KNOW-HOW</title>
   
 
 
@@ -150,9 +144,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#impulse-train-modulator"><span class="nav-number">1.</span> <span class="nav-text">impulse train modulator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#x_st-in-frequency-domain"><span class="nav-number">1.1.</span> <span class="nav-text">\(x_s(t)\) in Frequency-domain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#impulse-train-to-a-sequence"><span class="nav-number">2.</span> <span class="nav-text">impulse train to a sequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#impulse-invariance"><span class="nav-number">3.</span> <span class="nav-text">Impulse Invariance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application---transfer-function"><span class="nav-number">4.</span> <span class="nav-text">Application - Transfer
-function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sampled-impulse-response"><span class="nav-number">4.1.</span> <span class="nav-text">sampled impulse response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#useful-functions"><span class="nav-number">4.2.</span> <span class="nav-text">useful functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#practical-example"><span class="nav-number">4.3.</span> <span class="nav-text">Practical Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fourier-transform-of-impusle-train"><span class="nav-number">5.</span> <span class="nav-text">Fourier transform of impusle
-train</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#periodic-continuous-time"><span class="nav-number">5.1.</span> <span class="nav-text">Periodic Continuous-Time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#periodic-discrete-time"><span class="nav-number">5.2.</span> <span class="nav-text">Periodic Discrete-Time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multiplication-property-of-fourier-transform"><span class="nav-number">5.3.</span> <span class="nav-text">Multiplication
-Property of Fourier Transform</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gotcha"><span class="nav-number">6.</span> <span class="nav-text">Gotcha</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">reference</span></a></li></ol></div>
+function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sampled-impulse-response"><span class="nav-number">4.1.</span> <span class="nav-text">sampled impulse response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#useful-functions"><span class="nav-number">4.2.</span> <span class="nav-text">useful functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#practical-example"><span class="nav-number">4.3.</span> <span class="nav-text">Practical Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gotcha"><span class="nav-number">5.</span> <span class="nav-text">Gotcha</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -176,7 +168,7 @@ Property of Fourier Transform</span></a></li></ol></li><li class="nav-item nav-l
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">208</span>
+        <span class="site-state-item-count">204</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -224,12 +216,12 @@ Property of Fourier Transform</span></a></li></ol></li><li class="nav-item nav-l
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="impulse train to discrete-time sequence | KNOW-HOW">
+      <meta itemprop="name" content="Sampling of Continuous Time Signals | KNOW-HOW">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          impulse train to discrete-time sequence
+          Sampling of Continuous Time Signals
         </h1>
 
         <div class="post-meta-container">
@@ -247,7 +239,7 @@ Property of Fourier Transform</span></a></li></ol></li><li class="nav-item nav-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 15:31:23" itemprop="dateModified" datetime="2023-10-21T15:31:23+00:00">2023-10-21</time>
+      <time title="Modified: 2023-10-25 16:29:56" itemprop="dateModified" datetime="2023-10-25T16:29:56+00:00">2023-10-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -327,14 +319,14 @@ zero,except at integer multiples of <span
 class="math inline">\(T\)</span>.</p></li>
 <li><p>The sequence <span class="math inline">\(x[n]\)</span> is indexed
 on the integer variable <span class="math inline">\(n\)</span>, which
-introduces a *time normalization, <span
+introduces a <em>time normalization</em>, <span
 class="math inline">\(x[n]\)</span> contains <strong>no</strong>
 explicit information about the sampling period <span
 class="math inline">\(T\)</span></p></li>
 <li><p>The samples of <span class="math inline">\(x_c(t)\)</span> are
 represented by <em>finite numbers</em> in <span
-class="math inline">\(x[n]\)</span> rather than as the *areas of
-impulses in <span class="math inline">\(x_s(t)\)</span></p></li>
+class="math inline">\(x[n]\)</span> rather than as the <em>areas of
+impulses</em> in <span class="math inline">\(x_s(t)\)</span></p></li>
 </ul>
 </blockquote>
 <p>Our eventual objective is to express <span
@@ -422,43 +414,6 @@ impulse</p>
 <p><img src="/2022/05/01/sampling-dft/image-20220501020004068.png"
 alt="image-20220501020004068" /></p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% continuous system</span></span><br><span class="line">s = tf(<span class="string">&#x27;s&#x27;</span>);</span><br><span class="line">h = <span class="number">2</span>*<span class="built_in">pi</span>/(<span class="number">2</span>*<span class="built_in">pi</span>+s);</span><br><span class="line">[mag, phs, wout] = bode(h);</span><br><span class="line">fct = wout(:)/<span class="number">2</span>/<span class="built_in">pi</span>;</span><br><span class="line">Hct_dB = <span class="number">20</span>*<span class="built_in">log10</span>(mag(:));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fstep = <span class="number">0.01</span>;           <span class="comment">% freq resolution</span></span><br><span class="line">fnyqst = <span class="number">100</span>;</span><br><span class="line">Ts = <span class="number">1</span>/(<span class="number">2</span>*fnyqst);</span><br><span class="line">Fs = <span class="number">1</span>/Ts;              <span class="comment">% sampling freq</span></span><br><span class="line">Ns = <span class="built_in">ceil</span>(Fs/fstep);    <span class="comment">% samping points</span></span><br><span class="line">fstep = Fs/Ns;          <span class="comment">% update fstep</span></span><br><span class="line">t = (<span class="number">0</span>:Ns<span class="number">-1</span>)*Ts;        <span class="comment">% sampling time points</span></span><br><span class="line"></span><br><span class="line">y = impulse(h, t);      <span class="comment">% impulse resp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% modelling as discrete system</span></span><br><span class="line">Y = fft(y);                 <span class="comment">% dft</span></span><br><span class="line">Hfft = Y * Ts;              <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfft_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfft(<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)));</span><br><span class="line">ffft = (<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)*fstep - fstep;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Hfir, ffir] = freqz(y, <span class="number">1</span>, [], <span class="number">1</span>/Ts);   <span class="comment">% modelling as FIR</span></span><br><span class="line">Hfir = Hfir * Ts;           <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfir_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfir));</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot</span></span><br><span class="line">semilogx(fct, Hct_dB, <span class="string">&#x27;k&#x27;</span>, ffft, Hfft_dB, <span class="string">&#x27;r.-&#x27;</span>, ffir, Hfir_dB, <span class="string">&#x27;b--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;bode(s)&#x27;</span>, <span class="string">&#x27;fft&#x27;</span>, <span class="string">&#x27;FIR model&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">xlim([<span class="number">1e-2</span> <span class="number">1e2</span>]);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response of different methods&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="fourier-transform-of-impusle-train">Fourier transform of impusle
-train</h2>
-<h3 id="periodic-continuous-time">Periodic Continuous-Time</h3>
-<p><span class="math display">\[
-x(t) = \sum_{n \in \mathbb{Z}}\delta(t-nT)\overset{FT}{\longrightarrow}
-\frac{2\pi}{T}\sum_{k\in \mathbb{Z}}\delta(\omega - k\frac{2\pi}{T})
-\]</span></p>
-<h3 id="periodic-discrete-time">Periodic Discrete-Time</h3>
-<p>Consider the periodic discrete-time impulse train <span
-class="math display">\[
-\tilde{p}[n] = \sum_{r=-\infty}^{\infty}\delta[n-rN]
-\]</span> <strong>DFS</strong> of <span
-class="math inline">\(\tilde{p}[n]\)</span> is <span
-class="math display">\[
-\tilde{P}[k] = 1,\quad \text{for all k.}
-\]</span> Therefore, the <strong>DTFT</strong> of <span
-class="math inline">\(\tilde{p}[n]\)</span> is <span
-class="math display">\[
-\tilde{P}(e^{j\omega}) =
-\frac{2\pi}{N}\sum_{k=-\infty}^{\infty}\delta\left( \omega - \frac{2\pi
-k}{N} \right)
-\]</span></p>
-<h3 id="multiplication-property-of-fourier-transform">Multiplication
-Property of Fourier Transform</h3>
-<p><span class="math display">\[
-x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
-\]</span> Then sampled signal fourier transform is <span
-class="math display">\[\begin{align}
-X_s(\omega) &amp;= \frac{1}{2\pi}X_{\delta}(\omega)*X(\omega) \\
-&amp;= \frac{1}{T} \left(\sum_{k\in \mathbb{Z}}\delta(\omega -
-k\frac{2\pi}{T})\right) * X(\omega)
-\end{align}\]</span></p>
-<p><a
-target="_blank" rel="noopener" href="https://web.stanford.edu/class/ee179/lectures/notes11.pdf">Lecture
-11: Sampling and Pulse Modulation</a></p>
-<p><img src="/2022/05/01/sampling-dft/image-20220520221108500.png"
-alt="image-20220520221108500" /></p>
 <h2 id="gotcha">Gotcha</h2>
 <p>A remarkable fact of linear systems is that the <strong>complex
 exponentials</strong> are <strong>eigenfunctions</strong> of a linear
@@ -540,13 +495,6 @@ V. Oppenheim, 3rd edition.” (2011).</p>
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/fft/" rel="tag"># fft</a>
-              <a href="/tags/dft/" rel="tag"># dft</a>
-              <a href="/tags/fir/" rel="tag"># fir</a>
-              <a href="/tags/sampling/" rel="tag"># sampling</a>
-              <a href="/tags/freqz/" rel="tag"># freqz</a>
-          </div>
 
         
 

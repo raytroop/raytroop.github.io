@@ -1076,260 +1076,6 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Linear Time-Invariant Systems</title>
-    <url>/2023/05/15/LTI/</url>
-    <content><![CDATA[<h2 id="convolution">Convolution</h2>
-<h3 id="discrete-time">discrete-time</h3>
-<p><span class="math display">\[
-y[n] = \sum_{k=-\infty}^{+\infty}x[k]h[n-k]
-\]</span></p>
-<p>The operation on the right-hand side is known as the
-<strong>convolution</strong> of the sequences <em>x[n]</em> and
-<em>h[n]</em>. The operation of convolution can be represented
-symbolically as <span class="math display">\[
-y[n] = x[n]*h[n]
-\]</span></p>
-<blockquote>
-<p>The response of an LTI system to an arbitrary input is expressed in
-terms of the system's response to the <em>unit impulse</em>.</p>
-<p>From this, we see that an LTI system is completely characterized by
-its response to a single signal, namely, its response to the <em>unit
-impulse</em>.</p>
-</blockquote>
-<h3 id="continuous-time">continuous-time</h3>
-<p><span class="math display">\[
-y(t) = \int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau
-\]</span></p>
-<p><span class="math display">\[
-y(t)=x(t)*h(t)
-\]</span></p>
-<p>As in discrete time, we see that a continuous-time LTI system is
-completely characterized by its impulse response - i.e., by its response
-to a single elementary signal, the unit impulse <span
-class="math inline">\(\delta(t)\)</span></p>
-<h2 id="eigenfunction">Eigenfunction</h2>
-<p><em>A signal</em> for which the <em>system output</em> is <em>a
-(possibly complex) constant</em> times the <em>input</em> is referred to
-as an <strong>eigenfunction</strong> of the system, and the amplitude
-factor is referred to as the system's <strong>eigenvalue</strong>.</p>
-<p><strong>Complex exponentials</strong> are eigenfunctions of LTI
-systems, that is,</p>
-<p>continuous time: <span class="math display">\[
-e^{st}\to H(s)e^{st}
-\]</span> discrete time: <span class="math display">\[
-z^n \to H(z)z^n
-\]</span></p>
-<h3 id="continuous-time-1">continuous-time</h3>
-<p>Let's prove them. For an input <span
-class="math inline">\(x(t)\)</span>, we can determine the output through
-the use of the convolution integral, so that with <span
-class="math inline">\(x(t)=e^{st}\)</span></p>
-<p><span class="math display">\[\begin{align}
-y(t) &amp;= \int_{-\infty}^{+\infty}h(\tau)x(t-\tau)d\tau \\
-&amp;=\int_{-\infty}^{+\infty}h(\tau)e^{s(t-\tau)}d\tau \\
-&amp;= e^{st}\int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
-\end{align}\]</span></p>
-<p>Assuming that the integral on the right-hand side converges, the
-response to <span class="math inline">\(e^{st}\)</span> is of the form
-<span class="math display">\[
-y(t)=H(s)e^{st}
-\]</span> where <span class="math inline">\(H(s)\)</span> is a complex
-constant whose value depends on <span class="math inline">\(s\)</span>
-and which is related to the system impulse response by <span
-class="math display">\[
-H(s)=\int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
-\]</span></p>
-<h3 id="discrete-time-1">discrete-time</h3>
-<p>Suppose that an LTI system with impulse response <span
-class="math inline">\(h[n]\)</span> has as its input the sequence <span
-class="math display">\[
-x[n] = z^n
-\]</span> Then the output of the system can be determined from the
-convolution sum as <span class="math display">\[\begin{align}
-y[n]&amp;=\sum_{k=-\infty}^{+\infty}h[k]x[n-k] \\
-&amp;=\sum_{k=-\infty}^{+\infty}h[k]z^{n-k} \\
-&amp;= z^n\sum_{k=-\infty}^{+\infty}h[k]z^{-k}
-\end{align}\]</span></p>
-<p>Assuming that the summation on the right-hand side converges, the
-output is the same compex exponential multiplied by a constant that
-depends on the value of <span class="math inline">\(z\)</span>. That is,
-<span class="math display">\[
-y[n] = H(z)z^n
-\]</span> where <span class="math display">\[
-H(z) =\sum_{k=-\infty}^{+\infty}h[k]z^{-k}
-\]</span></p>
-<h3 id="linear-combination">linear combination</h3>
-<blockquote>
-<p>For both continuous time and discrete time, if the input to an LTI
-system is represented as <em>a linear combination of complex
-exponentials</em>, then the output can also be represented as <em>a
-linear combination of the same complex exponential signals</em>.</p>
-</blockquote>
-<p>If the input to a continuous-time LTI system is represented as a
-linear combination of complex exponentials, that is, if <span
-class="math display">\[
-x(t)=\sum_k a_ke^{s_k t}
-\]</span> then the output will be <span class="math display">\[
-y(t)=\sum_k a_kH(s_k)e^{s_k t}
-\]</span> In an exactly analogous manner, if the input to a
-discrete-time LTI system is represented as a linear combination of
-complex exponentials, that is, if <span class="math display">\[
-x[n]=\sum_k a_k z_k^n
-\]</span> then the output will be <span class="math display">\[
-y[n]=\sum_k a_kH(z_k)z_k^n
-\]</span></p>
-<h2 id="fourier-series">Fourier series</h2>
-<h3 id="continuous-time-2">continuous-time</h3>
-<p>The Fourier series of a periodic continuous-time signal: <span
-class="math display">\[
-x(t)=\sum_{k=-\infty}^{+\infty}a_ke^{jk\omega _0
-t}=\sum_{k=-\infty}^{+\infty}a_ke^{jk(2\pi/T) t}
-\]</span></p>
-<p><span class="math display">\[
-a_k = \frac{1}{T}\int_T x(t)e^{-jk\omega _0 t}dt=\frac{1}{T}\int _T
-x(t)e^{-jk(2\pi/T)t}dt
-\]</span></p>
-<p>Here, we have written equivalent expressions for the Fourier series
-in terms of the <strong>fundamental frequency</strong> <span
-class="math inline">\(\omega _0\)</span> and the <strong>fundamental
-period</strong> <span class="math inline">\(T\)</span></p>
-<h4 id="conjugate-symmetry">Conjugate Symmetry</h4>
-<p>If <span class="math inline">\(x(t)\)</span>
-<strong>real</strong>-that is, when <span class="math inline">\(x(t) =
-x^*(t)\)</span>, the Fourier series coefficients will be <em>conjugate
-symmetric</em>, i.e <span class="math display">\[
-a_{-k} = a_k^*
-\]</span></p>
-<h4 id="parsevals-relation">Parseval's Relation</h4>
-<p>Parseval's relation states is that the <strong>total average
-power</strong> in a periodic signal equals the <strong>sum of the
-average powers in all of its harmonic components</strong> <span
-class="math display">\[
-\frac{1}{T}\int _T|x(t)|^2dt = \sum_{k=-\infty}^{+\infty}|a_k|^2
-\]</span></p>
-<h3 id="discrete-time-2">discrete-time</h3>
-<h4 id="parsevals-relation-1">Parseval's Relation</h4>
-<p><span class="math display">\[
-\frac{1}{N}\sum_{n=&lt;N&gt;}|x[n]|^2=\sum_{k=&lt;N&gt;}|a_k|^2
-\]</span></p>
-<h3 id="system-functions">system functions</h3>
-<p>When <span class="math inline">\(s\)</span> or <span
-class="math inline">\(z\)</span> are general complex numbers, <span
-class="math inline">\(H(s)\)</span> and <span
-class="math inline">\(H(z)\)</span> are referred to as the
-<strong>system functions</strong> of the corresponding systems.</p>
-<p>For continuous-time signals and systems, we focus on the specific
-case in which <span class="math inline">\(\Re \{s\}= 0\)</span>, so that
-<span class="math inline">\(s = j\omega\)</span>, and consequently,
-<span class="math inline">\(e^{st}\)</span> is of the form <span
-class="math inline">\(e^{j\omega t}\)</span>. <span
-class="math inline">\(H(j\omega)\)</span> viewed as a function of <span
-class="math inline">\(\omega\)</span> - is referred to as the
-<strong>frequency response</strong> of the system and is given by <span
-class="math display">\[
-H(j\omega) = \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt
-\]</span></p>
-<p>Similarly, for discrete-time signals and systems, we focus on values
-of <span class="math inline">\(z\)</span> for which <span
-class="math inline">\(|z|=1\)</span>, so that <span
-class="math inline">\(z=e^{j\omega}\)</span> and <span
-class="math inline">\(z^n\)</span> is of the form <span
-class="math inline">\(e^{j\omega n}\)</span>. Then, the frequency
-response of the system is given by <span class="math display">\[
-H(e^{j\omega}) = \sum_{n=-\infty}^{+\infty}h[n]e^{-j\omega n}
-\]</span></p>
-<blockquote>
-<p>The response of an LTI system to a <em>complex exponential</em>
-signal of the form <span class="math inline">\(e^{j\omega t}\)</span>
-(in continuous time) or <span class="math inline">\(e^{j\omega
-n}\)</span> (in discrete time) is particularly simple to express in
-terms of the <em>frequency response of the system</em></p>
-</blockquote>
-<h2 id="continuous-time-fourier-transform">Continuous-Time Fourier
-transform</h2>
-<p><span class="math display">\[
-X(j\omega) =\int_{-\infty}^{+\infty}x(t)e^{-j\omega t}dt
-\]</span></p>
-<p><span class="math display">\[
-x(t) = \frac{1}{2\pi}\int_{-\infty}^{+\infty}X(j\omega)e^{j\omega
-t}d\omega
-\]</span></p>
-<blockquote>
-<p>Note system function is <span class="math display">\[
-H(j\omega) = \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt
-\]</span></p>
-</blockquote>
-<h3 id="dirichlet-conditions">Dirichlet conditions</h3>
-<p><img src="/2023/05/15/LTI/image-20230516020142197.png"
-alt="image-20230516020142197" /></p>
-<h3 id="fourier-transform-representations-for-periodic-signals">Fourier
-transform representations for periodic signals</h3>
-<p><img src="/2023/05/15/LTI/image-20230516021105696.png"
-alt="image-20230516021105696" /></p>
-<h3 id="differentiation-and-integration">Differentiation and
-Integration</h3>
-<p><span class="math display">\[
-\frac{dx(t)}{dt}\longleftrightarrow j\omega X(j\omega)
-\]</span></p>
-<p><span class="math display">\[
-\int_{-\infty}^t x(\tau)d\tau \longleftrightarrow
-\frac{1}{j\omega}X(j\omega)+\pi X(0)\delta(\omega)
-\]</span></p>
-<h3 id="parsevals-relation-2">Parseval's Relation</h3>
-<p><img src="/2023/05/15/LTI/image-20230516021627107.png"
-alt="image-20230516021627107" /></p>
-<h3 id="convolution-property">Convolution Property</h3>
-<p><img src="/2023/05/15/LTI/image-20230516022054782.png"
-alt="image-20230516022054782" /></p>
-<h2 id="discrete-time-fourier-transform">Discrete-Time Fourier
-Transform</h2>
-<p><span class="math display">\[
-X(e^{j\omega})=\sum_{n=-\infty}^{+\infty}x[n]e^{-j\omega n}
-\]</span></p>
-<p><span class="math display">\[
-x[n] = \frac{1}{2\pi}\int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega
-\]</span></p>
-<blockquote>
-<p>Note system function is <span class="math display">\[
-H(e^{j\omega}) = \sum_{n=-\infty}^{+\infty}h[n]e^{-j\omega n}
-\]</span></p>
-</blockquote>
-<h3 id="parsevals-relation-3">Parseval's Relation</h3>
-<p><img src="/2023/05/15/LTI/image-20230516022936168.png"
-alt="image-20230516022936168" /></p>
-<h3 id="convolution-property-1">Convolution Property</h3>
-<p><img src="/2023/05/15/LTI/image-20230516023124056.png"
-alt="image-20230516023124056" /></p>
-<p>we see that the <em>frequency response</em> <span
-class="math inline">\(H(e^{j\omega})\)</span> captures the change in
-complex amplitude of the Fourier transform of the input at each
-frequency <span class="math inline">\(\omega\)</span></p>
-<h2 id="laplace-transform">Laplace transform</h2>
-<p>The Laplace transform allowed us, for example, to perform transform
-analysis of unstable systems and to develop additional insights and
-tools for LTI system analysis</p>
-<p><img src="/2023/05/15/LTI/image-20230516023759163.png"
-alt="image-20230516023759163" /></p>
-<h2 id="discrete-fourier-transform">Discrete Fourier Transform</h2>
-<p><img src="/2023/05/15/LTI/image-20230516030532747.png"
-alt="image-20230516030532747" /></p>
-<p>where <span class="math inline">\(W_N=e^{-j(2\pi/N)}\)</span></p>
-<h2 id="reference">reference</h2>
-<p>Oppenheim, A.V., Willsky, A.S., &amp; Nawab, S.H. (1996). Signals
-&amp; systems (2nd ed.).</p>
-<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
-3rd edition</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>lti</tag>
-        <tag>ctft</tag>
-        <tag>dtft</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MOS capacitor structures</title>
     <url>/2022/09/24/MOS-Varactors/</url>
     <content><![CDATA[<h3 id="dsb-varactors">D=S=B varactors</h3>
@@ -5124,7 +4870,7 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679G
       </tags>
   </entry>
   <entry>
-    <title>Discrete Time Fourier Transform (DTFT) vs Discrete Fourier Transform (DFT)</title>
+    <title>DTFT &amp; DFT</title>
     <url>/2023/05/27/dtft-dft/</url>
     <content><![CDATA[<h2 id="sampling-theorem">sampling theorem</h2>
 <h3 id="time-sampling-theorem">time-sampling theorem</h3>
@@ -5202,123 +4948,8 @@ these two Fourier</p></li>
 </ol>
 <h2 id="numerical-computation-of-the-fourier-transform">Numerical
 Computation of The Fourier Transform</h2>
-<h3 id="aliasing-and-leakage-in-numerical-computation">aliasing and
-leakage in numerical computation</h3>
-<ol type="1">
-<li><p><em>timelimited</em> <span
-class="math inline">\(x(t)\)</span></p>
-<p>its spectrum <span class="math inline">\(X(\omega)\)</span> is
-nonbandlimited - aliasing in the frequency domain</p></li>
-<li><p><span class="math inline">\(x(t)\)</span> with
-<em>bandlimited</em> spectrum <span
-class="math inline">\(X(\omega)\)</span></p>
-<p>no aliasing in the spectrum; such a signal is nontimelimited and
-aliasing in the time domian</p></li>
-</ol>
-<h3 id="dfs---representation-of-periodic-sequences">DFS - representation
-of periodic sequences</h3>
-<p>also known as <strong>discrete-time Fouier series (DTFS)</strong></p>
-<blockquote>
-<p>Any <em>periodic sequence</em> can be represented as <em>a sum of
-complex exponential sequences</em>.</p>
-</blockquote>
-<p>⭐Analysis equation <span class="math display">\[
-\tilde{X}[k] = \sum_{n=0}^{N-1}\tilde{x}[n]W_N^{kn}
-\]</span> where <span class="math inline">\(W_N =
-e^{-j(2\pi/N)}\)</span></p>
-<p>⭐Synthesis equation <span class="math display">\[
-\tilde{x}[n] = \frac{1}{N}\sum_{k=0}^{N-1}\tilde{X}[k]W_N^{-kn}
-\]</span></p>
-<blockquote>
-<p>The multiplicative constant <span class="math inline">\(1/N\)</span>
-is included in above equation for convenience. It could also be absorbed
-into the definition of <span
-class="math inline">\(\tilde{X}[k]\)</span></p>
-</blockquote>
-<p>In general <span class="math display">\[
-W_N^{n+lN} = e^{-j(2\pi/N)(n+lN)} =e^{-j(2\pi/N)n}=W_N^n
-\]</span> The Fourier series coefficients <span
-class="math inline">\(\tilde{X}[k]\)</span> can be interpreted to be</p>
-<ul>
-<li>a sequence of finite length, for <span
-class="math inline">\(k=0,...,(N-1)\)</span>, and zero otherwise</li>
-<li>a periodic sequence defined for all <span
-class="math inline">\(k\)</span>, with period <span
-class="math inline">\(N\)</span></li>
-</ul>
-<p>Clearly, both of these interpretations are acceptable, since in
-<em>Synthesis equation</em> we use only the values of</p>
-<p><span class="math inline">\(\tilde{X}[k]\)</span> for <span
-class="math inline">\(0 \leq k \leq (N-1)\)</span>.</p>
-<p>An advantage to interpreting the Fourier series coefficients <span
-class="math inline">\(\tilde{X}[k]\)</span> as a periodic sequence is
-that there is then a <em>duality</em> between the time and frequency
-domains for the Fourier series representation of periodic sequences.</p>
-<h4 id="duality">Duality</h4>
-<p>An exact duality exists between the time and frequency domains in the
-DFS representation that does not exist in the DTFT and z-transform
-representation of sequences</p>
-<p>This duality property is summarized as follows:</p>
-<p>If <span class="math display">\[
-\tilde{x}[n] \overset{DFS}\longleftrightarrow \tilde{X}[k]
-\]</span> then <span class="math display">\[
-\tilde{X}[n] \overset{DFS}\longleftrightarrow N\tilde{x}[-k]
-\]</span></p>
-<h3 id="the-fourier-transform-of-periodic-signals">The Fourier Transform
-of Periodic Signals</h3>
-<p>use the DFS representation to obtain a DTFT representation of
-periodic signal:</p>
-<ol type="1">
-<li><p><em>uniform convergence</em> of the Fourier transform of a
-sequence (<em>DTFT</em>) requires that the sequence be <em>absolutely
-summable</em>, and <em>mean-square convergence</em> requires that the
-sequence be <em>square summable</em>. Periodic sequences <strong>satisfy
-neither condition</strong> .</p>
-<p><strong>Absolute summability is a sufficient condition</strong> for
-the existence of a Fourier transform representation (<em>DTFT</em>)</p>
-<p><span class="math display">\[\begin{align}
-|X(e^{j\omega})| &amp;= \left| \sum_{n=-\infty}^{\infty}x[n]e^{-j\omega
-n} \right| \\
-&amp;\leq \sum_{n=-\infty}^{\infty}|x[n]||e^{-j\omega n}| \\
-&amp;\leq \sum_{n=-\infty}^{\infty}|x[n]| \lt \infty
-\end{align}\]</span></p></li>
-<li><p>sequences that can be expressed as a sum of complex exponentials
-can be considered to have a Fourier transform representation as a train
-of impulses</p></li>
-</ol>
-<p>⭐If <span class="math inline">\(\tilde{x}[n]\)</span> is periodic
-with period <span class="math inline">\(N\)</span> and the corresponding
-<em>DFS coefficients</em> are <span
-class="math inline">\(\tilde{X}[k]\)</span>, then the Fourier transform
-of <span class="math inline">\(\tilde{x}[n]\)</span> is defined to be
-the <strong>impulse train</strong> <span class="math display">\[
-\tilde{X}(e^{j\omega}) =
-\sum_{k=-\infty}^{\infty}\frac{2\pi}{N}\tilde{X}[k]\delta\left(\omega -
-\frac{2\pi k}{N}\right)
-\]</span> Note that <span
-class="math inline">\(\tilde{X}(e^{j\omega})\)</span> has the necessary
-periodicity with period <span class="math inline">\(2\pi\)</span> since
-<span class="math inline">\(\tilde{X}[k]\)</span> is periodic with
-period <span class="math inline">\(N\)</span>, and the impulses are
-spaced at integer multiples of <span
-class="math inline">\(2\pi/N\)</span>, where <span
-class="math inline">\(N\)</span> is an integer.</p>
-<p>The follow inverse Fourier transform shows <span
-class="math inline">\(\tilde{X}(e^{j\omega})\)</span> is a Fourier
-transform representation of the periodic sequence <span
-class="math inline">\(\tilde{x}[n]\)</span></p>
-<p><img src="/2023/05/27/dtft-dft/image-20230528100004194.png"
-alt="image-20230528100004194" /></p>
-<blockquote>
-<p>Although the Fourier transform of a periodic sequence does not
-converge in the normal sense, the <strong>introduction of
-impulses</strong> (<span class="math inline">\(\delta\left(\omega -
-\frac{2\pi k}{N}\right)\)</span>) permits us to include <em>periodic
-sequences formally within the framework of Fourier transform
-analysis</em></p>
-</blockquote>
-<h3 id="relate-finite-length-signal-to-periodic-signal">relate
-finite-length signal to periodic signal</h3>
+<h3 id="finite-length-signal-periodic-signal">Finite-length signal &amp;
+periodic signal</h3>
 <p><img src="/2023/05/27/dtft-dft/image-20230528112723460.png"
 alt="image-20230528112723460" /></p>
 <blockquote>
@@ -5362,7 +4993,7 @@ class="math inline">\(\tilde{X}[k]\)</span>;</p>
 k/N}\)</span> is samples of the <strong>DTFT</strong> of the
 <em>finite-length sequence</em> <span
 class="math inline">\(x[n]\)</span></p>
-<h3 id="sampling-the-fourier-transform">sampling the fourier
+<h3 id="sampling-the-fourier-transform">sampling the Fourier
 transform</h3>
 <p>Assuming an <em>aperiodic sequence</em> with Fourier transform <span
 class="math inline">\(X(e^{j\omega})\)</span>, the <strong>sequences of
@@ -5478,6 +5109,22 @@ only values needed to reconstruct <span
 class="math inline">\(x[n]\)</span></li>
 </ul>
 </blockquote>
+<h3 id="multiplication-property-modulation-property">Multiplication
+Property (Modulation Property)</h3>
+<p><span class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span></p>
+<p>Then sampled signal fourier transform is <span
+class="math display">\[\begin{align}
+X_s(\omega) &amp;= \frac{1}{2\pi}X_{\delta}(\omega)*X(\omega) \\
+&amp;= \frac{1}{T} \left(\sum_{k\in \mathbb{Z}}\delta(\omega -
+k\frac{2\pi}{T})\right) * X(\omega)
+\end{align}\]</span></p>
+<p><a
+href="https://web.stanford.edu/class/ee179/lectures/notes11.pdf">Lecture
+11: Sampling and Pulse Modulation</a></p>
+<p><img src="/2023/05/27/dtft-dft/image-20220520221108500.png"
+alt="image-20220520221108500" /></p>
 <h3 id="multiplication-property-convolution-property">multiplication
 property &amp; convolution property</h3>
 <p>Because a digital computer can work only with <em>discrete data</em>
@@ -5572,15 +5219,13 @@ ed.). Prentice Hall.</p>
 <p>Dr. Wang Hongwei. FFT Basics and Case Study using Multi-Instrument
 [<a
 href="https://www.virtins.com/doc/D1002/FFT_Basics_and_Case_Study_using_Multi-Instrument_D1002.pdf">pdf</a>]</p>
+<p>Spectral Leakage and Zero-Padding of the Discrete Fourier Transform
+[<a
+href="https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-padding-and-frequency-resolution.html">https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-padding-and-frequency-resolution.html</a>]</p>
 ]]></content>
       <categories>
         <category>dsp</category>
       </categories>
-      <tags>
-        <tag>dtft</tag>
-        <tag>fft</tag>
-        <tag>dft</tag>
-      </tags>
   </entry>
   <entry>
     <title>verilog-mode.el</title>
@@ -7270,6 +6915,386 @@ Sixth international symposium on quality electronic design (isqed'05),
         <tag>hbm</tag>
         <tag>cdm</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Fourier Analysis 101</title>
+    <url>/2023/05/15/fourier101/</url>
+    <content><![CDATA[<h2 id="the-dirac-comb-function">The Dirac Comb function</h2>
+<h3 id="impulse-train">impulse train</h3>
+<p><img src="/2023/05/15/fourier101/image-20231026001721884.png"
+alt="image-20231026001721884" /></p>
+<p><img src="/2023/05/15/fourier101/image-20231026001952947.png"
+alt="image-20231026001952947" /></p>
+<blockquote>
+<p>The Fourier transform of a periodic impulse train in the time domain
+with period <span class="math inline">\(T\)</span> is a periodic impulse
+train in the frequency domain with period <span
+class="math inline">\(2\pi/T\)</span></p>
+</blockquote>
+<p><img src="/2023/05/15/fourier101/image-20231026002244212.png"
+alt="image-20231026002244212" /></p>
+<h3 id="the-discrete-time-counterpart">The discrete-time
+counterpart</h3>
+<p><img src="/2023/05/15/fourier101/image-20231026002344519.png"
+alt="image-20231026002344519" /></p>
+<p><img src="/2023/05/15/fourier101/image-20231026002420723.png"
+alt="image-20231026002420723" /></p>
+<h2 id="periodic-signal">Periodic Signal</h2>
+<h3 id="dfs-for-periodic-sequences">DFS for periodic sequences</h3>
+<p>AKA <strong>discrete-time Fourier series (DTFS)</strong></p>
+<blockquote>
+<p>Any <em>periodic sequence</em> can be represented as <em>a sum of
+complex exponential sequences</em>.</p>
+</blockquote>
+<p>⭐Analysis equation <span class="math display">\[
+\tilde{X}[k] = \sum_{n=0}^{N-1}\tilde{x}[n]W_N^{kn}
+\]</span> where <span class="math inline">\(W_N =
+e^{-j(2\pi/N)}\)</span></p>
+<p>⭐Synthesis equation <span class="math display">\[
+\tilde{x}[n] = \frac{1}{N}\sum_{k=0}^{N-1}\tilde{X}[k]W_N^{-kn}
+\]</span></p>
+<blockquote>
+<p>The multiplicative constant <span class="math inline">\(1/N\)</span>
+is included in above equation for convenience. It could also be absorbed
+into the definition of <span
+class="math inline">\(\tilde{X}[k]\)</span></p>
+</blockquote>
+<p>In general <span class="math display">\[
+W_N^{n+lN} = e^{-j(2\pi/N)(n+lN)} =e^{-j(2\pi/N)n}=W_N^n
+\]</span> The Fourier series coefficients <span
+class="math inline">\(\tilde{X}[k]\)</span> can be interpreted to be</p>
+<ul>
+<li>a sequence of finite length, for <span
+class="math inline">\(k=0,...,(N-1)\)</span>, and zero otherwise</li>
+<li>a periodic sequence defined for all <span
+class="math inline">\(k\)</span>, with period <span
+class="math inline">\(N\)</span></li>
+</ul>
+<p>Clearly, both of these interpretations are acceptable, since in
+<em>Synthesis equation</em> we use only the values of</p>
+<p><span class="math inline">\(\tilde{X}[k]\)</span> for <span
+class="math inline">\(0 \leq k \leq (N-1)\)</span>.</p>
+<p>An advantage to interpreting the Fourier series coefficients <span
+class="math inline">\(\tilde{X}[k]\)</span> as a periodic sequence is
+that there is then a <em>duality</em> between the time and frequency
+domains for the Fourier series representation of periodic sequences.</p>
+<h4 id="duality">Duality</h4>
+<p>An exact duality exists between the time and frequency domains in the
+DFS representation that does not exist in the DTFT and z-transform
+representation of sequences</p>
+<p>This duality property is summarized as follows:</p>
+<p>If <span class="math display">\[
+\tilde{x}[n] \overset{DFS}\longleftrightarrow \tilde{X}[k]
+\]</span> then <span class="math display">\[
+\tilde{X}[n] \overset{DFS}\longleftrightarrow N\tilde{x}[-k]
+\]</span></p>
+<h3 id="the-fourier-transform-of-periodic-signals">The Fourier Transform
+of Periodic Signals</h3>
+<blockquote>
+<p>use the DFS representation to obtain a DTFT representation of
+periodic signal:</p>
+</blockquote>
+<ol type="1">
+<li><p><em>uniform convergence</em> of the Fourier transform of a
+sequence (<em>DTFT</em>) requires that the sequence be <em>absolutely
+summable</em>, and <em>mean-square convergence</em> requires that the
+sequence be <em>square summable</em>. Periodic sequences <strong>satisfy
+neither condition</strong> .</p>
+<p><strong>Absolute summability is a sufficient condition</strong> for
+the existence of a Fourier transform representation (<em>DTFT</em>)</p>
+<p><span class="math display">\[\begin{align}
+|X(e^{j\omega})| &amp;= \left| \sum_{n=-\infty}^{\infty}x[n]e^{-j\omega
+n} \right| \\
+&amp;\leq \sum_{n=-\infty}^{\infty}|x[n]||e^{-j\omega n}| \\
+&amp;\leq \sum_{n=-\infty}^{\infty}|x[n]| \lt \infty
+\end{align}\]</span></p></li>
+<li><p>sequences that can be expressed as a sum of complex exponentials
+can be considered to have a Fourier transform representation as a train
+of impulses</p></li>
+</ol>
+<p>⭐If <span class="math inline">\(\tilde{x}[n]\)</span> is periodic
+with period <span class="math inline">\(N\)</span> and the corresponding
+<em>DFS coefficients</em> are <span
+class="math inline">\(\tilde{X}[k]\)</span>, then the Fourier transform
+of <span class="math inline">\(\tilde{x}[n]\)</span> is defined to be
+the <strong>impulse train</strong> <span class="math display">\[
+\tilde{X}(e^{j\omega}) =
+\sum_{k=-\infty}^{\infty}\frac{2\pi}{N}\tilde{X}[k]\delta\left(\omega -
+\frac{2\pi k}{N}\right)
+\]</span> Note that <span
+class="math inline">\(\tilde{X}(e^{j\omega})\)</span> has the necessary
+periodicity with period <span class="math inline">\(2\pi\)</span> since
+<span class="math inline">\(\tilde{X}[k]\)</span> is periodic with
+period <span class="math inline">\(N\)</span>, and the impulses are
+spaced at integer multiples of <span
+class="math inline">\(2\pi/N\)</span>, where <span
+class="math inline">\(N\)</span> is an integer.</p>
+<p>The follow inverse Fourier transform shows <span
+class="math inline">\(\tilde{X}(e^{j\omega})\)</span> is a Fourier
+transform representation of the periodic sequence <span
+class="math inline">\(\tilde{x}[n]\)</span></p>
+<p><img src="/2023/05/15/fourier101/image-20230528100004194.png"
+alt="image-20230528100004194" /></p>
+<blockquote>
+<p>Although the Fourier transform of a periodic sequence does not
+converge in the normal sense, the <strong>introduction of
+impulses</strong> (<span class="math inline">\(\delta\left(\omega -
+\frac{2\pi k}{N}\right)\)</span>) permits us to include <em>periodic
+sequences formally within the framework of Fourier transform
+analysis</em></p>
+</blockquote>
+<h2 id="convolution">Convolution</h2>
+<h3 id="discrete-time">discrete-time</h3>
+<p><span class="math display">\[
+y[n] = \sum_{k=-\infty}^{+\infty}x[k]h[n-k]
+\]</span></p>
+<p>The operation on the right-hand side is known as the
+<strong>convolution</strong> of the sequences <em>x[n]</em> and
+<em>h[n]</em>. The operation of convolution can be represented
+symbolically as <span class="math display">\[
+y[n] = x[n]*h[n]
+\]</span></p>
+<blockquote>
+<p>The response of an LTI system to an arbitrary input is expressed in
+terms of the system's response to the <em>unit impulse</em>.</p>
+<p>From this, we see that an LTI system is completely characterized by
+its response to a single signal, namely, its response to the <em>unit
+impulse</em>.</p>
+</blockquote>
+<h3 id="continuous-time">continuous-time</h3>
+<p><span class="math display">\[
+y(t) = \int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau
+\]</span></p>
+<p><span class="math display">\[
+y(t)=x(t)*h(t)
+\]</span></p>
+<p>As in discrete time, we see that a continuous-time LTI system is
+completely characterized by its impulse response - i.e., by its response
+to a single elementary signal, the unit impulse <span
+class="math inline">\(\delta(t)\)</span></p>
+<h2 id="eigenfunction">Eigenfunction</h2>
+<p><em>A signal</em> for which the <em>system output</em> is <em>a
+(possibly complex) constant</em> times the <em>input</em> is referred to
+as an <strong>eigenfunction</strong> of the system, and the amplitude
+factor is referred to as the system's <strong>eigenvalue</strong>.</p>
+<p><strong>Complex exponentials</strong> are eigenfunctions of LTI
+systems, that is,</p>
+<p>continuous time: <span class="math display">\[
+e^{st}\to H(s)e^{st}
+\]</span> discrete time: <span class="math display">\[
+z^n \to H(z)z^n
+\]</span></p>
+<h3 id="continuous-time-1">continuous-time</h3>
+<p>Let's prove them. For an input <span
+class="math inline">\(x(t)\)</span>, we can determine the output through
+the use of the convolution integral, so that with <span
+class="math inline">\(x(t)=e^{st}\)</span></p>
+<p><span class="math display">\[\begin{align}
+y(t) &amp;= \int_{-\infty}^{+\infty}h(\tau)x(t-\tau)d\tau \\
+&amp;=\int_{-\infty}^{+\infty}h(\tau)e^{s(t-\tau)}d\tau \\
+&amp;= e^{st}\int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
+\end{align}\]</span></p>
+<p>Assuming that the integral on the right-hand side converges, the
+response to <span class="math inline">\(e^{st}\)</span> is of the form
+<span class="math display">\[
+y(t)=H(s)e^{st}
+\]</span> where <span class="math inline">\(H(s)\)</span> is a complex
+constant whose value depends on <span class="math inline">\(s\)</span>
+and which is related to the system impulse response by <span
+class="math display">\[
+H(s)=\int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
+\]</span></p>
+<h3 id="discrete-time-1">discrete-time</h3>
+<p>Suppose that an LTI system with impulse response <span
+class="math inline">\(h[n]\)</span> has as its input the sequence <span
+class="math display">\[
+x[n] = z^n
+\]</span> Then the output of the system can be determined from the
+convolution sum as <span class="math display">\[\begin{align}
+y[n]&amp;=\sum_{k=-\infty}^{+\infty}h[k]x[n-k] \\
+&amp;=\sum_{k=-\infty}^{+\infty}h[k]z^{n-k} \\
+&amp;= z^n\sum_{k=-\infty}^{+\infty}h[k]z^{-k}
+\end{align}\]</span></p>
+<p>Assuming that the summation on the right-hand side converges, the
+output is the same compex exponential multiplied by a constant that
+depends on the value of <span class="math inline">\(z\)</span>. That is,
+<span class="math display">\[
+y[n] = H(z)z^n
+\]</span> where <span class="math display">\[
+H(z) =\sum_{k=-\infty}^{+\infty}h[k]z^{-k}
+\]</span></p>
+<h3 id="linear-combination">linear combination</h3>
+<blockquote>
+<p>For both continuous time and discrete time, if the input to an LTI
+system is represented as <em>a linear combination of complex
+exponentials</em>, then the output can also be represented as <em>a
+linear combination of the same complex exponential signals</em>.</p>
+</blockquote>
+<p>If the input to a continuous-time LTI system is represented as a
+linear combination of complex exponentials, that is, if <span
+class="math display">\[
+x(t)=\sum_k a_ke^{s_k t}
+\]</span> then the output will be <span class="math display">\[
+y(t)=\sum_k a_kH(s_k)e^{s_k t}
+\]</span> In an exactly analogous manner, if the input to a
+discrete-time LTI system is represented as a linear combination of
+complex exponentials, that is, if <span class="math display">\[
+x[n]=\sum_k a_k z_k^n
+\]</span> then the output will be <span class="math display">\[
+y[n]=\sum_k a_kH(z_k)z_k^n
+\]</span></p>
+<h2 id="fourier-series">Fourier series</h2>
+<h3 id="continuous-time-2">continuous-time</h3>
+<p>The Fourier series of a periodic continuous-time signal: <span
+class="math display">\[
+x(t)=\sum_{k=-\infty}^{+\infty}a_ke^{jk\omega _0
+t}=\sum_{k=-\infty}^{+\infty}a_ke^{jk(2\pi/T) t}
+\]</span></p>
+<p><span class="math display">\[
+a_k = \frac{1}{T}\int_T x(t)e^{-jk\omega _0 t}dt=\frac{1}{T}\int _T
+x(t)e^{-jk(2\pi/T)t}dt
+\]</span></p>
+<p>Here, we have written equivalent expressions for the Fourier series
+in terms of the <strong>fundamental frequency</strong> <span
+class="math inline">\(\omega _0\)</span> and the <strong>fundamental
+period</strong> <span class="math inline">\(T\)</span></p>
+<h4 id="conjugate-symmetry">Conjugate Symmetry</h4>
+<p>If <span class="math inline">\(x(t)\)</span>
+<strong>real</strong>-that is, when <span class="math inline">\(x(t) =
+x^*(t)\)</span>, the Fourier series coefficients will be <em>conjugate
+symmetric</em>, i.e <span class="math display">\[
+a_{-k} = a_k^*
+\]</span></p>
+<h4 id="parsevals-relation">Parseval's Relation</h4>
+<p>Parseval's relation states is that the <strong>total average
+power</strong> in a periodic signal equals the <strong>sum of the
+average powers in all of its harmonic components</strong> <span
+class="math display">\[
+\frac{1}{T}\int _T|x(t)|^2dt = \sum_{k=-\infty}^{+\infty}|a_k|^2
+\]</span></p>
+<h3 id="discrete-time-2">discrete-time</h3>
+<h4 id="parsevals-relation-1">Parseval's Relation</h4>
+<p><span class="math display">\[
+\frac{1}{N}\sum_{n=&lt;N&gt;}|x[n]|^2=\sum_{k=&lt;N&gt;}|a_k|^2
+\]</span></p>
+<h3 id="system-functions">system functions</h3>
+<p>When <span class="math inline">\(s\)</span> or <span
+class="math inline">\(z\)</span> are general complex numbers, <span
+class="math inline">\(H(s)\)</span> and <span
+class="math inline">\(H(z)\)</span> are referred to as the
+<strong>system functions</strong> of the corresponding systems.</p>
+<p>For continuous-time signals and systems, we focus on the specific
+case in which <span class="math inline">\(\Re \{s\}= 0\)</span>, so that
+<span class="math inline">\(s = j\omega\)</span>, and consequently,
+<span class="math inline">\(e^{st}\)</span> is of the form <span
+class="math inline">\(e^{j\omega t}\)</span>. <span
+class="math inline">\(H(j\omega)\)</span> viewed as a function of <span
+class="math inline">\(\omega\)</span> - is referred to as the
+<strong>frequency response</strong> of the system and is given by <span
+class="math display">\[
+H(j\omega) = \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt
+\]</span></p>
+<p>Similarly, for discrete-time signals and systems, we focus on values
+of <span class="math inline">\(z\)</span> for which <span
+class="math inline">\(|z|=1\)</span>, so that <span
+class="math inline">\(z=e^{j\omega}\)</span> and <span
+class="math inline">\(z^n\)</span> is of the form <span
+class="math inline">\(e^{j\omega n}\)</span>. Then, the frequency
+response of the system is given by <span class="math display">\[
+H(e^{j\omega}) = \sum_{n=-\infty}^{+\infty}h[n]e^{-j\omega n}
+\]</span></p>
+<blockquote>
+<p>The response of an LTI system to a <em>complex exponential</em>
+signal of the form <span class="math inline">\(e^{j\omega t}\)</span>
+(in continuous time) or <span class="math inline">\(e^{j\omega
+n}\)</span> (in discrete time) is particularly simple to express in
+terms of the <em>frequency response of the system</em></p>
+</blockquote>
+<h2 id="continuous-time-fourier-transform">Continuous-Time Fourier
+transform</h2>
+<p><span class="math display">\[
+X(j\omega) =\int_{-\infty}^{+\infty}x(t)e^{-j\omega t}dt
+\]</span></p>
+<p><span class="math display">\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{+\infty}X(j\omega)e^{j\omega
+t}d\omega
+\]</span></p>
+<blockquote>
+<p>Note system function is <span class="math display">\[
+H(j\omega) = \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt
+\]</span></p>
+</blockquote>
+<h3 id="dirichlet-conditions">Dirichlet conditions</h3>
+<p><img src="/2023/05/15/fourier101/image-20230516020142197.png"
+alt="image-20230516020142197" /></p>
+<h3 id="fourier-transform-representations-for-periodic-signals">Fourier
+transform representations for periodic signals</h3>
+<p><img src="/2023/05/15/fourier101/image-20230516021105696.png"
+alt="image-20230516021105696" /></p>
+<h3 id="differentiation-and-integration">Differentiation and
+Integration</h3>
+<p><span class="math display">\[
+\frac{dx(t)}{dt}\longleftrightarrow j\omega X(j\omega)
+\]</span></p>
+<p><span class="math display">\[
+\int_{-\infty}^t x(\tau)d\tau \longleftrightarrow
+\frac{1}{j\omega}X(j\omega)+\pi X(0)\delta(\omega)
+\]</span></p>
+<h3 id="parsevals-relation-2">Parseval's Relation</h3>
+<p><img src="/2023/05/15/fourier101/image-20230516021627107.png"
+alt="image-20230516021627107" /></p>
+<h3 id="convolution-property">Convolution Property</h3>
+<p><img src="/2023/05/15/fourier101/image-20230516022054782.png"
+alt="image-20230516022054782" /></p>
+<h3 id="multiplication-property">Multiplication Property</h3>
+<p><img src="/2023/05/15/fourier101/image-20231025231659449.png"
+alt="image-20231025231659449" /></p>
+<h2 id="discrete-time-fourier-transform">Discrete-Time Fourier
+Transform</h2>
+<p><span class="math display">\[
+X(e^{j\omega})=\sum_{n=-\infty}^{+\infty}x[n]e^{-j\omega n}
+\]</span></p>
+<p><span class="math display">\[
+x[n] = \frac{1}{2\pi}\int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega
+\]</span></p>
+<blockquote>
+<p>Note system function is <span class="math display">\[
+H(e^{j\omega}) = \sum_{n=-\infty}^{+\infty}h[n]e^{-j\omega n}
+\]</span></p>
+</blockquote>
+<h3 id="parsevals-relation-3">Parseval's Relation</h3>
+<p><img src="/2023/05/15/fourier101/image-20230516022936168.png"
+alt="image-20230516022936168" /></p>
+<h3 id="convolution-property-1">Convolution Property</h3>
+<p><img src="/2023/05/15/fourier101/image-20230516023124056.png"
+alt="image-20230516023124056" /></p>
+<p>we see that the <em>frequency response</em> <span
+class="math inline">\(H(e^{j\omega})\)</span> captures the change in
+complex amplitude of the Fourier transform of the input at each
+frequency <span class="math inline">\(\omega\)</span></p>
+<h2 id="laplace-transform">Laplace transform</h2>
+<p>The Laplace transform allowed us, for example, to perform transform
+analysis of unstable systems and to develop additional insights and
+tools for LTI system analysis</p>
+<p><img src="/2023/05/15/fourier101/image-20230516023759163.png"
+alt="image-20230516023759163" /></p>
+<h2 id="discrete-fourier-transform">Discrete Fourier Transform</h2>
+<p><img src="/2023/05/15/fourier101/image-20230516030532747.png"
+alt="image-20230516030532747" /></p>
+<p>where <span class="math inline">\(W_N=e^{-j(2\pi/N)}\)</span></p>
+<h2 id="reference">reference</h2>
+<p>The Dirac Comb and its Fourier Transform [<a
+href="https://dspillustrations.com/pages/posts/misc/the-dirac-comb-and-its-fourier-transform.html">https://dspillustrations.com/pages/posts/misc/the-dirac-comb-and-its-fourier-transform.html</a>]</p>
+<p>ECE 3793 Signals and Systems Spring 2017, Chapter 7 [<a
+href="https://coecs.ou.edu/Joseph.P.Havlicek/ece3793/notes/ECE3793NotesCh07.pdf">https://coecs.ou.edu/Joseph.P.Havlicek/ece3793/notes/ECE3793NotesCh07.pdf</a>]</p>
+<p>Oppenheim, A.V., Willsky, A.S., &amp; Nawab, S.H. (1996). Signals
+&amp; systems (2nd ed.).</p>
+<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
+3rd edition</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
   </entry>
   <entry>
     <title>Functional Coverage Modeling</title>
@@ -12939,7 +12964,7 @@ Units</li>
       </tags>
   </entry>
   <entry>
-    <title>impulse train to discrete-time sequence</title>
+    <title>Sampling of Continuous Time Signals</title>
     <url>/2022/05/01/sampling-dft/</url>
     <content><![CDATA[<p>The sampling process mathematically in the two stages:</p>
 <ul>
@@ -13000,14 +13025,14 @@ zero,except at integer multiples of <span
 class="math inline">\(T\)</span>.</p></li>
 <li><p>The sequence <span class="math inline">\(x[n]\)</span> is indexed
 on the integer variable <span class="math inline">\(n\)</span>, which
-introduces a *time normalization, <span
+introduces a <em>time normalization</em>, <span
 class="math inline">\(x[n]\)</span> contains <strong>no</strong>
 explicit information about the sampling period <span
 class="math inline">\(T\)</span></p></li>
 <li><p>The samples of <span class="math inline">\(x_c(t)\)</span> are
 represented by <em>finite numbers</em> in <span
-class="math inline">\(x[n]\)</span> rather than as the *areas of
-impulses in <span class="math inline">\(x_s(t)\)</span></p></li>
+class="math inline">\(x[n]\)</span> rather than as the <em>areas of
+impulses</em> in <span class="math inline">\(x_s(t)\)</span></p></li>
 </ul>
 </blockquote>
 <p>Our eventual objective is to express <span
@@ -13095,43 +13120,6 @@ impulse</p>
 <p><img src="/2022/05/01/sampling-dft/image-20220501020004068.png"
 alt="image-20220501020004068" /></p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% continuous system</span></span><br><span class="line">s = tf(<span class="string">&#x27;s&#x27;</span>);</span><br><span class="line">h = <span class="number">2</span>*<span class="built_in">pi</span>/(<span class="number">2</span>*<span class="built_in">pi</span>+s);</span><br><span class="line">[mag, phs, wout] = bode(h);</span><br><span class="line">fct = wout(:)/<span class="number">2</span>/<span class="built_in">pi</span>;</span><br><span class="line">Hct_dB = <span class="number">20</span>*<span class="built_in">log10</span>(mag(:));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fstep = <span class="number">0.01</span>;           <span class="comment">% freq resolution</span></span><br><span class="line">fnyqst = <span class="number">100</span>;</span><br><span class="line">Ts = <span class="number">1</span>/(<span class="number">2</span>*fnyqst);</span><br><span class="line">Fs = <span class="number">1</span>/Ts;              <span class="comment">% sampling freq</span></span><br><span class="line">Ns = <span class="built_in">ceil</span>(Fs/fstep);    <span class="comment">% samping points</span></span><br><span class="line">fstep = Fs/Ns;          <span class="comment">% update fstep</span></span><br><span class="line">t = (<span class="number">0</span>:Ns<span class="number">-1</span>)*Ts;        <span class="comment">% sampling time points</span></span><br><span class="line"></span><br><span class="line">y = impulse(h, t);      <span class="comment">% impulse resp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% modelling as discrete system</span></span><br><span class="line">Y = fft(y);                 <span class="comment">% dft</span></span><br><span class="line">Hfft = Y * Ts;              <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfft_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfft(<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)));</span><br><span class="line">ffft = (<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)*fstep - fstep;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Hfir, ffir] = freqz(y, <span class="number">1</span>, [], <span class="number">1</span>/Ts);   <span class="comment">% modelling as FIR</span></span><br><span class="line">Hfir = Hfir * Ts;           <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfir_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfir));</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot</span></span><br><span class="line">semilogx(fct, Hct_dB, <span class="string">&#x27;k&#x27;</span>, ffft, Hfft_dB, <span class="string">&#x27;r.-&#x27;</span>, ffir, Hfir_dB, <span class="string">&#x27;b--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;bode(s)&#x27;</span>, <span class="string">&#x27;fft&#x27;</span>, <span class="string">&#x27;FIR model&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">xlim([<span class="number">1e-2</span> <span class="number">1e2</span>]);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response of different methods&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="fourier-transform-of-impusle-train">Fourier transform of impusle
-train</h2>
-<h3 id="periodic-continuous-time">Periodic Continuous-Time</h3>
-<p><span class="math display">\[
-x(t) = \sum_{n \in \mathbb{Z}}\delta(t-nT)\overset{FT}{\longrightarrow}
-\frac{2\pi}{T}\sum_{k\in \mathbb{Z}}\delta(\omega - k\frac{2\pi}{T})
-\]</span></p>
-<h3 id="periodic-discrete-time">Periodic Discrete-Time</h3>
-<p>Consider the periodic discrete-time impulse train <span
-class="math display">\[
-\tilde{p}[n] = \sum_{r=-\infty}^{\infty}\delta[n-rN]
-\]</span> <strong>DFS</strong> of <span
-class="math inline">\(\tilde{p}[n]\)</span> is <span
-class="math display">\[
-\tilde{P}[k] = 1,\quad \text{for all k.}
-\]</span> Therefore, the <strong>DTFT</strong> of <span
-class="math inline">\(\tilde{p}[n]\)</span> is <span
-class="math display">\[
-\tilde{P}(e^{j\omega}) =
-\frac{2\pi}{N}\sum_{k=-\infty}^{\infty}\delta\left( \omega - \frac{2\pi
-k}{N} \right)
-\]</span></p>
-<h3 id="multiplication-property-of-fourier-transform">Multiplication
-Property of Fourier Transform</h3>
-<p><span class="math display">\[
-x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
-\]</span> Then sampled signal fourier transform is <span
-class="math display">\[\begin{align}
-X_s(\omega) &amp;= \frac{1}{2\pi}X_{\delta}(\omega)*X(\omega) \\
-&amp;= \frac{1}{T} \left(\sum_{k\in \mathbb{Z}}\delta(\omega -
-k\frac{2\pi}{T})\right) * X(\omega)
-\end{align}\]</span></p>
-<p><a
-href="https://web.stanford.edu/class/ee179/lectures/notes11.pdf">Lecture
-11: Sampling and Pulse Modulation</a></p>
-<p><img src="/2022/05/01/sampling-dft/image-20220520221108500.png"
-alt="image-20220520221108500" /></p>
 <h2 id="gotcha">Gotcha</h2>
 <p>A remarkable fact of linear systems is that the <strong>complex
 exponentials</strong> are <strong>eigenfunctions</strong> of a linear
@@ -13209,13 +13197,6 @@ V. Oppenheim, 3rd edition.” (2011).</p>
       <categories>
         <category>dsp</category>
       </categories>
-      <tags>
-        <tag>fft</tag>
-        <tag>dft</tag>
-        <tag>fir</tag>
-        <tag>sampling</tag>
-        <tag>freqz</tag>
-      </tags>
   </entry>
   <entry>
     <title>Successive Approximation (SAR) ADC</title>
@@ -15500,8 +15481,8 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
       <tags>
         <tag>dac</tag>
         <tag>pam4</tag>
-        <tag>fir</tag>
         <tag>tx</tag>
+        <tag>fir</tag>
       </tags>
   </entry>
   <entry>
@@ -16875,11 +16856,11 @@ Data Communications</p>
       </categories>
       <tags>
         <tag>dac</tag>
-        <tag>fir</tag>
         <tag>serdes</tag>
         <tag>ffe</tag>
         <tag>sst</tag>
         <tag>tx</tag>
+        <tag>fir</tag>
       </tags>
   </entry>
   <entry>
@@ -17086,11 +17067,11 @@ href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-desig
         <category>dsp</category>
       </categories>
       <tags>
-        <tag>dtft</tag>
         <tag>fft</tag>
         <tag>psd</tag>
         <tag>fir</tag>
         <tag>eq</tag>
+        <tag>dtft</tag>
       </tags>
   </entry>
   <entry>

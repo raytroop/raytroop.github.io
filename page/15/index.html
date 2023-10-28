@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,128 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/01/multicycle-paths/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/01/multicycle-paths/" class="post-title-link" itemprop="url">Multicycle Paths Constraints in PrimeTime</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-01 21:44:30" itemprop="dateCreated datePublished" datetime="2022-03-01T21:44:30+00:00">2022-03-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>PrimeTime <em>does not</em> automatically identifies multicycle
-paths.</p>
-<h4 id="specifying-multicycle-path-for-setup">specifying multicycle path
-for setup</h4>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set_multicycle_path <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">set_multicycle_path -setup <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># check the exception</span></span><br><span class="line">report_exception</span><br></pre></td></tr></table></figure>
-<h4
-id="specifying-multicycle-path-for-hold-new-data-every-6-cycles">specifying
-multicycle path for hold (new data every 6 cycles)</h4>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set_multicycle_path -setup <span class="number">6</span> -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br><span class="line">set_multicycle_path -hold [<span class="keyword">expr</span> <span class="number">6</span><span class="number">-1</span>] -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/01/multicycle-paths/image-20220301215938296.png"
-alt="image-20220301215938296" /></p>
-<p>M<sub>H</sub> stands for Hold Multiplier, M<sub>S</sub> for Setup
-Multiplier. The Setup multiplier counts up with increasing clock cycles,
-the Hold Multiplier counts up with decreasing cycles. The origin (0) for
-the Hold Multiplier is always at the <code>Setup Multiplier - 1</code>
-position.</p>
-<h4 id="reporting-a-multicycle-path-with-report_timing">Reporting a
-multicycle path with report_timing</h4>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">report_timing -exceptions all -from *reg[<span class="number">26</span>]/CP -to *reg/D</span><br></pre></td></tr></table></figure>
-<h4 id="timing-exceptions">Timing Exceptions</h4>
-<p>If certain paths are <strong>not</strong> intended to operate
-according to <em>the default setup and hold behavior assumed by the
-PrimeTime tool</em>, you need to specify those paths as timing
-exceptions. Otherwise, the tool might incorrectly report those paths as
-having timing violations.</p>
-<p>The PrimeTime tool lets you specify the following types of
-exceptions:</p>
-<ul>
-<li>False path – A path that is never sensitized due to the logic
-configuration, expected data sequence, or operating mode.</li>
-<li>Multicycle path – A path designed to take more than one clock cycle
-from launch to capture.</li>
-<li>Minimum or maximum delay path – A path that must meet a delay
-constraint that you explicitly specify as a time value.</li>
-</ul>
-<h4 id="ref">REF</h4>
-<p>PrimeTime® User Guide Version O-2018.06-SP4 Chapter 1: Introduction
-to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -348,7 +226,7 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -459,7 +337,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -575,7 +453,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:26" itemprop="dateModified" datetime="2023-10-28T09:07:26+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -677,7 +555,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1192,7 +1070,7 @@ Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1307,7 +1185,7 @@ threads</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:26" itemprop="dateModified" datetime="2023-10-28T09:07:26+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1427,7 +1305,7 @@ variant, the it is defined as a subsequence and its
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1552,7 +1430,7 @@ target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analo
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1656,7 +1534,7 @@ Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1686,6 +1564,96 @@ src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
 alt="endcap_tapcell_floorplan.drawio" /></p>
 <p><strong>REF:</strong> <a
 target="_blank" rel="noopener" href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/14/innovus-bump-part1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/14/innovus-bump-part1/" class="post-title-link" itemprop="url">innovus create and assign bump - part one</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-14 23:27:17" itemprop="dateCreated datePublished" datetime="2022-02-14T23:27:17+00:00">2022-02-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="powerground-bump">power/ground bump</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x0</span> <span class="variable">$y</span>  </span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x1</span> <span class="variable">$y</span> </span><br><span class="line">...</span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$xn</span> <span class="variable">$y</span> </span><br><span class="line">deselectAll </span><br><span class="line">select_bump –bum_cell PAD90UBMBOP </span><br><span class="line">assignPGBumps –nets &#123;vss vdd_dig&#125; -selected –checkboard</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/02/14/innovus-bump-part1/pma_dig_bumps.drawio.svg"
+alt="pma_dig_bumps.drawio" /></p>
+<h4 id="signal-or-powerground-bump">signal or power/ground bump</h4>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> bump_name [create_bump –cell PAD150PITCH –loc <span class="variable">$bump_x</span> <span class="variable">$bump_y</span> –loc_type cell_center –return_bumps_name] </span><br><span class="line"><span class="comment"># assign power/ground bump</span></span><br><span class="line">assignPGBumps –bumps <span class="variable">$bump_name</span> –nets <span class="variable">$pin_name</span> </span><br><span class="line"><span class="comment"># or assign to signal bump</span></span><br><span class="line">assignSigToBump –bumps <span class="variable">$bump_name</span> –net <span class="variable">$pin_name</span> </span><br></pre></td></tr></table></figure>
 
       
     </div>

@@ -190,6 +190,226 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/periodic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/28/periodic/" class="post-title-link" itemprop="url">Periodic Analysis</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-10-28 16:22:29 / Modified: 09:07:27" itemprop="dateCreated datePublished" datetime="2023-10-28T16:22:29+00:00">2023-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>The steady-state response is the response that results after any
+transient effects have dissipated.</p>
+<p><strong>The large signal solution is the starting point for
+small-signal analyses</strong>, including periodic AC, periodic transfer
+function, periodic noise, periodic stability, and periodic scattering
+parameter analyses.</p>
+<blockquote>
+<p>Designers refer periodic steady state analysis in <em>time
+domain</em> as <strong>"PSS"</strong> and corresponding <em>frequency
+domain</em> notation as <strong>"HB"</strong></p>
+</blockquote>
+<p><img src="/2023/10/28/periodic/image-20231028163033255.png"
+alt="image-20231028163033255" /></p>
+<h2 id="harmonic-balance-analysis">Harmonic Balance Analysis</h2>
+<p><strong>Large-signal/small-signal analysis</strong>, or
+<strong>conversion matrix analysis</strong>, is useful for a large class
+of problems wherein a nonlinear device is driven, or "pumped" by a
+<strong>single large sinusoidal signal</strong>; another signal, much
+smaller, is applied; and we seek only the <strong>linear response to the
+small signal</strong>.</p>
+<p><img src="/2023/10/28/periodic/image-20220511203515431.png"
+alt="image-20220511203515431" /></p>
+<p>The above nonlinear element has the <span
+class="math inline">\(I/V\)</span> relationship <span
+class="math inline">\(I=f(V)\)</span>. Assuming that <span
+class="math inline">\(V\)</span> consists of the sum of a large-signal
+component <span class="math inline">\(V_0\)</span> and a small-signal
+component <span class="math inline">\(v\)</span>, with Taylor series
+<span class="math display">\[
+f(V_0+v) = f(V_0)+\frac{d}{dV}f(V)|_{V=V_0}\cdot
+v+\frac{1}{2}\frac{d^2}{dV^2}f(V)|_{V=V_0}\cdot v^2+...
+\]</span> The small-signal, incremental current is found by subtracting
+the large-signal component of the current <span class="math display">\[
+i(v)=I(V_0+v)-I(V_0)
+\]</span> If <span class="math inline">\(v \ll V_0\)</span>, <span
+class="math inline">\(v^2\)</span>, <span
+class="math inline">\(v^3\)</span>,... are negligible. Then, <span
+class="math display">\[
+i(v) = \frac{d}{dV}f(V)|_{V=V_0}\cdot v
+\]</span> <span class="math inline">\(V_0\)</span> need not be a dc
+quantity; it can be a time-varying large-signal voltage <span
+class="math inline">\(V_L(t)\)</span> and that <span
+class="math inline">\(v=v(t)\)</span>, a function of time. Then <span
+class="math display">\[
+i(t) = \frac{d}{dV}f(V)|_{V=V_L(t)}\cdot v(t)
+\]</span></p>
+<p>The above equation can be expressed as <span class="math display">\[
+i(t)=g(t)v(t)
+\]</span> where <span
+class="math inline">\(g(t)=\frac{d}{dV}f(V)|_{V=V_L(t)}\)</span></p>
+<blockquote>
+<p>If <span class="math inline">\(f(V) = V^2\)</span>, then <span
+class="math display">\[\begin{align}
+i(t) &amp;= \frac{d}{dV}V^2|_{V=V_L(t)}\cdot v(t) \\
+&amp;= 2V_L(t) \cdot v(t)
+\end{align}\]</span></p>
+</blockquote>
+<p>A nonlinear element excited by two tones, generate mixing frequencies
+<span class="math inline">\(m\omega_1+n\omega_w\)</span>, where <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(n\)</span> are integers. If one of those tones,
+<span class="math inline">\(\omega_1\)</span> has such <strong>low
+level</strong> that it does not generate harmonics and the other is a
+large-signal sinusoid at <span class="math inline">\(\omega_p\)</span>,
+then the mixing frequencies are <span
+class="math inline">\(\omega=\pm\omega_1+n\omega_p\)</span>, which shown
+in below figure</p>
+<p><img src="/2023/10/28/periodic/image-20220511211114421.png"
+alt="image-20220511211114421" /></p>
+<p>A more compact representation of the mixing frequencies is <span
+class="math display">\[
+\omega_n=\omega_0+n\omega_p
+\]</span> which includes only half of the mixing frequencies: the
+negative components of the lower sidebands and the positive components
+of the upper sidebands</p>
+<p><img src="/2023/10/28/periodic/image-20220511211336437.png"
+alt="image-20220511211336437" /></p>
+<p>The <strong>frequency-domain</strong> currents and voltages in a
+<em>time-varying</em> circuit element are related by a
+<strong>conversion matrix</strong></p>
+<p>The small-signal voltage and current can be expressed in the
+frequency notation as <span class="math display">\[
+v&#39;(t) = \sum_{n=-\infty}^{\infty}V_ne^{j\omega_nt}
+\]</span> and <span class="math display">\[
+i&#39;(t) = \sum_{n=-\infty}^{\infty}I_ne^{j\omega_nt}
+\]</span> where <span class="math inline">\(v&#39;(t)\)</span> and <span
+class="math inline">\(i&#39;(t)\)</span> are not Fourier series.</p>
+<p>The conductance waveform <span class="math inline">\(g(t)\)</span>
+can be expressed by its Fourier series, <span class="math display">\[
+g(t)=\sum_{n=-\infty}^{\infty}G_ne^{jn\omega_pt}
+\]</span> Which is harmonics of large-signal <span
+class="math inline">\(\omega_p\)</span></p>
+<p>Then the voltage and current are related by Ohm's law <span
+class="math display">\[
+i&#39;(t)=g(t)v&#39;(t)
+\]</span> Then <span class="math display">\[
+\sum_{k=-\infty}^{\infty}I_ke^{j\omega_kt}=\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}G_nV_me^{j\omega_{m+n}t}
+\]</span></p>
+<h2 id="shooting-newton">Shooting Newton</h2>
+<h2 id="reference">reference</h2>
+<p>The Value Of RF Harmonic Balance Analyses For Analog Verification:
+Frequency domain periodic large and small signal analyses. [<a
+target="_blank" rel="noopener" href="https://semiengineering.com/the-value-of-rf-harmonic-balance-analyses-for-analog-verification/">https://semiengineering.com/the-value-of-rf-harmonic-balance-analyses-for-analog-verification/</a>]</p>
+<p>Prof. Shanthi Pavan. Introduction to Time - Varying Electrical
+Network. [<a
+target="_blank" rel="noopener" href="https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9">https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9</a>]</p>
+<p>R. S. Ashwin Kumar. EE698W: Analog circuits for signal processing [<a
+target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html">https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html</a>]</p>
+<p>Wereley, Norman. (1990). Analysis and control of linear periodically
+time varying systems.</p>
+<p>Hameed, S. (2017). Design and Analysis of Programmable Receiver
+Front-Ends Based on LPTV Circuits. <em>UCLA</em>. ProQuest ID:
+Hameed_ucla_0031D_15577. Merritt ID: ark:/13030/m5gb6zcz. Retrieved from
+<a
+target="_blank" rel="noopener" href="https://escholarship.org/uc/item/51q2m7bx">https://escholarship.org/uc/item/51q2m7bx</a></p>
+<p>Matt Allen. Introduction to Linear Time Periodic Systems. [<a
+target="_blank" rel="noopener" href="https://youtu.be/OCOkEFDQKTI">https://youtu.be/OCOkEFDQKTI</a>]</p>
+<p>Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition ,
+Artech, 2003.</p>
+<p>RF Harmonic Balance Analysis for Nonlinear Circuits [<a
+target="_blank" rel="noopener" href="https://resources.pcb.cadence.com/blog/2019-rf-harmonic-balance-analysis-for-nonlinear-circuits">link</a>]</p>
+<p>Steer, Michael. Microwave and RF Design (Third Edition, 2019). NC
+State University, 2019.</p>
+<p>Steer, Michael. Harmonic Balance Analysis of Nonlinear RF Circuits -
+Case Study Index: CS_AmpHB [<a
+target="_blank" rel="noopener" href="https://youtu.be/BM5ZQgfb_sY?si=bjN_hMe-wvoeGHzu">link</a>]</p>
+<p>Vishal Saxena, "SpectreRF Periodic Analysis" URL:<a
+target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf">https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf</a></p>
+<p>Josh Carnes,Peter Kurahashi. "Periodic Analyses of Sampled Systems"
+URL:<a
+target="_blank" rel="noopener" href="https://slideplayer.com/slide/14865977/">https://slideplayer.com/slide/14865977/</a></p>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF. URL:<a
+target="_blank" rel="noopener" href="https://designers-guide.org/analysis/sc-filters.pdf">https://designers-guide.org/analysis/sc-filters.pdf</a></p>
+<p>Article (20482538) Title: Why is pnoise sampled(jitter) different
+than pnoise timeaverage on a driven circuit? URL:<a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009EStcUAG">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009EStcUAG</a></p>
+<p>Article (20467468) Title: The mathematics behind choosing the upper
+frequency when simulating pnoise jitter on an oscillator URL:<a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000007MnBUUA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000007MnBUUA0</a></p>
+<p>Andrew Beckett. "Simulating phase noise for PFD-CP". URL:<a
+target="_blank" rel="noopener" href="https://groups.google.com/g/comp.cad.cadence/c/NPisXTElx6E/m/XjWxKbbfh2cJ">https://groups.google.com/g/comp.cad.cadence/c/NPisXTElx6E/m/XjWxKbbfh2cJ</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/21/CircuitImage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -226,7 +446,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:26" itemprop="dateModified" datetime="2023-10-28T09:07:26+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,7 +531,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -605,7 +825,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -794,7 +1014,7 @@ phase-noise analysis: Part 2 of two parts. Microwaves and Rf. 40.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -859,216 +1079,6 @@ Solid-State Circuits Magazine, Vol. 12, Issue 4, to appear, Fall
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/16/lptv/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/16/lptv/" class="post-title-link" itemprop="url">Linear Periodically Time-Varying Systems (LPTV)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-10-16 21:02:43" itemprop="dateCreated datePublished" datetime="2023-10-16T21:02:43+00:00">2023-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="harmonic-balance-analysis">Harmonic Balance Analysis</h2>
-<p><strong>Large-signal/small-signal analysis</strong>, or
-<strong>conversion matrix analysis</strong>, is useful for a large class
-of problems wherein a nonlinear device is driven, or "pumped" by a
-<strong>single large sinusoidal signal</strong>; another signal, much
-smaller, is applied; and we seek only the <strong>linear response to the
-small signal</strong>.</p>
-<p><img src="/2023/10/16/lptv/image-20220511203515431.png"
-alt="image-20220511203515431" /></p>
-<p>The above nonlinear element has the <span
-class="math inline">\(I/V\)</span> relationship <span
-class="math inline">\(I=f(V)\)</span>. Assuming that <span
-class="math inline">\(V\)</span> consists of the sum of a large-signal
-component <span class="math inline">\(V_0\)</span> and a small-signal
-component <span class="math inline">\(v\)</span>, with Taylor series
-<span class="math display">\[
-f(V_0+v) = f(V_0)+\frac{d}{dV}f(V)|_{V=V_0}\cdot
-v+\frac{1}{2}\frac{d^2}{dV^2}f(V)|_{V=V_0}\cdot v^2+...
-\]</span> The small-signal, incremental current is found by subtracting
-the large-signal component of the current <span class="math display">\[
-i(v)=I(V_0+v)-I(V_0)
-\]</span> If <span class="math inline">\(v \ll V_0\)</span>, <span
-class="math inline">\(v^2\)</span>, <span
-class="math inline">\(v^3\)</span>,... are negligible. Then, <span
-class="math display">\[
-i(v) = \frac{d}{dV}f(V)|_{V=V_0}\cdot v
-\]</span> <span class="math inline">\(V_0\)</span> need not be a dc
-quantity; it can be a time-varying large-signal voltage <span
-class="math inline">\(V_L(t)\)</span> and that <span
-class="math inline">\(v=v(t)\)</span>, a function of time. Then <span
-class="math display">\[
-i(t) = \frac{d}{dV}f(V)|_{V=V_L(t)}\cdot v(t)
-\]</span></p>
-<p>The above equation can be expressed as <span class="math display">\[
-i(t)=g(t)v(t)
-\]</span> where <span
-class="math inline">\(g(t)=\frac{d}{dV}f(V)|_{V=V_L(t)}\)</span></p>
-<blockquote>
-<p>If <span class="math inline">\(f(V) = V^2\)</span>, then <span
-class="math display">\[\begin{align}
-i(t) &amp;= \frac{d}{dV}V^2|_{V=V_L(t)}\cdot v(t) \\
-&amp;= 2V_L(t) \cdot v(t)
-\end{align}\]</span></p>
-</blockquote>
-<p>A nonlinear element excited by two tones, generate mixing frequencies
-<span class="math inline">\(m\omega_1+n\omega_w\)</span>, where <span
-class="math inline">\(m\)</span> and <span
-class="math inline">\(n\)</span> are integers. If one of those tones,
-<span class="math inline">\(\omega_1\)</span> has such <strong>low
-level</strong> that it does not generate harmonics and the other is a
-large-signal sinusoid at <span class="math inline">\(\omega_p\)</span>,
-then the mixing frequencies are <span
-class="math inline">\(\omega=\pm\omega_1+n\omega_p\)</span>, which shown
-in below figure</p>
-<p><img src="/2023/10/16/lptv/image-20220511211114421.png"
-alt="image-20220511211114421" /></p>
-<p>A more compact representation of the mixing frequencies is <span
-class="math display">\[
-\omega_n=\omega_0+n\omega_p
-\]</span> which includes only half of the mixing frequencies: the
-negative components of the lower sidebands and the positive components
-of the upper sidebands</p>
-<p><img src="/2023/10/16/lptv/image-20220511211336437.png"
-alt="image-20220511211336437" /></p>
-<p>The <strong>frequency-domain</strong> currents and voltages in a
-<em>time-varying</em> circuit element are related by a
-<strong>conversion matrix</strong></p>
-<p>The small-signal voltage and current can be expressed in the
-frequency notation as <span class="math display">\[
-v&#39;(t) = \sum_{n=-\infty}^{\infty}V_ne^{j\omega_nt}
-\]</span> and <span class="math display">\[
-i&#39;(t) = \sum_{n=-\infty}^{\infty}I_ne^{j\omega_nt}
-\]</span> where <span class="math inline">\(v&#39;(t)\)</span> and <span
-class="math inline">\(i&#39;(t)\)</span> are not Fourier series.</p>
-<p>The conductance waveform <span class="math inline">\(g(t)\)</span>
-can be expressed by its Fourier series, <span class="math display">\[
-g(t)=\sum_{n=-\infty}^{\infty}G_ne^{jn\omega_pt}
-\]</span> Which is harmonics of large-signal <span
-class="math inline">\(\omega_p\)</span></p>
-<p>Then the voltage and current are related by Ohm's law <span
-class="math display">\[
-i&#39;(t)=g(t)v&#39;(t)
-\]</span> Then <span class="math display">\[
-\sum_{k=-\infty}^{\infty}I_ke^{j\omega_kt}=\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}G_nV_me^{j\omega_{m+n}t}
-\]</span></p>
-<div class="pdf-container" data-target="/pdfs/hb_conversion_matrix.pdf" data-height="500px"></div>
-<h2 id="reference">reference</h2>
-<p>Prof. Shanthi Pavan. Introduction to Time - Varying Electrical
-Network. [<a
-target="_blank" rel="noopener" href="https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9">https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9</a>]</p>
-<p>R. S. Ashwin Kumar. EE698W: Analog circuits for signal processing [<a
-target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html">https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html</a>]</p>
-<p>Wereley, Norman. (1990). Analysis and control of linear periodically
-time varying systems.</p>
-<p>Hameed, S. (2017). Design and Analysis of Programmable Receiver
-Front-Ends Based on LPTV Circuits. <em>UCLA</em>. ProQuest ID:
-Hameed_ucla_0031D_15577. Merritt ID: ark:/13030/m5gb6zcz. Retrieved from
-<a
-target="_blank" rel="noopener" href="https://escholarship.org/uc/item/51q2m7bx">https://escholarship.org/uc/item/51q2m7bx</a></p>
-<p>Matt Allen. Introduction to Linear Time Periodic Systems. [<a
-target="_blank" rel="noopener" href="https://youtu.be/OCOkEFDQKTI">https://youtu.be/OCOkEFDQKTI</a>]</p>
-<p><em>Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition
-, Artech, 2003.</em></p>
-<p>RF Harmonic Balance Analysis for Nonlinear Circuits [<a
-target="_blank" rel="noopener" href="https://resources.pcb.cadence.com/blog/2019-rf-harmonic-balance-analysis-for-nonlinear-circuits">link</a>]</p>
-<p>Steer, Michael. Microwave and RF Design (Third Edition, 2019). NC
-State University, 2019.</p>
-<p>Steer, Michael. Harmonic Balance Analysis of Nonlinear RF Circuits -
-Case Study Index: CS_AmpHB [<a
-target="_blank" rel="noopener" href="https://youtu.be/BM5ZQgfb_sY?si=bjN_hMe-wvoeGHzu">link</a>]</p>
-<p>Vishal Saxena, "SpectreRF Periodic Analysis" URL:<a
-target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf">https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf</a></p>
-<p>Josh Carnes,Peter Kurahashi. "Periodic Analyses of Sampled Systems"
-URL:<a
-target="_blank" rel="noopener" href="https://slideplayer.com/slide/14865977/">https://slideplayer.com/slide/14865977/</a></p>
-<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
-SpectreRF. URL:<a
-target="_blank" rel="noopener" href="https://designers-guide.org/analysis/sc-filters.pdf">https://designers-guide.org/analysis/sc-filters.pdf</a></p>
-<p>Article (20482538) Title: Why is pnoise sampled(jitter) different
-than pnoise timeaverage on a driven circuit? URL:<a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009EStcUAG">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009EStcUAG</a></p>
-<p>Article (20467468) Title: The mathematics behind choosing the upper
-frequency when simulating pnoise jitter on an oscillator URL:<a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000007MnBUUA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000007MnBUUA0</a></p>
-<p>Andrew Beckett. "Simulating phase noise for PFD-CP". URL:<a
-target="_blank" rel="noopener" href="https://groups.google.com/g/comp.cad.cadence/c/NPisXTElx6E/m/XjWxKbbfh2cJ">https://groups.google.com/g/comp.cad.cadence/c/NPisXTElx6E/m/XjWxKbbfh2cJ</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/06/tranOP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1105,7 +1115,7 @@ target="_blank" rel="noopener" href="https://groups.google.com/g/comp.cad.cadenc
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1234,7 +1244,7 @@ alt="image-20231006110506245" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1331,7 +1341,7 @@ target="_blank" rel="noopener" href="https://github.com/kplindegaard/smbus2/tree
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1431,7 +1441,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1490,7 +1500,10 @@ Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
 doi:10.1109/dac.1999.781313</p>
 <p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
 Checker and Rational Fit Model Generator [<a
-href="Article%20(20508931)%20Title:%20Introducing%20the%20Spectre%20S-Parameter%20Quality%20Checker%20and%20Rational%20Fit%20Model%20Generator%20(Presented%20at%20the%20IEEE%20IMS%202023)%20URL:%20https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">link</a>]</p>
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
+<p>The Complex Art Of Handling S-Parameters: The importance of
+extraction and fitting to circuit simulation involving S-parameters [<a
+target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
 
       
     </div>
@@ -1553,7 +1566,7 @@ href="Article%20(20508931)%20Title:%20Introducing%20the%20Spectre%20S-Parameter%
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-25 16:44:23" itemprop="dateModified" datetime="2023-10-25T16:44:23+00:00">2023-10-25</time>
+      <time title="Modified: 2023-10-28 09:07:27" itemprop="dateModified" datetime="2023-10-28T09:07:27+00:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

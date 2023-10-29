@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">179</span>
+          <span class="site-state-item-count">178</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,214 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/23/esd-dual-diodes-ggnmos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/23/esd-dual-diodes-ggnmos/" class="post-title-link" itemprop="url">Dual Diode and ggNMOS</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-23 22:21:54" itemprop="dateCreated datePublished" datetime="2022-06-23T22:21:54+00:00">2022-06-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="hia-diode">HIA diode</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
-alt="image-20230517233753530" /></p>
-<blockquote>
-<p><em>HIA</em> = High Amp</p>
-<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
-diode</p>
-<p>HIA diode process is same with regular junction diode</p>
-</blockquote>
-<h2 id="strap">STRAP</h2>
-<p>A "strap" refers to a low-impedance connection</p>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518001007350.png"
-alt="image-20230518001007350" /></p>
-<p>NWDMY = NWDMY1, NWDMY2</p>
-<p>STRAP = NWSTRAP or PWSTRAP</p>
-<p>NWSTRAP = {NP &amp; OD} &amp; {NW not {NW INTERACT NWDMY}}</p>
-<p>PWSTRAP = {PP &amp; OD} not NW</p>
-<table>
-<thead>
-<tr class="header">
-<th>cell  pin</th>
-<th>PLUS</th>
-<th>MINUS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>N diode</strong></td>
-<td>PWSTRAP</td>
-<td>\</td>
-</tr>
-<tr class="even">
-<td><strong>P diode</strong></td>
-<td>\</td>
-<td>NWSTRAP</td>
-</tr>
-</tbody>
-</table>
-<h3 id="calibre-rulenot">Calibre Rule::NOT</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518005758993.png"
-alt="image-20230518005758993" /></p>
-<h3 id="calibre-ruleinteract">Calibre Rule::INTERACT</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010124496.png"
-alt="image-20230518010124496" /></p>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010758342.png"
-alt="image-20230518010758342" /></p>
-<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
-alt="image-20230518012456390" /></p>
-<blockquote>
-<p>PS: I/O to GND positively</p>
-<p>NS: I/O to GND negatively</p>
-<p>PD: I/O to VDD positively</p>
-<p>ND: I/O to VDD negatively</p>
-</blockquote>
-<p>Dual diode should be used with <strong>power clamp</strong> for
-<strong>PS</strong> and <strong>ND</strong> path</p>
-<h3 id="pmos-power-clamp">PMOS power clamp</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
-alt="power_clamp_pmos.drawio" /></p>
-<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
-alt="image-20220623231619052" /></p>
-<blockquote>
-<p>The drain (D) is connected to an I/O pad and the gate (G) is
-grounded.</p>
-<p>To ensure “zero” leakage of the ESD protection structure under normal
-operations.</p>
-<p>To to protect gate of core device, tie-high and tie-low shall be used
-when used as secondary ESD protecton.</p>
-</blockquote>
-<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
-alt="image-20220623233019912" /></p>
-<ol type="1">
-<li><strong>DB</strong> junction is reverse-biased all the way to its
-breakdown.</li>
-<li>Avalance multiplication takes place and generates electron-hole
-pairs</li>
-<li>Hole current flows into the ground via the *B-region** and build up
-a potential, VR, across the lateral parasitic resistance R</li>
-<li>As VR increases, the <strong>BS</strong> junction turns on,
-eventually triggers the parasitic lateral NPN transistor Q
-(<strong>DBS</strong>)</li>
-</ol>
-<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
-alt="image-20220623233634452" /></p>
-<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
-the transient</p>
-<blockquote>
-<p>ggNMOS is commonly used in the GPIO provided by foundry, which
-alleviate the ESD design burden of customer.</p>
-<p>These GPIO is self-protective thanks to the ggNMOS.</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
-circuits: an IC design perspective. Boston, Mass: Kluwer Academic
-Publishers.</p>
-<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
-Stine, J. (2001). On-chip ESD protection design for integrated circuits:
-An overview for IC designers. Microelectronics Journal. 32. 733-747.
-10.1016/S0026-2692(01)00060-X.</p>
-<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
-Protection Design for Ics.” (2001).</p>
-<p>Introduction: ESD protection concepts for I/Os. URL: <a
-target="_blank" rel="noopener" href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
-<p>Answer: What does "strap" mean in this context? <a
-target="_blank" rel="noopener" href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
-<p>Hammer VLSI Flow URL: <a
-target="_blank" rel="noopener" href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
-<p>Calibre Rule Writing 2009</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -434,7 +226,7 @@ target="_blank" rel="noopener" href="https://fires.im/micro22-slides-pdf/04_hamm
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:27" itemprop="dateModified" datetime="2023-10-29T09:35:27+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -535,7 +327,7 @@ target="_blank" rel="noopener" href="https://www.francisz.cn/2019/07/18/sv-iff/"
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:27" itemprop="dateModified" datetime="2023-10-29T09:35:27+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -871,7 +663,7 @@ Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:27" itemprop="dateModified" datetime="2023-10-29T09:35:27+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1149,7 +941,7 @@ Sixth international symposium on quality electronic design (isqed'05),
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:27" itemprop="dateModified" datetime="2023-10-29T09:35:27+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1287,7 +1079,7 @@ Units</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:26" itemprop="dateModified" datetime="2023-10-29T09:35:26+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1549,7 +1341,7 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:27" itemprop="dateModified" datetime="2023-10-29T09:35:27+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1662,7 +1454,7 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:27" itemprop="dateModified" datetime="2023-10-29T09:35:27+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1784,7 +1576,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:26" itemprop="dateModified" datetime="2023-10-29T09:35:26+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1883,7 +1675,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-28 15:17:43" itemprop="dateModified" datetime="2023-10-28T15:17:43+00:00">2023-10-28</time>
+      <time title="Modified: 2023-10-29 09:35:27" itemprop="dateModified" datetime="2023-10-29T09:35:27+00:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1934,6 +1726,248 @@ alt="image-20230211001849150" /></p>
 <h3 id="reference">reference</h3>
 <p>Isolation cells and Level Shifter cells URL: <a
 target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/">https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/21/jitter-decomposition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/21/jitter-decomposition/" class="post-title-link" itemprop="url">Jitter Decomposition in High-Speed Links</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-21 15:54:54" itemprop="dateCreated datePublished" datetime="2022-05-21T15:54:54+00:00">2022-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-29 09:35:27" itemprop="dateModified" datetime="2023-10-29T09:35:27+00:00">2023-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Jitter separation lets you learn if the components of jitter are
+random or deterministic. That is, if they are caused by crosstalk,
+channel loss, or some other phenomenon. The identification of jitter and
+noise sources is critical when debugging failure sources in the
+transmission of high-speed serial signals</p>
+<ul>
+<li>Tail Fit Method</li>
+<li>Spectral method</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>RJ Extraction Methods</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectral</td>
+<td>Speed/Consistency to Past Measurements;<br />Accuracy in low
+Crosstalk or Aperiodic Bounded Uncorrelated Jitter (ABUJ)
+conditions</td>
+</tr>
+<tr class="even">
+<td>Tail Fit</td>
+<td>General Purpose;<br />Accuracy in high Crosstalk or ABUJ
+conditions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jitter-components">Jitter Components</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521190326201.png"
+alt="image-20220521190326201" /></p>
+<h2 id="dual-dirac-model">dual-Dirac model</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521181604467.png"
+alt="image-20220521181604467" /></p>
+<p><img src="/2022/05/21/jitter-decomposition/Figure-1.webp"
+alt="Figure-1" /></p>
+<h2 id="spectral-method">Spectral method</h2>
+<blockquote>
+<p>power spectral density (PSD) represents jitter spectrum and peaks in
+the spectrum can be interpreted as PJ or DDJ, while the average noise
+floor is the power of RJ</p>
+</blockquote>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521182929127.png"
+alt="image-20220521182929127" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">S1 = sum(win);</span><br><span class="line">S2 = sum(win.^<span class="number">2</span>);</span><br><span class="line">N = <span class="built_in">length</span>(win);</span><br><span class="line">spec_nospur2 = (spec_nospur*S1).^<span class="number">2</span>/N/S2;    <span class="comment">% To obtain linear spectrum for rj</span></span><br><span class="line">rj_utj = <span class="built_in">sqrt</span>(sum(spec_nospur2))*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">spec = <span class="number">1</span>*<span class="built_in">ones</span>(<span class="built_in">length</span>(spec_nospur), <span class="number">1</span>)*<span class="number">1e-21</span>;</span><br><span class="line">spec(index) = specx(index);</span><br><span class="line"><span class="comment">% insert fft nyquist frequency component between positive frequency and</span></span><br><span class="line"><span class="comment">% negative frequency component</span></span><br><span class="line"><span class="comment">% DC;posFreq;nyqFreq;negFreq</span></span><br><span class="line">spec_ifft = [spec;specnyq;<span class="built_in">conj</span>(spec(<span class="keyword">end</span>:<span class="number">-1</span>:<span class="number">2</span>))]&#x27;;</span><br><span class="line">sfactor = sum(win)/<span class="built_in">sqrt</span>(<span class="number">2</span>);</span><br><span class="line">spec_ifft = spec_ifft*sfactor;</span><br><span class="line">sig_rec = <span class="built_in">real</span>(ifft(spec_ifft));</span><br><span class="line">sig_rec = sig_rec(:);</span><br><span class="line">sig_rec_utj = sig_rec./win(<span class="number">1</span>:<span class="keyword">end</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="tail-fit-method">Tail Fit Method</h2>
+<blockquote>
+<p>Tail fitting algorithm based on the <strong>Gaussian tail
+model</strong> by using probability distribution of collected jitter
+value</p>
+</blockquote>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521191029433.png"
+alt="image-20220521191029433" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">bin_sig = bin_sig*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">x = qfuncinv(cdf_sig);</span><br><span class="line"></span><br><span class="line"><span class="comment">% coef(1)*bin_sig + coef(2) = x</span></span><br><span class="line"><span class="comment">% which x is norm(0, 1)</span></span><br><span class="line"><span class="comment">% bin_sig = (x - coef(2))/coef(1)</span></span><br><span class="line"><span class="comment">% Then bin is norm(-coef(2)/coef(1), 1/coef(1))</span></span><br><span class="line">coef = polyfit(bin_sig, x, <span class="number">1</span>);</span><br><span class="line">sigma = <span class="number">1</span>/coef(<span class="number">1</span>);</span><br><span class="line">mu = -coef(<span class="number">2</span>)*sigma;</span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">&#x27;sigma=%.3fps, mu=%.3fps\n&#x27;</span>, sigma, mu);</span><br></pre></td></tr></table></figure>
+<h2 id="least-squares-ls-method">Least Squares (LS) method</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524005848719.png"
+alt="image-20220524005848719" /></p>
+<p>It is known that TIE jitter is a linear equation, shown in below
+formula <span class="math display">\[
+x[n] = d_n \times \left[ \Delta t_{pj}[n]+\Delta t_{DCD}[n] +\Delta
+t_{ISI}[n]+\Delta t_{RJ}[n]\right]
+\]</span> LS can be used to estimate the PJ, DCD, RJ , and ISI
+parameters <span class="math inline">\([a,b,J_{DCD},J_0,
+J_1...J_{(2^k-1)}]\)</span></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524185332637.png"
+alt="image-20220524185332637" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524185351383.png"
+alt="image-20220524185351383" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524010446422.png"
+alt="image-20220524010446422" /></p>
+<h2 id="jitter-modeling">Jitter modeling</h2>
+<h3 id="periodic-jitter-pj">Periodic Jitter (PJ)</h3>
+<p>PJ is a repeating jitter <span class="math display">\[
+\Delta t_{PJ}[n]=A\sin(2\pi f_0\cdot nT_s + \theta)=a \sin(2\pi f_0
+\cdot nT_s)+b\cos(2\pi f_0 \cdot nT_s)
+\]</span> where <span class="math inline">\(f_0\)</span> represents the
+fundamental frequency of PJ; <span class="math inline">\(A\)</span> is
+the amplitude of PJ; <span class="math inline">\(T_s\)</span> is the
+data stream period, and <span class="math inline">\(\theta\)</span> is
+the initial phase of PJ</p>
+<blockquote>
+<p>In the spectrum, the frequency of maximum amount of the jitter is PJ
+frequency <span class="math inline">\(f_0\)</span>.</p>
+</blockquote>
+<h3 id="duty-cycle-distortion-dcd">Duty Cycle Distortion (DCD)</h3>
+<p>DCD is viewed as a series of <strong>adjacent positive and negative
+impulses</strong> <span class="math display">\[
+\Delta t_{DCD}[n] = J_{DCD}\times (-1)^n =
+[-J_{DCD},J_{DCD},-J_{DCD},J_{DCD},...]
+\]</span> Where <span class="math inline">\(J_{DCD}\)</span> is the DCD
+amplitude.</p>
+<h3 id="random-jitter-rj">Random Jitter (RJ)</h3>
+<p>RJ is created by unbounded jitter sources, such as Gaussian white
+noise. The statistical PDF for RJ is enerally treated as a Gaussian
+distribution <span class="math display">\[
+f_{RJ}(\Delta t) = \frac{1}{\sqrt{2\pi\sigma}}\exp(-\frac{(\Delta
+t)^2}{2\sigma^2})
+\]</span></p>
+<h2 id="remarks">Remarks</h2>
+<h3 id="periodic-jitter-generator-and-insertion">Periodic Jitter
+Generator and Insertion</h3>
+<p><em>Analysis and Estimation of Jitter Sub-Components: Classification
+and Segregation of Jitter Components</em></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521212129098.png"
+alt="image-20220521212129098" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521212142719.png"
+alt="image-20220521212142719" /></p>
+<h2 id="reference">Reference</h2>
+<p>Mike Li. 2007. Jitter, noise, and signal integrity at high-speed
+(First. ed.). Prentice Hall Press, USA.</p>
+<p><a target="_blank" rel="noopener" href="https://keysightevent.com/191023/handout/d">余宥浚 Jacky Yu,
+Keysight Taiwan AEO, Advanced Jitter and Eye-Diagram Analysis</a></p>
+<p>Y. Duan and D. Chen, "Accurate jitter decomposition in high-speed
+links," 2017 IEEE 35th VLSI Test Symposium (VTS), 2017, pp. 1-6, doi:
+10.1109/VTS.2017.7928918.</p>
+<p>Y. Duan's phd thesis URL: <a
+target="_blank" rel="noopener" href="https://dr.lib.iastate.edu/handle/20.500.12876/30459">https://dr.lib.iastate.edu/handle/20.500.12876/30459</a></p>
+<p>Y. Duan and D. Chen, "Fast and Accurate Decomposition of
+Deterministic Jitter Components in High-Speed Links," in IEEE
+Transactions on Electromagnetic Compatibility, vol. 61, no. 1, pp.
+217-225, Feb. 2019, doi: 10.1109/TEMC.2018.2797122.</p>
+<p>"Jitter Analysis: The Dual-Dirac Model, RJ/DJ, and Q-Scale",
+Whitepaper: Keysight Technologies, U.S.A., Dec. 2017</p>
+<p>Sharma, Vijender Kumar and Sujay Deb. "Analysis and Estimation of
+Jitter Sub-Components." (2014).</p>
+<p>Qingqi Dou and J. A. Abraham, "Jitter decomposition in ring
+oscillators," Asia and South Pacific Conference on Design Automation,
+2006., 2006, pp. 6 pp.-, doi: 10.1109/ASPDAC.2006.1594696.</p>
+<p>E. Balestrieri, L. De Vito, F. Lamonaca, F. Picariello, S. Rapuano
+and I. Tudosa, "The jitter measurement ways: The jitter decomposition,"
+in IEEE Instrumentation &amp; Measurement Magazine, vol. 23, no. 7, pp.
+3-12, Oct. 2020, doi: 10.1109/MIM.2020.9234759.</p>
+<p>McClure, Mark Scott. "Digital jitter measurement and separation." PhD
+diss., 2005.</p>
+<p>Ren, Nan, Zaiming Fu, Shengcu Lei, Hanglin Liu, and Shulin Tian.
+"Jitter generation model based on timing modulation and cross point
+calibration for jitter decomposition." Metrology and Measurement Systems
+28, no. 1 (2021).</p>
+<p>M. P. Li, J. Wilstrup, R. Jessen and D. Petrich, "A new method for
+jitter decomposition through its distribution tail fitting,"
+International Test Conference 1999. Proceedings (IEEE Cat.
+No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
 
       
     </div>

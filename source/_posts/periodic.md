@@ -237,6 +237,12 @@ $$
 
 
 
+# Linear periodically-varying Analyses
+
+1.  LPV analyses start by performing a periodic analysis to compute the **periodic operating point** with only the **large clock signal** applied (the LO, the clock, the carrier, etc.). 
+2. The circuit is then **linearized about this time-varying operating point** (expand about the periodic equilibrium point with a Taylor series and discard all but the first-order term)
+3. and the **small information signal** is applied. The response is calculated using linear time-varying analysis
+
 
 
 # a long way to go
@@ -1099,13 +1105,19 @@ The Value Of RF Harmonic Balance Analyses For Analog Verification: Frequency dom
 
 Prof. Shanthi Pavan. Introduction to Time - Varying Electrical Network. [[https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9](https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9)]
 
+Shanthi Pavan. EE5323: Advanced Electrical Networks (Jan-May. 2015) [[https://www.ee.iitm.ac.in/vlsi/courses/ee5323/start](https://www.ee.iitm.ac.in/vlsi/courses/ee5323/start)]
+
 R. S. Ashwin Kumar. EE698W: Analog circuits for signal processing [[https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html](https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html)]
+
+Piet Vanassche, Georges Gielen, and Willy Sansen. 2009. Systematic Modeling and Analysis of Telecom Frontends and their Building Blocks (1st. ed.). Springer Publishing Company, Incorporated.
 
 Wereley, Norman. (1990). Analysis and control of linear periodically time varying systems.
 
 Hameed, S. (2017). Design and Analysis of Programmable Receiver Front-Ends Based on LPTV Circuits. *UCLA*. ProQuest ID: Hameed_ucla_0031D_15577. Merritt ID: ark:/13030/m5gb6zcz. Retrieved from [https://escholarship.org/uc/item/51q2m7bx](https://escholarship.org/uc/item/51q2m7bx)
 
 Matt Allen. Introduction to Linear Time Periodic Systems.  [[https://youtu.be/OCOkEFDQKTI](https://youtu.be/OCOkEFDQKTI)]
+
+Fivel, Oren. "Analysis of Linear Time-Varying & Periodic Systems." *arXiv preprint arXiv:2202.00498* (2022).
 
 Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition , Artech, 2003.
 

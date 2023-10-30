@@ -1159,6 +1159,10 @@ Kester, Walt. (2005). Converting Oscillator Phase Noise to Time Jitter.  [[https
 
 Drakhlis, B.. (2001). Calculate oscillator jitter by using phase-noise analysis: Part 2 of two parts. Microwaves and Rf. 40. 109-119. 
 
+Explanation for sampled PXF analysis. [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/45055/explanation-for-sampled-pxf-analysis/1376140#1376140](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/45055/explanation-for-sampled-pxf-analysis/1376140#1376140)]
+
+模拟放大器的低噪声设计技术2-3实践 아날로그 증폭기의 저잡음 설계 기법2-3실습 [[https://youtu.be/vXLDfEWR31k?si=p2gbwaKoTxtfvrTc](https://youtu.be/vXLDfEWR31k?si=p2gbwaKoTxtfvrTc)]
+
 
 
 ## paper

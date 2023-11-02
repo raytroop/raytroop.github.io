@@ -8003,7 +8003,10 @@ alt="pma_dig_bumps.drawio" /></p>
   <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
-    <content><![CDATA[<h2 id="demystifying-stb-and-pstb-in-spectre">Demystifying stb and pstb
+    <content><![CDATA[<h2 id="inverter-capacitance">Inverter capacitance</h2>
+<p><img src="/2023/01/01/insight/invCap.png" alt="invCap" /></p>
+<h2 id="section"></h2>
+<h2 id="demystifying-stb-and-pstb-in-spectre">Demystifying stb and pstb
 in Spectre</h2>
 <p>All credits to my colleague, Zhang Wenpian.</p>
 <h3 id="spectres-stb-analysis">Spectre's stb analysis</h3>
@@ -14880,8 +14883,6 @@ alt="image-20220623013225554" /></p>
 <p><img src="/2022/03/17/tcoil/image-20220623013923263.png"
 alt="image-20220623013923263" /></p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% EMX - shield tcoil model</span></span><br><span class="line">L1 = csvread(<span class="string">&#x27;./L1sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">L2 = csvread(<span class="string">&#x27;./L2sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">k = csvread(<span class="string">&#x27;./ksim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% EMX - Tapped shield inductor</span></span><br><span class="line">L = csvread(<span class="string">&#x27;./Lsim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">freq = L1(:, <span class="number">1</span>)/<span class="number">1e9</span>;    <span class="comment">% GHz</span></span><br><span class="line">L1 = L1(:, <span class="number">2</span>);</span><br><span class="line">L2 = L2(:, <span class="number">2</span>);</span><br><span class="line">k = -k(:, <span class="number">2</span>);   <span class="comment">% Caution: minus of EMX ksim due to same current direction</span></span><br><span class="line"></span><br><span class="line">L = L(:, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">Lcalc = L1 + L2 + <span class="number">2</span>*k.*(L1.*L2).^<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq, L*<span class="number">1e9</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(freq, Lcalc*<span class="number">1e9</span>, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Inductance (nH)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Tapped inductor model&#x27;</span>, <span class="string">&#x27;tcoil model calc&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="inverter-capacitance">Inverter capacitance</h2>
-<p><img src="/2022/03/17/tcoil/invCap.png" alt="invCap" /></p>
 <h2 id="reference">reference</h2>
 <p>B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE
 Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall

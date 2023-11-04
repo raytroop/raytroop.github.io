@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:21" itemprop="dateModified" datetime="2023-11-03T13:36:21+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -367,7 +367,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -694,7 +694,7 @@ McGraw-Hill, 2017.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -729,6 +729,45 @@ with <span class="math inline">\(V_{GS}\)</span></p></li>
 <strong>monotonically</strong> with <span
 class="math inline">\(V_{GS}\)</span></p></li>
 </ul>
+<h2 id="rc-charge-and-discharge">RC charge and discharge</h2>
+<ul>
+<li><p>charge: <span class="math display">\[
+V_o(t) = V_{X}(1-e^{-\frac{t}{\tau}}) + V_{o,0}\cdot
+e^{-\frac{-t}{\tau}}
+\]</span></p></li>
+<li><p>discharge: <span class="math display">\[
+V_o(t) = V_{o,0}\cdot e^{-\frac{t}{\tau}} +
+V_{o,\infty}\cdot(1-e^{-\frac{t}{\tau}})
+\]</span></p></li>
+</ul>
+<blockquote>
+<ol type="1">
+<li><span class="math inline">\(e^{-\frac{t}{\tau}}\)</span> determine
+the <strong>initial state </strong></li>
+<li><span class="math inline">\((1-e^{-\frac{t}{\tau}})\)</span>
+determine the <strong>final state</strong></li>
+</ol>
+</blockquote>
+<p><img src="/2023/01/01/insight/image-20231104231640290.png"
+alt="image-20231104231640290" /></p>
+<p><img src="/2023/01/01/insight/image-20231104232000036.png"
+alt="image-20231104232000036" /></p>
+<h2 id="switched-capacitor-resistor.">switched-capacitor resistor.</h2>
+<p><img src="/2023/01/01/insight/image-20231104212333555.png"
+alt="image-20231104212333555" /></p>
+<p><img src="/2023/01/01/insight/image-20231104212343670.png"
+alt="image-20231104212343670" /></p>
+<blockquote>
+<p>Switching the capacitor moves a charge proportional to the voltage
+difference. The resistor achieves the same function only in a continuous
+manner.</p>
+<p>Using a water analogy, we can imagine a couple of scenarios:</p>
+<ol type="1">
+<li>a steady water flow,</li>
+<li>or 2) the same water delivered rapidly in buckets. Both create the
+same flow of water - <strong>on average!</strong></li>
+</ol>
+</blockquote>
 <h2 id="current-mirror-with-source-degeneration">Current mirror with
 source degeneration</h2>
 <p><img src="/2023/01/01/insight/image-20231103213308081.png"
@@ -740,6 +779,48 @@ src="/2023/01/01/insight/current_mirror_with_res_degeneration.jpg"
 alt="degeneration" /></p>
 <blockquote>
 <p>Razavi 2nd, problem 14.15</p>
+</blockquote>
+<h2 id="sinusoidal-steady-state-and-frequency-response">Sinusoidal
+steady-state and frequency response</h2>
+<p><img src="/2023/01/01/insight/image-20231104104933781.png"
+alt="image-20231104104933781" /></p>
+<p><img src="/2023/01/01/insight/image-20231104104946203.png"
+alt="image-20231104104946203" /></p>
+<p><img src="/2023/01/01/insight/image-20231104105056345.png"
+alt="image-20231104105056345" /></p>
+<p><img src="/2023/01/01/insight/image-20231104105139814.png"
+alt="image-20231104105139814" /></p>
+<p><img src="/2023/01/01/insight/image-20231104105223549.png"
+alt="image-20231104105223549" /></p>
+<p>Due to KCL and <span class="math inline">\(u(t)=e^{j\omega
+t}\)</span> and <span class="math inline">\(y(t)=H(j\omega)e^{j\omega
+t}\)</span>, we have ODE:</p>
+<p><span class="math display">\[\begin{align}
+\frac{u(t) - y(t)}{R} = C \frac{dy(t)}{dt} \\
+e^{j\omega t} - H(j\omega) e^{j\omega t} = H(j\omega)\cdot j\omega
+e^{j\omega t} \\
+\end{align}\]</span></p>
+<p><span class="math inline">\(H(j\omega)\)</span> is obtained as below
+<span class="math display">\[
+H(j\omega) = \frac{1}{1+j\omega}
+\]</span></p>
+<p><img src="/2023/01/01/insight/image-20231104135855739.png"
+alt="image-20231104135855739" /></p>
+<h2 id="monitored-analog-critical-parameters">Monitored Analog Critical
+Parameters</h2>
+<p><img src="/2023/01/01/insight/monitor_parameters.drawio.svg"
+alt="monitor_parameters.drawio" /></p>
+<p>Parameter Definition:</p>
+<p><span class="math display">\[\begin{align}
+I_{\text{D,lin}} &amp;= I_D \mid _{V_G=V_{DD},V_D=0.05V} \\
+I_{\text{D,sat}} &amp;= I_D \mid _{V_G=V_D=V_{DD}} \\
+V_{\text{t,lin}} &amp;= V_G \mid _{I_D=I_{\text{thx}}\cdot
+\frac{W}{L}@\{V_D=0.05V\}}
+\end{align}\]</span></p>
+<blockquote>
+<p><span class="math inline">\(I_{\text{thx}}\)</span> could be
+different for technologies. (For N16, <span
+class="math inline">\(I_{\text{thx}}=10\)</span>nA)</p>
 </blockquote>
 <h2 id="demystifying-stb-and-pstb-in-spectre">Demystifying stb and pstb
 in Spectre</h2>
@@ -1057,6 +1138,17 @@ Solid-State Circuits Magazine, Vol. 7, Issue 4, pp. 7-8, Fall 2015.</p>
 <p>Ali Sheikholeslami, Circuit Intuitions: Miller's Theorem IEEE
 Solid-State Circuits Magazine, Vol. 7, Issue 3, pp. 8-10, Summer
 2015.</p>
+<p>Stephen P. Boyd. EE102 Lecture 10 Sinusoidal steady-state and
+frequency response [<a
+target="_blank" rel="noopener" href="https://web.stanford.edu/~boyd/ee102/freq.pdf">https://web.stanford.edu/~boyd/ee102/freq.pdf</a>]</p>
+<p>Shanthi Pavan, "Demystifying Linear Time Varying Circuits"</p>
+<p>ecircuitcenter. Switched-Capacitor Resistor [<a
+target="_blank" rel="noopener" href="http://www.ecircuitcenter.com/Circuits/SWCap/SWCap.htm">http://www.ecircuitcenter.com/Circuits/SWCap/SWCap.htm</a>]</p>
+<p>Jørgen Andreas Michaelsen. INF4420 Switched-Capacitor Circuits. [<a
+target="_blank" rel="noopener" href="https://www.uio.no/studier/emner/matnat/ifi/INF4420/v13/undervisningsmateriale/inf4420_v13_07_switchedcapacitor_print.pdf">https://www.uio.no/studier/emner/matnat/ifi/INF4420/v13/undervisningsmateriale/inf4420_v13_07_switchedcapacitor_print.pdf</a>]</p>
+<p>chembiyan T. OC Lecture 10: A very basic introduction to switched
+capacitor circuits [<a
+target="_blank" rel="noopener" href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu</a>]</p>
 
       
     </div>
@@ -1119,7 +1211,7 @@ Solid-State Circuits Magazine, Vol. 7, Issue 3, pp. 8-10, Summer
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1207,7 +1299,7 @@ target="_blank" rel="noopener" href="https://superuser.com/q/211798">https://sup
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1424,7 +1516,7 @@ target="_blank" rel="noopener" href="https://www.edn.com/demystifying-pole-zero-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:21" itemprop="dateModified" datetime="2023-11-03T13:36:21+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1576,11 +1668,11 @@ characteristics by causing a degradation in transconductance, a shift in
 the threshold voltage, and a general decrease in the drain current
 capability.</p>
 <blockquote>
-<p>HCI seems to hae just a <strong>weak</strong> temperature dependency.
-Unlike BTI, it seems to be no or just little recovery. As holes are much
-"cooler" (i.e. heavier) than electrons, the channel hot carrier effect
-in nMOS devices is shown to be more significant than in pMOS
-devices.</p>
+<p>HCI seems to have just a <strong>weak</strong> temperature
+dependency. Unlike BTI, it seems to be no or just little recovery. As
+holes are much "cooler" (i.e. heavier) than electrons, the channel hot
+carrier effect in nMOS devices is shown to be more significant than in
+pMOS devices.</p>
 </blockquote>
 <h4 id="degradation-saturation-effect">Degradation saturation
 effect</h4>
@@ -1749,7 +1841,7 @@ target="_blank" rel="noopener" href="https://community.cadence.com/cadence_blogs
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:21" itemprop="dateModified" datetime="2023-11-03T13:36:21+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1999,7 +2091,7 @@ Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2107,7 +2199,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2215,7 +2307,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

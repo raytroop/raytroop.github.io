@@ -190,6 +190,194 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/sbr-der/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/23/sbr-der/" class="post-title-link" itemprop="url">Time-Domain Channel Simulation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-09-23 11:09:07" itemprop="dateCreated datePublished" datetime="2023-09-23T11:09:07+00:00">2023-09-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Three fast time-domain system simulation techniques:</p>
+<ul>
+<li><strong>single-bit response method</strong></li>
+<li><strong>double-edge response method</strong></li>
+<li><strong>multiple-edge response method</strong></li>
+</ul>
+<h2 id="single-bit-response-sbr-method">Single-Bit Response (SBR)
+Method</h2>
+<p>To avoid spurious glitches between consecutive ones, rising and
+falling edge responses shall be <strong>symmetric</strong>. This is the
+limitation of SBR method.</p>
+<p>Let <span class="math inline">\(p(t)\)</span> be the SBR of the
+channel, <span class="math inline">\(t_s\)</span> be the data sampling
+phase, <span class="math inline">\(T\)</span> be the bit time, <span
+class="math inline">\(N_c\)</span> is the number of UI in stored pulse
+response and <span class="math inline">\(b_m\)</span> be the <span
+class="math inline">\(m\)</span>th transmitted symbol. The voltage seen
+by the receiver's data sampler at the <span
+class="math inline">\(m\)</span>th data sample is determined by <span
+class="math display">\[
+y_m = \sum_{k=m-N_c+1}^{m}b_kp(t_s+(m-k)T)
+\]</span> where <span class="math inline">\(b_k \in [0, 1]\)</span> and
+<span class="math inline">\(p(t) \ge 0\)</span></p>
+<p>We always prepend <span class="math inline">\(Nc-1\)</span> 0s in
+random bit stream for consistency.</p>
+<p><img src="/2023/09/23/sbr-der/image-20220429112902281.png"
+alt="image-20220429112902281" /></p>
+<p>For computation convenient, the pulse need to be positive. For
+differential signal and amplitude <span
+class="math inline">\(V_{peak}\)</span>, the peak to peak is <span
+class="math inline">\(-V_{peak}\)</span> to <span
+class="math inline">\(+V_{peak}\)</span>. After pulse added by <span
+class="math inline">\(V_{peak}\)</span>, peak to peak is <span
+class="math inline">\(0\)</span> to <span
+class="math inline">\(+2V_{peak}\)</span>.</p>
+<p><img src="/2023/09/23/sbr-der/image-20220429154336080.png"
+alt="image-20220429154336080" /></p>
+<p><img src="/2023/09/23/sbr-der/image-20220429154423247.png"
+alt="image-20220429154423247" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line">yy_sum = <span class="built_in">zeros</span>(OSR*Ns, Ns);</span><br><span class="line"><span class="keyword">for</span> idxBit = <span class="number">1</span>:Ns</span><br><span class="line">    bs_split = <span class="built_in">zeros</span>(<span class="number">1</span>, Ns+Nc<span class="number">-1</span>);</span><br><span class="line">    bs_split(idxBit) = bs(idxBit);</span><br><span class="line">    yy = <span class="built_in">zeros</span>(OSR, Ns);</span><br><span class="line">    <span class="keyword">for</span> ii = Nc:Nc+Ns<span class="number">-1</span></span><br><span class="line">        bb = bs_split(ii:<span class="number">-1</span>:ii-Nc+<span class="number">1</span>);</span><br><span class="line">        yy(:,ii-Nc+<span class="number">1</span>) = sum(bb.*yrps, <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    yy_cont2 = <span class="built_in">reshape</span>(yy, [], <span class="number">1</span>);</span><br><span class="line">    h = <span class="built_in">plot</span>(yy_cont2);</span><br><span class="line">    h.Annotation.LegendInformation.IconDisplayStyle = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line">    yy_sum(:, idxBit) = yy_cont2;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">yy_sum = sum(yy_sum, <span class="number">2</span>);    <span class="comment">% merge</span></span><br><span class="line"><span class="built_in">plot</span>(yy_sum, <span class="string">&#x27;k--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(yy_cont, <span class="string">&#x27;m-.&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sum&#x27;</span>, <span class="string">&#x27;syn&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;merge all single bit&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times Ts)&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The pulse response contain rising and falling edge. The <strong>1 bit
+</strong> first rise from -1 to 1, then fall to -1; The <strong>0
+bit</strong> just do nothing for synthesized waveform with the help of
+falling edge of <strong>1 bit</strong>.</p>
+<p>The DC shift help deal with continuous <strong>0 bits</strong>.</p>
+</blockquote>
+<p><img src="/2023/09/23/sbr-der/image-20220429174330324.png"
+alt="image-20220429174330324" /></p>
+<h3 id="another-sbr-example">another SBR example</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">A = <span class="built_in">zeros</span>(<span class="number">10</span>,<span class="number">21</span>);</span><br><span class="line">n = [<span class="number">1</span>:<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">% post cursor</span></span><br><span class="line"><span class="keyword">for</span> m = <span class="number">1</span>:<span class="number">3</span></span><br><span class="line">    A(m, <span class="number">11</span>+n(m)) = <span class="number">0.5</span>;</span><br><span class="line">    A(m, <span class="number">11</span>-n(m)) = <span class="number">0.5</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% one</span></span><br><span class="line"><span class="keyword">for</span> m = <span class="number">4</span>:<span class="number">10</span></span><br><span class="line">    A(m, <span class="number">11</span>) = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% h0 or main cursor</span></span><br><span class="line">h0 = <span class="built_in">zeros</span>(<span class="number">1</span>, <span class="number">21</span>);</span><br><span class="line">h0(<span class="number">1</span>, <span class="number">1</span>) = <span class="number">0.5</span>;</span><br><span class="line">h0(<span class="number">1</span>, <span class="number">21</span>) = <span class="number">0.5</span>;</span><br><span class="line">out = h0;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> m = <span class="number">1</span>:<span class="number">10</span></span><br><span class="line">    out = conv(out, A(m, :), <span class="string">&quot;full&quot;</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stem(out)</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2023/09/23/sbr-der/143512636-0878e0fd-fe87-414c-9c73-52577eeb7593.jpg"
+alt="143512636-0878e0fd-fe87-414c-9c73-52577eeb7593" /></p>
+<p><img
+src="/2023/09/23/sbr-der/143512677-ccefdf22-4e30-4e72-9220-bbe667671e79.png"
+alt="143512677-ccefdf22-4e30-4e72-9220-bbe667671e79" /></p>
+<h2 id="double-edge-response-der-method">Double-Edge Response (DER)
+Method</h2>
+<p>To handle the more general cases, with <strong>asymmetric rising and
+falling edges</strong>, the system response can be constructed in terms
+of <strong>edge transitions instead of bit responses</strong>.</p>
+<p>The DER method decomposes the input data pattern, in terms of
+<strong>rising and falling edge transitions</strong>. The system
+response can be calculated by <em>superimposing the shifted versions of
+the rising and falling edge responses</em> : <span
+class="math display">\[
+y_m = \sum_{k=m-N_c+1}^{m}(b_k-b_{k-1})s_k(t_s+(m-k)T) + y_{int}
+\]</span> where</p>
+<p><span class="math display">\[\begin{align}
+s_i(t) &amp;= r(t) -V_{low} \quad \text{if} \: (b_i\gt b_{i-1}) \\
+&amp;= V_{high}-f(t) \quad \text{otherwise}
+\end{align}\]</span></p>
+<p><span class="math inline">\(r(t)\)</span> and <span
+class="math inline">\(f(t)\)</span> are the rising and falling edge
+responses,respectively. <span class="math inline">\(V_{high}\)</span>
+and <span class="math inline">\(V_{low}\)</span> are the steady state DC
+levels, in response to a constant stream of ones and zeros,
+respectively. <span class="math inline">\(y_{int}\)</span> is the
+initial DC state (either <span class="math inline">\(V_{high}\)</span>
+or <span class="math inline">\(V_{low}\)</span> ).</p>
+<p>We always prepend <span class="math inline">\(Nc\)</span> 0s in
+random bit stream for consistency.</p>
+<p><img src="/2023/09/23/sbr-der/image-20220429191941805.png"
+alt="image-20220429191941805" /></p>
+<p><img src="/2023/09/23/sbr-der/der.drawio.svg" alt="der.drawio" /></p>
+<p><img src="/2023/09/23/sbr-der/image-20220430010336977.png"
+alt="image-20220430010336977" /></p>
+<p><img src="/2023/09/23/sbr-der/image-20220430013715680.png"
+alt="image-20220430013715680" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(yrc); </span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(yfc); </span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;rising&#x27;</span>, <span class="string">&#x27;falling&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times Ts)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;step response&#x27;</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(bs, <span class="string">&#x27;k&#x27;</span>); grid on;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem((idxPreRspStart:idxPreRspEnd), bs(idxPreRspStart:idxPreRspEnd), <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(idxPreRspStart, bs(idxPreRspStart), <span class="string">&#x27;go&#x27;</span>);</span><br><span class="line">stem(idxCurData, bs(idxCurData), <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;m&#x27;</span>);</span><br><span class="line">stem((idxPreRspStart:idxPreRspEnd)+<span class="number">0.5</span>, <span class="number">0.1</span>.*bd(idxPreRspStart:idxPreRspEnd), <span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;Nc bits&#x27;</span>, <span class="string">&#x27;y_&#123;int&#125;&#x27;</span>, <span class="string">&#x27;Current bit&#x27;</span>, <span class="string">&#x27;Edge Transitions&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times UI)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;input stream&#x27;</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">yy_cont = <span class="built_in">reshape</span>(yy, [], <span class="number">1</span>);   <span class="comment">% continuous version</span></span><br><span class="line"><span class="built_in">plot</span>(yy_cont); grid on;</span><br><span class="line">title(<span class="string">&#x27;continuous yout&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times Ts)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> idx = idxPreRspStart+<span class="number">1</span>-Nc:idxCurData+<span class="number">32</span>-Nc</span><br><span class="line">    ys = yy(:, idx);</span><br><span class="line">    tt = ((idx<span class="number">-1</span>)*OSR+<span class="number">1</span>:idx*OSR);</span><br><span class="line">    h = <span class="built_in">plot</span>(tt(:), ys(:), <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">3</span>);</span><br><span class="line">    h.Annotation.LegendInformation.IconDisplayStyle = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">plot</span>(yy_cont, <span class="string">&#x27;m--&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">1</span>); </span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;syn&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times Ts)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;synthesize with step response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h2 id="reference">Reference</h2>
+<p>Oh, Kyung Suk Dan, and Xing Chao Chuck Yuan. High-Speed Signaling:
+Jitter Modeling, Analysis, and Budgeting. Prentice Hall, 2011.</p>
+<p>Ren, Jihong and Kyung Suk Oh. “Multiple Edge Responses for Fast and
+Accurate System Simulations.” <em>IEEE Transactions on Advanced
+Packaging</em> 31 (2008): 741-748.</p>
+<p>Shi, Rui. “Off-chip wire distribution and signal analysis.”
+(2008).</p>
+<p>X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate
+Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links,"
+in IEEE Transactions on Very Large Scale Integration (VLSI) Systems,
+vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
+10.1109/TVLSI.2021.3082208.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/StatEye/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -226,7 +414,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -395,7 +583,7 @@ repo</a>]</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -525,7 +713,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:33" itemprop="dateModified" datetime="2023-11-04T15:28:33+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -548,108 +736,6 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="references">references</h2>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/perc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/08/perc/" class="post-title-link" itemprop="url">PERC</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-08 14:29:13" itemprop="dateCreated datePublished" datetime="2023-09-08T14:29:13+00:00">2023-09-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li><p>CD: current density checks</p></li>
-<li><p>P2P: point to point resistance checks</p></li>
-<li><p>LDL: logic driven layout checks, latch up related</p></li>
-<li><p>TOPO: topology, circuit connection and device size
-checks</p></li>
-</ul>
-<blockquote>
-<p>database</p>
-<ul>
-<li><p>CD, P2P, LDL : dfmdb</p></li>
-<li><p>TOPO: svdb</p></li>
-</ul>
-</blockquote>
-<h2 id="references">references</h2>
-<p>Frank Feng. New Approach For Full Chip Electrical Reliability
-Verification [<a
-target="_blank" rel="noopener" href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMFlXTm9MelV3TDNCMFlWOHhOamN6TnpWZk5qYzFNVGd6TjE4NE5ESXlOQzV3WkdZPQ==&amp;fname=1454FCFGGCPO45YTNOJCJGJGMKPKHC3534FG35YSA1GDXWFC34QOA0OOQOOKZWCDSSPOGDMP20NO4124YWB4B4LKYSMOQL0400YT34PKUWNK20FG00POUSXXYWXWOO15JCLKSWXWDCOKHG2050JCQKHCXTNPNOVSUSB4JCVW20HGJGTTWW40ZXIH5004A4GDMKJG5020OPMOJDLOML51NOFCSWROB454DGKKFCSTGCDCTXNPA4TWRKGDWW30CGKKDGB0YWLKIH05ML44WSFGQOTWOOECYWGHRKCCDD15A4XSFC14FCJGOO25WXROQLNK00JD31PKWSEC50A4SSOKHHTT">pdf</a>]</p>
 
       
     </div>
@@ -712,7 +798,7 @@ target="_blank" rel="noopener" href="https://cse.nsysu.edu.tw/app/index.php?Acti
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -802,7 +888,7 @@ Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -895,7 +981,7 @@ target="_blank" rel="noopener" href="https://github.com/git/git/blob/master/Docu
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1006,7 +1092,7 @@ target="_blank" rel="noopener" href="https://github.com/lnis-uofu/tsmc_template/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1170,7 +1256,7 @@ target="_blank" rel="noopener" href="https://webee.technion.ac.il/~ran/papers/Me
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1387,7 +1473,7 @@ target="_blank" rel="noopener" href="http://ece-research.unm.edu/jimp/vlsi/slide
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-03 13:36:22" itemprop="dateModified" datetime="2023-11-03T13:36:22+00:00">2023-11-03</time>
+      <time title="Modified: 2023-11-04 15:28:32" itemprop="dateModified" datetime="2023-11-04T15:28:32+00:00">2023-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

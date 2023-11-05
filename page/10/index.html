@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">178</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,248 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/21/jitter-decomposition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/21/jitter-decomposition/" class="post-title-link" itemprop="url">Jitter Decomposition in High-Speed Links</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-21 15:54:54" itemprop="dateCreated datePublished" datetime="2022-05-21T15:54:54+00:00">2022-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Jitter separation lets you learn if the components of jitter are
+random or deterministic. That is, if they are caused by crosstalk,
+channel loss, or some other phenomenon. The identification of jitter and
+noise sources is critical when debugging failure sources in the
+transmission of high-speed serial signals</p>
+<ul>
+<li>Tail Fit Method</li>
+<li>Spectral method</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>RJ Extraction Methods</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectral</td>
+<td>Speed/Consistency to Past Measurements;<br />Accuracy in low
+Crosstalk or Aperiodic Bounded Uncorrelated Jitter (ABUJ)
+conditions</td>
+</tr>
+<tr class="even">
+<td>Tail Fit</td>
+<td>General Purpose;<br />Accuracy in high Crosstalk or ABUJ
+conditions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jitter-components">Jitter Components</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521190326201.png"
+alt="image-20220521190326201" /></p>
+<h2 id="dual-dirac-model">dual-Dirac model</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521181604467.png"
+alt="image-20220521181604467" /></p>
+<p><img src="/2022/05/21/jitter-decomposition/Figure-1.webp"
+alt="Figure-1" /></p>
+<h2 id="spectral-method">Spectral method</h2>
+<blockquote>
+<p>power spectral density (PSD) represents jitter spectrum and peaks in
+the spectrum can be interpreted as PJ or DDJ, while the average noise
+floor is the power of RJ</p>
+</blockquote>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521182929127.png"
+alt="image-20220521182929127" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">S1 = sum(win);</span><br><span class="line">S2 = sum(win.^<span class="number">2</span>);</span><br><span class="line">N = <span class="built_in">length</span>(win);</span><br><span class="line">spec_nospur2 = (spec_nospur*S1).^<span class="number">2</span>/N/S2;    <span class="comment">% To obtain linear spectrum for rj</span></span><br><span class="line">rj_utj = <span class="built_in">sqrt</span>(sum(spec_nospur2))*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">spec = <span class="number">1</span>*<span class="built_in">ones</span>(<span class="built_in">length</span>(spec_nospur), <span class="number">1</span>)*<span class="number">1e-21</span>;</span><br><span class="line">spec(index) = specx(index);</span><br><span class="line"><span class="comment">% insert fft nyquist frequency component between positive frequency and</span></span><br><span class="line"><span class="comment">% negative frequency component</span></span><br><span class="line"><span class="comment">% DC;posFreq;nyqFreq;negFreq</span></span><br><span class="line">spec_ifft = [spec;specnyq;<span class="built_in">conj</span>(spec(<span class="keyword">end</span>:<span class="number">-1</span>:<span class="number">2</span>))]&#x27;;</span><br><span class="line">sfactor = sum(win)/<span class="built_in">sqrt</span>(<span class="number">2</span>);</span><br><span class="line">spec_ifft = spec_ifft*sfactor;</span><br><span class="line">sig_rec = <span class="built_in">real</span>(ifft(spec_ifft));</span><br><span class="line">sig_rec = sig_rec(:);</span><br><span class="line">sig_rec_utj = sig_rec./win(<span class="number">1</span>:<span class="keyword">end</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="tail-fit-method">Tail Fit Method</h2>
+<blockquote>
+<p>Tail fitting algorithm based on the <strong>Gaussian tail
+model</strong> by using probability distribution of collected jitter
+value</p>
+</blockquote>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521191029433.png"
+alt="image-20220521191029433" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">bin_sig = bin_sig*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">x = qfuncinv(cdf_sig);</span><br><span class="line"></span><br><span class="line"><span class="comment">% coef(1)*bin_sig + coef(2) = x</span></span><br><span class="line"><span class="comment">% which x is norm(0, 1)</span></span><br><span class="line"><span class="comment">% bin_sig = (x - coef(2))/coef(1)</span></span><br><span class="line"><span class="comment">% Then bin is norm(-coef(2)/coef(1), 1/coef(1))</span></span><br><span class="line">coef = polyfit(bin_sig, x, <span class="number">1</span>);</span><br><span class="line">sigma = <span class="number">1</span>/coef(<span class="number">1</span>);</span><br><span class="line">mu = -coef(<span class="number">2</span>)*sigma;</span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">&#x27;sigma=%.3fps, mu=%.3fps\n&#x27;</span>, sigma, mu);</span><br></pre></td></tr></table></figure>
+<h2 id="least-squares-ls-method">Least Squares (LS) method</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524005848719.png"
+alt="image-20220524005848719" /></p>
+<p>It is known that TIE jitter is a linear equation, shown in below
+formula <span class="math display">\[
+x[n] = d_n \times \left[ \Delta t_{pj}[n]+\Delta t_{DCD}[n] +\Delta
+t_{ISI}[n]+\Delta t_{RJ}[n]\right]
+\]</span> LS can be used to estimate the PJ, DCD, RJ , and ISI
+parameters <span class="math inline">\([a,b,J_{DCD},J_0,
+J_1...J_{(2^k-1)}]\)</span></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524185332637.png"
+alt="image-20220524185332637" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524185351383.png"
+alt="image-20220524185351383" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524010446422.png"
+alt="image-20220524010446422" /></p>
+<h2 id="jitter-modeling">Jitter modeling</h2>
+<h3 id="periodic-jitter-pj">Periodic Jitter (PJ)</h3>
+<p>PJ is a repeating jitter <span class="math display">\[
+\Delta t_{PJ}[n]=A\sin(2\pi f_0\cdot nT_s + \theta)=a \sin(2\pi f_0
+\cdot nT_s)+b\cos(2\pi f_0 \cdot nT_s)
+\]</span> where <span class="math inline">\(f_0\)</span> represents the
+fundamental frequency of PJ; <span class="math inline">\(A\)</span> is
+the amplitude of PJ; <span class="math inline">\(T_s\)</span> is the
+data stream period, and <span class="math inline">\(\theta\)</span> is
+the initial phase of PJ</p>
+<blockquote>
+<p>In the spectrum, the frequency of maximum amount of the jitter is PJ
+frequency <span class="math inline">\(f_0\)</span>.</p>
+</blockquote>
+<h3 id="duty-cycle-distortion-dcd">Duty Cycle Distortion (DCD)</h3>
+<p>DCD is viewed as a series of <strong>adjacent positive and negative
+impulses</strong> <span class="math display">\[
+\Delta t_{DCD}[n] = J_{DCD}\times (-1)^n =
+[-J_{DCD},J_{DCD},-J_{DCD},J_{DCD},...]
+\]</span> Where <span class="math inline">\(J_{DCD}\)</span> is the DCD
+amplitude.</p>
+<h3 id="random-jitter-rj">Random Jitter (RJ)</h3>
+<p>RJ is created by unbounded jitter sources, such as Gaussian white
+noise. The statistical PDF for RJ is enerally treated as a Gaussian
+distribution <span class="math display">\[
+f_{RJ}(\Delta t) = \frac{1}{\sqrt{2\pi\sigma}}\exp(-\frac{(\Delta
+t)^2}{2\sigma^2})
+\]</span></p>
+<h2 id="remarks">Remarks</h2>
+<h3 id="periodic-jitter-generator-and-insertion">Periodic Jitter
+Generator and Insertion</h3>
+<p><em>Analysis and Estimation of Jitter Sub-Components: Classification
+and Segregation of Jitter Components</em></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521212129098.png"
+alt="image-20220521212129098" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521212142719.png"
+alt="image-20220521212142719" /></p>
+<h2 id="reference">Reference</h2>
+<p>Mike Li. 2007. Jitter, noise, and signal integrity at high-speed
+(First. ed.). Prentice Hall Press, USA.</p>
+<p><a target="_blank" rel="noopener" href="https://keysightevent.com/191023/handout/d">余宥浚 Jacky Yu,
+Keysight Taiwan AEO, Advanced Jitter and Eye-Diagram Analysis</a></p>
+<p>Y. Duan and D. Chen, "Accurate jitter decomposition in high-speed
+links," 2017 IEEE 35th VLSI Test Symposium (VTS), 2017, pp. 1-6, doi:
+10.1109/VTS.2017.7928918.</p>
+<p>Y. Duan's phd thesis URL: <a
+target="_blank" rel="noopener" href="https://dr.lib.iastate.edu/handle/20.500.12876/30459">https://dr.lib.iastate.edu/handle/20.500.12876/30459</a></p>
+<p>Y. Duan and D. Chen, "Fast and Accurate Decomposition of
+Deterministic Jitter Components in High-Speed Links," in IEEE
+Transactions on Electromagnetic Compatibility, vol. 61, no. 1, pp.
+217-225, Feb. 2019, doi: 10.1109/TEMC.2018.2797122.</p>
+<p>"Jitter Analysis: The Dual-Dirac Model, RJ/DJ, and Q-Scale",
+Whitepaper: Keysight Technologies, U.S.A., Dec. 2017</p>
+<p>Sharma, Vijender Kumar and Sujay Deb. "Analysis and Estimation of
+Jitter Sub-Components." (2014).</p>
+<p>Qingqi Dou and J. A. Abraham, "Jitter decomposition in ring
+oscillators," Asia and South Pacific Conference on Design Automation,
+2006., 2006, pp. 6 pp.-, doi: 10.1109/ASPDAC.2006.1594696.</p>
+<p>E. Balestrieri, L. De Vito, F. Lamonaca, F. Picariello, S. Rapuano
+and I. Tudosa, "The jitter measurement ways: The jitter decomposition,"
+in IEEE Instrumentation &amp; Measurement Magazine, vol. 23, no. 7, pp.
+3-12, Oct. 2020, doi: 10.1109/MIM.2020.9234759.</p>
+<p>McClure, Mark Scott. "Digital jitter measurement and separation." PhD
+diss., 2005.</p>
+<p>Ren, Nan, Zaiming Fu, Shengcu Lei, Hanglin Liu, and Shulin Tian.
+"Jitter generation model based on timing modulation and cross point
+calibration for jitter decomposition." Metrology and Measurement Systems
+28, no. 1 (2021).</p>
+<p>M. P. Li, J. Wilstrup, R. Jessen and D. Petrich, "A new method for
+jitter decomposition through its distribution tail fitting,"
+International Test Conference 1999. Proceedings (IEEE Cat.
+No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +468,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -328,7 +570,7 @@ FFT</a></p>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/16/dj-rj/" class="post-title-link" itemprop="url">Random and Deterministic Jitters Simulation</a>
+          <a href="/2022/05/16/dj-rj/" class="post-title-link" itemprop="url">Random & Deterministic Jitters Simulation</a>
         </h2>
 
         <div class="post-meta-container">
@@ -346,7 +588,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,6 +720,67 @@ alt="image-20220516012200383" /></p>
 <blockquote>
 <p>In the psd of TJ, the spur is DJ and floor is RJ</p>
 </blockquote>
+<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
+<p>The <strong>phase noise</strong> is traditionally defined as the
+ratio of the power of the signal in 1Hz bandwidth at offset <span
+class="math inline">\(f\)</span> from the carrier <span
+class="math inline">\(P\)</span>, divided by the power of the carrier
+<span class="math display">\[
+\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
+<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
+\geqslant 0\)</span></p>
+<p>Under <strong>narrow angle assumption</strong> <span
+class="math display">\[
+S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
++\infty\right]\)</span></p>
+<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
+the variance of the absolute jitter(<span
+class="math inline">\(J_{ee}\)</span>)via integration of the
+corresponding PSD <span class="math display">\[
+J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
+\]</span></p>
+<p>And we know the relationship between absolute jitter and excess phase
+is <span class="math display">\[
+J_{ee}=\frac {\varphi}{\omega_0}
+\]</span> Considering that phase noise is normally symmetrical about the
+zero frequency, multiplied by <strong>two</strong> is shown as below
+<span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
+\]</span> where phase noise is in linear units not in logarithmic
+ones.</p>
+<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
+unit (<em>dBc</em>), we have to convert the unit before applying the
+above equation <span class="math display">\[
+\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
+\]</span> The complete equation using the simulation result of
+<em>Spectre-RF Pnoise</em> is <span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
+[dBc/Hz]}{10}}df}}{\omega_0}
+\]</span></p>
+<p>The above equation has been verified for <em>sampled pnoise</em>,
+i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
+<blockquote>
+<ul>
+<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
+Function: Jee:Integration Limits</em> can calculate it conveniently</li>
+<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
+below equation to get RMS jitter.</li>
+</ul>
+</blockquote>
+<p>One example, integrate to <span
+class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
+class="math inline">\(f_{osc} = 16GHz\)</span></p>
+<p><img src="/2022/05/16/dj-rj/image-20220415100034220.png"
+alt="image-20220415100034220" /></p>
+<p>Of course, it apply to conventional pnoise simulation.</p>
+<p>On the other hand, output rms voltage noise, <span
+class="math inline">\(V_{out,rms}\)</span> divied by slope should be
+close to <span class="math inline">\(J_{ee,rms}\)</span> <span
+class="math display">\[
+J_{ee,rms} = \frac {V_{out,rms}}{slope}
+\]</span></p>
 <h2 id="reference">reference</h2>
 <p>Article (20500632) Title: How to simulate Random and Deterministic
 Jitters URL:
@@ -544,7 +847,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -766,7 +1069,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:22" itemprop="dateModified" datetime="2023-11-05T04:20:22+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -859,7 +1162,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -999,7 +1302,7 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1129,7 +1432,7 @@ doi:10.1007/978-3-030-03238-8</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1245,7 +1548,7 @@ target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1418,7 +1721,7 @@ target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/le
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
+      <time title="Modified: 2023-11-05 15:27:33" itemprop="dateModified" datetime="2023-11-05T15:27:33+00:00">2023-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1686,139 +1989,6 @@ doi:10.1007/978-3-030-03238-8</p>
 <p><a target="_blank" rel="noopener" href="https://www.ece.ucdavis.edu/~bbaas/281/">Bevan Baas, VLSI
 Digital Signal Processing, EEC 281 - VLSI Digital Signal
 Processing</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/07/signed-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/07/signed-verilog/" class="post-title-link" itemprop="url">signed and unsigned arithmetic in Verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-07 11:37:18" itemprop="dateCreated datePublished" datetime="2022-05-07T11:37:18+00:00">2022-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-05 04:20:21" itemprop="dateModified" datetime="2023-11-05T04:20:21+00:00">2023-11-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>With <strong>implict sign extension</strong>, the implementation of
-<strong>signed</strong> arithmetic is <strong>DIFFERENT</strong> from
-that of <strong>unsigned</strong>. Otherwise, their implementations are
-same.</p>
-<p>The implementations manifest the RTL's behaviour correctly</p>
-<h2 id="add-without-implicit-sign-extension">add without implicit sign
-extension</h2>
-<h3 id="unsigned">unsigned</h3>
-<h4 id="rtl">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114215200.png"
-alt="image-20220507114215200" /></p>
-<h4 id="synthesized-netlist">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114307439.png"
-alt="image-20220507114307439" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:43:27 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>vcs compile with <code>-v /path/to/lib.v</code></p>
-</blockquote>
-<h3 id="signed">signed</h3>
-<h4 id="rtl-1">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114654777.png"
-alt="image-20220507114654777" /></p>
-<h4 id="synthesized-netlist-1">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114844111.png"
-alt="image-20220507114844111" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:48:54 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="add-with-implicit-sign-extension">add WITH implicit sign
-extension</h2>
-<h3 id="unsigned-with-0-extension">unsigned with 0 extension</h3>
-<h4 id="rtl-2">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0		<span class="comment">// 3 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] data1		<span class="comment">// 2 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result	<span class="comment">// 3 bit unsigned</span></span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507121521303.png"
-alt="image-20220507121521303" /></p>
-<h4 id="synthesized-netlist-2">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507121622001.png"
-alt="image-20220507121622001" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:15:58 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.Z</span>(n6) );</span><br><span class="line">  ad01d0 U7 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n6), <span class="variable">.CO</span>(n4), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr02d1 U8 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n4), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  nr02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n5) );</span><br><span class="line">  nr02d0 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(n5), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="signed-with-implicit-sign-extension">signed with implicit sign
-extension</h3>
-<h4 id="rtl-3">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507122053948.png"
-alt="image-20220507122053948" /></p>
-<h4 id="synthesized-netlist-3">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507122217830.png"
-alt="image-20220507122217830" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:21:51 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n6, n7, n8, n9, n10;</span><br><span class="line"></span><br><span class="line">  nd02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n10) );</span><br><span class="line">  inv0d0 U10 ( <span class="variable">.I</span>(n10), <span class="variable">.ZN</span>(n9) );</span><br><span class="line">  nr02d0 U11 ( <span class="variable">.A1</span>(data0[<span class="number">1</span>]), <span class="variable">.A2</span>(data1[<span class="number">1</span>]), <span class="variable">.ZN</span>(n7) );</span><br><span class="line">  aor221d1 U12 ( <span class="variable">.B1</span>(n9), <span class="variable">.B2</span>(data1[<span class="number">1</span>]), <span class="variable">.C1</span>(n10), <span class="variable">.C2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(</span><br><span class="line">        n6) );</span><br><span class="line">  xn02d1 U13 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n6), <span class="variable">.ZN</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  ora21d1 U14 ( <span class="variable">.B1</span>(data1[<span class="number">0</span>]), <span class="variable">.B2</span>(data0[<span class="number">0</span>]), <span class="variable">.A</span>(n10), <span class="variable">.Z</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  aor21d1 U15 ( <span class="variable">.B1</span>(data1[<span class="number">1</span>]), <span class="variable">.B2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(n8) );</span><br><span class="line">  mx02d0 U16 ( <span class="variable">.I0</span>(n10), <span class="variable">.I1</span>(n9), <span class="variable">.S</span>(n8), <span class="variable">.Z</span>(result[<span class="number">1</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
       
     </div>

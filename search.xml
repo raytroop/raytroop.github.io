@@ -87,269 +87,6 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_rx_circuits.p
       </tags>
   </entry>
   <entry>
-    <title>Device Aging</title>
-    <url>/2022/12/11/DeviceAging/</url>
-    <content><![CDATA[<p><img src="/2022/12/11/DeviceAging/bathtubcurve.png" alt="img" /></p>
-<h3 id="terminology">Terminology</h3>
-<p>The most accurate method to calculate the degradation of transistors
-is the SPICE-level simulation of the whole netlist with application
-programming interface (API) and industry-standard stress process
-models</p>
-<p>​ <strong>MOSRA</strong>: MOSFET reliability analysis Synopsys</p>
-<p>​ <strong>RelXpert</strong>: Cadence</p>
-<p>​ <strong>TMI</strong>: TSMC Model Interface, TSMC</p>
-<p>​ <strong>OMI</strong>: Open Model Interface, Si2 standard,</p>
-<blockquote>
-<p>The Silicon Integration Initiative (Si2) Compact Model Coalition has
-released the <em>Open Model Interface</em>, an Si2 standard, C-language
-application programming interface that supports SPICE compact model
-extensions.OMI allows circuit designers to simulate and analyze such
-important physical effects as <em>self-heating</em> and <em>aging</em>,
-and perform extended design optimizations. It is based on TMI2, the TSMC
-Model Interface, which was donated to Si2 by TSMC in 2014.</p>
-</blockquote>
-<ul>
-<li><strong>TDDB</strong>: Time-Dependent Dielectric Breakdown</li>
-<li><strong>HCI</strong>: Hot Carrier injection</li>
-<li><strong>BTI</strong>: Bias Temperature Instability
-<ul>
-<li><strong>NBTI</strong>: Negative Bias Temperature Instability</li>
-<li><strong>PBTI</strong>: Positive Bias Temperature Instability</li>
-</ul></li>
-<li><strong>SHE</strong>: Self-Heating Effect</li>
-</ul>
-<p><img src="/2022/12/11/DeviceAging/4645.reliability.png"
-alt="4645.reliability.png" /></p>
-<h3 id="aging-she-in-finfet">Aging &amp; SHE in FinFET</h3>
-<p><img src="/2022/12/11/DeviceAging/image-20230513215602865.png"
-alt="image-20230513215602865" /></p>
-<h3 id="she">SHE</h3>
-<p><img src="/2022/12/11/DeviceAging/image-20221214001912093.png"
-alt="image-20221214001912093" /></p>
-<p><img src="/2022/12/11/DeviceAging/image-20230513110032603.png"
-alt="image-20230513110032603" /></p>
-<p><img src="/2022/12/11/DeviceAging/image-20221214001940656.png"
-alt="image-20221214001940656" /></p>
-<h4 id="self-heating-em">Self-Heating &amp; EM</h4>
-<p><img src="/2022/12/11/DeviceAging/image-20230513220047241.png"
-alt="image-20230513220047241" /></p>
-<h3 id="bti">BTI</h3>
-<p>BTI occurs <em>predominantly in PMOS (or p-type or p channel)</em>
-transistors and causes an increase in the transistor's <em>absolute
-threshold voltage</em>.</p>
-<p>Stress in the case of NBTI means that the PMOS transistor is
-<strong>in inversion</strong>; that means that its <strong>gate to
-body</strong> potential is substantially below 0 V for analogue circuits
-or at <em>VGB = −VDD</em> for digital circuits</p>
-<p><em>Higher voltages</em> and <em>higher temperatures</em> both have
-an exponential impact onto the degradation, induced by NBTI.</p>
-<p>NBTI will be accelaerated with thinner gate oxide, at a high
-temperature and at a high electric field across the oxide region.</p>
-<p>During recovery phase where the gate voltage of pMOS is high and
-stress is removed, the H atoms in the gate oxiede diffuse back to
-Si-SiO2 interface and the recombination of Si-H bonds reduces the
-threshold voltage of pMOS.</p>
-<p><img src="/2022/12/11/DeviceAging/image-20230513111525657.png"
-alt="image-20230513111525657" /></p>
-<p><img src="/2022/12/11/DeviceAging/image-20230513111657285.png"
-alt="image-20230513111657285" /></p>
-<blockquote>
-<p>The net result is an increase in the magnitude of the device
-<strong>threshold voltage |Vt|</strong>, and a degradation of the
-channel <strong>carrier mobility</strong>.</p>
-<p><strong>Caution</strong>: The aging model provided by fab may
-<strong>NOT</strong> contain recovry effect</p>
-</blockquote>
-<p><img src="/2022/12/11/DeviceAging/image-20230513104621962.png"
-alt="image-20230513104621962" /></p>
-<p><img src="/2022/12/11/DeviceAging/image-20230513104654501.png"
-alt="image-20230513104654501" /></p>
-<p><img src="/2022/12/11/DeviceAging/image-20230513105016631.png"
-alt="image-20230513105016631" /></p>
-<p><img src="/2022/12/11/DeviceAging/image-20230513105100239.png"
-alt="image-20230513105100239" /></p>
-<h3 id="hci">HCI</h3>
-<p>Short-channel MOSFETs may exprience <strong>high lateral electric
-fields</strong> if the drain-source voltage is large. while the average
-velocity of carriers saturate at high fields, the instantaneous velocity
-and hence the kinetic energy of the carriers continue to increase,
-especially as they accelerate toward the drain. These are called
-<strong>hot</strong> carriers.</p>
-<p>In nanometer technologies, hot carrier effects have
-<strong>subsided</strong>. This is because the energy required to create
-an electron-hole pair, <span class="math inline">\(E_g \simeq 1.12
-eV\)</span>, is simply not available if the supply voltage is around
-1V.</p>
-<p><span class="math display">\[
-F_E= E \cdot q
-\]</span></p>
-<p><span class="math display">\[\begin{align}
-E_k &amp;= F_E \cdot s \\
-&amp;= E \cdot q \cdot s
-\end{align}\]</span></p>
-<p>Electrons and holes gaining high <strong>kinetic energies</strong> in
-the electric field (<strong>hot carriers</strong>) may be injected into
-the gate oxide and cause <em>permanent</em> changes in the
-oxide-interface charge distribution, degrading the current-voltage
-characteristics of the MOSFET.</p>
-<p>The channel hot-electron (CHE) effect is caused by electons flowing
-in the channel region, from the source to the drain. This effect is more
-pronounced at large drain-to-source voltage, at which the lateral
-electric field in the drain end of the channel accelerates the
-electrons.</p>
-<blockquote>
-<p>Four different hot carrier injectoin mechanisms can be distinguished:
-- channel hot electron (CHE) injection - drain avalanche hot carrier
-(DAHC) injection - secondary generated hot electron (SGHE) injection -
-substrate hot electron (SHE) injection</p>
-</blockquote>
-<p>HCI is more of a <strong>drain-localized</strong> mechanism, and is
-primarily a <strong>carrier mobility</strong> degradation (and <em>a Vt
-degradation if the device is operated bi-directionally</em>).</p>
-<p><img src="/2022/12/11/DeviceAging/image-20230512213236023.png"
-alt="image-20230512213236023" /></p>
-<blockquote>
-<p>For smaller transistor dimensions, <em>CHE</em> dominates the hot
-carrier degradation effect</p>
-</blockquote>
-<p>The hot-carrier induced damage in nMOS transistors has been found to
-result in either trapping of carriers on defect sites in the oxide or
-the creation of interface states at the silicon-oxide interface, or
-both.</p>
-<p>The damage caused by hot-carrier injection affects the transistor
-characteristics by causing a degradation in transconductance, a shift in
-the threshold voltage, and a general decrease in the drain current
-capability.</p>
-<blockquote>
-<p>HCI seems to have just a <strong>weak</strong> temperature
-dependency. Unlike BTI, it seems to be no or just little recovery. As
-holes are much "cooler" (i.e. heavier) than electrons, the channel hot
-carrier effect in nMOS devices is shown to be more significant than in
-pMOS devices.</p>
-</blockquote>
-<h4 id="degradation-saturation-effect">Degradation saturation
-effect</h4>
-<p>HCI model can reproduce the saturation effect if stress time is long
-enough</p>
-<p><img src="/2022/12/11/DeviceAging/image-20230513112108262.png"
-alt="image-20230513112108262" /></p>
-<h3 id="tddb">TDDB</h3>
-<p>TDDB effect is also related to oxide traps. In general, TDDB refers
-to the loss of isolating properties of a dielectric layer. If this
-dielectric layer is the gate oxide, TDDB will initially lead to an
-increase in the gate tunnelling current.</p>
-<p>This soft breakdown can already lead to a parametric degradation.
-After a long accumulation period, TDDB leads to a catastrophic reduction
-of the channel to gate insulation and thus a functional failure of the
-transistor.</p>
-<p><img src="/2022/12/11/DeviceAging/image-20230513105908505.png"
-alt="image-20230513105908505" /></p>
-<blockquote>
-<p>Scaling drive more concerns in TDDB</p>
-</blockquote>
-<p><img src="/2022/12/11/DeviceAging/image-20230513111245591.png"
-alt="image-20230513111245591" /></p>
-<h3 id="waveform-dependent-nature">waveform-dependent nature</h3>
-<p>The figure below illustrates the waveform-dependent nature of these
-mechanisms – as described earlier, BTI and HCI depend upon the region of
-active device operation. The slew rate of the circuit inputs and output
-will have a significant impact upon these mechanisms, especially
-HCI.</p>
-<p><img src="/2022/12/11/DeviceAging/img_5d04562454462.jpg" /></p>
-<ul>
-<li><strong>Negative bias temperature instability (NBTI)</strong>. This
-is caused by <em>constant electric fields</em> degrading the dielectric,
-which in turn causes the threshold voltage of the transistor to degrade.
-That leads to lower switching speeds. This effect depends on the
-activity level of the circuits, with heavier impact on parts of the
-design that <em>don’t switch as often</em>, such as gated clocks,
-control logic, and reset, programming and test circuitry.</li>
-<li><strong>Hot carrier injection (HCI)</strong>. This is caused by
-<em>fast-moving</em> electrons inserting themselves into the gate and
-degrading performance. It primarily occurs on higher-voltage modes and
-fast switching signals.</li>
-</ul>
-<p><img src="/2022/12/11/DeviceAging/image-20230513110202915.png"
-alt="image-20230513110202915" /></p>
-<ul>
-<li><em>longer</em> channel length help both BTI and HCI</li>
-<li><em>larger</em> <span class="math inline">\(V_{ds}\)</span> help
-BTI, but hurt HCI</li>
-<li><em>lower</em> temperature help BTI of core device, but hurt that of
-IO device for 7nm FinFET</li>
-</ul>
-<h3 id="mosra">MOSRA</h3>
-<p>MOSRA is a 2-step simulation: 1) Age computation, 2) Post-age
-analysis</p>
-<h3 id="tmi">TMI</h3>
-<p><strong>Don't</strong> include BTI recovery effect</p>
-<h3 id="reference">reference</h3>
-<p>Spectre Tech Tips: Device Aging? Yes, even Silicon wears out -
-Analog/Custom Design (Analog/Custom design) - Cadence Blogs - Cadence
-Community <a
-href="https://shar.es/afd31p">https://shar.es/afd31p</a></p>
-<p>S. Liao, C. Huang, and A. C. J. X. T. Guo, "New Generation
-Reliability Model," Dec 2016. [Online]. Available: <a
-href="http://www.mos-ak.org/berkeley_2016/publications/T11_Xie_MOS-AK_Berkeley_2016.pdf">http://www.mos-ak.org/berkeley_2016/publications/T11_Xie_MOS-AK_Berkeley_2016.pdf</a>.
-[Accessed Aug 2018]</p>
-<p>Tianlei Guo, Jushan Xie, "A Complete Reliability Solution:
-Reliability Modeling, Applications, and Integration in Analog Design
-Environment" [<a
-href="https://mos-ak.org/beijing_2018/presentations/Tianlei_Guo_MOS-AK_Beijing_2018.pdf">https://mos-ak.org/beijing_2018/presentations/Tianlei_Guo_MOS-AK_Beijing_2018.pdf</a>]</p>
-<p>FinFET Reliability Analysis with Device Self-Heating via <span
-class="citation" data-cites="DanielNenni">@DanielNenni</span> <a
-href="https://semiwiki.com/eda/synopsys/5085-finfet-reliability-analysis-with-device-self-heating/">https://semiwiki.com/eda/synopsys/5085-finfet-reliability-analysis-with-device-self-heating/</a></p>
-<p>Chris Changze Liu 刘长泽,Hisilicon, Huawei, "Reliability Challenges
-in Advanced Technology Node" <a
-href="https://www.tek.com.cn/sites/default/files/2018-09/reliability-challenges-in-advanced-technology-node.pdf">https://www.tek.com.cn/sites/default/files/2018-09/reliability-challenges-in-advanced-technology-node.pdf</a></p>
-<p>Ben Kaczer, imec. FEOL reliability: from essentials to advanced and
-emerging devices and circuits. 2016 IRPS Tutorial</p>
-<p>Ben Kaczer, imec. Present and Future of FEOL Reliability—from
-Dielectric Trap Properties to Reliable Circuit Operation. 2016 IEDM 2016
-[<a href="https://slideplayer.com/slide/12992784/">link</a>]</p>
-<p>Kang, Sung-Mo Steve, Yusuf Leblebici and Chulwoo Kim. “CMOS Digital
-Integrated Circuits: Analysis &amp; Design, 4th Edition.” (2014).</p>
-<p>Behzad Razavi. "Design of Analog CMOS Integrated Circuits" (2016)</p>
-<p>Basel Halak. Ageing of Integrated Circuits : Causes, Effects and
-Mitigation Techniques. Cham, Switzerland: Springer, 2020. ‌</p>
-<p>Elie Maricau, and Georges Gielen. Analog IC Reliability in Nanometer
-CMOS. Springer Science &amp; Business Media, 2013. ‌</p>
-<p>Transistor Aging Intensifies At 10/7nm And Below <a
-href="https://semiengineering.com/transistor-aging-intensifies-10nm/">https://semiengineering.com/transistor-aging-intensifies-10nm/</a></p>
-<p>Modeling Effects of Dynamic BTI Degradation on Analog and
-Mixed-Signal CMOS Circuits. MOS-AK/GSA Workshop, April 11-12, 2013,
-Munich <a
-href="https://www.mos-ak.org/munich_2013/presentations/05_Leonhard_Heiss_MOS-AK_Munich_2013.pdf">https://www.mos-ak.org/munich_2013/presentations/05_Leonhard_Heiss_MOS-AK_Munich_2013.pdf</a></p>
-<p>Challenges and Solutions in Modeling and Simulation of Device
-Self-heating, Reliability Aging and Statistical Variability Effects <a
-href="https://www.mos-ak.org/beijing_2018/presentations/Dehuang_Wu_MOS-AK_Beijing_2018.pdf">https://www.mos-ak.org/beijing_2018/presentations/Dehuang_Wu_MOS-AK_Beijing_2018.pdf</a></p>
-<p>New Generation Reliability Model <a
-href="https://www.mos-ak.org/berkeley_2016/publications/T11_Xie_MOS-AK_Berkeley_2016.pdf">https://www.mos-ak.org/berkeley_2016/publications/T11_Xie_MOS-AK_Berkeley_2016.pdf</a></p>
-<p>FinFET SPICE Modeling: Synopsys Solutions to Simulation Challenges of
-Advanced Technology Nodes <a
-href="https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf">https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf</a></p>
-<p>A. Zhang et al., "Reliability variability simulation methodology for
-IC design: An EDA perspective," 2015 IEEE International Electron Devices
-Meeting (IEDM), Washington, DC, USA, 2015, pp. 11.5.1-11.5.4, doi:
-10.1109/IEDM.2015.7409677.</p>
-<p>W. -K. Lee et al., "Unifying self-heating and aging simulations with
-TMI2," 2014 International Conference on Simulation of Semiconductor
-Processes and Devices (SISPAD), Yokohama, Japan, 2014, pp. 333-336, doi:
-10.1109/SISPAD.2014.6931631.</p>
-<p>Aging and Self-Heating in FinFETs - Breakfast Bytes - Cadence Blogs -
-Cadence Community <a
-href="https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/aging-and-self-heating">https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/aging-and-self-heating</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>aging</tag>
-        <tag>reliability</tag>
-        <tag>stress</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Dynamic Specification of Data Converter</title>
     <url>/2023/03/29/Dynamic-specification-converter/</url>
     <content><![CDATA[<h2 id="term-abbreviation">Term Abbreviation</h2>
@@ -889,9 +626,9 @@ current steering DAC</h2>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Database Navigation</title>
-    <url>/2022/02/07/Innovus-Database-Navigation/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -901,9 +638,9 @@ current steering DAC</h2>
       </tags>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Database Navigation</title>
+    <url>/2022/02/07/Innovus-Database-Navigation/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1740,6 +1477,55 @@ href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/
       </tags>
   </entry>
   <entry>
+    <title>Precision Techniques</title>
+    <url>/2023/05/19/Precision-Techniques/</url>
+    <content><![CDATA[<h2 id="autozeroing-techniques">Autozeroing techniques</h2>
+<blockquote>
+<p>offset is <strong>sampled</strong> and then subtracted from the
+input.</p>
+</blockquote>
+<h2 id="chopping-techniques">Chopping techniques</h2>
+<blockquote>
+<p>offset is <strong>modulated</strong> away from the signal band and
+then filtered out.</p>
+</blockquote>
+<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
+<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
+and other artifacts …</p>
+<h2 id="reference">reference</h2>
+<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
+effects of op-amp imperfections: autozeroing, correlated double
+sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
+84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
+href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
+<p>Bernhard E. Boser, M12 Precision Techniques [<a
+href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf</a>]</p>
+<p>Qinwen Fan, Evolution of precision amplifiers</p>
+<p>Wu, R., Huijsing, JH., &amp; Makinwa, KAA. (2013). Precision
+Instrumentation Amplifiers and Read-Out Integrated Circuits. Springer.
+https://doi.org/10.1007/978-1-4614-3731-4</p>
+<p>Kofi Makinwa, UPC 2009 <a
+href="https://electronicengineering.phd.upc.edu/en/courses-and-seminars/courses-materials/2008-2009/slides-makinwa-1">Overcoming
+Offset</a></p>
+<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
+CMOS [<a
+href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
+<p>Chopper Amplifiers Demystified Kofi A. A. Makinwa [<a
+href="https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt">https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt</a>]</p>
+<p>ESSCIRC2023 Circuit Insights Kofi Makinwa [<a
+href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7">https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>mismatch</tag>
+        <tag>offset</tag>
+        <tag>chopping</tag>
+        <tag>autozero</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Precedence Rule of UVM uvm_config_db::set</title>
     <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
     <content><![CDATA[<p><a
@@ -1798,196 +1584,6 @@ code]</a></p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Precision Techniques</title>
-    <url>/2023/05/19/Precision-Techniques/</url>
-    <content><![CDATA[<h2 id="autozeroing-techniques">Autozeroing techniques</h2>
-<blockquote>
-<p>offset is <strong>sampled</strong> and then subtracted from the
-input.</p>
-</blockquote>
-<h2 id="chopping-techniques">Chopping techniques</h2>
-<blockquote>
-<p>offset is <strong>modulated</strong> away from the signal band and
-then filtered out.</p>
-</blockquote>
-<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
-<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
-and other artifacts …</p>
-<h2 id="reference">reference</h2>
-<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
-effects of op-amp imperfections: autozeroing, correlated double
-sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
-84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
-href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
-<p>Bernhard E. Boser, M12 Precision Techniques [<a
-href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf</a>]</p>
-<p>Qinwen Fan, Evolution of precision amplifiers</p>
-<p>Wu, R., Huijsing, JH., &amp; Makinwa, KAA. (2013). Precision
-Instrumentation Amplifiers and Read-Out Integrated Circuits. Springer.
-https://doi.org/10.1007/978-1-4614-3731-4</p>
-<p>Kofi Makinwa, UPC 2009 <a
-href="https://electronicengineering.phd.upc.edu/en/courses-and-seminars/courses-materials/2008-2009/slides-makinwa-1">Overcoming
-Offset</a></p>
-<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
-CMOS [<a
-href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
-<p>Chopper Amplifiers Demystified Kofi A. A. Makinwa [<a
-href="https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt">https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt</a>]</p>
-<p>ESSCIRC2023 Circuit Insights Kofi Makinwa [<a
-href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7">https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>mismatch</tag>
-        <tag>offset</tag>
-        <tag>chopping</tag>
-        <tag>autozero</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Semiconductor Process Variation 101</title>
-    <url>/2022/03/02/Process-Corners-101/</url>
-    <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20220302000743092.png"
-alt="image-20220302000743092" /></p>
-<h4 id="globallocal-variation">Global/Local Variation</h4>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20220302000808679.png"
-alt="image-20220302000808679" /></p>
-<h4 id="timing-and-rc-modeling-with-process-corners">Timing and RC
-Modeling with Process Corners</h4>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20220302000916728.png"
-alt="image-20220302000916728" /></p>
-<h4 id="global-and-local-variation-by-gaussian">Global and Local
-variation by Gaussian</h4>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20230111003336823.png"
-alt="image-20230111003336823" /></p>
-<blockquote>
-<p>Local Monte-Carlo (<strong>SSG, FFG with Local Gaussian</strong>) as
-Signoff golden</p>
-</blockquote>
-<h4 id="process-corner-model-limitations">Process Corner Model
-Limitations</h4>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20220323232119661.png"
-alt="image-20220323232119661" /></p>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20230111003705417.png"
-alt="image-20230111003705417" /></p>
-<p>Variation section</p>
-<ul>
-<li>Total corner (TT/SS/FF/SF/FS)
-<ul>
-<li>E.g. TTMacro_MOS_MOS_MOSCAP</li>
-</ul></li>
-<li>Global Corner (TTG/SSG/FFG/SFG/FSG) + Local MC
-<ul>
-<li>E.g. TTGlobalCorner_LocalMC_MOS_MOSCAP</li>
-</ul></li>
-<li>Local MC
-<ul>
-<li>E.g. LocalMCOnly_MOS_MOSCAP</li>
-</ul></li>
-<li>Global MC + Local MC (Total MC)
-<ul>
-<li>GlobalMC_LocalMC_MOS_MOSCAP</li>
-</ul></li>
-</ul>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20230308003005235.png"
-alt="image-20230308003005235" /></p>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20230111010426775.png"
-alt="image-20230111010426775" /></p>
-<p><img
-src="/2022/03/02/Process-Corners-101/Screen-Shot-2014-09-11-at-8.47.06-AM.png"
-alt="img" /></p>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20230111011757049.png"
-alt="image-20230111011757049" /></p>
-<blockquote>
-<p><strong>SSGNP, FFGNP</strong>:</p>
-<p>When N/P global correlation is weak (R^2=0.15), the corner of N/PMOS
-balance circuit (e.g. inverter) can be tightened (<strong>3sigma -&gt;
-2.5sgma</strong>) due to the <strong>cancellation</strong> between NMOS
-and PMOS</p>
-<p>SSGNP, FFGNP usually used in Digital STA</p>
-</blockquote>
-<blockquote>
-<ul>
-<li><strong>Global variation</strong> validation with <strong>global
-corner</strong>
-<ul>
-<li><strong>3-sigma of global MC</strong> simulation is aligned with
-<strong>global corner</strong></li>
-</ul></li>
-<li><strong>Total variation</strong> validation with <strong>total
-corner</strong>
-<ul>
-<li><strong>3-sigma of global MC + local MC (total)</strong> simulation
-is aligned with <strong>total corner</strong></li>
-</ul></li>
-</ul>
-</blockquote>
-<h4 id="global-corner">Global Corner</h4>
-<blockquote>
-<p><a
-href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101</a></p>
-<p>The <strong>"total corner"</strong> is representative of the maximum
-device parameter variation including local device variation effects.
-However, it is not a statistical corner.</p>
-<p>The <strong>"global" corner</strong> is defined as the
-<strong>"total" corner minus the impact of "local
-variation"</strong></p>
-<p>Hence, if you were to examine simulation results for a parameter
-using a "total" and "global" corner, you would find the range of
-variation will be less with the "global" corner than with the "total"
-corner.</p>
-<p>The "global" corner is provided for use in <strong>statistical
-simulations</strong>. Hence, when performing a Monte-Carlo simulation,
-the "global" corner is selected - NOT the "total" corner.</p>
-</blockquote>
-<p><img
-src="/2022/03/02/Process-Corners-101/image-20230511234313012.png"
-alt="image-20230511234313012" /></p>
-<p><span class="math display">\[
-\Delta V_{T,\sigma_{total}} = \sqrt{\Delta^2 _{T,
-\sigma_{global}}+\Delta^2 _{T, \sigma_{local}}}
-\]</span></p>
-<h4 id="reference">reference</h4>
-<p>Eric J.-W. Fang, T5: Fundamentals of Process Monitors for
-Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State
-Circuits Conference</p>
-<p>Alvin Loke, Device and Physical Design Considerations for Circuits in
-FinFET Technology, ISSCC 2020 Short Course</p>
-<p>簡報 Cln16ffcll Sr V1d0 2p1 Usage Guide URL: <a
-href="https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view">https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view</a></p>
-<p>Radojcic, Riko, Dan Perry and Mark Nakamoto. “Design for
-manufacturability for fabless manufactuers.” <em>IEEE Solid-State
-Circuits Magazine</em> 1 (2009): n. pag.</p>
-<p>How To Reduce Implementation Headaches In FinFET Processes URL: <a
-href="https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/">https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/</a></p>
-<p>陌上风骑驴看IC, STA | SSGNP, FFGNP. <a
-href="https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg">https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg</a></p>
-<p>陌上风骑驴看IC, STA | ssg 跟ss corner 的区别——谬误更正版 <a
-href="https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd">https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd</a></p>
-<p>The Evolution, Pitfalls, and Cargo Cult Engineering of Advanced
-Digital Timing Sign-off <a
-href="https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf">https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>ocv</tag>
-      </tags>
   </entry>
   <entry>
     <title>RC corner</title>
@@ -2655,6 +2251,279 @@ Publishers Inc., San Francisco, CA, USA.</p>
       </categories>
   </entry>
   <entry>
+    <title>Device Aging</title>
+    <url>/2022/12/11/aging/</url>
+    <content><![CDATA[<p><img src="/2022/12/11/aging/bathtubcurve.png" alt="img" /></p>
+<h3 id="terminology">Terminology</h3>
+<p>The most accurate method to calculate the degradation of transistors
+is the SPICE-level simulation of the whole netlist with application
+programming interface (API) and industry-standard stress process
+models</p>
+<p>​ <strong>MOSRA</strong>: MOSFET reliability analysis Synopsys</p>
+<p>​ <strong>RelXpert</strong>: Cadence</p>
+<p>​ <strong>TMI</strong>: TSMC Model Interface, TSMC</p>
+<p>​ <strong>OMI</strong>: Open Model Interface, Si2 standard,</p>
+<blockquote>
+<p>The Silicon Integration Initiative (Si2) Compact Model Coalition has
+released the <em>Open Model Interface</em>, an Si2 standard, C-language
+application programming interface that supports SPICE compact model
+extensions.OMI allows circuit designers to simulate and analyze such
+important physical effects as <em>self-heating</em> and <em>aging</em>,
+and perform extended design optimizations. It is based on TMI2, the TSMC
+Model Interface, which was donated to Si2 by TSMC in 2014.</p>
+</blockquote>
+<ul>
+<li><strong>TDDB</strong>: Time-Dependent Dielectric Breakdown</li>
+<li><strong>HCI</strong>: Hot Carrier injection</li>
+<li><strong>BTI</strong>: Bias Temperature Instability
+<ul>
+<li><strong>NBTI</strong>: Negative Bias Temperature Instability</li>
+<li><strong>PBTI</strong>: Positive Bias Temperature Instability</li>
+</ul></li>
+<li><strong>SHE</strong>: Self-Heating Effect</li>
+</ul>
+<p><img src="/2022/12/11/aging/4645.reliability.png"
+alt="4645.reliability.png" /></p>
+<h3 id="aging-she-in-finfet">Aging &amp; SHE in FinFET</h3>
+<p><img src="/2022/12/11/aging/image-20230513215602865.png"
+alt="image-20230513215602865" /></p>
+<h3 id="she">SHE</h3>
+<p><img src="/2022/12/11/aging/image-20221214001912093.png"
+alt="image-20221214001912093" /></p>
+<p><img src="/2022/12/11/aging/image-20230513110032603.png"
+alt="image-20230513110032603" /></p>
+<p><img src="/2022/12/11/aging/image-20221214001940656.png"
+alt="image-20221214001940656" /></p>
+<h4 id="self-heating-em">Self-Heating &amp; EM</h4>
+<p><img src="/2022/12/11/aging/image-20230513220047241.png"
+alt="image-20230513220047241" /></p>
+<h3 id="bti">BTI</h3>
+<p><img src="/2022/12/11/aging/slide_39.jpg" alt="img" /></p>
+<p>BTI occurs <em>predominantly in PMOS (or p-type or p channel)</em>
+transistors and causes an increase in the transistor's <em>absolute
+threshold voltage</em>.</p>
+<p>Stress in the case of NBTI means that the PMOS transistor is
+<strong>in inversion</strong>; that means that its <strong>gate to
+body</strong> potential is substantially below 0 V for analogue circuits
+or at <em>VGB = −VDD</em> for digital circuits</p>
+<p><em>Higher voltages</em> and <em>higher temperatures</em> both have
+an exponential impact onto the degradation, induced by NBTI.</p>
+<p>NBTI will be accelaerated with thinner gate oxide, at a high
+temperature and at a high electric field across the oxide region.</p>
+<p>During recovery phase where the gate voltage of pMOS is high and
+stress is removed, the H atoms in the gate oxiede diffuse back to
+Si-SiO2 interface and the recombination of Si-H bonds reduces the
+threshold voltage of pMOS.</p>
+<p><img src="/2022/12/11/aging/image-20230513111525657.png"
+alt="image-20230513111525657" /></p>
+<p><img src="/2022/12/11/aging/image-20230513111657285.png"
+alt="image-20230513111657285" /></p>
+<blockquote>
+<p>The net result is an increase in the magnitude of the device
+<strong>threshold voltage |Vt|</strong>, and a degradation of the
+channel <strong>carrier mobility</strong>.</p>
+<p><strong>Caution</strong>: The aging model provided by fab may
+<strong>NOT</strong> contain recovry effect</p>
+</blockquote>
+<p><img src="/2022/12/11/aging/image-20230513104621962.png"
+alt="image-20230513104621962" /></p>
+<p><img src="/2022/12/11/aging/image-20230513104654501.png"
+alt="image-20230513104654501" /></p>
+<p><img src="/2022/12/11/aging/image-20230513105016631.png"
+alt="image-20230513105016631" /></p>
+<p><img src="/2022/12/11/aging/image-20230513105100239.png"
+alt="image-20230513105100239" /></p>
+<h3 id="hci">HCI</h3>
+<p>Short-channel MOSFETs may exprience <strong>high lateral electric
+fields</strong> if the drain-source voltage is large. while the average
+velocity of carriers saturate at high fields, the instantaneous velocity
+and hence the kinetic energy of the carriers continue to increase,
+especially as they accelerate toward the drain. These are called
+<strong>hot</strong> carriers.</p>
+<p>In nanometer technologies, hot carrier effects have
+<strong>subsided</strong>. This is because the energy required to create
+an electron-hole pair, <span class="math inline">\(E_g \simeq 1.12
+eV\)</span>, is simply not available if the supply voltage is around
+1V.</p>
+<p><span class="math display">\[
+F_E= E \cdot q
+\]</span></p>
+<p><span class="math display">\[\begin{align}
+E_k &amp;= F_E \cdot s \\
+&amp;= E \cdot q \cdot s
+\end{align}\]</span></p>
+<p>Electrons and holes gaining high <strong>kinetic energies</strong> in
+the electric field (<strong>hot carriers</strong>) may be injected into
+the gate oxide and cause <em>permanent</em> changes in the
+oxide-interface charge distribution, degrading the current-voltage
+characteristics of the MOSFET.</p>
+<p>The channel hot-electron (CHE) effect is caused by electons flowing
+in the channel region, from the source to the drain. This effect is more
+pronounced at large drain-to-source voltage, at which the lateral
+electric field in the drain end of the channel accelerates the
+electrons.</p>
+<blockquote>
+<p>Four different hot carrier injectoin mechanisms can be distinguished:
+- channel hot electron (CHE) injection - drain avalanche hot carrier
+(DAHC) injection - secondary generated hot electron (SGHE) injection -
+substrate hot electron (SHE) injection</p>
+</blockquote>
+<p>HCI is more of a <strong>drain-localized</strong> mechanism, and is
+primarily a <strong>carrier mobility</strong> degradation (and <em>a Vt
+degradation if the device is operated bi-directionally</em>).</p>
+<p><img src="/2022/12/11/aging/image-20230512213236023.png"
+alt="image-20230512213236023" /></p>
+<blockquote>
+<p>For smaller transistor dimensions, <em>CHE</em> dominates the hot
+carrier degradation effect</p>
+</blockquote>
+<p>The hot-carrier induced damage in nMOS transistors has been found to
+result in either trapping of carriers on defect sites in the oxide or
+the creation of interface states at the silicon-oxide interface, or
+both.</p>
+<p>The damage caused by hot-carrier injection affects the transistor
+characteristics by causing a degradation in transconductance, a shift in
+the threshold voltage, and a general decrease in the drain current
+capability.</p>
+<blockquote>
+<p>HCI seems to have just a <strong>weak</strong> temperature
+dependency. Unlike BTI, it seems to be no or just little recovery. As
+holes are much "cooler" (i.e. heavier) than electrons, the channel hot
+carrier effect in nMOS devices is shown to be more significant than in
+pMOS devices.</p>
+</blockquote>
+<p><img src="/2022/12/11/aging/image-20231106224938502.png"
+alt="image-20231106224938502" /></p>
+<h4 id="degradation-saturation-effect">Degradation saturation
+effect</h4>
+<p>HCI model can reproduce the saturation effect if stress time is long
+enough</p>
+<p><img src="/2022/12/11/aging/image-20230513112108262.png"
+alt="image-20230513112108262" /></p>
+<h3 id="tddb">TDDB</h3>
+<p>TDDB effect is also related to oxide traps. In general, TDDB refers
+to the loss of isolating properties of a dielectric layer. If this
+dielectric layer is the gate oxide, TDDB will initially lead to an
+increase in the gate tunnelling current.</p>
+<p>This soft breakdown can already lead to a parametric degradation.
+After a long accumulation period, TDDB leads to a catastrophic reduction
+of the channel to gate insulation and thus a functional failure of the
+transistor.</p>
+<p><img src="/2022/12/11/aging/image-20230513105908505.png"
+alt="image-20230513105908505" /></p>
+<blockquote>
+<p>Scaling drive more concerns in TDDB</p>
+</blockquote>
+<p><img src="/2022/12/11/aging/slide_33.jpg" alt="img" /></p>
+<p><img src="/2022/12/11/aging/slide_34.jpg" alt="img" /></p>
+<h3 id="waveform-dependent-nature">waveform-dependent nature</h3>
+<p>The figure below illustrates the waveform-dependent nature of these
+mechanisms – as described earlier, BTI and HCI depend upon the region of
+active device operation. The slew rate of the circuit inputs and output
+will have a significant impact upon these mechanisms, especially
+HCI.</p>
+<p><img src="/2022/12/11/aging/img_5d04562454462.jpg" /></p>
+<ul>
+<li><strong>Negative bias temperature instability (NBTI)</strong>. This
+is caused by <em>constant electric fields</em> degrading the dielectric,
+which in turn causes the threshold voltage of the transistor to degrade.
+That leads to lower switching speeds. This effect depends on the
+activity level of the circuits, with heavier impact on parts of the
+design that <em>don’t switch as often</em>, such as gated clocks,
+control logic, and reset, programming and test circuitry.</li>
+<li><strong>Hot carrier injection (HCI)</strong>. This is caused by
+<em>fast-moving</em> electrons inserting themselves into the gate and
+degrading performance. It primarily occurs on higher-voltage modes and
+fast switching signals.</li>
+</ul>
+<p><img src="/2022/12/11/aging/image-20230513110202915.png"
+alt="image-20230513110202915" /></p>
+<ul>
+<li><em>longer</em> channel length help both BTI and HCI</li>
+<li><em>larger</em> <span class="math inline">\(V_{ds}\)</span> help
+BTI, but hurt HCI</li>
+<li><em>lower</em> temperature help BTI of core device, but hurt that of
+IO device for 7nm FinFET</li>
+</ul>
+<h3 id="mosra">MOSRA</h3>
+<p>MOSRA is a 2-step simulation: 1) Age computation, 2) Post-age
+analysis</p>
+<h3 id="tmi">TMI</h3>
+<p>BTI recovery effect <strong>NOT</strong> included for N7</p>
+<h2 id="stochastic-nature-of-reliability-mechanisms">Stochastic Nature
+of Reliability Mechanisms</h2>
+<blockquote>
+<p>A fraction of devices will fail</p>
+</blockquote>
+<p><img src="/2022/12/11/aging/slide_5.jpg" alt="img" /></p>
+<p><img src="/2022/12/11/aging/slide_6.jpg" alt="img" /></p>
+<h2 id="circuit-simulations">Circuit Simulations</h2>
+<p><img src="/2022/12/11/aging/image-20231106230145351.png"
+alt="image-20231106230145351" /></p>
+<p><img src="/2022/12/11/aging/image-20231106230226203.png"
+alt="image-20231106230226203" /></p>
+<h3 id="reference">reference</h3>
+<p>Spectre Tech Tips: Device Aging? Yes, even Silicon wears out -
+Analog/Custom Design (Analog/Custom design) - Cadence Blogs - Cadence
+Community <a
+href="https://shar.es/afd31p">https://shar.es/afd31p</a></p>
+<p>S. Liao, C. Huang, and A. C. J. X. T. Guo, "New Generation
+Reliability Model," Dec 2016. [Online]. Available: <a
+href="http://www.mos-ak.org/berkeley_2016/publications/T11_Xie_MOS-AK_Berkeley_2016.pdf">http://www.mos-ak.org/berkeley_2016/publications/T11_Xie_MOS-AK_Berkeley_2016.pdf</a>.
+[Accessed Aug 2018]</p>
+<p>Tianlei Guo, Jushan Xie, "A Complete Reliability Solution:
+Reliability Modeling, Applications, and Integration in Analog Design
+Environment" [<a
+href="https://mos-ak.org/beijing_2018/presentations/Tianlei_Guo_MOS-AK_Beijing_2018.pdf">https://mos-ak.org/beijing_2018/presentations/Tianlei_Guo_MOS-AK_Beijing_2018.pdf</a>]</p>
+<p>FinFET Reliability Analysis with Device Self-Heating via <span
+class="citation" data-cites="DanielNenni">@DanielNenni</span> <a
+href="https://semiwiki.com/eda/synopsys/5085-finfet-reliability-analysis-with-device-self-heating/">https://semiwiki.com/eda/synopsys/5085-finfet-reliability-analysis-with-device-self-heating/</a></p>
+<p>Chris Changze Liu 刘长泽,Hisilicon, Huawei, "Reliability Challenges
+in Advanced Technology Node" <a
+href="https://www.tek.com.cn/sites/default/files/2018-09/reliability-challenges-in-advanced-technology-node.pdf">https://www.tek.com.cn/sites/default/files/2018-09/reliability-challenges-in-advanced-technology-node.pdf</a></p>
+<p>Ben Kaczer, imec. FEOL reliability: from essentials to advanced and
+emerging devices and circuits. 2016 IRPS Tutorial</p>
+<p>Ben Kaczer, imec. Present and Future of FEOL Reliability—from
+Dielectric Trap Properties to Reliable Circuit Operation. 2016 IEDM 2016
+[<a href="https://slideplayer.com/slide/12992784/">link</a>]</p>
+<p>Kang, Sung-Mo Steve, Yusuf Leblebici and Chulwoo Kim. “CMOS Digital
+Integrated Circuits: Analysis &amp; Design, 4th Edition.” (2014).</p>
+<p>Behzad Razavi. "Design of Analog CMOS Integrated Circuits" (2016)</p>
+<p>Basel Halak. Ageing of Integrated Circuits : Causes, Effects and
+Mitigation Techniques. Cham, Switzerland: Springer, 2020. ‌</p>
+<p>Elie Maricau, and Georges Gielen. Analog IC Reliability in Nanometer
+CMOS. Springer Science &amp; Business Media, 2013. ‌</p>
+<p>Transistor Aging Intensifies At 10/7nm And Below <a
+href="https://semiengineering.com/transistor-aging-intensifies-10nm/">https://semiengineering.com/transistor-aging-intensifies-10nm/</a></p>
+<p>Modeling Effects of Dynamic BTI Degradation on Analog and
+Mixed-Signal CMOS Circuits. MOS-AK/GSA Workshop, April 11-12, 2013,
+Munich <a
+href="https://www.mos-ak.org/munich_2013/presentations/05_Leonhard_Heiss_MOS-AK_Munich_2013.pdf">https://www.mos-ak.org/munich_2013/presentations/05_Leonhard_Heiss_MOS-AK_Munich_2013.pdf</a></p>
+<p>Challenges and Solutions in Modeling and Simulation of Device
+Self-heating, Reliability Aging and Statistical Variability Effects <a
+href="https://www.mos-ak.org/beijing_2018/presentations/Dehuang_Wu_MOS-AK_Beijing_2018.pdf">https://www.mos-ak.org/beijing_2018/presentations/Dehuang_Wu_MOS-AK_Beijing_2018.pdf</a></p>
+<p>New Generation Reliability Model <a
+href="https://www.mos-ak.org/berkeley_2016/publications/T11_Xie_MOS-AK_Berkeley_2016.pdf">https://www.mos-ak.org/berkeley_2016/publications/T11_Xie_MOS-AK_Berkeley_2016.pdf</a></p>
+<p>FinFET SPICE Modeling: Synopsys Solutions to Simulation Challenges of
+Advanced Technology Nodes <a
+href="https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf">https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf</a></p>
+<p>A. Zhang et al., "Reliability variability simulation methodology for
+IC design: An EDA perspective," 2015 IEEE International Electron Devices
+Meeting (IEDM), Washington, DC, USA, 2015, pp. 11.5.1-11.5.4, doi:
+10.1109/IEDM.2015.7409677.</p>
+<p>W. -K. Lee et al., "Unifying self-heating and aging simulations with
+TMI2," 2014 International Conference on Simulation of Semiconductor
+Processes and Devices (SISPAD), Yokohama, Japan, 2014, pp. 333-336, doi:
+10.1109/SISPAD.2014.6931631.</p>
+<p>Aging and Self-Heating in FinFETs - Breakfast Bytes - Cadence Blogs -
+Cadence Community <a
+href="https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/aging-and-self-heating">https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/aging-and-self-heating</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Antenna Effect</title>
     <url>/2023/08/08/antenna/</url>
     <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
@@ -3144,6 +3013,19 @@ href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysil
       </categories>
   </entry>
   <entry>
+    <title>Complete Response used in single-pole filter model in systemverilog</title>
+    <url>/2022/02/13/completeResponse/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>signal</tag>
+        <tag>laplace</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>primary clock, generated clock and virtual clock in SDC</title>
     <url>/2022/03/01/clocks-sta/</url>
     <content><![CDATA[<p><strong>primary clocks</strong></p>
@@ -3182,19 +3064,6 @@ virtual clock is propagated.</p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Complete Response used in single-pole filter model in systemverilog</title>
-    <url>/2022/02/13/completeResponse/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>signal</tag>
-        <tag>laplace</tag>
-      </tags>
   </entry>
   <entry>
     <title>complex uvm project topology</title>
@@ -3683,14 +3552,13 @@ href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com
       </tags>
   </entry>
   <entry>
-    <title>The Delta-Sigma Modulator</title>
-    <url>/2022/06/28/delta-sigma-modulator/</url>
+    <title>Delta-Sigma Modulator ADC</title>
+    <url>/2023/11/06/delta-sigma/</url>
     <content><![CDATA[<h3 id="the-delta-modulator">The Delta Modulator</h3>
 <ol type="a">
 <li>A delta modulator and (b) its simple implementation</li>
 </ol>
-<p><img
-src="/2022/06/28/delta-sigma-modulator/image-20230202224406667.png"
+<p><img src="/2023/11/06/delta-sigma/image-20230202224406667.png"
 alt="image-20230202224406667" /></p>
 <p>The high loop gain ensures that <span class="math inline">\(V_F
 \simeq V_{in}\)</span></p>
@@ -3724,18 +3592,17 @@ Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
 MATLAB Central File Exchange. Retrieved June 28, 2022.</p>
 <p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
 Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+<p>Manolis Terrovitis and Ken Kundert. <a
+href="https://designers-guide.org/analysis/delta-sigma.pdf">Device noise
+simulation of delta-sigma modulators</a> and associated Matlab scripts:
+<a
+href="https://designers-guide.org/analysis/scripts.tar.gz">scripts.tar.gz</a>,
+<a
+href="https://designers-guide.org/analysis/scripts.zip">scripts.zip</a>.</p>
 ]]></content>
       <categories>
         <category>analog</category>
       </categories>
-      <tags>
-        <tag>adc</tag>
-        <tag>dac</tag>
-        <tag>dsm</tag>
-        <tag>quantization</tag>
-        <tag>pll</tag>
-        <tag>noise shaping</tag>
-      </tags>
   </entry>
   <entry>
     <title>Dynamic Element Matching (DEM)</title>
@@ -4106,6 +3973,77 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
       </tags>
   </entry>
   <entry>
+    <title>Impact of Deep N-well Implantation</title>
+    <url>/2023/05/29/dnw/</url>
+    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
+<p>A variety of techniques can be used to minimize this noise, for
+example by keeping analog devices surrounded by guard rings, or using a
+separate supply for the substrate/well taps.</p>
+<p>However <em>guard rings alone cannot prevent noise coupling deep in
+the substrate, only surface currents</em>.</p>
+<blockquote>
+<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
+the substrate noise, but such is not valid for NMOS .</p>
+</blockquote>
+<h2 id="dnw">DNW</h2>
+<p>The N-channel devices built directly into the P-type substrate are
+not as effectively isolated as P-channel devices in their N-wells. This
+is because despite creating a P+ guard ring around the devices, there
+remains an electrical path below the guard ring for charge to flow.</p>
+<p>To overcome this issue, a <em>deep N-well</em> can be used to more
+effectively isolate these N-channel devices.</p>
+<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
+alt="image-20230529001556060" /></p>
+<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
+alt="image-20230529010836003" /></p>
+<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
+alt="BM_SS_Together at Last_Fig1" /></p>
+<blockquote>
+<p><a
+href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
+At Last – Combining Netlist and Layout Data for Power-Aware
+Verification</a></p>
+</blockquote>
+<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
+alt="image-20230529002733114" /></p>
+<ul>
+<li>the P-well is separated, allowing the voltage to be controlled</li>
+<li>because the circuit within the deep N-well is separated from the
+p-substrate in this structure, there is the benefit that this circuitry
+is less susceptible to noise that propagates through the
+p-substrate.</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
+Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
+Transistor Performance for Systems-on-a-Chip Integration. 32nd European
+Solid-State Device Research Conference, 251-254. URL:[<a
+href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
+<a
+href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
+<p>Mark Waller, <a
+href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
+layout: Why wells, taps, and guard rings are crucial</a></p>
+<p>KEITH SABINE <a
+href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
+Deep N Wells in Analog Design</a></p>
+<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
+nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
+1-8.</p>
+<p>cmos_processing, URL:<a
+href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>dnw</tag>
+        <tag>coupling</tag>
+        <tag>noise</tag>
+        <tag>substrate</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Random &amp; Deterministic Jitters Simulation</title>
     <url>/2022/05/16/dj-rj/</url>
     <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
@@ -4289,77 +4227,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
       </categories>
   </entry>
   <entry>
-    <title>Impact of Deep N-well Implantation</title>
-    <url>/2023/05/29/dnw/</url>
-    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
-<p>A variety of techniques can be used to minimize this noise, for
-example by keeping analog devices surrounded by guard rings, or using a
-separate supply for the substrate/well taps.</p>
-<p>However <em>guard rings alone cannot prevent noise coupling deep in
-the substrate, only surface currents</em>.</p>
-<blockquote>
-<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
-the substrate noise, but such is not valid for NMOS .</p>
-</blockquote>
-<h2 id="dnw">DNW</h2>
-<p>The N-channel devices built directly into the P-type substrate are
-not as effectively isolated as P-channel devices in their N-wells. This
-is because despite creating a P+ guard ring around the devices, there
-remains an electrical path below the guard ring for charge to flow.</p>
-<p>To overcome this issue, a <em>deep N-well</em> can be used to more
-effectively isolate these N-channel devices.</p>
-<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
-alt="image-20230529001556060" /></p>
-<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
-alt="image-20230529010836003" /></p>
-<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
-alt="BM_SS_Together at Last_Fig1" /></p>
-<blockquote>
-<p><a
-href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
-At Last – Combining Netlist and Layout Data for Power-Aware
-Verification</a></p>
-</blockquote>
-<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
-alt="image-20230529002733114" /></p>
-<ul>
-<li>the P-well is separated, allowing the voltage to be controlled</li>
-<li>because the circuit within the deep N-well is separated from the
-p-substrate in this structure, there is the benefit that this circuitry
-is less susceptible to noise that propagates through the
-p-substrate.</li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
-Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
-Transistor Performance for Systems-on-a-Chip Integration. 32nd European
-Solid-State Device Research Conference, 251-254. URL:[<a
-href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
-<a
-href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
-<p>Mark Waller, <a
-href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
-layout: Why wells, taps, and guard rings are crucial</a></p>
-<p>KEITH SABINE <a
-href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
-Deep N Wells in Analog Design</a></p>
-<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
-nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
-1-8.</p>
-<p>cmos_processing, URL:<a
-href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>dnw</tag>
-        <tag>coupling</tag>
-        <tag>noise</tag>
-        <tag>substrate</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>How to preserve hand-instantiated cells</title>
     <url>/2023/02/10/dont-touch/</url>
     <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
@@ -4385,24 +4252,6 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
       </categories>
       <tags>
         <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>different DSPF files for each corner</title>
-    <url>/2023/01/29/dspf-in-corner/</url>
-    <content><![CDATA[<p>Create a new file with an extension <strong>scs</strong> like
-<em>myDSPF_Files.scs</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* DSPF files to use with Corner Definitions</span><br><span class="line">* This is an example file showing how to define different dspf files for different corners</span><br><span class="line">* using model files for individual components as the</span><br><span class="line">* building blocks.</span><br><span class="line">simulator lang=spectre</span><br><span class="line">library dspf_files_corners</span><br><span class="line"></span><br><span class="line">section rctyp_25</span><br><span class="line">dspf_include &quot;DSPF_RC_TYPNOM25.spf&quot;</span><br><span class="line">endsection rctyp_25</span><br><span class="line"></span><br><span class="line">section rctyp_125</span><br><span class="line">dspf_include &quot;DSPF_RC_TYP125.spf&quot;</span><br><span class="line">endsection rctyp_125</span><br><span class="line"></span><br><span class="line">section rcworst_25</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE25.spf&quot;</span><br><span class="line">end section rcworst_25</span><br><span class="line"></span><br><span class="line">section rcworst_125</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE125.spf&quot;</span><br><span class="line">end section rcworst_125</span><br><span class="line"></span><br><span class="line">endlibrary dspf_files_corners</span><br></pre></td></tr></table></figure>
-<p>Add the file created above ‘<em>myDSPF_File.scs</em>’ in
-‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
-<p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
-alt="image-20230129223248655" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>corner</tag>
       </tags>
   </entry>
   <entry>
@@ -4749,6 +4598,24 @@ capacitance</strong></p>
         <tag>dspf</tag>
         <tag>calibre</tag>
         <tag>spectre</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>different DSPF files for each corner</title>
+    <url>/2023/01/29/dspf-in-corner/</url>
+    <content><![CDATA[<p>Create a new file with an extension <strong>scs</strong> like
+<em>myDSPF_Files.scs</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* DSPF files to use with Corner Definitions</span><br><span class="line">* This is an example file showing how to define different dspf files for different corners</span><br><span class="line">* using model files for individual components as the</span><br><span class="line">* building blocks.</span><br><span class="line">simulator lang=spectre</span><br><span class="line">library dspf_files_corners</span><br><span class="line"></span><br><span class="line">section rctyp_25</span><br><span class="line">dspf_include &quot;DSPF_RC_TYPNOM25.spf&quot;</span><br><span class="line">endsection rctyp_25</span><br><span class="line"></span><br><span class="line">section rctyp_125</span><br><span class="line">dspf_include &quot;DSPF_RC_TYP125.spf&quot;</span><br><span class="line">endsection rctyp_125</span><br><span class="line"></span><br><span class="line">section rcworst_25</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE25.spf&quot;</span><br><span class="line">end section rcworst_25</span><br><span class="line"></span><br><span class="line">section rcworst_125</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE125.spf&quot;</span><br><span class="line">end section rcworst_125</span><br><span class="line"></span><br><span class="line">endlibrary dspf_files_corners</span><br></pre></td></tr></table></figure>
+<p>Add the file created above ‘<em>myDSPF_File.scs</em>’ in
+‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
+<p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
+alt="image-20230129223248655" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>corner</tag>
       </tags>
   </entry>
   <entry>
@@ -6592,144 +6459,6 @@ href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff05
       </tags>
   </entry>
   <entry>
-    <title>Dual Diode and ggNMOS</title>
-    <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
-    <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
-alt="image-20230517233753530" /></p>
-<blockquote>
-<p><em>HIA</em> = High Amp</p>
-<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
-diode</p>
-<p>HIA diode process is same with regular junction diode</p>
-</blockquote>
-<h2 id="strap">STRAP</h2>
-<p>A "strap" refers to a low-impedance connection</p>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518001007350.png"
-alt="image-20230518001007350" /></p>
-<p>NWDMY = NWDMY1, NWDMY2</p>
-<p>STRAP = NWSTRAP or PWSTRAP</p>
-<p>NWSTRAP = {NP &amp; OD} &amp; {NW not {NW INTERACT NWDMY}}</p>
-<p>PWSTRAP = {PP &amp; OD} not NW</p>
-<table>
-<thead>
-<tr class="header">
-<th>cell  pin</th>
-<th>PLUS</th>
-<th>MINUS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>N diode</strong></td>
-<td>PWSTRAP</td>
-<td>\</td>
-</tr>
-<tr class="even">
-<td><strong>P diode</strong></td>
-<td>\</td>
-<td>NWSTRAP</td>
-</tr>
-</tbody>
-</table>
-<h3 id="calibre-rulenot">Calibre Rule::NOT</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518005758993.png"
-alt="image-20230518005758993" /></p>
-<h3 id="calibre-ruleinteract">Calibre Rule::INTERACT</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010124496.png"
-alt="image-20230518010124496" /></p>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010758342.png"
-alt="image-20230518010758342" /></p>
-<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
-alt="image-20230518012456390" /></p>
-<blockquote>
-<p>PS: I/O to GND positively</p>
-<p>NS: I/O to GND negatively</p>
-<p>PD: I/O to VDD positively</p>
-<p>ND: I/O to VDD negatively</p>
-</blockquote>
-<p>Dual diode should be used with <strong>power clamp</strong> for
-<strong>PS</strong> and <strong>ND</strong> path</p>
-<h3 id="pmos-power-clamp">PMOS power clamp</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
-alt="power_clamp_pmos.drawio" /></p>
-<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
-alt="image-20220623231619052" /></p>
-<blockquote>
-<p>The drain (D) is connected to an I/O pad and the gate (G) is
-grounded.</p>
-<p>To ensure “zero” leakage of the ESD protection structure under normal
-operations.</p>
-<p>To to protect gate of core device, tie-high and tie-low shall be used
-when used as secondary ESD protecton.</p>
-</blockquote>
-<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
-alt="image-20220623233019912" /></p>
-<ol type="1">
-<li><strong>DB</strong> junction is reverse-biased all the way to its
-breakdown.</li>
-<li>Avalance multiplication takes place and generates electron-hole
-pairs</li>
-<li>Hole current flows into the ground via the *B-region** and build up
-a potential, VR, across the lateral parasitic resistance R</li>
-<li>As VR increases, the <strong>BS</strong> junction turns on,
-eventually triggers the parasitic lateral NPN transistor Q
-(<strong>DBS</strong>)</li>
-</ol>
-<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
-alt="image-20220623233634452" /></p>
-<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
-the transient</p>
-<blockquote>
-<p>ggNMOS is commonly used in the GPIO provided by foundry, which
-alleviate the ESD design burden of customer.</p>
-<p>These GPIO is self-protective thanks to the ggNMOS.</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
-circuits: an IC design perspective. Boston, Mass: Kluwer Academic
-Publishers.</p>
-<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
-Stine, J. (2001). On-chip ESD protection design for integrated circuits:
-An overview for IC designers. Microelectronics Journal. 32. 733-747.
-10.1016/S0026-2692(01)00060-X.</p>
-<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
-Protection Design for Ics.” (2001).</p>
-<p>Introduction: ESD protection concepts for I/Os. URL: <a
-href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
-<p>Answer: What does "strap" mean in this context? <a
-href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
-<p>Hammer VLSI Flow URL: <a
-href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
-<p>Calibre Rule Writing 2009</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>esd</tag>
-        <tag>clamp</tag>
-        <tag>diode</tag>
-        <tag>ggnmos</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ESD and Protection</title>
     <url>/2022/06/09/esd-protection/</url>
     <content><![CDATA[<p>The <strong>ESD design window</strong> is defined as the difference
@@ -6935,6 +6664,144 @@ Sixth international symposium on quality electronic design (isqed'05),
         <tag>tlp</tag>
         <tag>hbm</tag>
         <tag>cdm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Dual Diode and ggNMOS</title>
+    <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
+    <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
+alt="image-20230517233753530" /></p>
+<blockquote>
+<p><em>HIA</em> = High Amp</p>
+<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
+diode</p>
+<p>HIA diode process is same with regular junction diode</p>
+</blockquote>
+<h2 id="strap">STRAP</h2>
+<p>A "strap" refers to a low-impedance connection</p>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518001007350.png"
+alt="image-20230518001007350" /></p>
+<p>NWDMY = NWDMY1, NWDMY2</p>
+<p>STRAP = NWSTRAP or PWSTRAP</p>
+<p>NWSTRAP = {NP &amp; OD} &amp; {NW not {NW INTERACT NWDMY}}</p>
+<p>PWSTRAP = {PP &amp; OD} not NW</p>
+<table>
+<thead>
+<tr class="header">
+<th>cell  pin</th>
+<th>PLUS</th>
+<th>MINUS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>N diode</strong></td>
+<td>PWSTRAP</td>
+<td>\</td>
+</tr>
+<tr class="even">
+<td><strong>P diode</strong></td>
+<td>\</td>
+<td>NWSTRAP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="calibre-rulenot">Calibre Rule::NOT</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518005758993.png"
+alt="image-20230518005758993" /></p>
+<h3 id="calibre-ruleinteract">Calibre Rule::INTERACT</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010124496.png"
+alt="image-20230518010124496" /></p>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010758342.png"
+alt="image-20230518010758342" /></p>
+<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
+alt="image-20230518012456390" /></p>
+<blockquote>
+<p>PS: I/O to GND positively</p>
+<p>NS: I/O to GND negatively</p>
+<p>PD: I/O to VDD positively</p>
+<p>ND: I/O to VDD negatively</p>
+</blockquote>
+<p>Dual diode should be used with <strong>power clamp</strong> for
+<strong>PS</strong> and <strong>ND</strong> path</p>
+<h3 id="pmos-power-clamp">PMOS power clamp</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
+alt="power_clamp_pmos.drawio" /></p>
+<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
+alt="image-20220623231619052" /></p>
+<blockquote>
+<p>The drain (D) is connected to an I/O pad and the gate (G) is
+grounded.</p>
+<p>To ensure “zero” leakage of the ESD protection structure under normal
+operations.</p>
+<p>To to protect gate of core device, tie-high and tie-low shall be used
+when used as secondary ESD protecton.</p>
+</blockquote>
+<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
+pad</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
+alt="image-20220623233019912" /></p>
+<ol type="1">
+<li><strong>DB</strong> junction is reverse-biased all the way to its
+breakdown.</li>
+<li>Avalance multiplication takes place and generates electron-hole
+pairs</li>
+<li>Hole current flows into the ground via the *B-region** and build up
+a potential, VR, across the lateral parasitic resistance R</li>
+<li>As VR increases, the <strong>BS</strong> junction turns on,
+eventually triggers the parasitic lateral NPN transistor Q
+(<strong>DBS</strong>)</li>
+</ol>
+<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
+pad</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
+alt="image-20220623233634452" /></p>
+<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
+the transient</p>
+<blockquote>
+<p>ggNMOS is commonly used in the GPIO provided by foundry, which
+alleviate the ESD design burden of customer.</p>
+<p>These GPIO is self-protective thanks to the ggNMOS.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
+circuits: an IC design perspective. Boston, Mass: Kluwer Academic
+Publishers.</p>
+<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
+Stine, J. (2001). On-chip ESD protection design for integrated circuits:
+An overview for IC designers. Microelectronics Journal. 32. 733-747.
+10.1016/S0026-2692(01)00060-X.</p>
+<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
+Protection Design for Ics.” (2001).</p>
+<p>Introduction: ESD protection concepts for I/Os. URL: <a
+href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
+<p>Answer: What does "strap" mean in this context? <a
+href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
+<p>Hammer VLSI Flow URL: <a
+href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
+<p>Calibre Rule Writing 2009</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>esd</tag>
+        <tag>clamp</tag>
+        <tag>diode</tag>
+        <tag>ggnmos</tag>
       </tags>
   </entry>
   <entry>
@@ -8071,6 +7938,75 @@ alt="pma_dig_bumps.drawio" /></p>
       </categories>
   </entry>
   <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>integrator</tag>
+        <tag>ota</tag>
+        <tag>slew rate</tag>
+        <tag>bandwidth</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
     <content><![CDATA[<h2 id="inverter-capacitance">Inverter capacitance</h2>
@@ -8510,75 +8446,6 @@ href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemY
       <categories>
         <category>analog</category>
       </categories>
-  </entry>
-  <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>integrator</tag>
-        <tag>ota</tag>
-        <tag>slew rate</tag>
-        <tag>bandwidth</tag>
-      </tags>
   </entry>
   <entry>
     <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
@@ -9468,6 +9335,25 @@ Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter
         <tag>dibl</tag>
         <tag>gidl</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Link Modeling &amp; Analysis</title>
+    <url>/2023/11/06/linkModeling/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
+(EPFL). <a
+href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
+generator model for jitter-tolerance simulation</a>; <a
+href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
+models</a></p>
+<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
+Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
+Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
+doi: 10.1109/CICC.2019.8780223.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
   </entry>
   <entry>
     <title>CDR Linear Model</title>
@@ -11745,7 +11631,7 @@ v_{out}(t) = \cos((\omega_c - \omega_{LO})t)
 </blockquote>
 <h1 id="linear-periodically-varying-analyses">Linear
 Periodically-Varying Analyses</h1>
-<h2 id="small-signal-analyses">Small-Signal Analyses</h2>
+<h2 id="small-signal">Small-Signal</h2>
 <ol type="1">
 <li>LPV analyses start by performing a periodic analysis to compute the
 <strong>periodic operating point</strong> with only the <strong>large
@@ -11767,8 +11653,7 @@ particular input signal</p>
 <p>PXF is best at predicting the input images for a particular
 output</p>
 </blockquote>
-<h2 id="cyclostationary-noise-analysis">cyclostationary noise
-analysis</h2>
+<h2 id="cyclostationary-noise">Cyclostationary Noise</h2>
 <blockquote>
 <p>which is referred to as a "periodic noise" or PNoise analysis</p>
 </blockquote>
@@ -11777,6 +11662,11 @@ analysis</h2>
 in IEEE Journal of Solid-State Circuits, vol. 34, no. 9, pp. 1298-1319,
 Sept. 1999, doi: 10.1109/4.782091. [<a
 href="https://designers-guide.org/analysis/rf-sim.pdf">pdf</a>]</p>
+<p>Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers,
+oscillators, samplers, and logic: an introduction to cyclostationary
+noise." <em>Proceedings of the IEEE 2000 Custom Integrated Circuits
+Conference (Cat. No.00CH37044)</em> (2000): 431-438. [<a
+href="https://designers-guide.org/theory/cyclo-preso.pdf">pdf</a>]</p>
 <p>Karti Mayaram. ECE 521 Fall 2016 Analog Circuit Simulation:
 Simulation of Radio Frequency Integrated Circuits [<a
 href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_16.pdf">pdf1</a>,
@@ -13667,19 +13557,18 @@ V. Oppenheim, 3rd edition.” (2011).</p>
       </categories>
   </entry>
   <entry>
-    <title>Successive Approximation (SAR) ADC</title>
-    <url>/2022/11/08/sar-adc/</url>
-    <content><![CDATA[<h3 id="model">model</h3>
-<p><img src="/2022/11/08/sar-adc/image-20221124234503524.png"
+    <title>SAR ADC</title>
+    <url>/2023/11/06/sar/</url>
+    <content><![CDATA[<h2 id="modeling">modeling</h2>
+<p><img src="/2023/11/06/sar/image-20221124234503524.png"
 alt="image-20221124234503524" /></p>
+<h2 id="reference">reference</h2>
+<p>Monte Ma. Data Converters [<a
+href="https://designers-guide.org/modeling/dataconversion.pdf">https://designers-guide.org/modeling/dataconversion.pdf</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
       </categories>
-      <tags>
-        <tag>adc</tag>
-        <tag>sar</tag>
-      </tags>
   </entry>
   <entry>
     <title>Understanding the save parameter in spectre</title>
@@ -13931,31 +13820,6 @@ href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">htt
       </tags>
   </entry>
   <entry>
-    <title>Self-heating Effect</title>
-    <url>/2023/05/13/self-heating/</url>
-    <content><![CDATA[<h2 id="heat-sink-hs">Heat Sink (HS)</h2>
-<ol type="1">
-<li><p>guard ring</p>
-<p>closer OD help reduce dT</p></li>
-<li><p>extended gate</p></li>
-<li><p>source/drain metal stack</p></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Self-Heating Issues Spread <a
-href="https://semiengineering.com/self-heating-issues-spread/">https://semiengineering.com/self-heating-issues-spread/</a></p>
-<p>Y. Zhao and Y. Qu, "Impact of Self-Heating Effect on Transistor
-Characterization and Reliability Issues in Sub-10 nm Technology Nodes,"
-in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
-2019, doi: 10.1109/JEDS.2019.2911085.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>she</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Sign-Sign LMS Adaptation algorithm in FFE and DFE</title>
     <url>/2022/03/02/sign-sign-LMS/</url>
     <content><![CDATA[<h4 id="adaptive-equalizing-link-architecture">Adaptive equalizing link
@@ -14036,61 +13900,29 @@ Implementation, 5th edition</p>
       </tags>
   </entry>
   <entry>
-    <title>signed and unsigned arithmetic in Verilog</title>
-    <url>/2022/05/07/signed-verilog/</url>
-    <content><![CDATA[<p>With <strong>implict sign extension</strong>, the implementation of
-<strong>signed</strong> arithmetic is <strong>DIFFERENT</strong> from
-that of <strong>unsigned</strong>. Otherwise, their implementations are
-same.</p>
-<p>The implementations manifest the RTL's behaviour correctly</p>
-<h2 id="add-without-implicit-sign-extension">add without implicit sign
-extension</h2>
-<h3 id="unsigned">unsigned</h3>
-<h4 id="rtl">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114215200.png"
-alt="image-20220507114215200" /></p>
-<h4 id="synthesized-netlist">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114307439.png"
-alt="image-20220507114307439" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:43:27 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>vcs compile with <code>-v /path/to/lib.v</code></p>
-</blockquote>
-<h3 id="signed">signed</h3>
-<h4 id="rtl-1">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114654777.png"
-alt="image-20220507114654777" /></p>
-<h4 id="synthesized-netlist-1">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114844111.png"
-alt="image-20220507114844111" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:48:54 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="add-with-implicit-sign-extension">add WITH implicit sign
-extension</h2>
-<h3 id="unsigned-with-0-extension">unsigned with 0 extension</h3>
-<h4 id="rtl-2">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0		<span class="comment">// 3 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] data1		<span class="comment">// 2 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result	<span class="comment">// 3 bit unsigned</span></span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507121521303.png"
-alt="image-20220507121521303" /></p>
-<h4 id="synthesized-netlist-2">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507121622001.png"
-alt="image-20220507121622001" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:15:58 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.Z</span>(n6) );</span><br><span class="line">  ad01d0 U7 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n6), <span class="variable">.CO</span>(n4), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr02d1 U8 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n4), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  nr02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n5) );</span><br><span class="line">  nr02d0 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(n5), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="signed-with-implicit-sign-extension">signed with implicit sign
-extension</h3>
-<h4 id="rtl-3">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507122053948.png"
-alt="image-20220507122053948" /></p>
-<h4 id="synthesized-netlist-3">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507122217830.png"
-alt="image-20220507122217830" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:21:51 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n6, n7, n8, n9, n10;</span><br><span class="line"></span><br><span class="line">  nd02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n10) );</span><br><span class="line">  inv0d0 U10 ( <span class="variable">.I</span>(n10), <span class="variable">.ZN</span>(n9) );</span><br><span class="line">  nr02d0 U11 ( <span class="variable">.A1</span>(data0[<span class="number">1</span>]), <span class="variable">.A2</span>(data1[<span class="number">1</span>]), <span class="variable">.ZN</span>(n7) );</span><br><span class="line">  aor221d1 U12 ( <span class="variable">.B1</span>(n9), <span class="variable">.B2</span>(data1[<span class="number">1</span>]), <span class="variable">.C1</span>(n10), <span class="variable">.C2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(</span><br><span class="line">        n6) );</span><br><span class="line">  xn02d1 U13 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n6), <span class="variable">.ZN</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  ora21d1 U14 ( <span class="variable">.B1</span>(data1[<span class="number">0</span>]), <span class="variable">.B2</span>(data0[<span class="number">0</span>]), <span class="variable">.A</span>(n10), <span class="variable">.Z</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  aor21d1 U15 ( <span class="variable">.B1</span>(data1[<span class="number">1</span>]), <span class="variable">.B2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(n8) );</span><br><span class="line">  mx02d0 U16 ( <span class="variable">.I0</span>(n10), <span class="variable">.I1</span>(n9), <span class="variable">.S</span>(n8), <span class="variable">.Z</span>(result[<span class="number">1</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+    <title>Self-heating Effect</title>
+    <url>/2023/05/13/self-heating/</url>
+    <content><![CDATA[<h2 id="heat-sink-hs">Heat Sink (HS)</h2>
+<ol type="1">
+<li><p>guard ring</p>
+<p>closer OD help reduce dT</p></li>
+<li><p>extended gate</p></li>
+<li><p>source/drain metal stack</p></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Self-Heating Issues Spread <a
+href="https://semiengineering.com/self-heating-issues-spread/">https://semiengineering.com/self-heating-issues-spread/</a></p>
+<p>Y. Zhao and Y. Qu, "Impact of Self-Heating Effect on Transistor
+Characterization and Reliability Issues in Sub-10 nm Technology Nodes,"
+in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
+2019, doi: 10.1109/JEDS.2019.2911085.</p>
 ]]></content>
       <categories>
-        <category>digital</category>
+        <category>analog</category>
       </categories>
+      <tags>
+        <tag>she</tag>
+      </tags>
   </entry>
   <entry>
     <title>DSPF Options</title>
@@ -14207,6 +14039,63 @@ href="https://shar.es/afO6e1">https://shar.es/afO6e1</a></p>
         <tag>dspf</tag>
         <tag>spectre</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>signed and unsigned arithmetic in Verilog</title>
+    <url>/2022/05/07/signed-verilog/</url>
+    <content><![CDATA[<p>With <strong>implict sign extension</strong>, the implementation of
+<strong>signed</strong> arithmetic is <strong>DIFFERENT</strong> from
+that of <strong>unsigned</strong>. Otherwise, their implementations are
+same.</p>
+<p>The implementations manifest the RTL's behaviour correctly</p>
+<h2 id="add-without-implicit-sign-extension">add without implicit sign
+extension</h2>
+<h3 id="unsigned">unsigned</h3>
+<h4 id="rtl">rtl</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/07/signed-verilog/image-20220507114215200.png"
+alt="image-20220507114215200" /></p>
+<h4 id="synthesized-netlist">synthesized netlist</h4>
+<p><img src="/2022/05/07/signed-verilog/image-20220507114307439.png"
+alt="image-20220507114307439" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:43:27 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>vcs compile with <code>-v /path/to/lib.v</code></p>
+</blockquote>
+<h3 id="signed">signed</h3>
+<h4 id="rtl-1">rtl</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/07/signed-verilog/image-20220507114654777.png"
+alt="image-20220507114654777" /></p>
+<h4 id="synthesized-netlist-1">synthesized netlist</h4>
+<p><img src="/2022/05/07/signed-verilog/image-20220507114844111.png"
+alt="image-20220507114844111" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:48:54 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2 id="add-with-implicit-sign-extension">add WITH implicit sign
+extension</h2>
+<h3 id="unsigned-with-0-extension">unsigned with 0 extension</h3>
+<h4 id="rtl-2">rtl</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0		<span class="comment">// 3 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] data1		<span class="comment">// 2 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result	<span class="comment">// 3 bit unsigned</span></span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/07/signed-verilog/image-20220507121521303.png"
+alt="image-20220507121521303" /></p>
+<h4 id="synthesized-netlist-2">synthesized netlist</h4>
+<p><img src="/2022/05/07/signed-verilog/image-20220507121622001.png"
+alt="image-20220507121622001" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:15:58 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.Z</span>(n6) );</span><br><span class="line">  ad01d0 U7 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n6), <span class="variable">.CO</span>(n4), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr02d1 U8 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n4), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  nr02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n5) );</span><br><span class="line">  nr02d0 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(n5), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3 id="signed-with-implicit-sign-extension">signed with implicit sign
+extension</h3>
+<h4 id="rtl-3">rtl</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/07/signed-verilog/image-20220507122053948.png"
+alt="image-20220507122053948" /></p>
+<h4 id="synthesized-netlist-3">synthesized netlist</h4>
+<p><img src="/2022/05/07/signed-verilog/image-20220507122217830.png"
+alt="image-20220507122217830" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:21:51 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n6, n7, n8, n9, n10;</span><br><span class="line"></span><br><span class="line">  nd02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n10) );</span><br><span class="line">  inv0d0 U10 ( <span class="variable">.I</span>(n10), <span class="variable">.ZN</span>(n9) );</span><br><span class="line">  nr02d0 U11 ( <span class="variable">.A1</span>(data0[<span class="number">1</span>]), <span class="variable">.A2</span>(data1[<span class="number">1</span>]), <span class="variable">.ZN</span>(n7) );</span><br><span class="line">  aor221d1 U12 ( <span class="variable">.B1</span>(n9), <span class="variable">.B2</span>(data1[<span class="number">1</span>]), <span class="variable">.C1</span>(n10), <span class="variable">.C2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(</span><br><span class="line">        n6) );</span><br><span class="line">  xn02d1 U13 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n6), <span class="variable">.ZN</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  ora21d1 U14 ( <span class="variable">.B1</span>(data1[<span class="number">0</span>]), <span class="variable">.B2</span>(data0[<span class="number">0</span>]), <span class="variable">.A</span>(n10), <span class="variable">.Z</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  aor21d1 U15 ( <span class="variable">.B1</span>(data1[<span class="number">1</span>]), <span class="variable">.B2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(n8) );</span><br><span class="line">  mx02d0 U16 ( <span class="variable">.I0</span>(n10), <span class="variable">.I1</span>(n9), <span class="variable">.S</span>(n8), <span class="variable">.Z</span>(result[<span class="number">1</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model</title>
@@ -14629,31 +14518,6 @@ I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
       </tags>
   </entry>
   <entry>
-    <title>SystemVerilog iff</title>
-    <url>/2022/06/21/sv-iff/</url>
-    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<p>is equivalent to</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>iff</code> is more efficient than <code>if</code> because the
-expression is recalculated when <code>vld</code> transition rather than
-<code>clk</code>.</p>
-</blockquote>
-<p>One example, detecting the negative edge of
-<code>rtr_io.cb.frameo_n[da]</code></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
-alt="image-20220621182019927" /></p>
-<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
-<p><strong>reference</strong></p>
-<p>system verilog中的iff, URL: <a
-href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
     <url>/2022/03/16/sv-rnm-101/</url>
     <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
@@ -14721,6 +14585,31 @@ together
         <tag>rnm</tag>
         <tag>EE_pkg</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>SystemVerilog iff</title>
+    <url>/2022/06/21/sv-iff/</url>
+    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<p>is equivalent to</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>iff</code> is more efficient than <code>if</code> because the
+expression is recalculated when <code>vld</code> transition rather than
+<code>clk</code>.</p>
+</blockquote>
+<p>One example, detecting the negative edge of
+<code>rtr_io.cb.frameo_n[da]</code></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
+alt="image-20220621182019927" /></p>
+<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
+<p><strong>reference</strong></p>
+<p>system verilog中的iff, URL: <a
+href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Metastability and Synchronizer</title>
@@ -15083,103 +14972,6 @@ Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
         <tag>sensor</tag>
         <tag>temperature</tag>
         <tag>bipolar</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>T-coil and its application</title>
-    <url>/2022/03/17/tcoil/</url>
-    <content><![CDATA[<ul>
-<li>Broaden the bandwidth</li>
-<li>Create a constant, resistive input impedance in the presence of a
-heavy load capacitance (ESD protection circuit)</li>
-</ul>
-<blockquote>
-<p>L<sub>1</sub> = L<sub>2</sub> for impedance matching</p>
-</blockquote>
-<p>The use of T-coils can dramatically increase the
-<strong>bandwidth</strong> and improve the <strong>return loss</strong>
-in both TXs and RXs.</p>
-<h2 id="tcoil-in-rx">Tcoil in RX</h2>
-<p><img src="/2022/03/17/tcoil/image-20220502201254057.png"
-alt="image-20220502201254057" /></p>
-<blockquote>
-<p><strong>ppwl</strong>: Independent Piece-Wise Linear Resistive
-Source</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220502201321341.png"
-alt="image-20220502201321341" /></p>
-<h2 id="simple-model">simple model</h2>
-<blockquote>
-<p>L1, L2, Km, Cb</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220502215310947.png"
-alt="image-20220502215310947" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220622224842237.png"
-alt="image-20220622224842237" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220622225709712.png"
-alt="image-20220622225709712" /></p>
-<h2 id="equivalent-model">equivalent model</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">simulator lang=spectre</span><br><span class="line">include &quot;/path/to/INDL0.scs&quot;</span><br><span class="line">subckt for_import(p0 p1 p2 gnd)</span><br><span class="line">	xmod (p0 p1 p2 gnd) INDL0</span><br><span class="line">ends for_import</span><br><span class="line"></span><br><span class="line">x_1 (p_1_1 p_1_2 p_1_3 0) for_import</span><br><span class="line">v_1_1 (p_1_1 0) vsource mag=-1</span><br><span class="line">v_1_2 (p_1_2 0) vsource mag=0</span><br><span class="line">v_1_3 (p_1_3 0) vsource mag=0</span><br><span class="line">save v_1_1:p v_1_2:p v_1_3:p</span><br><span class="line"></span><br><span class="line">x_2 (p_2_1 p_2_2 p_2_3 0) for_import</span><br><span class="line">v_2_1 (p_2_1 0) vsource mag=0</span><br><span class="line">v_2_2 (p_2_2 0) vsource mag=-1</span><br><span class="line">v_2_3 (p_2_3 0) vsource mag=0</span><br><span class="line">save v_2_1:p v_2_2:p v_2_3:p</span><br><span class="line"></span><br><span class="line">x_3 (p_3_1 p_3_2 p_3_3 0) for_import</span><br><span class="line">v_3_1 (p_3_1 0) vsource mag=0</span><br><span class="line">v_3_2 (p_3_2 0) vsource mag=0</span><br><span class="line">v_3_3 (p_3_3 0) vsource mag=-1</span><br><span class="line">save v_3_1:p v_3_2:p v_3_3:p</span><br><span class="line">Y ac start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08</span><br><span class="line"></span><br><span class="line">xsp (p_1 p_2 p_3 0) for_import</span><br><span class="line">port1 (p_1 0) port</span><br><span class="line">port2 (p_2 0) port</span><br><span class="line">port3 (p_3 0) port</span><br><span class="line">S sp start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08 ports=[ port1 port2 port3]</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/17/tcoil/image-20220503005728763.png"
-alt="image-20220503005728763" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220503005903105.png"
-alt="image-20220503005903105" /></p>
-<h3 id="emx_plot_tcoil-in-emxform.ils"><code>EMX_plot_tcoil</code> in
-<code>emxform.ils</code></h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(define (EMX_plot_tcoil bgui wid what)</span><br><span class="line">  (needNCells &#x27;adtComplex 100000)</span><br><span class="line">  (letseq ((to_z (lambda (ys)</span><br><span class="line">		   (letseq ((y11 (EMX_matrix_ref ys 0 0))</span><br><span class="line">			    (y12 (EMX_matrix_ref ys 0 1))</span><br><span class="line">			    (y21 (EMX_matrix_ref ys 1 0))</span><br><span class="line">			    (y22 (EMX_matrix_ref ys 1 1))</span><br><span class="line">			    (det y11*y22-y12*y21)</span><br><span class="line">			    (z11 y22/det)</span><br><span class="line">			    (z12 -y12/det)</span><br><span class="line">			    (z22 y11/det))</span><br><span class="line">		     (list z11 z12 z22))))</span><br><span class="line">	   (ground</span><br><span class="line">	    (lambda (y p)</span><br><span class="line">	      (letseq ((n (EMX_matrix_rows y))</span><br><span class="line">		       (yg (make_EMX_matrix n-1)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n-1))</span><br><span class="line">		  (do ((j 0 j+1))</span><br><span class="line">		      ((j &gt;= n-1))</span><br><span class="line">		    (EMX_matrix_set yg i j (EMX_matrix_ref y i+(if (i &gt;= p) 1 0) j+(if (j &gt;= p) 1 0)))))</span><br><span class="line">		yg)))</span><br><span class="line">	   (reduce</span><br><span class="line">	    (lambda (yys)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec (car yys)))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (yyvecs (mapcar drGetWaveformYVec yys))</span><br><span class="line">		       (zz1 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz2 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz3 (drCreateVec &#x27;doublecomplex n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (let ((ys (mapcar (lambda (w) (drGetElem w i)) yyvecs)))</span><br><span class="line">		    (setq ys (ground (as_EMX_matrix 3 3 ys) 2))</span><br><span class="line">		    (let ((zz (to_z ys)))</span><br><span class="line">		      (drSetElem zz1 i (nth 0 zz))</span><br><span class="line">		      (drSetElem zz2 i (nth 1 zz))</span><br><span class="line">		      (drSetElem zz3 i (nth 2 zz)))))</span><br><span class="line">		(list (drCreateWaveform xvec zz1)</span><br><span class="line">		      (drCreateWaveform xvec zz2)</span><br><span class="line">		      (drCreateWaveform xvec zz3)))))</span><br><span class="line">	   (get_k</span><br><span class="line">	    (lambda (l12 l1122)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec l12))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (l12v (drGetWaveformYVec l12))</span><br><span class="line">		       (l1122v (drGetWaveformYVec l1122))</span><br><span class="line">		       (resultv (drCreateVec &#x27;double n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (letseq ((l12i (drGetElem l12v i))</span><br><span class="line">			   (l1122i (drGetElem l1122v i))</span><br><span class="line">			   (kk (if (l1122i &gt; 0.0)</span><br><span class="line">				   l12i/(sqrt l1122i)</span><br><span class="line">				   0.0))</span><br><span class="line">			   (k (if ((abs kk) &lt; 2.0) kk 0.0)))</span><br><span class="line">		    (drSetElem resultv i k)))</span><br><span class="line">		(drCreateWaveform xvec resultv)))))</span><br><span class="line">  (EMX_plot_aux bgui wid what 3</span><br><span class="line">		&#x27;(&quot;Inductance&quot; &quot;Q&quot; &quot;k&quot;)</span><br><span class="line">		&#x27;(&quot;Henry&quot; &quot;&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((zs (reduce ys))</span><br><span class="line">			   (z11 (nth 0 zs))</span><br><span class="line">			   (z12 (nth 1 zs))</span><br><span class="line">			   (z22 (nth 2 zs))</span><br><span class="line">			   (pi 3.14159265358979)</span><br><span class="line">			   (f (xval z11))</span><br><span class="line">			   (l11 (imag z11)/(2*pi*f))</span><br><span class="line">			   (q11 (imag z11)/(real z11))</span><br><span class="line">			   (l12 (imag z12)/(2*pi*f))</span><br><span class="line">			   (l22 (imag z22)/(2*pi*f))</span><br><span class="line">			   (q22 (imag z22)/(real z22))</span><br><span class="line">			   (k (get_k l12 l11*l22)))</span><br><span class="line">		    `((,l11 ,l22) (,q11 ,q22) (,k))))</span><br><span class="line">		&#x27;((&quot;L1&quot; &quot;L2&quot;) (&quot;Q1&quot; &quot;Q2&quot;) (&quot;k&quot;)))))</span><br></pre></td></tr></table></figure>
-<h2 id="tcoil-and-tapped-inductor">tcoil and tapped inductor</h2>
-<p>tcoil and tapped inductor share same EM simulation result, and use
-modelgen with different model formula.</p>
-<p>The relationship is <span class="math display">\[
-L_{\text{sim}} = L1_{\text{sim}}+L2_{\text{sim}}+2\times k_{\text{sim}}
-\times \sqrt{L1_{\text{sim}}\cdot L2_{\text{sim}}}
-\]</span> where <span class="math inline">\(L1_{\text{sim}}\)</span>,
-<span class="math inline">\(L2_{\text{sim}}\)</span> and <span
-class="math inline">\(k_{\text{sim}}\)</span> come from tcoil model
-result, <span class="math inline">\(L_{\text{sim}}\)</span> comes from
-tapped inductor model result</p>
-<blockquote>
-<p><span class="math inline">\(k_{\text{sim}}\)</span> in EMX have
-assumption, induce current from P1 and P2 Given Dot Convention:</p>
-<p>Same direction : k &gt; 0</p>
-<p>Opposite direction : k &lt; 0</p>
-<p>So, the <span class="math inline">\(k_{\text{sim}}\)</span> is
-negative if routing coil in same direction</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220623013225554.png"
-alt="image-20220623013225554" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220623013923263.png"
-alt="image-20220623013923263" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% EMX - shield tcoil model</span></span><br><span class="line">L1 = csvread(<span class="string">&#x27;./L1sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">L2 = csvread(<span class="string">&#x27;./L2sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">k = csvread(<span class="string">&#x27;./ksim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% EMX - Tapped shield inductor</span></span><br><span class="line">L = csvread(<span class="string">&#x27;./Lsim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">freq = L1(:, <span class="number">1</span>)/<span class="number">1e9</span>;    <span class="comment">% GHz</span></span><br><span class="line">L1 = L1(:, <span class="number">2</span>);</span><br><span class="line">L2 = L2(:, <span class="number">2</span>);</span><br><span class="line">k = -k(:, <span class="number">2</span>);   <span class="comment">% Caution: minus of EMX ksim due to same current direction</span></span><br><span class="line"></span><br><span class="line">L = L(:, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">Lcalc = L1 + L2 + <span class="number">2</span>*k.*(L1.*L2).^<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq, L*<span class="number">1e9</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(freq, Lcalc*<span class="number">1e9</span>, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Inductance (nH)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Tapped inductor model&#x27;</span>, <span class="string">&#x27;tcoil model calc&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE
-Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall
-2015.</p>
-<p>B. Razavi, "The Design of Broadband I/O Circuits [The Analog Mind],"
-IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2, pp. 6-15,
-Spring 2021.</p>
-<p>S. Galal and B. Razavi, "Broadband ESD protection circuits in CMOS
-technology," in IEEE Journal of Solid-State Circuits, vol. 38, no. 12,
-pp. 2334-2340, Dec. 2003, doi: 10.1109/JSSC.2003.818568.</p>
-<p>M. Ker and Y. Hsiao, "On-Chip ESD Protection Strategies for RF
-Circuits in CMOS Technology," 2006 8th International Conference on
-Solid-State and Integrated Circuit Technology Proceedings, 2006, pp.
-1680-1683, doi: 10.1109/ICSICT.2006.306371.</p>
-<p>M. Ker, C. Lin and Y. Hsiao, "Overview on ESD Protection Designs of
-Low-Parasitic Capacitance for RF ICs in CMOS Technologies," in IEEE
-Transactions on Device and Materials Reliability, vol. 11, no. 2, pp.
-207-218, June 2011, doi: 10.1109/TDMR.2011.2106129.</p>
-<p><a
-href="https://pdfs.semanticscholar.org/29db/7f450d63eee941424655fb787de7d644a3c2.pdf">David
-J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers</a></p>
-<p><a href="https://ibis.org/summits/feb11/ross.pdf">Bob Ross, "T-Coil
-Topics" DesignCon IBIS Summit 2011</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>tcoil</tag>
       </tags>
   </entry>
   <entry>
@@ -15606,6 +15398,103 @@ FIFOs</p>
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>T-coil and its application</title>
+    <url>/2022/03/17/tcoil/</url>
+    <content><![CDATA[<ul>
+<li>Broaden the bandwidth</li>
+<li>Create a constant, resistive input impedance in the presence of a
+heavy load capacitance (ESD protection circuit)</li>
+</ul>
+<blockquote>
+<p>L<sub>1</sub> = L<sub>2</sub> for impedance matching</p>
+</blockquote>
+<p>The use of T-coils can dramatically increase the
+<strong>bandwidth</strong> and improve the <strong>return loss</strong>
+in both TXs and RXs.</p>
+<h2 id="tcoil-in-rx">Tcoil in RX</h2>
+<p><img src="/2022/03/17/tcoil/image-20220502201254057.png"
+alt="image-20220502201254057" /></p>
+<blockquote>
+<p><strong>ppwl</strong>: Independent Piece-Wise Linear Resistive
+Source</p>
+</blockquote>
+<p><img src="/2022/03/17/tcoil/image-20220502201321341.png"
+alt="image-20220502201321341" /></p>
+<h2 id="simple-model">simple model</h2>
+<blockquote>
+<p>L1, L2, Km, Cb</p>
+</blockquote>
+<p><img src="/2022/03/17/tcoil/image-20220502215310947.png"
+alt="image-20220502215310947" /></p>
+<p><img src="/2022/03/17/tcoil/image-20220622224842237.png"
+alt="image-20220622224842237" /></p>
+<p><img src="/2022/03/17/tcoil/image-20220622225709712.png"
+alt="image-20220622225709712" /></p>
+<h2 id="equivalent-model">equivalent model</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">simulator lang=spectre</span><br><span class="line">include &quot;/path/to/INDL0.scs&quot;</span><br><span class="line">subckt for_import(p0 p1 p2 gnd)</span><br><span class="line">	xmod (p0 p1 p2 gnd) INDL0</span><br><span class="line">ends for_import</span><br><span class="line"></span><br><span class="line">x_1 (p_1_1 p_1_2 p_1_3 0) for_import</span><br><span class="line">v_1_1 (p_1_1 0) vsource mag=-1</span><br><span class="line">v_1_2 (p_1_2 0) vsource mag=0</span><br><span class="line">v_1_3 (p_1_3 0) vsource mag=0</span><br><span class="line">save v_1_1:p v_1_2:p v_1_3:p</span><br><span class="line"></span><br><span class="line">x_2 (p_2_1 p_2_2 p_2_3 0) for_import</span><br><span class="line">v_2_1 (p_2_1 0) vsource mag=0</span><br><span class="line">v_2_2 (p_2_2 0) vsource mag=-1</span><br><span class="line">v_2_3 (p_2_3 0) vsource mag=0</span><br><span class="line">save v_2_1:p v_2_2:p v_2_3:p</span><br><span class="line"></span><br><span class="line">x_3 (p_3_1 p_3_2 p_3_3 0) for_import</span><br><span class="line">v_3_1 (p_3_1 0) vsource mag=0</span><br><span class="line">v_3_2 (p_3_2 0) vsource mag=0</span><br><span class="line">v_3_3 (p_3_3 0) vsource mag=-1</span><br><span class="line">save v_3_1:p v_3_2:p v_3_3:p</span><br><span class="line">Y ac start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08</span><br><span class="line"></span><br><span class="line">xsp (p_1 p_2 p_3 0) for_import</span><br><span class="line">port1 (p_1 0) port</span><br><span class="line">port2 (p_2 0) port</span><br><span class="line">port3 (p_3 0) port</span><br><span class="line">S sp start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08 ports=[ port1 port2 port3]</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/17/tcoil/image-20220503005728763.png"
+alt="image-20220503005728763" /></p>
+<p><img src="/2022/03/17/tcoil/image-20220503005903105.png"
+alt="image-20220503005903105" /></p>
+<h3 id="emx_plot_tcoil-in-emxform.ils"><code>EMX_plot_tcoil</code> in
+<code>emxform.ils</code></h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(define (EMX_plot_tcoil bgui wid what)</span><br><span class="line">  (needNCells &#x27;adtComplex 100000)</span><br><span class="line">  (letseq ((to_z (lambda (ys)</span><br><span class="line">		   (letseq ((y11 (EMX_matrix_ref ys 0 0))</span><br><span class="line">			    (y12 (EMX_matrix_ref ys 0 1))</span><br><span class="line">			    (y21 (EMX_matrix_ref ys 1 0))</span><br><span class="line">			    (y22 (EMX_matrix_ref ys 1 1))</span><br><span class="line">			    (det y11*y22-y12*y21)</span><br><span class="line">			    (z11 y22/det)</span><br><span class="line">			    (z12 -y12/det)</span><br><span class="line">			    (z22 y11/det))</span><br><span class="line">		     (list z11 z12 z22))))</span><br><span class="line">	   (ground</span><br><span class="line">	    (lambda (y p)</span><br><span class="line">	      (letseq ((n (EMX_matrix_rows y))</span><br><span class="line">		       (yg (make_EMX_matrix n-1)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n-1))</span><br><span class="line">		  (do ((j 0 j+1))</span><br><span class="line">		      ((j &gt;= n-1))</span><br><span class="line">		    (EMX_matrix_set yg i j (EMX_matrix_ref y i+(if (i &gt;= p) 1 0) j+(if (j &gt;= p) 1 0)))))</span><br><span class="line">		yg)))</span><br><span class="line">	   (reduce</span><br><span class="line">	    (lambda (yys)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec (car yys)))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (yyvecs (mapcar drGetWaveformYVec yys))</span><br><span class="line">		       (zz1 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz2 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz3 (drCreateVec &#x27;doublecomplex n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (let ((ys (mapcar (lambda (w) (drGetElem w i)) yyvecs)))</span><br><span class="line">		    (setq ys (ground (as_EMX_matrix 3 3 ys) 2))</span><br><span class="line">		    (let ((zz (to_z ys)))</span><br><span class="line">		      (drSetElem zz1 i (nth 0 zz))</span><br><span class="line">		      (drSetElem zz2 i (nth 1 zz))</span><br><span class="line">		      (drSetElem zz3 i (nth 2 zz)))))</span><br><span class="line">		(list (drCreateWaveform xvec zz1)</span><br><span class="line">		      (drCreateWaveform xvec zz2)</span><br><span class="line">		      (drCreateWaveform xvec zz3)))))</span><br><span class="line">	   (get_k</span><br><span class="line">	    (lambda (l12 l1122)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec l12))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (l12v (drGetWaveformYVec l12))</span><br><span class="line">		       (l1122v (drGetWaveformYVec l1122))</span><br><span class="line">		       (resultv (drCreateVec &#x27;double n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (letseq ((l12i (drGetElem l12v i))</span><br><span class="line">			   (l1122i (drGetElem l1122v i))</span><br><span class="line">			   (kk (if (l1122i &gt; 0.0)</span><br><span class="line">				   l12i/(sqrt l1122i)</span><br><span class="line">				   0.0))</span><br><span class="line">			   (k (if ((abs kk) &lt; 2.0) kk 0.0)))</span><br><span class="line">		    (drSetElem resultv i k)))</span><br><span class="line">		(drCreateWaveform xvec resultv)))))</span><br><span class="line">  (EMX_plot_aux bgui wid what 3</span><br><span class="line">		&#x27;(&quot;Inductance&quot; &quot;Q&quot; &quot;k&quot;)</span><br><span class="line">		&#x27;(&quot;Henry&quot; &quot;&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((zs (reduce ys))</span><br><span class="line">			   (z11 (nth 0 zs))</span><br><span class="line">			   (z12 (nth 1 zs))</span><br><span class="line">			   (z22 (nth 2 zs))</span><br><span class="line">			   (pi 3.14159265358979)</span><br><span class="line">			   (f (xval z11))</span><br><span class="line">			   (l11 (imag z11)/(2*pi*f))</span><br><span class="line">			   (q11 (imag z11)/(real z11))</span><br><span class="line">			   (l12 (imag z12)/(2*pi*f))</span><br><span class="line">			   (l22 (imag z22)/(2*pi*f))</span><br><span class="line">			   (q22 (imag z22)/(real z22))</span><br><span class="line">			   (k (get_k l12 l11*l22)))</span><br><span class="line">		    `((,l11 ,l22) (,q11 ,q22) (,k))))</span><br><span class="line">		&#x27;((&quot;L1&quot; &quot;L2&quot;) (&quot;Q1&quot; &quot;Q2&quot;) (&quot;k&quot;)))))</span><br></pre></td></tr></table></figure>
+<h2 id="tcoil-and-tapped-inductor">tcoil and tapped inductor</h2>
+<p>tcoil and tapped inductor share same EM simulation result, and use
+modelgen with different model formula.</p>
+<p>The relationship is <span class="math display">\[
+L_{\text{sim}} = L1_{\text{sim}}+L2_{\text{sim}}+2\times k_{\text{sim}}
+\times \sqrt{L1_{\text{sim}}\cdot L2_{\text{sim}}}
+\]</span> where <span class="math inline">\(L1_{\text{sim}}\)</span>,
+<span class="math inline">\(L2_{\text{sim}}\)</span> and <span
+class="math inline">\(k_{\text{sim}}\)</span> come from tcoil model
+result, <span class="math inline">\(L_{\text{sim}}\)</span> comes from
+tapped inductor model result</p>
+<blockquote>
+<p><span class="math inline">\(k_{\text{sim}}\)</span> in EMX have
+assumption, induce current from P1 and P2 Given Dot Convention:</p>
+<p>Same direction : k &gt; 0</p>
+<p>Opposite direction : k &lt; 0</p>
+<p>So, the <span class="math inline">\(k_{\text{sim}}\)</span> is
+negative if routing coil in same direction</p>
+</blockquote>
+<p><img src="/2022/03/17/tcoil/image-20220623013225554.png"
+alt="image-20220623013225554" /></p>
+<p><img src="/2022/03/17/tcoil/image-20220623013923263.png"
+alt="image-20220623013923263" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% EMX - shield tcoil model</span></span><br><span class="line">L1 = csvread(<span class="string">&#x27;./L1sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">L2 = csvread(<span class="string">&#x27;./L2sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">k = csvread(<span class="string">&#x27;./ksim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% EMX - Tapped shield inductor</span></span><br><span class="line">L = csvread(<span class="string">&#x27;./Lsim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">freq = L1(:, <span class="number">1</span>)/<span class="number">1e9</span>;    <span class="comment">% GHz</span></span><br><span class="line">L1 = L1(:, <span class="number">2</span>);</span><br><span class="line">L2 = L2(:, <span class="number">2</span>);</span><br><span class="line">k = -k(:, <span class="number">2</span>);   <span class="comment">% Caution: minus of EMX ksim due to same current direction</span></span><br><span class="line"></span><br><span class="line">L = L(:, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">Lcalc = L1 + L2 + <span class="number">2</span>*k.*(L1.*L2).^<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq, L*<span class="number">1e9</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(freq, Lcalc*<span class="number">1e9</span>, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Inductance (nH)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Tapped inductor model&#x27;</span>, <span class="string">&#x27;tcoil model calc&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE
+Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall
+2015.</p>
+<p>B. Razavi, "The Design of Broadband I/O Circuits [The Analog Mind],"
+IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2, pp. 6-15,
+Spring 2021.</p>
+<p>S. Galal and B. Razavi, "Broadband ESD protection circuits in CMOS
+technology," in IEEE Journal of Solid-State Circuits, vol. 38, no. 12,
+pp. 2334-2340, Dec. 2003, doi: 10.1109/JSSC.2003.818568.</p>
+<p>M. Ker and Y. Hsiao, "On-Chip ESD Protection Strategies for RF
+Circuits in CMOS Technology," 2006 8th International Conference on
+Solid-State and Integrated Circuit Technology Proceedings, 2006, pp.
+1680-1683, doi: 10.1109/ICSICT.2006.306371.</p>
+<p>M. Ker, C. Lin and Y. Hsiao, "Overview on ESD Protection Designs of
+Low-Parasitic Capacitance for RF ICs in CMOS Technologies," in IEEE
+Transactions on Device and Materials Reliability, vol. 11, no. 2, pp.
+207-218, June 2011, doi: 10.1109/TDMR.2011.2106129.</p>
+<p><a
+href="https://pdfs.semanticscholar.org/29db/7f450d63eee941424655fb787de7d644a3c2.pdf">David
+J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers</a></p>
+<p><a href="https://ibis.org/summits/feb11/ross.pdf">Bob Ross, "T-Coil
+Topics" DesignCon IBIS Summit 2011</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>tcoil</tag>
+      </tags>
   </entry>
   <entry>
     <title>DC operating points during TRANSIENT analysis</title>
@@ -16514,6 +16403,137 @@ University Press.</p>
         <tag>ssb</tag>
         <tag>dsb</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Process Variation</title>
+    <url>/2022/03/02/variation/</url>
+    <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
+<p><img src="/2022/03/02/variation/image-20220302000743092.png"
+alt="image-20220302000743092" /></p>
+<h4 id="globallocal-variation">Global/Local Variation</h4>
+<p><img src="/2022/03/02/variation/image-20220302000808679.png"
+alt="image-20220302000808679" /></p>
+<h4 id="timing-and-rc-modeling-with-process-corners">Timing and RC
+Modeling with Process Corners</h4>
+<p><img src="/2022/03/02/variation/image-20220302000916728.png"
+alt="image-20220302000916728" /></p>
+<h4 id="global-and-local-variation-by-gaussian">Global and Local
+variation by Gaussian</h4>
+<p><img src="/2022/03/02/variation/image-20230111003336823.png"
+alt="image-20230111003336823" /></p>
+<blockquote>
+<p>Local Monte-Carlo (<strong>SSG, FFG with Local Gaussian</strong>) as
+Signoff golden</p>
+</blockquote>
+<h4 id="process-corner-model-limitations">Process Corner Model
+Limitations</h4>
+<p><img src="/2022/03/02/variation/image-20220323232119661.png"
+alt="image-20220323232119661" /></p>
+<p><img src="/2022/03/02/variation/image-20230111003705417.png"
+alt="image-20230111003705417" /></p>
+<p>Variation section</p>
+<ul>
+<li>Total corner (TT/SS/FF/SF/FS)
+<ul>
+<li>E.g. TTMacro_MOS_MOS_MOSCAP</li>
+</ul></li>
+<li>Global Corner (TTG/SSG/FFG/SFG/FSG) + Local MC
+<ul>
+<li>E.g. TTGlobalCorner_LocalMC_MOS_MOSCAP</li>
+</ul></li>
+<li>Local MC
+<ul>
+<li>E.g. LocalMCOnly_MOS_MOSCAP</li>
+</ul></li>
+<li>Global MC + Local MC (Total MC)
+<ul>
+<li>GlobalMC_LocalMC_MOS_MOSCAP</li>
+</ul></li>
+</ul>
+<p><img src="/2022/03/02/variation/image-20230308003005235.png"
+alt="image-20230308003005235" /></p>
+<p><img src="/2022/03/02/variation/image-20230111010426775.png"
+alt="image-20230111010426775" /></p>
+<p><img
+src="/2022/03/02/variation/Screen-Shot-2014-09-11-at-8.47.06-AM.png"
+alt="img" /></p>
+<p><img src="/2022/03/02/variation/image-20230111011757049.png"
+alt="image-20230111011757049" /></p>
+<blockquote>
+<p><strong>SSGNP, FFGNP</strong>:</p>
+<p>When N/P global correlation is weak (R^2=0.15), the corner of N/PMOS
+balance circuit (e.g. inverter) can be tightened (<strong>3sigma -&gt;
+2.5sgma</strong>) due to the <strong>cancellation</strong> between NMOS
+and PMOS</p>
+<p>SSGNP, FFGNP usually used in Digital STA</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Global variation</strong> validation with <strong>global
+corner</strong>
+<ul>
+<li><strong>3-sigma of global MC</strong> simulation is aligned with
+<strong>global corner</strong></li>
+</ul></li>
+<li><strong>Total variation</strong> validation with <strong>total
+corner</strong>
+<ul>
+<li><strong>3-sigma of global MC + local MC (total)</strong> simulation
+is aligned with <strong>total corner</strong></li>
+</ul></li>
+</ul>
+</blockquote>
+<h4 id="global-corner">Global Corner</h4>
+<blockquote>
+<p><a
+href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101</a></p>
+<p>The <strong>"total corner"</strong> is representative of the maximum
+device parameter variation including local device variation effects.
+However, it is not a statistical corner.</p>
+<p>The <strong>"global" corner</strong> is defined as the
+<strong>"total" corner minus the impact of "local
+variation"</strong></p>
+<p>Hence, if you were to examine simulation results for a parameter
+using a "total" and "global" corner, you would find the range of
+variation will be less with the "global" corner than with the "total"
+corner.</p>
+<p>The "global" corner is provided for use in <strong>statistical
+simulations</strong>. Hence, when performing a Monte-Carlo simulation,
+the "global" corner is selected - NOT the "total" corner.</p>
+</blockquote>
+<p><img src="/2022/03/02/variation/image-20230511234313012.png"
+alt="image-20230511234313012" /></p>
+<p><span class="math display">\[
+\Delta V_{T,\sigma_{total}} = \sqrt{\Delta^2 _{T,
+\sigma_{global}}+\Delta^2 _{T, \sigma_{local}}}
+\]</span></p>
+<h4 id="reference">reference</h4>
+<p>Eric J.-W. Fang, T5: Fundamentals of Process Monitors for
+Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State
+Circuits Conference</p>
+<p>Alvin Loke, Device and Physical Design Considerations for Circuits in
+FinFET Technology, ISSCC 2020 Short Course</p>
+<p>簡報 Cln16ffcll Sr V1d0 2p1 Usage Guide URL: <a
+href="https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view">https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view</a></p>
+<p>Radojcic, Riko, Dan Perry and Mark Nakamoto. “Design for
+manufacturability for fabless manufactuers.” <em>IEEE Solid-State
+Circuits Magazine</em> 1 (2009): n. pag.</p>
+<p>How To Reduce Implementation Headaches In FinFET Processes URL: <a
+href="https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/">https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/</a></p>
+<p>陌上风骑驴看IC, STA | SSGNP, FFGNP. <a
+href="https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg">https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg</a></p>
+<p>陌上风骑驴看IC, STA | ssg 跟ss corner 的区别——谬误更正版 <a
+href="https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd">https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd</a></p>
+<p>The Evolution, Pitfalls, and Cargo Cult Engineering of Advanced
+Digital Timing Sign-off <a
+href="https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf">https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf</a></p>
+<p>Don O'Riordan Cadence Design Systems. Recommended Spectre Monte Carlo
+modeling methodology [<a
+href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-guide.org/modeling/montecarlo.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
   </entry>
   <entry>
     <title>variables with statistical distribution</title>

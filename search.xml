@@ -87,112 +87,6 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_rx_circuits.p
       </tags>
   </entry>
   <entry>
-    <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
-    <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
-    <content><![CDATA[<h4
-id="how-does-edi-system-identify-spare-cells-in-a-post-mask-eco-flow">How
-does EDI System identify spare cells in a post-mask ECO flow?</h4>
-<p>Spare cells should have a unique string in their instance name to
-identify them. Then the command <code>specifySpareGate</code> or
-<code>ecoDesign -useSpareCells patternName</code> is run to identify the
-spare instances. For example, if all spare cells have _spare_ in their
-name then they are identified using:</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst *_spare_*</span><br></pre></td></tr></table></figure>
-<p>OR</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">ecoDesign -spareCells *_spare_* ...</span><br></pre></td></tr></table></figure>
-<p><strong>Note</strong>: if you are making <strong>manual ECO</strong>
-changes to a netlist and converting a spare cell to a logical instance,
-<strong>it's important to change the instance name</strong>. Otherwise,
-the instance may be identified as a spare cell if a future ECO is
-performed because it still has the spare cell instance name.</p>
-<h4 id="example">Example</h4>
-<h5 id="the-cell-to-be-swapped-is-unplaced">The cell to be swapped is
-unplaced</h5>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307002842020.png"
-alt="image-20220307002842020" /></p>
-<p>pre_buf: <strong>unplaced</strong></p>
-<p>spare_buf: <strong>placed</strong></p>
-<blockquote>
-<p>innovus 49&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 50&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
-0x7f7b03ef6000 0x7f7b03ef6070</p>
-</blockquote>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst spare_*</span><br><span class="line">ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307003059068.png"
-alt="image-20220307003059068" /></p>
-<blockquote>
-<p>innovus 55&gt; dbGet top.insts.name</p>
-<p><strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 56&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef6150</strong> 0x7f7b03ef6000 0x7f7b03ef6070</p>
-<p>innovus 57&gt; dbGet top.insts.Pstatus</p>
-<p><strong>placed</strong> fixed fixed</p>
-</blockquote>
-<p><strong>Note</strong>: sparecell's pointer and name is swapped with
-the unplaced cell.</p>
-<h5 id="the-cell-to-be-swapped-is-placed">The cell to be swapped is
-placed</h5>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307004654614.png"
-alt="image-20220307004654614" /></p>
-<blockquote>
-<p>innovus 62&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 63&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
-0x7f7b03ef6000 0x7f7b03ef6070</p>
-<p>innovus 64&gt; dbGet top.insts.pStatus</p>
-<p><strong>placed</strong> <strong>placed</strong> fixed fixed</p>
-</blockquote>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">innovus <span class="number">66</span>&gt; specifySpareGate -inst spare_*</span><br><span class="line">Specifying instance [spare_buf] as spare gate.</span><br><span class="line">Specified <span class="number">1</span> instances as spare gate.</span><br><span class="line">innovus <span class="number">67</span>&gt; ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307005254488.png"
-alt="image-20220307005254488" /></p>
-<blockquote>
-<p>innovus 68&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf pre_buf</strong> UDriver USink</p>
-<p>innovus 69&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0 0x7f7b03ef6150</strong> 0x7f7b03ef6000
-0x7f7b03ef6070</p>
-<p>innovus 70&gt; dbGet top.insts.pStatus</p>
-<p>placed placed fixed fixed</p>
-</blockquote>
-<p><strong>Note</strong>: sparecell's pointer and name is swapped with
-the placed cell.</p>
-<h5 id="error-in-innovus-text-command-reference-21.12">Error in "Innovus
-Text Command Reference 21.12"</h5>
-<p><strong>ecoSwapSpareCell</strong></p>
-<p><del>If the cell to be swapped is unplaced, it is mapped to the spare
-cell. <code>*instName*</code> is deleted, and its connection is
-transferred to the spare cell. If the cell to be swapped is placed, it
-is swapped with the spare cell and is renamed to
-<code>*instNameSuffix*</code> if the <code>-suffix</code> option is
-used. If a suffix is not specified, the <code>*instName*</code> cell is
-renamed to <code>*spareCellInstName*</code>. The <code>*instName*</code>
-cell's connections are transferred to <code>*spareCellInstName*</code>.
-The input of <code>*instName*</code> is <code>tielo</code>, based on the
-global connection definition.</del></p>
-<p><strong>reference:</strong></p>
-<p><a
-href="https://community.cadence.com/cadence_blogs_8/b/di/posts/answers-to-frequently-asked-questions-when-performing-ecos-in-edi-system">Answers
-to Top 10 Questions on Performing ECOs in EDI System</a></p>
-<p><a
-href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html">EE
-582: Physical Design Automation of VLSI Circuits and Systems</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>eco</tag>
-        <tag>sparecell</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Dynamic Specification of Data Converter</title>
     <url>/2023/03/29/Dynamic-specification-converter/</url>
     <content><![CDATA[<h2 id="term-abbreviation">Term Abbreviation</h2>
@@ -344,6 +238,112 @@ href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effect
         <tag>adc</tag>
         <tag>dac</tag>
         <tag>Sampling</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
+    <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
+    <content><![CDATA[<h4
+id="how-does-edi-system-identify-spare-cells-in-a-post-mask-eco-flow">How
+does EDI System identify spare cells in a post-mask ECO flow?</h4>
+<p>Spare cells should have a unique string in their instance name to
+identify them. Then the command <code>specifySpareGate</code> or
+<code>ecoDesign -useSpareCells patternName</code> is run to identify the
+spare instances. For example, if all spare cells have _spare_ in their
+name then they are identified using:</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst *_spare_*</span><br></pre></td></tr></table></figure>
+<p>OR</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">ecoDesign -spareCells *_spare_* ...</span><br></pre></td></tr></table></figure>
+<p><strong>Note</strong>: if you are making <strong>manual ECO</strong>
+changes to a netlist and converting a spare cell to a logical instance,
+<strong>it's important to change the instance name</strong>. Otherwise,
+the instance may be identified as a spare cell if a future ECO is
+performed because it still has the spare cell instance name.</p>
+<h4 id="example">Example</h4>
+<h5 id="the-cell-to-be-swapped-is-unplaced">The cell to be swapped is
+unplaced</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307002842020.png"
+alt="image-20220307002842020" /></p>
+<p>pre_buf: <strong>unplaced</strong></p>
+<p>spare_buf: <strong>placed</strong></p>
+<blockquote>
+<p>innovus 49&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 50&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst spare_*</span><br><span class="line">ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307003059068.png"
+alt="image-20220307003059068" /></p>
+<blockquote>
+<p>innovus 55&gt; dbGet top.insts.name</p>
+<p><strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 56&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef6150</strong> 0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 57&gt; dbGet top.insts.Pstatus</p>
+<p><strong>placed</strong> fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the unplaced cell.</p>
+<h5 id="the-cell-to-be-swapped-is-placed">The cell to be swapped is
+placed</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307004654614.png"
+alt="image-20220307004654614" /></p>
+<blockquote>
+<p>innovus 62&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 63&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 64&gt; dbGet top.insts.pStatus</p>
+<p><strong>placed</strong> <strong>placed</strong> fixed fixed</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">innovus <span class="number">66</span>&gt; specifySpareGate -inst spare_*</span><br><span class="line">Specifying instance [spare_buf] as spare gate.</span><br><span class="line">Specified <span class="number">1</span> instances as spare gate.</span><br><span class="line">innovus <span class="number">67</span>&gt; ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307005254488.png"
+alt="image-20220307005254488" /></p>
+<blockquote>
+<p>innovus 68&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf pre_buf</strong> UDriver USink</p>
+<p>innovus 69&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0 0x7f7b03ef6150</strong> 0x7f7b03ef6000
+0x7f7b03ef6070</p>
+<p>innovus 70&gt; dbGet top.insts.pStatus</p>
+<p>placed placed fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the placed cell.</p>
+<h5 id="error-in-innovus-text-command-reference-21.12">Error in "Innovus
+Text Command Reference 21.12"</h5>
+<p><strong>ecoSwapSpareCell</strong></p>
+<p><del>If the cell to be swapped is unplaced, it is mapped to the spare
+cell. <code>*instName*</code> is deleted, and its connection is
+transferred to the spare cell. If the cell to be swapped is placed, it
+is swapped with the spare cell and is renamed to
+<code>*instNameSuffix*</code> if the <code>-suffix</code> option is
+used. If a suffix is not specified, the <code>*instName*</code> cell is
+renamed to <code>*spareCellInstName*</code>. The <code>*instName*</code>
+cell's connections are transferred to <code>*spareCellInstName*</code>.
+The input of <code>*instName*</code> is <code>tielo</code>, based on the
+global connection definition.</del></p>
+<p><strong>reference:</strong></p>
+<p><a
+href="https://community.cadence.com/cadence_blogs_8/b/di/posts/answers-to-frequently-asked-questions-when-performing-ecos-in-edi-system">Answers
+to Top 10 Questions on Performing ECOs in EDI System</a></p>
+<p><a
+href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html">EE
+582: Physical Design Automation of VLSI Circuits and Systems</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>eco</tag>
+        <tag>sparecell</tag>
       </tags>
   </entry>
   <entry>
@@ -1173,6 +1173,36 @@ href="http://ece-research.unm.edu/jimp/vlsi/slides/chap3_2.html">link2</a>]</p>
       </categories>
   </entry>
   <entry>
+    <title>New windows and forms appear behind the Library Manager in background when using GNOME 3</title>
+    <url>/2022/10/22/New-windows-Gnome3/</url>
+    <content><![CDATA[<p>Using <strong>Red Hat Enterprise Linux 8</strong>, <strong>Rocky
+Linux 8</strong> and the <strong>GNOME 3</strong> window manager, the
+new Virtuoso Schematic/Layout/ADE windows and forms sometimes pop up
+under or below the <strong>Library Manager</strong> or on the desktop in
+the background instead of the foreground and cannot be seen. Sometimes,
+they are iconized; they do not come on the top in front, though it is
+the most recent window opened.</p>
+<p><strong>solution</strong></p>
+<blockquote>
+<p>Install <strong>Focus my window</strong> GNOME Shell extension</p>
+</blockquote>
+<p><img src="/2022/10/22/New-windows-Gnome3/image-20221022002952578.png"
+alt="image-20221022002952578" /></p>
+<p><strong>reference</strong></p>
+<p>Article (11612426) Title: New windows and forms appear behind the
+Library Manager in background or iconized instead of foreground on RHEL
+and SuSE Linux in GNOME, KDE Desktop, Metacity window manager URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+        <tag>gnome3</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OCV Derating With AOCV</title>
     <url>/2022/12/10/OCVDeratingWithAOCV/</url>
     <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
@@ -1203,36 +1233,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>New windows and forms appear behind the Library Manager in background when using GNOME 3</title>
-    <url>/2022/10/22/New-windows-Gnome3/</url>
-    <content><![CDATA[<p>Using <strong>Red Hat Enterprise Linux 8</strong>, <strong>Rocky
-Linux 8</strong> and the <strong>GNOME 3</strong> window manager, the
-new Virtuoso Schematic/Layout/ADE windows and forms sometimes pop up
-under or below the <strong>Library Manager</strong> or on the desktop in
-the background instead of the foreground and cannot be seen. Sometimes,
-they are iconized; they do not come on the top in front, though it is
-the most recent window opened.</p>
-<p><strong>solution</strong></p>
-<blockquote>
-<p>Install <strong>Focus my window</strong> GNOME Shell extension</p>
-</blockquote>
-<p><img src="/2022/10/22/New-windows-Gnome3/image-20221022002952578.png"
-alt="image-20221022002952578" /></p>
-<p><strong>reference</strong></p>
-<p>Article (11612426) Title: New windows and forms appear behind the
-Library Manager in background or iconized instead of foreground on RHEL
-and SuSE Linux in GNOME, KDE Desktop, Metacity window manager URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-        <tag>gnome3</tag>
-      </tags>
   </entry>
   <entry>
     <title>Overflow Detection in Verilog</title>
@@ -1586,26 +1586,6 @@ href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7">https://youtu.be/uwRpP20
       </tags>
   </entry>
   <entry>
-    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
-    <url>/2022/02/13/SmallGainTheorem/</url>
-    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
-named Fellow of the Institute of Electrical and Electronics Engineers in
-2016 for contributions to testing of analog and mixed-signal integrated
-circuits.</p>
-<blockquote>
-<p>I forget where I download this slide.</p>
-</blockquote>
-<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>control</tag>
-        <tag>feedback</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RC corner</title>
     <url>/2023/04/16/RC-corner/</url>
     <content><![CDATA[<h3 id="traditional-rc-corners">Traditional RC Corners</h3>
@@ -1759,6 +1739,26 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
       <tags>
         <tag>beol</tag>
         <tag>dpt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
+    <url>/2022/02/13/SmallGainTheorem/</url>
+    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
+named Fellow of the Institute of Electrical and Electronics Engineers in
+2016 for contributions to testing of analog and mixed-signal integrated
+circuits.</p>
+<blockquote>
+<p>I forget where I download this slide.</p>
+</blockquote>
+<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>control</tag>
+        <tag>feedback</tag>
       </tags>
   </entry>
   <entry>
@@ -2378,6 +2378,10 @@ href="https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/agin
 <p>Article (20482350) Title: Measure the Impact of Aging in Spectre
 Technology URL:
 https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009ESBFUA4</p>
+<p>Karimi, Naghmeh, Thorben Moos and Amir Moradi. “Exploring the Effect
+of Device Aging on Static Power Analysis Attacks.” IACR Trans. Cryptogr.
+Hardw. Embed. Syst. 2019 (2019): 233-256.[<a
+href="https://pdfs.semanticscholar.org/b0f8/720a2b51a479f4a711bec4b47fdd50f29e2d.pdf">link</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -3070,6 +3074,34 @@ virtual clock is propagated.</p>
       </tags>
   </entry>
   <entry>
+    <title>complex uvm project topology</title>
+    <url>/2022/03/28/complex-uvm-topo/</url>
+    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
+alt="topo.drawio" /></p>
+<h2 id="compile">compile</h2>
+<ul>
+<li><code>-incdir</code> for all UVC's `<code>include</code></li>
+<li>all pkg.sv</li>
+<li>all if.sv</li>
+<li>all RTL DUT</li>
+<li>uvm top module</li>
+</ul>
+<h2 id="uvm-top.sv">uvm top.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
+<h2 id="rtl-top">RTL top</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2 id="pkg.sv">pkg.sv</h2>
+<p>`<code>include</code> all related uvm class in
+<strong>pgk.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<h2 id="if.sv">if.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>mismatch of current mirror</title>
     <url>/2022/10/02/current-mirror-mc/</url>
     <content><![CDATA[<p>The current mismatch consists of two components.</p>
@@ -3157,34 +3189,6 @@ alt="image-20221002220000435" /></p>
       </tags>
   </entry>
   <entry>
-    <title>complex uvm project topology</title>
-    <url>/2022/03/28/complex-uvm-topo/</url>
-    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
-alt="topo.drawio" /></p>
-<h2 id="compile">compile</h2>
-<ul>
-<li><code>-incdir</code> for all UVC's `<code>include</code></li>
-<li>all pkg.sv</li>
-<li>all if.sv</li>
-<li>all RTL DUT</li>
-<li>uvm top module</li>
-</ul>
-<h2 id="uvm-top.sv">uvm top.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
-<h2 id="rtl-top">RTL top</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="pkg.sv">pkg.sv</h2>
-<p>`<code>include</code> all related uvm class in
-<strong>pgk.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
-<h2 id="if.sv">if.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>C++ conditional compilation</title>
     <url>/2022/02/07/cxx-conditional-compilation/</url>
     <content><![CDATA[<h4 id="using-g-only">Using g++ only</h4>
@@ -3212,156 +3216,6 @@ alt="topo.drawio" /></p>
         <tag>compile</tag>
         <tag>g++</tag>
         <tag>cmake</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Zero(DC component) and Nyquist Component in FFT</title>
-    <url>/2022/05/14/dc-nyquist-fft/</url>
-    <content><![CDATA[<h2 id="dc-offset">DC offset</h2>
-<p>Performing FFT to a signal with a <em>large DC offset</em> would
-often result in a big impulse around frequency 0 Hz, thus masking out
-the signals of interests with relatively small amplitude.</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
-alt="Remove_DC_Offset_Blog_10" /></p>
-<p>One method to remove DC offset from the original signal before
-performing FFT</p>
-<ul>
-<li>Subtracting the Mean of Original Signal</li>
-</ul>
-<p>You can also not filter the input, but set zero to the zero frequency
-point for FFT result.</p>
-<h2 id="nyquist-component">Nyquist component</h2>
-<p>If we go back to the definition of the DFT <span
-class="math display">\[
-X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
-(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
-\]</span> which is a real number.</p>
-<p>The discrete function <span class="math display">\[
-x[n]=\cos(\pi n)
-\]</span> is always <span class="math inline">\((-1)^n\)</span> for
-integer <span class="math inline">\(n\)</span></p>
-<p>One general sinusoid at Nyquist and has phase shift <span
-class="math inline">\(\theta\)</span>, this is <span
-class="math inline">\(T=2\)</span> and <span
-class="math inline">\(T_s=1\)</span></p>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= A \cos(\pi n + \theta) \\
-     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
-\big) \\
-     &amp;= \big(A\cos(\theta)\big) \cos(\pi
-n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
-     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
-\cdot 0 \\
-     &amp;= B \cdot (-1)^n \\
-\end{align}\]</span></p>
-<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
-<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
-n)\)</span>, then <span class="math display">\[
-B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
-\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
-<p>In other words, you <strong>CAN'T</strong> infer the signal from
-<span class="math inline">\(X(\frac{N}{2})\)</span> <span
-class="math display">\[\begin{align}
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
-\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2}
-\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
-- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
-\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
-\cos(\pi n+\theta)
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
-you <strong>wouldn't</strong> know it because <span
-class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
-\mathbb{Z}\)</span></p>
-<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
-\]</span> However, if <span
-class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
-\]</span></p>
-<p>That sort of ambiguity is the reason for the <strong>strict
-inequality</strong> of the sampling theorem's condition.</p>
-<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
-<p><strong>Both edges</strong> is used for clock waveform to evaluate
-the duty cycle distortion,</p>
-<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
-DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
-below</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
-alt="image-20220516224616908" /></p>
-<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
-component, which is <strong>0.1</strong> in follow figure</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
-alt="image-20220516233618663" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>); </span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
-Spectrum</h2>
-<p>DC and Nyquist frequency of FFT left over</p>
-<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency                    </span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period       </span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2. </span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1) </span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
-alt="image-20220514221609734" /></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
-alt="image-20220514221642170" /></p>
-<h2 id="alternative-view">Alternative View</h2>
-<p>The direct current (DC) bin (<span
-class="math inline">\(k=0\)</span>) and the bin at <span
-class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
-the Nyquist frequency are <strong>purely real and unique</strong>.</p>
-<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
-amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
-plot is shown as below with sampling frequency is <span
-class="math inline">\(20Hz\)</span></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
-alt="image-20220427172526711" /></p>
-<p>Amplitude and Phase spectrum, sampled with <span
-class="math inline">\(f_s=20\)</span> Hz</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
-alt="image-20220427174557915" /></p>
-<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
-<strong>1</strong> and its phase is <strong>0</strong> as shown as
-above, which proves the DFT and IDFT.</p>
-<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
-Parseval's theorem), which may not be the power of continuous signal.
-The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
-<strong>1</strong>, that of corresponding continuous signal is <span
-class="math inline">\(\frac{1}{2}\)</span>.</p>
-<p>Power spectrum derived from FFT provide information of samples, i.e.
-<strong>1</strong></p>
-<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
-[1 1 1 1 ...].</p>
-<h3 id="code">code</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
-href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
-<p>How to remove DC component in FFT? URL: <a
-href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
-<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
-seem to work unless there is a phase shift URL: <a
-href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
-<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
-href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
-<p>Why remove energy at Nyquist before ifft? URL: <a
-href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>fft</tag>
-        <tag>nyquist</tag>
       </tags>
   </entry>
   <entry>
@@ -3553,6 +3407,156 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
         <tag>fsdb</tag>
         <tag>verdi</tag>
         <tag>vcs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Zero(DC component) and Nyquist Component in FFT</title>
+    <url>/2022/05/14/dc-nyquist-fft/</url>
+    <content><![CDATA[<h2 id="dc-offset">DC offset</h2>
+<p>Performing FFT to a signal with a <em>large DC offset</em> would
+often result in a big impulse around frequency 0 Hz, thus masking out
+the signals of interests with relatively small amplitude.</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
+alt="Remove_DC_Offset_Blog_10" /></p>
+<p>One method to remove DC offset from the original signal before
+performing FFT</p>
+<ul>
+<li>Subtracting the Mean of Original Signal</li>
+</ul>
+<p>You can also not filter the input, but set zero to the zero frequency
+point for FFT result.</p>
+<h2 id="nyquist-component">Nyquist component</h2>
+<p>If we go back to the definition of the DFT <span
+class="math display">\[
+X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
+(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
+\]</span> which is a real number.</p>
+<p>The discrete function <span class="math display">\[
+x[n]=\cos(\pi n)
+\]</span> is always <span class="math inline">\((-1)^n\)</span> for
+integer <span class="math inline">\(n\)</span></p>
+<p>One general sinusoid at Nyquist and has phase shift <span
+class="math inline">\(\theta\)</span>, this is <span
+class="math inline">\(T=2\)</span> and <span
+class="math inline">\(T_s=1\)</span></p>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= A \cos(\pi n + \theta) \\
+     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
+\big) \\
+     &amp;= \big(A\cos(\theta)\big) \cos(\pi
+n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
+     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
+\cdot 0 \\
+     &amp;= B \cdot (-1)^n \\
+\end{align}\]</span></p>
+<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
+<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
+n)\)</span>, then <span class="math display">\[
+B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
+\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
+<p>In other words, you <strong>CAN'T</strong> infer the signal from
+<span class="math inline">\(X(\frac{N}{2})\)</span> <span
+class="math display">\[\begin{align}
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
+\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
+\sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2}
+\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
+- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
+\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
+\sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
+\cos(\pi n+\theta)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
+you <strong>wouldn't</strong> know it because <span
+class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
+\mathbb{Z}\)</span></p>
+<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
+class="math display">\[
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
+\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
+\]</span> However, if <span
+class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
+class="math display">\[
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
+\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
+\]</span></p>
+<p>That sort of ambiguity is the reason for the <strong>strict
+inequality</strong> of the sampling theorem's condition.</p>
+<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
+<p><strong>Both edges</strong> is used for clock waveform to evaluate
+the duty cycle distortion,</p>
+<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
+DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
+below</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
+alt="image-20220516224616908" /></p>
+<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
+component, which is <strong>0.1</strong> in follow figure</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
+alt="image-20220516233618663" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>); </span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
+Spectrum</h2>
+<p>DC and Nyquist frequency of FFT left over</p>
+<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency                    </span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period       </span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2. </span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1) </span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
+alt="image-20220514221609734" /></p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
+alt="image-20220514221642170" /></p>
+<h2 id="alternative-view">Alternative View</h2>
+<p>The direct current (DC) bin (<span
+class="math inline">\(k=0\)</span>) and the bin at <span
+class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
+the Nyquist frequency are <strong>purely real and unique</strong>.</p>
+<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
+amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
+plot is shown as below with sampling frequency is <span
+class="math inline">\(20Hz\)</span></p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
+alt="image-20220427172526711" /></p>
+<p>Amplitude and Phase spectrum, sampled with <span
+class="math inline">\(f_s=20\)</span> Hz</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
+alt="image-20220427174557915" /></p>
+<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
+<strong>1</strong> and its phase is <strong>0</strong> as shown as
+above, which proves the DFT and IDFT.</p>
+<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
+Parseval's theorem), which may not be the power of continuous signal.
+The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
+<strong>1</strong>, that of corresponding continuous signal is <span
+class="math inline">\(\frac{1}{2}\)</span>.</p>
+<p>Power spectrum derived from FFT provide information of samples, i.e.
+<strong>1</strong></p>
+<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
+[1 1 1 1 ...].</p>
+<h3 id="code">code</h3>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
+href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
+<p>How to remove DC component in FFT? URL: <a
+href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
+<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
+seem to work unless there is a phase shift URL: <a
+href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
+<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
+href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
+<p>Why remove energy at Nyquist before ifft? URL: <a
+href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>fft</tag>
+        <tag>nyquist</tag>
       </tags>
   </entry>
   <entry>
@@ -3977,77 +3981,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
       </tags>
   </entry>
   <entry>
-    <title>Impact of Deep N-well Implantation</title>
-    <url>/2023/05/29/dnw/</url>
-    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
-<p>A variety of techniques can be used to minimize this noise, for
-example by keeping analog devices surrounded by guard rings, or using a
-separate supply for the substrate/well taps.</p>
-<p>However <em>guard rings alone cannot prevent noise coupling deep in
-the substrate, only surface currents</em>.</p>
-<blockquote>
-<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
-the substrate noise, but such is not valid for NMOS .</p>
-</blockquote>
-<h2 id="dnw">DNW</h2>
-<p>The N-channel devices built directly into the P-type substrate are
-not as effectively isolated as P-channel devices in their N-wells. This
-is because despite creating a P+ guard ring around the devices, there
-remains an electrical path below the guard ring for charge to flow.</p>
-<p>To overcome this issue, a <em>deep N-well</em> can be used to more
-effectively isolate these N-channel devices.</p>
-<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
-alt="image-20230529001556060" /></p>
-<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
-alt="image-20230529010836003" /></p>
-<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
-alt="BM_SS_Together at Last_Fig1" /></p>
-<blockquote>
-<p><a
-href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
-At Last – Combining Netlist and Layout Data for Power-Aware
-Verification</a></p>
-</blockquote>
-<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
-alt="image-20230529002733114" /></p>
-<ul>
-<li>the P-well is separated, allowing the voltage to be controlled</li>
-<li>because the circuit within the deep N-well is separated from the
-p-substrate in this structure, there is the benefit that this circuitry
-is less susceptible to noise that propagates through the
-p-substrate.</li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
-Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
-Transistor Performance for Systems-on-a-Chip Integration. 32nd European
-Solid-State Device Research Conference, 251-254. URL:[<a
-href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
-<a
-href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
-<p>Mark Waller, <a
-href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
-layout: Why wells, taps, and guard rings are crucial</a></p>
-<p>KEITH SABINE <a
-href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
-Deep N Wells in Analog Design</a></p>
-<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
-nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
-1-8.</p>
-<p>cmos_processing, URL:<a
-href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>dnw</tag>
-        <tag>coupling</tag>
-        <tag>noise</tag>
-        <tag>substrate</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Random &amp; Deterministic Jitters Simulation</title>
     <url>/2022/05/16/dj-rj/</url>
     <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
@@ -4229,6 +4162,77 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
       <categories>
         <category>noise</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Impact of Deep N-well Implantation</title>
+    <url>/2023/05/29/dnw/</url>
+    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
+<p>A variety of techniques can be used to minimize this noise, for
+example by keeping analog devices surrounded by guard rings, or using a
+separate supply for the substrate/well taps.</p>
+<p>However <em>guard rings alone cannot prevent noise coupling deep in
+the substrate, only surface currents</em>.</p>
+<blockquote>
+<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
+the substrate noise, but such is not valid for NMOS .</p>
+</blockquote>
+<h2 id="dnw">DNW</h2>
+<p>The N-channel devices built directly into the P-type substrate are
+not as effectively isolated as P-channel devices in their N-wells. This
+is because despite creating a P+ guard ring around the devices, there
+remains an electrical path below the guard ring for charge to flow.</p>
+<p>To overcome this issue, a <em>deep N-well</em> can be used to more
+effectively isolate these N-channel devices.</p>
+<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
+alt="image-20230529001556060" /></p>
+<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
+alt="image-20230529010836003" /></p>
+<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
+alt="BM_SS_Together at Last_Fig1" /></p>
+<blockquote>
+<p><a
+href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
+At Last – Combining Netlist and Layout Data for Power-Aware
+Verification</a></p>
+</blockquote>
+<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
+alt="image-20230529002733114" /></p>
+<ul>
+<li>the P-well is separated, allowing the voltage to be controlled</li>
+<li>because the circuit within the deep N-well is separated from the
+p-substrate in this structure, there is the benefit that this circuitry
+is less susceptible to noise that propagates through the
+p-substrate.</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
+Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
+Transistor Performance for Systems-on-a-Chip Integration. 32nd European
+Solid-State Device Research Conference, 251-254. URL:[<a
+href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
+<a
+href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
+<p>Mark Waller, <a
+href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
+layout: Why wells, taps, and guard rings are crucial</a></p>
+<p>KEITH SABINE <a
+href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
+Deep N Wells in Analog Design</a></p>
+<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
+nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
+1-8.</p>
+<p>cmos_processing, URL:<a
+href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>dnw</tag>
+        <tag>coupling</tag>
+        <tag>noise</tag>
+        <tag>substrate</tag>
+      </tags>
   </entry>
   <entry>
     <title>How to preserve hand-instantiated cells</title>
@@ -7841,20 +7845,6 @@ in IEEE Circuits and Devices Magazine, vol. 17, no. 4, pp. 14-21, July
       </tags>
   </entry>
   <entry>
-    <title>innovus create and assign bump - part one</title>
-    <url>/2022/02/14/innovus-bump-part1/</url>
-    <content><![CDATA[<h4 id="powerground-bump">power/ground bump</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x0</span> <span class="variable">$y</span>  </span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x1</span> <span class="variable">$y</span> </span><br><span class="line">...</span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$xn</span> <span class="variable">$y</span> </span><br><span class="line">deselectAll </span><br><span class="line">select_bump –bum_cell PAD90UBMBOP </span><br><span class="line">assignPGBumps –nets &#123;vss vdd_dig&#125; -selected –checkboard</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/02/14/innovus-bump-part1/pma_dig_bumps.drawio.svg"
-alt="pma_dig_bumps.drawio" /></p>
-<h4 id="signal-or-powerground-bump">signal or power/ground bump</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> bump_name [create_bump –cell PAD150PITCH –loc <span class="variable">$bump_x</span> <span class="variable">$bump_y</span> –loc_type cell_center –return_bumps_name] </span><br><span class="line"><span class="comment"># assign power/ground bump</span></span><br><span class="line">assignPGBumps –bumps <span class="variable">$bump_name</span> –nets <span class="variable">$pin_name</span> </span><br><span class="line"><span class="comment"># or assign to signal bump</span></span><br><span class="line">assignSigToBump –bumps <span class="variable">$bump_name</span> –net <span class="variable">$pin_name</span> </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Inertial &amp; transport delays</title>
     <url>/2022/03/16/inertial-and-transport-delay/</url>
     <content><![CDATA[<p><img
@@ -7936,6 +7926,20 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdL
 <p>Article (20447759) Title: Gate Level Simulation (GLS): A Quick Guide
 for Beginners URL: <a
 href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>innovus create and assign bump - part one</title>
+    <url>/2022/02/14/innovus-bump-part1/</url>
+    <content><![CDATA[<h4 id="powerground-bump">power/ground bump</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x0</span> <span class="variable">$y</span>  </span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x1</span> <span class="variable">$y</span> </span><br><span class="line">...</span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$xn</span> <span class="variable">$y</span> </span><br><span class="line">deselectAll </span><br><span class="line">select_bump –bum_cell PAD90UBMBOP </span><br><span class="line">assignPGBumps –nets &#123;vss vdd_dig&#125; -selected –checkboard</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/02/14/innovus-bump-part1/pma_dig_bumps.drawio.svg"
+alt="pma_dig_bumps.drawio" /></p>
+<h4 id="signal-or-powerground-bump">signal or power/ground bump</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> bump_name [create_bump –cell PAD150PITCH –loc <span class="variable">$bump_x</span> <span class="variable">$bump_y</span> –loc_type cell_center –return_bumps_name] </span><br><span class="line"><span class="comment"># assign power/ground bump</span></span><br><span class="line">assignPGBumps –bumps <span class="variable">$bump_name</span> –nets <span class="variable">$pin_name</span> </span><br><span class="line"><span class="comment"># or assign to signal bump</span></span><br><span class="line">assignSigToBump –bumps <span class="variable">$bump_name</span> –net <span class="variable">$pin_name</span> </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -9341,25 +9345,6 @@ Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter
       </tags>
   </entry>
   <entry>
-    <title>Link Modeling &amp; Analysis</title>
-    <url>/2023/11/06/linkModeling/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
-(EPFL). <a
-href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
-generator model for jitter-tolerance simulation</a>; <a
-href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
-models</a></p>
-<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
-Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
-Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
-doi: 10.1109/CICC.2019.8780223.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>CDR Linear Model</title>
     <url>/2022/05/04/linear-cdr/</url>
     <content><![CDATA[<p><img src="/2022/05/04/linear-cdr/image-20220504101924272.png"
@@ -9516,6 +9501,25 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
         <tag>jgen</tag>
         <tag>jtol</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Link Modeling &amp; Analysis</title>
+    <url>/2023/11/06/linkModeling/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
+(EPFL). <a
+href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
+generator model for jitter-tolerance simulation</a>; <a
+href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
+models</a></p>
+<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
+Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
+Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
+doi: 10.1109/CICC.2019.8780223.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
   </entry>
   <entry>
     <title>Long-Term Jitter</title>
@@ -12016,43 +12020,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBri
       </categories>
   </entry>
   <entry>
-    <title>plusargs in verilog</title>
-    <url>/2022/06/04/plusargs-verilog/</url>
-    <content><![CDATA[<p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>import package in SystemVerilog compilation</title>
     <url>/2022/03/24/pkg-import-compile-sv/</url>
     <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
@@ -12114,6 +12081,43 @@ compiling.</p>
 <p><a
 href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
 forward declaration</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>plusargs in verilog</title>
+    <url>/2022/06/04/plusargs-verilog/</url>
+    <content><![CDATA[<p><strong>plusargs</strong> are command-line switches supported by the
+simulator. As per SystemVerilog LRM arguments beginning with the
+<code>+</code> character will be available using the
+<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
+APIs</strong>.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
+<h4 id="example">Example</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>compile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
+<li><p>simulate (<em>QuestaSim</em>)</p>
+<ul>
+<li><p>with<strong>out</strong> plusargs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
+<li><p>with plusargs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>+SEED=31 +RUNSIM</code></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h4 id="reference">reference</h4>
+<p>systemverilog-command-line-input URL: <a
+href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
+<p>PLUSARGS IN SYSTEMVERILOG URL:<a
+href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -16788,25 +16792,6 @@ is the "+:" operator called in Verilog?</a></p>
       </categories>
   </entry>
   <entry>
-    <title>compile vim from source with GUI support</title>
-    <url>/2022/02/02/vim-compile/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<h2 id="binkey">binkey</h2>
-<p>Inserting a new line below: <code>o</code></p>
-<p>above: <code>O</code></p>
-<p>To insert before the cursor: <code>i</code></p>
-<p>After: <code>a</code></p>
-<p>Before the line (home): <code>I</code></p>
-<p>Append at the end of line: <code>A</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>verilog readmemb and readmemh</title>
     <url>/2022/02/12/verilog-readmemb/</url>
     <content><![CDATA[<p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
@@ -16847,6 +16832,25 @@ Memory in Verilog</a></p>
       </categories>
   </entry>
   <entry>
+    <title>compile vim from source with GUI support</title>
+    <url>/2022/02/02/vim-compile/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="binkey">binkey</h2>
+<p>Inserting a new line below: <code>o</code></p>
+<p>above: <code>O</code></p>
+<p>To insert before the cursor: <code>i</code></p>
+<p>After: <code>a</code></p>
+<p>Before the line (home): <code>I</code></p>
+<p>Append at the end of line: <code>A</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Custom Bindkey of Cadence Virtuoso</title>
     <url>/2022/04/13/virtuoso-bindkey/</url>
     <content><![CDATA[<h2 id="schbindkeys.il">schBindKeys.il</h2>
@@ -16880,6 +16884,24 @@ Memory in Verilog</a></p>
       </categories>
       <tags>
         <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Viterbi Algorithm for ADC-Based Serial Link</title>
+    <url>/2022/09/07/viterbi/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
+Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
+Undergraduate Research Scholars Program. Available electronically from
+<a
+href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>adc</tag>
+        <tag>mlse</tag>
       </tags>
   </entry>
   <entry>
@@ -17063,24 +17085,6 @@ Data Communications</p>
         <tag>sst</tag>
         <tag>tx</tag>
         <tag>fir</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Viterbi Algorithm for ADC-Based Serial Link</title>
-    <url>/2022/09/07/viterbi/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
-Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
-Undergraduate Research Scholars Program. Available electronically from
-<a
-href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>adc</tag>
-        <tag>mlse</tag>
       </tags>
   </entry>
   <entry>

@@ -1742,26 +1742,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
       </tags>
   </entry>
   <entry>
-    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
-    <url>/2022/02/13/SmallGainTheorem/</url>
-    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
-named Fellow of the Institute of Electrical and Electronics Engineers in
-2016 for contributions to testing of analog and mixed-signal integrated
-circuits.</p>
-<blockquote>
-<p>I forget where I download this slide.</p>
-</blockquote>
-<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>control</tag>
-        <tag>feedback</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SpiceIn foundary&#39;s standard cell&#39;s spice netlist</title>
     <url>/2022/10/22/SpiceIn-standardcellspi/</url>
     <content><![CDATA[<p>use <strong>SpiceIn</strong> GUI feature to map MOS parameter
@@ -1806,6 +1786,26 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2
       </categories>
       <tags>
         <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
+    <url>/2022/02/13/SmallGainTheorem/</url>
+    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
+named Fellow of the Institute of Electrical and Electronics Engineers in
+2016 for contributions to testing of analog and mixed-signal integrated
+circuits.</p>
+<blockquote>
+<p>I forget where I download this slide.</p>
+</blockquote>
+<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>control</tag>
+        <tag>feedback</tag>
       </tags>
   </entry>
   <entry>
@@ -2107,6 +2107,150 @@ Revision 7</p>
       </tags>
   </entry>
   <entry>
+    <title>Aliasing and Folding</title>
+    <url>/2022/06/25/aliasing-folding/</url>
+    <content><![CDATA[<h2 id="noise-aliasing">Noise Aliasing</h2>
+<p><img src="/2022/06/25/aliasing-folding/SamplingProcess.drawio.svg"
+alt="SamplingProcess.drawio" /></p>
+<p>Where impulse train or "shah" function is defined as <span
+class="math display">\[
+\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
+\]</span> where <span class="math inline">\(T\)</span> defines the
+period, or sampling rate. Its Fourier transform is <span
+class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
+<p><strong>Multiplication Property</strong> of Fourier Transform <span
+class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span></p>
+<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
+the discrete time integrated from DC to <span
+class="math inline">\(f_s/2\)</span> equals that of continuous time in
+all frequency range.</p>
+<blockquote>
+<p>The DFT spectrum is periodic with period <strong>N</strong></p>
+<p>The DTFT spectrum is periodic with period <span
+class="math inline">\(2\pi\)</span></p>
+<p>As a conclusion, the spectrum beyond <span
+class="math inline">\(f_s/2\)</span> is <strong>redundant</strong> and
+don't provide information</p>
+</blockquote>
+<h2 id="aliasing">Aliasing</h2>
+<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
+and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
+integer), are <strong>indistinguishable</strong> in the <strong>discrete
+time domain</strong>.</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000016184.png"
+alt="image-20220626000016184" /></p>
+<blockquote>
+<p>In order to prevent aliasing, we need <span
+class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
+sampling rate <span class="math inline">\(f_s=2\cdot
+f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
+Rate</strong>.</p>
+<p>Two solution possibilities</p>
+<ol type="1">
+<li>Sample fast enough to cover all spectral components, including
+"parasitic" ones outside band of interest</li>
+<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
+through filtering - Filter out "parasitic" ones</li>
+</ol>
+</blockquote>
+<p>Given below sequence <span class="math display">\[
+X[n] =A e^{j\omega _0 T_s n}
+\]</span> 1. signal frequency <span class="math inline">\(\omega _0 =
+\frac{1}{2T_s}+\Delta f\)</span> <span
+class="math display">\[\begin{align}
+   x[n] &amp;= Ae^{j\left( \frac{1}{2T_s}+\Delta f \right)2\pi T_sn} \\
+   &amp;= Ae^{j(\Delta f\cdot 2\pi T_s +\pi)n}
+   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>signal frequency <span class="math inline">\(\omega _0
+=-\frac{1}{2T_s}+\Delta f\)</span> <span
+class="math display">\[\begin{align}
+x&#39;[n] &amp;= Ae^{j\left( -\frac{1}{2T_s}+\Delta f \right)2\pi T_sn}
+\\
+&amp;= Ae^{j(\Delta f\cdot 2\pi T_s -\pi)n} \\
+&amp;= Ae^{j(\Delta f\cdot 2\pi T_s -\pi)n}\cdot e^{j2\pi n} \\
+&amp;= Ae^{j(\Delta f\cdot 2\pi T_s +\pi)n}
+\end{align}\]</span></li>
+</ol>
+<p><span class="math inline">\(x[n] = x&#39;[n]\)</span> is
+obtained.</p>
+<p>With sampling frequency <span
+class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
+class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
+class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
+distinguished</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20230518232314980.png"
+alt="image-20230518232314980" /></p>
+<blockquote>
+<p>Generally, The frequencies <span
+class="math inline">\(f_{\text{sig}}\)</span> and <span
+class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
+<strong>indistinguishable</strong> in the <strong>discrete time
+domain</strong>.</p>
+</blockquote>
+<h3 id="aliasing-example">Aliasing Example</h3>
+<p>Given <span class="math inline">\(f_s = 1000\)</span> KHz</p>
+<ol type="1">
+<li><p><span class="math inline">\(f_{\text{sig}}=101\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000206662.png"
+alt="image-20220626000206662" /></p></li>
+<li><p><span class="math inline">\(f_{\text{sig}}=899\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000258632.png"
+alt="image-20220626000258632" /></p></li>
+<li><p><span class="math inline">\(f_{\text{sig}}=1101\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000320755.png"
+alt="image-20220626000320755" /></p></li>
+</ol>
+<h3 id="classes-of-sampling">Classes of Sampling</h3>
+<ul>
+<li><p>Nyquist-rate sampling</p>
+<p><span class="math inline">\(f_s \gt 2 \cdot
+f_{\text{sig,max}}\)</span></p></li>
+<li><p>Oversampling</p>
+<p><span class="math inline">\(f_s \gg 2\cdot
+f_{\text{sig,max}}\)</span></p></li>
+<li><p>Undersampling, subsampling</p>
+<p><span class="math inline">\(f_s \lt 2\cdot
+f_{\text{sig,max}}\)</span></p></li>
+</ul>
+<h2 id="dirac-pulses-and-spectrum">Dirac Pulses and spectrum</h2>
+<p>Spectrum of <span class="math inline">\(x_d(t)\)</span> contains
+<strong>scaled replicas</strong> of <span
+class="math inline">\(X(f)\)</span> at <strong>integer
+multiples</strong> of the sampling frequency <span
+class="math inline">\(f_s\)</span></p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626001925375.png"
+alt="image-20220626001925375" /></p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626001043693.png"
+alt="image-20220626001043693" /></p>
+<h2 id="reference">reference</h2>
+<p>David Herres, The difference between signal under-sampling, aliasing,
+and folding URL: <a
+href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
+<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
+Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
+978-0-12-375079-2. <a
+href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
+7 (Sampling and reconstruction)</a></p>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF.</p>
+<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
+Converters, Second Edition" ISBN 978-1-119-25827-8</p>
+<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
+<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
+Modeling URL: <a
+href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
+<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
+Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
+Publishers Inc., San Francisco, CA, USA.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Device Aging</title>
     <url>/2022/12/11/aging/</url>
     <content><![CDATA[<p><img src="/2022/12/11/aging/image-20231106232135180.png"
@@ -2385,150 +2529,6 @@ href="https://pdfs.semanticscholar.org/b0f8/720a2b51a479f4a711bec4b47fdd50f29e2d
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Aliasing and Folding</title>
-    <url>/2022/06/25/aliasing-folding/</url>
-    <content><![CDATA[<h2 id="noise-aliasing">Noise Aliasing</h2>
-<p><img src="/2022/06/25/aliasing-folding/SamplingProcess.drawio.svg"
-alt="SamplingProcess.drawio" /></p>
-<p>Where impulse train or "shah" function is defined as <span
-class="math display">\[
-\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
-\]</span> where <span class="math inline">\(T\)</span> defines the
-period, or sampling rate. Its Fourier transform is <span
-class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
-<p><strong>Multiplication Property</strong> of Fourier Transform <span
-class="math display">\[
-x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
-\]</span></p>
-<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
-the discrete time integrated from DC to <span
-class="math inline">\(f_s/2\)</span> equals that of continuous time in
-all frequency range.</p>
-<blockquote>
-<p>The DFT spectrum is periodic with period <strong>N</strong></p>
-<p>The DTFT spectrum is periodic with period <span
-class="math inline">\(2\pi\)</span></p>
-<p>As a conclusion, the spectrum beyond <span
-class="math inline">\(f_s/2\)</span> is <strong>redundant</strong> and
-don't provide information</p>
-</blockquote>
-<h2 id="aliasing">Aliasing</h2>
-<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
-and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
-integer), are <strong>indistinguishable</strong> in the <strong>discrete
-time domain</strong>.</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626000016184.png"
-alt="image-20220626000016184" /></p>
-<blockquote>
-<p>In order to prevent aliasing, we need <span
-class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
-sampling rate <span class="math inline">\(f_s=2\cdot
-f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
-Rate</strong>.</p>
-<p>Two solution possibilities</p>
-<ol type="1">
-<li>Sample fast enough to cover all spectral components, including
-"parasitic" ones outside band of interest</li>
-<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
-through filtering - Filter out "parasitic" ones</li>
-</ol>
-</blockquote>
-<p>Given below sequence <span class="math display">\[
-X[n] =A e^{j\omega _0 T_s n}
-\]</span> 1. signal frequency <span class="math inline">\(\omega _0 =
-\frac{1}{2T_s}+\Delta f\)</span> <span
-class="math display">\[\begin{align}
-   x[n] &amp;= Ae^{j\left( \frac{1}{2T_s}+\Delta f \right)2\pi T_sn} \\
-   &amp;= Ae^{j(\Delta f\cdot 2\pi T_s +\pi)n}
-   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>signal frequency <span class="math inline">\(\omega _0
-=-\frac{1}{2T_s}+\Delta f\)</span> <span
-class="math display">\[\begin{align}
-x&#39;[n] &amp;= Ae^{j\left( -\frac{1}{2T_s}+\Delta f \right)2\pi T_sn}
-\\
-&amp;= Ae^{j(\Delta f\cdot 2\pi T_s -\pi)n} \\
-&amp;= Ae^{j(\Delta f\cdot 2\pi T_s -\pi)n}\cdot e^{j2\pi n} \\
-&amp;= Ae^{j(\Delta f\cdot 2\pi T_s +\pi)n}
-\end{align}\]</span></li>
-</ol>
-<p><span class="math inline">\(x[n] = x&#39;[n]\)</span> is
-obtained.</p>
-<p>With sampling frequency <span
-class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
-class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
-class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
-distinguished</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20230518232314980.png"
-alt="image-20230518232314980" /></p>
-<blockquote>
-<p>Generally, The frequencies <span
-class="math inline">\(f_{\text{sig}}\)</span> and <span
-class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
-<strong>indistinguishable</strong> in the <strong>discrete time
-domain</strong>.</p>
-</blockquote>
-<h3 id="aliasing-example">Aliasing Example</h3>
-<p>Given <span class="math inline">\(f_s = 1000\)</span> KHz</p>
-<ol type="1">
-<li><p><span class="math inline">\(f_{\text{sig}}=101\)</span> KHz</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626000206662.png"
-alt="image-20220626000206662" /></p></li>
-<li><p><span class="math inline">\(f_{\text{sig}}=899\)</span> KHz</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626000258632.png"
-alt="image-20220626000258632" /></p></li>
-<li><p><span class="math inline">\(f_{\text{sig}}=1101\)</span> KHz</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626000320755.png"
-alt="image-20220626000320755" /></p></li>
-</ol>
-<h3 id="classes-of-sampling">Classes of Sampling</h3>
-<ul>
-<li><p>Nyquist-rate sampling</p>
-<p><span class="math inline">\(f_s \gt 2 \cdot
-f_{\text{sig,max}}\)</span></p></li>
-<li><p>Oversampling</p>
-<p><span class="math inline">\(f_s \gg 2\cdot
-f_{\text{sig,max}}\)</span></p></li>
-<li><p>Undersampling, subsampling</p>
-<p><span class="math inline">\(f_s \lt 2\cdot
-f_{\text{sig,max}}\)</span></p></li>
-</ul>
-<h2 id="dirac-pulses-and-spectrum">Dirac Pulses and spectrum</h2>
-<p>Spectrum of <span class="math inline">\(x_d(t)\)</span> contains
-<strong>scaled replicas</strong> of <span
-class="math inline">\(X(f)\)</span> at <strong>integer
-multiples</strong> of the sampling frequency <span
-class="math inline">\(f_s\)</span></p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626001925375.png"
-alt="image-20220626001925375" /></p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626001043693.png"
-alt="image-20220626001043693" /></p>
-<h2 id="reference">reference</h2>
-<p>David Herres, The difference between signal under-sampling, aliasing,
-and folding URL: <a
-href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
-<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
-Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
-978-0-12-375079-2. <a
-href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
-7 (Sampling and reconstruction)</a></p>
-<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
-SpectreRF.</p>
-<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
-Converters, Second Edition" ISBN 978-1-119-25827-8</p>
-<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
-<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
-Modeling URL: <a
-href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
-<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
-Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
-Publishers Inc., San Francisco, CA, USA.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -3061,19 +3061,6 @@ virtual clock is propagated.</p>
       </categories>
   </entry>
   <entry>
-    <title>Complete Response used in single-pole filter model in systemverilog</title>
-    <url>/2022/02/13/completeResponse/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>signal</tag>
-        <tag>laplace</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>complex uvm project topology</title>
     <url>/2022/03/28/complex-uvm-topo/</url>
     <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
@@ -3100,6 +3087,19 @@ alt="topo.drawio" /></p>
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Complete Response used in single-pole filter model in systemverilog</title>
+    <url>/2022/02/13/completeResponse/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>signal</tag>
+        <tag>laplace</tag>
+      </tags>
   </entry>
   <entry>
     <title>mismatch of current mirror</title>
@@ -3657,6 +3657,189 @@ href="https://youtu.be/nA_DZtRqrTQ">https://youtu.be/nA_DZtRqrTQ</a></p>
       </tags>
   </entry>
   <entry>
+    <title>Random &amp; Deterministic Jitters Simulation</title>
+    <url>/2022/05/16/dj-rj/</url>
+    <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
+alt="image-20220516004008878" /></p>
+<h2 id="deterministic-jitter">Deterministic Jitter</h2>
+<p><img src="/2022/05/16/dj-rj/image-20220516004058916.png"
+alt="image-20220516004058916" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516004206118.png"
+alt="image-20220516004206118" /></p>
+<p><code>j_Djpp</code> can be calculated by PSD,too</p>
+<p><img src="/2022/05/16/dj-rj/image-20220516004615033.png"
+alt="image-20220516004615033" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fck = <span class="number">38.4e6</span>;</span><br><span class="line">Nfft = <span class="number">15000</span>;</span><br><span class="line">fres = fck/Nfft;</span><br><span class="line">psddBc = <span class="number">-99.3343</span>;</span><br><span class="line">psBc = psddBc + <span class="number">10</span>*<span class="built_in">log10</span>(fres);	<span class="comment">% psd -&gt; ps; </span></span><br><span class="line">phrad2 = <span class="number">10</span>^(psBc/<span class="number">10</span>);</span><br><span class="line">phrms = <span class="built_in">sqrt</span>(phrad2);</span><br><span class="line">Jrms = phrms/<span class="number">2</span>/<span class="built_in">pi</span>*<span class="number">1</span>/fck;</span><br><span class="line">Jpp = <span class="number">2</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*Jrms;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Jpp =</span><br><span class="line"></span><br><span class="line">   6.4038e-12</span><br></pre></td></tr></table></figure>
+<p>For DJ, we usually use peak to peak value</p>
+<blockquote>
+<p>BTW, the psd value at half of fundamental frequency (<span
+class="math inline">\(f_s/2\)</span>) is misleading and ambiguity, we
+won't use this value</p>
+</blockquote>
+<h2 id="random-jitter">Random Jitter</h2>
+<p>RJ can be accurately and efficiently measured using
+<strong>PSS/Pnoise</strong> or <strong>HB/HBnoise</strong>.</p>
+<p>Note that the <strong>transient noise</strong> can also be used to
+compute RJ;</p>
+<blockquote>
+<p>However, the computation cost is typically very high, and the
+accuracy is lesser as compared to PSS/Pnoise and HB/HBnoise.</p>
+</blockquote>
+<p>Since RJ follows a Gaussian distribution, it can be fully
+characterized using its Root-Mean-Squared value (RMS) or the standard
+deviation value (<span class="math inline">\(\sigma\)</span>)</p>
+<p>The Peak-to-Peak value of RJ (<span
+class="math inline">\(\text{RJ}_{\text{p-p}}\)</span>) can be calculated
+under certain observation conditions <span class="math display">\[
+\text{RJ}_{\text{p-p}}\equiv K \ast \text{RJ}_{\text{RMS}}
+\]</span> Here, <span class="math inline">\(K\)</span> is a constant
+determined by the BER specification of the system given in the following
+Table</p>
+<table>
+<thead>
+<tr class="header">
+<th>BER</th>
+<th>Crest factor (K)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(10^{-3}\)</span></td>
+<td>6.18</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-4}\)</span></td>
+<td>7.438</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-5}\)</span></td>
+<td>8.53</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-6}\)</span></td>
+<td>9.507</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-7}\)</span></td>
+<td>10.399</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-8}\)</span></td>
+<td>11.224</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-9}\)</span></td>
+<td>11.996</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-10}\)</span></td>
+<td>12.723</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-11}\)</span></td>
+<td>13.412</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-12}\)</span></td>
+<td>14.069</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-13}\)</span></td>
+<td>14.698</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">K = <span class="number">14.698</span>;</span><br><span class="line">Ks = K/<span class="number">2</span>;</span><br><span class="line">p = normcdf([-Ks Ks]);</span><br><span class="line">BER = <span class="number">1</span> - (p(<span class="number">2</span>)-p(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BER =</span><br><span class="line"></span><br><span class="line">   1.9962e-13</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/16/dj-rj/image-20220516160050961.png"
+alt="image-20220516160050961" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516193125490.png"
+alt="image-20220516193125490" /></p>
+<h2 id="total-jitter">Total Jitter</h2>
+<p><span class="math display">\[
+\text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} +
+\text{RJ}_{\text{p-p}}(\text{BER})
+\]</span></p>
+<p><img src="/2022/05/16/dj-rj/tj.drawio.svg" alt="tj.drawio" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516160006909.png"
+alt="image-20220516160006909" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516012200383.png"
+alt="image-20220516012200383" /></p>
+<blockquote>
+<p>In the psd of TJ, the spur is DJ and floor is RJ</p>
+</blockquote>
+<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
+<p>The <strong>phase noise</strong> is traditionally defined as the
+ratio of the power of the signal in 1Hz bandwidth at offset <span
+class="math inline">\(f\)</span> from the carrier <span
+class="math inline">\(P\)</span>, divided by the power of the carrier
+<span class="math display">\[
+\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
+<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
+\geqslant 0\)</span></p>
+<p>Under <strong>narrow angle assumption</strong> <span
+class="math display">\[
+S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
++\infty\right]\)</span></p>
+<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
+the variance of the absolute jitter(<span
+class="math inline">\(J_{ee}\)</span>)via integration of the
+corresponding PSD <span class="math display">\[
+J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
+\]</span></p>
+<p>And we know the relationship between absolute jitter and excess phase
+is <span class="math display">\[
+J_{ee}=\frac {\varphi}{\omega_0}
+\]</span> Considering that phase noise is normally symmetrical about the
+zero frequency, multiplied by <strong>two</strong> is shown as below
+<span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
+\]</span> where phase noise is in linear units not in logarithmic
+ones.</p>
+<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
+unit (<em>dBc</em>), we have to convert the unit before applying the
+above equation <span class="math display">\[
+\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
+\]</span> The complete equation using the simulation result of
+<em>Spectre-RF Pnoise</em> is <span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
+[dBc/Hz]}{10}}df}}{\omega_0}
+\]</span></p>
+<p>The above equation has been verified for <em>sampled pnoise</em>,
+i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
+<blockquote>
+<ul>
+<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
+Function: Jee:Integration Limits</em> can calculate it conveniently</li>
+<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
+below equation to get RMS jitter.</li>
+</ul>
+</blockquote>
+<p>One example, integrate to <span
+class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
+class="math inline">\(f_{osc} = 16GHz\)</span></p>
+<p><img src="/2022/05/16/dj-rj/image-20220415100034220.png"
+alt="image-20220415100034220" /></p>
+<p>Of course, it apply to conventional pnoise simulation.</p>
+<p>On the other hand, output rms voltage noise, <span
+class="math inline">\(V_{out,rms}\)</span> divied by slope should be
+close to <span class="math inline">\(J_{ee,rms}\)</span> <span
+class="math display">\[
+J_{ee,rms} = \frac {V_{out,rms}}{slope}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Windowing Technique for Accurate DFT</title>
     <url>/2023/05/27/dft-window/</url>
     <content><![CDATA[<p><strong>leakage</strong>:</p>
@@ -3979,189 +4162,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
         <tag>windowing</tag>
         <tag>leakage</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Random &amp; Deterministic Jitters Simulation</title>
-    <url>/2022/05/16/dj-rj/</url>
-    <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
-alt="image-20220516004008878" /></p>
-<h2 id="deterministic-jitter">Deterministic Jitter</h2>
-<p><img src="/2022/05/16/dj-rj/image-20220516004058916.png"
-alt="image-20220516004058916" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516004206118.png"
-alt="image-20220516004206118" /></p>
-<p><code>j_Djpp</code> can be calculated by PSD,too</p>
-<p><img src="/2022/05/16/dj-rj/image-20220516004615033.png"
-alt="image-20220516004615033" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fck = <span class="number">38.4e6</span>;</span><br><span class="line">Nfft = <span class="number">15000</span>;</span><br><span class="line">fres = fck/Nfft;</span><br><span class="line">psddBc = <span class="number">-99.3343</span>;</span><br><span class="line">psBc = psddBc + <span class="number">10</span>*<span class="built_in">log10</span>(fres);	<span class="comment">% psd -&gt; ps; </span></span><br><span class="line">phrad2 = <span class="number">10</span>^(psBc/<span class="number">10</span>);</span><br><span class="line">phrms = <span class="built_in">sqrt</span>(phrad2);</span><br><span class="line">Jrms = phrms/<span class="number">2</span>/<span class="built_in">pi</span>*<span class="number">1</span>/fck;</span><br><span class="line">Jpp = <span class="number">2</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*Jrms;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Jpp =</span><br><span class="line"></span><br><span class="line">   6.4038e-12</span><br></pre></td></tr></table></figure>
-<p>For DJ, we usually use peak to peak value</p>
-<blockquote>
-<p>BTW, the psd value at half of fundamental frequency (<span
-class="math inline">\(f_s/2\)</span>) is misleading and ambiguity, we
-won't use this value</p>
-</blockquote>
-<h2 id="random-jitter">Random Jitter</h2>
-<p>RJ can be accurately and efficiently measured using
-<strong>PSS/Pnoise</strong> or <strong>HB/HBnoise</strong>.</p>
-<p>Note that the <strong>transient noise</strong> can also be used to
-compute RJ;</p>
-<blockquote>
-<p>However, the computation cost is typically very high, and the
-accuracy is lesser as compared to PSS/Pnoise and HB/HBnoise.</p>
-</blockquote>
-<p>Since RJ follows a Gaussian distribution, it can be fully
-characterized using its Root-Mean-Squared value (RMS) or the standard
-deviation value (<span class="math inline">\(\sigma\)</span>)</p>
-<p>The Peak-to-Peak value of RJ (<span
-class="math inline">\(\text{RJ}_{\text{p-p}}\)</span>) can be calculated
-under certain observation conditions <span class="math display">\[
-\text{RJ}_{\text{p-p}}\equiv K \ast \text{RJ}_{\text{RMS}}
-\]</span> Here, <span class="math inline">\(K\)</span> is a constant
-determined by the BER specification of the system given in the following
-Table</p>
-<table>
-<thead>
-<tr class="header">
-<th>BER</th>
-<th>Crest factor (K)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(10^{-3}\)</span></td>
-<td>6.18</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-4}\)</span></td>
-<td>7.438</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-5}\)</span></td>
-<td>8.53</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-6}\)</span></td>
-<td>9.507</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-7}\)</span></td>
-<td>10.399</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-8}\)</span></td>
-<td>11.224</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-9}\)</span></td>
-<td>11.996</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-10}\)</span></td>
-<td>12.723</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-11}\)</span></td>
-<td>13.412</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-12}\)</span></td>
-<td>14.069</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-13}\)</span></td>
-<td>14.698</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">K = <span class="number">14.698</span>;</span><br><span class="line">Ks = K/<span class="number">2</span>;</span><br><span class="line">p = normcdf([-Ks Ks]);</span><br><span class="line">BER = <span class="number">1</span> - (p(<span class="number">2</span>)-p(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BER =</span><br><span class="line"></span><br><span class="line">   1.9962e-13</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/16/dj-rj/image-20220516160050961.png"
-alt="image-20220516160050961" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516193125490.png"
-alt="image-20220516193125490" /></p>
-<h2 id="total-jitter">Total Jitter</h2>
-<p><span class="math display">\[
-\text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} +
-\text{RJ}_{\text{p-p}}(\text{BER})
-\]</span></p>
-<p><img src="/2022/05/16/dj-rj/tj.drawio.svg" alt="tj.drawio" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516160006909.png"
-alt="image-20220516160006909" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516012200383.png"
-alt="image-20220516012200383" /></p>
-<blockquote>
-<p>In the psd of TJ, the spur is DJ and floor is RJ</p>
-</blockquote>
-<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
-<p>The <strong>phase noise</strong> is traditionally defined as the
-ratio of the power of the signal in 1Hz bandwidth at offset <span
-class="math inline">\(f\)</span> from the carrier <span
-class="math inline">\(P\)</span>, divided by the power of the carrier
-<span class="math display">\[
-\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
-\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
-<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
-\geqslant 0\)</span></p>
-<p>Under <strong>narrow angle assumption</strong> <span
-class="math display">\[
-S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
-\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
-+\infty\right]\)</span></p>
-<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
-the variance of the absolute jitter(<span
-class="math inline">\(J_{ee}\)</span>)via integration of the
-corresponding PSD <span class="math display">\[
-J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
-\]</span></p>
-<p>And we know the relationship between absolute jitter and excess phase
-is <span class="math display">\[
-J_{ee}=\frac {\varphi}{\omega_0}
-\]</span> Considering that phase noise is normally symmetrical about the
-zero frequency, multiplied by <strong>two</strong> is shown as below
-<span class="math display">\[
-J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
-\]</span> where phase noise is in linear units not in logarithmic
-ones.</p>
-<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
-unit (<em>dBc</em>), we have to convert the unit before applying the
-above equation <span class="math display">\[
-\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
-\]</span> The complete equation using the simulation result of
-<em>Spectre-RF Pnoise</em> is <span class="math display">\[
-J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
-[dBc/Hz]}{10}}df}}{\omega_0}
-\]</span></p>
-<p>The above equation has been verified for <em>sampled pnoise</em>,
-i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
-<blockquote>
-<ul>
-<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
-Function: Jee:Integration Limits</em> can calculate it conveniently</li>
-<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
-below equation to get RMS jitter.</li>
-</ul>
-</blockquote>
-<p>One example, integrate to <span
-class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
-class="math inline">\(f_{osc} = 16GHz\)</span></p>
-<p><img src="/2022/05/16/dj-rj/image-20220415100034220.png"
-alt="image-20220415100034220" /></p>
-<p>Of course, it apply to conventional pnoise simulation.</p>
-<p>On the other hand, output rms voltage noise, <span
-class="math inline">\(V_{out,rms}\)</span> divied by slope should be
-close to <span class="math inline">\(J_{ee,rms}\)</span> <span
-class="math display">\[
-J_{ee,rms} = \frac {V_{out,rms}}{slope}
-\]</span></p>
-<h2 id="reference">reference</h2>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
   </entry>
   <entry>
     <title>Impact of Deep N-well Implantation</title>
@@ -9517,25 +9517,6 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
       </tags>
   </entry>
   <entry>
-    <title>Link Modeling &amp; Analysis</title>
-    <url>/2023/11/11/linkModeling/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
-(EPFL). <a
-href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
-generator model for jitter-tolerance simulation</a>; <a
-href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
-models</a></p>
-<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
-Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
-Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
-doi: 10.1109/CICC.2019.8780223.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Long-Term Jitter</title>
     <url>/2023/09/16/lt-jitter/</url>
     <content><![CDATA[<p><strong>long-term jitter</strong> is sometimes referred to as the
@@ -9591,6 +9572,25 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture10_ee720_jitter.pdf">
       <tags>
         <tag>jitter</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Link Modeling &amp; Analysis</title>
+    <url>/2023/11/06/linkModeling/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
+(EPFL). <a
+href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
+generator model for jitter-tolerance simulation</a>; <a
+href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
+models</a></p>
+<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
+Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
+Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
+doi: 10.1109/CICC.2019.8780223.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
   </entry>
   <entry>
     <title>Matlab toolbox</title>
@@ -9905,24 +9905,6 @@ Processing</a></p>
       </categories>
   </entry>
   <entry>
-    <title>Maximum Likelihood Sequence Estimation (MLSE Equalizer)</title>
-    <url>/2023/08/12/mlse/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
-Sheikholeslami, "Design and Implementation of an On-Demand
-Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
-Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
-10.1109/OJCAS.2022.3173686.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>mlse</tag>
-        <tag>viterbi</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MOM cap of wo_mx</title>
     <url>/2023/02/20/mom-wo-mx/</url>
     <content><![CDATA[<p>Monte Carlo model:</p>
@@ -9949,6 +9931,24 @@ alt="image-20230220230331505" /></p>
       </categories>
       <tags>
         <tag>mom</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maximum Likelihood Sequence Estimation (MLSE Equalizer)</title>
+    <url>/2023/08/12/mlse/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
+Sheikholeslami, "Design and Implementation of an On-Demand
+Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
+Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
+10.1109/OJCAS.2022.3173686.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>mlse</tag>
+        <tag>viterbi</tag>
       </tags>
   </entry>
   <entry>
@@ -13549,6 +13549,20 @@ Units</li>
       </categories>
   </entry>
   <entry>
+    <title>SAR ADC</title>
+    <url>/2023/11/06/sar/</url>
+    <content><![CDATA[<h2 id="modeling">modeling</h2>
+<p><img src="/2023/11/06/sar/image-20221124234503524.png"
+alt="image-20221124234503524" /></p>
+<h2 id="reference">reference</h2>
+<p>Monte Ma. Data Converters [<a
+href="https://designers-guide.org/modeling/dataconversion.pdf">https://designers-guide.org/modeling/dataconversion.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Sampling of Continuous Time Signals</title>
     <url>/2022/05/01/sampling-dft/</url>
     <content><![CDATA[<p>The sampling process mathematically in the two stages:</p>
@@ -13781,20 +13795,6 @@ V. Oppenheim, 3rd edition.” (2011).</p>
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SAR ADC</title>
-    <url>/2023/11/06/sar/</url>
-    <content><![CDATA[<h2 id="modeling">modeling</h2>
-<p><img src="/2023/11/06/sar/image-20221124234503524.png"
-alt="image-20221124234503524" /></p>
-<h2 id="reference">reference</h2>
-<p>Monte Ma. Data Converters [<a
-href="https://designers-guide.org/modeling/dataconversion.pdf">https://designers-guide.org/modeling/dataconversion.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -14839,6 +14839,60 @@ together
       </tags>
   </entry>
   <entry>
+    <title>SystemVerilog clocking block</title>
+    <url>/2022/02/07/systemverilog-clocking-block/</url>
+    <content><![CDATA[<blockquote>
+<p>Assignment at &lt;interface&gt;.&lt;clocking block&gt;.&lt;output
+signal&gt; (i.e. synchronous) do <strong>NOT</strong> change
+&lt;interface&gt;.&lt;output signal&gt; until active clock edge.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// router_io.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> router_io(<span class="keyword">input</span> <span class="keyword">bit</span> clock);</span><br><span class="line">  <span class="keyword">logic</span>    reset_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  din;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frame_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valid_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  dout;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valido_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  busy_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frameo_n;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">clocking</span> cb @(<span class="keyword">posedge</span> clock);</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">input</span> #<span class="number">1</span>ns <span class="keyword">output</span> #<span class="number">1</span>ns;</span><br><span class="line">    <span class="keyword">output</span> reset_n;</span><br><span class="line">    <span class="keyword">output</span> din;</span><br><span class="line">    <span class="keyword">output</span> frame_n;</span><br><span class="line">    <span class="keyword">output</span> valid_n;</span><br><span class="line">    <span class="keyword">input</span>  dout;</span><br><span class="line">    <span class="keyword">input</span>  valido_n;</span><br><span class="line">    <span class="keyword">input</span>  frameo_n;</span><br><span class="line">    <span class="keyword">input</span>  busy_n;</span><br><span class="line">  <span class="keyword">endclocking</span>: cb</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// `reset_n` can be either a synchronous or an asynchronous signal</span></span><br><span class="line">  <span class="keyword">modport</span> TB(<span class="keyword">clocking</span> cb, <span class="keyword">output</span> reset_n);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endinterface</span>: router_io</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>All interface signals are asynchronous and without a direction
+spection (i.e. input, output, inout).</p>
+<ul>
+<li>The direction can only be specified in <code>clocking</code> block
+for <strong>synchronous signals</strong></li>
+<li>or a <code>modport</code> for <strong>asynchronous
+signals</strong></li>
+</ul>
+<p>All directions for the signals in the clocking block must be with
+respect to the test program;</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">program</span> <span class="keyword">automatic</span> test(router_io<span class="variable">.TB</span> rtr_io);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    reset();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">task</span> reset();</span><br><span class="line">    rtr_io<span class="variable">.reset_n</span> = <span class="number">1&#x27;b0</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.frame_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.valid_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">2</span>) @rtr_io<span class="variable">.cb</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.reset_n</span> &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">15</span>) @(rtr_io<span class="variable">.cb</span>);</span><br><span class="line">  <span class="keyword">endtask</span>: reset</span><br><span class="line"></span><br><span class="line"><span class="keyword">endprogram</span>: test</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// router_test_top.sv</span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> router_test_top;</span><br><span class="line">  <span class="keyword">parameter</span> simulation_cycle = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">bit</span> SystemClock = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  router_io top_io(SystemClock);</span><br><span class="line">  test t(top_io);</span><br><span class="line"></span><br><span class="line">  router dut(</span><br><span class="line">    <span class="variable">.reset_n</span>  (top_io<span class="variable">.reset_n</span>),</span><br><span class="line">    <span class="variable">.clock</span>    (top_io<span class="variable">.clock</span>),</span><br><span class="line">    <span class="variable">.din</span>    (top_io<span class="variable">.din</span>),</span><br><span class="line">    <span class="variable">.frame_n</span>  (top_io<span class="variable">.frame_n</span>),</span><br><span class="line">    <span class="variable">.valid_n</span>  (top_io<span class="variable">.valid_n</span>),</span><br><span class="line">    <span class="variable">.dout</span>    (top_io<span class="variable">.dout</span>),</span><br><span class="line">    <span class="variable">.valido_n</span>  (top_io<span class="variable">.valido_n</span>),</span><br><span class="line">    <span class="variable">.busy_n</span>    (top_io<span class="variable">.busy_n</span>),</span><br><span class="line">    <span class="variable">.frameo_n</span>  (top_io<span class="variable">.frameo_n</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$timeformat</span>(-<span class="number">9</span>, <span class="number">1</span>, <span class="string">&quot;ns&quot;</span>, <span class="number">10</span>);</span><br><span class="line">    $fsdbDumpvars;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="variable">#(simulation_cycle/2)</span> SystemClock = ~SystemClock;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>compile</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vcs -sverilog -full64 -kdb -debug_access+all router_test_top.sv test.sv router_io</span><br><span class="line">.sv ../../rtl/router.v</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>file with `<code>timescale</code> must be placed in the first, which
+is <code>router_test_top.sv</code> in above example</p>
+</blockquote>
+<h3 id="clocking.output">clocking.output</h3>
+<p><img
+src="/2022/02/07/systemverilog-clocking-block/image-20220621005749074.png"
+alt="image-20220621005749074" /></p>
+<blockquote>
+<p>systemverilog don't pass clocking.output to interface's until current
+or next active edge and after output-skew</p>
+</blockquote>
+<h3 id="clocking.input">clocking.input</h3>
+<p><img
+src="/2022/02/07/systemverilog-clocking-block/image-20220621010546293.png"
+alt="image-20220621010546293" /></p>
+<blockquote>
+<p>Systemverilog <strong>automatically</strong> update clocking.input
+signal from interface's value, input-skew before active edge</p>
+</blockquote>
+<h3 id="gotcha">Gotcha</h3>
+<p>An <code>interface</code> must be compiled separately like a
+<code>module</code> and CANNOT `<code>include</code> inside a
+<code>package</code> or ohter <code>module</code></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Metastability and Synchronizer</title>
     <url>/2023/08/10/synchronizer-metastability/</url>
     <content><![CDATA[<h2 id="sequentail-logic-deal">Sequentail logic deal</h2>
@@ -14921,60 +14975,6 @@ href="https://www.eejournal.com/article/meandering-musings-on-metastability/">ht
 Design &amp; Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct.
 2011, doi: 10.1109/MDT.2011.113. [<a
 href="https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf">https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SystemVerilog clocking block</title>
-    <url>/2022/02/07/systemverilog-clocking-block/</url>
-    <content><![CDATA[<blockquote>
-<p>Assignment at &lt;interface&gt;.&lt;clocking block&gt;.&lt;output
-signal&gt; (i.e. synchronous) do <strong>NOT</strong> change
-&lt;interface&gt;.&lt;output signal&gt; until active clock edge.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// router_io.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> router_io(<span class="keyword">input</span> <span class="keyword">bit</span> clock);</span><br><span class="line">  <span class="keyword">logic</span>    reset_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  din;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frame_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valid_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  dout;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valido_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  busy_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frameo_n;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">clocking</span> cb @(<span class="keyword">posedge</span> clock);</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">input</span> #<span class="number">1</span>ns <span class="keyword">output</span> #<span class="number">1</span>ns;</span><br><span class="line">    <span class="keyword">output</span> reset_n;</span><br><span class="line">    <span class="keyword">output</span> din;</span><br><span class="line">    <span class="keyword">output</span> frame_n;</span><br><span class="line">    <span class="keyword">output</span> valid_n;</span><br><span class="line">    <span class="keyword">input</span>  dout;</span><br><span class="line">    <span class="keyword">input</span>  valido_n;</span><br><span class="line">    <span class="keyword">input</span>  frameo_n;</span><br><span class="line">    <span class="keyword">input</span>  busy_n;</span><br><span class="line">  <span class="keyword">endclocking</span>: cb</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// `reset_n` can be either a synchronous or an asynchronous signal</span></span><br><span class="line">  <span class="keyword">modport</span> TB(<span class="keyword">clocking</span> cb, <span class="keyword">output</span> reset_n);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endinterface</span>: router_io</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>All interface signals are asynchronous and without a direction
-spection (i.e. input, output, inout).</p>
-<ul>
-<li>The direction can only be specified in <code>clocking</code> block
-for <strong>synchronous signals</strong></li>
-<li>or a <code>modport</code> for <strong>asynchronous
-signals</strong></li>
-</ul>
-<p>All directions for the signals in the clocking block must be with
-respect to the test program;</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">program</span> <span class="keyword">automatic</span> test(router_io<span class="variable">.TB</span> rtr_io);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    reset();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">task</span> reset();</span><br><span class="line">    rtr_io<span class="variable">.reset_n</span> = <span class="number">1&#x27;b0</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.frame_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.valid_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">2</span>) @rtr_io<span class="variable">.cb</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.reset_n</span> &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">15</span>) @(rtr_io<span class="variable">.cb</span>);</span><br><span class="line">  <span class="keyword">endtask</span>: reset</span><br><span class="line"></span><br><span class="line"><span class="keyword">endprogram</span>: test</span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// router_test_top.sv</span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> router_test_top;</span><br><span class="line">  <span class="keyword">parameter</span> simulation_cycle = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">bit</span> SystemClock = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  router_io top_io(SystemClock);</span><br><span class="line">  test t(top_io);</span><br><span class="line"></span><br><span class="line">  router dut(</span><br><span class="line">    <span class="variable">.reset_n</span>  (top_io<span class="variable">.reset_n</span>),</span><br><span class="line">    <span class="variable">.clock</span>    (top_io<span class="variable">.clock</span>),</span><br><span class="line">    <span class="variable">.din</span>    (top_io<span class="variable">.din</span>),</span><br><span class="line">    <span class="variable">.frame_n</span>  (top_io<span class="variable">.frame_n</span>),</span><br><span class="line">    <span class="variable">.valid_n</span>  (top_io<span class="variable">.valid_n</span>),</span><br><span class="line">    <span class="variable">.dout</span>    (top_io<span class="variable">.dout</span>),</span><br><span class="line">    <span class="variable">.valido_n</span>  (top_io<span class="variable">.valido_n</span>),</span><br><span class="line">    <span class="variable">.busy_n</span>    (top_io<span class="variable">.busy_n</span>),</span><br><span class="line">    <span class="variable">.frameo_n</span>  (top_io<span class="variable">.frameo_n</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$timeformat</span>(-<span class="number">9</span>, <span class="number">1</span>, <span class="string">&quot;ns&quot;</span>, <span class="number">10</span>);</span><br><span class="line">    $fsdbDumpvars;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="variable">#(simulation_cycle/2)</span> SystemClock = ~SystemClock;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>compile</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vcs -sverilog -full64 -kdb -debug_access+all router_test_top.sv test.sv router_io</span><br><span class="line">.sv ../../rtl/router.v</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>file with `<code>timescale</code> must be placed in the first, which
-is <code>router_test_top.sv</code> in above example</p>
-</blockquote>
-<h3 id="clocking.output">clocking.output</h3>
-<p><img
-src="/2022/02/07/systemverilog-clocking-block/image-20220621005749074.png"
-alt="image-20220621005749074" /></p>
-<blockquote>
-<p>systemverilog don't pass clocking.output to interface's until current
-or next active edge and after output-skew</p>
-</blockquote>
-<h3 id="clocking.input">clocking.input</h3>
-<p><img
-src="/2022/02/07/systemverilog-clocking-block/image-20220621010546293.png"
-alt="image-20220621010546293" /></p>
-<blockquote>
-<p>Systemverilog <strong>automatically</strong> update clocking.input
-signal from interface's value, input-skew before active edge</p>
-</blockquote>
-<h3 id="gotcha">Gotcha</h3>
-<p>An <code>interface</code> must be compiled separately like a
-<code>module</code> and CANNOT `<code>include</code> inside a
-<code>package</code> or ohter <code>module</code></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -15297,6 +15297,59 @@ Topics" DesignCon IBIS Summit 2011</a></p>
       <tags>
         <tag>tcoil</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>DC operating points during TRANSIENT analysis</title>
+    <url>/2023/10/06/tranOP/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
+Beckett</a><a
+href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
+11 years ago</a></p>
+<p>Two approaches:</p>
+<ol type="1">
+<li>On the transient options form, there's a field called "infotimes" -
+specify the times at which you want it to output the dc operating point
+data. You can then annotate the "transient operating points" from any of
+these times after the simulation, or access them via the results
+browser.</li>
+<li>Or you could get the operating point data to be continuously saved
+during the transient for selected devices - if so, create a file called
+(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
+M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
+reference the file via Setup-&gt;Model Libraries or as a "definition
+file" on Setup-&gt;Simulation Files. With this approach you can then
+find the operating point data for the selected devices in the results
+browser and plot it versus time (be cautious of saving too much though
+because this can generate a lot of data if you're not careful)</li>
+</ol>
+<p>Regards,</p>
+<p>Andrew.</p>
+</blockquote>
+<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
+alt="image-20231006110801078" /></p>
+<h2 id="transient-options-form">transient options form</h2>
+<h3 id="setup">setup</h3>
+<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
+alt="image-20231006103506475" /></p>
+<h3 id="access-1">access 1</h3>
+<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
+<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
+<strong>Transient Operating Points</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
+alt="image-20231006104317496" /></p>
+<h3 id="access-2">access 2</h3>
+<p><strong>tranOpTimed</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
+alt="image-20231006105236323" /></p>
+<h2 id="save.scs">save.scs</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
+alt="image-20231006110506245" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
   </entry>
   <entry>
     <title>TLM</title>
@@ -15721,59 +15774,6 @@ FIFOs</p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>DC operating points during TRANSIENT analysis</title>
-    <url>/2023/10/06/tranOP/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
-Beckett</a><a
-href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
-11 years ago</a></p>
-<p>Two approaches:</p>
-<ol type="1">
-<li>On the transient options form, there's a field called "infotimes" -
-specify the times at which you want it to output the dc operating point
-data. You can then annotate the "transient operating points" from any of
-these times after the simulation, or access them via the results
-browser.</li>
-<li>Or you could get the operating point data to be continuously saved
-during the transient for selected devices - if so, create a file called
-(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
-M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
-reference the file via Setup-&gt;Model Libraries or as a "definition
-file" on Setup-&gt;Simulation Files. With this approach you can then
-find the operating point data for the selected devices in the results
-browser and plot it versus time (be cautious of saving too much though
-because this can generate a lot of data if you're not careful)</li>
-</ol>
-<p>Regards,</p>
-<p>Andrew.</p>
-</blockquote>
-<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
-alt="image-20231006110801078" /></p>
-<h2 id="transient-options-form">transient options form</h2>
-<h3 id="setup">setup</h3>
-<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
-alt="image-20231006103506475" /></p>
-<h3 id="access-1">access 1</h3>
-<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
-<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
-<strong>Transient Operating Points</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
-alt="image-20231006104317496" /></p>
-<h3 id="access-2">access 2</h3>
-<p><strong>tranOpTimed</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
-alt="image-20231006105236323" /></p>
-<h2 id="save.scs">save.scs</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
-alt="image-20231006110506245" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -16763,33 +16763,6 @@ href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-gui
       </categories>
   </entry>
   <entry>
-    <title>variables with statistical distribution</title>
-    <url>/2023/10/05/varstat/</url>
-    <content><![CDATA[<p><code>Specifying Parameter Distributions Using Statistics Blocks</code></p>
-<ul>
-<li><code>process</code>: generate random number once per MC run</li>
-<li><code>mismatch</code> : generate a random number per instance</li>
-</ul>
-<p><img src="/2023/10/05/varstat/image-20231005190644654.png"
-alt="image-20231005190644654" /></p>
-<p><img src="/2023/10/05/varstat/image-20231005190712057.png"
-alt="image-20231005190712057" /></p>
-<p><img src="/2023/10/05/varstat/image-20231005190724560.png"
-alt="image-20231005190724560" /></p>
-<h2 id="reference">reference</h2>
-<p>Article (20498356) Title: How to vary design variables with
-statistical distribution to be used with Monte Carlo analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0</a></p>
-<p>Spectre Circuit Simulator Reference</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>mc</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>VCS &amp; Verdi</title>
     <url>/2022/02/08/vcs-verdi/</url>
     <content><![CDATA[<h2 id="vcs-with-customized-uvm-version">VCS with customized UVM
@@ -16977,6 +16950,33 @@ in Verdi | Synopsys</a></p>
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>variables with statistical distribution</title>
+    <url>/2023/10/05/varstat/</url>
+    <content><![CDATA[<p><code>Specifying Parameter Distributions Using Statistics Blocks</code></p>
+<ul>
+<li><code>process</code>: generate random number once per MC run</li>
+<li><code>mismatch</code> : generate a random number per instance</li>
+</ul>
+<p><img src="/2023/10/05/varstat/image-20231005190644654.png"
+alt="image-20231005190644654" /></p>
+<p><img src="/2023/10/05/varstat/image-20231005190712057.png"
+alt="image-20231005190712057" /></p>
+<p><img src="/2023/10/05/varstat/image-20231005190724560.png"
+alt="image-20231005190724560" /></p>
+<h2 id="reference">reference</h2>
+<p>Article (20498356) Title: How to vary design variables with
+statistical distribution to be used with Monte Carlo analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0</a></p>
+<p>Spectre Circuit Simulator Reference</p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>mc</tag>
+      </tags>
   </entry>
   <entry>
     <title>verilog constant part-select and indexed part-select</title>

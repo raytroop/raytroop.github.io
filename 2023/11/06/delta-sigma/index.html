@@ -18,16 +18,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="The Delta Modulator  A delta modulator and (b) its simple implementation   The high loop gain ensures that \(V_F \simeq V_{in}\) The principal difficulty with the delta modulator is that the output di">
+    <meta name="description" content="Oversampling In the oversampling process, samples per second are more than what is required, according to Nyquist-Shannon criteria. Allowing more sample rates does not influence the signal power and t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Delta-Sigma Modulator ADC">
 <meta property="og:url" content="http://example.com/2023/11/06/delta-sigma/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="The Delta Modulator  A delta modulator and (b) its simple implementation   The high loop gain ensures that \(V_F \simeq V_{in}\) The principal difficulty with the delta modulator is that the output di">
+<meta property="og:description" content="Oversampling In the oversampling process, samples per second are more than what is required, according to Nyquist-Shannon criteria. Allowing more sample rates does not influence the signal power and t">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2023/11/06/delta-sigma/image-20230202224406667.png">
 <meta property="article:published_time" content="2023-11-06T21:39:25.000Z">
-<meta property="article:modified_time" content="2023-11-11T09:52:57.310Z">
+<meta property="article:modified_time" content="2023-11-13T16:27:19.576Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/11/06/delta-sigma/image-20230202224406667.png">
@@ -139,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-delta-modulator"><span class="nav-number">1.</span> <span class="nav-text">The Delta Modulator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delta-sigma-modulators"><span class="nav-number">2.</span> <span class="nav-text">Delta-Sigma modulators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#charge-balancing"><span class="nav-number">3.</span> <span class="nav-text">Charge Balancing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decimation-filters"><span class="nav-number">4.</span> <span class="nav-text">Decimation Filters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#oversampling"><span class="nav-number">1.</span> <span class="nav-text">Oversampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-delta-modulator"><span class="nav-number">2.</span> <span class="nav-text">The Delta Modulator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delta-sigma-modulators"><span class="nav-number">3.</span> <span class="nav-text">Delta-Sigma modulators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#charge-balancing"><span class="nav-number">4.</span> <span class="nav-text">Charge Balancing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decimation-filters"><span class="nav-number">5.</span> <span class="nav-text">Decimation Filters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">182</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -163,7 +163,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">153</span>
+        <span class="site-state-item-count">152</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-11 09:52:57" itemprop="dateModified" datetime="2023-11-11T09:52:57+00:00">2023-11-11</time>
+      <time title="Modified: 2023-11-13 16:27:19" itemprop="dateModified" datetime="2023-11-13T16:27:19+00:00">2023-11-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,7 +255,22 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h3 id="the-delta-modulator">The Delta Modulator</h3>
+    <div class="post-body" itemprop="articleBody"><h2 id="oversampling">Oversampling</h2>
+<p>In the oversampling process, samples per second are more than what is
+required, according to Nyquist-Shannon criteria. Allowing more sample
+rates does not influence the signal power and total quantization noise
+power. Therefore, the SNR remains unchanged.</p>
+<p>The advantage of oversampling is that the quantization noises are
+spread over a larger frequency range. This reduces the quantization
+noise spectral density (the SNR over the frequency of interest is
+increased).</p>
+<blockquote>
+<p>Comparing normal sampling and oversampling, the quantization noise
+power is reduced by 3 dB for every doubling of oversampling ratio (OSR),
+where OSR is the ratio of sampling frequency to twice the frequency of
+the signal.</p>
+</blockquote>
+<h2 id="the-delta-modulator">The Delta Modulator</h2>
 <ol type="a">
 <li>A delta modulator and (b) its simple implementation</li>
 </ol>
@@ -275,14 +290,14 @@ D_{out} = \frac{dV_F}{dt}
 <li>attenuates the low-frequency content of the signal</li>
 <li>and amplifies high-frequency noise</li>
 </ul>
-<h3 id="delta-sigma-modulators">Delta-Sigma modulators</h3>
-<h3 id="charge-balancing">Charge Balancing</h3>
-<h3 id="decimation-filters">Decimation Filters</h3>
+<h2 id="delta-sigma-modulators">Delta-Sigma modulators</h2>
+<h2 id="charge-balancing">Charge Balancing</h2>
+<h2 id="decimation-filters">Decimation Filters</h2>
 <p>A simple time-domain analysis shows that a <strong>sinc
 filter</strong> is a suitable decimation filter for a first-order
 modulator. Such a filter has a rectangular impulse response, and can be
 implemented as a <strong>counter</strong>.</p>
-<h3 id="reference">reference</h3>
+<h2 id="reference">reference</h2>
 <p>B. Razavi, "The Delta-Sigma Modulator [A Circuit for All Seasons],"
 IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 20, pp. 10-15,
 Spring 2016.</p>
@@ -300,6 +315,16 @@ simulation of delta-sigma modulators</a> and associated Matlab scripts:
 target="_blank" rel="noopener" href="https://designers-guide.org/analysis/scripts.tar.gz">scripts.tar.gz</a>,
 <a
 target="_blank" rel="noopener" href="https://designers-guide.org/analysis/scripts.zip">scripts.zip</a>.</p>
+<p>Oversampling and Noise Shaping in Delta-Sigma Modulation [<a
+target="_blank" rel="noopener" href="https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation">https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation</a>]</p>
+<p>David A. Johns. ECE1371H - Advanced Analog Circuits - Spring 2014 [<a
+target="_blank" rel="noopener" href="https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html">https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html</a>]</p>
+<p>R.S. Ashwin Kumar. EE698I: Mixed-signal IC design [<a
+target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html">https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html</a>]</p>
+<p>R.S. Ashwin Kumar. EE698W: Analog circuits for signal processing [<a
+target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html">https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html</a>]</p>
+<p>Vishal Saxena. ECE 697 Delta-Sigma Data Converter Design [<a
+target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm</a>]</p>
 
     </div>
 

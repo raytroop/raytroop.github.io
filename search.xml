@@ -87,6 +87,111 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_rx_circuits.p
       </tags>
   </entry>
   <entry>
+    <title>Digital Models for Design</title>
+    <url>/2023/11/14/DigitalModels/</url>
+    <content><![CDATA[<h2 id="effective-switching-resistance">Effective Switching
+resistance</h2>
+<p><img src="/2023/11/14/DigitalModels/image-20231114001209252.png"
+alt="image-20231114001209252" /></p>
+<blockquote>
+<p><a
+href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf</a></p>
+</blockquote>
+<div class="pdf-container" data-target="/pdfs/chapter5_ex_sol.pdf" data-height="500px"></div>
+<h2 id="wire-delay">wire delay</h2>
+<h3 id="the-elmore-delay">The Elmore Delay</h3>
+<p><img src="/2023/11/14/DigitalModels/image-20230624234813719.png"
+alt="image-20230624234813719" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624234940864.png"
+alt="image-20230624234940864" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230625001756173.png"
+alt="image-20230625001756173" /></p>
+<blockquote>
+<p>Basic idea: use of <strong>mean</strong> of <span
+class="math inline">\(v&#39;(t)\)</span> to approximate
+<strong>median</strong> of <span
+class="math inline">\(v&#39;(t)\)</span></p>
+</blockquote>
+<p><img src="/2023/11/14/DigitalModels/image-20230624235148246.png"
+alt="image-20230624235148246" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230625002239199.png"
+alt="image-20230625002239199" /></p>
+<blockquote>
+<p>Elmore delay approximates the <strong>median</strong> of <span
+class="math inline">\(h(t)\)</span> by the <strong>mean</strong> of
+<span class="math inline">\(h(t)\)</span></p>
+</blockquote>
+<h3 id="distributed-rc-line">Distributed RC-Line</h3>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224005736.png"
+alt="image-20230624224005736" /></p>
+<h3 id="lumped-approximations">Lumped approximations</h3>
+<h4 id="rc-models"><span class="math inline">\(rc\)</span>-models</h4>
+<p>If your simulator does not support a distributed <span
+class="math inline">\(rc\)</span>-model, or if the computational
+complexity of these models slows down your simulation too much, you can
+construct a simple yet accurate model yourself by approximating the
+distributed <span class="math inline">\(rc\)</span> by a lumped RC
+network with a limited number of elements</p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624230057265.png"
+alt="image-20230624230057265" /></p>
+<blockquote>
+<p>The accuracy of the model is determined by the number of stages. For
+instance, the error of the <span class="math inline">\(\Pi -3\)</span>
+model is less than 3%, which is generally sufficient.</p>
+</blockquote>
+<h4 id="why-use-pi-model">Why use "<span
+class="math inline">\(\Pi\)</span> Model"</h4>
+<p><img src="/2023/11/14/DigitalModels/image-20230624230800255.png"
+alt="image-20230624230800255" /></p>
+<h4 id="examples">examples</h4>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224643487.png"
+alt="image-20230624224643487" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224923241.png"
+alt="image-20230624224923241" /></p>
+<h2 id="wire-inductive-effect">Wire Inductive Effect</h2>
+<ul>
+<li>RC delay increases quadratically with length</li>
+<li>LC delay (speed of light flight time) increases linearly with
+length</li>
+</ul>
+<blockquote>
+<p>Inductance will only be important to the delay of low-resistance
+signals such as wide clock lines</p>
+</blockquote>
+<h3 id="wave">wave</h3>
+<p>Signal propagates over the wire as a <strong>wave</strong> (rather
+than <strong>diffusing</strong> as in <span
+class="math inline">\(rc\)</span> only models)</p>
+<blockquote>
+<p>Signal propagates by alternately transferring energy from capacitive
+to inductive modes</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Akio Kitagawa, Analog layout design <a
+href="https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf">https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf</a></p>
+<p>THE WIRE <a
+href="http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf">http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf</a></p>
+<p>Anoop Veliyath, Design Engineer, Cadence Design Systems. Accurately
+Modeling Transmission Line Behavior with an LC Network-based Approach
+[<a
+href="https://www.pspice.com/sites/default/files/Transmission_Line_Modeling.pdf">pdf</a>]</p>
+<p>Mark Horowitz. Lecture 2: Wires and Wire Models [<a
+href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_02.pdf">pdf</a>]</p>
+<p>Neil Weste and David Harris. 2010. CMOS VLSI Design: A Circuits and
+Systems Perspective (4th. ed.). Addison-Wesley Publishing Company,
+USA.</p>
+<p>Cheng-Kok Koh. EE695K Modeling and Optimization of High Performance
+Interconnect [<a
+href="https://engineering.purdue.edu/~chengkok/ee695K/lec3a.pdf">lec3a_pdf</a>]</p>
+<p>Vishal Saxena. ECE 445 Intro to VLSI Design: Lectures for Spring 2019
+<a
+href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Dynamic Specification of Data Converter</title>
     <url>/2023/03/29/Dynamic-specification-converter/</url>
     <content><![CDATA[<h2 id="term-abbreviation">Term Abbreviation</h2>
@@ -568,26 +673,6 @@ Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits</p>
       </tags>
   </entry>
   <entry>
-    <title>INL, DNL analysis of current steering DAC</title>
-    <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
-    <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
-<div class="pdf-container" data-target="/pdfs/mos_mismatch.pdf" data-height="500px"></div>
-<h2 id="current-mirror-mismatch-analysis">Current mirror mismatch
-analysis</h2>
-<div class="pdf-container" data-target="/pdfs/Current_mirror_mismatch_analysis.pdf" data-height="500px"></div>
-<h2 id="inldnl-analysis-of-current-steering-dac">INL/DNL analysis of
-current steering DAC</h2>
-<div class="pdf-container" data-target="/pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>dac</tag>
-        <tag>mismatch</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Global Handles in UVM</title>
     <url>/2022/02/23/Global-Handles-UVM/</url>
     <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
@@ -612,6 +697,26 @@ accessing all the central UVM services such as
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>INL, DNL analysis of current steering DAC</title>
+    <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
+    <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
+<div class="pdf-container" data-target="/pdfs/mos_mismatch.pdf" data-height="500px"></div>
+<h2 id="current-mirror-mismatch-analysis">Current mirror mismatch
+analysis</h2>
+<div class="pdf-container" data-target="/pdfs/Current_mirror_mismatch_analysis.pdf" data-height="500px"></div>
+<h2 id="inldnl-analysis-of-current-steering-dac">INL/DNL analysis of
+current steering DAC</h2>
+<div class="pdf-container" data-target="/pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>dac</tag>
+        <tag>mismatch</tag>
+      </tags>
   </entry>
   <entry>
     <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
@@ -2532,6 +2637,120 @@ Publishers Inc., San Francisco, CA, USA.</p>
       </categories>
   </entry>
   <entry>
+    <title>Arithmetic in Verilog</title>
+    <url>/2022/05/29/arthmetic-verilog/</url>
+    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>1'b1</code>: overflow</p>
+</blockquote>
+<h4 id="signed-signed-signed">signed + signed = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code>: overflow</p>
+<p><code>2'b10</code>: underflow</p>
+</blockquote>
+<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Bandgap Reference</title>
+    <url>/2022/11/17/bgr/</url>
+    <content><![CDATA[<h3 id="temperature-coefficient">temperature coefficient</h3>
+<p>The parameter that shows the dependence of the reference voltage on
+temperature variation is called the temperature coefficient and is
+defined as: <span class="math display">\[
+TC_F=\frac{1}{V_{\text{REF}}}\left[
+\frac{V_{\text{max}}-V_{\text{min}}}{T_{\text{max}}-T_{\text{min}}}
+\right]\times10^6\;ppm/^oC
+\]</span></p>
+<h3 id="choice-of-n">Choice of n</h3>
+<p><img src="/2022/11/17/bgr/image-20221117002714125.png"
+alt="image-20221117002714125" /></p>
+<h3 id="reference">reference</h3>
+<p>ECEN 607 (ESS) Bandgap Reference: Basics URL:<a
+href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>bjt</tag>
+        <tag>ptat</tag>
+        <tag>ctat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Bilinear Transformation</title>
+    <url>/2023/05/21/bilinear-transformation/</url>
+    <content><![CDATA[<p><strong>Bilinear Transformation</strong>, also known as
+<strong>Bilinear Approximation</strong>, an algebraic transformation
+between the variables <span class="math inline">\(s\)</span> and <span
+class="math inline">\(z\)</span> that maps the entire <span
+class="math inline">\(j\Omega\)</span>-axis in the <span
+class="math inline">\(s\)</span>-plane to <em>one revolution of the unit
+circle</em> in the <span class="math inline">\(z\)</span>-plane.</p>
+<p>That is, with this approach, <span class="math inline">\(-\infty \le
+\Omega \le +\infty\)</span> maps onto <span class="math inline">\(-\pi
+\le \omega \le +\pi\)</span>, the transformation between the
+continuous-time and discrete-time frequency variables is necessarily
+<strong>nonlinear</strong>.</p>
+<p>With <span class="math inline">\(H_c(s)\)</span> denoting the
+continuous-time system function and <span
+class="math inline">\(H(z)\)</span> the discrete-time system function,
+the bilinear transformation corresponds to replacing <span
+class="math inline">\(s\)</span> by <span class="math display">\[
+s=\frac{2}{T_d}\left( \frac{1-z^{-1}}{1+z^{-1}} \right)
+\]</span></p>
+<p>that is, <span class="math display">\[
+H(z) = H_c\left( \frac{2}{T_d}\left( \frac{1-z^{-1}}{1+z^{-1}} \right)
+\right)
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p>[AN001] Designing from zero an IIR filter in Verilog using biquad
+structure and bilinear discretization. URL:<a
+href="https://www.controlpaths.com/articles/an001_designing_iir_biquad_filter_bilinear/">https://www.controlpaths.com/articles/an001_designing_iir_biquad_filter_bilinear/</a></p>
+<p>Frequency warping using the bilinear transform. URL:<a
+href="https://www.controlpaths.com/2022/05/09/frequency-warping-using-the-bilinear-transform/">https://www.controlpaths.com/2022/05/09/frequency-warping-using-the-bilinear-transform/</a></p>
+<p>Digital control loops. Theoretical approach. URL:<a
+href="https://www.controlpaths.com/2022/02/28/digital-control-loops-theoretical-approach/">https://www.controlpaths.com/2022/02/28/digital-control-loops-theoretical-approach/</a></p>
+<p>Simulation of DSP algorithms in Verilog. URL:<a
+href="https://www.controlpaths.com/2023/05/20/simulation-of-dsp-algorithms-in-verilog/">https://www.controlpaths.com/2023/05/20/simulation-of-dsp-algorithms-in-verilog/</a></p>
+<p>Implementing a digital biquad filter in Verilog. URL:<a
+href="https://www.controlpaths.com/2021/04/19/implementing-a-digital-biquad-filter-in-verilog/">https://www.controlpaths.com/2021/04/19/implementing-a-digital-biquad-filter-in-verilog/</a></p>
+<p>Implementing a FIR filter using folding. URL:<a
+href="https://www.controlpaths.com/2021/05/17/implementing-a-fir-filter-using-folding/">https://www.controlpaths.com/2021/05/17/implementing-a-fir-filter-using-folding/</a></p>
+<p>Oppenheim, Alan V. and Cram. “Discrete-time signal processing : Alan
+V. Oppenheim, 3rd edition.” (2011).</p>
+<p>Extras: PID Compensator with Bilinear Approximation URL:<a
+href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin</a></p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>filter</tag>
+        <tag>bilinear</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Burn-in</title>
+    <url>/2023/08/08/burnin/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Mayank Parasrampuria, Sandeep Jain, Burn-in 101 [<a
+href="https://www.edn.com/burn-in-101/">link</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Antenna Effect</title>
     <url>/2023/08/08/antenna/</url>
     <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
@@ -2599,120 +2818,6 @@ href="https://www.eng.biu.ac.il/temanad/files/2017/02/Lecture-10-The-Manufacturi
 <p>Zongjian Chen, Processing and Reliability Issues That Impact Design
 Practice. [<a
 href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf">https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Bandgap Reference</title>
-    <url>/2022/11/17/bgr/</url>
-    <content><![CDATA[<h3 id="temperature-coefficient">temperature coefficient</h3>
-<p>The parameter that shows the dependence of the reference voltage on
-temperature variation is called the temperature coefficient and is
-defined as: <span class="math display">\[
-TC_F=\frac{1}{V_{\text{REF}}}\left[
-\frac{V_{\text{max}}-V_{\text{min}}}{T_{\text{max}}-T_{\text{min}}}
-\right]\times10^6\;ppm/^oC
-\]</span></p>
-<h3 id="choice-of-n">Choice of n</h3>
-<p><img src="/2022/11/17/bgr/image-20221117002714125.png"
-alt="image-20221117002714125" /></p>
-<h3 id="reference">reference</h3>
-<p>ECEN 607 (ESS) Bandgap Reference: Basics URL:<a
-href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>bjt</tag>
-        <tag>ptat</tag>
-        <tag>ctat</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Arithmetic in Verilog</title>
-    <url>/2022/05/29/arthmetic-verilog/</url>
-    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>1'b1</code>: overflow</p>
-</blockquote>
-<h4 id="signed-signed-signed">signed + signed = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code>: overflow</p>
-<p><code>2'b10</code>: underflow</p>
-</blockquote>
-<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Bilinear Transformation</title>
-    <url>/2023/05/21/bilinear-transformation/</url>
-    <content><![CDATA[<p><strong>Bilinear Transformation</strong>, also known as
-<strong>Bilinear Approximation</strong>, an algebraic transformation
-between the variables <span class="math inline">\(s\)</span> and <span
-class="math inline">\(z\)</span> that maps the entire <span
-class="math inline">\(j\Omega\)</span>-axis in the <span
-class="math inline">\(s\)</span>-plane to <em>one revolution of the unit
-circle</em> in the <span class="math inline">\(z\)</span>-plane.</p>
-<p>That is, with this approach, <span class="math inline">\(-\infty \le
-\Omega \le +\infty\)</span> maps onto <span class="math inline">\(-\pi
-\le \omega \le +\pi\)</span>, the transformation between the
-continuous-time and discrete-time frequency variables is necessarily
-<strong>nonlinear</strong>.</p>
-<p>With <span class="math inline">\(H_c(s)\)</span> denoting the
-continuous-time system function and <span
-class="math inline">\(H(z)\)</span> the discrete-time system function,
-the bilinear transformation corresponds to replacing <span
-class="math inline">\(s\)</span> by <span class="math display">\[
-s=\frac{2}{T_d}\left( \frac{1-z^{-1}}{1+z^{-1}} \right)
-\]</span></p>
-<p>that is, <span class="math display">\[
-H(z) = H_c\left( \frac{2}{T_d}\left( \frac{1-z^{-1}}{1+z^{-1}} \right)
-\right)
-\]</span></p>
-<h2 id="reference">reference</h2>
-<p>[AN001] Designing from zero an IIR filter in Verilog using biquad
-structure and bilinear discretization. URL:<a
-href="https://www.controlpaths.com/articles/an001_designing_iir_biquad_filter_bilinear/">https://www.controlpaths.com/articles/an001_designing_iir_biquad_filter_bilinear/</a></p>
-<p>Frequency warping using the bilinear transform. URL:<a
-href="https://www.controlpaths.com/2022/05/09/frequency-warping-using-the-bilinear-transform/">https://www.controlpaths.com/2022/05/09/frequency-warping-using-the-bilinear-transform/</a></p>
-<p>Digital control loops. Theoretical approach. URL:<a
-href="https://www.controlpaths.com/2022/02/28/digital-control-loops-theoretical-approach/">https://www.controlpaths.com/2022/02/28/digital-control-loops-theoretical-approach/</a></p>
-<p>Simulation of DSP algorithms in Verilog. URL:<a
-href="https://www.controlpaths.com/2023/05/20/simulation-of-dsp-algorithms-in-verilog/">https://www.controlpaths.com/2023/05/20/simulation-of-dsp-algorithms-in-verilog/</a></p>
-<p>Implementing a digital biquad filter in Verilog. URL:<a
-href="https://www.controlpaths.com/2021/04/19/implementing-a-digital-biquad-filter-in-verilog/">https://www.controlpaths.com/2021/04/19/implementing-a-digital-biquad-filter-in-verilog/</a></p>
-<p>Implementing a FIR filter using folding. URL:<a
-href="https://www.controlpaths.com/2021/05/17/implementing-a-fir-filter-using-folding/">https://www.controlpaths.com/2021/05/17/implementing-a-fir-filter-using-folding/</a></p>
-<p>Oppenheim, Alan V. and Cram. “Discrete-time signal processing : Alan
-V. Oppenheim, 3rd edition.” (2011).</p>
-<p>Extras: PID Compensator with Bilinear Approximation URL:<a
-href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin</a></p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>filter</tag>
-        <tag>bilinear</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Burn-in</title>
-    <url>/2023/08/08/burnin/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Mayank Parasrampuria, Sandeep Jain, Burn-in 101 [<a
-href="https://www.edn.com/burn-in-101/">link</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -2917,6 +3022,32 @@ href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">h
       </tags>
   </entry>
   <entry>
+    <title>channel and termination</title>
+    <url>/2022/07/01/channel-termination/</url>
+    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
+<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
+alt="voltagemode20220704" /></p>
+<h2 id="current-mode-driver">current mode driver</h2>
+<p><img
+src="/2022/07/01/channel-termination/image-20220702003926289.png"
+alt="image-20220702003926289" /></p>
+<h2 id="reference">reference</h2>
+<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
+Conference, "T11: Basics of Equalization Techniques: Channels,
+Equalization, and Circuits"</p>
+<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
+Diverse Interconnect Applications,” IEEE Transactions on Circuits and
+Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
+2014.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>channel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Clock Edges used for Setup and Hold in PrimeTime</title>
     <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
     <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
@@ -2950,32 +3081,6 @@ alt="image-20220301203135490" /></p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>channel and termination</title>
-    <url>/2022/07/01/channel-termination/</url>
-    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
-<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
-alt="voltagemode20220704" /></p>
-<h2 id="current-mode-driver">current mode driver</h2>
-<p><img
-src="/2022/07/01/channel-termination/image-20220702003926289.png"
-alt="image-20220702003926289" /></p>
-<h2 id="reference">reference</h2>
-<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
-Conference, "T11: Basics of Equalization Techniques: Channels,
-Equalization, and Circuits"</p>
-<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
-Diverse Interconnect Applications,” IEEE Transactions on Circuits and
-Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
-2014.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>channel</tag>
-      </tags>
   </entry>
   <entry>
     <title>Clock Gating</title>
@@ -3562,7 +3667,22 @@ href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com
   <entry>
     <title>Delta-Sigma Modulator ADC</title>
     <url>/2023/11/06/delta-sigma/</url>
-    <content><![CDATA[<h3 id="the-delta-modulator">The Delta Modulator</h3>
+    <content><![CDATA[<h2 id="oversampling">Oversampling</h2>
+<p>In the oversampling process, samples per second are more than what is
+required, according to Nyquist-Shannon criteria. Allowing more sample
+rates does not influence the signal power and total quantization noise
+power. Therefore, the SNR remains unchanged.</p>
+<p>The advantage of oversampling is that the quantization noises are
+spread over a larger frequency range. This reduces the quantization
+noise spectral density (the SNR over the frequency of interest is
+increased).</p>
+<blockquote>
+<p>Comparing normal sampling and oversampling, the quantization noise
+power is reduced by 3 dB for every doubling of oversampling ratio (OSR),
+where OSR is the ratio of sampling frequency to twice the frequency of
+the signal.</p>
+</blockquote>
+<h2 id="the-delta-modulator">The Delta Modulator</h2>
 <ol type="a">
 <li>A delta modulator and (b) its simple implementation</li>
 </ol>
@@ -3582,14 +3702,14 @@ D_{out} = \frac{dV_F}{dt}
 <li>attenuates the low-frequency content of the signal</li>
 <li>and amplifies high-frequency noise</li>
 </ul>
-<h3 id="delta-sigma-modulators">Delta-Sigma modulators</h3>
-<h3 id="charge-balancing">Charge Balancing</h3>
-<h3 id="decimation-filters">Decimation Filters</h3>
+<h2 id="delta-sigma-modulators">Delta-Sigma modulators</h2>
+<h2 id="charge-balancing">Charge Balancing</h2>
+<h2 id="decimation-filters">Decimation Filters</h2>
 <p>A simple time-domain analysis shows that a <strong>sinc
 filter</strong> is a suitable decimation filter for a first-order
 modulator. Such a filter has a rectangular impulse response, and can be
 implemented as a <strong>counter</strong>.</p>
-<h3 id="reference">reference</h3>
+<h2 id="reference">reference</h2>
 <p>B. Razavi, "The Delta-Sigma Modulator [A Circuit for All Seasons],"
 IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 20, pp. 10-15,
 Spring 2016.</p>
@@ -3607,6 +3727,16 @@ simulation of delta-sigma modulators</a> and associated Matlab scripts:
 href="https://designers-guide.org/analysis/scripts.tar.gz">scripts.tar.gz</a>,
 <a
 href="https://designers-guide.org/analysis/scripts.zip">scripts.zip</a>.</p>
+<p>Oversampling and Noise Shaping in Delta-Sigma Modulation [<a
+href="https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation">https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation</a>]</p>
+<p>David A. Johns. ECE1371H - Advanced Analog Circuits - Spring 2014 [<a
+href="https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html">https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html</a>]</p>
+<p>R.S. Ashwin Kumar. EE698I: Mixed-signal IC design [<a
+href="https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html">https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html</a>]</p>
+<p>R.S. Ashwin Kumar. EE698W: Analog circuits for signal processing [<a
+href="https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html">https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html</a>]</p>
+<p>Vishal Saxena. ECE 697 Delta-Sigma Data Converter Design [<a
+href="https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -7946,75 +8076,6 @@ alt="pma_dig_bumps.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>integrator</tag>
-        <tag>ota</tag>
-        <tag>slew rate</tag>
-        <tag>bandwidth</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
     <content><![CDATA[<h2 id="inverter-capacitance">Inverter capacitance</h2>
@@ -8468,6 +8529,75 @@ href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemY
       <categories>
         <category>analog</category>
       </categories>
+  </entry>
+  <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>integrator</tag>
+        <tag>ota</tag>
+        <tag>slew rate</tag>
+        <tag>bandwidth</tag>
+      </tags>
   </entry>
   <entry>
     <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
@@ -9331,6 +9461,34 @@ Solid-State Circuits Magazine, Vol. 12, Issue 4, to appear, Fall
       </tags>
   </entry>
   <entry>
+    <title>Leakage in MOS</title>
+    <url>/2023/06/22/leakage-mos/</url>
+    <content><![CDATA[<p><img src="/2023/06/22/leakage-mos/image-20230812104737404.png"
+alt="image-20230812104737404" /></p>
+<h2 id="reference">reference</h2>
+<p>W. M. Elgharbawy and M. A. Bayoumi, "Leakage sources and possible
+solutions in nanometer CMOS technologies," in IEEE Circuits and Systems
+Magazine, vol. 5, no. 4, pp. 6-17, Fourth Quarter 2005, doi:
+10.1109/MCAS.2005.1550165.</p>
+<p>X. Qi et al., "Efficient subthreshold leakage current optimization -
+Leakage current optimization and layout migration for 90- and 65- nm
+ASIC libraries," in IEEE Circuits and Devices Magazine, vol. 22, no. 5,
+pp. 39-47, Sept.-Oct. 2006, doi: 10.1109/MCD.2006.272999.</p>
+<p>P. Monsurró, S. Pennisi, G. Scotti and A. Trifiletti, "Exploiting the
+Body of MOS Devices for High Performance Analog Design," in IEEE
+Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter
+2011, doi: 10.1109/MCAS.2011.942751.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>leakage</tag>
+        <tag>dibl</tag>
+        <tag>gidl</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CDR Linear Model</title>
     <url>/2022/05/04/linear-cdr/</url>
     <content><![CDATA[<p><img src="/2022/05/04/linear-cdr/image-20220504101924272.png"
@@ -9506,34 +9664,6 @@ doi: 10.1109/CICC.2019.8780223.</p>
       <categories>
         <category>analog</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Leakage in MOS</title>
-    <url>/2023/06/22/leakage-mos/</url>
-    <content><![CDATA[<p><img src="/2023/06/22/leakage-mos/image-20230812104737404.png"
-alt="image-20230812104737404" /></p>
-<h2 id="reference">reference</h2>
-<p>W. M. Elgharbawy and M. A. Bayoumi, "Leakage sources and possible
-solutions in nanometer CMOS technologies," in IEEE Circuits and Systems
-Magazine, vol. 5, no. 4, pp. 6-17, Fourth Quarter 2005, doi:
-10.1109/MCAS.2005.1550165.</p>
-<p>X. Qi et al., "Efficient subthreshold leakage current optimization -
-Leakage current optimization and layout migration for 90- and 65- nm
-ASIC libraries," in IEEE Circuits and Devices Magazine, vol. 22, no. 5,
-pp. 39-47, Sept.-Oct. 2006, doi: 10.1109/MCD.2006.272999.</p>
-<p>P. Monsurró, S. Pennisi, G. Scotti and A. Trifiletti, "Exploiting the
-Body of MOS Devices for High Performance Analog Design," in IEEE
-Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter
-2011, doi: 10.1109/MCAS.2011.942751.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>leakage</tag>
-        <tag>dibl</tag>
-        <tag>gidl</tag>
-      </tags>
   </entry>
   <entry>
     <title>Long-Term Jitter</title>
@@ -9905,6 +10035,24 @@ Processing</a></p>
       </categories>
   </entry>
   <entry>
+    <title>Maximum Likelihood Sequence Estimation (MLSE Equalizer)</title>
+    <url>/2023/08/12/mlse/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
+Sheikholeslami, "Design and Implementation of an On-Demand
+Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
+Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
+10.1109/OJCAS.2022.3173686.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>mlse</tag>
+        <tag>viterbi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MOM cap of wo_mx</title>
     <url>/2023/02/20/mom-wo-mx/</url>
     <content><![CDATA[<p>Monte Carlo model:</p>
@@ -9931,24 +10079,6 @@ alt="image-20230220230331505" /></p>
       </categories>
       <tags>
         <tag>mom</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Maximum Likelihood Sequence Estimation (MLSE Equalizer)</title>
-    <url>/2023/08/12/mlse/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
-Sheikholeslami, "Design and Implementation of an On-Demand
-Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
-Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
-10.1109/OJCAS.2022.3173686.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>mlse</tag>
-        <tag>viterbi</tag>
       </tags>
   </entry>
   <entry>
@@ -11390,243 +11520,6 @@ href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMF
       </tags>
   </entry>
   <entry>
-    <title>Phase Noise and Jitter Simulation</title>
-    <url>/2023/10/21/phasenoise-jitter/</url>
-    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
-<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
-<ol type="1">
-<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
-alt="image-20220511112856934" /></p></li>
-<li><p>manually calculate by definition</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
-alt="image-20220511112806122" /></p></li>
-<li><p><code>output noise</code> with unit <code>dBc</code></p>
-<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
-convention: SSB</em></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
-alt="image-20220511113248984" /></p></li>
-</ol>
-<blockquote>
-<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
-simulation,</p>
-</blockquote>
-<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
-sampled(jitter)/Edge Crossing</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
-alt="EdgePhaseNoise.drawio" /></p>
-<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
-alt="image-20220515214901120" /></p>
-<p>Another way, the following equation can also be used for
-<code>sampled(jitter)/Edge Crossing</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
-<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
-alt="image-20220511150337318" /></p>
-<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
-sampled(jitter) pnoise</h3>
-<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
-obtained by <em>transient noise simulation</em></p>
-<p>The idea is that sample waveform with ideal clock, subtract DC
-offset, then fft(psd)</p>
-<ul>
-<li>samplesRaw = sample(wv)</li>
-<li>samplePost = samplesRaw - average(samplesRaw)</li>
-<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
-alt="image-20220516184543148" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
-alt="image-20220516184844296" /></p>
-<p><strong>Expression</strong>:</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
-alt="image-20220516185506348" /></p>
-<blockquote>
-<p>The computation cost is typically very high, and the accuracy is
-lesser as compared to PSS/Pnoise</p>
-</blockquote>
-<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
-Sampled(jitter): Sampled Phase Option</h2>
-<ul>
-<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
-<li>Use model:
-<ul>
-<li>Sampleds Per Period: number of ponits</li>
-<li>Add Specific Points: specific time point, still time points</li>
-</ul></li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
-alt="image-20220712085426461" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
-alt="image-20220712085836315" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
-alt="image-20220712090011204" /></p>
-<blockquote>
-<p>pss beat freq = 5GHz</p>
-<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
-</blockquote>
-<h2 id="transient-noise">Transient noise</h2>
-<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h3>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
-function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
-<code>psd</code> and <code>abs_jitter</code> function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h4 id="comparison">Comparison</h4>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h3 id="rms-value">RMS value</h3>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h3 id="remarks">Remarks</h3>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Periodic Analysis</title>
     <url>/2023/10/28/periodic/</url>
     <content><![CDATA[<h1 id="pss-and-hb-overview">PSS and HB Overview</h1>
@@ -11857,7 +11750,7 @@ complex conjugate pairs</p>
 <p>The <strong>frequency-domain</strong> currents and voltages in a
 <strong>time-varying</strong> circuit element are related by a
 <strong>conversion matrix</strong></p>
-<p>The small-signal voltage and current can be expressed in the
+<p>The <em>small-signal</em> voltage and current can be expressed in the
 frequency notation as <span class="math display">\[
 v&#39;(t) = \sum_{n=-\infty}^{\infty}V_ne^{j\omega_nt}
 \]</span> and <span class="math display">\[
@@ -11869,7 +11762,7 @@ Fourier series, which includes only half of the mixing frequencies</p>
 can be expressed by its <strong>Fourier series</strong> <span
 class="math display">\[
 g(t)=\sum_{n=-\infty}^{\infty}G_ne^{jn\omega_pt}
-\]</span> Which is harmonics of large-signal <span
+\]</span> Which is harmonics of <em>large-signal</em> <span
 class="math inline">\(\omega_p\)</span></p>
 <p>Then the voltage and current are related by Ohm's law <span
 class="math display">\[
@@ -12184,6 +12077,243 @@ Sons. https://doi.org/10.1002/9780470634455</p>
 <p>B. Boser,A. Niknejad ,S.Gambin 2011 EECS 240 Topic 6: Noise Analysis
 [<a
 href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pdf">https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Phase Noise and Jitter Simulation</title>
+    <url>/2023/10/21/phasenoise-jitter/</url>
+    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
+<p>The phase noise does not affect the total power in the signal, it
+only affects its distribution.</p>
+<ul>
+<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
+a series of impulse functions at the harmonics of <span
+class="math inline">\(f_o\)</span>.</li>
+<li>With phase noise, the impulse functions spread, becoming fatter and
+shorter but retaining the same total power</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
+alt="image-20231029164227587" /></p>
+<blockquote>
+<p><strong>line width</strong>: corner frequency <span
+class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
+</blockquote>
+<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
+<p>A more precise analysis shows that the spectrum of a free-running
+oscillator does indeed have a Lorentian profile:</p>
+<ol type="1">
+<li>it is <strong>flat</strong> for frequencies below a given corner
+frequency</li>
+<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
+it.</li>
+</ol>
+<p>The spectrum of the signal <span class="math inline">\(x(t +
+α(t))\)</span> can be expressed as <span class="math display">\[
+S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
+c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
+\]</span> The integral in above equation around each harmonic is equal
+to the power of the harmonic itself <span class="math inline">\(\left|
+X_n \right|^2\)</span></p>
+<p>This means that the <strong>excess phase noise</strong>
+<strong>DONT</strong> change the energy of the signal; it just spreads
+its energy over the frequency spectrum, blurring the very sharp
+frequency impulse of an ideal noiseless oscillator.</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
+alt="image-20220504130750290" /></p>
+<h2 id="vco-varactor">VCO varactor</h2>
+<blockquote>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+</blockquote>
+<h3 id="pss-pac">PSS + PAC</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h3 id="pss-psp">PSS + PSP</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h3 id="results">results</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<blockquote>
+<p>which are same</p>
+</blockquote>
+<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h3>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
+Sampled(jitter): Sampled Phase Option</h2>
+<ul>
+<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
+<li>Use model:
+<ul>
+<li>Sampleds Per Period: number of ponits</li>
+<li>Add Specific Points: specific time point, still time points</li>
+</ul></li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
+alt="image-20220712085426461" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
+alt="image-20220712085836315" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
+alt="image-20220712090011204" /></p>
+<blockquote>
+<p>pss beat freq = 5GHz</p>
+<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
+</blockquote>
+<h2 id="transient-noise">Transient noise</h2>
+<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h3>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
+function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
+<code>psd</code> and <code>abs_jitter</code> function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h4 id="comparison">Comparison</h4>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h3 id="rms-value">RMS value</h3>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h3 id="remarks">Remarks</h3>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
 ]]></content>
       <categories>
         <category>noise</category>
@@ -13553,24 +13683,6 @@ running kernel:</p>
       </tags>
   </entry>
   <entry>
-    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
-    <url>/2022/02/02/rocky8-cadence/</url>
-    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
-<p><strong>library preparation for EDA installation</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>yum</tag>
-        <tag>os</tag>
-        <tag>rpm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>network connection using nmcli</title>
     <url>/2022/04/01/rocky-nmcli-network/</url>
     <content><![CDATA[<h4 id="problem">Problem</h4>
@@ -13592,6 +13704,24 @@ alt="image-20220401011543866" /></p>
       </categories>
       <tags>
         <tag>nmcli</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
+    <url>/2022/02/02/rocky8-cadence/</url>
+    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
+<p><strong>library preparation for EDA installation</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>yum</tag>
+        <tag>os</tag>
+        <tag>rpm</tag>
       </tags>
   </entry>
   <entry>
@@ -14446,104 +14576,6 @@ href="https://shar.es/afO6e1">https://shar.es/afO6e1</a></p>
       </tags>
   </entry>
   <entry>
-    <title>maximum oscillation frequency of multi-paths ring oscillator</title>
-    <url>/2022/03/20/spro-mpro/</url>
-    <content><![CDATA[<p>A conventional inverter-based ring oscillator consists of a single
-loop of an <strong>odd</strong> number of inverters. While compact, easy
-to design and tunable over a wide frequency range, this oscillator
-suffers from several limitations.</p>
-<ul>
-<li>it is not possible to increase the number of phases while
-maintaining the same oscillation frequency since the frequency is
-inversely proportional to the number of inverters in the loop. In other
-words, the time resolution of the oscillator is limited to one inverter
-delay and cannot be improved below this limit.</li>
-<li>the number of phases that can be obtained from this oscillator is
-limited to <strong>odd</strong> values. Otherwise, if an even number of
-inverters is used, the circuit remains in <em>a latched state</em> and
-does not oscillate.</li>
-</ul>
-<p>To overcome the limitations of conventional ring oscillators,
-multi-paths ring oscillator (MPRO) is proposed. Each phase can be driven
-by two or more inverters, or <em>multi-paths</em> instead of having each
-phase in oscillator driven by a single inverter, or <em>single
-path</em>.</p>
-<p>One thing that makes the MPRO design problem even more complicated is
-its property of having <strong>multiple possible oscillation
-modes</strong>. Without a clear understanding of what makes one of these
-modes dominant, it is very likely that a designer might end-up having an
-oscillator that can start-up each time in a different oscillation mode
-depending on the <em>initial state of the oscillator</em>.</p>
-<p><img src="/2022/03/20/spro-mpro/image-20220320155440541.png"
-alt="image-20220320155440541" /></p>
-<p>In practive, the oscillator starts first from a linear mode of
-operation where all the buffers are indeed acting as linear
-transconductors. All oscillation modes that have mode gains, <span
-class="math inline">\(a_n\)</span>, lower than the actual dc gain of the
-inverter, <span class="math inline">\(a_0\)</span>, start to grow.
-<em>As the oscillation amplitude grows, the effective gain of the
-inverter drops due to nonlinearity</em>. Consequently, modes with higher
-mode gain die out and only the mode that requires the minimum gain
-continues to oscillate and hence is the dominant mode.</p>
-<blockquote>
-<p>The dominant mode is dependent only on the relative sizing vector</p>
-</blockquote>
-<h4 id="maximum-oscillation-frequency">maximum oscillation
-frequency</h4>
-<p>The oscillation frequency of the dominant mode of any MPRO having any
-arbitrary coupling structure and number of phases is <span
-class="math display">\[
-f_{n^*} = \frac {1}{2\pi}\frac {(a_0-1) \cdot \sum_{i=1}^{N}x_isin\left
-( \frac {2\pi n^*(i-1)}{N} \right)}{(a_0\tau _p - \tau _o)\cdot
-\sum_{i=1}^{N}-x_icos\left( \frac{2\pi n^*(i-1)}{N}+(\tau _o - \tau _p)
-\right)}
-\]</span> <img src="/2022/03/20/spro-mpro/image-20220320172952925.png"
-alt="image-20220320172952925" /></p>
-<p>A <strong>linear increase</strong> in the maximum possible normalized
-oscillation frequency as the number of stages increases <em>provided
-that the dc gain of the buffer sufficient to provide the required
-amplification</em></p>
-<p><img src="/2022/03/20/spro-mpro/image-20220320170324494.png"
-alt="image-20220320170324494" /></p>
-<p><img src="/2022/03/20/spro-mpro/image-20220320170523390.png"
-alt="image-20220320170523390" /></p>
-<blockquote>
-<p>assuming unlimited dc gain and zero mode gain margins</p>
-</blockquote>
-<h4 id="mode-stability">mode stability</h4>
-<p>A common problem in MPRO design is the stability of the dominant
-oscillation mode. Mode stability refers to whether the MPRO always
-oscillates at the same mode regardless of the initial conditions of the
-oscillator. This problem is especially pronounced for MPROs with a large
-number of phases. This is due to the existence of many modes and the
-very small differences in the value of the mode gain of adjacent modes
-if the MPRO is not well designed.</p>
-<blockquote>
-<p>In general, when the mode gain difference between two modes is small,
-the oscillator can operate in either one depending on initial
-conditions.</p>
-</blockquote>
-<h4 id="coupling-configurations-and-simulation-results">coupling
-configurations and simulation results</h4>
-<p><img src="/2022/03/20/spro-mpro/image-20220320165217231.png"
-alt="image-20220320165217231" /></p>
-<h4 id="reference">reference</h4>
-<p>Abou-El-Sonoun, A. A. (2012). High Frequency Multiphase Clock
-Generation Using Multipath Oscillators and Applications. <em>UCLA</em>.
-ProQuest ID: AbouElSonoun_ucla_0031D_10684. Merritt ID:
-ark:/13030/m57p9288. Retrieved from
-https://escholarship.org/uc/item/75g8j8jt</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>ring oscillator</tag>
-        <tag>mpro</tag>
-        <tag>spro</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model</title>
     <url>/2022/03/09/spf-complex-pwl/</url>
     <content><![CDATA[<p><strong>Real number modeling</strong> of analog circuits in hardware
@@ -14781,6 +14813,104 @@ tools regarding on analog modeling,validation, and generation</a></p>
         <tag>systemverilog</tag>
         <tag>piecewise linear</tag>
         <tag>pwl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>maximum oscillation frequency of multi-paths ring oscillator</title>
+    <url>/2022/03/20/spro-mpro/</url>
+    <content><![CDATA[<p>A conventional inverter-based ring oscillator consists of a single
+loop of an <strong>odd</strong> number of inverters. While compact, easy
+to design and tunable over a wide frequency range, this oscillator
+suffers from several limitations.</p>
+<ul>
+<li>it is not possible to increase the number of phases while
+maintaining the same oscillation frequency since the frequency is
+inversely proportional to the number of inverters in the loop. In other
+words, the time resolution of the oscillator is limited to one inverter
+delay and cannot be improved below this limit.</li>
+<li>the number of phases that can be obtained from this oscillator is
+limited to <strong>odd</strong> values. Otherwise, if an even number of
+inverters is used, the circuit remains in <em>a latched state</em> and
+does not oscillate.</li>
+</ul>
+<p>To overcome the limitations of conventional ring oscillators,
+multi-paths ring oscillator (MPRO) is proposed. Each phase can be driven
+by two or more inverters, or <em>multi-paths</em> instead of having each
+phase in oscillator driven by a single inverter, or <em>single
+path</em>.</p>
+<p>One thing that makes the MPRO design problem even more complicated is
+its property of having <strong>multiple possible oscillation
+modes</strong>. Without a clear understanding of what makes one of these
+modes dominant, it is very likely that a designer might end-up having an
+oscillator that can start-up each time in a different oscillation mode
+depending on the <em>initial state of the oscillator</em>.</p>
+<p><img src="/2022/03/20/spro-mpro/image-20220320155440541.png"
+alt="image-20220320155440541" /></p>
+<p>In practive, the oscillator starts first from a linear mode of
+operation where all the buffers are indeed acting as linear
+transconductors. All oscillation modes that have mode gains, <span
+class="math inline">\(a_n\)</span>, lower than the actual dc gain of the
+inverter, <span class="math inline">\(a_0\)</span>, start to grow.
+<em>As the oscillation amplitude grows, the effective gain of the
+inverter drops due to nonlinearity</em>. Consequently, modes with higher
+mode gain die out and only the mode that requires the minimum gain
+continues to oscillate and hence is the dominant mode.</p>
+<blockquote>
+<p>The dominant mode is dependent only on the relative sizing vector</p>
+</blockquote>
+<h4 id="maximum-oscillation-frequency">maximum oscillation
+frequency</h4>
+<p>The oscillation frequency of the dominant mode of any MPRO having any
+arbitrary coupling structure and number of phases is <span
+class="math display">\[
+f_{n^*} = \frac {1}{2\pi}\frac {(a_0-1) \cdot \sum_{i=1}^{N}x_isin\left
+( \frac {2\pi n^*(i-1)}{N} \right)}{(a_0\tau _p - \tau _o)\cdot
+\sum_{i=1}^{N}-x_icos\left( \frac{2\pi n^*(i-1)}{N}+(\tau _o - \tau _p)
+\right)}
+\]</span> <img src="/2022/03/20/spro-mpro/image-20220320172952925.png"
+alt="image-20220320172952925" /></p>
+<p>A <strong>linear increase</strong> in the maximum possible normalized
+oscillation frequency as the number of stages increases <em>provided
+that the dc gain of the buffer sufficient to provide the required
+amplification</em></p>
+<p><img src="/2022/03/20/spro-mpro/image-20220320170324494.png"
+alt="image-20220320170324494" /></p>
+<p><img src="/2022/03/20/spro-mpro/image-20220320170523390.png"
+alt="image-20220320170523390" /></p>
+<blockquote>
+<p>assuming unlimited dc gain and zero mode gain margins</p>
+</blockquote>
+<h4 id="mode-stability">mode stability</h4>
+<p>A common problem in MPRO design is the stability of the dominant
+oscillation mode. Mode stability refers to whether the MPRO always
+oscillates at the same mode regardless of the initial conditions of the
+oscillator. This problem is especially pronounced for MPROs with a large
+number of phases. This is due to the existence of many modes and the
+very small differences in the value of the mode gain of adjacent modes
+if the MPRO is not well designed.</p>
+<blockquote>
+<p>In general, when the mode gain difference between two modes is small,
+the oscillator can operate in either one depending on initial
+conditions.</p>
+</blockquote>
+<h4 id="coupling-configurations-and-simulation-results">coupling
+configurations and simulation results</h4>
+<p><img src="/2022/03/20/spro-mpro/image-20220320165217231.png"
+alt="image-20220320165217231" /></p>
+<h4 id="reference">reference</h4>
+<p>Abou-El-Sonoun, A. A. (2012). High Frequency Multiphase Clock
+Generation Using Multipath Oscillators and Applications. <em>UCLA</em>.
+ProQuest ID: AbouElSonoun_ucla_0031D_10684. Merritt ID:
+ark:/13030/m57p9288. Retrieved from
+https://escholarship.org/uc/item/75g8j8jt</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>ring oscillator</tag>
+        <tag>mpro</tag>
+        <tag>spro</tag>
       </tags>
   </entry>
   <entry>
@@ -15845,6 +15975,12 @@ FIFOs</p>
       </categories>
   </entry>
   <entry>
+    <title>tmp</title>
+    <url>/2023/11/14/tmp/</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>DC operating points during TRANSIENT analysis</title>
     <url>/2023/10/06/tranOP/</url>
     <content><![CDATA[<blockquote>
@@ -15953,35 +16089,6 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
       </tags>
   </entry>
   <entry>
-    <title>UVM project topology</title>
-    <url>/2022/03/21/uvm-proj-topo/</url>
-    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
-files</em></p>
-<p>Classes can only be compiled from a <em>module</em> or <em>package
-scope</em></p>
-<p>Recommendation:</p>
-<ul>
-<li>Include related class files into a package</li>
-<li>Import the package into modules where required</li>
-</ul>
-<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
-<ul>
-<li>Import package to access library</li>
-<li>The macro file <code>uvm_macros.svh</code> must be included
-separately</li>
-</ul>
-<p>yapp_packet.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
-<p>yapp_pkg.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
-<p>run.f for <code>xrun</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Debug topology and Check config usage in UVM</title>
     <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
     <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
@@ -16015,6 +16122,35 @@ top-down)</li>
 <li><strong>Tasks</strong> are forked into concurrent executing
 threads</li>
 </ul>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UVM project topology</title>
+    <url>/2022/03/21/uvm-proj-topo/</url>
+    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
+files</em></p>
+<p>Classes can only be compiled from a <em>module</em> or <em>package
+scope</em></p>
+<p>Recommendation:</p>
+<ul>
+<li>Include related class files into a package</li>
+<li>Import the package into modules where required</li>
+</ul>
+<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
+<ul>
+<li>Import package to access library</li>
+<li>The macro file <code>uvm_macros.svh</code> must be included
+separately</li>
+</ul>
+<p>yapp_packet.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
+<p>yapp_pkg.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
+<p>run.f for <code>xrun</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -16505,94 +16641,6 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       </categories>
   </entry>
   <entry>
-    <title>Different Variants of the PSD Definition</title>
-    <url>/2023/06/03/variants-def-psd/</url>
-    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
-slightly different variants of the PSD definition, depending on the
-particular application or research field.</p>
-<ul>
-<li><p><strong>Two-Sided PSD</strong>, <span
-class="math inline">\(S_x(f)\)</span></p>
-<p>this is a synonym of the PSD defined as the Fourier Transform of the
-<strong>autocorrelation</strong>.</p></li>
-<li><p><strong>One-Sided PSD</strong>, <span
-class="math inline">\(S&#39;_x(f)\)</span></p>
-<p>this is a variant derived from the <em>two-sided PSD</em> by
-considering only the <em>positive frequency</em> semi-axis.</p>
-<p>To <strong>conserve the total power</strong>, the value of the
-one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
-class="math display">\[
-S&#39;_x(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_x(f) &amp; : \ f = 0 \\
-2S_x(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
-alt="image-20230603185546658" /></p>
-<blockquote>
-<p>Note that the one-sided PSD definition makes sense only if the
-two-sided is an even function of <span
-class="math inline">\(f\)</span></p>
-</blockquote>
-<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
-symmetrical around a positive frequency <span
-class="math inline">\(f_0\)</span>, then two additional definitions can
-be adopted:</p>
-<ul>
-<li><p><strong>Single-Sideband PSD</strong>, <span
-class="math inline">\(S_{SSB,x}(f)\)</span></p>
-<p>This is obtained from <span
-class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
-frequency axis to <span class="math inline">\(f_0\)</span> <span
-class="math display">\[
-S_{SSB,x}(f) =S&#39;_x(f+f_0)
-\]</span> This concept is particularly useful for describing phase or
-amplitude modulation schemes in wireless communications, where <span
-class="math inline">\(f_0\)</span> is the carrier frequency.</p>
-<blockquote>
-<p>Note that there is no difference in the values of the one-sided
-versus the SSB PSD; it is just a pure translation on the frequency
-axis.</p>
-</blockquote></li>
-<li><p><strong>Double-Sideband PSD</strong>, <span
-class="math inline">\(S_{DSB,x}(f)\)</span></p>
-<p>this is a variant of the SSB PSD obtained by considering only the
-positive frequency semi-axis.</p>
-<p>As in the case of the one-sided PSD, to conserve total power, the
-value of the DSB PSD is twice that of the SSB <span
-class="math display">\[
-S_{DSB,x}(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_{SSB,x}(f) &amp; : \ f = 0 \\
-2S_{SSB,x}(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
-alt="image-20230603222054506" /></p>
-<blockquote>
-<p>Note that the DSB definition makes sense only if the SSB PSD is even
-symmetrical around zero</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
-and phase noise: A circuits and systems perspective. Cambridge
-University Press.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>psd</tag>
-        <tag>two-sided</tag>
-        <tag>one-sided</tag>
-        <tag>ssb</tag>
-        <tag>dsb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UVM REG RALF &amp; IP-XACT</title>
     <url>/2022/03/14/uvm-reg-ralf/</url>
     <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
@@ -16751,6 +16799,94 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Different Variants of the PSD Definition</title>
+    <url>/2023/06/03/variants-def-psd/</url>
+    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
+slightly different variants of the PSD definition, depending on the
+particular application or research field.</p>
+<ul>
+<li><p><strong>Two-Sided PSD</strong>, <span
+class="math inline">\(S_x(f)\)</span></p>
+<p>this is a synonym of the PSD defined as the Fourier Transform of the
+<strong>autocorrelation</strong>.</p></li>
+<li><p><strong>One-Sided PSD</strong>, <span
+class="math inline">\(S&#39;_x(f)\)</span></p>
+<p>this is a variant derived from the <em>two-sided PSD</em> by
+considering only the <em>positive frequency</em> semi-axis.</p>
+<p>To <strong>conserve the total power</strong>, the value of the
+one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
+class="math display">\[
+S&#39;_x(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_x(f) &amp; : \ f = 0 \\
+2S_x(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
+alt="image-20230603185546658" /></p>
+<blockquote>
+<p>Note that the one-sided PSD definition makes sense only if the
+two-sided is an even function of <span
+class="math inline">\(f\)</span></p>
+</blockquote>
+<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
+symmetrical around a positive frequency <span
+class="math inline">\(f_0\)</span>, then two additional definitions can
+be adopted:</p>
+<ul>
+<li><p><strong>Single-Sideband PSD</strong>, <span
+class="math inline">\(S_{SSB,x}(f)\)</span></p>
+<p>This is obtained from <span
+class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
+frequency axis to <span class="math inline">\(f_0\)</span> <span
+class="math display">\[
+S_{SSB,x}(f) =S&#39;_x(f+f_0)
+\]</span> This concept is particularly useful for describing phase or
+amplitude modulation schemes in wireless communications, where <span
+class="math inline">\(f_0\)</span> is the carrier frequency.</p>
+<blockquote>
+<p>Note that there is no difference in the values of the one-sided
+versus the SSB PSD; it is just a pure translation on the frequency
+axis.</p>
+</blockquote></li>
+<li><p><strong>Double-Sideband PSD</strong>, <span
+class="math inline">\(S_{DSB,x}(f)\)</span></p>
+<p>this is a variant of the SSB PSD obtained by considering only the
+positive frequency semi-axis.</p>
+<p>As in the case of the one-sided PSD, to conserve total power, the
+value of the DSB PSD is twice that of the SSB <span
+class="math display">\[
+S_{DSB,x}(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_{SSB,x}(f) &amp; : \ f = 0 \\
+2S_{SSB,x}(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
+alt="image-20230603222054506" /></p>
+<blockquote>
+<p>Note that the DSB definition makes sense only if the SSB PSD is even
+symmetrical around zero</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
+and phase noise: A circuits and systems perspective. Cambridge
+University Press.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>psd</tag>
+        <tag>two-sided</tag>
+        <tag>one-sided</tag>
+        <tag>ssb</tag>
+        <tag>dsb</tag>
+      </tags>
   </entry>
   <entry>
     <title>Process Variation</title>
@@ -17245,27 +17381,6 @@ href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485
       </tags>
   </entry>
   <entry>
-    <title>Design Variable in analogLib-vpwlf</title>
-    <url>/2022/05/14/vpwlf-designvar/</url>
-    <content><![CDATA[<p><code>PWL File as Design Var?</code> parameter in <em>vpwlf</em> cell
-is convenient for sweep simulation or corner simulation, wherein there
-are multiple pwl files .</p>
-<p><img src="/2022/05/14/vpwlf-designvar/image-20220514121048124.png"
-alt="image-20220514121048124" /></p>
-<p>The file path should be surrounded with
-<strong>double-quotes</strong> to be protected from evaluation.</p>
-<p><img src="/2022/05/14/vpwlf-designvar/image-20220514121150988.png"
-alt="image-20220514121150988" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-        <tag>pwl</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Voltage-Mode Driver Equalization</title>
     <url>/2022/07/09/vm-drv-eq/</url>
     <content><![CDATA[<h2 id="vm-driver-equalization---differential-ended-termination">VM
@@ -17449,99 +17564,36 @@ Data Communications</p>
       </tags>
   </entry>
   <entry>
-    <title>wire</title>
-    <url>/2023/05/20/wire/</url>
-    <content><![CDATA[<h2 id="delay">delay</h2>
-<h3 id="the-elmore-delay">The Elmore Delay</h3>
-<p><img src="/2023/05/20/wire/image-20230624234813719.png"
-alt="image-20230624234813719" /></p>
-<p><img src="/2023/05/20/wire/image-20230624234940864.png"
-alt="image-20230624234940864" /></p>
-<p><img src="/2023/05/20/wire/image-20230625001756173.png"
-alt="image-20230625001756173" /></p>
-<blockquote>
-<p>Basic idea: use of <strong>mean</strong> of <span
-class="math inline">\(v&#39;(t)\)</span> to approximate
-<strong>median</strong> of <span
-class="math inline">\(v&#39;(t)\)</span></p>
-</blockquote>
-<p><img src="/2023/05/20/wire/image-20230624235148246.png"
-alt="image-20230624235148246" /></p>
-<p><img src="/2023/05/20/wire/image-20230625002239199.png"
-alt="image-20230625002239199" /></p>
-<blockquote>
-<p>Elmore delay approximates the <strong>median</strong> of <span
-class="math inline">\(h(t)\)</span> by the <strong>mean</strong> of
-<span class="math inline">\(h(t)\)</span></p>
-</blockquote>
-<h3 id="distributed-rc-line">Distributed RC-Line</h3>
-<p><img src="/2023/05/20/wire/image-20230624224005736.png"
-alt="image-20230624224005736" /></p>
-<h3 id="lumped-approximations">Lumped approximations</h3>
-<h4 id="rc-models"><span class="math inline">\(rc\)</span>-models</h4>
-<p>If your simulator does not support a distributed <span
-class="math inline">\(rc\)</span>-model, or if the computational
-complexity of these models slows down your simulation too much, you can
-construct a simple yet accurate model yourself by approximating the
-distributed <span class="math inline">\(rc\)</span> by a lumped RC
-network with a limited number of elements</p>
-<p><img src="/2023/05/20/wire/image-20230624230057265.png"
-alt="image-20230624230057265" /></p>
-<blockquote>
-<p>The accuracy of the model is determined by the number of stages. For
-instance, the error of the <span class="math inline">\(\Pi -3\)</span>
-model is less than 3%, which is generally sufficient.</p>
-</blockquote>
-<h4 id="why-use-pi-model">Why use "<span
-class="math inline">\(\Pi\)</span> Model"</h4>
-<p><img src="/2023/05/20/wire/image-20230624230800255.png"
-alt="image-20230624230800255" /></p>
-<h4 id="examples">examples</h4>
-<p><img src="/2023/05/20/wire/image-20230624224643487.png"
-alt="image-20230624224643487" /></p>
-<p><img src="/2023/05/20/wire/image-20230624224923241.png"
-alt="image-20230624224923241" /></p>
-<h2 id="inductive-effect">Inductive Effect</h2>
-<ul>
-<li>RC delay increases quadratically with length</li>
-<li>LC delay (speed of light flight time) increases linearly with
-length</li>
-</ul>
-<blockquote>
-<p>Inductance will only be important to the delay of low-resistance
-signals such as wide clock lines</p>
-</blockquote>
-<h3 id="wave">wave</h3>
-<p>Signal propagates over the wire as a <strong>wave</strong> (rather
-than <strong>diffusing</strong> as in <span
-class="math inline">\(rc\)</span> only models)</p>
-<blockquote>
-<p>Signal propagates by alternately transferring energy from capacitive
-to inductive modes</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Akio Kitagawa, Analog layout design <a
-href="https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf">https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf</a></p>
-<p>THE WIRE <a
-href="http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf">http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf</a></p>
-<p>Anoop Veliyath, Design Engineer, Cadence Design Systems. Accurately
-Modeling Transmission Line Behavior with an LC Network-based Approach
-[<a
-href="https://www.pspice.com/sites/default/files/Transmission_Line_Modeling.pdf">pdf</a>]</p>
-<p>Mark Horowitz. Lecture 2: Wires and Wire Models [<a
-href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_02.pdf">pdf</a>]</p>
-<p>Neil Weste and David Harris. 2010. CMOS VLSI Design: A Circuits and
-Systems Perspective (4th. ed.). Addison-Wesley Publishing Company,
-USA.</p>
-<p>Cheng-Kok Koh. EE695K Modeling and Optimization of High Performance
-Interconnect [<a
-href="https://engineering.purdue.edu/~chengkok/ee695K/lec3a.pdf">lec3a_pdf</a>]</p>
+    <title>Design Variable in analogLib-vpwlf</title>
+    <url>/2022/05/14/vpwlf-designvar/</url>
+    <content><![CDATA[<p><code>PWL File as Design Var?</code> parameter in <em>vpwlf</em> cell
+is convenient for sweep simulation or corner simulation, wherein there
+are multiple pwl files .</p>
+<p><img src="/2022/05/14/vpwlf-designvar/image-20220514121048124.png"
+alt="image-20220514121048124" /></p>
+<p>The file path should be surrounded with
+<strong>double-quotes</strong> to be protected from evaluation.</p>
+<p><img src="/2022/05/14/vpwlf-designvar/image-20220514121150988.png"
+alt="image-20220514121150988" /></p>
 ]]></content>
       <categories>
-        <category>analog</category>
+        <category>cad</category>
       </categories>
       <tags>
-        <tag>elmore</tag>
+        <tag>virtuoso</tag>
+        <tag>pwl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Crosstalk</title>
+    <url>/2023/09/16/xtalk/</url>
+    <content><![CDATA[<h2 id="references">references</h2>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>si</tag>
       </tags>
   </entry>
   <entry>
@@ -17624,18 +17676,6 @@ href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-desig
         <tag>fir</tag>
         <tag>eq</tag>
         <tag>dtft</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Crosstalk</title>
-    <url>/2023/09/16/xtalk/</url>
-    <content><![CDATA[<h2 id="references">references</h2>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>si</tag>
       </tags>
   </entry>
   <entry>

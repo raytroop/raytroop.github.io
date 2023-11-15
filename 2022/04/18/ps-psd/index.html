@@ -30,15 +30,15 @@
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/rtaImage.png">
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/amplitude-correction.png">
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/energey-correction.png">
-<meta property="og:image" content="http://example.com/2022/04/18/ps-psd/image-20230525011604685.png">
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/image-20220518002927545.png">
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/figure%203_99153.png">
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/image-20220420013255660.png">
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/image-20230526011628682.png">
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/complexDFT_Matlab_index.png">
 <meta property="og:image" content="http://example.com/2022/04/18/ps-psd/FFTshift_Matlab_index_resolved.png">
+<meta property="og:image" content="http://example.com/2022/04/18/ps-psd/image-20230525011604685.png">
 <meta property="article:published_time" content="2022-04-18T23:53:29.000Z">
-<meta property="article:modified_time" content="2023-11-15T01:20:13.893Z">
+<meta property="article:modified_time" content="2023-11-15T02:02:33.965Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2022/04/18/ps-psd/image-20220427220639646.png">
@@ -151,7 +151,8 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#scaling-dft-results"><span class="nav-number">1.</span> <span class="nav-text">scaling DFT results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-effects"><span class="nav-number">2.</span> <span class="nav-text">window effects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amplitude-correction"><span class="nav-number">2.1.</span> <span class="nav-text">Amplitude correction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#power-correction"><span class="nav-number">2.2.</span> <span class="nav-text">Power correction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-correction-factors"><span class="nav-number">2.3.</span> <span class="nav-text">Window Correction Factors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amplitudepower-correction-example"><span class="nav-number">2.4.</span> <span class="nav-text">Amplitude,Power Correction
-Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rms"><span class="nav-number">3.</span> <span class="nav-text">RMS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dft-averaging"><span class="nav-number">4.</span> <span class="nav-text">DFT averaging</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fftshift"><span class="nav-number">5.</span> <span class="nav-text">fftshift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
+Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rms"><span class="nav-number">3.</span> <span class="nav-text">RMS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dft-averaging"><span class="nav-number">4.</span> <span class="nav-text">DFT averaging</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fftshift"><span class="nav-number">5.</span> <span class="nav-text">fftshift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dft-and-psd-function-in-virtuoso"><span class="nav-number">6.</span> <span class="nav-text">dft and
+psd function in virtuoso</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -246,7 +247,7 @@ Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 01:20:13" itemprop="dateModified" datetime="2023-11-15T01:20:13+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -529,22 +530,6 @@ the <em>area</em> under the curve the same for both the original signal
 <p><strong>hanning</strong>'s correction factors:</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">256</span>;</span><br><span class="line">w = hanning(N);</span><br><span class="line">Ka = N/sum(w)</span><br><span class="line">Ke = <span class="built_in">sqrt</span>(N/sum(w.^<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Ka =</span><br><span class="line"></span><br><span class="line">    1.9922</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ke =</span><br><span class="line"></span><br><span class="line">    1.6298</span><br></pre></td></tr></table></figure>
-<p><strong>!!! Caution</strong>: <code>dft</code> and <code>psd</code>
-function in virtuoso</p>
-<ul>
-<li><p><code>dft</code> always return</p>
-<p><img src="/2022/04/18/ps-psd/image-20230525011604685.png"
-alt="image-20230525011604685" /></p></li>
-</ul>
-<p>To compensate windowing effect, <span
-class="math inline">\(W(n)\)</span>, the <code>dft</code> output should
-be multiplied by <span class="math inline">\(K_a\)</span>, e.g. 1.9922
-for hanning window.</p>
-<ul>
-<li><code>psd</code> function has taken into account <span
-class="math inline">\(K_e\)</span>, postprocessing is
-<strong>not</strong> needed</li>
-</ul>
 <h3 id="amplitudepower-correction-example">Amplitude,Power Correction
 Example</h3>
 <p><img src="/2022/04/18/ps-psd/image-20220518002927545.png"
@@ -642,6 +627,22 @@ alt="complexDFT_Matlab_index" /></p>
 <p><img src="/2022/04/18/ps-psd/FFTshift_Matlab_index_resolved.png"
 alt="FFTshift_Matlab_index_resolved" /></p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; fftshift([<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">     <span class="number">4</span>     <span class="number">5</span>     <span class="number">6</span>     <span class="number">1</span>     <span class="number">2</span>     <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="dft-and-psd-function-in-virtuoso"><code>dft</code> and
+<code>psd</code> function in virtuoso</h2>
+<ul>
+<li><p><code>dft</code> always return</p>
+<p><img src="/2022/04/18/ps-psd/image-20230525011604685.png"
+alt="image-20230525011604685" /></p></li>
+</ul>
+<p>To compensate windowing effect, <span
+class="math inline">\(W(n)\)</span>, the <code>dft</code> output should
+be multiplied by <span class="math inline">\(K_a\)</span>, e.g. 1.9922
+for hanning window.</p>
+<ul>
+<li><code>psd</code> function has taken into account <span
+class="math inline">\(K_e\)</span>, postprocessing is
+<strong>not</strong> needed</li>
+</ul>
 <h2 id="reference">reference</h2>
 <p><a
 target="_blank" rel="noopener" href="https://github.com/liangsizhuang/Demonstration-DFT-PS-PSD">Demonstration-DFT-PS-PSD</a></p>

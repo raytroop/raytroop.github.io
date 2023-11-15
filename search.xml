@@ -822,27 +822,6 @@ effect taken into consideration during delayCal</p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus check mode variants</title>
-    <url>/2022/02/07/Innovus-check-mode-variants/</url>
-    <content><![CDATA[<p>checkDesign</p>
-<p>check_timing</p>
-<p>checkPlace</p>
-<p>setDesignMode</p>
-<p>setFPlanMode</p>
-<p>setEcoMode</p>
-<p>setPlaceMode</p>
-<p>setRouteMode</p>
-<p>setExtractRCMode</p>
-<p>setOptMode</p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Innovus block level create Power Ground Pin method</title>
     <url>/2022/02/10/Innovus-block-level-PGPin/</url>
     <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
@@ -870,6 +849,27 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
+    <title>Innovus check mode variants</title>
+    <url>/2022/02/07/Innovus-check-mode-variants/</url>
+    <content><![CDATA[<p>checkDesign</p>
+<p>check_timing</p>
+<p>checkPlace</p>
+<p>setDesignMode</p>
+<p>setFPlanMode</p>
+<p>setEcoMode</p>
+<p>setPlaceMode</p>
+<p>setRouteMode</p>
+<p>setExtractRCMode</p>
+<p>setOptMode</p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Innovus Fix DRC Violation</title>
     <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
@@ -882,9 +882,9 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus global and localSkew</title>
-    <url>/2022/02/07/Innovus-global-and-localSkew/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
+    <title>Innovus Floorplan</title>
+    <url>/2022/02/07/Innovus-floorplan/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -894,9 +894,9 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Floorplan</title>
-    <url>/2022/02/07/Innovus-floorplan/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
+    <title>Innovus global and localSkew</title>
+    <url>/2022/02/07/Innovus-global-and-localSkew/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1437,6 +1437,66 @@ href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.c
       </categories>
   </entry>
   <entry>
+    <title>Precedence Rule of UVM uvm_config_db::set</title>
+    <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
+    <content><![CDATA[<p><a
+href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
+<h4 id="two-precedence-rules">Two Precedence rules</h4>
+<p>There are two precedence rules applicable to
+<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
+<ol type="1">
+<li>A <code>set()</code> call in <strong>a context higher up the
+component hierarchy</strong> takes precedence over a <code>set()</code>
+call that occurs lower in the hierarchical path.</li>
+<li>On having <strong>same context field</strong>, <strong>the
+last</strong> <code>set()</code> call takes precedence over the earlier
+<code>set()</code> call.</li>
+</ol>
+<h4 id="example-for-rule---1">Example for rule - 1</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>As you can see , the <code>uvm_config_db::set</code> is after the
+factory <code>type_id::create</code>, but <strong>receive_value</strong>
+is still <strong>100</strong>, I believe that <code>build_phase</code>
+of upper hierarchy finish first before create lower components.</p>
+<p>But the recommendation in literature and many web is place
+<code>uvm_config_db::set</code> before <code>create</code></p>
+</blockquote>
+<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.edaplayground.com/x/jgvh">[complete
+code]</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
+<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
+<p>The <code>set</code> in <code>super.build_phase</code> and
+<code>set</code> in current <code>build_phase</code> are at the
+<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
+<p>base_test</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
+<h4 id="test2---one">test2 - One</h4>
+<blockquote>
+<p><code>yapp_incr_payload_seq</code> override the
+<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
+<strong>yapp_incr_payload_seq</strong> is used.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<h4 id="test2---two">test2 - Two</h4>
+<blockquote>
+<p>the <code>yapp_5_packets</code> in
+<code>super.build_phase(phase)</code> overide
+<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
+<strong>yapp_5_packets</strong> is used</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Pole-Zero Doublets</title>
     <url>/2022/12/14/Pole-Zero-Doublets/</url>
     <content><![CDATA[<p>Mismatch between the pole and zero frequencies leads to the
@@ -1628,86 +1688,6 @@ href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7">https://youtu.be/uwRpP20
         <tag>offset</tag>
         <tag>chopping</tag>
         <tag>autozero</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Precedence Rule of UVM uvm_config_db::set</title>
-    <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
-    <content><![CDATA[<p><a
-href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
-<h4 id="two-precedence-rules">Two Precedence rules</h4>
-<p>There are two precedence rules applicable to
-<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
-<ol type="1">
-<li>A <code>set()</code> call in <strong>a context higher up the
-component hierarchy</strong> takes precedence over a <code>set()</code>
-call that occurs lower in the hierarchical path.</li>
-<li>On having <strong>same context field</strong>, <strong>the
-last</strong> <code>set()</code> call takes precedence over the earlier
-<code>set()</code> call.</li>
-</ol>
-<h4 id="example-for-rule---1">Example for rule - 1</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>As you can see , the <code>uvm_config_db::set</code> is after the
-factory <code>type_id::create</code>, but <strong>receive_value</strong>
-is still <strong>100</strong>, I believe that <code>build_phase</code>
-of upper hierarchy finish first before create lower components.</p>
-<p>But the recommendation in literature and many web is place
-<code>uvm_config_db::set</code> before <code>create</code></p>
-</blockquote>
-<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.edaplayground.com/x/jgvh">[complete
-code]</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
-<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
-<p>The <code>set</code> in <code>super.build_phase</code> and
-<code>set</code> in current <code>build_phase</code> are at the
-<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
-<p>base_test</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
-<h4 id="test2---one">test2 - One</h4>
-<blockquote>
-<p><code>yapp_incr_payload_seq</code> override the
-<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
-<strong>yapp_incr_payload_seq</strong> is used.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-<h4 id="test2---two">test2 - Two</h4>
-<blockquote>
-<p>the <code>yapp_5_packets</code> in
-<code>super.build_phase(phase)</code> overide
-<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
-<strong>yapp_5_packets</strong> is used</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
-    <url>/2022/02/13/SmallGainTheorem/</url>
-    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
-named Fellow of the Institute of Electrical and Electronics Engineers in
-2016 for contributions to testing of analog and mixed-signal integrated
-circuits.</p>
-<blockquote>
-<p>I forget where I download this slide.</p>
-</blockquote>
-<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>control</tag>
-        <tag>feedback</tag>
       </tags>
   </entry>
   <entry>
@@ -1911,6 +1891,26 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2
       </categories>
       <tags>
         <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
+    <url>/2022/02/13/SmallGainTheorem/</url>
+    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
+named Fellow of the Institute of Electrical and Electronics Engineers in
+2016 for contributions to testing of analog and mixed-signal integrated
+circuits.</p>
+<blockquote>
+<p>I forget where I download this slide.</p>
+</blockquote>
+<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>control</tag>
+        <tag>feedback</tag>
       </tags>
   </entry>
   <entry>
@@ -3048,6 +3048,41 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
       </tags>
   </entry>
   <entry>
+    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
+    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
+    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
+It determines which edges to be used as follows:</p>
+<ol type="1">
+<li><p>Evaluate waveforms over the smallest common base period</p></li>
+<li><p>For each capture edge, find the closest setup launch edge. Call
+these the <strong>primary pairs</strong></p></li>
+<li><p>Out of the <strong>primary pairs</strong>, pick the most
+restrictive setup launch and capture edges.</p></li>
+<li><p>For each <strong>primary pair</strong>, draw two hold
+relationships:</p>
+<ul>
+<li><p>Launch to (capture - 1)</p></li>
+<li><p>(Launch + 1) to Capture</p>
+<p>From all of these hold relationships, pick the most
+restrictive.</p></li>
+</ul></li>
+</ol>
+<p>PrimeTime uses the ideal clock waveform (as reported in
+<code>report_clock</code>) to determine the appropriate clock edges for
+inter-clock analysis.</p>
+<p><img
+src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
+alt="image-20220301203135490" /></p>
+<blockquote>
+<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
+<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Clock Gating</title>
     <url>/2023/04/05/clockgating/</url>
     <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
@@ -3085,41 +3120,6 @@ alt="clock gating" /></p>
 <h3 id="reference">reference</h3>
 <p>The Ultimate Guide to Clock Gating <a
 href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
-    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
-    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
-It determines which edges to be used as follows:</p>
-<ol type="1">
-<li><p>Evaluate waveforms over the smallest common base period</p></li>
-<li><p>For each capture edge, find the closest setup launch edge. Call
-these the <strong>primary pairs</strong></p></li>
-<li><p>Out of the <strong>primary pairs</strong>, pick the most
-restrictive setup launch and capture edges.</p></li>
-<li><p>For each <strong>primary pair</strong>, draw two hold
-relationships:</p>
-<ul>
-<li><p>Launch to (capture - 1)</p></li>
-<li><p>(Launch + 1) to Capture</p>
-<p>From all of these hold relationships, pick the most
-restrictive.</p></li>
-</ul></li>
-</ol>
-<p>PrimeTime uses the ideal clock waveform (as reported in
-<code>report_clock</code>) to determine the appropriate clock edges for
-inter-clock analysis.</p>
-<p><img
-src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
-alt="image-20220301203135490" /></p>
-<blockquote>
-<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
-<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -4053,8 +4053,8 @@ a_r(f) + ja_i(f) &amp;= \sum_{k=0}^{N-1} e^{\frac{j2\pi k f}{N}} \\
 f}{N}} \\
 &amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} + e^{j\pi}
 e^{\frac{j2\pi k f}{N}} \\
-&amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} - e^{\frac{j2\pi k f}{N}
-\\
+&amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} - e^{\frac{j2\pi k
+f}{N}} \\
 &amp;= 0
 \end{align}\]</span></p>
 <blockquote>
@@ -4324,6 +4324,19 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
       </categories>
   </entry>
   <entry>
+    <title>How to preserve hand-instantiated cells</title>
+    <url>/2023/02/10/dont-touch/</url>
+    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
+<p>The instances whose name contain "dont_touch_" shall be preserved
+during synthesis</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Impact of Deep N-well Implantation</title>
     <url>/2023/05/29/dnw/</url>
     <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
@@ -4395,17 +4408,19 @@ href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ec
       </tags>
   </entry>
   <entry>
-    <title>How to preserve hand-instantiated cells</title>
-    <url>/2023/02/10/dont-touch/</url>
-    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
-<p>The instances whose name contain "dont_touch_" shall be preserved
-during synthesis</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+    <title>Script to remove .cdslck files</title>
+    <url>/2022/02/02/dot-cdslck-clear/</url>
+    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh </span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt </span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence"
+class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence</a></p>
 ]]></content>
       <categories>
-        <category>digital</category>
+        <category>cad</category>
       </categories>
+      <tags>
+        <tag>shell</tag>
+      </tags>
   </entry>
   <entry>
     <title>different DSPF files for each corner</title>
@@ -4423,21 +4438,6 @@ alt="image-20230129223248655" /></p>
       </categories>
       <tags>
         <tag>corner</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Script to remove .cdslck files</title>
-    <url>/2022/02/02/dot-cdslck-clear/</url>
-    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh </span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt </span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence"
-class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
       </tags>
   </entry>
   <entry>
@@ -9175,20 +9175,6 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
       </categories>
   </entry>
   <entry>
-    <title>System Analysis Using Laplace Transform and z-Transform</title>
-    <url>/2023/05/27/laplace-z/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Lathi, B. P., &amp; Green, R. A. (2018). Linear systems and signals
-(Third Edition.). Oxford University Press.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>laplace</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JTF and OJTF</title>
     <url>/2022/07/14/jtf-ojtf/</url>
     <content><![CDATA[<h2 id="concepts-of-jtf-and-ojtf">Concepts of JTF and OJTF</h2>
@@ -9313,6 +9299,20 @@ href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitte
         <tag>jtf</tag>
         <tag>ojtf</tag>
         <tag>jitter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>System Analysis Using Laplace Transform and z-Transform</title>
+    <url>/2023/05/27/laplace-z/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Lathi, B. P., &amp; Green, R. A. (2018). Linear systems and signals
+(Third Edition.). Oxford University Press.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>laplace</tag>
       </tags>
   </entry>
   <entry>
@@ -10153,256 +10153,6 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>PAM4 Driver and Serializer</title>
-    <url>/2022/07/16/pam4-mux/</url>
-    <content><![CDATA[<h2 id="pam4-basic">PAM4 Basic</h2>
-<p><strong>PAM4</strong> only have <em>1/3</em> of the amplitude
-compared to <strong>NRZ</strong> <span class="math display">\[
-\text{SNR loss} = 20\log(\frac{1}{3}) \sim  9.5\text{dB}
-\]</span></p>
-<blockquote>
-<p>In practice, there is further degradation due to nonlinearity</p>
-</blockquote>
-<p>In a more technical terms, we trade the <strong>transmitter’s
-signal-to-noise ratio (SNR)</strong> for <strong>lower Nyquist
-frequency</strong></p>
-<p>Equalization will be a lot more complex</p>
-<h3 id="pam4-level-names">PAM4 Level Names</h3>
-<p><img src="/2022/07/16/pam4-mux/image-20220717000655620.png"
-alt="image-20220717000655620" /></p>
-<h3 id="pam4-eye-linearity">PAM4 Eye Linearity</h3>
-<p><img src="/2022/07/16/pam4-mux/image-20220716221740224.png"
-alt="image-20220716221740224" /></p>
-<p>Each level can have different amplitudes, which form the <strong>Eye
-Linearity</strong> <span class="math display">\[
-{\text{Eye
-Linearity}}=\frac{\min(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}{\max(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}
-\]</span></p>
-<blockquote>
-<p>Perfect eye = 1</p>
-<p>Worst eye = 0</p>
-</blockquote>
-<h3 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h3>
-<p>The <strong>Level Separation Mismatch Ratio</strong>, commonly
-referred to as <span class="math inline">\(R_{\text{LM}}\)</span>, is a
-measurement that is not required in normative or informative VSR tests,
-but is required by most other variants.</p>
-<p><img src="/2022/07/16/pam4-mux/image-20220716223452261.png"
-alt="image-20220716223452261" /></p>
-<p><span class="math display">\[\begin{align}
-V_{\text{mid}} &amp;= \frac{V_0+V_3}{2} \\
-ES1 &amp;= \frac{V_1-V_{\text{mid}}}{V_0-V_{\text{mid}}} \\
-ES2 &amp;= \frac{V_2-V_{\text{mid}}}{V_3-V_{\text{mid}}} \\
-R_{\text{LM}} &amp;= \min(3\times ES1, 3\times ES2, 2-3\times ES1,
-2-3\times ES2)
-\end{align}\]</span></p>
-<p>where <em>ES</em> means <em>Effective Symbol Level</em></p>
-<blockquote>
-<p><span class="math inline">\(R_{\text{LM}}\)</span> is conceptually
-similar to eye linearity but measured differently. An ideal PAM4 eye has
-<span class="math inline">\(R_{\text{LM}}\)</span> equal to
-<strong>1</strong>, but it does not scale in the same way as eye
-linearity.</p>
-<p>The closer <span class="math inline">\(R_{\text{LM}}\)</span> is to
-<strong>1</strong>, the better the eye linearity is.</p>
-</blockquote>
-<h3 id="gray-coding">Gray Coding</h3>
-<p>Gray code or reflected binary code was designed so that two
-successive values differ by one bit</p>
-<p>Reducing the number of switching</p>
-<table>
-<thead>
-<tr class="header">
-<th>Linear Code</th>
-<th>Gray Code</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>11</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>11</td>
-</tr>
-<tr class="odd">
-<td>01</td>
-<td>01</td>
-</tr>
-<tr class="even">
-<td>00</td>
-<td>00</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<ul>
-<li>Only one bit error per symbol is made for incorrect decisions</li>
-<li>This is the coding adopted in all the PAM4 standards</li>
-<li>Support dual-mode with PAM2, by grounding the LSB</li>
-<li>MSB is the bit transmitted first</li>
-</ul>
-</blockquote>
-<h4 id="binary-to-pam4-and-back-to-binary-example">Binary to PAM4 and
-Back to Binary Example</h4>
-<p><img src="/2022/07/16/pam4-mux/image-20220717000847185.png"
-alt="image-20220717000847185" /></p>
-<blockquote>
-<p>The way that Gray coding combines the MSB (most significant bit) and
-LSB (least significant bit) in each PAM4 symbol assures that
-<strong>symbol errors</strong> caused by <strong>amplitude
-noise</strong> are more likely to cause <strong>one bit error than
-two</strong>. On the other hand, jitter is more likely to cause two bit
-errors per symbol error.</p>
-</blockquote>
-<h2 id="pam4-tx-equalization">PAM4 TX equalization</h2>
-<p><img src="/2022/07/16/pam4-mux/image-20220717010007963.png"
-alt="image-20220717010007963" /></p>
-<p>Here, <span class="math inline">\(d_{\text{LSB}} \in \{-1,
-1\}\)</span>, <span class="math inline">\(d_{\text{MSB}} \in \{-2,
-2\}\)</span> and <span class="math inline">\(d&#39; \in \{ -3, -1, 1, 3
-\}\)</span></p>
-<p>Implementation-1 could potentially experience performance degradation
-due to</p>
-<ol type="1">
-<li>Clock skew, <span class="math inline">\(\Delta t\)</span>, could
-make the eye misaligned horizontally</li>
-<li>Gain mismatch, <span class="math inline">\(\Delta G\)</span>, could
-cause eye nonlinearity</li>
-<li>Bandwidth mismatch, <span class="math inline">\(\Delta
-f_{\text{BW}}\)</span>, could make the eye misaligned vertically</li>
-</ol>
-<p><img src="/2022/07/16/pam4-mux/image-20220717011129124.png"
-alt="image-20220717011129124" /></p>
-<blockquote>
-<p>Typically, a 3-tap FIR (pre + main + post) TX de-emphasis is used</p>
-<p>3-tap FIR results in <span class="math inline">\(4^3 = 64\)</span>
-possible distinct signal levels</p>
-</blockquote>
-<p><img src="/2022/07/16/pam4-mux/msb_lsb.drawio.svg"
-alt="msb_lsb.drawio" /></p>
-<p><span class="math display">\[\begin{align}
-R_U^M \parallel R_D^M &amp;= \frac{3R_T}{2}\\
-R_U^L \parallel R_D^L &amp;= 3R_T
-\end{align}\]</span></p>
-<p>Thevenin Equivalent Circuit is <img
-src="/2022/07/16/pam4-mux/thevenin_1.drawio.svg"
-alt="thevenin_1.drawio" /></p>
-<p>Which can be simpified as <img
-src="/2022/07/16/pam4-mux/thevenin_2.drawio.svg"
-alt="thevenin_2.drawio" /> <span class="math display">\[\begin{align}
-V_{\text{rx}} &amp;= \frac{1}{2}(V_p - V_m) \\
-&amp;= \frac{1}{2}(\frac{2}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-1) \\
-&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2}
-\end{align}\]</span></p>
-<p>The above eqations demonstrate that the output <span
-class="math inline">\(V_{\text{rx}}\)</span> is the linear sum of
-<strong>MSB</strong> and <strong>LSB</strong>; <strong>LSB</strong> and
-<strong>MSB</strong> have relative weight, i.e. <em>1</em> for LSB and
-<em>2</em> for MSB.</p>
-<p>Assume pre cusor has <span class="math inline">\(L\)</span> legs,
-main cursor <span class="math inline">\(M\)</span> legs and post cursor
-<span class="math inline">\(N\)</span> legs, which is same with the
-convention in "Voltage-Mode Driver Equalization"</p>
-<p>The number of legs connected with supply can expressed as <span
-class="math display">\[
-n_{up} = (1-d_{n+1})L + d_{n}M + (1-d_{n-1})N
-\]</span> Where <span class="math inline">\(d_n \in \{0, 1\}\)</span>,
-or <span class="math display">\[
-n_{up} = \frac{1}{2}(-D_{n+1}+1)L + \frac{1}{2}(D_{n}+1)M +
-\frac{1}{2}(-D_{n-1}+1)N
-\]</span> Where <span class="math inline">\(D_n \in \{-1,
-+1\}\)</span></p>
-<p>Then the number of legs connected with ground is <span
-class="math display">\[
-n_{dn}=L+M+N-n_{up}
-\]</span> where <span
-class="math inline">\(n_{up}+n_{dn}=L+M+N\)</span></p>
-<p>Voltage resistor divider <span class="math display">\[\begin{align}
-V_o &amp;=
-\frac{\frac{R_{U}}{n_{dn}}}{\frac{R_U}{n_{dn}}+\frac{R_U}{n_{up}}} \\
-&amp;= \frac{1}{2}- \frac{1}{2}D_{n+1}\frac{L}{L+M+N}+
-\frac{1}{2}D_{n}\frac{M}{L+M+N}-\frac{1}{2}D_{n-1}\frac{N}{L+M+N} \\
-&amp;= \frac{1}{2}-\frac{1}{2}D_{n+1}\cdot l+ \frac{1}{2}D_{n}\cdot
-m-\frac{1}{2}D_{n-1}\cdot n
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(l+m+n=1\)</span></p>
-<p><span class="math inline">\(V_{\text{MSB}}\)</span> and <span
-class="math inline">\(V_{\text{LSB}}\)</span> can be obtained</p>
-<p><span class="math display">\[\begin{align}
-V_{\text{MSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot
-l+ \frac{1}{2}D^{\text{MSB}}_{n}\cdot
-m-\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \\
-V_{\text{LSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot
-l+ \frac{1}{2}D^{\text{LSB}}_{n}\cdot
-m-\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n
-\end{align}\]</span></p>
-<p>Substitute the above equation into <span
-class="math inline">\(V_{\text{rx}}\)</span>, we obtain the relationship
-between driver legs and FFE coefficients</p>
-<p><span class="math display">\[\begin{align}
-V_{\text{rx}}
-&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2} \\
-&amp;= \frac{1}{3} \left\{  2\left(
-\frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot l+
-\frac{1}{2}D^{\text{MSB}}_{n}\cdot m-
-\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \right) + \left(
-\frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot l+
-\frac{1}{2}D^{\text{LSB}}_{n}\cdot m-
-\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n \right) \right\}-\frac{1}{2} \\
-&amp;=  \left(-\frac{l}{6} \cdot 2 \cdot D^{\text{MSB}}_{n+1}+
-\frac{m}{6} \cdot 2 \cdot D^{\text{MSB}}_{n}- \frac{n}{6} \cdot 2 \cdot
-D^{\text{MSB}}_{n-1}\right) + \left(-\frac{l}{6} \cdot
-D^{\text{LSB}}_{n+1}+ \frac{m}{6} \cdot D^{\text{LSB}}_{n}- \frac{n}{6}
-\cdot D^{\text{LSB}}_{n-1}\right) \\
-&amp;=  -\frac{l}{6}(2 \cdot D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+
-\frac{m}{6}(2\cdot D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n})
--\frac{n}{6}(2\cdot D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
-\end{align}\]</span></p>
-<p>After scaling, we obtain <span class="math display">\[
-V_{\text{rx}}  = -l\cdot(2 \cdot
-D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+ m\cdot(2\cdot
-D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n}) - n \cdot(2\cdot
-D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
-\]</span> Where <span class="math inline">\(C_{-1} = l\)</span>, <span
-class="math inline">\(C_0 = m\)</span> and <span
-class="math inline">\(C_{1}=n\)</span>, which is same with that of
-NRZ.</p>
-<h2 id="general-tx-serializer">General TX Serializer</h2>
-<h3 id="mux-timing">mux timing</h3>
-<p><img src="/2022/07/16/pam4-mux/mux2-1.drawio.svg"
-alt="mux2-1.drawio" /></p>
-<h3 id="divider-latch-timing">divider latch timing</h3>
-<p><img src="/2022/07/16/pam4-mux/div2-latch.drawio.svg"
-alt="div2-latch.drawio" /></p>
-<h3 id="two-latches">Two latches</h3>
-<p><img src="/2022/07/16/pam4-mux/two-latch.drawio.svg"
-alt="two-latch.drawio" /></p>
-<h2 id="reference">reference</h2>
-<p>Intel. AN 835.: "PAM4 Signaling Fundamentals," Application Note
-(2019) URL: <a
-href="https://www.intel.com/programmable/technical-pdfs/683852.pdf">https://www.intel.com/programmable/technical-pdfs/683852.pdf</a></p>
-<p>Fernando De Bernardinis, eSilicon, "Introduction to DSP Based Serial
-Links" URL: <a
-href="https://www.di.univr.it/documenti/OccorrenzaIns/matdid/matdid835215.pdf">https://www.di.univr.it/documenti/OccorrenzaIns/matdid/matdid835215.pdf</a></p>
-<p>Hongtao Zhang, Brandon Jiao, Yu Liao, and Geoff Zhang, "PAM4
-Signaling for 56G Serial Link Applications − A Tutorial" DesignCon 2016,
-URL: <a
-href="https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf">https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf</a></p>
-<p>Geoff Zhang, Hongtao Zhang, "A Tutorial on PAM4 Signaling for 56G
-Serial Link Applications" DesignCon 2017, URL: <a
-href="https://www.oldfriend.url.tw/article/IEEE_paper/PAM4/SLIDES_10_PAM4_Signaling_for_56G_Serial_Zhang_1_.pdf">https://www.oldfriend.url.tw/article/IEEE_paper/PAM4/SLIDES_10_PAM4_Signaling_for_56G_Serial_Zhang_1_.pdf</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>pam4</tag>
-        <tag>mux</tag>
-      </tags>
   </entry>
   <entry>
     <title>Nonlinear Systems</title>
@@ -11388,6 +11138,256 @@ href="https://benchugg.com/research_notes/sde_ito_lemma/">https://benchugg.com/r
       </categories>
   </entry>
   <entry>
+    <title>PAM4 Driver and Serializer</title>
+    <url>/2022/07/16/pam4-mux/</url>
+    <content><![CDATA[<h2 id="pam4-basic">PAM4 Basic</h2>
+<p><strong>PAM4</strong> only have <em>1/3</em> of the amplitude
+compared to <strong>NRZ</strong> <span class="math display">\[
+\text{SNR loss} = 20\log(\frac{1}{3}) \sim  9.5\text{dB}
+\]</span></p>
+<blockquote>
+<p>In practice, there is further degradation due to nonlinearity</p>
+</blockquote>
+<p>In a more technical terms, we trade the <strong>transmitter’s
+signal-to-noise ratio (SNR)</strong> for <strong>lower Nyquist
+frequency</strong></p>
+<p>Equalization will be a lot more complex</p>
+<h3 id="pam4-level-names">PAM4 Level Names</h3>
+<p><img src="/2022/07/16/pam4-mux/image-20220717000655620.png"
+alt="image-20220717000655620" /></p>
+<h3 id="pam4-eye-linearity">PAM4 Eye Linearity</h3>
+<p><img src="/2022/07/16/pam4-mux/image-20220716221740224.png"
+alt="image-20220716221740224" /></p>
+<p>Each level can have different amplitudes, which form the <strong>Eye
+Linearity</strong> <span class="math display">\[
+{\text{Eye
+Linearity}}=\frac{\min(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}{\max(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}
+\]</span></p>
+<blockquote>
+<p>Perfect eye = 1</p>
+<p>Worst eye = 0</p>
+</blockquote>
+<h3 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h3>
+<p>The <strong>Level Separation Mismatch Ratio</strong>, commonly
+referred to as <span class="math inline">\(R_{\text{LM}}\)</span>, is a
+measurement that is not required in normative or informative VSR tests,
+but is required by most other variants.</p>
+<p><img src="/2022/07/16/pam4-mux/image-20220716223452261.png"
+alt="image-20220716223452261" /></p>
+<p><span class="math display">\[\begin{align}
+V_{\text{mid}} &amp;= \frac{V_0+V_3}{2} \\
+ES1 &amp;= \frac{V_1-V_{\text{mid}}}{V_0-V_{\text{mid}}} \\
+ES2 &amp;= \frac{V_2-V_{\text{mid}}}{V_3-V_{\text{mid}}} \\
+R_{\text{LM}} &amp;= \min(3\times ES1, 3\times ES2, 2-3\times ES1,
+2-3\times ES2)
+\end{align}\]</span></p>
+<p>where <em>ES</em> means <em>Effective Symbol Level</em></p>
+<blockquote>
+<p><span class="math inline">\(R_{\text{LM}}\)</span> is conceptually
+similar to eye linearity but measured differently. An ideal PAM4 eye has
+<span class="math inline">\(R_{\text{LM}}\)</span> equal to
+<strong>1</strong>, but it does not scale in the same way as eye
+linearity.</p>
+<p>The closer <span class="math inline">\(R_{\text{LM}}\)</span> is to
+<strong>1</strong>, the better the eye linearity is.</p>
+</blockquote>
+<h3 id="gray-coding">Gray Coding</h3>
+<p>Gray code or reflected binary code was designed so that two
+successive values differ by one bit</p>
+<p>Reducing the number of switching</p>
+<table>
+<thead>
+<tr class="header">
+<th>Linear Code</th>
+<th>Gray Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>01</td>
+<td>01</td>
+</tr>
+<tr class="even">
+<td>00</td>
+<td>00</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li>Only one bit error per symbol is made for incorrect decisions</li>
+<li>This is the coding adopted in all the PAM4 standards</li>
+<li>Support dual-mode with PAM2, by grounding the LSB</li>
+<li>MSB is the bit transmitted first</li>
+</ul>
+</blockquote>
+<h4 id="binary-to-pam4-and-back-to-binary-example">Binary to PAM4 and
+Back to Binary Example</h4>
+<p><img src="/2022/07/16/pam4-mux/image-20220717000847185.png"
+alt="image-20220717000847185" /></p>
+<blockquote>
+<p>The way that Gray coding combines the MSB (most significant bit) and
+LSB (least significant bit) in each PAM4 symbol assures that
+<strong>symbol errors</strong> caused by <strong>amplitude
+noise</strong> are more likely to cause <strong>one bit error than
+two</strong>. On the other hand, jitter is more likely to cause two bit
+errors per symbol error.</p>
+</blockquote>
+<h2 id="pam4-tx-equalization">PAM4 TX equalization</h2>
+<p><img src="/2022/07/16/pam4-mux/image-20220717010007963.png"
+alt="image-20220717010007963" /></p>
+<p>Here, <span class="math inline">\(d_{\text{LSB}} \in \{-1,
+1\}\)</span>, <span class="math inline">\(d_{\text{MSB}} \in \{-2,
+2\}\)</span> and <span class="math inline">\(d&#39; \in \{ -3, -1, 1, 3
+\}\)</span></p>
+<p>Implementation-1 could potentially experience performance degradation
+due to</p>
+<ol type="1">
+<li>Clock skew, <span class="math inline">\(\Delta t\)</span>, could
+make the eye misaligned horizontally</li>
+<li>Gain mismatch, <span class="math inline">\(\Delta G\)</span>, could
+cause eye nonlinearity</li>
+<li>Bandwidth mismatch, <span class="math inline">\(\Delta
+f_{\text{BW}}\)</span>, could make the eye misaligned vertically</li>
+</ol>
+<p><img src="/2022/07/16/pam4-mux/image-20220717011129124.png"
+alt="image-20220717011129124" /></p>
+<blockquote>
+<p>Typically, a 3-tap FIR (pre + main + post) TX de-emphasis is used</p>
+<p>3-tap FIR results in <span class="math inline">\(4^3 = 64\)</span>
+possible distinct signal levels</p>
+</blockquote>
+<p><img src="/2022/07/16/pam4-mux/msb_lsb.drawio.svg"
+alt="msb_lsb.drawio" /></p>
+<p><span class="math display">\[\begin{align}
+R_U^M \parallel R_D^M &amp;= \frac{3R_T}{2}\\
+R_U^L \parallel R_D^L &amp;= 3R_T
+\end{align}\]</span></p>
+<p>Thevenin Equivalent Circuit is <img
+src="/2022/07/16/pam4-mux/thevenin_1.drawio.svg"
+alt="thevenin_1.drawio" /></p>
+<p>Which can be simpified as <img
+src="/2022/07/16/pam4-mux/thevenin_2.drawio.svg"
+alt="thevenin_2.drawio" /> <span class="math display">\[\begin{align}
+V_{\text{rx}} &amp;= \frac{1}{2}(V_p - V_m) \\
+&amp;= \frac{1}{2}(\frac{2}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-1) \\
+&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2}
+\end{align}\]</span></p>
+<p>The above eqations demonstrate that the output <span
+class="math inline">\(V_{\text{rx}}\)</span> is the linear sum of
+<strong>MSB</strong> and <strong>LSB</strong>; <strong>LSB</strong> and
+<strong>MSB</strong> have relative weight, i.e. <em>1</em> for LSB and
+<em>2</em> for MSB.</p>
+<p>Assume pre cusor has <span class="math inline">\(L\)</span> legs,
+main cursor <span class="math inline">\(M\)</span> legs and post cursor
+<span class="math inline">\(N\)</span> legs, which is same with the
+convention in "Voltage-Mode Driver Equalization"</p>
+<p>The number of legs connected with supply can expressed as <span
+class="math display">\[
+n_{up} = (1-d_{n+1})L + d_{n}M + (1-d_{n-1})N
+\]</span> Where <span class="math inline">\(d_n \in \{0, 1\}\)</span>,
+or <span class="math display">\[
+n_{up} = \frac{1}{2}(-D_{n+1}+1)L + \frac{1}{2}(D_{n}+1)M +
+\frac{1}{2}(-D_{n-1}+1)N
+\]</span> Where <span class="math inline">\(D_n \in \{-1,
++1\}\)</span></p>
+<p>Then the number of legs connected with ground is <span
+class="math display">\[
+n_{dn}=L+M+N-n_{up}
+\]</span> where <span
+class="math inline">\(n_{up}+n_{dn}=L+M+N\)</span></p>
+<p>Voltage resistor divider <span class="math display">\[\begin{align}
+V_o &amp;=
+\frac{\frac{R_{U}}{n_{dn}}}{\frac{R_U}{n_{dn}}+\frac{R_U}{n_{up}}} \\
+&amp;= \frac{1}{2}- \frac{1}{2}D_{n+1}\frac{L}{L+M+N}+
+\frac{1}{2}D_{n}\frac{M}{L+M+N}-\frac{1}{2}D_{n-1}\frac{N}{L+M+N} \\
+&amp;= \frac{1}{2}-\frac{1}{2}D_{n+1}\cdot l+ \frac{1}{2}D_{n}\cdot
+m-\frac{1}{2}D_{n-1}\cdot n
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(l+m+n=1\)</span></p>
+<p><span class="math inline">\(V_{\text{MSB}}\)</span> and <span
+class="math inline">\(V_{\text{LSB}}\)</span> can be obtained</p>
+<p><span class="math display">\[\begin{align}
+V_{\text{MSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot
+l+ \frac{1}{2}D^{\text{MSB}}_{n}\cdot
+m-\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \\
+V_{\text{LSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot
+l+ \frac{1}{2}D^{\text{LSB}}_{n}\cdot
+m-\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n
+\end{align}\]</span></p>
+<p>Substitute the above equation into <span
+class="math inline">\(V_{\text{rx}}\)</span>, we obtain the relationship
+between driver legs and FFE coefficients</p>
+<p><span class="math display">\[\begin{align}
+V_{\text{rx}}
+&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2} \\
+&amp;= \frac{1}{3} \left\{  2\left(
+\frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot l+
+\frac{1}{2}D^{\text{MSB}}_{n}\cdot m-
+\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \right) + \left(
+\frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot l+
+\frac{1}{2}D^{\text{LSB}}_{n}\cdot m-
+\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n \right) \right\}-\frac{1}{2} \\
+&amp;=  \left(-\frac{l}{6} \cdot 2 \cdot D^{\text{MSB}}_{n+1}+
+\frac{m}{6} \cdot 2 \cdot D^{\text{MSB}}_{n}- \frac{n}{6} \cdot 2 \cdot
+D^{\text{MSB}}_{n-1}\right) + \left(-\frac{l}{6} \cdot
+D^{\text{LSB}}_{n+1}+ \frac{m}{6} \cdot D^{\text{LSB}}_{n}- \frac{n}{6}
+\cdot D^{\text{LSB}}_{n-1}\right) \\
+&amp;=  -\frac{l}{6}(2 \cdot D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+
+\frac{m}{6}(2\cdot D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n})
+-\frac{n}{6}(2\cdot D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
+\end{align}\]</span></p>
+<p>After scaling, we obtain <span class="math display">\[
+V_{\text{rx}}  = -l\cdot(2 \cdot
+D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+ m\cdot(2\cdot
+D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n}) - n \cdot(2\cdot
+D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
+\]</span> Where <span class="math inline">\(C_{-1} = l\)</span>, <span
+class="math inline">\(C_0 = m\)</span> and <span
+class="math inline">\(C_{1}=n\)</span>, which is same with that of
+NRZ.</p>
+<h2 id="general-tx-serializer">General TX Serializer</h2>
+<h3 id="mux-timing">mux timing</h3>
+<p><img src="/2022/07/16/pam4-mux/mux2-1.drawio.svg"
+alt="mux2-1.drawio" /></p>
+<h3 id="divider-latch-timing">divider latch timing</h3>
+<p><img src="/2022/07/16/pam4-mux/div2-latch.drawio.svg"
+alt="div2-latch.drawio" /></p>
+<h3 id="two-latches">Two latches</h3>
+<p><img src="/2022/07/16/pam4-mux/two-latch.drawio.svg"
+alt="two-latch.drawio" /></p>
+<h2 id="reference">reference</h2>
+<p>Intel. AN 835.: "PAM4 Signaling Fundamentals," Application Note
+(2019) URL: <a
+href="https://www.intel.com/programmable/technical-pdfs/683852.pdf">https://www.intel.com/programmable/technical-pdfs/683852.pdf</a></p>
+<p>Fernando De Bernardinis, eSilicon, "Introduction to DSP Based Serial
+Links" URL: <a
+href="https://www.di.univr.it/documenti/OccorrenzaIns/matdid/matdid835215.pdf">https://www.di.univr.it/documenti/OccorrenzaIns/matdid/matdid835215.pdf</a></p>
+<p>Hongtao Zhang, Brandon Jiao, Yu Liao, and Geoff Zhang, "PAM4
+Signaling for 56G Serial Link Applications − A Tutorial" DesignCon 2016,
+URL: <a
+href="https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf">https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf</a></p>
+<p>Geoff Zhang, Hongtao Zhang, "A Tutorial on PAM4 Signaling for 56G
+Serial Link Applications" DesignCon 2017, URL: <a
+href="https://www.oldfriend.url.tw/article/IEEE_paper/PAM4/SLIDES_10_PAM4_Signaling_for_56G_Serial_Zhang_1_.pdf">https://www.oldfriend.url.tw/article/IEEE_paper/PAM4/SLIDES_10_PAM4_Signaling_for_56G_Serial_Zhang_1_.pdf</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>pam4</tag>
+        <tag>mux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Parallel Compensation in Two stage amplifier</title>
     <url>/2022/03/07/parallel-compensation/</url>
     <content><![CDATA[<blockquote>
@@ -12110,110 +12110,6 @@ href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pd
       </categories>
   </entry>
   <entry>
-    <title>import package in SystemVerilog compilation</title>
-    <url>/2022/03/24/pkg-import-compile-sv/</url>
-    <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
-<h4 id="project">project</h4>
-<p><strong>yapp_pkg.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
-<p><strong>yapp_tx_monitor.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Collected Data handle</span></span><br><span class="line">  yapp_packet pkt;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Count packets collected</span></span><br><span class="line">  <span class="keyword">int</span> num_pkt_col;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_monitor)</span><br><span class="line">    `uvm_field_int(num_pkt_col, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"><span class="comment">/////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_monitor</span><br></pre></td></tr></table></figure>
-<p><strong>yapp_tx_driver.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_driver <span class="keyword">extends</span> uvm_driver <span class="variable">#(yapp_packet)</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"> <span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">int</span> num_sent;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_driver)</span><br><span class="line">    `uvm_field_int(num_sent, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Constructor - required syntax for UVM automation and utilities</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">    `uvm_info(get_type_name(), &#123;<span class="string">&quot;start of simulation for &quot;</span>, get_full_name()&#125;, UVM_HIGH)</span><br><span class="line">  <span class="keyword">endfunction</span> : start_of_simulation_phase</span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_driver </span><br></pre></td></tr></table></figure>
-<p><strong>yapp_if.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////// import package //////////////////////</span></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////    </span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Actual Signals</span></span><br><span class="line">  <span class="keyword">logic</span>              in_data_vld;</span><br><span class="line">  <span class="keyword">logic</span>              in_suspend;</span><br><span class="line">  <span class="keyword">logic</span>       [<span class="number">7</span>:<span class="number">0</span>]  in_data;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// signal for transaction recording</span></span><br><span class="line">  <span class="keyword">bit</span> monstart, drvstart;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// local storage for payload</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">7</span>:<span class="number">0</span>] payload_mem [<span class="number">0</span>:<span class="number">63</span>];</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>virtual interface is in package;</p>
-<p><code>yapp_pkg</code> is imported into interface</p>
-</blockquote>
-<blockquote>
-<p>!!!
-<code>typedef uvm_config_db#(virtual yapp_if) yapp_vif_config;</code> is
-<strong>forward declaration</strong></p>
-<p><em>A forward <code>typedef</code> declares an identifier as a type
-in advance of the full definition of that type</em></p>
-</blockquote>
-<h4 id="vcs-compile">VCS compile</h4>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vcs -full64 -R -sverilog  -ntb_opts uvm-1.2 +UVM_TESTNAME=short_yapp_012_test  -f vcs.f  </span><br></pre></td></tr></table></figure>
-<p><strong>vcs.f</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-timescale=1ns/1ns</span><br><span class="line"></span><br><span class="line">+incdir+../sv</span><br><span class="line"></span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
-<p><em>output ERROR</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error-[SV-LCM-PND] Package not defined</span><br><span class="line">../sv/yapp_if.sv, 18</span><br><span class="line">yapp_if, &quot;yapp_pkg::&quot;</span><br><span class="line">  Package scope resolution failed. Token &#x27;yapp_pkg&#x27; is not a package. </span><br><span class="line">  Originating module &#x27;yapp_if&#x27;.</span><br><span class="line">  Move package definition before the use of the package.</span><br></pre></td></tr></table></figure>
-<h4 id="xrun-compile">xrun compile</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xrun -f xrun.f</span><br></pre></td></tr></table></figure>
-<p><strong>xrun.f</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-64</span><br><span class="line"></span><br><span class="line">-uvmhome  CDNS-1.2</span><br><span class="line"></span><br><span class="line">// incdir for include files</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">+UVM_TESTNAME=short_yapp_012_test</span><br><span class="line"></span><br><span class="line">-timescale 1ns/1ns</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
-<p><em>output Error</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">file: ../sv/yapp_if.sv</span><br><span class="line">import yapp_pkg::*;</span><br><span class="line">              |</span><br><span class="line">xmvlog: *E,NOPBIND (../sv/yapp_if.sv,18|14): Package yapp_pkg could not be bound.</span><br><span class="line">        interface worklib.yapp_if:sv</span><br><span class="line">                errors: 1, warnings: 0</span><br></pre></td></tr></table></figure>
-<h4 id="solution">solution</h4>
-<p>place <code>../sv/yapp_pkg.sv</code> before
-<code>../sv/yapp_if.sv</code>.</p>
-<blockquote>
-<p>In this particular example, <code>yapp_pkg</code> is NOT needed in
-interface. just delete <code>import yapp_pkg::*</code> is enough in
-<code>../sv/yapp_if.sv</code></p>
-</blockquote>
-<h3 id="plain-example">plain example</h3>
-<p>The order of compilation unit DON'T matter</p>
-<h4 id="project-1">project</h4>
-<p><strong>hw_top.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.clock_period</span>(<span class="number">32&#x27;d10</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">    <span class="variable">.reset</span>(reset),</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.error</span>(),</span><br><span class="line">    <span class="comment">// YAPP interface signals connection</span></span><br><span class="line">    <span class="variable">.in_data</span>(in0<span class="variable">.in_data</span>),</span><br><span class="line">    <span class="variable">.in_data_vld</span>(in0<span class="variable">.in_data_vld</span>),</span><br><span class="line">    <span class="variable">.in_suspend</span>(in0<span class="variable">.in_suspend</span>),</span><br><span class="line">    <span class="comment">// Output Channels</span></span><br><span class="line">    <span class="comment">//Channel 0   </span></span><br><span class="line">    <span class="variable">.data_0</span>(),</span><br><span class="line">    <span class="variable">.data_vld_0</span>(),</span><br><span class="line">    <span class="variable">.suspend_0</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 1   </span></span><br><span class="line">    <span class="variable">.data_1</span>(),</span><br><span class="line">    <span class="variable">.data_vld_1</span>(),</span><br><span class="line">    <span class="variable">.suspend_1</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 2   </span></span><br><span class="line">    <span class="variable">.data_2</span>(),  </span><br><span class="line">    <span class="variable">.data_vld_2</span>(),</span><br><span class="line">    <span class="variable">.suspend_2</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">// Host Interface Signals</span></span><br><span class="line">    <span class="variable">.haddr</span>(),</span><br><span class="line">    <span class="variable">.hdata</span>(),</span><br><span class="line">    <span class="variable">.hen</span>(),</span><br><span class="line">    <span class="variable">.hwr_rd</span>());</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>yapp_router.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> yapp_router (<span class="keyword">input</span> clock,                              </span><br><span class="line">                    <span class="keyword">input</span> reset,                            </span><br><span class="line">                    <span class="keyword">output</span> error,</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// Input channel</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] in_data,                           </span><br><span class="line">                    <span class="keyword">input</span> in_data_vld,                     </span><br><span class="line">                    <span class="keyword">output</span> in_suspend,</span><br><span class="line">                    <span class="comment">// Output Channels</span></span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_0,  <span class="comment">//Channel 0</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_0, </span><br><span class="line">                    <span class="keyword">input</span> suspend_0, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_1,  <span class="comment">//Channel 1</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_1, </span><br><span class="line">                    <span class="keyword">input</span> suspend_1, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_2,  <span class="comment">//Channel 2</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_2,</span><br><span class="line">                    <span class="keyword">input</span> suspend_2,</span><br><span class="line">     </span><br><span class="line">                    <span class="comment">// Host Interface Signals</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] haddr,</span><br><span class="line">                    <span class="keyword">inout</span> [<span class="number">7</span>:<span class="number">0</span>] hdata,</span><br><span class="line">                    <span class="keyword">input</span> hen,</span><br><span class="line">                    <span class="keyword">input</span> hwr_rd);                            </span><br><span class="line">...</span><br><span class="line"><span class="keyword">endmodule</span>    </span><br></pre></td></tr></table></figure>
-<h4 id="compile">compile</h4>
-<p>place <strong>hw_top.sv</strong> <em>before or after</em>
-<strong>yapp_router.sv</strong> doesn't matter, the compiler (xrun, vcs)
-can compile them successfully.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Always place package before DUT is preferred choice during
-compiling.</p>
-<h3 id="refernce">refernce</h3>
-<p><a
-href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
-forward declaration</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>plusargs in verilog</title>
-    <url>/2022/06/04/plusargs-verilog/</url>
-    <content><![CDATA[<p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Phase Noise and Jitter Simulation</title>
     <url>/2023/10/21/phasenoise-jitter/</url>
     <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
@@ -12451,144 +12347,104 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBri
       </categories>
   </entry>
   <entry>
-    <title>Power/Ground and I/O Pins</title>
-    <url>/2022/03/06/power-ground-io/</url>
-    <content><![CDATA[<h4 id="power-ground-pin-information">Power / Ground Pin
-Information</h4>
-<p>In both digital and analog I/O, power and ground pins appear at the
-sub-circuit definiton, allowing user to use the I/O in voltage islands.
-They follow certain naming conventions.</p>
-<ol type="1">
-<li>digital I/O sub-circuit</li>
-</ol>
+    <title>plusargs in verilog</title>
+    <url>/2022/06/04/plusargs-verilog/</url>
+    <content><![CDATA[<p><strong>plusargs</strong> are command-line switches supported by the
+simulator. As per SystemVerilog LRM arguments beginning with the
+<code>+</code> character will be available using the
+<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
+APIs</strong>.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
+<h4 id="example">Example</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>VDD: pre-driver core voltage (supplied by PVDD1CDGM)</li>
-<li>VSS: pre-driver ground and also global ground (supplied by
-PVDD1CDGM)</li>
-<li>VDDPST: I/O post-driver voltage, i.e. 1.8V (supplied by PVDD2CDGM or
-PVDD2POCM)</li>
-<li>VSSPOST: I/O post-driver ground (supplied by PVDD2CDGM or
-PVDD2POCM)</li>
-<li>POCCTRL: POCCTRL signal (supplied by PVDD2POCM)</li>
-</ul>
-<ol start="2" type="1">
-<li>analog I/O placed in a core voltage domain, the convention is</li>
-</ol>
+<li><p>compile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
+<li><p>simulate (<em>QuestaSim</em>)</p>
 <ul>
-<li>TACVDD: analog core voltage (supplied by PVDD3ACM)</li>
-<li>TACVSS: analog core ground (supplied by PVDD3ACM)</li>
-<li>VSS: global core ground</li>
-</ul>
-<ol start="3" type="1">
-<li>analog I/O placed in an I/O voltage domain, the convention is:</li>
-</ol>
-<ul>
-<li>TAVDD: analog I/O voltage, i.e. 1.8V (supplied by PVDD3AM)</li>
-<li>TAVSS: analog I/O ground (supplied by PVDD3AM)</li>
-<li>VSS: global core ground</li>
-</ul>
-<p>Power/Ground <strong>Combo Cells</strong></p>
-<table>
-<colgroup>
-<col style="width: 35%" />
-<col style="width: 36%" />
-<col style="width: 27%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>power/ground combo pad cell</th>
-<th>pins to be connected to bump</th>
-<th>to core side pin name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>PVDD1CDGM</td>
-<td>VDD VSS</td>
-<td>VDD VSS</td>
-</tr>
-<tr class="even">
-<td>PVDD2CDGM PVDD2POCM</td>
-<td>VDDPST VSSPST</td>
-<td>N/A</td>
-</tr>
-<tr class="odd">
-<td>PVDD3AM</td>
-<td>TAVDD TAVSS</td>
-<td>AVDD AVSS</td>
-</tr>
-<tr class="even">
-<td>PVDD3ACM</td>
-<td>TACVDD TACVSS</td>
-<td>AVDD AVSS</td>
-</tr>
-</tbody>
-</table>
-<h4 id="note-for-the-retention-mode">Note for the retention mode</h4>
-<ol type="1">
-<li>At initial state, IRTE must be <strong>0</strong> when VDD is
-off.</li>
-<li>IRTE must be kept &gt;= 10us after VDD turns on again (from the
-retention mode to the normal operation mode).</li>
-<li>IRTE can be switched only when both VDD and VDDPST are on.</li>
-</ol>
-<p><img src="/2022/03/06/power-ground-io/rention_seq.drawio.svg"
-alt="rention_seq.drawio" /></p>
-<p>When the rention function is needed, IRTE signal must come from an
-"always-on" core power domain. If you don't need the rention function,
-it is required to tie IRTE to ground. In other words, <strong>no matter
-the rention feature is needed or not, it is required to have PCBRTE in
-each domain</strong>.</p>
-<p><img
-src="/2022/03/06/power-ground-io/PCBRTE_in_digital_domain.drawio.svg"
-alt="PCBRTE_in_digital_domain.drawio" /></p>
-<p><strong>Note</strong>: PCBRTE <strong>does not</strong> need PAD
-connection.</p>
-<h4 id="internal-pins">Internal Pins</h4>
-<p>There are 3 internal global pins, i.e. <strong>ESD</strong>,
-<strong>POCCTRL</strong>, <strong>RTE</strong>, in all digital domain
-cells.</p>
-<p>In real application,</p>
-<ul>
-<li><strong>ESD pin</strong> is an internal signal and
-<strong>active</strong> in ESD event happening</li>
-<li><strong>POCCTRL</strong> is an internal signal and active in
-Power-on-control event.</li>
-</ul>
-<p>However, these special events (i.e. ESD event and Power-on-control
-event) are not modeled in NLDM kit (.lib), only normal function is
-covered, so <strong>ESD</strong> and <strong>POCCTRL</strong> pins are
-simply defined as ground in NLDM kit (.lib).</p>
+<li><p>with<strong>out</strong> plusargs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
+<li><p>with plusargs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>These 3 global pins will be connected automatically after
-<strong>cell-to-cell abutting</strong> in physical layout.</p>
+<p><code>+SEED=31 +RUNSIM</code></p>
 </blockquote>
-<h4 id="power-up-sequence-in-digital-domain">Power-Up sequence in
-Digital Domain</h4>
-<p>Power up the I/O power (VDDPST) first, then the core power (VDD)</p>
-<p><img src="/2022/03/06/power-ground-io/pocctrl_seq.drawio.svg"
-alt="pocctrl_seq.drawio" /></p>
-<ol type="1">
-<li>PVDDD2POCM cell would generate Power-On-Control signal (POCCTRL) to
-have the post-driver NMOS and PMOS off, so that the crowbar current
-would not occur in the post-driver fingers when the I/O voltage is on
-while the core voltage remains off. As such, I/O cell would be in the
-Hi-Z state. when POCCTRL is on, the pll-up/down resistor is disabled and
-C is 0.</li>
-<li>The POCCTRL signal is transmitted to I/O cells through <strong>cell
-abutment</strong>. There is no need to have routing for POCCTTRL nor
-give a control signal to the POCCTRL pin any of I/O cells. Note that the
-POCCTRL signal would be cut if inserting a power-cut (PRCUT) cell.</li>
-</ol>
-<p><img
-src="/2022/03/06/power-ground-io/power-on-control-ciruit.drawio.svg"
-alt="power-on-control-ciruit.drawio" /></p>
-<h4 id="power-down-sequence-in-digital-domain">Power-Down sequence in
-Digital Domain</h4>
-<p>It's the reverse of power-up sequence.</p>
-<h4 id="use-model-in-innovus">Use model in Innovus</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> init_gnd_net <span class="string">&quot;vss_core vss DUMMY_ESD DUMMY_POCCTRL&quot;</span></span><br><span class="line"></span><br><span class="line">addInst -moduleBased u_io -ori R270 -physical -status fixed -loc <span class="number">135</span> <span class="number">994</span> -inst u_io/VDDIO_1 -cell PVDD2CDGM_H</span><br><span class="line"></span><br><span class="line">addNet u_io_RTE</span><br><span class="line">attachTerm FILLER_6 RTE u_io_RTE</span><br><span class="line">attachTerm VDDIO_1 RTE u_right_RTE</span><br><span class="line">setAttribute -skip_routing true -net u_io_RTE</span><br><span class="line"></span><br><span class="line">clearGlobalNets</span><br><span class="line">globalNetConnect DUMMY_POCCTRL -type pgpin -pin POCCTRL -singleInstance u_io/VDDDIO_1 -override</span><br><span class="line">globalNetConnect DUMMY_ESD -type pgpin -pin ESD -singleInstance u_io/VDDDIO_1 -override</span><br></pre></td></tr></table></figure>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> pins [get_object_name [get_ports *]]</span><br><span class="line"><span class="keyword">foreach</span> pin <span class="variable">$pins</span> &#123;</span><br><span class="line">	<span class="keyword">set</span> netPtr [dbGetNetByName <span class="variable">$pin</span>]</span><br><span class="line">	<span class="keyword">if</span> &#123; <span class="variable">$netPtr</span> == <span class="string">&quot;0x0&quot;</span> &#125; &#123;</span><br><span class="line">		<span class="keyword">puts</span> <span class="string">&quot;INFO: can&#x27;t find the port: $pin&quot;</span></span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		setAttribute -net <span class="variable">$pin</span> -skip_routing true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical]]] &#123;</span><br><span class="line">	setAttribute -net <span class="variable">$net</span> -skip_routing true</span><br><span class="line">	dbSet [dbGetNetByName <span class="variable">$net</span>].dontTouch true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h4 id="reference">reference</h4>
+<p>systemverilog-command-line-input URL: <a
+href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
+<p>PLUSARGS IN SYSTEMVERILOG URL:<a
+href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>import package in SystemVerilog compilation</title>
+    <url>/2022/03/24/pkg-import-compile-sv/</url>
+    <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
+<h4 id="project">project</h4>
+<p><strong>yapp_pkg.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<p><strong>yapp_tx_monitor.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Collected Data handle</span></span><br><span class="line">  yapp_packet pkt;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Count packets collected</span></span><br><span class="line">  <span class="keyword">int</span> num_pkt_col;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_monitor)</span><br><span class="line">    `uvm_field_int(num_pkt_col, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"><span class="comment">/////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_monitor</span><br></pre></td></tr></table></figure>
+<p><strong>yapp_tx_driver.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_driver <span class="keyword">extends</span> uvm_driver <span class="variable">#(yapp_packet)</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"> <span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">int</span> num_sent;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_driver)</span><br><span class="line">    `uvm_field_int(num_sent, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Constructor - required syntax for UVM automation and utilities</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">    `uvm_info(get_type_name(), &#123;<span class="string">&quot;start of simulation for &quot;</span>, get_full_name()&#125;, UVM_HIGH)</span><br><span class="line">  <span class="keyword">endfunction</span> : start_of_simulation_phase</span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_driver </span><br></pre></td></tr></table></figure>
+<p><strong>yapp_if.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////// import package //////////////////////</span></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////    </span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Actual Signals</span></span><br><span class="line">  <span class="keyword">logic</span>              in_data_vld;</span><br><span class="line">  <span class="keyword">logic</span>              in_suspend;</span><br><span class="line">  <span class="keyword">logic</span>       [<span class="number">7</span>:<span class="number">0</span>]  in_data;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// signal for transaction recording</span></span><br><span class="line">  <span class="keyword">bit</span> monstart, drvstart;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// local storage for payload</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">7</span>:<span class="number">0</span>] payload_mem [<span class="number">0</span>:<span class="number">63</span>];</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>virtual interface is in package;</p>
+<p><code>yapp_pkg</code> is imported into interface</p>
+</blockquote>
+<blockquote>
+<p>!!!
+<code>typedef uvm_config_db#(virtual yapp_if) yapp_vif_config;</code> is
+<strong>forward declaration</strong></p>
+<p><em>A forward <code>typedef</code> declares an identifier as a type
+in advance of the full definition of that type</em></p>
+</blockquote>
+<h4 id="vcs-compile">VCS compile</h4>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vcs -full64 -R -sverilog  -ntb_opts uvm-1.2 +UVM_TESTNAME=short_yapp_012_test  -f vcs.f  </span><br></pre></td></tr></table></figure>
+<p><strong>vcs.f</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-timescale=1ns/1ns</span><br><span class="line"></span><br><span class="line">+incdir+../sv</span><br><span class="line"></span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
+<p><em>output ERROR</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error-[SV-LCM-PND] Package not defined</span><br><span class="line">../sv/yapp_if.sv, 18</span><br><span class="line">yapp_if, &quot;yapp_pkg::&quot;</span><br><span class="line">  Package scope resolution failed. Token &#x27;yapp_pkg&#x27; is not a package. </span><br><span class="line">  Originating module &#x27;yapp_if&#x27;.</span><br><span class="line">  Move package definition before the use of the package.</span><br></pre></td></tr></table></figure>
+<h4 id="xrun-compile">xrun compile</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xrun -f xrun.f</span><br></pre></td></tr></table></figure>
+<p><strong>xrun.f</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-64</span><br><span class="line"></span><br><span class="line">-uvmhome  CDNS-1.2</span><br><span class="line"></span><br><span class="line">// incdir for include files</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">+UVM_TESTNAME=short_yapp_012_test</span><br><span class="line"></span><br><span class="line">-timescale 1ns/1ns</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
+<p><em>output Error</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">file: ../sv/yapp_if.sv</span><br><span class="line">import yapp_pkg::*;</span><br><span class="line">              |</span><br><span class="line">xmvlog: *E,NOPBIND (../sv/yapp_if.sv,18|14): Package yapp_pkg could not be bound.</span><br><span class="line">        interface worklib.yapp_if:sv</span><br><span class="line">                errors: 1, warnings: 0</span><br></pre></td></tr></table></figure>
+<h4 id="solution">solution</h4>
+<p>place <code>../sv/yapp_pkg.sv</code> before
+<code>../sv/yapp_if.sv</code>.</p>
+<blockquote>
+<p>In this particular example, <code>yapp_pkg</code> is NOT needed in
+interface. just delete <code>import yapp_pkg::*</code> is enough in
+<code>../sv/yapp_if.sv</code></p>
+</blockquote>
+<h3 id="plain-example">plain example</h3>
+<p>The order of compilation unit DON'T matter</p>
+<h4 id="project-1">project</h4>
+<p><strong>hw_top.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.clock_period</span>(<span class="number">32&#x27;d10</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">    <span class="variable">.reset</span>(reset),</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.error</span>(),</span><br><span class="line">    <span class="comment">// YAPP interface signals connection</span></span><br><span class="line">    <span class="variable">.in_data</span>(in0<span class="variable">.in_data</span>),</span><br><span class="line">    <span class="variable">.in_data_vld</span>(in0<span class="variable">.in_data_vld</span>),</span><br><span class="line">    <span class="variable">.in_suspend</span>(in0<span class="variable">.in_suspend</span>),</span><br><span class="line">    <span class="comment">// Output Channels</span></span><br><span class="line">    <span class="comment">//Channel 0   </span></span><br><span class="line">    <span class="variable">.data_0</span>(),</span><br><span class="line">    <span class="variable">.data_vld_0</span>(),</span><br><span class="line">    <span class="variable">.suspend_0</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 1   </span></span><br><span class="line">    <span class="variable">.data_1</span>(),</span><br><span class="line">    <span class="variable">.data_vld_1</span>(),</span><br><span class="line">    <span class="variable">.suspend_1</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 2   </span></span><br><span class="line">    <span class="variable">.data_2</span>(),  </span><br><span class="line">    <span class="variable">.data_vld_2</span>(),</span><br><span class="line">    <span class="variable">.suspend_2</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">// Host Interface Signals</span></span><br><span class="line">    <span class="variable">.haddr</span>(),</span><br><span class="line">    <span class="variable">.hdata</span>(),</span><br><span class="line">    <span class="variable">.hen</span>(),</span><br><span class="line">    <span class="variable">.hwr_rd</span>());</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>yapp_router.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> yapp_router (<span class="keyword">input</span> clock,                              </span><br><span class="line">                    <span class="keyword">input</span> reset,                            </span><br><span class="line">                    <span class="keyword">output</span> error,</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// Input channel</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] in_data,                           </span><br><span class="line">                    <span class="keyword">input</span> in_data_vld,                     </span><br><span class="line">                    <span class="keyword">output</span> in_suspend,</span><br><span class="line">                    <span class="comment">// Output Channels</span></span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_0,  <span class="comment">//Channel 0</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_0, </span><br><span class="line">                    <span class="keyword">input</span> suspend_0, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_1,  <span class="comment">//Channel 1</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_1, </span><br><span class="line">                    <span class="keyword">input</span> suspend_1, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_2,  <span class="comment">//Channel 2</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_2,</span><br><span class="line">                    <span class="keyword">input</span> suspend_2,</span><br><span class="line">     </span><br><span class="line">                    <span class="comment">// Host Interface Signals</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] haddr,</span><br><span class="line">                    <span class="keyword">inout</span> [<span class="number">7</span>:<span class="number">0</span>] hdata,</span><br><span class="line">                    <span class="keyword">input</span> hen,</span><br><span class="line">                    <span class="keyword">input</span> hwr_rd);                            </span><br><span class="line">...</span><br><span class="line"><span class="keyword">endmodule</span>    </span><br></pre></td></tr></table></figure>
+<h4 id="compile">compile</h4>
+<p>place <strong>hw_top.sv</strong> <em>before or after</em>
+<strong>yapp_router.sv</strong> doesn't matter, the compiler (xrun, vcs)
+can compile them successfully.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Always place package before DUT is preferred choice during
+compiling.</p>
+<h3 id="refernce">refernce</h3>
+<p><a
+href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
+forward declaration</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -12848,6 +12704,150 @@ McGraw-Hill, 2017.</p>
         <tag>stability</tag>
         <tag>miller</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Power/Ground and I/O Pins</title>
+    <url>/2022/03/06/power-ground-io/</url>
+    <content><![CDATA[<h4 id="power-ground-pin-information">Power / Ground Pin
+Information</h4>
+<p>In both digital and analog I/O, power and ground pins appear at the
+sub-circuit definiton, allowing user to use the I/O in voltage islands.
+They follow certain naming conventions.</p>
+<ol type="1">
+<li>digital I/O sub-circuit</li>
+</ol>
+<ul>
+<li>VDD: pre-driver core voltage (supplied by PVDD1CDGM)</li>
+<li>VSS: pre-driver ground and also global ground (supplied by
+PVDD1CDGM)</li>
+<li>VDDPST: I/O post-driver voltage, i.e. 1.8V (supplied by PVDD2CDGM or
+PVDD2POCM)</li>
+<li>VSSPOST: I/O post-driver ground (supplied by PVDD2CDGM or
+PVDD2POCM)</li>
+<li>POCCTRL: POCCTRL signal (supplied by PVDD2POCM)</li>
+</ul>
+<ol start="2" type="1">
+<li>analog I/O placed in a core voltage domain, the convention is</li>
+</ol>
+<ul>
+<li>TACVDD: analog core voltage (supplied by PVDD3ACM)</li>
+<li>TACVSS: analog core ground (supplied by PVDD3ACM)</li>
+<li>VSS: global core ground</li>
+</ul>
+<ol start="3" type="1">
+<li>analog I/O placed in an I/O voltage domain, the convention is:</li>
+</ol>
+<ul>
+<li>TAVDD: analog I/O voltage, i.e. 1.8V (supplied by PVDD3AM)</li>
+<li>TAVSS: analog I/O ground (supplied by PVDD3AM)</li>
+<li>VSS: global core ground</li>
+</ul>
+<p>Power/Ground <strong>Combo Cells</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 36%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>power/ground combo pad cell</th>
+<th>pins to be connected to bump</th>
+<th>to core side pin name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PVDD1CDGM</td>
+<td>VDD VSS</td>
+<td>VDD VSS</td>
+</tr>
+<tr class="even">
+<td>PVDD2CDGM PVDD2POCM</td>
+<td>VDDPST VSSPST</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td>PVDD3AM</td>
+<td>TAVDD TAVSS</td>
+<td>AVDD AVSS</td>
+</tr>
+<tr class="even">
+<td>PVDD3ACM</td>
+<td>TACVDD TACVSS</td>
+<td>AVDD AVSS</td>
+</tr>
+</tbody>
+</table>
+<h4 id="note-for-the-retention-mode">Note for the retention mode</h4>
+<ol type="1">
+<li>At initial state, IRTE must be <strong>0</strong> when VDD is
+off.</li>
+<li>IRTE must be kept &gt;= 10us after VDD turns on again (from the
+retention mode to the normal operation mode).</li>
+<li>IRTE can be switched only when both VDD and VDDPST are on.</li>
+</ol>
+<p><img src="/2022/03/06/power-ground-io/rention_seq.drawio.svg"
+alt="rention_seq.drawio" /></p>
+<p>When the rention function is needed, IRTE signal must come from an
+"always-on" core power domain. If you don't need the rention function,
+it is required to tie IRTE to ground. In other words, <strong>no matter
+the rention feature is needed or not, it is required to have PCBRTE in
+each domain</strong>.</p>
+<p><img
+src="/2022/03/06/power-ground-io/PCBRTE_in_digital_domain.drawio.svg"
+alt="PCBRTE_in_digital_domain.drawio" /></p>
+<p><strong>Note</strong>: PCBRTE <strong>does not</strong> need PAD
+connection.</p>
+<h4 id="internal-pins">Internal Pins</h4>
+<p>There are 3 internal global pins, i.e. <strong>ESD</strong>,
+<strong>POCCTRL</strong>, <strong>RTE</strong>, in all digital domain
+cells.</p>
+<p>In real application,</p>
+<ul>
+<li><strong>ESD pin</strong> is an internal signal and
+<strong>active</strong> in ESD event happening</li>
+<li><strong>POCCTRL</strong> is an internal signal and active in
+Power-on-control event.</li>
+</ul>
+<p>However, these special events (i.e. ESD event and Power-on-control
+event) are not modeled in NLDM kit (.lib), only normal function is
+covered, so <strong>ESD</strong> and <strong>POCCTRL</strong> pins are
+simply defined as ground in NLDM kit (.lib).</p>
+<blockquote>
+<p>These 3 global pins will be connected automatically after
+<strong>cell-to-cell abutting</strong> in physical layout.</p>
+</blockquote>
+<h4 id="power-up-sequence-in-digital-domain">Power-Up sequence in
+Digital Domain</h4>
+<p>Power up the I/O power (VDDPST) first, then the core power (VDD)</p>
+<p><img src="/2022/03/06/power-ground-io/pocctrl_seq.drawio.svg"
+alt="pocctrl_seq.drawio" /></p>
+<ol type="1">
+<li>PVDDD2POCM cell would generate Power-On-Control signal (POCCTRL) to
+have the post-driver NMOS and PMOS off, so that the crowbar current
+would not occur in the post-driver fingers when the I/O voltage is on
+while the core voltage remains off. As such, I/O cell would be in the
+Hi-Z state. when POCCTRL is on, the pll-up/down resistor is disabled and
+C is 0.</li>
+<li>The POCCTRL signal is transmitted to I/O cells through <strong>cell
+abutment</strong>. There is no need to have routing for POCCTTRL nor
+give a control signal to the POCCTRL pin any of I/O cells. Note that the
+POCCTRL signal would be cut if inserting a power-cut (PRCUT) cell.</li>
+</ol>
+<p><img
+src="/2022/03/06/power-ground-io/power-on-control-ciruit.drawio.svg"
+alt="power-on-control-ciruit.drawio" /></p>
+<h4 id="power-down-sequence-in-digital-domain">Power-Down sequence in
+Digital Domain</h4>
+<p>It's the reverse of power-up sequence.</p>
+<h4 id="use-model-in-innovus">Use model in Innovus</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> init_gnd_net <span class="string">&quot;vss_core vss DUMMY_ESD DUMMY_POCCTRL&quot;</span></span><br><span class="line"></span><br><span class="line">addInst -moduleBased u_io -ori R270 -physical -status fixed -loc <span class="number">135</span> <span class="number">994</span> -inst u_io/VDDIO_1 -cell PVDD2CDGM_H</span><br><span class="line"></span><br><span class="line">addNet u_io_RTE</span><br><span class="line">attachTerm FILLER_6 RTE u_io_RTE</span><br><span class="line">attachTerm VDDIO_1 RTE u_right_RTE</span><br><span class="line">setAttribute -skip_routing true -net u_io_RTE</span><br><span class="line"></span><br><span class="line">clearGlobalNets</span><br><span class="line">globalNetConnect DUMMY_POCCTRL -type pgpin -pin POCCTRL -singleInstance u_io/VDDDIO_1 -override</span><br><span class="line">globalNetConnect DUMMY_ESD -type pgpin -pin ESD -singleInstance u_io/VDDDIO_1 -override</span><br></pre></td></tr></table></figure>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> pins [get_object_name [get_ports *]]</span><br><span class="line"><span class="keyword">foreach</span> pin <span class="variable">$pins</span> &#123;</span><br><span class="line">	<span class="keyword">set</span> netPtr [dbGetNetByName <span class="variable">$pin</span>]</span><br><span class="line">	<span class="keyword">if</span> &#123; <span class="variable">$netPtr</span> == <span class="string">&quot;0x0&quot;</span> &#125; &#123;</span><br><span class="line">		<span class="keyword">puts</span> <span class="string">&quot;INFO: can&#x27;t find the port: $pin&quot;</span></span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		setAttribute -net <span class="variable">$pin</span> -skip_routing true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical]]] &#123;</span><br><span class="line">	setAttribute -net <span class="variable">$net</span> -skip_routing true</span><br><span class="line">	dbSet [dbGetNetByName <span class="variable">$net</span>].dontTouch true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Power Spectra and Power Spectral Densities</title>
@@ -13728,19 +13728,6 @@ alt="image-20220401011543866" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Rocky Linux 8 extend LVM in VMware</title>
-    <url>/2022/02/02/rocky8-gparted/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) gparted extend</span><br><span class="line">2) </span><br><span class="line">  lvextend -l +100%FREE /dev/rl/root</span><br><span class="line">3) </span><br><span class="line">  xfs_growfs /dev/mapper/rl-root</span><br><span class="line"></span><br><span class="line">usefull command:</span><br><span class="line">  df -h</span><br><span class="line">  lvdisplay</span><br><span class="line">  fdisk -l</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line">https://pocketadmin.tech/en/centos-8-extend-lvm/</span><br><span class="line"></span><br><span class="line">$ sudo lvdisplay</span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/rl/swap</span><br><span class="line">  LV Name                swap</span><br><span class="line">  VG Name                rl</span><br><span class="line">  LV UUID                toZKEu-P5oV-6WOV-026Z-eFnI-xaSP-FgEbz5</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time myserver, 2021-12-03 21:28:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 2</span><br><span class="line">  LV Size                5.00 GiB</span><br><span class="line">  Current LE             1280</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           253:1</span><br><span class="line"></span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/rl/root</span><br><span class="line">  LV Name                root</span><br><span class="line">  VG Name                rl</span><br><span class="line">  LV UUID                S2soRE-umc7-Z6b3-i44x-TiBO-ulnk-ETgEoj</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time myserver, 2021-12-03 21:28:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 1</span><br><span class="line">  LV Size                &lt;194.00 GiB</span><br><span class="line">  Current LE             49663</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           253:0</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>gparted</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
     <url>/2022/02/02/rocky8-cadence/</url>
     <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
@@ -13756,6 +13743,19 @@ alt="image-20220401011543866" /></p>
         <tag>yum</tag>
         <tag>os</tag>
         <tag>rpm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Rocky Linux 8 extend LVM in VMware</title>
+    <url>/2022/02/02/rocky8-gparted/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) gparted extend</span><br><span class="line">2) </span><br><span class="line">  lvextend -l +100%FREE /dev/rl/root</span><br><span class="line">3) </span><br><span class="line">  xfs_growfs /dev/mapper/rl-root</span><br><span class="line"></span><br><span class="line">usefull command:</span><br><span class="line">  df -h</span><br><span class="line">  lvdisplay</span><br><span class="line">  fdisk -l</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line">https://pocketadmin.tech/en/centos-8-extend-lvm/</span><br><span class="line"></span><br><span class="line">$ sudo lvdisplay</span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/rl/swap</span><br><span class="line">  LV Name                swap</span><br><span class="line">  VG Name                rl</span><br><span class="line">  LV UUID                toZKEu-P5oV-6WOV-026Z-eFnI-xaSP-FgEbz5</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time myserver, 2021-12-03 21:28:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 2</span><br><span class="line">  LV Size                5.00 GiB</span><br><span class="line">  Current LE             1280</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           253:1</span><br><span class="line"></span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/rl/root</span><br><span class="line">  LV Name                root</span><br><span class="line">  VG Name                rl</span><br><span class="line">  LV UUID                S2soRE-umc7-Z6b3-i44x-TiBO-ulnk-ETgEoj</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time myserver, 2021-12-03 21:28:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 1</span><br><span class="line">  LV Size                &lt;194.00 GiB</span><br><span class="line">  Current LE             49663</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           253:0</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>gparted</tag>
       </tags>
   </entry>
   <entry>
@@ -14267,31 +14267,6 @@ Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
       </tags>
   </entry>
   <entry>
-    <title>Self-heating Effect</title>
-    <url>/2023/05/13/self-heating/</url>
-    <content><![CDATA[<h2 id="heat-sink-hs">Heat Sink (HS)</h2>
-<ol type="1">
-<li><p>guard ring</p>
-<p>closer OD help reduce dT</p></li>
-<li><p>extended gate</p></li>
-<li><p>source/drain metal stack</p></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Self-Heating Issues Spread <a
-href="https://semiengineering.com/self-heating-issues-spread/">https://semiengineering.com/self-heating-issues-spread/</a></p>
-<p>Y. Zhao and Y. Qu, "Impact of Self-Heating Effect on Transistor
-Characterization and Reliability Issues in Sub-10 nm Technology Nodes,"
-in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
-2019, doi: 10.1109/JEDS.2019.2911085.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>she</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Scattering parameters</title>
     <url>/2023/09/29/scattering/</url>
     <content><![CDATA[<h2 id="rational-fit">Rational Fit</h2>
@@ -14341,6 +14316,31 @@ href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">htt
       </categories>
       <tags>
         <tag>channel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self-heating Effect</title>
+    <url>/2023/05/13/self-heating/</url>
+    <content><![CDATA[<h2 id="heat-sink-hs">Heat Sink (HS)</h2>
+<ol type="1">
+<li><p>guard ring</p>
+<p>closer OD help reduce dT</p></li>
+<li><p>extended gate</p></li>
+<li><p>source/drain metal stack</p></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Self-Heating Issues Spread <a
+href="https://semiengineering.com/self-heating-issues-spread/">https://semiengineering.com/self-heating-issues-spread/</a></p>
+<p>Y. Zhao and Y. Qu, "Impact of Self-Heating Effect on Transistor
+Characterization and Reliability Issues in Sub-10 nm Technology Nodes,"
+in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
+2019, doi: 10.1109/JEDS.2019.2911085.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>she</tag>
       </tags>
   </entry>
   <entry>
@@ -14952,24 +14952,6 @@ href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L1
       </categories>
   </entry>
   <entry>
-    <title>sub-binary radix DAC</title>
-    <url>/2022/03/19/sub-binary-radix-DAC/</url>
-    <content><![CDATA[<p><strong>reference</strong>:</p>
-<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
-AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
-<p>M. Pastre and M. Kayal, "High-precision DAC based on a
-self-calibrated sub-binary radix converter," 2004 IEEE International
-Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
-I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>dac</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SST Driver</title>
     <url>/2022/03/08/sst-drv/</url>
     <content><![CDATA[<h2 id="sharing-termination-in-sst-transmitter">sharing termination in
@@ -15040,6 +15022,93 @@ href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/0
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>sub-binary radix DAC</title>
+    <url>/2022/03/19/sub-binary-radix-DAC/</url>
+    <content><![CDATA[<p><strong>reference</strong>:</p>
+<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
+AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
+<p>M. Pastre and M. Kayal, "High-precision DAC based on a
+self-calibrated sub-binary radix converter," 2004 IEEE International
+Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
+I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>dac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
+    <url>/2022/03/16/sv-rnm-101/</url>
+    <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
+<ul>
+<li>model analog blocks operation as signal flow model</li>
+<li>only the digital solver is used for high-speed simulation
+<ul>
+<li>Event-driven</li>
+<li>No convergence issues, because no analog solver is used</li>
+</ul></li>
+<li>Five different language standards support real number modeling:
+<ul>
+<li><strong>wreal</strong> (wired-real) ports in Verilog-AMS</li>
+<li><strong>real</strong> data type in VHDL</li>
+<li><strong>real</strong> data type in Verilog</li>
+<li><strong>real</strong> variables and <strong>nettypes</strong> in
+SystemVerilog (SV)</li>
+<li><strong>real</strong> types in e</li>
+</ul></li>
+</ul>
+<h2 id="benefits-of-rnm">Benefits of RNM</h2>
+<ul>
+<li>Most analog circuits that need to be modeled for MS verification at
+the SoC level can be described in terms of real-valued voltages or
+currents</li>
+<li>RNM is a mixed approach, borrowing concepts from both continuous and
+discrete domains
+<ul>
+<li>The values are floating-point (real) number.</li>
+<li>Time is discrete; the real signals change values based on discrete
+events</li>
+</ul></li>
+<li>Applicability of RNM is bounded primarily by
+<strong>signal-flow</strong> model style</li>
+<li>Migrating analog behavior from the analog domain to the event or
+pseudo-analog domain can bring huge benefits without sacrificing too
+much accuracy</li>
+<li>Simulation is executed by a digital simulation engine without need
+for the analog solver</li>
+<li>Hence real-number modeling enables very high performance simulation
+of mixed-signal systems</li>
+</ul>
+<h2 id="limitations-of-rnm">Limitations of RNM</h2>
+<ul>
+<li>connecting <strong>real</strong> or <strong>wreal</strong> signals
+to electrical signals requires careful consideration
+<ul>
+<li>Too conservative an approach can lead to large numbers of
+timepoints</li>
+<li>Too liberal an approach can lead to losing signal accuracy</li>
+</ul></li>
+<li>Time accuracy limited by the discrete sampling approach and the
+`<code>timescale</code> setting - no continuous signals anymore</li>
+<li>Limited capability for combination of signals by wiring outputs
+together
+<ul>
+<li>Requires assumptions about impedances to do simple merging</li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>rnm</tag>
+        <tag>EE_pkg</tag>
+      </tags>
   </entry>
   <entry>
     <title>Metastability and Synchronizer</title>
@@ -15128,75 +15197,6 @@ href="https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.I
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
-    <url>/2022/03/16/sv-rnm-101/</url>
-    <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
-<ul>
-<li>model analog blocks operation as signal flow model</li>
-<li>only the digital solver is used for high-speed simulation
-<ul>
-<li>Event-driven</li>
-<li>No convergence issues, because no analog solver is used</li>
-</ul></li>
-<li>Five different language standards support real number modeling:
-<ul>
-<li><strong>wreal</strong> (wired-real) ports in Verilog-AMS</li>
-<li><strong>real</strong> data type in VHDL</li>
-<li><strong>real</strong> data type in Verilog</li>
-<li><strong>real</strong> variables and <strong>nettypes</strong> in
-SystemVerilog (SV)</li>
-<li><strong>real</strong> types in e</li>
-</ul></li>
-</ul>
-<h2 id="benefits-of-rnm">Benefits of RNM</h2>
-<ul>
-<li>Most analog circuits that need to be modeled for MS verification at
-the SoC level can be described in terms of real-valued voltages or
-currents</li>
-<li>RNM is a mixed approach, borrowing concepts from both continuous and
-discrete domains
-<ul>
-<li>The values are floating-point (real) number.</li>
-<li>Time is discrete; the real signals change values based on discrete
-events</li>
-</ul></li>
-<li>Applicability of RNM is bounded primarily by
-<strong>signal-flow</strong> model style</li>
-<li>Migrating analog behavior from the analog domain to the event or
-pseudo-analog domain can bring huge benefits without sacrificing too
-much accuracy</li>
-<li>Simulation is executed by a digital simulation engine without need
-for the analog solver</li>
-<li>Hence real-number modeling enables very high performance simulation
-of mixed-signal systems</li>
-</ul>
-<h2 id="limitations-of-rnm">Limitations of RNM</h2>
-<ul>
-<li>connecting <strong>real</strong> or <strong>wreal</strong> signals
-to electrical signals requires careful consideration
-<ul>
-<li>Too conservative an approach can lead to large numbers of
-timepoints</li>
-<li>Too liberal an approach can lead to losing signal accuracy</li>
-</ul></li>
-<li>Time accuracy limited by the discrete sampling approach and the
-`<code>timescale</code> setting - no continuous signals anymore</li>
-<li>Limited capability for combination of signals by wiring outputs
-together
-<ul>
-<li>Requires assumptions about impedances to do simple merging</li>
-</ul></li>
-</ul>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>rnm</tag>
-        <tag>EE_pkg</tag>
-      </tags>
   </entry>
   <entry>
     <title>SystemVerilog clocking block</title>
@@ -17251,38 +17251,6 @@ in Verdi | Synopsys</a></p>
       </categories>
   </entry>
   <entry>
-    <title>verilog constant part-select and indexed part-select</title>
-    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
-    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
-<strong>part-select</strong>. There are two types of part-selects, one
-with a <strong>constant part-select</strong> and another with an
-<strong>indexed part-select</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
-<p>Having a variable part-select allows it to be used effectively in
-loops to select parts of the vector. Although the starting bit can be
-<strong>varied</strong>, the width has to be
-<strong>constant</strong>.</p>
-<blockquote>
-<p><strong>[&lt;start_bit +: <width>] // part-select increments from
-start-bit</strong></p>
-<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
-start-bit</strong></p>
-</blockquote>
-<p><strong>Example</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
-<p><strong>ref</strong></p>
-<p><a
-href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
-scalar and vector</a></p>
-<p><a
-href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
-is the "+:" operator called in Verilog?</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>verilog readmemb and readmemh</title>
     <url>/2022/02/12/verilog-readmemb/</url>
     <content><![CDATA[<p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
@@ -17317,6 +17285,38 @@ address bound.</p>
 <p><a
 href="https://projectf.io/posts/initialize-memory-in-verilog/">Initialize
 Memory in Verilog</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>verilog constant part-select and indexed part-select</title>
+    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
+    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
+<strong>part-select</strong>. There are two types of part-selects, one
+with a <strong>constant part-select</strong> and another with an
+<strong>indexed part-select</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
+<p>Having a variable part-select allows it to be used effectively in
+loops to select parts of the vector. Although the starting bit can be
+<strong>varied</strong>, the width has to be
+<strong>constant</strong>.</p>
+<blockquote>
+<p><strong>[&lt;start_bit +: <width>] // part-select increments from
+start-bit</strong></p>
+<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
+start-bit</strong></p>
+</blockquote>
+<p><strong>Example</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
+<p><strong>ref</strong></p>
+<p><a
+href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
+scalar and vector</a></p>
+<p><a
+href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
+is the "+:" operator called in Verilog?</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -17365,19 +17365,6 @@ Memory in Verilog</a></p>
       </tags>
   </entry>
   <entry>
-    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
-    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Viterbi Algorithm for ADC-Based Serial Link</title>
     <url>/2022/09/07/viterbi/</url>
     <content><![CDATA[<h2 id="reference">reference</h2>
@@ -17393,6 +17380,19 @@ href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485
       <tags>
         <tag>adc</tag>
         <tag>mlse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
+    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
       </tags>
   </entry>
   <entry>

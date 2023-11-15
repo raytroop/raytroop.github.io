@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">151</span>
+        <span class="site-state-item-count">149</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -248,7 +248,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>leakage</strong>:</p>
+          <blockquote>
+<p>Applying the Hanning window (or any window) to a <strong>periodic
+signal</strong> creates leakage.</p>
+</blockquote>
+<p><strong>leakage</strong>:</p>
 <p>​ The component at one frequency leaks into the vicinity of another
 compnent owing to the spectral smearing introdued by
 <em>window</em>.</p>
@@ -470,8 +474,8 @@ determining the true amplitude of individual peaks very difficult.</p>
 proper analysis could be performed.</p>
 <p><img src="/2023/05/27/dft-window/windowed-2tone.png"
 alt="windowed-2tone" /></p>
-<h2 id="the-window-function-in-the-frequency-domain">The window function
-in the frequency domain</h2>
+<h2 id="window-function-in-frequency-domain">window function in
+frequency domain</h2>
 <p>The transfer function <span class="math inline">\(a(f)\)</span> of a
 window <span class="math inline">\(w_j, j \in [0, N-1]\)</span>
 expresses the response of the window to a sinusoidal signal at an offset
@@ -486,7 +490,39 @@ a_i(f)=\sum_{j=0}^{N-1}w_j\sin (2\pi f j/N)
 a(f) = \frac{\sqrt{a_r^2+a_i^2}}{S_1}
 \]</span> where <span class="math inline">\(S_1 = \sum
 _{k=0}^{N-1}w_k\)</span></p>
-<h2 id="properties-of-the-windows">Properties of the Windows</h2>
+<h3 id="rectangle-window-example">rectangle window example</h3>
+<blockquote>
+<p>aka. Uniform window, "Rectangular" window, "no window"</p>
+<p>Whenever a measurement signal is periodic, a Uniform window is
+preferred. Applying a Hanning or Flattop window to a periodic signal
+will actually create amplitude and frequency distortion.</p>
+</blockquote>
+<ol type="1">
+<li>When <span class="math inline">\(f=0\)</span></li>
+</ol>
+<p><span class="math display">\[
+a_r(f) + ja_i(f) = \sum_{k=0}^{N-1}w_k = N
+\]</span></p>
+<ol start="3" type="1">
+<li>When <span class="math inline">\(f \neq 0\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+a_r(f) + ja_i(f) &amp;= \sum_{k=0}^{N-1} e^{\frac{j2\pi k f}{N}} \\
+&amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} + e^{\frac{j2\pi (k+N/2)
+f}{N}} \\
+&amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} + e^{j\pi}
+e^{\frac{j2\pi k f}{N}} \\
+&amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} - e^{\frac{j2\pi k f}{N}
+\\
+&amp;= 0
+\end{align}\]</span></p>
+<blockquote>
+<p>A Uniform window creates no frequency or amplitude distortion when
+the <strong>measured signal</strong> is <strong>periodic</strong>.</p>
+<p>However, if the signal cannot be guaranteed to be periodic, a Uniform
+window should be avoided.</p>
+</blockquote>
+<h2 id="window-properties">Window Properties</h2>
 <p>There is <strong>no</strong> possibility of trade-off between
 <em>main-lobe width</em> and <em>sied-lobe amplitude</em>, since the
 <em>window length</em> is the only variable parameter.</p>
@@ -520,6 +556,8 @@ alt="image-20230526010047826" /></p>
 <p>hanning reduce leakage and reduce amplitude error</p>
 </blockquote>
 <h2 id="reference">reference</h2>
+<p>Windows and Spectral Leakage. URL:<a
+target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/windows-and-spectral-leakage">https://community.sw.siemens.com/s/article/windows-and-spectral-leakage</a></p>
 <p>Article (20416822) Title: How to Utilize a Windowing Technique for
 Accurate DFT URL: <a
 target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050UrEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050UrEAI</a></p>
@@ -532,8 +570,6 @@ target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/
 target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/window-correction-factors">https://community.sw.siemens.com/s/article/window-correction-factors</a></p>
 <p>Root Mean Square (RMS) and Overall Level. URL:<a
 target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/root-mean-square-rms-and-overall-level">https://community.sw.siemens.com/s/article/root-mean-square-rms-and-overall-level</a></p>
-<p>Windows and Spectral Leakage. URL:<a
-target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/windows-and-spectral-leakage">https://community.sw.siemens.com/s/article/windows-and-spectral-leakage</a></p>
 <p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
 3rd edition</p>
 <p>Stefan Scholl, "Exact Signal Measurements using FFT
@@ -620,7 +656,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -745,7 +781,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -864,7 +900,7 @@ target="_blank" rel="noopener" href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbds
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1320,7 +1356,7 @@ target="_blank" rel="noopener" href="https://coecs.ou.edu/Joseph.P.Havlicek/ece3
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1418,7 +1454,7 @@ in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1563,7 +1599,7 @@ Revision 7</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:34" itemprop="dateModified" datetime="2023-11-15T02:02:34+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1751,7 +1787,7 @@ target="_blank" rel="noopener" href="https://shar.es/afO6e1">https://shar.es/afO
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1979,7 +2015,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2098,7 +2134,7 @@ target="_blank" rel="noopener" href="https://anysilicon.com/the-ultimate-guide-t
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

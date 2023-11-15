@@ -18,12 +18,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="leakage: ​ The component at one frequency leaks into the vicinity of another compnent owing to the spectral smearing introdued by window.  Notice side lobes adding out of phase can reduce the heights">
+    <meta name="description" content="Applying the Hanning window (or any window) to a periodic signal creates leakage.  leakage: ​ The component at one frequency leaks into the vicinity of another compnent owing to the spectral smearing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windowing Technique for Accurate DFT">
 <meta property="og:url" content="http://example.com/2023/05/27/dft-window/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="leakage: ​ The component at one frequency leaks into the vicinity of another compnent owing to the spectral smearing introdued by window.  Notice side lobes adding out of phase can reduce the heights">
+<meta property="og:description" content="Applying the Hanning window (or any window) to a periodic signal creates leakage.  leakage: ​ The component at one frequency leaks into the vicinity of another compnent owing to the spectral smearing">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2023/05/27/dft-window/sharpTransient.png">
 <meta property="og:image" content="http://example.com/2023/05/27/dft-window/windowedsignal.png">
@@ -44,12 +44,8 @@
 <meta property="og:image" content="http://example.com/2023/05/27/dft-window/image-20230526005934411.png">
 <meta property="og:image" content="http://example.com/2023/05/27/dft-window/image-20230526010047826.png">
 <meta property="article:published_time" content="2023-05-27T10:58:53.000Z">
-<meta property="article:modified_time" content="2023-11-15T02:02:33.745Z">
+<meta property="article:modified_time" content="2023-11-15T06:14:47.272Z">
 <meta property="article:author" content="Guo">
-<meta property="article:tag" content="signal">
-<meta property="article:tag" content="dft">
-<meta property="article:tag" content="windowing">
-<meta property="article:tag" content="leakage">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/05/27/dft-window/sharpTransient.png">
 
@@ -161,8 +157,8 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#windowed-signal"><span class="nav-number">1.</span> <span class="nav-text">Windowed Signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#periodic-versus-non-periodic-background"><span class="nav-number">2.</span> <span class="nav-text">Periodic versus
-Non-Periodic Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#periodic"><span class="nav-number">2.1.</span> <span class="nav-text">Periodic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-periodic"><span class="nav-number">2.2.</span> <span class="nav-text">Non-periodic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hanning"><span class="nav-number">3.</span> <span class="nav-text">Hanning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#periodic-signal"><span class="nav-number">3.1.</span> <span class="nav-text">periodic signal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-periodic-signal"><span class="nav-number">3.2.</span> <span class="nav-text">non-periodic signal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rms-calculation"><span class="nav-number">3.3.</span> <span class="nav-text">RMS calculation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flattop"><span class="nav-number">4.</span> <span class="nav-text">Flattop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amplitude-errors"><span class="nav-number">4.1.</span> <span class="nav-text">amplitude errors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#leakage"><span class="nav-number">4.2.</span> <span class="nav-text">leakage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uniform"><span class="nav-number">5.</span> <span class="nav-text">Uniform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#benefit-of-reducing-leakage"><span class="nav-number">6.</span> <span class="nav-text">Benefit of Reducing Leakage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#two-tones"><span class="nav-number">6.1.</span> <span class="nav-text">Two tones</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-window-function-in-the-frequency-domain"><span class="nav-number">7.</span> <span class="nav-text">The window function
-in the frequency domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#properties-of-the-windows"><span class="nav-number">8.</span> <span class="nav-text">Properties of the Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">9.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">10.</span> <span class="nav-text">reference</span></a></li></ol></div>
+Non-Periodic Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#periodic"><span class="nav-number">2.1.</span> <span class="nav-text">Periodic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-periodic"><span class="nav-number">2.2.</span> <span class="nav-text">Non-periodic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hanning"><span class="nav-number">3.</span> <span class="nav-text">Hanning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#periodic-signal"><span class="nav-number">3.1.</span> <span class="nav-text">periodic signal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-periodic-signal"><span class="nav-number">3.2.</span> <span class="nav-text">non-periodic signal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rms-calculation"><span class="nav-number">3.3.</span> <span class="nav-text">RMS calculation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flattop"><span class="nav-number">4.</span> <span class="nav-text">Flattop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amplitude-errors"><span class="nav-number">4.1.</span> <span class="nav-text">amplitude errors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#leakage"><span class="nav-number">4.2.</span> <span class="nav-text">leakage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uniform"><span class="nav-number">5.</span> <span class="nav-text">Uniform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#benefit-of-reducing-leakage"><span class="nav-number">6.</span> <span class="nav-text">Benefit of Reducing Leakage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#two-tones"><span class="nav-number">6.1.</span> <span class="nav-text">Two tones</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-function-in-frequency-domain"><span class="nav-number">7.</span> <span class="nav-text">window function in
+frequency domain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rectangle-window-example"><span class="nav-number">7.1.</span> <span class="nav-text">rectangle window example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-properties"><span class="nav-number">8.</span> <span class="nav-text">Window Properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">9.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">10.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,7 +182,7 @@ in the frequency domain</span></a></li><li class="nav-item nav-level-2"><a class
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">151</span>
+        <span class="site-state-item-count">149</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -257,7 +253,7 @@ in the frequency domain</span></a></li><li class="nav-item nav-level-2"><a class
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-15 02:02:33" itemprop="dateModified" datetime="2023-11-15T02:02:33+00:00">2023-11-15</time>
+      <time title="Modified: 2023-11-15 06:14:47" itemprop="dateModified" datetime="2023-11-15T06:14:47+00:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -278,7 +274,11 @@ in the frequency domain</span></a></li><li class="nav-item nav-level-2"><a class
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><strong>leakage</strong>:</p>
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>Applying the Hanning window (or any window) to a <strong>periodic
+signal</strong> creates leakage.</p>
+</blockquote>
+<p><strong>leakage</strong>:</p>
 <p>​ The component at one frequency leaks into the vicinity of another
 compnent owing to the spectral smearing introdued by
 <em>window</em>.</p>
@@ -500,8 +500,8 @@ determining the true amplitude of individual peaks very difficult.</p>
 proper analysis could be performed.</p>
 <p><img src="/2023/05/27/dft-window/windowed-2tone.png"
 alt="windowed-2tone" /></p>
-<h2 id="the-window-function-in-the-frequency-domain">The window function
-in the frequency domain</h2>
+<h2 id="window-function-in-frequency-domain">window function in
+frequency domain</h2>
 <p>The transfer function <span class="math inline">\(a(f)\)</span> of a
 window <span class="math inline">\(w_j, j \in [0, N-1]\)</span>
 expresses the response of the window to a sinusoidal signal at an offset
@@ -516,7 +516,39 @@ a_i(f)=\sum_{j=0}^{N-1}w_j\sin (2\pi f j/N)
 a(f) = \frac{\sqrt{a_r^2+a_i^2}}{S_1}
 \]</span> where <span class="math inline">\(S_1 = \sum
 _{k=0}^{N-1}w_k\)</span></p>
-<h2 id="properties-of-the-windows">Properties of the Windows</h2>
+<h3 id="rectangle-window-example">rectangle window example</h3>
+<blockquote>
+<p>aka. Uniform window, "Rectangular" window, "no window"</p>
+<p>Whenever a measurement signal is periodic, a Uniform window is
+preferred. Applying a Hanning or Flattop window to a periodic signal
+will actually create amplitude and frequency distortion.</p>
+</blockquote>
+<ol type="1">
+<li>When <span class="math inline">\(f=0\)</span></li>
+</ol>
+<p><span class="math display">\[
+a_r(f) + ja_i(f) = \sum_{k=0}^{N-1}w_k = N
+\]</span></p>
+<ol start="3" type="1">
+<li>When <span class="math inline">\(f \neq 0\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+a_r(f) + ja_i(f) &amp;= \sum_{k=0}^{N-1} e^{\frac{j2\pi k f}{N}} \\
+&amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} + e^{\frac{j2\pi (k+N/2)
+f}{N}} \\
+&amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} + e^{j\pi}
+e^{\frac{j2\pi k f}{N}} \\
+&amp;= \sum_{k=0}^{N/2} e^{\frac{j2\pi k f}{N}} - e^{\frac{j2\pi k f}{N}
+\\
+&amp;= 0
+\end{align}\]</span></p>
+<blockquote>
+<p>A Uniform window creates no frequency or amplitude distortion when
+the <strong>measured signal</strong> is <strong>periodic</strong>.</p>
+<p>However, if the signal cannot be guaranteed to be periodic, a Uniform
+window should be avoided.</p>
+</blockquote>
+<h2 id="window-properties">Window Properties</h2>
 <p>There is <strong>no</strong> possibility of trade-off between
 <em>main-lobe width</em> and <em>sied-lobe amplitude</em>, since the
 <em>window length</em> is the only variable parameter.</p>
@@ -550,6 +582,8 @@ alt="image-20230526010047826" /></p>
 <p>hanning reduce leakage and reduce amplitude error</p>
 </blockquote>
 <h2 id="reference">reference</h2>
+<p>Windows and Spectral Leakage. URL:<a
+target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/windows-and-spectral-leakage">https://community.sw.siemens.com/s/article/windows-and-spectral-leakage</a></p>
 <p>Article (20416822) Title: How to Utilize a Windowing Technique for
 Accurate DFT URL: <a
 target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050UrEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050UrEAI</a></p>
@@ -562,8 +596,6 @@ target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/
 target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/window-correction-factors">https://community.sw.siemens.com/s/article/window-correction-factors</a></p>
 <p>Root Mean Square (RMS) and Overall Level. URL:<a
 target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/root-mean-square-rms-and-overall-level">https://community.sw.siemens.com/s/article/root-mean-square-rms-and-overall-level</a></p>
-<p>Windows and Spectral Leakage. URL:<a
-target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/windows-and-spectral-leakage">https://community.sw.siemens.com/s/article/windows-and-spectral-leakage</a></p>
 <p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
 3rd edition</p>
 <p>Stefan Scholl, "Exact Signal Measurements using FFT
@@ -596,12 +628,6 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/signal/" rel="tag"># signal</a>
-              <a href="/tags/dft/" rel="tag"># dft</a>
-              <a href="/tags/windowing/" rel="tag"># windowing</a>
-              <a href="/tags/leakage/" rel="tag"># leakage</a>
-          </div>
 
         
 

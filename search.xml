@@ -837,18 +837,6 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Data Exchange</title>
-    <url>/2022/02/07/Innovus-data-exchange/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Innovus check mode variants</title>
     <url>/2022/02/07/Innovus-check-mode-variants/</url>
     <content><![CDATA[<p>checkDesign</p>
@@ -861,6 +849,18 @@ alt="createPGPin_onDie.drawio" /></p>
 <p>setRouteMode</p>
 <p>setExtractRCMode</p>
 <p>setOptMode</p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Innovus Data Exchange</title>
+    <url>/2022/02/07/Innovus-data-exchange/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1437,66 +1437,6 @@ href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.c
       </categories>
   </entry>
   <entry>
-    <title>Precedence Rule of UVM uvm_config_db::set</title>
-    <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
-    <content><![CDATA[<p><a
-href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
-<h4 id="two-precedence-rules">Two Precedence rules</h4>
-<p>There are two precedence rules applicable to
-<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
-<ol type="1">
-<li>A <code>set()</code> call in <strong>a context higher up the
-component hierarchy</strong> takes precedence over a <code>set()</code>
-call that occurs lower in the hierarchical path.</li>
-<li>On having <strong>same context field</strong>, <strong>the
-last</strong> <code>set()</code> call takes precedence over the earlier
-<code>set()</code> call.</li>
-</ol>
-<h4 id="example-for-rule---1">Example for rule - 1</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>As you can see , the <code>uvm_config_db::set</code> is after the
-factory <code>type_id::create</code>, but <strong>receive_value</strong>
-is still <strong>100</strong>, I believe that <code>build_phase</code>
-of upper hierarchy finish first before create lower components.</p>
-<p>But the recommendation in literature and many web is place
-<code>uvm_config_db::set</code> before <code>create</code></p>
-</blockquote>
-<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.edaplayground.com/x/jgvh">[complete
-code]</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
-<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
-<p>The <code>set</code> in <code>super.build_phase</code> and
-<code>set</code> in current <code>build_phase</code> are at the
-<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
-<p>base_test</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
-<h4 id="test2---one">test2 - One</h4>
-<blockquote>
-<p><code>yapp_incr_payload_seq</code> override the
-<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
-<strong>yapp_incr_payload_seq</strong> is used.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-<h4 id="test2---two">test2 - Two</h4>
-<blockquote>
-<p>the <code>yapp_5_packets</code> in
-<code>super.build_phase(phase)</code> overide
-<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
-<strong>yapp_5_packets</strong> is used</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Pole-Zero Doublets</title>
     <url>/2022/12/14/Pole-Zero-Doublets/</url>
     <content><![CDATA[<p>Mismatch between the pole and zero frequencies leads to the
@@ -1640,6 +1580,66 @@ href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/
         <tag>pole</tag>
         <tag>zero</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Precedence Rule of UVM uvm_config_db::set</title>
+    <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
+    <content><![CDATA[<p><a
+href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
+<h4 id="two-precedence-rules">Two Precedence rules</h4>
+<p>There are two precedence rules applicable to
+<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
+<ol type="1">
+<li>A <code>set()</code> call in <strong>a context higher up the
+component hierarchy</strong> takes precedence over a <code>set()</code>
+call that occurs lower in the hierarchical path.</li>
+<li>On having <strong>same context field</strong>, <strong>the
+last</strong> <code>set()</code> call takes precedence over the earlier
+<code>set()</code> call.</li>
+</ol>
+<h4 id="example-for-rule---1">Example for rule - 1</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>As you can see , the <code>uvm_config_db::set</code> is after the
+factory <code>type_id::create</code>, but <strong>receive_value</strong>
+is still <strong>100</strong>, I believe that <code>build_phase</code>
+of upper hierarchy finish first before create lower components.</p>
+<p>But the recommendation in literature and many web is place
+<code>uvm_config_db::set</code> before <code>create</code></p>
+</blockquote>
+<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.edaplayground.com/x/jgvh">[complete
+code]</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
+<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
+<p>The <code>set</code> in <code>super.build_phase</code> and
+<code>set</code> in current <code>build_phase</code> are at the
+<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
+<p>base_test</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
+<h4 id="test2---one">test2 - One</h4>
+<blockquote>
+<p><code>yapp_incr_payload_seq</code> override the
+<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
+<strong>yapp_incr_payload_seq</strong> is used.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<h4 id="test2---two">test2 - Two</h4>
+<blockquote>
+<p>the <code>yapp_5_packets</code> in
+<code>super.build_phase(phase)</code> overide
+<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
+<strong>yapp_5_packets</strong> is used</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Precision Techniques</title>
@@ -1847,6 +1847,26 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
       </tags>
   </entry>
   <entry>
+    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
+    <url>/2022/02/13/SmallGainTheorem/</url>
+    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
+named Fellow of the Institute of Electrical and Electronics Engineers in
+2016 for contributions to testing of analog and mixed-signal integrated
+circuits.</p>
+<blockquote>
+<p>I forget where I download this slide.</p>
+</blockquote>
+<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>control</tag>
+        <tag>feedback</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpiceIn foundary&#39;s standard cell&#39;s spice netlist</title>
     <url>/2022/10/22/SpiceIn-standardcellspi/</url>
     <content><![CDATA[<p>use <strong>SpiceIn</strong> GUI feature to map MOS parameter
@@ -1891,26 +1911,6 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2
       </categories>
       <tags>
         <tag>virtuoso</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
-    <url>/2022/02/13/SmallGainTheorem/</url>
-    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
-named Fellow of the Institute of Electrical and Electronics Engineers in
-2016 for contributions to testing of analog and mixed-signal integrated
-circuits.</p>
-<blockquote>
-<p>I forget where I download this slide.</p>
-</blockquote>
-<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>control</tag>
-        <tag>feedback</tag>
       </tags>
   </entry>
   <entry>
@@ -4324,19 +4324,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
       </categories>
   </entry>
   <entry>
-    <title>How to preserve hand-instantiated cells</title>
-    <url>/2023/02/10/dont-touch/</url>
-    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
-<p>The instances whose name contain "dont_touch_" shall be preserved
-during synthesis</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Impact of Deep N-well Implantation</title>
     <url>/2023/05/29/dnw/</url>
     <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
@@ -4406,6 +4393,19 @@ href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ec
         <tag>noise</tag>
         <tag>substrate</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>How to preserve hand-instantiated cells</title>
+    <url>/2023/02/10/dont-touch/</url>
+    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
+<p>The instances whose name contain "dont_touch_" shall be preserved
+during synthesis</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Script to remove .cdslck files</title>
@@ -12347,43 +12347,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBri
       </categories>
   </entry>
   <entry>
-    <title>plusargs in verilog</title>
-    <url>/2022/06/04/plusargs-verilog/</url>
-    <content><![CDATA[<p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>import package in SystemVerilog compilation</title>
     <url>/2022/03/24/pkg-import-compile-sv/</url>
     <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
@@ -12445,6 +12408,43 @@ compiling.</p>
 <p><a
 href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
 forward declaration</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>plusargs in verilog</title>
+    <url>/2022/06/04/plusargs-verilog/</url>
+    <content><![CDATA[<p><strong>plusargs</strong> are command-line switches supported by the
+simulator. As per SystemVerilog LRM arguments beginning with the
+<code>+</code> character will be available using the
+<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
+APIs</strong>.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
+<h4 id="example">Example</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>compile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
+<li><p>simulate (<em>QuestaSim</em>)</p>
+<ul>
+<li><p>with<strong>out</strong> plusargs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
+<li><p>with plusargs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>+SEED=31 +RUNSIM</code></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h4 id="reference">reference</h4>
+<p>systemverilog-command-line-input URL: <a
+href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
+<p>PLUSARGS IN SYSTEMVERILOG URL:<a
+href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -14999,6 +14999,24 @@ Technology. Solid-State Circuits, IEEE Journal of. 47. 3232-3248.
       </tags>
   </entry>
   <entry>
+    <title>sub-binary radix DAC</title>
+    <url>/2022/03/19/sub-binary-radix-DAC/</url>
+    <content><![CDATA[<p><strong>reference</strong>:</p>
+<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
+AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
+<p>M. Pastre and M. Kayal, "High-precision DAC based on a
+self-calibrated sub-binary radix converter," 2004 IEEE International
+Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
+I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>dac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SystemVerilog iff</title>
     <url>/2022/06/21/sv-iff/</url>
     <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
@@ -15022,24 +15040,6 @@ href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/0
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>sub-binary radix DAC</title>
-    <url>/2022/03/19/sub-binary-radix-DAC/</url>
-    <content><![CDATA[<p><strong>reference</strong>:</p>
-<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
-AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
-<p>M. Pastre and M. Kayal, "High-precision DAC based on a
-self-calibrated sub-binary radix converter," 2004 IEEE International
-Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
-I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>dac</tag>
-      </tags>
   </entry>
   <entry>
     <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
@@ -17251,6 +17251,38 @@ in Verdi | Synopsys</a></p>
       </categories>
   </entry>
   <entry>
+    <title>verilog constant part-select and indexed part-select</title>
+    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
+    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
+<strong>part-select</strong>. There are two types of part-selects, one
+with a <strong>constant part-select</strong> and another with an
+<strong>indexed part-select</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
+<p>Having a variable part-select allows it to be used effectively in
+loops to select parts of the vector. Although the starting bit can be
+<strong>varied</strong>, the width has to be
+<strong>constant</strong>.</p>
+<blockquote>
+<p><strong>[&lt;start_bit +: <width>] // part-select increments from
+start-bit</strong></p>
+<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
+start-bit</strong></p>
+</blockquote>
+<p><strong>Example</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
+<p><strong>ref</strong></p>
+<p><a
+href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
+scalar and vector</a></p>
+<p><a
+href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
+is the "+:" operator called in Verilog?</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>verilog readmemb and readmemh</title>
     <url>/2022/02/12/verilog-readmemb/</url>
     <content><![CDATA[<p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
@@ -17285,38 +17317,6 @@ address bound.</p>
 <p><a
 href="https://projectf.io/posts/initialize-memory-in-verilog/">Initialize
 Memory in Verilog</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>verilog constant part-select and indexed part-select</title>
-    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
-    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
-<strong>part-select</strong>. There are two types of part-selects, one
-with a <strong>constant part-select</strong> and another with an
-<strong>indexed part-select</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
-<p>Having a variable part-select allows it to be used effectively in
-loops to select parts of the vector. Although the starting bit can be
-<strong>varied</strong>, the width has to be
-<strong>constant</strong>.</p>
-<blockquote>
-<p><strong>[&lt;start_bit +: <width>] // part-select increments from
-start-bit</strong></p>
-<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
-start-bit</strong></p>
-</blockquote>
-<p><strong>Example</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
-<p><strong>ref</strong></p>
-<p><a
-href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
-scalar and vector</a></p>
-<p><a
-href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
-is the "+:" operator called in Verilog?</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -17365,6 +17365,19 @@ is the "+:" operator called in Verilog?</a></p>
       </tags>
   </entry>
   <entry>
+    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
+    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Viterbi Algorithm for ADC-Based Serial Link</title>
     <url>/2022/09/07/viterbi/</url>
     <content><![CDATA[<h2 id="reference">reference</h2>
@@ -17380,19 +17393,6 @@ href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485
       <tags>
         <tag>adc</tag>
         <tag>mlse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
-    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
       </tags>
   </entry>
   <entry>

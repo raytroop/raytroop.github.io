@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">149</span>
+        <span class="site-state-item-count">147</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,111 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/21/uvm-proj-topo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/21/uvm-proj-topo/" class="post-title-link" itemprop="url">UVM project topology</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-21 15:34:34" itemprop="dateCreated datePublished" datetime="2022-03-21T15:34:34+00:00">2022-03-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Most user-defined UVM classes are placed in <em>separate
-files</em></p>
-<p>Classes can only be compiled from a <em>module</em> or <em>package
-scope</em></p>
-<p>Recommendation:</p>
-<ul>
-<li>Include related class files into a package</li>
-<li>Import the package into modules where required</li>
-</ul>
-<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
-<ul>
-<li>Import package to access library</li>
-<li>The macro file <code>uvm_macros.svh</code> must be included
-separately</li>
-</ul>
-<p>yapp_packet.sv</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
-<p>yapp_pkg.sv</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
-<p>run.f for <code>xrun</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -331,7 +226,7 @@ separately</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -500,7 +395,7 @@ https://escholarship.org/uc/item/75g8j8jt</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -591,7 +486,7 @@ I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -761,7 +656,7 @@ Topics" DesignCon IBIS Summit 2011</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -924,7 +819,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1065,7 +960,7 @@ together
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1168,7 +1063,7 @@ focusing on bang-bang loop CDR design methodology, ISSCC Short Course,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1783,7 +1678,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2019,7 +1914,7 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2136,8 +2031,218 @@ Transceivers"</p>
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/13/uvm-ral-src-reading/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/13/uvm-ral-src-reading/" class="post-title-link" itemprop="url">UVM Register Abstraction Layer (RAL) - source code reading</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-13 17:15:22" itemprop="dateCreated datePublished" datetime="2022-03-13T17:15:22+00:00">2022-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="field-access-policies">Field Access Policies</h2>
+<p><img
+src="/2022/03/13/uvm-ral-src-reading/image-20220526092125583.png"
+alt="image-20220526092125583" /></p>
+<p>whether a register field can be read or written depends on both the
+field's configured access policy and the register's rights in the map
+being used to access the field</p>
+<p><a
+target="_blank" rel="noopener" href="http://www.verilab.com/files/litterick_register_final.pdf">http://www.verilab.com/files/litterick_register_final.pdf</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.verilab.com/files/litterick_register_slides_sm.pdf">https://www.verilab.com/files/litterick_register_slides_sm.pdf</a></p>
+<h2 id="uvm_regwrite">uvm_reg::write</h2>
+<ul>
+<li><p>If a back-door access path is used, the effect of writing the
+register through a physical access is mimicked. For example,
+<strong>read-only</strong> bits in the registers will
+<strong>not</strong> be written.</p></li>
+<li><p>The <strong>mirrored value</strong> will be updated using the
+<code>uvm_reg::predict()</code> method.</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">task</span> write(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                          <span class="keyword">input</span>  uvm_reg_data_t    value,</span><br><span class="line">                          <span class="keyword">input</span>  uvm_path_e        path = UVM_DEFAULT_PATH,</span><br><span class="line">                          <span class="keyword">input</span>  uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                          <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                          <span class="keyword">input</span>  <span class="keyword">int</span>               prior = -<span class="number">1</span>,</span><br><span class="line">                          <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                          <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                          <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">task</span> do_write(uvm_reg_item rw);</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> uvm_reg::write(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                    <span class="keyword">input</span>  uvm_reg_data_t    value,</span><br><span class="line">                    <span class="keyword">input</span>  uvm_path_e        path = UVM_DEFAULT_PATH,</span><br><span class="line">                    <span class="keyword">input</span>  uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                    <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                    <span class="keyword">input</span>  <span class="keyword">int</span>               prior = -<span class="number">1</span>,</span><br><span class="line">                    <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                    <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                    <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// create an abstract transaction for this operation</span></span><br><span class="line">   uvm_reg_item rw;</span><br><span class="line"></span><br><span class="line">   XatomicX(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   set(value);</span><br><span class="line"></span><br><span class="line">   rw = uvm_reg_item::type_id::create(<span class="string">&quot;write_item&quot;</span>,,get_full_name());</span><br><span class="line">   rw<span class="variable">.element</span>      = <span class="keyword">this</span>;</span><br><span class="line">   rw<span class="variable">.element_kind</span> = UVM_REG;</span><br><span class="line">   rw<span class="variable">.kind</span>         = UVM_WRITE;</span><br><span class="line">   rw<span class="variable">.value</span>[<span class="number">0</span>]     = value;</span><br><span class="line">   rw<span class="variable">.path</span>         = path;</span><br><span class="line">   rw<span class="variable">.map</span>          = map;</span><br><span class="line">   rw<span class="variable">.parent</span>       = parent;</span><br><span class="line">   rw<span class="variable">.prior</span>        = prior;</span><br><span class="line">   rw<span class="variable">.extension</span>    = extension;</span><br><span class="line">   rw<span class="variable">.fname</span>        = fname;</span><br><span class="line">   rw<span class="variable">.lineno</span>       = lineno;</span><br><span class="line"></span><br><span class="line">   do_write(rw);</span><br><span class="line"></span><br><span class="line">   status = rw<span class="variable">.status</span>;</span><br><span class="line"></span><br><span class="line">   XatomicX(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
+<h2 id="uvm_regread">uvm_reg::read</h2>
+<ul>
+<li><p>If a back-door access path is used, the effect of reading the
+register through a physical access is mimicked. For example,
+<strong>clear-on-read</strong> bits in the registers will be set to
+<strong>zero</strong>.</p></li>
+<li><p>The <strong>mirrored value</strong> will be updated using the
+<code>uvm_reg::predict()</code> method.</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">task</span> read(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                         <span class="keyword">output</span> uvm_reg_data_t    value,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_path_e        path = UVM_DEFAULT_PATH,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">int</span>               prior = -<span class="number">1</span>,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">task</span> do_read(uvm_reg_item rw);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/13/uvm-ral-src-reading/uvmreg_read.drawio.svg"
+alt="uvmreg_read.drawio" /></p>
+<blockquote>
+<p><strong>readback value can be different from m_mirrored , m_desired
+or value</strong></p>
+</blockquote>
+<h2 id="uvm_regpoke">uvm_reg::poke</h2>
+<ul>
+<li><p>Deposit the value in the DUT register corresponding to this
+abstraction class instance, <strong>as-is</strong>, using a back-door
+access.</p></li>
+<li><p>Uses the HDL path for the design abstraction specified by
+<strong>kind</strong>.</p></li>
+<li><p>The <strong>mirrored value</strong> will be updated using the
+<code>uvm_reg::predict()</code> method.</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">task</span> poke(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_reg_data_t    value,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">string</span>            kind = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="uvm_regpeek">uvm_reg::peek</h2>
+<ul>
+<li>Sample the value in the DUT register corresponding to this
+abstraction class instance using a <strong>back-door</strong> access.
+The register value is sampled, not modified.</li>
+<li>Uses the HDL path for the design abstraction specified by
+<code>kind</code>.</li>
+<li>The <strong>mirrored value</strong> will be updated using the
+<code>uvm_reg::predict()</code> method.</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">task</span> peek(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                         <span class="keyword">output</span> uvm_reg_data_t    value,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">string</span>            kind = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                         <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                         <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="uvm_regmirror">uvm_reg::mirror</h2>
+<ul>
+<li><p>Read the register and optionally compared the <strong>readback
+value</strong> with the <strong>current mirrored value</strong> if
+<code>check</code> is <code>UVM_CHECK</code>.</p></li>
+<li><p>The <strong>mirrored value</strong> will be updated using the
+<code>uvm_reg::predict()</code> method based on the <strong>readback
+value</strong>.</p></li>
+<li><p>The mirroring can be performed using the physical interfaces
+(frontdoor) or <code>uvm_reg::peek()</code> (backdoor).</p></li>
+<li><p>If the register contains <strong>write-only</strong> fields,
+their content is mirrored and optionally checked only if a
+<code>UVM_BACKDOOR</code> access path is used to read the
+register.</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">task</span> mirror(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                           <span class="keyword">input</span> uvm_check_e        check  = UVM_NO_CHECK,</span><br><span class="line">                           <span class="keyword">input</span> uvm_path_e         path = UVM_DEFAULT_PATH,</span><br><span class="line">                           <span class="keyword">input</span> uvm_reg_map        map = <span class="literal">null</span>,</span><br><span class="line">                           <span class="keyword">input</span> uvm_sequence_base  parent = <span class="literal">null</span>,</span><br><span class="line">                           <span class="keyword">input</span> <span class="keyword">int</span>                prior = -<span class="number">1</span>,</span><br><span class="line">                           <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                           <span class="keyword">input</span> <span class="keyword">string</span>             fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                           <span class="keyword">input</span> <span class="keyword">int</span>                lineno = <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="uvm_regupdate">uvm_reg::update</h2>
+<ul>
+<li>Write this register if the DUT register is out-of-date with the
+desired/mirrored value in the abstraction class, as determined by the
+<code>uvm_reg::needs_update()</code> method.</li>
+<li>The update can be performed using the using the physical interfaces
+(frontdoor) or <code>uvm_reg::poke()</code> (backdoor) access.</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">task</span> update(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                           <span class="keyword">input</span>  uvm_path_e        path = UVM_DEFAULT_PATH,</span><br><span class="line">                           <span class="keyword">input</span>  uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                           <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                           <span class="keyword">input</span>  <span class="keyword">int</span>               prior = -<span class="number">1</span>,</span><br><span class="line">                           <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                           <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                           <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">bit</span> uvm_reg::needs_update();</span><br><span class="line">    needs_update = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (m_fields[i]) <span class="keyword">begin</span></span><br><span class="line">       <span class="keyword">if</span> (m_fields[i]<span class="variable">.needs_update</span>()) <span class="keyword">begin</span></span><br><span class="line">          <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span>: needs_update</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> uvm_reg::update(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                     <span class="keyword">input</span>  uvm_path_e        path = UVM_DEFAULT_PATH,</span><br><span class="line">                     <span class="keyword">input</span>  uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                     <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                     <span class="keyword">input</span>  <span class="keyword">int</span>               prior = -<span class="number">1</span>,</span><br><span class="line">                     <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                     <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                     <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line">   uvm_reg_data_t upd;</span><br><span class="line"></span><br><span class="line">   status = UVM_IS_OK;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (!needs_update()) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Concatenate the write-to-update values from each field</span></span><br><span class="line">   <span class="comment">// Fields are stored in LSB or MSB order</span></span><br><span class="line">   upd = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">foreach</span> (m_fields[i])</span><br><span class="line">      upd |= m_fields[i]<span class="variable">.XupdateX</span>() &lt;&lt; m_fields[i]<span class="variable">.get_lsb_pos</span>();</span><br><span class="line"></span><br><span class="line">   write(status, upd, path, map, parent, prior, extension, fname, lineno);</span><br><span class="line"><span class="keyword">endtask</span>: update</span><br></pre></td></tr></table></figure>
+<h2 id="uvm_regpredict">uvm_reg::predict</h2>
+<ul>
+<li>Update the <strong>mirrored and desired value</strong> for this
+register.</li>
+<li>Predict the mirror (and desired) value of the fields in the register
+based on the specified observed <code>value</code> on a specified
+address <code>map</code>, or based on a calculated value.</li>
+<li>See <code>uvm_reg_field::predict()</code> for more details.</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">function</span> <span class="keyword">bit</span> predict (uvm_reg_data_t    value,</span><br><span class="line">                                     uvm_reg_byte_en_t be = -<span class="number">1</span>,</span><br><span class="line">                                     uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                     uvm_path_e        path = UVM_FRONTDOOR,</span><br><span class="line">                                     uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                                     <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                                     <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">virtual</span> <span class="keyword">function</span> <span class="keyword">void</span> do_predict</span><br><span class="line">                             (uvm_reg_item      rw,</span><br><span class="line">                              uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                              uvm_reg_byte_en_t be = -<span class="number">1</span>);</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+<h3 id="uvm_regdo_predict">uvm_reg::do_predict</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg::do_predict(uvm_reg_item      rw,</span><br><span class="line">                                  uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                  uvm_reg_byte_en_t be = -<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   uvm_reg_data_t reg_value = rw<span class="variable">.value</span>[<span class="number">0</span>];</span><br><span class="line">   m_fname = rw<span class="variable">.fname</span>;</span><br><span class="line">   m_lineno = rw<span class="variable">.lineno</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (rw<span class="variable">.status</span> ==UVM_IS_OK )</span><br><span class="line">   rw<span class="variable">.status</span> = UVM_IS_OK;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (m_is_busy &amp;&amp; kind == UVM_PREDICT_DIRECT) <span class="keyword">begin</span></span><br><span class="line">      `uvm_warning(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Trying to predict value of register &#x27;&quot;</span>,</span><br><span class="line">                  get_full_name(),<span class="string">&quot;&#x27; while it is being accessed&quot;</span>&#125;)</span><br><span class="line">      rw<span class="variable">.status</span> = UVM_NOT_OK;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">foreach</span> (m_fields[i]) <span class="keyword">begin</span></span><br><span class="line">      rw<span class="variable">.value</span>[<span class="number">0</span>] = (reg_value &gt;&gt; m_fields[i]<span class="variable">.get_lsb_pos</span>()) &amp;</span><br><span class="line">                                 ((<span class="number">1</span> &lt;&lt; m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>);</span><br><span class="line">      m_fields[i]<span class="variable">.do_predict</span>(rw, kind, be&gt;&gt;(m_fields[i]<span class="variable">.get_lsb_pos</span>()/<span class="number">8</span>));</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   rw<span class="variable">.value</span>[<span class="number">0</span>] = reg_value;</span><br><span class="line"></span><br><span class="line"><span class="keyword">endfunction</span>: do_predict</span><br></pre></td></tr></table></figure>
+<h3 id="uvm_reg_fielddo_predict">uvm_reg_field::do_predict</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_field::do_predict(uvm_reg_item      rw,</span><br><span class="line">                                        uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                        uvm_reg_byte_en_t be = -<span class="number">1</span>);</span><br><span class="line">   </span><br><span class="line">   uvm_reg_data_t field_val = rw<span class="variable">.value</span>[<span class="number">0</span>] &amp; ((<span class="number">1</span> &lt;&lt; m_size)-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (rw<span class="variable">.status</span> != UVM_NOT_OK)</span><br><span class="line">     rw<span class="variable">.status</span> = UVM_IS_OK;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Assume that the entire field is enabled</span></span><br><span class="line">   <span class="keyword">if</span> (!be[<span class="number">0</span>])</span><br><span class="line">     <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">   m_fname = rw<span class="variable">.fname</span>;</span><br><span class="line">   m_lineno = rw<span class="variable">.lineno</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">case</span> (kind)</span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_WRITE:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         uvm_reg_field_cb_iter cbs = <span class="keyword">new</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (rw<span class="variable">.path</span> == UVM_FRONTDOOR || rw<span class="variable">.path</span> == UVM_PREDICT)</span><br><span class="line">            field_val = XpredictX(m_mirrored, field_val, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         m_written = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">for</span> (uvm_reg_cbs cb = cbs<span class="variable">.first</span>(); cb != <span class="literal">null</span>; cb = cbs<span class="variable">.next</span>())</span><br><span class="line">            cb<span class="variable">.post_predict</span>(<span class="keyword">this</span>, m_mirrored, field_val, </span><br><span class="line">                            UVM_PREDICT_WRITE, rw<span class="variable">.path</span>, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         field_val &amp;= (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_READ:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         uvm_reg_field_cb_iter cbs = <span class="keyword">new</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (rw<span class="variable">.path</span> == UVM_FRONTDOOR || rw<span class="variable">.path</span> == UVM_PREDICT) <span class="keyword">begin</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">string</span> acc = get_access(rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (acc == <span class="string">&quot;RC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WSRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W1SRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W0SRC&quot;</span>)</span><br><span class="line">              field_val = <span class="number">0</span>;  <span class="comment">// (clear)</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;RS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WCRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W1CRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W0CRS&quot;</span>)</span><br><span class="line">              field_val = (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>; <span class="comment">// all 1&#x27;s (set)</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;WO&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOC&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WO1&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;NOACCESS&quot;</span>)</span><br><span class="line">              <span class="keyword">return</span>;</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">for</span> (uvm_reg_cbs cb = cbs<span class="variable">.first</span>(); cb != <span class="literal">null</span>; cb = cbs<span class="variable">.next</span>())</span><br><span class="line">            cb<span class="variable">.post_predict</span>(<span class="keyword">this</span>, m_mirrored, field_val,</span><br><span class="line">                            UVM_PREDICT_READ, rw<span class="variable">.path</span>, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         field_val &amp;= (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_DIRECT:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         <span class="keyword">if</span> (m_parent<span class="variable">.is_busy</span>()) <span class="keyword">begin</span></span><br><span class="line">           `uvm_warning(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Trying to predict value of field &#x27;&quot;</span>,</span><br><span class="line">              get_name(),<span class="string">&quot;&#x27; while register &#x27;&quot;</span>,m_parent<span class="variable">.get_full_name</span>(),</span><br><span class="line">              <span class="string">&quot;&#x27; is being accessed&quot;</span>&#125;)</span><br><span class="line">           rw<span class="variable">.status</span> = UVM_NOT_OK;</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// update the mirror with predicted value</span></span><br><span class="line">   m_mirrored = field_val;</span><br><span class="line">   m_desired  = field_val;</span><br><span class="line">   <span class="keyword">this</span><span class="variable">.value</span> = field_val;</span><br><span class="line"></span><br><span class="line"><span class="keyword">endfunction</span>: do_predict</span><br></pre></td></tr></table></figure>
+<h3 id="uvm_reg_fieldxpredictx">uvm_reg_field::XpredictX</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> uvm_reg_data_t uvm_reg_field::XpredictX (uvm_reg_data_t cur_val,</span><br><span class="line">                                                  uvm_reg_data_t wr_val,</span><br><span class="line">                                                  uvm_reg_map    map);</span><br><span class="line">   uvm_reg_data_t mask = (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">case</span> (get_access(map))</span><br><span class="line">     <span class="string">&quot;RO&quot;</span>:    <span class="keyword">return</span> cur_val;</span><br><span class="line">     <span class="string">&quot;RW&quot;</span>:    <span class="keyword">return</span> wr_val;</span><br><span class="line">     <span class="string">&quot;RC&quot;</span>:    <span class="keyword">return</span> cur_val;</span><br><span class="line">     <span class="string">&quot;RS&quot;</span>:    <span class="keyword">return</span> cur_val;</span><br><span class="line">     <span class="string">&quot;WC&quot;</span>:    <span class="keyword">return</span> &#x27;<span class="number">0</span>;</span><br><span class="line">     <span class="string">&quot;WS&quot;</span>:    <span class="keyword">return</span> mask;</span><br><span class="line">     <span class="string">&quot;WRC&quot;</span>:   <span class="keyword">return</span> wr_val;</span><br><span class="line">     <span class="string">&quot;WRS&quot;</span>:   <span class="keyword">return</span> wr_val;</span><br><span class="line">     <span class="string">&quot;WSRC&quot;</span>:  <span class="keyword">return</span> mask;</span><br><span class="line">     <span class="string">&quot;WCRS&quot;</span>:  <span class="keyword">return</span> &#x27;<span class="number">0</span>;</span><br><span class="line">     <span class="string">&quot;W1C&quot;</span>:   <span class="keyword">return</span> cur_val &amp; (~wr_val);</span><br><span class="line">     <span class="string">&quot;W1S&quot;</span>:   <span class="keyword">return</span> cur_val | wr_val;</span><br><span class="line">     <span class="string">&quot;W1T&quot;</span>:   <span class="keyword">return</span> cur_val ^ wr_val;</span><br><span class="line">     <span class="string">&quot;W0C&quot;</span>:   <span class="keyword">return</span> cur_val &amp; wr_val;</span><br><span class="line">     <span class="string">&quot;W0S&quot;</span>:   <span class="keyword">return</span> cur_val | (~wr_val &amp; mask);</span><br><span class="line">     <span class="string">&quot;W0T&quot;</span>:   <span class="keyword">return</span> cur_val ^ (~wr_val &amp; mask);</span><br><span class="line">     <span class="string">&quot;W1SRC&quot;</span>: <span class="keyword">return</span> cur_val | wr_val;</span><br><span class="line">     <span class="string">&quot;W1CRS&quot;</span>: <span class="keyword">return</span> cur_val &amp; (~wr_val);</span><br><span class="line">     <span class="string">&quot;W0SRC&quot;</span>: <span class="keyword">return</span> cur_val | (~wr_val &amp; mask);</span><br><span class="line">     <span class="string">&quot;W0CRS&quot;</span>: <span class="keyword">return</span> cur_val &amp; wr_val;</span><br><span class="line">     <span class="string">&quot;WO&quot;</span>:    <span class="keyword">return</span> wr_val;</span><br><span class="line">     <span class="string">&quot;WOC&quot;</span>:   <span class="keyword">return</span> &#x27;<span class="number">0</span>;</span><br><span class="line">     <span class="string">&quot;WOS&quot;</span>:   <span class="keyword">return</span> mask;</span><br><span class="line">     <span class="string">&quot;W1&quot;</span>:    <span class="keyword">return</span> (m_written) ? cur_val : wr_val;</span><br><span class="line">     <span class="string">&quot;WO1&quot;</span>:   <span class="keyword">return</span> (m_written) ? cur_val : wr_val;</span><br><span class="line">     <span class="string">&quot;NOACCESS&quot;</span>: <span class="keyword">return</span> cur_val;</span><br><span class="line">     <span class="keyword">default</span>: <span class="keyword">return</span> wr_val;</span><br><span class="line">   <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">   `uvm_fatal(<span class="string">&quot;RegModel&quot;</span>, <span class="string">&quot;uvm_reg_field::XpredictX(): Internal error&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">endfunction</span>: XpredictX</span><br></pre></td></tr></table></figure>
+<h2 id="uvm_regreset-uvm_reg_fieldreset">uvm_reg::reset ,
+uvm_reg_field::reset</h2>
+<p>Resetting a register model sets the mirror to the reset value
+specified in the model</p>
+<h3 id="uvm_regreset">uvm_reg::reset</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg::reset(<span class="keyword">string</span> kind = <span class="string">&quot;HARD&quot;</span>);</span><br><span class="line">   <span class="keyword">foreach</span> (m_fields[i])</span><br><span class="line">      m_fields[i]<span class="variable">.reset</span>(kind);</span><br><span class="line">   <span class="comment">// Put back a key in the semaphore if it is checked out</span></span><br><span class="line">   <span class="comment">// in case a thread was killed during an operation</span></span><br><span class="line">   <span class="keyword">void</span>&#x27;(m_atomic<span class="variable">.try_get</span>(<span class="number">1</span>));</span><br><span class="line">   m_atomic<span class="variable">.put</span>(<span class="number">1</span>);</span><br><span class="line">   m_process = <span class="literal">null</span>;</span><br><span class="line">   Xset_busyX(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">endfunction</span>: reset</span><br></pre></td></tr></table></figure>
+<h3 id="uvm_reg_fieldreset">uvm_reg_field::reset</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_field::reset(<span class="keyword">string</span> kind = <span class="string">&quot;HARD&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (!m_reset<span class="variable">.exists</span>(kind))</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">   m_mirrored = m_reset[kind];</span><br><span class="line">   m_desired  = m_mirrored;</span><br><span class="line">   value      = m_mirrored;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (kind == <span class="string">&quot;HARD&quot;</span>)</span><br><span class="line">      m_written  = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">endfunction</span>: reset</span><br></pre></td></tr></table></figure>
+<h2 id="uvm_reg_fieldrandomize">uvm_reg_field::randomize</h2>
+<h3 id="uvm_reg_fieldpre_randomize">uvm_reg_field::pre_randomize()</h3>
+<p>Update the only publicly known property <code>value</code> with the
+<strong>current desired</strong> value so it can be used as a state
+variable should the <code>rand_mode</code> of the field be turned
+off.</p>
+<blockquote>
+<p><code>value</code> is <code>m_desired</code> if
+<code>rand_mode</code> is off.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_field::pre_randomize();</span><br><span class="line">   value = m_desired;</span><br><span class="line"><span class="keyword">endfunction</span>: pre_randomize</span><br></pre></td></tr></table></figure>
+<h3 id="uvm_reg_fieldpost_randomize">uvm_reg_field::post_randomize</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_field::post_randomize();</span><br><span class="line">   m_desired = value;</span><br><span class="line"><span class="keyword">endfunction</span>: post_randomize</span><br></pre></td></tr></table></figure>
+<h2 id="misc">misc</h2>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span>  <span class="keyword">bit</span> <span class="keyword">unsigned</span> [`UVM_REG_DATA_WIDTH-<span class="number">1</span>:<span class="number">0</span>]  uvm_reg_data_t ;</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_predict_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// How the mirror is to be updated</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_DIRECT  - Predicted value is as-is</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_READ    - Predict based on the specified value having been read</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_WRITE   - Predict based on the specified value having been written</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_PREDICT_DIRECT,</span><br><span class="line">      UVM_PREDICT_READ,</span><br><span class="line">      UVM_PREDICT_WRITE</span><br><span class="line">   &#125; uvm_predict_e;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/14/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/14/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

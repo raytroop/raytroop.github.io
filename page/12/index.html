@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">149</span>
+        <span class="site-state-item-count">147</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,156 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/06/butter-filter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/06/butter-filter/" class="post-title-link" itemprop="url">Butterworth filter</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-06 23:58:11" itemprop="dateCreated datePublished" datetime="2022-04-06T23:58:11+00:00">2022-04-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="butterworth-filter">Butterworth filter</h2>
-<blockquote>
-<p>function varargout = butter(n, Wn, varargin)</p>
-<p>% BUTTER Butterworth digital and analog filter design.</p>
-<p>% [B,A] = BUTTER(N,Wn) designs an Nth order lowpass digital</p>
-<p>% Butterworth filter and returns the filter coefficients in
-length</p>
-<p>% N+1 vectors B (numerator) and A (denominator). The coefficients</p>
-<p>% are listed in descending powers of z. The cutoff frequency</p>
-<p>% Wn must be <strong>0.0 &lt; Wn &lt; 1.0</strong>, with 1.0
-corresponding to</p>
-<p>% half the sample rate.</p>
-</blockquote>
-<p><span class="math display">\[
-w_n = \frac{f_c}{0.5f_s}
-\]</span></p>
-<p>where <span class="math inline">\(f_c\)</span> is cutoff frequency,
-<span class="math inline">\(f_s\)</span> is sampling frequency</p>
-<p><span class="math display">\[
-\Phi = \omega T_s \text { ,}\Phi \in [0,2\pi]
-\]</span></p>
-<p>Find the relationship between <span
-class="math inline">\(\omega_n\)</span> and </p>
-<p><span class="math display">\[\begin{align}
-\Phi &amp;= 2\pi f_c \frac{1}{f_s}  \\
-&amp;=\pi \frac{f_c}{0.5f_s} \\
-&amp;= \pi \omega _n
-\end{align}\]</span></p>
-<p>Given <span class="math inline">\(f_c\)</span> is 300 Hz and <span
-class="math inline">\(f_s\)</span> is 1000 Hz, we get <span
-class="math display">\[
-\omega_n = \frac{f_c}{0.5*f_s} = 0.6
-\]</span> and in <code>rad/sample</code> unit, cutoff frequency is <span
-class="math display">\[
-\Phi = \pi * \omega_n = 0.6 \pi \text {, unit: rad/sample}
-\]</span></p>
-<h3 id="z-transform">Z-transform</h3>
-<p><span class="math display">\[
-z= e^{-j\Phi}
-\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fc = <span class="number">300</span>;</span><br><span class="line">fs = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">[b,a] = butter(<span class="number">6</span>,fc/(fs/<span class="number">2</span>));</span><br><span class="line">fprintf(<span class="string">&#x27;The numerator b is:\n &#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;%g &#x27;</span>, b);</span><br><span class="line">fprintf(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;The denominator a is:\n &#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;%g &#x27;</span>, a);</span><br><span class="line">fprintf(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">freqz(b, a);</span><br><span class="line">ylim([<span class="number">-400</span>, <span class="number">100</span>])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>The numerator (<code>b</code>) and denominator (<code>a</code>)
-depend on the cutoff frequency and the order; the cutoff frequency is
-denominated with <span class="math inline">\(\omega_n\)</span> . Just
-multiply the <span class="math inline">\(\pi\)</span>, we get the
-Z-transform <span class="math inline">\(\Phi\)</span> rad/sample, which
-is the plot of <code>freqz(b, a)</code></p>
-</blockquote>
-<p><img src="/2022/04/06/butter-filter/image-20220407100948965.png"
-alt="image-20220407100948965" /></p>
-<h3 id="transfer-function-with-sample-information">Transfer function
-with sample information</h3>
-<p><span class="math display">\[
-z = e^{-j\omega T_s}
-\]</span></p>
-<p><img src="/2022/04/06/butter-filter/image-20220407103451265.png"
-alt="image-20220407103451265" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">[h,f] = freqz(b,a,[],fs);</span><br><span class="line">hdb20 = <span class="number">20</span>*log10(abs(h));</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">plot(f, hdb20, &#x27;b&#x27;)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;DTFT <span class="keyword">with</span> freqz <span class="keyword">and</span> sample rate&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">sys = tf(b, a, <span class="number">1</span>/fs);</span><br><span class="line">[mag, phs, wout] = bode(sys);</span><br><span class="line">wout = wout(:);</span><br><span class="line">whz = wout/<span class="number">2</span>/pi;</span><br><span class="line">hdb = <span class="number">20</span>*log10(mag(:));</span><br><span class="line">plot(whz, hdb, &#x27;r-o&#x27;);</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;DTFT <span class="keyword">with</span> bode <span class="keyword">and</span> sample period&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">plot(f, hdb20,&#x27;b&#x27;, whz, hdb, &#x27;ro&#x27;);</span><br><span class="line">legend(&#x27;freqz&#x27;, &#x27;bode&#x27;)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;overlay <span class="keyword">and</span> comparision&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="time-domain-from-frequency-domain">Time Domain from Frequency
-Domain</h2>
-<p>Assume input is <strong>sampled by</strong> <span
-class="math inline">\(f_s\)</span></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">figure(<span class="number">3</span>)</span><br><span class="line">% <span class="keyword">assume</span> x is sampled by fs</span><br><span class="line">x = <span class="keyword">rand</span>(<span class="number">1</span>, <span class="number">50</span>);</span><br><span class="line">y = filter(b, a, x);</span><br><span class="line">xt = (<span class="number">1</span>:<span class="number">50</span>);</span><br><span class="line">plot(xt, x, &#x27;-s&#x27;, xt, y, &#x27;-o&#x27;)</span><br><span class="line">legend(&#x27;<span class="keyword">input</span>&#x27;, &#x27;<span class="keyword">output</span>&#x27;)</span><br><span class="line">xlabel(&#x27;Sample&#x27;)</span><br><span class="line">ylabel(&#x27;mag&#x27;)</span><br><span class="line">title(&#x27;filter in Time domain&#x27;)</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/04/06/butter-filter/image-20220407113330972.png"
-alt="image-20220407113330972" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -376,7 +226,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -583,7 +433,7 @@ alt="image-20220404195156776" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -746,7 +596,7 @@ alt="image-20220403212529981" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1247,7 +1097,7 @@ FIFOs</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1391,7 +1241,7 @@ possible without cloning.</p></li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1488,7 +1338,7 @@ alt="image-20220401011543866" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1592,7 +1442,7 @@ alt="topo.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1735,7 +1585,7 @@ forward declaration</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1871,7 +1721,7 @@ code]</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-17 10:18:24" itemprop="dateModified" datetime="2023-11-17T10:18:24+00:00">2023-11-17</time>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1978,8 +1828,113 @@ target="_blank" rel="noopener" href="https://www.gaussianwaves.com/2020/02/intro
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/21/uvm-proj-topo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/21/uvm-proj-topo/" class="post-title-link" itemprop="url">UVM project topology</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-21 15:34:34" itemprop="dateCreated datePublished" datetime="2022-03-21T15:34:34+00:00">2022-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-11-21 15:04:34" itemprop="dateModified" datetime="2023-11-21T15:04:34+00:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Most user-defined UVM classes are placed in <em>separate
+files</em></p>
+<p>Classes can only be compiled from a <em>module</em> or <em>package
+scope</em></p>
+<p>Recommendation:</p>
+<ul>
+<li>Include related class files into a package</li>
+<li>Import the package into modules where required</li>
+</ul>
+<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
+<ul>
+<li>Import package to access library</li>
+<li>The macro file <code>uvm_macros.svh</code> must be included
+separately</li>
+</ul>
+<p>yapp_packet.sv</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
+<p>yapp_pkg.sv</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
+<p>run.f for <code>xrun</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

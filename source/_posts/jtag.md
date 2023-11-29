@@ -19,7 +19,16 @@ Instruction Register, IR
 
 ![image-20231128230836498](jtag/image-20231128230836498.png)
 
-![tap-controller-fsm](jtag/tap-controller-fsm.png)
+> - FSM and Shift Register of DR and IR works at the **posedge** of the clock
+> - TMS, TDI, TDO and Hold Register of DR and IR changes value at the **nededge** of the clock
+
+
+
+![image-20231129232443249](jtag/image-20231129232443249.png)
+
+![image-20231129233218011](jtag/image-20231129233218011.png)
+
+> After power-up, they may not be in sync, but there is a trick. Look at the state machine and notice that no matter what state you are, if *TMS stays at "1" for five clocks*, a TAP controller goes back to the state "Test-Logic Reset". That's used to synchronize the TAP controllers.
 
 
 

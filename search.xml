@@ -798,9 +798,9 @@ effect taken into consideration during delayCal</p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Analysis Command</title>
-    <url>/2022/02/07/Innovus-analysis-command/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
+    <title>Innovus/Tempus Nonfunctional ECO</title>
+    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -810,9 +810,9 @@ effect taken into consideration during delayCal</p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus/Tempus Nonfunctional ECO</title>
-    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Analysis Command</title>
+    <url>/2022/02/07/Innovus-analysis-command/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -3179,6 +3179,34 @@ virtual clock is propagated.</p>
       </tags>
   </entry>
   <entry>
+    <title>complex uvm project topology</title>
+    <url>/2022/03/28/complex-uvm-topo/</url>
+    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
+alt="topo.drawio" /></p>
+<h2 id="compile">compile</h2>
+<ul>
+<li><code>-incdir</code> for all UVC's `<code>include</code></li>
+<li>all pkg.sv</li>
+<li>all if.sv</li>
+<li>all RTL DUT</li>
+<li>uvm top module</li>
+</ul>
+<h2 id="uvm-top.sv">uvm top.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
+<h2 id="rtl-top">RTL top</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2 id="pkg.sv">pkg.sv</h2>
+<p>`<code>include</code> all related uvm class in
+<strong>pgk.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<h2 id="if.sv">if.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>mismatch of current mirror</title>
     <url>/2022/10/02/current-mirror-mc/</url>
     <content><![CDATA[<p>The current mismatch consists of two components.</p>
@@ -3294,34 +3322,6 @@ alt="image-20221002220000435" /></p>
         <tag>g++</tag>
         <tag>cmake</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>complex uvm project topology</title>
-    <url>/2022/03/28/complex-uvm-topo/</url>
-    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
-alt="topo.drawio" /></p>
-<h2 id="compile">compile</h2>
-<ul>
-<li><code>-incdir</code> for all UVC's `<code>include</code></li>
-<li>all pkg.sv</li>
-<li>all if.sv</li>
-<li>all RTL DUT</li>
-<li>uvm top module</li>
-</ul>
-<h2 id="uvm-top.sv">uvm top.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
-<h2 id="rtl-top">RTL top</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="pkg.sv">pkg.sv</h2>
-<p>`<code>include</code> all related uvm class in
-<strong>pgk.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
-<h2 id="if.sv">if.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
   </entry>
   <entry>
     <title>simulation data dumping</title>
@@ -3787,189 +3787,6 @@ href="https://youtu.be/nA_DZtRqrTQ">https://youtu.be/nA_DZtRqrTQ</a></p>
       </tags>
   </entry>
   <entry>
-    <title>Random &amp; Deterministic Jitters Simulation</title>
-    <url>/2022/05/16/dj-rj/</url>
-    <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
-alt="image-20220516004008878" /></p>
-<h2 id="deterministic-jitter">Deterministic Jitter</h2>
-<p><img src="/2022/05/16/dj-rj/image-20220516004058916.png"
-alt="image-20220516004058916" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516004206118.png"
-alt="image-20220516004206118" /></p>
-<p><code>j_Djpp</code> can be calculated by PSD,too</p>
-<p><img src="/2022/05/16/dj-rj/image-20220516004615033.png"
-alt="image-20220516004615033" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fck = <span class="number">38.4e6</span>;</span><br><span class="line">Nfft = <span class="number">15000</span>;</span><br><span class="line">fres = fck/Nfft;</span><br><span class="line">psddBc = <span class="number">-99.3343</span>;</span><br><span class="line">psBc = psddBc + <span class="number">10</span>*<span class="built_in">log10</span>(fres);	<span class="comment">% psd -&gt; ps; </span></span><br><span class="line">phrad2 = <span class="number">10</span>^(psBc/<span class="number">10</span>);</span><br><span class="line">phrms = <span class="built_in">sqrt</span>(phrad2);</span><br><span class="line">Jrms = phrms/<span class="number">2</span>/<span class="built_in">pi</span>*<span class="number">1</span>/fck;</span><br><span class="line">Jpp = <span class="number">2</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*Jrms;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Jpp =</span><br><span class="line"></span><br><span class="line">   6.4038e-12</span><br></pre></td></tr></table></figure>
-<p>For DJ, we usually use peak to peak value</p>
-<blockquote>
-<p>BTW, the psd value at half of fundamental frequency (<span
-class="math inline">\(f_s/2\)</span>) is misleading and ambiguity, we
-won't use this value</p>
-</blockquote>
-<h2 id="random-jitter">Random Jitter</h2>
-<p>RJ can be accurately and efficiently measured using
-<strong>PSS/Pnoise</strong> or <strong>HB/HBnoise</strong>.</p>
-<p>Note that the <strong>transient noise</strong> can also be used to
-compute RJ;</p>
-<blockquote>
-<p>However, the computation cost is typically very high, and the
-accuracy is lesser as compared to PSS/Pnoise and HB/HBnoise.</p>
-</blockquote>
-<p>Since RJ follows a Gaussian distribution, it can be fully
-characterized using its Root-Mean-Squared value (RMS) or the standard
-deviation value (<span class="math inline">\(\sigma\)</span>)</p>
-<p>The Peak-to-Peak value of RJ (<span
-class="math inline">\(\text{RJ}_{\text{p-p}}\)</span>) can be calculated
-under certain observation conditions <span class="math display">\[
-\text{RJ}_{\text{p-p}}\equiv K \ast \text{RJ}_{\text{RMS}}
-\]</span> Here, <span class="math inline">\(K\)</span> is a constant
-determined by the BER specification of the system given in the following
-Table</p>
-<table>
-<thead>
-<tr class="header">
-<th>BER</th>
-<th>Crest factor (K)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(10^{-3}\)</span></td>
-<td>6.18</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-4}\)</span></td>
-<td>7.438</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-5}\)</span></td>
-<td>8.53</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-6}\)</span></td>
-<td>9.507</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-7}\)</span></td>
-<td>10.399</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-8}\)</span></td>
-<td>11.224</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-9}\)</span></td>
-<td>11.996</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-10}\)</span></td>
-<td>12.723</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-11}\)</span></td>
-<td>13.412</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-12}\)</span></td>
-<td>14.069</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-13}\)</span></td>
-<td>14.698</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">K = <span class="number">14.698</span>;</span><br><span class="line">Ks = K/<span class="number">2</span>;</span><br><span class="line">p = normcdf([-Ks Ks]);</span><br><span class="line">BER = <span class="number">1</span> - (p(<span class="number">2</span>)-p(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BER =</span><br><span class="line"></span><br><span class="line">   1.9962e-13</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/16/dj-rj/image-20220516160050961.png"
-alt="image-20220516160050961" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516193125490.png"
-alt="image-20220516193125490" /></p>
-<h2 id="total-jitter">Total Jitter</h2>
-<p><span class="math display">\[
-\text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} +
-\text{RJ}_{\text{p-p}}(\text{BER})
-\]</span></p>
-<p><img src="/2022/05/16/dj-rj/tj.drawio.svg" alt="tj.drawio" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516160006909.png"
-alt="image-20220516160006909" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516012200383.png"
-alt="image-20220516012200383" /></p>
-<blockquote>
-<p>In the psd of TJ, the spur is DJ and floor is RJ</p>
-</blockquote>
-<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
-<p>The <strong>phase noise</strong> is traditionally defined as the
-ratio of the power of the signal in 1Hz bandwidth at offset <span
-class="math inline">\(f\)</span> from the carrier <span
-class="math inline">\(P\)</span>, divided by the power of the carrier
-<span class="math display">\[
-\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
-\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
-<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
-\geqslant 0\)</span></p>
-<p>Under <strong>narrow angle assumption</strong> <span
-class="math display">\[
-S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
-\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
-+\infty\right]\)</span></p>
-<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
-the variance of the absolute jitter(<span
-class="math inline">\(J_{ee}\)</span>)via integration of the
-corresponding PSD <span class="math display">\[
-J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
-\]</span></p>
-<p>And we know the relationship between absolute jitter and excess phase
-is <span class="math display">\[
-J_{ee}=\frac {\varphi}{\omega_0}
-\]</span> Considering that phase noise is normally symmetrical about the
-zero frequency, multiplied by <strong>two</strong> is shown as below
-<span class="math display">\[
-J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
-\]</span> where phase noise is in linear units not in logarithmic
-ones.</p>
-<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
-unit (<em>dBc</em>), we have to convert the unit before applying the
-above equation <span class="math display">\[
-\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
-\]</span> The complete equation using the simulation result of
-<em>Spectre-RF Pnoise</em> is <span class="math display">\[
-J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
-[dBc/Hz]}{10}}df}}{\omega_0}
-\]</span></p>
-<p>The above equation has been verified for <em>sampled pnoise</em>,
-i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
-<blockquote>
-<ul>
-<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
-Function: Jee:Integration Limits</em> can calculate it conveniently</li>
-<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
-below equation to get RMS jitter.</li>
-</ul>
-</blockquote>
-<p>One example, integrate to <span
-class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
-class="math inline">\(f_{osc} = 16GHz\)</span></p>
-<p><img src="/2022/05/16/dj-rj/image-20220415100034220.png"
-alt="image-20220415100034220" /></p>
-<p>Of course, it apply to conventional pnoise simulation.</p>
-<p>On the other hand, output rms voltage noise, <span
-class="math inline">\(V_{out,rms}\)</span> divied by slope should be
-close to <span class="math inline">\(J_{ee,rms}\)</span> <span
-class="math display">\[
-J_{ee,rms} = \frac {V_{out,rms}}{slope}
-\]</span></p>
-<h2 id="reference">reference</h2>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Windowing Technique for Accurate DFT</title>
     <url>/2023/05/27/dft-window/</url>
     <content><![CDATA[<blockquote>
@@ -4321,6 +4138,189 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Random &amp; Deterministic Jitters Simulation</title>
+    <url>/2022/05/16/dj-rj/</url>
+    <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
+alt="image-20220516004008878" /></p>
+<h2 id="deterministic-jitter">Deterministic Jitter</h2>
+<p><img src="/2022/05/16/dj-rj/image-20220516004058916.png"
+alt="image-20220516004058916" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516004206118.png"
+alt="image-20220516004206118" /></p>
+<p><code>j_Djpp</code> can be calculated by PSD,too</p>
+<p><img src="/2022/05/16/dj-rj/image-20220516004615033.png"
+alt="image-20220516004615033" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fck = <span class="number">38.4e6</span>;</span><br><span class="line">Nfft = <span class="number">15000</span>;</span><br><span class="line">fres = fck/Nfft;</span><br><span class="line">psddBc = <span class="number">-99.3343</span>;</span><br><span class="line">psBc = psddBc + <span class="number">10</span>*<span class="built_in">log10</span>(fres);	<span class="comment">% psd -&gt; ps; </span></span><br><span class="line">phrad2 = <span class="number">10</span>^(psBc/<span class="number">10</span>);</span><br><span class="line">phrms = <span class="built_in">sqrt</span>(phrad2);</span><br><span class="line">Jrms = phrms/<span class="number">2</span>/<span class="built_in">pi</span>*<span class="number">1</span>/fck;</span><br><span class="line">Jpp = <span class="number">2</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*Jrms;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Jpp =</span><br><span class="line"></span><br><span class="line">   6.4038e-12</span><br></pre></td></tr></table></figure>
+<p>For DJ, we usually use peak to peak value</p>
+<blockquote>
+<p>BTW, the psd value at half of fundamental frequency (<span
+class="math inline">\(f_s/2\)</span>) is misleading and ambiguity, we
+won't use this value</p>
+</blockquote>
+<h2 id="random-jitter">Random Jitter</h2>
+<p>RJ can be accurately and efficiently measured using
+<strong>PSS/Pnoise</strong> or <strong>HB/HBnoise</strong>.</p>
+<p>Note that the <strong>transient noise</strong> can also be used to
+compute RJ;</p>
+<blockquote>
+<p>However, the computation cost is typically very high, and the
+accuracy is lesser as compared to PSS/Pnoise and HB/HBnoise.</p>
+</blockquote>
+<p>Since RJ follows a Gaussian distribution, it can be fully
+characterized using its Root-Mean-Squared value (RMS) or the standard
+deviation value (<span class="math inline">\(\sigma\)</span>)</p>
+<p>The Peak-to-Peak value of RJ (<span
+class="math inline">\(\text{RJ}_{\text{p-p}}\)</span>) can be calculated
+under certain observation conditions <span class="math display">\[
+\text{RJ}_{\text{p-p}}\equiv K \ast \text{RJ}_{\text{RMS}}
+\]</span> Here, <span class="math inline">\(K\)</span> is a constant
+determined by the BER specification of the system given in the following
+Table</p>
+<table>
+<thead>
+<tr class="header">
+<th>BER</th>
+<th>Crest factor (K)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(10^{-3}\)</span></td>
+<td>6.18</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-4}\)</span></td>
+<td>7.438</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-5}\)</span></td>
+<td>8.53</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-6}\)</span></td>
+<td>9.507</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-7}\)</span></td>
+<td>10.399</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-8}\)</span></td>
+<td>11.224</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-9}\)</span></td>
+<td>11.996</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-10}\)</span></td>
+<td>12.723</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-11}\)</span></td>
+<td>13.412</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-12}\)</span></td>
+<td>14.069</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-13}\)</span></td>
+<td>14.698</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">K = <span class="number">14.698</span>;</span><br><span class="line">Ks = K/<span class="number">2</span>;</span><br><span class="line">p = normcdf([-Ks Ks]);</span><br><span class="line">BER = <span class="number">1</span> - (p(<span class="number">2</span>)-p(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BER =</span><br><span class="line"></span><br><span class="line">   1.9962e-13</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/16/dj-rj/image-20220516160050961.png"
+alt="image-20220516160050961" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516193125490.png"
+alt="image-20220516193125490" /></p>
+<h2 id="total-jitter">Total Jitter</h2>
+<p><span class="math display">\[
+\text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} +
+\text{RJ}_{\text{p-p}}(\text{BER})
+\]</span></p>
+<p><img src="/2022/05/16/dj-rj/tj.drawio.svg" alt="tj.drawio" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516160006909.png"
+alt="image-20220516160006909" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516012200383.png"
+alt="image-20220516012200383" /></p>
+<blockquote>
+<p>In the psd of TJ, the spur is DJ and floor is RJ</p>
+</blockquote>
+<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
+<p>The <strong>phase noise</strong> is traditionally defined as the
+ratio of the power of the signal in 1Hz bandwidth at offset <span
+class="math inline">\(f\)</span> from the carrier <span
+class="math inline">\(P\)</span>, divided by the power of the carrier
+<span class="math display">\[
+\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
+<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
+\geqslant 0\)</span></p>
+<p>Under <strong>narrow angle assumption</strong> <span
+class="math display">\[
+S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
++\infty\right]\)</span></p>
+<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
+the variance of the absolute jitter(<span
+class="math inline">\(J_{ee}\)</span>)via integration of the
+corresponding PSD <span class="math display">\[
+J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
+\]</span></p>
+<p>And we know the relationship between absolute jitter and excess phase
+is <span class="math display">\[
+J_{ee}=\frac {\varphi}{\omega_0}
+\]</span> Considering that phase noise is normally symmetrical about the
+zero frequency, multiplied by <strong>two</strong> is shown as below
+<span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
+\]</span> where phase noise is in linear units not in logarithmic
+ones.</p>
+<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
+unit (<em>dBc</em>), we have to convert the unit before applying the
+above equation <span class="math display">\[
+\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
+\]</span> The complete equation using the simulation result of
+<em>Spectre-RF Pnoise</em> is <span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
+[dBc/Hz]}{10}}df}}{\omega_0}
+\]</span></p>
+<p>The above equation has been verified for <em>sampled pnoise</em>,
+i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
+<blockquote>
+<ul>
+<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
+Function: Jee:Integration Limits</em> can calculate it conveniently</li>
+<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
+below equation to get RMS jitter.</li>
+</ul>
+</blockquote>
+<p>One example, integrate to <span
+class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
+class="math inline">\(f_{osc} = 16GHz\)</span></p>
+<p><img src="/2022/05/16/dj-rj/image-20220415100034220.png"
+alt="image-20220415100034220" /></p>
+<p>Of course, it apply to conventional pnoise simulation.</p>
+<p>On the other hand, output rms voltage noise, <span
+class="math inline">\(V_{out,rms}\)</span> divied by slope should be
+close to <span class="math inline">\(J_{ee,rms}\)</span> <span
+class="math display">\[
+J_{ee,rms} = \frac {V_{out,rms}}{slope}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
+]]></content>
+      <categories>
+        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -6624,6 +6624,144 @@ href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff05
       </tags>
   </entry>
   <entry>
+    <title>Dual Diode and ggNMOS</title>
+    <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
+    <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
+alt="image-20230517233753530" /></p>
+<blockquote>
+<p><em>HIA</em> = High Amp</p>
+<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
+diode</p>
+<p>HIA diode process is same with regular junction diode</p>
+</blockquote>
+<h2 id="strap">STRAP</h2>
+<p>A "strap" refers to a low-impedance connection</p>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518001007350.png"
+alt="image-20230518001007350" /></p>
+<p>NWDMY = NWDMY1, NWDMY2</p>
+<p>STRAP = NWSTRAP or PWSTRAP</p>
+<p>NWSTRAP = {NP &amp; OD} &amp; {NW not {NW INTERACT NWDMY}}</p>
+<p>PWSTRAP = {PP &amp; OD} not NW</p>
+<table>
+<thead>
+<tr class="header">
+<th>cell  pin</th>
+<th>PLUS</th>
+<th>MINUS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>N diode</strong></td>
+<td>PWSTRAP</td>
+<td>\</td>
+</tr>
+<tr class="even">
+<td><strong>P diode</strong></td>
+<td>\</td>
+<td>NWSTRAP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="calibre-rulenot">Calibre Rule::NOT</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518005758993.png"
+alt="image-20230518005758993" /></p>
+<h3 id="calibre-ruleinteract">Calibre Rule::INTERACT</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010124496.png"
+alt="image-20230518010124496" /></p>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010758342.png"
+alt="image-20230518010758342" /></p>
+<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
+alt="image-20230518012456390" /></p>
+<blockquote>
+<p>PS: I/O to GND positively</p>
+<p>NS: I/O to GND negatively</p>
+<p>PD: I/O to VDD positively</p>
+<p>ND: I/O to VDD negatively</p>
+</blockquote>
+<p>Dual diode should be used with <strong>power clamp</strong> for
+<strong>PS</strong> and <strong>ND</strong> path</p>
+<h3 id="pmos-power-clamp">PMOS power clamp</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
+alt="power_clamp_pmos.drawio" /></p>
+<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
+alt="image-20220623231619052" /></p>
+<blockquote>
+<p>The drain (D) is connected to an I/O pad and the gate (G) is
+grounded.</p>
+<p>To ensure “zero” leakage of the ESD protection structure under normal
+operations.</p>
+<p>To to protect gate of core device, tie-high and tie-low shall be used
+when used as secondary ESD protecton.</p>
+</blockquote>
+<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
+pad</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
+alt="image-20220623233019912" /></p>
+<ol type="1">
+<li><strong>DB</strong> junction is reverse-biased all the way to its
+breakdown.</li>
+<li>Avalance multiplication takes place and generates electron-hole
+pairs</li>
+<li>Hole current flows into the ground via the *B-region** and build up
+a potential, VR, across the lateral parasitic resistance R</li>
+<li>As VR increases, the <strong>BS</strong> junction turns on,
+eventually triggers the parasitic lateral NPN transistor Q
+(<strong>DBS</strong>)</li>
+</ol>
+<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
+pad</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
+alt="image-20220623233634452" /></p>
+<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
+the transient</p>
+<blockquote>
+<p>ggNMOS is commonly used in the GPIO provided by foundry, which
+alleviate the ESD design burden of customer.</p>
+<p>These GPIO is self-protective thanks to the ggNMOS.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
+circuits: an IC design perspective. Boston, Mass: Kluwer Academic
+Publishers.</p>
+<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
+Stine, J. (2001). On-chip ESD protection design for integrated circuits:
+An overview for IC designers. Microelectronics Journal. 32. 733-747.
+10.1016/S0026-2692(01)00060-X.</p>
+<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
+Protection Design for Ics.” (2001).</p>
+<p>Introduction: ESD protection concepts for I/Os. URL: <a
+href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
+<p>Answer: What does "strap" mean in this context? <a
+href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
+<p>Hammer VLSI Flow URL: <a
+href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
+<p>Calibre Rule Writing 2009</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>esd</tag>
+        <tag>clamp</tag>
+        <tag>diode</tag>
+        <tag>ggnmos</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ESD and Protection</title>
     <url>/2022/06/09/esd-protection/</url>
     <content><![CDATA[<p>The <strong>ESD design window</strong> is defined as the difference
@@ -6829,144 +6967,6 @@ Sixth international symposium on quality electronic design (isqed'05),
         <tag>tlp</tag>
         <tag>hbm</tag>
         <tag>cdm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Dual Diode and ggNMOS</title>
-    <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
-    <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
-alt="image-20230517233753530" /></p>
-<blockquote>
-<p><em>HIA</em> = High Amp</p>
-<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
-diode</p>
-<p>HIA diode process is same with regular junction diode</p>
-</blockquote>
-<h2 id="strap">STRAP</h2>
-<p>A "strap" refers to a low-impedance connection</p>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518001007350.png"
-alt="image-20230518001007350" /></p>
-<p>NWDMY = NWDMY1, NWDMY2</p>
-<p>STRAP = NWSTRAP or PWSTRAP</p>
-<p>NWSTRAP = {NP &amp; OD} &amp; {NW not {NW INTERACT NWDMY}}</p>
-<p>PWSTRAP = {PP &amp; OD} not NW</p>
-<table>
-<thead>
-<tr class="header">
-<th>cell  pin</th>
-<th>PLUS</th>
-<th>MINUS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>N diode</strong></td>
-<td>PWSTRAP</td>
-<td>\</td>
-</tr>
-<tr class="even">
-<td><strong>P diode</strong></td>
-<td>\</td>
-<td>NWSTRAP</td>
-</tr>
-</tbody>
-</table>
-<h3 id="calibre-rulenot">Calibre Rule::NOT</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518005758993.png"
-alt="image-20230518005758993" /></p>
-<h3 id="calibre-ruleinteract">Calibre Rule::INTERACT</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010124496.png"
-alt="image-20230518010124496" /></p>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010758342.png"
-alt="image-20230518010758342" /></p>
-<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
-alt="image-20230518012456390" /></p>
-<blockquote>
-<p>PS: I/O to GND positively</p>
-<p>NS: I/O to GND negatively</p>
-<p>PD: I/O to VDD positively</p>
-<p>ND: I/O to VDD negatively</p>
-</blockquote>
-<p>Dual diode should be used with <strong>power clamp</strong> for
-<strong>PS</strong> and <strong>ND</strong> path</p>
-<h3 id="pmos-power-clamp">PMOS power clamp</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
-alt="power_clamp_pmos.drawio" /></p>
-<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
-alt="image-20220623231619052" /></p>
-<blockquote>
-<p>The drain (D) is connected to an I/O pad and the gate (G) is
-grounded.</p>
-<p>To ensure “zero” leakage of the ESD protection structure under normal
-operations.</p>
-<p>To to protect gate of core device, tie-high and tie-low shall be used
-when used as secondary ESD protecton.</p>
-</blockquote>
-<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
-alt="image-20220623233019912" /></p>
-<ol type="1">
-<li><strong>DB</strong> junction is reverse-biased all the way to its
-breakdown.</li>
-<li>Avalance multiplication takes place and generates electron-hole
-pairs</li>
-<li>Hole current flows into the ground via the *B-region** and build up
-a potential, VR, across the lateral parasitic resistance R</li>
-<li>As VR increases, the <strong>BS</strong> junction turns on,
-eventually triggers the parasitic lateral NPN transistor Q
-(<strong>DBS</strong>)</li>
-</ol>
-<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
-alt="image-20220623233634452" /></p>
-<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
-the transient</p>
-<blockquote>
-<p>ggNMOS is commonly used in the GPIO provided by foundry, which
-alleviate the ESD design burden of customer.</p>
-<p>These GPIO is self-protective thanks to the ggNMOS.</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
-circuits: an IC design perspective. Boston, Mass: Kluwer Academic
-Publishers.</p>
-<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
-Stine, J. (2001). On-chip ESD protection design for integrated circuits:
-An overview for IC designers. Microelectronics Journal. 32. 733-747.
-10.1016/S0026-2692(01)00060-X.</p>
-<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
-Protection Design for Ics.” (2001).</p>
-<p>Introduction: ESD protection concepts for I/Os. URL: <a
-href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
-<p>Answer: What does "strap" mean in this context? <a
-href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
-<p>Hammer VLSI Flow URL: <a
-href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
-<p>Calibre Rule Writing 2009</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>esd</tag>
-        <tag>clamp</tag>
-        <tag>diode</tag>
-        <tag>ggnmos</tag>
       </tags>
   </entry>
   <entry>
@@ -7668,6 +7668,20 @@ href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.car
       </categories>
   </entry>
   <entry>
+    <title>group delay</title>
+    <url>/2023/08/09/group-delay/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Inter-Symbol Interference (or Leaky Bits) [<a
+href="http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html">http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html</a>]</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>SI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>h0 Estimator</title>
     <url>/2022/05/29/h0-estimator/</url>
     <content><![CDATA[<p>summer output <span class="math display">\[
@@ -7714,20 +7728,6 @@ different pattern for even and odd error slicer</p>
       </categories>
       <tags>
         <tag>dfe</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>group delay</title>
-    <url>/2023/08/09/group-delay/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Inter-Symbol Interference (or Leaky Bits) [<a
-href="http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html">http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html</a>]</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>SI</tag>
       </tags>
   </entry>
   <entry>
@@ -8101,75 +8101,6 @@ alt="pma_dig_bumps.drawio" /></p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>integrator</tag>
-        <tag>ota</tag>
-        <tag>slew rate</tag>
-        <tag>bandwidth</tag>
-      </tags>
   </entry>
   <entry>
     <title>Circuit insight</title>
@@ -8643,6 +8574,75 @@ href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemY
       <categories>
         <category>analog</category>
       </categories>
+  </entry>
+  <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>integrator</tag>
+        <tag>ota</tag>
+        <tag>slew rate</tag>
+        <tag>bandwidth</tag>
+      </tags>
   </entry>
   <entry>
     <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
@@ -11188,6 +11188,136 @@ href="https://benchugg.com/research_notes/sde_ito_lemma/">https://benchugg.com/r
       </categories>
   </entry>
   <entry>
+    <title>Parallel Compensation in Two stage amplifier</title>
+    <url>/2022/03/07/parallel-compensation/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>Parallel Compensation</strong> is also known as <strong>Lead
+Compensation</strong>, <strong>Pole-Zero Compensation</strong></p>
+</blockquote>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20220307234938855.png"
+alt="image-20220307234938855" /></p>
+<p><strong>Note</strong>: The dominant pole is at output of the first
+stage, i.e. <span
+class="math inline">\(\frac{1}{R_{EQ}C_{EQ}}\)</span>.</p>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20221006001114562.png"
+alt="image-20221006001114562" /></p>
+<h4 id="pole-and-zero-in-transfer-function">Pole and Zero in transfer
+function</h4>
+<blockquote>
+<p>Design with operational amplifiers and analog integrated circuits /
+Sergio Franco, San Francisco State University. – Fourth edition</p>
+</blockquote>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20221005220854411.png"
+alt="image-20221005220854411" /></p>
+<p><span class="math display">\[
+Y = \frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}
+\]</span></p>
+<p><span class="math display">\[\begin{align}
+Z &amp;= \frac{1}{\frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}} \\
+&amp;= \frac{R_1(1+sR_cC_c)}{s^2R_1C_1R_cC_c+S(R_1C_c+R_1C_1+R_cC_c)+1}
+\end{align}\]</span> If <span class="math inline">\(p_{1c} \ll
+p_{3c}\)</span>, two real roots can be found <span
+class="math display">\[\begin{align}
+p_{1c} &amp;= \frac{1}{R_1C_c+R_1C_1+R_cC_c} \\
+p_{3c} &amp;= \frac{R_1C_c+R_1C_1+R_cC_c}{R_1C_1R_cC_c}
+\end{align}\]</span></p>
+<p>The additional zero is <span class="math display">\[
+z_c = \frac{1}{R_cC_c}
+\]</span> Given <span class="math inline">\(R_c \ll R\)</span> and <span
+class="math inline">\(C_c \gg C\)</span> <span
+class="math display">\[\begin{align}
+p_{1c} &amp;\simeq \frac{1}{R_1(C_c+C_1)} \simeq \frac{1}{R_1C_c}\\
+p_{3c} &amp;= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \simeq
+\frac{1}{R_cC_1}
+\end{align}\]</span></p>
+<p>The output pole is unchanged, which is <span class="math display">\[
+p_2 = \frac{1}{R_LC_L}
+\]</span> We usually <strong>cancel</strong> <span
+class="math inline">\(p_2\)</span> with <span
+class="math inline">\(z_c\)</span>, i.e. <span class="math display">\[
+R_cC_c=R_LC_L
+\]</span></p>
+<h4 id="phase-margin">Phase margin</h4>
+<p>unity-gain frequency <span class="math inline">\(\omega_t\)</span>
+<span class="math display">\[
+\omega_t = \frac{g_{m1}g_{m2}R_L}{C_c}
+\]</span></p>
+<ol type="1">
+<li><p>PM=45<span class="math inline">\(^o\)</span> <span
+class="math display">\[
+p_{3c} = \omega_t
+\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
+class="math inline">\(R_c\)</span> can be obtained</p>
+<p><span class="math display">\[\begin{align}
+   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot A_{DC}\cdot
+p_2}}=\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot A_{DC}}} \\
+C_c &amp;= \sqrt{\frac{A_{DC}\cdot C_1}{R_1\cdot
+p_2}}=\sqrt{\frac{A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}}
+\end{align}\]</span></p></li>
+<li><p>PM=60<span class="math inline">\(^o\)</span> <span
+class="math display">\[
+p_{3c} = 2\cdot\omega_t
+\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
+class="math inline">\(R_c\)</span> can be obtained <span
+class="math display">\[\begin{align}
+   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot 2A_{DC}\cdot p_2}} =
+\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot 2A_{DC}}} \\
+   &amp;= \sqrt{\frac{C_L}{2g_{m1}g_{m2}C_1}}\\
+C_c &amp;= \sqrt{\frac{2A_{DC}\cdot C_1}{R_1\cdot p_2}} =
+\sqrt{\frac{2A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}} \\
+&amp;= R_L\sqrt{2g_{m1}g_{m2}C_1C_L}
+\end{align}\]</span></p>
+<p>for the unity-gain frequency <span
+class="math inline">\(\omega_t\)</span> we find <span
+class="math display">\[
+\omega_t = \sqrt{\frac{1}{2}\cdot \frac{g_{m1}g_{m2}}{C_1C_L}}
+\]</span> The parallel compensation shows a remarkably good result. The
+new 0 dB frequency lies only a factor <span
+class="math inline">\(\sqrt{2}\)</span> lower than the theoretical
+maximum</p></li>
+</ol>
+<blockquote>
+<p>To increase <span class="math inline">\(\phi_m\)</span>, we need to
+<strong>raise</strong> <span class="math inline">\(C_c\)</span> a bit
+while <strong>lowering</strong> <span class="math inline">\(R_c\)</span>
+in proportion in order to maintain pole-zero cancellation. This causes
+<span class="math inline">\(p_{1c}\)</span> and <span
+class="math inline">\(p_{3c}\)</span> to split a bit further apart.</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"></span><br><span class="line">fd = <span class="number">84</span>*<span class="number">1e3</span>;	<span class="comment">% dominant freq, unit: Hz</span></span><br><span class="line">fnd = <span class="number">3.25</span>*<span class="number">1e6</span>;	<span class="comment">% unit: Hz</span></span><br><span class="line">C = <span class="number">478</span>*<span class="number">1e-15</span>;</span><br><span class="line">R = <span class="number">1</span>/fd/(<span class="number">2</span>*<span class="built_in">pi</span>)/C;</span><br><span class="line">Adc = <span class="number">10</span>^(<span class="number">80</span>/<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">ri = <span class="number">2</span>; <span class="comment">% PM=45: 1;  PM=60: 2</span></span><br><span class="line">Rc = (R/C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/ri/Adc)^<span class="number">0.5</span>; <span class="comment">% compensation resistor</span></span><br><span class="line">Cc = (ri*Adc*C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/R)^<span class="number">0.5</span>; <span class="comment">% compensation capacitor</span></span><br><span class="line"></span><br><span class="line">wzc = <span class="number">1</span>/<span class="number">2</span>/<span class="built_in">pi</span>/Rc/Cc; <span class="comment">% zero frequency</span></span><br></pre></td></tr></table></figure>
+<h4 id="reference">reference</h4>
+<p>Viola Schäffer, Designing Amplifiers for Stability, ISSCC 2021
+Tutorials</p>
+<p>R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft
+University Press, 1994.</p>
+<p>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
+Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.
+6.7 Compensation</p>
+<p>Application Note AN-1286 Compensation for the LM3478 Boost
+Controller</p>
+<p>ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 URL:
+<a
+href="https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability%20Jan27.pdf">Lect
+1D Op-Amps Stability and Frequency Compensation Techniques</a></p>
+<p>Sergio Franco, San Francisco State University, Design with
+Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
+<p>J. H. Huijsing, 6.2.2.1 Two-GA-stage Parallel Compensation (PC),
+"Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer,
+2017"</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>stability</tag>
+        <tag>compensation</tag>
+        <tag>amplifier</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PERC</title>
     <url>/2023/11/04/perc/</url>
     <content><![CDATA[<ul>
@@ -12015,136 +12145,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBri
       <categories>
         <category>noise</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Parallel Compensation in Two stage amplifier</title>
-    <url>/2022/03/07/parallel-compensation/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>Parallel Compensation</strong> is also known as <strong>Lead
-Compensation</strong>, <strong>Pole-Zero Compensation</strong></p>
-</blockquote>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20220307234938855.png"
-alt="image-20220307234938855" /></p>
-<p><strong>Note</strong>: The dominant pole is at output of the first
-stage, i.e. <span
-class="math inline">\(\frac{1}{R_{EQ}C_{EQ}}\)</span>.</p>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20221006001114562.png"
-alt="image-20221006001114562" /></p>
-<h4 id="pole-and-zero-in-transfer-function">Pole and Zero in transfer
-function</h4>
-<blockquote>
-<p>Design with operational amplifiers and analog integrated circuits /
-Sergio Franco, San Francisco State University. – Fourth edition</p>
-</blockquote>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20221005220854411.png"
-alt="image-20221005220854411" /></p>
-<p><span class="math display">\[
-Y = \frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}
-\]</span></p>
-<p><span class="math display">\[\begin{align}
-Z &amp;= \frac{1}{\frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}} \\
-&amp;= \frac{R_1(1+sR_cC_c)}{s^2R_1C_1R_cC_c+S(R_1C_c+R_1C_1+R_cC_c)+1}
-\end{align}\]</span> If <span class="math inline">\(p_{1c} \ll
-p_{3c}\)</span>, two real roots can be found <span
-class="math display">\[\begin{align}
-p_{1c} &amp;= \frac{1}{R_1C_c+R_1C_1+R_cC_c} \\
-p_{3c} &amp;= \frac{R_1C_c+R_1C_1+R_cC_c}{R_1C_1R_cC_c}
-\end{align}\]</span></p>
-<p>The additional zero is <span class="math display">\[
-z_c = \frac{1}{R_cC_c}
-\]</span> Given <span class="math inline">\(R_c \ll R\)</span> and <span
-class="math inline">\(C_c \gg C\)</span> <span
-class="math display">\[\begin{align}
-p_{1c} &amp;\simeq \frac{1}{R_1(C_c+C_1)} \simeq \frac{1}{R_1C_c}\\
-p_{3c} &amp;= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \simeq
-\frac{1}{R_cC_1}
-\end{align}\]</span></p>
-<p>The output pole is unchanged, which is <span class="math display">\[
-p_2 = \frac{1}{R_LC_L}
-\]</span> We usually <strong>cancel</strong> <span
-class="math inline">\(p_2\)</span> with <span
-class="math inline">\(z_c\)</span>, i.e. <span class="math display">\[
-R_cC_c=R_LC_L
-\]</span></p>
-<h4 id="phase-margin">Phase margin</h4>
-<p>unity-gain frequency <span class="math inline">\(\omega_t\)</span>
-<span class="math display">\[
-\omega_t = \frac{g_{m1}g_{m2}R_L}{C_c}
-\]</span></p>
-<ol type="1">
-<li><p>PM=45<span class="math inline">\(^o\)</span> <span
-class="math display">\[
-p_{3c} = \omega_t
-\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
-class="math inline">\(R_c\)</span> can be obtained</p>
-<p><span class="math display">\[\begin{align}
-   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot A_{DC}\cdot
-p_2}}=\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot A_{DC}}} \\
-C_c &amp;= \sqrt{\frac{A_{DC}\cdot C_1}{R_1\cdot
-p_2}}=\sqrt{\frac{A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}}
-\end{align}\]</span></p></li>
-<li><p>PM=60<span class="math inline">\(^o\)</span> <span
-class="math display">\[
-p_{3c} = 2\cdot\omega_t
-\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
-class="math inline">\(R_c\)</span> can be obtained <span
-class="math display">\[\begin{align}
-   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot 2A_{DC}\cdot p_2}} =
-\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot 2A_{DC}}} \\
-   &amp;= \sqrt{\frac{C_L}{2g_{m1}g_{m2}C_1}}\\
-C_c &amp;= \sqrt{\frac{2A_{DC}\cdot C_1}{R_1\cdot p_2}} =
-\sqrt{\frac{2A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}} \\
-&amp;= R_L\sqrt{2g_{m1}g_{m2}C_1C_L}
-\end{align}\]</span></p>
-<p>for the unity-gain frequency <span
-class="math inline">\(\omega_t\)</span> we find <span
-class="math display">\[
-\omega_t = \sqrt{\frac{1}{2}\cdot \frac{g_{m1}g_{m2}}{C_1C_L}}
-\]</span> The parallel compensation shows a remarkably good result. The
-new 0 dB frequency lies only a factor <span
-class="math inline">\(\sqrt{2}\)</span> lower than the theoretical
-maximum</p></li>
-</ol>
-<blockquote>
-<p>To increase <span class="math inline">\(\phi_m\)</span>, we need to
-<strong>raise</strong> <span class="math inline">\(C_c\)</span> a bit
-while <strong>lowering</strong> <span class="math inline">\(R_c\)</span>
-in proportion in order to maintain pole-zero cancellation. This causes
-<span class="math inline">\(p_{1c}\)</span> and <span
-class="math inline">\(p_{3c}\)</span> to split a bit further apart.</p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"></span><br><span class="line">fd = <span class="number">84</span>*<span class="number">1e3</span>;	<span class="comment">% dominant freq, unit: Hz</span></span><br><span class="line">fnd = <span class="number">3.25</span>*<span class="number">1e6</span>;	<span class="comment">% unit: Hz</span></span><br><span class="line">C = <span class="number">478</span>*<span class="number">1e-15</span>;</span><br><span class="line">R = <span class="number">1</span>/fd/(<span class="number">2</span>*<span class="built_in">pi</span>)/C;</span><br><span class="line">Adc = <span class="number">10</span>^(<span class="number">80</span>/<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">ri = <span class="number">2</span>; <span class="comment">% PM=45: 1;  PM=60: 2</span></span><br><span class="line">Rc = (R/C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/ri/Adc)^<span class="number">0.5</span>; <span class="comment">% compensation resistor</span></span><br><span class="line">Cc = (ri*Adc*C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/R)^<span class="number">0.5</span>; <span class="comment">% compensation capacitor</span></span><br><span class="line"></span><br><span class="line">wzc = <span class="number">1</span>/<span class="number">2</span>/<span class="built_in">pi</span>/Rc/Cc; <span class="comment">% zero frequency</span></span><br></pre></td></tr></table></figure>
-<h4 id="reference">reference</h4>
-<p>Viola Schäffer, Designing Amplifiers for Stability, ISSCC 2021
-Tutorials</p>
-<p>R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft
-University Press, 1994.</p>
-<p>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
-Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.
-6.7 Compensation</p>
-<p>Application Note AN-1286 Compensation for the LM3478 Boost
-Controller</p>
-<p>ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 URL:
-<a
-href="https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability%20Jan27.pdf">Lect
-1D Op-Amps Stability and Frequency Compensation Techniques</a></p>
-<p>Sergio Franco, San Francisco State University, Design with
-Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
-<p>J. H. Huijsing, 6.2.2.1 Two-GA-stage Parallel Compensation (PC),
-"Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer,
-2017"</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>stability</tag>
-        <tag>compensation</tag>
-        <tag>amplifier</tag>
-      </tags>
   </entry>
   <entry>
     <title>import package in SystemVerilog compilation</title>
@@ -13085,6 +13085,26 @@ Press. doi:10.1017/CBO9780511835261</p>
       </categories>
   </entry>
   <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Random Signals</title>
     <url>/2023/11/10/random/</url>
     <content><![CDATA[<h2 id="random-processes">Random Processes</h2>
@@ -13252,26 +13272,6 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
 ]]></content>
       <categories>
         <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -13504,24 +13504,6 @@ running kernel:</p>
       </tags>
   </entry>
   <entry>
-    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
-    <url>/2022/02/02/rocky8-cadence/</url>
-    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
-<p><strong>library preparation for EDA installation</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>yum</tag>
-        <tag>os</tag>
-        <tag>rpm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>network connection using nmcli</title>
     <url>/2022/04/01/rocky-nmcli-network/</url>
     <content><![CDATA[<h4 id="problem">Problem</h4>
@@ -13543,6 +13525,24 @@ alt="image-20220401011543866" /></p>
       </categories>
       <tags>
         <tag>nmcli</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
+    <url>/2022/02/02/rocky8-cadence/</url>
+    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
+<p><strong>library preparation for EDA installation</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>yum</tag>
+        <tag>os</tag>
+        <tag>rpm</tag>
       </tags>
   </entry>
   <entry>
@@ -17362,19 +17362,6 @@ Memory in Verilog</a></p>
       </tags>
   </entry>
   <entry>
-    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
-    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Custom Bindkey of Cadence Virtuoso</title>
     <url>/2022/04/13/virtuoso-bindkey/</url>
     <content><![CDATA[<h2 id="schbindkeys.il">schBindKeys.il</h2>
@@ -17395,6 +17382,19 @@ Memory in Verilog</a></p>
         <tag>virtuoso</tag>
         <tag>layout</tag>
         <tag>schematic</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
+    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
       </tags>
   </entry>
   <entry>

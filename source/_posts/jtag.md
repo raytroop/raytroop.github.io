@@ -20,7 +20,13 @@ Instruction Register, IR
 ![image-20231128230836498](jtag/image-20231128230836498.png)
 
 > - FSM and Shift Register of DR and IR works at the **posedge** of the clock
-> - TMS, TDI, TDO and Hold Register of DR and IR changes value at the **nededge** of the clock
+> - TMS, TDI, TDO and Hold Register of DR and IR changes value at the **negedge** of the clock
+
+![image-20231201001606120](jtag/image-20231201001606120.png)
+
+![image-20231201001813333](jtag/image-20231201001813333.png)
+
+> capture IR `01`, the fixed is for easier fault detection
 
 
 
@@ -44,3 +50,4 @@ B. Eklow, K. P. Parker and C. F. Barnhart, "IEEE 1149.6: a boundary-scan standar
 
 IEEE 1149.6 Tutorial | Testing AC-coupled and Differential High-speed Nets
 
+Prof. James Chien-Mo Li, Lab of Dependable Systems, National Taiwan University. VLSI Testing

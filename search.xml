@@ -346,50 +346,6 @@ href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effect
       </tags>
   </entry>
   <entry>
-    <title>Efficient Sequence Objection in UVM</title>
-    <url>/2022/02/21/Efficient-Sequence-Objection/</url>
-    <content><![CDATA[<p>Objections are handled in <strong>pre/post body</strong> decalared in
-a base sequence class</p>
-<p>This is efficient for all sequence execution options:</p>
-<ul>
-<li><p>Default sequences use body objections</p></li>
-<li><p>Test sequences use test objections</p></li>
-<li><p>Subsequences use objections of the root sequence which calls
-them</p></li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_base_seq <span class="keyword">extends</span> uvm_sequence<span class="variable">#(yapp_packet)</span>;</span><br><span class="line">…</span><br><span class="line">    <span class="keyword">task</span> pre_body();</span><br><span class="line">        <span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">        	starting_phase<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    <span class="keyword">task</span> post_body();</span><br><span class="line">    	<span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">    		starting_phase<span class="variable">.drop_objection</span>(<span class="keyword">this</span>, get_type_name());	</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">…</span><br><span class="line"><span class="keyword">class</span> yapp012 <span class="keyword">extends</span> yapp_base_seq;</span><br><span class="line">…</span><br></pre></td></tr></table></figure>
-<p><strong>Set as default sequence of sequencer:</strong></p>
-<p>A default sequence is a root sequence, so the <strong>pre/post
-body</strong> methods are executed and objection are raised/dropped
-there</p>
-<p><strong>Test sequence:</strong></p>
-<p>A test sequence is a root sequence, so the <strong>pre/post
-body</strong> methods are executed. However, for a test sequence,
-<code>starting_phase</code> is <code>null</code> and so the objection is
-not handled in the sequence. The test must raise and drop objections</p>
-<p><strong>Subsequence:</strong></p>
-<p>Not a root sequence, so <strong>pre/post body</strong> methods are
-not executed. The root sequence which ultimately called the subsequence
-handles the objections, using one of the two options above.</p>
-<blockquote>
-<p>If a <strong>sequence</strong> is call via a <strong>`uvm_do</strong>
-variant, the it is defined as a subsequence and its
-<strong>pre/post_body()</strong> methods are not executed.</p>
-</blockquote>
-<p><strong>objection change in UVM1.2</strong></p>
-<p>Raising or dropping objections directly from
-<code>starting_phase</code> is deprecated</p>
-<ul>
-<li><p>must use <code>get_starting_phase()</code> method</p></li>
-<li><p>prevents modification of phase during sequence</p></li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
     <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
     <content><![CDATA[<h4
@@ -494,6 +450,50 @@ href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html
         <tag>eco</tag>
         <tag>sparecell</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Efficient Sequence Objection in UVM</title>
+    <url>/2022/02/21/Efficient-Sequence-Objection/</url>
+    <content><![CDATA[<p>Objections are handled in <strong>pre/post body</strong> decalared in
+a base sequence class</p>
+<p>This is efficient for all sequence execution options:</p>
+<ul>
+<li><p>Default sequences use body objections</p></li>
+<li><p>Test sequences use test objections</p></li>
+<li><p>Subsequences use objections of the root sequence which calls
+them</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_base_seq <span class="keyword">extends</span> uvm_sequence<span class="variable">#(yapp_packet)</span>;</span><br><span class="line">…</span><br><span class="line">    <span class="keyword">task</span> pre_body();</span><br><span class="line">        <span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">        	starting_phase<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    <span class="keyword">task</span> post_body();</span><br><span class="line">    	<span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">    		starting_phase<span class="variable">.drop_objection</span>(<span class="keyword">this</span>, get_type_name());	</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">…</span><br><span class="line"><span class="keyword">class</span> yapp012 <span class="keyword">extends</span> yapp_base_seq;</span><br><span class="line">…</span><br></pre></td></tr></table></figure>
+<p><strong>Set as default sequence of sequencer:</strong></p>
+<p>A default sequence is a root sequence, so the <strong>pre/post
+body</strong> methods are executed and objection are raised/dropped
+there</p>
+<p><strong>Test sequence:</strong></p>
+<p>A test sequence is a root sequence, so the <strong>pre/post
+body</strong> methods are executed. However, for a test sequence,
+<code>starting_phase</code> is <code>null</code> and so the objection is
+not handled in the sequence. The test must raise and drop objections</p>
+<p><strong>Subsequence:</strong></p>
+<p>Not a root sequence, so <strong>pre/post body</strong> methods are
+not executed. The root sequence which ultimately called the subsequence
+handles the objections, using one of the two options above.</p>
+<blockquote>
+<p>If a <strong>sequence</strong> is call via a <strong>`uvm_do</strong>
+variant, the it is defined as a subsequence and its
+<strong>pre/post_body()</strong> methods are not executed.</p>
+</blockquote>
+<p><strong>objection change in UVM1.2</strong></p>
+<p>Raising or dropping objections directly from
+<code>starting_phase</code> is deprecated</p>
+<ul>
+<li><p>must use <code>get_starting_phase()</code> method</p></li>
+<li><p>prevents modification of phase during sequence</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Custom Design with FinFETs</title>
@@ -767,18 +767,6 @@ current steering DAC</h2>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Technology File</title>
-    <url>/2022/02/07/Innovus-Technology-File/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Innovus Path Based Analysis</title>
     <url>/2022/02/07/Innovus-Path-Based-Analysis/</url>
     <content><![CDATA[<p><strong>aocv</strong> : Re-timing the timing critical paths using the
@@ -789,6 +777,18 @@ critical paths using the actual slews for thepath</p>
 re-timing with aocv + path_slew_propagation</p>
 <p><strong>waveform_propagation</strong> : Re-timing with waveform
 effect taken into consideration during delayCal</p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Innovus Technology File</title>
+    <url>/2022/02/07/Innovus-Technology-File/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1582,6 +1582,55 @@ href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/
       </tags>
   </entry>
   <entry>
+    <title>Precision Techniques</title>
+    <url>/2023/05/19/Precision-Techniques/</url>
+    <content><![CDATA[<h2 id="autozeroing-techniques">Autozeroing techniques</h2>
+<blockquote>
+<p>offset is <strong>sampled</strong> and then subtracted from the
+input.</p>
+</blockquote>
+<h2 id="chopping-techniques">Chopping techniques</h2>
+<blockquote>
+<p>offset is <strong>modulated</strong> away from the signal band and
+then filtered out.</p>
+</blockquote>
+<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
+<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
+and other artifacts …</p>
+<h2 id="reference">reference</h2>
+<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
+effects of op-amp imperfections: autozeroing, correlated double
+sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
+84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
+href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
+<p>Bernhard E. Boser, M12 Precision Techniques [<a
+href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf</a>]</p>
+<p>Qinwen Fan, Evolution of precision amplifiers</p>
+<p>Wu, R., Huijsing, JH., &amp; Makinwa, KAA. (2013). Precision
+Instrumentation Amplifiers and Read-Out Integrated Circuits. Springer.
+https://doi.org/10.1007/978-1-4614-3731-4</p>
+<p>Kofi Makinwa, UPC 2009 <a
+href="https://electronicengineering.phd.upc.edu/en/courses-and-seminars/courses-materials/2008-2009/slides-makinwa-1">Overcoming
+Offset</a></p>
+<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
+CMOS [<a
+href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
+<p>Chopper Amplifiers Demystified Kofi A. A. Makinwa [<a
+href="https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt">https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt</a>]</p>
+<p>ESSCIRC2023 Circuit Insights Kofi Makinwa [<a
+href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7">https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>mismatch</tag>
+        <tag>offset</tag>
+        <tag>chopping</tag>
+        <tag>autozero</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Precedence Rule of UVM uvm_config_db::set</title>
     <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
     <content><![CDATA[<p><a
@@ -1640,55 +1689,6 @@ code]</a></p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Precision Techniques</title>
-    <url>/2023/05/19/Precision-Techniques/</url>
-    <content><![CDATA[<h2 id="autozeroing-techniques">Autozeroing techniques</h2>
-<blockquote>
-<p>offset is <strong>sampled</strong> and then subtracted from the
-input.</p>
-</blockquote>
-<h2 id="chopping-techniques">Chopping techniques</h2>
-<blockquote>
-<p>offset is <strong>modulated</strong> away from the signal band and
-then filtered out.</p>
-</blockquote>
-<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
-<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
-and other artifacts …</p>
-<h2 id="reference">reference</h2>
-<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
-effects of op-amp imperfections: autozeroing, correlated double
-sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
-84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
-href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
-<p>Bernhard E. Boser, M12 Precision Techniques [<a
-href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf</a>]</p>
-<p>Qinwen Fan, Evolution of precision amplifiers</p>
-<p>Wu, R., Huijsing, JH., &amp; Makinwa, KAA. (2013). Precision
-Instrumentation Amplifiers and Read-Out Integrated Circuits. Springer.
-https://doi.org/10.1007/978-1-4614-3731-4</p>
-<p>Kofi Makinwa, UPC 2009 <a
-href="https://electronicengineering.phd.upc.edu/en/courses-and-seminars/courses-materials/2008-2009/slides-makinwa-1">Overcoming
-Offset</a></p>
-<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
-CMOS [<a
-href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
-<p>Chopper Amplifiers Demystified Kofi A. A. Makinwa [<a
-href="https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt">https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt</a>]</p>
-<p>ESSCIRC2023 Circuit Insights Kofi Makinwa [<a
-href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7">https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>mismatch</tag>
-        <tag>offset</tag>
-        <tag>chopping</tag>
-        <tag>autozero</tag>
-      </tags>
   </entry>
   <entry>
     <title>RC corner</title>
@@ -1894,122 +1894,6 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2
       </tags>
   </entry>
   <entry>
-    <title>StatEye</title>
-    <url>/2023/09/23/StatEye/</url>
-    <content><![CDATA[<h2 id="matlab---pulse2stateye">Matlab - <code>pulse2stateye</code></h2>
-<blockquote>
-<p>Due to this function only output PDF of eye, postprocessing is needed
-which cumulative sum PDF.</p>
-</blockquote>
-<h3 id="probability-density-functionpdf-plot">Probability Density
-Function(PDF) plot</h3>
-<p><img src="/2023/09/23/StatEye/PDF.jpg" alt="PDF" /></p>
-<h3 id="bit-error-rateber-plot">Bit Error Rate(BER) plot</h3>
-<p><img src="/2023/09/23/StatEye/BER.jpg" alt="BER" /></p>
-<h3 id="pulse-response">pulse response</h3>
-<p><img src="/2023/09/23/StatEye/image-20220502134522549.png"
-alt="image-20220502134522549" /></p>
-<blockquote>
-<p>DC shift don't affect <code>pulse2stateye</code> function
-normally</p>
-<p>Both pulse <code>[0 0 0 0 .. 0 1 0 0 0 0 0 ...]</code> and
-<code>[1 1 1 1 ... 1 0 1 1 1 1 ...]</code> can be fed into</p>
-<p><code>pulse2stateye</code> function</p>
-<p><strong>CAUTION</strong>: the <code>0</code> don't mean common
-voltage but bit <code>0</code> , which is <code>-Vpeak</code> in
-differential link</p>
-</blockquote>
-<h3 id="postprocessing-function">postprocessing function</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% REF: https://www.mathworks.com/help/serdes/ref/pulse2stateye.html</span></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(<span class="built_in">size</span>(pulse, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">pulsewave = pulse(:, <span class="number">1</span>);</span><br><span class="line">pulsewave(:,<span class="number">1</span>) = pulsewave - pulsewave(<span class="number">1</span>);  <span class="comment">% DC shift, although `pulse2stateye` shift internally</span></span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line"><span class="comment">%stateye(1:200, 1:200) = 10000;</span></span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[ysize, xsize] = <span class="built_in">size</span>(stateye);</span><br><span class="line">ymid = <span class="built_in">floor</span>((ysize+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">upperEyePDF = stateye(ymid:<span class="keyword">end</span>,:); </span><br><span class="line">lowerEyePDF = stateye(ymid:<span class="number">-1</span>:<span class="number">1</span>,:); <span class="comment">% upside down</span></span><br><span class="line"></span><br><span class="line">upperEyeCDF = cumsum(upperEyePDF, <span class="number">1</span>);</span><br><span class="line">lowerEyeCDF = cumsum(lowerEyePDF, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">berlist = [<span class="number">1e-12</span>, <span class="number">1e-6</span>, <span class="number">0.01</span>];</span><br><span class="line">lenBer = <span class="built_in">length</span>(berlist);</span><br><span class="line">upperBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line">lowerBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:xsize</span><br><span class="line">        upperBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(upperEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">        lowerBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(lowerEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% shift idx to algin original stateye</span></span><br><span class="line">upperBERIdx = ymid - <span class="number">1</span> + upperBERIdx;</span><br><span class="line">lowerBERIdx = ymid + <span class="number">1</span> - lowerBERIdx;</span><br><span class="line"></span><br><span class="line">upperBERVal = vh(upperBERIdx);</span><br><span class="line">lowerBERVal = vh(lowerBERIdx);</span><br><span class="line"></span><br><span class="line">tticks = th*SymbolTime*<span class="number">1e12</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>);</span><br><span class="line">lgd = cell(lenBer*<span class="number">2</span>,<span class="number">1</span>) ;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer<span class="comment">% REF: https://www.mathworks.com/help/serdes/ref/pulse2stateye.html</span></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(<span class="built_in">size</span>(pulse, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">pulsewave = pulse(:, <span class="number">1</span>);    <span class="comment">% remove crosstalk pulse responses</span></span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[ysize, xsize] = <span class="built_in">size</span>(stateye);</span><br><span class="line">ymid = <span class="built_in">floor</span>((ysize+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">upperEyePDF = stateye(ymid:<span class="keyword">end</span>,:); </span><br><span class="line">lowerEyePDF = stateye(ymid:<span class="number">-1</span>:<span class="number">1</span>,:); <span class="comment">% upside down</span></span><br><span class="line"></span><br><span class="line">upperEyeCDF = cumsum(upperEyePDF, <span class="number">1</span>);</span><br><span class="line">lowerEyeCDF = cumsum(lowerEyePDF, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">berlist = [<span class="number">1e-12</span>, <span class="number">1e-6</span>, <span class="number">0.01</span>];</span><br><span class="line">lenBer = <span class="built_in">length</span>(berlist);</span><br><span class="line">upperBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line">lowerBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:xsize</span><br><span class="line">        upperBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(upperEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">        lowerBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(lowerEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% shift idx to algin original stateye</span></span><br><span class="line">upperBERIdx = ymid - <span class="number">1</span> + upperBERIdx;</span><br><span class="line">lowerBERIdx = ymid + <span class="number">1</span> - lowerBERIdx;</span><br><span class="line"></span><br><span class="line">upperBERVal = vh(upperBERIdx);</span><br><span class="line">lowerBERVal = vh(lowerBERIdx);</span><br><span class="line"></span><br><span class="line">tticks = th*SymbolTime*<span class="number">1e12</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>);</span><br><span class="line">lgd = cell(lenBer*<span class="number">2</span>,<span class="number">1</span>) ;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="built_in">plot</span>(tticks, upperBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span><span class="number">-1</span>&#125; = strcat(<span class="string">&#x27;BER=&#x27;</span>,num2str(berlist(<span class="built_in">i</span>)));</span><br><span class="line">    <span class="built_in">plot</span>(tticks, lowerBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span>&#125; = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(lgd)</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye BER&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave, <span class="string">&#x27;k&#x27;</span>, tt*<span class="number">1e9</span>, pulsewave-pulsewave(<span class="number">1</span>), <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;dc shift&#x27;</span>);</span><br><span class="line">xlim([<span class="number">0</span> <span class="number">10</span>]);</span><br><span class="line">ylim([<span class="number">-0.65</span> <span class="number">0.65</span>])</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">    <span class="built_in">plot</span>(tticks, upperBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span><span class="number">-1</span>&#125; = strcat(<span class="string">&#x27;BER=&#x27;</span>,num2str(berlist(<span class="built_in">i</span>)));</span><br><span class="line">    <span class="built_in">plot</span>(tticks, lowerBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span>&#125; = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(lgd)</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye BER&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h3 id="pulse-without-isi">pulse without ISI</h3>
-<blockquote>
-<p>Vp2p = 1V</p>
-</blockquote>
-<p><img src="/2023/09/23/StatEye/image-20220502135551321.png"
-alt="image-20220502135551321" /></p>
-<p><img src="/2023/09/23/StatEye/image-20220502135535943.png"
-alt="image-20220502135535943" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">SamplesPerSymbol = <span class="number">32</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(SamplesPerSymbol*<span class="number">16</span>, <span class="number">1</span>);</span><br><span class="line">pulsewave(<span class="number">3</span>*SamplesPerSymbol:<span class="number">4</span>*SamplesPerSymbol<span class="number">-1</span>, <span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave, <span class="string">&#x27;k&#x27;</span>, tt*<span class="number">1e9</span>, pulsewave-pulsewave(<span class="number">1</span>), <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;dc shift&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h2 id="hspice---snpssimade">HSPICE - <code>snpsSimADE</code></h2>
-<blockquote>
-<p>use StatEye Analysis in HSPICE</p>
-</blockquote>
-<h3 id="create-netlist-with-hspiced-in-virtuoso">create netlist with
-hspiceD in Virtuoso</h3>
-<p><img src="/2023/09/23/StatEye/image-20220708011315422.png"
-alt="image-20220708011315422" /></p>
-<h3 id="modify-netlist">modify netlist</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">P1 vi 0  port=1  Z0=0 LFSR (1 0 0 100p 100p 1G 1 [5,2])</span><br><span class="line">P2 vo 0  port=2  Z0=1G</span><br><span class="line">.stateye T=1ns trf=100p incident_port=1 probe_port=2</span><br><span class="line">.probe stateye eye(2) berC(2) eyeBW(2)</span><br><span class="line">.print stateye eye(2) berC(2) eyeBW(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Note both<code>Z0=0</code> and <code>Z0=1G</code> are used to remove
-port's effect, which is used as ideal voltage source and voltage
-monitor</p>
-</blockquote>
-<p><img src="/2023/09/23/StatEye/image-20220708012542135.png"
-alt="image-20220708012542135" /></p>
-<blockquote>
-<p>The <code>.probe stateye</code> command generates
-<code>netlist.stet#</code> and <code>netlist.stev#</code> for following
-purposes:</p>
-<ul>
-<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
-bathtubV(t)</li>
-<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
-bathtubV(t)</li>
-</ul>
-</blockquote>
-<h3 id="setup">setup</h3>
-<h4 id="cdsinit">.cdsinit</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load( strcat( getShellEnvVar(&quot;HSPICE_HOME&quot;) &quot;/hspice/interface/snpsSimADE.ile&quot; ))</span><br></pre></td></tr></table></figure>
-<h4 id="environment-variable">environment variable</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export CDS_LOAD_ENV=CSF</span><br><span class="line">export SNPSSIMADE_LOAD_MODE=HSPICE</span><br></pre></td></tr></table></figure>
-<h2 id="references">references</h2>
-<p>Sanders, Anthony, Michael Resso and John D'Ambrosia. “Channel
-Compliance Testing Utilizing Novel Statistical Eye Methodology.”
-(2004).</p>
-<p>X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate
-Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links,"
-in IEEE Transactions on Very Large Scale Integration (VLSI) Systems,
-vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
-10.1109/TVLSI.2021.3082208.</p>
-<p>HSPICE® User Guide: Signal Integrity Modeling and Analysis, Version
-Q-2020.03, March 2020</p>
-<p>IA Title: Common Electrical I/O (CEI) - Electrical and Jitter
-Interoperability agreements for 6G+ bps, 11G+ bps, 25G+ bps I/O and 56G+
-bps IA # OIF-CEI-04.0 December 29, 2017 [<a
-href="https://www.oiforum.com/wp-content/uploads/2019/01/OIF-CEI-04.0.pdf">pdf</a>]</p>
-<p>Chris Li Ph.D. student at the University of Toronto [<a
-href="https://github.com/ChrisZonghaoLi/pystateye">pystateye
-repo</a>]</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>stateye</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Small Gain Theorem - One Supply-Independent Biasing Example</title>
-    <url>/2022/02/13/SmallGainTheorem/</url>
-    <content><![CDATA[<p><strong>Degang Chen</strong> professor at Iowa State University, was
-named Fellow of the Institute of Electrical and Electronics Engineers in
-2016 for contributions to testing of analog and mixed-signal integrated
-circuits.</p>
-<blockquote>
-<p>I forget where I download this slide.</p>
-</blockquote>
-<div class="pdf-container" data-target="/pdfs/SmallGainTheorem.degang.cheng.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>control</tag>
-        <tag>feedback</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>voltage-dependent DRC checks</title>
     <url>/2022/04/13/VD-DRC/</url>
     <content><![CDATA[<p>In T* DRC deck, it is based on the voltage recognition CAD layer and
@@ -2121,6 +2005,102 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <tag>drc</tag>
         <tag>pvs</tag>
         <tag>erc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>StatEye</title>
+    <url>/2023/09/23/StatEye/</url>
+    <content><![CDATA[<h2 id="matlab---pulse2stateye">Matlab - <code>pulse2stateye</code></h2>
+<blockquote>
+<p>Due to this function only output PDF of eye, postprocessing is needed
+which cumulative sum PDF.</p>
+</blockquote>
+<h3 id="probability-density-functionpdf-plot">Probability Density
+Function(PDF) plot</h3>
+<p><img src="/2023/09/23/StatEye/PDF.jpg" alt="PDF" /></p>
+<h3 id="bit-error-rateber-plot">Bit Error Rate(BER) plot</h3>
+<p><img src="/2023/09/23/StatEye/BER.jpg" alt="BER" /></p>
+<h3 id="pulse-response">pulse response</h3>
+<p><img src="/2023/09/23/StatEye/image-20220502134522549.png"
+alt="image-20220502134522549" /></p>
+<blockquote>
+<p>DC shift don't affect <code>pulse2stateye</code> function
+normally</p>
+<p>Both pulse <code>[0 0 0 0 .. 0 1 0 0 0 0 0 ...]</code> and
+<code>[1 1 1 1 ... 1 0 1 1 1 1 ...]</code> can be fed into</p>
+<p><code>pulse2stateye</code> function</p>
+<p><strong>CAUTION</strong>: the <code>0</code> don't mean common
+voltage but bit <code>0</code> , which is <code>-Vpeak</code> in
+differential link</p>
+</blockquote>
+<h3 id="postprocessing-function">postprocessing function</h3>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% REF: https://www.mathworks.com/help/serdes/ref/pulse2stateye.html</span></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(<span class="built_in">size</span>(pulse, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">pulsewave = pulse(:, <span class="number">1</span>);</span><br><span class="line">pulsewave(:,<span class="number">1</span>) = pulsewave - pulsewave(<span class="number">1</span>);  <span class="comment">% DC shift, although `pulse2stateye` shift internally</span></span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line"><span class="comment">%stateye(1:200, 1:200) = 10000;</span></span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[ysize, xsize] = <span class="built_in">size</span>(stateye);</span><br><span class="line">ymid = <span class="built_in">floor</span>((ysize+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">upperEyePDF = stateye(ymid:<span class="keyword">end</span>,:); </span><br><span class="line">lowerEyePDF = stateye(ymid:<span class="number">-1</span>:<span class="number">1</span>,:); <span class="comment">% upside down</span></span><br><span class="line"></span><br><span class="line">upperEyeCDF = cumsum(upperEyePDF, <span class="number">1</span>);</span><br><span class="line">lowerEyeCDF = cumsum(lowerEyePDF, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">berlist = [<span class="number">1e-12</span>, <span class="number">1e-6</span>, <span class="number">0.01</span>];</span><br><span class="line">lenBer = <span class="built_in">length</span>(berlist);</span><br><span class="line">upperBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line">lowerBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:xsize</span><br><span class="line">        upperBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(upperEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">        lowerBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(lowerEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% shift idx to algin original stateye</span></span><br><span class="line">upperBERIdx = ymid - <span class="number">1</span> + upperBERIdx;</span><br><span class="line">lowerBERIdx = ymid + <span class="number">1</span> - lowerBERIdx;</span><br><span class="line"></span><br><span class="line">upperBERVal = vh(upperBERIdx);</span><br><span class="line">lowerBERVal = vh(lowerBERIdx);</span><br><span class="line"></span><br><span class="line">tticks = th*SymbolTime*<span class="number">1e12</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>);</span><br><span class="line">lgd = cell(lenBer*<span class="number">2</span>,<span class="number">1</span>) ;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer<span class="comment">% REF: https://www.mathworks.com/help/serdes/ref/pulse2stateye.html</span></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(<span class="built_in">size</span>(pulse, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">pulsewave = pulse(:, <span class="number">1</span>);    <span class="comment">% remove crosstalk pulse responses</span></span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[ysize, xsize] = <span class="built_in">size</span>(stateye);</span><br><span class="line">ymid = <span class="built_in">floor</span>((ysize+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">upperEyePDF = stateye(ymid:<span class="keyword">end</span>,:); </span><br><span class="line">lowerEyePDF = stateye(ymid:<span class="number">-1</span>:<span class="number">1</span>,:); <span class="comment">% upside down</span></span><br><span class="line"></span><br><span class="line">upperEyeCDF = cumsum(upperEyePDF, <span class="number">1</span>);</span><br><span class="line">lowerEyeCDF = cumsum(lowerEyePDF, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">berlist = [<span class="number">1e-12</span>, <span class="number">1e-6</span>, <span class="number">0.01</span>];</span><br><span class="line">lenBer = <span class="built_in">length</span>(berlist);</span><br><span class="line">upperBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line">lowerBERIdx = <span class="built_in">zeros</span>(lenBer, xsize);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:xsize</span><br><span class="line">        upperBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(upperEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">        lowerBERIdx(<span class="built_in">i</span>, <span class="built_in">j</span>) = <span class="built_in">find</span>(lowerEyeCDF(:, <span class="built_in">j</span>) &gt;= berlist(<span class="built_in">i</span>), <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% shift idx to algin original stateye</span></span><br><span class="line">upperBERIdx = ymid - <span class="number">1</span> + upperBERIdx;</span><br><span class="line">lowerBERIdx = ymid + <span class="number">1</span> - lowerBERIdx;</span><br><span class="line"></span><br><span class="line">upperBERVal = vh(upperBERIdx);</span><br><span class="line">lowerBERVal = vh(lowerBERIdx);</span><br><span class="line"></span><br><span class="line">tticks = th*SymbolTime*<span class="number">1e12</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>);</span><br><span class="line">lgd = cell(lenBer*<span class="number">2</span>,<span class="number">1</span>) ;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:lenBer</span><br><span class="line">    <span class="built_in">plot</span>(tticks, upperBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span><span class="number">-1</span>&#125; = strcat(<span class="string">&#x27;BER=&#x27;</span>,num2str(berlist(<span class="built_in">i</span>)));</span><br><span class="line">    <span class="built_in">plot</span>(tticks, lowerBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span>&#125; = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(lgd)</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye BER&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave, <span class="string">&#x27;k&#x27;</span>, tt*<span class="number">1e9</span>, pulsewave-pulsewave(<span class="number">1</span>), <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;dc shift&#x27;</span>);</span><br><span class="line">xlim([<span class="number">0</span> <span class="number">10</span>]);</span><br><span class="line">ylim([<span class="number">-0.65</span> <span class="number">0.65</span>])</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">    <span class="built_in">plot</span>(tticks, upperBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span><span class="number">-1</span>&#125; = strcat(<span class="string">&#x27;BER=&#x27;</span>,num2str(berlist(<span class="built_in">i</span>)));</span><br><span class="line">    <span class="built_in">plot</span>(tticks, lowerBERVal(<span class="built_in">i</span>, :), <span class="string">&#x27;Color&#x27;</span>, cmap(<span class="built_in">i</span>*<span class="number">15</span>, :));</span><br><span class="line">    lgd&#123;<span class="built_in">i</span>*<span class="number">2</span>&#125; = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(lgd)</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye BER&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h3 id="pulse-without-isi">pulse without ISI</h3>
+<blockquote>
+<p>Vp2p = 1V</p>
+</blockquote>
+<p><img src="/2023/09/23/StatEye/image-20220502135551321.png"
+alt="image-20220502135551321" /></p>
+<p><img src="/2023/09/23/StatEye/image-20220502135535943.png"
+alt="image-20220502135535943" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">modulation = <span class="number">2</span>;</span><br><span class="line">SamplesPerSymbol = <span class="number">32</span>;</span><br><span class="line">pulsewave = <span class="built_in">zeros</span>(SamplesPerSymbol*<span class="number">16</span>, <span class="number">1</span>);</span><br><span class="line">pulsewave(<span class="number">3</span>*SamplesPerSymbol:<span class="number">4</span>*SamplesPerSymbol<span class="number">-1</span>, <span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">[stateye,vh,th] = pulse2stateye(pulsewave,SamplesPerSymbol,modulation);</span><br><span class="line">cmap = serdes.utilities.SignalIntegrityColorMap;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">imagesc(th*SymbolTime*<span class="number">1e12</span>,vh,stateye)</span><br><span class="line">colormap(cmap)</span><br><span class="line">colorbar</span><br><span class="line">axis(<span class="string">&#x27;xy&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;ps&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Statistical Eye PDF&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">tt = [<span class="number">0</span>:<span class="built_in">size</span>(pulsewave, <span class="number">1</span>)<span class="number">-1</span>]*dt;</span><br><span class="line"><span class="built_in">plot</span>(tt*<span class="number">1e9</span>, pulsewave, <span class="string">&#x27;k&#x27;</span>, tt*<span class="number">1e9</span>, pulsewave-pulsewave(<span class="number">1</span>), <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;dc shift&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ns)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;voltage (V)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;pulse response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h2 id="hspice---snpssimade">HSPICE - <code>snpsSimADE</code></h2>
+<blockquote>
+<p>use StatEye Analysis in HSPICE</p>
+</blockquote>
+<h3 id="create-netlist-with-hspiced-in-virtuoso">create netlist with
+hspiceD in Virtuoso</h3>
+<p><img src="/2023/09/23/StatEye/image-20220708011315422.png"
+alt="image-20220708011315422" /></p>
+<h3 id="modify-netlist">modify netlist</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">P1 vi 0  port=1  Z0=0 LFSR (1 0 0 100p 100p 1G 1 [5,2])</span><br><span class="line">P2 vo 0  port=2  Z0=1G</span><br><span class="line">.stateye T=1ns trf=100p incident_port=1 probe_port=2</span><br><span class="line">.probe stateye eye(2) berC(2) eyeBW(2)</span><br><span class="line">.print stateye eye(2) berC(2) eyeBW(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note both<code>Z0=0</code> and <code>Z0=1G</code> are used to remove
+port's effect, which is used as ideal voltage source and voltage
+monitor</p>
+</blockquote>
+<p><img src="/2023/09/23/StatEye/image-20220708012542135.png"
+alt="image-20220708012542135" /></p>
+<blockquote>
+<p>The <code>.probe stateye</code> command generates
+<code>netlist.stet#</code> and <code>netlist.stev#</code> for following
+purposes:</p>
+<ul>
+<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
+bathtubV(t)</li>
+<li>netlist.stet#: eye(t,v), eyeBW(t,v), eyeV(t), ber(t,v) and
+bathtubV(t)</li>
+</ul>
+</blockquote>
+<h3 id="setup">setup</h3>
+<h4 id="cdsinit">.cdsinit</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load( strcat( getShellEnvVar(&quot;HSPICE_HOME&quot;) &quot;/hspice/interface/snpsSimADE.ile&quot; ))</span><br></pre></td></tr></table></figure>
+<h4 id="environment-variable">environment variable</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export CDS_LOAD_ENV=CSF</span><br><span class="line">export SNPSSIMADE_LOAD_MODE=HSPICE</span><br></pre></td></tr></table></figure>
+<h2 id="references">references</h2>
+<p>Sanders, Anthony, Michael Resso and John D'Ambrosia. “Channel
+Compliance Testing Utilizing Novel Statistical Eye Methodology.”
+(2004).</p>
+<p>X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate
+Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links,"
+in IEEE Transactions on Very Large Scale Integration (VLSI) Systems,
+vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
+10.1109/TVLSI.2021.3082208.</p>
+<p>HSPICE® User Guide: Signal Integrity Modeling and Analysis, Version
+Q-2020.03, March 2020</p>
+<p>IA Title: Common Electrical I/O (CEI) - Electrical and Jitter
+Interoperability agreements for 6G+ bps, 11G+ bps, 25G+ bps I/O and 56G+
+bps IA # OIF-CEI-04.0 December 29, 2017 [<a
+href="https://www.oiforum.com/wp-content/uploads/2019/01/OIF-CEI-04.0.pdf">pdf</a>]</p>
+<p>Chris Li Ph.D. student at the University of Toronto [<a
+href="https://github.com/ChrisZonghaoLi/pystateye">pystateye
+repo</a>]</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>stateye</tag>
       </tags>
   </entry>
   <entry>
@@ -3787,189 +3767,6 @@ href="https://youtu.be/nA_DZtRqrTQ">https://youtu.be/nA_DZtRqrTQ</a></p>
       </tags>
   </entry>
   <entry>
-    <title>Random &amp; Deterministic Jitters Simulation</title>
-    <url>/2022/05/16/dj-rj/</url>
-    <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
-alt="image-20220516004008878" /></p>
-<h2 id="deterministic-jitter">Deterministic Jitter</h2>
-<p><img src="/2022/05/16/dj-rj/image-20220516004058916.png"
-alt="image-20220516004058916" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516004206118.png"
-alt="image-20220516004206118" /></p>
-<p><code>j_Djpp</code> can be calculated by PSD,too</p>
-<p><img src="/2022/05/16/dj-rj/image-20220516004615033.png"
-alt="image-20220516004615033" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fck = <span class="number">38.4e6</span>;</span><br><span class="line">Nfft = <span class="number">15000</span>;</span><br><span class="line">fres = fck/Nfft;</span><br><span class="line">psddBc = <span class="number">-99.3343</span>;</span><br><span class="line">psBc = psddBc + <span class="number">10</span>*<span class="built_in">log10</span>(fres);	<span class="comment">% psd -&gt; ps; </span></span><br><span class="line">phrad2 = <span class="number">10</span>^(psBc/<span class="number">10</span>);</span><br><span class="line">phrms = <span class="built_in">sqrt</span>(phrad2);</span><br><span class="line">Jrms = phrms/<span class="number">2</span>/<span class="built_in">pi</span>*<span class="number">1</span>/fck;</span><br><span class="line">Jpp = <span class="number">2</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*Jrms;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Jpp =</span><br><span class="line"></span><br><span class="line">   6.4038e-12</span><br></pre></td></tr></table></figure>
-<p>For DJ, we usually use peak to peak value</p>
-<blockquote>
-<p>BTW, the psd value at half of fundamental frequency (<span
-class="math inline">\(f_s/2\)</span>) is misleading and ambiguity, we
-won't use this value</p>
-</blockquote>
-<h2 id="random-jitter">Random Jitter</h2>
-<p>RJ can be accurately and efficiently measured using
-<strong>PSS/Pnoise</strong> or <strong>HB/HBnoise</strong>.</p>
-<p>Note that the <strong>transient noise</strong> can also be used to
-compute RJ;</p>
-<blockquote>
-<p>However, the computation cost is typically very high, and the
-accuracy is lesser as compared to PSS/Pnoise and HB/HBnoise.</p>
-</blockquote>
-<p>Since RJ follows a Gaussian distribution, it can be fully
-characterized using its Root-Mean-Squared value (RMS) or the standard
-deviation value (<span class="math inline">\(\sigma\)</span>)</p>
-<p>The Peak-to-Peak value of RJ (<span
-class="math inline">\(\text{RJ}_{\text{p-p}}\)</span>) can be calculated
-under certain observation conditions <span class="math display">\[
-\text{RJ}_{\text{p-p}}\equiv K \ast \text{RJ}_{\text{RMS}}
-\]</span> Here, <span class="math inline">\(K\)</span> is a constant
-determined by the BER specification of the system given in the following
-Table</p>
-<table>
-<thead>
-<tr class="header">
-<th>BER</th>
-<th>Crest factor (K)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(10^{-3}\)</span></td>
-<td>6.18</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-4}\)</span></td>
-<td>7.438</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-5}\)</span></td>
-<td>8.53</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-6}\)</span></td>
-<td>9.507</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-7}\)</span></td>
-<td>10.399</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-8}\)</span></td>
-<td>11.224</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-9}\)</span></td>
-<td>11.996</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-10}\)</span></td>
-<td>12.723</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-11}\)</span></td>
-<td>13.412</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-12}\)</span></td>
-<td>14.069</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-13}\)</span></td>
-<td>14.698</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">K = <span class="number">14.698</span>;</span><br><span class="line">Ks = K/<span class="number">2</span>;</span><br><span class="line">p = normcdf([-Ks Ks]);</span><br><span class="line">BER = <span class="number">1</span> - (p(<span class="number">2</span>)-p(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BER =</span><br><span class="line"></span><br><span class="line">   1.9962e-13</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/16/dj-rj/image-20220516160050961.png"
-alt="image-20220516160050961" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516193125490.png"
-alt="image-20220516193125490" /></p>
-<h2 id="total-jitter">Total Jitter</h2>
-<p><span class="math display">\[
-\text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} +
-\text{RJ}_{\text{p-p}}(\text{BER})
-\]</span></p>
-<p><img src="/2022/05/16/dj-rj/tj.drawio.svg" alt="tj.drawio" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516160006909.png"
-alt="image-20220516160006909" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516012200383.png"
-alt="image-20220516012200383" /></p>
-<blockquote>
-<p>In the psd of TJ, the spur is DJ and floor is RJ</p>
-</blockquote>
-<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
-<p>The <strong>phase noise</strong> is traditionally defined as the
-ratio of the power of the signal in 1Hz bandwidth at offset <span
-class="math inline">\(f\)</span> from the carrier <span
-class="math inline">\(P\)</span>, divided by the power of the carrier
-<span class="math display">\[
-\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
-\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
-<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
-\geqslant 0\)</span></p>
-<p>Under <strong>narrow angle assumption</strong> <span
-class="math display">\[
-S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
-\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
-+\infty\right]\)</span></p>
-<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
-the variance of the absolute jitter(<span
-class="math inline">\(J_{ee}\)</span>)via integration of the
-corresponding PSD <span class="math display">\[
-J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
-\]</span></p>
-<p>And we know the relationship between absolute jitter and excess phase
-is <span class="math display">\[
-J_{ee}=\frac {\varphi}{\omega_0}
-\]</span> Considering that phase noise is normally symmetrical about the
-zero frequency, multiplied by <strong>two</strong> is shown as below
-<span class="math display">\[
-J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
-\]</span> where phase noise is in linear units not in logarithmic
-ones.</p>
-<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
-unit (<em>dBc</em>), we have to convert the unit before applying the
-above equation <span class="math display">\[
-\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
-\]</span> The complete equation using the simulation result of
-<em>Spectre-RF Pnoise</em> is <span class="math display">\[
-J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
-[dBc/Hz]}{10}}df}}{\omega_0}
-\]</span></p>
-<p>The above equation has been verified for <em>sampled pnoise</em>,
-i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
-<blockquote>
-<ul>
-<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
-Function: Jee:Integration Limits</em> can calculate it conveniently</li>
-<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
-below equation to get RMS jitter.</li>
-</ul>
-</blockquote>
-<p>One example, integrate to <span
-class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
-class="math inline">\(f_{osc} = 16GHz\)</span></p>
-<p><img src="/2022/05/16/dj-rj/image-20220415100034220.png"
-alt="image-20220415100034220" /></p>
-<p>Of course, it apply to conventional pnoise simulation.</p>
-<p>On the other hand, output rms voltage noise, <span
-class="math inline">\(V_{out,rms}\)</span> divied by slope should be
-close to <span class="math inline">\(J_{ee,rms}\)</span> <span
-class="math display">\[
-J_{ee,rms} = \frac {V_{out,rms}}{slope}
-\]</span></p>
-<h2 id="reference">reference</h2>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Windowing Technique for Accurate DFT</title>
     <url>/2023/05/27/dft-window/</url>
     <content><![CDATA[<blockquote>
@@ -4324,6 +4121,189 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
       </categories>
   </entry>
   <entry>
+    <title>Random &amp; Deterministic Jitters Simulation</title>
+    <url>/2022/05/16/dj-rj/</url>
+    <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
+alt="image-20220516004008878" /></p>
+<h2 id="deterministic-jitter">Deterministic Jitter</h2>
+<p><img src="/2022/05/16/dj-rj/image-20220516004058916.png"
+alt="image-20220516004058916" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516004206118.png"
+alt="image-20220516004206118" /></p>
+<p><code>j_Djpp</code> can be calculated by PSD,too</p>
+<p><img src="/2022/05/16/dj-rj/image-20220516004615033.png"
+alt="image-20220516004615033" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fck = <span class="number">38.4e6</span>;</span><br><span class="line">Nfft = <span class="number">15000</span>;</span><br><span class="line">fres = fck/Nfft;</span><br><span class="line">psddBc = <span class="number">-99.3343</span>;</span><br><span class="line">psBc = psddBc + <span class="number">10</span>*<span class="built_in">log10</span>(fres);	<span class="comment">% psd -&gt; ps; </span></span><br><span class="line">phrad2 = <span class="number">10</span>^(psBc/<span class="number">10</span>);</span><br><span class="line">phrms = <span class="built_in">sqrt</span>(phrad2);</span><br><span class="line">Jrms = phrms/<span class="number">2</span>/<span class="built_in">pi</span>*<span class="number">1</span>/fck;</span><br><span class="line">Jpp = <span class="number">2</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*Jrms;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Jpp =</span><br><span class="line"></span><br><span class="line">   6.4038e-12</span><br></pre></td></tr></table></figure>
+<p>For DJ, we usually use peak to peak value</p>
+<blockquote>
+<p>BTW, the psd value at half of fundamental frequency (<span
+class="math inline">\(f_s/2\)</span>) is misleading and ambiguity, we
+won't use this value</p>
+</blockquote>
+<h2 id="random-jitter">Random Jitter</h2>
+<p>RJ can be accurately and efficiently measured using
+<strong>PSS/Pnoise</strong> or <strong>HB/HBnoise</strong>.</p>
+<p>Note that the <strong>transient noise</strong> can also be used to
+compute RJ;</p>
+<blockquote>
+<p>However, the computation cost is typically very high, and the
+accuracy is lesser as compared to PSS/Pnoise and HB/HBnoise.</p>
+</blockquote>
+<p>Since RJ follows a Gaussian distribution, it can be fully
+characterized using its Root-Mean-Squared value (RMS) or the standard
+deviation value (<span class="math inline">\(\sigma\)</span>)</p>
+<p>The Peak-to-Peak value of RJ (<span
+class="math inline">\(\text{RJ}_{\text{p-p}}\)</span>) can be calculated
+under certain observation conditions <span class="math display">\[
+\text{RJ}_{\text{p-p}}\equiv K \ast \text{RJ}_{\text{RMS}}
+\]</span> Here, <span class="math inline">\(K\)</span> is a constant
+determined by the BER specification of the system given in the following
+Table</p>
+<table>
+<thead>
+<tr class="header">
+<th>BER</th>
+<th>Crest factor (K)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(10^{-3}\)</span></td>
+<td>6.18</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-4}\)</span></td>
+<td>7.438</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-5}\)</span></td>
+<td>8.53</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-6}\)</span></td>
+<td>9.507</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-7}\)</span></td>
+<td>10.399</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-8}\)</span></td>
+<td>11.224</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-9}\)</span></td>
+<td>11.996</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-10}\)</span></td>
+<td>12.723</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-11}\)</span></td>
+<td>13.412</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^{-12}\)</span></td>
+<td>14.069</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(10^{-13}\)</span></td>
+<td>14.698</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">K = <span class="number">14.698</span>;</span><br><span class="line">Ks = K/<span class="number">2</span>;</span><br><span class="line">p = normcdf([-Ks Ks]);</span><br><span class="line">BER = <span class="number">1</span> - (p(<span class="number">2</span>)-p(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BER =</span><br><span class="line"></span><br><span class="line">   1.9962e-13</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/16/dj-rj/image-20220516160050961.png"
+alt="image-20220516160050961" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516193125490.png"
+alt="image-20220516193125490" /></p>
+<h2 id="total-jitter">Total Jitter</h2>
+<p><span class="math display">\[
+\text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} +
+\text{RJ}_{\text{p-p}}(\text{BER})
+\]</span></p>
+<p><img src="/2022/05/16/dj-rj/tj.drawio.svg" alt="tj.drawio" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516160006909.png"
+alt="image-20220516160006909" /></p>
+<p><img src="/2022/05/16/dj-rj/image-20220516012200383.png"
+alt="image-20220516012200383" /></p>
+<blockquote>
+<p>In the psd of TJ, the spur is DJ and floor is RJ</p>
+</blockquote>
+<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
+<p>The <strong>phase noise</strong> is traditionally defined as the
+ratio of the power of the signal in 1Hz bandwidth at offset <span
+class="math inline">\(f\)</span> from the carrier <span
+class="math inline">\(P\)</span>, divided by the power of the carrier
+<span class="math display">\[
+\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
+<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
+\geqslant 0\)</span></p>
+<p>Under <strong>narrow angle assumption</strong> <span
+class="math display">\[
+S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
+\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
++\infty\right]\)</span></p>
+<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
+the variance of the absolute jitter(<span
+class="math inline">\(J_{ee}\)</span>)via integration of the
+corresponding PSD <span class="math display">\[
+J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
+\]</span></p>
+<p>And we know the relationship between absolute jitter and excess phase
+is <span class="math display">\[
+J_{ee}=\frac {\varphi}{\omega_0}
+\]</span> Considering that phase noise is normally symmetrical about the
+zero frequency, multiplied by <strong>two</strong> is shown as below
+<span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
+\]</span> where phase noise is in linear units not in logarithmic
+ones.</p>
+<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
+unit (<em>dBc</em>), we have to convert the unit before applying the
+above equation <span class="math display">\[
+\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
+\]</span> The complete equation using the simulation result of
+<em>Spectre-RF Pnoise</em> is <span class="math display">\[
+J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
+[dBc/Hz]}{10}}df}}{\omega_0}
+\]</span></p>
+<p>The above equation has been verified for <em>sampled pnoise</em>,
+i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
+<blockquote>
+<ul>
+<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
+Function: Jee:Integration Limits</em> can calculate it conveniently</li>
+<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
+below equation to get RMS jitter.</li>
+</ul>
+</blockquote>
+<p>One example, integrate to <span
+class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
+class="math inline">\(f_{osc} = 16GHz\)</span></p>
+<p><img src="/2022/05/16/dj-rj/image-20220415100034220.png"
+alt="image-20220415100034220" /></p>
+<p>Of course, it apply to conventional pnoise simulation.</p>
+<p>On the other hand, output rms voltage noise, <span
+class="math inline">\(V_{out,rms}\)</span> divied by slope should be
+close to <span class="math inline">\(J_{ee,rms}\)</span> <span
+class="math display">\[
+J_{ee,rms} = \frac {V_{out,rms}}{slope}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Impact of Deep N-well Implantation</title>
     <url>/2023/05/29/dnw/</url>
     <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
@@ -4395,19 +4375,6 @@ href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ec
       </tags>
   </entry>
   <entry>
-    <title>How to preserve hand-instantiated cells</title>
-    <url>/2023/02/10/dont-touch/</url>
-    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
-<p>The instances whose name contain "dont_touch_" shall be preserved
-during synthesis</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Script to remove .cdslck files</title>
     <url>/2022/02/02/dot-cdslck-clear/</url>
     <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh </span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt </span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
@@ -4421,6 +4388,19 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
       <tags>
         <tag>shell</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>How to preserve hand-instantiated cells</title>
+    <url>/2023/02/10/dont-touch/</url>
+    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
+<p>The instances whose name contain "dont_touch_" shall be preserved
+during synthesis</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>different DSPF files for each corner</title>
@@ -6340,25 +6320,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
       </tags>
   </entry>
   <entry>
-    <title>Add endcap and tapcell in Innovus</title>
-    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
-    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
-following code to add endcap and tapcell.</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
-alt="endcap_tapcell_floorplan.drawio" /></p>
-<p><strong>REF:</strong> <a
-href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Effective Noise BandWidth and Noise Floor</title>
     <url>/2023/05/29/enbw-nl/</url>
     <content><![CDATA[<h2 id="ps-and-psd">PS and PSD</h2>
@@ -6622,6 +6583,25 @@ href="https://github.com/unpingco/Python-for-Signal-Processing/blob/master/Windo
       <categories>
         <category>dsp</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Add endcap and tapcell in Innovus</title>
+    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
+    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
+following code to add endcap and tapcell.</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
+alt="endcap_tapcell_floorplan.drawio" /></p>
+<p><strong>REF:</strong> <a
+href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
   </entry>
   <entry>
     <title>Dual Diode and ggNMOS</title>
@@ -6968,93 +6948,6 @@ Sixth international symposium on quality electronic design (isqed'05),
         <tag>hbm</tag>
         <tag>cdm</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Functional Coverage Modeling</title>
-    <url>/2022/04/03/functional-coverage/</url>
-    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
-<ul>
-<li>Explicit (user defined)
-<ul>
-<li>Fully and clearly expressed within sources
-<ul>
-<li>Sequence and temporal coverage using assertions</li>
-<li>Data-oriented coverage using <code>covergroup</code></li>
-</ul></li>
-<li>Planned and defined by the verification team</li>
-</ul></li>
-<li>Implicit
-<ul>
-<li>Derived or computed from source
-<ul>
-<li>Code coverage measured by the simulator</li>
-</ul></li>
-<li>May be defined outside the verification team</li>
-<li>May be implied by the verification interface
-<ul>
-<li>e.g., an industry standard protocol</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
-Systemverilog</h2>
-<h3 id="assertions-for-control-oriented-coverage">Assertions for
-control-oriented coverage</h3>
-<ul>
-<li>Defined as procedural statements</li>
-<li><strong>CANNOT</strong> be defined in a class</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
-and the cover directive. It is used to cover sequences of signal values
-over time. Assertions cannot be declared or "covered" in a class
-declaration, so their use in an UVM verification environment is
-restricted to <strong>interface only</strong></p>
-</blockquote>
-<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
-data-oriented coverage</h3>
-<ul>
-<li>CAN be declared as a class member and created in class
-constructor</li>
-<li>Used in <strong>interface</strong> and module UVCs</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Data-oriented coverage uses the <code>covergroup</code> construct.
-Covergroups can be declared and created in classes, therefore they are
-essential for explicit coverage in a UVM verification environment.</p>
-</blockquote>
-<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
-<p><code>covergroup new</code> constructor is called
-<strong>directly</strong> off the declaration of the covergroup, it does
-not have a separate instance name</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<p>The <code>covergroup</code> instance must be created in the class
-constructor, not a UVM <code>build_phase</code> or other phase
-method</p>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403210225837.png"
-alt="image-20220403210225837" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
-<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
-<p>Typical module UVC coverage:</p>
-<ul>
-<li>Routing - packets flow from input ports to all legal outputs</li>
-<li>latency - all packets received within speicied delay</li>
-</ul>
-<blockquote>
-<p>The module UVC monitor receives data from the interface monitors via
-analysis ports, so the implementation of the analysis write function is
-a convenient place to put coverage code</p>
-</blockquote>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403212529981.png"
-alt="image-20220403212529981" /></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
   </entry>
   <entry>
     <title>Fourier Analysis 101</title>
@@ -7437,6 +7330,105 @@ href="https://coecs.ou.edu/Joseph.P.Havlicek/ece3793/notes/ECE3793NotesCh07.pdf"
       </categories>
   </entry>
   <entry>
+    <title>Functional Coverage Modeling</title>
+    <url>/2022/04/03/functional-coverage/</url>
+    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
+<ul>
+<li>Explicit (user defined)
+<ul>
+<li>Fully and clearly expressed within sources
+<ul>
+<li>Sequence and temporal coverage using assertions</li>
+<li>Data-oriented coverage using <code>covergroup</code></li>
+</ul></li>
+<li>Planned and defined by the verification team</li>
+</ul></li>
+<li>Implicit
+<ul>
+<li>Derived or computed from source
+<ul>
+<li>Code coverage measured by the simulator</li>
+</ul></li>
+<li>May be defined outside the verification team</li>
+<li>May be implied by the verification interface
+<ul>
+<li>e.g., an industry standard protocol</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
+Systemverilog</h2>
+<h3 id="assertions-for-control-oriented-coverage">Assertions for
+control-oriented coverage</h3>
+<ul>
+<li>Defined as procedural statements</li>
+<li><strong>CANNOT</strong> be defined in a class</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
+and the cover directive. It is used to cover sequences of signal values
+over time. Assertions cannot be declared or "covered" in a class
+declaration, so their use in an UVM verification environment is
+restricted to <strong>interface only</strong></p>
+</blockquote>
+<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
+data-oriented coverage</h3>
+<ul>
+<li>CAN be declared as a class member and created in class
+constructor</li>
+<li>Used in <strong>interface</strong> and module UVCs</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Data-oriented coverage uses the <code>covergroup</code> construct.
+Covergroups can be declared and created in classes, therefore they are
+essential for explicit coverage in a UVM verification environment.</p>
+</blockquote>
+<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
+<p><code>covergroup new</code> constructor is called
+<strong>directly</strong> off the declaration of the covergroup, it does
+not have a separate instance name</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<p>The <code>covergroup</code> instance must be created in the class
+constructor, not a UVM <code>build_phase</code> or other phase
+method</p>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403210225837.png"
+alt="image-20220403210225837" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
+<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
+<p>Typical module UVC coverage:</p>
+<ul>
+<li>Routing - packets flow from input ports to all legal outputs</li>
+<li>latency - all packets received within speicied delay</li>
+</ul>
+<blockquote>
+<p>The module UVC monitor receives data from the interface monitors via
+analysis ports, so the implementation of the analysis write function is
+a convenient place to put coverage code</p>
+</blockquote>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403212529981.png"
+alt="image-20220403212529981" /></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>GitHub Pages Build and deployment</title>
+    <url>/2023/07/01/github-pages-deploy/</url>
+    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
+<p><img
+src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
+alt="image-20230701142405404" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Demystifying Gate Resistance</title>
     <url>/2023/07/09/gate-resistance/</url>
     <content><![CDATA[<p><img src="/2023/07/09/gate-resistance/image-20230709102848934.png"
@@ -7614,18 +7606,6 @@ Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
       <tags>
         <tag>finfet</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>GitHub Pages Build and deployment</title>
-    <url>/2023/07/01/github-pages-deploy/</url>
-    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
-<p><img
-src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
-alt="image-20230701142405404" /></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
   </entry>
   <entry>
     <title>Glitches and Hazards</title>
@@ -7890,70 +7870,6 @@ href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kpl
       </categories>
   </entry>
   <entry>
-    <title>In-design Sign-off Metal Fill Flow in Innovus</title>
-    <url>/2022/03/05/in-design-signoff-metalfill-innovus/</url>
-    <content><![CDATA[<p>Before inserting sign-off metal fill, stream out a GDSII stream file
-of the current database. Specify the mapping file and units that match
-with the rule deck you specify while inserting metal fill. If necessary,
-include the detailed-cell (<code>-merge</code> option) Graphic Database
-System (GDS).</p>
-<p><strong>PVS:</strong></p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pvs.fill.gds</span><br><span class="line">run_pvs_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pvs.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure>
-<p><strong>Pegasus:</strong> <figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pegasus.fill.gds</span><br><span class="line">run_pegasus_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pegasus.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>Just replace <code>run_pvs_metal_fill</code> with
-<code>run_pegasus_metal_fill</code></p>
-</blockquote>
-<p><strong>Note</strong>: Innovus metal fill (e.g.
-<code>addMetalFill</code>, <code>addViaFill</code>, etc.) does not
-support 20nm and below node design rules. We strongly recommend the
-Pegasus/PVS metal fill solution for 20nm and below. If you have sign-off
-metal fill rule deck for 28nm and above available, we recommend you to
-move to Pegasus/PVS solution too.</p>
-<blockquote>
-<ol type="1">
-<li><p><code>trimMetalFillNearNet</code> does not check DRC rules. It
-only removes the metal fill with specified spacing</p></li>
-<li><p><strong>Do not</strong> perform ECO operations after dump in
-sign-off metal fill (by <code>run_pvs_metal_fill</code> or
-<code>run_pegasus_metal_fill</code>), especially, at 20nm and below
-nodes.</p></li>
-<li><p>If you perform an ECO action, the tool cannot get DRC clean
-because <code>trimMetalFill</code> does not support 20nm and below node
-design rules.</p></li>
-<li><p>The sign-off metal fill typically does not cause DRC issues with
-regular wires.</p></li>
-</ol>
-</blockquote>
-<p>The <code>run_pvs_metal_fill</code> command does the following:</p>
-<ul>
-<li>Runs PVS with the fill rules to create a GDSII output file.</li>
-<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
-layermap provided.</li>
-<li><strong>Loads the resulting DEF file into Innovus</strong>.</li>
-</ul>
-<p>Pegasus is similar to PVS, shown as below,</p>
-<p>The <code>run_pegasus_metal_fill</code> command does the
-following:</p>
-<ul>
-<li>Runs Pegasus with the fill rules to create a GDSII output file.</li>
-<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
-layermap provided.</li>
-<li>Loads the resulting DEF file into Innovus.</li>
-</ul>
-<p><strong>Reference:</strong></p>
-<p>Innovus User Guide, Product Version 21.12, Last Updated in November
-2021</p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>metalfill</tag>
-        <tag>dummy metal</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>interconnect, transmission line and inductance</title>
     <url>/2023/07/26/inductance/</url>
     <content><![CDATA[<h2 id="loop-inductance">loop inductance</h2>
@@ -8000,6 +7916,20 @@ in IEEE Circuits and Devices Magazine, vol. 17, no. 4, pp. 14-21, July
       <tags>
         <tag>SI</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>innovus create and assign bump - part one</title>
+    <url>/2022/02/14/innovus-bump-part1/</url>
+    <content><![CDATA[<h4 id="powerground-bump">power/ground bump</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x0</span> <span class="variable">$y</span>  </span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x1</span> <span class="variable">$y</span> </span><br><span class="line">...</span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$xn</span> <span class="variable">$y</span> </span><br><span class="line">deselectAll </span><br><span class="line">select_bump –bum_cell PAD90UBMBOP </span><br><span class="line">assignPGBumps –nets &#123;vss vdd_dig&#125; -selected –checkboard</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/02/14/innovus-bump-part1/pma_dig_bumps.drawio.svg"
+alt="pma_dig_bumps.drawio" /></p>
+<h4 id="signal-or-powerground-bump">signal or power/ground bump</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> bump_name [create_bump –cell PAD150PITCH –loc <span class="variable">$bump_x</span> <span class="variable">$bump_y</span> –loc_type cell_center –return_bumps_name] </span><br><span class="line"><span class="comment"># assign power/ground bump</span></span><br><span class="line">assignPGBumps –bumps <span class="variable">$bump_name</span> –nets <span class="variable">$pin_name</span> </span><br><span class="line"><span class="comment"># or assign to signal bump</span></span><br><span class="line">assignSigToBump –bumps <span class="variable">$bump_name</span> –net <span class="variable">$pin_name</span> </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Inertial &amp; transport delays</title>
@@ -8089,18 +8019,68 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEo
       </categories>
   </entry>
   <entry>
-    <title>innovus create and assign bump - part one</title>
-    <url>/2022/02/14/innovus-bump-part1/</url>
-    <content><![CDATA[<h4 id="powerground-bump">power/ground bump</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x0</span> <span class="variable">$y</span>  </span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$x1</span> <span class="variable">$y</span> </span><br><span class="line">...</span><br><span class="line">create_bump –cell PAD90UBMBOP –loc_type cell_center –loc <span class="variable">$xn</span> <span class="variable">$y</span> </span><br><span class="line">deselectAll </span><br><span class="line">select_bump –bum_cell PAD90UBMBOP </span><br><span class="line">assignPGBumps –nets &#123;vss vdd_dig&#125; -selected –checkboard</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/02/14/innovus-bump-part1/pma_dig_bumps.drawio.svg"
-alt="pma_dig_bumps.drawio" /></p>
-<h4 id="signal-or-powerground-bump">signal or power/ground bump</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> bump_name [create_bump –cell PAD150PITCH –loc <span class="variable">$bump_x</span> <span class="variable">$bump_y</span> –loc_type cell_center –return_bumps_name] </span><br><span class="line"><span class="comment"># assign power/ground bump</span></span><br><span class="line">assignPGBumps –bumps <span class="variable">$bump_name</span> –nets <span class="variable">$pin_name</span> </span><br><span class="line"><span class="comment"># or assign to signal bump</span></span><br><span class="line">assignSigToBump –bumps <span class="variable">$bump_name</span> –net <span class="variable">$pin_name</span> </span><br></pre></td></tr></table></figure>
+    <title>In-design Sign-off Metal Fill Flow in Innovus</title>
+    <url>/2022/03/05/in-design-signoff-metalfill-innovus/</url>
+    <content><![CDATA[<p>Before inserting sign-off metal fill, stream out a GDSII stream file
+of the current database. Specify the mapping file and units that match
+with the rule deck you specify while inserting metal fill. If necessary,
+include the detailed-cell (<code>-merge</code> option) Graphic Database
+System (GDS).</p>
+<p><strong>PVS:</strong></p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pvs.fill.gds</span><br><span class="line">run_pvs_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pvs.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure>
+<p><strong>Pegasus:</strong> <figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pegasus.fill.gds</span><br><span class="line">run_pegasus_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pegasus.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Just replace <code>run_pvs_metal_fill</code> with
+<code>run_pegasus_metal_fill</code></p>
+</blockquote>
+<p><strong>Note</strong>: Innovus metal fill (e.g.
+<code>addMetalFill</code>, <code>addViaFill</code>, etc.) does not
+support 20nm and below node design rules. We strongly recommend the
+Pegasus/PVS metal fill solution for 20nm and below. If you have sign-off
+metal fill rule deck for 28nm and above available, we recommend you to
+move to Pegasus/PVS solution too.</p>
+<blockquote>
+<ol type="1">
+<li><p><code>trimMetalFillNearNet</code> does not check DRC rules. It
+only removes the metal fill with specified spacing</p></li>
+<li><p><strong>Do not</strong> perform ECO operations after dump in
+sign-off metal fill (by <code>run_pvs_metal_fill</code> or
+<code>run_pegasus_metal_fill</code>), especially, at 20nm and below
+nodes.</p></li>
+<li><p>If you perform an ECO action, the tool cannot get DRC clean
+because <code>trimMetalFill</code> does not support 20nm and below node
+design rules.</p></li>
+<li><p>The sign-off metal fill typically does not cause DRC issues with
+regular wires.</p></li>
+</ol>
+</blockquote>
+<p>The <code>run_pvs_metal_fill</code> command does the following:</p>
+<ul>
+<li>Runs PVS with the fill rules to create a GDSII output file.</li>
+<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
+layermap provided.</li>
+<li><strong>Loads the resulting DEF file into Innovus</strong>.</li>
+</ul>
+<p>Pegasus is similar to PVS, shown as below,</p>
+<p>The <code>run_pegasus_metal_fill</code> command does the
+following:</p>
+<ul>
+<li>Runs Pegasus with the fill rules to create a GDSII output file.</li>
+<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
+layermap provided.</li>
+<li>Loads the resulting DEF file into Innovus.</li>
+</ul>
+<p><strong>Reference:</strong></p>
+<p>Innovus User Guide, Product Version 21.12, Last Updated in November
+2021</p>
 ]]></content>
       <categories>
-        <category>digital</category>
+        <category>innovus</category>
       </categories>
+      <tags>
+        <tag>metalfill</tag>
+        <tag>dummy metal</tag>
+      </tags>
   </entry>
   <entry>
     <title>Circuit insight</title>
@@ -8534,6 +8514,74 @@ href="https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/EC
 <span class="math inline">\(V_{\text{DS}}\)</span></h2>
 <p><img src="/2023/01/01/insight/image-20231125224714658.png"
 alt="image-20231125224714658" /></p>
+<h2 id="operating-points-small-gain-theorem">Operating points &amp;
+Small gain theorem</h2>
+<blockquote>
+<p>Dr. Degang Chen, <strong>EE 501:</strong> <strong>CMOS Analog
+Integrated Circuit Design</strong> [<a
+href="https://class.ece.iastate.edu/djchen/ee501/2020/References.ppt">https://class.ece.iastate.edu/djchen/ee501/2020/References.ppt</a>]</p>
+</blockquote>
+<p><img src="/2023/01/01/insight/image-20231202102259692.png"
+alt="image-20231202102259692" /></p>
+<p>For any given constant values of <em>u</em> and <em>v</em>, the
+constant values of variables that solve the the feed back relationship
+are called the <strong>operating points</strong>, or <strong>equilibrium
+points</strong>.</p>
+<blockquote>
+<p><em>Operating points</em> can be either <em>stable</em> or
+<em>unstable</em>.</p>
+<p>An operating point is unstable if any or some small perturbation near
+it causes divergence away from that operating point.</p>
+</blockquote>
+<p>If the loop gain evaluated at an operating point is <strong>less than
+one</strong>, that operating point is <strong>stable</strong>.</p>
+<blockquote>
+<p>This is a sufficient condition</p>
+</blockquote>
+<p><img src="/2023/01/01/insight/image-20231202105749888.png"
+alt="image-20231202105749888" /></p>
+<p><img src="/2023/01/01/insight/image-20231202105621385.png"
+alt="image-20231202105621385" /></p>
+<p>With <span class="math inline">\(m_{1\to 2} = 1\)</span> <span
+class="math display">\[
+\text{Loop Gain} \simeq \frac{V_{BN}-V_{T2}}{V_{BN}-V_{T2} + V_R}
+\tag{LG\_0}
+\]</span> Assuming all MOS in strong inv operation, <span
+class="math inline">\(I\)</span>, <span
+class="math inline">\(V_{BN}\)</span> and <span
+class="math inline">\(V_R\)</span> is obtain <span
+class="math display">\[\begin{align}
+I &amp;= \frac{2\beta _1 + 2\beta _2 - 4\sqrt{\beta _1 \beta
+_2}}{R^2\beta _1 \beta _2} \\
+V_{BN} &amp;= V_{T2} + \frac{2}{R\beta _2}(1- \sqrt{\frac{\beta
+_2}{\beta _1}}) \\
+IR &amp;= \frac{2}{R}\left( \frac{1}{\sqrt{\beta_2}}
+-  \frac{1}{\sqrt{\beta_1}} \right)
+\end{align}\]</span></p>
+<p>Substitute <span class="math inline">\(V_{BN}\)</span> and <span
+class="math inline">\(V_R\)</span> of <span
+class="math inline">\((LG\_0)\)</span> <span
+class="math display">\[\begin{align}
+\text{Loop Gain} &amp; \simeq
+\frac{1-\sqrt{\frac{\beta_2}{\beta_1}}}{\frac{\beta_2}{\beta_1} -
+3\sqrt{\frac{\beta_2}{\beta_1}}+2} \\
+&amp;= \frac{1}{2-\sqrt{\frac{\beta_2}{\beta_1}}} \tag{LG\_1}
+\end{align}\]</span></p>
+<h3 id="alternative-approach-for-loop-gain">Alternative approach for
+Loop Gain</h3>
+<blockquote>
+<p>using derivation of large signal</p>
+</blockquote>
+<p><img src="/2023/01/01/insight/image-20231202132310478.png"
+alt="image-20231202132310478" /></p>
+<p><img src="/2023/01/01/insight/image-20231202134138319.png"
+alt="image-20231202134138319" /></p>
+<hr />
+<blockquote>
+<p>❗❗❗ R should <strong>not</strong> be on the other side</p>
+</blockquote>
+<p><img src="/2023/01/01/insight/image-20231202104505264.png"
+alt="image-20231202104505264" /></p>
 <h2 id="reference">reference</h2>
 <p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
 small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
@@ -11377,243 +11425,6 @@ href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMF
       </tags>
   </entry>
   <entry>
-    <title>Phase Noise and Jitter Simulation</title>
-    <url>/2023/10/21/phasenoise-jitter/</url>
-    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
-<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
-<ol type="1">
-<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
-alt="image-20220511112856934" /></p></li>
-<li><p>manually calculate by definition</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
-alt="image-20220511112806122" /></p></li>
-<li><p><code>output noise</code> with unit <code>dBc</code></p>
-<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
-convention: SSB</em></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
-alt="image-20220511113248984" /></p></li>
-</ol>
-<blockquote>
-<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
-simulation,</p>
-</blockquote>
-<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
-sampled(jitter)/Edge Crossing</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
-alt="EdgePhaseNoise.drawio" /></p>
-<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
-alt="image-20220515214901120" /></p>
-<p>Another way, the following equation can also be used for
-<code>sampled(jitter)/Edge Crossing</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
-<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
-alt="image-20220511150337318" /></p>
-<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
-sampled(jitter) pnoise</h3>
-<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
-obtained by <em>transient noise simulation</em></p>
-<p>The idea is that sample waveform with ideal clock, subtract DC
-offset, then fft(psd)</p>
-<ul>
-<li>samplesRaw = sample(wv)</li>
-<li>samplePost = samplesRaw - average(samplesRaw)</li>
-<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
-alt="image-20220516184543148" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
-alt="image-20220516184844296" /></p>
-<p><strong>Expression</strong>:</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
-alt="image-20220516185506348" /></p>
-<blockquote>
-<p>The computation cost is typically very high, and the accuracy is
-lesser as compared to PSS/Pnoise</p>
-</blockquote>
-<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
-Sampled(jitter): Sampled Phase Option</h2>
-<ul>
-<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
-<li>Use model:
-<ul>
-<li>Sampleds Per Period: number of ponits</li>
-<li>Add Specific Points: specific time point, still time points</li>
-</ul></li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
-alt="image-20220712085426461" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
-alt="image-20220712085836315" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
-alt="image-20220712090011204" /></p>
-<blockquote>
-<p>pss beat freq = 5GHz</p>
-<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
-</blockquote>
-<h2 id="transient-noise">Transient noise</h2>
-<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h3>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
-function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
-<code>psd</code> and <code>abs_jitter</code> function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h4 id="comparison">Comparison</h4>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h3 id="rms-value">RMS value</h3>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h3 id="remarks">Remarks</h3>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Periodic Analysis</title>
     <url>/2023/10/28/periodic/</url>
     <content><![CDATA[<h1 id="pss-and-hb-overview">PSS and HB Overview</h1>
@@ -12177,6 +11988,243 @@ href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pd
       </categories>
   </entry>
   <entry>
+    <title>Phase Noise and Jitter Simulation</title>
+    <url>/2023/10/21/phasenoise-jitter/</url>
+    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
+<p>The phase noise does not affect the total power in the signal, it
+only affects its distribution.</p>
+<ul>
+<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
+a series of impulse functions at the harmonics of <span
+class="math inline">\(f_o\)</span>.</li>
+<li>With phase noise, the impulse functions spread, becoming fatter and
+shorter but retaining the same total power</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
+alt="image-20231029164227587" /></p>
+<blockquote>
+<p><strong>line width</strong>: corner frequency <span
+class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
+</blockquote>
+<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
+<p>A more precise analysis shows that the spectrum of a free-running
+oscillator does indeed have a Lorentian profile:</p>
+<ol type="1">
+<li>it is <strong>flat</strong> for frequencies below a given corner
+frequency</li>
+<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
+it.</li>
+</ol>
+<p>The spectrum of the signal <span class="math inline">\(x(t +
+α(t))\)</span> can be expressed as <span class="math display">\[
+S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
+c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
+\]</span> The integral in above equation around each harmonic is equal
+to the power of the harmonic itself <span class="math inline">\(\left|
+X_n \right|^2\)</span></p>
+<p>This means that the <strong>excess phase noise</strong>
+<strong>DONT</strong> change the energy of the signal; it just spreads
+its energy over the frequency spectrum, blurring the very sharp
+frequency impulse of an ideal noiseless oscillator.</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
+alt="image-20220504130750290" /></p>
+<h2 id="vco-varactor">VCO varactor</h2>
+<blockquote>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+</blockquote>
+<h3 id="pss-pac">PSS + PAC</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h3 id="pss-psp">PSS + PSP</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h3 id="results">results</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<blockquote>
+<p>which are same</p>
+</blockquote>
+<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h3>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
+Sampled(jitter): Sampled Phase Option</h2>
+<ul>
+<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
+<li>Use model:
+<ul>
+<li>Sampleds Per Period: number of ponits</li>
+<li>Add Specific Points: specific time point, still time points</li>
+</ul></li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
+alt="image-20220712085426461" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
+alt="image-20220712085836315" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
+alt="image-20220712090011204" /></p>
+<blockquote>
+<p>pss beat freq = 5GHz</p>
+<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
+</blockquote>
+<h2 id="transient-noise">Transient noise</h2>
+<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h3>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
+function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
+<code>psd</code> and <code>abs_jitter</code> function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h4 id="comparison">Comparison</h4>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h3 id="rms-value">RMS value</h3>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h3 id="remarks">Remarks</h3>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>import package in SystemVerilog compilation</title>
     <url>/2022/03/24/pkg-import-compile-sv/</url>
     <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
@@ -12275,150 +12323,6 @@ APIs</strong>.</p>
 href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
 <p>PLUSARGS IN SYSTEMVERILOG URL:<a
 href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Power/Ground and I/O Pins</title>
-    <url>/2022/03/06/power-ground-io/</url>
-    <content><![CDATA[<h4 id="power-ground-pin-information">Power / Ground Pin
-Information</h4>
-<p>In both digital and analog I/O, power and ground pins appear at the
-sub-circuit definiton, allowing user to use the I/O in voltage islands.
-They follow certain naming conventions.</p>
-<ol type="1">
-<li>digital I/O sub-circuit</li>
-</ol>
-<ul>
-<li>VDD: pre-driver core voltage (supplied by PVDD1CDGM)</li>
-<li>VSS: pre-driver ground and also global ground (supplied by
-PVDD1CDGM)</li>
-<li>VDDPST: I/O post-driver voltage, i.e. 1.8V (supplied by PVDD2CDGM or
-PVDD2POCM)</li>
-<li>VSSPOST: I/O post-driver ground (supplied by PVDD2CDGM or
-PVDD2POCM)</li>
-<li>POCCTRL: POCCTRL signal (supplied by PVDD2POCM)</li>
-</ul>
-<ol start="2" type="1">
-<li>analog I/O placed in a core voltage domain, the convention is</li>
-</ol>
-<ul>
-<li>TACVDD: analog core voltage (supplied by PVDD3ACM)</li>
-<li>TACVSS: analog core ground (supplied by PVDD3ACM)</li>
-<li>VSS: global core ground</li>
-</ul>
-<ol start="3" type="1">
-<li>analog I/O placed in an I/O voltage domain, the convention is:</li>
-</ol>
-<ul>
-<li>TAVDD: analog I/O voltage, i.e. 1.8V (supplied by PVDD3AM)</li>
-<li>TAVSS: analog I/O ground (supplied by PVDD3AM)</li>
-<li>VSS: global core ground</li>
-</ul>
-<p>Power/Ground <strong>Combo Cells</strong></p>
-<table>
-<colgroup>
-<col style="width: 35%" />
-<col style="width: 36%" />
-<col style="width: 27%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>power/ground combo pad cell</th>
-<th>pins to be connected to bump</th>
-<th>to core side pin name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>PVDD1CDGM</td>
-<td>VDD VSS</td>
-<td>VDD VSS</td>
-</tr>
-<tr class="even">
-<td>PVDD2CDGM PVDD2POCM</td>
-<td>VDDPST VSSPST</td>
-<td>N/A</td>
-</tr>
-<tr class="odd">
-<td>PVDD3AM</td>
-<td>TAVDD TAVSS</td>
-<td>AVDD AVSS</td>
-</tr>
-<tr class="even">
-<td>PVDD3ACM</td>
-<td>TACVDD TACVSS</td>
-<td>AVDD AVSS</td>
-</tr>
-</tbody>
-</table>
-<h4 id="note-for-the-retention-mode">Note for the retention mode</h4>
-<ol type="1">
-<li>At initial state, IRTE must be <strong>0</strong> when VDD is
-off.</li>
-<li>IRTE must be kept &gt;= 10us after VDD turns on again (from the
-retention mode to the normal operation mode).</li>
-<li>IRTE can be switched only when both VDD and VDDPST are on.</li>
-</ol>
-<p><img src="/2022/03/06/power-ground-io/rention_seq.drawio.svg"
-alt="rention_seq.drawio" /></p>
-<p>When the rention function is needed, IRTE signal must come from an
-"always-on" core power domain. If you don't need the rention function,
-it is required to tie IRTE to ground. In other words, <strong>no matter
-the rention feature is needed or not, it is required to have PCBRTE in
-each domain</strong>.</p>
-<p><img
-src="/2022/03/06/power-ground-io/PCBRTE_in_digital_domain.drawio.svg"
-alt="PCBRTE_in_digital_domain.drawio" /></p>
-<p><strong>Note</strong>: PCBRTE <strong>does not</strong> need PAD
-connection.</p>
-<h4 id="internal-pins">Internal Pins</h4>
-<p>There are 3 internal global pins, i.e. <strong>ESD</strong>,
-<strong>POCCTRL</strong>, <strong>RTE</strong>, in all digital domain
-cells.</p>
-<p>In real application,</p>
-<ul>
-<li><strong>ESD pin</strong> is an internal signal and
-<strong>active</strong> in ESD event happening</li>
-<li><strong>POCCTRL</strong> is an internal signal and active in
-Power-on-control event.</li>
-</ul>
-<p>However, these special events (i.e. ESD event and Power-on-control
-event) are not modeled in NLDM kit (.lib), only normal function is
-covered, so <strong>ESD</strong> and <strong>POCCTRL</strong> pins are
-simply defined as ground in NLDM kit (.lib).</p>
-<blockquote>
-<p>These 3 global pins will be connected automatically after
-<strong>cell-to-cell abutting</strong> in physical layout.</p>
-</blockquote>
-<h4 id="power-up-sequence-in-digital-domain">Power-Up sequence in
-Digital Domain</h4>
-<p>Power up the I/O power (VDDPST) first, then the core power (VDD)</p>
-<p><img src="/2022/03/06/power-ground-io/pocctrl_seq.drawio.svg"
-alt="pocctrl_seq.drawio" /></p>
-<ol type="1">
-<li>PVDDD2POCM cell would generate Power-On-Control signal (POCCTRL) to
-have the post-driver NMOS and PMOS off, so that the crowbar current
-would not occur in the post-driver fingers when the I/O voltage is on
-while the core voltage remains off. As such, I/O cell would be in the
-Hi-Z state. when POCCTRL is on, the pll-up/down resistor is disabled and
-C is 0.</li>
-<li>The POCCTRL signal is transmitted to I/O cells through <strong>cell
-abutment</strong>. There is no need to have routing for POCCTTRL nor
-give a control signal to the POCCTRL pin any of I/O cells. Note that the
-POCCTRL signal would be cut if inserting a power-cut (PRCUT) cell.</li>
-</ol>
-<p><img
-src="/2022/03/06/power-ground-io/power-on-control-ciruit.drawio.svg"
-alt="power-on-control-ciruit.drawio" /></p>
-<h4 id="power-down-sequence-in-digital-domain">Power-Down sequence in
-Digital Domain</h4>
-<p>It's the reverse of power-up sequence.</p>
-<h4 id="use-model-in-innovus">Use model in Innovus</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> init_gnd_net <span class="string">&quot;vss_core vss DUMMY_ESD DUMMY_POCCTRL&quot;</span></span><br><span class="line"></span><br><span class="line">addInst -moduleBased u_io -ori R270 -physical -status fixed -loc <span class="number">135</span> <span class="number">994</span> -inst u_io/VDDIO_1 -cell PVDD2CDGM_H</span><br><span class="line"></span><br><span class="line">addNet u_io_RTE</span><br><span class="line">attachTerm FILLER_6 RTE u_io_RTE</span><br><span class="line">attachTerm VDDIO_1 RTE u_right_RTE</span><br><span class="line">setAttribute -skip_routing true -net u_io_RTE</span><br><span class="line"></span><br><span class="line">clearGlobalNets</span><br><span class="line">globalNetConnect DUMMY_POCCTRL -type pgpin -pin POCCTRL -singleInstance u_io/VDDDIO_1 -override</span><br><span class="line">globalNetConnect DUMMY_ESD -type pgpin -pin ESD -singleInstance u_io/VDDDIO_1 -override</span><br></pre></td></tr></table></figure>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> pins [get_object_name [get_ports *]]</span><br><span class="line"><span class="keyword">foreach</span> pin <span class="variable">$pins</span> &#123;</span><br><span class="line">	<span class="keyword">set</span> netPtr [dbGetNetByName <span class="variable">$pin</span>]</span><br><span class="line">	<span class="keyword">if</span> &#123; <span class="variable">$netPtr</span> == <span class="string">&quot;0x0&quot;</span> &#125; &#123;</span><br><span class="line">		<span class="keyword">puts</span> <span class="string">&quot;INFO: can&#x27;t find the port: $pin&quot;</span></span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		setAttribute -net <span class="variable">$pin</span> -skip_routing true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical]]] &#123;</span><br><span class="line">	setAttribute -net <span class="variable">$net</span> -skip_routing true</span><br><span class="line">	dbSet [dbGetNetByName <span class="variable">$net</span>].dontTouch true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -12678,6 +12582,150 @@ McGraw-Hill, 2017.</p>
         <tag>stability</tag>
         <tag>miller</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Power/Ground and I/O Pins</title>
+    <url>/2022/03/06/power-ground-io/</url>
+    <content><![CDATA[<h4 id="power-ground-pin-information">Power / Ground Pin
+Information</h4>
+<p>In both digital and analog I/O, power and ground pins appear at the
+sub-circuit definiton, allowing user to use the I/O in voltage islands.
+They follow certain naming conventions.</p>
+<ol type="1">
+<li>digital I/O sub-circuit</li>
+</ol>
+<ul>
+<li>VDD: pre-driver core voltage (supplied by PVDD1CDGM)</li>
+<li>VSS: pre-driver ground and also global ground (supplied by
+PVDD1CDGM)</li>
+<li>VDDPST: I/O post-driver voltage, i.e. 1.8V (supplied by PVDD2CDGM or
+PVDD2POCM)</li>
+<li>VSSPOST: I/O post-driver ground (supplied by PVDD2CDGM or
+PVDD2POCM)</li>
+<li>POCCTRL: POCCTRL signal (supplied by PVDD2POCM)</li>
+</ul>
+<ol start="2" type="1">
+<li>analog I/O placed in a core voltage domain, the convention is</li>
+</ol>
+<ul>
+<li>TACVDD: analog core voltage (supplied by PVDD3ACM)</li>
+<li>TACVSS: analog core ground (supplied by PVDD3ACM)</li>
+<li>VSS: global core ground</li>
+</ul>
+<ol start="3" type="1">
+<li>analog I/O placed in an I/O voltage domain, the convention is:</li>
+</ol>
+<ul>
+<li>TAVDD: analog I/O voltage, i.e. 1.8V (supplied by PVDD3AM)</li>
+<li>TAVSS: analog I/O ground (supplied by PVDD3AM)</li>
+<li>VSS: global core ground</li>
+</ul>
+<p>Power/Ground <strong>Combo Cells</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 36%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>power/ground combo pad cell</th>
+<th>pins to be connected to bump</th>
+<th>to core side pin name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PVDD1CDGM</td>
+<td>VDD VSS</td>
+<td>VDD VSS</td>
+</tr>
+<tr class="even">
+<td>PVDD2CDGM PVDD2POCM</td>
+<td>VDDPST VSSPST</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td>PVDD3AM</td>
+<td>TAVDD TAVSS</td>
+<td>AVDD AVSS</td>
+</tr>
+<tr class="even">
+<td>PVDD3ACM</td>
+<td>TACVDD TACVSS</td>
+<td>AVDD AVSS</td>
+</tr>
+</tbody>
+</table>
+<h4 id="note-for-the-retention-mode">Note for the retention mode</h4>
+<ol type="1">
+<li>At initial state, IRTE must be <strong>0</strong> when VDD is
+off.</li>
+<li>IRTE must be kept &gt;= 10us after VDD turns on again (from the
+retention mode to the normal operation mode).</li>
+<li>IRTE can be switched only when both VDD and VDDPST are on.</li>
+</ol>
+<p><img src="/2022/03/06/power-ground-io/rention_seq.drawio.svg"
+alt="rention_seq.drawio" /></p>
+<p>When the rention function is needed, IRTE signal must come from an
+"always-on" core power domain. If you don't need the rention function,
+it is required to tie IRTE to ground. In other words, <strong>no matter
+the rention feature is needed or not, it is required to have PCBRTE in
+each domain</strong>.</p>
+<p><img
+src="/2022/03/06/power-ground-io/PCBRTE_in_digital_domain.drawio.svg"
+alt="PCBRTE_in_digital_domain.drawio" /></p>
+<p><strong>Note</strong>: PCBRTE <strong>does not</strong> need PAD
+connection.</p>
+<h4 id="internal-pins">Internal Pins</h4>
+<p>There are 3 internal global pins, i.e. <strong>ESD</strong>,
+<strong>POCCTRL</strong>, <strong>RTE</strong>, in all digital domain
+cells.</p>
+<p>In real application,</p>
+<ul>
+<li><strong>ESD pin</strong> is an internal signal and
+<strong>active</strong> in ESD event happening</li>
+<li><strong>POCCTRL</strong> is an internal signal and active in
+Power-on-control event.</li>
+</ul>
+<p>However, these special events (i.e. ESD event and Power-on-control
+event) are not modeled in NLDM kit (.lib), only normal function is
+covered, so <strong>ESD</strong> and <strong>POCCTRL</strong> pins are
+simply defined as ground in NLDM kit (.lib).</p>
+<blockquote>
+<p>These 3 global pins will be connected automatically after
+<strong>cell-to-cell abutting</strong> in physical layout.</p>
+</blockquote>
+<h4 id="power-up-sequence-in-digital-domain">Power-Up sequence in
+Digital Domain</h4>
+<p>Power up the I/O power (VDDPST) first, then the core power (VDD)</p>
+<p><img src="/2022/03/06/power-ground-io/pocctrl_seq.drawio.svg"
+alt="pocctrl_seq.drawio" /></p>
+<ol type="1">
+<li>PVDDD2POCM cell would generate Power-On-Control signal (POCCTRL) to
+have the post-driver NMOS and PMOS off, so that the crowbar current
+would not occur in the post-driver fingers when the I/O voltage is on
+while the core voltage remains off. As such, I/O cell would be in the
+Hi-Z state. when POCCTRL is on, the pll-up/down resistor is disabled and
+C is 0.</li>
+<li>The POCCTRL signal is transmitted to I/O cells through <strong>cell
+abutment</strong>. There is no need to have routing for POCCTTRL nor
+give a control signal to the POCCTRL pin any of I/O cells. Note that the
+POCCTRL signal would be cut if inserting a power-cut (PRCUT) cell.</li>
+</ol>
+<p><img
+src="/2022/03/06/power-ground-io/power-on-control-ciruit.drawio.svg"
+alt="power-on-control-ciruit.drawio" /></p>
+<h4 id="power-down-sequence-in-digital-domain">Power-Down sequence in
+Digital Domain</h4>
+<p>It's the reverse of power-up sequence.</p>
+<h4 id="use-model-in-innovus">Use model in Innovus</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> init_gnd_net <span class="string">&quot;vss_core vss DUMMY_ESD DUMMY_POCCTRL&quot;</span></span><br><span class="line"></span><br><span class="line">addInst -moduleBased u_io -ori R270 -physical -status fixed -loc <span class="number">135</span> <span class="number">994</span> -inst u_io/VDDIO_1 -cell PVDD2CDGM_H</span><br><span class="line"></span><br><span class="line">addNet u_io_RTE</span><br><span class="line">attachTerm FILLER_6 RTE u_io_RTE</span><br><span class="line">attachTerm VDDIO_1 RTE u_right_RTE</span><br><span class="line">setAttribute -skip_routing true -net u_io_RTE</span><br><span class="line"></span><br><span class="line">clearGlobalNets</span><br><span class="line">globalNetConnect DUMMY_POCCTRL -type pgpin -pin POCCTRL -singleInstance u_io/VDDDIO_1 -override</span><br><span class="line">globalNetConnect DUMMY_ESD -type pgpin -pin ESD -singleInstance u_io/VDDDIO_1 -override</span><br></pre></td></tr></table></figure>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> pins [get_object_name [get_ports *]]</span><br><span class="line"><span class="keyword">foreach</span> pin <span class="variable">$pins</span> &#123;</span><br><span class="line">	<span class="keyword">set</span> netPtr [dbGetNetByName <span class="variable">$pin</span>]</span><br><span class="line">	<span class="keyword">if</span> &#123; <span class="variable">$netPtr</span> == <span class="string">&quot;0x0&quot;</span> &#125; &#123;</span><br><span class="line">		<span class="keyword">puts</span> <span class="string">&quot;INFO: can&#x27;t find the port: $pin&quot;</span></span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		setAttribute -net <span class="variable">$pin</span> -skip_routing true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical]]] &#123;</span><br><span class="line">	setAttribute -net <span class="variable">$net</span> -skip_routing true</span><br><span class="line">	dbSet [dbGetNetByName <span class="variable">$net</span>].dontTouch true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Power Spectra and Power Spectral Densities</title>
@@ -13305,84 +13353,6 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
       </categories>
   </entry>
   <entry>
-    <title>Relative Sensitivity</title>
-    <url>/2023/07/12/relative-sensitivity/</url>
-    <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
-the total resistance) is function of <span
-class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
-be expressed as</p>
-<p><span class="math display">\[\begin{align}
-dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
-&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
-\frac{dx_n}{x_n}
-\end{align}\]</span></p>
-<p>Then, we obtain relative variation <span
-class="math display">\[\begin{align}
-\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
-x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
-&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
-\end{align}\]</span></p>
-<p>⭐ where <span class="math inline">\(S_{x_n}^T=\frac{\partial
-T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
-sensitivity</strong></p>
-<blockquote>
-<p><strong>relative sensitivity</strong> connect <span
-class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
-variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
-</blockquote>
-<p>And <span class="math inline">\(dT\)</span> can be expressed as <span
-class="math display">\[
-dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N
-x_n&#39;\cdot \frac{dx_n}{x_n}
-\]</span> ⭐ where <span class="math inline">\(x_n&#39;= S_{x_n}^T
-T\)</span> is the contribution of <span
-class="math inline">\(x_n\)</span> in <span
-class="math inline">\(T\)</span></p>
-<p>⭐ For parallel or series resistors, it can prove <span
-class="math inline">\(\sum_{n=1}^N S_{x_n}^T = 1\)</span> and $ _{n=1}^N
-x_n'=T$</p>
-<hr />
-<p><img src="/2023/07/12/relative-sensitivity/parallel_pgx.drawio.svg"
-alt="parallel_pgx.drawio" /></p>
-<p>Here <span class="math inline">\(T= R_1 \parallel R_2 =
-\frac{R_1R_2}{R_1+R_2}\)</span>, and <span
-class="math inline">\(T|_{R_1=8000, R_2=2000} = 1600\)</span></p>
-<p>We obtain <em>relative sensitivity:</em> <span
-class="math display">\[\begin{align}
-S_{R_1}^T &amp; = \frac{R_2}{R_1+R_2} \\
-S_{R_2}^T &amp; = \frac{R_1}{R_1+R_2}
-\end{align}\]</span></p>
-<p>The contribution of <span class="math inline">\(R_1\)</span> and
-<span class="math inline">\(R_2\)</span> to <span
-class="math inline">\(T\)</span> <span
-class="math display">\[\begin{align}
-R_1&#39;  &amp;= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
-R_2&#39;  &amp;= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
-\end{align}\]</span></p>
-<h2 id="scholar">scholar</h2>
-<p><strong>Normalized sensitivity</strong> captures <strong>relative
-sensitivity</strong></p>
-<blockquote>
-<p>change in objective per change in design variable</p>
-</blockquote>
-<p><img src="/2023/07/12/relative-sensitivity/normalized.PNG"
-alt="Normalized sensitivity" /></p>
-<h2 id="reference">reference</h2>
-<p>Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and
-Sensitivity Analysis [<a
-href="https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf">pdf</a>]</p>
-<p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
-Sensitivity and noise analyses [<a
-href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>parasitic</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Cadence&#39;s reg_verifier</title>
     <url>/2022/04/04/reg-verifier/</url>
     <content><![CDATA[<h2 id="generation">Generation</h2>
@@ -13514,6 +13484,84 @@ alt="image-20220404195156776" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Relative Sensitivity</title>
+    <url>/2023/07/12/relative-sensitivity/</url>
+    <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
+the total resistance) is function of <span
+class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
+be expressed as</p>
+<p><span class="math display">\[\begin{align}
+dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
+&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
+\frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>Then, we obtain relative variation <span
+class="math display">\[\begin{align}
+\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
+x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
+&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>⭐ where <span class="math inline">\(S_{x_n}^T=\frac{\partial
+T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p><strong>relative sensitivity</strong> connect <span
+class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
+variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
+</blockquote>
+<p>And <span class="math inline">\(dT\)</span> can be expressed as <span
+class="math display">\[
+dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N
+x_n&#39;\cdot \frac{dx_n}{x_n}
+\]</span> ⭐ where <span class="math inline">\(x_n&#39;= S_{x_n}^T
+T\)</span> is the contribution of <span
+class="math inline">\(x_n\)</span> in <span
+class="math inline">\(T\)</span></p>
+<p>⭐ For parallel or series resistors, it can prove <span
+class="math inline">\(\sum_{n=1}^N S_{x_n}^T = 1\)</span> and $ _{n=1}^N
+x_n'=T$</p>
+<hr />
+<p><img src="/2023/07/12/relative-sensitivity/parallel_pgx.drawio.svg"
+alt="parallel_pgx.drawio" /></p>
+<p>Here <span class="math inline">\(T= R_1 \parallel R_2 =
+\frac{R_1R_2}{R_1+R_2}\)</span>, and <span
+class="math inline">\(T|_{R_1=8000, R_2=2000} = 1600\)</span></p>
+<p>We obtain <em>relative sensitivity:</em> <span
+class="math display">\[\begin{align}
+S_{R_1}^T &amp; = \frac{R_2}{R_1+R_2} \\
+S_{R_2}^T &amp; = \frac{R_1}{R_1+R_2}
+\end{align}\]</span></p>
+<p>The contribution of <span class="math inline">\(R_1\)</span> and
+<span class="math inline">\(R_2\)</span> to <span
+class="math inline">\(T\)</span> <span
+class="math display">\[\begin{align}
+R_1&#39;  &amp;= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
+R_2&#39;  &amp;= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
+\end{align}\]</span></p>
+<h2 id="scholar">scholar</h2>
+<p><strong>Normalized sensitivity</strong> captures <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p>change in objective per change in design variable</p>
+</blockquote>
+<p><img src="/2023/07/12/relative-sensitivity/normalized.PNG"
+alt="Normalized sensitivity" /></p>
+<h2 id="reference">reference</h2>
+<p>Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and
+Sensitivity Analysis [<a
+href="https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf">pdf</a>]</p>
+<p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
+Sensitivity and noise analyses [<a
+href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>parasitic</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
     <url>/2022/05/01/rhel8-old-kernels/</url>
     <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
@@ -13558,6 +13606,19 @@ alt="image-20220401011543866" /></p>
       </tags>
   </entry>
   <entry>
+    <title>Rocky Linux 8 extend LVM in VMware</title>
+    <url>/2022/02/02/rocky8-gparted/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) gparted extend</span><br><span class="line">2) </span><br><span class="line">  lvextend -l +100%FREE /dev/rl/root</span><br><span class="line">3) </span><br><span class="line">  xfs_growfs /dev/mapper/rl-root</span><br><span class="line"></span><br><span class="line">usefull command:</span><br><span class="line">  df -h</span><br><span class="line">  lvdisplay</span><br><span class="line">  fdisk -l</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line">https://pocketadmin.tech/en/centos-8-extend-lvm/</span><br><span class="line"></span><br><span class="line">$ sudo lvdisplay</span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/rl/swap</span><br><span class="line">  LV Name                swap</span><br><span class="line">  VG Name                rl</span><br><span class="line">  LV UUID                toZKEu-P5oV-6WOV-026Z-eFnI-xaSP-FgEbz5</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time myserver, 2021-12-03 21:28:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 2</span><br><span class="line">  LV Size                5.00 GiB</span><br><span class="line">  Current LE             1280</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           253:1</span><br><span class="line"></span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/rl/root</span><br><span class="line">  LV Name                root</span><br><span class="line">  VG Name                rl</span><br><span class="line">  LV UUID                S2soRE-umc7-Z6b3-i44x-TiBO-ulnk-ETgEoj</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time myserver, 2021-12-03 21:28:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 1</span><br><span class="line">  LV Size                &lt;194.00 GiB</span><br><span class="line">  Current LE             49663</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           253:0</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>gparted</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
     <url>/2022/02/02/rocky8-cadence/</url>
     <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
@@ -13573,19 +13634,6 @@ alt="image-20220401011543866" /></p>
         <tag>yum</tag>
         <tag>os</tag>
         <tag>rpm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Rocky Linux 8 extend LVM in VMware</title>
-    <url>/2022/02/02/rocky8-gparted/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) gparted extend</span><br><span class="line">2) </span><br><span class="line">  lvextend -l +100%FREE /dev/rl/root</span><br><span class="line">3) </span><br><span class="line">  xfs_growfs /dev/mapper/rl-root</span><br><span class="line"></span><br><span class="line">usefull command:</span><br><span class="line">  df -h</span><br><span class="line">  lvdisplay</span><br><span class="line">  fdisk -l</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line">https://pocketadmin.tech/en/centos-8-extend-lvm/</span><br><span class="line"></span><br><span class="line">$ sudo lvdisplay</span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/rl/swap</span><br><span class="line">  LV Name                swap</span><br><span class="line">  VG Name                rl</span><br><span class="line">  LV UUID                toZKEu-P5oV-6WOV-026Z-eFnI-xaSP-FgEbz5</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time myserver, 2021-12-03 21:28:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 2</span><br><span class="line">  LV Size                5.00 GiB</span><br><span class="line">  Current LE             1280</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           253:1</span><br><span class="line"></span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/rl/root</span><br><span class="line">  LV Name                root</span><br><span class="line">  VG Name                rl</span><br><span class="line">  LV UUID                S2soRE-umc7-Z6b3-i44x-TiBO-ulnk-ETgEoj</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time myserver, 2021-12-03 21:28:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 1</span><br><span class="line">  LV Size                &lt;194.00 GiB</span><br><span class="line">  Current LE             49663</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           253:0</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>gparted</tag>
       </tags>
   </entry>
   <entry>
@@ -17112,6 +17160,38 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErH
       </tags>
   </entry>
   <entry>
+    <title>verilog constant part-select and indexed part-select</title>
+    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
+    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
+<strong>part-select</strong>. There are two types of part-selects, one
+with a <strong>constant part-select</strong> and another with an
+<strong>indexed part-select</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
+<p>Having a variable part-select allows it to be used effectively in
+loops to select parts of the vector. Although the starting bit can be
+<strong>varied</strong>, the width has to be
+<strong>constant</strong>.</p>
+<blockquote>
+<p><strong>[&lt;start_bit +: <width>] // part-select increments from
+start-bit</strong></p>
+<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
+start-bit</strong></p>
+</blockquote>
+<p><strong>Example</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
+<p><strong>ref</strong></p>
+<p><a
+href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
+scalar and vector</a></p>
+<p><a
+href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
+is the "+:" operator called in Verilog?</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>VCS &amp; Verdi</title>
     <url>/2022/02/08/vcs-verdi/</url>
     <content><![CDATA[<h2 id="vcs-with-customized-uvm-version">VCS with customized UVM
@@ -17301,36 +17381,23 @@ in Verdi | Synopsys</a></p>
       </categories>
   </entry>
   <entry>
-    <title>verilog constant part-select and indexed part-select</title>
-    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
-    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
-<strong>part-select</strong>. There are two types of part-selects, one
-with a <strong>constant part-select</strong> and another with an
-<strong>indexed part-select</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
-<p>Having a variable part-select allows it to be used effectively in
-loops to select parts of the vector. Although the starting bit can be
-<strong>varied</strong>, the width has to be
-<strong>constant</strong>.</p>
-<blockquote>
-<p><strong>[&lt;start_bit +: <width>] // part-select increments from
-start-bit</strong></p>
-<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
-start-bit</strong></p>
-</blockquote>
-<p><strong>Example</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
-<p><strong>ref</strong></p>
-<p><a
-href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
-scalar and vector</a></p>
-<p><a
-href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
-is the "+:" operator called in Verilog?</a></p>
+    <title>compile vim from source with GUI support</title>
+    <url>/2022/02/02/vim-compile/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="binkey">binkey</h2>
+<p>Inserting a new line below: <code>o</code></p>
+<p>above: <code>O</code></p>
+<p>To insert before the cursor: <code>i</code></p>
+<p>After: <code>a</code></p>
+<p>Before the line (home): <code>I</code></p>
+<p>Append at the end of line: <code>A</code></p>
 ]]></content>
       <categories>
-        <category>digital</category>
+        <category>devops</category>
       </categories>
+      <tags>
+        <tag>vim</tag>
+      </tags>
   </entry>
   <entry>
     <title>verilog readmemb and readmemh</title>
@@ -17371,25 +17438,6 @@ Memory in Verilog</a></p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>compile vim from source with GUI support</title>
-    <url>/2022/02/02/vim-compile/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<h2 id="binkey">binkey</h2>
-<p>Inserting a new line below: <code>o</code></p>
-<p>above: <code>O</code></p>
-<p>To insert before the cursor: <code>i</code></p>
-<p>After: <code>a</code></p>
-<p>Before the line (home): <code>I</code></p>
-<p>Append at the end of line: <code>A</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>vim</tag>
-      </tags>
   </entry>
   <entry>
     <title>Custom Bindkey of Cadence Virtuoso</title>
@@ -17629,6 +17677,18 @@ Data Communications</p>
       </tags>
   </entry>
   <entry>
+    <title>Crosstalk</title>
+    <url>/2023/09/16/xtalk/</url>
+    <content><![CDATA[<h2 id="references">references</h2>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>si</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Design Variable in analogLib-vpwlf</title>
     <url>/2022/05/14/vpwlf-designvar/</url>
     <content><![CDATA[<p><code>PWL File as Design Var?</code> parameter in <em>vpwlf</em> cell
@@ -17647,18 +17707,6 @@ alt="image-20220514121150988" /></p>
       <tags>
         <tag>virtuoso</tag>
         <tag>pwl</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Crosstalk</title>
-    <url>/2023/09/16/xtalk/</url>
-    <content><![CDATA[<h2 id="references">references</h2>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>si</tag>
       </tags>
   </entry>
   <entry>

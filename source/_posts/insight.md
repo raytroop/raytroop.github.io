@@ -481,6 +481,72 @@ For **global variation**, *all device have same variation*, mirror help reduce v
 
 
 
+## Operating points & Small gain theorem
+
+> Dr. Degang Chen, **EE 501:** **CMOS Analog Integrated Circuit Design** [[https://class.ece.iastate.edu/djchen/ee501/2020/References.ppt](https://class.ece.iastate.edu/djchen/ee501/2020/References.ppt)]
+
+![image-20231202102259692](insight/image-20231202102259692.png)
+
+For any given constant values of *u* and *v*, the constant values of variables that solve the the feed back relationship are called the **operating points**, or **equilibrium points**.
+
+> *Operating points* can be either *stable* or *unstable*.
+>
+> An operating point is unstable if any or some small perturbation near it causes divergence away from that operating point.
+
+
+
+If the loop gain evaluated at an operating point is **less than one**, that operating point is **stable**.
+
+> This is a sufficient condition
+
+![image-20231202105749888](insight/image-20231202105749888.png)
+
+
+
+![image-20231202105621385](insight/image-20231202105621385.png)
+
+With $m_{1\to 2} = 1$
+$$
+\text{Loop Gain} \simeq \frac{V_{BN}-V_{T2}}{V_{BN}-V_{T2} + V_R} \tag{LG\_0}
+$$
+Assuming all MOS in strong inv operation, $I$, $V_{BN}$ and $V_R$ is obtain
+$$\begin{align}
+I &= \frac{2\beta _1 + 2\beta _2 - 4\sqrt{\beta _1 \beta _2}}{R^2\beta _1 \beta _2} \\
+V_{BN} &= V_{T2} + \frac{2}{R\beta _2}(1- \sqrt{\frac{\beta _2}{\beta _1}}) \\
+IR &= \frac{2}{R}\left( \frac{1}{\sqrt{\beta_2}} -  \frac{1}{\sqrt{\beta_1}} \right)
+\end{align}$$
+
+Substitute $V_{BN}$ and $V_R$ of $(LG\_0)$
+$$\begin{align}
+\text{Loop Gain} & \simeq \frac{1-\sqrt{\frac{\beta_2}{\beta_1}}}{\frac{\beta_2}{\beta_1} - 3\sqrt{\frac{\beta_2}{\beta_1}}+2} \\
+&= \frac{1}{2-\sqrt{\frac{\beta_2}{\beta_1}}} \tag{LG\_1}
+\end{align}$$
+
+
+### Alternative approach for Loop Gain
+
+> using derivation of large signal
+
+![image-20231202132310478](insight/image-20231202132310478.png)
+
+![image-20231202134138319](insight/image-20231202134138319.png)
+
+
+
+
+
+---
+
+> &#10071;&#10071;&#10071; R should **not** be on the other side
+
+![image-20231202104505264](insight/image-20231202104505264.png)
+
+
+
+
+
+
+
 ## reference
 
 M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17, no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.

@@ -39,7 +39,7 @@ People with low self-esteem consider mistakes to be an indication of a general l
 
 In chapter 10, on handling mistakes, you will explore one of the fundamental laws of human nature: that you always choose actions that seem most likely to meet your needs based on current awareness. You make the best decision you can at any point in time, given what you know and what you want. 
 
-**The secret to coping with any failure is to recognize that each decision you’ve made was the very best one available under the circumstances.**
+**The secret to coping with any failure is to recognize that each decision you've made was the very best one available under the circumstances.**
 
 
 

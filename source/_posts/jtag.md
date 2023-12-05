@@ -36,6 +36,21 @@ Instruction Register, IR
 
 > After power-up, they may not be in sync, but there is a trick. Look at the state machine and notice that no matter what state you are, if *TMS stays at "1" for five clocks*, a TAP controller goes back to the state "Test-Logic Reset". That's used to synchronize the TAP controllers.
 
+> It is important to note that in a typical Boundary-Scan test, the time between launching a signal from driver (at the falling edge of test clock (TCK) in the `Update-DR` or `Update-IR` TAP Controller state) and capturing that signal (at the rising edge of TCK in the `Caputre-DR` TAP Controller state) is **no less tha 2.5 TCK cycles**
+
+
+
+## IEEE Std 1149.6-2003
+
+This standard is built on top of IEEE Std 1149.1 using the same Test Access Port structure and Boundary-Scan architecture.
+
+- It adds the concept of a "test receiver" to input pins that are expected to handle **differential and/or AC-coupling**
+- It adds two new instructions that cause drivers to emit AC waveforms that are processed by test receivers.
+
+
+## JTAG Instruction
+
+
 
 
 ## reference

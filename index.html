@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -337,7 +337,7 @@ loaded into the device.</p>
 <p>The AC signal is a test waveform suited for transmission through
 AC-coupling</p>
 </blockquote>
-<h2 id="test-signal-reception">## Test signal reception</h2>
+<h2 id="test-signal-reception">Test signal reception</h2>
 <ul>
 <li>When <em>an AC testing instruction</em> is loaded, a specialized
 test receiver detects transitoins of the AC signal seen at the input and
@@ -346,6 +346,55 @@ determines if this represents a logic '0' or '1'</li>
 and sent to the output of the test receiver to the Boundary-Scan
 Register cell</li>
 </ul>
+<p>When testing for a shorted capacitor, the <em>test software</em> must
+ensure that enough time has passed for the signal to decay before
+entering <em>Capture-DR</em>, either by stopping TCk or by spending
+additional TCK cycles in the <em>Run-Test/Idle</em> TAP Controller
+state</p>
+<h2 id="extest_pulse-extest_train">EXTEST_PULSE &amp; EXTEST_TRAIN</h2>
+<blockquote>
+<p>The two new AC-test instructions provided by this standard differ
+primarily in the number and timing of transitions to provide flexibility
+in dealing with the specific dynamic behavior of the channels being
+tested</p>
+</blockquote>
+<p><strong>AC Test Signal</strong> essentially modulates test data so
+that it will propagate through AC-coupled channels, for devices that
+contatin AC pins</p>
+<blockquote>
+<p>Tools should use the <strong>EXTEST_PULSE</strong> instruction unless
+there is a specific requirement for the <strong>EXTEST_TRAIN</strong>
+instruction</p>
+</blockquote>
+<h3 id="extest_pulse">EXTEST_PULSE</h3>
+<blockquote>
+<p>Generate <strong>two</strong> additional driver transitions and
+allows a tester to vary the <strong>time</strong> between them dependent
+on how many TCK cycles the TAP is left in the <em>Run-Test/Idle</em> TAP
+Controller state.</p>
+<p>This is intended to allow any undesired transient condition to decay
+to a <strong>DC steady-state value</strong> when that will make the
+final transition more reliably detectable</p>
+<p>The duration in the <em>Run-Test/Idle</em> TAP Controller state
+should be <strong>at least three times</strong> the high-pass coupling
+time constant. This allows the <em>first additional transition</em> to
+decay away to the <strong>DC steady-state value</strong> for the
+channel, and ensures that the full amplitude of the <em>final
+transition</em> is added to or subtracted from that steady-state
+value</p>
+<p>This establishes a <em>known initial conditon</em> for the <em>final
+transiton</em> and permits reliable specification of the detection
+threshold of the test receiver</p>
+</blockquote>
+<h3 id="extest_train">EXTEST_TRAIN</h3>
+<blockquote>
+<p>Generate <strong>multiple</strong> additional transitions, the
+<strong>number</strong> dependent on how long the TAP is left in the
+<em>Run-Test/Idle</em> TAP Controller state</p>
+<p>This is intended to allow any undesired transient condition to decay
+to an <strong>AC steady-state value</strong> when that will make the
+final transition more reliably detectable</p>
+</blockquote>
 <h2 id="ieee-std-1149.6-2003">IEEE Std 1149.6-2003</h2>
 <p>This standard is built on top of IEEE Std 1149.1 using the same Test
 Access Port structure and Boundary-Scan architecture.</p>
@@ -438,7 +487,7 @@ University. VLSI Testing</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -619,7 +668,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -717,7 +766,7 @@ target="_blank" rel="noopener" href="https://savobajic.ca/projects/academic/stat
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -963,7 +1012,7 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1053,7 +1102,7 @@ target="_blank" rel="noopener" href="https://designers-guide.org/modeling/dataco
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1207,7 +1256,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1309,7 +1358,7 @@ target="_blank" rel="noopener" href="https://cse.nsysu.edu.tw/app/index.php?Acti
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1948,7 +1997,7 @@ target="_blank" rel="noopener" href="https://mixsignal.files.wordpress.com/2013/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2033,7 +2082,7 @@ target="_blank" rel="noopener" href="https://mixsignal.files.wordpress.com/2013/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

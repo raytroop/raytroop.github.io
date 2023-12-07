@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/2023/11/28/jtag/image-20231129232443249.png">
 <meta property="og:image" content="http://example.com/2023/11/28/jtag/image-20231129233218011.png">
 <meta property="article:published_time" content="2023-11-28T22:00:32.000Z">
-<meta property="article:modified_time" content="2023-12-07T07:55:51.686Z">
+<meta property="article:modified_time" content="2023-12-07T10:44:01.912Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/11/28/jtag/image-20231128230836498.png">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tap-controller"><span class="nav-number">1.</span> <span class="nav-text">TAP Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac-coupling"><span class="nav-number">2.</span> <span class="nav-text">AC-coupling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-signal-implementation"><span class="nav-number">3.</span> <span class="nav-text">Test signal implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-signal-reception"><span class="nav-number">4.</span> <span class="nav-text">## Test signal reception</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ieee-std-1149.6-2003"><span class="nav-number">5.</span> <span class="nav-text">IEEE Std 1149.6-2003</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jtag-instruction"><span class="nav-number">6.</span> <span class="nav-text">JTAG Instruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#implementation"><span class="nav-number">7.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">8.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tap-controller"><span class="nav-number">1.</span> <span class="nav-text">TAP Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac-coupling"><span class="nav-number">2.</span> <span class="nav-text">AC-coupling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-signal-implementation"><span class="nav-number">3.</span> <span class="nav-text">Test signal implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-signal-reception"><span class="nav-number">4.</span> <span class="nav-text">Test signal reception</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extest_pulse-extest_train"><span class="nav-number">5.</span> <span class="nav-text">EXTEST_PULSE &amp; EXTEST_TRAIN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extest_pulse"><span class="nav-number">5.1.</span> <span class="nav-text">EXTEST_PULSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extest_train"><span class="nav-number">5.2.</span> <span class="nav-text">EXTEST_TRAIN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ieee-std-1149.6-2003"><span class="nav-number">6.</span> <span class="nav-text">IEEE Std 1149.6-2003</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jtag-instruction"><span class="nav-number">7.</span> <span class="nav-text">JTAG Instruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#implementation"><span class="nav-number">8.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">9.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -238,7 +238,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 10:44:01" itemprop="dateModified" datetime="2023-12-07T10:44:01+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -348,7 +348,7 @@ loaded into the device.</p>
 <p>The AC signal is a test waveform suited for transmission through
 AC-coupling</p>
 </blockquote>
-<h2 id="test-signal-reception">## Test signal reception</h2>
+<h2 id="test-signal-reception">Test signal reception</h2>
 <ul>
 <li>When <em>an AC testing instruction</em> is loaded, a specialized
 test receiver detects transitoins of the AC signal seen at the input and
@@ -357,6 +357,55 @@ determines if this represents a logic '0' or '1'</li>
 and sent to the output of the test receiver to the Boundary-Scan
 Register cell</li>
 </ul>
+<p>When testing for a shorted capacitor, the <em>test software</em> must
+ensure that enough time has passed for the signal to decay before
+entering <em>Capture-DR</em>, either by stopping TCk or by spending
+additional TCK cycles in the <em>Run-Test/Idle</em> TAP Controller
+state</p>
+<h2 id="extest_pulse-extest_train">EXTEST_PULSE &amp; EXTEST_TRAIN</h2>
+<blockquote>
+<p>The two new AC-test instructions provided by this standard differ
+primarily in the number and timing of transitions to provide flexibility
+in dealing with the specific dynamic behavior of the channels being
+tested</p>
+</blockquote>
+<p><strong>AC Test Signal</strong> essentially modulates test data so
+that it will propagate through AC-coupled channels, for devices that
+contatin AC pins</p>
+<blockquote>
+<p>Tools should use the <strong>EXTEST_PULSE</strong> instruction unless
+there is a specific requirement for the <strong>EXTEST_TRAIN</strong>
+instruction</p>
+</blockquote>
+<h3 id="extest_pulse">EXTEST_PULSE</h3>
+<blockquote>
+<p>Generate <strong>two</strong> additional driver transitions and
+allows a tester to vary the <strong>time</strong> between them dependent
+on how many TCK cycles the TAP is left in the <em>Run-Test/Idle</em> TAP
+Controller state.</p>
+<p>This is intended to allow any undesired transient condition to decay
+to a <strong>DC steady-state value</strong> when that will make the
+final transition more reliably detectable</p>
+<p>The duration in the <em>Run-Test/Idle</em> TAP Controller state
+should be <strong>at least three times</strong> the high-pass coupling
+time constant. This allows the <em>first additional transition</em> to
+decay away to the <strong>DC steady-state value</strong> for the
+channel, and ensures that the full amplitude of the <em>final
+transition</em> is added to or subtracted from that steady-state
+value</p>
+<p>This establishes a <em>known initial conditon</em> for the <em>final
+transiton</em> and permits reliable specification of the detection
+threshold of the test receiver</p>
+</blockquote>
+<h3 id="extest_train">EXTEST_TRAIN</h3>
+<blockquote>
+<p>Generate <strong>multiple</strong> additional transitions, the
+<strong>number</strong> dependent on how long the TAP is left in the
+<em>Run-Test/Idle</em> TAP Controller state</p>
+<p>This is intended to allow any undesired transient condition to decay
+to an <strong>AC steady-state value</strong> when that will make the
+final transition more reliably detectable</p>
+</blockquote>
 <h2 id="ieee-std-1149.6-2003">IEEE Std 1149.6-2003</h2>
 <p>This standard is built on top of IEEE Std 1149.1 using the same Test
 Access Port structure and Boundary-Scan architecture.</p>

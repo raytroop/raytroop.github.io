@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/2023/11/28/jtag/image-20231129232443249.png">
 <meta property="og:image" content="http://example.com/2023/11/28/jtag/image-20231129233218011.png">
 <meta property="article:published_time" content="2023-11-28T22:00:32.000Z">
-<meta property="article:modified_time" content="2023-12-07T06:06:04.175Z">
+<meta property="article:modified_time" content="2023-12-07T07:55:51.686Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/11/28/jtag/image-20231128230836498.png">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tap-controller"><span class="nav-number">1.</span> <span class="nav-text">TAP Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac-coupling"><span class="nav-number">2.</span> <span class="nav-text">AC-coupling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-signal-implementation"><span class="nav-number">3.</span> <span class="nav-text">Test signal implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ieee-std-1149.6-2003"><span class="nav-number">4.</span> <span class="nav-text">IEEE Std 1149.6-2003</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jtag-instruction"><span class="nav-number">5.</span> <span class="nav-text">JTAG Instruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tap-controller"><span class="nav-number">1.</span> <span class="nav-text">TAP Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac-coupling"><span class="nav-number">2.</span> <span class="nav-text">AC-coupling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-signal-implementation"><span class="nav-number">3.</span> <span class="nav-text">Test signal implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-signal-reception"><span class="nav-number">4.</span> <span class="nav-text">## Test signal reception</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ieee-std-1149.6-2003"><span class="nav-number">5.</span> <span class="nav-text">IEEE Std 1149.6-2003</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jtag-instruction"><span class="nav-number">6.</span> <span class="nav-text">JTAG Instruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#implementation"><span class="nav-number">7.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">8.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -238,7 +238,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 06:06:04" itemprop="dateModified" datetime="2023-12-07T06:06:04+00:00">2023-12-07</time>
+      <time title="Modified: 2023-12-07 07:55:51" itemprop="dateModified" datetime="2023-12-07T07:55:51+00:00">2023-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -348,6 +348,15 @@ loaded into the device.</p>
 <p>The AC signal is a test waveform suited for transmission through
 AC-coupling</p>
 </blockquote>
+<h2 id="test-signal-reception">## Test signal reception</h2>
+<ul>
+<li>When <em>an AC testing instruction</em> is loaded, a specialized
+test receiver detects transitoins of the AC signal seen at the input and
+determines if this represents a logic '0' or '1'</li>
+<li>When <em>EXTEST</em> is loaded, the input signal level is detected
+and sent to the output of the test receiver to the Boundary-Scan
+Register cell</li>
+</ul>
 <h2 id="ieee-std-1149.6-2003">IEEE Std 1149.6-2003</h2>
 <p>This standard is built on top of IEEE Std 1149.1 using the same Test
 Access Port structure and Boundary-Scan architecture.</p>
@@ -358,6 +367,11 @@ expected to handle <strong>differential and/or AC-coupling</strong></li>
 that are processed by test receivers.</li>
 </ul>
 <h2 id="jtag-instruction">JTAG Instruction</h2>
+<h2 id="implementation">Implementation</h2>
+<ul>
+<li>AC mode hysteresis, detect transistion</li>
+<li>DC mode threshold is determined by jtag initial value</li>
+</ul>
 <h2 id="reference">reference</h2>
 <p>IEEE Std 1149.1-2001, IEEE Standard Test Access Port and
 Boundary-Scan Architecture, IEEE, 2001</p>

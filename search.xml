@@ -496,32 +496,6 @@ variant, the it is defined as a subsequence and its
       </categories>
   </entry>
   <entry>
-    <title>Global Handles in UVM</title>
-    <url>/2022/02/23/Global-Handles-UVM/</url>
-    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Global handles uvm_top and factory in uvm_pkg have been removed in
-UVM-1.2 and later</p>
-</blockquote>
-<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
-UVM-1.2</h4>
-<p>Call the <strong>get() method of the class</strong> to retrieve the
-singleton handle.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
-accessing all the central UVM services such as
-<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
-<strong>uvm_report_server</strong>, etc.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Custom Design with FinFETs</title>
     <url>/2022/12/10/FinFET-Considerations/</url>
     <content><![CDATA[<h2 id="design-considerations">Design Considerations</h2>
@@ -699,16 +673,30 @@ Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits</p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
-    <url>/2022/02/07/Innovus-Clock-Concurrent-Optimization-Technology/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Clock_Concurrent_Optimization_Technology.pdf" data-height="500px"></div>
+    <title>Global Handles in UVM</title>
+    <url>/2022/02/23/Global-Handles-UVM/</url>
+    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Global handles uvm_top and factory in uvm_pkg have been removed in
+UVM-1.2 and later</p>
+</blockquote>
+<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
+UVM-1.2</h4>
+<p>Call the <strong>get() method of the class</strong> to retrieve the
+singleton handle.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
+accessing all the central UVM services such as
+<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
+<strong>uvm_report_server</strong>, etc.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>innovus</category>
+        <category>digital</category>
       </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
   </entry>
   <entry>
     <title>INL, DNL analysis of current steering DAC</title>
@@ -731,6 +719,18 @@ current steering DAC</h2>
       </tags>
   </entry>
   <entry>
+    <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
+    <url>/2022/02/07/Innovus-Clock-Concurrent-Optimization-Technology/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Clock_Concurrent_Optimization_Technology.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Innovus Database Navigation</title>
     <url>/2022/02/07/Innovus-Database-Navigation/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
@@ -743,9 +743,9 @@ current steering DAC</h2>
       </tags>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Parasitic Extraction</title>
+    <url>/2022/02/07/Innovus-Parasitic-Extraction/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Parasitic_Extraction.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -755,9 +755,9 @@ current steering DAC</h2>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Parasitic Extraction</title>
-    <url>/2022/02/07/Innovus-Parasitic-Extraction/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Parasitic_Extraction.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -786,18 +786,6 @@ effect taken into consideration during delayCal</p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Technology File</title>
-    <url>/2022/02/07/Innovus-Technology-File/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Innovus/Tempus Nonfunctional ECO</title>
     <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
@@ -810,9 +798,36 @@ effect taken into consideration during delayCal</p>
       </tags>
   </entry>
   <entry>
+    <title>Innovus Technology File</title>
+    <url>/2022/02/07/Innovus-Technology-File/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Innovus Analysis Command</title>
     <url>/2022/02/07/Innovus-analysis-command/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Innovus block level create Power Ground Pin method</title>
+    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
+    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
+alt="createPGPin_onDie.drawio" /></p>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -843,36 +858,9 @@ effect taken into consideration during delayCal</p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus block level create Power Ground Pin method</title>
-    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
-    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
-alt="createPGPin_onDie.drawio" /></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Innovus Data Exchange</title>
     <url>/2022/02/07/Innovus-data-exchange/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Innovus Floorplan</title>
-    <url>/2022/02/07/Innovus-floorplan/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -894,9 +882,9 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus timeDesign vs. report_timing</title>
-    <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
+    <title>Innovus Floorplan</title>
+    <url>/2022/02/07/Innovus-floorplan/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -915,6 +903,67 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
       <tags>
         <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Innovus timeDesign vs. report_timing</title>
+    <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MOS capacitor structures</title>
+    <url>/2022/09/24/MOS-Varactors/</url>
+    <content><![CDATA[<h3 id="dsb-varactors">D=S=B varactors</h3>
+<p><img src="/2022/09/24/MOS-Varactors/image-20220924003223575.png"
+alt="image-20220924003223575" /></p>
+<hr />
+<h3 id="inversion-mode-i-mos">Inversion-mode (I-MOS)</h3>
+<p><img src="/2022/09/24/MOS-Varactors/image-20220924003314979.png"
+alt="image-20220924003314979" /></p>
+<hr />
+<h3 id="accumulation-mode-a-mos">Accumulation-mode (A-MOS)</h3>
+<blockquote>
+<p>NMOS in NWELL, aka <strong>NMOS in N-Well varactor</strong></p>
+<p><strong>Notice: S/D and NWELL are connected togethor</strong> in
+layout</p>
+</blockquote>
+<p><img src="/2022/09/24/MOS-Varactors/image-20230504221234639.png"
+alt="image-20230504221234639" /></p>
+<p><img src="/2022/09/24/MOS-Varactors/image-20230504221313785.png"
+alt="image-20230504221313785" /></p>
+<p><img src="/2022/09/24/MOS-Varactors/image-20220924004206116.png"
+alt="image-20220924004206116" /></p>
+<h4 id="industrial-varactor">industrial varactor</h4>
+<blockquote>
+<p>NMOS in <strong>N-Well</strong> varactor</p>
+</blockquote>
+<p><img src="/2022/09/24/MOS-Varactors/image-20230504223522225.png"
+alt="image-20230504223522225" /></p>
+<h3 id="reference">reference</h3>
+<p>R. L. Bunch and S. Raman, "Large-signal analysis of MOS varactors in
+CMOS -G/sub m/ LC VCOs," in IEEE Journal of Solid-State Circuits, vol.
+38, no. 8, pp. 1325-1332, Aug. 2003, doi: 10.1109/JSSC.2003.814416.</p>
+<p>T. Soorapanth, C. P. Yue, D. K. Shaeffer, T. I. Lee and S. S. Wong,
+"Analysis and optimization of accumulation-mode varactor for RF ICs,"
+1998 Symposium on VLSI Circuits. Digest of Technical Papers (Cat.
+No.98CH36215), 1998, pp. 32-33, doi: 10.1109/VLSIC.1998.687993. URL: <a
+href="http://www-smirc.stanford.edu/papers/VLSI98s-chet.pdf">http://www-smirc.stanford.edu/papers/VLSI98s-chet.pdf</a></p>
+<p>R. Jacob Baker, 6.1 MOSFET Capacitance Overview/Review, CMOS Circuit
+Design, Layout, and Simulation, Fourth Edition</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>varactor</tag>
+        <tag>mos</tag>
       </tags>
   </entry>
   <entry>
@@ -1065,55 +1114,6 @@ Convergence Checker for Oscillators</a></p>
       <tags>
         <tag>oscillator</tag>
         <tag>stability</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MOS capacitor structures</title>
-    <url>/2022/09/24/MOS-Varactors/</url>
-    <content><![CDATA[<h3 id="dsb-varactors">D=S=B varactors</h3>
-<p><img src="/2022/09/24/MOS-Varactors/image-20220924003223575.png"
-alt="image-20220924003223575" /></p>
-<hr />
-<h3 id="inversion-mode-i-mos">Inversion-mode (I-MOS)</h3>
-<p><img src="/2022/09/24/MOS-Varactors/image-20220924003314979.png"
-alt="image-20220924003314979" /></p>
-<hr />
-<h3 id="accumulation-mode-a-mos">Accumulation-mode (A-MOS)</h3>
-<blockquote>
-<p>NMOS in NWELL, aka <strong>NMOS in N-Well varactor</strong></p>
-<p><strong>Notice: S/D and NWELL are connected togethor</strong> in
-layout</p>
-</blockquote>
-<p><img src="/2022/09/24/MOS-Varactors/image-20230504221234639.png"
-alt="image-20230504221234639" /></p>
-<p><img src="/2022/09/24/MOS-Varactors/image-20230504221313785.png"
-alt="image-20230504221313785" /></p>
-<p><img src="/2022/09/24/MOS-Varactors/image-20220924004206116.png"
-alt="image-20220924004206116" /></p>
-<h4 id="industrial-varactor">industrial varactor</h4>
-<blockquote>
-<p>NMOS in <strong>N-Well</strong> varactor</p>
-</blockquote>
-<p><img src="/2022/09/24/MOS-Varactors/image-20230504223522225.png"
-alt="image-20230504223522225" /></p>
-<h3 id="reference">reference</h3>
-<p>R. L. Bunch and S. Raman, "Large-signal analysis of MOS varactors in
-CMOS -G/sub m/ LC VCOs," in IEEE Journal of Solid-State Circuits, vol.
-38, no. 8, pp. 1325-1332, Aug. 2003, doi: 10.1109/JSSC.2003.814416.</p>
-<p>T. Soorapanth, C. P. Yue, D. K. Shaeffer, T. I. Lee and S. S. Wong,
-"Analysis and optimization of accumulation-mode varactor for RF ICs,"
-1998 Symposium on VLSI Circuits. Digest of Technical Papers (Cat.
-No.98CH36215), 1998, pp. 32-33, doi: 10.1109/VLSIC.1998.687993. URL: <a
-href="http://www-smirc.stanford.edu/papers/VLSI98s-chet.pdf">http://www-smirc.stanford.edu/papers/VLSI98s-chet.pdf</a></p>
-<p>R. Jacob Baker, 6.1 MOSFET Capacitance Overview/Review, CMOS Circuit
-Design, Layout, and Simulation, Fourth Edition</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>varactor</tag>
-        <tag>mos</tag>
       </tags>
   </entry>
   <entry>
@@ -2473,6 +2473,79 @@ href="https://pdfs.semanticscholar.org/b0f8/720a2b51a479f4a711bec4b47fdd50f29e2d
       </categories>
   </entry>
   <entry>
+    <title>Antenna Effect</title>
+    <url>/2023/08/08/antenna/</url>
+    <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
+of <em>charge accumulation</em> in <em>isolated nodes</em> of an
+integrated circuit <em>during its processing</em>.</p>
+<blockquote>
+<p>This effect is also sometimes called "Plasma Induced Damage",
+"Process Induced Damage" (PID) or "charging effect".</p>
+</blockquote>
+<h2 id="antenna-ratio">antenna ratio</h2>
+<p>The antenna rule specifies the maximum tolerance for the ratio of a
+metal line area to the area of connected gates.</p>
+<h2 id="metal-jumping">metal jumping</h2>
+<p>Long metal can be taken to <em>higher metal</em> routing layer. This
+is known as <strong>metal jumping</strong>.</p>
+<blockquote>
+<p>This metal jumping will break the long interconnect and hence the
+charge collected on the long interconnect will not discharge through
+gate oxide because the higher metal layer is not yet fabricated.</p>
+</blockquote>
+<blockquote>
+<p>so, if the gate immediately connects to the highest level by jump-up
+metals, large amount of charges can not be collected, while the poly
+finally connected to the diffusion part by highest level, thus no
+antenna violation will normally occure.</p>
+</blockquote>
+<h2 id="diode-insertion">Diode Insertion</h2>
+<p>Diode helps dissipate charges accumulated on metal. Diode should be
+placed as near as possible to the gate of device on low level of
+metal.</p>
+<blockquote>
+<p>Diode should always be connected in <em>reverse bias</em>, with
+cathode connected to gate electrode and anode connected to ground
+potential.</p>
+<p>During processing, even if the diodes are reversely biased, because
+of the elevated wafer temperature (200 o C plus) it will provide a much
+conductive path</p>
+<p>In the reverse bias region, the reverse saturation current of Si and
+Ge diodes doubles for every 10° C rise in temperature</p>
+</blockquote>
+<p><img
+src="/2023/08/08/antenna/main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq.jpg"
+alt="main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq" /></p>
+<h2 id="reference">reference</h2>
+<p>Tuvia Liran, Antenna effect (PID): Do the design rules really protect
+us? [<a
+href="https://www.eetimes.com/antenna-effect-do-the-design-rules-really-protect-us/">link</a>]</p>
+<p>Upma Pawan Kumar, Sunandan Chaubey, Antenna Effect in 16nm Technology
+Node [<a
+href="https://www.design-reuse.com/articles/48227/antenna-effect-in-16nm-technology-node.html">link</a>]</p>
+<p>pulsic.com, Analog layout – Stop the antenna effect from destroying
+your circuit [<a
+href="https://pulsic.com/analog-layout-stop-the-antenna-effect-from-destroying-your-circuit/">link</a>]</p>
+<p>BuBuChen, 積體電路的天線效應 (Antenna Effect in IC) [<a
+href="https://www.bubuchen.com/2020/04/Antenna-Effect.html">link</a>]</p>
+<p>EDN, Antenna violations resolved using new method [<a
+href="https://www.edn.com/antenna-violations-resolved-using-new-method/">link</a>]</p>
+<p>edaboard.com, why jump up metal can solve the antenna effect? [<a
+href="https://www.edaboard.com/threads/why-jump-up-metal-can-solve-the-antenna-effect.177890/post-745696">link</a>]</p>
+<p>siliconvlsi.com, Antenna effect [<a
+href="https://siliconvlsi.com/antenna-effect/">link</a>]</p>
+<p>Prof. Adam Teman, Digital VLSI Design.
+Lecture-10-The-Manufacturing-Process [<a
+href="https://www.eng.biu.ac.il/temanad/files/2017/02/Lecture-10-The-Manufacturing-Process.pdf">pdf</a>]</p>
+<p>Zongjian Chen, Processing and Reliability Issues That Impact Design
+Practice. [<a
+href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf">https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Aliasing and Folding</title>
     <url>/2022/06/25/aliasing-folding/</url>
     <content><![CDATA[<h2 id="noise-aliasing">Noise Aliasing</h2>
@@ -2614,79 +2687,6 @@ Publishers Inc., San Francisco, CA, USA.</p>
 ]]></content>
       <categories>
         <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Antenna Effect</title>
-    <url>/2023/08/08/antenna/</url>
-    <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
-of <em>charge accumulation</em> in <em>isolated nodes</em> of an
-integrated circuit <em>during its processing</em>.</p>
-<blockquote>
-<p>This effect is also sometimes called "Plasma Induced Damage",
-"Process Induced Damage" (PID) or "charging effect".</p>
-</blockquote>
-<h2 id="antenna-ratio">antenna ratio</h2>
-<p>The antenna rule specifies the maximum tolerance for the ratio of a
-metal line area to the area of connected gates.</p>
-<h2 id="metal-jumping">metal jumping</h2>
-<p>Long metal can be taken to <em>higher metal</em> routing layer. This
-is known as <strong>metal jumping</strong>.</p>
-<blockquote>
-<p>This metal jumping will break the long interconnect and hence the
-charge collected on the long interconnect will not discharge through
-gate oxide because the higher metal layer is not yet fabricated.</p>
-</blockquote>
-<blockquote>
-<p>so, if the gate immediately connects to the highest level by jump-up
-metals, large amount of charges can not be collected, while the poly
-finally connected to the diffusion part by highest level, thus no
-antenna violation will normally occure.</p>
-</blockquote>
-<h2 id="diode-insertion">Diode Insertion</h2>
-<p>Diode helps dissipate charges accumulated on metal. Diode should be
-placed as near as possible to the gate of device on low level of
-metal.</p>
-<blockquote>
-<p>Diode should always be connected in <em>reverse bias</em>, with
-cathode connected to gate electrode and anode connected to ground
-potential.</p>
-<p>During processing, even if the diodes are reversely biased, because
-of the elevated wafer temperature (200 o C plus) it will provide a much
-conductive path</p>
-<p>In the reverse bias region, the reverse saturation current of Si and
-Ge diodes doubles for every 10° C rise in temperature</p>
-</blockquote>
-<p><img
-src="/2023/08/08/antenna/main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq.jpg"
-alt="main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq" /></p>
-<h2 id="reference">reference</h2>
-<p>Tuvia Liran, Antenna effect (PID): Do the design rules really protect
-us? [<a
-href="https://www.eetimes.com/antenna-effect-do-the-design-rules-really-protect-us/">link</a>]</p>
-<p>Upma Pawan Kumar, Sunandan Chaubey, Antenna Effect in 16nm Technology
-Node [<a
-href="https://www.design-reuse.com/articles/48227/antenna-effect-in-16nm-technology-node.html">link</a>]</p>
-<p>pulsic.com, Analog layout – Stop the antenna effect from destroying
-your circuit [<a
-href="https://pulsic.com/analog-layout-stop-the-antenna-effect-from-destroying-your-circuit/">link</a>]</p>
-<p>BuBuChen, 積體電路的天線效應 (Antenna Effect in IC) [<a
-href="https://www.bubuchen.com/2020/04/Antenna-Effect.html">link</a>]</p>
-<p>EDN, Antenna violations resolved using new method [<a
-href="https://www.edn.com/antenna-violations-resolved-using-new-method/">link</a>]</p>
-<p>edaboard.com, why jump up metal can solve the antenna effect? [<a
-href="https://www.edaboard.com/threads/why-jump-up-metal-can-solve-the-antenna-effect.177890/post-745696">link</a>]</p>
-<p>siliconvlsi.com, Antenna effect [<a
-href="https://siliconvlsi.com/antenna-effect/">link</a>]</p>
-<p>Prof. Adam Teman, Digital VLSI Design.
-Lecture-10-The-Manufacturing-Process [<a
-href="https://www.eng.biu.ac.il/temanad/files/2017/02/Lecture-10-The-Manufacturing-Process.pdf">pdf</a>]</p>
-<p>Zongjian Chen, Processing and Reliability Issues That Impact Design
-Practice. [<a
-href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf">https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -3002,6 +3002,32 @@ href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">h
       </tags>
   </entry>
   <entry>
+    <title>channel and termination</title>
+    <url>/2022/07/01/channel-termination/</url>
+    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
+<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
+alt="voltagemode20220704" /></p>
+<h2 id="current-mode-driver">current mode driver</h2>
+<p><img
+src="/2022/07/01/channel-termination/image-20220702003926289.png"
+alt="image-20220702003926289" /></p>
+<h2 id="reference">reference</h2>
+<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
+Conference, "T11: Basics of Equalization Techniques: Channels,
+Equalization, and Circuits"</p>
+<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
+Diverse Interconnect Applications,” IEEE Transactions on Circuits and
+Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
+2014.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>channel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Clock Edges used for Setup and Hold in PrimeTime</title>
     <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
     <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
@@ -3035,32 +3061,6 @@ alt="image-20220301203135490" /></p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>channel and termination</title>
-    <url>/2022/07/01/channel-termination/</url>
-    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
-<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
-alt="voltagemode20220704" /></p>
-<h2 id="current-mode-driver">current mode driver</h2>
-<p><img
-src="/2022/07/01/channel-termination/image-20220702003926289.png"
-alt="image-20220702003926289" /></p>
-<h2 id="reference">reference</h2>
-<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
-Conference, "T11: Basics of Equalization Techniques: Channels,
-Equalization, and Circuits"</p>
-<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
-Diverse Interconnect Applications,” IEEE Transactions on Circuits and
-Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
-2014.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>channel</tag>
-      </tags>
   </entry>
   <entry>
     <title>Clock Gating</title>
@@ -7330,6 +7330,93 @@ href="https://coecs.ou.edu/Joseph.P.Havlicek/ece3793/notes/ECE3793NotesCh07.pdf"
       </categories>
   </entry>
   <entry>
+    <title>Functional Coverage Modeling</title>
+    <url>/2022/04/03/functional-coverage/</url>
+    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
+<ul>
+<li>Explicit (user defined)
+<ul>
+<li>Fully and clearly expressed within sources
+<ul>
+<li>Sequence and temporal coverage using assertions</li>
+<li>Data-oriented coverage using <code>covergroup</code></li>
+</ul></li>
+<li>Planned and defined by the verification team</li>
+</ul></li>
+<li>Implicit
+<ul>
+<li>Derived or computed from source
+<ul>
+<li>Code coverage measured by the simulator</li>
+</ul></li>
+<li>May be defined outside the verification team</li>
+<li>May be implied by the verification interface
+<ul>
+<li>e.g., an industry standard protocol</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
+Systemverilog</h2>
+<h3 id="assertions-for-control-oriented-coverage">Assertions for
+control-oriented coverage</h3>
+<ul>
+<li>Defined as procedural statements</li>
+<li><strong>CANNOT</strong> be defined in a class</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
+and the cover directive. It is used to cover sequences of signal values
+over time. Assertions cannot be declared or "covered" in a class
+declaration, so their use in an UVM verification environment is
+restricted to <strong>interface only</strong></p>
+</blockquote>
+<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
+data-oriented coverage</h3>
+<ul>
+<li>CAN be declared as a class member and created in class
+constructor</li>
+<li>Used in <strong>interface</strong> and module UVCs</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Data-oriented coverage uses the <code>covergroup</code> construct.
+Covergroups can be declared and created in classes, therefore they are
+essential for explicit coverage in a UVM verification environment.</p>
+</blockquote>
+<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
+<p><code>covergroup new</code> constructor is called
+<strong>directly</strong> off the declaration of the covergroup, it does
+not have a separate instance name</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<p>The <code>covergroup</code> instance must be created in the class
+constructor, not a UVM <code>build_phase</code> or other phase
+method</p>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403210225837.png"
+alt="image-20220403210225837" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
+<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
+<p>Typical module UVC coverage:</p>
+<ul>
+<li>Routing - packets flow from input ports to all legal outputs</li>
+<li>latency - all packets received within speicied delay</li>
+</ul>
+<blockquote>
+<p>The module UVC monitor receives data from the interface monitors via
+analysis ports, so the implementation of the analysis write function is
+a convenient place to put coverage code</p>
+</blockquote>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403212529981.png"
+alt="image-20220403212529981" /></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Demystifying Gate Resistance</title>
     <url>/2023/07/09/gate-resistance/</url>
     <content><![CDATA[<p><img src="/2023/07/09/gate-resistance/image-20230709102848934.png"
@@ -7507,93 +7594,6 @@ Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
       <tags>
         <tag>finfet</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Functional Coverage Modeling</title>
-    <url>/2022/04/03/functional-coverage/</url>
-    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
-<ul>
-<li>Explicit (user defined)
-<ul>
-<li>Fully and clearly expressed within sources
-<ul>
-<li>Sequence and temporal coverage using assertions</li>
-<li>Data-oriented coverage using <code>covergroup</code></li>
-</ul></li>
-<li>Planned and defined by the verification team</li>
-</ul></li>
-<li>Implicit
-<ul>
-<li>Derived or computed from source
-<ul>
-<li>Code coverage measured by the simulator</li>
-</ul></li>
-<li>May be defined outside the verification team</li>
-<li>May be implied by the verification interface
-<ul>
-<li>e.g., an industry standard protocol</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
-Systemverilog</h2>
-<h3 id="assertions-for-control-oriented-coverage">Assertions for
-control-oriented coverage</h3>
-<ul>
-<li>Defined as procedural statements</li>
-<li><strong>CANNOT</strong> be defined in a class</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
-and the cover directive. It is used to cover sequences of signal values
-over time. Assertions cannot be declared or "covered" in a class
-declaration, so their use in an UVM verification environment is
-restricted to <strong>interface only</strong></p>
-</blockquote>
-<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
-data-oriented coverage</h3>
-<ul>
-<li>CAN be declared as a class member and created in class
-constructor</li>
-<li>Used in <strong>interface</strong> and module UVCs</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Data-oriented coverage uses the <code>covergroup</code> construct.
-Covergroups can be declared and created in classes, therefore they are
-essential for explicit coverage in a UVM verification environment.</p>
-</blockquote>
-<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
-<p><code>covergroup new</code> constructor is called
-<strong>directly</strong> off the declaration of the covergroup, it does
-not have a separate instance name</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<p>The <code>covergroup</code> instance must be created in the class
-constructor, not a UVM <code>build_phase</code> or other phase
-method</p>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403210225837.png"
-alt="image-20220403210225837" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
-<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
-<p>Typical module UVC coverage:</p>
-<ul>
-<li>Routing - packets flow from input ports to all legal outputs</li>
-<li>latency - all packets received within speicied delay</li>
-</ul>
-<blockquote>
-<p>The module UVC monitor receives data from the interface monitors via
-analysis ports, so the implementation of the analysis write function is
-a convenient place to put coverage code</p>
-</blockquote>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403212529981.png"
-alt="image-20220403212529981" /></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
   </entry>
   <entry>
     <title>GitHub Pages Build and deployment</title>
@@ -8990,6 +8990,91 @@ href="https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vl
       </categories>
   </entry>
   <entry>
+    <title>jitter amplification</title>
+    <url>/2022/03/13/jitter-amplification/</url>
+    <content><![CDATA[<h2 id="transient-noise-and-rms_jitter-function">1. transient noise and
+rms_jitter function</h2>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608233610066.png"
+alt="image-20220608233610066" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220313230930333.png"
+alt="image-20220313230930333" /></p>
+<blockquote>
+<p><code>RJ(rms)</code>: single Edge or Both Edge?</p>
+<p><code>RJ(seed)</code>: what is it?</p>
+</blockquote>
+<h2 id="phase-noise-method">2 phase noise method</h2>
+<p>Directly compare the input phase noise and output phase noise, the
+input waveform maybe is the PLL output or other clock distribution end
+point</p>
+<h2 id="jitter-impulse-responsejir-jitter-impulse-responsejir">3. Jitter
+Impulse Response(JIR) &amp; Jitter Impulse Response(JIR)</h2>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220313231013645.png"
+alt="image-20220313231013645" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220313231027512.png"
+alt="image-20220313231027512" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220313231038542.png"
+alt="image-20220313231038542" /></p>
+<h3 id="example">Example</h3>
+<h4 id="low-pass-filter">Low Pass Filter</h4>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220322124344158.png"
+alt="image-20220322124344158" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">x = <span class="built_in">zeros</span>(N,<span class="number">1</span>);</span><br><span class="line">x(<span class="number">1</span>) = <span class="number">6</span>;</span><br><span class="line">x(<span class="number">2</span>) = <span class="number">-2</span>;</span><br><span class="line">x(<span class="number">3</span>) = <span class="number">0.5</span>;</span><br><span class="line">x = x/<span class="number">5</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(x)</span><br><span class="line">Y = fft(x, N);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>)));</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220322124902394.png"
+alt="image-20220322124902394" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220322124932584.png"
+alt="image-20220322124932584" /></p>
+<h4 id="high-pass-filter">High Pass Filter</h4>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220327010223664.png"
+alt="image-20220327010223664" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">128</span>;</span><br><span class="line">j_hp = <span class="built_in">zeros</span>(N, <span class="number">1</span>);</span><br><span class="line">j_hp(<span class="number">1</span>)= <span class="number">1</span>;</span><br><span class="line">j_hp(<span class="number">2</span>) = <span class="number">0.5</span>;</span><br><span class="line">j_hp(<span class="number">3</span>) = <span class="number">-0.3</span>;</span><br><span class="line">j_hp(<span class="number">4</span>) = <span class="number">0.3</span>;</span><br><span class="line">j_hp(<span class="number">5</span>) = <span class="number">-0.1</span>;</span><br><span class="line">jtf_hp = <span class="built_in">abs</span>(fft(j_hp));</span><br><span class="line">semilogx(jtf_hp(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Jitter Amplification Factor&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220327010421475.png"
+alt="image-20220327010421475" /></p>
+<h3 id="inverter-chain">inverter chain</h3>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608232251056.png"
+alt="image-20220608232251056" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608232658054.png"
+alt="image-20220608232658054" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608232438188.png"
+alt="image-20220608232438188" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">ji = <span class="number">1e-12</span>; <span class="comment">% 1ps</span></span><br><span class="line">data = importdata(<span class="string">&#x27;/path/to/jir.csv&#x27;</span>);</span><br><span class="line">jo = data.data(:, <span class="number">2</span>);</span><br><span class="line">Ts = <span class="number">31.25e-12</span>;</span><br><span class="line">Fs = <span class="number">1</span>/Ts;</span><br><span class="line">jir = jo/ji;</span><br><span class="line">N = <span class="number">2</span>^(<span class="built_in">nextpow2</span>(<span class="built_in">length</span>(jir)<span class="number">-1</span>));</span><br><span class="line">Y = fft(jir, N);</span><br><span class="line">jif = <span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">freqs= Fs/N*(<span class="number">0</span>:N/<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(feqs/<span class="number">1e9</span>, jtf, <span class="string">&#x27;linewidth&#x27;</span>, <span class="number">2</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;JTF&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;JTF of inverter chain&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608233303576.png"
+alt="image-20220608233303576" /></p>
+<h2 id="reference">Reference</h2>
+<p><a
+href="https://people.engr.tamu.edu/spalermo/ecen689/lecture13_ee720_fwd_clk_deskew.pdf">Sam
+Palermo, ECEN 720, Lecture 13 - Forwarded Clock Deskew Circuits</a></p>
+<p>B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and
+Measurement Techniques for High-Speed Data Links—A Tutorial," in IEEE
+Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 1,
+pp. 17-39, Jan. 2009, doi: 10.1109/TCSI.2008.931647.</p>
+<p>Phase-Locked Frequency Generation and Clocking : Architectures and
+Circuits for Modern Wireless and Wireline Systems by Woogeun Rhee (2020,
+Hardcover)</p>
+<p>Mathuranathan Viswanathan, Digital Modulations using Matlab : Build
+Simulation Models from Scratch</p>
+<p>Tony Chan Carusone, University of Toronto, Canada, 2022 CICC
+Educational Sessions "Architectural Considerations in 100+ Gbps Wireline
+Transceivers"</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Jitter Decomposition in High-Speed Links</title>
     <url>/2022/05/21/jitter-decomposition/</url>
     <content><![CDATA[<p>Jitter separation lets you learn if the components of jitter are
@@ -9156,91 +9241,6 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
       </categories>
   </entry>
   <entry>
-    <title>jitter amplification</title>
-    <url>/2022/03/13/jitter-amplification/</url>
-    <content><![CDATA[<h2 id="transient-noise-and-rms_jitter-function">1. transient noise and
-rms_jitter function</h2>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608233610066.png"
-alt="image-20220608233610066" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313230930333.png"
-alt="image-20220313230930333" /></p>
-<blockquote>
-<p><code>RJ(rms)</code>: single Edge or Both Edge?</p>
-<p><code>RJ(seed)</code>: what is it?</p>
-</blockquote>
-<h2 id="phase-noise-method">2 phase noise method</h2>
-<p>Directly compare the input phase noise and output phase noise, the
-input waveform maybe is the PLL output or other clock distribution end
-point</p>
-<h2 id="jitter-impulse-responsejir-jitter-impulse-responsejir">3. Jitter
-Impulse Response(JIR) &amp; Jitter Impulse Response(JIR)</h2>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231013645.png"
-alt="image-20220313231013645" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231027512.png"
-alt="image-20220313231027512" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231038542.png"
-alt="image-20220313231038542" /></p>
-<h3 id="example">Example</h3>
-<h4 id="low-pass-filter">Low Pass Filter</h4>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124344158.png"
-alt="image-20220322124344158" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">x = <span class="built_in">zeros</span>(N,<span class="number">1</span>);</span><br><span class="line">x(<span class="number">1</span>) = <span class="number">6</span>;</span><br><span class="line">x(<span class="number">2</span>) = <span class="number">-2</span>;</span><br><span class="line">x(<span class="number">3</span>) = <span class="number">0.5</span>;</span><br><span class="line">x = x/<span class="number">5</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(x)</span><br><span class="line">Y = fft(x, N);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>)));</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124902394.png"
-alt="image-20220322124902394" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124932584.png"
-alt="image-20220322124932584" /></p>
-<h4 id="high-pass-filter">High Pass Filter</h4>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220327010223664.png"
-alt="image-20220327010223664" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">128</span>;</span><br><span class="line">j_hp = <span class="built_in">zeros</span>(N, <span class="number">1</span>);</span><br><span class="line">j_hp(<span class="number">1</span>)= <span class="number">1</span>;</span><br><span class="line">j_hp(<span class="number">2</span>) = <span class="number">0.5</span>;</span><br><span class="line">j_hp(<span class="number">3</span>) = <span class="number">-0.3</span>;</span><br><span class="line">j_hp(<span class="number">4</span>) = <span class="number">0.3</span>;</span><br><span class="line">j_hp(<span class="number">5</span>) = <span class="number">-0.1</span>;</span><br><span class="line">jtf_hp = <span class="built_in">abs</span>(fft(j_hp));</span><br><span class="line">semilogx(jtf_hp(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Jitter Amplification Factor&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220327010421475.png"
-alt="image-20220327010421475" /></p>
-<h3 id="inverter-chain">inverter chain</h3>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232251056.png"
-alt="image-20220608232251056" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232658054.png"
-alt="image-20220608232658054" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232438188.png"
-alt="image-20220608232438188" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">ji = <span class="number">1e-12</span>; <span class="comment">% 1ps</span></span><br><span class="line">data = importdata(<span class="string">&#x27;/path/to/jir.csv&#x27;</span>);</span><br><span class="line">jo = data.data(:, <span class="number">2</span>);</span><br><span class="line">Ts = <span class="number">31.25e-12</span>;</span><br><span class="line">Fs = <span class="number">1</span>/Ts;</span><br><span class="line">jir = jo/ji;</span><br><span class="line">N = <span class="number">2</span>^(<span class="built_in">nextpow2</span>(<span class="built_in">length</span>(jir)<span class="number">-1</span>));</span><br><span class="line">Y = fft(jir, N);</span><br><span class="line">jif = <span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">freqs= Fs/N*(<span class="number">0</span>:N/<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(feqs/<span class="number">1e9</span>, jtf, <span class="string">&#x27;linewidth&#x27;</span>, <span class="number">2</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;JTF&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;JTF of inverter chain&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608233303576.png"
-alt="image-20220608233303576" /></p>
-<h2 id="reference">Reference</h2>
-<p><a
-href="https://people.engr.tamu.edu/spalermo/ecen689/lecture13_ee720_fwd_clk_deskew.pdf">Sam
-Palermo, ECEN 720, Lecture 13 - Forwarded Clock Deskew Circuits</a></p>
-<p>B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and
-Measurement Techniques for High-Speed Data Links—A Tutorial," in IEEE
-Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 1,
-pp. 17-39, Jan. 2009, doi: 10.1109/TCSI.2008.931647.</p>
-<p>Phase-Locked Frequency Generation and Clocking : Architectures and
-Circuits for Modern Wireless and Wireline Systems by Woogeun Rhee (2020,
-Hardcover)</p>
-<p>Mathuranathan Viswanathan, Digital Modulations using Matlab : Build
-Simulation Models from Scratch</p>
-<p>Tony Chan Carusone, University of Toronto, Canada, 2022 CICC
-Educational Sessions "Architectural Considerations in 100+ Gbps Wireline
-Transceivers"</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>JTAG and Boundary Scan</title>
     <url>/2023/11/28/jtag/</url>
     <content><![CDATA[<p>Data Register, DR:</p>
@@ -9332,6 +9332,15 @@ loaded into the device.</p>
 <p>The AC signal is a test waveform suited for transmission through
 AC-coupling</p>
 </blockquote>
+<h2 id="test-signal-reception">## Test signal reception</h2>
+<ul>
+<li>When <em>an AC testing instruction</em> is loaded, a specialized
+test receiver detects transitoins of the AC signal seen at the input and
+determines if this represents a logic '0' or '1'</li>
+<li>When <em>EXTEST</em> is loaded, the input signal level is detected
+and sent to the output of the test receiver to the Boundary-Scan
+Register cell</li>
+</ul>
 <h2 id="ieee-std-1149.6-2003">IEEE Std 1149.6-2003</h2>
 <p>This standard is built on top of IEEE Std 1149.1 using the same Test
 Access Port structure and Boundary-Scan architecture.</p>
@@ -9342,6 +9351,11 @@ expected to handle <strong>differential and/or AC-coupling</strong></li>
 that are processed by test receivers.</li>
 </ul>
 <h2 id="jtag-instruction">JTAG Instruction</h2>
+<h2 id="implementation">Implementation</h2>
+<ul>
+<li>AC mode hysteresis, detect transistion</li>
+<li>DC mode threshold is determined by jtag initial value</li>
+</ul>
 <h2 id="reference">reference</h2>
 <p>IEEE Std 1149.1-2001, IEEE Standard Test Access Port and
 Boundary-Scan Architecture, IEEE, 2001</p>
@@ -9704,6 +9718,28 @@ Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter
       </tags>
   </entry>
   <entry>
+    <title>Link Modeling &amp; Analysis</title>
+    <url>/2023/11/11/linkModeling/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
+(EPFL). <a
+href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
+generator model for jitter-tolerance simulation</a>; <a
+href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
+models</a></p>
+<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
+Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
+Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
+doi: 10.1109/CICC.2019.8780223.</p>
+<p>Savo Bajic, ECE1392, Integrated Circuits for Digital Communications:
+<strong>StatOpt in Python</strong> [<a
+href="https://savobajic.ca/projects/academic/statopt/">https://savobajic.ca/projects/academic/statopt</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>CDR Linear Model</title>
     <url>/2022/05/04/linear-cdr/</url>
     <content><![CDATA[<p><img src="/2022/05/04/linear-cdr/image-20220504101924272.png"
@@ -9860,28 +9896,6 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
         <tag>jgen</tag>
         <tag>jtol</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Link Modeling &amp; Analysis</title>
-    <url>/2023/11/11/linkModeling/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
-(EPFL). <a
-href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
-generator model for jitter-tolerance simulation</a>; <a
-href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
-models</a></p>
-<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
-Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
-Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
-doi: 10.1109/CICC.2019.8780223.</p>
-<p>Savo Bajic, ECE1392, Integrated Circuits for Digital Communications:
-<strong>StatOpt in Python</strong> [<a
-href="https://savobajic.ca/projects/academic/statopt/">https://savobajic.ca/projects/academic/statopt</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
   </entry>
   <entry>
     <title>Long-Term Jitter</title>
@@ -10253,6 +10267,24 @@ Processing</a></p>
       </categories>
   </entry>
   <entry>
+    <title>Maximum Likelihood Sequence Estimation (MLSE Equalizer)</title>
+    <url>/2023/08/12/mlse/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
+Sheikholeslami, "Design and Implementation of an On-Demand
+Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
+Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
+10.1109/OJCAS.2022.3173686.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>mlse</tag>
+        <tag>viterbi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MOM cap of wo_mx</title>
     <url>/2023/02/20/mom-wo-mx/</url>
     <content><![CDATA[<p>Monte Carlo model:</p>
@@ -10326,24 +10358,6 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Maximum Likelihood Sequence Estimation (MLSE Equalizer)</title>
-    <url>/2023/08/12/mlse/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
-Sheikholeslami, "Design and Implementation of an On-Demand
-Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
-Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
-10.1109/OJCAS.2022.3173686.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>mlse</tag>
-        <tag>viterbi</tag>
-      </tags>
   </entry>
   <entry>
     <title>Nonlinear Systems</title>
@@ -11329,6 +11343,35 @@ href="https://benchugg.com/research_notes/sde_ito_lemma/">https://benchugg.com/r
       </categories>
   </entry>
   <entry>
+    <title>PERC</title>
+    <url>/2023/11/04/perc/</url>
+    <content><![CDATA[<ul>
+<li><p>CD: current density checks</p></li>
+<li><p>P2P: point to point resistance checks</p></li>
+<li><p>LDL: logic driven layout checks, latch up related</p></li>
+<li><p>TOPO: topology, circuit connection and device size
+checks</p></li>
+</ul>
+<blockquote>
+<p>database</p>
+<ul>
+<li><p>CD, P2P, LDL : dfmdb</p></li>
+<li><p>TOPO: svdb</p></li>
+</ul>
+</blockquote>
+<h2 id="references">references</h2>
+<p>Frank Feng. New Approach For Full Chip Electrical Reliability
+Verification [<a
+href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMFlXTm9MelV3TDNCMFlWOHhOamN6TnpWZk5qYzFNVGd6TjE4NE5ESXlOQzV3WkdZPQ==&amp;fname=1454FCFGGCPO45YTNOJCJGJGMKPKHC3534FG35YSA1GDXWFC34QOA0OOQOOKZWCDSSPOGDMP20NO4124YWB4B4LKYSMOQL0400YT34PKUWNK20FG00POUSXXYWXWOO15JCLKSWXWDCOKHG2050JCQKHCXTNPNOVSUSB4JCVW20HGJGTTWW40ZXIH5004A4GDMKJG5020OPMOJDLOML51NOFCSWROB454DGKKFCSTGCDCTXNPA4TWRKGDWW30CGKKDGB0YWLKIH05ML44WSFGQOTWOOECYWGHRKCCDD15A4XSFC14FCJGOO25WXROQLNK00JD31PKWSEC50A4SSOKHHTT">pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>esd</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Parallel Compensation in Two stage amplifier</title>
     <url>/2022/03/07/parallel-compensation/</url>
     <content><![CDATA[<blockquote>
@@ -11456,35 +11499,6 @@ Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
         <tag>stability</tag>
         <tag>compensation</tag>
         <tag>amplifier</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PERC</title>
-    <url>/2023/11/04/perc/</url>
-    <content><![CDATA[<ul>
-<li><p>CD: current density checks</p></li>
-<li><p>P2P: point to point resistance checks</p></li>
-<li><p>LDL: logic driven layout checks, latch up related</p></li>
-<li><p>TOPO: topology, circuit connection and device size
-checks</p></li>
-</ul>
-<blockquote>
-<p>database</p>
-<ul>
-<li><p>CD, P2P, LDL : dfmdb</p></li>
-<li><p>TOPO: svdb</p></li>
-</ul>
-</blockquote>
-<h2 id="references">references</h2>
-<p>Frank Feng. New Approach For Full Chip Electrical Reliability
-Verification [<a
-href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMFlXTm9MelV3TDNCMFlWOHhOamN6TnpWZk5qYzFNVGd6TjE4NE5ESXlOQzV3WkdZPQ==&amp;fname=1454FCFGGCPO45YTNOJCJGJGMKPKHC3534FG35YSA1GDXWFC34QOA0OOQOOKZWCDSSPOGDMP20NO4124YWB4B4LKYSMOQL0400YT34PKUWNK20FG00POUSXXYWXWOO15JCLKSWXWDCOKHG2050JCQKHCXTNPNOVSUSB4JCVW20HGJGTTWW40ZXIH5004A4GDMKJG5020OPMOJDLOML51NOFCSWROB454DGKKFCSTGCDCTXNPA4TWRKGDWW30CGKKDGB0YWLKIH05ML44WSFGQOTWOOECYWGHRKCCDD15A4XSFC14FCJGOO25WXROQLNK00JD31PKWSEC50A4SSOKHHTT">pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>esd</tag>
       </tags>
   </entry>
   <entry>
@@ -12791,26 +12805,6 @@ Digital Domain</h4>
       </categories>
   </entry>
   <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Power Spectra and Power Spectral Densities</title>
     <url>/2022/04/18/ps-psd/</url>
     <content><![CDATA[<p>One will see the following phenomena:</p>
@@ -13246,6 +13240,26 @@ Press. doi:10.1017/CBO9780511835261</p>
       </categories>
   </entry>
   <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Random Signals</title>
     <url>/2023/11/10/random/</url>
     <content><![CDATA[<h2 id="random-processes">Random Processes</h2>
@@ -13547,6 +13561,50 @@ alt="image-20220404195156776" /></p>
       </categories>
   </entry>
   <entry>
+    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
+    <url>/2022/05/01/rhel8-old-kernels/</url>
+    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
+<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
+method for removing kernels and keeping only the latest version and
+running kernel:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
+<p>From the <code>yum</code> man page:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>yum</tag>
+        <tag>rhel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>network connection using nmcli</title>
+    <url>/2022/04/01/rocky-nmcli-network/</url>
+    <content><![CDATA[<h4 id="problem">Problem</h4>
+<p>There is no network connection and device is not managed</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ nmcli device status </span><br><span class="line">DEVICE  TYPE      STATE      CONNECTION            </span><br><span class="line">eth0    ethernet  unmanaged  --  </span><br><span class="line">lo      loopback  unmanaged  --  </span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/04/01/rocky-nmcli-network/image-20220401011509900.png"
+alt="image-20220401011509900" /></p>
+<h4 id="solution">solution</h4>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo nmcli networking on</span><br></pre></td></tr></table></figure>
+<p>Then, <strong>eth0</strong> is connected</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ nmcli device status </span><br><span class="line">DEVICE  TYPE      STATE      CONNECTION            </span><br><span class="line">eth0    ethernet  connected  Ethernet connection 1 </span><br><span class="line">lo      loopback  unmanaged  --  </span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
+alt="image-20220401011543866" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>nmcli</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Relative Sensitivity</title>
     <url>/2023/07/12/relative-sensitivity/</url>
     <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
@@ -13622,50 +13680,6 @@ href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://we
       </categories>
       <tags>
         <tag>parasitic</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>network connection using nmcli</title>
-    <url>/2022/04/01/rocky-nmcli-network/</url>
-    <content><![CDATA[<h4 id="problem">Problem</h4>
-<p>There is no network connection and device is not managed</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ nmcli device status </span><br><span class="line">DEVICE  TYPE      STATE      CONNECTION            </span><br><span class="line">eth0    ethernet  unmanaged  --  </span><br><span class="line">lo      loopback  unmanaged  --  </span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/04/01/rocky-nmcli-network/image-20220401011509900.png"
-alt="image-20220401011509900" /></p>
-<h4 id="solution">solution</h4>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo nmcli networking on</span><br></pre></td></tr></table></figure>
-<p>Then, <strong>eth0</strong> is connected</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ nmcli device status </span><br><span class="line">DEVICE  TYPE      STATE      CONNECTION            </span><br><span class="line">eth0    ethernet  connected  Ethernet connection 1 </span><br><span class="line">lo      loopback  unmanaged  --  </span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
-alt="image-20220401011543866" /></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>nmcli</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
-    <url>/2022/05/01/rhel8-old-kernels/</url>
-    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
-<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
-method for removing kernels and keeping only the latest version and
-running kernel:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
-<p>From the <code>yum</code> man page:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>yum</tag>
-        <tag>rhel</tag>
       </tags>
   </entry>
   <entry>
@@ -15512,6 +15526,59 @@ Topics" DesignCon IBIS Summit 2011</a></p>
       </tags>
   </entry>
   <entry>
+    <title>DC operating points during TRANSIENT analysis</title>
+    <url>/2023/10/06/tranOP/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
+Beckett</a><a
+href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
+11 years ago</a></p>
+<p>Two approaches:</p>
+<ol type="1">
+<li>On the transient options form, there's a field called "infotimes" -
+specify the times at which you want it to output the dc operating point
+data. You can then annotate the "transient operating points" from any of
+these times after the simulation, or access them via the results
+browser.</li>
+<li>Or you could get the operating point data to be continuously saved
+during the transient for selected devices - if so, create a file called
+(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
+M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
+reference the file via Setup-&gt;Model Libraries or as a "definition
+file" on Setup-&gt;Simulation Files. With this approach you can then
+find the operating point data for the selected devices in the results
+browser and plot it versus time (be cautious of saving too much though
+because this can generate a lot of data if you're not careful)</li>
+</ol>
+<p>Regards,</p>
+<p>Andrew.</p>
+</blockquote>
+<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
+alt="image-20231006110801078" /></p>
+<h2 id="transient-options-form">transient options form</h2>
+<h3 id="setup">setup</h3>
+<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
+alt="image-20231006103506475" /></p>
+<h3 id="access-1">access 1</h3>
+<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
+<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
+<strong>Transient Operating Points</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
+alt="image-20231006104317496" /></p>
+<h3 id="access-2">access 2</h3>
+<p><strong>tranOpTimed</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
+alt="image-20231006105236323" /></p>
+<h2 id="save.scs">save.scs</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
+alt="image-20231006110506245" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>TLM</title>
     <url>/2022/04/03/tlm/</url>
     <content><![CDATA[<p><img src="/2022/04/03/tlm/image-20220403094350570.png"
@@ -15937,127 +16004,6 @@ FIFOs</p>
       </categories>
   </entry>
   <entry>
-    <title>DC operating points during TRANSIENT analysis</title>
-    <url>/2023/10/06/tranOP/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
-Beckett</a><a
-href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
-11 years ago</a></p>
-<p>Two approaches:</p>
-<ol type="1">
-<li>On the transient options form, there's a field called "infotimes" -
-specify the times at which you want it to output the dc operating point
-data. You can then annotate the "transient operating points" from any of
-these times after the simulation, or access them via the results
-browser.</li>
-<li>Or you could get the operating point data to be continuously saved
-during the transient for selected devices - if so, create a file called
-(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
-M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
-reference the file via Setup-&gt;Model Libraries or as a "definition
-file" on Setup-&gt;Simulation Files. With this approach you can then
-find the operating point data for the selected devices in the results
-browser and plot it versus time (be cautious of saving too much though
-because this can generate a lot of data if you're not careful)</li>
-</ol>
-<p>Regards,</p>
-<p>Andrew.</p>
-</blockquote>
-<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
-alt="image-20231006110801078" /></p>
-<h2 id="transient-options-form">transient options form</h2>
-<h3 id="setup">setup</h3>
-<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
-alt="image-20231006103506475" /></p>
-<h3 id="access-1">access 1</h3>
-<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
-<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
-<strong>Transient Operating Points</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
-alt="image-20231006104317496" /></p>
-<h3 id="access-2">access 2</h3>
-<p><strong>tranOpTimed</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
-alt="image-20231006105236323" /></p>
-<h2 id="save.scs">save.scs</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
-alt="image-20231006110506245" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Debug topology and Check config usage in UVM</title>
-    <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
-    <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// defaults to table printer</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p>The default printer policy is
-<strong>uvm_default_table_printer</strong></p>
-<p>There are three default printer policies that the uvm_pkg
-provides:</p>
-<blockquote>
-<p>uvm_default_table_printer uvm_default_tree_printer
-uvm_default_line_printer</p>
-</blockquote>
-<h4 id="check-all-configuration-settings">Check all configuration
-settings</h4>
-<p>Check all configuration settings in a components configuration table
-to determine if the setting has been used, overridden or not used. When
-<em>recurse</em> is 1 (default), configuration for this and all child
-components are recursively checked. This function is automatically
-called in the check phase, but can be manually called at any time.</p>
-<p>To get all configuration information prior to the run phase, do
-something like this in your top object:</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	check_config_usage();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="uvm-phase">UVM phase</h4>
-<p><img
-src="/2022/02/21/uvm-debug-topology-config-usage/image-20220221230440017.png"
-alt="image-20220221230440017" /></p>
-<ul>
-<li><strong>Functions</strong> are executed bottom-up (Except for
-<strong>build and final phases</strong> , which are executed
-top-down)</li>
-<li><strong>Tasks</strong> are forked into concurrent executing
-threads</li>
-</ul>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>UVM project topology</title>
-    <url>/2022/03/21/uvm-proj-topo/</url>
-    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
-files</em></p>
-<p>Classes can only be compiled from a <em>module</em> or <em>package
-scope</em></p>
-<p>Recommendation:</p>
-<ul>
-<li>Include related class files into a package</li>
-<li>Import the package into modules where required</li>
-</ul>
-<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
-<ul>
-<li>Import package to access library</li>
-<li>The macro file <code>uvm_macros.svh</code> must be included
-separately</li>
-</ul>
-<p>yapp_packet.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
-<p>yapp_pkg.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
-<p>run.f for <code>xrun</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>PAM4 Transmitter</title>
     <url>/2022/07/20/tx-pam4/</url>
     <content><![CDATA[<h1 id="pam4-basic">PAM4 Basic</h1>
@@ -16330,6 +16276,74 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Debug topology and Check config usage in UVM</title>
+    <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
+    <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// defaults to table printer</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p>The default printer policy is
+<strong>uvm_default_table_printer</strong></p>
+<p>There are three default printer policies that the uvm_pkg
+provides:</p>
+<blockquote>
+<p>uvm_default_table_printer uvm_default_tree_printer
+uvm_default_line_printer</p>
+</blockquote>
+<h4 id="check-all-configuration-settings">Check all configuration
+settings</h4>
+<p>Check all configuration settings in a components configuration table
+to determine if the setting has been used, overridden or not used. When
+<em>recurse</em> is 1 (default), configuration for this and all child
+components are recursively checked. This function is automatically
+called in the check phase, but can be manually called at any time.</p>
+<p>To get all configuration information prior to the run phase, do
+something like this in your top object:</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	check_config_usage();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="uvm-phase">UVM phase</h4>
+<p><img
+src="/2022/02/21/uvm-debug-topology-config-usage/image-20220221230440017.png"
+alt="image-20220221230440017" /></p>
+<ul>
+<li><strong>Functions</strong> are executed bottom-up (Except for
+<strong>build and final phases</strong> , which are executed
+top-down)</li>
+<li><strong>Tasks</strong> are forked into concurrent executing
+threads</li>
+</ul>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UVM project topology</title>
+    <url>/2022/03/21/uvm-proj-topo/</url>
+    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
+files</em></p>
+<p>Classes can only be compiled from a <em>module</em> or <em>package
+scope</em></p>
+<p>Recommendation:</p>
+<ul>
+<li>Include related class files into a package</li>
+<li>Import the package into modules where required</li>
+</ul>
+<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
+<ul>
+<li>Import package to access library</li>
+<li>The macro file <code>uvm_macros.svh</code> must be included
+separately</li>
+</ul>
+<p>yapp_packet.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
+<p>yapp_pkg.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
+<p>run.f for <code>xrun</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -16817,94 +16831,6 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       </categories>
   </entry>
   <entry>
-    <title>Different Variants of the PSD Definition</title>
-    <url>/2023/06/03/variants-def-psd/</url>
-    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
-slightly different variants of the PSD definition, depending on the
-particular application or research field.</p>
-<ul>
-<li><p><strong>Two-Sided PSD</strong>, <span
-class="math inline">\(S_x(f)\)</span></p>
-<p>this is a synonym of the PSD defined as the Fourier Transform of the
-<strong>autocorrelation</strong>.</p></li>
-<li><p><strong>One-Sided PSD</strong>, <span
-class="math inline">\(S&#39;_x(f)\)</span></p>
-<p>this is a variant derived from the <em>two-sided PSD</em> by
-considering only the <em>positive frequency</em> semi-axis.</p>
-<p>To <strong>conserve the total power</strong>, the value of the
-one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
-class="math display">\[
-S&#39;_x(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_x(f) &amp; : \ f = 0 \\
-2S_x(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
-alt="image-20230603185546658" /></p>
-<blockquote>
-<p>Note that the one-sided PSD definition makes sense only if the
-two-sided is an even function of <span
-class="math inline">\(f\)</span></p>
-</blockquote>
-<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
-symmetrical around a positive frequency <span
-class="math inline">\(f_0\)</span>, then two additional definitions can
-be adopted:</p>
-<ul>
-<li><p><strong>Single-Sideband PSD</strong>, <span
-class="math inline">\(S_{SSB,x}(f)\)</span></p>
-<p>This is obtained from <span
-class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
-frequency axis to <span class="math inline">\(f_0\)</span> <span
-class="math display">\[
-S_{SSB,x}(f) =S&#39;_x(f+f_0)
-\]</span> This concept is particularly useful for describing phase or
-amplitude modulation schemes in wireless communications, where <span
-class="math inline">\(f_0\)</span> is the carrier frequency.</p>
-<blockquote>
-<p>Note that there is no difference in the values of the one-sided
-versus the SSB PSD; it is just a pure translation on the frequency
-axis.</p>
-</blockquote></li>
-<li><p><strong>Double-Sideband PSD</strong>, <span
-class="math inline">\(S_{DSB,x}(f)\)</span></p>
-<p>this is a variant of the SSB PSD obtained by considering only the
-positive frequency semi-axis.</p>
-<p>As in the case of the one-sided PSD, to conserve total power, the
-value of the DSB PSD is twice that of the SSB <span
-class="math display">\[
-S_{DSB,x}(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_{SSB,x}(f) &amp; : \ f = 0 \\
-2S_{SSB,x}(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
-alt="image-20230603222054506" /></p>
-<blockquote>
-<p>Note that the DSB definition makes sense only if the SSB PSD is even
-symmetrical around zero</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
-and phase noise: A circuits and systems perspective. Cambridge
-University Press.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>psd</tag>
-        <tag>two-sided</tag>
-        <tag>one-sided</tag>
-        <tag>ssb</tag>
-        <tag>dsb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UVM REG RALF &amp; IP-XACT</title>
     <url>/2022/03/14/uvm-reg-ralf/</url>
     <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
@@ -17065,6 +16991,94 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
       </categories>
   </entry>
   <entry>
+    <title>Different Variants of the PSD Definition</title>
+    <url>/2023/06/03/variants-def-psd/</url>
+    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
+slightly different variants of the PSD definition, depending on the
+particular application or research field.</p>
+<ul>
+<li><p><strong>Two-Sided PSD</strong>, <span
+class="math inline">\(S_x(f)\)</span></p>
+<p>this is a synonym of the PSD defined as the Fourier Transform of the
+<strong>autocorrelation</strong>.</p></li>
+<li><p><strong>One-Sided PSD</strong>, <span
+class="math inline">\(S&#39;_x(f)\)</span></p>
+<p>this is a variant derived from the <em>two-sided PSD</em> by
+considering only the <em>positive frequency</em> semi-axis.</p>
+<p>To <strong>conserve the total power</strong>, the value of the
+one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
+class="math display">\[
+S&#39;_x(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_x(f) &amp; : \ f = 0 \\
+2S_x(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
+alt="image-20230603185546658" /></p>
+<blockquote>
+<p>Note that the one-sided PSD definition makes sense only if the
+two-sided is an even function of <span
+class="math inline">\(f\)</span></p>
+</blockquote>
+<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
+symmetrical around a positive frequency <span
+class="math inline">\(f_0\)</span>, then two additional definitions can
+be adopted:</p>
+<ul>
+<li><p><strong>Single-Sideband PSD</strong>, <span
+class="math inline">\(S_{SSB,x}(f)\)</span></p>
+<p>This is obtained from <span
+class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
+frequency axis to <span class="math inline">\(f_0\)</span> <span
+class="math display">\[
+S_{SSB,x}(f) =S&#39;_x(f+f_0)
+\]</span> This concept is particularly useful for describing phase or
+amplitude modulation schemes in wireless communications, where <span
+class="math inline">\(f_0\)</span> is the carrier frequency.</p>
+<blockquote>
+<p>Note that there is no difference in the values of the one-sided
+versus the SSB PSD; it is just a pure translation on the frequency
+axis.</p>
+</blockquote></li>
+<li><p><strong>Double-Sideband PSD</strong>, <span
+class="math inline">\(S_{DSB,x}(f)\)</span></p>
+<p>this is a variant of the SSB PSD obtained by considering only the
+positive frequency semi-axis.</p>
+<p>As in the case of the one-sided PSD, to conserve total power, the
+value of the DSB PSD is twice that of the SSB <span
+class="math display">\[
+S_{DSB,x}(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_{SSB,x}(f) &amp; : \ f = 0 \\
+2S_{SSB,x}(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
+alt="image-20230603222054506" /></p>
+<blockquote>
+<p>Note that the DSB definition makes sense only if the SSB PSD is even
+symmetrical around zero</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
+and phase noise: A circuits and systems perspective. Cambridge
+University Press.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>psd</tag>
+        <tag>two-sided</tag>
+        <tag>one-sided</tag>
+        <tag>ssb</tag>
+        <tag>dsb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Process Variation</title>
     <url>/2022/03/02/variation/</url>
     <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
@@ -17194,33 +17208,6 @@ href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-gui
       <categories>
         <category>analog</category>
       </categories>
-  </entry>
-  <entry>
-    <title>variables with statistical distribution</title>
-    <url>/2023/10/05/varstat/</url>
-    <content><![CDATA[<p><code>Specifying Parameter Distributions Using Statistics Blocks</code></p>
-<ul>
-<li><code>process</code>: generate random number once per MC run</li>
-<li><code>mismatch</code> : generate a random number per instance</li>
-</ul>
-<p><img src="/2023/10/05/varstat/image-20231005190644654.png"
-alt="image-20231005190644654" /></p>
-<p><img src="/2023/10/05/varstat/image-20231005190712057.png"
-alt="image-20231005190712057" /></p>
-<p><img src="/2023/10/05/varstat/image-20231005190724560.png"
-alt="image-20231005190724560" /></p>
-<h2 id="reference">reference</h2>
-<p>Article (20498356) Title: How to vary design variables with
-statistical distribution to be used with Monte Carlo analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0</a></p>
-<p>Spectre Circuit Simulator Reference</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>mc</tag>
-      </tags>
   </entry>
   <entry>
     <title>VCS &amp; Verdi</title>
@@ -17410,6 +17397,33 @@ in Verdi | Synopsys</a></p>
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>variables with statistical distribution</title>
+    <url>/2023/10/05/varstat/</url>
+    <content><![CDATA[<p><code>Specifying Parameter Distributions Using Statistics Blocks</code></p>
+<ul>
+<li><code>process</code>: generate random number once per MC run</li>
+<li><code>mismatch</code> : generate a random number per instance</li>
+</ul>
+<p><img src="/2023/10/05/varstat/image-20231005190644654.png"
+alt="image-20231005190644654" /></p>
+<p><img src="/2023/10/05/varstat/image-20231005190712057.png"
+alt="image-20231005190712057" /></p>
+<p><img src="/2023/10/05/varstat/image-20231005190724560.png"
+alt="image-20231005190724560" /></p>
+<h2 id="reference">reference</h2>
+<p>Article (20498356) Title: How to vary design variables with
+statistical distribution to be used with Monte Carlo analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0</a></p>
+<p>Spectre Circuit Simulator Reference</p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>mc</tag>
+      </tags>
   </entry>
   <entry>
     <title>verilog constant part-select and indexed part-select</title>

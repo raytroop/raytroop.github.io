@@ -192,6 +192,156 @@ href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm">https:/
       </categories>
   </entry>
   <entry>
+    <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
+    <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
+    <content><![CDATA[<h4
+id="how-does-edi-system-identify-spare-cells-in-a-post-mask-eco-flow">How
+does EDI System identify spare cells in a post-mask ECO flow?</h4>
+<p>Spare cells should have a unique string in their instance name to
+identify them. Then the command <code>specifySpareGate</code> or
+<code>ecoDesign -useSpareCells patternName</code> is run to identify the
+spare instances. For example, if all spare cells have _spare_ in their
+name then they are identified using:</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst *_spare_*</span><br></pre></td></tr></table></figure>
+<p>OR</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">ecoDesign -spareCells *_spare_* ...</span><br></pre></td></tr></table></figure>
+<p><strong>Note</strong>: if you are making <strong>manual ECO</strong>
+changes to a netlist and converting a spare cell to a logical instance,
+<strong>it's important to change the instance name</strong>. Otherwise,
+the instance may be identified as a spare cell if a future ECO is
+performed because it still has the spare cell instance name.</p>
+<h4 id="example">Example</h4>
+<h5 id="the-cell-to-be-swapped-is-unplaced">The cell to be swapped is
+unplaced</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307002842020.png"
+alt="image-20220307002842020" /></p>
+<p>pre_buf: <strong>unplaced</strong></p>
+<p>spare_buf: <strong>placed</strong></p>
+<blockquote>
+<p>innovus 49&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 50&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst spare_*</span><br><span class="line">ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307003059068.png"
+alt="image-20220307003059068" /></p>
+<blockquote>
+<p>innovus 55&gt; dbGet top.insts.name</p>
+<p><strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 56&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef6150</strong> 0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 57&gt; dbGet top.insts.Pstatus</p>
+<p><strong>placed</strong> fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the unplaced cell.</p>
+<h5 id="the-cell-to-be-swapped-is-placed">The cell to be swapped is
+placed</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307004654614.png"
+alt="image-20220307004654614" /></p>
+<blockquote>
+<p>innovus 62&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 63&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 64&gt; dbGet top.insts.pStatus</p>
+<p><strong>placed</strong> <strong>placed</strong> fixed fixed</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">innovus <span class="number">66</span>&gt; specifySpareGate -inst spare_*</span><br><span class="line">Specifying instance [spare_buf] as spare gate.</span><br><span class="line">Specified <span class="number">1</span> instances as spare gate.</span><br><span class="line">innovus <span class="number">67</span>&gt; ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307005254488.png"
+alt="image-20220307005254488" /></p>
+<blockquote>
+<p>innovus 68&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf pre_buf</strong> UDriver USink</p>
+<p>innovus 69&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0 0x7f7b03ef6150</strong> 0x7f7b03ef6000
+0x7f7b03ef6070</p>
+<p>innovus 70&gt; dbGet top.insts.pStatus</p>
+<p>placed placed fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the placed cell.</p>
+<h5 id="error-in-innovus-text-command-reference-21.12">Error in "Innovus
+Text Command Reference 21.12"</h5>
+<p><strong>ecoSwapSpareCell</strong></p>
+<p><del>If the cell to be swapped is unplaced, it is mapped to the spare
+cell. <code>*instName*</code> is deleted, and its connection is
+transferred to the spare cell. If the cell to be swapped is placed, it
+is swapped with the spare cell and is renamed to
+<code>*instNameSuffix*</code> if the <code>-suffix</code> option is
+used. If a suffix is not specified, the <code>*instName*</code> cell is
+renamed to <code>*spareCellInstName*</code>. The <code>*instName*</code>
+cell's connections are transferred to <code>*spareCellInstName*</code>.
+The input of <code>*instName*</code> is <code>tielo</code>, based on the
+global connection definition.</del></p>
+<p><strong>reference:</strong></p>
+<p><a
+href="https://community.cadence.com/cadence_blogs_8/b/di/posts/answers-to-frequently-asked-questions-when-performing-ecos-in-edi-system">Answers
+to Top 10 Questions on Performing ECOs in EDI System</a></p>
+<p><a
+href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html">EE
+582: Physical Design Automation of VLSI Circuits and Systems</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>eco</tag>
+        <tag>sparecell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Efficient Sequence Objection in UVM</title>
+    <url>/2022/02/21/Efficient-Sequence-Objection/</url>
+    <content><![CDATA[<p>Objections are handled in <strong>pre/post body</strong> decalared in
+a base sequence class</p>
+<p>This is efficient for all sequence execution options:</p>
+<ul>
+<li><p>Default sequences use body objections</p></li>
+<li><p>Test sequences use test objections</p></li>
+<li><p>Subsequences use objections of the root sequence which calls
+them</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_base_seq <span class="keyword">extends</span> uvm_sequence<span class="variable">#(yapp_packet)</span>;</span><br><span class="line">…</span><br><span class="line">    <span class="keyword">task</span> pre_body();</span><br><span class="line">        <span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">        	starting_phase<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    <span class="keyword">task</span> post_body();</span><br><span class="line">    	<span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">    		starting_phase<span class="variable">.drop_objection</span>(<span class="keyword">this</span>, get_type_name());	</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">…</span><br><span class="line"><span class="keyword">class</span> yapp012 <span class="keyword">extends</span> yapp_base_seq;</span><br><span class="line">…</span><br></pre></td></tr></table></figure>
+<p><strong>Set as default sequence of sequencer:</strong></p>
+<p>A default sequence is a root sequence, so the <strong>pre/post
+body</strong> methods are executed and objection are raised/dropped
+there</p>
+<p><strong>Test sequence:</strong></p>
+<p>A test sequence is a root sequence, so the <strong>pre/post
+body</strong> methods are executed. However, for a test sequence,
+<code>starting_phase</code> is <code>null</code> and so the objection is
+not handled in the sequence. The test must raise and drop objections</p>
+<p><strong>Subsequence:</strong></p>
+<p>Not a root sequence, so <strong>pre/post body</strong> methods are
+not executed. The root sequence which ultimately called the subsequence
+handles the objections, using one of the two options above.</p>
+<blockquote>
+<p>If a <strong>sequence</strong> is call via a <strong>`uvm_do</strong>
+variant, the it is defined as a subsequence and its
+<strong>pre/post_body()</strong> methods are not executed.</p>
+</blockquote>
+<p><strong>objection change in UVM1.2</strong></p>
+<p>Raising or dropping objections directly from
+<code>starting_phase</code> is deprecated</p>
+<ul>
+<li><p>must use <code>get_starting_phase()</code> method</p></li>
+<li><p>prevents modification of phase during sequence</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Dynamic Specification of Data Converter</title>
     <url>/2023/03/29/Dynamic-specification-converter/</url>
     <content><![CDATA[<h2 id="term-abbreviation">Term Abbreviation</h2>
@@ -344,156 +494,6 @@ href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effect
         <tag>dac</tag>
         <tag>Sampling</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
-    <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
-    <content><![CDATA[<h4
-id="how-does-edi-system-identify-spare-cells-in-a-post-mask-eco-flow">How
-does EDI System identify spare cells in a post-mask ECO flow?</h4>
-<p>Spare cells should have a unique string in their instance name to
-identify them. Then the command <code>specifySpareGate</code> or
-<code>ecoDesign -useSpareCells patternName</code> is run to identify the
-spare instances. For example, if all spare cells have _spare_ in their
-name then they are identified using:</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst *_spare_*</span><br></pre></td></tr></table></figure>
-<p>OR</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">ecoDesign -spareCells *_spare_* ...</span><br></pre></td></tr></table></figure>
-<p><strong>Note</strong>: if you are making <strong>manual ECO</strong>
-changes to a netlist and converting a spare cell to a logical instance,
-<strong>it's important to change the instance name</strong>. Otherwise,
-the instance may be identified as a spare cell if a future ECO is
-performed because it still has the spare cell instance name.</p>
-<h4 id="example">Example</h4>
-<h5 id="the-cell-to-be-swapped-is-unplaced">The cell to be swapped is
-unplaced</h5>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307002842020.png"
-alt="image-20220307002842020" /></p>
-<p>pre_buf: <strong>unplaced</strong></p>
-<p>spare_buf: <strong>placed</strong></p>
-<blockquote>
-<p>innovus 49&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 50&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
-0x7f7b03ef6000 0x7f7b03ef6070</p>
-</blockquote>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst spare_*</span><br><span class="line">ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307003059068.png"
-alt="image-20220307003059068" /></p>
-<blockquote>
-<p>innovus 55&gt; dbGet top.insts.name</p>
-<p><strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 56&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef6150</strong> 0x7f7b03ef6000 0x7f7b03ef6070</p>
-<p>innovus 57&gt; dbGet top.insts.Pstatus</p>
-<p><strong>placed</strong> fixed fixed</p>
-</blockquote>
-<p><strong>Note</strong>: sparecell's pointer and name is swapped with
-the unplaced cell.</p>
-<h5 id="the-cell-to-be-swapped-is-placed">The cell to be swapped is
-placed</h5>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307004654614.png"
-alt="image-20220307004654614" /></p>
-<blockquote>
-<p>innovus 62&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 63&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
-0x7f7b03ef6000 0x7f7b03ef6070</p>
-<p>innovus 64&gt; dbGet top.insts.pStatus</p>
-<p><strong>placed</strong> <strong>placed</strong> fixed fixed</p>
-</blockquote>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">innovus <span class="number">66</span>&gt; specifySpareGate -inst spare_*</span><br><span class="line">Specifying instance [spare_buf] as spare gate.</span><br><span class="line">Specified <span class="number">1</span> instances as spare gate.</span><br><span class="line">innovus <span class="number">67</span>&gt; ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307005254488.png"
-alt="image-20220307005254488" /></p>
-<blockquote>
-<p>innovus 68&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf pre_buf</strong> UDriver USink</p>
-<p>innovus 69&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0 0x7f7b03ef6150</strong> 0x7f7b03ef6000
-0x7f7b03ef6070</p>
-<p>innovus 70&gt; dbGet top.insts.pStatus</p>
-<p>placed placed fixed fixed</p>
-</blockquote>
-<p><strong>Note</strong>: sparecell's pointer and name is swapped with
-the placed cell.</p>
-<h5 id="error-in-innovus-text-command-reference-21.12">Error in "Innovus
-Text Command Reference 21.12"</h5>
-<p><strong>ecoSwapSpareCell</strong></p>
-<p><del>If the cell to be swapped is unplaced, it is mapped to the spare
-cell. <code>*instName*</code> is deleted, and its connection is
-transferred to the spare cell. If the cell to be swapped is placed, it
-is swapped with the spare cell and is renamed to
-<code>*instNameSuffix*</code> if the <code>-suffix</code> option is
-used. If a suffix is not specified, the <code>*instName*</code> cell is
-renamed to <code>*spareCellInstName*</code>. The <code>*instName*</code>
-cell's connections are transferred to <code>*spareCellInstName*</code>.
-The input of <code>*instName*</code> is <code>tielo</code>, based on the
-global connection definition.</del></p>
-<p><strong>reference:</strong></p>
-<p><a
-href="https://community.cadence.com/cadence_blogs_8/b/di/posts/answers-to-frequently-asked-questions-when-performing-ecos-in-edi-system">Answers
-to Top 10 Questions on Performing ECOs in EDI System</a></p>
-<p><a
-href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html">EE
-582: Physical Design Automation of VLSI Circuits and Systems</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>eco</tag>
-        <tag>sparecell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Efficient Sequence Objection in UVM</title>
-    <url>/2022/02/21/Efficient-Sequence-Objection/</url>
-    <content><![CDATA[<p>Objections are handled in <strong>pre/post body</strong> decalared in
-a base sequence class</p>
-<p>This is efficient for all sequence execution options:</p>
-<ul>
-<li><p>Default sequences use body objections</p></li>
-<li><p>Test sequences use test objections</p></li>
-<li><p>Subsequences use objections of the root sequence which calls
-them</p></li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_base_seq <span class="keyword">extends</span> uvm_sequence<span class="variable">#(yapp_packet)</span>;</span><br><span class="line">…</span><br><span class="line">    <span class="keyword">task</span> pre_body();</span><br><span class="line">        <span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">        	starting_phase<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    <span class="keyword">task</span> post_body();</span><br><span class="line">    	<span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">    		starting_phase<span class="variable">.drop_objection</span>(<span class="keyword">this</span>, get_type_name());	</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">…</span><br><span class="line"><span class="keyword">class</span> yapp012 <span class="keyword">extends</span> yapp_base_seq;</span><br><span class="line">…</span><br></pre></td></tr></table></figure>
-<p><strong>Set as default sequence of sequencer:</strong></p>
-<p>A default sequence is a root sequence, so the <strong>pre/post
-body</strong> methods are executed and objection are raised/dropped
-there</p>
-<p><strong>Test sequence:</strong></p>
-<p>A test sequence is a root sequence, so the <strong>pre/post
-body</strong> methods are executed. However, for a test sequence,
-<code>starting_phase</code> is <code>null</code> and so the objection is
-not handled in the sequence. The test must raise and drop objections</p>
-<p><strong>Subsequence:</strong></p>
-<p>Not a root sequence, so <strong>pre/post body</strong> methods are
-not executed. The root sequence which ultimately called the subsequence
-handles the objections, using one of the two options above.</p>
-<blockquote>
-<p>If a <strong>sequence</strong> is call via a <strong>`uvm_do</strong>
-variant, the it is defined as a subsequence and its
-<strong>pre/post_body()</strong> methods are not executed.</p>
-</blockquote>
-<p><strong>objection change in UVM1.2</strong></p>
-<p>Raising or dropping objections directly from
-<code>starting_phase</code> is deprecated</p>
-<ul>
-<li><p>must use <code>get_starting_phase()</code> method</p></li>
-<li><p>prevents modification of phase during sequence</p></li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
   </entry>
   <entry>
     <title>Custom Design with FinFETs</title>
@@ -699,18 +699,6 @@ accessing all the central UVM services such as
       </categories>
   </entry>
   <entry>
-    <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
-    <url>/2022/02/07/Innovus-Clock-Concurrent-Optimization-Technology/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Clock_Concurrent_Optimization_Technology.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>INL, DNL analysis of current steering DAC</title>
     <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
     <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
@@ -728,6 +716,18 @@ current steering DAC</h2>
       <tags>
         <tag>dac</tag>
         <tag>mismatch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
+    <url>/2022/02/07/Innovus-Clock-Concurrent-Optimization-Technology/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Clock_Concurrent_Optimization_Technology.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
       </tags>
   </entry>
   <entry>
@@ -870,18 +870,6 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Fix DRC Violation</title>
-    <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Innovus Floorplan</title>
     <url>/2022/02/07/Innovus-floorplan/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
@@ -894,9 +882,9 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus timeDesign vs. report_timing</title>
-    <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
+    <title>Innovus Fix DRC Violation</title>
+    <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -909,6 +897,18 @@ alt="createPGPin_onDie.drawio" /></p>
     <title>Innovus global and localSkew</title>
     <url>/2022/02/07/Innovus-global-and-localSkew/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Innovus timeDesign vs. report_timing</title>
+    <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2617,29 +2617,6 @@ Publishers Inc., San Francisco, CA, USA.</p>
       </categories>
   </entry>
   <entry>
-    <title>Arithmetic in Verilog</title>
-    <url>/2022/05/29/arthmetic-verilog/</url>
-    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>1'b1</code>: overflow</p>
-</blockquote>
-<h4 id="signed-signed-signed">signed + signed = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code>: overflow</p>
-<p><code>2'b10</code>: underflow</p>
-</blockquote>
-<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Antenna Effect</title>
     <url>/2023/08/08/antenna/</url>
     <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
@@ -2738,6 +2715,29 @@ href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">
         <tag>ptat</tag>
         <tag>ctat</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Arithmetic in Verilog</title>
+    <url>/2022/05/29/arthmetic-verilog/</url>
+    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>1'b1</code>: overflow</p>
+</blockquote>
+<h4 id="signed-signed-signed">signed + signed = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code>: overflow</p>
+<p><code>2'b10</code>: underflow</p>
+</blockquote>
+<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Bilinear Transformation</title>
@@ -6950,93 +6950,6 @@ Sixth international symposium on quality electronic design (isqed'05),
       </tags>
   </entry>
   <entry>
-    <title>Functional Coverage Modeling</title>
-    <url>/2022/04/03/functional-coverage/</url>
-    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
-<ul>
-<li>Explicit (user defined)
-<ul>
-<li>Fully and clearly expressed within sources
-<ul>
-<li>Sequence and temporal coverage using assertions</li>
-<li>Data-oriented coverage using <code>covergroup</code></li>
-</ul></li>
-<li>Planned and defined by the verification team</li>
-</ul></li>
-<li>Implicit
-<ul>
-<li>Derived or computed from source
-<ul>
-<li>Code coverage measured by the simulator</li>
-</ul></li>
-<li>May be defined outside the verification team</li>
-<li>May be implied by the verification interface
-<ul>
-<li>e.g., an industry standard protocol</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
-Systemverilog</h2>
-<h3 id="assertions-for-control-oriented-coverage">Assertions for
-control-oriented coverage</h3>
-<ul>
-<li>Defined as procedural statements</li>
-<li><strong>CANNOT</strong> be defined in a class</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
-and the cover directive. It is used to cover sequences of signal values
-over time. Assertions cannot be declared or "covered" in a class
-declaration, so their use in an UVM verification environment is
-restricted to <strong>interface only</strong></p>
-</blockquote>
-<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
-data-oriented coverage</h3>
-<ul>
-<li>CAN be declared as a class member and created in class
-constructor</li>
-<li>Used in <strong>interface</strong> and module UVCs</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Data-oriented coverage uses the <code>covergroup</code> construct.
-Covergroups can be declared and created in classes, therefore they are
-essential for explicit coverage in a UVM verification environment.</p>
-</blockquote>
-<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
-<p><code>covergroup new</code> constructor is called
-<strong>directly</strong> off the declaration of the covergroup, it does
-not have a separate instance name</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<p>The <code>covergroup</code> instance must be created in the class
-constructor, not a UVM <code>build_phase</code> or other phase
-method</p>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403210225837.png"
-alt="image-20220403210225837" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
-<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
-<p>Typical module UVC coverage:</p>
-<ul>
-<li>Routing - packets flow from input ports to all legal outputs</li>
-<li>latency - all packets received within speicied delay</li>
-</ul>
-<blockquote>
-<p>The module UVC monitor receives data from the interface monitors via
-analysis ports, so the implementation of the analysis write function is
-a convenient place to put coverage code</p>
-</blockquote>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403212529981.png"
-alt="image-20220403212529981" /></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Fourier Analysis 101</title>
     <url>/2023/05/15/fourier101/</url>
     <content><![CDATA[<h2 id="the-dirac-comb-function">The Dirac Comb function</h2>
@@ -7414,6 +7327,93 @@ href="https://coecs.ou.edu/Joseph.P.Havlicek/ece3793/notes/ECE3793NotesCh07.pdf"
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Functional Coverage Modeling</title>
+    <url>/2022/04/03/functional-coverage/</url>
+    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
+<ul>
+<li>Explicit (user defined)
+<ul>
+<li>Fully and clearly expressed within sources
+<ul>
+<li>Sequence and temporal coverage using assertions</li>
+<li>Data-oriented coverage using <code>covergroup</code></li>
+</ul></li>
+<li>Planned and defined by the verification team</li>
+</ul></li>
+<li>Implicit
+<ul>
+<li>Derived or computed from source
+<ul>
+<li>Code coverage measured by the simulator</li>
+</ul></li>
+<li>May be defined outside the verification team</li>
+<li>May be implied by the verification interface
+<ul>
+<li>e.g., an industry standard protocol</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
+Systemverilog</h2>
+<h3 id="assertions-for-control-oriented-coverage">Assertions for
+control-oriented coverage</h3>
+<ul>
+<li>Defined as procedural statements</li>
+<li><strong>CANNOT</strong> be defined in a class</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
+and the cover directive. It is used to cover sequences of signal values
+over time. Assertions cannot be declared or "covered" in a class
+declaration, so their use in an UVM verification environment is
+restricted to <strong>interface only</strong></p>
+</blockquote>
+<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
+data-oriented coverage</h3>
+<ul>
+<li>CAN be declared as a class member and created in class
+constructor</li>
+<li>Used in <strong>interface</strong> and module UVCs</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Data-oriented coverage uses the <code>covergroup</code> construct.
+Covergroups can be declared and created in classes, therefore they are
+essential for explicit coverage in a UVM verification environment.</p>
+</blockquote>
+<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
+<p><code>covergroup new</code> constructor is called
+<strong>directly</strong> off the declaration of the covergroup, it does
+not have a separate instance name</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<p>The <code>covergroup</code> instance must be created in the class
+constructor, not a UVM <code>build_phase</code> or other phase
+method</p>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403210225837.png"
+alt="image-20220403210225837" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
+<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
+<p>Typical module UVC coverage:</p>
+<ul>
+<li>Routing - packets flow from input ports to all legal outputs</li>
+<li>latency - all packets received within speicied delay</li>
+</ul>
+<blockquote>
+<p>The module UVC monitor receives data from the interface monitors via
+analysis ports, so the implementation of the analysis write function is
+a convenient place to put coverage code</p>
+</blockquote>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403212529981.png"
+alt="image-20220403212529981" /></p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -7818,6 +7818,27 @@ possible without cloning.</p></li>
       </categories>
   </entry>
   <entry>
+    <title>I2C Communication Protocol - I2C, SMBus</title>
+    <url>/2023/10/05/i2c/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>UM10204 I2C-bus specification and user manual [<a
+href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">https://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>]</p>
+<p>AN10216-01 I2C MANUAL [<a
+href="https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf">https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf</a>]</p>
+<p>System Management Bus (SMBus) Specification [<a
+href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">http://smbus.org/specs/SMBus_3_2_20220112.pdf</a>]</p>
+<p>I2C Primer [<a
+href="https://www.i2c-bus.org/i2c-primer/">https://www.i2c-bus.org/i2c-primer/</a>]</p>
+<p>smbus2, A drop-in replacement for smbus-cffi/smbus-python in pure
+Python [<a
+href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kplindegaard/smbus2/tree/master</a>]</p>
+<p>THE BOOK OF I2C A Guide for Adventurers by Randall Hyde</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>hunting jitter</title>
     <url>/2022/03/16/hunting-jitter/</url>
     <content><![CDATA[<p>Due to the following two reasons in Bang-Bang CDR</p>
@@ -7847,27 +7868,6 @@ focusing on bang-bang loop CDR design methodology, ISSCC Short Course,
         <tag>pll</tag>
         <tag>cdr</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>I2C Communication Protocol - I2C, SMBus</title>
-    <url>/2023/10/05/i2c/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>UM10204 I2C-bus specification and user manual [<a
-href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">https://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>]</p>
-<p>AN10216-01 I2C MANUAL [<a
-href="https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf">https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf</a>]</p>
-<p>System Management Bus (SMBus) Specification [<a
-href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">http://smbus.org/specs/SMBus_3_2_20220112.pdf</a>]</p>
-<p>I2C Primer [<a
-href="https://www.i2c-bus.org/i2c-primer/">https://www.i2c-bus.org/i2c-primer/</a>]</p>
-<p>smbus2, A drop-in replacement for smbus-cffi/smbus-python in pure
-Python [<a
-href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kplindegaard/smbus2/tree/master</a>]</p>
-<p>THE BOOK OF I2C A Guide for Adventurers by Randall Hyde</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
   </entry>
   <entry>
     <title>In-design Sign-off Metal Fill Flow in Innovus</title>
@@ -8081,6 +8081,75 @@ alt="pma_dig_bumps.drawio" /></p>
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+      <tags>
+        <tag>integrator</tag>
+        <tag>ota</tag>
+        <tag>slew rate</tag>
+        <tag>bandwidth</tag>
+      </tags>
   </entry>
   <entry>
     <title>Circuit insight</title>
@@ -8494,8 +8563,15 @@ alt="image-20230102000059723" /></p>
 <p><img src="/2023/01/01/insight/image-20230103220933081.png"
 alt="image-20230103220933081" /></p>
 <blockquote>
-<p>small gm/ID for High ro</p>
+<p>small gm/ID for High ro, or high Early voltage <span
+class="math inline">\(V_A\)</span></p>
 </blockquote>
+<h2 id="transit-frequency-f_t">Transit Frequency <span
+class="math inline">\(f_T\)</span></h2>
+<p>Defined as the frequency at which the <strong>small-signal current
+gain</strong> of a device is <strong>unity</strong></p>
+<p><img src="/2023/01/01/insight/image-20231213234524075.png"
+alt="image-20231213234524075" /></p>
 <h2 id="spectral-content-of-nrz">Spectral content of NRZ</h2>
 <p><img src="/2023/01/01/insight/image-20231111100420675.png"
 alt="image-20231111100420675" /></p>
@@ -8595,6 +8671,8 @@ alt="image-20231212153054247" /></p>
 <blockquote>
 <p>aka. <strong>Beta-multiplier reference</strong></p>
 </blockquote>
+<p><img src="/2023/01/01/insight/image-20231213235846243.png"
+alt="image-20231213235846243" /></p>
 <h2 id="mosfet-ztc-condition-analysis">MOSFET ZTC Condition
 Analysis</h2>
 <blockquote>
@@ -8661,75 +8739,6 @@ href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemY
       <categories>
         <category>analog</category>
       </categories>
-  </entry>
-  <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-      <tags>
-        <tag>integrator</tag>
-        <tag>ota</tag>
-        <tag>slew rate</tag>
-        <tag>bandwidth</tag>
-      </tags>
   </entry>
   <entry>
     <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
@@ -9806,28 +9815,6 @@ Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter
       </tags>
   </entry>
   <entry>
-    <title>Link Modeling &amp; Analysis</title>
-    <url>/2023/11/11/linkModeling/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
-(EPFL). <a
-href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
-generator model for jitter-tolerance simulation</a>; <a
-href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
-models</a></p>
-<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
-Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
-Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
-doi: 10.1109/CICC.2019.8780223.</p>
-<p>Savo Bajic, ECE1392, Integrated Circuits for Digital Communications:
-<strong>StatOpt in Python</strong> [<a
-href="https://savobajic.ca/projects/academic/statopt/">https://savobajic.ca/projects/academic/statopt</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>CDR Linear Model</title>
     <url>/2022/05/04/linear-cdr/</url>
     <content><![CDATA[<p><img src="/2022/05/04/linear-cdr/image-20220504101924272.png"
@@ -9984,6 +9971,28 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
         <tag>jgen</tag>
         <tag>jtol</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Link Modeling &amp; Analysis</title>
+    <url>/2023/11/11/linkModeling/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
+(EPFL). <a
+href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
+generator model for jitter-tolerance simulation</a>; <a
+href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
+models</a></p>
+<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
+Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
+Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
+doi: 10.1109/CICC.2019.8780223.</p>
+<p>Savo Bajic, ECE1392, Integrated Circuits for Digital Communications:
+<strong>StatOpt in Python</strong> [<a
+href="https://savobajic.ca/projects/academic/statopt/">https://savobajic.ca/projects/academic/statopt</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
   </entry>
   <entry>
     <title>Long-Term Jitter</title>
@@ -13620,26 +13629,6 @@ alt="image-20220404195156776" /></p>
       </categories>
   </entry>
   <entry>
-    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
-    <url>/2022/05/01/rhel8-old-kernels/</url>
-    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
-<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
-method for removing kernels and keeping only the latest version and
-running kernel:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
-<p>From the <code>yum</code> man page:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>yum</tag>
-        <tag>rhel</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Relative Sensitivity</title>
     <url>/2023/07/12/relative-sensitivity/</url>
     <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
@@ -13715,6 +13704,26 @@ href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://we
       </categories>
       <tags>
         <tag>parasitic</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
+    <url>/2022/05/01/rhel8-old-kernels/</url>
+    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
+<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
+method for removing kernels and keeping only the latest version and
+running kernel:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
+<p>From the <code>yum</code> man page:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>yum</tag>
+        <tag>rhel</tag>
       </tags>
   </entry>
   <entry>
@@ -16063,45 +16072,6 @@ alt="image-20231006110506245" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Debug topology and Check config usage in UVM</title>
-    <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
-    <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// defaults to table printer</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p>The default printer policy is
-<strong>uvm_default_table_printer</strong></p>
-<p>There are three default printer policies that the uvm_pkg
-provides:</p>
-<blockquote>
-<p>uvm_default_table_printer uvm_default_tree_printer
-uvm_default_line_printer</p>
-</blockquote>
-<h4 id="check-all-configuration-settings">Check all configuration
-settings</h4>
-<p>Check all configuration settings in a components configuration table
-to determine if the setting has been used, overridden or not used. When
-<em>recurse</em> is 1 (default), configuration for this and all child
-components are recursively checked. This function is automatically
-called in the check phase, but can be manually called at any time.</p>
-<p>To get all configuration information prior to the run phase, do
-something like this in your top object:</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	check_config_usage();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="uvm-phase">UVM phase</h4>
-<p><img
-src="/2022/02/21/uvm-debug-topology-config-usage/image-20220221230440017.png"
-alt="image-20220221230440017" /></p>
-<ul>
-<li><strong>Functions</strong> are executed bottom-up (Except for
-<strong>build and final phases</strong> , which are executed
-top-down)</li>
-<li><strong>Tasks</strong> are forked into concurrent executing
-threads</li>
-</ul>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>PAM4 Transmitter</title>
     <url>/2022/07/20/tx-pam4/</url>
     <content><![CDATA[<h1 id="pam4-basic">PAM4 Basic</h1>
@@ -16377,6 +16347,45 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
       </categories>
   </entry>
   <entry>
+    <title>Debug topology and Check config usage in UVM</title>
+    <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
+    <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// defaults to table printer</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p>The default printer policy is
+<strong>uvm_default_table_printer</strong></p>
+<p>There are three default printer policies that the uvm_pkg
+provides:</p>
+<blockquote>
+<p>uvm_default_table_printer uvm_default_tree_printer
+uvm_default_line_printer</p>
+</blockquote>
+<h4 id="check-all-configuration-settings">Check all configuration
+settings</h4>
+<p>Check all configuration settings in a components configuration table
+to determine if the setting has been used, overridden or not used. When
+<em>recurse</em> is 1 (default), configuration for this and all child
+components are recursively checked. This function is automatically
+called in the check phase, but can be manually called at any time.</p>
+<p>To get all configuration information prior to the run phase, do
+something like this in your top object:</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	check_config_usage();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="uvm-phase">UVM phase</h4>
+<p><img
+src="/2022/02/21/uvm-debug-topology-config-usage/image-20220221230440017.png"
+alt="image-20220221230440017" /></p>
+<ul>
+<li><strong>Functions</strong> are executed bottom-up (Except for
+<strong>build and final phases</strong> , which are executed
+top-down)</li>
+<li><strong>Tasks</strong> are forked into concurrent executing
+threads</li>
+</ul>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>UVM project topology</title>
     <url>/2022/03/21/uvm-proj-topo/</url>
     <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
@@ -16538,6 +16547,254 @@ off.</p>
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>UVM REG RALF &amp; IP-XACT</title>
+    <url>/2022/03/14/uvm-reg-ralf/</url>
+    <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
+<p>There are no properties for <strong>unused</strong> or
+<strong>reserved</strong> fields, and unlike register arrays</p>
+<h3 id="ralf">ralf</h3>
+<ul>
+<li>bytes: the register size, default is <em>N*8 &gt; all
+field</em></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">register CTRL &#123;</span><br><span class="line">   left_to_right;</span><br><span class="line">   field unused &#123;bits 6;&#125;</span><br><span class="line">    field HC1R &#123;</span><br><span class="line">    bits 1; access rw  ;</span><br><span class="line">    coverpoint &#123; bins x = &#123;0,1&#125;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    field HC1E &#123;bits 1 ; access rw &#125;</span><br><span class="line">    field unused &#123;bits 2; &#125;</span><br><span class="line">    field HC0R &#123;bits 1; access rw &#125;</span><br><span class="line">    field HCOE &#123;bits 1 ; access rw &#125;</span><br><span class="line">    field unused &#123;bits 2; &#125;</span><br><span class="line">    field BL &#123;bits 1; access rw &#125;</span><br><span class="line">    field CSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field HSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field PC &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field CD &#123;bits 2 ; access rw&#125;</span><br><span class="line">    field VBL &#123;bits 2 ; access rw&#125;</span><br><span class="line">    field CBSWE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VBSWE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field CBSIE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VBSIE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field HIE  &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VIE  &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VEN  &#123;bits 1 ; access rw&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="generated-sv">generated sv</h3>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> build();</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1R</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC1R&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1R</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">23</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1E</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC1E&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1E</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">22</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC0R</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC0R&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC0R</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">19</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HCOE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HCOE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HCOE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">18</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.BL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;BL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.BL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.PC</span> = uvm_reg_field::type_id::create(<span class="string">&quot;PC&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.PC</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">11</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CD</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CD&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CD</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">2&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">2&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSWE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CBSWE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSWE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSWE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBSWE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSWE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CBSIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBSIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VEN</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VEN&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VEN</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">endfunction</span>: build </span><br></pre></td></tr></table></figure>
+<h2 id="uvm_reg_block">uvm_reg_block</h2>
+<h3 id="ralf-1">ralf</h3>
+<ul>
+<li>bytes : bus width</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">block vga_lcd  &#123;</span><br><span class="line">    bytes 4;</span><br><span class="line">    endian little;</span><br><span class="line">    </span><br><span class="line">    register STAT (`RAL_HDL_PATH.wbs.stat[31:0]) @0004;</span><br><span class="line">    register HTIM (`RAL_HDL_PATH.htim[31:0]) @0008;</span><br><span class="line">    register CTRL (`RAL_HDL_PATH.wbs.ctrl[31:0]) @00010;</span><br><span class="line">    register VTIM (`RAL_HDL_PATH.vtim[31:0]) @0012;</span><br><span class="line">    register C1CR (`RAL_HDL_PATH.c1cr[31:0]) @0016;</span><br><span class="line">    memory CLUT1  @&#x27;h0C00;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="generated-sv-1">generated sv</h3>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span> = create_map(<span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span> = ral_reg_STAT::type_id::create(<span class="string">&quot;STAT&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;wbs.stat[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125;&#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.STAT</span>, `UVM_REG_ADDR_WIDTH&#x27;h4, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span> = ral_reg_HTIM::type_id::create(<span class="string">&quot;HTIM&quot;</span>,,get_full_name()); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.add_hdl_path</span>(&#x27;&#123;&#x27;&#123;<span class="string">&quot;htim[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.HTIM</span>, `UVM_REG_ADDR_WIDTH&#x27;h8, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span> = ral_reg_CTRL::type_id::create(<span class="string">&quot;CTRL&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.build</span>(); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.add_hdl_path</span>(&#x27;&#123;&#x27;&#123;<span class="string">&quot;wbs.ctrl[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.CTRL</span>, `UVM_REG_ADDR_WIDTH&#x27;hA, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span> = ral_reg_VTIM::type_id::create(<span class="string">&quot;VTIM&quot;</span>,,get_full_name()); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;vtim[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.VTIM</span>, `UVM_REG_ADDR_WIDTH&#x27;hC, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span> = ral_reg_C1CR::type_id::create(<span class="string">&quot;C1CR&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;c1cr[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.C1CR</span>, `UVM_REG_ADDR_WIDTH&#x27;h10, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span> = ral_mem_CLUT1::type_id::create(<span class="string">&quot;CLUT1&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_mem</span>(<span class="keyword">this</span><span class="variable">.CLUT1</span>, `UVM_REG_ADDR_WIDTH&#x27;hC00, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> ral_reg_CTRL <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_STAT <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_HTIM <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_VTIM <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_C1CR <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_mem_CLUT1 <span class="keyword">extends</span> uvm_mem;</span><br><span class="line"><span class="keyword">class</span> ral_block_vga_lcd <span class="keyword">extends</span> uvm_reg_block;</span><br></pre></td></tr></table></figure>
+<h2 id="ralgen-command">ralgen command</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ralgen -uvm -t dut_regmodel0 vga_lcd_env.ralf</span><br></pre></td></tr></table></figure>
+<h2 id="byte-or-halfword-access">BYTE or HALFWORD access</h2>
+<p>User is verifying 32 bit registers and the design also allows the
+BYTE (8 bits) and HALFWORD (16 bits) accesses.</p>
+<blockquote>
+<p>this is achieved by setting the <strong>bit_addressing=0</strong>
+field in the <strong>uvm_reg_block::create_map</strong> function.</p>
+<p>Using <code>create_map</code> in <code>uvm_reg_block</code>, you can
+change the type of addressing scheme you want to use; namely BYTE or
+HALFWORD.</p>
+</blockquote>
+<p><strong>create_map</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">virtual</span> <span class="keyword">function</span> uvm_reg_map create_map( <span class="keyword">string</span> name,</span><br><span class="line">                                       uvm_reg_addr_t base_addr,</span><br><span class="line">                                       <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,</span><br><span class="line">                                       uvm_endianness_e endian,</span><br><span class="line">                                       <span class="keyword">bit</span> byte_addressing)</span><br></pre></td></tr></table></figure>
+<p>Creates an address map with the specified name, then configures it
+with the following properties:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>base_addr</td>
+<td>It is the base address for the map. All registers, memories, and
+sub-blocks within the map will be at offsets to this address.</td>
+</tr>
+<tr class="even">
+<td>n_bytes</td>
+<td>It is the byte-width of the bus on which this map is used</td>
+</tr>
+<tr class="odd">
+<td>endian</td>
+<td>It is the endian format. See uvm_endianness_e for possible
+values.</td>
+</tr>
+<tr class="even">
+<td>byte_addressing</td>
+<td>It specifies whether consecutive addresses referred are <strong>1
+byte apart (TRUE)</strong> or <strong>n_bytes apart (FALSE)</strong>.
+Default is TRUE.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>For HALFWORD addressing, you should call create_map the following
+way:</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">2</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x02, 0x04</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>For WORD addressing</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x01, 0x02</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>For BYTE addressing (default) :</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">1</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x04, 0x08</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>BYTE width and byte addressing</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">1</span>, UVM_LITTLE_ENDIAN, <span class="number">1</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x04, 0x08 </span></span><br></pre></td></tr></table></figure>
+<h2 id="uvm_reg_blockcreate_map">uvm_reg_block::create_map</h2>
+<p>Create an address map in this block</p>
+<blockquote>
+<p>n_bytes - the byte-width of the bus on which this map is used</p>
+<p>byte_addressing - specifies whether consecutive addresses refer are 1
+byte apart (TRUE) or <code>n_bytes</code> apart (FALSE). Default is
+TRUE.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> uvm_reg_map uvm_reg_block::create_map(<span class="keyword">string</span> name,</span><br><span class="line">                                               uvm_reg_addr_t base_addr,</span><br><span class="line">                                               <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,</span><br><span class="line">                                               uvm_endianness_e endian,</span><br><span class="line">                                               <span class="keyword">bit</span> byte_addressing=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   uvm_reg_map  map; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span><span class="variable">.locked</span>) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>, <span class="string">&quot;Cannot add map to locked model&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   map = uvm_reg_map::type_id::create(name,,<span class="keyword">this</span><span class="variable">.get_full_name</span>());</span><br><span class="line">   map<span class="variable">.configure</span>(<span class="keyword">this</span>,base_addr,n_bytes,endian,byte_addressing);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span><span class="variable">.maps</span>[map] = <span class="number">1</span>; </span><br><span class="line">   <span class="keyword">if</span> (maps<span class="variable">.num</span>() == <span class="number">1</span>)</span><br><span class="line">     default_map = map; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> map; </span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h2 id="uvm_reg_mapadd_reg">uvm_reg_map::add_reg</h2>
+<p>The register is located at the specified address <em>offset</em> from
+this maps configured base address.</p>
+<p>The number of consecutive physical addresses occupied by the register
+depends on the width of the register and the number of bytes in the
+physical interface corresponding to this address map.</p>
+<p>If <em>unmapped</em> is TRUE, the register does not occupy any
+physical addresses and the base address is ignored. Unmapped registers
+require a user-defined <em>frontdoor</em> to be specified.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_map::add_reg(uvm_reg rg,  </span><br><span class="line">                                   uvm_reg_addr_t offset,</span><br><span class="line">                                   <span class="keyword">string</span> rights = <span class="string">&quot;RW&quot;</span>,</span><br><span class="line">                                   <span class="keyword">bit</span> unmapped=<span class="number">0</span>,</span><br><span class="line">                                   uvm_reg_frontdoor frontdoor=<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (m_regs_info<span class="variable">.exists</span>(rg)) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Register &#x27;&quot;</span>,rg<span class="variable">.get_name</span>(),</span><br><span class="line">                 <span class="string">&quot;&#x27; has already been added to map &#x27;&quot;</span>,get_name(),<span class="string">&quot;&#x27;&quot;</span>&#125;)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (rg<span class="variable">.get_parent</span>() != get_parent()) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>,</span><br><span class="line">         &#123;<span class="string">&quot;Register &#x27;&quot;</span>,rg<span class="variable">.get_full_name</span>(),<span class="string">&quot;&#x27; may not be added to address map &#x27;&quot;</span>,</span><br><span class="line">          get_full_name(),<span class="string">&quot;&#x27; : they are not in the same block&quot;</span>&#125;)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line">   rg<span class="variable">.add_map</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">begin</span></span><br><span class="line">   uvm_reg_map_info info = <span class="keyword">new</span>; </span><br><span class="line">   info<span class="variable">.offset</span>   = offset;</span><br><span class="line">   info<span class="variable">.rights</span>   = rights;</span><br><span class="line">   info<span class="variable">.unmapped</span> = unmapped;</span><br><span class="line">   info<span class="variable">.frontdoor</span> = frontdoor;</span><br><span class="line">   m_regs_info[rg] = info;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h2 id="register-defines">Register Defines</h2>
+<h3 id="uvm_reg_addr_width">`UVM_REG_ADDR_WIDTH</h3>
+<p>Maximum address width in bits</p>
+<blockquote>
+<p>Default value is 64. Used to define the <uvm_reg_addr_t> type.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">ifndef</span> UVM_REG_ADDR_WIDTH</span></span><br><span class="line"> <span class="meta">`<span class="keyword">define</span> UVM_REG_ADDR_WIDTH 64</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="uvm_reg_data_width">`UVM_REG_DATA_WIDTH</h3>
+<p>Maximum data width in bits</p>
+<blockquote>
+<p>Default value is 64. Used to define the <uvm_reg_data_t> type.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">ifndef</span> UVM_REG_DATA_WIDTH</span></span><br><span class="line"> <span class="meta">`<span class="keyword">define</span> UVM_REG_DATA_WIDTH 64</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="generic-ralf-features-and-ip-xact-mapping">Generic RALF Features
+and IP-XACT Mapping</h2>
+<h3 id="field">field</h3>
+<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212141988.png"
+alt="image-20220314212141988" /></p>
+<h3 id="register">register</h3>
+<h4 id="addressoffset">addressOffset</h4>
+<p>a register has an <code>addressOffset</code> that describes the
+location of the register expressed in <code>addressUnitBits</code> as
+offset to the starting address of the containing
+<code>addressBlock</code> or the containing
+<code>registerFile</code></p>
+<h4 id="addressunitbits">addressUnitBits</h4>
+<p>The <code>addressUnitBits</code> element describes the number of bits
+of an address increment between two <strong>consecutive addressable
+units</strong> in the <code>addressSpace</code>. If
+<code>addressUnitBits</code> is not described, then its value
+<strong>defaults to 8</strong>, indicating a
+<strong>byte-addressable</strong> <code>addressSpace</code></p>
+<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212217722.png"
+alt="image-20220314212217722" /></p>
+<h3 id="block">block</h3>
+<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212251012.png"
+alt="image-20220314212251012" /></p>
+<h3 id="memory">memory</h3>
+<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212427347.png"
+alt="image-20220314212427347" /></p>
+<h2 id="reference">Reference</h2>
+<p>UVM Register Abstraction Layer Generator User Guide, S-2021.09-SP1,
+December 2021</p>
+<p><a
+href="https://www.accellera.org/images/downloads/standards/ip-xact/IP-XACT_User_Guide_2018-02-16.pdf">User
+guide for the IEEE 1685 Standard for IP-XACT</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Different Variants of the PSD Definition</title>
+    <url>/2023/06/03/variants-def-psd/</url>
+    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
+slightly different variants of the PSD definition, depending on the
+particular application or research field.</p>
+<ul>
+<li><p><strong>Two-Sided PSD</strong>, <span
+class="math inline">\(S_x(f)\)</span></p>
+<p>this is a synonym of the PSD defined as the Fourier Transform of the
+<strong>autocorrelation</strong>.</p></li>
+<li><p><strong>One-Sided PSD</strong>, <span
+class="math inline">\(S&#39;_x(f)\)</span></p>
+<p>this is a variant derived from the <em>two-sided PSD</em> by
+considering only the <em>positive frequency</em> semi-axis.</p>
+<p>To <strong>conserve the total power</strong>, the value of the
+one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
+class="math display">\[
+S&#39;_x(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_x(f) &amp; : \ f = 0 \\
+2S_x(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
+alt="image-20230603185546658" /></p>
+<blockquote>
+<p>Note that the one-sided PSD definition makes sense only if the
+two-sided is an even function of <span
+class="math inline">\(f\)</span></p>
+</blockquote>
+<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
+symmetrical around a positive frequency <span
+class="math inline">\(f_0\)</span>, then two additional definitions can
+be adopted:</p>
+<ul>
+<li><p><strong>Single-Sideband PSD</strong>, <span
+class="math inline">\(S_{SSB,x}(f)\)</span></p>
+<p>This is obtained from <span
+class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
+frequency axis to <span class="math inline">\(f_0\)</span> <span
+class="math display">\[
+S_{SSB,x}(f) =S&#39;_x(f+f_0)
+\]</span> This concept is particularly useful for describing phase or
+amplitude modulation schemes in wireless communications, where <span
+class="math inline">\(f_0\)</span> is the carrier frequency.</p>
+<blockquote>
+<p>Note that there is no difference in the values of the one-sided
+versus the SSB PSD; it is just a pure translation on the frequency
+axis.</p>
+</blockquote></li>
+<li><p><strong>Double-Sideband PSD</strong>, <span
+class="math inline">\(S_{DSB,x}(f)\)</span></p>
+<p>this is a variant of the SSB PSD obtained by considering only the
+positive frequency semi-axis.</p>
+<p>As in the case of the one-sided PSD, to conserve total power, the
+value of the DSB PSD is twice that of the SSB <span
+class="math display">\[
+S_{DSB,x}(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_{SSB,x}(f) &amp; : \ f = 0 \\
+2S_{SSB,x}(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
+alt="image-20230603222054506" /></p>
+<blockquote>
+<p>Note that the DSB definition makes sense only if the SSB PSD is even
+symmetrical around zero</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
+and phase noise: A circuits and systems perspective. Cambridge
+University Press.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>psd</tag>
+        <tag>two-sided</tag>
+        <tag>one-sided</tag>
+        <tag>ssb</tag>
+        <tag>dsb</tag>
+      </tags>
   </entry>
   <entry>
     <title>UVM Register Abstraction Layer (RAL) - overview</title>
@@ -16888,254 +17145,6 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>UVM REG RALF &amp; IP-XACT</title>
-    <url>/2022/03/14/uvm-reg-ralf/</url>
-    <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
-<p>There are no properties for <strong>unused</strong> or
-<strong>reserved</strong> fields, and unlike register arrays</p>
-<h3 id="ralf">ralf</h3>
-<ul>
-<li>bytes: the register size, default is <em>N*8 &gt; all
-field</em></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">register CTRL &#123;</span><br><span class="line">   left_to_right;</span><br><span class="line">   field unused &#123;bits 6;&#125;</span><br><span class="line">    field HC1R &#123;</span><br><span class="line">    bits 1; access rw  ;</span><br><span class="line">    coverpoint &#123; bins x = &#123;0,1&#125;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    field HC1E &#123;bits 1 ; access rw &#125;</span><br><span class="line">    field unused &#123;bits 2; &#125;</span><br><span class="line">    field HC0R &#123;bits 1; access rw &#125;</span><br><span class="line">    field HCOE &#123;bits 1 ; access rw &#125;</span><br><span class="line">    field unused &#123;bits 2; &#125;</span><br><span class="line">    field BL &#123;bits 1; access rw &#125;</span><br><span class="line">    field CSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field HSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field PC &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field CD &#123;bits 2 ; access rw&#125;</span><br><span class="line">    field VBL &#123;bits 2 ; access rw&#125;</span><br><span class="line">    field CBSWE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VBSWE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field CBSIE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VBSIE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field HIE  &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VIE  &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VEN  &#123;bits 1 ; access rw&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="generated-sv">generated sv</h3>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> build();</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1R</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC1R&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1R</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">23</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1E</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC1E&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1E</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">22</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC0R</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC0R&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC0R</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">19</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HCOE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HCOE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HCOE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">18</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.BL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;BL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.BL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.PC</span> = uvm_reg_field::type_id::create(<span class="string">&quot;PC&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.PC</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">11</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CD</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CD&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CD</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">2&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">2&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSWE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CBSWE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSWE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSWE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBSWE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSWE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CBSIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBSIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VEN</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VEN&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VEN</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">endfunction</span>: build </span><br></pre></td></tr></table></figure>
-<h2 id="uvm_reg_block">uvm_reg_block</h2>
-<h3 id="ralf-1">ralf</h3>
-<ul>
-<li>bytes : bus width</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">block vga_lcd  &#123;</span><br><span class="line">    bytes 4;</span><br><span class="line">    endian little;</span><br><span class="line">    </span><br><span class="line">    register STAT (`RAL_HDL_PATH.wbs.stat[31:0]) @0004;</span><br><span class="line">    register HTIM (`RAL_HDL_PATH.htim[31:0]) @0008;</span><br><span class="line">    register CTRL (`RAL_HDL_PATH.wbs.ctrl[31:0]) @00010;</span><br><span class="line">    register VTIM (`RAL_HDL_PATH.vtim[31:0]) @0012;</span><br><span class="line">    register C1CR (`RAL_HDL_PATH.c1cr[31:0]) @0016;</span><br><span class="line">    memory CLUT1  @&#x27;h0C00;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="generated-sv-1">generated sv</h3>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span> = create_map(<span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span> = ral_reg_STAT::type_id::create(<span class="string">&quot;STAT&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;wbs.stat[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125;&#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.STAT</span>, `UVM_REG_ADDR_WIDTH&#x27;h4, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span> = ral_reg_HTIM::type_id::create(<span class="string">&quot;HTIM&quot;</span>,,get_full_name()); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.add_hdl_path</span>(&#x27;&#123;&#x27;&#123;<span class="string">&quot;htim[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.HTIM</span>, `UVM_REG_ADDR_WIDTH&#x27;h8, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span> = ral_reg_CTRL::type_id::create(<span class="string">&quot;CTRL&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.build</span>(); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.add_hdl_path</span>(&#x27;&#123;&#x27;&#123;<span class="string">&quot;wbs.ctrl[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.CTRL</span>, `UVM_REG_ADDR_WIDTH&#x27;hA, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span> = ral_reg_VTIM::type_id::create(<span class="string">&quot;VTIM&quot;</span>,,get_full_name()); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;vtim[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.VTIM</span>, `UVM_REG_ADDR_WIDTH&#x27;hC, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span> = ral_reg_C1CR::type_id::create(<span class="string">&quot;C1CR&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;c1cr[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.C1CR</span>, `UVM_REG_ADDR_WIDTH&#x27;h10, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span> = ral_mem_CLUT1::type_id::create(<span class="string">&quot;CLUT1&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_mem</span>(<span class="keyword">this</span><span class="variable">.CLUT1</span>, `UVM_REG_ADDR_WIDTH&#x27;hC00, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> ral_reg_CTRL <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_STAT <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_HTIM <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_VTIM <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_C1CR <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_mem_CLUT1 <span class="keyword">extends</span> uvm_mem;</span><br><span class="line"><span class="keyword">class</span> ral_block_vga_lcd <span class="keyword">extends</span> uvm_reg_block;</span><br></pre></td></tr></table></figure>
-<h2 id="ralgen-command">ralgen command</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ralgen -uvm -t dut_regmodel0 vga_lcd_env.ralf</span><br></pre></td></tr></table></figure>
-<h2 id="byte-or-halfword-access">BYTE or HALFWORD access</h2>
-<p>User is verifying 32 bit registers and the design also allows the
-BYTE (8 bits) and HALFWORD (16 bits) accesses.</p>
-<blockquote>
-<p>this is achieved by setting the <strong>bit_addressing=0</strong>
-field in the <strong>uvm_reg_block::create_map</strong> function.</p>
-<p>Using <code>create_map</code> in <code>uvm_reg_block</code>, you can
-change the type of addressing scheme you want to use; namely BYTE or
-HALFWORD.</p>
-</blockquote>
-<p><strong>create_map</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">virtual</span> <span class="keyword">function</span> uvm_reg_map create_map( <span class="keyword">string</span> name,</span><br><span class="line">                                       uvm_reg_addr_t base_addr,</span><br><span class="line">                                       <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,</span><br><span class="line">                                       uvm_endianness_e endian,</span><br><span class="line">                                       <span class="keyword">bit</span> byte_addressing)</span><br></pre></td></tr></table></figure>
-<p>Creates an address map with the specified name, then configures it
-with the following properties:</p>
-<table>
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 80%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>base_addr</td>
-<td>It is the base address for the map. All registers, memories, and
-sub-blocks within the map will be at offsets to this address.</td>
-</tr>
-<tr class="even">
-<td>n_bytes</td>
-<td>It is the byte-width of the bus on which this map is used</td>
-</tr>
-<tr class="odd">
-<td>endian</td>
-<td>It is the endian format. See uvm_endianness_e for possible
-values.</td>
-</tr>
-<tr class="even">
-<td>byte_addressing</td>
-<td>It specifies whether consecutive addresses referred are <strong>1
-byte apart (TRUE)</strong> or <strong>n_bytes apart (FALSE)</strong>.
-Default is TRUE.</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>For HALFWORD addressing, you should call create_map the following
-way:</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">2</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x02, 0x04</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>For WORD addressing</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x01, 0x02</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>For BYTE addressing (default) :</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">1</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x04, 0x08</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>BYTE width and byte addressing</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">1</span>, UVM_LITTLE_ENDIAN, <span class="number">1</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x04, 0x08 </span></span><br></pre></td></tr></table></figure>
-<h2 id="uvm_reg_blockcreate_map">uvm_reg_block::create_map</h2>
-<p>Create an address map in this block</p>
-<blockquote>
-<p>n_bytes - the byte-width of the bus on which this map is used</p>
-<p>byte_addressing - specifies whether consecutive addresses refer are 1
-byte apart (TRUE) or <code>n_bytes</code> apart (FALSE). Default is
-TRUE.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> uvm_reg_map uvm_reg_block::create_map(<span class="keyword">string</span> name,</span><br><span class="line">                                               uvm_reg_addr_t base_addr,</span><br><span class="line">                                               <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,</span><br><span class="line">                                               uvm_endianness_e endian,</span><br><span class="line">                                               <span class="keyword">bit</span> byte_addressing=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   uvm_reg_map  map; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span><span class="variable">.locked</span>) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>, <span class="string">&quot;Cannot add map to locked model&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   map = uvm_reg_map::type_id::create(name,,<span class="keyword">this</span><span class="variable">.get_full_name</span>());</span><br><span class="line">   map<span class="variable">.configure</span>(<span class="keyword">this</span>,base_addr,n_bytes,endian,byte_addressing);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span><span class="variable">.maps</span>[map] = <span class="number">1</span>; </span><br><span class="line">   <span class="keyword">if</span> (maps<span class="variable">.num</span>() == <span class="number">1</span>)</span><br><span class="line">     default_map = map; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> map; </span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h2 id="uvm_reg_mapadd_reg">uvm_reg_map::add_reg</h2>
-<p>The register is located at the specified address <em>offset</em> from
-this maps configured base address.</p>
-<p>The number of consecutive physical addresses occupied by the register
-depends on the width of the register and the number of bytes in the
-physical interface corresponding to this address map.</p>
-<p>If <em>unmapped</em> is TRUE, the register does not occupy any
-physical addresses and the base address is ignored. Unmapped registers
-require a user-defined <em>frontdoor</em> to be specified.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_map::add_reg(uvm_reg rg,  </span><br><span class="line">                                   uvm_reg_addr_t offset,</span><br><span class="line">                                   <span class="keyword">string</span> rights = <span class="string">&quot;RW&quot;</span>,</span><br><span class="line">                                   <span class="keyword">bit</span> unmapped=<span class="number">0</span>,</span><br><span class="line">                                   uvm_reg_frontdoor frontdoor=<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (m_regs_info<span class="variable">.exists</span>(rg)) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Register &#x27;&quot;</span>,rg<span class="variable">.get_name</span>(),</span><br><span class="line">                 <span class="string">&quot;&#x27; has already been added to map &#x27;&quot;</span>,get_name(),<span class="string">&quot;&#x27;&quot;</span>&#125;)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (rg<span class="variable">.get_parent</span>() != get_parent()) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>,</span><br><span class="line">         &#123;<span class="string">&quot;Register &#x27;&quot;</span>,rg<span class="variable">.get_full_name</span>(),<span class="string">&quot;&#x27; may not be added to address map &#x27;&quot;</span>,</span><br><span class="line">          get_full_name(),<span class="string">&quot;&#x27; : they are not in the same block&quot;</span>&#125;)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line">   rg<span class="variable">.add_map</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">begin</span></span><br><span class="line">   uvm_reg_map_info info = <span class="keyword">new</span>; </span><br><span class="line">   info<span class="variable">.offset</span>   = offset;</span><br><span class="line">   info<span class="variable">.rights</span>   = rights;</span><br><span class="line">   info<span class="variable">.unmapped</span> = unmapped;</span><br><span class="line">   info<span class="variable">.frontdoor</span> = frontdoor;</span><br><span class="line">   m_regs_info[rg] = info;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h2 id="register-defines">Register Defines</h2>
-<h3 id="uvm_reg_addr_width">`UVM_REG_ADDR_WIDTH</h3>
-<p>Maximum address width in bits</p>
-<blockquote>
-<p>Default value is 64. Used to define the <uvm_reg_addr_t> type.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">ifndef</span> UVM_REG_ADDR_WIDTH</span></span><br><span class="line"> <span class="meta">`<span class="keyword">define</span> UVM_REG_ADDR_WIDTH 64</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="uvm_reg_data_width">`UVM_REG_DATA_WIDTH</h3>
-<p>Maximum data width in bits</p>
-<blockquote>
-<p>Default value is 64. Used to define the <uvm_reg_data_t> type.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">ifndef</span> UVM_REG_DATA_WIDTH</span></span><br><span class="line"> <span class="meta">`<span class="keyword">define</span> UVM_REG_DATA_WIDTH 64</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="generic-ralf-features-and-ip-xact-mapping">Generic RALF Features
-and IP-XACT Mapping</h2>
-<h3 id="field">field</h3>
-<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212141988.png"
-alt="image-20220314212141988" /></p>
-<h3 id="register">register</h3>
-<h4 id="addressoffset">addressOffset</h4>
-<p>a register has an <code>addressOffset</code> that describes the
-location of the register expressed in <code>addressUnitBits</code> as
-offset to the starting address of the containing
-<code>addressBlock</code> or the containing
-<code>registerFile</code></p>
-<h4 id="addressunitbits">addressUnitBits</h4>
-<p>The <code>addressUnitBits</code> element describes the number of bits
-of an address increment between two <strong>consecutive addressable
-units</strong> in the <code>addressSpace</code>. If
-<code>addressUnitBits</code> is not described, then its value
-<strong>defaults to 8</strong>, indicating a
-<strong>byte-addressable</strong> <code>addressSpace</code></p>
-<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212217722.png"
-alt="image-20220314212217722" /></p>
-<h3 id="block">block</h3>
-<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212251012.png"
-alt="image-20220314212251012" /></p>
-<h3 id="memory">memory</h3>
-<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212427347.png"
-alt="image-20220314212427347" /></p>
-<h2 id="reference">Reference</h2>
-<p>UVM Register Abstraction Layer Generator User Guide, S-2021.09-SP1,
-December 2021</p>
-<p><a
-href="https://www.accellera.org/images/downloads/standards/ip-xact/IP-XACT_User_Guide_2018-02-16.pdf">User
-guide for the IEEE 1685 Standard for IP-XACT</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Different Variants of the PSD Definition</title>
-    <url>/2023/06/03/variants-def-psd/</url>
-    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
-slightly different variants of the PSD definition, depending on the
-particular application or research field.</p>
-<ul>
-<li><p><strong>Two-Sided PSD</strong>, <span
-class="math inline">\(S_x(f)\)</span></p>
-<p>this is a synonym of the PSD defined as the Fourier Transform of the
-<strong>autocorrelation</strong>.</p></li>
-<li><p><strong>One-Sided PSD</strong>, <span
-class="math inline">\(S&#39;_x(f)\)</span></p>
-<p>this is a variant derived from the <em>two-sided PSD</em> by
-considering only the <em>positive frequency</em> semi-axis.</p>
-<p>To <strong>conserve the total power</strong>, the value of the
-one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
-class="math display">\[
-S&#39;_x(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_x(f) &amp; : \ f = 0 \\
-2S_x(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
-alt="image-20230603185546658" /></p>
-<blockquote>
-<p>Note that the one-sided PSD definition makes sense only if the
-two-sided is an even function of <span
-class="math inline">\(f\)</span></p>
-</blockquote>
-<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
-symmetrical around a positive frequency <span
-class="math inline">\(f_0\)</span>, then two additional definitions can
-be adopted:</p>
-<ul>
-<li><p><strong>Single-Sideband PSD</strong>, <span
-class="math inline">\(S_{SSB,x}(f)\)</span></p>
-<p>This is obtained from <span
-class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
-frequency axis to <span class="math inline">\(f_0\)</span> <span
-class="math display">\[
-S_{SSB,x}(f) =S&#39;_x(f+f_0)
-\]</span> This concept is particularly useful for describing phase or
-amplitude modulation schemes in wireless communications, where <span
-class="math inline">\(f_0\)</span> is the carrier frequency.</p>
-<blockquote>
-<p>Note that there is no difference in the values of the one-sided
-versus the SSB PSD; it is just a pure translation on the frequency
-axis.</p>
-</blockquote></li>
-<li><p><strong>Double-Sideband PSD</strong>, <span
-class="math inline">\(S_{DSB,x}(f)\)</span></p>
-<p>this is a variant of the SSB PSD obtained by considering only the
-positive frequency semi-axis.</p>
-<p>As in the case of the one-sided PSD, to conserve total power, the
-value of the DSB PSD is twice that of the SSB <span
-class="math display">\[
-S_{DSB,x}(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_{SSB,x}(f) &amp; : \ f = 0 \\
-2S_{SSB,x}(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
-alt="image-20230603222054506" /></p>
-<blockquote>
-<p>Note that the DSB definition makes sense only if the SSB PSD is even
-symmetrical around zero</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
-and phase noise: A circuits and systems perspective. Cambridge
-University Press.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>psd</tag>
-        <tag>two-sided</tag>
-        <tag>one-sided</tag>
-        <tag>ssb</tag>
-        <tag>dsb</tag>
-      </tags>
   </entry>
   <entry>
     <title>Process Variation</title>
@@ -17517,46 +17526,6 @@ is the "+:" operator called in Verilog?</a></p>
       </categories>
   </entry>
   <entry>
-    <title>verilog readmemb and readmemh</title>
-    <url>/2022/02/12/verilog-readmemb/</url>
-    <content><![CDATA[<p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
-<strong><code>$readmemb("bin_memory_file.mem", memory_array, [start_address], [end_address])</code></strong></p>
-<p>The system task has no versions to accept octal data or decimal
-data.</p>
-<ul>
-<li>The 1st argument is the data file name.</li>
-<li>The 2nd argument is the array to receive the data.</li>
-<li>The 3rd argument is an optional start address, and if you provide
-it, you can also provide</li>
-<li>The 4th argument optional end address.</li>
-</ul>
-<p>Note, the 3rd and 4th argument address is for array not data
-file.</p>
-<p>If the memory addresses are not specified anywhere, then the system
-tasks load file data sequentially from the lowest address toward the
-highest address.</p>
-<blockquote>
-<p>The standard before 2005 specify that the system tasks load file data
-sequentially from the left memory address bound to the right memory
-address bound.</p>
-</blockquote>
-<p><strong>readtest.v</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> readfile;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array4 [<span class="number">0</span>:<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array7 [<span class="number">6</span>:<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array12 [<span class="number">11</span>:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">integer</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array4);</span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array7, <span class="number">2</span>, <span class="number">5</span>);</span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array12);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array4[%0d] = %b&quot;</span>, i, array4[i]);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array7[%0d] = %b&quot;</span>, i, array7[i]);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">12</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array12[%0d] = %b&quot;</span>, i, array12[i]);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>data.txt</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">00000000 </span><br><span class="line">00000001</span><br><span class="line">00000010</span><br><span class="line">00000011</span><br><span class="line">00000100</span><br><span class="line">00000101</span><br><span class="line">00000110</span><br><span class="line">00001000</span><br></pre></td></tr></table></figure>
-<p><strong>result</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">array4[0] = 00000000</span><br><span class="line">array4[1] = 00000001</span><br><span class="line">array4[2] = 00000010</span><br><span class="line">array4[3] = 00000011</span><br><span class="line">=========================</span><br><span class="line">array7[0] = xxxxxxxx</span><br><span class="line">array7[1] = xxxxxxxx</span><br><span class="line">array7[2] = 00000000</span><br><span class="line">array7[3] = 00000001</span><br><span class="line">array7[4] = 00000010</span><br><span class="line">array7[5] = 00000011</span><br><span class="line">array7[6] = xxxxxxxx</span><br><span class="line">=========================</span><br><span class="line">array12[0] = 00000000</span><br><span class="line">array12[1] = 00000001</span><br><span class="line">array12[2] = 00000010</span><br><span class="line">array12[3] = 00000011</span><br><span class="line">array12[4] = 00000100</span><br><span class="line">array12[5] = 00000101</span><br><span class="line">array12[6] = 00000110</span><br><span class="line">array12[7] = 00001000</span><br><span class="line">array12[8] = xxxxxxxx</span><br><span class="line">array12[9] = xxxxxxxx</span><br><span class="line">array12[10] = xxxxxxxx</span><br><span class="line">array12[11] = xxxxxxxx</span><br></pre></td></tr></table></figure>
-<hr />
-<p><strong>ref</strong></p>
-<p><a
-href="https://projectf.io/posts/initialize-memory-in-verilog/">Initialize
-Memory in Verilog</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>compile vim from source with GUI support</title>
     <url>/2022/02/02/vim-compile/</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
@@ -17597,6 +17566,46 @@ Memory in Verilog</a></p>
         <tag>layout</tag>
         <tag>schematic</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>verilog readmemb and readmemh</title>
+    <url>/2022/02/12/verilog-readmemb/</url>
+    <content><![CDATA[<p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
+<strong><code>$readmemb("bin_memory_file.mem", memory_array, [start_address], [end_address])</code></strong></p>
+<p>The system task has no versions to accept octal data or decimal
+data.</p>
+<ul>
+<li>The 1st argument is the data file name.</li>
+<li>The 2nd argument is the array to receive the data.</li>
+<li>The 3rd argument is an optional start address, and if you provide
+it, you can also provide</li>
+<li>The 4th argument optional end address.</li>
+</ul>
+<p>Note, the 3rd and 4th argument address is for array not data
+file.</p>
+<p>If the memory addresses are not specified anywhere, then the system
+tasks load file data sequentially from the lowest address toward the
+highest address.</p>
+<blockquote>
+<p>The standard before 2005 specify that the system tasks load file data
+sequentially from the left memory address bound to the right memory
+address bound.</p>
+</blockquote>
+<p><strong>readtest.v</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> readfile;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array4 [<span class="number">0</span>:<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array7 [<span class="number">6</span>:<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array12 [<span class="number">11</span>:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">integer</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array4);</span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array7, <span class="number">2</span>, <span class="number">5</span>);</span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array12);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array4[%0d] = %b&quot;</span>, i, array4[i]);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array7[%0d] = %b&quot;</span>, i, array7[i]);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">12</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array12[%0d] = %b&quot;</span>, i, array12[i]);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>data.txt</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">00000000 </span><br><span class="line">00000001</span><br><span class="line">00000010</span><br><span class="line">00000011</span><br><span class="line">00000100</span><br><span class="line">00000101</span><br><span class="line">00000110</span><br><span class="line">00001000</span><br></pre></td></tr></table></figure>
+<p><strong>result</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">array4[0] = 00000000</span><br><span class="line">array4[1] = 00000001</span><br><span class="line">array4[2] = 00000010</span><br><span class="line">array4[3] = 00000011</span><br><span class="line">=========================</span><br><span class="line">array7[0] = xxxxxxxx</span><br><span class="line">array7[1] = xxxxxxxx</span><br><span class="line">array7[2] = 00000000</span><br><span class="line">array7[3] = 00000001</span><br><span class="line">array7[4] = 00000010</span><br><span class="line">array7[5] = 00000011</span><br><span class="line">array7[6] = xxxxxxxx</span><br><span class="line">=========================</span><br><span class="line">array12[0] = 00000000</span><br><span class="line">array12[1] = 00000001</span><br><span class="line">array12[2] = 00000010</span><br><span class="line">array12[3] = 00000011</span><br><span class="line">array12[4] = 00000100</span><br><span class="line">array12[5] = 00000101</span><br><span class="line">array12[6] = 00000110</span><br><span class="line">array12[7] = 00001000</span><br><span class="line">array12[8] = xxxxxxxx</span><br><span class="line">array12[9] = xxxxxxxx</span><br><span class="line">array12[10] = xxxxxxxx</span><br><span class="line">array12[11] = xxxxxxxx</span><br></pre></td></tr></table></figure>
+<hr />
+<p><strong>ref</strong></p>
+<p><a
+href="https://projectf.io/posts/initialize-memory-in-verilog/">Initialize
+Memory in Verilog</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>

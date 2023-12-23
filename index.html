@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">179</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,368 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/23/tf-freqresp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/23/tf-freqresp/" class="post-title-link" itemprop="url">Linear Circuits Analysis - Transfer Function & Frequency Response</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-12-23 14:58:39 / Modified: 16:51:18" itemprop="dateCreated datePublished" datetime="2023-12-23T14:58:39+00:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="are-ac-driven-circuits-linear">Are AC-Driven Circuits
+Linear?</h2>
+<p><span class="math display">\[
+f(x_1 + x_2)= f(x_1)+ f(x_2)
+\]</span></p>
+<p>Often, AC-driven circuits can be mistaken as non-linear as the basis
+that determines the linearity of a circuit is the relationship between
+the voltage and current.</p>
+<p>While an AC signal varies with time, it still exhibits a linear
+relationship across elements like resistors, capacitors, and inductors.
+Therefore, AC driven circuits are linear.</p>
+<h2 id="phasor">Phasor</h2>
+<p><em>Phasor concept has no real physical significance. It is just a
+convenient mathematical tool.</em></p>
+<blockquote>
+<p>Phasor analysis determines the steady-state response to a linear
+circuit driven by sinusoidal sources with frequency <span
+class="math inline">\(f\)</span></p>
+<p>If your circuit includes transistors or other nonlinear components,
+all is not lost. There is an extension of phasor analysis to nonlinear
+circuits called small-signal analysis in which you linearize the
+components before performing phasor analysis - AC analyses of SPICE</p>
+</blockquote>
+<p>A sinusoid is characterized by 3 numbers, its amplitude, its phase,
+and its frequency. For example <span class="math display">\[
+v(t) = A\cos(\omega t + \phi) \tag{1}
+\]</span> In a circuit there will be many signals but in the case of
+phasor analysis they will all have the same frequency. For this reason,
+the signals are characterized using only their <strong>amplitude and
+phase</strong>.</p>
+<p>The combination of an <strong>amplitude</strong> and
+<strong>phase</strong> to describe a signal is the
+<strong>phasor</strong> for that signal.</p>
+<p>Thus, the phasor for the signal in <span
+class="math inline">\((1)\)</span> is <span
+class="math inline">\(A\angle \phi\)</span></p>
+<blockquote>
+<p>In general, phasors are functions of frequency</p>
+</blockquote>
+<p>Often it is preferable to represent a phasor using <strong>complex
+numbers</strong> rather than using amplitude and phase. In this case we
+represent the signal as: <span class="math display">\[
+v(t) = \Re\{Ve^{j\omega t} \} \tag{2}
+\]</span> where <span class="math inline">\(V=Ae^{j\phi}\)</span> is the
+<strong>phasor</strong>.</p>
+<blockquote>
+<p><span class="math inline">\((1)\)</span> and <span
+class="math inline">\((2)\)</span> are the same</p>
+</blockquote>
+<h3 id="phasor-model-of-a-resistor">Phasor Model of a Resistor</h3>
+<p>A linear resistor is defined by the equation <span
+class="math inline">\(v = Ri\)</span></p>
+<p>Now, assume that the resistor current is described with the
+<em>phasor</em> <span class="math inline">\(I\)</span>. Then <span
+class="math display">\[
+i(t) = \Re\{Ie^{j\omega t}\}
+\]</span> <span class="math inline">\(R\)</span> is a real constant, and
+so the voltage can be computed to be <span class="math display">\[
+v(t) = R\Re\{Ie^{j\omega t}\} = \Re\{RIe^{j\omega t}\} =
+\Re\{Ve^{j\omega t}\}
+\]</span> where <span class="math inline">\(V\)</span> is the phasor
+representation for <span class="math inline">\(v\)</span>, i.e. <span
+class="math display">\[
+V = RI
+\]</span></p>
+<ol type="1">
+<li><p>Thus, given the <em>phasor</em> for the current we can directly
+compute the <em>phasor</em> for the voltage across the
+resistor.</p></li>
+<li><p>Similarly, given the <em>phasor</em> for the voltage across a
+resistor we can compute the <em>phasor</em> for the current through the
+resistor using <span class="math inline">\(I =
+\frac{V}{R}\)</span></p></li>
+</ol>
+<h3 id="phasor-model-of-a-capacitor">Phasor Model of a Capacitor</h3>
+<p>A linear capacitor is defined by the equation <span
+class="math inline">\(i=C\frac{dv}{dt}\)</span></p>
+<p>Now, assume that the voltage across the capacitor is described with
+the <em>phasor</em> <span class="math inline">\(V\)</span>. Then <span
+class="math display">\[
+v(t) = \Re\{ V e^{j\omega t}\}
+\]</span> <span class="math inline">\(C\)</span> is a real constant
+<span class="math display">\[
+i(t) = C\Re\{\frac{d}{dt}V e^{j\omega t}\} = \Re\{j\omega C V e^{j\omega
+t}\}
+\]</span> The <em>phasor</em> representation for <span
+class="math inline">\(i\)</span> is <span class="math inline">\(i(t) =
+\Re\{Ie^{j\omega t}\}\)</span>, that is <span class="math inline">\(I =
+j\omega C V\)</span></p>
+<ol type="1">
+<li><p>Thus, given the <em>phasor</em> for the voltage across a
+capacitor we can directly compute the <em>phasor</em> for the current
+through the capacitor.</p></li>
+<li><p>Similarly, given the <em>phasor</em> for the current through a
+capacitor we can compute the <em>phasor</em> for the voltage across the
+capacitor using <span class="math inline">\(V=\frac{I}{j\omega
+C}\)</span></p></li>
+</ol>
+<h3 id="phasor-model-of-an-inductor">Phasor Model of an Inductor</h3>
+<p>A linear inductor is defined by the equation <span
+class="math inline">\(v=L\frac{di}{dt}\)</span></p>
+<p>Now, assume that the inductor current is described with the
+<em>phasor</em> <span class="math inline">\(I\)</span>. Then <span
+class="math display">\[
+i(t) = \Re\{ I e^{j\omega t}\}
+\]</span> <span class="math inline">\(L\)</span> is a real constant, and
+so the voltage can be computed to be <span class="math display">\[
+v(t) = L\Re\{\frac{d}{dt}I e^{j\omega t}\} = \Re\{j\omega L I e^{j\omega
+t}\}
+\]</span> The <em>phasor</em> representation for <span
+class="math inline">\(v\)</span> is <span class="math inline">\(v(t) =
+\Re\{Ve^{j\omega t}\}\)</span>, that is <span class="math inline">\(V =
+j\omega L I\)</span></p>
+<ol type="1">
+<li><p>Thus, given the <em>phasor</em> for the current we can directly
+compute the <em>phasor</em> for the voltage across the
+inductor.</p></li>
+<li><p>Similarly, given the phasor for the voltage across an inductor we
+can compute the phasor for the current through the inductor using <span
+class="math inline">\(I=\frac{V}{j\omega L}\)</span></p></li>
+</ol>
+<h3 id="impedance-and-admittance">Impedance and Admittance</h3>
+<blockquote>
+<p>Impedance and admittance are generalizations of resistance and
+conductance.</p>
+<p>They differ from resistance and conductance in that they are complex
+and they vary with frequency.</p>
+</blockquote>
+<p>Impedance is defined to be the ratio of the <em>phasor</em> for the
+voltage across the component and the current through the component:
+<span class="math display">\[
+Z = \frac{V}{I}
+\]</span></p>
+<blockquote>
+<p>Impedance is a complex value. The real part of the impedance is
+referred to as the resistance and the imaginary part is referred to as
+the reactance</p>
+</blockquote>
+<p>For a linear component, admittance is defined to be the ratio of the
+<em>phasor</em> for the current through the component and the voltage
+across the component: <span class="math display">\[
+Y = \frac{I}{V}
+\]</span></p>
+<blockquote>
+<p>Admittance is a complex value. The real part of the admittance is
+referred to as the conductance and the imaginary part is referred to as
+the susceptance.</p>
+</blockquote>
+<h2 id="response-to-complex-exponentials">Response to Complex
+Exponentials</h2>
+<p>The response of an LTI system to a <strong>complex
+exponential</strong> input is the same <strong>complex
+exponential</strong> with only a change in <em>amplitude</em></p>
+<p><span class="math display">\[\begin{align}
+y(t) &amp;= H(s)e^{st} \\
+H(s) &amp;= \int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(h(t)\)</span> is the impulse
+response of a continuous-time LTI system</p>
+<blockquote>
+<p><strong>convolution integral</strong> is used here</p>
+</blockquote>
+<p><span class="math display">\[\begin{align}
+y[n] &amp;= H(z)z^n \\
+H(z) &amp;= \sum_{k=-\infty}^{+\infty}h[k]z^{-k}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(h(n)\)</span> is the impulse
+response of a discrete-time LTI system</p>
+<blockquote>
+<p><strong>convolution sum</strong> is used here</p>
+</blockquote>
+<p>The signals of the form <span class="math inline">\(e^{st}\)</span>
+in continuous time and <span class="math inline">\(z^{n}\)</span> in
+discrete time, where <span class="math inline">\(s\)</span> and <span
+class="math inline">\(z\)</span> are <em>complex numbers</em> are
+referred to as an <strong>eigenfunction</strong> of the system, and the
+<em>amplitude factor</em> <span class="math inline">\(H(s)\)</span>,
+<span class="math inline">\(H(z)\)</span> is referred to as the system's
+<strong>eigenvalue</strong></p>
+<h2 id="laplace-transform">Laplace transform</h2>
+<p>One of the important applications of the Laplace transform is in the
+<strong>analysis and characterization of LTI systems</strong>, which
+stems directly from the <em>convolution property</em> <span
+class="math display">\[
+Y(s) = H(s)X(s)
+\]</span> where <span class="math inline">\(X(s)\)</span>, <span
+class="math inline">\(Y(s)\)</span>, and <span
+class="math inline">\(H(s)\)</span> are the <em>Laplace transforms</em>
+of the input, output, and impulse response of the system,
+respectively</p>
+<blockquote>
+<p>From the response of LTI systems to complex exponentials, if the
+input to an LTI system is <span class="math inline">\(x(t) =
+e^{st}\)</span>, with <span class="math inline">\(s\)</span> the ROC of
+<span class="math inline">\(H(s)\)</span>, then the output will be <span
+class="math inline">\(y(t)=H(s)e^{st}\)</span>; i.e., <span
+class="math inline">\(e^{st}\)</span> is an <em>eigenfunction</em> of
+the system with <strong>eigenvalue</strong> equal to the <strong>Laplace
+transform of the impulse response</strong>.</p>
+</blockquote>
+<h3 id="s-domain-element-models">s-Domain Element Models</h3>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223225541693.png"
+alt="image-20231223225541693" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223225609893.png"
+alt="image-20231223225609893" /></p>
+<h2 id="sinusoidal-steady-state-analysis">Sinusoidal Steady-State
+Analysis</h2>
+<blockquote>
+<p>Here <strong>Sinusoidal</strong> means that source excitations have
+the form <span class="math inline">\(V_s\cos(\omega t +\theta)\)</span>
+or <span class="math inline">\(V_s\sin(\omega t+\theta)\)</span></p>
+<p><strong>Steady state</strong> mean that all transient behavior of the
+stable circuit has died out, i.e., decayed to zero</p>
+</blockquote>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223212820547.png"
+alt="image-20231223212820547" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223212846596.png"
+alt="image-20231223212846596" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223213016508.png"
+alt="image-20231223213016508" /></p>
+<h2 id="s-domain-and-phasor-domain"><span
+class="math inline">\(s\)</span>-domain and phasor-domain</h2>
+<p>Phasor analysis is a technique to find the steady-state response when
+the system input is a sinusoid. That is, phasor analysis is sinusoidal
+analysis.</p>
+<ul>
+<li>Phasor analysis is a powerful technique with which to find the
+steady-state portion of the complete response.</li>
+<li>Phasor analysis does not find the transient response.</li>
+<li>Phasor analysis does not find the complete response.</li>
+</ul>
+<blockquote>
+<p>The beauty of the phasor-domain circuit is that it is described by
+algebraic KVL and KCL equations with time-invariant sources, not
+differential equations of time</p>
+</blockquote>
+<p><img src="/2023/12/23/tf-freqresp/image-20231224001422189.png"
+alt="image-20231224001422189" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223230739219.png"
+alt="image-20231223230739219" /></p>
+<p>The difference here is that <em>Laplace analysis</em> can also give
+us the <strong>transient response</strong></p>
+<h3 id="general-response-classifications">General Response
+Classifications</h3>
+<p><img src="/2023/12/23/tf-freqresp/image_2_2_4.png" alt="img" /></p>
+<ul>
+<li><p><strong>zero-input response</strong>, <strong>zero-state
+response</strong> &amp; <strong>complete response</strong></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223235252850.png"
+alt="image-20231223235252850" /></p>
+<blockquote>
+<p>The <em>zero-state response</em> is given by <span
+class="math inline">\(\mathscr{L^1}[H(s)F(s)]\)</span>, for the
+arbitrary <span class="math inline">\(s\)</span>-domain input <span
+class="math inline">\(F(s)\)</span></p>
+</blockquote></li>
+<li><p><strong>transient response</strong> &amp; <strong>steady-state
+response</strong></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231224000454014.png"
+alt="image-20231224000454014" /></p></li>
+<li><p><strong>natural response</strong> &amp; <strong>forced
+response</strong></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231224000817438.png"
+alt="image-20231224000817438" /></p></li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>Ken Kundert. <a
+target="_blank" rel="noopener" href="http://www.designers-guide.org/Theory/phasors.pdf">Introduction to
+Phasors</a>. <em>Designer’s Guide Community</em>. September 2011.</p>
+<p>How to Perform Linearity Circuit Analysis [<a
+target="_blank" rel="noopener" href="https://resources.pcb.cadence.com/blog/2021-how-to-perform-linearity-circuit-analysis">https://resources.pcb.cadence.com/blog/2021-how-to-perform-linearity-circuit-analysis</a>]</p>
+<p>Stephen P. Boyd. EE102 Lecture 7 Circuit analysis via Laplace
+transform <a
+target="_blank" rel="noopener" href="https://web.stanford.edu/~boyd/ee102/laplace_ckts.pdf">[https://web.stanford.edu/~boyd/ee102/laplace_ckts.pdf]</a></p>
+<p>Cheng-Kok Koh, EE695K VLSI Interconnect, S-Domain Analysis [<a
+target="_blank" rel="noopener" href="https://engineering.purdue.edu/~chengkok/ee695K/lec3c.pdf">https://engineering.purdue.edu/~chengkok/ee695K/lec3c.pdf</a>]</p>
+<p>Kenneth R. Demarest, Circuit Analysis using Phasors, Laplace
+Transforms, and Network Functions [<a
+target="_blank" rel="noopener" href="https://people.eecs.ku.edu/~demarest/212/Phasor%20and%20Laplace%20review.pdf">https://people.eecs.ku.edu/~demarest/212/Phasor%20and%20Laplace%20review.pdf</a>]</p>
+<p>DeCarlo, R. A., &amp; Lin, P.-M. (2009). <em>Linear circuit
+analysis : time domain, phasor, and Laplace transform approaches</em>
+(3rd ed).</p>
+<p>Davis, Artice M.. "Linear Circuit Analysis." <em>The Electrical
+Engineering Handbook - Six Volume Set</em> (1998)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +588,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -487,7 +849,7 @@ University. VLSI Testing</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -668,7 +1030,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -766,7 +1128,7 @@ target="_blank" rel="noopener" href="https://savobajic.ca/projects/academic/stat
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1012,7 +1374,7 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1102,7 +1464,7 @@ target="_blank" rel="noopener" href="https://designers-guide.org/modeling/dataco
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1256,7 +1618,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1358,7 +1720,7 @@ target="_blank" rel="noopener" href="https://cse.nsysu.edu.tw/app/index.php?Acti
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1997,7 +2359,7 @@ target="_blank" rel="noopener" href="https://mixsignal.files.wordpress.com/2013/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2020,319 +2382,6 @@ target="_blank" rel="noopener" href="https://mixsignal.files.wordpress.com/2013/
     
     <div class="post-body" itemprop="articleBody">
           <p>Chung-chun Chen (陳重均)</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/21/phasenoise-jitter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/21/phasenoise-jitter/" class="post-title-link" itemprop="url">Phase Noise and Jitter Simulation</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-10-21 11:33:58" itemprop="dateCreated datePublished" datetime="2023-10-21T11:33:58+00:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
-<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
-<ol type="1">
-<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
-alt="image-20220511112856934" /></p></li>
-<li><p>manually calculate by definition</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
-alt="image-20220511112806122" /></p></li>
-<li><p><code>output noise</code> with unit <code>dBc</code></p>
-<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
-convention: SSB</em></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
-alt="image-20220511113248984" /></p></li>
-</ol>
-<blockquote>
-<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
-simulation,</p>
-</blockquote>
-<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
-sampled(jitter)/Edge Crossing</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
-alt="EdgePhaseNoise.drawio" /></p>
-<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
-alt="image-20220515214901120" /></p>
-<p>Another way, the following equation can also be used for
-<code>sampled(jitter)/Edge Crossing</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
-<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
-alt="image-20220511150337318" /></p>
-<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
-sampled(jitter) pnoise</h3>
-<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
-obtained by <em>transient noise simulation</em></p>
-<p>The idea is that sample waveform with ideal clock, subtract DC
-offset, then fft(psd)</p>
-<ul>
-<li>samplesRaw = sample(wv)</li>
-<li>samplePost = samplesRaw - average(samplesRaw)</li>
-<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
-alt="image-20220516184543148" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
-alt="image-20220516184844296" /></p>
-<p><strong>Expression</strong>:</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
-alt="image-20220516185506348" /></p>
-<blockquote>
-<p>The computation cost is typically very high, and the accuracy is
-lesser as compared to PSS/Pnoise</p>
-</blockquote>
-<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
-Sampled(jitter): Sampled Phase Option</h2>
-<ul>
-<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
-<li>Use model:
-<ul>
-<li>Sampleds Per Period: number of ponits</li>
-<li>Add Specific Points: specific time point, still time points</li>
-</ul></li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
-alt="image-20220712085426461" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
-alt="image-20220712085836315" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
-alt="image-20220712090011204" /></p>
-<blockquote>
-<p>pss beat freq = 5GHz</p>
-<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
-</blockquote>
-<h2 id="transient-noise">Transient noise</h2>
-<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h3>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
-function</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
-<code>psd</code> and <code>abs_jitter</code> function</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h4 id="comparison">Comparison</h4>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h3 id="rms-value">RMS value</h3>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h3 id="remarks">Remarks</h3>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL: <a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL: <a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
 
       
     </div>

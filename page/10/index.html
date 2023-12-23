@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">179</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,105 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/29/arthmetic-verilog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/29/arthmetic-verilog/" class="post-title-link" itemprop="url">Arithmetic in Verilog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-29 16:01:08" itemprop="dateCreated datePublished" datetime="2022-05-29T16:01:08+00:00">2022-05-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>1'b1</code>: overflow</p>
+</blockquote>
+<h4 id="signed-signed-signed">signed + signed = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code>: overflow</p>
+<p><code>2'b10</code>: underflow</p>
+</blockquote>
+<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +325,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -339,7 +438,7 @@ target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -581,7 +680,7 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -701,7 +800,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -960,7 +1059,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1182,7 +1281,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:58" itemprop="dateModified" datetime="2023-12-20T15:03:58+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1275,7 +1374,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1415,7 +1514,7 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1545,7 +1644,7 @@ doi:10.1007/978-3-030-03238-8</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
+      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1599,179 +1698,6 @@ Combinational Networks: <a
 target="_blank" rel="noopener" href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
 <p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
 target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/07/Overflowflag-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/07/Overflowflag-verilog/" class="post-title-link" itemprop="url">Overflow Detection in Verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-07 21:12:38" itemprop="dateCreated datePublished" datetime="2022-05-07T21:12:38+00:00">2022-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-20 15:03:57" itemprop="dateModified" datetime="2023-12-20T15:03:57+00:00">2023-12-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>Arithmetic operations have a potential to run into a condition known
-as <em>overflow</em>.</li>
-<li>Overflow occurs with respect to the <strong>size of the data
-type</strong> that must accommodate the result.</li>
-<li>Overflow indicates that the result was <em>too large</em> or <em>too
-small</em> to fit in the original data type.</li>
-</ul>
-<h2 id="overflow-when-adding-unsigned-number">Overflow when adding
-unsigned number</h2>
-<p>When two unsigned numbers are added, overflow occurs if</p>
-<ul>
-<li>there is a <strong>carry out</strong> of the leftmost bit.</li>
-</ul>
-<h2 id="overflow-when-adding-signed-numbers">Overflow when adding signed
-numbers</h2>
-<p>When two signed 2's complement numbers are added, overflow is
-detected if:</p>
-<ol type="1">
-<li>both operands are positive and the result is negative, or</li>
-<li>both operands are negative and the result is positive.</li>
-</ol>
-<p>Notice that when operands have <strong>opposite signs</strong>, their
-sum will never overflow. Therefore, <em>overflow can only occur when the
-operands have the same sign</em>.</p>
-<table>
-<thead>
-<tr class="header">
-<th>A</th>
-<th>B</th>
-<th>carryout_sum</th>
-<th>overflow</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>0</strong>11 (3)</td>
-<td><strong>0</strong>11 (3)</td>
-<td>0_<strong>1</strong>10 (6)</td>
-<td>overflow</td>
-</tr>
-<tr class="even">
-<td><strong>1</strong>00 (-4)</td>
-<td><strong>1</strong>00 (-4)</td>
-<td>1_<strong>0</strong>00 (-8)</td>
-<td>underflow</td>
-</tr>
-<tr class="odd">
-<td><strong>1</strong>11 (-1)</td>
-<td><strong>1</strong>10 (-2)</td>
-<td>1_<strong>1</strong>01 (-3)</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>carryout information <strong>ISN'T</strong> needed to detect
-overflow/underflow for signed number addition</p>
-</blockquote>
-<h3 id="extbitmsb">EXTBIT:MSB</h3>
-<p>extended 1bit and msb bit can be used to detect overflow or
-underflow</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span>  [<span class="number">1</span>:<span class="number">0</span>]      acc_inc;</span><br><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span>  [<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>]   acc;</span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">10</span>  :<span class="number">0</span>]   acc_w;  <span class="comment">// extend 1b for saturation</span></span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>]   acc_stat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> acc_w = acc + acc_inc;   <span class="comment">// signed arithmetic</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> acc_stat = (acc_w[<span class="number">10</span>-<span class="number">1</span> +: <span class="number">2</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;(<span class="number">10</span>-<span class="number">1</span>)&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125; : <span class="comment">// up saturation</span></span><br><span class="line">    (acc_w[<span class="number">10</span>-<span class="number">1</span> +: <span class="number">2</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;(<span class="number">10</span>-<span class="number">1</span>)&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;  :   			 <span class="comment">// down saturation</span></span><br><span class="line">    acc_w[<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code> : overflow, up saturation</p>
-<p><code>2'b10</code>: underflow, down saturation</p>
-</blockquote>
-<h2 id="s-complement-negative-number">2's complement negative
-number</h2>
-<ol type="1">
-<li>Flip all bits</li>
-<li>Add <strong>1</strong>.</li>
-</ol>
-<p>N-bit signed number <span class="math display">\[
-A = -M_{N-1}2^{N-1}+\sum_{k=0}^{N-2}M_k2^k
-\]</span> Flip all bits <span class="math display">\[\begin{align}
-A_{flip} &amp;= -(1-M_{N-1})2^{N-1} +\sum_{k=0}^{N-2}(1-M_k)2^k \\
-&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k
--2^{N-1}+\sum_{k=0}^{N-2}2^k \\
-&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k -1
-\end{align}\]</span></p>
-<p>Add <strong>1</strong> <span class="math display">\[\begin{align}
-A_- &amp;= A_{flip}+1 \\
-&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k \\
-&amp;= -A
-\end{align}\]</span></p>
-<h2 id="reference">reference</h2>
-<p>Overflow Detection: <a
-target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html</a></p>
 
       
     </div>

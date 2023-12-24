@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-count">181</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,157 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/22/z-Transform/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/22/z-Transform/" class="post-title-link" itemprop="url">The z-Transform and Its Application</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-22 09:31:24" itemprop="dateCreated datePublished" datetime="2022-03-22T09:31:24+00:00">2022-03-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="fir-equalization">FIR Equalization</h2>
+<h3 id="frequency-response">Frequency Response</h3>
+<p><img src="/2022/03/22/z-Transform/image-20220322093428287.png"
+alt="image-20220322093428287" /> <span class="math display">\[
+z = e^{j\omega T_s}
+\]</span></p>
+<h3 id="unit-impulse">Unit impulse</h3>
+<p>filter coefficients are <strong>[-0.131, 0.595, -0.274]</strong> and
+sampling period is <strong>100ps</strong></p>
+<p><img src="/2022/03/22/z-Transform/image-20220428125454912.png"
+alt="image-20220428125454912" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% Frequency response</span></span><br><span class="line">w = [<span class="number">-0.131</span>, <span class="number">0.595</span>, <span class="number">-0.274</span>];</span><br><span class="line">Ts = <span class="number">100e-12</span>;</span><br><span class="line">[mag, w] = freqz(w, <span class="number">1</span>, [], <span class="number">1</span>/Ts);</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="number">1e9</span>, <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(mag)));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% unit impulse response from transfer function</span></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">z = tf(<span class="string">&#x27;z&#x27;</span>, Ts);</span><br><span class="line">h = <span class="number">-0.131</span> + <span class="number">0.595</span>*z^(<span class="number">-1</span>) <span class="number">-0.274</span>*z^(<span class="number">-2</span>);</span><br><span class="line">[y, t] = impulse(h);</span><br><span class="line">stem(t*<span class="number">1e10</span>, y*Ts);  <span class="comment">% !!! y*Ts is essential</span></span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&quot;unit impulse response&quot;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(\times 100ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>impulse</code>:</p>
+<p>For discrete-time systems, the impulse response is the response to a
+unit area pulse of length <code>Ts</code> and height <code>1/Ts</code>,
+where <code>Ts</code> is the sample time of the system. (This pulse
+approaches <span class="math inline">\(\delta(t)\)</span> as
+<code>Ts</code> approaches zero.)</p>
+<p>Scale output:</p>
+<p>Multiply <code>impulse</code> output with sample period
+<code>Ts</code> in order to correct <code>1/Ts</code> height of
+<code>impulse</code> function.</p>
+</blockquote>
+<h3 id="psd-transformation">PSD transformation</h3>
+<p>If we have power spectrum or power spectrum density of <strong>both
+edge's absolute jitter</strong> (<span
+class="math inline">\(x(n)\)</span>) , <span
+class="math inline">\(P_{\text{xx}}\)</span></p>
+<p>Then <strong>1UI</strong> jitter is <span
+class="math inline">\(x_{\text{1UI}}(n)=x(n)-x(n-1)\)</span>, and
+<strong>Period</strong> jitter is <span
+class="math inline">\(x_{\text{Period}}(n)=x(n)-x(n-2)\)</span>, which
+can be modeled as FIR filter, <span class="math inline">\(H(\omega) =
+1-z^{-k}\)</span>, i.e. <span class="math inline">\(k=1\)</span> for
+<strong>1UI</strong> jitter and <span class="math inline">\(k=2\)</span>
+<strong>Period</strong> jitter <span
+class="math display">\[\begin{align}
+P_{\text{xx}}&#39;(\omega) &amp;= P_{\text{xx}}(\omega) \cdot \left|
+1-z^{-k}  \right|^2 \\
+&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-(e^{j\omega
+T_s})^{-k}  \right|^2 \\
+&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-e^{-j\omega T_s
+k}  \right|^2
+\end{align}\]</span></p>
+<p><img src="/2022/03/22/z-Transform/image-20220519172239916.png"
+alt="image-20220519172239916" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">clear all</span><br><span class="line">close all</span><br><span class="line">clc</span><br><span class="line"></span><br><span class="line">xf_fs = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">0.5</span>;</span><br><span class="line">k = <span class="number">1</span>;</span><br><span class="line">H_1UI = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_1UI = <span class="built_in">abs</span>(H_1UI).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_1UI);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for 1UI jitter&#x27;</span>);</span><br><span class="line"></span><br><span class="line">k = <span class="number">2</span>;</span><br><span class="line">H_period = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_period = <span class="built_in">abs</span>(H_period).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_period);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for Period jitter&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/22/z-Transform/image-20220709104127384.png"
+alt="image-20220709104127384" /> <span class="math display">\[
+x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p><a
+target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf">Sam
+Palermo, ECEN720, Lecture 7: Equalization Introduction &amp; TX FIR
+Eq</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab5_2021.pdf">Sam
+Palermo, ECEN720, Lab5 –Equalization Circuits</a></p>
+<p>B. Razavi, "The z-Transform for Analog Designers [The Analog Mind],"
+IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14,
+Summer 2020.</p>
+<p>Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial
+Data Communications</p>
+<p>Mathuranathan. Digital filter design – Introduction <a
+target="_blank" rel="noopener" href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/">https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +377,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -331,7 +482,7 @@ separately</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -500,7 +651,7 @@ https://escholarship.org/uc/item/75g8j8jt</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -591,7 +742,7 @@ I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -761,7 +912,7 @@ Topics" DesignCon IBIS Summit 2011</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -924,7 +1075,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1065,7 +1216,7 @@ together
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1168,7 +1319,7 @@ focusing on bang-bang loop CDR design methodology, ISSCC Short Course,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1783,7 +1934,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
+      <time title="Modified: 2023-12-24 13:41:11" itemprop="dateModified" datetime="2023-12-24T13:41:11+00:00">2023-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1975,169 +2126,8 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/13/jitter-amplification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/13/jitter-amplification/" class="post-title-link" itemprop="url">jitter amplification</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-13 23:02:11" itemprop="dateCreated datePublished" datetime="2022-03-13T23:02:11+00:00">2022-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-23 16:51:18" itemprop="dateModified" datetime="2023-12-23T16:51:18+00:00">2023-12-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="transient-noise-and-rms_jitter-function">1. transient noise and
-rms_jitter function</h2>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608233610066.png"
-alt="image-20220608233610066" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313230930333.png"
-alt="image-20220313230930333" /></p>
-<blockquote>
-<p><code>RJ(rms)</code>: single Edge or Both Edge?</p>
-<p><code>RJ(seed)</code>: what is it?</p>
-</blockquote>
-<h2 id="phase-noise-method">2 phase noise method</h2>
-<p>Directly compare the input phase noise and output phase noise, the
-input waveform maybe is the PLL output or other clock distribution end
-point</p>
-<h2 id="jitter-impulse-responsejir-jitter-impulse-responsejir">3. Jitter
-Impulse Response(JIR) &amp; Jitter Impulse Response(JIR)</h2>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231013645.png"
-alt="image-20220313231013645" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231027512.png"
-alt="image-20220313231027512" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231038542.png"
-alt="image-20220313231038542" /></p>
-<h3 id="example">Example</h3>
-<h4 id="low-pass-filter">Low Pass Filter</h4>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124344158.png"
-alt="image-20220322124344158" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">x = <span class="built_in">zeros</span>(N,<span class="number">1</span>);</span><br><span class="line">x(<span class="number">1</span>) = <span class="number">6</span>;</span><br><span class="line">x(<span class="number">2</span>) = <span class="number">-2</span>;</span><br><span class="line">x(<span class="number">3</span>) = <span class="number">0.5</span>;</span><br><span class="line">x = x/<span class="number">5</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(x)</span><br><span class="line">Y = fft(x, N);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>)));</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124902394.png"
-alt="image-20220322124902394" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124932584.png"
-alt="image-20220322124932584" /></p>
-<h4 id="high-pass-filter">High Pass Filter</h4>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220327010223664.png"
-alt="image-20220327010223664" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">128</span>;</span><br><span class="line">j_hp = <span class="built_in">zeros</span>(N, <span class="number">1</span>);</span><br><span class="line">j_hp(<span class="number">1</span>)= <span class="number">1</span>;</span><br><span class="line">j_hp(<span class="number">2</span>) = <span class="number">0.5</span>;</span><br><span class="line">j_hp(<span class="number">3</span>) = <span class="number">-0.3</span>;</span><br><span class="line">j_hp(<span class="number">4</span>) = <span class="number">0.3</span>;</span><br><span class="line">j_hp(<span class="number">5</span>) = <span class="number">-0.1</span>;</span><br><span class="line">jtf_hp = <span class="built_in">abs</span>(fft(j_hp));</span><br><span class="line">semilogx(jtf_hp(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Jitter Amplification Factor&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220327010421475.png"
-alt="image-20220327010421475" /></p>
-<h3 id="inverter-chain">inverter chain</h3>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232251056.png"
-alt="image-20220608232251056" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232658054.png"
-alt="image-20220608232658054" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232438188.png"
-alt="image-20220608232438188" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ji = <span class="number">1e-12</span>; <span class="comment">% 1ps</span></span><br><span class="line">data = importdata(<span class="string">&#x27;/path/to/jir.csv&#x27;</span>);</span><br><span class="line">jo = data.data(:, <span class="number">2</span>);</span><br><span class="line">Ts = <span class="number">31.25e-12</span>;</span><br><span class="line">Fs = <span class="number">1</span>/Ts;</span><br><span class="line">jir = jo/ji;</span><br><span class="line">N = <span class="number">2</span>^(<span class="built_in">nextpow2</span>(<span class="built_in">length</span>(jir)<span class="number">-1</span>));</span><br><span class="line">Y = fft(jir, N);</span><br><span class="line">jif = <span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">freqs= Fs/N*(<span class="number">0</span>:N/<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(feqs/<span class="number">1e9</span>, jtf, <span class="string">&#x27;linewidth&#x27;</span>, <span class="number">2</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;JTF&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;JTF of inverter chain&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608233303576.png"
-alt="image-20220608233303576" /></p>
-<h2 id="reference">Reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen689/lecture13_ee720_fwd_clk_deskew.pdf">Sam
-Palermo, ECEN 720, Lecture 13 - Forwarded Clock Deskew Circuits</a></p>
-<p>B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and
-Measurement Techniques for High-Speed Data Links—A Tutorial," in IEEE
-Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 1,
-pp. 17-39, Jan. 2009, doi: 10.1109/TCSI.2008.931647.</p>
-<p>Phase-Locked Frequency Generation and Clocking : Architectures and
-Circuits for Modern Wireless and Wireline Systems by Woogeun Rhee (2020,
-Hardcover)</p>
-<p>Mathuranathan Viswanathan, Digital Modulations using Matlab : Build
-Simulation Models from Scratch</p>
-<p>Tony Chan Carusone, University of Toronto, Canada, 2022 CICC
-Educational Sessions "Architectural Considerations in 100+ Gbps Wireline
-Transceivers"</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/14/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/14/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

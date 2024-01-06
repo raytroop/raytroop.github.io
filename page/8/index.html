@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">182</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,145 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/05/integrator-design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/05/integrator-design/" class="post-title-link" itemprop="url">integrator design</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-11-05 22:04:21" itemprop="dateCreated datePublished" datetime="2022-11-05T22:04:21+00:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +365,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -346,7 +485,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -448,7 +587,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -608,7 +747,7 @@ alt="image-20221002220000435" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -729,7 +868,7 @@ Design, Layout, and Simulation, Fourth Edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -815,7 +954,7 @@ Design, Layout, and Simulation, Fourth Edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -937,7 +1076,7 @@ signals.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1027,7 +1166,7 @@ target="_blank" rel="noopener" href="https://hdl.handle.net/1969.1/166485">https
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1319,7 +1458,7 @@ Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1608,204 +1747,6 @@ https://doi.org/10.1109/JSSC.2021.3109562</p>
 <p>J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm
 CMOS," 2018 IEEE International Solid - State Circuits Conference -
 (ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/14/jtf-ojtf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/14/jtf-ojtf/" class="post-title-link" itemprop="url">JTF and OJTF</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-07-14 10:22:47" itemprop="dateCreated datePublished" datetime="2022-07-14T10:22:47+00:00">2022-07-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="concepts-of-jtf-and-ojtf">Concepts of JTF and OJTF</h2>
-<p>Simplified Block Diagram of a Clock-Recovery PLL <img
-src="/2022/07/14/jtf-ojtf/pll_block_diagram.gif"
-alt="pll_block_diagram" /></p>
-<p><strong>Jitter Transfer Function (JTF)</strong></p>
-<ul>
-<li>Input Signal Versus Recovered Clock</li>
-<li>JTF, by jitter frequency, compares how much input signal jitter is
-transferred to the <strong>output of a clock-recovery's PLL (recovered
-clock)</strong>
-<ul>
-<li>Input signal jitter that is within the clock recovery PLL's loop
-bandwidth results in jitter that is faithfully transferred (closed-loop
-gain) to the clock recovery PLL's output signal. JTF in this situation
-is approximately 1.</li>
-<li>Input signal jitter that is outside the clock recovery PLL's loop
-bandwidth results in decreasing jitter (open-loop gain) on the clock
-recovery PLL's output, because the jitter is filtered out and no longer
-reaches the PLL's VCO</li>
-</ul></li>
-</ul>
-<p><strong>Observed Jitter Transfer Function</strong></p>
-<ul>
-<li>Input Signal Versus Sampled Signal</li>
-<li>OJTF compares how much input signal jitter is transferred to the
-<strong>output of a receiver's decision making circuit</strong> as
-effected by a clock recovery's PLL. As the recovered clock is the
-reference for detecting the input signal
-<ul>
-<li>Input signal jitter that is <strong>within</strong> the clock
-recovery PLL's loop bandwidth results in jitter on the recovered clock
-which reduces the amount of jitter that can be detected. The input
-signal and clock signal are closer in phase</li>
-<li>Input signal jitter that is <strong>outside</strong> the clock
-recovery PLL's loop bandwidth results in <strong>reduced jitter on the
-recovered cloc</strong>k which increases the amount of jitter that can
-be detected. The input signal and clock signal are more out of phase.
-Jitter that is on both the input and clock signals can not detected or
-is reduced</li>
-</ul></li>
-</ul>
-<p>JTF and OJTF for 1st Order PLLs</p>
-<p><img src="/2022/07/14/jtf-ojtf/jsa_1st_order_graph.png"
-alt="jsa_1st_order_graph" /></p>
-<p><img src="/2022/07/14/jtf-ojtf/neuhelium-jtf-ojtf.png"
-alt="neuhelium-jtf-ojtf" /></p>
-<blockquote>
-<p>The observed jitter is a complement to the PLL jitter transfer
-response OJTF=1-JTF <strong>(Phase matters!)</strong></p>
-<p>OTJF gives the amount of jitter which is tracked and therefore not
-observed at the output of the CDR as a function of the jitter rate
-applied to the input.</p>
-</blockquote>
-<p><img src="/2022/07/14/jtf-ojtf/A-jtf-ojtf.png"
-alt="A-jtf-ojtf" /></p>
-<h2 id="jitter-measurement">Jitter Measurement</h2>
-<p><span class="math display">\[
-J_{\text{measured}} = JTF_{\text{DUT}} \cdot OJTF_{\text{instrument}}
-\]</span> The combination of the OJTF of a jitter measurement device and
-the JTF of the clock generator under test gives the measured jitter as a
-function of frequency.</p>
-<p><img src="/2022/07/14/jtf-ojtf/image-20220716094732273.png"
-alt="image-20220716094732273" /></p>
-<p>For example, a clock generator with a type 1, 1st order PLL measured
-with a jitter measurement device employing a golden PLL is <span
-class="math display">\[
-J_{\text{measured}} = \frac{\omega_1}{s+\omega_1}\frac{s}{s+\omega_2}
-\]</span></p>
-<p>Accurate measurement of the clock JTF requires that the OJTF cutoff
-of the jitter measurement be significantly below that of the clock JTF
-and that the measurement is compensated for the instrument's OJTF.</p>
-<p>The overall response is a band pass filter because the clock JTF is
-low pass and the jitter measurement device OJTF is high pass.</p>
-<p>The compensation for the instrument OJTF is performed by measuring
-the jitter of the reference clock at each jitter rate being tested and
-comparing the <strong>reference jitter</strong> with the <strong>jitter
-measured at the output of the DUT</strong>.</p>
-<p><img src="/2022/07/14/jtf-ojtf/jit_resp.png" alt="jtf-ojtf" /></p>
-<p>The lower the cutoff frequency of the jitter measurement device the
-better the accuracy of the measurement will be.</p>
-<p>The cutoff frequency is limited by several factors including the
-phase noise of the DUT and measurement time.</p>
-<h2 id="digital-sampling-oscilloscope">Digital Sampling
-Oscilloscope</h2>
-<p>How to analyze jitter:</p>
-<ul>
-<li>TIE (Time Interval Error) track</li>
-<li>histogram</li>
-<li>FFT</li>
-</ul>
-<p><strong>TIE track</strong> provides a direct view of how the phase of
-the clock evolves over time.</p>
-<p><strong>histogram</strong> provides valuable information about the
-long term variations in the timing.</p>
-<p><strong>FFT</strong> allows jitter at specific rates to be measured
-down to the femto-second range.</p>
-<blockquote>
-<p>Maintaining the record length at a minimum of <span
-class="math inline">\(1/10\)</span> of the inverse of the PLL loop
-bandwidth minimizes the response error</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>neuhelium, 抖动、眼图和高速数字链路分析基础 URL: <a
-target="_blank" rel="noopener" href="http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf">http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf</a></p>
-<p>Keysight JTF &amp; OJTF Concepts, <a
-target="_blank" rel="noopener" href="https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4">https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4</a></p>
-<p>Complementary Transmitter and Receiver Jitter Test Methodlogy, URL:
-<a
-target="_blank" rel="noopener" href="https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf">https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf</a></p>
-<p>SerDesDesign.com CDR_BangBang_Model URL: <a
-target="_blank" rel="noopener" href="https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf">https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf</a></p>
-<p>M. Schnecker, Jitter Transfer Measurement in Clock Circuits, LeCroy
-Corporation, DesignCon 2009. URL: <a
-target="_blank" rel="noopener" href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf">http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf</a></p>
 
       
     </div>

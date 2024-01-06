@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">182</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,204 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/14/jtf-ojtf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/14/jtf-ojtf/" class="post-title-link" itemprop="url">JTF and OJTF</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-14 10:22:47" itemprop="dateCreated datePublished" datetime="2022-07-14T10:22:47+00:00">2022-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="concepts-of-jtf-and-ojtf">Concepts of JTF and OJTF</h2>
+<p>Simplified Block Diagram of a Clock-Recovery PLL <img
+src="/2022/07/14/jtf-ojtf/pll_block_diagram.gif"
+alt="pll_block_diagram" /></p>
+<p><strong>Jitter Transfer Function (JTF)</strong></p>
+<ul>
+<li>Input Signal Versus Recovered Clock</li>
+<li>JTF, by jitter frequency, compares how much input signal jitter is
+transferred to the <strong>output of a clock-recovery's PLL (recovered
+clock)</strong>
+<ul>
+<li>Input signal jitter that is within the clock recovery PLL's loop
+bandwidth results in jitter that is faithfully transferred (closed-loop
+gain) to the clock recovery PLL's output signal. JTF in this situation
+is approximately 1.</li>
+<li>Input signal jitter that is outside the clock recovery PLL's loop
+bandwidth results in decreasing jitter (open-loop gain) on the clock
+recovery PLL's output, because the jitter is filtered out and no longer
+reaches the PLL's VCO</li>
+</ul></li>
+</ul>
+<p><strong>Observed Jitter Transfer Function</strong></p>
+<ul>
+<li>Input Signal Versus Sampled Signal</li>
+<li>OJTF compares how much input signal jitter is transferred to the
+<strong>output of a receiver's decision making circuit</strong> as
+effected by a clock recovery's PLL. As the recovered clock is the
+reference for detecting the input signal
+<ul>
+<li>Input signal jitter that is <strong>within</strong> the clock
+recovery PLL's loop bandwidth results in jitter on the recovered clock
+which reduces the amount of jitter that can be detected. The input
+signal and clock signal are closer in phase</li>
+<li>Input signal jitter that is <strong>outside</strong> the clock
+recovery PLL's loop bandwidth results in <strong>reduced jitter on the
+recovered cloc</strong>k which increases the amount of jitter that can
+be detected. The input signal and clock signal are more out of phase.
+Jitter that is on both the input and clock signals can not detected or
+is reduced</li>
+</ul></li>
+</ul>
+<p>JTF and OJTF for 1st Order PLLs</p>
+<p><img src="/2022/07/14/jtf-ojtf/jsa_1st_order_graph.png"
+alt="jsa_1st_order_graph" /></p>
+<p><img src="/2022/07/14/jtf-ojtf/neuhelium-jtf-ojtf.png"
+alt="neuhelium-jtf-ojtf" /></p>
+<blockquote>
+<p>The observed jitter is a complement to the PLL jitter transfer
+response OJTF=1-JTF <strong>(Phase matters!)</strong></p>
+<p>OTJF gives the amount of jitter which is tracked and therefore not
+observed at the output of the CDR as a function of the jitter rate
+applied to the input.</p>
+</blockquote>
+<p><img src="/2022/07/14/jtf-ojtf/A-jtf-ojtf.png"
+alt="A-jtf-ojtf" /></p>
+<h2 id="jitter-measurement">Jitter Measurement</h2>
+<p><span class="math display">\[
+J_{\text{measured}} = JTF_{\text{DUT}} \cdot OJTF_{\text{instrument}}
+\]</span> The combination of the OJTF of a jitter measurement device and
+the JTF of the clock generator under test gives the measured jitter as a
+function of frequency.</p>
+<p><img src="/2022/07/14/jtf-ojtf/image-20220716094732273.png"
+alt="image-20220716094732273" /></p>
+<p>For example, a clock generator with a type 1, 1st order PLL measured
+with a jitter measurement device employing a golden PLL is <span
+class="math display">\[
+J_{\text{measured}} = \frac{\omega_1}{s+\omega_1}\frac{s}{s+\omega_2}
+\]</span></p>
+<p>Accurate measurement of the clock JTF requires that the OJTF cutoff
+of the jitter measurement be significantly below that of the clock JTF
+and that the measurement is compensated for the instrument's OJTF.</p>
+<p>The overall response is a band pass filter because the clock JTF is
+low pass and the jitter measurement device OJTF is high pass.</p>
+<p>The compensation for the instrument OJTF is performed by measuring
+the jitter of the reference clock at each jitter rate being tested and
+comparing the <strong>reference jitter</strong> with the <strong>jitter
+measured at the output of the DUT</strong>.</p>
+<p><img src="/2022/07/14/jtf-ojtf/jit_resp.png" alt="jtf-ojtf" /></p>
+<p>The lower the cutoff frequency of the jitter measurement device the
+better the accuracy of the measurement will be.</p>
+<p>The cutoff frequency is limited by several factors including the
+phase noise of the DUT and measurement time.</p>
+<h2 id="digital-sampling-oscilloscope">Digital Sampling
+Oscilloscope</h2>
+<p>How to analyze jitter:</p>
+<ul>
+<li>TIE (Time Interval Error) track</li>
+<li>histogram</li>
+<li>FFT</li>
+</ul>
+<p><strong>TIE track</strong> provides a direct view of how the phase of
+the clock evolves over time.</p>
+<p><strong>histogram</strong> provides valuable information about the
+long term variations in the timing.</p>
+<p><strong>FFT</strong> allows jitter at specific rates to be measured
+down to the femto-second range.</p>
+<blockquote>
+<p>Maintaining the record length at a minimum of <span
+class="math inline">\(1/10\)</span> of the inverse of the PLL loop
+bandwidth minimizes the response error</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>neuhelium, 抖动、眼图和高速数字链路分析基础 URL: <a
+target="_blank" rel="noopener" href="http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf">http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf</a></p>
+<p>Keysight JTF &amp; OJTF Concepts, <a
+target="_blank" rel="noopener" href="https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4">https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4</a></p>
+<p>Complementary Transmitter and Receiver Jitter Test Methodlogy, URL:
+<a
+target="_blank" rel="noopener" href="https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf">https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf</a></p>
+<p>SerDesDesign.com CDR_BangBang_Model URL: <a
+target="_blank" rel="noopener" href="https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf">https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf</a></p>
+<p>M. Schnecker, Jitter Transfer Measurement in Clock Circuits, LeCroy
+Corporation, DesignCon 2009. URL: <a
+target="_blank" rel="noopener" href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf">http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +424,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -477,7 +675,7 @@ Data Communications</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -576,7 +774,7 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -796,7 +994,7 @@ Publishers Inc., San Francisco, CA, USA.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1004,7 +1202,7 @@ target="_blank" rel="noopener" href="https://fires.im/micro22-slides-pdf/04_hamm
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1105,7 +1303,7 @@ target="_blank" rel="noopener" href="https://www.francisz.cn/2019/07/18/sv-iff/"
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1441,7 +1639,7 @@ Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1719,7 +1917,7 @@ Sixth international symposium on quality electronic design (isqed'05),
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1857,7 +2055,7 @@ Units</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2057,119 +2255,6 @@ dump the changes for first 100 units of time and then between 10200 and
 <h2 id="reference">reference</h2>
 <p>$dumpvars and $dumpfile Verilog,
 http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/04/plusargs-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/04/plusargs-verilog/" class="post-title-link" itemprop="url">plusargs in verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-04 12:29:28" itemprop="dateCreated datePublished" datetime="2022-06-04T12:29:28+00:00">2022-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-target="_blank" rel="noopener" href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-target="_blank" rel="noopener" href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
 
       
     </div>

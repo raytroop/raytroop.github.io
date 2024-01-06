@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">182</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,191 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/13/VD-DRC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/13/VD-DRC/" class="post-title-link" itemprop="url">voltage-dependent DRC checks</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-13 23:16:07" itemprop="dateCreated datePublished" datetime="2022-04-13T23:16:07+00:00">2022-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>In T* DRC deck, it is based on the voltage recognition CAD layer and
+net connection to calculate the voltage difference between two
+neighboring nets by the following formula:</p>
+<p><span class="math display">\[
+\Delta V = \max(V_H(\text{net1})-V_L(\text{net2}),
+V_H(\text{net2})-V_L(\text{net1}))
+\]</span></p>
+<p>where <span class="math display">\[
+V_H(\text{netx}) = \max(V(\text{netx}))
+\]</span> and <span class="math display">\[
+V_L(\text{netx}) = \min(V(\text{netx}))
+\]</span></p>
+<blockquote>
+<ul>
+<li>The <span class="math inline">\(\Delta V\)</span> will be
+<strong>0</strong> if two nets are connected as same potential</li>
+<li>If <span class="math inline">\(V_L \gt V_H\)</span> <strong>on a
+net</strong>, DRC will report warning on this net</li>
+</ul>
+</blockquote>
+<h2 id="voltage-recognition-cad-layer">Voltage recognition CAD
+Layer</h2>
+<p>Two method</p>
+<ol type="1">
+<li><p>voltage text layer</p>
+<p>You place specific voltage text on specific drawing layer</p></li>
+<li><p>voltage marker layer</p>
+<p>Each voltage marker layer represent different voltage for specific
+drawing layer</p></li>
+</ol>
+<blockquote>
+<p><em>voltage text layer</em> has higher priority than <em>voltage
+marker layer</em> and is recommended</p>
+</blockquote>
+<h3 id="voltage-text-layer">voltage text layer</h3>
+<p>For example <strong>M3</strong></p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 8%" />
+<col style="width: 9%" />
+<col style="width: 32%" />
+<col style="width: 8%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Process Layer</th>
+<th>CAD Layer#</th>
+<th>Voltage High</th>
+<th>Voltage High Top<br />(highest priority)</th>
+<th>Voltage Low</th>
+<th>Voltage Low Top<br />(highest priority)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M3</td>
+<td>63</td>
+<td>110</td>
+<td>112</td>
+<td>111</td>
+<td>113</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>where <strong>63</strong> is <strong>layer number</strong>,
+<strong>110 ~ 113</strong> is <strong>datatype</strong></p>
+</blockquote>
+<h3 id="voltage-marker-layer">voltage marker layer</h3>
+<p>Different data type represent different voltage, like</p>
+<table>
+<thead>
+<tr class="header">
+<th>DataType</th>
+<th>100</th>
+<th>101</th>
+<th>102</th>
+<th>...</th>
+<th>109</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Voltage</td>
+<td>0.0</td>
+<td>0.1</td>
+<td>0.2</td>
+<td>0.3</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<p><img src="/2022/04/13/VD-DRC/image-20220503171006936.png"
+alt="image-20220503171006936" /></p>
+<h2 id="reference">reference</h2>
+<p><a
+target="_blank" rel="noopener" href="https://blogs.sw.siemens.com/calibre/2015/08/18/automate-those-voltage-dependent-drc-checks/">Automate
+those voltage-dependent DRC checks! - siemens</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +411,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -320,7 +505,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -470,7 +655,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -677,7 +862,7 @@ alt="image-20220404195156776" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -840,7 +1025,7 @@ alt="image-20220403212529981" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1341,7 +1526,7 @@ FIFOs</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1485,7 +1670,7 @@ possible without cloning.</p></li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1582,7 +1767,7 @@ alt="image-20220401011543866" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1686,7 +1871,7 @@ alt="topo.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:07" itemprop="dateModified" datetime="2024-01-04T09:35:07+00:00">2024-01-04</time>
+      <time title="Modified: 2024-01-06 16:00:32" itemprop="dateModified" datetime="2024-01-06T16:00:32+00:00">2024-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1767,142 +1952,6 @@ compiling.</p>
 <p><a
 target="_blank" rel="noopener" href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
 forward declaration</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/23/Precedence-Rule-uvm-config-db/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/23/Precedence-Rule-uvm-config-db/" class="post-title-link" itemprop="url">Precedence Rule of UVM uvm_config_db::set</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-23 18:48:41" itemprop="dateCreated datePublished" datetime="2022-03-23T18:48:41+00:00">2022-03-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-04 09:35:06" itemprop="dateModified" datetime="2024-01-04T09:35:06+00:00">2024-01-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a
-target="_blank" rel="noopener" href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
-<h4 id="two-precedence-rules">Two Precedence rules</h4>
-<p>There are two precedence rules applicable to
-<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
-<ol type="1">
-<li>A <code>set()</code> call in <strong>a context higher up the
-component hierarchy</strong> takes precedence over a <code>set()</code>
-call that occurs lower in the hierarchical path.</li>
-<li>On having <strong>same context field</strong>, <strong>the
-last</strong> <code>set()</code> call takes precedence over the earlier
-<code>set()</code> call.</li>
-</ol>
-<h4 id="example-for-rule---1">Example for rule - 1</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>As you can see , the <code>uvm_config_db::set</code> is after the
-factory <code>type_id::create</code>, but <strong>receive_value</strong>
-is still <strong>100</strong>, I believe that <code>build_phase</code>
-of upper hierarchy finish first before create lower components.</p>
-<p>But the recommendation in literature and many web is place
-<code>uvm_config_db::set</code> before <code>create</code></p>
-</blockquote>
-<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://www.edaplayground.com/x/jgvh">[complete
-code]</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
-<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
-<p>The <code>set</code> in <code>super.build_phase</code> and
-<code>set</code> in current <code>build_phase</code> are at the
-<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
-<p>base_test</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
-<h4 id="test2---one">test2 - One</h4>
-<blockquote>
-<p><code>yapp_incr_payload_seq</code> override the
-<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
-<strong>yapp_incr_payload_seq</strong> is used.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-<h4 id="test2---two">test2 - Two</h4>
-<blockquote>
-<p>the <code>yapp_5_packets</code> in
-<code>super.build_phase(phase)</code> overide
-<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
-<strong>yapp_5_packets</strong> is used</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
 
       
     </div>

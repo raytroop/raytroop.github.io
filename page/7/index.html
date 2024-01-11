@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:25" itemprop="dateModified" datetime="2024-01-11T15:00:25+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -901,6 +901,36 @@ class="math inline">\(\Delta I_D\)</span>, as is the case for an NMOS
 device.</p>
 <p><img src="/2023/01/01/insight/image-20240106164923917.png"
 alt="image-20240106164923917" /></p>
+<h2 id="initial-value-theorem-final-value-theorem">Initial Value Theorem
+&amp; Final Value Theorem</h2>
+<p>Two valuable <em>Laplace transform</em> theorem</p>
+<ul>
+<li><p>Initial Value Theorem, which states that it is always possible to
+determine the <strong>initial value</strong> of the time function <span
+class="math inline">\(f(t)\)</span> from its Laplace transform <span
+class="math display">\[
+\lim _{s\to \infty}sF(s) = f(0^+)
+\]</span></p></li>
+<li><p>Final Value Theorem allows us to compute the <strong>constant
+steady-state value</strong> of a time function given its Laplace
+transform <span class="math display">\[
+\lim _{s\to 0}sF(s) = f(\infty)
+\]</span></p>
+<blockquote>
+<p>If <span class="math inline">\(f(t)\)</span> is step response, then
+<span class="math inline">\(f(0^+) = H(\infty)\)</span> and <span
+class="math inline">\(f(\infty) = H(0)\)</span>, where <span
+class="math inline">\(H(s)\)</span> is transfer function</p>
+</blockquote></li>
+</ul>
+<h2 id="step-response-of-higher-order-system">Step Response of higher
+order system</h2>
+<p><img src="/2023/01/01/insight/image-20240112002314153.png"
+alt="image-20240112002314153" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">step(vm, <span class="number">500e-9</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo, <span class="number">500e-9</span>);</span><br><span class="line"></span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; vm</span><br><span class="line"></span><br><span class="line">vm =</span><br><span class="line"> </span><br><span class="line">          1.024e-44 s^5 + 2.56e-37 s^4 + 1.6e-30 s^3</span><br><span class="line">  -----------------------------------------------------------</span><br><span class="line">  1.024e-44 s^5 + 2.571e-37 s^4 + 1.626e-30 s^3 + 1.6e-25 s^2</span><br><span class="line"> </span><br><span class="line">Continuous-time transfer function.</span><br><span class="line"></span><br><span class="line">&gt;&gt; vo</span><br><span class="line"></span><br><span class="line">vo =</span><br><span class="line"> </span><br><span class="line">                 8.194e-52 s^6 + 2.048e-44 s^5 + 1.28e-37 s^4</span><br><span class="line">  ---------------------------------------------------------------------------</span><br><span class="line">  8.194e-52 s^6 + 3.081e-44 s^5 + 3.871e-37 s^4 + 1.638e-30 s^3 + 1.6e-25 s^2</span><br><span class="line"> </span><br><span class="line">Continuous-time transfer function.</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/01/01/insight/image-20240112002155622.png"
+alt="image-20240112002155622" /></p>
 <h2 id="reference">reference</h2>
 <p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
 small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
@@ -999,7 +1029,7 @@ target="_blank" rel="noopener" href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:24" itemprop="dateModified" datetime="2024-01-11T15:00:24+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1087,7 +1117,7 @@ target="_blank" rel="noopener" href="https://superuser.com/q/211798">https://sup
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:24" itemprop="dateModified" datetime="2024-01-11T15:00:24+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1304,7 +1334,7 @@ target="_blank" rel="noopener" href="https://www.edn.com/demystifying-pole-zero-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:25" itemprop="dateModified" datetime="2024-01-11T15:00:25+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1661,7 +1691,7 @@ target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/b0f8/720a2
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:24" itemprop="dateModified" datetime="2024-01-11T15:00:24+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1911,7 +1941,7 @@ Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:24" itemprop="dateModified" datetime="2024-01-11T15:00:24+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2019,7 +2049,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:25" itemprop="dateModified" datetime="2024-01-11T15:00:25+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2127,7 +2157,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:25" itemprop="dateModified" datetime="2024-01-11T15:00:25+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2242,7 +2272,7 @@ target="_blank" rel="noopener" href="https://youtu.be/nA_DZtRqrTQ">https://youtu
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:25" itemprop="dateModified" datetime="2024-01-11T15:00:25+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2351,7 +2381,7 @@ target="_blank" rel="noopener" href="https://www.ee.columbia.edu/~kinget/EE6350_
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-11 15:00:25" itemprop="dateModified" datetime="2024-01-11T15:00:25+00:00">2024-01-11</time>
+      <time title="Modified: 2024-01-11 16:27:28" itemprop="dateModified" datetime="2024-01-11T16:27:28+00:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

@@ -220,7 +220,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-01-13 17:25:09 / Modified: 10:03:32" itemprop="dateCreated datePublished" datetime="2024-01-13T17:25:09+00:00">2024-01-13</time>
+      <time title="Created: 2024-01-13 17:25:09 / Modified: 10:13:13" itemprop="dateCreated datePublished" datetime="2024-01-13T17:25:09+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -339,7 +339,7 @@ target="_blank" rel="noopener" href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbds
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -409,19 +409,23 @@ R_1C_1e^{-t/R_0C_0}\right) \\
 R_1C_1\right)
 \end{align}\]</span></p>
 <p>where <span class="math inline">\(\tau=R_1C_1\)</span></p>
-<h3 id="partial-fraction-expansion">partial-fraction expansion</h3>
+<h3 id="via-partial-fraction-expansion">Via Partial-fraction
+Expansion</h3>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">syms C0</span><br><span class="line">syms R0</span><br><span class="line">syms C1</span><br><span class="line">syms R1</span><br><span class="line">syms s</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br></pre></td></tr></table></figure>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; partfrac(vm, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">&gt;&gt; partfrac(vo, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">vm_exp = <span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line">vo_exp = <span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;ks&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;ks&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br></pre></td></tr></table></figure>
 <p><span class="math display">\[\begin{align}
 V_m(s) &amp;= 1 -
 \frac{s(C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1} \\
 V_o(s) &amp;= 1 -
 \frac{s(C_0R_0+C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1}
 \end{align}\]</span></p>
-<p><img src="/2024/01/06/SecondOrder/image-20240113125629530.png"
-alt="image-20240113125629530" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">vm_exp = <span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line">vo_exp = <span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% with approximation</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">vm_exp2 = s*R0*C0/(<span class="number">1</span>+s*R0*C0);</span><br><span class="line">vo_exp2 = s*R0*C0/(<span class="number">1</span>+s*R0*C0) * s*R1*C1/(<span class="number">1</span>+s*R1*C1);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp2, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp2, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/06/SecondOrder/image-20240113181003272.png"
+alt="image-20240113181003272" /></p>
+<p><img src="/2024/01/06/SecondOrder/image-20240113181032379.png"
+alt="image-20240113181032379" /></p>
 <hr />
+<p>spectre simulation vs matlab</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">step(vm, <span class="number">500e-9</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo, <span class="number">500e-9</span>);</span><br><span class="line"></span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; vm</span><br><span class="line"></span><br><span class="line">vm =</span><br><span class="line"> </span><br><span class="line">          <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.56e-37</span> s^<span class="number">4</span> + <span class="number">1.6e-30</span> s^<span class="number">3</span></span><br><span class="line">  -----------------------------------------------------------</span><br><span class="line">  <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.571e-37</span> s^<span class="number">4</span> + <span class="number">1.626e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br><span class="line"></span><br><span class="line">&gt;&gt; vo</span><br><span class="line"></span><br><span class="line">vo =</span><br><span class="line"> </span><br><span class="line">                 <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">2.048e-44</span> s^<span class="number">5</span> + <span class="number">1.28e-37</span> s^<span class="number">4</span></span><br><span class="line">  ---------------------------------------------------------------------------</span><br><span class="line">  <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">3.081e-44</span> s^<span class="number">5</span> + <span class="number">3.871e-37</span> s^<span class="number">4</span> + <span class="number">1.638e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br></pre></td></tr></table></figure>
 <p><img src="/2024/01/06/SecondOrder/image-20240112002155622.png"
@@ -492,7 +496,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -624,7 +628,7 @@ target="_blank" rel="noopener" href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSape
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1076,7 +1080,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1337,7 +1341,7 @@ University. VLSI Testing</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1518,7 +1522,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1616,7 +1620,7 @@ target="_blank" rel="noopener" href="https://savobajic.ca/projects/academic/stat
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1862,7 +1866,7 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1952,7 +1956,7 @@ target="_blank" rel="noopener" href="https://designers-guide.org/modeling/dataco
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:13:13" itemprop="dateModified" datetime="2024-01-13T10:13:13+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,453 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/04/plusargs-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/04/plusargs-verilog/" class="post-title-link" itemprop="url">plusargs in verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-04 12:29:28" itemprop="dateCreated datePublished" datetime="2022-06-04T12:29:28+00:00">2022-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-target="_blank" rel="noopener" href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-target="_blank" rel="noopener" href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/29/h0-estimator/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/29/h0-estimator/" class="post-title-link" itemprop="url">h0 Estimator</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-29 23:34:44" itemprop="dateCreated datePublished" datetime="2022-05-29T23:34:44+00:00">2022-05-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>summer output <span class="math display">\[
-r_k =
-a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=1}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
-\]</span> error slicer analog output <span class="math display">\[
-e_k=r_k-\hat{a}_k \hat{h}_0
-\]</span> error slicer digital output <span class="math display">\[
-\hat{e}_k=|e_k|
-\]</span> It's NOT possible to implement <span
-class="math inline">\(e_k\)</span>, which need to determine <span
-class="math inline">\(\hat{a}_k=|r_k|\)</span> in no time. One method to
-approach this problem is calculate <span
-class="math inline">\(e_k^{a_k=1}=r_k-\hat{a}_k \hat{h}_0\)</span> and
-<span class="math inline">\(e_k^{a_k=-1}=r_k+\hat{a}_k
-\hat{h}_0\)</span>, then select the right one based on <span
-class="math inline">\(\hat{a}_k\)</span>.</p>
-<p>The update equation based on Sign-Sign-Least Mean square (SS-LMS) and
-loss function <span
-class="math inline">\(L(\hat{h}_{\text{0~ntap}})=E(e_k^2)\)</span> <span
-class="math display">\[
-\hat{h}_n(k+1) = \hat{h}_n(k)+\mu \cdot |e_k|\cdot \hat{a}_{k-n}
-\]</span> Where <span class="math inline">\(n \in
-[0,...,\text{ntap}]\)</span>. This way, we can obtain <span
-class="math inline">\(\hat{h}_0\)</span>, <span
-class="math inline">\(\hat{h}_1\)</span>, <span
-class="math inline">\(\hat{h}_2\)</span>, ...</p>
-<blockquote>
-<p><span class="math inline">\(\hat{h}_0\)</span> is used in AFE
-adaptation</p>
-</blockquote>
-<p>We may encounter difficulty if the first tap of DFE is unrolled, its
-<span class="math inline">\(e_k\)</span> is modified as follow <span
-class="math display">\[
-r_k =
-a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=2}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
-\]</span> Where there is NO <span
-class="math inline">\(\hat{h}_1\)</span></p>
-<p>To find <span class="math inline">\(\hat{h}_1\)</span>, we shall use
-different pattern for even and odd error slicer</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/29/arthmetic-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/29/arthmetic-verilog/" class="post-title-link" itemprop="url">Arithmetic in Verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-29 16:01:08" itemprop="dateCreated datePublished" datetime="2022-05-29T16:01:08+00:00">2022-05-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>1'b1</code>: overflow</p>
-</blockquote>
-<h4 id="signed-signed-signed">signed + signed = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code>: overflow</p>
-<p><code>2'b10</code>: underflow</p>
-</blockquote>
-<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/27/isocells/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/27/isocells/" class="post-title-link" itemprop="url">Isolation cells</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-27 10:18:10" itemprop="dateCreated datePublished" datetime="2022-05-27T10:18:10+00:00">2022-05-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Isolation cells are additional cells inserted by the synthesis tools
-for isolating the buses/wires crossing from <strong>power-gated
-domain</strong> of a circuit to its always-on domain
-(<strong>AON</strong>).</p>
-<blockquote>
-<p>To prevent corruption of always-on domain, we clamp the nets crossing
-the power domains to a value depending upon the design.</p>
-</blockquote>
-<p><em>A simple circuit having a switchable (or gated) power
-domain</em></p>
-<p><img src="/2022/05/27/isocells/isolation-cells-1-1.webp"
-alt="isolation-cells-1-1" /></p>
-<p><em>The circuit shown in Figure 1, after isolation cells are
-inserted</em></p>
-<p><img src="/2022/05/27/isocells/isolation-cells-2.webp"
-alt="isolation-cells-2" /></p>
-<h3 id="always-on-buffer">Always-On Buffer</h3>
-<p><img
-src="https://img-blog.csdnimg.cn/img_convert/1c84b9b7423b064b12b09b1e72b641e5.png"
-alt="640?wx_fmt=png" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001607578.png"
-alt="image-20230211001607578" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001708189.png"
-alt="image-20230211001708189" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001849150.png"
-alt="image-20230211001849150" /></p>
-<h3 id="reference">reference</h3>
-<p>Isolation cells and Level Shifter cells URL: <a
-target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/">https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -673,7 +226,7 @@ target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -915,7 +468,7 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1035,7 +588,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1294,7 +847,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1403,12 +956,12 @@ alt="image-20220516224616908" /></p>
 component, which is <strong>0.1</strong> in follow figure</p>
 <p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
 alt="image-20220516233618663" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>); </span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>);</span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
 <h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
 Spectrum</h2>
 <p>DC and Nyquist frequency of FFT left over</p>
 <p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency                    </span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period       </span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2. </span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1) </span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency</span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period</span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2.</span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1)</span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
 alt="image-20220514221609734" /></p>
 <p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
@@ -1516,7 +1069,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1609,7 +1162,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1705,8 +1258,757 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/09/latch-inference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/09/latch-inference/" class="post-title-link" itemprop="url">Latch Inference in Verilog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-09 16:33:03" itemprop="dateCreated datePublished" datetime="2022-05-09T16:33:03+00:00">2022-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="always"><code>always@( * )</code></h2>
+<p><code>always@( * )</code> blocks are used to describe Combinational
+Logic, or Logic Gates. Only <code>=</code> (blocking) assignments should
+be used in an <code>always@( * )</code> block.</p>
+<h2 id="latch-inference">Latch Inference</h2>
+<p>If you <strong>DON'T</strong> assign every element that can be
+assigned inside an <code>always@( * )</code> block every time that
+<code>always@( * )</code> block is executed, a latch will be inferred
+for that element</p>
+<p>The approaches to avoid latch generation:</p>
+<ul>
+<li>set default values</li>
+<li>proper use of the <code>else</code> statement, and other flow
+constructs</li>
+</ul>
+<h3 id="without-default-values">without default values</h3>
+<blockquote>
+<p>latch is generated</p>
+</blockquote>
+<h4 id="rtl">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509170640006.png"
+alt="image-20220509170640006" /></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:09:18 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lanhq1 C_reg ( <span class="variable">.E</span>(Trigger), <span class="variable">.D</span>(Pass), <span class="variable">.Q</span>(C) );</span><br><span class="line">  an02d0 U3 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3 id="add-default-value">add default value</h3>
+<blockquote>
+<p>Default values are an easy way to avoid latch generation</p>
+</blockquote>
+<h4 id="rtl-1">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">        	C = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist-1">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509171319204.png"
+alt="image-20220509171319204" /></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:12:47 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  nd12d0 U5 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.ZN</span>(C) );</span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="if-evaluation"><code>if</code> evaluation</h2>
+<p><code>signed</code> number cast to <code>unsigned</code>
+automatically before evaluating</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb; </span><br><span class="line">  <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] datasg;</span><br><span class="line">  <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] dataug;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    datasg = <span class="number">2&#x27;b11</span>;</span><br><span class="line">    dataug = <span class="number">2&#x27;b11</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;datasg(%%d): %d&quot;</span>, datasg);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;dataug(%%d): %d&quot;</span>, dataug);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (datasg)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;datasg is OK&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (dataug)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;dataug is OK&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$finish</span>();</span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ vlog tb.v</span><br><span class="line">$ vsim -c -do &quot;run;exit&quot; work.tb</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># datasg(%d): -1</span><br><span class="line"># dataug(%d): 3</span><br><span class="line"># datasg is OK</span><br><span class="line"># dataug is OK</span><br><span class="line"># ** Note: $finish    : tb.v(16)</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>UC Berkeley CS150 Lec #20: Finite State Machines <a
+target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf">Slides</a></p>
+<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
+by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
+doi:10.1007/978-3-030-03238-8</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/08/glitch-hazard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/08/glitch-hazard/" class="post-title-link" itemprop="url">Glitches and Hazards</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-08 18:34:33" itemprop="dateCreated datePublished" datetime="2022-05-08T18:34:33+00:00">2022-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>A <strong>glitch</strong> is an unwanted pulse at the output of a
+combinational logic network – <strong>a momentary change</strong> in an
+output that should not have changed</li>
+<li>A circuit with <em>the potential for a glitch</em> is said to have a
+<strong>hazard</strong></li>
+<li>In other words a hazard is something intrinsic about a circuit; a
+circuit with hazard may or may not have a glitch depending on input
+patterns and the electric characteristics of the circuit.</li>
+</ul>
+<h4 id="when-do-circuits-have-hazards">When do circuits have hazards
+?</h4>
+<p>Hazards are potential unwanted transients that occur in the output
+when different paths from input to output have different propagation
+delays</p>
+<h4 id="types-of-hazards-on-an-output">Types of Hazards (on an
+output)</h4>
+<p>static 1-hazard, static 0-hazard, dynamic hazard</p>
+<p><img src="/2022/05/08/glitch-hazard/image-20220508183800744.png"
+alt="image-20220508183800744" /></p>
+<h4 id="hazards-concern">Hazard's Concern</h4>
+<ul>
+<li>Hazards do not hurt synchronous circuits</li>
+<li>Hazards Kill Asynchronous Circuits</li>
+<li>Glitches Increase Power Consumption</li>
+</ul>
+<h4 id="referece">referece</h4>
+<p>CPE166/EEE 270 Advanced Logic Design-Digital Design: Time Behavior of
+Combinational Networks: <a
+target="_blank" rel="noopener" href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
+<p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
+target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/07/Overflowflag-verilog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/07/Overflowflag-verilog/" class="post-title-link" itemprop="url">Overflow Detection in Verilog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-07 21:12:38" itemprop="dateCreated datePublished" datetime="2022-05-07T21:12:38+00:00">2022-05-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>Arithmetic operations have a potential to run into a condition known
+as <em>overflow</em>.</li>
+<li>Overflow occurs with respect to the <strong>size of the data
+type</strong> that must accommodate the result.</li>
+<li>Overflow indicates that the result was <em>too large</em> or <em>too
+small</em> to fit in the original data type.</li>
+</ul>
+<h2 id="overflow-when-adding-unsigned-number">Overflow when adding
+unsigned number</h2>
+<p>When two unsigned numbers are added, overflow occurs if</p>
+<ul>
+<li>there is a <strong>carry out</strong> of the leftmost bit.</li>
+</ul>
+<h2 id="overflow-when-adding-signed-numbers">Overflow when adding signed
+numbers</h2>
+<p>When two signed 2's complement numbers are added, overflow is
+detected if:</p>
+<ol type="1">
+<li>both operands are positive and the result is negative, or</li>
+<li>both operands are negative and the result is positive.</li>
+</ol>
+<p>Notice that when operands have <strong>opposite signs</strong>, their
+sum will never overflow. Therefore, <em>overflow can only occur when the
+operands have the same sign</em>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>carryout_sum</th>
+<th>overflow</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>0</strong>11 (3)</td>
+<td><strong>0</strong>11 (3)</td>
+<td>0_<strong>1</strong>10 (6)</td>
+<td>overflow</td>
+</tr>
+<tr class="even">
+<td><strong>1</strong>00 (-4)</td>
+<td><strong>1</strong>00 (-4)</td>
+<td>1_<strong>0</strong>00 (-8)</td>
+<td>underflow</td>
+</tr>
+<tr class="odd">
+<td><strong>1</strong>11 (-1)</td>
+<td><strong>1</strong>10 (-2)</td>
+<td>1_<strong>1</strong>01 (-3)</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>carryout information <strong>ISN'T</strong> needed to detect
+overflow/underflow for signed number addition</p>
+</blockquote>
+<h3 id="extbitmsb">EXTBIT:MSB</h3>
+<p>extended 1bit and msb bit can be used to detect overflow or
+underflow</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span>  [<span class="number">1</span>:<span class="number">0</span>]      acc_inc;</span><br><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span>  [<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>]   acc;</span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">10</span>  :<span class="number">0</span>]   acc_w;  <span class="comment">// extend 1b for saturation</span></span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>]   acc_stat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> acc_w = acc + acc_inc;   <span class="comment">// signed arithmetic</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> acc_stat = (acc_w[<span class="number">10</span>-<span class="number">1</span> +: <span class="number">2</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;(<span class="number">10</span>-<span class="number">1</span>)&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125; : <span class="comment">// up saturation</span></span><br><span class="line">    (acc_w[<span class="number">10</span>-<span class="number">1</span> +: <span class="number">2</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;(<span class="number">10</span>-<span class="number">1</span>)&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;  :   			 <span class="comment">// down saturation</span></span><br><span class="line">    acc_w[<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code> : overflow, up saturation</p>
+<p><code>2'b10</code>: underflow, down saturation</p>
+</blockquote>
+<h2 id="s-complement-negative-number">2's complement negative
+number</h2>
+<ol type="1">
+<li>Flip all bits</li>
+<li>Add <strong>1</strong>.</li>
+</ol>
+<p>N-bit signed number <span class="math display">\[
+A = -M_{N-1}2^{N-1}+\sum_{k=0}^{N-2}M_k2^k
+\]</span> Flip all bits <span class="math display">\[\begin{align}
+A_{flip} &amp;= -(1-M_{N-1})2^{N-1} +\sum_{k=0}^{N-2}(1-M_k)2^k \\
+&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k
+-2^{N-1}+\sum_{k=0}^{N-2}2^k \\
+&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k -1
+\end{align}\]</span></p>
+<p>Add <strong>1</strong> <span class="math display">\[\begin{align}
+A_- &amp;= A_{flip}+1 \\
+&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k \\
+&amp;= -A
+\end{align}\]</span></p>
+<h2 id="reference">reference</h2>
+<p>Overflow Detection: <a
+target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/07/mixed-sign-verilog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/07/mixed-sign-verilog/" class="post-title-link" itemprop="url">Mixing Signed and Unsigned in Verilog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-07 16:23:26" itemprop="dateCreated datePublished" datetime="2022-05-07T16:23:26+00:00">2022-05-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Sign Extension</p>
+<ol type="1">
+<li>Calculate the necessary minimum width of the sum so that it contains
+all input possibilities</li>
+<li>Extend the inputs' sign bits to the width of the answer</li>
+<li>Add as usual</li>
+<li>Ignore bits that ripple to the left of the answer's MSB</li>
+</ol>
+<ol type="1">
+<li><strong>signed</strong></li>
+</ol>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>inA (signed)</th>
+<th>inB (signed)</th>
+<th>outSum<br />(signed/unsigned)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>0101 (5)</td>
+<td>1111 (-1)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><em>extend sign</em></td>
+<td><strong>0</strong>0101</td>
+<td><strong>1</strong>1111</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><em>sum result</em></td>
+<td></td>
+<td></td>
+<td>00100</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">3</span>:<span class="number">0</span>] inA;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">3</span>:<span class="number">0</span>] inB;</span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">4</span>:<span class="number">0</span>] outSumSg;	<span class="comment">// signed result</span></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">4</span>:<span class="number">0</span>] outSumUs;			<span class="comment">// unsigned result</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		inA = <span class="number">4&#x27;b0101</span>;</span><br><span class="line">		inB = <span class="number">4&#x27;b1111</span>;</span><br><span class="line">		outSumUs = inA + inB;</span><br><span class="line">		outSumSg = inA + inB;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;signed out(%%d): %0d&quot;</span>, outSumSg);</span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;signed out(%%b): %b&quot;</span>, outSumSg);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;unsigned out(%%d): %0d&quot;</span>, outSumUs);</span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;unsigned out(%%b): %b&quot;</span>, outSumUs);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li><strong>mixed</strong></li>
+</ol>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 17%" />
+<col style="width: 20%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>inA (signed)</th>
+<th>inB (unsigned)</th>
+<th>outSum<br />(signed/unsigned)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>0101 (5)</td>
+<td>1111 (15)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><em>extend sign</em></td>
+<td><strong>0</strong>0101</td>
+<td><strong>0</strong>1111</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><em>sum result</em></td>
+<td></td>
+<td></td>
+<td>10100</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">3</span>:<span class="number">0</span>] inA;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] inB;</span><br></pre></td></tr></table></figure>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 20%" />
+<col style="width: 17%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>inA (unsigned)</th>
+<th>inB (signed)</th>
+<th>outSum<br />(signed/unsigned)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>0101 (5)</td>
+<td>1111 (-1)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><em>extend sign</em></td>
+<td><strong>0</strong>0101</td>
+<td><strong>0</strong>1111</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><em>sum result</em></td>
+<td></td>
+<td></td>
+<td>10100</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] inA;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">3</span>:<span class="number">0</span>] inB;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">4</span>:<span class="number">0</span>] outSumSg;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">4</span>:<span class="number">0</span>] outSumUs;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		inA = <span class="number">4&#x27;b0101</span>;</span><br><span class="line">		inB = <span class="number">4&#x27;b1111</span>;</span><br><span class="line">		outSumUs = inA + inB;</span><br><span class="line">		outSumSg = inA + inB;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;signed out(%%d): %0d&quot;</span>, outSumSg);</span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;signed out(%%b): %b&quot;</span>, outSumSg);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;unsigned out(%%d): %0d&quot;</span>, outSumUs);</span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;unsigned out(%%b): %b&quot;</span>, outSumUs);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>xcelium</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xcelium&gt; run</span><br><span class="line">signed out(%d): -12</span><br><span class="line">signed out(%b): 10100</span><br><span class="line">unsigned out(%d): 20</span><br><span class="line">unsigned out(%b): 10100</span><br><span class="line">xmsim: *W,RNQUIE: Simulation is complete.</span><br><span class="line">xcelium&gt; exit</span><br></pre></td></tr></table></figure>
+<p><strong>vcs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Compiler version S-2021.09-SP2-1_Full64; Runtime version S-2021.09-SP2-1_Full64;  May  7 17:24 2022</span><br><span class="line">signed out(%d): -12</span><br><span class="line">signed out(%b): 10100</span><br><span class="line">unsigned out(%d): 20</span><br><span class="line">unsigned out(%b): 10100</span><br><span class="line">           V C S   S i m u l a t i o n   R e p o r t</span><br></pre></td></tr></table></figure>
+<h3 id="observation">observation</h3>
+<blockquote>
+<p>When <em>signed</em> and <em>unsigned</em> is <strong>mixed</strong>,
+the result is by default <strong>unsigned</strong>.</p>
+<p>Prepend to operands with <strong>0</strong>s instead of extending
+sign, even though the operands is signed</p>
+<p>LHS <strong>DONT</strong> affect how the simulator operate on the
+operands but what the results represent, signed or unsigned</p>
+</blockquote>
+<p>Therefore, although <code>outSumUs</code> is declared as signed, its
+result is unsigned</p>
+<h4 id="subtraction-example">subtraction example</h4>
+<p>In logic arithmetic, addition and subtraction are commonly used for
+digital design. Subtraction is similar to addition except that the
+subtracted number is 2's complement. By using 2's complement for the
+subtracted number, both addition and subtraction can be unified to using
+addition only.</p>
+<h5 id="operands-are-signed">operands are signed</h5>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>inA (signed)</th>
+<th>inB (signed)</th>
+<th>outSub<br />(signed/unsigned)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>1111 (-1)</td>
+<td>0010 (2)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><em>extend sign</em></td>
+<td><strong>1</strong>1111</td>
+<td><strong>0</strong>0010</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><em>sub result</em></td>
+<td></td>
+<td></td>
+<td>11101</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">3</span>:<span class="number">0</span>] inA;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">3</span>:<span class="number">0</span>] inB;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">4</span>:<span class="number">0</span>] outSubSg;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">4</span>:<span class="number">0</span>] outSubUs;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		inA = <span class="number">4&#x27;b1111</span>;</span><br><span class="line">		inB = <span class="number">4&#x27;b0010</span>;</span><br><span class="line">		outSubUs = inA - inB;</span><br><span class="line">		outSubSg = inA - inB;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;signed out(%%d): %0d&quot;</span>, outSubSg);</span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;signed out(%%b): %b&quot;</span>, outSubSg);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;unsigned out(%%d): %0d&quot;</span>, outSubUs);</span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;unsigned out(%%b): %b&quot;</span>, outSubUs);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Compiler version S-2021.09-SP2-1_Full64; Runtime version S-2021.09-SP2-1_Full64;  May  7 17:46 2022</span><br><span class="line">signed out(%d): -3</span><br><span class="line">signed out(%b): 11101</span><br><span class="line">unsigned out(%d): 29</span><br><span class="line">unsigned out(%b): 11101</span><br><span class="line">           V C S   S i m u l a t i o n   R e p o r t</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xcelium&gt; run</span><br><span class="line">signed out(%d): -3</span><br><span class="line">signed out(%b): 11101</span><br><span class="line">unsigned out(%d): 29</span><br><span class="line">unsigned out(%b): 11101</span><br><span class="line">xmsim: *W,RNQUIE: Simulation is complete.</span><br></pre></td></tr></table></figure>
+<h5 id="operands-are-mixed">operands are mixed</h5>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 17%" />
+<col style="width: 20%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>inA (signed)</th>
+<th>inB (unsigned)</th>
+<th>outSub<br />(signed/unsigned)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>1111 (-1)</td>
+<td>0010 (2)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><em>extend sign</em></td>
+<td><strong>0</strong>1111</td>
+<td><strong>0</strong>0010</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><em>sub result</em></td>
+<td></td>
+<td></td>
+<td>01101</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">3</span>:<span class="number">0</span>] inA;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] inB;</span><br><span class="line">	<span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">4</span>:<span class="number">0</span>] outSubSg;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">4</span>:<span class="number">0</span>] outSubUs;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		inA = <span class="number">4&#x27;b1111</span>;</span><br><span class="line">		inB = <span class="number">4&#x27;b0010</span>;</span><br><span class="line">		outSubUs = inA - inB;</span><br><span class="line">		outSubSg = inA - inB;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;signed out(%%d): %0d&quot;</span>, outSubSg);</span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;signed out(%%b): %b&quot;</span>, outSubSg);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;unsigned out(%%d): %0d&quot;</span>, outSubUs);</span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;unsigned out(%%b): %b&quot;</span>, outSubUs);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Compiler version S-2021.09-SP2-1_Full64; Runtime version S-2021.09-SP2-1_Full64;  May  7 17:50 2022</span><br><span class="line">signed out(%d): 13</span><br><span class="line">signed out(%b): 01101</span><br><span class="line">unsigned out(%d): 13</span><br><span class="line">unsigned out(%b): 01101</span><br><span class="line">           V C S   S i m u l a t i o n   R e p o r t </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xcelium&gt; run</span><br><span class="line">signed out(%d): 13</span><br><span class="line">signed out(%b): 01101</span><br><span class="line">unsigned out(%d): 13</span><br><span class="line">unsigned out(%b): 01101</span><br><span class="line">xmsim: *W,RNQUIE: Simulation is complete.</span><br><span class="line">xcelium&gt; exit</span><br></pre></td></tr></table></figure>
+<h3 id="danger-sign">Danger Sign</h3>
+<p><a
+target="_blank" rel="noopener" href="https://projectf.io/posts/numbers-in-verilog/">https://projectf.io/posts/numbers-in-verilog/</a></p>
+<blockquote>
+<p>Verilog has a nasty habit of treating everything as unsigned unless
+all variables in an expression are signed. To add insult to injury, most
+tools won’t warn you if signed values are being ignored.</p>
+<p>If you take one thing away from this post:</p>
+<p><strong>Never mix signed and unsigned variables in one
+expression!</strong></p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> signed_tb ();</span><br><span class="line">    <span class="keyword">logic</span> [<span class="number">7</span>:<span class="number">0</span>] x;  <span class="comment">// &#x27;x&#x27; is unsigned</span></span><br><span class="line">    <span class="keyword">logic</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] y;  <span class="comment">// &#x27;y&#x27; is signed</span></span><br><span class="line">    <span class="keyword">logic</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] x1, y1;</span><br><span class="line">    <span class="keyword">logic</span> <span class="keyword">signed</span> [<span class="number">3</span>:<span class="number">0</span>] move;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always_comb</span> <span class="keyword">begin</span></span><br><span class="line">        x1 = x + move;  <span class="comment">// !? DANGER: &#x27;x&#x27; is unsigned but &#x27;move&#x27; is signed</span></span><br><span class="line">        y1 = y + move;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        #<span class="number">10</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;Coordinates (7,7):&quot;</span>);</span><br><span class="line">        x = <span class="number">8&#x27;d7</span>;</span><br><span class="line">        y = <span class="number">8&#x27;d7</span>;</span><br><span class="line">        #<span class="number">10</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;x : %b  %d&quot;</span>, x, x);</span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;y : %b  %d&quot;</span>, y, y);</span><br><span class="line"></span><br><span class="line">        #<span class="number">10</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;Move +4:&quot;</span>);</span><br><span class="line">        move = <span class="number">4</span>&#x27;sd4;  <span class="comment">// signed positive value</span></span><br><span class="line">        #<span class="number">10</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;x1: %b  %d  *LOOKS OK*&quot;</span>, x1, x1);</span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;y1: %b  %d&quot;</span>, y1, y1);</span><br><span class="line"></span><br><span class="line">        #<span class="number">10</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;Move -4:&quot;</span>);</span><br><span class="line">        move = -<span class="number">4</span>&#x27;sd4;  <span class="comment">// signed negative value</span></span><br><span class="line">        #<span class="number">10</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;x1: %b  %d  *SURPRISE*&quot;</span>, x1, x1);     <span class="comment">// 0000_0111 + &#123;0000&#125;_1100 = 0001_0011</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;y1: %b  %d&quot;</span>, y1, y1);                 <span class="comment">// 0000_0111 + &#123;1111&#125;_1100 = 0000_0011</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Chronologic VCS simulator copyright 1991-2021</span><br><span class="line">Contains Synopsys proprietary information.</span><br><span class="line">Compiler version S-2021.09-SP2-2_Full64; Runtime version S-2021.09-SP2-2_Full64;  Nov 19 11:02 2022                                     </span><br><span class="line">Coordinates (7,7):</span><br><span class="line">x : 00000111    7</span><br><span class="line">y : 00000111            7</span><br><span class="line">Move +4:</span><br><span class="line">x1: 00001011           11  *LOOKS OK*</span><br><span class="line">y1: 00001011           11</span><br><span class="line">Move -4:</span><br><span class="line">x1: 00010011           19  *SURPRISE*</span><br><span class="line">y1: 00000011            3</span><br><span class="line">           V C S   S i m u l a t i o n   R e p o r t</span><br><span class="line">Time: 60</span><br><span class="line">CPU Time:      0.260 seconds;       Data structure size:   0.0Mb</span><br></pre></td></tr></table></figure>
+<h3 id="reference">reference</h3>
+<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
+by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
+doi:10.1007/978-3-030-03238-8</p>
+<p><a target="_blank" rel="noopener" href="https://www.ece.ucdavis.edu/~bbaas/281/">Bevan Baas, VLSI
+Digital Signal Processing, EEC 281 - VLSI Digital Signal
+Processing</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

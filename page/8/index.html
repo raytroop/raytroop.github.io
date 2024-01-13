@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -181,265 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/05/integrator-design/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/05/integrator-design/" class="post-title-link" itemprop="url">integrator design</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-11-05 22:04:21" itemprop="dateCreated datePublished" datetime="2022-11-05T22:04:21+00:00">2022-11-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/22/SpiceIn-standardcellspi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/22/SpiceIn-standardcellspi/" class="post-title-link" itemprop="url">SpiceIn foundary's standard cell's spice netlist</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-22 22:42:37" itemprop="dateCreated datePublished" datetime="2022-10-22T22:42:37+00:00">2022-10-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>use <strong>SpiceIn</strong> GUI feature to map MOS parameter
-correctly in generated schematic</p>
-<h3 id="input">Input</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022224745955.png"
-alt="image-20221022224745955" /></p>
-<blockquote>
-<p>The mos's total width (parameter name "w") value will update during
-<strong>SpiceIn</strong> trigger CDF callback automatically</p>
-</blockquote>
-<h3 id="output">Output</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225143844.png"
-alt="image-20221022225143844" /></p>
-<h3 id="device-map">Device Map</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225224751.png"
-alt="image-20221022225224751" /></p>
-<blockquote>
-<p><strong>User Prop Mapping</strong> is significant setup, both
-<em>xxx.spi</em> and <em>Edit CDF</em> provide the essential
-information.</p>
-<p>The map syntax is <em>spice_para0 cdf_para0 spice_para1 cdf_para01
-... spice_paraN cdf_paraN</em></p>
-</blockquote>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225742497.png"
-alt="image-20221022225742497" /></p>
-<h3 id="reference">reference</h3>
-<p>Article (20488179) Title: How to use SpiceIn GUI feature to map MOS
-parameter correctly in generated schematic URL: <a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY</a></p>
-<p>Article (11724692) Title: SpiceIn maps the netlist parameter to the
-CDF parameter incorrectly on the generated schematic devices (e.g. w to
-wf) URL: <a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -485,7 +226,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -551,166 +292,6 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/02/current-mirror-mc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/02/current-mirror-mc/" class="post-title-link" itemprop="url">mismatch of current mirror</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-02 18:41:33" itemprop="dateCreated datePublished" datetime="2022-10-02T18:41:33+00:00">2022-10-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>The current mismatch consists of two components.</p>
-<ul>
-<li>The first depends on threshold voltage mismatch and increases as the
-overdrive <span class="math inline">\((V_{GS} − V_t)\)</span> is
-reduced.</li>
-<li>The second is geometry dependent and contributes a fractional
-current mismatch that is independent of bias point.</li>
-</ul>
-<p><span class="math display">\[
-\Delta I_D = g_m\cdot \Delta V_{TH}+I_D\cdot \frac{\Delta(W/L)}{W/L}
-\]</span></p>
-<p>where mismatches in <span class="math inline">\(\mu_nC_{ox}\)</span>
-are neglected</p>
-<p><span class="math display">\[\begin{align}
-\Delta V_{TH} &amp;= \frac{A_{VTH}}{\sqrt{WL}} \\
-\frac{\Delta(W/L)}{W/L} &amp;= \frac{A_{WL}}{\sqrt{WL}}
-\end{align}\]</span></p>
-<h3 id="summary">summary</h3>
-<table>
-<colgroup>
-<col style="width: 4%" />
-<col style="width: 10%" />
-<col style="width: 13%" />
-<col style="width: 22%" />
-<col style="width: 42%" />
-<col style="width: 7%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Size</th>
-<th><span class="math inline">\(g_m\)</span></th>
-<th><span class="math inline">\(\Delta V_{TH}\)</span></th>
-<th><span class="math inline">\(\frac{\Delta(W/L)}{W/L}\)</span></th>
-<th>mismatch (%)</th>
-<th>simu (%)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>W, L</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td><span
-class="math inline">\(I_{\Delta_{V_{TH}}}+I_{\Delta_{WL}}\)</span></td>
-<td>3.44</td>
-</tr>
-<tr class="even">
-<td>W, 2L</td>
-<td><span class="math inline">\(1/\sqrt{2}\)</span></td>
-<td><span class="math inline">\(1/\sqrt{2}\)</span></td>
-<td><span class="math inline">\(1/\sqrt{2}\)</span></td>
-<td><span
-class="math inline">\(I_{\Delta_{V_{TH}}}/2+I_{\Delta_{WL}}/\sqrt{2}\)</span></td>
-<td>1.98</td>
-</tr>
-<tr class="odd">
-<td>2W, L</td>
-<td><span class="math inline">\(\sqrt{2}\)</span></td>
-<td><span class="math inline">\(1/\sqrt{2}\)</span></td>
-<td><span class="math inline">\(1/\sqrt{2}\)</span></td>
-<td><span
-class="math inline">\(I_{\Delta_{V_{TH}}}+I_{\Delta_{WL}}/\sqrt{2}\)</span></td>
-<td>2.93</td>
-</tr>
-</tbody>
-</table>
-<p>We get <span class="math inline">\(I_{\Delta_{V_{TH}}}\simeq
-1.71\%\)</span> and <span class="math inline">\(I_{\Delta_{WL}} \simeq
-1.73\%\)</span></p>
-<p><img src="/2022/10/02/current-mirror-mc/image-20221003001056211.png"
-alt="image-20221003001056211" /></p>
-<p><img src="/2022/10/02/current-mirror-mc/image-20221002215942456.png"
-alt="image-20221002215942456" /></p>
-<p><img src="/2022/10/02/current-mirror-mc/image-20221002220000435.png"
-alt="image-20221002220000435" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/24/MOS-Varactors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -747,7 +328,7 @@ alt="image-20221002220000435" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -868,7 +449,7 @@ Design, Layout, and Simulation, Fourth Edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -954,7 +535,7 @@ Design, Layout, and Simulation, Fourth Edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1040,96 +621,6 @@ signals.</p>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/07/viterbi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/07/viterbi/" class="post-title-link" itemprop="url">Viterbi Algorithm for ADC-Based Serial Link</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-09-07 22:20:06" itemprop="dateCreated datePublished" datetime="2022-09-07T22:20:06+00:00">2022-09-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="reference">reference</h2>
-<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
-Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
-Undergraduate Research Scholars Program. Available electronically from
-<a
-target="_blank" rel="noopener" href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/11/t-sensor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1166,7 +657,7 @@ target="_blank" rel="noopener" href="https://hdl.handle.net/1969.1/166485">https
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1458,7 +949,7 @@ Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-13 07:27:26" itemprop="dateModified" datetime="2024-01-13T07:27:26+00:00">2024-01-13</time>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1765,8 +1256,805 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/14/jtf-ojtf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/14/jtf-ojtf/" class="post-title-link" itemprop="url">JTF and OJTF</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-14 10:22:47" itemprop="dateCreated datePublished" datetime="2022-07-14T10:22:47+00:00">2022-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="concepts-of-jtf-and-ojtf">Concepts of JTF and OJTF</h2>
+<p>Simplified Block Diagram of a Clock-Recovery PLL <img
+src="/2022/07/14/jtf-ojtf/pll_block_diagram.gif"
+alt="pll_block_diagram" /></p>
+<p><strong>Jitter Transfer Function (JTF)</strong></p>
+<ul>
+<li>Input Signal Versus Recovered Clock</li>
+<li>JTF, by jitter frequency, compares how much input signal jitter is
+transferred to the <strong>output of a clock-recovery's PLL (recovered
+clock)</strong>
+<ul>
+<li>Input signal jitter that is within the clock recovery PLL's loop
+bandwidth results in jitter that is faithfully transferred (closed-loop
+gain) to the clock recovery PLL's output signal. JTF in this situation
+is approximately 1.</li>
+<li>Input signal jitter that is outside the clock recovery PLL's loop
+bandwidth results in decreasing jitter (open-loop gain) on the clock
+recovery PLL's output, because the jitter is filtered out and no longer
+reaches the PLL's VCO</li>
+</ul></li>
+</ul>
+<p><strong>Observed Jitter Transfer Function</strong></p>
+<ul>
+<li>Input Signal Versus Sampled Signal</li>
+<li>OJTF compares how much input signal jitter is transferred to the
+<strong>output of a receiver's decision making circuit</strong> as
+effected by a clock recovery's PLL. As the recovered clock is the
+reference for detecting the input signal
+<ul>
+<li>Input signal jitter that is <strong>within</strong> the clock
+recovery PLL's loop bandwidth results in jitter on the recovered clock
+which reduces the amount of jitter that can be detected. The input
+signal and clock signal are closer in phase</li>
+<li>Input signal jitter that is <strong>outside</strong> the clock
+recovery PLL's loop bandwidth results in <strong>reduced jitter on the
+recovered cloc</strong>k which increases the amount of jitter that can
+be detected. The input signal and clock signal are more out of phase.
+Jitter that is on both the input and clock signals can not detected or
+is reduced</li>
+</ul></li>
+</ul>
+<p>JTF and OJTF for 1st Order PLLs</p>
+<p><img src="/2022/07/14/jtf-ojtf/jsa_1st_order_graph.png"
+alt="jsa_1st_order_graph" /></p>
+<p><img src="/2022/07/14/jtf-ojtf/neuhelium-jtf-ojtf.png"
+alt="neuhelium-jtf-ojtf" /></p>
+<blockquote>
+<p>The observed jitter is a complement to the PLL jitter transfer
+response OJTF=1-JTF <strong>(Phase matters!)</strong></p>
+<p>OTJF gives the amount of jitter which is tracked and therefore not
+observed at the output of the CDR as a function of the jitter rate
+applied to the input.</p>
+</blockquote>
+<p><img src="/2022/07/14/jtf-ojtf/A-jtf-ojtf.png"
+alt="A-jtf-ojtf" /></p>
+<h2 id="jitter-measurement">Jitter Measurement</h2>
+<p><span class="math display">\[
+J_{\text{measured}} = JTF_{\text{DUT}} \cdot OJTF_{\text{instrument}}
+\]</span> The combination of the OJTF of a jitter measurement device and
+the JTF of the clock generator under test gives the measured jitter as a
+function of frequency.</p>
+<p><img src="/2022/07/14/jtf-ojtf/image-20220716094732273.png"
+alt="image-20220716094732273" /></p>
+<p>For example, a clock generator with a type 1, 1st order PLL measured
+with a jitter measurement device employing a golden PLL is <span
+class="math display">\[
+J_{\text{measured}} = \frac{\omega_1}{s+\omega_1}\frac{s}{s+\omega_2}
+\]</span></p>
+<p>Accurate measurement of the clock JTF requires that the OJTF cutoff
+of the jitter measurement be significantly below that of the clock JTF
+and that the measurement is compensated for the instrument's OJTF.</p>
+<p>The overall response is a band pass filter because the clock JTF is
+low pass and the jitter measurement device OJTF is high pass.</p>
+<p>The compensation for the instrument OJTF is performed by measuring
+the jitter of the reference clock at each jitter rate being tested and
+comparing the <strong>reference jitter</strong> with the <strong>jitter
+measured at the output of the DUT</strong>.</p>
+<p><img src="/2022/07/14/jtf-ojtf/jit_resp.png" alt="jtf-ojtf" /></p>
+<p>The lower the cutoff frequency of the jitter measurement device the
+better the accuracy of the measurement will be.</p>
+<p>The cutoff frequency is limited by several factors including the
+phase noise of the DUT and measurement time.</p>
+<h2 id="digital-sampling-oscilloscope">Digital Sampling
+Oscilloscope</h2>
+<p>How to analyze jitter:</p>
+<ul>
+<li>TIE (Time Interval Error) track</li>
+<li>histogram</li>
+<li>FFT</li>
+</ul>
+<p><strong>TIE track</strong> provides a direct view of how the phase of
+the clock evolves over time.</p>
+<p><strong>histogram</strong> provides valuable information about the
+long term variations in the timing.</p>
+<p><strong>FFT</strong> allows jitter at specific rates to be measured
+down to the femto-second range.</p>
+<blockquote>
+<p>Maintaining the record length at a minimum of <span
+class="math inline">\(1/10\)</span> of the inverse of the PLL loop
+bandwidth minimizes the response error</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>neuhelium, 抖动、眼图和高速数字链路分析基础 URL: <a
+target="_blank" rel="noopener" href="http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf">http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf</a></p>
+<p>Keysight JTF &amp; OJTF Concepts, <a
+target="_blank" rel="noopener" href="https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4">https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4</a></p>
+<p>Complementary Transmitter and Receiver Jitter Test Methodlogy, URL:
+<a
+target="_blank" rel="noopener" href="https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf">https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf</a></p>
+<p>SerDesDesign.com CDR_BangBang_Model URL: <a
+target="_blank" rel="noopener" href="https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf">https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf</a></p>
+<p>M. Schnecker, Jitter Transfer Measurement in Clock Circuits, LeCroy
+Corporation, DesignCon 2009. URL: <a
+target="_blank" rel="noopener" href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf">http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/09/vm-drv-eq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/09/vm-drv-eq/" class="post-title-link" itemprop="url">Voltage-Mode Driver Equalization</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-09 09:48:47" itemprop="dateCreated datePublished" datetime="2022-07-09T09:48:47+00:00">2022-07-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="sst-driver">SST Driver</h2>
+<h3 id="sharing-termination-in-sst-transmitter">sharing termination in
+SST transmitter</h3>
+<p><img src="/2022/07/09/vm-drv-eq/tx_leg.drawio.svg"
+alt="tx_leg.drawio" /></p>
+<p>Sharing termination keep a constant current through leg, which
+improve TX speed in this way. On the other hand, the sharing termination
+facilitate drain/source sharing technique in layout.</p>
+<h3 id="pull-up-and-pull-down-resistor">pull-up and pull-down
+resistor</h3>
+<p><img src="/2022/07/09/vm-drv-eq/sst-evolution.png"
+alt="sst-evolution" /></p>
+<p><strong>Original stacked structure</strong></p>
+<p>Pro's:</p>
+<p>​ smaller static current when both pull up and pull down path is
+on</p>
+<p>Con's:</p>
+<p>​ slowly switching due to parasitic capacitance behind pull-up and
+pull-down resistor</p>
+<p><strong>with single shared linearization resistor</strong></p>
+<p>Pro's:</p>
+<p>​ The parasitic capacitance behind the resistor still exists but is
+now always driven high or low actively</p>
+<p>Con's:</p>
+<p>​ more static current</p>
+<h2 id="vm-driver-equalization---differential-ended-termination">VM
+Driver Equalization - differential ended termination</h2>
+<p><span class="math display">\[
+V_o = D_{n+1}C_{-1}+D_nC_0+D_{n-1}C_{+1}
+\]</span></p>
+<p>where <span class="math inline">\(D_n \in \{-1, 1\}\)</span></p>
+<p><img src="/2022/07/09/vm-drv-eq/vdrv.drawio.svg" alt="vdrv.drawio" />
+<span class="math display">\[
+V_{\text{rx}} = V_{\text{dd}} \frac{(R_2-R_1)R_T}{R_1R_T+R_2R_T+R_1R_2}
+\]</span> With <span class="math inline">\(R_u=(L+M+N)R_T\)</span></p>
+<p>Normalize above equation, obtain <span class="math display">\[
+V_{\text{rx,norm}} = \frac{(R_2-R_1)R_T}{R_1R_T+R_2R_T+R_1R_2}
+\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(D_{n-1}\)</span></th>
+<th><span class="math inline">\(D_{n}\)</span></th>
+<th><span class="math inline">\(D_{n+1}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(C_{-1}\)</span></td>
+<td>1</td>
+<td>-1</td>
+<td>-1</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(C_0\)</span></td>
+<td>-1</td>
+<td>1</td>
+<td>-1</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(C_{+1}\)</span></td>
+<td>-1</td>
+<td>-1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Where precursor <span class="math inline">\(R_L = L\times
+R_T\)</span>, main cursor <span class="math inline">\(R_M = M\times
+R_T\)</span> and post cursor <span class="math inline">\(R_N = N\times
+R_T\)</span></p>
+<p><img src="/2022/07/09/vm-drv-eq/image-20220709151054840.png"
+alt="image-20220709151054840" /></p>
+<h3 id="equation-1">Equation-1</h3>
+<blockquote>
+<p><span class="math inline">\(D_{n-1}D_nD_{n+1}=1,-1,-1\)</span></p>
+</blockquote>
+<p><img src="/2022/07/09/vm-drv-eq/pre.drawio.svg"
+alt="pre.drawio" /></p>
+<p><span class="math display">\[\begin{align}
+R_1 &amp;= R_N \\
+&amp;= \frac{R_u}{N} \\
+R_2 &amp;= R_L\parallel R_M \\
+&amp;= \frac{R_u}{L+M}
+\end{align}\]</span></p>
+<p>We obtain <span class="math display">\[
+V_{L}= \frac{1}{2}\cdot\frac{N-(L+M)}{L+M+N}
+\]</span></p>
+<h3 id="equation-2">Equation-2</h3>
+<blockquote>
+<p><span class="math inline">\(D_{n-1}D_nD_{n+1}=-1,1,-1\)</span></p>
+</blockquote>
+<p><img src="/2022/07/09/vm-drv-eq/main.drawio.svg"
+alt="main.drawio" /></p>
+<p>with <span class="math inline">\(R_1=R_T\)</span> and <span
+class="math inline">\(R_2=+\infty\)</span>, we obtain <span
+class="math display">\[
+V_M = \frac{1}{2}
+\]</span></p>
+<h3 id="equation-3">Equation-3</h3>
+<blockquote>
+<p><span class="math inline">\(D_{n-1}D_nD_{n+1}=-1,-1,1\)</span></p>
+</blockquote>
+<p><span class="math display">\[\begin{align}
+R_1 &amp;= R_L \\
+&amp;= \frac{R_u}{L} \\
+R_2 &amp;= R_N\parallel R_M \\
+&amp;= \frac{R_u}{N+M}
+\end{align}\]</span></p>
+<p>We obtain <span class="math display">\[
+V_N = \frac{1}{2}\cdot\frac{L-(N+M)}{L+M+N}
+\]</span></p>
+<h3 id="obtain-fir-coefficients">Obtain FIR coefficients</h3>
+<p>We define <span class="math display">\[\begin{align}
+l &amp;= \frac{L}{L+M+N} \\
+m &amp;= \frac{M}{L+M+N} \\
+n &amp;= \frac{N}{L+M+N}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(l+m+n=1\)</span></p>
+<p>Due to Eq1 ~ Eq3 <span class="math display">\[
+\left\{ \begin{array}{cl}
+C_{-1}-C_0-C_1 &amp; = \frac{1}{2}(n-l-m) \\
+-C_{-1}+C_0-C_1 &amp; = \frac{1}{2} \\
+-C_{-1}-C_0+C_1 &amp; = \frac{1}{2}(l-n-m)
+\end{array} \right.
+\]</span> After scaling, we get <span class="math display">\[
+\left\{ \begin{array}{cl}
+C_{-1}-C_0-C_1 &amp; = -l-m+n \\
+-C_{-1}+C_0-C_1 &amp; = l+m+n \\
+-C_{-1}-C_0+C_1 &amp; = l-m-n
+\end{array} \right.
+\]</span> Then, <strong>the relationship between FIR coefficients and
+legs is clear</strong>, i.e. <span class="math display">\[\begin{align}
+C_{-1} &amp;= -\frac{L}{L+M+N} \\
+C_{0} &amp;= \frac{M}{L+M+N} \\
+C_{1} &amp;= -\frac{N}{L+M+N}
+\end{align}\]</span></p>
+<p>For example, <span class="math inline">\(C_{-1}=-0.1\)</span>, <span
+class="math inline">\(C_0=0.7\)</span> and <span
+class="math inline">\(C_1=-0.2\)</span> <span class="math display">\[
+H(z) = -0.1+0.7z^{-1}-0.2z^{-2}
+\]</span> <img src="/2022/07/09/vm-drv-eq/image-20220709185832444.png"
+alt="image-20220709185832444" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">w = [<span class="number">-0.1</span>, <span class="number">0.7</span>, <span class="number">-0.2</span>];</span><br><span class="line">Fs = <span class="number">32e9</span>;</span><br><span class="line">[mag, w] = freqz(w, <span class="number">1</span>, [], Fs);</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="number">1e9</span>, <span class="built_in">abs</span>(mag));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h2 id="vm-driver-equalization---single-ended-termination">VM Driver
+Equalization - single ended termination</h2>
+<h3 id="equation-1-1">Equation-1</h3>
+<p><img src="/2022/07/09/vm-drv-eq/pre_se.drawio.svg"
+alt="pre_se.drawio" /></p>
+<p><span class="math display">\[\begin{align}
+V_{\text{rxp}} &amp;= \frac{1}{2} \cdot \frac{N}{L+M+N} \\
+V_{\text{rxm}} &amp;= \frac{1}{2} \cdot \frac{L+M}{L+M+N}
+\end{align}\]</span> So <span class="math display">\[
+V_{L}= \frac{1}{2}\cdot\frac{N-(L+M)}{L+M+N}
+\]</span> which is same with differential ended termination</p>
+<h3 id="equation-2-1">Equation-2</h3>
+<p><img src="/2022/07/09/vm-drv-eq/main_se.drawio.svg"
+alt="main_se.drawio" /></p>
+<p><span class="math display">\[\begin{align}
+V_{\text{rxp}} &amp;= \frac{1}{2} \\
+V_{\text{rxm}} &amp;= 0
+\end{align}\]</span> So <span class="math display">\[
+V_{M}= \frac{1}{2}
+\]</span> which is same with differential ended termination</p>
+<h3 id="equation-3-1">Equation-3</h3>
+<p><span class="math display">\[
+V_{N}= \frac{1}{2}\cdot\frac{L-(N+M)}{L+M+N}
+\]</span></p>
+<h3 id="obtain-fir-coefficients-1">Obtain FIR coefficients</h3>
+<p>Same with differential ended termination driver.</p>
+<h2 id="basic-feed-forward-equalization-theory">Basic Feed Forward
+Equalization Theory</h2>
+<p><img src="/2022/07/09/vm-drv-eq/image-20220709111229772.png"
+alt="image-20220709111229772" /></p>
+<p><img src="/2022/07/09/vm-drv-eq/image-20220709112543338.png"
+alt="image-20220709112543338" /></p>
+<p><img src="/2022/07/09/vm-drv-eq/image-20220709125046329.png"
+alt="image-20220709125046329" /></p>
+<blockquote>
+<p>Pre-cursor FFE can compensate phase distortion through the
+channel</p>
+</blockquote>
+<p><img src="/2022/07/09/vm-drv-eq/image-20220709130050057.png"
+alt="image-20220709130050057" /></p>
+<blockquote>
+<p>Single-ended termination</p>
+<p>Differential termination</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>J. F. Bulzacchelli et al., "A 28-Gb/s 4-Tap FFE/15-Tap DFE Serial
+Link Transceiver in 32-nm SOI CMOS Technology," in IEEE Journal of
+Solid-State Circuits, vol. 47, no. 12, pp. 3232-3248, Dec. 2012, doi:
+10.1109/JSSC.2012.2216414.</p>
+<p>Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial
+Data Communications</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/01/channel-termination/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/01/channel-termination/" class="post-title-link" itemprop="url">channel and termination</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-01 08:44:42" itemprop="dateCreated datePublished" datetime="2022-07-01T08:44:42+00:00">2022-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="voltage-mode-driver">voltage mode driver</h2>
+<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
+alt="voltagemode20220704" /></p>
+<h2 id="current-mode-driver">current mode driver</h2>
+<p><img
+src="/2022/07/01/channel-termination/image-20220702003926289.png"
+alt="image-20220702003926289" /></p>
+<h2 id="reference">reference</h2>
+<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
+Conference, "T11: Basics of Equalization Techniques: Channels,
+Equalization, and Circuits"</p>
+<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
+Diverse Interconnect Applications,” IEEE Transactions on Circuits and
+Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
+2014.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/25/aliasing-folding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/25/aliasing-folding/" class="post-title-link" itemprop="url">Aliasing and Folding</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-25 13:12:37" itemprop="dateCreated datePublished" datetime="2022-06-25T13:12:37+00:00">2022-06-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-13 10:03:32" itemprop="dateModified" datetime="2024-01-13T10:03:32+00:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="noise-aliasing">Noise Aliasing</h2>
+<p><img src="/2022/06/25/aliasing-folding/SamplingProcess.drawio.svg"
+alt="SamplingProcess.drawio" /></p>
+<p>Where impulse train or "shah" function is defined as <span
+class="math display">\[
+\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
+\]</span> where <span class="math inline">\(T\)</span> defines the
+period, or sampling rate. Its Fourier transform is <span
+class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
+<p><strong>Multiplication Property</strong> of Fourier Transform <span
+class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span></p>
+<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
+the discrete time integrated from DC to <span
+class="math inline">\(f_s/2\)</span> equals that of continuous time in
+all frequency range.</p>
+<blockquote>
+<p>The DFT spectrum is periodic with period <strong>N</strong></p>
+<p>The DTFT spectrum is periodic with period <span
+class="math inline">\(2\pi\)</span></p>
+<p>As a conclusion, the spectrum beyond <span
+class="math inline">\(f_s/2\)</span> is <strong>redundant</strong> and
+don't provide information</p>
+</blockquote>
+<h2 id="aliasing">Aliasing</h2>
+<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
+and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
+integer), are <strong>indistinguishable</strong> in the <strong>discrete
+time domain</strong>.</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000016184.png"
+alt="image-20220626000016184" /></p>
+<blockquote>
+<p>In order to prevent aliasing, we need <span
+class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
+sampling rate <span class="math inline">\(f_s=2\cdot
+f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
+Rate</strong>.</p>
+<p>Two solution possibilities</p>
+<ol type="1">
+<li>Sample fast enough to cover all spectral components, including
+"parasitic" ones outside band of interest</li>
+<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
+through filtering - Filter out "parasitic" ones</li>
+</ol>
+</blockquote>
+<p>Given below sequence <span class="math display">\[
+X[n] =A e^{j\omega _0 T_s n}
+\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(kf_s + \Delta f\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s-\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\(kf_s - \Delta f\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s+\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<blockquote>
+<p>With sampling frequency <span
+class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
+class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
+class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
+distinguished <em>real signal</em></p>
+</blockquote>
+<p><img src="/2022/06/25/aliasing-folding/image-20230518232314980.png"
+alt="image-20230518232314980" /></p>
+<blockquote>
+<p>Generally, The frequencies <span
+class="math inline">\(f_{\text{sig}}\)</span> and <span
+class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
+<strong>indistinguishable</strong> in the <strong>discrete time
+domain</strong>.</p>
+</blockquote>
+<h3 id="aliasing-example">Aliasing Example</h3>
+<p>Given <span class="math inline">\(f_s = 1000\)</span> KHz</p>
+<ol type="1">
+<li><p><span class="math inline">\(f_{\text{sig}}=101\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000206662.png"
+alt="image-20220626000206662" /></p></li>
+<li><p><span class="math inline">\(f_{\text{sig}}=899\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000258632.png"
+alt="image-20220626000258632" /></p></li>
+<li><p><span class="math inline">\(f_{\text{sig}}=1101\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000320755.png"
+alt="image-20220626000320755" /></p></li>
+</ol>
+<h3 id="classes-of-sampling">Classes of Sampling</h3>
+<ul>
+<li><p>Nyquist-rate sampling</p>
+<p><span class="math inline">\(f_s \gt 2 \cdot
+f_{\text{sig,max}}\)</span></p></li>
+<li><p>Oversampling</p>
+<p><span class="math inline">\(f_s \gg 2\cdot
+f_{\text{sig,max}}\)</span></p></li>
+<li><p>Undersampling, subsampling</p>
+<p><span class="math inline">\(f_s \lt 2\cdot
+f_{\text{sig,max}}\)</span></p></li>
+</ul>
+<h2 id="dirac-pulses-and-spectrum">Dirac Pulses and spectrum</h2>
+<p>Spectrum of <span class="math inline">\(x_d(t)\)</span> contains
+<strong>scaled replicas</strong> of <span
+class="math inline">\(X(f)\)</span> at <strong>integer
+multiples</strong> of the sampling frequency <span
+class="math inline">\(f_s\)</span></p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626001925375.png"
+alt="image-20220626001925375" /></p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626001043693.png"
+alt="image-20220626001043693" /></p>
+<h2 id="reference">reference</h2>
+<p>David Herres, The difference between signal under-sampling, aliasing,
+and folding URL: <a
+target="_blank" rel="noopener" href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
+<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
+Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
+978-0-12-375079-2. <a
+target="_blank" rel="noopener" href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
+7 (Sampling and reconstruction)</a></p>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF.</p>
+<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
+Converters, Second Edition" ISBN 978-1-119-25827-8</p>
+<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
+<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
+Modeling URL: <a
+target="_blank" rel="noopener" href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
+<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
+Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
+Publishers Inc., San Francisco, CA, USA.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

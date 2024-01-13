@@ -837,18 +837,6 @@ alt="createPGPin_onDie.drawio" /></p>
       </tags>
   </entry>
   <entry>
-    <title>Innovus Data Exchange</title>
-    <url>/2022/02/07/Innovus-data-exchange/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-      <tags>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Innovus check mode variants</title>
     <url>/2022/02/07/Innovus-check-mode-variants/</url>
     <content><![CDATA[<p>checkDesign</p>
@@ -861,6 +849,18 @@ alt="createPGPin_onDie.drawio" /></p>
 <p>setRouteMode</p>
 <p>setExtractRCMode</p>
 <p>setOptMode</p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+      <tags>
+        <tag>pr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Innovus Data Exchange</title>
+    <url>/2022/02/07/Innovus-data-exchange/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1868,7 +1868,56 @@ class="math inline">\(\omega_\text{peak}\)</span> can be obtained via
 \omega_\text{peak} = \omega_z \sqrt{\sqrt{(\frac{\omega_n}{\omega_z})^4
 - 2(\frac{\omega_n}{\omega_z})^2(2\zeta ^2-1)+1} - 1}
 \]</span></p>
+<h2 id="step-response-of-higher-order-system">Step Response of higher
+order system</h2>
+<p><img src="/2024/01/06/SecondOrder/image-20240112002314153.png"
+alt="image-20240112002314153" /></p>
+<p>Since <span class="math inline">\(1/sC_1+R_1 \gg R_0\)</span> <span
+class="math display">\[
+V_m(s) \simeq \frac{R_0}{R_0 + 1/sC_0} = \frac{sR_0C_0}{1+sR_0C_0}
+\]</span> step response of <span class="math inline">\(V_m\)</span>
+<span class="math display">\[
+V_m(t) = e^{-t/R_0C_0}
+\]</span> where <span class="math inline">\(\tau = R_0C_0\)</span></p>
+<p>And <span class="math inline">\(V_o(s)\)</span> can be expressed as
+<span class="math display">\[\begin{align}
+V_o(s)  &amp; \simeq \frac{sR_0C_0}{1+sR_0C_0} \cdot
+\frac{sR_1C_1}{1+sR_1C_1} \\
+&amp;= \frac{sR_0C_0R_1C_1}{R_0C_0-R_1C_1}\left(\frac{1}{1+sR_1C_1} -
+\frac{1}{1+sR_0C_0}\right)
+\end{align}\]</span></p>
+<p>Then step response of <span class="math inline">\(Vo\)</span> <span
+class="math display">\[\begin{align}
+Vo(t) &amp;= \frac{R_0C_0R_1C_1}{R_0C_0-R_1C_1}
+\left(\frac{1}{R_1C_1}e^{-t/R_1C_1} -
+\frac{1}{R_0C_0}e^{-t/R_0C_0}\right) \\
+&amp;= \frac{1}{R_0C_0-R_1C_1}\left(R_0C_0e^{-t/R_1C_1} -
+R_1C_1e^{-t/R_0C_0}\right) \\
+&amp;\simeq = \frac{1}{R_0C_0-R_1C_1}\left(R_0C_0e^{-t/R_1C_1} -
+R_1C_1\right)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\tau=R_1C_1\)</span></p>
+<h3 id="partial-fraction-expansion">partial-fraction expansion</h3>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms C0</span><br><span class="line">syms R0</span><br><span class="line">syms C1</span><br><span class="line">syms R1</span><br><span class="line">syms s</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; partfrac(vm, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">&gt;&gt; partfrac(vo, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">vm_exp = <span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line">vo_exp = <span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;ks&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;ks&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[\begin{align}
+V_m(s) &amp;= 1 -
+\frac{s(C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1} \\
+V_o(s) &amp;= 1 -
+\frac{s(C_0R_0+C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1}
+\end{align}\]</span></p>
+<p><img src="/2024/01/06/SecondOrder/image-20240113125629530.png"
+alt="image-20240113125629530" /></p>
+<hr />
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">step(vm, <span class="number">500e-9</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo, <span class="number">500e-9</span>);</span><br><span class="line"></span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; vm</span><br><span class="line"></span><br><span class="line">vm =</span><br><span class="line"> </span><br><span class="line">          <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.56e-37</span> s^<span class="number">4</span> + <span class="number">1.6e-30</span> s^<span class="number">3</span></span><br><span class="line">  -----------------------------------------------------------</span><br><span class="line">  <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.571e-37</span> s^<span class="number">4</span> + <span class="number">1.626e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br><span class="line"></span><br><span class="line">&gt;&gt; vo</span><br><span class="line"></span><br><span class="line">vo =</span><br><span class="line"> </span><br><span class="line">                 <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">2.048e-44</span> s^<span class="number">5</span> + <span class="number">1.28e-37</span> s^<span class="number">4</span></span><br><span class="line">  ---------------------------------------------------------------------------</span><br><span class="line">  <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">3.081e-44</span> s^<span class="number">5</span> + <span class="number">3.871e-37</span> s^<span class="number">4</span> + <span class="number">1.638e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/06/SecondOrder/image-20240112002155622.png"
+alt="image-20240112002155622" /></p>
 <h2 id="reference">reference</h2>
+<p><em>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
+Feedback Control of Dynamic Systems (8th Edition) (8th. ed.).
+Pearson.</em></p>
 ]]></content>
       <categories>
         <category>dsp</category>
@@ -2220,150 +2269,6 @@ Revision 7</p>
       </tags>
   </entry>
   <entry>
-    <title>Aliasing and Folding</title>
-    <url>/2022/06/25/aliasing-folding/</url>
-    <content><![CDATA[<h2 id="noise-aliasing">Noise Aliasing</h2>
-<p><img src="/2022/06/25/aliasing-folding/SamplingProcess.drawio.svg"
-alt="SamplingProcess.drawio" /></p>
-<p>Where impulse train or "shah" function is defined as <span
-class="math display">\[
-\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
-\]</span> where <span class="math inline">\(T\)</span> defines the
-period, or sampling rate. Its Fourier transform is <span
-class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
-<p><strong>Multiplication Property</strong> of Fourier Transform <span
-class="math display">\[
-x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
-\]</span></p>
-<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
-the discrete time integrated from DC to <span
-class="math inline">\(f_s/2\)</span> equals that of continuous time in
-all frequency range.</p>
-<blockquote>
-<p>The DFT spectrum is periodic with period <strong>N</strong></p>
-<p>The DTFT spectrum is periodic with period <span
-class="math inline">\(2\pi\)</span></p>
-<p>As a conclusion, the spectrum beyond <span
-class="math inline">\(f_s/2\)</span> is <strong>redundant</strong> and
-don't provide information</p>
-</blockquote>
-<h2 id="aliasing">Aliasing</h2>
-<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
-and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
-integer), are <strong>indistinguishable</strong> in the <strong>discrete
-time domain</strong>.</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626000016184.png"
-alt="image-20220626000016184" /></p>
-<blockquote>
-<p>In order to prevent aliasing, we need <span
-class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
-sampling rate <span class="math inline">\(f_s=2\cdot
-f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
-Rate</strong>.</p>
-<p>Two solution possibilities</p>
-<ol type="1">
-<li>Sample fast enough to cover all spectral components, including
-"parasitic" ones outside band of interest</li>
-<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
-through filtering - Filter out "parasitic" ones</li>
-</ol>
-</blockquote>
-<p>Given below sequence <span class="math display">\[
-X[n] =A e^{j\omega _0 T_s n}
-\]</span></p>
-<ol type="1">
-<li><span class="math inline">\(kf_s + \Delta f\)</span></li>
-</ol>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left(
--kf_s-\Delta f \right)2\pi T_sn} \\
-&amp;= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
-\end{align}\]</span></p>
-<ol start="2" type="1">
-<li><span class="math inline">\(kf_s - \Delta f\)</span></li>
-</ol>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left(
--kf_s+\Delta f \right)2\pi T_sn} \\
-&amp;= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
-\end{align}\]</span></p>
-<blockquote>
-<p>With sampling frequency <span
-class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
-class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
-class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
-distinguished <em>real signal</em></p>
-</blockquote>
-<p><img src="/2022/06/25/aliasing-folding/image-20230518232314980.png"
-alt="image-20230518232314980" /></p>
-<blockquote>
-<p>Generally, The frequencies <span
-class="math inline">\(f_{\text{sig}}\)</span> and <span
-class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
-<strong>indistinguishable</strong> in the <strong>discrete time
-domain</strong>.</p>
-</blockquote>
-<h3 id="aliasing-example">Aliasing Example</h3>
-<p>Given <span class="math inline">\(f_s = 1000\)</span> KHz</p>
-<ol type="1">
-<li><p><span class="math inline">\(f_{\text{sig}}=101\)</span> KHz</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626000206662.png"
-alt="image-20220626000206662" /></p></li>
-<li><p><span class="math inline">\(f_{\text{sig}}=899\)</span> KHz</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626000258632.png"
-alt="image-20220626000258632" /></p></li>
-<li><p><span class="math inline">\(f_{\text{sig}}=1101\)</span> KHz</p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626000320755.png"
-alt="image-20220626000320755" /></p></li>
-</ol>
-<h3 id="classes-of-sampling">Classes of Sampling</h3>
-<ul>
-<li><p>Nyquist-rate sampling</p>
-<p><span class="math inline">\(f_s \gt 2 \cdot
-f_{\text{sig,max}}\)</span></p></li>
-<li><p>Oversampling</p>
-<p><span class="math inline">\(f_s \gg 2\cdot
-f_{\text{sig,max}}\)</span></p></li>
-<li><p>Undersampling, subsampling</p>
-<p><span class="math inline">\(f_s \lt 2\cdot
-f_{\text{sig,max}}\)</span></p></li>
-</ul>
-<h2 id="dirac-pulses-and-spectrum">Dirac Pulses and spectrum</h2>
-<p>Spectrum of <span class="math inline">\(x_d(t)\)</span> contains
-<strong>scaled replicas</strong> of <span
-class="math inline">\(X(f)\)</span> at <strong>integer
-multiples</strong> of the sampling frequency <span
-class="math inline">\(f_s\)</span></p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626001925375.png"
-alt="image-20220626001925375" /></p>
-<p><img src="/2022/06/25/aliasing-folding/image-20220626001043693.png"
-alt="image-20220626001043693" /></p>
-<h2 id="reference">reference</h2>
-<p>David Herres, The difference between signal under-sampling, aliasing,
-and folding URL: <a
-href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
-<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
-Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
-978-0-12-375079-2. <a
-href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
-7 (Sampling and reconstruction)</a></p>
-<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
-SpectreRF.</p>
-<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
-Converters, Second Edition" ISBN 978-1-119-25827-8</p>
-<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
-<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
-Modeling URL: <a
-href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
-<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
-Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
-Publishers Inc., San Francisco, CA, USA.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Device Aging</title>
     <url>/2022/12/11/aging/</url>
     <content><![CDATA[<p><img src="/2022/12/11/aging/image-20231106232135180.png"
@@ -2642,6 +2547,150 @@ href="https://pdfs.semanticscholar.org/b0f8/720a2b51a479f4a711bec4b47fdd50f29e2d
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Aliasing and Folding</title>
+    <url>/2022/06/25/aliasing-folding/</url>
+    <content><![CDATA[<h2 id="noise-aliasing">Noise Aliasing</h2>
+<p><img src="/2022/06/25/aliasing-folding/SamplingProcess.drawio.svg"
+alt="SamplingProcess.drawio" /></p>
+<p>Where impulse train or "shah" function is defined as <span
+class="math display">\[
+\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
+\]</span> where <span class="math inline">\(T\)</span> defines the
+period, or sampling rate. Its Fourier transform is <span
+class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
+<p><strong>Multiplication Property</strong> of Fourier Transform <span
+class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span></p>
+<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
+the discrete time integrated from DC to <span
+class="math inline">\(f_s/2\)</span> equals that of continuous time in
+all frequency range.</p>
+<blockquote>
+<p>The DFT spectrum is periodic with period <strong>N</strong></p>
+<p>The DTFT spectrum is periodic with period <span
+class="math inline">\(2\pi\)</span></p>
+<p>As a conclusion, the spectrum beyond <span
+class="math inline">\(f_s/2\)</span> is <strong>redundant</strong> and
+don't provide information</p>
+</blockquote>
+<h2 id="aliasing">Aliasing</h2>
+<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
+and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
+integer), are <strong>indistinguishable</strong> in the <strong>discrete
+time domain</strong>.</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000016184.png"
+alt="image-20220626000016184" /></p>
+<blockquote>
+<p>In order to prevent aliasing, we need <span
+class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
+sampling rate <span class="math inline">\(f_s=2\cdot
+f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
+Rate</strong>.</p>
+<p>Two solution possibilities</p>
+<ol type="1">
+<li>Sample fast enough to cover all spectral components, including
+"parasitic" ones outside band of interest</li>
+<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
+through filtering - Filter out "parasitic" ones</li>
+</ol>
+</blockquote>
+<p>Given below sequence <span class="math display">\[
+X[n] =A e^{j\omega _0 T_s n}
+\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(kf_s + \Delta f\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s-\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\(kf_s - \Delta f\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s+\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<blockquote>
+<p>With sampling frequency <span
+class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
+class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
+class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
+distinguished <em>real signal</em></p>
+</blockquote>
+<p><img src="/2022/06/25/aliasing-folding/image-20230518232314980.png"
+alt="image-20230518232314980" /></p>
+<blockquote>
+<p>Generally, The frequencies <span
+class="math inline">\(f_{\text{sig}}\)</span> and <span
+class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
+<strong>indistinguishable</strong> in the <strong>discrete time
+domain</strong>.</p>
+</blockquote>
+<h3 id="aliasing-example">Aliasing Example</h3>
+<p>Given <span class="math inline">\(f_s = 1000\)</span> KHz</p>
+<ol type="1">
+<li><p><span class="math inline">\(f_{\text{sig}}=101\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000206662.png"
+alt="image-20220626000206662" /></p></li>
+<li><p><span class="math inline">\(f_{\text{sig}}=899\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000258632.png"
+alt="image-20220626000258632" /></p></li>
+<li><p><span class="math inline">\(f_{\text{sig}}=1101\)</span> KHz</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626000320755.png"
+alt="image-20220626000320755" /></p></li>
+</ol>
+<h3 id="classes-of-sampling">Classes of Sampling</h3>
+<ul>
+<li><p>Nyquist-rate sampling</p>
+<p><span class="math inline">\(f_s \gt 2 \cdot
+f_{\text{sig,max}}\)</span></p></li>
+<li><p>Oversampling</p>
+<p><span class="math inline">\(f_s \gg 2\cdot
+f_{\text{sig,max}}\)</span></p></li>
+<li><p>Undersampling, subsampling</p>
+<p><span class="math inline">\(f_s \lt 2\cdot
+f_{\text{sig,max}}\)</span></p></li>
+</ul>
+<h2 id="dirac-pulses-and-spectrum">Dirac Pulses and spectrum</h2>
+<p>Spectrum of <span class="math inline">\(x_d(t)\)</span> contains
+<strong>scaled replicas</strong> of <span
+class="math inline">\(X(f)\)</span> at <strong>integer
+multiples</strong> of the sampling frequency <span
+class="math inline">\(f_s\)</span></p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626001925375.png"
+alt="image-20220626001925375" /></p>
+<p><img src="/2022/06/25/aliasing-folding/image-20220626001043693.png"
+alt="image-20220626001043693" /></p>
+<h2 id="reference">reference</h2>
+<p>David Herres, The difference between signal under-sampling, aliasing,
+and folding URL: <a
+href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
+<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
+Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
+978-0-12-375079-2. <a
+href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
+7 (Sampling and reconstruction)</a></p>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF.</p>
+<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
+Converters, Second Edition" ISBN 978-1-119-25827-8</p>
+<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
+<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
+Modeling URL: <a
+href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
+<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
+Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
+Publishers Inc., San Francisco, CA, USA.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -3056,6 +3105,41 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
       </tags>
   </entry>
   <entry>
+    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
+    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
+    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
+It determines which edges to be used as follows:</p>
+<ol type="1">
+<li><p>Evaluate waveforms over the smallest common base period</p></li>
+<li><p>For each capture edge, find the closest setup launch edge. Call
+these the <strong>primary pairs</strong></p></li>
+<li><p>Out of the <strong>primary pairs</strong>, pick the most
+restrictive setup launch and capture edges.</p></li>
+<li><p>For each <strong>primary pair</strong>, draw two hold
+relationships:</p>
+<ul>
+<li><p>Launch to (capture - 1)</p></li>
+<li><p>(Launch + 1) to Capture</p>
+<p>From all of these hold relationships, pick the most
+restrictive.</p></li>
+</ul></li>
+</ol>
+<p>PrimeTime uses the ideal clock waveform (as reported in
+<code>report_clock</code>) to determine the appropriate clock edges for
+inter-clock analysis.</p>
+<p><img
+src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
+alt="image-20220301203135490" /></p>
+<blockquote>
+<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
+<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Clock Gating</title>
     <url>/2023/04/05/clockgating/</url>
     <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
@@ -3093,41 +3177,6 @@ alt="clock gating" /></p>
 <h3 id="reference">reference</h3>
 <p>The Ultimate Guide to Clock Gating <a
 href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
-    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
-    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
-It determines which edges to be used as follows:</p>
-<ol type="1">
-<li><p>Evaluate waveforms over the smallest common base period</p></li>
-<li><p>For each capture edge, find the closest setup launch edge. Call
-these the <strong>primary pairs</strong></p></li>
-<li><p>Out of the <strong>primary pairs</strong>, pick the most
-restrictive setup launch and capture edges.</p></li>
-<li><p>For each <strong>primary pair</strong>, draw two hold
-relationships:</p>
-<ul>
-<li><p>Launch to (capture - 1)</p></li>
-<li><p>(Launch + 1) to Capture</p>
-<p>From all of these hold relationships, pick the most
-restrictive.</p></li>
-</ul></li>
-</ol>
-<p>PrimeTime uses the ideal clock waveform (as reported in
-<code>report_clock</code>) to determine the appropriate clock edges for
-inter-clock analysis.</p>
-<p><img
-src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
-alt="image-20220301203135490" /></p>
-<blockquote>
-<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
-<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -7678,20 +7727,6 @@ href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.car
       </categories>
   </entry>
   <entry>
-    <title>group delay</title>
-    <url>/2023/08/09/group-delay/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Inter-Symbol Interference (or Leaky Bits) [<a
-href="http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html">http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html</a>]</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>SI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>h0 Estimator</title>
     <url>/2022/05/29/h0-estimator/</url>
     <content><![CDATA[<p>summer output <span class="math display">\[
@@ -7738,6 +7773,20 @@ different pattern for even and odd error slicer</p>
       </categories>
       <tags>
         <tag>dfe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>group delay</title>
+    <url>/2023/08/09/group-delay/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Inter-Symbol Interference (or Leaky Bits) [<a
+href="http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html">http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html</a>]</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>SI</tag>
       </tags>
   </entry>
   <entry>
@@ -8180,266 +8229,6 @@ Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
         <tag>slew rate</tag>
         <tag>bandwidth</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
-    <url>/2022/06/10/isf-sampler/</url>
-    <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
-periodic AC (PAC) analysis, which is available from RF circuit
-simulators such as SpectreRF and ADS</p>
-<h2 id="isf">ISF</h2>
-<h3 id="linear-time-varying-system-theory">Linear Time-varying System
-Theory</h3>
-<p>We define the ISF of the sampler as the sensitivity of its final
-output voltage to the impulse arriving at its input at different times,
-the ISF essentially describes the aperture of the sampler.</p>
-<p>An ideal sampler would have the perfect aperture, i.e. sampling the
-input voltage at exactly one point in time; thus, its ISF would be a
-Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
-where <span class="math inline">\(t_s\)</span> is when sampling
-occurs.</p>
-<p>A realistic sampler would rather capture a weighted-average of the
-input voltage over a certain time window. This weighting function is
-called the sampling aperture and is equivalent to the ISF</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
-alt="image-20220610235211500" /></p>
-<p>A <strong>time-varying impulse response</strong> <span
-class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
-response at time <span class="math inline">\(t\)</span> responding to an
-impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
-<p>In general, the ISF can be regarded as the <strong>time-varying
-impulse response</strong> evaluated at <em>one particular observation
-time</em> <span class="math inline">\(t=t_0\)</span>.</p>
-<p>The system output <span class="math inline">\(y(t)\)</span> is
-related to the input <span class="math inline">\(x(t)\)</span> as: <span
-class="math display">\[
-y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
-\]</span> Note that in a linear time-invariant (LTI) system, <span
-class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
-equation reduces to a convolution.</p>
-<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
-transform of the input signal <span class="math inline">\(x(t)\)</span>,
-i.e. <span class="math display">\[
-x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
-t}d\omega
-\]</span> Then <span class="math display">\[\begin{align}
-y(t) &amp;=
-\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-e^{j\omega\tau }d\omega \right]\cdot d\tau \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{j\omega\tau}d\tau\right]\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
-<strong>time-varying transfer function</strong>, defined as the Fourier
-transform of the time-varying impulse response. <span
-class="math display">\[
-H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau
-\]</span> And it follows that: <span class="math display">\[
-Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
-\]</span> And</p>
-<p><span class="math display">\[\begin{align}
-x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
-h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
-\end{align}\]</span></p>
-<p>For linear, periodically time-varying (LPTV) systems, <span
-class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
-class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
-<span class="math inline">\(T\)</span> is the period of the time-varying
-dynamics of the system.</p>
-<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
-t+T)\)</span>:</p>
-<p><span class="math display">\[\begin{align}
-\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
-e^{-j\omega(t+T-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
-\\
-&amp;= H(j\omega;t)
-\end{align}\]</span></p>
-<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
-<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
-in <span class="math inline">\(T\)</span>, The time-varying transfer
-function <span class="math inline">\(H(j\omega;t)\)</span> can be
-expressed in a Fourier series: <span class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
-t}
-\]</span> where <span class="math inline">\(\omega_c\)</span> is the
-fundamental frequency of the periodic system. <span
-class="math inline">\(H_m(j\omega)\)</span> represent the frequency
-response of the system at the <em>(m-th)</em> harmonic output sideband
-to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
-<blockquote>
-<p>The above equation link time-varying transfer function <span
-class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
-output</p>
-</blockquote>
-<p>The response to a periodic impulse train, that is: <span
-class="math display">\[
-x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
-\]</span> The idea is that if the impulse response of the system settles
-to zero long before the next impulse arrives, then the system response
-to this impulse train would be approximately equal to the periodic
-repetition of the true impulse response, i.e.: <span
-class="math display">\[
-y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
-\]</span> and <span class="math inline">\(y(t)\)</span> would be
-approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
-for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
-<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
-alt="yt.drawio" /></p>
-<blockquote>
-<p>Without loss of generality and for computation convenience, we set
-<span class="math inline">\(k=1\)</span> thereafter.</p>
-</blockquote>
-<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
-of the <strong>T-periodic</strong> impulse train is: <span
-class="math display">\[
-X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
-e^{-j\omega\tau}
-\]</span> Then the response <span class="math inline">\(y(t)\)</span>
-is: <span class="math display">\[
-y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
-e^{jn\omega_c\cdot(t-\tau)}
-\]</span> The expression for the approximate time-varying impulse
-response: <span class="math display">\[
-h(t,\tau) = \left\{ \begin{array}{cl}
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
-0 &amp; : \ \text{elsewhere}
-\end{array} \right.
-\]</span> Finally, the ISF <span
-class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
-class="math inline">\(h(t,\tau)\)</span> when <span
-class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
-\gt \tau\)</span> <span class="math display">\[
-\Gamma(\tau)\cong
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
-\]</span> In practice, the summations are carried out over finite ranges
-of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
-<p>For each combination of <strong>n</strong> and <strong>m</strong>,
-the PAC analysis needs to be performed to compute <span
-class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
-response to the excitation at <span
-class="math inline">\(n\omega_c\)</span></p>
-<p>The detailed procedure for characterizing the ISF of this sampler is
-outlined as follows:</p>
-<ul>
-<li><p>First, apply the proper input voltages that place the sampler in
-a metastable state and perform the periodic steady-state (PSS)
-analysis.</p></li>
-<li><p>Second, perform the PAC analysis.</p></li>
-<li><p>Third, based on the simulated PAC response, pick a time point
-<span class="math inline">\(t_0\)</span> at which the ISF is to be
-computed and derive the ISF</p></li>
-</ul>
-<p>One possible candidate for the ISF measurement point <span
-class="math inline">\(t_0\)</span> is the time at which the output
-voltage is amplified to the largest value. PAC response of the sampler
-to a small signal DC input, that is, the time-varying transfer function
-evaluated at <span class="math inline">\(\omega=0\)</span> <span
-class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
-\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
-alt="image-20220614214446328" /></p>
-<blockquote>
-<p>The total area under the ISF is the sampling gain, which is equal to
-the time-varying gain measured at <span
-class="math inline">\(t_0\)</span></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
-log</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
-alt="image-20220614214537033" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
-<p>Since both are frequency originated, time-shift is NOT needed</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
-alt="image-20220614214613574" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="remarks">Remarks</h3>
-<p><strong>pss pac setup</strong></p>
-<ul>
-<li>clock frequency should be low enough to assure system response
-settle to zero.</li>
-<li>Beat Frequency os PSS should be clock frequency</li>
-<li>For PAC setup,
-<ul>
-<li>the <code>Sweeptype</code> is <code>absolute</code></li>
-<li><code>Input Frequency Sweep Range(Hz)</code> should be large
-enough.</li>
-<li><code>Sweep Type</code> should be <code>Linear</code> and
-<code>Step Size</code> should equal <strong>PSS Beat
-Frequency(Hz)</strong></li>
-<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
-positive, negative and 0)</li>
-<li><code>Specialized Analyses</code> should be <code>None</code></li>
-</ul></li>
-</ul>
-<blockquote>
-<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
-sweep from -400G to 400G and step is 8G, which is beat frequency, here
-K=1 Eq.(9) of paper</p>
-</blockquote>
-<blockquote>
-<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
-affect "Direct Plot"'s output but also simuation data i.e. the phase
-shift(imaginary part).</p>
-</blockquote>
-<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
-<p><code>transpose</code>, <code>.'</code> cf.
-https://www.mathworks.com/help/matlab/ref/transpose.html</p>
-<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
-<p>Using shooting PSS, the steady waveform starts from
-<code>tstab+n*tperiod</code>.</p>
-<ul>
-<li><strong>pss_td.pss</strong> is one period waveform starting from
-<code>tstab+n*tperiod</code></li>
-<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
-coefficient of expanded to left and right <strong>pss_td.pss</strong>
-waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
-</ul>
-<blockquote>
-<p>We have to left-shift <code>mod(tstab, tperiod)</code>
-<code>pss_fd.pss</code> in order to align it with of
-<strong>pss_tb.pss</strong></p>
-</blockquote>
-<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
-alt="image-20220610222535614" /></p>
-<h3 id="simulation-log">simulation log</h3>
-<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
-time, though <code>Stop Time(tstab)</code> field of pss form is filled
-with <code>0.3n</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h3 id="pss-simulation-result">PSS simulation result</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
-alt="image-20220610224100135" /></p>
-<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
-alt="image-20220610225310243" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
-function analysis of periodic circuits," 2008 IEEE/ACM International
-Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
-10.1109/ICCAD.2008.4681602.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
   </entry>
   <entry>
     <title>Circuit insight</title>
@@ -9119,14 +8908,6 @@ class="math inline">\(f(\infty) = H(0)\)</span>, where <span
 class="math inline">\(H(s)\)</span> is transfer function</p>
 </blockquote></li>
 </ul>
-<h2 id="step-response-of-higher-order-system">Step Response of higher
-order system</h2>
-<p><img src="/2023/01/01/insight/image-20240112002314153.png"
-alt="image-20240112002314153" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">step(vm, <span class="number">500e-9</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo, <span class="number">500e-9</span>);</span><br><span class="line"></span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;&gt; vm</span><br><span class="line"></span><br><span class="line">vm =</span><br><span class="line"> </span><br><span class="line">          1.024e-44 s^5 + 2.56e-37 s^4 + 1.6e-30 s^3</span><br><span class="line">  -----------------------------------------------------------</span><br><span class="line">  1.024e-44 s^5 + 2.571e-37 s^4 + 1.626e-30 s^3 + 1.6e-25 s^2</span><br><span class="line"> </span><br><span class="line">Continuous-time transfer function.</span><br><span class="line"></span><br><span class="line">&gt;&gt; vo</span><br><span class="line"></span><br><span class="line">vo =</span><br><span class="line"> </span><br><span class="line">                 8.194e-52 s^6 + 2.048e-44 s^5 + 1.28e-37 s^4</span><br><span class="line">  ---------------------------------------------------------------------------</span><br><span class="line">  8.194e-52 s^6 + 3.081e-44 s^5 + 3.871e-37 s^4 + 1.638e-30 s^3 + 1.6e-25 s^2</span><br><span class="line"> </span><br><span class="line">Continuous-time transfer function.</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/01/01/insight/image-20240112002155622.png"
-alt="image-20240112002155622" /></p>
 <h2 id="reference">reference</h2>
 <p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
 small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
@@ -9166,6 +8947,266 @@ href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemY
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
+    <url>/2022/06/10/isf-sampler/</url>
+    <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
+periodic AC (PAC) analysis, which is available from RF circuit
+simulators such as SpectreRF and ADS</p>
+<h2 id="isf">ISF</h2>
+<h3 id="linear-time-varying-system-theory">Linear Time-varying System
+Theory</h3>
+<p>We define the ISF of the sampler as the sensitivity of its final
+output voltage to the impulse arriving at its input at different times,
+the ISF essentially describes the aperture of the sampler.</p>
+<p>An ideal sampler would have the perfect aperture, i.e. sampling the
+input voltage at exactly one point in time; thus, its ISF would be a
+Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
+where <span class="math inline">\(t_s\)</span> is when sampling
+occurs.</p>
+<p>A realistic sampler would rather capture a weighted-average of the
+input voltage over a certain time window. This weighting function is
+called the sampling aperture and is equivalent to the ISF</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
+alt="image-20220610235211500" /></p>
+<p>A <strong>time-varying impulse response</strong> <span
+class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
+response at time <span class="math inline">\(t\)</span> responding to an
+impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
+<p>In general, the ISF can be regarded as the <strong>time-varying
+impulse response</strong> evaluated at <em>one particular observation
+time</em> <span class="math inline">\(t=t_0\)</span>.</p>
+<p>The system output <span class="math inline">\(y(t)\)</span> is
+related to the input <span class="math inline">\(x(t)\)</span> as: <span
+class="math display">\[
+y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
+\]</span> Note that in a linear time-invariant (LTI) system, <span
+class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
+equation reduces to a convolution.</p>
+<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
+transform of the input signal <span class="math inline">\(x(t)\)</span>,
+i.e. <span class="math display">\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
+t}d\omega
+\]</span> Then <span class="math display">\[\begin{align}
+y(t) &amp;=
+\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
+e^{j\omega\tau }d\omega \right]\cdot d\tau \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{j\omega\tau}d\tau\right]\cdot d\omega \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
+H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
+<strong>time-varying transfer function</strong>, defined as the Fourier
+transform of the time-varying impulse response. <span
+class="math display">\[
+H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau
+\]</span> And it follows that: <span class="math display">\[
+Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
+\]</span> And</p>
+<p><span class="math display">\[\begin{align}
+x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
+h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
+\end{align}\]</span></p>
+<p>For linear, periodically time-varying (LPTV) systems, <span
+class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
+class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
+<span class="math inline">\(T\)</span> is the period of the time-varying
+dynamics of the system.</p>
+<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
+t+T)\)</span>:</p>
+<p><span class="math display">\[\begin{align}
+\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau \\
+\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
+e^{-j\omega(t+T-\tau)}d\tau \\
+&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
+e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
+&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
+e^{-j\omega(t-\tau)}d\tau \\
+&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
+\\
+&amp;= H(j\omega;t)
+\end{align}\]</span></p>
+<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
+<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
+in <span class="math inline">\(T\)</span>, The time-varying transfer
+function <span class="math inline">\(H(j\omega;t)\)</span> can be
+expressed in a Fourier series: <span class="math display">\[
+H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
+t}
+\]</span> where <span class="math inline">\(\omega_c\)</span> is the
+fundamental frequency of the periodic system. <span
+class="math inline">\(H_m(j\omega)\)</span> represent the frequency
+response of the system at the <em>(m-th)</em> harmonic output sideband
+to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
+<blockquote>
+<p>The above equation link time-varying transfer function <span
+class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
+output</p>
+</blockquote>
+<p>The response to a periodic impulse train, that is: <span
+class="math display">\[
+x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
+\]</span> The idea is that if the impulse response of the system settles
+to zero long before the next impulse arrives, then the system response
+to this impulse train would be approximately equal to the periodic
+repetition of the true impulse response, i.e.: <span
+class="math display">\[
+y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
+\]</span> and <span class="math inline">\(y(t)\)</span> would be
+approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
+for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
+<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
+alt="yt.drawio" /></p>
+<blockquote>
+<p>Without loss of generality and for computation convenience, we set
+<span class="math inline">\(k=1\)</span> thereafter.</p>
+</blockquote>
+<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
+of the <strong>T-periodic</strong> impulse train is: <span
+class="math display">\[
+X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
+e^{-j\omega\tau}
+\]</span> Then the response <span class="math inline">\(y(t)\)</span>
+is: <span class="math display">\[
+y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
+e^{jn\omega_c\cdot(t-\tau)}
+\]</span> The expression for the approximate time-varying impulse
+response: <span class="math display">\[
+h(t,\tau) = \left\{ \begin{array}{cl}
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
+e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
+0 &amp; : \ \text{elsewhere}
+\end{array} \right.
+\]</span> Finally, the ISF <span
+class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
+class="math inline">\(h(t,\tau)\)</span> when <span
+class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
+\gt \tau\)</span> <span class="math display">\[
+\Gamma(\tau)\cong
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
+e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
+\]</span> In practice, the summations are carried out over finite ranges
+of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
+<p>For each combination of <strong>n</strong> and <strong>m</strong>,
+the PAC analysis needs to be performed to compute <span
+class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
+response to the excitation at <span
+class="math inline">\(n\omega_c\)</span></p>
+<p>The detailed procedure for characterizing the ISF of this sampler is
+outlined as follows:</p>
+<ul>
+<li><p>First, apply the proper input voltages that place the sampler in
+a metastable state and perform the periodic steady-state (PSS)
+analysis.</p></li>
+<li><p>Second, perform the PAC analysis.</p></li>
+<li><p>Third, based on the simulated PAC response, pick a time point
+<span class="math inline">\(t_0\)</span> at which the ISF is to be
+computed and derive the ISF</p></li>
+</ul>
+<p>One possible candidate for the ISF measurement point <span
+class="math inline">\(t_0\)</span> is the time at which the output
+voltage is amplified to the largest value. PAC response of the sampler
+to a small signal DC input, that is, the time-varying transfer function
+evaluated at <span class="math inline">\(\omega=0\)</span> <span
+class="math display">\[
+H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
+\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
+alt="image-20220614214446328" /></p>
+<blockquote>
+<p>The total area under the ISF is the sampling gain, which is equal to
+the time-varying gain measured at <span
+class="math inline">\(t_0\)</span></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
+<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
+log</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
+alt="image-20220614214537033" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
+<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
+<p>Since both are frequency originated, time-shift is NOT needed</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
+alt="image-20220614214613574" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="remarks">Remarks</h3>
+<p><strong>pss pac setup</strong></p>
+<ul>
+<li>clock frequency should be low enough to assure system response
+settle to zero.</li>
+<li>Beat Frequency os PSS should be clock frequency</li>
+<li>For PAC setup,
+<ul>
+<li>the <code>Sweeptype</code> is <code>absolute</code></li>
+<li><code>Input Frequency Sweep Range(Hz)</code> should be large
+enough.</li>
+<li><code>Sweep Type</code> should be <code>Linear</code> and
+<code>Step Size</code> should equal <strong>PSS Beat
+Frequency(Hz)</strong></li>
+<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
+positive, negative and 0)</li>
+<li><code>Specialized Analyses</code> should be <code>None</code></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
+sweep from -400G to 400G and step is 8G, which is beat frequency, here
+K=1 Eq.(9) of paper</p>
+</blockquote>
+<blockquote>
+<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
+affect "Direct Plot"'s output but also simuation data i.e. the phase
+shift(imaginary part).</p>
+</blockquote>
+<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
+<p><code>transpose</code>, <code>.'</code> cf.
+https://www.mathworks.com/help/matlab/ref/transpose.html</p>
+<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
+<p>Using shooting PSS, the steady waveform starts from
+<code>tstab+n*tperiod</code>.</p>
+<ul>
+<li><strong>pss_td.pss</strong> is one period waveform starting from
+<code>tstab+n*tperiod</code></li>
+<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
+coefficient of expanded to left and right <strong>pss_td.pss</strong>
+waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
+</ul>
+<blockquote>
+<p>We have to left-shift <code>mod(tstab, tperiod)</code>
+<code>pss_fd.pss</code> in order to align it with of
+<strong>pss_tb.pss</strong></p>
+</blockquote>
+<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
+alt="image-20220610222535614" /></p>
+<h3 id="simulation-log">simulation log</h3>
+<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
+time, though <code>Stop Time(tstab)</code> field of pss form is filled
+with <code>0.3n</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="pss-simulation-result">PSS simulation result</h3>
+<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
+alt="image-20220610224100135" /></p>
+<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
+<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
+alt="image-20220610225310243" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
+function analysis of periodic circuits," 2008 IEEE/ACM International
+Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
+10.1109/ICCAD.2008.4681602.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -9783,60 +9824,6 @@ href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitte
       </tags>
   </entry>
   <entry>
-    <title>Latch Inference in Verilog</title>
-    <url>/2022/05/09/latch-inference/</url>
-    <content><![CDATA[<h2 id="always"><code>always@( * )</code></h2>
-<p><code>always@( * )</code> blocks are used to describe Combinational
-Logic, or Logic Gates. Only <code>=</code> (blocking) assignments should
-be used in an <code>always@( * )</code> block.</p>
-<h2 id="latch-inference">Latch Inference</h2>
-<p>If you <strong>DON'T</strong> assign every element that can be
-assigned inside an <code>always@( * )</code> block every time that
-<code>always@( * )</code> block is executed, a latch will be inferred
-for that element</p>
-<p>The approaches to avoid latch generation:</p>
-<ul>
-<li>set default values</li>
-<li>proper use of the <code>else</code> statement, and other flow
-constructs</li>
-</ul>
-<h3 id="without-default-values">without default values</h3>
-<blockquote>
-<p>latch is generated</p>
-</blockquote>
-<h4 id="rtl">RTL</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h4 id="synthesized-netlist">synthesized netlist</h4>
-<p><img src="/2022/05/09/latch-inference/image-20220509170640006.png"
-alt="image-20220509170640006" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:09:18 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lanhq1 C_reg ( <span class="variable">.E</span>(Trigger), <span class="variable">.D</span>(Pass), <span class="variable">.Q</span>(C) );</span><br><span class="line">  an02d0 U3 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="add-default-value">add default value</h3>
-<blockquote>
-<p>Default values are an easy way to avoid latch generation</p>
-</blockquote>
-<h4 id="rtl-1">RTL</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">        	C = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h4 id="synthesized-netlist-1">synthesized netlist</h4>
-<p><img src="/2022/05/09/latch-inference/image-20220509171319204.png"
-alt="image-20220509171319204" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:12:47 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  nd12d0 U5 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.ZN</span>(C) );</span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="if-evaluation"><code>if</code> evaluation</h2>
-<p><code>signed</code> number cast to <code>unsigned</code>
-automatically before evaluating</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb; </span><br><span class="line">  <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] datasg;</span><br><span class="line">  <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] dataug;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    datasg = <span class="number">2&#x27;b11</span>;</span><br><span class="line">    dataug = <span class="number">2&#x27;b11</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;datasg(%%d): %d&quot;</span>, datasg);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;dataug(%%d): %d&quot;</span>, dataug);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (datasg)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;datasg is OK&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (dataug)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;dataug is OK&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$finish</span>();</span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlog tb.v</span><br><span class="line">$ vsim -c -do &quot;run;exit&quot; work.tb</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># datasg(%d): -1</span><br><span class="line"># dataug(%d): 3</span><br><span class="line"># datasg is OK</span><br><span class="line"># dataug is OK</span><br><span class="line"># ** Note: $finish    : tb.v(16)</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>UC Berkeley CS150 Lec #20: Finite State Machines <a
-href="https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf">Slides</a></p>
-<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
-by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
-doi:10.1007/978-3-030-03238-8</p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Layout Tricks Part 1 - compact, drain and source sharing</title>
     <url>/2022/02/19/layout-tricks-part1/</url>
     <content><![CDATA[<p>All credits to my colleague, Zhang Wenpian.</p>
@@ -9889,6 +9876,60 @@ href="https://pulsic.com/stacked-mosfets-in-analog-layout/">https://pulsic.com/s
         <tag>mos</tag>
         <tag>layout</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Latch Inference in Verilog</title>
+    <url>/2022/05/09/latch-inference/</url>
+    <content><![CDATA[<h2 id="always"><code>always@( * )</code></h2>
+<p><code>always@( * )</code> blocks are used to describe Combinational
+Logic, or Logic Gates. Only <code>=</code> (blocking) assignments should
+be used in an <code>always@( * )</code> block.</p>
+<h2 id="latch-inference">Latch Inference</h2>
+<p>If you <strong>DON'T</strong> assign every element that can be
+assigned inside an <code>always@( * )</code> block every time that
+<code>always@( * )</code> block is executed, a latch will be inferred
+for that element</p>
+<p>The approaches to avoid latch generation:</p>
+<ul>
+<li>set default values</li>
+<li>proper use of the <code>else</code> statement, and other flow
+constructs</li>
+</ul>
+<h3 id="without-default-values">without default values</h3>
+<blockquote>
+<p>latch is generated</p>
+</blockquote>
+<h4 id="rtl">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509170640006.png"
+alt="image-20220509170640006" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:09:18 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lanhq1 C_reg ( <span class="variable">.E</span>(Trigger), <span class="variable">.D</span>(Pass), <span class="variable">.Q</span>(C) );</span><br><span class="line">  an02d0 U3 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3 id="add-default-value">add default value</h3>
+<blockquote>
+<p>Default values are an easy way to avoid latch generation</p>
+</blockquote>
+<h4 id="rtl-1">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">        	C = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist-1">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509171319204.png"
+alt="image-20220509171319204" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:12:47 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  nd12d0 U5 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.ZN</span>(C) );</span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="if-evaluation"><code>if</code> evaluation</h2>
+<p><code>signed</code> number cast to <code>unsigned</code>
+automatically before evaluating</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb; </span><br><span class="line">  <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] datasg;</span><br><span class="line">  <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] dataug;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    datasg = <span class="number">2&#x27;b11</span>;</span><br><span class="line">    dataug = <span class="number">2&#x27;b11</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;datasg(%%d): %d&quot;</span>, datasg);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;dataug(%%d): %d&quot;</span>, dataug);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (datasg)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;datasg is OK&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (dataug)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;dataug is OK&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$finish</span>();</span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlog tb.v</span><br><span class="line">$ vsim -c -do &quot;run;exit&quot; work.tb</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># datasg(%d): -1</span><br><span class="line"># dataug(%d): 3</span><br><span class="line"># datasg is OK</span><br><span class="line"># dataug is OK</span><br><span class="line"># ** Note: $finish    : tb.v(16)</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>UC Berkeley CS150 Lec #20: Finite State Machines <a
+href="https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf">Slides</a></p>
+<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
+by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
+doi:10.1007/978-3-030-03238-8</p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
   </entry>
   <entry>
     <title>Layout Tricks Part 2 - matching</title>
@@ -10278,6 +10319,24 @@ Integrity (SPI)</em> (2018): 1-4.</p>
       </categories>
   </entry>
   <entry>
+    <title>Maximum Likelihood Sequence Estimation (MLSE Equalizer)</title>
+    <url>/2023/08/12/mlse/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
+Sheikholeslami, "Design and Implementation of an On-Demand
+Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
+Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
+10.1109/OJCAS.2022.3173686.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+      <tags>
+        <tag>mlse</tag>
+        <tag>viterbi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mixing Signed and Unsigned in Verilog</title>
     <url>/2022/05/07/mixed-sign-verilog/</url>
     <content><![CDATA[<p>Sign Extension</p>
@@ -10530,24 +10589,6 @@ Processing</a></p>
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Maximum Likelihood Sequence Estimation (MLSE Equalizer)</title>
-    <url>/2023/08/12/mlse/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
-Sheikholeslami, "Design and Implementation of an On-Demand
-Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
-Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
-10.1109/OJCAS.2022.3173686.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-      <tags>
-        <tag>mlse</tag>
-        <tag>viterbi</tag>
-      </tags>
   </entry>
   <entry>
     <title>Multicycle Paths Constraints in PrimeTime</title>
@@ -16962,6 +17003,35 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
       </categories>
   </entry>
   <entry>
+    <title>UVM project topology</title>
+    <url>/2022/03/21/uvm-proj-topo/</url>
+    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
+files</em></p>
+<p>Classes can only be compiled from a <em>module</em> or <em>package
+scope</em></p>
+<p>Recommendation:</p>
+<ul>
+<li>Include related class files into a package</li>
+<li>Import the package into modules where required</li>
+</ul>
+<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
+<ul>
+<li>Import package to access library</li>
+<li>The macro file <code>uvm_macros.svh</code> must be included
+separately</li>
+</ul>
+<p>yapp_packet.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
+<p>yapp_pkg.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
+<p>run.f for <code>xrun</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Debug topology and Check config usage in UVM</title>
     <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
     <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
@@ -16995,35 +17065,6 @@ top-down)</li>
 <li><strong>Tasks</strong> are forked into concurrent executing
 threads</li>
 </ul>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>UVM project topology</title>
-    <url>/2022/03/21/uvm-proj-topo/</url>
-    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
-files</em></p>
-<p>Classes can only be compiled from a <em>module</em> or <em>package
-scope</em></p>
-<p>Recommendation:</p>
-<ul>
-<li>Include related class files into a package</li>
-<li>Import the package into modules where required</li>
-</ul>
-<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
-<ul>
-<li>Import package to access library</li>
-<li>The macro file <code>uvm_macros.svh</code> must be included
-separately</li>
-</ul>
-<p>yapp_packet.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
-<p>yapp_pkg.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
-<p>run.f for <code>xrun</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -18183,6 +18224,25 @@ Memory in Verilog</a></p>
       </categories>
   </entry>
   <entry>
+    <title>compile vim from source with GUI support</title>
+    <url>/2022/02/02/vim-compile/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="binkey">binkey</h2>
+<p>Inserting a new line below: <code>o</code></p>
+<p>above: <code>O</code></p>
+<p>To insert before the cursor: <code>i</code></p>
+<p>After: <code>a</code></p>
+<p>Before the line (home): <code>I</code></p>
+<p>Append at the end of line: <code>A</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Custom Bindkey of Cadence Virtuoso</title>
     <url>/2022/04/13/virtuoso-bindkey/</url>
     <content><![CDATA[<h2 id="schbindkeys.il">schBindKeys.il</h2>
@@ -18203,25 +18263,6 @@ Memory in Verilog</a></p>
         <tag>virtuoso</tag>
         <tag>layout</tag>
         <tag>schematic</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>compile vim from source with GUI support</title>
-    <url>/2022/02/02/vim-compile/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<h2 id="binkey">binkey</h2>
-<p>Inserting a new line below: <code>o</code></p>
-<p>above: <code>O</code></p>
-<p>To insert before the cursor: <code>i</code></p>
-<p>After: <code>a</code></p>
-<p>Before the line (home): <code>I</code></p>
-<p>Append at the end of line: <code>A</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>vim</tag>
       </tags>
   </entry>
   <entry>

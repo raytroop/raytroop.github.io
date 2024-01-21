@@ -1,3 +1,9 @@
+---
+title: 哲学 Philosophy
+date: 2023-08-15 01:23:42
+tags:
+categories:
+---
 
 
 ## 《庄子》

@@ -1,10 +1,3 @@
----
-title: 哲学 Philosophy
-date: 2023-08-15 01:23:42
-tags:
-categories:
----
-
 
 
 ## 《庄子》
@@ -14,8 +7,6 @@ categories:
 ```
 知不可奈何而安之若命，唯有德者能之。
 ```
-
-
 
 
 
@@ -45,9 +36,9 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 
 
+## 诗词曲
 
-
-## 纳兰容若
+### 纳兰容若
 
 ```
 浣溪沙
@@ -60,7 +51,7 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 
 
-## 崔护
+### 崔护
 
 ```
 题都城南庄
@@ -73,7 +64,7 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 
 
-## 李白
+### 李白
 
 ```
 将进酒
@@ -97,22 +88,7 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 
 
-## 陆游
-
-```
-钗头凤
-
-红酥手， 黄縢酒， 满城春色宫墙柳。 东风恶， 欢情薄， 一怀愁
-绪， 几年离索。 错， 错， 错！
-春如旧， 人空瘦， 泪痕红浥鲛绡透。 桃花落， 闲池阁， 山盟虽
-在， 锦书难托。 莫， 莫， 莫！
-```
-
-
-
-
-
-## 辛弃疾
+### 辛弃疾
 
 ```
 破阵子
@@ -133,7 +109,7 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 
 
-## 岳飞
+### 岳飞
 
 ```
 满江红
@@ -146,7 +122,7 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 
 
-## 元好问
+### 元好问
 
 ```
 摸鱼儿
@@ -175,11 +151,7 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 
 
-## 黑塞
-
-
-
-### 悉达多
+## 悉达多
 
 ```
 知识可以传授，智慧却不能
@@ -193,6 +165,18 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 
 
+## 王德峰
+
+
+
+```
+我们确认有命之后，我们的人生观才会是积极的。
+```
+
+
+
+
+
 ## misc
 
 
@@ -202,8 +186,6 @@ The unexamined life is not worth living
 
 - Socrates
 ```
-
-
 
 
 
@@ -257,7 +239,68 @@ The unexamined life is not worth living
 ```
 The past was a lie, that memory has no return, that every spring gone by could never be recovered, and that the wildest and most tenacious love was an ephemeral truth in the end.
 
-- Gabriel García Márquez’s One Hundred Years of Solitude
+- Gabriel García Márquez's One Hundred Years of Solitude
+```
+
+
+
+```
+Life is the most difficult exam. Many people fail because they try to copy others, withuout realizing that everyone has a different question paper
+```
+
+
+
+```
+不像考卷，所有複雜困難的問題，都能得到一個解答。真實人生裡，有些事永遠也沒有答案。
+```
+
+
+
+
+
+## 恋爱必修课
+
+
+
+### 读懂相亲与其他恋爱模式的异同
+
+```
+第五，黑白名单
+
+其他模式结识的异性，一定是某个瞬间身上的闪光点打动了你，因此你会喜欢上 TA，这种叫作白名单模式。白名单里的人，一定是某些特点吸引了你，比较有魅力，相处比较有激情的。
+
+但是，这个名单里的人由于了解少，很可能也有雷，你们的恋爱过程会是个排雷的过程。随着了解的加深，你要看对方身上有没有让你无法忍受的缺点，没有才能走下去。
+
+相亲恰恰相反，能够走进你相亲名单的人，往往是没什么雷，看着条件都还行，但一时没什么特别打动自己的。这种我建议你采取黑名单模式，只要见面后没有发现什么特别大的缺点，不进黑名单的都可以尝试接触。毕竟，相亲那一两次特定的场合环境，是很难展现一个人闪光点的。
+```
+
+
+
+### 相亲注意手册
+
+```
+相亲原则一：明确
+在第一次相亲见面前，最好不要在线聊太长时间。毫无基础的两个人聊起来很容易尬，尬聊久了就容易崩。一般互相交换联系方式后，最好一周内安排“真身”见面。
+
+第一次见面后，最好当天就能有明确答复，最长一般不超过一周。这个答复可以直接和相亲对象交流，也可以通过介绍人转达，觉得行就是行，不行就是不行。如果几天没有答复，一般视作不同意，没答复介绍人还催问你什么意向的话，那说明对方对你的印象还不错，介绍人在给你兜。
+```
+
+
+
+```
+相亲原则三：委婉
+
+拒绝对方要委婉，你不是情感导师，不用干我这活，去给人家指出相亲中存在的不足和缺点。
+
+拒绝人家的话，你可以直接发好人卡，说不太合适就好了。同时，也要读懂对方的委婉，当人家给出一个非常宽泛而不具体的理由拒绝你时，也千万不要再追问别人自己哪里不合适了。
+```
+
+
+
+```
+相亲原则四：果断
+
+相亲始终是效率优先的，根据我这么长的咨询经历，相亲第一次没有看中的，很难通过后续发展挽回了。所以，一旦对方表现出不耐烦、不感兴趣，一聊天就去洗澡睡觉的，一定要果断止损。
 ```
 
 

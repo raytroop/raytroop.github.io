@@ -190,131 +190,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/29/scattering/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/29/scattering/" class="post-title-link" itemprop="url">Scattering parameters</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-29 15:57:01" itemprop="dateCreated datePublished" datetime="2023-09-29T15:57:01+00:00">2023-09-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/24/mattool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -351,7 +226,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -485,7 +360,7 @@ Integrity (SPI)</em> (2018): 1-4.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -673,7 +548,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -842,7 +717,7 @@ repo</a>]</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -936,6 +811,157 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/15/zhexue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/08/15/zhexue/" class="post-title-link" itemprop="url">哲学 Philosophy</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-08-15 01:23:42" itemprop="dateCreated datePublished" datetime="2023-08-15T01:23:42+00:00">2023-08-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="庄子">《庄子》</h2>
+<p>《庄子·德充符》</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">知不可奈何而安之若命，唯有德者能之。</span><br></pre></td></tr></table></figure>
+<h2 id="richard-p.-feynman">Richard P. Feynman</h2>
+<p>我有一种哲学，就是不为过去所做的事情后悔。只是设法记住你当时为什么做出那样的决定。</p>
+<p>I have a philosophy that it doesn't do any good to go and make
+regrets about what you did before but to try to remember how you made
+the decision at the time.</p>
+<p>​ ——<em>Perfectly Reasonable Deviations from the Beaten Track</em>,
+p. 421</p>
+<h2 id="self-esteem-fourth-edition">Self-Esteem Fourth edition</h2>
+<blockquote>
+<p>Self-Esteem: A Proven Program of Cognitive Techniques for Assessing,
+Improving, and Maintaining Your Self-Esteem Paperback – Illustrated,
+August 1, 2016</p>
+<p>​ -- Matthew McKay and Patrick Fanning</p>
+</blockquote>
+<p>The healthier strategy for controlling the fear of failure is to
+redefine the meaning of your mistakes.</p>
+<p>People with low self-esteem consider mistakes to be an indication of
+a general lack of worth. Each error reaffirms their underlying belief
+that something is terribly wrong with them.</p>
+<p>In chapter 10, on handling mistakes, you will explore one of the
+fundamental laws of human nature: that you always choose actions that
+seem most likely to meet your needs based on current awareness. You make
+the best decision you can at any point in time, given what you know and
+what you want.</p>
+<p><strong>The secret to coping with any failure is to recognize that
+each decision you've made was the very best one available under the
+circumstances.</strong></p>
+<h2 id="诗词曲">诗词曲</h2>
+<h3 id="纳兰容若">纳兰容若</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">浣溪沙</span><br><span class="line"></span><br><span class="line">谁念西风独自凉， 萧萧黄叶闭疏窗。 沉思往事立残阳。</span><br><span class="line">被酒莫惊春睡重， 赌书消得泼茶香。 当时只道是寻常。</span><br></pre></td></tr></table></figure>
+<h3 id="崔护">崔护</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">题都城南庄</span><br><span class="line"></span><br><span class="line">去年今日此门中， 人面桃花相映红。</span><br><span class="line">人面不知何处去， 桃花依旧笑春风。</span><br></pre></td></tr></table></figure>
+<h3 id="李白">李白</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">将进酒</span><br><span class="line"></span><br><span class="line">君不见黄河之水天上来， 奔流到海不复回。</span><br><span class="line">君不见高堂明镜悲白发， 朝如青丝暮成雪。</span><br><span class="line">人生得意须尽欢， 莫使金樽空对月。</span><br><span class="line">天生我材必有用， 千金散尽还复来。</span><br><span class="line">烹羊宰牛且为乐， 会须一饮三百杯。</span><br><span class="line">岑夫子， 丹丘生， 将进酒， 杯莫停。</span><br><span class="line">与君歌一曲， 请君为我倾耳听。</span><br><span class="line">钟鼓馔玉不足贵， 但愿长醉不复醒。</span><br><span class="line">古来圣贤皆寂寞， 惟有饮者留其名。</span><br><span class="line">陈王昔时宴平乐， 斗酒十千恣欢谑。</span><br><span class="line">主人何为言少钱， 径须沽取对君酌。</span><br><span class="line">五花马， 千金裘，</span><br><span class="line">呼儿将出换美酒， 与尔同销万古愁。</span><br></pre></td></tr></table></figure>
+<h3 id="辛弃疾">辛弃疾</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">破阵子</span><br><span class="line"></span><br><span class="line">醉里挑灯看剑， 梦回吹角连营。 八百里分麾下炙， 五十弦翻塞外</span><br><span class="line">声。 沙场秋点兵。</span><br><span class="line">马作的卢飞快， 弓如霹雳弦惊。 了却君王天下事， 赢得生前身后</span><br><span class="line">名。 可怜白发生！</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">水调歌头·和马叔度游月波楼</span><br><span class="line"></span><br><span class="line">唤起一天明月，照我满怀冰雪，浩荡百川流。鲸饮未吞海，剑气已横秋。</span><br></pre></td></tr></table></figure>
+<h3 id="岳飞">岳飞</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">满江红</span><br><span class="line"></span><br><span class="line">怒发冲冠， 凭栏处、 潇潇雨歇。 抬望眼， 仰天长啸， 壮怀激烈。 </span><br><span class="line">三十功名尘与土， 八千里路云和月。 莫等闲， 白了少年头， 空悲切。</span><br><span class="line">靖康耻， 犹未雪。 臣子恨， 何时灭。 驾长车踏破， 贺兰山缺。 </span><br><span class="line">壮志饥餐胡虏肉， 笑谈渴饮匈奴血。 待从头、 收拾旧山河， 朝天阙。</span><br></pre></td></tr></table></figure>
+<h3 id="元好问">元好问</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">摸鱼儿</span><br><span class="line"></span><br><span class="line">问世间，情为何物， 直教生死相许？</span><br><span class="line">天南地北双飞客， 老翅几回寒暑。</span><br><span class="line">欢乐趣， 离别苦， 就中更有痴儿女。</span><br><span class="line">君应有语， 渺万里层云， 千山暮雪， 只影向谁去？</span><br><span class="line"></span><br><span class="line">横汾路， 寂寞当年箫鼓， 荒烟依旧平楚。</span><br><span class="line">招魂楚些何嗟及， 山鬼暗啼风雨。</span><br><span class="line">天也妒， 未信与， 莺儿燕子俱黄土。</span><br><span class="line">千秋万古， 为留待骚人， 狂歌痛饮， 来访雁丘处。</span><br></pre></td></tr></table></figure>
+<h2 id="阿德勒">阿德勒</h2>
+<h3 id="被讨厌的勇气">被讨厌的勇气</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">人生中最大的谎言就是不活在“此时此刻”。纠结过去、关注未来，把微弱而模糊的光打向人生整体，自认为看到了些什么。</span><br></pre></td></tr></table></figure>
+<h2 id="悉达多">悉达多</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">知识可以传授，智慧却不能</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这就是我为何要继续我的求道之路——并非去寻找更好的法义，我知道它并不存在——而是为摆脱所有圣贤及法义，独自去实现我的目标，或者去幻灭。</span><br></pre></td></tr></table></figure>
+<h2 id="王德峰">王德峰</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们确认有命之后，我们的人生观才会是积极的。</span><br></pre></td></tr></table></figure>
+<h2 id="misc">misc</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The unexamined life is not worth living</span><br><span class="line"></span><br><span class="line">- Socrates</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">人生如棋，落子无悔。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>我还没想好，就跟他说了不合适，做朋友</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">标准的“鸡肋”心态。</span><br><span class="line">条件满意，但看着提不起性欲。</span><br><span class="line">立刻放弃吧，不甘心对方这么好的条件。</span><br><span class="line">立刻同意吧，自己又说服不了自己。</span><br><span class="line">要不就等等吧，看后面会不会出现更好的。</span><br></pre></td></tr></table></figure>
+<p>[<a
+target="_blank" rel="noopener" href="https://www.zhihu.com/question/341872732/answer/2307393870">知乎1</a>]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">体会了后悔和遗憾，才会明白，人生的出场顺序有多重要 。</span><br></pre></td></tr></table></figure>
+<p>[<a
+target="_blank" rel="noopener" href="https://www.zhihu.com/question/341872732/answer/801124328">知乎2</a>]</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;We have to dare to be ourselves, however frightening or strange that self may prove to be.&quot;</span><br><span class="line"></span><br><span class="line">― May Sarton</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">对于现在的我，既没有幸福，也没有不幸。</span><br><span class="line">只是，一切都将消逝。</span><br><span class="line">我阿鼻叫唤地活到今天，在这个人类世界里，只有、只有这句话是唯一的真理。</span><br><span class="line">只是，一切都将消逝。</span><br><span class="line"></span><br><span class="line">- 太宰治,人间失格</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The past was a lie, that memory has no return, that every spring gone by could never be recovered, and that the wildest and most tenacious love was an ephemeral truth in the end.</span><br><span class="line"></span><br><span class="line">- Gabriel García Márquez&#x27;s One Hundred Years of Solitude</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Life is the most difficult exam. Many people fail because they try to copy others, withuout realizing that everyone has a different question paper</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不像考卷，所有複雜困難的問題，都能得到一個解答。真實人生裡，有些事永遠也沒有答案。</span><br></pre></td></tr></table></figure>
+<h2 id="恋爱必修课">恋爱必修课</h2>
+<h3 id="读懂相亲与其他恋爱模式的异同">读懂相亲与其他恋爱模式的异同</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">第五，黑白名单</span><br><span class="line"></span><br><span class="line">其他模式结识的异性，一定是某个瞬间身上的闪光点打动了你，因此你会喜欢上 TA，这种叫作白名单模式。白名单里的人，一定是某些特点吸引了你，比较有魅力，相处比较有激情的。</span><br><span class="line"></span><br><span class="line">但是，这个名单里的人由于了解少，很可能也有雷，你们的恋爱过程会是个排雷的过程。随着了解的加深，你要看对方身上有没有让你无法忍受的缺点，没有才能走下去。</span><br><span class="line"></span><br><span class="line">相亲恰恰相反，能够走进你相亲名单的人，往往是没什么雷，看着条件都还行，但一时没什么特别打动自己的。这种我建议你采取黑名单模式，只要见面后没有发现什么特别大的缺点，不进黑名单的都可以尝试接触。毕竟，相亲那一两次特定的场合环境，是很难展现一个人闪光点的。</span><br></pre></td></tr></table></figure>
+<h3 id="相亲注意手册">相亲注意手册</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">相亲原则一：明确</span><br><span class="line">在第一次相亲见面前，最好不要在线聊太长时间。毫无基础的两个人聊起来很容易尬，尬聊久了就容易崩。一般互相交换联系方式后，最好一周内安排“真身”见面。</span><br><span class="line"></span><br><span class="line">第一次见面后，最好当天就能有明确答复，最长一般不超过一周。这个答复可以直接和相亲对象交流，也可以通过介绍人转达，觉得行就是行，不行就是不行。如果几天没有答复，一般视作不同意，没答复介绍人还催问你什么意向的话，那说明对方对你的印象还不错，介绍人在给你兜。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">相亲原则三：委婉</span><br><span class="line"></span><br><span class="line">拒绝对方要委婉，你不是情感导师，不用干我这活，去给人家指出相亲中存在的不足和缺点。</span><br><span class="line"></span><br><span class="line">拒绝人家的话，你可以直接发好人卡，说不太合适就好了。同时，也要读懂对方的委婉，当人家给出一个非常宽泛而不具体的理由拒绝你时，也千万不要再追问别人自己哪里不合适了。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">相亲原则四：果断</span><br><span class="line"></span><br><span class="line">相亲始终是效率优先的，根据我这么长的咨询经历，相亲第一次没有看中的，很难通过后续发展挽回了。所以，一旦对方表现出不耐烦、不感兴趣，一聊天就去洗澡睡觉的，一定要果断止损。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/12/mlse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -972,7 +998,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1069,7 +1095,7 @@ target="_blank" rel="noopener" href="https://hdl.handle.net/1969.1/166485">https
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1162,7 +1188,7 @@ target="_blank" rel="noopener" href="https://github.com/git/git/blob/master/Docu
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1273,7 +1299,7 @@ target="_blank" rel="noopener" href="https://github.com/lnis-uofu/tsmc_template/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1437,7 +1463,7 @@ target="_blank" rel="noopener" href="https://webee.technion.ac.il/~ran/papers/Me
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-21 14:30:42" itemprop="dateModified" datetime="2024-01-21T14:30:42+00:00">2024-01-21</time>
+      <time title="Modified: 2024-01-21 14:44:59" itemprop="dateModified" datetime="2024-01-21T14:44:59+00:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

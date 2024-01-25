@@ -649,22 +649,6 @@ Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits</p>
       </categories>
   </entry>
   <entry>
-    <title>INL, DNL analysis of current steering DAC</title>
-    <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
-    <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
-<div class="pdf-container" data-target="/pdfs/mos_mismatch.pdf" data-height="500px"></div>
-<h2 id="current-mirror-mismatch-analysis">Current mirror mismatch
-analysis</h2>
-<div class="pdf-container" data-target="/pdfs/Current_mirror_mismatch_analysis.pdf" data-height="500px"></div>
-<h2 id="inldnl-analysis-of-current-steering-dac">INL/DNL analysis of
-current steering DAC</h2>
-<div class="pdf-container" data-target="/pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Global Handles in UVM</title>
     <url>/2022/02/23/Global-Handles-UVM/</url>
     <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
@@ -688,6 +672,22 @@ accessing all the central UVM services such as
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>INL, DNL analysis of current steering DAC</title>
+    <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
+    <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
+<div class="pdf-container" data-target="/pdfs/mos_mismatch.pdf" data-height="500px"></div>
+<h2 id="current-mirror-mismatch-analysis">Current mirror mismatch
+analysis</h2>
+<div class="pdf-container" data-target="/pdfs/Current_mirror_mismatch_analysis.pdf" data-height="500px"></div>
+<h2 id="inldnl-analysis-of-current-steering-dac">INL/DNL analysis of
+current steering DAC</h2>
+<div class="pdf-container" data-target="/pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -752,15 +752,6 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Analysis Command</title>
-    <url>/2022/02/07/Innovus-analysis-command/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Innovus/Tempus Nonfunctional ECO</title>
     <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
@@ -776,6 +767,15 @@ effect taken into consideration during delayCal</p>
 <p><img
 src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
 alt="createPGPin_onDie.drawio" /></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Innovus Analysis Command</title>
+    <url>/2022/02/07/Innovus-analysis-command/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -3042,46 +3042,6 @@ alt="image-20220301203135490" /></p>
       </categories>
   </entry>
   <entry>
-    <title>primary clock, generated clock and virtual clock in SDC</title>
-    <url>/2022/03/01/clocks-sta/</url>
-    <content><![CDATA[<p><strong>primary clocks</strong></p>
-<ul>
-<li>Primary clocks should be created at input ports and output pins of
-black boxes.</li>
-<li>Never create clocks on hierarchy pins. Creating clocks on hierarchy
-will cause problems when reading SDF. The net timing arc becomes
-segmented at the hierarchy and PrimeTime will be unable to annotate the
-net successfully.</li>
-</ul>
-<p><strong>generated clocks</strong></p>
-<ul>
-<li>Generated clocks are generally created for waveform modifications of
-a primary clock (not including simple inversions). PrimeTime does not
-simulate a design and thus will <strong>not</strong> derive internally
-generated clocks automatically - these clocks must be created by the
-user and applied as a constraint.</li>
-<li>PrimeTime caculate source latency for generated clocks if primary
-clock is <strong>propagated</strong>, otherwise its source latency is
-zero.</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># primary clock</span></span><br><span class="line">create_clock -period <span class="number">4</span> [get_ports Clk]</span><br><span class="line">set_clock_latency -<span class="keyword">source</span> <span class="number">2</span> [get_clocks Clk]</span><br><span class="line">set_propagated_clock [get_clocks Clk]</span><br><span class="line">create_generated_clock -divide_by <span class="number">2</span> -name div_clk -<span class="keyword">source</span> [get_ports Clk] FF3/Q</span><br></pre></td></tr></table></figure>
-<p><strong>virtual clocks</strong></p>
-<ul>
-<li>Are clock objects without a source</li>
-<li>Do not clock sequential devices within the current_design</li>
-<li>Serve as references of input or output delays</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a virtual clock, vclk, for input and output delay constraints</span></span><br><span class="line">create_clock -period <span class="number">5</span> -name vclk</span><br><span class="line">set_input_delay -max <span class="number">2</span> -<span class="keyword">clock</span> vclk [get_ports in1]</span><br><span class="line">set_output_delay -max <span class="number">1</span> -<span class="keyword">clock</span> vclk [get_ports out2]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>There is <strong>no</strong> network latency to calculate, even if a
-virtual clock is propagated.</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Clock Gating</title>
     <url>/2023/04/05/clockgating/</url>
     <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
@@ -3125,6 +3085,74 @@ href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysil
       </categories>
   </entry>
   <entry>
+    <title>primary clock, generated clock and virtual clock in SDC</title>
+    <url>/2022/03/01/clocks-sta/</url>
+    <content><![CDATA[<p><strong>primary clocks</strong></p>
+<ul>
+<li>Primary clocks should be created at input ports and output pins of
+black boxes.</li>
+<li>Never create clocks on hierarchy pins. Creating clocks on hierarchy
+will cause problems when reading SDF. The net timing arc becomes
+segmented at the hierarchy and PrimeTime will be unable to annotate the
+net successfully.</li>
+</ul>
+<p><strong>generated clocks</strong></p>
+<ul>
+<li>Generated clocks are generally created for waveform modifications of
+a primary clock (not including simple inversions). PrimeTime does not
+simulate a design and thus will <strong>not</strong> derive internally
+generated clocks automatically - these clocks must be created by the
+user and applied as a constraint.</li>
+<li>PrimeTime caculate source latency for generated clocks if primary
+clock is <strong>propagated</strong>, otherwise its source latency is
+zero.</li>
+</ul>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># primary clock</span></span><br><span class="line">create_clock -period <span class="number">4</span> [get_ports Clk]</span><br><span class="line">set_clock_latency -<span class="keyword">source</span> <span class="number">2</span> [get_clocks Clk]</span><br><span class="line">set_propagated_clock [get_clocks Clk]</span><br><span class="line">create_generated_clock -divide_by <span class="number">2</span> -name div_clk -<span class="keyword">source</span> [get_ports Clk] FF3/Q</span><br></pre></td></tr></table></figure>
+<p><strong>virtual clocks</strong></p>
+<ul>
+<li>Are clock objects without a source</li>
+<li>Do not clock sequential devices within the current_design</li>
+<li>Serve as references of input or output delays</li>
+</ul>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a virtual clock, vclk, for input and output delay constraints</span></span><br><span class="line">create_clock -period <span class="number">5</span> -name vclk</span><br><span class="line">set_input_delay -max <span class="number">2</span> -<span class="keyword">clock</span> vclk [get_ports in1]</span><br><span class="line">set_output_delay -max <span class="number">1</span> -<span class="keyword">clock</span> vclk [get_ports out2]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>There is <strong>no</strong> network latency to calculate, even if a
+virtual clock is propagated.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>complex uvm project topology</title>
+    <url>/2022/03/28/complex-uvm-topo/</url>
+    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
+alt="topo.drawio" /></p>
+<h2 id="compile">compile</h2>
+<ul>
+<li><code>-incdir</code> for all UVC's `<code>include</code></li>
+<li>all pkg.sv</li>
+<li>all if.sv</li>
+<li>all RTL DUT</li>
+<li>uvm top module</li>
+</ul>
+<h2 id="uvm-top.sv">uvm top.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
+<h2 id="rtl-top">RTL top</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2 id="pkg.sv">pkg.sv</h2>
+<p>`<code>include</code> all related uvm class in
+<strong>pgk.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<h2 id="if.sv">if.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Complete Response used in single-pole filter model in systemverilog</title>
     <url>/2022/02/13/completeResponse/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
@@ -3155,34 +3183,6 @@ href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysil
 ]]></content>
       <categories>
         <category>coding</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>complex uvm project topology</title>
-    <url>/2022/03/28/complex-uvm-topo/</url>
-    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
-alt="topo.drawio" /></p>
-<h2 id="compile">compile</h2>
-<ul>
-<li><code>-incdir</code> for all UVC's `<code>include</code></li>
-<li>all pkg.sv</li>
-<li>all if.sv</li>
-<li>all RTL DUT</li>
-<li>uvm top module</li>
-</ul>
-<h2 id="uvm-top.sv">uvm top.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
-<h2 id="rtl-top">RTL top</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="pkg.sv">pkg.sv</h2>
-<p>`<code>include</code> all related uvm class in
-<strong>pgk.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
-<h2 id="if.sv">if.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -4264,21 +4264,6 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
       </categories>
   </entry>
   <entry>
-    <title>different DSPF files for each corner</title>
-    <url>/2023/01/29/dspf-in-corner/</url>
-    <content><![CDATA[<p>Create a new file with an extension <strong>scs</strong> like
-<em>myDSPF_Files.scs</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* DSPF files to use with Corner Definitions</span><br><span class="line">* This is an example file showing how to define different dspf files for different corners</span><br><span class="line">* using model files for individual components as the</span><br><span class="line">* building blocks.</span><br><span class="line">simulator lang=spectre</span><br><span class="line">library dspf_files_corners</span><br><span class="line"></span><br><span class="line">section rctyp_25</span><br><span class="line">dspf_include &quot;DSPF_RC_TYPNOM25.spf&quot;</span><br><span class="line">endsection rctyp_25</span><br><span class="line"></span><br><span class="line">section rctyp_125</span><br><span class="line">dspf_include &quot;DSPF_RC_TYP125.spf&quot;</span><br><span class="line">endsection rctyp_125</span><br><span class="line"></span><br><span class="line">section rcworst_25</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE25.spf&quot;</span><br><span class="line">end section rcworst_25</span><br><span class="line"></span><br><span class="line">section rcworst_125</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE125.spf&quot;</span><br><span class="line">end section rcworst_125</span><br><span class="line"></span><br><span class="line">endlibrary dspf_files_corners</span><br></pre></td></tr></table></figure>
-<p>Add the file created above ‘<em>myDSPF_File.scs</em>’ in
-‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
-<p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
-alt="image-20230129223248655" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>How to Save Node in DSPF?</title>
     <url>/2022/04/15/dspf-saveopt/</url>
     <content><![CDATA[<h2 id="dspf-semantics">DSPF Semantics</h2>
@@ -4619,6 +4604,21 @@ capacitance</strong></p>
       </categories>
   </entry>
   <entry>
+    <title>different DSPF files for each corner</title>
+    <url>/2023/01/29/dspf-in-corner/</url>
+    <content><![CDATA[<p>Create a new file with an extension <strong>scs</strong> like
+<em>myDSPF_Files.scs</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* DSPF files to use with Corner Definitions</span><br><span class="line">* This is an example file showing how to define different dspf files for different corners</span><br><span class="line">* using model files for individual components as the</span><br><span class="line">* building blocks.</span><br><span class="line">simulator lang=spectre</span><br><span class="line">library dspf_files_corners</span><br><span class="line"></span><br><span class="line">section rctyp_25</span><br><span class="line">dspf_include &quot;DSPF_RC_TYPNOM25.spf&quot;</span><br><span class="line">endsection rctyp_25</span><br><span class="line"></span><br><span class="line">section rctyp_125</span><br><span class="line">dspf_include &quot;DSPF_RC_TYP125.spf&quot;</span><br><span class="line">endsection rctyp_125</span><br><span class="line"></span><br><span class="line">section rcworst_25</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE25.spf&quot;</span><br><span class="line">end section rcworst_25</span><br><span class="line"></span><br><span class="line">section rcworst_125</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE125.spf&quot;</span><br><span class="line">end section rcworst_125</span><br><span class="line"></span><br><span class="line">endlibrary dspf_files_corners</span><br></pre></td></tr></table></figure>
+<p>Add the file created above ‘<em>myDSPF_File.scs</em>’ in
+‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
+<p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
+alt="image-20230129223248655" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>split pins in dspf_emir</title>
     <url>/2023/04/04/dspf-split-pins-emir/</url>
     <content><![CDATA[<h3 id="dspf-extract-using-starrc">dspf extract using starrc</h3>
@@ -4745,6 +4745,70 @@ with EMIR and without EMIR analysis URL: <a
 href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY</a></p>
 <p>StarRC User Guide and Command Reference Version O-2018.06, June
 2018</p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>verilog-mode.el</title>
+    <url>/2022/05/13/emacs-verilog-mode/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
+command</p>
+</blockquote>
+<h2 id="verilog-mode.el">verilog-mode.el</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
+<blockquote>
+<p>For use with <code>--batch</code>, perform automatic expansions as a
+stand-alone tool. This sets up the appropriate Verilog mode environment,
+updates automatics with M-x verilog-auto on all command-line files, and
+saves the buffers. For proper results, multiple filenames need to be
+passed on the command line in bottom-up order.</p>
+</blockquote>
+<h3
+id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
+<blockquote>
+<p>Update automatics with M-x verilog-auto, save the buffer, and
+<em>compile</em></p>
+</blockquote>
+<h2 id="emacs">Emacs</h2>
+<h3 id="no-site-file"><code>--no-site-file</code></h3>
+<p>Another file for site-customization is <code>site-start.el</code>.
+Emacs loads this <em>before</em> the user's init file
+(<code>.emacs</code>, <code>.emacs.el</code> or
+<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
+file with the option <code>--no-site-file</code></p>
+<h3 id="batch"><code>--batch</code></h3>
+<p>The command-line option <code>--batch</code> causes Emacs to run
+noninteractively. The idea is that you specify Lisp programs to run;
+when they are finished, Emacs should exit.</p>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function;</p>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="f-func"><code>-f FUNC</code></h3>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function</p>
+<blockquote>
+<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
+</blockquote>
+<h2 id="multiple-directories">multiple directories</h2>
+<p><strong>AUTOINST</strong> only search in the file's directory
+default.</p>
+<p>You can append below <code>verilog-library-directories</code> for
+multiple directories search</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>Emacs Online Documentation <a
+href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
+<p>Emacs verilog-mode 的使用 URL: <a
+href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -5105,70 +5169,6 @@ href="https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-paddin
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>verilog-mode.el</title>
-    <url>/2022/05/13/emacs-verilog-mode/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
-command</p>
-</blockquote>
-<h2 id="verilog-mode.el">verilog-mode.el</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
-<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
-<blockquote>
-<p>For use with <code>--batch</code>, perform automatic expansions as a
-stand-alone tool. This sets up the appropriate Verilog mode environment,
-updates automatics with M-x verilog-auto on all command-line files, and
-saves the buffers. For proper results, multiple filenames need to be
-passed on the command line in bottom-up order.</p>
-</blockquote>
-<h3
-id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
-<blockquote>
-<p>Update automatics with M-x verilog-auto, save the buffer, and
-<em>compile</em></p>
-</blockquote>
-<h2 id="emacs">Emacs</h2>
-<h3 id="no-site-file"><code>--no-site-file</code></h3>
-<p>Another file for site-customization is <code>site-start.el</code>.
-Emacs loads this <em>before</em> the user's init file
-(<code>.emacs</code>, <code>.emacs.el</code> or
-<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
-file with the option <code>--no-site-file</code></p>
-<h3 id="batch"><code>--batch</code></h3>
-<p>The command-line option <code>--batch</code> causes Emacs to run
-noninteractively. The idea is that you specify Lisp programs to run;
-when they are finished, Emacs should exit.</p>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function;</p>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="f-func"><code>-f FUNC</code></h3>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function</p>
-<blockquote>
-<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
-</blockquote>
-<h2 id="multiple-directories">multiple directories</h2>
-<p><strong>AUTOINST</strong> only search in the file's directory
-default.</p>
-<p>You can append below <code>verilog-library-directories</code> for
-multiple directories search</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>Emacs Online Documentation <a
-href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
-<p>Emacs verilog-mode 的使用 URL: <a
-href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -7878,69 +7878,6 @@ alt="pma_dig_bumps.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
     <content><![CDATA[<h2 id="rc-charge-and-discharge">RC charge and discharge</h2>
@@ -8725,6 +8662,69 @@ href="https://www.uio.no/studier/emner/matnat/ifi/INF4420/v13/undervisningsmater
 <p>chembiyan T. OC Lecture 10: A very basic introduction to switched
 capacitor circuits [<a
 href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -13332,26 +13332,6 @@ Press. doi:10.1017/CBO9780511835261</p>
       </categories>
   </entry>
   <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Random Signals</title>
     <url>/2023/11/10/random/</url>
     <content><![CDATA[<h2 id="random-processes">Random Processes</h2>
@@ -13519,6 +13499,26 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
 ]]></content>
       <categories>
         <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -13785,6 +13785,68 @@ alt="image-20220401011543866" /></p>
       </categories>
   </entry>
   <entry>
+    <title>How does UVM&#39;s run_test search testcase ?</title>
+    <url>/2022/06/08/run-test/</url>
+    <content><![CDATA[<p>It depends on the simulator:</p>
+<ul>
+<li>QuestaSim, Xcelium: You have to <code>import</code> pkg or
+`<code>include</code> file in top testbench</li>
+<li>VCS: VCS automatically search testcase in other Compilation
+Units</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test_pkg.sv</span></span><br><span class="line"><span class="keyword">package</span> sim_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">		`uvm_component_utils(my_test)</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">			<span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">		<span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">			`uvm_info(get_type_name(), <span class="string">&quot;this is run_phase of my_test&quot;</span>, UVM_LOW)</span><br><span class="line">		<span class="keyword">endtask</span> : run_phase</span><br><span class="line">	<span class="keyword">endclass</span> : my_test</span><br><span class="line"></span><br><span class="line">	<span class="keyword">class</span> its_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">		`uvm_component_utils(its_test)</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">			<span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">		<span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">			`uvm_info(get_type_name(), <span class="string">&quot;this is run_phase of its_test&quot;</span>, UVM_LOW)</span><br><span class="line">		<span class="keyword">endtask</span> : run_phase</span><br><span class="line">	<span class="keyword">endclass</span> : its_test</span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span> : sim_pkg</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb_top.sv</span></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="comment">//import sim_pkg::*;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		run_test();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 78%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>simulator</th>
+<th>cmd</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VCS</td>
+<td><code>vcs -sverilog -ntb_opts uvm-1.2 test_pkg.sv tb_top.sv</code><br /><code>./simv +UVM_TESTNAME=my_test</code></td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>Xcelium</td>
+<td><code>xrun -64 -uvmhome CDNS-1.2 test_pkg.sv tb_top.sv +UVM_TESTNAME=my_test</code></td>
+<td>✗</td>
+</tr>
+<tr class="odd">
+<td>QuestaSim</td>
+<td><code>vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</code><br /><code>vsim -c -do "run -all;exit" +UVM_TESTNAME=my_test work.tb_top -L $QUESTA_HOME/uvm-1.2</code></td>
+<td>✗</td>
+</tr>
+</tbody>
+</table>
+<p><em>Xcelium log:</em></p>
+<blockquote>
+<p><code>UVM_WARNING @ 0: reporter [BDTYP] Cannot create a component of type 'my_test' because it is not registered with the factory. UVM_FATAL @ 0: reporter [INVTST] Requested test from command line +UVM_TESTNAME=my_test not found. UVM_INFO /home/EDA/Cadence/XCELIUM2109/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 0: reporter [UVM/REPORT/CATCHER]</code></p>
+</blockquote>
+<p><em>QuestaSim log:</em></p>
+<blockquote>
+<p><code># UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3</code>
+<code># UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)</code>
+<code># UVM_WARNING @ 0: reporter [BDTYP] Cannot create a component of type 'my_test' because it is not registered with the factory.</code>
+<code># UVM_FATAL @ 0: reporter [INVTST] Requested test from command line +UVM_TESTNAME=my_test not found.</code>
+<code># UVM_INFO verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 0: reporter [UVM/REPORT/SERVER]</code></p>
+</blockquote>
+<p><strong>solution:</strong></p>
+<p>uncomment <code>//import sim_pkg::*;</code> in <em>tb_top.sv</em></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Sampling of Continuous Time Signals</title>
     <url>/2022/05/01/sampling-dft/</url>
     <content><![CDATA[<p>The sampling process mathematically in the two stages:</p>
@@ -14031,68 +14093,6 @@ href="https://designers-guide.org/modeling/dataconversion.pdf">https://designers
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>How does UVM&#39;s run_test search testcase ?</title>
-    <url>/2022/06/08/run-test/</url>
-    <content><![CDATA[<p>It depends on the simulator:</p>
-<ul>
-<li>QuestaSim, Xcelium: You have to <code>import</code> pkg or
-`<code>include</code> file in top testbench</li>
-<li>VCS: VCS automatically search testcase in other Compilation
-Units</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test_pkg.sv</span></span><br><span class="line"><span class="keyword">package</span> sim_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">		`uvm_component_utils(my_test)</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">			<span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">		<span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">			`uvm_info(get_type_name(), <span class="string">&quot;this is run_phase of my_test&quot;</span>, UVM_LOW)</span><br><span class="line">		<span class="keyword">endtask</span> : run_phase</span><br><span class="line">	<span class="keyword">endclass</span> : my_test</span><br><span class="line"></span><br><span class="line">	<span class="keyword">class</span> its_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">		`uvm_component_utils(its_test)</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">			<span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">		<span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">			`uvm_info(get_type_name(), <span class="string">&quot;this is run_phase of its_test&quot;</span>, UVM_LOW)</span><br><span class="line">		<span class="keyword">endtask</span> : run_phase</span><br><span class="line">	<span class="keyword">endclass</span> : its_test</span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span> : sim_pkg</span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb_top.sv</span></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="comment">//import sim_pkg::*;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		run_test();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<table>
-<colgroup>
-<col style="width: 11%" />
-<col style="width: 78%" />
-<col style="width: 9%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>simulator</th>
-<th>cmd</th>
-<th>result</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>VCS</td>
-<td><code>vcs -sverilog -ntb_opts uvm-1.2 test_pkg.sv tb_top.sv</code><br /><code>./simv +UVM_TESTNAME=my_test</code></td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>Xcelium</td>
-<td><code>xrun -64 -uvmhome CDNS-1.2 test_pkg.sv tb_top.sv +UVM_TESTNAME=my_test</code></td>
-<td>✗</td>
-</tr>
-<tr class="odd">
-<td>QuestaSim</td>
-<td><code>vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</code><br /><code>vsim -c -do "run -all;exit" +UVM_TESTNAME=my_test work.tb_top -L $QUESTA_HOME/uvm-1.2</code></td>
-<td>✗</td>
-</tr>
-</tbody>
-</table>
-<p><em>Xcelium log:</em></p>
-<blockquote>
-<p><code>UVM_WARNING @ 0: reporter [BDTYP] Cannot create a component of type 'my_test' because it is not registered with the factory. UVM_FATAL @ 0: reporter [INVTST] Requested test from command line +UVM_TESTNAME=my_test not found. UVM_INFO /home/EDA/Cadence/XCELIUM2109/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_catcher.svh(705) @ 0: reporter [UVM/REPORT/CATCHER]</code></p>
-</blockquote>
-<p><em>QuestaSim log:</em></p>
-<blockquote>
-<p><code># UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3</code>
-<code># UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)</code>
-<code># UVM_WARNING @ 0: reporter [BDTYP] Cannot create a component of type 'my_test' because it is not registered with the factory.</code>
-<code># UVM_FATAL @ 0: reporter [INVTST] Requested test from command line +UVM_TESTNAME=my_test not found.</code>
-<code># UVM_INFO verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 0: reporter [UVM/REPORT/SERVER]</code></p>
-</blockquote>
-<p><strong>solution:</strong></p>
-<p>uncomment <code>//import sim_pkg::*;</code> in <em>tb_top.sv</em></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -16360,6 +16360,45 @@ alt="image-20231006110506245" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Debug topology and Check config usage in UVM</title>
+    <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
+    <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// defaults to table printer</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p>The default printer policy is
+<strong>uvm_default_table_printer</strong></p>
+<p>There are three default printer policies that the uvm_pkg
+provides:</p>
+<blockquote>
+<p>uvm_default_table_printer uvm_default_tree_printer
+uvm_default_line_printer</p>
+</blockquote>
+<h4 id="check-all-configuration-settings">Check all configuration
+settings</h4>
+<p>Check all configuration settings in a components configuration table
+to determine if the setting has been used, overridden or not used. When
+<em>recurse</em> is 1 (default), configuration for this and all child
+components are recursively checked. This function is automatically
+called in the check phase, but can be manually called at any time.</p>
+<p>To get all configuration information prior to the run phase, do
+something like this in your top object:</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	check_config_usage();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="uvm-phase">UVM phase</h4>
+<p><img
+src="/2022/02/21/uvm-debug-topology-config-usage/image-20220221230440017.png"
+alt="image-20220221230440017" /></p>
+<ul>
+<li><strong>Functions</strong> are executed bottom-up (Except for
+<strong>build and final phases</strong> , which are executed
+top-down)</li>
+<li><strong>Tasks</strong> are forked into concurrent executing
+threads</li>
+</ul>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>PAM4 Transmitter</title>
     <url>/2022/07/20/tx-pam4/</url>
     <content><![CDATA[<h1 id="pam4-basic">PAM4 Basic</h1>
@@ -16632,45 +16671,6 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Debug topology and Check config usage in UVM</title>
-    <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
-    <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// defaults to table printer</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p>The default printer policy is
-<strong>uvm_default_table_printer</strong></p>
-<p>There are three default printer policies that the uvm_pkg
-provides:</p>
-<blockquote>
-<p>uvm_default_table_printer uvm_default_tree_printer
-uvm_default_line_printer</p>
-</blockquote>
-<h4 id="check-all-configuration-settings">Check all configuration
-settings</h4>
-<p>Check all configuration settings in a components configuration table
-to determine if the setting has been used, overridden or not used. When
-<em>recurse</em> is 1 (default), configuration for this and all child
-components are recursively checked. This function is automatically
-called in the check phase, but can be manually called at any time.</p>
-<p>To get all configuration information prior to the run phase, do
-something like this in your top object:</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	check_config_usage();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="uvm-phase">UVM phase</h4>
-<p><img
-src="/2022/02/21/uvm-debug-topology-config-usage/image-20220221230440017.png"
-alt="image-20220221230440017" /></p>
-<ul>
-<li><strong>Functions</strong> are executed bottom-up (Except for
-<strong>build and final phases</strong> , which are executed
-top-down)</li>
-<li><strong>Tasks</strong> are forked into concurrent executing
-threads</li>
-</ul>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -17585,38 +17585,6 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErH
       </categories>
   </entry>
   <entry>
-    <title>verilog constant part-select and indexed part-select</title>
-    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
-    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
-<strong>part-select</strong>. There are two types of part-selects, one
-with a <strong>constant part-select</strong> and another with an
-<strong>indexed part-select</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
-<p>Having a variable part-select allows it to be used effectively in
-loops to select parts of the vector. Although the starting bit can be
-<strong>varied</strong>, the width has to be
-<strong>constant</strong>.</p>
-<blockquote>
-<p><strong>[&lt;start_bit +: <width>] // part-select increments from
-start-bit</strong></p>
-<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
-start-bit</strong></p>
-</blockquote>
-<p><strong>Example</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
-<p><strong>ref</strong></p>
-<p><a
-href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
-scalar and vector</a></p>
-<p><a
-href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
-is the "+:" operator called in Verilog?</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>VCS &amp; Verdi</title>
     <url>/2022/02/08/vcs-verdi/</url>
     <content><![CDATA[<h2 id="vcs-with-customized-uvm-version">VCS with customized UVM
@@ -17800,6 +17768,38 @@ Synopsys</a></p>
 href="https://www.youtube.com/watch?v=yjs7R5UWOEw&amp;ab_channel=Synopsys">Using
 Verdi for Design Understanding - Connectivity Tracing and FSM Extraction
 in Verdi | Synopsys</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>verilog constant part-select and indexed part-select</title>
+    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
+    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
+<strong>part-select</strong>. There are two types of part-selects, one
+with a <strong>constant part-select</strong> and another with an
+<strong>indexed part-select</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
+<p>Having a variable part-select allows it to be used effectively in
+loops to select parts of the vector. Although the starting bit can be
+<strong>varied</strong>, the width has to be
+<strong>constant</strong>.</p>
+<blockquote>
+<p><strong>[&lt;start_bit +: <width>] // part-select increments from
+start-bit</strong></p>
+<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
+start-bit</strong></p>
+</blockquote>
+<p><strong>Example</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
+<p><strong>ref</strong></p>
+<p><a
+href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
+scalar and vector</a></p>
+<p><a
+href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
+is the "+:" operator called in Verilog?</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -18247,8 +18247,6 @@ circumstances.</strong></p>
 <h2 id="悉达多">悉达多</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">知识可以传授，智慧却不能</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这就是我为何要继续我的求道之路——并非去寻找更好的法义，我知道它并不存在——而是为摆脱所有圣贤及法义，独自去实现我的目标，或者去幻灭。</span><br></pre></td></tr></table></figure>
-<h2 id="王德峰">王德峰</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">我们确认有命之后，我们的人生观才会是积极的。</span><br></pre></td></tr></table></figure>
 <h2 id="misc">misc</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The unexamined life is not worth living</span><br><span class="line"></span><br><span class="line">- Socrates</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">人生如棋，落子无悔。</span><br></pre></td></tr></table></figure>
@@ -18267,12 +18265,24 @@ href="https://www.zhihu.com/question/341872732/answer/801124328">知乎2</a>]</p
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Life is the most difficult exam. Many people fail because they try to copy others, withuout realizing that everyone has a different question paper</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">不像考卷，所有複雜困難的問題，都能得到一個解答。真實人生裡，有些事永遠也沒有答案。</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">你如果不信命，这一生该有多少让你失望的事情</span><br><span class="line"></span><br><span class="line">- 王德峰</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">我们确认有命之后，我们的人生观才会是积极的。</span><br><span class="line"></span><br><span class="line">- 王德峰</span><br></pre></td></tr></table></figure>
 <h2 id="恋爱必修课"><a
 href="https://learn.lianglianglee.com/%E6%81%8B%E7%88%B1%E5%BF%85%E4%BF%AE%E8%AF%BE">恋爱必修课</a></h2>
 <h3 id="读懂相亲与其他恋爱模式的异同">读懂相亲与其他恋爱模式的异同</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">第二，目的明确</span><br><span class="line">其他模式认识的异性，在没有明确关系之前，双方可以是多元发展的。可以做朋友、可以做兄妹、可以做事业伙伴，即便你察觉到对方的异样，在没有积累足够好感度之前，你也可以装傻充愣，假装不知道。甚至在表白的时候还可以无辜地说，我只是想学编程，你居然想睡我。</span><br><span class="line"></span><br><span class="line">但相亲的目的是很明确的，双方认识的唯一目的就是搞对象，双方应该建立这个基本共识，不然就不用谈了。因此，在双方确立关系之前，所有负面反馈都应该视为拒绝，不接电话、约不出来、回消息慢，都可以视为拒绝。相亲是不能拿慢热、懵懂之类的原因当借口的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第五，黑白名单</span><br><span class="line"></span><br><span class="line">其他模式结识的异性，一定是某个瞬间身上的闪光点打动了你，因此你会喜欢上 TA，这种叫作白名单模式。白名单里的人，一定是某些特点吸引了你，比较有魅力，相处比较有激情的。</span><br><span class="line"></span><br><span class="line">但是，这个名单里的人由于了解少，很可能也有雷，你们的恋爱过程会是个排雷的过程。随着了解的加深，你要看对方身上有没有让你无法忍受的缺点，没有才能走下去。</span><br><span class="line"></span><br><span class="line">相亲恰恰相反，能够走进你相亲名单的人，往往是没什么雷，看着条件都还行，但一时没什么特别打动自己的。这种我建议你采取黑名单模式，只要见面后没有发现什么特别大的缺点，不进黑名单的都可以尝试接触。毕竟，相亲那一两次特定的场合环境，是很难展现一个人闪光点的。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">第二，目的明确</span><br><span class="line"></span><br><span class="line">但相亲的目的是很明确的，双方认识的唯一目的就是搞对象，双方应该建立这个基本共识，不然就不用谈了。因此，在双方确立关系之前，所有负面反馈都应该视为拒绝，不接电话、约不出来、回消息慢，都可以视为拒绝。相亲是不能拿慢热、懵懂之类的原因当借口的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第五，黑白名单</span><br><span class="line"></span><br><span class="line">其他模式结识的异性，一定是某个瞬间身上的闪光点打动了你，因此你会喜欢上 TA，这种叫作白名单模式。白名单里的人，一定是某些特点吸引了你，比较有魅力，相处比较有激情的。</span><br><span class="line"></span><br><span class="line">但是，这个名单里的人由于了解少，很可能也有雷，你们的恋爱过程会是个排雷的过程。随着了解的加深，你要看对方身上有没有让你无法忍受的缺点，没有才能走下去。</span><br><span class="line"></span><br><span class="line">相亲恰恰相反，能够走进你相亲名单的人，往往是没什么雷，看着条件都还行，但一时没什么特别打动自己的。这种我建议你采取黑名单模式，只要见面后没有发现什么特别大的缺点，不进黑名单的都可以尝试接触。毕竟，相亲那一两次特定的场合环境，是很难展现一个人闪光点的。</span><br></pre></td></tr></table></figure>
 <h3 id="相亲注意手册">相亲注意手册</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">相亲原则一：明确</span><br><span class="line">在第一次相亲见面前，最好不要在线聊太长时间。毫无基础的两个人聊起来很容易尬，尬聊久了就容易崩。一般互相交换联系方式后，最好一周内安排“真身”见面。</span><br><span class="line"></span><br><span class="line">第一次见面后，最好当天就能有明确答复，最长一般不超过一周。这个答复可以直接和相亲对象交流，也可以通过介绍人转达，觉得行就是行，不行就是不行。如果几天没有答复，一般视作不同意，没答复介绍人还催问你什么意向的话，那说明对方对你的印象还不错，介绍人在给你兜。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">相亲原则三：委婉</span><br><span class="line"></span><br><span class="line">拒绝对方要委婉，你不是情感导师，不用干我这活，去给人家指出相亲中存在的不足和缺点。</span><br><span class="line"></span><br><span class="line">拒绝人家的话，你可以直接发好人卡，说不太合适就好了。同时，也要读懂对方的委婉，当人家给出一个非常宽泛而不具体的理由拒绝你时，也千万不要再追问别人自己哪里不合适了。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">相亲原则四：果断</span><br><span class="line"></span><br><span class="line">相亲始终是效率优先的，根据我这么长的咨询经历，相亲第一次没有看中的，很难通过后续发展挽回了。所以，一旦对方表现出不耐烦、不感兴趣，一聊天就去洗澡睡觉的，一定要果断止损。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">相亲原则一：明确</span><br><span class="line"></span><br><span class="line">第一次见面后，最好当天就能有明确答复，最长一般不超过一周。这个答复可以直接和相亲对象交流，也可以通过介绍人转达，觉得行就是行，不行就是不行。如果几天没有答复，一般视作不同意，没答复介绍人还催问你什么意向的话，那说明对方对你的印象还不错，介绍人在给你兜。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">相亲原则三：委婉</span><br><span class="line"></span><br><span class="line">拒绝对方要委婉，你不是情感导师，不用干我这活，去给人家指出相亲中存在的不足和缺点。</span><br><span class="line"></span><br><span class="line">拒绝人家的话，你可以直接发好人卡，说不太合适就好了。同时，也要读懂对方的委婉，当人家给出一个非常宽泛而不具体的理由拒绝你时，也千万不要再追问别人自己哪里不合适了。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">相亲原则四：果断</span><br><span class="line"></span><br><span class="line">相亲始终是效率优先的，根据我这么长的咨询经历，相亲第一次没有看中的，很难通过后续发展挽回了。所以，一旦对方表现出不耐烦、不感兴趣，一聊天就去洗澡睡觉的，一定要果断止损。</span><br></pre></td></tr></table></figure>
+<h3 id="什么是好的恋爱目标">什么是好的恋爱目标？</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">第一条：再差的目标，也胜过没有目标。</span><br><span class="line"></span><br><span class="line">    但你不能不知道自己到底要什么，也不能什么都想要。</span><br><span class="line"></span><br><span class="line">    其实，最痛苦的就是这种半吊子。半吊子们，既无法彻底坚持理想主义，搞纯粹的爱情，又无法彻底向功利主义低	头，去做现实的奴隶，他们站在此岸望彼岸，两头不靠岸。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第二条：再好的目标，也得服从人生目标</span><br><span class="line"></span><br><span class="line">    因为，再好的恋爱目标，也要服从于人生目标。</span><br><span class="line">    爱情就是一场自我修炼，找对象其实也是在找寻自我。</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">第三条：恋爱目标，要以我为主</span><br><span class="line"></span><br><span class="line">    这个好，也可以是视野的开阔，为了一个人，去到了从未踏足的地方，见到了从未看过的风景，吃到了从未尝试的美食，多了以前想象不到的人生体验，这非常美好。</span><br><span class="line"></span><br><span class="line">    这个好，还可以是情感能力的提升，学会了如何爱一个人，也学会了如何享受被爱，明白了如何在习惯的生活中接纳一段亲密关系，这都是宝贵的财富。只有当你把恋爱的出发点和落脚点转回到自己身上时，你才会发现很多困扰自己的问题，都不再是问题。</span><br></pre></td></tr></table></figure>
+<h3 id="为什么你这么焦虑">为什么你这么焦虑？</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">最糟糕的就是爱情中黏黏糊糊的人，当断不断、循环往复、来来回回、不清不楚，既浪费自己的时间，也浪费他人的时间。</span><br><span class="line"></span><br><span class="line">所以，破局之道的第一要点就是，你要先改变自己这个状态，千万不要因为对方可能喜欢你，你才去喜欢人家，你最需要做的不是焦虑对方是否喜欢你，而是要确定自己是否喜欢对方。确定了这一点之后，我们才可以进入下一个环节。</span><br></pre></td></tr></table></figure>
+<h3 id="你是主动派-or-被动派">你是主动派 or 被动派？</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在恋爱中，永远要做个善良的人，这比恋爱更加重要。</span><br><span class="line"></span><br><span class="line">也许，你发现了，我给被动等待的人的建议是，别太被动；我给主动出击的人的建议是，别太主动。这看似朴实无华的道理，蕴藏了深意，总结就是：既不刻意讨好，也不掩饰喜欢。</span><br></pre></td></tr></table></figure>
+<h3 id="爱情是从我入手">爱情是从“我”入手</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">真心爱慕和蓄意撩拨，完全不同。真正的喜欢，是一片赤诚的坦然相对，是自然而然的真情流露，是不加修饰的一尘不染，你根本不会有丝毫犹豫就能确定。</span><br><span class="line"></span><br><span class="line">而人总是想给自己留一点余地，你明知道对方大概率不是特别喜欢自己，但想作弊看看对方的底牌，然后我再考虑在这个爱情的赌桌上加注，所以要反复猜测对方到底有多喜欢自己。</span><br><span class="line"></span><br><span class="line">但是，要记住，找一个人谈恋爱绝不是因为这个人在暗暗喜欢你，而必须是因为你足够喜欢这个人。因为足够喜欢，所以勇敢，这种勇敢不是直勾勾地表白，也不是惨兮兮地跪舔，而是坚持自我、展现自我、享受自我的过程。</span><br></pre></td></tr></table></figure>
+<h3
+id="冒犯有时是必要的如何开启一段亲密关系">冒犯有时是必要的：如何开启一段亲密关系？</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">前期：务必真诚</span><br><span class="line"></span><br><span class="line">    把对方当成一个人，而不是一个需要拿下的恋爱目标，仅此而已。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">中期：敢于冒犯</span><br><span class="line"></span><br><span class="line">    当然，敢于冒犯不是粗鲁猥琐，冒犯并不是让你把人按在墙上壁咚，也不是打着心直口快的幌子说黄段子，而是敢于示弱，告诉别人，你需要帮助。示弱是开启亲密关系的精髓所在，强而示之弱，能而示之不能，这既代表了你的态度，也显示了你的能力，更为对方提供了价值需求。</span><br><span class="line">    但是冒犯要注意，一要善意，二要谨防越级，三要记得找补。冒犯的最高级是示弱。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">后期：及时止损</span><br><span class="line"></span><br><span class="line">    那么当对方有哪些表现，你就应当立刻抽身离开呢？不算其人本身人品、性格的缺陷，我认为有以下几种情况，你就可以考虑马上止损了。</span><br><span class="line">    明确拒绝或暗示你，你俩不可能。（说到这得补一句，人家说现在不想谈恋爱的意思不是现在不谈，是不想跟你谈，要听懂拒绝。）</span><br><span class="line">    从来不主动，爱答不理，有你也行没你也行，对你不感兴趣，不愿意主动了解你的生活。</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
 </search>

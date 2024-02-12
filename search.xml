@@ -761,21 +761,21 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus block level create Power Ground Pin method</title>
-    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
-    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
-alt="createPGPin_onDie.drawio" /></p>
+    <title>Innovus Analysis Command</title>
+    <url>/2022/02/07/Innovus-analysis-command/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Analysis Command</title>
-    <url>/2022/02/07/Innovus-analysis-command/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
+    <title>Innovus block level create Power Ground Pin method</title>
+    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
+    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
+alt="createPGPin_onDie.drawio" /></p>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2109,18 +2109,6 @@ those voltage-dependent DRC checks! - siemens</a></p>
       </categories>
   </entry>
   <entry>
-    <title>VMware Disk Shrink</title>
-    <url>/2022/12/16/VMwareDiskShrink/</url>
-    <content><![CDATA[<p>In Guest OS and run</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Virtual Connectivity</title>
     <url>/2023/05/11/Virtual-Connectivity/</url>
     <content><![CDATA[<p>Normally, if the layout connectivity extractor finds disjoint,
@@ -2191,6 +2179,18 @@ Revision 7</p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>VMware Disk Shrink</title>
+    <url>/2022/12/16/VMwareDiskShrink/</url>
+    <content><![CDATA[<p>In Guest OS and run</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
   </entry>
   <entry>
     <title>Device Aging</title>
@@ -3241,6 +3241,152 @@ alt="topo.drawio" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Zero(DC component) and Nyquist Component in FFT</title>
+    <url>/2022/05/14/dc-nyquist-fft/</url>
+    <content><![CDATA[<h2 id="dc-offset">DC offset</h2>
+<p>Performing FFT to a signal with a <em>large DC offset</em> would
+often result in a big impulse around frequency 0 Hz, thus masking out
+the signals of interests with relatively small amplitude.</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
+alt="Remove_DC_Offset_Blog_10" /></p>
+<p>One method to remove DC offset from the original signal before
+performing FFT</p>
+<ul>
+<li>Subtracting the Mean of Original Signal</li>
+</ul>
+<p>You can also not filter the input, but set zero to the zero frequency
+point for FFT result.</p>
+<h2 id="nyquist-component">Nyquist component</h2>
+<p>If we go back to the definition of the DFT <span
+class="math display">\[
+X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
+(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
+\]</span> which is a real number.</p>
+<p>The discrete function <span class="math display">\[
+x[n]=\cos(\pi n)
+\]</span> is always <span class="math inline">\((-1)^n\)</span> for
+integer <span class="math inline">\(n\)</span></p>
+<p>One general sinusoid at Nyquist and has phase shift <span
+class="math inline">\(\theta\)</span>, this is <span
+class="math inline">\(T=2\)</span> and <span
+class="math inline">\(T_s=1\)</span></p>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= A \cos(\pi n + \theta) \\
+     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
+\big) \\
+     &amp;= \big(A\cos(\theta)\big) \cos(\pi
+n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
+     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
+\cdot 0 \\
+     &amp;= B \cdot (-1)^n \\
+\end{align}\]</span></p>
+<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
+<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
+n)\)</span>, then <span class="math display">\[
+B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
+\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
+<p>In other words, you <strong>CAN'T</strong> infer the signal from
+<span class="math inline">\(X(\frac{N}{2})\)</span> <span
+class="math display">\[\begin{align}
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
+\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
+\sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2}
+\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
+- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
+\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
+\sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
+\cos(\pi n+\theta)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
+you <strong>wouldn't</strong> know it because <span
+class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
+\mathbb{Z}\)</span></p>
+<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
+class="math display">\[
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
+\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
+\]</span> However, if <span
+class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
+class="math display">\[
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
+\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
+\]</span></p>
+<p>That sort of ambiguity is the reason for the <strong>strict
+inequality</strong> of the sampling theorem's condition.</p>
+<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
+<p><strong>Both edges</strong> is used for clock waveform to evaluate
+the duty cycle distortion,</p>
+<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
+DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
+below</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
+alt="image-20220516224616908" /></p>
+<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
+component, which is <strong>0.1</strong> in follow figure</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
+alt="image-20220516233618663" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>);</span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
+Spectrum</h2>
+<p>DC and Nyquist frequency of FFT left over</p>
+<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency</span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period</span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2.</span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1)</span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
+alt="image-20220514221609734" /></p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
+alt="image-20220514221642170" /></p>
+<h2 id="alternative-view">Alternative View</h2>
+<p>The direct current (DC) bin (<span
+class="math inline">\(k=0\)</span>) and the bin at <span
+class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
+the Nyquist frequency are <strong>purely real and unique</strong>.</p>
+<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
+amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
+plot is shown as below with sampling frequency is <span
+class="math inline">\(20Hz\)</span></p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
+alt="image-20220427172526711" /></p>
+<p>Amplitude and Phase spectrum, sampled with <span
+class="math inline">\(f_s=20\)</span> Hz</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
+alt="image-20220427174557915" /></p>
+<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
+<strong>1</strong> and its phase is <strong>0</strong> as shown as
+above, which proves the DFT and IDFT.</p>
+<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
+Parseval's theorem), which may not be the power of continuous signal.
+The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
+<strong>1</strong>, that of corresponding continuous signal is <span
+class="math inline">\(\frac{1}{2}\)</span>.</p>
+<p>Power spectrum derived from FFT provide information of samples, i.e.
+<strong>1</strong></p>
+<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
+[1 1 1 1 ...].</p>
+<h3 id="code">code</h3>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
+href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
+<p>How to remove DC component in FFT? URL: <a
+href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
+<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
+seem to work unless there is a phase shift URL: <a
+href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
+<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
+href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
+<p>Why remove energy at Nyquist before ifft? URL: <a
+href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>simulation data dumping</title>
     <url>/2022/06/04/data-dump/</url>
     <content><![CDATA[<h2 id="fsdb">FSDB</h2>
@@ -3424,152 +3570,6 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Zero(DC component) and Nyquist Component in FFT</title>
-    <url>/2022/05/14/dc-nyquist-fft/</url>
-    <content><![CDATA[<h2 id="dc-offset">DC offset</h2>
-<p>Performing FFT to a signal with a <em>large DC offset</em> would
-often result in a big impulse around frequency 0 Hz, thus masking out
-the signals of interests with relatively small amplitude.</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
-alt="Remove_DC_Offset_Blog_10" /></p>
-<p>One method to remove DC offset from the original signal before
-performing FFT</p>
-<ul>
-<li>Subtracting the Mean of Original Signal</li>
-</ul>
-<p>You can also not filter the input, but set zero to the zero frequency
-point for FFT result.</p>
-<h2 id="nyquist-component">Nyquist component</h2>
-<p>If we go back to the definition of the DFT <span
-class="math display">\[
-X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
-(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
-\]</span> which is a real number.</p>
-<p>The discrete function <span class="math display">\[
-x[n]=\cos(\pi n)
-\]</span> is always <span class="math inline">\((-1)^n\)</span> for
-integer <span class="math inline">\(n\)</span></p>
-<p>One general sinusoid at Nyquist and has phase shift <span
-class="math inline">\(\theta\)</span>, this is <span
-class="math inline">\(T=2\)</span> and <span
-class="math inline">\(T_s=1\)</span></p>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= A \cos(\pi n + \theta) \\
-     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
-\big) \\
-     &amp;= \big(A\cos(\theta)\big) \cos(\pi
-n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
-     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
-\cdot 0 \\
-     &amp;= B \cdot (-1)^n \\
-\end{align}\]</span></p>
-<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
-<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
-n)\)</span>, then <span class="math display">\[
-B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
-\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
-<p>In other words, you <strong>CAN'T</strong> infer the signal from
-<span class="math inline">\(X(\frac{N}{2})\)</span> <span
-class="math display">\[\begin{align}
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
-\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2}
-\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
-- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
-\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
-\cos(\pi n+\theta)
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
-you <strong>wouldn't</strong> know it because <span
-class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
-\mathbb{Z}\)</span></p>
-<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
-\]</span> However, if <span
-class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
-\]</span></p>
-<p>That sort of ambiguity is the reason for the <strong>strict
-inequality</strong> of the sampling theorem's condition.</p>
-<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
-<p><strong>Both edges</strong> is used for clock waveform to evaluate
-the duty cycle distortion,</p>
-<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
-DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
-below</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
-alt="image-20220516224616908" /></p>
-<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
-component, which is <strong>0.1</strong> in follow figure</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
-alt="image-20220516233618663" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>);</span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
-Spectrum</h2>
-<p>DC and Nyquist frequency of FFT left over</p>
-<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency</span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period</span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2.</span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1)</span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
-alt="image-20220514221609734" /></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
-alt="image-20220514221642170" /></p>
-<h2 id="alternative-view">Alternative View</h2>
-<p>The direct current (DC) bin (<span
-class="math inline">\(k=0\)</span>) and the bin at <span
-class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
-the Nyquist frequency are <strong>purely real and unique</strong>.</p>
-<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
-amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
-plot is shown as below with sampling frequency is <span
-class="math inline">\(20Hz\)</span></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
-alt="image-20220427172526711" /></p>
-<p>Amplitude and Phase spectrum, sampled with <span
-class="math inline">\(f_s=20\)</span> Hz</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
-alt="image-20220427174557915" /></p>
-<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
-<strong>1</strong> and its phase is <strong>0</strong> as shown as
-above, which proves the DFT and IDFT.</p>
-<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
-Parseval's theorem), which may not be the power of continuous signal.
-The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
-<strong>1</strong>, that of corresponding continuous signal is <span
-class="math inline">\(\frac{1}{2}\)</span>.</p>
-<p>Power spectrum derived from FFT provide information of samples, i.e.
-<strong>1</strong></p>
-<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
-[1 1 1 1 ...].</p>
-<h3 id="code">code</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
-href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
-<p>How to remove DC component in FFT? URL: <a
-href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
-<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
-seem to work unless there is a phase shift URL: <a
-href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
-<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
-href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
-<p>Why remove energy at Nyquist before ifft? URL: <a
-href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
-]]></content>
-      <categories>
-        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -6820,93 +6820,6 @@ Sixth international symposium on quality electronic design (isqed'05),
       </categories>
   </entry>
   <entry>
-    <title>Functional Coverage Modeling</title>
-    <url>/2022/04/03/functional-coverage/</url>
-    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
-<ul>
-<li>Explicit (user defined)
-<ul>
-<li>Fully and clearly expressed within sources
-<ul>
-<li>Sequence and temporal coverage using assertions</li>
-<li>Data-oriented coverage using <code>covergroup</code></li>
-</ul></li>
-<li>Planned and defined by the verification team</li>
-</ul></li>
-<li>Implicit
-<ul>
-<li>Derived or computed from source
-<ul>
-<li>Code coverage measured by the simulator</li>
-</ul></li>
-<li>May be defined outside the verification team</li>
-<li>May be implied by the verification interface
-<ul>
-<li>e.g., an industry standard protocol</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
-Systemverilog</h2>
-<h3 id="assertions-for-control-oriented-coverage">Assertions for
-control-oriented coverage</h3>
-<ul>
-<li>Defined as procedural statements</li>
-<li><strong>CANNOT</strong> be defined in a class</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
-and the cover directive. It is used to cover sequences of signal values
-over time. Assertions cannot be declared or "covered" in a class
-declaration, so their use in an UVM verification environment is
-restricted to <strong>interface only</strong></p>
-</blockquote>
-<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
-data-oriented coverage</h3>
-<ul>
-<li>CAN be declared as a class member and created in class
-constructor</li>
-<li>Used in <strong>interface</strong> and module UVCs</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Data-oriented coverage uses the <code>covergroup</code> construct.
-Covergroups can be declared and created in classes, therefore they are
-essential for explicit coverage in a UVM verification environment.</p>
-</blockquote>
-<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
-<p><code>covergroup new</code> constructor is called
-<strong>directly</strong> off the declaration of the covergroup, it does
-not have a separate instance name</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<p>The <code>covergroup</code> instance must be created in the class
-constructor, not a UVM <code>build_phase</code> or other phase
-method</p>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403210225837.png"
-alt="image-20220403210225837" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
-<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
-<p>Typical module UVC coverage:</p>
-<ul>
-<li>Routing - packets flow from input ports to all legal outputs</li>
-<li>latency - all packets received within speicied delay</li>
-</ul>
-<blockquote>
-<p>The module UVC monitor receives data from the interface monitors via
-analysis ports, so the implementation of the analysis write function is
-a convenient place to put coverage code</p>
-</blockquote>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403212529981.png"
-alt="image-20220403212529981" /></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Fourier Analysis 101</title>
     <url>/2023/05/15/fourier101/</url>
     <content><![CDATA[<h2 id="the-dirac-comb-function">The Dirac Comb function</h2>
@@ -7284,6 +7197,93 @@ href="https://coecs.ou.edu/Joseph.P.Havlicek/ece3793/notes/ECE3793NotesCh07.pdf"
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Functional Coverage Modeling</title>
+    <url>/2022/04/03/functional-coverage/</url>
+    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
+<ul>
+<li>Explicit (user defined)
+<ul>
+<li>Fully and clearly expressed within sources
+<ul>
+<li>Sequence and temporal coverage using assertions</li>
+<li>Data-oriented coverage using <code>covergroup</code></li>
+</ul></li>
+<li>Planned and defined by the verification team</li>
+</ul></li>
+<li>Implicit
+<ul>
+<li>Derived or computed from source
+<ul>
+<li>Code coverage measured by the simulator</li>
+</ul></li>
+<li>May be defined outside the verification team</li>
+<li>May be implied by the verification interface
+<ul>
+<li>e.g., an industry standard protocol</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
+Systemverilog</h2>
+<h3 id="assertions-for-control-oriented-coverage">Assertions for
+control-oriented coverage</h3>
+<ul>
+<li>Defined as procedural statements</li>
+<li><strong>CANNOT</strong> be defined in a class</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
+and the cover directive. It is used to cover sequences of signal values
+over time. Assertions cannot be declared or "covered" in a class
+declaration, so their use in an UVM verification environment is
+restricted to <strong>interface only</strong></p>
+</blockquote>
+<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
+data-oriented coverage</h3>
+<ul>
+<li>CAN be declared as a class member and created in class
+constructor</li>
+<li>Used in <strong>interface</strong> and module UVCs</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Data-oriented coverage uses the <code>covergroup</code> construct.
+Covergroups can be declared and created in classes, therefore they are
+essential for explicit coverage in a UVM verification environment.</p>
+</blockquote>
+<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
+<p><code>covergroup new</code> constructor is called
+<strong>directly</strong> off the declaration of the covergroup, it does
+not have a separate instance name</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<p>The <code>covergroup</code> instance must be created in the class
+constructor, not a UVM <code>build_phase</code> or other phase
+method</p>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403210225837.png"
+alt="image-20220403210225837" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
+<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
+<p>Typical module UVC coverage:</p>
+<ul>
+<li>Routing - packets flow from input ports to all legal outputs</li>
+<li>latency - all packets received within speicied delay</li>
+</ul>
+<blockquote>
+<p>The module UVC monitor receives data from the interface monitors via
+analysis ports, so the implementation of the analysis write function is
+a convenient place to put coverage code</p>
+</blockquote>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403212529981.png"
+alt="image-20220403212529981" /></p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -7679,6 +7679,27 @@ possible without cloning.</p></li>
       </categories>
   </entry>
   <entry>
+    <title>I2C Communication Protocol - I2C, SMBus</title>
+    <url>/2023/10/05/i2c/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>UM10204 I2C-bus specification and user manual [<a
+href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">https://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>]</p>
+<p>AN10216-01 I2C MANUAL [<a
+href="https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf">https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf</a>]</p>
+<p>System Management Bus (SMBus) Specification [<a
+href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">http://smbus.org/specs/SMBus_3_2_20220112.pdf</a>]</p>
+<p>I2C Primer [<a
+href="https://www.i2c-bus.org/i2c-primer/">https://www.i2c-bus.org/i2c-primer/</a>]</p>
+<p>smbus2, A drop-in replacement for smbus-cffi/smbus-python in pure
+Python [<a
+href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kplindegaard/smbus2/tree/master</a>]</p>
+<p>THE BOOK OF I2C A Guide for Adventurers by Randall Hyde</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>hunting jitter</title>
     <url>/2022/03/16/hunting-jitter/</url>
     <content><![CDATA[<p>Due to the following two reasons in Bang-Bang CDR</p>
@@ -7700,27 +7721,6 @@ alt="lock_range" /></p>
 <p>Walker, Clock and Data Recovery for Serial Digital Communication
 focusing on bang-bang loop CDR design methodology, ISSCC Short Course,
 2002</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>I2C Communication Protocol - I2C, SMBus</title>
-    <url>/2023/10/05/i2c/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>UM10204 I2C-bus specification and user manual [<a
-href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">https://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>]</p>
-<p>AN10216-01 I2C MANUAL [<a
-href="https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf">https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf</a>]</p>
-<p>System Management Bus (SMBus) Specification [<a
-href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">http://smbus.org/specs/SMBus_3_2_20220112.pdf</a>]</p>
-<p>I2C Primer [<a
-href="https://www.i2c-bus.org/i2c-primer/">https://www.i2c-bus.org/i2c-primer/</a>]</p>
-<p>smbus2, A drop-in replacement for smbus-cffi/smbus-python in pure
-Python [<a
-href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kplindegaard/smbus2/tree/master</a>]</p>
-<p>THE BOOK OF I2C A Guide for Adventurers by Randall Hyde</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -9334,6 +9334,128 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
       </categories>
   </entry>
   <entry>
+    <title>JTF and OJTF</title>
+    <url>/2022/07/14/jtf-ojtf/</url>
+    <content><![CDATA[<h2 id="concepts-of-jtf-and-ojtf">Concepts of JTF and OJTF</h2>
+<p>Simplified Block Diagram of a Clock-Recovery PLL <img
+src="/2022/07/14/jtf-ojtf/pll_block_diagram.gif"
+alt="pll_block_diagram" /></p>
+<p><strong>Jitter Transfer Function (JTF)</strong></p>
+<ul>
+<li>Input Signal Versus Recovered Clock</li>
+<li>JTF, by jitter frequency, compares how much input signal jitter is
+transferred to the <strong>output of a clock-recovery's PLL (recovered
+clock)</strong>
+<ul>
+<li>Input signal jitter that is within the clock recovery PLL's loop
+bandwidth results in jitter that is faithfully transferred (closed-loop
+gain) to the clock recovery PLL's output signal. JTF in this situation
+is approximately 1.</li>
+<li>Input signal jitter that is outside the clock recovery PLL's loop
+bandwidth results in decreasing jitter (open-loop gain) on the clock
+recovery PLL's output, because the jitter is filtered out and no longer
+reaches the PLL's VCO</li>
+</ul></li>
+</ul>
+<p><strong>Observed Jitter Transfer Function</strong></p>
+<ul>
+<li>Input Signal Versus Sampled Signal</li>
+<li>OJTF compares how much input signal jitter is transferred to the
+<strong>output of a receiver's decision making circuit</strong> as
+effected by a clock recovery's PLL. As the recovered clock is the
+reference for detecting the input signal
+<ul>
+<li>Input signal jitter that is <strong>within</strong> the clock
+recovery PLL's loop bandwidth results in jitter on the recovered clock
+which reduces the amount of jitter that can be detected. The input
+signal and clock signal are closer in phase</li>
+<li>Input signal jitter that is <strong>outside</strong> the clock
+recovery PLL's loop bandwidth results in <strong>reduced jitter on the
+recovered cloc</strong>k which increases the amount of jitter that can
+be detected. The input signal and clock signal are more out of phase.
+Jitter that is on both the input and clock signals can not detected or
+is reduced</li>
+</ul></li>
+</ul>
+<p>JTF and OJTF for 1st Order PLLs</p>
+<p><img src="/2022/07/14/jtf-ojtf/jsa_1st_order_graph.png"
+alt="jsa_1st_order_graph" /></p>
+<p><img src="/2022/07/14/jtf-ojtf/neuhelium-jtf-ojtf.png"
+alt="neuhelium-jtf-ojtf" /></p>
+<blockquote>
+<p>The observed jitter is a complement to the PLL jitter transfer
+response OJTF=1-JTF <strong>(Phase matters!)</strong></p>
+<p>OTJF gives the amount of jitter which is tracked and therefore not
+observed at the output of the CDR as a function of the jitter rate
+applied to the input.</p>
+</blockquote>
+<p><img src="/2022/07/14/jtf-ojtf/A-jtf-ojtf.png"
+alt="A-jtf-ojtf" /></p>
+<h2 id="jitter-measurement">Jitter Measurement</h2>
+<p><span class="math display">\[
+J_{\text{measured}} = JTF_{\text{DUT}} \cdot OJTF_{\text{instrument}}
+\]</span> The combination of the OJTF of a jitter measurement device and
+the JTF of the clock generator under test gives the measured jitter as a
+function of frequency.</p>
+<p><img src="/2022/07/14/jtf-ojtf/image-20220716094732273.png"
+alt="image-20220716094732273" /></p>
+<p>For example, a clock generator with a type 1, 1st order PLL measured
+with a jitter measurement device employing a golden PLL is <span
+class="math display">\[
+J_{\text{measured}} = \frac{\omega_1}{s+\omega_1}\frac{s}{s+\omega_2}
+\]</span></p>
+<p>Accurate measurement of the clock JTF requires that the OJTF cutoff
+of the jitter measurement be significantly below that of the clock JTF
+and that the measurement is compensated for the instrument's OJTF.</p>
+<p>The overall response is a band pass filter because the clock JTF is
+low pass and the jitter measurement device OJTF is high pass.</p>
+<p>The compensation for the instrument OJTF is performed by measuring
+the jitter of the reference clock at each jitter rate being tested and
+comparing the <strong>reference jitter</strong> with the <strong>jitter
+measured at the output of the DUT</strong>.</p>
+<p><img src="/2022/07/14/jtf-ojtf/jit_resp.png" alt="jtf-ojtf" /></p>
+<p>The lower the cutoff frequency of the jitter measurement device the
+better the accuracy of the measurement will be.</p>
+<p>The cutoff frequency is limited by several factors including the
+phase noise of the DUT and measurement time.</p>
+<h2 id="digital-sampling-oscilloscope">Digital Sampling
+Oscilloscope</h2>
+<p>How to analyze jitter:</p>
+<ul>
+<li>TIE (Time Interval Error) track</li>
+<li>histogram</li>
+<li>FFT</li>
+</ul>
+<p><strong>TIE track</strong> provides a direct view of how the phase of
+the clock evolves over time.</p>
+<p><strong>histogram</strong> provides valuable information about the
+long term variations in the timing.</p>
+<p><strong>FFT</strong> allows jitter at specific rates to be measured
+down to the femto-second range.</p>
+<blockquote>
+<p>Maintaining the record length at a minimum of <span
+class="math inline">\(1/10\)</span> of the inverse of the PLL loop
+bandwidth minimizes the response error</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>neuhelium, 抖动、眼图和高速数字链路分析基础 URL: <a
+href="http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf">http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf</a></p>
+<p>Keysight JTF &amp; OJTF Concepts, <a
+href="https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4">https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4</a></p>
+<p>Complementary Transmitter and Receiver Jitter Test Methodlogy, URL:
+<a
+href="https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf">https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf</a></p>
+<p>SerDesDesign.com CDR_BangBang_Model URL: <a
+href="https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf">https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf</a></p>
+<p>M. Schnecker, Jitter Transfer Measurement in Clock Circuits, LeCroy
+Corporation, DesignCon 2009. URL: <a
+href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf">http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf</a></p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>JTAG and Boundary Scan</title>
     <url>/2023/11/28/jtag/</url>
     <content><![CDATA[<p>Data Register, DR:</p>
@@ -9523,128 +9645,6 @@ doi: 10.1109/MDT.2003.1232259.</p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>JTF and OJTF</title>
-    <url>/2022/07/14/jtf-ojtf/</url>
-    <content><![CDATA[<h2 id="concepts-of-jtf-and-ojtf">Concepts of JTF and OJTF</h2>
-<p>Simplified Block Diagram of a Clock-Recovery PLL <img
-src="/2022/07/14/jtf-ojtf/pll_block_diagram.gif"
-alt="pll_block_diagram" /></p>
-<p><strong>Jitter Transfer Function (JTF)</strong></p>
-<ul>
-<li>Input Signal Versus Recovered Clock</li>
-<li>JTF, by jitter frequency, compares how much input signal jitter is
-transferred to the <strong>output of a clock-recovery's PLL (recovered
-clock)</strong>
-<ul>
-<li>Input signal jitter that is within the clock recovery PLL's loop
-bandwidth results in jitter that is faithfully transferred (closed-loop
-gain) to the clock recovery PLL's output signal. JTF in this situation
-is approximately 1.</li>
-<li>Input signal jitter that is outside the clock recovery PLL's loop
-bandwidth results in decreasing jitter (open-loop gain) on the clock
-recovery PLL's output, because the jitter is filtered out and no longer
-reaches the PLL's VCO</li>
-</ul></li>
-</ul>
-<p><strong>Observed Jitter Transfer Function</strong></p>
-<ul>
-<li>Input Signal Versus Sampled Signal</li>
-<li>OJTF compares how much input signal jitter is transferred to the
-<strong>output of a receiver's decision making circuit</strong> as
-effected by a clock recovery's PLL. As the recovered clock is the
-reference for detecting the input signal
-<ul>
-<li>Input signal jitter that is <strong>within</strong> the clock
-recovery PLL's loop bandwidth results in jitter on the recovered clock
-which reduces the amount of jitter that can be detected. The input
-signal and clock signal are closer in phase</li>
-<li>Input signal jitter that is <strong>outside</strong> the clock
-recovery PLL's loop bandwidth results in <strong>reduced jitter on the
-recovered cloc</strong>k which increases the amount of jitter that can
-be detected. The input signal and clock signal are more out of phase.
-Jitter that is on both the input and clock signals can not detected or
-is reduced</li>
-</ul></li>
-</ul>
-<p>JTF and OJTF for 1st Order PLLs</p>
-<p><img src="/2022/07/14/jtf-ojtf/jsa_1st_order_graph.png"
-alt="jsa_1st_order_graph" /></p>
-<p><img src="/2022/07/14/jtf-ojtf/neuhelium-jtf-ojtf.png"
-alt="neuhelium-jtf-ojtf" /></p>
-<blockquote>
-<p>The observed jitter is a complement to the PLL jitter transfer
-response OJTF=1-JTF <strong>(Phase matters!)</strong></p>
-<p>OTJF gives the amount of jitter which is tracked and therefore not
-observed at the output of the CDR as a function of the jitter rate
-applied to the input.</p>
-</blockquote>
-<p><img src="/2022/07/14/jtf-ojtf/A-jtf-ojtf.png"
-alt="A-jtf-ojtf" /></p>
-<h2 id="jitter-measurement">Jitter Measurement</h2>
-<p><span class="math display">\[
-J_{\text{measured}} = JTF_{\text{DUT}} \cdot OJTF_{\text{instrument}}
-\]</span> The combination of the OJTF of a jitter measurement device and
-the JTF of the clock generator under test gives the measured jitter as a
-function of frequency.</p>
-<p><img src="/2022/07/14/jtf-ojtf/image-20220716094732273.png"
-alt="image-20220716094732273" /></p>
-<p>For example, a clock generator with a type 1, 1st order PLL measured
-with a jitter measurement device employing a golden PLL is <span
-class="math display">\[
-J_{\text{measured}} = \frac{\omega_1}{s+\omega_1}\frac{s}{s+\omega_2}
-\]</span></p>
-<p>Accurate measurement of the clock JTF requires that the OJTF cutoff
-of the jitter measurement be significantly below that of the clock JTF
-and that the measurement is compensated for the instrument's OJTF.</p>
-<p>The overall response is a band pass filter because the clock JTF is
-low pass and the jitter measurement device OJTF is high pass.</p>
-<p>The compensation for the instrument OJTF is performed by measuring
-the jitter of the reference clock at each jitter rate being tested and
-comparing the <strong>reference jitter</strong> with the <strong>jitter
-measured at the output of the DUT</strong>.</p>
-<p><img src="/2022/07/14/jtf-ojtf/jit_resp.png" alt="jtf-ojtf" /></p>
-<p>The lower the cutoff frequency of the jitter measurement device the
-better the accuracy of the measurement will be.</p>
-<p>The cutoff frequency is limited by several factors including the
-phase noise of the DUT and measurement time.</p>
-<h2 id="digital-sampling-oscilloscope">Digital Sampling
-Oscilloscope</h2>
-<p>How to analyze jitter:</p>
-<ul>
-<li>TIE (Time Interval Error) track</li>
-<li>histogram</li>
-<li>FFT</li>
-</ul>
-<p><strong>TIE track</strong> provides a direct view of how the phase of
-the clock evolves over time.</p>
-<p><strong>histogram</strong> provides valuable information about the
-long term variations in the timing.</p>
-<p><strong>FFT</strong> allows jitter at specific rates to be measured
-down to the femto-second range.</p>
-<blockquote>
-<p>Maintaining the record length at a minimum of <span
-class="math inline">\(1/10\)</span> of the inverse of the PLL loop
-bandwidth minimizes the response error</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>neuhelium, 抖动、眼图和高速数字链路分析基础 URL: <a
-href="http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf">http://www.neuhelium.com/ueditor/net/upload/file/20200826/DSOS254A/03.pdf</a></p>
-<p>Keysight JTF &amp; OJTF Concepts, <a
-href="https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4">https://rfmw.em.keysight.com/DigitalPhotonics/flexdca/FlexPLL-UG/Content/Topics/Quick-Start/jtf-pll-theory.htm?TocPath=Quick%20Start%7C_____4</a></p>
-<p>Complementary Transmitter and Receiver Jitter Test Methodlogy, URL:
-<a
-href="https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf">https://www.ieee802.org/3/bm/public/mar14/ghiasi_01_0314_optx.pdf</a></p>
-<p>SerDesDesign.com CDR_BangBang_Model URL: <a
-href="https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf">https://www.serdesdesign.com/home/web_documents/models/CDR_BangBang_Model.pdf</a></p>
-<p>M. Schnecker, Jitter Transfer Measurement in Clock Circuits, LeCroy
-Corporation, DesignCon 2009. URL: <a
-href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf">http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf</a></p>
-]]></content>
-      <categories>
-        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -11638,6 +11638,243 @@ href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMF
       </categories>
   </entry>
   <entry>
+    <title>Phase Noise and Jitter Simulation</title>
+    <url>/2023/10/21/phasenoise-jitter/</url>
+    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
+<p>The phase noise does not affect the total power in the signal, it
+only affects its distribution.</p>
+<ul>
+<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
+a series of impulse functions at the harmonics of <span
+class="math inline">\(f_o\)</span>.</li>
+<li>With phase noise, the impulse functions spread, becoming fatter and
+shorter but retaining the same total power</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
+alt="image-20231029164227587" /></p>
+<blockquote>
+<p><strong>line width</strong>: corner frequency <span
+class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
+</blockquote>
+<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
+<p>A more precise analysis shows that the spectrum of a free-running
+oscillator does indeed have a Lorentian profile:</p>
+<ol type="1">
+<li>it is <strong>flat</strong> for frequencies below a given corner
+frequency</li>
+<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
+it.</li>
+</ol>
+<p>The spectrum of the signal <span class="math inline">\(x(t +
+α(t))\)</span> can be expressed as <span class="math display">\[
+S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
+c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
+\]</span> The integral in above equation around each harmonic is equal
+to the power of the harmonic itself <span class="math inline">\(\left|
+X_n \right|^2\)</span></p>
+<p>This means that the <strong>excess phase noise</strong>
+<strong>DONT</strong> change the energy of the signal; it just spreads
+its energy over the frequency spectrum, blurring the very sharp
+frequency impulse of an ideal noiseless oscillator.</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
+alt="image-20220504130750290" /></p>
+<h2 id="vco-varactor">VCO varactor</h2>
+<blockquote>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+</blockquote>
+<h3 id="pss-pac">PSS + PAC</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h3 id="pss-psp">PSS + PSP</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h3 id="results">results</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<blockquote>
+<p>which are same</p>
+</blockquote>
+<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h3>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
+Sampled(jitter): Sampled Phase Option</h2>
+<ul>
+<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
+<li>Use model:
+<ul>
+<li>Sampleds Per Period: number of ponits</li>
+<li>Add Specific Points: specific time point, still time points</li>
+</ul></li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
+alt="image-20220712085426461" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
+alt="image-20220712085836315" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
+alt="image-20220712090011204" /></p>
+<blockquote>
+<p>pss beat freq = 5GHz</p>
+<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
+</blockquote>
+<h2 id="transient-noise">Transient noise</h2>
+<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h3>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
+function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
+<code>psd</code> and <code>abs_jitter</code> function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h4 id="comparison">Comparison</h4>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h3 id="rms-value">RMS value</h3>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h3 id="remarks">Remarks</h3>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Periodic Analysis</title>
     <url>/2023/10/28/periodic/</url>
     <content><![CDATA[<h1 id="pss-and-hb-overview">PSS and HB Overview</h1>
@@ -12216,243 +12453,6 @@ href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pd
       </categories>
   </entry>
   <entry>
-    <title>Phase Noise and Jitter Simulation</title>
-    <url>/2023/10/21/phasenoise-jitter/</url>
-    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
-<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
-<ol type="1">
-<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
-alt="image-20220511112856934" /></p></li>
-<li><p>manually calculate by definition</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
-alt="image-20220511112806122" /></p></li>
-<li><p><code>output noise</code> with unit <code>dBc</code></p>
-<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
-convention: SSB</em></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
-alt="image-20220511113248984" /></p></li>
-</ol>
-<blockquote>
-<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
-simulation,</p>
-</blockquote>
-<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
-sampled(jitter)/Edge Crossing</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
-alt="EdgePhaseNoise.drawio" /></p>
-<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
-alt="image-20220515214901120" /></p>
-<p>Another way, the following equation can also be used for
-<code>sampled(jitter)/Edge Crossing</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
-<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
-alt="image-20220511150337318" /></p>
-<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
-sampled(jitter) pnoise</h3>
-<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
-obtained by <em>transient noise simulation</em></p>
-<p>The idea is that sample waveform with ideal clock, subtract DC
-offset, then fft(psd)</p>
-<ul>
-<li>samplesRaw = sample(wv)</li>
-<li>samplePost = samplesRaw - average(samplesRaw)</li>
-<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
-alt="image-20220516184543148" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
-alt="image-20220516184844296" /></p>
-<p><strong>Expression</strong>:</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
-alt="image-20220516185506348" /></p>
-<blockquote>
-<p>The computation cost is typically very high, and the accuracy is
-lesser as compared to PSS/Pnoise</p>
-</blockquote>
-<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
-Sampled(jitter): Sampled Phase Option</h2>
-<ul>
-<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
-<li>Use model:
-<ul>
-<li>Sampleds Per Period: number of ponits</li>
-<li>Add Specific Points: specific time point, still time points</li>
-</ul></li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
-alt="image-20220712085426461" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
-alt="image-20220712085836315" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
-alt="image-20220712090011204" /></p>
-<blockquote>
-<p>pss beat freq = 5GHz</p>
-<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
-</blockquote>
-<h2 id="transient-noise">Transient noise</h2>
-<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h3>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
-function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
-<code>psd</code> and <code>abs_jitter</code> function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h4 id="comparison">Comparison</h4>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h3 id="rms-value">RMS value</h3>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h3 id="remarks">Remarks</h3>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>import package in SystemVerilog compilation</title>
     <url>/2022/03/24/pkg-import-compile-sv/</url>
     <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
@@ -12952,6 +12952,26 @@ Digital Domain</h4>
       </categories>
   </entry>
   <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Power Spectra and Power Spectral Densities</title>
     <url>/2022/04/18/ps-psd/</url>
     <content><![CDATA[<p>One will see the following phenomena:</p>
@@ -13384,26 +13404,6 @@ Press. doi:10.1017/CBO9780511835261</p>
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -14200,6 +14200,34 @@ signals.</p>
       </tags>
   </entry>
   <entry>
+    <title>switched-capacitor circuit in signal detection circuit</title>
+    <url>/2022/02/15/sc_sigdet/</url>
+    <content><![CDATA[<p><img src="/2022/02/15/sc_sigdet/sc_sigdet.drawio.svg"
+alt="sc_sigdet.drawio" /></p>
+<p><strong>phase I</strong></p>
+<p><span class="math display">\[\begin{align}
+Q_a &amp;= (V_{a0} - 0.5*(V_{ip} + V_{im}))*C + (V_{a0} - V_{th})*C \\
+Q_b &amp;= (V_{b0} - 0.5*(V_{ip} + V_{im}))*C + V_{b0}*C
+\end{align}\]</span></p>
+<p><strong>Phase II</strong></p>
+<p><span class="math display">\[\begin{align}
+Q_a &amp;= (V_{a} - V_{ip})*C + (V_{a} - V_{b})*0.5C \\
+Q_b &amp;= (V_{b} - V_{im})*C + (V_{b} - V_{a})*0.5C
+\end{align}\]</span></p>
+<p><strong>With the law of charge conservation, we get</strong></p>
+<p><span class="math display">\[\begin{equation}
+V_a - V_b = (V_{a0} - V_{b0}) + 0.5*(V_{ip} - V_{im} - V_{th})
+\end{equation}\]</span></p>
+<p><strong>REF:</strong></p>
+<p>D. A. Yokoyama-Martin et al., "A Multi-Standard Low Power 1.5-3.125
+Gb/s Serial Transceiver in 90nm CMOS," IEEE Custom Integrated Circuits
+Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Time-Domain Channel Simulation</title>
     <url>/2023/09/23/sbr-der/</url>
     <content><![CDATA[<p>Three fast time-domain system simulation techniques:</p>
@@ -14309,34 +14337,6 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>switched-capacitor circuit in signal detection circuit</title>
-    <url>/2022/02/15/sc_sigdet/</url>
-    <content><![CDATA[<p><img src="/2022/02/15/sc_sigdet/sc_sigdet.drawio.svg"
-alt="sc_sigdet.drawio" /></p>
-<p><strong>phase I</strong></p>
-<p><span class="math display">\[\begin{align}
-Q_a &amp;= (V_{a0} - 0.5*(V_{ip} + V_{im}))*C + (V_{a0} - V_{th})*C \\
-Q_b &amp;= (V_{b0} - 0.5*(V_{ip} + V_{im}))*C + V_{b0}*C
-\end{align}\]</span></p>
-<p><strong>Phase II</strong></p>
-<p><span class="math display">\[\begin{align}
-Q_a &amp;= (V_{a} - V_{ip})*C + (V_{a} - V_{b})*0.5C \\
-Q_b &amp;= (V_{b} - V_{im})*C + (V_{b} - V_{a})*0.5C
-\end{align}\]</span></p>
-<p><strong>With the law of charge conservation, we get</strong></p>
-<p><span class="math display">\[\begin{equation}
-V_a - V_b = (V_{a0} - V_{b0}) + 0.5*(V_{ip} - V_{im} - V_{th})
-\end{equation}\]</span></p>
-<p><strong>REF:</strong></p>
-<p>D. A. Yokoyama-Martin et al., "A Multi-Standard Low Power 1.5-3.125
-Gb/s Serial Transceiver in 90nm CMOS," IEEE Custom Integrated Circuits
-Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -15016,31 +15016,6 @@ I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
       </categories>
   </entry>
   <entry>
-    <title>SystemVerilog iff</title>
-    <url>/2022/06/21/sv-iff/</url>
-    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<p>is equivalent to</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>iff</code> is more efficient than <code>if</code> because the
-expression is recalculated when <code>vld</code> transition rather than
-<code>clk</code>.</p>
-</blockquote>
-<p>One example, detecting the negative edge of
-<code>rtr_io.cb.frameo_n[da]</code></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
-alt="image-20220621182019927" /></p>
-<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
-<p><strong>reference</strong></p>
-<p>system verilog中的iff, URL: <a
-href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
     <url>/2022/03/16/sv-rnm-101/</url>
     <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
@@ -15103,6 +15078,31 @@ together
 ]]></content>
       <categories>
         <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SystemVerilog iff</title>
+    <url>/2022/06/21/sv-iff/</url>
+    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<p>is equivalent to</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>iff</code> is more efficient than <code>if</code> because the
+expression is recalculated when <code>vld</code> transition rather than
+<code>clk</code>.</p>
+</blockquote>
+<p>One example, detecting the negative edge of
+<code>rtr_io.cb.frameo_n[da]</code></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
+alt="image-20220621182019927" /></p>
+<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
+<p><strong>reference</strong></p>
+<p>system verilog中的iff, URL: <a
+href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -17242,6 +17242,87 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       </categories>
   </entry>
   <entry>
+    <title>Different Variants of the PSD Definition</title>
+    <url>/2023/06/03/variants-def-psd/</url>
+    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
+slightly different variants of the PSD definition, depending on the
+particular application or research field.</p>
+<ul>
+<li><p><strong>Two-Sided PSD</strong>, <span
+class="math inline">\(S_x(f)\)</span></p>
+<p>this is a synonym of the PSD defined as the Fourier Transform of the
+<strong>autocorrelation</strong>.</p></li>
+<li><p><strong>One-Sided PSD</strong>, <span
+class="math inline">\(S&#39;_x(f)\)</span></p>
+<p>this is a variant derived from the <em>two-sided PSD</em> by
+considering only the <em>positive frequency</em> semi-axis.</p>
+<p>To <strong>conserve the total power</strong>, the value of the
+one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
+class="math display">\[
+S&#39;_x(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_x(f) &amp; : \ f = 0 \\
+2S_x(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
+alt="image-20230603185546658" /></p>
+<blockquote>
+<p>Note that the one-sided PSD definition makes sense only if the
+two-sided is an even function of <span
+class="math inline">\(f\)</span></p>
+</blockquote>
+<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
+symmetrical around a positive frequency <span
+class="math inline">\(f_0\)</span>, then two additional definitions can
+be adopted:</p>
+<ul>
+<li><p><strong>Single-Sideband PSD</strong>, <span
+class="math inline">\(S_{SSB,x}(f)\)</span></p>
+<p>This is obtained from <span
+class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
+frequency axis to <span class="math inline">\(f_0\)</span> <span
+class="math display">\[
+S_{SSB,x}(f) =S&#39;_x(f+f_0)
+\]</span> This concept is particularly useful for describing phase or
+amplitude modulation schemes in wireless communications, where <span
+class="math inline">\(f_0\)</span> is the carrier frequency.</p>
+<blockquote>
+<p>Note that there is no difference in the values of the one-sided
+versus the SSB PSD; it is just a pure translation on the frequency
+axis.</p>
+</blockquote></li>
+<li><p><strong>Double-Sideband PSD</strong>, <span
+class="math inline">\(S_{DSB,x}(f)\)</span></p>
+<p>this is a variant of the SSB PSD obtained by considering only the
+positive frequency semi-axis.</p>
+<p>As in the case of the one-sided PSD, to conserve total power, the
+value of the DSB PSD is twice that of the SSB <span
+class="math display">\[
+S_{DSB,x}(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_{SSB,x}(f) &amp; : \ f = 0 \\
+2S_{SSB,x}(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
+alt="image-20230603222054506" /></p>
+<blockquote>
+<p>Note that the DSB definition makes sense only if the SSB PSD is even
+symmetrical around zero</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
+and phase noise: A circuits and systems perspective. Cambridge
+University Press.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>UVM REG RALF &amp; IP-XACT</title>
     <url>/2022/03/14/uvm-reg-ralf/</url>
     <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
@@ -17399,87 +17480,6 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Different Variants of the PSD Definition</title>
-    <url>/2023/06/03/variants-def-psd/</url>
-    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
-slightly different variants of the PSD definition, depending on the
-particular application or research field.</p>
-<ul>
-<li><p><strong>Two-Sided PSD</strong>, <span
-class="math inline">\(S_x(f)\)</span></p>
-<p>this is a synonym of the PSD defined as the Fourier Transform of the
-<strong>autocorrelation</strong>.</p></li>
-<li><p><strong>One-Sided PSD</strong>, <span
-class="math inline">\(S&#39;_x(f)\)</span></p>
-<p>this is a variant derived from the <em>two-sided PSD</em> by
-considering only the <em>positive frequency</em> semi-axis.</p>
-<p>To <strong>conserve the total power</strong>, the value of the
-one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
-class="math display">\[
-S&#39;_x(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_x(f) &amp; : \ f = 0 \\
-2S_x(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
-alt="image-20230603185546658" /></p>
-<blockquote>
-<p>Note that the one-sided PSD definition makes sense only if the
-two-sided is an even function of <span
-class="math inline">\(f\)</span></p>
-</blockquote>
-<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
-symmetrical around a positive frequency <span
-class="math inline">\(f_0\)</span>, then two additional definitions can
-be adopted:</p>
-<ul>
-<li><p><strong>Single-Sideband PSD</strong>, <span
-class="math inline">\(S_{SSB,x}(f)\)</span></p>
-<p>This is obtained from <span
-class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
-frequency axis to <span class="math inline">\(f_0\)</span> <span
-class="math display">\[
-S_{SSB,x}(f) =S&#39;_x(f+f_0)
-\]</span> This concept is particularly useful for describing phase or
-amplitude modulation schemes in wireless communications, where <span
-class="math inline">\(f_0\)</span> is the carrier frequency.</p>
-<blockquote>
-<p>Note that there is no difference in the values of the one-sided
-versus the SSB PSD; it is just a pure translation on the frequency
-axis.</p>
-</blockquote></li>
-<li><p><strong>Double-Sideband PSD</strong>, <span
-class="math inline">\(S_{DSB,x}(f)\)</span></p>
-<p>this is a variant of the SSB PSD obtained by considering only the
-positive frequency semi-axis.</p>
-<p>As in the case of the one-sided PSD, to conserve total power, the
-value of the DSB PSD is twice that of the SSB <span
-class="math display">\[
-S_{DSB,x}(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_{SSB,x}(f) &amp; : \ f = 0 \\
-2S_{SSB,x}(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
-alt="image-20230603222054506" /></p>
-<blockquote>
-<p>Note that the DSB definition makes sense only if the SSB PSD is even
-symmetrical around zero</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
-and phase noise: A circuits and systems perspective. Cambridge
-University Press.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -18294,8 +18294,6 @@ circumstances.</strong></p>
 <h2 id="诗词曲">诗词曲</h2>
 <h3 id="纳兰容若">纳兰容若</h3>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">浣溪沙</span><br><span class="line"></span><br><span class="line">谁念西风独自凉， 萧萧黄叶闭疏窗。 沉思往事立残阳。</span><br><span class="line">被酒莫惊春睡重， 赌书消得泼茶香。 当时只道是寻常。</span><br></pre></td></tr></table></figure>
-<h3 id="崔护">崔护</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">题都城南庄</span><br><span class="line"></span><br><span class="line">去年今日此门中， 人面桃花相映红。</span><br><span class="line">人面不知何处去， 桃花依旧笑春风。</span><br></pre></td></tr></table></figure>
 <h3 id="李白">李白</h3>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将进酒</span><br><span class="line"></span><br><span class="line">君不见黄河之水天上来， 奔流到海不复回。</span><br><span class="line">君不见高堂明镜悲白发， 朝如青丝暮成雪。</span><br><span class="line">人生得意须尽欢， 莫使金樽空对月。</span><br><span class="line">天生我材必有用， 千金散尽还复来。</span><br><span class="line">烹羊宰牛且为乐， 会须一饮三百杯。</span><br><span class="line">岑夫子， 丹丘生， 将进酒， 杯莫停。</span><br><span class="line">与君歌一曲， 请君为我倾耳听。</span><br><span class="line">钟鼓馔玉不足贵， 但愿长醉不复醒。</span><br><span class="line">古来圣贤皆寂寞， 惟有饮者留其名。</span><br><span class="line">陈王昔时宴平乐， 斗酒十千恣欢谑。</span><br><span class="line">主人何为言少钱， 径须沽取对君酌。</span><br><span class="line">五花马， 千金裘，</span><br><span class="line">呼儿将出换美酒， 与尔同销万古愁。</span><br></pre></td></tr></table></figure>
 <h3 id="辛弃疾">辛弃疾</h3>
@@ -18311,8 +18309,15 @@ circumstances.</strong></p>
 <h3 id="被讨厌的勇气">被讨厌的勇气</h3>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">人生中最大的谎言就是不活在“此时此刻”。纠结过去、关注未来，把微弱而模糊的光打向人生整体，自认为看到了些什么。</span><br></pre></td></tr></table></figure>
 <h2 id="悉达多">悉达多</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">知识可以传授，智慧却不能</span><br></pre></td></tr></table></figure>
+<h3 id="沙门">沙门</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">一切欲望、幸福和优美皆为虚幻。一切都在腐朽。世界是苦涩的。生活即是折磨。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">悉达多唯一的目标是堕入空无。无渴慕，无愿望，无梦想。无喜无悲。“我”被去除，不复存在。让空洞的心灵觅得安宁，在无“我”的深思中听便奇迹。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">乔文达道：“你这样说，哦，朋友，你当然知道，悉达多不是驱牛车夫，沙门也不是酒鬼。酗酒者可以被麻醉，他可以获得短暂的逃避和休憩，但当他从幻觉中醒来时会发现一切依旧。他没有成为智者，没有积累知识，也没有进入更高的境界。”</span><br></pre></td></tr></table></figure>
+<h3 id="乔达摩">乔达摩</h3>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这就是我为何要继续我的求道之路——并非去寻找更好的法义，我知道它并不存在——而是为摆脱所有圣贤及法义，独自去实现我的目标，或者去幻灭。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">您通过探索，求道，通过深观，禅修，通过认知，彻悟而非通过法义修成正果！——这就是我的想法，哦，世尊，没人能通过法义得到解脱！</span><br></pre></td></tr></table></figure>
+<h3 id="乔文达">乔文达</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">知识可以传授，智慧却不能</span><br></pre></td></tr></table></figure>
 <h2 id="misc">misc</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The unexamined life is not worth living</span><br><span class="line"></span><br><span class="line">- Socrates</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">人生如棋，落子无悔。</span><br></pre></td></tr></table></figure>

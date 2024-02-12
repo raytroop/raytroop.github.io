@@ -761,21 +761,21 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Analysis Command</title>
-    <url>/2022/02/07/Innovus-analysis-command/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Innovus block level create Power Ground Pin method</title>
     <url>/2022/02/10/Innovus-block-level-PGPin/</url>
     <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
 <p><img
 src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
 alt="createPGPin_onDie.drawio" /></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Innovus Analysis Command</title>
+    <url>/2022/02/07/Innovus-analysis-command/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -800,18 +800,18 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Fix DRC Violation</title>
-    <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
+    <title>Innovus Data Exchange</title>
+    <url>/2022/02/07/Innovus-data-exchange/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Data Exchange</title>
-    <url>/2022/02/07/Innovus-data-exchange/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
+    <title>Innovus Fix DRC Violation</title>
+    <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2193,96 +2193,6 @@ Revision 7</p>
       </tags>
   </entry>
   <entry>
-    <title>Ahuja Frequency Compensation</title>
-    <url>/2024/01/16/ahuja/</url>
-    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
-known as <strong>Ahuja compensation</strong></p>
-<h2 id="millers-approximation">Miller's approximation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
-alt="image-20240130224043511" /></p>
-<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span> Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{C_c}\)</span></p>
-<h3 id="equivalent-cap">Equivalent cap</h3>
-<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
-R_o\)</span> <span class="math display">\[
-I_\text{c,in} = (v_i - v_o)sC_c
-\]</span> Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
-&amp; = v_i s (1+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
-A_vC_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
-&amp; = v_o s (1+\frac{1}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}=
-(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="ahuja-compensation">Ahuja compensation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130233532624.png"
-alt="image-20240130233532624" /></p>
-<h3 id="right-half-plane-zero-1">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span></p>
-<p>where <span class="math inline">\(v_m = \alpha v_i\)</span> and <span
-class="math inline">\(\alpha \ll 1\)</span></p>
-<p>Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}\)</span></p>
-<blockquote>
-<p>Ahuja compensation push right-half-plane Zero to higher frequency</p>
-</blockquote>
-<h3 id="equivalent-cap-1">Equivalent cap</h3>
-<p>Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (\alpha v_i + A_v v_i)sC_c \\
-&amp; = v_i s (\alpha+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}=
-(\alpha+A_v)C_c\simeq A_v C_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - \alpha v_i)sC_c \\
-&amp; = v_o s (1+\frac{\alpha}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}= (1+\frac{\alpha
-}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="reference">reference</h2>
-<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
-Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
-pp. 629-633, Dec. 1983.</p>
-<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
-IEEE International Symposium on Radio-Frequency Integration Technology,
-2009.</p>
-<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
-CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
-594, May 1995.</p>
-<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
-op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
-Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
-10.1109/MWSCAS.2011.6026315.</p>
-<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
-Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
-International Conference on Electronics, Circuits and Systems, 2006, pp.
-264-267, doi: 10.1109/ICECS.2006.379776.</p>
-<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
-compensation over Miller compensation in two-stage operational
-amplifiers," Proceeding of the 13th international symposium on Low power
-electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
-283-288, doi: 10.1145/1393921.1393995.</p>
-<p>Stabilizing a 2-Stage Amplifier URL:<a
-href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Device Aging</title>
     <url>/2022/12/11/aging/</url>
     <content><![CDATA[<p><img src="/2022/12/11/aging/image-20231106232135180.png"
@@ -2558,6 +2468,96 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009ESBFUA4</
 of Device Aging on Static Power Analysis Attacks.” IACR Trans. Cryptogr.
 Hardw. Embed. Syst. 2019 (2019): 233-256.[<a
 href="https://pdfs.semanticscholar.org/b0f8/720a2b51a479f4a711bec4b47fdd50f29e2d.pdf">link</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ahuja Frequency Compensation</title>
+    <url>/2024/01/16/ahuja/</url>
+    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
+known as <strong>Ahuja compensation</strong></p>
+<h2 id="millers-approximation">Miller's approximation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
+alt="image-20240130224043511" /></p>
+<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
+\]</span> Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{C_c}\)</span></p>
+<h3 id="equivalent-cap">Equivalent cap</h3>
+<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
+R_o\)</span> <span class="math display">\[
+I_\text{c,in} = (v_i - v_o)sC_c
+\]</span> Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
+&amp; = v_i s (1+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
+A_vC_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
+&amp; = v_o s (1+\frac{1}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}=
+(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="ahuja-compensation">Ahuja compensation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130233532624.png"
+alt="image-20240130233532624" /></p>
+<h3 id="right-half-plane-zero-1">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
+\]</span></p>
+<p>where <span class="math inline">\(v_m = \alpha v_i\)</span> and <span
+class="math inline">\(\alpha \ll 1\)</span></p>
+<p>Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}\)</span></p>
+<blockquote>
+<p>Ahuja compensation push right-half-plane Zero to higher frequency</p>
+</blockquote>
+<h3 id="equivalent-cap-1">Equivalent cap</h3>
+<p>Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (\alpha v_i + A_v v_i)sC_c \\
+&amp; = v_i s (\alpha+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}=
+(\alpha+A_v)C_c\simeq A_v C_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - \alpha v_i)sC_c \\
+&amp; = v_o s (1+\frac{\alpha}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}= (1+\frac{\alpha
+}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="reference">reference</h2>
+<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
+Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
+pp. 629-633, Dec. 1983.</p>
+<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
+IEEE International Symposium on Radio-Frequency Integration Technology,
+2009.</p>
+<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
+CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
+594, May 1995.</p>
+<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
+op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
+Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
+10.1109/MWSCAS.2011.6026315.</p>
+<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
+Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
+International Conference on Electronics, Circuits and Systems, 2006, pp.
+264-267, doi: 10.1109/ICECS.2006.379776.</p>
+<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
+compensation over Miller compensation in two-stage operational
+amplifiers," Proceeding of the 13th international symposium on Low power
+electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
+283-288, doi: 10.1145/1393921.1393995.</p>
+<p>Stabilizing a 2-Stage Amplifier URL:<a
+href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -9168,6 +9168,172 @@ Transceivers"</p>
       </categories>
   </entry>
   <entry>
+    <title>Jitter Decomposition in High-Speed Links</title>
+    <url>/2022/05/21/jitter-decomposition/</url>
+    <content><![CDATA[<p>Jitter separation lets you learn if the components of jitter are
+random or deterministic. That is, if they are caused by crosstalk,
+channel loss, or some other phenomenon. The identification of jitter and
+noise sources is critical when debugging failure sources in the
+transmission of high-speed serial signals</p>
+<ul>
+<li>Tail Fit Method</li>
+<li>Spectral method</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>RJ Extraction Methods</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectral</td>
+<td>Speed/Consistency to Past Measurements;<br />Accuracy in low
+Crosstalk or Aperiodic Bounded Uncorrelated Jitter (ABUJ)
+conditions</td>
+</tr>
+<tr class="even">
+<td>Tail Fit</td>
+<td>General Purpose;<br />Accuracy in high Crosstalk or ABUJ
+conditions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jitter-components">Jitter Components</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521190326201.png"
+alt="image-20220521190326201" /></p>
+<h2 id="dual-dirac-model">dual-Dirac model</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521181604467.png"
+alt="image-20220521181604467" /></p>
+<p><img src="/2022/05/21/jitter-decomposition/Figure-1.webp"
+alt="Figure-1" /></p>
+<h2 id="spectral-method">Spectral method</h2>
+<blockquote>
+<p>power spectral density (PSD) represents jitter spectrum and peaks in
+the spectrum can be interpreted as PJ or DDJ, while the average noise
+floor is the power of RJ</p>
+</blockquote>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521182929127.png"
+alt="image-20220521182929127" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">S1 = sum(win);</span><br><span class="line">S2 = sum(win.^<span class="number">2</span>);</span><br><span class="line">N = <span class="built_in">length</span>(win);</span><br><span class="line">spec_nospur2 = (spec_nospur*S1).^<span class="number">2</span>/N/S2;    <span class="comment">% To obtain linear spectrum for rj</span></span><br><span class="line">rj_utj = <span class="built_in">sqrt</span>(sum(spec_nospur2))*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">spec = <span class="number">1</span>*<span class="built_in">ones</span>(<span class="built_in">length</span>(spec_nospur), <span class="number">1</span>)*<span class="number">1e-21</span>;</span><br><span class="line">spec(index) = specx(index);</span><br><span class="line"><span class="comment">% insert fft nyquist frequency component between positive frequency and</span></span><br><span class="line"><span class="comment">% negative frequency component</span></span><br><span class="line"><span class="comment">% DC;posFreq;nyqFreq;negFreq</span></span><br><span class="line">spec_ifft = [spec;specnyq;<span class="built_in">conj</span>(spec(<span class="keyword">end</span>:<span class="number">-1</span>:<span class="number">2</span>))]&#x27;;</span><br><span class="line">sfactor = sum(win)/<span class="built_in">sqrt</span>(<span class="number">2</span>);</span><br><span class="line">spec_ifft = spec_ifft*sfactor;</span><br><span class="line">sig_rec = <span class="built_in">real</span>(ifft(spec_ifft));</span><br><span class="line">sig_rec = sig_rec(:);</span><br><span class="line">sig_rec_utj = sig_rec./win(<span class="number">1</span>:<span class="keyword">end</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="tail-fit-method">Tail Fit Method</h2>
+<blockquote>
+<p>Tail fitting algorithm based on the <strong>Gaussian tail
+model</strong> by using probability distribution of collected jitter
+value</p>
+</blockquote>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521191029433.png"
+alt="image-20220521191029433" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">bin_sig = bin_sig*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">x = qfuncinv(cdf_sig);</span><br><span class="line"></span><br><span class="line"><span class="comment">% coef(1)*bin_sig + coef(2) = x</span></span><br><span class="line"><span class="comment">% which x is norm(0, 1)</span></span><br><span class="line"><span class="comment">% bin_sig = (x - coef(2))/coef(1)</span></span><br><span class="line"><span class="comment">% Then bin is norm(-coef(2)/coef(1), 1/coef(1))</span></span><br><span class="line">coef = polyfit(bin_sig, x, <span class="number">1</span>);</span><br><span class="line">sigma = <span class="number">1</span>/coef(<span class="number">1</span>);</span><br><span class="line">mu = -coef(<span class="number">2</span>)*sigma;</span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">&#x27;sigma=%.3fps, mu=%.3fps\n&#x27;</span>, sigma, mu);</span><br></pre></td></tr></table></figure>
+<h2 id="least-squares-ls-method">Least Squares (LS) method</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524005848719.png"
+alt="image-20220524005848719" /></p>
+<p>It is known that TIE jitter is a linear equation, shown in below
+formula <span class="math display">\[
+x[n] = d_n \times \left[ \Delta t_{pj}[n]+\Delta t_{DCD}[n] +\Delta
+t_{ISI}[n]+\Delta t_{RJ}[n]\right]
+\]</span> LS can be used to estimate the PJ, DCD, RJ , and ISI
+parameters <span class="math inline">\([a,b,J_{DCD},J_0,
+J_1...J_{(2^k-1)}]\)</span></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524185332637.png"
+alt="image-20220524185332637" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524185351383.png"
+alt="image-20220524185351383" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524010446422.png"
+alt="image-20220524010446422" /></p>
+<h2 id="jitter-modeling">Jitter modeling</h2>
+<h3 id="periodic-jitter-pj">Periodic Jitter (PJ)</h3>
+<p>PJ is a repeating jitter <span class="math display">\[
+\Delta t_{PJ}[n]=A\sin(2\pi f_0\cdot nT_s + \theta)=a \sin(2\pi f_0
+\cdot nT_s)+b\cos(2\pi f_0 \cdot nT_s)
+\]</span> where <span class="math inline">\(f_0\)</span> represents the
+fundamental frequency of PJ; <span class="math inline">\(A\)</span> is
+the amplitude of PJ; <span class="math inline">\(T_s\)</span> is the
+data stream period, and <span class="math inline">\(\theta\)</span> is
+the initial phase of PJ</p>
+<blockquote>
+<p>In the spectrum, the frequency of maximum amount of the jitter is PJ
+frequency <span class="math inline">\(f_0\)</span>.</p>
+</blockquote>
+<h3 id="duty-cycle-distortion-dcd">Duty Cycle Distortion (DCD)</h3>
+<p>DCD is viewed as a series of <strong>adjacent positive and negative
+impulses</strong> <span class="math display">\[
+\Delta t_{DCD}[n] = J_{DCD}\times (-1)^n =
+[-J_{DCD},J_{DCD},-J_{DCD},J_{DCD},...]
+\]</span> Where <span class="math inline">\(J_{DCD}\)</span> is the DCD
+amplitude.</p>
+<h3 id="random-jitter-rj">Random Jitter (RJ)</h3>
+<p>RJ is created by unbounded jitter sources, such as Gaussian white
+noise. The statistical PDF for RJ is enerally treated as a Gaussian
+distribution <span class="math display">\[
+f_{RJ}(\Delta t) = \frac{1}{\sqrt{2\pi\sigma}}\exp(-\frac{(\Delta
+t)^2}{2\sigma^2})
+\]</span></p>
+<h2 id="remarks">Remarks</h2>
+<h3 id="periodic-jitter-generator-and-insertion">Periodic Jitter
+Generator and Insertion</h3>
+<p><em>Analysis and Estimation of Jitter Sub-Components: Classification
+and Segregation of Jitter Components</em></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521212129098.png"
+alt="image-20220521212129098" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521212142719.png"
+alt="image-20220521212142719" /></p>
+<h2 id="reference">Reference</h2>
+<p>Mike Li. 2007. Jitter, noise, and signal integrity at high-speed
+(First. ed.). Prentice Hall Press, USA.</p>
+<p><a href="https://keysightevent.com/191023/handout/d">余宥浚 Jacky Yu,
+Keysight Taiwan AEO, Advanced Jitter and Eye-Diagram Analysis</a></p>
+<p>Y. Duan and D. Chen, "Accurate jitter decomposition in high-speed
+links," 2017 IEEE 35th VLSI Test Symposium (VTS), 2017, pp. 1-6, doi:
+10.1109/VTS.2017.7928918.</p>
+<p>Y. Duan's phd thesis URL: <a
+href="https://dr.lib.iastate.edu/handle/20.500.12876/30459">https://dr.lib.iastate.edu/handle/20.500.12876/30459</a></p>
+<p>Y. Duan and D. Chen, "Fast and Accurate Decomposition of
+Deterministic Jitter Components in High-Speed Links," in IEEE
+Transactions on Electromagnetic Compatibility, vol. 61, no. 1, pp.
+217-225, Feb. 2019, doi: 10.1109/TEMC.2018.2797122.</p>
+<p>"Jitter Analysis: The Dual-Dirac Model, RJ/DJ, and Q-Scale",
+Whitepaper: Keysight Technologies, U.S.A., Dec. 2017</p>
+<p>Sharma, Vijender Kumar and Sujay Deb. "Analysis and Estimation of
+Jitter Sub-Components." (2014).</p>
+<p>Qingqi Dou and J. A. Abraham, "Jitter decomposition in ring
+oscillators," Asia and South Pacific Conference on Design Automation,
+2006., 2006, pp. 6 pp.-, doi: 10.1109/ASPDAC.2006.1594696.</p>
+<p>E. Balestrieri, L. De Vito, F. Lamonaca, F. Picariello, S. Rapuano
+and I. Tudosa, "The jitter measurement ways: The jitter decomposition,"
+in IEEE Instrumentation &amp; Measurement Magazine, vol. 23, no. 7, pp.
+3-12, Oct. 2020, doi: 10.1109/MIM.2020.9234759.</p>
+<p>McClure, Mark Scott. "Digital jitter measurement and separation." PhD
+diss., 2005.</p>
+<p>Ren, Nan, Zaiming Fu, Shengcu Lei, Hanglin Liu, and Shulin Tian.
+"Jitter generation model based on timing modulation and cross point
+calibration for jitter decomposition." Metrology and Measurement Systems
+28, no. 1 (2021).</p>
+<p>M. P. Li, J. Wilstrup, R. Jessen and D. Petrich, "A new method for
+jitter decomposition through its distribution tail fitting,"
+International Test Conference 1999. Proceedings (IEEE Cat.
+No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>JTAG and Boundary Scan</title>
     <url>/2023/11/28/jtag/</url>
     <content><![CDATA[<p>Data Register, DR:</p>
@@ -9357,172 +9523,6 @@ doi: 10.1109/MDT.2003.1232259.</p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Jitter Decomposition in High-Speed Links</title>
-    <url>/2022/05/21/jitter-decomposition/</url>
-    <content><![CDATA[<p>Jitter separation lets you learn if the components of jitter are
-random or deterministic. That is, if they are caused by crosstalk,
-channel loss, or some other phenomenon. The identification of jitter and
-noise sources is critical when debugging failure sources in the
-transmission of high-speed serial signals</p>
-<ul>
-<li>Tail Fit Method</li>
-<li>Spectral method</li>
-</ul>
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 74%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>RJ Extraction Methods</th>
-<th>Rationale</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Spectral</td>
-<td>Speed/Consistency to Past Measurements;<br />Accuracy in low
-Crosstalk or Aperiodic Bounded Uncorrelated Jitter (ABUJ)
-conditions</td>
-</tr>
-<tr class="even">
-<td>Tail Fit</td>
-<td>General Purpose;<br />Accuracy in high Crosstalk or ABUJ
-conditions</td>
-</tr>
-</tbody>
-</table>
-<h2 id="jitter-components">Jitter Components</h2>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521190326201.png"
-alt="image-20220521190326201" /></p>
-<h2 id="dual-dirac-model">dual-Dirac model</h2>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521181604467.png"
-alt="image-20220521181604467" /></p>
-<p><img src="/2022/05/21/jitter-decomposition/Figure-1.webp"
-alt="Figure-1" /></p>
-<h2 id="spectral-method">Spectral method</h2>
-<blockquote>
-<p>power spectral density (PSD) represents jitter spectrum and peaks in
-the spectrum can be interpreted as PJ or DDJ, while the average noise
-floor is the power of RJ</p>
-</blockquote>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521182929127.png"
-alt="image-20220521182929127" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">S1 = sum(win);</span><br><span class="line">S2 = sum(win.^<span class="number">2</span>);</span><br><span class="line">N = <span class="built_in">length</span>(win);</span><br><span class="line">spec_nospur2 = (spec_nospur*S1).^<span class="number">2</span>/N/S2;    <span class="comment">% To obtain linear spectrum for rj</span></span><br><span class="line">rj_utj = <span class="built_in">sqrt</span>(sum(spec_nospur2))*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">spec = <span class="number">1</span>*<span class="built_in">ones</span>(<span class="built_in">length</span>(spec_nospur), <span class="number">1</span>)*<span class="number">1e-21</span>;</span><br><span class="line">spec(index) = specx(index);</span><br><span class="line"><span class="comment">% insert fft nyquist frequency component between positive frequency and</span></span><br><span class="line"><span class="comment">% negative frequency component</span></span><br><span class="line"><span class="comment">% DC;posFreq;nyqFreq;negFreq</span></span><br><span class="line">spec_ifft = [spec;specnyq;<span class="built_in">conj</span>(spec(<span class="keyword">end</span>:<span class="number">-1</span>:<span class="number">2</span>))]&#x27;;</span><br><span class="line">sfactor = sum(win)/<span class="built_in">sqrt</span>(<span class="number">2</span>);</span><br><span class="line">spec_ifft = spec_ifft*sfactor;</span><br><span class="line">sig_rec = <span class="built_in">real</span>(ifft(spec_ifft));</span><br><span class="line">sig_rec = sig_rec(:);</span><br><span class="line">sig_rec_utj = sig_rec./win(<span class="number">1</span>:<span class="keyword">end</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="tail-fit-method">Tail Fit Method</h2>
-<blockquote>
-<p>Tail fitting algorithm based on the <strong>Gaussian tail
-model</strong> by using probability distribution of collected jitter
-value</p>
-</blockquote>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521191029433.png"
-alt="image-20220521191029433" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">bin_sig = bin_sig*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">x = qfuncinv(cdf_sig);</span><br><span class="line"></span><br><span class="line"><span class="comment">% coef(1)*bin_sig + coef(2) = x</span></span><br><span class="line"><span class="comment">% which x is norm(0, 1)</span></span><br><span class="line"><span class="comment">% bin_sig = (x - coef(2))/coef(1)</span></span><br><span class="line"><span class="comment">% Then bin is norm(-coef(2)/coef(1), 1/coef(1))</span></span><br><span class="line">coef = polyfit(bin_sig, x, <span class="number">1</span>);</span><br><span class="line">sigma = <span class="number">1</span>/coef(<span class="number">1</span>);</span><br><span class="line">mu = -coef(<span class="number">2</span>)*sigma;</span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">&#x27;sigma=%.3fps, mu=%.3fps\n&#x27;</span>, sigma, mu);</span><br></pre></td></tr></table></figure>
-<h2 id="least-squares-ls-method">Least Squares (LS) method</h2>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220524005848719.png"
-alt="image-20220524005848719" /></p>
-<p>It is known that TIE jitter is a linear equation, shown in below
-formula <span class="math display">\[
-x[n] = d_n \times \left[ \Delta t_{pj}[n]+\Delta t_{DCD}[n] +\Delta
-t_{ISI}[n]+\Delta t_{RJ}[n]\right]
-\]</span> LS can be used to estimate the PJ, DCD, RJ , and ISI
-parameters <span class="math inline">\([a,b,J_{DCD},J_0,
-J_1...J_{(2^k-1)}]\)</span></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220524185332637.png"
-alt="image-20220524185332637" /></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220524185351383.png"
-alt="image-20220524185351383" /></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220524010446422.png"
-alt="image-20220524010446422" /></p>
-<h2 id="jitter-modeling">Jitter modeling</h2>
-<h3 id="periodic-jitter-pj">Periodic Jitter (PJ)</h3>
-<p>PJ is a repeating jitter <span class="math display">\[
-\Delta t_{PJ}[n]=A\sin(2\pi f_0\cdot nT_s + \theta)=a \sin(2\pi f_0
-\cdot nT_s)+b\cos(2\pi f_0 \cdot nT_s)
-\]</span> where <span class="math inline">\(f_0\)</span> represents the
-fundamental frequency of PJ; <span class="math inline">\(A\)</span> is
-the amplitude of PJ; <span class="math inline">\(T_s\)</span> is the
-data stream period, and <span class="math inline">\(\theta\)</span> is
-the initial phase of PJ</p>
-<blockquote>
-<p>In the spectrum, the frequency of maximum amount of the jitter is PJ
-frequency <span class="math inline">\(f_0\)</span>.</p>
-</blockquote>
-<h3 id="duty-cycle-distortion-dcd">Duty Cycle Distortion (DCD)</h3>
-<p>DCD is viewed as a series of <strong>adjacent positive and negative
-impulses</strong> <span class="math display">\[
-\Delta t_{DCD}[n] = J_{DCD}\times (-1)^n =
-[-J_{DCD},J_{DCD},-J_{DCD},J_{DCD},...]
-\]</span> Where <span class="math inline">\(J_{DCD}\)</span> is the DCD
-amplitude.</p>
-<h3 id="random-jitter-rj">Random Jitter (RJ)</h3>
-<p>RJ is created by unbounded jitter sources, such as Gaussian white
-noise. The statistical PDF for RJ is enerally treated as a Gaussian
-distribution <span class="math display">\[
-f_{RJ}(\Delta t) = \frac{1}{\sqrt{2\pi\sigma}}\exp(-\frac{(\Delta
-t)^2}{2\sigma^2})
-\]</span></p>
-<h2 id="remarks">Remarks</h2>
-<h3 id="periodic-jitter-generator-and-insertion">Periodic Jitter
-Generator and Insertion</h3>
-<p><em>Analysis and Estimation of Jitter Sub-Components: Classification
-and Segregation of Jitter Components</em></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521212129098.png"
-alt="image-20220521212129098" /></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521212142719.png"
-alt="image-20220521212142719" /></p>
-<h2 id="reference">Reference</h2>
-<p>Mike Li. 2007. Jitter, noise, and signal integrity at high-speed
-(First. ed.). Prentice Hall Press, USA.</p>
-<p><a href="https://keysightevent.com/191023/handout/d">余宥浚 Jacky Yu,
-Keysight Taiwan AEO, Advanced Jitter and Eye-Diagram Analysis</a></p>
-<p>Y. Duan and D. Chen, "Accurate jitter decomposition in high-speed
-links," 2017 IEEE 35th VLSI Test Symposium (VTS), 2017, pp. 1-6, doi:
-10.1109/VTS.2017.7928918.</p>
-<p>Y. Duan's phd thesis URL: <a
-href="https://dr.lib.iastate.edu/handle/20.500.12876/30459">https://dr.lib.iastate.edu/handle/20.500.12876/30459</a></p>
-<p>Y. Duan and D. Chen, "Fast and Accurate Decomposition of
-Deterministic Jitter Components in High-Speed Links," in IEEE
-Transactions on Electromagnetic Compatibility, vol. 61, no. 1, pp.
-217-225, Feb. 2019, doi: 10.1109/TEMC.2018.2797122.</p>
-<p>"Jitter Analysis: The Dual-Dirac Model, RJ/DJ, and Q-Scale",
-Whitepaper: Keysight Technologies, U.S.A., Dec. 2017</p>
-<p>Sharma, Vijender Kumar and Sujay Deb. "Analysis and Estimation of
-Jitter Sub-Components." (2014).</p>
-<p>Qingqi Dou and J. A. Abraham, "Jitter decomposition in ring
-oscillators," Asia and South Pacific Conference on Design Automation,
-2006., 2006, pp. 6 pp.-, doi: 10.1109/ASPDAC.2006.1594696.</p>
-<p>E. Balestrieri, L. De Vito, F. Lamonaca, F. Picariello, S. Rapuano
-and I. Tudosa, "The jitter measurement ways: The jitter decomposition,"
-in IEEE Instrumentation &amp; Measurement Magazine, vol. 23, no. 7, pp.
-3-12, Oct. 2020, doi: 10.1109/MIM.2020.9234759.</p>
-<p>McClure, Mark Scott. "Digital jitter measurement and separation." PhD
-diss., 2005.</p>
-<p>Ren, Nan, Zaiming Fu, Shengcu Lei, Hanglin Liu, and Shulin Tian.
-"Jitter generation model based on timing modulation and cross point
-calibration for jitter decomposition." Metrology and Measurement Systems
-28, no. 1 (2021).</p>
-<p>M. P. Li, J. Wilstrup, R. Jessen and D. Petrich, "A new method for
-jitter decomposition through its distribution tail fitting,"
-International Test Conference 1999. Proceedings (IEEE Cat.
-No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -9809,6 +9809,29 @@ Solid-State Circuits Magazine, Vol. 12, Issue 4, to appear, Fall
       </categories>
   </entry>
   <entry>
+    <title>Leakage in MOS</title>
+    <url>/2023/06/22/leakage-mos/</url>
+    <content><![CDATA[<p><img src="/2023/06/22/leakage-mos/image-20230812104737404.png"
+alt="image-20230812104737404" /></p>
+<h2 id="reference">reference</h2>
+<p>W. M. Elgharbawy and M. A. Bayoumi, "Leakage sources and possible
+solutions in nanometer CMOS technologies," in IEEE Circuits and Systems
+Magazine, vol. 5, no. 4, pp. 6-17, Fourth Quarter 2005, doi:
+10.1109/MCAS.2005.1550165.</p>
+<p>X. Qi et al., "Efficient subthreshold leakage current optimization -
+Leakage current optimization and layout migration for 90- and 65- nm
+ASIC libraries," in IEEE Circuits and Devices Magazine, vol. 22, no. 5,
+pp. 39-47, Sept.-Oct. 2006, doi: 10.1109/MCD.2006.272999.</p>
+<p>P. Monsurró, S. Pennisi, G. Scotti and A. Trifiletti, "Exploiting the
+Body of MOS Devices for High Performance Analog Design," in IEEE
+Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter
+2011, doi: 10.1109/MCAS.2011.942751.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>CDR Linear Model</title>
     <url>/2022/05/04/linear-cdr/</url>
     <content><![CDATA[<p><img src="/2022/05/04/linear-cdr/image-20220504101924272.png"
@@ -9955,29 +9978,6 @@ peak-to-peak</li>
 <h4 id="reference">reference</h4>
 <p>Dalt, Nicola Da and Ali Sheikholeslami. “Understanding Jitter and
 Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Leakage in MOS</title>
-    <url>/2023/06/22/leakage-mos/</url>
-    <content><![CDATA[<p><img src="/2023/06/22/leakage-mos/image-20230812104737404.png"
-alt="image-20230812104737404" /></p>
-<h2 id="reference">reference</h2>
-<p>W. M. Elgharbawy and M. A. Bayoumi, "Leakage sources and possible
-solutions in nanometer CMOS technologies," in IEEE Circuits and Systems
-Magazine, vol. 5, no. 4, pp. 6-17, Fourth Quarter 2005, doi:
-10.1109/MCAS.2005.1550165.</p>
-<p>X. Qi et al., "Efficient subthreshold leakage current optimization -
-Leakage current optimization and layout migration for 90- and 65- nm
-ASIC libraries," in IEEE Circuits and Devices Magazine, vol. 22, no. 5,
-pp. 39-47, Sept.-Oct. 2006, doi: 10.1109/MCD.2006.272999.</p>
-<p>P. Monsurró, S. Pennisi, G. Scotti and A. Trifiletti, "Exploiting the
-Body of MOS Devices for High Performance Analog Design," in IEEE
-Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter
-2011, doi: 10.1109/MCAS.2011.942751.</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -11638,243 +11638,6 @@ href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMF
       </categories>
   </entry>
   <entry>
-    <title>Phase Noise and Jitter Simulation</title>
-    <url>/2023/10/21/phasenoise-jitter/</url>
-    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
-<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
-<ol type="1">
-<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
-alt="image-20220511112856934" /></p></li>
-<li><p>manually calculate by definition</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
-alt="image-20220511112806122" /></p></li>
-<li><p><code>output noise</code> with unit <code>dBc</code></p>
-<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
-convention: SSB</em></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
-alt="image-20220511113248984" /></p></li>
-</ol>
-<blockquote>
-<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
-simulation,</p>
-</blockquote>
-<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
-sampled(jitter)/Edge Crossing</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
-alt="EdgePhaseNoise.drawio" /></p>
-<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
-alt="image-20220515214901120" /></p>
-<p>Another way, the following equation can also be used for
-<code>sampled(jitter)/Edge Crossing</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
-<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
-alt="image-20220511150337318" /></p>
-<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
-sampled(jitter) pnoise</h3>
-<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
-obtained by <em>transient noise simulation</em></p>
-<p>The idea is that sample waveform with ideal clock, subtract DC
-offset, then fft(psd)</p>
-<ul>
-<li>samplesRaw = sample(wv)</li>
-<li>samplePost = samplesRaw - average(samplesRaw)</li>
-<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
-alt="image-20220516184543148" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
-alt="image-20220516184844296" /></p>
-<p><strong>Expression</strong>:</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
-alt="image-20220516185506348" /></p>
-<blockquote>
-<p>The computation cost is typically very high, and the accuracy is
-lesser as compared to PSS/Pnoise</p>
-</blockquote>
-<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
-Sampled(jitter): Sampled Phase Option</h2>
-<ul>
-<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
-<li>Use model:
-<ul>
-<li>Sampleds Per Period: number of ponits</li>
-<li>Add Specific Points: specific time point, still time points</li>
-</ul></li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
-alt="image-20220712085426461" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
-alt="image-20220712085836315" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
-alt="image-20220712090011204" /></p>
-<blockquote>
-<p>pss beat freq = 5GHz</p>
-<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
-</blockquote>
-<h2 id="transient-noise">Transient noise</h2>
-<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h3>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
-function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
-<code>psd</code> and <code>abs_jitter</code> function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h4 id="comparison">Comparison</h4>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h3 id="rms-value">RMS value</h3>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h3 id="remarks">Remarks</h3>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Periodic Analysis</title>
     <url>/2023/10/28/periodic/</url>
     <content><![CDATA[<h1 id="pss-and-hb-overview">PSS and HB Overview</h1>
@@ -12453,6 +12216,243 @@ href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pd
       </categories>
   </entry>
   <entry>
+    <title>Phase Noise and Jitter Simulation</title>
+    <url>/2023/10/21/phasenoise-jitter/</url>
+    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
+<p>The phase noise does not affect the total power in the signal, it
+only affects its distribution.</p>
+<ul>
+<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
+a series of impulse functions at the harmonics of <span
+class="math inline">\(f_o\)</span>.</li>
+<li>With phase noise, the impulse functions spread, becoming fatter and
+shorter but retaining the same total power</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
+alt="image-20231029164227587" /></p>
+<blockquote>
+<p><strong>line width</strong>: corner frequency <span
+class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
+</blockquote>
+<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
+<p>A more precise analysis shows that the spectrum of a free-running
+oscillator does indeed have a Lorentian profile:</p>
+<ol type="1">
+<li>it is <strong>flat</strong> for frequencies below a given corner
+frequency</li>
+<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
+it.</li>
+</ol>
+<p>The spectrum of the signal <span class="math inline">\(x(t +
+α(t))\)</span> can be expressed as <span class="math display">\[
+S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
+c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
+\]</span> The integral in above equation around each harmonic is equal
+to the power of the harmonic itself <span class="math inline">\(\left|
+X_n \right|^2\)</span></p>
+<p>This means that the <strong>excess phase noise</strong>
+<strong>DONT</strong> change the energy of the signal; it just spreads
+its energy over the frequency spectrum, blurring the very sharp
+frequency impulse of an ideal noiseless oscillator.</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
+alt="image-20220504130750290" /></p>
+<h2 id="vco-varactor">VCO varactor</h2>
+<blockquote>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+</blockquote>
+<h3 id="pss-pac">PSS + PAC</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h3 id="pss-psp">PSS + PSP</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h3 id="results">results</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<blockquote>
+<p>which are same</p>
+</blockquote>
+<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h3>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
+Sampled(jitter): Sampled Phase Option</h2>
+<ul>
+<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
+<li>Use model:
+<ul>
+<li>Sampleds Per Period: number of ponits</li>
+<li>Add Specific Points: specific time point, still time points</li>
+</ul></li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
+alt="image-20220712085426461" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
+alt="image-20220712085836315" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
+alt="image-20220712090011204" /></p>
+<blockquote>
+<p>pss beat freq = 5GHz</p>
+<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
+</blockquote>
+<h2 id="transient-noise">Transient noise</h2>
+<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h3>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
+function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
+<code>psd</code> and <code>abs_jitter</code> function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h4 id="comparison">Comparison</h4>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h3 id="rms-value">RMS value</h3>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h3 id="remarks">Remarks</h3>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>import package in SystemVerilog compilation</title>
     <url>/2022/03/24/pkg-import-compile-sv/</url>
     <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
@@ -12551,150 +12551,6 @@ APIs</strong>.</p>
 href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
 <p>PLUSARGS IN SYSTEMVERILOG URL:<a
 href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Power/Ground and I/O Pins</title>
-    <url>/2022/03/06/power-ground-io/</url>
-    <content><![CDATA[<h4 id="power-ground-pin-information">Power / Ground Pin
-Information</h4>
-<p>In both digital and analog I/O, power and ground pins appear at the
-sub-circuit definiton, allowing user to use the I/O in voltage islands.
-They follow certain naming conventions.</p>
-<ol type="1">
-<li>digital I/O sub-circuit</li>
-</ol>
-<ul>
-<li>VDD: pre-driver core voltage (supplied by PVDD1CDGM)</li>
-<li>VSS: pre-driver ground and also global ground (supplied by
-PVDD1CDGM)</li>
-<li>VDDPST: I/O post-driver voltage, i.e. 1.8V (supplied by PVDD2CDGM or
-PVDD2POCM)</li>
-<li>VSSPOST: I/O post-driver ground (supplied by PVDD2CDGM or
-PVDD2POCM)</li>
-<li>POCCTRL: POCCTRL signal (supplied by PVDD2POCM)</li>
-</ul>
-<ol start="2" type="1">
-<li>analog I/O placed in a core voltage domain, the convention is</li>
-</ol>
-<ul>
-<li>TACVDD: analog core voltage (supplied by PVDD3ACM)</li>
-<li>TACVSS: analog core ground (supplied by PVDD3ACM)</li>
-<li>VSS: global core ground</li>
-</ul>
-<ol start="3" type="1">
-<li>analog I/O placed in an I/O voltage domain, the convention is:</li>
-</ol>
-<ul>
-<li>TAVDD: analog I/O voltage, i.e. 1.8V (supplied by PVDD3AM)</li>
-<li>TAVSS: analog I/O ground (supplied by PVDD3AM)</li>
-<li>VSS: global core ground</li>
-</ul>
-<p>Power/Ground <strong>Combo Cells</strong></p>
-<table>
-<colgroup>
-<col style="width: 35%" />
-<col style="width: 36%" />
-<col style="width: 27%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>power/ground combo pad cell</th>
-<th>pins to be connected to bump</th>
-<th>to core side pin name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>PVDD1CDGM</td>
-<td>VDD VSS</td>
-<td>VDD VSS</td>
-</tr>
-<tr class="even">
-<td>PVDD2CDGM PVDD2POCM</td>
-<td>VDDPST VSSPST</td>
-<td>N/A</td>
-</tr>
-<tr class="odd">
-<td>PVDD3AM</td>
-<td>TAVDD TAVSS</td>
-<td>AVDD AVSS</td>
-</tr>
-<tr class="even">
-<td>PVDD3ACM</td>
-<td>TACVDD TACVSS</td>
-<td>AVDD AVSS</td>
-</tr>
-</tbody>
-</table>
-<h4 id="note-for-the-retention-mode">Note for the retention mode</h4>
-<ol type="1">
-<li>At initial state, IRTE must be <strong>0</strong> when VDD is
-off.</li>
-<li>IRTE must be kept &gt;= 10us after VDD turns on again (from the
-retention mode to the normal operation mode).</li>
-<li>IRTE can be switched only when both VDD and VDDPST are on.</li>
-</ol>
-<p><img src="/2022/03/06/power-ground-io/rention_seq.drawio.svg"
-alt="rention_seq.drawio" /></p>
-<p>When the rention function is needed, IRTE signal must come from an
-"always-on" core power domain. If you don't need the rention function,
-it is required to tie IRTE to ground. In other words, <strong>no matter
-the rention feature is needed or not, it is required to have PCBRTE in
-each domain</strong>.</p>
-<p><img
-src="/2022/03/06/power-ground-io/PCBRTE_in_digital_domain.drawio.svg"
-alt="PCBRTE_in_digital_domain.drawio" /></p>
-<p><strong>Note</strong>: PCBRTE <strong>does not</strong> need PAD
-connection.</p>
-<h4 id="internal-pins">Internal Pins</h4>
-<p>There are 3 internal global pins, i.e. <strong>ESD</strong>,
-<strong>POCCTRL</strong>, <strong>RTE</strong>, in all digital domain
-cells.</p>
-<p>In real application,</p>
-<ul>
-<li><strong>ESD pin</strong> is an internal signal and
-<strong>active</strong> in ESD event happening</li>
-<li><strong>POCCTRL</strong> is an internal signal and active in
-Power-on-control event.</li>
-</ul>
-<p>However, these special events (i.e. ESD event and Power-on-control
-event) are not modeled in NLDM kit (.lib), only normal function is
-covered, so <strong>ESD</strong> and <strong>POCCTRL</strong> pins are
-simply defined as ground in NLDM kit (.lib).</p>
-<blockquote>
-<p>These 3 global pins will be connected automatically after
-<strong>cell-to-cell abutting</strong> in physical layout.</p>
-</blockquote>
-<h4 id="power-up-sequence-in-digital-domain">Power-Up sequence in
-Digital Domain</h4>
-<p>Power up the I/O power (VDDPST) first, then the core power (VDD)</p>
-<p><img src="/2022/03/06/power-ground-io/pocctrl_seq.drawio.svg"
-alt="pocctrl_seq.drawio" /></p>
-<ol type="1">
-<li>PVDDD2POCM cell would generate Power-On-Control signal (POCCTRL) to
-have the post-driver NMOS and PMOS off, so that the crowbar current
-would not occur in the post-driver fingers when the I/O voltage is on
-while the core voltage remains off. As such, I/O cell would be in the
-Hi-Z state. when POCCTRL is on, the pll-up/down resistor is disabled and
-C is 0.</li>
-<li>The POCCTRL signal is transmitted to I/O cells through <strong>cell
-abutment</strong>. There is no need to have routing for POCCTTRL nor
-give a control signal to the POCCTRL pin any of I/O cells. Note that the
-POCCTRL signal would be cut if inserting a power-cut (PRCUT) cell.</li>
-</ol>
-<p><img
-src="/2022/03/06/power-ground-io/power-on-control-ciruit.drawio.svg"
-alt="power-on-control-ciruit.drawio" /></p>
-<h4 id="power-down-sequence-in-digital-domain">Power-Down sequence in
-Digital Domain</h4>
-<p>It's the reverse of power-up sequence.</p>
-<h4 id="use-model-in-innovus">Use model in Innovus</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> init_gnd_net <span class="string">&quot;vss_core vss DUMMY_ESD DUMMY_POCCTRL&quot;</span></span><br><span class="line"></span><br><span class="line">addInst -moduleBased u_io -ori R270 -physical -status fixed -loc <span class="number">135</span> <span class="number">994</span> -inst u_io/VDDIO_1 -cell PVDD2CDGM_H</span><br><span class="line"></span><br><span class="line">addNet u_io_RTE</span><br><span class="line">attachTerm FILLER_6 RTE u_io_RTE</span><br><span class="line">attachTerm VDDIO_1 RTE u_right_RTE</span><br><span class="line">setAttribute -skip_routing true -net u_io_RTE</span><br><span class="line"></span><br><span class="line">clearGlobalNets</span><br><span class="line">globalNetConnect DUMMY_POCCTRL -type pgpin -pin POCCTRL -singleInstance u_io/VDDDIO_1 -override</span><br><span class="line">globalNetConnect DUMMY_ESD -type pgpin -pin ESD -singleInstance u_io/VDDDIO_1 -override</span><br></pre></td></tr></table></figure>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> pins [get_object_name [get_ports *]]</span><br><span class="line"><span class="keyword">foreach</span> pin <span class="variable">$pins</span> &#123;</span><br><span class="line">	<span class="keyword">set</span> netPtr [dbGetNetByName <span class="variable">$pin</span>]</span><br><span class="line">	<span class="keyword">if</span> &#123; <span class="variable">$netPtr</span> == <span class="string">&quot;0x0&quot;</span> &#125; &#123;</span><br><span class="line">		<span class="keyword">puts</span> <span class="string">&quot;INFO: can&#x27;t find the port: $pin&quot;</span></span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		setAttribute -net <span class="variable">$pin</span> -skip_routing true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical]]] &#123;</span><br><span class="line">	setAttribute -net <span class="variable">$net</span> -skip_routing true</span><br><span class="line">	dbSet [dbGetNetByName <span class="variable">$net</span>].dontTouch true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -12949,6 +12805,150 @@ McGraw-Hill, 2017.</p>
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Power/Ground and I/O Pins</title>
+    <url>/2022/03/06/power-ground-io/</url>
+    <content><![CDATA[<h4 id="power-ground-pin-information">Power / Ground Pin
+Information</h4>
+<p>In both digital and analog I/O, power and ground pins appear at the
+sub-circuit definiton, allowing user to use the I/O in voltage islands.
+They follow certain naming conventions.</p>
+<ol type="1">
+<li>digital I/O sub-circuit</li>
+</ol>
+<ul>
+<li>VDD: pre-driver core voltage (supplied by PVDD1CDGM)</li>
+<li>VSS: pre-driver ground and also global ground (supplied by
+PVDD1CDGM)</li>
+<li>VDDPST: I/O post-driver voltage, i.e. 1.8V (supplied by PVDD2CDGM or
+PVDD2POCM)</li>
+<li>VSSPOST: I/O post-driver ground (supplied by PVDD2CDGM or
+PVDD2POCM)</li>
+<li>POCCTRL: POCCTRL signal (supplied by PVDD2POCM)</li>
+</ul>
+<ol start="2" type="1">
+<li>analog I/O placed in a core voltage domain, the convention is</li>
+</ol>
+<ul>
+<li>TACVDD: analog core voltage (supplied by PVDD3ACM)</li>
+<li>TACVSS: analog core ground (supplied by PVDD3ACM)</li>
+<li>VSS: global core ground</li>
+</ul>
+<ol start="3" type="1">
+<li>analog I/O placed in an I/O voltage domain, the convention is:</li>
+</ol>
+<ul>
+<li>TAVDD: analog I/O voltage, i.e. 1.8V (supplied by PVDD3AM)</li>
+<li>TAVSS: analog I/O ground (supplied by PVDD3AM)</li>
+<li>VSS: global core ground</li>
+</ul>
+<p>Power/Ground <strong>Combo Cells</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 36%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>power/ground combo pad cell</th>
+<th>pins to be connected to bump</th>
+<th>to core side pin name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PVDD1CDGM</td>
+<td>VDD VSS</td>
+<td>VDD VSS</td>
+</tr>
+<tr class="even">
+<td>PVDD2CDGM PVDD2POCM</td>
+<td>VDDPST VSSPST</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td>PVDD3AM</td>
+<td>TAVDD TAVSS</td>
+<td>AVDD AVSS</td>
+</tr>
+<tr class="even">
+<td>PVDD3ACM</td>
+<td>TACVDD TACVSS</td>
+<td>AVDD AVSS</td>
+</tr>
+</tbody>
+</table>
+<h4 id="note-for-the-retention-mode">Note for the retention mode</h4>
+<ol type="1">
+<li>At initial state, IRTE must be <strong>0</strong> when VDD is
+off.</li>
+<li>IRTE must be kept &gt;= 10us after VDD turns on again (from the
+retention mode to the normal operation mode).</li>
+<li>IRTE can be switched only when both VDD and VDDPST are on.</li>
+</ol>
+<p><img src="/2022/03/06/power-ground-io/rention_seq.drawio.svg"
+alt="rention_seq.drawio" /></p>
+<p>When the rention function is needed, IRTE signal must come from an
+"always-on" core power domain. If you don't need the rention function,
+it is required to tie IRTE to ground. In other words, <strong>no matter
+the rention feature is needed or not, it is required to have PCBRTE in
+each domain</strong>.</p>
+<p><img
+src="/2022/03/06/power-ground-io/PCBRTE_in_digital_domain.drawio.svg"
+alt="PCBRTE_in_digital_domain.drawio" /></p>
+<p><strong>Note</strong>: PCBRTE <strong>does not</strong> need PAD
+connection.</p>
+<h4 id="internal-pins">Internal Pins</h4>
+<p>There are 3 internal global pins, i.e. <strong>ESD</strong>,
+<strong>POCCTRL</strong>, <strong>RTE</strong>, in all digital domain
+cells.</p>
+<p>In real application,</p>
+<ul>
+<li><strong>ESD pin</strong> is an internal signal and
+<strong>active</strong> in ESD event happening</li>
+<li><strong>POCCTRL</strong> is an internal signal and active in
+Power-on-control event.</li>
+</ul>
+<p>However, these special events (i.e. ESD event and Power-on-control
+event) are not modeled in NLDM kit (.lib), only normal function is
+covered, so <strong>ESD</strong> and <strong>POCCTRL</strong> pins are
+simply defined as ground in NLDM kit (.lib).</p>
+<blockquote>
+<p>These 3 global pins will be connected automatically after
+<strong>cell-to-cell abutting</strong> in physical layout.</p>
+</blockquote>
+<h4 id="power-up-sequence-in-digital-domain">Power-Up sequence in
+Digital Domain</h4>
+<p>Power up the I/O power (VDDPST) first, then the core power (VDD)</p>
+<p><img src="/2022/03/06/power-ground-io/pocctrl_seq.drawio.svg"
+alt="pocctrl_seq.drawio" /></p>
+<ol type="1">
+<li>PVDDD2POCM cell would generate Power-On-Control signal (POCCTRL) to
+have the post-driver NMOS and PMOS off, so that the crowbar current
+would not occur in the post-driver fingers when the I/O voltage is on
+while the core voltage remains off. As such, I/O cell would be in the
+Hi-Z state. when POCCTRL is on, the pll-up/down resistor is disabled and
+C is 0.</li>
+<li>The POCCTRL signal is transmitted to I/O cells through <strong>cell
+abutment</strong>. There is no need to have routing for POCCTTRL nor
+give a control signal to the POCCTRL pin any of I/O cells. Note that the
+POCCTRL signal would be cut if inserting a power-cut (PRCUT) cell.</li>
+</ol>
+<p><img
+src="/2022/03/06/power-ground-io/power-on-control-ciruit.drawio.svg"
+alt="power-on-control-ciruit.drawio" /></p>
+<h4 id="power-down-sequence-in-digital-domain">Power-Down sequence in
+Digital Domain</h4>
+<p>It's the reverse of power-up sequence.</p>
+<h4 id="use-model-in-innovus">Use model in Innovus</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> init_gnd_net <span class="string">&quot;vss_core vss DUMMY_ESD DUMMY_POCCTRL&quot;</span></span><br><span class="line"></span><br><span class="line">addInst -moduleBased u_io -ori R270 -physical -status fixed -loc <span class="number">135</span> <span class="number">994</span> -inst u_io/VDDIO_1 -cell PVDD2CDGM_H</span><br><span class="line"></span><br><span class="line">addNet u_io_RTE</span><br><span class="line">attachTerm FILLER_6 RTE u_io_RTE</span><br><span class="line">attachTerm VDDIO_1 RTE u_right_RTE</span><br><span class="line">setAttribute -skip_routing true -net u_io_RTE</span><br><span class="line"></span><br><span class="line">clearGlobalNets</span><br><span class="line">globalNetConnect DUMMY_POCCTRL -type pgpin -pin POCCTRL -singleInstance u_io/VDDDIO_1 -override</span><br><span class="line">globalNetConnect DUMMY_ESD -type pgpin -pin ESD -singleInstance u_io/VDDDIO_1 -override</span><br></pre></td></tr></table></figure>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> pins [get_object_name [get_ports *]]</span><br><span class="line"><span class="keyword">foreach</span> pin <span class="variable">$pins</span> &#123;</span><br><span class="line">	<span class="keyword">set</span> netPtr [dbGetNetByName <span class="variable">$pin</span>]</span><br><span class="line">	<span class="keyword">if</span> &#123; <span class="variable">$netPtr</span> == <span class="string">&quot;0x0&quot;</span> &#125; &#123;</span><br><span class="line">		<span class="keyword">puts</span> <span class="string">&quot;INFO: can&#x27;t find the port: $pin&quot;</span></span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		setAttribute -net <span class="variable">$pin</span> -skip_routing true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical]]] &#123;</span><br><span class="line">	setAttribute -net <span class="variable">$net</span> -skip_routing true</span><br><span class="line">	dbSet [dbGetNetByName <span class="variable">$net</span>].dontTouch true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -13902,20 +13902,6 @@ Units</li>
       </categories>
   </entry>
   <entry>
-    <title>SAR ADC</title>
-    <url>/2023/11/06/sar/</url>
-    <content><![CDATA[<h2 id="modeling">modeling</h2>
-<p><img src="/2023/11/06/sar/image-20221124234503524.png"
-alt="image-20221124234503524" /></p>
-<h2 id="reference">reference</h2>
-<p>Monte Ma. Data Converters [<a
-href="https://designers-guide.org/modeling/dataconversion.pdf">https://designers-guide.org/modeling/dataconversion.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Sampling of Continuous Time Signals</title>
     <url>/2022/05/01/sampling-dft/</url>
     <content><![CDATA[<p>The sampling process mathematically in the two stages:</p>
@@ -14148,6 +14134,20 @@ V. Oppenheim, 3rd edition.” (2011).</p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SAR ADC</title>
+    <url>/2023/11/06/sar/</url>
+    <content><![CDATA[<h2 id="modeling">modeling</h2>
+<p><img src="/2023/11/06/sar/image-20221124234503524.png"
+alt="image-20221124234503524" /></p>
+<h2 id="reference">reference</h2>
+<p>Monte Ma. Data Converters [<a
+href="https://designers-guide.org/modeling/dataconversion.pdf">https://designers-guide.org/modeling/dataconversion.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -14542,6 +14542,121 @@ alt="image-20220507122217830" /></p>
       </categories>
   </entry>
   <entry>
+    <title>DSPF Options</title>
+    <url>/2023/04/22/spectre-case/</url>
+    <content><![CDATA[<h3 id="case-sensitivity">Case Sensitivity</h3>
+<table>
+<thead>
+<tr class="header">
+<th><strong>netlist format</strong></th>
+<th><strong>default option</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectre netlist</td>
+<td><em>case sensitive</em></td>
+</tr>
+<tr class="even">
+<td>dspf format</td>
+<td><em>case insensitive</em></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>For a <strong>dspf format</strong>, it will be treated as a <em>spice
+netlist format</em>, which is <em>by default case insensitive</em></p>
+</blockquote>
+<p>Pay attention to <em>VerilogIn</em> block, which may contain upper
+case / lower case net name, e.g NET1 and net1.</p>
+<p>The extracted DSPF using extraction tool also contain NET1 and net1,
+which <strong>shall not</strong> be shorted together.</p>
+<p><img src="/2023/04/22/spectre-case/image-20230422225227022.png"
+alt="image-20230422225227022" /></p>
+<h3 id="port-order">Port Order</h3>
+<blockquote>
+<p>If you use <code>.dspf_include</code>, the following rules apply:</p>
+<ul>
+<li>The subcircuit description is taken from the DSPF file even if the
+same subcircuit description is available in the schematic netlist.</li>
+<li>Depending on the <code>port_order</code> option, the port order of
+the subcircuit definition is taken from the pre-layout schematic netlist
+or from the DSPF file subcircuit definition, as shown below.
+<ul>
+<li><code>port_order=sch</code> – (Default). The port order is taken
+from schematic subcircuit definition. The same port number and names are
+required. If the schematic subcircuit definition is not available, a
+warning is issued in the log file, and DSPF port order is used.</li>
+<li><code>port_order=spf</code> – The port order is taken from the DSPF
+subcircuit definition.</li>
+</ul></li>
+</ul>
+</blockquote>
+<p><strong>SPICE_SUBCKT_FILE</strong> of StarRC</p>
+<p>The StarRC tool reads the files specified by the
+<em>SPICE_SUBCKT_FILE</em> command to obtain <strong>port ordering
+information</strong>. The files control the port ordering of the top
+cell as well. The port order and the port list members read from the
+<strong>.subckt</strong> for a skip cell are preserved in the output
+netlist.</p>
+<blockquote>
+<p>The file usually is the <em>cdl netlist</em> of extracted cell, this
+way, port order is not problem</p>
+</blockquote>
+<p><strong>CDF termOrder</strong></p>
+<p><img src="/2023/04/22/spectre-case/image-20230423005204734.png"
+alt="image-20230423005204734" /></p>
+<h4 id="dspf-same-order">DSPF same order</h4>
+<p><strong>DSPF</strong></p>
+<p><img src="/2023/04/22/spectre-case/image-20230423005700599.png"
+alt="image-20230423005700599" /></p>
+<p><strong>input.scs</strong></p>
+<p><img src="/2023/04/22/spectre-case/image-20230423005754571.png"
+alt="image-20230423005754571" /></p>
+<p><img src="/2023/04/22/spectre-case/image-20230423010050512.png"
+alt="image-20230423010050512" /></p>
+<h4 id="different-order">different order</h4>
+<p>manual change DSPF's pin order shown as below</p>
+<p><img src="/2023/04/22/spectre-case/image-20230423010229253.png"
+alt="image-20230423010229253" /></p>
+<h4 id="port_ordersch">port_order=sch</h4>
+<p><em>dspf port is mapping to schematic by name</em>, and the
+simulation result is right</p>
+<p><img src="/2023/04/22/spectre-case/image-20230423011926424.png"
+alt="image-20230423011926424" /></p>
+<h5 id="port_orderspf">port_order=spf</h5>
+<p>dspf pin order is retained, and <strong>no mapping</strong> between
+spectre netlist and dspf.</p>
+<p>The simulation result is wrong</p>
+<p><img src="/2023/04/22/spectre-case/image-20230423012443314.png"
+alt="image-20230423012443314" /></p>
+<blockquote>
+<p>bus_delim="_ &lt;&gt;"</p>
+<p>The way this works is that the first part of <em>bus_delim</em> is
+the "schematic" delimiter (i.e. what's in the spectre netlist), and the
+other part is the DSPF delimiter</p>
+</blockquote>
+<h3 id="reference">reference</h3>
+<p>Article (20502176) Title: How does Spectre understand case-sensitive
+net names when using various post-layout netlists such as dspf,
+av_extracted view, or smart view? URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fthoEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fthoEAA</a></p>
+<p>spf in cadence <a
+href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/31326/spf-in-cadence/1342278#1342278">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/31326/spf-in-cadence/1342278#1342278</a></p>
+<p>Spectre Tech Tips: Using DSPF Post-Layout Netlists in Spectre Circuit
+Simulator - Analog/Custom Design - Cadence Blogs - Cadence Community <a
+href="https://shar.es/afO6e1">https://shar.es/afO6e1</a></p>
+<p>StarRC™ User Guide and Command Reference Version O-2018.06, June
+2018</p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model</title>
     <url>/2022/03/09/spf-complex-pwl/</url>
     <content><![CDATA[<p><strong>Real number modeling</strong> of analog circuits in hardware
@@ -14774,121 +14889,6 @@ tools regarding on analog modeling,validation, and generation</a></p>
       <categories>
         <category>analog</category>
       </categories>
-  </entry>
-  <entry>
-    <title>DSPF Options</title>
-    <url>/2023/04/22/spectre-case/</url>
-    <content><![CDATA[<h3 id="case-sensitivity">Case Sensitivity</h3>
-<table>
-<thead>
-<tr class="header">
-<th><strong>netlist format</strong></th>
-<th><strong>default option</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Spectre netlist</td>
-<td><em>case sensitive</em></td>
-</tr>
-<tr class="even">
-<td>dspf format</td>
-<td><em>case insensitive</em></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>For a <strong>dspf format</strong>, it will be treated as a <em>spice
-netlist format</em>, which is <em>by default case insensitive</em></p>
-</blockquote>
-<p>Pay attention to <em>VerilogIn</em> block, which may contain upper
-case / lower case net name, e.g NET1 and net1.</p>
-<p>The extracted DSPF using extraction tool also contain NET1 and net1,
-which <strong>shall not</strong> be shorted together.</p>
-<p><img src="/2023/04/22/spectre-case/image-20230422225227022.png"
-alt="image-20230422225227022" /></p>
-<h3 id="port-order">Port Order</h3>
-<blockquote>
-<p>If you use <code>.dspf_include</code>, the following rules apply:</p>
-<ul>
-<li>The subcircuit description is taken from the DSPF file even if the
-same subcircuit description is available in the schematic netlist.</li>
-<li>Depending on the <code>port_order</code> option, the port order of
-the subcircuit definition is taken from the pre-layout schematic netlist
-or from the DSPF file subcircuit definition, as shown below.
-<ul>
-<li><code>port_order=sch</code> – (Default). The port order is taken
-from schematic subcircuit definition. The same port number and names are
-required. If the schematic subcircuit definition is not available, a
-warning is issued in the log file, and DSPF port order is used.</li>
-<li><code>port_order=spf</code> – The port order is taken from the DSPF
-subcircuit definition.</li>
-</ul></li>
-</ul>
-</blockquote>
-<p><strong>SPICE_SUBCKT_FILE</strong> of StarRC</p>
-<p>The StarRC tool reads the files specified by the
-<em>SPICE_SUBCKT_FILE</em> command to obtain <strong>port ordering
-information</strong>. The files control the port ordering of the top
-cell as well. The port order and the port list members read from the
-<strong>.subckt</strong> for a skip cell are preserved in the output
-netlist.</p>
-<blockquote>
-<p>The file usually is the <em>cdl netlist</em> of extracted cell, this
-way, port order is not problem</p>
-</blockquote>
-<p><strong>CDF termOrder</strong></p>
-<p><img src="/2023/04/22/spectre-case/image-20230423005204734.png"
-alt="image-20230423005204734" /></p>
-<h4 id="dspf-same-order">DSPF same order</h4>
-<p><strong>DSPF</strong></p>
-<p><img src="/2023/04/22/spectre-case/image-20230423005700599.png"
-alt="image-20230423005700599" /></p>
-<p><strong>input.scs</strong></p>
-<p><img src="/2023/04/22/spectre-case/image-20230423005754571.png"
-alt="image-20230423005754571" /></p>
-<p><img src="/2023/04/22/spectre-case/image-20230423010050512.png"
-alt="image-20230423010050512" /></p>
-<h4 id="different-order">different order</h4>
-<p>manual change DSPF's pin order shown as below</p>
-<p><img src="/2023/04/22/spectre-case/image-20230423010229253.png"
-alt="image-20230423010229253" /></p>
-<h4 id="port_ordersch">port_order=sch</h4>
-<p><em>dspf port is mapping to schematic by name</em>, and the
-simulation result is right</p>
-<p><img src="/2023/04/22/spectre-case/image-20230423011926424.png"
-alt="image-20230423011926424" /></p>
-<h5 id="port_orderspf">port_order=spf</h5>
-<p>dspf pin order is retained, and <strong>no mapping</strong> between
-spectre netlist and dspf.</p>
-<p>The simulation result is wrong</p>
-<p><img src="/2023/04/22/spectre-case/image-20230423012443314.png"
-alt="image-20230423012443314" /></p>
-<blockquote>
-<p>bus_delim="_ &lt;&gt;"</p>
-<p>The way this works is that the first part of <em>bus_delim</em> is
-the "schematic" delimiter (i.e. what's in the spectre netlist), and the
-other part is the DSPF delimiter</p>
-</blockquote>
-<h3 id="reference">reference</h3>
-<p>Article (20502176) Title: How does Spectre understand case-sensitive
-net names when using various post-layout netlists such as dspf,
-av_extracted view, or smart view? URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fthoEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fthoEAA</a></p>
-<p>spf in cadence <a
-href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/31326/spf-in-cadence/1342278#1342278">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/31326/spf-in-cadence/1342278#1342278</a></p>
-<p>Spectre Tech Tips: Using DSPF Post-Layout Netlists in Spectre Circuit
-Simulator - Analog/Custom Design - Cadence Blogs - Cadence Community <a
-href="https://shar.es/afO6e1">https://shar.es/afO6e1</a></p>
-<p>StarRC™ User Guide and Command Reference Version O-2018.06, June
-2018</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
   </entry>
   <entry>
     <title>maximum oscillation frequency of multi-paths ring oscillator</title>
@@ -17242,87 +17242,6 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       </categories>
   </entry>
   <entry>
-    <title>Different Variants of the PSD Definition</title>
-    <url>/2023/06/03/variants-def-psd/</url>
-    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
-slightly different variants of the PSD definition, depending on the
-particular application or research field.</p>
-<ul>
-<li><p><strong>Two-Sided PSD</strong>, <span
-class="math inline">\(S_x(f)\)</span></p>
-<p>this is a synonym of the PSD defined as the Fourier Transform of the
-<strong>autocorrelation</strong>.</p></li>
-<li><p><strong>One-Sided PSD</strong>, <span
-class="math inline">\(S&#39;_x(f)\)</span></p>
-<p>this is a variant derived from the <em>two-sided PSD</em> by
-considering only the <em>positive frequency</em> semi-axis.</p>
-<p>To <strong>conserve the total power</strong>, the value of the
-one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
-class="math display">\[
-S&#39;_x(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_x(f) &amp; : \ f = 0 \\
-2S_x(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
-alt="image-20230603185546658" /></p>
-<blockquote>
-<p>Note that the one-sided PSD definition makes sense only if the
-two-sided is an even function of <span
-class="math inline">\(f\)</span></p>
-</blockquote>
-<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
-symmetrical around a positive frequency <span
-class="math inline">\(f_0\)</span>, then two additional definitions can
-be adopted:</p>
-<ul>
-<li><p><strong>Single-Sideband PSD</strong>, <span
-class="math inline">\(S_{SSB,x}(f)\)</span></p>
-<p>This is obtained from <span
-class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
-frequency axis to <span class="math inline">\(f_0\)</span> <span
-class="math display">\[
-S_{SSB,x}(f) =S&#39;_x(f+f_0)
-\]</span> This concept is particularly useful for describing phase or
-amplitude modulation schemes in wireless communications, where <span
-class="math inline">\(f_0\)</span> is the carrier frequency.</p>
-<blockquote>
-<p>Note that there is no difference in the values of the one-sided
-versus the SSB PSD; it is just a pure translation on the frequency
-axis.</p>
-</blockquote></li>
-<li><p><strong>Double-Sideband PSD</strong>, <span
-class="math inline">\(S_{DSB,x}(f)\)</span></p>
-<p>this is a variant of the SSB PSD obtained by considering only the
-positive frequency semi-axis.</p>
-<p>As in the case of the one-sided PSD, to conserve total power, the
-value of the DSB PSD is twice that of the SSB <span
-class="math display">\[
-S_{DSB,x}(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_{SSB,x}(f) &amp; : \ f = 0 \\
-2S_{SSB,x}(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
-alt="image-20230603222054506" /></p>
-<blockquote>
-<p>Note that the DSB definition makes sense only if the SSB PSD is even
-symmetrical around zero</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
-and phase noise: A circuits and systems perspective. Cambridge
-University Press.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
     <title>UVM REG RALF &amp; IP-XACT</title>
     <url>/2022/03/14/uvm-reg-ralf/</url>
     <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
@@ -17480,6 +17399,87 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Different Variants of the PSD Definition</title>
+    <url>/2023/06/03/variants-def-psd/</url>
+    <content><![CDATA[<p>In the practice of engineering, it has become customary to use
+slightly different variants of the PSD definition, depending on the
+particular application or research field.</p>
+<ul>
+<li><p><strong>Two-Sided PSD</strong>, <span
+class="math inline">\(S_x(f)\)</span></p>
+<p>this is a synonym of the PSD defined as the Fourier Transform of the
+<strong>autocorrelation</strong>.</p></li>
+<li><p><strong>One-Sided PSD</strong>, <span
+class="math inline">\(S&#39;_x(f)\)</span></p>
+<p>this is a variant derived from the <em>two-sided PSD</em> by
+considering only the <em>positive frequency</em> semi-axis.</p>
+<p>To <strong>conserve the total power</strong>, the value of the
+one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
+class="math display">\[
+S&#39;_x(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_x(f) &amp; : \ f = 0 \\
+2S_x(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603185546658.png"
+alt="image-20230603185546658" /></p>
+<blockquote>
+<p>Note that the one-sided PSD definition makes sense only if the
+two-sided is an even function of <span
+class="math inline">\(f\)</span></p>
+</blockquote>
+<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
+symmetrical around a positive frequency <span
+class="math inline">\(f_0\)</span>, then two additional definitions can
+be adopted:</p>
+<ul>
+<li><p><strong>Single-Sideband PSD</strong>, <span
+class="math inline">\(S_{SSB,x}(f)\)</span></p>
+<p>This is obtained from <span
+class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
+frequency axis to <span class="math inline">\(f_0\)</span> <span
+class="math display">\[
+S_{SSB,x}(f) =S&#39;_x(f+f_0)
+\]</span> This concept is particularly useful for describing phase or
+amplitude modulation schemes in wireless communications, where <span
+class="math inline">\(f_0\)</span> is the carrier frequency.</p>
+<blockquote>
+<p>Note that there is no difference in the values of the one-sided
+versus the SSB PSD; it is just a pure translation on the frequency
+axis.</p>
+</blockquote></li>
+<li><p><strong>Double-Sideband PSD</strong>, <span
+class="math inline">\(S_{DSB,x}(f)\)</span></p>
+<p>this is a variant of the SSB PSD obtained by considering only the
+positive frequency semi-axis.</p>
+<p>As in the case of the one-sided PSD, to conserve total power, the
+value of the DSB PSD is twice that of the SSB <span
+class="math display">\[
+S_{DSB,x}(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_{SSB,x}(f) &amp; : \ f = 0 \\
+2S_{SSB,x}(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2023/06/03/variants-def-psd/image-20230603222054506.png"
+alt="image-20230603222054506" /></p>
+<blockquote>
+<p>Note that the DSB definition makes sense only if the SSB PSD is even
+symmetrical around zero</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Da Dalt, N., &amp; Sheikholeslami, A. (2018). Understanding jitter
+and phase noise: A circuits and systems perspective. Cambridge
+University Press.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -17951,15 +17951,6 @@ Memory in Verilog</a></p>
       </tags>
   </entry>
   <entry>
-    <title>Build VMware host modules</title>
-    <url>/2024/01/30/vmware-module/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Voltage-Mode Driver Equalization</title>
     <url>/2022/07/09/vm-drv-eq/</url>
     <content><![CDATA[<h2 id="sst-driver">SST Driver</h2>
@@ -18161,6 +18152,15 @@ Data Communications</p>
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Build VMware host modules</title>
+    <url>/2024/01/30/vmware-module/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
       </categories>
   </entry>
   <entry>

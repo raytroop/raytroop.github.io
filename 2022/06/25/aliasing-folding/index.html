@@ -18,13 +18,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Noise Aliasing  Where impulse train or &quot;shah&quot; function is defined as \[ \amalg(t) &#x3D; T\sum_{i&#x3D;-\infty}^{\infty}\delta(x-iT) \] where \(T\) defines the period, or sampling rate. Its Fourier transform is">
+    <meta name="description" content="Switched-Capacitor The aliasing of the noise, or noise folding, plays an important role in switched-capacitor as it does in all switched-capacitor filters    The noise in \(S_{RC}\) is a stationary pr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Aliasing and Folding">
 <meta property="og:url" content="http://example.com/2022/06/25/aliasing-folding/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Noise Aliasing  Where impulse train or &quot;shah&quot; function is defined as \[ \amalg(t) &#x3D; T\sum_{i&#x3D;-\infty}^{\infty}\delta(x-iT) \] where \(T\) defines the period, or sampling rate. Its Fourier transform is">
+<meta property="og:description" content="Switched-Capacitor The aliasing of the noise, or noise folding, plays an important role in switched-capacitor as it does in all switched-capacitor filters    The noise in \(S_{RC}\) is a stationary pr">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/image-20240425215938141.png">
+<meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/image-20240425220220867.png">
+<meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/image-20240425220033340.png">
+<meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/image-20240425220400924.png">
 <meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/SamplingProcess.drawio.svg">
 <meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/image-20220626000016184.png">
 <meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/image-20230518232314980.png">
@@ -34,10 +38,10 @@
 <meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/image-20220626001925375.png">
 <meta property="og:image" content="http://example.com/2022/06/25/aliasing-folding/image-20220626001043693.png">
 <meta property="article:published_time" content="2022-06-25T13:12:37.000Z">
-<meta property="article:modified_time" content="2024-04-24T08:19:51.781Z">
+<meta property="article:modified_time" content="2024-04-25T15:06:01.201Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/06/25/aliasing-folding/SamplingProcess.drawio.svg">
+<meta name="twitter:image" content="http://example.com/2022/06/25/aliasing-folding/image-20240425215938141.png">
 
 
 <link rel="canonical" href="http://example.com/2022/06/25/aliasing-folding/">
@@ -146,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#noise-aliasing"><span class="nav-number">1.</span> <span class="nav-text">Noise Aliasing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aliasing"><span class="nav-number">2.</span> <span class="nav-text">Aliasing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#aliasing-example"><span class="nav-number">2.1.</span> <span class="nav-text">Aliasing Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#classes-of-sampling"><span class="nav-number">2.2.</span> <span class="nav-text">Classes of Sampling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dirac-pulses-and-spectrum"><span class="nav-number">3.</span> <span class="nav-text">Dirac Pulses and spectrum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#switched-capacitor"><span class="nav-number">1.</span> <span class="nav-text">Switched-Capacitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noise-aliasing"><span class="nav-number">2.</span> <span class="nav-text">Noise Aliasing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aliasing"><span class="nav-number">3.</span> <span class="nav-text">Aliasing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#aliasing-example"><span class="nav-number">3.1.</span> <span class="nav-text">Aliasing Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#classes-of-sampling"><span class="nav-number">3.2.</span> <span class="nav-text">Classes of Sampling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dirac-pulses-and-spectrum"><span class="nav-number">4.</span> <span class="nav-text">Dirac Pulses and spectrum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,7 +245,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-24 08:19:51" itemprop="dateModified" datetime="2024-04-24T08:19:51+00:00">2024-04-24</time>
+      <time title="Modified: 2024-04-25 15:06:01" itemprop="dateModified" datetime="2024-04-25T15:06:01+00:00">2024-04-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,7 +266,25 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="noise-aliasing">Noise Aliasing</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="switched-capacitor">Switched-Capacitor</h2>
+<p>The <strong>aliasing of the noise</strong>, or <strong>noise
+folding</strong>, plays an important role in switched-capacitor as it
+does in all switched-capacitor filters</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20240425215938141.png"
+alt="image-20240425215938141" /></p>
+<p><img src="/2022/06/25/aliasing-folding/image-20240425220220867.png"
+alt="image-20240425220220867" /></p>
+<p><img src="/2022/06/25/aliasing-folding/image-20240425220033340.png"
+alt="image-20240425220033340" /></p>
+<p>The noise in <span class="math inline">\(S_{RC}\)</span> is a
+<em>stationary process</em> and so is <em>uncorrelated</em> over <span
+class="math inline">\(f\)</span> allowing the <span
+class="math inline">\(N\)</span> rectangles to be combined by simply
+summing their noise powers</p>
+<p><img src="/2022/06/25/aliasing-folding/image-20240425220400924.png"
+alt="image-20240425220400924" /></p>
+<p>where <span class="math inline">\(m\)</span> is the duty cycle</p>
+<h2 id="noise-aliasing">Noise Aliasing</h2>
 <p><img src="/2022/06/25/aliasing-folding/SamplingProcess.drawio.svg"
 alt="SamplingProcess.drawio" /></p>
 <p>Where impulse train or "shah" function is defined as <span
@@ -392,6 +414,8 @@ SpectreRF.</p>
 <p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
 Converters, Second Edition" ISBN 978-1-119-25827-8</p>
 <p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
+<p>- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 /
+tutorials</p>
 <p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
 Modeling URL: <a
 target="_blank" rel="noopener" href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>

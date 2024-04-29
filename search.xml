@@ -770,6 +770,18 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
+    <title>Innovus block level create Power Ground Pin method</title>
+    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
+    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
+alt="createPGPin_onDie.drawio" /></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Innovus check mode variants</title>
     <url>/2022/02/07/Innovus-check-mode-variants/</url>
     <content><![CDATA[<p>checkDesign</p>
@@ -791,18 +803,6 @@ effect taken into consideration during delayCal</p>
     <title>Innovus Data Exchange</title>
     <url>/2022/02/07/Innovus-data-exchange/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Innovus block level create Power Ground Pin method</title>
-    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
-    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
-alt="createPGPin_onDie.drawio" /></p>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2000,6 +2000,18 @@ repo</a>]</p>
       </categories>
   </entry>
   <entry>
+    <title>VMware Disk Shrink</title>
+    <url>/2022/12/16/VMwareDiskShrink/</url>
+    <content><![CDATA[<p>In Guest OS and run</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>voltage-dependent DRC checks</title>
     <url>/2022/04/13/VD-DRC/</url>
     <content><![CDATA[<p>In T* DRC deck, it is based on the voltage recognition CAD layer and
@@ -2106,18 +2118,6 @@ those voltage-dependent DRC checks! - siemens</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>VMware Disk Shrink</title>
-    <url>/2022/12/16/VMwareDiskShrink/</url>
-    <content><![CDATA[<p>In Guest OS and run</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -2564,6 +2564,29 @@ href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">h
       </categories>
   </entry>
   <entry>
+    <title>Arithmetic in Verilog</title>
+    <url>/2022/05/29/arthmetic-verilog/</url>
+    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>1'b1</code>: overflow</p>
+</blockquote>
+<h4 id="signed-signed-signed">signed + signed = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code>: overflow</p>
+<p><code>2'b10</code>: underflow</p>
+</blockquote>
+<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Antenna Effect</title>
     <url>/2023/08/08/antenna/</url>
     <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
@@ -2637,29 +2660,6 @@ href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/le
       </categories>
   </entry>
   <entry>
-    <title>Arithmetic in Verilog</title>
-    <url>/2022/05/29/arthmetic-verilog/</url>
-    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>1'b1</code>: overflow</p>
-</blockquote>
-<h4 id="signed-signed-signed">signed + signed = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code>: overflow</p>
-<p><code>2'b10</code>: underflow</p>
-</blockquote>
-<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Bandgap Reference</title>
     <url>/2022/11/17/bgr/</url>
     <content><![CDATA[<h3 id="temperature-coefficient">temperature coefficient</h3>
@@ -2676,17 +2676,6 @@ alt="image-20221117002714125" /></p>
 <h3 id="reference">reference</h3>
 <p>ECEN 607 (ESS) Bandgap Reference: Basics URL:<a
 href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Burn-in</title>
-    <url>/2023/08/08/burnin/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>Mayank Parasrampuria, Sandeep Jain, Burn-in 101 [<a
-href="https://www.edn.com/burn-in-101/">link</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -2739,6 +2728,17 @@ href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://c
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Burn-in</title>
+    <url>/2023/08/08/burnin/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>Mayank Parasrampuria, Sandeep Jain, Burn-in 101 [<a
+href="https://www.edn.com/burn-in-101/">link</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -3097,6 +3097,152 @@ alt="topo.drawio" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Zero(DC component) and Nyquist Component in FFT</title>
+    <url>/2022/05/14/dc-nyquist-fft/</url>
+    <content><![CDATA[<h2 id="dc-offset">DC offset</h2>
+<p>Performing FFT to a signal with a <em>large DC offset</em> would
+often result in a big impulse around frequency 0 Hz, thus masking out
+the signals of interests with relatively small amplitude.</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
+alt="Remove_DC_Offset_Blog_10" /></p>
+<p>One method to remove DC offset from the original signal before
+performing FFT</p>
+<ul>
+<li>Subtracting the Mean of Original Signal</li>
+</ul>
+<p>You can also not filter the input, but set zero to the zero frequency
+point for FFT result.</p>
+<h2 id="nyquist-component">Nyquist component</h2>
+<p>If we go back to the definition of the DFT <span
+class="math display">\[
+X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
+(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
+\]</span> which is a real number.</p>
+<p>The discrete function <span class="math display">\[
+x[n]=\cos(\pi n)
+\]</span> is always <span class="math inline">\((-1)^n\)</span> for
+integer <span class="math inline">\(n\)</span></p>
+<p>One general sinusoid at Nyquist and has phase shift <span
+class="math inline">\(\theta\)</span>, this is <span
+class="math inline">\(T=2\)</span> and <span
+class="math inline">\(T_s=1\)</span></p>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= A \cos(\pi n + \theta) \\
+     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
+\big) \\
+     &amp;= \big(A\cos(\theta)\big) \cos(\pi
+n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
+     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
+\cdot 0 \\
+     &amp;= B \cdot (-1)^n \\
+\end{align}\]</span></p>
+<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
+<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
+n)\)</span>, then <span class="math display">\[
+B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
+\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
+<p>In other words, you <strong>CAN'T</strong> infer the signal from
+<span class="math inline">\(X(\frac{N}{2})\)</span> <span
+class="math display">\[\begin{align}
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
+\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
+\sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2}
+\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
+- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
+\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
+\sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
+\cos(\pi n+\theta)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
+you <strong>wouldn't</strong> know it because <span
+class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
+\mathbb{Z}\)</span></p>
+<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
+class="math display">\[
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
+\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
+\]</span> However, if <span
+class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
+class="math display">\[
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
+\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
+\]</span></p>
+<p>That sort of ambiguity is the reason for the <strong>strict
+inequality</strong> of the sampling theorem's condition.</p>
+<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
+<p><strong>Both edges</strong> is used for clock waveform to evaluate
+the duty cycle distortion,</p>
+<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
+DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
+below</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
+alt="image-20220516224616908" /></p>
+<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
+component, which is <strong>0.1</strong> in follow figure</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
+alt="image-20220516233618663" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>);</span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
+Spectrum</h2>
+<p>DC and Nyquist frequency of FFT left over</p>
+<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency</span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period</span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2.</span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1)</span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
+alt="image-20220514221609734" /></p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
+alt="image-20220514221642170" /></p>
+<h2 id="alternative-view">Alternative View</h2>
+<p>The direct current (DC) bin (<span
+class="math inline">\(k=0\)</span>) and the bin at <span
+class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
+the Nyquist frequency are <strong>purely real and unique</strong>.</p>
+<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
+amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
+plot is shown as below with sampling frequency is <span
+class="math inline">\(20Hz\)</span></p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
+alt="image-20220427172526711" /></p>
+<p>Amplitude and Phase spectrum, sampled with <span
+class="math inline">\(f_s=20\)</span> Hz</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
+alt="image-20220427174557915" /></p>
+<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
+<strong>1</strong> and its phase is <strong>0</strong> as shown as
+above, which proves the DFT and IDFT.</p>
+<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
+Parseval's theorem), which may not be the power of continuous signal.
+The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
+<strong>1</strong>, that of corresponding continuous signal is <span
+class="math inline">\(\frac{1}{2}\)</span>.</p>
+<p>Power spectrum derived from FFT provide information of samples, i.e.
+<strong>1</strong></p>
+<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
+[1 1 1 1 ...].</p>
+<h3 id="code">code</h3>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
+href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
+<p>How to remove DC component in FFT? URL: <a
+href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
+<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
+seem to work unless there is a phase shift URL: <a
+href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
+<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
+href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
+<p>Why remove energy at Nyquist before ifft? URL: <a
+href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>simulation data dumping</title>
     <url>/2022/06/04/data-dump/</url>
     <content><![CDATA[<h2 id="fsdb">FSDB</h2>
@@ -3280,152 +3426,6 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Zero(DC component) and Nyquist Component in FFT</title>
-    <url>/2022/05/14/dc-nyquist-fft/</url>
-    <content><![CDATA[<h2 id="dc-offset">DC offset</h2>
-<p>Performing FFT to a signal with a <em>large DC offset</em> would
-often result in a big impulse around frequency 0 Hz, thus masking out
-the signals of interests with relatively small amplitude.</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
-alt="Remove_DC_Offset_Blog_10" /></p>
-<p>One method to remove DC offset from the original signal before
-performing FFT</p>
-<ul>
-<li>Subtracting the Mean of Original Signal</li>
-</ul>
-<p>You can also not filter the input, but set zero to the zero frequency
-point for FFT result.</p>
-<h2 id="nyquist-component">Nyquist component</h2>
-<p>If we go back to the definition of the DFT <span
-class="math display">\[
-X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
-(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
-\]</span> which is a real number.</p>
-<p>The discrete function <span class="math display">\[
-x[n]=\cos(\pi n)
-\]</span> is always <span class="math inline">\((-1)^n\)</span> for
-integer <span class="math inline">\(n\)</span></p>
-<p>One general sinusoid at Nyquist and has phase shift <span
-class="math inline">\(\theta\)</span>, this is <span
-class="math inline">\(T=2\)</span> and <span
-class="math inline">\(T_s=1\)</span></p>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= A \cos(\pi n + \theta) \\
-     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
-\big) \\
-     &amp;= \big(A\cos(\theta)\big) \cos(\pi
-n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
-     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
-\cdot 0 \\
-     &amp;= B \cdot (-1)^n \\
-\end{align}\]</span></p>
-<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
-<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
-n)\)</span>, then <span class="math display">\[
-B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
-\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
-<p>In other words, you <strong>CAN'T</strong> infer the signal from
-<span class="math inline">\(X(\frac{N}{2})\)</span> <span
-class="math display">\[\begin{align}
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
-\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2}
-\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
-- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
-\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
-\cos(\pi n+\theta)
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
-you <strong>wouldn't</strong> know it because <span
-class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
-\mathbb{Z}\)</span></p>
-<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
-\]</span> However, if <span
-class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
-\]</span></p>
-<p>That sort of ambiguity is the reason for the <strong>strict
-inequality</strong> of the sampling theorem's condition.</p>
-<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
-<p><strong>Both edges</strong> is used for clock waveform to evaluate
-the duty cycle distortion,</p>
-<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
-DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
-below</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
-alt="image-20220516224616908" /></p>
-<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
-component, which is <strong>0.1</strong> in follow figure</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
-alt="image-20220516233618663" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>);</span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
-Spectrum</h2>
-<p>DC and Nyquist frequency of FFT left over</p>
-<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency</span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period</span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2.</span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1)</span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
-alt="image-20220514221609734" /></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
-alt="image-20220514221642170" /></p>
-<h2 id="alternative-view">Alternative View</h2>
-<p>The direct current (DC) bin (<span
-class="math inline">\(k=0\)</span>) and the bin at <span
-class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
-the Nyquist frequency are <strong>purely real and unique</strong>.</p>
-<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
-amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
-plot is shown as below with sampling frequency is <span
-class="math inline">\(20Hz\)</span></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
-alt="image-20220427172526711" /></p>
-<p>Amplitude and Phase spectrum, sampled with <span
-class="math inline">\(f_s=20\)</span> Hz</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
-alt="image-20220427174557915" /></p>
-<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
-<strong>1</strong> and its phase is <strong>0</strong> as shown as
-above, which proves the DFT and IDFT.</p>
-<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
-Parseval's theorem), which may not be the power of continuous signal.
-The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
-<strong>1</strong>, that of corresponding continuous signal is <span
-class="math inline">\(\frac{1}{2}\)</span>.</p>
-<p>Power spectrum derived from FFT provide information of samples, i.e.
-<strong>1</strong></p>
-<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
-[1 1 1 1 ...].</p>
-<h3 id="code">code</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
-href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
-<p>How to remove DC component in FFT? URL: <a
-href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
-<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
-seem to work unless there is a phase shift URL: <a
-href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
-<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
-href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
-<p>Why remove energy at Nyquist before ifft? URL: <a
-href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
-]]></content>
-      <categories>
-        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -3900,73 +3900,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
       </categories>
   </entry>
   <entry>
-    <title>Impact of Deep N-well Implantation</title>
-    <url>/2023/05/29/dnw/</url>
-    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
-<p>A variety of techniques can be used to minimize this noise, for
-example by keeping analog devices surrounded by guard rings, or using a
-separate supply for the substrate/well taps.</p>
-<p>However <em>guard rings alone cannot prevent noise coupling deep in
-the substrate, only surface currents</em>.</p>
-<blockquote>
-<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
-the substrate noise, but such is not valid for NMOS .</p>
-</blockquote>
-<h2 id="dnw">DNW</h2>
-<p>The N-channel devices built directly into the P-type substrate are
-not as effectively isolated as P-channel devices in their N-wells. This
-is because despite creating a P+ guard ring around the devices, there
-remains an electrical path below the guard ring for charge to flow.</p>
-<p>To overcome this issue, a <em>deep N-well</em> can be used to more
-effectively isolate these N-channel devices.</p>
-<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
-alt="image-20230529001556060" /></p>
-<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
-alt="image-20230529010836003" /></p>
-<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
-alt="BM_SS_Together at Last_Fig1" /></p>
-<blockquote>
-<p>pwdnw: PW/DNW diode</p>
-<p>dnwpsub: DNW/PSUB diode</p>
-<p><a
-href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
-At Last – Combining Netlist and Layout Data for Power-Aware
-Verification</a></p>
-</blockquote>
-<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
-alt="image-20230529002733114" /></p>
-<ul>
-<li>the P-well is separated, allowing the voltage to be controlled</li>
-<li>because the circuit within the deep N-well is separated from the
-p-substrate in this structure, there is the benefit that this circuitry
-is less susceptible to noise that propagates through the
-p-substrate.</li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
-Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
-Transistor Performance for Systems-on-a-Chip Integration. 32nd European
-Solid-State Device Research Conference, 251-254. URL:[<a
-href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
-<a
-href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
-<p>Mark Waller, <a
-href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
-layout: Why wells, taps, and guard rings are crucial</a></p>
-<p>KEITH SABINE <a
-href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
-Deep N Wells in Analog Design</a></p>
-<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
-nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
-1-8.</p>
-<p>cmos_processing, URL:<a
-href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Random &amp; Deterministic Jitters Simulation</title>
     <url>/2022/05/16/dj-rj/</url>
     <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
@@ -4147,6 +4080,73 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
 ]]></content>
       <categories>
         <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Impact of Deep N-well Implantation</title>
+    <url>/2023/05/29/dnw/</url>
+    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
+<p>A variety of techniques can be used to minimize this noise, for
+example by keeping analog devices surrounded by guard rings, or using a
+separate supply for the substrate/well taps.</p>
+<p>However <em>guard rings alone cannot prevent noise coupling deep in
+the substrate, only surface currents</em>.</p>
+<blockquote>
+<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
+the substrate noise, but such is not valid for NMOS .</p>
+</blockquote>
+<h2 id="dnw">DNW</h2>
+<p>The N-channel devices built directly into the P-type substrate are
+not as effectively isolated as P-channel devices in their N-wells. This
+is because despite creating a P+ guard ring around the devices, there
+remains an electrical path below the guard ring for charge to flow.</p>
+<p>To overcome this issue, a <em>deep N-well</em> can be used to more
+effectively isolate these N-channel devices.</p>
+<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
+alt="image-20230529001556060" /></p>
+<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
+alt="image-20230529010836003" /></p>
+<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
+alt="BM_SS_Together at Last_Fig1" /></p>
+<blockquote>
+<p>pwdnw: PW/DNW diode</p>
+<p>dnwpsub: DNW/PSUB diode</p>
+<p><a
+href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
+At Last – Combining Netlist and Layout Data for Power-Aware
+Verification</a></p>
+</blockquote>
+<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
+alt="image-20230529002733114" /></p>
+<ul>
+<li>the P-well is separated, allowing the voltage to be controlled</li>
+<li>because the circuit within the deep N-well is separated from the
+p-substrate in this structure, there is the benefit that this circuitry
+is less susceptible to noise that propagates through the
+p-substrate.</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
+Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
+Transistor Performance for Systems-on-a-Chip Integration. 32nd European
+Solid-State Device Research Conference, 251-254. URL:[<a
+href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
+<a
+href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
+<p>Mark Waller, <a
+href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
+layout: Why wells, taps, and guard rings are crucial</a></p>
+<p>KEITH SABINE <a
+href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
+Deep N Wells in Analog Design</a></p>
+<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
+nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
+1-8.</p>
+<p>cmos_processing, URL:<a
+href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -5083,6 +5083,445 @@ href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www
       </categories>
   </entry>
   <entry>
+    <title>EMIR via Voltus-Fi</title>
+    <url>/2022/02/23/emir-voltus-fi/</url>
+    <content><![CDATA[<h2 id="general-terminology">general terminology</h2>
+<h3 id="dc-related">DC related</h3>
+<p><strong>Imax</strong> in T*'s DRC document is the maximum allowed
+<strong>DC current</strong>, which depends on <em>Length and Width</em>
+only</p>
+<p><strong>Iavg</strong> is the average value of the current, which is
+the effective <em>DC current</em>. Therefore, <strong>Iavg
+rules</strong> are <strong>identical</strong> to <strong>Imax</strong>
+rules <span class="math display">\[
+I_{\text{avg}}=\frac{\int_0^\tau I(t)dt}{\tau}
+\]</span> Similarly, <strong>Iabsavg rules</strong> are
+<strong>identical</strong> to <strong>Imax</strong> rules, too <span
+class="math display">\[
+I_{\text{AbsAvg}}=\frac{\int_0^\tau |I(t)|dt}{\tau}
+\]</span></p>
+<h3 id="rms">rms</h3>
+<p><strong>Irms</strong> is the root-mean-square of the current through
+a metal line, which depends <strong>w(in um)</strong>, the <em>drawn
+width</em> of the metal line and <span class="math inline">\(\Delta
+T\)</span>, the temperature rise due to Joule heating. <span
+class="math display">\[
+I_{\text{rms}}=\left[\frac{\int_0^\tau I(t)^2dt}{\tau} \right]^{1/2}
+\]</span></p>
+<h3 id="peak-current">peak current</h3>
+<p><strong>Ipeak</strong> in T*'s DRC document is the current at which a
+metal line undergoes excessive Joule heating and can begin to melt.
+<strong>Ipeak</strong> is corresponding to
+<code>EM Current Analysis: max</code> in Voltus-Fi Analysis Setup <span
+class="math display">\[
+I_{\text{peak}}=\max(|I(t)|)
+\]</span> The limit for the peak current is <span
+class="math display">\[
+I_{\text{peak,limit}}=\frac{I_{\text{peak\_DC}}}{\sqrt{r
+} }
+\]</span> where <strong>r</strong> is the duty ratio</p>
+<p>The relationship between <strong>Ipeak</strong> and
+<strong>Ipeak_DC</strong> is merged in DRC document so that there is
+only <strong>Ipeak</strong> equation in document</p>
+<blockquote>
+<p><span class="math inline">\(I_{\text{peak,limit}}\)</span> depends on
+<span class="math inline">\(t_D\)</span>, r, width and length</p>
+</blockquote>
+<p><span class="math display">\[
+r=\frac{t_D}{\tau}
+\]</span></p>
+<p>where <span class="math inline">\(t_D\)</span> is equivalent duration
+<span class="math display">\[
+t_D =\frac{\int_0^\tau |I(t)|dt}{I_{\text{peak}}}
+\]</span> or <span class="math display">\[
+r=\frac{I_{\text{AbsAvg}}}{I_{\text{peak}}}
+\]</span> <img
+src="/2022/02/23/emir-voltus-fi/image-20220729023550943.png"
+alt="image-20220729023550943" /></p>
+<p>where the drawn width is 1um, r is 0.1</p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023722754.png"
+alt="image-20220729023722754" /></p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023319156.png"
+alt="image-20220729023319156" /> <span class="math display">\[
+9.37*(1-0.004)/\sqrt0.1 = 29.512
+\]</span></p>
+<h3 id="acpeakpwc">acpeak/pwc</h3>
+<p>It's same with <strong>max</strong> EM Current Analysis in
+Voltus-Fi</p>
+<h3 id="dynamicacpeak"><code>dynamicACPeak</code></h3>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023154009.png"
+alt="image-20220729023154009" /></p>
+<p>This option affect how duty ratio r is computed in <code>max</code>
+and <code>acpeak/pwc</code> EM current Analysis</p>
+<p>When the <code>dynamicACPeak</code> variable is set to
+<strong>true</strong> or <strong>multiPeak</strong> <span
+class="math display">\[
+r=\frac{T_d}{T_{\text{total}}}
+\]</span></p>
+<p>​ where <span class="math inline">\(T_{\text{total}} = \text{EMIR
+time window}\)</span></p>
+<p>​ <span class="math inline">\(T_d\)</span> = the time duration in
+microsecond of the total "On Time" period based on <code>IPWC</code></p>
+<blockquote>
+<p>Pulse-Wise Constant EM current calculation (IPWC)</p>
+</blockquote>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220729032235649.png"
+alt="image-20220729032235649" /></p>
+<p>where <strong>Tau</strong> is <span
+class="math inline">\(T_d\)</span> in above formula</p>
+<blockquote>
+<p>!!! It seems that t*'s PDK don't support
+<code>dynamicACPeak=true</code></p>
+</blockquote>
+<h2 id="ir-drop-filter-layers">IR drop filter layers</h2>
+<p>EM techfile (qrcTechFile) may take diffusion contact
+(<em>n_odtap</em>, <em>p_odtap</em> in DSPF file) into account during IR
+drop analysis. And these segment often dominate IR drop, but we as IC
+designer can NOT improve them. In general, the IR drop to M1 layer is
+enough and feasible.</p>
+<h2 id="regular-analysis-statements-in-emir-configuration">Regular
+analysis statements in emir configuration</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net name=[I0.vdd I0.vss] analysis=[vmax vavg]</span><br><span class="line">net name=[I0.*] analysis =[imax ivavg irms]</span><br></pre></td></tr></table></figure>
+<h2 id="emirreport-command">emirreport command</h2>
+<p>Creating reports for specific nets after simulation using
+<code>emirreport</code></p>
+<p>Create a new config file as shown below:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">** test.conf**</span><br><span class="line">net name=[I1.VDD I1.VSS] analysis=[iavg]</span><br><span class="line">net name=[I1.VBIAS] analysis=[imax]</span><br></pre></td></tr></table></figure>
+<p>Run <code>emirreport</code> on the command line using the
+<strong>emirdatabase</strong> (emir*.bin) and <strong>test.conf</strong>
+created above in</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">% emirreport -64 -c test.conf -db &lt;emirdatabase&gt; -outdir newreport</span><br></pre></td></tr></table></figure>
+<h2 id="database">database</h2>
+<h3 id="simulation-result">simulation result</h3>
+<ul>
+<li><code>input.emir0_bin</code>: The first EMIR Analysis which is DC or
+Transient, which depends on <em>Analyses</em> order</li>
+</ul>
+<blockquote>
+<ul>
+<li><p><code>input_tran.emir0_bin</code>: EMIR Analysis in Transient
+simulation</p></li>
+<li><p><code>input_dcOp.emir0_bin</code>: EMIR Analysis in DC
+simulation</p></li>
+</ul>
+</blockquote>
+<p>For example</p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203011393.png"
+alt="image-20220421203011393" /></p>
+<p>Two results are generated <code>input.emir0_bin</code> and
+<code>input_dcOp.emir0_bin</code> and their reports respectly</p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203657123.png"
+alt="image-20220421203657123" /></p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203554147.png"
+alt="image-20220421203554147" /></p>
+<h2 id="fix-electromigration">Fix Electromigration</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>wider wire</th>
+<th>downsize drivers</th>
+<th>decrease fanout</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RJ JMAX</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>JAVG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>JABSAVG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>JACPEAK</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>JACRMS</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><p>Iavg</p>
+<p>The average value of the current, which is the effective DC
+current</p></li>
+<li><p>Irms</p>
+<p>Irms rule relates to the heat or Joule-heating of metal
+lines</p></li>
+<li><p>Ipeak</p>
+<p>The main goal of the Ipeak limits is to ensure that no thermal
+breakdown could occur on single overshoot events. If the signal may not
+have a high current density but if it has a very large peak current
+density, then, local melting will happen and cause failures</p></li>
+</ul>
+</blockquote>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220503205418275.png"
+alt="image-20220503205418275" /></p>
+<h2 id="qa">QA</h2>
+<ol type="1">
+<li><p>Q. Why “length” column in EM results form doesn’t show extracted
+length, it shows “NA”.</p>
+<p>A. Voltus-Fi reports the “length” column only when length rules are
+present in the emDataFile.</p></li>
+<li><p>Seeing different port currents with and without emir simulations
+for same dspf included in EMIR Direct method using dspf_include.</p>
+<p>Split Pins (*|P) in DSPF are only shorted in the EMIR flow not in the
+regular spectre flow. Islands patching is only performed in EMIR
+only</p></li>
+<li><p>Setting temperature for EM analysis</p></li>
+</ol>
+<p>By Default, Voltus-FI and VPS pick up the current density limit for
+<strong>temperature at which simulation has been performed</strong>.</p>
+<blockquote>
+<p>By the way, <code>Design Variables</code> - <em>temperature</em> will
+override the temperature in <em>Setup toolbar</em> which is gray in ADE
+Explorer</p>
+</blockquote>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421184141363.png"
+alt="image-20220421184141363" /></p>
+<ol start="4" type="1">
+<li><p>AC Peak EM analysis - Voltus-Fi</p>
+<p>The available options within the EM current analysis section in the
+EMIR Analysis Setup form are:</p>
+<p><code>max / avg / avgabs / rms.</code></p>
+<p>In order to enable the <em>AC Peak based information</em> when
+loading the EM results, <strong>both max and avg</strong> should be
+selected when setting up the EMIR Analysis Setup.</p>
+<p>With this configuration, the AC Peak option becomes available and can
+be used.</p></li>
+<li><p>How to print average, rms, and peak current of <strong>device
+tap</strong> in Spectre/Voltus FI EMIR analysis</p>
+<p>The following option enables you to save the average, rms, and peak
+tap currents in the <strong>emir0bin</strong> file and report it in the
+<strong>input.rpt_tapi</strong> file.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">solver report_tapi=true</span><br></pre></td></tr></table></figure>
+<p>Add this option in <strong>emir.conf</strong> to enable the reporting
+of tap current after the Spectre EMIR simulation. The input.rpt_tapi
+file will be saved in the psf/raw directory.</p>
+<p><strong>Note:</strong> This feature is supported in SPECTRE20.1 ISR14
+and later versions.</p></li>
+<li><p>emir.conf file</p>
+<p><code>emir.conf</code> file is generated automaticaly after configure
+<em>EM/IR Analysis</em> in ADE, which is in <em>netlist</em>
+directory.</p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421182327011.png"
+alt="image-20220421182327011" /></p></li>
+<li><p>Setting default path for EM rules file in APS EMIR analysis</p>
+<ul>
+<li><p>set the following environment variable in your terminal</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv EMDATAFILE &lt; path to EM rules file&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>or set in <code>.cdsinit</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setShellEnvVar(&quot;EMDATAFILE=&lt;path to EM rules file&gt;&quot;)</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><p>Print node names and length associated with parasitic resistors
+in EM report file</p>
+<blockquote>
+<p><code>export CDS_MMSIM_VOLTUSFI_ROOT=$CDSHOME</code></p>
+</blockquote>
+<ul>
+<li><p>Printing the parasitic resistor length in the EM report</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportLength=true</span><br></pre></td></tr></table></figure></li>
+<li><p>Printing nodes that are associated with the parasitic
+resistor</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportNodeName=true</span><br></pre></td></tr></table></figure>
+<p>Once these are enabled, you will have the <strong>Length</strong>,
+<strong>Node_1</strong>, and <strong>Node_2</strong> columns printed in
+the EM report file, as shown below:</p>
+<p><img src="/2022/02/23/emir-voltus-fi/servlet.jpeg"
+alt="servlet" /></p></li>
+</ul></li>
+<li><p>Is it possible to run RMS IR Drop analysis using Voltus-Fi?</p>
+<p>Typically, in a simulation, Power/Ground nets are always biased with
+a <strong>constant DC source</strong>. Hence, at present, Voltus-Fi only
+supports <strong>Average and Maximum (Peak) IR Drop</strong>
+analysis.</p>
+<p>For a net to have data for IR analysis(vmax/vavg), the net/node must
+be connected to a <strong>DC vsource or a vsource which is constant
+within the emir time window</strong>.</p></li>
+<li><p>Can we change the time window of EM computation after the
+simulation completed ?</p>
+<p>It is not possible to modify the EM time window without re-running
+the full simulation.</p>
+<p>However you can specify several time window in the emir conf file for
+instance for 2 time window [0 to 10n] and [10n 20n]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time window=[0 10n 10n 20n]</span><br></pre></td></tr></table></figure>
+<p>In that case it will create 2 <strong>emir_bin</strong> files and
+then 2 different em report files according to the 2 different time
+windows.</p></li>
+<li><p>How to print segment_W values being used to compute EM limits</p>
+<p>You can use the following option to print <code>segment_W</code> to
+the report:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportSegmentWidth=[true]</span><br></pre></td></tr></table></figure>
+<p>This would print a <code>Segment_w</code> column in the report
+containing the segment width values used for computing the limit:</p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 5%" />
+<col style="width: 3%" />
+<col style="width: 7%" />
+<col style="width: 3%" />
+<col style="width: 6%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 7%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 11%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pass/Fail %</th>
+<th>Resistor</th>
+<th>layer</th>
+<th>Current</th>
+<th>Width</th>
+<th>PathLength</th>
+<th>I limit</th>
+<th>X1</th>
+<th>Y1</th>
+<th>X2</th>
+<th>Y2</th>
+<th>J/JMAX</th>
+<th>Res</th>
+<th>ViaArea</th>
+<th>No of needed vias</th>
+<th>width/#via</th>
+<th>J limit</th>
+<th>Segment_w</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td>(mA)</td>
+<td>(um)</td>
+<td>(um)</td>
+<td></td>
+<td>(um)</td>
+<td>(um)</td>
+<td>(um)</td>
+<td>(um)</td>
+<td></td>
+<td></td>
+<td>(nm^2)</td>
+<td></td>
+<td>(um/#)</td>
+<td>(A/um)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>pass-100.0</td>
+<td>Rj3292</td>
+<td>Met1</td>
+<td>9.02376e-12</td>
+<td>0.1</td>
+<td>42.72</td>
+<td>1.10067</td>
+<td>0.350</td>
+<td>11.568</td>
+<td>0.350</td>
+<td>11.376</td>
+<td>8.19843e-12</td>
+<td>0.7382</td>
+<td>NA</td>
+<td>NA</td>
+<td>0.0001</td>
+<td>0.0110067</td>
+<td>0.1</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>pathLength vs Length in EM report file</p>
+<ul>
+<li><p>Length: parasitic resistor length, which is set by
+<code>emirutil reportLength=true</code></p></li>
+<li><p>pathlength: Blech length is also known as "Short length" or "Path
+length", and can be explained as : The <strong>longest and continuous
+centerline path from edge to edge</strong> among the connected wire
+shapes on the <strong>same metal layer</strong>.</p>
+<ul>
+<li>For all resistors falling on this shape, <strong>same
+pathLength</strong> is reported.</li>
+<li>After the longest path in shape has been determined the tool applies
+the same blech length to all the resistor falling on that shape.</li>
+<li>This resistor length is <strong>NOT</strong> used in EM analysis
+because EM rules consider Blech length of the resistor.</li>
+</ul>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421001806689.png"
+alt="image-20220421001806689" /></p>
+<blockquote>
+<p>where W is the wire width and L is the Blech length.</p>
+</blockquote>
+<ul>
+<li><p>By default the tool will <strong>sum all branches of a given
+metal layer</strong>. In other words the path length that will be used
+to look up the EM density limit is :</p>
+<p>Bl = $l(R1) + $l(R2) + $l(R3) + $l(R4) + $l(R5) + $l(R6) + $l(R7) +
+$l(R8)</p>
+<p><img src="/2022/02/23/emir-voltus-fi/servlet-16504730496591.jpeg"
+alt="servlet" /></p></li>
+</ul></li>
+</ul></li>
+<li><p>How to enable EMIR analysis in PSS simualtion ?</p>
+<p>To enable EMIR in PSS, you have to enable DC and/or Tran simulation
+simultaneously. Two or more binary results file should be generated and
+select the file based file name or configure text file in
+<code>psf</code> directory.</p>
+<p>(given ICADVM 18.1 ISR11, Spectre 19.1 ISR6)</p></li>
+</ol>
+<h2 id="reference">reference</h2>
+<p>AC Peak Analysis Using IPWC Rapid Adoption Kit (RAK) Product Version:
+IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020</p>
+<p>Posser, Gracieli &amp; Sapatnekar, Sachin &amp; Reis, Ricardo.
+(2017). Electromigration Inside Logic Cells.
+10.1007/978-3-319-48899-8.</p>
+<p>A. B. Kahng, S. Nath and T. S. Rosing, "On potential design impacts
+of electromigration awareness," 2013 18th Asia and South Pacific Design
+Automation Conference (ASP-DAC), 2013, pp. 527-532, doi:
+10.1109/ASPDAC.2013.6509650.</p>
+<p>Kumar, Neeraj and Mohammad S. Hashmi. “Study, analysis and modeling
+of electromigration in SRAMs.” (2014).</p>
+<p>N. S. Nagaraj, F. Cano, H. Haznedar and D. Young, "A practical
+approach to static signal electromigration analysis," Proceedings 1998
+Design and Automation Conference. 35th DAC. (Cat. No.98CH36175), 1998,
+pp. 572-577, doi: 10.1109/DAC.1998.724536.</p>
+<p>Blaauw, David &amp; Oh, Chanhee &amp; Zolotov, Vladimir &amp;
+Dasgupta, Aurobindo. (2003). Static electromigration analysis for
+on-chip signal interconnects. Computer-Aided Design of Integrated
+Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
+10.1109/TCAD.2002.805728.</p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>EMX &amp; PeakView</title>
     <url>/2022/03/15/emx-peakview/</url>
     <content><![CDATA[<h2 id="lvs-check">LVS check</h2>
@@ -5616,445 +6055,6 @@ href="Article%20(20493671)%20Title:%20Tips%20on%20Specifying%20Ports%20in%20EMX%
 simulations [[link](Article (20496398) Title: Using 'Cadence pins' as
 ports with access direction in EMX simulations URL:
 https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>EMIR via Voltus-Fi</title>
-    <url>/2022/02/23/emir-voltus-fi/</url>
-    <content><![CDATA[<h2 id="general-terminology">general terminology</h2>
-<h3 id="dc-related">DC related</h3>
-<p><strong>Imax</strong> in T*'s DRC document is the maximum allowed
-<strong>DC current</strong>, which depends on <em>Length and Width</em>
-only</p>
-<p><strong>Iavg</strong> is the average value of the current, which is
-the effective <em>DC current</em>. Therefore, <strong>Iavg
-rules</strong> are <strong>identical</strong> to <strong>Imax</strong>
-rules <span class="math display">\[
-I_{\text{avg}}=\frac{\int_0^\tau I(t)dt}{\tau}
-\]</span> Similarly, <strong>Iabsavg rules</strong> are
-<strong>identical</strong> to <strong>Imax</strong> rules, too <span
-class="math display">\[
-I_{\text{AbsAvg}}=\frac{\int_0^\tau |I(t)|dt}{\tau}
-\]</span></p>
-<h3 id="rms">rms</h3>
-<p><strong>Irms</strong> is the root-mean-square of the current through
-a metal line, which depends <strong>w(in um)</strong>, the <em>drawn
-width</em> of the metal line and <span class="math inline">\(\Delta
-T\)</span>, the temperature rise due to Joule heating. <span
-class="math display">\[
-I_{\text{rms}}=\left[\frac{\int_0^\tau I(t)^2dt}{\tau} \right]^{1/2}
-\]</span></p>
-<h3 id="peak-current">peak current</h3>
-<p><strong>Ipeak</strong> in T*'s DRC document is the current at which a
-metal line undergoes excessive Joule heating and can begin to melt.
-<strong>Ipeak</strong> is corresponding to
-<code>EM Current Analysis: max</code> in Voltus-Fi Analysis Setup <span
-class="math display">\[
-I_{\text{peak}}=\max(|I(t)|)
-\]</span> The limit for the peak current is <span
-class="math display">\[
-I_{\text{peak,limit}}=\frac{I_{\text{peak\_DC}}}{\sqrt{r
-} }
-\]</span> where <strong>r</strong> is the duty ratio</p>
-<p>The relationship between <strong>Ipeak</strong> and
-<strong>Ipeak_DC</strong> is merged in DRC document so that there is
-only <strong>Ipeak</strong> equation in document</p>
-<blockquote>
-<p><span class="math inline">\(I_{\text{peak,limit}}\)</span> depends on
-<span class="math inline">\(t_D\)</span>, r, width and length</p>
-</blockquote>
-<p><span class="math display">\[
-r=\frac{t_D}{\tau}
-\]</span></p>
-<p>where <span class="math inline">\(t_D\)</span> is equivalent duration
-<span class="math display">\[
-t_D =\frac{\int_0^\tau |I(t)|dt}{I_{\text{peak}}}
-\]</span> or <span class="math display">\[
-r=\frac{I_{\text{AbsAvg}}}{I_{\text{peak}}}
-\]</span> <img
-src="/2022/02/23/emir-voltus-fi/image-20220729023550943.png"
-alt="image-20220729023550943" /></p>
-<p>where the drawn width is 1um, r is 0.1</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023722754.png"
-alt="image-20220729023722754" /></p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023319156.png"
-alt="image-20220729023319156" /> <span class="math display">\[
-9.37*(1-0.004)/\sqrt0.1 = 29.512
-\]</span></p>
-<h3 id="acpeakpwc">acpeak/pwc</h3>
-<p>It's same with <strong>max</strong> EM Current Analysis in
-Voltus-Fi</p>
-<h3 id="dynamicacpeak"><code>dynamicACPeak</code></h3>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023154009.png"
-alt="image-20220729023154009" /></p>
-<p>This option affect how duty ratio r is computed in <code>max</code>
-and <code>acpeak/pwc</code> EM current Analysis</p>
-<p>When the <code>dynamicACPeak</code> variable is set to
-<strong>true</strong> or <strong>multiPeak</strong> <span
-class="math display">\[
-r=\frac{T_d}{T_{\text{total}}}
-\]</span></p>
-<p>​ where <span class="math inline">\(T_{\text{total}} = \text{EMIR
-time window}\)</span></p>
-<p>​ <span class="math inline">\(T_d\)</span> = the time duration in
-microsecond of the total "On Time" period based on <code>IPWC</code></p>
-<blockquote>
-<p>Pulse-Wise Constant EM current calculation (IPWC)</p>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729032235649.png"
-alt="image-20220729032235649" /></p>
-<p>where <strong>Tau</strong> is <span
-class="math inline">\(T_d\)</span> in above formula</p>
-<blockquote>
-<p>!!! It seems that t*'s PDK don't support
-<code>dynamicACPeak=true</code></p>
-</blockquote>
-<h2 id="ir-drop-filter-layers">IR drop filter layers</h2>
-<p>EM techfile (qrcTechFile) may take diffusion contact
-(<em>n_odtap</em>, <em>p_odtap</em> in DSPF file) into account during IR
-drop analysis. And these segment often dominate IR drop, but we as IC
-designer can NOT improve them. In general, the IR drop to M1 layer is
-enough and feasible.</p>
-<h2 id="regular-analysis-statements-in-emir-configuration">Regular
-analysis statements in emir configuration</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net name=[I0.vdd I0.vss] analysis=[vmax vavg]</span><br><span class="line">net name=[I0.*] analysis =[imax ivavg irms]</span><br></pre></td></tr></table></figure>
-<h2 id="emirreport-command">emirreport command</h2>
-<p>Creating reports for specific nets after simulation using
-<code>emirreport</code></p>
-<p>Create a new config file as shown below:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">** test.conf**</span><br><span class="line">net name=[I1.VDD I1.VSS] analysis=[iavg]</span><br><span class="line">net name=[I1.VBIAS] analysis=[imax]</span><br></pre></td></tr></table></figure>
-<p>Run <code>emirreport</code> on the command line using the
-<strong>emirdatabase</strong> (emir*.bin) and <strong>test.conf</strong>
-created above in</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">% emirreport -64 -c test.conf -db &lt;emirdatabase&gt; -outdir newreport</span><br></pre></td></tr></table></figure>
-<h2 id="database">database</h2>
-<h3 id="simulation-result">simulation result</h3>
-<ul>
-<li><code>input.emir0_bin</code>: The first EMIR Analysis which is DC or
-Transient, which depends on <em>Analyses</em> order</li>
-</ul>
-<blockquote>
-<ul>
-<li><p><code>input_tran.emir0_bin</code>: EMIR Analysis in Transient
-simulation</p></li>
-<li><p><code>input_dcOp.emir0_bin</code>: EMIR Analysis in DC
-simulation</p></li>
-</ul>
-</blockquote>
-<p>For example</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203011393.png"
-alt="image-20220421203011393" /></p>
-<p>Two results are generated <code>input.emir0_bin</code> and
-<code>input_dcOp.emir0_bin</code> and their reports respectly</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203657123.png"
-alt="image-20220421203657123" /></p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203554147.png"
-alt="image-20220421203554147" /></p>
-<h2 id="fix-electromigration">Fix Electromigration</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>wider wire</th>
-<th>downsize drivers</th>
-<th>decrease fanout</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>RJ JMAX</td>
-<td></td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>JAVG</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>JABSAVG</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>JACPEAK</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>JACRMS</td>
-<td>✓</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<ul>
-<li><p>Iavg</p>
-<p>The average value of the current, which is the effective DC
-current</p></li>
-<li><p>Irms</p>
-<p>Irms rule relates to the heat or Joule-heating of metal
-lines</p></li>
-<li><p>Ipeak</p>
-<p>The main goal of the Ipeak limits is to ensure that no thermal
-breakdown could occur on single overshoot events. If the signal may not
-have a high current density but if it has a very large peak current
-density, then, local melting will happen and cause failures</p></li>
-</ul>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220503205418275.png"
-alt="image-20220503205418275" /></p>
-<h2 id="qa">QA</h2>
-<ol type="1">
-<li><p>Q. Why “length” column in EM results form doesn’t show extracted
-length, it shows “NA”.</p>
-<p>A. Voltus-Fi reports the “length” column only when length rules are
-present in the emDataFile.</p></li>
-<li><p>Seeing different port currents with and without emir simulations
-for same dspf included in EMIR Direct method using dspf_include.</p>
-<p>Split Pins (*|P) in DSPF are only shorted in the EMIR flow not in the
-regular spectre flow. Islands patching is only performed in EMIR
-only</p></li>
-<li><p>Setting temperature for EM analysis</p></li>
-</ol>
-<p>By Default, Voltus-FI and VPS pick up the current density limit for
-<strong>temperature at which simulation has been performed</strong>.</p>
-<blockquote>
-<p>By the way, <code>Design Variables</code> - <em>temperature</em> will
-override the temperature in <em>Setup toolbar</em> which is gray in ADE
-Explorer</p>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421184141363.png"
-alt="image-20220421184141363" /></p>
-<ol start="4" type="1">
-<li><p>AC Peak EM analysis - Voltus-Fi</p>
-<p>The available options within the EM current analysis section in the
-EMIR Analysis Setup form are:</p>
-<p><code>max / avg / avgabs / rms.</code></p>
-<p>In order to enable the <em>AC Peak based information</em> when
-loading the EM results, <strong>both max and avg</strong> should be
-selected when setting up the EMIR Analysis Setup.</p>
-<p>With this configuration, the AC Peak option becomes available and can
-be used.</p></li>
-<li><p>How to print average, rms, and peak current of <strong>device
-tap</strong> in Spectre/Voltus FI EMIR analysis</p>
-<p>The following option enables you to save the average, rms, and peak
-tap currents in the <strong>emir0bin</strong> file and report it in the
-<strong>input.rpt_tapi</strong> file.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">solver report_tapi=true</span><br></pre></td></tr></table></figure>
-<p>Add this option in <strong>emir.conf</strong> to enable the reporting
-of tap current after the Spectre EMIR simulation. The input.rpt_tapi
-file will be saved in the psf/raw directory.</p>
-<p><strong>Note:</strong> This feature is supported in SPECTRE20.1 ISR14
-and later versions.</p></li>
-<li><p>emir.conf file</p>
-<p><code>emir.conf</code> file is generated automaticaly after configure
-<em>EM/IR Analysis</em> in ADE, which is in <em>netlist</em>
-directory.</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421182327011.png"
-alt="image-20220421182327011" /></p></li>
-<li><p>Setting default path for EM rules file in APS EMIR analysis</p>
-<ul>
-<li><p>set the following environment variable in your terminal</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv EMDATAFILE &lt; path to EM rules file&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>or set in <code>.cdsinit</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setShellEnvVar(&quot;EMDATAFILE=&lt;path to EM rules file&gt;&quot;)</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li><p>Print node names and length associated with parasitic resistors
-in EM report file</p>
-<blockquote>
-<p><code>export CDS_MMSIM_VOLTUSFI_ROOT=$CDSHOME</code></p>
-</blockquote>
-<ul>
-<li><p>Printing the parasitic resistor length in the EM report</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportLength=true</span><br></pre></td></tr></table></figure></li>
-<li><p>Printing nodes that are associated with the parasitic
-resistor</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportNodeName=true</span><br></pre></td></tr></table></figure>
-<p>Once these are enabled, you will have the <strong>Length</strong>,
-<strong>Node_1</strong>, and <strong>Node_2</strong> columns printed in
-the EM report file, as shown below:</p>
-<p><img src="/2022/02/23/emir-voltus-fi/servlet.jpeg"
-alt="servlet" /></p></li>
-</ul></li>
-<li><p>Is it possible to run RMS IR Drop analysis using Voltus-Fi?</p>
-<p>Typically, in a simulation, Power/Ground nets are always biased with
-a <strong>constant DC source</strong>. Hence, at present, Voltus-Fi only
-supports <strong>Average and Maximum (Peak) IR Drop</strong>
-analysis.</p>
-<p>For a net to have data for IR analysis(vmax/vavg), the net/node must
-be connected to a <strong>DC vsource or a vsource which is constant
-within the emir time window</strong>.</p></li>
-<li><p>Can we change the time window of EM computation after the
-simulation completed ?</p>
-<p>It is not possible to modify the EM time window without re-running
-the full simulation.</p>
-<p>However you can specify several time window in the emir conf file for
-instance for 2 time window [0 to 10n] and [10n 20n]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time window=[0 10n 10n 20n]</span><br></pre></td></tr></table></figure>
-<p>In that case it will create 2 <strong>emir_bin</strong> files and
-then 2 different em report files according to the 2 different time
-windows.</p></li>
-<li><p>How to print segment_W values being used to compute EM limits</p>
-<p>You can use the following option to print <code>segment_W</code> to
-the report:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportSegmentWidth=[true]</span><br></pre></td></tr></table></figure>
-<p>This would print a <code>Segment_w</code> column in the report
-containing the segment width values used for computing the limit:</p>
-<table>
-<colgroup>
-<col style="width: 7%" />
-<col style="width: 5%" />
-<col style="width: 3%" />
-<col style="width: 7%" />
-<col style="width: 3%" />
-<col style="width: 6%" />
-<col style="width: 4%" />
-<col style="width: 3%" />
-<col style="width: 4%" />
-<col style="width: 3%" />
-<col style="width: 4%" />
-<col style="width: 7%" />
-<col style="width: 4%" />
-<col style="width: 4%" />
-<col style="width: 11%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Pass/Fail %</th>
-<th>Resistor</th>
-<th>layer</th>
-<th>Current</th>
-<th>Width</th>
-<th>PathLength</th>
-<th>I limit</th>
-<th>X1</th>
-<th>Y1</th>
-<th>X2</th>
-<th>Y2</th>
-<th>J/JMAX</th>
-<th>Res</th>
-<th>ViaArea</th>
-<th>No of needed vias</th>
-<th>width/#via</th>
-<th>J limit</th>
-<th>Segment_w</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td>(mA)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td></td>
-<td>(um)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td></td>
-<td></td>
-<td>(nm^2)</td>
-<td></td>
-<td>(um/#)</td>
-<td>(A/um)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>pass-100.0</td>
-<td>Rj3292</td>
-<td>Met1</td>
-<td>9.02376e-12</td>
-<td>0.1</td>
-<td>42.72</td>
-<td>1.10067</td>
-<td>0.350</td>
-<td>11.568</td>
-<td>0.350</td>
-<td>11.376</td>
-<td>8.19843e-12</td>
-<td>0.7382</td>
-<td>NA</td>
-<td>NA</td>
-<td>0.0001</td>
-<td>0.0110067</td>
-<td>0.1</td>
-</tr>
-</tbody>
-</table></li>
-<li><p>pathLength vs Length in EM report file</p>
-<ul>
-<li><p>Length: parasitic resistor length, which is set by
-<code>emirutil reportLength=true</code></p></li>
-<li><p>pathlength: Blech length is also known as "Short length" or "Path
-length", and can be explained as : The <strong>longest and continuous
-centerline path from edge to edge</strong> among the connected wire
-shapes on the <strong>same metal layer</strong>.</p>
-<ul>
-<li>For all resistors falling on this shape, <strong>same
-pathLength</strong> is reported.</li>
-<li>After the longest path in shape has been determined the tool applies
-the same blech length to all the resistor falling on that shape.</li>
-<li>This resistor length is <strong>NOT</strong> used in EM analysis
-because EM rules consider Blech length of the resistor.</li>
-</ul>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421001806689.png"
-alt="image-20220421001806689" /></p>
-<blockquote>
-<p>where W is the wire width and L is the Blech length.</p>
-</blockquote>
-<ul>
-<li><p>By default the tool will <strong>sum all branches of a given
-metal layer</strong>. In other words the path length that will be used
-to look up the EM density limit is :</p>
-<p>Bl = $l(R1) + $l(R2) + $l(R3) + $l(R4) + $l(R5) + $l(R6) + $l(R7) +
-$l(R8)</p>
-<p><img src="/2022/02/23/emir-voltus-fi/servlet-16504730496591.jpeg"
-alt="servlet" /></p></li>
-</ul></li>
-</ul></li>
-<li><p>How to enable EMIR analysis in PSS simualtion ?</p>
-<p>To enable EMIR in PSS, you have to enable DC and/or Tran simulation
-simultaneously. Two or more binary results file should be generated and
-select the file based file name or configure text file in
-<code>psf</code> directory.</p>
-<p>(given ICADVM 18.1 ISR11, Spectre 19.1 ISR6)</p></li>
-</ol>
-<h2 id="reference">reference</h2>
-<p>AC Peak Analysis Using IPWC Rapid Adoption Kit (RAK) Product Version:
-IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020</p>
-<p>Posser, Gracieli &amp; Sapatnekar, Sachin &amp; Reis, Ricardo.
-(2017). Electromigration Inside Logic Cells.
-10.1007/978-3-319-48899-8.</p>
-<p>A. B. Kahng, S. Nath and T. S. Rosing, "On potential design impacts
-of electromigration awareness," 2013 18th Asia and South Pacific Design
-Automation Conference (ASP-DAC), 2013, pp. 527-532, doi:
-10.1109/ASPDAC.2013.6509650.</p>
-<p>Kumar, Neeraj and Mohammad S. Hashmi. “Study, analysis and modeling
-of electromigration in SRAMs.” (2014).</p>
-<p>N. S. Nagaraj, F. Cano, H. Haznedar and D. Young, "A practical
-approach to static signal electromigration analysis," Proceedings 1998
-Design and Automation Conference. 35th DAC. (Cat. No.98CH36175), 1998,
-pp. 572-577, doi: 10.1109/DAC.1998.724536.</p>
-<p>Blaauw, David &amp; Oh, Chanhee &amp; Zolotov, Vladimir &amp;
-Dasgupta, Aurobindo. (2003). Static electromigration analysis for
-on-chip signal interconnects. Computer-Aided Design of Integrated
-Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
-10.1109/TCAD.2002.805728.</p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -7789,6 +7789,69 @@ alt="pma_dig_bumps.drawio" /></p>
       </categories>
   </entry>
   <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
     <content><![CDATA[<h2 id="rc-charge-and-discharge">RC charge and discharge</h2>
@@ -8537,6 +8600,13 @@ class="math inline">\(I_{\Delta_{V_{TH}}}+I_{\Delta_{WL}}/\sqrt{2}\)</span></td>
 alt="image-20221003001056211" /></p>
 <p><img src="/2023/01/01/insight/image-20221002215942456.png"
 alt="image-20221002215942456" /></p>
+<h2 id="conversion-between-the-s--and-z-domains">Conversion Between the
+<span class="math inline">\(s\)</span>- and <span
+class="math inline">\(z\)</span>-Domains</h2>
+<p><img src="/2023/01/01/insight/image-20240429220303281.png"
+alt="image-20240429220303281" /></p>
+<p><img src="/2023/01/01/insight/image-20240429215455332.png"
+alt="image-20240429215455332" /></p>
 <h2 id="reference">reference</h2>
 <p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
 small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
@@ -8573,69 +8643,6 @@ href="https://www.uio.no/studier/emner/matnat/ifi/INF4420/v13/undervisningsmater
 <p>chembiyan T. OC Lecture 10: A very basic introduction to switched
 capacitor circuits [<a
 href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -10338,8 +10345,7 @@ X(e^{j\omega}) = \sum_{n=-\infty}^{\infty}x[n]e^{-j\omega n}
 \]</span> <img
 src="/2024/04/27/noise-folding/image-20240428150020709.png"
 alt="image-20240428150020709" /></p>
-<p>where <span class="math inline">\(x[n] = x_c(nT)\)</span> and <span
-class="math inline">\(\omega = \Omega \cdot T\)</span></p>
+<p>where <span class="math inline">\(x[n] = x_c(nT)\)</span></p>
 <h2 id="fourier-analysis-of-stationary-random-signals">Fourier Analysis
 of Stationary Random Signals</h2>
 <blockquote>
@@ -11641,32 +11647,6 @@ href="https://benchugg.com/research_notes/sde_ito_lemma/">https://benchugg.com/r
       </categories>
   </entry>
   <entry>
-    <title>PERC</title>
-    <url>/2023/11/04/perc/</url>
-    <content><![CDATA[<ul>
-<li><p>CD: current density checks</p></li>
-<li><p>P2P: point to point resistance checks</p></li>
-<li><p>LDL: logic driven layout checks, latch up related</p></li>
-<li><p>TOPO: topology, circuit connection and device size
-checks</p></li>
-</ul>
-<blockquote>
-<p>database</p>
-<ul>
-<li><p>CD, P2P, LDL : dfmdb</p></li>
-<li><p>TOPO: svdb</p></li>
-</ul>
-</blockquote>
-<h2 id="references">references</h2>
-<p>Frank Feng. New Approach For Full Chip Electrical Reliability
-Verification [<a
-href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMFlXTm9MelV3TDNCMFlWOHhOamN6TnpWZk5qYzFNVGd6TjE4NE5ESXlOQzV3WkdZPQ==&amp;fname=1454FCFGGCPO45YTNOJCJGJGMKPKHC3534FG35YSA1GDXWFC34QOA0OOQOOKZWCDSSPOGDMP20NO4124YWB4B4LKYSMOQL0400YT34PKUWNK20FG00POUSXXYWXWOO15JCLKSWXWDCOKHG2050JCQKHCXTNPNOVSUSB4JCVW20HGJGTTWW40ZXIH5004A4GDMKJG5020OPMOJDLOML51NOFCSWROB454DGKKFCSTGCDCTXNPA4TWRKGDWW30CGKKDGB0YWLKIH05ML44WSFGQOTWOOECYWGHRKCCDD15A4XSFC14FCJGOO25WXROQLNK00JD31PKWSEC50A4SSOKHHTT">pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Parallel Compensation in Two stage amplifier</title>
     <url>/2022/03/07/parallel-compensation/</url>
     <content><![CDATA[<blockquote>
@@ -11786,6 +11766,32 @@ Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
 <p>J. H. Huijsing, 6.2.2.1 Two-GA-stage Parallel Compensation (PC),
 "Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer,
 2017"</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>PERC</title>
+    <url>/2023/11/04/perc/</url>
+    <content><![CDATA[<ul>
+<li><p>CD: current density checks</p></li>
+<li><p>P2P: point to point resistance checks</p></li>
+<li><p>LDL: logic driven layout checks, latch up related</p></li>
+<li><p>TOPO: topology, circuit connection and device size
+checks</p></li>
+</ul>
+<blockquote>
+<p>database</p>
+<ul>
+<li><p>CD, P2P, LDL : dfmdb</p></li>
+<li><p>TOPO: svdb</p></li>
+</ul>
+</blockquote>
+<h2 id="references">references</h2>
+<p>Frank Feng. New Approach For Full Chip Electrical Reliability
+Verification [<a
+href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMFlXTm9MelV3TDNCMFlWOHhOamN6TnpWZk5qYzFNVGd6TjE4NE5ESXlOQzV3WkdZPQ==&amp;fname=1454FCFGGCPO45YTNOJCJGJGMKPKHC3534FG35YSA1GDXWFC34QOA0OOQOOKZWCDSSPOGDMP20NO4124YWB4B4LKYSMOQL0400YT34PKUWNK20FG00POUSXXYWXWOO15JCLKSWXWDCOKHG2050JCQKHCXTNPNOVSUSB4JCVW20HGJGTTWW40ZXIH5004A4GDMKJG5020OPMOJDLOML51NOFCSWROB454DGKKFCSTGCDCTXNPA4TWRKGDWW30CGKKDGB0YWLKIH05ML44WSFGQOTWOOECYWGHRKCCDD15A4XSFC14FCJGOO25WXROQLNK00JD31PKWSEC50A4SSOKHHTT">pdf</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -13106,26 +13112,6 @@ Digital Domain</h4>
       </categories>
   </entry>
   <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Power Spectra and Power Spectral Densities</title>
     <url>/2022/04/18/ps-psd/</url>
     <content><![CDATA[<p>One will see the following phenomena:</p>
@@ -13561,6 +13547,26 @@ Press. doi:10.1017/CBO9780511835261</p>
       </categories>
   </entry>
   <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Random Signals</title>
     <url>/2023/11/10/random/</url>
     <content><![CDATA[<h2 id="random-processes">Random Processes</h2>
@@ -13731,6 +13737,81 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
       </categories>
   </entry>
   <entry>
+    <title>Relative Sensitivity</title>
+    <url>/2023/07/12/relative-sensitivity/</url>
+    <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
+the total resistance) is function of <span
+class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
+be expressed as</p>
+<p><span class="math display">\[\begin{align}
+dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
+&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
+\frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>Then, we obtain relative variation <span
+class="math display">\[\begin{align}
+\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
+x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
+&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>⭐ where <span class="math inline">\(S_{x_n}^T=\frac{\partial
+T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p><strong>relative sensitivity</strong> connect <span
+class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
+variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
+</blockquote>
+<p>And <span class="math inline">\(dT\)</span> can be expressed as <span
+class="math display">\[
+dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N
+x_n&#39;\cdot \frac{dx_n}{x_n}
+\]</span> ⭐ where <span class="math inline">\(x_n&#39;= S_{x_n}^T
+T\)</span> is the contribution of <span
+class="math inline">\(x_n\)</span> in <span
+class="math inline">\(T\)</span></p>
+<p>⭐ For parallel or series resistors, it can prove <span
+class="math inline">\(\sum_{n=1}^N S_{x_n}^T = 1\)</span> and $ _{n=1}^N
+x_n'=T$</p>
+<hr />
+<p><img src="/2023/07/12/relative-sensitivity/parallel_pgx.drawio.svg"
+alt="parallel_pgx.drawio" /></p>
+<p>Here <span class="math inline">\(T= R_1 \parallel R_2 =
+\frac{R_1R_2}{R_1+R_2}\)</span>, and <span
+class="math inline">\(T|_{R_1=8000, R_2=2000} = 1600\)</span></p>
+<p>We obtain <em>relative sensitivity:</em> <span
+class="math display">\[\begin{align}
+S_{R_1}^T &amp; = \frac{R_2}{R_1+R_2} \\
+S_{R_2}^T &amp; = \frac{R_1}{R_1+R_2}
+\end{align}\]</span></p>
+<p>The contribution of <span class="math inline">\(R_1\)</span> and
+<span class="math inline">\(R_2\)</span> to <span
+class="math inline">\(T\)</span> <span
+class="math display">\[\begin{align}
+R_1&#39;  &amp;= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
+R_2&#39;  &amp;= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
+\end{align}\]</span></p>
+<h2 id="scholar">scholar</h2>
+<p><strong>Normalized sensitivity</strong> captures <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p>change in objective per change in design variable</p>
+</blockquote>
+<p><img src="/2023/07/12/relative-sensitivity/normalized.PNG"
+alt="Normalized sensitivity" /></p>
+<h2 id="reference">reference</h2>
+<p>Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and
+Sensitivity Analysis [<a
+href="https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf">pdf</a>]</p>
+<p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
+Sensitivity and noise analyses [<a
+href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Cadence&#39;s reg_verifier</title>
     <url>/2022/04/04/reg-verifier/</url>
     <content><![CDATA[<h2 id="generation">Generation</h2>
@@ -13895,81 +13976,6 @@ alt="image-20220401011543866" /></p>
 ]]></content>
       <categories>
         <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Relative Sensitivity</title>
-    <url>/2023/07/12/relative-sensitivity/</url>
-    <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
-the total resistance) is function of <span
-class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
-be expressed as</p>
-<p><span class="math display">\[\begin{align}
-dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
-&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
-\frac{dx_n}{x_n}
-\end{align}\]</span></p>
-<p>Then, we obtain relative variation <span
-class="math display">\[\begin{align}
-\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
-x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
-&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
-\end{align}\]</span></p>
-<p>⭐ where <span class="math inline">\(S_{x_n}^T=\frac{\partial
-T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
-sensitivity</strong></p>
-<blockquote>
-<p><strong>relative sensitivity</strong> connect <span
-class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
-variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
-</blockquote>
-<p>And <span class="math inline">\(dT\)</span> can be expressed as <span
-class="math display">\[
-dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N
-x_n&#39;\cdot \frac{dx_n}{x_n}
-\]</span> ⭐ where <span class="math inline">\(x_n&#39;= S_{x_n}^T
-T\)</span> is the contribution of <span
-class="math inline">\(x_n\)</span> in <span
-class="math inline">\(T\)</span></p>
-<p>⭐ For parallel or series resistors, it can prove <span
-class="math inline">\(\sum_{n=1}^N S_{x_n}^T = 1\)</span> and $ _{n=1}^N
-x_n'=T$</p>
-<hr />
-<p><img src="/2023/07/12/relative-sensitivity/parallel_pgx.drawio.svg"
-alt="parallel_pgx.drawio" /></p>
-<p>Here <span class="math inline">\(T= R_1 \parallel R_2 =
-\frac{R_1R_2}{R_1+R_2}\)</span>, and <span
-class="math inline">\(T|_{R_1=8000, R_2=2000} = 1600\)</span></p>
-<p>We obtain <em>relative sensitivity:</em> <span
-class="math display">\[\begin{align}
-S_{R_1}^T &amp; = \frac{R_2}{R_1+R_2} \\
-S_{R_2}^T &amp; = \frac{R_1}{R_1+R_2}
-\end{align}\]</span></p>
-<p>The contribution of <span class="math inline">\(R_1\)</span> and
-<span class="math inline">\(R_2\)</span> to <span
-class="math inline">\(T\)</span> <span
-class="math display">\[\begin{align}
-R_1&#39;  &amp;= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
-R_2&#39;  &amp;= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
-\end{align}\]</span></p>
-<h2 id="scholar">scholar</h2>
-<p><strong>Normalized sensitivity</strong> captures <strong>relative
-sensitivity</strong></p>
-<blockquote>
-<p>change in objective per change in design variable</p>
-</blockquote>
-<p><img src="/2023/07/12/relative-sensitivity/normalized.PNG"
-alt="Normalized sensitivity" /></p>
-<h2 id="reference">reference</h2>
-<p>Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and
-Sensitivity Analysis [<a
-href="https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf">pdf</a>]</p>
-<p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
-Sensitivity and noise analyses [<a
-href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -15045,6 +15051,23 @@ tools regarding on analog modeling,validation, and generation</a></p>
       </categories>
   </entry>
   <entry>
+    <title>How to squash all git commits into one?</title>
+    <url>/2023/08/10/squash-all-commits/</url>
+    <content><![CDATA[<p><a
+href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
+<p>As of <a
+href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
+1.6.2</a>, you can use <code>git rebase --root -i</code></p>
+<p>For each commit except the first, change <code>pick</code> to
+<code>squash</code>.</p>
+<p>this works find, but I had to do a forced push. be careful!
+<code>git push -f</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>maximum oscillation frequency of multi-paths ring oscillator</title>
     <url>/2022/03/20/spro-mpro/</url>
     <content><![CDATA[<p>A conventional inverter-based ring oscillator consists of a single
@@ -15138,20 +15161,18 @@ https://escholarship.org/uc/item/75g8j8jt</p>
       </categories>
   </entry>
   <entry>
-    <title>How to squash all git commits into one?</title>
-    <url>/2023/08/10/squash-all-commits/</url>
-    <content><![CDATA[<p><a
-href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
-<p>As of <a
-href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
-1.6.2</a>, you can use <code>git rebase --root -i</code></p>
-<p>For each commit except the first, change <code>pick</code> to
-<code>squash</code>.</p>
-<p>this works find, but I had to do a forced push. be careful!
-<code>git push -f</code></p>
+    <title>sub-binary radix DAC</title>
+    <url>/2022/03/19/sub-binary-radix-DAC/</url>
+    <content><![CDATA[<p><strong>reference</strong>:</p>
+<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
+AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
+<p>M. Pastre and M. Kayal, "High-precision DAC based on a
+self-calibrated sub-binary radix converter," 2004 IEEE International
+Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
+I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
 ]]></content>
       <categories>
-        <category>devops</category>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -15177,21 +15198,6 @@ href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/0
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>sub-binary radix DAC</title>
-    <url>/2022/03/19/sub-binary-radix-DAC/</url>
-    <content><![CDATA[<p><strong>reference</strong>:</p>
-<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
-AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
-<p>M. Pastre and M. Kayal, "High-precision DAC based on a
-self-calibrated sub-binary radix converter," 2004 IEEE International
-Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
-I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -16091,59 +16097,6 @@ Pearson.</em></p>
       </categories>
   </entry>
   <entry>
-    <title>DC operating points during TRANSIENT analysis</title>
-    <url>/2023/10/06/tranOP/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
-Beckett</a><a
-href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
-11 years ago</a></p>
-<p>Two approaches:</p>
-<ol type="1">
-<li>On the transient options form, there's a field called "infotimes" -
-specify the times at which you want it to output the dc operating point
-data. You can then annotate the "transient operating points" from any of
-these times after the simulation, or access them via the results
-browser.</li>
-<li>Or you could get the operating point data to be continuously saved
-during the transient for selected devices - if so, create a file called
-(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
-M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
-reference the file via Setup-&gt;Model Libraries or as a "definition
-file" on Setup-&gt;Simulation Files. With this approach you can then
-find the operating point data for the selected devices in the results
-browser and plot it versus time (be cautious of saving too much though
-because this can generate a lot of data if you're not careful)</li>
-</ol>
-<p>Regards,</p>
-<p>Andrew.</p>
-</blockquote>
-<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
-alt="image-20231006110801078" /></p>
-<h2 id="transient-options-form">transient options form</h2>
-<h3 id="setup">setup</h3>
-<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
-alt="image-20231006103506475" /></p>
-<h3 id="access-1">access 1</h3>
-<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
-<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
-<strong>Transient Operating Points</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
-alt="image-20231006104317496" /></p>
-<h3 id="access-2">access 2</h3>
-<p><strong>tranOpTimed</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
-alt="image-20231006105236323" /></p>
-<h2 id="save.scs">save.scs</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
-alt="image-20231006110506245" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>TLM</title>
     <url>/2022/04/03/tlm/</url>
     <content><![CDATA[<p><img src="/2022/04/03/tlm/image-20220403094350570.png"
@@ -16566,6 +16519,59 @@ FIFOs</p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>DC operating points during TRANSIENT analysis</title>
+    <url>/2023/10/06/tranOP/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
+Beckett</a><a
+href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
+11 years ago</a></p>
+<p>Two approaches:</p>
+<ol type="1">
+<li>On the transient options form, there's a field called "infotimes" -
+specify the times at which you want it to output the dc operating point
+data. You can then annotate the "transient operating points" from any of
+these times after the simulation, or access them via the results
+browser.</li>
+<li>Or you could get the operating point data to be continuously saved
+during the transient for selected devices - if so, create a file called
+(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
+M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
+reference the file via Setup-&gt;Model Libraries or as a "definition
+file" on Setup-&gt;Simulation Files. With this approach you can then
+find the operating point data for the selected devices in the results
+browser and plot it versus time (be cautious of saving too much though
+because this can generate a lot of data if you're not careful)</li>
+</ol>
+<p>Regards,</p>
+<p>Andrew.</p>
+</blockquote>
+<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
+alt="image-20231006110801078" /></p>
+<h2 id="transient-options-form">transient options form</h2>
+<h3 id="setup">setup</h3>
+<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
+alt="image-20231006103506475" /></p>
+<h3 id="access-1">access 1</h3>
+<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
+<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
+<strong>Transient Operating Points</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
+alt="image-20231006104317496" /></p>
+<h3 id="access-2">access 2</h3>
+<p><strong>tranOpTimed</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
+alt="image-20231006105236323" /></p>
+<h2 id="save.scs">save.scs</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
+alt="image-20231006110506245" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -18055,6 +18061,22 @@ Memory in Verilog</a></p>
       </categories>
   </entry>
   <entry>
+    <title>compile vim from source with GUI support</title>
+    <url>/2022/02/02/vim-compile/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="binkey">binkey</h2>
+<p>Inserting a new line below: <code>o</code></p>
+<p>above: <code>O</code></p>
+<p>To insert before the cursor: <code>i</code></p>
+<p>After: <code>a</code></p>
+<p>Before the line (home): <code>I</code></p>
+<p>Append at the end of line: <code>A</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Custom Bindkey of Cadence Virtuoso</title>
     <url>/2022/04/13/virtuoso-bindkey/</url>
     <content><![CDATA[<h2 id="schbindkeys.il">schBindKeys.il</h2>
@@ -18074,22 +18096,6 @@ Memory in Verilog</a></p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>compile vim from source with GUI support</title>
-    <url>/2022/02/02/vim-compile/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<h2 id="binkey">binkey</h2>
-<p>Inserting a new line below: <code>o</code></p>
-<p>above: <code>O</code></p>
-<p>To insert before the cursor: <code>i</code></p>
-<p>After: <code>a</code></p>
-<p>Before the line (home): <code>I</code></p>
-<p>Append at the end of line: <code>A</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
   </entry>
   <entry>
     <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>

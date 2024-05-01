@@ -53,7 +53,7 @@
 <meta property="og:image" content="http://example.com/2023/10/28/periodic/image-20231105225346724.png">
 <meta property="og:image" content="http://example.com/2023/10/28/periodic/image-20231105225359292.png">
 <meta property="article:published_time" content="2023-10-28T16:22:29.000Z">
-<meta property="article:modified_time" content="2024-05-01T07:39:28.596Z">
+<meta property="article:modified_time" content="2024-05-01T13:40:37.240Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/10/28/periodic/image-20231028163033255.png">
@@ -269,7 +269,7 @@ Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
+      <time title="Modified: 2024-05-01 13:40:37" itemprop="dateModified" datetime="2024-05-01T13:40:37+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -603,6 +603,56 @@ the frequency domain has to be compensated for</p>
 </blockquote></li>
 </ul>
 <h1 id="linear-time-varying">Linear Time Varying</h1>
+<p>The response of a relaxed LTV system at a time <span
+class="math inline">\(t\)</span> due to an impulse applied at a time
+<span class="math inline">\(t − \tau\)</span> is denoted by <span
+class="math inline">\(h(t, \tau)\)</span></p>
+<blockquote>
+<p>The first argument in the impulse response denotes the time of
+observation.</p>
+<p>The second argument indicates that the system was excited by an
+impulse launched at a time <span class="math inline">\(\tau\)</span>
+<em>prior to</em> the time of observation.</p>
+<p>Thus, the response of an LTV system not only depends on how long
+before the observation time it was excited by the impulse but also on
+the observation instant.</p>
+<p>The output <span class="math inline">\(y(t)\)</span> of an initially
+relaxed LTV system with impulse response <span
+class="math inline">\(h(t, \tau)\)</span> is given by the convolution
+integral <span class="math display">\[
+y(t) = \int_0^{\infty}h(t,\tau)x(t-\tau)d\tau
+\]</span> Assuming <span class="math inline">\(x(t) = e^{j2\pi f
+t}\)</span> <span class="math display">\[
+y(t) = \int_0^{\infty}h(t,\tau)e^{j2\pi f (t-\tau)}d\tau = e^{j2\pi f
+t}\int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau
+\]</span> The (<em>time-varying</em>) frequency response can be
+interpreted as <span class="math display">\[
+H(j2\pi f, t) = \int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau
+\]</span> Linear Periodically Time-Varying (LPTV) Systems, which is a
+special case of an LTV system whose impulse response satisfies <span
+class="math display">\[
+h(t, \tau) = h(t+T_s, \tau)
+\]</span> In other words, the response to an impulse remains unchanged
+if the time at which the output is observed (<span
+class="math inline">\(t\)</span>) and the time at which the impulse is
+applied (denoted by <span class="math inline">\(t_1\)</span>) are both
+shifted by <span class="math inline">\(T_s\)</span> <span
+class="math display">\[
+H(j2\pi f, t+T_s) = \int_0^{\infty}h(t+T_s,\tau)e^{-j2\pi f\tau}d\tau =
+\int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau = H(j2\pi f, t)
+\]</span> <span class="math inline">\(H(j2\pi f, t)\)</span> of an LPTV
+system is periodic with timeperiod <span
+class="math inline">\(T_s\)</span>, it can be expanded as a Fourier
+series in <span class="math inline">\(t\)</span>, resulting in <span
+class="math display">\[
+H(j2\pi f, t) = \sum_{k=-\infty}^{\infty} H_k(j2\pi f)e^{j2\pi f_s k t}
+\]</span> The coefficients of the Fourier series <span
+class="math inline">\(H_k(j2\pi f)\)</span> are given by <span
+class="math display">\[
+H_k(j2\pi f) = \frac{1}{T_s}\int_0^{T_s} H(j2\pi f, t) e^{-j2\pi k f_s
+t}dt
+\]</span></p>
+</blockquote>
 <h2 id="lti-and-ltv">LTI and LTV</h2>
 <p><img src="/2023/10/28/periodic/image-20231104145535168.png"
 alt="image-20231104145535168" /></p>

@@ -259,6 +259,45 @@ There are two techniques that one can use to force the simulator to evaluate the
 
 # Linear Time Varying
 
+The response of a relaxed LTV system at a time $t$ due to an impulse applied at a time $t − \tau$ is denoted by $h(t, \tau)$
+
+> The first argument in the impulse response denotes the time of observation. 
+>
+> The second argument indicates that the system was excited by an impulse launched at a time $\tau$ *prior to* the time of observation.
+>
+> Thus, the response of an LTV system not only depends on how long before the observation time it was excited by the impulse but also on the observation instant. 
+>
+> The output $y(t)$ of an initially relaxed LTV system with impulse response $h(t, \tau)$ is given by the convolution integral
+> $$
+> y(t) = \int_0^{\infty}h(t,\tau)x(t-\tau)d\tau
+> $$
+> Assuming $x(t) = e^{j2\pi f t}$
+> $$
+> y(t) = \int_0^{\infty}h(t,\tau)e^{j2\pi f (t-\tau)}d\tau = e^{j2\pi f t}\int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau
+> $$
+> The (*time-varying*) frequency response can be interpreted as
+> $$
+> H(j2\pi f, t) = \int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau
+> $$
+> Linear Periodically Time-Varying (LPTV) Systems, which is a special case of an LTV system whose impulse response satisfies
+> $$
+> h(t, \tau) = h(t+T_s, \tau)
+> $$
+> In other words, the response to an impulse remains unchanged if the time at which the output is observed ($t$) and the time at which the impulse is applied (denoted by $t_1$) are both shifted by $T_s$
+> $$
+> H(j2\pi f, t+T_s) = \int_0^{\infty}h(t+T_s,\tau)e^{-j2\pi f\tau}d\tau = \int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau = H(j2\pi f, t)
+> $$
+> $H(j2\pi f, t)$ of an LPTV system is periodic with timeperiod $T_s$, it can be expanded as a Fourier series in $t$, resulting in
+> $$
+> H(j2\pi f, t) = \sum_{k=-\infty}^{\infty} H_k(j2\pi f)e^{j2\pi f_s k t}
+> $$
+> The coefficients of the Fourier series $H_k(j2\pi f)$ are given by 
+> $$
+> H_k(j2\pi f) = \frac{1}{T_s}\int_0^{T_s} H(j2\pi f, t) e^{-j2\pi k f_s t}dt
+> $$
+
+
+
 ## LTI and LTV
 
 ![image-20231104145535168](periodic/image-20231104145535168.png)

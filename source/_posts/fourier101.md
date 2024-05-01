@@ -27,6 +27,14 @@ mathjax: true
 
 
 
+## sifting property
+
+> The mathematical representation of a signal as the superposition of scaled and shifted unit impulse functions
+
+![image-20240501134030537](fourier101/image-20240501134030537.png)
+
+
+
 ## Periodic Signal
 
 ### DFS for periodic sequences

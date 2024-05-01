@@ -96,7 +96,7 @@ X_s(j\Omega) = X(e^{j\omega})|_{\omega=\Omega T} = X(e^{j\Omega T})
 $$
 Consequently,
 $$
-X(e^{j\Omega T}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega - k\Omega_s))
+X(e^{j\Omega T}) =X_s(j\Omega)= \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega - k\Omega_s))
 $$
 
 or equivalently,
@@ -108,6 +108,62 @@ $$
 > $\omega$: radians per sample
 >
 > $\Omega$: radians per second
+
+
+
+The factor $\frac{1}{T}$ in $X(e^{j\omega})$ is misleading,  actually $x[n]$ is not scaled by $\frac{1}{T}$ when taking $\omega$ variable of integration into account
+$$\begin{align}
+\int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega &= \int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega n}d\omega \\
+& = \int_{2\pi}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega n} d\frac{\omega}{T}  \\
+&= \int_{\Omega}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\Omega - \frac{2\pi k}{T}\right)\right] e^{j\Omega T n} d\Omega
+\end{align}$$
+
+
+
+
+
+---
+
+Assuming $x_c(t) = \cos(\omega_0 t)$, $x_s(t)= \sum_{n=-\infty}^{\infty}x_c(nT)\delta(t-nT)$ and $x[n]=x_c(nT)$, that is
+$$\begin{align}
+x_c(t) & = \cos(\omega_0 t) \\
+x_s(t) &= \sum_{n=-\infty}^{\infty}\cos(\omega_0 nT)\delta(t-nT) \\
+x[n] &= \cos(\omega_0 nT)
+\end{align}$$
+
+- $X_c(j\Omega)$, the Fourier Transform of $x_c(t)$
+  $$
+  X_c(j\Omega) = \pi[\delta(\Omega - \Omega_0) + \delta(\Omega + \Omega_0)]
+  $$
+
+- $X(e^{j\omega})$​, the the discrete-time Fourier transform (DTFT) of the sequence $x[n]$
+  $$
+  X(e^{j\omega}) =\sum_{k=-\infty}^{+\infty}\pi[\delta(\omega - \omega_0-2\pi k) + \delta(\omega + \omega_0-2\pi k)]
+  $$
+
+- $X_s(j\Omega)$, the Fourier Transform of $x_s(t)$
+  $$
+  X_s(j\Omega)= \frac{1}{T}\sum_{k=-\infty}^{+\infty}\pi[\delta(\Omega - \Omega_0-k\Omega_s) + \delta(\Omega + \Omega_0-k\Omega_s)]
+  $$
+  
+
+Express $X(e^{j\omega})$ in terms of $X_s(j\Omega)$ and $X_c(j\Omega)$
+$$
+X(e^{j\omega}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}\pi[\delta(\frac{\omega}{T} - \Omega_0-k\Omega_s) + \delta(\frac{\omega}{T} + \Omega_0-k\Omega_s)]
+$$
+Inverse $X(e^{j\omega})$
+$$\begin{align}
+x_r[n] &= \frac{1}{2\pi} \int_{2\pi}X(e^{j\omega}) e^{j\omega n} d\omega \\
+&= \frac{1}{2\pi}\int_{2\pi} \pi[\delta(\frac{\omega}{T} - \Omega_0) + \delta(\frac{\omega}{T} + \Omega_0)]e^{j\omega n} d\frac{\omega}{T} \\
+&= \frac{1}{2\pi}\int_{2\pi} \pi[\delta(\frac{\omega}{T} - \Omega_0)e^{j\omega_0 n} + \delta(\frac{\omega}{T} + \Omega_0)e^{-j\omega_0 n}] d\frac{\omega}{T} \\
+&= \frac{1}{2}[ e^{j\omega_0 n}\int_{2\pi} [\delta(\frac{\omega}{T} - \Omega_0)d\frac{\omega}{T} + e^{-j\omega_0 n}\int_{2\pi} [\delta(\frac{\omega}{T} + \Omega_0)d\frac{\omega}{T}] \\
+&= \frac{1}{2}[ e^{j\omega_0 n} + e^{-j\omega_0 n} ] \\
+&= \cos(\omega_0 n)
+\end{align}$$
+
+
+
+---
 
 
 
@@ -219,6 +275,17 @@ A remarkable fact of linear systems is that the **complex exponentials** are **e
 
 - Both amplitude and phase may change
 - but the frequency does not change
+
+>For an input $x(t)$, we can determine the output through the use of the convolution integral, so that with $x(t) = e^{st}$
+$$\begin{align}
+y(t) &= \int_{-\infty}^{+\infty}h(\tau)x(t-\tau)d\tau \\
+&= \int_{-\infty}^{+\infty} h(\tau) e^{s(t-\tau)}d\tau \\
+&= e^{st}\int_{-\infty}^{+\infty} h(\tau) e^{-s\tau}d\tau \\
+&= e^{st}H(s)
+\end{align}$$
+
+
+
 
 Take the input signal to be a complex exponential of the form $x(t)=Ae^{j\phi}e^{j\omega t}$
 

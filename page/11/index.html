@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -359,7 +359,7 @@ alt="image-20220507122217830" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -587,7 +587,7 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -678,7 +678,7 @@ running kernel:</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -789,8 +789,8 @@ x[n] = x_c(nT)
 \]</span> it follows that <span class="math display">\[
 X_s(j\Omega) = X(e^{j\omega})|_{\omega=\Omega T} = X(e^{j\Omega T})
 \]</span> Consequently, <span class="math display">\[
-X(e^{j\Omega T}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega -
-k\Omega_s))
+X(e^{j\Omega T}) =X_s(j\Omega)=
+\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega - k\Omega_s))
 \]</span></p>
 <p>or equivalently, <span class="math display">\[
 X(e^{j\omega}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[
@@ -800,6 +800,75 @@ j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right]
 <p><span class="math inline">\(\omega\)</span>: radians per sample</p>
 <p><span class="math inline">\(\Omega\)</span>: radians per second</p>
 </blockquote>
+<p>The factor <span class="math inline">\(\frac{1}{T}\)</span> in <span
+class="math inline">\(X(e^{j\omega})\)</span> is misleading, actually
+<span class="math inline">\(x[n]\)</span> is not scaled by <span
+class="math inline">\(\frac{1}{T}\)</span> when taking <span
+class="math inline">\(\omega\)</span> variable of integration into
+account <span class="math display">\[\begin{align}
+\int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega &amp;=
+\int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[
+j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega
+n}d\omega \\
+&amp; = \int_{2\pi}\sum_{k=-\infty}^{+\infty}X_c \left[
+j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega n}
+d\frac{\omega}{T}  \\
+&amp;= \int_{\Omega}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\Omega -
+\frac{2\pi k}{T}\right)\right] e^{j\Omega T n} d\Omega
+\end{align}\]</span></p>
+<hr />
+<p>Assuming <span class="math inline">\(x_c(t) = \cos(\omega_0
+t)\)</span>, <span class="math inline">\(x_s(t)=
+\sum_{n=-\infty}^{\infty}x_c(nT)\delta(t-nT)\)</span> and <span
+class="math inline">\(x[n]=x_c(nT)\)</span>, that is <span
+class="math display">\[\begin{align}
+x_c(t) &amp; = \cos(\omega_0 t) \\
+x_s(t) &amp;= \sum_{n=-\infty}^{\infty}\cos(\omega_0 nT)\delta(t-nT) \\
+x[n] &amp;= \cos(\omega_0 nT)
+\end{align}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(X_c(j\Omega)\)</span>, the Fourier
+Transform of <span class="math inline">\(x_c(t)\)</span> <span
+class="math display">\[
+X_c(j\Omega) = \pi[\delta(\Omega - \Omega_0) + \delta(\Omega +
+\Omega_0)]
+\]</span></p></li>
+<li><p><span class="math inline">\(X(e^{j\omega})\)</span>​, the the
+discrete-time Fourier transform (DTFT) of the sequence <span
+class="math inline">\(x[n]\)</span> <span class="math display">\[
+X(e^{j\omega}) =\sum_{k=-\infty}^{+\infty}\pi[\delta(\omega -
+\omega_0-2\pi k) + \delta(\omega + \omega_0-2\pi k)]
+\]</span></p></li>
+<li><p><span class="math inline">\(X_s(j\Omega)\)</span>, the Fourier
+Transform of <span class="math inline">\(x_s(t)\)</span> <span
+class="math display">\[
+X_s(j\Omega)= \frac{1}{T}\sum_{k=-\infty}^{+\infty}\pi[\delta(\Omega -
+\Omega_0-k\Omega_s) + \delta(\Omega + \Omega_0-k\Omega_s)]
+\]</span></p></li>
+</ul>
+<p>Express <span class="math inline">\(X(e^{j\omega})\)</span> in terms
+of <span class="math inline">\(X_s(j\Omega)\)</span> and <span
+class="math inline">\(X_c(j\Omega)\)</span> <span
+class="math display">\[
+X(e^{j\omega}) =
+\frac{1}{T}\sum_{k=-\infty}^{+\infty}\pi[\delta(\frac{\omega}{T} -
+\Omega_0-k\Omega_s) + \delta(\frac{\omega}{T} + \Omega_0-k\Omega_s)]
+\]</span> Inverse <span class="math inline">\(X(e^{j\omega})\)</span>
+<span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi} \int_{2\pi}X(e^{j\omega}) e^{j\omega n}
+d\omega \\
+&amp;= \frac{1}{2\pi}\int_{2\pi} \pi[\delta(\frac{\omega}{T} - \Omega_0)
++ \delta(\frac{\omega}{T} + \Omega_0)]e^{j\omega n} d\frac{\omega}{T} \\
+&amp;= \frac{1}{2\pi}\int_{2\pi} \pi[\delta(\frac{\omega}{T} -
+\Omega_0)e^{j\omega_0 n} + \delta(\frac{\omega}{T} +
+\Omega_0)e^{-j\omega_0 n}] d\frac{\omega}{T} \\
+&amp;= \frac{1}{2}[ e^{j\omega_0 n}\int_{2\pi} [\delta(\frac{\omega}{T}
+- \Omega_0)d\frac{\omega}{T} + e^{-j\omega_0 n}\int_{2\pi}
+[\delta(\frac{\omega}{T} + \Omega_0)d\frac{\omega}{T}] \\
+&amp;= \frac{1}{2}[ e^{j\omega_0 n} + e^{-j\omega_0 n} ] \\
+&amp;= \cos(\omega_0 n)
+\end{align}\]</span></p>
+<hr />
 <h2 id="impulse-invariance">Impulse Invariance</h2>
 <p><span class="math display">\[
 h[n] = Th_c(nT)
@@ -863,6 +932,17 @@ by a constant factor.</p>
 <li>Both amplitude and phase may change</li>
 <li>but the frequency does not change</li>
 </ul>
+<blockquote>
+<p>For an input <span class="math inline">\(x(t)\)</span>, we can
+determine the output through the use of the convolution integral, so
+that with <span class="math inline">\(x(t) = e^{st}\)</span> <span
+class="math display">\[\begin{align}
+y(t) &amp;= \int_{-\infty}^{+\infty}h(\tau)x(t-\tau)d\tau \\
+&amp;= \int_{-\infty}^{+\infty} h(\tau) e^{s(t-\tau)}d\tau \\
+&amp;= e^{st}\int_{-\infty}^{+\infty} h(\tau) e^{-s\tau}d\tau \\
+&amp;= e^{st}H(s)
+\end{align}\]</span></p>
+</blockquote>
 <p>Take the input signal to be a complex exponential of the form <span
 class="math inline">\(x(t)=Ae^{j\phi}e^{j\omega t}\)</span></p>
 <p><span class="math display">\[\begin{align}
@@ -989,7 +1069,7 @@ V. Oppenheim, 3rd edition.” (2011).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1500,7 +1580,7 @@ Press. doi:10.1017/CBO9780511835261</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1916,7 +1996,7 @@ capacitance</strong></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2101,7 +2181,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:20" itemprop="dateModified" datetime="2024-04-30T02:31:20+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2195,7 +2275,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2345,7 +2425,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 02:31:19" itemprop="dateModified" datetime="2024-04-30T02:31:19+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-01 07:39:28" itemprop="dateModified" datetime="2024-05-01T07:39:28+00:00">2024-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

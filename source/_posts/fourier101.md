@@ -32,7 +32,7 @@ mathjax: true
 ### scaled $\delta(t)$
 
 $$
-x(t)\delta(t-\tau) = x(\tau)\delta(t-tau)
+x(t)\delta(t-\tau) = x(\tau)\delta(t-\tau)
 $$
 
 >  the impulse is zero everywhere except when $t=\tau$

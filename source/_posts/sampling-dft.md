@@ -113,14 +113,22 @@ $$
 
 The factor $\frac{1}{T}$ in $X(e^{j\omega})$ is misleading,  actually $x[n]$ is not scaled by $\frac{1}{T}$ when taking $\omega$ variable of integration into account
 $$\begin{align}
-\int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega &= \int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega n}d\omega \\
-& = \int_{2\pi}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega n} d\frac{\omega}{T}  \\
-&= \int_{\Omega}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\Omega - \frac{2\pi k}{T}\right)\right] e^{j\Omega T n} d\Omega
+x_r[n] &= \frac{1}{2\pi} \int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega \\
+&= \frac{1}{2\pi}\int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega n}d\omega \\
+&\simeq \frac{1}{2\pi}\frac{1}{T}\int_{2\pi}X_c (\frac{\omega}{T} ) e^{j\omega  n} d\omega \\
+&=\frac{1}{2\pi} \frac{1}{T}\int_{2\pi} \left[ \int_{\infty}X_c(\Phi)\delta (\Phi - \frac{\omega}{T} )d\Phi \right]  e^{j\omega  n} d\omega \\
+&=\frac{1}{2\pi} \frac{1}{T} \int_{\infty}X_c(\Phi)d\Phi \int_{2\pi}\delta (\Phi - \frac{\omega}{T} )e^{j\omega  n} d\omega \\
+&=\frac{1}{2\pi} \frac{1}{T} \int_{\infty}X_c(\Phi)d\Phi \int_{2\pi}T\cdot \delta (\Phi T - \omega )e^{j\omega  n} d\omega \\
+&=\frac{1}{2\pi} \int_{\infty}X_c(\Phi) e^{j\Phi T n}d\Phi
 \end{align}$$
 
+That is
+$$\begin{align}
+x_r[n] &= \frac{1}{2\pi}\int_{2\pi} \frac{1}{T}X_c (\frac{\omega}{T} ) e^{j\omega  n} d\omega \\
+&= \frac{1}{2\pi} \int_{\infty}X_c(\Omega) e^{j\Omega T n}d\Omega \tag{31}
+\end{align}$$
 
-
-
+> assuming Nyquist–Shannon sampling theorem is met
 
 ---
 
@@ -161,7 +169,16 @@ x_r[n] &= \frac{1}{2\pi} \int_{2\pi}X(e^{j\omega}) e^{j\omega n} d\omega \\
 &= \cos(\omega_0 n)
 \end{align}$$
 
+or follow EQ.(31)
 
+$$\begin{align}
+x_r[n] &= \frac{1}{2\pi} \int_{\infty}X_c(\Omega) e^{j\Omega T n}d\Omega \\
+&= \frac{1}{2\pi} \int_{\infty} \pi[\delta(\Omega - \Omega_0) + \delta(\Omega + \Omega_0)]e^{j\Omega T n}d\Omega \\
+&= \frac{1}{2}(e^{j\Omega_0 T n}+e^{-j\Omega_0 T n}) \\
+&= \cos(\omega_0 n)
+\end{align}$$
+
+where $\omega_0 = \Omega_0 T$
 
 ---
 

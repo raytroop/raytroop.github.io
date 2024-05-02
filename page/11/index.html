@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:28" itemprop="dateModified" datetime="2024-05-02T06:30:28+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -359,7 +359,7 @@ alt="image-20220507122217830" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:28" itemprop="dateModified" datetime="2024-05-02T06:30:28+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -587,7 +587,7 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:28" itemprop="dateModified" datetime="2024-05-02T06:30:28+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -678,7 +678,7 @@ running kernel:</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:28" itemprop="dateModified" datetime="2024-05-02T06:30:28+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -806,16 +806,31 @@ class="math inline">\(X(e^{j\omega})\)</span> is misleading, actually
 class="math inline">\(\frac{1}{T}\)</span> when taking <span
 class="math inline">\(\omega\)</span> variable of integration into
 account <span class="math display">\[\begin{align}
-\int_{2\pi}X(e^{j\omega})e^{j\omega n}d\omega &amp;=
-\int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[
-j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega
+x_r[n] &amp;= \frac{1}{2\pi} \int_{2\pi}X(e^{j\omega})e^{j\omega
 n}d\omega \\
-&amp; = \int_{2\pi}\sum_{k=-\infty}^{+\infty}X_c \left[
-j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right] e^{j\omega n}
-d\frac{\omega}{T}  \\
-&amp;= \int_{\Omega}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\Omega -
-\frac{2\pi k}{T}\right)\right] e^{j\Omega T n} d\Omega
+&amp;= \frac{1}{2\pi}\int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c
+\left[ j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right]
+e^{j\omega n}d\omega \\
+&amp;\simeq \frac{1}{2\pi}\frac{1}{T}\int_{2\pi}X_c (\frac{\omega}{T} )
+e^{j\omega  n} d\omega \\
+&amp;=\frac{1}{2\pi} \frac{1}{T}\int_{2\pi} \left[
+\int_{\infty}X_c(\Phi)\delta (\Phi - \frac{\omega}{T} )d\Phi
+\right]  e^{j\omega  n} d\omega \\
+&amp;=\frac{1}{2\pi} \frac{1}{T} \int_{\infty}X_c(\Phi)d\Phi
+\int_{2\pi}\delta (\Phi - \frac{\omega}{T} )e^{j\omega  n} d\omega \\
+&amp;=\frac{1}{2\pi} \frac{1}{T} \int_{\infty}X_c(\Phi)d\Phi
+\int_{2\pi}T\cdot \delta (\Phi T - \omega )e^{j\omega  n} d\omega \\
+&amp;=\frac{1}{2\pi} \int_{\infty}X_c(\Phi) e^{j\Phi T n}d\Phi
 \end{align}\]</span></p>
+<p>That is <span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi}\int_{2\pi} \frac{1}{T}X_c (\frac{\omega}{T}
+) e^{j\omega  n} d\omega \\
+&amp;= \frac{1}{2\pi} \int_{\infty}X_c(\Omega) e^{j\Omega T n}d\Omega
+\tag{31}
+\end{align}\]</span></p>
+<blockquote>
+<p>assuming Nyquist–Shannon sampling theorem is met</p>
+</blockquote>
 <hr />
 <p>Assuming <span class="math inline">\(x_c(t) = \cos(\omega_0
 t)\)</span>, <span class="math inline">\(x_s(t)=
@@ -868,6 +883,16 @@ d\omega \\
 &amp;= \frac{1}{2}[ e^{j\omega_0 n} + e^{-j\omega_0 n} ] \\
 &amp;= \cos(\omega_0 n)
 \end{align}\]</span></p>
+<p>or follow EQ.(31)</p>
+<p><span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi} \int_{\infty}X_c(\Omega) e^{j\Omega T
+n}d\Omega \\
+&amp;= \frac{1}{2\pi} \int_{\infty} \pi[\delta(\Omega - \Omega_0) +
+\delta(\Omega + \Omega_0)]e^{j\Omega T n}d\Omega \\
+&amp;= \frac{1}{2}(e^{j\Omega_0 T n}+e^{-j\Omega_0 T n}) \\
+&amp;= \cos(\omega_0 n)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\omega_0 = \Omega_0 T\)</span></p>
 <hr />
 <h2 id="impulse-invariance">Impulse Invariance</h2>
 <p><span class="math display">\[
@@ -1069,7 +1094,7 @@ V. Oppenheim, 3rd edition.” (2011).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:28" itemprop="dateModified" datetime="2024-05-02T06:30:28+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1580,7 +1605,7 @@ Press. doi:10.1017/CBO9780511835261</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:27" itemprop="dateModified" datetime="2024-05-02T06:30:27+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1996,7 +2021,7 @@ capacitance</strong></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:27" itemprop="dateModified" datetime="2024-05-02T06:30:27+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2181,7 +2206,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:28" itemprop="dateModified" datetime="2024-05-02T06:30:28+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2275,7 +2300,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:27" itemprop="dateModified" datetime="2024-05-02T06:30:27+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2425,7 +2450,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-02 02:57:17" itemprop="dateModified" datetime="2024-05-02T02:57:17+00:00">2024-05-02</time>
+      <time title="Modified: 2024-05-02 06:30:28" itemprop="dateModified" datetime="2024-05-02T06:30:28+00:00">2024-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

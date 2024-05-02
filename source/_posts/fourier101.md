@@ -27,12 +27,46 @@ mathjax: true
 
 
 
-## sifting property
+## The Unit Impulse Function
+
+### scaled $\delta(t)$
+
+$$
+x(t)\delta(t-\tau) = x(\tau)\delta(t-tau)
+$$
+
+>  the impulse is zero everywhere except when $t=\tau$
+>
+> [[https://lpsa.swarthmore.edu/BackGround/ImpulseFunc/ImpFunc.html]](https://lpsa.swarthmore.edu/BackGround/ImpulseFunc/ImpFunc.html)
+
+### time-scaled
+
+$$
+\delta(at)=\frac{1}{|a|}\delta(t)
+$$
+
+An example
+
+$$
+\delta(2t-1)=\frac12\delta\left(t-\frac12\right)
+$$
+
+> [[https://dsp.stackexchange.com/a/67699]](https://dsp.stackexchange.com/a/67699)
+
+### sifting property
 
 > The mathematical representation of a signal as the superposition of scaled and shifted unit impulse functions
 
 ![image-20240501134030537](fourier101/image-20240501134030537.png)
 
+$$
+\int\limits_a^b {\delta (t - \lambda ) \cdot f(t)dt}  = \left\{ {\begin{array}{*{20}{c}}
+{f(\lambda ),\quad a < \lambda  < b}\\
+{0,\quad otherwise}
+\end{array}} \right
+$$
+
+> This is called the "sifting" property because the impulse function $\delta(t-\lambda)$ sifts through the function $f(t)$ and pulls out the value $f(\lambda)$
 
 
 ## Periodic Signal

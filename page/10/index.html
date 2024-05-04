@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">171</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,580 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/16/dj-rj/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/16/dj-rj/" class="post-title-link" itemprop="url">Random & Deterministic Jitters Simulation</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-16 00:39:22" itemprop="dateCreated datePublished" datetime="2022-05-16T00:39:22+00:00">2022-05-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
-alt="image-20220516004008878" /></p>
-<h2 id="deterministic-jitter">Deterministic Jitter</h2>
-<p><img src="/2022/05/16/dj-rj/image-20220516004058916.png"
-alt="image-20220516004058916" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516004206118.png"
-alt="image-20220516004206118" /></p>
-<p><code>j_Djpp</code> can be calculated by PSD,too</p>
-<p><img src="/2022/05/16/dj-rj/image-20220516004615033.png"
-alt="image-20220516004615033" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fck = <span class="number">38.4e6</span>;</span><br><span class="line">Nfft = <span class="number">15000</span>;</span><br><span class="line">fres = fck/Nfft;</span><br><span class="line">psddBc = <span class="number">-99.3343</span>;</span><br><span class="line">psBc = psddBc + <span class="number">10</span>*<span class="built_in">log10</span>(fres);	<span class="comment">% psd -&gt; ps; </span></span><br><span class="line">phrad2 = <span class="number">10</span>^(psBc/<span class="number">10</span>);</span><br><span class="line">phrms = <span class="built_in">sqrt</span>(phrad2);</span><br><span class="line">Jrms = phrms/<span class="number">2</span>/<span class="built_in">pi</span>*<span class="number">1</span>/fck;</span><br><span class="line">Jpp = <span class="number">2</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*Jrms;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jpp =</span><br><span class="line"></span><br><span class="line">   6.4038e-12</span><br></pre></td></tr></table></figure>
-<p>For DJ, we usually use peak to peak value</p>
-<blockquote>
-<p>BTW, the psd value at half of fundamental frequency (<span
-class="math inline">\(f_s/2\)</span>) is misleading and ambiguity, we
-won't use this value</p>
-</blockquote>
-<h2 id="random-jitter">Random Jitter</h2>
-<p>RJ can be accurately and efficiently measured using
-<strong>PSS/Pnoise</strong> or <strong>HB/HBnoise</strong>.</p>
-<p>Note that the <strong>transient noise</strong> can also be used to
-compute RJ;</p>
-<blockquote>
-<p>However, the computation cost is typically very high, and the
-accuracy is lesser as compared to PSS/Pnoise and HB/HBnoise.</p>
-</blockquote>
-<p>Since RJ follows a Gaussian distribution, it can be fully
-characterized using its Root-Mean-Squared value (RMS) or the standard
-deviation value (<span class="math inline">\(\sigma\)</span>)</p>
-<p>The Peak-to-Peak value of RJ (<span
-class="math inline">\(\text{RJ}_{\text{p-p}}\)</span>) can be calculated
-under certain observation conditions <span class="math display">\[
-\text{RJ}_{\text{p-p}}\equiv K \ast \text{RJ}_{\text{RMS}}
-\]</span> Here, <span class="math inline">\(K\)</span> is a constant
-determined by the BER specification of the system given in the following
-Table</p>
-<table>
-<thead>
-<tr class="header">
-<th>BER</th>
-<th>Crest factor (K)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(10^{-3}\)</span></td>
-<td>6.18</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-4}\)</span></td>
-<td>7.438</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-5}\)</span></td>
-<td>8.53</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-6}\)</span></td>
-<td>9.507</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-7}\)</span></td>
-<td>10.399</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-8}\)</span></td>
-<td>11.224</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-9}\)</span></td>
-<td>11.996</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-10}\)</span></td>
-<td>12.723</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-11}\)</span></td>
-<td>13.412</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(10^{-12}\)</span></td>
-<td>14.069</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(10^{-13}\)</span></td>
-<td>14.698</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">K = <span class="number">14.698</span>;</span><br><span class="line">Ks = K/<span class="number">2</span>;</span><br><span class="line">p = normcdf([-Ks Ks]);</span><br><span class="line">BER = <span class="number">1</span> - (p(<span class="number">2</span>)-p(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BER =</span><br><span class="line"></span><br><span class="line">   1.9962e-13</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/16/dj-rj/image-20220516160050961.png"
-alt="image-20220516160050961" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516193125490.png"
-alt="image-20220516193125490" /></p>
-<h2 id="total-jitter">Total Jitter</h2>
-<p><span class="math display">\[
-\text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} +
-\text{RJ}_{\text{p-p}}(\text{BER})
-\]</span></p>
-<p><img src="/2022/05/16/dj-rj/tj.drawio.svg" alt="tj.drawio" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516160006909.png"
-alt="image-20220516160006909" /></p>
-<p><img src="/2022/05/16/dj-rj/image-20220516012200383.png"
-alt="image-20220516012200383" /></p>
-<blockquote>
-<p>In the psd of TJ, the spur is DJ and floor is RJ</p>
-</blockquote>
-<h2 id="phase-noise-to-jitter">Phase Noise to Jitter</h2>
-<p>The <strong>phase noise</strong> is traditionally defined as the
-ratio of the power of the signal in 1Hz bandwidth at offset <span
-class="math inline">\(f\)</span> from the carrier <span
-class="math inline">\(P\)</span>, divided by the power of the carrier
-<span class="math display">\[
-\ell (f) = \frac {S_v&#39;(f_0+f)}{P}
-\]</span> where <span class="math inline">\(S_v&#39;\)</span> is is
-<strong>one-sided voltage PSD</strong> and <span class="math inline">\(f
-\geqslant 0\)</span></p>
-<p>Under <strong>narrow angle assumption</strong> <span
-class="math display">\[
-S_{\varphi}(f)= \frac {S_v&#39;(f_0+f)}{P}
-\]</span> where <span class="math inline">\(\forall f\in \left[-\infty
-+\infty\right]\)</span></p>
-<p>Using the Wiener-Khinchin theorem, it is possible to easily derive
-the variance of the absolute jitter(<span
-class="math inline">\(J_{ee}\)</span>)via integration of the
-corresponding PSD <span class="math display">\[
-J_{ee,rms}^2 = \int S_{J_{ee}}(f)df
-\]</span></p>
-<p>And we know the relationship between absolute jitter and excess phase
-is <span class="math display">\[
-J_{ee}=\frac {\varphi}{\omega_0}
-\]</span> Considering that phase noise is normally symmetrical about the
-zero frequency, multiplied by <strong>two</strong> is shown as below
-<span class="math display">\[
-J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}\ell(f)df}}{\omega_0}
-\]</span> where phase noise is in linear units not in logarithmic
-ones.</p>
-<p>Because the unit of phase noise in <em>Spectre-RF</em> is logarithmic
-unit (<em>dBc</em>), we have to convert the unit before applying the
-above equation <span class="math display">\[
-\ell[linear] = 10^{\frac {\ell [dBc/Hz]}{10}}
-\]</span> The complete equation using the simulation result of
-<em>Spectre-RF Pnoise</em> is <span class="math display">\[
-J_{ee,rms} = \frac{\sqrt{2\int_{0}^{+\infty}10^{\frac {\ell
-[dBc/Hz]}{10}}df}}{\omega_0}
-\]</span></p>
-<p>The above equation has been verified for <em>sampled pnoise</em>,
-i.e. <em>J<sub>ee</sub></em> and <em>Edge Phase Noise</em>.</p>
-<blockquote>
-<ul>
-<li>For <strong>pnoise-sampled(jitter)</strong>, <em>Direct Plot Form -
-Function: Jee:Integration Limits</em> can calculate it conveniently</li>
-<li>But for <strong>pnoise-timeaveage</strong>, you have to use the
-below equation to get RMS jitter.</li>
-</ul>
-</blockquote>
-<p>One example, integrate to <span
-class="math inline">\(\frac{f_{osc}}{2}\)</span> and <span
-class="math inline">\(f_{osc} = 16GHz\)</span></p>
-<p><img src="/2022/05/16/dj-rj/image-20220415100034220.png"
-alt="image-20220415100034220" /></p>
-<p>Of course, it apply to conventional pnoise simulation.</p>
-<p>On the other hand, output rms voltage noise, <span
-class="math inline">\(V_{out,rms}\)</span> divied by slope should be
-close to <span class="math inline">\(J_{ee,rms}\)</span> <span
-class="math display">\[
-J_{ee,rms} = \frac {V_{out,rms}}{slope}
-\]</span></p>
-<h2 id="reference">reference</h2>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/14/dc-nyquist-fft/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/14/dc-nyquist-fft/" class="post-title-link" itemprop="url">Zero(DC component) and Nyquist Component in FFT</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-14 20:56:28" itemprop="dateCreated datePublished" datetime="2022-05-14T20:56:28+00:00">2022-05-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="dc-offset">DC offset</h2>
-<p>Performing FFT to a signal with a <em>large DC offset</em> would
-often result in a big impulse around frequency 0 Hz, thus masking out
-the signals of interests with relatively small amplitude.</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
-alt="Remove_DC_Offset_Blog_10" /></p>
-<p>One method to remove DC offset from the original signal before
-performing FFT</p>
-<ul>
-<li>Subtracting the Mean of Original Signal</li>
-</ul>
-<p>You can also not filter the input, but set zero to the zero frequency
-point for FFT result.</p>
-<h2 id="nyquist-component">Nyquist component</h2>
-<p>If we go back to the definition of the DFT <span
-class="math display">\[
-X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
-(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
-\]</span> which is a real number.</p>
-<p>The discrete function <span class="math display">\[
-x[n]=\cos(\pi n)
-\]</span> is always <span class="math inline">\((-1)^n\)</span> for
-integer <span class="math inline">\(n\)</span></p>
-<p>One general sinusoid at Nyquist and has phase shift <span
-class="math inline">\(\theta\)</span>, this is <span
-class="math inline">\(T=2\)</span> and <span
-class="math inline">\(T_s=1\)</span></p>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= A \cos(\pi n + \theta) \\
-     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
-\big) \\
-     &amp;= \big(A\cos(\theta)\big) \cos(\pi
-n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
-     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
-\cdot 0 \\
-     &amp;= B \cdot (-1)^n \\
-\end{align}\]</span></p>
-<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
-<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
-n)\)</span>, then <span class="math display">\[
-B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
-\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
-<p>In other words, you <strong>CAN'T</strong> infer the signal from
-<span class="math inline">\(X(\frac{N}{2})\)</span> <span
-class="math display">\[\begin{align}
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
-\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2}
-\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
-- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
-\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
-\cos(\pi n+\theta)
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
-you <strong>wouldn't</strong> know it because <span
-class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
-\mathbb{Z}\)</span></p>
-<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
-\]</span> However, if <span
-class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
-\]</span></p>
-<p>That sort of ambiguity is the reason for the <strong>strict
-inequality</strong> of the sampling theorem's condition.</p>
-<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
-<p><strong>Both edges</strong> is used for clock waveform to evaluate
-the duty cycle distortion,</p>
-<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
-DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
-below</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
-alt="image-20220516224616908" /></p>
-<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
-component, which is <strong>0.1</strong> in follow figure</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
-alt="image-20220516233618663" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>);</span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
-Spectrum</h2>
-<p>DC and Nyquist frequency of FFT left over</p>
-<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency</span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period</span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2.</span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1)</span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
-alt="image-20220514221609734" /></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
-alt="image-20220514221642170" /></p>
-<h2 id="alternative-view">Alternative View</h2>
-<p>The direct current (DC) bin (<span
-class="math inline">\(k=0\)</span>) and the bin at <span
-class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
-the Nyquist frequency are <strong>purely real and unique</strong>.</p>
-<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
-amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
-plot is shown as below with sampling frequency is <span
-class="math inline">\(20Hz\)</span></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
-alt="image-20220427172526711" /></p>
-<p>Amplitude and Phase spectrum, sampled with <span
-class="math inline">\(f_s=20\)</span> Hz</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
-alt="image-20220427174557915" /></p>
-<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
-<strong>1</strong> and its phase is <strong>0</strong> as shown as
-above, which proves the DFT and IDFT.</p>
-<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
-Parseval's theorem), which may not be the power of continuous signal.
-The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
-<strong>1</strong>, that of corresponding continuous signal is <span
-class="math inline">\(\frac{1}{2}\)</span>.</p>
-<p>Power spectrum derived from FFT provide information of samples, i.e.
-<strong>1</strong></p>
-<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
-[1 1 1 1 ...].</p>
-<h3 id="code">code</h3>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
-target="_blank" rel="noopener" href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
-<p>How to remove DC component in FFT? URL: <a
-target="_blank" rel="noopener" href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
-<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
-seem to work unless there is a phase shift URL: <a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
-<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
-target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
-<p>Why remove energy at Nyquist before ifft? URL: <a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/14/vpwlf-designvar/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/14/vpwlf-designvar/" class="post-title-link" itemprop="url">Design Variable in analogLib-vpwlf</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-14 11:58:32" itemprop="dateCreated datePublished" datetime="2022-05-14T11:58:32+00:00">2022-05-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>PWL File as Design Var?</code> parameter in <em>vpwlf</em> cell
-is convenient for sweep simulation or corner simulation, wherein there
-are multiple pwl files .</p>
-<p><img src="/2022/05/14/vpwlf-designvar/image-20220514121048124.png"
-alt="image-20220514121048124" /></p>
-<p>The file path should be surrounded with
-<strong>double-quotes</strong> to be protected from evaluation.</p>
-<p><img src="/2022/05/14/vpwlf-designvar/image-20220514121150988.png"
-alt="image-20220514121150988" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -800,7 +226,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -940,7 +366,7 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1070,7 +496,7 @@ doi:10.1007/978-3-030-03238-8</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1186,7 +612,7 @@ target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1359,7 +785,7 @@ target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/le
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1689,7 +1115,7 @@ Processing</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1822,7 +1248,7 @@ alt="image-20220507122217830" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1988,6 +1414,1024 @@ peak-to-peak</li>
 <h4 id="reference">reference</h4>
 <p>Dalt, Nicola Da and Ali Sheikholeslami. “Understanding Jitter and
 Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/01/rhel8-old-kernels/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/01/rhel8-old-kernels/" class="post-title-link" itemprop="url">What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-01 22:43:32" itemprop="dateCreated datePublished" datetime="2022-05-01T22:43:32+00:00">2022-05-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Red Hat Enterprise Linux 8</strong></p>
+<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
+method for removing kernels and keeping only the latest version and
+running kernel:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
+<p>From the <code>yum</code> man page:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/01/sampling-dft/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/01/sampling-dft/" class="post-title-link" itemprop="url">Sampling of Continuous Time Signals</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-01 01:03:18" itemprop="dateCreated datePublished" datetime="2022-05-01T01:03:18+00:00">2022-05-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>The sampling process mathematically in the two stages:</p>
+<ul>
+<li><p>impulse train modulator <span class="math display">\[
+x_s(t)=x_c(t)s(t)
+\]</span></p></li>
+<li><p>impulse train to a sequence</p></li>
+</ul>
+<p><img src="/2022/05/01/sampling-dft/image-20230519000700841.png"
+alt="image-20230519000700841" /></p>
+<h2 id="impulse-train-modulator">impulse train modulator</h2>
+<p><img src="/2022/05/01/sampling-dft/image-20230519000740312.png"
+alt="image-20230519000740312" /></p>
+<blockquote>
+<p>Arrows with length proportional to their area.</p>
+</blockquote>
+<p>The periodic impulse train is <span class="math display">\[
+s(t) = \sum_{n=-\infty}^{+\infty}\delta (t-nT)
+\]</span> where <span class="math inline">\(\delta (t)\)</span> is the
+<strong>unit</strong> impulse function, or Dirac delta function; <span
+class="math inline">\(T\)</span> is the <em>sampling period</em>, and
+its reciprocal, <span class="math inline">\(f_s=1/T\)</span>, is the
+<em>sampling frequency</em>, in samples per second.</p>
+<p>The product of <span class="math inline">\(s(t)\)</span> and <span
+class="math inline">\(x_c (t)\)</span> is therefore</p>
+<p><span class="math display">\[\begin{align}
+x_s (t) &amp;= x_c(t)s(t) \\
+&amp;= x_c(t) \sum_{n=-\infty}^{+\infty}\delta (t-nT) =
+\sum_{n=-\infty}^{+\infty}x_c(t)\delta (t-nT)
+\end{align}\]</span></p>
+<p>The impulse train sampling <span
+class="math inline">\(x_s(t)\)</span> can be expressed as <span
+class="math display">\[
+x_s(t) = \sum_{n=-\infty}^{+\infty}x_c(nT)\delta (t-nT)
+\]</span> i.e., the size (area) of the <em>impulse</em> at sample time
+<span class="math inline">\(nT\)</span> is equal to the value of the
+continuous-time signal at that time.</p>
+<h3 id="x_st-in-frequency-domain"><span
+class="math inline">\(x_s(t)\)</span> in Frequency-domain</h3>
+<p><span class="math display">\[
+X_s(j\Omega) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega -
+k\Omega_s))
+\]</span></p>
+<blockquote>
+<p>The relationship between the Fourier transforms of the input and the
+output of the <em>impulse train modulator</em></p>
+</blockquote>
+<p><img src="/2022/05/01/sampling-dft/image-20230519002317865.png"
+alt="image-20230519002317865" /></p>
+<h2 id="impulse-train-to-a-sequence">impulse train to a sequence</h2>
+<p><img src="/2022/05/01/sampling-dft/image-20230519000938294.png"
+alt="image-20230519000938294" /></p>
+<blockquote>
+<ul>
+<li><p>The <span class="math inline">\(x_s(t)\)</span> is, in a sense, a
+<em>continuous-time signal (specifically, an impulse train)</em> that is
+zero,except at integer multiples of <span
+class="math inline">\(T\)</span>.</p></li>
+<li><p>The sequence <span class="math inline">\(x[n]\)</span> is indexed
+on the integer variable <span class="math inline">\(n\)</span>, which
+introduces a <em>time normalization</em>, <span
+class="math inline">\(x[n]\)</span> contains <strong>no</strong>
+explicit information about the sampling period <span
+class="math inline">\(T\)</span></p></li>
+<li><p>The samples of <span class="math inline">\(x_c(t)\)</span> are
+represented by <em>finite numbers</em> in <span
+class="math inline">\(x[n]\)</span> rather than as the <em>areas of
+impulses</em> in <span class="math inline">\(x_s(t)\)</span></p></li>
+</ul>
+</blockquote>
+<p>Our eventual objective is to express <span
+class="math inline">\(X(e^{j\omega})\)</span>, the <em>discrete-time
+Fourier transform (DTFT) of the sequence <span
+class="math inline">\(x[n]\)</span></em>, in terms of <span
+class="math inline">\(X_s(j\Omega)\)</span> and <span
+class="math inline">\(X_c(j\Omega)\)</span>.</p>
+<p>Toward this end, let us consider an alternative expression for <span
+class="math inline">\(X_s(j\Omega)\)</span>, Applying the
+continuous-time Fourier transform to <span class="math inline">\(x_s(t)
+= \sum_{n=-\infty}^{+\infty}x_c(nT)\delta (t-nT)\)</span>, we obtain
+<span class="math display">\[
+X_s(j\Omega) = \sum_{n=-\infty}^{+\infty}x_c(nT)e^{-j\Omega Tn}
+\]</span> and <span class="math display">\[
+X(e^{j\omega}) =\sum_{n=-\infty}^{+\infty}x[n]e^{-j\omega n}
+\]</span> where DTFT is applied</p>
+<p>Since <span class="math display">\[
+x[n] = x_c(nT)
+\]</span> it follows that <span class="math display">\[
+X_s(j\Omega) = X(e^{j\omega})|_{\omega=\Omega T} = X(e^{j\Omega T})
+\]</span> Consequently, <span class="math display">\[
+X(e^{j\Omega T}) =X_s(j\Omega)=
+\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c(j(\Omega - k\Omega_s))
+\]</span></p>
+<p>or equivalently, <span class="math display">\[
+X(e^{j\omega}) = \frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[
+j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right]
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(\omega\)</span>: radians per sample</p>
+<p><span class="math inline">\(\Omega\)</span>: radians per second</p>
+</blockquote>
+<p>The factor <span class="math inline">\(\frac{1}{T}\)</span> in <span
+class="math inline">\(X(e^{j\omega})\)</span> is misleading, actually
+<span class="math inline">\(x[n]\)</span> is not scaled by <span
+class="math inline">\(\frac{1}{T}\)</span> when taking <span
+class="math inline">\(\omega\)</span> variable of integration into
+account <span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi} \int_{2\pi}X(e^{j\omega})e^{j\omega
+n}d\omega \\
+&amp;= \frac{1}{2\pi}\int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c
+\left[ j\left(\frac{\omega}{T} - \frac{2\pi k}{T}\right)\right]
+e^{j\omega n}d\omega \\
+&amp;\simeq \frac{1}{2\pi}\frac{1}{T}\int_{2\pi}X_c (\frac{\omega}{T} )
+e^{j\omega  n} d\omega \\
+&amp;=\frac{1}{2\pi} \frac{1}{T}\int_{2\pi} \left[
+\int_{\infty}X_c(\Phi)\delta (\Phi - \frac{\omega}{T} )d\Phi
+\right]  e^{j\omega  n} d\omega \\
+&amp;=\frac{1}{2\pi} \frac{1}{T} \int_{\infty}X_c(\Phi)d\Phi
+\int_{2\pi}\delta (\Phi - \frac{\omega}{T} )e^{j\omega  n} d\omega \\
+&amp;=\frac{1}{2\pi} \frac{1}{T} \int_{\infty}X_c(\Phi)d\Phi
+\int_{2\pi}T\cdot \delta (\Phi T - \omega )e^{j\omega  n} d\omega \\
+&amp;=\frac{1}{2\pi} \int_{\infty}X_c(\Phi) e^{j\Phi T n}d\Phi
+\end{align}\]</span></p>
+<p>That is <span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi}\int_{2\pi} \frac{1}{T}X_c (\frac{\omega}{T}
+) e^{j\omega  n} d\omega \\
+&amp;= \frac{1}{2\pi} \int_{\infty}X_c(\Omega) e^{j\Omega T n}d\Omega
+\tag{31}
+\end{align}\]</span></p>
+<blockquote>
+<p>assuming Nyquist–Shannon sampling theorem is met</p>
+</blockquote>
+<hr />
+<p>Assuming <span class="math inline">\(x_c(t) = \cos(\omega_0
+t)\)</span>, <span class="math inline">\(x_s(t)=
+\sum_{n=-\infty}^{\infty}x_c(nT)\delta(t-nT)\)</span> and <span
+class="math inline">\(x[n]=x_c(nT)\)</span>, that is <span
+class="math display">\[\begin{align}
+x_c(t) &amp; = \cos(\omega_0 t) \\
+x_s(t) &amp;= \sum_{n=-\infty}^{\infty}\cos(\omega_0 nT)\delta(t-nT) \\
+x[n] &amp;= \cos(\omega_0 nT)
+\end{align}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(X_c(j\Omega)\)</span>, the Fourier
+Transform of <span class="math inline">\(x_c(t)\)</span> <span
+class="math display">\[
+X_c(j\Omega) = \pi[\delta(\Omega - \Omega_0) + \delta(\Omega +
+\Omega_0)]
+\]</span></p></li>
+<li><p><span class="math inline">\(X(e^{j\omega})\)</span>​, the the
+discrete-time Fourier transform (DTFT) of the sequence <span
+class="math inline">\(x[n]\)</span> <span class="math display">\[
+X(e^{j\omega}) =\sum_{k=-\infty}^{+\infty}\pi[\delta(\omega -
+\omega_0-2\pi k) + \delta(\omega + \omega_0-2\pi k)]
+\]</span></p></li>
+<li><p><span class="math inline">\(X_s(j\Omega)\)</span>, the Fourier
+Transform of <span class="math inline">\(x_s(t)\)</span> <span
+class="math display">\[
+X_s(j\Omega)= \frac{1}{T}\sum_{k=-\infty}^{+\infty}\pi[\delta(\Omega -
+\Omega_0-k\Omega_s) + \delta(\Omega + \Omega_0-k\Omega_s)]
+\]</span></p></li>
+</ul>
+<p>Express <span class="math inline">\(X(e^{j\omega})\)</span> in terms
+of <span class="math inline">\(X_s(j\Omega)\)</span> and <span
+class="math inline">\(X_c(j\Omega)\)</span> <span
+class="math display">\[
+X(e^{j\omega}) =
+\frac{1}{T}\sum_{k=-\infty}^{+\infty}\pi[\delta(\frac{\omega}{T} -
+\Omega_0-k\Omega_s) + \delta(\frac{\omega}{T} + \Omega_0-k\Omega_s)]
+\]</span> Inverse <span class="math inline">\(X(e^{j\omega})\)</span>
+<span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi} \int_{2\pi}X(e^{j\omega}) e^{j\omega n}
+d\omega \\
+&amp;= \frac{1}{2\pi}\int_{2\pi} \pi[\delta(\frac{\omega}{T} - \Omega_0)
++ \delta(\frac{\omega}{T} + \Omega_0)]e^{j\omega n} d\frac{\omega}{T} \\
+&amp;= \frac{1}{2\pi}\int_{2\pi} \pi[\delta(\frac{\omega}{T} -
+\Omega_0)e^{j\omega_0 n} + \delta(\frac{\omega}{T} +
+\Omega_0)e^{-j\omega_0 n}] d\frac{\omega}{T} \\
+&amp;= \frac{1}{2}[ e^{j\omega_0 n}\int_{2\pi} [\delta(\frac{\omega}{T}
+- \Omega_0)d\frac{\omega}{T} + e^{-j\omega_0 n}\int_{2\pi}
+[\delta(\frac{\omega}{T} + \Omega_0)d\frac{\omega}{T}] \\
+&amp;= \frac{1}{2}[ e^{j\omega_0 n} + e^{-j\omega_0 n} ] \\
+&amp;= \cos(\omega_0 n)
+\end{align}\]</span></p>
+<p>or follow EQ.(31)</p>
+<p><span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi} \int_{\infty}X_c(\Omega) e^{j\Omega T
+n}d\Omega \\
+&amp;= \frac{1}{2\pi} \int_{\infty} \pi[\delta(\Omega - \Omega_0) +
+\delta(\Omega + \Omega_0)]e^{j\Omega T n}d\Omega \\
+&amp;= \frac{1}{2}(e^{j\Omega_0 T n}+e^{-j\Omega_0 T n}) \\
+&amp;= \cos(\omega_0 n)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\omega_0 = \Omega_0 T\)</span></p>
+<hr />
+<h2 id="impulse-invariance">Impulse Invariance</h2>
+<p><span class="math display">\[
+h[n] = Th_c(nT)
+\]</span></p>
+<p>When <span class="math inline">\(h[n]\)</span> and <span
+class="math inline">\(h_c(t)\)</span> are related through the above
+equation, i.e., the impulse response of the discrete-time system is a
+<em>scaled</em>, <em>sampled</em> version of <span
+class="math inline">\(h_c(t)\)</span>, the <em>discrete-time system</em>
+is said to be an <strong>impulse-invariant</strong> version of the
+<em>continuous-time system</em>.</p>
+<p>we have <span class="math display">\[
+H(e^{j\omega}) = H_c\left(j\frac{\omega}{T}\right)
+\]</span></p>
+<h2 id="application---transfer-function">Application - Transfer
+function</h2>
+<h3 id="sampled-impulse-response">sampled impulse response</h3>
+<p>The below equation demonstrates how to obtain <strong>continuous
+Fourier Transform</strong> from <strong>DTFT</strong> . <span
+class="math display">\[
+X_c(\omega) = T \cdot X(\omega)
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(T\)</span> is sample period, follow
+previous equation</p>
+</blockquote>
+<h3 id="useful-functions">useful functions</h3>
+<ul>
+<li><p>using <code>fft</code></p>
+<p>The outputs of the DFT are <strong>samples</strong> of the
+DTFT</p></li>
+<li><p>using <code>freqz</code></p>
+<p>modeling as <strong>FIR filter</strong>, and the impulse response
+sequence of an FIR filter is the same as the sequence of filter
+coefficients, we can express the frequency response in terms of either
+the filter coefficients or the impulse response</p>
+<blockquote>
+<p><code>fft</code> is used in <code>freqz</code> internally</p>
+</blockquote></li>
+</ul>
+<h3 id="practical-example">Practical Example</h3>
+<p><strong>Question</strong>:</p>
+<p>​ How to obtain continuous system transfer function from sampled
+impulse</p>
+<p><strong>Answer</strong>:</p>
+<p>​ using above mentioned functions</p>
+<hr />
+<blockquote>
+<p>First order lowpass filter with 3-dB frequency
+<strong>1Hz</strong></p>
+</blockquote>
+<p><img src="/2022/05/01/sampling-dft/image-20220501020004068.png"
+alt="image-20220501020004068" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% continuous system</span></span><br><span class="line">s = tf(<span class="string">&#x27;s&#x27;</span>);</span><br><span class="line">h = <span class="number">2</span>*<span class="built_in">pi</span>/(<span class="number">2</span>*<span class="built_in">pi</span>+s);</span><br><span class="line">[mag, phs, wout] = bode(h);</span><br><span class="line">fct = wout(:)/<span class="number">2</span>/<span class="built_in">pi</span>;</span><br><span class="line">Hct_dB = <span class="number">20</span>*<span class="built_in">log10</span>(mag(:));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fstep = <span class="number">0.01</span>;           <span class="comment">% freq resolution</span></span><br><span class="line">fnyqst = <span class="number">100</span>;</span><br><span class="line">Ts = <span class="number">1</span>/(<span class="number">2</span>*fnyqst);</span><br><span class="line">Fs = <span class="number">1</span>/Ts;              <span class="comment">% sampling freq</span></span><br><span class="line">Ns = <span class="built_in">ceil</span>(Fs/fstep);    <span class="comment">% samping points</span></span><br><span class="line">fstep = Fs/Ns;          <span class="comment">% update fstep</span></span><br><span class="line">t = (<span class="number">0</span>:Ns<span class="number">-1</span>)*Ts;        <span class="comment">% sampling time points</span></span><br><span class="line"></span><br><span class="line">y = impulse(h, t);      <span class="comment">% impulse resp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% modelling as discrete system</span></span><br><span class="line">Y = fft(y);                 <span class="comment">% dft</span></span><br><span class="line">Hfft = Y * Ts;              <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfft_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfft(<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)));</span><br><span class="line">ffft = (<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)*fstep - fstep;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Hfir, ffir] = freqz(y, <span class="number">1</span>, [], <span class="number">1</span>/Ts);   <span class="comment">% modelling as FIR</span></span><br><span class="line">Hfir = Hfir * Ts;           <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfir_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfir));</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot</span></span><br><span class="line">semilogx(fct, Hct_dB, <span class="string">&#x27;k&#x27;</span>, ffft, Hfft_dB, <span class="string">&#x27;r.-&#x27;</span>, ffir, Hfir_dB, <span class="string">&#x27;b--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;bode(s)&#x27;</span>, <span class="string">&#x27;fft&#x27;</span>, <span class="string">&#x27;FIR model&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">xlim([<span class="number">1e-2</span> <span class="number">1e2</span>]);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response of different methods&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="gotcha">Gotcha</h2>
+<p>A remarkable fact of linear systems is that the <strong>complex
+exponentials</strong> are <strong>eigenfunctions</strong> of a linear
+system, as the system output to these inputs equals the input multiplied
+by a constant factor.</p>
+<ul>
+<li>Both amplitude and phase may change</li>
+<li>but the frequency does not change</li>
+</ul>
+<blockquote>
+<p>For an input <span class="math inline">\(x(t)\)</span>, we can
+determine the output through the use of the convolution integral, so
+that with <span class="math inline">\(x(t) = e^{st}\)</span> <span
+class="math display">\[\begin{align}
+y(t) &amp;= \int_{-\infty}^{+\infty}h(\tau)x(t-\tau)d\tau \\
+&amp;= \int_{-\infty}^{+\infty} h(\tau) e^{s(t-\tau)}d\tau \\
+&amp;= e^{st}\int_{-\infty}^{+\infty} h(\tau) e^{-s\tau}d\tau \\
+&amp;= e^{st}H(s)
+\end{align}\]</span></p>
+</blockquote>
+<p>Take the input signal to be a complex exponential of the form <span
+class="math inline">\(x(t)=Ae^{j\phi}e^{j\omega t}\)</span></p>
+<p><span class="math display">\[\begin{align}
+y(t) &amp;= h(t)*x(t) \\
+&amp;= H(j\omega)Ae^{j\phi}e^{j\omega t}
+\end{align}\]</span></p>
+<p>The frequency response at <span
+class="math inline">\(-\omega\)</span> is the <strong>complex
+conjugate</strong> of the frequency response at <span
+class="math inline">\(+\omega\)</span>, given <span
+class="math inline">\(h(t)\)</span> is real</p>
+<p><span class="math display">\[\begin{align}
+H^*(t) &amp;= \left(\int_{-\infty}^{+\infty}h(t)e^{-j\omega
+t}dt\right)^* \\
+&amp;= \int_{-\infty}^{+\infty}h^*(t)e^{+j\omega t}dt \\
+&amp;= \int_{-\infty}^{+\infty}h(t)e^{-j(-\omega t)}dt \\
+&amp;= H(-j\omega)
+\end{align}\]</span></p>
+<p>The <strong>real cosine signal</strong> is actually composed of two
+<strong>complex exponential signals</strong>: one with positive
+frequency and the other with negative <span class="math display">\[
+cos(\omega t + \phi) = \frac{e^{j(\omega t + \phi)} + e^{-j(\omega t +
+\phi)}}{2}
+\]</span></p>
+<p>The sinusoidal response is the sum of the complex-exponential
+response at the positive frequency <span
+class="math inline">\(\omega\)</span> and the response at the
+corresponding negative frequency <span
+class="math inline">\(-\omega\)</span> because of LTI systems's
+superposition property</p>
+<ul>
+<li><p>input: <span class="math display">\[\begin{align}
+x(t) &amp;= A cos(\omega t + \phi) \\
+&amp;= \frac{1}{2}Ae^{\phi}e^{\omega t} +
+\frac{1}{2}Ae^{-\phi}e^{-\omega t}
+\end{align}\]</span></p></li>
+<li><p>output with <span
+class="math inline">\(H(j\omega)=Ge^{j\theta}\)</span>: <span
+class="math display">\[\begin{align}
+y(t) &amp;= H(j\omega)\frac{1}{2}Ae^{\phi}e^{\omega t}
++  H(-j\omega)\frac{1}{2}Ae^{-\phi}e^{-\omega t} \\
+&amp;= Ge^{j\theta}\frac{1}{2}Ae^{\phi}e^{\omega t} +
+Ge^{-j\theta}\frac{1}{2}Ae^{-\phi}e^{-\omega t} \\
+&amp;= GAcos(\omega t + \phi + \theta)
+\end{align}\]</span></p></li>
+</ul>
+<p>Its phase shift is <span class="math inline">\(\theta\)</span> and
+gain is <span class="math inline">\(G\)</span>, which is same with <span
+class="math inline">\(H(j\omega)\)</span>.</p>
+<h2 id="reference">reference</h2>
+<p>James H. McClellan, Ronald Schafer, and Mark Yoder. 2015. DSP First
+(2nd. ed.). Prentice Hall Press, USA.</p>
+<p><a target="_blank" rel="noopener" href="https://www.mathworks.com/help/matlab/ref/fft.html">fft -
+https://www.mathworks.com/help/matlab/ref/fft.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.mathworks.com/help/signal/ref/freqz.html">freqz
+- https://www.mathworks.com/help/signal/ref/freqz.html</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cs.ccu.edu.tw/~wtchu/courses/2012s_DSP/Lectures/Lecture%2026%20Frequency%20Response.pdf">Wei-Ta
+Chu, 2012s_DSP - Lecture 26 Frequency Response</a></p>
+<p>Relationship between continuous-time and discrete-time Fourier
+transforms URL: <a
+target="_blank" rel="noopener" href="https://blogs.mathworks.com/steve/2010/01/18/relationship-between-continuous-time-and-discrete-time-fourier-transforms/">https://blogs.mathworks.com/steve/2010/01/18/relationship-between-continuous-time-and-discrete-time-fourier-transforms/</a></p>
+<p>Oppenheim, Alan V. and Cram. “Discrete-time signal processing : Alan
+V. Oppenheim, 3rd edition.” (2011).</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/18/ps-psd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/18/ps-psd/" class="post-title-link" itemprop="url">Power Spectra and Power Spectral Densities</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-18 23:53:29" itemprop="dateCreated datePublished" datetime="2022-04-18T23:53:29+00:00">2022-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>One will see the following phenomena:</p>
+<ol type="1">
+<li>A power spectrum is equal to the square of the absolute value of
+DFT.</li>
+<li>The sum of all power spectral lines in a power spectrum is equal to
+the power of the input signal.</li>
+<li>The integral of a PSD is equal to the power of the input
+signal.</li>
+</ol>
+<blockquote>
+<p>power spectrum has units of <span class="math inline">\(V^2\)</span>
+and power spectral density has units of <span
+class="math inline">\(V^2/Hz\)</span></p>
+</blockquote>
+<p><strong>Parseval's theorem</strong> is a property of the Discrete
+Fourier Transform (DFT) that states: <span class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2 = \frac{1}{N}\sum_{k=0}^{N-1}|X(k)|^2
+\]</span> Multiply both sides of the above by <span
+class="math inline">\(1/N\)</span>: <span class="math display">\[
+\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2 =
+\frac{1}{N^2}\sum_{k=0}^{N-1}|X(k)|^2
+\]</span> <span class="math inline">\(|x(n)|^2\)</span> is instantaneous
+power of a sample of the time signal. So the left side of the equation
+is just the <strong>average power</strong> of the signal over the N
+samples. <span class="math display">\[
+P_{\text{av}} = \frac{1}{N^2}\sum_{k=0}^{N-1}|X(k)|^2\text{,   }V^2
+\]</span> For the each DFT bin, we can say: <span
+class="math display">\[
+P_{\text{bin}}(k) = \frac{1}{N^2}|X(k)|^2\text{,
+k=0:N-1,  }V^2/\text{bin}
+\]</span> This is the power spectrum of the signal.</p>
+<p>Note that <span class="math inline">\(X(k)\)</span> is the
+<strong>two-sided spectrum</strong>. If <span
+class="math inline">\(x(n)\)</span> is real, then <span
+class="math inline">\(X(k)\)</span> is symmetric about <span
+class="math inline">\(fs/2\)</span>, with each side containing half of
+the power. In that case, we can choose to keep just the
+<strong>one-sided spectrum</strong>, and multiply Pbin by 2
+(<strong>except DC &amp; Nyquist</strong>):</p>
+<p><span class="math display">\[
+P_{\text{bin,one-sided}}(k) = \left\{ \begin{array}{cl}
+\frac{1}{N^2}|X(0)|^2 &amp; : \ k = 0 \\
+\frac{2}{N^2}|X(k)|^2 &amp; : \ 1 \leq k \leq N/2-1 \\
+\frac{1}{N^2}|X(N/2)|^2 &amp; : \ k = N/2
+\end{array} \right.
+\]</span></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rng default</span><br><span class="line">Fs = <span class="number">1000</span>;</span><br><span class="line">t = <span class="number">0</span>:<span class="number">1</span>/Fs:<span class="number">1</span><span class="number">-1</span>/Fs;</span><br><span class="line">x = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">100</span>*t) + <span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line">N = <span class="built_in">length</span>(x);</span><br><span class="line">xdft = fft(x);</span><br><span class="line">xsq_sum_avg = sum(x.^<span class="number">2</span>)/N;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(xdft).^<span class="number">2</span>)/N^<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>where <code>xsq_sum_avg</code> is same with
+<code>specsq_sum_avg</code></p>
+<blockquote>
+<p>For a discrete-time sequence x(n), the DFT is defined as: <span
+class="math display">\[
+X(k) = \sum_{n=0}^{N-1}x(n)e^{-j2\pi kn/N}
+\]</span> By it definition, the DFT does <strong>NOT</strong> apply to
+infinite duration signals.</p>
+</blockquote>
+<h2 id="scaling-dft-results">scaling DFT results</h2>
+<table>
+<thead>
+<tr class="header">
+<th>spectra type</th>
+<th>unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>amplitude spectrum</td>
+<td>V</td>
+</tr>
+<tr class="even">
+<td>power spectrum</td>
+<td>V^2</td>
+</tr>
+<tr class="odd">
+<td>power spectrum density</td>
+<td>V^2/Hz</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">Tutorial
+on Scaling of the Discrete Fourier Transform and the Implied Physical
+Units of the Spectra of Time-Discrete Signals <em>Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp</em></a></p>
+</blockquote>
+<p>Different scaling is needed to apply for amplitude spectrum, power
+spectrum and power spectrum density, which shown as below</p>
+<p><img src="/2022/04/18/ps-psd/image-20220427220639646.png"
+alt="image-20220427220639646" /></p>
+<blockquote>
+<p><span class="math inline">\(f_s\)</span> in Eq.(13) is <strong>sample
+rate</strong> rather than frequency resolution.</p>
+</blockquote>
+<p>And Eq.(13) can be expressed as <span class="math display">\[
+\text{PSD}(k) =\frac{1}{f_{\text{res}}\cdot
+N\sum_{n}w^2(n)}\left|X_{\omega}(k)\right|^2
+\]</span> where <span class="math inline">\(f_{\text{res}}\)</span> is
+frequency resolution</p>
+<p>We define the following two sums for normalization purposes:</p>
+<p><span class="math display">\[\begin{align}
+S_1 &amp;= \sum_{j=0}^{N-1}w_j \\
+S_2 &amp;= \sum_{j=0}^{N-1}w_j^2
+\end{align}\]</span></p>
+<p>Given Eq.(12) and Eq.(13) <span class="math display">\[\begin{align}
+\text{PS(k)} &amp;= \text{PSD(k)} \cdot \frac{f_s
+\sum_{n}w^2(n)}{(\sum_{n}\omega(n))^2} \\
+&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N
+\sum_{n}w^2(n)}{(\sum_{n}w(n))^2} \\
+&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N S_2}{S_1^2} \\
+&amp;= \text{PSD(k)} \cdot f_{\text{res}} \cdot \text{NENBW} \\
+&amp;= \text{PSD(k)} \cdot \text{ENBW}
+\end{align}\]</span></p>
+<p>where <strong>Normalized Equivalent Noise BandWidth</strong> is
+defined as <span class="math display">\[
+\text{NENBW} =\frac{N S_2}{S_1^2}
+\]</span> and <strong>Effective Noise BandWidth</strong> is <span
+class="math display">\[
+\text{ENBW} =f_{\text{res}} \cdot \frac{N S_2}{S_1^2}
+\]</span></p>
+<blockquote>
+<p>For Rectangular window, <span class="math inline">\(\text{ENBW}
+=f_{\text{res}}\)</span></p>
+<p>This <em>equivalent noise bandwidth</em> is required when the
+resulting spectrum is to be expressed as <em>spectral density (such as
+for noise measurements)</em>.</p>
+</blockquote>
+<p><em>Eq.(13) Example:</em></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Fs = <span class="number">1024</span>; </span><br><span class="line">t  = (<span class="number">0</span>:<span class="number">1</span>/Fs:<span class="number">1</span><span class="number">-1</span>/Fs).&#x27;; </span><br><span class="line">x  = <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*<span class="number">200</span>);</span><br><span class="line">Nx = <span class="built_in">length</span>(x);</span><br><span class="line"><span class="comment">% Window data</span></span><br><span class="line">w = hamming(Nx);	<span class="comment">% hamming window</span></span><br><span class="line">xw = x.*w; </span><br><span class="line"><span class="comment">% Calculate power</span></span><br><span class="line">nfft = Nx; </span><br><span class="line">X = fft(xw,nfft);</span><br><span class="line"></span><br><span class="line">NumUniquePts = nfft/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">Pxx1 = <span class="built_in">abs</span>(X(<span class="number">1</span>:NumUniquePts)).^<span class="number">2</span>/sum(w.^<span class="number">2</span>)/Fs;    <span class="comment">%!!! Eq.(13)</span></span><br><span class="line">Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Fx1 = (<span class="number">0</span>:NumUniquePts<span class="number">-1</span>)*Fs/nfft; </span><br><span class="line"></span><br><span class="line">[Pxx2,Fx2] = pwelch(x,w,<span class="number">0</span>,nfft,Fs);</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(Fx1,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx1),Fx2,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx2),<span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;PSD via Eq.(13)&#x27;</span>,<span class="string">&#x27;PSD via pwelch&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/04/18/ps-psd/image-20220514165525958.png"
+alt="image-20220514165525958" /></p>
+<h2 id="window-effects">window effects</h2>
+<p>It is possible to correct both the amplitude and energy content of
+the windowed signal to equal the original signal. However, both
+corrections cannot be applied simultaneously</p>
+<h3 id="amplitude-correction">Amplitude correction</h3>
+<p><em>Linear (amplitude) Spectrum</em> <span class="math display">\[
+X(k) = \frac{X_{\omega}(k)}{S_1}
+\]</span> <em>power spectrum</em> <span class="math display">\[
+\text{PS}=\frac{\left| X_{\omega}(k) \right|^2}{S_1^2}
+\]</span></p>
+<blockquote>
+<p>usage: tone amplitude</p>
+</blockquote>
+<h3 id="power-correction">Power correction</h3>
+<p><strong>power spectral density (PSD)</strong> <span
+class="math display">\[
+\text{PSD} =\frac{\left|X_{\omega}(k)\right|^2}{f_s\cdot S_2}
+\]</span></p>
+<blockquote>
+<p>We have <span class="math inline">\(\text{PSD} =
+\frac{\text{PS}}{\text{ENBW}}\)</span>, where <span
+class="math inline">\(\text{ENBW}=\frac{N \cdot
+S_2}{S_1^2}f_{\text{res}}\)</span></p>
+</blockquote>
+<p><strong>linear power spectrum</strong> <span class="math display">\[
+\text{PS}_L=\frac{|X_{\omega}(k)|^2}{N\cdot S_2}
+\]</span></p>
+<blockquote>
+<p>usage: RMS value, total power <span class="math display">\[
+\text{PS}_L(k)=\text{PSD(k)} \cdot f_{\text{res}}
+\]</span></p>
+</blockquote>
+<h3 id="window-correction-factors">Window Correction Factors</h3>
+<p>While a window helps reduce leakage (The window reduces the jumps at
+the ends of the repeated signal), the window itself distorts the data in
+two different ways:</p>
+<ul>
+<li><p><strong>Amplitude</strong> – The <em>amplitude</em> of the signal
+is reduced</p>
+<blockquote>
+<p>This is due to the fact that the window removes information in the
+signal</p>
+</blockquote></li>
+<li><p><strong>Energy</strong> – The <em>area</em> under the curve, or
+energy of the signal, is reduced</p></li>
+</ul>
+<p><img src="/2022/04/18/ps-psd/rtaImage.png" alt="rtaImage" /></p>
+<p><strong>Window correction factors</strong> are used to try and
+compensate for the effects of applying a window to data. There are both
+amplitude and energy correction factors.</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 43%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Window Type</th>
+<th>Amplitude Correction (<span class="math inline">\(K_a\)</span>)</th>
+<th>Energy Correction (<span class="math inline">\(K_e\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rectangluar</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td>hann</td>
+<td>1.9922</td>
+<td>1.6298</td>
+</tr>
+<tr class="odd">
+<td>blackman</td>
+<td>2.3903</td>
+<td>1.8155</td>
+</tr>
+<tr class="even">
+<td>kaiser</td>
+<td>1.0206</td>
+<td>1.0204</td>
+</tr>
+</tbody>
+</table>
+<p>Only the Uniform window (rectangular window), which is equivalent to
+no window, has the same amplitude and energy correction factors.</p>
+<p><span class="math display">\[\begin{align}
+X(k) &amp;= \frac{X_\omega(k)}{\sum_n w(n)} \\
+&amp;= \frac{N}{\sum_n w(n)} \frac{X_\omega(k)}{N} \\
+&amp;= K_a \cdot \frac{X_\omega(k)}{N}
+\end{align}\]</span> where <span class="math inline">\(K_a =
+\frac{N}{\sum_n \omega(n)}\)</span></p>
+<blockquote>
+<p>In literature, <strong>Coherent power gain</strong> is defined show
+below, which is close related to <span
+class="math inline">\(K_a\)</span> <span class="math display">\[
+\text{Coherent power gain (dB)} = 20 \; log_{10} \left( \frac{\sum_n
+w[n]}{N} \right)
+\]</span></p>
+</blockquote>
+<p><img src="/2022/04/18/ps-psd/amplitude-correction.png"
+alt="amplitude-correction" /></p>
+<blockquote>
+<p>With amplitude correction, by multiplying by two, the <em>peak
+value</em> of both the original and corrected spectrum match. However
+the energy content is not the same.</p>
+<p>The amplitude corrected signal (red) appears to have more energy, or
+area under the curve, than the original signal (blue).</p>
+</blockquote>
+<p><span class="math display">\[\begin{align}
+\text{PSD} &amp;=\frac{1}{f_{\text{res}}\cdot
+N\sum_{n}w^2(n)}\left|X_{\omega}(K)\right|^2 \\
+&amp;= \frac{N}{\sum_{n}w^2(n)}
+\frac{\left|X_{\omega}(K)\right|^2}{f_{\text{res}}\cdot N^2} \\
+&amp;=\left|K_e \cdot \frac{X_{\omega}(K)}{N}\right|^2 \cdot
+\frac{1}{f_{\text{res}}}
+\end{align}\]</span></p>
+<p>wherer <span class="math inline">\(K_e =
+\sqrt{\frac{N}{\sum_{n}\omega^2(n)}}\)</span></p>
+<p><img src="/2022/04/18/ps-psd/energey-correction.png"
+alt="energey-correction" /></p>
+<blockquote>
+<p>Multiplying the values in the spectrum by 1.63, rather than 2, makes
+the <em>area</em> under the curve the same for both the original signal
+(blue) and energy corrected signal (red)</p>
+</blockquote>
+<p><strong>hanning</strong>'s correction factors:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">256</span>;</span><br><span class="line">w = hanning(N);</span><br><span class="line">Ka = N/sum(w)</span><br><span class="line">Ke = <span class="built_in">sqrt</span>(N/sum(w.^<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Ka =</span><br><span class="line"></span><br><span class="line">    1.9922</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ke =</span><br><span class="line"></span><br><span class="line">    1.6298</span><br></pre></td></tr></table></figure>
+<h3 id="amplitudepower-correction-example">Amplitude,Power Correction
+Example</h3>
+<p><img src="/2022/04/18/ps-psd/image-20220518002927545.png"
+alt="image-20220518002927545" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 200 Hz, amplitude 1 and 200/3 Hz amplitude 0.3</span></span><br><span class="line">fosc = <span class="number">200</span>;</span><br><span class="line">Fs = <span class="number">8192</span>;</span><br><span class="line">Nx = Fs*<span class="number">4</span>;</span><br><span class="line">tstop = Nx/Fs;</span><br><span class="line">t  = (<span class="number">0</span>:<span class="number">1</span>/Fs:tstop<span class="number">-1</span>/Fs).&#x27;; </span><br><span class="line">x  = <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*fosc) + <span class="number">0.3</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*t*fosc/<span class="number">3</span>);</span><br><span class="line">Nx = <span class="built_in">length</span>(x);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% direct method, time domain</span></span><br><span class="line">P0 = sum(x.^<span class="number">2</span>)/Nx;</span><br><span class="line">xrms0 = <span class="built_in">sqrt</span>(P0);   <span class="comment">% RMS value caculated by time domain</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms0: %.4f\n&quot;</span>, xrms0);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% Window data</span></span><br><span class="line">w = hamming(Nx);	<span class="comment">% hamming window</span></span><br><span class="line"><span class="comment">%w = ones(Nx, 1);	% rectangular window</span></span><br><span class="line"></span><br><span class="line">S1= sum(w);</span><br><span class="line">S2 = sum(w.^<span class="number">2</span>);</span><br><span class="line">NENBW = Nx*S2/S1^<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">xw = x.*w; </span><br><span class="line">nfft = Nx; </span><br><span class="line">X = fft(xw,nfft);   <span class="comment">% windowed signal fft</span></span><br><span class="line">NumUniquePts = nfft/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">Fx1 = (<span class="number">0</span>:NumUniquePts<span class="number">-1</span>)*Fs/nfft;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% fft - ps -&gt; rms</span></span><br><span class="line">Xmag = <span class="built_in">abs</span>(X);</span><br><span class="line">PS1 = Xmag.^<span class="number">2</span>/S1^<span class="number">2</span>;    <span class="comment">%!!! Eq.(12)</span></span><br><span class="line">PS1 = PS1(<span class="number">1</span>:NumUniquePts);</span><br><span class="line">PS1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = PS1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Pmax_fft = <span class="built_in">max</span>(PS1);    <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;Pmax_fft: %.4f\n&quot;</span>, Pmax_fft);</span><br><span class="line"></span><br><span class="line"><span class="comment">% linear power spectrum</span></span><br><span class="line">PSL_fft = Xmag.^<span class="number">2</span>/nfft/S2;</span><br><span class="line">PSL_fft = PSL_fft(<span class="number">1</span>:NumUniquePts);</span><br><span class="line">PSL_fft = PSL_fft(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;</span><br><span class="line">Ptot_fft1 = sum(PSL_fft);</span><br><span class="line">xrms_PSL = <span class="built_in">sqrt</span>(Ptot_fft1); <span class="comment">% !!! power OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_PSL: %.4f\n&quot;</span>, xrms_PSL);</span><br><span class="line"></span><br><span class="line"><span class="comment">% use psd*fres to calculate total power</span></span><br><span class="line">Pxx1 = <span class="built_in">abs</span>(X(<span class="number">1</span>:NumUniquePts)).^<span class="number">2</span>/sum(w.^<span class="number">2</span>)/Fs;    <span class="comment">%!!! Eq.(13)</span></span><br><span class="line">Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = Pxx1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>)*<span class="number">2</span>;    <span class="comment">% twosided -&gt; onesided</span></span><br><span class="line">Ptot_fft2 = sum(Pxx1*Fs/nfft);</span><br><span class="line">xrms_psd = <span class="built_in">sqrt</span>(Ptot_fft2);     <span class="comment">% !!! power OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_psd: %.4f\n&quot;</span>, xrms_psd);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%% pwelch</span></span><br><span class="line">[Pxx2,Fx2] = pwelch(x,w,<span class="number">0</span>,nfft,Fs);</span><br><span class="line">fres = Fx2(<span class="number">2</span>)-Fx2(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">PS2 = Pxx2*fres;</span><br><span class="line">Ptot_pwelch = sum(PS2);</span><br><span class="line">xrms_pwelch = <span class="built_in">sqrt</span>(Ptot_pwelch);    <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;xrms_pwelch: %.4f\n&quot;</span>, xrms_pwelch);</span><br><span class="line"></span><br><span class="line"><span class="comment">% PS = PSD * ENBW always hold</span></span><br><span class="line">ENBW = fres * NENBW;</span><br><span class="line">PS2_pwelch = Pxx2*ENBW;</span><br><span class="line">Pmax_pwelch = <span class="built_in">max</span>(PS2_pwelch);  <span class="comment">% !!! amplitude OK</span></span><br><span class="line">fprintf(<span class="string">&quot;Pmax_pwelch: %.4f\n&quot;</span>, Pmax_pwelch);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot psd of two methods</span></span><br><span class="line"><span class="built_in">plot</span>(Fx1,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx1),Fx2,<span class="number">10</span>*<span class="built_in">log10</span>(Pxx2),<span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;PSD via Eq.(13)&#x27;</span>,<span class="string">&#x27;PSD via pwelch&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB; V^2/Hz&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xrms0: 0.7383</span><br><span class="line">Pmax_fft: 0.5000</span><br><span class="line">xrms_PSL: 0.7382</span><br><span class="line">xrms_psd: 0.7382</span><br><span class="line">xrms_pwelch: 0.7382</span><br><span class="line">Pmax_pwelch: 0.5000</span><br></pre></td></tr></table></figure>
+<h2 id="rms">RMS</h2>
+<p>We may also want to know for example the RMS value of the signal, in
+order to know how much power the signal generates. This can be done
+using Parseval’s theorem.</p>
+<p>For a <strong>periodic</strong> signal, which has a discrete
+spectrum, we obtain its total RMS value by summing the included signals
+using <span class="math display">\[
+x_{\text{rms}}=\sqrt{\sum R_{xk}^2}
+\]</span> Where <span class="math inline">\(R_{xk}\)</span> is the RMS
+value of each sinusoid for <span
+class="math inline">\(k=1,2,3,...\)</span> The RMS value of a signal
+consisting of a number of sinusoids is consequently equal to <strong>the
+square root of the sum of the RMS values</strong>.</p>
+<p>This result could also be explained by noting that sinusoids of
+different frequencies are <strong>orthogonal</strong>, and can therefore
+be summed like vectors (using <em>Pythagoras’ theorem</em>)</p>
+<p>For a random signal we cannot interpret the spectrum in the same way.
+As we have stated earlier, the PSD of a random signal contains all
+frequencies in a particular frequency band, which makes it
+<em>impossible to add the frequencies up</em>. Instead, as the PSD is a
+density function, the correct interpretation is to sum the area under
+the PSD in a specific frequency range, which then is the square of the
+RMS, i.e., the mean-square value of the signal <span
+class="math display">\[
+x_{\text{rms}}=\sqrt{\int G_{xx}(f)df}=\sqrt{\text{area under the
+curve}}
+\]</span> The <strong>linear spectrum</strong>, or <strong>RMS
+spectrum</strong>, defined by <span class="math display">\[\begin{align}
+X_L(k) &amp;= \sqrt{\text{PSD(k)} \cdot f_{\text{res}}}\\
+&amp;=\sqrt{\frac{\left|X_{\omega}(k)\right|^2}{f_{\text{res}}\cdot
+N\sum_{n}\omega^2(n)} \cdot f_{\text{res}}} \\
+&amp;= \sqrt{\frac{\left|X_{\omega}(k)\right|^2}{N\sum_{n}\omega^2(n)}}
+\\
+&amp;= \sqrt{\frac{|X_{\omega}(k)|^2}{N\cdot S_2}}
+\end{align}\]</span></p>
+<p>The corresponding <strong>linear power spectrum</strong> or
+<strong>RMS power spectrum</strong> can be defined by <span
+class="math display">\[\begin{align}
+\text{PS}_L(k)&amp;=X_L(k)^2=\frac{|X_{\omega}(k)|^2}{S_1^2}\frac{S_1^2}{N\cdot
+S_2} \\
+&amp;=\text{PS}(k) \cdot \frac{S_1^2}{N\cdot S_2}
+\end{align}\]</span></p>
+<p>So, RMS can be calculated as below <span
+class="math display">\[\begin{align}
+P_{\text{tot}} &amp;= \sum \text{PS}_L(k) \\
+\text{RMS} &amp;= \sqrt{P_{\text{tot}}}
+\end{align}\]</span></p>
+<h2 id="dft-averaging">DFT averaging</h2>
+<p>we use <span class="math inline">\(N= 8*\text{nfft}\)</span> time
+samples of <span class="math inline">\(x\)</span> and set the number of
+overlapping samples to <span class="math inline">\(\text{nfft}/2 =
+512\)</span>. <code>pwelch</code> takes the DFT of <span
+class="math inline">\(\text{Navg} = 15\)</span> overlapping segments of
+<span class="math inline">\(x\)</span>, each of length <span
+class="math inline">\(\text{nfft}\)</span>, then averages the <span
+class="math inline">\(|X(k)|^2\)</span> of the DFT’s.</p>
+<p>In general, if there are an integer number of segments that cover all
+samples of N, we have <span class="math display">\[
+N = (N_{\text{avg}}-1)*D + \text{nfft}
+\]</span> where <span
+class="math inline">\(D=\text{nfft}-\text{noverlap}\)</span>. For our
+case, with <span class="math inline">\(D = \text{nfft}/2\)</span> and
+<span class="math inline">\(N/\text{nfft} = 8\)</span>, we have <span
+class="math display">\[
+N_{\text{avg}}=2*N/\text{nfft}-1=15
+\]</span> For a given number of time samples N, using overlapping
+segments lets us increase <span class="math inline">\(N_{avg}\)</span>
+compared with no overlapping. In this case, overlapping of 50% increases
+<span class="math inline">\(N_{avg}\)</span> from 8 to 15. Here is the
+Matlab code to compute the spectrum:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nfft= <span class="number">1024</span>;</span><br><span class="line">N= nfft*<span class="number">8</span>;                                <span class="comment">% number of samples in signal</span></span><br><span class="line">n= <span class="number">0</span>:N<span class="number">-1</span>;</span><br><span class="line">x= A*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*f0*n*Ts) + <span class="number">.1</span>*<span class="built_in">randn</span>(<span class="number">1</span>,N);   <span class="comment">% 1 W sinewave + noise</span></span><br><span class="line">noverlap= nfft/<span class="number">2</span>;                         <span class="comment">% number of overlapping time samples</span></span><br><span class="line">window= hanning(nfft);</span><br><span class="line">[pxx,f]= pwelch(x,window,noverlap,nfft,fs);  <span class="comment">% W/Hz  PSD</span></span><br><span class="line">PdB_bin= <span class="number">10</span>*<span class="built_in">log10</span>(pxx*fs/nfft);              <span class="comment">% dBW/bin</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/04/18/ps-psd/figure%203_99153.png"
+alt="figure 3_99153" /></p>
+<blockquote>
+<p><strong>DFT averaging</strong> reduces the variance <span
+class="math inline">\(\sigma^2\)</span> of the noise spectrum by a
+factor of <span class="math inline">\(N_{avg}\)</span>, as long as
+<code>noverlap</code> is not greater than <code>nfft/2</code></p>
+</blockquote>
+<p><img src="/2022/04/18/ps-psd/image-20220420013255660.png"
+alt="image-20220420013255660" /></p>
+<p><img src="/2022/04/18/ps-psd/image-20230526011628682.png"
+alt="image-20230526011628682" /></p>
+<h2 id="fftshift">fftshift</h2>
+<p>The result of <code>fft</code> and its index is shown as below</p>
+<p><img src="/2022/04/18/ps-psd/complexDFT_Matlab_index.png"
+alt="complexDFT_Matlab_index" /></p>
+<p>After <code>fftshift</code></p>
+<p><img src="/2022/04/18/ps-psd/FFTshift_Matlab_index_resolved.png"
+alt="FFTshift_Matlab_index_resolved" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; fftshift([<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">     <span class="number">4</span>     <span class="number">5</span>     <span class="number">6</span>     <span class="number">1</span>     <span class="number">2</span>     <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="dft-and-psd-function-in-virtuoso"><code>dft</code> and
+<code>psd</code> function in virtuoso</h2>
+<ul>
+<li><p><code>dft</code> always return</p>
+<p><img src="/2022/04/18/ps-psd/image-20230525011604685.png"
+alt="image-20230525011604685" /></p></li>
+</ul>
+<p>To compensate windowing effect, <span
+class="math inline">\(W(n)\)</span>, the <code>dft</code> output should
+be multiplied by <span class="math inline">\(K_a\)</span>, e.g. 1.9922
+for hanning window.</p>
+<ul>
+<li><code>psd</code> function has taken into account <span
+class="math inline">\(K_e\)</span>, postprocessing is
+<strong>not</strong> needed</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/liangsizhuang/Demonstration-DFT-PS-PSD">Demonstration-DFT-PS-PSD</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.mathworks.com/help/signal/ug/power-spectral-density-estimates-using-fft.html">mathworks,
+Power Spectral Density Estimates Using FFT</a></p>
+<p>Lyons, Richard, “Widowing Functions Improve FFT Results”, EDN, June
+1, 1998. <a
+target="_blank" rel="noopener" href="https://www.edn.com/electronics-news/4383713/Windowing-Functions-Improve-FFT-Results-Part-I">https://www.edn.com/electronics-news/4383713/Windowing-Functions-Improve-FFT-Results-Part-I</a></p>
+<p>Rapuano, Sergio, and Harris, Fred J., An Introduction to FFT and Time
+Domain Windows, IEEE Instrumentation and Measurement Magazine, December,
+2007. <a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/4428580">https://ieeexplore.ieee.org/document/4428580</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1004.php">Neil
+Robertson, The Power Spectrum</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1221.php">Neil
+Robertson, Use Matlab Function pwelch to Find Power Spectral Density –
+or Do It Yourself</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.dsprelated.com/showarticle/1211.php">Neil
+Robertson, Evaluate Window Functions for the Discrete Fourier
+Transform</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.gaussianwaves.com/2015/11/interpreting-fft-results-complex-dft-frequency-bins-and-fftshift/">Mathuranathan
+Viswanathan, Interpret FFT, complex DFT, frequency bins &amp;
+FFTShift</a></p>
+<p><a target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/47603/59253">robert
+bristow-johnson, Does windowing affect Parseval's theorem?</a></p>
+<p>Heinzel, Gerhard, A. O. Rüdiger and Roland Schilling. "Spectrum and
+spectral density estimation by the Discrete Fourier transform (DFT),
+including a comprehensive list of window functions and some new at-top
+windows." (2002). URL: <a
+target="_blank" rel="noopener" href="https://holometer.fnal.gov/GH_FFT.pdf">https://holometer.fnal.gov/GH_FFT.pdf</a></p>
+<p>Window Correction Factors URL: <a
+target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/window-correction-factors">https://community.sw.siemens.com/s/article/window-correction-factors</a></p>
+<p>Brandt, A, 2011. Noise and vibration analysis: signal analysis and
+experimental procedures. John Wiley &amp; Sons</p>
+<p>What should be the correct scaling for PSD calculation using fft.
+URL:<a
+target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/32205">https://dsp.stackexchange.com/a/32205</a></p>
+<p>POWER SPECTRAL DENSITY CALCULATION VIA MATLAB Revision C. URL: <a
+target="_blank" rel="noopener" href="http://www.vibrationdata.com/tutorials_alt/psd_mat.pdf">http://www.vibrationdata.com/tutorials_alt/psd_mat.pdf</a></p>
+<p>Jens Ahrens, Carl Andersson, Patrik Höstmad, Wolfgang Kropp,
+“Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals” in 148th
+Convention of the AES, e-Brief 56, May 2020 [ <a
+target="_blank" rel="noopener" href="http://www.soundfieldsynthesis.org/wp-content/uploads/pubs/Ahrens_etal_AES2020.pdf">pdf</a>,
+<a
+target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">web</a>
+].</p>
+<p>Manolakis, D., &amp; Ingle, V. (2011). <em>Applied Digital Signal
+Processing: Theory and Practice</em>. Cambridge: Cambridge University
+Press. doi:10.1017/CBO9780511835261</p>
 
       
     </div>

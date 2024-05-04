@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">171</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -275,6 +275,8 @@ dynamic response</li>
 </ul>
 <h2 id="nyquist-stability-criterion">Nyquist stability criterion</h2>
 <p><em>TODO</em> 📅</p>
+<h2 id="group-delay">group delay</h2>
+<p><em>TODO</em> 📅</p>
 <h2 id="conversion-between-the-s--and-z-domains">Conversion Between the
 <span class="math inline">\(s\)</span>- and <span
 class="math inline">\(z\)</span>-Domains</h2>
@@ -282,8 +284,6 @@ class="math inline">\(z\)</span>-Domains</h2>
 alt="image-20240429220303281" /></p>
 <p><img src="/2024/05/02/ss-insight/image-20240429215455332.png"
 alt="image-20240429215455332" /></p>
-<h2 id="group-delay">group delay</h2>
-<p><em>TODO</em> 📅</p>
 <h2 id="spectral-content-of-nrz">Spectral content of NRZ</h2>
 <p><img src="/2024/05/02/ss-insight/image-20231111100420675.png"
 alt="image-20231111100420675" /></p>
@@ -436,6 +436,77 @@ s=\frac{2}{T_d}\left( \frac{1-z^{-1}}{1+z^{-1}} \right)
 H(z) = H_c\left( \frac{2}{T_d}\left( \frac{1-z^{-1}}{1+z^{-1}} \right)
 \right)
 \]</span></p>
+<h2 id="different-variants-of-the-psd-definition">Different Variants of
+the PSD Definition</h2>
+<p>In the practice of engineering, it has become customary to use
+slightly different variants of the PSD definition, depending on the
+particular application or research field.</p>
+<ul>
+<li><p><strong>Two-Sided PSD</strong>, <span
+class="math inline">\(S_x(f)\)</span></p>
+<p>this is a synonym of the PSD defined as the Fourier Transform of the
+<strong>autocorrelation</strong>.</p></li>
+<li><p><strong>One-Sided PSD</strong>, <span
+class="math inline">\(S&#39;_x(f)\)</span></p>
+<p>this is a variant derived from the <em>two-sided PSD</em> by
+considering only the <em>positive frequency</em> semi-axis.</p>
+<p>To <strong>conserve the total power</strong>, the value of the
+one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
+class="math display">\[
+S&#39;_x(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_x(f) &amp; : \ f = 0 \\
+2S_x(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2024/05/02/ss-insight/image-20230603185546658.png"
+alt="image-20230603185546658" /></p>
+<blockquote>
+<p>Note that the one-sided PSD definition makes sense only if the
+two-sided is an even function of <span
+class="math inline">\(f\)</span></p>
+</blockquote>
+<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
+symmetrical around a positive frequency <span
+class="math inline">\(f_0\)</span>, then two additional definitions can
+be adopted:</p>
+<ul>
+<li><p><strong>Single-Sideband PSD</strong>, <span
+class="math inline">\(S_{SSB,x}(f)\)</span></p>
+<p>This is obtained from <span
+class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
+frequency axis to <span class="math inline">\(f_0\)</span> <span
+class="math display">\[
+S_{SSB,x}(f) =S&#39;_x(f+f_0)
+\]</span> This concept is particularly useful for describing phase or
+amplitude modulation schemes in wireless communications, where <span
+class="math inline">\(f_0\)</span> is the carrier frequency.</p>
+<blockquote>
+<p>Note that there is no difference in the values of the one-sided
+versus the SSB PSD; it is just a pure translation on the frequency
+axis.</p>
+</blockquote></li>
+<li><p><strong>Double-Sideband PSD</strong>, <span
+class="math inline">\(S_{DSB,x}(f)\)</span></p>
+<p>this is a variant of the SSB PSD obtained by considering only the
+positive frequency semi-axis.</p>
+<p>As in the case of the one-sided PSD, to conserve total power, the
+value of the DSB PSD is twice that of the SSB <span
+class="math display">\[
+S_{DSB,x}(f) = \left\{ \begin{array}{cl}
+0 &amp; : \ f \geq 0 \\
+S_{SSB,x}(f) &amp; : \ f = 0 \\
+2S_{SSB,x}(f) &amp; : \ f \gt 0
+\end{array} \right.
+\]</span></p></li>
+</ul>
+<p><img src="/2024/05/02/ss-insight/image-20230603222054506.png"
+alt="image-20230603222054506" /></p>
+<blockquote>
+<p>Note that the DSB definition makes sense only if the SSB PSD is even
+symmetrical around zero</p>
+</blockquote>
 <h2 id="reference">reference</h2>
 <p>Stephen P. Boyd. EE102 Lecture 10 Sinusoidal steady-state and
 frequency response [<a
@@ -524,7 +595,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -904,7 +975,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -989,7 +1060,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1155,7 +1226,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1274,7 +1345,7 @@ target="_blank" rel="noopener" href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbds
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1431,7 +1502,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1572,7 +1643,7 @@ target="_blank" rel="noopener" href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSape
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2027,7 +2098,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2295,7 +2366,7 @@ doi: 10.1109/MDT.2003.1232259.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 01:11:43" itemprop="dateModified" datetime="2024-05-04T01:11:43+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

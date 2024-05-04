@@ -700,18 +700,18 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Database Navigation</title>
+    <url>/2022/02/07/Innovus-Database-Navigation/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Database Navigation</title>
-    <url>/2022/02/07/Innovus-Database-Navigation/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2577,6 +2577,29 @@ href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">h
       </categories>
   </entry>
   <entry>
+    <title>Arithmetic in Verilog</title>
+    <url>/2022/05/29/arthmetic-verilog/</url>
+    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>1'b1</code>: overflow</p>
+</blockquote>
+<h4 id="signed-signed-signed">signed + signed = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code>: overflow</p>
+<p><code>2'b10</code>: underflow</p>
+</blockquote>
+<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Antenna Effect</title>
     <url>/2023/08/08/antenna/</url>
     <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
@@ -2647,29 +2670,6 @@ href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/le
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Arithmetic in Verilog</title>
-    <url>/2022/05/29/arthmetic-verilog/</url>
-    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>1'b1</code>: overflow</p>
-</blockquote>
-<h4 id="signed-signed-signed">signed + signed = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code>: overflow</p>
-<p><code>2'b10</code>: underflow</p>
-</blockquote>
-<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -7242,6 +7242,18 @@ Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
       </categories>
   </entry>
   <entry>
+    <title>GitHub Pages Build and deployment</title>
+    <url>/2023/07/01/github-pages-deploy/</url>
+    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
+<p><img
+src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
+alt="image-20230701142405404" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Glitches and Hazards</title>
     <url>/2022/05/08/glitch-hazard/</url>
     <content><![CDATA[<ul>
@@ -7279,18 +7291,6 @@ href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.car
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>GitHub Pages Build and deployment</title>
-    <url>/2023/07/01/github-pages-deploy/</url>
-    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
-<p><img
-src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
-alt="image-20230701142405404" /></p>
-]]></content>
-      <categories>
-        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -7698,69 +7698,6 @@ alt="pma_dig_bumps.drawio" /></p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -8505,6 +8442,69 @@ href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemY
 Synthesizer in Deep‐Submicron CMOS"</p>
 <p>Mayank Parasrampuria, Sandeep Jain, Burn-in 101 [<a
 href="https://www.edn.com/burn-in-101/">link</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -11644,243 +11644,6 @@ href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMF
       </categories>
   </entry>
   <entry>
-    <title>Phase Noise and Jitter Simulation</title>
-    <url>/2023/10/21/phasenoise-jitter/</url>
-    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
-<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
-<ol type="1">
-<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
-alt="image-20220511112856934" /></p></li>
-<li><p>manually calculate by definition</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
-alt="image-20220511112806122" /></p></li>
-<li><p><code>output noise</code> with unit <code>dBc</code></p>
-<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
-convention: SSB</em></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
-alt="image-20220511113248984" /></p></li>
-</ol>
-<blockquote>
-<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
-simulation,</p>
-</blockquote>
-<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
-sampled(jitter)/Edge Crossing</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
-alt="EdgePhaseNoise.drawio" /></p>
-<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
-alt="image-20220515214901120" /></p>
-<p>Another way, the following equation can also be used for
-<code>sampled(jitter)/Edge Crossing</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
-<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
-alt="image-20220511150337318" /></p>
-<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
-sampled(jitter) pnoise</h3>
-<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
-obtained by <em>transient noise simulation</em></p>
-<p>The idea is that sample waveform with ideal clock, subtract DC
-offset, then fft(psd)</p>
-<ul>
-<li>samplesRaw = sample(wv)</li>
-<li>samplePost = samplesRaw - average(samplesRaw)</li>
-<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
-alt="image-20220516184543148" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
-alt="image-20220516184844296" /></p>
-<p><strong>Expression</strong>:</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
-alt="image-20220516185506348" /></p>
-<blockquote>
-<p>The computation cost is typically very high, and the accuracy is
-lesser as compared to PSS/Pnoise</p>
-</blockquote>
-<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
-Sampled(jitter): Sampled Phase Option</h2>
-<ul>
-<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
-<li>Use model:
-<ul>
-<li>Sampleds Per Period: number of ponits</li>
-<li>Add Specific Points: specific time point, still time points</li>
-</ul></li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
-alt="image-20220712085426461" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
-alt="image-20220712085836315" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
-alt="image-20220712090011204" /></p>
-<blockquote>
-<p>pss beat freq = 5GHz</p>
-<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
-</blockquote>
-<h2 id="transient-noise">Transient noise</h2>
-<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h3>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
-function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
-<code>psd</code> and <code>abs_jitter</code> function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h4 id="comparison">Comparison</h4>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h3 id="rms-value">RMS value</h3>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h3 id="remarks">Remarks</h3>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Periodic Analysis</title>
     <url>/2023/10/28/periodic/</url>
     <content><![CDATA[<h1 id="pss-and-hb-overview">PSS and HB Overview</h1>
@@ -12509,6 +12272,243 @@ href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pd
       </categories>
   </entry>
   <entry>
+    <title>Phase Noise and Jitter Simulation</title>
+    <url>/2023/10/21/phasenoise-jitter/</url>
+    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
+<p>The phase noise does not affect the total power in the signal, it
+only affects its distribution.</p>
+<ul>
+<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
+a series of impulse functions at the harmonics of <span
+class="math inline">\(f_o\)</span>.</li>
+<li>With phase noise, the impulse functions spread, becoming fatter and
+shorter but retaining the same total power</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
+alt="image-20231029164227587" /></p>
+<blockquote>
+<p><strong>line width</strong>: corner frequency <span
+class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
+</blockquote>
+<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
+<p>A more precise analysis shows that the spectrum of a free-running
+oscillator does indeed have a Lorentian profile:</p>
+<ol type="1">
+<li>it is <strong>flat</strong> for frequencies below a given corner
+frequency</li>
+<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
+it.</li>
+</ol>
+<p>The spectrum of the signal <span class="math inline">\(x(t +
+α(t))\)</span> can be expressed as <span class="math display">\[
+S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
+c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
+\]</span> The integral in above equation around each harmonic is equal
+to the power of the harmonic itself <span class="math inline">\(\left|
+X_n \right|^2\)</span></p>
+<p>This means that the <strong>excess phase noise</strong>
+<strong>DONT</strong> change the energy of the signal; it just spreads
+its energy over the frequency spectrum, blurring the very sharp
+frequency impulse of an ideal noiseless oscillator.</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
+alt="image-20220504130750290" /></p>
+<h2 id="vco-varactor">VCO varactor</h2>
+<blockquote>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+</blockquote>
+<h3 id="pss-pac">PSS + PAC</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h3 id="pss-psp">PSS + PSP</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h3 id="results">results</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<blockquote>
+<p>which are same</p>
+</blockquote>
+<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h3>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
+Sampled(jitter): Sampled Phase Option</h2>
+<ul>
+<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
+<li>Use model:
+<ul>
+<li>Sampleds Per Period: number of ponits</li>
+<li>Add Specific Points: specific time point, still time points</li>
+</ul></li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
+alt="image-20220712085426461" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
+alt="image-20220712085836315" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
+alt="image-20220712090011204" /></p>
+<blockquote>
+<p>pss beat freq = 5GHz</p>
+<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
+</blockquote>
+<h2 id="transient-noise">Transient noise</h2>
+<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h3>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
+function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
+<code>psd</code> and <code>abs_jitter</code> function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h4 id="comparison">Comparison</h4>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h3 id="rms-value">RMS value</h3>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h3 id="remarks">Remarks</h3>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>import package in SystemVerilog compilation</title>
     <url>/2022/03/24/pkg-import-compile-sv/</url>
     <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
@@ -13008,26 +13008,6 @@ Digital Domain</h4>
       </categories>
   </entry>
   <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Power Spectra and Power Spectral Densities</title>
     <url>/2022/04/18/ps-psd/</url>
     <content><![CDATA[<p>One will see the following phenomena:</p>
@@ -13463,6 +13443,26 @@ Press. doi:10.1017/CBO9780511835261</p>
       </categories>
   </entry>
   <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Random Signals</title>
     <url>/2023/11/10/random/</url>
     <content><![CDATA[<h2 id="random-processes">Random Processes</h2>
@@ -13633,81 +13633,6 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
       </categories>
   </entry>
   <entry>
-    <title>Relative Sensitivity</title>
-    <url>/2023/07/12/relative-sensitivity/</url>
-    <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
-the total resistance) is function of <span
-class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
-be expressed as</p>
-<p><span class="math display">\[\begin{align}
-dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
-&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
-\frac{dx_n}{x_n}
-\end{align}\]</span></p>
-<p>Then, we obtain relative variation <span
-class="math display">\[\begin{align}
-\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
-x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
-&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
-\end{align}\]</span></p>
-<p>⭐ where <span class="math inline">\(S_{x_n}^T=\frac{\partial
-T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
-sensitivity</strong></p>
-<blockquote>
-<p><strong>relative sensitivity</strong> connect <span
-class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
-variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
-</blockquote>
-<p>And <span class="math inline">\(dT\)</span> can be expressed as <span
-class="math display">\[
-dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N
-x_n&#39;\cdot \frac{dx_n}{x_n}
-\]</span> ⭐ where <span class="math inline">\(x_n&#39;= S_{x_n}^T
-T\)</span> is the contribution of <span
-class="math inline">\(x_n\)</span> in <span
-class="math inline">\(T\)</span></p>
-<p>⭐ For parallel or series resistors, it can prove <span
-class="math inline">\(\sum_{n=1}^N S_{x_n}^T = 1\)</span> and $ _{n=1}^N
-x_n'=T$</p>
-<hr />
-<p><img src="/2023/07/12/relative-sensitivity/parallel_pgx.drawio.svg"
-alt="parallel_pgx.drawio" /></p>
-<p>Here <span class="math inline">\(T= R_1 \parallel R_2 =
-\frac{R_1R_2}{R_1+R_2}\)</span>, and <span
-class="math inline">\(T|_{R_1=8000, R_2=2000} = 1600\)</span></p>
-<p>We obtain <em>relative sensitivity:</em> <span
-class="math display">\[\begin{align}
-S_{R_1}^T &amp; = \frac{R_2}{R_1+R_2} \\
-S_{R_2}^T &amp; = \frac{R_1}{R_1+R_2}
-\end{align}\]</span></p>
-<p>The contribution of <span class="math inline">\(R_1\)</span> and
-<span class="math inline">\(R_2\)</span> to <span
-class="math inline">\(T\)</span> <span
-class="math display">\[\begin{align}
-R_1&#39;  &amp;= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
-R_2&#39;  &amp;= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
-\end{align}\]</span></p>
-<h2 id="scholar">scholar</h2>
-<p><strong>Normalized sensitivity</strong> captures <strong>relative
-sensitivity</strong></p>
-<blockquote>
-<p>change in objective per change in design variable</p>
-</blockquote>
-<p><img src="/2023/07/12/relative-sensitivity/normalized.PNG"
-alt="Normalized sensitivity" /></p>
-<h2 id="reference">reference</h2>
-<p>Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and
-Sensitivity Analysis [<a
-href="https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf">pdf</a>]</p>
-<p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
-Sensitivity and noise analyses [<a
-href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Cadence&#39;s reg_verifier</title>
     <url>/2022/04/04/reg-verifier/</url>
     <content><![CDATA[<h2 id="generation">Generation</h2>
@@ -13839,6 +13764,81 @@ alt="image-20220404195156776" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Relative Sensitivity</title>
+    <url>/2023/07/12/relative-sensitivity/</url>
+    <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
+the total resistance) is function of <span
+class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
+be expressed as</p>
+<p><span class="math display">\[\begin{align}
+dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
+&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
+\frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>Then, we obtain relative variation <span
+class="math display">\[\begin{align}
+\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
+x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
+&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>⭐ where <span class="math inline">\(S_{x_n}^T=\frac{\partial
+T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p><strong>relative sensitivity</strong> connect <span
+class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
+variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
+</blockquote>
+<p>And <span class="math inline">\(dT\)</span> can be expressed as <span
+class="math display">\[
+dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N
+x_n&#39;\cdot \frac{dx_n}{x_n}
+\]</span> ⭐ where <span class="math inline">\(x_n&#39;= S_{x_n}^T
+T\)</span> is the contribution of <span
+class="math inline">\(x_n\)</span> in <span
+class="math inline">\(T\)</span></p>
+<p>⭐ For parallel or series resistors, it can prove <span
+class="math inline">\(\sum_{n=1}^N S_{x_n}^T = 1\)</span> and $ _{n=1}^N
+x_n'=T$</p>
+<hr />
+<p><img src="/2023/07/12/relative-sensitivity/parallel_pgx.drawio.svg"
+alt="parallel_pgx.drawio" /></p>
+<p>Here <span class="math inline">\(T= R_1 \parallel R_2 =
+\frac{R_1R_2}{R_1+R_2}\)</span>, and <span
+class="math inline">\(T|_{R_1=8000, R_2=2000} = 1600\)</span></p>
+<p>We obtain <em>relative sensitivity:</em> <span
+class="math display">\[\begin{align}
+S_{R_1}^T &amp; = \frac{R_2}{R_1+R_2} \\
+S_{R_2}^T &amp; = \frac{R_1}{R_1+R_2}
+\end{align}\]</span></p>
+<p>The contribution of <span class="math inline">\(R_1\)</span> and
+<span class="math inline">\(R_2\)</span> to <span
+class="math inline">\(T\)</span> <span
+class="math display">\[\begin{align}
+R_1&#39;  &amp;= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
+R_2&#39;  &amp;= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
+\end{align}\]</span></p>
+<h2 id="scholar">scholar</h2>
+<p><strong>Normalized sensitivity</strong> captures <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p>change in objective per change in design variable</p>
+</blockquote>
+<p><img src="/2023/07/12/relative-sensitivity/normalized.PNG"
+alt="Normalized sensitivity" /></p>
+<h2 id="reference">reference</h2>
+<p>Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and
+Sensitivity Analysis [<a
+href="https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf">pdf</a>]</p>
+<p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
+Sensitivity and noise analyses [<a
+href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
     <url>/2022/05/01/rhel8-old-kernels/</url>
     <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
@@ -13848,18 +13848,6 @@ running kernel:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
 <p>From the <code>yum</code> man page:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
-    <url>/2022/02/02/rocky8-cadence/</url>
-    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
-<p><strong>library preparation for EDA installation</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>devops</category>
@@ -13881,6 +13869,18 @@ alt="image-20220401011509900" /></p>
 <p><img
 src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
 alt="image-20220401011543866" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
+    <url>/2022/02/02/rocky8-cadence/</url>
+    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
+<p><strong>library preparation for EDA installation</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>devops</category>
@@ -15473,94 +15473,6 @@ href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/0
       </categories>
   </entry>
   <entry>
-    <title>Metastability and Synchronizer</title>
-    <url>/2023/08/10/synchronizer-metastability/</url>
-    <content><![CDATA[<h2 id="sequentail-logic-deal">Sequentail logic deal</h2>
-<p>We guarantee setup &amp; hold time / minimum clock width, FF
-guarantees propagation delay (clock -&gt; q delay)</p>
-<p>We can not keep our part of the deal because asynchronous signal may
-change in the setup/hold window</p>
-<p>FF enters a metastable state, as a result it does not guarantee
-propagation delay</p>
-<h2 id="what-is-a-metastable-flip-flop">What is a metastable flip
-flop?</h2>
-<blockquote>
-<p>Non-Regenerative flipflop: <strong>NOT</strong> suitable for
-synchronization</p>
-</blockquote>
-<blockquote>
-<p>Regenerative flipflop: Feedback loop must be isolated</p>
-</blockquote>
-<h2 id="probability-of-entering-a-metastable-state">Probability of
-entering a metastable state</h2>
-<h2
-id="metastability-resolution-time-constant-tau-of-flip-flops">Metastability
-resolution time constant (<span class="math inline">\(\tau\)</span>) of
-flip-flops</h2>
-<p><span class="math display">\[
-T_W = T_0 \cdot e^{-t_r/\tau}
-\]</span></p>
-<ul>
-<li><p><span class="math inline">\(T_W\)</span>: metastability window
-width for a given <span class="math inline">\(t_r\)</span> (<span
-class="math inline">\(|T_{clk}-T_d| - T_{meta}\)</span>) where <span
-class="math inline">\(T_{meta}\)</span> is the data failing point (<span
-class="math inline">\(t_r=\infty\)</span>)</p></li>
-<li><p><span class="math inline">\(T_0\)</span>: metastability window
-width at zero resolution time</p></li>
-<li><p><span class="math inline">\(t_r\)</span>: resolution time (clock
-to output delay)</p></li>
-<li><p><span class="math inline">\(\tau\)</span>: resolution time
-constant</p></li>
-</ul>
-<h2 id="recovering-from-a-metastable-state">Recovering from a metastable
-state</h2>
-<h3 id="in-a-latch">in a latch</h3>
-<h3 id="in-a-flipflop">in a flipflop</h3>
-<h2 id="probability-of-failure">Probability of failure</h2>
-<h2 id="techniques-to-improve-mtbf">Techniques to improve MTBF</h2>
-<h2 id="data-flip-flops-vs.-synchronizer-flip-flops">Data Flip-Flops Vs.
-Synchronizer Flip-Flops</h2>
-<p><img
-src="/2023/08/10/synchronizer-metastability/image-20230704230313635.png"
-alt="image-20230704230313635" /></p>
-<h2 id="reference">reference</h2>
-<p>Chen, Doris T., Deshanand P. Singh, Jeffrey Chromczak, David M.
-Lewis, Ryan Fung, David Neto and Vaughn Betz. “A comprehensive approach
-to modeling, characterizing and optimizing for metastability in FPGAs.”
-Symposium on Field Programmable Gate Arrays (2010).</p>
-<p>Jerome Cox. Synchronizers And Data Flip-Flops are Different [<a
-href="https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf">https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf</a>]</p>
-<p>J. U. Horstmann, H. W. Eichel and R. L. Coates, "Metastability
-behavior of CMOS ASIC flip-flops in theory and test," in IEEE Journal of
-Solid-State Circuits, vol. 24, no. 1, pp. 146-157, Feb. 1989, doi:
-10.1109/4.16314.</p>
-<p>Steve Golson. Synchronization and Metastability [<a
-href="https://trilobyte.com/pdf/golson_snug14.pdf">https://trilobyte.com/pdf/golson_snug14.pdf</a>]</p>
-<p>J. Reiher, M. R. Greenstreet and I. W. Jones, "Explaining
-Metastability in Real Synchronizers," 2018 24th IEEE International
-Symposium on Asynchronous Circuits and Systems (ASYNC), Vienna, Austria,
-2018, pp. 59-67, doi: 10.1109/ASYNC.2018.00024.</p>
-<p>A. Cantoni, J. Walker and T. -D. Tomlin, "Characterization of a
-Flip-Flop Metastability Measurement Method," in IEEE Transactions on
-Circuits and Systems I: Regular Papers, vol. 54, no. 5, pp. 1032-1040,
-May 2007, doi: 10.1109/TCSI.2007.895514.</p>
-<p>S. Yang, I. W. Jones and M. R. Greenstreet, "Synchronizer Performance
-in Deep Sub-Micron Technology," 2011 17th IEEE International Symposium
-on Asynchronous Circuits and Systems, Ithaca, NY, USA, 2011, pp. 33-42,
-doi: 10.1109/ASYNC.2011.19.</p>
-<p>Max Maxfield. Meandering Musings on Metastability [<a
-href="https://www.eejournal.com/article/meandering-musings-on-metastability/">https://www.eejournal.com/article/meandering-musings-on-metastability/</a>]</p>
-<p>R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE
-Design &amp; Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct.
-2011, doi: 10.1109/MDT.2011.113. [<a
-href="https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf">https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
     <url>/2022/03/16/sv-rnm-101/</url>
     <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
@@ -15674,6 +15586,94 @@ signal from interface's value, input-skew before active edge</p>
 <p>An <code>interface</code> must be compiled separately like a
 <code>module</code> and CANNOT `<code>include</code> inside a
 <code>package</code> or ohter <code>module</code></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Metastability and Synchronizer</title>
+    <url>/2023/08/10/synchronizer-metastability/</url>
+    <content><![CDATA[<h2 id="sequentail-logic-deal">Sequentail logic deal</h2>
+<p>We guarantee setup &amp; hold time / minimum clock width, FF
+guarantees propagation delay (clock -&gt; q delay)</p>
+<p>We can not keep our part of the deal because asynchronous signal may
+change in the setup/hold window</p>
+<p>FF enters a metastable state, as a result it does not guarantee
+propagation delay</p>
+<h2 id="what-is-a-metastable-flip-flop">What is a metastable flip
+flop?</h2>
+<blockquote>
+<p>Non-Regenerative flipflop: <strong>NOT</strong> suitable for
+synchronization</p>
+</blockquote>
+<blockquote>
+<p>Regenerative flipflop: Feedback loop must be isolated</p>
+</blockquote>
+<h2 id="probability-of-entering-a-metastable-state">Probability of
+entering a metastable state</h2>
+<h2
+id="metastability-resolution-time-constant-tau-of-flip-flops">Metastability
+resolution time constant (<span class="math inline">\(\tau\)</span>) of
+flip-flops</h2>
+<p><span class="math display">\[
+T_W = T_0 \cdot e^{-t_r/\tau}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(T_W\)</span>: metastability window
+width for a given <span class="math inline">\(t_r\)</span> (<span
+class="math inline">\(|T_{clk}-T_d| - T_{meta}\)</span>) where <span
+class="math inline">\(T_{meta}\)</span> is the data failing point (<span
+class="math inline">\(t_r=\infty\)</span>)</p></li>
+<li><p><span class="math inline">\(T_0\)</span>: metastability window
+width at zero resolution time</p></li>
+<li><p><span class="math inline">\(t_r\)</span>: resolution time (clock
+to output delay)</p></li>
+<li><p><span class="math inline">\(\tau\)</span>: resolution time
+constant</p></li>
+</ul>
+<h2 id="recovering-from-a-metastable-state">Recovering from a metastable
+state</h2>
+<h3 id="in-a-latch">in a latch</h3>
+<h3 id="in-a-flipflop">in a flipflop</h3>
+<h2 id="probability-of-failure">Probability of failure</h2>
+<h2 id="techniques-to-improve-mtbf">Techniques to improve MTBF</h2>
+<h2 id="data-flip-flops-vs.-synchronizer-flip-flops">Data Flip-Flops Vs.
+Synchronizer Flip-Flops</h2>
+<p><img
+src="/2023/08/10/synchronizer-metastability/image-20230704230313635.png"
+alt="image-20230704230313635" /></p>
+<h2 id="reference">reference</h2>
+<p>Chen, Doris T., Deshanand P. Singh, Jeffrey Chromczak, David M.
+Lewis, Ryan Fung, David Neto and Vaughn Betz. “A comprehensive approach
+to modeling, characterizing and optimizing for metastability in FPGAs.”
+Symposium on Field Programmable Gate Arrays (2010).</p>
+<p>Jerome Cox. Synchronizers And Data Flip-Flops are Different [<a
+href="https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf">https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf</a>]</p>
+<p>J. U. Horstmann, H. W. Eichel and R. L. Coates, "Metastability
+behavior of CMOS ASIC flip-flops in theory and test," in IEEE Journal of
+Solid-State Circuits, vol. 24, no. 1, pp. 146-157, Feb. 1989, doi:
+10.1109/4.16314.</p>
+<p>Steve Golson. Synchronization and Metastability [<a
+href="https://trilobyte.com/pdf/golson_snug14.pdf">https://trilobyte.com/pdf/golson_snug14.pdf</a>]</p>
+<p>J. Reiher, M. R. Greenstreet and I. W. Jones, "Explaining
+Metastability in Real Synchronizers," 2018 24th IEEE International
+Symposium on Asynchronous Circuits and Systems (ASYNC), Vienna, Austria,
+2018, pp. 59-67, doi: 10.1109/ASYNC.2018.00024.</p>
+<p>A. Cantoni, J. Walker and T. -D. Tomlin, "Characterization of a
+Flip-Flop Metastability Measurement Method," in IEEE Transactions on
+Circuits and Systems I: Regular Papers, vol. 54, no. 5, pp. 1032-1040,
+May 2007, doi: 10.1109/TCSI.2007.895514.</p>
+<p>S. Yang, I. W. Jones and M. R. Greenstreet, "Synchronizer Performance
+in Deep Sub-Micron Technology," 2011 17th IEEE International Symposium
+on Asynchronous Circuits and Systems, Ithaca, NY, USA, 2011, pp. 33-42,
+doi: 10.1109/ASYNC.2011.19.</p>
+<p>Max Maxfield. Meandering Musings on Metastability [<a
+href="https://www.eejournal.com/article/meandering-musings-on-metastability/">https://www.eejournal.com/article/meandering-musings-on-metastability/</a>]</p>
+<p>R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE
+Design &amp; Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct.
+2011, doi: 10.1109/MDT.2011.113. [<a
+href="https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf">https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf</a>]</p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -16369,59 +16369,6 @@ Pearson.</em></p>
       </categories>
   </entry>
   <entry>
-    <title>DC operating points during TRANSIENT analysis</title>
-    <url>/2023/10/06/tranOP/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
-Beckett</a><a
-href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
-11 years ago</a></p>
-<p>Two approaches:</p>
-<ol type="1">
-<li>On the transient options form, there's a field called "infotimes" -
-specify the times at which you want it to output the dc operating point
-data. You can then annotate the "transient operating points" from any of
-these times after the simulation, or access them via the results
-browser.</li>
-<li>Or you could get the operating point data to be continuously saved
-during the transient for selected devices - if so, create a file called
-(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
-M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
-reference the file via Setup-&gt;Model Libraries or as a "definition
-file" on Setup-&gt;Simulation Files. With this approach you can then
-find the operating point data for the selected devices in the results
-browser and plot it versus time (be cautious of saving too much though
-because this can generate a lot of data if you're not careful)</li>
-</ol>
-<p>Regards,</p>
-<p>Andrew.</p>
-</blockquote>
-<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
-alt="image-20231006110801078" /></p>
-<h2 id="transient-options-form">transient options form</h2>
-<h3 id="setup">setup</h3>
-<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
-alt="image-20231006103506475" /></p>
-<h3 id="access-1">access 1</h3>
-<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
-<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
-<strong>Transient Operating Points</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
-alt="image-20231006104317496" /></p>
-<h3 id="access-2">access 2</h3>
-<p><strong>tranOpTimed</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
-alt="image-20231006105236323" /></p>
-<h2 id="save.scs">save.scs</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
-alt="image-20231006110506245" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>TLM</title>
     <url>/2022/04/03/tlm/</url>
     <content><![CDATA[<p><img src="/2022/04/03/tlm/image-20220403094350570.png"
@@ -16844,6 +16791,59 @@ FIFOs</p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>DC operating points during TRANSIENT analysis</title>
+    <url>/2023/10/06/tranOP/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
+Beckett</a><a
+href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
+11 years ago</a></p>
+<p>Two approaches:</p>
+<ol type="1">
+<li>On the transient options form, there's a field called "infotimes" -
+specify the times at which you want it to output the dc operating point
+data. You can then annotate the "transient operating points" from any of
+these times after the simulation, or access them via the results
+browser.</li>
+<li>Or you could get the operating point data to be continuously saved
+during the transient for selected devices - if so, create a file called
+(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
+M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
+reference the file via Setup-&gt;Model Libraries or as a "definition
+file" on Setup-&gt;Simulation Files. With this approach you can then
+find the operating point data for the selected devices in the results
+browser and plot it versus time (be cautious of saving too much though
+because this can generate a lot of data if you're not careful)</li>
+</ol>
+<p>Regards,</p>
+<p>Andrew.</p>
+</blockquote>
+<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
+alt="image-20231006110801078" /></p>
+<h2 id="transient-options-form">transient options form</h2>
+<h3 id="setup">setup</h3>
+<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
+alt="image-20231006103506475" /></p>
+<h3 id="access-1">access 1</h3>
+<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
+<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
+<strong>Transient Operating Points</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
+alt="image-20231006104317496" /></p>
+<h3 id="access-2">access 2</h3>
+<p><strong>tranOpTimed</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
+alt="image-20231006105236323" /></p>
+<h2 id="save.scs">save.scs</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
+alt="image-20231006110506245" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>

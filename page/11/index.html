@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,234 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/04/linear-cdr/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/04/linear-cdr/" class="post-title-link" itemprop="url">CDR Linear Model</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-04 10:16:23" itemprop="dateCreated datePublished" datetime="2022-05-04T10:16:23+00:00">2022-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/2022/05/04/linear-cdr/image-20220504101924272.png"
-alt="image-20220504101924272" /></p>
-<blockquote>
-<p>condition:</p>
-<p>Linear model of the CDR is used in a <strong>frequency lock
-condition</strong> and is approaching to achieve <strong>phase
-lock</strong></p>
-</blockquote>
-<p>Using this model, the power spectral density (PSD) of jitter in the
-recovered clock <span class="math inline">\(S_{out}(f)\)</span> is <span
-class="math display">\[
-S_{out}(f)=|H_T(f)|^2S_{in}(f)+|H_G(f)|^2S_{VCO}(f)
-\]</span> Here, we assume <span
-class="math inline">\(\varphi_{in}\)</span> and <span
-class="math inline">\(\varphi_{VCO}\)</span> are uncorrelated as they
-come from independent sources.</p>
-<h4 id="jitter-transfer">Jitter Transfer</h4>
-<p><span class="math display">\[
-H_T(s) =
-\frac{\varphi_{out}(s)}{\varphi_{in}(s)}|_{\varphi_{vco}=0}=\frac{K_{PD}K_{VCO}R_s+\frac{K_{PD}K_{VCO}}{C}}{s^2+K_{PD}K_{VCO}R_s+\frac{K_{PD}K_{VCO}}{C}}
-\]</span></p>
-<p>Using below notation <span class="math display">\[\begin{align}
-\omega_n^2=\frac{K_{PD}K_{VCO}}{C} \\
-\xi=\frac{K_{PD}K_{VCO}}{2\omega_n^2}
-\end{align}\]</span></p>
-<p>We can rewrite transfer function as follows <span
-class="math display">\[
-H_T(s)=\frac{2\xi\omega_n s+\omega_n^2}{s^2+2\xi \omega_n s+\omega_n^2}
-\]</span></p>
-<blockquote>
-<p>The jitter transfer represents a <strong>low-pass filter</strong>
-whose magnitude is around 1 (0 dB) for low jitter frequencies and drops
-at 20 db/decade for frequencies above <span
-class="math inline">\(\omega_n\)</span></p>
-</blockquote>
-<p><img src="/2022/05/04/linear-cdr/image-20220504104202197.png"
-alt="image-20220504104202197" /></p>
-<ul>
-<li>the recovered clock <strong>track</strong> the <em>low-frequency
-jitter</em> of the input data</li>
-<li>the recovered clock <strong>DONT</strong> track the
-<em>high-frequency jitter</em> of the input data</li>
-</ul>
-<p>The recovered clock does not suffer from high-frequency jitter even
-though the input signal may contain high-frequency jitter, which will
-limit the CDR tolerance to high-frequency jitter.</p>
-<h4 id="jitter-peaking-in-jitter-transfer-function">Jitter Peaking in
-Jitter Transfer Function</h4>
-<p>The peak, slightly larger than 1 (0dB) implies that jitter will be
-<strong>amplified</strong> at some frequencies in the CDR, producing a
-jitter amplitude in the recovered clock, and thus also in the recovered
-data, that is slightly <strong>larger</strong> than the jitter amplitude
-in the input data.</p>
-<p>This is certainly undesirable, especially in applications such as
-repeaters.</p>
-<p><img src="/2022/05/04/linear-cdr/image-20220504110722442.png"
-alt="image-20220504110722442" /></p>
-<h4 id="jitter-generation">Jitter Generation</h4>
-<p>If the input data to the CDR is clean with no jitter, i.e., <span
-class="math inline">\(\varphi_{in}=0\)</span>, the jitter of the
-recovered clock comes directly from the VCO jitter. The transfer
-function that relates the VCO jitter to the recovered clock jitter is
-known as <strong>jitter generation</strong>. <span
-class="math display">\[
-H_G(s)=\frac{\varphi_{out}}{\varphi_{VCO}}|_{\varphi_{in}=0}=\frac{s^2}{s^2+2\xi
-\omega_n s+\omega_n^2}
-\]</span> Jitter generation is <strong>high-pass filter</strong> with
-two zeros, at zero frequency, and two poles identical to those of the
-jitter transfer function</p>
-<p><img src="/2022/05/04/linear-cdr/image-20220504110737718.png"
-alt="image-20220504110737718" /></p>
-<h4 id="jitter-tolerance">Jitter Tolerance</h4>
-<p>To quantify jitter tolerance, we often apply a sinusoidal jitter of a
-fixed frequency to the CDR input data and observe the BER of the CDR</p>
-<p>The jitter tolerance curve <strong>DONT</strong> capture a CDR's true
-tolerance to <strong>random</strong> jitter. Because we are applying
-"sinusoidal" jitter, which is <strong>deterministic</strong> signal.</p>
-<p>We can deal only with the jitter's amplitude and frequency instead of
-the PSD of the jitter thanks to deterministic sinusoidal jitter signal.
-<span class="math display">\[
-JTOL(f) = \left | \varphi_{in}(f)  \right |_{\text{pp-max}} \quad
-\text{for a fixed BER}
-\]</span> Where the subscript <span
-class="math inline">\(\text{pp-max}\)</span> indicates the maximum
-peak-to-peak amplitude. We can further expand this equation as follows
-<span class="math display">\[
-JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right| \cdot
-|\varphi_e(f)|_{pp-max}
-\]</span> <img src="/2022/05/04/linear-cdr/image-20220504114650749.png"
-alt="image-20220504114650749" /></p>
-<blockquote>
-<p>Relative jitter, <span class="math inline">\(\varphi_e\)</span> must
-be less than 1UIpp for error-free operation</p>
-</blockquote>
-<p>In an ideal CDR, the <strong>maximum peak-to-peak amplitude</strong>
-of <span class="math inline">\(|\varphi_e(f)|\)</span> is
-<strong>1UI</strong>, i.e.,<span
-class="math inline">\(|\varphi_e(f)|_{pp-max}=1UI\)</span></p>
-<p>Accordingly, jitter tolerance can be expressed in terms of the number
-of UIs as <span class="math display">\[
-JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right|\quad
-\text{[UI]}
-\]</span> Given the linear CDR model, we can write <span
-class="math display">\[
-JTOL(f)=\left| 1+\frac{K_{PD}K_{VCO}H_{LF}(f)}{j2\pi f} \right|\quad
-\text{[UI]}
-\]</span> Expand <span class="math inline">\(H_{LF}(f)\)</span> for the
-CDR, we can write <span class="math display">\[
-JTOL(f)=\left| 1-2\xi j \left(\frac{f_n}{f}\right) -
-\left(\frac{f_n}{f}\right)^2 \right|\quad \text{[UI]}
-\]</span> <img src="/2022/05/04/linear-cdr/image-20220504120538534.png"
-alt="image-20220504120538534" /></p>
-<p>At frequencies far below and above the natural frequency, the jitter
-tolerance can be approximated by the following <span
-class="math display">\[
-JTOL(f) = \left\{ \begin{array}{cl}
-\left(\frac{f_n}{f}\right)^2 &amp; : \ f\ll f_n \\
-1 &amp; : \ f\gg f_n
-\end{array} \right.
-\]</span></p>
-<ul>
-<li>the jitter tolerance at very <strong>high jitter
-frequencies</strong> is limited to <strong>1UIpp</strong>
-<ul>
-<li>This is consistent with that the recovered clock does not track the
-high-frequency jitter, limiting the maximum peak-to-peak deviation of
-the data edge from its nominal position to 1UI</li>
-<li>The circumstance, (b) jittery data with ideal clock</li>
-</ul></li>
-<li>the jitter tolerance is increased at 40dB/decade for jitter
-frequencies below <span class="math inline">\(f_c\)</span>
-<ul>
-<li>This is consistent with our obervation earlier that the recovered
-clock better tracks data jitter at lower jitter frequencies</li>
-<li>Equivalently, the data edge and the clock edge move together in the
-<strong>same direction</strong>. As a result, the relative jitter
-between the data and the clock remains small, i.e., below 1UI
-peak-to-peak</li>
-<li>The circumstance, (c) jittery data and jittery clock</li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>Dalt, Nicola Da and Ali Sheikholeslami. “Understanding Jitter and
-Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -454,7 +226,7 @@ Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -545,7 +317,7 @@ running kernel:</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -961,7 +733,7 @@ V. Oppenheim, 3rd edition.” (2011).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1472,7 +1244,7 @@ Press. doi:10.1017/CBO9780511835261</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1888,7 +1660,7 @@ capacitance</strong></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2073,7 +1845,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2105,156 +1877,6 @@ those voltage-dependent DRC checks! - siemens</a></p>
 <p>layout</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">alias bk hiSetBindKey</span><br><span class="line">when ( isCallable(&#x27;leGetEnv)</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;1&quot; &quot;leSetEntryLayer(\&quot;M0PO\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;M0OD\&quot;) leSetEntryLayer(\&quot;VIA0\&quot;) leSetEntryLayer(list(\&quot;M1\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M1\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; M1-VIA1-M2</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;2&quot; &quot;leSetEntryLayer(\&quot;M1\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;VIA1\&quot;) leSetEntryLayer(list(\&quot;M2\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M2\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; M2-VIA2-M3</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;3&quot; &quot;leSetEntryLayer(\&quot;M2\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;VIA2\&quot;) leSetEntryLayer(list(\&quot;M3\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M3\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; M3-VIA3-M4</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;4&quot; &quot;leSetEntryLayer(\&quot;M3\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;VIA3\&quot;) leSetEntryLayer(list(\&quot;M4\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M4\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; M4-VIA4-M5</span><br><span class="line">	; select M4 layer, turn off other layer visibilty, select VIA4 M5_pin M5 and turn on them</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;5&quot; &quot;leSetEntryLayer(\&quot;M4\&quot;) leSetAllLayerVisible(nil) leSetEntryLayer(\&quot;VIA4\&quot;) leSetEntryLayer(list(\&quot;M5\&quot; \&quot;pin\&quot;)) leSetEntryLayer(\&quot;M5\&quot;) hiRedraw()&quot; )</span><br><span class="line">    ; all visiable</span><br><span class="line">    bk(&quot;Layout&quot; &quot;&lt;Key&gt;0&quot; &quot;leSetAllLayerVisible(t) hiRedraw()&quot; )</span><br><span class="line">)</span><br><span class="line">unalias bk</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/06/butter-filter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/06/butter-filter/" class="post-title-link" itemprop="url">Butterworth filter</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-06 23:58:11" itemprop="dateCreated datePublished" datetime="2022-04-06T23:58:11+00:00">2022-04-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="butterworth-filter">Butterworth filter</h2>
-<blockquote>
-<p>function varargout = butter(n, Wn, varargin)</p>
-<p>% BUTTER Butterworth digital and analog filter design.</p>
-<p>% [B,A] = BUTTER(N,Wn) designs an Nth order lowpass digital</p>
-<p>% Butterworth filter and returns the filter coefficients in
-length</p>
-<p>% N+1 vectors B (numerator) and A (denominator). The coefficients</p>
-<p>% are listed in descending powers of z. The cutoff frequency</p>
-<p>% Wn must be <strong>0.0 &lt; Wn &lt; 1.0</strong>, with 1.0
-corresponding to</p>
-<p>% half the sample rate.</p>
-</blockquote>
-<p><span class="math display">\[
-w_n = \frac{f_c}{0.5f_s}
-\]</span></p>
-<p>where <span class="math inline">\(f_c\)</span> is cutoff frequency,
-<span class="math inline">\(f_s\)</span> is sampling frequency</p>
-<p><span class="math display">\[
-\Phi = \omega T_s \text { ,}\Phi \in [0,2\pi]
-\]</span></p>
-<p>Find the relationship between <span
-class="math inline">\(\omega_n\)</span> and </p>
-<p><span class="math display">\[\begin{align}
-\Phi &amp;= 2\pi f_c \frac{1}{f_s}  \\
-&amp;=\pi \frac{f_c}{0.5f_s} \\
-&amp;= \pi \omega _n
-\end{align}\]</span></p>
-<p>Given <span class="math inline">\(f_c\)</span> is 300 Hz and <span
-class="math inline">\(f_s\)</span> is 1000 Hz, we get <span
-class="math display">\[
-\omega_n = \frac{f_c}{0.5*f_s} = 0.6
-\]</span> and in <code>rad/sample</code> unit, cutoff frequency is <span
-class="math display">\[
-\Phi = \pi * \omega_n = 0.6 \pi \text {, unit: rad/sample}
-\]</span></p>
-<h3 id="z-transform">Z-transform</h3>
-<p><span class="math display">\[
-z= e^{-j\Phi}
-\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fc = <span class="number">300</span>;</span><br><span class="line">fs = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">[b,a] = butter(<span class="number">6</span>,fc/(fs/<span class="number">2</span>));</span><br><span class="line">fprintf(<span class="string">&#x27;The numerator b is:\n &#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;%g &#x27;</span>, b);</span><br><span class="line">fprintf(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;The denominator a is:\n &#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;%g &#x27;</span>, a);</span><br><span class="line">fprintf(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">freqz(b, a);</span><br><span class="line">ylim([<span class="number">-400</span>, <span class="number">100</span>])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>The numerator (<code>b</code>) and denominator (<code>a</code>)
-depend on the cutoff frequency and the order; the cutoff frequency is
-denominated with <span class="math inline">\(\omega_n\)</span> . Just
-multiply the <span class="math inline">\(\pi\)</span>, we get the
-Z-transform <span class="math inline">\(\Phi\)</span> rad/sample, which
-is the plot of <code>freqz(b, a)</code></p>
-</blockquote>
-<p><img src="/2022/04/06/butter-filter/image-20220407100948965.png"
-alt="image-20220407100948965" /></p>
-<h3 id="transfer-function-with-sample-information">Transfer function
-with sample information</h3>
-<p><span class="math display">\[
-z = e^{-j\omega T_s}
-\]</span></p>
-<p><img src="/2022/04/06/butter-filter/image-20220407103451265.png"
-alt="image-20220407103451265" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">[h,f] = freqz(b,a,[],fs);</span><br><span class="line">hdb20 = <span class="number">20</span>*log10(abs(h));</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">plot(f, hdb20, &#x27;b&#x27;)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;DTFT <span class="keyword">with</span> freqz <span class="keyword">and</span> sample rate&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">sys = tf(b, a, <span class="number">1</span>/fs);</span><br><span class="line">[mag, phs, wout] = bode(sys);</span><br><span class="line">wout = wout(:);</span><br><span class="line">whz = wout/<span class="number">2</span>/pi;</span><br><span class="line">hdb = <span class="number">20</span>*log10(mag(:));</span><br><span class="line">plot(whz, hdb, &#x27;r-o&#x27;);</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;DTFT <span class="keyword">with</span> bode <span class="keyword">and</span> sample period&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">plot(f, hdb20,&#x27;b&#x27;, whz, hdb, &#x27;ro&#x27;);</span><br><span class="line">legend(&#x27;freqz&#x27;, &#x27;bode&#x27;)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;overlay <span class="keyword">and</span> comparision&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="time-domain-from-frequency-domain">Time Domain from Frequency
-Domain</h2>
-<p>Assume input is <strong>sampled by</strong> <span
-class="math inline">\(f_s\)</span></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">figure(<span class="number">3</span>)</span><br><span class="line">% <span class="keyword">assume</span> x is sampled by fs</span><br><span class="line">x = <span class="keyword">rand</span>(<span class="number">1</span>, <span class="number">50</span>);</span><br><span class="line">y = filter(b, a, x);</span><br><span class="line">xt = (<span class="number">1</span>:<span class="number">50</span>);</span><br><span class="line">plot(xt, x, &#x27;-s&#x27;, xt, y, &#x27;-o&#x27;)</span><br><span class="line">legend(&#x27;<span class="keyword">input</span>&#x27;, &#x27;<span class="keyword">output</span>&#x27;)</span><br><span class="line">xlabel(&#x27;Sample&#x27;)</span><br><span class="line">ylabel(&#x27;mag&#x27;)</span><br><span class="line">title(&#x27;filter in Time domain&#x27;)</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/04/06/butter-filter/image-20220407113330972.png"
-alt="image-20220407113330972" /></p>
 
       
     </div>
@@ -2317,7 +1939,7 @@ alt="image-20220407113330972" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2524,7 +2146,7 @@ alt="image-20220404195156776" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2625,6 +2247,651 @@ a convenient place to put coverage code</p>
 <p><img
 src="/2022/04/03/functional-coverage/image-20220403212529981.png"
 alt="image-20220403212529981" /></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/03/tlm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/03/tlm/" class="post-title-link" itemprop="url">TLM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-03 09:42:36" itemprop="dateCreated datePublished" datetime="2022-04-03T09:42:36+00:00">2022-04-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="/2022/04/03/tlm/image-20220403094350570.png"
+alt="image-20220403094350570" /></p>
+<p><img src="/2022/04/03/tlm/image-20220403094404891.png"
+alt="image-20220403094404891" /></p>
+<ul>
+<li><strong>Blocking methods</strong> are defined with
+<code>get()</code> or <code>put()</code> <strong>tasks</strong> to allow
+them to consume time</li>
+<li><strong>Non-blocking methods</strong> are defined with
+<code>try_get()</code> or <code>try_put()</code>
+<strong>functions</strong> as they execute in zero time</li>
+</ul>
+<h2 id="uni-directional-tlm-methods-reference">Uni-Directional TLM
+Methods Reference</h2>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 51%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Method</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Syntax</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>put()</code></td>
+<td>Blocking put</td>
+<td><code>virtual task put(iput TR t);</code></td>
+</tr>
+<tr class="even">
+<td><code>try_put()</code></td>
+<td>Nonblocking put<br />-return 1 if successful<br />-return 0 if
+not</td>
+<td><code>virtual function bit try_put(input TR t);</code></td>
+</tr>
+<tr class="odd">
+<td><code>can_put()</code></td>
+<td>Nonblocking test put<br />-return 1 if put would be
+successful<br />-return 0 if not</td>
+<td><code>virtual function bit can_put();</code></td>
+</tr>
+<tr class="even">
+<td><code>get()</code></td>
+<td>Blocking get</td>
+<td><code>virtual task get(output TR t);</code></td>
+</tr>
+<tr class="odd">
+<td><code>try_get()</code></td>
+<td>Nonblocking get<br />-return 1 if successful<br />-return 0 if
+not</td>
+<td><code>virtual function bit try_get(output TR t);</code></td>
+</tr>
+<tr class="even">
+<td><code>can_get()</code></td>
+<td>Nonblocking test get<br />-return 1 if get would be
+successful<br />-return 0 if not</td>
+<td><code>virtual function bit can_get();</code></td>
+</tr>
+<tr class="odd">
+<td><code>peek()</code></td>
+<td>Blocking peek</td>
+<td><code>virtual task peek(output TR t);</code></td>
+</tr>
+<tr class="even">
+<td><code>try_peek()</code></td>
+<td>Nonblocking peek<br />-return 1 if successful<br />-return 0 if
+not</td>
+<td><code>virtual function bit try_peek(output TR t);</code></td>
+</tr>
+<tr class="odd">
+<td><code>can_peek</code></td>
+<td>Nonblocking test peek<br />-return 1 if peek would be
+successful<br />-return 0 if not</td>
+<td><code>virtual function bit can_peek();</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The <code>peek()</code> methods are similarly to the
+<code>get()</code> methods, but <strong>copy</strong> the transaction
+instead of <strong>removing</strong> it. The transaction is not
+consumed, and a subsequent <code>get</code> or <code>peek</code>
+operation will return the <em>same</em> transaction</p>
+</blockquote>
+<h2 id="selected-connector-and-method-options">Selected Connector and
+Method Options</h2>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 6%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 6%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 6%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><code>put</code></th>
+<th><code>try_put</code></th>
+<th><code>can_put</code></th>
+<th><code>get</code></th>
+<th><code>try_get</code></th>
+<th><code>can_get</code></th>
+<th><code>peek</code></th>
+<th><code>try_peed</code></th>
+<th><code>can_peek</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>uvm_put_*</code></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>uvm_blocking_put_*</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>uvm_nonblocking_put_*</code></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>uvm_get_*</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>uvm_blocking_get_*</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>uvm_nonblocking_get_*</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>uvm_get_peek_*</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td><code>uvm_blocking_get_peek_*</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>uvm_nonblocking_get_peek_*</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>in the connectors above, <code>*</code> can be replaced by
+<code>port</code>, <code>imp</code>, or <code>export</code></p>
+<p>All the methods for a specific connector type <strong>MUST</strong>
+be implemented. If you define an <code>uvm_put</code> connection between
+two compoents, then the component with the <code>uvm_put_imp</code>
+object must provide implementations of <strong>ALL</strong> three put
+methods, <code>put</code>, <code>try_put</code> and
+<code>can_put</code>, even if these methods are not explicitly
+called</p>
+</blockquote>
+<h2 id="tlm-fifo">TLM FIFO</h2>
+<p>The TLM FIFO is a FIFO component wrapped in <code>get</code> and
+<code>put</code> <code>imp</code> connectors. This has the benefit of
+data storage as well as providing implementations of the communication
+methods. Components connected to the TLM FIFO are in control of data
+transfer and can simply defined port connectors to initiate read and
+write operations on the FIFO</p>
+<h3 id="uvm_tlm_fifo">uvm_tlm_fifo</h3>
+<p><img src="/2022/04/03/tlm/image-20220403141222126.png"
+alt="image-20220403141222126" /></p>
+<p>The TLM FIFO object is effectively a FIFO component instantiated
+between and connected to two components. The FIFO contains
+<code>imp</code> connectors for the standard TLM <code>put</code> and
+<code>get</code>/<code>peek</code> interfaces, therefore the user does
+not have to define<code>imp</code> ports or communication methods and
+the FIRO takes care of data storage</p>
+<p>The advantages are:</p>
+<ul>
+<li>The user does not need to define communication methods or
+<code>imp</code> connectors</li>
+<li>The FIFO provides data storage between the <code>write</code>
+(<code>put</code>) and <code>read</code>
+(<code>get</code>/<code>peek</code>) components</li>
+<li>There are a number of built-in methods for checking FIFO status</li>
+</ul>
+<p>The disadvantages are:</p>
+<ul>
+<li>The user must now initiate both sides of the transfer (both
+<code>get</code>/<code>peek</code> and <code>put</code>) to complete the
+transaction</li>
+<li>Two connections must be made (both sides of the FIFO) rather than
+one</li>
+</ul>
+<p>The <code>put_export</code> and <code>get_peek_export</code>
+connection objects have alternatives which provide subsets of the full
+connector. For example, <code>blocking_put_export</code> and
+<code>nonblocking_put_export</code> can replace <code>put_export</code>.
+<code>blocking_get_export</code>, <code>nonblocking_get_export</code>
+and <code>get_export</code> (as well as others) can replace
+<code>get_peek_export</code>.</p>
+<h4 id="built-in-methods">built-in methods</h4>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 46%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Description</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>new</code></td>
+<td>Standard component constructor with an additional third argument,
+<code>size</code>, which sets the maximum FIFO size. Default size is 1.
+A size of <strong>0</strong> is an unbounded FIFO</td>
+<td><code>function new(string name, uvm_component parent=null, int size=1);</code></td>
+</tr>
+<tr class="even">
+<td><code>size</code></td>
+<td>Return size of FIFO. <strong>0</strong> indicates unbounded
+FIFO</td>
+<td><code>virtual function int size()</code></td>
+</tr>
+<tr class="odd">
+<td><code>used</code></td>
+<td>Return number of entries written to the FIFO</td>
+<td><code>virtual function int used();</code></td>
+</tr>
+<tr class="even">
+<td><code>is_empty</code></td>
+<td>Return <strong>1</strong> if <code>used()</code> is 0, otherwise
+<strong>0</strong></td>
+<td><code>virtual function bit is empty();</code></td>
+</tr>
+<tr class="odd">
+<td><code>is_full</code></td>
+<td>Return 1 if <code>used()</code> is equal to <code>size</code>,
+otherwise <strong>0</strong></td>
+<td><code>virtual function bit is_full()</code></td>
+</tr>
+<tr class="even">
+<td><code>flush</code></td>
+<td>Delete all entries from the FIFO, upon which <code>used()</code> is
+<strong>0</strong> and <code>is_empty()</code> is
+<strong>1</strong></td>
+<td><code>virtual funciton void flush();</code></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_tlm_fifo <span class="variable">#(type T=int) extends uvm_tlm_fifo_base #(T)</span>;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span>    </span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">virtual</span> <span class="keyword">class</span> uvm_tlm_fifo_base <span class="variable">#(type T=int)</span> <span class="keyword">extends</span> uvm_component;</span><br><span class="line">    uvm_put_imp <span class="variable">#(T, this_type)</span> put_export;</span><br><span class="line">    </span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> get_peek_export;</span><br><span class="line">    </span><br><span class="line">    uvm_analysis_port <span class="variable">#(T)</span> put_ap;</span><br><span class="line">    </span><br><span class="line">    uvm_analysis_port <span class="variable">#(T)</span> get_ap;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// The following are aliases to the above put_export</span></span><br><span class="line">    uvm_put_imp      <span class="variable">#(T, this_type)</span> blocking_put_export;</span><br><span class="line">    uvm_put_imp      <span class="variable">#(T, this_type)</span> nonblocking_put_export;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// The following are all aliased to the above get_peek_export, which provides</span></span><br><span class="line">    <span class="comment">// the superset of these interfaces.</span></span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> blocking_get_export;</span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> nonblocking_get_export;</span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> get_export;</span><br><span class="line">    </span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> blocking_peek_export;</span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> nonblocking_peek_export;</span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> peek_export;</span><br><span class="line">    </span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> blocking_get_peek_export;</span><br><span class="line">    uvm_get_peek_imp <span class="variable">#(T, this_type)</span> nonblocking_get_peek_export;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">        </span><br><span class="line">        put_export = <span class="keyword">new</span>(<span class="string">&quot;put_export&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">        blocking_put_export     = put_export;</span><br><span class="line">        nonblocking_put_export  = put_export;</span><br><span class="line">        </span><br><span class="line">        get_peek_export = <span class="keyword">new</span>(<span class="string">&quot;get_peek_export&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">        blocking_get_peek_export    = get_peek_export;</span><br><span class="line">        nonblocking_get_peek_export = get_peek_export;</span><br><span class="line">        blocking_get_export         = get_peek_export;</span><br><span class="line">        nonblocking_get_export      = get_peek_export;</span><br><span class="line">        get_export                  = get_peek_export;</span><br><span class="line">        blocking_peek_export        = get_peek_export;</span><br><span class="line">        nonblocking_peek_export     = get_peek_export;</span><br><span class="line">        peek_export                 = get_peek_export;</span><br><span class="line">        </span><br><span class="line">        put_ap = <span class="keyword">new</span>(<span class="string">&quot;put_ap&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">        get_ap = <span class="keyword">new</span>(<span class="string">&quot;get_ap&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h2 id="analysis-fifo">Analysis FIFO</h2>
+<h3 id="uvm_tlm_analysis_fifo">uvm_tlm_analysis_fifo</h3>
+<p><img src="/2022/04/03/tlm/image-20220403144951278.png"
+alt="image-20220403144951278" /></p>
+<p><code>uvm_tlm_analysis_fifo</code> is a specialization of
+<code>uvm_tlm_fifo</code></p>
+<ul>
+<li>Intended to buffer write transactions between the UVC monitor
+analysis port and scoreboard</li>
+</ul>
+<p>It has the following characteristics:</p>
+<ul>
+<li>Unbounded (size=0)</li>
+<li><code>analysis_export</code> connector replaces
+<code>put_export</code>
+<ul>
+<li>Support the analysis <code>write</code> method</li>
+</ul></li>
+</ul>
+<p><img src="/2022/04/03/tlm/image-20220403150326750.png"
+alt="image-20220403150326750" /></p>
+<blockquote>
+<p>By declaring the FIFO in the scoreboard, we can <code>get</code>
+directly from the FIFO output.</p>
+<p>However the write side connection of the FIFO to the interface UVC
+monitor analysis port must be made (usually) in the testbench which has
+visibility of both UVC and scoreboard components. The connection is made
+using a connect method call inside the connect phase method</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_tlm_analysis_fifo <span class="variable">#(type T = int) extends uvm_tlm_fifo #(T)</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Port: analysis_export #(T)</span></span><br><span class="line">  <span class="comment">//  </span></span><br><span class="line">  <span class="comment">// The analysis_export provides the write method to all connected analysis</span></span><br><span class="line">  <span class="comment">// ports and parent exports:</span></span><br><span class="line">  <span class="comment">//  </span></span><br><span class="line">  <span class="comment">//|  function void write (T t)</span></span><br><span class="line">  <span class="comment">//  </span></span><br><span class="line">  <span class="comment">// Access via ports bound to this export is the normal mechanism for writing</span></span><br><span class="line">  <span class="comment">// to an analysis FIFO. </span></span><br><span class="line">  <span class="comment">// See write method of &lt;uvm_tlm_if_base #(T1,T2)&gt; for more information.</span></span><br><span class="line"></span><br><span class="line">  uvm_analysis_imp <span class="variable">#(T, uvm_tlm_analysis_fifo #(T))</span> analysis_export;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Function: new</span></span><br><span class="line">  <span class="comment">//  </span></span><br><span class="line">  <span class="comment">// This is the standard uvm_component constructor. ~name~ is the local name</span></span><br><span class="line">  <span class="comment">// of this component. The ~parent~ should be left unspecified when this</span></span><br><span class="line">  <span class="comment">// component is instantiated in statically elaborated constructs and must be</span></span><br><span class="line">  <span class="comment">// specified when this component is a child of another UVM component.</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name ,  uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent, <span class="number">0</span>); <span class="comment">// analysis fifo must be unbounded</span></span><br><span class="line">    analysis_export = <span class="keyword">new</span>(<span class="string">&quot;analysis_export&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">string</span> type_name = <span class="string">&quot;uvm_tlm_analysis_fifo #(T)&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">function</span> <span class="keyword">string</span> get_type_name();</span><br><span class="line">    <span class="keyword">return</span> type_name;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> write(<span class="keyword">input</span> T t); </span><br><span class="line">    <span class="keyword">void</span>&#x27;(<span class="keyword">this</span><span class="variable">.try_put</span>(t)); <span class="comment">// unbounded =&gt; must succeed</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
+<h2 id="analysis-port-broadcast">Analysis Port Broadcast</h2>
+<p><img src="/2022/04/03/tlm/image-20220403152922101.png"
+alt="image-20220403152922101" /></p>
+<p>Analysis ports can (uniquely) be connected to any number of
+<code>imp</code> connectors, including zero</p>
+<p><img src="/2022/04/03/tlm/image-20220403153148158.png"
+alt="image-20220403153148158" /></p>
+<p>The analysis port in component <em>yapp_monitor</em> will be
+connected to both <em>monitor_one</em> and <em>monitor_two</em>
+components. Each of the receiving components has an <em>analysis imp
+object</em> and a write communication method declared. The write method
+must have the same signature - i.e., they must be void functions called
+write with a single input argument of type <em>yapp_packet</em>, but
+their implementations can be completely different.</p>
+<p>When the <code>send_yapp</code> port is connected to both
+<em>mone_in</em> and <em>mtwo_in</em> imps, then a single write call
+from <em>yapp_monitor</em> executes both write implementations in
+<em>monitor_one</em> and <em>monitor_two</em></p>
+<p><img src="/2022/04/03/tlm/image-20220403153742706.png"
+alt="image-20220403153742706" /></p>
+<p>For non-analysis connections</p>
+<ul>
+<li>the TLM object must be connected to a single destination only, i.e.,
+each non-analysis object has exactly <strong>one</strong> connect call.
+An object may be used multiple times as the <em>argument</em> to a
+connect, but exactly once as the caller. This is called
+<strong>many-to-one</strong> connection. For example, many ports can be
+connected to a one imp connector</li>
+</ul>
+<p>For analysis connections</p>
+<ul>
+<li>a TLM object can be connected to any number of destinations i.e.,
+one analysis object can call connect many times. This is called
+<strong>one-to-many</strong> connection. For example, one port can be
+connected to many imp connectors. <strong>one-to-many</strong> is only
+allowed for analysis connections. An analysis connection can also
+<em>NOT</em> call connect. An unconnected TLM object is also only
+allowed for analysis connections</li>
+</ul>
+<h2 id="bi-directional-tlm-transport-connection">Bi-Directional TLM
+Transport Connection</h2>
+<p><img src="/2022/04/03/tlm/image-20220403160248099.png"
+alt="image-20220403160248099" /></p>
+<p>Connector syntax</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uvm_blocking_transport_XXX <span class="variable">#(type REA, type RSP)</span></span><br><span class="line">uvm_nonblocking_transport_XXX <span class="variable">#(type REQ, type RSP)</span></span><br><span class="line">uvm_transport_XXX <span class="variable">#(type REQ, type RSP)</span></span><br></pre></td></tr></table></figure>
+<p>Communication methods</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> transport(REQ request, <span class="keyword">output</span> RSP response)</span><br><span class="line">    <span class="keyword">function</span> <span class="keyword">bit</span> nb_transport(REQ request, <span class="keyword">output</span> RSP response)</span><br></pre></td></tr></table></figure>
+<h2 id="gotchas">Gotchas</h2>
+<p>FIFO/analysis FIFOs do not perform any cloning on input transactions.
+Therefore, you will need to check that the UVC monitors collect every
+transaction into a different instance to avoid overwriting data in the
+FIFOs</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/02/hier-conn-export-uvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/02/hier-conn-export-uvm/" class="post-title-link" itemprop="url">Hierarchical Connections and Exports UVM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-02 11:24:09" itemprop="dateCreated datePublished" datetime="2022-04-02T11:24:09+00:00">2022-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>imp</code> and <code>port</code> connectors are sufficient for
+modeling most connections, but there is third connector,
+<code>export</code>, which is used exclusively in hierarchical
+connections.</p>
+<p>Normally hierarchical routing is not required. A <code>port</code> on
+an UVC monitor can be connected directly to an <code>imp</code> in a
+scoreboard by specifying full hierarchical pathname (e.g.,
+env.agent.monitor.analysis_port). The structure of an UVC is fixed and
+so the user knows to look in the monitor component for the analysis
+ports.</p>
+<p>However the internal hierarchy of a module UVC is more arbitrary, and
+it may be convenient to route all the module UVC connectors to the top
+level to allow use without knowledge of the internal structure.</p>
+<p>On the initiator side</p>
+<ul>
+<li>ports are routed up the hierarchy via other port instances</li>
+</ul>
+<p>On the target side</p>
+<ul>
+<li>only the component which defines the communication method is allowed
+to have an <code>imp</code> instance. So we need a third object to route
+connections up the target side hierarchy - <code>export</code></li>
+</ul>
+<p>The hierarchical route must be connected at each level in the
+direction of control flow:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initiator<span class="variable">.connect</span>(target)</span><br></pre></td></tr></table></figure>
+<p>Connection rules are as follows:</p>
+<ul>
+<li><code>port</code> initiators can be connected to <code>port</code>,
+<code>export</code> or <code>imp</code> targets</li>
+<li><code>export</code> initiators can be connected to
+<code>export</code> or <code>imp</code> targets</li>
+<li><code>imp</code> cannot be connection initiator. <code>imp</code> is
+target only and is always the last connection object on a route</li>
+</ul>
+<p><strong>uvm_analysis_port</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_analysis_port # (</span><br><span class="line">   	<span class="keyword">type</span> 	T	 = 	<span class="keyword">int</span></span><br><span class="line">) <span class="keyword">extends</span> uvm_port_base # (uvm_tlm_if_base <span class="variable">#(T,T))</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_analysis_port</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_analysis_port # (</span><br><span class="line">   	<span class="keyword">type</span> 	T	 = 	<span class="keyword">int</span></span><br><span class="line">) <span class="keyword">extends</span> uvm_port_base # (uvm_tlm_if_base <span class="variable">#(T,T))</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_analysis_imp</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_analysis_imp #(</span><br><span class="line">   	<span class="keyword">type</span> 	T	 = 	<span class="keyword">int</span>,</span><br><span class="line">   	<span class="keyword">type</span> 	IMP	 = 	<span class="keyword">int</span></span><br><span class="line">) <span class="keyword">extends</span> uvm_port_base <span class="variable">#(uvm_tlm_if_base #(T,T))</span></span><br></pre></td></tr></table></figure>
+<p><strong>QA</strong></p>
+<ol type="1">
+<li><p>What are the three distinct functions of a scoreboard?</p>
+<p>Reference model, expected data storage and comparison</p></li>
+<li><p>To how many consumer components can an analysis port be
+connected?</p>
+<p>Any number, including zero</p></li>
+<li><p>What are the names of the two declarations made available by the
+following macro:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`uvm_analysis_imp_decl(_possible)</span><br></pre></td></tr></table></figure>
+<p>Subclass <code>uvm_analysis_imp_possible</code></p>
+<p>Method <code>write_possible</code></p></li>
+<li><p>Why should a scoreboard clone the data received by a
+<code>write</code> method?</p>
+<p>The <code>write</code> method only sends a reference, therefore if
+the sending component uses the same reference for every data item,
+overwriting of data in the storage function of the scoreboard is
+possible without cloning.</p></li>
+</ol>
 
       
     </div>

@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,126 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/20/bw-from-pulse-resp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/20/bw-from-pulse-resp/" class="post-title-link" itemprop="url">How to obtain channel bandwidth from pulse response</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-20 22:30:33" itemprop="dateCreated datePublished" datetime="2022-05-20T22:30:33+00:00">2022-05-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Convolution Property of the Fourier Transform <span
-class="math display">\[
-x(t)*h(t)\longleftrightarrow  X(\omega)H(\omega)
-\]</span> pulse response can be obtained by convolve impulse response
-with UI length rectangular <span class="math display">\[
-H(\omega) = \frac{Y_{\text{pulse}}(\omega)}{X_{\text{rect}}(\omega)} =
-\frac{Y_{\text{pulse}}(\omega)}{\text{sinc}(\omega)}
-\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Convolution Property of the Fourier Transform</span></span><br><span class="line"><span class="comment">% pulse(t) = h(t) * rect(t)</span></span><br><span class="line"><span class="comment">% -&gt; fourier transform</span></span><br><span class="line"><span class="comment">% PULSE = H * RECT</span></span><br><span class="line"><span class="comment">% FT(RECT) = sinc</span></span><br><span class="line"><span class="comment">% H = PULSE/RECT = PULSE/sinc</span></span><br><span class="line">xx = <span class="built_in">pi</span>*ui.*w(<span class="number">1</span>:plt_num);</span><br><span class="line">y_sinc = ui.*<span class="built_in">sin</span>(xx)./xx;</span><br><span class="line">y_sinc(<span class="number">1</span>) = y_sinc(<span class="number">2</span>);</span><br><span class="line">y_sinc = y_sinc/y_sinc(<span class="number">1</span>);  <span class="comment">% we dont care the absoulte gain</span></span><br><span class="line">h_ban1 = <span class="built_in">abs</span>(h(<span class="number">1</span>:plt_num))./<span class="built_in">abs</span>(y_sinc);</span><br><span class="line"></span><br><span class="line">h_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(h_ban1));</span><br><span class="line">[hmin, Index] = <span class="built_in">min</span>(<span class="built_in">abs</span>(h_dB +<span class="number">3</span> ));</span><br><span class="line">f_3dB = w(Index);</span><br><span class="line">f_3dB = f_3dB/<span class="number">1e9</span>;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223115184.png"
-alt="image-20220520223115184" /></p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223621924.png"
-alt="image-20220520223621924" /></p>
-<h2 id="sinc-function">sinc function</h2>
-<p>Notice that the complete definition of <span
-class="math inline">\(\operatorname{sinc}\)</span> on <span
-class="math inline">\(\mathbb R\)</span> is <span
-class="math display">\[
-\operatorname{Sa}(x)=\operatorname{sinc}(x) = \begin{cases} \frac{\sin
-x}{x} &amp; x\ne 0, \\ 1, &amp; x = 0, \end{cases}
-\]</span> which is <strong>continuous</strong>.</p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220521112425477.png"
-alt="image-20220521112425477" /></p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220521112722838.png"
-alt="image-20220521112722838" /></p>
-<p>To approach to real spectrum of continuous rectangular waveform,
-<span class="math inline">\(\text{NFFT}\)</span> has to be big
-enough.</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">clear;</span><br><span class="line">close all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">fs=<span class="number">500</span>; <span class="comment">%sampling frequency</span></span><br><span class="line">Ts = <span class="number">1</span>/fs;</span><br><span class="line">T=<span class="number">0.2</span>; <span class="comment">%width of the rectangule pulse in seconds</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">t=<span class="number">-0.5</span>:<span class="number">1</span>/fs:<span class="number">0.5</span>; <span class="comment">%time base</span></span><br><span class="line">x=rectpuls(t,T); <span class="comment">%generating the square wave</span></span><br><span class="line">sum(x&gt;<span class="number">0.5</span>)</span><br><span class="line">stem(t,x,<span class="string">&#x27;--k&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(t, x, <span class="string">&#x27;b.-&#x27;</span>)</span><br><span class="line">xstart = T/<span class="number">2</span>-Ts/<span class="number">2</span>;</span><br><span class="line">xend = -T/<span class="number">2</span>-Ts/<span class="number">2</span>;</span><br><span class="line"><span class="built_in">plot</span>([xstart, xstart], [<span class="number">-1</span>, <span class="number">1.02</span>], <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>([xend, xend], [<span class="number">-1</span>, <span class="number">1.02</span>], <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>([<span class="number">-0.11</span>, <span class="number">0.11</span>], [<span class="number">1</span>, <span class="number">1</span>], <span class="string">&#x27;r--&#x27;</span>)</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line">grid on;</span><br><span class="line">title([<span class="string">&#x27;Rectangular Pulse width=&#x27;</span>, num2str(T),<span class="string">&#x27;s&#x27;</span>]);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Amplitude&#x27;</span>);</span><br><span class="line">xlim([<span class="number">-0.12</span>, <span class="number">0.12</span>]);</span><br><span class="line">ylim([<span class="number">-0.05</span>, <span class="number">1.05</span>]);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line">Titer = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>];</span><br><span class="line">color = &#123;<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;b&#x27;</span>&#125;;</span><br><span class="line">formatSpec = <span class="string">&#x27;NFFT=%d&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:<span class="built_in">length</span>(Titer)</span><br><span class="line">    t=-Titer(k):Ts:Titer(k); <span class="comment">%time base</span></span><br><span class="line">    x=rectpuls(t,T); <span class="comment">%generating the square wave</span></span><br><span class="line"></span><br><span class="line">    L=<span class="built_in">length</span>(x);</span><br><span class="line">    Np = <span class="built_in">nextpow2</span>(L)<span class="number">-1</span>;</span><br><span class="line">    NFFT = <span class="number">2</span>^Np;</span><br><span class="line">    X = fftshift(fft(x,NFFT)); <span class="comment">%FFT with FFTshift for both negative &amp; positive frequencies</span></span><br><span class="line">    f = fs*(-NFFT/<span class="number">2</span>:NFFT/<span class="number">2</span><span class="number">-1</span>)/NFFT; <span class="comment">%Frequency Vector</span></span><br><span class="line">    Xc = <span class="built_in">abs</span>(X)*Ts; <span class="comment">% continuous signal spectrum</span></span><br><span class="line">    <span class="built_in">plot</span>(f, Xc, <span class="string">&quot;Color&quot;</span>,color&#123;k&#125;, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line">    legend_str&#123;k&#125; = [num2str(NFFT, formatSpec)];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"><span class="built_in">legend</span>(legend_str);</span><br><span class="line">title(<span class="string">&#x27;Magnitude of X_c (original continuous signal)&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;Magnitude |X(f)|&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong></p>
-<p>L.W. Couch, <em>Digital and Analog Communication</em>
-<em>Systems</em>, 8th Edition, Pearson, 2013.</p>
-<p><a
-target="_blank" rel="noopener" href="https://www.gaussianwaves.com/2014/07/generating-basic-signals-rectangule-pulse-and-power-spectral-density-using-fft/">Generating
-Basic signals – Rectangular Pulse and Power Spectral Density using
-FFT</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -346,7 +226,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -605,7 +485,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -827,7 +707,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -920,7 +800,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1060,7 +940,7 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1190,7 +1070,7 @@ doi:10.1007/978-3-030-03238-8</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1306,7 +1186,7 @@ target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1479,7 +1359,7 @@ target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/le
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1809,7 +1689,7 @@ Processing</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1880,6 +1760,234 @@ alt="image-20220507122053948" /></p>
 <p><img src="/2022/05/07/signed-verilog/image-20220507122217830.png"
 alt="image-20220507122217830" /></p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:21:51 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n6, n7, n8, n9, n10;</span><br><span class="line"></span><br><span class="line">  nd02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n10) );</span><br><span class="line">  inv0d0 U10 ( <span class="variable">.I</span>(n10), <span class="variable">.ZN</span>(n9) );</span><br><span class="line">  nr02d0 U11 ( <span class="variable">.A1</span>(data0[<span class="number">1</span>]), <span class="variable">.A2</span>(data1[<span class="number">1</span>]), <span class="variable">.ZN</span>(n7) );</span><br><span class="line">  aor221d1 U12 ( <span class="variable">.B1</span>(n9), <span class="variable">.B2</span>(data1[<span class="number">1</span>]), <span class="variable">.C1</span>(n10), <span class="variable">.C2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(</span><br><span class="line">        n6) );</span><br><span class="line">  xn02d1 U13 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n6), <span class="variable">.ZN</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  ora21d1 U14 ( <span class="variable">.B1</span>(data1[<span class="number">0</span>]), <span class="variable">.B2</span>(data0[<span class="number">0</span>]), <span class="variable">.A</span>(n10), <span class="variable">.Z</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  aor21d1 U15 ( <span class="variable">.B1</span>(data1[<span class="number">1</span>]), <span class="variable">.B2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(n8) );</span><br><span class="line">  mx02d0 U16 ( <span class="variable">.I0</span>(n10), <span class="variable">.I1</span>(n9), <span class="variable">.S</span>(n8), <span class="variable">.Z</span>(result[<span class="number">1</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/04/linear-cdr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/04/linear-cdr/" class="post-title-link" itemprop="url">CDR Linear Model</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-04 10:16:23" itemprop="dateCreated datePublished" datetime="2022-05-04T10:16:23+00:00">2022-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="/2022/05/04/linear-cdr/image-20220504101924272.png"
+alt="image-20220504101924272" /></p>
+<blockquote>
+<p>condition:</p>
+<p>Linear model of the CDR is used in a <strong>frequency lock
+condition</strong> and is approaching to achieve <strong>phase
+lock</strong></p>
+</blockquote>
+<p>Using this model, the power spectral density (PSD) of jitter in the
+recovered clock <span class="math inline">\(S_{out}(f)\)</span> is <span
+class="math display">\[
+S_{out}(f)=|H_T(f)|^2S_{in}(f)+|H_G(f)|^2S_{VCO}(f)
+\]</span> Here, we assume <span
+class="math inline">\(\varphi_{in}\)</span> and <span
+class="math inline">\(\varphi_{VCO}\)</span> are uncorrelated as they
+come from independent sources.</p>
+<h4 id="jitter-transfer">Jitter Transfer</h4>
+<p><span class="math display">\[
+H_T(s) =
+\frac{\varphi_{out}(s)}{\varphi_{in}(s)}|_{\varphi_{vco}=0}=\frac{K_{PD}K_{VCO}R_s+\frac{K_{PD}K_{VCO}}{C}}{s^2+K_{PD}K_{VCO}R_s+\frac{K_{PD}K_{VCO}}{C}}
+\]</span></p>
+<p>Using below notation <span class="math display">\[\begin{align}
+\omega_n^2=\frac{K_{PD}K_{VCO}}{C} \\
+\xi=\frac{K_{PD}K_{VCO}}{2\omega_n^2}
+\end{align}\]</span></p>
+<p>We can rewrite transfer function as follows <span
+class="math display">\[
+H_T(s)=\frac{2\xi\omega_n s+\omega_n^2}{s^2+2\xi \omega_n s+\omega_n^2}
+\]</span></p>
+<blockquote>
+<p>The jitter transfer represents a <strong>low-pass filter</strong>
+whose magnitude is around 1 (0 dB) for low jitter frequencies and drops
+at 20 db/decade for frequencies above <span
+class="math inline">\(\omega_n\)</span></p>
+</blockquote>
+<p><img src="/2022/05/04/linear-cdr/image-20220504104202197.png"
+alt="image-20220504104202197" /></p>
+<ul>
+<li>the recovered clock <strong>track</strong> the <em>low-frequency
+jitter</em> of the input data</li>
+<li>the recovered clock <strong>DONT</strong> track the
+<em>high-frequency jitter</em> of the input data</li>
+</ul>
+<p>The recovered clock does not suffer from high-frequency jitter even
+though the input signal may contain high-frequency jitter, which will
+limit the CDR tolerance to high-frequency jitter.</p>
+<h4 id="jitter-peaking-in-jitter-transfer-function">Jitter Peaking in
+Jitter Transfer Function</h4>
+<p>The peak, slightly larger than 1 (0dB) implies that jitter will be
+<strong>amplified</strong> at some frequencies in the CDR, producing a
+jitter amplitude in the recovered clock, and thus also in the recovered
+data, that is slightly <strong>larger</strong> than the jitter amplitude
+in the input data.</p>
+<p>This is certainly undesirable, especially in applications such as
+repeaters.</p>
+<p><img src="/2022/05/04/linear-cdr/image-20220504110722442.png"
+alt="image-20220504110722442" /></p>
+<h4 id="jitter-generation">Jitter Generation</h4>
+<p>If the input data to the CDR is clean with no jitter, i.e., <span
+class="math inline">\(\varphi_{in}=0\)</span>, the jitter of the
+recovered clock comes directly from the VCO jitter. The transfer
+function that relates the VCO jitter to the recovered clock jitter is
+known as <strong>jitter generation</strong>. <span
+class="math display">\[
+H_G(s)=\frac{\varphi_{out}}{\varphi_{VCO}}|_{\varphi_{in}=0}=\frac{s^2}{s^2+2\xi
+\omega_n s+\omega_n^2}
+\]</span> Jitter generation is <strong>high-pass filter</strong> with
+two zeros, at zero frequency, and two poles identical to those of the
+jitter transfer function</p>
+<p><img src="/2022/05/04/linear-cdr/image-20220504110737718.png"
+alt="image-20220504110737718" /></p>
+<h4 id="jitter-tolerance">Jitter Tolerance</h4>
+<p>To quantify jitter tolerance, we often apply a sinusoidal jitter of a
+fixed frequency to the CDR input data and observe the BER of the CDR</p>
+<p>The jitter tolerance curve <strong>DONT</strong> capture a CDR's true
+tolerance to <strong>random</strong> jitter. Because we are applying
+"sinusoidal" jitter, which is <strong>deterministic</strong> signal.</p>
+<p>We can deal only with the jitter's amplitude and frequency instead of
+the PSD of the jitter thanks to deterministic sinusoidal jitter signal.
+<span class="math display">\[
+JTOL(f) = \left | \varphi_{in}(f)  \right |_{\text{pp-max}} \quad
+\text{for a fixed BER}
+\]</span> Where the subscript <span
+class="math inline">\(\text{pp-max}\)</span> indicates the maximum
+peak-to-peak amplitude. We can further expand this equation as follows
+<span class="math display">\[
+JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right| \cdot
+|\varphi_e(f)|_{pp-max}
+\]</span> <img src="/2022/05/04/linear-cdr/image-20220504114650749.png"
+alt="image-20220504114650749" /></p>
+<blockquote>
+<p>Relative jitter, <span class="math inline">\(\varphi_e\)</span> must
+be less than 1UIpp for error-free operation</p>
+</blockquote>
+<p>In an ideal CDR, the <strong>maximum peak-to-peak amplitude</strong>
+of <span class="math inline">\(|\varphi_e(f)|\)</span> is
+<strong>1UI</strong>, i.e.,<span
+class="math inline">\(|\varphi_e(f)|_{pp-max}=1UI\)</span></p>
+<p>Accordingly, jitter tolerance can be expressed in terms of the number
+of UIs as <span class="math display">\[
+JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right|\quad
+\text{[UI]}
+\]</span> Given the linear CDR model, we can write <span
+class="math display">\[
+JTOL(f)=\left| 1+\frac{K_{PD}K_{VCO}H_{LF}(f)}{j2\pi f} \right|\quad
+\text{[UI]}
+\]</span> Expand <span class="math inline">\(H_{LF}(f)\)</span> for the
+CDR, we can write <span class="math display">\[
+JTOL(f)=\left| 1-2\xi j \left(\frac{f_n}{f}\right) -
+\left(\frac{f_n}{f}\right)^2 \right|\quad \text{[UI]}
+\]</span> <img src="/2022/05/04/linear-cdr/image-20220504120538534.png"
+alt="image-20220504120538534" /></p>
+<p>At frequencies far below and above the natural frequency, the jitter
+tolerance can be approximated by the following <span
+class="math display">\[
+JTOL(f) = \left\{ \begin{array}{cl}
+\left(\frac{f_n}{f}\right)^2 &amp; : \ f\ll f_n \\
+1 &amp; : \ f\gg f_n
+\end{array} \right.
+\]</span></p>
+<ul>
+<li>the jitter tolerance at very <strong>high jitter
+frequencies</strong> is limited to <strong>1UIpp</strong>
+<ul>
+<li>This is consistent with that the recovered clock does not track the
+high-frequency jitter, limiting the maximum peak-to-peak deviation of
+the data edge from its nominal position to 1UI</li>
+<li>The circumstance, (b) jittery data with ideal clock</li>
+</ul></li>
+<li>the jitter tolerance is increased at 40dB/decade for jitter
+frequencies below <span class="math inline">\(f_c\)</span>
+<ul>
+<li>This is consistent with our obervation earlier that the recovered
+clock better tracks data jitter at lower jitter frequencies</li>
+<li>Equivalently, the data edge and the clock edge move together in the
+<strong>same direction</strong>. As a result, the relative jitter
+between the data and the clock remains small, i.e., below 1UI
+peak-to-peak</li>
+<li>The circumstance, (c) jittery data and jittery clock</li>
+</ul></li>
+</ul>
+<h4 id="reference">reference</h4>
+<p>Dalt, Nicola Da and Ali Sheikholeslami. “Understanding Jitter and
+Phase Noise: A Circuits and Systems Perspective.” (2018).</p>
 
       
     </div>

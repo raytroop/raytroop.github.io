@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,339 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/tcoil/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/17/tcoil/" class="post-title-link" itemprop="url">T-coil and its application</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-17 14:30:39" itemprop="dateCreated datePublished" datetime="2022-03-17T14:30:39+00:00">2022-03-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>Broaden the bandwidth</li>
-<li>Create a constant, resistive input impedance in the presence of a
-heavy load capacitance (ESD protection circuit)</li>
-</ul>
-<blockquote>
-<p>L<sub>1</sub> = L<sub>2</sub> for impedance matching</p>
-</blockquote>
-<p>The use of T-coils can dramatically increase the
-<strong>bandwidth</strong> and improve the <strong>return loss</strong>
-in both TXs and RXs.</p>
-<h2 id="tcoil-in-rx">Tcoil in RX</h2>
-<p><img src="/2022/03/17/tcoil/image-20220502201254057.png"
-alt="image-20220502201254057" /></p>
-<blockquote>
-<p><strong>ppwl</strong>: Independent Piece-Wise Linear Resistive
-Source</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220502201321341.png"
-alt="image-20220502201321341" /></p>
-<h2 id="simple-model">simple model</h2>
-<blockquote>
-<p>L1, L2, Km, Cb</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220502215310947.png"
-alt="image-20220502215310947" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220622224842237.png"
-alt="image-20220622224842237" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220622225709712.png"
-alt="image-20220622225709712" /></p>
-<h2 id="equivalent-model">equivalent model</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">simulator lang=spectre</span><br><span class="line">include &quot;/path/to/INDL0.scs&quot;</span><br><span class="line">subckt for_import(p0 p1 p2 gnd)</span><br><span class="line">	xmod (p0 p1 p2 gnd) INDL0</span><br><span class="line">ends for_import</span><br><span class="line"></span><br><span class="line">x_1 (p_1_1 p_1_2 p_1_3 0) for_import</span><br><span class="line">v_1_1 (p_1_1 0) vsource mag=-1</span><br><span class="line">v_1_2 (p_1_2 0) vsource mag=0</span><br><span class="line">v_1_3 (p_1_3 0) vsource mag=0</span><br><span class="line">save v_1_1:p v_1_2:p v_1_3:p</span><br><span class="line"></span><br><span class="line">x_2 (p_2_1 p_2_2 p_2_3 0) for_import</span><br><span class="line">v_2_1 (p_2_1 0) vsource mag=0</span><br><span class="line">v_2_2 (p_2_2 0) vsource mag=-1</span><br><span class="line">v_2_3 (p_2_3 0) vsource mag=0</span><br><span class="line">save v_2_1:p v_2_2:p v_2_3:p</span><br><span class="line"></span><br><span class="line">x_3 (p_3_1 p_3_2 p_3_3 0) for_import</span><br><span class="line">v_3_1 (p_3_1 0) vsource mag=0</span><br><span class="line">v_3_2 (p_3_2 0) vsource mag=0</span><br><span class="line">v_3_3 (p_3_3 0) vsource mag=-1</span><br><span class="line">save v_3_1:p v_3_2:p v_3_3:p</span><br><span class="line">Y ac start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08</span><br><span class="line"></span><br><span class="line">xsp (p_1 p_2 p_3 0) for_import</span><br><span class="line">port1 (p_1 0) port</span><br><span class="line">port2 (p_2 0) port</span><br><span class="line">port3 (p_3 0) port</span><br><span class="line">S sp start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08 ports=[ port1 port2 port3]</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/17/tcoil/image-20220503005728763.png"
-alt="image-20220503005728763" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220503005903105.png"
-alt="image-20220503005903105" /></p>
-<h3 id="emx_plot_tcoil-in-emxform.ils"><code>EMX_plot_tcoil</code> in
-<code>emxform.ils</code></h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">(define (EMX_plot_tcoil bgui wid what)</span><br><span class="line">  (needNCells &#x27;adtComplex 100000)</span><br><span class="line">  (letseq ((to_z (lambda (ys)</span><br><span class="line">		   (letseq ((y11 (EMX_matrix_ref ys 0 0))</span><br><span class="line">			    (y12 (EMX_matrix_ref ys 0 1))</span><br><span class="line">			    (y21 (EMX_matrix_ref ys 1 0))</span><br><span class="line">			    (y22 (EMX_matrix_ref ys 1 1))</span><br><span class="line">			    (det y11*y22-y12*y21)</span><br><span class="line">			    (z11 y22/det)</span><br><span class="line">			    (z12 -y12/det)</span><br><span class="line">			    (z22 y11/det))</span><br><span class="line">		     (list z11 z12 z22))))</span><br><span class="line">	   (ground</span><br><span class="line">	    (lambda (y p)</span><br><span class="line">	      (letseq ((n (EMX_matrix_rows y))</span><br><span class="line">		       (yg (make_EMX_matrix n-1)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n-1))</span><br><span class="line">		  (do ((j 0 j+1))</span><br><span class="line">		      ((j &gt;= n-1))</span><br><span class="line">		    (EMX_matrix_set yg i j (EMX_matrix_ref y i+(if (i &gt;= p) 1 0) j+(if (j &gt;= p) 1 0)))))</span><br><span class="line">		yg)))</span><br><span class="line">	   (reduce</span><br><span class="line">	    (lambda (yys)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec (car yys)))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (yyvecs (mapcar drGetWaveformYVec yys))</span><br><span class="line">		       (zz1 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz2 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz3 (drCreateVec &#x27;doublecomplex n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (let ((ys (mapcar (lambda (w) (drGetElem w i)) yyvecs)))</span><br><span class="line">		    (setq ys (ground (as_EMX_matrix 3 3 ys) 2))</span><br><span class="line">		    (let ((zz (to_z ys)))</span><br><span class="line">		      (drSetElem zz1 i (nth 0 zz))</span><br><span class="line">		      (drSetElem zz2 i (nth 1 zz))</span><br><span class="line">		      (drSetElem zz3 i (nth 2 zz)))))</span><br><span class="line">		(list (drCreateWaveform xvec zz1)</span><br><span class="line">		      (drCreateWaveform xvec zz2)</span><br><span class="line">		      (drCreateWaveform xvec zz3)))))</span><br><span class="line">	   (get_k</span><br><span class="line">	    (lambda (l12 l1122)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec l12))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (l12v (drGetWaveformYVec l12))</span><br><span class="line">		       (l1122v (drGetWaveformYVec l1122))</span><br><span class="line">		       (resultv (drCreateVec &#x27;double n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (letseq ((l12i (drGetElem l12v i))</span><br><span class="line">			   (l1122i (drGetElem l1122v i))</span><br><span class="line">			   (kk (if (l1122i &gt; 0.0)</span><br><span class="line">				   l12i/(sqrt l1122i)</span><br><span class="line">				   0.0))</span><br><span class="line">			   (k (if ((abs kk) &lt; 2.0) kk 0.0)))</span><br><span class="line">		    (drSetElem resultv i k)))</span><br><span class="line">		(drCreateWaveform xvec resultv)))))</span><br><span class="line">  (EMX_plot_aux bgui wid what 3</span><br><span class="line">		&#x27;(&quot;Inductance&quot; &quot;Q&quot; &quot;k&quot;)</span><br><span class="line">		&#x27;(&quot;Henry&quot; &quot;&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((zs (reduce ys))</span><br><span class="line">			   (z11 (nth 0 zs))</span><br><span class="line">			   (z12 (nth 1 zs))</span><br><span class="line">			   (z22 (nth 2 zs))</span><br><span class="line">			   (pi 3.14159265358979)</span><br><span class="line">			   (f (xval z11))</span><br><span class="line">			   (l11 (imag z11)/(2*pi*f))</span><br><span class="line">			   (q11 (imag z11)/(real z11))</span><br><span class="line">			   (l12 (imag z12)/(2*pi*f))</span><br><span class="line">			   (l22 (imag z22)/(2*pi*f))</span><br><span class="line">			   (q22 (imag z22)/(real z22))</span><br><span class="line">			   (k (get_k l12 l11*l22)))</span><br><span class="line">		    `((,l11 ,l22) (,q11 ,q22) (,k))))</span><br><span class="line">		&#x27;((&quot;L1&quot; &quot;L2&quot;) (&quot;Q1&quot; &quot;Q2&quot;) (&quot;k&quot;)))))</span><br></pre></td></tr></table></figure>
-<h2 id="tcoil-and-tapped-inductor">tcoil and tapped inductor</h2>
-<p>tcoil and tapped inductor share same EM simulation result, and use
-modelgen with different model formula.</p>
-<p>The relationship is <span class="math display">\[
-L_{\text{sim}} = L1_{\text{sim}}+L2_{\text{sim}}+2\times k_{\text{sim}}
-\times \sqrt{L1_{\text{sim}}\cdot L2_{\text{sim}}}
-\]</span> where <span class="math inline">\(L1_{\text{sim}}\)</span>,
-<span class="math inline">\(L2_{\text{sim}}\)</span> and <span
-class="math inline">\(k_{\text{sim}}\)</span> come from tcoil model
-result, <span class="math inline">\(L_{\text{sim}}\)</span> comes from
-tapped inductor model result</p>
-<blockquote>
-<p><span class="math inline">\(k_{\text{sim}}\)</span> in EMX have
-assumption, induce current from P1 and P2 Given Dot Convention:</p>
-<p>Same direction : k &gt; 0</p>
-<p>Opposite direction : k &lt; 0</p>
-<p>So, the <span class="math inline">\(k_{\text{sim}}\)</span> is
-negative if routing coil in same direction</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220623013225554.png"
-alt="image-20220623013225554" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220623013923263.png"
-alt="image-20220623013923263" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% EMX - shield tcoil model</span></span><br><span class="line">L1 = csvread(<span class="string">&#x27;./L1sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">L2 = csvread(<span class="string">&#x27;./L2sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">k = csvread(<span class="string">&#x27;./ksim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% EMX - Tapped shield inductor</span></span><br><span class="line">L = csvread(<span class="string">&#x27;./Lsim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">freq = L1(:, <span class="number">1</span>)/<span class="number">1e9</span>;    <span class="comment">% GHz</span></span><br><span class="line">L1 = L1(:, <span class="number">2</span>);</span><br><span class="line">L2 = L2(:, <span class="number">2</span>);</span><br><span class="line">k = -k(:, <span class="number">2</span>);   <span class="comment">% Caution: minus of EMX ksim due to same current direction</span></span><br><span class="line"></span><br><span class="line">L = L(:, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">Lcalc = L1 + L2 + <span class="number">2</span>*k.*(L1.*L2).^<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq, L*<span class="number">1e9</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(freq, Lcalc*<span class="number">1e9</span>, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Inductance (nH)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Tapped inductor model&#x27;</span>, <span class="string">&#x27;tcoil model calc&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE
-Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall
-2015.</p>
-<p>B. Razavi, "The Design of Broadband I/O Circuits [The Analog Mind],"
-IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2, pp. 6-15,
-Spring 2021.</p>
-<p>S. Galal and B. Razavi, "Broadband ESD protection circuits in CMOS
-technology," in IEEE Journal of Solid-State Circuits, vol. 38, no. 12,
-pp. 2334-2340, Dec. 2003, doi: 10.1109/JSSC.2003.818568.</p>
-<p>M. Ker and Y. Hsiao, "On-Chip ESD Protection Strategies for RF
-Circuits in CMOS Technology," 2006 8th International Conference on
-Solid-State and Integrated Circuit Technology Proceedings, 2006, pp.
-1680-1683, doi: 10.1109/ICSICT.2006.306371.</p>
-<p>M. Ker, C. Lin and Y. Hsiao, "Overview on ESD Protection Designs of
-Low-Parasitic Capacitance for RF ICs in CMOS Technologies," in IEEE
-Transactions on Device and Materials Reliability, vol. 11, no. 2, pp.
-207-218, June 2011, doi: 10.1109/TDMR.2011.2106129.</p>
-<p><a
-target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/29db/7f450d63eee941424655fb787de7d644a3c2.pdf">David
-J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers</a></p>
-<p><a target="_blank" rel="noopener" href="https://ibis.org/summits/feb11/ross.pdf">Bob Ross, "T-Coil
-Topics" DesignCon IBIS Summit 2011</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/16/inertial-and-transport-delay/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/16/inertial-and-transport-delay/" class="post-title-link" itemprop="url">Inertial & transport delays</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-16 23:23:02" itemprop="dateCreated datePublished" datetime="2022-03-16T23:23:02+00:00">2022-03-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img
-src="/2022/03/16/inertial-and-transport-delay/image-20230414232256309.png"
-alt="image-20230414232256309" /></p>
-<p><img
-src="/2022/03/16/inertial-and-transport-delay/image-20230414232439556.png"
-alt="image-20230414232439556" /></p>
-<h2 id="inertial-delay">Inertial delay</h2>
-<p>Inertial delay models are simulation delay models that filter pulses
-that are shorted than the propagation delay of <strong>Verilog gate
-primitives</strong> or <strong>continuous assignments</strong>
-(<code>assign #5 y = ~a;</code>)</p>
-<p>​ <strong>COMBINATIONAL LOGIC ONLY !!!</strong></p>
-<blockquote>
-<ul>
-<li>Inertial delays swallow glitches</li>
-<li><strong>sequential logic</strong> implemented with <strong>procedure
-assignments</strong> DON'T follow the rule</li>
-</ul>
-</blockquote>
-<h3 id="continuous-assignments">continuous assignments</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">wire</span> out;</span><br><span class="line">	<span class="keyword">assign</span> #<span class="number">2</span><span class="variable">.5</span> out = in;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/16/inertial-and-transport-delay/image-20220317000509716.png"
-alt="image-20220317000509716" /></p>
-<h3 id="procedure-assignment---combinational-logic">procedure assignment
-- combinational logic</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////// combination logic ////////////////////////</span></span><br><span class="line">	<span class="keyword">always</span> @(*)</span><br><span class="line">		#<span class="number">2</span><span class="variable">.5</span> out = in;</span><br><span class="line"><span class="comment">///////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">/* the above code is same with following code</span></span><br><span class="line"><span class="comment">    	always @(*) begin</span></span><br><span class="line"><span class="comment">			#2.5;</span></span><br><span class="line"><span class="comment">			out = in;</span></span><br><span class="line"><span class="comment">		end</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/16/inertial-and-transport-delay/image-20220316235257361.png"
-alt="image-20220316235257361" /></p>
-<h3 id="procedure-assignment---sequential-logic">procedure assignment -
-sequential logic</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> clk;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">		clk = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">5</span>;</span><br><span class="line">		<span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">			clk = ~clk;</span><br><span class="line">			#<span class="number">5</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">//////////// sequential logic //////////////////</span></span><br><span class="line">	<span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">		#<span class="number">2</span><span class="variable">.5</span> out &lt;= in;</span><br><span class="line"><span class="comment">///////////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/16/inertial-and-transport-delay/image-20220316235620168.png"
-alt="image-20220316235620168" /></p>
-<blockquote>
-<p>As shown above, sequential logic DON'T follow inertial delay</p>
-</blockquote>
-<h2 id="transport-delay">Transport delay</h2>
-<p>Transport delay models are simulation delay models that pass all
-pulses, including pulses that are shorter than the propagation delay of
-corresponding <strong>Verilog procedural assignments</strong></p>
-<blockquote>
-<ul>
-<li>Transport delays pass glitches, delayed in time</li>
-<li>Verilog can model RTL transport delays by adding <strong>explicit
-delays to the right-hand-side (RHS) of a nonblocking
-assignment</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @(*)</span><br><span class="line">    y &lt;= #<span class="number">5</span> ~a;</span><br></pre></td></tr></table></figure>
-<h3 id="nonblocking-assignment">nonblocking assignment</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"><span class="comment">/////////////// nonblocking assignment ///</span></span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		out &lt;= #<span class="number">2</span><span class="variable">.5</span> in;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/16/inertial-and-transport-delay/image-20220317003146825.png"
-alt="image-20220317003146825" /></p>
-<h3 id="blocking-assignment">blocking assignment</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> in;</span><br><span class="line">	<span class="keyword">reg</span> out;</span><br><span class="line"><span class="comment">/////////////// blocking assignment ///</span></span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		out = #<span class="number">2</span><span class="variable">.5</span> in;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">16</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">2</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span>;</span><br><span class="line">		in = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">4</span>;</span><br><span class="line">		in = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">50</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/16/inertial-and-transport-delay/image-20220317003819457.png"
-alt="image-20220317003819457" /></p>
-<blockquote>
-<p>It seems that new event is <strong>discarded</strong> before previous
-event is realized.</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="http://www.sunburst-design.com/papers/CummingsSNUG2002Boston_NBAwithDelays.pdf">Verilog
-Nonblocking Assignments With Delays, Myths &amp; Mysteries</a></p>
-<p><a
-target="_blank" rel="noopener" href="http://www.sunburst-design.com/papers/CummingsHDLCON1999_BehavioralDelays_Rev1_1.pdf">Correct
-Methods For Adding Delays To Verilog Behavioral Models</a></p>
-<p>Article (20488135) Title: Selecting Different Delay Modes in GLS
-(RAK) URL: <a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdLyEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdLyEAI</a></p>
-<p>Article (20447759) Title: Gate Level Simulation (GLS): A Quick Guide
-for Beginners URL: <a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -559,7 +226,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -700,7 +367,7 @@ together
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -803,7 +470,7 @@ focusing on bang-bang loop CDR design methodology, ISSCC Short Course,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1418,7 +1085,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1654,7 +1321,7 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:32" itemprop="dateModified" datetime="2024-05-04T00:25:32+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1815,7 +1482,7 @@ Transceivers"</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2025,7 +1692,7 @@ off.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2451,7 +2118,7 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-04 00:25:33" itemprop="dateModified" datetime="2024-05-04T00:25:33+00:00">2024-05-04</time>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2699,6 +2366,385 @@ Integrated Circuits Conference, 2013, pp. 1-5, doi:
 10.1109/CICC.2013.6658461.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/StanfordVLSI/DaVE">StanfordVLSI/DaVE -
 tools regarding on analog modeling,validation, and generation</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/07/parallel-compensation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/07/parallel-compensation/" class="post-title-link" itemprop="url">Parallel Compensation in Two stage amplifier</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-07 23:48:11" itemprop="dateCreated datePublished" datetime="2022-03-07T23:48:11+00:00">2022-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><strong>Parallel Compensation</strong> is also known as <strong>Lead
+Compensation</strong>, <strong>Pole-Zero Compensation</strong></p>
+</blockquote>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20220307234938855.png"
+alt="image-20220307234938855" /></p>
+<p><strong>Note</strong>: The dominant pole is at output of the first
+stage, i.e. <span
+class="math inline">\(\frac{1}{R_{EQ}C_{EQ}}\)</span>.</p>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20221006001114562.png"
+alt="image-20221006001114562" /></p>
+<h4 id="pole-and-zero-in-transfer-function">Pole and Zero in transfer
+function</h4>
+<blockquote>
+<p>Design with operational amplifiers and analog integrated circuits /
+Sergio Franco, San Francisco State University. – Fourth edition</p>
+</blockquote>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20221005220854411.png"
+alt="image-20221005220854411" /></p>
+<p><span class="math display">\[
+Y = \frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}
+\]</span></p>
+<p><span class="math display">\[\begin{align}
+Z &amp;= \frac{1}{\frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}} \\
+&amp;= \frac{R_1(1+sR_cC_c)}{s^2R_1C_1R_cC_c+s(R_1C_c+R_1C_1+R_cC_c)+1}
+\end{align}\]</span> If <span class="math inline">\(p_{1c} \ll
+p_{3c}\)</span>, two real roots can be found <span
+class="math display">\[\begin{align}
+p_{1c} &amp;= \frac{1}{R_1C_c+R_1C_1+R_cC_c} \\
+p_{3c} &amp;= \frac{R_1C_c+R_1C_1+R_cC_c}{R_1C_1R_cC_c}
+\end{align}\]</span></p>
+<p>The additional zero is <span class="math display">\[
+z_c = \frac{1}{R_cC_c}
+\]</span> Given <span class="math inline">\(R_c \ll R\)</span> and <span
+class="math inline">\(C_c \gg C\)</span> <span
+class="math display">\[\begin{align}
+p_{1c} &amp;\simeq \frac{1}{R_1(C_c+C_1)} \simeq \frac{1}{R_1C_c}\\
+p_{3c} &amp;= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \simeq
+\frac{1}{R_cC_1}
+\end{align}\]</span></p>
+<p>The output pole is unchanged, which is <span class="math display">\[
+p_2 = \frac{1}{R_LC_L}
+\]</span> We usually <strong>cancel</strong> <span
+class="math inline">\(p_2\)</span> with <span
+class="math inline">\(z_c\)</span>, i.e. <span class="math display">\[
+R_cC_c=R_LC_L
+\]</span></p>
+<h4 id="phase-margin">Phase margin</h4>
+<p>unity-gain frequency <span class="math inline">\(\omega_t\)</span>
+<span class="math display">\[
+\omega_t = A_\text{DC}\cdot P_{1c} =\frac{g_{m1}g_{m2}R_L}{C_c}
+\]</span></p>
+<ol type="1">
+<li><p>PM=45<span class="math inline">\(^o\)</span> <span
+class="math display">\[
+p_{3c} = \omega_t
+\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
+class="math inline">\(R_c\)</span> can be obtained</p>
+<p><span class="math display">\[\begin{align}
+   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot A_{DC}\cdot
+p_2}}=\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot A_{DC}}} \\
+C_c &amp;= \sqrt{\frac{A_{DC}\cdot C_1}{R_1\cdot
+p_2}}=\sqrt{\frac{A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}}
+\end{align}\]</span></p></li>
+<li><p>PM=60<span class="math inline">\(^o\)</span> <span
+class="math display">\[
+p_{3c} = 2\cdot\omega_t
+\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
+class="math inline">\(R_c\)</span> can be obtained <span
+class="math display">\[\begin{align}
+   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot 2A_{DC}\cdot p_2}} =
+\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot 2A_{DC}}} \\
+   &amp;= \sqrt{\frac{C_L}{2g_{m1}g_{m2}C_1}}\\
+C_c &amp;= \sqrt{\frac{2A_{DC}\cdot C_1}{R_1\cdot p_2}} =
+\sqrt{\frac{2A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}} \\
+&amp;= R_L\sqrt{2g_{m1}g_{m2}C_1C_L}
+\end{align}\]</span></p>
+<p>for the unity-gain frequency <span
+class="math inline">\(\omega_t\)</span> we find <span
+class="math display">\[
+\omega_t = \sqrt{\frac{1}{2}\cdot \frac{g_{m1}g_{m2}}{C_1C_L}}
+\]</span> The parallel compensation shows a remarkably good result. The
+new 0 dB frequency lies only a factor <span
+class="math inline">\(\sqrt{2}\)</span> lower than the theoretical
+maximum</p></li>
+</ol>
+<blockquote>
+<p>To increase <span class="math inline">\(\phi_m\)</span>, we need to
+<strong>raise</strong> <span class="math inline">\(C_c\)</span> a bit
+while <strong>lowering</strong> <span class="math inline">\(R_c\)</span>
+in proportion in order to maintain pole-zero cancellation. This causes
+<span class="math inline">\(p_{1c}\)</span> and <span
+class="math inline">\(p_{3c}\)</span> to split a bit further apart.</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"></span><br><span class="line">fd = <span class="number">84</span>*<span class="number">1e3</span>;	<span class="comment">% dominant freq, unit: Hz</span></span><br><span class="line">fnd = <span class="number">3.25</span>*<span class="number">1e6</span>;	<span class="comment">% unit: Hz</span></span><br><span class="line">C = <span class="number">478</span>*<span class="number">1e-15</span>;</span><br><span class="line">R = <span class="number">1</span>/fd/(<span class="number">2</span>*<span class="built_in">pi</span>)/C;</span><br><span class="line">Adc = <span class="number">10</span>^(<span class="number">80</span>/<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">ri = <span class="number">2</span>; <span class="comment">% PM=45: 1;  PM=60: 2</span></span><br><span class="line">Rc = (R/C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/ri/Adc)^<span class="number">0.5</span>; <span class="comment">% compensation resistor</span></span><br><span class="line">Cc = (ri*Adc*C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/R)^<span class="number">0.5</span>; <span class="comment">% compensation capacitor</span></span><br><span class="line"></span><br><span class="line">wzc = <span class="number">1</span>/<span class="number">2</span>/<span class="built_in">pi</span>/Rc/Cc; <span class="comment">% zero frequency</span></span><br></pre></td></tr></table></figure>
+<h4 id="reference">reference</h4>
+<p>Viola Schäffer, Designing Amplifiers for Stability, ISSCC 2021
+Tutorials</p>
+<p>R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft
+University Press, 1994.</p>
+<p>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
+Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.
+6.7 Compensation</p>
+<p>Application Note AN-1286 Compensation for the LM3478 Boost
+Controller</p>
+<p>ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 URL:
+<a
+target="_blank" rel="noopener" href="https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability%20Jan27.pdf">Lect
+1D Op-Amps Stability and Frequency Compensation Techniques</a></p>
+<p>Sergio Franco, San Francisco State University, Design with
+Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
+<p>J. H. Huijsing, 6.2.2.1 Two-GA-stage Parallel Compensation (PC),
+"Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer,
+2017"</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/06/EDI-post-mask-ECO-sparecell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/06/EDI-post-mask-ECO-sparecell/" class="post-title-link" itemprop="url">How does EDI System identify spare cells in a post-mask ECO flow?</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-06 22:56:40" itemprop="dateCreated datePublished" datetime="2022-03-06T22:56:40+00:00">2022-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-04 00:51:15" itemprop="dateModified" datetime="2024-05-04T00:51:15+00:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/innovus/" itemprop="url" rel="index"><span itemprop="name">innovus</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4
+id="how-does-edi-system-identify-spare-cells-in-a-post-mask-eco-flow">How
+does EDI System identify spare cells in a post-mask ECO flow?</h4>
+<p>Spare cells should have a unique string in their instance name to
+identify them. Then the command <code>specifySpareGate</code> or
+<code>ecoDesign -useSpareCells patternName</code> is run to identify the
+spare instances. For example, if all spare cells have _spare_ in their
+name then they are identified using:</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">specifySpareGate -inst *_spare_*</span><br></pre></td></tr></table></figure>
+<p>OR</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ecoDesign -spareCells *_spare_* ...</span><br></pre></td></tr></table></figure>
+<p><strong>Note</strong>: if you are making <strong>manual ECO</strong>
+changes to a netlist and converting a spare cell to a logical instance,
+<strong>it's important to change the instance name</strong>. Otherwise,
+the instance may be identified as a spare cell if a future ECO is
+performed because it still has the spare cell instance name.</p>
+<h4 id="example">Example</h4>
+<h5 id="the-cell-to-be-swapped-is-unplaced">The cell to be swapped is
+unplaced</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307002842020.png"
+alt="image-20220307002842020" /></p>
+<p>pre_buf: <strong>unplaced</strong></p>
+<p>spare_buf: <strong>placed</strong></p>
+<blockquote>
+<p>innovus 49&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 50&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">specifySpareGate -inst spare_*</span><br><span class="line">ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307003059068.png"
+alt="image-20220307003059068" /></p>
+<blockquote>
+<p>innovus 55&gt; dbGet top.insts.name</p>
+<p><strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 56&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef6150</strong> 0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 57&gt; dbGet top.insts.Pstatus</p>
+<p><strong>placed</strong> fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the unplaced cell.</p>
+<h5 id="the-cell-to-be-swapped-is-placed">The cell to be swapped is
+placed</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307004654614.png"
+alt="image-20220307004654614" /></p>
+<blockquote>
+<p>innovus 62&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 63&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 64&gt; dbGet top.insts.pStatus</p>
+<p><strong>placed</strong> <strong>placed</strong> fixed fixed</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">innovus <span class="number">66</span>&gt; specifySpareGate -inst spare_*</span><br><span class="line">Specifying instance [spare_buf] as spare gate.</span><br><span class="line">Specified <span class="number">1</span> instances as spare gate.</span><br><span class="line">innovus <span class="number">67</span>&gt; ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307005254488.png"
+alt="image-20220307005254488" /></p>
+<blockquote>
+<p>innovus 68&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf pre_buf</strong> UDriver USink</p>
+<p>innovus 69&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0 0x7f7b03ef6150</strong> 0x7f7b03ef6000
+0x7f7b03ef6070</p>
+<p>innovus 70&gt; dbGet top.insts.pStatus</p>
+<p>placed placed fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the placed cell.</p>
+<h5 id="error-in-innovus-text-command-reference-21.12">Error in "Innovus
+Text Command Reference 21.12"</h5>
+<p><strong>ecoSwapSpareCell</strong></p>
+<p><del>If the cell to be swapped is unplaced, it is mapped to the spare
+cell. <code>*instName*</code> is deleted, and its connection is
+transferred to the spare cell. If the cell to be swapped is placed, it
+is swapped with the spare cell and is renamed to
+<code>*instNameSuffix*</code> if the <code>-suffix</code> option is
+used. If a suffix is not specified, the <code>*instName*</code> cell is
+renamed to <code>*spareCellInstName*</code>. The <code>*instName*</code>
+cell's connections are transferred to <code>*spareCellInstName*</code>.
+The input of <code>*instName*</code> is <code>tielo</code>, based on the
+global connection definition.</del></p>
+<p><strong>reference:</strong></p>
+<p><a
+target="_blank" rel="noopener" href="https://community.cadence.com/cadence_blogs_8/b/di/posts/answers-to-frequently-asked-questions-when-performing-ecos-in-edi-system">Answers
+to Top 10 Questions on Performing ECOs in EDI System</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html">EE
+582: Physical Design Automation of VLSI Circuits and Systems</a></p>
 
       
     </div>

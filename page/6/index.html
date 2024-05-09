@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">171</span>
+          <span class="site-state-item-count">170</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,231 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/29/Dynamic-specification-converter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/29/Dynamic-specification-converter/" class="post-title-link" itemprop="url">Dynamic Specification of Data Converter</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-03-29 23:54:37" itemprop="dateCreated datePublished" datetime="2023-03-29T23:54:37+00:00">2023-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="term-abbreviation">Term Abbreviation</h2>
+<p>SNR: signal-to-noise ratio</p>
+<p>SINAD: signal to noise and distortion</p>
+<p>ENOB: effective number of bits</p>
+<p>THD: total harmonic distortion</p>
+<p>SFDR: spurious-free dynamic range</p>
+<p>TTIMD: two-tone intermodulation distortion</p>
+<p>MTIMD: multi-tone intermodulation distortion</p>
+<p>VSWR: voltage standing-wave ratio</p>
+<h2 id="coherent-sampling">Coherent Sampling</h2>
+<p>To avoid <strong>spectral leakage</strong> completely, the method of
+<strong>coherent sampling</strong> is recommended. Coherent sampling
+requires that the input- and clock-frequency generators are
+<strong>phase locked</strong>, and that the input frequency be chosen
+based on the following relationship: <span class="math display">\[
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(f_{\text{in}}\)</span> = the desired
+input frequency</li>
+<li><span class="math inline">\(f_s\)</span> = the clock frequency of
+the data converter under test</li>
+<li><span class="math inline">\(M_C\)</span> = the number of cycles in
+the data window (to make all samples unique, choose odd or prime
+numbers)</li>
+<li><span class="math inline">\(N_R\)</span> = the data record length
+(for an 8192-point FFT, the data record is 8192s long)</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+f_{\text{in}} &amp;=\frac{f_s}{N_R}\cdot M_C \\
+&amp;= f_{\text{res}}\cdot M_C
+\end{align}\]</span></p>
+<h3 id="irreducible-ratio">irreducible ratio</h3>
+<p>An <strong>irreducible ratio</strong> ensures identical code
+sequences not to be repeated multiple times. Unnecessary repetition of
+the same code is not desirable as it increases ADC test time.</p>
+<blockquote>
+<p>Given that <span class="math inline">\(\frac{M_C}{N_R}\)</span> is
+irreducible, and <span class="math inline">\(N_R\)</span> is a power of
+2, an <strong>odd number</strong> for <span
+class="math inline">\(M_C\)</span> will always produce an
+<strong>irreducible ratio</strong></p>
+</blockquote>
+<p>Assuming there is a common factor <span
+class="math inline">\(k\)</span> between <span
+class="math inline">\(M_C\)</span> and <span
+class="math inline">\(N_R\)</span>, i.e. <span
+class="math inline">\(\frac{M_C}{N_R}=\frac{k M_C&#39;}{k
+N_R&#39;}\)</span></p>
+<p>The samples (<span class="math inline">\(n\in[1, N_R]\)</span>)</p>
+<p><span class="math display">\[\begin{align}
+y[n] &amp;= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
+&amp;= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
+&amp; = \sin\left( \omega_{\text{in}} \cdot
+n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
+&amp; = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+\end{align}\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\begin{align}
+y[n+N_R&#39;] &amp;= \sin\left( 2\pi (n+N_R&#39;)\frac{M_C}{N_R} \right)
+\\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{M_C}{N_R}\right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{kM_C&#39;}{kN_R&#39;} \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C&#39; \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
+\end{align}\]</span></p>
+<p>So, the samples is repeated <span class="math inline">\(y[n] =
+y[n+N_R&#39;]\)</span>. Usually, no additional information is gained by
+repeating with the same sampling points.</p>
+<h3 id="general-simulation-setup">General Simulation Setup</h3>
+<p><span class="math display">\[
+N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}
+\]</span> where <span class="math inline">\(F_s\)</span> is sample
+frequency, <span class="math inline">\(F_{in}\)</span> input signal
+frequency.</p>
+<p>And <span class="math inline">\(N\)</span> often is 256, 512; M is 3,
+5, 7, 11.</p>
+<h2 id="snr">SNR</h2>
+<p><img src="/2023/03/29/Dynamic-specification-converter/VXpqU.png"
+alt="VXpqU" /></p>
+<p><img src="/2023/03/29/Dynamic-specification-converter/gRE1L.png"
+alt="gRE1L" /></p>
+<h2 id="reference">reference</h2>
+<p>everynanocounts. Memos on FFT With Windowing. URL: <a
+target="_blank" rel="noopener" href="https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/">https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/</a></p>
+<p>How to choose FFT depth for ADC performance analysis (SINAD, ENOB).
+URL:<a
+target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a></p>
+<p>Computation of Effective Number of Bits, Signal to Noise Ratio, &amp;
+Signal to Noise &amp; Distortion Ratio Using FFT. URL:<a
+target="_blank" rel="noopener" href="https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf">https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf</a></p>
+<p>Kester, Walt. (2009). Understand SINAD, ENOB, SNR, THD, THD + N, and
+SFDR so You Don't Get Lost in the Noise Floor. URL:<a
+target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf</a></p>
+<p>T. C. Hofner: Dynamic ADC testing part I. Defining and testing
+dynamic ADC parameters, Microwaves &amp; RF, 2000, vol. 39, no. 11, pp.
+75-84,162</p>
+<p>T. C. Hofner: Dynamic ADC testing part 2. Measuring and evaluating
+dynamic line parameters, Microwaves &amp; RF, 2000, vol. 39, no. 13, pp.
+78-94</p>
+<p>AN9675: A Tutorial in Coherent and Windowed Sampling with A/D
+Converters <a
+target="_blank" rel="noopener" href="https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters">https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters</a></p>
+<p>APPLICATION NOTE 3190: Coherent Sampling Calculator (CSC) <a
+target="_blank" rel="noopener" href="https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html">https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html</a></p>
+<p>Coherent Sampling (Very Brief and Simple) <a
+target="_blank" rel="noopener" href="https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple">https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple</a></p>
+<p>Signal Chain Basics #160: Making sense of coherent and noncoherent
+sampling in data-converter testing <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/">https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/</a></p>
+<p>Signal Chain Basics #104: Understanding noise in ADCs <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/">https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/</a></p>
+<p>Signal Chain Basics #101: ENOB Degradation Analysis Over Frequency
+Due to Jitter <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/">https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/</a></p>
+<p>Clock jitter analyzed in the time domain, Part 1, Texas Instruments
+Analog Applications Journal (slyt379), Aug 2010 <a
+target="_blank" rel="noopener" href="https://www.ti.com/lit/an/slyt379/slyt379.pdf">https://www.ti.com/lit/an/slyt379/slyt379.pdf</a></p>
+<p>Clock jitter analyzed in the time domain, Part 2 <a
+target="_blank" rel="noopener" href="https://www.ti.com/lit/slyt389">https://www.ti.com/lit/slyt389</a></p>
+<p>Measurement of Total Harmonic Distortion and Its Related Parameters
+using Multi-Instrument [<a
+target="_blank" rel="noopener" href="https://www.virtins.com/doc/Measurement-of-Total-Harmonic-Distortion-and-Its-Related-Parameters-using-Multi-Instrument.pdf">pdf</a>]</p>
+<p>Application Note AN-4: Understanding Data Converters' Frequency
+Domain Specifications [<a
+target="_blank" rel="noopener" href="https://www.datel.com/data/ads/adc-an4.pdf">pdf</a>]</p>
+<p>Belleman, J. (2008). From analog to digital.
+10.5170/CERN-2008-003.131. [<a
+target="_blank" rel="noopener" href="https://cds.cern.ch/record/1100535/files/p131.pdf">pdf</a>]</p>
+<p>HandWiki. Coherent sampling [<a
+target="_blank" rel="noopener" href="https://handwiki.org/wiki/Coherent_sampling">link</a>]</p>
+<p>Luis Chioye, TI. Leverage coherent sampling and FFT windows when
+evaluating SAR ADCs (Part 1) [<a
+target="_blank" rel="noopener" href="https://e2e.ti.com/blogs_/archives/b/precisionhub/posts/leverage-coherent-sampling-and-fft-windows-when-evaluating-sar-adcs-part-1">link</a>]</p>
+<p>Coherent Sampling vs. Window Sampling | Analog Devices <a
+target="_blank" rel="noopener" href="https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html">https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html</a></p>
+<p>Understanding Effective Number of Bits <a
+target="_blank" rel="noopener" href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/">https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +451,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -315,7 +540,7 @@ during synthesis</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -406,7 +631,7 @@ alt="image-20230129223248655" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,7 +724,7 @@ alt="image-20230114220458438" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -640,7 +865,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -967,7 +1192,7 @@ McGraw-Hill, 2017.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1802,7 +2027,7 @@ target="_blank" rel="noopener" href="https://www.edn.com/burn-in-101/">link</a>]
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1890,7 +2115,7 @@ target="_blank" rel="noopener" href="https://superuser.com/q/211798">https://sup
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2107,7 +2332,7 @@ target="_blank" rel="noopener" href="https://www.edn.com/demystifying-pole-zero-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 14:22:06" itemprop="dateModified" datetime="2024-05-09T14:22:06+00:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2433,264 +2658,8 @@ in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/10/FinFET-Considerations/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/10/FinFET-Considerations/" class="post-title-link" itemprop="url">Custom Design with FinFETs</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-12-10 16:56:07" itemprop="dateCreated datePublished" datetime="2022-12-10T16:56:07+00:00">2022-12-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 12:57:13" itemprop="dateModified" datetime="2024-05-09T12:57:13+00:00">2024-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="design-considerations">Design Considerations</h2>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20221210165644336.png"
-alt="image-20221210165644336" /></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20221210165916985.png"
-alt="image-20221210165916985" /></p>
-<h2 id="modeling-consideration">Modeling Consideration</h2>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20221217152830191.png"
-alt="image-20221217152830191" /></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20221210170042233.png"
-alt="image-20221210170042233" /></p>
-<p><img src="/2022/12/10/FinFET-Considerations/mos_pro.drawio.svg"
-alt="mos_pro" /> <span class="math display">\[\begin{align}
-R_{d1} &amp;\propto \frac{1}{N_{fins}} \\
-R_{s1} &amp;\propto \frac{1}{N_{fins}} \\
-R_{g1} &amp;\propto N_{fins} \\
-C_{gd} &amp;\propto N_{fins} \cdot N_{fingers} \cdot N_{multipler} \\
-C_{gs} &amp;= Cgd \\
-C_{g1d} &amp;\propto N_{fins} \\
-C_{g1s} &amp;= C_{g1d} \\
-C_{g1d1} &amp;\propto N_{fins} \\
-C_{g1s1} &amp;= C_{g1d1}  \\
-C_{g1d1} &amp;\simeq 2\times C_{g1d}
-\end{align}\]</span></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230708221056420.png"
-alt="image-20230708221056420" /></p>
-<h2 id="layout-consideration">Layout Consideration</h2>
-<h3 id="pode-cpode">PODE &amp; CPODE</h3>
-<blockquote>
-<p>The PODE devices is extracted as parasitic devices in post-layout
-netlist</p>
-</blockquote>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20220213172653116.png"
-alt="image-20220213172653116" /></p>
-<p><strong>DDB</strong> is the <strong>PODE</strong> (Poly on
-OD/Diffusion Edge) in TSMC 16FFC process.</p>
-<p><strong>SDB</strong> is the <strong>CPODE</strong> (Connected PODE)
-in TSMC 16FFC process.</p>
-<blockquote>
-<p>PO on OD edge (PODE) is a must and to define GATE that abuts OD
-vertical edge</p>
-<p>CPODE is used to connect two PODE cells together. It will isolate OD
-to save 1 poly pitch, via STI; Additional mask (12N) is required for
-manufacture</p>
-</blockquote>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20221210145232826.png"
-alt="image-20221210145232826" /></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20221210150847737.png"
-alt="image-20221210150847737" /></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20240509205506112.png"
-alt="image-20240509205506112" /></p>
-<h3 id="sac-sagc">SAC &amp; SAGC</h3>
-<h4 id="self-aligned-diffusion-contacts-sacs">self-aligned diffusion
-contacts (SACs)</h4>
-<p>As shown in Fig. 35 in older planar technology nodes, gate pitch is
-so relaxed such that S/D contacts and gate contacts can easily be placed
-next to each other without causing any shorting risk (see Fig.
-35(a)).</p>
-<p><strong>As the gate pitch scales, there’s no room to put gate
-contacts next to S/D contacts, and gatecontacts have been pushed away
-from the active region and are only placed on the STI
-region.</strong></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230708221916716.png"
-alt="image-20230708221916716" /></p>
-<p>In addition, at tight gate pitch, even forming <em>S/D contact</em>
-without shorting to <em>gate metal</em> becomes very challenging.</p>
-<p>The idea of <strong>self-aligned contacts (SAC)</strong> has been
-introduced to mitigate the issue of S/D contact to gate shorts.</p>
-<p>As shown in Fig. 35(b), <em>the gate metal is fully encapsulated by a
-dielectric spacer and gate cap</em>, which protects the gate from
-shorting to the S/D contact.</p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230708230238362.png"
-alt="image-20230708230238362" /></p>
-<blockquote>
-<p>A dielectric cap is added on top of the gate so that if the contact
-overlaps the gate, no short occurs.</p>
-<p><strong>MD</strong> layer represent SACs in PDK</p>
-</blockquote>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230709005334372.png"
-alt="image-20230709005334372" /></p>
-<h4 id="self-aligned-gate-contacts-sagcs">self-aligned gate contacts
-(SAGCs)</h4>
-<p><strong>Self-aligned gate contacts (SAGCs)</strong> have also been
-implemented and Denser standard cells can be achieved by eliminating the
-need to land contacts on the gate outside the active area.</p>
-<p>SAGCs require the source/drain contacts to be capped with an
-insulator that is different from both contact and gate cap dielectrics
-to protect the source/drain contacts against a misaligned gate contact
-etch.</p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230708233009568.png"
-alt="image-20230708233009568" /></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230708232429240.png"
-alt="image-20230708232429240" /></p>
-<blockquote>
-<p>According to the DRC of T foundary, poly extension &gt; 0 um and
-space between MP and OD &gt; 0 um., which demonstrate self-aligned gate
-contact is <strong>not</strong> introduced.</p>
-</blockquote>
-<h5 id="contacted-poly-pitch-cpp">Contacted-Poly-Pitch (CPP)</h5>
-<blockquote>
-<p>Wider Contacted-Poly-Pitch allows wider MD and VD size, which help
-reduce MEOL IRdrop</p>
-</blockquote>
-<p><img
-src="https://www.imec-int.com/_next/image?url=%2Fsites%2Fdefault%2Ffiles%2F2022-02%2FFigure%25201%2520-%2520Logic%2520standard%2520cell%2520scaling.JPG&amp;w=3840&amp;q=75"
-alt="Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP)." /></p>
-<p><em>Naoto Horiguchi. Entering the Nanosheet Transistor Era [<a
-target="_blank" rel="noopener" href="https://www.imec-int.com/en/articles/entering-nanosheet-transistor-era-0">link</a>]</em></p>
-<h3 id="gate-resistance">Gate Resistance</h3>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230709000326683.png"
-alt="image-20230709000326683" /></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230709004432013.png"
-alt="image-20230709004432013" /></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230709000637817.png"
-alt="image-20230709000637817" /></p>
-<p><img
-src="/2022/12/10/FinFET-Considerations/image-20230709003917922.png"
-alt="image-20230709003917922" /></p>
-<h4 id="non-quasistatic-nqs-effect">non-quasistatic (NQS) effect</h4>
-<h2 id="reference">reference</h2>
-<p>Tom Quan, TSMC, Bob Lefferts, Fred Sendig, Synopsys, Custom Design
-with FinFETs - Best practices designing mixed-signal IP</p>
-<p>Jacob, Ajey &amp; Xie, Ruilong &amp; Sung, Min &amp; Liebmann, Lars
-&amp; Lee, Rinus &amp; Taylor, Bill. (2017). Scaling Challenges for
-Advanced CMOS Devices. International Journal of High Speed Electronics
-and Systems. 26. 1740001. 10.1142/S0129156417400018.</p>
-<p>Joddy Wang, Synopsys <a
-target="_blank" rel="noopener" href="https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf">"FinFET
-SPICE Modeling"</a> Modeling of Systems and Parameter Extraction Working
-Group 8th International MOS-AK Workshop (co-located with the IEDM
-Conference and CMC Meeting) Washington DC, December 9 2015</p>
-<p>A. L. S. Loke et al., "Analog/mixed-signal design challenges in 7-nm
-CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference
-(CICC), San Diego, CA, USA, 2018, pp. 1-8, doi:
-10.1109/CICC.2018.8357060.[<a
-target="_blank" rel="noopener" href="https://ewh.ieee.org/r6/san_diego/sscs/events/slides/2018_05_23_AMSDesignChallengesIn7nmCMOS_AlvinLoke.pdf">slides</a>]</p>
-<p>Prof. Adam Teman, Advanced Process Technologies, [<a
-target="_blank" rel="noopener" href="https://www.eng.biu.ac.il/temanad/files/2022/03/Lecture-2-Advanced-Process-Technologies.pdf">pdf</a>]</p>
-<p>Luke Collins. FinFET variability issues challenge advantages of new
-process [<a
-target="_blank" rel="noopener" href="https://www.techdesignforums.com/blog/2014/04/16/finfet-variability-challenges-advantages/">link</a>]</p>
-<p>Loke, Alvin. (2020). FinFET technology considerations for circuit
-design (invited short course). BCICTS 2020 Monterey, CA</p>
-<p>Alvin Leng Sun Loke, TSMC. Device and Physical Design Considerations
-for Circuits in FinFET Technology", ISSCC 2020</p>
-<p>Prof. Adam Teman. Advanced Process Technologies [<a
-target="_blank" rel="noopener" href="https://www.eng.biu.ac.il/temanad/files/2022/03/Lecture-2-Advanced-Process-Technologies.pdf">pdf</a>]</p>
-<p>A. L. S. Loke, C. K. Lee and B. M. Leary, "Nanoscale CMOS
-Implications on Analog/Mixed-Signal Design," 2019 IEEE Custom Integrated
-Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
-10.1109/CICC.2019.8780267.</p>
-<p>A. L. S. Loke, Migrating Analog/Mixed-Signal Designs to FinFET Alvin
-Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits</p>
-<p>Lattice Semiconductor, 16FFC Process Technology Introduction December
-9th, 2021[<a
-target="_blank" rel="noopener" href="https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/HR1000000009.pdf">pdf</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -190,7 +190,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/09/cdr-sys/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/11/pll-fll/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -208,7 +208,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/09/cdr-sys/" class="post-title-link" itemprop="url">How does CDR work?</a>
+          <a href="/2024/05/11/pll-fll/" class="post-title-link" itemprop="url">clocking</a>
         </h2>
 
         <div class="post-meta-container">
@@ -218,15 +218,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2024-05-09 21:51:46" itemprop="dateCreated datePublished" datetime="2024-05-09T21:51:46+00:00">2024-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Created: 2024-05-11 09:36:14 / Modified: 14:12:48" itemprop="dateCreated datePublished" datetime="2024-05-11T09:36:14+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -248,7 +242,64 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="reference">reference</h2>
+          <h2 id="narrowband-phase-modulation">narrowband phase modulation</h2>
+<p>A sine wave with phase modulation is expressed as <span
+class="math display">\[
+y(t) = A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t))
+\]</span> where <span class="math inline">\(\phi (t)\)</span> is a
+time-varying phase modulation function</p>
+<p>Assuming a narrowband phase modulation (PM), that is, the absolute
+amount of modulated phase is small enough</p>
+<blockquote>
+<p><em>otherwise the modulation becomes frequency modulation (FM) and
+its analysis becomes more complex</em></p>
+</blockquote>
+<p><span class="math display">\[
+y(t) \simeq A_0 \sin(2\pi f_0 t +\phi _0) + A_0 \phi (t)\cos(2\pi f_0 t
++ \phi _0)
+\]</span></p>
+<blockquote>
+<p>Because <span class="math inline">\(\cos \phi(t)\)</span> and <span
+class="math inline">\(\sin \phi(t)\)</span> are approximated to <span
+class="math inline">\(1\)</span> and <span class="math inline">\(\phi
+(t)\)</span>, respectively</p>
+</blockquote>
+<p>The Fourier transform of <span class="math inline">\(y(t)\)</span> is
+<span class="math display">\[
+Y(f) = \frac{1}{2}A_0 e^{j\phi _0}\delta(f-f_0)
+-\frac{1}{2}A_0e^{-j\phi_0}\delta(f+f_0)+\frac{1}{2}A_0e^{j\phi_0}\Phi(f-f_0)-\frac{1}{2}A_0e^{-j\phi_0}\Phi(f+f_0)
+\]</span></p>
+<blockquote>
+<p>where <span class="math inline">\(\Phi(f)\)</span> is the Fourier
+transform pair of <span class="math inline">\(\phi(t)\)</span></p>
+</blockquote>
+<p>The autocorrelation of <span class="math inline">\(y(t)\)</span>
+is</p>
+<p><span class="math display">\[\begin{align}
+R(\tau) &amp;= E(y(t)y(t+\tau))\\
+&amp;= E([A_0\sin(2\pi f_0 t + \phi_0)+A_0\phi(t)\cos(2\pi f_0 t+\phi
+_0)]\\
+&amp;\cdot [A_0\sin(2\pi f_0 t + \phi_0+2\pi f_0\tau)+A_0\phi(t+\tau
+)\cos(2\pi f_0 t+\phi _0+2\pi f_0\tau)]) \\
+&amp;=A_0^2 E( \alpha_t^2\cos(2\pi f_0 \tau) + \alpha_t\beta_t\sin(2\pi
+f_0\tau)+ \phi(t+\tau)[\alpha_t \beta_t \cos(2\pi f_0 \tau) -
+\alpha_t^2\sin(2\pi f_0 \tau)] \\
+&amp;+ \phi(t)[\alpha_t \beta_t \cos(2\pi f_0\tau) + \beta_t^2 \sin(2\pi
+f_0 \tau)] \\
+&amp;+ \phi(t)\phi(t+\tau)[\beta_t^2 \cos(2\pi f_0 \tau)-\alpha_t\beta_t
+\sin(2\pi f_0 \tau)]) \\
+&amp;= A_0^2E(\alpha_t^2 \cos(2\pi f_0 \tau) +
+\phi(t)\phi(t+\tau)\beta_t^2\cos(2\pi f_0 \tau)) \\
+&amp;= \frac{1}{2}A_0^2 \cos(2\pi f_0 \tau)(1+E(\phi(t)\phi(t+\tau))) \\
+&amp;= \frac{1}{2}A_0^2 \cos(2\pi f_0 \tau)(1+R_{\phi}(\tau))
+\end{align}\]</span></p>
+<p>Fourier transform of <span class="math inline">\(R(\tau)\)</span> is
+<span class="math display">\[
+S_y(f) = \frac{1}{4}A_0^2 \delta (f-f_0) + \frac{1}{4}A_0\delta(f+f_0) +
+\frac{1}{4}A_0^2S_\phi (f-f_0)+\frac{1}{4}A_0^2S_\phi (f+f_0)
+\]</span> <img src="/2024/05/11/pll-fll/image-20240511221119938.png"
+alt="image-20240511221119938" /></p>
+<h2 id="reference">reference</h2>
 <p>Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data
 Recovery in Serial Data Transmission Systems. [<a
 target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf">pdf</a>]</p>
@@ -317,7 +368,7 @@ target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talk
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -723,7 +774,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1103,7 +1154,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1188,7 +1239,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1354,7 +1405,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1473,7 +1524,7 @@ target="_blank" rel="noopener" href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbds
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1630,7 +1681,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1771,7 +1822,7 @@ target="_blank" rel="noopener" href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSape
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2226,7 +2277,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-10 07:26:07" itemprop="dateModified" datetime="2024-05-10T07:26:07+00:00">2024-05-10</time>
+      <time title="Modified: 2024-05-11 14:12:48" itemprop="dateModified" datetime="2024-05-11T14:12:48+00:00">2024-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

@@ -18,19 +18,20 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="VCO tuning bandwidth TODO 📅 narrowband phase modulation A sine wave with phase modulation is expressed as \[ y(t) &#x3D; A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t)) \] where \(\phi (t)\) is a time-varying ph">
+    <meta name="description" content="Bang-Bang Phase Detector  It&#39;s ternary, because early, late or no transition  Linearing BB-PD BB Gain is the slope of average BB output \(\mu\), versus phase offset \(\phi\), i.e. \(\frac {\partial \m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="clocking">
 <meta property="og:url" content="http://example.com/2024/05/11/pll-fll/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="VCO tuning bandwidth TODO 📅 narrowband phase modulation A sine wave with phase modulation is expressed as \[ y(t) &#x3D; A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t)) \] where \(\phi (t)\) is a time-varying ph">
+<meta property="og:description" content="Bang-Bang Phase Detector  It&#39;s ternary, because early, late or no transition  Linearing BB-PD BB Gain is the slope of average BB output \(\mu\), versus phase offset \(\phi\), i.e. \(\frac {\partial \m">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/05/11/pll-fll/bb-PDF.drawio.svg">
 <meta property="og:image" content="http://example.com/2024/05/11/pll-fll/image-20240511221119938.png">
 <meta property="article:published_time" content="2024-05-11T09:36:14.000Z">
-<meta property="article:modified_time" content="2024-05-15T08:02:16.730Z">
+<meta property="article:modified_time" content="2024-05-15T10:06:04.147Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/05/11/pll-fll/image-20240511221119938.png">
+<meta name="twitter:image" content="http://example.com/2024/05/11/pll-fll/bb-PDF.drawio.svg">
 
 
 <link rel="canonical" href="http://example.com/2024/05/11/pll-fll/">
@@ -139,7 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vco-tuning-bandwidth"><span class="nav-number">1.</span> <span class="nav-text">VCO tuning bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#narrowband-phase-modulation"><span class="nav-number">2.</span> <span class="nav-text">narrowband phase modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#bang-bang-phase-detector"><span class="nav-number">1.</span> <span class="nav-text">Bang-Bang Phase Detector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linearing-bb-pd"><span class="nav-number">1.1.</span> <span class="nav-text">Linearing BB-PD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">1.1.1.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vco-tuning-bandwidth"><span class="nav-number">2.</span> <span class="nav-text">VCO tuning bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#narrowband-phase-modulation"><span class="nav-number">3.</span> <span class="nav-text">narrowband phase modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-1"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -234,7 +235,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 10:06:04" itemprop="dateModified" datetime="2024-05-15T10:06:04+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,7 +256,34 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="vco-tuning-bandwidth">VCO tuning bandwidth</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="bang-bang-phase-detector">Bang-Bang Phase Detector</h2>
+<blockquote>
+<p>It's <strong>ternary</strong>, because <em>early</em>, <em>late</em>
+or <em>no transition</em></p>
+</blockquote>
+<h3 id="linearing-bb-pd">Linearing BB-PD</h3>
+<p>BB Gain is the slope of average BB output <span
+class="math inline">\(\mu\)</span>, versus phase offset <span
+class="math inline">\(\phi\)</span>, i.e. <span
+class="math inline">\(\frac {\partial \mu}{\partial \phi}\)</span>,</p>
+<p>BB only produces output for a transition and this de-rates the gain.
+Transition density = <em>0.5</em> for random data</p>
+<p><span class="math display">\[
+K_{BB} = \frac{1}{2}\frac {\partial \mu}{\partial \phi}
+\]</span></p>
+<p>where <span class="math inline">\(\mu = (1)\times
+\mathrm{P}(\text{late}|\phi) + (-1)\times
+\mathrm{P}(\text{early}|\phi)\)</span></p>
+<p><img src="/2024/05/11/pll-fll/bb-PDF.drawio.svg"
+alt="bb-PDF.drawio" /></p>
+<blockquote>
+<p>Both jitter and amplitude noise distribution are same, just scaled by
+slope</p>
+</blockquote>
+<h4 id="reference">reference</h4>
+<p>John T. Stonick, ISSCC 2011 TUTORIALS <em>T5: DPLL-Based Clock and
+Data Recovery</em></p>
+<h2 id="vco-tuning-bandwidth">VCO tuning bandwidth</h2>
 <p><em>TODO</em> 📅</p>
 <h2 id="narrowband-phase-modulation">narrowband phase modulation</h2>
 <p>A sine wave with phase modulation is expressed as <span
@@ -314,7 +342,7 @@ S_y(f) = \frac{1}{4}A_0^2 \delta (f-f_0) + \frac{1}{4}A_0\delta(f+f_0) +
 \frac{1}{4}A_0^2S_\phi (f-f_0)+\frac{1}{4}A_0^2S_\phi (f+f_0)
 \]</span> <img src="/2024/05/11/pll-fll/image-20240511221119938.png"
 alt="image-20240511221119938" /></p>
-<h2 id="reference">reference</h2>
+<h2 id="reference-1">reference</h2>
 <p>Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data
 Recovery in Serial Data Transmission Systems. [<a
 target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf">pdf</a>]</p>

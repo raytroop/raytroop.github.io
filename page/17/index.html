@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">169</span>
+          <span class="site-state-item-count">168</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,136 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/07/systemverilog-clocking-block/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/07/systemverilog-clocking-block/" class="post-title-link" itemprop="url">SystemVerilog clocking block</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-07 21:36:33" itemprop="dateCreated datePublished" datetime="2022-02-07T21:36:33+00:00">2022-02-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>Assignment at &lt;interface&gt;.&lt;clocking block&gt;.&lt;output
-signal&gt; (i.e. synchronous) do <strong>NOT</strong> change
-&lt;interface&gt;.&lt;output signal&gt; until active clock edge.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router_io.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> router_io(<span class="keyword">input</span> <span class="keyword">bit</span> clock);</span><br><span class="line">  <span class="keyword">logic</span>    reset_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  din;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frame_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valid_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  dout;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valido_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  busy_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frameo_n;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">clocking</span> cb @(<span class="keyword">posedge</span> clock);</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">input</span> #<span class="number">1</span>ns <span class="keyword">output</span> #<span class="number">1</span>ns;</span><br><span class="line">    <span class="keyword">output</span> reset_n;</span><br><span class="line">    <span class="keyword">output</span> din;</span><br><span class="line">    <span class="keyword">output</span> frame_n;</span><br><span class="line">    <span class="keyword">output</span> valid_n;</span><br><span class="line">    <span class="keyword">input</span>  dout;</span><br><span class="line">    <span class="keyword">input</span>  valido_n;</span><br><span class="line">    <span class="keyword">input</span>  frameo_n;</span><br><span class="line">    <span class="keyword">input</span>  busy_n;</span><br><span class="line">  <span class="keyword">endclocking</span>: cb</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// `reset_n` can be either a synchronous or an asynchronous signal</span></span><br><span class="line">  <span class="keyword">modport</span> TB(<span class="keyword">clocking</span> cb, <span class="keyword">output</span> reset_n);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endinterface</span>: router_io</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>All interface signals are asynchronous and without a direction
-spection (i.e. input, output, inout).</p>
-<ul>
-<li>The direction can only be specified in <code>clocking</code> block
-for <strong>synchronous signals</strong></li>
-<li>or a <code>modport</code> for <strong>asynchronous
-signals</strong></li>
-</ul>
-<p>All directions for the signals in the clocking block must be with
-respect to the test program;</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">program</span> <span class="keyword">automatic</span> test(router_io<span class="variable">.TB</span> rtr_io);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    reset();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">task</span> reset();</span><br><span class="line">    rtr_io<span class="variable">.reset_n</span> = <span class="number">1&#x27;b0</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.frame_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.valid_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">2</span>) @rtr_io<span class="variable">.cb</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.reset_n</span> &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">15</span>) @(rtr_io<span class="variable">.cb</span>);</span><br><span class="line">  <span class="keyword">endtask</span>: reset</span><br><span class="line"></span><br><span class="line"><span class="keyword">endprogram</span>: test</span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router_test_top.sv</span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> router_test_top;</span><br><span class="line">  <span class="keyword">parameter</span> simulation_cycle = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">bit</span> SystemClock = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  router_io top_io(SystemClock);</span><br><span class="line">  test t(top_io);</span><br><span class="line"></span><br><span class="line">  router dut(</span><br><span class="line">    <span class="variable">.reset_n</span>  (top_io<span class="variable">.reset_n</span>),</span><br><span class="line">    <span class="variable">.clock</span>    (top_io<span class="variable">.clock</span>),</span><br><span class="line">    <span class="variable">.din</span>    (top_io<span class="variable">.din</span>),</span><br><span class="line">    <span class="variable">.frame_n</span>  (top_io<span class="variable">.frame_n</span>),</span><br><span class="line">    <span class="variable">.valid_n</span>  (top_io<span class="variable">.valid_n</span>),</span><br><span class="line">    <span class="variable">.dout</span>    (top_io<span class="variable">.dout</span>),</span><br><span class="line">    <span class="variable">.valido_n</span>  (top_io<span class="variable">.valido_n</span>),</span><br><span class="line">    <span class="variable">.busy_n</span>    (top_io<span class="variable">.busy_n</span>),</span><br><span class="line">    <span class="variable">.frameo_n</span>  (top_io<span class="variable">.frameo_n</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$timeformat</span>(-<span class="number">9</span>, <span class="number">1</span>, <span class="string">&quot;ns&quot;</span>, <span class="number">10</span>);</span><br><span class="line">    $fsdbDumpvars;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="variable">#(simulation_cycle/2)</span> SystemClock = ~SystemClock;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>compile</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vcs -sverilog -full64 -kdb -debug_access+all router_test_top.sv test.sv router_io</span><br><span class="line">.sv ../../rtl/router.v</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>file with `<code>timescale</code> must be placed in the first, which
-is <code>router_test_top.sv</code> in above example</p>
-</blockquote>
-<h3 id="clocking.output">clocking.output</h3>
-<p><img
-src="/2022/02/07/systemverilog-clocking-block/image-20220621005749074.png"
-alt="image-20220621005749074" /></p>
-<blockquote>
-<p>systemverilog don't pass clocking.output to interface's until current
-or next active edge and after output-skew</p>
-</blockquote>
-<h3 id="clocking.input">clocking.input</h3>
-<p><img
-src="/2022/02/07/systemverilog-clocking-block/image-20220621010546293.png"
-alt="image-20220621010546293" /></p>
-<blockquote>
-<p>Systemverilog <strong>automatically</strong> update clocking.input
-signal from interface's value, input-skew before active edge</p>
-</blockquote>
-<h3 id="gotcha">Gotcha</h3>
-<p>An <code>interface</code> must be compiled separately like a
-<code>module</code> and CANNOT `<code>include</code> inside a
-<code>package</code> or ohter <code>module</code></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -356,7 +226,7 @@ signal from interface's value, input-skew before active edge</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -450,7 +320,7 @@ signal from interface's value, input-skew before active edge</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -535,7 +405,7 @@ signal from interface's value, input-skew before active edge</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -627,7 +497,7 @@ effect taken into consideration during delayCal</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -715,7 +585,7 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -807,7 +677,7 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -903,7 +773,7 @@ target="_blank" rel="noopener" href="https://users.ece.cmu.edu/~jhoe/doku/doku.p
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -988,7 +858,7 @@ target="_blank" rel="noopener" href="https://users.ece.cmu.edu/~jhoe/doku/doku.p
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 07:59:07" itemprop="dateModified" datetime="2024-05-15T07:59:07+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-15 08:02:16" itemprop="dateModified" datetime="2024-05-15T08:02:16+00:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

@@ -218,9 +218,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-05-15 15:57:03 / Modified: 15:56:49" itemprop="dateCreated datePublished" datetime="2024-05-15T15:57:03+00:00">2024-05-15</time>
+      <time title="Created: 2024-05-15 15:57:03" itemprop="dateCreated datePublished" datetime="2024-05-15T15:57:03+00:00">2024-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -341,7 +347,7 @@ Compliance Testing Utilizing Novel Statistical Eye Methodology."
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:49" itemprop="dateModified" datetime="2024-05-15T15:56:49+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -470,6 +476,9 @@ target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.pape
 <p>- Clock and Data Recovery for Serial Data Communications, focusing on
 bang-bang CDR design methodology, ISSCC Short Course, February 2002. [<a
 target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf">slides</a>]</p>
+<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
+Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
+2020)</p>
 
       
     </div>
@@ -532,7 +541,7 @@ target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talk
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:49" itemprop="dateModified" datetime="2024-05-15T15:56:49+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -943,7 +952,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:49" itemprop="dateModified" datetime="2024-05-15T15:56:49+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1033,10 +1042,60 @@ signal</h2>
 alt="image-20240427155046131" /></p>
 <p><img src="/2024/04/27/noise-folding/image-20240427155100927.png"
 alt="image-20240427155100927" /></p>
+<hr />
+<p>A pure sine wave is expressed as <span class="math inline">\(y(t) =
+A_0 \sin(2\pi f_0 t +\phi _0)\)</span>, its autocorrelation
+function:</p>
+<p><span class="math display">\[
+\mathrm{R}(\tau) = \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
+y(t)y(t+\tau)dt
+\]</span></p>
+<p>where <span class="math inline">\(y(t)y(t+\tau)\)</span> can be
+expressed as <span class="math display">\[\begin{align}
+y(t)y(t+\tau) &amp;= A_0\sin(2\pi f_0 t+\phi_0)\cdot A_0\sin(2\pi f_0
+t+\phi_0+2\pi f_0\tau) \\
+&amp;= A_0^2\sin^2(2\pi f_0 t+\phi_0)\cdot \cos(2\pi f_0\tau) +
+A_0^2\sin(2\pi f_0 t+\phi_0)\cos(2\pi f_0 t+\phi_0)\cdot \cos(2\pi
+f_0\tau) \\
+&amp;= \frac{1}{2}A_0^2 (1 - \cos(2(2\pi f_0 t+\phi_0)))\cdot \cos(2\pi
+f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi
+f_0\tau) \\
+&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) -
+\frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) +
+\frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau)
+\end{align}\]</span></p>
+<p>And substitute <span class="math inline">\(y(t)y(t+\tau)\)</span> in
+<span class="math inline">\(\mathrm{R}(\tau)\)</span></p>
+<p><span class="math display">\[\begin{align}
+\mathrm{R}(\tau) &amp;= \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
+y(t)y(t+\tau)dt \\
+&amp;= \lim _{T\to \infty}\int_{-T}^{T} \left[\frac{1}{2}A_0^2\cdot
+\cos(2\pi f_0\tau) - \frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot
+\cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot
+\cos(2\pi f_0\tau)\right]dt \\
+&amp; = \lim _{T\to \infty}\int_{-T}^{T} \frac{1}{2}A_0^2\cdot \cos(2\pi
+f_0\tau) dt \\
+&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau)
+\end{align}\]</span></p>
+<p>Taking Fourier transform of <span
+class="math inline">\(\mathrm{R}(\tau)\)</span>, PSD is</p>
+<p><span class="math display">\[
+S_y(f) = \frac{1}{4}A_0^2 \delta(f-f_0) + \frac{1}{4}A_0^2 \delta(f+f_0)
+\]</span></p>
+<hr />
 <p><img src="/2024/04/27/noise-folding/image-20240427162827347.png"
 alt="image-20240427162827347" /></p>
 <p><img src="/2024/04/27/noise-folding/image-20240427170024123.png"
 alt="image-20240427170024123" /></p>
+<h3 id="reference">reference</h3>
+<p>Topic 5 Energy &amp; Power Signals, Correlation &amp; Spectral
+Density [<a
+target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf</a>]</p>
+<p>Topic 6 Random Processes and Signals [<a
+target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf</a>]</p>
+<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
+Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
+2020)</p>
 <h2 id="switched-capacitor">Switched-Capacitor</h2>
 <p>The <strong>aliasing of the noise</strong>, or <strong>noise
 folding</strong>, plays an important role in switched-capacitor as it
@@ -1229,7 +1288,7 @@ class="math inline">\(f_s\)</span></p>
 alt="image-20220626001925375" /></p>
 <p><img src="/2024/04/27/noise-folding/image-20220626001043693.png"
 alt="image-20220626001043693" /></p>
-<h2 id="reference">reference</h2>
+<h2 id="reference-1">reference</h2>
 <p>David Herres, The difference between signal under-sampling, aliasing,
 and folding URL: <a
 target="_blank" rel="noopener" href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
@@ -1254,9 +1313,6 @@ Publishers Inc., San Francisco, CA, USA.</p>
 <p>Bernhard E. Boser . Advanced Analog Integrated Circuits Switched
 Capacitor Gain Stages [<a
 target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf</a>]</p>
-<p>Topic 5 Energy &amp; Power Signals, Correlation &amp; Spectral
-Density [<a
-target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf</a>]</p>
 <p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
 3rd edition</p>
 <p>R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for
@@ -1323,7 +1379,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:49" itemprop="dateModified" datetime="2024-05-15T15:56:49+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1408,7 +1464,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:48" itemprop="dateModified" datetime="2024-05-15T15:56:48+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1574,7 +1630,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:48" itemprop="dateModified" datetime="2024-05-15T15:56:48+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1693,7 +1749,7 @@ target="_blank" rel="noopener" href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbds
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:48" itemprop="dateModified" datetime="2024-05-15T15:56:48+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1850,7 +1906,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:49" itemprop="dateModified" datetime="2024-05-15T15:56:49+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1991,7 +2047,7 @@ target="_blank" rel="noopener" href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSape
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 15:56:49" itemprop="dateModified" datetime="2024-05-15T15:56:49+00:00">2024-05-15</time>
+      <time title="Modified: 2024-05-16 04:58:24" itemprop="dateModified" datetime="2024-05-16T04:58:24+00:00">2024-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

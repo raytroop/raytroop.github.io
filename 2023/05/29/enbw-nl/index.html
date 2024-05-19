@@ -27,11 +27,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2023/05/29/enbw-nl/enbw.png">
 <meta property="og:image" content="http://example.com/2023/05/29/enbw-nl/coherence-incoherence.drawio.svg">
+<meta property="og:image" content="http://example.com/2023/05/29/enbw-nl/image-20240517195407690.png">
 <meta property="og:image" content="http://example.com/2023/05/29/enbw-nl/image-20230530230434715.png">
 <meta property="og:image" content="http://example.com/2023/05/29/enbw-nl/image-20230531004822838.png">
 <meta property="og:image" content="http://example.com/2023/05/29/enbw-nl/image-20230531005008418.png">
 <meta property="article:published_time" content="2023-05-29T23:57:28.000Z">
-<meta property="article:modified_time" content="2024-05-17T09:19:55.207Z">
+<meta property="article:modified_time" content="2024-05-19T23:42:36.225Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/05/29/enbw-nl/enbw.png">
@@ -240,7 +241,7 @@ Power Gains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-17 09:19:55" itemprop="dateModified" datetime="2024-05-17T09:19:55+00:00">2024-05-17</time>
+      <time title="Modified: 2024-05-19 23:42:36" itemprop="dateModified" datetime="2024-05-19T23:42:36+00:00">2024-05-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -353,9 +354,11 @@ of windowed signal</p></li>
 of windowed noise</p></li>
 </ul>
 <blockquote>
-<p>We observe that the amplitude of the harmonic estimate at a given
-frequency is biased by the accumulated broad-band noise included in the
-bandwidth of the window.</p>
+<p>From Fig. 6,, we observe that the amplitude of the harmonic estimate
+at a given frequency is biased by the accumulated broad-band noise
+included in the bandwidth of the window.</p>
+<p><img src="/2023/05/29/enbw-nl/image-20240517195407690.png"
+alt="image-20240517195407690" /></p>
 <p>In this sense, the window behaves as a filter, gathering
 contributions for its estimate over its bandwidth</p>
 </blockquote>
@@ -368,10 +371,10 @@ X_{v,sig} &amp;= W_{max}\cdot X_{sig} \\
 <p>For a typical window, <span class="math inline">\(W_{max}\)</span>
 occurs at <span class="math inline">\(\omega = 0\)</span></p>
 </blockquote>
-<p>And the Frouier Transform of windowed noise can be expressed as</p>
-<p><span class="math display">\[\begin{align}
-X_{v,n}^2 &amp;= \sum_k (W[k])^2 \cdot X_n^2
-\end{align}\]</span></p>
+<p>And the Fourier Transform of windowed noise can be expressed as</p>
+<p><span class="math display">\[
+X_{v,n}^2 = \sum_k (W[k])^2 \cdot X_n^2
+\]</span></p>
 <p>divided by <span class="math inline">\((W[0])^2\)</span> on both
 sides of the above equation</p>
 <p><span class="math display">\[
@@ -390,8 +393,8 @@ X_n^2 = \frac{PS_{n}}{B_{enbw}}
 \]</span></p>
 <p>where <span class="math inline">\(B_{enbw} = N
 \frac{\sum_{n}|w[n]|^2}{ \left| \sum_{n} w[n] \right|^2}\)</span> and
-<span class="math inline">\(PS_{n}=\left| \frac{X_{v,n}}{\left\sum_n
-w[n]\right}\right|^2\)</span></p>
+<span class="math inline">\(PS_{n}=\left| \frac{X_{v,n}}{\sum_n
+w[n]}\right|^2\)</span></p>
 <h3 id="code-example">code example</h3>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">lw = <span class="number">128</span>;</span><br><span class="line">win = hann(lw);</span><br><span class="line">lt = <span class="number">2048</span>;</span><br><span class="line">windft = fftshift(fft(win,lt));</span><br><span class="line"></span><br><span class="line">ad = <span class="built_in">abs</span>(windft).^<span class="number">2</span>;</span><br><span class="line">mg = <span class="built_in">max</span>(ad);</span><br><span class="line"></span><br><span class="line">fs = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">bw = enbw(win,fs);</span><br><span class="line"></span><br><span class="line">bdef = sum((win).^<span class="number">2</span>)/sum(win)^<span class="number">2</span>*fs;</span><br><span class="line">fprintf(<span class="string">&quot;bw: %.3f\n&quot;</span>, bw);</span><br><span class="line">fprintf(<span class="string">&quot;bdef: %.3f\n&quot;</span>, bdef);</span><br><span class="line"></span><br><span class="line">freq = -fs/<span class="number">2</span>:fs/lt:fs/<span class="number">2</span>-fs/lt;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq,ad, bw/<span class="number">2</span>*[<span class="number">-1</span> <span class="number">-1</span> <span class="number">1</span> <span class="number">1</span>],mg*[<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>],<span class="string">&#x27;--&#x27;</span>)</span><br><span class="line">xlim(bw*[<span class="number">-1</span> <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">Adiff = trapz(freq,ad)-bw*mg;</span><br><span class="line">fprintf(<span class="string">&quot;Adiff: %.3e\n&quot;</span>, Adiff);</span><br></pre></td></tr></table></figure>
 <p>Verify that the area of the rectangle contains the same total power

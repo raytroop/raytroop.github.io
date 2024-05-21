@@ -180,6 +180,108 @@ href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm">https:/
       </categories>
   </entry>
   <entry>
+    <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
+    <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
+    <content><![CDATA[<h4
+id="how-does-edi-system-identify-spare-cells-in-a-post-mask-eco-flow">How
+does EDI System identify spare cells in a post-mask ECO flow?</h4>
+<p>Spare cells should have a unique string in their instance name to
+identify them. Then the command <code>specifySpareGate</code> or
+<code>ecoDesign -useSpareCells patternName</code> is run to identify the
+spare instances. For example, if all spare cells have _spare_ in their
+name then they are identified using:</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst *_spare_*</span><br></pre></td></tr></table></figure>
+<p>OR</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">ecoDesign -spareCells *_spare_* ...</span><br></pre></td></tr></table></figure>
+<p><strong>Note</strong>: if you are making <strong>manual ECO</strong>
+changes to a netlist and converting a spare cell to a logical instance,
+<strong>it's important to change the instance name</strong>. Otherwise,
+the instance may be identified as a spare cell if a future ECO is
+performed because it still has the spare cell instance name.</p>
+<h4 id="example">Example</h4>
+<h5 id="the-cell-to-be-swapped-is-unplaced">The cell to be swapped is
+unplaced</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307002842020.png"
+alt="image-20220307002842020" /></p>
+<p>pre_buf: <strong>unplaced</strong></p>
+<p>spare_buf: <strong>placed</strong></p>
+<blockquote>
+<p>innovus 49&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 50&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst spare_*</span><br><span class="line">ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307003059068.png"
+alt="image-20220307003059068" /></p>
+<blockquote>
+<p>innovus 55&gt; dbGet top.insts.name</p>
+<p><strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 56&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef6150</strong> 0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 57&gt; dbGet top.insts.Pstatus</p>
+<p><strong>placed</strong> fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the unplaced cell.</p>
+<h5 id="the-cell-to-be-swapped-is-placed">The cell to be swapped is
+placed</h5>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307004654614.png"
+alt="image-20220307004654614" /></p>
+<blockquote>
+<p>innovus 62&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
+<p>innovus 63&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
+0x7f7b03ef6000 0x7f7b03ef6070</p>
+<p>innovus 64&gt; dbGet top.insts.pStatus</p>
+<p><strong>placed</strong> <strong>placed</strong> fixed fixed</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">innovus <span class="number">66</span>&gt; specifySpareGate -inst spare_*</span><br><span class="line">Specifying instance [spare_buf] as spare gate.</span><br><span class="line">Specified <span class="number">1</span> instances as spare gate.</span><br><span class="line">innovus <span class="number">67</span>&gt; ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307005254488.png"
+alt="image-20220307005254488" /></p>
+<blockquote>
+<p>innovus 68&gt; dbGet top.insts.name</p>
+<p><strong>spare_buf pre_buf</strong> UDriver USink</p>
+<p>innovus 69&gt; dbGet top.insts.</p>
+<p><strong>0x7f7b03ef60e0 0x7f7b03ef6150</strong> 0x7f7b03ef6000
+0x7f7b03ef6070</p>
+<p>innovus 70&gt; dbGet top.insts.pStatus</p>
+<p>placed placed fixed fixed</p>
+</blockquote>
+<p><strong>Note</strong>: sparecell's pointer and name is swapped with
+the placed cell.</p>
+<h5 id="error-in-innovus-text-command-reference-21.12">Error in "Innovus
+Text Command Reference 21.12"</h5>
+<p><strong>ecoSwapSpareCell</strong></p>
+<p><del>If the cell to be swapped is unplaced, it is mapped to the spare
+cell. <code>*instName*</code> is deleted, and its connection is
+transferred to the spare cell. If the cell to be swapped is placed, it
+is swapped with the spare cell and is renamed to
+<code>*instNameSuffix*</code> if the <code>-suffix</code> option is
+used. If a suffix is not specified, the <code>*instName*</code> cell is
+renamed to <code>*spareCellInstName*</code>. The <code>*instName*</code>
+cell's connections are transferred to <code>*spareCellInstName*</code>.
+The input of <code>*instName*</code> is <code>tielo</code>, based on the
+global connection definition.</del></p>
+<p><strong>reference:</strong></p>
+<p><a
+href="https://community.cadence.com/cadence_blogs_8/b/di/posts/answers-to-frequently-asked-questions-when-performing-ecos-in-edi-system">Answers
+to Top 10 Questions on Performing ECOs in EDI System</a></p>
+<p><a
+href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html">EE
+582: Physical Design Automation of VLSI Circuits and Systems</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Dynamic Specification of Data Converter</title>
     <url>/2023/03/29/Dynamic-specification-converter/</url>
     <content><![CDATA[<h2 id="term-abbreviation">Term Abbreviation</h2>
@@ -326,108 +428,6 @@ href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effect
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
-    <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
-    <content><![CDATA[<h4
-id="how-does-edi-system-identify-spare-cells-in-a-post-mask-eco-flow">How
-does EDI System identify spare cells in a post-mask ECO flow?</h4>
-<p>Spare cells should have a unique string in their instance name to
-identify them. Then the command <code>specifySpareGate</code> or
-<code>ecoDesign -useSpareCells patternName</code> is run to identify the
-spare instances. For example, if all spare cells have _spare_ in their
-name then they are identified using:</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst *_spare_*</span><br></pre></td></tr></table></figure>
-<p>OR</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">ecoDesign -spareCells *_spare_* ...</span><br></pre></td></tr></table></figure>
-<p><strong>Note</strong>: if you are making <strong>manual ECO</strong>
-changes to a netlist and converting a spare cell to a logical instance,
-<strong>it's important to change the instance name</strong>. Otherwise,
-the instance may be identified as a spare cell if a future ECO is
-performed because it still has the spare cell instance name.</p>
-<h4 id="example">Example</h4>
-<h5 id="the-cell-to-be-swapped-is-unplaced">The cell to be swapped is
-unplaced</h5>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307002842020.png"
-alt="image-20220307002842020" /></p>
-<p>pre_buf: <strong>unplaced</strong></p>
-<p>spare_buf: <strong>placed</strong></p>
-<blockquote>
-<p>innovus 49&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 50&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
-0x7f7b03ef6000 0x7f7b03ef6070</p>
-</blockquote>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">specifySpareGate -inst spare_*</span><br><span class="line">ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307003059068.png"
-alt="image-20220307003059068" /></p>
-<blockquote>
-<p>innovus 55&gt; dbGet top.insts.name</p>
-<p><strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 56&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef6150</strong> 0x7f7b03ef6000 0x7f7b03ef6070</p>
-<p>innovus 57&gt; dbGet top.insts.Pstatus</p>
-<p><strong>placed</strong> fixed fixed</p>
-</blockquote>
-<p><strong>Note</strong>: sparecell's pointer and name is swapped with
-the unplaced cell.</p>
-<h5 id="the-cell-to-be-swapped-is-placed">The cell to be swapped is
-placed</h5>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307004654614.png"
-alt="image-20220307004654614" /></p>
-<blockquote>
-<p>innovus 62&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf</strong> <strong>pre_buf</strong> UDriver USink</p>
-<p>innovus 63&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0</strong> <strong>0x7f7b03ef6150</strong>
-0x7f7b03ef6000 0x7f7b03ef6070</p>
-<p>innovus 64&gt; dbGet top.insts.pStatus</p>
-<p><strong>placed</strong> <strong>placed</strong> fixed fixed</p>
-</blockquote>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">innovus <span class="number">66</span>&gt; specifySpareGate -inst spare_*</span><br><span class="line">Specifying instance [spare_buf] as spare gate.</span><br><span class="line">Specified <span class="number">1</span> instances as spare gate.</span><br><span class="line">innovus <span class="number">67</span>&gt; ecoSwapSpareCell pre_buf spare_buf</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/06/EDI-post-mask-ECO-sparecell/image-20220307005254488.png"
-alt="image-20220307005254488" /></p>
-<blockquote>
-<p>innovus 68&gt; dbGet top.insts.name</p>
-<p><strong>spare_buf pre_buf</strong> UDriver USink</p>
-<p>innovus 69&gt; dbGet top.insts.</p>
-<p><strong>0x7f7b03ef60e0 0x7f7b03ef6150</strong> 0x7f7b03ef6000
-0x7f7b03ef6070</p>
-<p>innovus 70&gt; dbGet top.insts.pStatus</p>
-<p>placed placed fixed fixed</p>
-</blockquote>
-<p><strong>Note</strong>: sparecell's pointer and name is swapped with
-the placed cell.</p>
-<h5 id="error-in-innovus-text-command-reference-21.12">Error in "Innovus
-Text Command Reference 21.12"</h5>
-<p><strong>ecoSwapSpareCell</strong></p>
-<p><del>If the cell to be swapped is unplaced, it is mapped to the spare
-cell. <code>*instName*</code> is deleted, and its connection is
-transferred to the spare cell. If the cell to be swapped is placed, it
-is swapped with the spare cell and is renamed to
-<code>*instNameSuffix*</code> if the <code>-suffix</code> option is
-used. If a suffix is not specified, the <code>*instName*</code> cell is
-renamed to <code>*spareCellInstName*</code>. The <code>*instName*</code>
-cell's connections are transferred to <code>*spareCellInstName*</code>.
-The input of <code>*instName*</code> is <code>tielo</code>, based on the
-global connection definition.</del></p>
-<p><strong>reference:</strong></p>
-<p><a
-href="https://community.cadence.com/cadence_blogs_8/b/di/posts/answers-to-frequently-asked-questions-when-performing-ecos-in-edi-system">Answers
-to Top 10 Questions on Performing ECOs in EDI System</a></p>
-<p><a
-href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html">EE
-582: Physical Design Automation of VLSI Circuits and Systems</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
       </categories>
   </entry>
   <entry>
@@ -655,6 +655,22 @@ href="https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/H
       </categories>
   </entry>
   <entry>
+    <title>INL, DNL analysis of current steering DAC</title>
+    <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
+    <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
+<div class="pdf-container" data-target="/pdfs/mos_mismatch.pdf" data-height="500px"></div>
+<h2 id="current-mirror-mismatch-analysis">Current mirror mismatch
+analysis</h2>
+<div class="pdf-container" data-target="/pdfs/Current_mirror_mismatch_analysis.pdf" data-height="500px"></div>
+<h2 id="inldnl-analysis-of-current-steering-dac">INL/DNL analysis of
+current steering DAC</h2>
+<div class="pdf-container" data-target="/pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Global Handles in UVM</title>
     <url>/2022/02/23/Global-Handles-UVM/</url>
     <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
@@ -681,22 +697,6 @@ accessing all the central UVM services such as
       </categories>
   </entry>
   <entry>
-    <title>INL, DNL analysis of current steering DAC</title>
-    <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
-    <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
-<div class="pdf-container" data-target="/pdfs/mos_mismatch.pdf" data-height="500px"></div>
-<h2 id="current-mirror-mismatch-analysis">Current mirror mismatch
-analysis</h2>
-<div class="pdf-container" data-target="/pdfs/Current_mirror_mismatch_analysis.pdf" data-height="500px"></div>
-<h2 id="inldnl-analysis-of-current-steering-dac">INL/DNL analysis of
-current steering DAC</h2>
-<div class="pdf-container" data-target="/pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
     <url>/2022/02/07/Innovus-Clock-Concurrent-Optimization-Technology/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Clock_Concurrent_Optimization_Technology.pdf" data-height="500px"></div>
@@ -715,18 +715,18 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Parasitic Extraction</title>
+    <url>/2022/02/07/Innovus-Parasitic-Extraction/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Parasitic_Extraction.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Parasitic Extraction</title>
-    <url>/2022/02/07/Innovus-Parasitic-Extraction/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Parasitic_Extraction.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -758,6 +758,15 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
+    <title>Innovus/Tempus Nonfunctional ECO</title>
+    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Innovus Analysis Command</title>
     <url>/2022/02/07/Innovus-analysis-command/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
@@ -773,15 +782,6 @@ effect taken into consideration during delayCal</p>
 <p><img
 src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
 alt="createPGPin_onDie.drawio" /></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Innovus/Tempus Nonfunctional ECO</title>
-    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -824,15 +824,6 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Floorplan</title>
-    <url>/2022/02/07/Innovus-floorplan/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Innovus global and localSkew</title>
     <url>/2022/02/07/Innovus-global-and-localSkew/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
@@ -845,6 +836,15 @@ alt="createPGPin_onDie.drawio" /></p>
     <title>Innovus timeDesign vs. report_timing</title>
     <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Innovus Floorplan</title>
+    <url>/2022/02/07/Innovus-floorplan/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -922,6 +922,26 @@ Design, Layout, and Simulation, Fourth Edition</p>
       <categories>
         <category>analog</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Model Library Setup</title>
+    <url>/2023/01/14/ModelLibrarySetup/</url>
+    <content><![CDATA[<p>In order to set up model files automatically in the <em>Model Library
+Setup</em> form for Spectre or AMS simulator in ADE Explorer or ADE
+Assembler</p>
+<p>Add the following line in your <code>.cdsinit</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">envSetVal( &quot;spectre.envOpts&quot; &quot;modelFiles&quot; &#x27;string &quot;&lt;path_to model_file&gt;/myModels.scs&quot;)</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">envSetVal(&quot;spectre.envOpts&quot; &quot;modelFiles&quot; &#x27;string &quot;moreModels;ff mymodels;tt&quot;)</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/01/14/ModelLibrarySetup/image-20230114220458438.png"
+alt="image-20230114220458438" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
   </entry>
   <entry>
     <title>Frequency Stability of Multipath ring oscillators(MPRO)</title>
@@ -1068,26 +1088,6 @@ Convergence Checker for Oscillators</a></p>
       <categories>
         <category>analog</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Model Library Setup</title>
-    <url>/2023/01/14/ModelLibrarySetup/</url>
-    <content><![CDATA[<p>In order to set up model files automatically in the <em>Model Library
-Setup</em> form for Spectre or AMS simulator in ADE Explorer or ADE
-Assembler</p>
-<p>Add the following line in your <code>.cdsinit</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">envSetVal( &quot;spectre.envOpts&quot; &quot;modelFiles&quot; &#x27;string &quot;&lt;path_to model_file&gt;/myModels.scs&quot;)</span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">envSetVal(&quot;spectre.envOpts&quot; &quot;modelFiles&quot; &#x27;string &quot;moreModels;ff mymodels;tt&quot;)</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/01/14/ModelLibrarySetup/image-20230114220458438.png"
-alt="image-20230114220458438" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
   </entry>
   <entry>
     <title>Native NMOS Blocked Implant (NT_N)</title>
@@ -1785,6 +1785,53 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
       </categories>
   </entry>
   <entry>
+    <title>SpiceIn foundary&#39;s standard cell&#39;s spice netlist</title>
+    <url>/2022/10/22/SpiceIn-standardcellspi/</url>
+    <content><![CDATA[<p>use <strong>SpiceIn</strong> GUI feature to map MOS parameter
+correctly in generated schematic</p>
+<h3 id="input">Input</h3>
+<p><img
+src="/2022/10/22/SpiceIn-standardcellspi/image-20221022224745955.png"
+alt="image-20221022224745955" /></p>
+<blockquote>
+<p>The mos's total width (parameter name "w") value will update during
+<strong>SpiceIn</strong> trigger CDF callback automatically</p>
+</blockquote>
+<h3 id="output">Output</h3>
+<p><img
+src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225143844.png"
+alt="image-20221022225143844" /></p>
+<h3 id="device-map">Device Map</h3>
+<p><img
+src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225224751.png"
+alt="image-20221022225224751" /></p>
+<blockquote>
+<p><strong>User Prop Mapping</strong> is significant setup, both
+<em>xxx.spi</em> and <em>Edit CDF</em> provide the essential
+information.</p>
+<p>The map syntax is <em>spice_para0 cdf_para0 spice_para1 cdf_para01
+... spice_paraN cdf_paraN</em></p>
+</blockquote>
+<p><img
+src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225742497.png"
+alt="image-20221022225742497" /></p>
+<h3 id="reference">reference</h3>
+<p>Article (20488179) Title: How to use SpiceIn GUI feature to map MOS
+parameter correctly in generated schematic URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY</a></p>
+<p>Article (11724692) Title: SpiceIn maps the netlist parameter to the
+CDF parameter incorrectly on the generated schematic devices (e.g. w to
+wf) URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU</a></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Second-Order System</title>
     <url>/2024/01/06/SecondOrder/</url>
     <content><![CDATA[<h2 id="additional-zero">additional Zero</h2>
@@ -1864,53 +1911,6 @@ Pearson.</em></p>
       <categories>
         <category>dsp</category>
       </categories>
-  </entry>
-  <entry>
-    <title>SpiceIn foundary&#39;s standard cell&#39;s spice netlist</title>
-    <url>/2022/10/22/SpiceIn-standardcellspi/</url>
-    <content><![CDATA[<p>use <strong>SpiceIn</strong> GUI feature to map MOS parameter
-correctly in generated schematic</p>
-<h3 id="input">Input</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022224745955.png"
-alt="image-20221022224745955" /></p>
-<blockquote>
-<p>The mos's total width (parameter name "w") value will update during
-<strong>SpiceIn</strong> trigger CDF callback automatically</p>
-</blockquote>
-<h3 id="output">Output</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225143844.png"
-alt="image-20221022225143844" /></p>
-<h3 id="device-map">Device Map</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225224751.png"
-alt="image-20221022225224751" /></p>
-<blockquote>
-<p><strong>User Prop Mapping</strong> is significant setup, both
-<em>xxx.spi</em> and <em>Edit CDF</em> provide the essential
-information.</p>
-<p>The map syntax is <em>spice_para0 cdf_para0 spice_para1 cdf_para01
-... spice_paraN cdf_paraN</em></p>
-</blockquote>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225742497.png"
-alt="image-20221022225742497" /></p>
-<h3 id="reference">reference</h3>
-<p>Article (20488179) Title: How to use SpiceIn GUI feature to map MOS
-parameter correctly in generated schematic URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY</a></p>
-<p>Article (11724692) Title: SpiceIn maps the netlist parameter to the
-CDF parameter incorrectly on the generated schematic devices (e.g. w to
-wf) URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
   </entry>
   <entry>
     <title>voltage-dependent DRC checks</title>
@@ -4813,6 +4813,70 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679G
       </categories>
   </entry>
   <entry>
+    <title>verilog-mode.el</title>
+    <url>/2022/05/13/emacs-verilog-mode/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
+command</p>
+</blockquote>
+<h2 id="verilog-mode.el">verilog-mode.el</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
+<blockquote>
+<p>For use with <code>--batch</code>, perform automatic expansions as a
+stand-alone tool. This sets up the appropriate Verilog mode environment,
+updates automatics with M-x verilog-auto on all command-line files, and
+saves the buffers. For proper results, multiple filenames need to be
+passed on the command line in bottom-up order.</p>
+</blockquote>
+<h3
+id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
+<blockquote>
+<p>Update automatics with M-x verilog-auto, save the buffer, and
+<em>compile</em></p>
+</blockquote>
+<h2 id="emacs">Emacs</h2>
+<h3 id="no-site-file"><code>--no-site-file</code></h3>
+<p>Another file for site-customization is <code>site-start.el</code>.
+Emacs loads this <em>before</em> the user's init file
+(<code>.emacs</code>, <code>.emacs.el</code> or
+<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
+file with the option <code>--no-site-file</code></p>
+<h3 id="batch"><code>--batch</code></h3>
+<p>The command-line option <code>--batch</code> causes Emacs to run
+noninteractively. The idea is that you specify Lisp programs to run;
+when they are finished, Emacs should exit.</p>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function;</p>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="f-func"><code>-f FUNC</code></h3>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function</p>
+<blockquote>
+<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
+</blockquote>
+<h2 id="multiple-directories">multiple directories</h2>
+<p><strong>AUTOINST</strong> only search in the file's directory
+default.</p>
+<p>You can append below <code>verilog-library-directories</code> for
+multiple directories search</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>Emacs Online Documentation <a
+href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
+<p>Emacs verilog-mode 的使用 URL: <a
+href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>DTFT &amp; DFT</title>
     <url>/2023/05/27/dtft-dft/</url>
     <content><![CDATA[<h2 id="sampling-theorem">sampling theorem</h2>
@@ -5167,70 +5231,6 @@ href="https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-paddin
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>verilog-mode.el</title>
-    <url>/2022/05/13/emacs-verilog-mode/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
-command</p>
-</blockquote>
-<h2 id="verilog-mode.el">verilog-mode.el</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
-<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
-<blockquote>
-<p>For use with <code>--batch</code>, perform automatic expansions as a
-stand-alone tool. This sets up the appropriate Verilog mode environment,
-updates automatics with M-x verilog-auto on all command-line files, and
-saves the buffers. For proper results, multiple filenames need to be
-passed on the command line in bottom-up order.</p>
-</blockquote>
-<h3
-id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
-<blockquote>
-<p>Update automatics with M-x verilog-auto, save the buffer, and
-<em>compile</em></p>
-</blockquote>
-<h2 id="emacs">Emacs</h2>
-<h3 id="no-site-file"><code>--no-site-file</code></h3>
-<p>Another file for site-customization is <code>site-start.el</code>.
-Emacs loads this <em>before</em> the user's init file
-(<code>.emacs</code>, <code>.emacs.el</code> or
-<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
-file with the option <code>--no-site-file</code></p>
-<h3 id="batch"><code>--batch</code></h3>
-<p>The command-line option <code>--batch</code> causes Emacs to run
-noninteractively. The idea is that you specify Lisp programs to run;
-when they are finished, Emacs should exit.</p>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function;</p>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="f-func"><code>-f FUNC</code></h3>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function</p>
-<blockquote>
-<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
-</blockquote>
-<h2 id="multiple-directories">multiple directories</h2>
-<p><strong>AUTOINST</strong> only search in the file's directory
-default.</p>
-<p>You can append below <code>verilog-library-directories</code> for
-multiple directories search</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>Emacs Online Documentation <a
-href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
-<p>Emacs verilog-mode 的使用 URL: <a
-href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -6241,7 +6241,7 @@ normally not easily available any more.</p>
 <p>The <strong>normalized equivalent noise bandwidth</strong> (NENBW) of
 the window is given by</p>
 <p><span class="math display">\[
-\text{NENBW} = N\frac{S_2}{S_1}
+\text{NENBW} = \frac{NS_2}{S_1^2}
 \]</span> where <span class="math inline">\(S_1 = \sum
 _{k=0}^{N-1}w_k\)</span> and <span class="math inline">\(S_2 = \sum
 _{k=0}^{N-1}w_k^2\)</span></p>
@@ -7374,6 +7374,18 @@ alt="image-20220403212529981" /></p>
       </categories>
   </entry>
   <entry>
+    <title>GitHub Pages Build and deployment</title>
+    <url>/2023/07/01/github-pages-deploy/</url>
+    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
+<p><img
+src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
+alt="image-20230701142405404" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Demystifying Gate Resistance</title>
     <url>/2023/07/09/gate-resistance/</url>
     <content><![CDATA[<p><img src="/2023/07/09/gate-resistance/image-20230709102848934.png"
@@ -7547,18 +7559,6 @@ Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>GitHub Pages Build and deployment</title>
-    <url>/2023/07/01/github-pages-deploy/</url>
-    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
-<p><img
-src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
-alt="image-20230701142405404" /></p>
-]]></content>
-      <categories>
-        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -7755,6 +7755,27 @@ possible without cloning.</p></li>
       </categories>
   </entry>
   <entry>
+    <title>I2C Communication Protocol - I2C, SMBus</title>
+    <url>/2023/10/05/i2c/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>UM10204 I2C-bus specification and user manual [<a
+href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">https://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>]</p>
+<p>AN10216-01 I2C MANUAL [<a
+href="https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf">https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf</a>]</p>
+<p>System Management Bus (SMBus) Specification [<a
+href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">http://smbus.org/specs/SMBus_3_2_20220112.pdf</a>]</p>
+<p>I2C Primer [<a
+href="https://www.i2c-bus.org/i2c-primer/">https://www.i2c-bus.org/i2c-primer/</a>]</p>
+<p>smbus2, A drop-in replacement for smbus-cffi/smbus-python in pure
+Python [<a
+href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kplindegaard/smbus2/tree/master</a>]</p>
+<p>THE BOOK OF I2C A Guide for Adventurers by Randall Hyde</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>In-design Sign-off Metal Fill Flow in Innovus</title>
     <url>/2022/03/05/in-design-signoff-metalfill-innovus/</url>
     <content><![CDATA[<p>Before inserting sign-off metal fill, stream out a GDSII stream file
@@ -7860,27 +7881,6 @@ in IEEE Circuits and Devices Magazine, vol. 17, no. 4, pp. 14-21, July
       </categories>
   </entry>
   <entry>
-    <title>I2C Communication Protocol - I2C, SMBus</title>
-    <url>/2023/10/05/i2c/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>UM10204 I2C-bus specification and user manual [<a
-href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">https://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>]</p>
-<p>AN10216-01 I2C MANUAL [<a
-href="https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf">https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf</a>]</p>
-<p>System Management Bus (SMBus) Specification [<a
-href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">http://smbus.org/specs/SMBus_3_2_20220112.pdf</a>]</p>
-<p>I2C Primer [<a
-href="https://www.i2c-bus.org/i2c-primer/">https://www.i2c-bus.org/i2c-primer/</a>]</p>
-<p>smbus2, A drop-in replacement for smbus-cffi/smbus-python in pure
-Python [<a
-href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kplindegaard/smbus2/tree/master</a>]</p>
-<p>THE BOOK OF I2C A Guide for Adventurers by Randall Hyde</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Inertial &amp; transport delays</title>
     <url>/2022/03/16/inertial-and-transport-delay/</url>
     <content><![CDATA[<p><img
@@ -7979,6 +7979,69 @@ alt="pma_dig_bumps.drawio" /></p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -8741,69 +8804,6 @@ href="https://www.edn.com/burn-in-101/">link</a>]</p>
       </categories>
   </entry>
   <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
     <url>/2022/06/10/isf-sampler/</url>
     <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
@@ -9101,6 +9101,91 @@ href="https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vl
       </categories>
   </entry>
   <entry>
+    <title>jitter amplification</title>
+    <url>/2022/03/13/jitter-amplification/</url>
+    <content><![CDATA[<h2 id="transient-noise-and-rms_jitter-function">1. transient noise and
+rms_jitter function</h2>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608233610066.png"
+alt="image-20220608233610066" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220313230930333.png"
+alt="image-20220313230930333" /></p>
+<blockquote>
+<p><code>RJ(rms)</code>: single Edge or Both Edge?</p>
+<p><code>RJ(seed)</code>: what is it?</p>
+</blockquote>
+<h2 id="phase-noise-method">2 phase noise method</h2>
+<p>Directly compare the input phase noise and output phase noise, the
+input waveform maybe is the PLL output or other clock distribution end
+point</p>
+<h2 id="jitter-impulse-responsejir-jitter-impulse-responsejir">3. Jitter
+Impulse Response(JIR) &amp; Jitter Impulse Response(JIR)</h2>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220313231013645.png"
+alt="image-20220313231013645" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220313231027512.png"
+alt="image-20220313231027512" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220313231038542.png"
+alt="image-20220313231038542" /></p>
+<h3 id="example">Example</h3>
+<h4 id="low-pass-filter">Low Pass Filter</h4>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220322124344158.png"
+alt="image-20220322124344158" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">x = <span class="built_in">zeros</span>(N,<span class="number">1</span>);</span><br><span class="line">x(<span class="number">1</span>) = <span class="number">6</span>;</span><br><span class="line">x(<span class="number">2</span>) = <span class="number">-2</span>;</span><br><span class="line">x(<span class="number">3</span>) = <span class="number">0.5</span>;</span><br><span class="line">x = x/<span class="number">5</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(x)</span><br><span class="line">Y = fft(x, N);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>)));</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220322124902394.png"
+alt="image-20220322124902394" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220322124932584.png"
+alt="image-20220322124932584" /></p>
+<h4 id="high-pass-filter">High Pass Filter</h4>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220327010223664.png"
+alt="image-20220327010223664" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">128</span>;</span><br><span class="line">j_hp = <span class="built_in">zeros</span>(N, <span class="number">1</span>);</span><br><span class="line">j_hp(<span class="number">1</span>)= <span class="number">1</span>;</span><br><span class="line">j_hp(<span class="number">2</span>) = <span class="number">0.5</span>;</span><br><span class="line">j_hp(<span class="number">3</span>) = <span class="number">-0.3</span>;</span><br><span class="line">j_hp(<span class="number">4</span>) = <span class="number">0.3</span>;</span><br><span class="line">j_hp(<span class="number">5</span>) = <span class="number">-0.1</span>;</span><br><span class="line">jtf_hp = <span class="built_in">abs</span>(fft(j_hp));</span><br><span class="line">semilogx(jtf_hp(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Jitter Amplification Factor&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220327010421475.png"
+alt="image-20220327010421475" /></p>
+<h3 id="inverter-chain">inverter chain</h3>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608232251056.png"
+alt="image-20220608232251056" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608232658054.png"
+alt="image-20220608232658054" /></p>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608232438188.png"
+alt="image-20220608232438188" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">ji = <span class="number">1e-12</span>; <span class="comment">% 1ps</span></span><br><span class="line">data = importdata(<span class="string">&#x27;/path/to/jir.csv&#x27;</span>);</span><br><span class="line">jo = data.data(:, <span class="number">2</span>);</span><br><span class="line">Ts = <span class="number">31.25e-12</span>;</span><br><span class="line">Fs = <span class="number">1</span>/Ts;</span><br><span class="line">jir = jo/ji;</span><br><span class="line">N = <span class="number">2</span>^(<span class="built_in">nextpow2</span>(<span class="built_in">length</span>(jir)<span class="number">-1</span>));</span><br><span class="line">Y = fft(jir, N);</span><br><span class="line">jtf = <span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">freqs= Fs/N*(<span class="number">0</span>:N/<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(feqs/<span class="number">1e9</span>, jtf, <span class="string">&#x27;linewidth&#x27;</span>, <span class="number">2</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;JTF&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;JTF of inverter chain&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/03/13/jitter-amplification/image-20220608233303576.png"
+alt="image-20220608233303576" /></p>
+<h2 id="reference">Reference</h2>
+<p><a
+href="https://people.engr.tamu.edu/spalermo/ecen689/lecture13_ee720_fwd_clk_deskew.pdf">Sam
+Palermo, ECEN 720, Lecture 13 - Forwarded Clock Deskew Circuits</a></p>
+<p>B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and
+Measurement Techniques for High-Speed Data Links—A Tutorial," in IEEE
+Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 1,
+pp. 17-39, Jan. 2009, doi: 10.1109/TCSI.2008.931647.</p>
+<p>Phase-Locked Frequency Generation and Clocking : Architectures and
+Circuits for Modern Wireless and Wireline Systems by Woogeun Rhee (2020,
+Hardcover)</p>
+<p>Mathuranathan Viswanathan, Digital Modulations using Matlab : Build
+Simulation Models from Scratch</p>
+<p>Tony Chan Carusone, University of Toronto, Canada, 2022 CICC
+Educational Sessions "Architectural Considerations in 100+ Gbps Wireline
+Transceivers"</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Jitter Decomposition in High-Speed Links</title>
     <url>/2022/05/21/jitter-decomposition/</url>
     <content><![CDATA[<p>Jitter separation lets you learn if the components of jitter are
@@ -9261,91 +9346,6 @@ calibration for jitter decomposition." Metrology and Measurement Systems
 jitter decomposition through its distribution tail fitting,"
 International Test Conference 1999. Proceedings (IEEE Cat.
 No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>jitter amplification</title>
-    <url>/2022/03/13/jitter-amplification/</url>
-    <content><![CDATA[<h2 id="transient-noise-and-rms_jitter-function">1. transient noise and
-rms_jitter function</h2>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608233610066.png"
-alt="image-20220608233610066" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313230930333.png"
-alt="image-20220313230930333" /></p>
-<blockquote>
-<p><code>RJ(rms)</code>: single Edge or Both Edge?</p>
-<p><code>RJ(seed)</code>: what is it?</p>
-</blockquote>
-<h2 id="phase-noise-method">2 phase noise method</h2>
-<p>Directly compare the input phase noise and output phase noise, the
-input waveform maybe is the PLL output or other clock distribution end
-point</p>
-<h2 id="jitter-impulse-responsejir-jitter-impulse-responsejir">3. Jitter
-Impulse Response(JIR) &amp; Jitter Impulse Response(JIR)</h2>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231013645.png"
-alt="image-20220313231013645" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231027512.png"
-alt="image-20220313231027512" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220313231038542.png"
-alt="image-20220313231038542" /></p>
-<h3 id="example">Example</h3>
-<h4 id="low-pass-filter">Low Pass Filter</h4>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124344158.png"
-alt="image-20220322124344158" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">x = <span class="built_in">zeros</span>(N,<span class="number">1</span>);</span><br><span class="line">x(<span class="number">1</span>) = <span class="number">6</span>;</span><br><span class="line">x(<span class="number">2</span>) = <span class="number">-2</span>;</span><br><span class="line">x(<span class="number">3</span>) = <span class="number">0.5</span>;</span><br><span class="line">x = x/<span class="number">5</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(x)</span><br><span class="line">Y = fft(x, N);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>)));</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124902394.png"
-alt="image-20220322124902394" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220322124932584.png"
-alt="image-20220322124932584" /></p>
-<h4 id="high-pass-filter">High Pass Filter</h4>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220327010223664.png"
-alt="image-20220327010223664" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">128</span>;</span><br><span class="line">j_hp = <span class="built_in">zeros</span>(N, <span class="number">1</span>);</span><br><span class="line">j_hp(<span class="number">1</span>)= <span class="number">1</span>;</span><br><span class="line">j_hp(<span class="number">2</span>) = <span class="number">0.5</span>;</span><br><span class="line">j_hp(<span class="number">3</span>) = <span class="number">-0.3</span>;</span><br><span class="line">j_hp(<span class="number">4</span>) = <span class="number">0.3</span>;</span><br><span class="line">j_hp(<span class="number">5</span>) = <span class="number">-0.1</span>;</span><br><span class="line">jtf_hp = <span class="built_in">abs</span>(fft(j_hp));</span><br><span class="line">semilogx(jtf_hp(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Jitter Amplification Factor&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220327010421475.png"
-alt="image-20220327010421475" /></p>
-<h3 id="inverter-chain">inverter chain</h3>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232251056.png"
-alt="image-20220608232251056" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232658054.png"
-alt="image-20220608232658054" /></p>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608232438188.png"
-alt="image-20220608232438188" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">ji = <span class="number">1e-12</span>; <span class="comment">% 1ps</span></span><br><span class="line">data = importdata(<span class="string">&#x27;/path/to/jir.csv&#x27;</span>);</span><br><span class="line">jo = data.data(:, <span class="number">2</span>);</span><br><span class="line">Ts = <span class="number">31.25e-12</span>;</span><br><span class="line">Fs = <span class="number">1</span>/Ts;</span><br><span class="line">jir = jo/ji;</span><br><span class="line">N = <span class="number">2</span>^(<span class="built_in">nextpow2</span>(<span class="built_in">length</span>(jir)<span class="number">-1</span>));</span><br><span class="line">Y = fft(jir, N);</span><br><span class="line">jtf = <span class="built_in">abs</span>(Y(<span class="number">1</span>:N/<span class="number">2</span>+<span class="number">1</span>));</span><br><span class="line">freqs= Fs/N*(<span class="number">0</span>:N/<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(feqs/<span class="number">1e9</span>, jtf, <span class="string">&#x27;linewidth&#x27;</span>, <span class="number">2</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;JTF&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;JTF of inverter chain&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/03/13/jitter-amplification/image-20220608233303576.png"
-alt="image-20220608233303576" /></p>
-<h2 id="reference">Reference</h2>
-<p><a
-href="https://people.engr.tamu.edu/spalermo/ecen689/lecture13_ee720_fwd_clk_deskew.pdf">Sam
-Palermo, ECEN 720, Lecture 13 - Forwarded Clock Deskew Circuits</a></p>
-<p>B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and
-Measurement Techniques for High-Speed Data Links—A Tutorial," in IEEE
-Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 1,
-pp. 17-39, Jan. 2009, doi: 10.1109/TCSI.2008.931647.</p>
-<p>Phase-Locked Frequency Generation and Clocking : Architectures and
-Circuits for Modern Wireless and Wireline Systems by Woogeun Rhee (2020,
-Hardcover)</p>
-<p>Mathuranathan Viswanathan, Digital Modulations using Matlab : Build
-Simulation Models from Scratch</p>
-<p>Tony Chan Carusone, University of Toronto, Canada, 2022 CICC
-Educational Sessions "Architectural Considerations in 100+ Gbps Wireline
-Transceivers"</p>
 ]]></content>
       <categories>
         <category>noise</category>
@@ -11716,6 +11716,243 @@ href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMF
       </categories>
   </entry>
   <entry>
+    <title>Phase Noise and Jitter Simulation</title>
+    <url>/2023/10/21/phasenoise-jitter/</url>
+    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
+<p>The phase noise does not affect the total power in the signal, it
+only affects its distribution.</p>
+<ul>
+<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
+a series of impulse functions at the harmonics of <span
+class="math inline">\(f_o\)</span>.</li>
+<li>With phase noise, the impulse functions spread, becoming fatter and
+shorter but retaining the same total power</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
+alt="image-20231029164227587" /></p>
+<blockquote>
+<p><strong>line width</strong>: corner frequency <span
+class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
+</blockquote>
+<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
+<p>A more precise analysis shows that the spectrum of a free-running
+oscillator does indeed have a Lorentian profile:</p>
+<ol type="1">
+<li>it is <strong>flat</strong> for frequencies below a given corner
+frequency</li>
+<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
+it.</li>
+</ol>
+<p>The spectrum of the signal <span class="math inline">\(x(t +
+α(t))\)</span> can be expressed as <span class="math display">\[
+S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
+c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
+\]</span> The integral in above equation around each harmonic is equal
+to the power of the harmonic itself <span class="math inline">\(\left|
+X_n \right|^2\)</span></p>
+<p>This means that the <strong>excess phase noise</strong>
+<strong>DONT</strong> change the energy of the signal; it just spreads
+its energy over the frequency spectrum, blurring the very sharp
+frequency impulse of an ideal noiseless oscillator.</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
+alt="image-20220504130750290" /></p>
+<h2 id="vco-varactor">VCO varactor</h2>
+<blockquote>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+</blockquote>
+<h3 id="pss-pac">PSS + PAC</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h3 id="pss-psp">PSS + PSP</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h3 id="results">results</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<blockquote>
+<p>which are same</p>
+</blockquote>
+<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h3>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
+Sampled(jitter): Sampled Phase Option</h2>
+<ul>
+<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
+<li>Use model:
+<ul>
+<li>Sampleds Per Period: number of ponits</li>
+<li>Add Specific Points: specific time point, still time points</li>
+</ul></li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
+alt="image-20220712085426461" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
+alt="image-20220712085836315" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
+alt="image-20220712090011204" /></p>
+<blockquote>
+<p>pss beat freq = 5GHz</p>
+<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
+</blockquote>
+<h2 id="transient-noise">Transient noise</h2>
+<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h3>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
+function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
+<code>psd</code> and <code>abs_jitter</code> function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h4 id="comparison">Comparison</h4>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h3 id="rms-value">RMS value</h3>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h3 id="remarks">Remarks</h3>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Periodic Analysis</title>
     <url>/2023/10/28/periodic/</url>
     <content><![CDATA[<h1 id="pss-and-hb-overview">PSS and HB Overview</h1>
@@ -12338,243 +12575,6 @@ Sons. https://doi.org/10.1002/9780470634455</p>
 <p>B. Boser,A. Niknejad ,S.Gambin 2011 EECS 240 Topic 6: Noise Analysis
 [<a
 href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pdf">https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Phase Noise and Jitter Simulation</title>
-    <url>/2023/10/21/phasenoise-jitter/</url>
-    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
-<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
-<ol type="1">
-<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
-alt="image-20220511112856934" /></p></li>
-<li><p>manually calculate by definition</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
-alt="image-20220511112806122" /></p></li>
-<li><p><code>output noise</code> with unit <code>dBc</code></p>
-<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
-convention: SSB</em></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
-alt="image-20220511113248984" /></p></li>
-</ol>
-<blockquote>
-<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
-simulation,</p>
-</blockquote>
-<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
-sampled(jitter)/Edge Crossing</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
-alt="EdgePhaseNoise.drawio" /></p>
-<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
-alt="image-20220515214901120" /></p>
-<p>Another way, the following equation can also be used for
-<code>sampled(jitter)/Edge Crossing</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
-<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
-alt="image-20220511150337318" /></p>
-<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
-sampled(jitter) pnoise</h3>
-<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
-obtained by <em>transient noise simulation</em></p>
-<p>The idea is that sample waveform with ideal clock, subtract DC
-offset, then fft(psd)</p>
-<ul>
-<li>samplesRaw = sample(wv)</li>
-<li>samplePost = samplesRaw - average(samplesRaw)</li>
-<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
-alt="image-20220516184543148" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
-alt="image-20220516184844296" /></p>
-<p><strong>Expression</strong>:</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
-alt="image-20220516185506348" /></p>
-<blockquote>
-<p>The computation cost is typically very high, and the accuracy is
-lesser as compared to PSS/Pnoise</p>
-</blockquote>
-<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
-Sampled(jitter): Sampled Phase Option</h2>
-<ul>
-<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
-<li>Use model:
-<ul>
-<li>Sampleds Per Period: number of ponits</li>
-<li>Add Specific Points: specific time point, still time points</li>
-</ul></li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
-alt="image-20220712085426461" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
-alt="image-20220712085836315" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
-alt="image-20220712090011204" /></p>
-<blockquote>
-<p>pss beat freq = 5GHz</p>
-<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
-</blockquote>
-<h2 id="transient-noise">Transient noise</h2>
-<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h3>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
-function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
-<code>psd</code> and <code>abs_jitter</code> function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h4 id="comparison">Comparison</h4>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h3 id="rms-value">RMS value</h3>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h3 id="remarks">Remarks</h3>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
 ]]></content>
       <categories>
         <category>noise</category>
@@ -13774,6 +13774,46 @@ signal</p></li>
 <li><p>Blackman–Tukey method</p>
 <p>Fourier transform of the autocorrelation function</p></li>
 </ul>
+<h2 id="spectrum-analyzer">spectrum analyzer</h2>
+<p>The problem with sine-wave scaling is that the <em>noise power</em>
+is, on average, evenly distributed over all FFT bins, whereas the
+sine-wave power is concentrated in only a few bins.</p>
+<p>With sine-wave scaling, the power of individual sine-wave components
+can be read directly from the spectral plot, <em>but in order to
+determine the noise power, the powers of all the noise bins must be
+added together</em>.</p>
+<blockquote>
+<ul>
+<li><em>spectrum</em> of a periodic signal</li>
+<li><em>spectral density</em> of a broadband signal such as noise</li>
+</ul>
+</blockquote>
+<p>A spectrum analyzer solves the scaling problem by providing
+<strong>NBW</strong> along with each spectrum, thereby providing the
+designer with the information needed to convert the power shown on the
+display into a power density.</p>
+<blockquote>
+<p>In general, a filter’s <strong>NBW</strong> is the bandwidth of an
+ideal brick-wall filter that has the same output <em>power</em> given a
+<em>white noise</em> input and that has the same <em>mid-band gain</em>
+as the filter under consideration.</p>
+</blockquote>
+<p>The solution to the scaling problem in the case of a PSD obtained
+from a sine-wave scaled FFT is similarly simple. All we need do is
+provide the value of <strong>NBW</strong></p>
+<blockquote>
+<p><em>APPENDIX A - SPECTRAL ESTIMATION - A.2 Scaling and Noise
+Bandwidth</em></p>
+<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
+Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
+</blockquote>
+<hr />
+<ul>
+<li>For a filter with infinitely steep roll-off, the noise bandwidth
+(<strong>NBW</strong>) is equal to the filter’s bandwidth,</li>
+<li>while for a filter with a single-pole roll-off, <strong>NBW</strong>
+is 2 times the 3-dB bandwidth</li>
+</ul>
 <h2 id="reference">reference</h2>
 <p>Iain Collings. Random Processes [<a
 href="https://youtube.com/playlist?list=PLx7-Q20A1VYKRLHUMSt2YOORrVz8iH-Kq&amp;si=cZjlH7zcHcR0zWg6">https://youtube.com/playlist?list=PLx7-Q20A1VYKRLHUMSt2YOORrVz8iH-Kq&amp;si=cZjlH7zcHcR0zWg6</a>]
@@ -14029,6 +14069,18 @@ running kernel:</p>
       </categories>
   </entry>
   <entry>
+    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
+    <url>/2022/02/02/rocky8-cadence/</url>
+    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
+<p><strong>library preparation for EDA installation</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>network connection using nmcli</title>
     <url>/2022/04/01/rocky-nmcli-network/</url>
     <content><![CDATA[<h4 id="problem">Problem</h4>
@@ -14044,18 +14096,6 @@ alt="image-20220401011509900" /></p>
 <p><img
 src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
 alt="image-20220401011543866" /></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
-    <url>/2022/02/02/rocky8-cadence/</url>
-    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
-<p><strong>library preparation for EDA installation</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>devops</category>
@@ -18423,22 +18463,6 @@ is the "+:" operator called in Verilog?</a></p>
       </categories>
   </entry>
   <entry>
-    <title>compile vim from source with GUI support</title>
-    <url>/2022/02/02/vim-compile/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<h2 id="binkey">binkey</h2>
-<p>Inserting a new line below: <code>o</code></p>
-<p>above: <code>O</code></p>
-<p>To insert before the cursor: <code>i</code></p>
-<p>After: <code>a</code></p>
-<p>Before the line (home): <code>I</code></p>
-<p>Append at the end of line: <code>A</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>verilog readmemb and readmemh</title>
     <url>/2022/02/12/verilog-readmemb/</url>
     <content><![CDATA[<p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
@@ -18476,6 +18500,22 @@ Memory in Verilog</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>compile vim from source with GUI support</title>
+    <url>/2022/02/02/vim-compile/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="binkey">binkey</h2>
+<p>Inserting a new line below: <code>o</code></p>
+<p>above: <code>O</code></p>
+<p>To insert before the cursor: <code>i</code></p>
+<p>After: <code>a</code></p>
+<p>Before the line (home): <code>I</code></p>
+<p>Append at the end of line: <code>A</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
       </categories>
   </entry>
   <entry>

@@ -282,50 +282,6 @@ href="https://eecs.wsu.edu/~daehyun/teaching/2014_EE582/assignments/a10/a10.html
       </categories>
   </entry>
   <entry>
-    <title>Efficient Sequence Objection in UVM</title>
-    <url>/2022/02/21/Efficient-Sequence-Objection/</url>
-    <content><![CDATA[<p>Objections are handled in <strong>pre/post body</strong> decalared in
-a base sequence class</p>
-<p>This is efficient for all sequence execution options:</p>
-<ul>
-<li><p>Default sequences use body objections</p></li>
-<li><p>Test sequences use test objections</p></li>
-<li><p>Subsequences use objections of the root sequence which calls
-them</p></li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_base_seq <span class="keyword">extends</span> uvm_sequence<span class="variable">#(yapp_packet)</span>;</span><br><span class="line">…</span><br><span class="line">    <span class="keyword">task</span> pre_body();</span><br><span class="line">        <span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">        	starting_phase<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    <span class="keyword">task</span> post_body();</span><br><span class="line">    	<span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">    		starting_phase<span class="variable">.drop_objection</span>(<span class="keyword">this</span>, get_type_name());	</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">…</span><br><span class="line"><span class="keyword">class</span> yapp012 <span class="keyword">extends</span> yapp_base_seq;</span><br><span class="line">…</span><br></pre></td></tr></table></figure>
-<p><strong>Set as default sequence of sequencer:</strong></p>
-<p>A default sequence is a root sequence, so the <strong>pre/post
-body</strong> methods are executed and objection are raised/dropped
-there</p>
-<p><strong>Test sequence:</strong></p>
-<p>A test sequence is a root sequence, so the <strong>pre/post
-body</strong> methods are executed. However, for a test sequence,
-<code>starting_phase</code> is <code>null</code> and so the objection is
-not handled in the sequence. The test must raise and drop objections</p>
-<p><strong>Subsequence:</strong></p>
-<p>Not a root sequence, so <strong>pre/post body</strong> methods are
-not executed. The root sequence which ultimately called the subsequence
-handles the objections, using one of the two options above.</p>
-<blockquote>
-<p>If a <strong>sequence</strong> is call via a <strong>`uvm_do</strong>
-variant, the it is defined as a subsequence and its
-<strong>pre/post_body()</strong> methods are not executed.</p>
-</blockquote>
-<p><strong>objection change in UVM1.2</strong></p>
-<p>Raising or dropping objections directly from
-<code>starting_phase</code> is deprecated</p>
-<ul>
-<li><p>must use <code>get_starting_phase()</code> method</p></li>
-<li><p>prevents modification of phase during sequence</p></li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Custom Design with FinFETs</title>
     <url>/2022/12/10/FinFET-Considerations/</url>
     <content><![CDATA[<h2 id="design-considerations">Design Considerations</h2>
@@ -506,6 +462,50 @@ href="https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/H
       </categories>
   </entry>
   <entry>
+    <title>Efficient Sequence Objection in UVM</title>
+    <url>/2022/02/21/Efficient-Sequence-Objection/</url>
+    <content><![CDATA[<p>Objections are handled in <strong>pre/post body</strong> decalared in
+a base sequence class</p>
+<p>This is efficient for all sequence execution options:</p>
+<ul>
+<li><p>Default sequences use body objections</p></li>
+<li><p>Test sequences use test objections</p></li>
+<li><p>Subsequences use objections of the root sequence which calls
+them</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_base_seq <span class="keyword">extends</span> uvm_sequence<span class="variable">#(yapp_packet)</span>;</span><br><span class="line">…</span><br><span class="line">    <span class="keyword">task</span> pre_body();</span><br><span class="line">        <span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">        	starting_phase<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    <span class="keyword">task</span> post_body();</span><br><span class="line">    	<span class="keyword">if</span>(starting_phase != <span class="literal">null</span>);</span><br><span class="line">    		starting_phase<span class="variable">.drop_objection</span>(<span class="keyword">this</span>, get_type_name());	</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">…</span><br><span class="line"><span class="keyword">class</span> yapp012 <span class="keyword">extends</span> yapp_base_seq;</span><br><span class="line">…</span><br></pre></td></tr></table></figure>
+<p><strong>Set as default sequence of sequencer:</strong></p>
+<p>A default sequence is a root sequence, so the <strong>pre/post
+body</strong> methods are executed and objection are raised/dropped
+there</p>
+<p><strong>Test sequence:</strong></p>
+<p>A test sequence is a root sequence, so the <strong>pre/post
+body</strong> methods are executed. However, for a test sequence,
+<code>starting_phase</code> is <code>null</code> and so the objection is
+not handled in the sequence. The test must raise and drop objections</p>
+<p><strong>Subsequence:</strong></p>
+<p>Not a root sequence, so <strong>pre/post body</strong> methods are
+not executed. The root sequence which ultimately called the subsequence
+handles the objections, using one of the two options above.</p>
+<blockquote>
+<p>If a <strong>sequence</strong> is call via a <strong>`uvm_do</strong>
+variant, the it is defined as a subsequence and its
+<strong>pre/post_body()</strong> methods are not executed.</p>
+</blockquote>
+<p><strong>objection change in UVM1.2</strong></p>
+<p>Raising or dropping objections directly from
+<code>starting_phase</code> is deprecated</p>
+<ul>
+<li><p>must use <code>get_starting_phase()</code> method</p></li>
+<li><p>prevents modification of phase during sequence</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Global Handles in UVM</title>
     <url>/2022/02/23/Global-Handles-UVM/</url>
     <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
@@ -627,6 +627,18 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
+    <title>Innovus block level create Power Ground Pin method</title>
+    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
+    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
+alt="createPGPin_onDie.drawio" /></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Innovus check mode variants</title>
     <url>/2022/02/07/Innovus-check-mode-variants/</url>
     <content><![CDATA[<p>checkDesign</p>
@@ -639,18 +651,6 @@ effect taken into consideration during delayCal</p>
 <p>setRouteMode</p>
 <p>setExtractRCMode</p>
 <p>setOptMode</p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Innovus block level create Power Ground Pin method</title>
-    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
-    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
-alt="createPGPin_onDie.drawio" /></p>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1082,6 +1082,35 @@ href="http://ece-research.unm.edu/jimp/vlsi/slides/chap3_2.html">link2</a>]</p>
       </categories>
   </entry>
   <entry>
+    <title>New windows and forms appear behind the Library Manager in background when using GNOME 3</title>
+    <url>/2022/10/22/New-windows-Gnome3/</url>
+    <content><![CDATA[<p>Using <strong>Red Hat Enterprise Linux 8</strong>, <strong>Rocky
+Linux 8</strong> and the <strong>GNOME 3</strong> window manager, the
+new Virtuoso Schematic/Layout/ADE windows and forms sometimes pop up
+under or below the <strong>Library Manager</strong> or on the desktop in
+the background instead of the foreground and cannot be seen. Sometimes,
+they are iconized; they do not come on the top in front, though it is
+the most recent window opened.</p>
+<p><strong>solution</strong></p>
+<blockquote>
+<p>Install <strong>Focus my window</strong> GNOME Shell extension</p>
+</blockquote>
+<p><img src="/2022/10/22/New-windows-Gnome3/image-20221022002952578.png"
+alt="image-20221022002952578" /></p>
+<p><strong>reference</strong></p>
+<p>Article (11612426) Title: New windows and forms appear behind the
+Library Manager in background or iconized instead of foreground on RHEL
+and SuSE Linux in GNOME, KDE Desktop, Metacity window manager URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OCV Derating With AOCV</title>
     <url>/2022/12/10/OCVDeratingWithAOCV/</url>
     <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
@@ -1112,35 +1141,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</
       <categories>
         <category>digital</category>
       </categories>
-  </entry>
-  <entry>
-    <title>New windows and forms appear behind the Library Manager in background when using GNOME 3</title>
-    <url>/2022/10/22/New-windows-Gnome3/</url>
-    <content><![CDATA[<p>Using <strong>Red Hat Enterprise Linux 8</strong>, <strong>Rocky
-Linux 8</strong> and the <strong>GNOME 3</strong> window manager, the
-new Virtuoso Schematic/Layout/ADE windows and forms sometimes pop up
-under or below the <strong>Library Manager</strong> or on the desktop in
-the background instead of the foreground and cannot be seen. Sometimes,
-they are iconized; they do not come on the top in front, though it is
-the most recent window opened.</p>
-<p><strong>solution</strong></p>
-<blockquote>
-<p>Install <strong>Focus my window</strong> GNOME Shell extension</p>
-</blockquote>
-<p><img src="/2022/10/22/New-windows-Gnome3/image-20221022002952578.png"
-alt="image-20221022002952578" /></p>
-<p><strong>reference</strong></p>
-<p>Article (11612426) Title: New windows and forms appear behind the
-Library Manager in background or iconized instead of foreground on RHEL
-and SuSE Linux in GNOME, KDE Desktop, Metacity window manager URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
   </entry>
   <entry>
     <title>Overflow Detection in Verilog</title>
@@ -2631,6 +2631,29 @@ href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/l
       </categories>
   </entry>
   <entry>
+    <title>channel and termination</title>
+    <url>/2022/07/01/channel-termination/</url>
+    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
+<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
+alt="voltagemode20220704" /></p>
+<h2 id="current-mode-driver">current mode driver</h2>
+<p><img
+src="/2022/07/01/channel-termination/image-20220702003926289.png"
+alt="image-20220702003926289" /></p>
+<h2 id="reference">reference</h2>
+<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
+Conference, "T11: Basics of Equalization Techniques: Channels,
+Equalization, and Circuits"</p>
+<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
+Diverse Interconnect Applications,” IEEE Transactions on Circuits and
+Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
+2014.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Linear model of the CDR</title>
     <url>/2022/05/04/cdr-linear/</url>
     <content><![CDATA[<p><img src="/2022/05/04/cdr-linear/image-20220504101924272.png"
@@ -2897,29 +2920,6 @@ href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitte
       </categories>
   </entry>
   <entry>
-    <title>channel and termination</title>
-    <url>/2022/07/01/channel-termination/</url>
-    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
-<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
-alt="voltagemode20220704" /></p>
-<h2 id="current-mode-driver">current mode driver</h2>
-<p><img
-src="/2022/07/01/channel-termination/image-20220702003926289.png"
-alt="image-20220702003926289" /></p>
-<h2 id="reference">reference</h2>
-<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
-Conference, "T11: Basics of Equalization Techniques: Channels,
-Equalization, and Circuits"</p>
-<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
-Diverse Interconnect Applications,” IEEE Transactions on Circuits and
-Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
-2014.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Clock Edges used for Setup and Hold in PrimeTime</title>
     <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
     <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
@@ -2998,15 +2998,6 @@ href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysil
       </categories>
   </entry>
   <entry>
-    <title>Complete Response used in single-pole filter model in systemverilog</title>
-    <url>/2022/02/13/completeResponse/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>primary clock, generated clock and virtual clock in SDC</title>
     <url>/2022/03/01/clocks-sta/</url>
     <content><![CDATA[<p><strong>primary clocks</strong></p>
@@ -3044,6 +3035,15 @@ virtual clock is propagated.</p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Complete Response used in single-pole filter model in systemverilog</title>
+    <url>/2022/02/13/completeResponse/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -3428,6 +3428,9 @@ href="https://e2e.ti.com/blogs_/archives/b/precisionhub/posts/leverage-coherent-
 href="https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html">https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html</a></p>
 <p>Understanding Effective Number of Bits <a
 href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/">https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/</a></p>
+<p>ADC Input Noise: The Good, The Bad, and The Ugly. Is No Noise Good
+Noise? [<a
+href="https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html">https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -4694,138 +4697,6 @@ capacitance</strong></p>
       </categories>
   </entry>
   <entry>
-    <title>split pins in dspf_emir</title>
-    <url>/2023/04/04/dspf-split-pins-emir/</url>
-    <content><![CDATA[<h3 id="dspf-extract-using-starrc">dspf extract using starrc</h3>
-<p>multiple label and rectangle in vssa net</p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405003705354.png"
-alt="image-20230405003705354" /></p>
-<ul>
-<li><p>general dspf</p>
-<p><code>SHORT_PINS: YES</code></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405002824842.png"
-alt="image-20230405002824842" /></p>
-<blockquote>
-<p>other pin are short together</p>
-</blockquote></li>
-<li><p>dspf for emir analysis</p></li>
-</ul>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405000013461.png"
-alt="image-20230405000013461" /></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405001944418.png"
-alt="image-20230405001944418" /></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405230611522.png"
-alt="image-20230405230611522" /></p>
-<blockquote>
-<p>It seems that dspf_emir <strong>don't</strong> contain the
-<em>rectangle pin</em> information.</p>
-<p>only <strong>label</strong> is necessary</p>
-</blockquote>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 26%" />
-<col style="width: 22%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>setup</th>
-<th></th>
-<th></th>
-<th>spectre result</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>netlist type</strong></td>
-<td><strong>dspf option</strong></td>
-<td><strong>emir analysis</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>dspf</td>
-<td>/</td>
-<td>disable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>/</td>
-<td>disable</td>
-<td>✗</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>=shortPins=”yes”</td>
-<td>disable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>=shortPins=”no”</td>
-<td>disable</td>
-<td>✗</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>/</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>=shortPins=”yes”</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>=shortPins=”no”</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>shortPins=”yes”</strong> is preferred default option for
-dspf_emir, which has <strong>split pins</strong></p>
-</blockquote>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405005151550.png"
-alt="image-20230405005151550" /></p>
-<h3 id="dspf-syntax">DSPF Syntax</h3>
-<ul>
-<li><p><pin_def>::=*<strong>|P <pin_element>?</strong> <pin_element>
-describes pins in the net. Multiple pin descriptions can be listed in
-one line.</p></li>
-<li><p><pin_element>::=(<pinName> <pinType> <pinCap> {<coord>}?)
-<pinName> represents the name of the pin. <pinType> represents the type
-of the pin. It can be any of the following: I (Input), O (Output),</p>
-<p>​ B (Bidirectional), X (don’t care), S (Switch), and J (Jumper). ​
-<pinCap> represents the capacitance value associated with the pin. ​
-<coord> is optional. It represents the location of the pin. Multiple pin
-locations are allowed</p></li>
-</ul>
-<h4 id="split-pins">split pins</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*|P (avss_1 O 0 207.7555 59.9170)</span><br><span class="line">*|P (avss_10 O 0 181.1610 151.1130)</span><br><span class="line">*|P (avss_11 O 0 186.6330 151.1130)</span><br><span class="line">*|P (avss_12 O 0 192.1050 151.1130)</span><br><span class="line">*|P (avss_13 O 0 197.5770 151.1130)</span><br></pre></td></tr></table></figure>
-<h3 id="reference">reference</h3>
-<p>Article (20467964) Title: Difference in result on running Spectre APS
-with EMIR and without EMIR analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY</a></p>
-<p>StarRC User Guide and Command Reference Version O-2018.06, June
-2018</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>DTFT &amp; DFT</title>
     <url>/2023/05/27/dtft-dft/</url>
     <content><![CDATA[<h2 id="sampling-theorem">sampling theorem</h2>
@@ -5180,6 +5051,138 @@ href="https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-paddin
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>split pins in dspf_emir</title>
+    <url>/2023/04/04/dspf-split-pins-emir/</url>
+    <content><![CDATA[<h3 id="dspf-extract-using-starrc">dspf extract using starrc</h3>
+<p>multiple label and rectangle in vssa net</p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405003705354.png"
+alt="image-20230405003705354" /></p>
+<ul>
+<li><p>general dspf</p>
+<p><code>SHORT_PINS: YES</code></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405002824842.png"
+alt="image-20230405002824842" /></p>
+<blockquote>
+<p>other pin are short together</p>
+</blockquote></li>
+<li><p>dspf for emir analysis</p></li>
+</ul>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405000013461.png"
+alt="image-20230405000013461" /></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405001944418.png"
+alt="image-20230405001944418" /></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405230611522.png"
+alt="image-20230405230611522" /></p>
+<blockquote>
+<p>It seems that dspf_emir <strong>don't</strong> contain the
+<em>rectangle pin</em> information.</p>
+<p>only <strong>label</strong> is necessary</p>
+</blockquote>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 26%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>setup</th>
+<th></th>
+<th></th>
+<th>spectre result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>netlist type</strong></td>
+<td><strong>dspf option</strong></td>
+<td><strong>emir analysis</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>dspf</td>
+<td>/</td>
+<td>disable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>/</td>
+<td>disable</td>
+<td>✗</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>=shortPins=”yes”</td>
+<td>disable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>=shortPins=”no”</td>
+<td>disable</td>
+<td>✗</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>/</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>=shortPins=”yes”</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>=shortPins=”no”</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>shortPins=”yes”</strong> is preferred default option for
+dspf_emir, which has <strong>split pins</strong></p>
+</blockquote>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405005151550.png"
+alt="image-20230405005151550" /></p>
+<h3 id="dspf-syntax">DSPF Syntax</h3>
+<ul>
+<li><p><pin_def>::=*<strong>|P <pin_element>?</strong> <pin_element>
+describes pins in the net. Multiple pin descriptions can be listed in
+one line.</p></li>
+<li><p><pin_element>::=(<pinName> <pinType> <pinCap> {<coord>}?)
+<pinName> represents the name of the pin. <pinType> represents the type
+of the pin. It can be any of the following: I (Input), O (Output),</p>
+<p>​ B (Bidirectional), X (don’t care), S (Switch), and J (Jumper). ​
+<pinCap> represents the capacitance value associated with the pin. ​
+<coord> is optional. It represents the location of the pin. Multiple pin
+locations are allowed</p></li>
+</ul>
+<h4 id="split-pins">split pins</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*|P (avss_1 O 0 207.7555 59.9170)</span><br><span class="line">*|P (avss_10 O 0 181.1610 151.1130)</span><br><span class="line">*|P (avss_11 O 0 186.6330 151.1130)</span><br><span class="line">*|P (avss_12 O 0 192.1050 151.1130)</span><br><span class="line">*|P (avss_13 O 0 197.5770 151.1130)</span><br></pre></td></tr></table></figure>
+<h3 id="reference">reference</h3>
+<p>Article (20467964) Title: Difference in result on running Spectre APS
+with EMIR and without EMIR analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY</a></p>
+<p>StarRC User Guide and Command Reference Version O-2018.06, June
+2018</p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -6225,22 +6228,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
       </categories>
   </entry>
   <entry>
-    <title>Add endcap and tapcell in Innovus</title>
-    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
-    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
-following code to add endcap and tapcell.</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
-alt="endcap_tapcell_floorplan.drawio" /></p>
-<p><strong>REF:</strong> <a
-href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Effective Noise BandWidth and Noise Floor</title>
     <url>/2023/05/29/enbw-nl/</url>
     <content><![CDATA[<h2 id="ps-and-psd">PS and PSD</h2>
@@ -6544,6 +6531,22 @@ Converters, Second Edition" ISBN 978-1-119-25827-8</p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Add endcap and tapcell in Innovus</title>
+    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
+    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
+following code to add endcap and tapcell.</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
+alt="endcap_tapcell_floorplan.drawio" /></p>
+<p><strong>REF:</strong> <a
+href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
       </categories>
   </entry>
   <entry>
@@ -7773,27 +7776,6 @@ possible without cloning.</p></li>
       </categories>
   </entry>
   <entry>
-    <title>I2C Communication Protocol - I2C, SMBus</title>
-    <url>/2023/10/05/i2c/</url>
-    <content><![CDATA[<h2 id="reference">reference</h2>
-<p>UM10204 I2C-bus specification and user manual [<a
-href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">https://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>]</p>
-<p>AN10216-01 I2C MANUAL [<a
-href="https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf">https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf</a>]</p>
-<p>System Management Bus (SMBus) Specification [<a
-href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">http://smbus.org/specs/SMBus_3_2_20220112.pdf</a>]</p>
-<p>I2C Primer [<a
-href="https://www.i2c-bus.org/i2c-primer/">https://www.i2c-bus.org/i2c-primer/</a>]</p>
-<p>smbus2, A drop-in replacement for smbus-cffi/smbus-python in pure
-Python [<a
-href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kplindegaard/smbus2/tree/master</a>]</p>
-<p>THE BOOK OF I2C A Guide for Adventurers by Randall Hyde</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>In-design Sign-off Metal Fill Flow in Innovus</title>
     <url>/2022/03/05/in-design-signoff-metalfill-innovus/</url>
     <content><![CDATA[<p>Before inserting sign-off metal fill, stream out a GDSII stream file
@@ -7851,6 +7833,27 @@ layermap provided.</li>
 ]]></content>
       <categories>
         <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>I2C Communication Protocol - I2C, SMBus</title>
+    <url>/2023/10/05/i2c/</url>
+    <content><![CDATA[<h2 id="reference">reference</h2>
+<p>UM10204 I2C-bus specification and user manual [<a
+href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">https://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>]</p>
+<p>AN10216-01 I2C MANUAL [<a
+href="https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf">https://www.nxp.com.cn/docs/en/application-note/AN10216.pdf</a>]</p>
+<p>System Management Bus (SMBus) Specification [<a
+href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">http://smbus.org/specs/SMBus_3_2_20220112.pdf</a>]</p>
+<p>I2C Primer [<a
+href="https://www.i2c-bus.org/i2c-primer/">https://www.i2c-bus.org/i2c-primer/</a>]</p>
+<p>smbus2, A drop-in replacement for smbus-cffi/smbus-python in pure
+Python [<a
+href="https://github.com/kplindegaard/smbus2/tree/master">https://github.com/kplindegaard/smbus2/tree/master</a>]</p>
+<p>THE BOOK OF I2C A Guide for Adventurers by Randall Hyde</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -7997,69 +8000,6 @@ alt="pma_dig_bumps.drawio" /></p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -8822,6 +8762,69 @@ href="https://www.edn.com/burn-in-101/">link</a>]</p>
       </categories>
   </entry>
   <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
     <url>/2022/06/10/isf-sampler/</url>
     <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
@@ -9204,172 +9207,6 @@ Transceivers"</p>
       </categories>
   </entry>
   <entry>
-    <title>Jitter Decomposition in High-Speed Links</title>
-    <url>/2022/05/21/jitter-decomposition/</url>
-    <content><![CDATA[<p>Jitter separation lets you learn if the components of jitter are
-random or deterministic. That is, if they are caused by crosstalk,
-channel loss, or some other phenomenon. The identification of jitter and
-noise sources is critical when debugging failure sources in the
-transmission of high-speed serial signals</p>
-<ul>
-<li>Tail Fit Method</li>
-<li>Spectral method</li>
-</ul>
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 74%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>RJ Extraction Methods</th>
-<th>Rationale</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Spectral</td>
-<td>Speed/Consistency to Past Measurements;<br />Accuracy in low
-Crosstalk or Aperiodic Bounded Uncorrelated Jitter (ABUJ)
-conditions</td>
-</tr>
-<tr class="even">
-<td>Tail Fit</td>
-<td>General Purpose;<br />Accuracy in high Crosstalk or ABUJ
-conditions</td>
-</tr>
-</tbody>
-</table>
-<h2 id="jitter-components">Jitter Components</h2>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521190326201.png"
-alt="image-20220521190326201" /></p>
-<h2 id="dual-dirac-model">dual-Dirac model</h2>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521181604467.png"
-alt="image-20220521181604467" /></p>
-<p><img src="/2022/05/21/jitter-decomposition/Figure-1.webp"
-alt="Figure-1" /></p>
-<h2 id="spectral-method">Spectral method</h2>
-<blockquote>
-<p>power spectral density (PSD) represents jitter spectrum and peaks in
-the spectrum can be interpreted as PJ or DDJ, while the average noise
-floor is the power of RJ</p>
-</blockquote>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521182929127.png"
-alt="image-20220521182929127" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">S1 = sum(win);</span><br><span class="line">S2 = sum(win.^<span class="number">2</span>);</span><br><span class="line">N = <span class="built_in">length</span>(win);</span><br><span class="line">spec_nospur2 = (spec_nospur*S1).^<span class="number">2</span>/N/S2;    <span class="comment">% To obtain linear spectrum for rj</span></span><br><span class="line">rj_utj = <span class="built_in">sqrt</span>(sum(spec_nospur2))*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">spec = <span class="number">1</span>*<span class="built_in">ones</span>(<span class="built_in">length</span>(spec_nospur), <span class="number">1</span>)*<span class="number">1e-21</span>;</span><br><span class="line">spec(index) = specx(index);</span><br><span class="line"><span class="comment">% insert fft nyquist frequency component between positive frequency and</span></span><br><span class="line"><span class="comment">% negative frequency component</span></span><br><span class="line"><span class="comment">% DC;posFreq;nyqFreq;negFreq</span></span><br><span class="line">spec_ifft = [spec;specnyq;<span class="built_in">conj</span>(spec(<span class="keyword">end</span>:<span class="number">-1</span>:<span class="number">2</span>))]&#x27;;</span><br><span class="line">sfactor = sum(win)/<span class="built_in">sqrt</span>(<span class="number">2</span>);</span><br><span class="line">spec_ifft = spec_ifft*sfactor;</span><br><span class="line">sig_rec = <span class="built_in">real</span>(ifft(spec_ifft));</span><br><span class="line">sig_rec = sig_rec(:);</span><br><span class="line">sig_rec_utj = sig_rec./win(<span class="number">1</span>:<span class="keyword">end</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="tail-fit-method">Tail Fit Method</h2>
-<blockquote>
-<p>Tail fitting algorithm based on the <strong>Gaussian tail
-model</strong> by using probability distribution of collected jitter
-value</p>
-</blockquote>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521191029433.png"
-alt="image-20220521191029433" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">bin_sig = bin_sig*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">x = qfuncinv(cdf_sig);</span><br><span class="line"></span><br><span class="line"><span class="comment">% coef(1)*bin_sig + coef(2) = x</span></span><br><span class="line"><span class="comment">% which x is norm(0, 1)</span></span><br><span class="line"><span class="comment">% bin_sig = (x - coef(2))/coef(1)</span></span><br><span class="line"><span class="comment">% Then bin is norm(-coef(2)/coef(1), 1/coef(1))</span></span><br><span class="line">coef = polyfit(bin_sig, x, <span class="number">1</span>);</span><br><span class="line">sigma = <span class="number">1</span>/coef(<span class="number">1</span>);</span><br><span class="line">mu = -coef(<span class="number">2</span>)*sigma;</span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">&#x27;sigma=%.3fps, mu=%.3fps\n&#x27;</span>, sigma, mu);</span><br></pre></td></tr></table></figure>
-<h2 id="least-squares-ls-method">Least Squares (LS) method</h2>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220524005848719.png"
-alt="image-20220524005848719" /></p>
-<p>It is known that TIE jitter is a linear equation, shown in below
-formula <span class="math display">\[
-x[n] = d_n \times \left[ \Delta t_{pj}[n]+\Delta t_{DCD}[n] +\Delta
-t_{ISI}[n]+\Delta t_{RJ}[n]\right]
-\]</span> LS can be used to estimate the PJ, DCD, RJ , and ISI
-parameters <span class="math inline">\([a,b,J_{DCD},J_0,
-J_1...J_{(2^k-1)}]\)</span></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220524185332637.png"
-alt="image-20220524185332637" /></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220524185351383.png"
-alt="image-20220524185351383" /></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220524010446422.png"
-alt="image-20220524010446422" /></p>
-<h2 id="jitter-modeling">Jitter modeling</h2>
-<h3 id="periodic-jitter-pj">Periodic Jitter (PJ)</h3>
-<p>PJ is a repeating jitter <span class="math display">\[
-\Delta t_{PJ}[n]=A\sin(2\pi f_0\cdot nT_s + \theta)=a \sin(2\pi f_0
-\cdot nT_s)+b\cos(2\pi f_0 \cdot nT_s)
-\]</span> where <span class="math inline">\(f_0\)</span> represents the
-fundamental frequency of PJ; <span class="math inline">\(A\)</span> is
-the amplitude of PJ; <span class="math inline">\(T_s\)</span> is the
-data stream period, and <span class="math inline">\(\theta\)</span> is
-the initial phase of PJ</p>
-<blockquote>
-<p>In the spectrum, the frequency of maximum amount of the jitter is PJ
-frequency <span class="math inline">\(f_0\)</span>.</p>
-</blockquote>
-<h3 id="duty-cycle-distortion-dcd">Duty Cycle Distortion (DCD)</h3>
-<p>DCD is viewed as a series of <strong>adjacent positive and negative
-impulses</strong> <span class="math display">\[
-\Delta t_{DCD}[n] = J_{DCD}\times (-1)^n =
-[-J_{DCD},J_{DCD},-J_{DCD},J_{DCD},...]
-\]</span> Where <span class="math inline">\(J_{DCD}\)</span> is the DCD
-amplitude.</p>
-<h3 id="random-jitter-rj">Random Jitter (RJ)</h3>
-<p>RJ is created by unbounded jitter sources, such as Gaussian white
-noise. The statistical PDF for RJ is enerally treated as a Gaussian
-distribution <span class="math display">\[
-f_{RJ}(\Delta t) = \frac{1}{\sqrt{2\pi\sigma}}\exp(-\frac{(\Delta
-t)^2}{2\sigma^2})
-\]</span></p>
-<h2 id="remarks">Remarks</h2>
-<h3 id="periodic-jitter-generator-and-insertion">Periodic Jitter
-Generator and Insertion</h3>
-<p><em>Analysis and Estimation of Jitter Sub-Components: Classification
-and Segregation of Jitter Components</em></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521212129098.png"
-alt="image-20220521212129098" /></p>
-<p><img
-src="/2022/05/21/jitter-decomposition/image-20220521212142719.png"
-alt="image-20220521212142719" /></p>
-<h2 id="reference">Reference</h2>
-<p>Mike Li. 2007. Jitter, noise, and signal integrity at high-speed
-(First. ed.). Prentice Hall Press, USA.</p>
-<p><a href="https://keysightevent.com/191023/handout/d">余宥浚 Jacky Yu,
-Keysight Taiwan AEO, Advanced Jitter and Eye-Diagram Analysis</a></p>
-<p>Y. Duan and D. Chen, "Accurate jitter decomposition in high-speed
-links," 2017 IEEE 35th VLSI Test Symposium (VTS), 2017, pp. 1-6, doi:
-10.1109/VTS.2017.7928918.</p>
-<p>Y. Duan's phd thesis URL: <a
-href="https://dr.lib.iastate.edu/handle/20.500.12876/30459">https://dr.lib.iastate.edu/handle/20.500.12876/30459</a></p>
-<p>Y. Duan and D. Chen, "Fast and Accurate Decomposition of
-Deterministic Jitter Components in High-Speed Links," in IEEE
-Transactions on Electromagnetic Compatibility, vol. 61, no. 1, pp.
-217-225, Feb. 2019, doi: 10.1109/TEMC.2018.2797122.</p>
-<p>"Jitter Analysis: The Dual-Dirac Model, RJ/DJ, and Q-Scale",
-Whitepaper: Keysight Technologies, U.S.A., Dec. 2017</p>
-<p>Sharma, Vijender Kumar and Sujay Deb. "Analysis and Estimation of
-Jitter Sub-Components." (2014).</p>
-<p>Qingqi Dou and J. A. Abraham, "Jitter decomposition in ring
-oscillators," Asia and South Pacific Conference on Design Automation,
-2006., 2006, pp. 6 pp.-, doi: 10.1109/ASPDAC.2006.1594696.</p>
-<p>E. Balestrieri, L. De Vito, F. Lamonaca, F. Picariello, S. Rapuano
-and I. Tudosa, "The jitter measurement ways: The jitter decomposition,"
-in IEEE Instrumentation &amp; Measurement Magazine, vol. 23, no. 7, pp.
-3-12, Oct. 2020, doi: 10.1109/MIM.2020.9234759.</p>
-<p>McClure, Mark Scott. "Digital jitter measurement and separation." PhD
-diss., 2005.</p>
-<p>Ren, Nan, Zaiming Fu, Shengcu Lei, Hanglin Liu, and Shulin Tian.
-"Jitter generation model based on timing modulation and cross point
-calibration for jitter decomposition." Metrology and Measurement Systems
-28, no. 1 (2021).</p>
-<p>M. P. Li, J. Wilstrup, R. Jessen and D. Petrich, "A new method for
-jitter decomposition through its distribution tail fitting,"
-International Test Conference 1999. Proceedings (IEEE Cat.
-No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>JTAG and Boundary Scan</title>
     <url>/2023/11/28/jtag/</url>
     <content><![CDATA[<p>Data Register, DR:</p>
@@ -9562,6 +9399,172 @@ doi: 10.1109/MDT.2003.1232259.</p>
       </categories>
   </entry>
   <entry>
+    <title>Jitter Decomposition in High-Speed Links</title>
+    <url>/2022/05/21/jitter-decomposition/</url>
+    <content><![CDATA[<p>Jitter separation lets you learn if the components of jitter are
+random or deterministic. That is, if they are caused by crosstalk,
+channel loss, or some other phenomenon. The identification of jitter and
+noise sources is critical when debugging failure sources in the
+transmission of high-speed serial signals</p>
+<ul>
+<li>Tail Fit Method</li>
+<li>Spectral method</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>RJ Extraction Methods</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectral</td>
+<td>Speed/Consistency to Past Measurements;<br />Accuracy in low
+Crosstalk or Aperiodic Bounded Uncorrelated Jitter (ABUJ)
+conditions</td>
+</tr>
+<tr class="even">
+<td>Tail Fit</td>
+<td>General Purpose;<br />Accuracy in high Crosstalk or ABUJ
+conditions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jitter-components">Jitter Components</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521190326201.png"
+alt="image-20220521190326201" /></p>
+<h2 id="dual-dirac-model">dual-Dirac model</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521181604467.png"
+alt="image-20220521181604467" /></p>
+<p><img src="/2022/05/21/jitter-decomposition/Figure-1.webp"
+alt="Figure-1" /></p>
+<h2 id="spectral-method">Spectral method</h2>
+<blockquote>
+<p>power spectral density (PSD) represents jitter spectrum and peaks in
+the spectrum can be interpreted as PJ or DDJ, while the average noise
+floor is the power of RJ</p>
+</blockquote>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521182929127.png"
+alt="image-20220521182929127" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">S1 = sum(win);</span><br><span class="line">S2 = sum(win.^<span class="number">2</span>);</span><br><span class="line">N = <span class="built_in">length</span>(win);</span><br><span class="line">spec_nospur2 = (spec_nospur*S1).^<span class="number">2</span>/N/S2;    <span class="comment">% To obtain linear spectrum for rj</span></span><br><span class="line">rj_utj = <span class="built_in">sqrt</span>(sum(spec_nospur2))*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">spec = <span class="number">1</span>*<span class="built_in">ones</span>(<span class="built_in">length</span>(spec_nospur), <span class="number">1</span>)*<span class="number">1e-21</span>;</span><br><span class="line">spec(index) = specx(index);</span><br><span class="line"><span class="comment">% insert fft nyquist frequency component between positive frequency and</span></span><br><span class="line"><span class="comment">% negative frequency component</span></span><br><span class="line"><span class="comment">% DC;posFreq;nyqFreq;negFreq</span></span><br><span class="line">spec_ifft = [spec;specnyq;<span class="built_in">conj</span>(spec(<span class="keyword">end</span>:<span class="number">-1</span>:<span class="number">2</span>))]&#x27;;</span><br><span class="line">sfactor = sum(win)/<span class="built_in">sqrt</span>(<span class="number">2</span>);</span><br><span class="line">spec_ifft = spec_ifft*sfactor;</span><br><span class="line">sig_rec = <span class="built_in">real</span>(ifft(spec_ifft));</span><br><span class="line">sig_rec = sig_rec(:);</span><br><span class="line">sig_rec_utj = sig_rec./win(<span class="number">1</span>:<span class="keyword">end</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="tail-fit-method">Tail Fit Method</h2>
+<blockquote>
+<p>Tail fitting algorithm based on the <strong>Gaussian tail
+model</strong> by using probability distribution of collected jitter
+value</p>
+</blockquote>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521191029433.png"
+alt="image-20220521191029433" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">bin_sig = bin_sig*<span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">x = qfuncinv(cdf_sig);</span><br><span class="line"></span><br><span class="line"><span class="comment">% coef(1)*bin_sig + coef(2) = x</span></span><br><span class="line"><span class="comment">% which x is norm(0, 1)</span></span><br><span class="line"><span class="comment">% bin_sig = (x - coef(2))/coef(1)</span></span><br><span class="line"><span class="comment">% Then bin is norm(-coef(2)/coef(1), 1/coef(1))</span></span><br><span class="line">coef = polyfit(bin_sig, x, <span class="number">1</span>);</span><br><span class="line">sigma = <span class="number">1</span>/coef(<span class="number">1</span>);</span><br><span class="line">mu = -coef(<span class="number">2</span>)*sigma;</span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">&#x27;sigma=%.3fps, mu=%.3fps\n&#x27;</span>, sigma, mu);</span><br></pre></td></tr></table></figure>
+<h2 id="least-squares-ls-method">Least Squares (LS) method</h2>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524005848719.png"
+alt="image-20220524005848719" /></p>
+<p>It is known that TIE jitter is a linear equation, shown in below
+formula <span class="math display">\[
+x[n] = d_n \times \left[ \Delta t_{pj}[n]+\Delta t_{DCD}[n] +\Delta
+t_{ISI}[n]+\Delta t_{RJ}[n]\right]
+\]</span> LS can be used to estimate the PJ, DCD, RJ , and ISI
+parameters <span class="math inline">\([a,b,J_{DCD},J_0,
+J_1...J_{(2^k-1)}]\)</span></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524185332637.png"
+alt="image-20220524185332637" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524185351383.png"
+alt="image-20220524185351383" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220524010446422.png"
+alt="image-20220524010446422" /></p>
+<h2 id="jitter-modeling">Jitter modeling</h2>
+<h3 id="periodic-jitter-pj">Periodic Jitter (PJ)</h3>
+<p>PJ is a repeating jitter <span class="math display">\[
+\Delta t_{PJ}[n]=A\sin(2\pi f_0\cdot nT_s + \theta)=a \sin(2\pi f_0
+\cdot nT_s)+b\cos(2\pi f_0 \cdot nT_s)
+\]</span> where <span class="math inline">\(f_0\)</span> represents the
+fundamental frequency of PJ; <span class="math inline">\(A\)</span> is
+the amplitude of PJ; <span class="math inline">\(T_s\)</span> is the
+data stream period, and <span class="math inline">\(\theta\)</span> is
+the initial phase of PJ</p>
+<blockquote>
+<p>In the spectrum, the frequency of maximum amount of the jitter is PJ
+frequency <span class="math inline">\(f_0\)</span>.</p>
+</blockquote>
+<h3 id="duty-cycle-distortion-dcd">Duty Cycle Distortion (DCD)</h3>
+<p>DCD is viewed as a series of <strong>adjacent positive and negative
+impulses</strong> <span class="math display">\[
+\Delta t_{DCD}[n] = J_{DCD}\times (-1)^n =
+[-J_{DCD},J_{DCD},-J_{DCD},J_{DCD},...]
+\]</span> Where <span class="math inline">\(J_{DCD}\)</span> is the DCD
+amplitude.</p>
+<h3 id="random-jitter-rj">Random Jitter (RJ)</h3>
+<p>RJ is created by unbounded jitter sources, such as Gaussian white
+noise. The statistical PDF for RJ is enerally treated as a Gaussian
+distribution <span class="math display">\[
+f_{RJ}(\Delta t) = \frac{1}{\sqrt{2\pi\sigma}}\exp(-\frac{(\Delta
+t)^2}{2\sigma^2})
+\]</span></p>
+<h2 id="remarks">Remarks</h2>
+<h3 id="periodic-jitter-generator-and-insertion">Periodic Jitter
+Generator and Insertion</h3>
+<p><em>Analysis and Estimation of Jitter Sub-Components: Classification
+and Segregation of Jitter Components</em></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521212129098.png"
+alt="image-20220521212129098" /></p>
+<p><img
+src="/2022/05/21/jitter-decomposition/image-20220521212142719.png"
+alt="image-20220521212142719" /></p>
+<h2 id="reference">Reference</h2>
+<p>Mike Li. 2007. Jitter, noise, and signal integrity at high-speed
+(First. ed.). Prentice Hall Press, USA.</p>
+<p><a href="https://keysightevent.com/191023/handout/d">余宥浚 Jacky Yu,
+Keysight Taiwan AEO, Advanced Jitter and Eye-Diagram Analysis</a></p>
+<p>Y. Duan and D. Chen, "Accurate jitter decomposition in high-speed
+links," 2017 IEEE 35th VLSI Test Symposium (VTS), 2017, pp. 1-6, doi:
+10.1109/VTS.2017.7928918.</p>
+<p>Y. Duan's phd thesis URL: <a
+href="https://dr.lib.iastate.edu/handle/20.500.12876/30459">https://dr.lib.iastate.edu/handle/20.500.12876/30459</a></p>
+<p>Y. Duan and D. Chen, "Fast and Accurate Decomposition of
+Deterministic Jitter Components in High-Speed Links," in IEEE
+Transactions on Electromagnetic Compatibility, vol. 61, no. 1, pp.
+217-225, Feb. 2019, doi: 10.1109/TEMC.2018.2797122.</p>
+<p>"Jitter Analysis: The Dual-Dirac Model, RJ/DJ, and Q-Scale",
+Whitepaper: Keysight Technologies, U.S.A., Dec. 2017</p>
+<p>Sharma, Vijender Kumar and Sujay Deb. "Analysis and Estimation of
+Jitter Sub-Components." (2014).</p>
+<p>Qingqi Dou and J. A. Abraham, "Jitter decomposition in ring
+oscillators," Asia and South Pacific Conference on Design Automation,
+2006., 2006, pp. 6 pp.-, doi: 10.1109/ASPDAC.2006.1594696.</p>
+<p>E. Balestrieri, L. De Vito, F. Lamonaca, F. Picariello, S. Rapuano
+and I. Tudosa, "The jitter measurement ways: The jitter decomposition,"
+in IEEE Instrumentation &amp; Measurement Magazine, vol. 23, no. 7, pp.
+3-12, Oct. 2020, doi: 10.1109/MIM.2020.9234759.</p>
+<p>McClure, Mark Scott. "Digital jitter measurement and separation." PhD
+diss., 2005.</p>
+<p>Ren, Nan, Zaiming Fu, Shengcu Lei, Hanglin Liu, and Shulin Tian.
+"Jitter generation model based on timing modulation and cross point
+calibration for jitter decomposition." Metrology and Measurement Systems
+28, no. 1 (2021).</p>
+<p>M. P. Li, J. Wilstrup, R. Jessen and D. Petrich, "A new method for
+jitter decomposition through its distribution tail fitting,"
+International Test Conference 1999. Proceedings (IEEE Cat.
+No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Latch Inference in Verilog</title>
     <url>/2022/05/09/latch-inference/</url>
     <content><![CDATA[<h2 id="always"><code>always@( * )</code></h2>
@@ -9616,39 +9619,6 @@ doi:10.1007/978-3-030-03238-8</p>
       </categories>
   </entry>
   <entry>
-    <title>Layout Tricks Part 2 - matching</title>
-    <url>/2022/11/19/layout-tricks-part2/</url>
-    <content><![CDATA[<ol type="1">
-<li><p>Common Centroid</p>
-<p>The common centroid technique describes that if there are n blocks
-which are to be matched then the blocks are arranged symmetrically
-around the common centre at equal distances from the centre. This
-technique offers best matching for devices as it helps in avoiding
-cross-chip gradients</p>
-<p><img src="/2022/11/19/layout-tricks-part2/figure13.jpeg"
-alt="HTML5 Icon" /></p></li>
-<li><p>Inter-digitation</p>
-<p>Interdigitation reduces the device mismatch as it suffers equally
-from process variations in X dimension. This technique was used to
-layout current mirrors and resistors in PTAT and BGR circuits. In the
-Figure-15 below each brown stick represents a PFET of uniform length.
-This representation is termed as an inter-digitated layout.</p>
-<p><img src="/2022/11/19/layout-tricks-part2/figure14.jpeg"
-alt="HTML5 Icon" /></p></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Mikael Sahrling, Layout Techniques for Integrated Circuit Designers
-1st Edition , Artech House 2022</p>
-<p>LAYOUT, <a
-href="http://www.ee.columbia.edu/~kinget/EE6350_S16/">EE6350 VLSI Design
-Lab</a> SMART TEMPERATURE SENSOR URL: <a
-href="https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html">https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Layout Tricks Part 1 - compact, drain and source sharing</title>
     <url>/2022/02/19/layout-tricks-part1/</url>
     <content><![CDATA[<p>All credits to my colleague, Zhang Wenpian.</p>
@@ -9692,6 +9662,39 @@ CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference
 (CICC), 2018, pp. 1-8, doi: 10.1109/CICC.2018.8357060.</p>
 <p>Stacked MOSFETs in analog layout <a
 href="https://pulsic.com/stacked-mosfets-in-analog-layout/">https://pulsic.com/stacked-mosfets-in-analog-layout/</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Layout Tricks Part 2 - matching</title>
+    <url>/2022/11/19/layout-tricks-part2/</url>
+    <content><![CDATA[<ol type="1">
+<li><p>Common Centroid</p>
+<p>The common centroid technique describes that if there are n blocks
+which are to be matched then the blocks are arranged symmetrically
+around the common centre at equal distances from the centre. This
+technique offers best matching for devices as it helps in avoiding
+cross-chip gradients</p>
+<p><img src="/2022/11/19/layout-tricks-part2/figure13.jpeg"
+alt="HTML5 Icon" /></p></li>
+<li><p>Inter-digitation</p>
+<p>Interdigitation reduces the device mismatch as it suffers equally
+from process variations in X dimension. This technique was used to
+layout current mirrors and resistors in PTAT and BGR circuits. In the
+Figure-15 below each brown stick represents a PFET of uniform length.
+This representation is termed as an inter-digitated layout.</p>
+<p><img src="/2022/11/19/layout-tricks-part2/figure14.jpeg"
+alt="HTML5 Icon" /></p></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Mikael Sahrling, Layout Techniques for Integrated Circuit Designers
+1st Edition , Artech House 2022</p>
+<p>LAYOUT, <a
+href="http://www.ee.columbia.edu/~kinget/EE6350_S16/">EE6350 VLSI Design
+Lab</a> SMART TEMPERATURE SENSOR URL: <a
+href="https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html">https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -12599,73 +12602,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBri
       </categories>
   </entry>
   <entry>
-    <title>import package in SystemVerilog compilation</title>
-    <url>/2022/03/24/pkg-import-compile-sv/</url>
-    <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
-<h4 id="project">project</h4>
-<p><strong>yapp_pkg.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
-<p><strong>yapp_tx_monitor.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Collected Data handle</span></span><br><span class="line">  yapp_packet pkt;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Count packets collected</span></span><br><span class="line">  <span class="keyword">int</span> num_pkt_col;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_monitor)</span><br><span class="line">    `uvm_field_int(num_pkt_col, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"><span class="comment">/////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_monitor</span><br></pre></td></tr></table></figure>
-<p><strong>yapp_tx_driver.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_driver <span class="keyword">extends</span> uvm_driver <span class="variable">#(yapp_packet)</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"> <span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">int</span> num_sent;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_driver)</span><br><span class="line">    `uvm_field_int(num_sent, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Constructor - required syntax for UVM automation and utilities</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">    `uvm_info(get_type_name(), &#123;<span class="string">&quot;start of simulation for &quot;</span>, get_full_name()&#125;, UVM_HIGH)</span><br><span class="line">  <span class="keyword">endfunction</span> : start_of_simulation_phase</span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_driver </span><br></pre></td></tr></table></figure>
-<p><strong>yapp_if.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////// import package //////////////////////</span></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////    </span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Actual Signals</span></span><br><span class="line">  <span class="keyword">logic</span>              in_data_vld;</span><br><span class="line">  <span class="keyword">logic</span>              in_suspend;</span><br><span class="line">  <span class="keyword">logic</span>       [<span class="number">7</span>:<span class="number">0</span>]  in_data;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// signal for transaction recording</span></span><br><span class="line">  <span class="keyword">bit</span> monstart, drvstart;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// local storage for payload</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">7</span>:<span class="number">0</span>] payload_mem [<span class="number">0</span>:<span class="number">63</span>];</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>virtual interface is in package;</p>
-<p><code>yapp_pkg</code> is imported into interface</p>
-</blockquote>
-<blockquote>
-<p>!!!
-<code>typedef uvm_config_db#(virtual yapp_if) yapp_vif_config;</code> is
-<strong>forward declaration</strong></p>
-<p><em>A forward <code>typedef</code> declares an identifier as a type
-in advance of the full definition of that type</em></p>
-</blockquote>
-<h4 id="vcs-compile">VCS compile</h4>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vcs -full64 -R -sverilog  -ntb_opts uvm-1.2 +UVM_TESTNAME=short_yapp_012_test  -f vcs.f  </span><br></pre></td></tr></table></figure>
-<p><strong>vcs.f</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-timescale=1ns/1ns</span><br><span class="line"></span><br><span class="line">+incdir+../sv</span><br><span class="line"></span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
-<p><em>output ERROR</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error-[SV-LCM-PND] Package not defined</span><br><span class="line">../sv/yapp_if.sv, 18</span><br><span class="line">yapp_if, &quot;yapp_pkg::&quot;</span><br><span class="line">  Package scope resolution failed. Token &#x27;yapp_pkg&#x27; is not a package. </span><br><span class="line">  Originating module &#x27;yapp_if&#x27;.</span><br><span class="line">  Move package definition before the use of the package.</span><br></pre></td></tr></table></figure>
-<h4 id="xrun-compile">xrun compile</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xrun -f xrun.f</span><br></pre></td></tr></table></figure>
-<p><strong>xrun.f</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-64</span><br><span class="line"></span><br><span class="line">-uvmhome  CDNS-1.2</span><br><span class="line"></span><br><span class="line">// incdir for include files</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">+UVM_TESTNAME=short_yapp_012_test</span><br><span class="line"></span><br><span class="line">-timescale 1ns/1ns</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
-<p><em>output Error</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">file: ../sv/yapp_if.sv</span><br><span class="line">import yapp_pkg::*;</span><br><span class="line">              |</span><br><span class="line">xmvlog: *E,NOPBIND (../sv/yapp_if.sv,18|14): Package yapp_pkg could not be bound.</span><br><span class="line">        interface worklib.yapp_if:sv</span><br><span class="line">                errors: 1, warnings: 0</span><br></pre></td></tr></table></figure>
-<h4 id="solution">solution</h4>
-<p>place <code>../sv/yapp_pkg.sv</code> before
-<code>../sv/yapp_if.sv</code>.</p>
-<blockquote>
-<p>In this particular example, <code>yapp_pkg</code> is NOT needed in
-interface. just delete <code>import yapp_pkg::*</code> is enough in
-<code>../sv/yapp_if.sv</code></p>
-</blockquote>
-<h3 id="plain-example">plain example</h3>
-<p>The order of compilation unit DON'T matter</p>
-<h4 id="project-1">project</h4>
-<p><strong>hw_top.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.clock_period</span>(<span class="number">32&#x27;d10</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">    <span class="variable">.reset</span>(reset),</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.error</span>(),</span><br><span class="line">    <span class="comment">// YAPP interface signals connection</span></span><br><span class="line">    <span class="variable">.in_data</span>(in0<span class="variable">.in_data</span>),</span><br><span class="line">    <span class="variable">.in_data_vld</span>(in0<span class="variable">.in_data_vld</span>),</span><br><span class="line">    <span class="variable">.in_suspend</span>(in0<span class="variable">.in_suspend</span>),</span><br><span class="line">    <span class="comment">// Output Channels</span></span><br><span class="line">    <span class="comment">//Channel 0   </span></span><br><span class="line">    <span class="variable">.data_0</span>(),</span><br><span class="line">    <span class="variable">.data_vld_0</span>(),</span><br><span class="line">    <span class="variable">.suspend_0</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 1   </span></span><br><span class="line">    <span class="variable">.data_1</span>(),</span><br><span class="line">    <span class="variable">.data_vld_1</span>(),</span><br><span class="line">    <span class="variable">.suspend_1</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 2   </span></span><br><span class="line">    <span class="variable">.data_2</span>(),  </span><br><span class="line">    <span class="variable">.data_vld_2</span>(),</span><br><span class="line">    <span class="variable">.suspend_2</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">// Host Interface Signals</span></span><br><span class="line">    <span class="variable">.haddr</span>(),</span><br><span class="line">    <span class="variable">.hdata</span>(),</span><br><span class="line">    <span class="variable">.hen</span>(),</span><br><span class="line">    <span class="variable">.hwr_rd</span>());</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>yapp_router.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> yapp_router (<span class="keyword">input</span> clock,                              </span><br><span class="line">                    <span class="keyword">input</span> reset,                            </span><br><span class="line">                    <span class="keyword">output</span> error,</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// Input channel</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] in_data,                           </span><br><span class="line">                    <span class="keyword">input</span> in_data_vld,                     </span><br><span class="line">                    <span class="keyword">output</span> in_suspend,</span><br><span class="line">                    <span class="comment">// Output Channels</span></span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_0,  <span class="comment">//Channel 0</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_0, </span><br><span class="line">                    <span class="keyword">input</span> suspend_0, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_1,  <span class="comment">//Channel 1</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_1, </span><br><span class="line">                    <span class="keyword">input</span> suspend_1, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_2,  <span class="comment">//Channel 2</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_2,</span><br><span class="line">                    <span class="keyword">input</span> suspend_2,</span><br><span class="line">     </span><br><span class="line">                    <span class="comment">// Host Interface Signals</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] haddr,</span><br><span class="line">                    <span class="keyword">inout</span> [<span class="number">7</span>:<span class="number">0</span>] hdata,</span><br><span class="line">                    <span class="keyword">input</span> hen,</span><br><span class="line">                    <span class="keyword">input</span> hwr_rd);                            </span><br><span class="line">...</span><br><span class="line"><span class="keyword">endmodule</span>    </span><br></pre></td></tr></table></figure>
-<h4 id="compile">compile</h4>
-<p>place <strong>hw_top.sv</strong> <em>before or after</em>
-<strong>yapp_router.sv</strong> doesn't matter, the compiler (xrun, vcs)
-can compile them successfully.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Always place package before DUT is preferred choice during
-compiling.</p>
-<h3 id="refernce">refernce</h3>
-<p><a
-href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
-forward declaration</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>clocking</title>
     <url>/2024/05/11/pll-fll/</url>
     <content><![CDATA[<h2 id="bang-bang-phase-detector">Bang-Bang Phase Detector</h2>
@@ -12815,6 +12751,73 @@ APIs</strong>.</p>
 href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
 <p>PLUSARGS IN SYSTEMVERILOG URL:<a
 href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>import package in SystemVerilog compilation</title>
+    <url>/2022/03/24/pkg-import-compile-sv/</url>
+    <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
+<h4 id="project">project</h4>
+<p><strong>yapp_pkg.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<p><strong>yapp_tx_monitor.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Collected Data handle</span></span><br><span class="line">  yapp_packet pkt;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Count packets collected</span></span><br><span class="line">  <span class="keyword">int</span> num_pkt_col;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_monitor)</span><br><span class="line">    `uvm_field_int(num_pkt_col, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"><span class="comment">/////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_monitor</span><br></pre></td></tr></table></figure>
+<p><strong>yapp_tx_driver.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_driver <span class="keyword">extends</span> uvm_driver <span class="variable">#(yapp_packet)</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">////////////////// virtual interface ////////////////////</span></span><br><span class="line">  <span class="keyword">virtual</span> <span class="keyword">interface</span> yapp_if vif;</span><br><span class="line"> <span class="comment">/////////////////////////////////////////////////////</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">int</span> num_sent;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils_begin(yapp_tx_driver)</span><br><span class="line">    `uvm_field_int(num_sent, UVM_ALL_ON + UVM_NOCOMPARE)</span><br><span class="line">  `uvm_component_utils_end</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Constructor - required syntax for UVM automation and utilities</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">    `uvm_info(get_type_name(), &#123;<span class="string">&quot;start of simulation for &quot;</span>, get_full_name()&#125;, UVM_HIGH)</span><br><span class="line">  <span class="keyword">endfunction</span> : start_of_simulation_phase</span><br><span class="line">      ...</span><br><span class="line">     </span><br><span class="line"><span class="keyword">endclass</span> : yapp_tx_driver </span><br></pre></td></tr></table></figure>
+<p><strong>yapp_if.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////// import package //////////////////////</span></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////    </span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Actual Signals</span></span><br><span class="line">  <span class="keyword">logic</span>              in_data_vld;</span><br><span class="line">  <span class="keyword">logic</span>              in_suspend;</span><br><span class="line">  <span class="keyword">logic</span>       [<span class="number">7</span>:<span class="number">0</span>]  in_data;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// signal for transaction recording</span></span><br><span class="line">  <span class="keyword">bit</span> monstart, drvstart;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// local storage for payload</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">7</span>:<span class="number">0</span>] payload_mem [<span class="number">0</span>:<span class="number">63</span>];</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>virtual interface is in package;</p>
+<p><code>yapp_pkg</code> is imported into interface</p>
+</blockquote>
+<blockquote>
+<p>!!!
+<code>typedef uvm_config_db#(virtual yapp_if) yapp_vif_config;</code> is
+<strong>forward declaration</strong></p>
+<p><em>A forward <code>typedef</code> declares an identifier as a type
+in advance of the full definition of that type</em></p>
+</blockquote>
+<h4 id="vcs-compile">VCS compile</h4>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vcs -full64 -R -sverilog  -ntb_opts uvm-1.2 +UVM_TESTNAME=short_yapp_012_test  -f vcs.f  </span><br></pre></td></tr></table></figure>
+<p><strong>vcs.f</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-timescale=1ns/1ns</span><br><span class="line"></span><br><span class="line">+incdir+../sv</span><br><span class="line"></span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
+<p><em>output ERROR</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error-[SV-LCM-PND] Package not defined</span><br><span class="line">../sv/yapp_if.sv, 18</span><br><span class="line">yapp_if, &quot;yapp_pkg::&quot;</span><br><span class="line">  Package scope resolution failed. Token &#x27;yapp_pkg&#x27; is not a package. </span><br><span class="line">  Originating module &#x27;yapp_if&#x27;.</span><br><span class="line">  Move package definition before the use of the package.</span><br></pre></td></tr></table></figure>
+<h4 id="xrun-compile">xrun compile</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xrun -f xrun.f</span><br></pre></td></tr></table></figure>
+<p><strong>xrun.f</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-64</span><br><span class="line"></span><br><span class="line">-uvmhome  CDNS-1.2</span><br><span class="line"></span><br><span class="line">// incdir for include files</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">+UVM_TESTNAME=short_yapp_012_test</span><br><span class="line"></span><br><span class="line">-timescale 1ns/1ns</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_if.sv</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./clkgen.sv</span><br><span class="line">./hw_top.sv</span><br><span class="line">./tb_top.sv</span><br></pre></td></tr></table></figure>
+<p><em>output Error</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">file: ../sv/yapp_if.sv</span><br><span class="line">import yapp_pkg::*;</span><br><span class="line">              |</span><br><span class="line">xmvlog: *E,NOPBIND (../sv/yapp_if.sv,18|14): Package yapp_pkg could not be bound.</span><br><span class="line">        interface worklib.yapp_if:sv</span><br><span class="line">                errors: 1, warnings: 0</span><br></pre></td></tr></table></figure>
+<h4 id="solution">solution</h4>
+<p>place <code>../sv/yapp_pkg.sv</code> before
+<code>../sv/yapp_if.sv</code>.</p>
+<blockquote>
+<p>In this particular example, <code>yapp_pkg</code> is NOT needed in
+interface. just delete <code>import yapp_pkg::*</code> is enough in
+<code>../sv/yapp_if.sv</code></p>
+</blockquote>
+<h3 id="plain-example">plain example</h3>
+<p>The order of compilation unit DON'T matter</p>
+<h4 id="project-1">project</h4>
+<p><strong>hw_top.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.clock_period</span>(<span class="number">32&#x27;d10</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">    <span class="variable">.reset</span>(reset),</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.error</span>(),</span><br><span class="line">    <span class="comment">// YAPP interface signals connection</span></span><br><span class="line">    <span class="variable">.in_data</span>(in0<span class="variable">.in_data</span>),</span><br><span class="line">    <span class="variable">.in_data_vld</span>(in0<span class="variable">.in_data_vld</span>),</span><br><span class="line">    <span class="variable">.in_suspend</span>(in0<span class="variable">.in_suspend</span>),</span><br><span class="line">    <span class="comment">// Output Channels</span></span><br><span class="line">    <span class="comment">//Channel 0   </span></span><br><span class="line">    <span class="variable">.data_0</span>(),</span><br><span class="line">    <span class="variable">.data_vld_0</span>(),</span><br><span class="line">    <span class="variable">.suspend_0</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 1   </span></span><br><span class="line">    <span class="variable">.data_1</span>(),</span><br><span class="line">    <span class="variable">.data_vld_1</span>(),</span><br><span class="line">    <span class="variable">.suspend_1</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">//Channel 2   </span></span><br><span class="line">    <span class="variable">.data_2</span>(),  </span><br><span class="line">    <span class="variable">.data_vld_2</span>(),</span><br><span class="line">    <span class="variable">.suspend_2</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="comment">// Host Interface Signals</span></span><br><span class="line">    <span class="variable">.haddr</span>(),</span><br><span class="line">    <span class="variable">.hdata</span>(),</span><br><span class="line">    <span class="variable">.hen</span>(),</span><br><span class="line">    <span class="variable">.hwr_rd</span>());</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>yapp_router.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> yapp_router (<span class="keyword">input</span> clock,                              </span><br><span class="line">                    <span class="keyword">input</span> reset,                            </span><br><span class="line">                    <span class="keyword">output</span> error,</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// Input channel</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] in_data,                           </span><br><span class="line">                    <span class="keyword">input</span> in_data_vld,                     </span><br><span class="line">                    <span class="keyword">output</span> in_suspend,</span><br><span class="line">                    <span class="comment">// Output Channels</span></span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_0,  <span class="comment">//Channel 0</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_0, </span><br><span class="line">                    <span class="keyword">input</span> suspend_0, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_1,  <span class="comment">//Channel 1</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_1, </span><br><span class="line">                    <span class="keyword">input</span> suspend_1, </span><br><span class="line">                    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>] data_2,  <span class="comment">//Channel 2</span></span><br><span class="line">                    <span class="keyword">output</span> <span class="keyword">reg</span> data_vld_2,</span><br><span class="line">                    <span class="keyword">input</span> suspend_2,</span><br><span class="line">     </span><br><span class="line">                    <span class="comment">// Host Interface Signals</span></span><br><span class="line">                    <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] haddr,</span><br><span class="line">                    <span class="keyword">inout</span> [<span class="number">7</span>:<span class="number">0</span>] hdata,</span><br><span class="line">                    <span class="keyword">input</span> hen,</span><br><span class="line">                    <span class="keyword">input</span> hwr_rd);                            </span><br><span class="line">...</span><br><span class="line"><span class="keyword">endmodule</span>    </span><br></pre></td></tr></table></figure>
+<h4 id="compile">compile</h4>
+<p>place <strong>hw_top.sv</strong> <em>before or after</em>
+<strong>yapp_router.sv</strong> doesn't matter, the compiler (xrun, vcs)
+can compile them successfully.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Always place package before DUT is preferred choice during
+compiling.</p>
+<h3 id="refernce">refernce</h3>
+<p><a
+href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
+forward declaration</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -15910,6 +15913,60 @@ href="https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.I
       </categories>
   </entry>
   <entry>
+    <title>SystemVerilog clocking block</title>
+    <url>/2022/02/07/systemverilog-clocking-block/</url>
+    <content><![CDATA[<blockquote>
+<p>Assignment at &lt;interface&gt;.&lt;clocking block&gt;.&lt;output
+signal&gt; (i.e. synchronous) do <strong>NOT</strong> change
+&lt;interface&gt;.&lt;output signal&gt; until active clock edge.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// router_io.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> router_io(<span class="keyword">input</span> <span class="keyword">bit</span> clock);</span><br><span class="line">  <span class="keyword">logic</span>    reset_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  din;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frame_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valid_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  dout;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valido_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  busy_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frameo_n;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">clocking</span> cb @(<span class="keyword">posedge</span> clock);</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">input</span> #<span class="number">1</span>ns <span class="keyword">output</span> #<span class="number">1</span>ns;</span><br><span class="line">    <span class="keyword">output</span> reset_n;</span><br><span class="line">    <span class="keyword">output</span> din;</span><br><span class="line">    <span class="keyword">output</span> frame_n;</span><br><span class="line">    <span class="keyword">output</span> valid_n;</span><br><span class="line">    <span class="keyword">input</span>  dout;</span><br><span class="line">    <span class="keyword">input</span>  valido_n;</span><br><span class="line">    <span class="keyword">input</span>  frameo_n;</span><br><span class="line">    <span class="keyword">input</span>  busy_n;</span><br><span class="line">  <span class="keyword">endclocking</span>: cb</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// `reset_n` can be either a synchronous or an asynchronous signal</span></span><br><span class="line">  <span class="keyword">modport</span> TB(<span class="keyword">clocking</span> cb, <span class="keyword">output</span> reset_n);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endinterface</span>: router_io</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>All interface signals are asynchronous and without a direction
+spection (i.e. input, output, inout).</p>
+<ul>
+<li>The direction can only be specified in <code>clocking</code> block
+for <strong>synchronous signals</strong></li>
+<li>or a <code>modport</code> for <strong>asynchronous
+signals</strong></li>
+</ul>
+<p>All directions for the signals in the clocking block must be with
+respect to the test program;</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">program</span> <span class="keyword">automatic</span> test(router_io<span class="variable">.TB</span> rtr_io);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    reset();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">task</span> reset();</span><br><span class="line">    rtr_io<span class="variable">.reset_n</span> = <span class="number">1&#x27;b0</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.frame_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.valid_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">2</span>) @rtr_io<span class="variable">.cb</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.reset_n</span> &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">15</span>) @(rtr_io<span class="variable">.cb</span>);</span><br><span class="line">  <span class="keyword">endtask</span>: reset</span><br><span class="line"></span><br><span class="line"><span class="keyword">endprogram</span>: test</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// router_test_top.sv</span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> router_test_top;</span><br><span class="line">  <span class="keyword">parameter</span> simulation_cycle = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">bit</span> SystemClock = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  router_io top_io(SystemClock);</span><br><span class="line">  test t(top_io);</span><br><span class="line"></span><br><span class="line">  router dut(</span><br><span class="line">    <span class="variable">.reset_n</span>  (top_io<span class="variable">.reset_n</span>),</span><br><span class="line">    <span class="variable">.clock</span>    (top_io<span class="variable">.clock</span>),</span><br><span class="line">    <span class="variable">.din</span>    (top_io<span class="variable">.din</span>),</span><br><span class="line">    <span class="variable">.frame_n</span>  (top_io<span class="variable">.frame_n</span>),</span><br><span class="line">    <span class="variable">.valid_n</span>  (top_io<span class="variable">.valid_n</span>),</span><br><span class="line">    <span class="variable">.dout</span>    (top_io<span class="variable">.dout</span>),</span><br><span class="line">    <span class="variable">.valido_n</span>  (top_io<span class="variable">.valido_n</span>),</span><br><span class="line">    <span class="variable">.busy_n</span>    (top_io<span class="variable">.busy_n</span>),</span><br><span class="line">    <span class="variable">.frameo_n</span>  (top_io<span class="variable">.frameo_n</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$timeformat</span>(-<span class="number">9</span>, <span class="number">1</span>, <span class="string">&quot;ns&quot;</span>, <span class="number">10</span>);</span><br><span class="line">    $fsdbDumpvars;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="variable">#(simulation_cycle/2)</span> SystemClock = ~SystemClock;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>compile</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vcs -sverilog -full64 -kdb -debug_access+all router_test_top.sv test.sv router_io</span><br><span class="line">.sv ../../rtl/router.v</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>file with `<code>timescale</code> must be placed in the first, which
+is <code>router_test_top.sv</code> in above example</p>
+</blockquote>
+<h3 id="clocking.output">clocking.output</h3>
+<p><img
+src="/2022/02/07/systemverilog-clocking-block/image-20220621005749074.png"
+alt="image-20220621005749074" /></p>
+<blockquote>
+<p>systemverilog don't pass clocking.output to interface's until current
+or next active edge and after output-skew</p>
+</blockquote>
+<h3 id="clocking.input">clocking.input</h3>
+<p><img
+src="/2022/02/07/systemverilog-clocking-block/image-20220621010546293.png"
+alt="image-20220621010546293" /></p>
+<blockquote>
+<p>Systemverilog <strong>automatically</strong> update clocking.input
+signal from interface's value, input-skew before active edge</p>
+</blockquote>
+<h3 id="gotcha">Gotcha</h3>
+<p>An <code>interface</code> must be compiled separately like a
+<code>module</code> and CANNOT `<code>include</code> inside a
+<code>package</code> or ohter <code>module</code></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>temperature sensor</title>
     <url>/2022/08/11/t-sensor/</url>
     <content><![CDATA[<p>Due to the fact that <em>long-term drift</em> of temperature sensors
@@ -16123,60 +16180,6 @@ Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SystemVerilog clocking block</title>
-    <url>/2022/02/07/systemverilog-clocking-block/</url>
-    <content><![CDATA[<blockquote>
-<p>Assignment at &lt;interface&gt;.&lt;clocking block&gt;.&lt;output
-signal&gt; (i.e. synchronous) do <strong>NOT</strong> change
-&lt;interface&gt;.&lt;output signal&gt; until active clock edge.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// router_io.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> router_io(<span class="keyword">input</span> <span class="keyword">bit</span> clock);</span><br><span class="line">  <span class="keyword">logic</span>    reset_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  din;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frame_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valid_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  dout;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  valido_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  busy_n;</span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>]  frameo_n;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">clocking</span> cb @(<span class="keyword">posedge</span> clock);</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">input</span> #<span class="number">1</span>ns <span class="keyword">output</span> #<span class="number">1</span>ns;</span><br><span class="line">    <span class="keyword">output</span> reset_n;</span><br><span class="line">    <span class="keyword">output</span> din;</span><br><span class="line">    <span class="keyword">output</span> frame_n;</span><br><span class="line">    <span class="keyword">output</span> valid_n;</span><br><span class="line">    <span class="keyword">input</span>  dout;</span><br><span class="line">    <span class="keyword">input</span>  valido_n;</span><br><span class="line">    <span class="keyword">input</span>  frameo_n;</span><br><span class="line">    <span class="keyword">input</span>  busy_n;</span><br><span class="line">  <span class="keyword">endclocking</span>: cb</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// `reset_n` can be either a synchronous or an asynchronous signal</span></span><br><span class="line">  <span class="keyword">modport</span> TB(<span class="keyword">clocking</span> cb, <span class="keyword">output</span> reset_n);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endinterface</span>: router_io</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>All interface signals are asynchronous and without a direction
-spection (i.e. input, output, inout).</p>
-<ul>
-<li>The direction can only be specified in <code>clocking</code> block
-for <strong>synchronous signals</strong></li>
-<li>or a <code>modport</code> for <strong>asynchronous
-signals</strong></li>
-</ul>
-<p>All directions for the signals in the clocking block must be with
-respect to the test program;</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test.sv</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">program</span> <span class="keyword">automatic</span> test(router_io<span class="variable">.TB</span> rtr_io);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    reset();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">task</span> reset();</span><br><span class="line">    rtr_io<span class="variable">.reset_n</span> = <span class="number">1&#x27;b0</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.frame_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.valid_n</span> &lt;= &#x27;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">2</span>) @rtr_io<span class="variable">.cb</span>;</span><br><span class="line">    rtr_io<span class="variable">.cb</span><span class="variable">.reset_n</span> &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">    <span class="keyword">repeat</span>(<span class="number">15</span>) @(rtr_io<span class="variable">.cb</span>);</span><br><span class="line">  <span class="keyword">endtask</span>: reset</span><br><span class="line"></span><br><span class="line"><span class="keyword">endprogram</span>: test</span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// router_test_top.sv</span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/100ps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> router_test_top;</span><br><span class="line">  <span class="keyword">parameter</span> simulation_cycle = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">bit</span> SystemClock = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  router_io top_io(SystemClock);</span><br><span class="line">  test t(top_io);</span><br><span class="line"></span><br><span class="line">  router dut(</span><br><span class="line">    <span class="variable">.reset_n</span>  (top_io<span class="variable">.reset_n</span>),</span><br><span class="line">    <span class="variable">.clock</span>    (top_io<span class="variable">.clock</span>),</span><br><span class="line">    <span class="variable">.din</span>    (top_io<span class="variable">.din</span>),</span><br><span class="line">    <span class="variable">.frame_n</span>  (top_io<span class="variable">.frame_n</span>),</span><br><span class="line">    <span class="variable">.valid_n</span>  (top_io<span class="variable">.valid_n</span>),</span><br><span class="line">    <span class="variable">.dout</span>    (top_io<span class="variable">.dout</span>),</span><br><span class="line">    <span class="variable">.valido_n</span>  (top_io<span class="variable">.valido_n</span>),</span><br><span class="line">    <span class="variable">.busy_n</span>    (top_io<span class="variable">.busy_n</span>),</span><br><span class="line">    <span class="variable">.frameo_n</span>  (top_io<span class="variable">.frameo_n</span>)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$timeformat</span>(-<span class="number">9</span>, <span class="number">1</span>, <span class="string">&quot;ns&quot;</span>, <span class="number">10</span>);</span><br><span class="line">    $fsdbDumpvars;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="variable">#(simulation_cycle/2)</span> SystemClock = ~SystemClock;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>compile</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vcs -sverilog -full64 -kdb -debug_access+all router_test_top.sv test.sv router_io</span><br><span class="line">.sv ../../rtl/router.v</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>file with `<code>timescale</code> must be placed in the first, which
-is <code>router_test_top.sv</code> in above example</p>
-</blockquote>
-<h3 id="clocking.output">clocking.output</h3>
-<p><img
-src="/2022/02/07/systemverilog-clocking-block/image-20220621005749074.png"
-alt="image-20220621005749074" /></p>
-<blockquote>
-<p>systemverilog don't pass clocking.output to interface's until current
-or next active edge and after output-skew</p>
-</blockquote>
-<h3 id="clocking.input">clocking.input</h3>
-<p><img
-src="/2022/02/07/systemverilog-clocking-block/image-20220621010546293.png"
-alt="image-20220621010546293" /></p>
-<blockquote>
-<p>Systemverilog <strong>automatically</strong> update clocking.input
-signal from interface's value, input-skew before active edge</p>
-</blockquote>
-<h3 id="gotcha">Gotcha</h3>
-<p>An <code>interface</code> must be compiled separately like a
-<code>module</code> and CANNOT `<code>include</code> inside a
-<code>package</code> or ohter <code>module</code></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -17958,139 +17961,6 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       </categories>
   </entry>
   <entry>
-    <title>Process Variation</title>
-    <url>/2022/03/02/variation/</url>
-    <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
-<p><img src="/2022/03/02/variation/image-20220302000743092.png"
-alt="image-20220302000743092" /></p>
-<h4 id="globallocal-variation">Global/Local Variation</h4>
-<p><img src="/2022/03/02/variation/image-20220302000808679.png"
-alt="image-20220302000808679" /></p>
-<h4 id="timing-and-rc-modeling-with-process-corners">Timing and RC
-Modeling with Process Corners</h4>
-<p><img src="/2022/03/02/variation/image-20220302000916728.png"
-alt="image-20220302000916728" /></p>
-<h4 id="global-and-local-variation-by-gaussian">Global and Local
-variation by Gaussian</h4>
-<p><img src="/2022/03/02/variation/image-20230111003336823.png"
-alt="image-20230111003336823" /></p>
-<blockquote>
-<p>Local Monte-Carlo (<strong>SSG, FFG with Local Gaussian</strong>) as
-Signoff golden</p>
-</blockquote>
-<p><img src="/2022/03/02/variation/image-20231215234014594.png"
-alt="image-20231215234014594" /></p>
-<h4 id="process-corner-model-limitations">Process Corner Model
-Limitations</h4>
-<p><img src="/2022/03/02/variation/image-20220323232119661.png"
-alt="image-20220323232119661" /></p>
-<p><img src="/2022/03/02/variation/image-20230111003705417.png"
-alt="image-20230111003705417" /></p>
-<p>Variation section</p>
-<ul>
-<li>Total corner (TT/SS/FF/SF/FS)
-<ul>
-<li>E.g. TTMacro_MOS_MOS_MOSCAP</li>
-</ul></li>
-<li>Global Corner (TTG/SSG/FFG/SFG/FSG) + Local MC
-<ul>
-<li>E.g. TTGlobalCorner_LocalMC_MOS_MOSCAP</li>
-</ul></li>
-<li>Local MC
-<ul>
-<li>E.g. LocalMCOnly_MOS_MOSCAP</li>
-</ul></li>
-<li>Global MC + Local MC (Total MC)
-<ul>
-<li>GlobalMC_LocalMC_MOS_MOSCAP</li>
-</ul></li>
-</ul>
-<p><img src="/2022/03/02/variation/image-20230308003005235.png"
-alt="image-20230308003005235" /></p>
-<p><img src="/2022/03/02/variation/image-20230111010426775.png"
-alt="image-20230111010426775" /></p>
-<p><img
-src="/2022/03/02/variation/Screen-Shot-2014-09-11-at-8.47.06-AM.png"
-alt="img" /></p>
-<p><img src="/2022/03/02/variation/image-20230111011757049.png"
-alt="image-20230111011757049" /></p>
-<blockquote>
-<p><strong>SSGNP, FFGNP</strong>:</p>
-<p>When N/P global correlation is weak (R^2=0.15), the corner of N/PMOS
-balance circuit (e.g. inverter) can be tightened (<strong>3sigma -&gt;
-2.5sgma</strong>) due to the <strong>cancellation</strong> between NMOS
-and PMOS</p>
-<p>SSGNP, FFGNP usually used in Digital STA</p>
-</blockquote>
-<blockquote>
-<ul>
-<li><strong>Global variation</strong> validation with <strong>global
-corner</strong>
-<ul>
-<li><strong>3-sigma of global MC</strong> simulation is aligned with
-<strong>global corner</strong></li>
-</ul></li>
-<li><strong>Total variation</strong> validation with <strong>total
-corner</strong>
-<ul>
-<li><strong>3-sigma of global MC + local MC (total)</strong> simulation
-is aligned with <strong>total corner</strong></li>
-</ul></li>
-</ul>
-</blockquote>
-<h4 id="global-corner">Global Corner</h4>
-<blockquote>
-<p><a
-href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101</a></p>
-<p>The <strong>"total corner"</strong> is representative of the maximum
-device parameter variation including local device variation effects.
-However, it is not a statistical corner.</p>
-<p>The <strong>"global" corner</strong> is defined as the
-<strong>"total" corner minus the impact of "local
-variation"</strong></p>
-<p>Hence, if you were to examine simulation results for a parameter
-using a "total" and "global" corner, you would find the range of
-variation will be less with the "global" corner than with the "total"
-corner.</p>
-<p>The "global" corner is provided for use in <strong>statistical
-simulations</strong>. Hence, when performing a Monte-Carlo simulation,
-the "global" corner is selected - NOT the "total" corner.</p>
-</blockquote>
-<p><img src="/2022/03/02/variation/image-20230511234313012.png"
-alt="image-20230511234313012" /></p>
-<p><span class="math display">\[
-\Delta V_{T,\sigma_{total}} = \sqrt{\Delta^2 _{T,
-\sigma_{global}}+\Delta^2 _{T, \sigma_{local}}}
-\]</span></p>
-<h4 id="reference">reference</h4>
-<p>Eric J.-W. Fang, T5: Fundamentals of Process Monitors for
-Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State
-Circuits Conference</p>
-<p>Alvin Loke, Device and Physical Design Considerations for Circuits in
-FinFET Technology, ISSCC 2020 Short Course</p>
-<p>簡報 Cln16ffcll Sr V1d0 2p1 Usage Guide URL: <a
-href="https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view">https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view</a></p>
-<p>Radojcic, Riko, Dan Perry and Mark Nakamoto. “Design for
-manufacturability for fabless manufactuers.” <em>IEEE Solid-State
-Circuits Magazine</em> 1 (2009): n. pag.</p>
-<p>How To Reduce Implementation Headaches In FinFET Processes URL: <a
-href="https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/">https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/</a></p>
-<p>陌上风骑驴看IC, STA | SSGNP, FFGNP. <a
-href="https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg">https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg</a></p>
-<p>陌上风骑驴看IC, STA | ssg 跟ss corner 的区别——谬误更正版 <a
-href="https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd">https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd</a></p>
-<p>The Evolution, Pitfalls, and Cargo Cult Engineering of Advanced
-Digital Timing Sign-off <a
-href="https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf">https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf</a></p>
-<p>Don O'Riordan Cadence Design Systems. Recommended Spectre Monte Carlo
-modeling methodology [<a
-href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-guide.org/modeling/montecarlo.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>UVM REG RALF &amp; IP-XACT</title>
     <url>/2022/03/14/uvm-reg-ralf/</url>
     <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
@@ -18248,6 +18118,139 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Process Variation</title>
+    <url>/2022/03/02/variation/</url>
+    <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
+<p><img src="/2022/03/02/variation/image-20220302000743092.png"
+alt="image-20220302000743092" /></p>
+<h4 id="globallocal-variation">Global/Local Variation</h4>
+<p><img src="/2022/03/02/variation/image-20220302000808679.png"
+alt="image-20220302000808679" /></p>
+<h4 id="timing-and-rc-modeling-with-process-corners">Timing and RC
+Modeling with Process Corners</h4>
+<p><img src="/2022/03/02/variation/image-20220302000916728.png"
+alt="image-20220302000916728" /></p>
+<h4 id="global-and-local-variation-by-gaussian">Global and Local
+variation by Gaussian</h4>
+<p><img src="/2022/03/02/variation/image-20230111003336823.png"
+alt="image-20230111003336823" /></p>
+<blockquote>
+<p>Local Monte-Carlo (<strong>SSG, FFG with Local Gaussian</strong>) as
+Signoff golden</p>
+</blockquote>
+<p><img src="/2022/03/02/variation/image-20231215234014594.png"
+alt="image-20231215234014594" /></p>
+<h4 id="process-corner-model-limitations">Process Corner Model
+Limitations</h4>
+<p><img src="/2022/03/02/variation/image-20220323232119661.png"
+alt="image-20220323232119661" /></p>
+<p><img src="/2022/03/02/variation/image-20230111003705417.png"
+alt="image-20230111003705417" /></p>
+<p>Variation section</p>
+<ul>
+<li>Total corner (TT/SS/FF/SF/FS)
+<ul>
+<li>E.g. TTMacro_MOS_MOS_MOSCAP</li>
+</ul></li>
+<li>Global Corner (TTG/SSG/FFG/SFG/FSG) + Local MC
+<ul>
+<li>E.g. TTGlobalCorner_LocalMC_MOS_MOSCAP</li>
+</ul></li>
+<li>Local MC
+<ul>
+<li>E.g. LocalMCOnly_MOS_MOSCAP</li>
+</ul></li>
+<li>Global MC + Local MC (Total MC)
+<ul>
+<li>GlobalMC_LocalMC_MOS_MOSCAP</li>
+</ul></li>
+</ul>
+<p><img src="/2022/03/02/variation/image-20230308003005235.png"
+alt="image-20230308003005235" /></p>
+<p><img src="/2022/03/02/variation/image-20230111010426775.png"
+alt="image-20230111010426775" /></p>
+<p><img
+src="/2022/03/02/variation/Screen-Shot-2014-09-11-at-8.47.06-AM.png"
+alt="img" /></p>
+<p><img src="/2022/03/02/variation/image-20230111011757049.png"
+alt="image-20230111011757049" /></p>
+<blockquote>
+<p><strong>SSGNP, FFGNP</strong>:</p>
+<p>When N/P global correlation is weak (R^2=0.15), the corner of N/PMOS
+balance circuit (e.g. inverter) can be tightened (<strong>3sigma -&gt;
+2.5sgma</strong>) due to the <strong>cancellation</strong> between NMOS
+and PMOS</p>
+<p>SSGNP, FFGNP usually used in Digital STA</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Global variation</strong> validation with <strong>global
+corner</strong>
+<ul>
+<li><strong>3-sigma of global MC</strong> simulation is aligned with
+<strong>global corner</strong></li>
+</ul></li>
+<li><strong>Total variation</strong> validation with <strong>total
+corner</strong>
+<ul>
+<li><strong>3-sigma of global MC + local MC (total)</strong> simulation
+is aligned with <strong>total corner</strong></li>
+</ul></li>
+</ul>
+</blockquote>
+<h4 id="global-corner">Global Corner</h4>
+<blockquote>
+<p><a
+href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101</a></p>
+<p>The <strong>"total corner"</strong> is representative of the maximum
+device parameter variation including local device variation effects.
+However, it is not a statistical corner.</p>
+<p>The <strong>"global" corner</strong> is defined as the
+<strong>"total" corner minus the impact of "local
+variation"</strong></p>
+<p>Hence, if you were to examine simulation results for a parameter
+using a "total" and "global" corner, you would find the range of
+variation will be less with the "global" corner than with the "total"
+corner.</p>
+<p>The "global" corner is provided for use in <strong>statistical
+simulations</strong>. Hence, when performing a Monte-Carlo simulation,
+the "global" corner is selected - NOT the "total" corner.</p>
+</blockquote>
+<p><img src="/2022/03/02/variation/image-20230511234313012.png"
+alt="image-20230511234313012" /></p>
+<p><span class="math display">\[
+\Delta V_{T,\sigma_{total}} = \sqrt{\Delta^2 _{T,
+\sigma_{global}}+\Delta^2 _{T, \sigma_{local}}}
+\]</span></p>
+<h4 id="reference">reference</h4>
+<p>Eric J.-W. Fang, T5: Fundamentals of Process Monitors for
+Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State
+Circuits Conference</p>
+<p>Alvin Loke, Device and Physical Design Considerations for Circuits in
+FinFET Technology, ISSCC 2020 Short Course</p>
+<p>簡報 Cln16ffcll Sr V1d0 2p1 Usage Guide URL: <a
+href="https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view">https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view</a></p>
+<p>Radojcic, Riko, Dan Perry and Mark Nakamoto. “Design for
+manufacturability for fabless manufactuers.” <em>IEEE Solid-State
+Circuits Magazine</em> 1 (2009): n. pag.</p>
+<p>How To Reduce Implementation Headaches In FinFET Processes URL: <a
+href="https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/">https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/</a></p>
+<p>陌上风骑驴看IC, STA | SSGNP, FFGNP. <a
+href="https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg">https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg</a></p>
+<p>陌上风骑驴看IC, STA | ssg 跟ss corner 的区别——谬误更正版 <a
+href="https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd">https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd</a></p>
+<p>The Evolution, Pitfalls, and Cargo Cult Engineering of Advanced
+Digital Timing Sign-off <a
+href="https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf">https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf</a></p>
+<p>Don O'Riordan Cadence Design Systems. Recommended Spectre Monte Carlo
+modeling methodology [<a
+href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-guide.org/modeling/montecarlo.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -18536,22 +18539,6 @@ Memory in Verilog</a></p>
       </categories>
   </entry>
   <entry>
-    <title>compile vim from source with GUI support</title>
-    <url>/2022/02/02/vim-compile/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<h2 id="binkey">binkey</h2>
-<p>Inserting a new line below: <code>o</code></p>
-<p>above: <code>O</code></p>
-<p>To insert before the cursor: <code>i</code></p>
-<p>After: <code>a</code></p>
-<p>Before the line (home): <code>I</code></p>
-<p>Append at the end of line: <code>A</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Custom Bindkey of Cadence Virtuoso</title>
     <url>/2022/04/13/virtuoso-bindkey/</url>
     <content><![CDATA[<h2 id="schbindkeys.il">schBindKeys.il</h2>
@@ -18571,6 +18558,22 @@ Memory in Verilog</a></p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>compile vim from source with GUI support</title>
+    <url>/2022/02/02/vim-compile/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="binkey">binkey</h2>
+<p>Inserting a new line below: <code>o</code></p>
+<p>above: <code>O</code></p>
+<p>To insert before the cursor: <code>i</code></p>
+<p>After: <code>a</code></p>
+<p>Before the line (home): <code>I</code></p>
+<p>Append at the end of line: <code>A</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
   </entry>
   <entry>
     <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
@@ -18790,15 +18793,6 @@ Data Communications</p>
       </categories>
   </entry>
   <entry>
-    <title>Build VMware host modules</title>
-    <url>/2024/01/30/vmware-module/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Design Variable in analogLib-vpwlf</title>
     <url>/2022/05/14/vpwlf-designvar/</url>
     <content><![CDATA[<p><code>PWL File as Design Var?</code> parameter in <em>vpwlf</em> cell
@@ -18817,6 +18811,15 @@ alt="image-20220514121150988" /></p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Build VMware host modules</title>
+    <url>/2024/01/30/vmware-module/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
   </entry>
   <entry>
     <title>The z-Transform and Its Application</title>

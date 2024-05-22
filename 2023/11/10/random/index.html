@@ -26,7 +26,7 @@
 <meta property="og:description" content="Mean Function The mean function \(\mu_X(t)\) of a random process \(\{ X(t) \}\) is a function that specifies the expected value at each time \(t\) \[ \mu_X(t) \overset{\text{def}}{&#x3D;} E[X(t)] \tag{1.1">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-10T13:26:31.000Z">
-<meta property="article:modified_time" content="2024-05-22T03:13:01.286Z">
+<meta property="article:modified_time" content="2024-05-22T05:59:38.260Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 
@@ -234,7 +234,7 @@ Signals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 03:13:01" itemprop="dateModified" datetime="2024-05-22T03:13:01+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-22 05:59:38" itemprop="dateModified" datetime="2024-05-22T05:59:38+00:00">2024-05-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -388,6 +388,29 @@ bins!</p>
 <p>The <strong>noise floor</strong> depends on the <em>length of the
 FFT</em></p>
 </blockquote>
+<p>[<a
+target="_blank" rel="noopener" href="http://individual.utoronto.ca/schreier/lectures/2015/1.pdf">http://individual.utoronto.ca/schreier/lectures/2015/1.pdf</a>]</p>
+<p>signal tone power <span class="math display">\[
+P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
+\]</span></p>
+<p>noise power <span class="math display">\[
+P_n = \frac{X_{w,n}^2}{S_2}
+\]</span></p>
+<p>Then, displayed <strong>SNR</strong> is obtained <span
+class="math display">\[\begin{align}
+\mathrm{SNR} &amp;= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right)
+\\
+&amp;= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) +
+10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
+&amp;= \mathrm{SNR}&#39;-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
+&amp;= \mathrm{SNR}&#39;-10\log_{10}\left(\frac{2\mathrm{NBW}}\right) \\
+\end{align}\]</span></p>
+<blockquote>
+<p><em>DFT's output</em> <span
+class="math inline">\(\mathrm{SNR}\)</span></p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> N=[<span class="number">2</span>^<span class="number">6</span> <span class="number">2</span>^<span class="number">8</span> <span class="number">2</span>^<span class="number">10</span> <span class="number">2</span>^<span class="number">12</span>]</span><br><span class="line">  wd = rectwin(N);</span><br><span class="line">  nbw = enbw(wd)/N;</span><br><span class="line">  snr_shift = <span class="number">10</span>*<span class="built_in">log10</span>(nbw * <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">disp</span>(snr_shift);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>output: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-15.0515</span><br><span class="line"></span><br><span class="line">-21.0721</span><br><span class="line"></span><br><span class="line">-27.0927</span><br><span class="line"></span><br><span class="line">-33.1133</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>The solution to the scaling problem in the case of a PSD obtained
 from a sine-wave scaled FFT is similarly simple. All we need do is

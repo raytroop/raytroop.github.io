@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,136 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/09/latch-inference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/09/latch-inference/" class="post-title-link" itemprop="url">Latch Inference in Verilog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-09 16:33:03" itemprop="dateCreated datePublished" datetime="2022-05-09T16:33:03+00:00">2022-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="always"><code>always@( * )</code></h2>
+<p><code>always@( * )</code> blocks are used to describe Combinational
+Logic, or Logic Gates. Only <code>=</code> (blocking) assignments should
+be used in an <code>always@( * )</code> block.</p>
+<h2 id="latch-inference">Latch Inference</h2>
+<p>If you <strong>DON'T</strong> assign every element that can be
+assigned inside an <code>always@( * )</code> block every time that
+<code>always@( * )</code> block is executed, a latch will be inferred
+for that element</p>
+<p>The approaches to avoid latch generation:</p>
+<ul>
+<li>set default values</li>
+<li>proper use of the <code>else</code> statement, and other flow
+constructs</li>
+</ul>
+<h3 id="without-default-values">without default values</h3>
+<blockquote>
+<p>latch is generated</p>
+</blockquote>
+<h4 id="rtl">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509170640006.png"
+alt="image-20220509170640006" /></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:09:18 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lanhq1 C_reg ( <span class="variable">.E</span>(Trigger), <span class="variable">.D</span>(Pass), <span class="variable">.Q</span>(C) );</span><br><span class="line">  an02d0 U3 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3 id="add-default-value">add default value</h3>
+<blockquote>
+<p>Default values are an easy way to avoid latch generation</p>
+</blockquote>
+<h4 id="rtl-1">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">        	C = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist-1">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509171319204.png"
+alt="image-20220509171319204" /></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:12:47 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  nd12d0 U5 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.ZN</span>(C) );</span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="if-evaluation"><code>if</code> evaluation</h2>
+<p><code>signed</code> number cast to <code>unsigned</code>
+automatically before evaluating</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb; </span><br><span class="line">  <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] datasg;</span><br><span class="line">  <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] dataug;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    datasg = <span class="number">2&#x27;b11</span>;</span><br><span class="line">    dataug = <span class="number">2&#x27;b11</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;datasg(%%d): %d&quot;</span>, datasg);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;dataug(%%d): %d&quot;</span>, dataug);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (datasg)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;datasg is OK&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (dataug)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;dataug is OK&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$finish</span>();</span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ vlog tb.v</span><br><span class="line">$ vsim -c -do &quot;run;exit&quot; work.tb</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># datasg(%d): -1</span><br><span class="line"># dataug(%d): 3</span><br><span class="line"># datasg is OK</span><br><span class="line"># dataug is OK</span><br><span class="line"># ** Note: $finish    : tb.v(16)</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>UC Berkeley CS150 Lec #20: Finite State Machines <a
+target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf">Slides</a></p>
+<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
+by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
+doi:10.1007/978-3-030-03238-8</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +356,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -342,7 +472,7 @@ target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,7 +645,7 @@ target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/le
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -845,7 +975,7 @@ Processing</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -978,7 +1108,7 @@ alt="image-20220507122217830" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1320,7 +1450,7 @@ target="_blank" rel="noopener" href="http://cdn.teledynelecroy.com/files/whitepa
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1411,7 +1541,7 @@ running kernel:</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1835,7 +1965,7 @@ V. Oppenheim, 3rd edition.” (2011).</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2346,7 +2476,7 @@ Press. doi:10.1017/CBO9780511835261</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
+      <time title="Modified: 2024-05-23 05:35:17" itemprop="dateModified" datetime="2024-05-23T05:35:17+00:00">2024-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2700,191 +2830,6 @@ alt="image-20220618131626913" /></p>
 alt="image-20220618131649065" /></p>
 <p>only <strong>c</strong> dspf give the <strong>lumped
 capacitance</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/13/VD-DRC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/13/VD-DRC/" class="post-title-link" itemprop="url">voltage-dependent DRC checks</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-13 23:16:07" itemprop="dateCreated datePublished" datetime="2022-04-13T23:16:07+00:00">2022-04-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-22 13:50:59" itemprop="dateModified" datetime="2024-05-22T13:50:59+00:00">2024-05-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>In T* DRC deck, it is based on the voltage recognition CAD layer and
-net connection to calculate the voltage difference between two
-neighboring nets by the following formula:</p>
-<p><span class="math display">\[
-\Delta V = \max(V_H(\text{net1})-V_L(\text{net2}),
-V_H(\text{net2})-V_L(\text{net1}))
-\]</span></p>
-<p>where <span class="math display">\[
-V_H(\text{netx}) = \max(V(\text{netx}))
-\]</span> and <span class="math display">\[
-V_L(\text{netx}) = \min(V(\text{netx}))
-\]</span></p>
-<blockquote>
-<ul>
-<li>The <span class="math inline">\(\Delta V\)</span> will be
-<strong>0</strong> if two nets are connected as same potential</li>
-<li>If <span class="math inline">\(V_L \gt V_H\)</span> <strong>on a
-net</strong>, DRC will report warning on this net</li>
-</ul>
-</blockquote>
-<h2 id="voltage-recognition-cad-layer">Voltage recognition CAD
-Layer</h2>
-<p>Two method</p>
-<ol type="1">
-<li><p>voltage text layer</p>
-<p>You place specific voltage text on specific drawing layer</p></li>
-<li><p>voltage marker layer</p>
-<p>Each voltage marker layer represent different voltage for specific
-drawing layer</p></li>
-</ol>
-<blockquote>
-<p><em>voltage text layer</em> has higher priority than <em>voltage
-marker layer</em> and is recommended</p>
-</blockquote>
-<h3 id="voltage-text-layer">voltage text layer</h3>
-<p>For example <strong>M3</strong></p>
-<table>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 8%" />
-<col style="width: 9%" />
-<col style="width: 32%" />
-<col style="width: 8%" />
-<col style="width: 31%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Process Layer</th>
-<th>CAD Layer#</th>
-<th>Voltage High</th>
-<th>Voltage High Top<br />(highest priority)</th>
-<th>Voltage Low</th>
-<th>Voltage Low Top<br />(highest priority)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M3</td>
-<td>63</td>
-<td>110</td>
-<td>112</td>
-<td>111</td>
-<td>113</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>where <strong>63</strong> is <strong>layer number</strong>,
-<strong>110 ~ 113</strong> is <strong>datatype</strong></p>
-</blockquote>
-<h3 id="voltage-marker-layer">voltage marker layer</h3>
-<p>Different data type represent different voltage, like</p>
-<table>
-<thead>
-<tr class="header">
-<th>DataType</th>
-<th>100</th>
-<th>101</th>
-<th>102</th>
-<th>...</th>
-<th>109</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Voltage</td>
-<td>0.0</td>
-<td>0.1</td>
-<td>0.2</td>
-<td>0.3</td>
-<td>0.9</td>
-</tr>
-</tbody>
-</table>
-<h2 id="example">Example</h2>
-<p><img src="/2022/04/13/VD-DRC/image-20220503171006936.png"
-alt="image-20220503171006936" /></p>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://blogs.sw.siemens.com/calibre/2015/08/18/automate-those-voltage-dependent-drc-checks/">Automate
-those voltage-dependent DRC checks! - siemens</a></p>
 
       
     </div>

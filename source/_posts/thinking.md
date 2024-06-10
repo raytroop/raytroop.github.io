@@ -22,6 +22,8 @@ Sun Jun  2 11:34:09 PM CST 2024
 Sun Jun  9 06:51:28 PM CST 2024
 释怀了
 
+Mon Jun 10 09:51:58 PM CST 2024
+不要太绷着，做自己
 
 ```
 
@@ -337,7 +339,7 @@ Sun Jun  9 06:51:28 PM CST 2024
 
 
 ```
-"We have to dare to be ourselves, however frightening or strange that self may prove to be."
+We have to dare to be ourselves, however frightening or strange that self may prove to be. 
 
 ― May Sarton
 ```

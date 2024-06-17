@@ -326,32 +326,6 @@ variant, the it is defined as a subsequence and its
       </categories>
   </entry>
   <entry>
-    <title>Global Handles in UVM</title>
-    <url>/2022/02/23/Global-Handles-UVM/</url>
-    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Global handles uvm_top and factory in uvm_pkg have been removed in
-UVM-1.2 and later</p>
-</blockquote>
-<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
-UVM-1.2</h4>
-<p>Call the <strong>get() method of the class</strong> to retrieve the
-singleton handle.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
-accessing all the central UVM services such as
-<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
-<strong>uvm_report_server</strong>, etc.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Custom Design with FinFETs</title>
     <url>/2022/12/10/FinFET-Considerations/</url>
     <content><![CDATA[<h2 id="design-considerations">Design Considerations</h2>
@@ -532,6 +506,32 @@ href="https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/H
       </categories>
   </entry>
   <entry>
+    <title>Global Handles in UVM</title>
+    <url>/2022/02/23/Global-Handles-UVM/</url>
+    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Global handles uvm_top and factory in uvm_pkg have been removed in
+UVM-1.2 and later</p>
+</blockquote>
+<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
+UVM-1.2</h4>
+<p>Call the <strong>get() method of the class</strong> to retrieve the
+singleton handle.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
+accessing all the central UVM services such as
+<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
+<strong>uvm_report_server</strong>, etc.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>INL, DNL analysis of current steering DAC</title>
     <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
     <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
@@ -609,18 +609,18 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Analysis Command</title>
-    <url>/2022/02/07/Innovus-analysis-command/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
+    <title>Innovus/Tempus Nonfunctional ECO</title>
+    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus/Tempus Nonfunctional ECO</title>
-    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Analysis Command</title>
+    <url>/2022/02/07/Innovus-analysis-command/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1857,6 +1857,18 @@ repo</a>]</p>
       </categories>
   </entry>
   <entry>
+    <title>VMware Disk Shrink</title>
+    <url>/2022/12/16/VMwareDiskShrink/</url>
+    <content><![CDATA[<p>In Guest OS and run</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>voltage-dependent DRC checks</title>
     <url>/2022/04/13/VD-DRC/</url>
     <content><![CDATA[<p>In T* DRC deck, it is based on the voltage recognition CAD layer and
@@ -1963,18 +1975,6 @@ those voltage-dependent DRC checks! - siemens</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>VMware Disk Shrink</title>
-    <url>/2022/12/16/VMwareDiskShrink/</url>
-    <content><![CDATA[<p>In Guest OS and run</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -2578,41 +2578,6 @@ href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">
       </categories>
   </entry>
   <entry>
-    <title>Calibre Runsets</title>
-    <url>/2023/08/10/calibreRunsets/</url>
-    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
-runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
-<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
-respectively.</p>
-<p>When invoked, the Calibre DRC and LVS windows automatically load the
-runset used when the last session was closed.</p>
-<blockquote>
-<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
-run. They contain only information that differs from the default
-configuration of Calibre Interactive. There is a one-to-one
-correspondence between entry lines in the runset file and fields and
-button items in the Calibre Interactive user interface. Here is as
-example of a DRC runset:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
-</blockquote>
-<hr />
-<p>The runset filename opened at startup (if no runset is specified on
-the command line) can also be specified by setting the
-<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
-and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
-for LVS. If these environment variables are set, they take precedence
-over all other runset opening behavior options.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>tsmc_template. <a
-href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
-<p>Calibre Verification User’s Manual</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>How to obtain channel bandwidth from pulse response</title>
     <url>/2022/05/20/bw-from-pulse-resp/</url>
     <content><![CDATA[<p>Convolution Property of the Fourier Transform <span
@@ -2654,6 +2619,41 @@ FFT</a></p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Calibre Runsets</title>
+    <url>/2023/08/10/calibreRunsets/</url>
+    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
+runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
+<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
+respectively.</p>
+<p>When invoked, the Calibre DRC and LVS windows automatically load the
+runset used when the last session was closed.</p>
+<blockquote>
+<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
+run. They contain only information that differs from the default
+configuration of Calibre Interactive. There is a one-to-one
+correspondence between entry lines in the runset file and fields and
+button items in the Calibre Interactive user interface. Here is as
+example of a DRC runset:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr />
+<p>The runset filename opened at startup (if no runset is specified on
+the command line) can also be specified by setting the
+<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
+and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
+for LVS. If these environment variables are set, they take precedence
+over all other runset opening behavior options.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>tsmc_template. <a
+href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
+<p>Calibre Verification User’s Manual</p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -3064,6 +3064,15 @@ virtual clock is propagated.</p>
       </categories>
   </entry>
   <entry>
+    <title>Complete Response used in single-pole filter model in systemverilog</title>
+    <url>/2022/02/13/completeResponse/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>complex uvm project topology</title>
     <url>/2022/03/28/complex-uvm-topo/</url>
     <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
@@ -3089,15 +3098,6 @@ alt="topo.drawio" /></p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Complete Response used in single-pole filter model in systemverilog</title>
-    <url>/2022/02/13/completeResponse/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -4357,18 +4357,6 @@ during synthesis</p>
       </categories>
   </entry>
   <entry>
-    <title>Script to remove .cdslck files</title>
-    <url>/2022/02/02/dot-cdslck-clear/</url>
-    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh</span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt</span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence"
-class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>different DSPF files for each corner</title>
     <url>/2023/01/29/dspf-in-corner/</url>
     <content><![CDATA[<p>Create a new file with an extension <strong>scs</strong> like
@@ -4378,6 +4366,18 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
 ‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
 <p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
 alt="image-20230129223248655" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Script to remove .cdslck files</title>
+    <url>/2022/02/02/dot-cdslck-clear/</url>
+    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh</span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt</span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence"
+class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence</a></p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -6255,6 +6255,154 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
       </categories>
   </entry>
   <entry>
+    <title>Add endcap and tapcell in Innovus</title>
+    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
+    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
+following code to add endcap and tapcell.</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
+alt="endcap_tapcell_floorplan.drawio" /></p>
+<p><strong>REF:</strong> <a
+href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Dual Diode and ggNMOS</title>
+    <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
+    <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
+alt="image-20230517233753530" /></p>
+<blockquote>
+<p><em>HIA</em> = High Amp</p>
+<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
+diode</p>
+<p>HIA diode process is same with regular junction diode</p>
+</blockquote>
+<h2 id="strap">STRAP</h2>
+<p>A "strap" refers to a low-impedance connection</p>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518001007350.png"
+alt="image-20230518001007350" /></p>
+<p>NWDMY = NWDMY1, NWDMY2</p>
+<p>STRAP = NWSTRAP or PWSTRAP</p>
+<p>NWSTRAP = {NP &amp; OD} &amp; {NW not {NW INTERACT NWDMY}}</p>
+<p>PWSTRAP = {PP &amp; OD} not NW</p>
+<table>
+<thead>
+<tr class="header">
+<th>cell  pin</th>
+<th>PLUS</th>
+<th>MINUS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>N diode</strong></td>
+<td>PWSTRAP</td>
+<td>\</td>
+</tr>
+<tr class="even">
+<td><strong>P diode</strong></td>
+<td>\</td>
+<td>NWSTRAP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="calibre-rulenot">Calibre Rule::NOT</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518005758993.png"
+alt="image-20230518005758993" /></p>
+<h3 id="calibre-ruleinteract">Calibre Rule::INTERACT</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010124496.png"
+alt="image-20230518010124496" /></p>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010758342.png"
+alt="image-20230518010758342" /></p>
+<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
+alt="image-20230518012456390" /></p>
+<blockquote>
+<p>PS: I/O to GND positively</p>
+<p>NS: I/O to GND negatively</p>
+<p>PD: I/O to VDD positively</p>
+<p>ND: I/O to VDD negatively</p>
+</blockquote>
+<p>Dual diode should be used with <strong>power clamp</strong> for
+<strong>PS</strong> and <strong>ND</strong> path</p>
+<h3 id="pmos-power-clamp">PMOS power clamp</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
+alt="power_clamp_pmos.drawio" /></p>
+<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
+alt="image-20220623231619052" /></p>
+<blockquote>
+<p>The drain (D) is connected to an I/O pad and the gate (G) is
+grounded.</p>
+<p>To ensure “zero” leakage of the ESD protection structure under normal
+operations.</p>
+<p>To to protect gate of core device, tie-high and tie-low shall be used
+when used as secondary ESD protecton.</p>
+</blockquote>
+<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
+pad</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
+alt="image-20220623233019912" /></p>
+<ol type="1">
+<li><strong>DB</strong> junction is reverse-biased all the way to its
+breakdown.</li>
+<li>Avalance multiplication takes place and generates electron-hole
+pairs</li>
+<li>Hole current flows into the ground via the *B-region** and build up
+a potential, VR, across the lateral parasitic resistance R</li>
+<li>As VR increases, the <strong>BS</strong> junction turns on,
+eventually triggers the parasitic lateral NPN transistor Q
+(<strong>DBS</strong>)</li>
+</ol>
+<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
+pad</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
+alt="image-20220623233634452" /></p>
+<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
+the transient</p>
+<blockquote>
+<p>ggNMOS is commonly used in the GPIO provided by foundry, which
+alleviate the ESD design burden of customer.</p>
+<p>These GPIO is self-protective thanks to the ggNMOS.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
+circuits: an IC design perspective. Boston, Mass: Kluwer Academic
+Publishers.</p>
+<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
+Stine, J. (2001). On-chip ESD protection design for integrated circuits:
+An overview for IC designers. Microelectronics Journal. 32. 733-747.
+10.1016/S0026-2692(01)00060-X.</p>
+<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
+Protection Design for Ics.” (2001).</p>
+<p>Introduction: ESD protection concepts for I/Os. URL: <a
+href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
+<p>Answer: What does "strap" mean in this context? <a
+href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
+<p>Hammer VLSI Flow URL: <a
+href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
+<p>Calibre Rule Writing 2009</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Effective Noise BandWidth and Noise Floor</title>
     <url>/2023/05/29/enbw-nl/</url>
     <content><![CDATA[<h2 id="ps-and-psd">PS and PSD</h2>
@@ -6558,154 +6706,6 @@ Converters, Second Edition" ISBN 978-1-119-25827-8</p>
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Add endcap and tapcell in Innovus</title>
-    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
-    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
-following code to add endcap and tapcell.</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
-alt="endcap_tapcell_floorplan.drawio" /></p>
-<p><strong>REF:</strong> <a
-href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Dual Diode and ggNMOS</title>
-    <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
-    <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
-alt="image-20230517233753530" /></p>
-<blockquote>
-<p><em>HIA</em> = High Amp</p>
-<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
-diode</p>
-<p>HIA diode process is same with regular junction diode</p>
-</blockquote>
-<h2 id="strap">STRAP</h2>
-<p>A "strap" refers to a low-impedance connection</p>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518001007350.png"
-alt="image-20230518001007350" /></p>
-<p>NWDMY = NWDMY1, NWDMY2</p>
-<p>STRAP = NWSTRAP or PWSTRAP</p>
-<p>NWSTRAP = {NP &amp; OD} &amp; {NW not {NW INTERACT NWDMY}}</p>
-<p>PWSTRAP = {PP &amp; OD} not NW</p>
-<table>
-<thead>
-<tr class="header">
-<th>cell  pin</th>
-<th>PLUS</th>
-<th>MINUS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>N diode</strong></td>
-<td>PWSTRAP</td>
-<td>\</td>
-</tr>
-<tr class="even">
-<td><strong>P diode</strong></td>
-<td>\</td>
-<td>NWSTRAP</td>
-</tr>
-</tbody>
-</table>
-<h3 id="calibre-rulenot">Calibre Rule::NOT</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518005758993.png"
-alt="image-20230518005758993" /></p>
-<h3 id="calibre-ruleinteract">Calibre Rule::INTERACT</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010124496.png"
-alt="image-20230518010124496" /></p>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518010758342.png"
-alt="image-20230518010758342" /></p>
-<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
-alt="image-20230518012456390" /></p>
-<blockquote>
-<p>PS: I/O to GND positively</p>
-<p>NS: I/O to GND negatively</p>
-<p>PD: I/O to VDD positively</p>
-<p>ND: I/O to VDD negatively</p>
-</blockquote>
-<p>Dual diode should be used with <strong>power clamp</strong> for
-<strong>PS</strong> and <strong>ND</strong> path</p>
-<h3 id="pmos-power-clamp">PMOS power clamp</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
-alt="power_clamp_pmos.drawio" /></p>
-<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
-alt="image-20220623231619052" /></p>
-<blockquote>
-<p>The drain (D) is connected to an I/O pad and the gate (G) is
-grounded.</p>
-<p>To ensure “zero” leakage of the ESD protection structure under normal
-operations.</p>
-<p>To to protect gate of core device, tie-high and tie-low shall be used
-when used as secondary ESD protecton.</p>
-</blockquote>
-<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
-alt="image-20220623233019912" /></p>
-<ol type="1">
-<li><strong>DB</strong> junction is reverse-biased all the way to its
-breakdown.</li>
-<li>Avalance multiplication takes place and generates electron-hole
-pairs</li>
-<li>Hole current flows into the ground via the *B-region** and build up
-a potential, VR, across the lateral parasitic resistance R</li>
-<li>As VR increases, the <strong>BS</strong> junction turns on,
-eventually triggers the parasitic lateral NPN transistor Q
-(<strong>DBS</strong>)</li>
-</ol>
-<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
-alt="image-20220623233634452" /></p>
-<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
-the transient</p>
-<blockquote>
-<p>ggNMOS is commonly used in the GPIO provided by foundry, which
-alleviate the ESD design burden of customer.</p>
-<p>These GPIO is self-protective thanks to the ggNMOS.</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
-circuits: an IC design perspective. Boston, Mass: Kluwer Academic
-Publishers.</p>
-<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
-Stine, J. (2001). On-chip ESD protection design for integrated circuits:
-An overview for IC designers. Microelectronics Journal. 32. 733-747.
-10.1016/S0026-2692(01)00060-X.</p>
-<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
-Protection Design for Ics.” (2001).</p>
-<p>Introduction: ESD protection concepts for I/Os. URL: <a
-href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
-<p>Answer: What does "strap" mean in this context? <a
-href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
-<p>Hammer VLSI Flow URL: <a
-href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
-<p>Calibre Rule Writing 2009</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -9625,6 +9625,39 @@ doi:10.1007/978-3-030-03238-8</p>
       </categories>
   </entry>
   <entry>
+    <title>Layout Tricks Part 2 - matching</title>
+    <url>/2022/11/19/layout-tricks-part2/</url>
+    <content><![CDATA[<ol type="1">
+<li><p>Common Centroid</p>
+<p>The common centroid technique describes that if there are n blocks
+which are to be matched then the blocks are arranged symmetrically
+around the common centre at equal distances from the centre. This
+technique offers best matching for devices as it helps in avoiding
+cross-chip gradients</p>
+<p><img src="/2022/11/19/layout-tricks-part2/figure13.jpeg"
+alt="HTML5 Icon" /></p></li>
+<li><p>Inter-digitation</p>
+<p>Interdigitation reduces the device mismatch as it suffers equally
+from process variations in X dimension. This technique was used to
+layout current mirrors and resistors in PTAT and BGR circuits. In the
+Figure-15 below each brown stick represents a PFET of uniform length.
+This representation is termed as an inter-digitated layout.</p>
+<p><img src="/2022/11/19/layout-tricks-part2/figure14.jpeg"
+alt="HTML5 Icon" /></p></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Mikael Sahrling, Layout Techniques for Integrated Circuit Designers
+1st Edition , Artech House 2022</p>
+<p>LAYOUT, <a
+href="http://www.ee.columbia.edu/~kinget/EE6350_S16/">EE6350 VLSI Design
+Lab</a> SMART TEMPERATURE SENSOR URL: <a
+href="https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html">https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Layout Tricks Part 1 - compact, drain and source sharing</title>
     <url>/2022/02/19/layout-tricks-part1/</url>
     <content><![CDATA[<p>All credits to my colleague, Zhang Wenpian.</p>
@@ -9668,104 +9701,6 @@ CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference
 (CICC), 2018, pp. 1-8, doi: 10.1109/CICC.2018.8357060.</p>
 <p>Stacked MOSFETs in analog layout <a
 href="https://pulsic.com/stacked-mosfets-in-analog-layout/">https://pulsic.com/stacked-mosfets-in-analog-layout/</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Layout Tricks Part 2 - matching</title>
-    <url>/2022/11/19/layout-tricks-part2/</url>
-    <content><![CDATA[<ol type="1">
-<li><p>Common Centroid</p>
-<p>The common centroid technique describes that if there are n blocks
-which are to be matched then the blocks are arranged symmetrically
-around the common centre at equal distances from the centre. This
-technique offers best matching for devices as it helps in avoiding
-cross-chip gradients</p>
-<p><img src="/2022/11/19/layout-tricks-part2/figure13.jpeg"
-alt="HTML5 Icon" /></p></li>
-<li><p>Inter-digitation</p>
-<p>Interdigitation reduces the device mismatch as it suffers equally
-from process variations in X dimension. This technique was used to
-layout current mirrors and resistors in PTAT and BGR circuits. In the
-Figure-15 below each brown stick represents a PFET of uniform length.
-This representation is termed as an inter-digitated layout.</p>
-<p><img src="/2022/11/19/layout-tricks-part2/figure14.jpeg"
-alt="HTML5 Icon" /></p></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Mikael Sahrling, Layout Techniques for Integrated Circuit Designers
-1st Edition , Artech House 2022</p>
-<p>LAYOUT, <a
-href="http://www.ee.columbia.edu/~kinget/EE6350_S16/">EE6350 VLSI Design
-Lab</a> SMART TEMPERATURE SENSOR URL: <a
-href="https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html">https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Low-Dropout Regulator</title>
-    <url>/2023/10/21/ldo/</url>
-    <content><![CDATA[<p><em>TODO</em> 📅</p>
-<h2 id="pmos-ldo">PMOS LDO</h2>
-<p>A large output capacitor solves the sudden load change problem, but
-the stability decreases because the large output capacitor forces the
-output pole toward the origin with the role of dominant pole</p>
-<h2 id="damping-factor-zeta-and-phase-margin">damping factor (<span
-class="math inline">\(\zeta\)</span>) and phase margin</h2>
-<p>phase margin is defined for <em>open loop</em> system</p>
-<p>damping factor (<span class="math inline">\(\zeta\)</span>) is
-defined for <em>close loop</em> system</p>
-<p>the roughly 90 to 100 times of damping factor (<span
-class="math inline">\(\zeta\)</span>) is phase margin</p>
-<p><span class="math display">\[
-\mathrm{PM} = 90\zeta ~ 100\zeta
-\]</span></p>
-<blockquote>
-<p>in order to have a good stable system, we want <span
-class="math inline">\(\zeta &gt; 0.5\)</span> or phase margin more than
-<span class="math inline">\(45^o\)</span></p>
-</blockquote>
-<blockquote>
-<p>We can analyze open loop system in a better perspective because it is
-simpler</p>
-</blockquote>
-<p>DC output impedance of NMOS and PMOS LDO is the <em>same</em> for the
-same error amplifier gain</p>
-<p><span class="math display">\[
-R_{\text{out}} = \frac{1}{\beta A_{o1} g_{m2}}
-\]</span></p>
-<p>The NMOS LDO has a faster response to line transients than the PMOS
-LDO since it has btter (smaller) PSRR</p>
-<p>A good PSRR is important when an LDO is used as a sub-regulator in
-cascade with a switching regulator. The LDO would need to have a
-sufficiently high rejection at the switching frequency of the switching
-converter to filter out the ripples at that frequency</p>
-<h2 id="reference">reference</h2>
-<p>Hinojo, J.M., Martinez, C.I., &amp; Torralba, A.J. (2018). Internally
-Compensated LDO Regulators for Modern System-on-Chip Design.</p>
-<p>Mingoo Seok. ISSCC 2020 tutorial "Basics of Digital Low-Dropout (LDO)
-Integrated Voltage Regulator"</p>
-<p>Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators"</p>
-<p>Chen, K. (2016). Power Management Techniques for Integrated Circuit
-Design.</p>
-<p>Morita, B.G. (2014). Understand Low-Dropout Regulator ( LDO )
-Concepts to Achieve Optimal Designs.</p>
-<p>H. -S. Kim, "Exploring Ways to Minimize Dropout Voltage for
-Energy-Efficient Low-Dropout Regulators: Viable approaches that preserve
-performance," in IEEE Solid-State Circuits Magazine, vol. 15, no. 2, pp.
-59-68, Spring 2023, doi: 10.1109/MSSC.2023.3262767.</p>
-<p>Ali Sheikholeslami, Circuit Intuitions: Voltage Regulators IEEE
-Solid-State Circuits Magazine, Vol. 12, Issue 4, to appear, Fall
-2020.</p>
-<p>Operational Transconductance Amplifier II Multi-Stage Designs [<a
-href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf</a>]</p>
-<p>Toshiba, Load Transient Response of LDO and Methods to Improve it
-Application Note [<a
-href="https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268">https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -9871,6 +9806,71 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture10_ee720_jitter.pdf">
 ]]></content>
       <categories>
         <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Low-Dropout Regulator</title>
+    <url>/2023/10/21/ldo/</url>
+    <content><![CDATA[<p><em>TODO</em> 📅</p>
+<h2 id="pmos-ldo">PMOS LDO</h2>
+<p>A large output capacitor solves the sudden load change problem, but
+the stability decreases because the large output capacitor forces the
+output pole toward the origin with the role of dominant pole</p>
+<h2 id="damping-factor-zeta-and-phase-margin">damping factor (<span
+class="math inline">\(\zeta\)</span>) and phase margin</h2>
+<p>phase margin is defined for <em>open loop</em> system</p>
+<p>damping factor (<span class="math inline">\(\zeta\)</span>) is
+defined for <em>close loop</em> system</p>
+<p>the roughly 90 to 100 times of damping factor (<span
+class="math inline">\(\zeta\)</span>) is phase margin</p>
+<p><span class="math display">\[
+\mathrm{PM} = 90\zeta ~ 100\zeta
+\]</span></p>
+<blockquote>
+<p>in order to have a good stable system, we want <span
+class="math inline">\(\zeta &gt; 0.5\)</span> or phase margin more than
+<span class="math inline">\(45^o\)</span></p>
+</blockquote>
+<blockquote>
+<p>We can analyze open loop system in a better perspective because it is
+simpler</p>
+</blockquote>
+<p>DC output impedance of NMOS and PMOS LDO is the <em>same</em> for the
+same error amplifier gain</p>
+<p><span class="math display">\[
+R_{\text{out}} = \frac{1}{\beta A_{o1} g_{m2}}
+\]</span></p>
+<p>The NMOS LDO has a faster response to line transients than the PMOS
+LDO since it has btter (smaller) PSRR</p>
+<p>A good PSRR is important when an LDO is used as a sub-regulator in
+cascade with a switching regulator. The LDO would need to have a
+sufficiently high rejection at the switching frequency of the switching
+converter to filter out the ripples at that frequency</p>
+<h2 id="reference">reference</h2>
+<p>Hinojo, J.M., Martinez, C.I., &amp; Torralba, A.J. (2018). Internally
+Compensated LDO Regulators for Modern System-on-Chip Design.</p>
+<p>Mingoo Seok. ISSCC 2020 tutorial "Basics of Digital Low-Dropout (LDO)
+Integrated Voltage Regulator"</p>
+<p>Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators"</p>
+<p>Chen, K. (2016). Power Management Techniques for Integrated Circuit
+Design.</p>
+<p>Morita, B.G. (2014). Understand Low-Dropout Regulator ( LDO )
+Concepts to Achieve Optimal Designs.</p>
+<p>H. -S. Kim, "Exploring Ways to Minimize Dropout Voltage for
+Energy-Efficient Low-Dropout Regulators: Viable approaches that preserve
+performance," in IEEE Solid-State Circuits Magazine, vol. 15, no. 2, pp.
+59-68, Spring 2023, doi: 10.1109/MSSC.2023.3262767.</p>
+<p>Ali Sheikholeslami, Circuit Intuitions: Voltage Regulators IEEE
+Solid-State Circuits Magazine, Vol. 12, Issue 4, to appear, Fall
+2020.</p>
+<p>Operational Transconductance Amplifier II Multi-Stage Designs [<a
+href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf</a>]</p>
+<p>Toshiba, Load Transient Response of LDO and Methods to Improve it
+Application Note [<a
+href="https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268">https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -10245,6 +10245,357 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Noise Analysis</title>
+    <url>/2024/04/27/noise-folding/</url>
+    <content><![CDATA[<h2 id="frequency-domain-representation-of-sampling">Frequency-domain
+representation of sampling</h2>
+<p><img src="/2024/04/27/noise-folding/image-20240428145937610.png"
+alt="image-20240428145937610" /></p>
+<blockquote>
+<p><span class="math inline">\(\omega = \Omega T\)</span></p>
+</blockquote>
+<ul>
+<li><p>continuous-time signal <span
+class="math inline">\(x_c(t)\)</span></p></li>
+<li><p><span class="math inline">\(x_s(t)\)</span> is, in a sense, a
+continuous-time signal (specifically, an impulse train) that is zero,
+except at integer multiples of <span
+class="math inline">\(T\)</span></p></li>
+<li><p>The sequence <span class="math inline">\(x[n]\)</span>, on the
+other hand, is indexed on the integer variable n, which, in effect,
+introduces a time normalization; i.e., the sequence of numbers <span
+class="math inline">\(x[n]\)</span> contains no explicit information
+about the sampling period <span
+class="math inline">\(T\)</span></p></li>
+</ul>
+<blockquote>
+<p>the samples of <span class="math inline">\(x_c(t)\)</span> are
+represented by <em>finite numbers</em> in <span
+class="math inline">\(x[n]\)</span> rather than as the <em>areas of
+impulses</em>, as with <span class="math inline">\(x_s(t)\)</span></p>
+</blockquote>
+<p><span class="math inline">\(X_s(j\Omega)\)</span>, the Fourier
+transform of <span class="math inline">\(x_s(t)\)</span> <span
+class="math display">\[
+X_s(j\Omega) = \sum_{n=-\infty}^{\infty}x_c(nT)e^{-j\Omega Tn}
+\]</span> <img
+src="/2024/04/27/noise-folding/image-20240428150000863.png"
+alt="image-20240428150000863" /></p>
+<p><span class="math inline">\(X(e^{j\omega})\)</span>, the
+discrete-time Fourier transform (DTFT) of the sequence <span
+class="math inline">\(x[n]\)</span> <span class="math display">\[
+X(e^{j\omega}) = \sum_{n=-\infty}^{\infty}x[n]e^{-j\omega n}
+\]</span> <img
+src="/2024/04/27/noise-folding/image-20240428150020709.png"
+alt="image-20240428150020709" /></p>
+<p>where <span class="math inline">\(x[n] = x_c(nT)\)</span></p>
+<h2 id="fourier-analysis-of-stationary-random-signals">Fourier Analysis
+of Stationary Random Signals</h2>
+<blockquote>
+<p><img src="/2024/04/27/noise-folding/image-20240428161506523.png"
+alt="image-20240428161506523" /></p>
+<p>[<a
+href="https://dsp.stackexchange.com/a/17348/59253">https://dsp.stackexchange.com/a/17348/59253</a>]</p>
+</blockquote>
+<blockquote>
+<p>discrete-time random signal and autocorrelation <span
+class="math display">\[
+\phi[m] = \phi_c(mT)
+\]</span> <img
+src="/2024/04/27/noise-folding/image-20240428162643394.png"
+alt="image-20240428162643394" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240428162655969.png"
+alt="image-20240428162655969" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240428162735492.png"
+alt="image-20240428162735492" /></p>
+</blockquote>
+<h2 id="energy-signals-vs-power-signal">Energy signals vs Power
+signal</h2>
+<p><img src="/2024/04/27/noise-folding/image-20240427155046131.png"
+alt="image-20240427155046131" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240427155100927.png"
+alt="image-20240427155100927" /></p>
+<hr />
+<p>A pure sine wave is expressed as <span class="math inline">\(y(t) =
+A_0 \sin(2\pi f_0 t +\phi _0)\)</span>, its autocorrelation
+function:</p>
+<p><span class="math display">\[
+\mathrm{R}(\tau) = \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
+y(t)y(t+\tau)dt
+\]</span></p>
+<p>where <span class="math inline">\(y(t)y(t+\tau)\)</span> can be
+expressed as <span class="math display">\[\begin{align}
+y(t)y(t+\tau) &amp;= A_0\sin(2\pi f_0 t+\phi_0)\cdot A_0\sin(2\pi f_0
+t+\phi_0+2\pi f_0\tau) \\
+&amp;= A_0^2\sin^2(2\pi f_0 t+\phi_0)\cdot \cos(2\pi f_0\tau) +
+A_0^2\sin(2\pi f_0 t+\phi_0)\cos(2\pi f_0 t+\phi_0)\cdot \cos(2\pi
+f_0\tau) \\
+&amp;= \frac{1}{2}A_0^2 (1 - \cos(2(2\pi f_0 t+\phi_0)))\cdot \cos(2\pi
+f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi
+f_0\tau) \\
+&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) -
+\frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) +
+\frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau)
+\end{align}\]</span></p>
+<p>And substitute <span class="math inline">\(y(t)y(t+\tau)\)</span> in
+<span class="math inline">\(\mathrm{R}(\tau)\)</span></p>
+<p><span class="math display">\[\begin{align}
+\mathrm{R}(\tau) &amp;= \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
+y(t)y(t+\tau)dt \\
+&amp;= \lim _{T\to \infty}\int_{-T}^{T} \left[\frac{1}{2}A_0^2\cdot
+\cos(2\pi f_0\tau) - \frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot
+\cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot
+\cos(2\pi f_0\tau)\right]dt \\
+&amp; = \lim _{T\to \infty}\int_{-T}^{T} \frac{1}{2}A_0^2\cdot \cos(2\pi
+f_0\tau) dt \\
+&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau)
+\end{align}\]</span></p>
+<p>Taking Fourier transform of <span
+class="math inline">\(\mathrm{R}(\tau)\)</span>, PSD is</p>
+<p><span class="math display">\[
+S_y(f) = \frac{1}{4}A_0^2 \delta(f-f_0) + \frac{1}{4}A_0^2 \delta(f+f_0)
+\]</span></p>
+<hr />
+<p><img src="/2024/04/27/noise-folding/image-20240427162827347.png"
+alt="image-20240427162827347" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240427170024123.png"
+alt="image-20240427170024123" /></p>
+<h3 id="reference">reference</h3>
+<p>Topic 5 Energy &amp; Power Signals, Correlation &amp; Spectral
+Density [<a
+href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf</a>]</p>
+<p>Topic 6 Random Processes and Signals [<a
+href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf</a>]</p>
+<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
+Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
+2020)</p>
+<h2 id="switched-capacitor">Switched-Capacitor</h2>
+<p>The <strong>aliasing of the noise</strong>, or <strong>noise
+folding</strong>, plays an important role in switched-capacitor as it
+does in all switched-capacitor filters</p>
+<p><img src="/2024/04/27/noise-folding/image-20240425215938141.png"
+alt="image-20240425215938141" /></p>
+<p>Assume for the moment that the switch is <em>always closed</em> (that
+there is no hold phase), the single-sided noise density would be</p>
+<p><img src="/2024/04/27/noise-folding/image-20240428182816109.png"
+alt="image-20240428182816109" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240428180635082.png"
+alt="image-20240428180635082" /></p>
+<p><span class="math inline">\(v_s[n]\)</span> is the sampled version of
+<span class="math inline">\(v_{RC}(t)\)</span>, i.e. <span
+class="math inline">\(v_s[n]= v_{RC}(nT_C)\)</span> <span
+class="math display">\[
+S_s(e^{j\omega}) = \frac{1}{T_C}
+\sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi
+k}{T_C})) \cdot d\omega
+\]</span> where <span class="math inline">\(\omega \in [-\pi,
+\pi]\)</span>, furthermore <span
+class="math inline">\(\frac{d\omega}{T_C}= d\Omega\)</span> <span
+class="math display">\[
+S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s))
+\cdot d\Omega
+\]</span></p>
+<blockquote>
+<p><img src="/2024/04/27/noise-folding/image-20240428215559780.png"
+alt="image-20240428215559780" /></p>
+</blockquote>
+<p><img src="/2024/04/27/noise-folding/image-20240425220033340.png"
+alt="image-20240425220033340" /></p>
+<p>The noise in <span class="math inline">\(S_{RC}\)</span> is a
+<em>stationary process</em> and so is <em>uncorrelated</em> over <span
+class="math inline">\(f\)</span> allowing the <span
+class="math inline">\(N\)</span> rectangles to be combined by simply
+summing their noise powers</p>
+<p><img src="/2024/04/27/noise-folding/sample_impulse_hold.drawio.svg"
+alt="image-20240428225949327" /></p>
+<blockquote>
+<p><span class="math display">\[
+X(j\Omega)d\Omega = \frac{1}{T_c}X(e^{j\omega})d\omega  
+\]</span></p>
+<p>ref. <em><a
+href="https://raytroop.github.io/2022/05/01/sampling-dft">[Sampling of
+Continuous Time Signals]</a></em> of EQ.(31) in the blog</p>
+</blockquote>
+<p><img src="/2024/04/27/noise-folding/image-20240428225949327.png"
+alt="image-20240428225949327" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240425220400924.png"
+alt="image-20240425220400924" /></p>
+<p>where <span class="math inline">\(m\)</span> is the duty cycle</p>
+<p><img src="/2024/04/27/noise-folding/image-20240427183257203.png"
+alt="image-20240427183257203" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240427183349642.png"
+alt="image-20240427183349642" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240427183516540.png"
+alt="image-20240427183516540" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240427183458649.png"
+alt="image-20240427183458649" /></p>
+<blockquote>
+<ul>
+<li>Calculate autocorrelation function of noise at the output of the RC
+filter</li>
+<li>Calculate the spectrum by taking the <strong>discrete</strong> time
+Fourier transform of the autocorrelation function</li>
+</ul>
+</blockquote>
+<p><img src="/2024/04/27/noise-folding/image-20240427183700971.png"
+alt="image-20240427183700971" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20240427195202127.png"
+alt="image-20240427195202127" /></p>
+<ul>
+<li><span class="math inline">\(Vo_{[n-1]}\)</span> decay</li>
+<li><span class="math inline">\(Vo_{[n]}\)</span> charge C</li>
+</ul>
+<h2 id="noise-aliasing">Noise Aliasing</h2>
+<p><img src="/2024/04/27/noise-folding/SamplingProcess.drawio.svg"
+alt="SamplingProcess.drawio" /></p>
+<p>Where impulse train or "shah" function is defined as <span
+class="math display">\[
+\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
+\]</span> where <span class="math inline">\(T\)</span> defines the
+period, or sampling rate. Its Fourier transform is <span
+class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
+<p><strong>Multiplication Property</strong> of Fourier Transform <span
+class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span></p>
+<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
+the discrete time integrated from DC to <span
+class="math inline">\(f_s/2\)</span> equals that of continuous time in
+all frequency range.</p>
+<blockquote>
+<p>The DFT spectrum is periodic with period <strong>N</strong></p>
+<p>The DTFT spectrum is periodic with period <span
+class="math inline">\(2\pi\)</span></p>
+<p>As a conclusion, the spectrum beyond <span
+class="math inline">\(f_s/2\)</span> is <strong>redundant</strong> and
+don't provide information</p>
+</blockquote>
+<h2 id="aliasing">Aliasing</h2>
+<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
+and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
+integer), are <strong>indistinguishable</strong> in the <strong>discrete
+time domain</strong>.</p>
+<p><img src="/2024/04/27/noise-folding/image-20220626000016184.png"
+alt="image-20220626000016184" /></p>
+<blockquote>
+<p>In order to prevent aliasing, we need <span
+class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
+sampling rate <span class="math inline">\(f_s=2\cdot
+f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
+Rate</strong>.</p>
+<p>Two solution possibilities</p>
+<ol type="1">
+<li>Sample fast enough to cover all spectral components, including
+"parasitic" ones outside band of interest</li>
+<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
+through filtering - Filter out "parasitic" ones</li>
+</ol>
+</blockquote>
+<p>Given below sequence <span class="math display">\[
+X[n] =A e^{j\omega _0 T_s n}
+\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(kf_s + \Delta f\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s-\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\(kf_s - \Delta f\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s+\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<blockquote>
+<p>With sampling frequency <span
+class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
+class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
+class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
+distinguished <em>real signal</em></p>
+</blockquote>
+<p><img src="/2024/04/27/noise-folding/image-20230518232314980.png"
+alt="image-20230518232314980" /></p>
+<blockquote>
+<p>Generally, The frequencies <span
+class="math inline">\(f_{\text{sig}}\)</span> and <span
+class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
+<strong>indistinguishable</strong> in the <strong>discrete time
+domain</strong>.</p>
+</blockquote>
+<h3 id="aliasing-example">Aliasing Example</h3>
+<p>Given <span class="math inline">\(f_s = 1000\)</span> KHz</p>
+<ol type="1">
+<li><p><span class="math inline">\(f_{\text{sig}}=101\)</span> KHz</p>
+<p><img src="/2024/04/27/noise-folding/image-20220626000206662.png"
+alt="image-20220626000206662" /></p></li>
+<li><p><span class="math inline">\(f_{\text{sig}}=899\)</span> KHz</p>
+<p><img src="/2024/04/27/noise-folding/image-20220626000258632.png"
+alt="image-20220626000258632" /></p></li>
+<li><p><span class="math inline">\(f_{\text{sig}}=1101\)</span> KHz</p>
+<p><img src="/2024/04/27/noise-folding/image-20220626000320755.png"
+alt="image-20220626000320755" /></p></li>
+</ol>
+<h3 id="classes-of-sampling">Classes of Sampling</h3>
+<ul>
+<li><p>Nyquist-rate sampling</p>
+<p><span class="math inline">\(f_s \gt 2 \cdot
+f_{\text{sig,max}}\)</span></p></li>
+<li><p>Oversampling</p>
+<p><span class="math inline">\(f_s \gg 2\cdot
+f_{\text{sig,max}}\)</span></p></li>
+<li><p>Undersampling, subsampling</p>
+<p><span class="math inline">\(f_s \lt 2\cdot
+f_{\text{sig,max}}\)</span></p></li>
+</ul>
+<h2 id="dirac-pulses-and-spectrum">Dirac Pulses and spectrum</h2>
+<p>Spectrum of <span class="math inline">\(x_d(t)\)</span> contains
+<strong>scaled replicas</strong> of <span
+class="math inline">\(X(f)\)</span> at <strong>integer
+multiples</strong> of the sampling frequency <span
+class="math inline">\(f_s\)</span></p>
+<p><img src="/2024/04/27/noise-folding/image-20220626001925375.png"
+alt="image-20220626001925375" /></p>
+<p><img src="/2024/04/27/noise-folding/image-20220626001043693.png"
+alt="image-20220626001043693" /></p>
+<h2 id="reference-1">reference</h2>
+<p>David Herres, The difference between signal under-sampling, aliasing,
+and folding URL: <a
+href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
+<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
+Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
+978-0-12-375079-2. <a
+href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
+7 (Sampling and reconstruction)</a></p>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF.</p>
+<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
+Converters, Second Edition" ISBN 978-1-119-25827-8</p>
+<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
+<p>- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 /
+tutorials</p>
+<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
+Modeling URL: <a
+href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
+<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
+Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
+Publishers Inc., San Francisco, CA, USA.</p>
+<p>Bernhard E. Boser . Advanced Analog Integrated Circuits Switched
+Capacitor Gain Stages [<a
+href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf</a>]</p>
+<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
+3rd edition</p>
+<p>R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for
+Signal Processing. Wiley-Interscience, 1986</p>
+]]></content>
+      <categories>
+        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -11290,357 +11641,6 @@ href="https://benchugg.com/research_notes/intro_ito/">https://benchugg.com/resea
 <p>Ben Chugg. Itô Processes and The Fundamental Theorem of Stochastic
 Calculus [<a
 href="https://benchugg.com/research_notes/sde_ito_lemma/">https://benchugg.com/research_notes/sde_ito_lemma/)</a>]</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Noise Analysis</title>
-    <url>/2024/04/27/noise-folding/</url>
-    <content><![CDATA[<h2 id="frequency-domain-representation-of-sampling">Frequency-domain
-representation of sampling</h2>
-<p><img src="/2024/04/27/noise-folding/image-20240428145937610.png"
-alt="image-20240428145937610" /></p>
-<blockquote>
-<p><span class="math inline">\(\omega = \Omega T\)</span></p>
-</blockquote>
-<ul>
-<li><p>continuous-time signal <span
-class="math inline">\(x_c(t)\)</span></p></li>
-<li><p><span class="math inline">\(x_s(t)\)</span> is, in a sense, a
-continuous-time signal (specifically, an impulse train) that is zero,
-except at integer multiples of <span
-class="math inline">\(T\)</span></p></li>
-<li><p>The sequence <span class="math inline">\(x[n]\)</span>, on the
-other hand, is indexed on the integer variable n, which, in effect,
-introduces a time normalization; i.e., the sequence of numbers <span
-class="math inline">\(x[n]\)</span> contains no explicit information
-about the sampling period <span
-class="math inline">\(T\)</span></p></li>
-</ul>
-<blockquote>
-<p>the samples of <span class="math inline">\(x_c(t)\)</span> are
-represented by <em>finite numbers</em> in <span
-class="math inline">\(x[n]\)</span> rather than as the <em>areas of
-impulses</em>, as with <span class="math inline">\(x_s(t)\)</span></p>
-</blockquote>
-<p><span class="math inline">\(X_s(j\Omega)\)</span>, the Fourier
-transform of <span class="math inline">\(x_s(t)\)</span> <span
-class="math display">\[
-X_s(j\Omega) = \sum_{n=-\infty}^{\infty}x_c(nT)e^{-j\Omega Tn}
-\]</span> <img
-src="/2024/04/27/noise-folding/image-20240428150000863.png"
-alt="image-20240428150000863" /></p>
-<p><span class="math inline">\(X(e^{j\omega})\)</span>, the
-discrete-time Fourier transform (DTFT) of the sequence <span
-class="math inline">\(x[n]\)</span> <span class="math display">\[
-X(e^{j\omega}) = \sum_{n=-\infty}^{\infty}x[n]e^{-j\omega n}
-\]</span> <img
-src="/2024/04/27/noise-folding/image-20240428150020709.png"
-alt="image-20240428150020709" /></p>
-<p>where <span class="math inline">\(x[n] = x_c(nT)\)</span></p>
-<h2 id="fourier-analysis-of-stationary-random-signals">Fourier Analysis
-of Stationary Random Signals</h2>
-<blockquote>
-<p><img src="/2024/04/27/noise-folding/image-20240428161506523.png"
-alt="image-20240428161506523" /></p>
-<p>[<a
-href="https://dsp.stackexchange.com/a/17348/59253">https://dsp.stackexchange.com/a/17348/59253</a>]</p>
-</blockquote>
-<blockquote>
-<p>discrete-time random signal and autocorrelation <span
-class="math display">\[
-\phi[m] = \phi_c(mT)
-\]</span> <img
-src="/2024/04/27/noise-folding/image-20240428162643394.png"
-alt="image-20240428162643394" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240428162655969.png"
-alt="image-20240428162655969" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240428162735492.png"
-alt="image-20240428162735492" /></p>
-</blockquote>
-<h2 id="energy-signals-vs-power-signal">Energy signals vs Power
-signal</h2>
-<p><img src="/2024/04/27/noise-folding/image-20240427155046131.png"
-alt="image-20240427155046131" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240427155100927.png"
-alt="image-20240427155100927" /></p>
-<hr />
-<p>A pure sine wave is expressed as <span class="math inline">\(y(t) =
-A_0 \sin(2\pi f_0 t +\phi _0)\)</span>, its autocorrelation
-function:</p>
-<p><span class="math display">\[
-\mathrm{R}(\tau) = \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
-y(t)y(t+\tau)dt
-\]</span></p>
-<p>where <span class="math inline">\(y(t)y(t+\tau)\)</span> can be
-expressed as <span class="math display">\[\begin{align}
-y(t)y(t+\tau) &amp;= A_0\sin(2\pi f_0 t+\phi_0)\cdot A_0\sin(2\pi f_0
-t+\phi_0+2\pi f_0\tau) \\
-&amp;= A_0^2\sin^2(2\pi f_0 t+\phi_0)\cdot \cos(2\pi f_0\tau) +
-A_0^2\sin(2\pi f_0 t+\phi_0)\cos(2\pi f_0 t+\phi_0)\cdot \cos(2\pi
-f_0\tau) \\
-&amp;= \frac{1}{2}A_0^2 (1 - \cos(2(2\pi f_0 t+\phi_0)))\cdot \cos(2\pi
-f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi
-f_0\tau) \\
-&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) -
-\frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) +
-\frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau)
-\end{align}\]</span></p>
-<p>And substitute <span class="math inline">\(y(t)y(t+\tau)\)</span> in
-<span class="math inline">\(\mathrm{R}(\tau)\)</span></p>
-<p><span class="math display">\[\begin{align}
-\mathrm{R}(\tau) &amp;= \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
-y(t)y(t+\tau)dt \\
-&amp;= \lim _{T\to \infty}\int_{-T}^{T} \left[\frac{1}{2}A_0^2\cdot
-\cos(2\pi f_0\tau) - \frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot
-\cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot
-\cos(2\pi f_0\tau)\right]dt \\
-&amp; = \lim _{T\to \infty}\int_{-T}^{T} \frac{1}{2}A_0^2\cdot \cos(2\pi
-f_0\tau) dt \\
-&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau)
-\end{align}\]</span></p>
-<p>Taking Fourier transform of <span
-class="math inline">\(\mathrm{R}(\tau)\)</span>, PSD is</p>
-<p><span class="math display">\[
-S_y(f) = \frac{1}{4}A_0^2 \delta(f-f_0) + \frac{1}{4}A_0^2 \delta(f+f_0)
-\]</span></p>
-<hr />
-<p><img src="/2024/04/27/noise-folding/image-20240427162827347.png"
-alt="image-20240427162827347" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240427170024123.png"
-alt="image-20240427170024123" /></p>
-<h3 id="reference">reference</h3>
-<p>Topic 5 Energy &amp; Power Signals, Correlation &amp; Spectral
-Density [<a
-href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf</a>]</p>
-<p>Topic 6 Random Processes and Signals [<a
-href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf</a>]</p>
-<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
-Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
-2020)</p>
-<h2 id="switched-capacitor">Switched-Capacitor</h2>
-<p>The <strong>aliasing of the noise</strong>, or <strong>noise
-folding</strong>, plays an important role in switched-capacitor as it
-does in all switched-capacitor filters</p>
-<p><img src="/2024/04/27/noise-folding/image-20240425215938141.png"
-alt="image-20240425215938141" /></p>
-<p>Assume for the moment that the switch is <em>always closed</em> (that
-there is no hold phase), the single-sided noise density would be</p>
-<p><img src="/2024/04/27/noise-folding/image-20240428182816109.png"
-alt="image-20240428182816109" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240428180635082.png"
-alt="image-20240428180635082" /></p>
-<p><span class="math inline">\(v_s[n]\)</span> is the sampled version of
-<span class="math inline">\(v_{RC}(t)\)</span>, i.e. <span
-class="math inline">\(v_s[n]= v_{RC}(nT_C)\)</span> <span
-class="math display">\[
-S_s(e^{j\omega}) = \frac{1}{T_C}
-\sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi
-k}{T_C})) \cdot d\omega
-\]</span> where <span class="math inline">\(\omega \in [-\pi,
-\pi]\)</span>, furthermore <span
-class="math inline">\(\frac{d\omega}{T_C}= d\Omega\)</span> <span
-class="math display">\[
-S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s))
-\cdot d\Omega
-\]</span></p>
-<blockquote>
-<p><img src="/2024/04/27/noise-folding/image-20240428215559780.png"
-alt="image-20240428215559780" /></p>
-</blockquote>
-<p><img src="/2024/04/27/noise-folding/image-20240425220033340.png"
-alt="image-20240425220033340" /></p>
-<p>The noise in <span class="math inline">\(S_{RC}\)</span> is a
-<em>stationary process</em> and so is <em>uncorrelated</em> over <span
-class="math inline">\(f\)</span> allowing the <span
-class="math inline">\(N\)</span> rectangles to be combined by simply
-summing their noise powers</p>
-<p><img src="/2024/04/27/noise-folding/sample_impulse_hold.drawio.svg"
-alt="image-20240428225949327" /></p>
-<blockquote>
-<p><span class="math display">\[
-X(j\Omega)d\Omega = \frac{1}{T_c}X(e^{j\omega})d\omega  
-\]</span></p>
-<p>ref. <em><a
-href="https://raytroop.github.io/2022/05/01/sampling-dft">[Sampling of
-Continuous Time Signals]</a></em> of EQ.(31) in the blog</p>
-</blockquote>
-<p><img src="/2024/04/27/noise-folding/image-20240428225949327.png"
-alt="image-20240428225949327" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240425220400924.png"
-alt="image-20240425220400924" /></p>
-<p>where <span class="math inline">\(m\)</span> is the duty cycle</p>
-<p><img src="/2024/04/27/noise-folding/image-20240427183257203.png"
-alt="image-20240427183257203" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240427183349642.png"
-alt="image-20240427183349642" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240427183516540.png"
-alt="image-20240427183516540" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240427183458649.png"
-alt="image-20240427183458649" /></p>
-<blockquote>
-<ul>
-<li>Calculate autocorrelation function of noise at the output of the RC
-filter</li>
-<li>Calculate the spectrum by taking the <strong>discrete</strong> time
-Fourier transform of the autocorrelation function</li>
-</ul>
-</blockquote>
-<p><img src="/2024/04/27/noise-folding/image-20240427183700971.png"
-alt="image-20240427183700971" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240427195202127.png"
-alt="image-20240427195202127" /></p>
-<ul>
-<li><span class="math inline">\(Vo_{[n-1]}\)</span> decay</li>
-<li><span class="math inline">\(Vo_{[n]}\)</span> charge C</li>
-</ul>
-<h2 id="noise-aliasing">Noise Aliasing</h2>
-<p><img src="/2024/04/27/noise-folding/SamplingProcess.drawio.svg"
-alt="SamplingProcess.drawio" /></p>
-<p>Where impulse train or "shah" function is defined as <span
-class="math display">\[
-\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
-\]</span> where <span class="math inline">\(T\)</span> defines the
-period, or sampling rate. Its Fourier transform is <span
-class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
-<p><strong>Multiplication Property</strong> of Fourier Transform <span
-class="math display">\[
-x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
-\]</span></p>
-<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
-the discrete time integrated from DC to <span
-class="math inline">\(f_s/2\)</span> equals that of continuous time in
-all frequency range.</p>
-<blockquote>
-<p>The DFT spectrum is periodic with period <strong>N</strong></p>
-<p>The DTFT spectrum is periodic with period <span
-class="math inline">\(2\pi\)</span></p>
-<p>As a conclusion, the spectrum beyond <span
-class="math inline">\(f_s/2\)</span> is <strong>redundant</strong> and
-don't provide information</p>
-</blockquote>
-<h2 id="aliasing">Aliasing</h2>
-<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
-and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
-integer), are <strong>indistinguishable</strong> in the <strong>discrete
-time domain</strong>.</p>
-<p><img src="/2024/04/27/noise-folding/image-20220626000016184.png"
-alt="image-20220626000016184" /></p>
-<blockquote>
-<p>In order to prevent aliasing, we need <span
-class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
-sampling rate <span class="math inline">\(f_s=2\cdot
-f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
-Rate</strong>.</p>
-<p>Two solution possibilities</p>
-<ol type="1">
-<li>Sample fast enough to cover all spectral components, including
-"parasitic" ones outside band of interest</li>
-<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
-through filtering - Filter out "parasitic" ones</li>
-</ol>
-</blockquote>
-<p>Given below sequence <span class="math display">\[
-X[n] =A e^{j\omega _0 T_s n}
-\]</span></p>
-<ol type="1">
-<li><span class="math inline">\(kf_s + \Delta f\)</span></li>
-</ol>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left(
--kf_s-\Delta f \right)2\pi T_sn} \\
-&amp;= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
-\end{align}\]</span></p>
-<ol start="2" type="1">
-<li><span class="math inline">\(kf_s - \Delta f\)</span></li>
-</ol>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left(
--kf_s+\Delta f \right)2\pi T_sn} \\
-&amp;= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
-\end{align}\]</span></p>
-<blockquote>
-<p>With sampling frequency <span
-class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
-class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
-class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
-distinguished <em>real signal</em></p>
-</blockquote>
-<p><img src="/2024/04/27/noise-folding/image-20230518232314980.png"
-alt="image-20230518232314980" /></p>
-<blockquote>
-<p>Generally, The frequencies <span
-class="math inline">\(f_{\text{sig}}\)</span> and <span
-class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
-<strong>indistinguishable</strong> in the <strong>discrete time
-domain</strong>.</p>
-</blockquote>
-<h3 id="aliasing-example">Aliasing Example</h3>
-<p>Given <span class="math inline">\(f_s = 1000\)</span> KHz</p>
-<ol type="1">
-<li><p><span class="math inline">\(f_{\text{sig}}=101\)</span> KHz</p>
-<p><img src="/2024/04/27/noise-folding/image-20220626000206662.png"
-alt="image-20220626000206662" /></p></li>
-<li><p><span class="math inline">\(f_{\text{sig}}=899\)</span> KHz</p>
-<p><img src="/2024/04/27/noise-folding/image-20220626000258632.png"
-alt="image-20220626000258632" /></p></li>
-<li><p><span class="math inline">\(f_{\text{sig}}=1101\)</span> KHz</p>
-<p><img src="/2024/04/27/noise-folding/image-20220626000320755.png"
-alt="image-20220626000320755" /></p></li>
-</ol>
-<h3 id="classes-of-sampling">Classes of Sampling</h3>
-<ul>
-<li><p>Nyquist-rate sampling</p>
-<p><span class="math inline">\(f_s \gt 2 \cdot
-f_{\text{sig,max}}\)</span></p></li>
-<li><p>Oversampling</p>
-<p><span class="math inline">\(f_s \gg 2\cdot
-f_{\text{sig,max}}\)</span></p></li>
-<li><p>Undersampling, subsampling</p>
-<p><span class="math inline">\(f_s \lt 2\cdot
-f_{\text{sig,max}}\)</span></p></li>
-</ul>
-<h2 id="dirac-pulses-and-spectrum">Dirac Pulses and spectrum</h2>
-<p>Spectrum of <span class="math inline">\(x_d(t)\)</span> contains
-<strong>scaled replicas</strong> of <span
-class="math inline">\(X(f)\)</span> at <strong>integer
-multiples</strong> of the sampling frequency <span
-class="math inline">\(f_s\)</span></p>
-<p><img src="/2024/04/27/noise-folding/image-20220626001925375.png"
-alt="image-20220626001925375" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20220626001043693.png"
-alt="image-20220626001043693" /></p>
-<h2 id="reference-1">reference</h2>
-<p>David Herres, The difference between signal under-sampling, aliasing,
-and folding URL: <a
-href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
-<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
-Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
-978-0-12-375079-2. <a
-href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
-7 (Sampling and reconstruction)</a></p>
-<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
-SpectreRF.</p>
-<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
-Converters, Second Edition" ISBN 978-1-119-25827-8</p>
-<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
-<p>- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 /
-tutorials</p>
-<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
-Modeling URL: <a
-href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
-<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
-Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
-Publishers Inc., San Francisco, CA, USA.</p>
-<p>Bernhard E. Boser . Advanced Analog Integrated Circuits Switched
-Capacitor Gain Stages [<a
-href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf</a>]</p>
-<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
-3rd edition</p>
-<p>R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for
-Signal Processing. Wiley-Interscience, 1986</p>
 ]]></content>
       <categories>
         <category>noise</category>
@@ -13948,96 +13948,6 @@ ed. Boston: McGraw-Hill Higher Education, 2010.</p>
       </categories>
   </entry>
   <entry>
-    <title>Relative Sensitivity</title>
-    <url>/2023/07/12/relative-sensitivity/</url>
-    <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
-the total resistance) is function of <span
-class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
-be expressed as</p>
-<p><span class="math display">\[\begin{align}
-dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
-&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
-\frac{dx_n}{x_n}
-\end{align}\]</span></p>
-<p>Then, we obtain relative variation <span
-class="math display">\[\begin{align}
-\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
-x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
-&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
-\end{align}\]</span></p>
-<p>⭐ where <span class="math inline">\(S_{x_n}^T=\frac{\partial
-T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
-sensitivity</strong></p>
-<blockquote>
-<p><strong>relative sensitivity</strong> connect <span
-class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
-variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
-</blockquote>
-<p>And <span class="math inline">\(dT\)</span> can be expressed as <span
-class="math display">\[
-dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N
-x_n&#39;\cdot \frac{dx_n}{x_n}
-\]</span> ⭐ where <span class="math inline">\(x_n&#39;= S_{x_n}^T
-T\)</span> is the contribution of <span
-class="math inline">\(x_n\)</span> in <span
-class="math inline">\(T\)</span></p>
-<p>⭐ For parallel or series resistors, it can prove <span
-class="math inline">\(\sum_{n=1}^N S_{x_n}^T = 1\)</span> and $ _{n=1}^N
-x_n'=T$</p>
-<hr />
-<p><img src="/2023/07/12/relative-sensitivity/parallel_pgx.drawio.svg"
-alt="parallel_pgx.drawio" /></p>
-<p>Here <span class="math inline">\(T= R_1 \parallel R_2 =
-\frac{R_1R_2}{R_1+R_2}\)</span>, and <span
-class="math inline">\(T|_{R_1=8000, R_2=2000} = 1600\)</span></p>
-<p>We obtain <em>relative sensitivity:</em> <span
-class="math display">\[\begin{align}
-S_{R_1}^T &amp; = \frac{R_2}{R_1+R_2} \\
-S_{R_2}^T &amp; = \frac{R_1}{R_1+R_2}
-\end{align}\]</span></p>
-<p>The contribution of <span class="math inline">\(R_1\)</span> and
-<span class="math inline">\(R_2\)</span> to <span
-class="math inline">\(T\)</span> <span
-class="math display">\[\begin{align}
-R_1&#39;  &amp;= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
-R_2&#39;  &amp;= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
-\end{align}\]</span></p>
-<h2 id="scholar">scholar</h2>
-<p><strong>Normalized sensitivity</strong> captures <strong>relative
-sensitivity</strong></p>
-<blockquote>
-<p>change in objective per change in design variable</p>
-</blockquote>
-<p><img src="/2023/07/12/relative-sensitivity/normalized.PNG"
-alt="Normalized sensitivity" /></p>
-<h2 id="reference">reference</h2>
-<p>Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and
-Sensitivity Analysis [<a
-href="https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf">pdf</a>]</p>
-<p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
-Sensitivity and noise analyses [<a
-href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
-    <url>/2022/05/01/rhel8-old-kernels/</url>
-    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
-<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
-method for removing kernels and keeping only the latest version and
-running kernel:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
-<p>From the <code>yum</code> man page:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Cadence&#39;s reg_verifier</title>
     <url>/2022/04/04/reg-verifier/</url>
     <content><![CDATA[<h2 id="generation">Generation</h2>
@@ -14169,6 +14079,108 @@ alt="image-20220404195156776" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Relative Sensitivity</title>
+    <url>/2023/07/12/relative-sensitivity/</url>
+    <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
+the total resistance) is function of <span
+class="math inline">\(x_1,x_2,...,x_N\)</span>, then total variation can
+be expressed as</p>
+<p><span class="math display">\[\begin{align}
+dT  &amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
+&amp;= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot
+\frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>Then, we obtain relative variation <span
+class="math display">\[\begin{align}
+\frac{dT}{T} &amp;= \sum_{n=1}^N\frac{\partial T}{\partial
+x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
+&amp;= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
+\end{align}\]</span></p>
+<p>⭐ where <span class="math inline">\(S_{x_n}^T=\frac{\partial
+T}{\partial x_n}\frac{x_n}{T}\)</span> is <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p><strong>relative sensitivity</strong> connect <span
+class="math inline">\(\frac{dx_n}{x_n}\)</span> with total relative
+variation <span class="math inline">\(\frac{dT}{T}\)</span></p>
+</blockquote>
+<p>And <span class="math inline">\(dT\)</span> can be expressed as <span
+class="math display">\[
+dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N
+x_n&#39;\cdot \frac{dx_n}{x_n}
+\]</span> ⭐ where <span class="math inline">\(x_n&#39;= S_{x_n}^T
+T\)</span> is the contribution of <span
+class="math inline">\(x_n\)</span> in <span
+class="math inline">\(T\)</span></p>
+<p>⭐ For parallel or series resistors, it can prove <span
+class="math inline">\(\sum_{n=1}^N S_{x_n}^T = 1\)</span> and $ _{n=1}^N
+x_n'=T$</p>
+<hr />
+<p><img src="/2023/07/12/relative-sensitivity/parallel_pgx.drawio.svg"
+alt="parallel_pgx.drawio" /></p>
+<p>Here <span class="math inline">\(T= R_1 \parallel R_2 =
+\frac{R_1R_2}{R_1+R_2}\)</span>, and <span
+class="math inline">\(T|_{R_1=8000, R_2=2000} = 1600\)</span></p>
+<p>We obtain <em>relative sensitivity:</em> <span
+class="math display">\[\begin{align}
+S_{R_1}^T &amp; = \frac{R_2}{R_1+R_2} \\
+S_{R_2}^T &amp; = \frac{R_1}{R_1+R_2}
+\end{align}\]</span></p>
+<p>The contribution of <span class="math inline">\(R_1\)</span> and
+<span class="math inline">\(R_2\)</span> to <span
+class="math inline">\(T\)</span> <span
+class="math display">\[\begin{align}
+R_1&#39;  &amp;= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
+R_2&#39;  &amp;= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
+\end{align}\]</span></p>
+<h2 id="scholar">scholar</h2>
+<p><strong>Normalized sensitivity</strong> captures <strong>relative
+sensitivity</strong></p>
+<blockquote>
+<p>change in objective per change in design variable</p>
+</blockquote>
+<p><img src="/2023/07/12/relative-sensitivity/normalized.PNG"
+alt="Normalized sensitivity" /></p>
+<h2 id="reference">reference</h2>
+<p>Olivier de Weck, Karen Willcox. MIT, Gradient Calculation and
+Sensitivity Analysis [<a
+href="https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/ce1a087c39ebe629ff93ed57686ada0a_MITESD_77S10_lec09.pdf">pdf</a>]</p>
+<p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
+Sensitivity and noise analyses [<a
+href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
+    <url>/2022/05/01/rhel8-old-kernels/</url>
+    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
+<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
+method for removing kernels and keeping only the latest version and
+running kernel:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
+<p>From the <code>yum</code> man page:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
+    <url>/2022/02/02/rocky8-cadence/</url>
+    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
+<p><strong>library preparation for EDA installation</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>network connection using nmcli</title>
     <url>/2022/04/01/rocky-nmcli-network/</url>
     <content><![CDATA[<h4 id="problem">Problem</h4>
@@ -14184,18 +14196,6 @@ alt="image-20220401011509900" /></p>
 <p><img
 src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
 alt="image-20220401011543866" /></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
-    <url>/2022/02/02/rocky8-cadence/</url>
-    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
-<p><strong>library preparation for EDA installation</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>devops</category>
@@ -14698,55 +14698,6 @@ Conference 2006, 2006, pp. 401-404, doi: 10.1109/CICC.2006.320970.</p>
       </categories>
   </entry>
   <entry>
-    <title>Scattering parameters</title>
-    <url>/2023/09/29/scattering/</url>
-    <content><![CDATA[<h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Time-Domain Channel Simulation</title>
     <url>/2023/09/23/sbr-der/</url>
     <content><![CDATA[<p>Three fast time-domain system simulation techniques:</p>
@@ -14853,6 +14804,55 @@ Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links,"
 in IEEE Transactions on Very Large Scale Integration (VLSI) Systems,
 vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
 10.1109/TVLSI.2021.3082208.</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Scattering parameters</title>
+    <url>/2023/09/29/scattering/</url>
+    <content><![CDATA[<h2 id="rational-fit">Rational Fit</h2>
+<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
+<p>To resolve the convergence problem of s-parameter in Spectre
+simulator - <code>rationalfit</code> and write Verilog-A</p>
+<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
+alt="image-20220630224525565" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="z0">Z0</h2>
+<blockquote>
+<p>Remember, S-parameters <strong>don't mean much</strong> unless you
+know the value of the <strong>reference impedance </strong>(it's
+frequently called Z0).</p>
+</blockquote>
+<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
+<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
+alt="image-20220430214052538" /></p>
+<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
+alt="image-20220430214136970" /></p>
+<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
+alt="image-20220430214419283" /></p>
+<blockquote>
+<p>The default <strong>Z0</strong> exported by EMX is
+<strong>50</strong></p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p><a
+href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
+S-parameters
+(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
+<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
+Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
+<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
+rational function approximation algorithm for model generation.
+Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
+doi:10.1109/dac.1999.781313</p>
+<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
+Checker and Rational Fit Model Generator [<a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
+<p>The Complex Art Of Handling S-Parameters: The importance of
+extraction and fitting to circuit simulation involving S-parameters [<a
+href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
 ]]></content>
       <categories>
         <category>dsp</category>
@@ -16738,7 +16738,7 @@ Pearson.</em></p>
 <p><strong>坦诚</strong>，<strong>真诚</strong>，
 <strong>善良</strong></p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Sun Jun  2 11:34:09 PM CST 2024</span><br><span class="line">反思过错，舔舐伤口，再毫无保留地，勇敢地去爱</span><br><span class="line"></span><br><span class="line">Sun Jun  9 06:51:28 PM CST 2024</span><br><span class="line">释怀了</span><br><span class="line"></span><br><span class="line">Mon Jun 10 09:51:58 PM CST 2024</span><br><span class="line">做自己，要太绷着</span><br><span class="line"></span><br><span class="line">Tue Jun 18 07:04:05 AM CST 2024</span><br><span class="line">真的，用了心</span><br><span class="line">move on吧</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Sun Jun  2 11:34:09 PM CST 2024</span><br><span class="line">反思过错，舔舐伤口，再毫无保留地，勇敢地去爱</span><br><span class="line"></span><br><span class="line">Sun Jun  9 06:51:28 PM CST 2024</span><br><span class="line">释怀了</span><br><span class="line"></span><br><span class="line">Mon Jun 10 09:51:58 PM CST 2024</span><br><span class="line">做自己，要太绷着</span><br><span class="line"></span><br><span class="line">Tue Jun 18 07:04:05 AM CST 2024</span><br><span class="line">真的，用了心</span><br><span class="line">move on吧，快乐的单身汉</span><br><span class="line">认识自己,改造自己</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <hr />
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">体会了后悔和遗憾，才会明白，人生的出场顺序有多重要 。</span><br></pre></td></tr></table></figure>
 <p>​ [<a

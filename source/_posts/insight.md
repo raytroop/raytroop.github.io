@@ -9,6 +9,51 @@ mathjax: true
 
 
 
+## Random offset
+
+The dependence of offset voltage and current mismatches upon the overdrive voltage is similar to our
+observations for corresponding *noise quantities*
+
+### differential pair
+
+![image-20240624222306837](insight/image-20240624222306837.png)
+
+In reality, since mismatches are independent statistical variables
+
+![image-20240624222417564](insight/image-20240624222417564.png)
+
+> Above shows that the input transistors must be designed for *high gain* ($g_mr_o = \frac{2}{V_{OV}\lambda}$), which means they must be designed for *small* $V_{GS}-V_{TH}$.
+>
+> It is desirable to minimize $V_{GS}-V_{TH}$ by *lowering the tail current* or *increasing the transistor widths*
+
+---
+
+For $\frac{\Delta K}{K}$
+
+$$\begin{align}
+v_{os} g_m &= \Delta K \frac{W}{L}(V_{GS}-V_{TH})^2 \\
+v_{os} 2K\frac{W}{L}(V_{GS}-V_{TH}) &= \Delta K \frac{W}{L}(V_{GS}-V_{TH})^2 \\
+v_{os} &= \frac{V_{GS}-V_{TH}}{2} \frac{\Delta K}{K}
+\end{align}$$
+
+> The derivation for $\frac{\Delta W/L}{W/L}$ is same with $\frac{\Delta K}{K}$
+
+
+
+### current mirror
+
+![image-20240624224944377](insight/image-20240624224944377.png)
+
+![image-20240624225010443](insight/image-20240624225010443.png)
+
+> To minimize current mismatch, the overdrive voltage must be maximized, a trend opposite to that in differential pair.
+>
+> This is because as $V_{GS}-V_{TH}$ increases, threshold mismatch has a lesser effect on the device currents
+>
+> $\Delta I_D= g_m \Delta V_{TH} = \frac{2I_D}{V_{OV}}\Delta V_{TH}$
+
+
+
 ## Effect of Feedback on Noise
 
 > Feedback does **not improve** the noise performance of circuits.

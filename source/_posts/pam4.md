@@ -1,11 +1,17 @@
 ---
-title: PAM4 Transmitter
+title: PAM4 Signaling
 date: 2022-07-20 22:51:22
 tags:
 categories:
 - analog
 mathjax: true
 ---
+
+
+
+![image-20240624232935743](pam4/image-20240624232935743.png)
+
+![PAM4, NRZ, PCIe 6.0](pam4/nrz-v-pam4-bits.png)
 
 
 
@@ -24,11 +30,11 @@ Equalization will be a lot more complex
 
 ## PAM4 Level Names
 
-![image-20220717000655620](tx-pam4/image-20220717000655620.png)
+![image-20220717000655620](pam4/image-20220717000655620.png)
 
 ## PAM4 Eye Linearity
 
-![image-20220716221740224](tx-pam4/image-20220716221740224.png)
+![image-20220716221740224](pam4/image-20220716221740224.png)
 
 Each level can have different amplitudes, which form the **Eye Linearity**
 $$
@@ -43,7 +49,7 @@ $$
 
 The **Level Separation Mismatch Ratio**, commonly referred to as $R_{\text{LM}}$, is a measurement that is not required in normative or informative VSR tests, but is required by most other variants.
 
-![image-20220716223452261](tx-pam4/image-20220716223452261.png)
+![image-20220716223452261](pam4/image-20220716223452261.png)
 
 $$\begin{align}
 V_{\text{mid}} &= \frac{V_0+V_3}{2} \\
@@ -78,13 +84,13 @@ Reducing the number of switching
 
 ### Binary to PAM4 and Back to Binary Example
 
-![image-20220717000847185](tx-pam4/image-20220717000847185.png)
+![image-20220717000847185](pam4/image-20220717000847185.png)
 
 > The way that Gray coding combines the MSB (most significant bit) and LSB (least significant bit) in each PAM4 symbol assures that **symbol errors** caused by **amplitude noise** are more likely to cause **one bit error than two**. On the other hand, jitter is more likely to cause two bit errors per symbol error. 
 
 # PAM4 TX equalization
 
-![image-20220717010007963](tx-pam4/image-20220717010007963.png)
+![image-20220717010007963](pam4/image-20220717010007963.png)
 
 Here, $d_{\text{LSB}} \in \{-1, 1\}$, $d_{\text{MSB}} \in \{-2, 2\}$ and $d' \in \{ -3, -1, 1, 3 \}$
 
@@ -95,7 +101,7 @@ Implementation-1 could potentially experience performance degradation due to
 2. Gain mismatch, $\Delta G$, could cause eye nonlinearity
 3. Bandwidth mismatch, $\Delta f_{\text{BW}}$, could make the eye misaligned vertically
 
-![image-20220717011129124](tx-pam4/image-20220717011129124.png)
+![image-20220717011129124](pam4/image-20220717011129124.png)
 
 
 
@@ -104,7 +110,7 @@ Implementation-1 could potentially experience performance degradation due to
 > 3-tap FIR results in $4^3 = 64$ possible distinct signal levels
 
 
-![msb_lsb.drawio](tx-pam4/msb_lsb.drawio.svg)
+![msb_lsb.drawio](pam4/msb_lsb.drawio.svg)
 
 $$\begin{align}
 R_U^M \parallel R_D^M &= \frac{3R_T}{2}\\
@@ -112,10 +118,10 @@ R_U^L \parallel R_D^L &= 3R_T
 \end{align}$$
 
 Thevenin Equivalent Circuit is 
-![thevenin_1.drawio](tx-pam4/thevenin_1.drawio.svg)
+![thevenin_1.drawio](pam4/thevenin_1.drawio.svg)
 
 Which can be simpified as
-![thevenin_2.drawio](tx-pam4/thevenin_2.drawio.svg)
+![thevenin_2.drawio](pam4/thevenin_2.drawio.svg)
 $$\begin{align}
 V_{\text{rx}} &= \frac{1}{2}(V_p - V_m) \\
 &= \frac{1}{2}(\frac{2}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-1) \\
@@ -181,23 +187,23 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ.
 
 
 
-![mux2-1.drawio](tx-pam4/mux2-1.drawio.svg)
+![mux2-1.drawio](pam4/mux2-1.drawio.svg)
 
 
 
 ## divider latch timing
 
-![div2-latch.drawio](tx-pam4/div2-latch.drawio.svg)
+![div2-latch.drawio](pam4/div2-latch.drawio.svg)
 
 ## Two latches
 
-![two-latch.drawio](tx-pam4/two-latch.drawio.svg)
+![two-latch.drawio](pam4/two-latch.drawio.svg)
 
 
 
 # DAC-based FFE in PAM4 Transmitter
 
-![image-20220721220225623](tx-pam4/image-20220721220225623.png)
+![image-20220721220225623](pam4/image-20220721220225623.png)
 
 One classic TX implementation contain:
 
@@ -206,13 +212,13 @@ One classic TX implementation contain:
 
 > C. Menolfi et al., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," 2018 IEEE International Solid - State Circuits Conference - (ISSCC), 2018, pp. 104-106, doi: 10.1109/ISSCC.2018.8310205.
 
-![image-20220721234522043](tx-pam4/image-20220721234522043.png)
+![image-20220721234522043](pam4/image-20220721234522043.png)
 
 
 
 ## $\pi$-coil
 
-![image-20220720232837839](tx-pam4/image-20220720232837839.png)
+![image-20220720232837839](pam4/image-20220720232837839.png)
 
 > J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid - State Circuits Conference - (ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.
 
@@ -227,4 +233,6 @@ B. Razavi, "Design Techniques for High-Speed Wireline Transmitters," in IEEE Ope
 Wang, Z., Choi, M., Lee, K., Park, K., Liu, Z., Biswas, A., Han, J., Du, S., & Alon, E. (2022). An Output Bandwidth Optimized 200-Gb/s PAM-4 100-Gb/s NRZ Transmitter With 5-Tap FFE in 28-nm CMOS. IEEE Journal of Solid-State Circuits, 57(1), 21-31. https://doi.org/10.1109/JSSC.2021.3109562
 
 J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid - State Circuits Conference - (ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.
+
+PCIe® 6.0 Specification: The Interconnect for I/O Needs of the Future PCI-SIG® Educational Webinar Series, [[https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf](https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf)]
 

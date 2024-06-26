@@ -7,6 +7,22 @@ categories:
 mathjax: true
 ---
 
+## Subthreshold Conduction
+
+By square-law, the Eq $g_m = \sqrt{2\mu C_{ox}\frac{W}{L}I_D}$, it is possible to obtain a *higer* transconductance by increasing $W$ while maintaining $I_D$ constant. However, if $W$ increases while $I_D$ remains constant, then $V_{GS} \to V_{TH}$ and device enters the subthreshold region.
+$$
+I_D = I_0\exp \frac{V_{GS}}{\xi V_T}
+$$
+
+where $I_0$ is proportional to $W/L$, $\xi \gt 1$ is a nonideality factor, and $V_T = kT/q$
+
+As a result, the transconductance in subthreshold region is
+$$
+g_m = \frac{I_D}{\xi V_T}
+$$
+
+which is $g_m \propto I_D$
+
 
 
 ## Random offset

@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,439 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/27/dtft-dft/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/27/dtft-dft/" class="post-title-link" itemprop="url">DTFT & DFT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-27 10:59:52" itemprop="dateCreated datePublished" datetime="2023-05-27T10:59:52+00:00">2023-05-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-06-26 00:09:49" itemprop="dateModified" datetime="2024-06-26T00:09:49+00:00">2024-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="sampling-theorem">sampling theorem</h2>
+<h3 id="time-sampling-theorem">time-sampling theorem</h3>
+<p><img src="/2023/05/27/dtft-dft/image-20230527154334304.png"
+alt="image-20230527154334304" /></p>
+<p>The spectrum <span
+class="math inline">\(\overline{X}(\omega)\)</span> consists of <span
+class="math inline">\(X(\omega)\)</span> repeating periodically with
+period <span class="math inline">\(\omega _s = 2\pi/T\)</span> rad/s, or
+<span class="math inline">\(f_s = 1/T\)</span> Hz <span
+class="math display">\[
+\overline{X}(\omega) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(\omega -
+n\omega _s)
+\]</span></p>
+<h3 id="spectral-sampling-theorem">spectral-sampling theorem</h3>
+<p><img src="/2023/05/27/dtft-dft/image-20230527155436179.png"
+alt="image-20230527155436179" /></p>
+<p>The Fourier transform <span class="math inline">\(X(\omega)\)</span>
+of a <strong>timelimited</strong> signal <span
+class="math inline">\(x(t)\)</span> is given by <span
+class="math display">\[
+X(\omega)=\int_{-\infty}^{\infty}x(t)e^{-j\omega t}dt =
+\int_0^{\tau}x(t)e^{-j\omega t}dt
+\]</span> <span class="math inline">\(x_{T_0}(t)\)</span>, a
+<strong>periodic</strong> signal formed by repeating <span
+class="math inline">\(x(t)\)</span> every <span
+class="math inline">\(T_0\)</span> seconds (<span
+class="math inline">\(T_0 \gt \tau\)</span>), which can be expressed by
+the exponential Fourier series <span class="math display">\[
+x_{T_0}(t) = \sum_{-\infty}^{\infty}D_ne^{jn\omega _0t}
+\]</span> where <span class="math inline">\(\omega_0 =
+\frac{2\pi}{T_0}\)</span></p>
+<p>And <span class="math inline">\(D_n\)</span> can be obtained by
+(assuming <span class="math inline">\(T_0 \gt \tau\)</span>) <span
+class="math display">\[
+D_n = \frac{1}{T_0}\int_0^{T_0}x(t)e^{-jn\omega _0 t}dt =
+\frac{1}{T_0}\int_0^{\tau}x(t)e^{-jn\omega _0 t}dt
+\]</span> Then it follows that <span class="math display">\[
+D_n = \frac{1}{T_0}X(n\omega _0)
+\]</span> This result indicates that the <em>coefficients of the Fourier
+series</em> for <span class="math inline">\(x_{T_0}(t)\)</span> are
+<span class="math inline">\((1/T_0)\)</span> times the <em>sample values
+of the spectrum</em> <span class="math inline">\(X(\omega)\)</span>
+taken at intervals of <span class="math inline">\(\omega
+_0\)</span>.</p>
+<h4 id="spectral-interpolation">spectral interpolation</h4>
+<p>Consider a signal <em>timelimited</em> to <span
+class="math inline">\(\tau\)</span> seconds and <em>centered at</em>
+<span class="math inline">\(T_c\)</span>. The spectrum <span
+class="math inline">\(X(\omega)\)</span> of <span
+class="math inline">\(x(t)\)</span> can be reconstructed from the
+samples of <span class="math inline">\(X(\omega)\)</span> and the
+<strong>spectral interpolation formula</strong> is obtained as <span
+class="math display">\[
+X(\omega) = \sum_{-\infty}^{\infty}X(n\omega _0)
+\text{sinc}\left(\frac{\omega T_0}{2}-n\pi\right)e^{-j(\omega - n\omega
+_0)T_c}
+\]</span> step by step:</p>
+<ol type="1">
+<li><p>The Fourier transform of <span
+class="math inline">\(x_{T_0}(t)\)</span> is <span
+class="math display">\[
+2\pi\sum_n D_n \delta(\omega - n\omega_0) = \frac{2\pi}{T_0}\sum_n
+X(n\omega_0) \delta(\omega - n\omega_0)
+\]</span></p></li>
+<li><p>The Fourier transform of rectangular pulse <span
+class="math inline">\(\text{rect}((t-T_c)/T_0)\)</span> centered at
+<span class="math inline">\(T_c\)</span> and duration <span
+class="math inline">\(T_0\)</span> <span class="math display">\[
+T_0 \text{sinc}(\omega T_0/2)e^{-j\omega T_c}
+\]</span></p></li>
+<li><p>Hence, <span class="math inline">\(X(\omega)\)</span> is <span
+class="math inline">\(1/2\pi\)</span> times the <em>convolution</em> of
+these two Fourier</p></li>
+</ol>
+<h2 id="numerical-computation-of-the-fourier-transform">Numerical
+Computation of The Fourier Transform</h2>
+<h3 id="finite-length-signal-periodic-signal">Finite-length signal &amp;
+periodic signal</h3>
+<p><img src="/2023/05/27/dtft-dft/image-20230528112723460.png"
+alt="image-20230528112723460" /></p>
+<blockquote>
+<p><span class="math display">\[
+x[n] = \left\{ \begin{array}{cl}
+\tilde{x}[n] &amp; : \ 0 \leq n \leq N-1 \\
+0 &amp; : \text{otherwise}
+\end{array} \right.
+\]</span></p>
+</blockquote>
+<p>Consider a finite-length signal <span
+class="math inline">\(x[n]\)</span> such that <span
+class="math inline">\(x[n] = 0\)</span> except in the interval <span
+class="math inline">\(0 \leq n \leq N − 1\)</span>, and consider the
+convolution of <span class="math inline">\(x[n]\)</span> with the
+periodic impulse train <span
+class="math inline">\(\tilde{p}[n]\)</span>: <span
+class="math display">\[
+\tilde{x}[n] = x[n]*\tilde{p}[n] = x[n]*
+\sum_{r=-\infty}^{\infty}\delta[n-rN] = \sum_{r=-\infty}^{\infty}x[n-rN]
+\]</span> Thanks to Fourier Transform <em>convolution property</em>, the
+DTFT of <span class="math inline">\(\tilde{x}[n]\)</span> is
+obtained</p>
+<p><span class="math display">\[\begin{align}
+\tilde{X}(e^{j\omega}) &amp;= X(e^{j\omega}) \tilde{P}(e^{j\omega})\\
+&amp;= X(e^{j\omega})
+\sum_{k=-\infty}^{\infty}\frac{2\pi}{N}\delta\left(\omega - \frac{2\pi
+k}{N}\right) \\
+&amp; =
+\sum_{k=-\infty}^{\infty}\frac{2\pi}{N}X(e^{j(2\pi/N)k})\delta\left(\omega
+- \frac{2\pi k}{N}\right)
+\end{align}\]</span></p>
+<p>⭐ we conclude the DFS coefficients of <span
+class="math inline">\(\tilde{x}[n]\)</span> is <span
+class="math display">\[
+\tilde{X}[k] = X(e^{j\omega})|_{\omega=2\pi k/N}
+\]</span> where <span class="math inline">\(\tilde{X}[k]\)</span> is
+<strong>DFS coefficients</strong> of <span
+class="math inline">\(\tilde{X}[k]\)</span>;</p>
+<p><span class="math inline">\(X(e^{j\omega})|_{\omega=2\pi
+k/N}\)</span> is samples of the <strong>DTFT</strong> of the
+<em>finite-length sequence</em> <span
+class="math inline">\(x[n]\)</span></p>
+<h3 id="sampling-the-fourier-transform">sampling the Fourier
+transform</h3>
+<p>Assuming an <em>aperiodic sequence</em> with Fourier transform <span
+class="math inline">\(X(e^{j\omega})\)</span>, the <strong>sequences of
+samples</strong> <span class="math inline">\(\tilde{X}[k] =
+X(e^{j\omega})|_{\omega=2\pi k/N}\)</span> being periodic with period
+<span class="math inline">\(N\)</span> could be the <strong>sequence of
+<em>DFS</em> coefficients</strong> of sequence <span
+class="math inline">\(\tilde{x}[n]\)</span></p>
+<p>⭐To obtain <span class="math inline">\(\tilde{x}[n]\)</span>,
+substitute <span class="math inline">\(\tilde{X}[k]\)</span> into DFS
+synthesis equation <span class="math display">\[
+\tilde{x}[n] =x[n]*\sum_{r=-\infty}^{\infty}\delta[n-rN] =
+\sum_{r=-\infty}^{\infty}x[n-rN]
+\]</span> Thus, the periodic sequence <span
+class="math inline">\(\tilde{x}[n]\)</span>, corresponding to <span
+class="math inline">\(\tilde{X}[k]\)</span> obtained by sampling <span
+class="math inline">\(X(e^{j\omega})\)</span>, is formed from <span
+class="math inline">\(x[n]\)</span> by <em>adding together an infinite
+number of shifted replicas of <span
+class="math inline">\(x[n]\)</span></em>.</p>
+<h3 id="discrete-fourier-transform-dft">Discrete Fourier Transform
+(DFT)</h3>
+<blockquote>
+<p>When the <strong>Fourier series</strong> is used in this way to
+represent <em>finite-length sequences</em>, it is called the discrete
+Fourier transform or <strong>DFT</strong></p>
+<p>In developing, discussing, and applying the DFT, it is always
+important to remember that the representation through <em>samples of the
+Fourier transform</em> is in effect <em>a representation of the
+finite-duration sequence by a periodic sequence</em>, <strong>one period
+of which is the finite duration sequence that we wish to
+represent</strong></p>
+</blockquote>
+<ul>
+<li><p>Considering a <em>finite-length</em> sequence <span
+class="math inline">\(x[n]\)</span> of length <span
+class="math inline">\(N\)</span> samples such that <span
+class="math inline">\(x[n]=0\)</span> outside the range <span
+class="math inline">\(0\leq n \leq N-1\)</span>.</p>
+<p>To each finite-length sequence of length <span
+class="math inline">\(N\)</span>, we can always associate a periodic
+sequence <span class="math inline">\(\tilde{x}[n]\)</span></p>
+<p><span class="math inline">\(\tilde{x}[n] =
+\sum_{r=-\infty}^{\infty}x[n-rN]\)</span></p></li>
+<li><p>Since <span class="math inline">\(x[n]\)</span> is assumed to
+have finite length <span class="math inline">\(N\)</span>, there is
+<em>no overlap</em> between the terms <span class="math inline">\(x[n −
+rN]\)</span> for different values of <span
+class="math inline">\(r\)</span>.</p>
+<p><span class="math inline">\(\tilde{x}[n] = x[(n \; \text{modulo}\;
+N)]\)</span></p></li>
+</ul>
+<p>As discussed the sequence of <em>DFS coefficients</em> <span
+class="math inline">\(\tilde{X}[k]\)</span> of <em>the periodic
+sequence</em> <span class="math inline">\(\tilde{x}[n]\)</span> is
+itself a periodic sequence with <em>period</em> <span
+class="math inline">\(N\)</span>.</p>
+<p>To maintain a duality between the time and frequency domains, This
+finite-duration sequence, <span class="math inline">\(X [k]\)</span>,
+one period of <span class="math inline">\(\tilde{X}[k]\)</span> will be
+referred to as the <strong>DFT</strong> <span class="math display">\[
+X[k] = \left\{ \begin{array}{cl}
+\tilde{X}[k] &amp; : \ 0 \leq k \leq N-1 \\
+0 &amp; : \ \text{otherwise}
+\end{array} \right.
+\]</span> and <span class="math display">\[
+\tilde{X}[k] = X[(k \; \text{modulo}\; N)]
+\]</span> <span class="math inline">\(\tilde{X}[k]\)</span> and <span
+class="math inline">\(\tilde{x}[n]\)</span> are related by</p>
+<p><span class="math display">\[\begin{align}
+\tilde{X}[k] &amp;= \sum_{n=0}^{N-1}\tilde{x}[n]W_N^{kn} \\
+\tilde{x}[n] &amp;=\frac{1}{N} \sum_{k=0}^{N-1}\tilde{X}[k]W_N^{-kn}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(W_N = e^{-j(2\pi/N)}\)</span></p>
+<p>DFT analysis and synthesis equations , <span
+class="math inline">\(X[k]\)</span> and <span
+class="math inline">\(x[n]\)</span> are related by</p>
+<p>⭐ Analysis equation: <span class="math display">\[
+X[k] = \left\{ \begin{array}{cl}
+\sum_{n=0}^{N-1}x[n]W_N^{kn} &amp; : \ 0 \leq k \leq N-1 \\
+0 &amp; : \ \text{otherwise}
+\end{array} \right.
+\]</span> ⭐ Synthesis equation: <span class="math display">\[
+x[n] = \left\{ \begin{array}{cl}
+\frac{1}{N} \sum_{k=0}^{N-1}X[k]W_N^{-kn} &amp; : \ 0 \leq n \leq N-1 \\
+0 &amp; : \ \text{otherwise}
+\end{array} \right.
+\]</span></p>
+<blockquote>
+<p>That is, the fact that <span class="math inline">\(X[k]=0\)</span>
+for <span class="math inline">\(k\)</span> outside the interval <span
+class="math inline">\(0 \leq k \leq N −1\)</span> and that <span
+class="math inline">\(x[n] = 0\)</span> for <span
+class="math inline">\(n\)</span> outside the interval <span
+class="math inline">\(0 \leq n \leq N − 1\)</span> is implied, but not
+always stated explicitly.</p>
+</blockquote>
+<blockquote>
+<p>The inherent periodicity is always present. Sometimes, it causes us
+difficulty, and sometimes we can exploit it, but to totally ignore it is
+to invite trouble.</p>
+<p>In defining the DFT representation,</p>
+<ul>
+<li>we are simply recognizing that we are interested in values of <span
+class="math inline">\(x[n]\)</span> only in the interval <span
+class="math inline">\(0 \leq n \leq N-1\)</span>, because <span
+class="math inline">\(x[n]\)</span> is really zero outside that
+interval,</li>
+<li>and we are interested in values of <span
+class="math inline">\(X[k]\)</span> only in the interval <span
+class="math inline">\(0 \leq k \leq N-1\)</span> because these are the
+only values needed to reconstruct <span
+class="math inline">\(x[n]\)</span></li>
+</ul>
+</blockquote>
+<h3 id="multiplication-property-modulation-property">Multiplication
+Property (Modulation Property)</h3>
+<p><span class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span></p>
+<p>Then sampled signal fourier transform is <span
+class="math display">\[\begin{align}
+X_s(\omega) &amp;= \frac{1}{2\pi}X_{\delta}(\omega)*X(\omega) \\
+&amp;= \frac{1}{T} \left(\sum_{k\in \mathbb{Z}}\delta(\omega -
+k\frac{2\pi}{T})\right) * X(\omega)
+\end{align}\]</span></p>
+<p><a
+target="_blank" rel="noopener" href="https://web.stanford.edu/class/ee179/lectures/notes11.pdf">Lecture
+11: Sampling and Pulse Modulation</a></p>
+<p><img src="/2023/05/27/dtft-dft/image-20220520221108500.png"
+alt="image-20220520221108500" /></p>
+<h3 id="multiplication-property-convolution-property">multiplication
+property &amp; convolution property</h3>
+<p>Because a digital computer can work only with <em>discrete data</em>
+(sequence of numbers), moreover, it can compute <span
+class="math inline">\(X(\omega)\)</span> only at some <em>discrete
+values</em> of <span class="math inline">\(\omega\)</span> (samples of
+<span class="math inline">\(X(\omega)\)</span>).</p>
+<p><img src="/2023/05/27/dtft-dft/image-20230527181614818.png"
+alt="image-20230527181614818" /></p>
+<ul>
+<li><p><strong>{ (a), (b) } -&gt; { (c), (d) }</strong>:</p>
+<p>with CT multiplication property, <span
+class="math inline">\(X(\omega) = T
+\overline{X}(\omega)\)</span></p></li>
+<li><p><strong>{ (c), (d) } -&gt; { (e), (f) }</strong>:</p>
+<p>with DT convolution property, <span class="math inline">\(X_N(\omega)
+= \frac{2\pi}{N}\overline{X}(\omega)\)</span></p></li>
+<li><p>Assuming <span class="math inline">\(x_{T0}(t)
+=\sum_{r=-\infty}^{\infty}x(t-rT_0)\)</span>, formed by adding together
+an infinite number of shifted replicas of <span
+class="math inline">\(x(t)\)</span>: with CT convolution property, <span
+class="math inline">\(X_{T0}(\omega)=X(\omega)\frac{2\pi}{T_0}=\overline{X}(\omega)\frac{2\pi
+T}{T_0}\)</span> which is <span
+class="math inline">\(X_{T0}(\omega)=\frac{2\pi}{N}\overline{X}(\omega)\)</span></p></li>
+</ul>
+<p><span class="math inline">\(X_N(\omega) = X_{T0}(\omega)\)</span>
+indicates that finite-length discrete-time sequence provide Fourier
+Transform of continuous-time periodic signal</p>
+<p>⭐when a signal <span class="math inline">\(x(t)\)</span> is sampled
+and then periodically repeated, the corresponding spectrum is also
+sampled and periodically repeated</p>
+<h2 id="zero-padding">zero-padding</h2>
+<h3 id="the-number-of-zero-padding">The number of zero-padding</h3>
+<p>When you tack on a bunch of zeros to a sequence and then compute the
+<em>DFT</em>, you're just getting <strong>more and more samples</strong>
+of the <em>DTFT</em> of the original sequence.</p>
+<p>Let's look at a simple rectangular pulse, <span
+class="math inline">\(x[n]=1\)</span> for <span class="math inline">\(0
+\leq n \lt M\)</span>. The DTFT of <span
+class="math inline">\(x[n]\)</span> is: <span class="math display">\[
+X(\omega) = \frac{\sin(\omega M/2)}{\sin(\omega/2)} e^{-j \omega
+(M-1)/2}
+\]</span> Let's plot <span class="math inline">\(|X(\omega)|\)</span>
+for <span class="math inline">\(M=8\)</span> over a couple of
+periods:</p>
+<p><img src="/2023/05/27/dtft-dft/image-20230527210507334.png"
+alt="image-20230527210507334" /></p>
+<p>Here's the <em>P</em>-point DFT of our 8-point rectangular pulse:</p>
+<ul>
+<li><p>8-point DFT</p>
+<p><img src="/2023/05/27/dtft-dft/image-20230526231448884.png"
+alt="image-20230526231448884" /></p></li>
+<li><p>16-point DFT</p>
+<p><img src="/2023/05/27/dtft-dft/image-20230526231531076.png"
+alt="image-20230526231531076" /></p></li>
+<li><p>32-point DFT</p>
+<p><img src="/2023/05/27/dtft-dft/image-20230526231633067.png"
+alt="image-20230526231633067" /></p></li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear all;</span><br><span class="line"></span><br><span class="line">M = <span class="number">8</span>;</span><br><span class="line">w = <span class="built_in">linspace</span>(<span class="number">-2</span>*<span class="built_in">pi</span>, <span class="number">2</span>*<span class="built_in">pi</span>, <span class="number">800</span>);</span><br><span class="line">X_dtft = (<span class="built_in">sin</span>(w*M/<span class="number">2</span>) ./ <span class="built_in">sin</span>(w/<span class="number">2</span>)) .* <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">j</span> * w * (M<span class="number">-1</span>) / <span class="number">2</span>);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(w, <span class="built_in">abs</span>(X_dtft))</span><br><span class="line">title(<span class="string">&#x27;DTFT (|X(\omega)|)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">x = <span class="built_in">ones</span>(<span class="number">1</span>, M);</span><br><span class="line"></span><br><span class="line"><span class="comment">% P = 8</span></span><br><span class="line">P = <span class="number">8</span>;</span><br><span class="line">X_8pt = fft(x, P);</span><br><span class="line">w_k_8pt = (<span class="number">0</span>:P<span class="number">-1</span>) * (<span class="number">2</span>*<span class="built_in">pi</span>/P);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 16-point dft</span></span><br><span class="line">P = <span class="number">16</span>;</span><br><span class="line">X_16pt = fft(x, P); <span class="comment">% pad 8 point</span></span><br><span class="line">w_k_16pt = (<span class="number">0</span>:P<span class="number">-1</span>) * (<span class="number">2</span>*<span class="built_in">pi</span>/P);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% 32-point dft</span></span><br><span class="line">P = <span class="number">32</span>;</span><br><span class="line">X_32pt = fft(x, P); <span class="comment">% pad 24 point</span></span><br><span class="line">w_k_32pt = (<span class="number">0</span>:P<span class="number">-1</span>) * (<span class="number">2</span>*<span class="built_in">pi</span>/P);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(w, <span class="built_in">abs</span>(X_dtft))</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="built_in">plot</span>(w_k_8pt, <span class="built_in">abs</span>(X_8pt), <span class="string">&#x27;o&#x27;</span>)</span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;dtft&#x27;</span>, <span class="string">&#x27;8-point dft&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;8-point dft (without zero-padding)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">plot</span>(w, <span class="built_in">abs</span>(X_dtft))</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="built_in">plot</span>(w_k_16pt, <span class="built_in">abs</span>(X_16pt), <span class="string">&#x27;o&#x27;</span>)</span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;dtft&#x27;</span>, <span class="string">&#x27;16-point dft with 8 point zero-padding&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;16-point dft&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">plot</span>(w, <span class="built_in">abs</span>(X_dtft))</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="built_in">plot</span>(w_k_32pt, <span class="built_in">abs</span>(X_32pt), <span class="string">&#x27;o&#x27;</span>)</span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;dtft&#x27;</span>, <span class="string">&#x27;32-point dft&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;32-point dft with 24 point zero-padding&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>Zero padding does not improve accuracy or
+resolution.</strong></p>
+<ul>
+<li><p>Zero padding only allows us to look at more samples of that
+imperfect reality. It can never reduce the imperfection which caused by
+<strong>aliasing</strong>.</p></li>
+<li><p>The only way to obtain the detailed signal spectrum with a fine
+frequency resolution is to apply more available data samples, that is, a
+longer sequence of data.</p></li>
+</ul>
+<p><img src="/2023/05/27/dtft-dft/image-20230529232357283.png"
+alt="image-20230529232357283" /></p>
+<p><img src="/2023/05/27/dtft-dft/image-20230529232704566.png"
+alt="image-20230529232704566" /></p>
+<h3 id="prepend-vs-postpend-vs-both">prepend vs postpend vs both</h3>
+<p><em>TODO</em> 📅</p>
+<h2 id="reference">reference</h2>
+<p>Proakis, J. G., &amp; Manolakis, D. G. (2007). Digital signal
+processing (4th ed.). Pearson Prentice Hall.</p>
+<p>Tan, &amp; Jiang, J. (2019). Digital signal processing : fundamentals
+and applications / Lizhe Tan and Jean Jiang. (Third edition.). Academic
+Press.</p>
+<p>Steve Eddins, The DFT and the DTFT <a
+target="_blank" rel="noopener" href="https://blogs.mathworks.com/steve/2010/03/15/the-dft-and-the-dtft-mathjax/?doing_wp_cron=1648269838.4060609340667724609375">https://blogs.mathworks.com/steve/2010/03/15/the-dft-and-the-dtft-mathjax/?doing_wp_cron=1648269838.4060609340667724609375</a></p>
+<p>Lathi, B. P., &amp; Green, R. A. (2018). Linear systems and signals
+(Third Edition.). Oxford University Press.</p>
+<p>Oppenheim, A. V., &amp; Schafer, R. W. (2014). Discrete-time signal
+processing (Third ed., Pearson new internat. ed.). Pearson.</p>
+<p>Lyons, R. G. (2011). Understanding digital signal processing (3rd
+ed.). Prentice Hall.</p>
+<p>Dr. Wang Hongwei. FFT Basics and Case Study using Multi-Instrument
+[<a
+target="_blank" rel="noopener" href="https://www.virtins.com/doc/D1002/FFT_Basics_and_Case_Study_using_Multi-Instrument_D1002.pdf">https://www.virtins.com/doc/D1002/FFT_Basics_and_Case_Study_using_Multi-Instrument_D1002.pdf</a>]</p>
+<p>Spectral Leakage and Zero-Padding of the Discrete Fourier Transform
+[<a
+target="_blank" rel="noopener" href="https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-padding-and-frequency-resolution.html">https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-padding-and-frequency-resolution.html</a>]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +659,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:49" itemprop="dateModified" datetime="2024-06-26T00:09:49+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -662,7 +1095,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:50" itemprop="dateModified" datetime="2024-06-26T00:09:50+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1162,7 +1595,7 @@ target="_blank" rel="noopener" href="https://coecs.ou.edu/Joseph.P.Havlicek/ece3
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:49" itemprop="dateModified" datetime="2024-06-26T00:09:49+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1307,7 +1740,7 @@ Revision 7</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:50" itemprop="dateModified" datetime="2024-06-26T00:09:50+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1495,7 +1928,7 @@ target="_blank" rel="noopener" href="https://shar.es/afO6e1">https://shar.es/afO
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:49" itemprop="dateModified" datetime="2024-06-26T00:09:49+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1723,7 +2156,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:49" itemprop="dateModified" datetime="2024-06-26T00:09:49+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1842,7 +2275,7 @@ target="_blank" rel="noopener" href="https://anysilicon.com/the-ultimate-guide-t
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:49" itemprop="dateModified" datetime="2024-06-26T00:09:49+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2050,7 +2483,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:49" itemprop="dateModified" datetime="2024-06-26T00:09:49+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2279,7 +2712,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">http
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
+      <time title="Modified: 2024-06-26 00:09:49" itemprop="dateModified" datetime="2024-06-26T00:09:49+00:00">2024-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2306,97 +2739,6 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">http
 <p>The instances whose name contain "dont_touch_" shall be preserved
 during synthesis</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/29/dspf-in-corner/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/29/dspf-in-corner/" class="post-title-link" itemprop="url">different DSPF files for each corner</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-01-29 22:25:20" itemprop="dateCreated datePublished" datetime="2023-01-29T22:25:20+00:00">2023-01-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:31:58" itemprop="dateModified" datetime="2024-06-24T15:31:58+00:00">2024-06-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Create a new file with an extension <strong>scs</strong> like
-<em>myDSPF_Files.scs</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">* DSPF files to use with Corner Definitions</span><br><span class="line">* This is an example file showing how to define different dspf files for different corners</span><br><span class="line">* using model files for individual components as the</span><br><span class="line">* building blocks.</span><br><span class="line">simulator lang=spectre</span><br><span class="line">library dspf_files_corners</span><br><span class="line"></span><br><span class="line">section rctyp_25</span><br><span class="line">dspf_include &quot;DSPF_RC_TYPNOM25.spf&quot;</span><br><span class="line">endsection rctyp_25</span><br><span class="line"></span><br><span class="line">section rctyp_125</span><br><span class="line">dspf_include &quot;DSPF_RC_TYP125.spf&quot;</span><br><span class="line">endsection rctyp_125</span><br><span class="line"></span><br><span class="line">section rcworst_25</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE25.spf&quot;</span><br><span class="line">end section rcworst_25</span><br><span class="line"></span><br><span class="line">section rcworst_125</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE125.spf&quot;</span><br><span class="line">end section rcworst_125</span><br><span class="line"></span><br><span class="line">endlibrary dspf_files_corners</span><br></pre></td></tr></table></figure>
-<p>Add the file created above ‘<em>myDSPF_File.scs</em>’ in
-‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
-<p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
-alt="image-20230129223248655" /></p>
 
       
     </div>

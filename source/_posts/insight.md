@@ -23,7 +23,9 @@ $$
 
 which is $g_m \propto I_D$
 
+![image-20240627230726326](insight/image-20240627230726326.png)
 
+![image-20240627230744044](insight/image-20240627230744044.png)
 
 ## Random offset
 

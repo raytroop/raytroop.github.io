@@ -36,7 +36,7 @@ $$
 H_T(s)=\frac{2\xi\omega_n s+\omega_n^2}{s^2+2\xi \omega_n s+\omega_n^2}
 $$
 
-> The jitter transfer represents a **low-pass filter** whose magnitude is around 1 (0 dB) for low jitter frequencies and drops at 20 db/decade for frequencies above $\omega_n$
+> The jitter transfer represents a **low-pass filter** whose magnitude is around 1 (0 dB) for low jitter frequencies and drops at 20 dB/decade for frequencies above $\omega_n$
 
 ![image-20220504104202197](cdr-linear/image-20220504104202197.png)
 

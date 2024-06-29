@@ -9,6 +9,37 @@ mathjax: true
 
 
 
+## Complex conjugate pair poles
+
+![image-20240629134127219](ss-insight/image-20240629134127219.png)
+$$\begin{align}
+A &= \frac{\frac{A_0}{(1+s/\omega_1)(1+s/\omega_2)}}{1+\beta \frac{A_0} {(1+s/\omega_1)(1+s/\omega_2)}} \\
+&= \frac{A_0}{1+A_0 \beta}\frac{1}{\frac{s^2}{\omega_1\omega_2(1+A_0\beta)}+\frac{1/\omega_1+1/\omega_2}{1+A_0\beta}s+1} \\
+&\simeq = \frac{A_0}{1+A_0 \beta}\frac{1}{\frac{s^2}{\omega_u\omega_2}+\frac{1}{\omega_u}s+1} \\
+&= \frac{A_0}{1+A_0 \beta}\frac{\omega_u\omega_2}{s^2+\omega_2s+\omega_u\omega_2}
+\end{align}$$
+
+That is $\omega_u = \sqrt{\omega_u\omega_2}$ and $\zeta = \frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}$
+
+where $\omega_u$ is the unity gain bandwidth
+
+
+![image-20240629112429803](ss-insight/image-20240629112429803.png)
+
+where $f_r$ is *resonant frequency*, $\zeta$ is *damping ratio*, $P_f$ *maximum peaking*,  $P_t$ is the peak of the first overshoot (step response)
+
+![image-20240629142324982](ss-insight/image-20240629142324982.png)
+
+
+
+---
+
+![image-20240629140001275](ss-insight/image-20240629140001275.png)
+
+
+
+
+
 ## NRZ Bandwidth
 
 ![image-20240607221359970](ss-insight/image-20240607221359970.png)
@@ -48,13 +79,13 @@ $$
 R(s) = \frac{1}{s^{k+1}}
 $$
 
-Then the equaion for the error is simply
+Then the equation for the error is simply
 $$
 E(s) = \frac{1}{1+T(s)}R(s)
 $$
 
 
-Apllication of the *Final Value Theorem* to the error formula gives the result
+Application of the *Final Value Theorem* to the error formula gives the result
 
 $$\begin{align}
 \lim _{t\to \infty} e(t) &= e_{ss} = \lim _{s\to 0} sE(s) \\

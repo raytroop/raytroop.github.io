@@ -7,6 +7,42 @@ categories:
 mathjax: true
 ---
 
+
+
+## Zero in differential pair with active current mirror
+
+![image-20240629103021286](insight/image-20240629103021286.png)
+
+Noting the circuit consists of a "slow path" (M1, M3, M4) in parallel with a "fast path" (M2)
+
+- "slow path"
+  $$
+  H_\text{slow}(s) = \frac{A_0}{(1+s/\omega _{pE})(1+s/\omega _{pO})}
+  $$
+
+- "fast path"
+  $$
+  H_\text{fast}(s) = \frac{A_0}{1+s/\omega _{pO}}
+  $$
+
+Then
+$$\begin{align}
+\frac{V_\text{out}}{V_\text{in}} &= H_\text{slow}(s) + H_\text{fast}(s) \\
+&= \frac{A_0}{1+s/\omega _{pO}}\left(\frac{1}{1+s/\omega _{pE}} + 1 \right) \\
+&= \frac{A_0(1+s/2\omega _{pE})}{(1+s/\omega _{pO})(1+s/\omega _{pE})}
+\end{align}$$
+
+That is, the system exhibits a zero at $2\omega_{pE}$
+
+---
+
+signals traveling through *two paths* within an amplifier may cancel each other at one frequency, creating a *zero* in the transfer function
+
+![image-20240629104408168](insight/image-20240629104408168.png)
+
+
+
+
 ## Subthreshold Conduction
 
 By square-law, the Eq $g_m = \sqrt{2\mu C_{ox}\frac{W}{L}I_D}$, it is possible to obtain a *higer* transconductance by increasing $W$ while maintaining $I_D$ constant. However, if $W$ increases while $I_D$ remains constant, then $V_{GS} \to V_{TH}$ and device enters the subthreshold region.

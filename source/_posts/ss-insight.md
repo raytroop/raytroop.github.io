@@ -19,7 +19,7 @@ A &= \frac{\frac{A_0}{(1+s/\omega_1)(1+s/\omega_2)}}{1+\beta \frac{A_0} {(1+s/\o
 &= \frac{A_0}{1+A_0 \beta}\frac{\omega_u\omega_2}{s^2+\omega_2s+\omega_u\omega_2}
 \end{align}$$
 
-That is $\omega_u = \sqrt{\omega_u\omega_2}$ and $\zeta = \frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}$
+That is $\omega_n = \sqrt{\omega_u\omega_2}$ and $\zeta = \frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}$
 
 where $\omega_u$ is the unity gain bandwidth
 
@@ -426,6 +426,52 @@ If $S'_x(f)$ is even symmetrical around a positive frequency $f_0$, then two add
 > Note that the DSB definition makes sense only if the SSB PSD is even symmetrical around zero
 
 
+
+## Poles and Zeros of transfer function
+
+### poles
+
+$$
+H(s) = \frac{1}{1+s/\omega_0}
+$$
+
+magnitude and phase at $\omega_0$ and $-\omega_0$
+$$\begin{align}
+H(j\omega_0) &=  \frac{1}{1+j} = \frac{1}{\sqrt{2}}e^{-j\pi/4} \\
+H(-j\omega_0) &=  \frac{1}{1-j} = \frac{1}{\sqrt{2}}e^{j\pi/4}
+\end{align}$$
+
+system response $y(t)$ of input $\cos(\omega_0 t)$, note $\cos(\omega_0t) = \frac{1}{2}(e^{j\omega_0 t} + e^{-j\omega_0 t})$
+$$\begin{align}
+y(t) &= H(j\omega_0)\cdot \frac{1}{2}e^{j\omega_0 t} + H(-j\omega_0)\cdot \frac{1}{2}e^{-j\omega_0 t} \\
+&=  \frac{1}{\sqrt{2}}\cos(\omega_0t-\pi/4)
+\end{align}$$
+
+> $\cos(\omega_0 t)$, with frequency same with *pole* **DON'T** have *infinite response*
+>
+> That is,  pole indicate decrease trending 
+
+
+
+### zeros
+
+> similar with poles, $\cos(\omega_0 t)$, with frequency same with *zero* **DON'T** have *zero response*
+
+$$
+H(s) = 1+s/\omega_0
+$$
+
+magnitude and phase at $\omega_0$ and $-\omega_0$
+$$\begin{align}
+H(j\omega_0) &= 1+j = \sqrt{2}e^{j\pi/4} \\
+H(-j\omega_0) &= 1-j = \sqrt{2}e^{-j\pi/4}
+\end{align}$$
+
+system response $y(t)$ of input $\cos(\omega_0 t)$, note $\cos(\omega_0t) = \frac{1}{2}(e^{j\omega_0 t} + e^{-j\omega_0 t})$
+$$\begin{align}
+y(t) &= H(j\omega_0)\cdot \frac{1}{2}e^{j\omega_0 t} + H(-j\omega_0)\cdot \frac{1}{2}e^{-j\omega_0 t} \\
+&=  \sqrt{2}\cos(\omega_0t+\pi/4)
+\end{align}$$
 
 
 

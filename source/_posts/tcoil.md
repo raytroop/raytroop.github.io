@@ -1,5 +1,5 @@
 ---
-title: T-coil and its application
+title: T-coil
 date: 2022-03-17 14:30:39
 tags:
 categories:
@@ -207,6 +207,10 @@ legend('Tapped inductor model', 'tcoil model calc');
 
 ## reference
 
+S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension Techniques for CMOS Amplifiers," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 11, pp. 2424-2439, Nov. 2006
+
+[David J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers](https://ewh.ieee.org/r5/denver/sscs/Presentations/2007_08_Allstot.pdf)
+
 B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall 2015.
 
 B. Razavi, "The Design of Broadband I/O Circuits [The Analog Mind]," IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2, pp. 6-15, Spring 2021.
@@ -217,7 +221,8 @@ M. Ker and Y. Hsiao, "On-Chip ESD Protection Strategies for RF Circuits in CMOS 
 
 M. Ker, C. Lin and Y. Hsiao, "Overview on ESD Protection Designs of Low-Parasitic Capacitance for RF ICs in CMOS Technologies," in IEEE Transactions on Device and Materials Reliability, vol. 11, no. 2, pp. 207-218, June 2011, doi: 10.1109/TDMR.2011.2106129.
 
-[David J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers](https://pdfs.semanticscholar.org/29db/7f450d63eee941424655fb787de7d644a3c2.pdf)
-
 [Bob Ross, "T-Coil Topics" DesignCon IBIS Summit 2011](https://ibis.org/summits/feb11/ross.pdf)
 
+Ross, Bob and Cong Ling. “Wang Algebra: From Theory to Practice.” *IEEE Open Journal of Circuits and Systems* 3 (2022): 274-285.
+
+S. Lin, D. Huang and S. Wong, "Pi Coil: A New Element for Bandwidth Extension," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 56, no. 6, pp. 454-458, June 2009

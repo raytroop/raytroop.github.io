@@ -557,18 +557,18 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Database Navigation</title>
+    <url>/2022/02/07/Innovus-Database-Navigation/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Database Navigation</title>
-    <url>/2022/02/07/Innovus-Database-Navigation/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -618,18 +618,6 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus block level create Power Ground Pin method</title>
-    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
-    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
-alt="createPGPin_onDie.drawio" /></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Innovus Analysis Command</title>
     <url>/2022/02/07/Innovus-analysis-command/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
@@ -639,9 +627,12 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Data Exchange</title>
-    <url>/2022/02/07/Innovus-data-exchange/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
+    <title>Innovus block level create Power Ground Pin method</title>
+    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
+    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
+alt="createPGPin_onDie.drawio" /></p>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -660,6 +651,15 @@ alt="createPGPin_onDie.drawio" /></p>
 <p>setRouteMode</p>
 <p>setExtractRCMode</p>
 <p>setOptMode</p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Innovus Data Exchange</title>
+    <url>/2022/02/07/Innovus-data-exchange/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2053,6 +2053,122 @@ Revision 7</p>
       </tags>
   </entry>
   <entry>
+    <title>Ahuja Frequency Compensation</title>
+    <url>/2024/01/16/ahuja/</url>
+    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
+known as <strong>Ahuja compensation</strong></p>
+<p>The cause of the positive zero is the <em>feedforward current through
+<span class="math inline">\(C_m\)</span></em>.</p>
+<p>To abolish this zero, we have to cut the feedforward path and create
+a unidirectional feedback through <span
+class="math inline">\(C_m\)</span>.</p>
+<ol type="1">
+<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
+effect of the feedforward current.</p></li>
+<li><p>Another approach uses a current buffer cascode to pass the
+small-signal feedback current but cut the feedforward current</p></li>
+</ol>
+<blockquote>
+<p>People name this approach after the author <em>Ahuja</em></p>
+</blockquote>
+<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
+are severa</p>
+<ul>
+<li><p>better PSRR</p></li>
+<li><p>higher unity-gain bandwidth using smaller compensation
+capacitor</p></li>
+<li><p>ability to cope better with heavy capacitive and resistive
+loads</p></li>
+</ul>
+<blockquote>
+
+</blockquote>
+<h2 id="millers-approximation">Miller's approximation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
+alt="image-20240130224043511" /></p>
+<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
+\]</span> Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{C_c}\)</span></p>
+<h3 id="equivalent-cap">Equivalent cap</h3>
+<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
+R_o\)</span> <span class="math display">\[
+I_\text{c,in} = (v_i - v_o)sC_c
+\]</span> Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
+&amp; = v_i s (1+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
+A_vC_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
+&amp; = v_o s (1+\frac{1}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}=
+(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="ahuja-compensation">Ahuja compensation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130233532624.png"
+alt="image-20240130233532624" /></p>
+<h3 id="right-half-plane-zero-1">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
+\]</span></p>
+<p>where <span class="math inline">\(v_m = \alpha v_i\)</span> and <span
+class="math inline">\(\alpha \ll 1\)</span></p>
+<p>Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}\)</span></p>
+<blockquote>
+<p>Ahuja compensation push right-half-plane Zero to higher frequency</p>
+</blockquote>
+<h3 id="equivalent-cap-1">Equivalent cap</h3>
+<p>Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (\alpha v_i + A_v v_i)sC_c \\
+&amp; = v_i s (\alpha+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}=
+(\alpha+A_v)C_c\simeq A_v C_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - \alpha v_i)sC_c \\
+&amp; = v_o s (1+\frac{\alpha}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}= (1+\frac{\alpha
+}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="reference">reference</h2>
+<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
+Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
+pp. 629-633, Dec. 1983.</p>
+<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
+IEEE International Symposium on Radio-Frequency Integration Technology,
+2009.</p>
+<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
+CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
+594, May 1995.</p>
+<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
+op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
+Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
+10.1109/MWSCAS.2011.6026315.</p>
+<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
+Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
+International Conference on Electronics, Circuits and Systems, 2006, pp.
+264-267, doi: 10.1109/ICECS.2006.379776.</p>
+<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
+compensation over Miller compensation in two-stage operational
+amplifiers," Proceeding of the 13th international symposium on Low power
+electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
+283-288, doi: 10.1145/1393921.1393995.</p>
+<p>Stabilizing a 2-Stage Amplifier URL:<a
+href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Device Aging</title>
     <url>/2022/12/11/aging/</url>
     <content><![CDATA[<p><img src="/2022/12/11/aging/image-20231106232135180.png"
@@ -2341,122 +2457,6 @@ href="https://semiengineering.com/self-heating-issues-spread/">https://semiengin
 Characterization and Reliability Issues in Sub-10 nm Technology Nodes,"
 in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
 2019, doi: 10.1109/JEDS.2019.2911085.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Ahuja Frequency Compensation</title>
-    <url>/2024/01/16/ahuja/</url>
-    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
-known as <strong>Ahuja compensation</strong></p>
-<p>The cause of the positive zero is the <em>feedforward current through
-<span class="math inline">\(C_m\)</span></em>.</p>
-<p>To abolish this zero, we have to cut the feedforward path and create
-a unidirectional feedback through <span
-class="math inline">\(C_m\)</span>.</p>
-<ol type="1">
-<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
-effect of the feedforward current.</p></li>
-<li><p>Another approach uses a current buffer cascode to pass the
-small-signal feedback current but cut the feedforward current</p></li>
-</ol>
-<blockquote>
-<p>People name this approach after the author <em>Ahuja</em></p>
-</blockquote>
-<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
-are severa</p>
-<ul>
-<li><p>better PSRR</p></li>
-<li><p>higher unity-gain bandwidth using smaller compensation
-capacitor</p></li>
-<li><p>ability to cope better with heavy capacitive and resistive
-loads</p></li>
-</ul>
-<blockquote>
-
-</blockquote>
-<h2 id="millers-approximation">Miller's approximation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
-alt="image-20240130224043511" /></p>
-<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span> Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{C_c}\)</span></p>
-<h3 id="equivalent-cap">Equivalent cap</h3>
-<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
-R_o\)</span> <span class="math display">\[
-I_\text{c,in} = (v_i - v_o)sC_c
-\]</span> Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
-&amp; = v_i s (1+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
-A_vC_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
-&amp; = v_o s (1+\frac{1}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}=
-(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="ahuja-compensation">Ahuja compensation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130233532624.png"
-alt="image-20240130233532624" /></p>
-<h3 id="right-half-plane-zero-1">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span></p>
-<p>where <span class="math inline">\(v_m = \alpha v_i\)</span> and <span
-class="math inline">\(\alpha \ll 1\)</span></p>
-<p>Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}\)</span></p>
-<blockquote>
-<p>Ahuja compensation push right-half-plane Zero to higher frequency</p>
-</blockquote>
-<h3 id="equivalent-cap-1">Equivalent cap</h3>
-<p>Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (\alpha v_i + A_v v_i)sC_c \\
-&amp; = v_i s (\alpha+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}=
-(\alpha+A_v)C_c\simeq A_v C_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - \alpha v_i)sC_c \\
-&amp; = v_o s (1+\frac{\alpha}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}= (1+\frac{\alpha
-}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="reference">reference</h2>
-<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
-Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
-pp. 629-633, Dec. 1983.</p>
-<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
-IEEE International Symposium on Radio-Frequency Integration Technology,
-2009.</p>
-<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
-CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
-594, May 1995.</p>
-<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
-op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
-Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
-10.1109/MWSCAS.2011.6026315.</p>
-<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
-Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
-International Conference on Electronics, Circuits and Systems, 2006, pp.
-264-267, doi: 10.1109/ICECS.2006.379776.</p>
-<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
-compensation over Miller compensation in two-stage operational
-amplifiers," Proceeding of the 13th international symposium on Low power
-electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
-283-288, doi: 10.1145/1393921.1393995.</p>
-<p>Stabilizing a 2-Stage Amplifier URL:<a
-href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -2926,6 +2926,49 @@ href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitte
       </categories>
   </entry>
   <entry>
+    <title>Clock Gating</title>
+    <url>/2023/04/05/clockgating/</url>
+    <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
+technique/methodology to turn off the clock to certain parts of the
+digital design when not needed".</p>
+<h3 id="clock-gating-overview">Clock Gating Overview</h3>
+<h4 id="and-gate-based-clock-gating">AND gate-based clock gating</h4>
+<p>In <em>simplest form</em> a clock gating can be achieved by using an
+<em>AND gate</em> as shown in picture below</p>
+<p><img src="/2023/04/05/clockgating/AND-gate-based-clock-gating.png"
+alt="clock gating" /></p>
+<p>However, this simplest form of clock gating technique has some
+problem of generating <strong>glitches</strong> in the clock provide to
+the FF, which are not desirable.</p>
+<p><img src="/2023/04/05/clockgating/Glitches-in-enable-gated-clock.png"
+alt="img" /></p>
+<blockquote>
+<p>Glitches in enable/gated clock</p>
+</blockquote>
+<h4 id="latch-based-clock-gating">Latch based clock gating</h4>
+<p>These glitches can be removed by introducing a negative edge
+triggered FF (assuming downstream FFs are positive edge) or low-level
+sensitive latch at the output of the clock enable signal.</p>
+<p><img src="/2023/04/05/clockgating/Latch-based-clock-gating.png"
+alt="clock gating" /></p>
+<p>This will make sure that any glitch in the clock enable signal will
+not be visible to the gated clock output. The Latch output will only be
+updated during the negative clock cycle and thus input to AND gate will
+be stable high.</p>
+<p><img src="/2023/04/05/clockgating/Glitch-Free-Gated-Clock.png"
+alt="clock gating" /></p>
+<blockquote>
+<p>Glitch Free Gated Clock</p>
+</blockquote>
+<h3 id="reference">reference</h3>
+<p>The Ultimate Guide to Clock Gating <a
+href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>channel and termination</title>
     <url>/2022/07/01/channel-termination/</url>
     <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
@@ -2978,49 +3021,6 @@ alt="image-20220301203135490" /></p>
 <p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
 <p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Clock Gating</title>
-    <url>/2023/04/05/clockgating/</url>
-    <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
-technique/methodology to turn off the clock to certain parts of the
-digital design when not needed".</p>
-<h3 id="clock-gating-overview">Clock Gating Overview</h3>
-<h4 id="and-gate-based-clock-gating">AND gate-based clock gating</h4>
-<p>In <em>simplest form</em> a clock gating can be achieved by using an
-<em>AND gate</em> as shown in picture below</p>
-<p><img src="/2023/04/05/clockgating/AND-gate-based-clock-gating.png"
-alt="clock gating" /></p>
-<p>However, this simplest form of clock gating technique has some
-problem of generating <strong>glitches</strong> in the clock provide to
-the FF, which are not desirable.</p>
-<p><img src="/2023/04/05/clockgating/Glitches-in-enable-gated-clock.png"
-alt="img" /></p>
-<blockquote>
-<p>Glitches in enable/gated clock</p>
-</blockquote>
-<h4 id="latch-based-clock-gating">Latch based clock gating</h4>
-<p>These glitches can be removed by introducing a negative edge
-triggered FF (assuming downstream FFs are positive edge) or low-level
-sensitive latch at the output of the clock enable signal.</p>
-<p><img src="/2023/04/05/clockgating/Latch-based-clock-gating.png"
-alt="clock gating" /></p>
-<p>This will make sure that any glitch in the clock enable signal will
-not be visible to the gated clock output. The Latch output will only be
-updated during the negative clock cycle and thus input to AND gate will
-be stable high.</p>
-<p><img src="/2023/04/05/clockgating/Glitch-Free-Gated-Clock.png"
-alt="clock gating" /></p>
-<blockquote>
-<p>Glitch Free Gated Clock</p>
-</blockquote>
-<h3 id="reference">reference</h3>
-<p>The Ultimate Guide to Clock Gating <a
-href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -5280,445 +5280,6 @@ href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www
       </categories>
   </entry>
   <entry>
-    <title>EMIR via Voltus-Fi</title>
-    <url>/2022/02/23/emir-voltus-fi/</url>
-    <content><![CDATA[<h2 id="general-terminology">general terminology</h2>
-<h3 id="dc-related">DC related</h3>
-<p><strong>Imax</strong> in T*'s DRC document is the maximum allowed
-<strong>DC current</strong>, which depends on <em>Length and Width</em>
-only</p>
-<p><strong>Iavg</strong> is the average value of the current, which is
-the effective <em>DC current</em>. Therefore, <strong>Iavg
-rules</strong> are <strong>identical</strong> to <strong>Imax</strong>
-rules <span class="math display">\[
-I_{\text{avg}}=\frac{\int_0^\tau I(t)dt}{\tau}
-\]</span> Similarly, <strong>Iabsavg rules</strong> are
-<strong>identical</strong> to <strong>Imax</strong> rules, too <span
-class="math display">\[
-I_{\text{AbsAvg}}=\frac{\int_0^\tau |I(t)|dt}{\tau}
-\]</span></p>
-<h3 id="rms">rms</h3>
-<p><strong>Irms</strong> is the root-mean-square of the current through
-a metal line, which depends <strong>w(in um)</strong>, the <em>drawn
-width</em> of the metal line and <span class="math inline">\(\Delta
-T\)</span>, the temperature rise due to Joule heating. <span
-class="math display">\[
-I_{\text{rms}}=\left[\frac{\int_0^\tau I(t)^2dt}{\tau} \right]^{1/2}
-\]</span></p>
-<h3 id="peak-current">peak current</h3>
-<p><strong>Ipeak</strong> in T*'s DRC document is the current at which a
-metal line undergoes excessive Joule heating and can begin to melt.
-<strong>Ipeak</strong> is corresponding to
-<code>EM Current Analysis: max</code> in Voltus-Fi Analysis Setup <span
-class="math display">\[
-I_{\text{peak}}=\max(|I(t)|)
-\]</span> The limit for the peak current is <span
-class="math display">\[
-I_{\text{peak,limit}}=\frac{I_{\text{peak\_DC}}}{\sqrt{r
-} }
-\]</span> where <strong>r</strong> is the duty ratio</p>
-<p>The relationship between <strong>Ipeak</strong> and
-<strong>Ipeak_DC</strong> is merged in DRC document so that there is
-only <strong>Ipeak</strong> equation in document</p>
-<blockquote>
-<p><span class="math inline">\(I_{\text{peak,limit}}\)</span> depends on
-<span class="math inline">\(t_D\)</span>, r, width and length</p>
-</blockquote>
-<p><span class="math display">\[
-r=\frac{t_D}{\tau}
-\]</span></p>
-<p>where <span class="math inline">\(t_D\)</span> is equivalent duration
-<span class="math display">\[
-t_D =\frac{\int_0^\tau |I(t)|dt}{I_{\text{peak}}}
-\]</span> or <span class="math display">\[
-r=\frac{I_{\text{AbsAvg}}}{I_{\text{peak}}}
-\]</span> <img
-src="/2022/02/23/emir-voltus-fi/image-20220729023550943.png"
-alt="image-20220729023550943" /></p>
-<p>where the drawn width is 1um, r is 0.1</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023722754.png"
-alt="image-20220729023722754" /></p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023319156.png"
-alt="image-20220729023319156" /> <span class="math display">\[
-9.37*(1-0.004)/\sqrt0.1 = 29.512
-\]</span></p>
-<h3 id="acpeakpwc">acpeak/pwc</h3>
-<p>It's same with <strong>max</strong> EM Current Analysis in
-Voltus-Fi</p>
-<h3 id="dynamicacpeak"><code>dynamicACPeak</code></h3>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023154009.png"
-alt="image-20220729023154009" /></p>
-<p>This option affect how duty ratio r is computed in <code>max</code>
-and <code>acpeak/pwc</code> EM current Analysis</p>
-<p>When the <code>dynamicACPeak</code> variable is set to
-<strong>true</strong> or <strong>multiPeak</strong> <span
-class="math display">\[
-r=\frac{T_d}{T_{\text{total}}}
-\]</span></p>
-<p>​ where <span class="math inline">\(T_{\text{total}} = \text{EMIR
-time window}\)</span></p>
-<p>​ <span class="math inline">\(T_d\)</span> = the time duration in
-microsecond of the total "On Time" period based on <code>IPWC</code></p>
-<blockquote>
-<p>Pulse-Wise Constant EM current calculation (IPWC)</p>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729032235649.png"
-alt="image-20220729032235649" /></p>
-<p>where <strong>Tau</strong> is <span
-class="math inline">\(T_d\)</span> in above formula</p>
-<blockquote>
-<p>!!! It seems that t*'s PDK don't support
-<code>dynamicACPeak=true</code></p>
-</blockquote>
-<h2 id="ir-drop-filter-layers">IR drop filter layers</h2>
-<p>EM techfile (qrcTechFile) may take diffusion contact
-(<em>n_odtap</em>, <em>p_odtap</em> in DSPF file) into account during IR
-drop analysis. And these segment often dominate IR drop, but we as IC
-designer can NOT improve them. In general, the IR drop to M1 layer is
-enough and feasible.</p>
-<h2 id="regular-analysis-statements-in-emir-configuration">Regular
-analysis statements in emir configuration</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net name=[I0.vdd I0.vss] analysis=[vmax vavg]</span><br><span class="line">net name=[I0.*] analysis =[imax ivavg irms]</span><br></pre></td></tr></table></figure>
-<h2 id="emirreport-command">emirreport command</h2>
-<p>Creating reports for specific nets after simulation using
-<code>emirreport</code></p>
-<p>Create a new config file as shown below:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">** test.conf**</span><br><span class="line">net name=[I1.VDD I1.VSS] analysis=[iavg]</span><br><span class="line">net name=[I1.VBIAS] analysis=[imax]</span><br></pre></td></tr></table></figure>
-<p>Run <code>emirreport</code> on the command line using the
-<strong>emirdatabase</strong> (emir*.bin) and <strong>test.conf</strong>
-created above in</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">% emirreport -64 -c test.conf -db &lt;emirdatabase&gt; -outdir newreport</span><br></pre></td></tr></table></figure>
-<h2 id="database">database</h2>
-<h3 id="simulation-result">simulation result</h3>
-<ul>
-<li><code>input.emir0_bin</code>: The first EMIR Analysis which is DC or
-Transient, which depends on <em>Analyses</em> order</li>
-</ul>
-<blockquote>
-<ul>
-<li><p><code>input_tran.emir0_bin</code>: EMIR Analysis in Transient
-simulation</p></li>
-<li><p><code>input_dcOp.emir0_bin</code>: EMIR Analysis in DC
-simulation</p></li>
-</ul>
-</blockquote>
-<p>For example</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203011393.png"
-alt="image-20220421203011393" /></p>
-<p>Two results are generated <code>input.emir0_bin</code> and
-<code>input_dcOp.emir0_bin</code> and their reports respectly</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203657123.png"
-alt="image-20220421203657123" /></p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203554147.png"
-alt="image-20220421203554147" /></p>
-<h2 id="fix-electromigration">Fix Electromigration</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>wider wire</th>
-<th>downsize drivers</th>
-<th>decrease fanout</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>RJ JMAX</td>
-<td></td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>JAVG</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>JABSAVG</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>JACPEAK</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>JACRMS</td>
-<td>✓</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<ul>
-<li><p>Iavg</p>
-<p>The average value of the current, which is the effective DC
-current</p></li>
-<li><p>Irms</p>
-<p>Irms rule relates to the heat or Joule-heating of metal
-lines</p></li>
-<li><p>Ipeak</p>
-<p>The main goal of the Ipeak limits is to ensure that no thermal
-breakdown could occur on single overshoot events. If the signal may not
-have a high current density but if it has a very large peak current
-density, then, local melting will happen and cause failures</p></li>
-</ul>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220503205418275.png"
-alt="image-20220503205418275" /></p>
-<h2 id="qa">QA</h2>
-<ol type="1">
-<li><p>Q. Why “length” column in EM results form doesn’t show extracted
-length, it shows “NA”.</p>
-<p>A. Voltus-Fi reports the “length” column only when length rules are
-present in the emDataFile.</p></li>
-<li><p>Seeing different port currents with and without emir simulations
-for same dspf included in EMIR Direct method using dspf_include.</p>
-<p>Split Pins (*|P) in DSPF are only shorted in the EMIR flow not in the
-regular spectre flow. Islands patching is only performed in EMIR
-only</p></li>
-<li><p>Setting temperature for EM analysis</p></li>
-</ol>
-<p>By Default, Voltus-FI and VPS pick up the current density limit for
-<strong>temperature at which simulation has been performed</strong>.</p>
-<blockquote>
-<p>By the way, <code>Design Variables</code> - <em>temperature</em> will
-override the temperature in <em>Setup toolbar</em> which is gray in ADE
-Explorer</p>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421184141363.png"
-alt="image-20220421184141363" /></p>
-<ol start="4" type="1">
-<li><p>AC Peak EM analysis - Voltus-Fi</p>
-<p>The available options within the EM current analysis section in the
-EMIR Analysis Setup form are:</p>
-<p><code>max / avg / avgabs / rms.</code></p>
-<p>In order to enable the <em>AC Peak based information</em> when
-loading the EM results, <strong>both max and avg</strong> should be
-selected when setting up the EMIR Analysis Setup.</p>
-<p>With this configuration, the AC Peak option becomes available and can
-be used.</p></li>
-<li><p>How to print average, rms, and peak current of <strong>device
-tap</strong> in Spectre/Voltus FI EMIR analysis</p>
-<p>The following option enables you to save the average, rms, and peak
-tap currents in the <strong>emir0bin</strong> file and report it in the
-<strong>input.rpt_tapi</strong> file.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">solver report_tapi=true</span><br></pre></td></tr></table></figure>
-<p>Add this option in <strong>emir.conf</strong> to enable the reporting
-of tap current after the Spectre EMIR simulation. The input.rpt_tapi
-file will be saved in the psf/raw directory.</p>
-<p><strong>Note:</strong> This feature is supported in SPECTRE20.1 ISR14
-and later versions.</p></li>
-<li><p>emir.conf file</p>
-<p><code>emir.conf</code> file is generated automaticaly after configure
-<em>EM/IR Analysis</em> in ADE, which is in <em>netlist</em>
-directory.</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421182327011.png"
-alt="image-20220421182327011" /></p></li>
-<li><p>Setting default path for EM rules file in APS EMIR analysis</p>
-<ul>
-<li><p>set the following environment variable in your terminal</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv EMDATAFILE &lt; path to EM rules file&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>or set in <code>.cdsinit</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setShellEnvVar(&quot;EMDATAFILE=&lt;path to EM rules file&gt;&quot;)</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li><p>Print node names and length associated with parasitic resistors
-in EM report file</p>
-<blockquote>
-<p><code>export CDS_MMSIM_VOLTUSFI_ROOT=$CDSHOME</code></p>
-</blockquote>
-<ul>
-<li><p>Printing the parasitic resistor length in the EM report</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportLength=true</span><br></pre></td></tr></table></figure></li>
-<li><p>Printing nodes that are associated with the parasitic
-resistor</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportNodeName=true</span><br></pre></td></tr></table></figure>
-<p>Once these are enabled, you will have the <strong>Length</strong>,
-<strong>Node_1</strong>, and <strong>Node_2</strong> columns printed in
-the EM report file, as shown below:</p>
-<p><img src="/2022/02/23/emir-voltus-fi/servlet.jpeg"
-alt="servlet" /></p></li>
-</ul></li>
-<li><p>Is it possible to run RMS IR Drop analysis using Voltus-Fi?</p>
-<p>Typically, in a simulation, Power/Ground nets are always biased with
-a <strong>constant DC source</strong>. Hence, at present, Voltus-Fi only
-supports <strong>Average and Maximum (Peak) IR Drop</strong>
-analysis.</p>
-<p>For a net to have data for IR analysis(vmax/vavg), the net/node must
-be connected to a <strong>DC vsource or a vsource which is constant
-within the emir time window</strong>.</p></li>
-<li><p>Can we change the time window of EM computation after the
-simulation completed ?</p>
-<p>It is not possible to modify the EM time window without re-running
-the full simulation.</p>
-<p>However you can specify several time window in the emir conf file for
-instance for 2 time window [0 to 10n] and [10n 20n]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time window=[0 10n 10n 20n]</span><br></pre></td></tr></table></figure>
-<p>In that case it will create 2 <strong>emir_bin</strong> files and
-then 2 different em report files according to the 2 different time
-windows.</p></li>
-<li><p>How to print segment_W values being used to compute EM limits</p>
-<p>You can use the following option to print <code>segment_W</code> to
-the report:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportSegmentWidth=[true]</span><br></pre></td></tr></table></figure>
-<p>This would print a <code>Segment_w</code> column in the report
-containing the segment width values used for computing the limit:</p>
-<table>
-<colgroup>
-<col style="width: 7%" />
-<col style="width: 5%" />
-<col style="width: 3%" />
-<col style="width: 7%" />
-<col style="width: 3%" />
-<col style="width: 6%" />
-<col style="width: 4%" />
-<col style="width: 3%" />
-<col style="width: 4%" />
-<col style="width: 3%" />
-<col style="width: 4%" />
-<col style="width: 7%" />
-<col style="width: 4%" />
-<col style="width: 4%" />
-<col style="width: 11%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Pass/Fail %</th>
-<th>Resistor</th>
-<th>layer</th>
-<th>Current</th>
-<th>Width</th>
-<th>PathLength</th>
-<th>I limit</th>
-<th>X1</th>
-<th>Y1</th>
-<th>X2</th>
-<th>Y2</th>
-<th>J/JMAX</th>
-<th>Res</th>
-<th>ViaArea</th>
-<th>No of needed vias</th>
-<th>width/#via</th>
-<th>J limit</th>
-<th>Segment_w</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td>(mA)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td></td>
-<td>(um)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td></td>
-<td></td>
-<td>(nm^2)</td>
-<td></td>
-<td>(um/#)</td>
-<td>(A/um)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>pass-100.0</td>
-<td>Rj3292</td>
-<td>Met1</td>
-<td>9.02376e-12</td>
-<td>0.1</td>
-<td>42.72</td>
-<td>1.10067</td>
-<td>0.350</td>
-<td>11.568</td>
-<td>0.350</td>
-<td>11.376</td>
-<td>8.19843e-12</td>
-<td>0.7382</td>
-<td>NA</td>
-<td>NA</td>
-<td>0.0001</td>
-<td>0.0110067</td>
-<td>0.1</td>
-</tr>
-</tbody>
-</table></li>
-<li><p>pathLength vs Length in EM report file</p>
-<ul>
-<li><p>Length: parasitic resistor length, which is set by
-<code>emirutil reportLength=true</code></p></li>
-<li><p>pathlength: Blech length is also known as "Short length" or "Path
-length", and can be explained as : The <strong>longest and continuous
-centerline path from edge to edge</strong> among the connected wire
-shapes on the <strong>same metal layer</strong>.</p>
-<ul>
-<li>For all resistors falling on this shape, <strong>same
-pathLength</strong> is reported.</li>
-<li>After the longest path in shape has been determined the tool applies
-the same blech length to all the resistor falling on that shape.</li>
-<li>This resistor length is <strong>NOT</strong> used in EM analysis
-because EM rules consider Blech length of the resistor.</li>
-</ul>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421001806689.png"
-alt="image-20220421001806689" /></p>
-<blockquote>
-<p>where W is the wire width and L is the Blech length.</p>
-</blockquote>
-<ul>
-<li><p>By default the tool will <strong>sum all branches of a given
-metal layer</strong>. In other words the path length that will be used
-to look up the EM density limit is :</p>
-<p>Bl = $l(R1) + $l(R2) + $l(R3) + $l(R4) + $l(R5) + $l(R6) + $l(R7) +
-$l(R8)</p>
-<p><img src="/2022/02/23/emir-voltus-fi/servlet-16504730496591.jpeg"
-alt="servlet" /></p></li>
-</ul></li>
-</ul></li>
-<li><p>How to enable EMIR analysis in PSS simualtion ?</p>
-<p>To enable EMIR in PSS, you have to enable DC and/or Tran simulation
-simultaneously. Two or more binary results file should be generated and
-select the file based file name or configure text file in
-<code>psf</code> directory.</p>
-<p>(given ICADVM 18.1 ISR11, Spectre 19.1 ISR6)</p></li>
-</ol>
-<h2 id="reference">reference</h2>
-<p>AC Peak Analysis Using IPWC Rapid Adoption Kit (RAK) Product Version:
-IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020</p>
-<p>Posser, Gracieli &amp; Sapatnekar, Sachin &amp; Reis, Ricardo.
-(2017). Electromigration Inside Logic Cells.
-10.1007/978-3-319-48899-8.</p>
-<p>A. B. Kahng, S. Nath and T. S. Rosing, "On potential design impacts
-of electromigration awareness," 2013 18th Asia and South Pacific Design
-Automation Conference (ASP-DAC), 2013, pp. 527-532, doi:
-10.1109/ASPDAC.2013.6509650.</p>
-<p>Kumar, Neeraj and Mohammad S. Hashmi. “Study, analysis and modeling
-of electromigration in SRAMs.” (2014).</p>
-<p>N. S. Nagaraj, F. Cano, H. Haznedar and D. Young, "A practical
-approach to static signal electromigration analysis," Proceedings 1998
-Design and Automation Conference. 35th DAC. (Cat. No.98CH36175), 1998,
-pp. 572-577, doi: 10.1109/DAC.1998.724536.</p>
-<p>Blaauw, David &amp; Oh, Chanhee &amp; Zolotov, Vladimir &amp;
-Dasgupta, Aurobindo. (2003). Static electromigration analysis for
-on-chip signal interconnects. Computer-Aided Design of Integrated
-Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
-10.1109/TCAD.2002.805728.</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>EMX &amp; PeakView</title>
     <url>/2022/03/15/emx-peakview/</url>
     <content><![CDATA[<h2 id="lvs-check">LVS check</h2>
@@ -6252,6 +5813,445 @@ href="Article%20(20493671)%20Title:%20Tips%20on%20Specifying%20Ports%20in%20EMX%
 simulations [[link](Article (20496398) Title: Using 'Cadence pins' as
 ports with access direction in EMX simulations URL:
 https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]</p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>EMIR via Voltus-Fi</title>
+    <url>/2022/02/23/emir-voltus-fi/</url>
+    <content><![CDATA[<h2 id="general-terminology">general terminology</h2>
+<h3 id="dc-related">DC related</h3>
+<p><strong>Imax</strong> in T*'s DRC document is the maximum allowed
+<strong>DC current</strong>, which depends on <em>Length and Width</em>
+only</p>
+<p><strong>Iavg</strong> is the average value of the current, which is
+the effective <em>DC current</em>. Therefore, <strong>Iavg
+rules</strong> are <strong>identical</strong> to <strong>Imax</strong>
+rules <span class="math display">\[
+I_{\text{avg}}=\frac{\int_0^\tau I(t)dt}{\tau}
+\]</span> Similarly, <strong>Iabsavg rules</strong> are
+<strong>identical</strong> to <strong>Imax</strong> rules, too <span
+class="math display">\[
+I_{\text{AbsAvg}}=\frac{\int_0^\tau |I(t)|dt}{\tau}
+\]</span></p>
+<h3 id="rms">rms</h3>
+<p><strong>Irms</strong> is the root-mean-square of the current through
+a metal line, which depends <strong>w(in um)</strong>, the <em>drawn
+width</em> of the metal line and <span class="math inline">\(\Delta
+T\)</span>, the temperature rise due to Joule heating. <span
+class="math display">\[
+I_{\text{rms}}=\left[\frac{\int_0^\tau I(t)^2dt}{\tau} \right]^{1/2}
+\]</span></p>
+<h3 id="peak-current">peak current</h3>
+<p><strong>Ipeak</strong> in T*'s DRC document is the current at which a
+metal line undergoes excessive Joule heating and can begin to melt.
+<strong>Ipeak</strong> is corresponding to
+<code>EM Current Analysis: max</code> in Voltus-Fi Analysis Setup <span
+class="math display">\[
+I_{\text{peak}}=\max(|I(t)|)
+\]</span> The limit for the peak current is <span
+class="math display">\[
+I_{\text{peak,limit}}=\frac{I_{\text{peak\_DC}}}{\sqrt{r
+} }
+\]</span> where <strong>r</strong> is the duty ratio</p>
+<p>The relationship between <strong>Ipeak</strong> and
+<strong>Ipeak_DC</strong> is merged in DRC document so that there is
+only <strong>Ipeak</strong> equation in document</p>
+<blockquote>
+<p><span class="math inline">\(I_{\text{peak,limit}}\)</span> depends on
+<span class="math inline">\(t_D\)</span>, r, width and length</p>
+</blockquote>
+<p><span class="math display">\[
+r=\frac{t_D}{\tau}
+\]</span></p>
+<p>where <span class="math inline">\(t_D\)</span> is equivalent duration
+<span class="math display">\[
+t_D =\frac{\int_0^\tau |I(t)|dt}{I_{\text{peak}}}
+\]</span> or <span class="math display">\[
+r=\frac{I_{\text{AbsAvg}}}{I_{\text{peak}}}
+\]</span> <img
+src="/2022/02/23/emir-voltus-fi/image-20220729023550943.png"
+alt="image-20220729023550943" /></p>
+<p>where the drawn width is 1um, r is 0.1</p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023722754.png"
+alt="image-20220729023722754" /></p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023319156.png"
+alt="image-20220729023319156" /> <span class="math display">\[
+9.37*(1-0.004)/\sqrt0.1 = 29.512
+\]</span></p>
+<h3 id="acpeakpwc">acpeak/pwc</h3>
+<p>It's same with <strong>max</strong> EM Current Analysis in
+Voltus-Fi</p>
+<h3 id="dynamicacpeak"><code>dynamicACPeak</code></h3>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023154009.png"
+alt="image-20220729023154009" /></p>
+<p>This option affect how duty ratio r is computed in <code>max</code>
+and <code>acpeak/pwc</code> EM current Analysis</p>
+<p>When the <code>dynamicACPeak</code> variable is set to
+<strong>true</strong> or <strong>multiPeak</strong> <span
+class="math display">\[
+r=\frac{T_d}{T_{\text{total}}}
+\]</span></p>
+<p>​ where <span class="math inline">\(T_{\text{total}} = \text{EMIR
+time window}\)</span></p>
+<p>​ <span class="math inline">\(T_d\)</span> = the time duration in
+microsecond of the total "On Time" period based on <code>IPWC</code></p>
+<blockquote>
+<p>Pulse-Wise Constant EM current calculation (IPWC)</p>
+</blockquote>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220729032235649.png"
+alt="image-20220729032235649" /></p>
+<p>where <strong>Tau</strong> is <span
+class="math inline">\(T_d\)</span> in above formula</p>
+<blockquote>
+<p>!!! It seems that t*'s PDK don't support
+<code>dynamicACPeak=true</code></p>
+</blockquote>
+<h2 id="ir-drop-filter-layers">IR drop filter layers</h2>
+<p>EM techfile (qrcTechFile) may take diffusion contact
+(<em>n_odtap</em>, <em>p_odtap</em> in DSPF file) into account during IR
+drop analysis. And these segment often dominate IR drop, but we as IC
+designer can NOT improve them. In general, the IR drop to M1 layer is
+enough and feasible.</p>
+<h2 id="regular-analysis-statements-in-emir-configuration">Regular
+analysis statements in emir configuration</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net name=[I0.vdd I0.vss] analysis=[vmax vavg]</span><br><span class="line">net name=[I0.*] analysis =[imax ivavg irms]</span><br></pre></td></tr></table></figure>
+<h2 id="emirreport-command">emirreport command</h2>
+<p>Creating reports for specific nets after simulation using
+<code>emirreport</code></p>
+<p>Create a new config file as shown below:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">** test.conf**</span><br><span class="line">net name=[I1.VDD I1.VSS] analysis=[iavg]</span><br><span class="line">net name=[I1.VBIAS] analysis=[imax]</span><br></pre></td></tr></table></figure>
+<p>Run <code>emirreport</code> on the command line using the
+<strong>emirdatabase</strong> (emir*.bin) and <strong>test.conf</strong>
+created above in</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">% emirreport -64 -c test.conf -db &lt;emirdatabase&gt; -outdir newreport</span><br></pre></td></tr></table></figure>
+<h2 id="database">database</h2>
+<h3 id="simulation-result">simulation result</h3>
+<ul>
+<li><code>input.emir0_bin</code>: The first EMIR Analysis which is DC or
+Transient, which depends on <em>Analyses</em> order</li>
+</ul>
+<blockquote>
+<ul>
+<li><p><code>input_tran.emir0_bin</code>: EMIR Analysis in Transient
+simulation</p></li>
+<li><p><code>input_dcOp.emir0_bin</code>: EMIR Analysis in DC
+simulation</p></li>
+</ul>
+</blockquote>
+<p>For example</p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203011393.png"
+alt="image-20220421203011393" /></p>
+<p>Two results are generated <code>input.emir0_bin</code> and
+<code>input_dcOp.emir0_bin</code> and their reports respectly</p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203657123.png"
+alt="image-20220421203657123" /></p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203554147.png"
+alt="image-20220421203554147" /></p>
+<h2 id="fix-electromigration">Fix Electromigration</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>wider wire</th>
+<th>downsize drivers</th>
+<th>decrease fanout</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RJ JMAX</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>JAVG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>JABSAVG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>JACPEAK</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>JACRMS</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><p>Iavg</p>
+<p>The average value of the current, which is the effective DC
+current</p></li>
+<li><p>Irms</p>
+<p>Irms rule relates to the heat or Joule-heating of metal
+lines</p></li>
+<li><p>Ipeak</p>
+<p>The main goal of the Ipeak limits is to ensure that no thermal
+breakdown could occur on single overshoot events. If the signal may not
+have a high current density but if it has a very large peak current
+density, then, local melting will happen and cause failures</p></li>
+</ul>
+</blockquote>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220503205418275.png"
+alt="image-20220503205418275" /></p>
+<h2 id="qa">QA</h2>
+<ol type="1">
+<li><p>Q. Why “length” column in EM results form doesn’t show extracted
+length, it shows “NA”.</p>
+<p>A. Voltus-Fi reports the “length” column only when length rules are
+present in the emDataFile.</p></li>
+<li><p>Seeing different port currents with and without emir simulations
+for same dspf included in EMIR Direct method using dspf_include.</p>
+<p>Split Pins (*|P) in DSPF are only shorted in the EMIR flow not in the
+regular spectre flow. Islands patching is only performed in EMIR
+only</p></li>
+<li><p>Setting temperature for EM analysis</p></li>
+</ol>
+<p>By Default, Voltus-FI and VPS pick up the current density limit for
+<strong>temperature at which simulation has been performed</strong>.</p>
+<blockquote>
+<p>By the way, <code>Design Variables</code> - <em>temperature</em> will
+override the temperature in <em>Setup toolbar</em> which is gray in ADE
+Explorer</p>
+</blockquote>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421184141363.png"
+alt="image-20220421184141363" /></p>
+<ol start="4" type="1">
+<li><p>AC Peak EM analysis - Voltus-Fi</p>
+<p>The available options within the EM current analysis section in the
+EMIR Analysis Setup form are:</p>
+<p><code>max / avg / avgabs / rms.</code></p>
+<p>In order to enable the <em>AC Peak based information</em> when
+loading the EM results, <strong>both max and avg</strong> should be
+selected when setting up the EMIR Analysis Setup.</p>
+<p>With this configuration, the AC Peak option becomes available and can
+be used.</p></li>
+<li><p>How to print average, rms, and peak current of <strong>device
+tap</strong> in Spectre/Voltus FI EMIR analysis</p>
+<p>The following option enables you to save the average, rms, and peak
+tap currents in the <strong>emir0bin</strong> file and report it in the
+<strong>input.rpt_tapi</strong> file.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">solver report_tapi=true</span><br></pre></td></tr></table></figure>
+<p>Add this option in <strong>emir.conf</strong> to enable the reporting
+of tap current after the Spectre EMIR simulation. The input.rpt_tapi
+file will be saved in the psf/raw directory.</p>
+<p><strong>Note:</strong> This feature is supported in SPECTRE20.1 ISR14
+and later versions.</p></li>
+<li><p>emir.conf file</p>
+<p><code>emir.conf</code> file is generated automaticaly after configure
+<em>EM/IR Analysis</em> in ADE, which is in <em>netlist</em>
+directory.</p>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421182327011.png"
+alt="image-20220421182327011" /></p></li>
+<li><p>Setting default path for EM rules file in APS EMIR analysis</p>
+<ul>
+<li><p>set the following environment variable in your terminal</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv EMDATAFILE &lt; path to EM rules file&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>or set in <code>.cdsinit</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setShellEnvVar(&quot;EMDATAFILE=&lt;path to EM rules file&gt;&quot;)</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><p>Print node names and length associated with parasitic resistors
+in EM report file</p>
+<blockquote>
+<p><code>export CDS_MMSIM_VOLTUSFI_ROOT=$CDSHOME</code></p>
+</blockquote>
+<ul>
+<li><p>Printing the parasitic resistor length in the EM report</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportLength=true</span><br></pre></td></tr></table></figure></li>
+<li><p>Printing nodes that are associated with the parasitic
+resistor</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportNodeName=true</span><br></pre></td></tr></table></figure>
+<p>Once these are enabled, you will have the <strong>Length</strong>,
+<strong>Node_1</strong>, and <strong>Node_2</strong> columns printed in
+the EM report file, as shown below:</p>
+<p><img src="/2022/02/23/emir-voltus-fi/servlet.jpeg"
+alt="servlet" /></p></li>
+</ul></li>
+<li><p>Is it possible to run RMS IR Drop analysis using Voltus-Fi?</p>
+<p>Typically, in a simulation, Power/Ground nets are always biased with
+a <strong>constant DC source</strong>. Hence, at present, Voltus-Fi only
+supports <strong>Average and Maximum (Peak) IR Drop</strong>
+analysis.</p>
+<p>For a net to have data for IR analysis(vmax/vavg), the net/node must
+be connected to a <strong>DC vsource or a vsource which is constant
+within the emir time window</strong>.</p></li>
+<li><p>Can we change the time window of EM computation after the
+simulation completed ?</p>
+<p>It is not possible to modify the EM time window without re-running
+the full simulation.</p>
+<p>However you can specify several time window in the emir conf file for
+instance for 2 time window [0 to 10n] and [10n 20n]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time window=[0 10n 10n 20n]</span><br></pre></td></tr></table></figure>
+<p>In that case it will create 2 <strong>emir_bin</strong> files and
+then 2 different em report files according to the 2 different time
+windows.</p></li>
+<li><p>How to print segment_W values being used to compute EM limits</p>
+<p>You can use the following option to print <code>segment_W</code> to
+the report:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">emirutil reportSegmentWidth=[true]</span><br></pre></td></tr></table></figure>
+<p>This would print a <code>Segment_w</code> column in the report
+containing the segment width values used for computing the limit:</p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 5%" />
+<col style="width: 3%" />
+<col style="width: 7%" />
+<col style="width: 3%" />
+<col style="width: 6%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 7%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 11%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pass/Fail %</th>
+<th>Resistor</th>
+<th>layer</th>
+<th>Current</th>
+<th>Width</th>
+<th>PathLength</th>
+<th>I limit</th>
+<th>X1</th>
+<th>Y1</th>
+<th>X2</th>
+<th>Y2</th>
+<th>J/JMAX</th>
+<th>Res</th>
+<th>ViaArea</th>
+<th>No of needed vias</th>
+<th>width/#via</th>
+<th>J limit</th>
+<th>Segment_w</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td>(mA)</td>
+<td>(um)</td>
+<td>(um)</td>
+<td></td>
+<td>(um)</td>
+<td>(um)</td>
+<td>(um)</td>
+<td>(um)</td>
+<td></td>
+<td></td>
+<td>(nm^2)</td>
+<td></td>
+<td>(um/#)</td>
+<td>(A/um)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>pass-100.0</td>
+<td>Rj3292</td>
+<td>Met1</td>
+<td>9.02376e-12</td>
+<td>0.1</td>
+<td>42.72</td>
+<td>1.10067</td>
+<td>0.350</td>
+<td>11.568</td>
+<td>0.350</td>
+<td>11.376</td>
+<td>8.19843e-12</td>
+<td>0.7382</td>
+<td>NA</td>
+<td>NA</td>
+<td>0.0001</td>
+<td>0.0110067</td>
+<td>0.1</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>pathLength vs Length in EM report file</p>
+<ul>
+<li><p>Length: parasitic resistor length, which is set by
+<code>emirutil reportLength=true</code></p></li>
+<li><p>pathlength: Blech length is also known as "Short length" or "Path
+length", and can be explained as : The <strong>longest and continuous
+centerline path from edge to edge</strong> among the connected wire
+shapes on the <strong>same metal layer</strong>.</p>
+<ul>
+<li>For all resistors falling on this shape, <strong>same
+pathLength</strong> is reported.</li>
+<li>After the longest path in shape has been determined the tool applies
+the same blech length to all the resistor falling on that shape.</li>
+<li>This resistor length is <strong>NOT</strong> used in EM analysis
+because EM rules consider Blech length of the resistor.</li>
+</ul>
+<p><img src="/2022/02/23/emir-voltus-fi/image-20220421001806689.png"
+alt="image-20220421001806689" /></p>
+<blockquote>
+<p>where W is the wire width and L is the Blech length.</p>
+</blockquote>
+<ul>
+<li><p>By default the tool will <strong>sum all branches of a given
+metal layer</strong>. In other words the path length that will be used
+to look up the EM density limit is :</p>
+<p>Bl = $l(R1) + $l(R2) + $l(R3) + $l(R4) + $l(R5) + $l(R6) + $l(R7) +
+$l(R8)</p>
+<p><img src="/2022/02/23/emir-voltus-fi/servlet-16504730496591.jpeg"
+alt="servlet" /></p></li>
+</ul></li>
+</ul></li>
+<li><p>How to enable EMIR analysis in PSS simualtion ?</p>
+<p>To enable EMIR in PSS, you have to enable DC and/or Tran simulation
+simultaneously. Two or more binary results file should be generated and
+select the file based file name or configure text file in
+<code>psf</code> directory.</p>
+<p>(given ICADVM 18.1 ISR11, Spectre 19.1 ISR6)</p></li>
+</ol>
+<h2 id="reference">reference</h2>
+<p>AC Peak Analysis Using IPWC Rapid Adoption Kit (RAK) Product Version:
+IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020</p>
+<p>Posser, Gracieli &amp; Sapatnekar, Sachin &amp; Reis, Ricardo.
+(2017). Electromigration Inside Logic Cells.
+10.1007/978-3-319-48899-8.</p>
+<p>A. B. Kahng, S. Nath and T. S. Rosing, "On potential design impacts
+of electromigration awareness," 2013 18th Asia and South Pacific Design
+Automation Conference (ASP-DAC), 2013, pp. 527-532, doi:
+10.1109/ASPDAC.2013.6509650.</p>
+<p>Kumar, Neeraj and Mohammad S. Hashmi. “Study, analysis and modeling
+of electromigration in SRAMs.” (2014).</p>
+<p>N. S. Nagaraj, F. Cano, H. Haznedar and D. Young, "A practical
+approach to static signal electromigration analysis," Proceedings 1998
+Design and Automation Conference. 35th DAC. (Cat. No.98CH36175), 1998,
+pp. 572-577, doi: 10.1109/DAC.1998.724536.</p>
+<p>Blaauw, David &amp; Oh, Chanhee &amp; Zolotov, Vladimir &amp;
+Dasgupta, Aurobindo. (2003). Static electromigration analysis for
+on-chip signal interconnects. Computer-Aided Design of Integrated
+Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
+10.1109/TCAD.2002.805728.</p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -7613,6 +7613,46 @@ alt="image-20230701142405404" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Glitches and Hazards</title>
+    <url>/2022/05/08/glitch-hazard/</url>
+    <content><![CDATA[<ul>
+<li>A <strong>glitch</strong> is an unwanted pulse at the output of a
+combinational logic network – <strong>a momentary change</strong> in an
+output that should not have changed</li>
+<li>A circuit with <em>the potential for a glitch</em> is said to have a
+<strong>hazard</strong></li>
+<li>In other words a hazard is something intrinsic about a circuit; a
+circuit with hazard may or may not have a glitch depending on input
+patterns and the electric characteristics of the circuit.</li>
+</ul>
+<h4 id="when-do-circuits-have-hazards">When do circuits have hazards
+?</h4>
+<p>Hazards are potential unwanted transients that occur in the output
+when different paths from input to output have different propagation
+delays</p>
+<h4 id="types-of-hazards-on-an-output">Types of Hazards (on an
+output)</h4>
+<p>static 1-hazard, static 0-hazard, dynamic hazard</p>
+<p><img src="/2022/05/08/glitch-hazard/image-20220508183800744.png"
+alt="image-20220508183800744" /></p>
+<h4 id="hazards-concern">Hazard's Concern</h4>
+<ul>
+<li>Hazards do not hurt synchronous circuits</li>
+<li>Hazards Kill Asynchronous Circuits</li>
+<li>Glitches Increase Power Consumption</li>
+</ul>
+<h4 id="referece">referece</h4>
+<p>CPE166/EEE 270 Advanced Logic Design-Digital Design: Time Behavior of
+Combinational Networks: <a
+href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
+<p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
+href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>h0 Estimator</title>
     <url>/2022/05/29/h0-estimator/</url>
     <content><![CDATA[<p>summer output <span class="math display">\[
@@ -7656,46 +7696,6 @@ different pattern for even and odd error slicer</p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Glitches and Hazards</title>
-    <url>/2022/05/08/glitch-hazard/</url>
-    <content><![CDATA[<ul>
-<li>A <strong>glitch</strong> is an unwanted pulse at the output of a
-combinational logic network – <strong>a momentary change</strong> in an
-output that should not have changed</li>
-<li>A circuit with <em>the potential for a glitch</em> is said to have a
-<strong>hazard</strong></li>
-<li>In other words a hazard is something intrinsic about a circuit; a
-circuit with hazard may or may not have a glitch depending on input
-patterns and the electric characteristics of the circuit.</li>
-</ul>
-<h4 id="when-do-circuits-have-hazards">When do circuits have hazards
-?</h4>
-<p>Hazards are potential unwanted transients that occur in the output
-when different paths from input to output have different propagation
-delays</p>
-<h4 id="types-of-hazards-on-an-output">Types of Hazards (on an
-output)</h4>
-<p>static 1-hazard, static 0-hazard, dynamic hazard</p>
-<p><img src="/2022/05/08/glitch-hazard/image-20220508183800744.png"
-alt="image-20220508183800744" /></p>
-<h4 id="hazards-concern">Hazard's Concern</h4>
-<ul>
-<li>Hazards do not hurt synchronous circuits</li>
-<li>Hazards Kill Asynchronous Circuits</li>
-<li>Glitches Increase Power Consumption</li>
-</ul>
-<h4 id="referece">referece</h4>
-<p>CPE166/EEE 270 Advanced Logic Design-Digital Design: Time Behavior of
-Combinational Networks: <a
-href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
-<p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
-href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -10004,6 +10004,64 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture10_ee720_jitter.pdf">
       </categories>
   </entry>
   <entry>
+    <title>Matlab toolbox</title>
+    <url>/2023/09/24/mattool/</url>
+    <content><![CDATA[<h2 id="impulse2pulse">impulse2pulse</h2>
+<blockquote>
+<p>serdes/impulse2pulse.m</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">P</span> = <span class="title">impulse2pulse</span><span class="params">(I, N, dt)</span></span></span><br><span class="line"></span><br><span class="line">impulseSize = <span class="built_in">size</span>(I);</span><br><span class="line"></span><br><span class="line"><span class="comment">%Convert to Pulse by shifting and adding</span></span><br><span class="line">P = <span class="built_in">zeros</span>(impulseSize,<span class="string">&#x27;like&#x27;</span>,I);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> indx=<span class="number">1</span>:N</span><br><span class="line">    P = P + <span class="built_in">circshift</span>(I, indx,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">P = P*dt;  <span class="comment">% `dt` is the width of area</span></span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[
+P_k = \Delta t \times \sum_j I_j
+\]</span></p>
+<h2 id="impulse2step">impulse2step</h2>
+<blockquote>
+<p>serdes/impulse2step.m</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">S</span> = <span class="title">impulse2step</span><span class="params">(I,dt)</span></span></span><br><span class="line"></span><br><span class="line">[nr,nn] = <span class="built_in">size</span>(I);</span><br><span class="line"></span><br><span class="line">S = <span class="built_in">zeros</span>(nr,nn,<span class="string">&#x27;like&#x27;</span>,I);</span><br><span class="line"><span class="keyword">for</span> indx=<span class="number">2</span>:nr</span><br><span class="line">    S(indx,:) = S(indx<span class="number">-1</span>,:) + I(indx<span class="number">-1</span>,:)*dt;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[
+S_k = S_{k-1} + I_{k-1}\times \Delta t
+\]</span></p>
+<h2 id="step2impulse">step2impulse</h2>
+<blockquote>
+<p>serdes/step2impulse.m</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">I</span> = <span class="title">step2impulse</span><span class="params">(S,dt)</span></span></span><br><span class="line"></span><br><span class="line">I = diff(S)/dt;</span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[
+I_k = \frac{S_{k+1}- S_{k}}{\Delta t}
+\]</span></p>
+<h2 id="pulse2impulse">pulse2impulse</h2>
+<blockquote>
+<p>serdes/pulse2impulse.m</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">I</span> = <span class="title">pulse2impulse</span><span class="params">(P, N, dt )</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">%   The algorithm computes the step response from the pulse response and</span></span><br><span class="line"><span class="comment">%   then take the derivative to get the impulse response. The derivative</span></span><br><span class="line"><span class="comment">%   calculation has zero delay and is reasonably accurate up to one half</span></span><br><span class="line"><span class="comment">%   the Nyquist rate but then diverges rapidly back to zero at the Nyquist</span></span><br><span class="line"><span class="comment">%   rate.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%Size input waveform</span></span><br><span class="line">[nr,nc] = <span class="built_in">size</span>(P);</span><br><span class="line"></span><br><span class="line"><span class="comment">%Remove DC component of waveform</span></span><br><span class="line">dcValues = P(<span class="number">1</span>,:);</span><br><span class="line">P = P - <span class="built_in">repmat</span>(dcValues,nr,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% Convert to step response. No circshift here</span></span><br><span class="line">step = <span class="built_in">zeros</span>( nr, nc,<span class="string">&#x27;like&#x27;</span>,P );</span><br><span class="line"><span class="keyword">for</span> jj = <span class="number">1</span>:nc</span><br><span class="line">    <span class="keyword">for</span> indx = <span class="number">1</span>:N:nr</span><br><span class="line">        step(indx:nr,jj) = step(indx:nr,jj) + P(<span class="number">1</span>:nr-indx+<span class="number">1</span>,jj);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% Take the derivative</span></span><br><span class="line">a1 = <span class="number">0.59</span>;</span><br><span class="line">a3 = <span class="number">-0.03</span>;</span><br><span class="line">stepExt = <span class="built_in">zeros</span>( nr+<span class="number">6</span>, nc, <span class="string">&#x27;like&#x27;</span>,P );</span><br><span class="line">I = coder.nullcopy(P);</span><br><span class="line"><span class="keyword">for</span> jj = <span class="number">1</span>:nc    </span><br><span class="line">    stepExt(<span class="number">1</span>:<span class="number">3</span>,jj) = step(<span class="number">1</span>,jj);</span><br><span class="line">    stepExt(<span class="number">4</span>:nr+<span class="number">3</span>,jj) = step(:,jj);</span><br><span class="line">    stepExt(nr+<span class="number">4</span>:nr+<span class="number">6</span>,jj) = step(nr,jj);</span><br><span class="line">    I(:,jj) = (a1*(stepExt(<span class="number">5</span>:nr+<span class="number">4</span>,jj) - stepExt(<span class="number">3</span>:nr+<span class="number">2</span>,jj)) + ...</span><br><span class="line">        a3*(stepExt(<span class="number">7</span>:nr+<span class="number">6</span>,jj) - stepExt(<span class="number">1</span>:nr,jj))) / dt;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="pulse2wave">pulse2wave</h2>
+<blockquote>
+<p>serdes/pulse2wave.m</p>
+<p>% The algorithms utilizes circular convolution to project the
+pulse</p>
+<p>% response onto the data pattern.</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close all;</span><br><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line"></span><br><span class="line">P1 = pulse(:,<span class="number">1</span>) - pulse(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">P1 = P1(<span class="number">1</span>:<span class="number">2000</span>);</span><br><span class="line"><span class="comment">% P1 = P1 + 0.2;  % dc offset</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="string">&#x27;Name&#x27;</span>,<span class="string">&#x27;pulse&#x27;</span>)</span><br><span class="line"><span class="built_in">plot</span>(P1)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">order = <span class="number">10</span>;</span><br><span class="line">data =<span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">512</span>);</span><br><span class="line">data(<span class="number">1</span>, <span class="number">8</span>) = <span class="number">1</span>;</span><br><span class="line">data(<span class="number">1</span>, <span class="number">256</span>) = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="string">&#x27;Name&#x27;</span>,<span class="string">&#x27;input sequence&#x27;</span>);</span><br><span class="line">stem(data);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W1 = pulse2wave(P1,data,SamplesPerSymbol); </span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="string">&#x27;Name&#x27;</span>,<span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line"><span class="built_in">plot</span>(W1)</span><br><span class="line">grid on;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2023/09/24/mattool/image-20230924130954034.png"
+alt="image-20230924130954034" /></p>
+<h2 id="pulse2pda">pulse2pda</h2>
+<blockquote>
+<p>B. K. Casper, M. Haycock and R. Mooney, "An accurate and efficient
+analysis method for multi-Gb/s chip-to-chip signaling schemes," 2002
+Symposium on VLSI Circuits. Digest of Technical Papers (Cat.
+No.02CH37302), Honolulu, HI, USA, 2002, pp. 54-57, doi:
+10.1109/VLSIC.2002.1015043.</p>
+<p>Chang, Wei-Ju and Ruey-Beei Wu. “Eye diagram estimation and equalizer
+design method for PAM4.” <em>2018 IEEE 22nd Workshop on Signal and Power
+Integrity (SPI)</em> (2018): 1-4.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Mixing Signed and Unsigned in Verilog</title>
     <url>/2022/05/07/mixed-sign-verilog/</url>
     <content><![CDATA[<p>Sign Extension</p>
@@ -10258,64 +10316,6 @@ Processing</a></p>
       </categories>
   </entry>
   <entry>
-    <title>Matlab toolbox</title>
-    <url>/2023/09/24/mattool/</url>
-    <content><![CDATA[<h2 id="impulse2pulse">impulse2pulse</h2>
-<blockquote>
-<p>serdes/impulse2pulse.m</p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">P</span> = <span class="title">impulse2pulse</span><span class="params">(I, N, dt)</span></span></span><br><span class="line"></span><br><span class="line">impulseSize = <span class="built_in">size</span>(I);</span><br><span class="line"></span><br><span class="line"><span class="comment">%Convert to Pulse by shifting and adding</span></span><br><span class="line">P = <span class="built_in">zeros</span>(impulseSize,<span class="string">&#x27;like&#x27;</span>,I);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> indx=<span class="number">1</span>:N</span><br><span class="line">    P = P + <span class="built_in">circshift</span>(I, indx,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">P = P*dt;  <span class="comment">% `dt` is the width of area</span></span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-P_k = \Delta t \times \sum_j I_j
-\]</span></p>
-<h2 id="impulse2step">impulse2step</h2>
-<blockquote>
-<p>serdes/impulse2step.m</p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">S</span> = <span class="title">impulse2step</span><span class="params">(I,dt)</span></span></span><br><span class="line"></span><br><span class="line">[nr,nn] = <span class="built_in">size</span>(I);</span><br><span class="line"></span><br><span class="line">S = <span class="built_in">zeros</span>(nr,nn,<span class="string">&#x27;like&#x27;</span>,I);</span><br><span class="line"><span class="keyword">for</span> indx=<span class="number">2</span>:nr</span><br><span class="line">    S(indx,:) = S(indx<span class="number">-1</span>,:) + I(indx<span class="number">-1</span>,:)*dt;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-S_k = S_{k-1} + I_{k-1}\times \Delta t
-\]</span></p>
-<h2 id="step2impulse">step2impulse</h2>
-<blockquote>
-<p>serdes/step2impulse.m</p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">I</span> = <span class="title">step2impulse</span><span class="params">(S,dt)</span></span></span><br><span class="line"></span><br><span class="line">I = diff(S)/dt;</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-I_k = \frac{S_{k+1}- S_{k}}{\Delta t}
-\]</span></p>
-<h2 id="pulse2impulse">pulse2impulse</h2>
-<blockquote>
-<p>serdes/pulse2impulse.m</p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">I</span> = <span class="title">pulse2impulse</span><span class="params">(P, N, dt )</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">%   The algorithm computes the step response from the pulse response and</span></span><br><span class="line"><span class="comment">%   then take the derivative to get the impulse response. The derivative</span></span><br><span class="line"><span class="comment">%   calculation has zero delay and is reasonably accurate up to one half</span></span><br><span class="line"><span class="comment">%   the Nyquist rate but then diverges rapidly back to zero at the Nyquist</span></span><br><span class="line"><span class="comment">%   rate.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%Size input waveform</span></span><br><span class="line">[nr,nc] = <span class="built_in">size</span>(P);</span><br><span class="line"></span><br><span class="line"><span class="comment">%Remove DC component of waveform</span></span><br><span class="line">dcValues = P(<span class="number">1</span>,:);</span><br><span class="line">P = P - <span class="built_in">repmat</span>(dcValues,nr,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% Convert to step response. No circshift here</span></span><br><span class="line">step = <span class="built_in">zeros</span>( nr, nc,<span class="string">&#x27;like&#x27;</span>,P );</span><br><span class="line"><span class="keyword">for</span> jj = <span class="number">1</span>:nc</span><br><span class="line">    <span class="keyword">for</span> indx = <span class="number">1</span>:N:nr</span><br><span class="line">        step(indx:nr,jj) = step(indx:nr,jj) + P(<span class="number">1</span>:nr-indx+<span class="number">1</span>,jj);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% Take the derivative</span></span><br><span class="line">a1 = <span class="number">0.59</span>;</span><br><span class="line">a3 = <span class="number">-0.03</span>;</span><br><span class="line">stepExt = <span class="built_in">zeros</span>( nr+<span class="number">6</span>, nc, <span class="string">&#x27;like&#x27;</span>,P );</span><br><span class="line">I = coder.nullcopy(P);</span><br><span class="line"><span class="keyword">for</span> jj = <span class="number">1</span>:nc    </span><br><span class="line">    stepExt(<span class="number">1</span>:<span class="number">3</span>,jj) = step(<span class="number">1</span>,jj);</span><br><span class="line">    stepExt(<span class="number">4</span>:nr+<span class="number">3</span>,jj) = step(:,jj);</span><br><span class="line">    stepExt(nr+<span class="number">4</span>:nr+<span class="number">6</span>,jj) = step(nr,jj);</span><br><span class="line">    I(:,jj) = (a1*(stepExt(<span class="number">5</span>:nr+<span class="number">4</span>,jj) - stepExt(<span class="number">3</span>:nr+<span class="number">2</span>,jj)) + ...</span><br><span class="line">        a3*(stepExt(<span class="number">7</span>:nr+<span class="number">6</span>,jj) - stepExt(<span class="number">1</span>:nr,jj))) / dt;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="pulse2wave">pulse2wave</h2>
-<blockquote>
-<p>serdes/pulse2wave.m</p>
-<p>% The algorithms utilizes circular convolution to project the
-pulse</p>
-<p>% response onto the data pattern.</p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close all;</span><br><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;PulseResponseReflective100ps.mat&#x27;</span>);</span><br><span class="line"></span><br><span class="line">P1 = pulse(:,<span class="number">1</span>) - pulse(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">P1 = P1(<span class="number">1</span>:<span class="number">2000</span>);</span><br><span class="line"><span class="comment">% P1 = P1 + 0.2;  % dc offset</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="string">&#x27;Name&#x27;</span>,<span class="string">&#x27;pulse&#x27;</span>)</span><br><span class="line"><span class="built_in">plot</span>(P1)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">order = <span class="number">10</span>;</span><br><span class="line">data =<span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">512</span>);</span><br><span class="line">data(<span class="number">1</span>, <span class="number">8</span>) = <span class="number">1</span>;</span><br><span class="line">data(<span class="number">1</span>, <span class="number">256</span>) = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="string">&#x27;Name&#x27;</span>,<span class="string">&#x27;input sequence&#x27;</span>);</span><br><span class="line">stem(data);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W1 = pulse2wave(P1,data,SamplesPerSymbol); </span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="string">&#x27;Name&#x27;</span>,<span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line"><span class="built_in">plot</span>(W1)</span><br><span class="line">grid on;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/24/mattool/image-20230924130954034.png"
-alt="image-20230924130954034" /></p>
-<h2 id="pulse2pda">pulse2pda</h2>
-<blockquote>
-<p>B. K. Casper, M. Haycock and R. Mooney, "An accurate and efficient
-analysis method for multi-Gb/s chip-to-chip signaling schemes," 2002
-Symposium on VLSI Circuits. Digest of Technical Papers (Cat.
-No.02CH37302), Honolulu, HI, USA, 2002, pp. 54-57, doi:
-10.1109/VLSIC.2002.1015043.</p>
-<p>Chang, Wei-Ju and Ruey-Beei Wu. “Eye diagram estimation and equalizer
-design method for PAM4.” <em>2018 IEEE 22nd Workshop on Signal and Power
-Integrity (SPI)</em> (2018): 1-4.</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Multicycle Paths Constraints in PrimeTime</title>
     <url>/2022/03/01/multicycle-paths/</url>
     <content><![CDATA[<p>PrimeTime <em>does not</em> automatically identifies multicycle
@@ -10359,6 +10359,22 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Interpolation and Decimation</title>
+    <url>/2024/05/23/multirate/</url>
+    <content><![CDATA[<p><em>TODO</em> 📅</p>
+<h2 id="mutistage">Mutistage</h2>
+<h2 id="polyphase-decomposition">Polyphase Decomposition</h2>
+<h2 id="interpolation">Interpolation</h2>
+<h3 id="zero-order-hold-zoh">Zero-Order Hold (ZOH)</h3>
+<h3 id="first-order-hold-foh">First-Order Hold (FOH)</h3>
+<h2 id="decimation">Decimation</h2>
+<h2 id="reference">reference</h2>
+]]></content>
+      <categories>
+        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -10713,22 +10729,6 @@ Signal Processing. Wiley-Interscience, 1986</p>
       </categories>
   </entry>
   <entry>
-    <title>Interpolation and Decimation</title>
-    <url>/2024/05/23/multirate/</url>
-    <content><![CDATA[<p><em>TODO</em> 📅</p>
-<h2 id="mutistage">Mutistage</h2>
-<h2 id="polyphase-decomposition">Polyphase Decomposition</h2>
-<h2 id="interpolation">Interpolation</h2>
-<h3 id="zero-order-hold-zoh">Zero-Order Hold (ZOH)</h3>
-<h3 id="first-order-hold-foh">First-Order Hold (FOH)</h3>
-<h2 id="decimation">Decimation</h2>
-<h2 id="reference">reference</h2>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Non ideal capacitor and inductor</title>
     <url>/2023/12/24/nonideal-LC/</url>
     <content><![CDATA[<h2 id="conversion-relationships">Conversion Relationships</h2>
@@ -10788,288 +10788,6 @@ href="https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-
 <p>ES Lecture 35: Non ideal capacitor, Capacitor Q and series RC to
 parallel RC conversion [<a
 href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo">https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>PAM4 Signaling</title>
-    <url>/2022/07/20/pam4/</url>
-    <content><![CDATA[<p><img src="/2022/07/20/pam4/image-20240624232935743.png"
-alt="image-20240624232935743" /></p>
-<p><img src="/2022/07/20/pam4/nrz-v-pam4-bits.png"
-alt="PAM4, NRZ, PCIe 6.0" /></p>
-<h1 id="pam4-basic">PAM4 Basic</h1>
-<p><strong>PAM4</strong> only have <em>1/3</em> of the amplitude
-compared to <strong>NRZ</strong> <span class="math display">\[
-\text{SNR loss} = 20\log(\frac{1}{3}) \sim  9.5\text{dB}
-\]</span></p>
-<blockquote>
-<p>In practice, there is further degradation due to nonlinearity</p>
-</blockquote>
-<p>In a more technical terms, we trade the <strong>transmitter’s
-signal-to-noise ratio (SNR)</strong> for <strong>lower Nyquist
-frequency</strong></p>
-<p>Equalization will be a lot more complex</p>
-<h2 id="pam4-level-names">PAM4 Level Names</h2>
-<p><img src="/2022/07/20/pam4/image-20220717000655620.png"
-alt="image-20220717000655620" /></p>
-<h2 id="pam4-eye-linearity">PAM4 Eye Linearity</h2>
-<p><img src="/2022/07/20/pam4/image-20220716221740224.png"
-alt="image-20220716221740224" /></p>
-<p>Each level can have different amplitudes, which form the <strong>Eye
-Linearity</strong> <span class="math display">\[
-{\text{Eye
-Linearity}}=\frac{\min(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}{\max(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}
-\]</span></p>
-<blockquote>
-<p>Perfect eye = 1</p>
-<p>Worst eye = 0</p>
-</blockquote>
-<h2 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h2>
-<p>The <strong>Level Separation Mismatch Ratio</strong>, commonly
-referred to as <span class="math inline">\(R_{\text{LM}}\)</span>, is a
-measurement that is not required in normative or informative VSR tests,
-but is required by most other variants.</p>
-<p><img src="/2022/07/20/pam4/image-20220716223452261.png"
-alt="image-20220716223452261" /></p>
-<p><span class="math display">\[\begin{align}
-V_{\text{mid}} &amp;= \frac{V_0+V_3}{2} \\
-ES1 &amp;= \frac{V_1-V_{\text{mid}}}{V_0-V_{\text{mid}}} \\
-ES2 &amp;= \frac{V_2-V_{\text{mid}}}{V_3-V_{\text{mid}}} \\
-R_{\text{LM}} &amp;= \min(3\times ES1, 3\times ES2, 2-3\times ES1,
-2-3\times ES2)
-\end{align}\]</span></p>
-<p>where <em>ES</em> means <em>Effective Symbol Level</em></p>
-<blockquote>
-<p><span class="math inline">\(R_{\text{LM}}\)</span> is conceptually
-similar to eye linearity but measured differently. An ideal PAM4 eye has
-<span class="math inline">\(R_{\text{LM}}\)</span> equal to
-<strong>1</strong>, but it does not scale in the same way as eye
-linearity.</p>
-<p>The closer <span class="math inline">\(R_{\text{LM}}\)</span> is to
-<strong>1</strong>, the better the eye linearity is.</p>
-</blockquote>
-<h2 id="gray-coding">Gray Coding</h2>
-<p>Gray code or reflected binary code was designed so that two
-successive values differ by one bit</p>
-<p>Reducing the number of switching</p>
-<table>
-<thead>
-<tr class="header">
-<th>Linear Code</th>
-<th>Gray Code</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>11</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>11</td>
-</tr>
-<tr class="odd">
-<td>01</td>
-<td>01</td>
-</tr>
-<tr class="even">
-<td>00</td>
-<td>00</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<ul>
-<li>Only one bit error per symbol is made for incorrect decisions</li>
-<li>This is the coding adopted in all the PAM4 standards</li>
-<li>Support dual-mode with PAM2, by grounding the LSB</li>
-<li>MSB is the bit transmitted first</li>
-</ul>
-</blockquote>
-<h3 id="binary-to-pam4-and-back-to-binary-example">Binary to PAM4 and
-Back to Binary Example</h3>
-<p><img src="/2022/07/20/pam4/image-20220717000847185.png"
-alt="image-20220717000847185" /></p>
-<blockquote>
-<p>The way that Gray coding combines the MSB (most significant bit) and
-LSB (least significant bit) in each PAM4 symbol assures that
-<strong>symbol errors</strong> caused by <strong>amplitude
-noise</strong> are more likely to cause <strong>one bit error than
-two</strong>. On the other hand, jitter is more likely to cause two bit
-errors per symbol error.</p>
-</blockquote>
-<h1 id="pam4-tx-equalization">PAM4 TX equalization</h1>
-<p><img src="/2022/07/20/pam4/image-20220717010007963.png"
-alt="image-20220717010007963" /></p>
-<p>Here, <span class="math inline">\(d_{\text{LSB}} \in \{-1,
-1\}\)</span>, <span class="math inline">\(d_{\text{MSB}} \in \{-2,
-2\}\)</span> and <span class="math inline">\(d&#39; \in \{ -3, -1, 1, 3
-\}\)</span></p>
-<p>Implementation-1 could potentially experience performance degradation
-due to</p>
-<ol type="1">
-<li>Clock skew, <span class="math inline">\(\Delta t\)</span>, could
-make the eye misaligned horizontally</li>
-<li>Gain mismatch, <span class="math inline">\(\Delta G\)</span>, could
-cause eye nonlinearity</li>
-<li>Bandwidth mismatch, <span class="math inline">\(\Delta
-f_{\text{BW}}\)</span>, could make the eye misaligned vertically</li>
-</ol>
-<p><img src="/2022/07/20/pam4/image-20220717011129124.png"
-alt="image-20220717011129124" /></p>
-<blockquote>
-<p>Typically, a 3-tap FIR (pre + main + post) TX de-emphasis is used</p>
-<p>3-tap FIR results in <span class="math inline">\(4^3 = 64\)</span>
-possible distinct signal levels</p>
-</blockquote>
-<p><img src="/2022/07/20/pam4/msb_lsb.drawio.svg"
-alt="msb_lsb.drawio" /></p>
-<p><span class="math display">\[\begin{align}
-R_U^M \parallel R_D^M &amp;= \frac{3R_T}{2}\\
-R_U^L \parallel R_D^L &amp;= 3R_T
-\end{align}\]</span></p>
-<p>Thevenin Equivalent Circuit is <img
-src="/2022/07/20/pam4/thevenin_1.drawio.svg"
-alt="thevenin_1.drawio" /></p>
-<p>Which can be simpified as <img
-src="/2022/07/20/pam4/thevenin_2.drawio.svg" alt="thevenin_2.drawio" />
-<span class="math display">\[\begin{align}
-V_{\text{rx}} &amp;= \frac{1}{2}(V_p - V_m) \\
-&amp;= \frac{1}{2}(\frac{2}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-1) \\
-&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2}
-\end{align}\]</span></p>
-<p>The above eqations demonstrate that the output <span
-class="math inline">\(V_{\text{rx}}\)</span> is the linear sum of
-<strong>MSB</strong> and <strong>LSB</strong>; <strong>LSB</strong> and
-<strong>MSB</strong> have relative weight, i.e. <em>1</em> for LSB and
-<em>2</em> for MSB.</p>
-<p>Assume pre cusor has <span class="math inline">\(L\)</span> legs,
-main cursor <span class="math inline">\(M\)</span> legs and post cursor
-<span class="math inline">\(N\)</span> legs, which is same with the
-convention in "Voltage-Mode Driver Equalization"</p>
-<p>The number of legs connected with supply can expressed as <span
-class="math display">\[
-n_{up} = (1-d_{n+1})L + d_{n}M + (1-d_{n-1})N
-\]</span> Where <span class="math inline">\(d_n \in \{0, 1\}\)</span>,
-or <span class="math display">\[
-n_{up} = \frac{1}{2}(-D_{n+1}+1)L + \frac{1}{2}(D_{n}+1)M +
-\frac{1}{2}(-D_{n-1}+1)N
-\]</span> Where <span class="math inline">\(D_n \in \{-1,
-+1\}\)</span></p>
-<p>Then the number of legs connected with ground is <span
-class="math display">\[
-n_{dn}=L+M+N-n_{up}
-\]</span> where <span
-class="math inline">\(n_{up}+n_{dn}=L+M+N\)</span></p>
-<p>Voltage resistor divider <span class="math display">\[\begin{align}
-V_o &amp;=
-\frac{\frac{R_{U}}{n_{dn}}}{\frac{R_U}{n_{dn}}+\frac{R_U}{n_{up}}} \\
-&amp;= \frac{1}{2}- \frac{1}{2}D_{n+1}\frac{L}{L+M+N}+
-\frac{1}{2}D_{n}\frac{M}{L+M+N}-\frac{1}{2}D_{n-1}\frac{N}{L+M+N} \\
-&amp;= \frac{1}{2}-\frac{1}{2}D_{n+1}\cdot l+ \frac{1}{2}D_{n}\cdot
-m-\frac{1}{2}D_{n-1}\cdot n
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(l+m+n=1\)</span></p>
-<p><span class="math inline">\(V_{\text{MSB}}\)</span> and <span
-class="math inline">\(V_{\text{LSB}}\)</span> can be obtained</p>
-<p><span class="math display">\[\begin{align}
-V_{\text{MSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot
-l+ \frac{1}{2}D^{\text{MSB}}_{n}\cdot
-m-\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \\
-V_{\text{LSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot
-l+ \frac{1}{2}D^{\text{LSB}}_{n}\cdot
-m-\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n
-\end{align}\]</span></p>
-<p>Substitute the above equation into <span
-class="math inline">\(V_{\text{rx}}\)</span>, we obtain the relationship
-between driver legs and FFE coefficients</p>
-<p><span class="math display">\[\begin{align}
-V_{\text{rx}}
-&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2} \\
-&amp;= \frac{1}{3} \left\{  2\left(
-\frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot l+
-\frac{1}{2}D^{\text{MSB}}_{n}\cdot m-
-\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \right) + \left(
-\frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot l+
-\frac{1}{2}D^{\text{LSB}}_{n}\cdot m-
-\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n \right) \right\}-\frac{1}{2} \\
-&amp;=  \left(-\frac{l}{6} \cdot 2 \cdot D^{\text{MSB}}_{n+1}+
-\frac{m}{6} \cdot 2 \cdot D^{\text{MSB}}_{n}- \frac{n}{6} \cdot 2 \cdot
-D^{\text{MSB}}_{n-1}\right) + \left(-\frac{l}{6} \cdot
-D^{\text{LSB}}_{n+1}+ \frac{m}{6} \cdot D^{\text{LSB}}_{n}- \frac{n}{6}
-\cdot D^{\text{LSB}}_{n-1}\right) \\
-&amp;=  -\frac{l}{6}(2 \cdot D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+
-\frac{m}{6}(2\cdot D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n})
--\frac{n}{6}(2\cdot D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
-\end{align}\]</span></p>
-<p>After scaling, we obtain <span class="math display">\[
-V_{\text{rx}}  = -l\cdot(2 \cdot
-D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+ m\cdot(2\cdot
-D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n}) - n \cdot(2\cdot
-D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
-\]</span> Where <span class="math inline">\(C_{-1} = l\)</span>, <span
-class="math inline">\(C_0 = m\)</span> and <span
-class="math inline">\(C_{1}=n\)</span>, which is same with that of
-NRZ.</p>
-<h1 id="general-tx-serializer">General TX Serializer</h1>
-<h2 id="mux-timing">mux timing</h2>
-<p><img src="/2022/07/20/pam4/mux2-1.drawio.svg"
-alt="mux2-1.drawio" /></p>
-<h2 id="divider-latch-timing">divider latch timing</h2>
-<p><img src="/2022/07/20/pam4/div2-latch.drawio.svg"
-alt="div2-latch.drawio" /></p>
-<h2 id="two-latches">Two latches</h2>
-<p><img src="/2022/07/20/pam4/two-latch.drawio.svg"
-alt="two-latch.drawio" /></p>
-<h1 id="dac-based-ffe-in-pam4-transmitter">DAC-based FFE in PAM4
-Transmitter</h1>
-<p><img src="/2022/07/20/pam4/image-20220721220225623.png"
-alt="image-20220721220225623" /></p>
-<p>One classic TX implementation contain:</p>
-<ul>
-<li>a DAC: <strong>56GS/s</strong> <strong>8b</strong></li>
-<li>a DSP: <strong>8-tap FIR</strong></li>
-</ul>
-<blockquote>
-<p>C. Menolfi et al., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm
-CMOS," 2018 IEEE International Solid - State Circuits Conference -
-(ISSCC), 2018, pp. 104-106, doi: 10.1109/ISSCC.2018.8310205.</p>
-</blockquote>
-<p><img src="/2022/07/20/pam4/image-20220721234522043.png"
-alt="image-20220721234522043" /></p>
-<h2 id="pi-coil"><span class="math inline">\(\pi\)</span>-coil</h2>
-<p><img src="/2022/07/20/pam4/image-20220720232837839.png"
-alt="image-20220720232837839" /></p>
-<blockquote>
-<p>J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm
-CMOS," 2018 IEEE International Solid - State Circuits Conference -
-(ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>C. Menolfi et al., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm
-CMOS," 2018 IEEE International Solid - State Circuits Conference -
-(ISSCC), 2018, pp. 104-106, doi: 10.1109/ISSCC.2018.8310205.</p>
-<p>E. Chong et al., "A 112Gb/s PAM-4, 168Gb/s PAM-8 7bit DAC-Based
-Transmitter in 7nm FinFET," ESSCIRC 2021 - IEEE 47th European Solid
-State Circuits Conference (ESSCIRC), 2021, pp. 523-526, doi:
-10.1109/ESSCIRC53450.2021.9567801.</p>
-<p>B. Razavi, "Design Techniques for High-Speed Wireline Transmitters,"
-in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp.
-53-66, 2021, doi: 10.1109/OJSSCS.2021.3112398.</p>
-<p>Wang, Z., Choi, M., Lee, K., Park, K., Liu, Z., Biswas, A., Han, J.,
-Du, S., &amp; Alon, E. (2022). An Output Bandwidth Optimized 200-Gb/s
-PAM-4 100-Gb/s NRZ Transmitter With 5-Tap FFE in 28-nm CMOS. IEEE
-Journal of Solid-State Circuits, 57(1), 21-31.
-https://doi.org/10.1109/JSSC.2021.3109562</p>
-<p>J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm
-CMOS," 2018 IEEE International Solid - State Circuits Conference -
-(ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.</p>
-<p>PCIe® 6.0 Specification: The Interconnect for I/O Needs of the Future
-PCI-SIG® Educational Webinar Series, [<a
-href="https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf">https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -12059,6 +11777,288 @@ href="https://benchugg.com/research_notes/sde_ito_lemma/">https://benchugg.com/r
       </categories>
   </entry>
   <entry>
+    <title>PAM4 Signaling</title>
+    <url>/2022/07/20/pam4/</url>
+    <content><![CDATA[<p><img src="/2022/07/20/pam4/image-20240624232935743.png"
+alt="image-20240624232935743" /></p>
+<p><img src="/2022/07/20/pam4/nrz-v-pam4-bits.png"
+alt="PAM4, NRZ, PCIe 6.0" /></p>
+<h1 id="pam4-basic">PAM4 Basic</h1>
+<p><strong>PAM4</strong> only have <em>1/3</em> of the amplitude
+compared to <strong>NRZ</strong> <span class="math display">\[
+\text{SNR loss} = 20\log(\frac{1}{3}) \sim  9.5\text{dB}
+\]</span></p>
+<blockquote>
+<p>In practice, there is further degradation due to nonlinearity</p>
+</blockquote>
+<p>In a more technical terms, we trade the <strong>transmitter’s
+signal-to-noise ratio (SNR)</strong> for <strong>lower Nyquist
+frequency</strong></p>
+<p>Equalization will be a lot more complex</p>
+<h2 id="pam4-level-names">PAM4 Level Names</h2>
+<p><img src="/2022/07/20/pam4/image-20220717000655620.png"
+alt="image-20220717000655620" /></p>
+<h2 id="pam4-eye-linearity">PAM4 Eye Linearity</h2>
+<p><img src="/2022/07/20/pam4/image-20220716221740224.png"
+alt="image-20220716221740224" /></p>
+<p>Each level can have different amplitudes, which form the <strong>Eye
+Linearity</strong> <span class="math display">\[
+{\text{Eye
+Linearity}}=\frac{\min(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}{\max(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}
+\]</span></p>
+<blockquote>
+<p>Perfect eye = 1</p>
+<p>Worst eye = 0</p>
+</blockquote>
+<h2 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h2>
+<p>The <strong>Level Separation Mismatch Ratio</strong>, commonly
+referred to as <span class="math inline">\(R_{\text{LM}}\)</span>, is a
+measurement that is not required in normative or informative VSR tests,
+but is required by most other variants.</p>
+<p><img src="/2022/07/20/pam4/image-20220716223452261.png"
+alt="image-20220716223452261" /></p>
+<p><span class="math display">\[\begin{align}
+V_{\text{mid}} &amp;= \frac{V_0+V_3}{2} \\
+ES1 &amp;= \frac{V_1-V_{\text{mid}}}{V_0-V_{\text{mid}}} \\
+ES2 &amp;= \frac{V_2-V_{\text{mid}}}{V_3-V_{\text{mid}}} \\
+R_{\text{LM}} &amp;= \min(3\times ES1, 3\times ES2, 2-3\times ES1,
+2-3\times ES2)
+\end{align}\]</span></p>
+<p>where <em>ES</em> means <em>Effective Symbol Level</em></p>
+<blockquote>
+<p><span class="math inline">\(R_{\text{LM}}\)</span> is conceptually
+similar to eye linearity but measured differently. An ideal PAM4 eye has
+<span class="math inline">\(R_{\text{LM}}\)</span> equal to
+<strong>1</strong>, but it does not scale in the same way as eye
+linearity.</p>
+<p>The closer <span class="math inline">\(R_{\text{LM}}\)</span> is to
+<strong>1</strong>, the better the eye linearity is.</p>
+</blockquote>
+<h2 id="gray-coding">Gray Coding</h2>
+<p>Gray code or reflected binary code was designed so that two
+successive values differ by one bit</p>
+<p>Reducing the number of switching</p>
+<table>
+<thead>
+<tr class="header">
+<th>Linear Code</th>
+<th>Gray Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>01</td>
+<td>01</td>
+</tr>
+<tr class="even">
+<td>00</td>
+<td>00</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li>Only one bit error per symbol is made for incorrect decisions</li>
+<li>This is the coding adopted in all the PAM4 standards</li>
+<li>Support dual-mode with PAM2, by grounding the LSB</li>
+<li>MSB is the bit transmitted first</li>
+</ul>
+</blockquote>
+<h3 id="binary-to-pam4-and-back-to-binary-example">Binary to PAM4 and
+Back to Binary Example</h3>
+<p><img src="/2022/07/20/pam4/image-20220717000847185.png"
+alt="image-20220717000847185" /></p>
+<blockquote>
+<p>The way that Gray coding combines the MSB (most significant bit) and
+LSB (least significant bit) in each PAM4 symbol assures that
+<strong>symbol errors</strong> caused by <strong>amplitude
+noise</strong> are more likely to cause <strong>one bit error than
+two</strong>. On the other hand, jitter is more likely to cause two bit
+errors per symbol error.</p>
+</blockquote>
+<h1 id="pam4-tx-equalization">PAM4 TX equalization</h1>
+<p><img src="/2022/07/20/pam4/image-20220717010007963.png"
+alt="image-20220717010007963" /></p>
+<p>Here, <span class="math inline">\(d_{\text{LSB}} \in \{-1,
+1\}\)</span>, <span class="math inline">\(d_{\text{MSB}} \in \{-2,
+2\}\)</span> and <span class="math inline">\(d&#39; \in \{ -3, -1, 1, 3
+\}\)</span></p>
+<p>Implementation-1 could potentially experience performance degradation
+due to</p>
+<ol type="1">
+<li>Clock skew, <span class="math inline">\(\Delta t\)</span>, could
+make the eye misaligned horizontally</li>
+<li>Gain mismatch, <span class="math inline">\(\Delta G\)</span>, could
+cause eye nonlinearity</li>
+<li>Bandwidth mismatch, <span class="math inline">\(\Delta
+f_{\text{BW}}\)</span>, could make the eye misaligned vertically</li>
+</ol>
+<p><img src="/2022/07/20/pam4/image-20220717011129124.png"
+alt="image-20220717011129124" /></p>
+<blockquote>
+<p>Typically, a 3-tap FIR (pre + main + post) TX de-emphasis is used</p>
+<p>3-tap FIR results in <span class="math inline">\(4^3 = 64\)</span>
+possible distinct signal levels</p>
+</blockquote>
+<p><img src="/2022/07/20/pam4/msb_lsb.drawio.svg"
+alt="msb_lsb.drawio" /></p>
+<p><span class="math display">\[\begin{align}
+R_U^M \parallel R_D^M &amp;= \frac{3R_T}{2}\\
+R_U^L \parallel R_D^L &amp;= 3R_T
+\end{align}\]</span></p>
+<p>Thevenin Equivalent Circuit is <img
+src="/2022/07/20/pam4/thevenin_1.drawio.svg"
+alt="thevenin_1.drawio" /></p>
+<p>Which can be simpified as <img
+src="/2022/07/20/pam4/thevenin_2.drawio.svg" alt="thevenin_2.drawio" />
+<span class="math display">\[\begin{align}
+V_{\text{rx}} &amp;= \frac{1}{2}(V_p - V_m) \\
+&amp;= \frac{1}{2}(\frac{2}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-1) \\
+&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2}
+\end{align}\]</span></p>
+<p>The above eqations demonstrate that the output <span
+class="math inline">\(V_{\text{rx}}\)</span> is the linear sum of
+<strong>MSB</strong> and <strong>LSB</strong>; <strong>LSB</strong> and
+<strong>MSB</strong> have relative weight, i.e. <em>1</em> for LSB and
+<em>2</em> for MSB.</p>
+<p>Assume pre cusor has <span class="math inline">\(L\)</span> legs,
+main cursor <span class="math inline">\(M\)</span> legs and post cursor
+<span class="math inline">\(N\)</span> legs, which is same with the
+convention in "Voltage-Mode Driver Equalization"</p>
+<p>The number of legs connected with supply can expressed as <span
+class="math display">\[
+n_{up} = (1-d_{n+1})L + d_{n}M + (1-d_{n-1})N
+\]</span> Where <span class="math inline">\(d_n \in \{0, 1\}\)</span>,
+or <span class="math display">\[
+n_{up} = \frac{1}{2}(-D_{n+1}+1)L + \frac{1}{2}(D_{n}+1)M +
+\frac{1}{2}(-D_{n-1}+1)N
+\]</span> Where <span class="math inline">\(D_n \in \{-1,
++1\}\)</span></p>
+<p>Then the number of legs connected with ground is <span
+class="math display">\[
+n_{dn}=L+M+N-n_{up}
+\]</span> where <span
+class="math inline">\(n_{up}+n_{dn}=L+M+N\)</span></p>
+<p>Voltage resistor divider <span class="math display">\[\begin{align}
+V_o &amp;=
+\frac{\frac{R_{U}}{n_{dn}}}{\frac{R_U}{n_{dn}}+\frac{R_U}{n_{up}}} \\
+&amp;= \frac{1}{2}- \frac{1}{2}D_{n+1}\frac{L}{L+M+N}+
+\frac{1}{2}D_{n}\frac{M}{L+M+N}-\frac{1}{2}D_{n-1}\frac{N}{L+M+N} \\
+&amp;= \frac{1}{2}-\frac{1}{2}D_{n+1}\cdot l+ \frac{1}{2}D_{n}\cdot
+m-\frac{1}{2}D_{n-1}\cdot n
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(l+m+n=1\)</span></p>
+<p><span class="math inline">\(V_{\text{MSB}}\)</span> and <span
+class="math inline">\(V_{\text{LSB}}\)</span> can be obtained</p>
+<p><span class="math display">\[\begin{align}
+V_{\text{MSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot
+l+ \frac{1}{2}D^{\text{MSB}}_{n}\cdot
+m-\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \\
+V_{\text{LSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot
+l+ \frac{1}{2}D^{\text{LSB}}_{n}\cdot
+m-\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n
+\end{align}\]</span></p>
+<p>Substitute the above equation into <span
+class="math inline">\(V_{\text{rx}}\)</span>, we obtain the relationship
+between driver legs and FFE coefficients</p>
+<p><span class="math display">\[\begin{align}
+V_{\text{rx}}
+&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2} \\
+&amp;= \frac{1}{3} \left\{  2\left(
+\frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot l+
+\frac{1}{2}D^{\text{MSB}}_{n}\cdot m-
+\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \right) + \left(
+\frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot l+
+\frac{1}{2}D^{\text{LSB}}_{n}\cdot m-
+\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n \right) \right\}-\frac{1}{2} \\
+&amp;=  \left(-\frac{l}{6} \cdot 2 \cdot D^{\text{MSB}}_{n+1}+
+\frac{m}{6} \cdot 2 \cdot D^{\text{MSB}}_{n}- \frac{n}{6} \cdot 2 \cdot
+D^{\text{MSB}}_{n-1}\right) + \left(-\frac{l}{6} \cdot
+D^{\text{LSB}}_{n+1}+ \frac{m}{6} \cdot D^{\text{LSB}}_{n}- \frac{n}{6}
+\cdot D^{\text{LSB}}_{n-1}\right) \\
+&amp;=  -\frac{l}{6}(2 \cdot D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+
+\frac{m}{6}(2\cdot D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n})
+-\frac{n}{6}(2\cdot D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
+\end{align}\]</span></p>
+<p>After scaling, we obtain <span class="math display">\[
+V_{\text{rx}}  = -l\cdot(2 \cdot
+D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+ m\cdot(2\cdot
+D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n}) - n \cdot(2\cdot
+D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
+\]</span> Where <span class="math inline">\(C_{-1} = l\)</span>, <span
+class="math inline">\(C_0 = m\)</span> and <span
+class="math inline">\(C_{1}=n\)</span>, which is same with that of
+NRZ.</p>
+<h1 id="general-tx-serializer">General TX Serializer</h1>
+<h2 id="mux-timing">mux timing</h2>
+<p><img src="/2022/07/20/pam4/mux2-1.drawio.svg"
+alt="mux2-1.drawio" /></p>
+<h2 id="divider-latch-timing">divider latch timing</h2>
+<p><img src="/2022/07/20/pam4/div2-latch.drawio.svg"
+alt="div2-latch.drawio" /></p>
+<h2 id="two-latches">Two latches</h2>
+<p><img src="/2022/07/20/pam4/two-latch.drawio.svg"
+alt="two-latch.drawio" /></p>
+<h1 id="dac-based-ffe-in-pam4-transmitter">DAC-based FFE in PAM4
+Transmitter</h1>
+<p><img src="/2022/07/20/pam4/image-20220721220225623.png"
+alt="image-20220721220225623" /></p>
+<p>One classic TX implementation contain:</p>
+<ul>
+<li>a DAC: <strong>56GS/s</strong> <strong>8b</strong></li>
+<li>a DSP: <strong>8-tap FIR</strong></li>
+</ul>
+<blockquote>
+<p>C. Menolfi et al., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm
+CMOS," 2018 IEEE International Solid - State Circuits Conference -
+(ISSCC), 2018, pp. 104-106, doi: 10.1109/ISSCC.2018.8310205.</p>
+</blockquote>
+<p><img src="/2022/07/20/pam4/image-20220721234522043.png"
+alt="image-20220721234522043" /></p>
+<h2 id="pi-coil"><span class="math inline">\(\pi\)</span>-coil</h2>
+<p><img src="/2022/07/20/pam4/image-20220720232837839.png"
+alt="image-20220720232837839" /></p>
+<blockquote>
+<p>J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm
+CMOS," 2018 IEEE International Solid - State Circuits Conference -
+(ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>C. Menolfi et al., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm
+CMOS," 2018 IEEE International Solid - State Circuits Conference -
+(ISSCC), 2018, pp. 104-106, doi: 10.1109/ISSCC.2018.8310205.</p>
+<p>E. Chong et al., "A 112Gb/s PAM-4, 168Gb/s PAM-8 7bit DAC-Based
+Transmitter in 7nm FinFET," ESSCIRC 2021 - IEEE 47th European Solid
+State Circuits Conference (ESSCIRC), 2021, pp. 523-526, doi:
+10.1109/ESSCIRC53450.2021.9567801.</p>
+<p>B. Razavi, "Design Techniques for High-Speed Wireline Transmitters,"
+in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp.
+53-66, 2021, doi: 10.1109/OJSSCS.2021.3112398.</p>
+<p>Wang, Z., Choi, M., Lee, K., Park, K., Liu, Z., Biswas, A., Han, J.,
+Du, S., &amp; Alon, E. (2022). An Output Bandwidth Optimized 200-Gb/s
+PAM-4 100-Gb/s NRZ Transmitter With 5-Tap FFE in 28-nm CMOS. IEEE
+Journal of Solid-State Circuits, 57(1), 21-31.
+https://doi.org/10.1109/JSSC.2021.3109562</p>
+<p>J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm
+CMOS," 2018 IEEE International Solid - State Circuits Conference -
+(ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.</p>
+<p>PCIe® 6.0 Specification: The Interconnect for I/O Needs of the Future
+PCI-SIG® Educational Webinar Series, [<a
+href="https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf">https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Parallel Compensation in Two stage amplifier</title>
     <url>/2022/03/07/parallel-compensation/</url>
     <content><![CDATA[<blockquote>
@@ -12207,6 +12207,243 @@ href="https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&amp;file=WVhSMF
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Phase Noise and Jitter Simulation</title>
+    <url>/2023/10/21/phasenoise-jitter/</url>
+    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
+<p>The phase noise does not affect the total power in the signal, it
+only affects its distribution.</p>
+<ul>
+<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
+a series of impulse functions at the harmonics of <span
+class="math inline">\(f_o\)</span>.</li>
+<li>With phase noise, the impulse functions spread, becoming fatter and
+shorter but retaining the same total power</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
+alt="image-20231029164227587" /></p>
+<blockquote>
+<p><strong>line width</strong>: corner frequency <span
+class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
+</blockquote>
+<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
+<p>A more precise analysis shows that the spectrum of a free-running
+oscillator does indeed have a Lorentian profile:</p>
+<ol type="1">
+<li>it is <strong>flat</strong> for frequencies below a given corner
+frequency</li>
+<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
+it.</li>
+</ol>
+<p>The spectrum of the signal <span class="math inline">\(x(t +
+α(t))\)</span> can be expressed as <span class="math display">\[
+S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
+c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
+\]</span> The integral in above equation around each harmonic is equal
+to the power of the harmonic itself <span class="math inline">\(\left|
+X_n \right|^2\)</span></p>
+<p>This means that the <strong>excess phase noise</strong>
+<strong>DONT</strong> change the energy of the signal; it just spreads
+its energy over the frequency spectrum, blurring the very sharp
+frequency impulse of an ideal noiseless oscillator.</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
+alt="image-20220504130750290" /></p>
+<h2 id="vco-varactor">VCO varactor</h2>
+<blockquote>
+<p>Two methods: 1. pss + pac; 2. pss+psp</p>
+</blockquote>
+<h3 id="pss-pac">PSS + PAC</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
+alt="image-20220510192206354" /></p>
+<p>pss time domain</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
+alt="image-20220510192351590" /></p>
+<p>using the <strong>0-harmonic</strong></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
+alt="image-20220510192447040" /></p>
+<h3 id="pss-psp">PSS + PSP</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
+alt="image-20220510192753324" /></p>
+<p>using <strong>Y11</strong> of <code>psp</code></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
+alt="image-20220510192639080" /></p>
+<h3 id="results">results</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
+alt="image-20220510193036717" /></p>
+<blockquote>
+<p>which are same</p>
+</blockquote>
+<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h3>
+<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h3>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
+Sampled(jitter): Sampled Phase Option</h2>
+<ul>
+<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
+<li>Use model:
+<ul>
+<li>Sampleds Per Period: number of ponits</li>
+<li>Add Specific Points: specific time point, still time points</li>
+</ul></li>
+</ul>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
+alt="image-20220712085426461" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
+alt="image-20220712085836315" /></p>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
+alt="image-20220712090011204" /></p>
+<blockquote>
+<p>pss beat freq = 5GHz</p>
+<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
+</blockquote>
+<h2 id="transient-noise">Transient noise</h2>
+<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h3>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
+function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
+<code>psd</code> and <code>abs_jitter</code> function</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h4 id="comparison">Comparison</h4>
+<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h3 id="rms-value">RMS value</h3>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h3 id="remarks">Remarks</h3>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
+]]></content>
+      <categories>
+        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -12838,243 +13075,6 @@ href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pd
       </categories>
   </entry>
   <entry>
-    <title>Phase Noise and Jitter Simulation</title>
-    <url>/2023/10/21/phasenoise-jitter/</url>
-    <content><![CDATA[<h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
-<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
-<ol type="1">
-<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112856934.png"
-alt="image-20220511112856934" /></p></li>
-<li><p>manually calculate by definition</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511112806122.png"
-alt="image-20220511112806122" /></p></li>
-<li><p><code>output noise</code> with unit <code>dBc</code></p>
-<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
-convention: SSB</em></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511113248984.png"
-alt="image-20220511113248984" /></p></li>
-</ol>
-<blockquote>
-<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
-simulation,</p>
-</blockquote>
-<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
-sampled(jitter)/Edge Crossing</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/EdgePhaseNoise.drawio.svg"
-alt="EdgePhaseNoise.drawio" /></p>
-<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220515214901120.png"
-alt="image-20220515214901120" /></p>
-<p>Another way, the following equation can also be used for
-<code>sampled(jitter)/Edge Crossing</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
-<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220511150337318.png"
-alt="image-20220511150337318" /></p>
-<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
-sampled(jitter) pnoise</h3>
-<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
-obtained by <em>transient noise simulation</em></p>
-<p>The idea is that sample waveform with ideal clock, subtract DC
-offset, then fft(psd)</p>
-<ul>
-<li>samplesRaw = sample(wv)</li>
-<li>samplePost = samplesRaw - average(samplesRaw)</li>
-<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184543148.png"
-alt="image-20220516184543148" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516184844296.png"
-alt="image-20220516184844296" /></p>
-<p><strong>Expression</strong>:</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220516185506348.png"
-alt="image-20220516185506348" /></p>
-<blockquote>
-<p>The computation cost is typically very high, and the accuracy is
-lesser as compared to PSS/Pnoise</p>
-</blockquote>
-<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
-Sampled(jitter): Sampled Phase Option</h2>
-<ul>
-<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
-<li>Use model:
-<ul>
-<li>Sampleds Per Period: number of ponits</li>
-<li>Add Specific Points: specific time point, still time points</li>
-</ul></li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085426461.png"
-alt="image-20220712085426461" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712085836315.png"
-alt="image-20220712085836315" /></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220712090011204.png"
-alt="image-20220712090011204" /></p>
-<blockquote>
-<p>pss beat freq = 5GHz</p>
-<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
-</blockquote>
-<h2 id="transient-noise">Transient noise</h2>
-<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
-transient noise analysis</h3>
-<ol type="1">
-<li>The Phase Noise function is now available in the Direct Plot form
-(Results-Direct Plot-Main Form) after Transient Analysis is run
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-<li><code>PN</code> phase noise function
-<ul>
-<li>Absolute jitter Method</li>
-<li>Direct Power Spectral Density Method</li>
-</ul></li>
-</ol>
-<blockquote>
-<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
-the power spectral density of the absolute jitter of an input
-waveform</p>
-<p>and <strong>absolute jitter method</strong> is the default method</p>
-</blockquote>
-<p>In below discussion, we only think about the
-<code>absolute jitter method</code></p>
-<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
-<blockquote>
-<ul>
-<li>phase noise is single-sideband</li>
-<li>psd is double-sideband</li>
-<li>Then the ratio is <strong>2</strong></li>
-</ul>
-</blockquote>
-<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
-<p><code>jee</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>convert <strong>single-sideband</strong> phase noise to psd by
-multiplying 2 or <code>10 * log10(2)</code></p>
-</blockquote>
-<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
-function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-</blockquote>
-<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
-<code>psd</code> and <code>abs_jitter</code> function</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>double-sideband psd</p>
-<p><code>abs_jitter</code> <em>Y-Unit</em> default is
-<code>rad</code></p>
-</blockquote>
-<h4 id="comparison">Comparison</h4>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220506225324377.png"
-alt="image-20220506225324377" /></p>
-<blockquote>
-<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
-</blockquote>
-<h3 id="rms-value">RMS value</h3>
-<ul>
-<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
-axis</em> and add the <code>stddev</code> function to determine the Jee
-jitter value</li>
-<li>or integrate psd</li>
-</ul>
-<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
-discrete domain signal <span class="math inline">\(x(n)\)</span> is
-given by <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
-\]</span> Inserting Parseval's theorem given by <span
-class="math display">\[
-\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
-\]</span> allows for computing the RMS from the spectrum <span
-class="math inline">\(X(k)\)</span> as <span class="math display">\[
-x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
-\]</span></p>
-<h3 id="remarks">Remarks</h3>
-<p>Cadence Spectre's <code>PN</code> function may call
-<code>abs_jitter</code> and <code>psd</code> function under the
-hood.</p>
-<h2 id="reference">reference</h2>
-<p>Article (11514536) Title: How to obtain a phase noise plot from a
-transient noise analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
-<p>Article (20500632) Title: How to simulate Random and Deterministic
-Jitters URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
-<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
-Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
-Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
-href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>import package in SystemVerilog compilation</title>
     <url>/2022/03/24/pkg-import-compile-sv/</url>
     <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
@@ -13692,6 +13692,239 @@ Digital Domain</h4>
       </categories>
   </entry>
   <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Random Signals</title>
+    <url>/2023/11/10/random/</url>
+    <content><![CDATA[<ul>
+<li><p><strong>Mean Function</strong></p>
+<p>The <strong>mean function</strong> <span
+class="math inline">\(\mu_X(t)\)</span> of a random process <span
+class="math inline">\(\{ X(t) \}\)</span> is a function that specifies
+the expected value at <em>each time</em> <span
+class="math inline">\(t\)</span> <span class="math display">\[
+\mu_X(t) \overset{\text{def}}{=} E[X(t)] \tag{1.1}
+\]</span> For a discrete-time process, we notate the mean function as
+<span class="math display">\[
+\mu_X[n] \overset{\text{def}}{=} E[X[n]] \tag{1.2}
+\]</span></p></li>
+<li><p><strong>Variance Function</strong></p>
+<p>The <strong>variance function</strong> <span
+class="math inline">\(V(t)\)</span> of a random process <span
+class="math inline">\(\{ X(t) \}\)</span> is a function that specifies
+the variance of the process at each time <span
+class="math inline">\(t\)</span> <span class="math display">\[
+V(t) \overset{\text{def}}{=} \text{Var}[X(t)] \tag{1.3}
+\]</span> For a discrete-time process, we notate the variance function
+as <span class="math display">\[
+V[n] \overset{\text{def}}{=} \text{Var}[X[n]] \tag{1.4}
+\]</span> <img
+src="/2023/11/10/random/unnamed-chunk-184-1-1699676799639-1.png"
+alt="unnamed-chunk-184-1-1699676799639-1" /></p></li>
+</ul>
+<h2 id="autocovariance-function">Autocovariance Function</h2>
+<p><span class="math display">\[
+C_X(s, t) \overset{\text{def}}{=} \text{Cov}[X(s), X(t)] =
+\mathrm{E}[(X(s) - E(X(s)))(X(t) - E(X(t)))]
+\]</span></p>
+<h2 id="autocorrelation-function">Autocorrelation Function</h2>
+<p>The <strong>autocorrelation function</strong> <span
+class="math inline">\(R_X(s, t)\)</span> of a random process <span
+class="math inline">\(\{ X(t) \}\)</span> is a function of <em>two</em>
+times <span class="math inline">\(s\)</span> and <span
+class="math inline">\(t\)</span>. It specifies <span
+class="math display">\[
+R_X(s, t) \overset{\text{def}}{=} E[X(s)X(t)] \tag{1.7}
+\]</span></p>
+<blockquote>
+<p><span class="math display">\[
+E[X(s) X(t)] = \text{Cov}[X(s), X(t)] + E[X(s)] E[X(t)]
+\]</span></p>
+</blockquote>
+<p>For stationary process, the autocorrelation function only depends on
+the difference between the times <span class="math inline">\(\tau = s -
+t\)</span> <span class="math display">\[
+R_X(\tau) \overset{\text{def}}{=} C_X(s, t) + \mu_X(s) \mu_X(t) =
+C_X(\tau) + \mu_X^2
+\]</span></p>
+<h2 id="wide-sense-stationary-processes">Wide-Sense Stationary
+Processes</h2>
+<p>A random process <span class="math inline">\(\{ X(t) \}\)</span> is
+wide-sense stationary if its mean and autocovariance function are
+invariant under time shifts. That is:</p>
+<ol type="1">
+<li>The mean function <span class="math inline">\(\mu_X(t)\)</span> is
+constant. In this case, we will write the mean function as <span
+class="math inline">\(\mu_X(t) \equiv \mu_X\)</span></li>
+<li>The autocovariance function <span class="math inline">\(C_X(s,
+t)\)</span> only depends on <span class="math inline">\(s-t\)</span>,
+the difference between the times. In this case, we will write the
+autocovariance function as <span class="math inline">\(C_X(s, t) = C_X(s
+- t)\)</span></li>
+</ol>
+<h2 id="cyclostationary-process">Cyclostationary process</h2>
+<p><em>TODO</em> 📅</p>
+<h2 id="wiener-khinchin-theorem">Wiener-Khinchin theorem</h2>
+<blockquote>
+<p>Norbert Wiener proved this theorem for the case of a
+<em>deterministic function</em> in 1930; Aleksandr Khinchin later
+formulated an analogous result for <em>stationary stochastic
+processes</em> and published that probabilistic analogue in 1934. Albert
+Einstein explained, without proofs, the idea in a brief two-page memo in
+1914</p>
+</blockquote>
+<p><span class="math inline">\(x(t)\)</span>, Fourier transform over a
+limited period of time <span class="math inline">\([-T/2, +T/2]\)</span>
+, <span class="math display">\[
+X_T(f) = \int_{-T/2}^{T/2}x(t)e^{-j2\pi ft}dt
+\]</span></p>
+<p>using <em>Parseval's theorem</em> <span class="math display">\[
+\int_{-T/2}^{T/2}|x(t)|^2dt = \int_{-T/2}^{T/2}|X_T(f)|^2df
+\]</span> So that <span class="math display">\[
+\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2dt =
+\int_{-T/2}^{T/2}\frac{1}{T}|X_T(f)|^2df
+\]</span></p>
+<blockquote>
+<p>where the quantity, <span
+class="math inline">\(\frac{1}{T}|X_T(f)|^2\)</span> can be interpreted
+as distribution of power in the frequency domain</p>
+<p>For each <span class="math inline">\(f\)</span> this quantity is a
+random variable, since it is a function of the random process <span
+class="math inline">\(x(t)\)</span></p>
+</blockquote>
+<p>The power spectral density (PSD) <span class="math inline">\(S_x(f
+)\)</span> is defined as the limit of the expectation of the expression
+above, for large <span class="math inline">\(T\)</span>: <span
+class="math display">\[
+S_x(f) = \lim _{T\to \infty}\mathrm{E}\left[ \frac{1}{T}|X_T(f)|^2
+\right]
+\]</span></p>
+<p>The <em>Wiener-Khinchin theorem</em> ensures that for well-behaved
+<em>wide-sense stationary processes</em> the <strong>limit
+exists</strong> and is equal to the Fourier transform of the
+autocorrelation <span class="math display">\[\begin{align}
+S_x(f) &amp;= \int_{-\infty}^{+\infty}R_x(\tau)e^{-j2\pi f \tau}d\tau \\
+R_x(\tau) &amp;= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
+\end{align}\]</span></p>
+<h2 id="spectrum-analysis-of-random-signals">Spectrum Analysis of Random
+Signals</h2>
+<ul>
+<li><p>periodogram analysis</p>
+<p>direct Fourier transformation of finite-length segments of the
+signal</p></li>
+<li><p>Blackman-Tukey method</p>
+<p>Fourier transform of the autocorrelation function</p></li>
+</ul>
+<h2 id="spectrum-analyzer">spectrum analyzer</h2>
+<p>We tried to plot a <em>power spectral density</em> together with
+something that we want to interpret as a <em>power spectrum</em></p>
+<blockquote>
+<ul>
+<li><em>spectrum</em> of a periodic signal</li>
+<li><em>spectral density</em> of a broadband signal such as noise</li>
+</ul>
+<p>Sine-wave components are located in individual FFT bins, but
+broadband signals like noise have their power spread over all FFT
+bins!</p>
+<p>The <strong>noise floor</strong> depends on the <em>length of the
+FFT</em></p>
+</blockquote>
+<p>[<a
+href="http://individual.utoronto.ca/schreier/lectures/2015/1.pdf">http://individual.utoronto.ca/schreier/lectures/2015/1.pdf</a>]</p>
+<p><img src="/2023/11/10/random/image-20240522214004545.png"
+alt="image-20240522214004545" /></p>
+<p>signal tone power <span class="math display">\[
+P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
+\]</span></p>
+<p>noise power <span class="math display">\[
+P_n = \frac{X_{w,n}^2}{S_2}
+\]</span></p>
+<p>Then, displayed <strong>SNR</strong> is obtained <span
+class="math display">\[\begin{align}
+\mathrm{SNR} &amp;= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right)
+\\
+&amp;= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) +
+10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
+&amp;= \mathrm{SNR}&#39;-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
+&amp;= \mathrm{SNR}&#39;-10\log_{10}(2\cdot\mathrm{NBW}) \\
+\end{align}\]</span></p>
+<blockquote>
+<p><em>DFT's output</em> <span
+class="math inline">\(\mathrm{SNR}\)</span></p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> N=[<span class="number">2</span>^<span class="number">6</span> <span class="number">2</span>^<span class="number">8</span> <span class="number">2</span>^<span class="number">10</span> <span class="number">2</span>^<span class="number">12</span>]</span><br><span class="line">  wd = rectwin(N);</span><br><span class="line">  nbw = enbw(wd)/N;</span><br><span class="line">  snr_shift = <span class="number">10</span>*<span class="built_in">log10</span>(nbw * <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">disp</span>(snr_shift);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>output: <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-15.0515</span><br><span class="line"></span><br><span class="line">-21.0721</span><br><span class="line"></span><br><span class="line">-27.0927</span><br><span class="line"></span><br><span class="line">-33.1133</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2023/11/10/random/image-20240522214340882.png"
+alt="image-20240522214340882" /></p>
+<blockquote>
+<p>The solution to the scaling problem in the case of a PSD obtained
+from a sine-wave scaled FFT is similarly simple. All we need do is
+provide the value of <strong>NBW</strong></p>
+</blockquote>
+<blockquote>
+<p><em>APPENDIX A - SPECTRAL ESTIMATION - A.2 Scaling and Noise
+Bandwidth</em></p>
+<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
+Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
+</blockquote>
+<ul>
+<li>For a filter with infinitely steep roll-off, the noise bandwidth
+(<strong>NBW</strong>) is equal to the filter's bandwidth,</li>
+<li>while for a filter with a single-pole roll-off, <strong>NBW</strong>
+is 2 times the 3-dB bandwidth</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>Iain Collings. Random Processes [<a
+href="https://youtube.com/playlist?list=PLx7-Q20A1VYKRLHUMSt2YOORrVz8iH-Kq&amp;si=cZjlH7zcHcR0zWg6">https://youtube.com/playlist?list=PLx7-Q20A1VYKRLHUMSt2YOORrVz8iH-Kq&amp;si=cZjlH7zcHcR0zWg6</a>]
+Spectral content of NRZ test patterns [<a
+href="https://www.analog.com/media/en/technical-documentation/tech-articles/hfta110-spectral-content-of-nrz-test-patterns.pdf">https://www.analog.com/media/en/technical-documentation/tech-articles/hfta110-spectral-content-of-nrz-test-patterns.pdf</a>]</p>
+<p>NRZ Bandwidth - HF Cutoff vs. SNR [<a
+href="https://www.analog.com/media/en/technical-documentation/tech-articles/hfan0901-nrz-bandwidth--hf-cutoff-vs-snr.pdf">https://www.analog.com/media/en/technical-documentation/tech-articles/hfan0901-nrz-bandwidth--hf-cutoff-vs-snr.pdf</a>]</p>
+<p>Lab 2: Spectrum analysis [<a
+href="https://ece.uccs.edu/~mwickert/ece4670/lecture_notes/Lab2.pdf">https://ece.uccs.edu/~mwickert/ece4670/lecture_notes/Lab2.pdf</a>]</p>
+<p>PSD (Power spectral density) explanation. [<a
+href="https://dsp.stackexchange.com/a/8151">https://dsp.stackexchange.com/a/8151</a>]</p>
+<p>Dennis Sun. STAT 350 2020 Probability and Stochastic Processes for
+Electrical Engineers [<a
+href="https://dlsun.github.io/Stat350-S20/">https://dlsun.github.io/Stat350-S20/</a>]</p>
+<p>Oppenheim, Alan V. and Cram. "Discrete-time signal processing" 3rd
+edition. (2011).</p>
+<p>Leon W. Couch, II "Digital and Analog Communication Systems", 8th
+Ed., Pearson Education-LPE, 2013.</p>
+<p>B.P. Lathi, Zhi Ding. "Modern Digital and Analog Communication
+Systems", 5th edition, 2019.</p>
+<p>Ziemer, Rodger E., and William H. Tranter. <em>Principles of
+Communication: Systems, Modulation, and Noise</em>. 5th ed. New York:
+Wiley, 2002.</p>
+<p>Haykin, Simon. <em>Digital Communication Systems</em>. 1st edition.
+Wiley, 2013.</p>
+<p>Carlson, A. Bruce, and Paul B. Crilly. <em>Communication Systems: An
+Introduction to Signals and Noise in Electrical Communication</em>. 5th
+ed. Boston: McGraw-Hill Higher Education, 2010.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Power Spectra and Power Spectral Densities</title>
     <url>/2022/04/18/ps-psd/</url>
     <content><![CDATA[<p>One will see the following phenomena:</p>
@@ -14124,239 +14357,6 @@ Press. doi:10.1017/CBO9780511835261</p>
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Random Signals</title>
-    <url>/2023/11/10/random/</url>
-    <content><![CDATA[<ul>
-<li><p><strong>Mean Function</strong></p>
-<p>The <strong>mean function</strong> <span
-class="math inline">\(\mu_X(t)\)</span> of a random process <span
-class="math inline">\(\{ X(t) \}\)</span> is a function that specifies
-the expected value at <em>each time</em> <span
-class="math inline">\(t\)</span> <span class="math display">\[
-\mu_X(t) \overset{\text{def}}{=} E[X(t)] \tag{1.1}
-\]</span> For a discrete-time process, we notate the mean function as
-<span class="math display">\[
-\mu_X[n] \overset{\text{def}}{=} E[X[n]] \tag{1.2}
-\]</span></p></li>
-<li><p><strong>Variance Function</strong></p>
-<p>The <strong>variance function</strong> <span
-class="math inline">\(V(t)\)</span> of a random process <span
-class="math inline">\(\{ X(t) \}\)</span> is a function that specifies
-the variance of the process at each time <span
-class="math inline">\(t\)</span> <span class="math display">\[
-V(t) \overset{\text{def}}{=} \text{Var}[X(t)] \tag{1.3}
-\]</span> For a discrete-time process, we notate the variance function
-as <span class="math display">\[
-V[n] \overset{\text{def}}{=} \text{Var}[X[n]] \tag{1.4}
-\]</span> <img
-src="/2023/11/10/random/unnamed-chunk-184-1-1699676799639-1.png"
-alt="unnamed-chunk-184-1-1699676799639-1" /></p></li>
-</ul>
-<h2 id="autocovariance-function">Autocovariance Function</h2>
-<p><span class="math display">\[
-C_X(s, t) \overset{\text{def}}{=} \text{Cov}[X(s), X(t)] =
-\mathrm{E}[(X(s) - E(X(s)))(X(t) - E(X(t)))]
-\]</span></p>
-<h2 id="autocorrelation-function">Autocorrelation Function</h2>
-<p>The <strong>autocorrelation function</strong> <span
-class="math inline">\(R_X(s, t)\)</span> of a random process <span
-class="math inline">\(\{ X(t) \}\)</span> is a function of <em>two</em>
-times <span class="math inline">\(s\)</span> and <span
-class="math inline">\(t\)</span>. It specifies <span
-class="math display">\[
-R_X(s, t) \overset{\text{def}}{=} E[X(s)X(t)] \tag{1.7}
-\]</span></p>
-<blockquote>
-<p><span class="math display">\[
-E[X(s) X(t)] = \text{Cov}[X(s), X(t)] + E[X(s)] E[X(t)]
-\]</span></p>
-</blockquote>
-<p>For stationary process, the autocorrelation function only depends on
-the difference between the times <span class="math inline">\(\tau = s -
-t\)</span> <span class="math display">\[
-R_X(\tau) \overset{\text{def}}{=} C_X(s, t) + \mu_X(s) \mu_X(t) =
-C_X(\tau) + \mu_X^2
-\]</span></p>
-<h2 id="wide-sense-stationary-processes">Wide-Sense Stationary
-Processes</h2>
-<p>A random process <span class="math inline">\(\{ X(t) \}\)</span> is
-wide-sense stationary if its mean and autocovariance function are
-invariant under time shifts. That is:</p>
-<ol type="1">
-<li>The mean function <span class="math inline">\(\mu_X(t)\)</span> is
-constant. In this case, we will write the mean function as <span
-class="math inline">\(\mu_X(t) \equiv \mu_X\)</span></li>
-<li>The autocovariance function <span class="math inline">\(C_X(s,
-t)\)</span> only depends on <span class="math inline">\(s-t\)</span>,
-the difference between the times. In this case, we will write the
-autocovariance function as <span class="math inline">\(C_X(s, t) = C_X(s
-- t)\)</span></li>
-</ol>
-<h2 id="cyclostationary-process">Cyclostationary process</h2>
-<p><em>TODO</em> 📅</p>
-<h2 id="wiener-khinchin-theorem">Wiener-Khinchin theorem</h2>
-<blockquote>
-<p>Norbert Wiener proved this theorem for the case of a
-<em>deterministic function</em> in 1930; Aleksandr Khinchin later
-formulated an analogous result for <em>stationary stochastic
-processes</em> and published that probabilistic analogue in 1934. Albert
-Einstein explained, without proofs, the idea in a brief two-page memo in
-1914</p>
-</blockquote>
-<p><span class="math inline">\(x(t)\)</span>, Fourier transform over a
-limited period of time <span class="math inline">\([-T/2, +T/2]\)</span>
-, <span class="math display">\[
-X_T(f) = \int_{-T/2}^{T/2}x(t)e^{-j2\pi ft}dt
-\]</span></p>
-<p>using <em>Parseval's theorem</em> <span class="math display">\[
-\int_{-T/2}^{T/2}|x(t)|^2dt = \int_{-T/2}^{T/2}|X_T(f)|^2df
-\]</span> So that <span class="math display">\[
-\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2dt =
-\int_{-T/2}^{T/2}\frac{1}{T}|X_T(f)|^2df
-\]</span></p>
-<blockquote>
-<p>where the quantity, <span
-class="math inline">\(\frac{1}{T}|X_T(f)|^2\)</span> can be interpreted
-as distribution of power in the frequency domain</p>
-<p>For each <span class="math inline">\(f\)</span> this quantity is a
-random variable, since it is a function of the random process <span
-class="math inline">\(x(t)\)</span></p>
-</blockquote>
-<p>The power spectral density (PSD) <span class="math inline">\(S_x(f
-)\)</span> is defined as the limit of the expectation of the expression
-above, for large <span class="math inline">\(T\)</span>: <span
-class="math display">\[
-S_x(f) = \lim _{T\to \infty}\mathrm{E}\left[ \frac{1}{T}|X_T(f)|^2
-\right]
-\]</span></p>
-<p>The <em>Wiener-Khinchin theorem</em> ensures that for well-behaved
-<em>wide-sense stationary processes</em> the <strong>limit
-exists</strong> and is equal to the Fourier transform of the
-autocorrelation <span class="math display">\[\begin{align}
-S_x(f) &amp;= \int_{-\infty}^{+\infty}R_x(\tau)e^{-j2\pi f \tau}d\tau \\
-R_x(\tau) &amp;= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
-\end{align}\]</span></p>
-<h2 id="spectrum-analysis-of-random-signals">Spectrum Analysis of Random
-Signals</h2>
-<ul>
-<li><p>periodogram analysis</p>
-<p>direct Fourier transformation of finite-length segments of the
-signal</p></li>
-<li><p>Blackman-Tukey method</p>
-<p>Fourier transform of the autocorrelation function</p></li>
-</ul>
-<h2 id="spectrum-analyzer">spectrum analyzer</h2>
-<p>We tried to plot a <em>power spectral density</em> together with
-something that we want to interpret as a <em>power spectrum</em></p>
-<blockquote>
-<ul>
-<li><em>spectrum</em> of a periodic signal</li>
-<li><em>spectral density</em> of a broadband signal such as noise</li>
-</ul>
-<p>Sine-wave components are located in individual FFT bins, but
-broadband signals like noise have their power spread over all FFT
-bins!</p>
-<p>The <strong>noise floor</strong> depends on the <em>length of the
-FFT</em></p>
-</blockquote>
-<p>[<a
-href="http://individual.utoronto.ca/schreier/lectures/2015/1.pdf">http://individual.utoronto.ca/schreier/lectures/2015/1.pdf</a>]</p>
-<p><img src="/2023/11/10/random/image-20240522214004545.png"
-alt="image-20240522214004545" /></p>
-<p>signal tone power <span class="math display">\[
-P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
-\]</span></p>
-<p>noise power <span class="math display">\[
-P_n = \frac{X_{w,n}^2}{S_2}
-\]</span></p>
-<p>Then, displayed <strong>SNR</strong> is obtained <span
-class="math display">\[\begin{align}
-\mathrm{SNR} &amp;= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right)
-\\
-&amp;= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) +
-10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
-&amp;= \mathrm{SNR}&#39;-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
-&amp;= \mathrm{SNR}&#39;-10\log_{10}(2\cdot\mathrm{NBW}) \\
-\end{align}\]</span></p>
-<blockquote>
-<p><em>DFT's output</em> <span
-class="math inline">\(\mathrm{SNR}\)</span></p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> N=[<span class="number">2</span>^<span class="number">6</span> <span class="number">2</span>^<span class="number">8</span> <span class="number">2</span>^<span class="number">10</span> <span class="number">2</span>^<span class="number">12</span>]</span><br><span class="line">  wd = rectwin(N);</span><br><span class="line">  nbw = enbw(wd)/N;</span><br><span class="line">  snr_shift = <span class="number">10</span>*<span class="built_in">log10</span>(nbw * <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">disp</span>(snr_shift);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>output: <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-15.0515</span><br><span class="line"></span><br><span class="line">-21.0721</span><br><span class="line"></span><br><span class="line">-27.0927</span><br><span class="line"></span><br><span class="line">-33.1133</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2023/11/10/random/image-20240522214340882.png"
-alt="image-20240522214340882" /></p>
-<blockquote>
-<p>The solution to the scaling problem in the case of a PSD obtained
-from a sine-wave scaled FFT is similarly simple. All we need do is
-provide the value of <strong>NBW</strong></p>
-</blockquote>
-<blockquote>
-<p><em>APPENDIX A - SPECTRAL ESTIMATION - A.2 Scaling and Noise
-Bandwidth</em></p>
-<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
-Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
-</blockquote>
-<ul>
-<li>For a filter with infinitely steep roll-off, the noise bandwidth
-(<strong>NBW</strong>) is equal to the filter's bandwidth,</li>
-<li>while for a filter with a single-pole roll-off, <strong>NBW</strong>
-is 2 times the 3-dB bandwidth</li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>Iain Collings. Random Processes [<a
-href="https://youtube.com/playlist?list=PLx7-Q20A1VYKRLHUMSt2YOORrVz8iH-Kq&amp;si=cZjlH7zcHcR0zWg6">https://youtube.com/playlist?list=PLx7-Q20A1VYKRLHUMSt2YOORrVz8iH-Kq&amp;si=cZjlH7zcHcR0zWg6</a>]
-Spectral content of NRZ test patterns [<a
-href="https://www.analog.com/media/en/technical-documentation/tech-articles/hfta110-spectral-content-of-nrz-test-patterns.pdf">https://www.analog.com/media/en/technical-documentation/tech-articles/hfta110-spectral-content-of-nrz-test-patterns.pdf</a>]</p>
-<p>NRZ Bandwidth - HF Cutoff vs. SNR [<a
-href="https://www.analog.com/media/en/technical-documentation/tech-articles/hfan0901-nrz-bandwidth--hf-cutoff-vs-snr.pdf">https://www.analog.com/media/en/technical-documentation/tech-articles/hfan0901-nrz-bandwidth--hf-cutoff-vs-snr.pdf</a>]</p>
-<p>Lab 2: Spectrum analysis [<a
-href="https://ece.uccs.edu/~mwickert/ece4670/lecture_notes/Lab2.pdf">https://ece.uccs.edu/~mwickert/ece4670/lecture_notes/Lab2.pdf</a>]</p>
-<p>PSD (Power spectral density) explanation. [<a
-href="https://dsp.stackexchange.com/a/8151">https://dsp.stackexchange.com/a/8151</a>]</p>
-<p>Dennis Sun. STAT 350 2020 Probability and Stochastic Processes for
-Electrical Engineers [<a
-href="https://dlsun.github.io/Stat350-S20/">https://dlsun.github.io/Stat350-S20/</a>]</p>
-<p>Oppenheim, Alan V. and Cram. "Discrete-time signal processing" 3rd
-edition. (2011).</p>
-<p>Leon W. Couch, II "Digital and Analog Communication Systems", 8th
-Ed., Pearson Education-LPE, 2013.</p>
-<p>B.P. Lathi, Zhi Ding. "Modern Digital and Analog Communication
-Systems", 5th edition, 2019.</p>
-<p>Ziemer, Rodger E., and William H. Tranter. <em>Principles of
-Communication: Systems, Modulation, and Noise</em>. 5th ed. New York:
-Wiley, 2002.</p>
-<p>Haykin, Simon. <em>Digital Communication Systems</em>. 1st edition.
-Wiley, 2013.</p>
-<p>Carlson, A. Bruce, and Paul B. Crilly. <em>Communication Systems: An
-Introduction to Signals and Noise in Electrical Communication</em>. 5th
-ed. Boston: McGraw-Hill Higher Education, 2010.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -15723,23 +15723,6 @@ tools regarding on analog modeling,validation, and generation</a></p>
       </categories>
   </entry>
   <entry>
-    <title>How to squash all git commits into one?</title>
-    <url>/2023/08/10/squash-all-commits/</url>
-    <content><![CDATA[<p><a
-href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
-<p>As of <a
-href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
-1.6.2</a>, you can use <code>git rebase --root -i</code></p>
-<p>For each commit except the first, change <code>pick</code> to
-<code>squash</code>.</p>
-<p>this works find, but I had to do a forced push. be careful!
-<code>git push -f</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>maximum oscillation frequency of multi-paths ring oscillator</title>
     <url>/2022/03/20/spro-mpro/</url>
     <content><![CDATA[<p>A conventional inverter-based ring oscillator consists of a single
@@ -15830,6 +15813,23 @@ https://escholarship.org/uc/item/75g8j8jt</p>
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>How to squash all git commits into one?</title>
+    <url>/2023/08/10/squash-all-commits/</url>
+    <content><![CDATA[<p><a
+href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
+<p>As of <a
+href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
+1.6.2</a>, you can use <code>git rebase --root -i</code></p>
+<p>For each commit except the first, change <code>pick</code> to
+<code>squash</code>.</p>
+<p>this works find, but I had to do a forced push. be careful!
+<code>git push -f</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -16721,7 +16721,7 @@ Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
       </categories>
   </entry>
   <entry>
-    <title>T-coil and its application</title>
+    <title>T-coil</title>
     <url>/2022/03/17/tcoil/</url>
     <content><![CDATA[<ul>
 <li>Broaden the bandwidth</li>
@@ -16787,6 +16787,12 @@ alt="image-20220623013225554" /></p>
 alt="image-20220623013923263" /></p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% EMX - shield tcoil model</span></span><br><span class="line">L1 = csvread(<span class="string">&#x27;./L1sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">L2 = csvread(<span class="string">&#x27;./L2sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">k = csvread(<span class="string">&#x27;./ksim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% EMX - Tapped shield inductor</span></span><br><span class="line">L = csvread(<span class="string">&#x27;./Lsim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">freq = L1(:, <span class="number">1</span>)/<span class="number">1e9</span>;    <span class="comment">% GHz</span></span><br><span class="line">L1 = L1(:, <span class="number">2</span>);</span><br><span class="line">L2 = L2(:, <span class="number">2</span>);</span><br><span class="line">k = -k(:, <span class="number">2</span>);   <span class="comment">% Caution: minus of EMX ksim due to same current direction</span></span><br><span class="line"></span><br><span class="line">L = L(:, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">Lcalc = L1 + L2 + <span class="number">2</span>*k.*(L1.*L2).^<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq, L*<span class="number">1e9</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(freq, Lcalc*<span class="number">1e9</span>, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Inductance (nH)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Tapped inductor model&#x27;</span>, <span class="string">&#x27;tcoil model calc&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="reference">reference</h2>
+<p>S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension
+Techniques for CMOS Amplifiers," in <em>IEEE Journal of Solid-State
+Circuits</em>, vol. 41, no. 11, pp. 2424-2439, Nov. 2006</p>
+<p><a
+href="https://ewh.ieee.org/r5/denver/sscs/Presentations/2007_08_Allstot.pdf">David
+J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers</a></p>
 <p>B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE
 Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall
 2015.</p>
@@ -16804,11 +16810,14 @@ Solid-State and Integrated Circuit Technology Proceedings, 2006, pp.
 Low-Parasitic Capacitance for RF ICs in CMOS Technologies," in IEEE
 Transactions on Device and Materials Reliability, vol. 11, no. 2, pp.
 207-218, June 2011, doi: 10.1109/TDMR.2011.2106129.</p>
-<p><a
-href="https://pdfs.semanticscholar.org/29db/7f450d63eee941424655fb787de7d644a3c2.pdf">David
-J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers</a></p>
 <p><a href="https://ibis.org/summits/feb11/ross.pdf">Bob Ross, "T-Coil
 Topics" DesignCon IBIS Summit 2011</a></p>
+<p>Ross, Bob and Cong Ling. “Wang Algebra: From Theory to Practice.”
+<em>IEEE Open Journal of Circuits and Systems</em> 3 (2022):
+274-285.</p>
+<p>S. Lin, D. Huang and S. Wong, "Pi Coil: A New Element for Bandwidth
+Extension," in <em>IEEE Transactions on Circuits and Systems II: Express
+Briefs</em>, vol. 56, no. 6, pp. 454-458, June 2009</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -17293,59 +17302,6 @@ href="https://www.zhihu.com/question/341872732/answer/2327863003">知乎2</a>]</
 ]]></content>
   </entry>
   <entry>
-    <title>DC operating points during TRANSIENT analysis</title>
-    <url>/2023/10/06/tranOP/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
-Beckett</a><a
-href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
-11 years ago</a></p>
-<p>Two approaches:</p>
-<ol type="1">
-<li>On the transient options form, there's a field called "infotimes" -
-specify the times at which you want it to output the dc operating point
-data. You can then annotate the "transient operating points" from any of
-these times after the simulation, or access them via the results
-browser.</li>
-<li>Or you could get the operating point data to be continuously saved
-during the transient for selected devices - if so, create a file called
-(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
-M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
-reference the file via Setup-&gt;Model Libraries or as a "definition
-file" on Setup-&gt;Simulation Files. With this approach you can then
-find the operating point data for the selected devices in the results
-browser and plot it versus time (be cautious of saving too much though
-because this can generate a lot of data if you're not careful)</li>
-</ol>
-<p>Regards,</p>
-<p>Andrew.</p>
-</blockquote>
-<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
-alt="image-20231006110801078" /></p>
-<h2 id="transient-options-form">transient options form</h2>
-<h3 id="setup">setup</h3>
-<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
-alt="image-20231006103506475" /></p>
-<h3 id="access-1">access 1</h3>
-<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
-<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
-<strong>Transient Operating Points</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
-alt="image-20231006104317496" /></p>
-<h3 id="access-2">access 2</h3>
-<p><strong>tranOpTimed</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
-alt="image-20231006105236323" /></p>
-<h2 id="save.scs">save.scs</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
-alt="image-20231006110506245" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>TLM</title>
     <url>/2022/04/03/tlm/</url>
     <content><![CDATA[<p><img src="/2022/04/03/tlm/image-20220403094350570.png"
@@ -17768,6 +17724,59 @@ FIFOs</p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>DC operating points during TRANSIENT analysis</title>
+    <url>/2023/10/06/tranOP/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
+Beckett</a><a
+href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
+11 years ago</a></p>
+<p>Two approaches:</p>
+<ol type="1">
+<li>On the transient options form, there's a field called "infotimes" -
+specify the times at which you want it to output the dc operating point
+data. You can then annotate the "transient operating points" from any of
+these times after the simulation, or access them via the results
+browser.</li>
+<li>Or you could get the operating point data to be continuously saved
+during the transient for selected devices - if so, create a file called
+(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
+M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
+reference the file via Setup-&gt;Model Libraries or as a "definition
+file" on Setup-&gt;Simulation Files. With this approach you can then
+find the operating point data for the selected devices in the results
+browser and plot it versus time (be cautious of saving too much though
+because this can generate a lot of data if you're not careful)</li>
+</ol>
+<p>Regards,</p>
+<p>Andrew.</p>
+</blockquote>
+<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
+alt="image-20231006110801078" /></p>
+<h2 id="transient-options-form">transient options form</h2>
+<h3 id="setup">setup</h3>
+<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
+alt="image-20231006103506475" /></p>
+<h3 id="access-1">access 1</h3>
+<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
+<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
+<strong>Transient Operating Points</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
+alt="image-20231006104317496" /></p>
+<h3 id="access-2">access 2</h3>
+<p><strong>tranOpTimed</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
+alt="image-20231006105236323" /></p>
+<h2 id="save.scs">save.scs</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
+alt="image-20231006110506245" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>

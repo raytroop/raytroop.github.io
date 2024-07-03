@@ -4,6 +4,7 @@ date: 2022-09-24 00:29:21
 tags:
 categories:
 - analog
+mathjax: true
 ---
 
 ## D=S=B varactors
@@ -42,9 +43,10 @@ categories:
 
 > nmoscap: NMOS in **N-Well** varactor
 
-![image-20230504223522225](MOS-Cap/image-20230504223522225.png)
+![image-20240703224101060](MOS-Cap/image-20240703224101060.png)
 
-> pmoscap: PMOS in **P-Well** varactor
+> - Base Band MOSCAP model (nmoscap) is built without effective series resistance (ESR) and effective series inductance (ESL) calibrations, which is for capacitance simulation only
+> - LC-Tank MOSCAP model (moscap_rf) is for frequency-dependent Q factor and capacitance simulations
 
 
 

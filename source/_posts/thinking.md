@@ -283,9 +283,68 @@ There is only one thing that I dread: not to be worthy of my sufferings
 
 
 
+
+
+
+
+**【圆桌派 第三季】EP24 | 失恋: 失恋是一种病**
+
+> [[https://youtu.be/ofMDWwS2X38?si=u7SCPsyFBomgPgrh](https://youtu.be/ofMDWwS2X38?si=u7SCPsyFBomgPgrh)]
+
+
+
+```
+我永远不能把我的快乐寄托在另一个人的合作上——窦文涛
+```
+
+
+
+```
+每当有人问起，为什么我不恋爱的时候，我都以麻烦为由搪塞过去。又有人开始问我到底喜欢过谁没有，我也轻描淡写地表示否定。无数的朋友告诉我，或许是你还没碰到过真正喜欢的人吧，我却没法开口告诉他们，其实我曾经碰到过，碰得太早，以至于我没来得及分清，也没来得及弄明白——jasonwang524
+```
+
+
+
+
+
+**【圆桌派 第三季】EP04 | 爱哭: 何时你变得爱哭了**
+
+> [[https://youtu.be/oZlSd0PNhfA?si=ofTfMxk1m1MhD6AS](https://youtu.be/oZlSd0PNhfA?si=ofTfMxk1m1MhD6AS)]
+
+
+
+
+
+**【圆桌派 第四季】EP27 | 分手:拒绝的理由**
+
+> [[https://youtu.be/ovZQxSBsCMs?si=ELqoeSawVY06pHSs](https://youtu.be/ovZQxSBsCMs?si=ELqoeSawVY06pHSs)]
+
+```
+成熟的人，处事不会用人情来胁迫人家。预留人家say no 的权利，也是對别人的尊重。
+																	——Rebecca Liang
+```
+
+
+
+```
+爱哪有那么多解释，无非是心底的那片温柔属于某个人而已 
+																	——White Whale
+```
+
+
+
 **【圆桌派 第五季】EP1 心战：“把球打到台子上！”**
 
 
+
+**【圆桌派 第六季】 EP8 挑战：“兴致勃勃地去失败”**
+
+> [[https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9](https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9)]
+
+```
+爱是无条件的，怎么爱是有方法的。
+								-richcrop3950
+```
 
 
 
@@ -400,63 +459,5 @@ There is only one thing that I dread: not to be worthy of my sufferings
 天也妒， 未信与， 莺儿燕子俱黄土。
 千秋万古， 为留待骚人， 狂歌痛饮， 来访雁丘处。
 ```
-
-
-
-**【圆桌派 第三季】EP24 | 失恋: 失恋是一种病**
-
-> [[https://youtu.be/ofMDWwS2X38?si=u7SCPsyFBomgPgrh](https://youtu.be/ofMDWwS2X38?si=u7SCPsyFBomgPgrh)]
-
-
-
-```
-我永远不能把我的快乐寄托在另一个人的合作上——窦文涛
-```
-
-
-
-```
-每当有人问起，为什么我不恋爱的时候，我都以麻烦为由搪塞过去。又有人开始问我到底喜欢过谁没有，我也轻描淡写地表示否定。无数的朋友告诉我，或许是你还没碰到过真正喜欢的人吧，我却没法开口告诉他们，其实我曾经碰到过，碰得太早，以至于我没来得及分清，也没来得及弄明白——jasonwang524
-```
-
-
-
-
-
-**【圆桌派 第三季】EP04 | 爱哭: 何时你变得爱哭了**
-
-> [[https://youtu.be/oZlSd0PNhfA?si=ofTfMxk1m1MhD6AS](https://youtu.be/oZlSd0PNhfA?si=ofTfMxk1m1MhD6AS)]
-
-
-
-
-
-**【圆桌派 第四季】EP27 | 分手:拒绝的理由**
-
-> [[https://youtu.be/ovZQxSBsCMs?si=ELqoeSawVY06pHSs](https://youtu.be/ovZQxSBsCMs?si=ELqoeSawVY06pHSs)]
-
-```
-成熟的人，处事不会用人情来胁迫人家。预留人家say no 的权利，也是對别人的尊重。
-																	——Rebecca Liang
-```
-
-
-
-```
-爱哪有那么多解释，无非是心底的那片温柔属于某个人而已 
-																	——White Whale
-```
-
-
-
-**【圆桌派 第六季】 EP8 挑战：“兴致勃勃地去失败”**
-
-> [[https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9](https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9)]
-
-```
-爱是无条件的，怎么爱是有方法的。
-								-richcrop3950
-```
-
 
 

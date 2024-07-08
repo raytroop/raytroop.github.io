@@ -1,5 +1,5 @@
 ---
-title: Impact of Deep N-well Implantation
+title: Deep N-well
 date: 2023-05-29 00:00:26
 tags:
 categories:
@@ -36,6 +36,10 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 >
 > [Together At Last – Combining Netlist and Layout Data for Power-Aware Verification](https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/)
 
+![image-20240708221831791](dnw/image-20240708221831791.png)
+
+![image-20240708222327376](dnw/image-20240708222327376.png)
+
 
 
 ![image-20230529002733114](dnw/image-20230529002733114.png)
@@ -57,3 +61,5 @@ KEITH SABINE [Using Deep N Wells in Analog Design](https://www.planetanalog.com/
 Faricelli, J. (2010). Layout-dependent proximity effects in deep nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010, 1-8.
 
 cmos_processing, URL:[http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf](http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf)
+
+Kuo-Tsai LiPaul ChangAndy Chang, TSMC, US20120053923A1, "Methods of designing integrated circuits and systems thereof"

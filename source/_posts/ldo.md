@@ -45,6 +45,18 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 
 
+## NMOS LDO
+
+
+
+### Feedforward Compensation with $C_\text{FF}$
+
+![outCc.drawio](ldo/outCc.drawio.svg)
+
+
+
+
+
 
 ## reference
 
@@ -66,3 +78,6 @@ Operational Transconductance Amplifier II Multi-Stage Designs [[https://people.e
 
 Toshiba, Load Transient Response of LDO and Methods to Improve it Application Note [[https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268](https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268)]
 
+Application Report SBVA042–July 2014, Pros and Cons of Using a Feedforward Capacitor with a Low-Dropout Regulator [[https://www.ti.com/lit/an/sbva042/sbva042.pdf](https://www.ti.com/lit/an/sbva042/sbva042.pdf)]
+
+LDO Basics: Noise – How a Feed-forward Capacitor Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA13](https://www.ti.com/document-viewer/lit/html/SSZTA13)]

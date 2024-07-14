@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">170</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,370 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/10/FinFET-Considerations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/12/10/FinFET-Considerations/" class="post-title-link" itemprop="url">Custom Design with FinFETs</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-12-10 16:56:07" itemprop="dateCreated datePublished" datetime="2022-12-10T16:56:07+00:00">2022-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="design-considerations">Design Considerations</h2>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20221210165644336.png"
+alt="image-20221210165644336" /></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20221210165916985.png"
+alt="image-20221210165916985" /></p>
+<h2 id="modeling-consideration">Modeling Consideration</h2>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20221217152830191.png"
+alt="image-20221217152830191" /></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20221210170042233.png"
+alt="image-20221210170042233" /></p>
+<p><img src="/2022/12/10/FinFET-Considerations/mos_pro.drawio.svg"
+alt="mos_pro" /> <span class="math display">\[\begin{align}
+R_{d1} &amp;\propto \frac{1}{N_{fins}} \\
+R_{s1} &amp;\propto \frac{1}{N_{fins}} \\
+R_{g1} &amp;\propto N_{fins} \\
+C_{gd} &amp;\propto N_{fins} \cdot N_{fingers} \cdot N_{multipler} \\
+C_{gs} &amp;= Cgd \\
+C_{g1d} &amp;\propto N_{fins} \\
+C_{g1s} &amp;= C_{g1d} \\
+C_{g1d1} &amp;\propto N_{fins} \\
+C_{g1s1} &amp;= C_{g1d1}  \\
+C_{g1d1} &amp;\simeq 2\times C_{g1d}
+\end{align}\]</span></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230708221056420.png"
+alt="image-20230708221056420" /></p>
+<h2 id="layout-consideration">Layout Consideration</h2>
+<h3 id="pode-cpode">PODE &amp; CPODE</h3>
+<blockquote>
+<p>The PODE devices is extracted as parasitic devices in post-layout
+netlist</p>
+</blockquote>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20220213172653116.png"
+alt="image-20220213172653116" /></p>
+<p><strong>DDB</strong> is the <strong>PODE</strong> (Poly on
+OD/Diffusion Edge) in TSMC 16FFC process.</p>
+<p><strong>SDB</strong> is the <strong>CPODE</strong> (Connected PODE)
+in TSMC 16FFC process.</p>
+<blockquote>
+<p>PO on OD edge (PODE) is a must and to define GATE that abuts OD
+vertical edge</p>
+<p>CPODE is used to connect two PODE cells together. It will isolate OD
+to save 1 poly pitch, via STI; Additional mask (12N) is required for
+manufacture</p>
+</blockquote>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20221210145232826.png"
+alt="image-20221210145232826" /></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20221210150847737.png"
+alt="image-20221210150847737" /></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20240509205506112.png"
+alt="image-20240509205506112" /></p>
+<h3 id="sac-sagc">SAC &amp; SAGC</h3>
+<h4 id="self-aligned-diffusion-contacts-sacs">self-aligned diffusion
+contacts (SACs)</h4>
+<p>As shown in Fig. 35 in older planar technology nodes, gate pitch is
+so relaxed such that S/D contacts and gate contacts can easily be placed
+next to each other without causing any shorting risk (see Fig.
+35(a)).</p>
+<p><strong>As the gate pitch scales, there’s no room to put gate
+contacts next to S/D contacts, and gatecontacts have been pushed away
+from the active region and are only placed on the STI
+region.</strong></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230708221916716.png"
+alt="image-20230708221916716" /></p>
+<p>In addition, at tight gate pitch, even forming <em>S/D contact</em>
+without shorting to <em>gate metal</em> becomes very challenging.</p>
+<p>The idea of <strong>self-aligned contacts (SAC)</strong> has been
+introduced to mitigate the issue of S/D contact to gate shorts.</p>
+<p>As shown in Fig. 35(b), <em>the gate metal is fully encapsulated by a
+dielectric spacer and gate cap</em>, which protects the gate from
+shorting to the S/D contact.</p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230708230238362.png"
+alt="image-20230708230238362" /></p>
+<blockquote>
+<p>A dielectric cap is added on top of the gate so that if the contact
+overlaps the gate, no short occurs.</p>
+<p><strong>MD</strong> layer represent SACs in PDK</p>
+</blockquote>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230709005334372.png"
+alt="image-20230709005334372" /></p>
+<h4 id="self-aligned-gate-contacts-sagcs">self-aligned gate contacts
+(SAGCs)</h4>
+<p><strong>Self-aligned gate contacts (SAGCs)</strong> have also been
+implemented and Denser standard cells can be achieved by eliminating the
+need to land contacts on the gate outside the active area.</p>
+<p>SAGCs require the source/drain contacts to be capped with an
+insulator that is different from both contact and gate cap dielectrics
+to protect the source/drain contacts against a misaligned gate contact
+etch.</p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230708233009568.png"
+alt="image-20230708233009568" /></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230708232429240.png"
+alt="image-20230708232429240" /></p>
+<blockquote>
+<p>According to the DRC of T foundary, poly extension &gt; 0 um and
+space between MP and OD &gt; 0 um., which demonstrate self-aligned gate
+contact is <strong>not</strong> introduced.</p>
+</blockquote>
+<h5 id="contacted-poly-pitch-cpp">Contacted-Poly-Pitch (CPP)</h5>
+<blockquote>
+<p>Wider Contacted-Poly-Pitch allows wider MD and VD size, which help
+reduce MEOL IRdrop</p>
+</blockquote>
+<p><img
+src="https://www.imec-int.com/_next/image?url=%2Fsites%2Fdefault%2Ffiles%2F2022-02%2FFigure%25201%2520-%2520Logic%2520standard%2520cell%2520scaling.JPG&amp;w=3840&amp;q=75"
+alt="Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP)." /></p>
+<p><em>Naoto Horiguchi. Entering the Nanosheet Transistor Era [<a
+target="_blank" rel="noopener" href="https://www.imec-int.com/en/articles/entering-nanosheet-transistor-era-0">link</a>]</em></p>
+<h3 id="gate-resistance">Gate Resistance</h3>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230709000326683.png"
+alt="image-20230709000326683" /></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230709004432013.png"
+alt="image-20230709004432013" /></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230709000637817.png"
+alt="image-20230709000637817" /></p>
+<p><img
+src="/2022/12/10/FinFET-Considerations/image-20230709003917922.png"
+alt="image-20230709003917922" /></p>
+<h4 id="non-quasistatic-nqs-effect">non-quasistatic (NQS) effect</h4>
+<h2 id="reference">reference</h2>
+<p>Tom Quan, TSMC, Bob Lefferts, Fred Sendig, Synopsys, Custom Design
+with FinFETs - Best practices designing mixed-signal IP</p>
+<p>Jacob, Ajey &amp; Xie, Ruilong &amp; Sung, Min &amp; Liebmann, Lars
+&amp; Lee, Rinus &amp; Taylor, Bill. (2017). Scaling Challenges for
+Advanced CMOS Devices. International Journal of High Speed Electronics
+and Systems. 26. 1740001. 10.1142/S0129156417400018.</p>
+<p>Joddy Wang, Synopsys <a
+target="_blank" rel="noopener" href="https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf">"FinFET
+SPICE Modeling"</a> Modeling of Systems and Parameter Extraction Working
+Group 8th International MOS-AK Workshop (co-located with the IEDM
+Conference and CMC Meeting) Washington DC, December 9 2015</p>
+<p>A. L. S. Loke et al., "Analog/mixed-signal design challenges in 7-nm
+CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference
+(CICC), San Diego, CA, USA, 2018, pp. 1-8, doi:
+10.1109/CICC.2018.8357060.[<a
+target="_blank" rel="noopener" href="https://ewh.ieee.org/r6/san_diego/sscs/events/slides/2018_05_23_AMSDesignChallengesIn7nmCMOS_AlvinLoke.pdf">slides</a>]</p>
+<p>Prof. Adam Teman, Advanced Process Technologies, [<a
+target="_blank" rel="noopener" href="https://www.eng.biu.ac.il/temanad/files/2022/03/Lecture-2-Advanced-Process-Technologies.pdf">pdf</a>]</p>
+<p>Luke Collins. FinFET variability issues challenge advantages of new
+process [<a
+target="_blank" rel="noopener" href="https://www.techdesignforums.com/blog/2014/04/16/finfet-variability-challenges-advantages/">link</a>]</p>
+<p>Loke, Alvin. (2020). FinFET technology considerations for circuit
+design (invited short course). BCICTS 2020 Monterey, CA</p>
+<p>Alvin Leng Sun Loke, TSMC. Device and Physical Design Considerations
+for Circuits in FinFET Technology", ISSCC 2020</p>
+<p>Prof. Adam Teman. Advanced Process Technologies [<a
+target="_blank" rel="noopener" href="https://www.eng.biu.ac.il/temanad/files/2022/03/Lecture-2-Advanced-Process-Technologies.pdf">pdf</a>]</p>
+<p>A. L. S. Loke, C. K. Lee and B. M. Leary, "Nanoscale CMOS
+Implications on Analog/Mixed-Signal Design," 2019 IEEE Custom Integrated
+Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
+10.1109/CICC.2019.8780267.</p>
+<p>A. L. S. Loke, Migrating Analog/Mixed-Signal Designs to FinFET Alvin
+Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits</p>
+<p>Lattice Semiconductor, 16FFC Process Technology Introduction December
+9th, 2021[<a
+target="_blank" rel="noopener" href="https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/HR1000000009.pdf">pdf</a>]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/10/OCVDeratingWithAOCV/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/12/10/OCVDeratingWithAOCV/" class="post-title-link" itemprop="url">OCV Derating With AOCV</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-12-10 14:20:34" itemprop="dateCreated datePublished" datetime="2022-12-10T14:20:34+00:00">2022-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>timing_aocv_derate_mode</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timing_aocv_derate_mode&#123;aocv_multiplicative | aocv_additive&#125;</span><br></pre></td></tr></table></figure>
+<p><em>Default:</em> <code>aocv_multiplicative</code></p>
+<p>Controls the AOCV derating mode.</p>
+<p>When set to <code>aocv_multiplicative</code>, the derating factor
+will be calculated as AOCV derating * OCV derating, which is set using
+the <code>set_timing_derate</code> command.</p>
+<p>When set to <code>aocv_additive</code>, the derating factor will be
+calculated as AOCV derating + OCV derating values.</p>
+<p>When you use this global variable, the <code>report_timing</code>
+command shows the <code>total_derate</code> column in the timing report
+output, which allows you to view and cross-check the calculated total
+derate factor.</p>
+<p>To set this global variable, use the <code>set_global</code>
+command.</p>
+<p><img
+src="/2022/12/10/OCVDeratingWithAOCV/image-20221210143256639.png"
+alt="image-20221210143256639" /></p>
+<h3 id="reference">reference</h3>
+<p>Genus Attribute Reference 22.1</p>
+<p>Innovus Text Command Reference 22.10</p>
+<p>Article (20416394) Title: Analysis with Advanced On-chip Variation
+(AOCV) derating in EDI system and ETS URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +590,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -341,7 +705,7 @@ target="_blank" rel="noopener" href="https://youtu.be/nA_DZtRqrTQ">https://youtu
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -450,7 +814,7 @@ target="_blank" rel="noopener" href="https://www.ee.columbia.edu/~kinget/EE6350_
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -548,7 +912,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/s-sanchez/607%
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -687,7 +1051,7 @@ Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -807,7 +1171,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -909,7 +1273,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1064,7 +1428,7 @@ Design, Layout, and Simulation, Fourth Edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
+      <time title="Modified: 2024-07-14 08:45:40" itemprop="dateModified" datetime="2024-07-14T08:45:40+00:00">2024-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1088,420 +1452,6 @@ Design, Layout, and Simulation, Fourth Edition</p>
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/23/save-parameter-spectre/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/23/save-parameter-spectre/" class="post-title-link" itemprop="url">Understanding the save parameter in spectre</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-09-23 23:14:10" itemprop="dateCreated datePublished" datetime="2022-09-23T23:14:10+00:00">2022-09-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>none</strong>:</p>
-<p>​ Does not save any data (currently does save one node chosen at
-random)</p>
-<p><strong>selected</strong>:</p>
-<p>​ Saves only signals specified with save statements. The default
-setting.</p>
-<p><strong>lvlpub</strong>:</p>
-<pre><code>Saves all signals that are normally useful up to nestlvl deep in the subcircuit hierarchy. This option is equivalent to allpub for subcircuits.</code></pre>
-<p><strong>lvl</strong>:</p>
-<p>​ Saves all signals up to nestlvl deep in the subcircuit hierarchy.
-This option is relevant for subcircuits.</p>
-<p><strong>allpub</strong>:</p>
-<p>​ Saves only signals that are normally useful.</p>
-<p><strong>all</strong>:</p>
-<p>​ Saves all signals.</p>
-<blockquote>
-<p>Signals that are "normally useful" include the shared node voltages
-and currents through voltage sources and iprobes, and exclude the
-internal nodes on devices (the internal collector, base, emitter on a
-BJT, the internal drain, source on a FET, and so on). It also excludes
-currents through inductors, controlled sources, transmission lines,
-transformers, etc.</p>
-<p>If you use <strong>lvl</strong> or <strong>all</strong> instead of
-<strong>lvlpub</strong> or <strong>allpub</strong>, you will also get
-internal node voltages and currents through other components that happen
-to compute current.</p>
-<p>Thus, using <strong>*pub</strong> excludes internal nodes on devices
-(the internal collector, base, emitter on a BJT, the internal drain and
-source on a FET, etc). It also excludes the currents through inductors,
-controlled sources, transmission lines, transformers, etc.</p>
-</blockquote>
-<blockquote>
-<p><strong>nestlvl</strong></p>
-<p>This variable is used to save groups of signals as results and when
-signals are saved in subcircuits. The nestlvl parameter also specifies
-how many levels deep into the subcircuit hierarchy you want to save
-signals.</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/11/t-sensor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/11/t-sensor/" class="post-title-link" itemprop="url">temperature sensor</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-08-11 08:33:19" itemprop="dateCreated datePublished" datetime="2022-08-11T08:33:19+00:00">2022-08-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-13 14:42:22" itemprop="dateModified" datetime="2024-07-13T14:42:22+00:00">2024-07-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Due to the fact that <em>long-term drift</em> of temperature sensors
-and bandgap references caused by package-induced stress is lower with
-PNP BJTs than with NPN BJTs, <strong>PNP</strong> BJTs have been used
-traditionally for temperature sensor design in CMOS</p>
-<h3 id="v_be-curvature"><span class="math inline">\(V_{BE}\)</span>
-curvature</h3>
-<p>Though it is assumed that <span class="math inline">\(V_{BE}\)</span>
-is a linear function of temperature for first oder analysis.</p>
-<p>In practice, <span class="math inline">\(V_{BE}\)</span> is
-<em>slightly nonlinear</em>, the magnitude of this nonlinearity is
-referred to as <strong>curvature</strong>.</p>
-<p><strong>curvature</strong> depends on the temperature dependency of
-the <em>saturation current</em> (<span
-class="math inline">\(I_s\)</span>), and on that of the <em>collector
-current</em> (<span class="math inline">\(I_c\)</span>), it can be
-written as <span class="math display">\[
-V_{curv}(T)=\frac{k}{q}(\eta-\delta)(T-T_r-T\cdot \ln(\frac{T}{T_r}))
-\]</span> where <span class="math inline">\(\eta\)</span> = a constant
-depending on the doping level, CMOS substrate pnp transistors have a
-typically value of <span class="math inline">\(\eta \cong 4\)</span></p>
-<p><span class="math inline">\(\delta\)</span> = order of the
-<em>temperature dependence of collector current</em> (<span
-class="math inline">\(I_c\)</span>)</p>
-<blockquote>
-<p>PTAT <span class="math inline">\(I_c\)</span> help reduce <span
-class="math inline">\(V_{curv}(T)\)</span>, <span
-class="math inline">\(\delta=1\)</span></p>
-</blockquote>
-<p>Although the temperature dependence of the bias current <span
-class="math inline">\(I_b\)</span> doesn’t impact the accuracy of <span
-class="math inline">\(V_{BE}\)</span>, it does impact the systematic
-nonlinearity or curvature of <span
-class="math inline">\(V_{BE}\)</span>, and hence the sensor's
-<em>systematic error</em>. <strong>The curvature in <span
-class="math inline">\(V_{BE}\)</span> can be reduced by using a PTAT
-bias current</strong>.</p>
-<p><img src="/2022/08/11/t-sensor/image-20221106010909644.png"
-alt="image-20221106010909644" /></p>
-<h3 id="ptat-bias-current-generation">PTAT bias current generation</h3>
-<p><img src="/2022/08/11/t-sensor/image-20221023150817411.png"
-alt="image-20221023150817411" /> <span class="math display">\[
-I_{bias} = \frac{0.7}{\beta \cdot R^2}
-\]</span> in which <span class="math inline">\(\beta=\frac{\mu_{n}\cdot
-C_{ox}\cdot W}{L}\)</span>, where:</p>
-<p><span class="math inline">\(\mu_n\)</span>=mobility,</p>
-<p><span class="math inline">\(C_{ox}\)</span> = oxide capacitance
-density,</p>
-<p><span class="math inline">\(\frac{W}{L}\)</span> = dimension ratio of
-unit NMOS used for <span class="math inline">\(M_1\)</span> and <span
-class="math inline">\(M_2\)</span></p>
-<p><span class="math inline">\(\mu_n\)</span> is <strong>complementary
-to the absolute temperature</strong> and resitor R is implemented using
-high-R flow in FinFET which has a low temperature dependency, the net
-temperature dependency of <span class="math inline">\(I_{bias}\)</span>
-is proportional to the absolute temperature <span
-class="math display">\[
-I_{bias}\propto  T
-\]</span></p>
-<h3 id="errors-due-to-v-i-finite-gain">Errors due to V-I Finite
-Gain</h3>
-<p>Finite gain introduces errors both in the V-I converters, finite loop
-gain results in errors in the closed-loop transconductances.</p>
-<p><img src="/2022/08/11/t-sensor/image-20221106153613505.png"
-alt="image-20221106153613505" /> <span
-class="math display">\[\begin{align}
-(V_{i1} - V_{o1})\cdot A_{OL1} &amp;= V_{o1} \\
-V_{o1} &amp;= \frac{A_{OL1}}{1+A_{OL1}}V_{i1} \\
-I_{o1} &amp;= \frac{A_{OL1}}{1+A_{OL1}}\frac{1}{R_1}V_{i1}
-\end{align}\]</span> similarly, <span class="math display">\[
-I_{o2} = \frac{A_{OL2}}{1+A_{OL2}}\frac{1}{R_2}V_{i2}
-\]</span></p>
-<p>Then, <span class="math inline">\(\alpha\)</span> is obtained <span
-class="math display">\[
-\alpha =
-\frac{(1+A_{OL2})A_{OL1}}{A_{OL2}(1+A_{OL1})}\cdot\frac{R_2}{R_1}
-\]</span> Since the loop gains in the two V-I converters cannot be
-expected to <em>match</em>, the resulting errors in
-<strong>both</strong> converters should be reduced to negligible
-levels.</p>
-<p>First, assume <span class="math inline">\(A_{OL2}=\infty\)</span>
-<span class="math display">\[\begin{align}
-\Delta \alpha &amp;= (1-\frac{A_{OL1}}{1+A_{OL1}})\cdot\frac{R_2}{R_1}\\
-&amp;=\frac{1}{1+A_{OL1}}\cdot\frac{R_2}{R_1}\\
-&amp;\cong \frac{1}{A_{OL1}}\cdot\frac{R_2}{R_1}
-\end{align}\]</span></p>
-<p>We get <span class="math display">\[
-\frac{\Delta \alpha}{\alpha}=\frac{1}{A_{OL1}}
-\]</span> Follow the same procedure, assume <span
-class="math inline">\(A_{OL1}=\infty\)</span> <span
-class="math display">\[
-\frac{\Delta \alpha}{\alpha}=\frac{1}{A_{OL2}}
-\]</span> The finite gain introduces an error inversely proportional to
-the loop gain <span class="math inline">\(A_{OL1}\)</span>,<span
-class="math inline">\(A_{OL2}\)</span>, the resulting errors in both
-converters should be reduced to negligible levels</p>
-<h3 id="why-is-it-named-as-bandgap-reference">Why is it named as
-"bandgap reference"</h3>
-<p>Let us write the output voltage as <span class="math display">\[
-V_{REF} = V_{BE} + V_T\cdot \ln n
-\]</span> and hence <span class="math display">\[
-\frac{\partial V_{REF}}{\partial T} = \frac{\partial V_{BE}}{\partial T}
-+ \frac{V_T}{T}\ln n
-\]</span> Setting this to zero and substituting for <span
-class="math inline">\(\frac{\partial V_{BE}}{\partial T}\)</span>, we
-have <span class="math display">\[
-\frac{V_{BE}-(4+m)V_T-E_g/q}{T}=-\frac{V_T}{T}\ln n
-\]</span> If <span class="math inline">\(V_T\ln n\)</span> is found from
-this equation and inserted in <span
-class="math inline">\(V_{REF}\)</span>, we obtain <span
-class="math display">\[
-V_{REF}=\frac{E_g}{q} + (4+m)V_T
-\]</span></p>
-<blockquote>
-<p>The term <strong>bandgap</strong> is used here because as <span
-class="math inline">\(T\to 0\)</span>, <span
-class="math inline">\(V_{REF} \to E_g/q\)</span></p>
-</blockquote>
-<h3 id="consideration-for-readout-circuit">Consideration for Readout
-Circuit</h3>
-<h4 id="adc-dynamic-range">ADC dynamic range</h4>
-<p>Take <span class="math inline">\(V_{PTAT}=\alpha \cdot \Delta
-V_{BE}\)</span> as input and <span
-class="math inline">\(V_{REF}\)</span> as reference. The output <span
-class="math inline">\(\mu\)</span> of the ADC will then be <span
-class="math display">\[
-\mu =\frac{V_{PTAT}}{V_{VREF}}=\frac{\alpha \cdot \Delta
-V_{BE}}{V_{BE}+\alpha \cdot \Delta V_{BE}}
-\]</span> A final digital output <span
-class="math inline">\(D_{out}\)</span> in degrees <em>Celsius</em> can
-be obtained by linear scaling: <span class="math display">\[
-D_{out}=A\cdot \mu + B
-\]</span> where <span class="math inline">\(A\simeq 600K\)</span> and
-<span class="math inline">\(B\simeq -273K\)</span></p>
-<p>While the transfer is simple, it only uses about 30% of the of the
-ADC (the extremes of the operating range correspond to <span
-class="math inline">\(\mu \simeq 1/3\)</span> and <span
-class="math inline">\(\mu \simeq 2/3\)</span>). The ratio results in a
-rather inefficient use of the modulator's <em>dynamic range</em>.</p>
-<p>For a first-order <span class="math inline">\(\Sigma\Delta\)</span>
-modulator, this means that about <strong>1.5 bits</strong> of resolution
-are lost</p>
-<p>A more efficient transfer is <span class="math display">\[
-\mu &#39;=\frac{2\alpha \cdot \Delta V_{BE}-V_{BE}}{V_{BE}+\alpha \cdot
-\Delta V_{BE}}
-\]</span> With this more efficient combination, <em>90%</em> of the
-dynamic range is used rather than 30%. Thus, <em>the required resolution
-of the ADC</em> is reduced by <strong>a factor of three</strong>.</p>
-<p><img src="/2022/08/11/t-sensor/image-20230204220522392.png"
-alt="image-20230204220522392" /></p>
-<h4 id="integrator-output-swing">Integrator Output Swing</h4>
-<blockquote>
-<p><span class="math display">\[
-\mu =\frac{\alpha \cdot \Delta V_{BE}}{V_{BE}+\alpha \cdot \Delta
-V_{BE}}
-\]</span></p>
-</blockquote>
-<p><img src="/2022/08/11/t-sensor/image-20230207002324363.png"
-alt="image-20230207002324363" /></p>
-<blockquote>
-<p><span class="math display">\[
-\mu &#39;=\frac{2\alpha \cdot \Delta V_{BE}-V_{BE}}{V_{BE}+\alpha \cdot
-\Delta V_{BE}}
-\]</span></p>
-</blockquote>
-<p><img src="/2022/08/11/t-sensor/image-20230206230202755.png"
-alt="image-20230206230202755" /></p>
-<p>In advanced process, like Finfet 16nm, 7nm, high resistance resistor
-has <strong>+/-15%</strong> variation and MOM capacitor has
-<strong>+/-30%</strong> variation.</p>
-<p>Then, <span class="math inline">\(R_1\)</span> and <span
-class="math inline">\(R_2\)</span> not only determine the <span
-class="math inline">\(\alpha\)</span> but also the integrator's output
-swing, so do <span class="math inline">\(V_{BE}\)</span> and <span
-class="math inline">\(\Delta V_{BE}\)</span>, <span
-class="math inline">\(C_{int}\)</span>.</p>
-<blockquote>
-<p>The integrator's output change per period</p>
-</blockquote>
-<p><img src="/2022/08/11/t-sensor/image-20230206231010121.png"
-alt="image-20230206231010121" /></p>
-<h5 id="example">example</h5>
-<p><img src="/2022/08/11/t-sensor/image-20230430112230224.png"
-alt="image-20230430112230224" /></p>
-<h4 id="integrator-comparator-offset">integrator, comparator offset</h4>
-<h5 id="integrator-offset">integrator offset</h5>
-<p><img src="/2022/08/11/t-sensor/image-20230430114429118.png"
-alt="image-20230430114429118" /></p>
-<p><img src="/2022/08/11/t-sensor/image-20230430114520336.png"
-alt="image-20230430114520336" /></p>
-<h5 id="comparator-offset">comparator offset</h5>
-<p><img src="/2022/08/11/t-sensor/image-20230501223512686.png"
-alt="image-20230501223512686" /></p>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-<p>Kamath, Umanath Ramachandra. "BJT Based Precision Voltage Reference
-in FinFET Technology." (2021).</p>
-<p>C. -H. Chang, J. -J. Horng, A. Kundu, C. -C. Chang and Y. -C. Peng,
-"An ultra-compact, untrimmed CMOS bandgap reference with 3σ inaccuracy
-of +0.64% in 16nm FinFET," 2014 IEEE Asian Solid-State Circuits
-Conference (A-SSCC), 2014, pp. 165-168, doi:
-10.1109/ASSCC.2014.7008886.</p>
-<p>EE247 - Analog Digital Interface Integrated Circuits - Fall 2009 <a
-target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~ee247/fa09/files07/lectures/L24_2_f09.pdf">Lecture
-24- Oversampled ADCs</a></p>
-<p>Hecht, Bruce. (2010). SSCS DL Kofi Makinwa Talks About Smart Sensor
-Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
-54 - 56. 10.1109/MSSC.2009.935278.</p>
 
       
     </div>

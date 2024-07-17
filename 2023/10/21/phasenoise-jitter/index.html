@@ -18,21 +18,13 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Phase noise The phase noise does not affect the total power in the signal, it only affects its distribution.  Without phase noise, \(S_v(f)\) is a series of impulse functions at the harmonics of \(f_o">
+    <meta name="description" content="VCO Phase Noise pnoise - timeaverage  Direct Plot&#x2F;Pnoise&#x2F;Phase Noise or  manually calculate by definition  output noise with unit dBc Direct Plot&#x2F;Pnoise&#x2F;Output Noise Units:dBc&#x2F;Hz and Noise convention:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Phase Noise and Jitter Simulation">
 <meta property="og:url" content="http://example.com/2023/10/21/phasenoise-jitter/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Phase noise The phase noise does not affect the total power in the signal, it only affects its distribution.  Without phase noise, \(S_v(f)\) is a series of impulse functions at the harmonics of \(f_o">
+<meta property="og:description" content="VCO Phase Noise pnoise - timeaverage  Direct Plot&#x2F;Pnoise&#x2F;Phase Noise or  manually calculate by definition  output noise with unit dBc Direct Plot&#x2F;Pnoise&#x2F;Output Noise Units:dBc&#x2F;Hz and Noise convention:">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20231029164227587.png">
-<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220504130750290.png">
-<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220510192206354.png">
-<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220510192351590.png">
-<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220510192447040.png">
-<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220510192753324.png">
-<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220510192639080.png">
-<meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220510193036717.png">
 <meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220511112856934.png">
 <meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220511112806122.png">
 <meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220511113248984.png">
@@ -47,10 +39,10 @@
 <meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220712090011204.png">
 <meta property="og:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220506225324377.png">
 <meta property="article:published_time" content="2023-10-21T11:33:58.000Z">
-<meta property="article:modified_time" content="2024-07-17T04:13:11.984Z">
+<meta property="article:modified_time" content="2024-07-17T16:00:33.236Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20231029164227587.png">
+<meta name="twitter:image" content="http://example.com/2023/10/21/phasenoise-jitter/image-20220511112856934.png">
 
 
 <link rel="canonical" href="http://example.com/2023/10/21/phasenoise-jitter/">
@@ -159,13 +151,13 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-noise"><span class="nav-number">1.</span> <span class="nav-text">Phase noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lorentian-spectrum"><span class="nav-number">2.</span> <span class="nav-text">Lorentian Spectrum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vco-varactor"><span class="nav-number">3.</span> <span class="nav-text">VCO varactor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pss-pac"><span class="nav-number">3.1.</span> <span class="nav-text">PSS + PAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pss-psp"><span class="nav-number">3.2.</span> <span class="nav-text">PSS + PSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#results"><span class="nav-number">3.3.</span> <span class="nav-text">results</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vco-phase-noise"><span class="nav-number">4.</span> <span class="nav-text">VCO Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pnoise---timeaverage"><span class="nav-number">4.1.</span> <span class="nav-text">pnoise - timeaverage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pnoise---sampledjitteredge-crossing"><span class="nav-number">4.2.</span> <span class="nav-text">pnoise -
-sampled(jitter)&#x2F;Edge Crossing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#output-noise-of-sampledjitter-pnoise"><span class="nav-number">4.3.</span> <span class="nav-text">Output Noise of
-sampled(jitter) pnoise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pnoise-sampledjitter-sampled-phase-option"><span class="nav-number">5.</span> <span class="nav-text">Pnoise
-Sampled(jitter): Sampled Phase Option</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transient-noise"><span class="nav-number">6.</span> <span class="nav-text">Transient noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-noise-from-transient-noise-analysis"><span class="nav-number">6.1.</span> <span class="nav-text">phase noise from
-transient noise analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#psd-and-phase-noise"><span class="nav-number">6.2.</span> <span class="nav-text">PSD and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#by-pss_pnoise"><span class="nav-number">6.2.1.</span> <span class="nav-text">By PSS_Pnoise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#by-trannoise-pn-function"><span class="nav-number">6.2.2.</span> <span class="nav-text">By trannoise PN
-function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#by-trannoise-psd-and-abs_jitter-function"><span class="nav-number">6.2.3.</span> <span class="nav-text">By trannoise
-psd and abs_jitter function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#comparison"><span class="nav-number">6.2.4.</span> <span class="nav-text">Comparison</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rms-value"><span class="nav-number">6.3.</span> <span class="nav-text">RMS value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remarks"><span class="nav-number">6.4.</span> <span class="nav-text">Remarks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vco-phase-noise"><span class="nav-number">1.</span> <span class="nav-text">VCO Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pnoise---timeaverage"><span class="nav-number">1.1.</span> <span class="nav-text">pnoise - timeaverage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pnoise---sampledjitteredge-crossing"><span class="nav-number">1.2.</span> <span class="nav-text">pnoise -
+sampled(jitter)&#x2F;Edge Crossing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#output-noise-of-sampledjitter-pnoise"><span class="nav-number">1.3.</span> <span class="nav-text">Output Noise of
+sampled(jitter) pnoise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pnoise-sampledjitter-sampled-phase-option"><span class="nav-number">2.</span> <span class="nav-text">Pnoise
+Sampled(jitter): Sampled Phase Option</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transient-noise"><span class="nav-number">3.</span> <span class="nav-text">Transient noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-noise-from-transient-noise-analysis"><span class="nav-number">3.1.</span> <span class="nav-text">phase noise from
+transient noise analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#psd-and-phase-noise"><span class="nav-number">3.2.</span> <span class="nav-text">PSD and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#by-pss_pnoise"><span class="nav-number">3.2.1.</span> <span class="nav-text">By PSS_Pnoise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#by-trannoise-pn-function"><span class="nav-number">3.2.2.</span> <span class="nav-text">By trannoise PN
+function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#by-trannoise-psd-and-abs_jitter-function"><span class="nav-number">3.2.3.</span> <span class="nav-text">By trannoise
+psd and abs_jitter function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#comparison"><span class="nav-number">3.2.4.</span> <span class="nav-text">Comparison</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rms-value"><span class="nav-number">3.3.</span> <span class="nav-text">RMS value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remarks"><span class="nav-number">3.4.</span> <span class="nav-text">Remarks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -178,7 +170,7 @@ psd and abs_jitter function</span></a></li><li class="nav-item nav-level-4"><a c
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -260,7 +252,7 @@ psd and abs_jitter function</span></a></li><li class="nav-item nav-level-4"><a c
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 04:13:11" itemprop="dateModified" datetime="2024-07-17T04:13:11+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-17 16:00:33" itemprop="dateModified" datetime="2024-07-17T16:00:33+00:00">2024-07-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,70 +273,7 @@ psd and abs_jitter function</span></a></li><li class="nav-item nav-level-4"><a c
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="phase-noise">Phase noise</h2>
-<p>The phase noise does not affect the total power in the signal, it
-only affects its distribution.</p>
-<ul>
-<li>Without phase noise, <span class="math inline">\(S_v(f)\)</span> is
-a series of impulse functions at the harmonics of <span
-class="math inline">\(f_o\)</span>.</li>
-<li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
-</ul>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
-<h2 id="lorentian-spectrum">Lorentian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
-<h2 id="vco-varactor">VCO varactor</h2>
-<blockquote>
-<p>Two methods: 1. pss + pac; 2. pss+psp</p>
-</blockquote>
-<h3 id="pss-pac">PSS + PAC</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192206354.png"
-alt="image-20220510192206354" /></p>
-<p>pss time domain</p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192351590.png"
-alt="image-20220510192351590" /></p>
-<p>using the <strong>0-harmonic</strong></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192447040.png"
-alt="image-20220510192447040" /></p>
-<h3 id="pss-psp">PSS + PSP</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192753324.png"
-alt="image-20220510192753324" /></p>
-<p>using <strong>Y11</strong> of <code>psp</code></p>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510192639080.png"
-alt="image-20220510192639080" /></p>
-<h3 id="results">results</h3>
-<p><img src="/2023/10/21/phasenoise-jitter/image-20220510193036717.png"
-alt="image-20220510193036717" /></p>
-<blockquote>
-<p>which are same</p>
-</blockquote>
-<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="vco-phase-noise">VCO Phase Noise</h2>
 <h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
 <ol type="1">
 <li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>

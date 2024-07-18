@@ -220,7 +220,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-07-18 20:29:38 / Modified: 13:22:06" itemprop="dateCreated datePublished" datetime="2024-07-18T20:29:38+00:00">2024-07-18</time>
+      <time title="Created: 2024-07-18 20:29:38 / Modified: 15:22:06" itemprop="dateCreated datePublished" datetime="2024-07-18T20:29:38+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -333,7 +333,10 @@ S_y(f) = \frac{1}{4}A_0^2 \delta(f-f_0) + \frac{1}{4}A_0^2 \delta(f+f_0)
 <blockquote>
 <p>Remeber</p>
 <p><img src="/2024/07/18/wiener/image-20240718210137344.png"
-alt="image-20240718210137344" /></p>
+alt="image-20240718210137344" /> <span class="math display">\[
+\cos(2\pi f_0t) \overset{\mathcal{F}}{\longrightarrow}
+\frac{1}{2}[\delta(f -f_0)+\delta(f+f_0)]
+\]</span></p>
 </blockquote>
 <h2 id="reference">reference</h2>
 <p>Topic 5 Energy &amp; Power Signals, Correlation &amp; Spectral
@@ -406,7 +409,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -428,29 +431,25 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="leesons-equation">Leeson's equation</h2>
+          <h2 id="leesons-model">Leeson’s model</h2>
+<p>Leeson's equation is an <em>empirical</em> expression that describes
+an oscillator's phase noise spectrum</p>
+<p><img src="/2024/07/17/comm/image-20240718230819186.png"
+alt="image-20240718230819186" /></p>
+<p>Limitation:</p>
+<p>​ that the PSD diverges to <em>infinity</em> for very low values of
+the frequency offset <span class="math inline">\(f\)</span>​</p>
 <h2 id="lorentzian-spectrum">Lorentzian Spectrum</h2>
-<p>A more precise analysis shows that the spectrum of a free-running
-oscillator does indeed have a Lorentian profile:</p>
-<ol type="1">
-<li>it is <strong>flat</strong> for frequencies below a given corner
-frequency</li>
-<li>and rolls off as <span class="math inline">\(1/f^2\)</span> above
-it.</li>
-</ol>
-<p>The spectrum of the signal <span class="math inline">\(x(t +
-α(t))\)</span> can be expressed as <span class="math display">\[
-S_x(f)=\sum_{n}\left| X_n \right|^2\frac{\omega_0^2 n^2
-c}{\frac{1}{4}\omega_0^4 n^4 c^2+(\omega+n\omega_0)^2}
-\]</span> The integral in above equation around each harmonic is equal
-to the power of the harmonic itself <span class="math inline">\(\left|
-X_n \right|^2\)</span></p>
-<p>This means that the <strong>excess phase noise</strong>
-<strong>DONT</strong> change the energy of the signal; it just spreads
-its energy over the frequency spectrum, blurring the very sharp
-frequency impulse of an ideal noiseless oscillator.</p>
-<p><img src="/2024/07/17/comm/image-20220504130750290.png"
-alt="image-20220504130750290" /></p>
+<p>The spectrum of a free-running oscillator does indeed have a
+Lorentzian profile</p>
+<ul>
+<li>it is flat for frequencies below a given corner frequency and rolls
+off as <span class="math inline">\(1/f^2\)</span> above it</li>
+</ul>
+<p>The periodic signal <span class="math inline">\(x(t)\)</span> can be
+expanded in Fourier series as: <span class="math display">\[
+x(t) = \sum_{n=-\infty}^{+\infty}X_ne^{jn\omega_0 t}
+\]</span></p>
 <p>The phase noise does not affect the total power in the signal, it
 only affects its distribution.</p>
 <ul>
@@ -458,15 +457,14 @@ only affects its distribution.</p>
 a series of impulse functions at the harmonics of <span
 class="math inline">\(f_o\)</span>.</li>
 <li>With phase noise, the impulse functions spread, becoming fatter and
-shorter but retaining the same total power</li>
+shorter but retaining the <em>same total power</em></li>
 </ul>
-<p><img src="/2024/07/17/comm/image-20231029164227587.png"
-alt="image-20231029164227587" /></p>
-<blockquote>
-<p><strong>line width</strong>: corner frequency <span
-class="math inline">\(f_{\Delta}\)</span>, where the power drops 3dB</p>
-</blockquote>
+<h2 id="am-pm-conversion">AM-PM conversion</h2>
+<p><em>TODO</em> 📅</p>
 <h2 id="reference">reference</h2>
+<p>Nicola Da Dalt and Ali Sheikholeslami. 2018. Understanding Jitter and
+Phase Noise: A Circuits and Systems Perspective (1st. ed.). Cambridge
+University Press, USA.</p>
 <p>K. S. Kundert, "Introduction to RF simulation and its
 application,"</p>
 <p>J. Phillips and K. Kundert, "Noise in mixers, oscillators, samplers,
@@ -546,7 +544,7 @@ IEEE</em>, vol. 84, no. 11, pp. 1584-1614, Nov. 1996</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -647,7 +645,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -773,7 +771,7 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1021,7 +1019,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1551,7 +1549,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1918,7 +1916,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2003,7 +2001,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2195,7 +2193,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

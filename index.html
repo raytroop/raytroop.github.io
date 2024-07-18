@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">169</span>
+          <span class="site-state-item-count">170</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -190,6 +190,186 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/18/wiener/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/07/18/wiener/" class="post-title-link" itemprop="url">Wiener-Khinchin theorem</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-07-18 20:29:38 / Modified: 13:22:06" itemprop="dateCreated datePublished" datetime="2024-07-18T20:29:38+00:00">2024-07-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="energy-signals-vs-power-signal">Energy signals vs Power
+signal</h2>
+<p><img src="/2024/07/18/wiener/image-20240427155046131.png"
+alt="image-20240427155046131" /></p>
+<p><img src="/2024/07/18/wiener/image-20240427155100927.png"
+alt="image-20240427155100927" /></p>
+<h2 id="wiener-khinchin-theorem">Wiener-Khinchin theorem</h2>
+<blockquote>
+<p>Norbert Wiener proved this theorem for the case of a
+<em>deterministic function</em> in 1930; Aleksandr Khinchin later
+formulated an analogous result for <em>stationary stochastic
+processes</em> and published that probabilistic analogue in 1934. Albert
+Einstein explained, without proofs, the idea in a brief two-page memo in
+1914</p>
+</blockquote>
+<p><span class="math inline">\(x(t)\)</span>, Fourier transform over a
+limited period of time <span class="math inline">\([-T/2, +T/2]\)</span>
+, <span class="math display">\[
+X_T(f) = \int_{-T/2}^{T/2}x(t)e^{-j2\pi ft}dt
+\]</span></p>
+<p>using <em>Parseval's theorem</em> <span class="math display">\[
+\int_{-T/2}^{T/2}|x(t)|^2dt = \int_{-T/2}^{T/2}|X_T(f)|^2df
+\]</span> So that <span class="math display">\[
+\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2dt =
+\int_{-T/2}^{T/2}\frac{1}{T}|X_T(f)|^2df
+\]</span></p>
+<blockquote>
+<p>where the quantity, <span
+class="math inline">\(\frac{1}{T}|X_T(f)|^2\)</span> can be interpreted
+as distribution of power in the frequency domain</p>
+<p>For each <span class="math inline">\(f\)</span> this quantity is a
+random variable, since it is a function of the random process <span
+class="math inline">\(x(t)\)</span></p>
+</blockquote>
+<p>The power spectral density (PSD) <span class="math inline">\(S_x(f
+)\)</span> is defined as the limit of the expectation of the expression
+above, for large <span class="math inline">\(T\)</span>: <span
+class="math display">\[
+S_x(f) = \lim _{T\to \infty}\mathrm{E}\left[ \frac{1}{T}|X_T(f)|^2
+\right]
+\]</span></p>
+<p>The <em>Wiener-Khinchin theorem</em> ensures that for well-behaved
+<em>wide-sense stationary processes</em> the <strong>limit
+exists</strong> and is equal to the Fourier transform of the
+autocorrelation <span class="math display">\[\begin{align}
+S_x(f) &amp;= \int_{-\infty}^{+\infty}R_x(\tau)e^{-j2\pi f \tau}d\tau \\
+R_x(\tau) &amp;= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
+\end{align}\]</span></p>
+<h2 id="example">Example</h2>
+<p>A pure sine wave is expressed as <span class="math inline">\(y(t) =
+A_0 \sin(2\pi f_0 t +\phi _0)\)</span>, its autocorrelation
+function:</p>
+<p><span class="math display">\[
+\mathrm{R}(\tau) = \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
+y(t)y(t+\tau)dt
+\]</span></p>
+<p>where <span class="math inline">\(y(t)y(t+\tau)\)</span> can be
+expressed as <span class="math display">\[\begin{align}
+y(t)y(t+\tau) &amp;= A_0\sin(2\pi f_0 t+\phi_0)\cdot A_0\sin(2\pi f_0
+t+\phi_0+2\pi f_0\tau) \\
+&amp;= A_0^2\sin^2(2\pi f_0 t+\phi_0)\cdot \cos(2\pi f_0\tau) +
+A_0^2\sin(2\pi f_0 t+\phi_0)\cos(2\pi f_0 t+\phi_0)\cdot \cos(2\pi
+f_0\tau) \\
+&amp;= \frac{1}{2}A_0^2 (1 - \cos(2(2\pi f_0 t+\phi_0)))\cdot \cos(2\pi
+f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi
+f_0\tau) \\
+&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) -
+\frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) +
+\frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau)
+\end{align}\]</span></p>
+<p>And substitute <span class="math inline">\(y(t)y(t+\tau)\)</span> in
+<span class="math inline">\(\mathrm{R}(\tau)\)</span></p>
+<p><span class="math display">\[\begin{align}
+\mathrm{R}(\tau) &amp;= \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
+y(t)y(t+\tau)dt \\
+&amp;= \lim _{T\to \infty}\int_{-T}^{T} \left[\frac{1}{2}A_0^2\cdot
+\cos(2\pi f_0\tau) - \frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot
+\cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot
+\cos(2\pi f_0\tau)\right]dt \\
+&amp; = \lim _{T\to \infty}\int_{-T}^{T} \frac{1}{2}A_0^2\cdot \cos(2\pi
+f_0\tau) dt \\
+&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau)
+\end{align}\]</span></p>
+<p>Taking Fourier transform of <span
+class="math inline">\(\mathrm{R}(\tau)\)</span>, PSD is</p>
+<p><span class="math display">\[
+S_y(f) = \frac{1}{4}A_0^2 \delta(f-f_0) + \frac{1}{4}A_0^2 \delta(f+f_0)
+\]</span></p>
+<blockquote>
+<p>Remeber</p>
+<p><img src="/2024/07/18/wiener/image-20240718210137344.png"
+alt="image-20240718210137344" /></p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Topic 5 Energy &amp; Power Signals, Correlation &amp; Spectral
+Density [<a
+target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf</a>]</p>
+<p>Topic 6 Random Processes and Signals [<a
+target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf</a>]</p>
+<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
+Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
+2020)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/17/comm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -218,9 +398,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-07-17 23:11:07 / Modified: 16:00:33" itemprop="dateCreated datePublished" datetime="2024-07-17T23:11:07+00:00">2024-07-17</time>
+      <time title="Created: 2024-07-17 23:11:07" itemprop="dateCreated datePublished" datetime="2024-07-17T23:11:07+00:00">2024-07-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,7 +459,6 @@ a series of impulse functions at the harmonics of <span
 class="math inline">\(f_o\)</span>.</li>
 <li>With phase noise, the impulse functions spread, becoming fatter and
 shorter but retaining the same total power</li>
-<li></li>
 </ul>
 <p><img src="/2024/07/17/comm/image-20231029164227587.png"
 alt="image-20231029164227587" /></p>
@@ -361,7 +546,7 @@ IEEE</em>, vol. 84, no. 11, pp. 1584-1614, Nov. 1996</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:33" itemprop="dateModified" datetime="2024-07-17T16:00:33+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -462,7 +647,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:33" itemprop="dateModified" datetime="2024-07-17T16:00:33+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -588,7 +773,7 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:33" itemprop="dateModified" datetime="2024-07-17T16:00:33+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -836,7 +1021,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:33" itemprop="dateModified" datetime="2024-07-17T16:00:33+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1366,7 +1551,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:33" itemprop="dateModified" datetime="2024-07-17T16:00:33+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1450,66 +1635,6 @@ alt="image-20240428162655969" /></p>
 <p><img src="/2024/04/27/noise-folding/image-20240428162735492.png"
 alt="image-20240428162735492" /></p>
 </blockquote>
-<h2 id="energy-signals-vs-power-signal">Energy signals vs Power
-signal</h2>
-<p><img src="/2024/04/27/noise-folding/image-20240427155046131.png"
-alt="image-20240427155046131" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240427155100927.png"
-alt="image-20240427155100927" /></p>
-<hr />
-<p>A pure sine wave is expressed as <span class="math inline">\(y(t) =
-A_0 \sin(2\pi f_0 t +\phi _0)\)</span>, its autocorrelation
-function:</p>
-<p><span class="math display">\[
-\mathrm{R}(\tau) = \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
-y(t)y(t+\tau)dt
-\]</span></p>
-<p>where <span class="math inline">\(y(t)y(t+\tau)\)</span> can be
-expressed as <span class="math display">\[\begin{align}
-y(t)y(t+\tau) &amp;= A_0\sin(2\pi f_0 t+\phi_0)\cdot A_0\sin(2\pi f_0
-t+\phi_0+2\pi f_0\tau) \\
-&amp;= A_0^2\sin^2(2\pi f_0 t+\phi_0)\cdot \cos(2\pi f_0\tau) +
-A_0^2\sin(2\pi f_0 t+\phi_0)\cos(2\pi f_0 t+\phi_0)\cdot \cos(2\pi
-f_0\tau) \\
-&amp;= \frac{1}{2}A_0^2 (1 - \cos(2(2\pi f_0 t+\phi_0)))\cdot \cos(2\pi
-f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi
-f_0\tau) \\
-&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) -
-\frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) +
-\frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau)
-\end{align}\]</span></p>
-<p>And substitute <span class="math inline">\(y(t)y(t+\tau)\)</span> in
-<span class="math inline">\(\mathrm{R}(\tau)\)</span></p>
-<p><span class="math display">\[\begin{align}
-\mathrm{R}(\tau) &amp;= \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
-y(t)y(t+\tau)dt \\
-&amp;= \lim _{T\to \infty}\int_{-T}^{T} \left[\frac{1}{2}A_0^2\cdot
-\cos(2\pi f_0\tau) - \frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot
-\cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot
-\cos(2\pi f_0\tau)\right]dt \\
-&amp; = \lim _{T\to \infty}\int_{-T}^{T} \frac{1}{2}A_0^2\cdot \cos(2\pi
-f_0\tau) dt \\
-&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau)
-\end{align}\]</span></p>
-<p>Taking Fourier transform of <span
-class="math inline">\(\mathrm{R}(\tau)\)</span>, PSD is</p>
-<p><span class="math display">\[
-S_y(f) = \frac{1}{4}A_0^2 \delta(f-f_0) + \frac{1}{4}A_0^2 \delta(f+f_0)
-\]</span></p>
-<hr />
-<p><img src="/2024/04/27/noise-folding/image-20240427162827347.png"
-alt="image-20240427162827347" /></p>
-<p><img src="/2024/04/27/noise-folding/image-20240427170024123.png"
-alt="image-20240427170024123" /></p>
-<h3 id="reference">reference</h3>
-<p>Topic 5 Energy &amp; Power Signals, Correlation &amp; Spectral
-Density [<a
-target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf</a>]</p>
-<p>Topic 6 Random Processes and Signals [<a
-target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf</a>]</p>
-<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
-Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
-2020)</p>
 <h2 id="switched-capacitor">Switched-Capacitor</h2>
 <p>The <strong>aliasing of the noise</strong>, or <strong>noise
 folding</strong>, plays an important role in switched-capacitor as it
@@ -1702,7 +1827,7 @@ class="math inline">\(f_s\)</span></p>
 alt="image-20220626001925375" /></p>
 <p><img src="/2024/04/27/noise-folding/image-20220626001043693.png"
 alt="image-20220626001043693" /></p>
-<h2 id="reference-1">reference</h2>
+<h2 id="reference">reference</h2>
 <p>David Herres, The difference between signal under-sampling, aliasing,
 and folding URL: <a
 target="_blank" rel="noopener" href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
@@ -1793,7 +1918,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:33" itemprop="dateModified" datetime="2024-07-17T16:00:33+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1878,7 +2003,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:33" itemprop="dateModified" datetime="2024-07-17T16:00:33+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2070,7 +2195,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:32" itemprop="dateModified" datetime="2024-07-17T16:00:32+00:00">2024-07-17</time>
+      <time title="Modified: 2024-07-18 13:22:06" itemprop="dateModified" datetime="2024-07-18T13:22:06+00:00">2024-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2130,163 +2255,6 @@ target="_blank" rel="noopener" href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbds
 <p>Cadence Tutorial Part-4: Chopping Technique; Dynamic Offset
 Cancellation; Chopper Amp Simulations [<a
 target="_blank" rel="noopener" href="https://youtu.be/gF8sOlK7TM8?si=6o_ABKN-IWs-1Khm">https://youtu.be/gF8sOlK7TM8?si=6o_ABKN-IWs-1Khm</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/06/SecondOrder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/06/SecondOrder/" class="post-title-link" itemprop="url">Second-Order System</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-01-06 10:43:42" itemprop="dateCreated datePublished" datetime="2024-01-06T10:43:42+00:00">2024-01-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-17 16:00:32" itemprop="dateModified" datetime="2024-07-17T16:00:32+00:00">2024-07-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="additional-zero">additional Zero</h2>
-<h3 id="peaking-frequency">peaking frequency</h3>
-<p><span class="math display">\[\begin{align}
-TF &amp;= \frac{s +\omega_z}{s^2+2\zeta \omega_ns+\omega_n^2} \\
-&amp;= \frac{\omega _z}{\omega _n^2}\cdot \frac{1+s/\omega
-_z}{1+s^2/\omega_n^2+2\zeta s/\omega_n}
-\end{align}\]</span></p>
-<p>Let <span class="math inline">\(s=j\omega\)</span> and omit factor,
-<span class="math display">\[
-A_\text{dB}(\omega) = 10\log[1+(\frac{\omega}{\omega _z})^2] -
-10\log[1+\frac{\omega^4}{\omega_n^4}+\frac{2\omega^2(2\zeta ^2
--1)}{\omega_n^2}]
-\]</span> peaking frequency <span
-class="math inline">\(\omega_\text{peak}\)</span> can be obtained via
-<span class="math inline">\(\frac{d A_\text{dB}(\omega)}{d\omega} =
-0\)</span> <span class="math display">\[
-\omega_\text{peak} = \omega_z \sqrt{\sqrt{(\frac{\omega_n}{\omega_z})^4
-- 2(\frac{\omega_n}{\omega_z})^2(2\zeta ^2-1)+1} - 1}
-\]</span></p>
-<h2 id="step-response-of-higher-order-system">Step Response of higher
-order system</h2>
-<p><img src="/2024/01/06/SecondOrder/image-20240112002314153.png"
-alt="image-20240112002314153" /></p>
-<p>Since <span class="math inline">\(1/sC_1+R_1 \gg R_0\)</span> <span
-class="math display">\[
-V_m(s) \simeq \frac{R_0}{R_0 + 1/sC_0} = \frac{sR_0C_0}{1+sR_0C_0}
-\]</span> step response of <span class="math inline">\(V_m\)</span>
-<span class="math display">\[
-V_m(t) = e^{-t/R_0C_0}
-\]</span> where <span class="math inline">\(\tau = R_0C_0\)</span></p>
-<p>And <span class="math inline">\(V_o(s)\)</span> can be expressed as
-<span class="math display">\[\begin{align}
-V_o(s)  &amp; \simeq \frac{sR_0C_0}{1+sR_0C_0} \cdot
-\frac{sR_1C_1}{1+sR_1C_1} \\
-&amp;= \frac{sR_0C_0R_1C_1}{R_0C_0-R_1C_1}\left(\frac{1}{1+sR_1C_1} -
-\frac{1}{1+sR_0C_0}\right)
-\end{align}\]</span></p>
-<p>Then step response of <span class="math inline">\(Vo\)</span> <span
-class="math display">\[\begin{align}
-Vo(t) &amp;= \frac{R_0C_0R_1C_1}{R_0C_0-R_1C_1}
-\left(\frac{1}{R_1C_1}e^{-t/R_1C_1} -
-\frac{1}{R_0C_0}e^{-t/R_0C_0}\right) \\
-&amp;= \frac{1}{R_0C_0-R_1C_1}\left(R_0C_0e^{-t/R_1C_1} -
-R_1C_1e^{-t/R_0C_0}\right) \\
-&amp;\simeq = \frac{1}{R_0C_0-R_1C_1}\left(R_0C_0e^{-t/R_1C_1} -
-R_1C_1\right)
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\tau=R_1C_1\)</span></p>
-<h3 id="via-partial-fraction-expansion">Via Partial-fraction
-Expansion</h3>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">syms C0</span><br><span class="line">syms R0</span><br><span class="line">syms C1</span><br><span class="line">syms R1</span><br><span class="line">syms s</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br></pre></td></tr></table></figure>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; partfrac(vm, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">&gt;&gt; partfrac(vo, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[\begin{align}
-V_m(s) &amp;= 1 -
-\frac{s(C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1} \\
-V_o(s) &amp;= 1 -
-\frac{s(C_0R_0+C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1}
-\end{align}\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">vm_exp = <span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line">vo_exp = <span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% with approximation</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">vm_exp2 = s*R0*C0/(<span class="number">1</span>+s*R0*C0);</span><br><span class="line">vo_exp2 = s*R0*C0/(<span class="number">1</span>+s*R0*C0) * s*R1*C1/(<span class="number">1</span>+s*R1*C1);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp2, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp2, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/01/06/SecondOrder/image-20240113181003272.png"
-alt="image-20240113181003272" /></p>
-<p><img src="/2024/01/06/SecondOrder/image-20240113181032379.png"
-alt="image-20240113181032379" /></p>
-<hr />
-<p>spectre simulation vs matlab</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">step(vm, <span class="number">500e-9</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo, <span class="number">500e-9</span>);</span><br><span class="line"></span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; vm</span><br><span class="line"></span><br><span class="line">vm =</span><br><span class="line"> </span><br><span class="line">          <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.56e-37</span> s^<span class="number">4</span> + <span class="number">1.6e-30</span> s^<span class="number">3</span></span><br><span class="line">  -----------------------------------------------------------</span><br><span class="line">  <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.571e-37</span> s^<span class="number">4</span> + <span class="number">1.626e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br><span class="line"></span><br><span class="line">&gt;&gt; vo</span><br><span class="line"></span><br><span class="line">vo =</span><br><span class="line"> </span><br><span class="line">                 <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">2.048e-44</span> s^<span class="number">5</span> + <span class="number">1.28e-37</span> s^<span class="number">4</span></span><br><span class="line">  ---------------------------------------------------------------------------</span><br><span class="line">  <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">3.081e-44</span> s^<span class="number">5</span> + <span class="number">3.871e-37</span> s^<span class="number">4</span> + <span class="number">1.638e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/01/06/SecondOrder/image-20240112002155622.png"
-alt="image-20240112002155622" /></p>
-<h2 id="reference">reference</h2>
-<p><em>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
-Feedback Control of Dynamic Systems (8th Edition) (8th. ed.).
-Pearson.</em></p>
 
       
     </div>

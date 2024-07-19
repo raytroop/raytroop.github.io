@@ -18,18 +18,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Energy signals vs Power signal   Wiener-Khinchin theorem  Norbert Wiener proved this theorem for the case of a deterministic function in 1930; Aleksandr Khinchin later formulated an analogous result f">
+    <meta name="description" content="Energy signals vs Power signal         Ergodicity &amp; autocorrelation The most important statistical properties of a random process \(x(t)\) are obtained by applying the expectation operator to some">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Wiener-Khinchin theorem">
 <meta property="og:url" content="http://example.com/2024/07/18/wiener/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Energy signals vs Power signal   Wiener-Khinchin theorem  Norbert Wiener proved this theorem for the case of a deterministic function in 1930; Aleksandr Khinchin later formulated an analogous result f">
+<meta property="og:description" content="Energy signals vs Power signal         Ergodicity &amp; autocorrelation The most important statistical properties of a random process \(x(t)\) are obtained by applying the expectation operator to some">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2024/07/18/wiener/image-20240427155046131.png">
+<meta property="og:image" content="http://example.com/2024/07/18/wiener/image-20240719203550628.png">
 <meta property="og:image" content="http://example.com/2024/07/18/wiener/image-20240427155100927.png">
+<meta property="og:image" content="http://example.com/2024/07/18/wiener/image-20240719204148098.png">
+<meta property="og:image" content="http://example.com/2024/07/18/wiener/image-20240719230346944.png">
+<meta property="og:image" content="http://example.com/2024/07/18/wiener/image-20240719210621021.png">
 <meta property="og:image" content="http://example.com/2024/07/18/wiener/image-20240718210137344.png">
 <meta property="article:published_time" content="2024-07-18T20:29:38.000Z">
-<meta property="article:modified_time" content="2024-07-18T15:22:06.611Z">
+<meta property="article:modified_time" content="2024-07-19T16:56:26.817Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/07/18/wiener/image-20240427155046131.png">
@@ -142,7 +146,8 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#energy-signals-vs-power-signal"><span class="nav-number">1.</span> <span class="nav-text">Energy signals vs Power
-signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wiener-khinchin-theorem"><span class="nav-number">2.</span> <span class="nav-text">Wiener-Khinchin theorem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
+signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ergodicity-autocorrelation"><span class="nav-number">2.</span> <span class="nav-text">Ergodicity &amp;
+autocorrelation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wiener-khinchin-theorem"><span class="nav-number">3.</span> <span class="nav-text">Wiener-Khinchin theorem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#example"><span class="nav-number">4.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -229,9 +234,15 @@ signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href=
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-07-18 20:29:38 / Modified: 15:22:06" itemprop="dateCreated datePublished" datetime="2024-07-18T20:29:38+00:00">2024-07-18</time>
+      <time title="Created: 2024-07-18 20:29:38" itemprop="dateCreated datePublished" datetime="2024-07-18T20:29:38+00:00">2024-07-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-19 16:56:26" itemprop="dateModified" datetime="2024-07-19T16:56:26+00:00">2024-07-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -256,8 +267,41 @@ signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href=
 signal</h2>
 <p><img src="/2024/07/18/wiener/image-20240427155046131.png"
 alt="image-20240427155046131" /></p>
+<blockquote>
+<p><img src="/2024/07/18/wiener/image-20240719203550628.png"
+alt="image-20240719203550628" /></p>
+</blockquote>
 <p><img src="/2024/07/18/wiener/image-20240427155100927.png"
 alt="image-20240427155100927" /></p>
+<blockquote>
+<p><img src="/2024/07/18/wiener/image-20240719204148098.png"
+alt="image-20240719204148098" /></p>
+</blockquote>
+<h2 id="ergodicity-autocorrelation">Ergodicity &amp;
+autocorrelation</h2>
+<p>The most important statistical properties of a random process <span
+class="math inline">\(x(t)\)</span> are obtained by applying the
+<em>expectation operator</em> to some functions of the process
+itself</p>
+<ul>
+<li>The <strong>expectation</strong> returns the probability-weighted
+average of the specific function at that specific time over all possible
+realizations of the process</li>
+</ul>
+<blockquote>
+<p>In many real practical cases, though, data from many realizations of
+the process are not available. On the contrary, often only data from one
+of them are known</p>
+</blockquote>
+<p><strong><em>ensemble autocorrelation</em></strong> and
+<strong><em>temporal autocorrelation (time
+autocorrelation)</em></strong></p>
+<p><img src="/2024/07/18/wiener/image-20240719230346944.png"
+alt="image-20240719230346944" /></p>
+<blockquote>
+<p><img src="/2024/07/18/wiener/image-20240719210621021.png"
+alt="image-20240719210621021" /></p>
+</blockquote>
 <h2 id="wiener-khinchin-theorem">Wiener-Khinchin theorem</h2>
 <blockquote>
 <p>Norbert Wiener proved this theorem for the case of a
@@ -269,14 +313,13 @@ Einstein explained, without proofs, the idea in a brief two-page memo in
 </blockquote>
 <p><span class="math inline">\(x(t)\)</span>, Fourier transform over a
 limited period of time <span class="math inline">\([-T/2, +T/2]\)</span>
-, <span class="math display">\[
-X_T(f) = \int_{-T/2}^{T/2}x(t)e^{-j2\pi ft}dt
-\]</span></p>
-<p>using <em>Parseval's theorem</em> <span class="math display">\[
-\int_{-T/2}^{T/2}|x(t)|^2dt = \int_{-T/2}^{T/2}|X_T(f)|^2df
+, <span class="math inline">\(X_T(f) = \int_{-T/2}^{T/2}x(t)e^{-j2\pi
+ft}dt\)</span></p>
+<p>With <em>Parseval's theorem</em> <span class="math display">\[
+\int_{-T/2}^{T/2}|x(t)|^2dt = \int_{-\infty}^{\infty}|X_T(f)|^2df
 \]</span> So that <span class="math display">\[
 \frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2dt =
-\int_{-T/2}^{T/2}\frac{1}{T}|X_T(f)|^2df
+\int_{-\infty}^{\infty}\frac{1}{T}|X_T(f)|^2df
 \]</span></p>
 <blockquote>
 <p>where the quantity, <span

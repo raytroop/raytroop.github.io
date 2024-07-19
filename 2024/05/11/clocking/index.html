@@ -18,22 +18,23 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Clock Division with Jitter and Phase Noise  Multiplying the frequency of a signal by a factor of N using an ideal frequency multiplier increases the phase noise of the multiplied signal by \(20\log(N)">
+    <meta name="description" content="AC-coupled buffer   Since duty-cycle error is high frequency component, the high-pass filter suppresses the duty-cycle error propagating to the output    The AC-coupling capacitor blocks the low-frequ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="clocking">
 <meta property="og:url" content="http://example.com/2024/05/11/clocking/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Clock Division with Jitter and Phase Noise  Multiplying the frequency of a signal by a factor of N using an ideal frequency multiplier increases the phase noise of the multiplied signal by \(20\log(N)">
+<meta property="og:description" content="AC-coupled buffer   Since duty-cycle error is high frequency component, the high-pass filter suppresses the duty-cycle error propagating to the output    The AC-coupling capacitor blocks the low-frequ">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/05/11/clocking/image-20240720004951380.png">
+<meta property="og:image" content="http://example.com/2024/05/11/clocking/image-20240720005226736.png">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/rtaImage-1720945161770-5.png">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/rtaImage.png">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/bb-PDF.drawio.svg">
-<meta property="og:image" content="http://example.com/2024/05/11/clocking/image-20240511221119938.png">
 <meta property="article:published_time" content="2024-05-11T09:36:14.000Z">
-<meta property="article:modified_time" content="2024-07-18T15:22:06.279Z">
+<meta property="article:modified_time" content="2024-07-19T16:56:26.445Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/05/11/clocking/rtaImage-1720945161770-5.png">
+<meta name="twitter:image" content="http://example.com/2024/05/11/clocking/image-20240720004951380.png">
 
 
 <link rel="canonical" href="http://example.com/2024/05/11/clocking/">
@@ -142,8 +143,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-division-with-jitter-and-phase-noise"><span class="nav-number">1.</span> <span class="nav-text">Clock Division with
-Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-20logn-rule"><span class="nav-number">1.1.</span> <span class="nav-text">The 20log(N) Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-about-phase-jitter"><span class="nav-number">1.2.</span> <span class="nav-text">What About Phase Jitter?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bang-bang-phase-detector"><span class="nav-number">2.</span> <span class="nav-text">Bang-Bang Phase Detector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linearing-bb-pd"><span class="nav-number">2.1.</span> <span class="nav-text">Linearing BB-PD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-noise-term"><span class="nav-number">2.2.</span> <span class="nav-text">Self-Noise Term</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number">2.3.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vco-tuning-bandwidth"><span class="nav-number">3.</span> <span class="nav-text">VCO tuning bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#narrowband-phase-modulation"><span class="nav-number">4.</span> <span class="nav-text">narrowband phase modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-1"><span class="nav-number">5.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ac-coupled-buffer"><span class="nav-number">1.</span> <span class="nav-text">AC-coupled buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-division-with-jitter-and-phase-noise"><span class="nav-number">2.</span> <span class="nav-text">Clock Division with
+Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-20logn-rule"><span class="nav-number">2.1.</span> <span class="nav-text">The 20log(N) Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-about-phase-jitter"><span class="nav-number">2.2.</span> <span class="nav-text">What About Phase Jitter?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bang-bang-phase-detector"><span class="nav-number">3.</span> <span class="nav-text">Bang-Bang Phase Detector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linearing-bb-pd"><span class="nav-number">3.1.</span> <span class="nav-text">Linearing BB-PD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-noise-term"><span class="nav-number">3.2.</span> <span class="nav-text">Self-Noise Term</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -238,7 +239,7 @@ Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-18 15:22:06" itemprop="dateModified" datetime="2024-07-18T15:22:06+00:00">2024-07-18</time>
+      <time title="Modified: 2024-07-19 16:56:26" itemprop="dateModified" datetime="2024-07-19T16:56:26+00:00">2024-07-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -259,7 +260,32 @@ Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-l
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="clock-division-with-jitter-and-phase-noise">Clock Division with
+    <div class="post-body" itemprop="articleBody"><h2 id="ac-coupled-buffer">AC-coupled buffer</h2>
+<p><img src="/2024/05/11/clocking/image-20240720004951380.png"
+alt="image-20240720004951380" /></p>
+<blockquote>
+<p>Since duty-cycle error is <em>high frequency</em> component, the
+high-pass filter suppresses the duty-cycle error propagating to the
+output</p>
+</blockquote>
+<p><img src="/2024/05/11/clocking/image-20240720005226736.png"
+alt="image-20240720005226736" /></p>
+<ul>
+<li>The AC-coupling capacitor blocks the low-frequency component of the
+input</li>
+<li>The feedback resistor sets common mode voltage to the crossover
+voltage</li>
+</ul>
+<blockquote>
+<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
+Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
+2020)</p>
+<p>Casper B, O’Mahony F. Clocking analysis, implementation and
+measurement techniques for high-speed data links: A tutorial. IEEE
+Transactions on Circuits and Systems I: Regular Papers.
+2009;56(1):17–39</p>
+</blockquote>
+<h2 id="clock-division-with-jitter-and-phase-noise">Clock Division with
 Jitter and Phase Noise</h2>
 <ul>
 <li>Multiplying the frequency of a signal by a factor of N using an
@@ -351,78 +377,16 @@ equal number of earlies and lates</p>
 &amp;= [1 - 0]\cdot 0.5 \\
 &amp;= 0.5
 \end{align}\]</span></p>
-<h3 id="reference">reference</h3>
+<blockquote>
 <p>John T. Stonick, ISSCC 2011 TUTORIALS <em>T5: DPLL-Based Clock and
 Data Recovery</em></p>
-<h2 id="vco-tuning-bandwidth">VCO tuning bandwidth</h2>
-<p><em>TODO</em> 📅</p>
-<h2 id="narrowband-phase-modulation">narrowband phase modulation</h2>
-<p>A sine wave with phase modulation is expressed as <span
-class="math display">\[
-y(t) = A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t))
-\]</span> where <span class="math inline">\(\phi (t)\)</span> is a
-time-varying phase modulation function</p>
-<p>Assuming a <em>narrowband phase modulation (PM)</em>, that is, the
-absolute amount of modulated phase is small enough</p>
-<blockquote>
-<p><em>otherwise the modulation becomes frequency modulation (FM) and
-its analysis becomes more complex</em></p>
-</blockquote>
-<p><span class="math display">\[
-y(t) \simeq A_0 \sin(2\pi f_0 t +\phi _0) + A_0 \phi (t)\cos(2\pi f_0 t
-+ \phi _0)
-\]</span></p>
-<blockquote>
-<p>Because <span class="math inline">\(\cos \phi(t)\)</span> and <span
-class="math inline">\(\sin \phi(t)\)</span> are approximated to <span
-class="math inline">\(1\)</span> and <span class="math inline">\(\phi
-(t)\)</span>, respectively</p>
-</blockquote>
-<p>The Fourier transform of <span class="math inline">\(y(t)\)</span> is
-<span class="math display">\[
-Y(f) = \frac{1}{2}A_0 e^{j\phi _0}\delta(f-f_0)
--\frac{1}{2}A_0e^{-j\phi_0}\delta(f+f_0)+\frac{1}{2}A_0e^{j\phi_0}\Phi(f-f_0)-\frac{1}{2}A_0e^{-j\phi_0}\Phi(f+f_0)
-\]</span></p>
-<blockquote>
-<p>where <span class="math inline">\(\Phi(f)\)</span> is the Fourier
-transform pair of <span class="math inline">\(\phi(t)\)</span></p>
-</blockquote>
-<p>The autocorrelation of <span class="math inline">\(y(t)\)</span>
-is</p>
-<p><span class="math display">\[\begin{align}
-R(\tau) &amp;= E(y(t)y(t+\tau))\\
-&amp;= E([A_0\sin(2\pi f_0 t + \phi_0)+A_0\phi(t)\cos(2\pi f_0 t+\phi
-_0)]\\
-&amp;\cdot [A_0\sin(2\pi f_0 t + \phi_0+2\pi f_0\tau)+A_0\phi(t+\tau
-)\cos(2\pi f_0 t+\phi _0+2\pi f_0\tau)]) \\
-&amp;=A_0^2 E( \alpha_t^2\cos(2\pi f_0 \tau) + \alpha_t\beta_t\sin(2\pi
-f_0\tau)+ \phi(t+\tau)[\alpha_t \beta_t \cos(2\pi f_0 \tau) -
-\alpha_t^2\sin(2\pi f_0 \tau)] \\
-&amp;+ \phi(t)[\alpha_t \beta_t \cos(2\pi f_0\tau) + \beta_t^2 \sin(2\pi
-f_0 \tau)] \\
-&amp;+ \phi(t)\phi(t+\tau)[\beta_t^2 \cos(2\pi f_0 \tau)-\alpha_t\beta_t
-\sin(2\pi f_0 \tau)]) \\
-&amp;= A_0^2E(\alpha_t^2 \cos(2\pi f_0 \tau) +
-\phi(t)\phi(t+\tau)\beta_t^2\cos(2\pi f_0 \tau)) \\
-&amp;= \frac{1}{2}A_0^2 \cos(2\pi f_0 \tau)(1+E(\phi(t)\phi(t+\tau))) \\
-&amp;= \frac{1}{2}A_0^2 \cos(2\pi f_0 \tau)(1+R_{\phi}(\tau))
-\end{align}\]</span></p>
-<p>Fourier transform of <span class="math inline">\(R(\tau)\)</span> is
-<span class="math display">\[
-S_y(f) = \frac{1}{4}A_0^2 \delta (f-f_0) + \frac{1}{4}A_0\delta(f+f_0) +
-\frac{1}{4}A_0^2S_\phi (f-f_0)+\frac{1}{4}A_0^2S_\phi (f+f_0)
-\]</span> <img src="/2024/05/11/clocking/image-20240511221119938.png"
-alt="image-20240511221119938" /></p>
-<h2 id="reference-1">reference</h2>
 <p>Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data
 Recovery in Serial Data Transmission Systems. [<a
 target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf">pdf</a>]</p>
 <p>- Clock and Data Recovery for Serial Data Communications, focusing on
 bang-bang CDR design methodology, ISSCC Short Course, February 2002. [<a
 target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf">slides</a>]</p>
-<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
-Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
-2020)</p>
+</blockquote>
 
     </div>
 

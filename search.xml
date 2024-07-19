@@ -326,6 +326,32 @@ variant, the it is defined as a subsequence and its
       </categories>
   </entry>
   <entry>
+    <title>Global Handles in UVM</title>
+    <url>/2022/02/23/Global-Handles-UVM/</url>
+    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Global handles uvm_top and factory in uvm_pkg have been removed in
+UVM-1.2 and later</p>
+</blockquote>
+<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
+UVM-1.2</h4>
+<p>Call the <strong>get() method of the class</strong> to retrieve the
+singleton handle.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
+accessing all the central UVM services such as
+<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
+<strong>uvm_report_server</strong>, etc.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Custom Design with FinFETs</title>
     <url>/2022/12/10/FinFET-Considerations/</url>
     <content><![CDATA[<h2 id="design-considerations">Design Considerations</h2>
@@ -506,32 +532,6 @@ href="https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/H
       </categories>
   </entry>
   <entry>
-    <title>Global Handles in UVM</title>
-    <url>/2022/02/23/Global-Handles-UVM/</url>
-    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Global handles uvm_top and factory in uvm_pkg have been removed in
-UVM-1.2 and later</p>
-</blockquote>
-<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
-UVM-1.2</h4>
-<p>Call the <strong>get() method of the class</strong> to retrieve the
-singleton handle.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
-accessing all the central UVM services such as
-<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
-<strong>uvm_report_server</strong>, etc.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>INL, DNL analysis of current steering DAC</title>
     <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
     <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
@@ -557,18 +557,18 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Database Navigation</title>
+    <url>/2022/02/07/Innovus-Database-Navigation/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Database Navigation</title>
-    <url>/2022/02/07/Innovus-Database-Navigation/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -609,18 +609,18 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Analysis Command</title>
-    <url>/2022/02/07/Innovus-analysis-command/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
+    <title>Innovus/Tempus Nonfunctional ECO</title>
+    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus/Tempus Nonfunctional ECO</title>
-    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Analysis Command</title>
+    <url>/2022/02/07/Innovus-analysis-command/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -657,18 +657,18 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Fix DRC Violation</title>
-    <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
+    <title>Innovus Data Exchange</title>
+    <url>/2022/02/07/Innovus-data-exchange/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Data Exchange</title>
-    <url>/2022/02/07/Innovus-data-exchange/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
+    <title>Innovus Fix DRC Violation</title>
+    <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -684,18 +684,18 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus timeDesign vs. report_timing</title>
-    <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
+    <title>Innovus global and localSkew</title>
+    <url>/2022/02/07/Innovus-global-and-localSkew/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus global and localSkew</title>
-    <url>/2022/02/07/Innovus-global-and-localSkew/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
+    <title>Innovus timeDesign vs. report_timing</title>
+    <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1387,52 +1387,6 @@ href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/
       </categories>
   </entry>
   <entry>
-    <title>Precision Techniques</title>
-    <url>/2024/01/13/Precision-Techniques/</url>
-    <content><![CDATA[<h2 id="autozeroing-techniques">Autozeroing techniques</h2>
-<blockquote>
-<p>offset is <strong>sampled</strong> and then subtracted from the
-input.</p>
-</blockquote>
-<h2 id="chopping-techniques">Chopping techniques</h2>
-<blockquote>
-<p>offset is <strong>modulated</strong> away from the signal band and
-then filtered out.</p>
-</blockquote>
-<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
-<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
-and other artifacts …</p>
-<h2 id="reference">reference</h2>
-<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
-effects of op-amp imperfections: autozeroing, correlated double
-sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
-84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
-href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
-<p>Bernhard E. Boser, M12 Precision Techniques [<a
-href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf</a>]</p>
-<p>Qinwen Fan, Evolution of precision amplifiers</p>
-<p>Wu, R., Huijsing, JH., &amp; Makinwa, KAA. (2013). Precision
-Instrumentation Amplifiers and Read-Out Integrated Circuits. Springer.
-https://doi.org/10.1007/978-1-4614-3731-4</p>
-<p>Kofi Makinwa, UPC 2009 <a
-href="https://electronicengineering.phd.upc.edu/en/courses-and-seminars/courses-materials/2008-2009/slides-makinwa-1">Overcoming
-Offset</a></p>
-<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
-CMOS [<a
-href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
-<p>Chopper Amplifiers Demystified Kofi A. A. Makinwa [<a
-href="https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt">https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt</a>]</p>
-<p>ESSCIRC2023 Circuit Insights Kofi Makinwa [<a
-href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7">https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7</a>]</p>
-<p>Cadence Tutorial Part-4: Chopping Technique; Dynamic Offset
-Cancellation; Chopper Amp Simulations [<a
-href="https://youtu.be/gF8sOlK7TM8?si=6o_ABKN-IWs-1Khm">https://youtu.be/gF8sOlK7TM8?si=6o_ABKN-IWs-1Khm</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Precedence Rule of UVM uvm_config_db::set</title>
     <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
     <content><![CDATA[<p><a
@@ -1490,6 +1444,52 @@ code]</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Precision Techniques</title>
+    <url>/2024/01/13/Precision-Techniques/</url>
+    <content><![CDATA[<h2 id="autozeroing-techniques">Autozeroing techniques</h2>
+<blockquote>
+<p>offset is <strong>sampled</strong> and then subtracted from the
+input.</p>
+</blockquote>
+<h2 id="chopping-techniques">Chopping techniques</h2>
+<blockquote>
+<p>offset is <strong>modulated</strong> away from the signal band and
+then filtered out.</p>
+</blockquote>
+<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
+<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
+and other artifacts …</p>
+<h2 id="reference">reference</h2>
+<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
+effects of op-amp imperfections: autozeroing, correlated double
+sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
+84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
+href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
+<p>Bernhard E. Boser, M12 Precision Techniques [<a
+href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M12%20Precision%20Techniques.pdf</a>]</p>
+<p>Qinwen Fan, Evolution of precision amplifiers</p>
+<p>Wu, R., Huijsing, JH., &amp; Makinwa, KAA. (2013). Precision
+Instrumentation Amplifiers and Read-Out Integrated Circuits. Springer.
+https://doi.org/10.1007/978-1-4614-3731-4</p>
+<p>Kofi Makinwa, UPC 2009 <a
+href="https://electronicengineering.phd.upc.edu/en/courses-and-seminars/courses-materials/2008-2009/slides-makinwa-1">Overcoming
+Offset</a></p>
+<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
+CMOS [<a
+href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
+<p>Chopper Amplifiers Demystified Kofi A. A. Makinwa [<a
+href="https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt">https://youtu.be/J19rRjKV7kk?si=oHXskwd9y-B35cJt</a>]</p>
+<p>ESSCIRC2023 Circuit Insights Kofi Makinwa [<a
+href="https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7">https://youtu.be/uwRpP20Lprc?si=D8S4kjexbdsbuhb7</a>]</p>
+<p>Cadence Tutorial Part-4: Chopping Technique; Dynamic Offset
+Cancellation; Chopper Amp Simulations [<a
+href="https://youtu.be/gF8sOlK7TM8?si=6o_ABKN-IWs-1Khm">https://youtu.be/gF8sOlK7TM8?si=6o_ABKN-IWs-1Khm</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -2059,195 +2059,6 @@ Revision 7</p>
       </tags>
   </entry>
   <entry>
-    <title>Ahuja Frequency Compensation</title>
-    <url>/2024/01/16/ahuja/</url>
-    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
-known as <strong>Ahuja compensation</strong></p>
-<p>The cause of the positive zero is the <em>feedforward current through
-<span class="math inline">\(C_m\)</span></em>.</p>
-<p>To abolish this zero, we have to cut the feedforward path and create
-a unidirectional feedback through <span
-class="math inline">\(C_m\)</span>.</p>
-<ol type="1">
-<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
-effect of the feedforward current.</p></li>
-<li><p>Another approach uses a current buffer cascode to pass the
-small-signal feedback current but cut the feedforward current</p></li>
-</ol>
-<blockquote>
-<p>People name this approach after the author <em>Ahuja</em></p>
-</blockquote>
-<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
-are severa</p>
-<ul>
-<li><p>better PSRR</p></li>
-<li><p>higher unity-gain bandwidth using smaller compensation
-capacitor</p></li>
-<li><p>ability to cope better with heavy capacitive and resistive
-loads</p></li>
-</ul>
-<blockquote>
-
-</blockquote>
-<h2 id="millers-approximation">Miller's approximation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
-alt="image-20240130224043511" /></p>
-<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span> Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{C_c}\)</span></p>
-<h3 id="equivalent-cap">Equivalent cap</h3>
-<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
-R_o\)</span> <span class="math display">\[
-I_\text{c,in} = (v_i - v_o)sC_c
-\]</span> Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
-&amp; = v_i s (1+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
-A_vC_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
-&amp; = v_o s (1+\frac{1}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}=
-(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="ahuja-compensation">Ahuja compensation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130233532624.png"
-alt="image-20240130233532624" /></p>
-<h3 id="right-half-plane-zero-1">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span></p>
-<p>where <span class="math inline">\(v_m = \alpha v_i\)</span> and <span
-class="math inline">\(\alpha \ll 1\)</span></p>
-<p>Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}\)</span></p>
-<blockquote>
-<p>Ahuja compensation push right-half-plane Zero to higher frequency</p>
-</blockquote>
-<h3 id="equivalent-cap-1">Equivalent cap</h3>
-<p>Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (\alpha v_i + A_v v_i)sC_c \\
-&amp; = v_i s (\alpha+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}=
-(\alpha+A_v)C_c\simeq A_v C_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - \alpha v_i)sC_c \\
-&amp; = v_o s (1+\frac{\alpha}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}= (1+\frac{\alpha
-}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="reference">reference</h2>
-<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
-Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
-pp. 629-633, Dec. 1983.</p>
-<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
-IEEE International Symposium on Radio-Frequency Integration Technology,
-2009.</p>
-<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
-CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
-594, May 1995.</p>
-<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
-op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
-Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
-10.1109/MWSCAS.2011.6026315.</p>
-<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
-Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
-International Conference on Electronics, Circuits and Systems, 2006, pp.
-264-267, doi: 10.1109/ICECS.2006.379776.</p>
-<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
-compensation over Miller compensation in two-stage operational
-amplifiers," Proceeding of the 13th international symposium on Low power
-electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
-283-288, doi: 10.1145/1393921.1393995.</p>
-<p>Stabilizing a 2-Stage Amplifier URL:<a
-href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Antenna Effect</title>
-    <url>/2023/08/08/antenna/</url>
-    <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
-of <em>charge accumulation</em> in <em>isolated nodes</em> of an
-integrated circuit <em>during its processing</em>.</p>
-<blockquote>
-<p>This effect is also sometimes called "Plasma Induced Damage",
-"Process Induced Damage" (PID) or "charging effect".</p>
-</blockquote>
-<h2 id="antenna-ratio">antenna ratio</h2>
-<p>The antenna rule specifies the maximum tolerance for the ratio of a
-metal line area to the area of connected gates.</p>
-<h2 id="metal-jumping">metal jumping</h2>
-<p>Long metal can be taken to <em>higher metal</em> routing layer. This
-is known as <strong>metal jumping</strong>.</p>
-<blockquote>
-<p>This metal jumping will break the long interconnect and hence the
-charge collected on the long interconnect will not discharge through
-gate oxide because the higher metal layer is not yet fabricated.</p>
-</blockquote>
-<blockquote>
-<p>so, if the gate immediately connects to the highest level by jump-up
-metals, large amount of charges can not be collected, while the poly
-finally connected to the diffusion part by highest level, thus no
-antenna violation will normally occure.</p>
-</blockquote>
-<h2 id="diode-insertion">Diode Insertion</h2>
-<p>Diode helps dissipate charges accumulated on metal. Diode should be
-placed as near as possible to the gate of device on low level of
-metal.</p>
-<blockquote>
-<p>Diode should always be connected in <em>reverse bias</em>, with
-cathode connected to gate electrode and anode connected to ground
-potential.</p>
-<p>During processing, even if the diodes are reversely biased, because
-of the elevated wafer temperature (200 o C plus) it will provide a much
-conductive path</p>
-<p>In the reverse bias region, the reverse saturation current of Si and
-Ge diodes doubles for every 10° C rise in temperature</p>
-</blockquote>
-<p><img
-src="/2023/08/08/antenna/main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq.jpg"
-alt="main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq" /></p>
-<h2 id="reference">reference</h2>
-<p>Tuvia Liran, Antenna effect (PID): Do the design rules really protect
-us? [<a
-href="https://www.eetimes.com/antenna-effect-do-the-design-rules-really-protect-us/">link</a>]</p>
-<p>Upma Pawan Kumar, Sunandan Chaubey, Antenna Effect in 16nm Technology
-Node [<a
-href="https://www.design-reuse.com/articles/48227/antenna-effect-in-16nm-technology-node.html">link</a>]</p>
-<p>pulsic.com, Analog layout – Stop the antenna effect from destroying
-your circuit [<a
-href="https://pulsic.com/analog-layout-stop-the-antenna-effect-from-destroying-your-circuit/">link</a>]</p>
-<p>BuBuChen, 積體電路的天線效應 (Antenna Effect in IC) [<a
-href="https://www.bubuchen.com/2020/04/Antenna-Effect.html">link</a>]</p>
-<p>EDN, Antenna violations resolved using new method [<a
-href="https://www.edn.com/antenna-violations-resolved-using-new-method/">link</a>]</p>
-<p>edaboard.com, why jump up metal can solve the antenna effect? [<a
-href="https://www.edaboard.com/threads/why-jump-up-metal-can-solve-the-antenna-effect.177890/post-745696">link</a>]</p>
-<p>siliconvlsi.com, Antenna effect [<a
-href="https://siliconvlsi.com/antenna-effect/">link</a>]</p>
-<p>Prof. Adam Teman, Digital VLSI Design.
-Lecture-10-The-Manufacturing-Process [<a
-href="https://www.eng.biu.ac.il/temanad/files/2017/02/Lecture-10-The-Manufacturing-Process.pdf">pdf</a>]</p>
-<p>Zongjian Chen, Processing and Reliability Issues That Impact Design
-Practice. [<a
-href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf">https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Device Aging</title>
     <url>/2022/12/11/aging/</url>
     <content><![CDATA[<p><img src="/2022/12/11/aging/image-20231106232135180.png"
@@ -2542,22 +2353,189 @@ in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
       </categories>
   </entry>
   <entry>
-    <title>Bandgap Reference</title>
-    <url>/2022/11/17/bgr/</url>
-    <content><![CDATA[<h3 id="temperature-coefficient">temperature coefficient</h3>
-<p>The parameter that shows the dependence of the reference voltage on
-temperature variation is called the temperature coefficient and is
-defined as: <span class="math display">\[
-TC_F=\frac{1}{V_{\text{REF}}}\left[
-\frac{V_{\text{max}}-V_{\text{min}}}{T_{\text{max}}-T_{\text{min}}}
-\right]\times10^6\;ppm/^oC
+    <title>Antenna Effect</title>
+    <url>/2023/08/08/antenna/</url>
+    <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
+of <em>charge accumulation</em> in <em>isolated nodes</em> of an
+integrated circuit <em>during its processing</em>.</p>
+<blockquote>
+<p>This effect is also sometimes called "Plasma Induced Damage",
+"Process Induced Damage" (PID) or "charging effect".</p>
+</blockquote>
+<h2 id="antenna-ratio">antenna ratio</h2>
+<p>The antenna rule specifies the maximum tolerance for the ratio of a
+metal line area to the area of connected gates.</p>
+<h2 id="metal-jumping">metal jumping</h2>
+<p>Long metal can be taken to <em>higher metal</em> routing layer. This
+is known as <strong>metal jumping</strong>.</p>
+<blockquote>
+<p>This metal jumping will break the long interconnect and hence the
+charge collected on the long interconnect will not discharge through
+gate oxide because the higher metal layer is not yet fabricated.</p>
+</blockquote>
+<blockquote>
+<p>so, if the gate immediately connects to the highest level by jump-up
+metals, large amount of charges can not be collected, while the poly
+finally connected to the diffusion part by highest level, thus no
+antenna violation will normally occure.</p>
+</blockquote>
+<h2 id="diode-insertion">Diode Insertion</h2>
+<p>Diode helps dissipate charges accumulated on metal. Diode should be
+placed as near as possible to the gate of device on low level of
+metal.</p>
+<blockquote>
+<p>Diode should always be connected in <em>reverse bias</em>, with
+cathode connected to gate electrode and anode connected to ground
+potential.</p>
+<p>During processing, even if the diodes are reversely biased, because
+of the elevated wafer temperature (200 o C plus) it will provide a much
+conductive path</p>
+<p>In the reverse bias region, the reverse saturation current of Si and
+Ge diodes doubles for every 10° C rise in temperature</p>
+</blockquote>
+<p><img
+src="/2023/08/08/antenna/main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq.jpg"
+alt="main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq" /></p>
+<h2 id="reference">reference</h2>
+<p>Tuvia Liran, Antenna effect (PID): Do the design rules really protect
+us? [<a
+href="https://www.eetimes.com/antenna-effect-do-the-design-rules-really-protect-us/">link</a>]</p>
+<p>Upma Pawan Kumar, Sunandan Chaubey, Antenna Effect in 16nm Technology
+Node [<a
+href="https://www.design-reuse.com/articles/48227/antenna-effect-in-16nm-technology-node.html">link</a>]</p>
+<p>pulsic.com, Analog layout – Stop the antenna effect from destroying
+your circuit [<a
+href="https://pulsic.com/analog-layout-stop-the-antenna-effect-from-destroying-your-circuit/">link</a>]</p>
+<p>BuBuChen, 積體電路的天線效應 (Antenna Effect in IC) [<a
+href="https://www.bubuchen.com/2020/04/Antenna-Effect.html">link</a>]</p>
+<p>EDN, Antenna violations resolved using new method [<a
+href="https://www.edn.com/antenna-violations-resolved-using-new-method/">link</a>]</p>
+<p>edaboard.com, why jump up metal can solve the antenna effect? [<a
+href="https://www.edaboard.com/threads/why-jump-up-metal-can-solve-the-antenna-effect.177890/post-745696">link</a>]</p>
+<p>siliconvlsi.com, Antenna effect [<a
+href="https://siliconvlsi.com/antenna-effect/">link</a>]</p>
+<p>Prof. Adam Teman, Digital VLSI Design.
+Lecture-10-The-Manufacturing-Process [<a
+href="https://www.eng.biu.ac.il/temanad/files/2017/02/Lecture-10-The-Manufacturing-Process.pdf">pdf</a>]</p>
+<p>Zongjian Chen, Processing and Reliability Issues That Impact Design
+Practice. [<a
+href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf">https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ahuja Frequency Compensation</title>
+    <url>/2024/01/16/ahuja/</url>
+    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
+known as <strong>Ahuja compensation</strong></p>
+<p>The cause of the positive zero is the <em>feedforward current through
+<span class="math inline">\(C_m\)</span></em>.</p>
+<p>To abolish this zero, we have to cut the feedforward path and create
+a unidirectional feedback through <span
+class="math inline">\(C_m\)</span>.</p>
+<ol type="1">
+<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
+effect of the feedforward current.</p></li>
+<li><p>Another approach uses a current buffer cascode to pass the
+small-signal feedback current but cut the feedforward current</p></li>
+</ol>
+<blockquote>
+<p>People name this approach after the author <em>Ahuja</em></p>
+</blockquote>
+<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
+are severa</p>
+<ul>
+<li><p>better PSRR</p></li>
+<li><p>higher unity-gain bandwidth using smaller compensation
+capacitor</p></li>
+<li><p>ability to cope better with heavy capacitive and resistive
+loads</p></li>
+</ul>
+<blockquote>
+
+</blockquote>
+<h2 id="millers-approximation">Miller's approximation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
+alt="image-20240130224043511" /></p>
+<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
+\]</span> Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{C_c}\)</span></p>
+<h3 id="equivalent-cap">Equivalent cap</h3>
+<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
+R_o\)</span> <span class="math display">\[
+I_\text{c,in} = (v_i - v_o)sC_c
+\]</span> Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
+&amp; = v_i s (1+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
+A_vC_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
+&amp; = v_o s (1+\frac{1}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}=
+(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="ahuja-compensation">Ahuja compensation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130233532624.png"
+alt="image-20240130233532624" /></p>
+<h3 id="right-half-plane-zero-1">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
 \]</span></p>
-<h3 id="choice-of-n">Choice of n</h3>
-<p><img src="/2022/11/17/bgr/image-20221117002714125.png"
-alt="image-20221117002714125" /></p>
-<h3 id="reference">reference</h3>
-<p>ECEN 607 (ESS) Bandgap Reference: Basics URL:<a
-href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf</a></p>
+<p>where <span class="math inline">\(v_m = \alpha v_i\)</span> and <span
+class="math inline">\(\alpha \ll 1\)</span></p>
+<p>Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}\)</span></p>
+<blockquote>
+<p>Ahuja compensation push right-half-plane Zero to higher frequency</p>
+</blockquote>
+<h3 id="equivalent-cap-1">Equivalent cap</h3>
+<p>Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (\alpha v_i + A_v v_i)sC_c \\
+&amp; = v_i s (\alpha+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}=
+(\alpha+A_v)C_c\simeq A_v C_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - \alpha v_i)sC_c \\
+&amp; = v_o s (1+\frac{\alpha}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}= (1+\frac{\alpha
+}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="reference">reference</h2>
+<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
+Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
+pp. 629-633, Dec. 1983.</p>
+<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
+IEEE International Symposium on Radio-Frequency Integration Technology,
+2009.</p>
+<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
+CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
+594, May 1995.</p>
+<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
+op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
+Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
+10.1109/MWSCAS.2011.6026315.</p>
+<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
+Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
+International Conference on Electronics, Circuits and Systems, 2006, pp.
+264-267, doi: 10.1109/ICECS.2006.379776.</p>
+<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
+compensation over Miller compensation in two-stage operational
+amplifiers," Proceeding of the 13th international symposium on Low power
+electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
+283-288, doi: 10.1145/1393921.1393995.</p>
+<p>Stabilizing a 2-Stage Amplifier URL:<a
+href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -2584,6 +2562,28 @@ href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Bandgap Reference</title>
+    <url>/2022/11/17/bgr/</url>
+    <content><![CDATA[<h3 id="temperature-coefficient">temperature coefficient</h3>
+<p>The parameter that shows the dependence of the reference voltage on
+temperature variation is called the temperature coefficient and is
+defined as: <span class="math display">\[
+TC_F=\frac{1}{V_{\text{REF}}}\left[
+\frac{V_{\text{max}}-V_{\text{min}}}{T_{\text{max}}-T_{\text{min}}}
+\right]\times10^6\;ppm/^oC
+\]</span></p>
+<h3 id="choice-of-n">Choice of n</h3>
+<p><img src="/2022/11/17/bgr/image-20221117002714125.png"
+alt="image-20221117002714125" /></p>
+<h3 id="reference">reference</h3>
+<p>ECEN 607 (ESS) Bandgap Reference: Basics URL:<a
+href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -3036,8 +3036,8 @@ href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysil
     <title>clocking</title>
     <url>/2024/05/11/clocking/</url>
     <content><![CDATA[<h2 id="ac-coupled-buffer">AC-coupled buffer</h2>
-<p><img src="/2024/05/11/clocking/image-20240720004951380.png"
-alt="image-20240720004951380" /></p>
+<p><img src="/2024/05/11/clocking/image-20240720073616597.png"
+alt="image-20240720073616597" /></p>
 <blockquote>
 <p>Since duty-cycle error is <em>high frequency</em> component, the
 high-pass filter suppresses the duty-cycle error propagating to the
@@ -3217,34 +3217,6 @@ virtual clock is propagated.</p>
       </categories>
   </entry>
   <entry>
-    <title>complex uvm project topology</title>
-    <url>/2022/03/28/complex-uvm-topo/</url>
-    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
-alt="topo.drawio" /></p>
-<h2 id="compile">compile</h2>
-<ul>
-<li><code>-incdir</code> for all UVC's `<code>include</code></li>
-<li>all pkg.sv</li>
-<li>all if.sv</li>
-<li>all RTL DUT</li>
-<li>uvm top module</li>
-</ul>
-<h2 id="uvm-top.sv">uvm top.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
-<h2 id="rtl-top">RTL top</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="pkg.sv">pkg.sv</h2>
-<p>`<code>include</code> all related uvm class in
-<strong>pgk.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
-<h2 id="if.sv">if.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Phase noise, Modulation &amp; Sampling</title>
     <url>/2024/07/17/comm/</url>
     <content><![CDATA[<h2 id="narrowband-phase-modulation-pm">narrowband phase modulation
@@ -3365,6 +3337,34 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
 ]]></content>
       <categories>
         <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>complex uvm project topology</title>
+    <url>/2022/03/28/complex-uvm-topo/</url>
+    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
+alt="topo.drawio" /></p>
+<h2 id="compile">compile</h2>
+<ul>
+<li><code>-incdir</code> for all UVC's `<code>include</code></li>
+<li>all pkg.sv</li>
+<li>all if.sv</li>
+<li>all RTL DUT</li>
+<li>uvm top module</li>
+</ul>
+<h2 id="uvm-top.sv">uvm top.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
+<h2 id="rtl-top">RTL top</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2 id="pkg.sv">pkg.sv</h2>
+<p>`<code>include</code> all related uvm class in
+<strong>pgk.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<h2 id="if.sv">if.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -5133,70 +5133,6 @@ capacitance</strong></p>
       </categories>
   </entry>
   <entry>
-    <title>verilog-mode.el</title>
-    <url>/2022/05/13/emacs-verilog-mode/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
-command</p>
-</blockquote>
-<h2 id="verilog-mode.el">verilog-mode.el</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
-<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
-<blockquote>
-<p>For use with <code>--batch</code>, perform automatic expansions as a
-stand-alone tool. This sets up the appropriate Verilog mode environment,
-updates automatics with M-x verilog-auto on all command-line files, and
-saves the buffers. For proper results, multiple filenames need to be
-passed on the command line in bottom-up order.</p>
-</blockquote>
-<h3
-id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
-<blockquote>
-<p>Update automatics with M-x verilog-auto, save the buffer, and
-<em>compile</em></p>
-</blockquote>
-<h2 id="emacs">Emacs</h2>
-<h3 id="no-site-file"><code>--no-site-file</code></h3>
-<p>Another file for site-customization is <code>site-start.el</code>.
-Emacs loads this <em>before</em> the user's init file
-(<code>.emacs</code>, <code>.emacs.el</code> or
-<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
-file with the option <code>--no-site-file</code></p>
-<h3 id="batch"><code>--batch</code></h3>
-<p>The command-line option <code>--batch</code> causes Emacs to run
-noninteractively. The idea is that you specify Lisp programs to run;
-when they are finished, Emacs should exit.</p>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function;</p>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="f-func"><code>-f FUNC</code></h3>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function</p>
-<blockquote>
-<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
-</blockquote>
-<h2 id="multiple-directories">multiple directories</h2>
-<p><strong>AUTOINST</strong> only search in the file's directory
-default.</p>
-<p>You can append below <code>verilog-library-directories</code> for
-multiple directories search</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>Emacs Online Documentation <a
-href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
-<p>Emacs verilog-mode 的使用 URL: <a
-href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>DTFT &amp; DFT</title>
     <url>/2023/05/27/dtft-dft/</url>
     <content><![CDATA[<h2 id="sampling-theorem">sampling theorem</h2>
@@ -5551,6 +5487,70 @@ href="https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-paddin
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>verilog-mode.el</title>
+    <url>/2022/05/13/emacs-verilog-mode/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
+command</p>
+</blockquote>
+<h2 id="verilog-mode.el">verilog-mode.el</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
+<blockquote>
+<p>For use with <code>--batch</code>, perform automatic expansions as a
+stand-alone tool. This sets up the appropriate Verilog mode environment,
+updates automatics with M-x verilog-auto on all command-line files, and
+saves the buffers. For proper results, multiple filenames need to be
+passed on the command line in bottom-up order.</p>
+</blockquote>
+<h3
+id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
+<blockquote>
+<p>Update automatics with M-x verilog-auto, save the buffer, and
+<em>compile</em></p>
+</blockquote>
+<h2 id="emacs">Emacs</h2>
+<h3 id="no-site-file"><code>--no-site-file</code></h3>
+<p>Another file for site-customization is <code>site-start.el</code>.
+Emacs loads this <em>before</em> the user's init file
+(<code>.emacs</code>, <code>.emacs.el</code> or
+<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
+file with the option <code>--no-site-file</code></p>
+<h3 id="batch"><code>--batch</code></h3>
+<p>The command-line option <code>--batch</code> causes Emacs to run
+noninteractively. The idea is that you specify Lisp programs to run;
+when they are finished, Emacs should exit.</p>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function;</p>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="f-func"><code>-f FUNC</code></h3>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function</p>
+<blockquote>
+<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
+</blockquote>
+<h2 id="multiple-directories">multiple directories</h2>
+<p><strong>AUTOINST</strong> only search in the file's directory
+default.</p>
+<p>You can append below <code>verilog-library-directories</code> for
+multiple directories search</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>Emacs Online Documentation <a
+href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
+<p>Emacs verilog-mode 的使用 URL: <a
+href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -7891,6 +7891,46 @@ alt="image-20230701142405404" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Glitches and Hazards</title>
+    <url>/2022/05/08/glitch-hazard/</url>
+    <content><![CDATA[<ul>
+<li>A <strong>glitch</strong> is an unwanted pulse at the output of a
+combinational logic network – <strong>a momentary change</strong> in an
+output that should not have changed</li>
+<li>A circuit with <em>the potential for a glitch</em> is said to have a
+<strong>hazard</strong></li>
+<li>In other words a hazard is something intrinsic about a circuit; a
+circuit with hazard may or may not have a glitch depending on input
+patterns and the electric characteristics of the circuit.</li>
+</ul>
+<h4 id="when-do-circuits-have-hazards">When do circuits have hazards
+?</h4>
+<p>Hazards are potential unwanted transients that occur in the output
+when different paths from input to output have different propagation
+delays</p>
+<h4 id="types-of-hazards-on-an-output">Types of Hazards (on an
+output)</h4>
+<p>static 1-hazard, static 0-hazard, dynamic hazard</p>
+<p><img src="/2022/05/08/glitch-hazard/image-20220508183800744.png"
+alt="image-20220508183800744" /></p>
+<h4 id="hazards-concern">Hazard's Concern</h4>
+<ul>
+<li>Hazards do not hurt synchronous circuits</li>
+<li>Hazards Kill Asynchronous Circuits</li>
+<li>Glitches Increase Power Consumption</li>
+</ul>
+<h4 id="referece">referece</h4>
+<p>CPE166/EEE 270 Advanced Logic Design-Digital Design: Time Behavior of
+Combinational Networks: <a
+href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
+<p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
+href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>h0 Estimator</title>
     <url>/2022/05/29/h0-estimator/</url>
     <content><![CDATA[<p>summer output <span class="math display">\[
@@ -7937,46 +7977,6 @@ different pattern for even and odd error slicer</p>
       </categories>
   </entry>
   <entry>
-    <title>Glitches and Hazards</title>
-    <url>/2022/05/08/glitch-hazard/</url>
-    <content><![CDATA[<ul>
-<li>A <strong>glitch</strong> is an unwanted pulse at the output of a
-combinational logic network – <strong>a momentary change</strong> in an
-output that should not have changed</li>
-<li>A circuit with <em>the potential for a glitch</em> is said to have a
-<strong>hazard</strong></li>
-<li>In other words a hazard is something intrinsic about a circuit; a
-circuit with hazard may or may not have a glitch depending on input
-patterns and the electric characteristics of the circuit.</li>
-</ul>
-<h4 id="when-do-circuits-have-hazards">When do circuits have hazards
-?</h4>
-<p>Hazards are potential unwanted transients that occur in the output
-when different paths from input to output have different propagation
-delays</p>
-<h4 id="types-of-hazards-on-an-output">Types of Hazards (on an
-output)</h4>
-<p>static 1-hazard, static 0-hazard, dynamic hazard</p>
-<p><img src="/2022/05/08/glitch-hazard/image-20220508183800744.png"
-alt="image-20220508183800744" /></p>
-<h4 id="hazards-concern">Hazard's Concern</h4>
-<ul>
-<li>Hazards do not hurt synchronous circuits</li>
-<li>Hazards Kill Asynchronous Circuits</li>
-<li>Glitches Increase Power Consumption</li>
-</ul>
-<h4 id="referece">referece</h4>
-<p>CPE166/EEE 270 Advanced Logic Design-Digital Design: Time Behavior of
-Combinational Networks: <a
-href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
-<p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
-href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>time format in Verilog</title>
     <url>/2023/06/05/hdltime/</url>
     <content><![CDATA[<h2 id="realtime-vs-time">realtime vs time</h2>
@@ -8013,66 +8013,6 @@ course, the simulator follow the time tick shown by
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>In-design Sign-off Metal Fill Flow in Innovus</title>
-    <url>/2022/03/05/in-design-signoff-metalfill-innovus/</url>
-    <content><![CDATA[<p>Before inserting sign-off metal fill, stream out a GDSII stream file
-of the current database. Specify the mapping file and units that match
-with the rule deck you specify while inserting metal fill. If necessary,
-include the detailed-cell (<code>-merge</code> option) Graphic Database
-System (GDS).</p>
-<p><strong>PVS:</strong></p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pvs.fill.gds</span><br><span class="line">run_pvs_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pvs.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure>
-<p><strong>Pegasus:</strong> <figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pegasus.fill.gds</span><br><span class="line">run_pegasus_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pegasus.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>Just replace <code>run_pvs_metal_fill</code> with
-<code>run_pegasus_metal_fill</code></p>
-</blockquote>
-<p><strong>Note</strong>: Innovus metal fill (e.g.
-<code>addMetalFill</code>, <code>addViaFill</code>, etc.) does not
-support 20nm and below node design rules. We strongly recommend the
-Pegasus/PVS metal fill solution for 20nm and below. If you have sign-off
-metal fill rule deck for 28nm and above available, we recommend you to
-move to Pegasus/PVS solution too.</p>
-<blockquote>
-<ol type="1">
-<li><p><code>trimMetalFillNearNet</code> does not check DRC rules. It
-only removes the metal fill with specified spacing</p></li>
-<li><p><strong>Do not</strong> perform ECO operations after dump in
-sign-off metal fill (by <code>run_pvs_metal_fill</code> or
-<code>run_pegasus_metal_fill</code>), especially, at 20nm and below
-nodes.</p></li>
-<li><p>If you perform an ECO action, the tool cannot get DRC clean
-because <code>trimMetalFill</code> does not support 20nm and below node
-design rules.</p></li>
-<li><p>The sign-off metal fill typically does not cause DRC issues with
-regular wires.</p></li>
-</ol>
-</blockquote>
-<p>The <code>run_pvs_metal_fill</code> command does the following:</p>
-<ul>
-<li>Runs PVS with the fill rules to create a GDSII output file.</li>
-<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
-layermap provided.</li>
-<li><strong>Loads the resulting DEF file into Innovus</strong>.</li>
-</ul>
-<p>Pegasus is similar to PVS, shown as below,</p>
-<p>The <code>run_pegasus_metal_fill</code> command does the
-following:</p>
-<ul>
-<li>Runs Pegasus with the fill rules to create a GDSII output file.</li>
-<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
-layermap provided.</li>
-<li>Loads the resulting DEF file into Innovus.</li>
-</ul>
-<p><strong>Reference:</strong></p>
-<p>Innovus User Guide, Product Version 21.12, Last Updated in November
-2021</p>
-]]></content>
-      <categories>
-        <category>innovus</category>
       </categories>
   </entry>
   <entry>
@@ -8144,48 +8084,63 @@ possible without cloning.</p></li>
       </categories>
   </entry>
   <entry>
-    <title>interconnect, transmission line and inductance</title>
-    <url>/2023/07/26/inductance/</url>
-    <content><![CDATA[<h2 id="loop-inductance">loop inductance</h2>
-<p>Determine the <em>complete current loop path</em> in order to
-calculate loop inductance of that current loop</p>
+    <title>In-design Sign-off Metal Fill Flow in Innovus</title>
+    <url>/2022/03/05/in-design-signoff-metalfill-innovus/</url>
+    <content><![CDATA[<p>Before inserting sign-off metal fill, stream out a GDSII stream file
+of the current database. Specify the mapping file and units that match
+with the rule deck you specify while inserting metal fill. If necessary,
+include the detailed-cell (<code>-merge</code> option) Graphic Database
+System (GDS).</p>
+<p><strong>PVS:</strong></p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pvs.fill.gds</span><br><span class="line">run_pvs_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pvs.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure>
+<p><strong>Pegasus:</strong> <figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pegasus.fill.gds</span><br><span class="line">run_pegasus_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pegasus.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>The complete path for the current depends on the frequency of the
-current. For one frequency, the return current will take a particular
-path, but for a higher frequency the path of the return current may be
-entirely different!</p>
+<p>Just replace <code>run_pvs_metal_fill</code> with
+<code>run_pegasus_metal_fill</code></p>
 </blockquote>
-<h2 id="partial-inductance">partial inductance</h2>
+<p><strong>Note</strong>: Innovus metal fill (e.g.
+<code>addMetalFill</code>, <code>addViaFill</code>, etc.) does not
+support 20nm and below node design rules. We strongly recommend the
+Pegasus/PVS metal fill solution for 20nm and below. If you have sign-off
+metal fill rule deck for 28nm and above available, we recommend you to
+move to Pegasus/PVS solution too.</p>
 <blockquote>
-<p>The first problem with using <em>loop inductance</em> to model the
-conductors of a loop is that at different frequencies, the return
-path</p>
+<ol type="1">
+<li><p><code>trimMetalFillNearNet</code> does not check DRC rules. It
+only removes the metal fill with specified spacing</p></li>
+<li><p><strong>Do not</strong> perform ECO operations after dump in
+sign-off metal fill (by <code>run_pvs_metal_fill</code> or
+<code>run_pegasus_metal_fill</code>), especially, at 20nm and below
+nodes.</p></li>
+<li><p>If you perform an ECO action, the tool cannot get DRC clean
+because <code>trimMetalFill</code> does not support 20nm and below node
+design rules.</p></li>
+<li><p>The sign-off metal fill typically does not cause DRC issues with
+regular wires.</p></li>
+</ol>
 </blockquote>
-<h2 id="reference">reference</h2>
-<p>Yuriy Shlepnev. How Interconnects Work: Characteristic Impedance and
-Reflections [<a
-href="https://www.linkedin.com/pulse/how-interconnects-work-characteristic-impedance-yuriy-shlepnev/">https://www.linkedin.com/pulse/how-interconnects-work-characteristic-impedance-yuriy-shlepnev/</a>]</p>
-<p>-. How Interconnects Work: Bandwidth for Modeling and Measurements
-[<a
-href="https://www.linkedin.com/pulse/how-interconnects-work-bandwidth-modeling-yuriy-shlepnev/?trackingId=874kpm3XuNyV9D0eP6IioA%3D%3D">https://www.linkedin.com/pulse/how-interconnects-work-bandwidth-modeling-yuriy-shlepnev/?trackingId=874kpm3XuNyV9D0eP6IioA%3D%3D</a>]</p>
-<p>Eric Bogatin. Pop Quiz: When is an Interconnect Not a Transmission
-Line? [<a
-href="https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line">https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line</a>]</p>
-<p>TeledyneLeCroy/SignalIntegrity Python tools for signal integrity
-applications [<a
-href="https://github.com/TeledyneLeCroy/SignalIntegrity">SignalIntegrityApp</a>]</p>
-<p>Paul, Clayton R. <em>Inductance: Loop and Partial</em>. Hoboken, N.J.
-: [Piscataway, N.J.]: Wiley ; IEEE, 2010.</p>
-<p>A Look at Transmission-Line Losses [<a
-href="http://blog.teledynelecroy.com/2018/06/a-look-at-transmission-line-losses.html">http://blog.teledynelecroy.com/2018/06/a-look-at-transmission-line-losses.html</a>]</p>
-<p>How Much Transmission-Line Loss is Too Much? [<a
-href="http://blog.teledynelecroy.com/2018/06/how-much-transmission-line-loss-is-too.html">http://blog.teledynelecroy.com/2018/06/how-much-transmission-line-loss-is-too.html</a>]</p>
-<p>Y. Massoud and Y. Ismail, "Gasping the impact of on-chip inductance,"
-in IEEE Circuits and Devices Magazine, vol. 17, no. 4, pp. 14-21, July
-2001, doi: 10.1109/101.950046.</p>
+<p>The <code>run_pvs_metal_fill</code> command does the following:</p>
+<ul>
+<li>Runs PVS with the fill rules to create a GDSII output file.</li>
+<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
+layermap provided.</li>
+<li><strong>Loads the resulting DEF file into Innovus</strong>.</li>
+</ul>
+<p>Pegasus is similar to PVS, shown as below,</p>
+<p>The <code>run_pegasus_metal_fill</code> command does the
+following:</p>
+<ul>
+<li>Runs Pegasus with the fill rules to create a GDSII output file.</li>
+<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
+layermap provided.</li>
+<li>Loads the resulting DEF file into Innovus.</li>
+</ul>
+<p><strong>Reference:</strong></p>
+<p>Innovus User Guide, Product Version 21.12, Last Updated in November
+2021</p>
 ]]></content>
       <categories>
-        <category>analog</category>
+        <category>innovus</category>
       </categories>
   </entry>
   <entry>
@@ -8276,6 +8231,51 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEo
       </categories>
   </entry>
   <entry>
+    <title>interconnect, transmission line and inductance</title>
+    <url>/2023/07/26/inductance/</url>
+    <content><![CDATA[<h2 id="loop-inductance">loop inductance</h2>
+<p>Determine the <em>complete current loop path</em> in order to
+calculate loop inductance of that current loop</p>
+<blockquote>
+<p>The complete path for the current depends on the frequency of the
+current. For one frequency, the return current will take a particular
+path, but for a higher frequency the path of the return current may be
+entirely different!</p>
+</blockquote>
+<h2 id="partial-inductance">partial inductance</h2>
+<blockquote>
+<p>The first problem with using <em>loop inductance</em> to model the
+conductors of a loop is that at different frequencies, the return
+path</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Yuriy Shlepnev. How Interconnects Work: Characteristic Impedance and
+Reflections [<a
+href="https://www.linkedin.com/pulse/how-interconnects-work-characteristic-impedance-yuriy-shlepnev/">https://www.linkedin.com/pulse/how-interconnects-work-characteristic-impedance-yuriy-shlepnev/</a>]</p>
+<p>-. How Interconnects Work: Bandwidth for Modeling and Measurements
+[<a
+href="https://www.linkedin.com/pulse/how-interconnects-work-bandwidth-modeling-yuriy-shlepnev/?trackingId=874kpm3XuNyV9D0eP6IioA%3D%3D">https://www.linkedin.com/pulse/how-interconnects-work-bandwidth-modeling-yuriy-shlepnev/?trackingId=874kpm3XuNyV9D0eP6IioA%3D%3D</a>]</p>
+<p>Eric Bogatin. Pop Quiz: When is an Interconnect Not a Transmission
+Line? [<a
+href="https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line">https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line</a>]</p>
+<p>TeledyneLeCroy/SignalIntegrity Python tools for signal integrity
+applications [<a
+href="https://github.com/TeledyneLeCroy/SignalIntegrity">SignalIntegrityApp</a>]</p>
+<p>Paul, Clayton R. <em>Inductance: Loop and Partial</em>. Hoboken, N.J.
+: [Piscataway, N.J.]: Wiley ; IEEE, 2010.</p>
+<p>A Look at Transmission-Line Losses [<a
+href="http://blog.teledynelecroy.com/2018/06/a-look-at-transmission-line-losses.html">http://blog.teledynelecroy.com/2018/06/a-look-at-transmission-line-losses.html</a>]</p>
+<p>How Much Transmission-Line Loss is Too Much? [<a
+href="http://blog.teledynelecroy.com/2018/06/how-much-transmission-line-loss-is-too.html">http://blog.teledynelecroy.com/2018/06/how-much-transmission-line-loss-is-too.html</a>]</p>
+<p>Y. Massoud and Y. Ismail, "Gasping the impact of on-chip inductance,"
+in IEEE Circuits and Devices Magazine, vol. 17, no. 4, pp. 14-21, July
+2001, doi: 10.1109/101.950046.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>innovus create and assign bump - part one</title>
     <url>/2022/02/14/innovus-bump-part1/</url>
     <content><![CDATA[<h4 id="powerground-bump">power/ground bump</h4>
@@ -8284,6 +8284,366 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEo
 alt="pma_dig_bumps.drawio" /></p>
 <h4 id="signal-or-powerground-bump">signal or power/ground bump</h4>
 <figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> bump_name [create_bump –cell PAD150PITCH –loc <span class="variable">$bump_x</span> <span class="variable">$bump_y</span> –loc_type cell_center –return_bumps_name] </span><br><span class="line"><span class="comment"># assign power/ground bump</span></span><br><span class="line">assignPGBumps –bumps <span class="variable">$bump_name</span> –nets <span class="variable">$pin_name</span> </span><br><span class="line"><span class="comment"># or assign to signal bump</span></span><br><span class="line">assignSigToBump –bumps <span class="variable">$bump_name</span> –net <span class="variable">$pin_name</span> </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
+    <url>/2022/06/10/isf-sampler/</url>
+    <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
+periodic AC (PAC) analysis, which is available from RF circuit
+simulators such as SpectreRF and ADS</p>
+<h2 id="isf">ISF</h2>
+<h3 id="linear-time-varying-system-theory">Linear Time-varying System
+Theory</h3>
+<p>We define the ISF of the sampler as the sensitivity of its final
+output voltage to the impulse arriving at its input at different times,
+the ISF essentially describes the aperture of the sampler.</p>
+<p>An ideal sampler would have the perfect aperture, i.e. sampling the
+input voltage at exactly one point in time; thus, its ISF would be a
+Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
+where <span class="math inline">\(t_s\)</span> is when sampling
+occurs.</p>
+<p>A realistic sampler would rather capture a weighted-average of the
+input voltage over a certain time window. This weighting function is
+called the sampling aperture and is equivalent to the ISF</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
+alt="image-20220610235211500" /></p>
+<p>A <strong>time-varying impulse response</strong> <span
+class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
+response at time <span class="math inline">\(t\)</span> responding to an
+impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
+<p>In general, the ISF can be regarded as the <strong>time-varying
+impulse response</strong> evaluated at <em>one particular observation
+time</em> <span class="math inline">\(t=t_0\)</span>.</p>
+<p>The system output <span class="math inline">\(y(t)\)</span> is
+related to the input <span class="math inline">\(x(t)\)</span> as: <span
+class="math display">\[
+y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
+\]</span> Note that in a linear time-invariant (LTI) system, <span
+class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
+equation reduces to a convolution.</p>
+<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
+transform of the input signal <span class="math inline">\(x(t)\)</span>,
+i.e. <span class="math display">\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
+t}d\omega
+\]</span> Then <span class="math display">\[\begin{align}
+y(t) &amp;=
+\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
+e^{j\omega\tau }d\omega \right]\cdot d\tau \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{j\omega\tau}d\tau\right]\cdot d\omega \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
+H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
+<strong>time-varying transfer function</strong>, defined as the Fourier
+transform of the time-varying impulse response. <span
+class="math display">\[
+H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau
+\]</span> And it follows that: <span class="math display">\[
+Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
+\]</span> And</p>
+<p><span class="math display">\[\begin{align}
+x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
+h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
+\end{align}\]</span></p>
+<p>For linear, periodically time-varying (LPTV) systems, <span
+class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
+class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
+<span class="math inline">\(T\)</span> is the period of the time-varying
+dynamics of the system.</p>
+<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
+t+T)\)</span>:</p>
+<p><span class="math display">\[\begin{align}
+\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau \\
+\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
+e^{-j\omega(t+T-\tau)}d\tau \\
+&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
+e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
+&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
+e^{-j\omega(t-\tau)}d\tau \\
+&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
+\\
+&amp;= H(j\omega;t)
+\end{align}\]</span></p>
+<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
+<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
+in <span class="math inline">\(T\)</span>, The time-varying transfer
+function <span class="math inline">\(H(j\omega;t)\)</span> can be
+expressed in a Fourier series: <span class="math display">\[
+H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
+t}
+\]</span> where <span class="math inline">\(\omega_c\)</span> is the
+fundamental frequency of the periodic system. <span
+class="math inline">\(H_m(j\omega)\)</span> represent the frequency
+response of the system at the <em>(m-th)</em> harmonic output sideband
+to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
+<blockquote>
+<p>The above equation link time-varying transfer function <span
+class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
+output</p>
+</blockquote>
+<p>The response to a periodic impulse train, that is: <span
+class="math display">\[
+x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
+\]</span> The idea is that if the impulse response of the system settles
+to zero long before the next impulse arrives, then the system response
+to this impulse train would be approximately equal to the periodic
+repetition of the true impulse response, i.e.: <span
+class="math display">\[
+y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
+\]</span> and <span class="math inline">\(y(t)\)</span> would be
+approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
+for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
+<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
+alt="yt.drawio" /></p>
+<blockquote>
+<p>Without loss of generality and for computation convenience, we set
+<span class="math inline">\(k=1\)</span> thereafter.</p>
+</blockquote>
+<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
+of the <strong>T-periodic</strong> impulse train is: <span
+class="math display">\[
+X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
+e^{-j\omega\tau}
+\]</span> Then the response <span class="math inline">\(y(t)\)</span>
+is: <span class="math display">\[
+y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
+e^{jn\omega_c\cdot(t-\tau)}
+\]</span> The expression for the approximate time-varying impulse
+response: <span class="math display">\[
+h(t,\tau) = \left\{ \begin{array}{cl}
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
+e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
+0 &amp; : \ \text{elsewhere}
+\end{array} \right.
+\]</span> Finally, the ISF <span
+class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
+class="math inline">\(h(t,\tau)\)</span> when <span
+class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
+\gt \tau\)</span> <span class="math display">\[
+\Gamma(\tau)\cong
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
+e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
+\]</span> In practice, the summations are carried out over finite ranges
+of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
+<p>For each combination of <strong>n</strong> and <strong>m</strong>,
+the PAC analysis needs to be performed to compute <span
+class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
+response to the excitation at <span
+class="math inline">\(n\omega_c\)</span></p>
+<p>The detailed procedure for characterizing the ISF of this sampler is
+outlined as follows:</p>
+<ul>
+<li><p>First, apply the proper input voltages that place the sampler in
+a metastable state and perform the periodic steady-state (PSS)
+analysis.</p></li>
+<li><p>Second, perform the PAC analysis.</p></li>
+<li><p>Third, based on the simulated PAC response, pick a time point
+<span class="math inline">\(t_0\)</span> at which the ISF is to be
+computed and derive the ISF</p></li>
+</ul>
+<p>One possible candidate for the ISF measurement point <span
+class="math inline">\(t_0\)</span> is the time at which the output
+voltage is amplified to the largest value. PAC response of the sampler
+to a small signal DC input, that is, the time-varying transfer function
+evaluated at <span class="math inline">\(\omega=0\)</span> <span
+class="math display">\[
+H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
+\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
+alt="image-20220614214446328" /></p>
+<blockquote>
+<p>The total area under the ISF is the sampling gain, which is equal to
+the time-varying gain measured at <span
+class="math inline">\(t_0\)</span></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
+<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
+log</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
+alt="image-20220614214537033" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
+<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
+<p>Since both are frequency originated, time-shift is NOT needed</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
+alt="image-20220614214613574" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="remarks">Remarks</h3>
+<p><strong>pss pac setup</strong></p>
+<ul>
+<li>clock frequency should be low enough to assure system response
+settle to zero.</li>
+<li>Beat Frequency os PSS should be clock frequency</li>
+<li>For PAC setup,
+<ul>
+<li>the <code>Sweeptype</code> is <code>absolute</code></li>
+<li><code>Input Frequency Sweep Range(Hz)</code> should be large
+enough.</li>
+<li><code>Sweep Type</code> should be <code>Linear</code> and
+<code>Step Size</code> should equal <strong>PSS Beat
+Frequency(Hz)</strong></li>
+<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
+positive, negative and 0)</li>
+<li><code>Specialized Analyses</code> should be <code>None</code></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
+sweep from -400G to 400G and step is 8G, which is beat frequency, here
+K=1 Eq.(9) of paper</p>
+</blockquote>
+<blockquote>
+<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
+affect "Direct Plot"'s output but also simuation data i.e. the phase
+shift(imaginary part).</p>
+</blockquote>
+<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
+<p><code>transpose</code>, <code>.'</code> cf.
+https://www.mathworks.com/help/matlab/ref/transpose.html</p>
+<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
+<p>Using shooting PSS, the steady waveform starts from
+<code>tstab+n*tperiod</code>.</p>
+<ul>
+<li><strong>pss_td.pss</strong> is one period waveform starting from
+<code>tstab+n*tperiod</code></li>
+<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
+coefficient of expanded to left and right <strong>pss_td.pss</strong>
+waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
+</ul>
+<blockquote>
+<p>We have to left-shift <code>mod(tstab, tperiod)</code>
+<code>pss_fd.pss</code> in order to align it with of
+<strong>pss_tb.pss</strong></p>
+</blockquote>
+<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
+alt="image-20220610222535614" /></p>
+<h3 id="simulation-log">simulation log</h3>
+<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
+time, though <code>Stop Time(tstab)</code> field of pss form is filled
+with <code>0.3n</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="pss-simulation-result">PSS simulation result</h3>
+<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
+alt="image-20220610224100135" /></p>
+<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
+<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
+alt="image-20220610225310243" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
+function analysis of periodic circuits," 2008 IEEE/ACM International
+Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
+10.1109/ICCAD.2008.4681602.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Isolation cells</title>
+    <url>/2022/05/27/isocells/</url>
+    <content><![CDATA[<p>Isolation cells are additional cells inserted by the synthesis tools
+for isolating the buses/wires crossing from <strong>power-gated
+domain</strong> of a circuit to its always-on domain
+(<strong>AON</strong>).</p>
+<blockquote>
+<p>To prevent corruption of always-on domain, we clamp the nets crossing
+the power domains to a value depending upon the design.</p>
+</blockquote>
+<p><em>A simple circuit having a switchable (or gated) power
+domain</em></p>
+<p><img src="/2022/05/27/isocells/isolation-cells-1-1.webp"
+alt="isolation-cells-1-1" /></p>
+<p><em>The circuit shown in Figure 1, after isolation cells are
+inserted</em></p>
+<p><img src="/2022/05/27/isocells/isolation-cells-2.webp"
+alt="isolation-cells-2" /></p>
+<h3 id="always-on-buffer">Always-On Buffer</h3>
+<p><img
+src="https://img-blog.csdnimg.cn/img_convert/1c84b9b7423b064b12b09b1e72b641e5.png"
+alt="640?wx_fmt=png" /></p>
+<p><img src="/2022/05/27/isocells/image-20230211001607578.png"
+alt="image-20230211001607578" /></p>
+<p><img src="/2022/05/27/isocells/image-20230211001708189.png"
+alt="image-20230211001708189" /></p>
+<p><img src="/2022/05/27/isocells/image-20230211001849150.png"
+alt="image-20230211001849150" /></p>
+<h3 id="reference">reference</h3>
+<p>Isolation cells and Level Shifter cells URL: <a
+href="https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/">https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -9204,366 +9564,6 @@ href="https://www.edn.com/burn-in-101/">link</a>]</p>
       </categories>
   </entry>
   <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
-    <url>/2022/06/10/isf-sampler/</url>
-    <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
-periodic AC (PAC) analysis, which is available from RF circuit
-simulators such as SpectreRF and ADS</p>
-<h2 id="isf">ISF</h2>
-<h3 id="linear-time-varying-system-theory">Linear Time-varying System
-Theory</h3>
-<p>We define the ISF of the sampler as the sensitivity of its final
-output voltage to the impulse arriving at its input at different times,
-the ISF essentially describes the aperture of the sampler.</p>
-<p>An ideal sampler would have the perfect aperture, i.e. sampling the
-input voltage at exactly one point in time; thus, its ISF would be a
-Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
-where <span class="math inline">\(t_s\)</span> is when sampling
-occurs.</p>
-<p>A realistic sampler would rather capture a weighted-average of the
-input voltage over a certain time window. This weighting function is
-called the sampling aperture and is equivalent to the ISF</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
-alt="image-20220610235211500" /></p>
-<p>A <strong>time-varying impulse response</strong> <span
-class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
-response at time <span class="math inline">\(t\)</span> responding to an
-impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
-<p>In general, the ISF can be regarded as the <strong>time-varying
-impulse response</strong> evaluated at <em>one particular observation
-time</em> <span class="math inline">\(t=t_0\)</span>.</p>
-<p>The system output <span class="math inline">\(y(t)\)</span> is
-related to the input <span class="math inline">\(x(t)\)</span> as: <span
-class="math display">\[
-y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
-\]</span> Note that in a linear time-invariant (LTI) system, <span
-class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
-equation reduces to a convolution.</p>
-<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
-transform of the input signal <span class="math inline">\(x(t)\)</span>,
-i.e. <span class="math display">\[
-x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
-t}d\omega
-\]</span> Then <span class="math display">\[\begin{align}
-y(t) &amp;=
-\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-e^{j\omega\tau }d\omega \right]\cdot d\tau \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{j\omega\tau}d\tau\right]\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
-<strong>time-varying transfer function</strong>, defined as the Fourier
-transform of the time-varying impulse response. <span
-class="math display">\[
-H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau
-\]</span> And it follows that: <span class="math display">\[
-Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
-\]</span> And</p>
-<p><span class="math display">\[\begin{align}
-x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
-h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
-\end{align}\]</span></p>
-<p>For linear, periodically time-varying (LPTV) systems, <span
-class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
-class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
-<span class="math inline">\(T\)</span> is the period of the time-varying
-dynamics of the system.</p>
-<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
-t+T)\)</span>:</p>
-<p><span class="math display">\[\begin{align}
-\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
-e^{-j\omega(t+T-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
-\\
-&amp;= H(j\omega;t)
-\end{align}\]</span></p>
-<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
-<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
-in <span class="math inline">\(T\)</span>, The time-varying transfer
-function <span class="math inline">\(H(j\omega;t)\)</span> can be
-expressed in a Fourier series: <span class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
-t}
-\]</span> where <span class="math inline">\(\omega_c\)</span> is the
-fundamental frequency of the periodic system. <span
-class="math inline">\(H_m(j\omega)\)</span> represent the frequency
-response of the system at the <em>(m-th)</em> harmonic output sideband
-to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
-<blockquote>
-<p>The above equation link time-varying transfer function <span
-class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
-output</p>
-</blockquote>
-<p>The response to a periodic impulse train, that is: <span
-class="math display">\[
-x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
-\]</span> The idea is that if the impulse response of the system settles
-to zero long before the next impulse arrives, then the system response
-to this impulse train would be approximately equal to the periodic
-repetition of the true impulse response, i.e.: <span
-class="math display">\[
-y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
-\]</span> and <span class="math inline">\(y(t)\)</span> would be
-approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
-for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
-<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
-alt="yt.drawio" /></p>
-<blockquote>
-<p>Without loss of generality and for computation convenience, we set
-<span class="math inline">\(k=1\)</span> thereafter.</p>
-</blockquote>
-<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
-of the <strong>T-periodic</strong> impulse train is: <span
-class="math display">\[
-X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
-e^{-j\omega\tau}
-\]</span> Then the response <span class="math inline">\(y(t)\)</span>
-is: <span class="math display">\[
-y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
-e^{jn\omega_c\cdot(t-\tau)}
-\]</span> The expression for the approximate time-varying impulse
-response: <span class="math display">\[
-h(t,\tau) = \left\{ \begin{array}{cl}
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
-0 &amp; : \ \text{elsewhere}
-\end{array} \right.
-\]</span> Finally, the ISF <span
-class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
-class="math inline">\(h(t,\tau)\)</span> when <span
-class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
-\gt \tau\)</span> <span class="math display">\[
-\Gamma(\tau)\cong
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
-\]</span> In practice, the summations are carried out over finite ranges
-of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
-<p>For each combination of <strong>n</strong> and <strong>m</strong>,
-the PAC analysis needs to be performed to compute <span
-class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
-response to the excitation at <span
-class="math inline">\(n\omega_c\)</span></p>
-<p>The detailed procedure for characterizing the ISF of this sampler is
-outlined as follows:</p>
-<ul>
-<li><p>First, apply the proper input voltages that place the sampler in
-a metastable state and perform the periodic steady-state (PSS)
-analysis.</p></li>
-<li><p>Second, perform the PAC analysis.</p></li>
-<li><p>Third, based on the simulated PAC response, pick a time point
-<span class="math inline">\(t_0\)</span> at which the ISF is to be
-computed and derive the ISF</p></li>
-</ul>
-<p>One possible candidate for the ISF measurement point <span
-class="math inline">\(t_0\)</span> is the time at which the output
-voltage is amplified to the largest value. PAC response of the sampler
-to a small signal DC input, that is, the time-varying transfer function
-evaluated at <span class="math inline">\(\omega=0\)</span> <span
-class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
-\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
-alt="image-20220614214446328" /></p>
-<blockquote>
-<p>The total area under the ISF is the sampling gain, which is equal to
-the time-varying gain measured at <span
-class="math inline">\(t_0\)</span></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
-log</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
-alt="image-20220614214537033" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
-<p>Since both are frequency originated, time-shift is NOT needed</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
-alt="image-20220614214613574" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="remarks">Remarks</h3>
-<p><strong>pss pac setup</strong></p>
-<ul>
-<li>clock frequency should be low enough to assure system response
-settle to zero.</li>
-<li>Beat Frequency os PSS should be clock frequency</li>
-<li>For PAC setup,
-<ul>
-<li>the <code>Sweeptype</code> is <code>absolute</code></li>
-<li><code>Input Frequency Sweep Range(Hz)</code> should be large
-enough.</li>
-<li><code>Sweep Type</code> should be <code>Linear</code> and
-<code>Step Size</code> should equal <strong>PSS Beat
-Frequency(Hz)</strong></li>
-<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
-positive, negative and 0)</li>
-<li><code>Specialized Analyses</code> should be <code>None</code></li>
-</ul></li>
-</ul>
-<blockquote>
-<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
-sweep from -400G to 400G and step is 8G, which is beat frequency, here
-K=1 Eq.(9) of paper</p>
-</blockquote>
-<blockquote>
-<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
-affect "Direct Plot"'s output but also simuation data i.e. the phase
-shift(imaginary part).</p>
-</blockquote>
-<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
-<p><code>transpose</code>, <code>.'</code> cf.
-https://www.mathworks.com/help/matlab/ref/transpose.html</p>
-<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
-<p>Using shooting PSS, the steady waveform starts from
-<code>tstab+n*tperiod</code>.</p>
-<ul>
-<li><strong>pss_td.pss</strong> is one period waveform starting from
-<code>tstab+n*tperiod</code></li>
-<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
-coefficient of expanded to left and right <strong>pss_td.pss</strong>
-waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
-</ul>
-<blockquote>
-<p>We have to left-shift <code>mod(tstab, tperiod)</code>
-<code>pss_fd.pss</code> in order to align it with of
-<strong>pss_tb.pss</strong></p>
-</blockquote>
-<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
-alt="image-20220610222535614" /></p>
-<h3 id="simulation-log">simulation log</h3>
-<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
-time, though <code>Stop Time(tstab)</code> field of pss form is filled
-with <code>0.3n</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h3 id="pss-simulation-result">PSS simulation result</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
-alt="image-20220610224100135" /></p>
-<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
-alt="image-20220610225310243" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
-function analysis of periodic circuits," 2008 IEEE/ACM International
-Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
-10.1109/ICCAD.2008.4681602.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Isolation cells</title>
-    <url>/2022/05/27/isocells/</url>
-    <content><![CDATA[<p>Isolation cells are additional cells inserted by the synthesis tools
-for isolating the buses/wires crossing from <strong>power-gated
-domain</strong> of a circuit to its always-on domain
-(<strong>AON</strong>).</p>
-<blockquote>
-<p>To prevent corruption of always-on domain, we clamp the nets crossing
-the power domains to a value depending upon the design.</p>
-</blockquote>
-<p><em>A simple circuit having a switchable (or gated) power
-domain</em></p>
-<p><img src="/2022/05/27/isocells/isolation-cells-1-1.webp"
-alt="isolation-cells-1-1" /></p>
-<p><em>The circuit shown in Figure 1, after isolation cells are
-inserted</em></p>
-<p><img src="/2022/05/27/isocells/isolation-cells-2.webp"
-alt="isolation-cells-2" /></p>
-<h3 id="always-on-buffer">Always-On Buffer</h3>
-<p><img
-src="https://img-blog.csdnimg.cn/img_convert/1c84b9b7423b064b12b09b1e72b641e5.png"
-alt="640?wx_fmt=png" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001607578.png"
-alt="image-20230211001607578" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001708189.png"
-alt="image-20230211001708189" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001849150.png"
-alt="image-20230211001849150" /></p>
-<h3 id="reference">reference</h3>
-<p>Isolation cells and Level Shifter cells URL: <a
-href="https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/">https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>jitter amplification</title>
     <url>/2022/03/13/jitter-amplification/</url>
     <content><![CDATA[<h2 id="transient-noise-and-rms_jitter-function">transient noise and
@@ -10157,55 +10157,6 @@ doi: 10.1109/MDT.2003.1232259.</p>
       </categories>
   </entry>
   <entry>
-    <title>Layout Tricks Part 1 - compact, drain and source sharing</title>
-    <url>/2022/02/19/layout-tricks-part1/</url>
-    <content><![CDATA[<p>All credits to my colleague, Zhang Wenpian.</p>
-<h3 id="planar-process-vs.-finfet-process">Planar process vs. FinFet
-process</h3>
-<p><img
-src="/2022/02/19/layout-tricks-part1/local_Interconnect.drawio.svg"
-alt="local_Interconnect.drawio" /></p>
-<h3 id="standard-cell-tapcell">Standard Cell Tapcell</h3>
-<p><img src="/2022/02/19/layout-tricks-part1/tapcell.drawio.svg"
-alt="tapcell.drawio" /></p>
-<h3 id="guard-ring-in-custom-block">Guard Ring in Custom block</h3>
-<p>Place well tie and substrate tie where they are needed. Redundant
-guard ring consume area and increase the routing of critical signal
-net.</p>
-<p><img
-src="/2022/02/19/layout-tricks-part1/guardring_stypes.drawio.svg"
-alt="guardring_stypes.drawio" /></p>
-<h3 id="continuous-od">Continuous OD</h3>
-<h4 id="performance-matching">Performance &amp; Matching</h4>
-<p><img
-src="/2022/02/19/layout-tricks-part1/image-20220219223723289.png"
-alt="image-20220219223723289" /></p>
-<h4 id="current-mirror">current mirror</h4>
-<p>split diffusion with dummy transistors</p>
-<p><img
-src="/2022/02/19/layout-tricks-part1/mirror_continuous_OD_split_with_dummy.drawio.svg"
-alt="mirror_continuous_OD_split_with_dummy.drawio" /></p>
-<h4 id="cascode-structure">cascode structure</h4>
-<p>off transistor split diffusion</p>
-<p><img
-src="/2022/02/19/layout-tricks-part1/cascode_continuous_OD_split_with_dummy.drawio.svg"
-alt="cascode_continuous_OD_split_with_dummy.drawio" /></p>
-<h4 id="sharing-source-drain">sharing source &amp; drain</h4>
-<p><img src="/2022/02/19/layout-tricks-part1/sharing_SD.drawio.svg"
-alt="sharing_SD.drawio" /></p>
-<h3 id="stacked-mosfets">Stacked MOSFETs</h3>
-<h3 id="reference">reference</h3>
-<p>A. L. S. Loke et al., "Analog/mixed-signal design challenges in 7-nm
-CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference
-(CICC), 2018, pp. 1-8, doi: 10.1109/CICC.2018.8357060.</p>
-<p>Stacked MOSFETs in analog layout <a
-href="https://pulsic.com/stacked-mosfets-in-analog-layout/">https://pulsic.com/stacked-mosfets-in-analog-layout/</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Latch Inference in Verilog</title>
     <url>/2022/05/09/latch-inference/</url>
     <content><![CDATA[<h2 id="always"><code>always@( * )</code></h2>
@@ -10260,6 +10211,55 @@ doi:10.1007/978-3-030-03238-8</p>
       </categories>
   </entry>
   <entry>
+    <title>Layout Tricks Part 1 - compact, drain and source sharing</title>
+    <url>/2022/02/19/layout-tricks-part1/</url>
+    <content><![CDATA[<p>All credits to my colleague, Zhang Wenpian.</p>
+<h3 id="planar-process-vs.-finfet-process">Planar process vs. FinFet
+process</h3>
+<p><img
+src="/2022/02/19/layout-tricks-part1/local_Interconnect.drawio.svg"
+alt="local_Interconnect.drawio" /></p>
+<h3 id="standard-cell-tapcell">Standard Cell Tapcell</h3>
+<p><img src="/2022/02/19/layout-tricks-part1/tapcell.drawio.svg"
+alt="tapcell.drawio" /></p>
+<h3 id="guard-ring-in-custom-block">Guard Ring in Custom block</h3>
+<p>Place well tie and substrate tie where they are needed. Redundant
+guard ring consume area and increase the routing of critical signal
+net.</p>
+<p><img
+src="/2022/02/19/layout-tricks-part1/guardring_stypes.drawio.svg"
+alt="guardring_stypes.drawio" /></p>
+<h3 id="continuous-od">Continuous OD</h3>
+<h4 id="performance-matching">Performance &amp; Matching</h4>
+<p><img
+src="/2022/02/19/layout-tricks-part1/image-20220219223723289.png"
+alt="image-20220219223723289" /></p>
+<h4 id="current-mirror">current mirror</h4>
+<p>split diffusion with dummy transistors</p>
+<p><img
+src="/2022/02/19/layout-tricks-part1/mirror_continuous_OD_split_with_dummy.drawio.svg"
+alt="mirror_continuous_OD_split_with_dummy.drawio" /></p>
+<h4 id="cascode-structure">cascode structure</h4>
+<p>off transistor split diffusion</p>
+<p><img
+src="/2022/02/19/layout-tricks-part1/cascode_continuous_OD_split_with_dummy.drawio.svg"
+alt="cascode_continuous_OD_split_with_dummy.drawio" /></p>
+<h4 id="sharing-source-drain">sharing source &amp; drain</h4>
+<p><img src="/2022/02/19/layout-tricks-part1/sharing_SD.drawio.svg"
+alt="sharing_SD.drawio" /></p>
+<h3 id="stacked-mosfets">Stacked MOSFETs</h3>
+<h3 id="reference">reference</h3>
+<p>A. L. S. Loke et al., "Analog/mixed-signal design challenges in 7-nm
+CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference
+(CICC), 2018, pp. 1-8, doi: 10.1109/CICC.2018.8357060.</p>
+<p>Stacked MOSFETs in analog layout <a
+href="https://pulsic.com/stacked-mosfets-in-analog-layout/">https://pulsic.com/stacked-mosfets-in-analog-layout/</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Layout Tricks Part 2 - matching</title>
     <url>/2022/11/19/layout-tricks-part2/</url>
     <content><![CDATA[<ol type="1">
@@ -10287,56 +10287,6 @@ alt="HTML5 Icon" /></p></li>
 href="http://www.ee.columbia.edu/~kinget/EE6350_S16/">EE6350 VLSI Design
 Lab</a> SMART TEMPERATURE SENSOR URL: <a
 href="https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html">https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Link Modeling &amp; Analysis</title>
-    <url>/2024/05/15/linkModeling/</url>
-    <content><![CDATA[<ul>
-<li><p>statistical eye/BER analysis</p></li>
-<li><p>Channel Operation Margin (<strong>COM</strong>)</p></li>
-</ul>
-<h2 id="statistical-eye">statistical eye</h2>
-<p><em>TODO</em> 📅</p>
-<h3 id="reference">reference</h3>
-<p>Sanders, Anthony, Michael Resso and John D'Ambrosia. "Channel
-Compliance Testing Utilizing Novel Statistical Eye Methodology."
-(2004).</p>
-<h2 id="maximum-likelihood-sequence-estimation">Maximum-Likelihood
-Sequence Estimation</h2>
-<p><em>TODO</em> 📅</p>
-<h3 id="reference-1">reference</h3>
-<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
-Sheikholeslami, "Design and Implementation of an On-Demand
-Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
-Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
-10.1109/OJCAS.2022.3173686.</p>
-<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
-Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
-Undergraduate Research Scholars Program. Available electronically from
-[<a
-href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a>]</p>
-<h2 id="reference-2">reference</h2>
-<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
-(EPFL). <a
-href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
-generator model for jitter-tolerance simulation</a>; <a
-href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
-models</a></p>
-<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
-Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
-Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
-doi: 10.1109/CICC.2019.8780223.</p>
-<p>Savo Bajic, ECE1392, Integrated Circuits for Digital Communications:
-<strong>StatOpt in Python</strong> [<a
-href="https://savobajic.ca/projects/academic/statopt/">https://savobajic.ca/projects/academic/statopt</a>]</p>
-<p>Anritsu Company, "Measuring Channel Operating Margin," 2016. [<a
-href="https://dl.cdn-anritsu.com/en-us/test-measurement/files/Technical-Notes/White-Paper/11410-00989A.pdf">https://dl.cdn-anritsu.com/en-us/test-measurement/files/Technical-Notes/White-Paper/11410-00989A.pdf</a>]</p>
-<p>JLSD - Julia SerDe [<a
-href="https://github.com/kevjzheng/JLSD">https://github.com/kevjzheng/JLSD</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -10443,6 +10393,56 @@ href="https://www.ti.com/document-viewer/lit/html/SSZTA13">https://www.ti.com/do
 <p>LDO Basics: Noise – How a Noise-reduction Pin Improves System
 Performance [<a
 href="https://www.ti.com/document-viewer/lit/html/SSZTA40">https://www.ti.com/document-viewer/lit/html/SSZTA40</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Link Modeling &amp; Analysis</title>
+    <url>/2024/05/15/linkModeling/</url>
+    <content><![CDATA[<ul>
+<li><p>statistical eye/BER analysis</p></li>
+<li><p>Channel Operation Margin (<strong>COM</strong>)</p></li>
+</ul>
+<h2 id="statistical-eye">statistical eye</h2>
+<p><em>TODO</em> 📅</p>
+<h3 id="reference">reference</h3>
+<p>Sanders, Anthony, Michael Resso and John D'Ambrosia. "Channel
+Compliance Testing Utilizing Novel Statistical Eye Methodology."
+(2004).</p>
+<h2 id="maximum-likelihood-sequence-estimation">Maximum-Likelihood
+Sequence Estimation</h2>
+<p><em>TODO</em> 📅</p>
+<h3 id="reference-1">reference</h3>
+<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
+Sheikholeslami, "Design and Implementation of an On-Demand
+Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
+Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
+10.1109/OJCAS.2022.3173686.</p>
+<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
+Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
+Undergraduate Research Scholars Program. Available electronically from
+[<a
+href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a>]</p>
+<h2 id="reference-2">reference</h2>
+<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
+(EPFL). <a
+href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
+generator model for jitter-tolerance simulation</a>; <a
+href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
+models</a></p>
+<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
+Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
+Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
+doi: 10.1109/CICC.2019.8780223.</p>
+<p>Savo Bajic, ECE1392, Integrated Circuits for Digital Communications:
+<strong>StatOpt in Python</strong> [<a
+href="https://savobajic.ca/projects/academic/statopt/">https://savobajic.ca/projects/academic/statopt</a>]</p>
+<p>Anritsu Company, "Measuring Channel Operating Margin," 2016. [<a
+href="https://dl.cdn-anritsu.com/en-us/test-measurement/files/Technical-Notes/White-Paper/11410-00989A.pdf">https://dl.cdn-anritsu.com/en-us/test-measurement/files/Technical-Notes/White-Paper/11410-00989A.pdf</a>]</p>
+<p>JLSD - Julia SerDe [<a
+href="https://github.com/kevjzheng/JLSD">https://github.com/kevjzheng/JLSD</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -10761,52 +10761,6 @@ Processing</a></p>
       </categories>
   </entry>
   <entry>
-    <title>Multicycle Paths Constraints in PrimeTime</title>
-    <url>/2022/03/01/multicycle-paths/</url>
-    <content><![CDATA[<p>PrimeTime <em>does not</em> automatically identifies multicycle
-paths.</p>
-<h4 id="specifying-multicycle-path-for-setup">specifying multicycle path
-for setup</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">set_multicycle_path <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">set_multicycle_path -setup <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># check the exception</span></span><br><span class="line">report_exception</span><br></pre></td></tr></table></figure>
-<h4
-id="specifying-multicycle-path-for-hold-new-data-every-6-cycles">specifying
-multicycle path for hold (new data every 6 cycles)</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">set_multicycle_path -setup <span class="number">6</span> -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br><span class="line">set_multicycle_path -hold [<span class="keyword">expr</span> <span class="number">6</span><span class="number">-1</span>] -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/01/multicycle-paths/image-20220301215938296.png"
-alt="image-20220301215938296" /></p>
-<p>M<sub>H</sub> stands for Hold Multiplier, M<sub>S</sub> for Setup
-Multiplier. The Setup multiplier counts up with increasing clock cycles,
-the Hold Multiplier counts up with decreasing cycles. The origin (0) for
-the Hold Multiplier is always at the <code>Setup Multiplier - 1</code>
-position.</p>
-<h4 id="reporting-a-multicycle-path-with-report_timing">Reporting a
-multicycle path with report_timing</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">report_timing -exceptions all -from *reg[<span class="number">26</span>]/CP -to *reg/D</span><br></pre></td></tr></table></figure>
-<h4 id="timing-exceptions">Timing Exceptions</h4>
-<p>If certain paths are <strong>not</strong> intended to operate
-according to <em>the default setup and hold behavior assumed by the
-PrimeTime tool</em>, you need to specify those paths as timing
-exceptions. Otherwise, the tool might incorrectly report those paths as
-having timing violations.</p>
-<p>The PrimeTime tool lets you specify the following types of
-exceptions:</p>
-<ul>
-<li>False path – A path that is never sensitized due to the logic
-configuration, expected data sequence, or operating mode.</li>
-<li>Multicycle path – A path designed to take more than one clock cycle
-from launch to capture.</li>
-<li>Minimum or maximum delay path – A path that must meet a delay
-constraint that you explicitly specify as a time value.</li>
-</ul>
-<h4 id="ref">REF</h4>
-<p>PrimeTime® User Guide Version O-2018.06-SP4 Chapter 1: Introduction
-to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Network Analysis</title>
     <url>/2023/09/29/network/</url>
     <content><![CDATA[<p><img src="/2023/09/29/network/image-20240704212740246.png"
@@ -10855,6 +10809,52 @@ href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">htt
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Multicycle Paths Constraints in PrimeTime</title>
+    <url>/2022/03/01/multicycle-paths/</url>
+    <content><![CDATA[<p>PrimeTime <em>does not</em> automatically identifies multicycle
+paths.</p>
+<h4 id="specifying-multicycle-path-for-setup">specifying multicycle path
+for setup</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">set_multicycle_path <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">set_multicycle_path -setup <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># check the exception</span></span><br><span class="line">report_exception</span><br></pre></td></tr></table></figure>
+<h4
+id="specifying-multicycle-path-for-hold-new-data-every-6-cycles">specifying
+multicycle path for hold (new data every 6 cycles)</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">set_multicycle_path -setup <span class="number">6</span> -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br><span class="line">set_multicycle_path -hold [<span class="keyword">expr</span> <span class="number">6</span><span class="number">-1</span>] -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/01/multicycle-paths/image-20220301215938296.png"
+alt="image-20220301215938296" /></p>
+<p>M<sub>H</sub> stands for Hold Multiplier, M<sub>S</sub> for Setup
+Multiplier. The Setup multiplier counts up with increasing clock cycles,
+the Hold Multiplier counts up with decreasing cycles. The origin (0) for
+the Hold Multiplier is always at the <code>Setup Multiplier - 1</code>
+position.</p>
+<h4 id="reporting-a-multicycle-path-with-report_timing">Reporting a
+multicycle path with report_timing</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">report_timing -exceptions all -from *reg[<span class="number">26</span>]/CP -to *reg/D</span><br></pre></td></tr></table></figure>
+<h4 id="timing-exceptions">Timing Exceptions</h4>
+<p>If certain paths are <strong>not</strong> intended to operate
+according to <em>the default setup and hold behavior assumed by the
+PrimeTime tool</em>, you need to specify those paths as timing
+exceptions. Otherwise, the tool might incorrectly report those paths as
+having timing violations.</p>
+<p>The PrimeTime tool lets you specify the following types of
+exceptions:</p>
+<ul>
+<li>False path – A path that is never sensitized due to the logic
+configuration, expected data sequence, or operating mode.</li>
+<li>Multicycle path – A path designed to take more than one clock cycle
+from launch to capture.</li>
+<li>Minimum or maximum delay path – A path that must meet a delay
+constraint that you explicitly specify as a time value.</li>
+</ul>
+<h4 id="ref">REF</h4>
+<p>PrimeTime® User Guide Version O-2018.06-SP4 Chapter 1: Introduction
+to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -13769,18 +13769,6 @@ running kernel:</p>
       </categories>
   </entry>
   <entry>
-    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
-    <url>/2022/02/02/rocky8-cadence/</url>
-    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
-<p><strong>library preparation for EDA installation</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>network connection using nmcli</title>
     <url>/2022/04/01/rocky-nmcli-network/</url>
     <content><![CDATA[<h4 id="problem">Problem</h4>
@@ -13796,6 +13784,18 @@ alt="image-20220401011509900" /></p>
 <p><img
 src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
 alt="image-20220401011543866" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
+    <url>/2022/02/02/rocky8-cadence/</url>
+    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
+<p><strong>library preparation for EDA installation</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>devops</category>
@@ -18277,6 +18277,19 @@ Memory in Verilog</a></p>
       </tags>
   </entry>
   <entry>
+    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
+    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Voltage-Mode Driver Equalization</title>
     <url>/2022/07/09/vm-drv-eq/</url>
     <content><![CDATA[<h2 id="sst-driver">SST Driver</h2>
@@ -18479,19 +18492,6 @@ Data Communications</p>
       <categories>
         <category>analog</category>
       </categories>
-  </entry>
-  <entry>
-    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
-    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
   </entry>
   <entry>
     <title>Build VMware host modules</title>

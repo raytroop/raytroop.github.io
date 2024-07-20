@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">169</span>
+          <span class="site-state-item-count">168</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,268 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/04/data-dump/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/04/data-dump/" class="post-title-link" itemprop="url">simulation data dumping</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-04 16:30:47" itemprop="dateCreated datePublished" datetime="2022-06-04T16:30:47+00:00">2022-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="fsdb">FSDB</h2>
-<h3 id="fsdbdumpfile"><code>$fsdbDumpfile</code></h3>
-<p>It specifies the FSDB file name created by the Novas object files for
-FSDB dumping. If it is not specified, then the default FSDB file name is
-"novas.fsdb".</p>
-<blockquote>
-<p>This command is valid only <strong>before</strong> executing
-<code>$fsdbDumpvars</code> and is ignored if specified after
-<code>$fsdbDumpvars</code></p>
-</blockquote>
-<h3 id="fsdbsuppress"><code>$fsdbSuppress</code></h3>
-<p>The <code>fsdbSuppress</code>utility is used to skip dumping of few
-instances, scopes, modules and signals. The
-<code>fsdbSuppress</code>utility is a system task like other fsdb
-tasks.</p>
-<blockquote>
-<p>For <code>$fsdbSuppress()</code> to be effective, it needs to be
-specified/called <strong>before</strong> <code>$fsdbDumpvars</code></p>
-</blockquote>
-<h3
-id="fsdbautoswitchdumpfile"><code>$fsdbAutoSwitchDumpfile</code></h3>
-<p>Automatically switch to a new dump file when the working FSDB file
-reaches the specified size or the specified wall time period.</p>
-<blockquote>
-<p>After the dumping is finished, a <strong>virtual FSDB file
-(*.vf)</strong> is automatically created and list all of the generated
-FSDB files with the correct sequence. Only the <strong>virtual FSDB
-file</strong>, rather than all of the FSDB files, needs to be loaded to
-view the simulation results</p>
-</blockquote>
-<p>When specified in the design to switch based on <strong>file
-size</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$fsdbAutoSwitchDumpfile(File_Size | File_Size_var, &quot;FSDB_Name&quot; |FSDB_Name_var, Number_of_Files | Number_of_Files_var[ ,&quot;log_filename&quot; | ,log_filename_var ], [&quot;+no_overwrite&quot;]);</span><br></pre></td></tr></table></figure>
-<p>When specified in the design to switch based on <strong>time
-period</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$fsdbAutoSwitchDumpfile(File_Size | File_Size_var, &quot;FSDB_Name&quot; |FSDB_Name_var, Number_of_Files | Number_of_Files_var[ ,&quot;log_filename&quot; | ,log_filename_var ], [&quot;+no_overwrite&quot;], “+by_period”);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>“+by_period”</code></p>
-</blockquote>
-<h3 id="fsdbdumpvars"><code>$fsdbDumpvars</code></h3>
-<p>This command dumps the change in signal value to the FSDB file.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$fsdbDumpvars([ depth, | &quot;level=&quot;,depth_var, ],[instance | &quot;instance=&quot;,instance_var])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>For VCS users, to include memory, MDA, packed array and structure
-information in the generated FSDB file, the <code>-debug_access</code>
-option must be included when VCS is invoked to <strong>compile the
-design</strong></p>
-</blockquote>
-<ul>
-<li><p><code>depth</code></p>
-<p>Specify how many sub-scope levels under the given scope you want to
-dump.</p>
-<ul>
-<li>Specify this argument as <strong>1</strong> to dump the signals
-under the given scope</li>
-<li>Specify this argument as <strong>0</strong> to dump all signals
-under the given scope and its descendant scopes.</li>
-</ul>
-<p>0: all signals in all scopes.</p>
-<p>1: all signals in current scope.</p>
-<p>2: all signals in the current scope and all scopes one level
-below.</p>
-<p>n: all signals in the current scope and all scopes n-1 levels
-below.</p>
-<table>
-<colgroup>
-<col style="width: 36%" />
-<col style="width: 9%" />
-<col style="width: 18%" />
-<col style="width: 36%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>tb.clk</th>
-<th>tb.u_div2.div2</th>
-<th>tb.u_div2.u_div2neg.div2neg</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>$fsdbDumpvars(0)</td>
-<td>✓</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>$fsdbDumpvars(1)</td>
-<td>✓</td>
-<td>✗</td>
-<td>✗</td>
-</tr>
-<tr class="odd">
-<td>$fsdbDumpvars(2)</td>
-<td>✓</td>
-<td>✓</td>
-<td>✗</td>
-</tr>
-<tr class="even">
-<td>$fsdbDumpvars(1, tb.u_div2)</td>
-<td>✗</td>
-<td>✓</td>
-<td>✗</td>
-</tr>
-<tr class="odd">
-<td>$fsdbDumpvars(0, tb.u_div2)</td>
-<td>✗</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">	<span class="keyword">reg</span> clk;</span><br><span class="line"></span><br><span class="line">	divider2 u_div2(clk);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">forever</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		#<span class="number">100</span>;</span><br><span class="line">		<span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		 #<span class="number">10</span>;</span><br><span class="line">		 $fsdbDumpfile(<span class="string">&quot;tb.fsdb&quot;</span>);</span><br><span class="line">		 <span class="comment">//$fsdbDumpvars(0);				// same with $fsdbDumpvars(0, tb)</span></span><br><span class="line">		 <span class="comment">//$fsdbDumpvars(1);				// same with $fsdbDumpvars(1, tb)</span></span><br><span class="line">		 <span class="comment">//$fsdbDumpvars(2);				// same with $fsdbDumpvars(2, tb)</span></span><br><span class="line">		 <span class="comment">//$fsdbDumpvars(1, tb.u_div2);</span></span><br><span class="line">		 $fsdbDumpvars(<span class="number">0</span>, tb<span class="variable">.u_div2</span>);</span><br><span class="line">		 #<span class="number">80</span> <span class="built_in">$finish</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> divider2 (</span><br><span class="line">	<span class="keyword">input</span> clk</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">reg</span> div2;</span><br><span class="line"></span><br><span class="line">	divider2neg u_div2neg(div2);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">always</span>@(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">		div2 = ~div2;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		div2 = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> divider2neg (</span><br><span class="line">	<span class="keyword">input</span> clk</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">reg</span> div2neg;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">always</span>@(<span class="keyword">negedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">		div2neg = ~div2neg;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		div2neg= <span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><em>compile</em> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcs -full64 -kdb -debug_access+all tb.v</span><br></pre></td></tr></table></figure></p>
-<p><em>simulate</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./simv</span><br></pre></td></tr></table></figure>
-<p><em>load fsdb</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">verdi -ssf tb.fsdb</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/04/data-dump/image-20220604192421888.png"
-alt="image-20220604192421888" /></p></li>
-</ul>
-<h3
-id="fsdbdumpon-fsdbdumpoff"><code>$fsdbDumpon, $fsdbDumpoff</code></h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$fsdbDumpon([<span class="string">&quot;+fsdbfile+filename&quot;</span>])</span><br><span class="line"></span><br><span class="line">$fsdbDumpoff([<span class="string">&quot;+fsdbfile+filename&quot;</span>])</span><br></pre></td></tr></table></figure>
-<p>These FSDB dumping commands turn dumping on and off.
-<code>fsdbDumpon/fsdbDumpoff</code> has the highest priority and
-overrides all other FSDB dumping commands.</p>
-<p><code>fsdbDumpon/fsdbDumpoff</code> is not restricted to only
-<code>fsdbDumpvars</code>. If there is more than one FSDB file open for
-dumping at one simulation run, <code>fsdbDumpon/fsdbDumpoff</code> may
-only affect a specific FSDB file by specifying the specific file
-name.</p>
-<ul>
-<li><code>+fsdbfile+filename</code>: Specify the FSDB file name. If not
-specified, the default FSDB file name is "novas.fsdb"</li>
-</ul>
-<h3 id="fsdbdumpfinish"><code>$fsdbDumpFinish</code></h3>
-<p>This command closes all FSDB files in the current simulation and
-stops dumping of signals. Although all FSDB files are <em>closed
-automatically at the end of simulation</em>, this dumping command can be
-invoked to <em>explicitly</em> close the FSDB files during the
-simulation</p>
-<h2 id="vcd">VCD</h2>
-<h3 id="dumpfile"><code>$dumpfile</code></h3>
-<p>The declaration onf <code>$dumpfile</code> must come before the
-<code>$dumpvars</code> or any other system tasks that specifies
-dump.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$dumpfile</span>(<span class="string">&quot;test.vcd&quot;</span>);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>argument <strong>is necessary</strong>, there is no default value</p>
-</blockquote>
-<h3 id="dumpvars"><code>$dumpvars</code></h3>
-<p>The <code>$dumpvars</code> is used to specify which variables are to
-be dumped ( in the file mentioned by <code>$dumpfile</code>). The
-simplest way to use it is without any argument.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$dumpvars</span>(&lt;levels&gt; &lt;, &lt;module_or_variable&gt;&gt;* );</span><br></pre></td></tr></table></figure>
-<h3 id="dumplimit"><code>$dumplimit</code></h3>
-<p>It is possible that you inadvertantly generate huge file in Gigabytes
-( for examples while dumping a Gigahertz clock for one second). To
-reduce such occurrences, we may use <code>$dumplimit</code>. It usage
-is</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$dumplimit</span>(&lt;filesize&gt;);</span><br></pre></td></tr></table></figure>
-<h3 id="dumpoff-and-dumpon"><code>$dumpoff and $dumpon</code></h3>
-<p>During the simulation if you are bothered about about only during a
-certain interval then you can use <code>$dumpoff</code> and
-<code>$dumpon</code>. The following example shows its usage. It will
-dump the changes for first 100 units of time and then between 10200 and
-10400 units of time.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span></span><br><span class="line">    <span class="built_in">$monitor</span>(<span class="built_in">$time</span>, <span class="string">&quot; reset=%b,clk_out=%b&quot;</span>,reset,clk_out);</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">            <span class="built_in">$dumpfile</span>(<span class="string">&quot;clkdiv2n_tb.vcd&quot;</span>);</span><br><span class="line">            <span class="built_in">$dumpvars</span>(<span class="number">0</span>,clkdiv2n_tb);</span><br><span class="line">            #<span class="number">100</span>;</span><br><span class="line">            <span class="built_in">$dumpoff</span>;</span><br><span class="line">            #<span class="number">10200</span>;</span><br><span class="line">            <span class="built_in">$dumpon</span>;</span><br><span class="line">            #<span class="number">10400</span>;</span><br><span class="line">            <span class="built_in">$dumpoff</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="demo">demo</h3>
-<p>stimulus.v</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns / 1ps</span></span><br><span class="line"><span class="keyword">module</span> stimulus;</span><br><span class="line">	<span class="comment">// Inputs</span></span><br><span class="line">	<span class="keyword">reg</span> x;</span><br><span class="line">	<span class="keyword">reg</span> y;</span><br><span class="line">	<span class="comment">// Outputs</span></span><br><span class="line">	<span class="keyword">wire</span> z;</span><br><span class="line">	<span class="comment">// Instantiate the Unit Under Test (UUT)</span></span><br><span class="line">	comparator uut (</span><br><span class="line">		<span class="variable">.x</span>(x),</span><br><span class="line">		<span class="variable">.y</span>(y),</span><br><span class="line">		<span class="variable">.z</span>(z)</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="built_in">$dumpfile</span>(<span class="string">&quot;test.vcd&quot;</span>);</span><br><span class="line">		<span class="built_in">$dumpvars</span>(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">// Initialize Inputs</span></span><br><span class="line">		x = <span class="number">0</span>;</span><br><span class="line">		y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		#<span class="number">20</span> x = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">20</span> y = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">20</span> y = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">20</span> x = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">40</span> ;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="built_in">$monitor</span>(<span class="string">&quot;t=%3d x=%d,y=%d,z=%d \n&quot;</span>,<span class="built_in">$time</span>,x,y,z, );</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>comparator.v</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> comparator(</span><br><span class="line">	<span class="keyword">input</span> x,</span><br><span class="line">	<span class="keyword">input</span> y,</span><br><span class="line">	<span class="keyword">output</span> z</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">assign</span> z = (~x &amp; ~y) |(x &amp; y);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ xrun stimulus.v comparator.v -access +rwc</span><br><span class="line">$ simvision test.vcd</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>$dumpvars and $dumpfile Verilog,
-http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -488,7 +226,7 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:13" itemprop="dateModified" datetime="2024-07-20T06:54:13+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -601,7 +339,7 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -723,7 +461,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -822,7 +560,7 @@ different pattern for even and odd error slicer</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -935,7 +673,7 @@ target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1177,7 +915,7 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1297,7 +1035,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1560,7 +1298,7 @@ target="_blank" rel="noopener" href="https://community.cadence.com/cadence_blogs
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1782,7 +1520,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 06:54:13" itemprop="dateModified" datetime="2024-07-20T06:54:13+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1813,6 +1551,146 @@ alt="image-20220514121048124" /></p>
 <strong>double-quotes</strong> to be protected from evaluation.</p>
 <p><img src="/2022/05/14/vpwlf-designvar/image-20220514121150988.png"
 alt="image-20220514121150988" /></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/13/emacs-verilog-mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/13/emacs-verilog-mode/" class="post-title-link" itemprop="url">verilog-mode.el</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-13 14:07:29" itemprop="dateCreated datePublished" datetime="2022-05-13T14:07:29+00:00">2022-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
+command</p>
+</blockquote>
+<h2 id="verilog-mode.el">verilog-mode.el</h2>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
+<blockquote>
+<p>For use with <code>--batch</code>, perform automatic expansions as a
+stand-alone tool. This sets up the appropriate Verilog mode environment,
+updates automatics with M-x verilog-auto on all command-line files, and
+saves the buffers. For proper results, multiple filenames need to be
+passed on the command line in bottom-up order.</p>
+</blockquote>
+<h3
+id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
+<blockquote>
+<p>Update automatics with M-x verilog-auto, save the buffer, and
+<em>compile</em></p>
+</blockquote>
+<h2 id="emacs">Emacs</h2>
+<h3 id="no-site-file"><code>--no-site-file</code></h3>
+<p>Another file for site-customization is <code>site-start.el</code>.
+Emacs loads this <em>before</em> the user's init file
+(<code>.emacs</code>, <code>.emacs.el</code> or
+<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
+file with the option <code>--no-site-file</code></p>
+<h3 id="batch"><code>--batch</code></h3>
+<p>The command-line option <code>--batch</code> causes Emacs to run
+noninteractively. The idea is that you specify Lisp programs to run;
+when they are finished, Emacs should exit.</p>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function;</p>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="f-func"><code>-f FUNC</code></h3>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function</p>
+<blockquote>
+<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
+</blockquote>
+<h2 id="multiple-directories">multiple directories</h2>
+<p><strong>AUTOINST</strong> only search in the file's directory
+default.</p>
+<p>You can append below <code>verilog-library-directories</code> for
+multiple directories search</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>Emacs Online Documentation <a
+target="_blank" rel="noopener" href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
+<p>Emacs verilog-mode 的使用 URL: <a
+target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
 
       
     </div>

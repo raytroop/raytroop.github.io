@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">170</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:13" itemprop="dateModified" datetime="2024-07-20T06:54:13+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,7 +285,9 @@ autocorrelation)</em></strong></p>
 alt="image-20240719230346944" /></p>
 <blockquote>
 <p><img src="/2024/07/18/wiener/image-20240719210621021.png"
-alt="image-20240719210621021" /></p>
+alt="image-20240719210621021" /><img
+src="/2024/07/18/wiener/image-20240720140527704.png"
+alt="image-20240720140527704" /></p>
 </blockquote>
 <h2 id="wiener-khinchin-theorem">Wiener-Khinchin theorem</h2>
 <blockquote>
@@ -447,7 +449,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -469,8 +471,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="narrowband-phase-modulation-pm">narrowband phase modulation
-(PM)</h2>
+          <h2 id="narrowband-approximation">narrowband approximation</h2>
 <p>A sine wave with phase modulation is expressed as <span
 class="math display">\[
 y(t) = A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t))
@@ -527,9 +528,10 @@ S_y(f) = \frac{1}{4}A_0^2 \delta (f-f_0) + \frac{1}{4}A_0\delta(f+f_0) +
 \frac{1}{4}A_0^2S_\phi (f-f_0)+\frac{1}{4}A_0^2S_\phi (f+f_0)
 \]</span> <img src="/2024/07/17/comm/image-20240511221119938.png"
 alt="image-20240511221119938" /></p>
-<blockquote>
-<p>limitation: <strong>Don't</strong> retain the same total power</p>
-</blockquote>
+<h3 id="approximation-limitation">approximation limitation</h3>
+<p><strong>Don't</strong> retain the same total power</p>
+<p><img src="/2024/07/17/comm/image-20240720101133749.png"
+alt="image-20240720101133749" /></p>
 <h2 id="leesons-model">Leeson’s model</h2>
 <p>Leeson's equation is an <em>empirical</em> expression that describes
 an oscillator's phase noise spectrum</p>
@@ -539,6 +541,13 @@ alt="image-20240718230819186" /></p>
 <p>​ that the PSD diverges to <em>infinity</em> for very low values of
 the frequency offset <span class="math inline">\(f\)</span>​</p>
 <h2 id="lorentzian-spectrum">Lorentzian Spectrum</h2>
+<blockquote>
+<p>phase noise spectrum is different from <strong>voltage
+spectrum</strong>, which is called <strong>Lorentzian
+spectrum</strong></p>
+<p><img src="/2024/07/17/comm/image-20240720134811859.png"
+alt="image-20240720134811859" /></p>
+</blockquote>
 <p>The spectrum of a free-running oscillator does indeed have a
 Lorentzian profile</p>
 <ul>
@@ -546,9 +555,42 @@ Lorentzian profile</p>
 off as <span class="math inline">\(1/f^2\)</span> above it</li>
 </ul>
 <p>The periodic signal <span class="math inline">\(x(t)\)</span> can be
-expanded in Fourier series as: <span class="math display">\[
-x(t) = \sum_{n=-\infty}^{+\infty}X_ne^{jn\omega_0 t}
-\]</span></p>
+expanded in Fourier series as:</p>
+<p><img src="/2024/07/17/comm/image-20240720141514040.png"
+alt="image-20240720141514040" /></p>
+<p>Assume that the signal is subject to excess phase noise, which is
+modeled by adding a time-dependent noise component <span
+class="math inline">\(\alpha(t)\)</span>. The noisy signal can be
+written <span class="math inline">\(x(t+\alpha(t))\)</span>, the added
+excess phase <span class="math inline">\(\phi(t)=
+\frac{\alpha(t)}{\omega_0}\)</span></p>
+<p>The autocorrelation of the noisy signal is by definition:</p>
+<p><img src="/2024/07/17/comm/image-20240720141525576.png"
+alt="image-20240720141525576" /></p>
+<p>The <em>autocorrelation averaged over time</em> results in:</p>
+<p><img src="/2024/07/17/comm/image-20240720141659415.png"
+alt="image-20240720141659415" /></p>
+<p>By taking the Fourier transform of the autocorrelation, the spectrum
+of the signal <span class="math inline">\(x(t + \alpha(t))\)</span>​ can
+be expressed as</p>
+<p><img src="/2024/07/17/comm/image-20240720141813256.png"
+alt="image-20240720141813256" /></p>
+<p>It is also interesting to note how the integral in Equation 9.80
+around each harmonic is equal to the power of the harmonic itself <span
+class="math inline">\(|X_n|^2\)</span></p>
+<p>The integral <span class="math inline">\(S_x(f)\)</span> around
+harmonic is <span class="math display">\[\begin{align}
+P_{x,n} &amp;= \int_{f=-\infty}^{\infty}
+|X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\omega_0^4n^4c^2+(\omega
++n\omega_0)^2}df \\
+&amp;= |X_n|^2\int_{\Delta
+f=-\infty}^{\infty}\frac{2\beta}{\beta^2+(2\pi\cdot\Delta f)^2}d\Delta f
+\\
+&amp;= |X_n|^2\frac{1}{\pi}\arctan(\frac{2\pi \Delta
+f}{\beta})|_{-\infty}^{\infty} \\
+&amp;= |X_n|^2
+\end{align}\]</span></p>
+<blockquote>
 <p>The phase noise does not affect the total power in the signal, it
 only affects its distribution.</p>
 <ul>
@@ -558,6 +600,7 @@ class="math inline">\(f_o\)</span>.</li>
 <li>With phase noise, the impulse functions spread, becoming fatter and
 shorter but retaining the <em>same total power</em></li>
 </ul>
+</blockquote>
 <h2 id="am-pm-conversion">AM-PM conversion</h2>
 <p><em>TODO</em> 📅</p>
 <h2 id="reference">reference</h2>
@@ -646,7 +689,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:13" itemprop="dateModified" datetime="2024-07-20T06:54:13+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -751,7 +794,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -877,7 +920,7 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -899,7 +942,16 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="ac-coupled-buffer">AC-coupled buffer</h2>
+          <h2 id="limit-cycle">limit cycle</h2>
+<p><em>TODO</em> 📅</p>
+<h2 id="false-locking">False locking</h2>
+<p><em>TODO</em> 📅</p>
+<ul>
+<li>divider failure</li>
+<li>even-stage ring oscillator ( multipath ring oscillators)</li>
+<li>DLL: harmonic locking, stuck locking</li>
+</ul>
+<h2 id="ac-coupled-buffer">AC-coupled buffer</h2>
 <p><img src="/2024/05/11/clocking/image-20240720073616597.png"
 alt="image-20240720073616597" /></p>
 <blockquote>
@@ -1088,7 +1140,7 @@ target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talk
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:13" itemprop="dateModified" datetime="2024-07-20T06:54:13+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1110,7 +1162,13 @@ target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talk
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="closed-loop-poles-versus-open-loop-gain">Closed Loop Poles
+          <h2 id="barkhausen-criteria">Barkhausen criteria</h2>
+<p>Barkhausen criteria are <em>necessary</em> but <strong>not sufficient
+conditions</strong> for sustainable <strong>oscillations</strong></p>
+<p><img src="/2024/05/02/ss-insight/image-20240720090654883.png"
+alt="image-20240720090654883" /></p>
+<p>it simply <em>"latches up"</em> rather than oscillates</p>
+<h2 id="closed-loop-poles-versus-open-loop-gain">Closed Loop Poles
 Versus Open Loop Gain</h2>
 <p><img src="/2024/05/02/ss-insight/image-20240712203230295.png"
 alt="image-20240712203230295" /></p>
@@ -1618,7 +1676,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1947,7 +2005,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:13" itemprop="dateModified" datetime="2024-07-20T06:54:13+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2032,7 +2090,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2224,7 +2282,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

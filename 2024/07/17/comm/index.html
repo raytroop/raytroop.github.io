@@ -18,17 +18,23 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="narrowband phase modulation (PM) A sine wave with phase modulation is expressed as \[ y(t) &#x3D; A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t)) \] where \(\phi (t)\) is a time-varying phase modulation function">
+    <meta name="description" content="narrowband approximation A sine wave with phase modulation is expressed as \[ y(t) &#x3D; A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t)) \] where \(\phi (t)\) is a time-varying phase modulation function Assuming">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Phase noise, Modulation &amp; Sampling">
 <meta property="og:url" content="http://example.com/2024/07/17/comm/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="narrowband phase modulation (PM) A sine wave with phase modulation is expressed as \[ y(t) &#x3D; A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t)) \] where \(\phi (t)\) is a time-varying phase modulation function">
+<meta property="og:description" content="narrowband approximation A sine wave with phase modulation is expressed as \[ y(t) &#x3D; A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t)) \] where \(\phi (t)\) is a time-varying phase modulation function Assuming">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2024/07/17/comm/image-20240511221119938.png">
+<meta property="og:image" content="http://example.com/2024/07/17/comm/image-20240720101133749.png">
 <meta property="og:image" content="http://example.com/2024/07/17/comm/image-20240718230819186.png">
+<meta property="og:image" content="http://example.com/2024/07/17/comm/image-20240720134811859.png">
+<meta property="og:image" content="http://example.com/2024/07/17/comm/image-20240720141514040.png">
+<meta property="og:image" content="http://example.com/2024/07/17/comm/image-20240720141525576.png">
+<meta property="og:image" content="http://example.com/2024/07/17/comm/image-20240720141659415.png">
+<meta property="og:image" content="http://example.com/2024/07/17/comm/image-20240720141813256.png">
 <meta property="article:published_time" content="2024-07-17T23:11:07.000Z">
-<meta property="article:modified_time" content="2024-07-19T23:37:59.123Z">
+<meta property="article:modified_time" content="2024-07-20T06:54:12.804Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/07/17/comm/image-20240511221119938.png">
@@ -140,8 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#narrowband-phase-modulation-pm"><span class="nav-number">1.</span> <span class="nav-text">narrowband phase modulation
-(PM)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leesons-model"><span class="nav-number">2.</span> <span class="nav-text">Leeson’s model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lorentzian-spectrum"><span class="nav-number">3.</span> <span class="nav-text">Lorentzian Spectrum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#am-pm-conversion"><span class="nav-number">4.</span> <span class="nav-text">AM-PM conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#narrowband-approximation"><span class="nav-number">1.</span> <span class="nav-text">narrowband approximation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#approximation-limitation"><span class="nav-number">1.1.</span> <span class="nav-text">approximation limitation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leesons-model"><span class="nav-number">2.</span> <span class="nav-text">Leeson’s model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lorentzian-spectrum"><span class="nav-number">3.</span> <span class="nav-text">Lorentzian Spectrum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#am-pm-conversion"><span class="nav-number">4.</span> <span class="nav-text">AM-PM conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -154,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">170</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -236,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-19 23:37:59" itemprop="dateModified" datetime="2024-07-19T23:37:59+00:00">2024-07-19</time>
+      <time title="Modified: 2024-07-20 06:54:12" itemprop="dateModified" datetime="2024-07-20T06:54:12+00:00">2024-07-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,8 +262,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="narrowband-phase-modulation-pm">narrowband phase modulation
-(PM)</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="narrowband-approximation">narrowband approximation</h2>
 <p>A sine wave with phase modulation is expressed as <span
 class="math display">\[
 y(t) = A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t))
@@ -315,9 +319,10 @@ S_y(f) = \frac{1}{4}A_0^2 \delta (f-f_0) + \frac{1}{4}A_0\delta(f+f_0) +
 \frac{1}{4}A_0^2S_\phi (f-f_0)+\frac{1}{4}A_0^2S_\phi (f+f_0)
 \]</span> <img src="/2024/07/17/comm/image-20240511221119938.png"
 alt="image-20240511221119938" /></p>
-<blockquote>
-<p>limitation: <strong>Don't</strong> retain the same total power</p>
-</blockquote>
+<h3 id="approximation-limitation">approximation limitation</h3>
+<p><strong>Don't</strong> retain the same total power</p>
+<p><img src="/2024/07/17/comm/image-20240720101133749.png"
+alt="image-20240720101133749" /></p>
 <h2 id="leesons-model">Leeson’s model</h2>
 <p>Leeson's equation is an <em>empirical</em> expression that describes
 an oscillator's phase noise spectrum</p>
@@ -327,6 +332,13 @@ alt="image-20240718230819186" /></p>
 <p>​ that the PSD diverges to <em>infinity</em> for very low values of
 the frequency offset <span class="math inline">\(f\)</span>​</p>
 <h2 id="lorentzian-spectrum">Lorentzian Spectrum</h2>
+<blockquote>
+<p>phase noise spectrum is different from <strong>voltage
+spectrum</strong>, which is called <strong>Lorentzian
+spectrum</strong></p>
+<p><img src="/2024/07/17/comm/image-20240720134811859.png"
+alt="image-20240720134811859" /></p>
+</blockquote>
 <p>The spectrum of a free-running oscillator does indeed have a
 Lorentzian profile</p>
 <ul>
@@ -334,9 +346,42 @@ Lorentzian profile</p>
 off as <span class="math inline">\(1/f^2\)</span> above it</li>
 </ul>
 <p>The periodic signal <span class="math inline">\(x(t)\)</span> can be
-expanded in Fourier series as: <span class="math display">\[
-x(t) = \sum_{n=-\infty}^{+\infty}X_ne^{jn\omega_0 t}
-\]</span></p>
+expanded in Fourier series as:</p>
+<p><img src="/2024/07/17/comm/image-20240720141514040.png"
+alt="image-20240720141514040" /></p>
+<p>Assume that the signal is subject to excess phase noise, which is
+modeled by adding a time-dependent noise component <span
+class="math inline">\(\alpha(t)\)</span>. The noisy signal can be
+written <span class="math inline">\(x(t+\alpha(t))\)</span>, the added
+excess phase <span class="math inline">\(\phi(t)=
+\frac{\alpha(t)}{\omega_0}\)</span></p>
+<p>The autocorrelation of the noisy signal is by definition:</p>
+<p><img src="/2024/07/17/comm/image-20240720141525576.png"
+alt="image-20240720141525576" /></p>
+<p>The <em>autocorrelation averaged over time</em> results in:</p>
+<p><img src="/2024/07/17/comm/image-20240720141659415.png"
+alt="image-20240720141659415" /></p>
+<p>By taking the Fourier transform of the autocorrelation, the spectrum
+of the signal <span class="math inline">\(x(t + \alpha(t))\)</span>​ can
+be expressed as</p>
+<p><img src="/2024/07/17/comm/image-20240720141813256.png"
+alt="image-20240720141813256" /></p>
+<p>It is also interesting to note how the integral in Equation 9.80
+around each harmonic is equal to the power of the harmonic itself <span
+class="math inline">\(|X_n|^2\)</span></p>
+<p>The integral <span class="math inline">\(S_x(f)\)</span> around
+harmonic is <span class="math display">\[\begin{align}
+P_{x,n} &amp;= \int_{f=-\infty}^{\infty}
+|X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\omega_0^4n^4c^2+(\omega
++n\omega_0)^2}df \\
+&amp;= |X_n|^2\int_{\Delta
+f=-\infty}^{\infty}\frac{2\beta}{\beta^2+(2\pi\cdot\Delta f)^2}d\Delta f
+\\
+&amp;= |X_n|^2\frac{1}{\pi}\arctan(\frac{2\pi \Delta
+f}{\beta})|_{-\infty}^{\infty} \\
+&amp;= |X_n|^2
+\end{align}\]</span></p>
+<blockquote>
 <p>The phase noise does not affect the total power in the signal, it
 only affects its distribution.</p>
 <ul>
@@ -346,6 +391,7 @@ class="math inline">\(f_o\)</span>.</li>
 <li>With phase noise, the impulse functions spread, becoming fatter and
 shorter but retaining the <em>same total power</em></li>
 </ul>
+</blockquote>
 <h2 id="am-pm-conversion">AM-PM conversion</h2>
 <p><em>TODO</em> 📅</p>
 <h2 id="reference">reference</h2>

@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:37" itemprop="dateModified" datetime="2024-07-21T02:57:37+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -449,7 +449,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:36" itemprop="dateModified" datetime="2024-07-21T02:57:36+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -728,7 +728,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:37" itemprop="dateModified" datetime="2024-07-21T02:57:37+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -833,7 +833,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:37" itemprop="dateModified" datetime="2024-07-21T02:57:37+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -959,7 +959,7 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:36" itemprop="dateModified" datetime="2024-07-21T02:57:36+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1117,6 +1117,41 @@ target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.pape
 bang-bang CDR design methodology, ISSCC Short Course, February 2002. [<a
 target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf">slides</a>]</p>
 </blockquote>
+<h2 id="pll-bandwidth-test">PLL bandwidth test</h2>
+<p>A <em>step response test</em> is an easy way to determine the
+bandwidth.</p>
+<p><em>Sum a small step into the control voltage</em> of your oscillator
+(VCO or NCO), and measure the <em>90% to 10%</em> fall time of the
+corrected response at the output of the loop filter as shown in this
+block diagram</p>
+<p><img src="/2024/05/11/clocking/loVQR.png"
+alt="PLL Step Response Test" /></p>
+<p>a first order loop <span class="math display">\[
+BW = \frac{0.35}{t} \space\space\space\space \text{(first order system)}
+\]</span> Where <span class="math inline">\(BW\)</span> is the 3 dB
+bandwidth in Hz and <span class="math inline">\(𝑡\)</span>​ is the
+10%/90% rise or fall time.</p>
+<p>For second order loops with a typical damping factor of <em>0.7</em>
+this relationship is closer to: <span class="math display">\[
+BW = \frac{0.33}{t}\space\space\space\space \text{(second order system,
+damping factor = 0.7)}
+\]</span></p>
+<blockquote>
+<p>[How can I experimentally find the bandwidth of my PLL?, <a
+target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/73654/59253">https://dsp.stackexchange.com/a/73654/59253</a>]</p>
+</blockquote>
+<hr />
+<p><img src="/2024/05/11/clocking/loop-refactor.drawio.svg"
+alt="loop-refactor.drawio" /></p>
+<p>The closed loop transfer function of <span
+class="math inline">\(Y/X\)</span> and <span
+class="math inline">\(Y_1/X_1\)</span> are almost same, except sign</p>
+<p><span class="math display">\[\begin{align}
+\frac{Y}{X} &amp;= +\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)} \\
+\frac{Y_1}{X_1} &amp;= -\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
+\end{align}\]</span></p>
+<p><img src="/2024/05/11/clocking/loop-refactor-partion.drawio.svg"
+alt="loop-refactor-partion.drawio" /></p>
 
       
     </div>
@@ -1179,7 +1214,7 @@ target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talk
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:37" itemprop="dateModified" datetime="2024-07-21T02:57:37+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1219,7 +1254,7 @@ target="_blank" rel="noopener" href="https://www.cppsim.com/CommCircuitLectures/
 Perrott, High Speed Communication Circuits and Systems, Lecture 15
 Integer-N Frequency Synthesizers</a>]</p>
 </blockquote>
-<h2 id="complex-conjugate-pair-poles">Complex conjugate pair poles</h2>
+<h2 id="complex-conjugate-pair-poles">complex conjugate pair poles</h2>
 <p><img src="/2024/05/02/ss-insight/image-20240629134127219.png"
 alt="image-20240629134127219" /> <span
 class="math display">\[\begin{align}
@@ -1250,6 +1285,25 @@ alt="image-20240629142324982" /></p>
 <hr />
 <p><img src="/2024/05/02/ss-insight/image-20240629140001275.png"
 alt="image-20240629140001275" /></p>
+<h2 id="damping-factor-phase-margin">damping factor &amp; phase
+margin</h2>
+<ul>
+<li><p>phase margin is defined for <em>open loop</em> system</p></li>
+<li><p>damping factor (<span class="math inline">\(\zeta\)</span>) is
+defined for <em>close loop</em> system</p></li>
+</ul>
+<p>The roughly 90 to 100 times of damping factor (<span
+class="math inline">\(\zeta\)</span>​) is phase margin <span
+class="math display">\[
+\mathrm{PM} = 90\zeta \sim 100\zeta
+\]</span> In order to have a good stable system, we want <span
+class="math inline">\(\zeta &gt; 0.5\)</span> or phase margin more than
+<span class="math inline">\(45^o\)</span></p>
+<p>We can analyze open loop system in a better perspective because it is
+simpler. So, we always use the loop gain analysis to find the phase
+margin and see whether the system is stable or not.</p>
+<h2 id="settling-time">settling time</h2>
+<p><em>TODO</em> 📅</p>
 <h2 id="nrz-bandwidth">NRZ Bandwidth</h2>
 <p><img src="/2024/05/02/ss-insight/image-20240607221359970.png"
 alt="image-20240607221359970" /></p>
@@ -1715,7 +1769,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:37" itemprop="dateModified" datetime="2024-07-21T02:57:37+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2044,7 +2098,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:13" itemprop="dateModified" datetime="2024-07-20T07:16:13+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:37" itemprop="dateModified" datetime="2024-07-21T02:57:37+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2129,7 +2183,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:36" itemprop="dateModified" datetime="2024-07-21T02:57:36+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2321,7 +2375,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:36" itemprop="dateModified" datetime="2024-07-21T02:57:36+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

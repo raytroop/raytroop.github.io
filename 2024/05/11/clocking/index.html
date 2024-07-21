@@ -30,8 +30,11 @@
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/rtaImage-1720945161770-5.png">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/rtaImage.png">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/bb-PDF.drawio.svg">
+<meta property="og:image" content="http://example.com/2024/05/11/clocking/loVQR.png">
+<meta property="og:image" content="http://example.com/2024/05/11/clocking/loop-refactor.drawio.svg">
+<meta property="og:image" content="http://example.com/2024/05/11/clocking/loop-refactor-partion.drawio.svg">
 <meta property="article:published_time" content="2024-05-11T09:36:14.000Z">
-<meta property="article:modified_time" content="2024-07-20T07:16:12.896Z">
+<meta property="article:modified_time" content="2024-07-21T02:57:36.832Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/05/11/clocking/image-20240720073616597.png">
@@ -144,7 +147,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#limit-cycle"><span class="nav-number">1.</span> <span class="nav-text">limit cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#false-locking"><span class="nav-number">2.</span> <span class="nav-text">False locking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac-coupled-buffer"><span class="nav-number">3.</span> <span class="nav-text">AC-coupled buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-division-with-jitter-and-phase-noise"><span class="nav-number">4.</span> <span class="nav-text">Clock Division with
-Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-20logn-rule"><span class="nav-number">4.1.</span> <span class="nav-text">The 20log(N) Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-about-phase-jitter"><span class="nav-number">4.2.</span> <span class="nav-text">What About Phase Jitter?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bang-bang-phase-detector"><span class="nav-number">5.</span> <span class="nav-text">Bang-Bang Phase Detector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linearing-bb-pd"><span class="nav-number">5.1.</span> <span class="nav-text">Linearing BB-PD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-noise-term"><span class="nav-number">5.2.</span> <span class="nav-text">Self-Noise Term</span></a></li></ol></li></ol></div>
+Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-20logn-rule"><span class="nav-number">4.1.</span> <span class="nav-text">The 20log(N) Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-about-phase-jitter"><span class="nav-number">4.2.</span> <span class="nav-text">What About Phase Jitter?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bang-bang-phase-detector"><span class="nav-number">5.</span> <span class="nav-text">Bang-Bang Phase Detector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linearing-bb-pd"><span class="nav-number">5.1.</span> <span class="nav-text">Linearing BB-PD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-noise-term"><span class="nav-number">5.2.</span> <span class="nav-text">Self-Noise Term</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pll-bandwidth-test"><span class="nav-number">6.</span> <span class="nav-text">PLL bandwidth test</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -239,7 +242,7 @@ Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-20 07:16:12" itemprop="dateModified" datetime="2024-07-20T07:16:12+00:00">2024-07-20</time>
+      <time title="Modified: 2024-07-21 02:57:36" itemprop="dateModified" datetime="2024-07-21T02:57:36+00:00">2024-07-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -396,6 +399,41 @@ target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.pape
 bang-bang CDR design methodology, ISSCC Short Course, February 2002. [<a
 target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf">slides</a>]</p>
 </blockquote>
+<h2 id="pll-bandwidth-test">PLL bandwidth test</h2>
+<p>A <em>step response test</em> is an easy way to determine the
+bandwidth.</p>
+<p><em>Sum a small step into the control voltage</em> of your oscillator
+(VCO or NCO), and measure the <em>90% to 10%</em> fall time of the
+corrected response at the output of the loop filter as shown in this
+block diagram</p>
+<p><img src="/2024/05/11/clocking/loVQR.png"
+alt="PLL Step Response Test" /></p>
+<p>a first order loop <span class="math display">\[
+BW = \frac{0.35}{t} \space\space\space\space \text{(first order system)}
+\]</span> Where <span class="math inline">\(BW\)</span> is the 3 dB
+bandwidth in Hz and <span class="math inline">\(𝑡\)</span>​ is the
+10%/90% rise or fall time.</p>
+<p>For second order loops with a typical damping factor of <em>0.7</em>
+this relationship is closer to: <span class="math display">\[
+BW = \frac{0.33}{t}\space\space\space\space \text{(second order system,
+damping factor = 0.7)}
+\]</span></p>
+<blockquote>
+<p>[How can I experimentally find the bandwidth of my PLL?, <a
+target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/73654/59253">https://dsp.stackexchange.com/a/73654/59253</a>]</p>
+</blockquote>
+<hr />
+<p><img src="/2024/05/11/clocking/loop-refactor.drawio.svg"
+alt="loop-refactor.drawio" /></p>
+<p>The closed loop transfer function of <span
+class="math inline">\(Y/X\)</span> and <span
+class="math inline">\(Y_1/X_1\)</span> are almost same, except sign</p>
+<p><span class="math display">\[\begin{align}
+\frac{Y}{X} &amp;= +\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)} \\
+\frac{Y_1}{X_1} &amp;= -\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
+\end{align}\]</span></p>
+<p><img src="/2024/05/11/clocking/loop-refactor-partion.drawio.svg"
+alt="loop-refactor-partion.drawio" /></p>
 
     </div>
 

@@ -971,38 +971,6 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSX
       </tags>
   </entry>
   <entry>
-    <title>OCV Derating With AOCV</title>
-    <url>/2022/12/10/OCVDeratingWithAOCV/</url>
-    <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">timing_aocv_derate_mode&#123;aocv_multiplicative | aocv_additive&#125;</span><br></pre></td></tr></table></figure>
-<p><em>Default:</em> <code>aocv_multiplicative</code></p>
-<p>Controls the AOCV derating mode.</p>
-<p>When set to <code>aocv_multiplicative</code>, the derating factor
-will be calculated as AOCV derating * OCV derating, which is set using
-the <code>set_timing_derate</code> command.</p>
-<p>When set to <code>aocv_additive</code>, the derating factor will be
-calculated as AOCV derating + OCV derating values.</p>
-<p>When you use this global variable, the <code>report_timing</code>
-command shows the <code>total_derate</code> column in the timing report
-output, which allows you to view and cross-check the calculated total
-derate factor.</p>
-<p>To set this global variable, use the <code>set_global</code>
-command.</p>
-<p><img
-src="/2022/12/10/OCVDeratingWithAOCV/image-20221210143256639.png"
-alt="image-20221210143256639" /></p>
-<h3 id="reference">reference</h3>
-<p>Genus Attribute Reference 22.1</p>
-<p>Innovus Text Command Reference 22.10</p>
-<p>Article (20416394) Title: Analysis with Advanced On-chip Variation
-(AOCV) derating in EDI system and ETS URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Overflow Detection in Verilog</title>
     <url>/2022/05/07/Overflowflag-verilog/</url>
     <content><![CDATA[<ul>
@@ -1094,6 +1062,38 @@ A_- &amp;= A_{flip}+1 \\
 <h2 id="reference">reference</h2>
 <p>Overflow Detection: <a
 href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>OCV Derating With AOCV</title>
+    <url>/2022/12/10/OCVDeratingWithAOCV/</url>
+    <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">timing_aocv_derate_mode&#123;aocv_multiplicative | aocv_additive&#125;</span><br></pre></td></tr></table></figure>
+<p><em>Default:</em> <code>aocv_multiplicative</code></p>
+<p>Controls the AOCV derating mode.</p>
+<p>When set to <code>aocv_multiplicative</code>, the derating factor
+will be calculated as AOCV derating * OCV derating, which is set using
+the <code>set_timing_derate</code> command.</p>
+<p>When set to <code>aocv_additive</code>, the derating factor will be
+calculated as AOCV derating + OCV derating values.</p>
+<p>When you use this global variable, the <code>report_timing</code>
+command shows the <code>total_derate</code> column in the timing report
+output, which allows you to view and cross-check the calculated total
+derate factor.</p>
+<p>To set this global variable, use the <code>set_global</code>
+command.</p>
+<p><img
+src="/2022/12/10/OCVDeratingWithAOCV/image-20221210143256639.png"
+alt="image-20221210143256639" /></p>
+<h3 id="reference">reference</h3>
+<p>Genus Attribute Reference 22.1</p>
+<p>Innovus Text Command Reference 22.10</p>
+<p>Article (20416394) Title: Analysis with Advanced On-chip Variation
+(AOCV) derating in EDI system and ETS URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -1867,122 +1867,6 @@ Revision 7</p>
       </tags>
   </entry>
   <entry>
-    <title>Ahuja Frequency Compensation</title>
-    <url>/2024/01/16/ahuja/</url>
-    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
-known as <strong>Ahuja compensation</strong></p>
-<p>The cause of the positive zero is the <em>feedforward current through
-<span class="math inline">\(C_m\)</span></em>.</p>
-<p>To abolish this zero, we have to cut the feedforward path and create
-a unidirectional feedback through <span
-class="math inline">\(C_m\)</span>.</p>
-<ol type="1">
-<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
-effect of the feedforward current.</p></li>
-<li><p>Another approach uses a current buffer cascode to pass the
-small-signal feedback current but cut the feedforward current</p></li>
-</ol>
-<blockquote>
-<p>People name this approach after the author <em>Ahuja</em></p>
-</blockquote>
-<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
-are severa</p>
-<ul>
-<li><p>better PSRR</p></li>
-<li><p>higher unity-gain bandwidth using smaller compensation
-capacitor</p></li>
-<li><p>ability to cope better with heavy capacitive and resistive
-loads</p></li>
-</ul>
-<blockquote>
-
-</blockquote>
-<h2 id="millers-approximation">Miller's approximation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
-alt="image-20240130224043511" /></p>
-<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span> Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{C_c}\)</span></p>
-<h3 id="equivalent-cap">Equivalent cap</h3>
-<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
-R_o\)</span> <span class="math display">\[
-I_\text{c,in} = (v_i - v_o)sC_c
-\]</span> Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
-&amp; = v_i s (1+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
-A_vC_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
-&amp; = v_o s (1+\frac{1}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}=
-(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="ahuja-compensation">Ahuja compensation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130233532624.png"
-alt="image-20240130233532624" /></p>
-<h3 id="right-half-plane-zero-1">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span></p>
-<p>where <span class="math inline">\(v_m = \alpha v_i\)</span> and <span
-class="math inline">\(\alpha \ll 1\)</span></p>
-<p>Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}\)</span></p>
-<blockquote>
-<p>Ahuja compensation push right-half-plane Zero to higher frequency</p>
-</blockquote>
-<h3 id="equivalent-cap-1">Equivalent cap</h3>
-<p>Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (\alpha v_i + A_v v_i)sC_c \\
-&amp; = v_i s (\alpha+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}=
-(\alpha+A_v)C_c\simeq A_v C_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - \alpha v_i)sC_c \\
-&amp; = v_o s (1+\frac{\alpha}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}= (1+\frac{\alpha
-}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="reference">reference</h2>
-<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
-Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
-pp. 629-633, Dec. 1983.</p>
-<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
-IEEE International Symposium on Radio-Frequency Integration Technology,
-2009.</p>
-<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
-CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
-594, May 1995.</p>
-<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
-op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
-Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
-10.1109/MWSCAS.2011.6026315.</p>
-<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
-Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
-International Conference on Electronics, Circuits and Systems, 2006, pp.
-264-267, doi: 10.1109/ICECS.2006.379776.</p>
-<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
-compensation over Miller compensation in two-stage operational
-amplifiers," Proceeding of the 13th international symposium on Low power
-electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
-283-288, doi: 10.1145/1393921.1393995.</p>
-<p>Stabilizing a 2-Stage Amplifier URL:<a
-href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Device Aging</title>
     <url>/2022/12/11/aging/</url>
     <content><![CDATA[<p><img src="/2022/12/11/aging/image-20231106232135180.png"
@@ -2277,6 +2161,122 @@ in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
       </categories>
   </entry>
   <entry>
+    <title>Ahuja Frequency Compensation</title>
+    <url>/2024/01/16/ahuja/</url>
+    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
+known as <strong>Ahuja compensation</strong></p>
+<p>The cause of the positive zero is the <em>feedforward current through
+<span class="math inline">\(C_m\)</span></em>.</p>
+<p>To abolish this zero, we have to cut the feedforward path and create
+a unidirectional feedback through <span
+class="math inline">\(C_m\)</span>.</p>
+<ol type="1">
+<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
+effect of the feedforward current.</p></li>
+<li><p>Another approach uses a current buffer cascode to pass the
+small-signal feedback current but cut the feedforward current</p></li>
+</ol>
+<blockquote>
+<p>People name this approach after the author <em>Ahuja</em></p>
+</blockquote>
+<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
+are severa</p>
+<ul>
+<li><p>better PSRR</p></li>
+<li><p>higher unity-gain bandwidth using smaller compensation
+capacitor</p></li>
+<li><p>ability to cope better with heavy capacitive and resistive
+loads</p></li>
+</ul>
+<blockquote>
+
+</blockquote>
+<h2 id="millers-approximation">Miller's approximation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
+alt="image-20240130224043511" /></p>
+<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
+\]</span> Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{C_c}\)</span></p>
+<h3 id="equivalent-cap">Equivalent cap</h3>
+<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
+R_o\)</span> <span class="math display">\[
+I_\text{c,in} = (v_i - v_o)sC_c
+\]</span> Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
+&amp; = v_i s (1+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
+A_vC_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
+&amp; = v_o s (1+\frac{1}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}=
+(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="ahuja-compensation">Ahuja compensation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130233532624.png"
+alt="image-20240130233532624" /></p>
+<h3 id="right-half-plane-zero-1">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
+\]</span></p>
+<p>where <span class="math inline">\(v_m = \alpha v_i\)</span> and <span
+class="math inline">\(\alpha \ll 1\)</span></p>
+<p>Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}\)</span></p>
+<blockquote>
+<p>Ahuja compensation push right-half-plane Zero to higher frequency</p>
+</blockquote>
+<h3 id="equivalent-cap-1">Equivalent cap</h3>
+<p>Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (\alpha v_i + A_v v_i)sC_c \\
+&amp; = v_i s (\alpha+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}=
+(\alpha+A_v)C_c\simeq A_v C_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - \alpha v_i)sC_c \\
+&amp; = v_o s (1+\frac{\alpha}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}= (1+\frac{\alpha
+}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="reference">reference</h2>
+<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
+Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
+pp. 629-633, Dec. 1983.</p>
+<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
+IEEE International Symposium on Radio-Frequency Integration Technology,
+2009.</p>
+<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
+CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
+594, May 1995.</p>
+<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
+op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
+Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
+10.1109/MWSCAS.2011.6026315.</p>
+<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
+Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
+International Conference on Electronics, Circuits and Systems, 2006, pp.
+264-267, doi: 10.1109/ICECS.2006.379776.</p>
+<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
+compensation over Miller compensation in two-stage operational
+amplifiers," Proceeding of the 13th international symposium on Low power
+electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
+283-288, doi: 10.1145/1393921.1393995.</p>
+<p>Stabilizing a 2-Stage Amplifier URL:<a
+href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Antenna Effect</title>
     <url>/2023/08/08/antenna/</url>
     <content><![CDATA[<p>The <strong>antenna effect</strong> is a common name for the effects
@@ -2395,41 +2395,6 @@ href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">
       </categories>
   </entry>
   <entry>
-    <title>Calibre Runsets</title>
-    <url>/2023/08/10/calibreRunsets/</url>
-    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
-runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
-<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
-respectively.</p>
-<p>When invoked, the Calibre DRC and LVS windows automatically load the
-runset used when the last session was closed.</p>
-<blockquote>
-<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
-run. They contain only information that differs from the default
-configuration of Calibre Interactive. There is a one-to-one
-correspondence between entry lines in the runset file and fields and
-button items in the Calibre Interactive user interface. Here is as
-example of a DRC runset:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
-</blockquote>
-<hr />
-<p>The runset filename opened at startup (if no runset is specified on
-the command line) can also be specified by setting the
-<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
-and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
-for LVS. If these environment variables are set, they take precedence
-over all other runset opening behavior options.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>tsmc_template. <a
-href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
-<p>Calibre Verification User’s Manual</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>How to obtain channel bandwidth from pulse response</title>
     <url>/2022/05/20/bw-from-pulse-resp/</url>
     <content><![CDATA[<p>Convolution Property of the Fourier Transform <span
@@ -2471,6 +2436,41 @@ FFT</a></p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Calibre Runsets</title>
+    <url>/2023/08/10/calibreRunsets/</url>
+    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
+runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
+<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
+respectively.</p>
+<p>When invoked, the Calibre DRC and LVS windows automatically load the
+runset used when the last session was closed.</p>
+<blockquote>
+<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
+run. They contain only information that differs from the default
+configuration of Calibre Interactive. There is a one-to-one
+correspondence between entry lines in the runset file and fields and
+button items in the Calibre Interactive user interface. Here is as
+example of a DRC runset:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr />
+<p>The runset filename opened at startup (if no runset is specified on
+the command line) can also be specified by setting the
+<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
+and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
+for LVS. If these environment variables are set, they take precedence
+over all other runset opening behavior options.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>tsmc_template. <a
+href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
+<p>Calibre Verification User’s Manual</p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -2763,6 +2763,41 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
       </categories>
   </entry>
   <entry>
+    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
+    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
+    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
+It determines which edges to be used as follows:</p>
+<ol type="1">
+<li><p>Evaluate waveforms over the smallest common base period</p></li>
+<li><p>For each capture edge, find the closest setup launch edge. Call
+these the <strong>primary pairs</strong></p></li>
+<li><p>Out of the <strong>primary pairs</strong>, pick the most
+restrictive setup launch and capture edges.</p></li>
+<li><p>For each <strong>primary pair</strong>, draw two hold
+relationships:</p>
+<ul>
+<li><p>Launch to (capture - 1)</p></li>
+<li><p>(Launch + 1) to Capture</p>
+<p>From all of these hold relationships, pick the most
+restrictive.</p></li>
+</ul></li>
+</ol>
+<p>PrimeTime uses the ideal clock waveform (as reported in
+<code>report_clock</code>) to determine the appropriate clock edges for
+inter-clock analysis.</p>
+<p><img
+src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
+alt="image-20220301203135490" /></p>
+<blockquote>
+<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
+<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Clock Gating</title>
     <url>/2023/04/05/clockgating/</url>
     <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
@@ -2800,41 +2835,6 @@ alt="clock gating" /></p>
 <h3 id="reference">reference</h3>
 <p>The Ultimate Guide to Clock Gating <a
 href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
-    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
-    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
-It determines which edges to be used as follows:</p>
-<ol type="1">
-<li><p>Evaluate waveforms over the smallest common base period</p></li>
-<li><p>For each capture edge, find the closest setup launch edge. Call
-these the <strong>primary pairs</strong></p></li>
-<li><p>Out of the <strong>primary pairs</strong>, pick the most
-restrictive setup launch and capture edges.</p></li>
-<li><p>For each <strong>primary pair</strong>, draw two hold
-relationships:</p>
-<ul>
-<li><p>Launch to (capture - 1)</p></li>
-<li><p>(Launch + 1) to Capture</p>
-<p>From all of these hold relationships, pick the most
-restrictive.</p></li>
-</ul></li>
-</ol>
-<p>PrimeTime uses the ideal clock waveform (as reported in
-<code>report_clock</code>) to determine the appropriate clock edges for
-inter-clock analysis.</p>
-<p><img
-src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
-alt="image-20220301203135490" /></p>
-<blockquote>
-<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
-<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -2979,6 +2979,41 @@ href="https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf">pdf</a>]</p>
 bang-bang CDR design methodology, ISSCC Short Course, February 2002. [<a
 href="https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf">slides</a>]</p>
 </blockquote>
+<h2 id="pll-bandwidth-test">PLL bandwidth test</h2>
+<p>A <em>step response test</em> is an easy way to determine the
+bandwidth.</p>
+<p><em>Sum a small step into the control voltage</em> of your oscillator
+(VCO or NCO), and measure the <em>90% to 10%</em> fall time of the
+corrected response at the output of the loop filter as shown in this
+block diagram</p>
+<p><img src="/2024/05/11/clocking/loVQR.png"
+alt="PLL Step Response Test" /></p>
+<p>a first order loop <span class="math display">\[
+BW = \frac{0.35}{t} \space\space\space\space \text{(first order system)}
+\]</span> Where <span class="math inline">\(BW\)</span> is the 3 dB
+bandwidth in Hz and <span class="math inline">\(𝑡\)</span>​ is the
+10%/90% rise or fall time.</p>
+<p>For second order loops with a typical damping factor of <em>0.7</em>
+this relationship is closer to: <span class="math display">\[
+BW = \frac{0.33}{t}\space\space\space\space \text{(second order system,
+damping factor = 0.7)}
+\]</span></p>
+<blockquote>
+<p>[How can I experimentally find the bandwidth of my PLL?, <a
+href="https://dsp.stackexchange.com/a/73654/59253">https://dsp.stackexchange.com/a/73654/59253</a>]</p>
+</blockquote>
+<hr />
+<p><img src="/2024/05/11/clocking/loop-refactor.drawio.svg"
+alt="loop-refactor.drawio" /></p>
+<p>The closed loop transfer function of <span
+class="math inline">\(Y/X\)</span> and <span
+class="math inline">\(Y_1/X_1\)</span> are almost same, except sign</p>
+<p><span class="math display">\[\begin{align}
+\frac{Y}{X} &amp;= +\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)} \\
+\frac{Y_1}{X_1} &amp;= -\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
+\end{align}\]</span></p>
+<p><img src="/2024/05/11/clocking/loop-refactor-partion.drawio.svg"
+alt="loop-refactor-partion.drawio" /></p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -3022,15 +3057,6 @@ virtual clock is propagated.</p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Complete Response used in single-pole filter model in systemverilog</title>
-    <url>/2022/02/13/completeResponse/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -3237,31 +3263,12 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
       </categories>
   </entry>
   <entry>
-    <title>complex uvm project topology</title>
-    <url>/2022/03/28/complex-uvm-topo/</url>
-    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
-alt="topo.drawio" /></p>
-<h2 id="compile">compile</h2>
-<ul>
-<li><code>-incdir</code> for all UVC's `<code>include</code></li>
-<li>all pkg.sv</li>
-<li>all if.sv</li>
-<li>all RTL DUT</li>
-<li>uvm top module</li>
-</ul>
-<h2 id="uvm-top.sv">uvm top.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
-<h2 id="rtl-top">RTL top</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="pkg.sv">pkg.sv</h2>
-<p>`<code>include</code> all related uvm class in
-<strong>pgk.sv</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
-<h2 id="if.sv">if.sv</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
+    <title>Complete Response used in single-pole filter model in systemverilog</title>
+    <url>/2022/02/13/completeResponse/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
-        <category>digital</category>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -3289,156 +3296,31 @@ alt="topo.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Data Converter Evaluation</title>
-    <url>/2023/03/29/dataconverter-test/</url>
-    <content><![CDATA[<h2 id="term-abbreviation">Term Abbreviation</h2>
-<p>SNR: signal-to-noise ratio</p>
-<p>SINAD: signal to noise and distortion</p>
-<p>ENOB: effective number of bits</p>
-<p>THD: total harmonic distortion</p>
-<p>SFDR: spurious-free dynamic range</p>
-<p>TTIMD: two-tone intermodulation distortion</p>
-<p>MTIMD: multi-tone intermodulation distortion</p>
-<p>VSWR: voltage standing-wave ratio</p>
-<h2 id="coherent-sampling">Coherent Sampling</h2>
-<p>To avoid <strong>spectral leakage</strong> completely, the method of
-<strong>coherent sampling</strong> is recommended. Coherent sampling
-requires that the input- and clock-frequency generators are
-<strong>phase locked</strong>, and that the input frequency be chosen
-based on the following relationship: <span class="math display">\[
-\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
-\]</span></p>
-<p>where:</p>
+    <title>complex uvm project topology</title>
+    <url>/2022/03/28/complex-uvm-topo/</url>
+    <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
+alt="topo.drawio" /></p>
+<h2 id="compile">compile</h2>
 <ul>
-<li><span class="math inline">\(f_{\text{in}}\)</span> = the desired
-input frequency</li>
-<li><span class="math inline">\(f_s\)</span> = the clock frequency of
-the data converter under test</li>
-<li><span class="math inline">\(M_C\)</span> = the number of cycles in
-the data window (to make all samples unique, choose odd or prime
-numbers)</li>
-<li><span class="math inline">\(N_R\)</span> = the data record length
-(for an 8192-point FFT, the data record is 8192s long)</li>
+<li><code>-incdir</code> for all UVC's `<code>include</code></li>
+<li>all pkg.sv</li>
+<li>all if.sv</li>
+<li>all RTL DUT</li>
+<li>uvm top module</li>
 </ul>
-<p><span class="math display">\[\begin{align}
-f_{\text{in}} &amp;=\frac{f_s}{N_R}\cdot M_C \\
-&amp;= f_{\text{res}}\cdot M_C
-\end{align}\]</span></p>
-<h3 id="irreducible-ratio">irreducible ratio</h3>
-<p>An <strong>irreducible ratio</strong> ensures identical code
-sequences not to be repeated multiple times. Unnecessary repetition of
-the same code is not desirable as it increases ADC test time.</p>
-<blockquote>
-<p>Given that <span class="math inline">\(\frac{M_C}{N_R}\)</span> is
-irreducible, and <span class="math inline">\(N_R\)</span> is a power of
-2, an <strong>odd number</strong> for <span
-class="math inline">\(M_C\)</span> will always produce an
-<strong>irreducible ratio</strong></p>
-</blockquote>
-<p>Assuming there is a common factor <span
-class="math inline">\(k\)</span> between <span
-class="math inline">\(M_C\)</span> and <span
-class="math inline">\(N_R\)</span>, i.e. <span
-class="math inline">\(\frac{M_C}{N_R}=\frac{k M_C&#39;}{k
-N_R&#39;}\)</span></p>
-<p>The samples (<span class="math inline">\(n\in[1, N_R]\)</span>)</p>
-<p><span class="math display">\[\begin{align}
-y[n] &amp;= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
-&amp;= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
-&amp; = \sin\left( \omega_{\text{in}} \cdot
-n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
-&amp; = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
-\end{align}\]</span></p>
-<p>Then</p>
-<p><span class="math display">\[\begin{align}
-y[n+N_R&#39;] &amp;= \sin\left( 2\pi (n+N_R&#39;)\frac{M_C}{N_R} \right)
-\\
-&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
-N_R&#39;\frac{M_C}{N_R}\right) \\
-&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
-N_R&#39;\frac{kM_C&#39;}{kN_R&#39;} \right) \\
-&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C&#39; \right) \\
-&amp; = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
-\end{align}\]</span></p>
-<p>So, the samples is repeated <span class="math inline">\(y[n] =
-y[n+N_R&#39;]\)</span>. Usually, no additional information is gained by
-repeating with the same sampling points.</p>
-<h3 id="general-simulation-setup">General Simulation Setup</h3>
-<p><span class="math display">\[
-N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}
-\]</span> where <span class="math inline">\(F_s\)</span> is sample
-frequency, <span class="math inline">\(F_{in}\)</span> input signal
-frequency.</p>
-<p>And <span class="math inline">\(N\)</span> often is 256, 512; M is 3,
-5, 7, 11.</p>
-<h2 id="reference">reference</h2>
-<p>everynanocounts. Memos on FFT With Windowing. URL: <a
-href="https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/">https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/</a></p>
-<p>How to choose FFT depth for ADC performance analysis (SINAD, ENOB).
-URL:<a
-href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a></p>
-<p>Computation of Effective Number of Bits, Signal to Noise Ratio, &amp;
-Signal to Noise &amp; Distortion Ratio Using FFT. URL:<a
-href="https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf">https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf</a></p>
-<p>Kester, Walt. (2009). Understand SINAD, ENOB, SNR, THD, THD + N, and
-SFDR so You Don't Get Lost in the Noise Floor. URL:<a
-href="https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf</a></p>
-<p>T. C. Hofner: Dynamic ADC testing part I. Defining and testing
-dynamic ADC parameters, Microwaves &amp; RF, 2000, vol. 39, no. 11, pp.
-75-84,162</p>
-<p>T. C. Hofner: Dynamic ADC testing part 2. Measuring and evaluating
-dynamic line parameters, Microwaves &amp; RF, 2000, vol. 39, no. 13, pp.
-78-94</p>
-<p>AN9675: A Tutorial in Coherent and Windowed Sampling with A/D
-Converters <a
-href="https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters">https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters</a></p>
-<p>APPLICATION NOTE 3190: Coherent Sampling Calculator (CSC) <a
-href="https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html">https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html</a></p>
-<p>Coherent Sampling (Very Brief and Simple) <a
-href="https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple">https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple</a></p>
-<p>Signal Chain Basics #160: Making sense of coherent and noncoherent
-sampling in data-converter testing <a
-href="https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/">https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/</a></p>
-<p>Signal Chain Basics #104: Understanding noise in ADCs <a
-href="https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/">https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/</a></p>
-<p>Signal Chain Basics #101: ENOB Degradation Analysis Over Frequency
-Due to Jitter <a
-href="https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/">https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/</a></p>
-<p>Clock jitter analyzed in the time domain, Part 1, Texas Instruments
-Analog Applications Journal (slyt379), Aug 2010 <a
-href="https://www.ti.com/lit/an/slyt379/slyt379.pdf">https://www.ti.com/lit/an/slyt379/slyt379.pdf</a></p>
-<p>Clock jitter analyzed in the time domain, Part 2 <a
-href="https://www.ti.com/lit/slyt389">https://www.ti.com/lit/slyt389</a></p>
-<p>Measurement of Total Harmonic Distortion and Its Related Parameters
-using Multi-Instrument [<a
-href="https://www.virtins.com/doc/Measurement-of-Total-Harmonic-Distortion-and-Its-Related-Parameters-using-Multi-Instrument.pdf">pdf</a>]</p>
-<p>Application Note AN-4: Understanding Data Converters' Frequency
-Domain Specifications [<a
-href="https://www.datel.com/data/ads/adc-an4.pdf">pdf</a>]</p>
-<p>Belleman, J. (2008). From analog to digital.
-10.5170/CERN-2008-003.131. [<a
-href="https://cds.cern.ch/record/1100535/files/p131.pdf">pdf</a>]</p>
-<p>HandWiki. Coherent sampling [<a
-href="https://handwiki.org/wiki/Coherent_sampling">link</a>]</p>
-<p>Luis Chioye, TI. Leverage coherent sampling and FFT windows when
-evaluating SAR ADCs (Part 1) [<a
-href="https://e2e.ti.com/blogs_/archives/b/precisionhub/posts/leverage-coherent-sampling-and-fft-windows-when-evaluating-sar-adcs-part-1">link</a>]</p>
-<p>Coherent Sampling vs. Window Sampling | Analog Devices <a
-href="https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html">https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html</a></p>
-<p>Understanding Effective Number of Bits <a
-href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/">https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/</a></p>
-<p>ADC Input Noise: The Good, The Bad, and The Ugly. Is No Noise Good
-Noise? [<a
-href="https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html">https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html</a>]</p>
-<p>Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR =
-6.02N + 1.76dB," and Why You Should Care [<a
-href="https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf</a>]</p>
-<p>Dan Boschen, "How to choose FFT depth for ADC performance analysis
-(SINAD, ENOB)", [<a
-href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a>]</p>
+<h2 id="uvm-top.sv">uvm top.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// import the UVM library</span></span><br><span class="line">  <span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the UVM macros</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// import the yapp UVC</span></span><br><span class="line">  <span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> hbus_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> channel_pkg::*;</span><br><span class="line">  <span class="keyword">import</span> clock_and_reset_pkg::*;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// include the test library file</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_tb.sv&quot;</span></span><br><span class="line">  <span class="meta">`<span class="keyword">include</span> &quot;router_test_lib.sv&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    yapp_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.yapp.tx_agent.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.in0</span>);</span><br><span class="line">    hbus_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.hbus.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.hif</span> ); </span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan0.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch0</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan1.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch1</span>);</span><br><span class="line">    channel_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.chan2.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.ch2</span>);</span><br><span class="line">    clock_and_reset_vif_config::set(<span class="literal">null</span>, <span class="string">&quot;uvm_test_top.tb.clock_and_reset.*&quot;</span>, <span class="string">&quot;vif&quot;</span>, hw_top<span class="variable">.clk_rst_if</span>);</span><br><span class="line">    run_test();</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span> : tb_top</span><br></pre></td></tr></table></figure>
+<h2 id="rtl-top">RTL top</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> hw_top;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Clock and reset signals</span></span><br><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  clock_period;</span><br><span class="line">  <span class="keyword">logic</span>         run_clock;</span><br><span class="line">  <span class="keyword">logic</span>         clock;</span><br><span class="line">  <span class="keyword">logic</span>         reset;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// YAPP Interface to the DUT</span></span><br><span class="line">  yapp_if in0(clock, reset);</span><br><span class="line">  <span class="comment">// reset will now be generated by the Clock and Reset UVC</span></span><br><span class="line">  <span class="comment">// input: clock; output: reset, run_clock, clock_period</span></span><br><span class="line">  clock_and_reset_if clk_rst_if(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset), <span class="variable">.run_clock</span>(run_clock), <span class="variable">.clock_period</span>(clock_period));</span><br><span class="line">  hbus_if hif(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  channel_if ch0(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch1(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line">  channel_if ch2(<span class="variable">.clock</span>(clock), <span class="variable">.reset</span>(reset));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLKGEN module generates clock</span></span><br><span class="line">  clkgen clkgen (</span><br><span class="line">    <span class="variable">.clock</span>(clock),</span><br><span class="line">    <span class="variable">.run_clock</span>(run_clock),</span><br><span class="line">    <span class="variable">.clock_period</span>(clock_period)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  yapp_router dut(</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2 id="pkg.sv">pkg.sv</h2>
+<p>`<code>include</code> all related uvm class in
+<strong>pgk.sv</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> yapp_pkg;</span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> uvm_config_db<span class="variable">#(virtual yapp_if)</span> yapp_vif_config;</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_monitor.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_sequencer.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_seqs.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_driver.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_tx_agent.sv&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;yapp_env.sv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endpackage</span></span><br></pre></td></tr></table></figure>
+<h2 id="if.sv">if.sv</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> yapp_if (<span class="keyword">input</span> clock, <span class="keyword">input</span> reset );</span><br><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> yapp_pkg::*;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endinterface</span> : yapp_if</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>analog</category>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -3625,6 +3507,159 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Data Converter Evaluation</title>
+    <url>/2023/03/29/dataconverter-test/</url>
+    <content><![CDATA[<h2 id="term-abbreviation">Term Abbreviation</h2>
+<p>SNR: signal-to-noise ratio</p>
+<p>SINAD: signal to noise and distortion</p>
+<p>ENOB: effective number of bits</p>
+<p>THD: total harmonic distortion</p>
+<p>SFDR: spurious-free dynamic range</p>
+<p>TTIMD: two-tone intermodulation distortion</p>
+<p>MTIMD: multi-tone intermodulation distortion</p>
+<p>VSWR: voltage standing-wave ratio</p>
+<h2 id="coherent-sampling">Coherent Sampling</h2>
+<p>To avoid <strong>spectral leakage</strong> completely, the method of
+<strong>coherent sampling</strong> is recommended. Coherent sampling
+requires that the input- and clock-frequency generators are
+<strong>phase locked</strong>, and that the input frequency be chosen
+based on the following relationship: <span class="math display">\[
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(f_{\text{in}}\)</span> = the desired
+input frequency</li>
+<li><span class="math inline">\(f_s\)</span> = the clock frequency of
+the data converter under test</li>
+<li><span class="math inline">\(M_C\)</span> = the number of cycles in
+the data window (to make all samples unique, choose odd or prime
+numbers)</li>
+<li><span class="math inline">\(N_R\)</span> = the data record length
+(for an 8192-point FFT, the data record is 8192s long)</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+f_{\text{in}} &amp;=\frac{f_s}{N_R}\cdot M_C \\
+&amp;= f_{\text{res}}\cdot M_C
+\end{align}\]</span></p>
+<h3 id="irreducible-ratio">irreducible ratio</h3>
+<p>An <strong>irreducible ratio</strong> ensures identical code
+sequences not to be repeated multiple times. Unnecessary repetition of
+the same code is not desirable as it increases ADC test time.</p>
+<blockquote>
+<p>Given that <span class="math inline">\(\frac{M_C}{N_R}\)</span> is
+irreducible, and <span class="math inline">\(N_R\)</span> is a power of
+2, an <strong>odd number</strong> for <span
+class="math inline">\(M_C\)</span> will always produce an
+<strong>irreducible ratio</strong></p>
+</blockquote>
+<p>Assuming there is a common factor <span
+class="math inline">\(k\)</span> between <span
+class="math inline">\(M_C\)</span> and <span
+class="math inline">\(N_R\)</span>, i.e. <span
+class="math inline">\(\frac{M_C}{N_R}=\frac{k M_C&#39;}{k
+N_R&#39;}\)</span></p>
+<p>The samples (<span class="math inline">\(n\in[1, N_R]\)</span>)</p>
+<p><span class="math display">\[\begin{align}
+y[n] &amp;= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
+&amp;= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
+&amp; = \sin\left( \omega_{\text{in}} \cdot
+n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
+&amp; = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+\end{align}\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\begin{align}
+y[n+N_R&#39;] &amp;= \sin\left( 2\pi (n+N_R&#39;)\frac{M_C}{N_R} \right)
+\\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{M_C}{N_R}\right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{kM_C&#39;}{kN_R&#39;} \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C&#39; \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
+\end{align}\]</span></p>
+<p>So, the samples is repeated <span class="math inline">\(y[n] =
+y[n+N_R&#39;]\)</span>. Usually, no additional information is gained by
+repeating with the same sampling points.</p>
+<h3 id="general-simulation-setup">General Simulation Setup</h3>
+<p><span class="math display">\[
+N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}
+\]</span> where <span class="math inline">\(F_s\)</span> is sample
+frequency, <span class="math inline">\(F_{in}\)</span> input signal
+frequency.</p>
+<p>And <span class="math inline">\(N\)</span> often is 256, 512; M is 3,
+5, 7, 11.</p>
+<h2 id="reference">reference</h2>
+<p>everynanocounts. Memos on FFT With Windowing. URL: <a
+href="https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/">https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/</a></p>
+<p>How to choose FFT depth for ADC performance analysis (SINAD, ENOB).
+URL:<a
+href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a></p>
+<p>Computation of Effective Number of Bits, Signal to Noise Ratio, &amp;
+Signal to Noise &amp; Distortion Ratio Using FFT. URL:<a
+href="https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf">https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf</a></p>
+<p>Kester, Walt. (2009). Understand SINAD, ENOB, SNR, THD, THD + N, and
+SFDR so You Don't Get Lost in the Noise Floor. URL:<a
+href="https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf</a></p>
+<p>T. C. Hofner: Dynamic ADC testing part I. Defining and testing
+dynamic ADC parameters, Microwaves &amp; RF, 2000, vol. 39, no. 11, pp.
+75-84,162</p>
+<p>T. C. Hofner: Dynamic ADC testing part 2. Measuring and evaluating
+dynamic line parameters, Microwaves &amp; RF, 2000, vol. 39, no. 13, pp.
+78-94</p>
+<p>AN9675: A Tutorial in Coherent and Windowed Sampling with A/D
+Converters <a
+href="https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters">https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters</a></p>
+<p>APPLICATION NOTE 3190: Coherent Sampling Calculator (CSC) <a
+href="https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html">https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html</a></p>
+<p>Coherent Sampling (Very Brief and Simple) <a
+href="https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple">https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple</a></p>
+<p>Signal Chain Basics #160: Making sense of coherent and noncoherent
+sampling in data-converter testing <a
+href="https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/">https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/</a></p>
+<p>Signal Chain Basics #104: Understanding noise in ADCs <a
+href="https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/">https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/</a></p>
+<p>Signal Chain Basics #101: ENOB Degradation Analysis Over Frequency
+Due to Jitter <a
+href="https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/">https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/</a></p>
+<p>Clock jitter analyzed in the time domain, Part 1, Texas Instruments
+Analog Applications Journal (slyt379), Aug 2010 <a
+href="https://www.ti.com/lit/an/slyt379/slyt379.pdf">https://www.ti.com/lit/an/slyt379/slyt379.pdf</a></p>
+<p>Clock jitter analyzed in the time domain, Part 2 <a
+href="https://www.ti.com/lit/slyt389">https://www.ti.com/lit/slyt389</a></p>
+<p>Measurement of Total Harmonic Distortion and Its Related Parameters
+using Multi-Instrument [<a
+href="https://www.virtins.com/doc/Measurement-of-Total-Harmonic-Distortion-and-Its-Related-Parameters-using-Multi-Instrument.pdf">pdf</a>]</p>
+<p>Application Note AN-4: Understanding Data Converters' Frequency
+Domain Specifications [<a
+href="https://www.datel.com/data/ads/adc-an4.pdf">pdf</a>]</p>
+<p>Belleman, J. (2008). From analog to digital.
+10.5170/CERN-2008-003.131. [<a
+href="https://cds.cern.ch/record/1100535/files/p131.pdf">pdf</a>]</p>
+<p>HandWiki. Coherent sampling [<a
+href="https://handwiki.org/wiki/Coherent_sampling">link</a>]</p>
+<p>Luis Chioye, TI. Leverage coherent sampling and FFT windows when
+evaluating SAR ADCs (Part 1) [<a
+href="https://e2e.ti.com/blogs_/archives/b/precisionhub/posts/leverage-coherent-sampling-and-fft-windows-when-evaluating-sar-adcs-part-1">link</a>]</p>
+<p>Coherent Sampling vs. Window Sampling | Analog Devices <a
+href="https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html">https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html</a></p>
+<p>Understanding Effective Number of Bits <a
+href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/">https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/</a></p>
+<p>ADC Input Noise: The Good, The Bad, and The Ugly. Is No Noise Good
+Noise? [<a
+href="https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html">https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html</a>]</p>
+<p>Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR =
+6.02N + 1.76dB," and Why You Should Care [<a
+href="https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf</a>]</p>
+<p>Dan Boschen, "How to choose FFT depth for ADC performance analysis
+(SINAD, ENOB)", [<a
+href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -4518,18 +4553,6 @@ designing integrated circuits and systems thereof"</p>
       </categories>
   </entry>
   <entry>
-    <title>Script to remove .cdslck files</title>
-    <url>/2022/02/02/dot-cdslck-clear/</url>
-    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh</span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt</span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence"
-class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>How to preserve hand-instantiated cells</title>
     <url>/2023/02/10/dont-touch/</url>
     <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
@@ -4543,6 +4566,18 @@ during synthesis</p>
       </categories>
   </entry>
   <entry>
+    <title>Script to remove .cdslck files</title>
+    <url>/2022/02/02/dot-cdslck-clear/</url>
+    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh</span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt</span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence"
+class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence</a></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>different DSPF files for each corner</title>
     <url>/2023/01/29/dspf-in-corner/</url>
     <content><![CDATA[<p>Create a new file with an extension <strong>scs</strong> like
@@ -4552,138 +4587,6 @@ during synthesis</p>
 ‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
 <p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
 alt="image-20230129223248655" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>split pins in dspf_emir</title>
-    <url>/2023/04/04/dspf-split-pins-emir/</url>
-    <content><![CDATA[<h3 id="dspf-extract-using-starrc">dspf extract using starrc</h3>
-<p>multiple label and rectangle in vssa net</p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405003705354.png"
-alt="image-20230405003705354" /></p>
-<ul>
-<li><p>general dspf</p>
-<p><code>SHORT_PINS: YES</code></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405002824842.png"
-alt="image-20230405002824842" /></p>
-<blockquote>
-<p>other pin are short together</p>
-</blockquote></li>
-<li><p>dspf for emir analysis</p></li>
-</ul>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405000013461.png"
-alt="image-20230405000013461" /></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405001944418.png"
-alt="image-20230405001944418" /></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405230611522.png"
-alt="image-20230405230611522" /></p>
-<blockquote>
-<p>It seems that dspf_emir <strong>don't</strong> contain the
-<em>rectangle pin</em> information.</p>
-<p>only <strong>label</strong> is necessary</p>
-</blockquote>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 26%" />
-<col style="width: 22%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>setup</th>
-<th></th>
-<th></th>
-<th>spectre result</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>netlist type</strong></td>
-<td><strong>dspf option</strong></td>
-<td><strong>emir analysis</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>dspf</td>
-<td>/</td>
-<td>disable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>/</td>
-<td>disable</td>
-<td>✗</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>=shortPins=”yes”</td>
-<td>disable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>=shortPins=”no”</td>
-<td>disable</td>
-<td>✗</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>/</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>=shortPins=”yes”</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>=shortPins=”no”</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>shortPins=”yes”</strong> is preferred default option for
-dspf_emir, which has <strong>split pins</strong></p>
-</blockquote>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405005151550.png"
-alt="image-20230405005151550" /></p>
-<h3 id="dspf-syntax">DSPF Syntax</h3>
-<ul>
-<li><p><pin_def>::=*<strong>|P <pin_element>?</strong> <pin_element>
-describes pins in the net. Multiple pin descriptions can be listed in
-one line.</p></li>
-<li><p><pin_element>::=(<pinName> <pinType> <pinCap> {<coord>}?)
-<pinName> represents the name of the pin. <pinType> represents the type
-of the pin. It can be any of the following: I (Input), O (Output),</p>
-<p>​ B (Bidirectional), X (don’t care), S (Switch), and J (Jumper). ​
-<pinCap> represents the capacitance value associated with the pin. ​
-<coord> is optional. It represents the location of the pin. Multiple pin
-locations are allowed</p></li>
-</ul>
-<h4 id="split-pins">split pins</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*|P (avss_1 O 0 207.7555 59.9170)</span><br><span class="line">*|P (avss_10 O 0 181.1610 151.1130)</span><br><span class="line">*|P (avss_11 O 0 186.6330 151.1130)</span><br><span class="line">*|P (avss_12 O 0 192.1050 151.1130)</span><br><span class="line">*|P (avss_13 O 0 197.5770 151.1130)</span><br></pre></td></tr></table></figure>
-<h3 id="reference">reference</h3>
-<p>Article (20467964) Title: Difference in result on running Spectre APS
-with EMIR and without EMIR analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY</a></p>
-<p>StarRC User Guide and Command Reference Version O-2018.06, June
-2018</p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -5024,6 +4927,138 @@ alt="image-20220618131626913" /></p>
 alt="image-20220618131649065" /></p>
 <p>only <strong>c</strong> dspf give the <strong>lumped
 capacitance</strong></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>split pins in dspf_emir</title>
+    <url>/2023/04/04/dspf-split-pins-emir/</url>
+    <content><![CDATA[<h3 id="dspf-extract-using-starrc">dspf extract using starrc</h3>
+<p>multiple label and rectangle in vssa net</p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405003705354.png"
+alt="image-20230405003705354" /></p>
+<ul>
+<li><p>general dspf</p>
+<p><code>SHORT_PINS: YES</code></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405002824842.png"
+alt="image-20230405002824842" /></p>
+<blockquote>
+<p>other pin are short together</p>
+</blockquote></li>
+<li><p>dspf for emir analysis</p></li>
+</ul>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405000013461.png"
+alt="image-20230405000013461" /></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405001944418.png"
+alt="image-20230405001944418" /></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405230611522.png"
+alt="image-20230405230611522" /></p>
+<blockquote>
+<p>It seems that dspf_emir <strong>don't</strong> contain the
+<em>rectangle pin</em> information.</p>
+<p>only <strong>label</strong> is necessary</p>
+</blockquote>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 26%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>setup</th>
+<th></th>
+<th></th>
+<th>spectre result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>netlist type</strong></td>
+<td><strong>dspf option</strong></td>
+<td><strong>emir analysis</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>dspf</td>
+<td>/</td>
+<td>disable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>/</td>
+<td>disable</td>
+<td>✗</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>=shortPins=”yes”</td>
+<td>disable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>=shortPins=”no”</td>
+<td>disable</td>
+<td>✗</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>/</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>=shortPins=”yes”</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>=shortPins=”no”</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>shortPins=”yes”</strong> is preferred default option for
+dspf_emir, which has <strong>split pins</strong></p>
+</blockquote>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405005151550.png"
+alt="image-20230405005151550" /></p>
+<h3 id="dspf-syntax">DSPF Syntax</h3>
+<ul>
+<li><p><pin_def>::=*<strong>|P <pin_element>?</strong> <pin_element>
+describes pins in the net. Multiple pin descriptions can be listed in
+one line.</p></li>
+<li><p><pin_element>::=(<pinName> <pinType> <pinCap> {<coord>}?)
+<pinName> represents the name of the pin. <pinType> represents the type
+of the pin. It can be any of the following: I (Input), O (Output),</p>
+<p>​ B (Bidirectional), X (don’t care), S (Switch), and J (Jumper). ​
+<pinCap> represents the capacitance value associated with the pin. ​
+<coord> is optional. It represents the location of the pin. Multiple pin
+locations are allowed</p></li>
+</ul>
+<h4 id="split-pins">split pins</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*|P (avss_1 O 0 207.7555 59.9170)</span><br><span class="line">*|P (avss_10 O 0 181.1610 151.1130)</span><br><span class="line">*|P (avss_11 O 0 186.6330 151.1130)</span><br><span class="line">*|P (avss_12 O 0 192.1050 151.1130)</span><br><span class="line">*|P (avss_13 O 0 197.5770 151.1130)</span><br></pre></td></tr></table></figure>
+<h3 id="reference">reference</h3>
+<p>Article (20467964) Title: Difference in result on running Spectre APS
+with EMIR and without EMIR analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY</a></p>
+<p>StarRC User Guide and Command Reference Version O-2018.06, June
+2018</p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -8187,69 +8222,6 @@ alt="pma_dig_bumps.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>integrator design</title>
-    <url>/2022/11/05/integrator-design/</url>
-    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
-<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
-alt="image-20221106142157115" /></p>
-<h4 id="offset-errors">Offset Errors</h4>
-<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
-<strong>much less critical</strong>:</p>
-<ol type="1">
-<li><p>It affects the integrated currents via the finite output
-impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
-converters, and is therefore attenuated by a factor <span
-class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
-input of the sinking V-I converter,</p></li>
-<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
-when referred back to the input of the sourcing V-I converter.</p></li>
-</ol>
-<p>Therefore, no special offset cancellation is needed for opamp <span
-class="math inline">\(A_3\)</span>.</p>
-<p>The current change due to offset of <span
-class="math inline">\(A_3\)</span>: <span
-class="math display">\[\begin{align}
-\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
-\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
-\end{align}\]</span> Then, the input referenced offset is: <span
-class="math display">\[\begin{align}
-V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
-\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
-\end{align}\]</span></p>
-<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
-<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
-in a non-zero overdrive voltage at its input, which modulates the
-current Iint due to the finite output impedances of the V-I
-converters.</p>
-<p>Assuming the opamp is implemented as a <strong>transconductance
-amplifier</strong>, there are two main causes of this non-zero overdrive
-voltage</p>
-<ol type="1">
-<li>The finite transconductance <span
-class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
-an overdrive voltage is required to provide the <strong>feedback
-current</strong></li>
-</ol>
-<p>​ The change in the integrated current</p>
-<p>​ <span class="math display">\[\begin{align}
-​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
-​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​   \end{align}\]</span></p>
-<ol start="2" type="1">
-<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
-which implies that an overdrive voltage is required to produce the
-<strong>output voltage</strong> <span
-class="math inline">\(V_{int}\)</span></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
     <content><![CDATA[<h2 id="transmission-lines">Transmission Lines</h2>
@@ -9158,6 +9130,69 @@ href="https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu">https://youtu.be/SaYtemY
 Synthesizer in Deep‐Submicron CMOS"</p>
 <p>Mayank Parasrampuria, Sandeep Jain, Burn-in 101 [<a
 href="https://www.edn.com/burn-in-101/">link</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>integrator design</title>
+    <url>/2022/11/05/integrator-design/</url>
+    <content><![CDATA[<h3 id="application-in-sensor">application in sensor</h3>
+<p><img src="/2022/11/05/integrator-design/image-20221106142157115.png"
+alt="image-20221106142157115" /></p>
+<h4 id="offset-errors">Offset Errors</h4>
+<p>The offset of opamp <span class="math inline">\(A_3\)</span> is
+<strong>much less critical</strong>:</p>
+<ol type="1">
+<li><p>It affects the integrated currents via the finite output
+impedances <span class="math inline">\(R_{out1,2}\)</span> of the V-I
+converters, and is therefore attenuated by a factor <span
+class="math inline">\(R_{out1}/R_1\)</span> when referred back to the
+input of the sinking V-I converter,</p></li>
+<li><p>or by a factor <span class="math inline">\(R_{out2}/R_2\)</span>
+when referred back to the input of the sourcing V-I converter.</p></li>
+</ol>
+<p>Therefore, no special offset cancellation is needed for opamp <span
+class="math inline">\(A_3\)</span>.</p>
+<p>The current change due to offset of <span
+class="math inline">\(A_3\)</span>: <span
+class="math display">\[\begin{align}
+\frac{V_{BE,os}}{R_1} &amp;= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &amp;= \frac{V_{ota,os}}{R_{out2}}
+\end{align}\]</span> Then, the input referenced offset is: <span
+class="math display">\[\begin{align}
+V_{BE,os} &amp;=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &amp;= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}\]</span></p>
+<h4 id="errors-due-to-finite-gain">Errors due to Finite Gain</h4>
+<p>Finite gain of opamp <span class="math inline">\(A_3\)</span> results
+in a non-zero overdrive voltage at its input, which modulates the
+current Iint due to the finite output impedances of the V-I
+converters.</p>
+<p>Assuming the opamp is implemented as a <strong>transconductance
+amplifier</strong>, there are two main causes of this non-zero overdrive
+voltage</p>
+<ol type="1">
+<li>The finite transconductance <span
+class="math inline">\(g_{m3}\)</span> of the opamp, , which implies that
+an overdrive voltage is required to provide the <strong>feedback
+current</strong></li>
+</ol>
+<p>​ The change in the integrated current</p>
+<p>​ <span class="math display">\[\begin{align}
+​   \Delta I_{int} &amp;= \frac{V_{i,ota}}{R_{out}}\\
+​   &amp;= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​   \end{align}\]</span></p>
+<ol start="2" type="1">
+<li>The finite DC gain <span class="math inline">\(A_{0,3}\)</span>,
+which implies that an overdrive voltage is required to produce the
+<strong>output voltage</strong> <span
+class="math inline">\(V_{int}\)</span></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -10197,37 +10232,20 @@ href="https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/la
 <p>A large output capacitor solves the sudden load change problem, but
 the stability decreases because the large output capacitor forces the
 output pole toward the origin with the role of dominant pole</p>
-<h2 id="damping-factor-zeta-and-phase-margin">damping factor (<span
-class="math inline">\(\zeta\)</span>) and phase margin</h2>
-<p>phase margin is defined for <em>open loop</em> system</p>
-<p>damping factor (<span class="math inline">\(\zeta\)</span>) is
-defined for <em>close loop</em> system</p>
-<p>the roughly 90 to 100 times of damping factor (<span
-class="math inline">\(\zeta\)</span>) is phase margin</p>
-<p><span class="math display">\[
-\mathrm{PM} = 90\zeta \sim 100\zeta
-\]</span></p>
-<blockquote>
-<p>in order to have a good stable system, we want <span
-class="math inline">\(\zeta &gt; 0.5\)</span> or phase margin more than
-<span class="math inline">\(45^o\)</span></p>
-</blockquote>
-<blockquote>
-<p>We can analyze open loop system in a better perspective because it is
-simpler</p>
-</blockquote>
-<p>DC output impedance of NMOS and PMOS LDO is the <em>same</em> for the
-same error amplifier gain</p>
+<h2 id="dc-output-impedance">DC output impedance</h2>
+<p>DC output impedance of NMOS and PMOS LDO is the
+<strong><em>same</em></strong> for the same error amplifier gain</p>
 <p><span class="math display">\[
 R_{\text{out}} = \frac{1}{\beta A_{o1} g_{m2}}
 \]</span></p>
 <p>The NMOS LDO has a faster response to line transients than the PMOS
-LDO since it has btter (smaller) PSRR</p>
+LDO since it has better (smaller) PSRR</p>
 <p>A good PSRR is important when an LDO is used as a sub-regulator in
 cascade with a switching regulator. The LDO would need to have a
 sufficiently high rejection at the switching frequency of the switching
 converter to filter out the ripples at that frequency</p>
 <h2 id="nmos-ldo">NMOS LDO</h2>
+<p><em>TODO</em> 📅</p>
 <h3 id="feedforward-compensation-with-c_textff">Feedforward Compensation
 with <span class="math inline">\(C_\text{FF}\)</span>​</h3>
 <ul>
@@ -10658,6 +10676,103 @@ Processing</a></p>
       </categories>
   </entry>
   <entry>
+    <title>Multicycle Paths Constraints in PrimeTime</title>
+    <url>/2022/03/01/multicycle-paths/</url>
+    <content><![CDATA[<p>PrimeTime <em>does not</em> automatically identifies multicycle
+paths.</p>
+<h4 id="specifying-multicycle-path-for-setup">specifying multicycle path
+for setup</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">set_multicycle_path <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">set_multicycle_path -setup <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># check the exception</span></span><br><span class="line">report_exception</span><br></pre></td></tr></table></figure>
+<h4
+id="specifying-multicycle-path-for-hold-new-data-every-6-cycles">specifying
+multicycle path for hold (new data every 6 cycles)</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">set_multicycle_path -setup <span class="number">6</span> -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br><span class="line">set_multicycle_path -hold [<span class="keyword">expr</span> <span class="number">6</span><span class="number">-1</span>] -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/01/multicycle-paths/image-20220301215938296.png"
+alt="image-20220301215938296" /></p>
+<p>M<sub>H</sub> stands for Hold Multiplier, M<sub>S</sub> for Setup
+Multiplier. The Setup multiplier counts up with increasing clock cycles,
+the Hold Multiplier counts up with decreasing cycles. The origin (0) for
+the Hold Multiplier is always at the <code>Setup Multiplier - 1</code>
+position.</p>
+<h4 id="reporting-a-multicycle-path-with-report_timing">Reporting a
+multicycle path with report_timing</h4>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">report_timing -exceptions all -from *reg[<span class="number">26</span>]/CP -to *reg/D</span><br></pre></td></tr></table></figure>
+<h4 id="timing-exceptions">Timing Exceptions</h4>
+<p>If certain paths are <strong>not</strong> intended to operate
+according to <em>the default setup and hold behavior assumed by the
+PrimeTime tool</em>, you need to specify those paths as timing
+exceptions. Otherwise, the tool might incorrectly report those paths as
+having timing violations.</p>
+<p>The PrimeTime tool lets you specify the following types of
+exceptions:</p>
+<ul>
+<li>False path – A path that is never sensitized due to the logic
+configuration, expected data sequence, or operating mode.</li>
+<li>Multicycle path – A path designed to take more than one clock cycle
+from launch to capture.</li>
+<li>Minimum or maximum delay path – A path that must meet a delay
+constraint that you explicitly specify as a time value.</li>
+</ul>
+<h4 id="ref">REF</h4>
+<p>PrimeTime® User Guide Version O-2018.06-SP4 Chapter 1: Introduction
+to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Network Analysis</title>
+    <url>/2023/09/29/network/</url>
+    <content><![CDATA[<p><img src="/2023/09/29/network/image-20240704212740246.png"
+alt="image-20240704212740246" /></p>
+<h2 id="rational-fit">Rational Fit</h2>
+<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
+<p>To resolve the convergence problem of s-parameter in Spectre
+simulator - <code>rationalfit</code> and write Verilog-A</p>
+<p><img src="/2023/09/29/network/image-20220630224525565.png"
+alt="image-20220630224525565" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="z0">Z0</h2>
+<blockquote>
+<p>Remember, S-parameters <strong>don't mean much</strong> unless you
+know the value of the <strong>reference impedance </strong>(it's
+frequently called Z0).</p>
+</blockquote>
+<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
+<p><img src="/2023/09/29/network/image-20220430214052538.png"
+alt="image-20220430214052538" /></p>
+<p><img src="/2023/09/29/network/image-20220430214136970.png"
+alt="image-20220430214136970" /></p>
+<p><img src="/2023/09/29/network/image-20220430214419283.png"
+alt="image-20220430214419283" /></p>
+<blockquote>
+<p>The default <strong>Z0</strong> exported by EMX is
+<strong>50</strong></p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p><a
+href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
+S-parameters
+(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
+<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
+Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
+<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
+rational function approximation algorithm for model generation.
+Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
+doi:10.1109/dac.1999.781313</p>
+<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
+Checker and Rational Fit Model Generator [<a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
+<p>The Complex Art Of Handling S-Parameters: The importance of
+extraction and fitting to circuit simulation involving S-parameters [<a
+href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>multipath ring oscillator (MPRO)</title>
     <url>/2022/03/06/mpro/</url>
     <content><![CDATA[<h2 id="maximum-frequency">maximum frequency</h2>
@@ -10889,103 +11004,6 @@ Checker for Oscillators</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Multicycle Paths Constraints in PrimeTime</title>
-    <url>/2022/03/01/multicycle-paths/</url>
-    <content><![CDATA[<p>PrimeTime <em>does not</em> automatically identifies multicycle
-paths.</p>
-<h4 id="specifying-multicycle-path-for-setup">specifying multicycle path
-for setup</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">set_multicycle_path <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">set_multicycle_path -setup <span class="number">6</span> -from reg[<span class="number">26</span>]/CP -to reg/D</span><br><span class="line"><span class="comment"># check the exception</span></span><br><span class="line">report_exception</span><br></pre></td></tr></table></figure>
-<h4
-id="specifying-multicycle-path-for-hold-new-data-every-6-cycles">specifying
-multicycle path for hold (new data every 6 cycles)</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">set_multicycle_path -setup <span class="number">6</span> -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br><span class="line">set_multicycle_path -hold [<span class="keyword">expr</span> <span class="number">6</span><span class="number">-1</span>] -to [get_pins <span class="string">&quot;*reg[*]/D&quot;</span>]</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/01/multicycle-paths/image-20220301215938296.png"
-alt="image-20220301215938296" /></p>
-<p>M<sub>H</sub> stands for Hold Multiplier, M<sub>S</sub> for Setup
-Multiplier. The Setup multiplier counts up with increasing clock cycles,
-the Hold Multiplier counts up with decreasing cycles. The origin (0) for
-the Hold Multiplier is always at the <code>Setup Multiplier - 1</code>
-position.</p>
-<h4 id="reporting-a-multicycle-path-with-report_timing">Reporting a
-multicycle path with report_timing</h4>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">report_timing -exceptions all -from *reg[<span class="number">26</span>]/CP -to *reg/D</span><br></pre></td></tr></table></figure>
-<h4 id="timing-exceptions">Timing Exceptions</h4>
-<p>If certain paths are <strong>not</strong> intended to operate
-according to <em>the default setup and hold behavior assumed by the
-PrimeTime tool</em>, you need to specify those paths as timing
-exceptions. Otherwise, the tool might incorrectly report those paths as
-having timing violations.</p>
-<p>The PrimeTime tool lets you specify the following types of
-exceptions:</p>
-<ul>
-<li>False path – A path that is never sensitized due to the logic
-configuration, expected data sequence, or operating mode.</li>
-<li>Multicycle path – A path designed to take more than one clock cycle
-from launch to capture.</li>
-<li>Minimum or maximum delay path – A path that must meet a delay
-constraint that you explicitly specify as a time value.</li>
-</ul>
-<h4 id="ref">REF</h4>
-<p>PrimeTime® User Guide Version O-2018.06-SP4 Chapter 1: Introduction
-to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Network Analysis</title>
-    <url>/2023/09/29/network/</url>
-    <content><![CDATA[<p><img src="/2023/09/29/network/image-20240704212740246.png"
-alt="image-20240704212740246" /></p>
-<h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/network/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/network/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/network/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/network/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -14809,35 +14827,6 @@ href="https://shar.es/afO6e1">https://shar.es/afO6e1</a></p>
       </tags>
   </entry>
   <entry>
-    <title>Spurious Phase Noise</title>
-    <url>/2024/07/14/spur/</url>
-    <content><![CDATA[<p><em>TODO</em> 📅</p>
-<p><strong>spurs</strong> are carrier or clock frequency spectral
-imperfections measured in the frequency domain just like phase noise.
-However, unlike phase noise they are <em>discrete</em> frequency
-components.</p>
-<ul>
-<li><p>Spurs are deterministic.</p></li>
-<li><p>Spur power is independent of bandwidth.</p></li>
-<li><p>Spurs contribute bounded peak jitter in the time domain.</p></li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>Timing 101 #6: The Case of the Spurious Phase Noise Part I, Silicon
-Labs, [<a
-href="https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i">https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i</a>]</p>
-<p>Timing 101 #7: The Case of the Spurious Phase Noise Part II, Silicon
-Labs, [<a
-href="https://community.silabs.com/s/share/a5U1M000000kntqUAA/timing-101-7-the-case-of-the-spurious-phase-noise-part-ii">https://community.silabs.com/s/share/a5U1M000000kntqUAA/timing-101-7-the-case-of-the-spurious-phase-noise-part-ii</a>]</p>
-<p>Timing 101 #6: The Case of the Spurious Phase Noise Part I, [<a
-href="https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i?language=en_US">https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i?language=en_US</a>]</p>
-<p>Timing 201 #2: The Case of the Phase Noise That Wasn’t - Part 2, [<a
-href="https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US">https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US</a>]</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model</title>
     <url>/2022/03/09/spf-complex-pwl/</url>
     <content><![CDATA[<p><strong>Real number modeling</strong> of analog circuits in hardware
@@ -15072,6 +15061,35 @@ tools regarding on analog modeling,validation, and generation</a></p>
       </categories>
   </entry>
   <entry>
+    <title>Spurious Phase Noise</title>
+    <url>/2024/07/14/spur/</url>
+    <content><![CDATA[<p><em>TODO</em> 📅</p>
+<p><strong>spurs</strong> are carrier or clock frequency spectral
+imperfections measured in the frequency domain just like phase noise.
+However, unlike phase noise they are <em>discrete</em> frequency
+components.</p>
+<ul>
+<li><p>Spurs are deterministic.</p></li>
+<li><p>Spur power is independent of bandwidth.</p></li>
+<li><p>Spurs contribute bounded peak jitter in the time domain.</p></li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>Timing 101 #6: The Case of the Spurious Phase Noise Part I, Silicon
+Labs, [<a
+href="https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i">https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i</a>]</p>
+<p>Timing 101 #7: The Case of the Spurious Phase Noise Part II, Silicon
+Labs, [<a
+href="https://community.silabs.com/s/share/a5U1M000000kntqUAA/timing-101-7-the-case-of-the-spurious-phase-noise-part-ii">https://community.silabs.com/s/share/a5U1M000000kntqUAA/timing-101-7-the-case-of-the-spurious-phase-noise-part-ii</a>]</p>
+<p>Timing 101 #6: The Case of the Spurious Phase Noise Part I, [<a
+href="https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i?language=en_US">https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i?language=en_US</a>]</p>
+<p>Timing 201 #2: The Case of the Phase Noise That Wasn’t - Part 2, [<a
+href="https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US">https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US</a>]</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>How to squash all git commits into one?</title>
     <url>/2023/08/10/squash-all-commits/</url>
     <content><![CDATA[<p><a
@@ -15109,7 +15127,7 @@ href="https://www.cppsim.com/CommCircuitLectures/lec15.pdf">Michael H.
 Perrott, High Speed Communication Circuits and Systems, Lecture 15
 Integer-N Frequency Synthesizers</a>]</p>
 </blockquote>
-<h2 id="complex-conjugate-pair-poles">Complex conjugate pair poles</h2>
+<h2 id="complex-conjugate-pair-poles">complex conjugate pair poles</h2>
 <p><img src="/2024/05/02/ss-insight/image-20240629134127219.png"
 alt="image-20240629134127219" /> <span
 class="math display">\[\begin{align}
@@ -15140,6 +15158,25 @@ alt="image-20240629142324982" /></p>
 <hr />
 <p><img src="/2024/05/02/ss-insight/image-20240629140001275.png"
 alt="image-20240629140001275" /></p>
+<h2 id="damping-factor-phase-margin">damping factor &amp; phase
+margin</h2>
+<ul>
+<li><p>phase margin is defined for <em>open loop</em> system</p></li>
+<li><p>damping factor (<span class="math inline">\(\zeta\)</span>) is
+defined for <em>close loop</em> system</p></li>
+</ul>
+<p>The roughly 90 to 100 times of damping factor (<span
+class="math inline">\(\zeta\)</span>​) is phase margin <span
+class="math display">\[
+\mathrm{PM} = 90\zeta \sim 100\zeta
+\]</span> In order to have a good stable system, we want <span
+class="math inline">\(\zeta &gt; 0.5\)</span> or phase margin more than
+<span class="math inline">\(45^o\)</span></p>
+<p>We can analyze open loop system in a better perspective because it is
+simpler. So, we always use the loop gain analysis to find the phase
+margin and see whether the system is stable or not.</p>
+<h2 id="settling-time">settling time</h2>
+<p><em>TODO</em> 📅</p>
 <h2 id="nrz-bandwidth">NRZ Bandwidth</h2>
 <p><img src="/2024/05/02/ss-insight/image-20240607221359970.png"
 alt="image-20240607221359970" /></p>
@@ -15589,6 +15626,71 @@ href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/0
       </categories>
   </entry>
   <entry>
+    <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
+    <url>/2022/03/16/sv-rnm-101/</url>
+    <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
+<ul>
+<li>model analog blocks operation as signal flow model</li>
+<li>only the digital solver is used for high-speed simulation
+<ul>
+<li>Event-driven</li>
+<li>No convergence issues, because no analog solver is used</li>
+</ul></li>
+<li>Five different language standards support real number modeling:
+<ul>
+<li><strong>wreal</strong> (wired-real) ports in Verilog-AMS</li>
+<li><strong>real</strong> data type in VHDL</li>
+<li><strong>real</strong> data type in Verilog</li>
+<li><strong>real</strong> variables and <strong>nettypes</strong> in
+SystemVerilog (SV)</li>
+<li><strong>real</strong> types in e</li>
+</ul></li>
+</ul>
+<h2 id="benefits-of-rnm">Benefits of RNM</h2>
+<ul>
+<li>Most analog circuits that need to be modeled for MS verification at
+the SoC level can be described in terms of real-valued voltages or
+currents</li>
+<li>RNM is a mixed approach, borrowing concepts from both continuous and
+discrete domains
+<ul>
+<li>The values are floating-point (real) number.</li>
+<li>Time is discrete; the real signals change values based on discrete
+events</li>
+</ul></li>
+<li>Applicability of RNM is bounded primarily by
+<strong>signal-flow</strong> model style</li>
+<li>Migrating analog behavior from the analog domain to the event or
+pseudo-analog domain can bring huge benefits without sacrificing too
+much accuracy</li>
+<li>Simulation is executed by a digital simulation engine without need
+for the analog solver</li>
+<li>Hence real-number modeling enables very high performance simulation
+of mixed-signal systems</li>
+</ul>
+<h2 id="limitations-of-rnm">Limitations of RNM</h2>
+<ul>
+<li>connecting <strong>real</strong> or <strong>wreal</strong> signals
+to electrical signals requires careful consideration
+<ul>
+<li>Too conservative an approach can lead to large numbers of
+timepoints</li>
+<li>Too liberal an approach can lead to losing signal accuracy</li>
+</ul></li>
+<li>Time accuracy limited by the discrete sampling approach and the
+`<code>timescale</code> setting - no continuous signals anymore</li>
+<li>Limited capability for combination of signals by wiring outputs
+together
+<ul>
+<li>Requires assumptions about impedances to do simple merging</li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Metastability and Synchronizer</title>
     <url>/2023/08/10/synchronizer-metastability/</url>
     <content><![CDATA[<h2 id="sequentail-logic-deal">Sequentail logic deal</h2>
@@ -15674,71 +15776,6 @@ href="https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.I
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
-    <url>/2022/03/16/sv-rnm-101/</url>
-    <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
-<ul>
-<li>model analog blocks operation as signal flow model</li>
-<li>only the digital solver is used for high-speed simulation
-<ul>
-<li>Event-driven</li>
-<li>No convergence issues, because no analog solver is used</li>
-</ul></li>
-<li>Five different language standards support real number modeling:
-<ul>
-<li><strong>wreal</strong> (wired-real) ports in Verilog-AMS</li>
-<li><strong>real</strong> data type in VHDL</li>
-<li><strong>real</strong> data type in Verilog</li>
-<li><strong>real</strong> variables and <strong>nettypes</strong> in
-SystemVerilog (SV)</li>
-<li><strong>real</strong> types in e</li>
-</ul></li>
-</ul>
-<h2 id="benefits-of-rnm">Benefits of RNM</h2>
-<ul>
-<li>Most analog circuits that need to be modeled for MS verification at
-the SoC level can be described in terms of real-valued voltages or
-currents</li>
-<li>RNM is a mixed approach, borrowing concepts from both continuous and
-discrete domains
-<ul>
-<li>The values are floating-point (real) number.</li>
-<li>Time is discrete; the real signals change values based on discrete
-events</li>
-</ul></li>
-<li>Applicability of RNM is bounded primarily by
-<strong>signal-flow</strong> model style</li>
-<li>Migrating analog behavior from the analog domain to the event or
-pseudo-analog domain can bring huge benefits without sacrificing too
-much accuracy</li>
-<li>Simulation is executed by a digital simulation engine without need
-for the analog solver</li>
-<li>Hence real-number modeling enables very high performance simulation
-of mixed-signal systems</li>
-</ul>
-<h2 id="limitations-of-rnm">Limitations of RNM</h2>
-<ul>
-<li>connecting <strong>real</strong> or <strong>wreal</strong> signals
-to electrical signals requires careful consideration
-<ul>
-<li>Too conservative an approach can lead to large numbers of
-timepoints</li>
-<li>Too liberal an approach can lead to losing signal accuracy</li>
-</ul></li>
-<li>Time accuracy limited by the discrete sampling approach and the
-`<code>timescale</code> setting - no continuous signals anymore</li>
-<li>Limited capability for combination of signals by wiring outputs
-together
-<ul>
-<li>Requires assumptions about impedances to do simple merging</li>
-</ul></li>
-</ul>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -17706,6 +17743,139 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       </categories>
   </entry>
   <entry>
+    <title>Process Variation</title>
+    <url>/2022/03/02/variation/</url>
+    <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
+<p><img src="/2022/03/02/variation/image-20220302000743092.png"
+alt="image-20220302000743092" /></p>
+<h4 id="globallocal-variation">Global/Local Variation</h4>
+<p><img src="/2022/03/02/variation/image-20220302000808679.png"
+alt="image-20220302000808679" /></p>
+<h4 id="timing-and-rc-modeling-with-process-corners">Timing and RC
+Modeling with Process Corners</h4>
+<p><img src="/2022/03/02/variation/image-20220302000916728.png"
+alt="image-20220302000916728" /></p>
+<h4 id="global-and-local-variation-by-gaussian">Global and Local
+variation by Gaussian</h4>
+<p><img src="/2022/03/02/variation/image-20230111003336823.png"
+alt="image-20230111003336823" /></p>
+<blockquote>
+<p>Local Monte-Carlo (<strong>SSG, FFG with Local Gaussian</strong>) as
+Signoff golden</p>
+</blockquote>
+<p><img src="/2022/03/02/variation/image-20231215234014594.png"
+alt="image-20231215234014594" /></p>
+<h4 id="process-corner-model-limitations">Process Corner Model
+Limitations</h4>
+<p><img src="/2022/03/02/variation/image-20220323232119661.png"
+alt="image-20220323232119661" /></p>
+<p><img src="/2022/03/02/variation/image-20230111003705417.png"
+alt="image-20230111003705417" /></p>
+<p>Variation section</p>
+<ul>
+<li>Total corner (TT/SS/FF/SF/FS)
+<ul>
+<li>E.g. TTMacro_MOS_MOS_MOSCAP</li>
+</ul></li>
+<li>Global Corner (TTG/SSG/FFG/SFG/FSG) + Local MC
+<ul>
+<li>E.g. TTGlobalCorner_LocalMC_MOS_MOSCAP</li>
+</ul></li>
+<li>Local MC
+<ul>
+<li>E.g. LocalMCOnly_MOS_MOSCAP</li>
+</ul></li>
+<li>Global MC + Local MC (Total MC)
+<ul>
+<li>GlobalMC_LocalMC_MOS_MOSCAP</li>
+</ul></li>
+</ul>
+<p><img src="/2022/03/02/variation/image-20230308003005235.png"
+alt="image-20230308003005235" /></p>
+<p><img src="/2022/03/02/variation/image-20230111010426775.png"
+alt="image-20230111010426775" /></p>
+<p><img
+src="/2022/03/02/variation/Screen-Shot-2014-09-11-at-8.47.06-AM.png"
+alt="img" /></p>
+<p><img src="/2022/03/02/variation/image-20230111011757049.png"
+alt="image-20230111011757049" /></p>
+<blockquote>
+<p><strong>SSGNP, FFGNP</strong>:</p>
+<p>When N/P global correlation is weak (R^2=0.15), the corner of N/PMOS
+balance circuit (e.g. inverter) can be tightened (<strong>3sigma -&gt;
+2.5sgma</strong>) due to the <strong>cancellation</strong> between NMOS
+and PMOS</p>
+<p>SSGNP, FFGNP usually used in Digital STA</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Global variation</strong> validation with <strong>global
+corner</strong>
+<ul>
+<li><strong>3-sigma of global MC</strong> simulation is aligned with
+<strong>global corner</strong></li>
+</ul></li>
+<li><strong>Total variation</strong> validation with <strong>total
+corner</strong>
+<ul>
+<li><strong>3-sigma of global MC + local MC (total)</strong> simulation
+is aligned with <strong>total corner</strong></li>
+</ul></li>
+</ul>
+</blockquote>
+<h4 id="global-corner">Global Corner</h4>
+<blockquote>
+<p><a
+href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101</a></p>
+<p>The <strong>"total corner"</strong> is representative of the maximum
+device parameter variation including local device variation effects.
+However, it is not a statistical corner.</p>
+<p>The <strong>"global" corner</strong> is defined as the
+<strong>"total" corner minus the impact of "local
+variation"</strong></p>
+<p>Hence, if you were to examine simulation results for a parameter
+using a "total" and "global" corner, you would find the range of
+variation will be less with the "global" corner than with the "total"
+corner.</p>
+<p>The "global" corner is provided for use in <strong>statistical
+simulations</strong>. Hence, when performing a Monte-Carlo simulation,
+the "global" corner is selected - NOT the "total" corner.</p>
+</blockquote>
+<p><img src="/2022/03/02/variation/image-20230511234313012.png"
+alt="image-20230511234313012" /></p>
+<p><span class="math display">\[
+\Delta V_{T,\sigma_{total}} = \sqrt{\Delta^2 _{T,
+\sigma_{global}}+\Delta^2 _{T, \sigma_{local}}}
+\]</span></p>
+<h4 id="reference">reference</h4>
+<p>Eric J.-W. Fang, T5: Fundamentals of Process Monitors for
+Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State
+Circuits Conference</p>
+<p>Alvin Loke, Device and Physical Design Considerations for Circuits in
+FinFET Technology, ISSCC 2020 Short Course</p>
+<p>簡報 Cln16ffcll Sr V1d0 2p1 Usage Guide URL: <a
+href="https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view">https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view</a></p>
+<p>Radojcic, Riko, Dan Perry and Mark Nakamoto. “Design for
+manufacturability for fabless manufactuers.” <em>IEEE Solid-State
+Circuits Magazine</em> 1 (2009): n. pag.</p>
+<p>How To Reduce Implementation Headaches In FinFET Processes URL: <a
+href="https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/">https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/</a></p>
+<p>陌上风骑驴看IC, STA | SSGNP, FFGNP. <a
+href="https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg">https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg</a></p>
+<p>陌上风骑驴看IC, STA | ssg 跟ss corner 的区别——谬误更正版 <a
+href="https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd">https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd</a></p>
+<p>The Evolution, Pitfalls, and Cargo Cult Engineering of Advanced
+Digital Timing Sign-off <a
+href="https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf">https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf</a></p>
+<p>Don O'Riordan Cadence Design Systems. Recommended Spectre Monte Carlo
+modeling methodology [<a
+href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-guide.org/modeling/montecarlo.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>UVM REG RALF &amp; IP-XACT</title>
     <url>/2022/03/14/uvm-reg-ralf/</url>
     <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
@@ -17863,139 +18033,6 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Process Variation</title>
-    <url>/2022/03/02/variation/</url>
-    <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
-<p><img src="/2022/03/02/variation/image-20220302000743092.png"
-alt="image-20220302000743092" /></p>
-<h4 id="globallocal-variation">Global/Local Variation</h4>
-<p><img src="/2022/03/02/variation/image-20220302000808679.png"
-alt="image-20220302000808679" /></p>
-<h4 id="timing-and-rc-modeling-with-process-corners">Timing and RC
-Modeling with Process Corners</h4>
-<p><img src="/2022/03/02/variation/image-20220302000916728.png"
-alt="image-20220302000916728" /></p>
-<h4 id="global-and-local-variation-by-gaussian">Global and Local
-variation by Gaussian</h4>
-<p><img src="/2022/03/02/variation/image-20230111003336823.png"
-alt="image-20230111003336823" /></p>
-<blockquote>
-<p>Local Monte-Carlo (<strong>SSG, FFG with Local Gaussian</strong>) as
-Signoff golden</p>
-</blockquote>
-<p><img src="/2022/03/02/variation/image-20231215234014594.png"
-alt="image-20231215234014594" /></p>
-<h4 id="process-corner-model-limitations">Process Corner Model
-Limitations</h4>
-<p><img src="/2022/03/02/variation/image-20220323232119661.png"
-alt="image-20220323232119661" /></p>
-<p><img src="/2022/03/02/variation/image-20230111003705417.png"
-alt="image-20230111003705417" /></p>
-<p>Variation section</p>
-<ul>
-<li>Total corner (TT/SS/FF/SF/FS)
-<ul>
-<li>E.g. TTMacro_MOS_MOS_MOSCAP</li>
-</ul></li>
-<li>Global Corner (TTG/SSG/FFG/SFG/FSG) + Local MC
-<ul>
-<li>E.g. TTGlobalCorner_LocalMC_MOS_MOSCAP</li>
-</ul></li>
-<li>Local MC
-<ul>
-<li>E.g. LocalMCOnly_MOS_MOSCAP</li>
-</ul></li>
-<li>Global MC + Local MC (Total MC)
-<ul>
-<li>GlobalMC_LocalMC_MOS_MOSCAP</li>
-</ul></li>
-</ul>
-<p><img src="/2022/03/02/variation/image-20230308003005235.png"
-alt="image-20230308003005235" /></p>
-<p><img src="/2022/03/02/variation/image-20230111010426775.png"
-alt="image-20230111010426775" /></p>
-<p><img
-src="/2022/03/02/variation/Screen-Shot-2014-09-11-at-8.47.06-AM.png"
-alt="img" /></p>
-<p><img src="/2022/03/02/variation/image-20230111011757049.png"
-alt="image-20230111011757049" /></p>
-<blockquote>
-<p><strong>SSGNP, FFGNP</strong>:</p>
-<p>When N/P global correlation is weak (R^2=0.15), the corner of N/PMOS
-balance circuit (e.g. inverter) can be tightened (<strong>3sigma -&gt;
-2.5sgma</strong>) due to the <strong>cancellation</strong> between NMOS
-and PMOS</p>
-<p>SSGNP, FFGNP usually used in Digital STA</p>
-</blockquote>
-<blockquote>
-<ul>
-<li><strong>Global variation</strong> validation with <strong>global
-corner</strong>
-<ul>
-<li><strong>3-sigma of global MC</strong> simulation is aligned with
-<strong>global corner</strong></li>
-</ul></li>
-<li><strong>Total variation</strong> validation with <strong>total
-corner</strong>
-<ul>
-<li><strong>3-sigma of global MC + local MC (total)</strong> simulation
-is aligned with <strong>total corner</strong></li>
-</ul></li>
-</ul>
-</blockquote>
-<h4 id="global-corner">Global Corner</h4>
-<blockquote>
-<p><a
-href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101</a></p>
-<p>The <strong>"total corner"</strong> is representative of the maximum
-device parameter variation including local device variation effects.
-However, it is not a statistical corner.</p>
-<p>The <strong>"global" corner</strong> is defined as the
-<strong>"total" corner minus the impact of "local
-variation"</strong></p>
-<p>Hence, if you were to examine simulation results for a parameter
-using a "total" and "global" corner, you would find the range of
-variation will be less with the "global" corner than with the "total"
-corner.</p>
-<p>The "global" corner is provided for use in <strong>statistical
-simulations</strong>. Hence, when performing a Monte-Carlo simulation,
-the "global" corner is selected - NOT the "total" corner.</p>
-</blockquote>
-<p><img src="/2022/03/02/variation/image-20230511234313012.png"
-alt="image-20230511234313012" /></p>
-<p><span class="math display">\[
-\Delta V_{T,\sigma_{total}} = \sqrt{\Delta^2 _{T,
-\sigma_{global}}+\Delta^2 _{T, \sigma_{local}}}
-\]</span></p>
-<h4 id="reference">reference</h4>
-<p>Eric J.-W. Fang, T5: Fundamentals of Process Monitors for
-Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State
-Circuits Conference</p>
-<p>Alvin Loke, Device and Physical Design Considerations for Circuits in
-FinFET Technology, ISSCC 2020 Short Course</p>
-<p>簡報 Cln16ffcll Sr V1d0 2p1 Usage Guide URL: <a
-href="https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view">https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view</a></p>
-<p>Radojcic, Riko, Dan Perry and Mark Nakamoto. “Design for
-manufacturability for fabless manufactuers.” <em>IEEE Solid-State
-Circuits Magazine</em> 1 (2009): n. pag.</p>
-<p>How To Reduce Implementation Headaches In FinFET Processes URL: <a
-href="https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/">https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/</a></p>
-<p>陌上风骑驴看IC, STA | SSGNP, FFGNP. <a
-href="https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg">https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg</a></p>
-<p>陌上风骑驴看IC, STA | ssg 跟ss corner 的区别——谬误更正版 <a
-href="https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd">https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd</a></p>
-<p>The Evolution, Pitfalls, and Cargo Cult Engineering of Advanced
-Digital Timing Sign-off <a
-href="https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf">https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf</a></p>
-<p>Don O'Riordan Cadence Design Systems. Recommended Spectre Monte Carlo
-modeling methodology [<a
-href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-guide.org/modeling/montecarlo.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -18212,38 +18249,6 @@ in Verdi | Synopsys</a></p>
       </categories>
   </entry>
   <entry>
-    <title>verilog constant part-select and indexed part-select</title>
-    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
-    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
-<strong>part-select</strong>. There are two types of part-selects, one
-with a <strong>constant part-select</strong> and another with an
-<strong>indexed part-select</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
-<p>Having a variable part-select allows it to be used effectively in
-loops to select parts of the vector. Although the starting bit can be
-<strong>varied</strong>, the width has to be
-<strong>constant</strong>.</p>
-<blockquote>
-<p><strong>[&lt;start_bit +: <width>] // part-select increments from
-start-bit</strong></p>
-<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
-start-bit</strong></p>
-</blockquote>
-<p><strong>Example</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
-<p><strong>ref</strong></p>
-<p><a
-href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
-scalar and vector</a></p>
-<p><a
-href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
-is the "+:" operator called in Verilog?</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>verilog readmemb and readmemh</title>
     <url>/2022/02/12/verilog-readmemb/</url>
     <content><![CDATA[<p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
@@ -18278,6 +18283,38 @@ address bound.</p>
 <p><a
 href="https://projectf.io/posts/initialize-memory-in-verilog/">Initialize
 Memory in Verilog</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>verilog constant part-select and indexed part-select</title>
+    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
+    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
+<strong>part-select</strong>. There are two types of part-selects, one
+with a <strong>constant part-select</strong> and another with an
+<strong>indexed part-select</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
+<p>Having a variable part-select allows it to be used effectively in
+loops to select parts of the vector. Although the starting bit can be
+<strong>varied</strong>, the width has to be
+<strong>constant</strong>.</p>
+<blockquote>
+<p><strong>[&lt;start_bit +: <width>] // part-select increments from
+start-bit</strong></p>
+<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
+start-bit</strong></p>
+</blockquote>
+<p><strong>Example</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
+<p><strong>ref</strong></p>
+<p><a
+href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
+scalar and vector</a></p>
+<p><a
+href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
+is the "+:" operator called in Verilog?</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -18567,81 +18604,6 @@ alt="image-20220514121150988" /></p>
       </tags>
   </entry>
   <entry>
-    <title>The z-Transform and Its Application</title>
-    <url>/2022/03/22/z-Transform/</url>
-    <content><![CDATA[<h2 id="fir-equalization">FIR Equalization</h2>
-<h3 id="frequency-response">Frequency Response</h3>
-<p><img src="/2022/03/22/z-Transform/image-20220322093428287.png"
-alt="image-20220322093428287" /> <span class="math display">\[
-z = e^{j\omega T_s}
-\]</span></p>
-<h3 id="unit-impulse">Unit impulse</h3>
-<p>filter coefficients are <strong>[-0.131, 0.595, -0.274]</strong> and
-sampling period is <strong>100ps</strong></p>
-<p><img src="/2022/03/22/z-Transform/image-20220428125454912.png"
-alt="image-20220428125454912" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% Frequency response</span></span><br><span class="line">w = [<span class="number">-0.131</span>, <span class="number">0.595</span>, <span class="number">-0.274</span>];</span><br><span class="line">Ts = <span class="number">100e-12</span>;</span><br><span class="line">[mag, w] = freqz(w, <span class="number">1</span>, [], <span class="number">1</span>/Ts);</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="number">1e9</span>, <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(mag)));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% unit impulse response from transfer function</span></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">z = tf(<span class="string">&#x27;z&#x27;</span>, Ts);</span><br><span class="line">h = <span class="number">-0.131</span> + <span class="number">0.595</span>*z^(<span class="number">-1</span>) <span class="number">-0.274</span>*z^(<span class="number">-2</span>);</span><br><span class="line">[y, t] = impulse(h);</span><br><span class="line">stem(t*<span class="number">1e10</span>, y*Ts);  <span class="comment">% !!! y*Ts is essential</span></span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&quot;unit impulse response&quot;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(\times 100ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>impulse</code>:</p>
-<p>For discrete-time systems, the impulse response is the response to a
-unit area pulse of length <code>Ts</code> and height <code>1/Ts</code>,
-where <code>Ts</code> is the sample time of the system. (This pulse
-approaches <span class="math inline">\(\delta(t)\)</span> as
-<code>Ts</code> approaches zero.)</p>
-<p>Scale output:</p>
-<p>Multiply <code>impulse</code> output with sample period
-<code>Ts</code> in order to correct <code>1/Ts</code> height of
-<code>impulse</code> function.</p>
-</blockquote>
-<h3 id="psd-transformation">PSD transformation</h3>
-<p>If we have power spectrum or power spectrum density of <strong>both
-edge's absolute jitter</strong> (<span
-class="math inline">\(x(n)\)</span>) , <span
-class="math inline">\(P_{\text{xx}}\)</span></p>
-<p>Then <strong>1UI</strong> jitter is <span
-class="math inline">\(x_{\text{1UI}}(n)=x(n)-x(n-1)\)</span>, and
-<strong>Period</strong> jitter is <span
-class="math inline">\(x_{\text{Period}}(n)=x(n)-x(n-2)\)</span>, which
-can be modeled as FIR filter, <span class="math inline">\(H(\omega) =
-1-z^{-k}\)</span>, i.e. <span class="math inline">\(k=1\)</span> for
-<strong>1UI</strong> jitter and <span class="math inline">\(k=2\)</span>
-<strong>Period</strong> jitter <span
-class="math display">\[\begin{align}
-P_{\text{xx}}&#39;(\omega) &amp;= P_{\text{xx}}(\omega) \cdot \left|
-1-z^{-k}  \right|^2 \\
-&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-(e^{j\omega
-T_s})^{-k}  \right|^2 \\
-&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-e^{-j\omega T_s
-k}  \right|^2
-\end{align}\]</span></p>
-<p><img src="/2022/03/22/z-Transform/image-20220519172239916.png"
-alt="image-20220519172239916" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear all</span><br><span class="line">close all</span><br><span class="line">clc</span><br><span class="line"></span><br><span class="line">xf_fs = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">0.5</span>;</span><br><span class="line">k = <span class="number">1</span>;</span><br><span class="line">H_1UI = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_1UI = <span class="built_in">abs</span>(H_1UI).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_1UI);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for 1UI jitter&#x27;</span>);</span><br><span class="line"></span><br><span class="line">k = <span class="number">2</span>;</span><br><span class="line">H_period = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_period = <span class="built_in">abs</span>(H_period).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_period);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for Period jitter&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/22/z-Transform/image-20220709104127384.png"
-alt="image-20220709104127384" /> <span class="math display">\[
-x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
-\]</span></p>
-<h2 id="reference">reference</h2>
-<p><a
-href="https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf">Sam
-Palermo, ECEN720, Lecture 7: Equalization Introduction &amp; TX FIR
-Eq</a></p>
-<p><a
-href="https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab5_2021.pdf">Sam
-Palermo, ECEN720, Lab5 –Equalization Circuits</a></p>
-<p>B. Razavi, "The z-Transform for Analog Designers [The Analog Mind],"
-IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14,
-Summer 2020.</p>
-<p>Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial
-Data Communications</p>
-<p>Mathuranathan. Digital filter design – Introduction <a
-href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/">https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/</a></p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Wiener-Khinchin theorem</title>
     <url>/2024/07/18/wiener/</url>
     <content><![CDATA[<h2 id="energy-signals-vs-power-signal">Energy signals vs Power
@@ -18786,6 +18748,81 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
 ]]></content>
       <categories>
         <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>The z-Transform and Its Application</title>
+    <url>/2022/03/22/z-Transform/</url>
+    <content><![CDATA[<h2 id="fir-equalization">FIR Equalization</h2>
+<h3 id="frequency-response">Frequency Response</h3>
+<p><img src="/2022/03/22/z-Transform/image-20220322093428287.png"
+alt="image-20220322093428287" /> <span class="math display">\[
+z = e^{j\omega T_s}
+\]</span></p>
+<h3 id="unit-impulse">Unit impulse</h3>
+<p>filter coefficients are <strong>[-0.131, 0.595, -0.274]</strong> and
+sampling period is <strong>100ps</strong></p>
+<p><img src="/2022/03/22/z-Transform/image-20220428125454912.png"
+alt="image-20220428125454912" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% Frequency response</span></span><br><span class="line">w = [<span class="number">-0.131</span>, <span class="number">0.595</span>, <span class="number">-0.274</span>];</span><br><span class="line">Ts = <span class="number">100e-12</span>;</span><br><span class="line">[mag, w] = freqz(w, <span class="number">1</span>, [], <span class="number">1</span>/Ts);</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="number">1e9</span>, <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(mag)));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% unit impulse response from transfer function</span></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">z = tf(<span class="string">&#x27;z&#x27;</span>, Ts);</span><br><span class="line">h = <span class="number">-0.131</span> + <span class="number">0.595</span>*z^(<span class="number">-1</span>) <span class="number">-0.274</span>*z^(<span class="number">-2</span>);</span><br><span class="line">[y, t] = impulse(h);</span><br><span class="line">stem(t*<span class="number">1e10</span>, y*Ts);  <span class="comment">% !!! y*Ts is essential</span></span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&quot;unit impulse response&quot;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(\times 100ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>impulse</code>:</p>
+<p>For discrete-time systems, the impulse response is the response to a
+unit area pulse of length <code>Ts</code> and height <code>1/Ts</code>,
+where <code>Ts</code> is the sample time of the system. (This pulse
+approaches <span class="math inline">\(\delta(t)\)</span> as
+<code>Ts</code> approaches zero.)</p>
+<p>Scale output:</p>
+<p>Multiply <code>impulse</code> output with sample period
+<code>Ts</code> in order to correct <code>1/Ts</code> height of
+<code>impulse</code> function.</p>
+</blockquote>
+<h3 id="psd-transformation">PSD transformation</h3>
+<p>If we have power spectrum or power spectrum density of <strong>both
+edge's absolute jitter</strong> (<span
+class="math inline">\(x(n)\)</span>) , <span
+class="math inline">\(P_{\text{xx}}\)</span></p>
+<p>Then <strong>1UI</strong> jitter is <span
+class="math inline">\(x_{\text{1UI}}(n)=x(n)-x(n-1)\)</span>, and
+<strong>Period</strong> jitter is <span
+class="math inline">\(x_{\text{Period}}(n)=x(n)-x(n-2)\)</span>, which
+can be modeled as FIR filter, <span class="math inline">\(H(\omega) =
+1-z^{-k}\)</span>, i.e. <span class="math inline">\(k=1\)</span> for
+<strong>1UI</strong> jitter and <span class="math inline">\(k=2\)</span>
+<strong>Period</strong> jitter <span
+class="math display">\[\begin{align}
+P_{\text{xx}}&#39;(\omega) &amp;= P_{\text{xx}}(\omega) \cdot \left|
+1-z^{-k}  \right|^2 \\
+&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-(e^{j\omega
+T_s})^{-k}  \right|^2 \\
+&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-e^{-j\omega T_s
+k}  \right|^2
+\end{align}\]</span></p>
+<p><img src="/2022/03/22/z-Transform/image-20220519172239916.png"
+alt="image-20220519172239916" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear all</span><br><span class="line">close all</span><br><span class="line">clc</span><br><span class="line"></span><br><span class="line">xf_fs = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">0.5</span>;</span><br><span class="line">k = <span class="number">1</span>;</span><br><span class="line">H_1UI = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_1UI = <span class="built_in">abs</span>(H_1UI).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_1UI);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for 1UI jitter&#x27;</span>);</span><br><span class="line"></span><br><span class="line">k = <span class="number">2</span>;</span><br><span class="line">H_period = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_period = <span class="built_in">abs</span>(H_period).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_period);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for Period jitter&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/22/z-Transform/image-20220709104127384.png"
+alt="image-20220709104127384" /> <span class="math display">\[
+x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p><a
+href="https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf">Sam
+Palermo, ECEN720, Lecture 7: Equalization Introduction &amp; TX FIR
+Eq</a></p>
+<p><a
+href="https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab5_2021.pdf">Sam
+Palermo, ECEN720, Lab5 –Equalization Circuits</a></p>
+<p>B. Razavi, "The z-Transform for Analog Designers [The Analog Mind],"
+IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14,
+Summer 2020.</p>
+<p>Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial
+Data Communications</p>
+<p>Mathuranathan. Digital filter design – Introduction <a
+href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/">https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/</a></p>
+]]></content>
+      <categories>
+        <category>dsp</category>
       </categories>
   </entry>
 </search>

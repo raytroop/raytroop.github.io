@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:56" itemprop="dateModified" datetime="2024-07-22T01:52:56+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -449,7 +449,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:55" itemprop="dateModified" datetime="2024-07-22T01:52:55+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -728,7 +728,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:55" itemprop="dateModified" datetime="2024-07-22T01:52:55+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -833,7 +833,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:55" itemprop="dateModified" datetime="2024-07-22T01:52:55+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -959,7 +959,7 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:55" itemprop="dateModified" datetime="2024-07-22T01:52:55+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -990,6 +990,13 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
 <li>even-stage ring oscillator ( multipath ring oscillators)</li>
 <li>DLL: harmonic locking, stuck locking</li>
 </ul>
+<h2 id="pll-type-order">PLL Type &amp; Order</h2>
+<p><strong>Type</strong>: # of integrators within the loop</p>
+<p><strong>Order</strong>: # of poles in the <em>closed-loop</em>
+transfer function</p>
+<blockquote>
+<p><em>Type <span class="math inline">\(\leq\)</span> Order</em></p>
+</blockquote>
 <h2 id="ac-coupled-buffer">AC-coupled buffer</h2>
 <p><img src="/2024/05/11/clocking/image-20240720073616597.png"
 alt="image-20240720073616597" /></p>
@@ -1214,7 +1221,7 @@ alt="loop-refactor-partion.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:55" itemprop="dateModified" datetime="2024-07-22T01:52:55+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1290,7 +1297,7 @@ gives the result</p>
 \lim _{t\to \infty} e(t) &amp;= e_{ss} = \lim _{s\to 0} sE(s) \\
 &amp;= \lim _{s\to 0} s\frac{1}{1+\frac{K_n(s)}{s^n}}\frac{1}{s^{k+1}}
 \\
-&amp;= \lim _{s\to 0} \frac{s^n}{s^n + K_n(0)}\frac{1}{s^k}
+&amp;= \lim _{s\to 0} \frac{s^n}{s^n + K_n}\frac{1}{s^k}
 \end{align}\]</span></p>
 <ul>
 <li>if <span class="math inline">\(n &gt; k\)</span>, <span
@@ -1299,12 +1306,13 @@ class="math inline">\(e=0\)</span></li>
 class="math inline">\(e\to \infty\)</span></li>
 <li>if <span class="math inline">\(n=k\)</span>
 <ul>
-<li><span class="math inline">\(e_{ss} = \frac{1}{1+K_0}\)</span> if
+<li><span class="math inline">\(e_{ss} = \frac{1}{1+K_n}\)</span> if
 <span class="math inline">\(n=k=0\)</span></li>
 <li><span class="math inline">\(e_{ss} = \frac{1}{K_n}\)</span> if <span
-class="math inline">\(n=k \neq 0\)</span></li>
+class="math inline">\(n=k \neq 0\)</span>​</li>
 </ul></li>
 </ul>
+<p>where we define <span class="math inline">\(K_n(0) = K_n\)</span></p>
 <h2 id="pid">PID</h2>
 <p><em>TODO</em> 📅</p>
 <ul>
@@ -1707,7 +1715,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:55" itemprop="dateModified" datetime="2024-07-22T01:52:55+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2036,7 +2044,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:56" itemprop="dateModified" datetime="2024-07-22T01:52:56+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2121,7 +2129,7 @@ Signal Processing. Wiley-Interscience, 1986</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:55" itemprop="dateModified" datetime="2024-07-22T01:52:55+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:15" itemprop="dateModified" datetime="2024-07-23T12:01:15+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2313,7 +2321,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-22 01:52:55" itemprop="dateModified" datetime="2024-07-22T01:52:55+00:00">2024-07-22</time>
+      <time title="Modified: 2024-07-23 12:01:14" itemprop="dateModified" datetime="2024-07-23T12:01:14+00:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

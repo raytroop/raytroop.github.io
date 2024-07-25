@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">168</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,192 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/21/ldo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/21/ldo/" class="post-title-link" itemprop="url">Low-Dropout Regulator</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-21 10:31:41" itemprop="dateCreated datePublished" datetime="2023-10-21T10:31:41+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="pmos-ldo">PMOS LDO</h2>
+<p>A large output capacitor solves the sudden load change problem, but
+the stability decreases because the large output capacitor forces the
+output pole toward the origin with the role of dominant pole</p>
+<h2 id="dc-output-impedance">DC output impedance</h2>
+<p>DC output impedance of NMOS and PMOS LDO is the
+<strong><em>same</em></strong> for the same error amplifier gain</p>
+<p><span class="math display">\[
+R_{\text{out}} = \frac{1}{\beta A_{o1} g_{m2}}
+\]</span></p>
+<p>The NMOS LDO has a faster response to line transients than the PMOS
+LDO since it has better (smaller) PSRR</p>
+<p>A good PSRR is important when an LDO is used as a sub-regulator in
+cascade with a switching regulator. The LDO would need to have a
+sufficiently high rejection at the switching frequency of the switching
+converter to filter out the ripples at that frequency</p>
+<h2 id="nmos-ldo">NMOS LDO</h2>
+<p><em>TODO</em> 📅</p>
+<h3 id="feedforward-compensation-with-c_textff">Feedforward Compensation
+with <span class="math inline">\(C_\text{FF}\)</span>​</h3>
+<ul>
+<li>Improved Noise</li>
+<li>Improved Stability and Transient Response</li>
+<li>Improved PSRR</li>
+</ul>
+<p><img src="/2023/10/21/ldo/outCc.drawio.svg" alt="outCc.drawio" /></p>
+<p><span class="math display">\[\begin{align}
+R_1 \parallel \frac{1}{sC_{FF}} &amp;= \frac{R_1}{1+sR_1C_{FF}} \\
+Z_o &amp;= \left( R_1\parallel \frac{1}{sC_{FF}}\right)\parallel
+\frac{1}{sC_L} \\
+&amp;=\frac{R_1+R_2+sR_1R_2C_{FF}}{s^2R_1R_2C_{FF}C_L +
+s[(R_1+R_2)C_L+R_1C_{FF}]+1} \\
+A_{V2} &amp;= g_m Z_o \\
+&amp;= g_m \frac{R_1+R_2+sR_1R_2C_{FF}}{s^2R_1R_2C_{FF}C_L +
+s[(R_1+R_2)C_L+R_1C_{FF}]+1} \\
+\beta &amp;= \frac{R_2}{\frac{R_1}{1+sR_1C_{FF}}+R_2} \\
+&amp;= \frac{R_2(1+sR_1C_{FF})}{R_1+R_2+sR_1R_2C_c} \\
+A_{V2}\beta &amp;=
+\frac{g_mR_2(1+sR_1C_{FF})}{s^2R_1R_2C_{FF}C_L+s[(R_1+R_2)C_L+R_1C_{FF}]+1}
+\end{align}\]</span></p>
+<p>That is, adding a <span class="math inline">\(C_{FF}\)</span> also
+introduces a zero (<span class="math inline">\(\omega_z\)</span>) and
+pole (<span class="math inline">\(\omega_p\)</span>) into the <em>LDO
+feedback loop</em></p>
+<p><span class="math display">\[\begin{align}
+\omega_{po} &amp;= \frac{1}{(R_1+R_2)C_L} \\
+\omega_z &amp;= \frac{1}{R_1C_{FF}} \\
+\omega_{p} &amp;= \frac{1}{(R_1 \parallel R_2)C_{FF}}
+\end{align}\]</span></p>
+<h2 id="nmos-slave-ldo">NMOS Slave LDO</h2>
+<p><img src="/2023/10/21/ldo/nmos_slave_psrr.drawio.svg"
+alt="nmos_slave_psrr.drawio" /></p>
+<p><span class="math display">\[\begin{align}
+\frac{V_g}{V_i}
+&amp;=\frac{R||\frac{1}{s(C_g+C_{gs})}}{R||\frac{1}{s(C_g+C_{gs})}+\frac{1}{sC_{gd}}}
+\\
+&amp;= \frac{sRC_{gd}}{sR(C+C_{gd}+C_{gs})+1}
+\end{align}\]</span> <span class="math display">\[
+\frac{V_g}{V_i} = -\frac{sC_{ds}+g_{ds}}{sC_{gs}+g_m}
+\]</span></p>
+<p>That is, <span class="math display">\[
+\omega_{z,d} \simeq \frac{1}{R(\frac{g_m}{g_{ds}}C_{gd}+C)}
+\]</span></p>
+<p>The calculating PSRR pole approach similar with zero, just <span
+class="math inline">\(V_o\)</span> to <span
+class="math inline">\(V_i\)</span> zero <span class="math display">\[
+\omega_{p,d} \simeq \frac{1}{R(\frac{C_s}{g_mR}+C)}
+\]</span></p>
+<p>DC PSRR <span class="math display">\[
+\text{PSRR} = \frac{1}{g_mr_o}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p>Hinojo, J.M., Martinez, C.I., &amp; Torralba, A.J. (2018). Internally
+Compensated LDO Regulators for Modern System-on-Chip Design.</p>
+<p>Mingoo Seok. ISSCC 2020 tutorial "Basics of Digital Low-Dropout (LDO)
+Integrated Voltage Regulator"</p>
+<p>Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators"</p>
+<p>Chen, K. (2016). Power Management Techniques for Integrated Circuit
+Design.</p>
+<p>Morita, B.G. (2014). Understand Low-Dropout Regulator ( LDO )
+Concepts to Achieve Optimal Designs.</p>
+<p>H. -S. Kim, "Exploring Ways to Minimize Dropout Voltage for
+Energy-Efficient Low-Dropout Regulators: Viable approaches that preserve
+performance," in IEEE Solid-State Circuits Magazine, vol. 15, no. 2, pp.
+59-68, Spring 2023, doi: 10.1109/MSSC.2023.3262767.</p>
+<p>Ali Sheikholeslami, Circuit Intuitions: Voltage Regulators IEEE
+Solid-State Circuits Magazine, Vol. 12, Issue 4, to appear, Fall
+2020.</p>
+<p>Operational Transconductance Amplifier II Multi-Stage Designs [<a
+target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf</a>]</p>
+<p>Toshiba, Load Transient Response of LDO and Methods to Improve it
+Application Note [<a
+target="_blank" rel="noopener" href="https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268">https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268</a>]</p>
+<p>Application Report SBVA042–July 2014, Pros and Cons of Using a
+Feedforward Capacitor with a Low-Dropout Regulator [<a
+target="_blank" rel="noopener" href="https://www.ti.com/lit/an/sbva042/sbva042.pdf">https://www.ti.com/lit/an/sbva042/sbva042.pdf</a>]</p>
+<p>LDO Basics: Noise – How a Feed-forward Capacitor Improves System
+Performance [<a
+target="_blank" rel="noopener" href="https://www.ti.com/document-viewer/lit/html/SSZTA13">https://www.ti.com/document-viewer/lit/html/SSZTA13</a>]</p>
+<p>LDO Basics: Noise – How a Noise-reduction Pin Improves System
+Performance [<a
+target="_blank" rel="noopener" href="https://www.ti.com/document-viewer/lit/html/SSZTA40">https://www.ti.com/document-viewer/lit/html/SSZTA40</a>]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +412,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -355,7 +541,7 @@ alt="image-20231006110506245" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -455,7 +641,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -657,7 +843,7 @@ target="_blank" rel="noopener" href="https://benchugg.com/research_notes/sde_ito
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -784,7 +970,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -909,7 +1095,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1043,7 +1229,7 @@ Integrity (SPI)</em> (2018): 1-4.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1231,7 +1417,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1400,7 +1586,7 @@ repo</a>]</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1564,99 +1750,6 @@ target="_blank" rel="noopener" href="https://www.siliconcr.com/sc-cms/uploads/u2
 <p>Lecture 10: Jitter, ECEN720: High-Speed Links Circuits and Systems
 Spring 2023 [<a
 target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen689/lecture10_ee720_jitter.pdf">pdf</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/10/squash-all-commits/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/10/squash-all-commits/" class="post-title-link" itemprop="url">How to squash all git commits into one?</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-08-10 23:47:23" itemprop="dateCreated datePublished" datetime="2023-08-10T23:47:23+00:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 09:22:30" itemprop="dateModified" datetime="2024-07-25T09:22:30+00:00">2024-07-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a
-target="_blank" rel="noopener" href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
-<p>As of <a
-target="_blank" rel="noopener" href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
-1.6.2</a>, you can use <code>git rebase --root -i</code></p>
-<p>For each commit except the first, change <code>pick</code> to
-<code>squash</code>.</p>
-<p>this works find, but I had to do a forced push. be careful!
-<code>git push -f</code></p>
 
       
     </div>

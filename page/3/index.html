@@ -190,6 +190,263 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/21/pn-jitter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/21/pn-jitter/" class="post-title-link" itemprop="url">Phase Noise and Jitter Simulation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-21 11:33:58" itemprop="dateCreated datePublished" datetime="2023-10-21T11:33:58+00:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="integration-limits">Integration Limits</h2>
+<blockquote>
+<p>Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter
+Calculation,"[<a
+target="_blank" rel="noopener" href="https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf">https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf</a>]</p>
+</blockquote>
+<p><em>TODO</em> 📅</p>
+<h2 id="vco-phase-noise">VCO Phase Noise</h2>
+<h3 id="pnoise---timeaverage">pnoise - timeaverage</h3>
+<ol type="1">
+<li><p><em>Direct Plot/Pnoise/Phase Noise</em> or</p>
+<p><img src="/2023/10/21/pn-jitter/image-20220511112856934.png"
+alt="image-20220511112856934" /></p></li>
+<li><p>manually calculate by definition</p>
+<p><img src="/2023/10/21/pn-jitter/image-20220511112806122.png"
+alt="image-20220511112806122" /></p></li>
+<li><p><code>output noise</code> with unit <code>dBc</code></p>
+<p><em>Direct Plot/Pnoise/Output Noise Units:dBc/Hz and Noise
+convention: SSB</em></p>
+<p><img src="/2023/10/21/pn-jitter/image-20220511113248984.png"
+alt="image-20220511113248984" /></p></li>
+</ol>
+<blockquote>
+<p>The above method 2 and 3 only apply to <code>timeaveage</code> pnoise
+simulation,</p>
+</blockquote>
+<h3 id="pnoise---sampledjitteredge-crossing">pnoise -
+sampled(jitter)/Edge Crossing</h3>
+<p><img src="/2023/10/21/pn-jitter/EdgePhaseNoise.drawio.svg"
+alt="EdgePhaseNoise.drawio" /></p>
+<p><em>Direct Plot/Pnoise/<strong>Edge</strong> Phase Noise</em> or</p>
+<p><img src="/2023/10/21/pn-jitter/image-20220515214901120.png"
+alt="image-20220515214901120" /></p>
+<p>Another way, the following equation can also be used for
+<code>sampled(jitter)/Edge Crossing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PhaseNoise(dBc/Hz) = dB20( OutputNoise(V/sqrt(Hz)) / slopeCrossing / Tper*twoPi ) - dB10(2)</span><br></pre></td></tr></table></figure>
+<p>where <code>dB10(2)</code> is used to obtain SSB from DSB</p>
+<p><img src="/2023/10/21/pn-jitter/image-20220511150337318.png"
+alt="image-20220511150337318" /></p>
+<h3 id="output-noise-of-sampledjitter-pnoise">Output Noise of
+sampled(jitter) pnoise</h3>
+<p>The last section's <code>Output Noise (V**2/Hz)</code> can be
+obtained by <em>transient noise simulation</em></p>
+<p>The idea is that sample waveform with ideal clock, subtract DC
+offset, then fft(psd)</p>
+<ul>
+<li>samplesRaw = sample(wv)</li>
+<li>samplePost = samplesRaw - average(samplesRaw)</li>
+<li>Output Noise (V**2/Hz) = psd(samplePost)</li>
+</ul>
+<p><img src="/2023/10/21/pn-jitter/image-20220516184543148.png"
+alt="image-20220516184543148" /></p>
+<p><img src="/2023/10/21/pn-jitter/image-20220516184844296.png"
+alt="image-20220516184844296" /></p>
+<p><strong>Expression</strong>:</p>
+<p><img src="/2023/10/21/pn-jitter/image-20220516185506348.png"
+alt="image-20220516185506348" /></p>
+<blockquote>
+<p>The computation cost is typically very high, and the accuracy is
+lesser as compared to PSS/Pnoise</p>
+</blockquote>
+<h2 id="pnoise-sampledjitter-sampled-phase-option">Pnoise
+Sampled(jitter): Sampled Phase Option</h2>
+<ul>
+<li>Identical to <strong>noisetype=timedomain</strong> in old GUI</li>
+<li>Use model:
+<ul>
+<li>Sampleds Per Period: number of ponits</li>
+<li>Add Specific Points: specific time point, still time points</li>
+</ul></li>
+</ul>
+<p><img src="/2023/10/21/pn-jitter/image-20220712085426461.png"
+alt="image-20220712085426461" /></p>
+<p><img src="/2023/10/21/pn-jitter/image-20220712085836315.png"
+alt="image-20220712085836315" /></p>
+<p><img src="/2023/10/21/pn-jitter/image-20220712090011204.png"
+alt="image-20220712090011204" /></p>
+<blockquote>
+<p>pss beat freq = 5GHz</p>
+<p>pnoise sweeptype: absolute, from 100k to 2.5GHz</p>
+</blockquote>
+<h2 id="transient-noise">Transient noise</h2>
+<h3 id="phase-noise-from-transient-noise-analysis">phase noise from
+transient noise analysis</h3>
+<ol type="1">
+<li>The Phase Noise function is now available in the Direct Plot form
+(Results-Direct Plot-Main Form) after Transient Analysis is run
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+<li><code>PN</code> phase noise function
+<ul>
+<li>Absolute jitter Method</li>
+<li>Direct Power Spectral Density Method</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Absolute jitter Method</strong>: Phase noise is defined as
+the power spectral density of the absolute jitter of an input
+waveform</p>
+<p>and <strong>absolute jitter method</strong> is the default method</p>
+</blockquote>
+<p>In below discussion, we only think about the
+<code>absolute jitter method</code></p>
+<h3 id="psd-and-phase-noise">PSD and Phase Noise</h3>
+<blockquote>
+<ul>
+<li>phase noise is single-sideband</li>
+<li>psd is double-sideband</li>
+<li>Then the ratio is <strong>2</strong></li>
+</ul>
+</blockquote>
+<h4 id="by-pss_pnoise">By PSS_Pnoise</h4>
+<p><code>jee</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rfEdgePhaseNoise(?result &quot;pnoise_sample_pm0&quot; ?eventList &#x27;nil) + 10 * log10(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>convert <strong>single-sideband</strong> phase noise to psd by
+multiplying 2 or <code>10 * log10(2)</code></p>
+</blockquote>
+<h4 id="by-trannoise-pn-function">By trannoise <code>PN</code>
+function</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PN(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07) ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1 ?methodType &quot;absJitter&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+</blockquote>
+<h4 id="by-trannoise-psd-and-abs_jitter-function">By trannoise
+<code>psd</code> and <code>abs_jitter</code> function</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dB10(psd(abs_jitter(clip(VT(&quot;/Out1&quot;) 2.60417e-08 0.000400052) &quot;rising&quot; 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName &quot;Rectangular&quot; ?smooth 1 ?windowSize 15000 ?detrending &quot;None&quot; ?cohGain 1))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>double-sideband psd</p>
+<p><code>abs_jitter</code> <em>Y-Unit</em> default is
+<code>rad</code></p>
+</blockquote>
+<h4 id="comparison">Comparison</h4>
+<p><img src="/2023/10/21/pn-jitter/image-20220506225324377.png"
+alt="image-20220506225324377" /></p>
+<blockquote>
+<p><code>PN</code>'s result is same with <code>psd</code>'s</p>
+</blockquote>
+<h3 id="rms-value">RMS value</h3>
+<ul>
+<li>build the <code>abs_jitter</code> function with <em>seconds as the Y
+axis</em> and add the <code>stddev</code> function to determine the Jee
+jitter value</li>
+<li>or integrate psd</li>
+</ul>
+<p>The RMS <span class="math inline">\(x_{\text{RMS}}\)</span> of a
+discrete domain signal <span class="math inline">\(x(n)\)</span> is
+given by <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}|x(n)|^2}
+\]</span> Inserting Parseval's theorem given by <span
+class="math display">\[
+\sum_{n=0}^{N-1}|x(n)|^2=\frac{1}{N}\sum_{n=0}^{N-1}|X(k)|^2
+\]</span> allows for computing the RMS from the spectrum <span
+class="math inline">\(X(k)\)</span> as <span class="math display">\[
+x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
+\]</span></p>
+<h3 id="remarks">Remarks</h3>
+<p>Cadence Spectre's <code>PN</code> function may call
+<code>abs_jitter</code> and <code>psd</code> function under the
+hood.</p>
+<h2 id="reference">reference</h2>
+<p>Article (11514536) Title: How to obtain a phase noise plot from a
+transient noise analysis URL: <a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ</a></p>
+<p>Article (20500632) Title: How to simulate Random and Deterministic
+Jitters URL: <a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI</a></p>
+<p>Tutorial on Scaling of the Discrete Fourier Transform and the Implied
+Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl
+Andersson, Patrik Höstmad, Wolfgang Kropp URL: <a
+target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/">https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/21/ldo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -226,7 +483,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -319,6 +576,12 @@ class="math inline">\(V_i\)</span> zero <span class="math display">\[
 <p>DC PSRR <span class="math display">\[
 \text{PSRR} = \frac{1}{g_mr_o}
 \]</span></p>
+<hr />
+<p><img src="/2023/10/21/ldo/image-20240726205718920.png"
+alt="image-20240726205718920" /></p>
+<p><img src="/2023/10/21/ldo/image-20240726205738664.png"
+alt="image-20240726205738664" /></p>
+<hr />
 <h2 id="reference">reference</h2>
 <p>Hinojo, J.M., Martinez, C.I., &amp; Torralba, A.J. (2018). Internally
 Compensated LDO Regulators for Modern System-on-Chip Design.</p>
@@ -412,7 +675,7 @@ target="_blank" rel="noopener" href="https://www.ti.com/document-viewer/lit/html
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -541,7 +804,7 @@ alt="image-20231006110506245" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -641,7 +904,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -843,7 +1106,7 @@ target="_blank" rel="noopener" href="https://benchugg.com/research_notes/sde_ito
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -970,7 +1233,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1095,7 +1358,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1229,7 +1492,7 @@ Integrity (SPI)</em> (2018): 1-4.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:02" itemprop="dateModified" datetime="2024-07-26T14:36:02+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1417,7 +1680,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
+      <time title="Modified: 2024-07-26 14:36:01" itemprop="dateModified" datetime="2024-07-26T14:36:01+00:00">2024-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1524,232 +1787,6 @@ target="_blank" rel="noopener" href="https://www.oiforum.com/wp-content/uploads/
 <p>Chris Li Ph.D. student at the University of Toronto [<a
 target="_blank" rel="noopener" href="https://github.com/ChrisZonghaoLi/pystateye">pystateye
 repo</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/16/jitter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/16/jitter/" class="post-title-link" itemprop="url">Jitter</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-16 23:48:05" itemprop="dateCreated datePublished" datetime="2023-09-16T23:48:05+00:00">2023-09-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-25 13:29:28" itemprop="dateModified" datetime="2024-07-25T13:29:28+00:00">2024-07-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Jitter measurements can be classified into three categories:
-<em>cycle-to-cycle jitter</em>, <em>period jitter</em>, and
-<em>long-term jitter</em></p>
-<p>Jitter is a key performance parameter. Need to know what matters in
-each case:</p>
-<ul>
-<li><em>PJ</em> for digital timing</li>
-<li><em>LTJ</em> for data converters and serial data</li>
-<li><em>Phase noise</em> for communications (not all bandwidths
-matter)</li>
-</ul>
-<p><img src="/2023/09/16/jitter/image-20240714095712249.png"
-alt="image-20240714095712249" /></p>
-<blockquote>
-<p>The above Cycle-Cycle Jitter equation is <strong>wrong</strong>,
-<span class="math inline">\(\tau_1\)</span> and <span
-class="math inline">\(\tau_2\)</span> are not independent</p>
-</blockquote>
-<h2 id="short-term-jitter">Short Term Jitter</h2>
-<p><img src="/2023/09/16/jitter/image-20230916235240675.png"
-alt="image-20230916235240675" /></p>
-<p><img src="/2023/09/16/jitter/image-20230916235314423.png"
-alt="image-20230916235314423" /></p>
-<blockquote>
-<p><strong>Period jitter</strong>, <em>Jper</em> is the short term
-variation in clock period compared to the average (mean) clock
-period.</p>
-<p><strong>Cycle-to-Cycle</strong>, <em>Jcc</em> is the time difference
-of two adjacent clock periods</p>
-</blockquote>
-<h2 id="long-term-jitter-ltj">Long Term Jitter (LTJ)</h2>
-<p><img src="/2023/09/16/jitter/image-20230916235647723.png"
-alt="image-20230916235647723" /></p>
-<p><img src="/2023/09/16/jitter/image-20230916235709504.png"
-alt="image-20230916235709504" /></p>
-<h3 id="measuring-ltj">measuring LTJ</h3>
-<p><img src="/2023/09/16/jitter/image-20230916235033464.png"
-alt="image-20230916235033464" /></p>
-<h2 id="jitter-calculation-examples">Jitter Calculation Examples</h2>
-<p><img src="/2023/09/16/jitter/image-20230917003028143.png"
-alt="image-20230917003028143" /></p>
-<h2 id="jcc-vs-jper">Jcc vs Jper</h2>
-<blockquote>
-<p>Estimating the RMS cycle-to-cycle jitter if all you have available is
-the RMS period jitter.</p>
-</blockquote>
-<ul>
-<li><strong>Cycle-to-cycle jitter</strong> - The <em>short-term</em>
-variation in clock period between <em>adjacent</em> clock cycles. This
-jitter measure, abbreviated here as <span
-class="math inline">\(J_{CC}\)</span>, may be specified as either an RMS
-or peak-to-peak quantity.</li>
-<li><strong>Period jitter</strong> - The <em>short-term</em> variation
-in clock period over <em>all</em> measured clock cycles, compared to the
-average clock period. This jitter measure, abbreviated here as <span
-class="math inline">\(J_{PER}\)</span>, may be specified as either an
-RMS or peak-to-peak quantity.</li>
-</ul>
-<p>Let the variable below represent the variance of a single edge’s
-timing jitter, i.e. the difference in time of a jittery edge versus an
-ideal edge, <span class="math inline">\(\sigma^2_j\)</span></p>
-<p>If each edge’s jitter is <em>independent</em> then the variance of
-the period jitter can be written as <span
-class="math display">\[\begin{align}
-\sigma^2_\text{jper} &amp;= (\sigma_\text{j(n+1)}-\sigma_\text{j(n)})^2
-\\
-&amp;=
-\sigma_\text{j(n+1)}^2-2\sigma_\text{j(n+1)}\sigma_\text{j(n)})+\sigma_\text{j(n)})^2\\
-&amp;= \sigma_\text{j(n+1)}^2+\sigma_\text{j(n)})^2 \\
-&amp;=2\sigma^2_j
-\end{align}\]</span></p>
-<p>In every cycle-to-cycle measurement we use one
-"<strong>interior</strong>" clock edge <em>twice</em> and therefore we
-must account for this</p>
-<p><span class="math display">\[\begin{align}
-\sigma^2_\text{jcc} &amp;=
-(\sigma_\text{jper(n+1)}-\sigma_\text{jper(n)})^2 \\
-&amp;=(\sigma_\text{j(n+2)}-2\sigma_\text{j(n+1)}+\sigma_\text{j(n)})^2
-\end{align}\]</span></p>
-<p>Since each edge's jitter is assumed to be <em>independent</em> and
-have the same statistical properties we can drop the cross correlation
-terms and write:</p>
-<p><span class="math display">\[\begin{align}
-\sigma^2_\text{jcc}
-&amp;=(\sigma_\text{j(n+2)}-2\sigma_\text{j(n+1)}+\sigma_\text{j(n)})^2
-\\
-&amp;=\sigma_\text{j(n+2)}^2+4\sigma_\text{j(n+1)}^2+\sigma_\text{j(n)}^2
-\\
-&amp;=6\sigma_\text{j}^2
-\end{align}\]</span></p>
-<p>The ratio of the variances is therefore <span class="math display">\[
-\frac{\sigma^2_\text{jcc}}{\sigma^2_\text{jper}} =
-\frac{6\sigma_\text{j}^2} {2\sigma_\text{j}^2}=3
-\]</span> Then <span class="math display">\[
-\sigma_\text{jcc} = \sqrt{3}\sigma_\text{per}
-\]</span></p>
-<blockquote>
-<p>[<a
-target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M000000knzoUAA/timing-101-8-the-case-of-the-cycletocycle-jitter-rule-of-thumb?language=en_US">Timing
-101 #8: The Case of the Cycle-to-Cycle Jitter Rule of Thumb, Silicon
-Labs</a>]</p>
-</blockquote>
-<h2 id="cadence-sampled-phase-noise">Cadence Sampled Phase Noise</h2>
-<p><img src="/2023/09/16/jitter/jitter.edgePhase.Noise.png" /></p>
-<p><img src="/2023/09/16/jitter/sampledNoise-2.png" /></p>
-<blockquote>
-<p>How to derive edge phase noise from Output Noise in sampled Pnoise
-simulation, [<a
-target="_blank" rel="noopener" href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation</a>]</p>
-<p>[<a
-href="www.dropbox.com/s/3m531dl4fl7bwbr/jee_computation_example_sml_032823v1p0.pdf">Shawn
-Logan, Summary of Study of Cadence Sampled Phase Noise and Jitter
-Definitions with a Comparison to Conventional Time Interval Error (TIE)
-for a Driven Circuit</a>]</p>
-</blockquote>
-<h2
-id="general-relationships-between-variance-of-jitter-and-phase-noise">General
-relationships between variance of jitter and phase noise</h2>
-<p><img src="/2023/09/16/jitter/image-20240718225039432.png"
-alt="image-20240718225039432" /></p>
-<blockquote>
-<p><em>Understanding jitter and phase noise : a circuits and systems
-perspective</em></p>
-</blockquote>
-<h2 id="references">references</h2>
-<p>AN10007 Clock Jitter Definitions and Measurement Methods, SiTime [<a
-target="_blank" rel="noopener" href="https://www.sitime.com/sites/default/files/hiddenresources/AN10007-Jitter-and-measurement-methods_SIT.pdf">pdf</a>]</p>
-<p>SERDES Design and Simulation Using the Analog FastSPICE Platform,
-Silicon Creations [<a
-target="_blank" rel="noopener" href="https://www.siliconcr.com/sc-cms/uploads/u2u_presentation_sc_april25.pdf">pdf</a>]</p>
-<p>Flexible clocking solutions in advanced processes from 180nm to 5nm,
-Silicon Creations [<a
-target="_blank" rel="noopener" href="https://www.siliconcr.com/sc-cms/uploads/siliconcreations_iccad_2019_v2_191020.pdf">pdf</a>]</p>
-<p>One-size-fits-all PLLs for Advanced Samsung Foundry Processes,
-Silicon Creations [<a
-target="_blank" rel="noopener" href="https://www.siliconcr.com/sc-cms/uploads/siliconcreations_dac_2022_v2_22-07-12.pdf">pdf</a>]</p>
-<p>Circuit Design and Verification of 7nm LowPower, Low-Jitter PLLs,
-Silicon Creations, [<a
-target="_blank" rel="noopener" href="https://www.siliconcr.com/sc-cms/uploads/u2u-2018-sicr-plls-v3-180509.pdf">pdf</a>]</p>
-<p>Lecture 10: Jitter, ECEN720: High-Speed Links Circuits and Systems
-Spring 2023 [<a
-target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen689/lecture10_ee720_jitter.pdf">pdf</a>]</p>
 
       
     </div>

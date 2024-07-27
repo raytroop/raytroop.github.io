@@ -225,111 +225,6 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_rx_circuits.p
       </categories>
   </entry>
   <entry>
-    <title>Digital Delay Model</title>
-    <url>/2023/11/14/DigitalModels/</url>
-    <content><![CDATA[<h2 id="effective-switching-resistance">Effective Switching
-resistance</h2>
-<p><img src="/2023/11/14/DigitalModels/image-20231114001209252.png"
-alt="image-20231114001209252" /></p>
-<blockquote>
-<p><a
-href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf</a></p>
-</blockquote>
-<div class="pdf-container" data-target="/pdfs/chapter5_ex_sol.pdf" data-height="500px"></div>
-<h2 id="wire-delay">wire delay</h2>
-<h3 id="the-elmore-delay">The Elmore Delay</h3>
-<p><img src="/2023/11/14/DigitalModels/image-20230624234813719.png"
-alt="image-20230624234813719" /></p>
-<p><img src="/2023/11/14/DigitalModels/image-20230624234940864.png"
-alt="image-20230624234940864" /></p>
-<p><img src="/2023/11/14/DigitalModels/image-20230625001756173.png"
-alt="image-20230625001756173" /></p>
-<blockquote>
-<p>Basic idea: use of <strong>mean</strong> of <span
-class="math inline">\(v&#39;(t)\)</span> to approximate
-<strong>median</strong> of <span
-class="math inline">\(v&#39;(t)\)</span></p>
-</blockquote>
-<p><img src="/2023/11/14/DigitalModels/image-20230624235148246.png"
-alt="image-20230624235148246" /></p>
-<p><img src="/2023/11/14/DigitalModels/image-20230625002239199.png"
-alt="image-20230625002239199" /></p>
-<blockquote>
-<p>Elmore delay approximates the <strong>median</strong> of <span
-class="math inline">\(h(t)\)</span> by the <strong>mean</strong> of
-<span class="math inline">\(h(t)\)</span></p>
-</blockquote>
-<h3 id="distributed-rc-line">Distributed RC-Line</h3>
-<p><img src="/2023/11/14/DigitalModels/image-20230624224005736.png"
-alt="image-20230624224005736" /></p>
-<h3 id="lumped-approximations">Lumped approximations</h3>
-<h4 id="rc-models"><span class="math inline">\(rc\)</span>-models</h4>
-<p>If your simulator does not support a distributed <span
-class="math inline">\(rc\)</span>-model, or if the computational
-complexity of these models slows down your simulation too much, you can
-construct a simple yet accurate model yourself by approximating the
-distributed <span class="math inline">\(rc\)</span> by a lumped RC
-network with a limited number of elements</p>
-<p><img src="/2023/11/14/DigitalModels/image-20230624230057265.png"
-alt="image-20230624230057265" /></p>
-<blockquote>
-<p>The accuracy of the model is determined by the number of stages. For
-instance, the error of the <span class="math inline">\(\Pi -3\)</span>
-model is less than 3%, which is generally sufficient.</p>
-</blockquote>
-<h4 id="why-use-pi-model">Why use "<span
-class="math inline">\(\Pi\)</span> Model"</h4>
-<p><img src="/2023/11/14/DigitalModels/image-20230624230800255.png"
-alt="image-20230624230800255" /></p>
-<h4 id="examples">examples</h4>
-<p><img src="/2023/11/14/DigitalModels/image-20230624224643487.png"
-alt="image-20230624224643487" /></p>
-<p><img src="/2023/11/14/DigitalModels/image-20230624224923241.png"
-alt="image-20230624224923241" /></p>
-<h2 id="wire-inductive-effect">Wire Inductive Effect</h2>
-<ul>
-<li>RC delay increases quadratically with length</li>
-<li>LC delay (speed of light flight time) increases linearly with
-length</li>
-</ul>
-<blockquote>
-<p>Inductance will only be important to the delay of low-resistance
-signals such as wide clock lines</p>
-</blockquote>
-<h3 id="wave">wave</h3>
-<p>Signal propagates over the wire as a <strong>wave</strong> (rather
-than <strong>diffusing</strong> as in <span
-class="math inline">\(rc\)</span> only models)</p>
-<blockquote>
-<p>Signal propagates by alternately transferring energy from capacitive
-to inductive modes</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Akio Kitagawa, Analog layout design <a
-href="https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf">https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf</a></p>
-<p>THE WIRE <a
-href="http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf">http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf</a></p>
-<p>Anoop Veliyath, Design Engineer, Cadence Design Systems. Accurately
-Modeling Transmission Line Behavior with an LC Network-based Approach
-[<a
-href="https://www.pspice.com/sites/default/files/Transmission_Line_Modeling.pdf">pdf</a>]</p>
-<p>Mark Horowitz. Lecture 2: Wires and Wire Models [<a
-href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_02.pdf">pdf</a>]</p>
-<p>Neil Weste and David Harris. 2010. CMOS VLSI Design: A Circuits and
-Systems Perspective (4th. ed.). Addison-Wesley Publishing Company,
-USA.</p>
-<p>Cheng-Kok Koh. EE695K Modeling and Optimization of High Performance
-Interconnect [<a
-href="https://engineering.purdue.edu/~chengkok/ee695K/lec3a.pdf">lec3a_pdf</a>]</p>
-<p>Vishal Saxena. ECE 445 Intro to VLSI Design: Lectures for Spring 2019
-<a
-href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
     <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
     <content><![CDATA[<h4
@@ -473,6 +368,111 @@ variant, the it is defined as a subsequence and its
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Digital Delay Model</title>
+    <url>/2023/11/14/DigitalModels/</url>
+    <content><![CDATA[<h2 id="effective-switching-resistance">Effective Switching
+resistance</h2>
+<p><img src="/2023/11/14/DigitalModels/image-20231114001209252.png"
+alt="image-20231114001209252" /></p>
+<blockquote>
+<p><a
+href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf</a></p>
+</blockquote>
+<div class="pdf-container" data-target="/pdfs/chapter5_ex_sol.pdf" data-height="500px"></div>
+<h2 id="wire-delay">wire delay</h2>
+<h3 id="the-elmore-delay">The Elmore Delay</h3>
+<p><img src="/2023/11/14/DigitalModels/image-20230624234813719.png"
+alt="image-20230624234813719" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624234940864.png"
+alt="image-20230624234940864" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230625001756173.png"
+alt="image-20230625001756173" /></p>
+<blockquote>
+<p>Basic idea: use of <strong>mean</strong> of <span
+class="math inline">\(v&#39;(t)\)</span> to approximate
+<strong>median</strong> of <span
+class="math inline">\(v&#39;(t)\)</span></p>
+</blockquote>
+<p><img src="/2023/11/14/DigitalModels/image-20230624235148246.png"
+alt="image-20230624235148246" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230625002239199.png"
+alt="image-20230625002239199" /></p>
+<blockquote>
+<p>Elmore delay approximates the <strong>median</strong> of <span
+class="math inline">\(h(t)\)</span> by the <strong>mean</strong> of
+<span class="math inline">\(h(t)\)</span></p>
+</blockquote>
+<h3 id="distributed-rc-line">Distributed RC-Line</h3>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224005736.png"
+alt="image-20230624224005736" /></p>
+<h3 id="lumped-approximations">Lumped approximations</h3>
+<h4 id="rc-models"><span class="math inline">\(rc\)</span>-models</h4>
+<p>If your simulator does not support a distributed <span
+class="math inline">\(rc\)</span>-model, or if the computational
+complexity of these models slows down your simulation too much, you can
+construct a simple yet accurate model yourself by approximating the
+distributed <span class="math inline">\(rc\)</span> by a lumped RC
+network with a limited number of elements</p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624230057265.png"
+alt="image-20230624230057265" /></p>
+<blockquote>
+<p>The accuracy of the model is determined by the number of stages. For
+instance, the error of the <span class="math inline">\(\Pi -3\)</span>
+model is less than 3%, which is generally sufficient.</p>
+</blockquote>
+<h4 id="why-use-pi-model">Why use "<span
+class="math inline">\(\Pi\)</span> Model"</h4>
+<p><img src="/2023/11/14/DigitalModels/image-20230624230800255.png"
+alt="image-20230624230800255" /></p>
+<h4 id="examples">examples</h4>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224643487.png"
+alt="image-20230624224643487" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224923241.png"
+alt="image-20230624224923241" /></p>
+<h2 id="wire-inductive-effect">Wire Inductive Effect</h2>
+<ul>
+<li>RC delay increases quadratically with length</li>
+<li>LC delay (speed of light flight time) increases linearly with
+length</li>
+</ul>
+<blockquote>
+<p>Inductance will only be important to the delay of low-resistance
+signals such as wide clock lines</p>
+</blockquote>
+<h3 id="wave">wave</h3>
+<p>Signal propagates over the wire as a <strong>wave</strong> (rather
+than <strong>diffusing</strong> as in <span
+class="math inline">\(rc\)</span> only models)</p>
+<blockquote>
+<p>Signal propagates by alternately transferring energy from capacitive
+to inductive modes</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Akio Kitagawa, Analog layout design <a
+href="https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf">https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf</a></p>
+<p>THE WIRE <a
+href="http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf">http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf</a></p>
+<p>Anoop Veliyath, Design Engineer, Cadence Design Systems. Accurately
+Modeling Transmission Line Behavior with an LC Network-based Approach
+[<a
+href="https://www.pspice.com/sites/default/files/Transmission_Line_Modeling.pdf">pdf</a>]</p>
+<p>Mark Horowitz. Lecture 2: Wires and Wire Models [<a
+href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_02.pdf">pdf</a>]</p>
+<p>Neil Weste and David Harris. 2010. CMOS VLSI Design: A Circuits and
+Systems Perspective (4th. ed.). Addison-Wesley Publishing Company,
+USA.</p>
+<p>Cheng-Kok Koh. EE695K Modeling and Optimization of High Performance
+Interconnect [<a
+href="https://engineering.purdue.edu/~chengkok/ee695K/lec3a.pdf">lec3a_pdf</a>]</p>
+<p>Vishal Saxena. ECE 445 Intro to VLSI Design: Lectures for Spring 2019
+<a
+href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -777,6 +777,18 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
+    <title>Innovus block level create Power Ground Pin method</title>
+    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
+    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
+alt="createPGPin_onDie.drawio" /></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Innovus check mode variants</title>
     <url>/2022/02/07/Innovus-check-mode-variants/</url>
     <content><![CDATA[<p>checkDesign</p>
@@ -789,18 +801,6 @@ effect taken into consideration during delayCal</p>
 <p>setRouteMode</p>
 <p>setExtractRCMode</p>
 <p>setOptMode</p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Innovus block level create Power Ground Pin method</title>
-    <url>/2022/02/10/Innovus-block-level-PGPin/</url>
-    <content><![CDATA[<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
-alt="createPGPin_onDie.drawio" /></p>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -854,7 +854,30 @@ alt="createPGPin_onDie.drawio" /></p>
   <entry>
     <title>MOS Capacitor</title>
     <url>/2022/09/24/MOS-Cap/</url>
-    <content><![CDATA[<h2 id="dsb-varactors">D=S=B varactors</h2>
+    <content><![CDATA[<h2 id="mos-capacitances">MOS capacitances</h2>
+<ul>
+<li>the <strong>oxide capacitance</strong> between the gate and the
+channel <span class="math inline">\(C_1=WLC_{ox}\)</span></li>
+<li>the <strong>depletion capacitance</strong> between the channel and
+the substrate</li>
+<li>The <strong>junction capacitance</strong> between the source/drain
+areas and the substrate
+<ul>
+<li>The value of <span class="math inline">\(C_{SB}\)</span> and <span
+class="math inline">\(C_{DB}\)</span> is a function of the source and
+drain voltages with respect to the substrate</li>
+</ul></li>
+</ul>
+<p><img src="/2022/09/24/MOS-Cap/image-20240727134110758.png"
+alt="image-20240727134110758" /></p>
+<p><img src="/2022/09/24/MOS-Cap/image-20240727134150216.png"
+alt="image-20240727134150216" /></p>
+<blockquote>
+<p>The <strong>gate-bulk capacitance</strong> is usually neglected in
+the triode and saturation regions because the inversion layer acts as a
+"shield" between the gate and the bulk.</p>
+</blockquote>
+<h2 id="dsb-varactor">D=S=B varactor</h2>
 <p><img src="/2022/09/24/MOS-Cap/image-20220924003223575.png"
 alt="image-20220924003223575" /></p>
 <hr />
@@ -874,8 +897,6 @@ alt="image-20230504221234639" /></p>
 alt="image-20230504221313785" /></p>
 <p><img src="/2022/09/24/MOS-Cap/image-20220924004206116.png"
 alt="image-20220924004206116" /></p>
-<p><img src="/2022/09/24/MOS-Cap/image-20240117230001916.png"
-alt="image-20240117230001916" /></p>
 <h3 id="pdk-varactor">PDK varactor</h3>
 <blockquote>
 <p>nmoscap: NMOS in <strong>N-Well</strong> varactor</p>
@@ -996,54 +1017,6 @@ such as the guarding-ring of MOM and inductor</p>
 <td>TrGATE</td>
 <td>{GATE NOT PODE_GATE}</td>
 </tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
 <p>NP: N+ Source/Drain Ion Implantation</p>
@@ -1119,38 +1092,6 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSX
       <tags>
         <tag>virtuoso</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>OCV Derating With AOCV</title>
-    <url>/2022/12/10/OCVDeratingWithAOCV/</url>
-    <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">timing_aocv_derate_mode&#123;aocv_multiplicative | aocv_additive&#125;</span><br></pre></td></tr></table></figure>
-<p><em>Default:</em> <code>aocv_multiplicative</code></p>
-<p>Controls the AOCV derating mode.</p>
-<p>When set to <code>aocv_multiplicative</code>, the derating factor
-will be calculated as AOCV derating * OCV derating, which is set using
-the <code>set_timing_derate</code> command.</p>
-<p>When set to <code>aocv_additive</code>, the derating factor will be
-calculated as AOCV derating + OCV derating values.</p>
-<p>When you use this global variable, the <code>report_timing</code>
-command shows the <code>total_derate</code> column in the timing report
-output, which allows you to view and cross-check the calculated total
-derate factor.</p>
-<p>To set this global variable, use the <code>set_global</code>
-command.</p>
-<p><img
-src="/2022/12/10/OCVDeratingWithAOCV/image-20221210143256639.png"
-alt="image-20221210143256639" /></p>
-<h3 id="reference">reference</h3>
-<p>Genus Attribute Reference 22.1</p>
-<p>Innovus Text Command Reference 22.10</p>
-<p>Article (20416394) Title: Analysis with Advanced On-chip Variation
-(AOCV) derating in EDI system and ETS URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
   </entry>
   <entry>
     <title>Overflow Detection in Verilog</title>
@@ -1250,144 +1191,35 @@ href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.c
       </categories>
   </entry>
   <entry>
-    <title>Pole-Zero Doublets</title>
-    <url>/2022/12/14/Pole-Zero-Doublets/</url>
-    <content><![CDATA[<p>Mismatch between the pole and zero frequencies leads to the
-<strong>“doublet problem”</strong>. If the pole and the zero do not
-exactly coincide, we say that they constitute a
-<strong>doublet</strong></p>
-<blockquote>
-<p>Problem 10.19 in Razavi 2nd book</p>
-</blockquote>
-<p>Suppose the open-loop transfer function of a two-stage op amp is
-expressed as <span class="math display">\[
-H_{open}(s)=\frac{A_0(1+\frac{s}{\omega_z})}{\left( 1+
-\frac{s}{\omega_{p1}}\right)\left( 1+ \frac{s}{\omega_{p2}}\right)}
-\]</span> deally, <span class="math inline">\(\omega_z=\omega_2\)</span>
-and the feedback circuit exhibits a first-order behavior, i.e., its step
-response contains a single time constant and no overshoot.</p>
-<p>Then the transfer function of the amplifier in a <em>unity-gain
-feedback loop</em> is given by <span
-class="math display">\[\begin{align}
-H_{closed}(s)
-&amp;=\frac{A_0\left(1+\frac{s}{\omega_z}\right)}{\frac{s^2}{\omega_{p1}\omega_{p2}}+\left(
-\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1} \\
-&amp;=\frac{\frac{A_0}{A_0+1}(1+\frac{s}{\omega_z})}{\frac{s^2}{\omega_{p1}\omega_{p2}(A_0+1)}+\left(
-\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)\frac{s}{A_0+1}+1}
-\end{align}\]</span></p>
-<hr />
-<p>The denominator part of <span
-class="math inline">\(H_{closed}(s)\)</span> is <span
-class="math display">\[
-D(s) = \frac{s^2}{\omega_{p1}\omega_{p2}}+\left( \frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1
-\]</span></p>
-<p>Assuming two poles (<span class="math inline">\(\omega_{pA}
-\ll\omega_{pB}\)</span>) of <span
-class="math inline">\(H_{closed}(s)\)</span> are widely spaced, <span
-class="math display">\[\begin{align}
-D(s) &amp;= \left( 1+ \frac{s}{\omega_{pA}}\right)\left( 1+
-\frac{s}{\omega_{pB}}\right)\\
-&amp;\cong \frac{s^2}{\omega_{pA}\omega_{pB}}+\frac{s}{\omega_{pA}} + 1
-\end{align}\]</span></p>
-<p>Thus, the two poles of the closed-loop transfer function of system
-are <span class="math display">\[\begin{align}
-\omega_{pA} &amp;= \frac{A_0+1}{\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}} \\
-&amp;=  \frac{(A_0+1)\omega_{p1} \omega_{p2}}{\omega_{p1} + \omega_{p2}
-+ \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}} \\
-\omega_{pB} &amp;= \omega_{p1} + \omega_{p2} +
-\frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}
-\end{align}\]</span></p>
-<hr />
-<p><strong>Assuming</strong> <span class="math inline">\(\omega_z \simeq
-\omega_{p2}\)</span> and <span class="math inline">\(\omega_{p2}\ll
-(1+A_0)\omega_{p1}\)</span> <span class="math display">\[
-\omega_{pA} = \omega_{p2}
-\]</span> and <span class="math display">\[
-\omega_{pB} = (1+A_0)\omega_{p1}
-\]</span> The closed-loop transfer function is <span
-class="math display">\[
-H_{closed}(s) =
-\frac{\frac{A_0}{A_0+1}\left(1+\frac{s}{\omega_z}\right)}{\left(1+\frac{s}{(1+A_0)\omega_{p1}}\right)\left(
-1+\frac{s}{\omega_{p2}} \right)}
-\]</span></p>
-<hr />
-<p>The step response of the closed-loop amplifier</p>
-<p>Consider the Laplace transform function of step response, <span
-class="math inline">\(X(s)=\frac{1}{s}\)</span> <span
-class="math display">\[
-Y(s)=\frac{1}{s}\times H_{closed}(s)
-\]</span> Thus, the <strong>small-signal step response</strong> of the
-closed-loop amplifer is <span class="math display">\[
-y(t)=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t)
-\]</span> Since, <span class="math inline">\(\omega_{p2}\ll
-(1+A_0)\omega_{p1}\)</span>. Therefore, rewrite the <span
-class="math inline">\(y(t)\)</span> <span class="math display">\[
-y(t)\cong
-\frac{A_0}{A_0+1}\left[1-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t)
-\]</span> The step response contains an exponential term of the form
-<span
-class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}\)</span>.
-This is an important result, indicating that if the zero does not
-exactly cancel the pole, the step response exhibits an exponential with
-an amplitude proportional to <span
-class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)\)</span>,
-which depends on the mismatch between <span
-class="math inline">\(\omega_z\)</span> and <span
-class="math inline">\(\omega_{p2}\)</span> and a time constant <span
-class="math inline">\(\tau\)</span> of <span
-class="math inline">\(\frac{1}{\omega_{p2}}\)</span> or <span
-class="math inline">\(\frac{1}{\omega_{z}}\)</span></p>
-<h3 id="perfect-pole-zero-cancellation">perfect pole-zero
-cancellation</h3>
-<p><span class="math display">\[\begin{align}
-y(t)
-&amp;=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t) \\
-&amp;= \frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}\right]u(t)
-\end{align}\]</span></p>
-<hr />
-<p><img src="/2022/12/14/Pole-Zero-Doublets/image-20230108233523345.png"
-alt="image-20230108233523345" /></p>
-<p><img src="/2022/12/14/Pole-Zero-Doublets/image-20230108234123707.png"
-alt="image-20230108234123707" /></p>
-<blockquote>
-<p>The zero comes from the mirror node</p>
-<p>Thanks to unity gain buffer, zero is alleviated for <span
-class="math inline">\(C_c\)</span></p>
-</blockquote>
+    <title>OCV Derating With AOCV</title>
+    <url>/2022/12/10/OCVDeratingWithAOCV/</url>
+    <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">timing_aocv_derate_mode&#123;aocv_multiplicative | aocv_additive&#125;</span><br></pre></td></tr></table></figure>
+<p><em>Default:</em> <code>aocv_multiplicative</code></p>
+<p>Controls the AOCV derating mode.</p>
+<p>When set to <code>aocv_multiplicative</code>, the derating factor
+will be calculated as AOCV derating * OCV derating, which is set using
+the <code>set_timing_derate</code> command.</p>
+<p>When set to <code>aocv_additive</code>, the derating factor will be
+calculated as AOCV derating + OCV derating values.</p>
+<p>When you use this global variable, the <code>report_timing</code>
+command shows the <code>total_derate</code> column in the timing report
+output, which allows you to view and cross-check the calculated total
+derate factor.</p>
+<p>To set this global variable, use the <code>set_global</code>
+command.</p>
+<p><img
+src="/2022/12/10/OCVDeratingWithAOCV/image-20221210143256639.png"
+alt="image-20221210143256639" /></p>
 <h3 id="reference">reference</h3>
-<p>Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology,
-EE 240B – Spring 2018, Advanced Analog Integrated Circuits <a
-href="https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf</a></p>
-<p>Eric Chang, Prof. Elad Alon EE240B HW3 <a
-href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf</a>
-and <a
-href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf</a></p>
-<p>Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ),
-Operational Amplifiers <a
-href="http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf">http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf</a></p>
-<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
-frequency response and settling time of operational amplifiers," in IEEE
-Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
-doi: 10.1109/JSSC.1974.1050527.</p>
-<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
-frequency response and settling time of operational amplifiers," in IEEE
-Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
-doi: 10.1109/JSSC.1974.1050527.</p>
-<p>P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a
-tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17,
-no. 6, pp. 969-982, Dec. 1982, doi: 10.1109/JSSC.1982.1051851.</p>
-<p>SERGIO FRANCO, Demystifying pole-zero doublets URL:<a
-href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/demystifying-pole-zero-doublets/</a></p>
+<p>Genus Attribute Reference 22.1</p>
+<p>Innovus Text Command Reference 22.10</p>
+<p>Article (20416394) Title: Analysis with Advanced On-chip Variation
+(AOCV) derating in EDI system and ETS URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</p>
 ]]></content>
       <categories>
-        <category>analog</category>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -1743,6 +1575,18 @@ repo</a>]</p>
       </categories>
   </entry>
   <entry>
+    <title>VMware Disk Shrink</title>
+    <url>/2022/12/16/VMwareDiskShrink/</url>
+    <content><![CDATA[<p>In Guest OS and run</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>voltage-dependent DRC checks</title>
     <url>/2022/04/13/VD-DRC/</url>
     <content><![CDATA[<p>In T* DRC deck, it is based on the voltage recognition CAD layer and
@@ -1849,18 +1693,6 @@ those voltage-dependent DRC checks! - siemens</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>VMware Disk Shrink</title>
-    <url>/2022/12/16/VMwareDiskShrink/</url>
-    <content><![CDATA[<p>In Guest OS and run</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -2393,7 +2225,140 @@ href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">
   <entry>
     <title>Bias Circuit</title>
     <url>/2024/05/26/biasing/</url>
-    <content><![CDATA[<h2 id="cascode-with-switch">cascode with switch</h2>
+    <content><![CDATA[<h2 id="why-employ-mosfets-in-saturation">Why employ MOSFETs in
+saturation?</h2>
+<h3 id="gm-gds-at-fixed-vgs">gm, gds at fixed VGS</h3>
+<p><img src="/2024/05/26/biasing/image-20231125224714658.png"
+alt="image-20231125224714658" /></p>
+<hr />
+<p><span class="math inline">\(g_{ds}\)</span> is constant in saturation
+region</p>
+<p>in triode region <span class="math display">\[
+g_{ds} = \mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH}-V_{DS})
+\]</span></p>
+<blockquote>
+<p>Interestingly, <span class="math inline">\(g_m\)</span> in the
+saturation region is equal to the inverse of <span
+class="math inline">\(R_\text{on}\)</span> in the deep triode
+region.</p>
+</blockquote>
+<p><img src="/2024/05/26/biasing/gds_vgs.drawio.svg"
+alt="gds_vgs.drawio" /></p>
+<p><img src="/2024/05/26/biasing/image-20240727140918647.png"
+alt="image-20240727140918647" /></p>
+<h2 id="gm-gds-at-fixed-id-vg">gm, gds at fixed Id, VG</h2>
+<p><strong>In triode region</strong> <span class="math display">\[
+I_D  =
+\frac{1}{2}\mu_nC_{ox}\frac{W}{L}[2(V_{GS}-V_{TH})V_{DS}-V_{DS}^2]
+\]</span> where <span class="math inline">\(I_D\)</span> and <span
+class="math inline">\(V_G\)</span> is fixed</p>
+<p>Then <span class="math inline">\(V_S\)</span> can be expressed with
+<span class="math inline">\(V_D\)</span>, that is <span
+class="math display">\[
+V_S = V_{GT} - \sqrt{(V_{GT}-V_D)^2+V_{dsat}^2}
+\]</span> where <span class="math inline">\(V_{GT}=V_G-V_{TH}\)</span>,
+<span class="math inline">\(V_{dsat}\)</span> is <span
+class="math inline">\(V_{DS}\)</span> saturation voltage <span
+class="math display">\[
+g_m =
+\mu_nC_{ox}\frac{W}{L}\left(V_D-V_{GT}+\sqrt{(V_{GT}-V_D)^2+V_{dsat}^2}\right)
+\]</span> Then <span class="math display">\[
+\frac{\partial g_m}{\partial V_D} \propto  1 -
+\frac{V_{GT}-V_D}{\sqrt{(V_{GT}-V_D)^2+V_{dsat}^2}} \gt 0
+\]</span></p>
+<p>That is, <span class="math inline">\(g_m \propto V_D\)</span>​</p>
+<hr />
+<p><span class="math display">\[\begin{align}
+g_{ds} &amp;= \mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH}-V_{DS}) \\
+&amp;= \mu_nC_{ox}\frac{W}{L}(V_{GT}-V_{D})
+\end{align}\]</span></p>
+<p>That is, <span class="math inline">\(g_{ds} \propto -V_D\)</span></p>
+<p><img src="/2024/05/26/biasing/image-20240727171005401.png"
+alt="image-20240727171005401" /></p>
+<blockquote>
+<p>Both gain and speed degrade once entering triode region, though Id is
+constant</p>
+</blockquote>
+<h2 id="channel-length-modulation">Channel-length modulation</h2>
+<blockquote>
+<p>❗ There it <strong>not</strong> channel-length modulation in the
+triode region</p>
+<p><img src="/2024/05/26/biasing/image-20240727095651984.png"
+alt="image-20240727095651984" /></p>
+</blockquote>
+<p><span class="math display">\[\begin{align}
+I_D
+&amp;=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2(1+\frac{\Delta
+L}{L}) \\
+I_D &amp;=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2(1+\lambda
+V_{DS}) \\
+I_D
+&amp;=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2(1+\frac{V_{DS}}{V_A})
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\frac{\Delta L}{L}=\lambda
+V_{DS}\)</span> and <span
+class="math inline">\(V_A=\frac{1}{\lambda}\)</span></p>
+<p><span class="math inline">\(\lambda\)</span> is channel length
+modulation parameter</p>
+<p><span class="math inline">\(V_A\)</span>, i.e. Early voltage is equal
+to inverse of channel length modulation parameter</p>
+<p>The output resistance <span class="math inline">\(r_o\)</span></p>
+<p><span class="math display">\[\begin{align}
+r_o &amp;= \frac{\partial V_{DS}}{\partial I_D} \\
+&amp;= \frac{1}{\partial I_D/\partial V_{DS}} \\
+&amp;= \frac{1}{\lambda I_D} \\
+&amp;= \frac{V_A}{I_D}
+\end{align}\]</span></p>
+<p>Due to <span class="math inline">\(\lambda \propto 1/L\)</span>, i.e.
+<span class="math inline">\(V_A \propto L\)</span> <span
+class="math display">\[
+r_o \propto \frac{L}{I_D}
+\]</span> <img src="/2024/05/26/biasing/image-20220930001909262.png"
+alt="image-20220930001909262" /></p>
+<p><img src="/2024/05/26/biasing/image-20220930002003924.png"
+alt="image-20220930002003924" /></p>
+<p><img src="/2024/05/26/biasing/image-20220930002157365.png"
+alt="image-20220930002157365" /></p>
+<p>The output resistance is almost doubled using Stacked FET in
+<em>saturation region</em></p>
+<blockquote>
+<p><span class="math inline">\(V_t\)</span> and mobility <span
+class="math inline">\(\mu_{n,p}\)</span> are sensitive to
+temperature</p>
+<ul>
+<li><span class="math inline">\(V_t\)</span> decreases by 2-mV for every
+1<span class="math inline">\(^oC\)</span> rise in temperature</li>
+<li>mobility <span class="math inline">\(\mu_{n,p}\)</span> decreases
+with temperature</li>
+</ul>
+<p>Overall, increase in temperature results in lower drain currents</p>
+</blockquote>
+<h2 id="subthreshold-conduction">Subthreshold Conduction</h2>
+<p>By square-law, the Eq <span class="math inline">\(g_m = \sqrt{2\mu
+C_{ox}\frac{W}{L}I_D}\)</span>, it is possible to obtain a
+<em>higer</em> transconductance by increasing <span
+class="math inline">\(W\)</span> while maintaining <span
+class="math inline">\(I_D\)</span> constant. However, if <span
+class="math inline">\(W\)</span> increases while <span
+class="math inline">\(I_D\)</span> remains constant, then <span
+class="math inline">\(V_{GS} \to V_{TH}\)</span> and device enters the
+subthreshold region. <span class="math display">\[
+I_D = I_0\exp \frac{V_{GS}}{\xi V_T}
+\]</span></p>
+<p>where <span class="math inline">\(I_0\)</span> is proportional to
+<span class="math inline">\(W/L\)</span>, <span
+class="math inline">\(\xi \gt 1\)</span> is a nonideality factor, and
+<span class="math inline">\(V_T = kT/q\)</span></p>
+<p>As a result, the transconductance in subthreshold region is <span
+class="math display">\[
+g_m = \frac{I_D}{\xi V_T}
+\]</span></p>
+<p>which is <span class="math inline">\(g_m \propto I_D\)</span></p>
+<p><img src="/2024/05/26/biasing/image-20240627230726326.png"
+alt="image-20240627230726326" /></p>
+<p><img src="/2024/05/26/biasing/image-20240627230744044.png"
+alt="image-20240627230744044" /></p>
+<h2 id="cascode-with-switch">cascode with switch</h2>
 <p><img src="/2024/05/26/biasing/image-20231212145336401.png"
 alt="image-20231212145336401" /></p>
 <h2 id="cascode-with-single-current-input">cascode with single current
@@ -2596,9 +2561,51 @@ alt="image-20231202134138319" /></p>
 </blockquote>
 <p><img src="/2024/05/26/biasing/image-20231202104505264.png"
 alt="image-20231202104505264" /></p>
+<h2 id="reference">reference</h2>
+<p>S. Pavan, "Systematic Development of CMOS Fixed-Transconductance Bias
+Circuits," in <em>IEEE Transactions on Circuits and Systems II: Express
+Briefs</em>, vol. 69, no. 5, pp. 2394-2397, May 2022</p>
+<p>S. Pavan, "A Fixed Transconductance Bias Circuit for CMOS Analog
+Integrated Circuits", <em>IEEE International Symposium on Circuits and
+Systems</em>, ISCAS 2004, Vancouver , May 2004</p>
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Calibre Runsets</title>
+    <url>/2023/08/10/calibreRunsets/</url>
+    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
+runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
+<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
+respectively.</p>
+<p>When invoked, the Calibre DRC and LVS windows automatically load the
+runset used when the last session was closed.</p>
+<blockquote>
+<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
+run. They contain only information that differs from the default
+configuration of Calibre Interactive. There is a one-to-one
+correspondence between entry lines in the runset file and fields and
+button items in the Calibre Interactive user interface. Here is as
+example of a DRC runset:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr />
+<p>The runset filename opened at startup (if no runset is specified on
+the command line) can also be specified by setting the
+<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
+and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
+for LVS. If these environment variables are set, they take precedence
+over all other runset opening behavior options.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>tsmc_template. <a
+href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
+<p>Calibre Verification User’s Manual</p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -2643,41 +2650,6 @@ FFT</a></p>
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Calibre Runsets</title>
-    <url>/2023/08/10/calibreRunsets/</url>
-    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
-runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
-<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
-respectively.</p>
-<p>When invoked, the Calibre DRC and LVS windows automatically load the
-runset used when the last session was closed.</p>
-<blockquote>
-<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
-run. They contain only information that differs from the default
-configuration of Calibre Interactive. There is a one-to-one
-correspondence between entry lines in the runset file and fields and
-button items in the Calibre Interactive user interface. Here is as
-example of a DRC runset:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
-</blockquote>
-<hr />
-<p>The runset filename opened at startup (if no runset is specified on
-the command line) can also be specified by setting the
-<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
-and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
-for LVS. If these environment variables are set, they take precedence
-over all other runset opening behavior options.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>tsmc_template. <a
-href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
-<p>Calibre Verification User’s Manual</p>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -2970,41 +2942,6 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
       </categories>
   </entry>
   <entry>
-    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
-    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
-    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
-It determines which edges to be used as follows:</p>
-<ol type="1">
-<li><p>Evaluate waveforms over the smallest common base period</p></li>
-<li><p>For each capture edge, find the closest setup launch edge. Call
-these the <strong>primary pairs</strong></p></li>
-<li><p>Out of the <strong>primary pairs</strong>, pick the most
-restrictive setup launch and capture edges.</p></li>
-<li><p>For each <strong>primary pair</strong>, draw two hold
-relationships:</p>
-<ul>
-<li><p>Launch to (capture - 1)</p></li>
-<li><p>(Launch + 1) to Capture</p>
-<p>From all of these hold relationships, pick the most
-restrictive.</p></li>
-</ul></li>
-</ol>
-<p>PrimeTime uses the ideal clock waveform (as reported in
-<code>report_clock</code>) to determine the appropriate clock edges for
-inter-clock analysis.</p>
-<p><img
-src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
-alt="image-20220301203135490" /></p>
-<blockquote>
-<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
-<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Clock Gating</title>
     <url>/2023/04/05/clockgating/</url>
     <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
@@ -3042,6 +2979,41 @@ alt="clock gating" /></p>
 <h3 id="reference">reference</h3>
 <p>The Ultimate Guide to Clock Gating <a
 href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
+    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
+    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
+It determines which edges to be used as follows:</p>
+<ol type="1">
+<li><p>Evaluate waveforms over the smallest common base period</p></li>
+<li><p>For each capture edge, find the closest setup launch edge. Call
+these the <strong>primary pairs</strong></p></li>
+<li><p>Out of the <strong>primary pairs</strong>, pick the most
+restrictive setup launch and capture edges.</p></li>
+<li><p>For each <strong>primary pair</strong>, draw two hold
+relationships:</p>
+<ul>
+<li><p>Launch to (capture - 1)</p></li>
+<li><p>(Launch + 1) to Capture</p>
+<p>From all of these hold relationships, pick the most
+restrictive.</p></li>
+</ul></li>
+</ol>
+<p>PrimeTime uses the ideal clock waveform (as reported in
+<code>report_clock</code>) to determine the appropriate clock edges for
+inter-clock analysis.</p>
+<p><img
+src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
+alt="image-20220301203135490" /></p>
+<blockquote>
+<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
+<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -4495,6 +4467,79 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
       </categories>
   </entry>
   <entry>
+    <title>Deep N-well</title>
+    <url>/2023/05/29/dnw/</url>
+    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
+<p>A variety of techniques can be used to minimize this noise, for
+example by keeping analog devices surrounded by guard rings, or using a
+separate supply for the substrate/well taps.</p>
+<p>However <em>guard rings alone cannot prevent noise coupling deep in
+the substrate, only surface currents</em>.</p>
+<blockquote>
+<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
+the substrate noise, but such is not valid for NMOS .</p>
+</blockquote>
+<h2 id="dnw">DNW</h2>
+<p>The N-channel devices built directly into the P-type substrate are
+not as effectively isolated as P-channel devices in their N-wells. This
+is because despite creating a P+ guard ring around the devices, there
+remains an electrical path below the guard ring for charge to flow.</p>
+<p>To overcome this issue, a <em>deep N-well</em> can be used to more
+effectively isolate these N-channel devices.</p>
+<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
+alt="image-20230529001556060" /></p>
+<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
+alt="image-20230529010836003" /></p>
+<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
+alt="BM_SS_Together at Last_Fig1" /></p>
+<blockquote>
+<p>pwdnw: PW/DNW diode</p>
+<p>dnwpsub: DNW/PSUB diode</p>
+<p><a
+href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
+At Last – Combining Netlist and Layout Data for Power-Aware
+Verification</a></p>
+</blockquote>
+<p><img src="/2023/05/29/dnw/image-20240708221831791.png"
+alt="image-20240708221831791" /></p>
+<p><img src="/2023/05/29/dnw/image-20240708222327376.png"
+alt="image-20240708222327376" /></p>
+<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
+alt="image-20230529002733114" /></p>
+<ul>
+<li>the P-well is separated, allowing the voltage to be controlled</li>
+<li>because the circuit within the deep N-well is separated from the
+p-substrate in this structure, there is the benefit that this circuitry
+is less susceptible to noise that propagates through the
+p-substrate.</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
+Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
+Transistor Performance for Systems-on-a-Chip Integration. 32nd European
+Solid-State Device Research Conference, 251-254. URL:[<a
+href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
+<a
+href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
+<p>Mark Waller, <a
+href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
+layout: Why wells, taps, and guard rings are crucial</a></p>
+<p>KEITH SABINE <a
+href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
+Deep N Wells in Analog Design</a></p>
+<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
+nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
+1-8.</p>
+<p>cmos_processing, URL:<a
+href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
+<p>Kuo-Tsai LiPaul ChangAndy Chang, TSMC, US20120053923A1, "Methods of
+designing integrated circuits and systems thereof"</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Jitters Simulation</title>
     <url>/2022/05/16/dj-rj/</url>
     <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
@@ -4682,76 +4727,16 @@ href="https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tip
       </categories>
   </entry>
   <entry>
-    <title>Deep N-well</title>
-    <url>/2023/05/29/dnw/</url>
-    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
-<p>A variety of techniques can be used to minimize this noise, for
-example by keeping analog devices surrounded by guard rings, or using a
-separate supply for the substrate/well taps.</p>
-<p>However <em>guard rings alone cannot prevent noise coupling deep in
-the substrate, only surface currents</em>.</p>
-<blockquote>
-<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
-the substrate noise, but such is not valid for NMOS .</p>
-</blockquote>
-<h2 id="dnw">DNW</h2>
-<p>The N-channel devices built directly into the P-type substrate are
-not as effectively isolated as P-channel devices in their N-wells. This
-is because despite creating a P+ guard ring around the devices, there
-remains an electrical path below the guard ring for charge to flow.</p>
-<p>To overcome this issue, a <em>deep N-well</em> can be used to more
-effectively isolate these N-channel devices.</p>
-<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
-alt="image-20230529001556060" /></p>
-<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
-alt="image-20230529010836003" /></p>
-<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
-alt="BM_SS_Together at Last_Fig1" /></p>
-<blockquote>
-<p>pwdnw: PW/DNW diode</p>
-<p>dnwpsub: DNW/PSUB diode</p>
-<p><a
-href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
-At Last – Combining Netlist and Layout Data for Power-Aware
-Verification</a></p>
-</blockquote>
-<p><img src="/2023/05/29/dnw/image-20240708221831791.png"
-alt="image-20240708221831791" /></p>
-<p><img src="/2023/05/29/dnw/image-20240708222327376.png"
-alt="image-20240708222327376" /></p>
-<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
-alt="image-20230529002733114" /></p>
-<ul>
-<li>the P-well is separated, allowing the voltage to be controlled</li>
-<li>because the circuit within the deep N-well is separated from the
-p-substrate in this structure, there is the benefit that this circuitry
-is less susceptible to noise that propagates through the
-p-substrate.</li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
-Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
-Transistor Performance for Systems-on-a-Chip Integration. 32nd European
-Solid-State Device Research Conference, 251-254. URL:[<a
-href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
-<a
-href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
-<p>Mark Waller, <a
-href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
-layout: Why wells, taps, and guard rings are crucial</a></p>
-<p>KEITH SABINE <a
-href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
-Deep N Wells in Analog Design</a></p>
-<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
-nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
-1-8.</p>
-<p>cmos_processing, URL:<a
-href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
-<p>Kuo-Tsai LiPaul ChangAndy Chang, TSMC, US20120053923A1, "Methods of
-designing integrated circuits and systems thereof"</p>
+    <title>How to preserve hand-instantiated cells</title>
+    <url>/2023/02/10/dont-touch/</url>
+    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
+<p>The instances whose name contain "dont_touch_" shall be preserved
+during synthesis</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>analog</category>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -4767,16 +4752,145 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
       </categories>
   </entry>
   <entry>
-    <title>How to preserve hand-instantiated cells</title>
-    <url>/2023/02/10/dont-touch/</url>
-    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
-<p>The instances whose name contain "dont_touch_" shall be preserved
-during synthesis</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+    <title>Pole-Zero Doublet</title>
+    <url>/2022/12/14/doublet/</url>
+    <content><![CDATA[<p>Mismatch between the pole and zero frequencies leads to the
+<strong>“doublet problem”</strong>. If the pole and the zero do not
+exactly coincide, we say that they constitute a
+<strong>doublet</strong></p>
+<blockquote>
+<p>Problem 10.19 in Razavi 2nd book</p>
+</blockquote>
+<p>Suppose the open-loop transfer function of a two-stage op amp is
+expressed as <span class="math display">\[
+H_{open}(s)=\frac{A_0(1+\frac{s}{\omega_z})}{\left( 1+
+\frac{s}{\omega_{p1}}\right)\left( 1+ \frac{s}{\omega_{p2}}\right)}
+\]</span> Ideally, <span
+class="math inline">\(\omega_z=\omega_2\)</span> and the feedback
+circuit exhibits a first-order behavior, i.e., its step response
+contains a single time constant and no overshoot.</p>
+<p>Then the transfer function of the amplifier in a <em>unity-gain
+feedback loop</em> is given by <span
+class="math display">\[\begin{align}
+H_{closed}(s)
+&amp;=\frac{A_0\left(1+\frac{s}{\omega_z}\right)}{\frac{s^2}{\omega_{p1}\omega_{p2}}+\left(
+\frac{1}{\omega_{p1}} +
+\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1} \\
+&amp;=\frac{\frac{A_0}{A_0+1}(1+\frac{s}{\omega_z})}{\frac{s^2}{\omega_{p1}\omega_{p2}(A_0+1)}+\left(
+\frac{1}{\omega_{p1}} +
+\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)\frac{s}{A_0+1}+1}
+\end{align}\]</span></p>
+<hr />
+<p>The denominator part of <span
+class="math inline">\(H_{closed}(s)\)</span> is <span
+class="math display">\[
+D(s) = \frac{s^2}{\omega_{p1}\omega_{p2}}+\left( \frac{1}{\omega_{p1}} +
+\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1
+\]</span></p>
+<p>Assuming two poles (<span class="math inline">\(\omega_{pA}
+\ll\omega_{pB}\)</span>) of <span
+class="math inline">\(H_{closed}(s)\)</span> are widely spaced, <span
+class="math display">\[\begin{align}
+D(s) &amp;= \left( 1+ \frac{s}{\omega_{pA}}\right)\left( 1+
+\frac{s}{\omega_{pB}}\right)\\
+&amp;\cong \frac{s^2}{\omega_{pA}\omega_{pB}}+\frac{s}{\omega_{pA}} + 1
+\end{align}\]</span></p>
+<p>Thus, the two poles of the closed-loop transfer function of system
+are <span class="math display">\[\begin{align}
+\omega_{pA} &amp;= \frac{A_0+1}{\frac{1}{\omega_{p1}} +
+\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}} \\
+&amp;=  \frac{(A_0+1)\omega_{p1} \omega_{p2}}{\omega_{p1} + \omega_{p2}
++ \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}} \\
+\omega_{pB} &amp;= \omega_{p1} + \omega_{p2} +
+\frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}
+\end{align}\]</span></p>
+<hr />
+<p><strong>Assuming</strong> <span class="math inline">\(\omega_z \simeq
+\omega_{p2}\)</span> and <span class="math inline">\(\omega_{p2}\ll
+(1+A_0)\omega_{p1}\)</span> <span class="math display">\[
+\omega_{pA} = \omega_{p2}
+\]</span> and <span class="math display">\[
+\omega_{pB} = (1+A_0)\omega_{p1}
+\]</span> The closed-loop transfer function is <span
+class="math display">\[
+H_{closed}(s) =
+\frac{\frac{A_0}{A_0+1}\left(1+\frac{s}{\omega_z}\right)}{\left(1+\frac{s}{(1+A_0)\omega_{p1}}\right)\left(
+1+\frac{s}{\omega_{p2}} \right)}
+\]</span></p>
+<hr />
+<p>The step response of the closed-loop amplifier</p>
+<p>Consider the Laplace transform function of step response, <span
+class="math inline">\(X(s)=\frac{1}{s}\)</span> <span
+class="math display">\[
+Y(s)=\frac{1}{s}\times H_{closed}(s)
+\]</span> Thus, the <strong>small-signal step response</strong> of the
+closed-loop amplifier is <span class="math display">\[
+y(t)=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
+\right]u(t)
+\]</span> Since, <span class="math inline">\(\omega_{p2}\ll
+(1+A_0)\omega_{p1}\)</span>. Therefore, rewrite the <span
+class="math inline">\(y(t)\)</span> <span class="math display">\[
+y(t)\cong
+\frac{A_0}{A_0+1}\left[1-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
+\right]u(t)
+\]</span> The step response contains an exponential term of the form
+<span
+class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}\)</span>.
+This is an important result, indicating that if the zero does not
+exactly cancel the pole, the step response exhibits an exponential with
+an amplitude proportional to <span
+class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)\)</span>,
+which depends on the mismatch between <span
+class="math inline">\(\omega_z\)</span> and <span
+class="math inline">\(\omega_{p2}\)</span> and a time constant <span
+class="math inline">\(\tau\)</span> of <span
+class="math inline">\(\frac{1}{\omega_{p2}}\)</span> or <span
+class="math inline">\(\frac{1}{\omega_{z}}\)</span></p>
+<h3 id="perfect-pole-zero-cancellation">perfect pole-zero
+cancellation</h3>
+<p><span class="math display">\[\begin{align}
+y(t)
+&amp;=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
+\right]u(t) \\
+&amp;= \frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}\right]u(t)
+\end{align}\]</span></p>
+<hr />
+<p><img src="/2022/12/14/doublet/image-20230108233523345.png"
+alt="image-20230108233523345" /></p>
+<p><img src="/2022/12/14/doublet/image-20230108234123707.png"
+alt="image-20230108234123707" /></p>
+<blockquote>
+<p>The zero comes from the mirror node</p>
+<p>Thanks to unity gain buffer, zero is alleviated for <span
+class="math inline">\(C_c\)</span></p>
+</blockquote>
+<h3 id="reference">reference</h3>
+<p>Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology,
+EE 240B – Spring 2018, Advanced Analog Integrated Circuits <a
+href="https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf</a></p>
+<p>Eric Chang, Prof. Elad Alon EE240B HW3 <a
+href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf</a>
+and <a
+href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf</a></p>
+<p>Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ),
+Operational Amplifiers <a
+href="http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf">http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf</a></p>
+<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
+frequency response and settling time of operational amplifiers," in IEEE
+Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
+doi: 10.1109/JSSC.1974.1050527.</p>
+<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
+frequency response and settling time of operational amplifiers," in IEEE
+Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
+doi: 10.1109/JSSC.1974.1050527.</p>
+<p>P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a
+tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17,
+no. 6, pp. 969-982, Dec. 1982, doi: 10.1109/JSSC.1982.1051851.</p>
+<p>SERGIO FRANCO, Demystifying pole-zero doublets URL:<a
+href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/demystifying-pole-zero-doublets/</a></p>
 ]]></content>
       <categories>
-        <category>digital</category>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -5624,70 +5738,6 @@ href="https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-paddin
       </categories>
   </entry>
   <entry>
-    <title>verilog-mode.el</title>
-    <url>/2022/05/13/emacs-verilog-mode/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
-command</p>
-</blockquote>
-<h2 id="verilog-mode.el">verilog-mode.el</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
-<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
-<blockquote>
-<p>For use with <code>--batch</code>, perform automatic expansions as a
-stand-alone tool. This sets up the appropriate Verilog mode environment,
-updates automatics with M-x verilog-auto on all command-line files, and
-saves the buffers. For proper results, multiple filenames need to be
-passed on the command line in bottom-up order.</p>
-</blockquote>
-<h3
-id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
-<blockquote>
-<p>Update automatics with M-x verilog-auto, save the buffer, and
-<em>compile</em></p>
-</blockquote>
-<h2 id="emacs">Emacs</h2>
-<h3 id="no-site-file"><code>--no-site-file</code></h3>
-<p>Another file for site-customization is <code>site-start.el</code>.
-Emacs loads this <em>before</em> the user's init file
-(<code>.emacs</code>, <code>.emacs.el</code> or
-<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
-file with the option <code>--no-site-file</code></p>
-<h3 id="batch"><code>--batch</code></h3>
-<p>The command-line option <code>--batch</code> causes Emacs to run
-noninteractively. The idea is that you specify Lisp programs to run;
-when they are finished, Emacs should exit.</p>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function;</p>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="f-func"><code>-f FUNC</code></h3>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function</p>
-<blockquote>
-<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
-</blockquote>
-<h2 id="multiple-directories">multiple directories</h2>
-<p><strong>AUTOINST</strong> only search in the file's directory
-default.</p>
-<p>You can append below <code>verilog-library-directories</code> for
-multiple directories search</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>Emacs Online Documentation <a
-href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
-<p>Emacs verilog-mode 的使用 URL: <a
-href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>EMIR via Voltus-Fi</title>
     <url>/2022/02/23/emir-voltus-fi/</url>
     <content><![CDATA[<h2 id="general-terminology">general terminology</h2>
@@ -6121,6 +6171,70 @@ Dasgupta, Aurobindo. (2003). Static electromigration analysis for
 on-chip signal interconnects. Computer-Aided Design of Integrated
 Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
 10.1109/TCAD.2002.805728.</p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>verilog-mode.el</title>
+    <url>/2022/05/13/emacs-verilog-mode/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
+command</p>
+</blockquote>
+<h2 id="verilog-mode.el">verilog-mode.el</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
+<blockquote>
+<p>For use with <code>--batch</code>, perform automatic expansions as a
+stand-alone tool. This sets up the appropriate Verilog mode environment,
+updates automatics with M-x verilog-auto on all command-line files, and
+saves the buffers. For proper results, multiple filenames need to be
+passed on the command line in bottom-up order.</p>
+</blockquote>
+<h3
+id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
+<blockquote>
+<p>Update automatics with M-x verilog-auto, save the buffer, and
+<em>compile</em></p>
+</blockquote>
+<h2 id="emacs">Emacs</h2>
+<h3 id="no-site-file"><code>--no-site-file</code></h3>
+<p>Another file for site-customization is <code>site-start.el</code>.
+Emacs loads this <em>before</em> the user's init file
+(<code>.emacs</code>, <code>.emacs.el</code> or
+<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
+file with the option <code>--no-site-file</code></p>
+<h3 id="batch"><code>--batch</code></h3>
+<p>The command-line option <code>--batch</code> causes Emacs to run
+noninteractively. The idea is that you specify Lisp programs to run;
+when they are finished, Emacs should exit.</p>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function;</p>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="f-func"><code>-f FUNC</code></h3>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function</p>
+<blockquote>
+<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
+</blockquote>
+<h2 id="multiple-directories">multiple directories</h2>
+<p><strong>AUTOINST</strong> only search in the file's directory
+default.</p>
+<p>You can append below <code>verilog-library-directories</code> for
+multiple directories search</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>Emacs Online Documentation <a
+href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
+<p>Emacs verilog-mode 的使用 URL: <a
+href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -7292,93 +7406,6 @@ Sixth international symposium on quality electronic design (isqed'05),
       </categories>
   </entry>
   <entry>
-    <title>Functional Coverage Modeling</title>
-    <url>/2022/04/03/functional-coverage/</url>
-    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
-<ul>
-<li>Explicit (user defined)
-<ul>
-<li>Fully and clearly expressed within sources
-<ul>
-<li>Sequence and temporal coverage using assertions</li>
-<li>Data-oriented coverage using <code>covergroup</code></li>
-</ul></li>
-<li>Planned and defined by the verification team</li>
-</ul></li>
-<li>Implicit
-<ul>
-<li>Derived or computed from source
-<ul>
-<li>Code coverage measured by the simulator</li>
-</ul></li>
-<li>May be defined outside the verification team</li>
-<li>May be implied by the verification interface
-<ul>
-<li>e.g., an industry standard protocol</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
-Systemverilog</h2>
-<h3 id="assertions-for-control-oriented-coverage">Assertions for
-control-oriented coverage</h3>
-<ul>
-<li>Defined as procedural statements</li>
-<li><strong>CANNOT</strong> be defined in a class</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
-and the cover directive. It is used to cover sequences of signal values
-over time. Assertions cannot be declared or "covered" in a class
-declaration, so their use in an UVM verification environment is
-restricted to <strong>interface only</strong></p>
-</blockquote>
-<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
-data-oriented coverage</h3>
-<ul>
-<li>CAN be declared as a class member and created in class
-constructor</li>
-<li>Used in <strong>interface</strong> and module UVCs</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Data-oriented coverage uses the <code>covergroup</code> construct.
-Covergroups can be declared and created in classes, therefore they are
-essential for explicit coverage in a UVM verification environment.</p>
-</blockquote>
-<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
-<p><code>covergroup new</code> constructor is called
-<strong>directly</strong> off the declaration of the covergroup, it does
-not have a separate instance name</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<p>The <code>covergroup</code> instance must be created in the class
-constructor, not a UVM <code>build_phase</code> or other phase
-method</p>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403210225837.png"
-alt="image-20220403210225837" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
-<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
-<p>Typical module UVC coverage:</p>
-<ul>
-<li>Routing - packets flow from input ports to all legal outputs</li>
-<li>latency - all packets received within speicied delay</li>
-</ul>
-<blockquote>
-<p>The module UVC monitor receives data from the interface monitors via
-analysis ports, so the implementation of the analysis write function is
-a convenient place to put coverage code</p>
-</blockquote>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403212529981.png"
-alt="image-20220403212529981" /></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Fourier Analysis 101</title>
     <url>/2023/05/15/fourier101/</url>
     <content><![CDATA[<h2 id="the-dirac-comb-function">The Dirac Comb function</h2>
@@ -7803,6 +7830,93 @@ href="https://coecs.ou.edu/Joseph.P.Havlicek/ece3793/notes/ECE3793NotesCh07.pdf"
       </categories>
   </entry>
   <entry>
+    <title>Functional Coverage Modeling</title>
+    <url>/2022/04/03/functional-coverage/</url>
+    <content><![CDATA[<h2 id="coverage-options">Coverage Options</h2>
+<ul>
+<li>Explicit (user defined)
+<ul>
+<li>Fully and clearly expressed within sources
+<ul>
+<li>Sequence and temporal coverage using assertions</li>
+<li>Data-oriented coverage using <code>covergroup</code></li>
+</ul></li>
+<li>Planned and defined by the verification team</li>
+</ul></li>
+<li>Implicit
+<ul>
+<li>Derived or computed from source
+<ul>
+<li>Code coverage measured by the simulator</li>
+</ul></li>
+<li>May be defined outside the verification team</li>
+<li>May be implied by the verification interface
+<ul>
+<li>e.g., an industry standard protocol</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
+Systemverilog</h2>
+<h3 id="assertions-for-control-oriented-coverage">Assertions for
+control-oriented coverage</h3>
+<ul>
+<li>Defined as procedural statements</li>
+<li><strong>CANNOT</strong> be defined in a class</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
+and the cover directive. It is used to cover sequences of signal values
+over time. Assertions cannot be declared or "covered" in a class
+declaration, so their use in an UVM verification environment is
+restricted to <strong>interface only</strong></p>
+</blockquote>
+<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
+data-oriented coverage</h3>
+<ul>
+<li>CAN be declared as a class member and created in class
+constructor</li>
+<li>Used in <strong>interface</strong> and module UVCs</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Data-oriented coverage uses the <code>covergroup</code> construct.
+Covergroups can be declared and created in classes, therefore they are
+essential for explicit coverage in a UVM verification environment.</p>
+</blockquote>
+<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
+<p><code>covergroup new</code> constructor is called
+<strong>directly</strong> off the declaration of the covergroup, it does
+not have a separate instance name</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
+<p>The <code>covergroup</code> instance must be created in the class
+constructor, not a UVM <code>build_phase</code> or other phase
+method</p>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403210225837.png"
+alt="image-20220403210225837" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
+<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
+<p>Typical module UVC coverage:</p>
+<ul>
+<li>Routing - packets flow from input ports to all legal outputs</li>
+<li>latency - all packets received within speicied delay</li>
+</ul>
+<blockquote>
+<p>The module UVC monitor receives data from the interface monitors via
+analysis ports, so the implementation of the analysis write function is
+a convenient place to put coverage code</p>
+</blockquote>
+<p><img
+src="/2022/04/03/functional-coverage/image-20220403212529981.png"
+alt="image-20220403212529981" /></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Demystifying Gate Resistance</title>
     <url>/2023/07/09/gate-resistance/</url>
     <content><![CDATA[<p><img src="/2023/07/09/gate-resistance/image-20230709102848934.png"
@@ -7991,6 +8105,46 @@ alt="image-20230701142405404" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Glitches and Hazards</title>
+    <url>/2022/05/08/glitch-hazard/</url>
+    <content><![CDATA[<ul>
+<li>A <strong>glitch</strong> is an unwanted pulse at the output of a
+combinational logic network – <strong>a momentary change</strong> in an
+output that should not have changed</li>
+<li>A circuit with <em>the potential for a glitch</em> is said to have a
+<strong>hazard</strong></li>
+<li>In other words a hazard is something intrinsic about a circuit; a
+circuit with hazard may or may not have a glitch depending on input
+patterns and the electric characteristics of the circuit.</li>
+</ul>
+<h4 id="when-do-circuits-have-hazards">When do circuits have hazards
+?</h4>
+<p>Hazards are potential unwanted transients that occur in the output
+when different paths from input to output have different propagation
+delays</p>
+<h4 id="types-of-hazards-on-an-output">Types of Hazards (on an
+output)</h4>
+<p>static 1-hazard, static 0-hazard, dynamic hazard</p>
+<p><img src="/2022/05/08/glitch-hazard/image-20220508183800744.png"
+alt="image-20220508183800744" /></p>
+<h4 id="hazards-concern">Hazard's Concern</h4>
+<ul>
+<li>Hazards do not hurt synchronous circuits</li>
+<li>Hazards Kill Asynchronous Circuits</li>
+<li>Glitches Increase Power Consumption</li>
+</ul>
+<h4 id="referece">referece</h4>
+<p>CPE166/EEE 270 Advanced Logic Design-Digital Design: Time Behavior of
+Combinational Networks: <a
+href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
+<p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
+href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>h0 Estimator</title>
     <url>/2022/05/29/h0-estimator/</url>
     <content><![CDATA[<p>summer output <span class="math display">\[
@@ -8034,46 +8188,6 @@ different pattern for even and odd error slicer</p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Glitches and Hazards</title>
-    <url>/2022/05/08/glitch-hazard/</url>
-    <content><![CDATA[<ul>
-<li>A <strong>glitch</strong> is an unwanted pulse at the output of a
-combinational logic network – <strong>a momentary change</strong> in an
-output that should not have changed</li>
-<li>A circuit with <em>the potential for a glitch</em> is said to have a
-<strong>hazard</strong></li>
-<li>In other words a hazard is something intrinsic about a circuit; a
-circuit with hazard may or may not have a glitch depending on input
-patterns and the electric characteristics of the circuit.</li>
-</ul>
-<h4 id="when-do-circuits-have-hazards">When do circuits have hazards
-?</h4>
-<p>Hazards are potential unwanted transients that occur in the output
-when different paths from input to output have different propagation
-delays</p>
-<h4 id="types-of-hazards-on-an-output">Types of Hazards (on an
-output)</h4>
-<p>static 1-hazard, static 0-hazard, dynamic hazard</p>
-<p><img src="/2022/05/08/glitch-hazard/image-20220508183800744.png"
-alt="image-20220508183800744" /></p>
-<h4 id="hazards-concern">Hazard's Concern</h4>
-<ul>
-<li>Hazards do not hurt synchronous circuits</li>
-<li>Hazards Kill Asynchronous Circuits</li>
-<li>Glitches Increase Power Consumption</li>
-</ul>
-<h4 id="referece">referece</h4>
-<p>CPE166/EEE 270 Advanced Logic Design-Digital Design: Time Behavior of
-Combinational Networks: <a
-href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
-<p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
-href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -8452,31 +8566,6 @@ cancel each other at one frequency, creating a <em>zero</em> in the
 transfer function</p>
 <p><img src="/2023/01/01/insight/image-20240629104408168.png"
 alt="image-20240629104408168" /></p>
-<h2 id="subthreshold-conduction">Subthreshold Conduction</h2>
-<p>By square-law, the Eq <span class="math inline">\(g_m = \sqrt{2\mu
-C_{ox}\frac{W}{L}I_D}\)</span>, it is possible to obtain a
-<em>higer</em> transconductance by increasing <span
-class="math inline">\(W\)</span> while maintaining <span
-class="math inline">\(I_D\)</span> constant. However, if <span
-class="math inline">\(W\)</span> increases while <span
-class="math inline">\(I_D\)</span> remains constant, then <span
-class="math inline">\(V_{GS} \to V_{TH}\)</span> and device enters the
-subthreshold region. <span class="math display">\[
-I_D = I_0\exp \frac{V_{GS}}{\xi V_T}
-\]</span></p>
-<p>where <span class="math inline">\(I_0\)</span> is proportional to
-<span class="math inline">\(W/L\)</span>, <span
-class="math inline">\(\xi \gt 1\)</span> is a nonideality factor, and
-<span class="math inline">\(V_T = kT/q\)</span></p>
-<p>As a result, the transconductance in subthreshold region is <span
-class="math display">\[
-g_m = \frac{I_D}{\xi V_T}
-\]</span></p>
-<p>which is <span class="math inline">\(g_m \propto I_D\)</span></p>
-<p><img src="/2023/01/01/insight/image-20240627230726326.png"
-alt="image-20240627230726326" /></p>
-<p><img src="/2023/01/01/insight/image-20240627230744044.png"
-alt="image-20240627230744044" /></p>
 <h2 id="random-offset">Random offset</h2>
 <p>The dependence of offset voltage and current mismatches upon the
 overdrive voltage is similar to our observations for corresponding
@@ -8875,57 +8964,6 @@ alt="image-20230104230757729" /></p>
 alt="image-20230104230837829" /></p>
 <p><img src="/2023/01/01/insight/image-20230104230851475.png"
 alt="image-20230104230851475" /></p>
-<h2 id="channel-length-modulation">Channel-length modulation</h2>
-<blockquote>
-<p>short-channel effects</p>
-</blockquote>
-<p><span class="math display">\[\begin{align}
-I_D
-&amp;=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2(1+\frac{\Delta
-L}{L}) \\
-I_D &amp;=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2(1+\lambda
-V_{DS}) \\
-I_D
-&amp;=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2(1+\frac{V_{DS}}{V_A})
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\frac{\Delta L}{L}=\lambda
-V_{DS}\)</span> and <span
-class="math inline">\(V_A=\frac{1}{\lambda}\)</span></p>
-<p><span class="math inline">\(\lambda\)</span> is channel length
-modulation parameter</p>
-<p><span class="math inline">\(V_A\)</span>, i.e. Early voltage is equal
-to inverse of channel length modulation parameter</p>
-<p>The output resistance <span class="math inline">\(r_o\)</span></p>
-<p><span class="math display">\[\begin{align}
-r_o &amp;= \frac{\partial V_{DS}}{\partial I_D} \\
-&amp;= \frac{1}{\partial I_D/\partial V_{DS}} \\
-&amp;= \frac{1}{\lambda I_D} \\
-&amp;= \frac{V_A}{I_D}
-\end{align}\]</span></p>
-<p>Due to <span class="math inline">\(\lambda \propto 1/L\)</span>, i.e.
-<span class="math inline">\(V_A \propto L\)</span> <span
-class="math display">\[
-r_o \propto \frac{L}{I_D}
-\]</span> <img src="/2023/01/01/insight/image-20220930001909262.png"
-alt="image-20220930001909262" /></p>
-<p><img src="/2023/01/01/insight/image-20220930002003924.png"
-alt="image-20220930002003924" /></p>
-<p><img src="/2023/01/01/insight/image-20220930002157365.png"
-alt="image-20220930002157365" /></p>
-<p>The output resistance is almost doubled using Stacked FET in
-<em>saturation region</em></p>
-<blockquote>
-<p><span class="math inline">\(V_t\)</span> and mobility <span
-class="math inline">\(\mu_{n,p}\)</span> are sensitive to
-temperature</p>
-<ul>
-<li><span class="math inline">\(V_t\)</span> decreases by 2-mV for every
-1<span class="math inline">\(^oC\)</span> rise in temperature</li>
-<li>mobility <span class="math inline">\(\mu_{n,p}\)</span> decreases
-with temperature</li>
-</ul>
-<p>Overall, increase in temperature results in lower drain currents</p>
-</blockquote>
 <h2 id="schmitt-inverter">Schmitt Inverter</h2>
 <p><img src="/2023/01/01/insight/image-20231021232912529.png"
 alt="image-20231021232912529" /></p>
@@ -8945,10 +8983,6 @@ alt="image-20231213234524075" /></p>
 <hr />
 <p><img src="/2023/01/01/insight/image-20240116233951006.png"
 alt="image-20240116233951006" /></p>
-<h2 id="g_m-vs-v_textds"><span class="math inline">\(g_m\)</span> vs
-<span class="math inline">\(V_{\text{DS}}\)</span></h2>
-<p><img src="/2023/01/01/insight/image-20231125224714658.png"
-alt="image-20231125224714658" /></p>
 <h2 id="mosfet-ztc-condition-analysis">MOSFET ZTC Condition
 Analysis</h2>
 <blockquote>
@@ -14739,8 +14773,6 @@ alt="image-20240725204501781" /></p>
 alt="image-20240725204527121" /> <span class="math display">\[
 \tau \simeq \frac{1}{\beta \omega_\text{ugb}}
 \]</span></p>
-<h2 id="pole-zero-doublet">pole-zero doublet</h2>
-<p><em>TODO</em> 📅</p>
 <h2 id="feedback-rearrange">Feedback Rearrange</h2>
 <p><img src="/2024/07/25/settling/loop-refactor.drawio.svg"
 alt="loop-refactor.drawio" /></p>
@@ -15285,6 +15317,21 @@ href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L1
       </categories>
   </entry>
   <entry>
+    <title>sub-binary radix DAC</title>
+    <url>/2022/03/19/sub-binary-radix-DAC/</url>
+    <content><![CDATA[<p><strong>reference</strong>:</p>
+<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
+AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
+<p>M. Pastre and M. Kayal, "High-precision DAC based on a
+self-calibrated sub-binary radix converter," 2004 IEEE International
+Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
+I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Signal and System insight</title>
     <url>/2024/05/02/ss-insight/</url>
     <content><![CDATA[<h2 id="barkhausen-criteria">Barkhausen criteria</h2>
@@ -15700,21 +15747,6 @@ href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://c
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>sub-binary radix DAC</title>
-    <url>/2022/03/19/sub-binary-radix-DAC/</url>
-    <content><![CDATA[<p><strong>reference</strong>:</p>
-<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
-AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
-<p>M. Pastre and M. Kayal, "High-precision DAC based on a
-self-calibrated sub-binary radix converter," 2004 IEEE International
-Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
-I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>

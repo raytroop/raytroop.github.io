@@ -225,6 +225,111 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_rx_circuits.p
       </categories>
   </entry>
   <entry>
+    <title>Digital Delay Model</title>
+    <url>/2023/11/14/DigitalModels/</url>
+    <content><![CDATA[<h2 id="effective-switching-resistance">Effective Switching
+resistance</h2>
+<p><img src="/2023/11/14/DigitalModels/image-20231114001209252.png"
+alt="image-20231114001209252" /></p>
+<blockquote>
+<p><a
+href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf</a></p>
+</blockquote>
+<div class="pdf-container" data-target="/pdfs/chapter5_ex_sol.pdf" data-height="500px"></div>
+<h2 id="wire-delay">wire delay</h2>
+<h3 id="the-elmore-delay">The Elmore Delay</h3>
+<p><img src="/2023/11/14/DigitalModels/image-20230624234813719.png"
+alt="image-20230624234813719" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624234940864.png"
+alt="image-20230624234940864" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230625001756173.png"
+alt="image-20230625001756173" /></p>
+<blockquote>
+<p>Basic idea: use of <strong>mean</strong> of <span
+class="math inline">\(v&#39;(t)\)</span> to approximate
+<strong>median</strong> of <span
+class="math inline">\(v&#39;(t)\)</span></p>
+</blockquote>
+<p><img src="/2023/11/14/DigitalModels/image-20230624235148246.png"
+alt="image-20230624235148246" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230625002239199.png"
+alt="image-20230625002239199" /></p>
+<blockquote>
+<p>Elmore delay approximates the <strong>median</strong> of <span
+class="math inline">\(h(t)\)</span> by the <strong>mean</strong> of
+<span class="math inline">\(h(t)\)</span></p>
+</blockquote>
+<h3 id="distributed-rc-line">Distributed RC-Line</h3>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224005736.png"
+alt="image-20230624224005736" /></p>
+<h3 id="lumped-approximations">Lumped approximations</h3>
+<h4 id="rc-models"><span class="math inline">\(rc\)</span>-models</h4>
+<p>If your simulator does not support a distributed <span
+class="math inline">\(rc\)</span>-model, or if the computational
+complexity of these models slows down your simulation too much, you can
+construct a simple yet accurate model yourself by approximating the
+distributed <span class="math inline">\(rc\)</span> by a lumped RC
+network with a limited number of elements</p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624230057265.png"
+alt="image-20230624230057265" /></p>
+<blockquote>
+<p>The accuracy of the model is determined by the number of stages. For
+instance, the error of the <span class="math inline">\(\Pi -3\)</span>
+model is less than 3%, which is generally sufficient.</p>
+</blockquote>
+<h4 id="why-use-pi-model">Why use "<span
+class="math inline">\(\Pi\)</span> Model"</h4>
+<p><img src="/2023/11/14/DigitalModels/image-20230624230800255.png"
+alt="image-20230624230800255" /></p>
+<h4 id="examples">examples</h4>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224643487.png"
+alt="image-20230624224643487" /></p>
+<p><img src="/2023/11/14/DigitalModels/image-20230624224923241.png"
+alt="image-20230624224923241" /></p>
+<h2 id="wire-inductive-effect">Wire Inductive Effect</h2>
+<ul>
+<li>RC delay increases quadratically with length</li>
+<li>LC delay (speed of light flight time) increases linearly with
+length</li>
+</ul>
+<blockquote>
+<p>Inductance will only be important to the delay of low-resistance
+signals such as wide clock lines</p>
+</blockquote>
+<h3 id="wave">wave</h3>
+<p>Signal propagates over the wire as a <strong>wave</strong> (rather
+than <strong>diffusing</strong> as in <span
+class="math inline">\(rc\)</span> only models)</p>
+<blockquote>
+<p>Signal propagates by alternately transferring energy from capacitive
+to inductive modes</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Akio Kitagawa, Analog layout design <a
+href="https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf">https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf</a></p>
+<p>THE WIRE <a
+href="http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf">http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf</a></p>
+<p>Anoop Veliyath, Design Engineer, Cadence Design Systems. Accurately
+Modeling Transmission Line Behavior with an LC Network-based Approach
+[<a
+href="https://www.pspice.com/sites/default/files/Transmission_Line_Modeling.pdf">pdf</a>]</p>
+<p>Mark Horowitz. Lecture 2: Wires and Wire Models [<a
+href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_02.pdf">pdf</a>]</p>
+<p>Neil Weste and David Harris. 2010. CMOS VLSI Design: A Circuits and
+Systems Perspective (4th. ed.). Addison-Wesley Publishing Company,
+USA.</p>
+<p>Cheng-Kok Koh. EE695K Modeling and Optimization of High Performance
+Interconnect [<a
+href="https://engineering.purdue.edu/~chengkok/ee695K/lec3a.pdf">lec3a_pdf</a>]</p>
+<p>Vishal Saxena. ECE 445 Intro to VLSI Design: Lectures for Spring 2019
+<a
+href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>How does EDI System identify spare cells in a post-mask ECO flow?</title>
     <url>/2022/03/06/EDI-post-mask-ECO-sparecell/</url>
     <content><![CDATA[<h4
@@ -368,111 +473,6 @@ variant, the it is defined as a subsequence and its
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Digital Delay Model</title>
-    <url>/2023/11/14/DigitalModels/</url>
-    <content><![CDATA[<h2 id="effective-switching-resistance">Effective Switching
-resistance</h2>
-<p><img src="/2023/11/14/DigitalModels/image-20231114001209252.png"
-alt="image-20231114001209252" /></p>
-<blockquote>
-<p><a
-href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/Lecture%20Notes/lec15_ece445.pdf</a></p>
-</blockquote>
-<div class="pdf-container" data-target="/pdfs/chapter5_ex_sol.pdf" data-height="500px"></div>
-<h2 id="wire-delay">wire delay</h2>
-<h3 id="the-elmore-delay">The Elmore Delay</h3>
-<p><img src="/2023/11/14/DigitalModels/image-20230624234813719.png"
-alt="image-20230624234813719" /></p>
-<p><img src="/2023/11/14/DigitalModels/image-20230624234940864.png"
-alt="image-20230624234940864" /></p>
-<p><img src="/2023/11/14/DigitalModels/image-20230625001756173.png"
-alt="image-20230625001756173" /></p>
-<blockquote>
-<p>Basic idea: use of <strong>mean</strong> of <span
-class="math inline">\(v&#39;(t)\)</span> to approximate
-<strong>median</strong> of <span
-class="math inline">\(v&#39;(t)\)</span></p>
-</blockquote>
-<p><img src="/2023/11/14/DigitalModels/image-20230624235148246.png"
-alt="image-20230624235148246" /></p>
-<p><img src="/2023/11/14/DigitalModels/image-20230625002239199.png"
-alt="image-20230625002239199" /></p>
-<blockquote>
-<p>Elmore delay approximates the <strong>median</strong> of <span
-class="math inline">\(h(t)\)</span> by the <strong>mean</strong> of
-<span class="math inline">\(h(t)\)</span></p>
-</blockquote>
-<h3 id="distributed-rc-line">Distributed RC-Line</h3>
-<p><img src="/2023/11/14/DigitalModels/image-20230624224005736.png"
-alt="image-20230624224005736" /></p>
-<h3 id="lumped-approximations">Lumped approximations</h3>
-<h4 id="rc-models"><span class="math inline">\(rc\)</span>-models</h4>
-<p>If your simulator does not support a distributed <span
-class="math inline">\(rc\)</span>-model, or if the computational
-complexity of these models slows down your simulation too much, you can
-construct a simple yet accurate model yourself by approximating the
-distributed <span class="math inline">\(rc\)</span> by a lumped RC
-network with a limited number of elements</p>
-<p><img src="/2023/11/14/DigitalModels/image-20230624230057265.png"
-alt="image-20230624230057265" /></p>
-<blockquote>
-<p>The accuracy of the model is determined by the number of stages. For
-instance, the error of the <span class="math inline">\(\Pi -3\)</span>
-model is less than 3%, which is generally sufficient.</p>
-</blockquote>
-<h4 id="why-use-pi-model">Why use "<span
-class="math inline">\(\Pi\)</span> Model"</h4>
-<p><img src="/2023/11/14/DigitalModels/image-20230624230800255.png"
-alt="image-20230624230800255" /></p>
-<h4 id="examples">examples</h4>
-<p><img src="/2023/11/14/DigitalModels/image-20230624224643487.png"
-alt="image-20230624224643487" /></p>
-<p><img src="/2023/11/14/DigitalModels/image-20230624224923241.png"
-alt="image-20230624224923241" /></p>
-<h2 id="wire-inductive-effect">Wire Inductive Effect</h2>
-<ul>
-<li>RC delay increases quadratically with length</li>
-<li>LC delay (speed of light flight time) increases linearly with
-length</li>
-</ul>
-<blockquote>
-<p>Inductance will only be important to the delay of low-resistance
-signals such as wide clock lines</p>
-</blockquote>
-<h3 id="wave">wave</h3>
-<p>Signal propagates over the wire as a <strong>wave</strong> (rather
-than <strong>diffusing</strong> as in <span
-class="math inline">\(rc\)</span> only models)</p>
-<blockquote>
-<p>Signal propagates by alternately transferring energy from capacitive
-to inductive modes</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Akio Kitagawa, Analog layout design <a
-href="https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf">https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf</a></p>
-<p>THE WIRE <a
-href="http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf">http://bwrcs.eecs.berkeley.edu/Classes/icdesign/ee141_f01/Notes/chapter4.pdf</a></p>
-<p>Anoop Veliyath, Design Engineer, Cadence Design Systems. Accurately
-Modeling Transmission Line Behavior with an LC Network-based Approach
-[<a
-href="https://www.pspice.com/sites/default/files/Transmission_Line_Modeling.pdf">pdf</a>]</p>
-<p>Mark Horowitz. Lecture 2: Wires and Wire Models [<a
-href="https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_02.pdf">pdf</a>]</p>
-<p>Neil Weste and David Harris. 2010. CMOS VLSI Design: A Circuits and
-Systems Perspective (4th. ed.). Addison-Wesley Publishing Company,
-USA.</p>
-<p>Cheng-Kok Koh. EE695K Modeling and Optimization of High Performance
-Interconnect [<a
-href="https://engineering.purdue.edu/~chengkok/ee695K/lec3a.pdf">lec3a_pdf</a>]</p>
-<p>Vishal Saxena. ECE 445 Intro to VLSI Design: Lectures for Spring 2019
-<a
-href="https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece445/s19/ECE445.htm</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -707,18 +707,18 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Database Navigation</title>
-    <url>/2022/02/07/Innovus-Database-Navigation/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Database Navigation</title>
+    <url>/2022/02/07/Innovus-Database-Navigation/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -759,18 +759,18 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus/Tempus Nonfunctional ECO</title>
-    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Analysis Command</title>
+    <url>/2022/02/07/Innovus-analysis-command/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Analysis Command</title>
-    <url>/2022/02/07/Innovus-analysis-command/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
+    <title>Innovus/Tempus Nonfunctional ECO</title>
+    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1094,6 +1094,38 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSX
       </tags>
   </entry>
   <entry>
+    <title>OCV Derating With AOCV</title>
+    <url>/2022/12/10/OCVDeratingWithAOCV/</url>
+    <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">timing_aocv_derate_mode&#123;aocv_multiplicative | aocv_additive&#125;</span><br></pre></td></tr></table></figure>
+<p><em>Default:</em> <code>aocv_multiplicative</code></p>
+<p>Controls the AOCV derating mode.</p>
+<p>When set to <code>aocv_multiplicative</code>, the derating factor
+will be calculated as AOCV derating * OCV derating, which is set using
+the <code>set_timing_derate</code> command.</p>
+<p>When set to <code>aocv_additive</code>, the derating factor will be
+calculated as AOCV derating + OCV derating values.</p>
+<p>When you use this global variable, the <code>report_timing</code>
+command shows the <code>total_derate</code> column in the timing report
+output, which allows you to view and cross-check the calculated total
+derate factor.</p>
+<p>To set this global variable, use the <code>set_global</code>
+command.</p>
+<p><img
+src="/2022/12/10/OCVDeratingWithAOCV/image-20221210143256639.png"
+alt="image-20221210143256639" /></p>
+<h3 id="reference">reference</h3>
+<p>Genus Attribute Reference 22.1</p>
+<p>Innovus Text Command Reference 22.10</p>
+<p>Article (20416394) Title: Analysis with Advanced On-chip Variation
+(AOCV) derating in EDI system and ETS URL:
+https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Overflow Detection in Verilog</title>
     <url>/2022/05/07/Overflowflag-verilog/</url>
     <content><![CDATA[<ul>
@@ -1185,38 +1217,6 @@ A_- &amp;= A_{flip}+1 \\
 <h2 id="reference">reference</h2>
 <p>Overflow Detection: <a
 href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>OCV Derating With AOCV</title>
-    <url>/2022/12/10/OCVDeratingWithAOCV/</url>
-    <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">timing_aocv_derate_mode&#123;aocv_multiplicative | aocv_additive&#125;</span><br></pre></td></tr></table></figure>
-<p><em>Default:</em> <code>aocv_multiplicative</code></p>
-<p>Controls the AOCV derating mode.</p>
-<p>When set to <code>aocv_multiplicative</code>, the derating factor
-will be calculated as AOCV derating * OCV derating, which is set using
-the <code>set_timing_derate</code> command.</p>
-<p>When set to <code>aocv_additive</code>, the derating factor will be
-calculated as AOCV derating + OCV derating values.</p>
-<p>When you use this global variable, the <code>report_timing</code>
-command shows the <code>total_derate</code> column in the timing report
-output, which allows you to view and cross-check the calculated total
-derate factor.</p>
-<p>To set this global variable, use the <code>set_global</code>
-command.</p>
-<p><img
-src="/2022/12/10/OCVDeratingWithAOCV/image-20221210143256639.png"
-alt="image-20221210143256639" /></p>
-<h3 id="reference">reference</h3>
-<p>Genus Attribute Reference 22.1</p>
-<p>Innovus Text Command Reference 22.10</p>
-<p>Article (20416394) Title: Analysis with Advanced On-chip Variation
-(AOCV) derating in EDI system and ETS URL:
-https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -1575,18 +1575,6 @@ repo</a>]</p>
       </categories>
   </entry>
   <entry>
-    <title>VMware Disk Shrink</title>
-    <url>/2022/12/16/VMwareDiskShrink/</url>
-    <content><![CDATA[<p>In Guest OS and run</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>voltage-dependent DRC checks</title>
     <url>/2022/04/13/VD-DRC/</url>
     <content><![CDATA[<p>In T* DRC deck, it is based on the voltage recognition CAD layer and
@@ -1766,6 +1754,18 @@ Revision 7</p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>VMware Disk Shrink</title>
+    <url>/2022/12/16/VMwareDiskShrink/</url>
+    <content><![CDATA[<p>In Guest OS and run</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
   </entry>
   <entry>
     <title>Device Aging</title>
@@ -2223,12 +2223,56 @@ href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">
       </categories>
   </entry>
   <entry>
+    <title>How to obtain channel bandwidth from pulse response</title>
+    <url>/2022/05/20/bw-from-pulse-resp/</url>
+    <content><![CDATA[<p>Convolution Property of the Fourier Transform <span
+class="math display">\[
+x(t)*h(t)\longleftrightarrow  X(\omega)H(\omega)
+\]</span> pulse response can be obtained by convolve impulse response
+with UI length rectangular <span class="math display">\[
+H(\omega) = \frac{Y_{\text{pulse}}(\omega)}{X_{\text{rect}}(\omega)} =
+\frac{Y_{\text{pulse}}(\omega)}{\text{sinc}(\omega)}
+\]</span></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% Convolution Property of the Fourier Transform</span></span><br><span class="line"><span class="comment">% pulse(t) = h(t) * rect(t)</span></span><br><span class="line"><span class="comment">% -&gt; fourier transform</span></span><br><span class="line"><span class="comment">% PULSE = H * RECT</span></span><br><span class="line"><span class="comment">% FT(RECT) = sinc</span></span><br><span class="line"><span class="comment">% H = PULSE/RECT = PULSE/sinc</span></span><br><span class="line">xx = <span class="built_in">pi</span>*ui.*w(<span class="number">1</span>:plt_num);</span><br><span class="line">y_sinc = ui.*<span class="built_in">sin</span>(xx)./xx;</span><br><span class="line">y_sinc(<span class="number">1</span>) = y_sinc(<span class="number">2</span>);</span><br><span class="line">y_sinc = y_sinc/y_sinc(<span class="number">1</span>);  <span class="comment">% we dont care the absoulte gain</span></span><br><span class="line">h_ban1 = <span class="built_in">abs</span>(h(<span class="number">1</span>:plt_num))./<span class="built_in">abs</span>(y_sinc);</span><br><span class="line"></span><br><span class="line">h_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(h_ban1));</span><br><span class="line">[hmin, Index] = <span class="built_in">min</span>(<span class="built_in">abs</span>(h_dB +<span class="number">3</span> ));</span><br><span class="line">f_3dB = w(Index);</span><br><span class="line">f_3dB = f_3dB/<span class="number">1e9</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223115184.png"
+alt="image-20220520223115184" /></p>
+<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223621924.png"
+alt="image-20220520223621924" /></p>
+<h2 id="sinc-function">sinc function</h2>
+<p>Notice that the complete definition of <span
+class="math inline">\(\operatorname{sinc}\)</span> on <span
+class="math inline">\(\mathbb R\)</span> is <span
+class="math display">\[
+\operatorname{Sa}(x)=\operatorname{sinc}(x) = \begin{cases} \frac{\sin
+x}{x} &amp; x\ne 0, \\ 1, &amp; x = 0, \end{cases}
+\]</span> which is <strong>continuous</strong>.</p>
+<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220521112425477.png"
+alt="image-20220521112425477" /></p>
+<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220521112722838.png"
+alt="image-20220521112722838" /></p>
+<p>To approach to real spectrum of continuous rectangular waveform,
+<span class="math inline">\(\text{NFFT}\)</span> has to be big
+enough.</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">close all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">fs=<span class="number">500</span>; <span class="comment">%sampling frequency</span></span><br><span class="line">Ts = <span class="number">1</span>/fs;</span><br><span class="line">T=<span class="number">0.2</span>; <span class="comment">%width of the rectangule pulse in seconds</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">t=<span class="number">-0.5</span>:<span class="number">1</span>/fs:<span class="number">0.5</span>; <span class="comment">%time base</span></span><br><span class="line">x=rectpuls(t,T); <span class="comment">%generating the square wave</span></span><br><span class="line">sum(x&gt;<span class="number">0.5</span>)</span><br><span class="line">stem(t,x,<span class="string">&#x27;--k&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(t, x, <span class="string">&#x27;b.-&#x27;</span>)</span><br><span class="line">xstart = T/<span class="number">2</span>-Ts/<span class="number">2</span>;</span><br><span class="line">xend = -T/<span class="number">2</span>-Ts/<span class="number">2</span>;</span><br><span class="line"><span class="built_in">plot</span>([xstart, xstart], [<span class="number">-1</span>, <span class="number">1.02</span>], <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>([xend, xend], [<span class="number">-1</span>, <span class="number">1.02</span>], <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>([<span class="number">-0.11</span>, <span class="number">0.11</span>], [<span class="number">1</span>, <span class="number">1</span>], <span class="string">&#x27;r--&#x27;</span>)</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line">grid on;</span><br><span class="line">title([<span class="string">&#x27;Rectangular Pulse width=&#x27;</span>, num2str(T),<span class="string">&#x27;s&#x27;</span>]);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Amplitude&#x27;</span>);</span><br><span class="line">xlim([<span class="number">-0.12</span>, <span class="number">0.12</span>]);</span><br><span class="line">ylim([<span class="number">-0.05</span>, <span class="number">1.05</span>]);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line">Titer = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>];</span><br><span class="line">color = &#123;<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;b&#x27;</span>&#125;;</span><br><span class="line">formatSpec = <span class="string">&#x27;NFFT=%d&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:<span class="built_in">length</span>(Titer)</span><br><span class="line">    t=-Titer(k):Ts:Titer(k); <span class="comment">%time base</span></span><br><span class="line">    x=rectpuls(t,T); <span class="comment">%generating the square wave</span></span><br><span class="line"></span><br><span class="line">    L=<span class="built_in">length</span>(x);</span><br><span class="line">    Np = <span class="built_in">nextpow2</span>(L)<span class="number">-1</span>;</span><br><span class="line">    NFFT = <span class="number">2</span>^Np;</span><br><span class="line">    X = fftshift(fft(x,NFFT)); <span class="comment">%FFT with FFTshift for both negative &amp; positive frequencies</span></span><br><span class="line">    f = fs*(-NFFT/<span class="number">2</span>:NFFT/<span class="number">2</span><span class="number">-1</span>)/NFFT; <span class="comment">%Frequency Vector</span></span><br><span class="line">    Xc = <span class="built_in">abs</span>(X)*Ts; <span class="comment">% continuous signal spectrum</span></span><br><span class="line">    <span class="built_in">plot</span>(f, Xc, <span class="string">&quot;Color&quot;</span>,color&#123;k&#125;, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line">    legend_str&#123;k&#125; = [num2str(NFFT, formatSpec)];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"><span class="built_in">legend</span>(legend_str);</span><br><span class="line">title(<span class="string">&#x27;Magnitude of X_c (original continuous signal)&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;Magnitude |X(f)|&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong></p>
+<p>L.W. Couch, <em>Digital and Analog Communication</em>
+<em>Systems</em>, 8th Edition, Pearson, 2013.</p>
+<p><a
+href="https://www.gaussianwaves.com/2014/07/generating-basic-signals-rectangule-pulse-and-power-spectral-density-using-fft/">Generating
+Basic signals – Rectangular Pulse and Power Spectral Density using
+FFT</a></p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Bias Circuit</title>
-    <url>/2024/05/26/biasing/</url>
+    <url>/2024/07/27/biasing/</url>
     <content><![CDATA[<h2 id="why-employ-mosfets-in-saturation">Why employ MOSFETs in
 saturation?</h2>
 <h3 id="gm-gds-at-fixed-vgs">gm, gds at fixed VGS</h3>
-<p><img src="/2024/05/26/biasing/image-20231125224714658.png"
+<p><img src="/2024/07/27/biasing/image-20231125224714658.png"
 alt="image-20231125224714658" /></p>
 <hr />
 <p><span class="math inline">\(g_{ds}\)</span> is constant in saturation
@@ -2242,9 +2286,9 @@ saturation region is equal to the inverse of <span
 class="math inline">\(R_\text{on}\)</span> in the deep triode
 region.</p>
 </blockquote>
-<p><img src="/2024/05/26/biasing/gds_vgs.drawio.svg"
+<p><img src="/2024/07/27/biasing/gds_vgs.drawio.svg"
 alt="gds_vgs.drawio" /></p>
-<p><img src="/2024/05/26/biasing/image-20240727140918647.png"
+<p><img src="/2024/07/27/biasing/image-20240727140918647.png"
 alt="image-20240727140918647" /></p>
 <h2 id="gm-gds-at-fixed-id-vg">gm, gds at fixed Id, VG</h2>
 <p><strong>In triode region</strong> <span class="math display">\[
@@ -2273,7 +2317,7 @@ g_{ds} &amp;= \mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH}-V_{DS}) \\
 &amp;= \mu_nC_{ox}\frac{W}{L}(V_{GT}-V_{D})
 \end{align}\]</span></p>
 <p>That is, <span class="math inline">\(g_{ds} \propto -V_D\)</span></p>
-<p><img src="/2024/05/26/biasing/image-20240727171005401.png"
+<p><img src="/2024/07/27/biasing/image-20240727171005401.png"
 alt="image-20240727171005401" /></p>
 <blockquote>
 <p>Both gain and speed degrade once entering triode region, though Id is
@@ -2283,7 +2327,7 @@ constant</p>
 <blockquote>
 <p>❗ There it <strong>not</strong> channel-length modulation in the
 triode region</p>
-<p><img src="/2024/05/26/biasing/image-20240727095651984.png"
+<p><img src="/2024/07/27/biasing/image-20240727095651984.png"
 alt="image-20240727095651984" /></p>
 </blockquote>
 <p><span class="math display">\[\begin{align}
@@ -2313,11 +2357,11 @@ r_o &amp;= \frac{\partial V_{DS}}{\partial I_D} \\
 <span class="math inline">\(V_A \propto L\)</span> <span
 class="math display">\[
 r_o \propto \frac{L}{I_D}
-\]</span> <img src="/2024/05/26/biasing/image-20220930001909262.png"
+\]</span> <img src="/2024/07/27/biasing/image-20220930001909262.png"
 alt="image-20220930001909262" /></p>
-<p><img src="/2024/05/26/biasing/image-20220930002003924.png"
+<p><img src="/2024/07/27/biasing/image-20220930002003924.png"
 alt="image-20220930002003924" /></p>
-<p><img src="/2024/05/26/biasing/image-20220930002157365.png"
+<p><img src="/2024/07/27/biasing/image-20220930002157365.png"
 alt="image-20220930002157365" /></p>
 <p>The output resistance is almost doubled using Stacked FET in
 <em>saturation region</em></p>
@@ -2354,22 +2398,22 @@ class="math display">\[
 g_m = \frac{I_D}{\xi V_T}
 \]</span></p>
 <p>which is <span class="math inline">\(g_m \propto I_D\)</span></p>
-<p><img src="/2024/05/26/biasing/image-20240627230726326.png"
+<p><img src="/2024/07/27/biasing/image-20240627230726326.png"
 alt="image-20240627230726326" /></p>
-<p><img src="/2024/05/26/biasing/image-20240627230744044.png"
+<p><img src="/2024/07/27/biasing/image-20240627230744044.png"
 alt="image-20240627230744044" /></p>
 <h2 id="cascode-with-switch">cascode with switch</h2>
-<p><img src="/2024/05/26/biasing/image-20231212145336401.png"
+<p><img src="/2024/07/27/biasing/image-20231212145336401.png"
 alt="image-20231212145336401" /></p>
 <h2 id="cascode-with-single-current-input">cascode with single current
 input</h2>
-<p><img src="/2024/05/26/biasing/image-20231212153054247.png"
+<p><img src="/2024/07/27/biasing/image-20231212153054247.png"
 alt="image-20231212153054247" /></p>
 <h2 id="constant-gm">constant-gm</h2>
 <blockquote>
 <p>aka. <strong>Beta-multiplier reference</strong></p>
 </blockquote>
-<p><img src="/2024/05/26/biasing/image-20231213235846243.png"
+<p><img src="/2024/07/27/biasing/image-20231213235846243.png"
 alt="image-20231213235846243" /></p>
 <h2 id="current-mirror-mismatch">current mirror mismatch</h2>
 <p>The current mismatch consists of two components.</p>
@@ -2449,15 +2493,15 @@ class="math inline">\(I_{\Delta_{V_{TH}}}+I_{\Delta_{WL}}/\sqrt{2}\)</span></td>
 </tr>
 </tbody>
 </table>
-<p><img src="/2024/05/26/biasing/image-20221003001056211.png"
+<p><img src="/2024/07/27/biasing/image-20221003001056211.png"
 alt="image-20221003001056211" /></p>
-<p><img src="/2024/05/26/biasing/image-20221002215942456.png"
+<p><img src="/2024/07/27/biasing/image-20221002215942456.png"
 alt="image-20221002215942456" /></p>
 <h2 id="biasing-current-source-and-global-variation-monte-carlo">Biasing
 current source and global variation Monte Carlo</h2>
-<p><img src="/2024/05/26/biasing/image-20221020225334767.png"
+<p><img src="/2024/07/27/biasing/image-20221020225334767.png"
 alt="image-20221020225334767" /></p>
-<p><img src="/2024/05/26/biasing/image-20221020225502503.png"
+<p><img src="/2024/07/27/biasing/image-20221020225502503.png"
 alt="image-20221020225502503" /></p>
 <p><strong>iwl</strong>: biased by mirror</p>
 <p><strong>iwl_ideal</strong>: biased by <em>vdc</em> source, whose
@@ -2473,17 +2517,17 @@ class="math inline">\(V_{gs}\)</span></p>
 <ol type="1">
 <li>global variation + local variation (All MC)</li>
 </ol>
-<p><img src="/2024/05/26/biasing/image-20221020225615633.png"
+<p><img src="/2024/07/27/biasing/image-20221020225615633.png"
 alt="image-20221020225615633" /></p>
 <ol start="2" type="1">
 <li>local variation (Mismatch MC)</li>
 </ol>
-<p><img src="/2024/05/26/biasing/image-20221020225701218.png"
+<p><img src="/2024/07/27/biasing/image-20221020225701218.png"
 alt="image-20221020225701218" /></p>
 <ol start="3" type="1">
 <li>global variation (Process MC)</li>
 </ol>
-<p><img src="/2024/05/26/biasing/image-20221020232515420.png"
+<p><img src="/2024/07/27/biasing/image-20221020232515420.png"
 alt="image-20221020232515420" /></p>
 <blockquote>
 <p>We had better bias mos gate with mirror rather than the <em>vdc</em>
@@ -2500,7 +2544,7 @@ Small gain theorem</h2>
 Integrated Circuit Design</strong> [<a
 href="https://class.ece.iastate.edu/djchen/ee501/2020/References.ppt">https://class.ece.iastate.edu/djchen/ee501/2020/References.ppt</a>]</p>
 </blockquote>
-<p><img src="/2024/05/26/biasing/image-20231202102259692.png"
+<p><img src="/2024/07/27/biasing/image-20231202102259692.png"
 alt="image-20231202102259692" /></p>
 <p>For any given constant values of <em>u</em> and <em>v</em>, the
 constant values of variables that solve the the feed back relationship
@@ -2517,9 +2561,9 @@ one</strong>, that operating point is <strong>stable</strong>.</p>
 <blockquote>
 <p>This is a sufficient condition</p>
 </blockquote>
-<p><img src="/2024/05/26/biasing/image-20231202105749888.png"
+<p><img src="/2024/07/27/biasing/image-20231202105749888.png"
 alt="image-20231202105749888" /></p>
-<p><img src="/2024/05/26/biasing/image-20231202105621385.png"
+<p><img src="/2024/07/27/biasing/image-20231202105621385.png"
 alt="image-20231202105621385" /></p>
 <p>With <span class="math inline">\(m_{1\to 2} = 1\)</span> <span
 class="math display">\[
@@ -2551,15 +2595,15 @@ Loop Gain</h3>
 <blockquote>
 <p>using derivation of large signal</p>
 </blockquote>
-<p><img src="/2024/05/26/biasing/image-20231202132310478.png"
+<p><img src="/2024/07/27/biasing/image-20231202132310478.png"
 alt="image-20231202132310478" /></p>
-<p><img src="/2024/05/26/biasing/image-20231202134138319.png"
+<p><img src="/2024/07/27/biasing/image-20231202134138319.png"
 alt="image-20231202134138319" /></p>
 <hr />
 <blockquote>
 <p>❗❗❗ R should <strong>not</strong> be on the other side</p>
 </blockquote>
-<p><img src="/2024/05/26/biasing/image-20231202104505264.png"
+<p><img src="/2024/07/27/biasing/image-20231202104505264.png"
 alt="image-20231202104505264" /></p>
 <h2 id="reference">reference</h2>
 <p>S. Pavan, "Systematic Development of CMOS Fixed-Transconductance Bias
@@ -2606,50 +2650,6 @@ href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/l
 ]]></content>
       <categories>
         <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>How to obtain channel bandwidth from pulse response</title>
-    <url>/2022/05/20/bw-from-pulse-resp/</url>
-    <content><![CDATA[<p>Convolution Property of the Fourier Transform <span
-class="math display">\[
-x(t)*h(t)\longleftrightarrow  X(\omega)H(\omega)
-\]</span> pulse response can be obtained by convolve impulse response
-with UI length rectangular <span class="math display">\[
-H(\omega) = \frac{Y_{\text{pulse}}(\omega)}{X_{\text{rect}}(\omega)} =
-\frac{Y_{\text{pulse}}(\omega)}{\text{sinc}(\omega)}
-\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% Convolution Property of the Fourier Transform</span></span><br><span class="line"><span class="comment">% pulse(t) = h(t) * rect(t)</span></span><br><span class="line"><span class="comment">% -&gt; fourier transform</span></span><br><span class="line"><span class="comment">% PULSE = H * RECT</span></span><br><span class="line"><span class="comment">% FT(RECT) = sinc</span></span><br><span class="line"><span class="comment">% H = PULSE/RECT = PULSE/sinc</span></span><br><span class="line">xx = <span class="built_in">pi</span>*ui.*w(<span class="number">1</span>:plt_num);</span><br><span class="line">y_sinc = ui.*<span class="built_in">sin</span>(xx)./xx;</span><br><span class="line">y_sinc(<span class="number">1</span>) = y_sinc(<span class="number">2</span>);</span><br><span class="line">y_sinc = y_sinc/y_sinc(<span class="number">1</span>);  <span class="comment">% we dont care the absoulte gain</span></span><br><span class="line">h_ban1 = <span class="built_in">abs</span>(h(<span class="number">1</span>:plt_num))./<span class="built_in">abs</span>(y_sinc);</span><br><span class="line"></span><br><span class="line">h_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(h_ban1));</span><br><span class="line">[hmin, Index] = <span class="built_in">min</span>(<span class="built_in">abs</span>(h_dB +<span class="number">3</span> ));</span><br><span class="line">f_3dB = w(Index);</span><br><span class="line">f_3dB = f_3dB/<span class="number">1e9</span>;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223115184.png"
-alt="image-20220520223115184" /></p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220520223621924.png"
-alt="image-20220520223621924" /></p>
-<h2 id="sinc-function">sinc function</h2>
-<p>Notice that the complete definition of <span
-class="math inline">\(\operatorname{sinc}\)</span> on <span
-class="math inline">\(\mathbb R\)</span> is <span
-class="math display">\[
-\operatorname{Sa}(x)=\operatorname{sinc}(x) = \begin{cases} \frac{\sin
-x}{x} &amp; x\ne 0, \\ 1, &amp; x = 0, \end{cases}
-\]</span> which is <strong>continuous</strong>.</p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220521112425477.png"
-alt="image-20220521112425477" /></p>
-<p><img src="/2022/05/20/bw-from-pulse-resp/image-20220521112722838.png"
-alt="image-20220521112722838" /></p>
-<p>To approach to real spectrum of continuous rectangular waveform,
-<span class="math inline">\(\text{NFFT}\)</span> has to be big
-enough.</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">close all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">fs=<span class="number">500</span>; <span class="comment">%sampling frequency</span></span><br><span class="line">Ts = <span class="number">1</span>/fs;</span><br><span class="line">T=<span class="number">0.2</span>; <span class="comment">%width of the rectangule pulse in seconds</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">t=<span class="number">-0.5</span>:<span class="number">1</span>/fs:<span class="number">0.5</span>; <span class="comment">%time base</span></span><br><span class="line">x=rectpuls(t,T); <span class="comment">%generating the square wave</span></span><br><span class="line">sum(x&gt;<span class="number">0.5</span>)</span><br><span class="line">stem(t,x,<span class="string">&#x27;--k&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(t, x, <span class="string">&#x27;b.-&#x27;</span>)</span><br><span class="line">xstart = T/<span class="number">2</span>-Ts/<span class="number">2</span>;</span><br><span class="line">xend = -T/<span class="number">2</span>-Ts/<span class="number">2</span>;</span><br><span class="line"><span class="built_in">plot</span>([xstart, xstart], [<span class="number">-1</span>, <span class="number">1.02</span>], <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>([xend, xend], [<span class="number">-1</span>, <span class="number">1.02</span>], <span class="string">&#x27;r--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>([<span class="number">-0.11</span>, <span class="number">0.11</span>], [<span class="number">1</span>, <span class="number">1</span>], <span class="string">&#x27;r--&#x27;</span>)</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line">grid on;</span><br><span class="line">title([<span class="string">&#x27;Rectangular Pulse width=&#x27;</span>, num2str(T),<span class="string">&#x27;s&#x27;</span>]);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Amplitude&#x27;</span>);</span><br><span class="line">xlim([<span class="number">-0.12</span>, <span class="number">0.12</span>]);</span><br><span class="line">ylim([<span class="number">-0.05</span>, <span class="number">1.05</span>]);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line">Titer = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>];</span><br><span class="line">color = &#123;<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;b&#x27;</span>&#125;;</span><br><span class="line">formatSpec = <span class="string">&#x27;NFFT=%d&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:<span class="built_in">length</span>(Titer)</span><br><span class="line">    t=-Titer(k):Ts:Titer(k); <span class="comment">%time base</span></span><br><span class="line">    x=rectpuls(t,T); <span class="comment">%generating the square wave</span></span><br><span class="line"></span><br><span class="line">    L=<span class="built_in">length</span>(x);</span><br><span class="line">    Np = <span class="built_in">nextpow2</span>(L)<span class="number">-1</span>;</span><br><span class="line">    NFFT = <span class="number">2</span>^Np;</span><br><span class="line">    X = fftshift(fft(x,NFFT)); <span class="comment">%FFT with FFTshift for both negative &amp; positive frequencies</span></span><br><span class="line">    f = fs*(-NFFT/<span class="number">2</span>:NFFT/<span class="number">2</span><span class="number">-1</span>)/NFFT; <span class="comment">%Frequency Vector</span></span><br><span class="line">    Xc = <span class="built_in">abs</span>(X)*Ts; <span class="comment">% continuous signal spectrum</span></span><br><span class="line">    <span class="built_in">plot</span>(f, Xc, <span class="string">&quot;Color&quot;</span>,color&#123;k&#125;, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line">    legend_str&#123;k&#125; = [num2str(NFFT, formatSpec)];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"><span class="built_in">legend</span>(legend_str);</span><br><span class="line">title(<span class="string">&#x27;Magnitude of X_c (original continuous signal)&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;Magnitude |X(f)|&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong></p>
-<p>L.W. Couch, <em>Digital and Analog Communication</em>
-<em>Systems</em>, 8th Edition, Pearson, 2013.</p>
-<p><a
-href="https://www.gaussianwaves.com/2014/07/generating-basic-signals-rectangule-pulse-and-power-spectral-density-using-fft/">Generating
-Basic signals – Rectangular Pulse and Power Spectral Density using
-FFT</a></p>
-]]></content>
-      <categories>
-        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -2942,6 +2942,41 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
       </categories>
   </entry>
   <entry>
+    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
+    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
+    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
+It determines which edges to be used as follows:</p>
+<ol type="1">
+<li><p>Evaluate waveforms over the smallest common base period</p></li>
+<li><p>For each capture edge, find the closest setup launch edge. Call
+these the <strong>primary pairs</strong></p></li>
+<li><p>Out of the <strong>primary pairs</strong>, pick the most
+restrictive setup launch and capture edges.</p></li>
+<li><p>For each <strong>primary pair</strong>, draw two hold
+relationships:</p>
+<ul>
+<li><p>Launch to (capture - 1)</p></li>
+<li><p>(Launch + 1) to Capture</p>
+<p>From all of these hold relationships, pick the most
+restrictive.</p></li>
+</ul></li>
+</ol>
+<p>PrimeTime uses the ideal clock waveform (as reported in
+<code>report_clock</code>) to determine the appropriate clock edges for
+inter-clock analysis.</p>
+<p><img
+src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
+alt="image-20220301203135490" /></p>
+<blockquote>
+<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
+<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Clock Gating</title>
     <url>/2023/04/05/clockgating/</url>
     <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
@@ -2979,41 +3014,6 @@ alt="clock gating" /></p>
 <h3 id="reference">reference</h3>
 <p>The Ultimate Guide to Clock Gating <a
 href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
-    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
-    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
-It determines which edges to be used as follows:</p>
-<ol type="1">
-<li><p>Evaluate waveforms over the smallest common base period</p></li>
-<li><p>For each capture edge, find the closest setup launch edge. Call
-these the <strong>primary pairs</strong></p></li>
-<li><p>Out of the <strong>primary pairs</strong>, pick the most
-restrictive setup launch and capture edges.</p></li>
-<li><p>For each <strong>primary pair</strong>, draw two hold
-relationships:</p>
-<ul>
-<li><p>Launch to (capture - 1)</p></li>
-<li><p>(Launch + 1) to Capture</p>
-<p>From all of these hold relationships, pick the most
-restrictive.</p></li>
-</ul></li>
-</ol>
-<p>PrimeTime uses the ideal clock waveform (as reported in
-<code>report_clock</code>) to determine the appropriate clock edges for
-inter-clock analysis.</p>
-<p><img
-src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
-alt="image-20220301203135490" /></p>
-<blockquote>
-<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
-<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -4467,79 +4467,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
       </categories>
   </entry>
   <entry>
-    <title>Deep N-well</title>
-    <url>/2023/05/29/dnw/</url>
-    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
-<p>A variety of techniques can be used to minimize this noise, for
-example by keeping analog devices surrounded by guard rings, or using a
-separate supply for the substrate/well taps.</p>
-<p>However <em>guard rings alone cannot prevent noise coupling deep in
-the substrate, only surface currents</em>.</p>
-<blockquote>
-<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
-the substrate noise, but such is not valid for NMOS .</p>
-</blockquote>
-<h2 id="dnw">DNW</h2>
-<p>The N-channel devices built directly into the P-type substrate are
-not as effectively isolated as P-channel devices in their N-wells. This
-is because despite creating a P+ guard ring around the devices, there
-remains an electrical path below the guard ring for charge to flow.</p>
-<p>To overcome this issue, a <em>deep N-well</em> can be used to more
-effectively isolate these N-channel devices.</p>
-<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
-alt="image-20230529001556060" /></p>
-<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
-alt="image-20230529010836003" /></p>
-<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
-alt="BM_SS_Together at Last_Fig1" /></p>
-<blockquote>
-<p>pwdnw: PW/DNW diode</p>
-<p>dnwpsub: DNW/PSUB diode</p>
-<p><a
-href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
-At Last – Combining Netlist and Layout Data for Power-Aware
-Verification</a></p>
-</blockquote>
-<p><img src="/2023/05/29/dnw/image-20240708221831791.png"
-alt="image-20240708221831791" /></p>
-<p><img src="/2023/05/29/dnw/image-20240708222327376.png"
-alt="image-20240708222327376" /></p>
-<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
-alt="image-20230529002733114" /></p>
-<ul>
-<li>the P-well is separated, allowing the voltage to be controlled</li>
-<li>because the circuit within the deep N-well is separated from the
-p-substrate in this structure, there is the benefit that this circuitry
-is less susceptible to noise that propagates through the
-p-substrate.</li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
-Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
-Transistor Performance for Systems-on-a-Chip Integration. 32nd European
-Solid-State Device Research Conference, 251-254. URL:[<a
-href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
-<a
-href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
-<p>Mark Waller, <a
-href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
-layout: Why wells, taps, and guard rings are crucial</a></p>
-<p>KEITH SABINE <a
-href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
-Deep N Wells in Analog Design</a></p>
-<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
-nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
-1-8.</p>
-<p>cmos_processing, URL:<a
-href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
-<p>Kuo-Tsai LiPaul ChangAndy Chang, TSMC, US20120053923A1, "Methods of
-designing integrated circuits and systems thereof"</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Jitters Simulation</title>
     <url>/2022/05/16/dj-rj/</url>
     <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
@@ -4727,6 +4654,79 @@ href="https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tip
       </categories>
   </entry>
   <entry>
+    <title>Deep N-well</title>
+    <url>/2023/05/29/dnw/</url>
+    <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
+<p>A variety of techniques can be used to minimize this noise, for
+example by keeping analog devices surrounded by guard rings, or using a
+separate supply for the substrate/well taps.</p>
+<p>However <em>guard rings alone cannot prevent noise coupling deep in
+the substrate, only surface currents</em>.</p>
+<blockquote>
+<p>PMOS are less noisy than NMOS since PMOS has its nwell which isolates
+the substrate noise, but such is not valid for NMOS .</p>
+</blockquote>
+<h2 id="dnw">DNW</h2>
+<p>The N-channel devices built directly into the P-type substrate are
+not as effectively isolated as P-channel devices in their N-wells. This
+is because despite creating a P+ guard ring around the devices, there
+remains an electrical path below the guard ring for charge to flow.</p>
+<p>To overcome this issue, a <em>deep N-well</em> can be used to more
+effectively isolate these N-channel devices.</p>
+<p><img src="/2023/05/29/dnw/image-20230529001556060.png"
+alt="image-20230529001556060" /></p>
+<p><img src="/2023/05/29/dnw/image-20230529010836003.png"
+alt="image-20230529010836003" /></p>
+<p><img src="/2023/05/29/dnw/BM_SS_Fig1-520x288.jpg"
+alt="BM_SS_Together at Last_Fig1" /></p>
+<blockquote>
+<p>pwdnw: PW/DNW diode</p>
+<p>dnwpsub: DNW/PSUB diode</p>
+<p><a
+href="https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/">Together
+At Last – Combining Netlist and Layout Data for Power-Aware
+Verification</a></p>
+</blockquote>
+<p><img src="/2023/05/29/dnw/image-20240708221831791.png"
+alt="image-20240708221831791" /></p>
+<p><img src="/2023/05/29/dnw/image-20240708222327376.png"
+alt="image-20240708222327376" /></p>
+<p><img src="/2023/05/29/dnw/image-20230529002733114.png"
+alt="image-20230529002733114" /></p>
+<ul>
+<li>the P-well is separated, allowing the voltage to be controlled</li>
+<li>because the circuit within the deep N-well is separated from the
+p-substrate in this structure, there is the benefit that this circuitry
+is less susceptible to noise that propagates through the
+p-substrate.</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>Chew, K.W., Zhang, J., Shao, K., Loh, W., &amp; Chu, S.F. (2002).
+Impact of Deep N-well Implantation on Substrate Noise Coupling and RF
+Transistor Performance for Systems-on-a-Chip Integration. 32nd European
+Solid-State Device Research Conference, 251-254. URL:[<a
+href="http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf">slides</a>,
+<a
+href="http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf">paper</a>]</p>
+<p>Mark Waller, <a
+href="https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/">Analog
+layout: Why wells, taps, and guard rings are crucial</a></p>
+<p>KEITH SABINE <a
+href="https://www.planetanalog.com/using-deep-n-wells-in-analog-design/">Using
+Deep N Wells in Analog Design</a></p>
+<p>Faricelli, J. (2010). Layout-dependent proximity effects in deep
+nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010,
+1-8.</p>
+<p>cmos_processing, URL:<a
+href="http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf">http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf</a></p>
+<p>Kuo-Tsai LiPaul ChangAndy Chang, TSMC, US20120053923A1, "Methods of
+designing integrated circuits and systems thereof"</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>How to preserve hand-instantiated cells</title>
     <url>/2023/02/10/dont-touch/</url>
     <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
@@ -4749,148 +4749,6 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
 ]]></content>
       <categories>
         <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Pole-Zero Doublet</title>
-    <url>/2022/12/14/doublet/</url>
-    <content><![CDATA[<p>Mismatch between the pole and zero frequencies leads to the
-<strong>“doublet problem”</strong>. If the pole and the zero do not
-exactly coincide, we say that they constitute a
-<strong>doublet</strong></p>
-<blockquote>
-<p>Problem 10.19 in Razavi 2nd book</p>
-</blockquote>
-<p>Suppose the open-loop transfer function of a two-stage op amp is
-expressed as <span class="math display">\[
-H_{open}(s)=\frac{A_0(1+\frac{s}{\omega_z})}{\left( 1+
-\frac{s}{\omega_{p1}}\right)\left( 1+ \frac{s}{\omega_{p2}}\right)}
-\]</span> Ideally, <span
-class="math inline">\(\omega_z=\omega_2\)</span> and the feedback
-circuit exhibits a first-order behavior, i.e., its step response
-contains a single time constant and no overshoot.</p>
-<p>Then the transfer function of the amplifier in a <em>unity-gain
-feedback loop</em> is given by <span
-class="math display">\[\begin{align}
-H_{closed}(s)
-&amp;=\frac{A_0\left(1+\frac{s}{\omega_z}\right)}{\frac{s^2}{\omega_{p1}\omega_{p2}}+\left(
-\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1} \\
-&amp;=\frac{\frac{A_0}{A_0+1}(1+\frac{s}{\omega_z})}{\frac{s^2}{\omega_{p1}\omega_{p2}(A_0+1)}+\left(
-\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)\frac{s}{A_0+1}+1}
-\end{align}\]</span></p>
-<hr />
-<p>The denominator part of <span
-class="math inline">\(H_{closed}(s)\)</span> is <span
-class="math display">\[
-D(s) = \frac{s^2}{\omega_{p1}\omega_{p2}}+\left( \frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1
-\]</span></p>
-<p>Assuming two poles (<span class="math inline">\(\omega_{pA}
-\ll\omega_{pB}\)</span>) of <span
-class="math inline">\(H_{closed}(s)\)</span> are widely spaced, <span
-class="math display">\[\begin{align}
-D(s) &amp;= \left( 1+ \frac{s}{\omega_{pA}}\right)\left( 1+
-\frac{s}{\omega_{pB}}\right)\\
-&amp;\cong \frac{s^2}{\omega_{pA}\omega_{pB}}+\frac{s}{\omega_{pA}} + 1
-\end{align}\]</span></p>
-<p>Thus, the two poles of the closed-loop transfer function of system
-are <span class="math display">\[\begin{align}
-\omega_{pA} &amp;= \frac{A_0+1}{\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}} \\
-&amp;=  \frac{(A_0+1)\omega_{p1} \omega_{p2}}{\omega_{p1} + \omega_{p2}
-+ \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}} \\
-\omega_{pB} &amp;= \omega_{p1} + \omega_{p2} +
-\frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}
-\end{align}\]</span></p>
-<hr />
-<p><strong>Assuming</strong> <span class="math inline">\(\omega_z \simeq
-\omega_{p2}\)</span> and <span class="math inline">\(\omega_{p2}\ll
-(1+A_0)\omega_{p1}\)</span> <span class="math display">\[
-\omega_{pA} = \omega_{p2}
-\]</span> and <span class="math display">\[
-\omega_{pB} = (1+A_0)\omega_{p1}
-\]</span> The closed-loop transfer function is <span
-class="math display">\[
-H_{closed}(s) =
-\frac{\frac{A_0}{A_0+1}\left(1+\frac{s}{\omega_z}\right)}{\left(1+\frac{s}{(1+A_0)\omega_{p1}}\right)\left(
-1+\frac{s}{\omega_{p2}} \right)}
-\]</span></p>
-<hr />
-<p>The step response of the closed-loop amplifier</p>
-<p>Consider the Laplace transform function of step response, <span
-class="math inline">\(X(s)=\frac{1}{s}\)</span> <span
-class="math display">\[
-Y(s)=\frac{1}{s}\times H_{closed}(s)
-\]</span> Thus, the <strong>small-signal step response</strong> of the
-closed-loop amplifier is <span class="math display">\[
-y(t)=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t)
-\]</span> Since, <span class="math inline">\(\omega_{p2}\ll
-(1+A_0)\omega_{p1}\)</span>. Therefore, rewrite the <span
-class="math inline">\(y(t)\)</span> <span class="math display">\[
-y(t)\cong
-\frac{A_0}{A_0+1}\left[1-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t)
-\]</span> The step response contains an exponential term of the form
-<span
-class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}\)</span>.
-This is an important result, indicating that if the zero does not
-exactly cancel the pole, the step response exhibits an exponential with
-an amplitude proportional to <span
-class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)\)</span>,
-which depends on the mismatch between <span
-class="math inline">\(\omega_z\)</span> and <span
-class="math inline">\(\omega_{p2}\)</span> and a time constant <span
-class="math inline">\(\tau\)</span> of <span
-class="math inline">\(\frac{1}{\omega_{p2}}\)</span> or <span
-class="math inline">\(\frac{1}{\omega_{z}}\)</span></p>
-<h3 id="perfect-pole-zero-cancellation">perfect pole-zero
-cancellation</h3>
-<p><span class="math display">\[\begin{align}
-y(t)
-&amp;=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t) \\
-&amp;= \frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}\right]u(t)
-\end{align}\]</span></p>
-<hr />
-<p><img src="/2022/12/14/doublet/image-20230108233523345.png"
-alt="image-20230108233523345" /></p>
-<p><img src="/2022/12/14/doublet/image-20230108234123707.png"
-alt="image-20230108234123707" /></p>
-<blockquote>
-<p>The zero comes from the mirror node</p>
-<p>Thanks to unity gain buffer, zero is alleviated for <span
-class="math inline">\(C_c\)</span></p>
-</blockquote>
-<h3 id="reference">reference</h3>
-<p>Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology,
-EE 240B – Spring 2018, Advanced Analog Integrated Circuits <a
-href="https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf</a></p>
-<p>Eric Chang, Prof. Elad Alon EE240B HW3 <a
-href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf</a>
-and <a
-href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf</a></p>
-<p>Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ),
-Operational Amplifiers <a
-href="http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf">http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf</a></p>
-<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
-frequency response and settling time of operational amplifiers," in IEEE
-Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
-doi: 10.1109/JSSC.1974.1050527.</p>
-<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
-frequency response and settling time of operational amplifiers," in IEEE
-Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
-doi: 10.1109/JSSC.1974.1050527.</p>
-<p>P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a
-tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17,
-no. 6, pp. 969-982, Dec. 1982, doi: 10.1109/JSSC.1982.1051851.</p>
-<p>SERGIO FRANCO, Demystifying pole-zero doublets URL:<a
-href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/demystifying-pole-zero-doublets/</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -5246,6 +5104,148 @@ capacitance</strong></p>
 ]]></content>
       <categories>
         <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Pole-Zero Doublet</title>
+    <url>/2022/12/14/doublet/</url>
+    <content><![CDATA[<p>Mismatch between the pole and zero frequencies leads to the
+<strong>“doublet problem”</strong>. If the pole and the zero do not
+exactly coincide, we say that they constitute a
+<strong>doublet</strong></p>
+<blockquote>
+<p>Problem 10.19 in Razavi 2nd book</p>
+</blockquote>
+<p>Suppose the open-loop transfer function of a two-stage op amp is
+expressed as <span class="math display">\[
+H_{open}(s)=\frac{A_0(1+\frac{s}{\omega_z})}{\left( 1+
+\frac{s}{\omega_{p1}}\right)\left( 1+ \frac{s}{\omega_{p2}}\right)}
+\]</span> Ideally, <span
+class="math inline">\(\omega_z=\omega_2\)</span> and the feedback
+circuit exhibits a first-order behavior, i.e., its step response
+contains a single time constant and no overshoot.</p>
+<p>Then the transfer function of the amplifier in a <em>unity-gain
+feedback loop</em> is given by <span
+class="math display">\[\begin{align}
+H_{closed}(s)
+&amp;=\frac{A_0\left(1+\frac{s}{\omega_z}\right)}{\frac{s^2}{\omega_{p1}\omega_{p2}}+\left(
+\frac{1}{\omega_{p1}} +
+\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1} \\
+&amp;=\frac{\frac{A_0}{A_0+1}(1+\frac{s}{\omega_z})}{\frac{s^2}{\omega_{p1}\omega_{p2}(A_0+1)}+\left(
+\frac{1}{\omega_{p1}} +
+\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)\frac{s}{A_0+1}+1}
+\end{align}\]</span></p>
+<hr />
+<p>The denominator part of <span
+class="math inline">\(H_{closed}(s)\)</span> is <span
+class="math display">\[
+D(s) = \frac{s^2}{\omega_{p1}\omega_{p2}}+\left( \frac{1}{\omega_{p1}} +
+\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1
+\]</span></p>
+<p>Assuming two poles (<span class="math inline">\(\omega_{pA}
+\ll\omega_{pB}\)</span>) of <span
+class="math inline">\(H_{closed}(s)\)</span> are widely spaced, <span
+class="math display">\[\begin{align}
+D(s) &amp;= \left( 1+ \frac{s}{\omega_{pA}}\right)\left( 1+
+\frac{s}{\omega_{pB}}\right)\\
+&amp;\cong \frac{s^2}{\omega_{pA}\omega_{pB}}+\frac{s}{\omega_{pA}} + 1
+\end{align}\]</span></p>
+<p>Thus, the two poles of the closed-loop transfer function of system
+are <span class="math display">\[\begin{align}
+\omega_{pA} &amp;= \frac{A_0+1}{\frac{1}{\omega_{p1}} +
+\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}} \\
+&amp;=  \frac{(A_0+1)\omega_{p1} \omega_{p2}}{\omega_{p1} + \omega_{p2}
++ \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}} \\
+\omega_{pB} &amp;= \omega_{p1} + \omega_{p2} +
+\frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}
+\end{align}\]</span></p>
+<hr />
+<p><strong>Assuming</strong> <span class="math inline">\(\omega_z \simeq
+\omega_{p2}\)</span> and <span class="math inline">\(\omega_{p2}\ll
+(1+A_0)\omega_{p1}\)</span> <span class="math display">\[
+\omega_{pA} = \omega_{p2}
+\]</span> and <span class="math display">\[
+\omega_{pB} = (1+A_0)\omega_{p1}
+\]</span> The closed-loop transfer function is <span
+class="math display">\[
+H_{closed}(s) =
+\frac{\frac{A_0}{A_0+1}\left(1+\frac{s}{\omega_z}\right)}{\left(1+\frac{s}{(1+A_0)\omega_{p1}}\right)\left(
+1+\frac{s}{\omega_{p2}} \right)}
+\]</span></p>
+<hr />
+<p>The step response of the closed-loop amplifier</p>
+<p>Consider the Laplace transform function of step response, <span
+class="math inline">\(X(s)=\frac{1}{s}\)</span> <span
+class="math display">\[
+Y(s)=\frac{1}{s}\times H_{closed}(s)
+\]</span> Thus, the <strong>small-signal step response</strong> of the
+closed-loop amplifier is <span class="math display">\[
+y(t)=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
+\right]u(t)
+\]</span> Since, <span class="math inline">\(\omega_{p2}\ll
+(1+A_0)\omega_{p1}\)</span>. Therefore, rewrite the <span
+class="math inline">\(y(t)\)</span> <span class="math display">\[
+y(t)\cong
+\frac{A_0}{A_0+1}\left[1-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
+\right]u(t)
+\]</span> The step response contains an exponential term of the form
+<span
+class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}\)</span>.
+This is an important result, indicating that if the zero does not
+exactly cancel the pole, the step response exhibits an exponential with
+an amplitude proportional to <span
+class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)\)</span>,
+which depends on the mismatch between <span
+class="math inline">\(\omega_z\)</span> and <span
+class="math inline">\(\omega_{p2}\)</span> and a time constant <span
+class="math inline">\(\tau\)</span> of <span
+class="math inline">\(\frac{1}{\omega_{p2}}\)</span> or <span
+class="math inline">\(\frac{1}{\omega_{z}}\)</span></p>
+<h3 id="perfect-pole-zero-cancellation">perfect pole-zero
+cancellation</h3>
+<p><span class="math display">\[\begin{align}
+y(t)
+&amp;=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
+\right]u(t) \\
+&amp;= \frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}\right]u(t)
+\end{align}\]</span></p>
+<hr />
+<p><img src="/2022/12/14/doublet/image-20230108233523345.png"
+alt="image-20230108233523345" /></p>
+<p><img src="/2022/12/14/doublet/image-20230108234123707.png"
+alt="image-20230108234123707" /></p>
+<blockquote>
+<p>The zero comes from the mirror node</p>
+<p>Thanks to unity gain buffer, zero is alleviated for <span
+class="math inline">\(C_c\)</span></p>
+</blockquote>
+<h3 id="reference">reference</h3>
+<p>Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology,
+EE 240B – Spring 2018, Advanced Analog Integrated Circuits <a
+href="https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf</a></p>
+<p>Eric Chang, Prof. Elad Alon EE240B HW3 <a
+href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf</a>
+and <a
+href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf</a></p>
+<p>Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ),
+Operational Amplifiers <a
+href="http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf">http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf</a></p>
+<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
+frequency response and settling time of operational amplifiers," in IEEE
+Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
+doi: 10.1109/JSSC.1974.1050527.</p>
+<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
+frequency response and settling time of operational amplifiers," in IEEE
+Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
+doi: 10.1109/JSSC.1974.1050527.</p>
+<p>P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a
+tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17,
+no. 6, pp. 969-982, Dec. 1982, doi: 10.1109/JSSC.1982.1051851.</p>
+<p>SERGIO FRANCO, Demystifying pole-zero doublets URL:<a
+href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/demystifying-pole-zero-doublets/</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -5738,6 +5738,70 @@ href="https://dspillustrations.com/pages/posts/misc/spectral-leakage-zero-paddin
       </categories>
   </entry>
   <entry>
+    <title>verilog-mode.el</title>
+    <url>/2022/05/13/emacs-verilog-mode/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
+command</p>
+</blockquote>
+<h2 id="verilog-mode.el">verilog-mode.el</h2>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
+<blockquote>
+<p>For use with <code>--batch</code>, perform automatic expansions as a
+stand-alone tool. This sets up the appropriate Verilog mode environment,
+updates automatics with M-x verilog-auto on all command-line files, and
+saves the buffers. For proper results, multiple filenames need to be
+passed on the command line in bottom-up order.</p>
+</blockquote>
+<h3
+id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
+<blockquote>
+<p>Update automatics with M-x verilog-auto, save the buffer, and
+<em>compile</em></p>
+</blockquote>
+<h2 id="emacs">Emacs</h2>
+<h3 id="no-site-file"><code>--no-site-file</code></h3>
+<p>Another file for site-customization is <code>site-start.el</code>.
+Emacs loads this <em>before</em> the user's init file
+(<code>.emacs</code>, <code>.emacs.el</code> or
+<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
+file with the option <code>--no-site-file</code></p>
+<h3 id="batch"><code>--batch</code></h3>
+<p>The command-line option <code>--batch</code> causes Emacs to run
+noninteractively. The idea is that you specify Lisp programs to run;
+when they are finished, Emacs should exit.</p>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function;</p>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="f-func"><code>-f FUNC</code></h3>
+<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
+no arguments</p>
+<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
+<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
+function</p>
+<blockquote>
+<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
+</blockquote>
+<h2 id="multiple-directories">multiple directories</h2>
+<p><strong>AUTOINST</strong> only search in the file's directory
+default.</p>
+<p>You can append below <code>verilog-library-directories</code> for
+multiple directories search</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>Emacs Online Documentation <a
+href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
+<p>Emacs verilog-mode 的使用 URL: <a
+href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>EMIR via Voltus-Fi</title>
     <url>/2022/02/23/emir-voltus-fi/</url>
     <content><![CDATA[<h2 id="general-terminology">general terminology</h2>
@@ -6171,70 +6235,6 @@ Dasgupta, Aurobindo. (2003). Static electromigration analysis for
 on-chip signal interconnects. Computer-Aided Design of Integrated
 Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
 10.1109/TCAD.2002.805728.</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>verilog-mode.el</title>
-    <url>/2022/05/13/emacs-verilog-mode/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>CAUTION: <em>filename.v</em> is <strong>overwrite</strong> by
-command</p>
-</blockquote>
-<h2 id="verilog-mode.el">verilog-mode.el</h2>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*AUTOINPUT*/</span></span><br><span class="line"><span class="comment">/*AUTOWIRE*/</span></span><br><span class="line"><span class="comment">/*AUTOINST*/</span></span><br><span class="line"><span class="comment">/*AUTO_TEMPLATE*/</span></span><br></pre></td></tr></table></figure>
-<h3 id="f-verilog-batch-auto"><code>-f verilog-batch-auto</code></h3>
-<blockquote>
-<p>For use with <code>--batch</code>, perform automatic expansions as a
-stand-alone tool. This sets up the appropriate Verilog mode environment,
-updates automatics with M-x verilog-auto on all command-line files, and
-saves the buffers. For proper results, multiple filenames need to be
-passed on the command line in bottom-up order.</p>
-</blockquote>
-<h3
-id="f-verilog-auto-save-compile"><code>-f verilog-auto-save-compile</code></h3>
-<blockquote>
-<p>Update automatics with M-x verilog-auto, save the buffer, and
-<em>compile</em></p>
-</blockquote>
-<h2 id="emacs">Emacs</h2>
-<h3 id="no-site-file"><code>--no-site-file</code></h3>
-<p>Another file for site-customization is <code>site-start.el</code>.
-Emacs loads this <em>before</em> the user's init file
-(<code>.emacs</code>, <code>.emacs.el</code> or
-<code>.emacs.d/.emacs.d</code>). You can inhibit the loading of this
-file with the option <code>--no-site-file</code></p>
-<h3 id="batch"><code>--batch</code></h3>
-<p>The command-line option <code>--batch</code> causes Emacs to run
-noninteractively. The idea is that you specify Lisp programs to run;
-when they are finished, Emacs should exit.</p>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function;</p>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="f-func"><code>-f FUNC</code></h3>
-<p><code>--funcall, -f FUNC</code>, call Emacs Lisp function FUNC with
-no arguments</p>
-<h3 id="load--l-file"><code>--load, -l FILE</code></h3>
-<p><code>--load, -l FILE</code>, load Emacs Lisp FILE using the load
-function</p>
-<blockquote>
-<p>Verilog-mode is a standard part of GNU Emacs as of 22.2.</p>
-</blockquote>
-<h2 id="multiple-directories">multiple directories</h2>
-<p><strong>AUTOINST</strong> only search in the file's directory
-default.</p>
-<p>You can append below <code>verilog-library-directories</code> for
-multiple directories search</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Local Variables:</span><br><span class="line">// verilog-library-directories:(&quot;.&quot; &quot;subdir&quot; &quot;subdir2&quot;)</span><br><span class="line">// End:</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>Emacs Online Documentation <a
-href="https://doc.endlessparentheses.com/">https://doc.endlessparentheses.com/</a></p>
-<p>Emacs verilog-mode 的使用 URL: <a
-href="https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/">https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/</a></p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -7917,6 +7917,18 @@ alt="image-20220403212529981" /></p>
       </categories>
   </entry>
   <entry>
+    <title>GitHub Pages Build and deployment</title>
+    <url>/2023/07/01/github-pages-deploy/</url>
+    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
+<p><img
+src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
+alt="image-20230701142405404" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Demystifying Gate Resistance</title>
     <url>/2023/07/09/gate-resistance/</url>
     <content><![CDATA[<p><img src="/2023/07/09/gate-resistance/image-20230709102848934.png"
@@ -8090,18 +8102,6 @@ Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>GitHub Pages Build and deployment</title>
-    <url>/2023/07/01/github-pages-deploy/</url>
-    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
-<p><img
-src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
-alt="image-20230701142405404" /></p>
-]]></content>
-      <categories>
-        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -13328,6 +13328,26 @@ McGraw-Hill, 2017.</p>
       </categories>
   </entry>
   <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Power Spectra and Power Spectral Densities</title>
     <url>/2022/04/18/ps-psd/</url>
     <content><![CDATA[<p>One will see the following phenomena:</p>
@@ -13760,26 +13780,6 @@ Press. doi:10.1017/CBO9780511835261</p>
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -15317,21 +15317,6 @@ href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L1
       </categories>
   </entry>
   <entry>
-    <title>sub-binary radix DAC</title>
-    <url>/2022/03/19/sub-binary-radix-DAC/</url>
-    <content><![CDATA[<p><strong>reference</strong>:</p>
-<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
-AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
-<p>M. Pastre and M. Kayal, "High-precision DAC based on a
-self-calibrated sub-binary radix converter," 2004 IEEE International
-Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
-I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Signal and System insight</title>
     <url>/2024/05/02/ss-insight/</url>
     <content><![CDATA[<h2 id="barkhausen-criteria">Barkhausen criteria</h2>
@@ -15747,6 +15732,21 @@ href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://c
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>sub-binary radix DAC</title>
+    <url>/2022/03/19/sub-binary-radix-DAC/</url>
+    <content><![CDATA[<p><strong>reference</strong>:</p>
+<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
+AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
+<p>M. Pastre and M. Kayal, "High-precision DAC based on a
+self-calibrated sub-binary radix converter," 2004 IEEE International
+Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
+I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -17892,6 +17892,139 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       </categories>
   </entry>
   <entry>
+    <title>Process Variation</title>
+    <url>/2022/03/02/variation/</url>
+    <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
+<p><img src="/2022/03/02/variation/image-20220302000743092.png"
+alt="image-20220302000743092" /></p>
+<h4 id="globallocal-variation">Global/Local Variation</h4>
+<p><img src="/2022/03/02/variation/image-20220302000808679.png"
+alt="image-20220302000808679" /></p>
+<h4 id="timing-and-rc-modeling-with-process-corners">Timing and RC
+Modeling with Process Corners</h4>
+<p><img src="/2022/03/02/variation/image-20220302000916728.png"
+alt="image-20220302000916728" /></p>
+<h4 id="global-and-local-variation-by-gaussian">Global and Local
+variation by Gaussian</h4>
+<p><img src="/2022/03/02/variation/image-20230111003336823.png"
+alt="image-20230111003336823" /></p>
+<blockquote>
+<p>Local Monte-Carlo (<strong>SSG, FFG with Local Gaussian</strong>) as
+Signoff golden</p>
+</blockquote>
+<p><img src="/2022/03/02/variation/image-20231215234014594.png"
+alt="image-20231215234014594" /></p>
+<h4 id="process-corner-model-limitations">Process Corner Model
+Limitations</h4>
+<p><img src="/2022/03/02/variation/image-20220323232119661.png"
+alt="image-20220323232119661" /></p>
+<p><img src="/2022/03/02/variation/image-20230111003705417.png"
+alt="image-20230111003705417" /></p>
+<p>Variation section</p>
+<ul>
+<li>Total corner (TT/SS/FF/SF/FS)
+<ul>
+<li>E.g. TTMacro_MOS_MOS_MOSCAP</li>
+</ul></li>
+<li>Global Corner (TTG/SSG/FFG/SFG/FSG) + Local MC
+<ul>
+<li>E.g. TTGlobalCorner_LocalMC_MOS_MOSCAP</li>
+</ul></li>
+<li>Local MC
+<ul>
+<li>E.g. LocalMCOnly_MOS_MOSCAP</li>
+</ul></li>
+<li>Global MC + Local MC (Total MC)
+<ul>
+<li>GlobalMC_LocalMC_MOS_MOSCAP</li>
+</ul></li>
+</ul>
+<p><img src="/2022/03/02/variation/image-20230308003005235.png"
+alt="image-20230308003005235" /></p>
+<p><img src="/2022/03/02/variation/image-20230111010426775.png"
+alt="image-20230111010426775" /></p>
+<p><img
+src="/2022/03/02/variation/Screen-Shot-2014-09-11-at-8.47.06-AM.png"
+alt="img" /></p>
+<p><img src="/2022/03/02/variation/image-20230111011757049.png"
+alt="image-20230111011757049" /></p>
+<blockquote>
+<p><strong>SSGNP, FFGNP</strong>:</p>
+<p>When N/P global correlation is weak (R^2=0.15), the corner of N/PMOS
+balance circuit (e.g. inverter) can be tightened (<strong>3sigma -&gt;
+2.5sgma</strong>) due to the <strong>cancellation</strong> between NMOS
+and PMOS</p>
+<p>SSGNP, FFGNP usually used in Digital STA</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Global variation</strong> validation with <strong>global
+corner</strong>
+<ul>
+<li><strong>3-sigma of global MC</strong> simulation is aligned with
+<strong>global corner</strong></li>
+</ul></li>
+<li><strong>Total variation</strong> validation with <strong>total
+corner</strong>
+<ul>
+<li><strong>3-sigma of global MC + local MC (total)</strong> simulation
+is aligned with <strong>total corner</strong></li>
+</ul></li>
+</ul>
+</blockquote>
+<h4 id="global-corner">Global Corner</h4>
+<blockquote>
+<p><a
+href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101</a></p>
+<p>The <strong>"total corner"</strong> is representative of the maximum
+device parameter variation including local device variation effects.
+However, it is not a statistical corner.</p>
+<p>The <strong>"global" corner</strong> is defined as the
+<strong>"total" corner minus the impact of "local
+variation"</strong></p>
+<p>Hence, if you were to examine simulation results for a parameter
+using a "total" and "global" corner, you would find the range of
+variation will be less with the "global" corner than with the "total"
+corner.</p>
+<p>The "global" corner is provided for use in <strong>statistical
+simulations</strong>. Hence, when performing a Monte-Carlo simulation,
+the "global" corner is selected - NOT the "total" corner.</p>
+</blockquote>
+<p><img src="/2022/03/02/variation/image-20230511234313012.png"
+alt="image-20230511234313012" /></p>
+<p><span class="math display">\[
+\Delta V_{T,\sigma_{total}} = \sqrt{\Delta^2 _{T,
+\sigma_{global}}+\Delta^2 _{T, \sigma_{local}}}
+\]</span></p>
+<h4 id="reference">reference</h4>
+<p>Eric J.-W. Fang, T5: Fundamentals of Process Monitors for
+Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State
+Circuits Conference</p>
+<p>Alvin Loke, Device and Physical Design Considerations for Circuits in
+FinFET Technology, ISSCC 2020 Short Course</p>
+<p>簡報 Cln16ffcll Sr V1d0 2p1 Usage Guide URL: <a
+href="https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view">https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view</a></p>
+<p>Radojcic, Riko, Dan Perry and Mark Nakamoto. “Design for
+manufacturability for fabless manufactuers.” <em>IEEE Solid-State
+Circuits Magazine</em> 1 (2009): n. pag.</p>
+<p>How To Reduce Implementation Headaches In FinFET Processes URL: <a
+href="https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/">https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/</a></p>
+<p>陌上风骑驴看IC, STA | SSGNP, FFGNP. <a
+href="https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg">https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg</a></p>
+<p>陌上风骑驴看IC, STA | ssg 跟ss corner 的区别——谬误更正版 <a
+href="https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd">https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd</a></p>
+<p>The Evolution, Pitfalls, and Cargo Cult Engineering of Advanced
+Digital Timing Sign-off <a
+href="https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf">https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf</a></p>
+<p>Don O'Riordan Cadence Design Systems. Recommended Spectre Monte Carlo
+modeling methodology [<a
+href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-guide.org/modeling/montecarlo.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>UVM REG RALF &amp; IP-XACT</title>
     <url>/2022/03/14/uvm-reg-ralf/</url>
     <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
@@ -18049,139 +18182,6 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Process Variation</title>
-    <url>/2022/03/02/variation/</url>
-    <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
-<p><img src="/2022/03/02/variation/image-20220302000743092.png"
-alt="image-20220302000743092" /></p>
-<h4 id="globallocal-variation">Global/Local Variation</h4>
-<p><img src="/2022/03/02/variation/image-20220302000808679.png"
-alt="image-20220302000808679" /></p>
-<h4 id="timing-and-rc-modeling-with-process-corners">Timing and RC
-Modeling with Process Corners</h4>
-<p><img src="/2022/03/02/variation/image-20220302000916728.png"
-alt="image-20220302000916728" /></p>
-<h4 id="global-and-local-variation-by-gaussian">Global and Local
-variation by Gaussian</h4>
-<p><img src="/2022/03/02/variation/image-20230111003336823.png"
-alt="image-20230111003336823" /></p>
-<blockquote>
-<p>Local Monte-Carlo (<strong>SSG, FFG with Local Gaussian</strong>) as
-Signoff golden</p>
-</blockquote>
-<p><img src="/2022/03/02/variation/image-20231215234014594.png"
-alt="image-20231215234014594" /></p>
-<h4 id="process-corner-model-limitations">Process Corner Model
-Limitations</h4>
-<p><img src="/2022/03/02/variation/image-20220323232119661.png"
-alt="image-20220323232119661" /></p>
-<p><img src="/2022/03/02/variation/image-20230111003705417.png"
-alt="image-20230111003705417" /></p>
-<p>Variation section</p>
-<ul>
-<li>Total corner (TT/SS/FF/SF/FS)
-<ul>
-<li>E.g. TTMacro_MOS_MOS_MOSCAP</li>
-</ul></li>
-<li>Global Corner (TTG/SSG/FFG/SFG/FSG) + Local MC
-<ul>
-<li>E.g. TTGlobalCorner_LocalMC_MOS_MOSCAP</li>
-</ul></li>
-<li>Local MC
-<ul>
-<li>E.g. LocalMCOnly_MOS_MOSCAP</li>
-</ul></li>
-<li>Global MC + Local MC (Total MC)
-<ul>
-<li>GlobalMC_LocalMC_MOS_MOSCAP</li>
-</ul></li>
-</ul>
-<p><img src="/2022/03/02/variation/image-20230308003005235.png"
-alt="image-20230308003005235" /></p>
-<p><img src="/2022/03/02/variation/image-20230111010426775.png"
-alt="image-20230111010426775" /></p>
-<p><img
-src="/2022/03/02/variation/Screen-Shot-2014-09-11-at-8.47.06-AM.png"
-alt="img" /></p>
-<p><img src="/2022/03/02/variation/image-20230111011757049.png"
-alt="image-20230111011757049" /></p>
-<blockquote>
-<p><strong>SSGNP, FFGNP</strong>:</p>
-<p>When N/P global correlation is weak (R^2=0.15), the corner of N/PMOS
-balance circuit (e.g. inverter) can be tightened (<strong>3sigma -&gt;
-2.5sgma</strong>) due to the <strong>cancellation</strong> between NMOS
-and PMOS</p>
-<p>SSGNP, FFGNP usually used in Digital STA</p>
-</blockquote>
-<blockquote>
-<ul>
-<li><strong>Global variation</strong> validation with <strong>global
-corner</strong>
-<ul>
-<li><strong>3-sigma of global MC</strong> simulation is aligned with
-<strong>global corner</strong></li>
-</ul></li>
-<li><strong>Total variation</strong> validation with <strong>total
-corner</strong>
-<ul>
-<li><strong>3-sigma of global MC + local MC (total)</strong> simulation
-is aligned with <strong>total corner</strong></li>
-</ul></li>
-</ul>
-</blockquote>
-<h4 id="global-corner">Global Corner</h4>
-<blockquote>
-<p><a
-href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/20466/monte-carlo-simulation-global-local-vs-local-and-process-vs-mismatch/1365101#1365101</a></p>
-<p>The <strong>"total corner"</strong> is representative of the maximum
-device parameter variation including local device variation effects.
-However, it is not a statistical corner.</p>
-<p>The <strong>"global" corner</strong> is defined as the
-<strong>"total" corner minus the impact of "local
-variation"</strong></p>
-<p>Hence, if you were to examine simulation results for a parameter
-using a "total" and "global" corner, you would find the range of
-variation will be less with the "global" corner than with the "total"
-corner.</p>
-<p>The "global" corner is provided for use in <strong>statistical
-simulations</strong>. Hence, when performing a Monte-Carlo simulation,
-the "global" corner is selected - NOT the "total" corner.</p>
-</blockquote>
-<p><img src="/2022/03/02/variation/image-20230511234313012.png"
-alt="image-20230511234313012" /></p>
-<p><span class="math display">\[
-\Delta V_{T,\sigma_{total}} = \sqrt{\Delta^2 _{T,
-\sigma_{global}}+\Delta^2 _{T, \sigma_{local}}}
-\]</span></p>
-<h4 id="reference">reference</h4>
-<p>Eric J.-W. Fang, T5: Fundamentals of Process Monitors for
-Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State
-Circuits Conference</p>
-<p>Alvin Loke, Device and Physical Design Considerations for Circuits in
-FinFET Technology, ISSCC 2020 Short Course</p>
-<p>簡報 Cln16ffcll Sr V1d0 2p1 Usage Guide URL: <a
-href="https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view">https://usermanual.wiki/Document/cln16ffcllsrv1d02p1usageguide.1649731847/view</a></p>
-<p>Radojcic, Riko, Dan Perry and Mark Nakamoto. “Design for
-manufacturability for fabless manufactuers.” <em>IEEE Solid-State
-Circuits Magazine</em> 1 (2009): n. pag.</p>
-<p>How To Reduce Implementation Headaches In FinFET Processes URL: <a
-href="https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/">https://semiengineering.com/how-to-reduce-implementation-headaches-in-finfet-processes/</a></p>
-<p>陌上风骑驴看IC, STA | SSGNP, FFGNP. <a
-href="https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg">https://mp.weixin.qq.com/s/eJ8fYRJBR1E9XbfH95OUOg</a></p>
-<p>陌上风骑驴看IC, STA | ssg 跟ss corner 的区别——谬误更正版 <a
-href="https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd">https://mp.weixin.qq.com/s?__biz=MzUzODczODg2NQ==&amp;mid=2247486225&amp;idx=1&amp;sn=e9c68f6108ae6c9958d47ca0b29373ca&amp;chksm=fad262cfcda5ebd949cc91353c7cbfaf4ba61179306f7d8e98461a4f4ca9d8a9baef5e9f2cc1&amp;scene=178&amp;cur_album_id=1326356275000705025#rd</a></p>
-<p>The Evolution, Pitfalls, and Cargo Cult Engineering of Advanced
-Digital Timing Sign-off <a
-href="https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf">https://www.tauworkshop.com/2021/speaker_slides/christian_l.pdf</a></p>
-<p>Don O'Riordan Cadence Design Systems. Recommended Spectre Monte Carlo
-modeling methodology [<a
-href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-guide.org/modeling/montecarlo.pdf</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -18398,6 +18398,22 @@ in Verdi | Synopsys</a></p>
       </categories>
   </entry>
   <entry>
+    <title>compile vim from source with GUI support</title>
+    <url>/2022/02/02/vim-compile/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="binkey">binkey</h2>
+<p>Inserting a new line below: <code>o</code></p>
+<p>above: <code>O</code></p>
+<p>To insert before the cursor: <code>i</code></p>
+<p>After: <code>a</code></p>
+<p>Before the line (home): <code>I</code></p>
+<p>Append at the end of line: <code>A</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>verilog constant part-select and indexed part-select</title>
     <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
     <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
@@ -18470,20 +18486,17 @@ Memory in Verilog</a></p>
       </categories>
   </entry>
   <entry>
-    <title>compile vim from source with GUI support</title>
-    <url>/2022/02/02/vim-compile/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<h2 id="binkey">binkey</h2>
-<p>Inserting a new line below: <code>o</code></p>
-<p>above: <code>O</code></p>
-<p>To insert before the cursor: <code>i</code></p>
-<p>After: <code>a</code></p>
-<p>Before the line (home): <code>I</code></p>
-<p>Append at the end of line: <code>A</code></p>
+    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
+    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>devops</category>
+        <category>cad</category>
       </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
   </entry>
   <entry>
     <title>Custom Bindkey of Cadence Virtuoso</title>
@@ -18507,17 +18520,13 @@ Memory in Verilog</a></p>
       </tags>
   </entry>
   <entry>
-    <title>virtuoso &quot;dlopen failed to open &#39;libdl.so&#39;&quot;</title>
-    <url>/2022/09/24/virtuoso-dlopen-libdl/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install glibc-devel  </span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last metadata expiration check: 0:01:02 ago on Sat 24 Sep 2022 12:13:54 AM CST.                                                         </span><br><span class="line">Dependencies resolved.</span><br><span class="line">=========================================================================================================================================</span><br><span class="line"> Package                            Architecture              Version                                    Repository                 Size</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> glibc-devel                        x86_64                    2.28-189.5.el8_6                           baseos                     78 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> glibc-headers                      x86_64                    2.28-189.5.el8_6                           baseos                    482 k</span><br><span class="line"> kernel-headers                     x86_64                    4.18.0-372.26.1.el8_6                      baseos                    9.4 M</span><br><span class="line"> libxcrypt-devel                    x86_64                    4.1.1-6.el8                                baseos                     24 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=========================================================================================================================================</span><br><span class="line">Install  4 Packages</span><br></pre></td></tr></table></figure>
+    <title>Build VMware host modules</title>
+    <url>/2024/01/30/vmware-module/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>cad</category>
+        <category>devops</category>
       </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
   </entry>
   <entry>
     <title>Voltage-Mode Driver Equalization</title>
@@ -18721,15 +18730,6 @@ Data Communications</p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Build VMware host modules</title>
-    <url>/2024/01/30/vmware-module/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
       </categories>
   </entry>
   <entry>

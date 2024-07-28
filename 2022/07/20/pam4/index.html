@@ -18,12 +18,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="PAM4 Basic PAM4 only have 1&#x2F;3 of the amplitude compared to NRZ \[ \text{SNR loss} &#x3D; 20\log(\frac{1}{3}) \sim  9.5\text{dB} \]  In practice, there is further degradation due to nonlinearity  In a mor">
+    <meta name="description" content="Bandwidth  [How Interconnects Work: Bandwidth for Modeling and Measurements, https:&#x2F;&#x2F;www.simberian.com&#x2F;AppNotes&#x2F;HIW-Bandwidth-6to112-2021-11-08.pdf] [Moving from 28 Gbps NRZ to 56 Gbps PAM-4 - is it &quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAM4 Signaling">
 <meta property="og:url" content="http://example.com/2022/07/20/pam4/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="PAM4 Basic PAM4 only have 1&#x2F;3 of the amplitude compared to NRZ \[ \text{SNR loss} &#x3D; 20\log(\frac{1}{3}) \sim  9.5\text{dB} \]  In practice, there is further degradation due to nonlinearity  In a mor">
+<meta property="og:description" content="Bandwidth  [How Interconnects Work: Bandwidth for Modeling and Measurements, https:&#x2F;&#x2F;www.simberian.com&#x2F;AppNotes&#x2F;HIW-Bandwidth-6to112-2021-11-08.pdf] [Moving from 28 Gbps NRZ to 56 Gbps PAM-4 - is it &quot;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20240624232935743.png">
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/nrz-v-pam4-bits.png">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20220721234522043.png">
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20220720232837839.png">
 <meta property="article:published_time" content="2022-07-20T22:51:22.000Z">
-<meta property="article:modified_time" content="2024-07-27T09:22:54.323Z">
+<meta property="article:modified_time" content="2024-07-28T13:01:44.343Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2022/07/20/pam4/image-20240624232935743.png">
@@ -153,9 +153,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pam4-basic"><span class="nav-number">1.</span> <span class="nav-text">PAM4 Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pam4-level-names"><span class="nav-number">1.1.</span> <span class="nav-text">PAM4 Level Names</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pam4-eye-linearity"><span class="nav-number">1.2.</span> <span class="nav-text">PAM4 Eye Linearity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transmitter-linearity-rlm"><span class="nav-number">1.3.</span> <span class="nav-text">Transmitter Linearity (RLM)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gray-coding"><span class="nav-number">1.4.</span> <span class="nav-text">Gray Coding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#binary-to-pam4-and-back-to-binary-example"><span class="nav-number">1.4.1.</span> <span class="nav-text">Binary to PAM4 and
-Back to Binary Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pam4-tx-equalization"><span class="nav-number">2.</span> <span class="nav-text">PAM4 TX equalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#general-tx-serializer"><span class="nav-number">3.</span> <span class="nav-text">General TX Serializer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mux-timing"><span class="nav-number">3.1.</span> <span class="nav-text">mux timing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#divider-latch-timing"><span class="nav-number">3.2.</span> <span class="nav-text">divider latch timing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#two-latches"><span class="nav-number">3.3.</span> <span class="nav-text">Two latches</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dac-based-ffe-in-pam4-transmitter"><span class="nav-number">4.</span> <span class="nav-text">DAC-based FFE in PAM4
-Transmitter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pi-coil"><span class="nav-number">4.1.</span> <span class="nav-text">\(\pi\)-coil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.2.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#bandwidth"><span class="nav-number">1.</span> <span class="nav-text">Bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pam4-basic"><span class="nav-number">2.</span> <span class="nav-text">PAM4 Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#energy"><span class="nav-number">2.1.</span> <span class="nav-text">Energy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pam4-level-names"><span class="nav-number">2.2.</span> <span class="nav-text">PAM4 Level Names</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pam4-eye-linearity"><span class="nav-number">2.3.</span> <span class="nav-text">PAM4 Eye Linearity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transmitter-linearity-rlm"><span class="nav-number">2.4.</span> <span class="nav-text">Transmitter Linearity (RLM)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gray-coding"><span class="nav-number">3.</span> <span class="nav-text">Gray Coding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#binary-to-pam4-and-back-to-binary-example"><span class="nav-number">3.1.</span> <span class="nav-text">Binary to PAM4 and
+Back to Binary Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pam4-tx-equalization"><span class="nav-number"></span> <span class="nav-text">PAM4 TX equalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-serializer"><span class="nav-number">1.</span> <span class="nav-text">TX Serializer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mux-timing"><span class="nav-number">1.1.</span> <span class="nav-text">mux timing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#divider-latch-timing"><span class="nav-number">1.2.</span> <span class="nav-text">divider latch timing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#two-latches"><span class="nav-number">1.3.</span> <span class="nav-text">Two latches</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dac-based-ffe-in-pam4-transmitter"><span class="nav-number">2.</span> <span class="nav-text">DAC-based FFE in PAM4
+Transmitter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pi-coil"><span class="nav-number">2.1.</span> <span class="nav-text">\(\pi\)-coil</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -250,7 +250,7 @@ Transmitter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a 
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,11 +271,20 @@ Transmitter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a 
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="/2022/07/20/pam4/image-20240624232935743.png"
+    <div class="post-body" itemprop="articleBody"><h2 id="bandwidth">Bandwidth</h2>
+<blockquote>
+<p>[How Interconnects Work: Bandwidth for Modeling and Measurements, <a
+target="_blank" rel="noopener" href="https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf">https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf</a>]</p>
+<p>[Moving from 28 Gbps NRZ to 56 Gbps PAM-4 - is it "free lunch"?, <a
+target="_blank" rel="noopener" href="https://www.simberian.com/AppNotes/28NRZto56PAM4.pdf">https://www.simberian.com/AppNotes/28NRZto56PAM4.pdf</a>]</p>
+<p>[PAM4: For Better and Worse Is PAM4 worth the hassle?<a
+target="_blank" rel="noopener" href="https://www.signalintegrityjournal.com/articles/1151-pam4-for-better-and-worse">https://www.signalintegrityjournal.com/articles/1151-pam4-for-better-and-worse</a>]</p>
+</blockquote>
+<h2 id="pam4-basic">PAM4 Basic</h2>
+<p><img src="/2022/07/20/pam4/image-20240624232935743.png"
 alt="image-20240624232935743" /></p>
 <p><img src="/2022/07/20/pam4/nrz-v-pam4-bits.png"
 alt="PAM4, NRZ, PCIe 6.0" /></p>
-<h1 id="pam4-basic">PAM4 Basic</h1>
 <p><strong>PAM4</strong> only have <em>1/3</em> of the amplitude
 compared to <strong>NRZ</strong> <span class="math display">\[
 \text{SNR loss} = 20\log(\frac{1}{3}) \sim  9.5\text{dB}
@@ -287,10 +296,12 @@ compared to <strong>NRZ</strong> <span class="math display">\[
 signal-to-noise ratio (SNR)</strong> for <strong>lower Nyquist
 frequency</strong></p>
 <p>Equalization will be a lot more complex</p>
-<h2 id="pam4-level-names">PAM4 Level Names</h2>
+<h3 id="energy">Energy</h3>
+<p>1mW/Gbps = 1pJ/bit</p>
+<h3 id="pam4-level-names">PAM4 Level Names</h3>
 <p><img src="/2022/07/20/pam4/image-20220717000655620.png"
 alt="image-20220717000655620" /></p>
-<h2 id="pam4-eye-linearity">PAM4 Eye Linearity</h2>
+<h3 id="pam4-eye-linearity">PAM4 Eye Linearity</h3>
 <p><img src="/2022/07/20/pam4/image-20220716221740224.png"
 alt="image-20220716221740224" /></p>
 <p>Each level can have different amplitudes, which form the <strong>Eye
@@ -302,7 +313,7 @@ Linearity}}=\frac{\min(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}{\max(AV
 <p>Perfect eye = 1</p>
 <p>Worst eye = 0</p>
 </blockquote>
-<h2 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h2>
+<h3 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h3>
 <p>The <strong>Level Separation Mismatch Ratio</strong>, commonly
 referred to as <span class="math inline">\(R_{\text{LM}}\)</span>, is a
 measurement that is not required in normative or informative VSR tests,
@@ -489,18 +500,18 @@ D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
 class="math inline">\(C_0 = m\)</span> and <span
 class="math inline">\(C_{1}=n\)</span>, which is same with that of
 NRZ.</p>
-<h1 id="general-tx-serializer">General TX Serializer</h1>
-<h2 id="mux-timing">mux timing</h2>
+<h2 id="tx-serializer">TX Serializer</h2>
+<h3 id="mux-timing">mux timing</h3>
 <p><img src="/2022/07/20/pam4/mux2-1.drawio.svg"
 alt="mux2-1.drawio" /></p>
-<h2 id="divider-latch-timing">divider latch timing</h2>
+<h3 id="divider-latch-timing">divider latch timing</h3>
 <p><img src="/2022/07/20/pam4/div2-latch.drawio.svg"
 alt="div2-latch.drawio" /></p>
-<h2 id="two-latches">Two latches</h2>
+<h3 id="two-latches">Two latches</h3>
 <p><img src="/2022/07/20/pam4/two-latch.drawio.svg"
 alt="two-latch.drawio" /></p>
-<h1 id="dac-based-ffe-in-pam4-transmitter">DAC-based FFE in PAM4
-Transmitter</h1>
+<h2 id="dac-based-ffe-in-pam4-transmitter">DAC-based FFE in PAM4
+Transmitter</h2>
 <p><img src="/2022/07/20/pam4/image-20220721220225623.png"
 alt="image-20220721220225623" /></p>
 <p>One classic TX implementation contain:</p>
@@ -515,7 +526,7 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
 </blockquote>
 <p><img src="/2022/07/20/pam4/image-20220721234522043.png"
 alt="image-20220721234522043" /></p>
-<h2 id="pi-coil"><span class="math inline">\(\pi\)</span>-coil</h2>
+<h3 id="pi-coil"><span class="math inline">\(\pi\)</span>-coil</h3>
 <p><img src="/2022/07/20/pam4/image-20220720232837839.png"
 alt="image-20220720232837839" /></p>
 <blockquote>

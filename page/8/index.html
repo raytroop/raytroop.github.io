@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -348,7 +348,7 @@ signals.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -640,7 +640,7 @@ Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -662,11 +662,20 @@ Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/2022/07/20/pam4/image-20240624232935743.png"
+          <h2 id="bandwidth">Bandwidth</h2>
+<blockquote>
+<p>[How Interconnects Work: Bandwidth for Modeling and Measurements, <a
+target="_blank" rel="noopener" href="https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf">https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf</a>]</p>
+<p>[Moving from 28 Gbps NRZ to 56 Gbps PAM-4 - is it "free lunch"?, <a
+target="_blank" rel="noopener" href="https://www.simberian.com/AppNotes/28NRZto56PAM4.pdf">https://www.simberian.com/AppNotes/28NRZto56PAM4.pdf</a>]</p>
+<p>[PAM4: For Better and Worse Is PAM4 worth the hassle?<a
+target="_blank" rel="noopener" href="https://www.signalintegrityjournal.com/articles/1151-pam4-for-better-and-worse">https://www.signalintegrityjournal.com/articles/1151-pam4-for-better-and-worse</a>]</p>
+</blockquote>
+<h2 id="pam4-basic">PAM4 Basic</h2>
+<p><img src="/2022/07/20/pam4/image-20240624232935743.png"
 alt="image-20240624232935743" /></p>
 <p><img src="/2022/07/20/pam4/nrz-v-pam4-bits.png"
 alt="PAM4, NRZ, PCIe 6.0" /></p>
-<h1 id="pam4-basic">PAM4 Basic</h1>
 <p><strong>PAM4</strong> only have <em>1/3</em> of the amplitude
 compared to <strong>NRZ</strong> <span class="math display">\[
 \text{SNR loss} = 20\log(\frac{1}{3}) \sim  9.5\text{dB}
@@ -678,10 +687,12 @@ compared to <strong>NRZ</strong> <span class="math display">\[
 signal-to-noise ratio (SNR)</strong> for <strong>lower Nyquist
 frequency</strong></p>
 <p>Equalization will be a lot more complex</p>
-<h2 id="pam4-level-names">PAM4 Level Names</h2>
+<h3 id="energy">Energy</h3>
+<p>1mW/Gbps = 1pJ/bit</p>
+<h3 id="pam4-level-names">PAM4 Level Names</h3>
 <p><img src="/2022/07/20/pam4/image-20220717000655620.png"
 alt="image-20220717000655620" /></p>
-<h2 id="pam4-eye-linearity">PAM4 Eye Linearity</h2>
+<h3 id="pam4-eye-linearity">PAM4 Eye Linearity</h3>
 <p><img src="/2022/07/20/pam4/image-20220716221740224.png"
 alt="image-20220716221740224" /></p>
 <p>Each level can have different amplitudes, which form the <strong>Eye
@@ -693,7 +704,7 @@ Linearity}}=\frac{\min(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}{\max(AV
 <p>Perfect eye = 1</p>
 <p>Worst eye = 0</p>
 </blockquote>
-<h2 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h2>
+<h3 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h3>
 <p>The <strong>Level Separation Mismatch Ratio</strong>, commonly
 referred to as <span class="math inline">\(R_{\text{LM}}\)</span>, is a
 measurement that is not required in normative or informative VSR tests,
@@ -880,18 +891,18 @@ D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
 class="math inline">\(C_0 = m\)</span> and <span
 class="math inline">\(C_{1}=n\)</span>, which is same with that of
 NRZ.</p>
-<h1 id="general-tx-serializer">General TX Serializer</h1>
-<h2 id="mux-timing">mux timing</h2>
+<h2 id="tx-serializer">TX Serializer</h2>
+<h3 id="mux-timing">mux timing</h3>
 <p><img src="/2022/07/20/pam4/mux2-1.drawio.svg"
 alt="mux2-1.drawio" /></p>
-<h2 id="divider-latch-timing">divider latch timing</h2>
+<h3 id="divider-latch-timing">divider latch timing</h3>
 <p><img src="/2022/07/20/pam4/div2-latch.drawio.svg"
 alt="div2-latch.drawio" /></p>
-<h2 id="two-latches">Two latches</h2>
+<h3 id="two-latches">Two latches</h3>
 <p><img src="/2022/07/20/pam4/two-latch.drawio.svg"
 alt="two-latch.drawio" /></p>
-<h1 id="dac-based-ffe-in-pam4-transmitter">DAC-based FFE in PAM4
-Transmitter</h1>
+<h2 id="dac-based-ffe-in-pam4-transmitter">DAC-based FFE in PAM4
+Transmitter</h2>
 <p><img src="/2022/07/20/pam4/image-20220721220225623.png"
 alt="image-20220721220225623" /></p>
 <p>One classic TX implementation contain:</p>
@@ -906,7 +917,7 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
 </blockquote>
 <p><img src="/2022/07/20/pam4/image-20220721234522043.png"
 alt="image-20220721234522043" /></p>
-<h2 id="pi-coil"><span class="math inline">\(\pi\)</span>-coil</h2>
+<h3 id="pi-coil"><span class="math inline">\(\pi\)</span>-coil</h3>
 <p><img src="/2022/07/20/pam4/image-20220720232837839.png"
 alt="image-20220720232837839" /></p>
 <blockquote>
@@ -998,7 +1009,7 @@ target="_blank" rel="noopener" href="https://pcisig.com/sites/default/files/file
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1278,7 +1289,7 @@ Data Communications</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1377,7 +1388,7 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1551,7 +1562,7 @@ target="_blank" rel="noopener" href="https://fires.im/micro22-slides-pdf/04_hamm
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1652,7 +1663,7 @@ target="_blank" rel="noopener" href="https://www.francisz.cn/2019/07/18/sv-iff/"
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1988,7 +1999,7 @@ Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2270,7 +2281,7 @@ Sixth international symposium on quality electronic design (isqed'05),
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-27 09:22:54" itemprop="dateModified" datetime="2024-07-27T09:22:54+00:00">2024-07-27</time>
+      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

@@ -29,6 +29,7 @@
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/gds_vgs.drawio.svg">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240727140918647.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240727171005401.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/cascode_vth.drawio.svg">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240727095651984.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20220930001909262.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20220930002003924.png">
@@ -52,7 +53,7 @@
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231202134138319.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231202104505264.png">
 <meta property="article:published_time" content="2024-07-27T17:20:52.000Z">
-<meta property="article:modified_time" content="2024-07-28T13:01:44.139Z">
+<meta property="article:modified_time" content="2024-07-29T02:40:22.895Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/07/27/biasing/image-20231125224714658.png">
@@ -165,11 +166,11 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#why-employ-mosfets-in-saturation"><span class="nav-number">1.</span> <span class="nav-text">Why employ MOSFETs in
-saturation?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gm-gds-at-fixed-vgs"><span class="nav-number">1.1.</span> <span class="nav-text">gm, gds at fixed VGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gm-gds-at-fixed-id-vg"><span class="nav-number">2.</span> <span class="nav-text">gm, gds at fixed Id, VG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channel-length-modulation"><span class="nav-number">3.</span> <span class="nav-text">Channel-length modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subthreshold-conduction"><span class="nav-number">4.</span> <span class="nav-text">Subthreshold Conduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-with-switch"><span class="nav-number">5.</span> <span class="nav-text">cascode with switch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-with-single-current-input"><span class="nav-number">6.</span> <span class="nav-text">cascode with single current
-input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constant-gm"><span class="nav-number">7.</span> <span class="nav-text">constant-gm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#current-mirror-mismatch"><span class="nav-number">8.</span> <span class="nav-text">current mirror mismatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biasing-current-source-and-global-variation-monte-carlo"><span class="nav-number">9.</span> <span class="nav-text">Biasing
-current source and global variation Monte Carlo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operating-points-small-gain-theorem"><span class="nav-number">10.</span> <span class="nav-text">Operating points &amp;
-Small gain theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alternative-approach-for-loop-gain"><span class="nav-number">10.1.</span> <span class="nav-text">Alternative approach for
-Loop Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">11.</span> <span class="nav-text">reference</span></a></li></ol></div>
+saturation?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gm-gds-at-fixed-vgs"><span class="nav-number">1.1.</span> <span class="nav-text">gm, gds at fixed VGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gm-gds-at-fixed-id-vg"><span class="nav-number">2.</span> <span class="nav-text">gm, gds at fixed Id, VG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-mos-vth"><span class="nav-number">3.</span> <span class="nav-text">cascode mos vth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channel-length-modulation"><span class="nav-number">4.</span> <span class="nav-text">Channel-length modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subthreshold-conduction"><span class="nav-number">5.</span> <span class="nav-text">Subthreshold Conduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-with-switch"><span class="nav-number">6.</span> <span class="nav-text">cascode with switch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-with-single-current-input"><span class="nav-number">7.</span> <span class="nav-text">cascode with single current
+input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constant-gm"><span class="nav-number">8.</span> <span class="nav-text">constant-gm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#current-mirror-mismatch"><span class="nav-number">9.</span> <span class="nav-text">current mirror mismatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biasing-current-source-and-global-variation-monte-carlo"><span class="nav-number">10.</span> <span class="nav-text">Biasing
+current source and global variation Monte Carlo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operating-points-small-gain-theorem"><span class="nav-number">11.</span> <span class="nav-text">Operating points &amp;
+Small gain theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alternative-approach-for-loop-gain"><span class="nav-number">11.1.</span> <span class="nav-text">Alternative approach for
+Loop Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">12.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -264,7 +265,7 @@ Loop Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="na
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-28 13:01:44" itemprop="dateModified" datetime="2024-07-28T13:01:44+00:00">2024-07-28</time>
+      <time title="Modified: 2024-07-29 02:40:22" itemprop="dateModified" datetime="2024-07-29T02:40:22+00:00">2024-07-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -339,6 +340,11 @@ alt="image-20240727171005401" /></p>
 <p>Both gain and speed degrade once entering triode region, though Id is
 constant</p>
 </blockquote>
+<h2 id="cascode-mos-vth">cascode mos vth</h2>
+<p>The low threshold voltage of cascode MOS <strong>don't</strong> help
+decrease the minimum output voltage</p>
+<p><img src="/2024/07/27/biasing/cascode_vth.drawio.svg"
+alt="cascode_vth.drawio" /></p>
 <h2 id="channel-length-modulation">Channel-length modulation</h2>
 <blockquote>
 <p>❗ There it <strong>not</strong> channel-length modulation in the

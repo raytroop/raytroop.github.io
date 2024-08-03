@@ -7,6 +7,25 @@ categories:
 mathjax: true
 ---
 
+## constant-gm
+
+> aka. **Beta-multiplier reference**
+
+![image-20231213235846243](biasing/image-20231213235846243.png)
+
+> Boris Murmann, Systematic Design of Analog Circuits Using Pre-Computed Lookup Tables
+
+
+
+
+
+> S. Pavan, "Systematic Development of CMOS Fixed-Transconductance Bias Circuits," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 5, pp. 2394-2397, May 2022
+>
+> S. Pavan, "A Fixed Transconductance Bias Circuit for CMOS Analog Integrated Circuits", *IEEE International Symposium on Circuits and Systems*, ISCAS 2004, Vancouver , May 2004
+
+
+
+
 ## Why employ MOSFETs in saturation?
 
 ### gm, gds at fixed VGS
@@ -152,21 +171,6 @@ which is $g_m \propto I_D$
 
 
 
-## cascode with switch
-
-
-
-![image-20231212145336401](biasing/image-20231212145336401.png)
-
-
-
-
-
-## constant-gm
-
-> aka. **Beta-multiplier reference**
-
-![image-20231213235846243](biasing/image-20231213235846243.png)
 
 
 
@@ -303,10 +307,3 @@ $$\begin{align}
 
 ![image-20231202104505264](biasing/image-20231202104505264.png)
 
-
-
-## reference
-
-S. Pavan, "Systematic Development of CMOS Fixed-Transconductance Bias Circuits," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 5, pp. 2394-2397, May 2022
-
-S. Pavan, "A Fixed Transconductance Bias Circuit for CMOS Analog Integrated Circuits", *IEEE International Symposium on Circuits and Systems*, ISCAS 2004, Vancouver , May 2004

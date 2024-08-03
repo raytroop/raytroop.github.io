@@ -28,11 +28,27 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 
 
-## NMOS LDO
+## Power MOS gain affect on NMOS LDO
 
-*TODO* &#128197;
+![pwm_miller.drawio](ldo/pwm_miller.drawio.svg)
 
 
+
+DC gain
+$$
+A_{dc} = g_mR_\text{ota} A_2
+$$
+3dB bandwidth
+$$
+\omega_p = \frac{1}{R_\text{ota}(C_g+A_2C_c)}
+$$
+and GBW
+$$
+\omega_u = \frac{g_m}{\frac{C_g}{A_2}+C_c}
+$$
+
+
+![image-20240803102158612](ldo/image-20240803102158612.png)
 
 
 
@@ -46,12 +62,12 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 $$\begin{align}
 R_1 \parallel \frac{1}{sC_{FF}} &= \frac{R_1}{1+sR_1C_{FF}} \\
-Z_o &= \left( R_1\parallel \frac{1}{sC_{FF}}\right)\parallel \frac{1}{sC_L} \\
+Z_o &= \left( R_1\parallel \frac{1}{sC_{FF}}+R_2\right)\parallel \frac{1}{sC_L} \\
 &=\frac{R_1+R_2+sR_1R_2C_{FF}}{s^2R_1R_2C_{FF}C_L + s[(R_1+R_2)C_L+R_1C_{FF}]+1} \\
 A_{V2} &= g_m Z_o \\
 &= g_m \frac{R_1+R_2+sR_1R_2C_{FF}}{s^2R_1R_2C_{FF}C_L + s[(R_1+R_2)C_L+R_1C_{FF}]+1} \\
 \beta &= \frac{R_2}{\frac{R_1}{1+sR_1C_{FF}}+R_2} \\
-&= \frac{R_2(1+sR_1C_{FF})}{R_1+R_2+sR_1R_2C_c} \\
+&= \frac{R_2(1+sR_1C_{FF})}{R_1+R_2+sR_1R_2C_{FF}} \\
 A_{V2}\beta &= \frac{g_mR_2(1+sR_1C_{FF})}{s^2R_1R_2C_{FF}C_L+s[(R_1+R_2)C_L+R_1C_{FF}]+1} 
 \end{align}$$
 
@@ -62,6 +78,14 @@ $$\begin{align}
 \omega_z &= \frac{1}{R_1C_{FF}} \\
 \omega_{p} &= \frac{1}{(R_1 \parallel R_2)C_{FF}}
 \end{align}$$
+
+
+
+> Application Report SBVA042–July 2014, Pros and Cons of Using a Feedforward Capacitor with a Low-Dropout Regulator [[https://www.ti.com/lit/an/sbva042/sbva042.pdf](https://www.ti.com/lit/an/sbva042/sbva042.pdf)]
+>
+> LDO Basics: Noise – How a Feed-forward Capacitor Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA13](https://www.ti.com/document-viewer/lit/html/SSZTA13)]
+>
+> LDO Basics: Noise – How a Noise-reduction Pin Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA40](https://www.ti.com/document-viewer/lit/html/SSZTA40)]
 
 
 
@@ -110,6 +134,8 @@ $$
 
 
 
+
+
 ## reference
 
 Hinojo, J.M., Martinez, C.I., & Torralba, A.J. (2018). Internally Compensated LDO Regulators for Modern System-on-Chip Design.
@@ -130,9 +156,5 @@ Operational Transconductance Amplifier II Multi-Stage Designs [[https://people.e
 
 Toshiba, Load Transient Response of LDO and Methods to Improve it Application Note [[https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268](https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268)]
 
-Application Report SBVA042–July 2014, Pros and Cons of Using a Feedforward Capacitor with a Low-Dropout Regulator [[https://www.ti.com/lit/an/sbva042/sbva042.pdf](https://www.ti.com/lit/an/sbva042/sbva042.pdf)]
 
-LDO Basics: Noise – How a Feed-forward Capacitor Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA13](https://www.ti.com/document-viewer/lit/html/SSZTA13)]
-
-LDO Basics: Noise – How a Noise-reduction Pin Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA40](https://www.ti.com/document-viewer/lit/html/SSZTA40)]
 

@@ -664,6 +664,34 @@ A_\text{dB,peak} &= 10\log\frac{\alpha^2}{4(\alpha-1)}
 
 ![image-20231220230015868](insight/image-20231220230015868.png)
 
+---
+
+gain has **limited** bandwidth
+
+![image-20231224212914366](insight/image-20231224212914366.png)
+
+![image-20231224212541383](insight/image-20231224212541383.png)
+
+![image-20231224212625409](insight/image-20231224212625409.png)
+
+$V_o = V_i |A|e^{j\theta}$, and $A_r = |A|\cos\theta$, $A_i = |A|\sin\theta$
+
+Then $I_i = (V_i - V_o)sC_f= V_i(1-|A|e^{j\theta})sC_f$, impedance is shown as below
+
+$$\begin{align}
+Z &= \frac{V_i}{I_i} \\
+&= \frac{1}{(1-|A|e^{j\theta})j\omega C_f} \\
+&= -\frac{j}{\omega C_f\frac{1+|A|^2-2|A|\cos\theta}{1-|A|\cos\theta}} + \frac{|A|\sin\theta}{\omega C_f (1+|A|^2-2|A|\cos\theta)} \\
+\end{align}$$
+
+$C_\text{eq}$ and $R_\text{eq}$ are obtained
+$$\begin{align}
+C_\text{eq} &= \frac{1+|A|^2-2A_r}{1-A_r}\cdot C_f \\
+R_\text{eq} &= \frac{A_i}{1+|A|^2-2A_r}\cdot \frac{1}{\omega C_f}
+\end{align}$$
+
+
+
 
 
 ## D/S small signal model
@@ -914,6 +942,26 @@ Diode helps dissipate charges accumulated on metal. Diode should be placed as ne
 >
 >
 > Zongjian Chen, Processing and Reliability Issues That Impact Design Practice. [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf)]
+
+
+
+## Metastability and Synchronizer
+
+When a flip-flop samples an input that is changing during its aperture, the output Q may momentarily take on a voltage between 0 and VDD that is in the forbidden zone. This is called a metastable state. Eventually, the flip-flop will resolve the output to a stable state of either 0 or 1. However, the resolution time required to reach the stable state is *unbounded*
+
+
+
+![image-20240803075025846](insight/image-20240803075025846.png)
+
+> Steve Golson. Synchronization and Metastability [[https://trilobyte.com/pdf/golson_snug14.pdf](https://trilobyte.com/pdf/golson_snug14.pdf)]
+>
+> R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011, doi: 10.1109/MDT.2011.113. [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
+>
+> Kinniment, D. J. Synchronization and arbitration in digital systems. John Wiley & Sons Ltd (2007).
+
+
+
+
 
 
 

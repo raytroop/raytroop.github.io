@@ -33,30 +33,6 @@ mathjax: true
 
 ![image-20231224163916109](nonideal-LC/image-20231224163916109.png)
 
----
-
-![image-20231224212914366](nonideal-LC/image-20231224212914366.png)
-
-![image-20231224212625409](nonideal-LC/image-20231224212625409.png)
-
-![image-20231224212541383](nonideal-LC/image-20231224212541383.png)
-
-$V_o = V_i |A|e^{j\theta}$, and $A_r = |A|\cos\theta$, $A_i = |A|\sin\theta$
-
-Then $I_i = (V_i - V_o)sC_f= V_i(1-|A|e^{j\theta})sC_f$, impedance is shown as below
-
-$$\begin{align}
-Z &= \frac{V_i}{I_i} \\
-&= \frac{1}{(1-|A|e^{j\theta})j\omega C_f} \\
-&= -\frac{j}{\omega C_f\frac{1+|A|^2-2|A|\cos\theta}{1-|A|\cos\theta}} + \frac{|A|\sin\theta}{\omega C_f (1+|A|^2-2|A|\cos\theta)} \\
-\end{align}$$
-
-$C_\text{eq}$ and $R_\text{eq}$ are obtained
-$$\begin{align}
-C_\text{eq} &= \frac{1+|A|^2-2A_r}{1-A_r}\cdot C_f \\
-R_\text{eq} &= \frac{A_i}{1+|A|^2-2A_r}\cdot \frac{1}{\omega C_f}
-\end{align}$$
-
 
 
 ## series or parallel representation

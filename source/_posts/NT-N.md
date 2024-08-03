@@ -24,7 +24,7 @@ A **native layer (NT_N)** is usually added under inductors or transformers in th
 
 | Term | Definition  |
 | ---- | ----------- |
-| *PW* | *{NOT NW}*  |
+| PW | {NOT NW}  |
 | N+OD | {NP AND OD} |
 | P+OD | {PP AND OD} |
 | GATE | {PO AND OD} |

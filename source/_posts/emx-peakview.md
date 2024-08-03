@@ -413,6 +413,26 @@ ParaView
 
 
 
+## Self-Resonant Frequency
+
+![image-20240802210109935](emx-peakview/image-20240802210109935.png)
+
+
+$$
+f_\text{SRF} = \frac{1}{2\pi \sqrt{LC}}
+$$
+The SRF of an inductor is the frequency at which the parasitic capacitance of the inductor resonates with the ideal inductance of the inductor, resulting in an extremely high impedance. The inductance only acts like an inductor below its SRF. 
+
+![image-20240802205835601](emx-peakview/image-20240802205835601.png)
+
+> [Understanding RF Inductor Specifications, [https://www.ece.uprm.edu/~rafaelr/inel5325/SupportDocuments/doc671_Selecting_RF_Inductors.pdf](https://www.ece.uprm.edu/~rafaelr/inel5325/SupportDocuments/doc671_Selecting_RF_Inductors.pdf)]
+>
+> [RFIC-GPT Wiki, [https://wiki.icprophet.net/](https://wiki.icprophet.net/)]
+
+
+
+
+
 ## reference
 
 Tips on Specifying Ports in EMX [[link](Article (20493671) Title: Tips on Specifying Ports in EMX

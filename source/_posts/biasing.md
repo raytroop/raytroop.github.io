@@ -31,7 +31,7 @@ MOS working in the **weak inversion region** (**"subthreshold conduction"**) hav
 
 - temperature coefficient of $V_{BE}$ itself depends on the temperature,
 
-- temperature coefficient of the $V_{BE}$ at a given temperature T depends on the magnitude of $$V_{BE}$$ itself
+- temperature coefficient of the $V_{BE}$ at a given temperature T depends on the magnitude of $V_{BE}$ itself
 
 
 

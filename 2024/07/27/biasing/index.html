@@ -18,13 +18,21 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="constant-gm  aka. Beta-multiplier reference    Boris Murmann, Systematic Design of Analog Circuits Using Pre-Computed Lookup Tables   S. Pavan, &quot;Systematic Development of CMOS Fixed-Transconductance B">
+    <meta name="description" content="PTAT with only MOS MOS working in the weak inversion region (&quot;subthreshold conduction&quot;) have the similar characteristics to BJTs and diodes, since the effect of diffusion current becomes more signific">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bias Circuit">
 <meta property="og:url" content="http://example.com/2024/07/27/biasing/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="constant-gm  aka. Beta-multiplier reference    Boris Murmann, Systematic Design of Analog Circuits Using Pre-Computed Lookup Tables   S. Pavan, &quot;Systematic Development of CMOS Fixed-Transconductance B">
+<meta property="og:description" content="PTAT with only MOS MOS working in the weak inversion region (&quot;subthreshold conduction&quot;) have the similar characteristics to BJTs and diodes, since the effect of diffusion current becomes more signific">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240803193343915.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240803195500321.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240803200129592.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240803155734754.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240803201548623.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240803201803449.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240803202015668.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240803201941683.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231213235846243.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231125224714658.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/gds_vgs.drawio.svg">
@@ -50,11 +58,14 @@
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231202132310478.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231202134138319.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231202104505264.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231212153054247.png">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/cascode_selfbias.drawio.svg">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/v2i.drawio.svg">
 <meta property="article:published_time" content="2024-07-27T17:20:52.000Z">
-<meta property="article:modified_time" content="2024-08-03T02:59:55.435Z">
+<meta property="article:modified_time" content="2024-08-03T12:55:59.357Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/07/27/biasing/image-20231213235846243.png">
+<meta name="twitter:image" content="http://example.com/2024/07/27/biasing/image-20240803193343915.png">
 
 
 <link rel="canonical" href="http://example.com/2024/07/27/biasing/">
@@ -163,11 +174,11 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#constant-gm"><span class="nav-number">1.</span> <span class="nav-text">constant-gm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-employ-mosfets-in-saturation"><span class="nav-number">2.</span> <span class="nav-text">Why employ MOSFETs in
-saturation?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gm-gds-at-fixed-vgs"><span class="nav-number">2.1.</span> <span class="nav-text">gm, gds at fixed VGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gm-gds-at-fixed-id-vg"><span class="nav-number">3.</span> <span class="nav-text">gm, gds at fixed Id, VG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-mos-vth"><span class="nav-number">4.</span> <span class="nav-text">cascode mos vth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channel-length-modulation"><span class="nav-number">5.</span> <span class="nav-text">Channel-length modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subthreshold-conduction"><span class="nav-number">6.</span> <span class="nav-text">Subthreshold Conduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#current-mirror-mismatch"><span class="nav-number">7.</span> <span class="nav-text">current mirror mismatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biasing-current-source-and-global-variation-monte-carlo"><span class="nav-number">8.</span> <span class="nav-text">Biasing
-current source and global variation Monte Carlo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operating-points-small-gain-theorem"><span class="nav-number">9.</span> <span class="nav-text">Operating points &amp;
-Small gain theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alternative-approach-for-loop-gain"><span class="nav-number">9.1.</span> <span class="nav-text">Alternative approach for
-Loop Gain</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ptat-with-only-mos"><span class="nav-number">1.</span> <span class="nav-text">PTAT with only MOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vbe"><span class="nav-number">2.</span> <span class="nav-text">VBE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constant-gm"><span class="nav-number">3.</span> <span class="nav-text">constant-gm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-employ-mosfets-in-saturation"><span class="nav-number">4.</span> <span class="nav-text">Why employ MOSFETs in
+saturation?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gm-gds-at-fixed-vgs"><span class="nav-number">4.1.</span> <span class="nav-text">gm, gds at fixed VGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gm-gds-at-fixed-id-vg"><span class="nav-number">5.</span> <span class="nav-text">gm, gds at fixed Id, VG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-mos-vth"><span class="nav-number">6.</span> <span class="nav-text">cascode mos vth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channel-length-modulation"><span class="nav-number">7.</span> <span class="nav-text">Channel-length modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subthreshold-conduction"><span class="nav-number">8.</span> <span class="nav-text">Subthreshold Conduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#current-mirror-mismatch"><span class="nav-number">9.</span> <span class="nav-text">current mirror mismatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biasing-current-source-and-global-variation-monte-carlo"><span class="nav-number">10.</span> <span class="nav-text">Biasing
+current source and global variation Monte Carlo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operating-points-small-gain-theorem"><span class="nav-number">11.</span> <span class="nav-text">Operating points &amp;
+Small gain theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alternative-approach-for-loop-gain"><span class="nav-number">11.1.</span> <span class="nav-text">Alternative approach for
+Loop Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#self-biasing-cascode"><span class="nav-number">12.</span> <span class="nav-text">Self-Biasing Cascode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">13.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -262,7 +273,7 @@ Loop Gain</span></a></li></ol></li></ol></div>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-03 12:55:59" itemprop="dateModified" datetime="2024-08-03T12:55:59+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,10 +294,64 @@ Loop Gain</span></a></li></ol></li></ol></div>
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="constant-gm">constant-gm</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="ptat-with-only-mos">PTAT with only MOS</h2>
+<p>MOS working in the <strong>weak inversion region</strong>
+(<strong>"subthreshold conduction"</strong>) have the similar
+characteristics to BJTs and diodes, since the effect of diffusion
+current becomes more significant than that of drift current</p>
+<p><img src="/2024/07/27/biasing/image-20240803193343915.png"
+alt="image-20240803193343915" /></p>
+<p><img src="/2024/07/27/biasing/image-20240803195500321.png"
+alt="image-20240803195500321" /></p>
+<p><img src="/2024/07/27/biasing/image-20240803200129592.png"
+alt="image-20240803200129592" /></p>
+<blockquote>
+<p>Hongprasit, Saweth, Worawat Sa-ngiamvibool and Apinan Aurasopon.
+“Design of Bandgap Core and Startup Circuits for All CMOS Bandgap
+Voltage Reference.” <em>Przegląd Elektrotechniczny</em> (2012):
+277-280.</p>
+</blockquote>
+<h2 id="vbe">VBE</h2>
+<ul>
+<li><p>temperature coefficient of <span
+class="math inline">\(V_{BE}\)</span> itself depends on the
+temperature,</p></li>
+<li><p>temperature coefficient of the <span
+class="math inline">\(V_{BE}\)</span> at a given temperature T depends
+on the magnitude of <span class="math display">\[V_{BE}\]</span>
+itself</p></li>
+</ul>
+<blockquote>
+<p><span class="math inline">\(\frac{kT}{q}\)</span>​ is approximately
+26mV, at room temperature 300K</p>
+<p>In advanced node, <span class="math inline">\(V_{BE}\)</span> is
+about -1.45mV/K</p>
+</blockquote>
+<h2 id="constant-gm">constant-gm</h2>
 <blockquote>
 <p>aka. <strong>Beta-multiplier reference</strong></p>
 </blockquote>
+<p><img src="/2024/07/27/biasing/image-20240803155734754.png"
+alt="image-20240803155734754" /></p>
+<blockquote>
+<p><span class="math inline">\(I_\text{out}\)</span> is
+<strong>PTAT</strong> in case temperature coefficient of <span
+class="math inline">\(R_s\)</span> is less than that of <span
+class="math inline">\(\mu_n\)</span></p>
+</blockquote>
+<hr />
+<p><img src="/2024/07/27/biasing/image-20240803201548623.png"
+alt="image-20240803201548623" /></p>
+<blockquote>
+<p>Body effect of M2</p>
+</blockquote>
+<p><img src="/2024/07/27/biasing/image-20240803201803449.png"
+alt="image-20240803201803449" /></p>
+<p><img src="/2024/07/27/biasing/image-20240803202015668.png"
+alt="image-20240803202015668" /></p>
+<p><img src="/2024/07/27/biasing/image-20240803201941683.png"
+alt="image-20240803201941683" /></p>
+<hr />
 <p><img src="/2024/07/27/biasing/image-20231213235846243.png"
 alt="image-20231213235846243" /></p>
 <blockquote>
@@ -629,6 +694,18 @@ alt="image-20231202134138319" /></p>
 </blockquote>
 <p><img src="/2024/07/27/biasing/image-20231202104505264.png"
 alt="image-20231202104505264" /></p>
+<h2 id="self-biasing-cascode">Self-Biasing Cascode</h2>
+<p><img src="/2024/07/27/biasing/image-20231212153054247.png"
+alt="image-20231212153054247" /></p>
+<hr />
+<p><img src="/2024/07/27/biasing/cascode_selfbias.drawio.svg"
+alt="cascode_selfbias.drawio" /></p>
+<hr />
+<p><img src="/2024/07/27/biasing/v2i.drawio.svg" alt="v2i.drawio" /></p>
+<h2 id="reference">reference</h2>
+<p>B. Razavi, "The Design of a Low-Voltage Bandgap Reference [The Analog
+Mind]," in <em>IEEE Solid-State Circuits Magazine</em>, vol. 13, no. 3,
+pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963</p>
 
     </div>
 

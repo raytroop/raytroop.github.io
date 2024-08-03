@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -483,7 +483,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -521,8 +521,19 @@ LDO since it has better (smaller) PSRR</p>
 cascade with a switching regulator. The LDO would need to have a
 sufficiently high rejection at the switching frequency of the switching
 converter to filter out the ripples at that frequency</p>
-<h2 id="nmos-ldo">NMOS LDO</h2>
-<p><em>TODO</em> 📅</p>
+<h2 id="power-mos-gain-affect-on-nmos-ldo">Power MOS gain affect on NMOS
+LDO</h2>
+<p><img src="/2023/10/21/ldo/pwm_miller.drawio.svg"
+alt="pwm_miller.drawio" /></p>
+<p>DC gain <span class="math display">\[
+A_{dc} = g_mR_\text{ota} A_2
+\]</span> 3dB bandwidth <span class="math display">\[
+\omega_p = \frac{1}{R_\text{ota}(C_g+A_2C_c)}
+\]</span> and GBW <span class="math display">\[
+\omega_u = \frac{g_m}{\frac{C_g}{A_2}+C_c}
+\]</span></p>
+<p><img src="/2023/10/21/ldo/image-20240803102158612.png"
+alt="image-20240803102158612" /></p>
 <h3 id="feedforward-compensation-with-c_textff">Feedforward Compensation
 with <span class="math inline">\(C_\text{FF}\)</span>​</h3>
 <ul>
@@ -533,7 +544,7 @@ with <span class="math inline">\(C_\text{FF}\)</span>​</h3>
 <p><img src="/2023/10/21/ldo/outCc.drawio.svg" alt="outCc.drawio" /></p>
 <p><span class="math display">\[\begin{align}
 R_1 \parallel \frac{1}{sC_{FF}} &amp;= \frac{R_1}{1+sR_1C_{FF}} \\
-Z_o &amp;= \left( R_1\parallel \frac{1}{sC_{FF}}\right)\parallel
+Z_o &amp;= \left( R_1\parallel \frac{1}{sC_{FF}}+R_2\right)\parallel
 \frac{1}{sC_L} \\
 &amp;=\frac{R_1+R_2+sR_1R_2C_{FF}}{s^2R_1R_2C_{FF}C_L +
 s[(R_1+R_2)C_L+R_1C_{FF}]+1} \\
@@ -541,7 +552,7 @@ A_{V2} &amp;= g_m Z_o \\
 &amp;= g_m \frac{R_1+R_2+sR_1R_2C_{FF}}{s^2R_1R_2C_{FF}C_L +
 s[(R_1+R_2)C_L+R_1C_{FF}]+1} \\
 \beta &amp;= \frac{R_2}{\frac{R_1}{1+sR_1C_{FF}}+R_2} \\
-&amp;= \frac{R_2(1+sR_1C_{FF})}{R_1+R_2+sR_1R_2C_c} \\
+&amp;= \frac{R_2(1+sR_1C_{FF})}{R_1+R_2+sR_1R_2C_{FF}} \\
 A_{V2}\beta &amp;=
 \frac{g_mR_2(1+sR_1C_{FF})}{s^2R_1R_2C_{FF}C_L+s[(R_1+R_2)C_L+R_1C_{FF}]+1}
 \end{align}\]</span></p>
@@ -554,6 +565,17 @@ feedback loop</em></p>
 \omega_z &amp;= \frac{1}{R_1C_{FF}} \\
 \omega_{p} &amp;= \frac{1}{(R_1 \parallel R_2)C_{FF}}
 \end{align}\]</span></p>
+<blockquote>
+<p>Application Report SBVA042–July 2014, Pros and Cons of Using a
+Feedforward Capacitor with a Low-Dropout Regulator [<a
+target="_blank" rel="noopener" href="https://www.ti.com/lit/an/sbva042/sbva042.pdf">https://www.ti.com/lit/an/sbva042/sbva042.pdf</a>]</p>
+<p>LDO Basics: Noise – How a Feed-forward Capacitor Improves System
+Performance [<a
+target="_blank" rel="noopener" href="https://www.ti.com/document-viewer/lit/html/SSZTA13">https://www.ti.com/document-viewer/lit/html/SSZTA13</a>]</p>
+<p>LDO Basics: Noise – How a Noise-reduction Pin Improves System
+Performance [<a
+target="_blank" rel="noopener" href="https://www.ti.com/document-viewer/lit/html/SSZTA40">https://www.ti.com/document-viewer/lit/html/SSZTA40</a>]</p>
+</blockquote>
 <h2 id="nmos-slave-ldo">NMOS Slave LDO</h2>
 <p><img src="/2023/10/21/ldo/nmos_slave_psrr.drawio.svg"
 alt="nmos_slave_psrr.drawio" /></p>
@@ -607,15 +629,6 @@ target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/cou
 <p>Toshiba, Load Transient Response of LDO and Methods to Improve it
 Application Note [<a
 target="_blank" rel="noopener" href="https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268">https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268</a>]</p>
-<p>Application Report SBVA042–July 2014, Pros and Cons of Using a
-Feedforward Capacitor with a Low-Dropout Regulator [<a
-target="_blank" rel="noopener" href="https://www.ti.com/lit/an/sbva042/sbva042.pdf">https://www.ti.com/lit/an/sbva042/sbva042.pdf</a>]</p>
-<p>LDO Basics: Noise – How a Feed-forward Capacitor Improves System
-Performance [<a
-target="_blank" rel="noopener" href="https://www.ti.com/document-viewer/lit/html/SSZTA13">https://www.ti.com/document-viewer/lit/html/SSZTA13</a>]</p>
-<p>LDO Basics: Noise – How a Noise-reduction Pin Improves System
-Performance [<a
-target="_blank" rel="noopener" href="https://www.ti.com/document-viewer/lit/html/SSZTA40">https://www.ti.com/document-viewer/lit/html/SSZTA40</a>]</p>
 
       
     </div>
@@ -678,7 +691,7 @@ target="_blank" rel="noopener" href="https://www.ti.com/document-viewer/lit/html
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -807,7 +820,7 @@ alt="image-20231006110506245" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -907,7 +920,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1109,7 +1122,7 @@ target="_blank" rel="noopener" href="https://benchugg.com/research_notes/sde_ito
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1236,7 +1249,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1361,7 +1374,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1495,7 +1508,7 @@ Integrity (SPI)</em> (2018): 1-4.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1683,7 +1696,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

@@ -18,13 +18,14 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Why employ MOSFETs in saturation? gm, gds at fixed VGS   \(g_{ds}\) is constant in saturation region in triode region \[ g_{ds} &#x3D; \mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH}-V_{DS}) \]  Interestingly, \(g_m\">
+    <meta name="description" content="constant-gm  aka. Beta-multiplier reference    Boris Murmann, Systematic Design of Analog Circuits Using Pre-Computed Lookup Tables   S. Pavan, &quot;Systematic Development of CMOS Fixed-Transconductance B">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bias Circuit">
 <meta property="og:url" content="http://example.com/2024/07/27/biasing/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Why employ MOSFETs in saturation? gm, gds at fixed VGS   \(g_{ds}\) is constant in saturation region in triode region \[ g_{ds} &#x3D; \mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH}-V_{DS}) \]  Interestingly, \(g_m\">
+<meta property="og:description" content="constant-gm  aka. Beta-multiplier reference    Boris Murmann, Systematic Design of Analog Circuits Using Pre-Computed Lookup Tables   S. Pavan, &quot;Systematic Development of CMOS Fixed-Transconductance B">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231213235846243.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231125224714658.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/gds_vgs.drawio.svg">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240727140918647.png">
@@ -36,8 +37,6 @@
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20220930002157365.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240627230726326.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20240627230744044.png">
-<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231212145336401.png">
-<meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231213235846243.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20221003001056211.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20221002215942456.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20221020225334767.png">
@@ -52,10 +51,10 @@
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231202134138319.png">
 <meta property="og:image" content="http://example.com/2024/07/27/biasing/image-20231202104505264.png">
 <meta property="article:published_time" content="2024-07-27T17:20:52.000Z">
-<meta property="article:modified_time" content="2024-08-02T12:10:36.103Z">
+<meta property="article:modified_time" content="2024-08-03T02:59:55.435Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/07/27/biasing/image-20231125224714658.png">
+<meta name="twitter:image" content="http://example.com/2024/07/27/biasing/image-20231213235846243.png">
 
 
 <link rel="canonical" href="http://example.com/2024/07/27/biasing/">
@@ -164,11 +163,11 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#why-employ-mosfets-in-saturation"><span class="nav-number">1.</span> <span class="nav-text">Why employ MOSFETs in
-saturation?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gm-gds-at-fixed-vgs"><span class="nav-number">1.1.</span> <span class="nav-text">gm, gds at fixed VGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gm-gds-at-fixed-id-vg"><span class="nav-number">2.</span> <span class="nav-text">gm, gds at fixed Id, VG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-mos-vth"><span class="nav-number">3.</span> <span class="nav-text">cascode mos vth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channel-length-modulation"><span class="nav-number">4.</span> <span class="nav-text">Channel-length modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subthreshold-conduction"><span class="nav-number">5.</span> <span class="nav-text">Subthreshold Conduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-with-switch"><span class="nav-number">6.</span> <span class="nav-text">cascode with switch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constant-gm"><span class="nav-number">7.</span> <span class="nav-text">constant-gm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#current-mirror-mismatch"><span class="nav-number">8.</span> <span class="nav-text">current mirror mismatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biasing-current-source-and-global-variation-monte-carlo"><span class="nav-number">9.</span> <span class="nav-text">Biasing
-current source and global variation Monte Carlo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operating-points-small-gain-theorem"><span class="nav-number">10.</span> <span class="nav-text">Operating points &amp;
-Small gain theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alternative-approach-for-loop-gain"><span class="nav-number">10.1.</span> <span class="nav-text">Alternative approach for
-Loop Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">11.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#constant-gm"><span class="nav-number">1.</span> <span class="nav-text">constant-gm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-employ-mosfets-in-saturation"><span class="nav-number">2.</span> <span class="nav-text">Why employ MOSFETs in
+saturation?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gm-gds-at-fixed-vgs"><span class="nav-number">2.1.</span> <span class="nav-text">gm, gds at fixed VGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gm-gds-at-fixed-id-vg"><span class="nav-number">3.</span> <span class="nav-text">gm, gds at fixed Id, VG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cascode-mos-vth"><span class="nav-number">4.</span> <span class="nav-text">cascode mos vth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channel-length-modulation"><span class="nav-number">5.</span> <span class="nav-text">Channel-length modulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subthreshold-conduction"><span class="nav-number">6.</span> <span class="nav-text">Subthreshold Conduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#current-mirror-mismatch"><span class="nav-number">7.</span> <span class="nav-text">current mirror mismatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biasing-current-source-and-global-variation-monte-carlo"><span class="nav-number">8.</span> <span class="nav-text">Biasing
+current source and global variation Monte Carlo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operating-points-small-gain-theorem"><span class="nav-number">9.</span> <span class="nav-text">Operating points &amp;
+Small gain theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alternative-approach-for-loop-gain"><span class="nav-number">9.1.</span> <span class="nav-text">Alternative approach for
+Loop Gain</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,7 +180,7 @@ Loop Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="na
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -263,7 +262,7 @@ Loop Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="na
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-02 12:10:36" itemprop="dateModified" datetime="2024-08-02T12:10:36+00:00">2024-08-02</time>
+      <time title="Modified: 2024-08-03 02:59:55" itemprop="dateModified" datetime="2024-08-03T02:59:55+00:00">2024-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -284,7 +283,25 @@ Loop Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="na
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="why-employ-mosfets-in-saturation">Why employ MOSFETs in
+    <div class="post-body" itemprop="articleBody"><h2 id="constant-gm">constant-gm</h2>
+<blockquote>
+<p>aka. <strong>Beta-multiplier reference</strong></p>
+</blockquote>
+<p><img src="/2024/07/27/biasing/image-20231213235846243.png"
+alt="image-20231213235846243" /></p>
+<blockquote>
+<p>Boris Murmann, Systematic Design of Analog Circuits Using
+Pre-Computed Lookup Tables</p>
+</blockquote>
+<blockquote>
+<p>S. Pavan, "Systematic Development of CMOS Fixed-Transconductance Bias
+Circuits," in <em>IEEE Transactions on Circuits and Systems II: Express
+Briefs</em>, vol. 69, no. 5, pp. 2394-2397, May 2022</p>
+<p>S. Pavan, "A Fixed Transconductance Bias Circuit for CMOS Analog
+Integrated Circuits", <em>IEEE International Symposium on Circuits and
+Systems</em>, ISCAS 2004, Vancouver , May 2004</p>
+</blockquote>
+<h2 id="why-employ-mosfets-in-saturation">Why employ MOSFETs in
 saturation?</h2>
 <h3 id="gm-gds-at-fixed-vgs">gm, gds at fixed VGS</h3>
 <p><img src="/2024/07/27/biasing/image-20231125224714658.png"
@@ -422,15 +439,6 @@ g_m = \frac{I_D}{\xi V_T}
 alt="image-20240627230726326" /></p>
 <p><img src="/2024/07/27/biasing/image-20240627230744044.png"
 alt="image-20240627230744044" /></p>
-<h2 id="cascode-with-switch">cascode with switch</h2>
-<p><img src="/2024/07/27/biasing/image-20231212145336401.png"
-alt="image-20231212145336401" /></p>
-<h2 id="constant-gm">constant-gm</h2>
-<blockquote>
-<p>aka. <strong>Beta-multiplier reference</strong></p>
-</blockquote>
-<p><img src="/2024/07/27/biasing/image-20231213235846243.png"
-alt="image-20231213235846243" /></p>
 <h2 id="current-mirror-mismatch">current mirror mismatch</h2>
 <p>The current mismatch consists of two components.</p>
 <ul>
@@ -621,13 +629,6 @@ alt="image-20231202134138319" /></p>
 </blockquote>
 <p><img src="/2024/07/27/biasing/image-20231202104505264.png"
 alt="image-20231202104505264" /></p>
-<h2 id="reference">reference</h2>
-<p>S. Pavan, "Systematic Development of CMOS Fixed-Transconductance Bias
-Circuits," in <em>IEEE Transactions on Circuits and Systems II: Express
-Briefs</em>, vol. 69, no. 5, pp. 2394-2397, May 2022</p>
-<p>S. Pavan, "A Fixed Transconductance Bias Circuit for CMOS Analog
-Integrated Circuits", <em>IEEE International Symposium on Circuits and
-Systems</em>, ISCAS 2004, Vancouver , May 2004</p>
 
     </div>
 

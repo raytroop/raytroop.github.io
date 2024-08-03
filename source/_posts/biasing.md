@@ -7,9 +7,67 @@ categories:
 mathjax: true
 ---
 
+
+
+## PTAT with only MOS
+
+MOS working in the **weak inversion region** (**"subthreshold conduction"**) have the similar characteristics to BJTs and diodes, since the effect of diffusion current becomes more significant than that of drift current
+
+![image-20240803193343915](biasing/image-20240803193343915.png)
+
+![image-20240803195500321](biasing/image-20240803195500321.png)
+
+![image-20240803200129592](biasing/image-20240803200129592.png)
+
+
+
+> Hongprasit, Saweth, Worawat Sa-ngiamvibool and Apinan Aurasopon. “Design of Bandgap Core and Startup Circuits for All CMOS Bandgap Voltage Reference.” *Przegląd Elektrotechniczny* (2012): 277-280.
+
+
+
+
+
+## VBE
+
+- temperature coefficient of $V_{BE}$ itself depends on the temperature,
+
+- temperature coefficient of the $V_{BE}$ at a given temperature T depends on the magnitude of $$V_{BE}$$ itself
+
+
+
+> $\frac{kT}{q}$​ is approximately 26mV, at room temperature 300K
+>
+> In advanced node, $V_{BE}$ is about -1.45mV/K
+
+
+
 ## constant-gm
 
 > aka. **Beta-multiplier reference**
+
+![image-20240803155734754](biasing/image-20240803155734754.png)
+
+> $I_\text{out}$ is **PTAT** in case temperature coefficient of $R_s$ is less than that of $\mu_n$ 
+
+---
+
+![image-20240803201548623](biasing/image-20240803201548623.png)
+
+> Body effect of M2
+
+
+
+![image-20240803201803449](biasing/image-20240803201803449.png)
+
+![image-20240803202015668](biasing/image-20240803202015668.png)
+
+![image-20240803201941683](biasing/image-20240803201941683.png)
+
+
+
+---
+
+
 
 ![image-20231213235846243](biasing/image-20231213235846243.png)
 
@@ -306,4 +364,28 @@ $$\begin{align}
 > &#10071;&#10071;&#10071; R should **not** be on the other side
 
 ![image-20231202104505264](biasing/image-20231202104505264.png)
+
+
+
+## Self-Biasing Cascode
+
+![image-20231212153054247](biasing/image-20231212153054247.png)
+
+---
+
+
+
+![cascode_selfbias.drawio](biasing/cascode_selfbias.drawio.svg)
+
+---
+
+
+
+![v2i.drawio](biasing/v2i.drawio.svg)
+
+
+
+## reference
+
+B. Razavi, "The Design of a Low-Voltage Bandgap Reference [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 13, no. 3, pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963
 

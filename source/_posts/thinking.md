@@ -143,6 +143,16 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 > 
 > 
 
+```
+the word "happy" would lose its meaning if it were not balanced by sadness. 
+
+- Carl Jung
+```
+
+
+
+
+
 
 
 ```
@@ -459,5 +469,4 @@ There is only one thing that I dread: not to be worthy of my sufferings
 天也妒， 未信与， 莺儿燕子俱黄土。
 千秋万古， 为留待骚人， 狂歌痛饮， 来访雁丘处。
 ```
-
 

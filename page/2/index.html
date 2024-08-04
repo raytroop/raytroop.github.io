@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">166</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,335 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/27/noise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/27/noise/" class="post-title-link" itemprop="url">Noise Analysis</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-27 09:54:25" itemprop="dateCreated datePublished" datetime="2024-04-27T09:54:25+00:00">2024-04-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="spectrum-analyzer">spectrum analyzer</h2>
+<p>We tried to plot a <em>power spectral density</em> together with
+something that we want to interpret as a <em>power spectrum</em></p>
+<blockquote>
+<ul>
+<li><em>spectrum</em> of a periodic signal</li>
+<li><em>spectral density</em> of a broadband signal such as noise</li>
+</ul>
+<p>Sine-wave components are located in individual FFT bins, but
+broadband signals like noise have their power spread over all FFT
+bins!</p>
+<p>The <strong>noise floor</strong> depends on the <em>length of the
+FFT</em></p>
+</blockquote>
+<p>[<a
+target="_blank" rel="noopener" href="http://individual.utoronto.ca/schreier/lectures/2015/1.pdf">http://individual.utoronto.ca/schreier/lectures/2015/1.pdf</a>]</p>
+<p><img src="/2024/04/27/noise/image-20240522214004545.png"
+alt="image-20240522214004545" /></p>
+<p>signal tone power <span class="math display">\[
+P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
+\]</span></p>
+<p>noise power <span class="math display">\[
+P_n = \frac{X_{w,n}^2}{S_2}
+\]</span></p>
+<p>Then, displayed <strong>SNR</strong> is obtained <span
+class="math display">\[\begin{align}
+\mathrm{SNR} &amp;= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right)
+\\
+&amp;= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) +
+10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
+&amp;= \mathrm{SNR}&#39;-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
+&amp;= \mathrm{SNR}&#39;-10\log_{10}(2\cdot\mathrm{NBW}) \\
+\end{align}\]</span></p>
+<blockquote>
+<p><em>DFT's output</em> <span
+class="math inline">\(\mathrm{SNR}\)</span></p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> N=[<span class="number">2</span>^<span class="number">6</span> <span class="number">2</span>^<span class="number">8</span> <span class="number">2</span>^<span class="number">10</span> <span class="number">2</span>^<span class="number">12</span>]</span><br><span class="line">  wd = rectwin(N);</span><br><span class="line">  nbw = enbw(wd)/N;</span><br><span class="line">  snr_shift = <span class="number">10</span>*<span class="built_in">log10</span>(nbw * <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">disp</span>(snr_shift);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-15.0515</span><br><span class="line"></span><br><span class="line">-21.0721</span><br><span class="line"></span><br><span class="line">-27.0927</span><br><span class="line"></span><br><span class="line">-33.1133</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/04/27/noise/image-20240522214340882.png"
+alt="image-20240522214340882" /></p>
+<blockquote>
+<p>The solution to the scaling problem in the case of a PSD obtained
+from a sine-wave scaled FFT is similarly simple. All we need do is
+provide the value of <strong>NBW</strong></p>
+</blockquote>
+<blockquote>
+<p><em>APPENDIX A - SPECTRAL ESTIMATION - A.2 Scaling and Noise
+Bandwidth</em></p>
+<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
+Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
+</blockquote>
+<ul>
+<li>For a filter with infinitely steep roll-off, the noise bandwidth
+(<strong>NBW</strong>) is equal to the filter's bandwidth,</li>
+<li>while for a filter with a single-pole roll-off, <strong>NBW</strong>
+is 2 times the 3-dB bandwidth</li>
+</ul>
+<h2 id="switched-capacitor-filters">Switched-Capacitor Filters</h2>
+<p>The <strong>aliasing of the noise</strong>, or <strong>noise
+folding</strong>, plays an important role in switched-capacitor as it
+does in all switched-capacitor filters</p>
+<p><img src="/2024/04/27/noise/image-20240425215938141.png"
+alt="image-20240425215938141" /></p>
+<p>Assume for the moment that the switch is <em>always closed</em> (that
+there is no hold phase), the single-sided noise density would be</p>
+<p><img src="/2024/04/27/noise/image-20240428182816109.png"
+alt="image-20240428182816109" /></p>
+<p><img src="/2024/04/27/noise/image-20240428180635082.png"
+alt="image-20240428180635082" /></p>
+<p><span class="math inline">\(v_s[n]\)</span> is the sampled version of
+<span class="math inline">\(v_{RC}(t)\)</span>, i.e. <span
+class="math inline">\(v_s[n]= v_{RC}(nT_C)\)</span> <span
+class="math display">\[
+S_s(e^{j\omega}) = \frac{1}{T_C}
+\sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi
+k}{T_C})) \cdot d\omega
+\]</span> where <span class="math inline">\(\omega \in [-\pi,
+\pi]\)</span>, furthermore <span
+class="math inline">\(\frac{d\omega}{T_C}= d\Omega\)</span> <span
+class="math display">\[
+S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s))
+\cdot d\Omega
+\]</span></p>
+<blockquote>
+<p><img src="/2024/04/27/noise/image-20240428215559780.png"
+alt="image-20240428215559780" /></p>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240425220033340.png"
+alt="image-20240425220033340" /></p>
+<p>The noise in <span class="math inline">\(S_{RC}\)</span> is a
+<em>stationary process</em> and so is <em>uncorrelated</em> over <span
+class="math inline">\(f\)</span> allowing the <span
+class="math inline">\(N\)</span> rectangles to be combined by simply
+summing their noise powers</p>
+<p><img src="/2024/04/27/noise/sample_impulse_hold.drawio.svg"
+alt="image-20240428225949327" /></p>
+<blockquote>
+<p><span class="math display">\[
+X(j\Omega)d\Omega = \frac{1}{T_c}X(e^{j\omega})d\omega  
+\]</span></p>
+<p>ref. <em><a
+target="_blank" rel="noopener" href="https://raytroop.github.io/2022/05/01/sampling-dft">[Sampling of
+Continuous Time Signals]</a></em> of EQ.(31) in the blog</p>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240428225949327.png"
+alt="image-20240428225949327" /></p>
+<p><img src="/2024/04/27/noise/image-20240425220400924.png"
+alt="image-20240425220400924" /></p>
+<p>where <span class="math inline">\(m\)</span> is the duty cycle</p>
+<p><img src="/2024/04/27/noise/image-20240427183257203.png"
+alt="image-20240427183257203" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183349642.png"
+alt="image-20240427183349642" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183516540.png"
+alt="image-20240427183516540" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183458649.png"
+alt="image-20240427183458649" /></p>
+<blockquote>
+<ul>
+<li>Calculate autocorrelation function of noise at the output of the RC
+filter</li>
+<li>Calculate the spectrum by taking the <strong>discrete</strong> time
+Fourier transform of the autocorrelation function</li>
+</ul>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240427183700971.png"
+alt="image-20240427183700971" /></p>
+<p><img src="/2024/04/27/noise/image-20240427195202127.png"
+alt="image-20240427195202127" /></p>
+<ul>
+<li><span class="math inline">\(Vo_{[n-1]}\)</span> decay</li>
+<li><span class="math inline">\(Vo_{[n]}\)</span> charge C</li>
+</ul>
+<h2 id="noise-aliasing">Noise Aliasing</h2>
+<p><img src="/2024/04/27/noise/SamplingProcess.drawio.svg"
+alt="SamplingProcess.drawio" /></p>
+<p>Where impulse train or "shah" function is defined as <span
+class="math display">\[
+\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
+\]</span> where <span class="math inline">\(T\)</span> defines the
+period, or sampling rate. Its Fourier transform is <span
+class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
+<p><strong>Multiplication Property</strong> of Fourier Transform <span
+class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span></p>
+<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
+the discrete time integrated from DC to <span
+class="math inline">\(f_s/2\)</span> equals that of continuous time in
+all frequency range.</p>
+<blockquote>
+<p>The DFT spectrum is periodic with period <strong>N</strong></p>
+<p>The DTFT spectrum is periodic with period <span
+class="math inline">\(2\pi\)</span></p>
+<p>As a conclusion, the spectrum beyond <span
+class="math inline">\(f_s/2\)</span>​ is <strong>redundant</strong> and
+don't provide information</p>
+</blockquote>
+<hr />
+<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
+and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
+integer), are <strong>indistinguishable</strong> in the <strong>discrete
+time domain</strong>.</p>
+<p><img src="/2024/04/27/noise/image-20220626000016184.png"
+alt="image-20220626000016184" /></p>
+<blockquote>
+<p>In order to prevent aliasing, we need <span
+class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
+sampling rate <span class="math inline">\(f_s=2\cdot
+f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
+Rate</strong>.</p>
+<p>Two solution possibilities</p>
+<ol type="1">
+<li>Sample fast enough to cover all spectral components, including
+"parasitic" ones outside band of interest</li>
+<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
+through filtering - Filter out "parasitic" ones</li>
+</ol>
+</blockquote>
+<p>Given below sequence <span class="math display">\[
+X[n] =A e^{j\omega _0 T_s n}
+\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(kf_s + \Delta f\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s-\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\(kf_s - \Delta f\)</span></li>
+</ol>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s+\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<blockquote>
+<p>With sampling frequency <span
+class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
+class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
+class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
+distinguished <em>real signal</em></p>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20230518232314980.png"
+alt="image-20230518232314980" /></p>
+<blockquote>
+<p>Generally, The frequencies <span
+class="math inline">\(f_{\text{sig}}\)</span> and <span
+class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
+<strong>indistinguishable</strong> in the <strong>discrete time
+domain</strong>.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>David Herres, The difference between signal under-sampling, aliasing,
+and folding URL: <a
+target="_blank" rel="noopener" href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
+<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
+Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
+978-0-12-375079-2. <a
+target="_blank" rel="noopener" href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
+7 (Sampling and reconstruction)</a></p>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF.</p>
+<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
+Converters, Second Edition" ISBN 978-1-119-25827-8</p>
+<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
+<p>- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 /
+tutorials</p>
+<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
+Modeling URL: <a
+target="_blank" rel="noopener" href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
+<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
+Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
+Publishers Inc., San Francisco, CA, USA.</p>
+<p>Bernhard E. Boser . Advanced Analog Integrated Circuits Switched
+Capacitor Gain Stages [<a
+target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf</a>]</p>
+<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
+3rd edition</p>
+<p>R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for
+Signal Processing. Wiley-Interscience, 1986</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +555,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,7 +640,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,7 +832,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:09" itemprop="dateModified" datetime="2024-08-03T12:59:09+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -729,7 +1058,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -845,7 +1174,7 @@ target="_blank" rel="noopener" href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSape
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1300,7 +1629,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1568,7 +1897,7 @@ doi: 10.1109/MDT.2003.1232259.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:09" itemprop="dateModified" datetime="2024-08-03T12:59:09+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1749,7 +2078,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1839,167 +2168,6 @@ target="_blank" rel="noopener" href="https://dlsun.github.io/Stat350-S20/">https
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/06/delta-sigma/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/06/delta-sigma/" class="post-title-link" itemprop="url">Delta-Sigma Modulator</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-11-06 21:39:25" itemprop="dateCreated datePublished" datetime="2023-11-06T21:39:25+00:00">2023-11-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="oversampling">Oversampling</h2>
-<p>In the oversampling process, samples per second are more than what is
-required, according to Nyquist-Shannon criteria. Allowing more sample
-rates does not influence the signal power and total quantization noise
-power. Therefore, the SNR remains unchanged.</p>
-<p>The advantage of oversampling is that the quantization noises are
-spread over a larger frequency range. This reduces the quantization
-noise spectral density (the SNR over the frequency of interest is
-increased).</p>
-<blockquote>
-<p>Comparing normal sampling and oversampling, the quantization noise
-power is reduced by 3 dB for every doubling of oversampling ratio (OSR),
-where OSR is the ratio of sampling frequency to twice the frequency of
-the signal.</p>
-</blockquote>
-<h2 id="the-delta-modulator">The Delta Modulator</h2>
-<ol type="a">
-<li>A delta modulator and (b) its simple implementation</li>
-</ol>
-<p><img src="/2023/11/06/delta-sigma/image-20230202224406667.png"
-alt="image-20230202224406667" /></p>
-<p>The high loop gain ensures that <span class="math inline">\(V_F
-\simeq V_{in}\)</span></p>
-<p>The principal difficulty with the delta modulator is that the output
-digital representation in fact contains only the <strong>derivative of
-the input</strong>, as can be seen by noting <span
-class="math inline">\(V_F=\int D_{out}dt\)</span>, i.e. <span
-class="math display">\[
-D_{out} = \frac{dV_F}{dt}
-\]</span></p>
-<ul>
-<li>This differentiation alters the signal spectrum</li>
-<li>attenuates the low-frequency content of the signal</li>
-<li>and amplifies high-frequency noise</li>
-</ul>
-<h2 id="delta-sigma-modulators">Delta-Sigma modulators</h2>
-<h2 id="charge-balancing">Charge Balancing</h2>
-<h2 id="decimation-filters">Decimation Filters</h2>
-<p>A simple time-domain analysis shows that a <strong>sinc
-filter</strong> is a suitable decimation filter for a first-order
-modulator. Such a filter has a rectangular impulse response, and can be
-implemented as a <strong>counter</strong>.</p>
-<h2 id="reference">reference</h2>
-<p>B. Razavi, "The Delta-Sigma Modulator [A Circuit for All Seasons],"
-IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 20, pp. 10-15,
-Spring 2016.</p>
-<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
-Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
-<p>Richard Schreier (2022). Delta Sigma Toolbox
-(https://www.mathworks.com/matlabcentral/fileexchange/19-delta-sigma-toolbox),
-MATLAB Central File Exchange. Retrieved June 28, 2022.</p>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-<p>Manolis Terrovitis and Ken Kundert. <a
-target="_blank" rel="noopener" href="https://designers-guide.org/analysis/delta-sigma.pdf">Device noise
-simulation of delta-sigma modulators</a> and associated Matlab scripts:
-<a
-target="_blank" rel="noopener" href="https://designers-guide.org/analysis/scripts.tar.gz">scripts.tar.gz</a>,
-<a
-target="_blank" rel="noopener" href="https://designers-guide.org/analysis/scripts.zip">scripts.zip</a>.</p>
-<p>Oversampling and Noise Shaping in Delta-Sigma Modulation [<a
-target="_blank" rel="noopener" href="https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation">https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation</a>]</p>
-<p>David A. Johns. ECE1371H - Advanced Analog Circuits - Spring 2014 [<a
-target="_blank" rel="noopener" href="https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html">https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html</a>]</p>
-<p>R.S. Ashwin Kumar. EE698I: Mixed-signal IC design [<a
-target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html">https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html</a>]</p>
-<p>R.S. Ashwin Kumar. EE698W: Analog circuits for signal processing [<a
-target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html">https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html</a>]</p>
-<p>Vishal Saxena. ECE 697 Delta-Sigma Data Converter Design [<a
-target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm</a>]</p>
-<p>-, ECE 615 Mixed Signal IC Design Spring 2016, Boise State University
-[<a
-target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece615/s16/ECE615.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece615/s16/ECE615.htm</a>]</p>
-<p>Richard E. Schreier, ECE 1371 Advanced Analog Circuits Notes 2015 [<a
-target="_blank" rel="noopener" href="http://individual.utoronto.ca/schreier/ece1371-2015.html">http://individual.utoronto.ca/schreier/ece1371-2015.html</a>]</p>
-<p>Dai, Getting Started With Delta-Sigma ADC Design [<a
-target="_blank" rel="noopener" href="https://everynanocounts.com/2022/06/02/getting-started-with-delta-sigma-adc-design/">https://everynanocounts.com/2022/06/02/getting-started-with-delta-sigma-adc-design/</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/periodic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2036,7 +2204,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2022/06/02/gett
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

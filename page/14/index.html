@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">166</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,122 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/01/clocks-sta/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/01/clocks-sta/" class="post-title-link" itemprop="url">primary clock, generated clock and virtual clock in SDC</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-01 19:15:43" itemprop="dateCreated datePublished" datetime="2022-03-01T19:15:43+00:00">2022-03-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>primary clocks</strong></p>
-<ul>
-<li>Primary clocks should be created at input ports and output pins of
-black boxes.</li>
-<li>Never create clocks on hierarchy pins. Creating clocks on hierarchy
-will cause problems when reading SDF. The net timing arc becomes
-segmented at the hierarchy and PrimeTime will be unable to annotate the
-net successfully.</li>
-</ul>
-<p><strong>generated clocks</strong></p>
-<ul>
-<li>Generated clocks are generally created for waveform modifications of
-a primary clock (not including simple inversions). PrimeTime does not
-simulate a design and thus will <strong>not</strong> derive internally
-generated clocks automatically - these clocks must be created by the
-user and applied as a constraint.</li>
-<li>PrimeTime caculate source latency for generated clocks if primary
-clock is <strong>propagated</strong>, otherwise its source latency is
-zero.</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># primary clock</span></span><br><span class="line">create_clock -period <span class="number">4</span> [get_ports Clk]</span><br><span class="line">set_clock_latency -<span class="keyword">source</span> <span class="number">2</span> [get_clocks Clk]</span><br><span class="line">set_propagated_clock [get_clocks Clk]</span><br><span class="line">create_generated_clock -divide_by <span class="number">2</span> -name div_clk -<span class="keyword">source</span> [get_ports Clk] FF3/Q</span><br></pre></td></tr></table></figure>
-<p><strong>virtual clocks</strong></p>
-<ul>
-<li>Are clock objects without a source</li>
-<li>Do not clock sequential devices within the current_design</li>
-<li>Serve as references of input or output delays</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a virtual clock, vclk, for input and output delay constraints</span></span><br><span class="line">create_clock -period <span class="number">5</span> -name vclk</span><br><span class="line">set_input_delay -max <span class="number">2</span> -<span class="keyword">clock</span> vclk [get_ports in1]</span><br><span class="line">set_output_delay -max <span class="number">1</span> -<span class="keyword">clock</span> vclk [get_ports out2]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>There is <strong>no</strong> network latency to calculate, even if a
-virtual clock is propagated.</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -342,7 +226,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:09" itemprop="dateModified" datetime="2024-08-03T12:59:09+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -444,7 +328,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -959,7 +843,7 @@ Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1074,7 +958,7 @@ threads</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:09" itemprop="dateModified" datetime="2024-08-03T12:59:09+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1194,7 +1078,7 @@ variant, the it is defined as a subsequence and its
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1319,7 +1203,7 @@ target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analo
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1411,7 +1295,7 @@ target="_blank" rel="noopener" href="https://github.com/StanfordAHA/PowerDomainD
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1501,7 +1385,7 @@ alt="pma_dig_bumps.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:10" itemprop="dateModified" datetime="2024-08-03T12:59:10+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1586,7 +1470,7 @@ alt="pma_dig_bumps.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-03 12:59:09" itemprop="dateModified" datetime="2024-08-03T12:59:09+00:00">2024-08-03</time>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1616,6 +1500,122 @@ analysis</h2>
 <h2 id="inldnl-analysis-of-current-steering-dac">INL/DNL analysis of
 current steering DAC</h2>
 <div class="pdf-container" data-target="/pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf" data-height="500px"></div>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/12/verilog-readmemb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/12/verilog-readmemb/" class="post-title-link" itemprop="url">verilog readmemb and readmemh</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-12 17:15:47" itemprop="dateCreated datePublished" datetime="2022-02-12T17:15:47+00:00">2022-02-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-04 06:38:21" itemprop="dateModified" datetime="2024-08-04T06:38:21+00:00">2024-08-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
+<strong><code>$readmemb("bin_memory_file.mem", memory_array, [start_address], [end_address])</code></strong></p>
+<p>The system task has no versions to accept octal data or decimal
+data.</p>
+<ul>
+<li>The 1st argument is the data file name.</li>
+<li>The 2nd argument is the array to receive the data.</li>
+<li>The 3rd argument is an optional start address, and if you provide
+it, you can also provide</li>
+<li>The 4th argument optional end address.</li>
+</ul>
+<p>Note, the 3rd and 4th argument address is for array not data
+file.</p>
+<p>If the memory addresses are not specified anywhere, then the system
+tasks load file data sequentially from the lowest address toward the
+highest address.</p>
+<blockquote>
+<p>The standard before 2005 specify that the system tasks load file data
+sequentially from the left memory address bound to the right memory
+address bound.</p>
+</blockquote>
+<p><strong>readtest.v</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> readfile;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array4 [<span class="number">0</span>:<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array7 [<span class="number">6</span>:<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] array12 [<span class="number">11</span>:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">integer</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array4);</span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array7, <span class="number">2</span>, <span class="number">5</span>);</span><br><span class="line">		<span class="built_in">$readmemb</span>(<span class="string">&quot;data.txt&quot;</span>, array12);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array4[%0d] = %b&quot;</span>, i, array4[i]);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array7[%0d] = %b&quot;</span>, i, array7[i]);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">$display</span>(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">12</span>; i = i+<span class="number">1</span>)</span><br><span class="line">			<span class="built_in">$display</span>(<span class="string">&quot;array12[%0d] = %b&quot;</span>, i, array12[i]);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>data.txt</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">00000000 </span><br><span class="line">00000001</span><br><span class="line">00000010</span><br><span class="line">00000011</span><br><span class="line">00000100</span><br><span class="line">00000101</span><br><span class="line">00000110</span><br><span class="line">00001000</span><br></pre></td></tr></table></figure>
+<p><strong>result</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">array4[0] = 00000000</span><br><span class="line">array4[1] = 00000001</span><br><span class="line">array4[2] = 00000010</span><br><span class="line">array4[3] = 00000011</span><br><span class="line">=========================</span><br><span class="line">array7[0] = xxxxxxxx</span><br><span class="line">array7[1] = xxxxxxxx</span><br><span class="line">array7[2] = 00000000</span><br><span class="line">array7[3] = 00000001</span><br><span class="line">array7[4] = 00000010</span><br><span class="line">array7[5] = 00000011</span><br><span class="line">array7[6] = xxxxxxxx</span><br><span class="line">=========================</span><br><span class="line">array12[0] = 00000000</span><br><span class="line">array12[1] = 00000001</span><br><span class="line">array12[2] = 00000010</span><br><span class="line">array12[3] = 00000011</span><br><span class="line">array12[4] = 00000100</span><br><span class="line">array12[5] = 00000101</span><br><span class="line">array12[6] = 00000110</span><br><span class="line">array12[7] = 00001000</span><br><span class="line">array12[8] = xxxxxxxx</span><br><span class="line">array12[9] = xxxxxxxx</span><br><span class="line">array12[10] = xxxxxxxx</span><br><span class="line">array12[11] = xxxxxxxx</span><br></pre></td></tr></table></figure>
+<hr />
+<p><strong>ref</strong></p>
+<p><a
+target="_blank" rel="noopener" href="https://projectf.io/posts/initialize-memory-in-verilog/">Initialize
+Memory in Verilog</a></p>
 
       
     </div>

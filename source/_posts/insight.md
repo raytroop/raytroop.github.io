@@ -25,6 +25,16 @@ Distributed ESD Protection
 
 
 
+## Nonlinearity of Differential Circuits
+
+![image-20240804173949430](insight/image-20240804173949430.png)
+
+> ![image-20240804174042088](insight/image-20240804174042088.png)
+
+
+
+
+
 ## VCO varactor
 
 > Two methods: 1. pss + pac; 2. pss+psp

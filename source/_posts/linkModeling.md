@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+## ADC Resolution Requirement
+
+
+
+
+
+
+
 ## BER Calculation with Quantization Noise
 
 ![image-20240804110522955](linkModeling/image-20240804110522955.png)

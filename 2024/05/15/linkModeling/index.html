@@ -18,17 +18,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="BER Calculation with Quantization Noise   \[ \text{Var}(X) &#x3D; E[X^2] - E[X]^2 \]   TX FFE TX FFE suffers from the peak power constraint, which in effect attenuates the average power of the outgoing sig">
+    <meta name="description" content="ADC Resolution Requirement BER Calculation with Quantization Noise   \[ \text{Var}(X) &#x3D; E[X^2] - E[X]^2 \]   TX FFE TX FFE suffers from the peak power constraint, which in effect attenuates the averag">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Link Modeling">
 <meta property="og:url" content="http://example.com/2024/05/15/linkModeling/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="BER Calculation with Quantization Noise   \[ \text{Var}(X) &#x3D; E[X^2] - E[X]^2 \]   TX FFE TX FFE suffers from the peak power constraint, which in effect attenuates the average power of the outgoing sig">
+<meta property="og:description" content="ADC Resolution Requirement BER Calculation with Quantization Noise   \[ \text{Var}(X) &#x3D; E[X^2] - E[X]^2 \]   TX FFE TX FFE suffers from the peak power constraint, which in effect attenuates the averag">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240804110522955.png">
 <meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240727225120002.png">
 <meta property="article:published_time" content="2024-05-15T15:57:03.000Z">
-<meta property="article:modified_time" content="2024-08-04T08:10:26.073Z">
+<meta property="article:modified_time" content="2024-08-04T12:51:26.807Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/05/15/linkModeling/image-20240804110522955.png">
@@ -140,9 +140,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ber-calculation-with-quantization-noise"><span class="nav-number">1.</span> <span class="nav-text">BER Calculation with
-Quantization Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-ffe"><span class="nav-number">2.</span> <span class="nav-text">TX FFE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statistical-eye"><span class="nav-number">3.</span> <span class="nav-text">statistical eye</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number">3.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-likelihood-sequence-estimation"><span class="nav-number">4.</span> <span class="nav-text">Maximum-Likelihood
-Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reference-1"><span class="nav-number">4.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-2"><span class="nav-number">5.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#adc-resolution-requirement"><span class="nav-number">1.</span> <span class="nav-text">ADC Resolution Requirement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ber-calculation-with-quantization-noise"><span class="nav-number">2.</span> <span class="nav-text">BER Calculation with
+Quantization Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-ffe"><span class="nav-number">3.</span> <span class="nav-text">TX FFE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statistical-eye"><span class="nav-number">4.</span> <span class="nav-text">statistical eye</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number">4.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-likelihood-sequence-estimation"><span class="nav-number">5.</span> <span class="nav-text">Maximum-Likelihood
+Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reference-1"><span class="nav-number">5.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-2"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -237,7 +237,7 @@ Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-leve
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-04 08:10:26" itemprop="dateModified" datetime="2024-08-04T08:10:26+00:00">2024-08-04</time>
+      <time title="Modified: 2024-08-04 12:51:26" itemprop="dateModified" datetime="2024-08-04T12:51:26+00:00">2024-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -258,7 +258,8 @@ Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-leve
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="ber-calculation-with-quantization-noise">BER Calculation with
+    <div class="post-body" itemprop="articleBody"><h2 id="adc-resolution-requirement">ADC Resolution Requirement</h2>
+<h2 id="ber-calculation-with-quantization-noise">BER Calculation with
 Quantization Noise</h2>
 <p><img src="/2024/05/15/linkModeling/image-20240804110522955.png"
 alt="image-20240804110522955" /></p>

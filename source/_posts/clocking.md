@@ -49,6 +49,20 @@ mathjax: true
 
 
 
+## Feedback Dividers
+
+![image-20240803225130324](clocking/image-20240803225130324.png)
+
+- Large values of N lowers the loop BW which is bad for jitter
+
+
+
+
+
+> Gunnman, Kiran, and Mohammad Vahidfar. *Selected Topics in RF, Analog and Mixed Signal Circuits and Systems*. Aalborg: River Publishers, 2017.
+
+
+
 ## clock gating
 
 ![clk_mux.drawio](clocking/clk_mux.drawio.svg)

@@ -9,6 +9,28 @@ mathjax: true
 
 
 
+## Convolution of probability distributions
+
+The probability distribution of the *sum of two or more **independent** random variables* is the **convolution** of their individual distributions.
+
+![image-20240804104528903](ss-insight/image-20240804104528903.png)
+
+
+
+
+
+## Thermal noise
+
+Thermal noise in an ideal resistor is approximately **white**, meaning that its power spectral density is nearly **constant** throughout the frequency spectrum.
+
+When limited to a *finite bandwidth* and viewed in the time domain, thermal noise has a nearly **Gaussian amplitude distribution**
+
+
+
+> ![image-20240804102454281](ss-insight/image-20240804102454281.png)
+
+
+
 ## Barkhausen criteria
 
 Barkhausen criteria are *necessary* but **not sufficient conditions** for sustainable **oscillations**

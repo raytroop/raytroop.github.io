@@ -112,8 +112,11 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 但是，要记住，找一个人谈恋爱绝不是因为这个人在暗暗喜欢你，而必须是因为你足够喜欢这个人。因为足够喜欢，所以勇敢，这种勇敢不是直勾勾地表白，也不是惨兮兮地跪舔，而是坚持自我、展现自我、享受自我的过程。
 ```
 
-## 悟
 
+
+
+
+**错过了很好的相亲对象，想挽回，我们还有可能吗？**
 
 
 > **我还没想好，就跟他说了不合适，做朋友**
@@ -143,6 +146,20 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 > 
 > 
 
+
+
+```
+念念不忘，必有回響
+```
+
+
+
+
+
+## 悟
+
+
+
 ```
 the word "happy" would lose its meaning if it were not balanced by sadness. 
 
@@ -150,6 +167,39 @@ the word "happy" would lose its meaning if it were not balanced by sadness.
 ```
 
 
+
+```
+「世上只有一種英雄主義，就是在認清生活真相之後依然熱愛生活。」 
+
+- 斯蒂芬·茨威格 《羅曼·羅蘭》
+```
+
+
+
+```
+不要因爲一時的情緒而做出永久的決定
+```
+
+
+
+```
+最後記住導航裡的那句話：前方道路擁堵，但您仍在最優路線上
+
+你的方向比速度更重要
+```
+
+
+
+```
+如果你不爲自己的夢想而努力，那麼你將爲別人的夢想而工作
+```
+
+
+
+```
+不抱怨
+是逆轉殘酷人生的第一步
+```
 
 
 

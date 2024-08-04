@@ -1,5 +1,5 @@
 ---
-title: Link Modeling & Analysis
+title: Link Modeling
 date: 2024-05-15 15:57:03
 tags:
 categories:
@@ -7,9 +7,22 @@ categories:
 mathjax: true
 ---
 
-- statistical eye/BER analysis
 
-- Channel Operation Margin (**COM**)
+
+## BER Calculation with Quantization Noise
+
+![image-20240804110522955](linkModeling/image-20240804110522955.png)
+
+
+
+
+> $$
+> \text{Var}(X) = E[X^2] - E[X]^2
+> $$
+> ![image-20240804110235178](linkModeling/image-20240804110235178.png)
+
+
+
 
 
 

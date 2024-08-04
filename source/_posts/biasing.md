@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-## PTAT with only MOS
+## PTAT with subthreshold MOS
 
 MOS working in the **weak inversion region** (**"subthreshold conduction"**) have the similar characteristics to BJTs and diodes, since the effect of diffusion current becomes more significant than that of drift current
 
@@ -37,7 +37,7 @@ MOS working in the **weak inversion region** (**"subthreshold conduction"**) hav
 
 > $\frac{kT}{q}$​ is approximately 26mV, at room temperature 300K
 >
-> In advanced node, $V_{BE}$ is about -1.45mV/K
+> In advanced node, N4P, $V_{BE}$ is about -1.45mV/K
 
 
 

@@ -32,6 +32,15 @@ mathjax: true
 *TODO* &#128197;
 
 
+## different frequency clock impact on edge
+
+![clock2clock.drawio](clocking/clock2clock.drawio.svg)
+
+> ck1 is div2 of ck0
+
+- edge of ck0 is affected differently by ck1
+
+- edge of ck1 is affected equally by ck0
 
 
 

@@ -28,7 +28,9 @@ $$
 $$
 ![loop-refactor-partion-general.drawio](ss-insight/loop-refactor-partion-general.drawio.svg)
 
-
+> ![image-20240805231921946](ss-insight/image-20240805231921946.png)
+>
+> Saurabh Saxena, IIT Madras. Clocking for Serial Links - Frequency and Jitter Requirements, Phase-Locked Loops, Clock and Data Recovery
 
 
 

@@ -9,6 +9,31 @@ mathjax: true
 
 
 
+## Feedback Rearrange
+
+![loop-refactor.drawio](ss-insight/loop-refactor.drawio.svg)
+
+The closed loop transfer function of $Y/X$ and $Y_1/X_1$ are almost same, except sign
+
+$$\begin{align}
+\frac{Y}{X} &= +\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)} \\
+\frac{Y_1}{X_1} &= -\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
+\end{align}$$
+
+![loop-refactor-partion.drawio](ss-insight/loop-refactor-partion.drawio.svg)
+
+define $-Y_1=Y_n$, then
+$$
+\frac{Y_n}{X_1} = \frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
+$$
+![loop-refactor-partion-general.drawio](ss-insight/loop-refactor-partion-general.drawio.svg)
+
+
+
+
+
+
+
 ## Convolution of probability distributions
 
 The probability distribution of the *sum of two or more **independent** random variables* is the **convolution** of their individual distributions.

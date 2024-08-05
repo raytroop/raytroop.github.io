@@ -82,17 +82,3 @@ $$
 $$
 
 
-
-## Feedback Rearrange
-
-![loop-refactor.drawio](settling/loop-refactor.drawio.svg)
-
-The closed loop transfer function of $Y/X$ and $Y_1/X_1$ are almost same, except sign
-
-$$\begin{align}
-\frac{Y}{X} &= +\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)} \\
-\frac{Y_1}{X_1} &= -\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)} 
-\end{align}$$
-
-![loop-refactor-partion.drawio](settling/loop-refactor-partion.drawio.svg)
-

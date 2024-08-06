@@ -8,6 +8,25 @@ mathjax: true
 ---
 
 
+
+## Mueller–Muller
+
+| pattern | main cursor               |
+| ------- | ------------------------- |
+| 0**1**1 | $s_{011}=-h_1+h_0+h_{-1}$ |
+| 1**1**0 | $s_{110}=h_1+h_0-h_{-1}$  |
+| 1**0**0 | $s_{100}=h_1-h_0-h_{-1}$  |
+| 0**0**1 | $s_{001}=-h_1-h_0+h_{-1}$ |
+
+During adapting,  we make
+
+- 0**1**1 & 1**1**0 are approaching to each other
+- 1**0**0 & 0**0**1 are approaching to each other
+
+Then, $h_{-1}$ and $h_1$ are same, which is desired
+
+
+
 ## False locking
 
 *TODO* &#128197;
@@ -43,11 +62,12 @@ mathjax: true
 >  *hunting jitter* is also called as **dithering jitter**
 
 
+
 ## CDR Loop Latency 
 
 Denoting the CDR loop latency by $\Delta T$ , we note that the loop transmission is multiplied by $exp(-s\Delta T)\simeq 1-s\Delta T$.The resulting right-half-plane zero, $f_z$ degrades the phase margin and must remain about **one decade beyond the BW**
 $$
-f_z\simeq \frac{1}{2\pi Delta T}
+f_z\simeq \frac{1}{2\pi \Delta T}
 $$
 
 
@@ -66,6 +86,26 @@ Decimation is commonly employed to alleviate the high-speed requirement. However
 
 
 > L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in IEEE Journal of Solid-State Circuits, vol. 41, no. 8, pp. 1867-1875, Aug. 2006
+
+
+
+
+
+## Loop Bandwidth
+
+> The *closed-loop −3-dB bandwidth* is sometimes called the **“loop bandwidth”**
+
+
+
+
+
+## Limitations of Continuous-Time Approximation
+
+A rule of thumb often used to ensure slow changes in the loop is to select the *loop bandwidth* approximately equal to **one-tenth** of the *input frequency*. 
+
+![image-20240806230158367](clocking/image-20240806230158367.png)
+
+
 
 
 

@@ -9,6 +9,21 @@ mathjax: true
 
 
 
+## z-domain & sampled analysis
+
+*TODO* &#128197;
+
+
+
+A sampled system almost always has more stability problems than arise in continuous-time systems. 
+
+- In particular, an analog, second-order PLL is unconditionally stable for any value of loop gain
+- but the sampled equivalent will go unstable if the gain is made too large
+
+> F. Gardner, "Charge-Pump Phase-Lock Loops," in *IEEE Transactions on Communications*, vol. 28, no. 11, pp. 1849-1858, November 1980, doi: 10.1109/TCOM.1980.1094619
+
+
+
 ## Feedback Rearrange
 
 ![loop-refactor.drawio](ss-insight/loop-refactor.drawio.svg)

@@ -7,13 +7,6 @@ categories:
 mathjax: true
 ---
 
-## limit cycle
-
-*TODO* &#128197;
-
-
-
-
 
 ## False locking
 
@@ -44,11 +37,41 @@ mathjax: true
 
 
 
+
+## limit cycle & hunting jitter 
+
+>  *hunting jitter* is also called as **dithering jitter**
+
+
+## CDR Loop Latency 
+
+Denoting the CDR loop latency by $\Delta T$ , we note that the loop transmission is multiplied by $exp(-s\Delta T)\simeq 1-s\Delta T$.The resulting right-half-plane zero, $f_z$ degrades the phase margin and must remain about **one decade beyond the BW**
+$$
+f_z\simeq \frac{1}{2\pi Delta T}
+$$
+
+
+> This assumption is true in practice since the bandwidth of the CDR (few mega Hertz) is much smaller than the data rate (multi giga bits/second).
+
+> [Fernando , Marvell Italy."Considerations for CDR
+Bandwidth Proposal" [https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf](https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf)]
+>
+>
+
+
+
+### Decimation 
+
+Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases *loop-latency* which causes excessive *dither jitter*
+
+
+> L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in IEEE Journal of Solid-State Circuits, vol. 41, no. 8, pp. 1867-1875, Aug. 2006
+
+
+
+
+
 ## clock distribution
-
-
-
-
 
 
 

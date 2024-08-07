@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">166</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,202 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/11/verilog-constant-part-select-and-variable-part-select/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/11/verilog-constant-part-select-and-variable-part-select/" class="post-title-link" itemprop="url">verilog constant part-select and indexed part-select</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-11 20:42:34" itemprop="dateCreated datePublished" datetime="2022-02-11T20:42:34+00:00">2022-02-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:12" itemprop="dateModified" datetime="2024-08-07T06:39:12+00:00">2024-08-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>A range of contiguous bits can be selected and is known as
-<strong>part-select</strong>. There are two types of part-selects, one
-with a <strong>constant part-select</strong> and another with an
-<strong>indexed part-select</strong></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
-<p>Having a variable part-select allows it to be used effectively in
-loops to select parts of the vector. Although the starting bit can be
-<strong>varied</strong>, the width has to be
-<strong>constant</strong>.</p>
-<blockquote>
-<p><strong>[&lt;start_bit +: <width>] // part-select increments from
-start-bit</strong></p>
-<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
-start-bit</strong></p>
-</blockquote>
-<p><strong>Example</strong></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
-<p><strong>ref</strong></p>
-<p><a
-target="_blank" rel="noopener" href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
-scalar and vector</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
-is the "+:" operator called in Verilog?</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/10/Innovus-block-level-PGPin/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/10/Innovus-block-level-PGPin/" class="post-title-link" itemprop="url">Innovus block level create Power Ground Pin method</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-10 10:52:07" itemprop="dateCreated datePublished" datetime="2022-02-10T10:52:07+00:00">2022-02-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/innovus/" itemprop="url" rel="index"><span itemprop="name">innovus</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">editStretch x ...</span><br><span class="line">selectWire ... VDD</span><br><span class="line">selectWire ... GND</span><br><span class="line">createPGPin -selected -onDie</span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/10/Innovus-block-level-PGPin/createPGPin_onDie.drawio.svg"
-alt="createPGPin_onDie.drawio" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -422,7 +226,7 @@ alt="createPGPin_onDie.drawio" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:12" itemprop="dateModified" datetime="2024-08-07T06:39:12+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:42" itemprop="dateModified" datetime="2024-08-07T16:17:42+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -687,7 +491,7 @@ in Verdi | Synopsys</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -787,7 +591,7 @@ in Verdi | Synopsys</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -872,7 +676,7 @@ in Verdi | Synopsys</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -957,7 +761,7 @@ in Verdi | Synopsys</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1042,7 +846,7 @@ in Verdi | Synopsys</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1127,7 +931,7 @@ in Verdi | Synopsys</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1212,7 +1016,7 @@ in Verdi | Synopsys</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1235,6 +1039,176 @@ in Verdi | Synopsys</a></p>
     
     <div class="post-body" itemprop="articleBody">
           <div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/07/Innovus-global-and-localSkew/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/07/Innovus-global-and-localSkew/" class="post-title-link" itemprop="url">Innovus global and localSkew</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-07 23:14:25" itemprop="dateCreated datePublished" datetime="2022-02-07T23:14:25+00:00">2022-02-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/innovus/" itemprop="url" rel="index"><span itemprop="name">innovus</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/07/Innovus-data-exchange/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/07/Innovus-data-exchange/" class="post-title-link" itemprop="url">Innovus Data Exchange</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-07 23:12:41" itemprop="dateCreated datePublished" datetime="2022-02-07T23:12:41+00:00">2022-02-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/innovus/" itemprop="url" rel="index"><span itemprop="name">innovus</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
 
       
     </div>

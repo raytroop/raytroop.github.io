@@ -18,20 +18,25 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="ADC Resolution Requirement BER Calculation with Quantization Noise   \[ \text{Var}(X) &#x3D; E[X^2] - E[X]^2 \]   TX FFE TX FFE suffers from the peak power constraint, which in effect attenuates the averag">
+    <meta name="description" content="Impulse Response or Pulse Response   Sign-Sign LMS Adaptive equalizing link architecture  dLev: desired signal level yn: received signal at time n ern: the error slicer sample, i.e. sign(dLev - yn) dn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Link Modeling">
 <meta property="og:url" content="http://example.com/2024/05/15/linkModeling/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="ADC Resolution Requirement BER Calculation with Quantization Noise   \[ \text{Var}(X) &#x3D; E[X^2] - E[X]^2 \]   TX FFE TX FFE suffers from the peak power constraint, which in effect attenuates the averag">
+<meta property="og:description" content="Impulse Response or Pulse Response   Sign-Sign LMS Adaptive equalizing link architecture  dLev: desired signal level yn: received signal at time n ern: the error slicer sample, i.e. sign(dLev - yn) dn">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240807221637401.png">
+<meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240807224407213.png">
+<meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20220302213259394.png">
+<meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20220302231044136.png">
+<meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240807233152154.png">
 <meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240804110522955.png">
 <meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240727225120002.png">
 <meta property="article:published_time" content="2024-05-15T15:57:03.000Z">
-<meta property="article:modified_time" content="2024-08-07T06:39:11.962Z">
+<meta property="article:modified_time" content="2024-08-07T16:17:41.952Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/05/15/linkModeling/image-20240804110522955.png">
+<meta name="twitter:image" content="http://example.com/2024/05/15/linkModeling/image-20240807221637401.png">
 
 
 <link rel="canonical" href="http://example.com/2024/05/15/linkModeling/">
@@ -140,9 +145,12 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#adc-resolution-requirement"><span class="nav-number">1.</span> <span class="nav-text">ADC Resolution Requirement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ber-calculation-with-quantization-noise"><span class="nav-number">2.</span> <span class="nav-text">BER Calculation with
-Quantization Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-ffe"><span class="nav-number">3.</span> <span class="nav-text">TX FFE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statistical-eye"><span class="nav-number">4.</span> <span class="nav-text">statistical eye</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number">4.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-likelihood-sequence-estimation"><span class="nav-number">5.</span> <span class="nav-text">Maximum-Likelihood
-Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reference-1"><span class="nav-number">5.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-2"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#impulse-response-or-pulse-response"><span class="nav-number">1.</span> <span class="nav-text">Impulse Response or Pulse
+Response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sign-sign-lms"><span class="nav-number">2.</span> <span class="nav-text">Sign-Sign LMS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adaptive-equalizing-link-architecture"><span class="nav-number">2.1.</span> <span class="nav-text">Adaptive equalizing link
+architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#least-mean-square-algorithm-lms"><span class="nav-number">2.2.</span> <span class="nav-text">Least Mean Square Algorithm
+(LMS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sign-sign-lms-sslms"><span class="nav-number">2.3.</span> <span class="nav-text">Sign-Sign LMS (SSLMS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dfe-h0-estimator"><span class="nav-number">2.4.</span> <span class="nav-text">DFE h0 Estimator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mlse"><span class="nav-number">3.</span> <span class="nav-text">MLSE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mlsd"><span class="nav-number">4.</span> <span class="nav-text">MLSD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#adc-resolution-requirement"><span class="nav-number">5.</span> <span class="nav-text">ADC Resolution Requirement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ber-calculation-with-quantization-noise"><span class="nav-number">6.</span> <span class="nav-text">BER Calculation with
+Quantization Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-ffe"><span class="nav-number">7.</span> <span class="nav-text">TX FFE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statistical-eye"><span class="nav-number">8.</span> <span class="nav-text">statistical eye</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number">8.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-likelihood-sequence-estimation"><span class="nav-number">9.</span> <span class="nav-text">Maximum-Likelihood
+Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reference-1"><span class="nav-number">9.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-2"><span class="nav-number">10.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -155,7 +163,7 @@ Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-leve
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">166</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -237,7 +245,7 @@ Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-leve
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-07 06:39:11" itemprop="dateModified" datetime="2024-08-07T06:39:11+00:00">2024-08-07</time>
+      <time title="Modified: 2024-08-07 16:17:41" itemprop="dateModified" datetime="2024-08-07T16:17:41+00:00">2024-08-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -258,7 +266,149 @@ Sequence Estimation</span></a><ol class="nav-child"><li class="nav-item nav-leve
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="adc-resolution-requirement">ADC Resolution Requirement</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="impulse-response-or-pulse-response">Impulse Response or Pulse
+Response</h2>
+<p><img src="/2024/05/15/linkModeling/image-20240807221637401.png"
+alt="image-20240807221637401" /></p>
+<p><img src="/2024/05/15/linkModeling/image-20240807224407213.png"
+alt="image-20240807224407213" /><img
+src="/2024/05/15/linkModeling/image-20240807224505987.png"
+alt="image-20240807224505987" /></p>
+<h2 id="sign-sign-lms">Sign-Sign LMS</h2>
+<h3 id="adaptive-equalizing-link-architecture">Adaptive equalizing link
+architecture</h3>
+<p><img src="/2024/05/15/linkModeling/image-20220302213259394.png"
+alt="image-20220302213259394" /></p>
+<p>dLev: desired signal level</p>
+<p>y<sub>n</sub>: received signal at time n</p>
+<p>er<sub>n</sub>: the error slicer sample, i.e. sign(dLev -
+y<sub>n</sub>)</p>
+<p>d<sub>n-k</sub>: the data slicer sample at time n-k</p>
+<h3 id="least-mean-square-algorithm-lms">Least Mean Square Algorithm
+(LMS)</h3>
+<p>Loss function or cost function: <span
+class="math display">\[\begin{align}
+e_n^2 &amp;= (dLev - y_n)^2
+\end{align}\]</span></p>
+<p>Transmitter and channel response: <span
+class="math display">\[\begin{align}
+ytx_n &amp;= \sum_{0}^{k}\omega_n^k\ast dtx_{n-k} \\
+y_n &amp;= f_{ch}(ytx_n)
+\end{align}\]</span> <span class="math inline">\(ytx_n\)</span> is
+output of transmitter at time n; <span
+class="math inline">\(f_{ch}\)</span> is channel response, for
+simplicity, scaling factor <span class="math inline">\(\alpha\)</span>,
+(<span class="math inline">\(\alpha &gt; 0\)</span>) is enough.</p>
+<p>Update function (i.e. Gradient descent): <span
+class="math display">\[\begin{align}
+\omega_{n+1}^k = \omega_{n}^k - \frac{\eta}{2}\ast\frac{\partial
+e_n^2}{\partial \omega_{n}^k} \\
+\omega_{n+1}^k = \omega_{n}^k + \eta \ast e_n \ast\frac{\partial
+y_n}{\partial \omega_{n}^k}
+\end{align}\]</span> <span class="math inline">\(\eta\)</span> is
+learning rate or the rate of update, which is greater than zero.</p>
+<h3 id="sign-sign-lms-sslms">Sign-Sign LMS (SSLMS)</h3>
+<p><strong>Why Sign-Sign LMS</strong></p>
+<p>$ (dLev - y_n)$ and <span class="math inline">\(\frac{\partial
+y_n}{\partial \omega_{n}^k}\)</span> is hard to get in circuit, where
+the actual analog value should be obtained.</p>
+<p><img src="/2024/05/15/linkModeling/image-20220302231044136.png"
+alt="image-20220302231044136" /></p>
+<p>In <strong>SSLMS algorithm</strong>, only the polarities of samples
+are used since it is easy to detect by simple comparators. Moreover,
+recovered data by hard decision is employed instead of <span
+class="math inline">\(y_n\)</span> for more simplicity.</p>
+<p>The update function can be written as,</p>
+<p><span class="math display">\[\begin{align}
+\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(e_n) \ast
+Sign(\frac{\partial y_n}{\partial \omega_{n}^k}) \\
+\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(e_n) \ast \alpha
+\ast Sign(\frac{\partial ytx_n}{\partial \omega_{n}^k}) \\
+\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(er_n) \ast
+Sign(d_{n-k})
+\end{align}\]</span></p>
+<p>SSLMS algorithm useful for DFE adaptation.</p>
+<blockquote>
+<p>T11: Basics of Equalization Techniques: Channels, Equalization, and
+Circuits, 2022 IEEE International Solid-State Circuits Conference</p>
+<p>V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link
+transceiver with adaptive equalization and data recovery," in IEEE
+Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012-1026, April
+2005, doi: 10.1109/JSSC.2004.842863.</p>
+<p>Jinhyung Lee, Design of High-Speed Receiver for Video Interface with
+Adaptive Equalization; Phd thesis, August 2019. <a
+target="_blank" rel="noopener" href="http://dcollection.snu.ac.kr/common/orgView/000000157003">thesis
+link</a></p>
+<p>Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical
+Implementation, 5th edition</p>
+</blockquote>
+<h3 id="dfe-h0-estimator">DFE h0 Estimator</h3>
+<p>summer output <span class="math display">\[
+r_k =
+a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=1}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
+\]</span> error slicer analog output <span class="math display">\[
+e_k=r_k-\hat{a}_k \hat{h}_0
+\]</span> error slicer digital output <span class="math display">\[
+\hat{e}_k=|e_k|
+\]</span> It's NOT possible to implement <span
+class="math inline">\(e_k\)</span>, which need to determine <span
+class="math inline">\(\hat{a}_k=|r_k|\)</span> in no time. One method to
+approach this problem is calculate <span
+class="math inline">\(e_k^{a_k=1}=r_k-\hat{a}_k \hat{h}_0\)</span> and
+<span class="math inline">\(e_k^{a_k=-1}=r_k+\hat{a}_k
+\hat{h}_0\)</span>, then select the right one based on <span
+class="math inline">\(\hat{a}_k\)</span>.</p>
+<p>The update equation based on Sign-Sign-Least Mean square (SS-LMS) and
+loss function <span
+class="math inline">\(L(\hat{h}_{\text{0~ntap}})=E(e_k^2)\)</span> <span
+class="math display">\[
+\hat{h}_n(k+1) = \hat{h}_n(k)+\mu \cdot |e_k|\cdot \hat{a}_{k-n}
+\]</span> Where <span class="math inline">\(n \in
+[0,...,\text{ntap}]\)</span>. This way, we can obtain <span
+class="math inline">\(\hat{h}_0\)</span>, <span
+class="math inline">\(\hat{h}_1\)</span>, <span
+class="math inline">\(\hat{h}_2\)</span>, ...</p>
+<blockquote>
+<p><span class="math inline">\(\hat{h}_0\)</span> is used in AFE
+adaptation</p>
+</blockquote>
+<p>We may encounter difficulty if the first tap of DFE is unrolled, its
+<span class="math inline">\(e_k\)</span> is modified as follow <span
+class="math display">\[
+r_k =
+a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=2}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
+\]</span> Where there is NO <span
+class="math inline">\(\hat{h}_1\)</span></p>
+<p>To find <span class="math inline">\(\hat{h}_1\)</span>, we shall use
+different pattern for even and odd error slicer</p>
+<h2 id="mlse">MLSE</h2>
+<blockquote>
+<p>maximum likelihood sequence estimation (MLSE)</p>
+</blockquote>
+<p><img src="/2024/05/15/linkModeling/image-20240807233152154.png"
+alt="image-20240807233152154" /></p>
+<blockquote>
+<p>[IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes
+Beyond 100 Gb/s <a
+target="_blank" rel="noopener" href="https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf">https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf</a>]</p>
+</blockquote>
+<h2 id="mlsd">MLSD</h2>
+<blockquote>
+<p>Maximum Likelihood Sequence Detection (MLSD)</p>
+</blockquote>
+<p>There are several variants of MLSD, including:</p>
+<ul>
+<li>Viterbi Algorithm</li>
+<li>Decision Feedback Sequence Estimation (DFSE)</li>
+<li>Soft-Output MLSD</li>
+</ul>
+<blockquote>
+<p>[Evolution Of Equalization Techniques In High-Speed SerDes For
+Extended Reaches. <a
+target="_blank" rel="noopener" href="https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/">https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/</a>]</p>
+</blockquote>
+<h2 id="adc-resolution-requirement">ADC Resolution Requirement</h2>
+<p><em>TODO</em> 📅</p>
 <h2 id="ber-calculation-with-quantization-noise">BER Calculation with
 Quantization Noise</h2>
 <p><img src="/2024/05/15/linkModeling/image-20240804110522955.png"

@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-## Mueller–Muller
+## Mueller-Muller A
 
 | pattern | main cursor               |
 | ------- | ------------------------- |
@@ -24,6 +24,52 @@ During adapting,  we make
 - 1**0**0 & 0**0**1 are approaching to each other
 
 Then, $h_{-1}$ and $h_1$ are same, which is desired
+
+
+
+## Mueller-Muller B
+
+MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
+
+![image-20240807230029591](clocking/image-20240807230029591.png)
+
+
+
+> Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [[https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf](https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf)]
+>
+> Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS" [[https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf](https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf)]
+>
+> Eduardo Fuentetaja. "Analysis of the M&M Clock Recovery Algorithm" [[https://edfuentetaja.github.io/sdr/m_m_analysis/](https://edfuentetaja.github.io/sdr/m_m_analysis/)]
+>
+> Liu T, Li T, Lv F, Liang B, Zheng X, Wang H, Wu M, Lu D, Zhao F. Analysis and Modeling of Mueller–Muller Clock and Data Recovery Circuits. *Electronics*. 2021; 10(16):1888.
+>
+> Youzhi Gu . Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model
+>
+> Baud-Rate CDRs [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
+>
+> F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, doi: 10.1109/ISSCC.2010.5433823.
+
+
+
+![image-20240808001201612](clocking/image-20240808001201612.png)
+
+
+
+![image-20240808001256515](clocking/image-20240808001256515.png)
+
+
+
+![image-20240808001449664](clocking/image-20240808001449664.png)
+
+![image-20240808001501485](clocking/image-20240808001501485.png)
+
+
+
+## Sign-Sign Mueller-Müller CDR
+
+![image-20240807232814202](clocking/image-20240807232814202.png)
+
+
 
 
 

@@ -28,7 +28,7 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 
 
-## Power MOS gain affect on NMOS LDO
+## Power MOS gain affect on PMOS LDO
 
 ![pwm_miller.drawio](ldo/pwm_miller.drawio.svg)
 

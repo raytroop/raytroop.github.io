@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+## Why PAM4?
+
+![image-20240808205451067](pam4/image-20240808205451067.png)
+
+![image-20240808205635598](pam4/image-20240808205635598.png)
+
+
+
 ## Bandwidth
 
 

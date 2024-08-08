@@ -8,20 +8,51 @@ mathjax: true
 ---
 
 
-## group delay and phase delay 
 
-*TODO* &#128197;
+## phase delay & group delay
 
-> **group delay** is also known **envelope delay**
+### phase delay
+
+![image-20240808212730768](ss-insight/image-20240808212730768.png)
 
 
-phase delay
 
 > If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency
-> components late in the step response. This causes *ringing*. 
+> components late in the step response. This causes ***ringing***. 
+
+
+
+
+
+### group delay
+
+> Envelope delay (also known as group delay) is not as intuitive, but it is easier to understand
+> mathematically
+
+![image-20240808213806803](ss-insight/image-20240808213806803.png)
+
+
+
+> It is a more sensitive measure of aberrations than phase delay. If envelope delay is fl at with increasing frequency, then the phase delay will also be. It is the envelope delay that isused as the prime measure to approximate a constant delay
+>
+> in the ideal case the envelope delay is equal to the phase delay
+
+
+
+![image-20240808220657443](ss-insight/image-20240808220657443.png)
+
+![image-20240808220740349](ss-insight/image-20240808220740349.png)
+
+
+
+---
 
 
 > Hollister, Allen L. *Wideband Amplifier Design*. Raleigh, NC: SciTech Pub., 2007.
+>
+> Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data Transmission and Testing.  [[https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf](https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf)]
+>
+> Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.). Prentice-Hall, Inc., USA.
 
 
 

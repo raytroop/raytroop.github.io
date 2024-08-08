@@ -18,13 +18,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="group delay and phase delay TODO 📅  group delay is also known envelope delay  phase delay  If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency components l">
+    <meta name="description" content="phase delay &amp; group delay phase delay   If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency components late in the step response. This causes ringing.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Signal and System insight">
 <meta property="og:url" content="http://example.com/2024/05/02/ss-insight/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="group delay and phase delay TODO 📅  group delay is also known envelope delay  phase delay  If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency components l">
+<meta property="og:description" content="phase delay &amp; group delay phase delay   If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency components late in the step response. This causes ringing.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/05/02/ss-insight/image-20240808212730768.png">
+<meta property="og:image" content="http://example.com/2024/05/02/ss-insight/image-20240808213806803.png">
+<meta property="og:image" content="http://example.com/2024/05/02/ss-insight/image-20240808220657443.png">
+<meta property="og:image" content="http://example.com/2024/05/02/ss-insight/image-20240808220740349.png">
 <meta property="og:image" content="http://example.com/2024/05/02/ss-insight/loop-refactor.drawio.svg">
 <meta property="og:image" content="http://example.com/2024/05/02/ss-insight/loop-refactor-partion.drawio.svg">
 <meta property="og:image" content="http://example.com/2024/05/02/ss-insight/image-20240805231921946.png">
@@ -51,10 +55,10 @@
 <meta property="og:image" content="http://example.com/2024/05/02/ss-insight/image-20230603185546658.png">
 <meta property="og:image" content="http://example.com/2024/05/02/ss-insight/image-20230603222054506.png">
 <meta property="article:published_time" content="2024-05-02T23:04:55.000Z">
-<meta property="article:modified_time" content="2024-08-08T05:54:30.649Z">
+<meta property="article:modified_time" content="2024-08-08T14:11:56.609Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/05/02/ss-insight/loop-refactor.drawio.svg">
+<meta name="twitter:image" content="http://example.com/2024/05/02/ss-insight/image-20240808212730768.png">
 
 
 <link rel="canonical" href="http://example.com/2024/05/02/ss-insight/">
@@ -163,7 +167,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#group-delay-and-phase-delay"><span class="nav-number">1.</span> <span class="nav-text">group delay and phase delay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-domain-sampled-analysis"><span class="nav-number">2.</span> <span class="nav-text">z-domain &amp; sampled analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feedback-rearrange"><span class="nav-number">3.</span> <span class="nav-text">Feedback Rearrange</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convolution-of-probability-distributions"><span class="nav-number">4.</span> <span class="nav-text">Convolution of
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-delay-group-delay"><span class="nav-number">1.</span> <span class="nav-text">phase delay &amp; group delay</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-delay"><span class="nav-number">1.1.</span> <span class="nav-text">phase delay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#group-delay"><span class="nav-number">1.2.</span> <span class="nav-text">group delay</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-domain-sampled-analysis"><span class="nav-number">2.</span> <span class="nav-text">z-domain &amp; sampled analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feedback-rearrange"><span class="nav-number">3.</span> <span class="nav-text">Feedback Rearrange</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convolution-of-probability-distributions"><span class="nav-number">4.</span> <span class="nav-text">Convolution of
 probability distributions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thermal-noise"><span class="nav-number">5.</span> <span class="nav-text">Thermal noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#barkhausen-criteria"><span class="nav-number">6.</span> <span class="nav-text">Barkhausen criteria</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nrz-bandwidth"><span class="nav-number">7.</span> <span class="nav-text">NRZ Bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#t_r"><span class="nav-number">8.</span> <span class="nav-text">\(0.35&#x2F;T_r\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#t_r-1"><span class="nav-number">9.</span> <span class="nav-text">\(0.5&#x2F;T_r\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#system-type"><span class="nav-number">10.</span> <span class="nav-text">System Type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pid"><span class="nav-number">11.</span> <span class="nav-text">PID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nyquists-stability-criterion"><span class="nav-number">12.</span> <span class="nav-text">Nyquist’s Stability Criterion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conversion-between-the-s--and-z-domains"><span class="nav-number">13.</span> <span class="nav-text">Conversion Between the
 \(s\)- and \(z\)-Domains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spectral-content-of-nrz"><span class="nav-number">14.</span> <span class="nav-text">Spectral content of NRZ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sinusoidal-steady-state-and-frequency-response"><span class="nav-number">15.</span> <span class="nav-text">sinusoidal
 steady-state and frequency response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#initial-value-theorem-final-value-theorem"><span class="nav-number">16.</span> <span class="nav-text">Initial Value Theorem
@@ -266,7 +270,7 @@ transfer function</span></a><ol class="nav-child"><li class="nav-item nav-level-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-08 05:54:30" itemprop="dateModified" datetime="2024-08-08T05:54:30+00:00">2024-08-08</time>
+      <time title="Modified: 2024-08-08 14:11:56" itemprop="dateModified" datetime="2024-08-08T14:11:56+00:00">2024-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,21 +291,42 @@ transfer function</span></a><ol class="nav-child"><li class="nav-item nav-level-
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="group-delay-and-phase-delay">group delay and phase delay</h2>
-<p><em>TODO</em> 📅</p>
-<blockquote>
-<p><strong>group delay</strong> is also known <strong>envelope
-delay</strong></p>
-</blockquote>
-<p>phase delay</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="phase-delay-group-delay">phase delay &amp; group delay</h2>
+<h3 id="phase-delay">phase delay</h3>
+<p><img src="/2024/05/02/ss-insight/image-20240808212730768.png"
+alt="image-20240808212730768" /></p>
 <blockquote>
 <p>If the phase delay peaks (exceeds the low-frequency value) you can
 expect to see high-frequency components late in the step response. This
-causes <em>ringing</em>.</p>
+causes <strong><em>ringing</em></strong>.</p>
 </blockquote>
+<h3 id="group-delay">group delay</h3>
+<blockquote>
+<p>Envelope delay (also known as group delay) is not as intuitive, but
+it is easier to understand mathematically</p>
+</blockquote>
+<p><img src="/2024/05/02/ss-insight/image-20240808213806803.png"
+alt="image-20240808213806803" /></p>
+<blockquote>
+<p>It is a more sensitive measure of aberrations than phase delay. If
+envelope delay is fl at with increasing frequency, then the phase delay
+will also be. It is the envelope delay that isused as the prime measure
+to approximate a constant delay</p>
+<p>in the ideal case the envelope delay is equal to the phase delay</p>
+</blockquote>
+<p><img src="/2024/05/02/ss-insight/image-20240808220657443.png"
+alt="image-20240808220657443" /></p>
+<p><img src="/2024/05/02/ss-insight/image-20240808220740349.png"
+alt="image-20240808220740349" /></p>
+<hr />
 <blockquote>
 <p>Hollister, Allen L. <em>Wideband Amplifier Design</em>. Raleigh, NC:
 SciTech Pub., 2007.</p>
+<p>Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data
+Transmission and Testing. [<a
+target="_blank" rel="noopener" href="https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf">https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf</a>]</p>
+<p>Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals
+&amp; systems (2nd ed.). Prentice-Hall, Inc., USA.</p>
 </blockquote>
 <h2 id="z-domain-sampled-analysis">z-domain &amp; sampled analysis</h2>
 <p><em>TODO</em> 📅</p>

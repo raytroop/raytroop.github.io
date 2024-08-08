@@ -476,6 +476,32 @@ variant, the it is defined as a subsequence and its
       </categories>
   </entry>
   <entry>
+    <title>Global Handles in UVM</title>
+    <url>/2022/02/23/Global-Handles-UVM/</url>
+    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Global handles uvm_top and factory in uvm_pkg have been removed in
+UVM-1.2 and later</p>
+</blockquote>
+<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
+UVM-1.2</h4>
+<p>Call the <strong>get() method of the class</strong> to retrieve the
+singleton handle.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
+accessing all the central UVM services such as
+<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
+<strong>uvm_report_server</strong>, etc.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Custom Design with FinFETs</title>
     <url>/2022/12/10/FinFET-Considerations/</url>
     <content><![CDATA[<h2 id="design-considerations">Design Considerations</h2>
@@ -672,32 +698,6 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Global Handles in UVM</title>
-    <url>/2022/02/23/Global-Handles-UVM/</url>
-    <content><![CDATA[<h4 id="mechanism-in-uvm-1.1">Mechanism in UVM-1.1</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_top<span class="variable">.print_topology</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line">	factory<span class="variable">.print</span>(); <span class="comment">// Will not compile in UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Global handles uvm_top and factory in uvm_pkg have been removed in
-UVM-1.2 and later</p>
-</blockquote>
-<h4 id="mechanism-in-uvm-1.1-and-uvm-1.2">Mechanism in UVM-1.1 and
-UVM-1.2</h4>
-<p>Call the <strong>get() method of the class</strong> to retrieve the
-singleton handle.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	<span class="keyword">super</span><span class="variable">.start_of_simulation_phase</span>(phase);</span><br><span class="line">	uvm_root::get()<span class="variable">.print_topology</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line">	uvm_factory::get()<span class="variable">.print</span>(); <span class="comment">// Works in UVM-1.1 &amp; UVM-1.2</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="mechanism-only-in-uvm-1.2">Mechanism Only in UVM-1.2</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> test_base::start_of_simulation_phase(uvm_phase phase);</span><br><span class="line">	uvm_coreservice_t cs = uvm_coreservice_t::get();</span><br><span class="line">	cs<span class="variable">.get_root</span>()<span class="variable">.print_topology</span>();</span><br><span class="line">	cs<span class="variable">.get_factory</span>()<span class="variable">.print</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm_coreservice_t</strong> is the uvm-1.2 mechanism for
-accessing all the central UVM services such as
-<strong>uvm_root</strong>,<strong>uvm_factory</strong>,
-<strong>uvm_report_server</strong>, etc.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
     <url>/2022/02/07/Innovus-Clock-Concurrent-Optimization-Technology/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Clock_Concurrent_Optimization_Technology.pdf" data-height="500px"></div>
@@ -834,18 +834,18 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus global and localSkew</title>
-    <url>/2022/02/07/Innovus-global-and-localSkew/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
+    <title>Innovus timeDesign vs. report_timing</title>
+    <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus timeDesign vs. report_timing</title>
-    <url>/2022/02/07/Innovus-timeDesign-vs-report-timing/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_timeDesign_vs_report_timing.pdf" data-height="500px"></div>
+    <title>Innovus global and localSkew</title>
+    <url>/2022/02/07/Innovus-global-and-localSkew/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_global_and_localSkew.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1065,35 +1065,6 @@ href="http://ece-research.unm.edu/jimp/vlsi/slides/chap3_2.html">link2</a>]</p>
       </categories>
   </entry>
   <entry>
-    <title>New windows and forms appear behind the Library Manager in background when using GNOME 3</title>
-    <url>/2022/10/22/New-windows-Gnome3/</url>
-    <content><![CDATA[<p>Using <strong>Red Hat Enterprise Linux 8</strong>, <strong>Rocky
-Linux 8</strong> and the <strong>GNOME 3</strong> window manager, the
-new Virtuoso Schematic/Layout/ADE windows and forms sometimes pop up
-under or below the <strong>Library Manager</strong> or on the desktop in
-the background instead of the foreground and cannot be seen. Sometimes,
-they are iconized; they do not come on the top in front, though it is
-the most recent window opened.</p>
-<p><strong>solution</strong></p>
-<blockquote>
-<p>Install <strong>Focus my window</strong> GNOME Shell extension</p>
-</blockquote>
-<p><img src="/2022/10/22/New-windows-Gnome3/image-20221022002952578.png"
-alt="image-20221022002952578" /></p>
-<p><strong>reference</strong></p>
-<p>Article (11612426) Title: New windows and forms appear behind the
-Library Manager in background or iconized instead of foreground on RHEL
-and SuSE Linux in GNOME, KDE Desktop, Metacity window manager URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OCV Derating With AOCV</title>
     <url>/2022/12/10/OCVDeratingWithAOCV/</url>
     <content><![CDATA[<p><strong>timing_aocv_derate_mode</strong></p>
@@ -1124,6 +1095,35 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI</
       <categories>
         <category>digital</category>
       </categories>
+  </entry>
+  <entry>
+    <title>New windows and forms appear behind the Library Manager in background when using GNOME 3</title>
+    <url>/2022/10/22/New-windows-Gnome3/</url>
+    <content><![CDATA[<p>Using <strong>Red Hat Enterprise Linux 8</strong>, <strong>Rocky
+Linux 8</strong> and the <strong>GNOME 3</strong> window manager, the
+new Virtuoso Schematic/Layout/ADE windows and forms sometimes pop up
+under or below the <strong>Library Manager</strong> or on the desktop in
+the background instead of the foreground and cannot be seen. Sometimes,
+they are iconized; they do not come on the top in front, though it is
+the most recent window opened.</p>
+<p><strong>solution</strong></p>
+<blockquote>
+<p>Install <strong>Focus my window</strong> GNOME Shell extension</p>
+</blockquote>
+<p><img src="/2022/10/22/New-windows-Gnome3/image-20221022002952578.png"
+alt="image-20221022002952578" /></p>
+<p><strong>reference</strong></p>
+<p>Article (11612426) Title: New windows and forms appear behind the
+Library Manager in background or iconized instead of foreground on RHEL
+and SuSE Linux in GNOME, KDE Desktop, Metacity window manager URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
   </entry>
   <entry>
     <title>Overflow Detection in Verilog</title>
@@ -8294,18 +8294,6 @@ Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
       </categories>
   </entry>
   <entry>
-    <title>GitHub Pages Build and deployment</title>
-    <url>/2023/07/01/github-pages-deploy/</url>
-    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
-<p><img
-src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
-alt="image-20230701142405404" /></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Glitches and Hazards</title>
     <url>/2022/05/08/glitch-hazard/</url>
     <content><![CDATA[<ul>
@@ -8343,6 +8331,18 @@ href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.car
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>GitHub Pages Build and deployment</title>
+    <url>/2023/07/01/github-pages-deploy/</url>
+    <content><![CDATA[<p>The repository visibility shall be <code>public</code></p>
+<p><img
+src="/2023/07/01/github-pages-deploy/image-20230701142405404.png"
+alt="image-20230701142405404" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -12129,7 +12129,12 @@ href="https://benchugg.com/research_notes/sde_ito_lemma/">https://benchugg.com/r
   <entry>
     <title>PAM4 Signaling</title>
     <url>/2022/07/20/pam4/</url>
-    <content><![CDATA[<h2 id="bandwidth">Bandwidth</h2>
+    <content><![CDATA[<h2 id="why-pam4">Why PAM4?</h2>
+<p><img src="/2022/07/20/pam4/image-20240808205451067.png"
+alt="image-20240808205451067" /></p>
+<p><img src="/2022/07/20/pam4/image-20240808205635598.png"
+alt="image-20240808205635598" /></p>
+<h2 id="bandwidth">Bandwidth</h2>
 <blockquote>
 <p>[How Interconnects Work: Bandwidth for Modeling and Measurements, <a
 href="https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf">https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf</a>]</p>
@@ -13709,26 +13714,6 @@ McGraw-Hill, 2017.</p>
       </categories>
   </entry>
   <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Power Spectra and Power Spectral Densities</title>
     <url>/2022/04/18/ps-psd/</url>
     <content><![CDATA[<p>One will see the following phenomena:</p>
@@ -14161,6 +14146,26 @@ Press. doi:10.1017/CBO9780511835261</p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -15049,6 +15054,55 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
       </categories>
   </entry>
   <entry>
+    <title>Scattering parameters</title>
+    <url>/2023/09/29/scattering/</url>
+    <content><![CDATA[<h2 id="rational-fit">Rational Fit</h2>
+<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
+<p>To resolve the convergence problem of s-parameter in Spectre
+simulator - <code>rationalfit</code> and write Verilog-A</p>
+<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
+alt="image-20220630224525565" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="z0">Z0</h2>
+<blockquote>
+<p>Remember, S-parameters <strong>don't mean much</strong> unless you
+know the value of the <strong>reference impedance </strong>(it's
+frequently called Z0).</p>
+</blockquote>
+<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
+<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
+alt="image-20220430214052538" /></p>
+<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
+alt="image-20220430214136970" /></p>
+<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
+alt="image-20220430214419283" /></p>
+<blockquote>
+<p>The default <strong>Z0</strong> exported by EMX is
+<strong>50</strong></p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p><a
+href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
+S-parameters
+(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
+<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
+Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
+<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
+rational function approximation algorithm for model generation.
+Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
+doi:10.1109/dac.1999.781313</p>
+<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
+Checker and Rational Fit Model Generator [<a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
+<p>The Complex Art Of Handling S-Parameters: The importance of
+extraction and fitting to circuit simulation involving S-parameters [<a
+href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Settling time</title>
     <url>/2024/07/25/settling/</url>
     <content><![CDATA[<h2 id="second-order-system">Second-order system</h2>
@@ -15115,55 +15169,6 @@ alt="image-20240725204527121" /> <span class="math display">\[
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Scattering parameters</title>
-    <url>/2023/09/29/scattering/</url>
-    <content><![CDATA[<h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -15623,23 +15628,59 @@ href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L1
       </categories>
   </entry>
   <entry>
+    <title>sub-binary radix DAC</title>
+    <url>/2022/03/19/sub-binary-radix-DAC/</url>
+    <content><![CDATA[<p><strong>reference</strong>:</p>
+<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
+AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
+<p>M. Pastre and M. Kayal, "High-precision DAC based on a
+self-calibrated sub-binary radix converter," 2004 IEEE International
+Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
+I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Signal and System insight</title>
     <url>/2024/05/02/ss-insight/</url>
-    <content><![CDATA[<h2 id="group-delay-and-phase-delay">group delay and phase delay</h2>
-<p><em>TODO</em> 📅</p>
-<blockquote>
-<p><strong>group delay</strong> is also known <strong>envelope
-delay</strong></p>
-</blockquote>
-<p>phase delay</p>
+    <content><![CDATA[<h2 id="phase-delay-group-delay">phase delay &amp; group delay</h2>
+<h3 id="phase-delay">phase delay</h3>
+<p><img src="/2024/05/02/ss-insight/image-20240808212730768.png"
+alt="image-20240808212730768" /></p>
 <blockquote>
 <p>If the phase delay peaks (exceeds the low-frequency value) you can
 expect to see high-frequency components late in the step response. This
-causes <em>ringing</em>.</p>
+causes <strong><em>ringing</em></strong>.</p>
 </blockquote>
+<h3 id="group-delay">group delay</h3>
+<blockquote>
+<p>Envelope delay (also known as group delay) is not as intuitive, but
+it is easier to understand mathematically</p>
+</blockquote>
+<p><img src="/2024/05/02/ss-insight/image-20240808213806803.png"
+alt="image-20240808213806803" /></p>
+<blockquote>
+<p>It is a more sensitive measure of aberrations than phase delay. If
+envelope delay is fl at with increasing frequency, then the phase delay
+will also be. It is the envelope delay that isused as the prime measure
+to approximate a constant delay</p>
+<p>in the ideal case the envelope delay is equal to the phase delay</p>
+</blockquote>
+<p><img src="/2024/05/02/ss-insight/image-20240808220657443.png"
+alt="image-20240808220657443" /></p>
+<p><img src="/2024/05/02/ss-insight/image-20240808220740349.png"
+alt="image-20240808220740349" /></p>
+<hr />
 <blockquote>
 <p>Hollister, Allen L. <em>Wideband Amplifier Design</em>. Raleigh, NC:
 SciTech Pub., 2007.</p>
+<p>Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data
+Transmission and Testing. [<a
+href="https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf">https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf</a>]</p>
+<p>Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals
+&amp; systems (2nd ed.). Prentice-Hall, Inc., USA.</p>
 </blockquote>
 <h2 id="z-domain-sampled-analysis">z-domain &amp; sampled analysis</h2>
 <p><em>TODO</em> 📅</p>
@@ -16098,21 +16139,6 @@ href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://c
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>sub-binary radix DAC</title>
-    <url>/2022/03/19/sub-binary-radix-DAC/</url>
-    <content><![CDATA[<p><strong>reference</strong>:</p>
-<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
-AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
-<p>M. Pastre and M. Kayal, "High-precision DAC based on a
-self-calibrated sub-binary radix converter," 2004 IEEE International
-Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
-I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -18338,30 +18364,6 @@ guide for the IEEE 1685 Standard for IP-XACT</a></p>
       </categories>
   </entry>
   <entry>
-    <title>variables with statistical distribution</title>
-    <url>/2023/10/05/varstat/</url>
-    <content><![CDATA[<p><code>Specifying Parameter Distributions Using Statistics Blocks</code></p>
-<ul>
-<li><code>process</code>: generate random number once per MC run</li>
-<li><code>mismatch</code> : generate a random number per instance</li>
-</ul>
-<p><img src="/2023/10/05/varstat/image-20231005190644654.png"
-alt="image-20231005190644654" /></p>
-<p><img src="/2023/10/05/varstat/image-20231005190712057.png"
-alt="image-20231005190712057" /></p>
-<p><img src="/2023/10/05/varstat/image-20231005190724560.png"
-alt="image-20231005190724560" /></p>
-<h2 id="reference">reference</h2>
-<p>Article (20498356) Title: How to vary design variables with
-statistical distribution to be used with Monte Carlo analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0</a></p>
-<p>Spectre Circuit Simulator Reference</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Process Variation</title>
     <url>/2022/03/02/variation/</url>
     <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
@@ -18492,6 +18494,30 @@ href="https://designers-guide.org/modeling/montecarlo.pdf">https://designers-gui
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>variables with statistical distribution</title>
+    <url>/2023/10/05/varstat/</url>
+    <content><![CDATA[<p><code>Specifying Parameter Distributions Using Statistics Blocks</code></p>
+<ul>
+<li><code>process</code>: generate random number once per MC run</li>
+<li><code>mismatch</code> : generate a random number per instance</li>
+</ul>
+<p><img src="/2023/10/05/varstat/image-20231005190644654.png"
+alt="image-20231005190644654" /></p>
+<p><img src="/2023/10/05/varstat/image-20231005190712057.png"
+alt="image-20231005190712057" /></p>
+<p><img src="/2023/10/05/varstat/image-20231005190724560.png"
+alt="image-20231005190724560" /></p>
+<h2 id="reference">reference</h2>
+<p>Article (20498356) Title: How to vary design variables with
+statistical distribution to be used with Monte Carlo analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0</a></p>
+<p>Spectre Circuit Simulator Reference</p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>

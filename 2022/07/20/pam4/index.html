@@ -18,13 +18,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Bandwidth  [How Interconnects Work: Bandwidth for Modeling and Measurements, https:&#x2F;&#x2F;www.simberian.com&#x2F;AppNotes&#x2F;HIW-Bandwidth-6to112-2021-11-08.pdf] [Moving from 28 Gbps NRZ to 56 Gbps PAM-4 - is it &quot;">
+    <meta name="description" content="Why PAM4?   Bandwidth  [How Interconnects Work: Bandwidth for Modeling and Measurements, https:&#x2F;&#x2F;www.simberian.com&#x2F;AppNotes&#x2F;HIW-Bandwidth-6to112-2021-11-08.pdf] [Moving from 28 Gbps NRZ to 56 Gbps PAM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAM4 Signaling">
 <meta property="og:url" content="http://example.com/2022/07/20/pam4/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Bandwidth  [How Interconnects Work: Bandwidth for Modeling and Measurements, https:&#x2F;&#x2F;www.simberian.com&#x2F;AppNotes&#x2F;HIW-Bandwidth-6to112-2021-11-08.pdf] [Moving from 28 Gbps NRZ to 56 Gbps PAM-4 - is it &quot;">
+<meta property="og:description" content="Why PAM4?   Bandwidth  [How Interconnects Work: Bandwidth for Modeling and Measurements, https:&#x2F;&#x2F;www.simberian.com&#x2F;AppNotes&#x2F;HIW-Bandwidth-6to112-2021-11-08.pdf] [Moving from 28 Gbps NRZ to 56 Gbps PAM">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20240808205451067.png">
+<meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20240808205635598.png">
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20240624232935743.png">
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/nrz-v-pam4-bits.png">
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20220717000655620.png">
@@ -41,10 +43,10 @@
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20220721234522043.png">
 <meta property="og:image" content="http://example.com/2022/07/20/pam4/image-20220720232837839.png">
 <meta property="article:published_time" content="2022-07-20T22:51:22.000Z">
-<meta property="article:modified_time" content="2024-08-08T05:54:30.589Z">
+<meta property="article:modified_time" content="2024-08-08T14:11:56.541Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/07/20/pam4/image-20240624232935743.png">
+<meta name="twitter:image" content="http://example.com/2022/07/20/pam4/image-20240808205451067.png">
 
 
 <link rel="canonical" href="http://example.com/2022/07/20/pam4/">
@@ -153,7 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#bandwidth"><span class="nav-number">1.</span> <span class="nav-text">Bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pam4-basic"><span class="nav-number">2.</span> <span class="nav-text">PAM4 Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#energy"><span class="nav-number">2.1.</span> <span class="nav-text">Energy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pam4-level-names"><span class="nav-number">2.2.</span> <span class="nav-text">PAM4 Level Names</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pam4-eye-linearity"><span class="nav-number">2.3.</span> <span class="nav-text">PAM4 Eye Linearity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transmitter-linearity-rlm"><span class="nav-number">2.4.</span> <span class="nav-text">Transmitter Linearity (RLM)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gray-coding"><span class="nav-number">3.</span> <span class="nav-text">Gray Coding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#binary-to-pam4-and-back-to-binary-example"><span class="nav-number">3.1.</span> <span class="nav-text">Binary to PAM4 and
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#why-pam4"><span class="nav-number">1.</span> <span class="nav-text">Why PAM4?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bandwidth"><span class="nav-number">2.</span> <span class="nav-text">Bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pam4-basic"><span class="nav-number">3.</span> <span class="nav-text">PAM4 Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#energy"><span class="nav-number">3.1.</span> <span class="nav-text">Energy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pam4-level-names"><span class="nav-number">3.2.</span> <span class="nav-text">PAM4 Level Names</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pam4-eye-linearity"><span class="nav-number">3.3.</span> <span class="nav-text">PAM4 Eye Linearity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transmitter-linearity-rlm"><span class="nav-number">3.4.</span> <span class="nav-text">Transmitter Linearity (RLM)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gray-coding"><span class="nav-number">4.</span> <span class="nav-text">Gray Coding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#binary-to-pam4-and-back-to-binary-example"><span class="nav-number">4.1.</span> <span class="nav-text">Binary to PAM4 and
 Back to Binary Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pam4-tx-equalization"><span class="nav-number"></span> <span class="nav-text">PAM4 TX equalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-serializer"><span class="nav-number">1.</span> <span class="nav-text">TX Serializer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mux-timing"><span class="nav-number">1.1.</span> <span class="nav-text">mux timing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#divider-latch-timing"><span class="nav-number">1.2.</span> <span class="nav-text">divider latch timing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#two-latches"><span class="nav-number">1.3.</span> <span class="nav-text">Two latches</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dac-based-ffe-in-pam4-transmitter"><span class="nav-number">2.</span> <span class="nav-text">DAC-based FFE in PAM4
 Transmitter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pi-coil"><span class="nav-number">2.1.</span> <span class="nav-text">\(\pi\)-coil</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
@@ -250,7 +252,7 @@ Transmitter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a 
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-08 05:54:30" itemprop="dateModified" datetime="2024-08-08T05:54:30+00:00">2024-08-08</time>
+      <time title="Modified: 2024-08-08 14:11:56" itemprop="dateModified" datetime="2024-08-08T14:11:56+00:00">2024-08-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,7 +273,12 @@ Transmitter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="bandwidth">Bandwidth</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="why-pam4">Why PAM4?</h2>
+<p><img src="/2022/07/20/pam4/image-20240808205451067.png"
+alt="image-20240808205451067" /></p>
+<p><img src="/2022/07/20/pam4/image-20240808205635598.png"
+alt="image-20240808205635598" /></p>
+<h2 id="bandwidth">Bandwidth</h2>
 <blockquote>
 <p>[How Interconnects Work: Bandwidth for Modeling and Measurements, <a
 target="_blank" rel="noopener" href="https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf">https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf</a>]</p>

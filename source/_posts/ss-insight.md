@@ -8,6 +8,22 @@ mathjax: true
 ---
 
 
+## group delay and phase delay 
+
+*TODO* &#128197;
+
+> **group delay** is also known **envelope delay**
+
+
+phase delay
+
+> If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency
+> components late in the step response. This causes *ringing*. 
+
+
+> Hollister, Allen L. *Wideband Amplifier Design*. Raleigh, NC: SciTech Pub., 2007.
+
+
 
 ## z-domain & sampled analysis
 
@@ -172,25 +188,6 @@ where we define $K_n(0) = K_n$
 [[Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
 
 
-
-## group delay
-
-*TODO* &#128197;
-
-> also known **envelope delay**
-
-
-
-## phase delay
-
-> If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency
-> components late in the step response. This causes *ringing*. 
-
-
-
-
-
-> Hollister, Allen L. *Wideband Amplifier Design*. Raleigh, NC: SciTech Pub., 2007.
 
 
 

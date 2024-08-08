@@ -49,14 +49,12 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 >
 > F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, doi: 10.1109/ISSCC.2010.5433823.
 
-
+![img202408080859](clocking/img202408080859.PNG)
 
 ![image-20240808001201612](clocking/image-20240808001201612.png)
 
 
-
 ![image-20240808001256515](clocking/image-20240808001256515.png)
-
 
 
 ![image-20240808001449664](clocking/image-20240808001449664.png)

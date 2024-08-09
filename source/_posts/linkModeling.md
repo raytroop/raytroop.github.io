@@ -42,8 +42,8 @@ e_n^2 &= (dLev - y_n)^2
 
 Transmitter and channel response:
 $$\begin{align}
-ytx_n &= \sum_{0}^{k}\omega_n^k\ast dtx_{n-k} \\
-y_n &= f_{ch}(ytx_n)
+y_{tx,n} &= \sum_{0}^{k}\omega_n^k\ast d_{tx,n-k} \\
+y_n &= f_{ch}(y_{tx,_n})
 \end{align}$$
 $ytx_n$ is output of transmitter at time n; $f_{ch}$ is channel response, for simplicity, scaling factor $\alpha$, ($\alpha > 0$) is enough.
 
@@ -121,11 +121,6 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 
 
-
-
-
-
-
 ## MLSE
 
 > maximum likelihood sequence estimation (MLSE)
@@ -138,7 +133,9 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 > [IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes Beyond 100 Gb/s [https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf](https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf)]
 >
-> 
+> M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A. Sheikholeslami, "Design and Implementation of an On-Demand Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of Circuits and Systems, vol. 3, pp. 97-108, 2022, doi: 10.1109/OJCAS.2022.3173686.
+>
+> Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing Architecture Using Viterbi Algorithm for ADC-Based Serial Link. Undergraduate Research Scholars Program. Available electronically from [[https://hdl.handle.net/1969.1/166485](https://hdl.handle.net/1969.1/166485)]
 
 
 
@@ -160,7 +157,7 @@ There are several variants of MLSD, including:
 
 
 
-## ADC Resolution Requirement
+## ADC Resolution
 
 *TODO* &#128197;
 
@@ -168,7 +165,7 @@ There are several variants of MLSD, including:
 
 
 
-## BER Calculation with Quantization Noise
+## BER with Quantization Noise
 
 ![image-20240804110522955](linkModeling/image-20240804110522955.png)
 
@@ -202,21 +199,8 @@ TX FFE suffers from the peak power constraint, which in effect attenuates the av
 *TODO* &#128197;
 
 
-### reference
 
-Sanders, Anthony, Michael Resso and John D'Ambrosia. "Channel Compliance Testing Utilizing Novel Statistical Eye Methodology." (2004).
-
-
-
-## Maximum-Likelihood Sequence Estimation
-
-*TODO* &#128197;
-
-### reference
-M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A. Sheikholeslami, "Design and Implementation of an On-Demand Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of Circuits and Systems, vol. 3, pp. 97-108, 2022, doi: 10.1109/OJCAS.2022.3173686.
-
-Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing Architecture Using Viterbi Algorithm for ADC-Based Serial Link. Undergraduate Research Scholars Program. Available electronically from [[https://hdl.handle.net/1969.1/166485](https://hdl.handle.net/1969.1/166485)]
-
+> Sanders, Anthony, Michael Resso and John D'Ambrosia. "Channel Compliance Testing Utilizing Novel Statistical Eye Methodology." (2004).
 
 
 

@@ -11,10 +11,14 @@ mathjax: true
 
 ## phase delay & group delay
 
+- Phase delay directly measures the device or system time delay of *individual sinusoidal frequency components* in the **steady state**.
+- In the ideal case the envelope delay is equal to the phase delay
+- envelope delay is a more sensitive measure of aberrations than phase delay
+
+
 ### phase delay
 
 ![image-20240808212730768](ss-insight/image-20240808212730768.png)
-
 
 
 > If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency
@@ -22,20 +26,11 @@ mathjax: true
 
 
 
-
-
 ### group delay
-
-> Envelope delay (also known as group delay) is not as intuitive, but it is easier to understand
-> mathematically
 
 ![image-20240808213806803](ss-insight/image-20240808213806803.png)
 
 
-
-> It is a more sensitive measure of aberrations than phase delay. If envelope delay is flat with increasing frequency, then the phase delay will also be. It is the envelope delay that is used as the prime measure to approximate a constant delay
->
-> *In the ideal case the envelope delay is equal to the phase delay*
 
 
 

@@ -35,7 +35,7 @@ mathjax: true
 
 > It is a more sensitive measure of aberrations than phase delay. If envelope delay is flat with increasing frequency, then the phase delay will also be. It is the envelope delay that is used as the prime measure to approximate a constant delay
 >
-> in the ideal case the envelope delay is equal to the phase delay
+> *In the ideal case the envelope delay is equal to the phase delay*
 
 
 

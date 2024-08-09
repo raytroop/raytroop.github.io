@@ -573,6 +573,14 @@ y(t) &= H(j\omega_0)\cdot \frac{1}{2}e^{j\omega_0 t} + H(-j\omega_0)\cdot \frac{
 \end{align}$$
 
 
+## baud rate
+
+**symbol rate**, **modulation rate** or **baud rate** is the number of symbol changes per unit of time.
+
+- Bit rate refers to the number of **bits** transmitted between two devices per unit of time
+- The baud or symbol rate refers to the number of **symbols** that can be sent in the same amount of time
+
+
 
 ## reference
 

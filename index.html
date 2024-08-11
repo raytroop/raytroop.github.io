@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,263 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/11/adapt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/11/adapt/" class="post-title-link" itemprop="url">Adaptation in Wireline</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-08-11 11:07:31 / Modified: 12:43:39" itemprop="dateCreated datePublished" datetime="2024-08-11T11:07:31+00:00">2024-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="least-mean-square-lms">Least-Mean-Square (LMS)</h2>
+<blockquote>
+<p>mean square error (MMSE)</p>
+</blockquote>
+<h3 id="sign-sign-lms-ss-lms">Sign-Sign LMS (SS-LMS)</h3>
+<blockquote>
+<p>T11: Basics of Equalization Techniques: Channels, Equalization, and
+Circuits, 2022 IEEE International Solid-State Circuits Conference</p>
+<p>V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link
+transceiver with adaptive equalization and data recovery," in IEEE
+Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012-1026, April
+2005, doi: 10.1109/JSSC.2004.842863.</p>
+<p>Jinhyung Lee, Design of High-Speed Receiver for Video Interface with
+Adaptive Equalization; Phd thesis, August 2019. <a
+target="_blank" rel="noopener" href="http://dcollection.snu.ac.kr/common/orgView/000000157003">thesis
+link</a></p>
+<p>Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical
+Implementation, 5th edition</p>
+</blockquote>
+<h3 id="dfe-h0-estimator">DFE h0 Estimator</h3>
+<p>summer output <span class="math display">\[
+r_k =
+a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=1}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
+\]</span> error slicer analog output <span class="math display">\[
+e_k=r_k-\hat{a}_k \hat{h}_0
+\]</span> error slicer digital output <span class="math display">\[
+\hat{e}_k=|e_k|
+\]</span> It's NOT possible to implement <span
+class="math inline">\(e_k\)</span>, which need to determine <span
+class="math inline">\(\hat{a}_k=|r_k|\)</span> in no time. One method to
+approach this problem is calculate <span
+class="math inline">\(e_k^{a_k=1}=r_k-\hat{a}_k \hat{h}_0\)</span> and
+<span class="math inline">\(e_k^{a_k=-1}=r_k+\hat{a}_k
+\hat{h}_0\)</span>, then select the right one based on <span
+class="math inline">\(\hat{a}_k\)</span></p>
+<p>The update equation based on Sign-Sign-Least Mean square (SS-LMS) and
+loss function <span
+class="math inline">\(L(\hat{h}_{\text{0~ntap}})=E(e_k^2)\)</span> <span
+class="math display">\[
+\hat{h}_n(k+1) = \hat{h}_n(k)+\mu \cdot |e_k|\cdot \hat{a}_{k-n}
+\]</span> Where <span class="math inline">\(n \in
+[0,...,\text{ntap}]\)</span>. This way, we can obtain <span
+class="math inline">\(\hat{h}_0\)</span>, <span
+class="math inline">\(\hat{h}_1\)</span>, <span
+class="math inline">\(\hat{h}_2\)</span>, ...</p>
+<blockquote>
+<p><span class="math inline">\(\hat{h}_0\)</span> is used in AFE
+adaptation</p>
+</blockquote>
+<p>We may encounter difficulty if the first tap of DFE is unrolled, its
+<span class="math inline">\(e_k\)</span> is modified as follow <span
+class="math display">\[
+r_k =
+a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=2}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
+\]</span> Where there is NO <span
+class="math inline">\(\hat{h}_1\)</span></p>
+<p>To find <span class="math inline">\(\hat{h}_1\)</span>, we shall use
+different pattern for even and odd error slicer</p>
+<h2 id="maximum-likelihood-sequence-estimation-mlse">Maximum Likelihood
+Sequence Estimation (MLSE)</h2>
+<p><img src="/2024/08/11/adapt/image-20240807233152154.png"
+alt="image-20240807233152154" /></p>
+<blockquote>
+<p>[IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes
+Beyond 100 Gb/s <a
+target="_blank" rel="noopener" href="https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf">https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf</a>]</p>
+<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
+Sheikholeslami, "Design and Implementation of an On-Demand
+Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
+Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
+10.1109/OJCAS.2022.3173686.</p>
+<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
+Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
+Undergraduate Research Scholars Program. Available electronically from
+[<a
+target="_blank" rel="noopener" href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a>]</p>
+</blockquote>
+<h2 id="maximum-likelihood-sequence-detection-mlsd">Maximum Likelihood
+Sequence Detection (MLSD)</h2>
+<p>There are several variants of MLSD, including:</p>
+<ul>
+<li>Viterbi Algorithm</li>
+<li>Decision Feedback Sequence Estimation (DFSE)</li>
+<li>Soft-Output MLSD</li>
+</ul>
+<blockquote>
+<p>[Evolution Of Equalization Techniques In High-Speed SerDes For
+Extended Reaches. <a
+target="_blank" rel="noopener" href="https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/">https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/</a>]</p>
+</blockquote>
+<h2 id="mueller-muller-a">Mueller-Muller A</h2>
+<table>
+<thead>
+<tr class="header">
+<th>pattern</th>
+<th>main cursor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0<strong>1</strong>1</td>
+<td><span class="math inline">\(s_{011}=-h_1+h_0+h_{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td>1<strong>1</strong>0</td>
+<td><span class="math inline">\(s_{110}=h_1+h_0-h_{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td>1<strong>0</strong>0</td>
+<td><span class="math inline">\(s_{100}=h_1-h_0-h_{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td>0<strong>0</strong>1</td>
+<td><span class="math inline">\(s_{001}=-h_1-h_0+h_{-1}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>During adapting, we make</p>
+<ul>
+<li>0<strong>1</strong>1 &amp; 1<strong>1</strong>0 are approaching to
+each other</li>
+<li>1<strong>0</strong>0 &amp; 0<strong>0</strong>1 are approaching to
+each other</li>
+</ul>
+<p>Then, <span class="math inline">\(h_{-1}\)</span> and <span
+class="math inline">\(h_1\)</span> are same, which is desired</p>
+<h2 id="mueller-muller-b">Mueller-Muller B</h2>
+<p>MMPD infers the channel response from baud-rate samples of the
+received data, the adaptation aligns the sampling clock such that
+pre-cursor is equal to the post-cursor in the <em>pulse
+response</em></p>
+<p><img src="/2024/08/11/adapt/image-20240807230029591.png"
+alt="image-20240807230029591" /></p>
+<blockquote>
+<p>Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [<a
+target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf">https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf</a>]</p>
+<p>Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS"
+[<a
+target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf">https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf</a>]</p>
+<p>Eduardo Fuentetaja. "Analysis of the M&amp;M Clock Recovery
+Algorithm" [<a
+target="_blank" rel="noopener" href="https://edfuentetaja.github.io/sdr/m_m_analysis/">https://edfuentetaja.github.io/sdr/m_m_analysis/</a>]</p>
+<p>Liu T, Li T, Lv F, Liang B, Zheng X, Wang H, Wu M, Lu D, Zhao F.
+Analysis and Modeling of Mueller–Muller Clock and Data Recovery
+Circuits. <em>Electronics</em>. 2021; 10(16):1888.</p>
+<p>Youzhi Gu . Analysis of Mueller-Muller Clock and Data Recovery
+Circuits with a Linearized Model</p>
+<p>Baud-Rate CDRs [<a
+target="_blank" rel="noopener" href="https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf</a>]</p>
+<p>F. Spagna <em>et al</em>., "A 78mW 11.8Gb/s serial link transceiver
+with adaptive RX equalization and baud-rate CDR in 32nm CMOS," <em>2010
+IEEE International Solid-State Circuits Conference - (ISSCC)</em>, San
+Francisco, CA, USA, 2010, pp. 366-367, doi:
+10.1109/ISSCC.2010.5433823.</p>
+</blockquote>
+<p><img src="/2024/08/11/adapt/image-20240810095006113.png"
+alt="image-20240810095006113" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001201612.png"
+alt="image-20240808001201612" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001256515.png"
+alt="image-20240808001256515" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001449664.png"
+alt="image-20240808001449664" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001501485.png"
+alt="image-20240808001501485" /></p>
+<h2 id="sign-sign-mueller-muller-cdr">Sign-Sign Mueller-Muller CDR</h2>
+<p><img src="/2024/08/11/adapt/image-20240807232814202.png"
+alt="image-20240807232814202" /></p>
+<h2 id="reference">reference</h2>
+<p>Stojanovic, Vladimir &amp; Ho, A. &amp; Garlepp, B. &amp; Chen, Fred
+&amp; Wei, J. &amp; Alon, Elad &amp; Werner, C. &amp; Zerbe, J. &amp;
+Horowitz, M.A.. (2004). Adaptive equalization and data recovery in a
+dual-mode (PAM2/4) serial link transceiver. IEEE Symposium on VLSI
+Circuits, Digest of Technical Papers. 348 - 351.
+10.1109/VLSIC.2004.1346611.</p>
+<p>A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design
+Optimization for Wireline SerDes Applications," in <em>IEEE Transactions
+on Circuits and Systems I: Regular Papers</em>, doi:
+10.1109/TCSI.2023.3328807.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +483,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -483,7 +740,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">http
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -979,7 +1236,7 @@ pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1124,7 +1381,7 @@ alt="image-20240725204527121" /> <span class="math display">\[
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1215,7 +1472,7 @@ target="_blank" rel="noopener" href="https://www.analog.com/en/resources/technic
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1438,7 +1695,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1717,7 +1974,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1826,7 +2083,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1848,158 +2105,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="impulse-response-or-pulse-response">Impulse Response or Pulse
-Response</h2>
-<p><img src="/2024/05/15/linkModeling/image-20240807221637401.png"
-alt="image-20240807221637401" /></p>
-<p><img src="/2024/05/15/linkModeling/image-20240807224407213.png"
-alt="image-20240807224407213" /><img
-src="/2024/05/15/linkModeling/image-20240807224505987.png"
-alt="image-20240807224505987" /></p>
-<h2 id="sign-sign-lms">Sign-Sign LMS</h2>
-<h3 id="adaptive-equalizing-link-architecture">Adaptive equalizing link
-architecture</h3>
-<p><img src="/2024/05/15/linkModeling/image-20220302213259394.png"
-alt="image-20220302213259394" /></p>
-<p>dLev: desired signal level</p>
-<p>y<sub>n</sub>: received signal at time n</p>
-<p>er<sub>n</sub>: the error slicer sample, i.e. sign(dLev -
-y<sub>n</sub>)</p>
-<p>d<sub>n-k</sub>: the data slicer sample at time n-k</p>
-<h3 id="least-mean-square-algorithm-lms">Least Mean Square Algorithm
-(LMS)</h3>
-<p>Loss function or cost function: <span
-class="math display">\[\begin{align}
-e_n^2 &amp;= (dLev - y_n)^2
-\end{align}\]</span></p>
-<p>Transmitter and channel response: <span
-class="math display">\[\begin{align}
-y_{tx,n} &amp;= \sum_{0}^{k}\omega_n^k\ast d_{tx,n-k} \\
-y_n &amp;= f_{ch}(y_{tx,_n})
-\end{align}\]</span> <span class="math inline">\(ytx_n\)</span> is
-output of transmitter at time n; <span
-class="math inline">\(f_{ch}\)</span> is channel response, for
-simplicity, scaling factor <span class="math inline">\(\alpha\)</span>,
-(<span class="math inline">\(\alpha &gt; 0\)</span>) is enough.</p>
-<p>Update function (i.e. Gradient descent): <span
-class="math display">\[\begin{align}
-\omega_{n+1}^k = \omega_{n}^k - \frac{\eta}{2}\ast\frac{\partial
-e_n^2}{\partial \omega_{n}^k} \\
-\omega_{n+1}^k = \omega_{n}^k + \eta \ast e_n \ast\frac{\partial
-y_n}{\partial \omega_{n}^k}
-\end{align}\]</span> <span class="math inline">\(\eta\)</span> is
-learning rate or the rate of update, which is greater than zero.</p>
-<h3 id="sign-sign-lms-sslms">Sign-Sign LMS (SSLMS)</h3>
-<p><strong>Why Sign-Sign LMS</strong></p>
-<p>$ (dLev - y_n)$ and <span class="math inline">\(\frac{\partial
-y_n}{\partial \omega_{n}^k}\)</span> is hard to get in circuit, where
-the actual analog value should be obtained.</p>
-<p><img src="/2024/05/15/linkModeling/image-20220302231044136.png"
-alt="image-20220302231044136" /></p>
-<p>In <strong>SSLMS algorithm</strong>, only the polarities of samples
-are used since it is easy to detect by simple comparators. Moreover,
-recovered data by hard decision is employed instead of <span
-class="math inline">\(y_n\)</span> for more simplicity.</p>
-<p>The update function can be written as,</p>
-<p><span class="math display">\[\begin{align}
-\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(e_n) \ast
-Sign(\frac{\partial y_n}{\partial \omega_{n}^k}) \\
-\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(e_n) \ast \alpha
-\ast Sign(\frac{\partial ytx_n}{\partial \omega_{n}^k}) \\
-\omega_{n+1}^k &amp;= \omega_{n}^k + \eta \ast Sign(er_n) \ast
-Sign(d_{n-k})
-\end{align}\]</span></p>
-<p>SSLMS algorithm useful for DFE adaptation.</p>
-<blockquote>
-<p>T11: Basics of Equalization Techniques: Channels, Equalization, and
-Circuits, 2022 IEEE International Solid-State Circuits Conference</p>
-<p>V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link
-transceiver with adaptive equalization and data recovery," in IEEE
-Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012-1026, April
-2005, doi: 10.1109/JSSC.2004.842863.</p>
-<p>Jinhyung Lee, Design of High-Speed Receiver for Video Interface with
-Adaptive Equalization; Phd thesis, August 2019. <a
-target="_blank" rel="noopener" href="http://dcollection.snu.ac.kr/common/orgView/000000157003">thesis
-link</a></p>
-<p>Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical
-Implementation, 5th edition</p>
-</blockquote>
-<h3 id="dfe-h0-estimator">DFE h0 Estimator</h3>
-<p>summer output <span class="math display">\[
-r_k =
-a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=1}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
-\]</span> error slicer analog output <span class="math display">\[
-e_k=r_k-\hat{a}_k \hat{h}_0
-\]</span> error slicer digital output <span class="math display">\[
-\hat{e}_k=|e_k|
-\]</span> It's NOT possible to implement <span
-class="math inline">\(e_k\)</span>, which need to determine <span
-class="math inline">\(\hat{a}_k=|r_k|\)</span> in no time. One method to
-approach this problem is calculate <span
-class="math inline">\(e_k^{a_k=1}=r_k-\hat{a}_k \hat{h}_0\)</span> and
-<span class="math inline">\(e_k^{a_k=-1}=r_k+\hat{a}_k
-\hat{h}_0\)</span>, then select the right one based on <span
-class="math inline">\(\hat{a}_k\)</span>.</p>
-<p>The update equation based on Sign-Sign-Least Mean square (SS-LMS) and
-loss function <span
-class="math inline">\(L(\hat{h}_{\text{0~ntap}})=E(e_k^2)\)</span> <span
-class="math display">\[
-\hat{h}_n(k+1) = \hat{h}_n(k)+\mu \cdot |e_k|\cdot \hat{a}_{k-n}
-\]</span> Where <span class="math inline">\(n \in
-[0,...,\text{ntap}]\)</span>. This way, we can obtain <span
-class="math inline">\(\hat{h}_0\)</span>, <span
-class="math inline">\(\hat{h}_1\)</span>, <span
-class="math inline">\(\hat{h}_2\)</span>, ...</p>
-<blockquote>
-<p><span class="math inline">\(\hat{h}_0\)</span> is used in AFE
-adaptation</p>
-</blockquote>
-<p>We may encounter difficulty if the first tap of DFE is unrolled, its
-<span class="math inline">\(e_k\)</span> is modified as follow <span
-class="math display">\[
-r_k =
-a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=2}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
-\]</span> Where there is NO <span
-class="math inline">\(\hat{h}_1\)</span></p>
-<p>To find <span class="math inline">\(\hat{h}_1\)</span>, we shall use
-different pattern for even and odd error slicer</p>
-<h2 id="mlse">MLSE</h2>
-<blockquote>
-<p>maximum likelihood sequence estimation (MLSE)</p>
-</blockquote>
-<p><img src="/2024/05/15/linkModeling/image-20240807233152154.png"
-alt="image-20240807233152154" /></p>
-<blockquote>
-<p>[IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes
-Beyond 100 Gb/s <a
-target="_blank" rel="noopener" href="https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf">https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf</a>]</p>
-<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
-Sheikholeslami, "Design and Implementation of an On-Demand
-Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
-Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
-10.1109/OJCAS.2022.3173686.</p>
-<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
-Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
-Undergraduate Research Scholars Program. Available electronically from
-[<a
-target="_blank" rel="noopener" href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a>]</p>
-</blockquote>
-<h2 id="mlsd">MLSD</h2>
-<blockquote>
-<p>Maximum Likelihood Sequence Detection (MLSD)</p>
-</blockquote>
-<p>There are several variants of MLSD, including:</p>
-<ul>
-<li>Viterbi Algorithm</li>
-<li>Decision Feedback Sequence Estimation (DFSE)</li>
-<li>Soft-Output MLSD</li>
-</ul>
-<blockquote>
-<p>[Evolution Of Equalization Techniques In High-Speed SerDes For
-Extended Reaches. <a
-target="_blank" rel="noopener" href="https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/">https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/</a>]</p>
-</blockquote>
-<h2 id="adc-resolution">ADC Resolution</h2>
+          <h2 id="adc-resolution">ADC Resolution</h2>
 <p><em>TODO</em> 📅</p>
 <h2 id="ber-with-quantization-noise">BER with Quantization Noise</h2>
 <p><img src="/2024/05/15/linkModeling/image-20240804110522955.png"
@@ -2011,6 +2117,14 @@ alt="image-20240804110522955" /></p>
 src="/2024/05/15/linkModeling/image-20240804110235178.png"
 alt="image-20240804110235178" /></p>
 </blockquote>
+<h2 id="impulse-response-or-pulse-response">Impulse Response or Pulse
+Response</h2>
+<p><img src="/2024/05/15/linkModeling/image-20240807221637401.png"
+alt="image-20240807221637401" /></p>
+<p><img src="/2024/05/15/linkModeling/image-20240807224407213.png"
+alt="image-20240807224407213" /><img
+src="/2024/05/15/linkModeling/image-20240807224505987.png"
+alt="image-20240807224505987" /></p>
 <h2 id="tx-ffe">TX FFE</h2>
 <p>TX FFE suffers from the peak power constraint, which in effect
 attenuates the average power of the outgoing signal - the low-frequency
@@ -2113,7 +2227,7 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
+      <time title="Modified: 2024-08-11 12:43:39" itemprop="dateModified" datetime="2024-08-11T12:43:39+00:00">2024-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2135,93 +2249,13 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="mueller-muller-a">Mueller-Muller A</h2>
-<table>
-<thead>
-<tr class="header">
-<th>pattern</th>
-<th>main cursor</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0<strong>1</strong>1</td>
-<td><span class="math inline">\(s_{011}=-h_1+h_0+h_{-1}\)</span></td>
-</tr>
-<tr class="even">
-<td>1<strong>1</strong>0</td>
-<td><span class="math inline">\(s_{110}=h_1+h_0-h_{-1}\)</span></td>
-</tr>
-<tr class="odd">
-<td>1<strong>0</strong>0</td>
-<td><span class="math inline">\(s_{100}=h_1-h_0-h_{-1}\)</span></td>
-</tr>
-<tr class="even">
-<td>0<strong>0</strong>1</td>
-<td><span class="math inline">\(s_{001}=-h_1-h_0+h_{-1}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>During adapting, we make</p>
-<ul>
-<li>0<strong>1</strong>1 &amp; 1<strong>1</strong>0 are approaching to
-each other</li>
-<li>1<strong>0</strong>0 &amp; 0<strong>0</strong>1 are approaching to
-each other</li>
-</ul>
-<p>Then, <span class="math inline">\(h_{-1}\)</span> and <span
-class="math inline">\(h_1\)</span> are same, which is desired</p>
-<h2 id="mueller-muller-b">Mueller-Muller B</h2>
-<p>MMPD infers the channel response from baud-rate samples of the
-received data, the adaptation aligns the sampling clock such that
-pre-cursor is equal to the post-cursor in the <em>pulse
-response</em></p>
-<p><img src="/2024/05/11/clocking/image-20240807230029591.png"
-alt="image-20240807230029591" /></p>
-<blockquote>
-<p>Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [<a
-target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf">https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf</a>]</p>
-<p>Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS"
-[<a
-target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf">https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf</a>]</p>
-<p>Eduardo Fuentetaja. "Analysis of the M&amp;M Clock Recovery
-Algorithm" [<a
-target="_blank" rel="noopener" href="https://edfuentetaja.github.io/sdr/m_m_analysis/">https://edfuentetaja.github.io/sdr/m_m_analysis/</a>]</p>
-<p>Liu T, Li T, Lv F, Liang B, Zheng X, Wang H, Wu M, Lu D, Zhao F.
-Analysis and Modeling of Mueller–Muller Clock and Data Recovery
-Circuits. <em>Electronics</em>. 2021; 10(16):1888.</p>
-<p>Youzhi Gu . Analysis of Mueller-Muller Clock and Data Recovery
-Circuits with a Linearized Model</p>
-<p>Baud-Rate CDRs [<a
-target="_blank" rel="noopener" href="https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf</a>]</p>
-<p>F. Spagna <em>et al</em>., "A 78mW 11.8Gb/s serial link transceiver
-with adaptive RX equalization and baud-rate CDR in 32nm CMOS," <em>2010
-IEEE International Solid-State Circuits Conference - (ISSCC)</em>, San
-Francisco, CA, USA, 2010, pp. 366-367, doi:
-10.1109/ISSCC.2010.5433823.</p>
-</blockquote>
-<p><img src="/2024/05/11/clocking/img202408080859.PNG"
-alt="img202408080859" /></p>
-<p><img src="/2024/05/11/clocking/image-20240808001201612.png"
-alt="image-20240808001201612" /></p>
-<p><img src="/2024/05/11/clocking/image-20240808001256515.png"
-alt="image-20240808001256515" /></p>
-<p><img src="/2024/05/11/clocking/image-20240808001449664.png"
-alt="image-20240808001449664" /></p>
-<p><img src="/2024/05/11/clocking/image-20240808001501485.png"
-alt="image-20240808001501485" /></p>
-<h2 id="sign-sign-mueller-müller-cdr">Sign-Sign Mueller-Müller CDR</h2>
-<p><img src="/2024/05/11/clocking/image-20240807232814202.png"
-alt="image-20240807232814202" /></p>
-<h2 id="false-locking">False locking</h2>
+          <h2 id="false-locking">False locking</h2>
 <p><em>TODO</em> 📅</p>
 <ul>
 <li>divider failure</li>
 <li>even-stage ring oscillator ( multipath ring oscillators)</li>
 <li>DLL: harmonic locking, stuck locking</li>
 </ul>
-<h2 id="prescaler">Prescaler</h2>
-<p><em>TODO</em> 📅</p>
 <h2 id="different-frequency-clock-impact-on-edge">different frequency
 clock impact on edge</h2>
 <p><img src="/2024/05/11/clocking/clock2clock.drawio.svg"
@@ -2273,13 +2307,24 @@ Solid-State Circuits, vol. 41, no. 8, pp. 1867-1875, Aug. 2006</p>
 <p>The <em>closed-loop −3-dB bandwidth</em> is sometimes called the
 <strong>“loop bandwidth”</strong></p>
 </blockquote>
-<h2 id="limitations-of-continuous-time-approximation">Limitations of
-Continuous-Time Approximation</h2>
+<h2 id="continuous-time-approximation-limitations">Continuous-Time
+Approximation Limitations</h2>
 <p>A rule of thumb often used to ensure slow changes in the loop is to
 select the <em>loop bandwidth</em> approximately equal to
 <strong>one-tenth</strong> of the <em>input frequency</em>.</p>
 <p><img src="/2024/05/11/clocking/image-20240806230158367.png"
 alt="image-20240806230158367" /></p>
+<blockquote>
+<p>Gardner, F.M. (1980). Charge-Pump Phase-Lock Loops. <em>IEEE Trans.
+Commun., 28</em>, 1849-1858.</p>
+<p>Homayoun, Aliakbar and Behzad Razavi. “On the Stability of
+Charge-Pump Phase-Locked Loops.” <em>IEEE Transactions on Circuits and
+Systems I: Regular Papers</em> 63 (2016): 741-750.</p>
+<p>N. Kuznetsov, A. Matveev, M. Yuldashev and R. Yuldashev, "Nonlinear
+Analysis of Charge-Pump Phase-Locked Loop: The Hold-In and Pull-In
+Ranges," in <em>IEEE Transactions on Circuits and Systems I: Regular
+Papers</em>, vol. 68, no. 10, pp. 4049-4061, Oct. 2021</p>
+</blockquote>
 <h2 id="clock-distribution">clock distribution</h2>
 <blockquote>
 <p>X. Mo, J. Wu, N. Wary and T. C. Carusone, "Design Methodologies for
@@ -2457,595 +2502,6 @@ damping factor = 0.7)}
 <p>[How can I experimentally find the bandwidth of my PLL?, <a
 target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/73654/59253">https://dsp.stackexchange.com/a/73654/59253</a>]</p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/02/ss-insight/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/02/ss-insight/" class="post-title-link" itemprop="url">Signal and System insight</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-05-02 23:04:55" itemprop="dateCreated datePublished" datetime="2024-05-02T23:04:55+00:00">2024-05-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-09 10:43:52" itemprop="dateModified" datetime="2024-08-09T10:43:52+00:00">2024-08-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="phase-delay-group-delay">phase delay &amp; group delay</h2>
-<ul>
-<li>Phase delay directly measures the device or system time delay of
-<em>individual sinusoidal frequency components</em> in the
-<strong>steady state</strong>.</li>
-<li>In the ideal case the envelope delay is equal to the phase
-delay</li>
-<li>envelope delay is a more sensitive measure of aberrations than phase
-delay</li>
-</ul>
-<h3 id="phase-delay">phase delay</h3>
-<p><img src="/2024/05/02/ss-insight/image-20240808212730768.png"
-alt="image-20240808212730768" /></p>
-<blockquote>
-<p>If the phase delay peaks (exceeds the low-frequency value) you can
-expect to see high-frequency components late in the step response. This
-causes <strong><em>ringing</em></strong>.</p>
-</blockquote>
-<h3 id="group-delay">group delay</h3>
-<p><img src="/2024/05/02/ss-insight/image-20240808213806803.png"
-alt="image-20240808213806803" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20240808220657443.png"
-alt="image-20240808220657443" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20240808220740349.png"
-alt="image-20240808220740349" /></p>
-<hr />
-<blockquote>
-<p>Hollister, Allen L. <em>Wideband Amplifier Design</em>. Raleigh, NC:
-SciTech Pub., 2007.</p>
-<p>Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data
-Transmission and Testing. [<a
-target="_blank" rel="noopener" href="https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf">https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf</a>]</p>
-<p>[Pupalaikis et al., “Eye Patterns in Scopes”, DesignCon, Santa Clara
-CA, 2005<a
-target="_blank" rel="noopener" href="https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf">https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf</a>]</p>
-<p>Starič, P. &amp; Margan, E.. (2006). Wideband Amplifiers.
-10.1007/978-0-387-28341-8.</p>
-<p>Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals
-&amp; systems (2nd ed.). Prentice-Hall, Inc., USA.</p>
-</blockquote>
-<h2 id="z-domain-sampled-analysis">z-domain &amp; sampled analysis</h2>
-<p><em>TODO</em> 📅</p>
-<p>A sampled system almost always has more stability problems than arise
-in continuous-time systems.</p>
-<ul>
-<li>In particular, an analog, second-order PLL is unconditionally stable
-for any value of loop gain</li>
-<li>but the sampled equivalent will go unstable if the gain is made too
-large</li>
-</ul>
-<blockquote>
-<p>F. Gardner, "Charge-Pump Phase-Lock Loops," in <em>IEEE Transactions
-on Communications</em>, vol. 28, no. 11, pp. 1849-1858, November 1980,
-doi: 10.1109/TCOM.1980.1094619</p>
-</blockquote>
-<h2 id="feedback-rearrange">Feedback Rearrange</h2>
-<p><img src="/2024/05/02/ss-insight/loop-refactor.drawio.svg"
-alt="loop-refactor.drawio" /></p>
-<p>The closed loop transfer function of <span
-class="math inline">\(Y/X\)</span> and <span
-class="math inline">\(Y_1/X_1\)</span> are almost same, except sign</p>
-<p><span class="math display">\[\begin{align}
-\frac{Y}{X} &amp;= +\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)} \\
-\frac{Y_1}{X_1} &amp;= -\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
-\end{align}\]</span></p>
-<p><img src="/2024/05/02/ss-insight/loop-refactor-partion.drawio.svg"
-alt="loop-refactor-partion.drawio" /></p>
-<p>define <span class="math inline">\(-Y_1=Y_n\)</span>, then <span
-class="math display">\[
-\frac{Y_n}{X_1} = \frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
-\]</span> <img
-src="/2024/05/02/ss-insight/loop-refactor-partion-general.drawio.svg"
-alt="loop-refactor-partion-general.drawio" /></p>
-<blockquote>
-<p><img src="/2024/05/02/ss-insight/image-20240805231921946.png"
-alt="image-20240805231921946" /></p>
-<p>Saurabh Saxena, IIT Madras. Clocking for Serial Links - Frequency and
-Jitter Requirements, Phase-Locked Loops, Clock and Data Recovery</p>
-</blockquote>
-<h2 id="convolution-of-probability-distributions">Convolution of
-probability distributions</h2>
-<p>The probability distribution of the <em>sum of two or more
-<strong>independent</strong> random variables</em> is the
-<strong>convolution</strong> of their individual distributions.</p>
-<p><img src="/2024/05/02/ss-insight/image-20240804104528903.png"
-alt="image-20240804104528903" /></p>
-<h2 id="thermal-noise">Thermal noise</h2>
-<p>Thermal noise in an ideal resistor is approximately
-<strong>white</strong>, meaning that its power spectral density is
-nearly <strong>constant</strong> throughout the frequency spectrum.</p>
-<p>When limited to a <em>finite bandwidth</em> and viewed in the time
-domain, thermal noise has a nearly <strong>Gaussian amplitude
-distribution</strong></p>
-<blockquote>
-<p><img src="/2024/05/02/ss-insight/image-20240804102454281.png"
-alt="image-20240804102454281" /></p>
-</blockquote>
-<h2 id="barkhausen-criteria">Barkhausen criteria</h2>
-<p>Barkhausen criteria are <em>necessary</em> but <strong>not sufficient
-conditions</strong> for sustainable <strong>oscillations</strong></p>
-<p><img src="/2024/05/02/ss-insight/image-20240720090654883.png"
-alt="image-20240720090654883" /></p>
-<p>it simply <em>"latches up"</em> rather than oscillates</p>
-<h2 id="nrz-bandwidth">NRZ Bandwidth</h2>
-<p><img src="/2024/05/02/ss-insight/image-20240607221359970.png"
-alt="image-20240607221359970" /></p>
-<blockquote>
-<p>Maxim Integrated,NRZ Bandwidth - HF Cutoff vs. SNR [<a
-target="_blank" rel="noopener" href="https://pdfserv.maximintegrated.com/en/an/AN870.pdf">https://pdfserv.maximintegrated.com/en/an/AN870.pdf</a>]</p>
-</blockquote>
-<h2 id="t_r"><span class="math inline">\(0.35/T_r\)</span></h2>
-<p><img src="/2024/05/02/ss-insight/image-20240607222440796.png"
-alt="image-20240607222440796" /></p>
-<h2 id="t_r-1"><span class="math inline">\(0.5/T_r\)</span></h2>
-<p><em>TODO</em> 📅</p>
-<h2 id="system-type">System Type</h2>
-<blockquote>
-<p>Control of Steady-State Error to Polynomial Inputs: System Type</p>
-</blockquote>
-<p><img src="/2024/05/02/ss-insight/image-20240502232125317.png"
-alt="image-20240502232125317" /></p>
-<p>control systems are assigned a <strong>type</strong> number according
-to the maximum degree of the input polynominal for which the
-steady-state error is a <em>finite constant</em>. i.e.</p>
-<blockquote>
-<ul>
-<li>Type 0: Finite error to a step (position error)</li>
-<li>Type 1: Finite error to a ramp (velocity error)</li>
-<li>Type 2: Finite error to a parabola (acceleration error)</li>
-</ul>
-</blockquote>
-<p>The open-loop transfer function can be expressed as <span
-class="math display">\[
-T(s) = \frac{K_n(s)}{s^n}
-\]</span></p>
-<p>where we collect all the terms except the pole (<span
-class="math inline">\(s\)</span>) at eh origin into <span
-class="math inline">\(K_n(s)\)</span>,</p>
-<p>The polynomial inputs, <span
-class="math inline">\(r(t)=\frac{t^k}{k!} u(t)\)</span>, whose transform
-is <span class="math display">\[
-R(s) = \frac{1}{s^{k+1}}
-\]</span></p>
-<p>Then the equation for the error is simply <span
-class="math display">\[
-E(s) = \frac{1}{1+T(s)}R(s)
-\]</span></p>
-<p>Application of the <em>Final Value Theorem</em> to the error formula
-gives the result</p>
-<p><span class="math display">\[\begin{align}
-\lim _{t\to \infty} e(t) &amp;= e_{ss} = \lim _{s\to 0} sE(s) \\
-&amp;= \lim _{s\to 0} s\frac{1}{1+\frac{K_n(s)}{s^n}}\frac{1}{s^{k+1}}
-\\
-&amp;= \lim _{s\to 0} \frac{s^n}{s^n + K_n}\frac{1}{s^k}
-\end{align}\]</span></p>
-<ul>
-<li>if <span class="math inline">\(n &gt; k\)</span>, <span
-class="math inline">\(e=0\)</span></li>
-<li>if <span class="math inline">\(n &lt; k\)</span>, <span
-class="math inline">\(e\to \infty\)</span></li>
-<li>if <span class="math inline">\(n=k\)</span>
-<ul>
-<li><span class="math inline">\(e_{ss} = \frac{1}{1+K_n}\)</span> if
-<span class="math inline">\(n=k=0\)</span></li>
-<li><span class="math inline">\(e_{ss} = \frac{1}{K_n}\)</span> if <span
-class="math inline">\(n=k \neq 0\)</span>​</li>
-</ul></li>
-</ul>
-<p>where we define <span class="math inline">\(K_n(0) = K_n\)</span></p>
-<h2 id="pid">PID</h2>
-<p><em>TODO</em> 📅</p>
-<ul>
-<li>a Proportional term to close the feedback loop</li>
-<li>an Integral term to assure zero error to constant reference and
-disturbance inputs</li>
-<li>a Derivative term to improve (or realize!) stability and good
-dynamic response</li>
-</ul>
-<h2 id="nyquists-stability-criterion">Nyquist’s Stability Criterion</h2>
-<p><em>TODO</em> 📅</p>
-<p>[<a
-target="_blank" rel="noopener" href="https://www.cppsim.com/CommCircuitLectures/lec15.pdf">Michael H.
-Perrott, High Speed Communication Circuits and Systems, Lecture 15
-Integer-N Frequency Synthesizers</a>]</p>
-<h2 id="conversion-between-the-s--and-z-domains">Conversion Between the
-<span class="math inline">\(s\)</span>- and <span
-class="math inline">\(z\)</span>-Domains</h2>
-<p><img src="/2024/05/02/ss-insight/image-20240429220303281.png"
-alt="image-20240429220303281" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20240429215455332.png"
-alt="image-20240429215455332" /></p>
-<blockquote>
-<p>Staszewski, Robert Bogdan, and Poras T. Balsara. All-digital
-frequency synthesizer in deep-submicron CMOS. John Wiley &amp; Sons,
-2006.</p>
-</blockquote>
-<h2 id="spectral-content-of-nrz">Spectral content of NRZ</h2>
-<p><img src="/2024/05/02/ss-insight/image-20231111100420675.png"
-alt="image-20231111100420675" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20231111101322771.png"
-alt="image-20231111101322771" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20231110224237933.png"
-alt="image-20231110224237933" /></p>
-<blockquote>
-<p>Lecture 26 Autocorrelation Functions of Random Binary Processes [<a
-target="_blank" rel="noopener" href="https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf">https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf</a>]</p>
-<p>Lecture 32 Correlation Functions &amp; Power Density Spectrum,
-Cross-spectral Density [<a
-target="_blank" rel="noopener" href="https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf">https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf</a>]</p>
-</blockquote>
-<h2 id="sinusoidal-steady-state-and-frequency-response">sinusoidal
-steady-state and frequency response</h2>
-<p><img src="/2024/05/02/ss-insight/image-20231104104933781.png"
-alt="image-20231104104933781" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20231104104946203.png"
-alt="image-20231104104946203" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20231104105056345.png"
-alt="image-20231104105056345" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20231104105139814.png"
-alt="image-20231104105139814" /></p>
-<p><img src="/2024/05/02/ss-insight/image-20231104105223549.png"
-alt="image-20231104105223549" /></p>
-<p>Due to KCL and <span class="math inline">\(u(t)=e^{j\omega
-t}\)</span> and <span class="math inline">\(y(t)=H(j\omega)e^{j\omega
-t}\)</span>, we have ODE:</p>
-<p><span class="math display">\[\begin{align}
-\frac{u(t) - y(t)}{R} = C \frac{dy(t)}{dt} \\
-e^{j\omega t} - H(j\omega) e^{j\omega t} = H(j\omega)\cdot j\omega
-e^{j\omega t} \\
-\end{align}\]</span></p>
-<p><span class="math inline">\(H(j\omega)\)</span> is obtained as below
-<span class="math display">\[
-H(j\omega) = \frac{1}{1+j\omega}
-\]</span></p>
-<p><img src="/2024/05/02/ss-insight/image-20231104135855739.png"
-alt="image-20231104135855739" /></p>
-<h2 id="initial-value-theorem-final-value-theorem">Initial Value Theorem
-&amp; Final Value Theorem</h2>
-<p>Two valuable <em>Laplace transform</em> theorem</p>
-<ul>
-<li><p>Initial Value Theorem, which states that it is always possible to
-determine the <strong>initial value</strong> of the time function <span
-class="math inline">\(f(t)\)</span> from its Laplace transform <span
-class="math display">\[
-\lim _{s\to \infty}sF(s) = f(0^+)
-\]</span></p></li>
-<li><p>Final Value Theorem allows us to compute the <strong>constant
-steady-state value</strong> of a time function given its Laplace
-transform <span class="math display">\[
-\lim _{s\to 0}sF(s) = f(\infty)
-\]</span></p>
-<blockquote>
-<p>If <span class="math inline">\(f(t)\)</span> is step response, then
-<span class="math inline">\(f(0^+) = H(\infty)\)</span> and <span
-class="math inline">\(f(\infty) = H(0)\)</span>, where <span
-class="math inline">\(H(s)\)</span> is transfer function</p>
-</blockquote></li>
-</ul>
-<h2 id="butterworth-filter">Butterworth filter</h2>
-<blockquote>
-<p>function varargout = butter(n, Wn, varargin)</p>
-<p>% BUTTER Butterworth digital and analog filter design.</p>
-<p>% [B,A] = BUTTER(N,Wn) designs an Nth order lowpass digital</p>
-<p>% Butterworth filter and returns the filter coefficients in
-length</p>
-<p>% N+1 vectors B (numerator) and A (denominator). The coefficients</p>
-<p>% are listed in descending powers of z. The cutoff frequency</p>
-<p>% Wn must be <strong>0.0 &lt; Wn &lt; 1.0</strong>, with 1.0
-corresponding to</p>
-<p>% half the sample rate.</p>
-</blockquote>
-<p><span class="math display">\[
-w_n = \frac{f_c}{0.5f_s}
-\]</span></p>
-<p>where <span class="math inline">\(f_c\)</span> is cutoff frequency,
-<span class="math inline">\(f_s\)</span> is sampling frequency</p>
-<p><span class="math display">\[
-\Phi = \omega T_s \text { ,}\Phi \in [0,2\pi]
-\]</span></p>
-<p>Find the relationship between <span
-class="math inline">\(\omega_n\)</span> and </p>
-<p><span class="math display">\[\begin{align}
-\Phi &amp;= 2\pi f_c \frac{1}{f_s}  \\
-&amp;=\pi \frac{f_c}{0.5f_s} \\
-&amp;= \pi \omega _n
-\end{align}\]</span></p>
-<p>Given <span class="math inline">\(f_c\)</span> is 300 Hz and <span
-class="math inline">\(f_s\)</span> is 1000 Hz, we get <span
-class="math display">\[
-\omega_n = \frac{f_c}{0.5*f_s} = 0.6
-\]</span> and in <code>rad/sample</code> unit, cutoff frequency is <span
-class="math display">\[
-\Phi = \pi * \omega_n = 0.6 \pi \text {, unit: rad/sample}
-\]</span></p>
-<h3 id="z-transform">Z-transform</h3>
-<p><span class="math display">\[
-z= e^{-j\Phi}
-\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fc = <span class="number">300</span>;</span><br><span class="line">fs = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">[b,a] = butter(<span class="number">6</span>,fc/(fs/<span class="number">2</span>));</span><br><span class="line">fprintf(<span class="string">&#x27;The numerator b is:\n &#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;%g &#x27;</span>, b);</span><br><span class="line">fprintf(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;The denominator a is:\n &#x27;</span>);</span><br><span class="line">fprintf(<span class="string">&#x27;%g &#x27;</span>, a);</span><br><span class="line">fprintf(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">freqz(b, a);</span><br><span class="line">ylim([<span class="number">-400</span>, <span class="number">100</span>])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>The numerator (<code>b</code>) and denominator (<code>a</code>)
-depend on the cutoff frequency and the order; the cutoff frequency is
-denominated with <span class="math inline">\(\omega_n\)</span> . Just
-multiply the <span class="math inline">\(\pi\)</span>, we get the
-Z-transform <span class="math inline">\(\Phi\)</span> rad/sample, which
-is the plot of <code>freqz(b, a)</code></p>
-</blockquote>
-<p><img src="/2024/05/02/ss-insight/image-20220407100948965.png"
-alt="image-20220407100948965" /></p>
-<h3 id="transfer-function-with-sample-information">Transfer function
-with sample information</h3>
-<p><span class="math display">\[
-z = e^{-j\omega T_s}
-\]</span></p>
-<p><img src="/2024/05/02/ss-insight/image-20220407103451265.png"
-alt="image-20220407103451265" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">[h,f] = freqz(b,a,[],fs);</span><br><span class="line">hdb20 = <span class="number">20</span>*log10(abs(h));</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">plot(f, hdb20, &#x27;b&#x27;)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;DTFT <span class="keyword">with</span> freqz <span class="keyword">and</span> sample rate&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">sys = tf(b, a, <span class="number">1</span>/fs);</span><br><span class="line">[mag, phs, wout] = bode(sys);</span><br><span class="line">wout = wout(:);</span><br><span class="line">whz = wout/<span class="number">2</span>/pi;</span><br><span class="line">hdb = <span class="number">20</span>*log10(mag(:));</span><br><span class="line">plot(whz, hdb, &#x27;r-o&#x27;);</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;DTFT <span class="keyword">with</span> bode <span class="keyword">and</span> sample period&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">plot(f, hdb20,&#x27;b&#x27;, whz, hdb, &#x27;ro&#x27;);</span><br><span class="line">legend(&#x27;freqz&#x27;, &#x27;bode&#x27;)</span><br><span class="line">ylim([-<span class="number">400</span>, <span class="number">100</span>])</span><br><span class="line">title(&#x27;overlay <span class="keyword">and</span> comparision&#x27;)</span><br><span class="line">xlabel(&#x27;Frequency (Hz)&#x27;)</span><br><span class="line">ylabel(&#x27;Mag (dB)&#x27;)</span><br><span class="line">grid on;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="time-domain-from-frequency-domain">Time Domain from Frequency
-Domain</h3>
-<p>Assume input is <strong>sampled by</strong> <span
-class="math inline">\(f_s\)</span></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">figure(<span class="number">3</span>)</span><br><span class="line">% <span class="keyword">assume</span> x is sampled by fs</span><br><span class="line">x = <span class="keyword">rand</span>(<span class="number">1</span>, <span class="number">50</span>);</span><br><span class="line">y = filter(b, a, x);</span><br><span class="line">xt = (<span class="number">1</span>:<span class="number">50</span>);</span><br><span class="line">plot(xt, x, &#x27;-s&#x27;, xt, y, &#x27;-o&#x27;)</span><br><span class="line">legend(&#x27;<span class="keyword">input</span>&#x27;, &#x27;<span class="keyword">output</span>&#x27;)</span><br><span class="line">xlabel(&#x27;Sample&#x27;)</span><br><span class="line">ylabel(&#x27;mag&#x27;)</span><br><span class="line">title(&#x27;filter in Time domain&#x27;)</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/05/02/ss-insight/image-20220407113330972.png"
-alt="image-20220407113330972" /></p>
-<h2 id="bilinear-transformation">Bilinear Transformation</h2>
-<p><strong>Bilinear Transformation</strong>, also known as
-<strong>Bilinear Approximation</strong>, an algebraic transformation
-between the variables <span class="math inline">\(s\)</span> and <span
-class="math inline">\(z\)</span> that maps the entire <span
-class="math inline">\(j\Omega\)</span>-axis in the <span
-class="math inline">\(s\)</span>-plane to <em>one revolution of the unit
-circle</em> in the <span class="math inline">\(z\)</span>-plane.</p>
-<p>That is, with this approach, <span class="math inline">\(-\infty \le
-\Omega \le +\infty\)</span> maps onto <span class="math inline">\(-\pi
-\le \omega \le +\pi\)</span>, the transformation between the
-continuous-time and discrete-time frequency variables is necessarily
-<strong>nonlinear</strong>.</p>
-<p>With <span class="math inline">\(H_c(s)\)</span> denoting the
-continuous-time system function and <span
-class="math inline">\(H(z)\)</span> the discrete-time system function,
-the bilinear transformation corresponds to replacing <span
-class="math inline">\(s\)</span> by <span class="math display">\[
-s=\frac{2}{T_d}\left( \frac{1-z^{-1}}{1+z^{-1}} \right)
-\]</span></p>
-<p>that is, <span class="math display">\[
-H(z) = H_c\left( \frac{2}{T_d}\left( \frac{1-z^{-1}}{1+z^{-1}} \right)
-\right)
-\]</span></p>
-<h2 id="different-variants-of-the-psd-definition">Different Variants of
-the PSD Definition</h2>
-<p>In the practice of engineering, it has become customary to use
-slightly different variants of the PSD definition, depending on the
-particular application or research field.</p>
-<ul>
-<li><p><strong>Two-Sided PSD</strong>, <span
-class="math inline">\(S_x(f)\)</span></p>
-<p>this is a synonym of the PSD defined as the Fourier Transform of the
-<strong>autocorrelation</strong>.</p></li>
-<li><p><strong>One-Sided PSD</strong>, <span
-class="math inline">\(S&#39;_x(f)\)</span></p>
-<p>this is a variant derived from the <em>two-sided PSD</em> by
-considering only the <em>positive frequency</em> semi-axis.</p>
-<p>To <strong>conserve the total power</strong>, the value of the
-one-sided PSD is <strong>twice</strong> that of the two-sided PSD <span
-class="math display">\[
-S&#39;_x(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_x(f) &amp; : \ f = 0 \\
-2S_x(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2024/05/02/ss-insight/image-20230603185546658.png"
-alt="image-20230603185546658" /></p>
-<blockquote>
-<p>Note that the one-sided PSD definition makes sense only if the
-two-sided is an even function of <span
-class="math inline">\(f\)</span></p>
-</blockquote>
-<p>If <span class="math inline">\(S&#39;_x(f)\)</span> is even
-symmetrical around a positive frequency <span
-class="math inline">\(f_0\)</span>, then two additional definitions can
-be adopted:</p>
-<ul>
-<li><p><strong>Single-Sideband PSD</strong>, <span
-class="math inline">\(S_{SSB,x}(f)\)</span></p>
-<p>This is obtained from <span
-class="math inline">\(S&#39;_x(f)\)</span> by moving the origin of the
-frequency axis to <span class="math inline">\(f_0\)</span> <span
-class="math display">\[
-S_{SSB,x}(f) =S&#39;_x(f+f_0)
-\]</span> This concept is particularly useful for describing phase or
-amplitude modulation schemes in wireless communications, where <span
-class="math inline">\(f_0\)</span> is the carrier frequency.</p>
-<blockquote>
-<p>Note that there is no difference in the values of the one-sided
-versus the SSB PSD; it is just a pure translation on the frequency
-axis.</p>
-</blockquote></li>
-<li><p><strong>Double-Sideband PSD</strong>, <span
-class="math inline">\(S_{DSB,x}(f)\)</span></p>
-<p>this is a variant of the SSB PSD obtained by considering only the
-positive frequency semi-axis.</p>
-<p>As in the case of the one-sided PSD, to conserve total power, the
-value of the DSB PSD is twice that of the SSB <span
-class="math display">\[
-S_{DSB,x}(f) = \left\{ \begin{array}{cl}
-0 &amp; : \ f \geq 0 \\
-S_{SSB,x}(f) &amp; : \ f = 0 \\
-2S_{SSB,x}(f) &amp; : \ f \gt 0
-\end{array} \right.
-\]</span></p></li>
-</ul>
-<p><img src="/2024/05/02/ss-insight/image-20230603222054506.png"
-alt="image-20230603222054506" /></p>
-<blockquote>
-<p>Note that the DSB definition makes sense only if the SSB PSD is even
-symmetrical around zero</p>
-</blockquote>
-<h2 id="poles-and-zeros-of-transfer-function">Poles and Zeros of
-transfer function</h2>
-<h3 id="poles">poles</h3>
-<p><span class="math display">\[
-H(s) = \frac{1}{1+s/\omega_0}
-\]</span></p>
-<p>magnitude and phase at <span class="math inline">\(\omega_0\)</span>
-and <span class="math inline">\(-\omega_0\)</span> <span
-class="math display">\[\begin{align}
-H(j\omega_0) &amp;=  \frac{1}{1+j} = \frac{1}{\sqrt{2}}e^{-j\pi/4} \\
-H(-j\omega_0) &amp;=  \frac{1}{1-j} = \frac{1}{\sqrt{2}}e^{j\pi/4}
-\end{align}\]</span></p>
-<p>system response <span class="math inline">\(y(t)\)</span> of input
-<span class="math inline">\(\cos(\omega_0 t)\)</span>, note <span
-class="math inline">\(\cos(\omega_0t) = \frac{1}{2}(e^{j\omega_0 t} +
-e^{-j\omega_0 t})\)</span> <span class="math display">\[\begin{align}
-y(t) &amp;= H(j\omega_0)\cdot \frac{1}{2}e^{j\omega_0 t} +
-H(-j\omega_0)\cdot \frac{1}{2}e^{-j\omega_0 t} \\
-&amp;=  \frac{1}{\sqrt{2}}\cos(\omega_0t-\pi/4)
-\end{align}\]</span></p>
-<blockquote>
-<p><span class="math inline">\(\cos(\omega_0 t)\)</span>, with frequency
-same with <em>pole</em> <strong>DON'T</strong> have <em>infinite
-response</em></p>
-<p>That is, pole indicate decrease trending</p>
-</blockquote>
-<h3 id="zeros">zeros</h3>
-<blockquote>
-<p>similar with poles, <span class="math inline">\(\cos(\omega_0
-t)\)</span>, with frequency same with <em>zero</em>
-<strong>DON'T</strong> have <em>zero response</em></p>
-</blockquote>
-<p><span class="math display">\[
-H(s) = 1+s/\omega_0
-\]</span></p>
-<p>magnitude and phase at <span class="math inline">\(\omega_0\)</span>
-and <span class="math inline">\(-\omega_0\)</span> <span
-class="math display">\[\begin{align}
-H(j\omega_0) &amp;= 1+j = \sqrt{2}e^{j\pi/4} \\
-H(-j\omega_0) &amp;= 1-j = \sqrt{2}e^{-j\pi/4}
-\end{align}\]</span></p>
-<p>system response <span class="math inline">\(y(t)\)</span> of input
-<span class="math inline">\(\cos(\omega_0 t)\)</span>, note <span
-class="math inline">\(\cos(\omega_0t) = \frac{1}{2}(e^{j\omega_0 t} +
-e^{-j\omega_0 t})\)</span> <span class="math display">\[\begin{align}
-y(t) &amp;= H(j\omega_0)\cdot \frac{1}{2}e^{j\omega_0 t} +
-H(-j\omega_0)\cdot \frac{1}{2}e^{-j\omega_0 t} \\
-&amp;=  \sqrt{2}\cos(\omega_0t+\pi/4)
-\end{align}\]</span></p>
-<h2 id="baud-rate">baud rate</h2>
-<p><strong>symbol rate</strong>, <strong>modulation rate</strong> or
-<strong>baud rate</strong> is the number of symbol changes per unit of
-time.</p>
-<ul>
-<li>Bit rate refers to the number of <strong>bits</strong> transmitted
-between two devices per unit of time</li>
-<li>The baud or symbol rate refers to the number of
-<strong>symbols</strong> that can be sent in the same amount of
-time</li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>Stephen P. Boyd. EE102 Lecture 10 Sinusoidal steady-state and
-frequency response [<a
-target="_blank" rel="noopener" href="https://web.stanford.edu/~boyd/ee102/freq.pdf">https://web.stanford.edu/~boyd/ee102/freq.pdf</a>]</p>
-<p><em>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
-Feedback Control of Dynamic Systems (8th Edition) (8th. ed.).
-Pearson.</em></p>
-<p>Inter-Symbol Interference (or Leaky Bits) [<a
-target="_blank" rel="noopener" href="http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html">http://blog.teledynelecroy.com/2018/06/inter-symbol-interference-or-leaky-bits.html</a>]</p>
-<p>[AN001] Designing from zero an IIR filter in Verilog using biquad
-structure and bilinear discretization. URL:[<a
-target="_blank" rel="noopener" href="https://www.controlpaths.com/articles/an001_designing_iir_biquad_filter_bilinear/">https://www.controlpaths.com/articles/an001_designing_iir_biquad_filter_bilinear/</a>]</p>
-<p>Frequency warping using the bilinear transform. URL:[<a
-target="_blank" rel="noopener" href="https://www.controlpaths.com/2022/05/09/frequency-warping-using-the-bilinear-transform/">https://www.controlpaths.com/2022/05/09/frequency-warping-using-the-bilinear-transform/</a>]</p>
-<p>Digital control loops. Theoretical approach. URL:[<a
-target="_blank" rel="noopener" href="https://www.controlpaths.com/2022/02/28/digital-control-loops-theoretical-approach/">https://www.controlpaths.com/2022/02/28/digital-control-loops-theoretical-approach/</a>]</p>
-<p>Simulation of DSP algorithms in Verilog. URL:[<a
-target="_blank" rel="noopener" href="https://www.controlpaths.com/2023/05/20/simulation-of-dsp-algorithms-in-verilog/">https://www.controlpaths.com/2023/05/20/simulation-of-dsp-algorithms-in-verilog/</a>]</p>
-<p>Implementing a digital biquad filter in Verilog. URL:[<a
-target="_blank" rel="noopener" href="https://www.controlpaths.com/2021/04/19/implementing-a-digital-biquad-filter-in-verilog/">https://www.controlpaths.com/2021/04/19/implementing-a-digital-biquad-filter-in-verilog/</a>]</p>
-<p>Implementing a FIR filter using folding. URL:[<a
-target="_blank" rel="noopener" href="https://www.controlpaths.com/2021/05/17/implementing-a-fir-filter-using-folding/">https://www.controlpaths.com/2021/05/17/implementing-a-fir-filter-using-folding/</a>]</p>
-<p>Oppenheim, Alan V. and Cram. “Discrete-time signal processing : Alan
-V. Oppenheim, 3rd edition.” (2011).</p>
-<p>Extras: PID Compensator with Bilinear Approximation URL:[<a
-target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin</a>]</p>
 
       
     </div>

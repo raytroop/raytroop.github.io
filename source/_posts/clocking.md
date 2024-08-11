@@ -9,68 +9,6 @@ mathjax: true
 
 
 
-## Mueller-Muller A
-
-| pattern | main cursor               |
-| ------- | ------------------------- |
-| 0**1**1 | $s_{011}=-h_1+h_0+h_{-1}$ |
-| 1**1**0 | $s_{110}=h_1+h_0-h_{-1}$  |
-| 1**0**0 | $s_{100}=h_1-h_0-h_{-1}$  |
-| 0**0**1 | $s_{001}=-h_1-h_0+h_{-1}$ |
-
-During adapting,  we make
-
-- 0**1**1 & 1**1**0 are approaching to each other
-- 1**0**0 & 0**0**1 are approaching to each other
-
-Then, $h_{-1}$ and $h_1$ are same, which is desired
-
-
-
-## Mueller-Muller B
-
-MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
-
-![image-20240807230029591](clocking/image-20240807230029591.png)
-
-
-
-> Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [[https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf](https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf)]
->
-> Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS" [[https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf](https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf)]
->
-> Eduardo Fuentetaja. "Analysis of the M&M Clock Recovery Algorithm" [[https://edfuentetaja.github.io/sdr/m_m_analysis/](https://edfuentetaja.github.io/sdr/m_m_analysis/)]
->
-> Liu T, Li T, Lv F, Liang B, Zheng X, Wang H, Wu M, Lu D, Zhao F. Analysis and Modeling of Mueller–Muller Clock and Data Recovery Circuits. *Electronics*. 2021; 10(16):1888.
->
-> Youzhi Gu . Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model
->
-> Baud-Rate CDRs [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
->
-> F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, doi: 10.1109/ISSCC.2010.5433823.
-
-![img202408080859](clocking/img202408080859.PNG)
-
-![image-20240808001201612](clocking/image-20240808001201612.png)
-
-
-![image-20240808001256515](clocking/image-20240808001256515.png)
-
-
-![image-20240808001449664](clocking/image-20240808001449664.png)
-
-![image-20240808001501485](clocking/image-20240808001501485.png)
-
-
-
-## Sign-Sign Mueller-Müller CDR
-
-![image-20240807232814202](clocking/image-20240807232814202.png)
-
-
-
-
-
 ## False locking
 
 *TODO* &#128197;
@@ -82,10 +20,6 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 
 
 
-
-## Prescaler
-
-*TODO* &#128197;
 
 
 ## different frequency clock impact on edge
@@ -143,7 +77,7 @@ Decimation is commonly employed to alleviate the high-speed requirement. However
 
 
 
-## Limitations of Continuous-Time Approximation
+## Continuous-Time Approximation Limitations 
 
 A rule of thumb often used to ensure slow changes in the loop is to select the *loop bandwidth* approximately equal to **one-tenth** of the *input frequency*. 
 
@@ -153,6 +87,14 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 
 
+> Gardner, F.M. (1980). Charge-Pump Phase-Lock Loops. *IEEE Trans. Commun., 28*, 1849-1858.
+>
+> Homayoun, Aliakbar and Behzad Razavi. “On the Stability of Charge-Pump Phase-Locked Loops.” *IEEE Transactions on Circuits and Systems I: Regular Papers* 63 (2016): 741-750.
+>
+> N. Kuznetsov, A. Matveev, M. Yuldashev and R. Yuldashev, "Nonlinear Analysis of Charge-Pump Phase-Locked Loop: The Hold-In and Pull-In Ranges," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 68, no. 10, pp. 4049-4061, Oct. 2021
+>
+> 
+
 
 
 ## clock distribution
@@ -161,7 +103,8 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 > X. Mo, J. Wu, N. Wary and T. C. Carusone, "Design Methodologies for Low-Jitter CMOS Clock Distribution," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 1, pp. 94-103, 2021
 >
-> 
+
+
 
 
 

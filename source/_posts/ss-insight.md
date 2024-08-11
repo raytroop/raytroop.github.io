@@ -9,9 +9,22 @@ mathjax: true
 
 
 
+## channel loss
+
+- skin effect loss
+- dielectric loss
+
+![image-20240810102618245](ss-insight/image-20240810102618245.png)
+
+
+
 ## phase delay & group delay
 
-- Phase delay directly measures the device or system time delay of *individual sinusoidal frequency components* in the **steady state**.
+![image-20240810094519487](ss-insight/image-20240810094519487.png)
+
+
+
+- Phase delay directly measures the device or system time delay of *individual sinusoidal frequency components* in the **steady-state conditions**.
 - In the ideal case the envelope delay is equal to the phase delay
 - envelope delay is a more sensitive measure of aberrations than phase delay
 
@@ -42,6 +55,24 @@ mathjax: true
 
 ---
 
+steady-state at this frequency is a polarity flip; a 180 degrees phase shift; which is a transfer function of H(s)=-1. 
+$$
+H(s) = e^{j\pi}
+$$
+That is $\phi(\omega) = \pi$
+$$
+\tau_p = \frac{\pi}{\omega}
+$$
+and
+$$
+\tau_g = \frac{\partial \pi}{\partial \omega}=0
+$$
+
+
+
+
+---
+
 
 > Hollister, Allen L. *Wideband Amplifier Design*. Raleigh, NC: SciTech Pub., 2007.
 >
@@ -52,6 +83,8 @@ mathjax: true
 > Starič, P. & Margan, E.. (2006). Wideband Amplifiers. 10.1007/978-0-387-28341-8. 
 >
 > Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.). Prentice-Hall, Inc., USA.
+>
+> Phase delay vs group delay: Common misconceptions. [[https://audiosciencereview.com/forum/index.php?threads/phase-delay-vs-group-delay-common-misconceptions.39591/](https://audiosciencereview.com/forum/index.php?threads/phase-delay-vs-group-delay-common-misconceptions.39591/)]
 
 
 

@@ -9,12 +9,11 @@ mathjax: true
 
 ## Least-Mean-Square (LMS) 
 
-> mean square error (MMSE)
+> minimum mean square error (MMSE) 
 
-
+This simplified version of LMS algorithm is identical to the *zero-forcing* algorithm which minimizes the ISI at data samples
 
 ###  Sign-Sign LMS (SS-LMS)
-
 
 
 
@@ -26,6 +25,8 @@ mathjax: true
 > Jinhyung Lee, Design of High-Speed Receiver for Video Interface with Adaptive Equalization; Phd thesis, August 2019. [thesis link](http://dcollection.snu.ac.kr/common/orgView/000000157003)
 >
 > Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical Implementation, 5th edition
+>
+> E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008
 
 
 
@@ -80,14 +81,11 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 
 
-## Maximum Likelihood Sequence Detection (MLSD)
-
-There are several variants of MLSD, including:
+There are several variants of MLSD (Maximum Likelihood Sequence Detection), including:
 
 - Viterbi Algorithm
 - Decision Feedback Sequence Estimation (DFSE)
 - Soft-Output MLSD
-
 
 
 

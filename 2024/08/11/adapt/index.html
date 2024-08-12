@@ -26,6 +26,9 @@
 <meta property="og:description" content="Least-Mean-Square (LMS)  minimum mean square error (MMSE)  This simplified version of LMS algorithm is identical to the zero-forcing algorithm which minimizes the ISI at data samples Sign-Sign LMS (SS">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240807233152154.png">
+<meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240812205534753.png">
+<meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240812205613467.png">
+<meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240812222307061.png">
 <meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240807230029591.png">
 <meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240810095006113.png">
 <meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240808001201612.png">
@@ -33,8 +36,9 @@
 <meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240808001449664.png">
 <meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240808001501485.png">
 <meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240807232814202.png">
+<meta property="og:image" content="http://example.com/2024/08/11/adapt/image-20240812232618238.png">
 <meta property="article:published_time" content="2024-08-11T11:07:31.000Z">
-<meta property="article:modified_time" content="2024-08-12T06:24:10.520Z">
+<meta property="article:modified_time" content="2024-08-12T16:21:43.748Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/08/11/adapt/image-20240807233152154.png">
@@ -147,7 +151,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#least-mean-square-lms"><span class="nav-number">1.</span> <span class="nav-text">Least-Mean-Square (LMS)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sign-sign-lms-ss-lms"><span class="nav-number">1.1.</span> <span class="nav-text">Sign-Sign LMS (SS-LMS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dfe-h0-estimator"><span class="nav-number">1.2.</span> <span class="nav-text">DFE h0 Estimator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-likelihood-sequence-estimation-mlse"><span class="nav-number">2.</span> <span class="nav-text">Maximum Likelihood
-Sequence Estimation (MLSE)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mueller-muller-a"><span class="nav-number">3.</span> <span class="nav-text">Mueller-Muller A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mueller-muller-b"><span class="nav-number">4.</span> <span class="nav-text">Mueller-Muller B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sign-sign-mueller-muller-cdr"><span class="nav-number">5.</span> <span class="nav-text">Sign-Sign Mueller-Muller CDR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
+Sequence Estimation (MLSE)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mueller-muller-cdr"><span class="nav-number">3.</span> <span class="nav-text">Mueller-Muller CDR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ss-mm-cdr"><span class="nav-number">4.</span> <span class="nav-text">SS-MM CDR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pattern-filter"><span class="nav-number">4.1.</span> <span class="nav-text">Pattern filter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bang-bang-cdr"><span class="nav-number">5.</span> <span class="nav-text">Bang-Bang CDR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -242,7 +246,7 @@ Sequence Estimation (MLSE)</span></a></li><li class="nav-item nav-level-2"><a cl
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-12 06:24:10" itemprop="dateModified" datetime="2024-08-12T06:24:10+00:00">2024-08-12</time>
+      <time title="Modified: 2024-08-12 16:21:43" itemprop="dateModified" datetime="2024-08-12T16:21:43+00:00">2024-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -331,6 +335,10 @@ different pattern for even and odd error slicer</p>
 Sequence Estimation (MLSE)</h2>
 <p><img src="/2024/08/11/adapt/image-20240807233152154.png"
 alt="image-20240807233152154" /></p>
+<p><img src="/2024/08/11/adapt/image-20240812205534753.png"
+alt="image-20240812205534753" /></p>
+<p><img src="/2024/08/11/adapt/image-20240812205613467.png"
+alt="image-20240812205613467" /></p>
 <blockquote>
 <p>[IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes
 Beyond 100 Gb/s <a
@@ -358,7 +366,79 @@ Detection), including:</p>
 Extended Reaches. <a
 target="_blank" rel="noopener" href="https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/">https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/</a>]</p>
 </blockquote>
-<h2 id="mueller-muller-a">Mueller-Muller A</h2>
+<h2 id="mueller-muller-cdr">Mueller-Muller CDR</h2>
+<p><img src="/2024/08/11/adapt/image-20240812222307061.png"
+alt="image-20240812222307061" /></p>
+<p>MMPD infers the channel response from baud-rate samples of the
+received data, the adaptation aligns the sampling clock such that
+pre-cursor is equal to the post-cursor in the <em>pulse
+response</em></p>
+<p><img src="/2024/08/11/adapt/image-20240807230029591.png"
+alt="image-20240807230029591" /></p>
+<blockquote>
+<p>Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [<a
+target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf">https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf</a>]</p>
+<p>Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS"
+[<a
+target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf">https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf</a>]</p>
+<p>Eduardo Fuentetaja. "Analysis of the M&amp;M Clock Recovery
+Algorithm" [<a
+target="_blank" rel="noopener" href="https://edfuentetaja.github.io/sdr/m_m_analysis/">https://edfuentetaja.github.io/sdr/m_m_analysis/</a>]</p>
+<p>Liu, Tao &amp; Li, Tiejun &amp; Lv, Fangxu &amp; Liang, Bin &amp;
+Zheng, Xuqiang &amp; Wang, Heming &amp; Wu, Miaomiao &amp; Lu, Dechao
+&amp; Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock
+and Data Recovery Circuits. Electronics. 10. 1888.
+10.3390/electronics10161888.</p>
+<p>Gu, Youzhi &amp; Feng, Xinjie &amp; Chi, Runze &amp; Chen, Yongzhen
+&amp; Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data
+Recovery Circuits with a Linearized Model.
+10.21203/rs.3.rs-1817774/v1.</p>
+<p>Baud-Rate CDRs [<a
+target="_blank" rel="noopener" href="https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf</a>]</p>
+<p>F. Spagna <em>et al</em>., "A 78mW 11.8Gb/s serial link transceiver
+with adaptive RX equalization and baud-rate CDR in 32nm CMOS," <em>2010
+IEEE International Solid-State Circuits Conference - (ISSCC)</em>, San
+Francisco, CA, USA, 2010, pp. 366-367, doi:
+10.1109/ISSCC.2010.5433823.</p>
+<p>K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of
+PAM-4 Mueller–Muller Clock and Data Recovery System," in <em>IEEE Open
+Journal of Circuits and Systems</em>, vol. 3, pp. 216-227, 2022</p>
+</blockquote>
+<p><img src="/2024/08/11/adapt/image-20240810095006113.png"
+alt="image-20240810095006113" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001201612.png"
+alt="image-20240808001201612" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001256515.png"
+alt="image-20240808001256515" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001449664.png"
+alt="image-20240808001449664" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001501485.png"
+alt="image-20240808001501485" /></p>
+<h2 id="ss-mm-cdr">SS-MM CDR</h2>
+<p><img src="/2024/08/11/adapt/image-20240807232814202.png"
+alt="image-20240807232814202" /></p>
+<p><span class="math inline">\(h_1\)</span> is
+<strong>necessary</strong></p>
+<ul>
+<li><p>without DFE</p>
+<p>SS-MMPD locks at the point (<span
+class="math inline">\(h_1=h_{-1}\)</span>​)</p></li>
+<li><p>With a 1-tap DFE</p>
+<p>1-tap adaptive DFE that forces the <span
+class="math inline">\(h_1\)</span> to be <em>zero</em>, the SS-MMPD
+locks wherever the <span class="math inline">\(h_{-1}\)</span>​ is zero
+and drifts eventually.</p>
+<p>Consequently, it suffers from a severe <em>multiple-locking problem
+with an adaptive DFE</em></p></li>
+</ul>
+<p><img src="/2024/08/11/adapt/image-20240812232618238.png"
+alt="image-20240812232618238" /></p>
+<blockquote>
+<p>Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive
+Equalizer and Multi-Level Baud-Rate Phase Detector" [<a
+target="_blank" rel="noopener" href="https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf">https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf</a>]</p>
+</blockquote>
+<h3 id="pattern-filter">Pattern filter</h3>
 <table>
 <thead>
 <tr class="header">
@@ -387,55 +467,37 @@ target="_blank" rel="noopener" href="https://semiengineering.com/evolution-of-eq
 </table>
 <p>During adapting, we make</p>
 <ul>
-<li>0<strong>1</strong>1 &amp; 1<strong>1</strong>0 are approaching to
-each other</li>
-<li>1<strong>0</strong>0 &amp; 0<strong>0</strong>1 are approaching to
-each other</li>
+<li><span class="math inline">\(s_{011}\)</span> &amp; <span
+class="math inline">\(s_{110}\)</span> are approaching to each
+other</li>
+<li><span class="math inline">\(s_{100}\)</span> &amp; <span
+class="math inline">\(s_{001}\)</span> are approaching to each
+other</li>
 </ul>
 <p>Then, <span class="math inline">\(h_{-1}\)</span> and <span
 class="math inline">\(h_1\)</span> are same, which is desired</p>
-<h2 id="mueller-muller-b">Mueller-Muller B</h2>
-<p>MMPD infers the channel response from baud-rate samples of the
-received data, the adaptation aligns the sampling clock such that
-pre-cursor is equal to the post-cursor in the <em>pulse
-response</em></p>
-<p><img src="/2024/08/11/adapt/image-20240807230029591.png"
-alt="image-20240807230029591" /></p>
+<h2 id="bang-bang-cdr">Bang-Bang CDR</h2>
 <blockquote>
-<p>Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [<a
-target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf">https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf</a>]</p>
-<p>Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS"
-[<a
-target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf">https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf</a>]</p>
-<p>Eduardo Fuentetaja. "Analysis of the M&amp;M Clock Recovery
-Algorithm" [<a
-target="_blank" rel="noopener" href="https://edfuentetaja.github.io/sdr/m_m_analysis/">https://edfuentetaja.github.io/sdr/m_m_analysis/</a>]</p>
-<p>Liu T, Li T, Lv F, Liang B, Zheng X, Wang H, Wu M, Lu D, Zhao F.
-Analysis and Modeling of Mueller–Muller Clock and Data Recovery
-Circuits. <em>Electronics</em>. 2021; 10(16):1888.</p>
-<p>Youzhi Gu . Analysis of Mueller-Muller Clock and Data Recovery
-Circuits with a Linearized Model</p>
-<p>Baud-Rate CDRs [<a
-target="_blank" rel="noopener" href="https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf</a>]</p>
-<p>F. Spagna <em>et al</em>., "A 78mW 11.8Gb/s serial link transceiver
-with adaptive RX equalization and baud-rate CDR in 32nm CMOS," <em>2010
-IEEE International Solid-State Circuits Conference - (ISSCC)</em>, San
-Francisco, CA, USA, 2010, pp. 366-367, doi:
-10.1109/ISSCC.2010.5433823.</p>
+<p>alexander PD or !!PD</p>
 </blockquote>
-<p><img src="/2024/08/11/adapt/image-20240810095006113.png"
-alt="image-20240810095006113" /></p>
-<p><img src="/2024/08/11/adapt/image-20240808001201612.png"
-alt="image-20240808001201612" /></p>
-<p><img src="/2024/08/11/adapt/image-20240808001256515.png"
-alt="image-20240808001256515" /></p>
-<p><img src="/2024/08/11/adapt/image-20240808001449664.png"
-alt="image-20240808001449664" /></p>
-<p><img src="/2024/08/11/adapt/image-20240808001501485.png"
-alt="image-20240808001501485" /></p>
-<h2 id="sign-sign-mueller-muller-cdr">Sign-Sign Mueller-Muller CDR</h2>
-<p><img src="/2024/08/11/adapt/image-20240807232814202.png"
-alt="image-20240807232814202" /></p>
+<p>The alexander PD locks that edge clock (clkedge) is located at zero
+crossings of the data. The <span class="math inline">\(h_{-0.5}\)</span>
+and <span class="math inline">\(h_{0.5}\)</span> are
+<strong>equal</strong> at the <em>lock point,</em> where the <span
+class="math inline">\(h_{-0.5}\)</span> and <span
+class="math inline">\(h_{0.5}\)</span> are the cursors located at -0.5
+UI and 0.5 UI.</p>
+<blockquote>
+<p>Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive
+Equalizer and Multi-Level Baud-Rate Phase Detector" [<a
+target="_blank" rel="noopener" href="https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf">https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf</a>]</p>
+<p>Shahramian, Shayan, "Adaptive Decision Feedback Equalization With
+Continuous-time Infinite Impulse Response Filters" [<a
+target="_blank" rel="noopener" href="https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf">https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf</a>]</p>
+<p>MENIN, DAVIDE, "Modelling and Design of High-Speed Wireline
+Transceivers with Fully-Adaptive Equalization" [<a
+target="_blank" rel="noopener" href="https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf">https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf</a>]</p>
+</blockquote>
 <h2 id="reference">reference</h2>
 <p>Stojanovic, Vladimir &amp; Ho, A. &amp; Garlepp, B. &amp; Chen, Fred
 &amp; Wei, J. &amp; Alon, Elad &amp; Werner, C. &amp; Zerbe, J. &amp;

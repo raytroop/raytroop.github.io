@@ -71,7 +71,9 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 ![image-20240807233152154](adapt/image-20240807233152154.png)
 
+![image-20240812205534753](adapt/image-20240812205534753.png)
 
+![image-20240812205613467](adapt/image-20240812205613467.png)
 
 > [IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes Beyond 100 Gb/s [https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf](https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf)]
 >
@@ -96,25 +98,11 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 
 
 
-## Mueller-Muller A
+## Mueller-Muller CDR
 
-| pattern | main cursor               |
-| ------- | ------------------------- |
-| 0**1**1 | $s_{011}=-h_1+h_0+h_{-1}$ |
-| 1**1**0 | $s_{110}=h_1+h_0-h_{-1}$  |
-| 1**0**0 | $s_{100}=h_1-h_0-h_{-1}$  |
-| 0**0**1 | $s_{001}=-h_1-h_0+h_{-1}$ |
-
-During adapting,  we make
-
-- 0**1**1 & 1**1**0 are approaching to each other
-- 1**0**0 & 0**0**1 are approaching to each other
-
-Then, $h_{-1}$ and $h_1$ are same, which is desired
+![image-20240812222307061](adapt/image-20240812222307061.png)
 
 
-
-## Mueller-Muller B
 
 MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
 
@@ -128,13 +116,15 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 >
 > Eduardo Fuentetaja. "Analysis of the M&M Clock Recovery Algorithm" [[https://edfuentetaja.github.io/sdr/m_m_analysis/](https://edfuentetaja.github.io/sdr/m_m_analysis/)]
 >
-> Liu T, Li T, Lv F, Liang B, Zheng X, Wang H, Wu M, Lu D, Zhao F. Analysis and Modeling of Mueller–Muller Clock and Data Recovery Circuits. *Electronics*. 2021; 10(16):1888.
+> Liu, Tao & Li, Tiejun & Lv, Fangxu & Liang, Bin & Zheng, Xuqiang & Wang, Heming & Wu, Miaomiao & Lu, Dechao & Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits. Electronics. 10. 1888. 10.3390/electronics10161888. 
 >
-> Youzhi Gu . Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model
+> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. 10.21203/rs.3.rs-1817774/v1. 
 >
 > Baud-Rate CDRs [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
 >
 > F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, doi: 10.1109/ISSCC.2010.5433823.
+>
+> K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of PAM-4 Mueller–Muller Clock and Data Recovery System," in *IEEE Open Journal of Circuits and Systems*, vol. 3, pp. 216-227, 2022
 
 ![image-20240810095006113](adapt/image-20240810095006113.png)
 
@@ -150,11 +140,63 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 
 
 
-## Sign-Sign Mueller-Muller CDR
+## SS-MM CDR
 
 ![image-20240807232814202](adapt/image-20240807232814202.png)
 
 
+
+$h_1$ is **necessary**
+
+- without DFE
+
+  SS-MMPD locks at the point ($h_1=h_{-1}$​)
+
+- With a 1-tap DFE
+
+  1-tap adaptive DFE that forces the $h_1$ to be *zero*, the SS-MMPD locks wherever the $h_{-1}$​ is zero and drifts eventually.
+
+  Consequently, it suffers from a severe *multiple-locking problem with an adaptive DFE*
+
+![image-20240812232618238](adapt/image-20240812232618238.png)
+
+
+
+> Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector" [[https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
+
+
+
+### Pattern filter
+
+| pattern | main cursor               |
+| ------- | ------------------------- |
+| 0**1**1 | $s_{011}=-h_1+h_0+h_{-1}$ |
+| 1**1**0 | $s_{110}=h_1+h_0-h_{-1}$  |
+| 1**0**0 | $s_{100}=h_1-h_0-h_{-1}$  |
+| 0**0**1 | $s_{001}=-h_1-h_0+h_{-1}$ |
+
+During adapting,  we make
+
+- $s_{011}$ & $s_{110}$ are approaching to each other
+- $s_{100}$ & $s_{001}$ are approaching to each other
+
+Then, $h_{-1}$ and $h_1$ are same, which is desired
+
+
+
+## Bang-Bang CDR
+
+> alexander PD or !!PD
+
+The alexander PD locks that edge clock (clkedge) is located at zero crossings of the data. The $h_{-0.5}$ and $h_{0.5}$ are **equal** at the *lock point,* where the  $h_{-0.5}$ and $h_{0.5}$ are the cursors located at -0.5 UI and 0.5 UI. 
+
+
+
+> Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector" [[https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
+>
+> Shahramian, Shayan, "Adaptive Decision Feedback Equalization With Continuous-time Infinite Impulse Response Filters" [[https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf](https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf)]
+>
+> MENIN, DAVIDE, "Modelling and Design of High-Speed Wireline Transceivers with Fully-Adaptive Equalization" [[https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf](https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf)]
 
 
 

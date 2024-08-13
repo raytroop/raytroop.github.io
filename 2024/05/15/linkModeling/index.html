@@ -18,19 +18,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="ADC Resolution TODO 📅 Decimation TODO 📅 Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter. Deci">
+    <meta name="description" content="ADC Resolution TODO 📅 Decimation Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter. Decimating b">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Link Modeling">
 <meta property="og:url" content="http://example.com/2024/05/15/linkModeling/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="ADC Resolution TODO 📅 Decimation TODO 📅 Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter. Deci">
+<meta property="og:description" content="ADC Resolution TODO 📅 Decimation Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter. Decimating b">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240804110522955.png">
 <meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240807221637401.png">
 <meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240807224407213.png">
 <meta property="og:image" content="http://example.com/2024/05/15/linkModeling/image-20240727225120002.png">
 <meta property="article:published_time" content="2024-05-15T15:57:03.000Z">
-<meta property="article:modified_time" content="2024-08-12T16:21:43.972Z">
+<meta property="article:modified_time" content="2024-08-13T12:29:08.161Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/05/15/linkModeling/image-20240804110522955.png">
@@ -142,8 +142,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#adc-resolution"><span class="nav-number">1.</span> <span class="nav-text">ADC Resolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decimation"><span class="nav-number">2.</span> <span class="nav-text">Decimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#decimation-by-boxcar-fir"><span class="nav-number">2.1.</span> <span class="nav-text">Decimation by boxcar FIR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decimation-by-voting"><span class="nav-number">2.2.</span> <span class="nav-text">Decimation by Voting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ber-with-quantization-noise"><span class="nav-number">3.</span> <span class="nav-text">BER with Quantization Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#impulse-response-or-pulse-response"><span class="nav-number">4.</span> <span class="nav-text">Impulse Response or Pulse
-Response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-ffe"><span class="nav-number">5.</span> <span class="nav-text">TX FFE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statistical-eye"><span class="nav-number">6.</span> <span class="nav-text">statistical eye</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#adc-resolution"><span class="nav-number">1.</span> <span class="nav-text">ADC Resolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decimation"><span class="nav-number">2.</span> <span class="nav-text">Decimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#decimation-by-summing"><span class="nav-number">2.1.</span> <span class="nav-text">Decimation by Summing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decimation-by-voting"><span class="nav-number">2.2.</span> <span class="nav-text">Decimation by Voting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-integrator"><span class="nav-number">3.</span> <span class="nav-text">Phase Integrator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ber-with-quantization-noise"><span class="nav-number">4.</span> <span class="nav-text">BER with Quantization Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#impulse-response-or-pulse-response"><span class="nav-number">5.</span> <span class="nav-text">Impulse Response or Pulse
+Response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-ffe"><span class="nav-number">6.</span> <span class="nav-text">TX FFE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statistical-eye"><span class="nav-number">7.</span> <span class="nav-text">statistical eye</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">8.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -238,7 +238,7 @@ Response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" hre
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-12 16:21:43" itemprop="dateModified" datetime="2024-08-12T16:21:43+00:00">2024-08-12</time>
+      <time title="Modified: 2024-08-13 12:29:08" itemprop="dateModified" datetime="2024-08-13T12:29:08+00:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,12 +262,24 @@ Response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" hre
     <div class="post-body" itemprop="articleBody"><h2 id="adc-resolution">ADC Resolution</h2>
 <p><em>TODO</em> 📅</p>
 <h2 id="decimation">Decimation</h2>
-<p><em>TODO</em> 📅</p>
 <p>Decimation is commonly employed to alleviate the high-speed
 requirement. However, decimation increases loop-latency which causes
 excessive dither jitter.</p>
-<h3 id="decimation-by-boxcar-fir">Decimation by boxcar FIR</h3>
+<p>Decimating by L means frequency register only added once every L UI,
+<em>reduces integral gain by L</em></p>
+<h3 id="decimation-by-summing">Decimation by Summing</h3>
+<blockquote>
+<p>In DSP this is called <em>boxcar filter</em></p>
+<p><span class="math inline">\(\sum d_n\)</span>, where <span
+class="math inline">\(d_n \in \{-1, 0, 1\}\)</span></p>
+</blockquote>
+<p>Loop gain of <em>proportional path</em> is unchanged</p>
 <h3 id="decimation-by-voting">Decimation by Voting</h3>
+<blockquote>
+<p>equivalent <span class="math inline">\(\sum d_n \lt 0 \to
+-1\)</span>, <span class="math inline">\(\sum d_n = 0 \to 0\)</span> and
+<span class="math inline">\(\sum d_n\gt 0 \to 1\)</span></p>
+</blockquote>
 <blockquote>
 <p>Compared to the boxcar filter, voting is able to reduce the loop
 delay and lower the output noise of the MMPD</p>
@@ -286,13 +298,20 @@ target="_blank" rel="noopener" href="https://www.nishanchettri.com/isscc-slides/
 Architectures &amp; Circuits"</p>
 <p>Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming
 Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and
-Modeling of Mueller–Muller Clock and Data Recovery Circuits"
+Modeling of Mueller-Muller Clock and Data Recovery Circuits"
 <em>Electronics</em> 10, no. 16: 1888.
 https://doi.org/10.3390/electronics10161888</p>
 <p>Gu, Youzhi &amp; Feng, Xinjie &amp; Chi, Runze &amp; Chen, Yongzhen
 &amp; Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data
 Recovery Circuits with a Linearized Model.
 10.21203/rs.3.rs-1817774/v1.</p>
+</blockquote>
+<h2 id="phase-integrator">Phase Integrator</h2>
+<p>sub-resolution bits: gain reduction through sub-resolution bits</p>
+<blockquote>
+<p>John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data
+Recovery" [<a
+target="_blank" rel="noopener" href="https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf">https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf</a>]</p>
 </blockquote>
 <h2 id="ber-with-quantization-noise">BER with Quantization Noise</h2>
 <p><img src="/2024/05/15/linkModeling/image-20240804110522955.png"

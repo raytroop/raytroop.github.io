@@ -17,10 +17,10 @@ mathjax: true
 
 ## Decimation
 
+- Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
 
-Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
-
-Decimating by L means frequency register only added once every L UI, *reduces integral gain by L*
+- Decimation is basically, widen the data and slowing it down
+- Decimating by $L$ means frequency register only added once every $L$ UI, thus *integral path gain* reduced by $L$ in linear model
 
 ### Decimation by Summing
 
@@ -28,15 +28,24 @@ Decimating by L means frequency register only added once every L UI, *reduces in
 >
 > $\sum d_n$, where $d_n \in \{-1, 0, 1\}$
 
+- Decimation via boxcar filter produces a DC gain, $K_b$, corresponding to the *decimation factor*. 
+
+![image-20240813222409404](linkModeling/image-20240813222409404.png)
+
+
 
 Loop gain of *proportional path* is unchanged
 
 ### Decimation by Voting
 > equivalent $\sum d_n \lt 0 \to -1$, $\sum d_n = 0 \to 0$ and $\sum d_n\gt 0 \to 1$
-
+>
 > Compared to the boxcar filter, voting is able to reduce the loop delay and lower the output noise of the MMPD
 
+- Decimation via voting has a reduced gain, $K_V$, which can be determined through simulation
 
+
+
+![image-20240813223338067](linkModeling/image-20240813223338067.png)
 
 
 

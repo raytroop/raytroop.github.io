@@ -17,17 +17,22 @@ mathjax: true
 
 ## Decimation
 
-*TODO* &#128197;
 
 Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
 
+Decimating by L means frequency register only added once every L UI, *reduces integral gain by L*
+
+### Decimation by Summing
+
+> In DSP this is called *boxcar filter*
+>
+> $\sum d_n$, where $d_n \in \{-1, 0, 1\}$
 
 
-### Decimation by boxcar FIR
-
-
+Loop gain of *proportional path* is unchanged
 
 ### Decimation by Voting
+> equivalent $\sum d_n \lt 0 \to -1$, $\sum d_n = 0 \to 0$ and $\sum d_n\gt 0 \to 1$
 
 > Compared to the boxcar filter, voting is able to reduce the loop delay and lower the output noise of the MMPD
 
@@ -43,11 +48,17 @@ Decimation is commonly employed to alleviate the high-speed requirement. However
 >
 > Pavan Hanumolu, ISSCC 2015 tutorial. "Clock and Data Recovery Architectures & Circuits" 
 >
-> Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and Modeling of Mueller–Muller Clock and Data Recovery Circuits" *Electronics* 10, no. 16: 1888. https://doi.org/10.3390/electronics10161888
+> Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits" *Electronics* 10, no. 16: 1888. https://doi.org/10.3390/electronics10161888
 >
 > Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. 10.21203/rs.3.rs-1817774/v1. 
 
 
+
+## Phase Integrator
+
+sub-resolution bits: gain reduction through sub-resolution bits
+
+> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery" [[https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)]
 
 ## BER with Quantization Noise
 

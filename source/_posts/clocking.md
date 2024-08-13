@@ -8,6 +8,14 @@ mathjax: true
 ---
 
 
+## Impact of reference Clock Edges on PI Output
+
+*TODO* &#128197;
+
+
+> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery" [[https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)]
+
+
 
 ## False locking
 

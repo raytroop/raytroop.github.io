@@ -22,6 +22,9 @@ mathjax: true
 - Decimation is basically, widen the data and slowing it down
 - Decimating by $L$ means frequency register only added once every $L$ UI, thus *integral path gain* reduced by $L$ in linear model
 
+![intg_path_decim.drawio](linkModeling/intg_path_decim.drawio.svg)
+
+
 ### Decimation by Summing
 
 > In DSP this is called *boxcar filter*

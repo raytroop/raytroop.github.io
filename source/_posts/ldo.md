@@ -134,6 +134,14 @@ $$
 
 
 
+## feedback resistor divider noise
+
+*TODO* &#128197;
+
+
+
+
+
 
 
 ## reference

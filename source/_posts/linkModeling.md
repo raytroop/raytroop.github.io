@@ -22,6 +22,9 @@ Decimation is commonly employed to alleviate the high-speed requirement. However
 
 Decimating by L means frequency register only added once every L UI, *reduces integral gain by L*
 
+![intg_path_decim.drawio](linkModeling/intg_path_decim.drawio.svg)
+
+
 ### Decimation by Summing
 
 > In DSP this is called *boxcar filter*

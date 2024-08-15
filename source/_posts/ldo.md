@@ -136,12 +136,24 @@ $$
 
 ## feedback resistor divider noise
 
-*TODO* &#128197;
+![fb_res_noise.drawio](ldo/fb_res_noise.drawio.svg)
 
+> assuming $\text{LG} \gg 1$
 
+$$\begin{align}
+I_\text{t} &= \frac{V_\text{ref} - v_\text{n2}}{R_\text{2}} \\
+V_\text{o} &= V_\text{ref} +v_\text{n1} + I_\text{t}R_\text{1} \\
+\end{align}$$
 
+Then,
+$$
+V_\text{o} = \frac{R_1+R_2}{R_2}V_\text{ref} + v_\text{n1} - \frac{R_1}{R_2}v_\text{n2}
+$$
+that is,
 
-
+$$
+v_\text{no} = v_\text{n1}^2 + \left(\frac{R_1}{R_2}\right)^2 v_\text{n2}^2
+$$
 
 
 ## reference

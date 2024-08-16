@@ -156,6 +156,23 @@ v_\text{no}^2 = v_\text{n1}^2 + \left(\frac{R_1}{R_2}\right)^2 v_\text{n2}^2
 $$
 
 
+
+---
+
+![image-20240816172605226](ldo/image-20240816172605226.png)
+
+![image-20240816173559747](ldo/image-20240816173559747.png)
+
+
+$$
+\text{vno1}^2= \text{vn1}^2+\text{vn2}^2/6^2=16.5758 + 99.45453/6^2 = 19.338425833
+$$
+
+
+
+
+
+
 ## reference
 
 Hinojo, J.M., Martinez, C.I., & Torralba, A.J. (2018). Internally Compensated LDO Regulators for Modern System-on-Chip Design.

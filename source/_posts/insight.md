@@ -971,6 +971,18 @@ When a flip-flop samples an input that is changing during its aperture, the outp
 
 
 
+## folded-cascode OTA slew rate
+
+![image-20240816175038971](insight/image-20240816175038971.png)
+
+- left circuit
+
+  $I_b \gt I_a$
+
+- right circuit
+
+  $I_b \gt 2I_a$
+
 
 
 

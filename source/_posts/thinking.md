@@ -1,6 +1,7 @@
 ---
 title: 刹那 The Moment
 date: 2009-05-20 13:14:11
+tags:
 ---
 
 
@@ -49,12 +50,14 @@ Sun Aug 11 09:11:05 PM CST 2024
 体会了后悔和遗憾，才会明白，人生的出场顺序有多重要 。
 ```
 
-​																		[[-知乎](https://www.zhihu.com/question/341872732/answer/801124328)]																								
+[[-知乎](https://www.zhihu.com/question/341872732/answer/801124328)]
+
+​																		
 
 ```
 We have to dare to be ourselves, however frightening or strange that self may prove to be. 
 
-																			― May Sarton
+― May Sarton
 ```
 
 
@@ -165,6 +168,33 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 
 
 ```
+It's not necessary to hope in order to persevere.
+
+- Charlie Munger
+```
+
+
+
+```
+Self-pity gets pretty close to paranoia and paranoia is one of the very hardest things to reverse. 
+It's a ridiculous way to behave and when you avoid it you get a great advantage over everybody else, almost everybody else, because self-pity is a standard condition and yet you can train yourself out of it.
+
+- Charlie Munger
+```
+
+
+
+```
+Every mischance in life was an opportunity to learn something and your duty was not to be submerged in self-pity, but to utilize the terrible blow in a constructive fashion. 
+
+- Charlie Munger
+```
+
+
+
+
+
+```
 the word "happy" would lose its meaning if it were not balanced by sadness. 
 
 - Carl Jung
@@ -225,7 +255,8 @@ Life is the most difficult exam. Many people fail because they try to copy other
 
 ```
 不像考卷，所有複雜困難的問題，都能得到一個解答。真實人生裡，有些事永遠也沒有答案。
-											- 那些年，我們一起追的女孩
+
+- 那些年，我們一起追的女孩
 ```
 
 
@@ -233,7 +264,7 @@ Life is the most difficult exam. Many people fail because they try to copy other
 ```
 你如果不信命，这一生该有多少让你失望的事情
 
-								- 王德峰
+- 王德峰
 ```
 
 
@@ -241,7 +272,7 @@ Life is the most difficult exam. Many people fail because they try to copy other
 ```
 我们确认有命之后，我们的人生观才会是积极的。
 
-								- 王德峰
+- 王德峰
 ```
 
 
@@ -249,7 +280,7 @@ Life is the most difficult exam. Many people fail because they try to copy other
 ```
 We suffer more often in imagination than in reality.
 
-													- Seneca
+- Seneca
 ```
 
 
@@ -257,7 +288,7 @@ We suffer more often in imagination than in reality.
 ```
 Life can only be understood backwards; but it must be lived forwards.
 
-													- Soren Kierkegaard
+- Soren Kierkegaard
 ```
 
 
@@ -266,14 +297,15 @@ Life can only be understood backwards; but it must be lived forwards.
 ```
 But man is not made for defeat… A man can be destroyed but not defeated.
 
-											- The Old Man and The Sea, 1952
+- The Old Man and The Sea, 1952
 ```
 
 
 
 ```
 知不可奈何而安之若命，唯有德者能之。
-											- 庄子·德充符
+
+- 庄子·德充符
 ```
 
 
@@ -283,7 +315,7 @@ But man is not made for defeat… A man can be destroyed but not defeated.
 
 I have a philosophy that it doesn't do any good to go and make regrets about what you did before but to try to remember how you made the decision at the time.
 
-										——Richard P. Feynman, Perfectly Reasonable Deviations from the Beaten Track, p. 421
+- Richard P. Feynman, Perfectly Reasonable Deviations from the Beaten Track, p. 421
 ```
 
 
@@ -305,7 +337,7 @@ The secret to coping with any failure is to recognize that each decision you've 
 ```
 There is only one thing that I dread: not to be worthy of my sufferings
 
-									——Viktor E. Frankl, Man's Search for Meaning
+- Viktor E. Frankl, Man's Search for Meaning
 ```
 
 
@@ -313,7 +345,7 @@ There is only one thing that I dread: not to be worthy of my sufferings
 **被讨厌的勇气**
 
 ```
-人生中最大的谎言就是不活在“此时此刻”。纠结过去、关注未来，把微弱而模糊的光打向人生整体，自认为看到了些什么。
+人生中最大的谎言就是不活在"此时此刻"。纠结过去、关注未来，把微弱而模糊的光打向人生整体，自认为看到了些什么。
 ```
 
 
@@ -358,13 +390,17 @@ There is only one thing that I dread: not to be worthy of my sufferings
 
 
 ```
-我永远不能把我的快乐寄托在另一个人的合作上——窦文涛
+我永远不能把我的快乐寄托在另一个人的合作上
+
+- 窦文涛
 ```
 
 
 
 ```
-每当有人问起，为什么我不恋爱的时候，我都以麻烦为由搪塞过去。又有人开始问我到底喜欢过谁没有，我也轻描淡写地表示否定。无数的朋友告诉我，或许是你还没碰到过真正喜欢的人吧，我却没法开口告诉他们，其实我曾经碰到过，碰得太早，以至于我没来得及分清，也没来得及弄明白——jasonwang524
+每当有人问起，为什么我不恋爱的时候，我都以麻烦为由搪塞过去。又有人开始问我到底喜欢过谁没有，我也轻描淡写地表示否定。无数的朋友告诉我，或许是你还没碰到过真正喜欢的人吧，我却没法开口告诉他们，其实我曾经碰到过，碰得太早，以至于我没来得及分清，也没来得及弄明白
+
+- jasonwang524
 ```
 
 
@@ -385,14 +421,16 @@ There is only one thing that I dread: not to be worthy of my sufferings
 
 ```
 成熟的人，处事不会用人情来胁迫人家。预留人家say no 的权利，也是對别人的尊重。
-																	——Rebecca Liang
+
+- Rebecca Liang
 ```
 
 
 
 ```
 爱哪有那么多解释，无非是心底的那片温柔属于某个人而已 
-																	——White Whale
+
+- White Whale
 ```
 
 
@@ -407,7 +445,8 @@ There is only one thing that I dread: not to be worthy of my sufferings
 
 ```
 爱是无条件的，怎么爱是有方法的。
-								-richcrop3950
+
+- richcrop3950
 ```
 
 

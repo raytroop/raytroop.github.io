@@ -91,7 +91,7 @@ $$
 
 ![image-20240817193513058](ahuja/image-20240817193513058.png)
 
-![image-20240817193613297](ahuja/image-20240817193613297.png)
+![image-20240817201727109](ahuja/image-20240817201727109.png)
 
 
 
@@ -112,6 +112,28 @@ I_\text{c,out}  &= (v_o - \alpha v_i)sC_c \\
 \end{align}$$
 
 we get $C_\text{out,eq}= (1+\frac{\alpha }{A_v})C_c\simeq C_c$
+
+
+
+## intuitive analysis of zero
+
+miller compensation
+
+- zero in the **right** half plane
+  $$
+  g_\text{m1}V_P = sC_c V_P
+  $$
+  
+
+cascode compensation
+
+- zero in the **left** half plane
+  $$
+  g_\text{m2}V_X = - sC_c V_x
+  $$
+  
+
+![zero_loc.drawio](ahuja/zero_loc.drawio.svg)
 
 
 

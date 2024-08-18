@@ -129,7 +129,7 @@ cascode compensation
 
 - zero in the **left** half plane
   $$
-  g_\text{m2}V_X = - sC_c V_x
+  g_\text{m2}V_X = - sC_c V_X
   $$
   
 

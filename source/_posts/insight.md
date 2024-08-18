@@ -960,8 +960,6 @@ Avoid *zero current* in cascodes
 
 
 
-
-
 ## reference
 
 M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17, no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.

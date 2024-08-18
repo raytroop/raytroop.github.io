@@ -165,6 +165,22 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 
 ## 悟
 
+[[Why Unloved People Hate Themselves](https://youtu.be/4K41tC_d_7k?si=U9WsCHZ8kLZ-D4Pv)]
+
+[[How Unloving Parents Generate Self-Hating Children](https://youtu.be/ujhn1JdOSB4?si=hROnKx0vMw8Q_sc1)]
+
+
+
+```
+瑞士著名心理学家卡尔·荣格说过：“人们会想尽办法，各种荒谬的办法，来避免面对自己的灵魂。
+
+但他还说过：“只有直面灵魂的人，才会觉醒。”
+```
+
+
+
+
+
 
 
 ```
@@ -180,6 +196,11 @@ Self-pity gets pretty close to paranoia and paranoia is one of the very hardest 
 It's a ridiculous way to behave and when you avoid it you get a great advantage over everybody else, almost everybody else, because self-pity is a standard condition and yet you can train yourself out of it.
 
 - Charlie Munger
+
+
+过度自怜可以让人近乎偏执。 偏执是最难逆转的东西之一。
+自怜总是会产生负面的影响， 它是一种错误的思维方式。 如果你们能够避开它， 你们的优势就远远大于所有其他人， 或者几乎所有其他人， 因为自怜是一种标准的反应。 你们可以通过训练来摆脱它。
+
 ```
 
 
@@ -188,6 +209,37 @@ It's a ridiculous way to behave and when you avoid it you get a great advantage 
 Every mischance in life was an opportunity to learn something and your duty was not to be submerged in self-pity, but to utilize the terrible blow in a constructive fashion. 
 
 - Charlie Munger
+```
+
+
+
+```
+卡森给的确保痛苦生活的处方包括：
+1. 为了改变心情或者感觉而使用化学物质；
+2. 妒忌， 以及
+3. 怨恨。
+
+约翰逊说得好， 他说生活本已艰辛得难以下咽， 何必再将它塞进怨恨的苦涩果皮里呢。
+
+
+
+Carson's prescriptions for sure misery included:
+1) Ingesting chemicals in an effort to alter mood or perception;
+2) Envy; and
+3) Resentment.
+
+Johnson spoke well when he said that life is hard enough to swallow without squeezing in the bitter rind of resentment.
+```
+
+
+
+```
+在生命没有结束之前， 没有人的一生能够被称为是幸福的。
+- 克洛伊斯
+
+
+"No man's life should be accounted a happy one until it is over."
+- Croesus
 ```
 
 

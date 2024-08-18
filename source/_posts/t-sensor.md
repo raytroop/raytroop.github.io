@@ -11,7 +11,7 @@ Due to the fact that *long-term drift* of temperature sensors and bandgap refere
 
 
 
-### $V_{BE}$ curvature
+## $V_{BE}$ curvature
 
 Though it is assumed that  $V_{BE}$ is a linear function of temperature for first oder analysis.
 
@@ -31,7 +31,7 @@ Although the temperature dependence of the bias current $I_b$ doesn’t impact t
 
 ![image-20221106010909644](t-sensor/image-20221106010909644.png)
 
-### PTAT bias current generation
+## PTAT bias current generation
 
 ![image-20221023150817411](t-sensor/image-20221023150817411.png)
 $$
@@ -50,7 +50,7 @@ $$
 I_{bias}\propto  T
 $$
 
-### Errors due to V-I Finite Gain
+## Errors due to V-I Finite Gain
 
 Finite gain introduces errors both in the V-I converters, finite loop gain results in errors in the closed-loop transconductances. 
 
@@ -90,7 +90,7 @@ The finite gain introduces an error inversely proportional to the loop gain $A_{
 
 
 
-### Why is it named as "bandgap reference"
+## Why is it named as "bandgap reference"
 
  Let us write the output voltage as
 $$
@@ -113,9 +113,9 @@ $$
 
 
 
-### Consideration for Readout Circuit
+## Consideration for Readout Circuit
 
-#### ADC dynamic range
+### ADC dynamic range
 
 Take $V_{PTAT}=\alpha \cdot \Delta V_{BE}$ as input and $V_{REF}$ as reference. The output $\mu$ of the ADC will then be
 $$
@@ -139,7 +139,7 @@ With this more efficient combination, *90%* of the dynamic range is used rather 
 
 ![image-20230204220522392](t-sensor/image-20230204220522392.png)
 
-#### Integrator Output Swing
+### Integrator Output Swing
 
 > $$
 > \mu =\frac{\alpha \cdot \Delta V_{BE}}{V_{BE}+\alpha \cdot \Delta V_{BE}}
@@ -163,13 +163,13 @@ Then,  $R_1$ and $R_2$ not only determine the $\alpha$ but also the integrator's
 
 
 
-##### example
+#### example
 
 ![image-20230430112230224](t-sensor/image-20230430112230224.png)
 
-#### integrator, comparator offset
+### integrator, comparator offset
 
-##### integrator offset
+#### integrator offset
 
 ![image-20230430114429118](t-sensor/image-20230430114429118.png)
 
@@ -177,16 +177,60 @@ Then,  $R_1$ and $R_2$ not only determine the $\alpha$ but also the integrator's
 
 
 
-##### comparator offset
+#### comparator offset
 
 ![image-20230501223512686](t-sensor/image-20230501223512686.png)
 
 
 
+## integrator design
+
+### application in sensor
+
+![image-20221106142157115](t-sensor/image-20221106142157115.png)
+
+### Offset Errors
+
+The offset of opamp $A_3$ is **much less critical**:
+
+1.  It affects the integrated currents via the finite output impedances $R_{out1,2}$ of the V-I converters, and is therefore attenuated by a factor $R_{out1}/R_1$ when referred back to the input of the sinking V-I converter, 
+
+2.  or by a factor $R_{out2}/R_2$ when referred back to the input of the sourcing V-I converter. 
+
+Therefore, no special offset cancellation is needed for opamp $A_3$.
+
+The current change due to offset of $A_3$:
+$$\begin{align}
+\frac{V_{BE,os}}{R_1} &= \frac{V_{ota,os}}{R_{out1}} \\
+\frac{\Delta V_{BE,os}}{R_2} &= \frac{V_{ota,os}}{R_{out2}} 
+\end{align}$$
+Then, the input referenced offset is:
+$$\begin{align}
+V_{BE,os} &=\frac{ V_{ota,os}}{R_{out1}/R_1} \\
+\Delta V_{BE,os} &= \frac{ V_{ota,os}}{R_{out2}/R_2}
+\end{align}$$
+
+### Errors due to Finite Gain
+
+Finite gain of opamp $A_3$ results in a non-zero overdrive voltage at its input, which modulates the current Iint due to the finite output impedances of the V-I converters. 
+
+Assuming the opamp is implemented as a **transconductance amplifier**, there are two main causes of this non-zero overdrive voltage
+
+1. The finite transconductance $g_{m3}$ of the opamp, , which implies that an overdrive voltage is required to provide the **feedback current**
+
+​	The change in the integrated current
+
+​	$$\begin{align}
+​	\Delta I_{int} &= \frac{V_{i,ota}}{R_{out}}\\
+​	&= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+​	\end{align}$$
+
+2. The finite DC gain $A_{0,3}$, which implies that an overdrive voltage is required to produce the **output voltage** $V_{int}$
 
 
 
-### reference
+
+## reference
 
 Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H., Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.   
 

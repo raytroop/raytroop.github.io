@@ -1,5 +1,5 @@
 ---
-title: Adaptation in Wireline
+title: adaptation in wireline
 date: 2024-08-11 11:07:31
 tags:
 categories:

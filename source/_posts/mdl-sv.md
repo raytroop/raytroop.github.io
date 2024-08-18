@@ -1,15 +1,25 @@
 ---
-title: Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model
-date: 2022-03-09 23:40:23
+title: Modeling and Simulation in SystemVerilog
+date: 2024-08-18 18:27:17
 tags:
 categories:
 - analog
 mathjax: true
 ---
 
+
+
+
+
+## Single-Pole Filter & Complex Conjugate Pole pair
+
+> Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven PWL model
+
+
+
 **Real number modeling** of analog circuits in hardware description languages (HDLs) has become more common as a part of mixed-signal SoC validation. **Piecewise linear (PWL)** waveform approximation represent analog signals and **dynamically schedule the events** for approximating the signal waveform to PWL segments with a well controlled error bound.
 
-![image-20220310000010013](spf-complex-pwl/image-20220310000010013.png)
+![image-20220310000010013](mdl-sv/image-20220310000010013.png)
 
 Definition of a piecewise liner (PWL) waveform using struct in Systemverilog
 
@@ -20,14 +30,17 @@ typedef struct {
     real t0;	// time offset
 } pwl; // pwl datatype
 ```
-#### When to update piecewise model
+
+### When to update piecewise model
+
 1. model parameter update once new input come in
 2. error is greater than user-define tolerance $e_{tol}$, trigger by $\Delta T$
 
-![tolerance_error.drawio](spf-complex-pwl/tolerance_error.drawio.svg)
+![tolerance_error.drawio](mdl-sv/tolerance_error.drawio.svg)
 
 
-#### Dynamic Time Step Control
+### Dynamic Time Step Control
+
 When approximating a function $y(t)$ to a **piecewise linear segment** for the interval $t_0 \le t_0 + \Delta t$, the approximation error $err$ is bounded by
 $$
 \left| err \right| \le \frac{1}{8}\cdot \Delta t^2 \cdot \max(\left| \ddot{y(t)} \right|)
@@ -37,7 +50,7 @@ $$
 \Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\max(\left| \ddot{y(t)} \right|)}}
 $$
 
-#### Single-Pole Filter Model
+### Single-Pole Filter Model
 
 The **ramp** input $X(s)$, the single pole system Laplace s-domain $H(s)$ and the output response $Y(s)$,
 $$\begin{align}
@@ -52,28 +65,36 @@ x(t) = a +b \cdot t
 $$
 
 1. The output transfer function
-$$\begin{align}
-Y(s) &= X(s) \cdot H(s) \\
-&= \frac{\omega_1}{\omega_1+s}\cdot X
-\end{align}$$
+   $$\begin{align}
+   Y(s) &= X(s) \cdot H(s) \\
+   &= \frac{\omega_1}{\omega_1+s}\cdot X
+   \end{align}$$
+
 $$
 Y\omega_1 + sY = \omega_1 X
 $$
+
 2. its differential equation
+
 $$
 y(t) \cdot \omega_1+\frac{d y(t)}{dt} = \omega_1 \cdot x(t)
 $$
+
 3. Laplace transfrom two side of the above equation, $y_0$ is initial conditon of output, $x_0=0$
+
 $$
 Y\omega_1 + sY-y_0 = \omega_1 \cdot X
 $$
+
 Solving $Y(s)$
 $$\begin{align}
 Y &= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot X \\
 &= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot (\frac{a}{s}+\frac{b}{s^2}) \\
 &= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot \frac{a}{s}+\frac{\omega_1}{\omega_1+s}\cdot\frac{b}{s^2}
 \end{align}$$
+
 4. inverse Laplace transform
+
 $$
 y(t) = y_0e^{-\omega_1t}+(a-a\cdot e^{-\omega_1t})+(b\cdot t-\frac{b}{\omega_1}+\frac{b}{\omega_1}\cdot e^{-\omega_1 t})
 $$
@@ -96,7 +117,7 @@ $$
 \Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\left| \ddot{y(t_0)} \right|}}
 $$
 
-#### Complex Conjugate Pole pair
+### Complex Conjugate Pole pair
 
 $$
 H(s) = \frac{r}{s+\omega_p} + \frac{r^*}{s+\omega_p^*}
@@ -188,7 +209,8 @@ $$
 \Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\left| g_1(t_0) \right|}}
 $$
 
-#### One Fixed-time step SystemVerilog model example
+### One Fixed-time step SystemVerilog model example
+
 ```verilog
 timeunit 1ns;
 timeprecision 1fs;
@@ -207,14 +229,24 @@ initial #0.1 forever begin
 end
 ```
 
-#### Acknowledgement
 
-My colleague, Zhang Wenpian help me a lot in understanding this modeling method. Lots of content here are copied from Zhang's note.
 
-#### Reference
+> **Acknowledgement**
+>
+> My colleague, Zhang Wenpian help me a lot in understanding this modeling method. Lots of content here are copied from Zhang's note.
+
+
+
+## Reference
 
 B. C. Lim and M. Horowitz, "Error Control and Limit Cycle Elimination in Event-Driven Piecewise Linear Analog Functional Models," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 63, no. 1, pp. 23-33, Jan. 2016, doi: 10.1109/TCSI.2015.2512699.
 
 S. Liao and M. Horowitz, "A Verilog piecewise-linear analog behavior model for mixed-signal validation," Proceedings of the IEEE 2013 Custom Integrated Circuits Conference, 2013, pp. 1-5, doi: 10.1109/CICC.2013.6658461.
 
-[StanfordVLSI/DaVE - tools regarding on analog modeling,validation, and generation](https://github.com/StanfordVLSI/DaVE)
+DaVE - tools regarding on analog modeling,validation, and generation, https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)
+
+B. C. Lim, J. -E. Jang, J. Mao, J. Kim and M. Horowitz, "Digital Analog Design: Enabling Mixed-Signal System Validation," in *IEEE Design & Test*, vol. 32, no. 1, pp. 44-52, Feb. 2015 [[http://iot.stanford.edu/pubs/lim-mixed-design15.pdf](http://iot.stanford.edu/pubs/lim-mixed-design15.pdf)]
+
+Liao Sabrina, Verilog piecewise linear behavioral modeling for mixed-signal validation [[https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf](https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf)]
+
+Lim, Byong Chan. Model validation of mixed-signal systems [[https://stacks.stanford.edu/file/druid:xq068rv3398/bclim-thesis-submission-augmented.pdf](https://stacks.stanford.edu/file/druid:xq068rv3398/bclim-thesis-submission-augmented.pdf)]

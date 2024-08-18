@@ -1,6 +1,6 @@
 ---
 title: Data Converter
-date: 2024-08-03 21:21:50
+date: 2024-08-18 14:50:27
 tags:
 categories:
 - analog
@@ -8,6 +8,20 @@ mathjax: true
 ---
 
 
+
+
+
+##  SAR redundancy 
+
+That redundancy, that use of non-binary weighting, allowed it to tolerate mismatch and also slow settling
+
+
+
+
+
+##  asynchronous SAR ADC
+
+> assign the amount of time based on the time needed for each step
 
 
 
@@ -120,7 +134,15 @@ And $N$ often is 256, 512; M is 3, 5, 7, 11.
 
 
 
+## sub-binary radix DAC
 
+*TODO* &#128197;
+
+
+
+> Roermund, Arthur & Hegt, Hans & Harpe, Pieter. (2010). Smart AD and DA Conversion. 10.1007/978-90-481-9042-3.
+>
+> M. Pastre and M. Kayal, "High-precision DAC based on a self-calibrated sub-binary radix converter," 2004 IEEE International Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp. I-I, doi: 10.1109/ISCAS.2004.1328201.
 
 
 

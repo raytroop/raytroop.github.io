@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -190,6 +190,694 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/18/mdl-sv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/18/mdl-sv/" class="post-title-link" itemprop="url">Modeling and Simulation in SystemVerilog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-08-18 18:27:17 / Modified: 13:25:26" itemprop="dateCreated datePublished" datetime="2024-08-18T18:27:17+00:00">2024-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="single-pole-filter-complex-conjugate-pole-pair">Single-Pole
+Filter &amp; Complex Conjugate Pole pair</h2>
+<blockquote>
+<p>Single-Pole Filter and Complex Conjugate Pole pair in Event-Driven
+PWL model</p>
+</blockquote>
+<p><strong>Real number modeling</strong> of analog circuits in hardware
+description languages (HDLs) has become more common as a part of
+mixed-signal SoC validation. <strong>Piecewise linear (PWL)</strong>
+waveform approximation represent analog signals and <strong>dynamically
+schedule the events</strong> for approximating the signal waveform to
+PWL segments with a well controlled error bound.</p>
+<p><img src="/2024/08/18/mdl-sv/image-20220310000010013.png"
+alt="image-20220310000010013" /></p>
+<p>Definition of a piecewise liner (PWL) waveform using struct in
+Systemverilog</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="keyword">real</span> y; <span class="comment">// signal offset</span></span><br><span class="line">    <span class="keyword">real</span> slope; <span class="comment">// signal slope</span></span><br><span class="line">    <span class="keyword">real</span> t0;	<span class="comment">// time offset</span></span><br><span class="line">&#125; pwl; <span class="comment">// pwl datatype</span></span><br></pre></td></tr></table></figure>
+<h3 id="when-to-update-piecewise-model">When to update piecewise
+model</h3>
+<ol type="1">
+<li>model parameter update once new input come in</li>
+<li>error is greater than user-define tolerance <span
+class="math inline">\(e_{tol}\)</span>, trigger by <span
+class="math inline">\(\Delta T\)</span></li>
+</ol>
+<p><img src="/2024/08/18/mdl-sv/tolerance_error.drawio.svg"
+alt="tolerance_error.drawio" /></p>
+<h3 id="dynamic-time-step-control">Dynamic Time Step Control</h3>
+<p>When approximating a function <span
+class="math inline">\(y(t)\)</span> to a <strong>piecewise linear
+segment</strong> for the interval <span class="math inline">\(t_0 \le
+t_0 + \Delta t\)</span>, the approximation error <span
+class="math inline">\(err\)</span> is bounded by <span
+class="math display">\[
+\left| err \right| \le \frac{1}{8}\cdot \Delta t^2 \cdot \max(\left|
+\ddot{y(t)} \right|)
+\]</span> Using Rolle's theorem for the interval <span
+class="math inline">\(t_0 \le t_0 + \Delta t\)</span>, the needed time
+step <span class="math inline">\(\Delta t\)</span> is givend by <span
+class="math display">\[
+\Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\max(\left| \ddot{y(t)}
+\right|)}}
+\]</span></p>
+<h3 id="single-pole-filter-model">Single-Pole Filter Model</h3>
+<p>The <strong>ramp</strong> input <span
+class="math inline">\(X(s)\)</span>, the single pole system Laplace
+s-domain <span class="math inline">\(H(s)\)</span> and the output
+response <span class="math inline">\(Y(s)\)</span>, <span
+class="math display">\[\begin{align}
+X(s) &amp;= \frac{a}{s} +\frac{b}{s^2} \\
+H(s) &amp;= \frac{Y(s)}{X(s)} = \frac{1}{1+\frac{s}{\omega_{1}}} \\
+Y(s) &amp;= X(s) \cdot H(s)
+\end{align}\]</span></p>
+<p>Time domain of ramp input shown as below <span
+class="math display">\[
+x(t) = a +b \cdot t
+\]</span></p>
+<ol type="1">
+<li>The output transfer function <span
+class="math display">\[\begin{align}
+Y(s) &amp;= X(s) \cdot H(s) \\
+&amp;= \frac{\omega_1}{\omega_1+s}\cdot X
+\end{align}\]</span></li>
+</ol>
+<p><span class="math display">\[
+Y\omega_1 + sY = \omega_1 X
+\]</span></p>
+<ol start="2" type="1">
+<li>its differential equation</li>
+</ol>
+<p><span class="math display">\[
+y(t) \cdot \omega_1+\frac{d y(t)}{dt} = \omega_1 \cdot x(t)
+\]</span></p>
+<ol start="3" type="1">
+<li>Laplace transfrom two side of the above equation, <span
+class="math inline">\(y_0\)</span> is initial conditon of output, <span
+class="math inline">\(x_0=0\)</span></li>
+</ol>
+<p><span class="math display">\[
+Y\omega_1 + sY-y_0 = \omega_1 \cdot X
+\]</span></p>
+<p>Solving <span class="math inline">\(Y(s)\)</span> <span
+class="math display">\[\begin{align}
+Y &amp;= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot X \\
+&amp;= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot
+(\frac{a}{s}+\frac{b}{s^2}) \\
+&amp;= \frac{y_0}{\omega_1+s}+\frac{\omega_1}{\omega_1+s}\cdot
+\frac{a}{s}+\frac{\omega_1}{\omega_1+s}\cdot\frac{b}{s^2}
+\end{align}\]</span></p>
+<ol start="4" type="1">
+<li>inverse Laplace transform</li>
+</ol>
+<p><span class="math display">\[
+y(t) = y_0e^{-\omega_1t}+(a-a\cdot e^{-\omega_1t})+(b\cdot
+t-\frac{b}{\omega_1}+\frac{b}{\omega_1}\cdot e^{-\omega_1 t})
+\]</span></p>
+<blockquote>
+<p>step-1 transfer function in Laplace s-domain, which
+<strong>don't</strong> initial conditon and is only steady response.</p>
+<p>step-2 differential equation</p>
+<p>step-3 Laplace transform of <span
+class="math inline">\(Y(s)\)</span>, (the initial conditon of input
+<span class="math inline">\(X(s)\)</span> is zero, that of <span
+class="math inline">\(Y(s)\)</span> is explicit)</p>
+<p>step-4 inverse Laplace transform, with the help of Laplace transform
+table or matlab <code>syms</code> and <code>ilaplace</code> function</p>
+</blockquote>
+<p><span class="math inline">\(y(t)\)</span> has a continuous second
+derivative <span class="math inline">\(\ddot{y(t)}\)</span> <span
+class="math display">\[
+\ddot{y(t)} =(-a+\frac{b}{\omega_1}+y_0)\cdot \omega_1^2\cdot
+e^{-\omega_1t}
+\]</span> It's obvious <span class="math inline">\(\left| \ddot{y(t)}
+\right|\)</span> is a decaying function and thus the maximum value is
+<span class="math inline">\(\left| \ddot{y(t_0)} \right|\)</span> for
+the interval <span class="math inline">\(t_0 \le t_0 + \Delta
+t\)</span>. The time step <span class="math inline">\(\Delta t\)</span>
+for the error tolerance <span class="math inline">\(e_{tol}\)</span>:
+<span class="math display">\[
+\Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\left| \ddot{y(t_0)}
+\right|}}
+\]</span></p>
+<h3 id="complex-conjugate-pole-pair">Complex Conjugate Pole pair</h3>
+<p><span class="math display">\[
+H(s) = \frac{r}{s+\omega_p} + \frac{r^*}{s+\omega_p^*}
+\]</span></p>
+<p>where <span class="math inline">\(\omega_p\)</span> and <span
+class="math inline">\(r\)</span> are complex numbers, <span
+class="math inline">\(r=r_r+jr_i\)</span>, <span
+class="math inline">\(\omega_p=\omega_{pr}+j\omega_{pi}\)</span></p>
+<p>Follow the procedure as above single pole <span
+class="math display">\[
+\frac{Y(s)}{X(s)} = \frac{s\cdot r_{cs}+e}{s^2+s\cdot \omega_{p\_cs}+f}
+\]</span> where <span class="math inline">\(r_{cs}=r+r^*\)</span>, <span
+class="math inline">\(\omega_{p\_cs}=\omega_p+\omega_p^*\)</span> and
+<span class="math inline">\(e=r\omega_p^*+r^*\omega_p\)</span>, <span
+class="math inline">\(f=\omega_p\omega_p^*\)</span> implies <span
+class="math display">\[
+s^2Y(s)+s\omega_{p\_cs}Y(s)+fY(s)=(s\cdot r_{cs}+e)X(s)
+\]</span> or a differential equation <span class="math display">\[
+\frac{d^2y(t)}{dt^2}+\omega_{p\_cs}\frac{dy(t)}{dt}+fy(t)=r_{cs}\frac{dx(t)}{dt}+e\cdot
+x(t)
+\]</span> Taking Laplace transform with initial conditions <span
+class="math inline">\(y_0\)</span>, <span
+class="math inline">\(\dot{y_0}\)</span> and <span
+class="math inline">\(x_0=0\)</span>, <span class="math display">\[
+s^2-sy_0-\dot{y_0}+\omega_{p\_cs}(sY(s)-y_0)+f\cdot y(t) = r_{cs}\cdot
+(sX(s)-0)+e\cdot X(s)
+\]</span> Solving for <span class="math inline">\(Y(s)\)</span> <span
+class="math display">\[
+Y(s)=\frac{s\cdot
+y_0+\dot{y_0}+\omega_{p\_cs}y_0}{s^2+s\cdot{\omega_{p\_cs}}+f}+\frac{s\cdot{r_{cs}}+e}{s^2+s\cdot{\omega_{p\_cs}}+f}X(s)
+\]</span> With an ramp input, height <span
+class="math inline">\(a\)</span>, slope <span
+class="math inline">\(b\)</span>, i.e. <span
+class="math inline">\(X(s)=\frac{a}{s}+\frac{b}{s^2}\)</span> <span
+class="math display">\[
+Y(s)=\frac{s\cdot
+y_0+\dot{y_0}+\omega_{p\_cs}y_0}{s^2+s\cdot{\omega_{p\_cs}}+f}+\frac{s\cdot{r_{cs}}+e}{s^2+s\cdot{\omega_{p\_cs}}+f}(\frac{a}{s}+\frac{b}{s^2})
+\]</span> After inverse Laplace transform, we can get total response
+<span class="math display">\[
+y(t)=e^{-\omega_{pr}t}\cdot \left[ y_0\cdot
+\cos(\omega_{pi}t)+\frac{\dot{y_0}+y_0\omega_{pr}}{\omega_{pi}}\sin(\omega_{pi}t)+D\cdot
+\cos(\omega_{pi}t)+\frac{C-D\cdot{\omega_{pr}}}{\omega_{pi}}\sin(\omega_{pi}t)
+\right]+B+A\cdot{t}
+\]</span> where <span class="math display">\[\begin{align}
+A &amp;= \frac{e\cdot{b}}{f} \\
+B &amp;= \frac{r_{cs}\cdot{b}+a\cdot{e}-A\cdot{\omega_{p\_{cs}}}}{f} \\
+C &amp;= a\cdot{r_{cs}}-A-B\cdot{\omega_{p\_cs}} \\
+D &amp;= -B
+\end{align}\]</span></p>
+<p>As a double check, note that at <span
+class="math inline">\(t=0\)</span>, <span class="math display">\[
+y(0)=\left[ y_0 + D \right]+B=y_0
+\]</span></p>
+<p>To derive derivative, we first assume <span class="math display">\[
+y_0\cdot
+\cos(\omega_{pi}t)+\frac{\dot{y_0}+y_0\omega_{pr}}{\omega_{pi}}\sin(\omega_{pi}t)+D\cdot
+\cos(\omega_{pi}t)+\frac{C-D\cdot{\omega_{pr}}}{\omega_{pi}}\sin(\omega_{pi}t)
+= \alpha \cdot{\cos(\omega_{pi}t+\phi)}
+\]</span> The above equation implies <span
+class="math display">\[\begin{align}
+y_0+D &amp;= \alpha\cdot{\cos(\phi)} \\
+\frac{\dot{y_0}+y_0\omega_{pr}}{\omega_{pi}}+\frac{C-D\cdot{\omega_{pr}}}{\omega_{pi}}
+&amp;= -\alpha\cdot{\sin(\phi)}
+\end{align}\]</span> Then <span class="math display">\[
+\alpha^2=(y_0+D)^2+\left(\frac{\dot{y_0}+y_0\omega_{pr}}{\omega_{pi}}+\frac{C-D\cdot{\omega_{pr}}}{\omega_{pi}}
+\right)^2
+\]</span> And <span class="math inline">\(\alpha\)</span> can be used to
+estimate time step size. The total response is <span
+class="math display">\[
+y(t)=e^{-\omega_{pr}t}\cdot \alpha
+\cdot{\cos(\omega_{pi}t+\phi)}+B+A\cdot{t}
+\]</span> It's second derivative is <span class="math display">\[
+\ddot{y(t)} = \alpha\left[
+(\omega_{pr}^2-\omega_{pi}^2)e^{-\omega_{pr}t}\cos(\omega_{pi}t+\phi)+2\cdot
+\omega_{pr}\omega_{pi}e^{-\omega_{pr}t}\sin(\omega_{pi}t+\phi) \right]
+\]</span> Absolute value <span class="math display">\[
+\left| \ddot{y(t)} \right| = \left| \alpha \right| \left|
+(\omega_{pr}^2-\omega_{pi}^2)e^{-\omega_{pr}t}\cos(\omega_{pi}t+\phi)+2\cdot
+\omega_{pr}\omega_{pi}e^{-\omega_{pr}t}\sin(\omega_{pi}t+\phi) \right|
+\]</span> Define new function <span
+class="math inline">\(g_0(t)\)</span> <span class="math display">\[
+g_0(t) = \left| \alpha \right| \left|
+(\omega_{pr}^2-\omega_{pi}^2)e^{-\omega_{pr}t}\cos(\omega_{pi}t+\phi)
+\right|+2\cdot |\alpha| \left|
+\omega_{pr}\omega_{pi}e^{-\omega_{pr}t}\sin(\omega_{pi}t+\phi) \right|
+\]</span> another new funtion <span
+class="math inline">\(g_1(t)\)</span>, by equating <span
+class="math inline">\(\sin(\omega_{pi}t+\phi)\)</span> and <span
+class="math inline">\(\cos(\omega_{pi}t+\phi)\)</span> to one <span
+class="math display">\[
+g_1(t) = \left| \alpha \right| \left|
+(\omega_{pr}^2-\omega_{pi}^2)e^{-\omega_{pr}t} \right|+2\cdot |\alpha|
+\left| \omega_{pr}\omega_{pi}e^{-\omega_{pr}t} \right|
+\]</span></p>
+<p>By triangular inequality, <span class="math inline">\(g_0(t)\)</span>
+is the upper bound of <span class="math inline">\(\left| \ddot{y(t)}
+\right|\)</span>, and <span class="math inline">\(g_1(t)\)</span> is the
+upper bound of <span class="math inline">\(g_0(t)\)</span></p>
+<p>Because <span class="math inline">\(g_1(t)\)</span> is a decaying
+exponential function, Therefore, a conservative time step can be
+obtained, for inteval <span class="math inline">\(t_0 \le t_0 + \Delta
+t\)</span>, <span class="math display">\[
+\Delta t(t=t_0) = \sqrt{\frac{8\cdot e_{tol}}{\left| g_1(t_0) \right|}}
+\]</span></p>
+<h3 id="one-fixed-time-step-systemverilog-model-example">One Fixed-time
+step SystemVerilog model example</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line"><span class="keyword">timeprecision</span> <span class="number">1</span>fs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">initial</span> #<span class="number">0</span><span class="variable">.1</span> <span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">    Ir4 = (Vm - Vout) / R4;</span><br><span class="line">    Ir3 = (Vcp - Vm) / R3;</span><br><span class="line">    Ir2 = (Vcp - Vz) / R2;</span><br><span class="line"></span><br><span class="line">    Vout = Vout + Ir4 * <span class="number">0</span><span class="variable">.1</span> * (<span class="number">1</span>e-<span class="number">9</span>) / C4;</span><br><span class="line">    Vm = Vm + (Ir3 - Ir4) * <span class="number">0</span><span class="variable">.1</span> * (<span class="number">1</span>e-<span class="number">9</span>) / C3;</span><br><span class="line">    Vz = Vz + Ir2 * <span class="number">0</span><span class="variable">.1</span> * (<span class="number">1</span>e-<span class="number">9</span>) / C2;</span><br><span class="line">    Vcp = Vcp + (Icp - Ir2 - Ir3) * <span class="number">0</span><span class="variable">.1</span> * (<span class="number">1</span>e-<span class="number">9</span>) / C1;</span><br><span class="line">    last_time = <span class="built_in">$realtime</span>;</span><br><span class="line">    #<span class="number">0</span><span class="variable">.1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Acknowledgement</strong></p>
+<p>My colleague, Zhang Wenpian help me a lot in understanding this
+modeling method. Lots of content here are copied from Zhang's note.</p>
+</blockquote>
+<h2 id="reference">Reference</h2>
+<p>B. C. Lim and M. Horowitz, "Error Control and Limit Cycle Elimination
+in Event-Driven Piecewise Linear Analog Functional Models," in IEEE
+Transactions on Circuits and Systems I: Regular Papers, vol. 63, no. 1,
+pp. 23-33, Jan. 2016, doi: 10.1109/TCSI.2015.2512699.</p>
+<p>S. Liao and M. Horowitz, "A Verilog piecewise-linear analog behavior
+model for mixed-signal validation," Proceedings of the IEEE 2013 Custom
+Integrated Circuits Conference, 2013, pp. 1-5, doi:
+10.1109/CICC.2013.6658461.</p>
+<p>DaVE - tools regarding on analog modeling,validation, and generation,
+https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)</p>
+<p>B. C. Lim, J. -E. Jang, J. Mao, J. Kim and M. Horowitz, "Digital
+Analog Design: Enabling Mixed-Signal System Validation," in <em>IEEE
+Design &amp; Test</em>, vol. 32, no. 1, pp. 44-52, Feb. 2015 [<a
+target="_blank" rel="noopener" href="http://iot.stanford.edu/pubs/lim-mixed-design15.pdf">http://iot.stanford.edu/pubs/lim-mixed-design15.pdf</a>]</p>
+<p>Liao Sabrina, Verilog piecewise linear behavioral modeling for
+mixed-signal validation [<a
+target="_blank" rel="noopener" href="https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf">https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf</a>]</p>
+<p>Lim, Byong Chan. Model validation of mixed-signal systems [<a
+target="_blank" rel="noopener" href="https://stacks.stanford.edu/file/druid:xq068rv3398/bclim-thesis-submission-augmented.pdf">https://stacks.stanford.edu/file/druid:xq068rv3398/bclim-thesis-submission-augmented.pdf</a>]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/18/rm-prefix-bash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/18/rm-prefix-bash/" class="post-title-link" itemprop="url">Remove prefix from multiple files in Linux console</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-08-18 16:01:18 / Modified: 13:25:27" itemprop="dateCreated datePublished" datetime="2024-08-18T16:01:18+00:00">2024-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Bash <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for file in prefix*; do mv &quot;$file&quot; &quot;$&#123;file#prefix&#125;&quot;; done;</span><br></pre></td></tr></table></figure> The for loop iterates over all files with the
+prefix. The do removes from all those files iterated over the
+prefix.</p>
+<p>Here is an example to remove "bla_" form the following files:
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bla_1.txt</span><br><span class="line">bla_2.txt</span><br><span class="line">bla_3.txt</span><br><span class="line">blub.txt</span><br></pre></td></tr></table></figure> Command <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for file in bla_*; do mv &quot;$file&quot; &quot;$&#123;file#bla_&#125;&quot;;done;</span><br></pre></td></tr></table></figure> Result in file system:
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.txt</span><br><span class="line">2.txt</span><br><span class="line">3.txt</span><br><span class="line">blub.txt</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>[<a
+target="_blank" rel="noopener" href="https://gist.github.com/guisehn/5438bbc22138435665c6e996493fe02b">https://gist.github.com/guisehn/5438bbc22138435665c6e996493fe02b</a>]</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/18/ad-da/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/18/ad-da/" class="post-title-link" itemprop="url">Data Converter</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-08-18 14:50:27 / Modified: 13:25:26" itemprop="dateCreated datePublished" datetime="2024-08-18T14:50:27+00:00">2024-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="sar-redundancy">SAR redundancy</h2>
+<p>That redundancy, that use of non-binary weighting, allowed it to
+tolerate mismatch and also slow settling</p>
+<h2 id="asynchronous-sar-adc">asynchronous SAR ADC</h2>
+<blockquote>
+<p>assign the amount of time based on the time needed for each step</p>
+</blockquote>
+<h2 id="delta-sigma">Delta-Sigma</h2>
+<blockquote>
+<p>B. Razavi, "The Delta-Sigma Modulator [A Circuit for All Seasons],"
+IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 20, pp. 10-15,
+Spring 2016.</p>
+<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
+Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
+<p>Richard Schreier (2022). Delta Sigma Toolbox
+(https://www.mathworks.com/matlabcentral/fileexchange/19-delta-sigma-toolbox),
+MATLAB Central File Exchange. Retrieved June 28, 2022.</p>
+<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
+Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
+<p>Manolis Terrovitis and Ken Kundert. <a
+target="_blank" rel="noopener" href="https://designers-guide.org/analysis/delta-sigma.pdf">Device noise
+simulation of delta-sigma modulators</a> and associated Matlab scripts:
+<a
+target="_blank" rel="noopener" href="https://designers-guide.org/analysis/scripts.tar.gz">scripts.tar.gz</a>,
+<a
+target="_blank" rel="noopener" href="https://designers-guide.org/analysis/scripts.zip">scripts.zip</a>.</p>
+<p>Oversampling and Noise Shaping in Delta-Sigma Modulation [<a
+target="_blank" rel="noopener" href="https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation">https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation</a>]</p>
+<p>David A. Johns. ECE1371H - Advanced Analog Circuits - Spring 2014 [<a
+target="_blank" rel="noopener" href="https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html">https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html</a>]</p>
+<p>R.S. Ashwin Kumar. EE698I: Mixed-signal IC design [<a
+target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html">https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html</a>]</p>
+<p>R.S. Ashwin Kumar. EE698W: Analog circuits for signal processing [<a
+target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html">https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html</a>]</p>
+<p>Vishal Saxena. ECE 697 Delta-Sigma Data Converter Design [<a
+target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm</a>]</p>
+<p>-, ECE 615 Mixed Signal IC Design Spring 2016, Boise State University
+[<a
+target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece615/s16/ECE615.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece615/s16/ECE615.htm</a>]</p>
+<p>Richard E. Schreier, ECE 1371 Advanced Analog Circuits Notes 2015 [<a
+target="_blank" rel="noopener" href="http://individual.utoronto.ca/schreier/ece1371-2015.html">http://individual.utoronto.ca/schreier/ece1371-2015.html</a>]</p>
+<p>Dai, Getting Started With Delta-Sigma ADC Design [<a
+target="_blank" rel="noopener" href="https://everynanocounts.com/2022/06/02/getting-started-with-delta-sigma-adc-design/">https://everynanocounts.com/2022/06/02/getting-started-with-delta-sigma-adc-design/</a>]</p>
+</blockquote>
+<h2 id="coherent-sampling">Coherent Sampling</h2>
+<p>To avoid <strong>spectral leakage</strong> completely, the method of
+<strong>coherent sampling</strong> is recommended. Coherent sampling
+requires that the input- and clock-frequency generators are
+<strong>phase locked</strong>, and that the input frequency be chosen
+based on the following relationship: <span class="math display">\[
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(f_{\text{in}}\)</span> = the desired
+input frequency</li>
+<li><span class="math inline">\(f_s\)</span> = the clock frequency of
+the data converter under test</li>
+<li><span class="math inline">\(M_C\)</span> = the number of cycles in
+the data window (to make all samples unique, choose odd or prime
+numbers)</li>
+<li><span class="math inline">\(N_R\)</span> = the data record length
+(for an 8192-point FFT, the data record is 8192s long)</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+f_{\text{in}} &amp;=\frac{f_s}{N_R}\cdot M_C \\
+&amp;= f_{\text{res}}\cdot M_C
+\end{align}\]</span></p>
+<h3 id="irreducible-ratio">irreducible ratio</h3>
+<p>An <strong>irreducible ratio</strong> ensures identical code
+sequences not to be repeated multiple times. Unnecessary repetition of
+the same code is not desirable as it increases ADC test time.</p>
+<blockquote>
+<p>Given that <span class="math inline">\(\frac{M_C}{N_R}\)</span> is
+irreducible, and <span class="math inline">\(N_R\)</span> is a power of
+2, an <strong>odd number</strong> for <span
+class="math inline">\(M_C\)</span> will always produce an
+<strong>irreducible ratio</strong></p>
+</blockquote>
+<p>Assuming there is a common factor <span
+class="math inline">\(k\)</span> between <span
+class="math inline">\(M_C\)</span> and <span
+class="math inline">\(N_R\)</span>, i.e. <span
+class="math inline">\(\frac{M_C}{N_R}=\frac{k M_C&#39;}{k
+N_R&#39;}\)</span></p>
+<p>The samples (<span class="math inline">\(n\in[1, N_R]\)</span>)</p>
+<p><span class="math display">\[\begin{align}
+y[n] &amp;= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
+&amp;= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
+&amp; = \sin\left( \omega_{\text{in}} \cdot
+n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
+&amp; = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+\end{align}\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\begin{align}
+y[n+N_R&#39;] &amp;= \sin\left( 2\pi (n+N_R&#39;)\frac{M_C}{N_R} \right)
+\\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{M_C}{N_R}\right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{kM_C&#39;}{kN_R&#39;} \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C&#39; \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
+\end{align}\]</span></p>
+<p>So, the samples is repeated <span class="math inline">\(y[n] =
+y[n+N_R&#39;]\)</span>. Usually, no additional information is gained by
+repeating with the same sampling points.</p>
+<h3 id="example">Example</h3>
+<p><span class="math display">\[
+N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}
+\]</span> where <span class="math inline">\(F_s\)</span> is sample
+frequency, <span class="math inline">\(F_{in}\)</span> input signal
+frequency.</p>
+<p>And <span class="math inline">\(N\)</span> often is 256, 512; M is 3,
+5, 7, 11.</p>
+<h2 id="sub-binary-radix-dac">sub-binary radix DAC</h2>
+<p><em>TODO</em> 📅</p>
+<blockquote>
+<p>Roermund, Arthur &amp; Hegt, Hans &amp; Harpe, Pieter. (2010). Smart
+AD and DA Conversion. 10.1007/978-90-481-9042-3.</p>
+<p>M. Pastre and M. Kayal, "High-precision DAC based on a
+self-calibrated sub-binary radix converter," 2004 IEEE International
+Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp.
+I-I, doi: 10.1109/ISCAS.2004.1328201.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>everynanocounts. Memos on FFT With Windowing. URL: <a
+target="_blank" rel="noopener" href="https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/">https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/</a></p>
+<p>How to choose FFT depth for ADC performance analysis (SINAD, ENOB).
+URL:<a
+target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a></p>
+<p>Computation of Effective Number of Bits, Signal to Noise Ratio, &amp;
+Signal to Noise &amp; Distortion Ratio Using FFT. URL:<a
+target="_blank" rel="noopener" href="https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf">https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf</a></p>
+<p>Kester, Walt. (2009). Understand SINAD, ENOB, SNR, THD, THD + N, and
+SFDR so You Don't Get Lost in the Noise Floor. URL:<a
+target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf</a></p>
+<p>T. C. Hofner: Dynamic ADC testing part I. Defining and testing
+dynamic ADC parameters, Microwaves &amp; RF, 2000, vol. 39, no. 11, pp.
+75-84,162</p>
+<p>T. C. Hofner: Dynamic ADC testing part 2. Measuring and evaluating
+dynamic line parameters, Microwaves &amp; RF, 2000, vol. 39, no. 13, pp.
+78-94</p>
+<p>AN9675: A Tutorial in Coherent and Windowed Sampling with A/D
+Converters <a
+target="_blank" rel="noopener" href="https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters">https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters</a></p>
+<p>APPLICATION NOTE 3190: Coherent Sampling Calculator (CSC) <a
+target="_blank" rel="noopener" href="https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html">https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html</a></p>
+<p>Coherent Sampling (Very Brief and Simple) <a
+target="_blank" rel="noopener" href="https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple">https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple</a></p>
+<p>Signal Chain Basics #160: Making sense of coherent and noncoherent
+sampling in data-converter testing <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/">https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/</a></p>
+<p>Signal Chain Basics #104: Understanding noise in ADCs <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/">https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/</a></p>
+<p>Signal Chain Basics #101: ENOB Degradation Analysis Over Frequency
+Due to Jitter <a
+target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/">https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/</a></p>
+<p>Clock jitter analyzed in the time domain, Part 1, Texas Instruments
+Analog Applications Journal (slyt379), Aug 2010 <a
+target="_blank" rel="noopener" href="https://www.ti.com/lit/an/slyt379/slyt379.pdf">https://www.ti.com/lit/an/slyt379/slyt379.pdf</a></p>
+<p>Clock jitter analyzed in the time domain, Part 2 <a
+target="_blank" rel="noopener" href="https://www.ti.com/lit/slyt389">https://www.ti.com/lit/slyt389</a></p>
+<p>Measurement of Total Harmonic Distortion and Its Related Parameters
+using Multi-Instrument [<a
+target="_blank" rel="noopener" href="https://www.virtins.com/doc/Measurement-of-Total-Harmonic-Distortion-and-Its-Related-Parameters-using-Multi-Instrument.pdf">pdf</a>]</p>
+<p>Application Note AN-4: Understanding Data Converters' Frequency
+Domain Specifications [<a
+target="_blank" rel="noopener" href="https://www.datel.com/data/ads/adc-an4.pdf">pdf</a>]</p>
+<p>Belleman, J. (2008). From analog to digital.
+10.5170/CERN-2008-003.131. [<a
+target="_blank" rel="noopener" href="https://cds.cern.ch/record/1100535/files/p131.pdf">pdf</a>]</p>
+<p>HandWiki. Coherent sampling [<a
+target="_blank" rel="noopener" href="https://handwiki.org/wiki/Coherent_sampling">link</a>]</p>
+<p>Luis Chioye, TI. Leverage coherent sampling and FFT windows when
+evaluating SAR ADCs (Part 1) [<a
+target="_blank" rel="noopener" href="https://e2e.ti.com/blogs_/archives/b/precisionhub/posts/leverage-coherent-sampling-and-fft-windows-when-evaluating-sar-adcs-part-1">link</a>]</p>
+<p>Coherent Sampling vs. Window Sampling | Analog Devices <a
+target="_blank" rel="noopener" href="https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html">https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html</a></p>
+<p>Understanding Effective Number of Bits <a
+target="_blank" rel="noopener" href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/">https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/</a></p>
+<p>ADC Input Noise: The Good, The Bad, and The Ugly. Is No Noise Good
+Noise? [<a
+target="_blank" rel="noopener" href="https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html">https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html</a>]</p>
+<p>Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR =
+6.02N + 1.76dB," and Why You Should Care [<a
+target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf</a>]</p>
+<p>Dan Boschen, "How to choose FFT depth for ADC performance analysis
+(SINAD, ENOB)", [<a
+target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a>]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/11/adapt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -208,7 +896,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/08/11/adapt/" class="post-title-link" itemprop="url">Adaptation in Wireline</a>
+          <a href="/2024/08/11/adapt/" class="post-title-link" itemprop="url">adaptation in wireline</a>
         </h2>
 
         <div class="post-meta-container">
@@ -226,7 +914,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
+      <time title="Modified: 2024-08-18 13:25:26" itemprop="dateModified" datetime="2024-08-18T13:25:26+00:00">2024-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -516,263 +1204,6 @@ on Circuits and Systems I: Regular Papers</em>, doi:
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/03/ad-da/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/08/03/ad-da/" class="post-title-link" itemprop="url">Data Converter</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-08-03 21:21:50" itemprop="dateCreated datePublished" datetime="2024-08-03T21:21:50+00:00">2024-08-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="delta-sigma">Delta-Sigma</h2>
-<blockquote>
-<p>B. Razavi, "The Delta-Sigma Modulator [A Circuit for All Seasons],"
-IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 20, pp. 10-15,
-Spring 2016.</p>
-<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
-Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
-<p>Richard Schreier (2022). Delta Sigma Toolbox
-(https://www.mathworks.com/matlabcentral/fileexchange/19-delta-sigma-toolbox),
-MATLAB Central File Exchange. Retrieved June 28, 2022.</p>
-<p>Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H.,
-Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.</p>
-<p>Manolis Terrovitis and Ken Kundert. <a
-target="_blank" rel="noopener" href="https://designers-guide.org/analysis/delta-sigma.pdf">Device noise
-simulation of delta-sigma modulators</a> and associated Matlab scripts:
-<a
-target="_blank" rel="noopener" href="https://designers-guide.org/analysis/scripts.tar.gz">scripts.tar.gz</a>,
-<a
-target="_blank" rel="noopener" href="https://designers-guide.org/analysis/scripts.zip">scripts.zip</a>.</p>
-<p>Oversampling and Noise Shaping in Delta-Sigma Modulation [<a
-target="_blank" rel="noopener" href="https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation">https://resources.system-analysis.cadence.com/blog/msa2021-oversampling-and-noise-shaping-in-delta-sigma-modulation</a>]</p>
-<p>David A. Johns. ECE1371H - Advanced Analog Circuits - Spring 2014 [<a
-target="_blank" rel="noopener" href="https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html">https://www.eecg.toronto.edu/~johns/ece1371/ece1371.html</a>]</p>
-<p>R.S. Ashwin Kumar. EE698I: Mixed-signal IC design [<a
-target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html">https://home.iitk.ac.in/~ashwinrs/2023_EE698I.html</a>]</p>
-<p>R.S. Ashwin Kumar. EE698W: Analog circuits for signal processing [<a
-target="_blank" rel="noopener" href="https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html">https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html</a>]</p>
-<p>Vishal Saxena. ECE 697 Delta-Sigma Data Converter Design [<a
-target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece697A/s10/ECE697.htm</a>]</p>
-<p>-, ECE 615 Mixed Signal IC Design Spring 2016, Boise State University
-[<a
-target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses/ece615/s16/ECE615.htm">https://www.eecis.udel.edu/~vsaxena/courses/ece615/s16/ECE615.htm</a>]</p>
-<p>Richard E. Schreier, ECE 1371 Advanced Analog Circuits Notes 2015 [<a
-target="_blank" rel="noopener" href="http://individual.utoronto.ca/schreier/ece1371-2015.html">http://individual.utoronto.ca/schreier/ece1371-2015.html</a>]</p>
-<p>Dai, Getting Started With Delta-Sigma ADC Design [<a
-target="_blank" rel="noopener" href="https://everynanocounts.com/2022/06/02/getting-started-with-delta-sigma-adc-design/">https://everynanocounts.com/2022/06/02/getting-started-with-delta-sigma-adc-design/</a>]</p>
-</blockquote>
-<h2 id="coherent-sampling">Coherent Sampling</h2>
-<p>To avoid <strong>spectral leakage</strong> completely, the method of
-<strong>coherent sampling</strong> is recommended. Coherent sampling
-requires that the input- and clock-frequency generators are
-<strong>phase locked</strong>, and that the input frequency be chosen
-based on the following relationship: <span class="math display">\[
-\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
-\]</span></p>
-<p>where:</p>
-<ul>
-<li><span class="math inline">\(f_{\text{in}}\)</span> = the desired
-input frequency</li>
-<li><span class="math inline">\(f_s\)</span> = the clock frequency of
-the data converter under test</li>
-<li><span class="math inline">\(M_C\)</span> = the number of cycles in
-the data window (to make all samples unique, choose odd or prime
-numbers)</li>
-<li><span class="math inline">\(N_R\)</span> = the data record length
-(for an 8192-point FFT, the data record is 8192s long)</li>
-</ul>
-<p><span class="math display">\[\begin{align}
-f_{\text{in}} &amp;=\frac{f_s}{N_R}\cdot M_C \\
-&amp;= f_{\text{res}}\cdot M_C
-\end{align}\]</span></p>
-<h3 id="irreducible-ratio">irreducible ratio</h3>
-<p>An <strong>irreducible ratio</strong> ensures identical code
-sequences not to be repeated multiple times. Unnecessary repetition of
-the same code is not desirable as it increases ADC test time.</p>
-<blockquote>
-<p>Given that <span class="math inline">\(\frac{M_C}{N_R}\)</span> is
-irreducible, and <span class="math inline">\(N_R\)</span> is a power of
-2, an <strong>odd number</strong> for <span
-class="math inline">\(M_C\)</span> will always produce an
-<strong>irreducible ratio</strong></p>
-</blockquote>
-<p>Assuming there is a common factor <span
-class="math inline">\(k\)</span> between <span
-class="math inline">\(M_C\)</span> and <span
-class="math inline">\(N_R\)</span>, i.e. <span
-class="math inline">\(\frac{M_C}{N_R}=\frac{k M_C&#39;}{k
-N_R&#39;}\)</span></p>
-<p>The samples (<span class="math inline">\(n\in[1, N_R]\)</span>)</p>
-<p><span class="math display">\[\begin{align}
-y[n] &amp;= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
-&amp;= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
-&amp; = \sin\left( \omega_{\text{in}} \cdot
-n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
-&amp; = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
-\end{align}\]</span></p>
-<p>Then</p>
-<p><span class="math display">\[\begin{align}
-y[n+N_R&#39;] &amp;= \sin\left( 2\pi (n+N_R&#39;)\frac{M_C}{N_R} \right)
-\\
-&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
-N_R&#39;\frac{M_C}{N_R}\right) \\
-&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
-N_R&#39;\frac{kM_C&#39;}{kN_R&#39;} \right) \\
-&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C&#39; \right) \\
-&amp; = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
-\end{align}\]</span></p>
-<p>So, the samples is repeated <span class="math inline">\(y[n] =
-y[n+N_R&#39;]\)</span>. Usually, no additional information is gained by
-repeating with the same sampling points.</p>
-<h3 id="example">Example</h3>
-<p><span class="math display">\[
-N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}
-\]</span> where <span class="math inline">\(F_s\)</span> is sample
-frequency, <span class="math inline">\(F_{in}\)</span> input signal
-frequency.</p>
-<p>And <span class="math inline">\(N\)</span> often is 256, 512; M is 3,
-5, 7, 11.</p>
-<h2 id="reference">reference</h2>
-<p>everynanocounts. Memos on FFT With Windowing. URL: <a
-target="_blank" rel="noopener" href="https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/">https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/</a></p>
-<p>How to choose FFT depth for ADC performance analysis (SINAD, ENOB).
-URL:<a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a></p>
-<p>Computation of Effective Number of Bits, Signal to Noise Ratio, &amp;
-Signal to Noise &amp; Distortion Ratio Using FFT. URL:<a
-target="_blank" rel="noopener" href="https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf">https://cdn.teledynelecroy.com/files/appnotes/computation_of_effective_no_bits.pdf</a></p>
-<p>Kester, Walt. (2009). Understand SINAD, ENOB, SNR, THD, THD + N, and
-SFDR so You Don't Get Lost in the Noise Floor. URL:<a
-target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-003.pdf</a></p>
-<p>T. C. Hofner: Dynamic ADC testing part I. Defining and testing
-dynamic ADC parameters, Microwaves &amp; RF, 2000, vol. 39, no. 11, pp.
-75-84,162</p>
-<p>T. C. Hofner: Dynamic ADC testing part 2. Measuring and evaluating
-dynamic line parameters, Microwaves &amp; RF, 2000, vol. 39, no. 13, pp.
-78-94</p>
-<p>AN9675: A Tutorial in Coherent and Windowed Sampling with A/D
-Converters <a
-target="_blank" rel="noopener" href="https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters">https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters</a></p>
-<p>APPLICATION NOTE 3190: Coherent Sampling Calculator (CSC) <a
-target="_blank" rel="noopener" href="https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html">https://www.stg-maximintegrated.com/en/design/technical-documents/app-notes/3/3190.html</a></p>
-<p>Coherent Sampling (Very Brief and Simple) <a
-target="_blank" rel="noopener" href="https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple">https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple</a></p>
-<p>Signal Chain Basics #160: Making sense of coherent and noncoherent
-sampling in data-converter testing <a
-target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/">https://www.planetanalog.com/signal-chain-basics-160-making-sense-of-coherent-and-noncoherent-sampling-in-data-converter-testing/</a></p>
-<p>Signal Chain Basics #104: Understanding noise in ADCs <a
-target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/">https://www.planetanalog.com/signal-chain-basics-part-104-understanding-noise-in-adcs/</a></p>
-<p>Signal Chain Basics #101: ENOB Degradation Analysis Over Frequency
-Due to Jitter <a
-target="_blank" rel="noopener" href="https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/">https://www.planetanalog.com/signal-chain-basics-part-101-enob-degradation-analysis-over-frequency-due-to-jitter/</a></p>
-<p>Clock jitter analyzed in the time domain, Part 1, Texas Instruments
-Analog Applications Journal (slyt379), Aug 2010 <a
-target="_blank" rel="noopener" href="https://www.ti.com/lit/an/slyt379/slyt379.pdf">https://www.ti.com/lit/an/slyt379/slyt379.pdf</a></p>
-<p>Clock jitter analyzed in the time domain, Part 2 <a
-target="_blank" rel="noopener" href="https://www.ti.com/lit/slyt389">https://www.ti.com/lit/slyt389</a></p>
-<p>Measurement of Total Harmonic Distortion and Its Related Parameters
-using Multi-Instrument [<a
-target="_blank" rel="noopener" href="https://www.virtins.com/doc/Measurement-of-Total-Harmonic-Distortion-and-Its-Related-Parameters-using-Multi-Instrument.pdf">pdf</a>]</p>
-<p>Application Note AN-4: Understanding Data Converters' Frequency
-Domain Specifications [<a
-target="_blank" rel="noopener" href="https://www.datel.com/data/ads/adc-an4.pdf">pdf</a>]</p>
-<p>Belleman, J. (2008). From analog to digital.
-10.5170/CERN-2008-003.131. [<a
-target="_blank" rel="noopener" href="https://cds.cern.ch/record/1100535/files/p131.pdf">pdf</a>]</p>
-<p>HandWiki. Coherent sampling [<a
-target="_blank" rel="noopener" href="https://handwiki.org/wiki/Coherent_sampling">link</a>]</p>
-<p>Luis Chioye, TI. Leverage coherent sampling and FFT windows when
-evaluating SAR ADCs (Part 1) [<a
-target="_blank" rel="noopener" href="https://e2e.ti.com/blogs_/archives/b/precisionhub/posts/leverage-coherent-sampling-and-fft-windows-when-evaluating-sar-adcs-part-1">link</a>]</p>
-<p>Coherent Sampling vs. Window Sampling | Analog Devices <a
-target="_blank" rel="noopener" href="https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html">https://www.analog.com/en/technical-articles/coherent-sampling-vs-window-sampling.html</a></p>
-<p>Understanding Effective Number of Bits <a
-target="_blank" rel="noopener" href="https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/">https://robustcircuitdesign.com/signal-chain-explorer/understanding-effective-number-of-bits/</a></p>
-<p>ADC Input Noise: The Good, The Bad, and The Ugly. Is No Noise Good
-Noise? [<a
-target="_blank" rel="noopener" href="https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html">https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html</a>]</p>
-<p>Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR =
-6.02N + 1.76dB," and Why You Should Care [<a
-target="_blank" rel="noopener" href="https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf">https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf</a>]</p>
-<p>Dan Boschen, "How to choose FFT depth for ADC performance analysis
-(SINAD, ENOB)", [<a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/38201</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/27/biasing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -809,7 +1240,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">http
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
+      <time title="Modified: 2024-08-18 13:25:26" itemprop="dateModified" datetime="2024-08-18T13:25:26+00:00">2024-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1305,7 +1736,7 @@ pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
+      <time title="Modified: 2024-08-18 13:25:27" itemprop="dateModified" datetime="2024-08-18T13:25:27+00:00">2024-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1450,7 +1881,7 @@ alt="image-20240725204527121" /> <span class="math display">\[
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
+      <time title="Modified: 2024-08-18 13:25:26" itemprop="dateModified" datetime="2024-08-18T13:25:26+00:00">2024-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1472,7 +1903,8 @@ alt="image-20240725204527121" /> <span class="math display">\[
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="reference">reference</h2>
+          <p><em>TODO</em> 📅</p>
+<h2 id="reference">reference</h2>
 <p>[<a
 target="_blank" rel="noopener" href="https://www.testfixtures.com/are-you-overlooking-latch-up/#:~:text=Latch%2Dup%20happens%20when%20a,permanent%20damage%20to%20the%20device.">https://www.testfixtures.com/are-you-overlooking-latch-up/#:~:text=Latch%2Dup%20happens%20when%20a,permanent%20damage%20to%20the%20device.</a>]</p>
 <p>[<a
@@ -1541,7 +1973,7 @@ target="_blank" rel="noopener" href="https://www.analog.com/en/resources/technic
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:24" itemprop="dateModified" datetime="2024-08-17T12:35:24+00:00">2024-08-17</time>
+      <time title="Modified: 2024-08-18 13:25:27" itemprop="dateModified" datetime="2024-08-18T13:25:27+00:00">2024-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1764,7 +2196,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
+      <time title="Modified: 2024-08-18 13:25:26" itemprop="dateModified" datetime="2024-08-18T13:25:26+00:00">2024-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2043,7 +2475,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
+      <time title="Modified: 2024-08-18 13:25:27" itemprop="dateModified" datetime="2024-08-18T13:25:27+00:00">2024-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2090,568 +2522,6 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
 target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i?language=en_US">https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i?language=en_US</a>]</p>
 <p>Timing 201 #2: The Case of the Phase Noise That Wasn’t - Part 2, [<a
 target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US">https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/linkModeling/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/15/linkModeling/" class="post-title-link" itemprop="url">Link Modeling</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-05-15 15:57:03" itemprop="dateCreated datePublished" datetime="2024-05-15T15:57:03+00:00">2024-05-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="adc-resolution">ADC Resolution</h2>
-<p><em>TODO</em> 📅</p>
-<h2 id="decimation">Decimation</h2>
-<ul>
-<li><p>Decimation is commonly employed to alleviate the high-speed
-requirement. However, decimation increases loop-latency which causes
-excessive dither jitter.</p></li>
-<li><p>Decimation is basically, widen the data and slowing it
-down</p></li>
-<li><p>Decimating by <span class="math inline">\(L\)</span> means
-frequency register only added once every <span
-class="math inline">\(L\)</span> UI, thus <em>integral path gain</em>
-reduced by <span class="math inline">\(L\)</span> in linear
-model</p></li>
-</ul>
-<p><img src="/2024/05/15/linkModeling/intg_path_decim.drawio.svg"
-alt="intg_path_decim.drawio" /></p>
-<h3 id="decimation-by-summing">Decimation by Summing</h3>
-<blockquote>
-<p>In DSP this is called <em>boxcar filter</em></p>
-<p><span class="math inline">\(\sum d_n\)</span>, where <span
-class="math inline">\(d_n \in \{-1, 0, 1\}\)</span></p>
-</blockquote>
-<ul>
-<li>Decimation via boxcar filter produces a DC gain, <span
-class="math inline">\(K_b\)</span>, corresponding to the <em>decimation
-factor</em>.</li>
-</ul>
-<p><img src="/2024/05/15/linkModeling/image-20240813222409404.png"
-alt="image-20240813222409404" /></p>
-<p>Loop gain of <em>proportional path</em> is unchanged</p>
-<h3 id="decimation-by-voting">Decimation by Voting</h3>
-<blockquote>
-<p>equivalent <span class="math inline">\(\sum d_n \lt 0 \to
--1\)</span>, <span class="math inline">\(\sum d_n = 0 \to 0\)</span> and
-<span class="math inline">\(\sum d_n\gt 0 \to 1\)</span></p>
-<p>Compared to the boxcar filter, voting is able to reduce the loop
-delay and lower the output noise of the MMPD</p>
-</blockquote>
-<ul>
-<li>Decimation via voting has a reduced gain, <span
-class="math inline">\(K_V\)</span>, which can be determined through
-simulation</li>
-</ul>
-<p><img src="/2024/05/15/linkModeling/image-20240813223338067.png"
-alt="image-20240813223338067" /></p>
-<blockquote>
-<p>P. K. Hanumolu, M. G. Kim, G. -y. Wei and U. -k. Moon, "A 1.6Gbps
-Digital Clock and Data Recovery Circuit," <em>IEEE Custom Integrated
-Circuits Conference 2006</em>, San Jose, CA, USA, 2006, pp. 603-606</p>
-<p>J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery
-Architecture for Multi-Gigabit/s Binary Links," in <em>IEEE Journal of
-Solid-State Circuits</em>, vol. 41, no. 8, pp. 1867-1875, Aug. 2006</p>
-<p>John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data
-Recovery" [<a
-target="_blank" rel="noopener" href="https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf">https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf</a>]</p>
-<p>Pavan Hanumolu, ISSCC 2015 tutorial. "Clock and Data Recovery
-Architectures &amp; Circuits"</p>
-<p>Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming
-Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and
-Modeling of Mueller-Muller Clock and Data Recovery Circuits"
-<em>Electronics</em> 10, no. 16: 1888.
-https://doi.org/10.3390/electronics10161888</p>
-<p>Gu, Youzhi &amp; Feng, Xinjie &amp; Chi, Runze &amp; Chen, Yongzhen
-&amp; Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data
-Recovery Circuits with a Linearized Model.
-10.21203/rs.3.rs-1817774/v1.</p>
-</blockquote>
-<h2 id="phase-integrator">Phase Integrator</h2>
-<p>sub-resolution bits: gain reduction through sub-resolution bits</p>
-<blockquote>
-<p>John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data
-Recovery" [<a
-target="_blank" rel="noopener" href="https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf">https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf</a>]</p>
-</blockquote>
-<h2 id="ber-with-quantization-noise">BER with Quantization Noise</h2>
-<p><img src="/2024/05/15/linkModeling/image-20240804110522955.png"
-alt="image-20240804110522955" /></p>
-<blockquote>
-<p><span class="math display">\[
-\text{Var}(X) = E[X^2] - E[X]^2
-\]</span> <img
-src="/2024/05/15/linkModeling/image-20240804110235178.png"
-alt="image-20240804110235178" /></p>
-</blockquote>
-<h2 id="impulse-response-or-pulse-response">Impulse Response or Pulse
-Response</h2>
-<p><img src="/2024/05/15/linkModeling/image-20240807221637401.png"
-alt="image-20240807221637401" /></p>
-<p><img src="/2024/05/15/linkModeling/image-20240807224407213.png"
-alt="image-20240807224407213" /><img
-src="/2024/05/15/linkModeling/image-20240807224505987.png"
-alt="image-20240807224505987" /></p>
-<h2 id="tx-ffe">TX FFE</h2>
-<p>TX FFE suffers from the peak power constraint, which in effect
-attenuates the average power of the outgoing signal - the low-frequency
-signal content has been attenuated down to the high-frequency level</p>
-<p><img src="/2024/05/15/linkModeling/image-20240727225120002.png"
-alt="image-20240727225120002" /></p>
-<blockquote>
-<p>[<a
-target="_blank" rel="noopener" href="https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems">https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems</a>]</p>
-<p><strong>S. Palermo</strong>, "CMOS Nanoelectronics Analog and RF VLSI
-Circuits," <a
-target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/docs/serial_links_chapter_palermo_2011.pdf">Chapter
-9: High-Speed Serial I/O Design for Channel-Limited and
-Power-Constrained Systems</a>, McGraw-Hill, 2011.</p>
-</blockquote>
-<h2 id="statistical-eye">statistical eye</h2>
-<p><em>TODO</em> 📅</p>
-<blockquote>
-<p>Sanders, Anthony, Michael Resso and John D'Ambrosia. "Channel
-Compliance Testing Utilizing Novel Statistical Eye Methodology."
-(2004).</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne
-(EPFL). <a
-target="_blank" rel="noopener" href="https://designers-guide.org/modeling/JTOL_rev1.0.pdf">Pattern
-generator model for jitter-tolerance simulation</a>; <a
-target="_blank" rel="noopener" href="https://designers-guide.org/modeling/fc_jtol_src_ns.vhd">VHDL-AMS
-models</a></p>
-<p>G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link
-Foundations Standards, Link Budgets &amp; Models," 2019 IEEE Custom
-Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95,
-doi: 10.1109/CICC.2019.8780223.</p>
-<p>Savo Bajic, ECE1392, Integrated Circuits for Digital Communications:
-<strong>StatOpt in Python</strong> [<a
-target="_blank" rel="noopener" href="https://savobajic.ca/projects/academic/statopt/">https://savobajic.ca/projects/academic/statopt</a>]</p>
-<p>Anritsu Company, "Measuring Channel Operating Margin," 2016. [<a
-target="_blank" rel="noopener" href="https://dl.cdn-anritsu.com/en-us/test-measurement/files/Technical-Notes/White-Paper/11410-00989A.pdf">https://dl.cdn-anritsu.com/en-us/test-measurement/files/Technical-Notes/White-Paper/11410-00989A.pdf</a>]</p>
-<p>JLSD - Julia SerDe [<a
-target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://github.com/kevjzheng/JLSD</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/11/clocking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/11/clocking/" class="post-title-link" itemprop="url">clocking</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-05-11 09:36:14" itemprop="dateCreated datePublished" datetime="2024-05-11T09:36:14+00:00">2024-05-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-17 12:35:23" itemprop="dateModified" datetime="2024-08-17T12:35:23+00:00">2024-08-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="impact-of-reference-clock-edges-on-pi-output">Impact of
-reference Clock Edges on PI Output</h2>
-<p><em>TODO</em> 📅</p>
-<blockquote>
-<p>John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data
-Recovery" [<a
-target="_blank" rel="noopener" href="https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf">https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf</a>]</p>
-</blockquote>
-<h2 id="false-locking">False locking</h2>
-<p><em>TODO</em> 📅</p>
-<ul>
-<li>divider failure</li>
-<li>even-stage ring oscillator ( multipath ring oscillators)</li>
-<li>DLL: harmonic locking, stuck locking</li>
-</ul>
-<h2 id="different-frequency-clock-impact-on-edge">different frequency
-clock impact on edge</h2>
-<p><img src="/2024/05/11/clocking/clock2clock.drawio.svg"
-alt="clock2clock.drawio" /></p>
-<blockquote>
-<p>ck1 is div2 of ck0</p>
-</blockquote>
-<ul>
-<li><p>edge of ck0 is affected differently by ck1</p></li>
-<li><p>edge of ck1 is affected equally by ck0</p></li>
-</ul>
-<h2 id="limit-cycle-hunting-jitter">limit cycle &amp; hunting
-jitter</h2>
-<blockquote>
-<p><em>hunting jitter</em> is also called as <strong>dithering
-jitter</strong></p>
-</blockquote>
-<h2 id="cdr-loop-latency">CDR Loop Latency</h2>
-<p>Denoting the CDR loop latency by <span class="math inline">\(\Delta
-T\)</span> , we note that the loop transmission is multiplied by <span
-class="math inline">\(exp(-s\Delta T)\simeq 1-s\Delta T\)</span>.The
-resulting right-half-plane zero, <span
-class="math inline">\(f_z\)</span> degrades the phase margin and must
-remain about <strong>one decade beyond the BW</strong> <span
-class="math display">\[
-f_z\simeq \frac{1}{2\pi \Delta T}
-\]</span></p>
-<blockquote>
-<p>This assumption is true in practice since the bandwidth of the CDR
-(few mega Hertz) is much smaller than the data rate (multi giga
-bits/second).</p>
-</blockquote>
-<blockquote>
-<p>[Fernando , Marvell Italy."Considerations for CDR Bandwidth Proposal"
-<a
-target="_blank" rel="noopener" href="https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf">https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf</a>]</p>
-</blockquote>
-<h3 id="decimation">Decimation</h3>
-<p>Decimation is commonly employed to alleviate the high-speed
-requirement. However, decimation increases <em>loop-latency</em> which
-causes excessive <em>dither jitter</em></p>
-<blockquote>
-<p>L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery
-Architecture for Multi-Gigabit/s Binary Links," in IEEE Journal of
-Solid-State Circuits, vol. 41, no. 8, pp. 1867-1875, Aug. 2006</p>
-</blockquote>
-<h2 id="loop-bandwidth">Loop Bandwidth</h2>
-<blockquote>
-<p>The <em>closed-loop −3-dB bandwidth</em> is sometimes called the
-<strong>“loop bandwidth”</strong></p>
-</blockquote>
-<h2 id="continuous-time-approximation-limitations">Continuous-Time
-Approximation Limitations</h2>
-<p>A rule of thumb often used to ensure slow changes in the loop is to
-select the <em>loop bandwidth</em> approximately equal to
-<strong>one-tenth</strong> of the <em>input frequency</em>.</p>
-<p><img src="/2024/05/11/clocking/image-20240806230158367.png"
-alt="image-20240806230158367" /></p>
-<blockquote>
-<p>Gardner, F.M. (1980). Charge-Pump Phase-Lock Loops. <em>IEEE Trans.
-Commun., 28</em>, 1849-1858.</p>
-<p>Homayoun, Aliakbar and Behzad Razavi. “On the Stability of
-Charge-Pump Phase-Locked Loops.” <em>IEEE Transactions on Circuits and
-Systems I: Regular Papers</em> 63 (2016): 741-750.</p>
-<p>N. Kuznetsov, A. Matveev, M. Yuldashev and R. Yuldashev, "Nonlinear
-Analysis of Charge-Pump Phase-Locked Loop: The Hold-In and Pull-In
-Ranges," in <em>IEEE Transactions on Circuits and Systems I: Regular
-Papers</em>, vol. 68, no. 10, pp. 4049-4061, Oct. 2021</p>
-</blockquote>
-<h2 id="clock-distribution">clock distribution</h2>
-<blockquote>
-<p>X. Mo, J. Wu, N. Wary and T. C. Carusone, "Design Methodologies for
-Low-Jitter CMOS Clock Distribution," in <em>IEEE Open Journal of the
-Solid-State Circuits Society</em>, vol. 1, pp. 94-103, 2021</p>
-</blockquote>
-<h2 id="feedback-dividers">Feedback Dividers</h2>
-<p><img src="/2024/05/11/clocking/image-20240803225130324.png"
-alt="image-20240803225130324" /></p>
-<ul>
-<li>Large values of N lowers the loop BW which is bad for jitter</li>
-</ul>
-<blockquote>
-<p>Gunnman, Kiran, and Mohammad Vahidfar. <em>Selected Topics in RF,
-Analog and Mixed Signal Circuits and Systems</em>. Aalborg: River
-Publishers, 2017.</p>
-</blockquote>
-<h2 id="clock-gating">clock gating</h2>
-<p><img src="/2024/05/11/clocking/clk_mux.drawio.svg"
-alt="clk_mux.drawio" /></p>
-<h2 id="pll-type-order">PLL Type &amp; Order</h2>
-<p><strong>Type</strong>: # of integrators within the loop</p>
-<p><strong>Order</strong>: # of poles in the <em>closed-loop</em>
-transfer function</p>
-<blockquote>
-<p><em>Type <span class="math inline">\(\leq\)</span> Order</em></p>
-</blockquote>
-<h2 id="ac-coupled-buffer">AC-coupled buffer</h2>
-<p><img src="/2024/05/11/clocking/image-20240720073616597.png"
-alt="image-20240720073616597" /></p>
-<blockquote>
-<p>Since duty-cycle error is <em>high frequency</em> component, the
-high-pass filter suppresses the duty-cycle error propagating to the
-output</p>
-</blockquote>
-<p><img src="/2024/05/11/clocking/image-20240720005226736.png"
-alt="image-20240720005226736" /></p>
-<ul>
-<li>The AC-coupling capacitor blocks the low-frequency component of the
-input</li>
-<li>The feedback resistor sets common mode voltage to the crossover
-voltage</li>
-</ul>
-<blockquote>
-<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
-Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
-2020)</p>
-<p>Casper B, O’Mahony F. Clocking analysis, implementation and
-measurement techniques for high-speed data links: A tutorial. IEEE
-Transactions on Circuits and Systems I: Regular Papers.
-2009;56(1):17–39</p>
-</blockquote>
-<h2 id="clock-division-with-jitter-and-phase-noise">Clock Division with
-Jitter and Phase Noise</h2>
-<ul>
-<li>Multiplying the frequency of a signal by a factor of N using an
-<strong>ideal</strong> frequency multiplier increases the phase noise of
-the multiplied signal by <span class="math inline">\(20\log(N)\)</span>
-dB.</li>
-<li>Similarly dividing a signal frequency by N reduces the phase noise
-of the output signal by <span class="math inline">\(20\log(N)\)</span>
-dB</li>
-</ul>
-<blockquote>
-<p>The sideband offset from the carrier in the frequency
-multiplied/divided signal is the same as for the original signal.</p>
-</blockquote>
-<h3 id="the-20logn-rule">The 20log(N) Rule</h3>
-<p>If the carrier frequency of a clock is divided down by a factor of
-<span class="math inline">\(N\)</span> then we expect the phase noise to
-decrease by <span class="math inline">\(20\log(N)\)</span>.The primary
-assumption here is a <em>noiseless</em> conventional digital
-divider.</p>
-<blockquote>
-<p>The <span class="math inline">\(20\log(N)\)</span> rule only applies
-to <em>phase noise</em> and <em>not integrated phase noise or phase
-jitter</em>. Phase jitter should generally measure about the
-<strong>same</strong>.</p>
-</blockquote>
-<p><img src="/2024/05/11/clocking/rtaImage-1720945161770-5.png"
-alt="20log(N).png" /></p>
-<h3 id="what-about-phase-jitter">What About Phase Jitter?</h3>
-<p>We integrate <em>SSB</em> phase noise <em>L</em>(f) [dBc/Hz] to
-obtain rms phase jitter in seconds as follows for “brick wall”
-integration from f1 to f2 offset frequencies in Hz and where f0 is the
-carrier or clock frequency.</p>
-<p><img src="/2024/05/11/clocking/rtaImage.png"
-alt="phase jitter.png" /></p>
-<p>Note that the rms phase jitter in seconds is inversely proportional
-to f0. When frequency is divided down, the phase noise, <em>L</em>(f),
-goes down by a factor of 20log(N). However, since the frequency goes
-down by N also, the phase jitter expressed in units of time is
-constant.</p>
-<p>Therefore, phase noise curves, related by 20log(N), with the same
-phase noise shape over the <em>jitter bandwidth</em>, are expected to
-yield the same phase jitter in seconds.</p>
-<blockquote>
-<p><a
-target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M000000knweUAA/timing-101-the-case-of-the-jitterier-divideddown-clock?language=en_US">[Timing
-101: The Case of the Jitterier Divided-Down Clock, Silicon Labs]</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://www.planetanalog.com/how-division-impacts-spurs-phase-noise-and-phase/">[How
-division impacts spurs, phase noise, and phase]</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.ko4bb.com/~bruce/IdealFreqMultDiv.html">[Phase
-Noise Theory: Ideal Frequency Multipliers and Dividers]</a></p>
-</blockquote>
-<h2 id="bang-bang-phase-detector">Bang-Bang Phase Detector</h2>
-<blockquote>
-<p>It's <strong>ternary</strong>, because <em>early</em>, <em>late</em>
-and <em>no transition</em></p>
-</blockquote>
-<h3 id="linearing-bb-pd">Linearing BB-PD</h3>
-<p>BB Gain is the slope of average BB output <span
-class="math inline">\(\mu\)</span>, versus phase offset <span
-class="math inline">\(\phi\)</span>, i.e. <span
-class="math inline">\(\frac {\partial \mu}{\partial \phi}\)</span>,</p>
-<p>BB only produces output for a transition and this de-rates the gain.
-Transition density = <em>0.5</em> for random data</p>
-<p><span class="math display">\[
-K_{BB} = \frac{1}{2}\frac {\partial \mu}{\partial \phi}
-\]</span></p>
-<p>where <span class="math inline">\(\mu = (1)\times
-\mathrm{P}(\text{late}|\phi) + (-1)\times
-\mathrm{P}(\text{early}|\phi)\)</span></p>
-<p><img src="/2024/05/11/clocking/bb-PDF.drawio.svg"
-alt="bb-PDF.drawio" /></p>
-<blockquote>
-<p>Both jitter and amplitude noise distribution are same, just scaled by
-slope</p>
-</blockquote>
-<h3 id="self-noise-term">Self-Noise Term</h3>
-<p>One price we pay for <em>BB PD</em> versus <em>linear PD</em> is the
-self-noise term. For small phase errors BB output noise is the full
-magnitude of the sliced data.</p>
-<blockquote>
-<p>BB-PD don't have any measure as to how early or how late and the way
-that tell loop is locked, is over a long time average, BB-PD have an
-equal number of earlies and lates</p>
-</blockquote>
-<p><span class="math display">\[\begin{align}
-\sigma_{BB} &amp;= [E(X^2) - E(X)^2] \cdot \mathrm{P}(\text{trans}) \\
-&amp;= [1 - 0]\cdot 0.5 \\
-&amp;= 0.5
-\end{align}\]</span></p>
-<blockquote>
-<p>John T. Stonick, ISSCC 2011 TUTORIALS <em>T5: DPLL-Based Clock and
-Data Recovery</em></p>
-<p>Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data
-Recovery in Serial Data Transmission Systems. [<a
-target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf">pdf</a>]</p>
-<p>- Clock and Data Recovery for Serial Data Communications, focusing on
-bang-bang CDR design methodology, ISSCC Short Course, February 2002. [<a
-target="_blank" rel="noopener" href="https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf">slides</a>]</p>
-</blockquote>
-<h2 id="pll-bandwidth-test">PLL bandwidth test</h2>
-<p>A <em>step response test</em> is an easy way to determine the
-bandwidth.</p>
-<p><em>Sum a small step into the control voltage</em> of your oscillator
-(VCO or NCO), and measure the <em>90% to 10%</em> fall time of the
-corrected response at the output of the loop filter as shown in this
-block diagram</p>
-<p><img src="/2024/05/11/clocking/loVQR.png"
-alt="PLL Step Response Test" /></p>
-<p>a first order loop <span class="math display">\[
-BW = \frac{0.35}{t} \space\space\space\space \text{(first order system)}
-\]</span> Where <span class="math inline">\(BW\)</span> is the 3 dB
-bandwidth in Hz and <span class="math inline">\(𝑡\)</span>​ is the
-10%/90% rise or fall time.</p>
-<p>For second order loops with a typical damping factor of <em>0.7</em>
-this relationship is closer to: <span class="math display">\[
-BW = \frac{0.33}{t}\space\space\space\space \text{(second order system,
-damping factor = 0.7)}
-\]</span></p>
-<blockquote>
-<p>[How can I experimentally find the bandwidth of my PLL?, <a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/73654/59253">https://dsp.stackexchange.com/a/73654/59253</a>]</p>
-</blockquote>
 
       
     </div>

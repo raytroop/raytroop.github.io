@@ -69,49 +69,46 @@ we get $C_\text{out,eq}= (1+\frac{1}{A_v})C_c\simeq C_c$
 
 
 
-## ahuja compensation
-
-![image-20240130233532624](ahuja/image-20240130233532624.png)
-
-### ~~Right-Half-Plane Zero~~
-
-$$
-\left[(\alpha v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-$$
-
-where $v_m = \alpha v_i$ and $\alpha \ll 1$
-
-Then
-$$
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{\alpha C_c}{g_m}}{1+sR_oC_c}
-$$
- ~~right-half-plane Zero $\omega _z = \frac{g_m}{\alpha C_c} \gg \frac{g_m}{C_c}$~~
-
-> ~~Ahuja compensation push right-half-plane Zero to higher frequency~~
+## cascode compensation
 
 ![image-20240817193513058](ahuja/image-20240817193513058.png)
 
 ![image-20240817201727109](ahuja/image-20240817201727109.png)
 
+Of course, , if the capacitance at the gate of $M_1$ is taken into account, pole splitting is less pronounced.
 
+---
 
-### Equivalent cap
+**including $r_\text{o2}$**
 
-Then
+![image-20240819202642809](ahuja/image-20240819202642809.png)
+$$
+\frac{V_{out}}{I_{in}} \approx \frac{-g_{m1}R_SR_L(g_{m2}+C_Cs)}{\frac{R_S+r_o}{r_o}R_LC_LC_Cs^2+g_{m1}g_{m2}R_LR_SC_Cs+g_{m2}}
+$$
+The poles as
+
 $$\begin{align}
-I_\text{c,in}  &= (\alpha v_i + A_v v_i)sC_c \\
-& = v_i s (\alpha+A_v)C_c
+\omega_{p1} &\approx  \frac{1}{g_{m1}R_LR_SC_c} \\
+\omega_{p2} &\approx \frac{g_{m2}R_Sg_{m1}}{C_L}\frac{r_o}{R_S+r_o}
 \end{align}$$
 
-we get $C_\text{in,eq}= (\alpha+A_v)C_c\simeq A_v C_c$
+and zero is not affected, which is $\omega_z =\frac{g_{m2}}{C_C}$
 
-Similarly
-$$\begin{align}
-I_\text{c,out}  &= (v_o - \alpha v_i)sC_c \\
-& = v_o s (1+\frac{\alpha}{A_v})C_c
-\end{align}$$
 
-we get $C_\text{out,eq}= (1+\frac{\alpha }{A_v})C_c\simeq C_c$
+
+the above model simulation result is shown below
+
+![image-20240819221653262](ahuja/image-20240819221653262.png)
+
+> the zero is located between two poles
+
+
+
+take into the capacitance at the gate of $M_1$ and all other second-order effect
+
+![image-20240819222727276](ahuja/image-20240819222727276.png)
+
+
 
 
 

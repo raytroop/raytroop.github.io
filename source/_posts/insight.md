@@ -28,6 +28,11 @@ Distributed ESD Protection
 *TODO* &#128197;
 
 
+## Cgd of Common-Source Stage
+
+pay attention to Miller effect of Cgd of *layout*
+
+
 
 ## Nonlinearity of Differential Circuits
 

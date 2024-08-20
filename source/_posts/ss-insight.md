@@ -254,7 +254,7 @@ where we define $K_n(0) = K_n$
 
 
 
-## Conversion Between the $s$- and $z$-Domains
+## $s$- and $z$-Domains Conversion 
 
 ![image-20240429220303281](ss-insight/image-20240429220303281.png)
 

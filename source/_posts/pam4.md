@@ -46,7 +46,7 @@ $$
 
 > In practice, there is further degradation due to nonlinearity
 
-In a more technical terms, we trade the **transmitter’s signal-to-noise ratio (SNR)** for **lower Nyquist frequency**
+In a more technical terms, we trade the **transmitter's signal-to-noise ratio (SNR)** for **lower Nyquist frequency**
 
 Equalization will be a lot more complex
 

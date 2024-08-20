@@ -8,6 +8,32 @@ mathjax: true
 ---
 
 
+## comparator noise
+*TODO* &#128197;
+
+*mv "Noise and Offset in Dynamic Comparators" here*
+
+
+## bootstrap T/H Switch
+*TODO* &#128197;
+
+## Feedthrough cancellation
+*TODO* &#128197;
+
+
+
+## kick-back
+
+kick-back increases CDAC settling time
+
+> *add pre-amp (more power)*
+
+
+
+> P. Schvan et al., "A 24GS/s 6b ADC in 90nm CMOS," 2008 IEEE International Solid-State Circuits Conference - Digest of Technical Papers, San Francisco, CA, USA, 2008, pp. 544-634
+>
+> B. Sedighi, A. T. Huynh and E. Skafidas, "A CMOS track-and-hold circuit with beyond 30 GHz input bandwidth," 2012 19th IEEE International Conference on Electronics, Circuits, and Systems (ICECS 2012), Seville, Spain, 2012, pp. 113-116
+
 
 
 

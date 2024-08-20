@@ -9,9 +9,17 @@ mathjax: true
 
 
 
-## ADC Resolution
+## ADC requirement
 
 *TODO* &#128197;
+
+ENOB - Not sufficient & not accurate enough
+- Based on SNDR
+- Assume unbounded Gaussian distribution
+
+> quantization noise is ~ bounded uniform distribution
+> 
+> Using unbounded Gaussian -> pessimistic BER prediction
 
 
 

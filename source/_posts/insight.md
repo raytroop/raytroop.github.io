@@ -30,7 +30,7 @@ Distributed ESD Protection
 
 ## Cgd of Common-Source Stage
 
-pay attention to Miller effect of Cgd of *layout*
+pay attention to Miller effect of Cgd during *layout*
 
 
 

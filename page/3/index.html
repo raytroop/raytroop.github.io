@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,729 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/23/tf-freqresp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/23/tf-freqresp/" class="post-title-link" itemprop="url">Linear Circuits Analysis - Transfer Function & Frequency Response</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-23 14:58:39" itemprop="dateCreated datePublished" datetime="2023-12-23T14:58:39+00:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="are-ac-driven-circuits-linear">Are AC-Driven Circuits
+Linear?</h2>
+<p><span class="math display">\[
+f(x_1 + x_2)= f(x_1)+ f(x_2)
+\]</span></p>
+<p>Often, AC-driven circuits can be mistaken as non-linear as the basis
+that determines the linearity of a circuit is the relationship between
+the voltage and current.</p>
+<p>While an AC signal varies with time, it still exhibits a linear
+relationship across elements like resistors, capacitors, and inductors.
+Therefore, AC driven circuits are linear.</p>
+<h2 id="phasor">Phasor</h2>
+<p><em>Phasor concept has no real physical significance. It is just a
+convenient mathematical tool.</em></p>
+<blockquote>
+<p>Phasor analysis determines the steady-state response to a linear
+circuit driven by sinusoidal sources with frequency <span
+class="math inline">\(f\)</span></p>
+<p>If your circuit includes transistors or other nonlinear components,
+all is not lost. There is an extension of phasor analysis to nonlinear
+circuits called small-signal analysis in which you linearize the
+components before performing phasor analysis - AC analyses of SPICE</p>
+</blockquote>
+<p>A sinusoid is characterized by 3 numbers, its amplitude, its phase,
+and its frequency. For example <span class="math display">\[
+v(t) = A\cos(\omega t + \phi) \tag{1}
+\]</span> In a circuit there will be many signals but in the case of
+phasor analysis they will all have the same frequency. For this reason,
+the signals are characterized using only their <strong>amplitude and
+phase</strong>.</p>
+<p>The combination of an <strong>amplitude</strong> and
+<strong>phase</strong> to describe a signal is the
+<strong>phasor</strong> for that signal.</p>
+<p>Thus, the phasor for the signal in <span
+class="math inline">\((1)\)</span> is <span
+class="math inline">\(A\angle \phi\)</span></p>
+<blockquote>
+<p>In general, phasors are functions of frequency</p>
+</blockquote>
+<p>Often it is preferable to represent a phasor using <strong>complex
+numbers</strong> rather than using amplitude and phase. In this case we
+represent the signal as: <span class="math display">\[
+v(t) = \Re\{Ve^{j\omega t} \} \tag{2}
+\]</span> where <span class="math inline">\(V=Ae^{j\phi}\)</span> is the
+<strong>phasor</strong>.</p>
+<blockquote>
+<p><span class="math inline">\((1)\)</span> and <span
+class="math inline">\((2)\)</span> are the same</p>
+</blockquote>
+<h3 id="phasor-model-of-a-resistor">Phasor Model of a Resistor</h3>
+<p>A linear resistor is defined by the equation <span
+class="math inline">\(v = Ri\)</span></p>
+<p>Now, assume that the resistor current is described with the
+<em>phasor</em> <span class="math inline">\(I\)</span>. Then <span
+class="math display">\[
+i(t) = \Re\{Ie^{j\omega t}\}
+\]</span> <span class="math inline">\(R\)</span> is a real constant, and
+so the voltage can be computed to be <span class="math display">\[
+v(t) = R\Re\{Ie^{j\omega t}\} = \Re\{RIe^{j\omega t}\} =
+\Re\{Ve^{j\omega t}\}
+\]</span> where <span class="math inline">\(V\)</span> is the phasor
+representation for <span class="math inline">\(v\)</span>, i.e. <span
+class="math display">\[
+V = RI
+\]</span></p>
+<ol type="1">
+<li><p>Thus, given the <em>phasor</em> for the current we can directly
+compute the <em>phasor</em> for the voltage across the
+resistor.</p></li>
+<li><p>Similarly, given the <em>phasor</em> for the voltage across a
+resistor we can compute the <em>phasor</em> for the current through the
+resistor using <span class="math inline">\(I =
+\frac{V}{R}\)</span></p></li>
+</ol>
+<h3 id="phasor-model-of-a-capacitor">Phasor Model of a Capacitor</h3>
+<p>A linear capacitor is defined by the equation <span
+class="math inline">\(i=C\frac{dv}{dt}\)</span></p>
+<p>Now, assume that the voltage across the capacitor is described with
+the <em>phasor</em> <span class="math inline">\(V\)</span>. Then <span
+class="math display">\[
+v(t) = \Re\{ V e^{j\omega t}\}
+\]</span> <span class="math inline">\(C\)</span> is a real constant
+<span class="math display">\[
+i(t) = C\Re\{\frac{d}{dt}V e^{j\omega t}\} = \Re\{j\omega C V e^{j\omega
+t}\}
+\]</span> The <em>phasor</em> representation for <span
+class="math inline">\(i\)</span> is <span class="math inline">\(i(t) =
+\Re\{Ie^{j\omega t}\}\)</span>, that is <span class="math inline">\(I =
+j\omega C V\)</span></p>
+<ol type="1">
+<li><p>Thus, given the <em>phasor</em> for the voltage across a
+capacitor we can directly compute the <em>phasor</em> for the current
+through the capacitor.</p></li>
+<li><p>Similarly, given the <em>phasor</em> for the current through a
+capacitor we can compute the <em>phasor</em> for the voltage across the
+capacitor using <span class="math inline">\(V=\frac{I}{j\omega
+C}\)</span></p></li>
+</ol>
+<h3 id="phasor-model-of-an-inductor">Phasor Model of an Inductor</h3>
+<p>A linear inductor is defined by the equation <span
+class="math inline">\(v=L\frac{di}{dt}\)</span></p>
+<p>Now, assume that the inductor current is described with the
+<em>phasor</em> <span class="math inline">\(I\)</span>. Then <span
+class="math display">\[
+i(t) = \Re\{ I e^{j\omega t}\}
+\]</span> <span class="math inline">\(L\)</span> is a real constant, and
+so the voltage can be computed to be <span class="math display">\[
+v(t) = L\Re\{\frac{d}{dt}I e^{j\omega t}\} = \Re\{j\omega L I e^{j\omega
+t}\}
+\]</span> The <em>phasor</em> representation for <span
+class="math inline">\(v\)</span> is <span class="math inline">\(v(t) =
+\Re\{Ve^{j\omega t}\}\)</span>, that is <span class="math inline">\(V =
+j\omega L I\)</span></p>
+<ol type="1">
+<li><p>Thus, given the <em>phasor</em> for the current we can directly
+compute the <em>phasor</em> for the voltage across the
+inductor.</p></li>
+<li><p>Similarly, given the phasor for the voltage across an inductor we
+can compute the phasor for the current through the inductor using <span
+class="math inline">\(I=\frac{V}{j\omega L}\)</span></p></li>
+</ol>
+<h3 id="impedance-and-admittance">Impedance and Admittance</h3>
+<blockquote>
+<p>Impedance and admittance are generalizations of resistance and
+conductance.</p>
+<p>They differ from resistance and conductance in that they are complex
+and they vary with frequency.</p>
+</blockquote>
+<p>Impedance is defined to be the ratio of the <em>phasor</em> for the
+voltage across the component and the current through the component:
+<span class="math display">\[
+Z = \frac{V}{I}
+\]</span></p>
+<blockquote>
+<p>Impedance is a complex value. The real part of the impedance is
+referred to as the resistance and the imaginary part is referred to as
+the reactance</p>
+</blockquote>
+<p>For a linear component, admittance is defined to be the ratio of the
+<em>phasor</em> for the current through the component and the voltage
+across the component: <span class="math display">\[
+Y = \frac{I}{V}
+\]</span></p>
+<blockquote>
+<p>Admittance is a complex value. The real part of the admittance is
+referred to as the conductance and the imaginary part is referred to as
+the susceptance.</p>
+</blockquote>
+<h2 id="response-to-complex-exponentials">Response to Complex
+Exponentials</h2>
+<p>The response of an LTI system to a <strong>complex
+exponential</strong> input is the same <strong>complex
+exponential</strong> with only a change in <em>amplitude</em></p>
+<p><span class="math display">\[\begin{align}
+y(t) &amp;= H(s)e^{st} \\
+H(s) &amp;= \int_{-\infty}^{+\infty}h(\tau)e^{-s\tau}d\tau
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(h(t)\)</span> is the impulse
+response of a continuous-time LTI system</p>
+<blockquote>
+<p><strong>convolution integral</strong> is used here</p>
+</blockquote>
+<p><span class="math display">\[\begin{align}
+y[n] &amp;= H(z)z^n \\
+H(z) &amp;= \sum_{k=-\infty}^{+\infty}h[k]z^{-k}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(h(n)\)</span> is the impulse
+response of a discrete-time LTI system</p>
+<blockquote>
+<p><strong>convolution sum</strong> is used here</p>
+</blockquote>
+<p>The signals of the form <span class="math inline">\(e^{st}\)</span>
+in continuous time and <span class="math inline">\(z^{n}\)</span> in
+discrete time, where <span class="math inline">\(s\)</span> and <span
+class="math inline">\(z\)</span> are <em>complex numbers</em> are
+referred to as an <strong>eigenfunction</strong> of the system, and the
+<em>amplitude factor</em> <span class="math inline">\(H(s)\)</span>,
+<span class="math inline">\(H(z)\)</span> is referred to as the system's
+<strong>eigenvalue</strong></p>
+<h2 id="laplace-transform">Laplace transform</h2>
+<p>One of the important applications of the Laplace transform is in the
+<strong>analysis and characterization of LTI systems</strong>, which
+stems directly from the <em>convolution property</em> <span
+class="math display">\[
+Y(s) = H(s)X(s)
+\]</span> where <span class="math inline">\(X(s)\)</span>, <span
+class="math inline">\(Y(s)\)</span>, and <span
+class="math inline">\(H(s)\)</span> are the <em>Laplace transforms</em>
+of the input, output, and impulse response of the system,
+respectively</p>
+<blockquote>
+<p>From the response of LTI systems to complex exponentials, if the
+input to an LTI system is <span class="math inline">\(x(t) =
+e^{st}\)</span>, with <span class="math inline">\(s\)</span> the ROC of
+<span class="math inline">\(H(s)\)</span>, then the output will be <span
+class="math inline">\(y(t)=H(s)e^{st}\)</span>; i.e., <span
+class="math inline">\(e^{st}\)</span> is an <em>eigenfunction</em> of
+the system with <strong>eigenvalue</strong> equal to the <strong>Laplace
+transform of the impulse response</strong>.</p>
+</blockquote>
+<h3 id="s-domain-element-models">s-Domain Element Models</h3>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223225541693.png"
+alt="image-20231223225541693" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223225609893.png"
+alt="image-20231223225609893" /></p>
+<h2 id="sinusoidal-steady-state-analysis">Sinusoidal Steady-State
+Analysis</h2>
+<blockquote>
+<p>Here <strong>Sinusoidal</strong> means that source excitations have
+the form <span class="math inline">\(V_s\cos(\omega t +\theta)\)</span>
+or <span class="math inline">\(V_s\sin(\omega t+\theta)\)</span></p>
+<p><strong>Steady state</strong> mean that all transient behavior of the
+stable circuit has died out, i.e., decayed to zero</p>
+</blockquote>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223212820547.png"
+alt="image-20231223212820547" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223212846596.png"
+alt="image-20231223212846596" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223213016508.png"
+alt="image-20231223213016508" /></p>
+<h2 id="s-domain-and-phasor-domain"><span
+class="math inline">\(s\)</span>-domain and phasor-domain</h2>
+<p>Phasor analysis is a technique to find the steady-state response when
+the system input is a sinusoid. That is, phasor analysis is sinusoidal
+analysis.</p>
+<ul>
+<li>Phasor analysis is a powerful technique with which to find the
+steady-state portion of the complete response.</li>
+<li>Phasor analysis does not find the transient response.</li>
+<li>Phasor analysis does not find the complete response.</li>
+</ul>
+<blockquote>
+<p>The beauty of the phasor-domain circuit is that it is described by
+algebraic KVL and KCL equations with time-invariant sources, not
+differential equations of time</p>
+</blockquote>
+<p><img src="/2023/12/23/tf-freqresp/image-20231224001422189.png"
+alt="image-20231224001422189" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223230739219.png"
+alt="image-20231223230739219" /></p>
+<blockquote>
+<p>The difference here is that <em>Laplace analysis</em> can also give
+us the <strong>transient response</strong></p>
+</blockquote>
+<p><img src="/2023/12/23/tf-freqresp/image-20231224132406755.png"
+alt="image-20231224132406755" /></p>
+<h3 id="general-response-classifications">General Response
+Classifications</h3>
+<p><img src="/2023/12/23/tf-freqresp/image_2_2_4.png" alt="img" /></p>
+<ul>
+<li><p><strong>zero-input response</strong>, <strong>zero-state
+response</strong> &amp; <strong>complete response</strong></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231223235252850.png"
+alt="image-20231223235252850" /></p>
+<blockquote>
+<p>The <em>zero-state response</em> is given by <span
+class="math inline">\(\mathscr{L^1}[H(s)F(s)]\)</span>, for the
+arbitrary <span class="math inline">\(s\)</span>-domain input <span
+class="math inline">\(F(s)\)</span></p>
+<p>where <span class="math inline">\(Z_L(s) = sL\)</span>, the inductor
+with zero initial current <span class="math inline">\(i_L(0)=0\)</span>
+and <span class="math inline">\(Z_C(s)=1/sC\)</span> with zero initial
+voltage <span class="math inline">\(v_C(0)=0\)</span></p>
+</blockquote></li>
+<li><p><strong>transient response</strong> &amp; <strong>steady-state
+response</strong></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231224000454014.png"
+alt="image-20231224000454014" /></p></li>
+<li><p><strong>natural response</strong> &amp; <strong>forced
+response</strong></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20231224000817438.png"
+alt="image-20231224000817438" /></p></li>
+</ul>
+<hr />
+<p><img src="/2023/12/23/tf-freqresp/image-20240118212304219.png"
+alt="image-20240118212304219" /></p>
+<h2 id="transfer-functions-and-frequency-response">Transfer Functions
+and Frequency Response</h2>
+<h3 id="transfer-function">transfer function</h3>
+<p>The <strong>transfer function</strong> <span
+class="math inline">\(H(s)\)</span> is the ratio of the <em>Laplace
+transform</em> of the output of the system to its input <strong>assuming
+all zero initial conditions</strong>.</p>
+<p><img src="/2023/12/23/tf-freqresp/image-20240106185523937.png"
+alt="image-20240106185523937" /></p>
+<p><img src="/2023/12/23/tf-freqresp/image-20240106185937270.png"
+alt="image-20240106185937270" /></p>
+<h3 id="frequency-response">frequency response</h3>
+<p>An immediate consequence of <em>convolution</em> is that an input of
+the form <span class="math inline">\(e^{st}\)</span> results in an
+output <span class="math display">\[
+y(t) = H(s)e^{st}
+\]</span> where the specific constant <span
+class="math inline">\(s\)</span> may be complex, expressed as <span
+class="math inline">\(s = \sigma + j\omega\)</span></p>
+<p>A very common way to use the <em>exponential response</em> of LTIs is
+in finding the <strong>frequency response</strong> i.e. <strong>response
+to a sinusoid</strong></p>
+<p>First, we express the <em>sinusoid</em> as a sum of two
+<em>exponential expressions</em> (Euler’s relation): <span
+class="math display">\[
+\cos(\omega t) = \frac{1}{2}(e^{j\omega t}+e^{-j\omega t})
+\]</span> If we let <span class="math inline">\(s=j\omega\)</span>, then
+<span class="math inline">\(H(-j\omega)=H^*(j\omega)\)</span>, in polar
+form <span class="math inline">\(H(j\omega)=Me^{j\phi}\)</span> and
+<span class="math inline">\(H(-j\omega)=Me^{-j\phi}\)</span>. <span
+class="math display">\[\begin{align}
+y_+(t) &amp; = H(s)e^{st}|_{s=j\omega} = H(j\omega)e^{j\omega t} = M
+e^{j(\omega t + \phi)} \\
+y_-(t) &amp; = H(s)e^{st}|_{s=-j\omega} = H(-j\omega)e^{-j\omega t} = M
+e^{-j(\omega t + \phi)}
+\end{align}\]</span></p>
+<p>By <em>superposition</em>, the response to the sum of these two
+exponentials, which make up the cosine signal, is the sum of the
+responses <span class="math display">\[\begin{align}
+y(t) &amp;= \frac{1}{2}[H(j\omega)e^{j\omega t} + H(-j\omega)e^{-j\omega
+t}] \\
+&amp;= \frac{M}{2}[e^{j(\omega t + \phi)} + e^{-j(\omega t + \phi)}] \\
+&amp;= M\cos(\omega t + \phi)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(M = |H(j\omega|\)</span> and <span
+class="math inline">\(\phi = \angle H(j\omega)\)</span></p>
+<blockquote>
+<p>This means if a system represented by the transfer function <span
+class="math inline">\(H(s)\)</span> has a <em>sinusoidal input</em>, the
+output will be <em>sinusoidal</em> at the same frequency with magnitude
+<span class="math inline">\(M\)</span> and will be shifted in phase by
+the angle <span class="math inline">\(\phi\)</span></p>
+</blockquote>
+<h3 id="laplace-transform-fourier-transform">Laplace transform &amp;
+Fourier transform</h3>
+<ul>
+<li>Laplace transforms such as <span
+class="math inline">\(Y(s)=H(s)U(s)\)</span> can be used to study the
+<strong>complete response characteristics</strong> of systems, including
+the <em>transient response</em>—that is, the time response to <em>an
+initial condition</em> or <em>suddenly applied signal</em></li>
+<li>This is in contrast to the use of <em>Fourier transforms</em>, which
+<strong>only take into account the steady-state response</strong></li>
+</ul>
+<p>Given a general linear system with transfer function <span
+class="math inline">\(H(s)\)</span> and an input signal <span
+class="math inline">\(u(t)\)</span>, the procedure for determining <span
+class="math inline">\(y(t)\)</span> using the <em>Laplace transform</em>
+is given by the following steps:</p>
+<p><img src="/2023/12/23/tf-freqresp/image-20240106224403401.png"
+alt="image-20240106224403401" /></p>
+<h2 id="reference">reference</h2>
+<p>Ken Kundert. <a
+target="_blank" rel="noopener" href="http://www.designers-guide.org/Theory/phasors.pdf">Introduction to
+Phasors</a>. <em>Designer’s Guide Community</em>. September 2011.</p>
+<p>How to Perform Linearity Circuit Analysis [<a
+target="_blank" rel="noopener" href="https://resources.pcb.cadence.com/blog/2021-how-to-perform-linearity-circuit-analysis">https://resources.pcb.cadence.com/blog/2021-how-to-perform-linearity-circuit-analysis</a>]</p>
+<p>Stephen P. Boyd. EE102 Lecture 7 Circuit analysis via Laplace
+transform <a
+target="_blank" rel="noopener" href="https://web.stanford.edu/~boyd/ee102/laplace_ckts.pdf">[https://web.stanford.edu/~boyd/ee102/laplace_ckts.pdf]</a></p>
+<p>Cheng-Kok Koh, EE695K VLSI Interconnect, S-Domain Analysis [<a
+target="_blank" rel="noopener" href="https://engineering.purdue.edu/~chengkok/ee695K/lec3c.pdf">https://engineering.purdue.edu/~chengkok/ee695K/lec3c.pdf</a>]</p>
+<p>Kenneth R. Demarest, Circuit Analysis using Phasors, Laplace
+Transforms, and Network Functions [<a
+target="_blank" rel="noopener" href="https://people.eecs.ku.edu/~demarest/212/Phasor%20and%20Laplace%20review.pdf">https://people.eecs.ku.edu/~demarest/212/Phasor%20and%20Laplace%20review.pdf</a>]</p>
+<p>DeCarlo, R. A., &amp; Lin, P.-M. (2009). <em>Linear circuit
+analysis : time domain, phasor, and Laplace transform approaches</em>
+(3rd ed).</p>
+<p>Davis, Artice M.. "Linear Circuit Analysis." <em>The Electrical
+Engineering Handbook - Six Volume Set</em> (1998)</p>
+<p>Duane Marcy, Fundamentals of Linear Systems [<a
+target="_blank" rel="noopener" href="http://lcs-vc-marcy.syr.edu:8080/Chapter22.html">http://lcs-vc-marcy.syr.edu:8080/Chapter22.html</a>]</p>
+<p><em>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
+Feedback Control of Dynamic Systems (8th Edition) (8th. ed.).
+Pearson.</em></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/28/jtag/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/28/jtag/" class="post-title-link" itemprop="url">JTAG and Boundary Scan</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-28 22:00:32" itemprop="dateCreated datePublished" datetime="2023-11-28T22:00:32+00:00">2023-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Data Register, DR:</p>
+<ul>
+<li>Bypass Register, BR</li>
+<li>Boundary Scan Register, BSR</li>
+</ul>
+<p>Instruction Register, IR</p>
+<h2 id="tap-controller">TAP Controller</h2>
+<p><img src="/2023/11/28/jtag/image-20240113191225838.png"
+alt="image-20240113191225838" /></p>
+<blockquote>
+<ul>
+<li>FSM and Shift Register of DR and IR works at the
+<strong>posedge</strong> of the clock</li>
+<li>TMS, TDI, TDO and Hold Register of DR and IR changes value at the
+<strong>negedge</strong> of the clock</li>
+</ul>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20240113191409296.png"
+alt="image-20240113191409296" /></p>
+<p><img src="/2023/11/28/jtag/image-20240113191526490.png"
+alt="image-20240113191526490" /></p>
+<blockquote>
+<p>capture IR <code>01</code>, the fixed is for easier fault
+detection</p>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20231129232443249.png"
+alt="image-20231129232443249" /></p>
+<p><img src="/2023/11/28/jtag/image-20231129233218011.png"
+alt="image-20231129233218011" /></p>
+<blockquote>
+<p>After power-up, they may not be in sync, but there is a trick. Look
+at the state machine and notice that no matter what state you are, if
+<em>TMS stays at "1" for five clocks</em>, a TAP controller goes back to
+the state "Test-Logic Reset". That's used to synchronize the TAP
+controllers.</p>
+</blockquote>
+<blockquote>
+<p>It is important to note that in a typical Boundary-Scan test, the
+time between launching a signal from driver (at the falling edge of test
+clock (TCK) in the <code>Update-DR</code> or <code>Update-IR</code> TAP
+Controller state) and capturing that signal (at the rising edge of TCK
+in the <code>Caputre-DR</code> TAP Controller state) is <strong>no less
+tha 2.5 TCK cycles</strong></p>
+</blockquote>
+<p>Further, the time between successive launches on a driver is governed
+- not only by the TCk rate - but by the amount of serial data shifting
+needed to load the next pattern data in the concatenated Boundary-Scan
+Registers of the Boundary-Scan chain</p>
+<blockquote>
+<p>Thus the effective test data rate of a driver could be thousands of
+the times lower than the TCK rate</p>
+<ol type="1">
+<li>For DC-coupled interconnect, this time is of no concern</li>
+<li>For AC-coupled interconnect, the signal may easily decay partially
+or completely before it can be captured</li>
+<li>If only partial decay occurs before capture, that decay will very
+likely be completed before the driver produces the next edge</li>
+</ol>
+</blockquote>
+<h2 id="ac-coupling">AC-coupling</h2>
+<p>In general, AC-coupling can distort a signal transmitted across a
+channel depending on its frequency.</p>
+<p><code>Figure 5</code></p>
+<ul>
+<li>The high frequency signal is relatively unaffected by the
+coupling</li>
+<li>The low frequency signal is severely impacted
+<ol type="1">
+<li>it decays to <span class="math inline">\(V_T\)</span> after a few
+time constants</li>
+<li>its amplitude is double the input amplitude &gt; transient response,
+before AC-coupling capacitor: <span class="math inline">\(-A_p \to
+A_p\)</span>; after AC-coupling capacitor <span
+class="math inline">\(V_T \to V_T+2A_p\)</span> &gt; A key item to note
+is that the transitions in the original signal are preserved, although
+their start and end points are offset &gt; &gt; compared to where they
+were in the high frequency</li>
+</ol></li>
+</ul>
+<h2 id="test-signal-implementation">Test signal implementation</h2>
+<p>The test data is either the content of the Boundary-Scan Register
+Update latch (U) when executing the (DC) EXTEST instruction, or an
+<strong>"AC Signal"</strong> when an <em>AC testing instruction</em> is
+loaded into the device.</p>
+<blockquote>
+<p>The AC signal is a test waveform suited for transmission through
+AC-coupling</p>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20240113184502597.png"
+alt="image-20240113184502597" /></p>
+<h2 id="test-signal-reception">Test signal reception</h2>
+<ul>
+<li>When <em>an AC testing instruction</em> is loaded, a specialized
+test receiver detects transitoins of the AC signal seen at the input and
+determines if this represents a logic '0' or '1'</li>
+<li>When <em>EXTEST</em> is loaded, the input signal level is detected
+and sent to the output of the test receiver to the Boundary-Scan
+Register cell</li>
+</ul>
+<p>When testing for a shorted capacitor, the <em>test software</em> must
+ensure that enough time has passed for the signal to decay before
+entering <em>Capture-DR</em>, either by stopping TCk or by spending
+additional TCK cycles in the <em>Run-Test/Idle</em> TAP Controller
+state</p>
+<h2 id="extest_pulse-extest_train">EXTEST_PULSE &amp; EXTEST_TRAIN</h2>
+<blockquote>
+<p>The two new AC-test instructions provided by this standard differ
+primarily in the number and timing of transitions to provide flexibility
+in dealing with the specific dynamic behavior of the channels being
+tested</p>
+</blockquote>
+<p><strong>AC Test Signal</strong> essentially modulates test data so
+that it will propagate through AC-coupled channels, for devices that
+contatin AC pins</p>
+<blockquote>
+<p>Tools should use the <strong>EXTEST_PULSE</strong> instruction unless
+there is a specific requirement for the <strong>EXTEST_TRAIN</strong>
+instruction</p>
+</blockquote>
+<h3 id="extest_pulse">EXTEST_PULSE</h3>
+<blockquote>
+<p>Generate <strong>two</strong> additional driver transitions and
+allows a tester to vary the <strong>time</strong> between them dependent
+on how many TCK cycles the TAP is left in the <em>Run-Test/Idle</em> TAP
+Controller state.</p>
+<p>This is intended to allow any undesired transient condition to decay
+to a <strong>DC steady-state value</strong> when that will make the
+final transition more reliably detectable</p>
+<p>The duration in the <em>Run-Test/Idle</em> TAP Controller state
+should be <strong>at least three times</strong> the high-pass coupling
+time constant. This allows the <em>first additional transition</em> to
+decay away to the <strong>DC steady-state value</strong> for the
+channel, and ensures that the full amplitude of the <em>final
+transition</em> is added to or subtracted from that steady-state
+value</p>
+<p>This establishes a <em>known initial condition</em> for the <em>final
+transition</em> and permits reliable specification of the detection
+threshold of the test receiver</p>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20240113190314947.png"
+alt="image-20240113190314947" /></p>
+<h3 id="extest_train">EXTEST_TRAIN</h3>
+<blockquote>
+<p>Generate <strong>multiple</strong> additional transitions, the
+<strong>number</strong> dependent on how long the TAP is left in the
+<em>Run-Test/Idle</em> TAP Controller state</p>
+<p>This is intended to allow any undesired transient condition to decay
+to an <strong>AC steady-state value</strong> when that will make the
+final transition more reliably detectable</p>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20240113190345323.png"
+alt="image-20240113190345323" /></p>
+<h2 id="ieee-std-1149.6-2003">IEEE Std 1149.6-2003</h2>
+<p>This standard is built on top of IEEE Std 1149.1 using the same Test
+Access Port structure and Boundary-Scan architecture.</p>
+<ul>
+<li>It adds the concept of a "test receiver" to input pins that are
+expected to handle <strong>differential and/or AC-coupling</strong></li>
+<li>It adds two new instructions that cause drivers to emit AC waveforms
+that are processed by test receivers.</li>
+</ul>
+<h2 id="jtag-instruction">JTAG Instruction</h2>
+<h2 id="implementation">Implementation</h2>
+<ul>
+<li>AC mode hysteresis, detect transistion</li>
+<li>DC mode threshold is determined by jtag initial value</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>IEEE Std 1149.1-2001, IEEE Standard Test Access Port and
+Boundary-Scan Architecture, IEEE, 2001</p>
+<p>IEEE Std 1149.6-2003, IEEE Standard for BoundaryScan Testing of
+Advanced Digital Networks, IEEE, 2003</p>
+<p>IEEE 1149.6 Tutorial | Testing AC-coupled and Differential High-speed
+Nets [<a
+target="_blank" rel="noopener" href="https://www.asset-intertech.com/resources/eresources/ieee-11496-tutorial-testing-ac-coupled-and-differential-high-speed-nets/">https://www.asset-intertech.com/resources/eresources/ieee-11496-tutorial-testing-ac-coupled-and-differential-high-speed-nets/</a>]</p>
+<p>Prof. James Chien-Mo Li, Lab of Dependable Systems, National Taiwan
+University. VLSI Testing [<a
+target="_blank" rel="noopener" href="http://cc.ee.ntu.edu.tw/~cmli/VLSItesting/">http://cc.ee.ntu.edu.tw/~cmli/VLSItesting/</a>]</p>
+<p>K.P. Parker, The Boundary Scan Handbook, 3rd ed., Kluwer Academic,
+2003.</p>
+<p>B. Eklow, K. P. Parker and C. F. Barnhart, "IEEE 1149.6: a
+boundary-scan standard for advanced digital networks," in IEEE Design
+&amp; Test of Computers, vol. 20, no. 5, pp. 76-83, Sept.-Oct. 2003,
+doi: 10.1109/MDT.2003.1232259.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +949,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -407,7 +1130,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -533,7 +1256,7 @@ target="_blank" rel="noopener" href="https://dlsun.github.io/Stat350-S20/">https
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1237,7 +1960,7 @@ target="_blank" rel="noopener" href="https://mixsignal.files.wordpress.com/2013/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1494,7 +2217,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1730,7 +2453,7 @@ target="_blank" rel="noopener" href="https://toshiba.semicon-storage.com/info/ap
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1859,7 +2582,7 @@ alt="image-20231006110506245" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1959,7 +2682,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2099,258 +2822,6 @@ target="_blank" rel="noopener" href="https://benchugg.com/research_notes/intro_i
 <p>Ben Chugg. Itô Processes and The Fundamental Theorem of Stochastic
 Calculus [<a
 target="_blank" rel="noopener" href="https://benchugg.com/research_notes/sde_ito_lemma/">https://benchugg.com/research_notes/sde_ito_lemma/)</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/29/network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/29/network/" class="post-title-link" itemprop="url">Network Analysis</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-29 15:57:01" itemprop="dateCreated datePublished" datetime="2023-09-29T15:57:01+00:00">2023-09-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/2023/09/29/network/image-20240704212740246.png"
-alt="image-20240704212740246" /></p>
-<h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/network/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/network/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/network/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/network/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/29/scattering/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/29/scattering/" class="post-title-link" itemprop="url">Scattering parameters</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-29 15:57:01" itemprop="dateCreated datePublished" datetime="2023-09-29T15:57:01+00:00">2023-09-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
 
       
     </div>

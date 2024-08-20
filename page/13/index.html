@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,432 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/12/uvm-ral/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/12/uvm-ral/" class="post-title-link" itemprop="url">UVM Register Abstraction Layer (RAL) - overview</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-12 11:16:25" itemprop="dateCreated datePublished" datetime="2022-03-12T11:16:25+00:00">2022-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Within an UVM testbench a register model is used</p>
+<ul>
+<li><p>either as a means of looking up a mirror of the current DUT
+hardware state</p></li>
+<li><p>or as means of accessing the hardware via the front or back
+door</p>
+<p>and updating the register model database.</p></li>
+</ul>
+<p><img src="/2022/03/12/uvm-ral/image-20220312125516500.png"
+alt="image-20220312125516500" /></p>
+<h4 id="register-frontdoor-write">Register Frontdoor Write</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.write</span>(status, value, [UVM_FRONTDOOR], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sequence sets <code>uvm_reg</code> with value</li>
+<li><code>uvm_reg</code> content is translated into bus transaction</li>
+<li>Driver gets bus transaction and writes DUT register</li>
+<li><strong>Mirror</strong> can be updated either implicitly or
+explicitly (predictor)</li>
+</ul>
+<h4 id="register-backdoor-write">Register Backdoor Write</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.write</span>(status, value, UVM_BACKDOOR, <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p><code>uvm_reg</code> uses DPI/XMR to set DUT register with value</p>
+<ul>
+<li>Physical interface is bypassed</li>
+<li>Register behavior is mimicked</li>
+</ul>
+<h4 id="register-backdoor-poke">Register Backdoor Poke</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.poke</span>(status, value, <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p><code>uvm_reg</code> used DPI/XMR to set DUT register with
+<strong>value as is</strong></p>
+<ul>
+<li>Physical interface is bypassed</li>
+<li>Register behavior is <strong>NOT</strong> mimicked</li>
+</ul>
+<hr />
+<h4 id="register-frontdoor-read">Register Frontdoor Read</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.read</span>(status, value, [UVM_FRONTDOOR], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sequence executes <code>uvm_reg</code> READ</li>
+<li><code>uvm_reg</code> is translated into bus transaction</li>
+<li>Driver gets bus transaction and read DUT register</li>
+<li>Read value is translated into <code>uvm_reg</code> data and returned
+to sequence</li>
+<li>Mirror updates</li>
+</ul>
+<h4 id="register-backdoor-read">Register Backdoor Read</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.read</span>(status, value, UVM_BACKDOOR, <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p><code>uvm_reg</code> used DPI/XMR to get DUT register value</p>
+<ul>
+<li>Physical interface is bypassed</li>
+<li>Register behavior is <strong>mimicked</strong> (acc)</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// EXECUTE READ...</span></span><br><span class="line"><span class="keyword">case</span> (rw<span class="variable">.path</span>)</span><br><span class="line"></span><br><span class="line">   <span class="comment">// ...VIA USER BACKDOOR</span></span><br><span class="line">   UVM_BACKDOOR: <span class="keyword">begin</span> </span><br><span class="line">      uvm_reg_backdoor bkdr = get_backdoor();</span><br><span class="line"></span><br><span class="line">      uvm_reg_map map = uvm_reg_map::backdoor();</span><br><span class="line">      <span class="keyword">if</span> (map<span class="variable">.get_check_on_read</span>()) exp = get();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (bkdr != <span class="literal">null</span>)</span><br><span class="line">        bkdr<span class="variable">.read</span>(rw);</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        backdoor_read(rw);</span><br><span class="line"></span><br><span class="line">      value = rw<span class="variable">.value</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Need to clear RC fields, set RS fields and mask WO fields</span></span><br><span class="line">      <span class="keyword">if</span> (rw<span class="variable">.status</span> != UVM_NOT_OK) <span class="keyword">begin</span></span><br><span class="line"></span><br><span class="line">         uvm_reg_data_t wo_mask;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">foreach</span> (m_fields[i]) <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">string</span> acc = m_fields[i]<span class="variable">.get_access</span>(uvm_reg_map::backdoor());</span><br><span class="line">            <span class="keyword">if</span> (acc == <span class="string">&quot;RC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WSRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W1SRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W0SRC&quot;</span>) <span class="keyword">begin</span></span><br><span class="line">               value &amp;= ~(((<span class="number">1</span>&lt;&lt;m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>)</span><br><span class="line">                                       &lt;&lt; m_fields[i]<span class="variable">.get_lsb_pos</span>());</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;RS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WCRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W1CRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W0CRS&quot;</span>) <span class="keyword">begin</span></span><br><span class="line">               value |= (((<span class="number">1</span>&lt;&lt;m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>)</span><br><span class="line">                                       &lt;&lt; m_fields[i]<span class="variable">.get_lsb_pos</span>());</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;WO&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOC&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WO1&quot;</span>) <span class="keyword">begin</span></span><br><span class="line">               wo_mask |= ((<span class="number">1</span>&lt;&lt;m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>)</span><br><span class="line">                                       &lt;&lt; m_fields[i]<span class="variable">.get_lsb_pos</span>();</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (value != rw<span class="variable">.value</span>[<span class="number">0</span>]) <span class="keyword">begin</span></span><br><span class="line">           uvm_reg_data_t saved;</span><br><span class="line">           saved = rw<span class="variable">.value</span>[<span class="number">0</span>];</span><br><span class="line">           rw<span class="variable">.value</span>[<span class="number">0</span>] = value;</span><br><span class="line">           <span class="keyword">if</span> (bkdr != <span class="literal">null</span>)</span><br><span class="line">              bkdr<span class="variable">.write</span>(rw);</span><br><span class="line">           <span class="keyword">else</span></span><br><span class="line">              backdoor_write(rw);</span><br><span class="line">           rw<span class="variable">.value</span>[<span class="number">0</span>] = saved;</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">         rw<span class="variable">.value</span>[<span class="number">0</span>] &amp;= ~wo_mask;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (map<span class="variable">.get_check_on_read</span>() &amp;&amp;</span><br><span class="line">            rw<span class="variable">.status</span> != UVM_NOT_OK) <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">void</span>&#x27;(do_check(exp, rw<span class="variable">.value</span>[<span class="number">0</span>], map));</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line">         </span><br><span class="line">         do_predict(rw, UVM_PREDICT_READ);</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="register-backdoor-peek">Register Backdoor Peek</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.peek</span>(status, value, <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p><code>uvm_reg</code> uses DPI/XMR to get DUT register <strong>value
+as is</strong></p>
+<ul>
+<li>Physical interface is bypassed</li>
+<li>Register behavior is <strong>NOT</strong> mimicked</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> uvm_reg::peek(<span class="keyword">output</span> uvm_status_e      status,</span><br><span class="line">                   <span class="keyword">output</span> uvm_reg_data_t    value,</span><br><span class="line">                   <span class="keyword">input</span>  <span class="keyword">string</span>            kind = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                   <span class="keyword">input</span>  uvm_sequence_base parent = <span class="literal">null</span>,</span><br><span class="line">                   <span class="keyword">input</span>  uvm_object        extension = <span class="literal">null</span>,</span><br><span class="line">                   <span class="keyword">input</span>  <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                   <span class="keyword">input</span>  <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">   uvm_reg_backdoor bkdr = get_backdoor();</span><br><span class="line">   uvm_reg_item rw;</span><br><span class="line"></span><br><span class="line">   m_fname = fname;</span><br><span class="line">   m_lineno = lineno;</span><br><span class="line">    </span><br><span class="line">   <span class="comment">// create an abstract transaction for this operation</span></span><br><span class="line">   rw = uvm_reg_item::type_id::create(<span class="string">&quot;mem_peek_item&quot;</span>,,get_full_name());</span><br><span class="line">   rw<span class="variable">.element</span>      = <span class="keyword">this</span>;</span><br><span class="line">   rw<span class="variable">.path</span>         = UVM_BACKDOOR;</span><br><span class="line">   rw<span class="variable">.element_kind</span> = UVM_REG;</span><br><span class="line">   rw<span class="variable">.kind</span>         = UVM_READ;</span><br><span class="line">   rw<span class="variable">.bd_kind</span>      = kind;</span><br><span class="line">   rw<span class="variable">.parent</span>       = parent;</span><br><span class="line">   rw<span class="variable">.extension</span>    = extension;</span><br><span class="line">   rw<span class="variable">.fname</span>        = fname;</span><br><span class="line">   rw<span class="variable">.lineno</span>       = lineno;</span><br><span class="line"></span><br><span class="line">   do_predict(rw, UVM_PREDICT_READ);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endtask</span>: peek </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="methods-to-handle-property-of-uvm_reg-or-uvm_reg_block">Methods
+to handle property of uvm_reg or uvm_reg_block</h4>
+<h5 id="mirror">mirror</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.mirror</span>(status, [check], [path], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br><span class="line">model<span class="variable">.r0</span><span class="variable">.mirro</span>(status, [check], [path], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p>Update <strong>mirrored</strong> and <strong>desired</strong>
+properties with DUT content</p>
+<h5 id="set">set</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.set</span>(value);</span><br></pre></td></tr></table></figure>
+<p>Set value in <strong>desired</strong> properties</p>
+<h5 id="randomize">randomize</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.randomize</span>();</span><br><span class="line">model<span class="variable">.r0</span><span class="variable">.randomize</span>();</span><br></pre></td></tr></table></figure>
+<p>Populate <strong>desired</strong> property with random value</p>
+<h5 id="get">get</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value = model<span class="variable">.r0</span><span class="variable">.get</span>();</span><br></pre></td></tr></table></figure>
+<p>Get value from <strong>desired</strong> property</p>
+<h5 id="update">update</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.update</span>(status, [path], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br><span class="line">model<span class="variable">.r0</span><span class="variable">.update</span>(status, [path], <span class="variable">.parent</span>(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<p>Update <strong>DUT</strong> and <strong>mirrored</strong> property
+with <strong>desired</strong> property if <strong>mirrored</strong>
+property is different from <strong>desired</strong></p>
+<h5 id="predict">predict</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model<span class="variable">.r0</span><span class="variable">.predict</span>(value);</span><br></pre></td></tr></table></figure>
+<p>Set the value of <strong>mirrored</strong> property</p>
+<h5 id="get_mirrored_value">get_mirrored_value</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value = model<span class="variable">.r0</span><span class="variable">.get_mirrored_value</span>();</span><br></pre></td></tr></table></figure>
+<p>Get value from <strong>mirrored</strong> property</p>
+<h4 id="backdoor-access">Backdoor Access</h4>
+<ul>
+<li>Two ways to generate the backdoor access:
+<ul>
+<li>Via SystemVerilog Cross Module Reference (XMR)</li>
+<li>Via SystemVerilog DPI call</li>
+</ul></li>
+<li>Both allow register model to be part of SystemVerilog package</li>
+<li>XMR implementation is faster
+<ul>
+<li>Requires user to compile one additional file and at compile-time
+provide top level path to DUT</li>
+<li><strong>VCS only</strong></li>
+</ul></li>
+<li>DPI implementation is slower
+<ul>
+<li>No additional file is needed and top level path can be provided at
+run-time</li>
+<li>Portable to other simulators</li>
+</ul></li>
+</ul>
+<h4 id="uvm-register-classes-uvm_reg_bus_op-uvm_reg_item">UVM Register
+Classes: uvm_reg_bus_op &amp; uvm_reg_item</h4>
+<p>The generic register item is implemented as a struct in order to
+minimise the amount of memory resource it uses. The struct is defined as
+type <code>uvm_reg_bus_op</code> and this contains 6 fields:</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 26%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Type</th>
+<th>Comment/Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>addr</td>
+<td>uvm_reg_addr_t</td>
+<td>Address field, defaults to 64 bits</td>
+</tr>
+<tr class="even">
+<td>data</td>
+<td>uvm_reg_data_t</td>
+<td>Read or write data, defaults to 64 bits</td>
+</tr>
+<tr class="odd">
+<td>kind</td>
+<td>uvm_access_e</td>
+<td>UVM_READ or UVM_WRITE</td>
+</tr>
+<tr class="even">
+<td>n_bits</td>
+<td>unsigned int</td>
+<td>Number of bits being transferred</td>
+</tr>
+<tr class="odd">
+<td>byte_en</td>
+<td>uvm_reg_byte_en_t</td>
+<td>Byte enable</td>
+</tr>
+<tr class="even">
+<td>status</td>
+<td>uvm_status_e</td>
+<td>UVM_IS_OK, UVM_IS_X, UVM_NOT_OK</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">  uvm_access_e kind;	<span class="comment">// Kind of access: READ or WRITE.</span></span><br><span class="line">  uvm_reg_addr_t addr;	<span class="comment">// The bus address.</span></span><br><span class="line">  uvm_reg_data_t data;	<span class="comment">// The data to write.</span></span><br><span class="line">  <span class="comment">// The number of bits of &lt;uvm_reg_item::value&gt; being transferred by this transaction.</span></span><br><span class="line">  <span class="keyword">int</span> n_bits;	</span><br><span class="line">  uvm_reg_byte_en_t byte_en;	<span class="comment">// Enables for the byte lanes on the bus.</span></span><br><span class="line">  uvm_status_e status;	<span class="comment">// The result of the transaction: UVM_IS_OK, UVM_HAS_X, UVM_NOT_OK.</span></span><br><span class="line">&#125; uvm_reg_bus_op;</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> uvm_reg_item <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    <span class="keyword">rand</span> uvm_access_e kind;</span><br><span class="line">    <span class="keyword">rand</span> uvm_reg_data_t value[];</span><br><span class="line">    <span class="keyword">rand</span> uvm_reg_addr_t offset;</span><br><span class="line">    uvm_status_e status;</span><br><span class="line">    uvm_reg_map map;</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
+<h4 id="registers">Registers</h4>
+<p>The register class contains a <code>build</code> method which is used
+to <strong>create</strong> and <strong>configure the
+fields</strong>.</p>
+<blockquote>
+<p>this <code>build</code> method is not called by the UVM
+<code>build_phase</code>, since the register is an
+<code>uvm_object</code> rather than an <code>uvm_component</code></p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// uvm_reg constructor prototype:</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">new</span> (<span class="keyword">string</span> name=<span class="string">&quot;&quot;</span>,      <span class="comment">// Register name</span></span><br><span class="line">              <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bits, <span class="comment">// Register width in bits</span></span><br><span class="line">              <span class="keyword">int</span> has_coverage);   <span class="comment">// Coverage model supported by the register</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Function: new</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;ctrl_reg&quot;</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, <span class="number">32</span>, build_coverage(UVM_CVR_FIELD_VALS));</span><br><span class="line">    add_coverage(build_coverage(UVM_CVR_FIELD_VALS));</span><br><span class="line">    <span class="keyword">if</span>(has_coverage(UVM_CVR_FIELD_VALS))</span><br><span class="line">        cg_vals = <span class="keyword">new</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Function: sample_values</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="keyword">virtual</span> <span class="keyword">function</span> <span class="keyword">void</span> sample_values();</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.sample_values</span>();</span><br><span class="line">    <span class="keyword">if</span> (get_coverage(UVM_CVR_FIELD_VALS))</span><br><span class="line">        cg_vals<span class="variable">.sample</span>();</span><br><span class="line"><span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Function: build</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="keyword">virtual</span> <span class="keyword">function</span> <span class="keyword">void</span> build();</span><br><span class="line">    ass = uvm_reg_field::type_id::create(<span class="string">&quot;ass&quot;</span>);</span><br><span class="line">    ie = uvm_reg_field::type_id::create(<span class="string">&quot;ie&quot;</span>);</span><br><span class="line">    lsb = uvm_reg_field::type_id::create(<span class="string">&quot;lsb&quot;</span>);</span><br><span class="line">    tx_neg = uvm_reg_field::type_id::create(<span class="string">&quot;tx_neg&quot;</span>);</span><br><span class="line">    rx_neg = uvm_reg_field::type_id::create(<span class="string">&quot;rx_neg&quot;</span>);</span><br><span class="line">    go_bsy = uvm_reg_field::type_id::create(<span class="string">&quot;go_bsy&quot;</span>);</span><br><span class="line">    reserved2 = uvm_reg_field::type_id::create(<span class="string">&quot;reserved2&quot;</span>);</span><br><span class="line">    char_len = uvm_reg_field::type_id::create(<span class="string">&quot;char_len&quot;</span>);</span><br><span class="line"></span><br><span class="line">    ass<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    ie<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    lsb<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">11</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    tx_neg<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    rx_neg<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    go_bsy<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    reserved2<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;b0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    char_len<span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">7&#x27;b0000000</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>As shown above, Register width is <strong>32</strong> same with the
+bus width, <strong>lower 14 bit</strong> is configured.</p>
+</blockquote>
+<p><strong>RTL</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">define</span> SPI_CTRL_BIT_NB         14</span></span><br><span class="line"><span class="keyword">reg</span> [`SPI_CTRL_BIT_NB-<span class="number">1</span>:<span class="number">0</span>] ctrl;	<span class="comment">// Control and status register</span></span><br></pre></td></tr></table></figure>
+<h4 id="register-maps">Register Maps</h4>
+<p>Two purpose of the register map</p>
+<ul>
+<li>provide information on the offset of the registers, memories and/or
+register blocks</li>
+<li>identify bus agent based sequences to be executed ???</li>
+</ul>
+<blockquote>
+<p>There can be several register maps within a block, each one can
+specify a different <strong>address map</strong> and a different
+<strong>target bus agent</strong></p>
+<p>register map has to be created which the <strong>register
+block</strong> using the <code>create_map</code> method</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Prototype for the create_map method</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">function</span> uvm_reg_map create_map(<span class="keyword">string</span> name,               <span class="comment">// Name of the map handle</span></span><br><span class="line">                                uvm_reg_addr_t base_addr,  <span class="comment">// The maps base address</span></span><br><span class="line">                                <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,      <span class="comment">// Map access width in bytes</span></span><br><span class="line">                                uvm_endianness_e endian,   <span class="comment">// The endianess of the map</span></span><br><span class="line">                                <span class="keyword">bit</span> byte_addressing=<span class="number">1</span>);    <span class="comment">// Whether byte_addressing is supported</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Example:</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">AHB_map = create_map(<span class="string">&quot;AHB_map&quot;</span>, <span class="number">&#x27;h0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><p>The <strong>n_bytes</strong> parameter is the word size (bus
+width) of the bus to which the map is associated. If a register's width
+exceeds the bus width, more than one bus access is needed to read and
+write that register over that bus.</p></li>
+<li><p>he <em>byte_addressing</em> argument affects how the address is
+incremented in these consecutive accesses. For example, if
+<em>n_bytes</em>=4 and <em>byte_addressing</em>=0, then an access to a
+register that is 64-bits wide and at offset 0 will result in two bus
+accesses at addresses 0 and 1. With <em>byte_addressing</em>=1, that
+same access will result in two bus accesses at addresses 0 and 4.</p>
+<p><strong>The default for <em>byte_addressing is</em>
+1</strong></p></li>
+<li><p>The <strong>first map</strong> to be created within a register
+block is assigned to the <strong>default_map</strong> member of the
+register block</p></li>
+</ul>
+</blockquote>
+<p><img src="/2022/03/12/uvm-ral/byte_addressing.drawio.svg"
+alt="byte_addressing.drawio" /></p>
+<h4 id="register-adapter">Register Adapter</h4>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>uvm_reg_adapter</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Methods</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="even">
+<td>reg2bus</td>
+<td>Overload to convert generic register access items to target bus
+agent sequence items</td>
+</tr>
+<tr class="odd">
+<td>bus2reg</td>
+<td>Overload to convert target bus sequence items to register model
+items</td>
+</tr>
+<tr class="even">
+<td><strong>Properties (Of type bit)</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="odd">
+<td>supports_byte_enable</td>
+<td>Set to 1 if the target bus and the target bus agent supports byte
+enables, else set to 0</td>
+</tr>
+<tr class="even">
+<td>provides_responses</td>
+<td>Set to 1 if the target agent driver sends separate response
+sequence_items that require response handling</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The <strong>provides_responses</strong> bit should be set if the
+agent driver returns a separate response item (i.e.
+<code>put(response)</code>, or <code>item_done(response)</code>) from
+its request item</p>
+</blockquote>
+<h4 id="prediction">Prediction</h4>
+<p>the update, or prediction, of the register model content can occur
+using one of three models</p>
+<h5 id="auto-prediction">Auto Prediction</h5>
+<p>This mode of operation is the simplest to implement, but suffers from
+the drawback that it can only keep the register model up to date with
+<strong>the transfers that it initiates</strong>. If any other sequences
+directly access the target sequencer to update register content, or if
+there are register accesses from other DUT interfaces, then the register
+model will not be updated.</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_map::set_auto_predict(<span class="keyword">bit</span> on=<span class="number">1</span>); m_auto_predict = on; <span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Gets the auto-predict mode setting for this map.</span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">bit</span>  uvm_reg_map::get_auto_predict(); <span class="keyword">return</span> m_auto_predict; <span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>// Function: set_auto_predict</p>
+<p>//</p>
+<p>// Sets the auto-predict mode for his map.</p>
+<p>//</p>
+<p>// When <sub>on</sub> is <sub>TRUE</sub>,</p>
+<p>// the register model will automatically update its
+<strong>mirror</strong> (what it thinks should be in the DUT)</p>
+<p>immediately after any bus read or write operation via this map.
+<strong>Before</strong> a <code>uvm_reg::write</code></p>
+<p>// or <code>uvm_reg::read</code> operation returns, the register's
+<code>uvm_reg::predict</code> method is called to update</p>
+<p>the <strong>mirrored</strong> value in the register.</p>
+<p>//</p>
+<p>// When <sub>on</sub> is <sub>FALSE</sub>, bus reads and writes via
+this map do not</p>
+<p>// automatically update the mirror. For real-time updates to the
+mirror</p>
+<p>// in this mode, you connect a <code>uvm_reg_predictor</code>
+instance to the bus</p>
+<p>// monitor. The predictor takes observed bus transactions from
+the</p>
+<p>// bus monitor, looks up the associated <code>uvm_reg</code> register
+given</p>
+<p>// the address, then calls that register's
+<code>uvm_reg::predict</code> method.</p>
+<p>// While more complex, this mode will capture all register
+read/write</p>
+<p>// activity, including that not directly descendant from calls to</p>
+<p>// <code>uvm_reg::write</code> and <code>uvm_reg::read</code>.</p>
+<p>//</p>
+<p>// <strong>By default, auto-prediction is turned off</strong>.</p>
+<p>//</p>
+</blockquote>
+<p><img
+src="https://s3.amazonaws.com/cookbook.verification.academy/images/Reg_auto_predict.gif"
+alt="Reg auto predict.gif" /></p>
+<blockquote>
+<p>The register model content is updated based on the register accesses
+it initiates</p>
+</blockquote>
+<h5 id="explicit-prediction-recommended-approach">Explicit Prediction
+(Recommended Approach)</h5>
+<p>Explicit prediction is the <strong>default mode</strong> of
+prediction</p>
+<p><img
+src="https://s3.amazonaws.com/cookbook.verification.academy/images/Reg_explicit_prediction.gif"
+alt="Reg explicit prediction.gif" /></p>
+<p>The register model content is updated via the <strong>predictor
+component</strong> based on all observed bus transactions, ensuring that
+register accesses made without the register model are mirrored
+correctly. The predictor looks up the accessed register by address then
+calls its <code>predict()</code> method</p>
+<h6 id="uvm_regpredict-uvm_regdo_predict">uvm_reg::predict &amp;
+uvm_reg::do_predict</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// predict</span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">bit</span> uvm_reg::predict (uvm_reg_data_t    value,</span><br><span class="line">                               uvm_reg_byte_en_t be = -<span class="number">1</span>,</span><br><span class="line">                               uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                               uvm_path_e        path = UVM_FRONTDOOR,</span><br><span class="line">                               uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                               <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                               <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line">  uvm_reg_item rw = <span class="keyword">new</span>; </span><br><span class="line">  rw<span class="variable">.value</span>[<span class="number">0</span>] = value;</span><br><span class="line">  rw<span class="variable">.path</span> = path;</span><br><span class="line">  rw<span class="variable">.map</span> = map; </span><br><span class="line">  rw<span class="variable">.fname</span> = fname;</span><br><span class="line">  rw<span class="variable">.lineno</span> = lineno;</span><br><span class="line">  do_predict(rw, kind, be); </span><br><span class="line">  predict = (rw<span class="variable">.status</span> == UVM_NOT_OK) ? <span class="number">0</span> : <span class="number">1</span>; </span><br><span class="line"><span class="keyword">endfunction</span>: predict</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// do_predict</span></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg::do_predict(uvm_reg_item      rw,  </span><br><span class="line">                                  uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                  uvm_reg_byte_en_t be = -<span class="number">1</span>); </span><br><span class="line"></span><br><span class="line">   uvm_reg_data_t reg_value = rw<span class="variable">.value</span>[<span class="number">0</span>];</span><br><span class="line">   m_fname = rw<span class="variable">.fname</span>;</span><br><span class="line">   m_lineno = rw<span class="variable">.lineno</span>;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">if</span> (rw<span class="variable">.status</span> ==UVM_IS_OK )</span><br><span class="line">   rw<span class="variable">.status</span> = UVM_IS_OK;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (m_is_busy &amp;&amp; kind == UVM_PREDICT_DIRECT) <span class="keyword">begin</span></span><br><span class="line">      `uvm_warning(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Trying to predict value of register &#x27;&quot;</span>,</span><br><span class="line">                  get_full_name(),<span class="string">&quot;&#x27; while it is being accessed&quot;</span>&#125;)</span><br><span class="line">      rw<span class="variable">.status</span> = UVM_NOT_OK;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line">   <span class="keyword">foreach</span> (m_fields[i]) <span class="keyword">begin</span></span><br><span class="line">      rw<span class="variable">.value</span>[<span class="number">0</span>] = (reg_value &gt;&gt; m_fields[i]<span class="variable">.get_lsb_pos</span>()) &amp;</span><br><span class="line">                                 ((<span class="number">1</span> &lt;&lt; m_fields[i]<span class="variable">.get_n_bits</span>())-<span class="number">1</span>);</span><br><span class="line">      m_fields[i]<span class="variable">.do_predict</span>(rw, kind, be&gt;&gt;(m_fields[i]<span class="variable">.get_lsb_pos</span>()/<span class="number">8</span>));</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   rw<span class="variable">.value</span>[<span class="number">0</span>] = reg_value;</span><br><span class="line"></span><br><span class="line"><span class="keyword">endfunction</span>: do_predict</span><br></pre></td></tr></table></figure>
+<h6
+id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
+&amp; uvm_reg_field::do_predict</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// predict</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">bit</span> uvm_reg_field::predict (uvm_reg_data_t    value,</span><br><span class="line">                                     uvm_reg_byte_en_t be = -<span class="number">1</span>,</span><br><span class="line">                                     uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                     uvm_path_e        path = UVM_FRONTDOOR,</span><br><span class="line">                                     uvm_reg_map       map = <span class="literal">null</span>,</span><br><span class="line">                                     <span class="keyword">string</span>            fname = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                                     <span class="keyword">int</span>               lineno = <span class="number">0</span>);</span><br><span class="line">  uvm_reg_item rw = <span class="keyword">new</span>;</span><br><span class="line">  rw<span class="variable">.value</span>[<span class="number">0</span>] = value;</span><br><span class="line">  rw<span class="variable">.path</span> = path;</span><br><span class="line">  rw<span class="variable">.map</span> = map;</span><br><span class="line">  rw<span class="variable">.fname</span> = fname;</span><br><span class="line">  rw<span class="variable">.lineno</span> = lineno;</span><br><span class="line">  do_predict(rw, kind, be);</span><br><span class="line">  predict = (rw<span class="variable">.status</span> == UVM_NOT_OK) ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line"><span class="keyword">endfunction</span>: predict</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// do_predict</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_field::do_predict(uvm_reg_item      rw,</span><br><span class="line">                                        uvm_predict_e     kind = UVM_PREDICT_DIRECT,</span><br><span class="line">                                        uvm_reg_byte_en_t be = -<span class="number">1</span>);</span><br><span class="line">   </span><br><span class="line">   uvm_reg_data_t field_val = rw<span class="variable">.value</span>[<span class="number">0</span>] &amp; ((<span class="number">1</span> &lt;&lt; m_size)-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (rw<span class="variable">.status</span> != UVM_NOT_OK)</span><br><span class="line">     rw<span class="variable">.status</span> = UVM_IS_OK;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Assume that the entire field is enabled</span></span><br><span class="line">   <span class="keyword">if</span> (!be[<span class="number">0</span>])</span><br><span class="line">     <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">   m_fname = rw<span class="variable">.fname</span>;</span><br><span class="line">   m_lineno = rw<span class="variable">.lineno</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">case</span> (kind)</span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_WRITE:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         uvm_reg_field_cb_iter cbs = <span class="keyword">new</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (rw<span class="variable">.path</span> == UVM_FRONTDOOR || rw<span class="variable">.path</span> == UVM_PREDICT)</span><br><span class="line">            field_val = XpredictX(m_mirrored, field_val, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         m_written = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">for</span> (uvm_reg_cbs cb = cbs<span class="variable">.first</span>(); cb != <span class="literal">null</span>; cb = cbs<span class="variable">.next</span>())</span><br><span class="line">            cb<span class="variable">.post_predict</span>(<span class="keyword">this</span>, m_mirrored, field_val, </span><br><span class="line">                            UVM_PREDICT_WRITE, rw<span class="variable">.path</span>, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         field_val &amp;= (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_READ:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         uvm_reg_field_cb_iter cbs = <span class="keyword">new</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (rw<span class="variable">.path</span> == UVM_FRONTDOOR || rw<span class="variable">.path</span> == UVM_PREDICT) <span class="keyword">begin</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">string</span> acc = get_access(rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (acc == <span class="string">&quot;RC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;WSRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W1SRC&quot;</span> ||</span><br><span class="line">                acc == <span class="string">&quot;W0SRC&quot;</span>)</span><br><span class="line">              field_val = <span class="number">0</span>;  <span class="comment">// (clear)</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;RS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WCRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W1CRS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;W0CRS&quot;</span>)</span><br><span class="line">              field_val = (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>; <span class="comment">// all 1&#x27;s (set)</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (acc == <span class="string">&quot;WO&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOC&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WOS&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;WO1&quot;</span> ||</span><br><span class="line">                     acc == <span class="string">&quot;NOACCESS&quot;</span>)</span><br><span class="line">              <span class="keyword">return</span>;</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">for</span> (uvm_reg_cbs cb = cbs<span class="variable">.first</span>(); cb != <span class="literal">null</span>; cb = cbs<span class="variable">.next</span>())</span><br><span class="line">            cb<span class="variable">.post_predict</span>(<span class="keyword">this</span>, m_mirrored, field_val,</span><br><span class="line">                            UVM_PREDICT_READ, rw<span class="variable">.path</span>, rw<span class="variable">.map</span>);</span><br><span class="line"></span><br><span class="line">         field_val &amp;= (<span class="number">&#x27;b1</span> &lt;&lt; m_size)-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">     UVM_PREDICT_DIRECT:</span><br><span class="line">       <span class="keyword">begin</span></span><br><span class="line">         <span class="keyword">if</span> (m_parent<span class="variable">.is_busy</span>()) <span class="keyword">begin</span></span><br><span class="line">           `uvm_warning(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Trying to predict value of field &#x27;&quot;</span>,</span><br><span class="line">              get_name(),<span class="string">&quot;&#x27; while register &#x27;&quot;</span>,m_parent<span class="variable">.get_full_name</span>(),</span><br><span class="line">              <span class="string">&quot;&#x27; is being accessed&quot;</span>&#125;)</span><br><span class="line">           rw<span class="variable">.status</span> = UVM_NOT_OK;</span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// update the mirror with predicted value</span></span><br><span class="line">   m_mirrored = field_val;</span><br><span class="line">   m_desired  = field_val;</span><br><span class="line">   <span class="keyword">this</span><span class="variable">.value</span> = field_val;</span><br><span class="line"></span><br><span class="line"><span class="keyword">endfunction</span>: do_predict</span><br></pre></td></tr></table></figure>
+<h6 id="uvm_access_e">uvm_access_e</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_access_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Type of operation begin performed</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_READ     - Read operation</span></span><br><span class="line"><span class="comment">// UVM_WRITE    - Write operation</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_READ,</span><br><span class="line">      UVM_WRITE,</span><br><span class="line">      UVM_BURST_READ,</span><br><span class="line">      UVM_BURST_WRITE</span><br><span class="line">   &#125; uvm_access_e;</span><br></pre></td></tr></table></figure>
+<h6 id="uvm_predict_e">uvm_predict_e</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_predict_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// How the mirror is to be updated</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_DIRECT  - Predicted value is as-is</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_READ    - Predict based on the specified value having been read</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_WRITE   - Predict based on the specified value having been written</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_PREDICT_DIRECT,</span><br><span class="line">      UVM_PREDICT_READ,</span><br><span class="line">      UVM_PREDICT_WRITE</span><br><span class="line">   &#125; uvm_predict_e;</span><br></pre></td></tr></table></figure>
+<h6 id="uvm_path_e">uvm_path_e</h6>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_path_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Path used for register operation</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_FRONTDOOR    - Use the front door</span></span><br><span class="line"><span class="comment">// UVM_BACKDOOR     - Use the back door</span></span><br><span class="line"><span class="comment">// UVM_PREDICT      - Operation derived from observations by a bus monitor via</span></span><br><span class="line"><span class="comment">//                    the &lt;uvm_reg_predictor&gt; class.</span></span><br><span class="line"><span class="comment">// UVM_DEFAULT_PATH - Operation specified by the context</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_FRONTDOOR,</span><br><span class="line">      UVM_BACKDOOR,</span><br><span class="line">      UVM_PREDICT,</span><br><span class="line">      UVM_DEFAULT_PATH</span><br><span class="line">   &#125; uvm_path_e;</span><br></pre></td></tr></table></figure>
+<h5 id="passive-prediction">Passive Prediction</h5>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +652,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -427,7 +853,7 @@ Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -605,7 +1031,7 @@ target="_blank" rel="noopener" href="https://eecs.wsu.edu/~daehyun/teaching/2014
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -915,7 +1341,7 @@ Checker for Oscillators</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1051,7 +1477,7 @@ layermap provided.</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:56" itemprop="dateModified" datetime="2024-08-20T14:45:56+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1260,7 +1686,7 @@ target="_blank" rel="noopener" href="https://designers-guide.org/modeling/montec
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1382,7 +1808,7 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1493,7 +1919,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1609,7 +2035,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
+      <time title="Modified: 2024-08-20 14:45:55" itemprop="dateModified" datetime="2024-08-20T14:45:55+00:00">2024-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1649,521 +2075,6 @@ accessing all the central UVM services such as
 <strong>uvm_root</strong>,<strong>uvm_factory</strong>,
 <strong>uvm_report_server</strong>, etc.</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Using the uvm_coreservice_t:</span></span><br><span class="line">uvm_coreservice_t cs;</span><br><span class="line">uvm_factory f;</span><br><span class="line">uvm_root top;</span><br><span class="line">cs = uvm_coreservice_t::get();</span><br><span class="line">f = cs<span class="variable">.get_factory</span>();</span><br><span class="line">top = cs<span class="variable">.get_root</span>();</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/23/emir-voltus-fi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/23/emir-voltus-fi/" class="post-title-link" itemprop="url">EMIR via Voltus-Fi</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-23 13:39:30" itemprop="dateCreated datePublished" datetime="2022-02-23T13:39:30+00:00">2022-02-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-20 10:10:48" itemprop="dateModified" datetime="2024-08-20T10:10:48+00:00">2024-08-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="general-terminology">general terminology</h2>
-<h3 id="dc-related">DC related</h3>
-<p><strong>Imax</strong> in T*'s DRC document is the maximum allowed
-<strong>DC current</strong>, which depends on <em>Length and Width</em>
-only</p>
-<p><strong>Iavg</strong> is the average value of the current, which is
-the effective <em>DC current</em>. Therefore, <strong>Iavg
-rules</strong> are <strong>identical</strong> to <strong>Imax</strong>
-rules <span class="math display">\[
-I_{\text{avg}}=\frac{\int_0^\tau I(t)dt}{\tau}
-\]</span> Similarly, <strong>Iabsavg rules</strong> are
-<strong>identical</strong> to <strong>Imax</strong> rules, too <span
-class="math display">\[
-I_{\text{AbsAvg}}=\frac{\int_0^\tau |I(t)|dt}{\tau}
-\]</span></p>
-<h3 id="rms">rms</h3>
-<p><strong>Irms</strong> is the root-mean-square of the current through
-a metal line, which depends <strong>w(in um)</strong>, the <em>drawn
-width</em> of the metal line and <span class="math inline">\(\Delta
-T\)</span>, the temperature rise due to Joule heating. <span
-class="math display">\[
-I_{\text{rms}}=\left[\frac{\int_0^\tau I(t)^2dt}{\tau} \right]^{1/2}
-\]</span></p>
-<h3 id="peak-current">peak current</h3>
-<p><strong>Ipeak</strong> in T*'s DRC document is the current at which a
-metal line undergoes excessive Joule heating and can begin to melt.
-<strong>Ipeak</strong> is corresponding to
-<code>EM Current Analysis: max</code> in Voltus-Fi Analysis Setup <span
-class="math display">\[
-I_{\text{peak}}=\max(|I(t)|)
-\]</span> The limit for the peak current is <span
-class="math display">\[
-I_{\text{peak,limit}}=\frac{I_{\text{peak\_DC}}}{\sqrt{r
-} }
-\]</span> where <strong>r</strong> is the duty ratio</p>
-<p>The relationship between <strong>Ipeak</strong> and
-<strong>Ipeak_DC</strong> is merged in DRC document so that there is
-only <strong>Ipeak</strong> equation in document</p>
-<blockquote>
-<p><span class="math inline">\(I_{\text{peak,limit}}\)</span> depends on
-<span class="math inline">\(t_D\)</span>, r, width and length</p>
-</blockquote>
-<p><span class="math display">\[
-r=\frac{t_D}{\tau}
-\]</span></p>
-<p>where <span class="math inline">\(t_D\)</span> is equivalent duration
-<span class="math display">\[
-t_D =\frac{\int_0^\tau |I(t)|dt}{I_{\text{peak}}}
-\]</span> or <span class="math display">\[
-r=\frac{I_{\text{AbsAvg}}}{I_{\text{peak}}}
-\]</span> <img
-src="/2022/02/23/emir-voltus-fi/image-20220729023550943.png"
-alt="image-20220729023550943" /></p>
-<p>where the drawn width is 1um, r is 0.1</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023722754.png"
-alt="image-20220729023722754" /></p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023319156.png"
-alt="image-20220729023319156" /> <span class="math display">\[
-9.37*(1-0.004)/\sqrt0.1 = 29.512
-\]</span></p>
-<h3 id="acpeakpwc">acpeak/pwc</h3>
-<p>It's same with <strong>max</strong> EM Current Analysis in
-Voltus-Fi</p>
-<h3 id="dynamicacpeak"><code>dynamicACPeak</code></h3>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729023154009.png"
-alt="image-20220729023154009" /></p>
-<p>This option affect how duty ratio r is computed in <code>max</code>
-and <code>acpeak/pwc</code> EM current Analysis</p>
-<p>When the <code>dynamicACPeak</code> variable is set to
-<strong>true</strong> or <strong>multiPeak</strong> <span
-class="math display">\[
-r=\frac{T_d}{T_{\text{total}}}
-\]</span></p>
-<p>​ where <span class="math inline">\(T_{\text{total}} = \text{EMIR
-time window}\)</span></p>
-<p>​ <span class="math inline">\(T_d\)</span> = the time duration in
-microsecond of the total "On Time" period based on <code>IPWC</code></p>
-<blockquote>
-<p>Pulse-Wise Constant EM current calculation (IPWC)</p>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220729032235649.png"
-alt="image-20220729032235649" /></p>
-<p>where <strong>Tau</strong> is <span
-class="math inline">\(T_d\)</span> in above formula</p>
-<blockquote>
-<p>!!! It seems that t*'s PDK don't support
-<code>dynamicACPeak=true</code></p>
-</blockquote>
-<h2 id="ir-drop-filter-layers">IR drop filter layers</h2>
-<p>EM techfile (qrcTechFile) may take diffusion contact
-(<em>n_odtap</em>, <em>p_odtap</em> in DSPF file) into account during IR
-drop analysis. And these segment often dominate IR drop, but we as IC
-designer can NOT improve them. In general, the IR drop to M1 layer is
-enough and feasible.</p>
-<h2 id="regular-analysis-statements-in-emir-configuration">Regular
-analysis statements in emir configuration</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net name=[I0.vdd I0.vss] analysis=[vmax vavg]</span><br><span class="line">net name=[I0.*] analysis =[imax ivavg irms]</span><br></pre></td></tr></table></figure>
-<h2 id="emirreport-command">emirreport command</h2>
-<p>Creating reports for specific nets after simulation using
-<code>emirreport</code></p>
-<p>Create a new config file as shown below:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">** test.conf**</span><br><span class="line">net name=[I1.VDD I1.VSS] analysis=[iavg]</span><br><span class="line">net name=[I1.VBIAS] analysis=[imax]</span><br></pre></td></tr></table></figure>
-<p>Run <code>emirreport</code> on the command line using the
-<strong>emirdatabase</strong> (emir*.bin) and <strong>test.conf</strong>
-created above in</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">% emirreport -64 -c test.conf -db &lt;emirdatabase&gt; -outdir newreport</span><br></pre></td></tr></table></figure>
-<h2 id="database">database</h2>
-<h3 id="simulation-result">simulation result</h3>
-<ul>
-<li><code>input.emir0_bin</code>: The first EMIR Analysis which is DC or
-Transient, which depends on <em>Analyses</em> order</li>
-</ul>
-<blockquote>
-<ul>
-<li><p><code>input_tran.emir0_bin</code>: EMIR Analysis in Transient
-simulation</p></li>
-<li><p><code>input_dcOp.emir0_bin</code>: EMIR Analysis in DC
-simulation</p></li>
-</ul>
-</blockquote>
-<p>For example</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203011393.png"
-alt="image-20220421203011393" /></p>
-<p>Two results are generated <code>input.emir0_bin</code> and
-<code>input_dcOp.emir0_bin</code> and their reports respectly</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203657123.png"
-alt="image-20220421203657123" /></p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421203554147.png"
-alt="image-20220421203554147" /></p>
-<h2 id="fix-electromigration">Fix Electromigration</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>wider wire</th>
-<th>downsize drivers</th>
-<th>decrease fanout</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>RJ JMAX</td>
-<td></td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>JAVG</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>JABSAVG</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>JACPEAK</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>JACRMS</td>
-<td>✓</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<ul>
-<li><p>Iavg</p>
-<p>The average value of the current, which is the effective DC
-current</p></li>
-<li><p>Irms</p>
-<p>Irms rule relates to the heat or Joule-heating of metal
-lines</p></li>
-<li><p>Ipeak</p>
-<p>The main goal of the Ipeak limits is to ensure that no thermal
-breakdown could occur on single overshoot events. If the signal may not
-have a high current density but if it has a very large peak current
-density, then, local melting will happen and cause failures</p></li>
-</ul>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220503205418275.png"
-alt="image-20220503205418275" /></p>
-<h2 id="qa">QA</h2>
-<ol type="1">
-<li><p>Q. Why “length” column in EM results form doesn’t show extracted
-length, it shows “NA”.</p>
-<p>A. Voltus-Fi reports the “length” column only when length rules are
-present in the emDataFile.</p></li>
-<li><p>Seeing different port currents with and without emir simulations
-for same dspf included in EMIR Direct method using dspf_include.</p>
-<p>Split Pins (*|P) in DSPF are only shorted in the EMIR flow not in the
-regular spectre flow. Islands patching is only performed in EMIR
-only</p></li>
-<li><p>Setting temperature for EM analysis</p></li>
-</ol>
-<p>By Default, Voltus-FI and VPS pick up the current density limit for
-<strong>temperature at which simulation has been performed</strong>.</p>
-<blockquote>
-<p>By the way, <code>Design Variables</code> - <em>temperature</em> will
-override the temperature in <em>Setup toolbar</em> which is gray in ADE
-Explorer</p>
-</blockquote>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421184141363.png"
-alt="image-20220421184141363" /></p>
-<ol start="4" type="1">
-<li><p>AC Peak EM analysis - Voltus-Fi</p>
-<p>The available options within the EM current analysis section in the
-EMIR Analysis Setup form are:</p>
-<p><code>max / avg / avgabs / rms.</code></p>
-<p>In order to enable the <em>AC Peak based information</em> when
-loading the EM results, <strong>both max and avg</strong> should be
-selected when setting up the EMIR Analysis Setup.</p>
-<p>With this configuration, the AC Peak option becomes available and can
-be used.</p></li>
-<li><p>How to print average, rms, and peak current of <strong>device
-tap</strong> in Spectre/Voltus FI EMIR analysis</p>
-<p>The following option enables you to save the average, rms, and peak
-tap currents in the <strong>emir0bin</strong> file and report it in the
-<strong>input.rpt_tapi</strong> file.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solver report_tapi=true</span><br></pre></td></tr></table></figure>
-<p>Add this option in <strong>emir.conf</strong> to enable the reporting
-of tap current after the Spectre EMIR simulation. The input.rpt_tapi
-file will be saved in the psf/raw directory.</p>
-<p><strong>Note:</strong> This feature is supported in SPECTRE20.1 ISR14
-and later versions.</p></li>
-<li><p>emir.conf file</p>
-<p><code>emir.conf</code> file is generated automaticaly after configure
-<em>EM/IR Analysis</em> in ADE, which is in <em>netlist</em>
-directory.</p>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421182327011.png"
-alt="image-20220421182327011" /></p></li>
-<li><p>Setting default path for EM rules file in APS EMIR analysis</p>
-<ul>
-<li><p>set the following environment variable in your terminal</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenv EMDATAFILE &lt; path to EM rules file&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>or set in <code>.cdsinit</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setShellEnvVar(&quot;EMDATAFILE=&lt;path to EM rules file&gt;&quot;)</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li><p>Print node names and length associated with parasitic resistors
-in EM report file</p>
-<blockquote>
-<p><code>export CDS_MMSIM_VOLTUSFI_ROOT=$CDSHOME</code></p>
-</blockquote>
-<ul>
-<li><p>Printing the parasitic resistor length in the EM report</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emirutil reportLength=true</span><br></pre></td></tr></table></figure></li>
-<li><p>Printing nodes that are associated with the parasitic
-resistor</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emirutil reportNodeName=true</span><br></pre></td></tr></table></figure>
-<p>Once these are enabled, you will have the <strong>Length</strong>,
-<strong>Node_1</strong>, and <strong>Node_2</strong> columns printed in
-the EM report file, as shown below:</p>
-<p><img src="/2022/02/23/emir-voltus-fi/servlet.jpeg"
-alt="servlet" /></p></li>
-</ul></li>
-<li><p>Is it possible to run RMS IR Drop analysis using Voltus-Fi?</p>
-<p>Typically, in a simulation, Power/Ground nets are always biased with
-a <strong>constant DC source</strong>. Hence, at present, Voltus-Fi only
-supports <strong>Average and Maximum (Peak) IR Drop</strong>
-analysis.</p>
-<p>For a net to have data for IR analysis(vmax/vavg), the net/node must
-be connected to a <strong>DC vsource or a vsource which is constant
-within the emir time window</strong>.</p></li>
-<li><p>Can we change the time window of EM computation after the
-simulation completed ?</p>
-<p>It is not possible to modify the EM time window without re-running
-the full simulation.</p>
-<p>However you can specify several time window in the emir conf file for
-instance for 2 time window [0 to 10n] and [10n 20n]</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time window=[0 10n 10n 20n]</span><br></pre></td></tr></table></figure>
-<p>In that case it will create 2 <strong>emir_bin</strong> files and
-then 2 different em report files according to the 2 different time
-windows.</p></li>
-<li><p>How to print segment_W values being used to compute EM limits</p>
-<p>You can use the following option to print <code>segment_W</code> to
-the report:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emirutil reportSegmentWidth=[true]</span><br></pre></td></tr></table></figure>
-<p>This would print a <code>Segment_w</code> column in the report
-containing the segment width values used for computing the limit:</p>
-<table>
-<colgroup>
-<col style="width: 7%" />
-<col style="width: 5%" />
-<col style="width: 3%" />
-<col style="width: 7%" />
-<col style="width: 3%" />
-<col style="width: 6%" />
-<col style="width: 4%" />
-<col style="width: 3%" />
-<col style="width: 4%" />
-<col style="width: 3%" />
-<col style="width: 4%" />
-<col style="width: 7%" />
-<col style="width: 4%" />
-<col style="width: 4%" />
-<col style="width: 11%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Pass/Fail %</th>
-<th>Resistor</th>
-<th>layer</th>
-<th>Current</th>
-<th>Width</th>
-<th>PathLength</th>
-<th>I limit</th>
-<th>X1</th>
-<th>Y1</th>
-<th>X2</th>
-<th>Y2</th>
-<th>J/JMAX</th>
-<th>Res</th>
-<th>ViaArea</th>
-<th>No of needed vias</th>
-<th>width/#via</th>
-<th>J limit</th>
-<th>Segment_w</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td>(mA)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td></td>
-<td>(um)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td>(um)</td>
-<td></td>
-<td></td>
-<td>(nm^2)</td>
-<td></td>
-<td>(um/#)</td>
-<td>(A/um)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>pass-100.0</td>
-<td>Rj3292</td>
-<td>Met1</td>
-<td>9.02376e-12</td>
-<td>0.1</td>
-<td>42.72</td>
-<td>1.10067</td>
-<td>0.350</td>
-<td>11.568</td>
-<td>0.350</td>
-<td>11.376</td>
-<td>8.19843e-12</td>
-<td>0.7382</td>
-<td>NA</td>
-<td>NA</td>
-<td>0.0001</td>
-<td>0.0110067</td>
-<td>0.1</td>
-</tr>
-</tbody>
-</table></li>
-<li><p>pathLength vs Length in EM report file</p>
-<ul>
-<li><p>Length: parasitic resistor length, which is set by
-<code>emirutil reportLength=true</code></p></li>
-<li><p>pathlength: Blech length is also known as "Short length" or "Path
-length", and can be explained as : The <strong>longest and continuous
-centerline path from edge to edge</strong> among the connected wire
-shapes on the <strong>same metal layer</strong>.</p>
-<ul>
-<li>For all resistors falling on this shape, <strong>same
-pathLength</strong> is reported.</li>
-<li>After the longest path in shape has been determined the tool applies
-the same blech length to all the resistor falling on that shape.</li>
-<li>This resistor length is <strong>NOT</strong> used in EM analysis
-because EM rules consider Blech length of the resistor.</li>
-</ul>
-<p><img src="/2022/02/23/emir-voltus-fi/image-20220421001806689.png"
-alt="image-20220421001806689" /></p>
-<blockquote>
-<p>where W is the wire width and L is the Blech length.</p>
-</blockquote>
-<ul>
-<li><p>By default the tool will <strong>sum all branches of a given
-metal layer</strong>. In other words the path length that will be used
-to look up the EM density limit is :</p>
-<p>Bl = $l(R1) + $l(R2) + $l(R3) + $l(R4) + $l(R5) + $l(R6) + $l(R7) +
-$l(R8)</p>
-<p><img src="/2022/02/23/emir-voltus-fi/servlet-16504730496591.jpeg"
-alt="servlet" /></p></li>
-</ul></li>
-</ul></li>
-<li><p>How to enable EMIR analysis in PSS simualtion ?</p>
-<p>To enable EMIR in PSS, you have to enable DC and/or Tran simulation
-simultaneously. Two or more binary results file should be generated and
-select the file based file name or configure text file in
-<code>psf</code> directory.</p>
-<p>(given ICADVM 18.1 ISR11, Spectre 19.1 ISR6)</p></li>
-</ol>
-<h2 id="reference">reference</h2>
-<p>AC Peak Analysis Using IPWC Rapid Adoption Kit (RAK) Product Version:
-IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020</p>
-<p>Posser, Gracieli &amp; Sapatnekar, Sachin &amp; Reis, Ricardo.
-(2017). Electromigration Inside Logic Cells.
-10.1007/978-3-319-48899-8.</p>
-<p>A. B. Kahng, S. Nath and T. S. Rosing, "On potential design impacts
-of electromigration awareness," 2013 18th Asia and South Pacific Design
-Automation Conference (ASP-DAC), 2013, pp. 527-532, doi:
-10.1109/ASPDAC.2013.6509650.</p>
-<p>Kumar, Neeraj and Mohammad S. Hashmi. “Study, analysis and modeling
-of electromigration in SRAMs.” (2014).</p>
-<p>N. S. Nagaraj, F. Cano, H. Haznedar and D. Young, "A practical
-approach to static signal electromigration analysis," Proceedings 1998
-Design and Automation Conference. 35th DAC. (Cat. No.98CH36175), 1998,
-pp. 572-577, doi: 10.1109/DAC.1998.724536.</p>
-<p>Blaauw, David &amp; Oh, Chanhee &amp; Zolotov, Vladimir &amp;
-Dasgupta, Aurobindo. (2003). Static electromigration analysis for
-on-chip signal interconnects. Computer-Aided Design of Integrated
-Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
-10.1109/TCAD.2002.805728.</p>
 
       
     </div>

@@ -59,6 +59,8 @@ That redundancy, that use of non-binary weighting, allowed it to tolerate mismat
 
 
 
+
+
 ## Coherent Sampling
 
 To avoid **spectral leakage** completely, the method of **coherent sampling** is recommended. Coherent sampling requires that the input- and clock-frequency generators are **phase locked**, and that the input frequency be chosen based on the following relationship:

@@ -13,9 +13,16 @@ mathjax: true
 *TODO* &#128197;
 
 
-## Impact of reference Clock Edges on PI Output
 
-*TODO* &#128197;
+## Clock Edges on PI
+
+And for a phase interpolator, you need those reference clocks to be completely the opposite. Ideally they would be **triangular** shaped
+
+![image-20240821203756602](clocking/image-20240821203756602.png)
+
+> *four input clocks given by the cyan, black, magenta, red* 
+
+
 
 
 > John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery" [[https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)]

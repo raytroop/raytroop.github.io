@@ -83,13 +83,13 @@ Of course, , if the capacitance at the gate of $M_1$ is taken into account, pole
 
 ![image-20240819202642809](ahuja/image-20240819202642809.png)
 $$
-\frac{V_{out}}{I_{in}} \approx \frac{-g_{m1}R_SR_L(g_{m2}+C_Cs)}{\frac{R_S+r_o}{r_o}R_LC_LC_Cs^2+g_{m1}g_{m2}R_LR_SC_Cs+g_{m2}}
+\frac{V_{out}}{I_{in}} \approx \frac{-g_{m1}R_SR_L(g_{m2}+C_Cs)}{\frac{R_S+r_\text{o2}}{r_\text{o2}}R_LC_LC_Cs^2+g_{m1}g_{m2}R_LR_SC_Cs+g_{m2}}
 $$
 The poles as
 
 $$\begin{align}
 \omega_{p1} &\approx  \frac{1}{g_{m1}R_LR_SC_c} \\
-\omega_{p2} &\approx \frac{g_{m2}R_Sg_{m1}}{C_L}\frac{r_o}{R_S+r_o}
+\omega_{p2} &\approx \frac{g_{m2}R_Sg_{m1}}{C_L}\frac{r_\text{o2}}{R_S+r_\text{o2}}
 \end{align}$$
 
 and zero is not affected, which is $\omega_z =\frac{g_{m2}}{C_C}$

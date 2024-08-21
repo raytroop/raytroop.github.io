@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -345,7 +345,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2022/06/02/gett
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -369,6 +369,68 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2022/06/02/gett
     <div class="post-body" itemprop="articleBody">
           <blockquote>
 <p>assign the amount of time based on the time needed for each step</p>
+</blockquote>
+<h2 id="background">Background</h2>
+<h3 id="pipeline-adc">pipeline ADC</h3>
+<p><img src="/2024/08/20/async-sar/image-20240821212812683.png"
+alt="image-20240821212812683" /></p>
+<p><img src="/2024/08/20/async-sar/pipelineADC.drawio.svg"
+alt="pipelineADC.drawio" /></p>
+<p><span class="math display">\[
+V_{N-1} = \sum_{i=0}^{N-2} B[i]\frac{1}{2^{N-i}}+ B[N-1]\frac{1}{2}
+\]</span> Compare with <span class="math inline">\(\frac{1}{2}\)</span>,
+and determine <span class="math inline">\(B[N-1]\)</span> <span
+class="math display">\[\begin{align}
+V_{N-2}  &amp;= \left(V_{N-1} - B[N-1]\frac{1}{2}\right)\cdot 2 \\
+&amp;= \left(\sum_{i=0}^{N-1} B[i]\frac{1}{2^{N-i}} -
+B[N-1]\frac{1}{2}\right) \cdot 2 \\
+&amp;= \sum_{i=0}^{N-2} B[i]\frac{1}{2^{N-i}} \cdot 2 \\
+&amp;= \sum_{i=0}^{N-3} B[i]\frac{1}{2^{N-i}}\cdot 2 + B[N-2]\frac{1}{2}
+\end{align}\]</span></p>
+<p>That is, input can be expressed as below straightforwardly <span
+class="math display">\[\begin{align}
+V_{N-1} &amp;= \sum_{i=0}^{N-1} B[i] \frac{1}{2}\cdot 2^{i-N+1} \\
+&amp;= B[N-1]\frac{1}{2} + B[N-2]\frac{1}{2}\cdot 2^{-1} +
+B[N-3]\frac{1}{2}\cdot 2^{-2 }...
+\end{align}\]</span></p>
+<p>It divides the process into several comparison stages, the number of
+which is proportional to the number of bits</p>
+<blockquote>
+<p>Due to the pipeline structure of both analog and digital signal path,
+inter-stage <strong>residue amplification</strong> is needed which
+consumes considerable power and limits high speed operation</p>
+</blockquote>
+<h3 id="synchronous-sar-adc">Synchronous SAR ADC</h3>
+<p>It also divides a full conversion into several comparison stages in a
+way similar to the <em>pipeline ADC</em>, except the algorithm is
+executed <strong>sequentially</strong> rather than in <em>parallel</em>
+as in the pipeline case.</p>
+<p>However, the sequential operation of the SA algorithm has
+traditionally been a <em>limitation in achieving high-speed
+operation</em></p>
+<p><img src="/2024/08/20/async-sar/image-20240821215815566.png"
+alt="image-20240821215815566" /></p>
+<ul>
+<li>a clock running at least <span class="math inline">\((N + 1) \cdot
+F_s\)</span> is required for an <span
+class="math inline">\(N\)</span>-bit converter with conversion rate of
+<span class="math inline">\(F_s\)</span></li>
+<li>every clock cycle has to tolerate the worst case comparison
+time</li>
+<li>every clock cycle requires margin for the clock jitter</li>
+</ul>
+<blockquote>
+<p>The power and speed limitations of a synchronous SA design comes
+largely from the <em>high-speed internal clock</em></p>
+</blockquote>
+<h2 id="asynchronous-processing">Asynchronous processing</h2>
+<p><img src="/2024/08/20/async-sar/image-20240821230528349.png"
+alt="image-20240821230528349" /></p>
+<p>a global clock running at the sample rate is still used for an
+<strong>uniform sampling</strong></p>
+<blockquote>
+<p>The concept of asynchronous processing is to trigger the internal
+comparison from MSB to LSB like <em>dominoes</em>.</p>
 </blockquote>
 <h2 id="reference">reference</h2>
 <p>S. -W. M. Chen and R. W. Brodersen, "A 6-bit 600-MS/s 5.3-mW
@@ -439,7 +501,7 @@ target="_blank" rel="noopener" href="http://www2.eecs.berkeley.edu/Pubs/TechRpts
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -777,7 +839,7 @@ target="_blank" rel="noopener" href="https://stacks.stanford.edu/file/druid:xq06
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -871,7 +933,7 @@ target="_blank" rel="noopener" href="https://gist.github.com/guisehn/5438bbc2213
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1278,7 +1340,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">http
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1604,7 +1666,7 @@ on Circuits and Systems I: Regular Papers</em>, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2100,7 +2162,7 @@ pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2245,7 +2307,7 @@ alt="image-20240725204527121" /> <span class="math display">\[
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2337,7 +2399,7 @@ target="_blank" rel="noopener" href="https://www.analog.com/en/resources/technic
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-21 02:03:06" itemprop="dateModified" datetime="2024-08-21T02:03:06+00:00">2024-08-21</time>
+      <time title="Modified: 2024-08-21 15:11:17" itemprop="dateModified" datetime="2024-08-21T15:11:17+00:00">2024-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

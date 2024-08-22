@@ -1,5 +1,5 @@
 ---
-title: Spurious Phase Noise
+title: Spur & Spread Spectrum Clocking (SSC)
 date: 2024-07-14 09:17:11
 tags:
 categories:

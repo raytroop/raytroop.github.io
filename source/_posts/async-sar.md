@@ -32,7 +32,7 @@ V_{N-2}  &= \left(V_{N-1} - B[N-1]\frac{1}{2}\right)\cdot 2 \\
 &= \sum_{i=0}^{N-3} B[i]\frac{1}{2^{N-i}}\cdot 2 + B[N-2]\frac{1}{2}
 \end{align}$$
 
-That is, input can be expressed as below straightforwardly
+On your intuition, input can be expressed as below
 $$\begin{align}
 V_{N-1} &= \sum_{i=0}^{N-1} B[i] \frac{1}{2}\cdot 2^{i-N+1} \\
 &= B[N-1]\frac{1}{2} + B[N-2]\frac{1}{2}\cdot 2^{-1} + B[N-3]\frac{1}{2}\cdot 2^{-2 }...

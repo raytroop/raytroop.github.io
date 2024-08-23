@@ -112,6 +112,14 @@ $$
 > The term **bandgap** is used here because as $T\to 0$, $V_{REF} \to E_g/q$
 
 
+## sinking PTAT-current generator without current mirrors
+
+**without current mirror**
+
+*TODO* &#128197;
+
+
+> Bakker, Anton. (2000). High-Accuracy CMOS Smart Temperature Sensors. 10.1007/978-1-4757-3190-3. [[https://repository.tudelft.nl/record/uuid:fd398056-48dd-4d84-8ae8-27a1b011d2c3](https://repository.tudelft.nl/record/uuid:fd398056-48dd-4d84-8ae8-27a1b011d2c3)]
 
 ## Consideration for Readout Circuit
 

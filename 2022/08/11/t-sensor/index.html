@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://example.com/2022/08/11/t-sensor/image-20230501223512686.png">
 <meta property="og:image" content="http://example.com/2022/08/11/t-sensor/image-20221106142157115.png">
 <meta property="article:published_time" content="2022-08-11T08:33:19.000Z">
-<meta property="article:modified_time" content="2024-08-22T10:33:48.694Z">
+<meta property="article:modified_time" content="2024-08-23T10:26:09.797Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2022/08/11/t-sensor/image-20221106010909644.png">
@@ -153,8 +153,9 @@
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#v_be-curvature"><span class="nav-number">1.</span> <span class="nav-text">\(V_{BE}\)
 curvature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ptat-bias-current-generation"><span class="nav-number">2.</span> <span class="nav-text">PTAT bias current generation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#errors-due-to-v-i-finite-gain"><span class="nav-number">3.</span> <span class="nav-text">Errors due to V-I Finite
 Gain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-is-it-named-as-bandgap-reference"><span class="nav-number">4.</span> <span class="nav-text">Why is it named as
-&quot;bandgap reference&quot;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consideration-for-readout-circuit"><span class="nav-number">5.</span> <span class="nav-text">Consideration for Readout
-Circuit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adc-dynamic-range"><span class="nav-number">5.1.</span> <span class="nav-text">ADC dynamic range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#integrator-output-swing"><span class="nav-number">5.2.</span> <span class="nav-text">Integrator Output Swing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example"><span class="nav-number">5.2.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#integrator-comparator-offset"><span class="nav-number">5.3.</span> <span class="nav-text">integrator, comparator offset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#integrator-offset"><span class="nav-number">5.3.1.</span> <span class="nav-text">integrator offset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#comparator-offset"><span class="nav-number">5.3.2.</span> <span class="nav-text">comparator offset</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#integrator-design"><span class="nav-number">6.</span> <span class="nav-text">integrator design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#application-in-sensor"><span class="nav-number">6.1.</span> <span class="nav-text">application in sensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#offset-errors"><span class="nav-number">6.2.</span> <span class="nav-text">Offset Errors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errors-due-to-finite-gain"><span class="nav-number">6.3.</span> <span class="nav-text">Errors due to Finite Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">reference</span></a></li></ol></div>
+&quot;bandgap reference&quot;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sinking-ptat-current-generator-without-current-mirrors"><span class="nav-number">5.</span> <span class="nav-text">sinking
+PTAT-current generator without current mirrors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consideration-for-readout-circuit"><span class="nav-number">6.</span> <span class="nav-text">Consideration for Readout
+Circuit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adc-dynamic-range"><span class="nav-number">6.1.</span> <span class="nav-text">ADC dynamic range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#integrator-output-swing"><span class="nav-number">6.2.</span> <span class="nav-text">Integrator Output Swing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example"><span class="nav-number">6.2.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#integrator-comparator-offset"><span class="nav-number">6.3.</span> <span class="nav-text">integrator, comparator offset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#integrator-offset"><span class="nav-number">6.3.1.</span> <span class="nav-text">integrator offset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#comparator-offset"><span class="nav-number">6.3.2.</span> <span class="nav-text">comparator offset</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#integrator-design"><span class="nav-number">7.</span> <span class="nav-text">integrator design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#application-in-sensor"><span class="nav-number">7.1.</span> <span class="nav-text">application in sensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#offset-errors"><span class="nav-number">7.2.</span> <span class="nav-text">Offset Errors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errors-due-to-finite-gain"><span class="nav-number">7.3.</span> <span class="nav-text">Errors due to Finite Gain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">8.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -249,7 +250,7 @@ Circuit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a clas
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-22 10:33:48" itemprop="dateModified" datetime="2024-08-22T10:33:48+00:00">2024-08-22</time>
+      <time title="Modified: 2024-08-23 10:26:09" itemprop="dateModified" datetime="2024-08-23T10:26:09+00:00">2024-08-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -386,6 +387,15 @@ V_{REF}=\frac{E_g}{q} + (4+m)V_T
 <p>The term <strong>bandgap</strong> is used here because as <span
 class="math inline">\(T\to 0\)</span>, <span
 class="math inline">\(V_{REF} \to E_g/q\)</span></p>
+</blockquote>
+<h2 id="sinking-ptat-current-generator-without-current-mirrors">sinking
+PTAT-current generator without current mirrors</h2>
+<p><strong>without current mirror</strong></p>
+<p><em>TODO</em> 📅</p>
+<blockquote>
+<p>Bakker, Anton. (2000). High-Accuracy CMOS Smart Temperature Sensors.
+10.1007/978-1-4757-3190-3. [<a
+target="_blank" rel="noopener" href="https://repository.tudelft.nl/record/uuid:fd398056-48dd-4d84-8ae8-27a1b011d2c3">https://repository.tudelft.nl/record/uuid:fd398056-48dd-4d84-8ae8-27a1b011d2c3</a>]</p>
 </blockquote>
 <h2 id="consideration-for-readout-circuit">Consideration for Readout
 Circuit</h2>

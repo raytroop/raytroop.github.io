@@ -11,6 +11,18 @@ Due to the fact that *long-term drift* of temperature sensors and bandgap refere
 
 
 
+##  Calibration
+
+*TODO* &#128197;
+
+
+
+
+
+> [[https://ww1.microchip.com/downloads/en/Appnotes/Atmel-8108-Calibration-of-the-AVRs-Internal-Temperature-Reference_ApplicationNote_AVR122.pdf](https://ww1.microchip.com/downloads/en/Appnotes/Atmel-8108-Calibration-of-the-AVRs-Internal-Temperature-Reference_ApplicationNote_AVR122.pdf)]
+
+
+
 ## $V_{BE}$ curvature
 
 Though it is assumed that  $V_{BE}$ is a linear function of temperature for first oder analysis.
@@ -114,12 +126,22 @@ $$
 
 ## sinking PTAT-current generator without current mirrors
 
-**without current mirror**
 
-*TODO* &#128197;
+
+![image-20240824110909314](t-sensor/image-20240824110909314.png)
+
+**why without current mirror?**
+
+![image-20240824110641427](t-sensor/image-20240824110641427.png)
+
+![image-20240824110958282](t-sensor/image-20240824110958282.png)
+
+
 
 
 > Bakker, Anton. (2000). High-Accuracy CMOS Smart Temperature Sensors. 10.1007/978-1-4757-3190-3. [[https://repository.tudelft.nl/record/uuid:fd398056-48dd-4d84-8ae8-27a1b011d2c3](https://repository.tudelft.nl/record/uuid:fd398056-48dd-4d84-8ae8-27a1b011d2c3)]
+
+
 
 ## Consideration for Readout Circuit
 
@@ -234,7 +256,6 @@ Assuming the opamp is implemented as a **transconductance amplifier**, there are
 ​	\end{align}$$
 
 2. The finite DC gain $A_{0,3}$, which implies that an overdrive voltage is required to produce the **output voltage** $V_{int}$
-
 
 
 

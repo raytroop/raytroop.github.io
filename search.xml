@@ -3,8 +3,7 @@
   <entry>
     <title>Second-Order System</title>
     <url>/2024/01/06/2nd-sys/</url>
-    <content><![CDATA[<h2 id="standard-form-of-the-second-order-system">standard form of the
-second-order system</h2>
+    <content><![CDATA[<h2 id="overview">overview</h2>
 <p><img src="/2024/01/06/2nd-sys/image-20240721172721884.png"
 alt="image-20240721172721884" /></p>
 <p><img src="/2024/01/06/2nd-sys/image-20240629140001275.png"
@@ -14,7 +13,8 @@ alt="image-20240629140001275" /></p>
 natural frequency</em></p>
 </blockquote>
 <hr />
-<h2 id="closed-loop">closed loop</h2>
+<h2 id="closed-loop-frequency-response">closed loop frequency
+response</h2>
 <p><img src="/2024/01/06/2nd-sys/image-20240629134127219.png"
 alt="image-20240629134127219" /> <span
 class="math display">\[\begin{align}
@@ -59,18 +59,6 @@ class="math inline">\(\zeta &gt; 0.5\)</span> or phase margin more than
 <p>We can analyze open loop system in a better perspective because it is
 simpler. So, we always use the loop gain analysis to find the phase
 margin and see whether the system is stable or not.</p>
-<h2 id="closed-loop-poles-versus-open-loop-gain">Closed Loop Poles
-Versus Open Loop Gain</h2>
-<p><img src="/2024/01/06/2nd-sys/image-20240712203230295.png"
-alt="image-20240712203230295" /></p>
-<p><img src="/2024/01/06/2nd-sys/image-20240712203241638.png"
-alt="image-20240712203241638" /></p>
-<blockquote>
-<p>[<a
-href="https://www.cppsim.com/CommCircuitLectures/lec15.pdf">Michael H.
-Perrott, High Speed Communication Circuits and Systems, Lecture 15
-Integer-N Frequency Synthesizers</a>]</p>
-</blockquote>
 <h2 id="additional-zero">additional Zero</h2>
 <p><span class="math display">\[\begin{align}
 TF &amp;= \frac{s +\omega_z}{s^2+2\zeta \omega_ns+\omega_n^2} \\
@@ -89,57 +77,66 @@ class="math inline">\(\omega_\text{peak}\)</span> can be obtained via
 \omega_\text{peak} = \omega_z \sqrt{\sqrt{(\frac{\omega_n}{\omega_z})^4
 - 2(\frac{\omega_n}{\omega_z})^2(2\zeta ^2-1)+1} - 1}
 \]</span></p>
-<h2 id="step-response-of-higher-order-system">Step Response of higher
-order system</h2>
-<p><img src="/2024/01/06/2nd-sys/image-20240112002314153.png"
-alt="image-20240112002314153" /></p>
-<p>Since <span class="math inline">\(1/sC_1+R_1 \gg R_0\)</span> <span
+<h2 id="settling-time">Settling Time</h2>
+<h3 id="single-pole">single-pole</h3>
+<p><img src="/2024/01/06/2nd-sys/image-20240725204501781.png"
+alt="image-20240725204501781" /></p>
+<p><img src="/2024/01/06/2nd-sys/image-20240725204527121.png"
+alt="image-20240725204527121" /> <span class="math display">\[
+\tau \simeq \frac{1}{\beta \omega_\text{ugb}}
+\]</span></p>
+<h3 id="two-poles">two poles</h3>
+<h4 id="rise-time">Rise Time</h4>
+<blockquote>
+<p>Katsuhiko Ogata, Modern Control Engineering Fifth Edition</p>
+</blockquote>
+<p><img src="/2024/01/06/2nd-sys/image-20240721180718116.png"
+alt="image-20240721180718116" /></p>
+<blockquote>
+<p>For <em>underdamped</em> second order systems, the <em>0% to 100%
+rise time</em> is normally used</p>
+</blockquote>
+<p>For <span class="math inline">\(\text{PM}=70^o\)</span></p>
+<ul>
+<li><span class="math inline">\(\omega_2=3\omega_u\)</span>, that is
+<span class="math inline">\(\omega_n = 1.7\omega_u\)</span>.</li>
+<li><span class="math inline">\(\zeta = 0.87\)</span></li>
+</ul>
+<p>Then <span class="math display">\[
+t_r = \frac{3.1}{\omega_u}
+\]</span></p>
+<h4 id="settling-time-1">Settling Time</h4>
+<blockquote>
+<p>Gene F. Franklin, Feedback Control of Dynamic Systems, 8th
+Edition</p>
+</blockquote>
+<p><img src="/2024/01/06/2nd-sys/image-20240721181956221.png"
+alt="image-20240721181956221" /></p>
+<p><img src="/2024/01/06/2nd-sys/image-20240721182025547.png"
+alt="image-20240721182025547" /></p>
+<p>As we know <span class="math display">\[
+\zeta \omega_n=\frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}\cdot
+\sqrt{\omega_u\omega_2}=\frac{1}{2}\omega_2
+\]</span></p>
+<p>Then <span class="math display">\[
+t_s = \frac{9.2}{\omega_2}
+\]</span></p>
+<p>For <span class="math inline">\(\text{PM}=70^o\)</span>, <span
+class="math inline">\(\omega_2 = 3\omega_u\)</span>, that is <span
 class="math display">\[
-\frac{V_m}{V_i}(s) \simeq \frac{R_0}{R_0 + 1/sC_0} =
-\frac{sR_0C_0}{1+sR_0C_0}
-\]</span> <em>step response</em> of <span
-class="math inline">\(V_m\)</span> <span class="math display">\[
-V_m(t) = e^{-t/R_0C_0}
-\]</span> where <span class="math inline">\(\tau = R_0C_0\)</span></p>
-<p>And <span class="math inline">\(V_o(s)\)</span> can be expressed as
-<span class="math display">\[\begin{align}
-\frac{V_o}{V_i}(s)  &amp; \simeq \frac{sR_0C_0}{1+sR_0C_0} \cdot
-\frac{sR_1C_1}{1+sR_1C_1} \\
-&amp;= \frac{sR_0C_0R_1C_1}{R_0C_0-R_1C_1}\left(\frac{1}{1+sR_1C_1} -
-\frac{1}{1+sR_0C_0}\right)
-\end{align}\]</span></p>
-<p>Then <em>step response</em> of <span
-class="math inline">\(Vo\)</span> <span
-class="math display">\[\begin{align}
-Vo(t) &amp;= \frac{R_0C_0R_1C_1}{R_0C_0-R_1C_1}
-\left(\frac{1}{R_1C_1}e^{-t/R_1C_1} -
-\frac{1}{R_0C_0}e^{-t/R_0C_0}\right) \\
-&amp;= \frac{1}{R_0C_0-R_1C_1}\left(R_0C_0e^{-t/R_1C_1} -
-R_1C_1e^{-t/R_0C_0}\right) \\
-&amp;\simeq = \frac{1}{R_0C_0-R_1C_1}\left(R_0C_0e^{-t/R_1C_1} -
-R_1C_1\right)
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\tau=R_1C_1\)</span></p>
-<h3 id="partial-fraction-expansion">Partial-fraction Expansion</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms C0</span><br><span class="line">syms R0</span><br><span class="line">syms C1</span><br><span class="line">syms R1</span><br><span class="line">syms s</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br></pre></td></tr></table></figure>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; partfrac(vm, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">&gt;&gt; partfrac(vo, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[\begin{align}
-V_m(s) &amp;= 1 -
-\frac{s(C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1} \\
-V_o(s) &amp;= 1 -
-\frac{s(C_0R_0+C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1}
-\end{align}\]</span></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">vm_exp = <span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line">vo_exp = <span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% with approximation</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">vm_exp2 = s*R0*C0/(<span class="number">1</span>+s*R0*C0);</span><br><span class="line">vo_exp2 = s*R0*C0/(<span class="number">1</span>+s*R0*C0) * s*R1*C1/(<span class="number">1</span>+s*R1*C1);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp2, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp2, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/01/06/2nd-sys/image-20240113181003272.png"
-alt="image-20240113181003272" /></p>
-<p><img src="/2024/01/06/2nd-sys/image-20240113181032379.png"
-alt="image-20240113181032379" /></p>
-<hr />
-<p>spectre simulation vs matlab</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">step(vm, <span class="number">500e-9</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo, <span class="number">500e-9</span>);</span><br><span class="line"></span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; vm</span><br><span class="line"></span><br><span class="line">vm =</span><br><span class="line"> </span><br><span class="line">          <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.56e-37</span> s^<span class="number">4</span> + <span class="number">1.6e-30</span> s^<span class="number">3</span></span><br><span class="line">  -----------------------------------------------------------</span><br><span class="line">  <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.571e-37</span> s^<span class="number">4</span> + <span class="number">1.626e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br><span class="line"></span><br><span class="line">&gt;&gt; vo</span><br><span class="line"></span><br><span class="line">vo =</span><br><span class="line"> </span><br><span class="line">                 <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">2.048e-44</span> s^<span class="number">5</span> + <span class="number">1.28e-37</span> s^<span class="number">4</span></span><br><span class="line">  ---------------------------------------------------------------------------</span><br><span class="line">  <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">3.081e-44</span> s^<span class="number">5</span> + <span class="number">3.871e-37</span> s^<span class="number">4</span> + <span class="number">1.638e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/01/06/2nd-sys/image-20240112002155622.png"
-alt="image-20240112002155622" /></p>
+t_s \simeq \frac{3}{\omega_u} \space\space \text{, for PM}=70^o
+\]</span></p>
+<p>For <span class="math inline">\(\text{PM}=45^o\)</span>, <span
+class="math inline">\(\omega_2 = \omega_u\)</span>, that is <span
+class="math display">\[
+t_s \simeq \frac{9.2}{\omega_u} \space\space \text{, for PM}=45^o
+\]</span></p>
+<blockquote>
+<p>Above equation is valid only for <strong>underdamped</strong>, <span
+class="math inline">\(\zeta=\frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}\lt
+1\)</span>, that is <span class="math inline">\(\omega_2\lt
+4\omega_u\)</span></p>
+</blockquote>
 <h2 id="reference">reference</h2>
 <p><em>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
 Feedback Control of Dynamic Systems (8th Edition) (8th. ed.).
@@ -617,15 +614,6 @@ accessing all the central UVM services such as
       </categories>
   </entry>
   <entry>
-    <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
-    <url>/2022/02/07/Innovus-Clock-Concurrent-Optimization-Technology/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Clock_Concurrent_Optimization_Technology.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>INL, DNL analysis of current steering DAC</title>
     <url>/2022/02/13/INL-DNL-analysis-of-current-steering-DAC/</url>
     <content><![CDATA[<h2 id="mos-mismatch">MOS mismatch</h2>
@@ -660,6 +648,15 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
+    <title>Innovus Clock Concurrent Optimization Technology (CCOpt)</title>
+    <url>/2022/02/07/Innovus-Clock-Concurrent-Optimization-Technology/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Clock_Concurrent_Optimization_Technology.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Innovus Parasitic Extraction</title>
     <url>/2022/02/07/Innovus-Parasitic-Extraction/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Parasitic_Extraction.pdf" data-height="500px"></div>
@@ -685,18 +682,18 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Technology File</title>
-    <url>/2022/02/07/Innovus-Technology-File/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
+    <title>Innovus/Tempus Nonfunctional ECO</title>
+    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus/Tempus Nonfunctional ECO</title>
-    <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Technology File</title>
+    <url>/2022/02/07/Innovus-Technology-File/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -785,26 +782,6 @@ alt="createPGPin_onDie.drawio" /></p>
       <categories>
         <category>innovus</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Model Library Setup</title>
-    <url>/2023/01/14/ModelLibrarySetup/</url>
-    <content><![CDATA[<p>In order to set up model files automatically in the <em>Model Library
-Setup</em> form for Spectre or AMS simulator in ADE Explorer or ADE
-Assembler</p>
-<p>Add the following line in your <code>.cdsinit</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">envSetVal( &quot;spectre.envOpts&quot; &quot;modelFiles&quot; &#x27;string &quot;&lt;path_to model_file&gt;/myModels.scs&quot;)</span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">envSetVal(&quot;spectre.envOpts&quot; &quot;modelFiles&quot; &#x27;string &quot;moreModels;ff mymodels;tt&quot;)</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/01/14/ModelLibrarySetup/image-20230114220458438.png"
-alt="image-20230114220458438" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
   </entry>
   <entry>
     <title>MOS Capacitor</title>
@@ -905,6 +882,26 @@ Design, Layout, and Simulation, Fourth Edition</p>
       <categories>
         <category>analog</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Model Library Setup</title>
+    <url>/2023/01/14/ModelLibrarySetup/</url>
+    <content><![CDATA[<p>In order to set up model files automatically in the <em>Model Library
+Setup</em> form for Spectre or AMS simulator in ADE Explorer or ADE
+Assembler</p>
+<p>Add the following line in your <code>.cdsinit</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">envSetVal( &quot;spectre.envOpts&quot; &quot;modelFiles&quot; &#x27;string &quot;&lt;path_to model_file&gt;/myModels.scs&quot;)</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">envSetVal(&quot;spectre.envOpts&quot; &quot;modelFiles&quot; &#x27;string &quot;moreModels;ff mymodels;tt&quot;)</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/01/14/ModelLibrarySetup/image-20230114220458438.png"
+alt="image-20230114220458438" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
   </entry>
   <entry>
     <title>Native NMOS Blocked Implant (NT_N)</title>
@@ -1218,53 +1215,6 @@ code]</a></p>
       </categories>
   </entry>
   <entry>
-    <title>SpiceIn foundary&#39;s standard cell&#39;s spice netlist</title>
-    <url>/2022/10/22/SpiceIn-standardcellspi/</url>
-    <content><![CDATA[<p>use <strong>SpiceIn</strong> GUI feature to map MOS parameter
-correctly in generated schematic</p>
-<h3 id="input">Input</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022224745955.png"
-alt="image-20221022224745955" /></p>
-<blockquote>
-<p>The mos's total width (parameter name "w") value will update during
-<strong>SpiceIn</strong> trigger CDF callback automatically</p>
-</blockquote>
-<h3 id="output">Output</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225143844.png"
-alt="image-20221022225143844" /></p>
-<h3 id="device-map">Device Map</h3>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225224751.png"
-alt="image-20221022225224751" /></p>
-<blockquote>
-<p><strong>User Prop Mapping</strong> is significant setup, both
-<em>xxx.spi</em> and <em>Edit CDF</em> provide the essential
-information.</p>
-<p>The map syntax is <em>spice_para0 cdf_para0 spice_para1 cdf_para01
-... spice_paraN cdf_paraN</em></p>
-</blockquote>
-<p><img
-src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225742497.png"
-alt="image-20221022225742497" /></p>
-<h3 id="reference">reference</h3>
-<p>Article (20488179) Title: How to use SpiceIn GUI feature to map MOS
-parameter correctly in generated schematic URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY</a></p>
-<p>Article (11724692) Title: SpiceIn maps the netlist parameter to the
-CDF parameter incorrectly on the generated schematic devices (e.g. w to
-wf) URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-      <tags>
-        <tag>virtuoso</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RC corner</title>
     <url>/2023/04/16/RC-corner/</url>
     <content><![CDATA[<h3 id="traditional-rc-corners">Traditional RC Corners</h3>
@@ -1417,6 +1367,53 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
       </categories>
   </entry>
   <entry>
+    <title>SpiceIn foundary&#39;s standard cell&#39;s spice netlist</title>
+    <url>/2022/10/22/SpiceIn-standardcellspi/</url>
+    <content><![CDATA[<p>use <strong>SpiceIn</strong> GUI feature to map MOS parameter
+correctly in generated schematic</p>
+<h3 id="input">Input</h3>
+<p><img
+src="/2022/10/22/SpiceIn-standardcellspi/image-20221022224745955.png"
+alt="image-20221022224745955" /></p>
+<blockquote>
+<p>The mos's total width (parameter name "w") value will update during
+<strong>SpiceIn</strong> trigger CDF callback automatically</p>
+</blockquote>
+<h3 id="output">Output</h3>
+<p><img
+src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225143844.png"
+alt="image-20221022225143844" /></p>
+<h3 id="device-map">Device Map</h3>
+<p><img
+src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225224751.png"
+alt="image-20221022225224751" /></p>
+<blockquote>
+<p><strong>User Prop Mapping</strong> is significant setup, both
+<em>xxx.spi</em> and <em>Edit CDF</em> provide the essential
+information.</p>
+<p>The map syntax is <em>spice_para0 cdf_para0 spice_para1 cdf_para01
+... spice_paraN cdf_paraN</em></p>
+</blockquote>
+<p><img
+src="/2022/10/22/SpiceIn-standardcellspi/image-20221022225742497.png"
+alt="image-20221022225742497" /></p>
+<h3 id="reference">reference</h3>
+<p>Article (20488179) Title: How to use SpiceIn GUI feature to map MOS
+parameter correctly in generated schematic URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY</a></p>
+<p>Article (11724692) Title: SpiceIn maps the netlist parameter to the
+CDF parameter incorrectly on the generated schematic devices (e.g. w to
+wf) URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU</a></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+      <tags>
+        <tag>virtuoso</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>StatEye</title>
     <url>/2023/09/23/StatEye/</url>
     <content><![CDATA[<h2 id="matlab---pulse2stateye">Matlab - <code>pulse2stateye</code></h2>
@@ -1507,6 +1504,18 @@ repo</a>]</p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>VMware Disk Shrink</title>
+    <url>/2022/12/16/VMwareDiskShrink/</url>
+    <content><![CDATA[<p>In Guest OS and run</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
+]]></content>
+      <categories>
+        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -1619,18 +1628,6 @@ those voltage-dependent DRC checks! - siemens</a></p>
       </categories>
   </entry>
   <entry>
-    <title>VMware Disk Shrink</title>
-    <url>/2022/12/16/VMwareDiskShrink/</url>
-    <content><![CDATA[<p>In Guest OS and run</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Virtual Connectivity</title>
     <url>/2023/05/11/Virtual-Connectivity/</url>
     <content><![CDATA[<p>Normally, if the layout connectivity extractor finds disjoint,
@@ -1701,6 +1698,256 @@ Revision 7</p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>adaptation in wireline</title>
+    <url>/2024/08/11/adapt/</url>
+    <content><![CDATA[<h2 id="least-mean-square-lms">Least-Mean-Square (LMS)</h2>
+<blockquote>
+<p>minimum mean square error (MMSE)</p>
+</blockquote>
+<p>This simplified version of LMS algorithm is identical to the
+<em>zero-forcing</em> algorithm which minimizes the ISI at data
+samples</p>
+<h3 id="sign-sign-lms-ss-lms">Sign-Sign LMS (SS-LMS)</h3>
+<blockquote>
+<p>T11: Basics of Equalization Techniques: Channels, Equalization, and
+Circuits, 2022 IEEE International Solid-State Circuits Conference</p>
+<p>V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link
+transceiver with adaptive equalization and data recovery," in IEEE
+Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012-1026, April
+2005, doi: 10.1109/JSSC.2004.842863.</p>
+<p>Jinhyung Lee, Design of High-Speed Receiver for Video Interface with
+Adaptive Equalization; Phd thesis, August 2019. <a
+href="http://dcollection.snu.ac.kr/common/orgView/000000157003">thesis
+link</a></p>
+<p>Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical
+Implementation, 5th edition</p>
+<p>E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for
+I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State
+Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008</p>
+</blockquote>
+<h3 id="dfe-h0-estimator">DFE h0 Estimator</h3>
+<p>summer output <span class="math display">\[
+r_k =
+a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=1}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
+\]</span> error slicer analog output <span class="math display">\[
+e_k=r_k-\hat{a}_k \hat{h}_0
+\]</span> error slicer digital output <span class="math display">\[
+\hat{e}_k=|e_k|
+\]</span> It's NOT possible to implement <span
+class="math inline">\(e_k\)</span>, which need to determine <span
+class="math inline">\(\hat{a}_k=|r_k|\)</span> in no time. One method to
+approach this problem is calculate <span
+class="math inline">\(e_k^{a_k=1}=r_k-\hat{a}_k \hat{h}_0\)</span> and
+<span class="math inline">\(e_k^{a_k=-1}=r_k+\hat{a}_k
+\hat{h}_0\)</span>, then select the right one based on <span
+class="math inline">\(\hat{a}_k\)</span></p>
+<p>The update equation based on Sign-Sign-Least Mean square (SS-LMS) and
+loss function <span
+class="math inline">\(L(\hat{h}_{\text{0~ntap}})=E(e_k^2)\)</span> <span
+class="math display">\[
+\hat{h}_n(k+1) = \hat{h}_n(k)+\mu \cdot |e_k|\cdot \hat{a}_{k-n}
+\]</span> Where <span class="math inline">\(n \in
+[0,...,\text{ntap}]\)</span>. This way, we can obtain <span
+class="math inline">\(\hat{h}_0\)</span>, <span
+class="math inline">\(\hat{h}_1\)</span>, <span
+class="math inline">\(\hat{h}_2\)</span>, ...</p>
+<blockquote>
+<p><span class="math inline">\(\hat{h}_0\)</span> is used in AFE
+adaptation</p>
+</blockquote>
+<p>We may encounter difficulty if the first tap of DFE is unrolled, its
+<span class="math inline">\(e_k\)</span> is modified as follow <span
+class="math display">\[
+r_k =
+a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=2}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
+\]</span> Where there is NO <span
+class="math inline">\(\hat{h}_1\)</span></p>
+<p>To find <span class="math inline">\(\hat{h}_1\)</span>, we shall use
+different pattern for even and odd error slicer</p>
+<h2 id="maximum-likelihood-sequence-estimation-mlse">Maximum Likelihood
+Sequence Estimation (MLSE)</h2>
+<p><img src="/2024/08/11/adapt/image-20240807233152154.png"
+alt="image-20240807233152154" /></p>
+<p><img src="/2024/08/11/adapt/image-20240812205534753.png"
+alt="image-20240812205534753" /></p>
+<p><img src="/2024/08/11/adapt/image-20240812205613467.png"
+alt="image-20240812205613467" /></p>
+<blockquote>
+<p>[IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes
+Beyond 100 Gb/s <a
+href="https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf">https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf</a>]</p>
+<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
+Sheikholeslami, "Design and Implementation of an On-Demand
+Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
+Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
+10.1109/OJCAS.2022.3173686.</p>
+<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
+Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
+Undergraduate Research Scholars Program. Available electronically from
+[<a
+href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a>]</p>
+</blockquote>
+<p>There are several variants of MLSD (Maximum Likelihood Sequence
+Detection), including:</p>
+<ul>
+<li>Viterbi Algorithm</li>
+<li>Decision Feedback Sequence Estimation (DFSE)</li>
+<li>Soft-Output MLSD</li>
+</ul>
+<blockquote>
+<p>[Evolution Of Equalization Techniques In High-Speed SerDes For
+Extended Reaches. <a
+href="https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/">https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/</a>]</p>
+</blockquote>
+<h2 id="mueller-muller-cdr">Mueller-Muller CDR</h2>
+<p><img src="/2024/08/11/adapt/image-20240812222307061.png"
+alt="image-20240812222307061" /></p>
+<p>MMPD infers the channel response from baud-rate samples of the
+received data, the adaptation aligns the sampling clock such that
+pre-cursor is equal to the post-cursor in the <em>pulse
+response</em></p>
+<p><img src="/2024/08/11/adapt/image-20240807230029591.png"
+alt="image-20240807230029591" /></p>
+<blockquote>
+<p>Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [<a
+href="https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf">https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf</a>]</p>
+<p>Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS"
+[<a
+href="https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf">https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf</a>]</p>
+<p>Eduardo Fuentetaja. "Analysis of the M&amp;M Clock Recovery
+Algorithm" [<a
+href="https://edfuentetaja.github.io/sdr/m_m_analysis/">https://edfuentetaja.github.io/sdr/m_m_analysis/</a>]</p>
+<p>Liu, Tao &amp; Li, Tiejun &amp; Lv, Fangxu &amp; Liang, Bin &amp;
+Zheng, Xuqiang &amp; Wang, Heming &amp; Wu, Miaomiao &amp; Lu, Dechao
+&amp; Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock
+and Data Recovery Circuits. Electronics. 10. 1888.
+10.3390/electronics10161888.</p>
+<p>Gu, Youzhi &amp; Feng, Xinjie &amp; Chi, Runze &amp; Chen, Yongzhen
+&amp; Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data
+Recovery Circuits with a Linearized Model.
+10.21203/rs.3.rs-1817774/v1.</p>
+<p>Baud-Rate CDRs [<a
+href="https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf</a>]</p>
+<p>F. Spagna <em>et al</em>., "A 78mW 11.8Gb/s serial link transceiver
+with adaptive RX equalization and baud-rate CDR in 32nm CMOS," <em>2010
+IEEE International Solid-State Circuits Conference - (ISSCC)</em>, San
+Francisco, CA, USA, 2010, pp. 366-367, doi:
+10.1109/ISSCC.2010.5433823.</p>
+<p>K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of
+PAM-4 Mueller–Muller Clock and Data Recovery System," in <em>IEEE Open
+Journal of Circuits and Systems</em>, vol. 3, pp. 216-227, 2022</p>
+</blockquote>
+<p><img src="/2024/08/11/adapt/image-20240810095006113.png"
+alt="image-20240810095006113" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001201612.png"
+alt="image-20240808001201612" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001256515.png"
+alt="image-20240808001256515" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001449664.png"
+alt="image-20240808001449664" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001501485.png"
+alt="image-20240808001501485" /></p>
+<h2 id="ss-mm-cdr">SS-MM CDR</h2>
+<p><img src="/2024/08/11/adapt/image-20240807232814202.png"
+alt="image-20240807232814202" /></p>
+<p><span class="math inline">\(h_1\)</span> is
+<strong>necessary</strong></p>
+<ul>
+<li><p>without DFE</p>
+<p>SS-MMPD locks at the point (<span
+class="math inline">\(h_1=h_{-1}\)</span>​)</p></li>
+<li><p>With a 1-tap DFE</p>
+<p>1-tap adaptive DFE that forces the <span
+class="math inline">\(h_1\)</span> to be <em>zero</em>, the SS-MMPD
+locks wherever the <span class="math inline">\(h_{-1}\)</span>​ is zero
+and drifts eventually.</p>
+<p>Consequently, it suffers from a severe <em>multiple-locking problem
+with an adaptive DFE</em></p></li>
+</ul>
+<p><img src="/2024/08/11/adapt/image-20240812232618238.png"
+alt="image-20240812232618238" /></p>
+<blockquote>
+<p>Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive
+Equalizer and Multi-Level Baud-Rate Phase Detector" [<a
+href="https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf">https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf</a>]</p>
+</blockquote>
+<h3 id="pattern-filter">Pattern filter</h3>
+<table>
+<thead>
+<tr class="header">
+<th>pattern</th>
+<th>main cursor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0<strong>1</strong>1</td>
+<td><span class="math inline">\(s_{011}=-h_1+h_0+h_{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td>1<strong>1</strong>0</td>
+<td><span class="math inline">\(s_{110}=h_1+h_0-h_{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td>1<strong>0</strong>0</td>
+<td><span class="math inline">\(s_{100}=h_1-h_0-h_{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td>0<strong>0</strong>1</td>
+<td><span class="math inline">\(s_{001}=-h_1-h_0+h_{-1}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>During adapting, we make</p>
+<ul>
+<li><span class="math inline">\(s_{011}\)</span> &amp; <span
+class="math inline">\(s_{110}\)</span> are approaching to each
+other</li>
+<li><span class="math inline">\(s_{100}\)</span> &amp; <span
+class="math inline">\(s_{001}\)</span> are approaching to each
+other</li>
+</ul>
+<p>Then, <span class="math inline">\(h_{-1}\)</span> and <span
+class="math inline">\(h_1\)</span> are same, which is desired</p>
+<h2 id="bang-bang-cdr">Bang-Bang CDR</h2>
+<blockquote>
+<p>alexander PD or !!PD</p>
+</blockquote>
+<p>The alexander PD locks that edge clock (clkedge) is located at zero
+crossings of the data. The <span class="math inline">\(h_{-0.5}\)</span>
+and <span class="math inline">\(h_{0.5}\)</span> are
+<strong>equal</strong> at the <em>lock point,</em> where the <span
+class="math inline">\(h_{-0.5}\)</span> and <span
+class="math inline">\(h_{0.5}\)</span> are the cursors located at -0.5
+UI and 0.5 UI.</p>
+<blockquote>
+<p>Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive
+Equalizer and Multi-Level Baud-Rate Phase Detector" [<a
+href="https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf">https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf</a>]</p>
+<p>Shahramian, Shayan, "Adaptive Decision Feedback Equalization With
+Continuous-time Infinite Impulse Response Filters" [<a
+href="https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf">https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf</a>]</p>
+<p>MENIN, DAVIDE, "Modelling and Design of High-Speed Wireline
+Transceivers with Fully-Adaptive Equalization" [<a
+href="https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf">https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf</a>]</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Stojanovic, Vladimir &amp; Ho, A. &amp; Garlepp, B. &amp; Chen, Fred
+&amp; Wei, J. &amp; Alon, Elad &amp; Werner, C. &amp; Zerbe, J. &amp;
+Horowitz, M.A.. (2004). Adaptive equalization and data recovery in a
+dual-mode (PAM2/4) serial link transceiver. IEEE Symposium on VLSI
+Circuits, Digest of Technical Papers. 348 - 351.
+10.1109/VLSIC.2004.1346611.</p>
+<p>A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design
+Optimization for Wireline SerDes Applications," in <em>IEEE Transactions
+on Circuits and Systems I: Regular Papers</em>, doi:
+10.1109/TCSI.2023.3328807.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
   </entry>
   <entry>
     <title>Data Converter</title>
@@ -2034,440 +2281,6 @@ href="https://dsp.stackexchange.com/a/38201">https://dsp.stackexchange.com/a/382
       </categories>
   </entry>
   <entry>
-    <title>adaptation in wireline</title>
-    <url>/2024/08/11/adapt/</url>
-    <content><![CDATA[<h2 id="least-mean-square-lms">Least-Mean-Square (LMS)</h2>
-<blockquote>
-<p>minimum mean square error (MMSE)</p>
-</blockquote>
-<p>This simplified version of LMS algorithm is identical to the
-<em>zero-forcing</em> algorithm which minimizes the ISI at data
-samples</p>
-<h3 id="sign-sign-lms-ss-lms">Sign-Sign LMS (SS-LMS)</h3>
-<blockquote>
-<p>T11: Basics of Equalization Techniques: Channels, Equalization, and
-Circuits, 2022 IEEE International Solid-State Circuits Conference</p>
-<p>V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link
-transceiver with adaptive equalization and data recovery," in IEEE
-Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012-1026, April
-2005, doi: 10.1109/JSSC.2004.842863.</p>
-<p>Jinhyung Lee, Design of High-Speed Receiver for Video Interface with
-Adaptive Equalization; Phd thesis, August 2019. <a
-href="http://dcollection.snu.ac.kr/common/orgView/000000157003">thesis
-link</a></p>
-<p>Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical
-Implementation, 5th edition</p>
-<p>E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for
-I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State
-Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008</p>
-</blockquote>
-<h3 id="dfe-h0-estimator">DFE h0 Estimator</h3>
-<p>summer output <span class="math display">\[
-r_k =
-a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=1}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
-\]</span> error slicer analog output <span class="math display">\[
-e_k=r_k-\hat{a}_k \hat{h}_0
-\]</span> error slicer digital output <span class="math display">\[
-\hat{e}_k=|e_k|
-\]</span> It's NOT possible to implement <span
-class="math inline">\(e_k\)</span>, which need to determine <span
-class="math inline">\(\hat{a}_k=|r_k|\)</span> in no time. One method to
-approach this problem is calculate <span
-class="math inline">\(e_k^{a_k=1}=r_k-\hat{a}_k \hat{h}_0\)</span> and
-<span class="math inline">\(e_k^{a_k=-1}=r_k+\hat{a}_k
-\hat{h}_0\)</span>, then select the right one based on <span
-class="math inline">\(\hat{a}_k\)</span></p>
-<p>The update equation based on Sign-Sign-Least Mean square (SS-LMS) and
-loss function <span
-class="math inline">\(L(\hat{h}_{\text{0~ntap}})=E(e_k^2)\)</span> <span
-class="math display">\[
-\hat{h}_n(k+1) = \hat{h}_n(k)+\mu \cdot |e_k|\cdot \hat{a}_{k-n}
-\]</span> Where <span class="math inline">\(n \in
-[0,...,\text{ntap}]\)</span>. This way, we can obtain <span
-class="math inline">\(\hat{h}_0\)</span>, <span
-class="math inline">\(\hat{h}_1\)</span>, <span
-class="math inline">\(\hat{h}_2\)</span>, ...</p>
-<blockquote>
-<p><span class="math inline">\(\hat{h}_0\)</span> is used in AFE
-adaptation</p>
-</blockquote>
-<p>We may encounter difficulty if the first tap of DFE is unrolled, its
-<span class="math inline">\(e_k\)</span> is modified as follow <span
-class="math display">\[
-r_k =
-a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=2}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
-\]</span> Where there is NO <span
-class="math inline">\(\hat{h}_1\)</span></p>
-<p>To find <span class="math inline">\(\hat{h}_1\)</span>, we shall use
-different pattern for even and odd error slicer</p>
-<h2 id="maximum-likelihood-sequence-estimation-mlse">Maximum Likelihood
-Sequence Estimation (MLSE)</h2>
-<p><img src="/2024/08/11/adapt/image-20240807233152154.png"
-alt="image-20240807233152154" /></p>
-<p><img src="/2024/08/11/adapt/image-20240812205534753.png"
-alt="image-20240812205534753" /></p>
-<p><img src="/2024/08/11/adapt/image-20240812205613467.png"
-alt="image-20240812205613467" /></p>
-<blockquote>
-<p>[IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes
-Beyond 100 Gb/s <a
-href="https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf">https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf</a>]</p>
-<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
-Sheikholeslami, "Design and Implementation of an On-Demand
-Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
-Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
-10.1109/OJCAS.2022.3173686.</p>
-<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
-Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
-Undergraduate Research Scholars Program. Available electronically from
-[<a
-href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a>]</p>
-</blockquote>
-<p>There are several variants of MLSD (Maximum Likelihood Sequence
-Detection), including:</p>
-<ul>
-<li>Viterbi Algorithm</li>
-<li>Decision Feedback Sequence Estimation (DFSE)</li>
-<li>Soft-Output MLSD</li>
-</ul>
-<blockquote>
-<p>[Evolution Of Equalization Techniques In High-Speed SerDes For
-Extended Reaches. <a
-href="https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/">https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/</a>]</p>
-</blockquote>
-<h2 id="mueller-muller-cdr">Mueller-Muller CDR</h2>
-<p><img src="/2024/08/11/adapt/image-20240812222307061.png"
-alt="image-20240812222307061" /></p>
-<p>MMPD infers the channel response from baud-rate samples of the
-received data, the adaptation aligns the sampling clock such that
-pre-cursor is equal to the post-cursor in the <em>pulse
-response</em></p>
-<p><img src="/2024/08/11/adapt/image-20240807230029591.png"
-alt="image-20240807230029591" /></p>
-<blockquote>
-<p>Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [<a
-href="https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf">https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf</a>]</p>
-<p>Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS"
-[<a
-href="https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf">https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf</a>]</p>
-<p>Eduardo Fuentetaja. "Analysis of the M&amp;M Clock Recovery
-Algorithm" [<a
-href="https://edfuentetaja.github.io/sdr/m_m_analysis/">https://edfuentetaja.github.io/sdr/m_m_analysis/</a>]</p>
-<p>Liu, Tao &amp; Li, Tiejun &amp; Lv, Fangxu &amp; Liang, Bin &amp;
-Zheng, Xuqiang &amp; Wang, Heming &amp; Wu, Miaomiao &amp; Lu, Dechao
-&amp; Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock
-and Data Recovery Circuits. Electronics. 10. 1888.
-10.3390/electronics10161888.</p>
-<p>Gu, Youzhi &amp; Feng, Xinjie &amp; Chi, Runze &amp; Chen, Yongzhen
-&amp; Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data
-Recovery Circuits with a Linearized Model.
-10.21203/rs.3.rs-1817774/v1.</p>
-<p>Baud-Rate CDRs [<a
-href="https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf</a>]</p>
-<p>F. Spagna <em>et al</em>., "A 78mW 11.8Gb/s serial link transceiver
-with adaptive RX equalization and baud-rate CDR in 32nm CMOS," <em>2010
-IEEE International Solid-State Circuits Conference - (ISSCC)</em>, San
-Francisco, CA, USA, 2010, pp. 366-367, doi:
-10.1109/ISSCC.2010.5433823.</p>
-<p>K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of
-PAM-4 Mueller–Muller Clock and Data Recovery System," in <em>IEEE Open
-Journal of Circuits and Systems</em>, vol. 3, pp. 216-227, 2022</p>
-</blockquote>
-<p><img src="/2024/08/11/adapt/image-20240810095006113.png"
-alt="image-20240810095006113" /></p>
-<p><img src="/2024/08/11/adapt/image-20240808001201612.png"
-alt="image-20240808001201612" /></p>
-<p><img src="/2024/08/11/adapt/image-20240808001256515.png"
-alt="image-20240808001256515" /></p>
-<p><img src="/2024/08/11/adapt/image-20240808001449664.png"
-alt="image-20240808001449664" /></p>
-<p><img src="/2024/08/11/adapt/image-20240808001501485.png"
-alt="image-20240808001501485" /></p>
-<h2 id="ss-mm-cdr">SS-MM CDR</h2>
-<p><img src="/2024/08/11/adapt/image-20240807232814202.png"
-alt="image-20240807232814202" /></p>
-<p><span class="math inline">\(h_1\)</span> is
-<strong>necessary</strong></p>
-<ul>
-<li><p>without DFE</p>
-<p>SS-MMPD locks at the point (<span
-class="math inline">\(h_1=h_{-1}\)</span>​)</p></li>
-<li><p>With a 1-tap DFE</p>
-<p>1-tap adaptive DFE that forces the <span
-class="math inline">\(h_1\)</span> to be <em>zero</em>, the SS-MMPD
-locks wherever the <span class="math inline">\(h_{-1}\)</span>​ is zero
-and drifts eventually.</p>
-<p>Consequently, it suffers from a severe <em>multiple-locking problem
-with an adaptive DFE</em></p></li>
-</ul>
-<p><img src="/2024/08/11/adapt/image-20240812232618238.png"
-alt="image-20240812232618238" /></p>
-<blockquote>
-<p>Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive
-Equalizer and Multi-Level Baud-Rate Phase Detector" [<a
-href="https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf">https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf</a>]</p>
-</blockquote>
-<h3 id="pattern-filter">Pattern filter</h3>
-<table>
-<thead>
-<tr class="header">
-<th>pattern</th>
-<th>main cursor</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0<strong>1</strong>1</td>
-<td><span class="math inline">\(s_{011}=-h_1+h_0+h_{-1}\)</span></td>
-</tr>
-<tr class="even">
-<td>1<strong>1</strong>0</td>
-<td><span class="math inline">\(s_{110}=h_1+h_0-h_{-1}\)</span></td>
-</tr>
-<tr class="odd">
-<td>1<strong>0</strong>0</td>
-<td><span class="math inline">\(s_{100}=h_1-h_0-h_{-1}\)</span></td>
-</tr>
-<tr class="even">
-<td>0<strong>0</strong>1</td>
-<td><span class="math inline">\(s_{001}=-h_1-h_0+h_{-1}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>During adapting, we make</p>
-<ul>
-<li><span class="math inline">\(s_{011}\)</span> &amp; <span
-class="math inline">\(s_{110}\)</span> are approaching to each
-other</li>
-<li><span class="math inline">\(s_{100}\)</span> &amp; <span
-class="math inline">\(s_{001}\)</span> are approaching to each
-other</li>
-</ul>
-<p>Then, <span class="math inline">\(h_{-1}\)</span> and <span
-class="math inline">\(h_1\)</span> are same, which is desired</p>
-<h2 id="bang-bang-cdr">Bang-Bang CDR</h2>
-<blockquote>
-<p>alexander PD or !!PD</p>
-</blockquote>
-<p>The alexander PD locks that edge clock (clkedge) is located at zero
-crossings of the data. The <span class="math inline">\(h_{-0.5}\)</span>
-and <span class="math inline">\(h_{0.5}\)</span> are
-<strong>equal</strong> at the <em>lock point,</em> where the <span
-class="math inline">\(h_{-0.5}\)</span> and <span
-class="math inline">\(h_{0.5}\)</span> are the cursors located at -0.5
-UI and 0.5 UI.</p>
-<blockquote>
-<p>Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive
-Equalizer and Multi-Level Baud-Rate Phase Detector" [<a
-href="https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf">https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf</a>]</p>
-<p>Shahramian, Shayan, "Adaptive Decision Feedback Equalization With
-Continuous-time Infinite Impulse Response Filters" [<a
-href="https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf">https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf</a>]</p>
-<p>MENIN, DAVIDE, "Modelling and Design of High-Speed Wireline
-Transceivers with Fully-Adaptive Equalization" [<a
-href="https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf">https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf</a>]</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Stojanovic, Vladimir &amp; Ho, A. &amp; Garlepp, B. &amp; Chen, Fred
-&amp; Wei, J. &amp; Alon, Elad &amp; Werner, C. &amp; Zerbe, J. &amp;
-Horowitz, M.A.. (2004). Adaptive equalization and data recovery in a
-dual-mode (PAM2/4) serial link transceiver. IEEE Symposium on VLSI
-Circuits, Digest of Technical Papers. 348 - 351.
-10.1109/VLSIC.2004.1346611.</p>
-<p>A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design
-Optimization for Wireline SerDes Applications," in <em>IEEE Transactions
-on Circuits and Systems I: Regular Papers</em>, doi:
-10.1109/TCSI.2023.3328807.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>ahuja frequency compensation</title>
-    <url>/2024/01/16/ahuja/</url>
-    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
-known as <strong>ahuja compensation</strong></p>
-<p>The cause of the positive zero is the <em>feedforward current through
-<span class="math inline">\(C_m\)</span></em>.</p>
-<p>To abolish this zero, we have to cut the feedforward path and create
-a unidirectional feedback through <span
-class="math inline">\(C_m\)</span>.</p>
-<ol type="1">
-<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
-effect of the feedforward current.</p></li>
-<li><p>Another approach uses a current buffer cascode to pass the
-small-signal feedback current but cut the feedforward current</p></li>
-</ol>
-<blockquote>
-<p>People name this approach after the author <em>Ahuja</em></p>
-</blockquote>
-<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
-are severa</p>
-<ul>
-<li><p>better PSRR</p></li>
-<li><p>higher unity-gain bandwidth using smaller compensation
-capacitor</p></li>
-<li><p>ability to cope better with heavy capacitive and resistive
-loads</p></li>
-</ul>
-<h2 id="millers-approximation">Miller's approximation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
-alt="image-20240130224043511" /></p>
-<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span> Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{C_c}\)</span></p>
-<h3 id="equivalent-cap">Equivalent cap</h3>
-<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
-R_o\)</span> <span class="math display">\[
-I_\text{c,in} = (v_i - v_o)sC_c
-\]</span> Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
-&amp; = v_i s (1+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
-A_vC_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
-&amp; = v_o s (1+\frac{1}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}=
-(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="cascode-compensation">cascode compensation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240817193513058.png"
-alt="image-20240817193513058" /></p>
-<p><img src="/2024/01/16/ahuja/image-20240817201727109.png"
-alt="image-20240817201727109" /></p>
-<p>Of course, , if the capacitance at the gate of <span
-class="math inline">\(M_1\)</span> is taken into account, pole splitting
-is less pronounced.</p>
-<hr />
-<p><strong>including <span
-class="math inline">\(r_\text{o2}\)</span></strong></p>
-<p><img src="/2024/01/16/ahuja/image-20240819202642809.png"
-alt="image-20240819202642809" /> <span class="math display">\[
-\frac{V_{out}}{I_{in}} \approx
-\frac{-g_{m1}R_SR_L(g_{m2}+C_Cs)}{\frac{R_S+r_\text{o2}}{r_\text{o2}}R_LC_LC_Cs^2+g_{m1}g_{m2}R_LR_SC_Cs+g_{m2}}
-\]</span> The poles as</p>
-<p><span class="math display">\[\begin{align}
-\omega_{p1} &amp;\approx  \frac{1}{g_{m1}R_LR_SC_c} \\
-\omega_{p2} &amp;\approx
-\frac{g_{m2}R_Sg_{m1}}{C_L}\frac{r_\text{o2}}{R_S+r_\text{o2}}
-\end{align}\]</span></p>
-<p>and zero is not affected, which is <span
-class="math inline">\(\omega_z =\frac{g_{m2}}{C_C}\)</span></p>
-<p>the above model simulation result is shown below</p>
-<p><img src="/2024/01/16/ahuja/image-20240819221653262.png"
-alt="image-20240819221653262" /></p>
-<blockquote>
-<p>the zero is located between two poles</p>
-</blockquote>
-<p>take into the capacitance at the gate of <span
-class="math inline">\(M_1\)</span> and all other second-order effect</p>
-<p><img src="/2024/01/16/ahuja/image-20240819222727276.png"
-alt="image-20240819222727276" /></p>
-<h2 id="intuitive-analysis-of-zero">intuitive analysis of zero</h2>
-<p>miller compensation</p>
-<ul>
-<li>zero in the <strong>right</strong> half plane <span
-class="math display">\[
-g_\text{m1}V_P = sC_c V_P
-\]</span></li>
-</ul>
-<p>cascode compensation</p>
-<ul>
-<li>zero in the <strong>left</strong> half plane <span
-class="math display">\[
-g_\text{m2}V_X = - sC_c V_X
-\]</span></li>
-</ul>
-<p><img src="/2024/01/16/ahuja/zero_loc.drawio.svg"
-alt="zero_loc.drawio" /></p>
-<h2 id="how-to-mitigate-impact-of-zero">How to Mitigate Impact of
-Zero</h2>
-<p><img src="/2024/01/16/ahuja/cascode_compensation.PNG"
-alt="cascode_compensation" /></p>
-<p><strong>dominant pole</strong> <span class="math display">\[
-\omega_\text{p,d} = \frac {1} {R_\text{eq}g_\text{m9}R_{L}C_{c}}
-\]</span> <strong>first nondominant pole</strong> <span
-class="math display">\[
-\omega_\text{p,nd} = \frac {g_\text{m4}R_\text{eq}g_\text{m9}} {C_L}
-\]</span> <strong>zero</strong> <span class="math display">\[
-\omega_\text{z} = (g_\text{m4}R_\text{eq})(\frac {g_\text{m9}} {C_c})
-\]</span> a much greater magnitude than <span
-class="math inline">\(g_\text{m9}/C_C\)</span></p>
-<blockquote>
-<p><strong>Lectures</strong></p>
-<p>EE 240B: Advanced Analog Circuit Design, Prof. Bernhard E. Boser [<a
-href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf">OTA
-II, Multi-Stage</a>]</p>
-<p><strong>Papers</strong></p>
-<p>B. K. Ahuja, "An improved frequency compensation technique for CMOS
-operational amplifiers," in IEEE Journal of Solid-State Circuits, vol.
-18, no. 6, pp. 629-633, Dec. 1983, doi: 10.1109/JSSC.1983.1052012.</p>
-<p>D. B. Ribner and M. A. Copeland, "Design techniques for cascoded CMOS
-op amps with improved PSRR and common-mode input range," in IEEE Journal
-of Solid-State Circuits, vol. 19, no. 6, pp. 919-925, Dec. 1984, doi:
-10.1109/JSSC.1984.1052246.</p>
-<p>Abo, Andrew &amp; Gray, Paul. (1999). A 1.5V, 10-bit, 14MS/s CMOS
-Pipeline Analog-to-Digital Converter.</p>
-<p><strong>Book's chapters</strong></p>
-<p>Design of analog CMOS integrated circuits, Behzad Razavi</p>
-<ul>
-<li>10.5 Compensation of Two-Stage Op Amps</li>
-<li>10.7 Other Compensation Techniques</li>
-</ul>
-<p>Analog Design Essentials, Willy M.C. Sansen</p>
-<ul>
-<li>chapter #5 Stability of operational amplifiers - Compensation of
-positive zero</li>
-</ul>
-<p>Analysis and Design of Analog Integrated Circuits 5th Edition, Paul
-R. Gray, Paul J. Hurst, Stephen H. Lewis, Robert G. Meyer</p>
-<ul>
-<li>9.4.3 Two-Stage MOS Amplifier Compensation</li>
-</ul>
-<p>CMOS Analog Circuit Design 3rd Edition, Phillip E. Allen, Douglas R.
-Holberg</p>
-<ul>
-<li>6.2.2 Miller Compensation of the Two-Stage Op Amp</li>
-</ul>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
-Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
-pp. 629-633, Dec. 1983.</p>
-<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
-IEEE International Symposium on Radio-Frequency Integration Technology,
-2009.</p>
-<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
-CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
-594, May 1995.</p>
-<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
-op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
-Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
-10.1109/MWSCAS.2011.6026315.</p>
-<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
-Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
-International Conference on Electronics, Circuits and Systems, 2006, pp.
-264-267, doi: 10.1109/ICECS.2006.379776.</p>
-<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
-compensation over Miller compensation in two-stage operational
-amplifiers," Proceeding of the 13th international symposium on Low power
-electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
-283-288, doi: 10.1145/1393921.1393995.</p>
-<p>Stabilizing a 2-Stage Amplifier URL:<a
-href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Device Aging</title>
     <url>/2022/12/11/aging/</url>
     <content><![CDATA[<p><img src="/2022/12/11/aging/image-20231106232135180.png"
@@ -2782,6 +2595,190 @@ in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836,
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>ahuja frequency compensation</title>
+    <url>/2024/01/16/ahuja/</url>
+    <content><![CDATA[<p>This <strong>cascode compensation</strong> topology is popularly
+known as <strong>ahuja compensation</strong></p>
+<p>The cause of the positive zero is the <em>feedforward current through
+<span class="math inline">\(C_m\)</span></em>.</p>
+<p>To abolish this zero, we have to cut the feedforward path and create
+a unidirectional feedback through <span
+class="math inline">\(C_m\)</span>.</p>
+<ol type="1">
+<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
+effect of the feedforward current.</p></li>
+<li><p>Another approach uses a current buffer cascode to pass the
+small-signal feedback current but cut the feedforward current</p></li>
+</ol>
+<blockquote>
+<p>People name this approach after the author <em>Ahuja</em></p>
+</blockquote>
+<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
+are severa</p>
+<ul>
+<li><p>better PSRR</p></li>
+<li><p>higher unity-gain bandwidth using smaller compensation
+capacitor</p></li>
+<li><p>ability to cope better with heavy capacitive and resistive
+loads</p></li>
+</ul>
+<h2 id="millers-approximation">Miller's approximation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
+alt="image-20240130224043511" /></p>
+<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
+<p><span class="math display">\[
+\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
+\]</span> Then <span class="math display">\[
+\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
+\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
+\frac{g_m}{C_c}\)</span></p>
+<h3 id="equivalent-cap">Equivalent cap</h3>
+<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
+R_o\)</span> <span class="math display">\[
+I_\text{c,in} = (v_i - v_o)sC_c
+\]</span> Then <span class="math display">\[\begin{align}
+I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
+&amp; = v_i s (1+A_v)C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
+A_vC_c\)</span></p>
+<p>Similarly <span class="math display">\[\begin{align}
+I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
+&amp; = v_o s (1+\frac{1}{A_v})C_c
+\end{align}\]</span></p>
+<p>we get <span class="math inline">\(C_\text{out,eq}=
+(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
+<h2 id="cascode-compensation">cascode compensation</h2>
+<p><img src="/2024/01/16/ahuja/image-20240817193513058.png"
+alt="image-20240817193513058" /></p>
+<p><img src="/2024/01/16/ahuja/image-20240817201727109.png"
+alt="image-20240817201727109" /></p>
+<p>Of course, , if the capacitance at the gate of <span
+class="math inline">\(M_1\)</span> is taken into account, pole splitting
+is less pronounced.</p>
+<hr />
+<p><strong>including <span
+class="math inline">\(r_\text{o2}\)</span></strong></p>
+<p><img src="/2024/01/16/ahuja/image-20240819202642809.png"
+alt="image-20240819202642809" /> <span class="math display">\[
+\frac{V_{out}}{I_{in}} \approx
+\frac{-g_{m1}R_SR_L(g_{m2}+C_Cs)}{\frac{R_S+r_\text{o2}}{r_\text{o2}}R_LC_LC_Cs^2+g_{m1}g_{m2}R_LR_SC_Cs+g_{m2}}
+\]</span> The poles as</p>
+<p><span class="math display">\[\begin{align}
+\omega_{p1} &amp;\approx  \frac{1}{g_{m1}R_LR_SC_c} \\
+\omega_{p2} &amp;\approx
+\frac{g_{m2}R_Sg_{m1}}{C_L}\frac{r_\text{o2}}{R_S+r_\text{o2}}
+\end{align}\]</span></p>
+<p>and zero is not affected, which is <span
+class="math inline">\(\omega_z =\frac{g_{m2}}{C_C}\)</span></p>
+<p>the above model simulation result is shown below</p>
+<p><img src="/2024/01/16/ahuja/image-20240819221653262.png"
+alt="image-20240819221653262" /></p>
+<blockquote>
+<p>the zero is located between two poles</p>
+</blockquote>
+<p>take into the capacitance at the gate of <span
+class="math inline">\(M_1\)</span> and all other second-order effect</p>
+<p><img src="/2024/01/16/ahuja/image-20240819222727276.png"
+alt="image-20240819222727276" /></p>
+<h2 id="intuitive-analysis-of-zero">intuitive analysis of zero</h2>
+<p>miller compensation</p>
+<ul>
+<li>zero in the <strong>right</strong> half plane <span
+class="math display">\[
+g_\text{m1}V_P = sC_c V_P
+\]</span></li>
+</ul>
+<p>cascode compensation</p>
+<ul>
+<li>zero in the <strong>left</strong> half plane <span
+class="math display">\[
+g_\text{m2}V_X = - sC_c V_X
+\]</span></li>
+</ul>
+<p><img src="/2024/01/16/ahuja/zero_loc.drawio.svg"
+alt="zero_loc.drawio" /></p>
+<h2 id="how-to-mitigate-impact-of-zero">How to Mitigate Impact of
+Zero</h2>
+<p><img src="/2024/01/16/ahuja/cascode_compensation.PNG"
+alt="cascode_compensation" /></p>
+<p><strong>dominant pole</strong> <span class="math display">\[
+\omega_\text{p,d} = \frac {1} {R_\text{eq}g_\text{m9}R_{L}C_{c}}
+\]</span> <strong>first nondominant pole</strong> <span
+class="math display">\[
+\omega_\text{p,nd} = \frac {g_\text{m4}R_\text{eq}g_\text{m9}} {C_L}
+\]</span> <strong>zero</strong> <span class="math display">\[
+\omega_\text{z} = (g_\text{m4}R_\text{eq})(\frac {g_\text{m9}} {C_c})
+\]</span> a much greater magnitude than <span
+class="math inline">\(g_\text{m9}/C_C\)</span></p>
+<blockquote>
+<p><strong>Lectures</strong></p>
+<p>EE 240B: Advanced Analog Circuit Design, Prof. Bernhard E. Boser [<a
+href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf">OTA
+II, Multi-Stage</a>]</p>
+<p><strong>Papers</strong></p>
+<p>B. K. Ahuja, "An improved frequency compensation technique for CMOS
+operational amplifiers," in IEEE Journal of Solid-State Circuits, vol.
+18, no. 6, pp. 629-633, Dec. 1983, doi: 10.1109/JSSC.1983.1052012.</p>
+<p>D. B. Ribner and M. A. Copeland, "Design techniques for cascoded CMOS
+op amps with improved PSRR and common-mode input range," in IEEE Journal
+of Solid-State Circuits, vol. 19, no. 6, pp. 919-925, Dec. 1984, doi:
+10.1109/JSSC.1984.1052246.</p>
+<p>Abo, Andrew &amp; Gray, Paul. (1999). A 1.5V, 10-bit, 14MS/s CMOS
+Pipeline Analog-to-Digital Converter.</p>
+<p><strong>Book's chapters</strong></p>
+<p>Design of analog CMOS integrated circuits, Behzad Razavi</p>
+<ul>
+<li>10.5 Compensation of Two-Stage Op Amps</li>
+<li>10.7 Other Compensation Techniques</li>
+</ul>
+<p>Analog Design Essentials, Willy M.C. Sansen</p>
+<ul>
+<li>chapter #5 Stability of operational amplifiers - Compensation of
+positive zero</li>
+</ul>
+<p>Analysis and Design of Analog Integrated Circuits 5th Edition, Paul
+R. Gray, Paul J. Hurst, Stephen H. Lewis, Robert G. Meyer</p>
+<ul>
+<li>9.4.3 Two-Stage MOS Amplifier Compensation</li>
+</ul>
+<p>CMOS Analog Circuit Design 3rd Edition, Phillip E. Allen, Douglas R.
+Holberg</p>
+<ul>
+<li>6.2.2 Miller Compensation of the Two-Stage Op Amp</li>
+</ul>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
+Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
+pp. 629-633, Dec. 1983.</p>
+<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
+IEEE International Symposium on Radio-Frequency Integration Technology,
+2009.</p>
+<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
+CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
+594, May 1995.</p>
+<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
+op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
+Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
+10.1109/MWSCAS.2011.6026315.</p>
+<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
+Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
+International Conference on Electronics, Circuits and Systems, 2006, pp.
+264-267, doi: 10.1109/ICECS.2006.379776.</p>
+<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
+compensation over Miller compensation in two-stage operational
+amplifiers," Proceeding of the 13th international symposium on Low power
+electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
+283-288, doi: 10.1145/1393921.1393995.</p>
+<p>Stabilizing a 2-Stage Amplifier URL:<a
+href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -3386,29 +3383,6 @@ href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/l
       </categories>
   </entry>
   <entry>
-    <title>channel and termination</title>
-    <url>/2022/07/01/channel-termination/</url>
-    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
-<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
-alt="voltagemode20220704" /></p>
-<h2 id="current-mode-driver">current mode driver</h2>
-<p><img
-src="/2022/07/01/channel-termination/image-20220702003926289.png"
-alt="image-20220702003926289" /></p>
-<h2 id="reference">reference</h2>
-<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
-Conference, "T11: Basics of Equalization Techniques: Channels,
-Equalization, and Circuits"</p>
-<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
-Diverse Interconnect Applications,” IEEE Transactions on Circuits and
-Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
-2014.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Linear model of the CDR</title>
     <url>/2022/05/04/cdr-linear/</url>
     <content><![CDATA[<p><img src="/2022/05/04/cdr-linear/image-20220504101924272.png"
@@ -3675,6 +3649,64 @@ href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitte
       </categories>
   </entry>
   <entry>
+    <title>channel and termination</title>
+    <url>/2022/07/01/channel-termination/</url>
+    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
+<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
+alt="voltagemode20220704" /></p>
+<h2 id="current-mode-driver">current mode driver</h2>
+<p><img
+src="/2022/07/01/channel-termination/image-20220702003926289.png"
+alt="image-20220702003926289" /></p>
+<h2 id="reference">reference</h2>
+<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
+Conference, "T11: Basics of Equalization Techniques: Channels,
+Equalization, and Circuits"</p>
+<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
+Diverse Interconnect Applications,” IEEE Transactions on Circuits and
+Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
+2014.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
+    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
+    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
+It determines which edges to be used as follows:</p>
+<ol type="1">
+<li><p>Evaluate waveforms over the smallest common base period</p></li>
+<li><p>For each capture edge, find the closest setup launch edge. Call
+these the <strong>primary pairs</strong></p></li>
+<li><p>Out of the <strong>primary pairs</strong>, pick the most
+restrictive setup launch and capture edges.</p></li>
+<li><p>For each <strong>primary pair</strong>, draw two hold
+relationships:</p>
+<ul>
+<li><p>Launch to (capture - 1)</p></li>
+<li><p>(Launch + 1) to Capture</p>
+<p>From all of these hold relationships, pick the most
+restrictive.</p></li>
+</ul></li>
+</ol>
+<p>PrimeTime uses the ideal clock waveform (as reported in
+<code>report_clock</code>) to determine the appropriate clock edges for
+inter-clock analysis.</p>
+<p><img
+src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
+alt="image-20220301203135490" /></p>
+<blockquote>
+<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
+<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Clock Gating</title>
     <url>/2023/04/05/clockgating/</url>
     <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
@@ -3712,41 +3744,6 @@ alt="clock gating" /></p>
 <h3 id="reference">reference</h3>
 <p>The Ultimate Guide to Clock Gating <a
 href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
-    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
-    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
-It determines which edges to be used as follows:</p>
-<ol type="1">
-<li><p>Evaluate waveforms over the smallest common base period</p></li>
-<li><p>For each capture edge, find the closest setup launch edge. Call
-these the <strong>primary pairs</strong></p></li>
-<li><p>Out of the <strong>primary pairs</strong>, pick the most
-restrictive setup launch and capture edges.</p></li>
-<li><p>For each <strong>primary pair</strong>, draw two hold
-relationships:</p>
-<ul>
-<li><p>Launch to (capture - 1)</p></li>
-<li><p>(Launch + 1) to Capture</p>
-<p>From all of these hold relationships, pick the most
-restrictive.</p></li>
-</ul></li>
-</ol>
-<p>PrimeTime uses the ideal clock waveform (as reported in
-<code>report_clock</code>) to determine the appropriate clock edges for
-inter-clock analysis.</p>
-<p><img
-src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
-alt="image-20220301203135490" /></p>
-<blockquote>
-<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
-<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -9134,13 +9131,45 @@ alt="pma_dig_bumps.drawio" /></p>
   <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
-    <content><![CDATA[<h2 id="tia">TIA</h2>
-<p><em>TODO</em> 📅</p>
-<h2 id="transmission-lines">Transmission Lines</h2>
+    <content><![CDATA[<h2 id="transmission-lines">Transmission Lines</h2>
 <p>Distributed ESD Protection</p>
 <p><em>TODO</em> 📅</p>
 <h2 id="resonant-circuit">Resonant Circuit</h2>
 <p><em>TODO</em> 📅</p>
+<h2 id="linearization-of-resistive-degeneration">Linearization of
+resistive degeneration</h2>
+<p><em>Resistive degeneration</em> in differential pairs serves as one
+major technique for linear amplifier</p>
+<p><img src="/2023/01/01/insight/image-20240824132739726.png"
+alt="image-20240824132739726" /></p>
+<p>The linear region for CMOS differential pair would be extended by
+<span class="math inline">\(±I_{SS}R/2\)</span> as all of <span
+class="math inline">\(I_{SS}/2\)</span> flows through <span
+class="math inline">\(R\)</span>. <span
+class="math display">\[\begin{align}
+V_{in}^+ -V_{in}^-  &amp;= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
+&amp;= \sqrt{\frac{2I_{SS}}{\mu_nC_{OX}\frac{W}{L}}} + \frac{I_{SS}R}{2}
+\end{align}\]</span></p>
+<blockquote>
+<p><strong>Jri Lee</strong>, "Communication Integrated Circuits." <a
+href="https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf">https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf</a></p>
+</blockquote>
+<h2 id="tia">TIA</h2>
+<p><img src="/2023/01/01/insight/image-20240824111517140.png"
+alt="image-20240824111517140" /></p>
+<p><span class="math display">\[\begin{align}
+I_{in} &amp;= \frac{V_i}{R_S} + \frac{V_i - V_o}{R_F} \\
+\frac{V_i - V_o}{R_F} &amp;= g_m V_i
+\end{align}\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\begin{align}
+V_o &amp;= \frac{I_{in}R_F}{\frac{R_S+R_F}{R_S}\frac{1}{1-g_mR_F}- 1} \\
+V_i &amp;= \frac{I_{in}R_F}{\frac{R_F}{R_S}+g_mR_F}
+\end{align}\]</span> If <span class="math inline">\(R_S \gg R_F\)</span>
+<span class="math display">\[\begin{align}
+V_o &amp;= \frac{I_{in}}{g_m}(1-g_mR_F) \\
+V_i &amp;= \frac{I_{in}}{g_m}
+\end{align}\]</span></p>
 <h2 id="cgd-of-common-source-stage">Cgd of Common-Source Stage</h2>
 <p>pay attention to Miller effect of Cgd during <em>layout</em></p>
 <h2 id="nonlinearity-of-differential-circuits">Nonlinearity of
@@ -10022,6 +10051,57 @@ alt="image-20240816175038971" /></p>
 <li><p>right circuit</p>
 <p><span class="math inline">\(I_b \gt 2I_a\)</span></p></li>
 </ul>
+<h2 id="step-response-of-higher-order-system">Step Response of higher
+order system</h2>
+<p><img src="/2023/01/01/insight/image-20240112002314153.png"
+alt="image-20240112002314153" /></p>
+<p>Since <span class="math inline">\(1/sC_1+R_1 \gg R_0\)</span> <span
+class="math display">\[
+\frac{V_m}{V_i}(s) \simeq \frac{R_0}{R_0 + 1/sC_0} =
+\frac{sR_0C_0}{1+sR_0C_0}
+\]</span> <em>step response</em> of <span
+class="math inline">\(V_m\)</span> <span class="math display">\[
+V_m(t) = e^{-t/R_0C_0}
+\]</span> where <span class="math inline">\(\tau = R_0C_0\)</span></p>
+<p>And <span class="math inline">\(V_o(s)\)</span> can be expressed as
+<span class="math display">\[\begin{align}
+\frac{V_o}{V_i}(s)  &amp; \simeq \frac{sR_0C_0}{1+sR_0C_0} \cdot
+\frac{sR_1C_1}{1+sR_1C_1} \\
+&amp;= \frac{sR_0C_0R_1C_1}{R_0C_0-R_1C_1}\left(\frac{1}{1+sR_1C_1} -
+\frac{1}{1+sR_0C_0}\right)
+\end{align}\]</span></p>
+<p>Then <em>step response</em> of <span
+class="math inline">\(Vo\)</span> <span
+class="math display">\[\begin{align}
+Vo(t) &amp;= \frac{R_0C_0R_1C_1}{R_0C_0-R_1C_1}
+\left(\frac{1}{R_1C_1}e^{-t/R_1C_1} -
+\frac{1}{R_0C_0}e^{-t/R_0C_0}\right) \\
+&amp;= \frac{1}{R_0C_0-R_1C_1}\left(R_0C_0e^{-t/R_1C_1} -
+R_1C_1e^{-t/R_0C_0}\right) \\
+&amp;\simeq = \frac{1}{R_0C_0-R_1C_1}\left(R_0C_0e^{-t/R_1C_1} -
+R_1C_1\right)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\tau=R_1C_1\)</span></p>
+<h3 id="partial-fraction-expansion">Partial-fraction Expansion</h3>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms C0</span><br><span class="line">syms R0</span><br><span class="line">syms C1</span><br><span class="line">syms R1</span><br><span class="line">syms s</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; partfrac(vm, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">&gt;&gt; partfrac(vo, s)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[\begin{align}
+V_m(s) &amp;= 1 -
+\frac{s(C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1} \\
+V_o(s) &amp;= 1 -
+\frac{s(C_0R_0+C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1}
+\end{align}\]</span></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">vm_exp = <span class="number">1</span> - (s*(C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line">vo_exp = <span class="number">1</span> - (s*(C0*R0 + C1*R0 + C1*R1) + <span class="number">1</span>)/(C0*C1*R0*R1*s^<span class="number">2</span> + (C0*R0 + C1*R0 + C1*R1)*s + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% with approximation</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">vm_exp2 = s*R0*C0/(<span class="number">1</span>+s*R0*C0);</span><br><span class="line">vo_exp2 = s*R0*C0/(<span class="number">1</span>+s*R0*C0) * s*R1*C1/(<span class="number">1</span>+s*R1*C1);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">step(vm, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vm_exp2, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vm step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">step(vo, <span class="number">500e-9</span>, <span class="string">&#x27;k-o&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo_exp2, <span class="number">500e-9</span>, <span class="string">&#x27;r-^&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;vo step response&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">legend</span>()</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/01/01/insight/image-20240113181003272.png"
+alt="image-20240113181003272" /></p>
+<p><img src="/2023/01/01/insight/image-20240113181032379.png"
+alt="image-20240113181032379" /></p>
+<hr />
+<p>spectre simulation vs matlab</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C0 = <span class="number">200e-9</span>;</span><br><span class="line">R0 = <span class="number">50</span>;</span><br><span class="line">C1 = <span class="number">400e-15</span>;</span><br><span class="line">R1 = <span class="number">200e3</span>;</span><br><span class="line"></span><br><span class="line">s = tf(<span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">Z0 = <span class="number">1</span>/s/C1 + R1;</span><br><span class="line">Z1 = R0*Z0/(R0+Z0);</span><br><span class="line">vm = Z1 / (Z1 + <span class="number">1</span>/s/C0);</span><br><span class="line">vo = R1/Z0 * vm;</span><br><span class="line"></span><br><span class="line">step(vm, <span class="number">500e-9</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">step(vo, <span class="number">500e-9</span>);</span><br><span class="line"></span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; vm</span><br><span class="line"></span><br><span class="line">vm =</span><br><span class="line"> </span><br><span class="line">          <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.56e-37</span> s^<span class="number">4</span> + <span class="number">1.6e-30</span> s^<span class="number">3</span></span><br><span class="line">  -----------------------------------------------------------</span><br><span class="line">  <span class="number">1.024e-44</span> s^<span class="number">5</span> + <span class="number">2.571e-37</span> s^<span class="number">4</span> + <span class="number">1.626e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br><span class="line"></span><br><span class="line">&gt;&gt; vo</span><br><span class="line"></span><br><span class="line">vo =</span><br><span class="line"> </span><br><span class="line">                 <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">2.048e-44</span> s^<span class="number">5</span> + <span class="number">1.28e-37</span> s^<span class="number">4</span></span><br><span class="line">  ---------------------------------------------------------------------------</span><br><span class="line">  <span class="number">8.194e-52</span> s^<span class="number">6</span> + <span class="number">3.081e-44</span> s^<span class="number">5</span> + <span class="number">3.871e-37</span> s^<span class="number">4</span> + <span class="number">1.638e-30</span> s^<span class="number">3</span> + <span class="number">1.6e-25</span> s^<span class="number">2</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/01/01/insight/image-20240112002155622.png"
+alt="image-20240112002155622" /></p>
 <h2 id="reference-1">reference</h2>
 <p>M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for
 small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17,
@@ -10062,6 +10142,43 @@ href="https://www.edn.com/burn-in-101/">link</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Isolation cells</title>
+    <url>/2022/05/27/isocells/</url>
+    <content><![CDATA[<p>Isolation cells are additional cells inserted by the synthesis tools
+for isolating the buses/wires crossing from <strong>power-gated
+domain</strong> of a circuit to its always-on domain
+(<strong>AON</strong>).</p>
+<blockquote>
+<p>To prevent corruption of always-on domain, we clamp the nets crossing
+the power domains to a value depending upon the design.</p>
+</blockquote>
+<p><em>A simple circuit having a switchable (or gated) power
+domain</em></p>
+<p><img src="/2022/05/27/isocells/isolation-cells-1-1.webp"
+alt="isolation-cells-1-1" /></p>
+<p><em>The circuit shown in Figure 1, after isolation cells are
+inserted</em></p>
+<p><img src="/2022/05/27/isocells/isolation-cells-2.webp"
+alt="isolation-cells-2" /></p>
+<h3 id="always-on-buffer">Always-On Buffer</h3>
+<p><img
+src="https://img-blog.csdnimg.cn/img_convert/1c84b9b7423b064b12b09b1e72b641e5.png"
+alt="640?wx_fmt=png" /></p>
+<p><img src="/2022/05/27/isocells/image-20230211001607578.png"
+alt="image-20230211001607578" /></p>
+<p><img src="/2022/05/27/isocells/image-20230211001708189.png"
+alt="image-20230211001708189" /></p>
+<p><img src="/2022/05/27/isocells/image-20230211001849150.png"
+alt="image-20230211001849150" /></p>
+<h3 id="reference">reference</h3>
+<p>Isolation cells and Level Shifter cells URL: <a
+href="https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/">https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -10322,43 +10439,6 @@ Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
 ]]></content>
       <categories>
         <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Isolation cells</title>
-    <url>/2022/05/27/isocells/</url>
-    <content><![CDATA[<p>Isolation cells are additional cells inserted by the synthesis tools
-for isolating the buses/wires crossing from <strong>power-gated
-domain</strong> of a circuit to its always-on domain
-(<strong>AON</strong>).</p>
-<blockquote>
-<p>To prevent corruption of always-on domain, we clamp the nets crossing
-the power domains to a value depending upon the design.</p>
-</blockquote>
-<p><em>A simple circuit having a switchable (or gated) power
-domain</em></p>
-<p><img src="/2022/05/27/isocells/isolation-cells-1-1.webp"
-alt="isolation-cells-1-1" /></p>
-<p><em>The circuit shown in Figure 1, after isolation cells are
-inserted</em></p>
-<p><img src="/2022/05/27/isocells/isolation-cells-2.webp"
-alt="isolation-cells-2" /></p>
-<h3 id="always-on-buffer">Always-On Buffer</h3>
-<p><img
-src="https://img-blog.csdnimg.cn/img_convert/1c84b9b7423b064b12b09b1e72b641e5.png"
-alt="640?wx_fmt=png" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001607578.png"
-alt="image-20230211001607578" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001708189.png"
-alt="image-20230211001708189" /></p>
-<p><img src="/2022/05/27/isocells/image-20230211001849150.png"
-alt="image-20230211001849150" /></p>
-<h3 id="reference">reference</h3>
-<p>Isolation cells and Level Shifter cells URL: <a
-href="https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/">https://vlsitutorials.com/isolation-cells-level-shifter-cells-low-power-vlsi/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -15638,75 +15718,6 @@ href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">htt
       </categories>
   </entry>
   <entry>
-    <title>Settling time</title>
-    <url>/2024/07/25/settling/</url>
-    <content><![CDATA[<h2 id="second-order-system">Second-order system</h2>
-<h3 id="rise-time">Rise Time</h3>
-<blockquote>
-<p>Katsuhiko Ogata, Modern Control Engineering Fifth Edition</p>
-</blockquote>
-<p><img src="/2024/07/25/settling/image-20240721180718116.png"
-alt="image-20240721180718116" /></p>
-<blockquote>
-<p>For <em>underdamped</em> second order systems, the <em>0% to 100%
-rise time</em> is normally used</p>
-</blockquote>
-<p>For <span class="math inline">\(\text{PM}=70^o\)</span></p>
-<ul>
-<li><span class="math inline">\(\omega_2=3\omega_u\)</span>, that is
-<span class="math inline">\(\omega_n = 1.7\omega_u\)</span>.</li>
-<li><span class="math inline">\(\zeta = 0.87\)</span></li>
-</ul>
-<p>Then <span class="math display">\[
-t_r = \frac{3.1}{\omega_u}
-\]</span></p>
-<h3 id="settling-time">Settling Time</h3>
-<blockquote>
-<p>Gene F. Franklin, Feedback Control of Dynamic Systems, 8th
-Edition</p>
-</blockquote>
-<p><img src="/2024/07/25/settling/image-20240721181956221.png"
-alt="image-20240721181956221" /></p>
-<p><img src="/2024/07/25/settling/image-20240721182025547.png"
-alt="image-20240721182025547" /></p>
-<p>As we know <span class="math display">\[
-\zeta \omega_n=\frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}\cdot
-\sqrt{\omega_u\omega_2}=\frac{1}{2}\omega_2
-\]</span></p>
-<p>Then <span class="math display">\[
-t_s = \frac{9.2}{\omega_2}
-\]</span></p>
-<p>For <span class="math inline">\(\text{PM}=70^o\)</span>, <span
-class="math inline">\(\omega_2 = 3\omega_u\)</span>, that is <span
-class="math display">\[
-t_s \simeq \frac{3}{\omega_u} \space\space \text{, for PM}=70^o
-\]</span></p>
-<p>For <span class="math inline">\(\text{PM}=45^o\)</span>, <span
-class="math inline">\(\omega_2 = \omega_u\)</span>, that is <span
-class="math display">\[
-t_s \simeq \frac{9.2}{\omega_u} \space\space \text{, for PM}=45^o
-\]</span></p>
-<blockquote>
-<p>Above equation is valid only for <strong>underdamped</strong>, <span
-class="math inline">\(\zeta=\frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}\lt
-1\)</span>, that is <span class="math inline">\(\omega_2\lt
-4\omega_u\)</span></p>
-</blockquote>
-<hr />
-<h2 id="single-pole-voltage-amplifier">single-pole voltage
-amplifier</h2>
-<p><img src="/2024/07/25/settling/image-20240725204501781.png"
-alt="image-20240725204501781" /></p>
-<p><img src="/2024/07/25/settling/image-20240725204527121.png"
-alt="image-20240725204527121" /> <span class="math display">\[
-\tau \simeq \frac{1}{\beta \omega_\text{ugb}}
-\]</span></p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>signed and unsigned arithmetic in Verilog</title>
     <url>/2022/05/07/signed-verilog/</url>
     <content><![CDATA[<p>With <strong>implict sign extension</strong>, the implementation of
@@ -15879,6 +15890,23 @@ href="https://shar.es/afO6e1">https://shar.es/afO6e1</a></p>
       </tags>
   </entry>
   <entry>
+    <title>How to squash all git commits into one?</title>
+    <url>/2023/08/10/squash-all-commits/</url>
+    <content><![CDATA[<p><a
+href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
+<p>As of <a
+href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
+1.6.2</a>, you can use <code>git rebase --root -i</code></p>
+<p>For each commit except the first, change <code>pick</code> to
+<code>squash</code>.</p>
+<p>this works find, but I had to do a forced push. be careful!
+<code>git push -f</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Spur &amp; Spread Spectrum Clocking (SSC)</title>
     <url>/2024/07/14/spur/</url>
     <content><![CDATA[<p><em>TODO</em> 📅</p>
@@ -15909,113 +15937,6 @@ href="https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-c
 ]]></content>
       <categories>
         <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>How to squash all git commits into one?</title>
-    <url>/2023/08/10/squash-all-commits/</url>
-    <content><![CDATA[<p><a
-href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
-<p>As of <a
-href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
-1.6.2</a>, you can use <code>git rebase --root -i</code></p>
-<p>For each commit except the first, change <code>pick</code> to
-<code>squash</code>.</p>
-<p>this works find, but I had to do a forced push. be careful!
-<code>git push -f</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SystemVerilog iff</title>
-    <url>/2022/06/21/sv-iff/</url>
-    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<p>is equivalent to</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>iff</code> is more efficient than <code>if</code> because the
-expression is recalculated when <code>vld</code> transition rather than
-<code>clk</code>.</p>
-</blockquote>
-<p>One example, detecting the negative edge of
-<code>rtr_io.cb.frameo_n[da]</code></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
-alt="image-20220621182019927" /></p>
-<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
-<p><strong>reference</strong></p>
-<p>system verilog中的iff, URL: <a
-href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
-    <url>/2022/03/16/sv-rnm-101/</url>
-    <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
-<ul>
-<li>model analog blocks operation as signal flow model</li>
-<li>only the digital solver is used for high-speed simulation
-<ul>
-<li>Event-driven</li>
-<li>No convergence issues, because no analog solver is used</li>
-</ul></li>
-<li>Five different language standards support real number modeling:
-<ul>
-<li><strong>wreal</strong> (wired-real) ports in Verilog-AMS</li>
-<li><strong>real</strong> data type in VHDL</li>
-<li><strong>real</strong> data type in Verilog</li>
-<li><strong>real</strong> variables and <strong>nettypes</strong> in
-SystemVerilog (SV)</li>
-<li><strong>real</strong> types in e</li>
-</ul></li>
-</ul>
-<h2 id="benefits-of-rnm">Benefits of RNM</h2>
-<ul>
-<li>Most analog circuits that need to be modeled for MS verification at
-the SoC level can be described in terms of real-valued voltages or
-currents</li>
-<li>RNM is a mixed approach, borrowing concepts from both continuous and
-discrete domains
-<ul>
-<li>The values are floating-point (real) number.</li>
-<li>Time is discrete; the real signals change values based on discrete
-events</li>
-</ul></li>
-<li>Applicability of RNM is bounded primarily by
-<strong>signal-flow</strong> model style</li>
-<li>Migrating analog behavior from the analog domain to the event or
-pseudo-analog domain can bring huge benefits without sacrificing too
-much accuracy</li>
-<li>Simulation is executed by a digital simulation engine without need
-for the analog solver</li>
-<li>Hence real-number modeling enables very high performance simulation
-of mixed-signal systems</li>
-</ul>
-<h2 id="limitations-of-rnm">Limitations of RNM</h2>
-<ul>
-<li>connecting <strong>real</strong> or <strong>wreal</strong> signals
-to electrical signals requires careful consideration
-<ul>
-<li>Too conservative an approach can lead to large numbers of
-timepoints</li>
-<li>Too liberal an approach can lead to losing signal accuracy</li>
-</ul></li>
-<li>Time accuracy limited by the discrete sampling approach and the
-`<code>timescale</code> setting - no continuous signals anymore</li>
-<li>Limited capability for combination of signals by wiring outputs
-together
-<ul>
-<li>Requires assumptions about impedances to do simple merging</li>
-</ul></li>
-</ul>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -16554,6 +16475,96 @@ href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://c
       </categories>
   </entry>
   <entry>
+    <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
+    <url>/2022/03/16/sv-rnm-101/</url>
+    <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
+<ul>
+<li>model analog blocks operation as signal flow model</li>
+<li>only the digital solver is used for high-speed simulation
+<ul>
+<li>Event-driven</li>
+<li>No convergence issues, because no analog solver is used</li>
+</ul></li>
+<li>Five different language standards support real number modeling:
+<ul>
+<li><strong>wreal</strong> (wired-real) ports in Verilog-AMS</li>
+<li><strong>real</strong> data type in VHDL</li>
+<li><strong>real</strong> data type in Verilog</li>
+<li><strong>real</strong> variables and <strong>nettypes</strong> in
+SystemVerilog (SV)</li>
+<li><strong>real</strong> types in e</li>
+</ul></li>
+</ul>
+<h2 id="benefits-of-rnm">Benefits of RNM</h2>
+<ul>
+<li>Most analog circuits that need to be modeled for MS verification at
+the SoC level can be described in terms of real-valued voltages or
+currents</li>
+<li>RNM is a mixed approach, borrowing concepts from both continuous and
+discrete domains
+<ul>
+<li>The values are floating-point (real) number.</li>
+<li>Time is discrete; the real signals change values based on discrete
+events</li>
+</ul></li>
+<li>Applicability of RNM is bounded primarily by
+<strong>signal-flow</strong> model style</li>
+<li>Migrating analog behavior from the analog domain to the event or
+pseudo-analog domain can bring huge benefits without sacrificing too
+much accuracy</li>
+<li>Simulation is executed by a digital simulation engine without need
+for the analog solver</li>
+<li>Hence real-number modeling enables very high performance simulation
+of mixed-signal systems</li>
+</ul>
+<h2 id="limitations-of-rnm">Limitations of RNM</h2>
+<ul>
+<li>connecting <strong>real</strong> or <strong>wreal</strong> signals
+to electrical signals requires careful consideration
+<ul>
+<li>Too conservative an approach can lead to large numbers of
+timepoints</li>
+<li>Too liberal an approach can lead to losing signal accuracy</li>
+</ul></li>
+<li>Time accuracy limited by the discrete sampling approach and the
+`<code>timescale</code> setting - no continuous signals anymore</li>
+<li>Limited capability for combination of signals by wiring outputs
+together
+<ul>
+<li>Requires assumptions about impedances to do simple merging</li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SystemVerilog iff</title>
+    <url>/2022/06/21/sv-iff/</url>
+    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<p>is equivalent to</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>iff</code> is more efficient than <code>if</code> because the
+expression is recalculated when <code>vld</code> transition rather than
+<code>clk</code>.</p>
+</blockquote>
+<p>One example, detecting the negative edge of
+<code>rtr_io.cb.frameo_n[da]</code></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
+alt="image-20220621182019927" /></p>
+<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
+<p><strong>reference</strong></p>
+<p>system verilog中的iff, URL: <a
+href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>SystemVerilog clocking block</title>
     <url>/2022/02/07/systemverilog-clocking-block/</url>
     <content><![CDATA[<blockquote>
@@ -16614,6 +16625,12 @@ signal from interface's value, input-skew before active edge</p>
 and bandgap references caused by package-induced stress is lower with
 PNP BJTs than with NPN BJTs, <strong>PNP</strong> BJTs have been used
 traditionally for temperature sensor design in CMOS</p>
+<h2 id="calibration">Calibration</h2>
+<p><em>TODO</em> 📅</p>
+<blockquote>
+<p>[<a
+href="https://ww1.microchip.com/downloads/en/Appnotes/Atmel-8108-Calibration-of-the-AVRs-Internal-Temperature-Reference_ApplicationNote_AVR122.pdf">https://ww1.microchip.com/downloads/en/Appnotes/Atmel-8108-Calibration-of-the-AVRs-Internal-Temperature-Reference_ApplicationNote_AVR122.pdf</a>]</p>
+</blockquote>
 <h2 id="v_be-curvature"><span class="math inline">\(V_{BE}\)</span>
 curvature</h2>
 <p>Though it is assumed that <span class="math inline">\(V_{BE}\)</span>
@@ -16729,8 +16746,13 @@ class="math inline">\(V_{REF} \to E_g/q\)</span></p>
 </blockquote>
 <h2 id="sinking-ptat-current-generator-without-current-mirrors">sinking
 PTAT-current generator without current mirrors</h2>
-<p><strong>without current mirror</strong></p>
-<p><em>TODO</em> 📅</p>
+<p><img src="/2022/08/11/t-sensor/image-20240824110909314.png"
+alt="image-20240824110909314" /></p>
+<p><strong>why without current mirror?</strong></p>
+<p><img src="/2022/08/11/t-sensor/image-20240824110641427.png"
+alt="image-20240824110641427" /></p>
+<p><img src="/2022/08/11/t-sensor/image-20240824110958282.png"
+alt="image-20240824110958282" /></p>
 <blockquote>
 <p>Bakker, Anton. (2000). High-Accuracy CMOS Smart Temperature Sensors.
 10.1007/978-1-4757-3190-3. [<a
@@ -18086,35 +18108,6 @@ threads</li>
       </categories>
   </entry>
   <entry>
-    <title>UVM project topology</title>
-    <url>/2022/03/21/uvm-proj-topo/</url>
-    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
-files</em></p>
-<p>Classes can only be compiled from a <em>module</em> or <em>package
-scope</em></p>
-<p>Recommendation:</p>
-<ul>
-<li>Include related class files into a package</li>
-<li>Import the package into modules where required</li>
-</ul>
-<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
-<ul>
-<li>Import package to access library</li>
-<li>The macro file <code>uvm_macros.svh</code> must be included
-separately</li>
-</ul>
-<p>yapp_packet.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
-<p>yapp_pkg.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
-<p>run.f for <code>xrun</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>UVM Register Abstraction Layer (RAL) - source code reading</title>
     <url>/2022/03/13/uvm-ral-src-reading/</url>
     <content><![CDATA[<h2 id="field-access-policies">Field Access Policies</h2>
@@ -18243,6 +18236,35 @@ off.</p>
 <h2 id="misc">misc</h2>
 <figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span>  <span class="keyword">bit</span> <span class="keyword">unsigned</span> [`UVM_REG_DATA_WIDTH-<span class="number">1</span>:<span class="number">0</span>]  uvm_reg_data_t ;</span><br></pre></td></tr></table></figure>
 <figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Enum: uvm_predict_e</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// How the mirror is to be updated</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_DIRECT  - Predicted value is as-is</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_READ    - Predict based on the specified value having been read</span></span><br><span class="line"><span class="comment">// UVM_PREDICT_WRITE   - Predict based on the specified value having been written</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">   <span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">      UVM_PREDICT_DIRECT,</span><br><span class="line">      UVM_PREDICT_READ,</span><br><span class="line">      UVM_PREDICT_WRITE</span><br><span class="line">   &#125; uvm_predict_e;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UVM project topology</title>
+    <url>/2022/03/21/uvm-proj-topo/</url>
+    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
+files</em></p>
+<p>Classes can only be compiled from a <em>module</em> or <em>package
+scope</em></p>
+<p>Recommendation:</p>
+<ul>
+<li>Include related class files into a package</li>
+<li>Import the package into modules where required</li>
+</ul>
+<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
+<ul>
+<li>Import package to access library</li>
+<li>The macro file <code>uvm_macros.svh</code> must be included
+separately</li>
+</ul>
+<p>yapp_packet.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
+<p>yapp_pkg.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
+<p>run.f for <code>xrun</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -19431,15 +19453,6 @@ Data Communications</p>
       </categories>
   </entry>
   <entry>
-    <title>Build VMware host modules</title>
-    <url>/2024/01/30/vmware-module/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Design Variable in analogLib-vpwlf</title>
     <url>/2022/05/14/vpwlf-designvar/</url>
     <content><![CDATA[<p><code>PWL File as Design Var?</code> parameter in <em>vpwlf</em> cell
@@ -19458,6 +19471,15 @@ alt="image-20220514121150988" /></p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Build VMware host modules</title>
+    <url>/2024/01/30/vmware-module/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
   </entry>
   <entry>
     <title>Wiener-Khinchin theorem</title>

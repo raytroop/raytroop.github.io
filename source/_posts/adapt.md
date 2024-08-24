@@ -96,6 +96,8 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 
 
 
+![image-20240824193839108](adapt/image-20240824193839108.png)
+
 
 
 ## Mueller-Muller CDR

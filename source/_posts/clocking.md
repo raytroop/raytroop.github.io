@@ -128,6 +128,14 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 
 
+## PFD
+
+![image-20240824220600632](clocking/image-20240824220600632.png)
+
+> symmetric???
+
+
+
 ## Feedback Dividers
 
 ![image-20240803225130324](clocking/image-20240803225130324.png)

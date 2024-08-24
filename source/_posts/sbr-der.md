@@ -17,6 +17,10 @@ Three fast time-domain system simulation techniques:
 
 ## Single-Bit Response (SBR) Method
 
+Overlapping portions of a pulse response from neighboring bits are referred to as intersymbol interference (ISI). A received waveform is formed by *superimposing*, in time, the pulse responses of each bit in the sequence, as illustrated in Figure 9, *assuming **symmetric** positive and negative pulses* are transmitted for 1s and 0s
+
+![image-20240824193208821](sbr-der/image-20240824193208821.png)
+
 To avoid spurious glitches between consecutive ones, rising and falling edge responses shall be **symmetric**. This is the limitation of SBR method.
 
  Let $p(t)$ be the SBR of the channel, $t_s$ be the data sampling phase, $T$ be the bit time, $N_c$ is the number of UI in stored pulse response and $b_m$ be the $m$th transmitted symbol. The voltage seen by the receiver's data sampler at the $m$th data sample is determined by
@@ -189,6 +193,8 @@ grid on;
 
 
 ## Reference
+
+T. C. Carusone, "Introduction to Digital I/O: Constraining I/O Power Consumption in High-Performance Systems," in *IEEE Solid-State Circuits Magazine*, vol. 7, no. 4, pp. 14-22, Fall 2015
 
 Oh, Kyung Suk Dan, and Xing Chao Chuck Yuan. High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting. Prentice Hall, 2011.
 

@@ -22,6 +22,8 @@ kick-back increases CDAC settling time
 > *add pre-amp (more power)*
 
 
+
+
 ##  SAR redundancy 
 
 *TODO* &#128197;

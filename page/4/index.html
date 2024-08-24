@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,7 +351,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -485,7 +485,7 @@ Integrity (SPI)</em> (2018): 1-4.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,6 +515,14 @@ Integrity (SPI)</em> (2018): 1-4.</p>
 </ul>
 <h2 id="single-bit-response-sbr-method">Single-Bit Response (SBR)
 Method</h2>
+<p>Overlapping portions of a pulse response from neighboring bits are
+referred to as intersymbol interference (ISI). A received waveform is
+formed by <em>superimposing</em>, in time, the pulse responses of each
+bit in the sequence, as illustrated in Figure 9, <em>assuming
+<strong>symmetric</strong> positive and negative pulses</em> are
+transmitted for 1s and 0s</p>
+<p><img src="/2023/09/23/sbr-der/image-20240824193208821.png"
+alt="image-20240824193208821" /></p>
 <p>To avoid spurious glitches between consecutive ones, rising and
 falling edge responses shall be <strong>symmetric</strong>. This is the
 limitation of SBR method.</p>
@@ -599,6 +607,9 @@ alt="image-20220430010336977" /></p>
 alt="image-20220430013715680" /></p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(yrc);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(yfc);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;rising&#x27;</span>, <span class="string">&#x27;falling&#x27;</span>)</span><br><span class="line">grid on;</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times Ts)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;step response&#x27;</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(bs, <span class="string">&#x27;k&#x27;</span>); grid on;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem((idxPreRspStart:idxPreRspEnd), bs(idxPreRspStart:idxPreRspEnd), <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(idxPreRspStart, bs(idxPreRspStart), <span class="string">&#x27;go&#x27;</span>);</span><br><span class="line">stem(idxCurData, bs(idxCurData), <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;m&#x27;</span>);</span><br><span class="line">stem((idxPreRspStart:idxPreRspEnd)+<span class="number">0.5</span>, <span class="number">0.1</span>.*bd(idxPreRspStart:idxPreRspEnd), <span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;Nc bits&#x27;</span>, <span class="string">&#x27;y_&#123;int&#125;&#x27;</span>, <span class="string">&#x27;Current bit&#x27;</span>, <span class="string">&#x27;Edge Transitions&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times UI)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;input stream&#x27;</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">yy_cont = <span class="built_in">reshape</span>(yy, [], <span class="number">1</span>);   <span class="comment">% continuous version</span></span><br><span class="line"><span class="built_in">plot</span>(yy_cont); grid on;</span><br><span class="line">title(<span class="string">&#x27;continuous yout&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times Ts)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> idx = idxPreRspStart+<span class="number">1</span>-Nc:idxCurData+<span class="number">32</span>-Nc</span><br><span class="line">    ys = yy(:, idx);</span><br><span class="line">    tt = ((idx<span class="number">-1</span>)*OSR+<span class="number">1</span>:idx*OSR);</span><br><span class="line">    h = <span class="built_in">plot</span>(tt(:), ys(:), <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">3</span>);</span><br><span class="line">    h.Annotation.LegendInformation.IconDisplayStyle = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">plot</span>(yy_cont, <span class="string">&#x27;m--&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">1</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;syn&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\times Ts)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;synthesize with step response&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
 <h2 id="reference">Reference</h2>
+<p>T. C. Carusone, "Introduction to Digital I/O: Constraining I/O Power
+Consumption in High-Performance Systems," in <em>IEEE Solid-State
+Circuits Magazine</em>, vol. 7, no. 4, pp. 14-22, Fall 2015</p>
 <p>Oh, Kyung Suk Dan, and Xing Chao Chuck Yuan. High-Speed Signaling:
 Jitter Modeling, Analysis, and Budgeting. Prentice Hall, 2011.</p>
 <p>Ren, Jihong and Kyung Suk Oh. “Multiple Edge Responses for Fast and
@@ -673,7 +684,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:15" itemprop="dateModified" datetime="2024-08-24T14:19:15+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -842,7 +853,7 @@ repo</a>]</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:15" itemprop="dateModified" datetime="2024-08-24T14:19:15+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1068,7 +1079,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1161,7 +1172,7 @@ target="_blank" rel="noopener" href="https://github.com/git/git/blob/master/Docu
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:15" itemprop="dateModified" datetime="2024-08-24T14:19:15+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1272,7 +1283,7 @@ target="_blank" rel="noopener" href="https://github.com/lnis-uofu/tsmc_template/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:15" itemprop="dateModified" datetime="2024-08-24T14:19:15+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1441,7 +1452,7 @@ target="_blank" rel="noopener" href="http://ece-research.unm.edu/jimp/vlsi/slide
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:15" itemprop="dateModified" datetime="2024-08-24T14:19:15+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1562,7 +1573,7 @@ in IEEE Circuits and Devices Magazine, vol. 17, no. 4, pp. 14-21, July
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 05:40:01" itemprop="dateModified" datetime="2024-08-24T05:40:01+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

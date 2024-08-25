@@ -23,6 +23,14 @@ ENOB - Not sufficient & not accurate enough
 
 
 
+## CML vs. SST based driver
+
+![image-20240825194548697](linkModeling/image-20240825194548697.png)
+
+> Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
+
+
+
 ## Decimation
 
 - Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
@@ -74,11 +82,7 @@ Loop gain of *proportional path* is unchanged
 
 
 
-## Phase Integrator
 
-sub-resolution bits: gain reduction through sub-resolution bits
-
-> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery" [[https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)]
 
 ## BER with Quantization Noise
 

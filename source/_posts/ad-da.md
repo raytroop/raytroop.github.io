@@ -9,12 +9,6 @@ mathjax: true
 
 
 
-
-## bootstrap T/H Switch
-*TODO* &#128197;
-
-
-
 ## kick-back
 
 kick-back increases CDAC settling time
@@ -23,19 +17,58 @@ kick-back increases CDAC settling time
 
 
 
+## bootstrap T/H Switch
+![image-20240825222432796](ad-da/image-20240825222432796.png)
 
-##  SAR redundancy 
 
-*TODO* &#128197;
 
-That redundancy, that use of non-binary weighting, allowed it to tolerate mismatch and also slow settling
+> A. Abo et al., “A 1.5-V, 10-bit, 14.3-MS/s CMOS Pipeline Analog-toDigital Converter,” IEEE J. Solid-State Circuits, pp. 599, May 1999
+>
+> Dessouky and Kaiser, "Input switch configuration suitable for rail-to-rail operation of switched opamp circuits," Electronics Letters, Jan. 1999.
 
+
+
+
+
+## Quantization Noise
+
+![image-20240825221754959](ad-da/image-20240825221754959.png)
+
+> Quantization noise is less with higher resolution as the input range is divided into a greater number of smaller ranges
+>
+> This error can be considered a quantization noise with **RMS**
+
+
+
+
+
+## Bottom plate sampling
+
+> Sample signal at the *"grounded"* side of the capacitor to achieve ***signal independent sampling***
+
+![image-20240825231816582](ad-da/image-20240825231816582.png)
+
+![image-20240825232007848](ad-da/image-20240825232007848.png)
+
+![image-20240825232717342](ad-da/image-20240825232717342.png)
+
+![image-20240825233801855](ad-da/image-20240825233801855.png)
+
+![image-20240825233821389](ad-da/image-20240825233821389.png)
+
+---
+
+![image-20240825233859540](ad-da/image-20240825233859540.png)
+
+> [[https://indico.cern.ch/event/1064521/contributions/4475393/attachments/2355793/4078773/esi_sampling_and_converters2022.pdf](https://indico.cern.ch/event/1064521/contributions/4475393/attachments/2355793/4078773/esi_sampling_and_converters2022.pdf)]
+
+
+
+> EE 435 Spring 2024 Analog VLSI Circuit Design - Switched-Capacitor Amplifiers Other Integrated Filters, [https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf](https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf)
 
 
 
 ## Hold Mode Feedthrough
-*TODO* &#128197;
-
 ![image-20240820204720277](ad-da/image-20240820204720277.png)
 
 ![image-20240820204959977](ad-da/image-20240820204959977.png)
@@ -49,85 +82,25 @@ That redundancy, that use of non-binary weighting, allowed it to tolerate mismat
 > Tania Khanna, ESE 568: Mixed Signal Circuit Design and Modeling [[https://www.seas.upenn.edu/~ese5680/fall2019/handouts/lec11.pdf](https://www.seas.upenn.edu/~ese5680/fall2019/handouts/lec11.pdf)]
 
 
-## sub-binary radix DAC
-
-*TODO* &#128197;
 
 
+## CDAC intuition
 
-> Roermund, Arthur & Hegt, Hans & Harpe, Pieter. (2010). Smart AD and DA Conversion. 10.1007/978-90-481-9042-3.
->
-> M. Pastre and M. Kayal, "High-precision DAC based on a self-calibrated sub-binary radix converter," 2004 IEEE International Symposium on Circuits and Systems (IEEE Cat. No.04CH37512), 2004, pp. I-I, doi: 10.1109/ISCAS.2004.1328201.
+The *charge redistribution capacitor network* is used to sample the input signal and serves as a
+digital-to-analog converter (DAC) for creating and subtracting reference voltages
 
-
-
-
-
-## Coherent Sampling
-
-To avoid **spectral leakage** completely, the method of **coherent sampling** is recommended. Coherent sampling requires that the input- and clock-frequency generators are **phase locked**, and that the input frequency be chosen based on the following relationship:
+sampling charge
 $$
-\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
+Q = V_{in} C_{tot}
 $$
-
-where:
-
-- $f_{\text{in}}$ = the desired input frequency
-- $f_s$ = the clock frequency of the data converter under test
-- $M_C$ = the number of cycles in the data window (to make all samples unique, choose odd or prime numbers)
-- $N_R$ = the data record length (for an 8192-point FFT, the data record is 8192s long)
-
-
-
-$$\begin{align}
-f_{\text{in}} &=\frac{f_s}{N_R}\cdot M_C \\
-&= f_{\text{res}}\cdot M_C
-\end{align}$$
-
-### irreducible ratio
-
-An **irreducible ratio** ensures identical code sequences not to be repeated multiple times. Unnecessary repetition of the same code is not desirable as it increases ADC test time.
-
-> Given that $\frac{M_C}{N_R}$ is irreducible, and $N_R$ is a power of 2, an **odd number** for $M_C$ will always produce an **irreducible ratio**
-
-
-
-Assuming there is a common factor $k$ between $M_C$ and $N_R$, i.e. $\frac{M_C}{N_R}=\frac{k M_C'}{k N_R'}$
-
-The samples  ($n\in[1, N_R]$)
-
-$$\begin{align}
-y[n] &= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
-&= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
-& = \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
-& = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
-\end{align}$$
-
-Then
-
-$$\begin{align}
-y[n+N_R'] &= \sin\left( 2\pi (n+N_R')\frac{M_C}{N_R} \right) \\
-& = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{M_C}{N_R}\right) \\
-& = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{kM_C'}{kN_R'} \right) \\
-& = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C' \right) \\
-& = \sin\left( 2\pi n \frac{M_C}{N_R}\right) 
-\end{align}$$
-
-
-
-So,  the samples is repeated $y[n] = y[n+N_R']$.  Usually, no additional information is gained by repeating with the same sampling points.
-
-
-
-### Example
-
+conversion charge
 $$
-N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}
+Q = -C_{tot}V_c + V_{ref}C_\Delta
 $$
-where $F_s$ is sample frequency, $F_{in}$ input signal frequency. 
-
-And $N$ often is 256, 512; M is 3, 5, 7, 11.
-
+That is
+$$
+V_c = \frac{C_\Delta}{C_{tot}}V_{ref} - V_{in}
+$$
 
 
 
@@ -214,51 +187,49 @@ where $m$ is the duty cycle
 >
 > Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
 
+
+
 ## comparator noise
 
-### transient noise method
+![image-20240825215015322](ad-da/image-20240825215015322.png)
 
-### PSS method
+![image-20240825215134067](ad-da/image-20240825215134067.png)
+
 
 $$
-\overline{V^2_{n,in}}=\frac{\overline{V^2_{n,out}}}{A_v}
+\text{SNR} = \frac{V_{o,sig}^2}{V_{o,n}^2} = \frac{V_{i,sig}^2}{V_{i,n}^2}
 $$
-
-![image-20230106232724903](ad-da/image-20230106232724903.png)
-
-
-
-### RX sensitivity and input referred noise
-
+That is 
+$$
+V_{i,n}^2 = \frac{V_{i,sig}^2}{V_{o,sig}^2}V_{o,n}^2
+$$
+where $V_{i,sig}$ is constant signal applied to input of comparator
 
 
 
 
-> J. Silva, D. Brito, G. Rodrigues, T. Rabuske, A. C. Pinto and J. Fernandes, "Methods for Fast Characterization of Noise and Offset in Dynamic Comparators," 2021 19th IEEE International New Circuits and Systems Conference (NEWCAS), 2021, pp. 1-4, doi: 10.1109/NEWCAS50681.2021.9462744.
->
-> P. Lund, “Comparator Design for High-Speed ADCs,” Dissertation, 2022. URL: [https://www.diva-portal.org/smash/get/diva2:1688161/FULLTEXT01.pdf](https://www.diva-portal.org/smash/get/diva2:1688161/FULLTEXT01.pdf)
->
-> Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A New Methodology for Dynamic Comparator Noise Analysis URL:[https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf](https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf)
->
-> Masaya Miyahara, Yusuke Asada, Daehwa Paik and Akira Matsuzawa, "A low-noise self-calibrating dynamic comparator for high-speed ADCs," 2008 IEEE Asian Solid-State Circuits Conference, 2008, pp. 269-272, doi: 10.1109/ASSCC.2008.4708780.
->
+
 > J. Kim, B. S. Leibowitz, J. Ren and C. J. Madden, "Simulation and Analysis of Random Decision Errors in Clocked Comparators," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 8, pp. 1844-1857, Aug. 2009, doi: 10.1109/TCSI.2009.2028449. URL:[https://people.engr.tamu.edu/spalermo/ecen689/simulation_analysis_clocked_comparators_kim_tcas1_2009.pdf](https://people.engr.tamu.edu/spalermo/ecen689/simulation_analysis_clocked_comparators_kim_tcas1_2009.pdf)
 >
 > Jaeha Kim, Lecture 12. Aperture and Noise Analysis of Clocked Comparators URL:[https://ocw.snu.ac.kr/sites/default/files/NOTE/7038.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/7038.pdf)
->
-> Shanthi Pavan, NOC:Introduction to Time - Varying Electrical Networks, IIT Madras [https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9](https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9)
->
-> Rabuske, Taimur & Fernandes, Jorge. (2014). Noise-aware simulation-based sizing and optimization of clocked comparators. Analog Integr. Circuits Signal Process.. 81. 723-728. 10.1007/s10470-014-0428-4.
 >
 > Rabuske, Taimur & Fernandes, Jorge. (2017), Chapter 5 Noise-Aware Synthesis and Optimization of Voltage Comparators, "Charge-Sharing SAR ADCs for Low-Voltage Low-Power Applications"
 >
 > Eric Chang, EE240B Discussion 9 [https://inst.eecs.berkeley.edu/~ee240b/sp18/discussions/dis9.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/discussions/dis9.pdf)
 >
-> Y. Luo, A. Jain, J. Wagner and M. Ortmanns, "Input Referred Comparator Noise in SAR ADCs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 5, pp. 718-722, May 2019, doi: 10.1109/TCSII.2019.2909429.
+> Y. Luo, A. Jain, J. Wagner and M. Ortmanns, "Input Referred Comparator Noise in SAR ADCs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 5, pp. 718-722, May 2019. [[https://sci-hub.se/10.1109/TCSII.2019.2909429](https://sci-hub.se/10.1109/TCSII.2019.2909429)]
 >
-> E. Gillen, G. Panchanan, B. Lawton and D. O'Hare, "Comparison of transient and PNOISE simulation techniques for the design of a dynamic comparator," 2022 33rd Irish Signals and Systems Conference (ISSC), Cork, Ireland, 2022, pp. 1-5, doi: 10.1109/ISSC55427.2022.9826195.
->
-> Sam Palermo Lecture 6: RX Circuits  URL:[https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_rx_circuits.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_rx_circuits.pdf)
+> Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A New Methodology for Dynamic Comparator Noise Analysis URL:[https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf](https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf)
+
+
+
+
+
+## comparator offset
+
+![image-20240825204030645](ad-da/image-20240825204030645.png)
+
+
 
 
 

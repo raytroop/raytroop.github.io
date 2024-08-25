@@ -11,9 +11,8 @@ mathjax: true
 
 
 
-## Background
 
-### pipeline ADC
+## pipeline ADC
 
 
 
@@ -44,7 +43,15 @@ It divides the process into several comparison stages, the number of which is pr
 
 
 
-### Synchronous SAR ADC
+### reduced residue amplification gain
+
+
+
+
+
+
+
+## Synchronous SAR ADC
 
 It also divides a full conversion into several comparison stages in a way similar to the *pipeline ADC*, except the algorithm is executed **sequentially** rather than in *parallel* as in the pipeline case.
 
@@ -59,6 +66,28 @@ However, the sequential operation of the SA algorithm has traditionally been a *
 - every clock cycle requires margin for the clock jitter 
 
 > The power and speed limitations of a synchronous SA design comes largely from the *high-speed internal clock*
+
+
+
+###  Non-Binary Successive Approximation
+
+The *overlapped search range* compensates for wrong decisions made in earlier stages as long as they are within the error tolerance range
+
+
+
+
+
+> Kuttner, Franz. “A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS.” *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1.
+
+
+
+
+
+### Bottom Plate Sampling vs. Top Plate Sampling
+
+
+
+
 
 
 

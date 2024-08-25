@@ -25,6 +25,20 @@ Distributed ESD Protection
 
 
 
+
+
+## R-2R & C-2C
+
+*TODO* &#128197;
+
+
+
+
+
+> B. Razavi, "The R-2R and C-2C Ladders [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 11, no. 3, pp. 10-15, Summer 2019 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf)]
+
+
+
 ## Linearization of resistive degeneration
 
 *Resistive degeneration* in differential pairs serves as one major technique for linear amplifier

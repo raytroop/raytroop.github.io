@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:12" itemprop="dateModified" datetime="2024-08-25T15:59:12+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -335,7 +335,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:12" itemprop="dateModified" datetime="2024-08-25T15:59:12+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -364,6 +364,13 @@ Assume unbounded Gaussian distribution</p>
 <blockquote>
 <p>quantization noise is ~ bounded uniform distribution</p>
 <p>Using unbounded Gaussian -&gt; pessimistic BER prediction</p>
+</blockquote>
+<h2 id="cml-vs.-sst-based-driver">CML vs. SST based driver</h2>
+<p><img src="/2024/05/15/linkModeling/image-20240825194548697.png"
+alt="image-20240825194548697" /></p>
+<blockquote>
+<p>Design Challenges Of High-Speed Wireline Transmitters [<a
+target="_blank" rel="noopener" href="https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/">https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/</a>]</p>
 </blockquote>
 <h2 id="decimation">Decimation</h2>
 <ul>
@@ -430,13 +437,6 @@ https://doi.org/10.3390/electronics10161888</p>
 &amp; Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data
 Recovery Circuits with a Linearized Model.
 10.21203/rs.3.rs-1817774/v1.</p>
-</blockquote>
-<h2 id="phase-integrator">Phase Integrator</h2>
-<p>sub-resolution bits: gain reduction through sub-resolution bits</p>
-<blockquote>
-<p>John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data
-Recovery" [<a
-target="_blank" rel="noopener" href="https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf">https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf</a>]</p>
 </blockquote>
 <h2 id="ber-with-quantization-noise">BER with Quantization Noise</h2>
 <p><img src="/2024/05/15/linkModeling/image-20240804110522955.png"
@@ -558,7 +558,7 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:15" itemprop="dateModified" datetime="2024-08-24T14:19:15+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:11" itemprop="dateModified" datetime="2024-08-25T15:59:11+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -917,7 +917,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/73654/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:12" itemprop="dateModified" datetime="2024-08-25T15:59:12+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -939,7 +939,79 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/73654/59253
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="channel-loss">channel loss</h2>
+          <h2 id="coherent-sampling">Coherent Sampling</h2>
+<p>To avoid <strong>spectral leakage</strong> completely, the method of
+<strong>coherent sampling</strong> is recommended. Coherent sampling
+requires that the input- and clock-frequency generators are
+<strong>phase locked</strong>, and that the input frequency be chosen
+based on the following relationship: <span class="math display">\[
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(f_{\text{in}}\)</span> = the desired
+input frequency</li>
+<li><span class="math inline">\(f_s\)</span> = the clock frequency of
+the data converter under test</li>
+<li><span class="math inline">\(M_C\)</span> = the number of cycles in
+the data window (to make all samples unique, choose odd or prime
+numbers)</li>
+<li><span class="math inline">\(N_R\)</span> = the data record length
+(for an 8192-point FFT, the data record is 8192s long)</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+f_{\text{in}} &amp;=\frac{f_s}{N_R}\cdot M_C \\
+&amp;= f_{\text{res}}\cdot M_C
+\end{align}\]</span></p>
+<hr />
+<p><strong>irreducible ratio</strong></p>
+<p>An <strong>irreducible ratio</strong> ensures identical code
+sequences not to be repeated multiple times. Unnecessary repetition of
+the same code is not desirable as it increases ADC test time.</p>
+<blockquote>
+<p>Given that <span class="math inline">\(\frac{M_C}{N_R}\)</span> is
+irreducible, and <span class="math inline">\(N_R\)</span> is a power of
+2, an <strong>odd number</strong> for <span
+class="math inline">\(M_C\)</span> will always produce an
+<strong>irreducible ratio</strong></p>
+</blockquote>
+<p>Assuming there is a common factor <span
+class="math inline">\(k\)</span> between <span
+class="math inline">\(M_C\)</span> and <span
+class="math inline">\(N_R\)</span>, i.e. <span
+class="math inline">\(\frac{M_C}{N_R}=\frac{k M_C&#39;}{k
+N_R&#39;}\)</span></p>
+<p>The samples (<span class="math inline">\(n\in[1, N_R]\)</span>)</p>
+<p><span class="math display">\[\begin{align}
+y[n] &amp;= \sin\left( \omega_{\text{in}} \cdot t_n \right) \\
+&amp;= \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  \\
+&amp; = \sin\left( \omega_{\text{in}} \cdot
+n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) \\
+&amp; = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+\end{align}\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\begin{align}
+y[n+N_R&#39;] &amp;= \sin\left( 2\pi (n+N_R&#39;)\frac{M_C}{N_R} \right)
+\\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{M_C}{N_R}\right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi
+N_R&#39;\frac{kM_C&#39;}{kN_R&#39;} \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi M_C&#39; \right) \\
+&amp; = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
+\end{align}\]</span></p>
+<p>So, the samples is repeated <span class="math inline">\(y[n] =
+y[n+N_R&#39;]\)</span>. Usually, no additional information is gained by
+repeating with the same sampling points.</p>
+<hr />
+<p><strong>Example</strong> <span class="math display">\[
+N \cdot \frac{1}{F_s} = M \cdot \frac{1}{F_{in}}
+\]</span></p>
+<p>where <span class="math inline">\(F_s\)</span> is sample frequency,
+<span class="math inline">\(F_{in}\)</span> input signal frequency.</p>
+<p>And <span class="math inline">\(N\)</span> often is 256, 512; M is 3,
+5, 7, 11.</p>
+<h2 id="channel-loss">channel loss</h2>
 <ul>
 <li>skin effect loss</li>
 <li>dielectric loss</li>
@@ -1528,7 +1600,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:12" itemprop="dateModified" datetime="2024-08-25T15:59:12+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1763,7 +1835,7 @@ target="_blank" rel="noopener" href="https://web.archive.org/web/20131016055332/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:12" itemprop="dateModified" datetime="2024-08-25T15:59:12+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1848,7 +1920,7 @@ target="_blank" rel="noopener" href="https://web.archive.org/web/20131016055332/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:15" itemprop="dateModified" datetime="2024-08-24T14:19:15+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:11" itemprop="dateModified" datetime="2024-08-25T15:59:11+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2108,7 +2180,7 @@ target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stab
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:15" itemprop="dateModified" datetime="2024-08-24T14:19:15+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:11" itemprop="dateModified" datetime="2024-08-25T15:59:11+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2331,7 +2403,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:12" itemprop="dateModified" datetime="2024-08-25T15:59:12+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2447,7 +2519,7 @@ target="_blank" rel="noopener" href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSape
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-24 14:19:16" itemprop="dateModified" datetime="2024-08-24T14:19:16+00:00">2024-08-24</time>
+      <time title="Modified: 2024-08-25 15:59:12" itemprop="dateModified" datetime="2024-08-25T15:59:12+00:00">2024-08-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

@@ -19,14 +19,6 @@ Distributed ESD Protection
 
 
 
-## Resonant Circuit
-
-*TODO* &#128197;
-
-
-
-
-
 ## R-2R & C-2C
 
 *TODO* &#128197;
@@ -36,6 +28,32 @@ Distributed ESD Protection
 
 
 > B. Razavi, "The R-2R and C-2C Ladders [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 11, no. 3, pp. 10-15, Summer 2019 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf)]
+
+
+
+
+
+## Resonator
+
+![image-20240826223955851](insight/image-20240826223955851.png)
+
+
+
+![image-20240826224132736](insight/image-20240826224132736.png)
+
+![image-20240826224317197](insight/image-20240826224317197.png)
+
+---
+
+![image-20240826224651954](insight/image-20240826224651954.png)
+
+![image-20240826224823886](insight/image-20240826224823886.png)
+
+*bandpass filter*
+
+
+
+> Hossein Hashemi, RF Circuits, [[https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN](https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN)]
 
 
 

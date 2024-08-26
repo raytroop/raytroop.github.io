@@ -9,6 +9,18 @@ mathjax: true
 
 
 
+## modulation & demodulation
+
+![image-20240826221237312](ss-insight/image-20240826221237312.png)
+
+![image-20240826221251379](ss-insight/image-20240826221251379.png)
+
+
+
+> Hossein Hashemi, RF Circuits, [[https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN](https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN)]
+
+
+
 ## Coherent Sampling
 
 To avoid **spectral leakage** completely, the method of **coherent sampling** is recommended. Coherent sampling requires that the input- and clock-frequency generators are **phase locked**, and that the input frequency be chosen based on the following relationship:

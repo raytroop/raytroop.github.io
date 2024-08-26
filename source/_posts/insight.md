@@ -206,7 +206,7 @@ v_{os} &= \frac{V_{GS}-V_{TH}}{2} \frac{\Delta K}{K}
 **alternative derivation**
 
 $$\begin{align}
-\Delta V_\beta  g_m &= \frac{\partial I_D}{\partial \beta} \Delta \beta \\
+\Delta V_\beta \cdot g_m &= \frac{\partial I_D}{\partial \beta} \Delta \beta \\
 &= I_D \frac{\Delta \beta}{\beta}
 \end{align}$$
 

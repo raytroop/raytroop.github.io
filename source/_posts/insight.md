@@ -201,6 +201,25 @@ v_{os} &= \frac{V_{GS}-V_{TH}}{2} \frac{\Delta K}{K}
 > The derivation for $\frac{\Delta W/L}{W/L}$ is same with $\frac{\Delta K}{K}$
 
 
+---
+**alternative derivation**
+
+$$\begin{align}
+\Delta V_\beta  g_m &= \frac{\partial I_D}{\partial \beta} \Delta \beta \\
+&= I_D \frac{\Delta \beta}{\beta}
+\end{align}$$
+
+That is $\Delta V_\beta = \frac{I_D}{g_m}\frac{\Delta \beta}{\beta}$
+
+$$
+\Delta V_R \cdot g_m R = I_D \cdot \Delta R 
+$$
+
+That is $\Delta V_R = \frac{I_D}{ g_m} \cdot \frac{\Delta R}{R}$
+
+> [[https://electronicengineering.phd.upc.edu/en/courses-and-seminars/courses-materials/2008-2009/slides-makinwa-1](https://electronicengineering.phd.upc.edu/en/courses-and-seminars/courses-materials/2008-2009/slides-makinwa-1)]
+---
+
 
 ### current mirror
 

@@ -7,15 +7,19 @@ categories:
 mathjax: true
 ---
 
-## Autozeroing techniques
+## Autozeroing
 
-> offset is **sampled** and then subtracted from the input.
+> offset is **sampled** and then subtracted from the input
+>
+> Measure the offset somehow and then subtract it from the input signal
 
 
 
-## Chopping techniques
+## Chopping
 
-> offset is **modulated** away from the signal band and then filtered out.
+> offset is **modulated** away from the signal band and then filtered out
+>
+> Modulate the offset away from DC and then filter it out
 
 **Good**: Magically reduces offset, 1/f noise, drift
 

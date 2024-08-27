@@ -266,9 +266,11 @@ The problem with sine-wave scaling is that the noise power is, on average, *even
 
 ![snr_final.drawio](enbw-nl/snr_final.drawio.svg)
 
-> We can't use Fourier transorm of random signal
+> We **can't** use *Fourier transform of random signal*
 >
-> ref. [[https://raytroop.github.io/2023/11/10/random/?highlight=discrete#lti-systems-on-wss-processes](https://raytroop.github.io/2023/11/10/random/?highlight=discrete#lti-systems-on-wss-processes)]
+> [[https://raytroop.github.io/2023/11/10/random/#lti-systems-on-wss-processes](https://raytroop.github.io/2023/11/10/random/#lti-systems-on-wss-processes)]
+
+
 
 $$\begin{align}
 \mathrm{SNR} &= \frac{X_\text{sig}^2}{X_\text{n}^2N} \\

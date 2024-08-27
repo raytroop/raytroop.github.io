@@ -9,6 +9,28 @@ mathjax: true
 
 
 
+##  Energy signals vs Power signal
+
+> Topic 5 Energy & Power Signals, Correlation & Spectral Density [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf)]
+
+---
+
+![image-20240427155046131](ss-insight/image-20240427155046131.png)
+
+> ![image-20240719203550628](ss-insight/image-20240719203550628.png)
+
+---
+
+---
+
+![image-20240427155100927](ss-insight/image-20240427155100927.png)
+
+> ![image-20240719204148098](ss-insight/image-20240719204148098.png)
+
+
+
+
+
 ## modulation & demodulation
 
 ![image-20240826221237312](ss-insight/image-20240826221237312.png)

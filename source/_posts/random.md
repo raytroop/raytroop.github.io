@@ -11,6 +11,8 @@ mathjax: true
 
 ## Random Signals Sampling
 
+> sampling autocorrelation sequence
+
 ![image-20240428162643394](random/image-20240428162643394.png)
 
 ![image-20240428162655969](random/image-20240428162655969.png)

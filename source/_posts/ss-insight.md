@@ -323,7 +323,7 @@ where we define $K_n(0) = K_n$
 
 
 
-## Nyquist’s Stability Criterion
+## Nyquist's Stability Criterion
 
 *TODO* &#128197;
 

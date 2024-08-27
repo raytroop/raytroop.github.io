@@ -102,7 +102,24 @@ $$
 V_c = \frac{C_\Delta}{C_{tot}}V_{ref} - V_{in}
 $$
 
+---
 
+CDAC is actually working as a **capacitive divider** during *conversion phase*, the charge of internal node is not changed (*charge conservation law*)
+
+```
+\Delta V_i -----||C_1----\Delta V_x---||C_2-----\
+```
+
+$$
+(\Delta V_i - \Delta V_x) C_1 = \Delta V_x \cdot C_2
+$$
+Then
+$$
+\Delta V_x = \frac{C_1}{C_1+C_2}\Delta V_i
+$$
+
+
+---
 
 
 ##  Sampled Thermal Noise

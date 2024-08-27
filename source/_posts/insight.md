@@ -34,7 +34,7 @@ Distributed ESD Protection
 ## Early Voltage indicator
 
 $$
-g_m r_o = \frac{g_m}{I_D}I_D\frac{V_A}{I_D} =  \frac{g_m}{I_D} \cdot V_A
+g_m r_o = \frac{g_m}{I_D}I_D \cdot \frac{V_A}{I_D} =  \frac{g_m}{I_D} \cdot V_A
 $$
 
 $g_m r_o $ is the indicator of $V_A$, if $\frac{g_m}{I_D}$ is same

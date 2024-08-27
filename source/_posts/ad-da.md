@@ -106,6 +106,8 @@ $$
 
 CDAC is actually working as a **capacitive divider** during *conversion phase*, the charge of internal node is not changed (*charge conservation law*)
 
+assuming $\Delta V_i$ is applied to series capacitor $C_1$ and $C_2$
+
 ```
 \Delta V_i -----||C_1----\Delta V_x---||C_2-----\
 ```
@@ -118,6 +120,7 @@ $$
 \Delta V_x = \frac{C_1}{C_1+C_2}\Delta V_i
 $$
 
+> $V_x= V_{x,0} + \Delta V_x$
 
 ---
 

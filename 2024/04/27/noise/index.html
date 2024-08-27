@@ -18,23 +18,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="spectrum analyzer We tried to plot a power spectral density together with something that we want to interpret as a power spectrum   spectrum of a periodic signal spectral density of a broadband signal">
+    <meta name="description" content="Sampled Thermal Noise The aliasing of the noise, or noise folding, plays an important role in switched-capacitor as it does in all switched-capacitor filters  Assume for the moment that the switch is">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Noise Analysis">
 <meta property="og:url" content="http://example.com/2024/04/27/noise/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="spectrum analyzer We tried to plot a power spectral density together with something that we want to interpret as a power spectrum   spectrum of a periodic signal spectral density of a broadband signal">
+<meta property="og:description" content="Sampled Thermal Noise The aliasing of the noise, or noise folding, plays an important role in switched-capacitor as it does in all switched-capacitor filters  Assume for the moment that the switch is">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240425215938141.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240428182816109.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240428180635082.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240428215559780.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240425220033340.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/sample_impulse_hold.drawio.svg">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240428225949327.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240425220400924.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240427183257203.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240427183349642.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240427183516540.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240427183458649.png">
+<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240427183700971.png">
 <meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240522214004545.png">
 <meta property="og:image" content="http://example.com/2024/04/27/noise/image-20240522214340882.png">
-<meta property="og:image" content="http://example.com/2024/04/27/noise/SamplingProcess.drawio.svg">
-<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20220626000016184.png">
-<meta property="og:image" content="http://example.com/2024/04/27/noise/image-20230518232314980.png">
 <meta property="article:published_time" content="2024-04-27T09:54:25.000Z">
-<meta property="article:modified_time" content="2024-08-27T10:36:01.452Z">
+<meta property="article:modified_time" content="2024-08-27T15:10:58.457Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/04/27/noise/image-20240522214004545.png">
+<meta name="twitter:image" content="http://example.com/2024/04/27/noise/image-20240425215938141.png">
 
 
 <link rel="canonical" href="http://example.com/2024/04/27/noise/">
@@ -143,7 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#spectrum-analyzer"><span class="nav-number">1.</span> <span class="nav-text">spectrum analyzer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noise-aliasing"><span class="nav-number">2.</span> <span class="nav-text">Noise Aliasing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sampled-thermal-noise"><span class="nav-number">1.</span> <span class="nav-text">Sampled Thermal Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spectrum-analyzer"><span class="nav-number">2.</span> <span class="nav-text">spectrum analyzer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -156,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -238,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -259,7 +269,99 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="spectrum-analyzer">spectrum analyzer</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="sampled-thermal-noise">Sampled Thermal Noise</h2>
+<p>The <strong>aliasing of the noise</strong>, or <strong>noise
+folding</strong>, plays an important role in switched-capacitor as it
+does in all switched-capacitor filters</p>
+<p><img src="/2024/04/27/noise/image-20240425215938141.png"
+alt="image-20240425215938141" /></p>
+<p>Assume for the moment that the switch is <em>always closed</em> (that
+there is no hold phase), the single-sided noise density would be</p>
+<p><img src="/2024/04/27/noise/image-20240428182816109.png"
+alt="image-20240428182816109" /></p>
+<p><img src="/2024/04/27/noise/image-20240428180635082.png"
+alt="image-20240428180635082" /></p>
+<p><span class="math inline">\(v_s[n]\)</span> is the sampled version of
+<span class="math inline">\(v_{RC}(t)\)</span>, i.e. <span
+class="math inline">\(v_s[n]= v_{RC}(nT_C)\)</span> <span
+class="math display">\[
+S_s(e^{j\omega}) = \frac{1}{T_C}
+\sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi
+k}{T_C})) \cdot d\omega
+\]</span> where <span class="math inline">\(\omega \in [-\pi,
+\pi]\)</span>, furthermore <span
+class="math inline">\(\frac{d\omega}{T_C}= d\Omega\)</span> <span
+class="math display">\[
+S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s))
+\cdot d\Omega
+\]</span></p>
+<blockquote>
+<p><img src="/2024/04/27/noise/image-20240428215559780.png"
+alt="image-20240428215559780" /></p>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240425220033340.png"
+alt="image-20240425220033340" /></p>
+<p>The noise in <span class="math inline">\(S_{RC}\)</span> is a
+<em>stationary process</em> and so is <em>uncorrelated</em> over <span
+class="math inline">\(f\)</span> allowing the <span
+class="math inline">\(N\)</span> rectangles to be combined by simply
+summing their noise powers</p>
+<p><img src="/2024/04/27/noise/sample_impulse_hold.drawio.svg"
+alt="image-20240428225949327" /></p>
+<blockquote>
+<p><span class="math display">\[
+X(j\Omega)d\Omega = \frac{1}{T_c}X(e^{j\omega})d\omega  
+\]</span></p>
+<p>ref. <em><a
+target="_blank" rel="noopener" href="https://raytroop.github.io/2022/05/01/sampling-dft">[Sampling of
+Continuous Time Signals]</a></em> of EQ.(31) in the blog</p>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240428225949327.png"
+alt="image-20240428225949327" /></p>
+<p><img src="/2024/04/27/noise/image-20240425220400924.png"
+alt="image-20240425220400924" /></p>
+<p>where <span class="math inline">\(m\)</span> is the duty cycle</p>
+<p><img src="/2024/04/27/noise/image-20240427183257203.png"
+alt="image-20240427183257203" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183349642.png"
+alt="image-20240427183349642" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183516540.png"
+alt="image-20240427183516540" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183458649.png"
+alt="image-20240427183458649" /></p>
+<blockquote>
+<ul>
+<li>Calculate autocorrelation function of noise at the output of the RC
+filter</li>
+<li>Calculate the spectrum by taking the <strong>discrete</strong> time
+Fourier transform of the autocorrelation function</li>
+</ul>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240427183700971.png"
+alt="image-20240427183700971" /></p>
+<blockquote>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF.</p>
+<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
+Converters, Second Edition" ISBN 978-1-119-25827-8</p>
+<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
+<p>- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 /
+tutorials</p>
+<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
+Modeling URL: <a
+target="_blank" rel="noopener" href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
+<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
+Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
+Publishers Inc., San Francisco, CA, USA.</p>
+<p>Bernhard E. Boser . Advanced Analog Integrated Circuits Switched
+Capacitor Gain Stages [<a
+target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf</a>]</p>
+<p>R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for
+Signal Processing. Wiley-Interscience, 1986</p>
+<p>Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits [<a
+target="_blank" rel="noopener" href="http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf">http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf</a>]</p>
+</blockquote>
+<h2 id="spectrum-analyzer">spectrum analyzer</h2>
 <p>We tried to plot a <em>power spectral density</em> together with
 something that we want to interpret as a <em>power spectrum</em></p>
 <blockquote>
@@ -318,87 +420,6 @@ Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
 <li>while for a filter with a single-pole roll-off, <strong>NBW</strong>
 is 2 times the 3-dB bandwidth</li>
 </ul>
-<h2 id="noise-aliasing">Noise Aliasing</h2>
-<p><img src="/2024/04/27/noise/SamplingProcess.drawio.svg"
-alt="SamplingProcess.drawio" /></p>
-<p>Where impulse train or "shah" function is defined as <span
-class="math display">\[
-\amalg(t) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
-\]</span> where <span class="math inline">\(T\)</span> defines the
-period, or sampling rate. Its Fourier transform is <span
-class="math inline">\(2\pi \delta(\omega-i\frac{2\pi}{T})\)</span></p>
-<p><strong>Multiplication Property</strong> of Fourier Transform <span
-class="math display">\[
-x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
-\]</span></p>
-<p>Due to <span class="math inline">\(A = B+2C\)</span>, the noise in
-the discrete time integrated from DC to <span
-class="math inline">\(f_s/2\)</span> equals that of continuous time in
-all frequency range.</p>
-<blockquote>
-<p>The DFT spectrum is periodic with period <strong>N</strong></p>
-<p>The DTFT spectrum is periodic with period <span
-class="math inline">\(2\pi\)</span></p>
-<p>As a conclusion, the spectrum beyond <span
-class="math inline">\(f_s/2\)</span>​ is <strong>redundant</strong> and
-don't provide information</p>
-</blockquote>
-<hr />
-<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
-and <span class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N
-integer), are <strong>indistinguishable</strong> in the <strong>discrete
-time domain</strong>.</p>
-<p><img src="/2024/04/27/noise/image-20220626000016184.png"
-alt="image-20220626000016184" /></p>
-<blockquote>
-<p>In order to prevent aliasing, we need <span
-class="math inline">\(f_{\text{sig,max}}\lt \frac{f_s}{2}\)</span>. The
-sampling rate <span class="math inline">\(f_s=2\cdot
-f_{\text{sig,max}}\)</span> is called the <strong>Nyquist
-Rate</strong>.</p>
-<p>Two solution possibilities</p>
-<ol type="1">
-<li>Sample fast enough to cover all spectral components, including
-"parasitic" ones outside band of interest</li>
-<li>Limit <span class="math inline">\(f_{\text{sig,max}}\)</span>
-through filtering - Filter out "parasitic" ones</li>
-</ol>
-</blockquote>
-<p>Given below sequence <span class="math display">\[
-X[n] =A e^{j\omega _0 T_s n}
-\]</span></p>
-<ol type="1">
-<li><span class="math inline">\(kf_s + \Delta f\)</span></li>
-</ol>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left(
--kf_s-\Delta f \right)2\pi T_sn} \\
-&amp;= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
-\end{align}\]</span></p>
-<ol start="2" type="1">
-<li><span class="math inline">\(kf_s - \Delta f\)</span></li>
-</ol>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left(
--kf_s+\Delta f \right)2\pi T_sn} \\
-&amp;= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
-\end{align}\]</span></p>
-<blockquote>
-<p>With sampling frequency <span
-class="math inline">\(\frac{1}{T_s}\)</span>, continuous signal of <span
-class="math inline">\(\frac{1}{2T_s}+\Delta f\)</span> and <span
-class="math inline">\(-\frac{1}{2T_s}+\Delta f\)</span> can not be
-distinguished <em>real signal</em></p>
-</blockquote>
-<p><img src="/2024/04/27/noise/image-20230518232314980.png"
-alt="image-20230518232314980" /></p>
-<blockquote>
-<p>Generally, The frequencies <span
-class="math inline">\(f_{\text{sig}}\)</span> and <span
-class="math inline">\(N· f_s ±f_{\text{sig}}\)</span> (N integer), are
-<strong>indistinguishable</strong> in the <strong>discrete time
-domain</strong>.</p>
-</blockquote>
 <h2 id="reference">reference</h2>
 <p>David Herres, The difference between signal under-sampling, aliasing,
 and folding URL: <a

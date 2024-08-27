@@ -18,24 +18,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Random Signals Sampling  sampling autocorrelation sequence      Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition     [https:&#x2F;&#x2F;dsp.stackexchange.com&#x2F;a&#x2F;17348&#x2F;59253]  LTI">
+    <meta name="description" content="Ergodicity &amp; autocorrelation The most important statistical properties of a random process \(x(t)\) are obtained by applying the expectation operator to some functions of the process itself  The e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Random Process">
 <meta property="og:url" content="http://example.com/2023/11/10/random/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Random Signals Sampling  sampling autocorrelation sequence      Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition     [https:&#x2F;&#x2F;dsp.stackexchange.com&#x2F;a&#x2F;17348&#x2F;59253]  LTI">
+<meta property="og:description" content="Ergodicity &amp; autocorrelation The most important statistical properties of a random process \(x(t)\) are obtained by applying the expectation operator to some functions of the process itself  The e">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240719230346944.png">
+<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240719210621021.png">
+<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240827221945277.png">
+<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240427170024123.png">
+<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240827222224395.png">
+<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240827222235906.png">
 <meta property="og:image" content="http://example.com/2023/11/10/random/image-20240428162643394.png">
 <meta property="og:image" content="http://example.com/2023/11/10/random/image-20240428162655969.png">
 <meta property="og:image" content="http://example.com/2023/11/10/random/image-20240428162735492.png">
 <meta property="og:image" content="http://example.com/2023/11/10/random/image-20240428161506523.png">
-<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240427162827347.png">
-<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240427170024123.png">
+<meta property="og:image" content="http://example.com/2023/11/10/random/image-20240718210137344.png">
 <meta property="article:published_time" content="2023-11-10T13:26:31.000Z">
-<meta property="article:modified_time" content="2024-08-27T10:36:01.504Z">
+<meta property="article:modified_time" content="2024-08-27T15:10:58.513Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/11/10/random/image-20240428162643394.png">
+<meta name="twitter:image" content="http://example.com/2023/11/10/random/image-20240719230346944.png">
 
 
 <link rel="canonical" href="http://example.com/2023/11/10/random/">
@@ -144,7 +149,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#random-signals-sampling"><span class="nav-number">1.</span> <span class="nav-text">Random Signals Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lti-systems-on-wss-processes"><span class="nav-number">2.</span> <span class="nav-text">LTI Systems on WSS Processes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ergodicity-autocorrelation"><span class="nav-number">1.</span> <span class="nav-text">Ergodicity &amp;
+autocorrelation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lti-systems-on-wss-processes"><span class="nav-number">2.</span> <span class="nav-text">LTI Systems on WSS Processes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#random-signals-sampling"><span class="nav-number">3.</span> <span class="nav-text">Random Signals Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#noise-aliasing"><span class="nav-number">3.1.</span> <span class="nav-text">Noise Aliasing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wiener-khinchin-theorem"><span class="nav-number">4.</span> <span class="nav-text">Wiener-Khinchin theorem</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,7 +163,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -239,7 +245,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -260,7 +266,55 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="random-signals-sampling">Random Signals Sampling</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="ergodicity-autocorrelation">Ergodicity &amp;
+autocorrelation</h2>
+<p>The most important statistical properties of a random process <span
+class="math inline">\(x(t)\)</span> are obtained by applying the
+<em>expectation operator</em> to some functions of the process
+itself</p>
+<ul>
+<li>The <strong>expectation</strong> returns the probability-weighted
+average of the specific function at that specific time over all possible
+realizations of the process</li>
+</ul>
+<blockquote>
+<p>In many real practical cases, though, data from many realizations of
+the process are not available. On the contrary, often only data from one
+of them are known</p>
+</blockquote>
+<p><strong><em>ensemble autocorrelation</em></strong> and
+<strong><em>temporal autocorrelation (time
+autocorrelation)</em></strong></p>
+<p><img src="/2023/11/10/random/image-20240719230346944.png"
+alt="image-20240719230346944" /></p>
+<blockquote>
+<p><img src="/2023/11/10/random/image-20240719210621021.png"
+alt="image-20240719210621021" /><img
+src="/2023/11/10/random/image-20240720140527704.png"
+alt="image-20240720140527704" /></p>
+</blockquote>
+<h2 id="lti-systems-on-wss-processes">LTI Systems on WSS Processes</h2>
+<p><img src="/2023/11/10/random/image-20240827221945277.png"
+alt="image-20240827221945277" /></p>
+<p><strong>output autocorrelation</strong></p>
+<p><img src="/2023/11/10/random/image-20240427170024123.png"
+alt="image-20240427170024123" /></p>
+<hr />
+<p><strong>output PSD</strong></p>
+<p><img src="/2023/11/10/random/image-20240827222224395.png"
+alt="image-20240827222224395" /></p>
+<p><img src="/2023/11/10/random/image-20240827222235906.png"
+alt="image-20240827222235906" /></p>
+<blockquote>
+<p>Topic 6 Random Processes and Signals [<a
+target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf</a>]</p>
+<p>Alan V. Oppenheim, Introduction To Communication, Control, And Signal
+Processing [<a
+target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf">https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf</a>]</p>
+<p>L.W. Couch, Digital and Analog Communication Systems, 8th Edition,
+2013</p>
+</blockquote>
+<h2 id="random-signals-sampling">Random Signals Sampling</h2>
 <blockquote>
 <p>sampling autocorrelation sequence</p>
 </blockquote>
@@ -281,30 +335,103 @@ alt="image-20240428161506523" /></p>
 <p>[<a
 target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/17348/59253">https://dsp.stackexchange.com/a/17348/59253</a>]</p>
 </blockquote>
-<h2 id="lti-systems-on-wss-processes">LTI Systems on WSS Processes</h2>
-<p><img src="/2023/11/10/random/image-20240427162827347.png"
-alt="image-20240427162827347" /></p>
-<p><img src="/2023/11/10/random/image-20240427170024123.png"
-alt="image-20240427170024123" /></p>
+<h3 id="noise-aliasing">Noise Aliasing</h3>
+<p><em>apply aforegoing conclusion</em></p>
+<h2 id="wiener-khinchin-theorem">Wiener-Khinchin theorem</h2>
 <blockquote>
-<p>Topic 6 Random Processes and Signals [<a
-target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf">https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf</a>]</p>
-<p>Alan V. Oppenheim, Introduction To Communication, Control, And Signal
-Processing [<a
-target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf">https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf</a>]</p>
+<p>Norbert Wiener proved this theorem for the case of a
+<strong><em>deterministic function</em></strong> in 1930; Aleksandr
+Khinchin later formulated an analogous result for <strong><em>stationary
+stochastic processes</em></strong> and published that probabilistic
+analogue in 1934. Albert Einstein explained, without proofs, the idea in
+a brief two-page memo in 1914</p>
 </blockquote>
-<h2 id="reference">reference</h2>
-<p>Iain Collings. Random Processes [<a
-target="_blank" rel="noopener" href="https://youtube.com/playlist?list=PLx7-Q20A1VYKRLHUMSt2YOORrVz8iH-Kq&amp;si=cZjlH7zcHcR0zWg6">https://youtube.com/playlist?list=PLx7-Q20A1VYKRLHUMSt2YOORrVz8iH-Kq&amp;si=cZjlH7zcHcR0zWg6</a>]
-Spectral content of NRZ test patterns [<a
-target="_blank" rel="noopener" href="https://www.analog.com/media/en/technical-documentation/tech-articles/hfta110-spectral-content-of-nrz-test-patterns.pdf">https://www.analog.com/media/en/technical-documentation/tech-articles/hfta110-spectral-content-of-nrz-test-patterns.pdf</a>]</p>
-<p>Lab 2: Spectrum analysis [<a
-target="_blank" rel="noopener" href="https://ece.uccs.edu/~mwickert/ece4670/lecture_notes/Lab2.pdf">https://ece.uccs.edu/~mwickert/ece4670/lecture_notes/Lab2.pdf</a>]</p>
-<p>PSD (Power spectral density) explanation. [<a
-target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/8151">https://dsp.stackexchange.com/a/8151</a>]</p>
-<p>Dennis Sun. STAT 350 2020 Probability and Stochastic Processes for
-Electrical Engineers [<a
-target="_blank" rel="noopener" href="https://dlsun.github.io/Stat350-S20/">https://dlsun.github.io/Stat350-S20/</a>]</p>
+<p><span class="math inline">\(x(t)\)</span>, Fourier transform over a
+limited period of time <span class="math inline">\([-T/2, +T/2]\)</span>
+, <span class="math inline">\(X_T(f) = \int_{-T/2}^{T/2}x(t)e^{-j2\pi
+ft}dt\)</span></p>
+<p>With <em>Parseval's theorem</em> <span class="math display">\[
+\int_{-T/2}^{T/2}|x(t)|^2dt = \int_{-\infty}^{\infty}|X_T(f)|^2df
+\]</span> So that <span class="math display">\[
+\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2dt =
+\int_{-\infty}^{\infty}\frac{1}{T}|X_T(f)|^2df
+\]</span></p>
+<blockquote>
+<p>where the quantity, <span
+class="math inline">\(\frac{1}{T}|X_T(f)|^2\)</span> can be interpreted
+as distribution of power in the frequency domain</p>
+<p>For each <span class="math inline">\(f\)</span> this quantity is a
+random variable, since it is a function of the random process <span
+class="math inline">\(x(t)\)</span></p>
+</blockquote>
+<p>The power spectral density (PSD) <span class="math inline">\(S_x(f
+)\)</span> is defined as the limit of the expectation of the expression
+above, for large <span class="math inline">\(T\)</span>: <span
+class="math display">\[
+S_x(f) = \lim _{T\to \infty}\mathrm{E}\left[ \frac{1}{T}|X_T(f)|^2
+\right]
+\]</span></p>
+<p>The <em>Wiener-Khinchin theorem</em> ensures that for well-behaved
+<em>wide-sense stationary processes</em> the <strong>limit
+exists</strong> and is equal to the <em>Fourier transform of the
+autocorrelation</em> <span class="math display">\[\begin{align}
+S_x(f) &amp;= \int_{-\infty}^{+\infty}R_x(\tau)e^{-j2\pi f \tau}d\tau \\
+R_x(\tau) &amp;= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
+\end{align}\]</span></p>
+<hr />
+<p><strong>Example</strong></p>
+<p>A pure sine wave is expressed as <span class="math inline">\(y(t) =
+A_0 \sin(2\pi f_0 t +\phi _0)\)</span>, its autocorrelation
+function:</p>
+<p><span class="math display">\[
+\mathrm{R}(\tau) = \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
+y(t)y(t+\tau)dt
+\]</span></p>
+<p>where <span class="math inline">\(y(t)y(t+\tau)\)</span> can be
+expressed as <span class="math display">\[\begin{align}
+y(t)y(t+\tau) &amp;= A_0\sin(2\pi f_0 t+\phi_0)\cdot A_0\sin(2\pi f_0
+t+\phi_0+2\pi f_0\tau) \\
+&amp;= A_0^2\sin^2(2\pi f_0 t+\phi_0)\cdot \cos(2\pi f_0\tau) +
+A_0^2\sin(2\pi f_0 t+\phi_0)\cos(2\pi f_0 t+\phi_0)\cdot \cos(2\pi
+f_0\tau) \\
+&amp;= \frac{1}{2}A_0^2 (1 - \cos(2(2\pi f_0 t+\phi_0)))\cdot \cos(2\pi
+f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi
+f_0\tau) \\
+&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) -
+\frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) +
+\frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau)
+\end{align}\]</span></p>
+<p>And substitute <span class="math inline">\(y(t)y(t+\tau)\)</span> in
+<span class="math inline">\(\mathrm{R}(\tau)\)</span></p>
+<p><span class="math display">\[\begin{align}
+\mathrm{R}(\tau) &amp;= \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T}
+y(t)y(t+\tau)dt \\
+&amp;= \lim _{T\to \infty}\int_{-T}^{T} \left[\frac{1}{2}A_0^2\cdot
+\cos(2\pi f_0\tau) - \frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot
+\cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot
+\cos(2\pi f_0\tau)\right]dt \\
+&amp; = \lim _{T\to \infty}\int_{-T}^{T} \frac{1}{2}A_0^2\cdot \cos(2\pi
+f_0\tau) dt \\
+&amp;= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau)
+\end{align}\]</span></p>
+<p>Taking Fourier transform of <span
+class="math inline">\(\mathrm{R}(\tau)\)</span>, PSD is</p>
+<p><span class="math display">\[
+S_y(f) = \frac{1}{4}A_0^2 \delta(f-f_0) + \frac{1}{4}A_0^2 \delta(f+f_0)
+\]</span></p>
+<blockquote>
+<p>Remember</p>
+<p><img src="/2023/11/10/random/image-20240718210137344.png"
+alt="image-20240718210137344" /> <span class="math display">\[
+\cos(2\pi f_0t) \overset{\mathcal{F}}{\longrightarrow}
+\frac{1}{2}[\delta(f -f_0)+\delta(f+f_0)]
+\]</span></p>
+</blockquote>
+<blockquote>
+<p>Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS
+Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
+2020)</p>
+</blockquote>
 
     </div>
 

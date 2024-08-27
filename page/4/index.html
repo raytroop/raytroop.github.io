@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,131 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/29/scattering/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/29/scattering/" class="post-title-link" itemprop="url">Scattering parameters</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-29 15:57:01" itemprop="dateCreated datePublished" datetime="2023-09-29T15:57:01+00:00">2023-09-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -351,7 +226,7 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -485,7 +360,7 @@ Integrity (SPI)</em> (2018): 1-4.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -684,7 +559,7 @@ vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -853,7 +728,7 @@ repo</a>]</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1079,7 +954,7 @@ target="_blank" rel="noopener" href="https://people.engr.tamu.edu/spalermo/ecen6
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1172,7 +1047,7 @@ target="_blank" rel="noopener" href="https://github.com/git/git/blob/master/Docu
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1283,7 +1158,7 @@ target="_blank" rel="noopener" href="https://github.com/lnis-uofu/tsmc_template/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1452,7 +1327,7 @@ target="_blank" rel="noopener" href="http://ece-research.unm.edu/jimp/vlsi/slide
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1573,7 +1448,7 @@ in IEEE Circuits and Devices Magazine, vol. 17, no. 4, pp. 14-21, July
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-27 10:36:01" itemprop="dateModified" datetime="2024-08-27T10:36:01+00:00">2024-08-27</time>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1662,6 +1537,274 @@ target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/ids-338j-multid
 <p>Karti Mayaram, ECE 521 Fall 2016 Analog Circuit Simulation,
 Sensitivity and noise analyses [<a
 target="_blank" rel="noopener" href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf</a>]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/09/gate-resistance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/09/gate-resistance/" class="post-title-link" itemprop="url">Gate Resistance</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-09 10:23:12" itemprop="dateCreated datePublished" datetime="2023-07-09T10:23:12+00:00">2023-07-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-27 15:10:58" itemprop="dateModified" datetime="2024-08-27T15:10:58+00:00">2024-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="/2023/07/09/gate-resistance/image-20230709102848934.png"
+alt="image-20230709102848934" /></p>
+<h2 id="transit-frequency-f_t">Transit frequency <span
+class="math inline">\(f_T\)</span></h2>
+<blockquote>
+<p>aka <strong>cut-off frequency</strong></p>
+</blockquote>
+<h2 id="gate-thermal-noise">Gate (thermal) noise</h2>
+<p><img src="/2023/07/09/gate-resistance/image-20230709210517475.png"
+alt="image-20230709210517475" /></p>
+<p><img src="/2023/07/09/gate-resistance/image-20230709211309265.png"
+alt="image-20230709211309265" /></p>
+<p><img src="/2023/07/09/gate-resistance/image-20230709202930102.png"
+alt="image-20230709202930102" /></p>
+<h3 id="two-side-poly-contact-folding">Two-Side Poly Contact &amp;
+folding</h3>
+<p><img src="/2023/07/09/gate-resistance/image-20230709212015293.png"
+alt="image-20230709212015293" /></p>
+<p>Both scheme yield a total distributed resistance of <span
+class="math inline">\(R_G/4\)</span> for gate noise calculation</p>
+<h4 id="folding">folding</h4>
+<p>finger 0 <span class="math display">\[\begin{align}
+\overline{i_{tot,0}^2} &amp;= \left(\frac{g_m}{2}
+\right)^2(4kT\frac{R_G/2}{3}) \\
+&amp;= g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{2^2\cdot 2}
+\end{align}\]</span></p>
+<p>similarly finger 1 <span class="math display">\[
+\overline{i_{tot,1}^2} =
+g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{2^2\cdot 2}
+\]</span> Assuming uncorrelated <span class="math display">\[
+\overline{i_{tot}^2} = \sum_{N=0}^1\overline{i_{tot,N}^2}
+=g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{2^2\cdot 2} \cdot 2 =
+g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{2^2}
+\]</span> Generally <span class="math display">\[
+\overline{i_{tot}^2} = g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{N^2}
+\]</span> where the gate is decomposed into <span
+class="math inline">\(N\)</span> parallel fingers</p>
+<h4 id="two-side-poly-contact">two-side poly contact</h4>
+<p><img src="/2023/07/09/gate-resistance/1678671319799.png"
+alt="No alt text provided for this image" /></p>
+<p><strong>We fracture Gate poly at the center point, then we obtain 2
+segments, both have same <span
+class="math inline">\(\frac{g_m}{2}\)</span> and <span
+class="math inline">\(R_G/2\)</span>.</strong></p>
+<p>The derivation procedure is same with folding structure, i.e. plug
+<span class="math inline">\(N=2\)</span> into <span
+class="math inline">\(\overline{i_{tot}^2} =
+g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{N^2}\)</span></p>
+<p>That is <span class="math display">\[
+\overline{i_{tot}^2} = g_m^2\left(4kT\frac{R_G}{12}\right)
+\]</span> The input referred noise of gate resistance <span
+class="math display">\[
+\overline{V_{nRG}^2} = 4kT\frac{R_G}{12}
+\]</span></p>
+<h3 id="four-equal-gate-fingers">four equal gate fingers</h3>
+<p><img src="/2023/07/09/gate-resistance/image-20230709212818351.png"
+alt="image-20230709212818351" /></p>
+<p><span class="math display">\[
+\overline{i_{tot}^2} = g_m^2\left(4kT\frac{R_G}{3}\right)\frac{1}{4^2}
+\]</span> Then <span class="math display">\[
+\overline{V_{nRG}^2} = \frac{\overline{i_{tot}^2}}{g_m^2}
+=4kT\frac{R_G}{48}
+\]</span></p>
+<h2 id="gate-resistance-handling-by-parasitic-extraction-tools">Gate
+resistance handling by parasitic extraction tools</h2>
+<p>They fracture the poly line at the intersection with the active
+(diffusion) layer, breaking it into <strong>"gate poly"(poly over
+active)</strong> and <strong>"field poly" (poly outside
+active)</strong></p>
+<blockquote>
+<p>gploy, fpoly</p>
+</blockquote>
+<p><img src="/2023/07/09/gate-resistance/1678670859052.png"
+alt="No alt text provided for this image" /></p>
+<p>Gate poly is also fractured at the center point. Gate instance pin of
+the MOSFET (SPICE model) is connected to the center point of the gate
+poly. <strong>Gate poly is described by two parasitic resistors,
+connecting the fracture points</strong>.</p>
+<p><img src="/2023/07/09/gate-resistance/image-20230709222642979.png"
+alt="image-20230709222642979" /></p>
+<p>MOSFET extrinsic parasitic capacitance between gate poly and source /
+drain diffusion and contacts is calculated by parasitic extraction
+tools, and assigned to the nodes of the resistive networks.</p>
+<p>Different extraction tools do this differently - some tools connect
+these parasitic capacitances to the center point of the gate poly, while
+some other tools connect them to the end points of the gate poly
+resistors.</p>
+<h2 id="delta-gate-model"><span class="math inline">\(\Delta\)</span>
+gate model</h2>
+<blockquote>
+<p>This distributed network has a different AC and transient response
+than a simple lumped one-R and one-C circuit.</p>
+<p>It was shown [B. Razavi] that such RC network behaves approximately
+the same as a network with one R and one C element, where <em>C is the
+total capacitance</em>, and R=1/3 * W/L <em>rsh for single-side
+connected poly, and R=1/12 </em> W/L * rsh for double-sided connected
+poly.</p>
+<p>These coefficients - 1/3 and 1/12 - effectively enable an accurate
+reduced order model for the gate, reducing a large number of R and C
+elements to two (or three) resistors and one capacitor.</p>
+</blockquote>
+<p><strong>Gate Delta Model</strong>: where a gate is described by two
+positive and one negative resistors</p>
+<p><img src="/2023/07/09/gate-resistance/image-20230709214200878.png"
+alt="image-20230709214200878" /></p>
+<blockquote>
+<p>only applicable to contacts on gate overhangs</p>
+<p>invalid for self-aligned gate contacts, where gate contact land
+directly on top of gate, not gate overhang</p>
+</blockquote>
+<p><img src="/2023/07/09/gate-resistance/1678672522997.png"
+alt="No alt text provided for this image" /></p>
+<ol type="1">
+<li><p>1-side gate contact <span class="math display">\[
+R_{eq,1side} =R_1 \parallel (R_2+R_1)= \frac{R_G}{6}\parallel
+(-\frac{R_G}{2}+\frac{R_G}{6})=\frac{R_G}{3}
+\]</span></p></li>
+<li><p>2-side contact <span class="math display">\[
+R_{eq,2side}= R_1 \parallel R_1 = \frac{R_G}{6}\parallel \frac{R_G}{6} =
+\frac{R_G}{12}
+\]</span></p></li>
+</ol>
+<blockquote>
+<p>Some SPICE simulators have problems handling <em>negative
+resistors</em>, that's possibly why this model did not get a wide
+adoption. Some foundries and PDKs support delta gate model, while some
+others don't.</p>
+</blockquote>
+<h2 id="vertical-component-of-gate-resistance">Vertical component of
+gate resistance</h2>
+<p>In "old" technologies (pre-16nm), gate resistance was dominated by
+lateral resistance. However, in advanced technologies, multiple
+interfaces between gate material layers lead to a large vertical gate
+resistance.</p>
+<p><img src="/2023/07/09/gate-resistance/1678686425859.png"
+alt="No alt text provided for this image" /></p>
+<blockquote>
+<p>It's very easy to check this in DSPF file - if gate instance pin is
+connected directly to the center of the gate poly - vertical resistance
+is not accounted for. If it is connected by a positive resistor to the
+center of the gate poly - that resistors represents the vertical gate
+resistance.</p>
+</blockquote>
+<h2 id="decap">decap</h2>
+<p><img src="/2023/07/09/gate-resistance/decap-res.drawio.svg"
+alt="decap-res.drawio" /></p>
+<p>leakage current is determined by <span class="math inline">\(R_s +
+R_p\)</span>, and <span class="math inline">\(R_p \gg R_s\)</span></p>
+<ul>
+<li>low freq: <span class="math inline">\(Z=R_s + R_p\)</span></li>
+<li>high freq: <span class="math inline">\(Z=R_s\)</span></li>
+</ul>
+<blockquote>
+<p>An example: <span class="math inline">\(R_s=200 \ohm\)</span>, <span
+class="math inline">\(R_p = 8 M\ohm\)</span> and <span
+class="math inline">\(C_\text{gate}=10fF\)</span></p>
+</blockquote>
+<p><img src="/2023/07/09/gate-resistance/image-20240729205410196.png"
+alt="image-20240729205410196" /></p>
+<h2 id="reference">reference</h2>
+<p>⭐ B. Razavi, Y. Ran, and K. F. Lee, “Impact of Distributed Gate
+Resistance on the Performance of MOS Devices,” IEEE Trans. Circuits and
+Systems, Part I, pp. 750–754, Nov. 1994.</p>
+<p>⭐ Maxim Ershov, Diakopto. "Gate Resistance in IC design flow", [<a
+target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/gate-resistance-ic-design-flow-maxim-ershov">link</a>,
+<a
+target="_blank" rel="noopener" href="https://diakopto.com/wp-content/uploads/Gate-Resistance-in-IC-design-flow.pdf">pdf</a>]</p>
+<p>Saha, Samar K.. “FinFET Devices for VLSI Circuits and Systems.”
+(2020).</p>
+<p>Harpe, Pieter J. A., Andrea Baschirotto and Kofi A. A. Makinwa.
+“Hybrid ADCs, Smart sensors for the IoT, and Sub-1V and Advanced node
+analog circuit design: Advances in Analog Circuit Design 2017.”
+(2018).</p>
+<p>Chauhan, Yogesh Singh. FinFET Modeling for IC Simulation and Design:
+Using the BSIM-CMG Standard. London, UK: Academic Press, 2015.</p>
+<p>A.J.Sholten et al., "FinFET compact modelling for analogue and RF
+applications", IEDM'2010, p.190.</p>
+<p>W. Wu and M. Chan, “Gate resistance modeling of multifin MOS
+devices,” IEEE Electron Device Letters, vol. 27, no. 1, pp. 68-70, Jan.
+2006.</p>
+<p>A. L. S. Loke, C. K. Lee and B. M. Leary, "Nanoscale CMOS
+Implications on Analog/Mixed-Signal Design," 2019 IEEE Custom Integrated
+Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi:
+10.1109/CICC.2019.8780267.</p>
 
       
     </div>

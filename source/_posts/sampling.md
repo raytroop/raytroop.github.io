@@ -22,55 +22,6 @@ The sampling process mathematically in the two stages:
 
 
 
-
-
-## Aliasing & Sampling Theorem
-
-The frequencies $f_{\text{sig}}$ and $N· f_s ±f_{\text{sig}}$ (N integer), are **indistinguishable** in the **discrete time domain**.
-
-![image-20220626000016184](sampling/image-20220626000016184.png)
-
-> In order to prevent aliasing, we need $f_{\text{sig,max}}\lt \frac{f_s}{2}$. The sampling rate $f_s=2\cdot f_{\text{sig,max}}$ is called the **Nyquist Rate**.
->
-> Two solution possibilities
->
-> 1.  Sample fast enough to cover all spectral components, including "parasitic" ones outside band of interest
-> 2.  Limit $f_{\text{sig,max}}$ through filtering - Filter out "parasitic" ones 
-
-
-
-Given below sequence
-$$
-X[n] =A e^{j\omega _0 T_s n}
-$$
-
-1. $kf_s + \Delta f$
-
-$$\begin{align}
-x[n] &= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left( -kf_s-\Delta f \right)2\pi T_sn} \\
-&= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
-\end{align}$$
-
-2. $kf_s - \Delta f$
-
-$$\begin{align}
-x[n] &= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left( -kf_s+\Delta f \right)2\pi T_sn} \\
-&= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
-\end{align}$$
-
-> With sampling frequency $\frac{1}{T_s}$, continuous signal of $\frac{1}{2T_s}+\Delta f$ and  $-\frac{1}{2T_s}+\Delta f$ can not be distinguished
-> *real signal*
-
-![image-20230518232314980](sampling/image-20230518232314980.png)
-
-
-
-> Generally, The frequencies $f_{\text{sig}}$ and $N· f_s ±f_{\text{sig}}$ (N integer), are **indistinguishable** in the **discrete time domain**.
-
-
-
-
-
 ## impulse train modulator
 
 ![image-20230519000740312](sampling/image-20230519000740312.png)
@@ -255,6 +206,50 @@ H(e^{j\omega}) = H_c\left(j\frac{\omega}{T}\right)
 $$
 
 
+## Aliasing & Sampling Theorem
+
+The frequencies $f_{\text{sig}}$ and $N· f_s ±f_{\text{sig}}$ (N integer), are **indistinguishable** in the **discrete time domain**.
+
+![image-20220626000016184](sampling/image-20220626000016184.png)
+
+> In order to prevent aliasing, we need $f_{\text{sig,max}}\lt \frac{f_s}{2}$. The sampling rate $f_s=2\cdot f_{\text{sig,max}}$ is called the **Nyquist Rate**.
+>
+> Two solution possibilities
+>
+> 1.  Sample fast enough to cover all spectral components, including "parasitic" ones outside band of interest
+> 2.  Limit $f_{\text{sig,max}}$ through filtering - Filter out "parasitic" ones 
+
+
+
+Given below sequence
+$$
+X[n] =A e^{j\omega _0 T_s n}
+$$
+
+1. $kf_s + \Delta f$
+
+$$\begin{align}
+x[n] &= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left( -kf_s-\Delta f \right)2\pi T_sn} \\
+&= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
+\end{align}$$
+
+2. $kf_s - \Delta f$
+
+$$\begin{align}
+x[n] &= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left( -kf_s+\Delta f \right)2\pi T_sn} \\
+&= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
+\end{align}$$
+
+> With sampling frequency $\frac{1}{T_s}$, continuous signal of $\frac{1}{2T_s}+\Delta f$ and  $-\frac{1}{2T_s}+\Delta f$ can not be distinguished
+> *real signal*
+
+![image-20230518232314980](sampling/image-20230518232314980.png)
+
+
+
+> Generally, The frequencies $f_{\text{sig}}$ and $N· f_s ±f_{\text{sig}}$ (N integer), are **indistinguishable** in the **discrete time domain**.
+
+
 
 
 
@@ -286,11 +281,11 @@ $$
 
 **Question**:
 
-​	How to obtain continuous system transfer function from sampled impulse
+​How to obtain continuous system transfer function from sampled impulse
 
 **Answer**:
 
-​	using above mentioned functions
+​using above mentioned functions
 
 ---
 

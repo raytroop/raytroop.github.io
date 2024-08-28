@@ -74,7 +74,7 @@ $$
 
 
 
-Our eventual objective is to express $X(e^{j\omega})$, the *discrete-time Fourier transform (DTFT) of the sequence $x[n]$*, in terms of $X_s(j\Omega)$ and $X_c(j\Omega)$. 
+Our eventual objective is to express $X(e^{j\omega})$, the **discrete-time Fourier transform (DTFT) of the sequence $x[n]$**, in terms of $X_s(j\Omega)$ and $X_c(j\Omega)$. 
 
 Toward this end, let us consider an alternative expression for $X_s(j\Omega)$,  Applying the continuous-time Fourier transform to $x_s(t) = \sum_{n=-\infty}^{+\infty}x_c(nT)\delta (t-nT)$, we obtain
 $$

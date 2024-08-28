@@ -164,6 +164,11 @@ where $V_{i,sig}$ is constant signal applied to input of comparator
 
 
 
+## comparator noise vs input common voltage
+
+*TODO* &#128197;
+
+> higher input common voltage -> greater slew rate -> higher noise (input referred comparator noise)
 
 
 

@@ -43,7 +43,7 @@ Although the temperature dependence of the bias current $I_b$ doesn’t impact t
 
 ![image-20221106010909644](t-sensor/image-20221106010909644.png)
 
-## PTAT bias current generation
+## PTAT bias current
 
 ![image-20221023150817411](t-sensor/image-20221023150817411.png)
 $$
@@ -61,6 +61,8 @@ $\mu_n$ is **complementary to the absolute temperature** and resitor R is implem
 $$
 I_{bias}\propto  T
 $$
+
+> Kamath, Umanath Ramachandra. "BJT Based Precision Voltage Reference in FinFET Technology." (2021).
 
 ## Errors due to V-I Finite Gain
 
@@ -262,8 +264,6 @@ Assuming the opamp is implemented as a **transconductance amplifier**, there are
 ## reference
 
 Micheal, A., P., Pertijs., Johan, H., Huijsing., Pertijs., Johan, H., Huijsing. (2006). Precision Temperature Sensors in CMOS Technology.   
-
-Kamath, Umanath Ramachandra. "BJT Based Precision Voltage Reference in FinFET Technology." (2021).
 
 C. -H. Chang, J. -J. Horng, A. Kundu, C. -C. Chang and Y. -C. Peng, "An ultra-compact, untrimmed CMOS bandgap reference with 3σ inaccuracy of +0.64% in 16nm FinFET," 2014 IEEE Asian Solid-State Circuits Conference (A-SSCC), 2014, pp. 165-168, doi: 10.1109/ASSCC.2014.7008886.
 

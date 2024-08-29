@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Common Innovus Commands</title>
-    <url>/2022/02/07/Common-Innovus-Commands/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Common-Innovus-Commands.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Second-Order System</title>
     <url>/2024/01/06/2nd-sys/</url>
     <content><![CDATA[<h2 id="overview">overview</h2>
@@ -154,6 +145,15 @@ Pearson.</em></p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Common Innovus Commands</title>
+    <url>/2022/02/07/Common-Innovus-Commands/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Common-Innovus-Commands.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
       </categories>
   </entry>
   <entry>
@@ -748,18 +748,18 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Fix DRC Violation</title>
-    <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
+    <title>Innovus Floorplan</title>
+    <url>/2022/02/07/Innovus-floorplan/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Floorplan</title>
-    <url>/2022/02/07/Innovus-floorplan/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_floorplan.pdf" data-height="500px"></div>
+    <title>Innovus Fix DRC Violation</title>
+    <url>/2022/02/07/Innovus-fix-DRC-violation/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clearDrc</span><br><span class="line">set drc_marker_file calibre_drc_markers.err</span><br><span class="line">loadViolationReport -type Calibre -filename $drc_marker_file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foreach marker_id [dbGet -p -e top.markers.userOriginator Calibre] &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">editSelect -area [dbget $object.box] -layer M4</span><br><span class="line"></span><br><span class="line">dbSet [dbGet -p top.nets.name $net ].wires.status routed</span><br><span class="line"></span><br><span class="line">editTrim -selected</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2642,6 +2642,29 @@ href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">h
       </categories>
   </entry>
   <entry>
+    <title>Arithmetic in Verilog</title>
+    <url>/2022/05/29/arthmetic-verilog/</url>
+    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>1'b1</code>: overflow</p>
+</blockquote>
+<h4 id="signed-signed-signed">signed + signed = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code>: overflow</p>
+<p><code>2'b10</code>: underflow</p>
+</blockquote>
+<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Asynchronous SAR ADC</title>
     <url>/2024/08/20/async-sar/</url>
     <content><![CDATA[<blockquote>
@@ -2733,29 +2756,6 @@ href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-71.pdf">http://
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Arithmetic in Verilog</title>
-    <url>/2022/05/29/arthmetic-verilog/</url>
-    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>1'b1</code>: overflow</p>
-</blockquote>
-<h4 id="signed-signed-signed">signed + signed = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code>: overflow</p>
-<p><code>2'b10</code>: underflow</p>
-</blockquote>
-<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -4354,152 +4354,6 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
       </categories>
   </entry>
   <entry>
-    <title>Zero(DC component) and Nyquist Component in FFT</title>
-    <url>/2022/05/14/dc-nyquist-fft/</url>
-    <content><![CDATA[<h2 id="dc-offset">DC offset</h2>
-<p>Performing FFT to a signal with a <em>large DC offset</em> would
-often result in a big impulse around frequency 0 Hz, thus masking out
-the signals of interests with relatively small amplitude.</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
-alt="Remove_DC_Offset_Blog_10" /></p>
-<p>One method to remove DC offset from the original signal before
-performing FFT</p>
-<ul>
-<li>Subtracting the Mean of Original Signal</li>
-</ul>
-<p>You can also not filter the input, but set zero to the zero frequency
-point for FFT result.</p>
-<h2 id="nyquist-component">Nyquist component</h2>
-<p>If we go back to the definition of the DFT <span
-class="math display">\[
-X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
-(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
-\]</span> which is a real number.</p>
-<p>The discrete function <span class="math display">\[
-x[n]=\cos(\pi n)
-\]</span> is always <span class="math inline">\((-1)^n\)</span> for
-integer <span class="math inline">\(n\)</span></p>
-<p>One general sinusoid at Nyquist and has phase shift <span
-class="math inline">\(\theta\)</span>, this is <span
-class="math inline">\(T=2\)</span> and <span
-class="math inline">\(T_s=1\)</span></p>
-<p><span class="math display">\[\begin{align}
-x[n] &amp;= A \cos(\pi n + \theta) \\
-     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
-\big) \\
-     &amp;= \big(A\cos(\theta)\big) \cos(\pi
-n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
-     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
-\cdot 0 \\
-     &amp;= B \cdot (-1)^n \\
-\end{align}\]</span></p>
-<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
-<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
-n)\)</span>, then <span class="math display">\[
-B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
-\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
-<p>In other words, you <strong>CAN'T</strong> infer the signal from
-<span class="math inline">\(X(\frac{N}{2})\)</span> <span
-class="math display">\[\begin{align}
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
-\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2}
-\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
-- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
-\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
-\sin(\pi n) \right) \\
-&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
-\cos(\pi n+\theta)
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
-you <strong>wouldn't</strong> know it because <span
-class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
-\mathbb{Z}\)</span></p>
-<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
-\]</span> However, if <span
-class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
-class="math display">\[
-X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
-\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
-\]</span></p>
-<p>That sort of ambiguity is the reason for the <strong>strict
-inequality</strong> of the sampling theorem's condition.</p>
-<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
-<p><strong>Both edges</strong> is used for clock waveform to evaluate
-the duty cycle distortion,</p>
-<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
-DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
-below</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
-alt="image-20220516224616908" /></p>
-<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
-component, which is <strong>0.1</strong> in follow figure</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
-alt="image-20220516233618663" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>);</span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
-Spectrum</h2>
-<p>DC and Nyquist frequency of FFT left over</p>
-<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency</span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period</span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2.</span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1)</span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
-alt="image-20220514221609734" /></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
-alt="image-20220514221642170" /></p>
-<h2 id="alternative-view">Alternative View</h2>
-<p>The direct current (DC) bin (<span
-class="math inline">\(k=0\)</span>) and the bin at <span
-class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
-the Nyquist frequency are <strong>purely real and unique</strong>.</p>
-<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
-amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
-plot is shown as below with sampling frequency is <span
-class="math inline">\(20Hz\)</span></p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
-alt="image-20220427172526711" /></p>
-<p>Amplitude and Phase spectrum, sampled with <span
-class="math inline">\(f_s=20\)</span> Hz</p>
-<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
-alt="image-20220427174557915" /></p>
-<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
-<strong>1</strong> and its phase is <strong>0</strong> as shown as
-above, which proves the DFT and IDFT.</p>
-<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
-Parseval's theorem), which may not be the power of continuous signal.
-The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
-<strong>1</strong>, that of corresponding continuous signal is <span
-class="math inline">\(\frac{1}{2}\)</span>.</p>
-<p>Power spectrum derived from FFT provide information of samples, i.e.
-<strong>1</strong></p>
-<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
-[1 1 1 1 ...].</p>
-<h3 id="code">code</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
-href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
-<p>How to remove DC component in FFT? URL: <a
-href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
-<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
-seem to work unless there is a phase shift URL: <a
-href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
-<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
-href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
-<p>Why remove energy at Nyquist before ifft? URL: <a
-href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Delta-Sigma Data Converters</title>
     <url>/2024/08/20/delta-sigma/</url>
     <content><![CDATA[<h2 id="reference">reference</h2>
@@ -4889,6 +4743,152 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_win
       </categories>
   </entry>
   <entry>
+    <title>Zero(DC component) and Nyquist Component in FFT</title>
+    <url>/2022/05/14/dc-nyquist-fft/</url>
+    <content><![CDATA[<h2 id="dc-offset">DC offset</h2>
+<p>Performing FFT to a signal with a <em>large DC offset</em> would
+often result in a big impulse around frequency 0 Hz, thus masking out
+the signals of interests with relatively small amplitude.</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/Remove_DC_Offset_Blog_10.png"
+alt="Remove_DC_Offset_Blog_10" /></p>
+<p>One method to remove DC offset from the original signal before
+performing FFT</p>
+<ul>
+<li>Subtracting the Mean of Original Signal</li>
+</ul>
+<p>You can also not filter the input, but set zero to the zero frequency
+point for FFT result.</p>
+<h2 id="nyquist-component">Nyquist component</h2>
+<p>If we go back to the definition of the DFT <span
+class="math display">\[
+X(N/2)=\sum_{n=0}^{N-1}x[n]e^{-j2\pi
+(N/2)n/2}=\sum_{n=0}^{N-1}x[n]e^{-j\pi n}=\sum_{n=0}^{N-1}x[n](-1)^n
+\]</span> which is a real number.</p>
+<p>The discrete function <span class="math display">\[
+x[n]=\cos(\pi n)
+\]</span> is always <span class="math inline">\((-1)^n\)</span> for
+integer <span class="math inline">\(n\)</span></p>
+<p>One general sinusoid at Nyquist and has phase shift <span
+class="math inline">\(\theta\)</span>, this is <span
+class="math inline">\(T=2\)</span> and <span
+class="math inline">\(T_s=1\)</span></p>
+<p><span class="math display">\[\begin{align}
+x[n] &amp;= A \cos(\pi n + \theta) \\
+     &amp;= A \big( \cos(\pi n) \cos(\theta) - \sin(\pi n) \sin(\theta)
+\big) \\
+     &amp;= \big(A\cos(\theta)\big) \cos(\pi
+n)  +  \big(-A\sin(\theta)\big) \sin(\pi n) \\
+     &amp;= \big(A\cos(\theta)\big) (-1)^n  +  \big(-A\sin(\theta)\big)
+\cdot 0 \\
+     &amp;= B \cdot (-1)^n \\
+\end{align}\]</span></p>
+<p>Where <span class="math inline">\(A\cos(\theta)=B\)</span>.</p>
+<p>Moreover <span class="math inline">\(B \cdot (-1)^n = B\cdot \cos(\pi
+n)\)</span>, then <span class="math display">\[
+B\cdot \cos(\pi n) =  A \cdot \cos(\pi n + \theta)
+\]</span> We can <strong>NOT</strong> distinguish one from another.</p>
+<p>In other words, you <strong>CAN'T</strong> infer the signal from
+<span class="math inline">\(X(\frac{N}{2})\)</span> <span
+class="math display">\[\begin{align}
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}} &amp;=
+\frac{X\left(\frac{N}{2} \right)}{N}(-1)^n  \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\cos(\pi n)  \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}\left( \cos(\pi n) - \beta
+\sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2}
+\right)}{N}\sqrt{1+\beta^2}\left(\frac{1}{\sqrt{1+\beta^2}} \cos(\pi n)
+- \frac{\beta}{\sqrt{1+\beta^2}} \sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N}
+\frac{1}{\cos(\theta)}\left(\cos(\theta) \cos(\pi n) - \sin(\theta)
+\sin(\pi n) \right) \\
+&amp;= \frac{X\left(\frac{N}{2} \right)}{N} \frac{1}{\cos(\theta)}
+\cos(\pi n+\theta)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\beta \in \mathbb{R}\)</span> and
+you <strong>wouldn't</strong> know it because <span
+class="math inline">\(\sin(\pi n)=0 \quad \forall n \in
+\mathbb{Z}\)</span></p>
+<p>For example, if <span class="math inline">\(\theta=0\)</span> <span
+class="math display">\[
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
+\frac{X\left(\frac{N}{2} \right)}{N} \cos(\pi n)
+\]</span> However, if <span
+class="math inline">\(\theta=\frac{\pi}{3}\)</span> <span
+class="math display">\[
+X(k)\frac{1}{N}e^{j 2 \pi \frac{nk}{N}}\bigg|_{k=\frac{N}{2}}=
+\frac{X\left(\frac{N}{2} \right)}{N}\cdot 2 \cos(\pi n+\frac{\pi}{3})
+\]</span></p>
+<p>That sort of ambiguity is the reason for the <strong>strict
+inequality</strong> of the sampling theorem's condition.</p>
+<h3 id="duty-cycle-distortion">Duty Cycle Distortion</h3>
+<p><strong>Both edges</strong> is used for clock waveform to evaluate
+the duty cycle distortion,</p>
+<p>Assuming TIE is <code>[0 0.2 0 0.2 0 0.2 ...]</code>, then subtract
+DC offset, we get <code>[-0.1 0.1 -0.1 0.1 ...]</code>, shown as
+below</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516224616908.png"
+alt="image-20220516224616908" /></p>
+<p>The amplitude is manifested in FFT amplitude spectrum, i.e. Nyquist
+component, which is <strong>0.1</strong> in follow figure</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220516233618663.png"
+alt="image-20220516233618663" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">32</span>;</span><br><span class="line">n = (<span class="number">1</span>:N);</span><br><span class="line">x = <span class="number">0.1</span>*(<span class="number">-1</span>).^n;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line">stem(n<span class="number">-1</span>, x);</span><br><span class="line">X = fft(x)/N;</span><br><span class="line">Xshift = fftshift(X);</span><br><span class="line">fprintf(<span class="string">&quot;nyquist component: %.2f\n&quot;</span>, Xshift(<span class="number">1</span>));</span><br><span class="line">magXshift = <span class="built_in">abs</span>(Xshift);</span><br><span class="line">ph = phase(Xshift)/<span class="built_in">pi</span>*<span class="number">180</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">fx = (-N/<span class="number">2</span>:N/<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">stem(fx, magXshift);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|X(k)|&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;mag of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">stem(fx, ph);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;\angle X(k)(^oC)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;phase of DFT&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% inverse dft</span></span><br><span class="line">ninv = (<span class="number">0</span>:<span class="number">32</span><span class="number">-1</span>);</span><br><span class="line">xinv = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninv);</span><br><span class="line">subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">stem(ninv, x, <span class="string">&quot;filled&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">stem(ninv, xinv,<span class="string">&#x27;bd-.&#x27;</span>);</span><br><span class="line">ninfer = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">32</span>+<span class="number">1</span>);</span><br><span class="line">xinfer1 = Xshift(<span class="number">1</span>)*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer); <span class="comment">% theta = 0</span></span><br><span class="line">xinfer2 = Xshift(<span class="number">1</span>)*<span class="number">2</span>*<span class="built_in">cos</span>(<span class="built_in">pi</span>*ninfer+<span class="built_in">pi</span>/<span class="number">3</span>); <span class="comment">% theta = pi/3</span></span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer1, <span class="string">&#x27;m--&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(ninfer, xinfer2, <span class="string">&#x27;c--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;IDFT&#x27;</span>, <span class="string">&#x27;\theta=0&#x27;</span>, <span class="string">&#x27;\theta=\pi/3&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;time&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;sample points&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+<h2 id="single-sided-amplitude-spectrum">Single-Sided Amplitude
+Spectrum</h2>
+<p>DC and Nyquist frequency of FFT left over</p>
+<p><code>P1(2:end-1) = 2*P1(2:end-1);</code></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Fs = <span class="number">1000</span>;            <span class="comment">% Sampling frequency</span></span><br><span class="line">T = <span class="number">1</span>/Fs;             <span class="comment">% Sampling period</span></span><br><span class="line">L = <span class="number">1500</span>;             <span class="comment">% Length of signal</span></span><br><span class="line">t = (<span class="number">0</span>:L<span class="number">-1</span>)*T;        <span class="comment">% Time vector</span></span><br><span class="line">S = <span class="number">0.7</span>*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">120</span>*t);</span><br><span class="line">X = S + <span class="number">2</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1000</span>*t(<span class="number">1</span>:<span class="number">50</span>),X(<span class="number">1</span>:<span class="number">50</span>))</span><br><span class="line">title(<span class="string">&#x27;Signal Corrupted with Zero-Mean Random Noise&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;t (milliseconds)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;X(t)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">Y = fft(X);</span><br><span class="line">P2 = <span class="built_in">abs</span>(Y/L);      <span class="comment">%!!! two-sided spectrum P2.</span></span><br><span class="line">P1 = P2(<span class="number">1</span>:L/<span class="number">2</span>+<span class="number">1</span>);   <span class="comment">%!!! single-sided spectrum P1</span></span><br><span class="line">P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>) = <span class="number">2</span>*P1(<span class="number">2</span>:<span class="keyword">end</span><span class="number">-1</span>);	<span class="comment">% exclude DC and Nyquist freqency</span></span><br><span class="line">f = Fs*(<span class="number">0</span>:(L/<span class="number">2</span>))/L;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f,P1)</span><br><span class="line">title(<span class="string">&#x27;Single-Sided Amplitude Spectrum of X(t)&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;f (Hz)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;|P1(f)|&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221609734.png"
+alt="image-20220514221609734" /></p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220514221642170.png"
+alt="image-20220514221642170" /></p>
+<h2 id="alternative-view">Alternative View</h2>
+<p>The direct current (DC) bin (<span
+class="math inline">\(k=0\)</span>) and the bin at <span
+class="math inline">\(k=N/2\)</span>, i.e., the bin that corresponds to
+the Nyquist frequency are <strong>purely real and unique</strong>.</p>
+<p>sinusoidal waveform with <span class="math inline">\(10Hz\)</span>,
+amplitude 1 is <span class="math inline">\(cos(2\pi f_c t)\)</span>. The
+plot is shown as below with sampling frequency is <span
+class="math inline">\(20Hz\)</span></p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427172526711.png"
+alt="image-20220427172526711" /></p>
+<p>Amplitude and Phase spectrum, sampled with <span
+class="math inline">\(f_s=20\)</span> Hz</p>
+<p><img src="/2022/05/14/dc-nyquist-fft/image-20220427174557915.png"
+alt="image-20220427174557915" /></p>
+<p>The FFT magnitude of <span class="math inline">\(10Hz\)</span> is
+<strong>1</strong> and its phase is <strong>0</strong> as shown as
+above, which proves the DFT and IDFT.</p>
+<p><strong>Caution:</strong> the power of FFT is related to samples (DFT
+Parseval's theorem), which may not be the power of continuous signal.
+The average power of samples is ([1 -1 1 -1 -1 1 ...]) is
+<strong>1</strong>, that of corresponding continuous signal is <span
+class="math inline">\(\frac{1}{2}\)</span>.</p>
+<p>Power spectrum derived from FFT provide information of samples, i.e.
+<strong>1</strong></p>
+<p>Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC
+[1 1 1 1 ...].</p>
+<h3 id="code">code</h3>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">fc = <span class="number">10</span>;</span><br><span class="line">fs = <span class="number">2</span>*fc;</span><br><span class="line">fov = <span class="number">64</span>*fc;</span><br><span class="line"></span><br><span class="line">ts = (<span class="number">0</span>:<span class="number">1</span>/fs:<span class="number">26</span>);</span><br><span class="line">tov = (<span class="number">0</span>:<span class="number">1</span>/fov:<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">ys = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*ts);</span><br><span class="line">yov = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>*fc*tov);</span><br><span class="line"><span class="comment">%% waveform</span></span><br><span class="line">stem(ts, ys)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(tov, yov);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sample&#x27;</span>, <span class="string">&#x27;waveform&#x27;</span>)</span><br><span class="line">ylim([<span class="number">-1.5</span> <span class="number">1.5</span>])</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;time(s)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag(V)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nfft = <span class="number">256</span>;</span><br><span class="line">X = fftshift(fft(ys, nfft))/nfft;</span><br><span class="line">f = (-nfft/<span class="number">2</span>:nfft/<span class="number">2</span><span class="number">-1</span>)*fs/nfft;</span><br><span class="line">magX = <span class="built_in">abs</span>(X);</span><br><span class="line">phsX = <span class="built_in">atan2</span>(<span class="built_in">imag</span>(X),<span class="built_in">real</span>(X));</span><br><span class="line"><span class="comment">%% fft spectrum</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">stem(f, magX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Amplitude spectrum&#x27;</span>)</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(f, phsX);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;phase (rad)&#x27;</span>)</span><br><span class="line">xlim([<span class="built_in">min</span>(f)<span class="number">-1</span> <span class="built_in">max</span>(f)+<span class="number">1</span>])</span><br><span class="line">title(<span class="string">&#x27;Phase spectrum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%% power spectrum</span></span><br><span class="line">yssq_sum_avg = sum(ys(<span class="number">1</span>:nfft).^<span class="number">2</span>)/nfft;</span><br><span class="line">specsq_sum_avg = sum(<span class="built_in">abs</span>(X).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>OriginLab, How to Remove DC Offset before Performing FFT URL: <a
+href="http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft">http://blog.originlab.com/how-to-remove-dc-offset-before-performing-fft</a></p>
+<p>How to remove DC component in FFT? URL: <a
+href="https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373">https://www.mathworks.com/matlabcentral/answers/712808-how-to-remove-dc-component-in-fft#answer_594373</a></p>
+<p>Analyzing a signal that contains frequency content at Fs/2 doesn't
+seem to work unless there is a phase shift URL: <a
+href="https://dsp.stackexchange.com/a/59807/59253">https://dsp.stackexchange.com/a/59807/59253</a></p>
+<p>Nyquist–Shannon sampling theorem, Critical frequency URL: <a
+href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency">https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem#Critical_frequency</a></p>
+<p>Why remove energy at Nyquist before ifft? URL: <a
+href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com/a/22851/59253</a></p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Jitters Simulation</title>
     <url>/2022/05/16/dj-rj/</url>
     <content><![CDATA[<p><img src="/2022/05/16/dj-rj/image-20220516004008878.png"
@@ -5174,6 +5174,21 @@ class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_
       </categories>
   </entry>
   <entry>
+    <title>different DSPF files for each corner</title>
+    <url>/2023/01/29/dspf-in-corner/</url>
+    <content><![CDATA[<p>Create a new file with an extension <strong>scs</strong> like
+<em>myDSPF_Files.scs</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* DSPF files to use with Corner Definitions</span><br><span class="line">* This is an example file showing how to define different dspf files for different corners</span><br><span class="line">* using model files for individual components as the</span><br><span class="line">* building blocks.</span><br><span class="line">simulator lang=spectre</span><br><span class="line">library dspf_files_corners</span><br><span class="line"></span><br><span class="line">section rctyp_25</span><br><span class="line">dspf_include &quot;DSPF_RC_TYPNOM25.spf&quot;</span><br><span class="line">endsection rctyp_25</span><br><span class="line"></span><br><span class="line">section rctyp_125</span><br><span class="line">dspf_include &quot;DSPF_RC_TYP125.spf&quot;</span><br><span class="line">endsection rctyp_125</span><br><span class="line"></span><br><span class="line">section rcworst_25</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE25.spf&quot;</span><br><span class="line">end section rcworst_25</span><br><span class="line"></span><br><span class="line">section rcworst_125</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE125.spf&quot;</span><br><span class="line">end section rcworst_125</span><br><span class="line"></span><br><span class="line">endlibrary dspf_files_corners</span><br></pre></td></tr></table></figure>
+<p>Add the file created above ‘<em>myDSPF_File.scs</em>’ in
+‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
+<p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
+alt="image-20230129223248655" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Pole-Zero Doublet</title>
     <url>/2022/12/14/doublet/</url>
     <content><![CDATA[<p>Mismatch between the pole and zero frequencies leads to the
@@ -5313,21 +5328,6 @@ href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>different DSPF files for each corner</title>
-    <url>/2023/01/29/dspf-in-corner/</url>
-    <content><![CDATA[<p>Create a new file with an extension <strong>scs</strong> like
-<em>myDSPF_Files.scs</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* DSPF files to use with Corner Definitions</span><br><span class="line">* This is an example file showing how to define different dspf files for different corners</span><br><span class="line">* using model files for individual components as the</span><br><span class="line">* building blocks.</span><br><span class="line">simulator lang=spectre</span><br><span class="line">library dspf_files_corners</span><br><span class="line"></span><br><span class="line">section rctyp_25</span><br><span class="line">dspf_include &quot;DSPF_RC_TYPNOM25.spf&quot;</span><br><span class="line">endsection rctyp_25</span><br><span class="line"></span><br><span class="line">section rctyp_125</span><br><span class="line">dspf_include &quot;DSPF_RC_TYP125.spf&quot;</span><br><span class="line">endsection rctyp_125</span><br><span class="line"></span><br><span class="line">section rcworst_25</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE25.spf&quot;</span><br><span class="line">end section rcworst_25</span><br><span class="line"></span><br><span class="line">section rcworst_125</span><br><span class="line">dspf_include &quot;DSPF_RC_WORSE125.spf&quot;</span><br><span class="line">end section rcworst_125</span><br><span class="line"></span><br><span class="line">endlibrary dspf_files_corners</span><br></pre></td></tr></table></figure>
-<p>Add the file created above ‘<em>myDSPF_File.scs</em>’ in
-‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
-<p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
-alt="image-20230129223248655" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -7219,22 +7219,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
       </categories>
   </entry>
   <entry>
-    <title>Add endcap and tapcell in Innovus</title>
-    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
-    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
-following code to add endcap and tapcell.</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
-alt="endcap_tapcell_floorplan.drawio" /></p>
-<p><strong>REF:</strong> <a
-href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Effective Noise BandWidth and Noise Floor</title>
     <url>/2023/05/29/enbw-nl/</url>
     <content><![CDATA[<h2 id="ps-and-psd">PS and PSD</h2>
@@ -7544,6 +7528,22 @@ Converters, Second Edition" ISBN 978-1-119-25827-8</p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Add endcap and tapcell in Innovus</title>
+    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
+    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
+following code to add endcap and tapcell.</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
+alt="endcap_tapcell_floorplan.drawio" /></p>
+<p><strong>REF:</strong> <a
+href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
       </categories>
   </entry>
   <entry>
@@ -8919,6 +8919,266 @@ alt="pma_dig_bumps.drawio" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
+    <url>/2022/06/10/isf-sampler/</url>
+    <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
+periodic AC (PAC) analysis, which is available from RF circuit
+simulators such as SpectreRF and ADS</p>
+<h2 id="isf">ISF</h2>
+<h3 id="linear-time-varying-system-theory">Linear Time-varying System
+Theory</h3>
+<p>We define the ISF of the sampler as the sensitivity of its final
+output voltage to the impulse arriving at its input at different times,
+the ISF essentially describes the aperture of the sampler.</p>
+<p>An ideal sampler would have the perfect aperture, i.e. sampling the
+input voltage at exactly one point in time; thus, its ISF would be a
+Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
+where <span class="math inline">\(t_s\)</span> is when sampling
+occurs.</p>
+<p>A realistic sampler would rather capture a weighted-average of the
+input voltage over a certain time window. This weighting function is
+called the sampling aperture and is equivalent to the ISF</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
+alt="image-20220610235211500" /></p>
+<p>A <strong>time-varying impulse response</strong> <span
+class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
+response at time <span class="math inline">\(t\)</span> responding to an
+impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
+<p>In general, the ISF can be regarded as the <strong>time-varying
+impulse response</strong> evaluated at <em>one particular observation
+time</em> <span class="math inline">\(t=t_0\)</span>.</p>
+<p>The system output <span class="math inline">\(y(t)\)</span> is
+related to the input <span class="math inline">\(x(t)\)</span> as: <span
+class="math display">\[
+y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
+\]</span> Note that in a linear time-invariant (LTI) system, <span
+class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
+equation reduces to a convolution.</p>
+<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
+transform of the input signal <span class="math inline">\(x(t)\)</span>,
+i.e. <span class="math display">\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
+t}d\omega
+\]</span> Then <span class="math display">\[\begin{align}
+y(t) &amp;=
+\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
+e^{j\omega\tau }d\omega \right]\cdot d\tau \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{j\omega\tau}d\tau\right]\cdot d\omega \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
+H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
+<strong>time-varying transfer function</strong>, defined as the Fourier
+transform of the time-varying impulse response. <span
+class="math display">\[
+H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau
+\]</span> And it follows that: <span class="math display">\[
+Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
+\]</span> And</p>
+<p><span class="math display">\[\begin{align}
+x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
+h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
+\end{align}\]</span></p>
+<p>For linear, periodically time-varying (LPTV) systems, <span
+class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
+class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
+<span class="math inline">\(T\)</span> is the period of the time-varying
+dynamics of the system.</p>
+<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
+t+T)\)</span>:</p>
+<p><span class="math display">\[\begin{align}
+\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau \\
+\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
+e^{-j\omega(t+T-\tau)}d\tau \\
+&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
+e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
+&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
+e^{-j\omega(t-\tau)}d\tau \\
+&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
+\\
+&amp;= H(j\omega;t)
+\end{align}\]</span></p>
+<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
+<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
+in <span class="math inline">\(T\)</span>, The time-varying transfer
+function <span class="math inline">\(H(j\omega;t)\)</span> can be
+expressed in a Fourier series: <span class="math display">\[
+H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
+t}
+\]</span> where <span class="math inline">\(\omega_c\)</span> is the
+fundamental frequency of the periodic system. <span
+class="math inline">\(H_m(j\omega)\)</span> represent the frequency
+response of the system at the <em>(m-th)</em> harmonic output sideband
+to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
+<blockquote>
+<p>The above equation link time-varying transfer function <span
+class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
+output</p>
+</blockquote>
+<p>The response to a periodic impulse train, that is: <span
+class="math display">\[
+x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
+\]</span> The idea is that if the impulse response of the system settles
+to zero long before the next impulse arrives, then the system response
+to this impulse train would be approximately equal to the periodic
+repetition of the true impulse response, i.e.: <span
+class="math display">\[
+y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
+\]</span> and <span class="math inline">\(y(t)\)</span> would be
+approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
+for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
+<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
+alt="yt.drawio" /></p>
+<blockquote>
+<p>Without loss of generality and for computation convenience, we set
+<span class="math inline">\(k=1\)</span> thereafter.</p>
+</blockquote>
+<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
+of the <strong>T-periodic</strong> impulse train is: <span
+class="math display">\[
+X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
+e^{-j\omega\tau}
+\]</span> Then the response <span class="math inline">\(y(t)\)</span>
+is: <span class="math display">\[
+y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
+e^{jn\omega_c\cdot(t-\tau)}
+\]</span> The expression for the approximate time-varying impulse
+response: <span class="math display">\[
+h(t,\tau) = \left\{ \begin{array}{cl}
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
+e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
+0 &amp; : \ \text{elsewhere}
+\end{array} \right.
+\]</span> Finally, the ISF <span
+class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
+class="math inline">\(h(t,\tau)\)</span> when <span
+class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
+\gt \tau\)</span> <span class="math display">\[
+\Gamma(\tau)\cong
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
+e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
+\]</span> In practice, the summations are carried out over finite ranges
+of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
+<p>For each combination of <strong>n</strong> and <strong>m</strong>,
+the PAC analysis needs to be performed to compute <span
+class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
+response to the excitation at <span
+class="math inline">\(n\omega_c\)</span></p>
+<p>The detailed procedure for characterizing the ISF of this sampler is
+outlined as follows:</p>
+<ul>
+<li><p>First, apply the proper input voltages that place the sampler in
+a metastable state and perform the periodic steady-state (PSS)
+analysis.</p></li>
+<li><p>Second, perform the PAC analysis.</p></li>
+<li><p>Third, based on the simulated PAC response, pick a time point
+<span class="math inline">\(t_0\)</span> at which the ISF is to be
+computed and derive the ISF</p></li>
+</ul>
+<p>One possible candidate for the ISF measurement point <span
+class="math inline">\(t_0\)</span> is the time at which the output
+voltage is amplified to the largest value. PAC response of the sampler
+to a small signal DC input, that is, the time-varying transfer function
+evaluated at <span class="math inline">\(\omega=0\)</span> <span
+class="math display">\[
+H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
+\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
+alt="image-20220614214446328" /></p>
+<blockquote>
+<p>The total area under the ISF is the sampling gain, which is equal to
+the time-varying gain measured at <span
+class="math inline">\(t_0\)</span></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
+<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
+log</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
+alt="image-20220614214537033" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
+<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
+<p>Since both are frequency originated, time-shift is NOT needed</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
+alt="image-20220614214613574" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="remarks">Remarks</h3>
+<p><strong>pss pac setup</strong></p>
+<ul>
+<li>clock frequency should be low enough to assure system response
+settle to zero.</li>
+<li>Beat Frequency os PSS should be clock frequency</li>
+<li>For PAC setup,
+<ul>
+<li>the <code>Sweeptype</code> is <code>absolute</code></li>
+<li><code>Input Frequency Sweep Range(Hz)</code> should be large
+enough.</li>
+<li><code>Sweep Type</code> should be <code>Linear</code> and
+<code>Step Size</code> should equal <strong>PSS Beat
+Frequency(Hz)</strong></li>
+<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
+positive, negative and 0)</li>
+<li><code>Specialized Analyses</code> should be <code>None</code></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
+sweep from -400G to 400G and step is 8G, which is beat frequency, here
+K=1 Eq.(9) of paper</p>
+</blockquote>
+<blockquote>
+<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
+affect "Direct Plot"'s output but also simuation data i.e. the phase
+shift(imaginary part).</p>
+</blockquote>
+<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
+<p><code>transpose</code>, <code>.'</code> cf.
+https://www.mathworks.com/help/matlab/ref/transpose.html</p>
+<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
+<p>Using shooting PSS, the steady waveform starts from
+<code>tstab+n*tperiod</code>.</p>
+<ul>
+<li><strong>pss_td.pss</strong> is one period waveform starting from
+<code>tstab+n*tperiod</code></li>
+<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
+coefficient of expanded to left and right <strong>pss_td.pss</strong>
+waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
+</ul>
+<blockquote>
+<p>We have to left-shift <code>mod(tstab, tperiod)</code>
+<code>pss_fd.pss</code> in order to align it with of
+<strong>pss_tb.pss</strong></p>
+</blockquote>
+<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
+alt="image-20220610222535614" /></p>
+<h3 id="simulation-log">simulation log</h3>
+<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
+time, though <code>Stop Time(tstab)</code> field of pss form is filled
+with <code>0.3n</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="pss-simulation-result">PSS simulation result</h3>
+<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
+alt="image-20220610224100135" /></p>
+<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
+<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
+alt="image-20220610225310243" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
+function analysis of periodic circuits," 2008 IEEE/ACM International
+Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
+10.1109/ICCAD.2008.4681602.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Circuit insight</title>
     <url>/2023/01/01/insight/</url>
     <content><![CDATA[<h2 id="r-2r-c-2c">R-2R &amp; C-2C</h2>
@@ -9979,266 +10239,6 @@ href="https://www.edn.com/burn-in-101/">link</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
-    <url>/2022/06/10/isf-sampler/</url>
-    <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
-periodic AC (PAC) analysis, which is available from RF circuit
-simulators such as SpectreRF and ADS</p>
-<h2 id="isf">ISF</h2>
-<h3 id="linear-time-varying-system-theory">Linear Time-varying System
-Theory</h3>
-<p>We define the ISF of the sampler as the sensitivity of its final
-output voltage to the impulse arriving at its input at different times,
-the ISF essentially describes the aperture of the sampler.</p>
-<p>An ideal sampler would have the perfect aperture, i.e. sampling the
-input voltage at exactly one point in time; thus, its ISF would be a
-Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
-where <span class="math inline">\(t_s\)</span> is when sampling
-occurs.</p>
-<p>A realistic sampler would rather capture a weighted-average of the
-input voltage over a certain time window. This weighting function is
-called the sampling aperture and is equivalent to the ISF</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
-alt="image-20220610235211500" /></p>
-<p>A <strong>time-varying impulse response</strong> <span
-class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
-response at time <span class="math inline">\(t\)</span> responding to an
-impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
-<p>In general, the ISF can be regarded as the <strong>time-varying
-impulse response</strong> evaluated at <em>one particular observation
-time</em> <span class="math inline">\(t=t_0\)</span>.</p>
-<p>The system output <span class="math inline">\(y(t)\)</span> is
-related to the input <span class="math inline">\(x(t)\)</span> as: <span
-class="math display">\[
-y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
-\]</span> Note that in a linear time-invariant (LTI) system, <span
-class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
-equation reduces to a convolution.</p>
-<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
-transform of the input signal <span class="math inline">\(x(t)\)</span>,
-i.e. <span class="math display">\[
-x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
-t}d\omega
-\]</span> Then <span class="math display">\[\begin{align}
-y(t) &amp;=
-\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-e^{j\omega\tau }d\omega \right]\cdot d\tau \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{j\omega\tau}d\tau\right]\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
-<strong>time-varying transfer function</strong>, defined as the Fourier
-transform of the time-varying impulse response. <span
-class="math display">\[
-H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau
-\]</span> And it follows that: <span class="math display">\[
-Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
-\]</span> And</p>
-<p><span class="math display">\[\begin{align}
-x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
-h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
-\end{align}\]</span></p>
-<p>For linear, periodically time-varying (LPTV) systems, <span
-class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
-class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
-<span class="math inline">\(T\)</span> is the period of the time-varying
-dynamics of the system.</p>
-<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
-t+T)\)</span>:</p>
-<p><span class="math display">\[\begin{align}
-\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
-e^{-j\omega(t+T-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
-\\
-&amp;= H(j\omega;t)
-\end{align}\]</span></p>
-<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
-<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
-in <span class="math inline">\(T\)</span>, The time-varying transfer
-function <span class="math inline">\(H(j\omega;t)\)</span> can be
-expressed in a Fourier series: <span class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
-t}
-\]</span> where <span class="math inline">\(\omega_c\)</span> is the
-fundamental frequency of the periodic system. <span
-class="math inline">\(H_m(j\omega)\)</span> represent the frequency
-response of the system at the <em>(m-th)</em> harmonic output sideband
-to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
-<blockquote>
-<p>The above equation link time-varying transfer function <span
-class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
-output</p>
-</blockquote>
-<p>The response to a periodic impulse train, that is: <span
-class="math display">\[
-x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
-\]</span> The idea is that if the impulse response of the system settles
-to zero long before the next impulse arrives, then the system response
-to this impulse train would be approximately equal to the periodic
-repetition of the true impulse response, i.e.: <span
-class="math display">\[
-y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
-\]</span> and <span class="math inline">\(y(t)\)</span> would be
-approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
-for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
-<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
-alt="yt.drawio" /></p>
-<blockquote>
-<p>Without loss of generality and for computation convenience, we set
-<span class="math inline">\(k=1\)</span> thereafter.</p>
-</blockquote>
-<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
-of the <strong>T-periodic</strong> impulse train is: <span
-class="math display">\[
-X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
-e^{-j\omega\tau}
-\]</span> Then the response <span class="math inline">\(y(t)\)</span>
-is: <span class="math display">\[
-y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
-e^{jn\omega_c\cdot(t-\tau)}
-\]</span> The expression for the approximate time-varying impulse
-response: <span class="math display">\[
-h(t,\tau) = \left\{ \begin{array}{cl}
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
-0 &amp; : \ \text{elsewhere}
-\end{array} \right.
-\]</span> Finally, the ISF <span
-class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
-class="math inline">\(h(t,\tau)\)</span> when <span
-class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
-\gt \tau\)</span> <span class="math display">\[
-\Gamma(\tau)\cong
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
-\]</span> In practice, the summations are carried out over finite ranges
-of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
-<p>For each combination of <strong>n</strong> and <strong>m</strong>,
-the PAC analysis needs to be performed to compute <span
-class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
-response to the excitation at <span
-class="math inline">\(n\omega_c\)</span></p>
-<p>The detailed procedure for characterizing the ISF of this sampler is
-outlined as follows:</p>
-<ul>
-<li><p>First, apply the proper input voltages that place the sampler in
-a metastable state and perform the periodic steady-state (PSS)
-analysis.</p></li>
-<li><p>Second, perform the PAC analysis.</p></li>
-<li><p>Third, based on the simulated PAC response, pick a time point
-<span class="math inline">\(t_0\)</span> at which the ISF is to be
-computed and derive the ISF</p></li>
-</ul>
-<p>One possible candidate for the ISF measurement point <span
-class="math inline">\(t_0\)</span> is the time at which the output
-voltage is amplified to the largest value. PAC response of the sampler
-to a small signal DC input, that is, the time-varying transfer function
-evaluated at <span class="math inline">\(\omega=0\)</span> <span
-class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
-\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
-alt="image-20220614214446328" /></p>
-<blockquote>
-<p>The total area under the ISF is the sampling gain, which is equal to
-the time-varying gain measured at <span
-class="math inline">\(t_0\)</span></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
-log</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
-alt="image-20220614214537033" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
-<p>Since both are frequency originated, time-shift is NOT needed</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
-alt="image-20220614214613574" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="remarks">Remarks</h3>
-<p><strong>pss pac setup</strong></p>
-<ul>
-<li>clock frequency should be low enough to assure system response
-settle to zero.</li>
-<li>Beat Frequency os PSS should be clock frequency</li>
-<li>For PAC setup,
-<ul>
-<li>the <code>Sweeptype</code> is <code>absolute</code></li>
-<li><code>Input Frequency Sweep Range(Hz)</code> should be large
-enough.</li>
-<li><code>Sweep Type</code> should be <code>Linear</code> and
-<code>Step Size</code> should equal <strong>PSS Beat
-Frequency(Hz)</strong></li>
-<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
-positive, negative and 0)</li>
-<li><code>Specialized Analyses</code> should be <code>None</code></li>
-</ul></li>
-</ul>
-<blockquote>
-<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
-sweep from -400G to 400G and step is 8G, which is beat frequency, here
-K=1 Eq.(9) of paper</p>
-</blockquote>
-<blockquote>
-<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
-affect "Direct Plot"'s output but also simuation data i.e. the phase
-shift(imaginary part).</p>
-</blockquote>
-<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
-<p><code>transpose</code>, <code>.'</code> cf.
-https://www.mathworks.com/help/matlab/ref/transpose.html</p>
-<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
-<p>Using shooting PSS, the steady waveform starts from
-<code>tstab+n*tperiod</code>.</p>
-<ul>
-<li><strong>pss_td.pss</strong> is one period waveform starting from
-<code>tstab+n*tperiod</code></li>
-<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
-coefficient of expanded to left and right <strong>pss_td.pss</strong>
-waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
-</ul>
-<blockquote>
-<p>We have to left-shift <code>mod(tstab, tperiod)</code>
-<code>pss_fd.pss</code> in order to align it with of
-<strong>pss_tb.pss</strong></p>
-</blockquote>
-<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
-alt="image-20220610222535614" /></p>
-<h3 id="simulation-log">simulation log</h3>
-<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
-time, though <code>Stop Time(tstab)</code> field of pss form is filled
-with <code>0.3n</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h3 id="pss-simulation-result">PSS simulation result</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
-alt="image-20220610224100135" /></p>
-<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
-alt="image-20220610225310243" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
-function analysis of periodic circuits," 2008 IEEE/ACM International
-Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
-10.1109/ICCAD.2008.4681602.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -12185,6 +12185,97 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
       </categories>
   </entry>
   <entry>
+    <title>Network Analysis</title>
+    <url>/2023/09/29/network/</url>
+    <content><![CDATA[<p><img src="/2023/09/29/network/image-20240704212740246.png"
+alt="image-20240704212740246" /></p>
+<h2 id="rational-fit">Rational Fit</h2>
+<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
+<p>To resolve the convergence problem of s-parameter in Spectre
+simulator - <code>rationalfit</code> and write Verilog-A</p>
+<p><img src="/2023/09/29/network/image-20220630224525565.png"
+alt="image-20220630224525565" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="z0">Z0</h2>
+<blockquote>
+<p>Remember, S-parameters <strong>don't mean much</strong> unless you
+know the value of the <strong>reference impedance </strong>(it's
+frequently called Z0).</p>
+</blockquote>
+<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
+<p><img src="/2023/09/29/network/image-20220430214052538.png"
+alt="image-20220430214052538" /></p>
+<p><img src="/2023/09/29/network/image-20220430214136970.png"
+alt="image-20220430214136970" /></p>
+<p><img src="/2023/09/29/network/image-20220430214419283.png"
+alt="image-20220430214419283" /></p>
+<blockquote>
+<p>The default <strong>Z0</strong> exported by EMX is
+<strong>50</strong></p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p><a
+href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
+S-parameters
+(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
+<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
+Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
+<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
+rational function approximation algorithm for model generation.
+Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
+doi:10.1109/dac.1999.781313</p>
+<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
+Checker and Rational Fit Model Generator [<a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
+<p>The Complex Art Of Handling S-Parameters: The importance of
+extraction and fitting to circuit simulation involving S-parameters [<a
+href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Non ideal capacitor and inductor</title>
+    <url>/2023/12/24/nonideal-LC/</url>
+    <content><![CDATA[<h2 id="conversion-relationships">Conversion Relationships</h2>
+<h3 id="capacitor">Capacitor</h3>
+<p><img src="/2023/12/24/nonideal-LC/image-20231224163730529.png"
+alt="image-20231224163730529" /></p>
+<hr />
+<p><img src="/2023/12/24/nonideal-LC/image-20240119000951498.png"
+alt="image-20240119000951498" /></p>
+<p><img src="/2023/12/24/nonideal-LC/image-20240119001025892.png"
+alt="image-20240119001025892" /></p>
+<p><img src="/2023/12/24/nonideal-LC/image-20240119001309410.png"
+alt="image-20240119001309410" /></p>
+<h3 id="inductor">Inductor</h3>
+<p><img src="/2023/12/24/nonideal-LC/image-20231224163740411.png"
+alt="image-20231224163740411" /></p>
+<h3 id="derivation">Derivation</h3>
+<p><img src="/2023/12/24/nonideal-LC/image-20231224163905233.png"
+alt="image-20231224163905233" /></p>
+<p><img src="/2023/12/24/nonideal-LC/image-20231224163916109.png"
+alt="image-20231224163916109" /></p>
+<h2 id="series-or-parallel-representation">series or parallel
+representation</h2>
+<h2 id="reference">reference</h2>
+<p>Tank Circuits/Impedances [<a
+href="https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf">https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf</a>]</p>
+<p>Resonant Circuits [<a
+href="https://web.ece.ucsb.edu/~long/ece145b/Resonators.pdf">https://web.ece.ucsb.edu/~long/ece145b/Resonators.pdf</a>]</p>
+<p>Series &amp; Parallel Impedance Parameters and Equivalent Circuits
+[<a
+href="https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf">https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf</a>]</p>
+<p>ES Lecture 35: Non ideal capacitor, Capacitor Q and series RC to
+parallel RC conversion [<a
+href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo">https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Noise Analysis</title>
     <url>/2024/04/27/noise/</url>
     <content><![CDATA[<h2 id="sampled-thermal-noise">Sampled Thermal Noise</h2>
@@ -12352,97 +12443,6 @@ href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~m
 ]]></content>
       <categories>
         <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Non ideal capacitor and inductor</title>
-    <url>/2023/12/24/nonideal-LC/</url>
-    <content><![CDATA[<h2 id="conversion-relationships">Conversion Relationships</h2>
-<h3 id="capacitor">Capacitor</h3>
-<p><img src="/2023/12/24/nonideal-LC/image-20231224163730529.png"
-alt="image-20231224163730529" /></p>
-<hr />
-<p><img src="/2023/12/24/nonideal-LC/image-20240119000951498.png"
-alt="image-20240119000951498" /></p>
-<p><img src="/2023/12/24/nonideal-LC/image-20240119001025892.png"
-alt="image-20240119001025892" /></p>
-<p><img src="/2023/12/24/nonideal-LC/image-20240119001309410.png"
-alt="image-20240119001309410" /></p>
-<h3 id="inductor">Inductor</h3>
-<p><img src="/2023/12/24/nonideal-LC/image-20231224163740411.png"
-alt="image-20231224163740411" /></p>
-<h3 id="derivation">Derivation</h3>
-<p><img src="/2023/12/24/nonideal-LC/image-20231224163905233.png"
-alt="image-20231224163905233" /></p>
-<p><img src="/2023/12/24/nonideal-LC/image-20231224163916109.png"
-alt="image-20231224163916109" /></p>
-<h2 id="series-or-parallel-representation">series or parallel
-representation</h2>
-<h2 id="reference">reference</h2>
-<p>Tank Circuits/Impedances [<a
-href="https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf">https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf</a>]</p>
-<p>Resonant Circuits [<a
-href="https://web.ece.ucsb.edu/~long/ece145b/Resonators.pdf">https://web.ece.ucsb.edu/~long/ece145b/Resonators.pdf</a>]</p>
-<p>Series &amp; Parallel Impedance Parameters and Equivalent Circuits
-[<a
-href="https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf">https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf</a>]</p>
-<p>ES Lecture 35: Non ideal capacitor, Capacitor Q and series RC to
-parallel RC conversion [<a
-href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo">https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Network Analysis</title>
-    <url>/2023/09/29/network/</url>
-    <content><![CDATA[<p><img src="/2023/09/29/network/image-20240704212740246.png"
-alt="image-20240704212740246" /></p>
-<h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/network/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/network/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/network/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/network/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
       </categories>
   </entry>
   <entry>
@@ -14217,26 +14217,6 @@ href="https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob">https://youtu.be/uwRpP20
       </categories>
   </entry>
   <entry>
-    <title>questasim sim flow</title>
-    <url>/2022/02/02/questasim-sim/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>-voptargs=+acc</code>: Add the option
-<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
-full visibility into every aspect of the design.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><strong>uvm</strong>:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
-<p><strong>reference</strong>:</p>
-<p>A Short Intro to ModelSim Verilog Simulator URL: <a
-href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Power Spectra and Power Spectral Densities</title>
     <url>/2022/04/18/ps-psd/</url>
     <content><![CDATA[<p>One will see the following phenomena:</p>
@@ -14669,6 +14649,26 @@ Press. doi:10.1017/CBO9780511835261</p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>questasim sim flow</title>
+    <url>/2022/02/02/questasim-sim/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog -f filelist tb.sv</span><br><span class="line"># &quot;-c&quot;: command line mode</span><br><span class="line">vsim -voptargs=+acc -c -do &quot;run 100ns; exit&quot; work.topmodule</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-voptargs=+acc</code>: Add the option
+<code>-voptargs=+acc</code> to the <em>vsim</em> command, This enables
+full visibility into every aspect of the design.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> topmodule;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><strong>uvm</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2</span><br><span class="line">&gt; vsim -c -do &quot;run -all;exit&quot; +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2</span><br></pre></td></tr></table></figure>
+<p><strong>reference</strong>:</p>
+<p>A Short Intro to ModelSim Verilog Simulator URL: <a
+href="https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator">https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -16037,31 +16037,6 @@ href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L1
       </categories>
   </entry>
   <entry>
-    <title>SystemVerilog iff</title>
-    <url>/2022/06/21/sv-iff/</url>
-    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<p>is equivalent to</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>iff</code> is more efficient than <code>if</code> because the
-expression is recalculated when <code>vld</code> transition rather than
-<code>clk</code>.</p>
-</blockquote>
-<p>One example, detecting the negative edge of
-<code>rtr_io.cb.frameo_n[da]</code></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
-alt="image-20220621182019927" /></p>
-<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
-<p><strong>reference</strong></p>
-<p>system verilog中的iff, URL: <a
-href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Signal and System insight</title>
     <url>/2024/05/02/ss-insight/</url>
     <content><![CDATA[<h2 id="energy-signals-vs-power-signal">Energy signals vs Power
@@ -16700,6 +16675,31 @@ href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://c
       </categories>
   </entry>
   <entry>
+    <title>SystemVerilog iff</title>
+    <url>/2022/06/21/sv-iff/</url>
+    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<p>is equivalent to</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>iff</code> is more efficient than <code>if</code> because the
+expression is recalculated when <code>vld</code> transition rather than
+<code>clk</code>.</p>
+</blockquote>
+<p>One example, detecting the negative edge of
+<code>rtr_io.cb.frameo_n[da]</code></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
+alt="image-20220621182019927" /></p>
+<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
+<p><strong>reference</strong></p>
+<p>system verilog中的iff, URL: <a
+href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
     <url>/2022/03/16/sv-rnm-101/</url>
     <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
@@ -16833,6 +16833,9 @@ href="https://ww1.microchip.com/downloads/en/Appnotes/Atmel-8108-Calibration-of-
 </blockquote>
 <h2 id="v_be-curvature"><span class="math inline">\(V_{BE}\)</span>
 curvature</h2>
+<blockquote>
+<p><em>curvature</em> results in results in <em>non-linearity</em></p>
+</blockquote>
 <p>Though it is assumed that <span class="math inline">\(V_{BE}\)</span>
 is a linear function of temperature for first oder analysis.</p>
 <p>In practice, <span class="math inline">\(V_{BE}\)</span> is
@@ -17104,193 +17107,6 @@ href="https://inst.eecs.berkeley.edu/~ee247/fa09/files07/lectures/L24_2_f09.pdf"
 <p>Hecht, Bruce. (2010). SSCS DL Kofi Makinwa Talks About Smart Sensor
 Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2.
 54 - 56. 10.1109/MSSC.2009.935278.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>T-coil</title>
-    <url>/2022/03/17/tcoil/</url>
-    <content><![CDATA[<ul>
-<li>Broaden the bandwidth</li>
-<li>Create a constant, resistive input impedance in the presence of a
-heavy load capacitance (ESD protection circuit)</li>
-</ul>
-<blockquote>
-<p>L<sub>1</sub> = L<sub>2</sub> for impedance matching</p>
-</blockquote>
-<p>The use of T-coils can dramatically increase the
-<strong>bandwidth</strong> and improve the <strong>return loss</strong>
-in both TXs and RXs.</p>
-<p><img src="/2022/03/17/tcoil/image-20240712234028634.png"
-alt="image-20240712234028634" /></p>
-<blockquote>
-<p><em>equivalent circuit</em></p>
-<p><img src="/2022/03/17/tcoil/image-20240713001415948.png"
-alt="image-20240713001415948" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713011127116.png"
-alt="image-20240713011127116" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713011152541.png"
-alt="image-20240713011152541" /></p>
-<p>Note the negative sign of <span class="math inline">\(L_M\)</span>,
-which is a consequence of magnetic coupling; owing to this, the driving
-impedance at the center tap <em>as seen by <span
-class="math inline">\(C\)</span></em> is <strong>lower than without the
-coupling</strong>.</p>
-<p><span class="math display">\[\begin{align}
-Z_{c} &amp;= sL_a/2 -sL_M = sL/2 - sL_M/2 \\
-Z_{noc} &amp;= sL/2
-\end{align}\]</span></p>
-</blockquote>
-<h2 id="bridged-t-coil">Bridged T-Coil</h2>
-<blockquote>
-<p>The vertical stacking of the inductor halves causes a significant
-bridging capacitance <span class="math inline">\(C_B\)</span>​ between
-them.</p>
-<p>The most important aspect is that <span
-class="math inline">\(C_B\)</span> does not prohibit perfect impedance
-matching but can be used to tune certain transfer functions.</p>
-</blockquote>
-<h2 id="tcoil-in-rx">Tcoil in RX</h2>
-<p><img src="/2022/03/17/tcoil/image-20220502201254057.png"
-alt="image-20220502201254057" /></p>
-<blockquote>
-<p><strong>ppwl</strong>: Independent Piece-Wise Linear Resistive
-Source</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220502201321341.png"
-alt="image-20220502201321341" /></p>
-<h2 id="simple-model">simple model</h2>
-<blockquote>
-<p>L1, L2, Km, Cb</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220502215310947.png"
-alt="image-20220502215310947" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220622224842237.png"
-alt="image-20220622224842237" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220622225709712.png"
-alt="image-20220622225709712" /></p>
-<h2 id="lumped-model">lumped model</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">simulator lang=spectre</span><br><span class="line">include &quot;/path/to/INDL0.scs&quot;</span><br><span class="line">subckt for_import(p0 p1 p2 gnd)</span><br><span class="line">	xmod (p0 p1 p2 gnd) INDL0</span><br><span class="line">ends for_import</span><br><span class="line"></span><br><span class="line">x_1 (p_1_1 p_1_2 p_1_3 0) for_import</span><br><span class="line">v_1_1 (p_1_1 0) vsource mag=-1</span><br><span class="line">v_1_2 (p_1_2 0) vsource mag=0</span><br><span class="line">v_1_3 (p_1_3 0) vsource mag=0</span><br><span class="line">save v_1_1:p v_1_2:p v_1_3:p</span><br><span class="line"></span><br><span class="line">x_2 (p_2_1 p_2_2 p_2_3 0) for_import</span><br><span class="line">v_2_1 (p_2_1 0) vsource mag=0</span><br><span class="line">v_2_2 (p_2_2 0) vsource mag=-1</span><br><span class="line">v_2_3 (p_2_3 0) vsource mag=0</span><br><span class="line">save v_2_1:p v_2_2:p v_2_3:p</span><br><span class="line"></span><br><span class="line">x_3 (p_3_1 p_3_2 p_3_3 0) for_import</span><br><span class="line">v_3_1 (p_3_1 0) vsource mag=0</span><br><span class="line">v_3_2 (p_3_2 0) vsource mag=0</span><br><span class="line">v_3_3 (p_3_3 0) vsource mag=-1</span><br><span class="line">save v_3_1:p v_3_2:p v_3_3:p</span><br><span class="line">Y ac start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08</span><br><span class="line"></span><br><span class="line">xsp (p_1 p_2 p_3 0) for_import</span><br><span class="line">port1 (p_1 0) port</span><br><span class="line">port2 (p_2 0) port</span><br><span class="line">port3 (p_3 0) port</span><br><span class="line">S sp start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08 ports=[ port1 port2 port3]</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/17/tcoil/image-20220503005728763.png"
-alt="image-20220503005728763" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220503005903105.png"
-alt="image-20220503005903105" /></p>
-<h3 id="emx_plot_tcoil-in-emxform.ils"><code>EMX_plot_tcoil</code> in
-<code>emxform.ils</code></h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(define (EMX_plot_tcoil bgui wid what)</span><br><span class="line">  (needNCells &#x27;adtComplex 100000)</span><br><span class="line">  (letseq ((to_z (lambda (ys)</span><br><span class="line">		   (letseq ((y11 (EMX_matrix_ref ys 0 0))</span><br><span class="line">			    (y12 (EMX_matrix_ref ys 0 1))</span><br><span class="line">			    (y21 (EMX_matrix_ref ys 1 0))</span><br><span class="line">			    (y22 (EMX_matrix_ref ys 1 1))</span><br><span class="line">			    (det y11*y22-y12*y21)</span><br><span class="line">			    (z11 y22/det)</span><br><span class="line">			    (z12 -y12/det)</span><br><span class="line">			    (z22 y11/det))</span><br><span class="line">		     (list z11 z12 z22))))</span><br><span class="line">	   (ground</span><br><span class="line">	    (lambda (y p)</span><br><span class="line">	      (letseq ((n (EMX_matrix_rows y))</span><br><span class="line">		       (yg (make_EMX_matrix n-1)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n-1))</span><br><span class="line">		  (do ((j 0 j+1))</span><br><span class="line">		      ((j &gt;= n-1))</span><br><span class="line">		    (EMX_matrix_set yg i j (EMX_matrix_ref y i+(if (i &gt;= p) 1 0) j+(if (j &gt;= p) 1 0)))))</span><br><span class="line">		yg)))</span><br><span class="line">	   (reduce</span><br><span class="line">	    (lambda (yys)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec (car yys)))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (yyvecs (mapcar drGetWaveformYVec yys))</span><br><span class="line">		       (zz1 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz2 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz3 (drCreateVec &#x27;doublecomplex n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (let ((ys (mapcar (lambda (w) (drGetElem w i)) yyvecs)))</span><br><span class="line">		    (setq ys (ground (as_EMX_matrix 3 3 ys) 2))</span><br><span class="line">		    (let ((zz (to_z ys)))</span><br><span class="line">		      (drSetElem zz1 i (nth 0 zz))</span><br><span class="line">		      (drSetElem zz2 i (nth 1 zz))</span><br><span class="line">		      (drSetElem zz3 i (nth 2 zz)))))</span><br><span class="line">		(list (drCreateWaveform xvec zz1)</span><br><span class="line">		      (drCreateWaveform xvec zz2)</span><br><span class="line">		      (drCreateWaveform xvec zz3)))))</span><br><span class="line">	   (get_k</span><br><span class="line">	    (lambda (l12 l1122)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec l12))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (l12v (drGetWaveformYVec l12))</span><br><span class="line">		       (l1122v (drGetWaveformYVec l1122))</span><br><span class="line">		       (resultv (drCreateVec &#x27;double n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (letseq ((l12i (drGetElem l12v i))</span><br><span class="line">			   (l1122i (drGetElem l1122v i))</span><br><span class="line">			   (kk (if (l1122i &gt; 0.0)</span><br><span class="line">				   l12i/(sqrt l1122i)</span><br><span class="line">				   0.0))</span><br><span class="line">			   (k (if ((abs kk) &lt; 2.0) kk 0.0)))</span><br><span class="line">		    (drSetElem resultv i k)))</span><br><span class="line">		(drCreateWaveform xvec resultv)))))</span><br><span class="line">  (EMX_plot_aux bgui wid what 3</span><br><span class="line">		&#x27;(&quot;Inductance&quot; &quot;Q&quot; &quot;k&quot;)</span><br><span class="line">		&#x27;(&quot;Henry&quot; &quot;&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((zs (reduce ys))</span><br><span class="line">			   (z11 (nth 0 zs))</span><br><span class="line">			   (z12 (nth 1 zs))</span><br><span class="line">			   (z22 (nth 2 zs))</span><br><span class="line">			   (pi 3.14159265358979)</span><br><span class="line">			   (f (xval z11))</span><br><span class="line">			   (l11 (imag z11)/(2*pi*f))</span><br><span class="line">			   (q11 (imag z11)/(real z11))</span><br><span class="line">			   (l12 (imag z12)/(2*pi*f))</span><br><span class="line">			   (l22 (imag z22)/(2*pi*f))</span><br><span class="line">			   (q22 (imag z22)/(real z22))</span><br><span class="line">			   (k (get_k l12 l11*l22)))</span><br><span class="line">		    `((,l11 ,l22) (,q11 ,q22) (,k))))</span><br><span class="line">		&#x27;((&quot;L1&quot; &quot;L2&quot;) (&quot;Q1&quot; &quot;Q2&quot;) (&quot;k&quot;)))))</span><br></pre></td></tr></table></figure>
-<h2 id="tcoil-vs-tapped-inductor">Tcoil vs tapped inductor</h2>
-<p>tcoil and tapped inductor share same EM simulation result, and use
-modelgen with different model formula.</p>
-<p>The relationship is <span class="math display">\[
-L_{\text{sim}} = L1_{\text{sim}}+L2_{\text{sim}}+2\times k_{\text{sim}}
-\times \sqrt{L1_{\text{sim}}\cdot L2_{\text{sim}}}
-\]</span> where <span class="math inline">\(L1_{\text{sim}}\)</span>,
-<span class="math inline">\(L2_{\text{sim}}\)</span> and <span
-class="math inline">\(k_{\text{sim}}\)</span> come from tcoil model
-result, <span class="math inline">\(L_{\text{sim}}\)</span> comes from
-tapped inductor model result</p>
-<blockquote>
-<p><span class="math inline">\(k_{\text{sim}}\)</span> in EMX have
-assumption, induce current from P1 and P2 Given Dot Convention:</p>
-<p>Same direction : k &gt; 0</p>
-<p>Opposite direction : k &lt; 0</p>
-<p>So, the <span class="math inline">\(k_{\text{sim}}\)</span> is
-negative if routing coil in same direction</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20220623013225554.png"
-alt="image-20220623013225554" /></p>
-<p><img src="/2022/03/17/tcoil/image-20220623013923263.png"
-alt="image-20220623013923263" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% EMX - shield tcoil model</span></span><br><span class="line">L1 = csvread(<span class="string">&#x27;./L1sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">L2 = csvread(<span class="string">&#x27;./L2sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">k = csvread(<span class="string">&#x27;./ksim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% EMX - Tapped shield inductor</span></span><br><span class="line">L = csvread(<span class="string">&#x27;./Lsim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">freq = L1(:, <span class="number">1</span>)/<span class="number">1e9</span>;    <span class="comment">% GHz</span></span><br><span class="line">L1 = L1(:, <span class="number">2</span>);</span><br><span class="line">L2 = L2(:, <span class="number">2</span>);</span><br><span class="line">k = -k(:, <span class="number">2</span>);   <span class="comment">% Caution: minus of EMX ksim due to same current direction</span></span><br><span class="line"></span><br><span class="line">L = L(:, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">Lcalc = L1 + L2 + <span class="number">2</span>*k.*(L1.*L2).^<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq, L*<span class="number">1e9</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(freq, Lcalc*<span class="number">1e9</span>, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Inductance (nH)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Tapped inductor model&#x27;</span>, <span class="string">&#x27;tcoil model calc&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="电磁感应定律-electromagnetic-induction">电磁感应定律
-(electromagnetic induction)</h2>
-<p>任何封闭电路中感应电动势大小，等于穿过这一电路磁通量的变化率。 <span
-class="math display">\[
-\epsilon = -\frac{d\Phi_B}{dt}
-\]</span> 其中 <span
-class="math inline">\(\epsilon\)</span>是电动势，单位为伏特</p>
-<p><span
-class="math inline">\(\Phi_B\)</span>是通过电路的磁通量，单位为韦伯</p>
-<p>电动势的方向（公式中的负号）由楞次定律决定</p>
-<blockquote>
-<p><strong>楞次定律</strong>:
-由于磁通量的改变而产生的感应电流，其方向为抗拒磁通量改变的方向。</p>
-</blockquote>
-<blockquote>
-<p>在回路中产生感应电动势的原因是由于通过回路平面的磁通量的<strong>变化</strong>，而不是磁通量本身，即使通过回路的磁通量很大，但只要它不随时间变化，回路中依然不会产生感应电动势。</p>
-</blockquote>
-<h3 id="自感电动势">自感电动势</h3>
-<p>当电流<span
-class="math inline">\(I\)</span>随时间变化时，在线圈中产生的自感电动势为
-<span class="math display">\[
-\epsilon = -L\frac{dI}{dt}
-\]</span></p>
-<p><img src="/2022/03/17/tcoil/image-20240713131201618.png"
-alt="image-20240713131201618" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713145315890.png"
-alt="image-20240713145315890" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713145343423.png"
-alt="image-20240713145343423" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713145005306.png"
-alt="image-20240713145005306" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713145212327.png"
-alt="image-20240713145212327" /></p>
-<hr />
-<p><img src="/2022/03/17/tcoil/image-20240713140911612.png"
-alt="image-20240713140911612" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713135148710.png"
-alt="image-20240713135148710" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713135236291.png"
-alt="image-20240713135236291" /></p>
-<blockquote>
-<p><strong>同名端</strong>：当两个<em>电流</em>分别从两个线圈的对应端子流入
-，其所 产生的磁场相互加强时，则这两个对应端子称为同名端。</p>
-</blockquote>
-<p><img src="/2022/03/17/tcoil/image-20240713142238398.png"
-alt="image-20240713142238398" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713142249362.png"
-alt="image-20240713142249362" /></p>
-<p><img src="/2022/03/17/tcoil/image-20240713142506673.png"
-alt="image-20240713142506673" /></p>
-<h2 id="reference">reference</h2>
-<p>S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension
-Techniques for CMOS Amplifiers," in <em>IEEE Journal of Solid-State
-Circuits</em>, vol. 41, no. 11, pp. 2424-2439, Nov. 2006</p>
-<p><a
-href="https://ewh.ieee.org/r5/denver/sscs/Presentations/2007_08_Allstot.pdf">David
-J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers</a></p>
-<p>B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE
-Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall
-2015.</p>
-<p>B. Razavi, "The Design of Broadband I/O Circuits [The Analog Mind],"
-IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2, pp. 6-15,
-Spring 2021.</p>
-<p>S. Galal and B. Razavi, "Broadband ESD protection circuits in CMOS
-technology," in IEEE Journal of Solid-State Circuits, vol. 38, no. 12,
-pp. 2334-2340, Dec. 2003, doi: 10.1109/JSSC.2003.818568.</p>
-<p>M. Ker and Y. Hsiao, "On-Chip ESD Protection Strategies for RF
-Circuits in CMOS Technology," 2006 8th International Conference on
-Solid-State and Integrated Circuit Technology Proceedings, 2006, pp.
-1680-1683, doi: 10.1109/ICSICT.2006.306371.</p>
-<p>M. Ker, C. Lin and Y. Hsiao, "Overview on ESD Protection Designs of
-Low-Parasitic Capacitance for RF ICs in CMOS Technologies," in IEEE
-Transactions on Device and Materials Reliability, vol. 11, no. 2, pp.
-207-218, June 2011, doi: 10.1109/TDMR.2011.2106129.</p>
-<p><a href="https://ibis.org/summits/feb11/ross.pdf">Bob Ross, "T-Coil
-Topics" DesignCon IBIS Summit 2011</a></p>
-<p>Ross, Bob and Cong Ling. “Wang Algebra: From Theory to Practice.”
-<em>IEEE Open Journal of Circuits and Systems</em> 3 (2022):
-274-285.</p>
-<p>S. Lin, D. Huang and S. Wong, "Pi Coil: A New Element for Bandwidth
-Extension," in <em>IEEE Transactions on Circuits and Systems II: Express
-Briefs</em>, vol. 56, no. 6, pp. 454-458, June 2009</p>
-<p>Starič, Peter and Erik Margan. “Wideband amplifiers.” (2006).</p>
-<p>Kosnac, Stefan (2021) <em>Analysis</em> of On-<em>Chip Inductors</em>
-and <em>Arithmetic Circuits</em> in the <em>Context</em> of <em>High
-Performance Computing</em> [<a
-href="https://archiv.ub.uni-heidelberg.de/volltextserver/30559/1/Dissertation_Stefan_Kosnac.pdf">https://archiv.ub.uni-heidelberg.de/volltextserver/30559/1/Dissertation_Stefan_Kosnac.pdf</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -17673,6 +17489,193 @@ Pearson.</em></p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>T-coil</title>
+    <url>/2022/03/17/tcoil/</url>
+    <content><![CDATA[<ul>
+<li>Broaden the bandwidth</li>
+<li>Create a constant, resistive input impedance in the presence of a
+heavy load capacitance (ESD protection circuit)</li>
+</ul>
+<blockquote>
+<p>L<sub>1</sub> = L<sub>2</sub> for impedance matching</p>
+</blockquote>
+<p>The use of T-coils can dramatically increase the
+<strong>bandwidth</strong> and improve the <strong>return loss</strong>
+in both TXs and RXs.</p>
+<p><img src="/2022/03/17/tcoil/image-20240712234028634.png"
+alt="image-20240712234028634" /></p>
+<blockquote>
+<p><em>equivalent circuit</em></p>
+<p><img src="/2022/03/17/tcoil/image-20240713001415948.png"
+alt="image-20240713001415948" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713011127116.png"
+alt="image-20240713011127116" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713011152541.png"
+alt="image-20240713011152541" /></p>
+<p>Note the negative sign of <span class="math inline">\(L_M\)</span>,
+which is a consequence of magnetic coupling; owing to this, the driving
+impedance at the center tap <em>as seen by <span
+class="math inline">\(C\)</span></em> is <strong>lower than without the
+coupling</strong>.</p>
+<p><span class="math display">\[\begin{align}
+Z_{c} &amp;= sL_a/2 -sL_M = sL/2 - sL_M/2 \\
+Z_{noc} &amp;= sL/2
+\end{align}\]</span></p>
+</blockquote>
+<h2 id="bridged-t-coil">Bridged T-Coil</h2>
+<blockquote>
+<p>The vertical stacking of the inductor halves causes a significant
+bridging capacitance <span class="math inline">\(C_B\)</span>​ between
+them.</p>
+<p>The most important aspect is that <span
+class="math inline">\(C_B\)</span> does not prohibit perfect impedance
+matching but can be used to tune certain transfer functions.</p>
+</blockquote>
+<h2 id="tcoil-in-rx">Tcoil in RX</h2>
+<p><img src="/2022/03/17/tcoil/image-20220502201254057.png"
+alt="image-20220502201254057" /></p>
+<blockquote>
+<p><strong>ppwl</strong>: Independent Piece-Wise Linear Resistive
+Source</p>
+</blockquote>
+<p><img src="/2022/03/17/tcoil/image-20220502201321341.png"
+alt="image-20220502201321341" /></p>
+<h2 id="simple-model">simple model</h2>
+<blockquote>
+<p>L1, L2, Km, Cb</p>
+</blockquote>
+<p><img src="/2022/03/17/tcoil/image-20220502215310947.png"
+alt="image-20220502215310947" /></p>
+<p><img src="/2022/03/17/tcoil/image-20220622224842237.png"
+alt="image-20220622224842237" /></p>
+<p><img src="/2022/03/17/tcoil/image-20220622225709712.png"
+alt="image-20220622225709712" /></p>
+<h2 id="lumped-model">lumped model</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">simulator lang=spectre</span><br><span class="line">include &quot;/path/to/INDL0.scs&quot;</span><br><span class="line">subckt for_import(p0 p1 p2 gnd)</span><br><span class="line">	xmod (p0 p1 p2 gnd) INDL0</span><br><span class="line">ends for_import</span><br><span class="line"></span><br><span class="line">x_1 (p_1_1 p_1_2 p_1_3 0) for_import</span><br><span class="line">v_1_1 (p_1_1 0) vsource mag=-1</span><br><span class="line">v_1_2 (p_1_2 0) vsource mag=0</span><br><span class="line">v_1_3 (p_1_3 0) vsource mag=0</span><br><span class="line">save v_1_1:p v_1_2:p v_1_3:p</span><br><span class="line"></span><br><span class="line">x_2 (p_2_1 p_2_2 p_2_3 0) for_import</span><br><span class="line">v_2_1 (p_2_1 0) vsource mag=0</span><br><span class="line">v_2_2 (p_2_2 0) vsource mag=-1</span><br><span class="line">v_2_3 (p_2_3 0) vsource mag=0</span><br><span class="line">save v_2_1:p v_2_2:p v_2_3:p</span><br><span class="line"></span><br><span class="line">x_3 (p_3_1 p_3_2 p_3_3 0) for_import</span><br><span class="line">v_3_1 (p_3_1 0) vsource mag=0</span><br><span class="line">v_3_2 (p_3_2 0) vsource mag=0</span><br><span class="line">v_3_3 (p_3_3 0) vsource mag=-1</span><br><span class="line">save v_3_1:p v_3_2:p v_3_3:p</span><br><span class="line">Y ac start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08</span><br><span class="line"></span><br><span class="line">xsp (p_1 p_2 p_3 0) for_import</span><br><span class="line">port1 (p_1 0) port</span><br><span class="line">port2 (p_2 0) port</span><br><span class="line">port3 (p_3 0) port</span><br><span class="line">S sp start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08 ports=[ port1 port2 port3]</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/17/tcoil/image-20220503005728763.png"
+alt="image-20220503005728763" /></p>
+<p><img src="/2022/03/17/tcoil/image-20220503005903105.png"
+alt="image-20220503005903105" /></p>
+<h3 id="emx_plot_tcoil-in-emxform.ils"><code>EMX_plot_tcoil</code> in
+<code>emxform.ils</code></h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(define (EMX_plot_tcoil bgui wid what)</span><br><span class="line">  (needNCells &#x27;adtComplex 100000)</span><br><span class="line">  (letseq ((to_z (lambda (ys)</span><br><span class="line">		   (letseq ((y11 (EMX_matrix_ref ys 0 0))</span><br><span class="line">			    (y12 (EMX_matrix_ref ys 0 1))</span><br><span class="line">			    (y21 (EMX_matrix_ref ys 1 0))</span><br><span class="line">			    (y22 (EMX_matrix_ref ys 1 1))</span><br><span class="line">			    (det y11*y22-y12*y21)</span><br><span class="line">			    (z11 y22/det)</span><br><span class="line">			    (z12 -y12/det)</span><br><span class="line">			    (z22 y11/det))</span><br><span class="line">		     (list z11 z12 z22))))</span><br><span class="line">	   (ground</span><br><span class="line">	    (lambda (y p)</span><br><span class="line">	      (letseq ((n (EMX_matrix_rows y))</span><br><span class="line">		       (yg (make_EMX_matrix n-1)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n-1))</span><br><span class="line">		  (do ((j 0 j+1))</span><br><span class="line">		      ((j &gt;= n-1))</span><br><span class="line">		    (EMX_matrix_set yg i j (EMX_matrix_ref y i+(if (i &gt;= p) 1 0) j+(if (j &gt;= p) 1 0)))))</span><br><span class="line">		yg)))</span><br><span class="line">	   (reduce</span><br><span class="line">	    (lambda (yys)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec (car yys)))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (yyvecs (mapcar drGetWaveformYVec yys))</span><br><span class="line">		       (zz1 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz2 (drCreateVec &#x27;doublecomplex n))</span><br><span class="line">		       (zz3 (drCreateVec &#x27;doublecomplex n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (let ((ys (mapcar (lambda (w) (drGetElem w i)) yyvecs)))</span><br><span class="line">		    (setq ys (ground (as_EMX_matrix 3 3 ys) 2))</span><br><span class="line">		    (let ((zz (to_z ys)))</span><br><span class="line">		      (drSetElem zz1 i (nth 0 zz))</span><br><span class="line">		      (drSetElem zz2 i (nth 1 zz))</span><br><span class="line">		      (drSetElem zz3 i (nth 2 zz)))))</span><br><span class="line">		(list (drCreateWaveform xvec zz1)</span><br><span class="line">		      (drCreateWaveform xvec zz2)</span><br><span class="line">		      (drCreateWaveform xvec zz3)))))</span><br><span class="line">	   (get_k</span><br><span class="line">	    (lambda (l12 l1122)</span><br><span class="line">	      (letseq ((xvec (drGetWaveformXVec l12))</span><br><span class="line">		       (n (drVectorLength xvec))</span><br><span class="line">		       (l12v (drGetWaveformYVec l12))</span><br><span class="line">		       (l1122v (drGetWaveformYVec l1122))</span><br><span class="line">		       (resultv (drCreateVec &#x27;double n)))</span><br><span class="line">		(do ((i 0 i+1))</span><br><span class="line">		    ((i &gt;= n))</span><br><span class="line">		  (letseq ((l12i (drGetElem l12v i))</span><br><span class="line">			   (l1122i (drGetElem l1122v i))</span><br><span class="line">			   (kk (if (l1122i &gt; 0.0)</span><br><span class="line">				   l12i/(sqrt l1122i)</span><br><span class="line">				   0.0))</span><br><span class="line">			   (k (if ((abs kk) &lt; 2.0) kk 0.0)))</span><br><span class="line">		    (drSetElem resultv i k)))</span><br><span class="line">		(drCreateWaveform xvec resultv)))))</span><br><span class="line">  (EMX_plot_aux bgui wid what 3</span><br><span class="line">		&#x27;(&quot;Inductance&quot; &quot;Q&quot; &quot;k&quot;)</span><br><span class="line">		&#x27;(&quot;Henry&quot; &quot;&quot; &quot;&quot;)</span><br><span class="line">		(lambda (ys)</span><br><span class="line">		  (letseq ((zs (reduce ys))</span><br><span class="line">			   (z11 (nth 0 zs))</span><br><span class="line">			   (z12 (nth 1 zs))</span><br><span class="line">			   (z22 (nth 2 zs))</span><br><span class="line">			   (pi 3.14159265358979)</span><br><span class="line">			   (f (xval z11))</span><br><span class="line">			   (l11 (imag z11)/(2*pi*f))</span><br><span class="line">			   (q11 (imag z11)/(real z11))</span><br><span class="line">			   (l12 (imag z12)/(2*pi*f))</span><br><span class="line">			   (l22 (imag z22)/(2*pi*f))</span><br><span class="line">			   (q22 (imag z22)/(real z22))</span><br><span class="line">			   (k (get_k l12 l11*l22)))</span><br><span class="line">		    `((,l11 ,l22) (,q11 ,q22) (,k))))</span><br><span class="line">		&#x27;((&quot;L1&quot; &quot;L2&quot;) (&quot;Q1&quot; &quot;Q2&quot;) (&quot;k&quot;)))))</span><br></pre></td></tr></table></figure>
+<h2 id="tcoil-vs-tapped-inductor">Tcoil vs tapped inductor</h2>
+<p>tcoil and tapped inductor share same EM simulation result, and use
+modelgen with different model formula.</p>
+<p>The relationship is <span class="math display">\[
+L_{\text{sim}} = L1_{\text{sim}}+L2_{\text{sim}}+2\times k_{\text{sim}}
+\times \sqrt{L1_{\text{sim}}\cdot L2_{\text{sim}}}
+\]</span> where <span class="math inline">\(L1_{\text{sim}}\)</span>,
+<span class="math inline">\(L2_{\text{sim}}\)</span> and <span
+class="math inline">\(k_{\text{sim}}\)</span> come from tcoil model
+result, <span class="math inline">\(L_{\text{sim}}\)</span> comes from
+tapped inductor model result</p>
+<blockquote>
+<p><span class="math inline">\(k_{\text{sim}}\)</span> in EMX have
+assumption, induce current from P1 and P2 Given Dot Convention:</p>
+<p>Same direction : k &gt; 0</p>
+<p>Opposite direction : k &lt; 0</p>
+<p>So, the <span class="math inline">\(k_{\text{sim}}\)</span> is
+negative if routing coil in same direction</p>
+</blockquote>
+<p><img src="/2022/03/17/tcoil/image-20220623013225554.png"
+alt="image-20220623013225554" /></p>
+<p><img src="/2022/03/17/tcoil/image-20220623013923263.png"
+alt="image-20220623013923263" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% EMX - shield tcoil model</span></span><br><span class="line">L1 = csvread(<span class="string">&#x27;./L1sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">L2 = csvread(<span class="string">&#x27;./L2sim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">k = csvread(<span class="string">&#x27;./ksim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% EMX - Tapped shield inductor</span></span><br><span class="line">L = csvread(<span class="string">&#x27;./Lsim.csv&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">freq = L1(:, <span class="number">1</span>)/<span class="number">1e9</span>;    <span class="comment">% GHz</span></span><br><span class="line">L1 = L1(:, <span class="number">2</span>);</span><br><span class="line">L2 = L2(:, <span class="number">2</span>);</span><br><span class="line">k = -k(:, <span class="number">2</span>);   <span class="comment">% Caution: minus of EMX ksim due to same current direction</span></span><br><span class="line"></span><br><span class="line">L = L(:, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">Lcalc = L1 + L2 + <span class="number">2</span>*k.*(L1.*L2).^<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(freq, L*<span class="number">1e9</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(freq, Lcalc*<span class="number">1e9</span>, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Inductance (nH)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Tapped inductor model&#x27;</span>, <span class="string">&#x27;tcoil model calc&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="电磁感应定律-electromagnetic-induction">电磁感应定律
+(electromagnetic induction)</h2>
+<p>任何封闭电路中感应电动势大小，等于穿过这一电路磁通量的变化率。 <span
+class="math display">\[
+\epsilon = -\frac{d\Phi_B}{dt}
+\]</span> 其中 <span
+class="math inline">\(\epsilon\)</span>是电动势，单位为伏特</p>
+<p><span
+class="math inline">\(\Phi_B\)</span>是通过电路的磁通量，单位为韦伯</p>
+<p>电动势的方向（公式中的负号）由楞次定律决定</p>
+<blockquote>
+<p><strong>楞次定律</strong>:
+由于磁通量的改变而产生的感应电流，其方向为抗拒磁通量改变的方向。</p>
+</blockquote>
+<blockquote>
+<p>在回路中产生感应电动势的原因是由于通过回路平面的磁通量的<strong>变化</strong>，而不是磁通量本身，即使通过回路的磁通量很大，但只要它不随时间变化，回路中依然不会产生感应电动势。</p>
+</blockquote>
+<h3 id="自感电动势">自感电动势</h3>
+<p>当电流<span
+class="math inline">\(I\)</span>随时间变化时，在线圈中产生的自感电动势为
+<span class="math display">\[
+\epsilon = -L\frac{dI}{dt}
+\]</span></p>
+<p><img src="/2022/03/17/tcoil/image-20240713131201618.png"
+alt="image-20240713131201618" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713145315890.png"
+alt="image-20240713145315890" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713145343423.png"
+alt="image-20240713145343423" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713145005306.png"
+alt="image-20240713145005306" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713145212327.png"
+alt="image-20240713145212327" /></p>
+<hr />
+<p><img src="/2022/03/17/tcoil/image-20240713140911612.png"
+alt="image-20240713140911612" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713135148710.png"
+alt="image-20240713135148710" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713135236291.png"
+alt="image-20240713135236291" /></p>
+<blockquote>
+<p><strong>同名端</strong>：当两个<em>电流</em>分别从两个线圈的对应端子流入
+，其所 产生的磁场相互加强时，则这两个对应端子称为同名端。</p>
+</blockquote>
+<p><img src="/2022/03/17/tcoil/image-20240713142238398.png"
+alt="image-20240713142238398" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713142249362.png"
+alt="image-20240713142249362" /></p>
+<p><img src="/2022/03/17/tcoil/image-20240713142506673.png"
+alt="image-20240713142506673" /></p>
+<h2 id="reference">reference</h2>
+<p>S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension
+Techniques for CMOS Amplifiers," in <em>IEEE Journal of Solid-State
+Circuits</em>, vol. 41, no. 11, pp. 2424-2439, Nov. 2006</p>
+<p><a
+href="https://ewh.ieee.org/r5/denver/sscs/Presentations/2007_08_Allstot.pdf">David
+J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers</a></p>
+<p>B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE
+Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall
+2015.</p>
+<p>B. Razavi, "The Design of Broadband I/O Circuits [The Analog Mind],"
+IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2, pp. 6-15,
+Spring 2021.</p>
+<p>S. Galal and B. Razavi, "Broadband ESD protection circuits in CMOS
+technology," in IEEE Journal of Solid-State Circuits, vol. 38, no. 12,
+pp. 2334-2340, Dec. 2003, doi: 10.1109/JSSC.2003.818568.</p>
+<p>M. Ker and Y. Hsiao, "On-Chip ESD Protection Strategies for RF
+Circuits in CMOS Technology," 2006 8th International Conference on
+Solid-State and Integrated Circuit Technology Proceedings, 2006, pp.
+1680-1683, doi: 10.1109/ICSICT.2006.306371.</p>
+<p>M. Ker, C. Lin and Y. Hsiao, "Overview on ESD Protection Designs of
+Low-Parasitic Capacitance for RF ICs in CMOS Technologies," in IEEE
+Transactions on Device and Materials Reliability, vol. 11, no. 2, pp.
+207-218, June 2011, doi: 10.1109/TDMR.2011.2106129.</p>
+<p><a href="https://ibis.org/summits/feb11/ross.pdf">Bob Ross, "T-Coil
+Topics" DesignCon IBIS Summit 2011</a></p>
+<p>Ross, Bob and Cong Ling. “Wang Algebra: From Theory to Practice.”
+<em>IEEE Open Journal of Circuits and Systems</em> 3 (2022):
+274-285.</p>
+<p>S. Lin, D. Huang and S. Wong, "Pi Coil: A New Element for Bandwidth
+Extension," in <em>IEEE Transactions on Circuits and Systems II: Express
+Briefs</em>, vol. 56, no. 6, pp. 454-458, June 2009</p>
+<p>Starič, Peter and Erik Margan. “Wideband amplifiers.” (2006).</p>
+<p>Kosnac, Stefan (2021) <em>Analysis</em> of On-<em>Chip Inductors</em>
+and <em>Arithmetic Circuits</em> in the <em>Context</em> of <em>High
+Performance Computing</em> [<a
+href="https://archiv.ub.uni-heidelberg.de/volltextserver/30559/1/Dissertation_Stefan_Kosnac.pdf">https://archiv.ub.uni-heidelberg.de/volltextserver/30559/1/Dissertation_Stefan_Kosnac.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>

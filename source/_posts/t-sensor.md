@@ -25,6 +25,8 @@ Due to the fact that *long-term drift* of temperature sensors and bandgap refere
 
 ## $V_{BE}$ curvature
 
+> *curvature* results in results in *non-linearity*
+
 Though it is assumed that  $V_{BE}$ is a linear function of temperature for first oder analysis.
 
 In practice, $V_{BE}$ is *slightly nonlinear*, the magnitude of this nonlinearity is referred to as **curvature**.

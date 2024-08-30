@@ -52,7 +52,7 @@ $$
 
 
 
-### Feedforward Compensation with $C_\text{FF}$​
+## Feedforward Compensation with $C_\text{FF}$
 
 - Improved Noise
 - Improved Stability and Transient Response

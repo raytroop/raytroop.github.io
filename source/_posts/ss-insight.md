@@ -9,6 +9,15 @@ mathjax: true
 
 
 
+## frequency convention
+
+- radian frequency $\omega_0$ in **rad/s**
+- cyclic frequency $f_0$ in **Hz**
+
+
+
+
+
 ##  Energy signals vs Power signal
 
 > Topic 5 Energy & Power Signals, Correlation & Spectral Density [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N5.pdf)]

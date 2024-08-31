@@ -179,10 +179,6 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 
 
 
-
-
-
-
 ```
 It's not necessary to hope in order to persevere.
 
@@ -201,6 +197,12 @@ It's a ridiculous way to behave and when you avoid it you get a great advantage 
 过度自怜可以让人近乎偏执。 偏执是最难逆转的东西之一。
 自怜总是会产生负面的影响， 它是一种错误的思维方式。 如果你们能够避开它， 你们的优势就远远大于所有其他人， 或者几乎所有其他人， 因为自怜是一种标准的反应。 你们可以通过训练来摆脱它。
 
+```
+
+```
+Envy is a really stupid sin because it's the only one you could never possibly have any fun at. There's a lot of pain and no fun. Why would you want to get on that trolley?
+
+- Charlie Munger
 ```
 
 

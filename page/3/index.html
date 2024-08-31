@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">160</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,274 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/28/jtag/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/28/jtag/" class="post-title-link" itemprop="url">JTAG and Boundary Scan</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-28 22:00:32" itemprop="dateCreated datePublished" datetime="2023-11-28T22:00:32+00:00">2023-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Data Register, DR:</p>
+<ul>
+<li>Bypass Register, BR</li>
+<li>Boundary Scan Register, BSR</li>
+</ul>
+<p>Instruction Register, IR</p>
+<h2 id="tap-controller">TAP Controller</h2>
+<p><img src="/2023/11/28/jtag/image-20240113191225838.png"
+alt="image-20240113191225838" /></p>
+<blockquote>
+<ul>
+<li>FSM and Shift Register of DR and IR works at the
+<strong>posedge</strong> of the clock</li>
+<li>TMS, TDI, TDO and Hold Register of DR and IR changes value at the
+<strong>negedge</strong> of the clock</li>
+</ul>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20240113191409296.png"
+alt="image-20240113191409296" /></p>
+<p><img src="/2023/11/28/jtag/image-20240113191526490.png"
+alt="image-20240113191526490" /></p>
+<blockquote>
+<p>capture IR <code>01</code>, the fixed is for easier fault
+detection</p>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20231129232443249.png"
+alt="image-20231129232443249" /></p>
+<p><img src="/2023/11/28/jtag/image-20231129233218011.png"
+alt="image-20231129233218011" /></p>
+<blockquote>
+<p>After power-up, they may not be in sync, but there is a trick. Look
+at the state machine and notice that no matter what state you are, if
+<em>TMS stays at "1" for five clocks</em>, a TAP controller goes back to
+the state "Test-Logic Reset". That's used to synchronize the TAP
+controllers.</p>
+</blockquote>
+<blockquote>
+<p>It is important to note that in a typical Boundary-Scan test, the
+time between launching a signal from driver (at the falling edge of test
+clock (TCK) in the <code>Update-DR</code> or <code>Update-IR</code> TAP
+Controller state) and capturing that signal (at the rising edge of TCK
+in the <code>Caputre-DR</code> TAP Controller state) is <strong>no less
+tha 2.5 TCK cycles</strong></p>
+</blockquote>
+<p>Further, the time between successive launches on a driver is governed
+- not only by the TCk rate - but by the amount of serial data shifting
+needed to load the next pattern data in the concatenated Boundary-Scan
+Registers of the Boundary-Scan chain</p>
+<blockquote>
+<p>Thus the effective test data rate of a driver could be thousands of
+the times lower than the TCK rate</p>
+<ol type="1">
+<li>For DC-coupled interconnect, this time is of no concern</li>
+<li>For AC-coupled interconnect, the signal may easily decay partially
+or completely before it can be captured</li>
+<li>If only partial decay occurs before capture, that decay will very
+likely be completed before the driver produces the next edge</li>
+</ol>
+</blockquote>
+<h2 id="ac-coupling">AC-coupling</h2>
+<p>In general, AC-coupling can distort a signal transmitted across a
+channel depending on its frequency.</p>
+<p><code>Figure 5</code></p>
+<ul>
+<li>The high frequency signal is relatively unaffected by the
+coupling</li>
+<li>The low frequency signal is severely impacted
+<ol type="1">
+<li>it decays to <span class="math inline">\(V_T\)</span> after a few
+time constants</li>
+<li>its amplitude is double the input amplitude &gt; transient response,
+before AC-coupling capacitor: <span class="math inline">\(-A_p \to
+A_p\)</span>; after AC-coupling capacitor <span
+class="math inline">\(V_T \to V_T+2A_p\)</span> &gt; A key item to note
+is that the transitions in the original signal are preserved, although
+their start and end points are offset &gt; &gt; compared to where they
+were in the high frequency</li>
+</ol></li>
+</ul>
+<h2 id="test-signal-implementation">Test signal implementation</h2>
+<p>The test data is either the content of the Boundary-Scan Register
+Update latch (U) when executing the (DC) EXTEST instruction, or an
+<strong>"AC Signal"</strong> when an <em>AC testing instruction</em> is
+loaded into the device.</p>
+<blockquote>
+<p>The AC signal is a test waveform suited for transmission through
+AC-coupling</p>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20240113184502597.png"
+alt="image-20240113184502597" /></p>
+<h2 id="test-signal-reception">Test signal reception</h2>
+<ul>
+<li>When <em>an AC testing instruction</em> is loaded, a specialized
+test receiver detects transitoins of the AC signal seen at the input and
+determines if this represents a logic '0' or '1'</li>
+<li>When <em>EXTEST</em> is loaded, the input signal level is detected
+and sent to the output of the test receiver to the Boundary-Scan
+Register cell</li>
+</ul>
+<p>When testing for a shorted capacitor, the <em>test software</em> must
+ensure that enough time has passed for the signal to decay before
+entering <em>Capture-DR</em>, either by stopping TCk or by spending
+additional TCK cycles in the <em>Run-Test/Idle</em> TAP Controller
+state</p>
+<h2 id="extest_pulse-extest_train">EXTEST_PULSE &amp; EXTEST_TRAIN</h2>
+<blockquote>
+<p>The two new AC-test instructions provided by this standard differ
+primarily in the number and timing of transitions to provide flexibility
+in dealing with the specific dynamic behavior of the channels being
+tested</p>
+</blockquote>
+<p><strong>AC Test Signal</strong> essentially modulates test data so
+that it will propagate through AC-coupled channels, for devices that
+contatin AC pins</p>
+<blockquote>
+<p>Tools should use the <strong>EXTEST_PULSE</strong> instruction unless
+there is a specific requirement for the <strong>EXTEST_TRAIN</strong>
+instruction</p>
+</blockquote>
+<h3 id="extest_pulse">EXTEST_PULSE</h3>
+<blockquote>
+<p>Generate <strong>two</strong> additional driver transitions and
+allows a tester to vary the <strong>time</strong> between them dependent
+on how many TCK cycles the TAP is left in the <em>Run-Test/Idle</em> TAP
+Controller state.</p>
+<p>This is intended to allow any undesired transient condition to decay
+to a <strong>DC steady-state value</strong> when that will make the
+final transition more reliably detectable</p>
+<p>The duration in the <em>Run-Test/Idle</em> TAP Controller state
+should be <strong>at least three times</strong> the high-pass coupling
+time constant. This allows the <em>first additional transition</em> to
+decay away to the <strong>DC steady-state value</strong> for the
+channel, and ensures that the full amplitude of the <em>final
+transition</em> is added to or subtracted from that steady-state
+value</p>
+<p>This establishes a <em>known initial condition</em> for the <em>final
+transition</em> and permits reliable specification of the detection
+threshold of the test receiver</p>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20240113190314947.png"
+alt="image-20240113190314947" /></p>
+<h3 id="extest_train">EXTEST_TRAIN</h3>
+<blockquote>
+<p>Generate <strong>multiple</strong> additional transitions, the
+<strong>number</strong> dependent on how long the TAP is left in the
+<em>Run-Test/Idle</em> TAP Controller state</p>
+<p>This is intended to allow any undesired transient condition to decay
+to an <strong>AC steady-state value</strong> when that will make the
+final transition more reliably detectable</p>
+</blockquote>
+<p><img src="/2023/11/28/jtag/image-20240113190345323.png"
+alt="image-20240113190345323" /></p>
+<h2 id="ieee-std-1149.6-2003">IEEE Std 1149.6-2003</h2>
+<p>This standard is built on top of IEEE Std 1149.1 using the same Test
+Access Port structure and Boundary-Scan architecture.</p>
+<ul>
+<li>It adds the concept of a "test receiver" to input pins that are
+expected to handle <strong>differential and/or AC-coupling</strong></li>
+<li>It adds two new instructions that cause drivers to emit AC waveforms
+that are processed by test receivers.</li>
+</ul>
+<h2 id="jtag-instruction">JTAG Instruction</h2>
+<h2 id="implementation">Implementation</h2>
+<ul>
+<li>AC mode hysteresis, detect transistion</li>
+<li>DC mode threshold is determined by jtag initial value</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>IEEE Std 1149.1-2001, IEEE Standard Test Access Port and
+Boundary-Scan Architecture, IEEE, 2001</p>
+<p>IEEE Std 1149.6-2003, IEEE Standard for BoundaryScan Testing of
+Advanced Digital Networks, IEEE, 2003</p>
+<p>IEEE 1149.6 Tutorial | Testing AC-coupled and Differential High-speed
+Nets [<a
+target="_blank" rel="noopener" href="https://www.asset-intertech.com/resources/eresources/ieee-11496-tutorial-testing-ac-coupled-and-differential-high-speed-nets/">https://www.asset-intertech.com/resources/eresources/ieee-11496-tutorial-testing-ac-coupled-and-differential-high-speed-nets/</a>]</p>
+<p>Prof. James Chien-Mo Li, Lab of Dependable Systems, National Taiwan
+University. VLSI Testing [<a
+target="_blank" rel="noopener" href="http://cc.ee.ntu.edu.tw/~cmli/VLSItesting/">http://cc.ee.ntu.edu.tw/~cmli/VLSItesting/</a>]</p>
+<p>K.P. Parker, The Boundary Scan Handbook, 3rd ed., Kluwer Academic,
+2003.</p>
+<p>B. Eklow, K. P. Parker and C. F. Barnhart, "IEEE 1149.6: a
+boundary-scan standard for advanced digital networks," in IEEE Design
+&amp; Test of Computers, vol. 20, no. 5, pp. 76-83, Sept.-Oct. 2003,
+doi: 10.1109/MDT.2003.1232259.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +494,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -407,7 +675,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -657,7 +925,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1361,7 +1629,7 @@ target="_blank" rel="noopener" href="https://mixsignal.files.wordpress.com/2013/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1618,7 +1886,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1854,7 +2122,7 @@ target="_blank" rel="noopener" href="https://toshiba.semicon-storage.com/info/ap
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:39" itemprop="dateModified" datetime="2024-08-30T00:50:39+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:02" itemprop="dateModified" datetime="2024-08-31T15:36:02+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1983,7 +2251,7 @@ alt="image-20231006110506245" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:39" itemprop="dateModified" datetime="2024-08-30T00:50:39+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:02" itemprop="dateModified" datetime="2024-08-31T15:36:02+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2083,7 +2351,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2285,7 +2553,7 @@ target="_blank" rel="noopener" href="https://benchugg.com/research_notes/sde_ito
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2368,133 +2636,8 @@ target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/29/scattering/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/29/scattering/" class="post-title-link" itemprop="url">Scattering parameters</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-29 15:57:01" itemprop="dateCreated datePublished" datetime="2023-09-29T15:57:01+00:00">2023-09-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-target="_blank" rel="noopener" href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-target="_blank" rel="noopener" href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">160</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,696 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/30/fourier/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/30/fourier/" class="post-title-link" itemprop="url">Fourier Transform</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-30 20:10:15" itemprop="dateCreated datePublished" datetime="2024-08-30T20:10:15+00:00">2024-08-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><strong>discrete-time frequency</strong>: <span
+class="math inline">\(\hat{\omega}=\omega T_s\)</span>, units are
+<strong><em>radians per sample</em></strong></p>
+</blockquote>
+<h2 id="warmup">warmup</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 38%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Continuous-time signals <span
+class="math inline">\(x_c(t)\)</span></th>
+<th>Discrete-time signals <span class="math inline">\(x[n]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Aperiodic signals</strong></td>
+<td style="text-align: left;">Continuous Fourier transform</td>
+<td>Discrete-time Fourier transform</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Periodic signals</strong></td>
+<td style="text-align: left;">Fourier series</td>
+<td>Discrete Fourier transform</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fourier-series-fs">Fourier Series (FS)</h3>
+<p><span class="math display">\[\begin{align}
+a_k &amp;= \frac{1}{T}\int_T x(t)e^{-jk(2\pi/T)) t}dt \\
+x(t) &amp;= \sum_{k=-\infty}^{+\infty}a_ke^{jk(2\pi/T) t}
+\end{align}\]</span></p>
+<h3 id="continuous-time-fourier-transform-ctft">Continuous-Time Fourier
+transform (CTFT)</h3>
+<p><span class="math display">\[\begin{align}
+X(j\omega) &amp;=\int_{-\infty}^{+\infty}x(t)e^{-j\omega t}dt \\
+x(t)&amp;= \frac{1}{2\pi}\int_{-\infty}^{+\infty}X(j\omega)e^{j\omega
+t}d\omega
+\end{align}\]</span></p>
+<blockquote>
+<p>[<a
+target="_blank" rel="noopener" href="https://www.rose-hulman.edu/class/ee/yoder/ece380/Handouts/Fourier%20Transform%20Tables%20w.pdf">https://www.rose-hulman.edu/class/ee/yoder/ece380/Handouts/Fourier%20Transform%20Tables%20w.pdf</a>]</p>
+<p><img src="/2024/08/30/fourier/image-20240831104459715.png"
+alt="image-20240831104459715" /></p>
+</blockquote>
+<h3 id="discrete-time-fourier-transform-dtft">Discrete-Time Fourier
+Transform (DTFT)</h3>
+<p><span class="math display">\[\begin{align}
+X(e^{j\hat{\omega}})
+&amp;=\sum_{n=-\infty}^{+\infty}x[n]e^{-j\hat{\omega} n} \\
+x[n] &amp;=
+\frac{1}{2\pi}\int_{2\pi}X(e^{j\hat{\omega}})e^{j\hat{\omega}
+n}d\hat{\omega}
+\end{align}\]</span></p>
+<p><em>DTFT is defined for infinitely long signals as well as
+finite-length signal</em></p>
+<p><em>DTFT is <strong>continuous</strong> in the frequency
+domain</em></p>
+<p>We could verify that is the correct inverse DTFT relation by
+substituting the definition of the DTFT and rearranging terms</p>
+<hr />
+<p><img src="/2024/08/30/fourier/image-20240831152155093.png"
+alt="image-20240831152155093" /></p>
+<h3 id="discrete-time-fourier-series-dtfs">Discrete-Time Fourier Series
+(DTFS)</h3>
+<h3 id="discrete-fourier-transform-dft">Discrete Fourier Transform
+(DFT)</h3>
+<blockquote>
+<p>Two steps are needed to change the DTFT sum into a computable
+form:</p>
+<ol type="1">
+<li>the continuous frequency variable <span
+class="math inline">\(\hat{\omega}\)</span> must be sampled</li>
+<li>the limits on the DTFT sum must be finite</li>
+</ol>
+</blockquote>
+<p><span class="math display">\[\begin{align}
+X[k] &amp;= \sum_{n=0}^{N-1}x[n]e^{-j(2\pi/N)kn}\space\space\space
+k=0,1,...,N-1 \\
+x[n] &amp;= \frac{1}{N}\sum_{k=0}^{N-1}X[k]e^{j(2\pi/N)kn}
+\space\space\space n=0,1,...,N-1
+\end{align}\]</span></p>
+<p>Part of the proof is given by the following step:</p>
+<p><img src="/2024/08/30/fourier/image-20240830222204470.png"
+alt="image-20240830222204470" /></p>
+<p><em>DFT <span class="math inline">\(X[k]\)</span> is a
+<strong>sampled</strong> version of the DTFT <span
+class="math inline">\(X(e^{j\hat{\omega}})\)</span>, where <span
+class="math inline">\(\hat{\omega_k} = \frac{2\pi
+k}{N}\)</span></em></p>
+<h3 id="impulse-train">impulse train</h3>
+<p><img src="/2024/08/30/fourier/image-20240830224755336.png"
+alt="image-20240830224755336" /></p>
+<blockquote>
+<p>using time-sampling property</p>
+<p><img src="/2024/08/30/fourier/impulse_train.drawio.svg"
+alt="impulse_train.drawio" /></p>
+</blockquote>
+<h3 id="impulse-scaling">impulse scaling</h3>
+<p><span class="math display">\[
+\delta(\omega /T) = T\delta(\omega)
+\]</span></p>
+<h3 id="impulse-invariance">impulse invariance</h3>
+<p><span class="math display">\[
+h[n] = Th_c(nT)
+\]</span></p>
+<p>When <span class="math inline">\(h[n]\)</span> and <span
+class="math inline">\(h_c(t)\)</span> are related through the above
+equation, i.e., the impulse response of the discrete-time system is a
+<em>scaled</em>, <em>sampled</em> version of <span
+class="math inline">\(h_c(t)\)</span>, the <strong><em>discrete-time
+system</em></strong> is said to be an <strong>impulse-invariant</strong>
+version of the <strong><em>continuous-time system</em></strong></p>
+<p>we have <span class="math display">\[
+H(e^{j\hat{\omega}}) = H_c\left(j\frac{\hat{\omega}}{T}\right)
+\]</span></p>
+<h3 id="multiplication-property">Multiplication Property</h3>
+<blockquote>
+<p>aka <em>Modulation Property</em></p>
+</blockquote>
+<p><span class="math display">\[
+x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
+\]</span></p>
+<h3 id="parsevals-relation">Parseval's Relation</h3>
+<p><img src="/2024/08/30/fourier/image-20240830230835764.png"
+alt="image-20240830230835764" /></p>
+<hr />
+<p><img src="/2024/08/30/fourier/image-20230516022936168.png"
+alt="image-20230516022936168" /></p>
+<h3 id="eigenfunctions-frequency-response">Eigenfunctions &amp;
+frequency response</h3>
+<p><em>Complex exponentials</em> are <strong>eigenfunctions</strong> of
+LTI systems, that is,</p>
+<p>continuous time: <span class="math inline">\(e^{j\omega t}\to
+H(j\omega)e^{j\omega t}\)</span></p>
+<p>discrete time: <span class="math inline">\(e^{j\hat{\omega}n} \to
+H(e^{j\hat{\omega}})e^{j\hat{\omega}n}\)</span></p>
+<p>where <span class="math inline">\(H(j\omega)\)</span>, <span
+class="math inline">\(H(e^{j\hat{\omega}})\)</span> is <strong>frequency
+response</strong> of <em>continuous-time systems</em> and
+<em>discrete-time systems</em>, which is the function of <span
+class="math inline">\(\omega\)</span> and <span
+class="math inline">\(\hat{\omega}\)</span> <span
+class="math display">\[\begin{align}
+H(j\omega) &amp;= \int_{-\infty}^{+\infty}h(t)e^{-j\omega t}dt \\ \\
+H(e^{j\hat{\omega}}) &amp;=
+\sum_{n=-\infty}^{+\infty}h[n]e^{-j\hat{\omega} n}
+\end{align}\]</span></p>
+<p>The <em>frequency response</em> of <em>discrete-time LTI systems</em>
+is always a <strong>periodic function</strong> of the frequency variable
+<span class="math inline">\(\hat{\omega}\)</span> with period <span
+class="math inline">\(2\pi\)</span></p>
+<h3 id="sampling-theorem">Sampling Theorem</h3>
+<p><strong>time-sampling theorem</strong>: applies to <em>bandlimited
+signals</em></p>
+<p><strong>spectral sampling theorem</strong>: applies to
+<em>timelimited signals</em></p>
+<h3 id="aliasing">Aliasing</h3>
+<p>The frequencies <span class="math inline">\(f_{\text{sig}}\)</span>
+and <span class="math inline">\(Nf_s \pm f_{\text{sig}}\)</span> (<span
+class="math inline">\(N\)</span> integer), are
+<strong>indistinguishable</strong> in the <strong>discrete time
+domain</strong>.</p>
+<p><img src="/2024/08/30/fourier/image-20220626000016184.png"
+alt="image-20220626000016184" /></p>
+<p>Given below sequence <span class="math display">\[
+X[n] =A e^{j\omega T_s n}
+\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(kf_s + \Delta f\)</span></li>
+</ol>
+<p>​ <span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s+\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s-\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{j\Delta f\cdot 2\pi T_sn} + Ae^{-j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\(kf_s - \Delta f\)</span></li>
+</ol>
+<p>​ <span class="math display">\[\begin{align}
+x[n] &amp;= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left(
+-kf_s+\Delta f \right)2\pi T_sn} \\
+&amp;= Ae^{-j\Delta f\cdot 2\pi T_sn} + Ae^{j\Delta f\cdot 2\pi T_sn}
+\end{align}\]</span></p>
+<blockquote>
+<p><em>complex signal</em></p>
+<p><span class="math display">\[\begin{align}
+A e^{j(\omega_s + \Delta \omega) T_s n} &amp;= A e^{j(k\omega_s + \Delta
+\omega) T_s n} \\
+A e^{j(\omega_s - \Delta \omega) T_s n} &amp;= A e^{j(k\omega_s - \Delta
+\omega) T_s n}
+\end{align}\]</span></p>
+<p><img src="/2024/08/30/fourier/sampling_aliasing.drawio.svg"
+alt="sampling_aliasing.drawio" /></p>
+</blockquote>
+<h2 id="spectral-sampling">spectral sampling</h2>
+<p>Fourier transform of a periodic signal with Fourier series
+coefficients <span class="math inline">\(\{a_k\}\)</span> can be
+interpreted as a train of <em>impulses</em> occurring at the
+harmonically related frequencies and for which the area of the impulse
+at the <span class="math inline">\(k\)</span>th harmonic frequency <span
+class="math inline">\(k\omega_0\)</span> is <span
+class="math inline">\(2\pi\)</span> times the <span
+class="math inline">\(k\)</span>th Fourier series coefficient <span
+class="math inline">\(a_k\)</span></p>
+<p><img src="/2024/08/30/fourier/image-20240830225453601.png"
+alt="image-20240830225453601" /></p>
+<hr />
+<p><img src="/2024/08/30/fourier/image-20240831185532202.png"
+alt="image-20240831185532202" /></p>
+<p>spectral sampling by <span class="math inline">\(\omega_0\)</span>,
+and <span class="math inline">\(\frac{2\pi}{\omega_0} \gt \tau\)</span>
+<span class="math display">\[
+X_{n\omega_0}(\omega) =
+\sum_{n=-\infty}^{\infty}X(n\omega_0)\delta(\omega - n\omega_0)
+\]</span> Periodic repetition of <span
+class="math inline">\(x(t)\)</span> is <span class="math display">\[
+x_{n\omega_0}(t) = \frac{1}{\omega_0}\sum_{n=-\infty}^{\infty}x(t
+-n\frac{2\pi}{\omega_0})=\frac{T_0}{2\pi}\sum_{n=-\infty}^{\infty}x(t
+-nT_0)
+\]</span></p>
+<p>Then, if <span class="math inline">\(x_{T_0} (t)\)</span>, a periodic
+signal formed by repeating <span class="math inline">\(x(t)\)</span>
+every <span class="math inline">\(T_0\)</span> seconds (<span
+class="math inline">\(T_0 \gt \tau\)</span>​), its CTFT is <span
+class="math display">\[
+X_{T_0}(\omega) = \frac{2\pi}{T_0} \cdot X_{n\omega_0}(\omega) =
+\frac{2\pi}{T_0}\sum_{n=-\infty}^{\infty}X(n\omega_0)\delta(\omega -
+n\omega_0)
+\]</span> Then <span class="math inline">\(x_{T_0} (t)\)</span> can be
+expressed with inverse CTFT as <span
+class="math display">\[\begin{align}
+x_{T_0} (t) &amp;=
+\frac{1}{2\pi}\int_{-\infty}^{\infty}X_{T_0}(\omega)e^{j\omega t}d\omega
+\\
+&amp;= \frac{1}{T_0}\sum_{n=-\infty}^{\infty}X(n\omega_0)e^{jn\omega_0
+t} =\sum_{n=-\infty}^{\infty}\frac{1}{T_0}X(n\omega_0)e^{jn\omega_0 t}
+\end{align}\]</span></p>
+<p>i.e. the coefficients of the Fourier series for <span
+class="math inline">\(x_{T_0} (t)\)</span> is <span
+class="math inline">\(D_n =\frac{1}{T_0}X(n\omega_0)\)</span></p>
+<p><img src="/2024/08/30/fourier/image-20240831190258683.png"
+alt="image-20240831190258683" /></p>
+<blockquote>
+<p>alternative method by direct Fourier series</p>
+<p><img src="/2024/08/30/fourier/image-20240831193912709.png"
+alt="image-20240831193912709" /></p>
+</blockquote>
+<h2 id="why-dft">Why DFT ?</h2>
+<p><em>We can use DFT to compute DTFT samples and CTFT samples</em></p>
+<p><img src="/2024/08/30/fourier/image-20240831201335531.png"
+alt="image-20240831201335531" /></p>
+<p><span class="math display">\[
+\overline{x}(t) = \sum_{n=0}^{N_0-1}x(nT)\delta(t-nT)
+\]</span> applying the Fourier transform yieds <span
+class="math display">\[
+\overline{X}(\omega) = \sum_{n=0}^{N_0-1}x[n]e^{-jn\omega T}
+\]</span> But <span class="math inline">\(\overline{X}(\omega)\)</span>,
+the Fourier transform of <span
+class="math inline">\(\overline{x}(t)\)</span> is <span
+class="math inline">\(X(\omega)/T\)</span>, assuming negligible
+aliasing. Hence, <span class="math display">\[
+X(\omega) = T\overline{X}(\omega) = T\sum_{n=0}^{N_0-1}x[n]e^{-jn\omega
+T}
+\]</span> and <span class="math display">\[
+X(k\omega_0) =  T\sum_{n=0}^{N_0-1}x[n]e^{-jn k\omega_0 T}
+\]</span> with <span class="math inline">\(\hat{\omega}_0 = \omega_0
+T\)</span> <span class="math display">\[
+X(k\omega_0) = T\sum_{n=0}^{N_0-1}x[n]e^{-jn k\hat{\omega}_0}
+\]</span> <em>i.e. the relationship between CTFT and DFT is <span
+class="math inline">\(X(k\omega_0) = T\cdot X[k]\)</span>, DFT is a tool
+for computing the samples of CTFT</em></p>
+<h2 id="cd">C/D</h2>
+<p>Sampling with a periodic impulse train, followed by conversion to a
+discrete-time sequence</p>
+<p><img
+src="http://localhost:4000/2022/05/01/sampling/image-20230519000700841.png"
+alt="image-20230519000700841" /></p>
+<p><img src="/2024/08/30/fourier/image-20240830231619897.png"
+alt="image-20240830231619897" /></p>
+<p>The periodic impulse train is <span class="math display">\[
+s(t) = \sum_{n=-\infty}^{\infty}\delta(t-nT)
+\]</span> <span class="math inline">\(x_s(t)\)</span> can be expressed
+as <span class="math display">\[
+x_s(t) = \sum_{n=-\infty}^{\infty}x_c(nT)\delta(t-nT)
+\]</span> i.e., <em>the size (area) of the impulse</em> at sample time
+<span class="math inline">\(nT\)</span> is equal to the value of the
+continuous-time signal at that time.</p>
+<blockquote>
+<p><span class="math inline">\(x_s(t)\)</span>​ is, in a sense, a
+<em>continuous-time</em> signal (specifically, an impulse train)</p>
+<p><strong>samples of <span
+class="math inline">\(x_c(t)\)</span></strong> are represented by
+<em>finite numbers</em> in <span class="math inline">\(x[n]\)</span>
+rather than as the <em>areas of impulses,</em> as with <span
+class="math inline">\(x_s(t)\)</span></p>
+</blockquote>
+<h3 id="frequency-domain-representation-of-sampling">Frequency-Domain
+Representation of Sampling</h3>
+<p>The relationship between the Fourier transforms of the input and the
+output of the impulse train modulator <span class="math display">\[
+X_s(j\omega) = \frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(j(\omega
+-k\omega_s))
+\]</span> where <span class="math inline">\(\omega_s\)</span> is the
+sampling frequency in <em>radians/s</em></p>
+<hr />
+<p><span class="math inline">\(X(e^{j\hat{\omega}})\)</span>, the
+discrete-time Fourier transform (DTFT) of the sequence <span
+class="math inline">\(x[n]\)</span>, in terms of <span
+class="math inline">\(X_s(j\omega)\)</span> and <span
+class="math inline">\(X_c(j\omega)\)</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>continuous-time Fourier transform</th>
+<th>discrete-time Fourier transform</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(x_s(t) =
+\sum_{n=-\infty}^{\infty}x_c(nT)\delta(t-nT)\)</span></td>
+<td><span class="math inline">\(x[n]=x_c(nT)\)</span></td>
+</tr>
+<tr class="even">
+<td><span
+class="math inline">\(X_s(j\omega)=\sum_{n=-\infty}^{\infty}x_c(nT)e^{-j\omega
+Tn}\)</span></td>
+<td><span
+class="math inline">\(X(e^{j\hat{\omega}})=\sum_{n=-\infty}^{\infty}x_c(nT)e^{-j\hat{\omega}
+n}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+X(e^{j\omega T}) =
+\frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(j(\omega-k\omega_s))
+\]</span> or equivalently, <span class="math display">\[
+X(e^{j\hat{\omega}}) =
+\frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(j(\frac{\hat{\omega}}{T}-\frac{2\pi
+k}{T}))
+\]</span></p>
+<p><span class="math inline">\(X(e^{j\hat{\omega}})\)</span> is a
+frequency-scaled version of <span
+class="math inline">\(X_s(j\omega)\)</span> with the frequency scaling
+specified by <span class="math inline">\(\hat{\omega} =\omega
+T\)</span></p>
+<blockquote>
+<p>Ref. 9.5 DTFT connection with the CTFT</p>
+<p><img src="/2024/08/30/fourier/image-20240831154638540.png"
+alt="image-20240831154638540" /></p>
+<p><em>Here, <span class="math inline">\(\Omega = \omega
+T\)</span></em></p>
+</blockquote>
+<p>The factor <span class="math inline">\(\frac{1}{T}\)</span> in <span
+class="math inline">\(X(e^{j\hat{\omega}})\)</span> is
+<strong>misleading</strong>, actually <span
+class="math inline">\(x[n]\)</span> is not scaled by <span
+class="math inline">\(\frac{1}{T}\)</span> when taking <span
+class="math inline">\(\hat{\omega}\)</span> variable of integration into
+account <span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi}
+\int_{2\pi}X(e^{j\hat{\omega}})e^{j\hat{\omega} n}d\hat{\omega} \\
+&amp;= \frac{1}{2\pi}\int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c
+\left[ j\left(\frac{\hat{\omega}}{T} - \frac{2\pi k}{T}\right)\right]
+e^{j\hat{\omega} n}d\hat{\omega} \\
+&amp;\approx \frac{1}{2\pi}\frac{1}{T}\int_{2\pi}X_c
+(\frac{\hat{\omega}}{T} ) e^{j\hat{\omega}  n} d\hat{\omega} \\
+&amp;=\frac{1}{2\pi} \frac{1}{T}\int_{2\pi} \left[
+\int_{\infty}X_c(\Phi)\delta (\Phi - \frac{\hat{\omega}}{T} )d\Phi
+\right]  e^{j\hat{\omega}  n} d\hat{\omega} \\
+&amp;=\frac{1}{2\pi} \frac{1}{T} \int_{\infty}X_c(\Phi)d\Phi
+\int_{2\pi}\delta (\Phi - \frac{\hat{\omega}}{T} )e^{j\hat{\omega}  n}
+d\hat{\omega} \\
+&amp;=\frac{1}{2\pi} \frac{1}{T} \int_{\infty}X_c(\Phi)d\Phi
+\int_{2\pi}T\cdot \delta (\Phi T - \hat{\omega} )e^{j\hat{\omega}  n}
+d\hat{\omega} \\
+&amp;=\frac{1}{2\pi} \int_{\infty}X_c(\Phi) e^{j\Phi T n}d\Phi
+\end{align}\]</span></p>
+<p>That is <span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi}\int_{2\pi} \frac{1}{T}X_c
+(\frac{\hat{\omega}}{T} ) e^{j\hat{\omega}  n} d\hat{\omega} \\
+&amp;= \frac{1}{2\pi} \int_{\infty}X_c(\omega) e^{j\omega T n}d\omega
+\tag{31}
+\end{align}\]</span></p>
+<blockquote>
+<p>assuming Nyquist–Shannon sampling theorem is met</p>
+</blockquote>
+<p><span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi} \int_{\infty}X_c(\omega) e^{j\omega T
+n}d\omega \\
+&amp;= \frac{1}{2\pi} \int_{\infty}X_c(\omega) e^{j\omega t}d\omega \\
+&amp;= x_c(t)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(t = T n\)</span>, then <span
+class="math inline">\(x_r[n] = x_c(nT)\)</span></p>
+<hr />
+<p>Assuming <span class="math inline">\(x_c(t) = \cos(\omega_0
+t)\)</span>, <span class="math inline">\(x_s(t)=
+\sum_{n=-\infty}^{\infty}x_c(nT)\delta(t-nT)\)</span> and <span
+class="math inline">\(x[n]=x_c(nT)\)</span>, that is <span
+class="math display">\[\begin{align}
+x_c(t) &amp; = \cos(\omega_0 t) \\
+x_s(t) &amp;= \sum_{n=-\infty}^{\infty}\cos(\omega_0 nT)\delta(t-nT) \\
+x[n] &amp;= \cos(\omega_0 nT)
+\end{align}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(X_c(j\omega)\)</span>, the Fourier
+Transform of <span class="math inline">\(x_c(t)\)</span> <span
+class="math display">\[
+X_c(j\omega) = \pi[\delta(\omega - \omega_0) + \delta(\omega +
+\omega_0)]
+\]</span></p></li>
+<li><p><span class="math inline">\(X(e^{j\hat{\omega}})\)</span>, the
+the discrete-time Fourier transform (DTFT) of the sequence <span
+class="math inline">\(x[n]\)</span> <span class="math display">\[
+X(e^{j\hat{\omega}}) =\sum_{k=-\infty}^{+\infty}\pi[\delta(\hat{\omega}
+- \hat{\omega}_0-2\pi k) + \delta(\hat{\omega} + \hat{\omega}_0-2\pi k)]
+\]</span></p></li>
+<li><p><span class="math inline">\(X_s(j\omega)\)</span>, the Fourier
+Transform of <span class="math inline">\(x_s(t)\)</span> <span
+class="math display">\[
+X_s(j\omega)= \frac{1}{T}\sum_{k=-\infty}^{+\infty}\pi[\delta(\omega -
+\omega_0-k\omega_s) + \delta(\omega + \omega_0-k\omega_s)]
+\]</span></p></li>
+</ul>
+<p>Express <span class="math inline">\(X(e^{j\hat{\omega}})\)</span> in
+terms of <span class="math inline">\(X_s(j\omega)\)</span> and <span
+class="math inline">\(X_c(j\omega)\)</span> <span
+class="math display">\[
+X(e^{j\hat{\omega}}) =
+\frac{1}{T}\sum_{k=-\infty}^{+\infty}\pi[\delta(\frac{\hat{\omega}}{T} -
+\omega_0-k\omega_s) + \delta(\frac{\hat{\omega}}{T} +
+\omega_0-k\omega_s)]
+\]</span> Inverse <span
+class="math inline">\(X(e^{j\hat{\omega}})\)</span> <span
+class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi} \int_{2\pi}X(e^{j\hat{\omega}})
+e^{j\hat{\omega} n} d\hat{\omega} \\
+&amp;= \frac{1}{2\pi}\int_{2\pi} \pi[\delta(\frac{\hat{\omega}}{T} -
+\omega_0) + \delta(\frac{\hat{\omega}}{T} + \omega_0)]e^{j\hat{\omega}
+n} d\frac{\hat{\omega}}{T} \\
+&amp;= \frac{1}{2\pi}\int_{2\pi} \pi[\delta(\frac{\hat{\omega}}{T} -
+\omega_0)e^{j\hat{\omega}_0 n} + \delta(\frac{\hat{\omega}}{T} +
+\omega_0)e^{-j\hat{\omega}_0 n}] d\frac{\hat{\omega}}{T} \\
+&amp;= \frac{1}{2}[ e^{j\hat{\omega}_0 n}\int_{2\pi}
+[\delta(\frac{\hat{\omega}}{T} - \omega_0)d\frac{\hat{\omega}}{T} +
+e^{-j\hat{\omega}_0 n}\int_{2\pi} [\delta(\frac{\hat{\omega}}{T} +
+\omega_0)d\frac{\hat{\omega}}{T}] \\
+&amp;= \frac{1}{2}[ e^{j\hat{\omega}_0 n} + e^{-j\hat{\omega}_0 n} ] \\
+&amp;= \cos(\hat{\omega}_0 n)
+\end{align}\]</span></p>
+<p>or follow EQ.(31)</p>
+<p><span class="math display">\[\begin{align}
+x_r[n] &amp;= \frac{1}{2\pi} \int_{\infty}X_c(\omega) e^{j\omega T
+n}d\omega \\
+&amp;= \frac{1}{2\pi} \int_{\infty} \pi[\delta(\omega - \omega_0) +
+\delta(\omega + \omega_0)]e^{j\omega T n}d\omega \\
+&amp;= \frac{1}{2}(e^{j\omega_0 T n}+e^{-j\omega_0 T n}) \\
+&amp;= \cos(\hat{\omega}_0 n)
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\hat{\omega}_0 = \omega_0
+T\)</span></p>
+<h2 id="dc">D/C</h2>
+<p><img src="/2024/08/30/fourier/image-20240831161852787.png"
+alt="image-20240831161852787" /></p>
+<p><img src="/2024/08/30/fourier/image-20240831162625943.png"
+alt="image-20240831162625943" /></p>
+<p><img src="/2024/08/30/fourier/image-20240831162559492.png"
+alt="image-20240831162559492" /></p>
+<h2 id="zero-padding">zero padding</h2>
+<p>This option increases <span class="math inline">\(N_0\)</span>, the
+number of samples of <span class="math inline">\(x(t)\)</span>, by
+adding dummy samples of 0 value. This addition of dummy samples is known
+as zero padding.</p>
+<p>We should keep in mind that even if the fence were transparent, we
+would see a reality distorted by <strong>aliasing</strong>.</p>
+<p>Zero padding only allows us to look at more samples of that imperfect
+reality</p>
+<h2 id="transfer-function">Transfer function</h2>
+<h3 id="sampled-impulse-response">sampled impulse response</h3>
+<p>The below equation demonstrates how to obtain <strong>continuous
+Fourier Transform</strong> from <strong>DTFT</strong> . <span
+class="math display">\[
+X_c(\omega) = T \cdot X(\omega)
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(T\)</span> is sample period, follow
+previous equation</p>
+</blockquote>
+<h3 id="useful-functions">useful functions</h3>
+<ul>
+<li><p>using <code>fft</code></p>
+<p>The outputs of the DFT are <strong>samples</strong> of the
+DTFT</p></li>
+<li><p>using <code>freqz</code></p>
+<p>modeling as <strong>FIR filter</strong>, and the impulse response
+sequence of an FIR filter is the same as the sequence of filter
+coefficients, we can express the frequency response in terms of either
+the filter coefficients or the impulse response</p>
+<blockquote>
+<p><code>fft</code> is used in <code>freqz</code> internally</p>
+</blockquote></li>
+</ul>
+<h3 id="example">Example</h3>
+<p><strong>Question</strong>:</p>
+<p>How to obtain continuous system transfer function from sampled
+impulse</p>
+<p><strong>Answer</strong>:</p>
+<p>using above mentioned functions</p>
+<hr />
+<blockquote>
+<p>First order lowpass filter with 3-dB frequency
+<strong>1Hz</strong></p>
+</blockquote>
+<p><img src="/2024/08/30/fourier/image-20220501020004068.png"
+alt="image-20220501020004068" /></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% continuous system</span></span><br><span class="line">s = tf(<span class="string">&#x27;s&#x27;</span>);</span><br><span class="line">h = <span class="number">2</span>*<span class="built_in">pi</span>/(<span class="number">2</span>*<span class="built_in">pi</span>+s);</span><br><span class="line">[mag, phs, wout] = bode(h);</span><br><span class="line">fct = wout(:)/<span class="number">2</span>/<span class="built_in">pi</span>;</span><br><span class="line">Hct_dB = <span class="number">20</span>*<span class="built_in">log10</span>(mag(:));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fstep = <span class="number">0.01</span>;           <span class="comment">% freq resolution</span></span><br><span class="line">fnyqst = <span class="number">100</span>;</span><br><span class="line">Ts = <span class="number">1</span>/(<span class="number">2</span>*fnyqst);</span><br><span class="line">Fs = <span class="number">1</span>/Ts;              <span class="comment">% sampling freq</span></span><br><span class="line">Ns = <span class="built_in">ceil</span>(Fs/fstep);    <span class="comment">% samping points</span></span><br><span class="line">fstep = Fs/Ns;          <span class="comment">% update fstep</span></span><br><span class="line">t = (<span class="number">0</span>:Ns<span class="number">-1</span>)*Ts;        <span class="comment">% sampling time points</span></span><br><span class="line"></span><br><span class="line">y = impulse(h, t);      <span class="comment">% impulse resp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% modelling as discrete system</span></span><br><span class="line">Y = fft(y);                 <span class="comment">% dft</span></span><br><span class="line">Hfft = Y * Ts;              <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfft_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfft(<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)));</span><br><span class="line">ffft = (<span class="number">1</span>:Ns/<span class="number">2</span>+<span class="number">1</span>)*fstep - fstep;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Hfir, ffir] = freqz(y, <span class="number">1</span>, [], <span class="number">1</span>/Ts);   <span class="comment">% modelling as FIR</span></span><br><span class="line">Hfir = Hfir * Ts;           <span class="comment">% !!! multiply Ts</span></span><br><span class="line">Hfir_dB = <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(Hfir));</span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot</span></span><br><span class="line">semilogx(fct, Hct_dB, <span class="string">&#x27;k&#x27;</span>, ffft, Hfft_dB, <span class="string">&#x27;r.-&#x27;</span>, ffir, Hfir_dB, <span class="string">&#x27;b--&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;bode(s)&#x27;</span>, <span class="string">&#x27;fft&#x27;</span>, <span class="string">&#x27;FIR model&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(Hz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">xlim([<span class="number">1e-2</span> <span class="number">1e2</span>]);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response of different methods&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="gotcha">Gotcha</h2>
+<p>A remarkable fact of linear systems is that the <strong>complex
+exponentials</strong> are <strong>eigenfunctions</strong> of a linear
+system, as the system output to these inputs equals the input multiplied
+by a constant factor.</p>
+<ul>
+<li>Both amplitude and phase may change</li>
+<li>but the frequency does not change</li>
+</ul>
+<blockquote>
+<p>For an input <span class="math inline">\(x(t)\)</span>, we can
+determine the output through the use of the convolution integral, so
+that with <span class="math inline">\(x(t) = e^{st}\)</span> <span
+class="math display">\[\begin{align}
+y(t) &amp;= \int_{-\infty}^{+\infty}h(\tau)x(t-\tau)d\tau \\
+&amp;= \int_{-\infty}^{+\infty} h(\tau) e^{s(t-\tau)}d\tau \\
+&amp;= e^{st}\int_{-\infty}^{+\infty} h(\tau) e^{-s\tau}d\tau \\
+&amp;= e^{st}H(s)
+\end{align}\]</span></p>
+</blockquote>
+<p>Take the input signal to be a complex exponential of the form <span
+class="math inline">\(x(t)=Ae^{j\phi}e^{j\omega t}\)</span></p>
+<p><span class="math display">\[\begin{align}
+y(t) &amp;= h(t)*x(t) \\
+&amp;= H(j\omega)Ae^{j\phi}e^{j\omega t}
+\end{align}\]</span></p>
+<p>The frequency response at <span
+class="math inline">\(-\omega\)</span> is the <strong>complex
+conjugate</strong> of the frequency response at <span
+class="math inline">\(+\omega\)</span>, given <span
+class="math inline">\(h(t)\)</span> is real</p>
+<p><span class="math display">\[\begin{align}
+H^*(t) &amp;= \left(\int_{-\infty}^{+\infty}h(t)e^{-j\omega
+t}dt\right)^* \\
+&amp;= \int_{-\infty}^{+\infty}h^*(t)e^{+j\omega t}dt \\
+&amp;= \int_{-\infty}^{+\infty}h(t)e^{-j(-\omega t)}dt \\
+&amp;= H(-j\omega)
+\end{align}\]</span></p>
+<p>The <strong>real cosine signal</strong> is actually composed of two
+<strong>complex exponential signals</strong>: one with positive
+frequency and the other with negative <span class="math display">\[
+cos(\omega t + \phi) = \frac{e^{j(\omega t + \phi)} + e^{-j(\omega t +
+\phi)}}{2}
+\]</span></p>
+<p>The sinusoidal response is the sum of the complex-exponential
+response at the positive frequency <span
+class="math inline">\(\omega\)</span> and the response at the
+corresponding negative frequency <span
+class="math inline">\(-\omega\)</span> because of LTI systems's
+superposition property</p>
+<ul>
+<li><p>input: <span class="math display">\[\begin{align}
+x(t) &amp;= A cos(\omega t + \phi) \\
+&amp;= \frac{1}{2}Ae^{\phi}e^{\omega t} +
+\frac{1}{2}Ae^{-\phi}e^{-\omega t}
+\end{align}\]</span></p></li>
+<li><p>output with <span
+class="math inline">\(H(j\omega)=Ge^{j\theta}\)</span>: <span
+class="math display">\[\begin{align}
+y(t) &amp;= H(j\omega)\frac{1}{2}Ae^{\phi}e^{\omega t}
++  H(-j\omega)\frac{1}{2}Ae^{-\phi}e^{-\omega t} \\
+&amp;= Ge^{j\theta}\frac{1}{2}Ae^{\phi}e^{\omega t} +
+Ge^{-j\theta}\frac{1}{2}Ae^{-\phi}e^{-\omega t} \\
+&amp;= GAcos(\omega t + \phi + \theta)
+\end{align}\]</span></p></li>
+</ul>
+<p>Its phase shift is <span class="math inline">\(\theta\)</span> and
+gain is <span class="math inline">\(G\)</span>, which is same with <span
+class="math inline">\(H(j\omega)\)</span>.</p>
+<h2 id="reference">reference</h2>
+<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
+3rd edition</p>
+<p>B.P. Lathi, Roger Green. Linear Systems and Signals (The Oxford
+Series in Electrical and Computer Engineering) 3rd Edition</p>
+<p>Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals
+&amp; systems (2nd ed.)</p>
+<p>James H. McClellan, Ronald Schafer, and Mark Yoder. 2015. DSP First
+(2nd. ed.). Prentice Hall Press, USA</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +916,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -331,7 +1021,7 @@ target="_blank" rel="noopener" href="http://individual.utoronto.ca/trevorcaldwel
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,7 +1191,7 @@ target="_blank" rel="noopener" href="http://www2.eecs.berkeley.edu/Pubs/TechRpts
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -839,7 +1529,7 @@ target="_blank" rel="noopener" href="https://stacks.stanford.edu/file/druid:xq06
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -933,7 +1623,7 @@ target="_blank" rel="noopener" href="https://gist.github.com/guisehn/5438bbc2213
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1221,7 +1911,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">http
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1549,7 +2239,7 @@ on Circuits and Systems I: Regular Papers</em>, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2045,7 +2735,7 @@ pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2137,7 +2827,7 @@ target="_blank" rel="noopener" href="https://www.analog.com/en/resources/technic
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
+      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2227,117 +2917,8 @@ target="_blank" rel="noopener" href="https://youtu.be/uwRpP20Lprc?si=SGPta86jRCd
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/14/spur/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/14/spur/" class="post-title-link" itemprop="url">Spur & Spread Spectrum Clocking (SSC)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-07-14 09:17:11" itemprop="dateCreated datePublished" datetime="2024-07-14T09:17:11+00:00">2024-07-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-30 00:50:38" itemprop="dateModified" datetime="2024-08-30T00:50:38+00:00">2024-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/noise/" itemprop="url" rel="index"><span itemprop="name">noise</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><em>TODO</em> 📅</p>
-<p><strong>spurs</strong> are carrier or clock frequency spectral
-imperfections measured in the frequency domain just like phase noise.
-However, unlike phase noise they are <em>discrete</em> frequency
-components.</p>
-<ul>
-<li><p>Spurs are deterministic.</p></li>
-<li><p>Spur power is independent of bandwidth.</p></li>
-<li><p>Spurs contribute bounded peak jitter in the time domain.</p></li>
-</ul>
-<h2 id="reference-spurs">reference spurs</h2>
-<blockquote>
-<p>https://www.linkedin.com/posts/chembiyan-t-0b34b910_pll-rfdesign-circuits-activity-7111435571448713216-9jng?utm_source=share&amp;utm_medium=member_desktop</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Timing 101 #6: The Case of the Spurious Phase Noise Part I, Silicon
-Labs, [<a
-target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i">https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i</a>]</p>
-<p>Timing 101 #7: The Case of the Spurious Phase Noise Part II, Silicon
-Labs, [<a
-target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M000000kntqUAA/timing-101-7-the-case-of-the-spurious-phase-noise-part-ii">https://community.silabs.com/s/share/a5U1M000000kntqUAA/timing-101-7-the-case-of-the-spurious-phase-noise-part-ii</a>]</p>
-<p>Timing 101 #6: The Case of the Spurious Phase Noise Part I, [<a
-target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i?language=en_US">https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i?language=en_US</a>]</p>
-<p>Timing 201 #2: The Case of the Phase Noise That Wasn’t - Part 2, [<a
-target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US">https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US</a>]</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

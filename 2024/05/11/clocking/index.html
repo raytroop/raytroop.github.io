@@ -18,13 +18,14 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Injection Lock TODO 📅 Clock Edges on PI And for a phase interpolator, you need those reference clocks to be completely the opposite. Ideally they would be triangular shaped   four input clocks given">
+    <meta name="description" content="Switched Capacitor Banks Q: why \(R_b\) ? A: TODO 📅   Hu, Yizhe. &quot;Flicker noise upconversion and reduction mechanisms in RF&#x2F;millimeter-wave oscillators for 5G communications.&quot; PhD diss., 2019. S. D.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="clocking">
 <meta property="og:url" content="http://example.com/2024/05/11/clocking/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="Injection Lock TODO 📅 Clock Edges on PI And for a phase interpolator, you need those reference clocks to be completely the opposite. Ideally they would be triangular shaped   four input clocks given">
+<meta property="og:description" content="Switched Capacitor Banks Q: why \(R_b\) ? A: TODO 📅   Hu, Yizhe. &quot;Flicker noise upconversion and reduction mechanisms in RF&#x2F;millimeter-wave oscillators for 5G communications.&quot; PhD diss., 2019. S. D.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/05/11/clocking/image-20240901105919333.png">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/image-20240821203756602.png">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/clock2clock.drawio.svg">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/image-20240806230158367.png">
@@ -46,10 +47,10 @@
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/image-20240720141659415.png">
 <meta property="og:image" content="http://example.com/2024/05/11/clocking/image-20240720141813256.png">
 <meta property="article:published_time" content="2024-05-11T09:36:14.000Z">
-<meta property="article:modified_time" content="2024-09-01T01:49:13.584Z">
+<meta property="article:modified_time" content="2024-09-01T08:18:05.088Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/05/11/clocking/image-20240821203756602.png">
+<meta name="twitter:image" content="http://example.com/2024/05/11/clocking/image-20240901105919333.png">
 
 
 <link rel="canonical" href="http://example.com/2024/05/11/clocking/">
@@ -158,11 +159,11 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#injection-lock"><span class="nav-number">1.</span> <span class="nav-text">Injection Lock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-edges-on-pi"><span class="nav-number">2.</span> <span class="nav-text">Clock Edges on PI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#false-locking"><span class="nav-number">3.</span> <span class="nav-text">False locking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#different-frequency-clock-impact-on-edge"><span class="nav-number">4.</span> <span class="nav-text">different frequency
-clock impact on edge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limit-cycle-hunting-jitter"><span class="nav-number">5.</span> <span class="nav-text">limit cycle &amp; hunting
-jitter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cdr-loop-latency"><span class="nav-number">6.</span> <span class="nav-text">CDR Loop Latency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#decimation"><span class="nav-number">6.1.</span> <span class="nav-text">Decimation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loop-bandwidth"><span class="nav-number">7.</span> <span class="nav-text">Loop Bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#continuous-time-approximation-limitations"><span class="nav-number">8.</span> <span class="nav-text">Continuous-Time
-Approximation Limitations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-distribution"><span class="nav-number">9.</span> <span class="nav-text">clock distribution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pfd"><span class="nav-number">10.</span> <span class="nav-text">PFD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feedback-dividers"><span class="nav-number">11.</span> <span class="nav-text">Feedback Dividers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-gating"><span class="nav-number">12.</span> <span class="nav-text">clock gating</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pll-type-order"><span class="nav-number">13.</span> <span class="nav-text">PLL Type &amp; Order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac-coupled-buffer"><span class="nav-number">14.</span> <span class="nav-text">AC-coupled buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-division-with-jitter-and-phase-noise"><span class="nav-number">15.</span> <span class="nav-text">Clock Division with
-Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-20logn-rule"><span class="nav-number">15.1.</span> <span class="nav-text">The 20log(N) Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-about-phase-jitter"><span class="nav-number">15.2.</span> <span class="nav-text">What About Phase Jitter?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bang-bang-phase-detector"><span class="nav-number">16.</span> <span class="nav-text">Bang-Bang Phase Detector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linearing-bb-pd"><span class="nav-number">16.1.</span> <span class="nav-text">Linearing BB-PD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-noise-term"><span class="nav-number">16.2.</span> <span class="nav-text">Self-Noise Term</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pll-bandwidth-test"><span class="nav-number">17.</span> <span class="nav-text">PLL bandwidth test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#narrowband-approximation"><span class="nav-number">18.</span> <span class="nav-text">narrowband approximation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#approximation-limitation"><span class="nav-number">18.1.</span> <span class="nav-text">approximation limitation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leesons-model"><span class="nav-number">19.</span> <span class="nav-text">Leeson&#39;s model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lorentzian-spectrum"><span class="nav-number">20.</span> <span class="nav-text">Lorentzian Spectrum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#am-pm-conversion"><span class="nav-number">21.</span> <span class="nav-text">AM-PM conversion</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#switched-capacitor-banks"><span class="nav-number">1.</span> <span class="nav-text">Switched Capacitor Banks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#injection-lock"><span class="nav-number">2.</span> <span class="nav-text">Injection Lock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-edges-on-pi"><span class="nav-number">3.</span> <span class="nav-text">Clock Edges on PI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#false-locking"><span class="nav-number">4.</span> <span class="nav-text">False locking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#different-frequency-clock-impact-on-edge"><span class="nav-number">5.</span> <span class="nav-text">different frequency
+clock impact on edge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limit-cycle-hunting-jitter"><span class="nav-number">6.</span> <span class="nav-text">limit cycle &amp; hunting
+jitter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cdr-loop-latency"><span class="nav-number">7.</span> <span class="nav-text">CDR Loop Latency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loop-bandwidth"><span class="nav-number">8.</span> <span class="nav-text">Loop Bandwidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#continuous-time-approximation-limitations"><span class="nav-number">9.</span> <span class="nav-text">Continuous-Time
+Approximation Limitations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-distribution"><span class="nav-number">10.</span> <span class="nav-text">clock distribution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pfd"><span class="nav-number">11.</span> <span class="nav-text">PFD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feedback-dividers"><span class="nav-number">12.</span> <span class="nav-text">Feedback Dividers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-gating"><span class="nav-number">13.</span> <span class="nav-text">clock gating</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pll-type-order"><span class="nav-number">14.</span> <span class="nav-text">PLL Type &amp; Order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac-coupled-buffer"><span class="nav-number">15.</span> <span class="nav-text">AC-coupled buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock-division-with-jitter-and-phase-noise"><span class="nav-number">16.</span> <span class="nav-text">Clock Division with
+Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-20logn-rule"><span class="nav-number">16.1.</span> <span class="nav-text">The 20log(N) Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-about-phase-jitter"><span class="nav-number">16.2.</span> <span class="nav-text">What About Phase Jitter?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bang-bang-phase-detector"><span class="nav-number">17.</span> <span class="nav-text">Bang-Bang Phase Detector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linearing-bb-pd"><span class="nav-number">17.1.</span> <span class="nav-text">Linearing BB-PD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-noise-term"><span class="nav-number">17.2.</span> <span class="nav-text">Self-Noise Term</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pll-bandwidth-test"><span class="nav-number">18.</span> <span class="nav-text">PLL bandwidth test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#narrowband-approximation"><span class="nav-number">19.</span> <span class="nav-text">narrowband approximation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#approximation-limitation"><span class="nav-number">19.1.</span> <span class="nav-text">approximation limitation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leesons-model"><span class="nav-number">20.</span> <span class="nav-text">Leeson&#39;s model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lorentzian-spectrum"><span class="nav-number">21.</span> <span class="nav-text">Lorentzian Spectrum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#am-pm-conversion"><span class="nav-number">22.</span> <span class="nav-text">AM-PM conversion</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -175,7 +176,7 @@ Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-l
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -257,7 +258,7 @@ Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
+      <time title="Modified: 2024-09-01 08:18:05" itemprop="dateModified" datetime="2024-09-01T08:18:05+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -278,7 +279,21 @@ Jitter and Phase Noise</span></a><ol class="nav-child"><li class="nav-item nav-l
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="injection-lock">Injection Lock</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="switched-capacitor-banks">Switched Capacitor Banks</h2>
+<p>Q: why <span class="math inline">\(R_b\)</span> ?</p>
+<p>A: <em>TODO</em> 📅</p>
+<p><img src="/2024/05/11/clocking/image-20240901105919333.png"
+alt="image-20240901105919333" /></p>
+<blockquote>
+<p>Hu, Yizhe. "Flicker noise upconversion and reduction mechanisms in
+RF/millimeter-wave oscillators for 5G communications." PhD diss.,
+2019.</p>
+<p>S. D. Toso, A. Bevilacqua, A. Gerosa and A. Neviani, "A thorough
+analysis of the tank quality factor in LC oscillators with switched
+capacitor banks," <em>Proceedings of 2010 IEEE International Symposium
+on Circuits and Systems</em>, Paris, France, 2010, pp. 1903-1906</p>
+</blockquote>
+<h2 id="injection-lock">Injection Lock</h2>
 <p><em>TODO</em> 📅</p>
 <h2 id="clock-edges-on-pi">Clock Edges on PI</h2>
 <p>And for a phase interpolator, you need those reference clocks to be
@@ -337,15 +352,6 @@ bits/second).</p>
 <p>[Fernando , Marvell Italy."Considerations for CDR Bandwidth Proposal"
 <a
 target="_blank" rel="noopener" href="https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf">https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf</a>]</p>
-</blockquote>
-<h3 id="decimation">Decimation</h3>
-<p>Decimation is commonly employed to alleviate the high-speed
-requirement. However, decimation increases <em>loop-latency</em> which
-causes excessive <em>dither jitter</em></p>
-<blockquote>
-<p>L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery
-Architecture for Multi-Gigabit/s Binary Links," in IEEE Journal of
-Solid-State Circuits, vol. 41, no. 8, pp. 1867-1875, Aug. 2006</p>
 </blockquote>
 <h2 id="loop-bandwidth">Loop Bandwidth</h2>
 <blockquote>

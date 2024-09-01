@@ -18,13 +18,14 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="discrete-time frequency: \(\hat{\omega}&#x3D;\omega T_s\), units are radians per sample  warmup          Continuous-time signals \(x_c(t)\) Discrete-time signals \(x[n]\)     Aperiodic signals Continuous">
+    <meta name="description" content="Below diagram show the windowing effect and sampling   discrete-time frequency: \(\hat{\omega}&#x3D;\omega T_s\), units are radians per sample  warmup          Continuous-time signals \(x_c(t)\) Discrete-t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fourier Transform">
 <meta property="og:url" content="http://example.com/2024/08/30/fourier/index.html">
 <meta property="og:site_name" content="KNOW-HOW">
-<meta property="og:description" content="discrete-time frequency: \(\hat{\omega}&#x3D;\omega T_s\), units are radians per sample  warmup          Continuous-time signals \(x_c(t)\) Discrete-time signals \(x[n]\)     Aperiodic signals Continuous">
+<meta property="og:description" content="Below diagram show the windowing effect and sampling   discrete-time frequency: \(\hat{\omega}&#x3D;\omega T_s\), units are radians per sample  warmup          Continuous-time signals \(x_c(t)\) Discrete-t">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/08/30/fourier/NinDFT.drawio.svg">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240831104459715.png">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240831152155093.png">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240830222204470.png">
@@ -39,6 +40,7 @@
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240831190258683.png">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240831193912709.png">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240831201335531.png">
+<meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240901155629500.png">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240830231619897.png">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240831154638540.png">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240831161852787.png">
@@ -46,10 +48,10 @@
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20240831162559492.png">
 <meta property="og:image" content="http://example.com/2024/08/30/fourier/image-20220501020004068.png">
 <meta property="article:published_time" content="2024-08-30T20:10:15.000Z">
-<meta property="article:modified_time" content="2024-09-01T01:49:13.656Z">
+<meta property="article:modified_time" content="2024-09-01T08:18:05.160Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/08/30/fourier/image-20240831104459715.png">
+<meta name="twitter:image" content="http://example.com/2024/08/30/fourier/NinDFT.drawio.svg">
 
 
 <link rel="canonical" href="http://example.com/2024/08/30/fourier/">
@@ -177,7 +179,7 @@ Representation of Sampling</span></a></li></ol></li><li class="nav-item nav-leve
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -259,7 +261,7 @@ Representation of Sampling</span></a></li></ol></li><li class="nav-item nav-leve
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
+      <time title="Modified: 2024-09-01 08:18:05" itemprop="dateModified" datetime="2024-09-01T08:18:05+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -280,7 +282,10 @@ Representation of Sampling</span></a></li></ol></li><li class="nav-item nav-leve
     
     
     
-    <div class="post-body" itemprop="articleBody"><blockquote>
+    <div class="post-body" itemprop="articleBody"><p>Below diagram show the windowing effect and sampling</p>
+<p><img src="/2024/08/30/fourier/NinDFT.drawio.svg"
+alt="NinDFT.drawio" /></p>
+<blockquote>
 <p><strong>discrete-time frequency</strong>: <span
 class="math inline">\(\hat{\omega}=\omega T_s\)</span>, units are
 <strong><em>radians per sample</em></strong></p>
@@ -561,9 +566,8 @@ for computing the samples of CTFT</em></p>
 <h2 id="cd">C/D</h2>
 <p>Sampling with a periodic impulse train, followed by conversion to a
 discrete-time sequence</p>
-<p><img
-src="http://localhost:4000/2022/05/01/sampling/image-20230519000700841.png"
-alt="image-20230519000700841" /></p>
+<p><img src="/2024/08/30/fourier/image-20240901155629500.png"
+alt="image-20240901155629500" /></p>
 <p><img src="/2024/08/30/fourier/image-20240830231619897.png"
 alt="image-20240830231619897" /></p>
 <p>The periodic impulse train is <span class="math display">\[

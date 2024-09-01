@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,179 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/07/Overflowflag-verilog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/07/Overflowflag-verilog/" class="post-title-link" itemprop="url">Overflow Detection in Verilog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-07 21:12:38" itemprop="dateCreated datePublished" datetime="2022-05-07T21:12:38+00:00">2022-05-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>Arithmetic operations have a potential to run into a condition known
+as <em>overflow</em>.</li>
+<li>Overflow occurs with respect to the <strong>size of the data
+type</strong> that must accommodate the result.</li>
+<li>Overflow indicates that the result was <em>too large</em> or <em>too
+small</em> to fit in the original data type.</li>
+</ul>
+<h2 id="overflow-when-adding-unsigned-number">Overflow when adding
+unsigned number</h2>
+<p>When two unsigned numbers are added, overflow occurs if</p>
+<ul>
+<li>there is a <strong>carry out</strong> of the leftmost bit.</li>
+</ul>
+<h2 id="overflow-when-adding-signed-numbers">Overflow when adding signed
+numbers</h2>
+<p>When two signed 2's complement numbers are added, overflow is
+detected if:</p>
+<ol type="1">
+<li>both operands are positive and the result is negative, or</li>
+<li>both operands are negative and the result is positive.</li>
+</ol>
+<p>Notice that when operands have <strong>opposite signs</strong>, their
+sum will never overflow. Therefore, <em>overflow can only occur when the
+operands have the same sign</em>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>carryout_sum</th>
+<th>overflow</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>0</strong>11 (3)</td>
+<td><strong>0</strong>11 (3)</td>
+<td>0_<strong>1</strong>10 (6)</td>
+<td>overflow</td>
+</tr>
+<tr class="even">
+<td><strong>1</strong>00 (-4)</td>
+<td><strong>1</strong>00 (-4)</td>
+<td>1_<strong>0</strong>00 (-8)</td>
+<td>underflow</td>
+</tr>
+<tr class="odd">
+<td><strong>1</strong>11 (-1)</td>
+<td><strong>1</strong>10 (-2)</td>
+<td>1_<strong>1</strong>01 (-3)</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>carryout information <strong>ISN'T</strong> needed to detect
+overflow/underflow for signed number addition</p>
+</blockquote>
+<h3 id="extbitmsb">EXTBIT:MSB</h3>
+<p>extended 1bit and msb bit can be used to detect overflow or
+underflow</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span>  [<span class="number">1</span>:<span class="number">0</span>]      acc_inc;</span><br><span class="line"><span class="keyword">reg</span> <span class="keyword">signed</span>  [<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>]   acc;</span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">10</span>  :<span class="number">0</span>]   acc_w;  <span class="comment">// extend 1b for saturation</span></span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>]   acc_stat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> acc_w = acc + acc_inc;   <span class="comment">// signed arithmetic</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> acc_stat = (acc_w[<span class="number">10</span>-<span class="number">1</span> +: <span class="number">2</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;(<span class="number">10</span>-<span class="number">1</span>)&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125; : <span class="comment">// up saturation</span></span><br><span class="line">    (acc_w[<span class="number">10</span>-<span class="number">1</span> +: <span class="number">2</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;(<span class="number">10</span>-<span class="number">1</span>)&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;  :   			 <span class="comment">// down saturation</span></span><br><span class="line">    acc_w[<span class="number">10</span>-<span class="number">1</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code> : overflow, up saturation</p>
+<p><code>2'b10</code>: underflow, down saturation</p>
+</blockquote>
+<h2 id="s-complement-negative-number">2's complement negative
+number</h2>
+<ol type="1">
+<li>Flip all bits</li>
+<li>Add <strong>1</strong>.</li>
+</ol>
+<p>N-bit signed number <span class="math display">\[
+A = -M_{N-1}2^{N-1}+\sum_{k=0}^{N-2}M_k2^k
+\]</span> Flip all bits <span class="math display">\[\begin{align}
+A_{flip} &amp;= -(1-M_{N-1})2^{N-1} +\sum_{k=0}^{N-2}(1-M_k)2^k \\
+&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k
+-2^{N-1}+\sum_{k=0}^{N-2}2^k \\
+&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k -1
+\end{align}\]</span></p>
+<p>Add <strong>1</strong> <span class="math display">\[\begin{align}
+A_- &amp;= A_{flip}+1 \\
+&amp;= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k \\
+&amp;= -A
+\end{align}\]</span></p>
+<h2 id="reference">reference</h2>
+<p>Overflow Detection: <a
+target="_blank" rel="noopener" href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +399,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -556,7 +729,7 @@ Processing</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -689,7 +862,7 @@ alt="image-20220507122217830" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1031,7 +1204,7 @@ target="_blank" rel="noopener" href="http://cdn.teledynelecroy.com/files/whitepa
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1122,7 +1295,7 @@ running kernel:</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1633,7 +1806,7 @@ Press. doi:10.1017/CBO9780511835261</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2049,7 +2222,7 @@ capacitance</strong></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2234,7 +2407,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:02" itemprop="dateModified" datetime="2024-08-31T15:36:02+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2328,7 +2501,7 @@ those voltage-dependent DRC checks! - siemens</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2491,171 +2664,8 @@ alt="image-20220404195156776" /></p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/03/functional-coverage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/03/functional-coverage/" class="post-title-link" itemprop="url">Functional Coverage Modeling</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-03 20:19:08" itemprop="dateCreated datePublished" datetime="2022-04-03T20:19:08+00:00">2022-04-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="coverage-options">Coverage Options</h2>
-<ul>
-<li>Explicit (user defined)
-<ul>
-<li>Fully and clearly expressed within sources
-<ul>
-<li>Sequence and temporal coverage using assertions</li>
-<li>Data-oriented coverage using <code>covergroup</code></li>
-</ul></li>
-<li>Planned and defined by the verification team</li>
-</ul></li>
-<li>Implicit
-<ul>
-<li>Derived or computed from source
-<ul>
-<li>Code coverage measured by the simulator</li>
-</ul></li>
-<li>May be defined outside the verification team</li>
-<li>May be implied by the verification interface
-<ul>
-<li>e.g., an industry standard protocol</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id="explicit-coverage-in-systemverilog">Explicit Coverage in
-Systemverilog</h2>
-<h3 id="assertions-for-control-oriented-coverage">Assertions for
-control-oriented coverage</h3>
-<ul>
-<li>Defined as procedural statements</li>
-<li><strong>CANNOT</strong> be defined in a class</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">property</span> req_gnt (cyc);</span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    	<span class="built_in">$rose</span>(req) ##<span class="number">0</span> (req &amp;&amp; !gnt)[cyc] ##<span class="number">1</span> gnt;</span><br><span class="line"><span class="keyword">endproperty</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">3</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">4</span>));</span><br><span class="line"><span class="keyword">cover</span> <span class="keyword">property</span> (req_gnt(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Control-oriented coverage uses SystemVerilog Assertion (SVA) syntax
-and the cover directive. It is used to cover sequences of signal values
-over time. Assertions cannot be declared or "covered" in a class
-declaration, so their use in an UVM verification environment is
-restricted to <strong>interface only</strong></p>
-</blockquote>
-<h3 id="covergroup-for-data-oriented-coverage">Covergroup for
-data-oriented coverage</h3>
-<ul>
-<li>CAN be declared as a class member and created in class
-constructor</li>
-<li>Used in <strong>interface</strong> and module UVCs</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">covergroup</span> cg @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    len: <span class="keyword">coverpoint</span> pkt<span class="variable">.lenght</span> &#123;</span><br><span class="line">        <span class="keyword">illegal_bins</span> zero = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">bins</span> sml = &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    addrxlen : <span class="keyword">cross</span> pkt<span class="variable">.addr</span>, len;</span><br><span class="line"><span class="keyword">endgroup</span></span><br><span class="line"></span><br><span class="line">cg cg1 = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Data-oriented coverage uses the <code>covergroup</code> construct.
-Covergroups can be declared and created in classes, therefore they are
-essential for explicit coverage in a UVM verification environment.</p>
-</blockquote>
-<h4 id="interface-monitor-coverage">Interface Monitor Coverage</h4>
-<p><code>covergroup new</code> constructor is called
-<strong>directly</strong> off the declaration of the covergroup, it does
-not have a separate instance name</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">collected_pkts_cq = <span class="keyword">new</span>();</span><br></pre></td></tr></table></figure>
-<p>The <code>covergroup</code> instance must be created in the class
-constructor, not a UVM <code>build_phase</code> or other phase
-method</p>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403210225837.png"
-alt="image-20220403210225837" /></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_tx_monitor <span class="keyword">extends</span> uvm_monitor;</span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">covergroup</span> collected_pkts_cg;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endgroup</span></span><br><span class="line">    </span><br><span class="line">    yapp_packet packet_collected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">        collect_packet();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">task</span> collect_packet();</span><br><span class="line">        <span class="comment">// read RTL signals via interface</span></span><br><span class="line">        <span class="comment">// reconstruct packet</span></span><br><span class="line">        collected_pkts_cg<span class="variable">.sample</span>();</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">endtask</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span></span><br></pre></td></tr></table></figure>
-<h4 id="module-uvc-coverage">Module UVC Coverage</h4>
-<p>Typical module UVC coverage:</p>
-<ul>
-<li>Routing - packets flow from input ports to all legal outputs</li>
-<li>latency - all packets received within speicied delay</li>
-</ul>
-<blockquote>
-<p>The module UVC monitor receives data from the interface monitors via
-analysis ports, so the implementation of the analysis write function is
-a convenient place to put coverage code</p>
-</blockquote>
-<p><img
-src="/2022/04/03/functional-coverage/image-20220403212529981.png"
-alt="image-20220403212529981" /></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

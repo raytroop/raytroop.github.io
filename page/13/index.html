@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,142 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/05/in-design-signoff-metalfill-innovus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/05/in-design-signoff-metalfill-innovus/" class="post-title-link" itemprop="url">In-design Sign-off Metal Fill Flow in Innovus</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-05 18:18:37" itemprop="dateCreated datePublished" datetime="2022-03-05T18:18:37+00:00">2022-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/innovus/" itemprop="url" rel="index"><span itemprop="name">innovus</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Before inserting sign-off metal fill, stream out a GDSII stream file
+of the current database. Specify the mapping file and units that match
+with the rule deck you specify while inserting metal fill. If necessary,
+include the detailed-cell (<code>-merge</code> option) Graphic Database
+System (GDS).</p>
+<p><strong>PVS:</strong></p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pvs.fill.gds</span><br><span class="line">run_pvs_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pvs.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure>
+<p><strong>Pegasus:</strong> <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">streamOut -merge <span class="variable">$GDSFile</span> -mode ALL -units <span class="variable">$GDSUNITS</span> -mapFile <span class="variable">$GDSMAP</span> -outputMacros pegasus.fill.gds</span><br><span class="line">run_pegasus_metal_fill -ruleFile <span class="variable">$DUMMYRULE</span> -defMapFile <span class="variable">$DEFMAP</span> -gdsFile pegasus.fill.gds -cell [dbgDesignName]</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Just replace <code>run_pvs_metal_fill</code> with
+<code>run_pegasus_metal_fill</code></p>
+</blockquote>
+<p><strong>Note</strong>: Innovus metal fill (e.g.
+<code>addMetalFill</code>, <code>addViaFill</code>, etc.) does not
+support 20nm and below node design rules. We strongly recommend the
+Pegasus/PVS metal fill solution for 20nm and below. If you have sign-off
+metal fill rule deck for 28nm and above available, we recommend you to
+move to Pegasus/PVS solution too.</p>
+<blockquote>
+<ol type="1">
+<li><p><code>trimMetalFillNearNet</code> does not check DRC rules. It
+only removes the metal fill with specified spacing</p></li>
+<li><p><strong>Do not</strong> perform ECO operations after dump in
+sign-off metal fill (by <code>run_pvs_metal_fill</code> or
+<code>run_pegasus_metal_fill</code>), especially, at 20nm and below
+nodes.</p></li>
+<li><p>If you perform an ECO action, the tool cannot get DRC clean
+because <code>trimMetalFill</code> does not support 20nm and below node
+design rules.</p></li>
+<li><p>The sign-off metal fill typically does not cause DRC issues with
+regular wires.</p></li>
+</ol>
+</blockquote>
+<p>The <code>run_pvs_metal_fill</code> command does the following:</p>
+<ul>
+<li>Runs PVS with the fill rules to create a GDSII output file.</li>
+<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
+layermap provided.</li>
+<li><strong>Loads the resulting DEF file into Innovus</strong>.</li>
+</ul>
+<p>Pegasus is similar to PVS, shown as below,</p>
+<p>The <code>run_pegasus_metal_fill</code> command does the
+following:</p>
+<ul>
+<li>Runs Pegasus with the fill rules to create a GDSII output file.</li>
+<li>Converts the GDSII to a DEF format file based on the GDSII to DEF
+layermap provided.</li>
+<li>Loads the resulting DEF file into Innovus.</li>
+</ul>
+<p><strong>Reference:</strong></p>
+<p>Innovus User Guide, Product Version 21.12, Last Updated in November
+2021</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +362,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:02" itemprop="dateModified" datetime="2024-08-31T15:36:02+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -435,7 +571,7 @@ target="_blank" rel="noopener" href="https://designers-guide.org/modeling/montec
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -557,7 +693,7 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -668,7 +804,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -784,7 +920,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -886,7 +1022,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1401,7 +1537,7 @@ Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:02" itemprop="dateModified" datetime="2024-08-31T15:36:02+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1516,7 +1652,7 @@ threads</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1636,7 +1772,7 @@ variant, the it is defined as a subsequence and its
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1717,100 +1853,8 @@ target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analo
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/15/endcap_tapcell_floorplan/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/15/endcap_tapcell_floorplan/" class="post-title-link" itemprop="url">Add endcap and tapcell in Innovus</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-15 12:51:52" itemprop="dateCreated datePublished" datetime="2022-02-15T12:51:52+00:00">2022-02-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/innovus/" itemprop="url" rel="index"><span itemprop="name">innovus</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>First place place hard macro and add placement halo, then execute the
-following code to add endcap and tapcell.</p>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
-alt="endcap_tapcell_floorplan.drawio" /></p>
-<p><strong>REF:</strong> <a
-target="_blank" rel="noopener" href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/14/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/14/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

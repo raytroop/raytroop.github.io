@@ -666,15 +666,6 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Technology File</title>
-    <url>/2022/02/07/Innovus-Technology-File/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Innovus Path Based Analysis</title>
     <url>/2022/02/07/Innovus-Path-Based-Analysis/</url>
     <content><![CDATA[<p><strong>aocv</strong> : Re-timing the timing critical paths using the
@@ -691,9 +682,9 @@ effect taken into consideration during delayCal</p>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Analysis Command</title>
-    <url>/2022/02/07/Innovus-analysis-command/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
+    <title>Innovus Technology File</title>
+    <url>/2022/02/07/Innovus-Technology-File/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Technology_File.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -703,6 +694,15 @@ effect taken into consideration during delayCal</p>
     <title>Innovus/Tempus Nonfunctional ECO</title>
     <url>/2022/02/07/Innovus-Tempus-Nonfunctional-ECO/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus-Tempus_Nonfunctional_ECO.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Innovus Analysis Command</title>
+    <url>/2022/02/07/Innovus-analysis-command/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_analysis_command.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2642,6 +2642,29 @@ href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">h
       </categories>
   </entry>
   <entry>
+    <title>Arithmetic in Verilog</title>
+    <url>/2022/05/29/arthmetic-verilog/</url>
+    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>1'b1</code>: overflow</p>
+</blockquote>
+<h4 id="signed-signed-signed">signed + signed = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>2'b01</code>: overflow</p>
+<p><code>2'b10</code>: underflow</p>
+</blockquote>
+<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Asynchronous SAR ADC</title>
     <url>/2024/08/20/async-sar/</url>
     <content><![CDATA[<blockquote>
@@ -2733,29 +2756,6 @@ href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-71.pdf">http://
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Arithmetic in Verilog</title>
-    <url>/2022/05/29/arthmetic-verilog/</url>
-    <content><![CDATA[<h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>1'b1</code>: overflow</p>
-</blockquote>
-<h4 id="signed-signed-signed">signed + signed = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code>: overflow</p>
-<p><code>2'b10</code>: underflow</p>
-</blockquote>
-<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -3201,41 +3201,6 @@ pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963</p>
       </categories>
   </entry>
   <entry>
-    <title>Calibre Runsets</title>
-    <url>/2023/08/10/calibreRunsets/</url>
-    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
-runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
-<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
-respectively.</p>
-<p>When invoked, the Calibre DRC and LVS windows automatically load the
-runset used when the last session was closed.</p>
-<blockquote>
-<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
-run. They contain only information that differs from the default
-configuration of Calibre Interactive. There is a one-to-one
-correspondence between entry lines in the runset file and fields and
-button items in the Calibre Interactive user interface. Here is as
-example of a DRC runset:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
-</blockquote>
-<hr />
-<p>The runset filename opened at startup (if no runset is specified on
-the command line) can also be specified by setting the
-<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
-and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
-for LVS. If these environment variables are set, they take precedence
-over all other runset opening behavior options.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>tsmc_template. <a
-href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
-<p>Calibre Verification User’s Manual</p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>How to obtain channel bandwidth from pulse response</title>
     <url>/2022/05/20/bw-from-pulse-resp/</url>
     <content><![CDATA[<p>Convolution Property of the Fourier Transform <span
@@ -3280,26 +3245,38 @@ FFT</a></p>
       </categories>
   </entry>
   <entry>
-    <title>channel and termination</title>
-    <url>/2022/07/01/channel-termination/</url>
-    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
-<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
-alt="voltagemode20220704" /></p>
-<h2 id="current-mode-driver">current mode driver</h2>
-<p><img
-src="/2022/07/01/channel-termination/image-20220702003926289.png"
-alt="image-20220702003926289" /></p>
+    <title>Calibre Runsets</title>
+    <url>/2023/08/10/calibreRunsets/</url>
+    <content><![CDATA[<p>Calibre Interactive stores a list of your most recently opened
+runsets in your <em>home directory</em> as <code>.cgidrcdb</code> or
+<code>.cgilvsdb</code> for Calibre Interactive DRC or LVS,
+respectively.</p>
+<p>When invoked, the Calibre DRC and LVS windows automatically load the
+runset used when the last session was closed.</p>
+<blockquote>
+<p>Runsets are ASCII files that set up Calibre Interactive for a Calibre
+run. They contain only information that differs from the default
+configuration of Calibre Interactive. There is a one-to-one
+correspondence between entry lines in the runset file and fields and
+button items in the Calibre Interactive user interface. Here is as
+example of a DRC runset:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*drcRulesFile: rule_file</span><br><span class="line">*drcRulesFileLastLoad: 1009224452</span><br><span class="line">*drcLayoutPaths: ./lab3.gds</span><br><span class="line">*drcLayoutPrimary: lab3</span><br><span class="line">*drcResultsFile: ./lab3.db</span><br><span class="line">*drcSummaryFile: drc_report</span><br><span class="line">*drcRunTurbo: 0</span><br><span class="line">*drcRunRemoteOn: Cluster</span><br><span class="line">*drcRemoteLICENSEFILEName: MGLS_LICENSE_FILE</span><br><span class="line">*drcRemoteLICENSEFILEValue: /scratch1/mgls/mgclicenses</span><br><span class="line">*drcDontWaitForLicense: 0</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr />
+<p>The runset filename opened at startup (if no runset is specified on
+the command line) can also be specified by setting the
+<code>MGC_CALIBRE_DRC_RUNSET_FILE</code> environment variable for DRC,
+and the <code>MGC_CALIBRE_LVS_RUNSET_FILE</code> environment variable
+for LVS. If these environment variables are set, they take precedence
+over all other runset opening behavior options.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setenv RUNSET_DIR ../calibre</span><br><span class="line">setenv MGC_CALIBRE_DRC_RUNSET_FILE $RUNSET_DIR/tsmc180nm_drc_runset</span><br><span class="line">setenv MGC_CALIBRE_LVS_RUNSET_FILE $RUNSET_DIR/tsmc180nm_lvs_runset</span><br><span class="line">setenv MGC_CALIBRE_PEX_RUNSET_FILE $RUNSET_DIR/tsmc180nm_pex_runset</span><br><span class="line">setenv CALIBRE_DISABLE_RHEL5_WARNING 1</span><br></pre></td></tr></table></figure>
 <h2 id="reference">reference</h2>
-<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
-Conference, "T11: Basics of Equalization Techniques: Channels,
-Equalization, and Circuits"</p>
-<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
-Diverse Interconnect Applications,” IEEE Transactions on Circuits and
-Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
-2014.</p>
+<p>tsmc_template. <a
+href="https://github.com/lnis-uofu/tsmc_template/tree/main">https://github.com/lnis-uofu/tsmc_template/tree/main</a></p>
+<p>Calibre Verification User’s Manual</p>
 ]]></content>
       <categories>
-        <category>analog</category>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -3569,6 +3546,29 @@ href="http://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitte
       </categories>
   </entry>
   <entry>
+    <title>channel and termination</title>
+    <url>/2022/07/01/channel-termination/</url>
+    <content><![CDATA[<h2 id="voltage-mode-driver">voltage mode driver</h2>
+<p><img src="/2022/07/01/channel-termination/voltagemode20220704.PNG"
+alt="voltagemode20220704" /></p>
+<h2 id="current-mode-driver">current mode driver</h2>
+<p><img
+src="/2022/07/01/channel-termination/image-20220702003926289.png"
+alt="image-20220702003926289" /></p>
+<h2 id="reference">reference</h2>
+<p>Byungsub Kim, 2022 IEEE International Solid-State Circuits
+Conference, "T11: Basics of Equalization Techniques: Channels,
+Equalization, and Circuits"</p>
+<p>Minsoo Choi et al., “An Approximate Closed-Form Channel Model for
+Diverse Interconnect Applications,” IEEE Transactions on Circuits and
+Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
+2014.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Clock Edges used for Setup and Hold in PrimeTime</title>
     <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
     <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
@@ -3641,46 +3641,6 @@ alt="clock gating" /></p>
 <h3 id="reference">reference</h3>
 <p>The Ultimate Guide to Clock Gating <a
 href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>primary clock, generated clock and virtual clock in SDC</title>
-    <url>/2022/03/01/clocks-sta/</url>
-    <content><![CDATA[<p><strong>primary clocks</strong></p>
-<ul>
-<li>Primary clocks should be created at input ports and output pins of
-black boxes.</li>
-<li>Never create clocks on hierarchy pins. Creating clocks on hierarchy
-will cause problems when reading SDF. The net timing arc becomes
-segmented at the hierarchy and PrimeTime will be unable to annotate the
-net successfully.</li>
-</ul>
-<p><strong>generated clocks</strong></p>
-<ul>
-<li>Generated clocks are generally created for waveform modifications of
-a primary clock (not including simple inversions). PrimeTime does not
-simulate a design and thus will <strong>not</strong> derive internally
-generated clocks automatically - these clocks must be created by the
-user and applied as a constraint.</li>
-<li>PrimeTime caculate source latency for generated clocks if primary
-clock is <strong>propagated</strong>, otherwise its source latency is
-zero.</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># primary clock</span></span><br><span class="line">create_clock -period <span class="number">4</span> [get_ports Clk]</span><br><span class="line">set_clock_latency -<span class="keyword">source</span> <span class="number">2</span> [get_clocks Clk]</span><br><span class="line">set_propagated_clock [get_clocks Clk]</span><br><span class="line">create_generated_clock -divide_by <span class="number">2</span> -name div_clk -<span class="keyword">source</span> [get_ports Clk] FF3/Q</span><br></pre></td></tr></table></figure>
-<p><strong>virtual clocks</strong></p>
-<ul>
-<li>Are clock objects without a source</li>
-<li>Do not clock sequential devices within the current_design</li>
-<li>Serve as references of input or output delays</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a virtual clock, vclk, for input and output delay constraints</span></span><br><span class="line">create_clock -period <span class="number">5</span> -name vclk</span><br><span class="line">set_input_delay -max <span class="number">2</span> -<span class="keyword">clock</span> vclk [get_ports in1]</span><br><span class="line">set_output_delay -max <span class="number">1</span> -<span class="keyword">clock</span> vclk [get_ports out2]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>There is <strong>no</strong> network latency to calculate, even if a
-virtual clock is propagated.</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -4107,6 +4067,46 @@ shorter but retaining the <em>same total power</em></li>
       </categories>
   </entry>
   <entry>
+    <title>primary clock, generated clock and virtual clock in SDC</title>
+    <url>/2022/03/01/clocks-sta/</url>
+    <content><![CDATA[<p><strong>primary clocks</strong></p>
+<ul>
+<li>Primary clocks should be created at input ports and output pins of
+black boxes.</li>
+<li>Never create clocks on hierarchy pins. Creating clocks on hierarchy
+will cause problems when reading SDF. The net timing arc becomes
+segmented at the hierarchy and PrimeTime will be unable to annotate the
+net successfully.</li>
+</ul>
+<p><strong>generated clocks</strong></p>
+<ul>
+<li>Generated clocks are generally created for waveform modifications of
+a primary clock (not including simple inversions). PrimeTime does not
+simulate a design and thus will <strong>not</strong> derive internally
+generated clocks automatically - these clocks must be created by the
+user and applied as a constraint.</li>
+<li>PrimeTime caculate source latency for generated clocks if primary
+clock is <strong>propagated</strong>, otherwise its source latency is
+zero.</li>
+</ul>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># primary clock</span></span><br><span class="line">create_clock -period <span class="number">4</span> [get_ports Clk]</span><br><span class="line">set_clock_latency -<span class="keyword">source</span> <span class="number">2</span> [get_clocks Clk]</span><br><span class="line">set_propagated_clock [get_clocks Clk]</span><br><span class="line">create_generated_clock -divide_by <span class="number">2</span> -name div_clk -<span class="keyword">source</span> [get_ports Clk] FF3/Q</span><br></pre></td></tr></table></figure>
+<p><strong>virtual clocks</strong></p>
+<ul>
+<li>Are clock objects without a source</li>
+<li>Do not clock sequential devices within the current_design</li>
+<li>Serve as references of input or output delays</li>
+</ul>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a virtual clock, vclk, for input and output delay constraints</span></span><br><span class="line">create_clock -period <span class="number">5</span> -name vclk</span><br><span class="line">set_input_delay -max <span class="number">2</span> -<span class="keyword">clock</span> vclk [get_ports in1]</span><br><span class="line">set_output_delay -max <span class="number">1</span> -<span class="keyword">clock</span> vclk [get_ports out2]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>There is <strong>no</strong> network latency to calculate, even if a
+virtual clock is propagated.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Complete Response used in single-pole filter model in systemverilog</title>
     <url>/2022/02/13/completeResponse/</url>
     <content><![CDATA[<div class="pdf-container" data-target="/pdfs/completeResponse.pdf" data-height="500px"></div>
@@ -4500,8 +4500,21 @@ href="https://dsp.stackexchange.com/a/22851/59253">https://dsp.stackexchange.com
       </categories>
   </entry>
   <entry>
+    <title>DC sweep &amp; parametric sweep</title>
+    <url>/2024/09/01/dcsweep/</url>
+    <content><![CDATA[<blockquote>
+<p>swpuseprevic</p>
+</blockquote>
+<p><img src="/2024/09/01/dcsweep/image-20240901094536745.png"
+alt="image-20240901094536745" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Delta-Sigma Data Converters</title>
-    <url>/2024/08/20/delta-sigma/</url>
+    <url>/2024/09/01/delta-sigma/</url>
     <content><![CDATA[<h2 id="reference">reference</h2>
 <p>B. Razavi, "The Delta-Sigma Modulator [A Circuit for All Seasons],"
 IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 20, pp. 10-15,
@@ -5149,18 +5162,6 @@ designing integrated circuits and systems thereof"</p>
       </categories>
   </entry>
   <entry>
-    <title>Script to remove .cdslck files</title>
-    <url>/2022/02/02/dot-cdslck-clear/</url>
-    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh</span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt</span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
-<p><a
-href="https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence"
-class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence</a></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
     <title>How to preserve hand-instantiated cells</title>
     <url>/2023/02/10/dont-touch/</url>
     <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
@@ -5171,6 +5172,18 @@ during synthesis</p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Script to remove .cdslck files</title>
+    <url>/2022/02/02/dot-cdslck-clear/</url>
+    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#!/bin/sh</span></span><br><span class="line">tree -<span class="keyword">if</span> | grep <span class="string">&#x27;cdslck&#x27;</span> &gt; txt</span><br><span class="line">var=`<span class="built_in">cat</span> txt`</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$var</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">rm</span> -i <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> -i txt</span><br></pre></td></tr></table></figure>
+<p><a
+href="https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence"
+class="uri">https://wikis.ece.iastate.edu/vlsi/index.php/Tips_%26_Tricks#Locked_Files_in_Cadence</a></p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -5325,138 +5338,6 @@ href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/
 ‘<em>Add/Edit Model Files</em>’ of Corners setup form</p>
 <p><img src="/2023/01/29/dspf-in-corner/image-20230129223248655.png"
 alt="image-20230129223248655" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>split pins in dspf_emir</title>
-    <url>/2023/04/04/dspf-split-pins-emir/</url>
-    <content><![CDATA[<h3 id="dspf-extract-using-starrc">dspf extract using starrc</h3>
-<p>multiple label and rectangle in vssa net</p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405003705354.png"
-alt="image-20230405003705354" /></p>
-<ul>
-<li><p>general dspf</p>
-<p><code>SHORT_PINS: YES</code></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405002824842.png"
-alt="image-20230405002824842" /></p>
-<blockquote>
-<p>other pin are short together</p>
-</blockquote></li>
-<li><p>dspf for emir analysis</p></li>
-</ul>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405000013461.png"
-alt="image-20230405000013461" /></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405001944418.png"
-alt="image-20230405001944418" /></p>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405230611522.png"
-alt="image-20230405230611522" /></p>
-<blockquote>
-<p>It seems that dspf_emir <strong>don't</strong> contain the
-<em>rectangle pin</em> information.</p>
-<p>only <strong>label</strong> is necessary</p>
-</blockquote>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 26%" />
-<col style="width: 22%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>setup</th>
-<th></th>
-<th></th>
-<th>spectre result</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>netlist type</strong></td>
-<td><strong>dspf option</strong></td>
-<td><strong>emir analysis</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>dspf</td>
-<td>/</td>
-<td>disable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>/</td>
-<td>disable</td>
-<td>✗</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>=shortPins=”yes”</td>
-<td>disable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>=shortPins=”no”</td>
-<td>disable</td>
-<td>✗</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>/</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<td>dspf_emir</td>
-<td>=shortPins=”yes”</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<td>dspf_emir</td>
-<td>=shortPins=”no”</td>
-<td>enable</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>shortPins=”yes”</strong> is preferred default option for
-dspf_emir, which has <strong>split pins</strong></p>
-</blockquote>
-<p><img
-src="/2023/04/04/dspf-split-pins-emir/image-20230405005151550.png"
-alt="image-20230405005151550" /></p>
-<h3 id="dspf-syntax">DSPF Syntax</h3>
-<ul>
-<li><p><pin_def>::=*<strong>|P <pin_element>?</strong> <pin_element>
-describes pins in the net. Multiple pin descriptions can be listed in
-one line.</p></li>
-<li><p><pin_element>::=(<pinName> <pinType> <pinCap> {<coord>}?)
-<pinName> represents the name of the pin. <pinType> represents the type
-of the pin. It can be any of the following: I (Input), O (Output),</p>
-<p>​ B (Bidirectional), X (don’t care), S (Switch), and J (Jumper). ​
-<pinCap> represents the capacitance value associated with the pin. ​
-<coord> is optional. It represents the location of the pin. Multiple pin
-locations are allowed</p></li>
-</ul>
-<h4 id="split-pins">split pins</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*|P (avss_1 O 0 207.7555 59.9170)</span><br><span class="line">*|P (avss_10 O 0 181.1610 151.1130)</span><br><span class="line">*|P (avss_11 O 0 186.6330 151.1130)</span><br><span class="line">*|P (avss_12 O 0 192.1050 151.1130)</span><br><span class="line">*|P (avss_13 O 0 197.5770 151.1130)</span><br></pre></td></tr></table></figure>
-<h3 id="reference">reference</h3>
-<p>Article (20467964) Title: Difference in result on running Spectre APS
-with EMIR and without EMIR analysis URL: <a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY</a></p>
-<p>StarRC User Guide and Command Reference Version O-2018.06, June
-2018</p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -5797,6 +5678,138 @@ alt="image-20220618131626913" /></p>
 alt="image-20220618131649065" /></p>
 <p>only <strong>c</strong> dspf give the <strong>lumped
 capacitance</strong></p>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>split pins in dspf_emir</title>
+    <url>/2023/04/04/dspf-split-pins-emir/</url>
+    <content><![CDATA[<h3 id="dspf-extract-using-starrc">dspf extract using starrc</h3>
+<p>multiple label and rectangle in vssa net</p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405003705354.png"
+alt="image-20230405003705354" /></p>
+<ul>
+<li><p>general dspf</p>
+<p><code>SHORT_PINS: YES</code></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405002824842.png"
+alt="image-20230405002824842" /></p>
+<blockquote>
+<p>other pin are short together</p>
+</blockquote></li>
+<li><p>dspf for emir analysis</p></li>
+</ul>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405000013461.png"
+alt="image-20230405000013461" /></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405001944418.png"
+alt="image-20230405001944418" /></p>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405230611522.png"
+alt="image-20230405230611522" /></p>
+<blockquote>
+<p>It seems that dspf_emir <strong>don't</strong> contain the
+<em>rectangle pin</em> information.</p>
+<p>only <strong>label</strong> is necessary</p>
+</blockquote>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 26%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>setup</th>
+<th></th>
+<th></th>
+<th>spectre result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>netlist type</strong></td>
+<td><strong>dspf option</strong></td>
+<td><strong>emir analysis</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>dspf</td>
+<td>/</td>
+<td>disable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>/</td>
+<td>disable</td>
+<td>✗</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>=shortPins=”yes”</td>
+<td>disable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>=shortPins=”no”</td>
+<td>disable</td>
+<td>✗</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>/</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>dspf_emir</td>
+<td>=shortPins=”yes”</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>dspf_emir</td>
+<td>=shortPins=”no”</td>
+<td>enable</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>shortPins=”yes”</strong> is preferred default option for
+dspf_emir, which has <strong>split pins</strong></p>
+</blockquote>
+<p><img
+src="/2023/04/04/dspf-split-pins-emir/image-20230405005151550.png"
+alt="image-20230405005151550" /></p>
+<h3 id="dspf-syntax">DSPF Syntax</h3>
+<ul>
+<li><p><pin_def>::=*<strong>|P <pin_element>?</strong> <pin_element>
+describes pins in the net. Multiple pin descriptions can be listed in
+one line.</p></li>
+<li><p><pin_element>::=(<pinName> <pinType> <pinCap> {<coord>}?)
+<pinName> represents the name of the pin. <pinType> represents the type
+of the pin. It can be any of the following: I (Input), O (Output),</p>
+<p>​ B (Bidirectional), X (don’t care), S (Switch), and J (Jumper). ​
+<pinCap> represents the capacitance value associated with the pin. ​
+<coord> is optional. It represents the location of the pin. Multiple pin
+locations are allowed</p></li>
+</ul>
+<h4 id="split-pins">split pins</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*|P (avss_1 O 0 207.7555 59.9170)</span><br><span class="line">*|P (avss_10 O 0 181.1610 151.1130)</span><br><span class="line">*|P (avss_11 O 0 186.6330 151.1130)</span><br><span class="line">*|P (avss_12 O 0 192.1050 151.1130)</span><br><span class="line">*|P (avss_13 O 0 197.5770 151.1130)</span><br></pre></td></tr></table></figure>
+<h3 id="reference">reference</h3>
+<p>Article (20467964) Title: Difference in result on running Spectre APS
+with EMIR and without EMIR analysis URL: <a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY</a></p>
+<p>StarRC User Guide and Command Reference Version O-2018.06, June
+2018</p>
 ]]></content>
       <categories>
         <category>cad</category>
@@ -6862,120 +6875,6 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
       </categories>
   </entry>
   <entry>
-    <title>Add endcap and tapcell in Innovus</title>
-    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
-    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
-following code to add endcap and tapcell.</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
-alt="endcap_tapcell_floorplan.drawio" /></p>
-<p><strong>REF:</strong> <a
-href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Dual Diode and ggNMOS</title>
-    <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
-    <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
-alt="image-20230517233753530" /></p>
-<blockquote>
-<p><em>HIA</em> = High Amp</p>
-<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
-diode</p>
-<p>HIA diode process is same with regular junction diode</p>
-</blockquote>
-<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
-alt="image-20230518012456390" /></p>
-<blockquote>
-<p>PS: I/O to GND positively</p>
-<p>NS: I/O to GND negatively</p>
-<p>PD: I/O to VDD positively</p>
-<p>ND: I/O to VDD negatively</p>
-</blockquote>
-<p>Dual diode should be used with <strong>power clamp</strong> for
-<strong>PS</strong> and <strong>ND</strong> path</p>
-<h3 id="pmos-power-clamp">PMOS power clamp</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
-alt="power_clamp_pmos.drawio" /></p>
-<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
-alt="image-20220623231619052" /></p>
-<blockquote>
-<p>The drain (D) is connected to an I/O pad and the gate (G) is
-grounded.</p>
-<p>To ensure “zero” leakage of the ESD protection structure under normal
-operations.</p>
-<p>To to protect gate of core device, tie-high and tie-low shall be used
-when used as secondary ESD protection.</p>
-</blockquote>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20240723213214708.png"
-alt="image-20240723213214708" /></p>
-<blockquote>
-<p>[<a
-href="https://monthly-pulse.com/wp-content/uploads/2021/11/2021-11-sofics_presentation_ieee_final.pdf">https://monthly-pulse.com/wp-content/uploads/2021/11/2021-11-sofics_presentation_ieee_final.pdf</a>]</p>
-</blockquote>
-<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
-alt="image-20220623233019912" /></p>
-<ol type="1">
-<li><strong>DB</strong> junction is reverse-biased all the way to its
-breakdown.</li>
-<li>Avalance multiplication takes place and generates electron-hole
-pairs</li>
-<li>Hole current flows into the ground via the *B-region** and build up
-a potential, VR, across the lateral parasitic resistance R</li>
-<li>As VR increases, the <strong>BS</strong> junction turns on,
-eventually triggers the parasitic lateral NPN transistor Q
-(<strong>DBS</strong>)</li>
-</ol>
-<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
-pad</h3>
-<p><img
-src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
-alt="image-20220623233634452" /></p>
-<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
-the transient</p>
-<blockquote>
-<p>ggNMOS is commonly used in the GPIO provided by foundry, which
-alleviate the ESD design burden of customer.</p>
-<p>These GPIO is self-protective thanks to the ggNMOS.</p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
-circuits: an IC design perspective. Boston, Mass: Kluwer Academic
-Publishers.</p>
-<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
-Stine, J. (2001). On-chip ESD protection design for integrated circuits:
-An overview for IC designers. Microelectronics Journal. 32. 733-747.
-10.1016/S0026-2692(01)00060-X.</p>
-<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
-Protection Design for Ics.” (2001).</p>
-<p>Introduction: ESD protection concepts for I/Os. URL: <a
-href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
-<p>Answer: What does "strap" mean in this context? <a
-href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
-<p>Hammer VLSI Flow URL: <a
-href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
-<p>Calibre Rule Writing 2009</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Effective Noise BandWidth and Noise Floor</title>
     <url>/2023/05/29/enbw-nl/</url>
     <content><![CDATA[<h2 id="ps-and-psd">PS and PSD</h2>
@@ -7285,6 +7184,120 @@ Converters, Second Edition" ISBN 978-1-119-25827-8</p>
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Add endcap and tapcell in Innovus</title>
+    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
+    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
+following code to add endcap and tapcell.</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
+alt="endcap_tapcell_floorplan.drawio" /></p>
+<p><strong>REF:</strong> <a
+href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Dual Diode and ggNMOS</title>
+    <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
+    <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230517233753530.png"
+alt="image-20230517233753530" /></p>
+<blockquote>
+<p><em>HIA</em> = High Amp</p>
+<p>lateral diode: <strong>perimeter</strong> is key DRC rule for ESD
+diode</p>
+<p>HIA diode process is same with regular junction diode</p>
+</blockquote>
+<h2 id="dual-stacked-diodes">Dual Stacked Diodes</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20230518012456390.png"
+alt="image-20230518012456390" /></p>
+<blockquote>
+<p>PS: I/O to GND positively</p>
+<p>NS: I/O to GND negatively</p>
+<p>PD: I/O to VDD positively</p>
+<p>ND: I/O to VDD negatively</p>
+</blockquote>
+<p>Dual diode should be used with <strong>power clamp</strong> for
+<strong>PS</strong> and <strong>ND</strong> path</p>
+<h3 id="pmos-power-clamp">PMOS power clamp</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/power_clamp_pmos.drawio.svg"
+alt="power_clamp_pmos.drawio" /></p>
+<h2 id="ggnmos-grounded-gate-nmos">ggNMOS (grounded-gate NMOS)</h2>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623231619052.png"
+alt="image-20220623231619052" /></p>
+<blockquote>
+<p>The drain (D) is connected to an I/O pad and the gate (G) is
+grounded.</p>
+<p>To ensure “zero” leakage of the ESD protection structure under normal
+operations.</p>
+<p>To to protect gate of core device, tie-high and tie-low shall be used
+when used as secondary ESD protection.</p>
+</blockquote>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20240723213214708.png"
+alt="image-20240723213214708" /></p>
+<blockquote>
+<p>[<a
+href="https://monthly-pulse.com/wp-content/uploads/2021/11/2021-11-sofics_presentation_ieee_final.pdf">https://monthly-pulse.com/wp-content/uploads/2021/11/2021-11-sofics_presentation_ieee_final.pdf</a>]</p>
+</blockquote>
+<h3 id="positive-esd-transient-at-io-pad">Positive ESD transient at I/O
+pad</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233019912.png"
+alt="image-20220623233019912" /></p>
+<ol type="1">
+<li><strong>DB</strong> junction is reverse-biased all the way to its
+breakdown.</li>
+<li>Avalance multiplication takes place and generates electron-hole
+pairs</li>
+<li>Hole current flows into the ground via the *B-region** and build up
+a potential, VR, across the lateral parasitic resistance R</li>
+<li>As VR increases, the <strong>BS</strong> junction turns on,
+eventually triggers the parasitic lateral NPN transistor Q
+(<strong>DBS</strong>)</li>
+</ol>
+<h3 id="negative-esd-transient-at-io-pad">Negative ESD transient at I/O
+pad</h3>
+<p><img
+src="/2022/06/23/esd-dual-diodes-ggnmos/image-20220623233634452.png"
+alt="image-20220623233634452" /></p>
+<p>The forward-biased parasitic diode, <strong>BD</strong>, will shunt
+the transient</p>
+<blockquote>
+<p>ggNMOS is commonly used in the GPIO provided by foundry, which
+alleviate the ESD design burden of customer.</p>
+<p>These GPIO is self-protective thanks to the ggNMOS.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Wang, Albert Z. H. 2002. On-chip ESD protection for integrated
+circuits: an IC design perspective. Boston, Mass: Kluwer Academic
+Publishers.</p>
+<p>Wang, Anq i &amp; Feng, H.G &amp; Gong, K &amp; Zhan, Ruqing &amp;
+Stine, J. (2001). On-chip ESD protection design for integrated circuits:
+An overview for IC designers. Microelectronics Journal. 32. 733-747.
+10.1016/S0026-2692(01)00060-X.</p>
+<p>Feng, Haigang, Ke Gong, Rouying Zhan and Albert Z. Wang. “On-Chip ESD
+Protection Design for Ics.” (2001).</p>
+<p>Introduction: ESD protection concepts for I/Os. URL: <a
+href="https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/">https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/</a></p>
+<p>Answer: What does "strap" mean in this context? <a
+href="https://electronics.stackexchange.com/a/591759?stw=2">https://electronics.stackexchange.com/a/591759?stw=2</a></p>
+<p>Hammer VLSI Flow URL: <a
+href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf</a></p>
+<p>Calibre Rule Writing 2009</p>
+]]></content>
+      <categories>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -8439,6 +8452,45 @@ href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.car
       </categories>
   </entry>
   <entry>
+    <title>time format in Verilog</title>
+    <url>/2023/06/05/hdltime/</url>
+    <content><![CDATA[<h2 id="realtime-vs-time">realtime vs time</h2>
+<ul>
+<li><p><code>$realtime</code> round the current time to
+<code>timeprecision</code></p></li>
+<li><p><code>$time</code> round the current time to integer</p></li>
+<li><p><code>%t</code> will scale the rounded value to represent
+<code>timeprecision</code>,</p>
+<p>i.e. <span class="math inline">\([\$\text{realtime},
+\$\text{time}]\cdot \$\text{timeunit} /
+\$\text{timeprecision}\)</span></p></li>
+</ul>
+<p><a
+href="https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94062">https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94062</a>
+<a
+href="https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94096">https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94096</a></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">10</span>ns;</span><br><span class="line">  <span class="keyword">timeprecision</span> <span class="number">1</span>ps;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$realtime = %g&quot;</span>, <span class="built_in">$realtime</span>);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$time = %g&quot;</span>, <span class="built_in">$time</span>);</span><br><span class="line">    <span class="comment">// $realtime round to timeprecision</span></span><br><span class="line">    <span class="comment">// $time round to integer</span></span><br><span class="line">    #<span class="number">1</span><span class="variable">.10016</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$realtime = %g&quot;</span>, <span class="built_in">$realtime</span>);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$time = %g&quot;</span>, <span class="built_in">$time</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// %t format will scale the rounded value to represent timeprecision</span></span><br><span class="line">    <span class="comment">// 1.1002*10e-9/1e-12 = 11002</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$realtime %%t = %t&quot;</span>, <span class="built_in">$realtime</span>);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$time %%t = %t&quot;</span>, <span class="built_in">$time</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>output <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$realtime = 0</span><br><span class="line">$time = 0</span><br><span class="line">$realtime = 1.1002</span><br><span class="line">$time = 1</span><br><span class="line">$realtime %t =                11002</span><br><span class="line">$time %t =                10000</span><br></pre></td></tr></table></figure></p>
+<h2 id="timeunit-timeprecision">timeunit, timeprecision</h2>
+<p>The time unit and time precision can be specified in the following
+two ways: - Using the compiler directive <code>`timescale</code> - Using
+the keywords <code>timeunit</code> and <code>timeprecision</code>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> D (...);</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">100</span>ps;</span><br><span class="line">  <span class="keyword">timeprecision</span> <span class="number">10</span>fs;</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> E (...);</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">100</span>ps / <span class="number">10</span>fs; <span class="comment">// timeunit with optional second argument</span></span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
+<p>The minimum of <code>timeprecision</code> determine <code>%t</code>
+output, the nearest <code>timeunit</code> and <code>timeprecision</code>
+determine the round of <code>$realtime</code> and <code>$time</code>. Of
+course, the simulator follow the time tick shown by
+<code>$realtime</code>.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/1ns</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Due to minimum of timeprecision is 10ps</span></span><br><span class="line"><span class="keyword">module</span> rawplant;</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line">  <span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">task</span> print;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    1ns: 1</span></span><br><span class="line"><span class="comment">    100ps:  6</span></span><br><span class="line"><span class="comment">    10ps: 6</span></span><br><span class="line"><span class="comment">    1ps: 6</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    #<span class="number">1</span><span class="variable">.666</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;raw: $realtime = %g&quot;</span>, <span class="built_in">$realtime</span>);     <span class="comment">// 1.7</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;raw: $time = %g&quot;</span>, <span class="built_in">$time</span>);             <span class="comment">// 2</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;raw: $realtime %%t = %t&quot;</span>, <span class="built_in">$realtime</span>); <span class="comment">// 1.7*1ns/10ps=170</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;raw: $time %%t = %t&quot;</span>, <span class="built_in">$time</span>);         <span class="comment">// 2*1ns/10ps = 200</span></span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> fineplant;</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">100</span>ps;</span><br><span class="line">  <span class="keyword">timeprecision</span> <span class="number">10</span>ps;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">task</span> print;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    100ps: 2</span></span><br><span class="line"><span class="comment">    10ps: 6</span></span><br><span class="line"><span class="comment">    1ps: 6</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    #<span class="number">2</span><span class="variable">.66</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;fine: $realtime = %g&quot;</span>, <span class="built_in">$realtime</span>);     <span class="comment">// 2.7</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;fine: $time = %g&quot;</span>, <span class="built_in">$time</span>);             <span class="comment">// 3</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;fine: $realtime %%t = %t&quot;</span>, <span class="built_in">$realtime</span>); <span class="comment">// 2.7*100ps/10ps = 27</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;fine: $time %%t = %t&quot;</span>, <span class="built_in">$time</span>);         <span class="comment">// 3*100ps/10ps = 30</span></span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">  rawplant rawblock();</span><br><span class="line">  fineplant fineblock();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">fork</span></span><br><span class="line">    rawblock<span class="variable">.print</span>();</span><br><span class="line">    fineblock<span class="variable">.print</span>();</span><br><span class="line">  <span class="keyword">join</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>output <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fine: $realtime = 2.7</span><br><span class="line">fine: $time = 3</span><br><span class="line">fine: $realtime %t =                   27</span><br><span class="line">fine: $time %t =                   30</span><br><span class="line">raw: $realtime = 1.7</span><br><span class="line">raw: $time = 2</span><br><span class="line">raw: $realtime %t =                  170</span><br><span class="line">raw: $time %t =                  200</span><br></pre></td></tr></table></figure></p>
+<h2 id="questasim-cmd">questasim cmd</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog tb.v</span><br><span class="line">vsim -c -<span class="keyword">do</span> <span class="string">&quot;run -all;exit&quot;</span> work.tb</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Hierarchical Connections and Exports UVM</title>
     <url>/2022/04/02/hier-conn-export-uvm/</url>
     <content><![CDATA[<p><code>imp</code> and <code>port</code> connectors are sufficient for
@@ -8501,45 +8553,6 @@ the sending component uses the same reference for every data item,
 overwriting of data in the storage function of the scoreboard is
 possible without cloning.</p></li>
 </ol>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>time format in Verilog</title>
-    <url>/2023/06/05/hdltime/</url>
-    <content><![CDATA[<h2 id="realtime-vs-time">realtime vs time</h2>
-<ul>
-<li><p><code>$realtime</code> round the current time to
-<code>timeprecision</code></p></li>
-<li><p><code>$time</code> round the current time to integer</p></li>
-<li><p><code>%t</code> will scale the rounded value to represent
-<code>timeprecision</code>,</p>
-<p>i.e. <span class="math inline">\([\$\text{realtime},
-\$\text{time}]\cdot \$\text{timeunit} /
-\$\text{timeprecision}\)</span></p></li>
-</ul>
-<p><a
-href="https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94062">https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94062</a>
-<a
-href="https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94096">https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94096</a></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">10</span>ns;</span><br><span class="line">  <span class="keyword">timeprecision</span> <span class="number">1</span>ps;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$realtime = %g&quot;</span>, <span class="built_in">$realtime</span>);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$time = %g&quot;</span>, <span class="built_in">$time</span>);</span><br><span class="line">    <span class="comment">// $realtime round to timeprecision</span></span><br><span class="line">    <span class="comment">// $time round to integer</span></span><br><span class="line">    #<span class="number">1</span><span class="variable">.10016</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$realtime = %g&quot;</span>, <span class="built_in">$realtime</span>);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$time = %g&quot;</span>, <span class="built_in">$time</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// %t format will scale the rounded value to represent timeprecision</span></span><br><span class="line">    <span class="comment">// 1.1002*10e-9/1e-12 = 11002</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$realtime %%t = %t&quot;</span>, <span class="built_in">$realtime</span>);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;$time %%t = %t&quot;</span>, <span class="built_in">$time</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>output <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$realtime = 0</span><br><span class="line">$time = 0</span><br><span class="line">$realtime = 1.1002</span><br><span class="line">$time = 1</span><br><span class="line">$realtime %t =                11002</span><br><span class="line">$time %t =                10000</span><br></pre></td></tr></table></figure></p>
-<h2 id="timeunit-timeprecision">timeunit, timeprecision</h2>
-<p>The time unit and time precision can be specified in the following
-two ways: - Using the compiler directive <code>`timescale</code> - Using
-the keywords <code>timeunit</code> and <code>timeprecision</code>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> D (...);</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">100</span>ps;</span><br><span class="line">  <span class="keyword">timeprecision</span> <span class="number">10</span>fs;</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> E (...);</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">100</span>ps / <span class="number">10</span>fs; <span class="comment">// timeunit with optional second argument</span></span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
-<p>The minimum of <code>timeprecision</code> determine <code>%t</code>
-output, the nearest <code>timeunit</code> and <code>timeprecision</code>
-determine the round of <code>$realtime</code> and <code>$time</code>. Of
-course, the simulator follow the time tick shown by
-<code>$realtime</code>.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns/1ns</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Due to minimum of timeprecision is 10ps</span></span><br><span class="line"><span class="keyword">module</span> rawplant;</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">1</span>ns;</span><br><span class="line">  <span class="keyword">timeprecision</span> <span class="number">100</span>ps;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">task</span> print;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    1ns: 1</span></span><br><span class="line"><span class="comment">    100ps:  6</span></span><br><span class="line"><span class="comment">    10ps: 6</span></span><br><span class="line"><span class="comment">    1ps: 6</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    #<span class="number">1</span><span class="variable">.666</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;raw: $realtime = %g&quot;</span>, <span class="built_in">$realtime</span>);     <span class="comment">// 1.7</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;raw: $time = %g&quot;</span>, <span class="built_in">$time</span>);             <span class="comment">// 2</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;raw: $realtime %%t = %t&quot;</span>, <span class="built_in">$realtime</span>); <span class="comment">// 1.7*1ns/10ps=170</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;raw: $time %%t = %t&quot;</span>, <span class="built_in">$time</span>);         <span class="comment">// 2*1ns/10ps = 200</span></span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> fineplant;</span><br><span class="line">  <span class="keyword">timeunit</span> <span class="number">100</span>ps;</span><br><span class="line">  <span class="keyword">timeprecision</span> <span class="number">10</span>ps;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">task</span> print;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    100ps: 2</span></span><br><span class="line"><span class="comment">    10ps: 6</span></span><br><span class="line"><span class="comment">    1ps: 6</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    #<span class="number">2</span><span class="variable">.66</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;fine: $realtime = %g&quot;</span>, <span class="built_in">$realtime</span>);     <span class="comment">// 2.7</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;fine: $time = %g&quot;</span>, <span class="built_in">$time</span>);             <span class="comment">// 3</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;fine: $realtime %%t = %t&quot;</span>, <span class="built_in">$realtime</span>); <span class="comment">// 2.7*100ps/10ps = 27</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;fine: $time %%t = %t&quot;</span>, <span class="built_in">$time</span>);         <span class="comment">// 3*100ps/10ps = 30</span></span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">  rawplant rawblock();</span><br><span class="line">  fineplant fineblock();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">fork</span></span><br><span class="line">    rawblock<span class="variable">.print</span>();</span><br><span class="line">    fineblock<span class="variable">.print</span>();</span><br><span class="line">  <span class="keyword">join</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>output <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fine: $realtime = 2.7</span><br><span class="line">fine: $time = 3</span><br><span class="line">fine: $realtime %t =                   27</span><br><span class="line">fine: $time %t =                   30</span><br><span class="line">raw: $realtime = 1.7</span><br><span class="line">raw: $time = 2</span><br><span class="line">raw: $realtime %t =                  170</span><br><span class="line">raw: $time %t =                  200</span><br></pre></td></tr></table></figure></p>
-<h2 id="questasim-cmd">questasim cmd</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vlib work</span><br><span class="line">vlog tb.v</span><br><span class="line">vsim -c -<span class="keyword">do</span> <span class="string">&quot;run -all;exit&quot;</span> work.tb</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -10513,60 +10526,6 @@ href="https://people.engr.tamu.edu/spalermo/ecen689/lecture10_ee720_jitter.pdf">
       </categories>
   </entry>
   <entry>
-    <title>Latch Inference in Verilog</title>
-    <url>/2022/05/09/latch-inference/</url>
-    <content><![CDATA[<h2 id="always"><code>always@( * )</code></h2>
-<p><code>always@( * )</code> blocks are used to describe Combinational
-Logic, or Logic Gates. Only <code>=</code> (blocking) assignments should
-be used in an <code>always@( * )</code> block.</p>
-<h2 id="latch-inference">Latch Inference</h2>
-<p>If you <strong>DON'T</strong> assign every element that can be
-assigned inside an <code>always@( * )</code> block every time that
-<code>always@( * )</code> block is executed, a latch will be inferred
-for that element</p>
-<p>The approaches to avoid latch generation:</p>
-<ul>
-<li>set default values</li>
-<li>proper use of the <code>else</code> statement, and other flow
-constructs</li>
-</ul>
-<h3 id="without-default-values">without default values</h3>
-<blockquote>
-<p>latch is generated</p>
-</blockquote>
-<h4 id="rtl">RTL</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h4 id="synthesized-netlist">synthesized netlist</h4>
-<p><img src="/2022/05/09/latch-inference/image-20220509170640006.png"
-alt="image-20220509170640006" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:09:18 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lanhq1 C_reg ( <span class="variable">.E</span>(Trigger), <span class="variable">.D</span>(Pass), <span class="variable">.Q</span>(C) );</span><br><span class="line">  an02d0 U3 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="add-default-value">add default value</h3>
-<blockquote>
-<p>Default values are an easy way to avoid latch generation</p>
-</blockquote>
-<h4 id="rtl-1">RTL</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">        	C = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h4 id="synthesized-netlist-1">synthesized netlist</h4>
-<p><img src="/2022/05/09/latch-inference/image-20220509171319204.png"
-alt="image-20220509171319204" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:12:47 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  nd12d0 U5 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.ZN</span>(C) );</span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="if-evaluation"><code>if</code> evaluation</h2>
-<p><code>signed</code> number cast to <code>unsigned</code>
-automatically before evaluating</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb; </span><br><span class="line">  <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] datasg;</span><br><span class="line">  <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] dataug;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    datasg = <span class="number">2&#x27;b11</span>;</span><br><span class="line">    dataug = <span class="number">2&#x27;b11</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;datasg(%%d): %d&quot;</span>, datasg);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;dataug(%%d): %d&quot;</span>, dataug);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (datasg)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;datasg is OK&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (dataug)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;dataug is OK&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$finish</span>();</span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlog tb.v</span><br><span class="line">$ vsim -c -do &quot;run;exit&quot; work.tb</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># datasg(%d): -1</span><br><span class="line"># dataug(%d): 3</span><br><span class="line"># datasg is OK</span><br><span class="line"># dataug is OK</span><br><span class="line"># ** Note: $finish    : tb.v(16)</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>UC Berkeley CS150 Lec #20: Finite State Machines <a
-href="https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf">Slides</a></p>
-<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
-by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
-doi:10.1007/978-3-030-03238-8</p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>JTAG and Boundary Scan</title>
     <url>/2023/11/28/jtag/</url>
     <content><![CDATA[<p>Data Register, DR:</p>
@@ -10756,6 +10715,139 @@ doi: 10.1109/MDT.2003.1232259.</p>
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>System Analysis using Laplace Transform and z-Transform</title>
+    <url>/2022/03/22/laplace-Z/</url>
+    <content><![CDATA[<p><em>The Laplace transform converts integro-differential equations
+into algebraic equations - continuous-time systems</em></p>
+<p><em>The z-transforms changes difference equations into algebraic
+equations - discrete-time systems</em></p>
+<h2 id="fir-equalization">FIR Equalization</h2>
+<h3 id="frequency-response">Frequency Response</h3>
+<p><img src="/2022/03/22/laplace-Z/image-20220322093428287.png"
+alt="image-20220322093428287" /> <span class="math display">\[
+z = e^{j\omega T_s}
+\]</span></p>
+<h3 id="unit-impulse">Unit impulse</h3>
+<p>filter coefficients are <strong>[-0.131, 0.595, -0.274]</strong> and
+sampling period is <strong>100ps</strong></p>
+<p><img src="/2022/03/22/laplace-Z/image-20220428125454912.png"
+alt="image-20220428125454912" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% Frequency response</span></span><br><span class="line">w = [<span class="number">-0.131</span>, <span class="number">0.595</span>, <span class="number">-0.274</span>];</span><br><span class="line">Ts = <span class="number">100e-12</span>;</span><br><span class="line">[mag, w] = freqz(w, <span class="number">1</span>, [], <span class="number">1</span>/Ts);</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="number">1e9</span>, <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(mag)));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% unit impulse response from transfer function</span></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">z = tf(<span class="string">&#x27;z&#x27;</span>, Ts);</span><br><span class="line">h = <span class="number">-0.131</span> + <span class="number">0.595</span>*z^(<span class="number">-1</span>) <span class="number">-0.274</span>*z^(<span class="number">-2</span>);</span><br><span class="line">[y, t] = impulse(h);</span><br><span class="line">stem(t*<span class="number">1e10</span>, y*Ts);  <span class="comment">% !!! y*Ts is essential</span></span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&quot;unit impulse response&quot;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(\times 100ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>impulse</code>:</p>
+<p>For discrete-time systems, the impulse response is the response to a
+unit area pulse of length <code>Ts</code> and height <code>1/Ts</code>,
+where <code>Ts</code> is the sample time of the system. (This pulse
+approaches <span class="math inline">\(\delta(t)\)</span> as
+<code>Ts</code> approaches zero.)</p>
+<p>Scale output:</p>
+<p>Multiply <code>impulse</code> output with sample period
+<code>Ts</code> in order to correct <code>1/Ts</code> height of
+<code>impulse</code> function.</p>
+</blockquote>
+<h3 id="psd-transformation">PSD transformation</h3>
+<p>If we have power spectrum or power spectrum density of <strong>both
+edge's absolute jitter</strong> (<span
+class="math inline">\(x(n)\)</span>) , <span
+class="math inline">\(P_{\text{xx}}\)</span></p>
+<p>Then <strong>1UI</strong> jitter is <span
+class="math inline">\(x_{\text{1UI}}(n)=x(n)-x(n-1)\)</span>, and
+<strong>Period</strong> jitter is <span
+class="math inline">\(x_{\text{Period}}(n)=x(n)-x(n-2)\)</span>, which
+can be modeled as FIR filter, <span class="math inline">\(H(\omega) =
+1-z^{-k}\)</span>, i.e. <span class="math inline">\(k=1\)</span> for
+<strong>1UI</strong> jitter and <span class="math inline">\(k=2\)</span>
+<strong>Period</strong> jitter <span
+class="math display">\[\begin{align}
+P_{\text{xx}}&#39;(\omega) &amp;= P_{\text{xx}}(\omega) \cdot \left|
+1-z^{-k}  \right|^2 \\
+&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-(e^{j\omega
+T_s})^{-k}  \right|^2 \\
+&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-e^{-j\omega T_s
+k}  \right|^2
+\end{align}\]</span></p>
+<p><img src="/2022/03/22/laplace-Z/image-20220519172239916.png"
+alt="image-20220519172239916" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear all</span><br><span class="line">close all</span><br><span class="line">clc</span><br><span class="line"></span><br><span class="line">xf_fs = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">0.5</span>;</span><br><span class="line">k = <span class="number">1</span>;</span><br><span class="line">H_1UI = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_1UI = <span class="built_in">abs</span>(H_1UI).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_1UI);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for 1UI jitter&#x27;</span>);</span><br><span class="line"></span><br><span class="line">k = <span class="number">2</span>;</span><br><span class="line">H_period = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_period = <span class="built_in">abs</span>(H_period).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_period);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for Period jitter&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/03/22/laplace-Z/image-20220709104127384.png"
+alt="image-20220709104127384" /> <span class="math display">\[
+x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
+\]</span></p>
+<h2 id="reference">reference</h2>
+<p><a
+href="https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf">Sam
+Palermo, ECEN720, Lecture 7: Equalization Introduction &amp; TX FIR
+Eq</a></p>
+<p><a
+href="https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab5_2021.pdf">Sam
+Palermo, ECEN720, Lab5 –Equalization Circuits</a></p>
+<p>B. Razavi, "The z-Transform for Analog Designers [The Analog Mind],"
+IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14,
+Summer 2020.</p>
+<p>Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial
+Data Communications</p>
+<p>Mathuranathan. Digital filter design – Introduction <a
+href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/">https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/</a></p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Latch Inference in Verilog</title>
+    <url>/2022/05/09/latch-inference/</url>
+    <content><![CDATA[<h2 id="always"><code>always@( * )</code></h2>
+<p><code>always@( * )</code> blocks are used to describe Combinational
+Logic, or Logic Gates. Only <code>=</code> (blocking) assignments should
+be used in an <code>always@( * )</code> block.</p>
+<h2 id="latch-inference">Latch Inference</h2>
+<p>If you <strong>DON'T</strong> assign every element that can be
+assigned inside an <code>always@( * )</code> block every time that
+<code>always@( * )</code> block is executed, a latch will be inferred
+for that element</p>
+<p>The approaches to avoid latch generation:</p>
+<ul>
+<li>set default values</li>
+<li>proper use of the <code>else</code> statement, and other flow
+constructs</li>
+</ul>
+<h3 id="without-default-values">without default values</h3>
+<blockquote>
+<p>latch is generated</p>
+</blockquote>
+<h4 id="rtl">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509170640006.png"
+alt="image-20220509170640006" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:09:18 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lanhq1 C_reg ( <span class="variable">.E</span>(Trigger), <span class="variable">.D</span>(Pass), <span class="variable">.Q</span>(C) );</span><br><span class="line">  an02d0 U3 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3 id="add-default-value">add default value</h3>
+<blockquote>
+<p>Default values are an easy way to avoid latch generation</p>
+</blockquote>
+<h4 id="rtl-1">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">        	C = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist-1">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509171319204.png"
+alt="image-20220509171319204" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:12:47 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  nd12d0 U5 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.ZN</span>(C) );</span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="if-evaluation"><code>if</code> evaluation</h2>
+<p><code>signed</code> number cast to <code>unsigned</code>
+automatically before evaluating</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb; </span><br><span class="line">  <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] datasg;</span><br><span class="line">  <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] dataug;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    datasg = <span class="number">2&#x27;b11</span>;</span><br><span class="line">    dataug = <span class="number">2&#x27;b11</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;datasg(%%d): %d&quot;</span>, datasg);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;dataug(%%d): %d&quot;</span>, dataug);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (datasg)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;datasg is OK&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (dataug)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;dataug is OK&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$finish</span>();</span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlog tb.v</span><br><span class="line">$ vsim -c -do &quot;run;exit&quot; work.tb</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># datasg(%d): -1</span><br><span class="line"># dataug(%d): 3</span><br><span class="line"># datasg is OK</span><br><span class="line"># dataug is OK</span><br><span class="line"># ** Note: $finish    : tb.v(16)</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>UC Berkeley CS150 Lec #20: Finite State Machines <a
+href="https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf">Slides</a></p>
+<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
+by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
+doi:10.1007/978-3-030-03238-8</p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -13741,64 +13833,6 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBri
       </categories>
   </entry>
   <entry>
-    <title>Precision Techniques</title>
-    <url>/2024/07/17/precision/</url>
-    <content><![CDATA[<h2 id="autozeroing">Autozeroing</h2>
-<blockquote>
-<p>offset is <strong>sampled</strong> and then subtracted from the
-input</p>
-<p>Measure the offset somehow and then subtract it from the input
-signal</p>
-</blockquote>
-<h3 id="residual-noise-of-auto-zeroing">Residual Noise of
-Auto-zeroing</h3>
-<p><img src="/2024/07/17/precision/image-20240826212343905.png"
-alt="image-20240826212343905" /></p>
-<hr />
-<p><img src="/2024/07/17/precision/image-20240826213958740.png"
-alt="image-20240826213958740" /></p>
-<p><em>pnosie Noise</em> Type: <strong>timeaverage</strong></p>
-<p><img src="/2024/07/17/precision/image-20240826214306376.png"
-alt="image-20240826214306376" /></p>
-<blockquote>
-<p>sinc filter come from <em>Zero-Order Hold</em></p>
-<p><img
-src="/2024/07/17/precision/Fourier-transform-of-a-rectangle-function-a-and-a-sinc-function-b.png"
-alt="Fourier-transform-of-a-rectangle-function-a-and-a-sinc-function-b" /></p>
-</blockquote>
-<h2 id="chopping">Chopping</h2>
-<blockquote>
-<p>offset is <strong>modulated</strong> away from the signal band and
-then filtered out</p>
-<p>Modulate the offset away from DC and then filter it out</p>
-</blockquote>
-<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
-<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
-and other artifacts …</p>
-<h2 id="dynamic-element-matching-dem">Dynamic Element Matching
-(DEM)</h2>
-<p><em>TODO</em> 📅</p>
-<h2 id="reference">reference</h2>
-<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
-effects of op-amp imperfections: autozeroing, correlated double
-sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
-84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
-href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
-<p>Qinwen Fan, Evolution of precision amplifiers</p>
-<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
-CMOS [<a
-href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
-<p>Kofi Makinwa. Precision Analog Circuit Design: Coping with
-Variability, [<a
-href="https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d">https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d</a>]
-[<a
-href="https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob">https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>pole splitting</title>
     <url>/2023/01/03/pole-splitting/</url>
     <content><![CDATA[<h3 id="generic-circuit-in-textbook">Generic circuit in textbook</h3>
@@ -14044,6 +14078,64 @@ class="math inline">\(20log_{10}(1.414^2)=6\text{dB}\)</span></p>
 McGraw-Hill, 2017.</p>
 <p>Sansen, Willy M. Analog Design Essentials. Germany: Springer US,
 2006.</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Precision Techniques</title>
+    <url>/2024/07/17/precision/</url>
+    <content><![CDATA[<h2 id="autozeroing">Autozeroing</h2>
+<blockquote>
+<p>offset is <strong>sampled</strong> and then subtracted from the
+input</p>
+<p>Measure the offset somehow and then subtract it from the input
+signal</p>
+</blockquote>
+<h3 id="residual-noise-of-auto-zeroing">Residual Noise of
+Auto-zeroing</h3>
+<p><img src="/2024/07/17/precision/image-20240826212343905.png"
+alt="image-20240826212343905" /></p>
+<hr />
+<p><img src="/2024/07/17/precision/image-20240826213958740.png"
+alt="image-20240826213958740" /></p>
+<p><em>pnosie Noise</em> Type: <strong>timeaverage</strong></p>
+<p><img src="/2024/07/17/precision/image-20240826214306376.png"
+alt="image-20240826214306376" /></p>
+<blockquote>
+<p>sinc filter come from <em>Zero-Order Hold</em></p>
+<p><img
+src="/2024/07/17/precision/Fourier-transform-of-a-rectangle-function-a-and-a-sinc-function-b.png"
+alt="Fourier-transform-of-a-rectangle-function-a-and-a-sinc-function-b" /></p>
+</blockquote>
+<h2 id="chopping">Chopping</h2>
+<blockquote>
+<p>offset is <strong>modulated</strong> away from the signal band and
+then filtered out</p>
+<p>Modulate the offset away from DC and then filter it out</p>
+</blockquote>
+<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
+<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
+and other artifacts …</p>
+<h2 id="dynamic-element-matching-dem">Dynamic Element Matching
+(DEM)</h2>
+<p><em>TODO</em> 📅</p>
+<h2 id="reference">reference</h2>
+<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
+effects of op-amp imperfections: autozeroing, correlated double
+sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
+84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
+href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
+<p>Qinwen Fan, Evolution of precision amplifiers</p>
+<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
+CMOS [<a
+href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
+<p>Kofi Makinwa. Precision Analog Circuit Design: Coping with
+Variability, [<a
+href="https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d">https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d</a>]
+[<a
+href="https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob">https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -14810,21 +14902,6 @@ alt="image-20220404195156776" /></p>
       </categories>
   </entry>
   <entry>
-    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
-    <url>/2022/05/01/rhel8-old-kernels/</url>
-    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
-<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
-method for removing kernels and keeping only the latest version and
-running kernel:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
-<p>From the <code>yum</code> man page:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Relative Sensitivity</title>
     <url>/2023/07/12/relative-sensitivity/</url>
     <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
@@ -14900,6 +14977,21 @@ href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://we
       </categories>
   </entry>
   <entry>
+    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
+    <url>/2022/05/01/rhel8-old-kernels/</url>
+    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
+<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
+method for removing kernels and keeping only the latest version and
+running kernel:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
+<p>From the <code>yum</code> man page:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Remove prefix from multiple files in Linux console</title>
     <url>/2024/08/18/rm-prefix-bash/</url>
     <content><![CDATA[<p>Bash <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for file in prefix*; do mv &quot;$file&quot; &quot;$&#123;file#prefix&#125;&quot;; done;</span><br></pre></td></tr></table></figure> The for loop iterates over all files with the
@@ -14912,18 +15004,6 @@ prefix.</p>
 <p>[<a
 href="https://gist.github.com/guisehn/5438bbc22138435665c6e996493fe02b">https://gist.github.com/guisehn/5438bbc22138435665c6e996493fe02b</a>]</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
-    <url>/2022/02/02/rocky8-cadence/</url>
-    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
-<p><strong>library preparation for EDA installation</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>devops</category>
@@ -14945,6 +15025,18 @@ alt="image-20220401011509900" /></p>
 <p><img
 src="/2022/04/01/rocky-nmcli-network/image-20220401011543866.png"
 alt="image-20220401011543866" /></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Rocky Linux 8 rpm for cadence binary and cdnshelp</title>
+    <url>/2022/02/02/rocky8-cadence/</url>
+    <content><![CDATA[<p><strong>qt5 and openssl</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssl compat-openssl10 qca-qt5-ossl.x86_64 openssl-devel</span><br></pre></td></tr></table></figure>
+<p><strong>library preparation for EDA installation</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">libc6, gdb</span><br><span class="line">dc</span><br><span class="line">libncurses5-dev</span><br><span class="line">libncurses5-dev:i386</span><br><span class="line">g++</span><br><span class="line">pstack</span><br><span class="line">libelf1:i386</span><br><span class="line">libgcc-4.8-dev:i386</span><br><span class="line">libstdc++6:i386</span><br><span class="line">gcc-multilib</span><br><span class="line">g++-multilib</span><br><span class="line">libc6-dbg</span><br><span class="line">libc6-dbg:i386</span><br><span class="line">libexpat-dev</span><br><span class="line">libexpat-dev:i386libxss-dev</span><br><span class="line">libxpm4</span><br><span class="line">libxpm4:i386</span><br><span class="line">libmng2</span><br><span class="line">libxss-dev:i386</span><br><span class="line">libxft2</span><br><span class="line">libxft2:i386</span><br><span class="line">libxmu6</span><br><span class="line">libxmu6:i386</span><br><span class="line">libjpeg62-dev</span><br><span class="line">libjpeg62-dev:i386</span><br><span class="line">gnome-core</span><br><span class="line">gnome-core:i386</span><br><span class="line">xfce4</span><br><span class="line">libxml2:i386</span><br><span class="line">libxml2, libXft-dev</span><br><span class="line">libXft-dev:i386</span><br><span class="line">libSM</span><br><span class="line">libSM:i386</span><br><span class="line">libpng3</span><br><span class="line">libpng3:i386</span><br><span class="line">libxi6</span><br><span class="line">libxi6:i386</span><br><span class="line">glibc.i686</span><br><span class="line">libX11.i686</span><br><span class="line">libX11-devel.i686</span><br><span class="line">libX11-devel.x86_64</span><br><span class="line">gcc-c++</span><br><span class="line">compat-readline5</span><br><span class="line">libXext.i686</span><br><span class="line">libXtst.i686</span><br><span class="line">redhat-lsb.i686</span><br><span class="line">libXrender.i686</span><br><span class="line">glibc-devel.i686</span><br><span class="line">zlib.i686</span><br><span class="line">ncompress.x86_64</span><br><span class="line">ksh</span><br><span class="line">openmotif22.i686</span><br><span class="line">openmotif22.x86_64</span><br><span class="line">xterm</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>devops</category>
@@ -15243,6 +15335,63 @@ href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">htt
       </categories>
   </entry>
   <entry>
+    <title>signed and unsigned arithmetic in Verilog</title>
+    <url>/2022/05/07/signed-verilog/</url>
+    <content><![CDATA[<p>With <strong>implict sign extension</strong>, the implementation of
+<strong>signed</strong> arithmetic is <strong>DIFFERENT</strong> from
+that of <strong>unsigned</strong>. Otherwise, their implementations are
+same.</p>
+<p>The implementations manifest the RTL's behaviour correctly</p>
+<h2 id="add-without-implicit-sign-extension">add without implicit sign
+extension</h2>
+<h3 id="unsigned">unsigned</h3>
+<h4 id="rtl">rtl</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/07/signed-verilog/image-20220507114215200.png"
+alt="image-20220507114215200" /></p>
+<h4 id="synthesized-netlist">synthesized netlist</h4>
+<p><img src="/2022/05/07/signed-verilog/image-20220507114307439.png"
+alt="image-20220507114307439" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:43:27 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>vcs compile with <code>-v /path/to/lib.v</code></p>
+</blockquote>
+<h3 id="signed">signed</h3>
+<h4 id="rtl-1">rtl</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/07/signed-verilog/image-20220507114654777.png"
+alt="image-20220507114654777" /></p>
+<h4 id="synthesized-netlist-1">synthesized netlist</h4>
+<p><img src="/2022/05/07/signed-verilog/image-20220507114844111.png"
+alt="image-20220507114844111" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:48:54 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2 id="add-with-implicit-sign-extension">add WITH implicit sign
+extension</h2>
+<h3 id="unsigned-with-0-extension">unsigned with 0 extension</h3>
+<h4 id="rtl-2">rtl</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0		<span class="comment">// 3 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] data1		<span class="comment">// 2 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result	<span class="comment">// 3 bit unsigned</span></span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/07/signed-verilog/image-20220507121521303.png"
+alt="image-20220507121521303" /></p>
+<h4 id="synthesized-netlist-2">synthesized netlist</h4>
+<p><img src="/2022/05/07/signed-verilog/image-20220507121622001.png"
+alt="image-20220507121622001" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:15:58 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.Z</span>(n6) );</span><br><span class="line">  ad01d0 U7 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n6), <span class="variable">.CO</span>(n4), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr02d1 U8 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n4), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  nr02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n5) );</span><br><span class="line">  nr02d0 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(n5), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3 id="signed-with-implicit-sign-extension">signed with implicit sign
+extension</h3>
+<h4 id="rtl-3">rtl</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/07/signed-verilog/image-20220507122053948.png"
+alt="image-20220507122053948" /></p>
+<h4 id="synthesized-netlist-3">synthesized netlist</h4>
+<p><img src="/2022/05/07/signed-verilog/image-20220507122217830.png"
+alt="image-20220507122217830" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:21:51 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n6, n7, n8, n9, n10;</span><br><span class="line"></span><br><span class="line">  nd02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n10) );</span><br><span class="line">  inv0d0 U10 ( <span class="variable">.I</span>(n10), <span class="variable">.ZN</span>(n9) );</span><br><span class="line">  nr02d0 U11 ( <span class="variable">.A1</span>(data0[<span class="number">1</span>]), <span class="variable">.A2</span>(data1[<span class="number">1</span>]), <span class="variable">.ZN</span>(n7) );</span><br><span class="line">  aor221d1 U12 ( <span class="variable">.B1</span>(n9), <span class="variable">.B2</span>(data1[<span class="number">1</span>]), <span class="variable">.C1</span>(n10), <span class="variable">.C2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(</span><br><span class="line">        n6) );</span><br><span class="line">  xn02d1 U13 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n6), <span class="variable">.ZN</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  ora21d1 U14 ( <span class="variable">.B1</span>(data1[<span class="number">0</span>]), <span class="variable">.B2</span>(data0[<span class="number">0</span>]), <span class="variable">.A</span>(n10), <span class="variable">.Z</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  aor21d1 U15 ( <span class="variable">.B1</span>(data1[<span class="number">1</span>]), <span class="variable">.B2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(n8) );</span><br><span class="line">  mx02d0 U16 ( <span class="variable">.I0</span>(n10), <span class="variable">.I1</span>(n9), <span class="variable">.S</span>(n8), <span class="variable">.Z</span>(result[<span class="number">1</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>DSPF Options</title>
     <url>/2023/04/22/spectre-case/</url>
     <content><![CDATA[<h3 id="case-sensitivity">Case Sensitivity</h3>
@@ -15388,63 +15537,6 @@ href="https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-c
 ]]></content>
       <categories>
         <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>signed and unsigned arithmetic in Verilog</title>
-    <url>/2022/05/07/signed-verilog/</url>
-    <content><![CDATA[<p>With <strong>implict sign extension</strong>, the implementation of
-<strong>signed</strong> arithmetic is <strong>DIFFERENT</strong> from
-that of <strong>unsigned</strong>. Otherwise, their implementations are
-same.</p>
-<p>The implementations manifest the RTL's behaviour correctly</p>
-<h2 id="add-without-implicit-sign-extension">add without implicit sign
-extension</h2>
-<h3 id="unsigned">unsigned</h3>
-<h4 id="rtl">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114215200.png"
-alt="image-20220507114215200" /></p>
-<h4 id="synthesized-netlist">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114307439.png"
-alt="image-20220507114307439" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:43:27 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>vcs compile with <code>-v /path/to/lib.v</code></p>
-</blockquote>
-<h3 id="signed">signed</h3>
-<h4 id="rtl-1">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114654777.png"
-alt="image-20220507114654777" /></p>
-<h4 id="synthesized-netlist-1">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507114844111.png"
-alt="image-20220507114844111" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 11:48:54 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.Z</span>(n5) );</span><br><span class="line">  nr02d0 U7 ( <span class="variable">.A1</span>(data0[<span class="number">0</span>]), <span class="variable">.A2</span>(data1[<span class="number">0</span>]), <span class="variable">.ZN</span>(n4) );</span><br><span class="line">  nr02d0 U8 ( <span class="variable">.A1</span>(n5), <span class="variable">.A2</span>(n4), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  ad01d0 U9 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n5), <span class="variable">.CO</span>(n6), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr03d1 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(data0[<span class="number">2</span>]), <span class="variable">.A3</span>(data1[<span class="number">2</span>]), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="add-with-implicit-sign-extension">add WITH implicit sign
-extension</h2>
-<h3 id="unsigned-with-0-extension">unsigned with 0 extension</h3>
-<h4 id="rtl-2">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] data0		<span class="comment">// 3 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] data1		<span class="comment">// 2 bit unsigned</span></span><br><span class="line">    ,<span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] result	<span class="comment">// 3 bit unsigned</span></span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507121521303.png"
-alt="image-20220507121521303" /></p>
-<h4 id="synthesized-netlist-2">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507121622001.png"
-alt="image-20220507121622001" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:15:58 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n4, n5, n6;</span><br><span class="line"></span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.Z</span>(n6) );</span><br><span class="line">  ad01d0 U7 ( <span class="variable">.A</span>(data1[<span class="number">1</span>]), <span class="variable">.B</span>(data0[<span class="number">1</span>]), <span class="variable">.CI</span>(n6), <span class="variable">.CO</span>(n4), <span class="variable">.S</span>(result[<span class="number">1</span>]) );</span><br><span class="line">  xr02d1 U8 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n4), <span class="variable">.Z</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  nr02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n5) );</span><br><span class="line">  nr02d0 U10 ( <span class="variable">.A1</span>(n6), <span class="variable">.A2</span>(n5), <span class="variable">.ZN</span>(result[<span class="number">0</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="signed-with-implicit-sign-extension">signed with implicit sign
-extension</h3>
-<h4 id="rtl-3">rtl</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] data0</span><br><span class="line">	,<span class="keyword">input</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] data1</span><br><span class="line">	,<span class="keyword">output</span> <span class="keyword">wire</span> <span class="keyword">signed</span> [<span class="number">2</span>:<span class="number">0</span>] result</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">assign</span> result = data0 + data1;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/07/signed-verilog/image-20220507122053948.png"
-alt="image-20220507122053948" /></p>
-<h4 id="synthesized-netlist-3">synthesized netlist</h4>
-<p><img src="/2022/05/07/signed-verilog/image-20220507122217830.png"
-alt="image-20220507122217830" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Sat May  7 12:21:51 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( data0, data1, result );</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] data0;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] data1;</span><br><span class="line">  <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>] result;</span><br><span class="line">  <span class="keyword">wire</span>   n6, n7, n8, n9, n10;</span><br><span class="line"></span><br><span class="line">  nd02d0 U9 ( <span class="variable">.A1</span>(data1[<span class="number">0</span>]), <span class="variable">.A2</span>(data0[<span class="number">0</span>]), <span class="variable">.ZN</span>(n10) );</span><br><span class="line">  inv0d0 U10 ( <span class="variable">.I</span>(n10), <span class="variable">.ZN</span>(n9) );</span><br><span class="line">  nr02d0 U11 ( <span class="variable">.A1</span>(data0[<span class="number">1</span>]), <span class="variable">.A2</span>(data1[<span class="number">1</span>]), <span class="variable">.ZN</span>(n7) );</span><br><span class="line">  aor221d1 U12 ( <span class="variable">.B1</span>(n9), <span class="variable">.B2</span>(data1[<span class="number">1</span>]), <span class="variable">.C1</span>(n10), <span class="variable">.C2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(</span><br><span class="line">        n6) );</span><br><span class="line">  xn02d1 U13 ( <span class="variable">.A1</span>(data0[<span class="number">2</span>]), <span class="variable">.A2</span>(n6), <span class="variable">.ZN</span>(result[<span class="number">2</span>]) );</span><br><span class="line">  ora21d1 U14 ( <span class="variable">.B1</span>(data1[<span class="number">0</span>]), <span class="variable">.B2</span>(data0[<span class="number">0</span>]), <span class="variable">.A</span>(n10), <span class="variable">.Z</span>(result[<span class="number">0</span>]) );</span><br><span class="line">  aor21d1 U15 ( <span class="variable">.B1</span>(data1[<span class="number">1</span>]), <span class="variable">.B2</span>(data0[<span class="number">1</span>]), <span class="variable">.A</span>(n7), <span class="variable">.Z</span>(n8) );</span><br><span class="line">  mx02d0 U16 ( <span class="variable">.I0</span>(n10), <span class="variable">.I1</span>(n9), <span class="variable">.S</span>(n8), <span class="variable">.Z</span>(result[<span class="number">1</span>]) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -16959,9 +17051,9 @@ alt="image-20231223212846596" /></p>
 alt="image-20231223213016508" /></p>
 <h2 id="s-domain-and-phasor-domain"><span
 class="math inline">\(s\)</span>-domain and phasor-domain</h2>
-<p>Phasor analysis is a technique to find the steady-state response when
-the system input is a sinusoid. That is, phasor analysis is sinusoidal
-analysis.</p>
+<p>Phasor analysis is a technique to find the <em>steady-state
+response</em> when the system input is a sinusoid. That is, phasor
+analysis is sinusoidal analysis.</p>
 <ul>
 <li>Phasor analysis is a powerful technique with which to find the
 steady-state portion of the complete response.</li>
@@ -17230,59 +17322,6 @@ href="https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9">https://youtu.be/qjkrngJ
 <p><strong>元好问</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">摸鱼儿</span><br><span class="line"></span><br><span class="line">问世间，情为何物， 直教生死相许？</span><br><span class="line">天南地北双飞客， 老翅几回寒暑。</span><br><span class="line">欢乐趣， 离别苦， 就中更有痴儿女。</span><br><span class="line">君应有语， 渺万里层云， 千山暮雪， 只影向谁去？</span><br><span class="line"></span><br><span class="line">横汾路， 寂寞当年箫鼓， 荒烟依旧平楚。</span><br><span class="line">招魂楚些何嗟及， 山鬼暗啼风雨。</span><br><span class="line">天也妒， 未信与， 莺儿燕子俱黄土。</span><br><span class="line">千秋万古， 为留待骚人， 狂歌痛饮， 来访雁丘处。</span><br></pre></td></tr></table></figure>
 ]]></content>
-  </entry>
-  <entry>
-    <title>DC operating points during TRANSIENT analysis</title>
-    <url>/2023/10/06/tranOP/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
-Beckett</a><a
-href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
-11 years ago</a></p>
-<p>Two approaches:</p>
-<ol type="1">
-<li>On the transient options form, there's a field called "infotimes" -
-specify the times at which you want it to output the dc operating point
-data. You can then annotate the "transient operating points" from any of
-these times after the simulation, or access them via the results
-browser.</li>
-<li>Or you could get the operating point data to be continuously saved
-during the transient for selected devices - if so, create a file called
-(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
-M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
-reference the file via Setup-&gt;Model Libraries or as a "definition
-file" on Setup-&gt;Simulation Files. With this approach you can then
-find the operating point data for the selected devices in the results
-browser and plot it versus time (be cautious of saving too much though
-because this can generate a lot of data if you're not careful)</li>
-</ol>
-<p>Regards,</p>
-<p>Andrew.</p>
-</blockquote>
-<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
-alt="image-20231006110801078" /></p>
-<h2 id="transient-options-form">transient options form</h2>
-<h3 id="setup">setup</h3>
-<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
-alt="image-20231006103506475" /></p>
-<h3 id="access-1">access 1</h3>
-<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
-<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
-<strong>Transient Operating Points</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
-alt="image-20231006104317496" /></p>
-<h3 id="access-2">access 2</h3>
-<p><strong>tranOpTimed</strong></p>
-<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
-alt="image-20231006105236323" /></p>
-<h2 id="save.scs">save.scs</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
-alt="image-20231006110506245" /></p>
-]]></content>
-      <categories>
-        <category>cad</category>
-      </categories>
   </entry>
   <entry>
     <title>TLM</title>
@@ -17707,6 +17746,59 @@ FIFOs</p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>DC operating points during TRANSIENT analysis</title>
+    <url>/2023/10/06/tranOP/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://community.cadence.com/members/andrew-beckett">Andrew
+Beckett</a><a
+href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
+11 years ago</a></p>
+<p>Two approaches:</p>
+<ol type="1">
+<li>On the transient options form, there's a field called "infotimes" -
+specify the times at which you want it to output the dc operating point
+data. You can then annotate the "transient operating points" from any of
+these times after the simulation, or access them via the results
+browser.</li>
+<li>Or you could get the operating point data to be continuously saved
+during the transient for selected devices - if so, create a file called
+(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
+M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
+reference the file via Setup-&gt;Model Libraries or as a "definition
+file" on Setup-&gt;Simulation Files. With this approach you can then
+find the operating point data for the selected devices in the results
+browser and plot it versus time (be cautious of saving too much though
+because this can generate a lot of data if you're not careful)</li>
+</ol>
+<p>Regards,</p>
+<p>Andrew.</p>
+</blockquote>
+<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
+alt="image-20231006110801078" /></p>
+<h2 id="transient-options-form">transient options form</h2>
+<h3 id="setup">setup</h3>
+<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
+alt="image-20231006103506475" /></p>
+<h3 id="access-1">access 1</h3>
+<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
+<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
+<strong>Transient Operating Points</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
+alt="image-20231006104317496" /></p>
+<h3 id="access-2">access 2</h3>
+<p><strong>tranOpTimed</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
+alt="image-20231006105236323" /></p>
+<h2 id="save.scs">save.scs</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
+alt="image-20231006110506245" /></p>
+]]></content>
+      <categories>
+        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -19121,80 +19213,5 @@ alt="image-20220514121150988" /></p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>The z-Transform and Its Application</title>
-    <url>/2022/03/22/z-Transform/</url>
-    <content><![CDATA[<h2 id="fir-equalization">FIR Equalization</h2>
-<h3 id="frequency-response">Frequency Response</h3>
-<p><img src="/2022/03/22/z-Transform/image-20220322093428287.png"
-alt="image-20220322093428287" /> <span class="math display">\[
-z = e^{j\omega T_s}
-\]</span></p>
-<h3 id="unit-impulse">Unit impulse</h3>
-<p>filter coefficients are <strong>[-0.131, 0.595, -0.274]</strong> and
-sampling period is <strong>100ps</strong></p>
-<p><img src="/2022/03/22/z-Transform/image-20220428125454912.png"
-alt="image-20220428125454912" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% Frequency response</span></span><br><span class="line">w = [<span class="number">-0.131</span>, <span class="number">0.595</span>, <span class="number">-0.274</span>];</span><br><span class="line">Ts = <span class="number">100e-12</span>;</span><br><span class="line">[mag, w] = freqz(w, <span class="number">1</span>, [], <span class="number">1</span>/Ts);</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="number">1e9</span>, <span class="number">20</span>*<span class="built_in">log10</span>(<span class="built_in">abs</span>(mag)));</span><br><span class="line">xlabel(<span class="string">&#x27;Freq(GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;dB&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&#x27;frequency response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% unit impulse response from transfer function</span></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">z = tf(<span class="string">&#x27;z&#x27;</span>, Ts);</span><br><span class="line">h = <span class="number">-0.131</span> + <span class="number">0.595</span>*z^(<span class="number">-1</span>) <span class="number">-0.274</span>*z^(<span class="number">-2</span>);</span><br><span class="line">[y, t] = impulse(h);</span><br><span class="line">stem(t*<span class="number">1e10</span>, y*Ts);  <span class="comment">% !!! y*Ts is essential</span></span><br><span class="line">grid on;</span><br><span class="line">title(<span class="string">&quot;unit impulse response&quot;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(\times 100ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;mag&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>impulse</code>:</p>
-<p>For discrete-time systems, the impulse response is the response to a
-unit area pulse of length <code>Ts</code> and height <code>1/Ts</code>,
-where <code>Ts</code> is the sample time of the system. (This pulse
-approaches <span class="math inline">\(\delta(t)\)</span> as
-<code>Ts</code> approaches zero.)</p>
-<p>Scale output:</p>
-<p>Multiply <code>impulse</code> output with sample period
-<code>Ts</code> in order to correct <code>1/Ts</code> height of
-<code>impulse</code> function.</p>
-</blockquote>
-<h3 id="psd-transformation">PSD transformation</h3>
-<p>If we have power spectrum or power spectrum density of <strong>both
-edge's absolute jitter</strong> (<span
-class="math inline">\(x(n)\)</span>) , <span
-class="math inline">\(P_{\text{xx}}\)</span></p>
-<p>Then <strong>1UI</strong> jitter is <span
-class="math inline">\(x_{\text{1UI}}(n)=x(n)-x(n-1)\)</span>, and
-<strong>Period</strong> jitter is <span
-class="math inline">\(x_{\text{Period}}(n)=x(n)-x(n-2)\)</span>, which
-can be modeled as FIR filter, <span class="math inline">\(H(\omega) =
-1-z^{-k}\)</span>, i.e. <span class="math inline">\(k=1\)</span> for
-<strong>1UI</strong> jitter and <span class="math inline">\(k=2\)</span>
-<strong>Period</strong> jitter <span
-class="math display">\[\begin{align}
-P_{\text{xx}}&#39;(\omega) &amp;= P_{\text{xx}}(\omega) \cdot \left|
-1-z^{-k}  \right|^2 \\
-&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-(e^{j\omega
-T_s})^{-k}  \right|^2 \\
-&amp;= P_{\text{xx}}(\omega) \cdot \left| 1-e^{-j\omega T_s
-k}  \right|^2
-\end{align}\]</span></p>
-<p><img src="/2022/03/22/z-Transform/image-20220519172239916.png"
-alt="image-20220519172239916" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear all</span><br><span class="line">close all</span><br><span class="line">clc</span><br><span class="line"></span><br><span class="line">xf_fs = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">0.5</span>;</span><br><span class="line">k = <span class="number">1</span>;</span><br><span class="line">H_1UI = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_1UI = <span class="built_in">abs</span>(H_1UI).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_1UI);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for 1UI jitter&#x27;</span>);</span><br><span class="line"></span><br><span class="line">k = <span class="number">2</span>;</span><br><span class="line">H_period = <span class="number">1</span> - <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*xf_fs);</span><br><span class="line">HH_period = <span class="built_in">abs</span>(H_period).^<span class="number">2</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(xf_fs, HH_period);</span><br><span class="line">grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Freq&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;|H|^2&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Weight for Period jitter&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/22/z-Transform/image-20220709104127384.png"
-alt="image-20220709104127384" /> <span class="math display">\[
-x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
-\]</span></p>
-<h2 id="reference">reference</h2>
-<p><a
-href="https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf">Sam
-Palermo, ECEN720, Lecture 7: Equalization Introduction &amp; TX FIR
-Eq</a></p>
-<p><a
-href="https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab5_2021.pdf">Sam
-Palermo, ECEN720, Lab5 –Equalization Circuits</a></p>
-<p>B. Razavi, "The z-Transform for Analog Designers [The Analog Mind],"
-IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14,
-Summer 2020.</p>
-<p>Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial
-Data Communications</p>
-<p>Mathuranathan. Digital filter design – Introduction <a
-href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/">https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/</a></p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
   </entry>
 </search>

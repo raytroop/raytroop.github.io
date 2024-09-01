@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,380 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/20/pam4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/20/pam4/" class="post-title-link" itemprop="url">PAM4 Signaling</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-20 22:51:22" itemprop="dateCreated datePublished" datetime="2022-07-20T22:51:22+00:00">2022-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="why-pam4">Why PAM4?</h2>
+<p><img src="/2022/07/20/pam4/image-20240808205451067.png"
+alt="image-20240808205451067" /></p>
+<p><img src="/2022/07/20/pam4/image-20240808205635598.png"
+alt="image-20240808205635598" /></p>
+<h2 id="bandwidth">Bandwidth</h2>
+<blockquote>
+<p>[How Interconnects Work: Bandwidth for Modeling and Measurements, <a
+target="_blank" rel="noopener" href="https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf">https://www.simberian.com/AppNotes/HIW-Bandwidth-6to112-2021-11-08.pdf</a>]</p>
+<p>[Moving from 28 Gbps NRZ to 56 Gbps PAM-4 - is it "free lunch"?, <a
+target="_blank" rel="noopener" href="https://www.simberian.com/AppNotes/28NRZto56PAM4.pdf">https://www.simberian.com/AppNotes/28NRZto56PAM4.pdf</a>]</p>
+<p>[PAM4: For Better and Worse Is PAM4 worth the hassle?<a
+target="_blank" rel="noopener" href="https://www.signalintegrityjournal.com/articles/1151-pam4-for-better-and-worse">https://www.signalintegrityjournal.com/articles/1151-pam4-for-better-and-worse</a>]</p>
+</blockquote>
+<h2 id="pam4-basic">PAM4 Basic</h2>
+<p><img src="/2022/07/20/pam4/image-20240624232935743.png"
+alt="image-20240624232935743" /></p>
+<p><img src="/2022/07/20/pam4/nrz-v-pam4-bits.png"
+alt="PAM4, NRZ, PCIe 6.0" /></p>
+<p><strong>PAM4</strong> only have <em>1/3</em> of the amplitude
+compared to <strong>NRZ</strong> <span class="math display">\[
+\text{SNR loss} = 20\log(\frac{1}{3}) \sim  9.5\text{dB}
+\]</span></p>
+<blockquote>
+<p>In practice, there is further degradation due to nonlinearity</p>
+</blockquote>
+<p>In a more technical terms, we trade the <strong>transmitter's
+signal-to-noise ratio (SNR)</strong> for <strong>lower Nyquist
+frequency</strong></p>
+<p>Equalization will be a lot more complex</p>
+<h3 id="energy">Energy</h3>
+<p>1mW/Gbps = 1pJ/bit</p>
+<h3 id="pam4-level-names">PAM4 Level Names</h3>
+<p><img src="/2022/07/20/pam4/image-20220717000655620.png"
+alt="image-20220717000655620" /></p>
+<h3 id="pam4-eye-linearity">PAM4 Eye Linearity</h3>
+<p><img src="/2022/07/20/pam4/image-20220716221740224.png"
+alt="image-20220716221740224" /></p>
+<p>Each level can have different amplitudes, which form the <strong>Eye
+Linearity</strong> <span class="math display">\[
+{\text{Eye
+Linearity}}=\frac{\min(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}{\max(AV_{\text{upp}},AV_{\text{mid}},AV_{\text{low}})}
+\]</span></p>
+<blockquote>
+<p>Perfect eye = 1</p>
+<p>Worst eye = 0</p>
+</blockquote>
+<h3 id="transmitter-linearity-rlm">Transmitter Linearity (RLM)</h3>
+<p>The <strong>Level Separation Mismatch Ratio</strong>, commonly
+referred to as <span class="math inline">\(R_{\text{LM}}\)</span>, is a
+measurement that is not required in normative or informative VSR tests,
+but is required by most other variants.</p>
+<p><img src="/2022/07/20/pam4/image-20220716223452261.png"
+alt="image-20220716223452261" /></p>
+<p><span class="math display">\[\begin{align}
+V_{\text{mid}} &amp;= \frac{V_0+V_3}{2} \\
+ES1 &amp;= \frac{V_1-V_{\text{mid}}}{V_0-V_{\text{mid}}} \\
+ES2 &amp;= \frac{V_2-V_{\text{mid}}}{V_3-V_{\text{mid}}} \\
+R_{\text{LM}} &amp;= \min(3\times ES1, 3\times ES2, 2-3\times ES1,
+2-3\times ES2)
+\end{align}\]</span></p>
+<p>where <em>ES</em> means <em>Effective Symbol Level</em></p>
+<blockquote>
+<p><span class="math inline">\(R_{\text{LM}}\)</span> is conceptually
+similar to eye linearity but measured differently. An ideal PAM4 eye has
+<span class="math inline">\(R_{\text{LM}}\)</span> equal to
+<strong>1</strong>, but it does not scale in the same way as eye
+linearity.</p>
+<p>The closer <span class="math inline">\(R_{\text{LM}}\)</span> is to
+<strong>1</strong>, the better the eye linearity is.</p>
+</blockquote>
+<h2 id="gray-coding">Gray Coding</h2>
+<p>Gray code or reflected binary code was designed so that two
+successive values differ by one bit</p>
+<p>Reducing the number of switching</p>
+<table>
+<thead>
+<tr class="header">
+<th>Linear Code</th>
+<th>Gray Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>01</td>
+<td>01</td>
+</tr>
+<tr class="even">
+<td>00</td>
+<td>00</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li>Only one bit error per symbol is made for incorrect decisions</li>
+<li>This is the coding adopted in all the PAM4 standards</li>
+<li>Support dual-mode with PAM2, by grounding the LSB</li>
+<li>MSB is the bit transmitted first</li>
+</ul>
+</blockquote>
+<h3 id="binary-to-pam4-and-back-to-binary-example">Binary to PAM4 and
+Back to Binary Example</h3>
+<p><img src="/2022/07/20/pam4/image-20220717000847185.png"
+alt="image-20220717000847185" /></p>
+<blockquote>
+<p>The way that Gray coding combines the MSB (most significant bit) and
+LSB (least significant bit) in each PAM4 symbol assures that
+<strong>symbol errors</strong> caused by <strong>amplitude
+noise</strong> are more likely to cause <strong>one bit error than
+two</strong>. On the other hand, jitter is more likely to cause two bit
+errors per symbol error.</p>
+</blockquote>
+<h1 id="pam4-tx-equalization">PAM4 TX equalization</h1>
+<p><img src="/2022/07/20/pam4/image-20220717010007963.png"
+alt="image-20220717010007963" /></p>
+<p>Here, <span class="math inline">\(d_{\text{LSB}} \in \{-1,
+1\}\)</span>, <span class="math inline">\(d_{\text{MSB}} \in \{-2,
+2\}\)</span> and <span class="math inline">\(d&#39; \in \{ -3, -1, 1, 3
+\}\)</span></p>
+<p>Implementation-1 could potentially experience performance degradation
+due to</p>
+<ol type="1">
+<li>Clock skew, <span class="math inline">\(\Delta t\)</span>, could
+make the eye misaligned horizontally</li>
+<li>Gain mismatch, <span class="math inline">\(\Delta G\)</span>, could
+cause eye nonlinearity</li>
+<li>Bandwidth mismatch, <span class="math inline">\(\Delta
+f_{\text{BW}}\)</span>, could make the eye misaligned vertically</li>
+</ol>
+<p><img src="/2022/07/20/pam4/image-20220717011129124.png"
+alt="image-20220717011129124" /></p>
+<blockquote>
+<p>Typically, a 3-tap FIR (pre + main + post) TX de-emphasis is used</p>
+<p>3-tap FIR results in <span class="math inline">\(4^3 = 64\)</span>
+possible distinct signal levels</p>
+</blockquote>
+<p><img src="/2022/07/20/pam4/msb_lsb.drawio.svg"
+alt="msb_lsb.drawio" /></p>
+<p><span class="math display">\[\begin{align}
+R_U^M \parallel R_D^M &amp;= \frac{3R_T}{2}\\
+R_U^L \parallel R_D^L &amp;= 3R_T
+\end{align}\]</span></p>
+<p>Thevenin Equivalent Circuit is <img
+src="/2022/07/20/pam4/thevenin_1.drawio.svg"
+alt="thevenin_1.drawio" /></p>
+<p>Which can be simpified as <img
+src="/2022/07/20/pam4/thevenin_2.drawio.svg" alt="thevenin_2.drawio" />
+<span class="math display">\[\begin{align}
+V_{\text{rx}} &amp;= \frac{1}{2}(V_p - V_m) \\
+&amp;= \frac{1}{2}(\frac{2}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-1) \\
+&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2}
+\end{align}\]</span></p>
+<p>The above eqations demonstrate that the output <span
+class="math inline">\(V_{\text{rx}}\)</span> is the linear sum of
+<strong>MSB</strong> and <strong>LSB</strong>; <strong>LSB</strong> and
+<strong>MSB</strong> have relative weight, i.e. <em>1</em> for LSB and
+<em>2</em> for MSB.</p>
+<p>Assume pre cusor has <span class="math inline">\(L\)</span> legs,
+main cursor <span class="math inline">\(M\)</span> legs and post cursor
+<span class="math inline">\(N\)</span> legs, which is same with the
+convention in "Voltage-Mode Driver Equalization"</p>
+<p>The number of legs connected with supply can expressed as <span
+class="math display">\[
+n_{up} = (1-d_{n+1})L + d_{n}M + (1-d_{n-1})N
+\]</span> Where <span class="math inline">\(d_n \in \{0, 1\}\)</span>,
+or <span class="math display">\[
+n_{up} = \frac{1}{2}(-D_{n+1}+1)L + \frac{1}{2}(D_{n}+1)M +
+\frac{1}{2}(-D_{n-1}+1)N
+\]</span> Where <span class="math inline">\(D_n \in \{-1,
++1\}\)</span></p>
+<p>Then the number of legs connected with ground is <span
+class="math display">\[
+n_{dn}=L+M+N-n_{up}
+\]</span> where <span
+class="math inline">\(n_{up}+n_{dn}=L+M+N\)</span></p>
+<p>Voltage resistor divider <span class="math display">\[\begin{align}
+V_o &amp;=
+\frac{\frac{R_{U}}{n_{dn}}}{\frac{R_U}{n_{dn}}+\frac{R_U}{n_{up}}} \\
+&amp;= \frac{1}{2}- \frac{1}{2}D_{n+1}\frac{L}{L+M+N}+
+\frac{1}{2}D_{n}\frac{M}{L+M+N}-\frac{1}{2}D_{n-1}\frac{N}{L+M+N} \\
+&amp;= \frac{1}{2}-\frac{1}{2}D_{n+1}\cdot l+ \frac{1}{2}D_{n}\cdot
+m-\frac{1}{2}D_{n-1}\cdot n
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(l+m+n=1\)</span></p>
+<p><span class="math inline">\(V_{\text{MSB}}\)</span> and <span
+class="math inline">\(V_{\text{LSB}}\)</span> can be obtained</p>
+<p><span class="math display">\[\begin{align}
+V_{\text{MSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot
+l+ \frac{1}{2}D^{\text{MSB}}_{n}\cdot
+m-\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \\
+V_{\text{LSB}} &amp;= \frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot
+l+ \frac{1}{2}D^{\text{LSB}}_{n}\cdot
+m-\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n
+\end{align}\]</span></p>
+<p>Substitute the above equation into <span
+class="math inline">\(V_{\text{rx}}\)</span>, we obtain the relationship
+between driver legs and FFE coefficients</p>
+<p><span class="math display">\[\begin{align}
+V_{\text{rx}}
+&amp;=\frac{1}{3}(2V_{\text{MSB}}+V_{\text{LSB}})-\frac{1}{2} \\
+&amp;= \frac{1}{3} \left\{  2\left(
+\frac{1}{2}-\frac{1}{2}D^{\text{MSB}}_{n+1}\cdot l+
+\frac{1}{2}D^{\text{MSB}}_{n}\cdot m-
+\frac{1}{2}D^{\text{MSB}}_{n-1}\cdot n \right) + \left(
+\frac{1}{2}-\frac{1}{2}D^{\text{LSB}}_{n+1}\cdot l+
+\frac{1}{2}D^{\text{LSB}}_{n}\cdot m-
+\frac{1}{2}D^{\text{LSB}}_{n-1}\cdot n \right) \right\}-\frac{1}{2} \\
+&amp;=  \left(-\frac{l}{6} \cdot 2 \cdot D^{\text{MSB}}_{n+1}+
+\frac{m}{6} \cdot 2 \cdot D^{\text{MSB}}_{n}- \frac{n}{6} \cdot 2 \cdot
+D^{\text{MSB}}_{n-1}\right) + \left(-\frac{l}{6} \cdot
+D^{\text{LSB}}_{n+1}+ \frac{m}{6} \cdot D^{\text{LSB}}_{n}- \frac{n}{6}
+\cdot D^{\text{LSB}}_{n-1}\right) \\
+&amp;=  -\frac{l}{6}(2 \cdot D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+
+\frac{m}{6}(2\cdot D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n})
+-\frac{n}{6}(2\cdot D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
+\end{align}\]</span></p>
+<p>After scaling, we obtain <span class="math display">\[
+V_{\text{rx}}  = -l\cdot(2 \cdot
+D^{\text{MSB}}_{n+1}+D^{\text{LSB}}_{n+1})+ m\cdot(2\cdot
+D^{\text{MSB}}_{n}+D^{\text{LSB}}_{n}) - n \cdot(2\cdot
+D^{\text{MSB}}_{n-1}+D^{\text{LSB}}_{n-1})
+\]</span> Where <span class="math inline">\(C_{-1} = l\)</span>, <span
+class="math inline">\(C_0 = m\)</span> and <span
+class="math inline">\(C_{1}=n\)</span>, which is same with that of
+NRZ.</p>
+<h2 id="tx-serializer">TX Serializer</h2>
+<h3 id="mux-timing">mux timing</h3>
+<p><img src="/2022/07/20/pam4/mux2-1.drawio.svg"
+alt="mux2-1.drawio" /></p>
+<h3 id="divider-latch-timing">divider latch timing</h3>
+<p><img src="/2022/07/20/pam4/div2-latch.drawio.svg"
+alt="div2-latch.drawio" /></p>
+<h3 id="two-latches">Two latches</h3>
+<p><img src="/2022/07/20/pam4/two-latch.drawio.svg"
+alt="two-latch.drawio" /></p>
+<h2 id="dac-based-ffe-in-pam4-transmitter">DAC-based FFE in PAM4
+Transmitter</h2>
+<p><img src="/2022/07/20/pam4/image-20220721220225623.png"
+alt="image-20220721220225623" /></p>
+<p>One classic TX implementation contain:</p>
+<ul>
+<li>a DAC: <strong>56GS/s</strong> <strong>8b</strong></li>
+<li>a DSP: <strong>8-tap FIR</strong></li>
+</ul>
+<blockquote>
+<p>C. Menolfi et al., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm
+CMOS," 2018 IEEE International Solid - State Circuits Conference -
+(ISSCC), 2018, pp. 104-106, doi: 10.1109/ISSCC.2018.8310205.</p>
+</blockquote>
+<p><img src="/2022/07/20/pam4/image-20220721234522043.png"
+alt="image-20220721234522043" /></p>
+<h3 id="pi-coil"><span class="math inline">\(\pi\)</span>-coil</h3>
+<p><img src="/2022/07/20/pam4/image-20220720232837839.png"
+alt="image-20220720232837839" /></p>
+<blockquote>
+<p>J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm
+CMOS," 2018 IEEE International Solid - State Circuits Conference -
+(ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>C. Menolfi et al., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm
+CMOS," 2018 IEEE International Solid - State Circuits Conference -
+(ISSCC), 2018, pp. 104-106, doi: 10.1109/ISSCC.2018.8310205.</p>
+<p>E. Chong et al., "A 112Gb/s PAM-4, 168Gb/s PAM-8 7bit DAC-Based
+Transmitter in 7nm FinFET," ESSCIRC 2021 - IEEE 47th European Solid
+State Circuits Conference (ESSCIRC), 2021, pp. 523-526, doi:
+10.1109/ESSCIRC53450.2021.9567801.</p>
+<p>B. Razavi, "Design Techniques for High-Speed Wireline Transmitters,"
+in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp.
+53-66, 2021, doi: 10.1109/OJSSCS.2021.3112398.</p>
+<p>Wang, Z., Choi, M., Lee, K., Park, K., Liu, Z., Biswas, A., Han, J.,
+Du, S., &amp; Alon, E. (2022). An Output Bandwidth Optimized 200-Gb/s
+PAM-4 100-Gb/s NRZ Transmitter With 5-Tap FFE in 28-nm CMOS. IEEE
+Journal of Solid-State Circuits, 57(1), 21-31.
+https://doi.org/10.1109/JSSC.2021.3109562</p>
+<p>J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm
+CMOS," 2018 IEEE International Solid - State Circuits Conference -
+(ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.</p>
+<p>PCIe® 6.0 Specification: The Interconnect for I/O Needs of the Future
+PCI-SIG® Educational Webinar Series, [<a
+target="_blank" rel="noopener" href="https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf">https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf</a>]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +600,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:02" itemprop="dateModified" datetime="2024-08-31T15:36:02+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,7 +880,7 @@ Data Communications</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -605,7 +979,7 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -779,7 +1153,7 @@ target="_blank" rel="noopener" href="https://fires.im/micro22-slides-pdf/04_hamm
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -880,7 +1254,7 @@ target="_blank" rel="noopener" href="https://www.francisz.cn/2019/07/18/sv-iff/"
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1216,7 +1590,7 @@ Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1498,7 +1872,7 @@ Sixth international symposium on quality electronic design (isqed'05),
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1636,7 +2010,7 @@ Units</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1898,7 +2272,7 @@ http://www.referencedesigner.com/tutorials/verilog/verilog_62.php</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
+      <time title="Modified: 2024-09-01 01:49:13" itemprop="dateModified" datetime="2024-09-01T01:49:13+00:00">2024-09-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1967,107 +2341,8 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/29/arthmetic-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/29/arthmetic-verilog/" class="post-title-link" itemprop="url">Arithmetic in Verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-29 16:01:08" itemprop="dateCreated datePublished" datetime="2022-05-29T16:01:08+00:00">2022-05-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-31 15:36:01" itemprop="dateModified" datetime="2024-08-31T15:36:01+00:00">2024-08-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="unsigned-unsigned-unsigned">unsigned + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_uuu8b;   <span class="comment">// unsigned + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">8</span>:<span class="number">0</span>] t;   <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;<span class="number">1&#x27;b0</span>, a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satop_uuu16b = t[<span class="number">8</span>] ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>1'b1</code>: overflow</p>
-</blockquote>
-<h4 id="signed-signed-signed">signed + signed = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_sss8b;    <span class="comment">// signed + signed = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = a + b;  <span class="comment">// extend sign bit automatically</span></span><br><span class="line">        satadd_sss8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up sat</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, <span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn sat</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>2'b01</code>: overflow</p>
-<p><code>2'b10</code>: underflow</p>
-</blockquote>
-<h4 id="signed-unsigned-unsigned">signed + unsigned = unsigned</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [<span class="number">7</span>:<span class="number">0</span>] satadd_suu8b;    <span class="comment">// signed + unsigned = unsigned</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t; <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">        satadd_ssu8b =  (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b10</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125; : <span class="comment">// up saturate for unsigned</span></span><br><span class="line">                        (t[<span class="number">8</span>:<span class="number">7</span>] == <span class="number">2&#x27;b11</span>) ? &#123;<span class="number">8</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125; : <span class="comment">// dn saturate for unsigned</span></span><br><span class="line">                                            t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h4 id="signed-unsigned-signed">signed + unsigned = signed</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">signed</span> [<span class="number">7</span>:<span class="number">0</span>] satop_sus8b;    <span class="comment">//signed +/- unsigned = signed</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">signed</span>    [<span class="number">7</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">input</span>           [<span class="number">7</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">input</span> plus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">8</span>:<span class="number">0</span>] t;    <span class="comment">// extend 1b</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(plus) <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; + &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b01</span>) ? &#123;<span class="number">1&#x27;b0</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b1</span>&#125;&#125;&#125;   <span class="comment">// up saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            t = &#123;a[<span class="number">7</span>], a&#125; - &#123;<span class="number">1&#x27;b0</span>, b&#125;;</span><br><span class="line">            satop_sus8b = (t[<span class="number">8</span>:<span class="number">7</span>]==<span class="number">2&#x27;b10</span>) ? &#123;<span class="number">1&#x27;b1</span>, &#123;<span class="number">7</span>&#123;<span class="number">1&#x27;b0</span>&#125;&#125;&#125;   <span class="comment">// dn saturate for signed</span></span><br><span class="line">                                             : t[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

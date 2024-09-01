@@ -11,9 +11,9 @@ mathjax: true
 
 ## MOS capacitances
 
-- the **oxide capacitance** between the gate and the channel $C_1=WLC_{ox}$
-- the **depletion capacitance** between the channel and the substrate
-- The **junction capacitance** between the source/drain areas and the substrate
+- **oxide capacitance** between the gate and the channel $C_1=WLC_{ox}$
+- **depletion capacitance** between the channel and the substrate
+- **junction capacitance** between the source/drain areas and the *substrate*
   - The value of $C_{SB}$ and $C_{DB}$ is a function of the source and drain voltages with respect to the substrate
 
 ![image-20240727134110758](MOS-Cap/image-20240727134110758.png)
@@ -23,6 +23,28 @@ mathjax: true
 
 
 > The **gate-bulk capacitance** is usually neglected in the triode and saturation regions because the inversion layer acts as a "shield" between the gate and the bulk.
+
+
+
+
+
+### Temperature Dependence of Junction Diode CV
+
+![image-20240901234200243](MOS-Cap/image-20240901234200243.png)
+
+
+
+where *TCJ* and *TCJSW* are positive
+
+
+
+> https://cmosedu.com/cmos1/BSIM4_manual.pdf
+>
+> ![image-20240901235359149](MOS-Cap/image-20240901235359149.png)
+>
+> ![image-20240901235425992](MOS-Cap/image-20240901235425992.png)
+>
+> ![image-20240901235543033](MOS-Cap/image-20240901235543033.png)
 
 
 

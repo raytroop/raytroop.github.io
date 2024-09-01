@@ -21,6 +21,50 @@ mathjax: true
 
 
 
+## DIBL & GIDL
+
+### drain-induced barrier lowering (DIBL)
+
+***impact on the threshold voltage***
+
+![image-20240901231532412](insight/image-20240901231532412.png)
+
+***impact on output impedance***
+
+In short-channel devices, as $V_{DS}$ increases further, drain-induced barrier lowering becomes significant, reducing the threshold voltage and increasing the drain current
+
+![image-20240901232709711](insight/image-20240901232709711.png)
+
+### Gate induced drain leakage (GIDL)
+
+![image-20240902000820459](insight/image-20240902000820459.png)
+
+
+
+> Chauhan, Yogesh Singh, et al. *FinFET modeling for IC simulation and design: using the BSIM-CMG standard*. Academic Press, 2015.
+
+---
+
+
+
+![image-20240901225754731](insight/image-20240901225754731.png)
+
+
+$$
+\frac{g_m}{I_D} = \frac{2}{V_{GS}-V_{TH}}
+$$
+Decrease of gm/Id results from decrease in VT.  
+
+GIDL (**Gate induced drain leakage**) as at weak inversion may results in a weak lateral electric field causing leakage current between drain and bulk, which degrade the efficiency of the transistor (gm/ID).
+
+
+
+> [[https://www.linkedin.com/posts/master-micro_mastermicro-mastermicro-adt-activity-7214549962833989632-ZoV_?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/master-micro_mastermicro-mastermicro-adt-activity-7214549962833989632-ZoV_?utm_source=share&utm_medium=member_desktop)]
+
+
+
+
+
 ## Early Voltage indicator
 
 $$

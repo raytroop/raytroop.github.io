@@ -8,6 +8,25 @@ mathjax: true
 ---
 
 
+
+## Switched Capacitor Banks
+
+Q: why $R_b$ ?
+
+A:  *TODO* &#128197;
+
+
+
+![image-20240901105919333](clocking/image-20240901105919333.png)
+
+
+
+> Hu, Yizhe. "Flicker noise upconversion and reduction mechanisms in RF/millimeter-wave oscillators for 5G communications." PhD diss., 2019.
+>
+> S. D. Toso, A. Bevilacqua, A. Gerosa and A. Neviani, "A thorough analysis of the tank quality factor in LC oscillators with switched capacitor banks," *Proceedings of 2010 IEEE International Symposium on Circuits and Systems*, Paris, France, 2010, pp. 1903-1906
+
+
+
 ## Injection Lock
 
 *TODO* &#128197;
@@ -75,15 +94,6 @@ $$
 Bandwidth Proposal" [https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf](https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf)]
 >
 >
-
-
-
-### Decimation 
-
-Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases *loop-latency* which causes excessive *dither jitter*
-
-
-> L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in IEEE Journal of Solid-State Circuits, vol. 41, no. 8, pp. 1867-1875, Aug. 2006
 
 
 

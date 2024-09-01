@@ -9,6 +9,10 @@ mathjax: true
 
 
 
+Below diagram show the windowing effect and sampling
+
+![NinDFT.drawio](fourier/NinDFT.drawio.svg)
+
 >  **discrete-time frequency**: $\hat{\omega}=\omega T_s$, units are ***radians per sample***
 
 
@@ -105,8 +109,6 @@ Part of the proof is given by the following step:
 
 
 *DFT  $X[k]$ is a **sampled** version of the DTFT $X(e^{j\hat{\omega}})$, where $\hat{\omega_k} = \frac{2\pi k}{N}$*
-
-
 
 
 
@@ -309,11 +311,13 @@ $$
 
 
 
+
+
 ## C/D
 
 Sampling with a periodic impulse train, followed by conversion to a discrete-time sequence
 
-![image-20230519000700841](http://localhost:4000/2022/05/01/sampling/image-20230519000700841.png)
+![image-20240901155629500](fourier/image-20240901155629500.png)
 
 ![image-20240830231619897](fourier/image-20240830231619897.png)
 

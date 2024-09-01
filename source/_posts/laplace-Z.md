@@ -1,5 +1,5 @@
 ---
-title: The z-Transform and Its Application
+title: System Analysis using Laplace Transform and z-Transform
 date: 2022-03-22 09:31:24
 tags:
 categories:
@@ -7,11 +7,19 @@ categories:
 mathjax: true
 ---
 
+*The Laplace transform converts integro-differential equations into algebraic equations - continuous-time systems*
+
+*The z-transforms changes difference equations into algebraic equations - discrete-time systems*
+
+
+
+
+
 ## FIR Equalization
 
 ### Frequency Response
 
-![image-20220322093428287](z-Transform/image-20220322093428287.png)
+![image-20220322093428287](laplace-Z/image-20220322093428287.png)
 $$
 z = e^{j\omega T_s}
 $$
@@ -20,7 +28,7 @@ $$
 
 filter coefficients are **[-0.131, 0.595, -0.274]** and sampling period is **100ps**
 
-![image-20220428125454912](z-Transform/image-20220428125454912.png)
+![image-20220428125454912](laplace-Z/image-20220428125454912.png)
 
 ```matlab
 %% Frequency response
@@ -69,7 +77,7 @@ P_{\text{xx}}'(\omega) &= P_{\text{xx}}(\omega) \cdot \left| 1-z^{-k}  \right|^2
 &= P_{\text{xx}}(\omega) \cdot \left| 1-e^{-j\omega T_s k}  \right|^2
 \end{align}$$
 
-![image-20220519172239916](z-Transform/image-20220519172239916.png)
+![image-20220519172239916](laplace-Z/image-20220519172239916.png)
 
 ```matlab
 clear all
@@ -100,7 +108,7 @@ title('Weight for Period jitter');
 
 
 
-![image-20220709104127384](z-Transform/image-20220709104127384.png)
+![image-20220709104127384](laplace-Z/image-20220709104127384.png)
 $$
 x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
 $$

@@ -210,7 +210,7 @@ where $X(s)$, $Y(s)$, and $H(s)$ are the *Laplace transforms* of the input, outp
 
 ## $s$-domain and phasor-domain
 
-Phasor analysis is a technique to find the steady-state response when the system input is a sinusoid. That is, phasor analysis is sinusoidal analysis.
+Phasor analysis is a technique to find the *steady-state response* when the system input is a sinusoid. That is, phasor analysis is sinusoidal analysis.
 
 - Phasor analysis is a powerful technique with which to find the steady-state portion of the complete response. 
 - Phasor analysis does not find the transient response. 

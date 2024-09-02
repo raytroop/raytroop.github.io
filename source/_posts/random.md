@@ -34,13 +34,15 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 
 ![image-20240827221945277](random/image-20240827221945277.png)
 
-**output autocorrelation**
+### output autocorrelation
+
+**deterministic autocorrelation function**
 
 ![image-20240427170024123](random/image-20240427170024123.png)
 
 ---
 
-**output PSD**
+### output PSD
 
 ![image-20240827222224395](random/image-20240827222224395.png)
 

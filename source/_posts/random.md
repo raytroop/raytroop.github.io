@@ -40,6 +40,8 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 
 ![image-20240427170024123](random/image-20240427170024123.png)
 
+![image-20240902223052500](random/image-20240902223052500.png)
+
 ---
 
 ### output PSD
@@ -56,8 +58,21 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 >
 > Alan V. Oppenheim, Introduction To Communication, Control, And Signal Processing [[https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf](https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf)]
 >
-> L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013
 
+
+
+---
+
+**Time Reversal**
+$$
+x(-t) \overset{FT}{\longrightarrow} X(-j\omega)
+$$
+
+
+ if $x(t)$ is *real*, then $X(j\omega)$​ has **conjugate symmetry**
+$$
+X(-j\omega) = X^*(j\omega)
+$$
 
 
 
@@ -123,6 +138,12 @@ S_x(f) &= \int_{-\infty}^{+\infty}R_x(\tau)e^{-j2\pi f \tau}d\tau \\
 R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 \end{align}$$
 
+
+
+> pay attention to $df$
+
+
+
 ---
 
 **Example**
@@ -169,3 +190,8 @@ $$
 
 
 
+## reference
+
+L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013
+
+Alan V Oppenheim, George C. Verghese, Signals, Systems and Inference, 1st edition

@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,316 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/06/mpro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/06/mpro/" class="post-title-link" itemprop="url">multipath ring oscillator (MPRO)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-06 16:20:13" itemprop="dateCreated datePublished" datetime="2022-03-06T16:20:13+00:00">2022-03-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="maximum-frequency">maximum frequency</h2>
-<p>A conventional inverter-based ring oscillator consists of a single
-loop of an <strong>odd</strong> number of inverters. While compact, easy
-to design and tunable over a wide frequency range, this oscillator
-suffers from several limitations.</p>
-<ul>
-<li>it is not possible to increase the number of phases while
-maintaining the same oscillation frequency since the frequency is
-inversely proportional to the number of inverters in the loop. In other
-words, the time resolution of the oscillator is limited to one inverter
-delay and cannot be improved below this limit.</li>
-<li>the number of phases that can be obtained from this oscillator is
-limited to <strong>odd</strong> values. Otherwise, if an even number of
-inverters is used, the circuit remains in <em>a latched state</em> and
-does not oscillate.</li>
-</ul>
-<p>To overcome the limitations of conventional ring oscillators,
-multi-paths ring oscillator (MPRO) is proposed. Each phase can be driven
-by two or more inverters, or <em>multi-paths</em> instead of having each
-phase in oscillator driven by a single inverter, or <em>single
-path</em>.</p>
-<p>One thing that makes the MPRO design problem even more complicated is
-its property of having <strong>multiple possible oscillation
-modes</strong>. Without a clear understanding of what makes one of these
-modes dominant, it is very likely that a designer might end-up having an
-oscillator that can start-up each time in a different oscillation mode
-depending on the <em>initial state of the oscillator</em>.</p>
-<p><img src="/2022/03/06/mpro/image-20220320155440541.png"
-alt="image-20220320155440541" /></p>
-<p>In practive, the oscillator starts first from a linear mode of
-operation where all the buffers are indeed acting as linear
-transconductors. All oscillation modes that have mode gains, <span
-class="math inline">\(a_n\)</span>, lower than the actual dc gain of the
-inverter, <span class="math inline">\(a_0\)</span>, start to grow.
-<em>As the oscillation amplitude grows, the effective gain of the
-inverter drops due to nonlinearity</em>. Consequently, modes with higher
-mode gain die out and only the mode that requires the minimum gain
-continues to oscillate and hence is the dominant mode.</p>
-<blockquote>
-<p>The dominant mode is dependent only on the relative sizing vector</p>
-</blockquote>
-<h3 id="maximum-oscillation-frequency">maximum oscillation
-frequency</h3>
-<p>The oscillation frequency of the dominant mode of any MPRO having any
-arbitrary coupling structure and number of phases is <span
-class="math display">\[
-f_{n^*} = \frac {1}{2\pi}\frac {(a_0-1) \cdot \sum_{i=1}^{N}x_isin\left
-( \frac {2\pi n^*(i-1)}{N} \right)}{(a_0\tau _p - \tau _o)\cdot
-\sum_{i=1}^{N}-x_icos\left( \frac{2\pi n^*(i-1)}{N}+(\tau _o - \tau _p)
-\right)}
-\]</span> <img src="/2022/03/06/mpro/image-20220320172952925.png"
-alt="image-20220320172952925" /></p>
-<p>A <strong>linear increase</strong> in the maximum possible normalized
-oscillation frequency as the number of stages increases <em>provided
-that the dc gain of the buffer sufficient to provide the required
-amplification</em></p>
-<p><img src="/2022/03/06/mpro/image-20220320170324494.png"
-alt="image-20220320170324494" /></p>
-<p><img src="/2022/03/06/mpro/image-20220320170523390.png"
-alt="image-20220320170523390" /></p>
-<blockquote>
-<p>assuming unlimited dc gain and zero mode gain margins</p>
-</blockquote>
-<h3 id="mode-stability">mode stability</h3>
-<p>A common problem in MPRO design is the stability of the dominant
-oscillation mode. Mode stability refers to whether the MPRO always
-oscillates at the same mode regardless of the initial conditions of the
-oscillator. This problem is especially pronounced for MPROs with a large
-number of phases. This is due to the existence of many modes and the
-very small differences in the value of the mode gain of adjacent modes
-if the MPRO is not well designed.</p>
-<blockquote>
-<p>In general, when the mode gain difference between two modes is small,
-the oscillator can operate in either one depending on initial
-conditions.</p>
-</blockquote>
-<h3 id="coupling-configurations-and-simulation-results">coupling
-configurations and simulation results</h3>
-<p><img src="/2022/03/06/mpro/image-20220320165217231.png"
-alt="image-20220320165217231" /></p>
-<blockquote>
-<p>Abou-El-Sonoun, A. A. (2012). High Frequency Multiphase Clock
-Generation Using Multipath Oscillators and Applications. <em>UCLA</em>.
-ProQuest ID: AbouElSonoun_ucla_0031D_10684. Merritt ID:
-ark:/13030/m57p9288. Retrieved from
-https://escholarship.org/uc/item/75g8j8jt</p>
-</blockquote>
-<h2 id="frequency-stability">frequency stability</h2>
-<blockquote>
-<p>A problem associated with the design of MPROs is the existence of
-different possible modes of oscillation. Each of these modes is
-characterized by a different frequency, phase shift and phase noise.</p>
-</blockquote>
-<h3 id="linear-delay-stage-model-mode-gain">Linear delay-stage model
-(mode gain)</h3>
-<p><strong>mode gain</strong> is based on the linear model, independent
-of process but depends on coupling structure (coupling configuration,
-size ratio).</p>
-<p>The inverting buffer modeled as a linear transconductor. The
-input-output relationship of a single buffer scaled by <span
-class="math inline">\(h_i\)</span> and driving the input capacitance of
-a similar buffer can be expressed as <span
-class="math display">\[\begin{align}
-h_ig_mv_{in}(t) + h_ig_oV_{out}(t)+h_iC_g\frac {dV_{out}(t)}{dt} &amp;=
-0 \\
-a_nV_{in}(t)+V_{out}(t)+\tau \frac {V_{out}(t)}{dt} &amp;= 0
-\end{align}\]</span> where <span class="math inline">\(g_m\)</span> is
-the transconductance, <span class="math inline">\(g_o\)</span> is the
-output conductance, <span class="math inline">\(C_g\)</span> is the
-buffer input capacitance which also acts as the load capacitance for the
-driving buffer, and <span class="math inline">\(a_n = \frac
-{g_m}{g_o}\)</span> is the <strong>linear dc gain</strong> of the
-buffer, and <span class="math inline">\(\tau=\frac {C_g}{g_o}\)</span>
-is a time constant.</p>
-<p>Similarly, <span class="math inline">\(V_1\)</span>, the output of
-the first stage in MPRO can be expressed <span class="math display">\[
-\sum_{i=1}^{N}h_ig_mV_i(t)+\sum_{i=1}^{N}h_ig_oV_i(t)+\sum_{i=1}^{N}h_iC_g\frac
-{dV_it(t)}{dt} = 0
-\]</span> Defining the fractional sizing factors and the total sizing
-factor as <span class="math inline">\(x_i=\frac{h_i}{H}\)</span> and
-<span class="math inline">\(H=\sum_{i=1}^{N}h_i\)</span> <span
-class="math display">\[
-a_n\sum_{i=1}^{N}x_iV_i(t) + V_1(t)+\tau\frac {dV_i(t)}{dt} = 0
-\]</span> where <span class="math inline">\(a_n = \frac
-{g_m}{g_o}\)</span> and <span class="math inline">\(\tau=\frac
-{C_g}{g_o}\)</span> are same dc gain and time constant defined
-previously</p>
-<p>Since the total phase shift around the loop should be multiples of
-<span class="math inline">\(2\pi\)</span>, the oscillation waveform at
-the <em>i</em>th node can be expressed as <span class="math display">\[
-V_i(t) = V_o \cos(\omega_nt-\Delta \varphi \cdot i)
-\]</span> where <span class="math inline">\(\omega_n\)</span> is the
-oscillation frequency and <span class="math inline">\(\Delta \varphi =
-\frac {2\pi n}{N}\)</span>, <span class="math inline">\(N\)</span> is
-the number of stages in the oscillator and <span
-class="math inline">\(n\)</span> can take values between <span
-class="math inline">\(0\)</span> and <span
-class="math inline">\(N-1\)</span></p>
-<p>Plug <span class="math inline">\(V_i(t)\)</span> into differential
-equation, we get <span class="math display">\[
-a_n\sum_{i=1}^{N}x_i\cos(\omega_n t-\frac{2\pi n}{N}i)+\cos(\omega_n
-t-\frac{2\pi n}{N}) - \omega_n \tau \sin(\omega_n t-\frac{2\pi n}{N}) =
-0
-\]</span> By equating the <span class="math inline">\(cos(\omega_n
-t)\)</span> and <span class="math inline">\(sin(\omega_n t)\)</span>
-terms of the above equation, we get expressions for <strong>the
-oscillation frequency of the <em>n</em>th mode</strong> and <strong>the
-minimum dc gain required for this mode to exist</strong>. we refer to
-this gain as the <strong>mode gain</strong> <span
-class="math display">\[\begin{align}
-\omega_n\tau &amp;= \frac {\sum_{i=1}^{N}x_i \cdot \sin(\frac{2\pi
-n}{N}(i-1))}{-\sum_{i=1}^{N}x_i \cdot \cos(\frac{2\pi n}{N}(i-1))} \\
-a_n &amp;= \frac {1}{-\sum_{i=1}^{N}x_i \cdot \cos(\frac{2\pi
-n}{N}(i-1))}
-\end{align}\]</span> where <span class="math inline">\(a_n\)</span>
-should be greater than <span class="math inline">\(0\)</span> for a
-existent mode</p>
-<p>In practice, the oscillator starts first from a linear mode of
-operation where all the buffers are indeed acting as linear
-transconductors. All oscillation modes that have mode gains <span
-class="math inline">\(a_n\)</span> lower than the actual dc gain of the
-inverter <span class="math inline">\(a_o\)</span> start to grow. As the
-oscillation amplitude grows, the effective gain of the inverter drops
-due to nonlinearity. Consequently, <em>modes with higher mode gain die
-out and only the mode that requires the minimum gain continues to
-oscillate and hence is the dominant mode</em></p>
-<p>A. A. Hafez and C. K. Yang, "Design and Optimization of Multipath
-Ring Oscillators," in IEEE Transactions on Circuits and Systems I:
-Regular Papers, vol. 58, no. 10, pp. 2332-2345, Oct. 2011, doi:
-10.1109/TCSI.2011.2142810.</p>
-<h3 id="simulation-based-approach">Simulation-based approach</h3>
-<p><strong>GCHECK</strong> is an automated verification tool that
-validate whether a ring oscillator always converges to the desired mode
-of operation regardless of <strong>the initial conditions</strong> and
-<strong>variability conditions</strong>. This is the first tool ever
-reported to address the global convergence failures in presence of
-variability. It has been shown that the tool can successfully validate a
-number of coupled ring oscillator circuits with various global
-convergence failure modes (e.g. no oscillation, false oscillation, and
-even chaotic oscillation) with reasonable computational costs such as
-running 1000-point Monte-Carlo simulations for 7~60 initial conditions
-(maximum 4 hours).</p>
-<ul>
-<li>The verification is performed using a <strong>predictive global
-optimization algorithm</strong> that looks for a problematic initial
-state from a discretized state space</li>
-<li>despite the <strong>finite number of initial state
-candidates</strong> considered and <strong>finite number of Monte-Carlo
-samples</strong> to model variability, the proposed algorithm can verify
-the oscillator to a prescribed confidence level</li>
-</ul>
-<p><img src="/2022/03/06/mpro/image-20220320183344877.png"
-alt="image-20220320183344877" /></p>
-<blockquote>
-<ul>
-<li>The observation that the responses of a circuit with nearby initial
-conditions are strongly correlated with respect to common variability
-conditions enables us to explore a <strong>discretized version</strong>
-of the initial condition space instead of the continuous one.</li>
-<li>the settling time increases as the initial state gets farther away
-from the equilibrium state allowed us to use the settling time as a
-guidance metric to find a problematic initial condition.</li>
-</ul>
-</blockquote>
-<p><strong>Selecting the Next Initial Condition Candidate to
-Evaluate</strong></p>
-<p>To determine whether the algorithm should continue or terminate the
-search for a new maximum, the algorithm estimates the probability of
-finding a new <strong>initial condition with the longer settling
-time</strong>, based on the information obtained with the
-previously-evaluated initial conditions.</p>
-<p><strong>GCHECK EXAMPLE</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python gcheck_osc.py input.scs</span><br></pre></td></tr></table></figure>
-<p>output log:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Step 1/4: Simulating the setting-time distribution with the reference initial condition</span><br><span class="line">...</span><br><span class="line">Step 2/4: Simulating the setting-time distribution for randomly-selected initial probes</span><br><span class="line">...</span><br><span class="line">Step 3/4: Searching for Problematic Initial Conditions</span><br><span class="line">...</span><br><span class="line">Step 4/4: Reporting Verification Results and Statistics</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/06/mpro/image-20220320201718018.png"
-alt="image-20220320201718018" /></p>
-<blockquote>
-<p>T. Kim, D. -G. Song, S. Youn, J. Park, H. Park and J. Kim, "Verifying
-start-up failures in coupled ring oscillators in presence of variability
-using predictive global optimization," 2013 IEEE/ACM International
-Conference on Computer-Aided Design (ICCAD), 2013, pp. 486-493, doi:
-10.1109/ICCAD.2013.6691161.<a
-target="_blank" rel="noopener" href="https://mics.snu.ac.kr/wiki/GCHECK">GCHECK: Global Convergence
-Checker for Oscillators</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -536,7 +226,7 @@ Checker for Oscillators</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -672,7 +362,7 @@ layermap provided.</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:58" itemprop="dateModified" datetime="2024-09-02T12:28:58+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -881,7 +571,7 @@ target="_blank" rel="noopener" href="https://designers-guide.org/modeling/montec
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1003,7 +693,7 @@ to PrimeTime Overview of Static Timing Analysis - Timing Exceptions</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1114,7 +804,7 @@ alt="image-20220301203135490" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1230,7 +920,7 @@ virtual clock is propagated.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1332,7 +1022,7 @@ accessing all the central UVM services such as
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1847,7 +1537,7 @@ Circuits and Systems, IEEE Transactions on. 22. 39 - 48.
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:58" itemprop="dateModified" datetime="2024-09-02T12:28:58+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1962,7 +1652,7 @@ threads</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2020,6 +1710,131 @@ variant, the it is defined as a subsequence and its
 <li><p>prevents modification of phase during sequence</p></li>
 </ul>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> pre_body();</span><br><span class="line">    uvm_phase sp = get_starting_phase();</span><br><span class="line">    <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">        sp<span class="variable">.raise_objection</span>(<span class="keyword">this</span>, get_type_name());</span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/19/layout-tricks-part1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/19/layout-tricks-part1/" class="post-title-link" itemprop="url">Layout Tricks Part 1 - compact, drain and source sharing</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-19 22:24:22" itemprop="dateCreated datePublished" datetime="2022-02-19T22:24:22+00:00">2022-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>All credits to my colleague, Zhang Wenpian.</p>
+<h3 id="planar-process-vs.-finfet-process">Planar process vs. FinFet
+process</h3>
+<p><img
+src="/2022/02/19/layout-tricks-part1/local_Interconnect.drawio.svg"
+alt="local_Interconnect.drawio" /></p>
+<h3 id="standard-cell-tapcell">Standard Cell Tapcell</h3>
+<p><img src="/2022/02/19/layout-tricks-part1/tapcell.drawio.svg"
+alt="tapcell.drawio" /></p>
+<h3 id="guard-ring-in-custom-block">Guard Ring in Custom block</h3>
+<p>Place well tie and substrate tie where they are needed. Redundant
+guard ring consume area and increase the routing of critical signal
+net.</p>
+<p><img
+src="/2022/02/19/layout-tricks-part1/guardring_stypes.drawio.svg"
+alt="guardring_stypes.drawio" /></p>
+<h3 id="continuous-od">Continuous OD</h3>
+<h4 id="performance-matching">Performance &amp; Matching</h4>
+<p><img
+src="/2022/02/19/layout-tricks-part1/image-20220219223723289.png"
+alt="image-20220219223723289" /></p>
+<h4 id="current-mirror">current mirror</h4>
+<p>split diffusion with dummy transistors</p>
+<p><img
+src="/2022/02/19/layout-tricks-part1/mirror_continuous_OD_split_with_dummy.drawio.svg"
+alt="mirror_continuous_OD_split_with_dummy.drawio" /></p>
+<h4 id="cascode-structure">cascode structure</h4>
+<p>off transistor split diffusion</p>
+<p><img
+src="/2022/02/19/layout-tricks-part1/cascode_continuous_OD_split_with_dummy.drawio.svg"
+alt="cascode_continuous_OD_split_with_dummy.drawio" /></p>
+<h4 id="sharing-source-drain">sharing source &amp; drain</h4>
+<p><img src="/2022/02/19/layout-tricks-part1/sharing_SD.drawio.svg"
+alt="sharing_SD.drawio" /></p>
+<h3 id="stacked-mosfets">Stacked MOSFETs</h3>
+<h3 id="reference">reference</h3>
+<p>A. L. S. Loke et al., "Analog/mixed-signal design challenges in 7-nm
+CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference
+(CICC), 2018, pp. 1-8, doi: 10.1109/CICC.2018.8357060.</p>
+<p>Stacked MOSFETs in analog layout <a
+target="_blank" rel="noopener" href="https://pulsic.com/stacked-mosfets-in-analog-layout/">https://pulsic.com/stacked-mosfets-in-analog-layout/</a></p>
 
       
     </div>

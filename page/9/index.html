@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,119 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/04/plusargs-verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/04/plusargs-verilog/" class="post-title-link" itemprop="url">plusargs in verilog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-04 12:29:28" itemprop="dateCreated datePublished" datetime="2022-06-04T12:29:28+00:00">2022-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-target="_blank" rel="noopener" href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-target="_blank" rel="noopener" href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -339,7 +226,7 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -438,7 +325,7 @@ target="_blank" rel="noopener" href="https://www.theartofverification.com/plusar
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -551,7 +438,7 @@ target="_blank" rel="noopener" href="https://vlsitutorials.com/isolation-cells-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -793,7 +680,7 @@ No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -913,7 +800,7 @@ FFT</a></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1176,7 +1063,7 @@ target="_blank" rel="noopener" href="https://community.cadence.com/cadence_blogs
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1398,7 +1285,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/22851/59253
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:58" itemprop="dateModified" datetime="2024-09-02T12:28:58+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1491,7 +1378,7 @@ alt="image-20220514121150988" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1631,7 +1518,7 @@ target="_blank" rel="noopener" href="https://www.wenhui.space/docs/02-emacs/veri
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-02 11:16:53" itemprop="dateModified" datetime="2024-09-02T11:16:53+00:00">2024-09-02</time>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1699,6 +1586,122 @@ target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs150/sp11/
 <p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
 by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
 doi:10.1007/978-3-030-03238-8</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/08/glitch-hazard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/08/glitch-hazard/" class="post-title-link" itemprop="url">Glitches and Hazards</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-08 18:34:33" itemprop="dateCreated datePublished" datetime="2022-05-08T18:34:33+00:00">2022-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-02 12:28:57" itemprop="dateModified" datetime="2024-09-02T12:28:57+00:00">2024-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/digital/" itemprop="url" rel="index"><span itemprop="name">digital</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>A <strong>glitch</strong> is an unwanted pulse at the output of a
+combinational logic network – <strong>a momentary change</strong> in an
+output that should not have changed</li>
+<li>A circuit with <em>the potential for a glitch</em> is said to have a
+<strong>hazard</strong></li>
+<li>In other words a hazard is something intrinsic about a circuit; a
+circuit with hazard may or may not have a glitch depending on input
+patterns and the electric characteristics of the circuit.</li>
+</ul>
+<h4 id="when-do-circuits-have-hazards">When do circuits have hazards
+?</h4>
+<p>Hazards are potential unwanted transients that occur in the output
+when different paths from input to output have different propagation
+delays</p>
+<h4 id="types-of-hazards-on-an-output">Types of Hazards (on an
+output)</h4>
+<p>static 1-hazard, static 0-hazard, dynamic hazard</p>
+<p><img src="/2022/05/08/glitch-hazard/image-20220508183800744.png"
+alt="image-20220508183800744" /></p>
+<h4 id="hazards-concern">Hazard's Concern</h4>
+<ul>
+<li>Hazards do not hurt synchronous circuits</li>
+<li>Hazards Kill Asynchronous Circuits</li>
+<li>Glitches Increase Power Consumption</li>
+</ul>
+<h4 id="referece">referece</h4>
+<p>CPE166/EEE 270 Advanced Logic Design-Digital Design: Time Behavior of
+Combinational Networks: <a
+target="_blank" rel="noopener" href="https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf">https://www.csus.edu/indiv/p/pangj/166/f/sram/Handout_Hazard.pdf</a></p>
+<p>John Knight, ELEC3500 Glitches and Hazards in Digital Circuits <a
+target="_blank" rel="noopener" href="http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf">http://www.doe.carleton.ca/~shams/ELEC3500/hazards.pdf</a></p>
 
       
     </div>

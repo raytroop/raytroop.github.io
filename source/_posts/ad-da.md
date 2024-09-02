@@ -127,13 +127,16 @@ $$
 
 ![image-20240825215134067](ad-da/image-20240825215134067.png)
 
+> SNR during sampling region and decison region increase
+>
+> SNR during regeneration region is consant, where noise is critical 
 
 $$
 \text{SNR} = \frac{V_{o,sig}^2}{V_{o,n}^2} = \frac{V_{i,sig}^2}{V_{i,n}^2}
 $$
 That is 
 $$
-V_{i,n}^2 = \frac{V_{i,sig}^2}{V_{o,sig}^2}V_{o,n}^2
+V_{i,n}^2 = \frac{V_{i,sig}^2}{V_{o,sig}^2}V_{o,n}^2 = \frac{V_{o,n}^2}{A_v^2}
 $$
 where $V_{i,sig}$ is constant signal applied to input of comparator
 
@@ -154,6 +157,11 @@ where $V_{i,sig}$ is constant signal applied to input of comparator
 > Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A New Methodology for Dynamic Comparator Noise Analysis URL:[https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf](https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf)
 
 
+### comparator noise vs input common voltage
+
+*TODO* &#128197;
+
+> higher input common voltage -> greater slew rate -> higher noise (input referred comparator noise)
 
 
 
@@ -163,12 +171,6 @@ where $V_{i,sig}$ is constant signal applied to input of comparator
 
 
 
-
-## comparator noise vs input common voltage
-
-*TODO* &#128197;
-
-> higher input common voltage -> greater slew rate -> higher noise (input referred comparator noise)
 
 
 

@@ -641,18 +641,18 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Database Navigation</title>
+    <url>/2022/02/07/Innovus-Database-Navigation/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Database Navigation</title>
-    <url>/2022/02/07/Innovus-Database-Navigation/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -2755,7 +2755,39 @@ href="https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf">
   <entry>
     <title>Bias Circuit</title>
     <url>/2024/07/27/biasing/</url>
-    <content><![CDATA[<h2 id="ptat-with-subthreshold-mos">PTAT with subthreshold MOS</h2>
+    <content><![CDATA[<h2 id="curvature-compensation">Curvature compensation</h2>
+<p><img src="/2024/07/27/biasing/image-20240903234720200.png"
+alt="image-20240903234720200" /></p>
+<blockquote>
+<p>Tutorials | 08012023 | 1.2.1 Bandgap Voltage Regular |, [<a
+href="https://youtu.be/dz067SOX0XQ?si=PlYczw9UdneAX6Na">https://youtu.be/dz067SOX0XQ?si=PlYczw9UdneAX6Na</a>]</p>
+</blockquote>
+<h2 id="subthreshold-conduction">Subthreshold Conduction</h2>
+<p>By square-law, the Eq <span class="math inline">\(g_m = \sqrt{2\mu
+C_{ox}\frac{W}{L}I_D}\)</span>, it is possible to obtain a
+<em>higer</em> transconductance by increasing <span
+class="math inline">\(W\)</span> while maintaining <span
+class="math inline">\(I_D\)</span> constant. However, if <span
+class="math inline">\(W\)</span> increases while <span
+class="math inline">\(I_D\)</span> remains constant, then <span
+class="math inline">\(V_{GS} \to V_{TH}\)</span> and device enters the
+subthreshold region. <span class="math display">\[
+I_D = I_0\exp \frac{V_{GS}}{\xi V_T}
+\]</span></p>
+<p>where <span class="math inline">\(I_0\)</span> is proportional to
+<span class="math inline">\(W/L\)</span>, <span
+class="math inline">\(\xi \gt 1\)</span> is a nonideality factor, and
+<span class="math inline">\(V_T = kT/q\)</span></p>
+<p>As a result, the transconductance in subthreshold region is <span
+class="math display">\[
+g_m = \frac{I_D}{\xi V_T}
+\]</span></p>
+<p>which is <span class="math inline">\(g_m \propto I_D\)</span></p>
+<p><img src="/2024/07/27/biasing/image-20240627230726326.png"
+alt="image-20240627230726326" /></p>
+<p><img src="/2024/07/27/biasing/image-20240627230744044.png"
+alt="image-20240627230744044" /></p>
+<h3 id="ptat-with-subthreshold-mos">PTAT with subthreshold MOS</h3>
 <p>MOS working in the <strong>weak inversion region</strong>
 (<strong>"subthreshold conduction"</strong>) have the similar
 characteristics to BJTs and diodes, since the effect of diffusion
@@ -2848,7 +2880,7 @@ region.</p>
 alt="gds_vgs.drawio" /></p>
 <p><img src="/2024/07/27/biasing/image-20240727140918647.png"
 alt="image-20240727140918647" /></p>
-<h2 id="gm-gds-at-fixed-id-vg">gm, gds at fixed Id, VG</h2>
+<h3 id="gm-gds-at-fixed-id-vg">gm, gds at fixed Id, VG</h3>
 <p><strong>In triode region</strong> <span class="math display">\[
 I_D  =
 \frac{1}{2}\mu_nC_{ox}\frac{W}{L}[2(V_{GS}-V_{TH})V_{DS}-V_{DS}^2]
@@ -2881,7 +2913,7 @@ alt="image-20240727171005401" /></p>
 <p>Both gain and speed degrade once entering triode region, though Id is
 constant</p>
 </blockquote>
-<h2 id="cascode-mos-vth">cascode mos vth</h2>
+<h2 id="cascode-mos">Cascode MOS</h2>
 <p>The low threshold voltage of cascode MOS <strong>don't</strong> help
 decrease the minimum output voltage</p>
 <p><img src="/2024/07/27/biasing/cascode_vth.drawio.svg"
@@ -2940,31 +2972,6 @@ with temperature</li>
 </ul>
 <p>Overall, increase in temperature results in lower drain currents</p>
 </blockquote>
-<h2 id="subthreshold-conduction">Subthreshold Conduction</h2>
-<p>By square-law, the Eq <span class="math inline">\(g_m = \sqrt{2\mu
-C_{ox}\frac{W}{L}I_D}\)</span>, it is possible to obtain a
-<em>higer</em> transconductance by increasing <span
-class="math inline">\(W\)</span> while maintaining <span
-class="math inline">\(I_D\)</span> constant. However, if <span
-class="math inline">\(W\)</span> increases while <span
-class="math inline">\(I_D\)</span> remains constant, then <span
-class="math inline">\(V_{GS} \to V_{TH}\)</span> and device enters the
-subthreshold region. <span class="math display">\[
-I_D = I_0\exp \frac{V_{GS}}{\xi V_T}
-\]</span></p>
-<p>where <span class="math inline">\(I_0\)</span> is proportional to
-<span class="math inline">\(W/L\)</span>, <span
-class="math inline">\(\xi \gt 1\)</span> is a nonideality factor, and
-<span class="math inline">\(V_T = kT/q\)</span></p>
-<p>As a result, the transconductance in subthreshold region is <span
-class="math display">\[
-g_m = \frac{I_D}{\xi V_T}
-\]</span></p>
-<p>which is <span class="math inline">\(g_m \propto I_D\)</span></p>
-<p><img src="/2024/07/27/biasing/image-20240627230726326.png"
-alt="image-20240627230726326" /></p>
-<p><img src="/2024/07/27/biasing/image-20240627230744044.png"
-alt="image-20240627230744044" /></p>
 <h2 id="current-mirror-mismatch">current mirror mismatch</h2>
 <p>The current mismatch consists of two components.</p>
 <ul>
@@ -4093,6 +4100,30 @@ virtual clock is propagated.</p>
       </categories>
   </entry>
   <entry>
+    <title>C++ conditional compilation</title>
+    <url>/2022/02/07/cxx-conditional-compilation/</url>
+    <content><![CDATA[<h4 id="using-g-only">Using g++ only</h4>
+<p><strong>conditional.cpp</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> na 4</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> a[na];</span><br><span class="line"></span><br><span class="line">  a[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">1</span>; n &lt; na; n++) a[n] = a[n<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> DEBUG</span></span><br><span class="line">  <span class="comment">// Only kept by preprocessor if DEBUG defined</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">0</span>; n &lt; na; n++) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;a[&quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;] = &quot;</span> &lt;&lt; a[n] &lt;&lt; std::endl;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> </span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p><strong>-DDEBUG</strong> args</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ g++ -Wall -Wextra -Wconversion conditional.cpp -o conditional</span><br><span class="line">$ ./conditional</span><br><span class="line">$ g++ -Wall -Wextra -Wconversion conditional.cpp -o conditional -DDEBUG</span><br><span class="line">$ ./conditional</span><br><span class="line">a[0] = 2</span><br><span class="line">a[1] = 3</span><br><span class="line">a[2] = 4</span><br><span class="line">a[3] = 5</span><br></pre></td></tr></table></figure>
+<hr />
+<hr />
+<h4 id="using-cmakelists.txt-add_definitions">Using
+<strong>CMakeLists.txt</strong> <em>add_definitions</em></h4>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">option</span>(DEBUG <span class="string">&quot;Option description&quot;</span> <span class="keyword">OFF</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(DEBUG)</span><br><span class="line">    <span class="keyword">add_definitions</span>(-DDEBUG)</span><br><span class="line"><span class="keyword">endif</span>(DEBUG)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(cond conditional.cpp)</span><br></pre></td></tr></table></figure>
+<hr />
+<p><strong>without debug</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cmake ..</span><br><span class="line">$ make</span><br><span class="line">$ ./cond</span><br></pre></td></tr></table></figure>
+<p><strong>with debug</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cmake -DDEBUG=ON ..</span><br><span class="line">$ make</span><br><span class="line">$ ./cond</span><br><span class="line">a[0] = 2</span><br><span class="line">a[1] = 3</span><br><span class="line">a[2] = 4</span><br><span class="line">a[3] = 5</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+  </entry>
+  <entry>
     <title>complex uvm project topology</title>
     <url>/2022/03/28/complex-uvm-topo/</url>
     <content><![CDATA[<p><img src="/2022/03/28/complex-uvm-topo/topo.drawio.svg"
@@ -4118,30 +4149,6 @@ alt="topo.drawio" /></p>
 ]]></content>
       <categories>
         <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C++ conditional compilation</title>
-    <url>/2022/02/07/cxx-conditional-compilation/</url>
-    <content><![CDATA[<h4 id="using-g-only">Using g++ only</h4>
-<p><strong>conditional.cpp</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> na 4</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> a[na];</span><br><span class="line"></span><br><span class="line">  a[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">1</span>; n &lt; na; n++) a[n] = a[n<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> DEBUG</span></span><br><span class="line">  <span class="comment">// Only kept by preprocessor if DEBUG defined</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">0</span>; n &lt; na; n++) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;a[&quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;] = &quot;</span> &lt;&lt; a[n] &lt;&lt; std::endl;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> </span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr />
-<p><strong>-DDEBUG</strong> args</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ g++ -Wall -Wextra -Wconversion conditional.cpp -o conditional</span><br><span class="line">$ ./conditional</span><br><span class="line">$ g++ -Wall -Wextra -Wconversion conditional.cpp -o conditional -DDEBUG</span><br><span class="line">$ ./conditional</span><br><span class="line">a[0] = 2</span><br><span class="line">a[1] = 3</span><br><span class="line">a[2] = 4</span><br><span class="line">a[3] = 5</span><br></pre></td></tr></table></figure>
-<hr />
-<hr />
-<h4 id="using-cmakelists.txt-add_definitions">Using
-<strong>CMakeLists.txt</strong> <em>add_definitions</em></h4>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">option</span>(DEBUG <span class="string">&quot;Option description&quot;</span> <span class="keyword">OFF</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(DEBUG)</span><br><span class="line">    <span class="keyword">add_definitions</span>(-DDEBUG)</span><br><span class="line"><span class="keyword">endif</span>(DEBUG)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(cond conditional.cpp)</span><br></pre></td></tr></table></figure>
-<hr />
-<p><strong>without debug</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cmake ..</span><br><span class="line">$ make</span><br><span class="line">$ ./cond</span><br></pre></td></tr></table></figure>
-<p><strong>with debug</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cmake -DDEBUG=ON ..</span><br><span class="line">$ make</span><br><span class="line">$ ./cond</span><br><span class="line">a[0] = 2</span><br><span class="line">a[1] = 3</span><br><span class="line">a[2] = 4</span><br><span class="line">a[3] = 5</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>coding</category>
       </categories>
   </entry>
   <entry>
@@ -7164,22 +7171,6 @@ Converters, Second Edition" ISBN 978-1-119-25827-8</p>
       </categories>
   </entry>
   <entry>
-    <title>Add endcap and tapcell in Innovus</title>
-    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
-    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
-following code to add endcap and tapcell.</p>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
-<p><img
-src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
-alt="endcap_tapcell_floorplan.drawio" /></p>
-<p><strong>REF:</strong> <a
-href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Dual Diode and ggNMOS</title>
     <url>/2022/06/23/esd-dual-diodes-ggnmos/</url>
     <content><![CDATA[<h2 id="hia-diode">HIA diode</h2>
@@ -7275,6 +7266,22 @@ href="https://fires.im/micro22-slides-pdf/04_hammer_vlsi.pdf">https://fires.im/m
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Add endcap and tapcell in Innovus</title>
+    <url>/2022/02/15/endcap_tapcell_floorplan/</url>
+    <content><![CDATA[<p>First place place hard macro and add placement halo, then execute the
+following code to add endcap and tapcell.</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">deleteFill -prefix ENDCAP</span><br><span class="line">deleteFill -prefix WELL</span><br><span class="line"></span><br><span class="line">setEndCapMode \</span><br><span class="line">    -leftEdge BOUNDARY_RIGHTBWP16P90CPD \</span><br><span class="line">    -rightEdge BOUNDARY_LEFTBWP16P90CPD \</span><br><span class="line">    -leftBottomCorner BOUNDARY_NCORNERBWP16P90CPD \</span><br><span class="line">    -leftTopCorner BOUNDARY_PCORNERBWP16P90CPD \</span><br><span class="line">    -rightTopEdge FILL3BWP16P90CPD \</span><br><span class="line">    -rightBottomEdge FILL3BWP16P90CPD \</span><br><span class="line">    -topEdge <span class="string">&quot;BOUNDARY_PROW2BWP16P90CPD BOUNDARY_PROW3BWP16P90CPD&quot;</span></span><br><span class="line">    -bottomEdge <span class="string">&quot;BOUNDARY_NROW2BWP16P90CPD BOUNDARY_NROW3BWP16P90CPD&quot;</span> \</span><br><span class="line">    -boundary_tap true</span><br><span class="line"></span><br><span class="line">set_well_tap_mode \</span><br><span class="line">    -rule <span class="number">33</span></span><br><span class="line">    -bottom_tap_cell BOUNDARY_NTAPBWP16P90CPD \</span><br><span class="line">    -top_tap_cell BOUNDARY_PTAPBWP16P90CPD \</span><br><span class="line">    -cell TAPCELLBWP16P90CPD</span><br><span class="line"></span><br><span class="line">addEndCap</span><br><span class="line">addWellTap -checkerBoard -cell TAPCELLBWP16P90CPD -cellInterval <span class="number">160</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="/2022/02/15/endcap_tapcell_floorplan/endcap_tapcell_floorplan.drawio.svg"
+alt="endcap_tapcell_floorplan.drawio" /></p>
+<p><strong>REF:</strong> <a
+href="https://github.com/StanfordAHA/PowerDomainDesign/blob/c280a35f01ad0617ff054b925c1d5c2652a0f4e1/scripts/layout_pe_tile_new.power.tcl#L94-L113">StanfordAHA/PowerDomainDesign</a></p>
+]]></content>
+      <categories>
+        <category>innovus</category>
       </categories>
   </entry>
   <entry>
@@ -10732,6 +10739,60 @@ doi: 10.1109/MDT.2003.1232259.</p>
       </categories>
   </entry>
   <entry>
+    <title>Latch Inference in Verilog</title>
+    <url>/2022/05/09/latch-inference/</url>
+    <content><![CDATA[<h2 id="always"><code>always@( * )</code></h2>
+<p><code>always@( * )</code> blocks are used to describe Combinational
+Logic, or Logic Gates. Only <code>=</code> (blocking) assignments should
+be used in an <code>always@( * )</code> block.</p>
+<h2 id="latch-inference">Latch Inference</h2>
+<p>If you <strong>DON'T</strong> assign every element that can be
+assigned inside an <code>always@( * )</code> block every time that
+<code>always@( * )</code> block is executed, a latch will be inferred
+for that element</p>
+<p>The approaches to avoid latch generation:</p>
+<ul>
+<li>set default values</li>
+<li>proper use of the <code>else</code> statement, and other flow
+constructs</li>
+</ul>
+<h3 id="without-default-values">without default values</h3>
+<blockquote>
+<p>latch is generated</p>
+</blockquote>
+<h4 id="rtl">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509170640006.png"
+alt="image-20220509170640006" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:09:18 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lanhq1 C_reg ( <span class="variable">.E</span>(Trigger), <span class="variable">.D</span>(Pass), <span class="variable">.Q</span>(C) );</span><br><span class="line">  an02d0 U3 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3 id="add-default-value">add default value</h3>
+<blockquote>
+<p>Default values are an easy way to avoid latch generation</p>
+</blockquote>
+<h4 id="rtl-1">RTL</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">        	C = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="synthesized-netlist-1">synthesized netlist</h4>
+<p><img src="/2022/05/09/latch-inference/image-20220509171319204.png"
+alt="image-20220509171319204" /></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:12:47 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  nd12d0 U5 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.ZN</span>(C) );</span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="if-evaluation"><code>if</code> evaluation</h2>
+<p><code>signed</code> number cast to <code>unsigned</code>
+automatically before evaluating</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb; </span><br><span class="line">  <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] datasg;</span><br><span class="line">  <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] dataug;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    datasg = <span class="number">2&#x27;b11</span>;</span><br><span class="line">    dataug = <span class="number">2&#x27;b11</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;datasg(%%d): %d&quot;</span>, datasg);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;dataug(%%d): %d&quot;</span>, dataug);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (datasg)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;datasg is OK&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (dataug)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;dataug is OK&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$finish</span>();</span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlog tb.v</span><br><span class="line">$ vsim -c -do &quot;run;exit&quot; work.tb</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># datasg(%d): -1</span><br><span class="line"># dataug(%d): 3</span><br><span class="line"># datasg is OK</span><br><span class="line"># dataug is OK</span><br><span class="line"># ** Note: $finish    : tb.v(16)</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>UC Berkeley CS150 Lec #20: Finite State Machines <a
+href="https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf">Slides</a></p>
+<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
+by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
+doi:10.1007/978-3-030-03238-8</p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>System Analysis using Laplace Transform and z-Transform</title>
     <url>/2022/03/22/laplace-Z/</url>
     <content><![CDATA[<p><em>The Laplace transform converts integro-differential equations
@@ -10808,60 +10869,6 @@ href="https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-desig
 ]]></content>
       <categories>
         <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Latch Inference in Verilog</title>
-    <url>/2022/05/09/latch-inference/</url>
-    <content><![CDATA[<h2 id="always"><code>always@( * )</code></h2>
-<p><code>always@( * )</code> blocks are used to describe Combinational
-Logic, or Logic Gates. Only <code>=</code> (blocking) assignments should
-be used in an <code>always@( * )</code> block.</p>
-<h2 id="latch-inference">Latch Inference</h2>
-<p>If you <strong>DON'T</strong> assign every element that can be
-assigned inside an <code>always@( * )</code> block every time that
-<code>always@( * )</code> block is executed, a latch will be inferred
-for that element</p>
-<p>The approaches to avoid latch generation:</p>
-<ul>
-<li>set default values</li>
-<li>proper use of the <code>else</code> statement, and other flow
-constructs</li>
-</ul>
-<h3 id="without-default-values">without default values</h3>
-<blockquote>
-<p>latch is generated</p>
-</blockquote>
-<h4 id="rtl">RTL</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h4 id="synthesized-netlist">synthesized netlist</h4>
-<p><img src="/2022/05/09/latch-inference/image-20220509170640006.png"
-alt="image-20220509170640006" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:09:18 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lanhq1 C_reg ( <span class="variable">.E</span>(Trigger), <span class="variable">.D</span>(Pass), <span class="variable">.Q</span>(C) );</span><br><span class="line">  an02d0 U3 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="add-default-value">add default value</h3>
-<blockquote>
-<p>Default values are an easy way to avoid latch generation</p>
-</blockquote>
-<h4 id="rtl-1">RTL</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> TOP (</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Trigger,</span><br><span class="line">	<span class="keyword">input</span> <span class="keyword">wire</span> Pass,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> A,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> C</span><br><span class="line">);</span><br><span class="line">	<span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">		A = <span class="number">1&#x27;b0</span>;</span><br><span class="line">        	C = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">if</span> (Trigger) <span class="keyword">begin</span></span><br><span class="line">			A = Pass;</span><br><span class="line">			C = Pass;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h4 id="synthesized-netlist-1">synthesized netlist</h4>
-<p><img src="/2022/05/09/latch-inference/image-20220509171319204.png"
-alt="image-20220509171319204" /></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// Created by: Synopsys DC Ultra(TM) in wire load mode</span></span><br><span class="line"><span class="comment">// Version   : S-2021.06-SP5</span></span><br><span class="line"><span class="comment">// Date      : Mon May  9 17:12:47 2022</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> TOP ( Trigger, Pass, A, C );</span><br><span class="line">  <span class="keyword">input</span> Trigger, Pass;</span><br><span class="line">  <span class="keyword">output</span> A, C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  nd12d0 U5 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.ZN</span>(C) );</span><br><span class="line">  an02d0 U6 ( <span class="variable">.A1</span>(Pass), <span class="variable">.A2</span>(Trigger), <span class="variable">.Z</span>(A) );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="if-evaluation"><code>if</code> evaluation</h2>
-<p><code>signed</code> number cast to <code>unsigned</code>
-automatically before evaluating</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb; </span><br><span class="line">  <span class="keyword">reg</span> <span class="keyword">signed</span> [<span class="number">1</span>:<span class="number">0</span>] datasg;</span><br><span class="line">  <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] dataug;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    datasg = <span class="number">2&#x27;b11</span>;</span><br><span class="line">    dataug = <span class="number">2&#x27;b11</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;datasg(%%d): %d&quot;</span>, datasg);</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;dataug(%%d): %d&quot;</span>, dataug);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (datasg)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;datasg is OK&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (dataug)</span><br><span class="line">      <span class="built_in">$display</span>(<span class="string">&quot;dataug is OK&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">$finish</span>();</span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlog tb.v</span><br><span class="line">$ vsim -c -do &quot;run;exit&quot; work.tb</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># datasg(%d): -1</span><br><span class="line"># dataug(%d): 3</span><br><span class="line"># datasg is OK</span><br><span class="line"># dataug is OK</span><br><span class="line"># ** Note: $finish    : tb.v(16)</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>UC Berkeley CS150 Lec #20: Finite State Machines <a
-href="https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf">Slides</a></p>
-<p>Lee WF. Learning from VLSI Design Experience [electronic Resource] /
-by Weng Fook Lee. 1st ed. 2019. Springer International Publishing; 2019.
-doi:10.1007/978-3-030-03238-8</p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -12394,131 +12401,6 @@ href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo">https://youtu.be/CJ_2U5p
       </categories>
   </entry>
   <entry>
-    <title>Parallel Compensation in Two stage amplifier</title>
-    <url>/2022/03/07/parallel-compensation/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>Parallel Compensation</strong> is also known as <strong>Lead
-Compensation</strong>, <strong>Pole-Zero Compensation</strong></p>
-</blockquote>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20220307234938855.png"
-alt="image-20220307234938855" /></p>
-<p><strong>Note</strong>: The dominant pole is at output of the first
-stage, i.e. <span
-class="math inline">\(\frac{1}{R_{EQ}C_{EQ}}\)</span>.</p>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20221006001114562.png"
-alt="image-20221006001114562" /></p>
-<h4 id="pole-and-zero-in-transfer-function">Pole and Zero in transfer
-function</h4>
-<blockquote>
-<p>Design with operational amplifiers and analog integrated circuits /
-Sergio Franco, San Francisco State University. – Fourth edition</p>
-</blockquote>
-<p><img
-src="/2022/03/07/parallel-compensation/image-20221005220854411.png"
-alt="image-20221005220854411" /></p>
-<p><span class="math display">\[
-Y = \frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}
-\]</span></p>
-<p><span class="math display">\[\begin{align}
-Z &amp;= \frac{1}{\frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}} \\
-&amp;= \frac{R_1(1+sR_cC_c)}{s^2R_1C_1R_cC_c+s(R_1C_c+R_1C_1+R_cC_c)+1}
-\end{align}\]</span> If <span class="math inline">\(p_{1c} \ll
-p_{3c}\)</span>, two real roots can be found <span
-class="math display">\[\begin{align}
-p_{1c} &amp;= \frac{1}{R_1C_c+R_1C_1+R_cC_c} \\
-p_{3c} &amp;= \frac{R_1C_c+R_1C_1+R_cC_c}{R_1C_1R_cC_c}
-\end{align}\]</span></p>
-<p>The additional zero is <span class="math display">\[
-z_c = \frac{1}{R_cC_c}
-\]</span> Given <span class="math inline">\(R_c \ll R\)</span> and <span
-class="math inline">\(C_c \gg C\)</span> <span
-class="math display">\[\begin{align}
-p_{1c} &amp;\simeq \frac{1}{R_1(C_c+C_1)} \simeq \frac{1}{R_1C_c}\\
-p_{3c} &amp;= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \simeq
-\frac{1}{R_cC_1}
-\end{align}\]</span></p>
-<p>The output pole is unchanged, which is <span class="math display">\[
-p_2 = \frac{1}{R_LC_L}
-\]</span> We usually <strong>cancel</strong> <span
-class="math inline">\(p_2\)</span> with <span
-class="math inline">\(z_c\)</span>, i.e. <span class="math display">\[
-R_cC_c=R_LC_L
-\]</span></p>
-<h4 id="phase-margin">Phase margin</h4>
-<p>unity-gain frequency <span class="math inline">\(\omega_t\)</span>
-<span class="math display">\[
-\omega_t = A_\text{DC}\cdot P_{1c} =\frac{g_{m1}g_{m2}R_L}{C_c}
-\]</span></p>
-<ol type="1">
-<li><p>PM=45<span class="math inline">\(^o\)</span> <span
-class="math display">\[
-p_{3c} = \omega_t
-\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
-class="math inline">\(R_c\)</span> can be obtained</p>
-<p><span class="math display">\[\begin{align}
-   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot A_{DC}\cdot
-p_2}}=\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot A_{DC}}} \\
-C_c &amp;= \sqrt{\frac{A_{DC}\cdot C_1}{R_1\cdot
-p_2}}=\sqrt{\frac{A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}}
-\end{align}\]</span></p></li>
-<li><p>PM=60<span class="math inline">\(^o\)</span> <span
-class="math display">\[
-p_{3c} = 2\cdot\omega_t
-\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
-class="math inline">\(R_c\)</span> can be obtained <span
-class="math display">\[\begin{align}
-   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot 2A_{DC}\cdot p_2}} =
-\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot 2A_{DC}}} \\
-   &amp;= \sqrt{\frac{C_L}{2g_{m1}g_{m2}C_1}}\\
-C_c &amp;= \sqrt{\frac{2A_{DC}\cdot C_1}{R_1\cdot p_2}} =
-\sqrt{\frac{2A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}} \\
-&amp;= R_L\sqrt{2g_{m1}g_{m2}C_1C_L}
-\end{align}\]</span></p>
-<p>for the unity-gain frequency <span
-class="math inline">\(\omega_t\)</span> we find <span
-class="math display">\[
-\omega_t = \sqrt{\frac{1}{2}\cdot \frac{g_{m1}g_{m2}}{C_1C_L}}
-\]</span> The parallel compensation shows a remarkably good result. The
-new 0 dB frequency lies only a factor <span
-class="math inline">\(\sqrt{2}\)</span> lower than the theoretical
-maximum</p></li>
-</ol>
-<blockquote>
-<p>To increase <span class="math inline">\(\phi_m\)</span>, we need to
-<strong>raise</strong> <span class="math inline">\(C_c\)</span> a bit
-while <strong>lowering</strong> <span class="math inline">\(R_c\)</span>
-in proportion in order to maintain pole-zero cancellation. This causes
-<span class="math inline">\(p_{1c}\)</span> and <span
-class="math inline">\(p_{3c}\)</span> to split a bit further apart.</p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"></span><br><span class="line">fd = <span class="number">84</span>*<span class="number">1e3</span>;	<span class="comment">% dominant freq, unit: Hz</span></span><br><span class="line">fnd = <span class="number">3.25</span>*<span class="number">1e6</span>;	<span class="comment">% unit: Hz</span></span><br><span class="line">C = <span class="number">478</span>*<span class="number">1e-15</span>;</span><br><span class="line">R = <span class="number">1</span>/fd/(<span class="number">2</span>*<span class="built_in">pi</span>)/C;</span><br><span class="line">Adc = <span class="number">10</span>^(<span class="number">80</span>/<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">ri = <span class="number">2</span>; <span class="comment">% PM=45: 1;  PM=60: 2</span></span><br><span class="line">Rc = (R/C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/ri/Adc)^<span class="number">0.5</span>; <span class="comment">% compensation resistor</span></span><br><span class="line">Cc = (ri*Adc*C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/R)^<span class="number">0.5</span>; <span class="comment">% compensation capacitor</span></span><br><span class="line"></span><br><span class="line">wzc = <span class="number">1</span>/<span class="number">2</span>/<span class="built_in">pi</span>/Rc/Cc; <span class="comment">% zero frequency</span></span><br></pre></td></tr></table></figure>
-<h4 id="reference">reference</h4>
-<p>Viola Schäffer, Designing Amplifiers for Stability, ISSCC 2021
-Tutorials</p>
-<p>R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft
-University Press, 1994.</p>
-<p>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
-Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.
-6.7 Compensation</p>
-<p>Application Note AN-1286 Compensation for the LM3478 Boost
-Controller</p>
-<p>ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 URL:
-<a
-href="https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability%20Jan27.pdf">Lect
-1D Op-Amps Stability and Frequency Compensation Techniques</a></p>
-<p>Sergio Franco, San Francisco State University, Design with
-Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
-<p>J. H. Huijsing, 6.2.2.1 Two-GA-stage Parallel Compensation (PC),
-"Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer,
-2017"</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>PAM4 Signaling</title>
     <url>/2022/07/20/pam4/</url>
     <content><![CDATA[<h2 id="why-pam4">Why PAM4?</h2>
@@ -12811,6 +12693,131 @@ CMOS," 2018 IEEE International Solid - State Circuits Conference -
 <p>PCIe® 6.0 Specification: The Interconnect for I/O Needs of the Future
 PCI-SIG® Educational Webinar Series, [<a
 href="https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf">https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Parallel Compensation in Two stage amplifier</title>
+    <url>/2022/03/07/parallel-compensation/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>Parallel Compensation</strong> is also known as <strong>Lead
+Compensation</strong>, <strong>Pole-Zero Compensation</strong></p>
+</blockquote>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20220307234938855.png"
+alt="image-20220307234938855" /></p>
+<p><strong>Note</strong>: The dominant pole is at output of the first
+stage, i.e. <span
+class="math inline">\(\frac{1}{R_{EQ}C_{EQ}}\)</span>.</p>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20221006001114562.png"
+alt="image-20221006001114562" /></p>
+<h4 id="pole-and-zero-in-transfer-function">Pole and Zero in transfer
+function</h4>
+<blockquote>
+<p>Design with operational amplifiers and analog integrated circuits /
+Sergio Franco, San Francisco State University. – Fourth edition</p>
+</blockquote>
+<p><img
+src="/2022/03/07/parallel-compensation/image-20221005220854411.png"
+alt="image-20221005220854411" /></p>
+<p><span class="math display">\[
+Y = \frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}
+\]</span></p>
+<p><span class="math display">\[\begin{align}
+Z &amp;= \frac{1}{\frac{1}{R_1} + sC_1+\frac{1}{R_c+1/SC_c}} \\
+&amp;= \frac{R_1(1+sR_cC_c)}{s^2R_1C_1R_cC_c+s(R_1C_c+R_1C_1+R_cC_c)+1}
+\end{align}\]</span> If <span class="math inline">\(p_{1c} \ll
+p_{3c}\)</span>, two real roots can be found <span
+class="math display">\[\begin{align}
+p_{1c} &amp;= \frac{1}{R_1C_c+R_1C_1+R_cC_c} \\
+p_{3c} &amp;= \frac{R_1C_c+R_1C_1+R_cC_c}{R_1C_1R_cC_c}
+\end{align}\]</span></p>
+<p>The additional zero is <span class="math display">\[
+z_c = \frac{1}{R_cC_c}
+\]</span> Given <span class="math inline">\(R_c \ll R\)</span> and <span
+class="math inline">\(C_c \gg C\)</span> <span
+class="math display">\[\begin{align}
+p_{1c} &amp;\simeq \frac{1}{R_1(C_c+C_1)} \simeq \frac{1}{R_1C_c}\\
+p_{3c} &amp;= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \simeq
+\frac{1}{R_cC_1}
+\end{align}\]</span></p>
+<p>The output pole is unchanged, which is <span class="math display">\[
+p_2 = \frac{1}{R_LC_L}
+\]</span> We usually <strong>cancel</strong> <span
+class="math inline">\(p_2\)</span> with <span
+class="math inline">\(z_c\)</span>, i.e. <span class="math display">\[
+R_cC_c=R_LC_L
+\]</span></p>
+<h4 id="phase-margin">Phase margin</h4>
+<p>unity-gain frequency <span class="math inline">\(\omega_t\)</span>
+<span class="math display">\[
+\omega_t = A_\text{DC}\cdot P_{1c} =\frac{g_{m1}g_{m2}R_L}{C_c}
+\]</span></p>
+<ol type="1">
+<li><p>PM=45<span class="math inline">\(^o\)</span> <span
+class="math display">\[
+p_{3c} = \omega_t
+\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
+class="math inline">\(R_c\)</span> can be obtained</p>
+<p><span class="math display">\[\begin{align}
+   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot A_{DC}\cdot
+p_2}}=\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot A_{DC}}} \\
+C_c &amp;= \sqrt{\frac{A_{DC}\cdot C_1}{R_1\cdot
+p_2}}=\sqrt{\frac{A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}}
+\end{align}\]</span></p></li>
+<li><p>PM=60<span class="math inline">\(^o\)</span> <span
+class="math display">\[
+p_{3c} = 2\cdot\omega_t
+\]</span> Then, <span class="math inline">\(C_c\)</span> and <span
+class="math inline">\(R_c\)</span> can be obtained <span
+class="math display">\[\begin{align}
+   R_c &amp;= \sqrt{\frac{R_1}{C_1\cdot 2A_{DC}\cdot p_2}} =
+\sqrt{\frac{R_1\cdot R_LC_L}{C_1\cdot 2A_{DC}}} \\
+   &amp;= \sqrt{\frac{C_L}{2g_{m1}g_{m2}C_1}}\\
+C_c &amp;= \sqrt{\frac{2A_{DC}\cdot C_1}{R_1\cdot p_2}} =
+\sqrt{\frac{2A_{DC}\cdot C_1 \cdot R_LC_L}{R_1}} \\
+&amp;= R_L\sqrt{2g_{m1}g_{m2}C_1C_L}
+\end{align}\]</span></p>
+<p>for the unity-gain frequency <span
+class="math inline">\(\omega_t\)</span> we find <span
+class="math display">\[
+\omega_t = \sqrt{\frac{1}{2}\cdot \frac{g_{m1}g_{m2}}{C_1C_L}}
+\]</span> The parallel compensation shows a remarkably good result. The
+new 0 dB frequency lies only a factor <span
+class="math inline">\(\sqrt{2}\)</span> lower than the theoretical
+maximum</p></li>
+</ol>
+<blockquote>
+<p>To increase <span class="math inline">\(\phi_m\)</span>, we need to
+<strong>raise</strong> <span class="math inline">\(C_c\)</span> a bit
+while <strong>lowering</strong> <span class="math inline">\(R_c\)</span>
+in proportion in order to maintain pole-zero cancellation. This causes
+<span class="math inline">\(p_{1c}\)</span> and <span
+class="math inline">\(p_{3c}\)</span> to split a bit further apart.</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"></span><br><span class="line">fd = <span class="number">84</span>*<span class="number">1e3</span>;	<span class="comment">% dominant freq, unit: Hz</span></span><br><span class="line">fnd = <span class="number">3.25</span>*<span class="number">1e6</span>;	<span class="comment">% unit: Hz</span></span><br><span class="line">C = <span class="number">478</span>*<span class="number">1e-15</span>;</span><br><span class="line">R = <span class="number">1</span>/fd/(<span class="number">2</span>*<span class="built_in">pi</span>)/C;</span><br><span class="line">Adc = <span class="number">10</span>^(<span class="number">80</span>/<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">ri = <span class="number">2</span>; <span class="comment">% PM=45: 1;  PM=60: 2</span></span><br><span class="line">Rc = (R/C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/ri/Adc)^<span class="number">0.5</span>; <span class="comment">% compensation resistor</span></span><br><span class="line">Cc = (ri*Adc*C/fnd/<span class="number">2</span>/<span class="built_in">pi</span>/R)^<span class="number">0.5</span>; <span class="comment">% compensation capacitor</span></span><br><span class="line"></span><br><span class="line">wzc = <span class="number">1</span>/<span class="number">2</span>/<span class="built_in">pi</span>/Rc/Cc; <span class="comment">% zero frequency</span></span><br></pre></td></tr></table></figure>
+<h4 id="reference">reference</h4>
+<p>Viola Schäffer, Designing Amplifiers for Stability, ISSCC 2021
+Tutorials</p>
+<p>R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft
+University Press, 1994.</p>
+<p>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
+Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.
+6.7 Compensation</p>
+<p>Application Note AN-1286 Compensation for the LM3478 Boost
+Controller</p>
+<p>ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 URL:
+<a
+href="https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability%20Jan27.pdf">Lect
+1D Op-Amps Stability and Frequency Compensation Techniques</a></p>
+<p>Sergio Franco, San Francisco State University, Design with
+Operational Amplifiers and Analog Integrated Circuits, 4/e</p>
+<p>J. H. Huijsing, 6.2.2.1 Two-GA-stage Parallel Compensation (PC),
+"Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer,
+2017"</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -13730,6 +13737,108 @@ href="https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBri
       </categories>
   </entry>
   <entry>
+    <title>Precision Techniques</title>
+    <url>/2024/07/17/precision/</url>
+    <content><![CDATA[<h2 id="autozeroing">Autozeroing</h2>
+<blockquote>
+<p>offset is <strong>sampled</strong> and then subtracted from the
+input</p>
+<p>Measure the offset somehow and then subtract it from the input
+signal</p>
+</blockquote>
+<h3 id="residual-noise-of-auto-zeroing">Residual Noise of
+Auto-zeroing</h3>
+<p><img src="/2024/07/17/precision/image-20240826212343905.png"
+alt="image-20240826212343905" /></p>
+<hr />
+<p><img src="/2024/07/17/precision/image-20240826213958740.png"
+alt="image-20240826213958740" /></p>
+<p><em>pnosie Noise</em> Type: <strong>timeaverage</strong></p>
+<p><img src="/2024/07/17/precision/image-20240826214306376.png"
+alt="image-20240826214306376" /></p>
+<blockquote>
+<p>sinc filter come from <em>Zero-Order Hold</em></p>
+<p><img src="/2024/07/17/precision/image-20240903223100157.png"
+alt="image-20240903223100157" /></p>
+</blockquote>
+<h2 id="chopping">Chopping</h2>
+<blockquote>
+<p>offset is <strong>modulated</strong> away from the signal band and
+then filtered out</p>
+<p>Modulate the offset away from DC and then filter it out</p>
+</blockquote>
+<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
+<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
+and other artifacts …</p>
+<h3 id="chopping-in-the-frequency-domain">Chopping in the Frequency
+Domain</h3>
+<blockquote>
+<p><strong>Square-wave Modulation</strong></p>
+<p>defination of convolution <span class="math inline">\(y(t) =
+x(t)*h(t)= \int_{-\infty}^{\infty} x(\tau)h(t-\tau)d\tau\)</span></p>
+<p>for real signal <span
+class="math inline">\(H(j\omega)^*=H(-j\omega)\)</span>​</p>
+</blockquote>
+<p><img src="/2024/07/17/precision/image-20240903222441433.png"
+alt="image-20240903222441433" /></p>
+<p><span class="math display">\[
+H(j\hat{\omega})*H(j\hat{\omega}) =
+\int_{-\infty}^{\infty}H(j\omega)H(j(\hat{\omega}-\omega))d\omega
+\]</span></p>
+<p><img src="/2024/07/17/precision/sq_mod.drawio.svg"
+alt="sq_mod.drawio" /></p>
+<h3 id="bandwidth-gain-accuracy">Bandwidth &amp; Gain Accuracy</h3>
+<p><img src="/2024/07/17/precision/image-20240903225224732.png"
+alt="image-20240903225224732" /></p>
+<ul>
+<li><p><em>lower effective gain</em>: DC level at the output of the
+amplifiers is a bit less than what it should be</p></li>
+<li><p>chopping artifacts at the <em>even harmonics</em>: frequency of
+output is <span class="math inline">\(2f_{ch}\)</span></p></li>
+</ul>
+<blockquote>
+<p>REF. [<a
+href="https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge">https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge</a>]</p>
+</blockquote>
+<h3 id="residual-offset-of-chopping">Residual Offset of Chopping</h3>
+<p><img src="/2024/07/17/precision/image-20240903222425730.png"
+alt="image-20240903222425730" /></p>
+<p>assume input spikes can be expressed as <span class="math display">\[
+V_\text{spike}(t) = V_o e^{-\frac{t}{\tau}}
+\]</span></p>
+<p>Then, residual offset is</p>
+<p><span class="math display">\[\begin{align}
+\overline{V_\text{os}} &amp;=
+\frac{2\int_0^{T_{ch}/2}V_\text{spike}(t)dt}{T_{ch}} \\
+&amp;= 2f_{ch}V_o\int_0^{T_{ch}/2}  e^{-\frac{t}{\tau}}dt\\
+&amp;= 2f_{ch}V_o\tau\int_0^{T_{ch}/2\tau}
+e^{-\frac{t}{\tau}}d\frac{t}{\tau} \\
+&amp;\approx 2f_{ch}V_o\tau
+\end{align}\]</span>​</p>
+<h2 id="dynamic-element-matching-dem">Dynamic Element Matching
+(DEM)</h2>
+<p><em>TODO</em> 📅</p>
+<h2 id="reference">reference</h2>
+<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
+effects of op-amp imperfections: autozeroing, correlated double
+sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
+84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
+href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
+<p>Qinwen Fan, Evolution of precision amplifiers</p>
+<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
+CMOS [<a
+href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
+<p>Kofi Makinwa. Precision Analog Circuit Design: Coping with
+Variability, [<a
+href="https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d">https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d</a>]
+[<a
+href="https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob">https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob</a>]</p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>pole splitting</title>
     <url>/2023/01/03/pole-splitting/</url>
     <content><![CDATA[<h3 id="generic-circuit-in-textbook">Generic circuit in textbook</h3>
@@ -13975,88 +14084,6 @@ class="math inline">\(20log_{10}(1.414^2)=6\text{dB}\)</span></p>
 McGraw-Hill, 2017.</p>
 <p>Sansen, Willy M. Analog Design Essentials. Germany: Springer US,
 2006.</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Precision Techniques</title>
-    <url>/2024/07/17/precision/</url>
-    <content><![CDATA[<h2 id="autozeroing">Autozeroing</h2>
-<blockquote>
-<p>offset is <strong>sampled</strong> and then subtracted from the
-input</p>
-<p>Measure the offset somehow and then subtract it from the input
-signal</p>
-</blockquote>
-<h3 id="residual-noise-of-auto-zeroing">Residual Noise of
-Auto-zeroing</h3>
-<p><img src="/2024/07/17/precision/image-20240826212343905.png"
-alt="image-20240826212343905" /></p>
-<hr />
-<p><img src="/2024/07/17/precision/image-20240826213958740.png"
-alt="image-20240826213958740" /></p>
-<p><em>pnosie Noise</em> Type: <strong>timeaverage</strong></p>
-<p><img src="/2024/07/17/precision/image-20240826214306376.png"
-alt="image-20240826214306376" /></p>
-<blockquote>
-<p>sinc filter come from <em>Zero-Order Hold</em></p>
-<p><img
-src="/2024/07/17/precision/Fourier-transform-of-a-rectangle-function-a-and-a-sinc-function-b.png"
-alt="Fourier-transform-of-a-rectangle-function-a-and-a-sinc-function-b" /></p>
-</blockquote>
-<h2 id="chopping">Chopping</h2>
-<blockquote>
-<p>offset is <strong>modulated</strong> away from the signal band and
-then filtered out</p>
-<p>Modulate the offset away from DC and then filter it out</p>
-</blockquote>
-<p><strong>Good</strong>: Magically reduces offset, 1/f noise, drift</p>
-<p><strong>Bad</strong>: But creates switching spikes, chopper ripple
-and other artifacts …</p>
-<h3 id="chopping-in-the-frequency-domain">Chopping in the Frequency
-Domain</h3>
-<blockquote>
-<p><strong>Square-wave Modulation</strong></p>
-<p>defination of convolution <span class="math inline">\(y(t) =
-x(t)*h(t)= \int_{-\infty}^{\infty} x(\tau)h(t-\tau)d\tau\)</span></p>
-<p>for real signal <span
-class="math inline">\(H(j\omega)^*=H(-j\omega)\)</span></p>
-</blockquote>
-<p><img src="/2024/07/17/precision/sq_mod.drawio.svg"
-alt="sq_mod.drawio" /></p>
-<h3 id="bandwidth-gain-accuracy">Bandwidth &amp; Gain Accuracy</h3>
-<h3 id="residual-offest-of-chopping">Residual Offest of Chopping</h3>
-<p><span class="math display">\[
-V_\text{spike}(t) = V_o e^{-\frac{t}{\tau}}
-\]</span></p>
-<p><span class="math display">\[\begin{align}
-\overline{V_\text{os}} &amp;=
-\frac{2\int_0^{T_{ch}/2}V_\text{spike}(t)dt}{T_{ch}} \\
-&amp;= 2f_{ch}V_o\int_0^{T_{ch}/2}  e^{-\frac{t}{\tau}}dt\\
-&amp;= 2f_{ch}V_o\tau\int_0^{T_{ch}/2\tau}
-e^{-\frac{t}{\tau}}d\frac{t}{\tau} \\
-&amp;\approx 2f_{ch}V_o\tau
-\end{align}\]</span></p>
-<h2 id="dynamic-element-matching-dem">Dynamic Element Matching
-(DEM)</h2>
-<p><em>TODO</em> 📅</p>
-<h2 id="reference">reference</h2>
-<p>C. C. Enz and G. C. Temes, "Circuit techniques for reducing the
-effects of op-amp imperfections: autozeroing, correlated double
-sampling, and chopper stabilization," in Proceedings of the IEEE, vol.
-84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [<a
-href="http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf">http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf</a>]</p>
-<p>Qinwen Fan, Evolution of precision amplifiers</p>
-<p>Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in
-CMOS [<a
-href="https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf">https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf</a>]</p>
-<p>Kofi Makinwa. Precision Analog Circuit Design: Coping with
-Variability, [<a
-href="https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d">https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d</a>]
-[<a
-href="https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob">https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob</a>]</p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -14841,21 +14868,6 @@ alt="image-20220404195156776" /></p>
       </categories>
   </entry>
   <entry>
-    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
-    <url>/2022/05/01/rhel8-old-kernels/</url>
-    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
-<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
-method for removing kernels and keeping only the latest version and
-running kernel:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
-<p>From the <code>yum</code> man page:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Relative Sensitivity</title>
     <url>/2023/07/12/relative-sensitivity/</url>
     <content><![CDATA[<p>Assuming Target <span class="math inline">\(T\)</span> ( for example,
@@ -14928,6 +14940,21 @@ href="https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_09.pdf">https://we
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>What is the proper method to remove old kernels from a Red Hat Enterprise Linux system?</title>
+    <url>/2022/05/01/rhel8-old-kernels/</url>
+    <content><![CDATA[<p><strong>Red Hat Enterprise Linux 8</strong></p>
+<p>The YUM version 4 (based on the upstream <code>DNF</code> project)
+method for removing kernels and keeping only the latest version and
+running kernel:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum remove --oldinstallonly</span><br></pre></td></tr></table></figure>
+<p>From the <code>yum</code> man page:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf [options] remove --oldinstallonly</span><br><span class="line">    Removes old installonly packages, keeping only latest versions and  version  of  running</span><br><span class="line">    kernel.</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -15102,6 +15129,55 @@ signals.</p>
       </tags>
   </entry>
   <entry>
+    <title>Scattering parameters</title>
+    <url>/2023/09/29/scattering/</url>
+    <content><![CDATA[<h2 id="rational-fit">Rational Fit</h2>
+<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
+<p>To resolve the convergence problem of s-parameter in Spectre
+simulator - <code>rationalfit</code> and write Verilog-A</p>
+<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
+alt="image-20220630224525565" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="z0">Z0</h2>
+<blockquote>
+<p>Remember, S-parameters <strong>don't mean much</strong> unless you
+know the value of the <strong>reference impedance </strong>(it's
+frequently called Z0).</p>
+</blockquote>
+<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
+<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
+alt="image-20220430214052538" /></p>
+<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
+alt="image-20220430214136970" /></p>
+<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
+alt="image-20220430214419283" /></p>
+<blockquote>
+<p>The default <strong>Z0</strong> exported by EMX is
+<strong>50</strong></p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p><a
+href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
+S-parameters
+(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
+<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
+Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
+<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
+rational function approximation algorithm for model generation.
+Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
+doi:10.1109/dac.1999.781313</p>
+<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
+Checker and Rational Fit Model Generator [<a
+href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
+<p>The Complex Art Of Handling S-Parameters: The importance of
+extraction and fitting to circuit simulation involving S-parameters [<a
+href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
+]]></content>
+      <categories>
+        <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Time-Domain Channel Simulation</title>
     <url>/2023/09/23/sbr-der/</url>
     <content><![CDATA[<p>Three fast time-domain system simulation techniques:</p>
@@ -15219,55 +15295,6 @@ Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links,"
 in IEEE Transactions on Very Large Scale Integration (VLSI) Systems,
 vol. 29, no. 7, pp. 1370-1378, July 2021, doi:
 10.1109/TVLSI.2021.3082208.</p>
-]]></content>
-      <categories>
-        <category>dsp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Scattering parameters</title>
-    <url>/2023/09/29/scattering/</url>
-    <content><![CDATA[<h2 id="rational-fit">Rational Fit</h2>
-<h3 id="matlabrationalfit">Matlab/rationalfit</h3>
-<p>To resolve the convergence problem of s-parameter in Spectre
-simulator - <code>rationalfit</code> and write Verilog-A</p>
-<p><img src="/2023/09/29/scattering/image-20220630224525565.png"
-alt="image-20220630224525565" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">filename  = <span class="string">&#x27;touchstone/ISI.S4P&#x27;</span>;</span><br><span class="line">s4p = read(rfdata.data, filename);</span><br><span class="line">sdd_params = s2sdd(s2p.S_Parameters, <span class="number">2</span>);</span><br><span class="line">sdd21 = <span class="built_in">squeeze</span>(sdd_params(<span class="number">2</span>, <span class="number">1</span>, :));   <span class="comment">% s21</span></span><br><span class="line">freq = s4p.Freq;</span><br><span class="line"></span><br><span class="line"><span class="comment">% rational fitting</span></span><br><span class="line">weight = <span class="built_in">ones</span>(<span class="built_in">size</span>(sdd21));</span><br><span class="line">weight(<span class="built_in">floor</span>(<span class="keyword">end</span>*<span class="number">3</span>/<span class="number">4</span>):<span class="keyword">end</span>) = <span class="number">0.2</span>;</span><br><span class="line">weight(<span class="number">2</span>:<span class="number">10</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">[hfit, errb] = rationalfit(freq, sdd21, <span class="string">&#x27;IterationLimit&#x27;</span>, [<span class="number">4</span>, <span class="number">16</span>], <span class="string">&#x27;Delayfactor&#x27;</span>, <span class="number">0.98</span>, ...</span><br><span class="line">    <span class="string">&#x27;Weight&#x27;</span>, weight, <span class="string">&#x27;Tolerance&#x27;</span>, <span class="number">-38</span>, <span class="string">&#x27;NPoles&#x27;</span>, <span class="number">32</span>);</span><br><span class="line">[sdd21_fit, ff] = freqresp(hfit, freq);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(freq/<span class="number">1e9</span>, db(sdd21), <span class="string">&#x27;b-&#x27;</span>); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(ff/<span class="number">1e9</span>, db(sdd21_fit), <span class="string">&#x27;r-&#x27;</span>); <span class="built_in">hold</span> off; grid on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sdd21&#x27;</span>, <span class="string">&#x27;sdd21\_fit&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Freq (GHz)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;magnitude (dB)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ts = <span class="number">1e-12</span>;</span><br><span class="line">n = <span class="number">2</span>^<span class="number">18</span>;</span><br><span class="line">trise = <span class="number">4e-14</span>;</span><br><span class="line">[yout, tout] = stepresp(hfit, ts, n, trise);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(tout*<span class="number">1e12</span>, yout, <span class="string">&#x27;b-&#x27;</span>); grid on;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;Step Response&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% write verilog-A</span></span><br><span class="line">writeva(hfit, <span class="string">&#x27;channel_32poles.va&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="z0">Z0</h2>
-<blockquote>
-<p>Remember, S-parameters <strong>don't mean much</strong> unless you
-know the value of the <strong>reference impedance </strong>(it's
-frequently called Z0).</p>
-</blockquote>
-<p>simulator will read sp file's <strong>Z0</strong> parameter</p>
-<p><img src="/2023/09/29/scattering/image-20220430214052538.png"
-alt="image-20220430214052538" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214136970.png"
-alt="image-20220430214136970" /></p>
-<p><img src="/2023/09/29/scattering/image-20220430214419283.png"
-alt="image-20220430214419283" /></p>
-<blockquote>
-<p>The default <strong>Z0</strong> exported by EMX is
-<strong>50</strong></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><a
-href="https://www.microwaves101.com/encyclopedias/s-parameters">microwaves101,
-S-parameters
-(https://www.microwaves101.com/encyclopedias/s-parameters)</a></p>
-<p>Pupalaikis, P. (2020). <em>S-Parameters for Signal Integrity</em>.
-Cambridge: Cambridge University Press. doi:10.1017/9781108784863</p>
-<p>Coelho, C. P., Phillips, J. R., &amp; Silveira, L. M. (n.d.). Robust
-rational function approximation algorithm for model generation.
-Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).
-doi:10.1109/dac.1999.781313</p>
-<p>Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality
-Checker and Rational Fit Model Generator [<a
-href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA</a>]</p>
-<p>The Complex Art Of Handling S-Parameters: The importance of
-extraction and fitting to circuit simulation involving S-parameters [<a
-href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">https://semiengineering.com/the-complex-art-of-handling-s-parameters</a>]</p>
 ]]></content>
       <categories>
         <category>dsp</category>
@@ -15554,96 +15581,6 @@ href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L1
 ]]></content>
       <categories>
         <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SystemVerilog iff</title>
-    <url>/2022/06/21/sv-iff/</url>
-    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<p>is equivalent to</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>iff</code> is more efficient than <code>if</code> because the
-expression is recalculated when <code>vld</code> transition rather than
-<code>clk</code>.</p>
-</blockquote>
-<p>One example, detecting the negative edge of
-<code>rtr_io.cb.frameo_n[da]</code></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
-alt="image-20220621182019927" /></p>
-<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
-<p><strong>reference</strong></p>
-<p>system verilog中的iff, URL: <a
-href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
-    <url>/2022/03/16/sv-rnm-101/</url>
-    <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
-<ul>
-<li>model analog blocks operation as signal flow model</li>
-<li>only the digital solver is used for high-speed simulation
-<ul>
-<li>Event-driven</li>
-<li>No convergence issues, because no analog solver is used</li>
-</ul></li>
-<li>Five different language standards support real number modeling:
-<ul>
-<li><strong>wreal</strong> (wired-real) ports in Verilog-AMS</li>
-<li><strong>real</strong> data type in VHDL</li>
-<li><strong>real</strong> data type in Verilog</li>
-<li><strong>real</strong> variables and <strong>nettypes</strong> in
-SystemVerilog (SV)</li>
-<li><strong>real</strong> types in e</li>
-</ul></li>
-</ul>
-<h2 id="benefits-of-rnm">Benefits of RNM</h2>
-<ul>
-<li>Most analog circuits that need to be modeled for MS verification at
-the SoC level can be described in terms of real-valued voltages or
-currents</li>
-<li>RNM is a mixed approach, borrowing concepts from both continuous and
-discrete domains
-<ul>
-<li>The values are floating-point (real) number.</li>
-<li>Time is discrete; the real signals change values based on discrete
-events</li>
-</ul></li>
-<li>Applicability of RNM is bounded primarily by
-<strong>signal-flow</strong> model style</li>
-<li>Migrating analog behavior from the analog domain to the event or
-pseudo-analog domain can bring huge benefits without sacrificing too
-much accuracy</li>
-<li>Simulation is executed by a digital simulation engine without need
-for the analog solver</li>
-<li>Hence real-number modeling enables very high performance simulation
-of mixed-signal systems</li>
-</ul>
-<h2 id="limitations-of-rnm">Limitations of RNM</h2>
-<ul>
-<li>connecting <strong>real</strong> or <strong>wreal</strong> signals
-to electrical signals requires careful consideration
-<ul>
-<li>Too conservative an approach can lead to large numbers of
-timepoints</li>
-<li>Too liberal an approach can lead to losing signal accuracy</li>
-</ul></li>
-<li>Time accuracy limited by the discrete sampling approach and the
-`<code>timescale</code> setting - no continuous signals anymore</li>
-<li>Limited capability for combination of signals by wiring outputs
-together
-<ul>
-<li>Requires assumptions about impedances to do simple merging</li>
-</ul></li>
-</ul>
-]]></content>
-      <categories>
-        <category>cad</category>
       </categories>
   </entry>
   <entry>
@@ -16292,6 +16229,96 @@ href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://c
       </categories>
   </entry>
   <entry>
+    <title>SystemVerilog iff</title>
+    <url>/2022/06/21/sv-iff/</url>
+    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<p>is equivalent to</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>iff</code> is more efficient than <code>if</code> because the
+expression is recalculated when <code>vld</code> transition rather than
+<code>clk</code>.</p>
+</blockquote>
+<p>One example, detecting the negative edge of
+<code>rtr_io.cb.frameo_n[da]</code></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
+alt="image-20220621182019927" /></p>
+<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
+<p><strong>reference</strong></p>
+<p>system verilog中的iff, URL: <a
+href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Real Modeling with SystemVerilog using Cadence EE_pkg 101</title>
+    <url>/2022/03/16/sv-rnm-101/</url>
+    <content><![CDATA[<h2 id="what-is-real-number-modeling">What Is Real Number Modeling?</h2>
+<ul>
+<li>model analog blocks operation as signal flow model</li>
+<li>only the digital solver is used for high-speed simulation
+<ul>
+<li>Event-driven</li>
+<li>No convergence issues, because no analog solver is used</li>
+</ul></li>
+<li>Five different language standards support real number modeling:
+<ul>
+<li><strong>wreal</strong> (wired-real) ports in Verilog-AMS</li>
+<li><strong>real</strong> data type in VHDL</li>
+<li><strong>real</strong> data type in Verilog</li>
+<li><strong>real</strong> variables and <strong>nettypes</strong> in
+SystemVerilog (SV)</li>
+<li><strong>real</strong> types in e</li>
+</ul></li>
+</ul>
+<h2 id="benefits-of-rnm">Benefits of RNM</h2>
+<ul>
+<li>Most analog circuits that need to be modeled for MS verification at
+the SoC level can be described in terms of real-valued voltages or
+currents</li>
+<li>RNM is a mixed approach, borrowing concepts from both continuous and
+discrete domains
+<ul>
+<li>The values are floating-point (real) number.</li>
+<li>Time is discrete; the real signals change values based on discrete
+events</li>
+</ul></li>
+<li>Applicability of RNM is bounded primarily by
+<strong>signal-flow</strong> model style</li>
+<li>Migrating analog behavior from the analog domain to the event or
+pseudo-analog domain can bring huge benefits without sacrificing too
+much accuracy</li>
+<li>Simulation is executed by a digital simulation engine without need
+for the analog solver</li>
+<li>Hence real-number modeling enables very high performance simulation
+of mixed-signal systems</li>
+</ul>
+<h2 id="limitations-of-rnm">Limitations of RNM</h2>
+<ul>
+<li>connecting <strong>real</strong> or <strong>wreal</strong> signals
+to electrical signals requires careful consideration
+<ul>
+<li>Too conservative an approach can lead to large numbers of
+timepoints</li>
+<li>Too liberal an approach can lead to losing signal accuracy</li>
+</ul></li>
+<li>Time accuracy limited by the discrete sampling approach and the
+`<code>timescale</code> setting - no continuous signals anymore</li>
+<li>Limited capability for combination of signals by wiring outputs
+together
+<ul>
+<li>Requires assumptions about impedances to do simple merging</li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>cad</category>
+      </categories>
+  </entry>
+  <entry>
     <title>SystemVerilog clocking block</title>
     <url>/2022/02/07/systemverilog-clocking-block/</url>
     <content><![CDATA[<blockquote>
@@ -16492,8 +16519,7 @@ alt="image-20240824110958282" /></p>
 10.1007/978-1-4757-3190-3. [<a
 href="https://repository.tudelft.nl/record/uuid:fd398056-48dd-4d84-8ae8-27a1b011d2c3">https://repository.tudelft.nl/record/uuid:fd398056-48dd-4d84-8ae8-27a1b011d2c3</a>]</p>
 </blockquote>
-<h2 id="consideration-for-readout-circuit">Consideration for Readout
-Circuit</h2>
+<h2 id="readout-circuit">Readout Circuit</h2>
 <h3 id="adc-dynamic-range">ADC dynamic range</h3>
 <p>Take <span class="math inline">\(V_{PTAT}=\alpha \cdot \Delta
 V_{BE}\)</span> as input and <span
@@ -17802,6 +17828,35 @@ alt="image-20231006110506245" /></p>
       </categories>
   </entry>
   <entry>
+    <title>UVM project topology</title>
+    <url>/2022/03/21/uvm-proj-topo/</url>
+    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
+files</em></p>
+<p>Classes can only be compiled from a <em>module</em> or <em>package
+scope</em></p>
+<p>Recommendation:</p>
+<ul>
+<li>Include related class files into a package</li>
+<li>Import the package into modules where required</li>
+</ul>
+<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
+<ul>
+<li>Import package to access library</li>
+<li>The macro file <code>uvm_macros.svh</code> must be included
+separately</li>
+</ul>
+<p>yapp_packet.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
+<p>yapp_pkg.sv</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
+<p>run.f for <code>xrun</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Debug topology and Check config usage in UVM</title>
     <url>/2022/02/21/uvm-debug-topology-config-usage/</url>
     <content><![CDATA[<h4 id="topology-of-the-test">Topology of the test</h4>
@@ -17835,35 +17890,6 @@ top-down)</li>
 <li><strong>Tasks</strong> are forked into concurrent executing
 threads</li>
 </ul>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>UVM project topology</title>
-    <url>/2022/03/21/uvm-proj-topo/</url>
-    <content><![CDATA[<p>Most user-defined UVM classes are placed in <em>separate
-files</em></p>
-<p>Classes can only be compiled from a <em>module</em> or <em>package
-scope</em></p>
-<p>Recommendation:</p>
-<ul>
-<li>Include related class files into a package</li>
-<li>Import the package into modules where required</li>
-</ul>
-<p>The UVM library is supplied in the package <code>uvm_pkg</code></p>
-<ul>
-<li>Import package to access library</li>
-<li>The macro file <code>uvm_macros.svh</code> must be included
-separately</li>
-</ul>
-<p>yapp_packet.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> yapp_packet <span class="keyword">extends</span> uvm_sequence_item;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endclass</span> : yapp_packet   </span><br></pre></td></tr></table></figure>
-<p>yapp_pkg.sv</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span>  yapp_pkg;</span><br><span class="line">	<span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">`<span class="keyword">include</span> &quot;yapp_packet.sv&quot;</span></span><br><span class="line"><span class="keyword">endpackage</span> : yapp_pkg</span><br></pre></td></tr></table></figure>
-<p>run.f for <code>xrun</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 64 bit option <span class="keyword">for</span> AWS labs</span><br><span class="line">-64</span><br><span class="line"></span><br><span class="line"> -uvmhome CDNS-1.2</span><br><span class="line"></span><br><span class="line">// include directories</span><br><span class="line">-incdir ../sv</span><br><span class="line"></span><br><span class="line">// compile files</span><br><span class="line">../sv/yapp_pkg.sv</span><br><span class="line">./top.sv</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -18354,166 +18380,6 @@ id="uvm_reg_fieldpredict-uvm_reg_fielddo_predict">uvm_reg_field::predict
       </categories>
   </entry>
   <entry>
-    <title>UVM REG RALF &amp; IP-XACT</title>
-    <url>/2022/03/14/uvm-reg-ralf/</url>
-    <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
-<p>There are no properties for <strong>unused</strong> or
-<strong>reserved</strong> fields, and unlike register arrays</p>
-<h3 id="ralf">ralf</h3>
-<ul>
-<li>bytes: the register size, default is <em>N*8 &gt; all
-field</em></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">register CTRL &#123;</span><br><span class="line">   left_to_right;</span><br><span class="line">   field unused &#123;bits 6;&#125;</span><br><span class="line">    field HC1R &#123;</span><br><span class="line">    bits 1; access rw  ;</span><br><span class="line">    coverpoint &#123; bins x = &#123;0,1&#125;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    field HC1E &#123;bits 1 ; access rw &#125;</span><br><span class="line">    field unused &#123;bits 2; &#125;</span><br><span class="line">    field HC0R &#123;bits 1; access rw &#125;</span><br><span class="line">    field HCOE &#123;bits 1 ; access rw &#125;</span><br><span class="line">    field unused &#123;bits 2; &#125;</span><br><span class="line">    field BL &#123;bits 1; access rw &#125;</span><br><span class="line">    field CSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field HSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field PC &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field CD &#123;bits 2 ; access rw&#125;</span><br><span class="line">    field VBL &#123;bits 2 ; access rw&#125;</span><br><span class="line">    field CBSWE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VBSWE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field CBSIE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VBSIE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field HIE  &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VIE  &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VEN  &#123;bits 1 ; access rw&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="generated-sv">generated sv</h3>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> build();</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1R</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC1R&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1R</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">23</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1E</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC1E&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1E</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">22</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC0R</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC0R&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC0R</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">19</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HCOE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HCOE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HCOE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">18</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.BL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;BL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.BL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.PC</span> = uvm_reg_field::type_id::create(<span class="string">&quot;PC&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.PC</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">11</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CD</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CD&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CD</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">2&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">2&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSWE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CBSWE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSWE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSWE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBSWE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSWE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CBSIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBSIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VEN</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VEN&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VEN</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">endfunction</span>: build </span><br></pre></td></tr></table></figure>
-<h2 id="uvm_reg_block">uvm_reg_block</h2>
-<h3 id="ralf-1">ralf</h3>
-<ul>
-<li>bytes : bus width</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">block vga_lcd  &#123;</span><br><span class="line">    bytes 4;</span><br><span class="line">    endian little;</span><br><span class="line">    </span><br><span class="line">    register STAT (`RAL_HDL_PATH.wbs.stat[31:0]) @0004;</span><br><span class="line">    register HTIM (`RAL_HDL_PATH.htim[31:0]) @0008;</span><br><span class="line">    register CTRL (`RAL_HDL_PATH.wbs.ctrl[31:0]) @00010;</span><br><span class="line">    register VTIM (`RAL_HDL_PATH.vtim[31:0]) @0012;</span><br><span class="line">    register C1CR (`RAL_HDL_PATH.c1cr[31:0]) @0016;</span><br><span class="line">    memory CLUT1  @&#x27;h0C00;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="generated-sv-1">generated sv</h3>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span> = create_map(<span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span> = ral_reg_STAT::type_id::create(<span class="string">&quot;STAT&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;wbs.stat[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125;&#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.STAT</span>, `UVM_REG_ADDR_WIDTH&#x27;h4, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span> = ral_reg_HTIM::type_id::create(<span class="string">&quot;HTIM&quot;</span>,,get_full_name()); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.add_hdl_path</span>(&#x27;&#123;&#x27;&#123;<span class="string">&quot;htim[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.HTIM</span>, `UVM_REG_ADDR_WIDTH&#x27;h8, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span> = ral_reg_CTRL::type_id::create(<span class="string">&quot;CTRL&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.build</span>(); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.add_hdl_path</span>(&#x27;&#123;&#x27;&#123;<span class="string">&quot;wbs.ctrl[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.CTRL</span>, `UVM_REG_ADDR_WIDTH&#x27;hA, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span> = ral_reg_VTIM::type_id::create(<span class="string">&quot;VTIM&quot;</span>,,get_full_name()); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;vtim[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.VTIM</span>, `UVM_REG_ADDR_WIDTH&#x27;hC, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span> = ral_reg_C1CR::type_id::create(<span class="string">&quot;C1CR&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;c1cr[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.C1CR</span>, `UVM_REG_ADDR_WIDTH&#x27;h10, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span> = ral_mem_CLUT1::type_id::create(<span class="string">&quot;CLUT1&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_mem</span>(<span class="keyword">this</span><span class="variable">.CLUT1</span>, `UVM_REG_ADDR_WIDTH&#x27;hC00, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> ral_reg_CTRL <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_STAT <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_HTIM <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_VTIM <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_C1CR <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_mem_CLUT1 <span class="keyword">extends</span> uvm_mem;</span><br><span class="line"><span class="keyword">class</span> ral_block_vga_lcd <span class="keyword">extends</span> uvm_reg_block;</span><br></pre></td></tr></table></figure>
-<h2 id="ralgen-command">ralgen command</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ralgen -uvm -t dut_regmodel0 vga_lcd_env.ralf</span><br></pre></td></tr></table></figure>
-<h2 id="byte-or-halfword-access">BYTE or HALFWORD access</h2>
-<p>User is verifying 32 bit registers and the design also allows the
-BYTE (8 bits) and HALFWORD (16 bits) accesses.</p>
-<blockquote>
-<p>this is achieved by setting the <strong>bit_addressing=0</strong>
-field in the <strong>uvm_reg_block::create_map</strong> function.</p>
-<p>Using <code>create_map</code> in <code>uvm_reg_block</code>, you can
-change the type of addressing scheme you want to use; namely BYTE or
-HALFWORD.</p>
-</blockquote>
-<p><strong>create_map</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">virtual</span> <span class="keyword">function</span> uvm_reg_map create_map( <span class="keyword">string</span> name,</span><br><span class="line">                                       uvm_reg_addr_t base_addr,</span><br><span class="line">                                       <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,</span><br><span class="line">                                       uvm_endianness_e endian,</span><br><span class="line">                                       <span class="keyword">bit</span> byte_addressing)</span><br></pre></td></tr></table></figure>
-<p>Creates an address map with the specified name, then configures it
-with the following properties:</p>
-<table>
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 80%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>base_addr</td>
-<td>It is the base address for the map. All registers, memories, and
-sub-blocks within the map will be at offsets to this address.</td>
-</tr>
-<tr class="even">
-<td>n_bytes</td>
-<td>It is the byte-width of the bus on which this map is used</td>
-</tr>
-<tr class="odd">
-<td>endian</td>
-<td>It is the endian format. See uvm_endianness_e for possible
-values.</td>
-</tr>
-<tr class="even">
-<td>byte_addressing</td>
-<td>It specifies whether consecutive addresses referred are <strong>1
-byte apart (TRUE)</strong> or <strong>n_bytes apart (FALSE)</strong>.
-Default is TRUE.</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>For HALFWORD addressing, you should call create_map the following
-way:</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">2</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x02, 0x04</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>For WORD addressing</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x01, 0x02</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>For BYTE addressing (default) :</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">1</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x04, 0x08</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>BYTE width and byte addressing</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">1</span>, UVM_LITTLE_ENDIAN, <span class="number">1</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x04, 0x08 </span></span><br></pre></td></tr></table></figure>
-<h2 id="uvm_reg_blockcreate_map">uvm_reg_block::create_map</h2>
-<p>Create an address map in this block</p>
-<blockquote>
-<p>n_bytes - the byte-width of the bus on which this map is used</p>
-<p>byte_addressing - specifies whether consecutive addresses refer are 1
-byte apart (TRUE) or <code>n_bytes</code> apart (FALSE). Default is
-TRUE.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> uvm_reg_map uvm_reg_block::create_map(<span class="keyword">string</span> name,</span><br><span class="line">                                               uvm_reg_addr_t base_addr,</span><br><span class="line">                                               <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,</span><br><span class="line">                                               uvm_endianness_e endian,</span><br><span class="line">                                               <span class="keyword">bit</span> byte_addressing=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   uvm_reg_map  map; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span><span class="variable">.locked</span>) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>, <span class="string">&quot;Cannot add map to locked model&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   map = uvm_reg_map::type_id::create(name,,<span class="keyword">this</span><span class="variable">.get_full_name</span>());</span><br><span class="line">   map<span class="variable">.configure</span>(<span class="keyword">this</span>,base_addr,n_bytes,endian,byte_addressing);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span><span class="variable">.maps</span>[map] = <span class="number">1</span>; </span><br><span class="line">   <span class="keyword">if</span> (maps<span class="variable">.num</span>() == <span class="number">1</span>)</span><br><span class="line">     default_map = map; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> map; </span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h2 id="uvm_reg_mapadd_reg">uvm_reg_map::add_reg</h2>
-<p>The register is located at the specified address <em>offset</em> from
-this maps configured base address.</p>
-<p>The number of consecutive physical addresses occupied by the register
-depends on the width of the register and the number of bytes in the
-physical interface corresponding to this address map.</p>
-<p>If <em>unmapped</em> is TRUE, the register does not occupy any
-physical addresses and the base address is ignored. Unmapped registers
-require a user-defined <em>frontdoor</em> to be specified.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_map::add_reg(uvm_reg rg,  </span><br><span class="line">                                   uvm_reg_addr_t offset,</span><br><span class="line">                                   <span class="keyword">string</span> rights = <span class="string">&quot;RW&quot;</span>,</span><br><span class="line">                                   <span class="keyword">bit</span> unmapped=<span class="number">0</span>,</span><br><span class="line">                                   uvm_reg_frontdoor frontdoor=<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (m_regs_info<span class="variable">.exists</span>(rg)) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Register &#x27;&quot;</span>,rg<span class="variable">.get_name</span>(),</span><br><span class="line">                 <span class="string">&quot;&#x27; has already been added to map &#x27;&quot;</span>,get_name(),<span class="string">&quot;&#x27;&quot;</span>&#125;)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (rg<span class="variable">.get_parent</span>() != get_parent()) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>,</span><br><span class="line">         &#123;<span class="string">&quot;Register &#x27;&quot;</span>,rg<span class="variable">.get_full_name</span>(),<span class="string">&quot;&#x27; may not be added to address map &#x27;&quot;</span>,</span><br><span class="line">          get_full_name(),<span class="string">&quot;&#x27; : they are not in the same block&quot;</span>&#125;)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line">   rg<span class="variable">.add_map</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">begin</span></span><br><span class="line">   uvm_reg_map_info info = <span class="keyword">new</span>; </span><br><span class="line">   info<span class="variable">.offset</span>   = offset;</span><br><span class="line">   info<span class="variable">.rights</span>   = rights;</span><br><span class="line">   info<span class="variable">.unmapped</span> = unmapped;</span><br><span class="line">   info<span class="variable">.frontdoor</span> = frontdoor;</span><br><span class="line">   m_regs_info[rg] = info;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
-<h2 id="register-defines">Register Defines</h2>
-<h3 id="uvm_reg_addr_width">`UVM_REG_ADDR_WIDTH</h3>
-<p>Maximum address width in bits</p>
-<blockquote>
-<p>Default value is 64. Used to define the <uvm_reg_addr_t> type.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">ifndef</span> UVM_REG_ADDR_WIDTH</span></span><br><span class="line"> <span class="meta">`<span class="keyword">define</span> UVM_REG_ADDR_WIDTH 64</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="uvm_reg_data_width">`UVM_REG_DATA_WIDTH</h3>
-<p>Maximum data width in bits</p>
-<blockquote>
-<p>Default value is 64. Used to define the <uvm_reg_data_t> type.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">ifndef</span> UVM_REG_DATA_WIDTH</span></span><br><span class="line"> <span class="meta">`<span class="keyword">define</span> UVM_REG_DATA_WIDTH 64</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="generic-ralf-features-and-ip-xact-mapping">Generic RALF Features
-and IP-XACT Mapping</h2>
-<h3 id="field">field</h3>
-<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212141988.png"
-alt="image-20220314212141988" /></p>
-<h3 id="register">register</h3>
-<h4 id="addressoffset">addressOffset</h4>
-<p>a register has an <code>addressOffset</code> that describes the
-location of the register expressed in <code>addressUnitBits</code> as
-offset to the starting address of the containing
-<code>addressBlock</code> or the containing
-<code>registerFile</code></p>
-<h4 id="addressunitbits">addressUnitBits</h4>
-<p>The <code>addressUnitBits</code> element describes the number of bits
-of an address increment between two <strong>consecutive addressable
-units</strong> in the <code>addressSpace</code>. If
-<code>addressUnitBits</code> is not described, then its value
-<strong>defaults to 8</strong>, indicating a
-<strong>byte-addressable</strong> <code>addressSpace</code></p>
-<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212217722.png"
-alt="image-20220314212217722" /></p>
-<h3 id="block">block</h3>
-<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212251012.png"
-alt="image-20220314212251012" /></p>
-<h3 id="memory">memory</h3>
-<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212427347.png"
-alt="image-20220314212427347" /></p>
-<h2 id="reference">Reference</h2>
-<p>UVM Register Abstraction Layer Generator User Guide, S-2021.09-SP1,
-December 2021</p>
-<p><a
-href="https://www.accellera.org/images/downloads/standards/ip-xact/IP-XACT_User_Guide_2018-02-16.pdf">User
-guide for the IEEE 1685 Standard for IP-XACT</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Process Variation</title>
     <url>/2022/03/02/variation/</url>
     <content><![CDATA[<h4 id="process-corners">Process Corners</h4>
@@ -18671,32 +18537,160 @@ href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErH
       </categories>
   </entry>
   <entry>
-    <title>verilog constant part-select and indexed part-select</title>
-    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
-    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
-<strong>part-select</strong>. There are two types of part-selects, one
-with a <strong>constant part-select</strong> and another with an
-<strong>indexed part-select</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
-<p>Having a variable part-select allows it to be used effectively in
-loops to select parts of the vector. Although the starting bit can be
-<strong>varied</strong>, the width has to be
-<strong>constant</strong>.</p>
+    <title>UVM REG RALF &amp; IP-XACT</title>
+    <url>/2022/03/14/uvm-reg-ralf/</url>
+    <content><![CDATA[<h2 id="uvm_reg_field">uvm_reg_field</h2>
+<p>There are no properties for <strong>unused</strong> or
+<strong>reserved</strong> fields, and unlike register arrays</p>
+<h3 id="ralf">ralf</h3>
+<ul>
+<li>bytes: the register size, default is <em>N*8 &gt; all
+field</em></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">register CTRL &#123;</span><br><span class="line">   left_to_right;</span><br><span class="line">   field unused &#123;bits 6;&#125;</span><br><span class="line">    field HC1R &#123;</span><br><span class="line">    bits 1; access rw  ;</span><br><span class="line">    coverpoint &#123; bins x = &#123;0,1&#125;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    field HC1E &#123;bits 1 ; access rw &#125;</span><br><span class="line">    field unused &#123;bits 2; &#125;</span><br><span class="line">    field HC0R &#123;bits 1; access rw &#125;</span><br><span class="line">    field HCOE &#123;bits 1 ; access rw &#125;</span><br><span class="line">    field unused &#123;bits 2; &#125;</span><br><span class="line">    field BL &#123;bits 1; access rw &#125;</span><br><span class="line">    field CSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field HSL &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field PC &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field CD &#123;bits 2 ; access rw&#125;</span><br><span class="line">    field VBL &#123;bits 2 ; access rw&#125;</span><br><span class="line">    field CBSWE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VBSWE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field CBSIE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VBSIE &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field HIE  &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VIE  &#123;bits 1 ; access rw&#125;</span><br><span class="line">    field VEN  &#123;bits 1 ; access rw&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="generated-sv">generated sv</h3>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> build();</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1R</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC1R&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1R</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">23</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1E</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC1E&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC1E</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">22</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC0R</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HC0R&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HC0R</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">19</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HCOE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HCOE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HCOE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">18</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.BL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;BL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.BL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HSL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HSL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HSL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.PC</span> = uvm_reg_field::type_id::create(<span class="string">&quot;PC&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.PC</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">11</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CD</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CD&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CD</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">2&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBL</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBL&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">2&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSWE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CBSWE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSWE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSWE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBSWE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSWE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;CBSIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.CBSIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VBSIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VBSIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;HIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.HIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VIE</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VIE&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VIE</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VEN</span> = uvm_reg_field::type_id::create(<span class="string">&quot;VEN&quot;</span>,,get_full_name());</span><br><span class="line">     <span class="keyword">this</span><span class="variable">.VEN</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>, <span class="number">1&#x27;h0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">endfunction</span>: build </span><br></pre></td></tr></table></figure>
+<h2 id="uvm_reg_block">uvm_reg_block</h2>
+<h3 id="ralf-1">ralf</h3>
+<ul>
+<li>bytes : bus width</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">block vga_lcd  &#123;</span><br><span class="line">    bytes 4;</span><br><span class="line">    endian little;</span><br><span class="line">    </span><br><span class="line">    register STAT (`RAL_HDL_PATH.wbs.stat[31:0]) @0004;</span><br><span class="line">    register HTIM (`RAL_HDL_PATH.htim[31:0]) @0008;</span><br><span class="line">    register CTRL (`RAL_HDL_PATH.wbs.ctrl[31:0]) @00010;</span><br><span class="line">    register VTIM (`RAL_HDL_PATH.vtim[31:0]) @0012;</span><br><span class="line">    register C1CR (`RAL_HDL_PATH.c1cr[31:0]) @0016;</span><br><span class="line">    memory CLUT1  @&#x27;h0C00;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="generated-sv-1">generated sv</h3>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span> = create_map(<span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span> = ral_reg_STAT::type_id::create(<span class="string">&quot;STAT&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.STAT</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;wbs.stat[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125;&#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.STAT</span>, `UVM_REG_ADDR_WIDTH&#x27;h4, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span> = ral_reg_HTIM::type_id::create(<span class="string">&quot;HTIM&quot;</span>,,get_full_name()); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.HTIM</span><span class="variable">.add_hdl_path</span>(&#x27;&#123;&#x27;&#123;<span class="string">&quot;htim[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.HTIM</span>, `UVM_REG_ADDR_WIDTH&#x27;h8, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span> = ral_reg_CTRL::type_id::create(<span class="string">&quot;CTRL&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.build</span>(); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.CTRL</span><span class="variable">.add_hdl_path</span>(&#x27;&#123;&#x27;&#123;<span class="string">&quot;wbs.ctrl[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.CTRL</span>, `UVM_REG_ADDR_WIDTH&#x27;hA, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span> = ral_reg_VTIM::type_id::create(<span class="string">&quot;VTIM&quot;</span>,,get_full_name()); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.VTIM</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;vtim[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;); </span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.VTIM</span>, `UVM_REG_ADDR_WIDTH&#x27;hC, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span> = ral_reg_C1CR::type_id::create(<span class="string">&quot;C1CR&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.C1CR</span><span class="variable">.add_hdl_path</span>(&#x27;&#123; &#x27;&#123;<span class="string">&quot;c1cr[31:0]&quot;</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125; &#125;);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_reg</span>(<span class="keyword">this</span><span class="variable">.C1CR</span>, `UVM_REG_ADDR_WIDTH&#x27;h10, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span> = ral_mem_CLUT1::type_id::create(<span class="string">&quot;CLUT1&quot;</span>,,get_full_name());</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span><span class="variable">.configure</span>(<span class="keyword">this</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">this</span><span class="variable">.CLUT1</span><span class="variable">.build</span>();</span><br><span class="line"><span class="keyword">this</span><span class="variable">.default_map</span><span class="variable">.add_mem</span>(<span class="keyword">this</span><span class="variable">.CLUT1</span>, `UVM_REG_ADDR_WIDTH&#x27;hC00, <span class="string">&quot;RW&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> ral_reg_CTRL <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_STAT <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_HTIM <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_VTIM <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_reg_C1CR <span class="keyword">extends</span> uvm_reg;</span><br><span class="line"><span class="keyword">class</span> ral_mem_CLUT1 <span class="keyword">extends</span> uvm_mem;</span><br><span class="line"><span class="keyword">class</span> ral_block_vga_lcd <span class="keyword">extends</span> uvm_reg_block;</span><br></pre></td></tr></table></figure>
+<h2 id="ralgen-command">ralgen command</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ralgen -uvm -t dut_regmodel0 vga_lcd_env.ralf</span><br></pre></td></tr></table></figure>
+<h2 id="byte-or-halfword-access">BYTE or HALFWORD access</h2>
+<p>User is verifying 32 bit registers and the design also allows the
+BYTE (8 bits) and HALFWORD (16 bits) accesses.</p>
 <blockquote>
-<p><strong>[&lt;start_bit +: <width>] // part-select increments from
-start-bit</strong></p>
-<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
-start-bit</strong></p>
+<p>this is achieved by setting the <strong>bit_addressing=0</strong>
+field in the <strong>uvm_reg_block::create_map</strong> function.</p>
+<p>Using <code>create_map</code> in <code>uvm_reg_block</code>, you can
+change the type of addressing scheme you want to use; namely BYTE or
+HALFWORD.</p>
 </blockquote>
-<p><strong>Example</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
-<p><strong>ref</strong></p>
+<p><strong>create_map</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">virtual</span> <span class="keyword">function</span> uvm_reg_map create_map( <span class="keyword">string</span> name,</span><br><span class="line">                                       uvm_reg_addr_t base_addr,</span><br><span class="line">                                       <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,</span><br><span class="line">                                       uvm_endianness_e endian,</span><br><span class="line">                                       <span class="keyword">bit</span> byte_addressing)</span><br></pre></td></tr></table></figure>
+<p>Creates an address map with the specified name, then configures it
+with the following properties:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>base_addr</td>
+<td>It is the base address for the map. All registers, memories, and
+sub-blocks within the map will be at offsets to this address.</td>
+</tr>
+<tr class="even">
+<td>n_bytes</td>
+<td>It is the byte-width of the bus on which this map is used</td>
+</tr>
+<tr class="odd">
+<td>endian</td>
+<td>It is the endian format. See uvm_endianness_e for possible
+values.</td>
+</tr>
+<tr class="even">
+<td>byte_addressing</td>
+<td>It specifies whether consecutive addresses referred are <strong>1
+byte apart (TRUE)</strong> or <strong>n_bytes apart (FALSE)</strong>.
+Default is TRUE.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>For HALFWORD addressing, you should call create_map the following
+way:</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">2</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x02, 0x04</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>For WORD addressing</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">0</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x01, 0x02</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>For BYTE addressing (default) :</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">4</span>, UVM_LITTLE_ENDIAN, <span class="number">1</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x04, 0x08</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>BYTE width and byte addressing</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">default_map = create_map(get_name(), <span class="number">0</span>, <span class="number">1</span>, UVM_LITTLE_ENDIAN, <span class="number">1</span>); <span class="comment">// 32 bit registers offset are 0x00, 0x04, 0x08 </span></span><br></pre></td></tr></table></figure>
+<h2 id="uvm_reg_blockcreate_map">uvm_reg_block::create_map</h2>
+<p>Create an address map in this block</p>
+<blockquote>
+<p>n_bytes - the byte-width of the bus on which this map is used</p>
+<p>byte_addressing - specifies whether consecutive addresses refer are 1
+byte apart (TRUE) or <code>n_bytes</code> apart (FALSE). Default is
+TRUE.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> uvm_reg_map uvm_reg_block::create_map(<span class="keyword">string</span> name,</span><br><span class="line">                                               uvm_reg_addr_t base_addr,</span><br><span class="line">                                               <span class="keyword">int</span> <span class="keyword">unsigned</span> n_bytes,</span><br><span class="line">                                               uvm_endianness_e endian,</span><br><span class="line">                                               <span class="keyword">bit</span> byte_addressing=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">   uvm_reg_map  map; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span><span class="variable">.locked</span>) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>, <span class="string">&quot;Cannot add map to locked model&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   map = uvm_reg_map::type_id::create(name,,<span class="keyword">this</span><span class="variable">.get_full_name</span>());</span><br><span class="line">   map<span class="variable">.configure</span>(<span class="keyword">this</span>,base_addr,n_bytes,endian,byte_addressing);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span><span class="variable">.maps</span>[map] = <span class="number">1</span>; </span><br><span class="line">   <span class="keyword">if</span> (maps<span class="variable">.num</span>() == <span class="number">1</span>)</span><br><span class="line">     default_map = map; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> map; </span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h2 id="uvm_reg_mapadd_reg">uvm_reg_map::add_reg</h2>
+<p>The register is located at the specified address <em>offset</em> from
+this maps configured base address.</p>
+<p>The number of consecutive physical addresses occupied by the register
+depends on the width of the register and the number of bytes in the
+physical interface corresponding to this address map.</p>
+<p>If <em>unmapped</em> is TRUE, the register does not occupy any
+physical addresses and the base address is ignored. Unmapped registers
+require a user-defined <em>frontdoor</em> to be specified.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> uvm_reg_map::add_reg(uvm_reg rg,  </span><br><span class="line">                                   uvm_reg_addr_t offset,</span><br><span class="line">                                   <span class="keyword">string</span> rights = <span class="string">&quot;RW&quot;</span>,</span><br><span class="line">                                   <span class="keyword">bit</span> unmapped=<span class="number">0</span>,</span><br><span class="line">                                   uvm_reg_frontdoor frontdoor=<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (m_regs_info<span class="variable">.exists</span>(rg)) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>, &#123;<span class="string">&quot;Register &#x27;&quot;</span>,rg<span class="variable">.get_name</span>(),</span><br><span class="line">                 <span class="string">&quot;&#x27; has already been added to map &#x27;&quot;</span>,get_name(),<span class="string">&quot;&#x27;&quot;</span>&#125;)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (rg<span class="variable">.get_parent</span>() != get_parent()) <span class="keyword">begin</span></span><br><span class="line">      `uvm_error(<span class="string">&quot;RegModel&quot;</span>,</span><br><span class="line">         &#123;<span class="string">&quot;Register &#x27;&quot;</span>,rg<span class="variable">.get_full_name</span>(),<span class="string">&quot;&#x27; may not be added to address map &#x27;&quot;</span>,</span><br><span class="line">          get_full_name(),<span class="string">&quot;&#x27; : they are not in the same block&quot;</span>&#125;)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line">   rg<span class="variable">.add_map</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">begin</span></span><br><span class="line">   uvm_reg_map_info info = <span class="keyword">new</span>; </span><br><span class="line">   info<span class="variable">.offset</span>   = offset;</span><br><span class="line">   info<span class="variable">.rights</span>   = rights;</span><br><span class="line">   info<span class="variable">.unmapped</span> = unmapped;</span><br><span class="line">   info<span class="variable">.frontdoor</span> = frontdoor;</span><br><span class="line">   m_regs_info[rg] = info;</span><br><span class="line">   <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">endfunction</span></span><br></pre></td></tr></table></figure>
+<h2 id="register-defines">Register Defines</h2>
+<h3 id="uvm_reg_addr_width">`UVM_REG_ADDR_WIDTH</h3>
+<p>Maximum address width in bits</p>
+<blockquote>
+<p>Default value is 64. Used to define the <uvm_reg_addr_t> type.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">ifndef</span> UVM_REG_ADDR_WIDTH</span></span><br><span class="line"> <span class="meta">`<span class="keyword">define</span> UVM_REG_ADDR_WIDTH 64</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="uvm_reg_data_width">`UVM_REG_DATA_WIDTH</h3>
+<p>Maximum data width in bits</p>
+<blockquote>
+<p>Default value is 64. Used to define the <uvm_reg_data_t> type.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">ifndef</span> UVM_REG_DATA_WIDTH</span></span><br><span class="line"> <span class="meta">`<span class="keyword">define</span> UVM_REG_DATA_WIDTH 64</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="generic-ralf-features-and-ip-xact-mapping">Generic RALF Features
+and IP-XACT Mapping</h2>
+<h3 id="field">field</h3>
+<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212141988.png"
+alt="image-20220314212141988" /></p>
+<h3 id="register">register</h3>
+<h4 id="addressoffset">addressOffset</h4>
+<p>a register has an <code>addressOffset</code> that describes the
+location of the register expressed in <code>addressUnitBits</code> as
+offset to the starting address of the containing
+<code>addressBlock</code> or the containing
+<code>registerFile</code></p>
+<h4 id="addressunitbits">addressUnitBits</h4>
+<p>The <code>addressUnitBits</code> element describes the number of bits
+of an address increment between two <strong>consecutive addressable
+units</strong> in the <code>addressSpace</code>. If
+<code>addressUnitBits</code> is not described, then its value
+<strong>defaults to 8</strong>, indicating a
+<strong>byte-addressable</strong> <code>addressSpace</code></p>
+<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212217722.png"
+alt="image-20220314212217722" /></p>
+<h3 id="block">block</h3>
+<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212251012.png"
+alt="image-20220314212251012" /></p>
+<h3 id="memory">memory</h3>
+<p><img src="/2022/03/14/uvm-reg-ralf/image-20220314212427347.png"
+alt="image-20220314212427347" /></p>
+<h2 id="reference">Reference</h2>
+<p>UVM Register Abstraction Layer Generator User Guide, S-2021.09-SP1,
+December 2021</p>
 <p><a
-href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
-scalar and vector</a></p>
-<p><a
-href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
-is the "+:" operator called in Verilog?</a></p>
+href="https://www.accellera.org/images/downloads/standards/ip-xact/IP-XACT_User_Guide_2018-02-16.pdf">User
+guide for the IEEE 1685 Standard for IP-XACT</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -18886,6 +18880,38 @@ Synopsys</a></p>
 href="https://www.youtube.com/watch?v=yjs7R5UWOEw&amp;ab_channel=Synopsys">Using
 Verdi for Design Understanding - Connectivity Tracing and FSM Extraction
 in Verdi | Synopsys</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>verilog constant part-select and indexed part-select</title>
+    <url>/2022/02/11/verilog-constant-part-select-and-variable-part-select/</url>
+    <content><![CDATA[<p>A range of contiguous bits can be selected and is known as
+<strong>part-select</strong>. There are two types of part-selects, one
+with a <strong>constant part-select</strong> and another with an
+<strong>indexed part-select</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] addr;</span><br><span class="line">addr [<span class="number">23</span>:<span class="number">16</span>] = <span class="number">8&#x27;h23</span>; <span class="comment">//bits 23 to 16 will be replaced by the new value &#x27;h23 -&gt; constant part-select</span></span><br></pre></td></tr></table></figure>
+<p>Having a variable part-select allows it to be used effectively in
+loops to select parts of the vector. Although the starting bit can be
+<strong>varied</strong>, the width has to be
+<strong>constant</strong>.</p>
+<blockquote>
+<p><strong>[&lt;start_bit +: <width>] // part-select increments from
+start-bit</strong></p>
+<p><strong>[&lt;start_bit -: <width>] // part-select decrements from
+start-bit</strong></p>
+</blockquote>
+<p><strong>Example</strong></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>: <span class="number">0</span>] a_vect;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">0</span> :<span class="number">31</span>] b_vect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">63</span>: <span class="number">0</span>] dword;</span><br><span class="line"><span class="keyword">integer</span> sel;</span><br><span class="line"></span><br><span class="line">a_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == a_vect[ 7 : 0]</span></span><br><span class="line">a_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == a_vect[15 : 8]</span></span><br><span class="line">b_vect[ <span class="number">0</span> +: <span class="number">8</span>] <span class="comment">// == b_vect[0 : 7]</span></span><br><span class="line">b_vect[<span class="number">15</span> -: <span class="number">8</span>] <span class="comment">// == b_vect[8 :15]</span></span><br><span class="line"></span><br><span class="line">dword[<span class="number">8</span>*sel +: <span class="number">8</span>] <span class="comment">// variable part-select with fixed width</span></span><br></pre></td></tr></table></figure>
+<p><strong>ref</strong></p>
+<p><a
+href="https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part%2Dselects,with%20an%20indexed%20part%2Dselect.&amp;text=Having%20a%20variable%20part%2Dselect,select%20parts%20of%20the%20vector.">Verilog
+scalar and vector</a></p>
+<p><a
+href="https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog">What
+is the "+:" operator called in Verilog?</a></p>
 ]]></content>
       <categories>
         <category>digital</category>

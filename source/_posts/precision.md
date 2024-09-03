@@ -51,7 +51,16 @@ mathjax: true
 
 
 
+### Chopping in the Frequency Domain
 
+> **Square-wave Modulation**
+>
+> defination of convolution $y(t) = x(t)*h(t)= \int_{-\infty}^{\infty} x(\tau)h(t-\tau)d\tau$
+>
+> for real signal $H(j\omega)*=H(j\omega)$
+
+
+![sq_mod.drawio](precision/sq_mod.drawio.svg)
 
 
 

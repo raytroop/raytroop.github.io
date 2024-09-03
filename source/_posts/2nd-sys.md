@@ -94,7 +94,7 @@ $$
 $$
 
 
-
+![tau_1pole.drawio](2nd-sys/tau_1pole.drawio.svg)
 
 
 ### two poles

@@ -147,7 +147,7 @@ $$
 
 
 
-## Consideration for Readout Circuit
+## Readout Circuit
 
 ### ADC dynamic range
 

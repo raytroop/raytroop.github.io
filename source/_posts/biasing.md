@@ -9,7 +9,42 @@ mathjax: true
 
 
 
-## PTAT with subthreshold MOS
+## Curvature compensation
+
+![image-20240903234720200](biasing/image-20240903234720200.png)
+
+
+
+> Tutorials | 08012023 | 1.2.1 Bandgap Voltage Regular |, [[https://youtu.be/dz067SOX0XQ?si=PlYczw9UdneAX6Na](https://youtu.be/dz067SOX0XQ?si=PlYczw9UdneAX6Na)]
+
+
+
+## Subthreshold Conduction
+
+By square-law, the Eq $g_m = \sqrt{2\mu C_{ox}\frac{W}{L}I_D}$, it is possible to obtain a *higer* transconductance by increasing $W$ while maintaining $I_D$ constant. However, if $W$ increases while $I_D$ remains constant, then $V_{GS} \to V_{TH}$ and device enters the subthreshold region.
+$$
+I_D = I_0\exp \frac{V_{GS}}{\xi V_T}
+$$
+
+where $I_0$ is proportional to $W/L$, $\xi \gt 1$ is a nonideality factor, and $V_T = kT/q$
+
+As a result, the transconductance in subthreshold region is
+$$
+g_m = \frac{I_D}{\xi V_T}
+$$
+
+which is $g_m \propto I_D$
+
+![image-20240627230726326](biasing/image-20240627230726326.png)
+
+![image-20240627230744044](biasing/image-20240627230744044.png)
+
+
+
+
+
+
+### PTAT with subthreshold MOS
 
 MOS working in the **weak inversion region** (**"subthreshold conduction"**) have the similar characteristics to BJTs and diodes, since the effect of diffusion current becomes more significant than that of drift current
 
@@ -111,7 +146,7 @@ $$
 
 
 
-## gm, gds at fixed Id, VG
+### gm, gds at fixed Id, VG
 
 **In triode region**
 $$
@@ -148,7 +183,7 @@ That is, $g_{ds} \propto -V_D$
 > Both gain and speed degrade once entering triode region, though Id is constant
 
 
-## cascode mos vth
+## Cascode MOS 
 
 The low threshold voltage of cascode MOS **don't** help decrease the minimum output voltage
 
@@ -203,32 +238,6 @@ The output resistance is almost doubled using Stacked FET  in *saturation region
 > - mobility $\mu_{n,p}$ decreases with temperature
 >
 >  Overall, increase in temperature results in lower drain currents
-
-
-
-
-## Subthreshold Conduction
-
-By square-law, the Eq $g_m = \sqrt{2\mu C_{ox}\frac{W}{L}I_D}$, it is possible to obtain a *higer* transconductance by increasing $W$ while maintaining $I_D$ constant. However, if $W$ increases while $I_D$ remains constant, then $V_{GS} \to V_{TH}$ and device enters the subthreshold region.
-$$
-I_D = I_0\exp \frac{V_{GS}}{\xi V_T}
-$$
-
-where $I_0$ is proportional to $W/L$, $\xi \gt 1$ is a nonideality factor, and $V_T = kT/q$
-
-As a result, the transconductance in subthreshold region is
-$$
-g_m = \frac{I_D}{\xi V_T}
-$$
-
-which is $g_m \propto I_D$
-
-![image-20240627230726326](biasing/image-20240627230726326.png)
-
-![image-20240627230744044](biasing/image-20240627230744044.png)
-
-
-
 
 
 

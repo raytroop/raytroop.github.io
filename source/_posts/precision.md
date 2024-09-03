@@ -35,7 +35,7 @@ mathjax: true
 
 > sinc filter come from *Zero-Order Hold*
 >
-> ![Fourier-transform-of-a-rectangle-function-a-and-a-sinc-function-b](precision/Fourier-transform-of-a-rectangle-function-a-and-a-sinc-function-b.png)
+> ![image-20240903223100157](precision/image-20240903223100157.png)
 
 
 
@@ -57,29 +57,50 @@ mathjax: true
 >
 > defination of convolution $y(t) = x(t)*h(t)= \int_{-\infty}^{\infty} x(\tau)h(t-\tau)d\tau$
 >
-> for real signal $H(j\omega)^*=H(-j\omega)$
+> for real signal $H(j\omega)^*=H(-j\omega)$​
+
+![image-20240903222441433](precision/image-20240903222441433.png)
+
+$$
+H(j\hat{\omega})*H(j\hat{\omega}) = \int_{-\infty}^{\infty}H(j\omega)H(j(\hat{\omega}-\omega))d\omega
+$$
 
 
 ![sq_mod.drawio](precision/sq_mod.drawio.svg)
 
 
 
-
 ### Bandwidth & Gain Accuracy
 
+![image-20240903225224732](precision/image-20240903225224732.png)
 
-### Residual Offest of Chopping
+- *lower effective gain*: DC level at the output of the amplifiers is a bit less than what it should be
 
+
+
+- chopping artifacts at the *even harmonics*:  frequency of output is $2f_{ch}$
+
+
+
+> REF. [[https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge](https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge)]
+
+### Residual Offset of Chopping
+
+![image-20240903222425730](precision/image-20240903222425730.png)
+
+assume input spikes can be expressed as
 $$
 V_\text{spike}(t) = V_o e^{-\frac{t}{\tau}}
 $$
+
+Then, residual offset is
 
 $$\begin{align}
 \overline{V_\text{os}} &= \frac{2\int_0^{T_{ch}/2}V_\text{spike}(t)dt}{T_{ch}} \\
 &= 2f_{ch}V_o\int_0^{T_{ch}/2}  e^{-\frac{t}{\tau}}dt\\
 &= 2f_{ch}V_o\tau\int_0^{T_{ch}/2\tau} e^{-\frac{t}{\tau}}d\frac{t}{\tau} \\
 &\approx 2f_{ch}V_o\tau 
-\end{align}$$
+\end{align}$$​
 
 
 

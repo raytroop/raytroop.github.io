@@ -65,6 +65,23 @@ mathjax: true
 
 
 
+### Bandwidth & Gain Accuracy
+
+
+### Residual Offest of Chopping
+
+$$
+V_\text{spike}(t) = V_o e^{-\frac{t}{\tau}}
+$$
+
+$$\begin{align}
+\overline{V_\text{os}} &= \frac{2\int_0^{T_{ch}/2}V_\text{spike}(t)dt}{T_{ch}} \\
+&= 2f_{ch}V_o\int_0^{T_{ch}/2}  e^{-\frac{t}{\tau}}dt\\
+&= 2f_{ch}V_o\tau\int_0^{T_{ch}/2\tau} e^{-\frac{t}{\tau}}d\frac{t}{\tau} \\
+&\approx 2f_{ch}V_o\tau 
+\end{align}$$
+
+
 
 ## Dynamic Element Matching (DEM)
 

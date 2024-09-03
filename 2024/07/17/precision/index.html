@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/2024/07/17/precision/image-20240826214306376.png">
 <meta property="og:image" content="http://example.com/2024/07/17/precision/sq_mod.drawio.svg">
 <meta property="article:published_time" content="2024-07-17T23:11:07.000Z">
-<meta property="article:modified_time" content="2024-09-03T05:22:24.255Z">
+<meta property="article:modified_time" content="2024-09-03T07:15:43.094Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/07/17/precision/image-20240826212343905.png">
@@ -144,7 +144,7 @@
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#autozeroing"><span class="nav-number">1.</span> <span class="nav-text">Autozeroing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#residual-noise-of-auto-zeroing"><span class="nav-number">1.1.</span> <span class="nav-text">Residual Noise of
 Auto-zeroing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chopping"><span class="nav-number">2.</span> <span class="nav-text">Chopping</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chopping-in-the-frequency-domain"><span class="nav-number">2.1.</span> <span class="nav-text">Chopping in the Frequency
-Domain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dynamic-element-matching-dem"><span class="nav-number">3.</span> <span class="nav-text">Dynamic Element Matching
+Domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bandwidth-gain-accuracy"><span class="nav-number">2.2.</span> <span class="nav-text">Bandwidth &amp; Gain Accuracy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#residual-offest-of-chopping"><span class="nav-number">2.3.</span> <span class="nav-text">Residual Offest of Chopping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dynamic-element-matching-dem"><span class="nav-number">3.</span> <span class="nav-text">Dynamic Element Matching
 (DEM)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
@@ -240,7 +240,7 @@ Domain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-03 05:22:24" itemprop="dateModified" datetime="2024-09-03T05:22:24+00:00">2024-09-03</time>
+      <time title="Modified: 2024-09-03 07:15:43" itemprop="dateModified" datetime="2024-09-03T07:15:43+00:00">2024-09-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -304,6 +304,19 @@ class="math inline">\(H(j\omega)^*=H(-j\omega)\)</span></p>
 </blockquote>
 <p><img src="/2024/07/17/precision/sq_mod.drawio.svg"
 alt="sq_mod.drawio" /></p>
+<h3 id="bandwidth-gain-accuracy">Bandwidth &amp; Gain Accuracy</h3>
+<h3 id="residual-offest-of-chopping">Residual Offest of Chopping</h3>
+<p><span class="math display">\[
+V_\text{spike}(t) = V_o e^{-\frac{t}{\tau}}
+\]</span></p>
+<p><span class="math display">\[\begin{align}
+\overline{V_\text{os}} &amp;=
+\frac{2\int_0^{T_{ch}/2}V_\text{spike}(t)dt}{T_{ch}} \\
+&amp;= 2f_{ch}V_o\int_0^{T_{ch}/2}  e^{-\frac{t}{\tau}}dt\\
+&amp;= 2f_{ch}V_o\tau\int_0^{T_{ch}/2\tau}
+e^{-\frac{t}{\tau}}d\frac{t}{\tau} \\
+&amp;\approx 2f_{ch}V_o\tau
+\end{align}\]</span></p>
 <h2 id="dynamic-element-matching-dem">Dynamic Element Matching
 (DEM)</h2>
 <p><em>TODO</em> 📅</p>

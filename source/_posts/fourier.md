@@ -127,9 +127,10 @@ Part of the proof is given by the following step:
 ### impulse scaling
 
 $$
-\delta(\omega /T) = T\delta(\omega)
+\delta(\alpha t)= \frac{1}{\alpha}\delta( t)
 $$
 
+where $\alpha$ is scaling ratio
 
 
 ### impulse invariance

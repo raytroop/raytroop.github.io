@@ -140,7 +140,7 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 
 
-> pay attention to $df$
+> Note: $S_x(f)$ in *Hz*  and inverse Fourier Transform in *Hz* ($\frac{1}{2\pi}d\omega = df$)
 
 
 
@@ -148,36 +148,10 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 **Example**
 
-A pure sine wave is expressed as $y(t) = A_0 \sin(2\pi f_0 t +\phi _0)$, its autocorrelation function:
+> Example 2-11, L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013 
 
-$$
-\mathrm{R}(\tau) = \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T} y(t)y(t+\tau)dt
-$$
 
-where $y(t)y(t+\tau)$ can be expressed as
-$$\begin{align}
-y(t)y(t+\tau) &= A_0\sin(2\pi f_0 t+\phi_0)\cdot A_0\sin(2\pi f_0 t+\phi_0+2\pi f_0\tau) \\
-&= A_0^2\sin^2(2\pi f_0 t+\phi_0)\cdot \cos(2\pi f_0\tau) + A_0^2\sin(2\pi f_0 t+\phi_0)\cos(2\pi f_0 t+\phi_0)\cdot \cos(2\pi f_0\tau) \\
-&= \frac{1}{2}A_0^2 (1 - \cos(2(2\pi f_0 t+\phi_0)))\cdot \cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) \\
-&= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) - \frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau)
-\end{align}$$
-
-And substitute $y(t)y(t+\tau)$ in $\mathrm{R}(\tau)$
-
-$$\begin{align}
-\mathrm{R}(\tau) &= \lim _{T\to \infty}\frac{1}{2T}\int_{-T}^{T} y(t)y(t+\tau)dt \\
-&= \lim _{T\to \infty}\int_{-T}^{T} \left[\frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) - \frac{1}{2}A_0^2\cos(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau) + \frac{1}{2}A_0^2\sin(2(2\pi f_0 t+\phi_0))\cdot \cos(2\pi f_0\tau)\right]dt \\
-& = \lim _{T\to \infty}\int_{-T}^{T} \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau) dt \\
-&= \frac{1}{2}A_0^2\cdot \cos(2\pi f_0\tau)
-\end{align}$$
-
-Taking Fourier transform of $\mathrm{R}(\tau)$, PSD is
-
-$$
-S_y(f) = \frac{1}{4}A_0^2 \delta(f-f_0) + \frac{1}{4}A_0^2 \delta(f+f_0)
-$$
-
-> Remember
+> Remember: impulse scaling
 >
 > ![image-20240718210137344](random/image-20240718210137344.png)
 > $$

@@ -38,11 +38,26 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 
 **deterministic autocorrelation function**
 
+
+
 ![image-20240427170024123](random/image-20240427170024123.png)
 
 ![image-20240902223052500](random/image-20240902223052500.png)
 
+
+
+> why $\overline{R}_{hh}  \overset{\Delta}{=} h(\tau)*h(-\tau)$ is autocorrelation ?  the proof is as follows:
+> 
+> $$\begin{align}
+>\overline{R}_{hh} &= h(\tau)*h(-\tau) \\
+> &= \int_{-\infty}^{\infty}h(x)h(-(\tau - x))dx \\
+> &= \int_{-\infty}^{\infty}h(x)h(-\tau + x))dx \\
+> &=\int_{-\infty}^{\infty}h(x+\tau)h(x))dx
+> \end{align}$$
+
 ---
+
+
 
 ### output PSD
 
@@ -148,7 +163,9 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 **Example**
 
-> Example 2-11, L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013 
+![image-20240904203802604](random/image-20240904203802604.png)
+
+
 
 
 > Remember: impulse scaling

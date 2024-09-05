@@ -46,10 +46,10 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 
 
 
-> why $\overline{R}_{hh}  \overset{\Delta}{=} h(\tau)*h(-\tau)$ is autocorrelation ?  the proof is as follows:
+> why $\overline{R}_{hh}(\tau)  \overset{\Delta}{=} h(\tau)*h(-\tau)$ is autocorrelation ?  the proof is as follows:
 > 
 > $$\begin{align}
->\overline{R}_{hh} &= h(\tau)*h(-\tau) \\
+>\overline{R}_{hh}(\tau) &= h(\tau)*h(-\tau) \\
 > &= \int_{-\infty}^{\infty}h(x)h(-(\tau - x))dx \\
 > &= \int_{-\infty}^{\infty}h(x)h(-\tau + x))dx \\
 > &=\int_{-\infty}^{\infty}h(x+\tau)h(x))dx

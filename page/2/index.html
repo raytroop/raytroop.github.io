@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,334 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/11/adapt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/11/adapt/" class="post-title-link" itemprop="url">adaptation in wireline</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-11 11:07:31" itemprop="dateCreated datePublished" datetime="2024-08-11T11:07:31+00:00">2024-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="least-mean-square-lms">Least-Mean-Square (LMS)</h2>
+<blockquote>
+<p>minimum mean square error (MMSE)</p>
+</blockquote>
+<p>This simplified version of LMS algorithm is identical to the
+<em>zero-forcing</em> algorithm which minimizes the ISI at data
+samples</p>
+<h3 id="sign-sign-lms-ss-lms">Sign-Sign LMS (SS-LMS)</h3>
+<blockquote>
+<p>T11: Basics of Equalization Techniques: Channels, Equalization, and
+Circuits, 2022 IEEE International Solid-State Circuits Conference</p>
+<p>V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link
+transceiver with adaptive equalization and data recovery," in IEEE
+Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012-1026, April
+2005, doi: 10.1109/JSSC.2004.842863.</p>
+<p>Jinhyung Lee, Design of High-Speed Receiver for Video Interface with
+Adaptive Equalization; Phd thesis, August 2019. <a
+target="_blank" rel="noopener" href="http://dcollection.snu.ac.kr/common/orgView/000000157003">thesis
+link</a></p>
+<p>Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical
+Implementation, 5th edition</p>
+<p>E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for
+I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State
+Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008</p>
+</blockquote>
+<h3 id="dfe-h0-estimator">DFE h0 Estimator</h3>
+<p>summer output <span class="math display">\[
+r_k =
+a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=1}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
+\]</span> error slicer analog output <span class="math display">\[
+e_k=r_k-\hat{a}_k \hat{h}_0
+\]</span> error slicer digital output <span class="math display">\[
+\hat{e}_k=|e_k|
+\]</span> It's NOT possible to implement <span
+class="math inline">\(e_k\)</span>, which need to determine <span
+class="math inline">\(\hat{a}_k=|r_k|\)</span> in no time. One method to
+approach this problem is calculate <span
+class="math inline">\(e_k^{a_k=1}=r_k-\hat{a}_k \hat{h}_0\)</span> and
+<span class="math inline">\(e_k^{a_k=-1}=r_k+\hat{a}_k
+\hat{h}_0\)</span>, then select the right one based on <span
+class="math inline">\(\hat{a}_k\)</span></p>
+<p>The update equation based on Sign-Sign-Least Mean square (SS-LMS) and
+loss function <span
+class="math inline">\(L(\hat{h}_{\text{0~ntap}})=E(e_k^2)\)</span> <span
+class="math display">\[
+\hat{h}_n(k+1) = \hat{h}_n(k)+\mu \cdot |e_k|\cdot \hat{a}_{k-n}
+\]</span> Where <span class="math inline">\(n \in
+[0,...,\text{ntap}]\)</span>. This way, we can obtain <span
+class="math inline">\(\hat{h}_0\)</span>, <span
+class="math inline">\(\hat{h}_1\)</span>, <span
+class="math inline">\(\hat{h}_2\)</span>, ...</p>
+<blockquote>
+<p><span class="math inline">\(\hat{h}_0\)</span> is used in AFE
+adaptation</p>
+</blockquote>
+<p>We may encounter difficulty if the first tap of DFE is unrolled, its
+<span class="math inline">\(e_k\)</span> is modified as follow <span
+class="math display">\[
+r_k =
+a_kh_0+\left(\sum_{n=-\infty,n\neq0}^{+\infty}a_{k-n}h_n-\sum_{n=2}^{\text{ntap}}\hat{a}_{k-n}\hat{h}_n\right)
+\]</span> Where there is NO <span
+class="math inline">\(\hat{h}_1\)</span></p>
+<p>To find <span class="math inline">\(\hat{h}_1\)</span>, we shall use
+different pattern for even and odd error slicer</p>
+<h2 id="maximum-likelihood-sequence-estimation-mlse">Maximum Likelihood
+Sequence Estimation (MLSE)</h2>
+<p><img src="/2024/08/11/adapt/image-20240807233152154.png"
+alt="image-20240807233152154" /></p>
+<p><img src="/2024/08/11/adapt/image-20240812205534753.png"
+alt="image-20240812205534753" /></p>
+<p><img src="/2024/08/11/adapt/image-20240812205613467.png"
+alt="image-20240812205613467" /></p>
+<blockquote>
+<p>[IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes
+Beyond 100 Gb/s <a
+target="_blank" rel="noopener" href="https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf">https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf</a>]</p>
+<p>M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A.
+Sheikholeslami, "Design and Implementation of an On-Demand
+Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of
+Circuits and Systems, vol. 3, pp. 97-108, 2022, doi:
+10.1109/OJCAS.2022.3173686.</p>
+<p>Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing
+Architecture Using Viterbi Algorithm for ADC-Based Serial Link.
+Undergraduate Research Scholars Program. Available electronically from
+[<a
+target="_blank" rel="noopener" href="https://hdl.handle.net/1969.1/166485">https://hdl.handle.net/1969.1/166485</a>]</p>
+</blockquote>
+<p>There are several variants of MLSD (Maximum Likelihood Sequence
+Detection), including:</p>
+<ul>
+<li>Viterbi Algorithm</li>
+<li>Decision Feedback Sequence Estimation (DFSE)</li>
+<li>Soft-Output MLSD</li>
+</ul>
+<blockquote>
+<p>[Evolution Of Equalization Techniques In High-Speed SerDes For
+Extended Reaches. <a
+target="_blank" rel="noopener" href="https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/">https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/</a>]</p>
+</blockquote>
+<p><img src="/2024/08/11/adapt/image-20240824193839108.png"
+alt="image-20240824193839108" /></p>
+<h2 id="mueller-muller-cdr">Mueller-Muller CDR</h2>
+<p><img src="/2024/08/11/adapt/image-20240812222307061.png"
+alt="image-20240812222307061" /></p>
+<p>MMPD infers the channel response from baud-rate samples of the
+received data, the adaptation aligns the sampling clock such that
+pre-cursor is equal to the post-cursor in the <em>pulse
+response</em></p>
+<p><img src="/2024/08/11/adapt/image-20240807230029591.png"
+alt="image-20240807230029591" /></p>
+<blockquote>
+<p>Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [<a
+target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf">https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf</a>]</p>
+<p>Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS"
+[<a
+target="_blank" rel="noopener" href="https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf">https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf</a>]</p>
+<p>Eduardo Fuentetaja. "Analysis of the M&amp;M Clock Recovery
+Algorithm" [<a
+target="_blank" rel="noopener" href="https://edfuentetaja.github.io/sdr/m_m_analysis/">https://edfuentetaja.github.io/sdr/m_m_analysis/</a>]</p>
+<p>Liu, Tao &amp; Li, Tiejun &amp; Lv, Fangxu &amp; Liang, Bin &amp;
+Zheng, Xuqiang &amp; Wang, Heming &amp; Wu, Miaomiao &amp; Lu, Dechao
+&amp; Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock
+and Data Recovery Circuits. Electronics. 10. 1888.
+10.3390/electronics10161888.</p>
+<p>Gu, Youzhi &amp; Feng, Xinjie &amp; Chi, Runze &amp; Chen, Yongzhen
+&amp; Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data
+Recovery Circuits with a Linearized Model.
+10.21203/rs.3.rs-1817774/v1.</p>
+<p>Baud-Rate CDRs [<a
+target="_blank" rel="noopener" href="https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf</a>]</p>
+<p>F. Spagna <em>et al</em>., "A 78mW 11.8Gb/s serial link transceiver
+with adaptive RX equalization and baud-rate CDR in 32nm CMOS," <em>2010
+IEEE International Solid-State Circuits Conference - (ISSCC)</em>, San
+Francisco, CA, USA, 2010, pp. 366-367, doi:
+10.1109/ISSCC.2010.5433823.</p>
+<p>K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of
+PAM-4 Mueller–Muller Clock and Data Recovery System," in <em>IEEE Open
+Journal of Circuits and Systems</em>, vol. 3, pp. 216-227, 2022</p>
+</blockquote>
+<p><img src="/2024/08/11/adapt/image-20240810095006113.png"
+alt="image-20240810095006113" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001201612.png"
+alt="image-20240808001201612" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001256515.png"
+alt="image-20240808001256515" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001449664.png"
+alt="image-20240808001449664" /></p>
+<p><img src="/2024/08/11/adapt/image-20240808001501485.png"
+alt="image-20240808001501485" /></p>
+<h2 id="ss-mm-cdr">SS-MM CDR</h2>
+<p><img src="/2024/08/11/adapt/image-20240807232814202.png"
+alt="image-20240807232814202" /></p>
+<p><span class="math inline">\(h_1\)</span> is
+<strong>necessary</strong></p>
+<ul>
+<li><p>without DFE</p>
+<p>SS-MMPD locks at the point (<span
+class="math inline">\(h_1=h_{-1}\)</span>​)</p></li>
+<li><p>With a 1-tap DFE</p>
+<p>1-tap adaptive DFE that forces the <span
+class="math inline">\(h_1\)</span> to be <em>zero</em>, the SS-MMPD
+locks wherever the <span class="math inline">\(h_{-1}\)</span>​ is zero
+and drifts eventually.</p>
+<p>Consequently, it suffers from a severe <em>multiple-locking problem
+with an adaptive DFE</em></p></li>
+</ul>
+<p><img src="/2024/08/11/adapt/image-20240812232618238.png"
+alt="image-20240812232618238" /></p>
+<blockquote>
+<p>Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive
+Equalizer and Multi-Level Baud-Rate Phase Detector" [<a
+target="_blank" rel="noopener" href="https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf">https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf</a>]</p>
+</blockquote>
+<h3 id="pattern-filter">Pattern filter</h3>
+<table>
+<thead>
+<tr class="header">
+<th>pattern</th>
+<th>main cursor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0<strong>1</strong>1</td>
+<td><span class="math inline">\(s_{011}=-h_1+h_0+h_{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td>1<strong>1</strong>0</td>
+<td><span class="math inline">\(s_{110}=h_1+h_0-h_{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td>1<strong>0</strong>0</td>
+<td><span class="math inline">\(s_{100}=h_1-h_0-h_{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td>0<strong>0</strong>1</td>
+<td><span class="math inline">\(s_{001}=-h_1-h_0+h_{-1}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>During adapting, we make</p>
+<ul>
+<li><span class="math inline">\(s_{011}\)</span> &amp; <span
+class="math inline">\(s_{110}\)</span> are approaching to each
+other</li>
+<li><span class="math inline">\(s_{100}\)</span> &amp; <span
+class="math inline">\(s_{001}\)</span> are approaching to each
+other</li>
+</ul>
+<p>Then, <span class="math inline">\(h_{-1}\)</span> and <span
+class="math inline">\(h_1\)</span> are same, which is desired</p>
+<h2 id="bang-bang-cdr">Bang-Bang CDR</h2>
+<blockquote>
+<p>alexander PD or !!PD</p>
+</blockquote>
+<p>The alexander PD locks that edge clock (clkedge) is located at zero
+crossings of the data. The <span class="math inline">\(h_{-0.5}\)</span>
+and <span class="math inline">\(h_{0.5}\)</span> are
+<strong>equal</strong> at the <em>lock point,</em> where the <span
+class="math inline">\(h_{-0.5}\)</span> and <span
+class="math inline">\(h_{0.5}\)</span> are the cursors located at -0.5
+UI and 0.5 UI.</p>
+<blockquote>
+<p>Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive
+Equalizer and Multi-Level Baud-Rate Phase Detector" [<a
+target="_blank" rel="noopener" href="https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf">https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf</a>]</p>
+<p>Shahramian, Shayan, "Adaptive Decision Feedback Equalization With
+Continuous-time Infinite Impulse Response Filters" [<a
+target="_blank" rel="noopener" href="https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf">https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf</a>]</p>
+<p>MENIN, DAVIDE, "Modelling and Design of High-Speed Wireline
+Transceivers with Fully-Adaptive Equalization" [<a
+target="_blank" rel="noopener" href="https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf">https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf</a>]</p>
+</blockquote>
+<h2 id="reference">reference</h2>
+<p>Stojanovic, Vladimir &amp; Ho, A. &amp; Garlepp, B. &amp; Chen, Fred
+&amp; Wei, J. &amp; Alon, Elad &amp; Werner, C. &amp; Zerbe, J. &amp;
+Horowitz, M.A.. (2004). Adaptive equalization and data recovery in a
+dual-mode (PAM2/4) serial link transceiver. IEEE Symposium on VLSI
+Circuits, Digest of Technical Papers. 348 - 351.
+10.1109/VLSIC.2004.1346611.</p>
+<p>A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design
+Optimization for Wireline SerDes Applications," in <em>IEEE Transactions
+on Circuits and Systems I: Regular Papers</em>, doi:
+10.1109/TCSI.2023.3328807.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +554,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -729,7 +1057,7 @@ pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -821,7 +1149,7 @@ target="_blank" rel="noopener" href="https://www.analog.com/en/resources/technic
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -999,7 +1327,7 @@ target="_blank" rel="noopener" href="https://youtu.be/uwRpP20Lprc?si=SGPta86jRCd
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1034,6 +1362,33 @@ components.</p>
 <h2 id="reference-spurs">reference spurs</h2>
 <blockquote>
 <p>https://www.linkedin.com/posts/chembiyan-t-0b34b910_pll-rfdesign-circuits-activity-7111435571448713216-9jng?utm_source=share&amp;utm_medium=member_desktop</p>
+</blockquote>
+<h2 id="charge-pump-mismatch">charge pump mismatch</h2>
+<p>Matching of the CP currents is also a critical part of PLL design.
+Leakage and mismatch in the CP will lead to <em>deterministic
+jitter</em> on the PLL output</p>
+<p>Any difference between the charging and discharging currents can
+cause static phase offset as well as <em>dynamic jitter</em>, known as
+<strong>reference spur</strong></p>
+<p>peak2peak deterministic jitter <span class="math display">\[
+\text{DJ}_\text{PP} = \frac{\phi_{PP}}{2\pi}T_{osc}
+\]</span></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kvco = <span class="number">1e9</span>;</span><br><span class="line">Icp = <span class="number">600e-6</span>;</span><br><span class="line">deltaI_Icp = <span class="number">3e-2</span>;</span><br><span class="line">deltaI = deltaI_Icp*Icp;</span><br><span class="line">ton = <span class="number">100e-12</span>;</span><br><span class="line">C2 =<span class="number">0.5e-12</span>;</span><br><span class="line">Tosc = <span class="number">1</span>/<span class="number">15e9</span>;</span><br><span class="line"></span><br><span class="line">DJpp = kvco*deltaI*ton^<span class="number">2</span>/(<span class="number">2</span>*C2)*(deltaI_Icp + <span class="number">1</span>)*Tosc</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>W. Rhee, "Design of high-performance CMOS charge pumps in
+phase-locked loops," <em>1999 IEEE International Symposium on Circuits
+and Systems (ISCAS)</em>, Orlando, FL, USA, 1999, pp. 545-548 vol.2 [<a
+target="_blank" rel="noopener" href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=3006edc15fdef2e71674d4170c10c62fd69f96a3">https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=3006edc15fdef2e71674d4170c10c62fd69f96a3</a>]</p>
+<p>Rhee, W. and Yu, Z., 2024. <em>Phase-Locked Loops: System
+Perspectives and Circuit Design Aspects</em>. John Wiley &amp; Sons.</p>
+<p>H. M. S. Fazeel, L. Raghavan, C. Srinivasaraman and M. Jain,
+"Reduction of Current Mismatch in PLL Charge Pump," <em>2009 IEEE
+Computer Society Annual Symposium on VLSI</em>, Tampa, FL, USA, 2009,
+pp. 7-12, doi: 10.1109/ISVLSI.2009.45.</p>
+<p>H. -G. Ko, W. Bae, G. -S. Jeong and D. -K. Jeong, "Reference Spur
+Reduction Techniques for a Phase-Locked Loop," in <em>IEEE Access</em>,
+vol. 7, pp. 38035-38043, 2019 [<a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8671476">https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8671476</a>]</p>
 </blockquote>
 <h2 id="reference">reference</h2>
 <p>Timing 101 #6: The Case of the Spurious Phase Noise Part I, Silicon
@@ -1108,7 +1463,7 @@ target="_blank" rel="noopener" href="https://community.silabs.com/s/share/a5U1M0
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1331,7 +1686,7 @@ target="_blank" rel="noopener" href="https://github.com/kevjzheng/JLSD">https://
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1832,7 +2187,7 @@ shorter but retaining the <em>same total power</em></li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2553,7 +2908,7 @@ target="_blank" rel="noopener" href="https://ctms.engin.umich.edu/CTMS/index.php
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2799,7 +3154,7 @@ target="_blank" rel="noopener" href="https://web.archive.org/web/20131016055332/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2822,266 +3177,6 @@ target="_blank" rel="noopener" href="https://web.archive.org/web/20131016055332/
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/16/ahuja/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/16/ahuja/" class="post-title-link" itemprop="url">ahuja frequency compensation</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-01-16 23:37:59" itemprop="dateCreated datePublished" datetime="2024-01-16T23:37:59+00:00">2024-01-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>This <strong>cascode compensation</strong> topology is popularly
-known as <strong>ahuja compensation</strong></p>
-<p>The cause of the positive zero is the <em>feedforward current through
-<span class="math inline">\(C_m\)</span></em>.</p>
-<p>To abolish this zero, we have to cut the feedforward path and create
-a unidirectional feedback through <span
-class="math inline">\(C_m\)</span>.</p>
-<ol type="1">
-<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
-effect of the feedforward current.</p></li>
-<li><p>Another approach uses a current buffer cascode to pass the
-small-signal feedback current but cut the feedforward current</p></li>
-</ol>
-<blockquote>
-<p>People name this approach after the author <em>Ahuja</em></p>
-</blockquote>
-<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
-are severa</p>
-<ul>
-<li><p>better PSRR</p></li>
-<li><p>higher unity-gain bandwidth using smaller compensation
-capacitor</p></li>
-<li><p>ability to cope better with heavy capacitive and resistive
-loads</p></li>
-</ul>
-<h2 id="millers-approximation">Miller's approximation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
-alt="image-20240130224043511" /></p>
-<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span> Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{C_c}\)</span></p>
-<h3 id="equivalent-cap">Equivalent cap</h3>
-<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
-R_o\)</span> <span class="math display">\[
-I_\text{c,in} = (v_i - v_o)sC_c
-\]</span> Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
-&amp; = v_i s (1+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
-A_vC_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
-&amp; = v_o s (1+\frac{1}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}=
-(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="cascode-compensation">cascode compensation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240817193513058.png"
-alt="image-20240817193513058" /></p>
-<p><img src="/2024/01/16/ahuja/image-20240817201727109.png"
-alt="image-20240817201727109" /></p>
-<p>Of course, , if the capacitance at the gate of <span
-class="math inline">\(M_1\)</span> is taken into account, pole splitting
-is less pronounced.</p>
-<hr />
-<p><strong>including <span
-class="math inline">\(r_\text{o2}\)</span></strong></p>
-<p><img src="/2024/01/16/ahuja/image-20240819202642809.png"
-alt="image-20240819202642809" /> <span class="math display">\[
-\frac{V_{out}}{I_{in}} \approx
-\frac{-g_{m1}R_SR_L(g_{m2}+C_Cs)}{\frac{R_S+r_\text{o2}}{r_\text{o2}}R_LC_LC_Cs^2+g_{m1}g_{m2}R_LR_SC_Cs+g_{m2}}
-\]</span> The poles as</p>
-<p><span class="math display">\[\begin{align}
-\omega_{p1} &amp;\approx  \frac{1}{g_{m1}R_LR_SC_c} \\
-\omega_{p2} &amp;\approx
-\frac{g_{m2}R_Sg_{m1}}{C_L}\frac{r_\text{o2}}{R_S+r_\text{o2}}
-\end{align}\]</span></p>
-<p>and zero is not affected, which is <span
-class="math inline">\(\omega_z =\frac{g_{m2}}{C_C}\)</span></p>
-<p>the above model simulation result is shown below</p>
-<p><img src="/2024/01/16/ahuja/image-20240819221653262.png"
-alt="image-20240819221653262" /></p>
-<blockquote>
-<p>the zero is located between two poles</p>
-</blockquote>
-<p>take into the capacitance at the gate of <span
-class="math inline">\(M_1\)</span> and all other second-order effect</p>
-<p><img src="/2024/01/16/ahuja/image-20240819222727276.png"
-alt="image-20240819222727276" /></p>
-<h2 id="intuitive-analysis-of-zero">intuitive analysis of zero</h2>
-<p>miller compensation</p>
-<ul>
-<li>zero in the <strong>right</strong> half plane <span
-class="math display">\[
-g_\text{m1}V_P = sC_c V_P
-\]</span></li>
-</ul>
-<p>cascode compensation</p>
-<ul>
-<li>zero in the <strong>left</strong> half plane <span
-class="math display">\[
-g_\text{m2}V_X = - sC_c V_X
-\]</span></li>
-</ul>
-<p><img src="/2024/01/16/ahuja/zero_loc.drawio.svg"
-alt="zero_loc.drawio" /></p>
-<h2 id="how-to-mitigate-impact-of-zero">How to Mitigate Impact of
-Zero</h2>
-<p><img src="/2024/01/16/ahuja/cascode_compensation.PNG"
-alt="cascode_compensation" /></p>
-<p><strong>dominant pole</strong> <span class="math display">\[
-\omega_\text{p,d} = \frac {1} {R_\text{eq}g_\text{m9}R_{L}C_{c}}
-\]</span> <strong>first nondominant pole</strong> <span
-class="math display">\[
-\omega_\text{p,nd} = \frac {g_\text{m4}R_\text{eq}g_\text{m9}} {C_L}
-\]</span> <strong>zero</strong> <span class="math display">\[
-\omega_\text{z} = (g_\text{m4}R_\text{eq})(\frac {g_\text{m9}} {C_c})
-\]</span> a much greater magnitude than <span
-class="math inline">\(g_\text{m9}/C_C\)</span></p>
-<blockquote>
-<p><strong>Lectures</strong></p>
-<p>EE 240B: Advanced Analog Circuit Design, Prof. Bernhard E. Boser [<a
-target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf">OTA
-II, Multi-Stage</a>]</p>
-<p><strong>Papers</strong></p>
-<p>B. K. Ahuja, "An improved frequency compensation technique for CMOS
-operational amplifiers," in IEEE Journal of Solid-State Circuits, vol.
-18, no. 6, pp. 629-633, Dec. 1983, doi: 10.1109/JSSC.1983.1052012.</p>
-<p>D. B. Ribner and M. A. Copeland, "Design techniques for cascoded CMOS
-op amps with improved PSRR and common-mode input range," in IEEE Journal
-of Solid-State Circuits, vol. 19, no. 6, pp. 919-925, Dec. 1984, doi:
-10.1109/JSSC.1984.1052246.</p>
-<p>Abo, Andrew &amp; Gray, Paul. (1999). A 1.5V, 10-bit, 14MS/s CMOS
-Pipeline Analog-to-Digital Converter.</p>
-<p><strong>Book's chapters</strong></p>
-<p>Design of analog CMOS integrated circuits, Behzad Razavi</p>
-<ul>
-<li>10.5 Compensation of Two-Stage Op Amps</li>
-<li>10.7 Other Compensation Techniques</li>
-</ul>
-<p>Analog Design Essentials, Willy M.C. Sansen</p>
-<ul>
-<li>chapter #5 Stability of operational amplifiers - Compensation of
-positive zero</li>
-</ul>
-<p>Analysis and Design of Analog Integrated Circuits 5th Edition, Paul
-R. Gray, Paul J. Hurst, Stephen H. Lewis, Robert G. Meyer</p>
-<ul>
-<li>9.4.3 Two-Stage MOS Amplifier Compensation</li>
-</ul>
-<p>CMOS Analog Circuit Design 3rd Edition, Phillip E. Allen, Douglas R.
-Holberg</p>
-<ul>
-<li>6.2.2 Miller Compensation of the Two-Stage Op Amp</li>
-</ul>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
-Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
-pp. 629-633, Dec. 1983.</p>
-<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
-IEEE International Symposium on Radio-Frequency Integration Technology,
-2009.</p>
-<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
-CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
-594, May 1995.</p>
-<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
-op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
-Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
-10.1109/MWSCAS.2011.6026315.</p>
-<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
-Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
-International Conference on Electronics, Circuits and Systems, 2006, pp.
-264-267, doi: 10.1109/ICECS.2006.379776.</p>
-<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
-compensation over Miller compensation in two-stage operational
-amplifiers," Proceeding of the 13th international symposium on Low power
-electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
-283-288, doi: 10.1145/1393921.1393995.</p>
-<p>Stabilizing a 2-Stage Amplifier URL:<a
-target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
 
       
     </div>

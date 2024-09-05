@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,6 +181,194 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/22/spectre-case/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/04/22/spectre-case/" class="post-title-link" itemprop="url">DSPF Options</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-04-22 10:53:10" itemprop="dateCreated datePublished" datetime="2023-04-22T10:53:10+00:00">2023-04-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="case-sensitivity">Case Sensitivity</h3>
+<table>
+<thead>
+<tr class="header">
+<th><strong>netlist format</strong></th>
+<th><strong>default option</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectre netlist</td>
+<td><em>case sensitive</em></td>
+</tr>
+<tr class="even">
+<td>dspf format</td>
+<td><em>case insensitive</em></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>For a <strong>dspf format</strong>, it will be treated as a <em>spice
+netlist format</em>, which is <em>by default case insensitive</em></p>
+</blockquote>
+<p>Pay attention to <em>VerilogIn</em> block, which may contain upper
+case / lower case net name, e.g NET1 and net1.</p>
+<p>The extracted DSPF using extraction tool also contain NET1 and net1,
+which <strong>shall not</strong> be shorted together.</p>
+<p><img src="/2023/04/22/spectre-case/image-20230422225227022.png"
+alt="image-20230422225227022" /></p>
+<h3 id="port-order">Port Order</h3>
+<blockquote>
+<p>If you use <code>.dspf_include</code>, the following rules apply:</p>
+<ul>
+<li>The subcircuit description is taken from the DSPF file even if the
+same subcircuit description is available in the schematic netlist.</li>
+<li>Depending on the <code>port_order</code> option, the port order of
+the subcircuit definition is taken from the pre-layout schematic netlist
+or from the DSPF file subcircuit definition, as shown below.
+<ul>
+<li><code>port_order=sch</code> – (Default). The port order is taken
+from schematic subcircuit definition. The same port number and names are
+required. If the schematic subcircuit definition is not available, a
+warning is issued in the log file, and DSPF port order is used.</li>
+<li><code>port_order=spf</code> – The port order is taken from the DSPF
+subcircuit definition.</li>
+</ul></li>
+</ul>
+</blockquote>
+<p><strong>SPICE_SUBCKT_FILE</strong> of StarRC</p>
+<p>The StarRC tool reads the files specified by the
+<em>SPICE_SUBCKT_FILE</em> command to obtain <strong>port ordering
+information</strong>. The files control the port ordering of the top
+cell as well. The port order and the port list members read from the
+<strong>.subckt</strong> for a skip cell are preserved in the output
+netlist.</p>
+<blockquote>
+<p>The file usually is the <em>cdl netlist</em> of extracted cell, this
+way, port order is not problem</p>
+</blockquote>
+<p><strong>CDF termOrder</strong></p>
+<p><img src="/2023/04/22/spectre-case/image-20230423005204734.png"
+alt="image-20230423005204734" /></p>
+<h4 id="dspf-same-order">DSPF same order</h4>
+<p><strong>DSPF</strong></p>
+<p><img src="/2023/04/22/spectre-case/image-20230423005700599.png"
+alt="image-20230423005700599" /></p>
+<p><strong>input.scs</strong></p>
+<p><img src="/2023/04/22/spectre-case/image-20230423005754571.png"
+alt="image-20230423005754571" /></p>
+<p><img src="/2023/04/22/spectre-case/image-20230423010050512.png"
+alt="image-20230423010050512" /></p>
+<h4 id="different-order">different order</h4>
+<p>manual change DSPF's pin order shown as below</p>
+<p><img src="/2023/04/22/spectre-case/image-20230423010229253.png"
+alt="image-20230423010229253" /></p>
+<h4 id="port_ordersch">port_order=sch</h4>
+<p><em>dspf port is mapping to schematic by name</em>, and the
+simulation result is right</p>
+<p><img src="/2023/04/22/spectre-case/image-20230423011926424.png"
+alt="image-20230423011926424" /></p>
+<h5 id="port_orderspf">port_order=spf</h5>
+<p>dspf pin order is retained, and <strong>no mapping</strong> between
+spectre netlist and dspf.</p>
+<p>The simulation result is wrong</p>
+<p><img src="/2023/04/22/spectre-case/image-20230423012443314.png"
+alt="image-20230423012443314" /></p>
+<blockquote>
+<p>bus_delim="_ &lt;&gt;"</p>
+<p>The way this works is that the first part of <em>bus_delim</em> is
+the "schematic" delimiter (i.e. what's in the spectre netlist), and the
+other part is the DSPF delimiter</p>
+</blockquote>
+<h3 id="reference">reference</h3>
+<p>Article (20502176) Title: How does Spectre understand case-sensitive
+net names when using various post-layout netlists such as dspf,
+av_extracted view, or smart view? URL: <a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fthoEAA">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fthoEAA</a></p>
+<p>spf in cadence <a
+target="_blank" rel="noopener" href="https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/31326/spf-in-cadence/1342278#1342278">https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/31326/spf-in-cadence/1342278#1342278</a></p>
+<p>Spectre Tech Tips: Using DSPF Post-Layout Netlists in Spectre Circuit
+Simulator - Analog/Custom Design - Cadence Blogs - Cadence Community <a
+target="_blank" rel="noopener" href="https://shar.es/afO6e1">https://shar.es/afO6e1</a></p>
+<p>StarRC™ User Guide and Command Reference Version O-2018.06, June
+2018</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -226,7 +414,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -454,7 +642,7 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -573,7 +761,7 @@ target="_blank" rel="noopener" href="https://anysilicon.com/the-ultimate-guide-t
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -781,7 +969,7 @@ target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAtt
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -870,7 +1058,7 @@ during synthesis</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -961,7 +1149,7 @@ alt="image-20230129223248655" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1054,7 +1242,7 @@ alt="image-20230114220458438" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1381,7 +1569,7 @@ McGraw-Hill, 2017.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1415,7 +1603,8 @@ target="_blank" rel="noopener" href="https://www.seas.ucla.edu/brweb/papers/Jour
 <p><span class="math display">\[
 R_{eq} = \frac{1}{f_sC}
 \]</span></p>
-<p><img src="/2023/01/01/insight/FeuLj.png" alt="FeuLj.png" /></p>
+<p><img src="/2023/01/01/insight/image-20240905202145206.png"
+alt="image-20240905202145206" /></p>
 <h2 id="dibl-gidl">DIBL &amp; GIDL</h2>
 <h3 id="drain-induced-barrier-lowering-dibl">drain-induced barrier
 lowering (DIBL)</h3>
@@ -2560,7 +2749,7 @@ target="_blank" rel="noopener" href="https://www.edn.com/burn-in-101/">link</a>]
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2586,224 +2775,6 @@ target="_blank" rel="noopener" href="https://www.edn.com/burn-in-101/">link</a>]
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
 <p><a
 target="_blank" rel="noopener" href="https://superuser.com/q/211798">https://superuser.com/q/211798</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/14/doublet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/14/doublet/" class="post-title-link" itemprop="url">Pole-Zero Doublet</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-12-14 23:27:20" itemprop="dateCreated datePublished" datetime="2022-12-14T23:27:20+00:00">2022-12-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 10:13:16" itemprop="dateModified" datetime="2024-09-05T10:13:16+00:00">2024-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Mismatch between the pole and zero frequencies leads to the
-<strong>“doublet problem”</strong>. If the pole and the zero do not
-exactly coincide, we say that they constitute a
-<strong>doublet</strong></p>
-<blockquote>
-<p>Problem 10.19 in Razavi 2nd book</p>
-</blockquote>
-<p>Suppose the open-loop transfer function of a two-stage op amp is
-expressed as <span class="math display">\[
-H_{open}(s)=\frac{A_0(1+\frac{s}{\omega_z})}{\left( 1+
-\frac{s}{\omega_{p1}}\right)\left( 1+ \frac{s}{\omega_{p2}}\right)}
-\]</span> Ideally, <span
-class="math inline">\(\omega_z=\omega_2\)</span> and the feedback
-circuit exhibits a first-order behavior, i.e., its step response
-contains a single time constant and no overshoot.</p>
-<p>Then the transfer function of the amplifier in a <em>unity-gain
-feedback loop</em> is given by <span
-class="math display">\[\begin{align}
-H_{closed}(s)
-&amp;=\frac{A_0\left(1+\frac{s}{\omega_z}\right)}{\frac{s^2}{\omega_{p1}\omega_{p2}}+\left(
-\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1} \\
-&amp;=\frac{\frac{A_0}{A_0+1}(1+\frac{s}{\omega_z})}{\frac{s^2}{\omega_{p1}\omega_{p2}(A_0+1)}+\left(
-\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)\frac{s}{A_0+1}+1}
-\end{align}\]</span></p>
-<hr />
-<p>The denominator part of <span
-class="math inline">\(H_{closed}(s)\)</span> is <span
-class="math display">\[
-D(s) = \frac{s^2}{\omega_{p1}\omega_{p2}}+\left( \frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1
-\]</span></p>
-<p>Assuming two poles (<span class="math inline">\(\omega_{pA}
-\ll\omega_{pB}\)</span>) of <span
-class="math inline">\(H_{closed}(s)\)</span> are widely spaced, <span
-class="math display">\[\begin{align}
-D(s) &amp;= \left( 1+ \frac{s}{\omega_{pA}}\right)\left( 1+
-\frac{s}{\omega_{pB}}\right)\\
-&amp;\cong \frac{s^2}{\omega_{pA}\omega_{pB}}+\frac{s}{\omega_{pA}} + 1
-\end{align}\]</span></p>
-<p>Thus, the two poles of the closed-loop transfer function of system
-are <span class="math display">\[\begin{align}
-\omega_{pA} &amp;= \frac{A_0+1}{\frac{1}{\omega_{p1}} +
-\frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}} \\
-&amp;=  \frac{(A_0+1)\omega_{p1} \omega_{p2}}{\omega_{p1} + \omega_{p2}
-+ \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}} \\
-\omega_{pB} &amp;= \omega_{p1} + \omega_{p2} +
-\frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}
-\end{align}\]</span></p>
-<hr />
-<p><strong>Assuming</strong> <span class="math inline">\(\omega_z \simeq
-\omega_{p2}\)</span> and <span class="math inline">\(\omega_{p2}\ll
-(1+A_0)\omega_{p1}\)</span> <span class="math display">\[
-\omega_{pA} = \omega_{p2}
-\]</span> and <span class="math display">\[
-\omega_{pB} = (1+A_0)\omega_{p1}
-\]</span> The closed-loop transfer function is <span
-class="math display">\[
-H_{closed}(s) =
-\frac{\frac{A_0}{A_0+1}\left(1+\frac{s}{\omega_z}\right)}{\left(1+\frac{s}{(1+A_0)\omega_{p1}}\right)\left(
-1+\frac{s}{\omega_{p2}} \right)}
-\]</span></p>
-<hr />
-<p>The step response of the closed-loop amplifier</p>
-<p>Consider the Laplace transform function of step response, <span
-class="math inline">\(X(s)=\frac{1}{s}\)</span> <span
-class="math display">\[
-Y(s)=\frac{1}{s}\times H_{closed}(s)
-\]</span> Thus, the <strong>small-signal step response</strong> of the
-closed-loop amplifier is <span class="math display">\[
-y(t)=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t)
-\]</span> Since, <span class="math inline">\(\omega_{p2}\ll
-(1+A_0)\omega_{p1}\)</span>. Therefore, rewrite the <span
-class="math inline">\(y(t)\)</span> <span class="math display">\[
-y(t)\cong
-\frac{A_0}{A_0+1}\left[1-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t)
-\]</span> The step response contains an exponential term of the form
-<span
-class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}\)</span>.
-This is an important result, indicating that if the zero does not
-exactly cancel the pole, the step response exhibits an exponential with
-an amplitude proportional to <span
-class="math inline">\(\left(1-\frac{\omega_{p2}}{\omega_z}\right)\)</span>,
-which depends on the mismatch between <span
-class="math inline">\(\omega_z\)</span> and <span
-class="math inline">\(\omega_{p2}\)</span> and a time constant <span
-class="math inline">\(\tau\)</span> of <span
-class="math inline">\(\frac{1}{\omega_{p2}}\)</span> or <span
-class="math inline">\(\frac{1}{\omega_{z}}\)</span></p>
-<h3 id="perfect-pole-zero-cancellation">perfect pole-zero
-cancellation</h3>
-<p><span class="math display">\[\begin{align}
-y(t)
-&amp;=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}
-\right]u(t) \\
-&amp;= \frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}\right]u(t)
-\end{align}\]</span></p>
-<hr />
-<p><img src="/2022/12/14/doublet/image-20230108233523345.png"
-alt="image-20230108233523345" /></p>
-<p><img src="/2022/12/14/doublet/image-20230108234123707.png"
-alt="image-20230108234123707" /></p>
-<blockquote>
-<p>The zero comes from the mirror node</p>
-<p>Thanks to unity gain buffer, zero is alleviated for <span
-class="math inline">\(C_c\)</span></p>
-</blockquote>
-<h3 id="reference">reference</h3>
-<p>Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology,
-EE 240B – Spring 2018, Advanced Analog Integrated Circuits <a
-target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf</a></p>
-<p>Eric Chang, Prof. Elad Alon EE240B HW3 <a
-target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf</a>
-and <a
-target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf">https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf</a></p>
-<p>Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ),
-Operational Amplifiers <a
-target="_blank" rel="noopener" href="http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf">http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf</a></p>
-<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
-frequency response and settling time of operational amplifiers," in IEEE
-Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
-doi: 10.1109/JSSC.1974.1050527.</p>
-<p>B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between
-frequency response and settling time of operational amplifiers," in IEEE
-Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974,
-doi: 10.1109/JSSC.1974.1050527.</p>
-<p>P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a
-tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17,
-no. 6, pp. 969-982, Dec. 1982, doi: 10.1109/JSSC.1982.1051851.</p>
-<p>SERGIO FRANCO, Demystifying pole-zero doublets URL:<a
-target="_blank" rel="noopener" href="https://www.edn.com/demystifying-pole-zero-doublets/">https://www.edn.com/demystifying-pole-zero-doublets/</a></p>
 
       
     </div>

@@ -26,6 +26,7 @@ $$
 R_{eq} = \frac{1}{f_sC}
 $$
 
+![FeuLj.png](insight/FeuLj.png)
 
 
 ## DIBL & GIDL

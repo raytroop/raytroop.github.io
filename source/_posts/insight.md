@@ -8,6 +8,14 @@ mathjax: true
 ---
 
 
+## 4-fin grid rules
+
+*TODO* &#128197;
+
+MATCHING_GRID, FB1_AN or Device_Sen
+
+
+
 ## charge pump
 
 *TODO* &#128197;

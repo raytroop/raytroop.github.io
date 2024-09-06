@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -181,491 +181,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/16/ahuja/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/16/ahuja/" class="post-title-link" itemprop="url">ahuja frequency compensation</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-01-16 23:37:59" itemprop="dateCreated datePublished" datetime="2024-01-16T23:37:59+00:00">2024-01-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/analog/" itemprop="url" rel="index"><span itemprop="name">analog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>This <strong>cascode compensation</strong> topology is popularly
-known as <strong>ahuja compensation</strong></p>
-<p>The cause of the positive zero is the <em>feedforward current through
-<span class="math inline">\(C_m\)</span></em>.</p>
-<p>To abolish this zero, we have to cut the feedforward path and create
-a unidirectional feedback through <span
-class="math inline">\(C_m\)</span>.</p>
-<ol type="1">
-<li><p>Adding a resistor(nulling resistor) is one way to mitigate the
-effect of the feedforward current.</p></li>
-<li><p>Another approach uses a current buffer cascode to pass the
-small-signal feedback current but cut the feedforward current</p></li>
-</ol>
-<blockquote>
-<p>People name this approach after the author <em>Ahuja</em></p>
-</blockquote>
-<p>The benefits of <em>Ahuja</em> compensation over Miller compensation
-are severa</p>
-<ul>
-<li><p>better PSRR</p></li>
-<li><p>higher unity-gain bandwidth using smaller compensation
-capacitor</p></li>
-<li><p>ability to cope better with heavy capacitive and resistive
-loads</p></li>
-</ul>
-<h2 id="millers-approximation">Miller's approximation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240130224043511.png"
-alt="image-20240130224043511" /></p>
-<h3 id="right-half-plane-zero">Right-Half-Plane Zero</h3>
-<p><span class="math display">\[
-\left[(v_i - v_o)sC_c - g_m v_i\right]R_o = v_o
-\]</span> Then <span class="math display">\[
-\frac{v_o}{v_i} = -g_mR_o\frac{1-s\frac{C_c}{g_m}}{1+sR_oC_c}
-\]</span> right-half-plane Zero <span class="math inline">\(\omega _z =
-\frac{g_m}{C_c}\)</span></p>
-<h3 id="equivalent-cap">Equivalent cap</h3>
-<p>The amplifier gain magnitude <span class="math inline">\(A_v = g_m
-R_o\)</span> <span class="math display">\[
-I_\text{c,in} = (v_i - v_o)sC_c
-\]</span> Then <span class="math display">\[\begin{align}
-I_\text{c,in}  &amp;= (v_i + A_v v_i)sC_c \\
-&amp; = v_i s (1+A_v)C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{in,eq}= (1+A_v)C_c\simeq
-A_vC_c\)</span></p>
-<p>Similarly <span class="math display">\[\begin{align}
-I_\text{c,out}  &amp;= (v_o - v_i)sC_c \\
-&amp; = v_o s (1+\frac{1}{A_v})C_c
-\end{align}\]</span></p>
-<p>we get <span class="math inline">\(C_\text{out,eq}=
-(1+\frac{1}{A_v})C_c\simeq C_c\)</span></p>
-<h2 id="cascode-compensation">cascode compensation</h2>
-<p><img src="/2024/01/16/ahuja/image-20240817193513058.png"
-alt="image-20240817193513058" /></p>
-<p><img src="/2024/01/16/ahuja/image-20240817201727109.png"
-alt="image-20240817201727109" /></p>
-<p>Of course, , if the capacitance at the gate of <span
-class="math inline">\(M_1\)</span> is taken into account, pole splitting
-is less pronounced.</p>
-<hr />
-<p><strong>including <span
-class="math inline">\(r_\text{o2}\)</span></strong></p>
-<p><img src="/2024/01/16/ahuja/image-20240819202642809.png"
-alt="image-20240819202642809" /> <span class="math display">\[
-\frac{V_{out}}{I_{in}} \approx
-\frac{-g_{m1}R_SR_L(g_{m2}+C_Cs)}{\frac{R_S+r_\text{o2}}{r_\text{o2}}R_LC_LC_Cs^2+g_{m1}g_{m2}R_LR_SC_Cs+g_{m2}}
-\]</span> The poles as</p>
-<p><span class="math display">\[\begin{align}
-\omega_{p1} &amp;\approx  \frac{1}{g_{m1}R_LR_SC_c} \\
-\omega_{p2} &amp;\approx
-\frac{g_{m2}R_Sg_{m1}}{C_L}\frac{r_\text{o2}}{R_S+r_\text{o2}}
-\end{align}\]</span></p>
-<p>and zero is not affected, which is <span
-class="math inline">\(\omega_z =\frac{g_{m2}}{C_C}\)</span></p>
-<p>the above model simulation result is shown below</p>
-<p><img src="/2024/01/16/ahuja/image-20240819221653262.png"
-alt="image-20240819221653262" /></p>
-<blockquote>
-<p>the zero is located between two poles</p>
-</blockquote>
-<p>take into the capacitance at the gate of <span
-class="math inline">\(M_1\)</span> and all other second-order effect</p>
-<p><img src="/2024/01/16/ahuja/image-20240819222727276.png"
-alt="image-20240819222727276" /></p>
-<h2 id="intuitive-analysis-of-zero">intuitive analysis of zero</h2>
-<p>miller compensation</p>
-<ul>
-<li>zero in the <strong>right</strong> half plane <span
-class="math display">\[
-g_\text{m1}V_P = sC_c V_P
-\]</span></li>
-</ul>
-<p>cascode compensation</p>
-<ul>
-<li>zero in the <strong>left</strong> half plane <span
-class="math display">\[
-g_\text{m2}V_X = - sC_c V_X
-\]</span></li>
-</ul>
-<p><img src="/2024/01/16/ahuja/zero_loc.drawio.svg"
-alt="zero_loc.drawio" /></p>
-<h2 id="how-to-mitigate-impact-of-zero">How to Mitigate Impact of
-Zero</h2>
-<p><img src="/2024/01/16/ahuja/cascode_compensation.PNG"
-alt="cascode_compensation" /></p>
-<p><strong>dominant pole</strong> <span class="math display">\[
-\omega_\text{p,d} = \frac {1} {R_\text{eq}g_\text{m9}R_{L}C_{c}}
-\]</span> <strong>first nondominant pole</strong> <span
-class="math display">\[
-\omega_\text{p,nd} = \frac {g_\text{m4}R_\text{eq}g_\text{m9}} {C_L}
-\]</span> <strong>zero</strong> <span class="math display">\[
-\omega_\text{z} = (g_\text{m4}R_\text{eq})(\frac {g_\text{m9}} {C_c})
-\]</span> a much greater magnitude than <span
-class="math inline">\(g_\text{m9}/C_C\)</span></p>
-<blockquote>
-<p><strong>Lectures</strong></p>
-<p>EE 240B: Advanced Analog Circuit Design, Prof. Bernhard E. Boser [<a
-target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf">OTA
-II, Multi-Stage</a>]</p>
-<p><strong>Papers</strong></p>
-<p>B. K. Ahuja, "An improved frequency compensation technique for CMOS
-operational amplifiers," in IEEE Journal of Solid-State Circuits, vol.
-18, no. 6, pp. 629-633, Dec. 1983, doi: 10.1109/JSSC.1983.1052012.</p>
-<p>D. B. Ribner and M. A. Copeland, "Design techniques for cascoded CMOS
-op amps with improved PSRR and common-mode input range," in IEEE Journal
-of Solid-State Circuits, vol. 19, no. 6, pp. 919-925, Dec. 1984, doi:
-10.1109/JSSC.1984.1052246.</p>
-<p>Abo, Andrew &amp; Gray, Paul. (1999). A 1.5V, 10-bit, 14MS/s CMOS
-Pipeline Analog-to-Digital Converter.</p>
-<p><strong>Book's chapters</strong></p>
-<p>Design of analog CMOS integrated circuits, Behzad Razavi</p>
-<ul>
-<li>10.5 Compensation of Two-Stage Op Amps</li>
-<li>10.7 Other Compensation Techniques</li>
-</ul>
-<p>Analog Design Essentials, Willy M.C. Sansen</p>
-<ul>
-<li>chapter #5 Stability of operational amplifiers - Compensation of
-positive zero</li>
-</ul>
-<p>Analysis and Design of Analog Integrated Circuits 5th Edition, Paul
-R. Gray, Paul J. Hurst, Stephen H. Lewis, Robert G. Meyer</p>
-<ul>
-<li>9.4.3 Two-Stage MOS Amplifier Compensation</li>
-</ul>
-<p>CMOS Analog Circuit Design 3rd Edition, Phillip E. Allen, Douglas R.
-Holberg</p>
-<ul>
-<li>6.2.2 Miller Compensation of the Two-Stage Op Amp</li>
-</ul>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p>B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS
-Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6,
-pp. 629-633, Dec. 1983.</p>
-<p>U. Dasgupta, "Issues in "Ahuja" frequency compensation technique",
-IEEE International Symposium on Radio-Frequency Integration Technology,
-2009.</p>
-<p>R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage
-CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591-
-594, May 1995.</p>
-<p>A. Garimella and P. M. Furth, "Frequency compensation techniques for
-op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International
-Midwest Symposium on Circuits and Systems (MWSCAS), 2011, pp. 1-4, doi:
-10.1109/MWSCAS.2011.6026315.</p>
-<p>H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for
-Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE
-International Conference on Electronics, Circuits and Systems, 2006, pp.
-264-267, doi: 10.1109/ICECS.2006.379776.</p>
-<p>H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode
-compensation over Miller compensation in two-stage operational
-amplifiers," Proceeding of the 13th international symposium on Low power
-electronics and design (ISLPED '08), Bangalore, India, 2008, pp.
-283-288, doi: 10.1145/1393921.1393995.</p>
-<p>Stabilizing a 2-Stage Amplifier URL:<a
-target="_blank" rel="noopener" href="https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/">https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/06/2nd-sys/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Guo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KNOW-HOW">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/06/2nd-sys/" class="post-title-link" itemprop="url">Second-Order System</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-01-06 10:43:42" itemprop="dateCreated datePublished" datetime="2024-01-06T10:43:42+00:00">2024-01-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/dsp/" itemprop="url" rel="index"><span itemprop="name">dsp</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="overview">overview</h2>
-<p><img src="/2024/01/06/2nd-sys/image-20240721172721884.png"
-alt="image-20240721172721884" /></p>
-<p><img src="/2024/01/06/2nd-sys/image-20240629140001275.png"
-alt="image-20240629140001275" /></p>
-<blockquote>
-<p><span class="math inline">\(\omega_d\)</span> called <em>damped
-natural frequency</em></p>
-</blockquote>
-<hr />
-<h2 id="closed-loop-frequency-response">closed loop frequency
-response</h2>
-<p><img src="/2024/01/06/2nd-sys/image-20240629134127219.png"
-alt="image-20240629134127219" /> <span
-class="math display">\[\begin{align}
-A &amp;= \frac{\frac{A_0}{(1+s/\omega_1)(1+s/\omega_2)}}{1+\beta
-\frac{A_0} {(1+s/\omega_1)(1+s/\omega_2)}} \\
-&amp;= \frac{A_0}{1+A_0
-\beta}\frac{1}{\frac{s^2}{\omega_1\omega_2(1+A_0\beta)}+\frac{1/\omega_1+1/\omega_2}{1+A_0\beta}s+1}
-\\
-&amp;\simeq \frac{A_0}{1+A_0
-\beta}\frac{1}{\frac{s^2}{\omega_u\omega_2}+\frac{1}{\omega_u}s+1} \\
-&amp;= \frac{A_0}{1+A_0
-\beta}\frac{\omega_u\omega_2}{s^2+\omega_2s+\omega_u\omega_2}
-\end{align}\]</span></p>
-<p>That is <span class="math inline">\(\omega_n =
-\sqrt{\omega_u\omega_2}\)</span> and <span class="math inline">\(\zeta =
-\frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}\)</span></p>
-<p>where <span class="math inline">\(\omega_u\)</span> is the unity gain
-bandwidth</p>
-<p><img src="/2024/01/06/2nd-sys/image-20240629112429803.png"
-alt="image-20240629112429803" /></p>
-<p>where <span class="math inline">\(f_r\)</span> is <em>resonant
-frequency</em>, <span class="math inline">\(\zeta\)</span> is
-<em>damping ratio</em>, <span class="math inline">\(P_f\)</span>
-<em>maximum peaking</em>, <span class="math inline">\(P_t\)</span> is
-the peak of the first overshoot (step response)</p>
-<p><img src="/2024/01/06/2nd-sys/image-20240629142324982.png"
-alt="image-20240629142324982" /></p>
-<h2 id="damping-factor-phase-margin">damping factor &amp; phase
-margin</h2>
-<ul>
-<li><p>phase margin is defined for <em>open loop</em> system</p></li>
-<li><p>damping factor (<span class="math inline">\(\zeta\)</span>) is
-defined for <em>close loop</em> system</p></li>
-</ul>
-<p>The roughly 90 to 100 times of damping factor (<span
-class="math inline">\(\zeta\)</span>​) is phase margin <span
-class="math display">\[
-\mathrm{PM} = 90\zeta \sim 100\zeta
-\]</span> In order to have a good stable system, we want <span
-class="math inline">\(\zeta &gt; 0.5\)</span> or phase margin more than
-<span class="math inline">\(45^o\)</span></p>
-<p>We can analyze open loop system in a better perspective because it is
-simpler. So, we always use the loop gain analysis to find the phase
-margin and see whether the system is stable or not.</p>
-<h2 id="additional-zero">additional Zero</h2>
-<p><span class="math display">\[\begin{align}
-TF &amp;= \frac{s +\omega_z}{s^2+2\zeta \omega_ns+\omega_n^2} \\
-&amp;= \frac{\omega _z}{\omega _n^2}\cdot \frac{1+s/\omega
-_z}{1+s^2/\omega_n^2+2\zeta s/\omega_n}
-\end{align}\]</span></p>
-<p>Let <span class="math inline">\(s=j\omega\)</span> and omit factor,
-<span class="math display">\[
-A_\text{dB}(\omega) = 10\log[1+(\frac{\omega}{\omega _z})^2] -
-10\log[1+\frac{\omega^4}{\omega_n^4}+\frac{2\omega^2(2\zeta ^2
--1)}{\omega_n^2}]
-\]</span> peaking frequency <span
-class="math inline">\(\omega_\text{peak}\)</span> can be obtained via
-<span class="math inline">\(\frac{d A_\text{dB}(\omega)}{d\omega} =
-0\)</span> <span class="math display">\[
-\omega_\text{peak} = \omega_z \sqrt{\sqrt{(\frac{\omega_n}{\omega_z})^4
-- 2(\frac{\omega_n}{\omega_z})^2(2\zeta ^2-1)+1} - 1}
-\]</span></p>
-<h2 id="settling-time">Settling Time</h2>
-<h3 id="single-pole">single-pole</h3>
-<p><img src="/2024/01/06/2nd-sys/image-20240725204501781.png"
-alt="image-20240725204501781" /></p>
-<p><img src="/2024/01/06/2nd-sys/image-20240725204527121.png"
-alt="image-20240725204527121" /> <span class="math display">\[
-\tau \simeq \frac{1}{\beta \omega_\text{ugb}}
-\]</span></p>
-<p><img src="/2024/01/06/2nd-sys/tau_1pole.drawio.svg"
-alt="tau_1pole.drawio" /></p>
-<h3 id="two-poles">two poles</h3>
-<h4 id="rise-time">Rise Time</h4>
-<blockquote>
-<p>Katsuhiko Ogata, Modern Control Engineering Fifth Edition</p>
-</blockquote>
-<p><img src="/2024/01/06/2nd-sys/image-20240721180718116.png"
-alt="image-20240721180718116" /></p>
-<blockquote>
-<p>For <em>underdamped</em> second order systems, the <em>0% to 100%
-rise time</em> is normally used</p>
-</blockquote>
-<p>For <span class="math inline">\(\text{PM}=70^o\)</span></p>
-<ul>
-<li><span class="math inline">\(\omega_2=3\omega_u\)</span>, that is
-<span class="math inline">\(\omega_n = 1.7\omega_u\)</span>.</li>
-<li><span class="math inline">\(\zeta = 0.87\)</span></li>
-</ul>
-<p>Then <span class="math display">\[
-t_r = \frac{3.1}{\omega_u}
-\]</span></p>
-<h4 id="settling-time-1">Settling Time</h4>
-<blockquote>
-<p>Gene F. Franklin, Feedback Control of Dynamic Systems, 8th
-Edition</p>
-</blockquote>
-<p><img src="/2024/01/06/2nd-sys/image-20240721181956221.png"
-alt="image-20240721181956221" /></p>
-<p><img src="/2024/01/06/2nd-sys/image-20240721182025547.png"
-alt="image-20240721182025547" /></p>
-<p>As we know <span class="math display">\[
-\zeta \omega_n=\frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}\cdot
-\sqrt{\omega_u\omega_2}=\frac{1}{2}\omega_2
-\]</span></p>
-<p>Then <span class="math display">\[
-t_s = \frac{9.2}{\omega_2}
-\]</span></p>
-<p>For <span class="math inline">\(\text{PM}=70^o\)</span>, <span
-class="math inline">\(\omega_2 = 3\omega_u\)</span>, that is <span
-class="math display">\[
-t_s \simeq \frac{3}{\omega_u} \space\space \text{, for PM}=70^o
-\]</span></p>
-<p>For <span class="math inline">\(\text{PM}=45^o\)</span>, <span
-class="math inline">\(\omega_2 = \omega_u\)</span>, that is <span
-class="math display">\[
-t_s \simeq \frac{9.2}{\omega_u} \space\space \text{, for PM}=45^o
-\]</span></p>
-<blockquote>
-<p>Above equation is valid only for <strong>underdamped</strong>, <span
-class="math inline">\(\zeta=\frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}\lt
-1\)</span>, that is <span class="math inline">\(\omega_2\lt
-4\omega_u\)</span></p>
-</blockquote>
-<h2 id="reference">reference</h2>
-<p><em>Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018.
-Feedback Control of Dynamic Systems (8th Edition) (8th. ed.).
-Pearson.</em></p>
-<p>Katsuhiko Ogata, Modern Control Engineering, 5th edition</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -711,7 +226,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -827,7 +342,7 @@ target="_blank" rel="noopener" href="https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSape
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1282,7 +797,7 @@ Pearson.</em></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1550,7 +1065,7 @@ doi: 10.1109/MDT.2003.1232259.</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:55" itemprop="dateModified" datetime="2024-09-05T15:42:55+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1731,7 +1246,7 @@ target="_blank" rel="noopener" href="https://www.eecis.udel.edu/~vsaxena/courses
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1975,7 +1490,7 @@ Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices,
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2679,7 +2194,7 @@ target="_blank" rel="noopener" href="https://mixsignal.files.wordpress.com/2013/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2936,7 +2451,7 @@ target="_blank" rel="noopener" href="https://appliedacousticschalmers.github.io/
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-05 15:42:56" itemprop="dateModified" datetime="2024-09-05T15:42:56+00:00">2024-09-05</time>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -3110,6 +2625,235 @@ target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~boser/cou
 <p>Toshiba, Load Transient Response of LDO and Methods to Improve it
 Application Note [<a
 target="_blank" rel="noopener" href="https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268">https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268</a>]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/06/tranOP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/06/tranOP/" class="post-title-link" itemprop="url">DC operating points during TRANSIENT analysis</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-06 10:32:10" itemprop="dateCreated datePublished" datetime="2023-10-06T10:32:10+00:00">2023-10-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><a target="_blank" rel="noopener" href="https://community.cadence.com/members/andrew-beckett">Andrew
+Beckett</a><a
+target="_blank" rel="noopener" href="https://community.cadence.com/cadence_technology_forums/f/rf-design/25702/finding-dc-operating-points-at-certain-timepoints-during-transient-analysis/1321796#1321796">over
+11 years ago</a></p>
+<p>Two approaches:</p>
+<ol type="1">
+<li>On the transient options form, there's a field called "infotimes" -
+specify the times at which you want it to output the dc operating point
+data. You can then annotate the "transient operating points" from any of
+these times after the simulation, or access them via the results
+browser.</li>
+<li>Or you could get the operating point data to be continuously saved
+during the transient for selected devices - if so, create a file called
+(say) "save.scs" (make sure it has a ".scs" suffix), and put: save
+M1:oppoint or save M*:oppoint sigtype=dev in this file, and then
+reference the file via Setup-&gt;Model Libraries or as a "definition
+file" on Setup-&gt;Simulation Files. With this approach you can then
+find the operating point data for the selected devices in the results
+browser and plot it versus time (be cautious of saving too much though
+because this can generate a lot of data if you're not careful)</li>
+</ol>
+<p>Regards,</p>
+<p>Andrew.</p>
+</blockquote>
+<p><img src="/2023/10/06/tranOP/image-20231006110801078.png"
+alt="image-20231006110801078" /></p>
+<h2 id="transient-options-form">transient options form</h2>
+<h3 id="setup">setup</h3>
+<p><img src="/2023/10/06/tranOP/image-20231006103506475.png"
+alt="image-20231006103506475" /></p>
+<h3 id="access-1">access 1</h3>
+<p><strong>right-click</strong> <span class="math inline">\(\to\)</span>
+<strong>Annotate</strong> <span class="math inline">\(\to\)</span>
+<strong>Transient Operating Points</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006104317496.png"
+alt="image-20231006104317496" /></p>
+<h3 id="access-2">access 2</h3>
+<p><strong>tranOpTimed</strong></p>
+<p><img src="/2023/10/06/tranOP/image-20231006105236323.png"
+alt="image-20231006105236323" /></p>
+<h2 id="save.scs">save.scs</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save M0:oppoint</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/10/06/tranOP/image-20231006110506245.png"
+alt="image-20231006110506245" /></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/05/varstat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | KNOW-HOW">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/05/varstat/" class="post-title-link" itemprop="url">variables with statistical distribution</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-05 19:04:19" itemprop="dateCreated datePublished" datetime="2023-10-05T19:04:19+00:00">2023-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-06 00:35:42" itemprop="dateModified" datetime="2024-09-06T00:35:42+00:00">2024-09-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cad/" itemprop="url" rel="index"><span itemprop="name">cad</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>Specifying Parameter Distributions Using Statistics Blocks</code></p>
+<ul>
+<li><code>process</code>: generate random number once per MC run</li>
+<li><code>mismatch</code> : generate a random number per instance</li>
+</ul>
+<p><img src="/2023/10/05/varstat/image-20231005190644654.png"
+alt="image-20231005190644654" /></p>
+<p><img src="/2023/10/05/varstat/image-20231005190712057.png"
+alt="image-20231005190712057" /></p>
+<p><img src="/2023/10/05/varstat/image-20231005190724560.png"
+alt="image-20231005190724560" /></p>
+<h2 id="reference">reference</h2>
+<p>Article (20498356) Title: How to vary design variables with
+statistical distribution to be used with Monte Carlo analysis URL: <a
+target="_blank" rel="noopener" href="https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0">https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0</a></p>
+<p>Spectre Circuit Simulator Reference</p>
 
       
     </div>

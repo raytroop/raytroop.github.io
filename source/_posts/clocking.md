@@ -9,6 +9,20 @@ mathjax: true
 
 
 
+
+
+## why 2nd loop filter ?
+
+> PI (proportional - integral) Loop Filter
+
+![image-20240907123938255](clocking/image-20240907123938255.png)
+
+![image-20240907124029346](clocking/image-20240907124029346.png)
+
+![image-20240907124018476](clocking/image-20240907124018476.png)
+
+
+
 ## Switched Capacitor Banks
 
 Q: why $R_b$ ?

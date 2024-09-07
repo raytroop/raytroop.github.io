@@ -160,11 +160,25 @@ $$
 
 ### Parseval's Relation
 
+*CTFT*:
+
 ![image-20240830230835764](fourier/image-20240830230835764.png)
 
 ---
 
+*DTFT*:
+
 ![image-20230516022936168](fourier/image-20230516022936168.png)
+
+---
+
+*DFT*:
+
+![image-20240907224043641](fourier/image-20240907224043641.png)
+
+
+
+
 
 ### Eigenfunctions & frequency response
 

@@ -42,7 +42,7 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 
 ![image-20240427170024123](random/image-20240427170024123.png)
 
-![image-20240902223052500](random/image-20240902223052500.png)
+![image-20240907211343832](random/image-20240907211343832.png)
 
 
 
@@ -99,7 +99,9 @@ $$
 
 ![image-20240428162655969](random/image-20240428162655969.png)
 
-![image-20240428162735492](random/image-20240428162735492.png)
+![image-20240907220050543](random/image-20240907220050543.png)
+
+
 
 > Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
 
@@ -116,6 +118,19 @@ $$
 ### Noise Aliasing
 
 *apply aforegoing conclusion*
+
+
+
+## The Periodogram
+
+The periodogram is in fact the Fourier transform of the aperiodic correlation of the windowed data sequence
+
+![image-20240907215822425](random/image-20240907215822425.png)
+
+![image-20240907215957865](random/image-20240907215957865.png)
+
+> ![image-20240907230715637](random/image-20240907230715637.png)
+
 
 
 
@@ -176,8 +191,6 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 > $$
 
 
-
-> Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
 
 
 

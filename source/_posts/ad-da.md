@@ -104,7 +104,7 @@ $$
 
 ---
 
-CDAC is actually working as a **capacitive divider** during *conversion phase*, the charge of internal node is not changed (*charge conservation law*)
+CDAC is actually working as a **capacitive divider** during *conversion phase*, the charge of internal node retain (*charge conservation law*)
 
 assuming $\Delta V_i$ is applied to series capacitor $C_1$ and $C_2$
 
@@ -118,6 +118,46 @@ $$
 $$
 
 > $V_x= V_{x,0} + \Delta V_x$
+
+
+
+## CDAC settling time
+
+![cdac-tau.drawio](ad-da/cdac-tau.drawio.svg)
+$$\begin{align}
+V_x(s) &= \frac{C_1+C_2}{RC_1C_2}\cdot \frac{1}{s+\frac{C_1+C_2}{RC_1C_2}}\cdot V_i(s) \\
+&= \frac{1}{\tau}\cdot \frac{1}{s+\frac{1}{\tau}}\cdot \frac{1}{s}\\
+&=  \frac{1}{\tau}\cdot \tau(\frac{1}{s} - \frac{1}{s+\frac{1}{\tau}})=\frac{1}{s} - \frac{1}{s+\frac{1}{\tau}}
+\end{align}$$
+
+inverse Laplace Transform is $V_x(t) = 1 - e^{-t/\tau}$
+
+$$\begin{align}
+V_y(s) &= V_x\frac{C_1}{C_1+C_2} \\
+&= \frac{C_1}{C_1+C_2} \left(\frac{1}{s} - \frac{1}{s+\frac{1}{\tau}}\right)\\
+\end{align}$$
+
+inverse Laplace Transform is $V_y(t) = \frac{C_1}{C_1+C_2}\left(1 - e^{-t/\tau}\right)$
+
+$V_x(t)$ and $V_y(t)$ prove that the settling time is *same*
+
+
+
+## Comparator input capacitance
+
+![image-20240907194621524](ad-da/image-20240907194621524.png)
+$$
+-V_{in}\cdot 2^N C = V_c (2^N C + C_p)
+$$
+Then $V_c = -\frac{2^N C}{2^N C + C_p}V_{in}$, i.e. this capacitance reduce the voltage amplitude by the factor
+
+During conversion
+$$\begin{align}
+V_c &= -\frac{2^N C}{2^N C + C_p}V_{in} +V_{ref}\sum_{n=0}^{N-1} \frac{b_n\cdot2^n C}{2^N C + C_p} \\
+&= \frac{2^N C}{2^N C + C_p}\left(-V_{in} + V_{ref}\sum_{n=0}^{N-1}\frac{b_n }{2^{N-n}}  \right)
+\end{align}$$
+
+That is, it does not change the sign
 
 
 

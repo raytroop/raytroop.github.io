@@ -36,8 +36,10 @@
 <meta property="og:image" content="http://example.com/2024/08/18/ad-da/image-20240820204720277.png">
 <meta property="og:image" content="http://example.com/2024/08/18/ad-da/image-20240820204959977.png">
 <meta property="og:image" content="http://example.com/2024/08/18/ad-da/cap_divider.drawio.svg">
+<meta property="og:image" content="http://example.com/2024/08/18/ad-da/cdac-tau.drawio.svg">
+<meta property="og:image" content="http://example.com/2024/08/18/ad-da/image-20240907194621524.png">
 <meta property="article:published_time" content="2024-08-18T14:50:27.000Z">
-<meta property="article:modified_time" content="2024-09-06T07:12:18.366Z">
+<meta property="article:modified_time" content="2024-09-07T15:56:10.961Z">
 <meta property="article:author" content="Guo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/08/18/ad-da/image-20240825222432796.png">
@@ -149,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#kick-back"><span class="nav-number">1.</span> <span class="nav-text">kick-back</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bootstrap-th-switch"><span class="nav-number">2.</span> <span class="nav-text">bootstrap T&#x2F;H Switch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quantization-noise"><span class="nav-number">3.</span> <span class="nav-text">Quantization Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bottom-plate-sampling"><span class="nav-number">4.</span> <span class="nav-text">Bottom plate sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hold-mode-feedthrough"><span class="nav-number">5.</span> <span class="nav-text">Hold Mode Feedthrough</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cdac-intuition"><span class="nav-number">6.</span> <span class="nav-text">CDAC intuition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#kick-back"><span class="nav-number">1.</span> <span class="nav-text">kick-back</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bootstrap-th-switch"><span class="nav-number">2.</span> <span class="nav-text">bootstrap T&#x2F;H Switch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quantization-noise"><span class="nav-number">3.</span> <span class="nav-text">Quantization Noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bottom-plate-sampling"><span class="nav-number">4.</span> <span class="nav-text">Bottom plate sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hold-mode-feedthrough"><span class="nav-number">5.</span> <span class="nav-text">Hold Mode Feedthrough</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cdac-intuition"><span class="nav-number">6.</span> <span class="nav-text">CDAC intuition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cdac-settling-time"><span class="nav-number">7.</span> <span class="nav-text">CDAC settling time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#comparator-input-capacitance"><span class="nav-number">8.</span> <span class="nav-text">Comparator input capacitance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">9.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -244,7 +246,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-06 07:12:18" itemprop="dateModified" datetime="2024-09-06T07:12:18+00:00">2024-09-06</time>
+      <time title="Modified: 2024-09-07 15:56:10" itemprop="dateModified" datetime="2024-09-07T15:56:10+00:00">2024-09-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -346,8 +348,8 @@ V_c = \frac{C_\Delta}{C_{tot}}V_{ref} - V_{in}
 \]</span></p>
 <hr />
 <p>CDAC is actually working as a <strong>capacitive divider</strong>
-during <em>conversion phase</em>, the charge of internal node is not
-changed (<em>charge conservation law</em>)</p>
+during <em>conversion phase</em>, the charge of internal node retain
+(<em>charge conservation law</em>)</p>
 <p>assuming <span class="math inline">\(\Delta V_i\)</span> is applied
 to series capacitor <span class="math inline">\(C_1\)</span> and <span
 class="math inline">\(C_2\)</span></p>
@@ -360,6 +362,41 @@ alt="cap_divider.drawio" /> <span class="math display">\[
 <blockquote>
 <p><span class="math inline">\(V_x= V_{x,0} + \Delta V_x\)</span></p>
 </blockquote>
+<h2 id="cdac-settling-time">CDAC settling time</h2>
+<p><img src="/2024/08/18/ad-da/cdac-tau.drawio.svg"
+alt="cdac-tau.drawio" /> <span class="math display">\[\begin{align}
+V_x(s) &amp;= \frac{C_1+C_2}{RC_1C_2}\cdot
+\frac{1}{s+\frac{C_1+C_2}{RC_1C_2}}\cdot V_i(s) \\
+&amp;= \frac{1}{\tau}\cdot \frac{1}{s+\frac{1}{\tau}}\cdot \frac{1}{s}\\
+&amp;=  \frac{1}{\tau}\cdot \tau(\frac{1}{s} -
+\frac{1}{s+\frac{1}{\tau}})=\frac{1}{s} - \frac{1}{s+\frac{1}{\tau}}
+\end{align}\]</span></p>
+<p>inverse Laplace Transform is <span class="math inline">\(V_x(t) = 1 -
+e^{-t/\tau}\)</span></p>
+<p><span class="math display">\[\begin{align}
+V_y(s) &amp;= V_x\frac{C_1}{C_1+C_2} \\
+&amp;= \frac{C_1}{C_1+C_2} \left(\frac{1}{s} -
+\frac{1}{s+\frac{1}{\tau}}\right)\\
+\end{align}\]</span></p>
+<p>inverse Laplace Transform is <span class="math inline">\(V_y(t) =
+\frac{C_1}{C_1+C_2}\left(1 - e^{-t/\tau}\right)\)</span></p>
+<p><span class="math inline">\(V_x(t)\)</span> and <span
+class="math inline">\(V_y(t)\)</span> prove that the settling time is
+<em>same</em></p>
+<h2 id="comparator-input-capacitance">Comparator input capacitance</h2>
+<p><img src="/2024/08/18/ad-da/image-20240907194621524.png"
+alt="image-20240907194621524" /> <span class="math display">\[
+-V_{in}\cdot 2^N C = V_c (2^N C + C_p)
+\]</span> Then <span class="math inline">\(V_c = -\frac{2^N C}{2^N C +
+C_p}V_{in}\)</span>, i.e. this capacitance reduce the voltage amplitude
+by the factor</p>
+<p>During conversion <span class="math display">\[\begin{align}
+V_c &amp;= -\frac{2^N C}{2^N C + C_p}V_{in} +V_{ref}\sum_{n=0}^{N-1}
+\frac{b_n\cdot2^n C}{2^N C + C_p} \\
+&amp;= \frac{2^N C}{2^N C + C_p}\left(-V_{in} +
+V_{ref}\sum_{n=0}^{N-1}\frac{b_n }{2^{N-n}}  \right)
+\end{align}\]</span></p>
+<p>That is, it does not change the sign</p>
 <h2 id="reference">reference</h2>
 <p>everynanocounts. Memos on FFT With Windowing. URL: <a
 target="_blank" rel="noopener" href="https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/">https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/</a></p>

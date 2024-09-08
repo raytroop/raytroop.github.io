@@ -1,11 +1,21 @@
 ---
 title: Delta-Sigma Data Converters
-date: 2024-09-01 09:48:01
+date: 2024-09-08 16:48:32
 tags:
 categories:
 - analog
 mathjax: true
 ---
+
+
+
+## Delta Modulator
+
+![image-20240908173930949](delta-sigma/image-20240908173930949.png)
+$$
+D_{out} = s V_F
+$$
+attenuates the low-frequency content of the signal, and amplifies high-frequency noise.
 
 
 

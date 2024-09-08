@@ -130,6 +130,19 @@ The periodogram is in fact the Fourier transform of the aperiodic correlation of
 ![image-20240907215957865](random/image-20240907215957865.png)
 
 > ![image-20240907230715637](random/image-20240907230715637.png)
+>
+> ---
+>
+> Due to $\sum_{n=0}^{L-1}|w[n]|^2 = \frac{1}{L}\sum_{k=0}^{L-1}|W[k]|^2$​ 
+> $$
+> I(\omega) = \frac{|V(e^{j\omega})|^2}{LU} = \frac{L|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}|W[k]|^2}
+> $$
+> The unavoidable rectangular window sequence selects a *finite-length* segment ($L$ samples) for *infinite-length* sequence, that is $|X(\omega)|^2 L = I(\omega)$
+> $$
+> |X(\omega)|^2 = \frac{|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}|W[k]|^2}
+> $$
+
+
 
 
 

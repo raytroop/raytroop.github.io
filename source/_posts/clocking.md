@@ -11,6 +11,18 @@ mathjax: true
 
 
 
+## charge pump with amplifier
+
+This reduces the charge sharing effect, when the switch is turned on. 
+
+![image-20240909221145643](clocking/image-20240909221145643.png)
+
+> Young, I.A., Greason, J.K., Wong, K.L.: A PLL Clock Generator with 5 to 110MHz of Lock Range for Microprocessors. IEEE Journal of Solid-State Circuits 27(11), 1599– 1607 (1992)  [[https://people.engr.tamu.edu/spalermo/ecen620/pll_intel_young_jssc_1992.pdf](https://people.engr.tamu.edu/spalermo/ecen620/pll_intel_young_jssc_1992.pdf)]
+>
+> Johnson, M., Hudson, E.: A variable delay line PLL for CPU-coprocessor synchronization. IEEE Journal of Solid-State Circuits 23(10), 1218–1223 (1988)  [[https://sci-hub.se/10.1109/4.5947](https://sci-hub.se/10.1109/4.5947)]
+
+
+
 ## why 2nd loop filter ?
 
 > PI (proportional - integral) Loop Filter

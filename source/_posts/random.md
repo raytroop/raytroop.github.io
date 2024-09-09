@@ -131,17 +131,38 @@ The periodogram is in fact the Fourier transform of the aperiodic correlation of
 
 > ![image-20240907230715637](random/image-20240907230715637.png)
 >
-> ---
->
-> Due to $\sum_{n=0}^{L-1}|w[n]|^2 = \frac{1}{L}\sum_{k=0}^{L-1}|W[k]|^2$​ 
-> $$
-> I(\omega) = \frac{|V(e^{j\omega})|^2}{LU} = \frac{L|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}|W[k]|^2}
-> $$
-> The unavoidable rectangular window sequence selects a *finite-length* segment ($L$ samples) for *infinite-length* sequence, that is $|X(\omega)|^2 L = I(\omega)$
-> $$
-> |X(\omega)|^2 = \frac{|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}|W[k]|^2}
-> $$
 
+---
+
+
+![periodogram.drawio](random/periodogram.drawio.svg)
+
+The sequence $x[n]$ is typically multiplied by a *finite*-duration window $w[n]$, since the input to the DFT must be of *finite* duration. This produces the *finite*-length sequence $v[n] = w[n]x[n]$
+
+![image-20240910005608007](random/image-20240910005608007.png)
+
+![image-20240910005927534](random/image-20240910005927534.png)
+
+![image-20240910005723458](random/image-20240910005723458.png)
+
+$$\begin{align}
+\hat{P}_{xx(\omega)} &= \frac{|V(e^{j\omega})|^2}{LU} \\
+&= \frac{|V(e^{j\omega})|^2}{\sum_{n=0}^{L-1}(w[n])^2} \tag{1}\\
+&= \frac{L|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}(W[k])^2} \tag{2}
+\end{align}$$
+
+![image-20240910010638376](random/image-20240910010638376.png)
+
+That is, by $(1)$
+$$
+\hat{P}_{ss(\omega)} = T_s\hat{P}_{xx(\omega)} = \frac{T_s|V(e^{j\omega})|^2}{\sum_{n=0}^{L-1}(w[n])^2}=\frac{|V(e^{j\omega})|^2}{f_{res}L\sum_{n=0}^{L-1}(w[n])^2}
+$$
+
+
+That is, by $(2)$
+$$
+\hat{P}_{ss(\omega)} = T_s\hat{P}_{xx(\omega)} = \frac{T_sL|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}(W[k])^2} = \frac{|V(e^{j\omega})|^2}{f_{res}\sum_{k=0}^{L-1}(W[k])^2}
+$$
 
 
 
@@ -187,6 +208,10 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 
 
+![image-20240910003805151](random/image-20240910003805151.png)
+
+> [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf)]
+
 ---
 
 **Example**
@@ -202,6 +227,16 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 > $$
 > \cos(2\pi f_0t) \overset{\mathcal{F}}{\longrightarrow} \frac{1}{2}[\delta(f -f_0)+\delta(f+f_0)]
 > $$
+
+
+
+### Energy Signal
+
+![image-20240910004411501](random/image-20240910004411501.png)
+
+![image-20240910004421791](random/image-20240910004421791.png)
+
+![image-20240910004448439](random/image-20240910004448439.png)
 
 
 

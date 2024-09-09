@@ -148,13 +148,24 @@ $$
 
 
 
-### Multiplication Property
+### Multiplication
 
-> aka *Modulation Property*
+> aka *Modulation or Windowing Theorem*
 
+
+
+*CTFT*:
 $$
 x_1(t)x_2(t)\overset{FT}{\longrightarrow}\frac{1}{2\pi}X_1(\omega)*X_2(\omega)
 $$
+
+
+
+---
+
+*DTFT*:
+
+![image-20240909215833750](fourier/image-20240909215833750.png)
 
 
 

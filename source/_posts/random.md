@@ -132,7 +132,7 @@ The periodogram is in fact the Fourier transform of the aperiodic correlation of
 > ![image-20240907230715637](random/image-20240907230715637.png)
 >
 
----
+### estimating continuous-time stationary random signal
 
 
 ![periodogram.drawio](random/periodogram.drawio.svg)
@@ -164,6 +164,7 @@ $$
 \hat{P}_{ss}(\Omega) = T_s\hat{P}_{xx(\omega)} = \frac{T_sL|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}(W[k])^2} = \frac{|V(e^{j\omega})|^2}{f_{res}\sum_{k=0}^{L-1}(W[k])^2}
 $$
 
+> !! *ENBW*
 
 
 

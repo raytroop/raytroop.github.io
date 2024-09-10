@@ -1,5 +1,5 @@
 ---
-title: System Analysis using Laplace Transform and z-Transform
+title: Laplace Transform and z-Transform in System Analysis
 date: 2022-03-22 09:31:24
 tags:
 categories:

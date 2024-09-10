@@ -33,11 +33,6 @@ mathjax: true
 
 
 
-> sinc filter come from *Zero-Order Hold*
->
-> ![image-20240903223100157](precision/image-20240903223100157.png)
-
-
 
 ## Chopping
 

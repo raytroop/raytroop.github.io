@@ -20,7 +20,9 @@ mathjax: true
 - cyclic frequency $f_0$ in **Hz**
 
 
+## sinc filter
 
+![image-20240903223100157](ss-insight/image-20240903223100157.png)
 
 
 ##  Energy signals vs Power signal

@@ -20,6 +20,15 @@ attenuates the low-frequency content of the signal, and amplifies high-frequency
 
 ## Delta-Sigma Modulator
 
+The average output of DSM tracks the input signal
+
+
+
+## integrator
+
+*TODO* &#128197;
+
+### opamp bandwidth & slewing
 
 
 

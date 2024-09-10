@@ -117,7 +117,7 @@ $$
 
 ### Noise Aliasing
 
-*apply aforegoing conclusion*
+*apply foregoing conclusion*
 
 
 

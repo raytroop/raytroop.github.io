@@ -641,18 +641,18 @@ current steering DAC</h2>
       </categories>
   </entry>
   <entry>
-    <title>Innovus Database Navigation</title>
-    <url>/2022/02/07/Innovus-Database-Navigation/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
+    <title>Innovus ECO</title>
+    <url>/2022/02/07/Innovus-ECO/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
       </categories>
   </entry>
   <entry>
-    <title>Innovus ECO</title>
-    <url>/2022/02/07/Innovus-ECO/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_ECO.pdf" data-height="500px"></div>
+    <title>Innovus Database Navigation</title>
+    <url>/2022/02/07/Innovus-Database-Navigation/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_Database_Navigation.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -723,6 +723,15 @@ alt="createPGPin_onDie.drawio" /></p>
       </categories>
   </entry>
   <entry>
+    <title>Innovus Data Exchange</title>
+    <url>/2022/02/07/Innovus-data-exchange/</url>
+    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>innovus</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Innovus check mode variants</title>
     <url>/2022/02/07/Innovus-check-mode-variants/</url>
     <content><![CDATA[<p>checkDesign</p>
@@ -735,15 +744,6 @@ alt="createPGPin_onDie.drawio" /></p>
 <p>setRouteMode</p>
 <p>setExtractRCMode</p>
 <p>setOptMode</p>
-]]></content>
-      <categories>
-        <category>innovus</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Innovus Data Exchange</title>
-    <url>/2022/02/07/Innovus-data-exchange/</url>
-    <content><![CDATA[<div class="pdf-container" data-target="/pdfs/Innovus_data_exchange.pdf" data-height="500px"></div>
 ]]></content>
       <categories>
         <category>innovus</category>
@@ -1171,66 +1171,6 @@ href="http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html">http://www.c-jump.c
       </categories>
   </entry>
   <entry>
-    <title>Precedence Rule of UVM uvm_config_db::set</title>
-    <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
-    <content><![CDATA[<p><a
-href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
-<h4 id="two-precedence-rules">Two Precedence rules</h4>
-<p>There are two precedence rules applicable to
-<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
-<ol type="1">
-<li>A <code>set()</code> call in <strong>a context higher up the
-component hierarchy</strong> takes precedence over a <code>set()</code>
-call that occurs lower in the hierarchical path.</li>
-<li>On having <strong>same context field</strong>, <strong>the
-last</strong> <code>set()</code> call takes precedence over the earlier
-<code>set()</code> call.</li>
-</ol>
-<h4 id="example-for-rule---1">Example for rule - 1</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>As you can see , the <code>uvm_config_db::set</code> is after the
-factory <code>type_id::create</code>, but <strong>receive_value</strong>
-is still <strong>100</strong>, I believe that <code>build_phase</code>
-of upper hierarchy finish first before create lower components.</p>
-<p>But the recommendation in literature and many web is place
-<code>uvm_config_db::set</code> before <code>create</code></p>
-</blockquote>
-<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.edaplayground.com/x/jgvh">[complete
-code]</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
-<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
-<p>The <code>set</code> in <code>super.build_phase</code> and
-<code>set</code> in current <code>build_phase</code> are at the
-<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
-<p>base_test</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
-<h4 id="test2---one">test2 - One</h4>
-<blockquote>
-<p><code>yapp_incr_payload_seq</code> override the
-<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
-<strong>yapp_incr_payload_seq</strong> is used.</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-<h4 id="test2---two">test2 - Two</h4>
-<blockquote>
-<p>the <code>yapp_5_packets</code> in
-<code>super.build_phase(phase)</code> overide
-<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
-<strong>yapp_5_packets</strong> is used</p>
-</blockquote>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>RC corner</title>
     <url>/2023/04/16/RC-corner/</url>
     <content><![CDATA[<h3 id="traditional-rc-corners">Traditional RC Corners</h3>
@@ -1380,6 +1320,66 @@ https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS</
 ]]></content>
       <categories>
         <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Precedence Rule of UVM uvm_config_db::set</title>
+    <url>/2022/03/23/Precedence-Rule-uvm-config-db/</url>
+    <content><![CDATA[<p><a
+href="https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule">https://vlsiverify.com/uvm/uvm_config_db-in-uvm#Precedence_Rule</a></p>
+<h4 id="two-precedence-rules">Two Precedence rules</h4>
+<p>There are two precedence rules applicable to
+<code>uvm_config_db</code>. In the <code>build_phase</code>,</p>
+<ol type="1">
+<li>A <code>set()</code> call in <strong>a context higher up the
+component hierarchy</strong> takes precedence over a <code>set()</code>
+call that occurs lower in the hierarchical path.</li>
+<li>On having <strong>same context field</strong>, <strong>the
+last</strong> <code>set()</code> call takes precedence over the earlier
+<code>set()</code> call.</li>
+</ol>
+<h4 id="example-for-rule---1">Example for rule - 1</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;uvm_macros.svh&quot;</span></span><br><span class="line"><span class="keyword">import</span> uvm_pkg::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_A <span class="keyword">extends</span> uvm_component;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  `uvm_component_utils(component_A)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_A&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_A: id = %0d&quot;</span>, id), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> component_B <span class="keyword">extends</span> component_A;</span><br><span class="line">  <span class="keyword">int</span> receive_value;</span><br><span class="line">  <span class="keyword">int</span> id;</span><br><span class="line">  </span><br><span class="line">  `uvm_component_utils(component_B)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;component_B&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">    id = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="keyword">if</span>(!uvm_config_db <span class="variable">#(int)::get(this, &quot;*&quot;, &quot;value&quot;, receive_value))</span></span><br><span class="line">      `uvm_fatal(get_type_name(), <span class="string">&quot;get failed for resource in this scope&quot;</span>);    </span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> display();</span><br><span class="line">    `uvm_info(get_type_name(), <span class="built_in">$sformatf</span>(<span class="string">&quot;inside component_B: id = %0d, receive_value = %0d&quot;</span>, id, receive_value), UVM_LOW);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> env <span class="keyword">extends</span> uvm_env;</span><br><span class="line">  `uvm_component_utils(env)</span><br><span class="line">  component_A comp_A;</span><br><span class="line">  component_B comp_B;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;env&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    comp_A = component_A ::type_id::create(<span class="string">&quot;comp_A&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    comp_B = component_B ::type_id::create(<span class="string">&quot;comp_B&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    uvm_config_db <span class="variable">#(int)::set(this, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">task</span> run_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.run_phase</span>(phase);</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_A<span class="variable">.display</span>());</span><br><span class="line">    <span class="keyword">void</span>&#x27;(comp_B<span class="variable">.display</span>());</span><br><span class="line">  <span class="keyword">endtask</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> my_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line">  <span class="keyword">bit</span> control;</span><br><span class="line">  `uvm_component_utils(my_test)</span><br><span class="line">  env env_o;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">&quot;my_test&quot;</span>, uvm_component parent = <span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    <span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">      env_o = env::type_id::create(<span class="string">&quot;env_o&quot;</span>, <span class="keyword">this</span>);				<span class="comment">// line 99</span></span><br><span class="line">    </span><br><span class="line">      uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;		<span class="comment">// line 101</span></span><br><span class="line">	<span class="comment">////////////////////////////////////////////////////</span></span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line">   </span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> end_of_elaboration_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.end_of_elaboration_phase</span>(phase);</span><br><span class="line">    uvm_top<span class="variable">.print_topology</span>();</span><br><span class="line">  <span class="keyword">endfunction</span></span><br><span class="line"><span class="keyword">endclass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_top;</span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    run_test(<span class="string">&quot;my_test&quot;</span>);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1922</span><br><span class="line">    comp_B    component_B  -     @1953</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 100</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>As you can see , the <code>uvm_config_db::set</code> is after the
+factory <code>type_id::create</code>, but <strong>receive_value</strong>
+is still <strong>100</strong>, I believe that <code>build_phase</code>
+of upper hierarchy finish first before create lower components.</p>
+<p>But the recommendation in literature and many web is place
+<code>uvm_config_db::set</code> before <code>create</code></p>
+</blockquote>
+<h4 id="simple-example-for-rule---2">Simple Example for rule - 2</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 100)</span>;</span><br><span class="line">uvm_config_db <span class="variable">#(int)::set(null, &quot;*&quot;, &quot;value&quot;, 200)</span>;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.edaplayground.com/x/jgvh">[complete
+code]</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UVM_INFO /xcelium20.09/tools//methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(605) @ 0: reporter [UVMTOP] UVM testbench topology:</span><br><span class="line">--------------------------------------</span><br><span class="line">Name          Type         Size  Value</span><br><span class="line">--------------------------------------</span><br><span class="line">uvm_test_top  my_test      -     @1810</span><br><span class="line">  env_o       env          -     @1877</span><br><span class="line">    comp_A    component_A  -     @1924</span><br><span class="line">    comp_B    component_B  -     @1955</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">UVM_INFO testbench.sv(14) @ 0: uvm_test_top.env_o.comp_A [component_A] inside component_A: id = 1</span><br><span class="line">UVM_INFO testbench.sv(36) @ 0: uvm_test_top.env_o.comp_B [component_B] inside component_B: id = 2, receive_value = 200</span><br></pre></td></tr></table></figure>
+<h3 id="another-example-for-rule---2">Another Example for rule - 2</h3>
+<p>The <code>set</code> in <code>super.build_phase</code> and
+<code>set</code> in current <code>build_phase</code> are at the
+<strong>same hierarchy</strong>, so <strong>rule-2</strong> apply</p>
+<p>base_test</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> base_test <span class="keyword">extends</span> uvm_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(base_test)</span><br><span class="line"></span><br><span class="line">  router_tb tb;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// UVM build_phase()</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_int::set(<span class="keyword">this</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;recording_detail&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_5_packets::get_type());</span><br><span class="line">    tb = router_tb::type_id::create(<span class="string">&quot;tb&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : base_test</span><br></pre></td></tr></table></figure>
+<h4 id="test2---one">test2 - One</h4>
+<blockquote>
+<p><code>yapp_incr_payload_seq</code> override the
+<code>yapp_5_packets</code> in <code>super.build_phase(phase)</code>,
+<strong>yapp_incr_payload_seq</strong> is used.</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">---------------------------------------------------------------------------------------------------------------------                   </span><br><span class="line">req                            short_yapp_packet  -     @3045</span><br><span class="line">  length                       integral           6     &#x27;h5</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       5     -</span><br><span class="line">    [0]                        integral           8     &#x27;h0</span><br><span class="line">    [1]                        integral           8     &#x27;h1</span><br><span class="line">    [2]                        integral           8     &#x27;h2</span><br><span class="line">    [3]                        integral           8     &#x27;h3</span><br><span class="line">    [4]                        integral           8     &#x27;h4</span><br><span class="line">  parity                       integral           8     &#x27;h11</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d19</span><br><span class="line">  begin_time                   time               64    0</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             21    yapp_incr_payload_seq                                                           </span><br><span class="line">  parent sequence (full name)  string             61    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_incr_payload_seq                   </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">---------------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<h4 id="test2---two">test2 - Two</h4>
+<blockquote>
+<p>the <code>yapp_5_packets</code> in
+<code>super.build_phase(phase)</code> overide
+<code>yapp_incr_payload_seq</code> in test2's <code>build_phase</code>,
+<strong>yapp_5_packets</strong> is used</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> test2 <span class="keyword">extends</span> base_test;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component macro</span></span><br><span class="line">  `uvm_component_utils(test2)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// component constructor</span></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name, uvm_component parent);</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.new</span>(name, parent);</span><br><span class="line">  <span class="keyword">endfunction</span> : <span class="keyword">new</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> build_phase(uvm_phase phase);</span><br><span class="line">    yapp_packet::type_id::set_type_override(short_yapp_packet::get_type());</span><br><span class="line">    uvm_config_wrapper::set(<span class="keyword">this</span>, <span class="string">&quot;tb.yapp.tx_agent.sequencer.run_phase&quot;</span>, </span><br><span class="line">                                                      <span class="string">&quot;default_sequence&quot;</span>,</span><br><span class="line">                                                      yapp_incr_payload_seq::get_type());</span><br><span class="line">    <span class="keyword">super</span><span class="variable">.build_phase</span>(phase);</span><br><span class="line">  <span class="keyword">endfunction</span> : build_phase</span><br><span class="line"></span><br><span class="line"><span class="keyword">endclass</span> : test2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">Name                           Type               Size  Value</span><br><span class="line">--------------------------------------------------------------------------------------------------------------                          </span><br><span class="line">req                            short_yapp_packet  -     @3176</span><br><span class="line">  length                       integral           6     &#x27;h6</span><br><span class="line">  addr                         integral           2     &#x27;h1</span><br><span class="line">  payload                      da(integral)       6     -</span><br><span class="line">    [0]                        integral           8     &#x27;h4f</span><br><span class="line">    [1]                        integral           8     &#x27;hbe</span><br><span class="line">    [2]                        integral           8     &#x27;hb</span><br><span class="line">    [3]                        integral           8     &#x27;h1d</span><br><span class="line">    [4]                        integral           8     &#x27;h72</span><br><span class="line">    [5]                        integral           8     &#x27;hc5</span><br><span class="line">  parity                       integral           8     &#x27;h49</span><br><span class="line">  parity_type                  parity_t           1     GOOD_PARITY</span><br><span class="line">  packet_delay                 integral           32    &#x27;d0</span><br><span class="line">  begin_time                   time               64    40</span><br><span class="line">  depth                        int                32    &#x27;d2</span><br><span class="line">  parent sequence (name)       string             14    yapp_5_packets                                                                  </span><br><span class="line">  parent sequence (full name)  string             54    uvm_test_top.tb.yapp.tx_agent.sequencer.yapp_5_packets                          </span><br><span class="line">  sequencer                    string             39    uvm_test_top.tb.yapp.tx_agent.sequencer                                         </span><br><span class="line">-------------------------------------------------------------------------------------------------------------- </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -3584,41 +3584,6 @@ Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct.
       </categories>
   </entry>
   <entry>
-    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
-    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
-    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
-It determines which edges to be used as follows:</p>
-<ol type="1">
-<li><p>Evaluate waveforms over the smallest common base period</p></li>
-<li><p>For each capture edge, find the closest setup launch edge. Call
-these the <strong>primary pairs</strong></p></li>
-<li><p>Out of the <strong>primary pairs</strong>, pick the most
-restrictive setup launch and capture edges.</p></li>
-<li><p>For each <strong>primary pair</strong>, draw two hold
-relationships:</p>
-<ul>
-<li><p>Launch to (capture - 1)</p></li>
-<li><p>(Launch + 1) to Capture</p>
-<p>From all of these hold relationships, pick the most
-restrictive.</p></li>
-</ul></li>
-</ol>
-<p>PrimeTime uses the ideal clock waveform (as reported in
-<code>report_clock</code>) to determine the appropriate clock edges for
-inter-clock analysis.</p>
-<p><img
-src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
-alt="image-20220301203135490" /></p>
-<blockquote>
-<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
-<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Clock Gating</title>
     <url>/2023/04/05/clockgating/</url>
     <content><![CDATA[<p><strong>Clock Gating</strong> is defined as: "Clock gating is a
@@ -3656,6 +3621,81 @@ alt="clock gating" /></p>
 <h3 id="reference">reference</h3>
 <p>The Ultimate Guide to Clock Gating <a
 href="https://anysilicon.com/the-ultimate-guide-to-clock-gating/">https://anysilicon.com/the-ultimate-guide-to-clock-gating/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Clock Edges used for Setup and Hold in PrimeTime</title>
+    <url>/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/</url>
+    <content><![CDATA[<p>PT picks the most restrictive pair of edges for setup and for hold.
+It determines which edges to be used as follows:</p>
+<ol type="1">
+<li><p>Evaluate waveforms over the smallest common base period</p></li>
+<li><p>For each capture edge, find the closest setup launch edge. Call
+these the <strong>primary pairs</strong></p></li>
+<li><p>Out of the <strong>primary pairs</strong>, pick the most
+restrictive setup launch and capture edges.</p></li>
+<li><p>For each <strong>primary pair</strong>, draw two hold
+relationships:</p>
+<ul>
+<li><p>Launch to (capture - 1)</p></li>
+<li><p>(Launch + 1) to Capture</p>
+<p>From all of these hold relationships, pick the most
+restrictive.</p></li>
+</ul></li>
+</ol>
+<p>PrimeTime uses the ideal clock waveform (as reported in
+<code>report_clock</code>) to determine the appropriate clock edges for
+inter-clock analysis.</p>
+<p><img
+src="/2022/03/01/clock-edges-used-for-setup-and-hold-primetime/image-20220301203135490.png"
+alt="image-20220301203135490" /></p>
+<blockquote>
+<p>The most restrictive setup pair is from Clk1 8ns to Clk2 9ns</p>
+<p>The most restrictive hold pair is from Clk1 0ns to Clk2 0ns</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>primary clock, generated clock and virtual clock in SDC</title>
+    <url>/2022/03/01/clocks-sta/</url>
+    <content><![CDATA[<p><strong>primary clocks</strong></p>
+<ul>
+<li>Primary clocks should be created at input ports and output pins of
+black boxes.</li>
+<li>Never create clocks on hierarchy pins. Creating clocks on hierarchy
+will cause problems when reading SDF. The net timing arc becomes
+segmented at the hierarchy and PrimeTime will be unable to annotate the
+net successfully.</li>
+</ul>
+<p><strong>generated clocks</strong></p>
+<ul>
+<li>Generated clocks are generally created for waveform modifications of
+a primary clock (not including simple inversions). PrimeTime does not
+simulate a design and thus will <strong>not</strong> derive internally
+generated clocks automatically - these clocks must be created by the
+user and applied as a constraint.</li>
+<li>PrimeTime caculate source latency for generated clocks if primary
+clock is <strong>propagated</strong>, otherwise its source latency is
+zero.</li>
+</ul>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># primary clock</span></span><br><span class="line">create_clock -period <span class="number">4</span> [get_ports Clk]</span><br><span class="line">set_clock_latency -<span class="keyword">source</span> <span class="number">2</span> [get_clocks Clk]</span><br><span class="line">set_propagated_clock [get_clocks Clk]</span><br><span class="line">create_generated_clock -divide_by <span class="number">2</span> -name div_clk -<span class="keyword">source</span> [get_ports Clk] FF3/Q</span><br></pre></td></tr></table></figure>
+<p><strong>virtual clocks</strong></p>
+<ul>
+<li>Are clock objects without a source</li>
+<li>Do not clock sequential devices within the current_design</li>
+<li>Serve as references of input or output delays</li>
+</ul>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a virtual clock, vclk, for input and output delay constraints</span></span><br><span class="line">create_clock -period <span class="number">5</span> -name vclk</span><br><span class="line">set_input_delay -max <span class="number">2</span> -<span class="keyword">clock</span> vclk [get_ports in1]</span><br><span class="line">set_output_delay -max <span class="number">1</span> -<span class="keyword">clock</span> vclk [get_ports out2]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>There is <strong>no</strong> network latency to calculate, even if a
+virtual clock is propagated.</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -4112,43 +4152,76 @@ shorter but retaining the <em>same total power</em></li>
       </categories>
   </entry>
   <entry>
-    <title>primary clock, generated clock and virtual clock in SDC</title>
-    <url>/2022/03/01/clocks-sta/</url>
-    <content><![CDATA[<p><strong>primary clocks</strong></p>
-<ul>
-<li>Primary clocks should be created at input ports and output pins of
-black boxes.</li>
-<li>Never create clocks on hierarchy pins. Creating clocks on hierarchy
-will cause problems when reading SDF. The net timing arc becomes
-segmented at the hierarchy and PrimeTime will be unable to annotate the
-net successfully.</li>
-</ul>
-<p><strong>generated clocks</strong></p>
-<ul>
-<li>Generated clocks are generally created for waveform modifications of
-a primary clock (not including simple inversions). PrimeTime does not
-simulate a design and thus will <strong>not</strong> derive internally
-generated clocks automatically - these clocks must be created by the
-user and applied as a constraint.</li>
-<li>PrimeTime caculate source latency for generated clocks if primary
-clock is <strong>propagated</strong>, otherwise its source latency is
-zero.</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># primary clock</span></span><br><span class="line">create_clock -period <span class="number">4</span> [get_ports Clk]</span><br><span class="line">set_clock_latency -<span class="keyword">source</span> <span class="number">2</span> [get_clocks Clk]</span><br><span class="line">set_propagated_clock [get_clocks Clk]</span><br><span class="line">create_generated_clock -divide_by <span class="number">2</span> -name div_clk -<span class="keyword">source</span> [get_ports Clk] FF3/Q</span><br></pre></td></tr></table></figure>
-<p><strong>virtual clocks</strong></p>
-<ul>
-<li>Are clock objects without a source</li>
-<li>Do not clock sequential devices within the current_design</li>
-<li>Serve as references of input or output delays</li>
-</ul>
-<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a virtual clock, vclk, for input and output delay constraints</span></span><br><span class="line">create_clock -period <span class="number">5</span> -name vclk</span><br><span class="line">set_input_delay -max <span class="number">2</span> -<span class="keyword">clock</span> vclk [get_ports in1]</span><br><span class="line">set_output_delay -max <span class="number">1</span> -<span class="keyword">clock</span> vclk [get_ports out2]</span><br></pre></td></tr></table></figure>
+    <title>Comparator Noise</title>
+    <url>/2024/09/02/comparator/</url>
+    <content><![CDATA[<h2 id="noise-analysis">Noise Analysis</h2>
+<p><em>TODO</em> 📅</p>
+<h2 id="noise-simulation">Noise Simulation</h2>
+<p><img src="/2024/09/02/comparator/image-20240825215015322.png"
+alt="image-20240825215015322" /></p>
+<p><img src="/2024/09/02/comparator/image-20240825215134067.png"
+alt="image-20240825215134067" /></p>
 <blockquote>
-<p>There is <strong>no</strong> network latency to calculate, even if a
-virtual clock is propagated.</p>
+<p>SNR during sampling region and decison region increase</p>
+<p>SNR during regeneration region is consant, where noise is
+critical</p>
 </blockquote>
+<p><span class="math display">\[
+\text{SNR} = \frac{V_{o,sig}^2}{V_{o,n}^2} =
+\frac{V_{i,sig}^2}{V_{i,n}^2}
+\]</span></p>
+<p>That is <span class="math display">\[
+V_{i,n}^2 = \frac{V_{i,sig}^2}{V_{o,sig}^2}V_{o,n}^2 =
+\frac{V_{o,n}^2}{A_v^2}
+\]</span> where <span class="math inline">\(V_{i,sig}\)</span> is
+constant signal applied to input of comparator</p>
+<h2 id="offset">offset</h2>
+<p><img src="/2024/09/02/comparator/image-20240825204030645.png"
+alt="image-20240825204030645" /></p>
+<h2 id="reference">reference</h2>
+<p>Xu, H. (2018). Mixed-Signal Circuit Design Driven by Analysis: ADCs,
+Comparators, and PLLs. <em>UCLA</em>. ProQuest ID: Xu_ucla_0031D_17380.
+Merritt ID: ark:/13030/m5f52m8x. Retrieved from
+https://escholarship.org/uc/item/88h8b5t3</p>
+<p>A. Abidi and H. Xu, ‘Understanding the Regenerative Comparator
+Circuit,’ Proceedings of the IEEE 2014 Custom Integrated Circuits
+Conference, San Jose, CA, 2014, pp. 1-8.</p>
+<p>T. Sepke, P. Holloway, C. G. Sodini and H. -S. Lee, "Noise Analysis
+for Comparator-Based Circuits," in IEEE Transactions on Circuits and
+Systems I: Regular Papers, vol. 56, no. 3, pp. 541-553, March 2009 [<a
+href="https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf">https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf</a>]</p>
+<p>Sepke, Todd. "Comparator design and analysis for comparator-based
+switched-capacitor circuits." (2006). [<a
+href="https://dspace.mit.edu/handle/1721.1/38925">https://dspace.mit.edu/handle/1721.1/38925</a>]</p>
+<p>P. Nuzzo, F. De Bernardinis, P. Terreni and G. Van der Plas, "Noise
+Analysis of Regenerative Comparators for Reconfigurable ADC
+Architectures," in <em>IEEE Transactions on Circuits and Systems I:
+Regular Papers</em>, vol. 55, no. 6, pp. 1441-1454, July 2008 [<a
+href="https://picture.iczhiku.com/resource/eetop/SYirpPPPaAQzsNXn.pdf">https://picture.iczhiku.com/resource/eetop/SYirpPPPaAQzsNXn.pdf</a>]</p>
+<p>J. Kim, B. S. Leibowitz, J. Ren and C. J. Madden, "Simulation and
+Analysis of Random Decision Errors in Clocked Comparators," in IEEE
+Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 8,
+pp. 1844-1857, Aug. 2009, doi: 10.1109/TCSI.2009.2028449. URL:<a
+href="https://people.engr.tamu.edu/spalermo/ecen689/simulation_analysis_clocked_comparators_kim_tcas1_2009.pdf">https://people.engr.tamu.edu/spalermo/ecen689/simulation_analysis_clocked_comparators_kim_tcas1_2009.pdf</a></p>
+<p>Jaeha Kim, Lecture 12. Aperture and Noise Analysis of Clocked
+Comparators URL:<a
+href="https://ocw.snu.ac.kr/sites/default/files/NOTE/7038.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/7038.pdf</a></p>
+<p>Rabuske, Taimur &amp; Fernandes, Jorge. (2017), Chapter 5 Noise-Aware
+Synthesis and Optimization of Voltage Comparators, "Charge-Sharing SAR
+ADCs for Low-Voltage Low-Power Applications"</p>
+<p>Y. Luo, A. Jain, J. Wagner and M. Ortmanns, "Input Referred
+Comparator Noise in SAR ADCs," in IEEE Transactions on Circuits and
+Systems II: Express Briefs, vol. 66, no. 5, pp. 718-722, May 2019. [<a
+href="https://sci-hub.se/10.1109/TCSII.2019.2909429">https://sci-hub.se/10.1109/TCSII.2019.2909429</a>]</p>
+<p>Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A
+New Methodology for Dynamic Comparator Noise Analysis URL:<a
+href="https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf">https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf</a></p>
+<p>X. Tang et al., "An Energy-Efficient Comparator With Dynamic Floating
+Inverter Amplifier," in IEEE Journal of Solid-State Circuits, vol. 55,
+no. 4, pp. 1011-1022, April 2020</p>
 ]]></content>
       <categories>
-        <category>digital</category>
+        <category>analog</category>
       </categories>
   </entry>
   <entry>
@@ -5146,6 +5219,19 @@ href="https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tip
       </categories>
   </entry>
   <entry>
+    <title>How to preserve hand-instantiated cells</title>
+    <url>/2023/02/10/dont-touch/</url>
+    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
+<p>The instances whose name contain "dont_touch_" shall be preserved
+during synthesis</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Deep N-well</title>
     <url>/2023/05/29/dnw/</url>
     <content><![CDATA[<h2 id="substrate-noise">Substrate noise</h2>
@@ -5216,19 +5302,6 @@ designing integrated circuits and systems thereof"</p>
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>How to preserve hand-instantiated cells</title>
-    <url>/2023/02/10/dont-touch/</url>
-    <content><![CDATA[<p>To preserve the hand-instantiated cells</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set_dont_touch [get_cells -hierarchical *dont_touch_*]</span><br></pre></td></tr></table></figure>
-<p>The instances whose name contain "dont_touch_" shall be preserved
-during synthesis</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no performace concerns, rest sync use sync3 is enough</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> CN_resetb_sync_cell</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">input</span> resetb_in,</span><br><span class="line">    <span class="keyword">input</span> clkdst,</span><br><span class="line">    <span class="keyword">output</span> resetb_out</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] resetb_dly;</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> USE_VERILOG</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clkdst <span class="keyword">or</span> <span class="keyword">negedge</span> resetb_in)</span><br><span class="line">    <span class="keyword">if</span> (~resetb_in) resetb_dly &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="keyword">else</span> resetb_dly &lt;= &#123;resetb_dly[<span class="number">1</span>:<span class="number">0</span>], <span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line"><span class="meta">`<span class="keyword">else</span></span></span><br><span class="line">SDFCNQD4 dont_touch_sync_flop0 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(<span class="number">1&#x27;b1</span>),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">0</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop1 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">0</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">1</span>])</span><br><span class="line">);</span><br><span class="line">SDFCNQD4 dont_touch_sync_flop2 (</span><br><span class="line">    <span class="variable">.SI</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.SE</span>(<span class="number">1&#x27;b0</span>),</span><br><span class="line">    <span class="variable">.CP</span>(clkdst),</span><br><span class="line">    <span class="variable">.CDN</span>(resetb_in),</span><br><span class="line">    <span class="variable">.D</span>(resetb_dly[<span class="number">1</span>]),</span><br><span class="line">    <span class="variable">.Q</span>(resetb_dly[<span class="number">2</span>])</span><br><span class="line">);</span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> resetb_out = resetb_dly[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -10000,266 +10073,6 @@ href="https://www.edn.com/burn-in-101/">link</a>]</p>
       </categories>
   </entry>
   <entry>
-    <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
-    <url>/2022/06/10/isf-sampler/</url>
-    <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
-periodic AC (PAC) analysis, which is available from RF circuit
-simulators such as SpectreRF and ADS</p>
-<h2 id="isf">ISF</h2>
-<h3 id="linear-time-varying-system-theory">Linear Time-varying System
-Theory</h3>
-<p>We define the ISF of the sampler as the sensitivity of its final
-output voltage to the impulse arriving at its input at different times,
-the ISF essentially describes the aperture of the sampler.</p>
-<p>An ideal sampler would have the perfect aperture, i.e. sampling the
-input voltage at exactly one point in time; thus, its ISF would be a
-Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
-where <span class="math inline">\(t_s\)</span> is when sampling
-occurs.</p>
-<p>A realistic sampler would rather capture a weighted-average of the
-input voltage over a certain time window. This weighting function is
-called the sampling aperture and is equivalent to the ISF</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
-alt="image-20220610235211500" /></p>
-<p>A <strong>time-varying impulse response</strong> <span
-class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
-response at time <span class="math inline">\(t\)</span> responding to an
-impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
-<p>In general, the ISF can be regarded as the <strong>time-varying
-impulse response</strong> evaluated at <em>one particular observation
-time</em> <span class="math inline">\(t=t_0\)</span>.</p>
-<p>The system output <span class="math inline">\(y(t)\)</span> is
-related to the input <span class="math inline">\(x(t)\)</span> as: <span
-class="math display">\[
-y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
-\]</span> Note that in a linear time-invariant (LTI) system, <span
-class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
-equation reduces to a convolution.</p>
-<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
-transform of the input signal <span class="math inline">\(x(t)\)</span>,
-i.e. <span class="math display">\[
-x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
-t}d\omega
-\]</span> Then <span class="math display">\[\begin{align}
-y(t) &amp;=
-\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-e^{j\omega\tau }d\omega \right]\cdot d\tau \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{j\omega\tau}d\tau\right]\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
-&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
-H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
-\end{align}\]</span></p>
-<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
-<strong>time-varying transfer function</strong>, defined as the Fourier
-transform of the time-varying impulse response. <span
-class="math display">\[
-H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau
-\]</span> And it follows that: <span class="math display">\[
-Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
-\]</span> And</p>
-<p><span class="math display">\[\begin{align}
-x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
-h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
-\end{align}\]</span></p>
-<p>For linear, periodically time-varying (LPTV) systems, <span
-class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
-class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
-<span class="math inline">\(T\)</span> is the period of the time-varying
-dynamics of the system.</p>
-<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
-t+T)\)</span>:</p>
-<p><span class="math display">\[\begin{align}
-\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
-e^{-j\omega(t+T-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
-&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
-e^{-j\omega(t-\tau)}d\tau \\
-&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
-\\
-&amp;= H(j\omega;t)
-\end{align}\]</span></p>
-<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
-<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
-in <span class="math inline">\(T\)</span>, The time-varying transfer
-function <span class="math inline">\(H(j\omega;t)\)</span> can be
-expressed in a Fourier series: <span class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
-t}
-\]</span> where <span class="math inline">\(\omega_c\)</span> is the
-fundamental frequency of the periodic system. <span
-class="math inline">\(H_m(j\omega)\)</span> represent the frequency
-response of the system at the <em>(m-th)</em> harmonic output sideband
-to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
-<blockquote>
-<p>The above equation link time-varying transfer function <span
-class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
-output</p>
-</blockquote>
-<p>The response to a periodic impulse train, that is: <span
-class="math display">\[
-x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
-\]</span> The idea is that if the impulse response of the system settles
-to zero long before the next impulse arrives, then the system response
-to this impulse train would be approximately equal to the periodic
-repetition of the true impulse response, i.e.: <span
-class="math display">\[
-y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
-\]</span> and <span class="math inline">\(y(t)\)</span> would be
-approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
-for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
-<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
-alt="yt.drawio" /></p>
-<blockquote>
-<p>Without loss of generality and for computation convenience, we set
-<span class="math inline">\(k=1\)</span> thereafter.</p>
-</blockquote>
-<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
-of the <strong>T-periodic</strong> impulse train is: <span
-class="math display">\[
-X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
-e^{-j\omega\tau}
-\]</span> Then the response <span class="math inline">\(y(t)\)</span>
-is: <span class="math display">\[
-y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
-e^{jn\omega_c\cdot(t-\tau)}
-\]</span> The expression for the approximate time-varying impulse
-response: <span class="math display">\[
-h(t,\tau) = \left\{ \begin{array}{cl}
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
-0 &amp; : \ \text{elsewhere}
-\end{array} \right.
-\]</span> Finally, the ISF <span
-class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
-class="math inline">\(h(t,\tau)\)</span> when <span
-class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
-\gt \tau\)</span> <span class="math display">\[
-\Gamma(\tau)\cong
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
-e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
-\]</span> In practice, the summations are carried out over finite ranges
-of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
-<p>For each combination of <strong>n</strong> and <strong>m</strong>,
-the PAC analysis needs to be performed to compute <span
-class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
-response to the excitation at <span
-class="math inline">\(n\omega_c\)</span></p>
-<p>The detailed procedure for characterizing the ISF of this sampler is
-outlined as follows:</p>
-<ul>
-<li><p>First, apply the proper input voltages that place the sampler in
-a metastable state and perform the periodic steady-state (PSS)
-analysis.</p></li>
-<li><p>Second, perform the PAC analysis.</p></li>
-<li><p>Third, based on the simulated PAC response, pick a time point
-<span class="math inline">\(t_0\)</span> at which the ISF is to be
-computed and derive the ISF</p></li>
-</ul>
-<p>One possible candidate for the ISF measurement point <span
-class="math inline">\(t_0\)</span> is the time at which the output
-voltage is amplified to the largest value. PAC response of the sampler
-to a small signal DC input, that is, the time-varying transfer function
-evaluated at <span class="math inline">\(\omega=0\)</span> <span
-class="math display">\[
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
-\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
-alt="image-20220614214446328" /></p>
-<blockquote>
-<p>The total area under the ISF is the sampling gain, which is equal to
-the time-varying gain measured at <span
-class="math inline">\(t_0\)</span></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
-log</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
-alt="image-20220614214537033" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
-<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
-<p>Since both are frequency originated, time-shift is NOT needed</p>
-<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
-alt="image-20220614214613574" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="remarks">Remarks</h3>
-<p><strong>pss pac setup</strong></p>
-<ul>
-<li>clock frequency should be low enough to assure system response
-settle to zero.</li>
-<li>Beat Frequency os PSS should be clock frequency</li>
-<li>For PAC setup,
-<ul>
-<li>the <code>Sweeptype</code> is <code>absolute</code></li>
-<li><code>Input Frequency Sweep Range(Hz)</code> should be large
-enough.</li>
-<li><code>Sweep Type</code> should be <code>Linear</code> and
-<code>Step Size</code> should equal <strong>PSS Beat
-Frequency(Hz)</strong></li>
-<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
-positive, negative and 0)</li>
-<li><code>Specialized Analyses</code> should be <code>None</code></li>
-</ul></li>
-</ul>
-<blockquote>
-<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
-sweep from -400G to 400G and step is 8G, which is beat frequency, here
-K=1 Eq.(9) of paper</p>
-</blockquote>
-<blockquote>
-<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
-affect "Direct Plot"'s output but also simuation data i.e. the phase
-shift(imaginary part).</p>
-</blockquote>
-<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
-<p><code>transpose</code>, <code>.'</code> cf.
-https://www.mathworks.com/help/matlab/ref/transpose.html</p>
-<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
-<p>Using shooting PSS, the steady waveform starts from
-<code>tstab+n*tperiod</code>.</p>
-<ul>
-<li><strong>pss_td.pss</strong> is one period waveform starting from
-<code>tstab+n*tperiod</code></li>
-<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
-coefficient of expanded to left and right <strong>pss_td.pss</strong>
-waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
-</ul>
-<blockquote>
-<p>We have to left-shift <code>mod(tstab, tperiod)</code>
-<code>pss_fd.pss</code> in order to align it with of
-<strong>pss_tb.pss</strong></p>
-</blockquote>
-<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
-alt="image-20220610222535614" /></p>
-<h3 id="simulation-log">simulation log</h3>
-<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
-time, though <code>Stop Time(tstab)</code> field of pss form is filled
-with <code>0.3n</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h3 id="pss-simulation-result">PSS simulation result</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
-alt="image-20220610224100135" /></p>
-<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
-<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
-alt="image-20220610225310243" /></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="reference">reference</h2>
-<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
-function analysis of periodic circuits," 2008 IEEE/ACM International
-Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
-10.1109/ICCAD.2008.4681602.</p>
-]]></content>
-      <categories>
-        <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Isolation cells</title>
     <url>/2022/05/27/isocells/</url>
     <content><![CDATA[<p>Isolation cells are additional cells inserted by the synthesis tools
@@ -10542,6 +10355,266 @@ calibration for jitter decomposition." Metrology and Measurement Systems
 jitter decomposition through its distribution tail fitting,"
 International Test Conference 1999. Proceedings (IEEE Cat.
 No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Impulse Sensitivity Function (ISF) of Periodic Sampler</title>
+    <url>/2022/06/10/isf-sampler/</url>
+    <content><![CDATA[<p>An efficient method to measure the ISFs of periodic circuits via
+periodic AC (PAC) analysis, which is available from RF circuit
+simulators such as SpectreRF and ADS</p>
+<h2 id="isf">ISF</h2>
+<h3 id="linear-time-varying-system-theory">Linear Time-varying System
+Theory</h3>
+<p>We define the ISF of the sampler as the sensitivity of its final
+output voltage to the impulse arriving at its input at different times,
+the ISF essentially describes the aperture of the sampler.</p>
+<p>An ideal sampler would have the perfect aperture, i.e. sampling the
+input voltage at exactly one point in time; thus, its ISF would be a
+Dirac delta function, <span class="math inline">\(\delta(t-t_s)\)</span>
+where <span class="math inline">\(t_s\)</span> is when sampling
+occurs.</p>
+<p>A realistic sampler would rather capture a weighted-average of the
+input voltage over a certain time window. This weighting function is
+called the sampling aperture and is equivalent to the ISF</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220610235211500.png"
+alt="image-20220610235211500" /></p>
+<p>A <strong>time-varying impulse response</strong> <span
+class="math inline">\(h(t, \tau)\)</span> is defined as the circuit
+response at time <span class="math inline">\(t\)</span> responding to an
+impulse arriving at time <span class="math inline">\(\tau\)</span>.</p>
+<p>In general, the ISF can be regarded as the <strong>time-varying
+impulse response</strong> evaluated at <em>one particular observation
+time</em> <span class="math inline">\(t=t_0\)</span>.</p>
+<p>The system output <span class="math inline">\(y(t)\)</span> is
+related to the input <span class="math inline">\(x(t)\)</span> as: <span
+class="math display">\[
+y(t) = \int_{-\infty}^{\infty}h(t, \tau)\cdot x(\tau)d\tau
+\]</span> Note that in a linear time-invariant (LTI) system, <span
+class="math inline">\(h(t,\tau)=h(t-\tau)\)</span> and the above
+equation reduces to a convolution.</p>
+<p>If <span class="math inline">\(X(j\omega)\)</span> is the Fourier
+transform of the input signal <span class="math inline">\(x(t)\)</span>,
+i.e. <span class="math display">\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot e^{j\omega
+t}d\omega
+\]</span> Then <span class="math display">\[\begin{align}
+y(t) &amp;=
+\int_{-\infty}^{\infty}h(t,\tau)\left[\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
+e^{j\omega\tau }d\omega \right]\cdot d\tau \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{j\omega\tau}d\tau\right]\cdot d\omega \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\left[\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau\right]\cdot e^{j\omega t}\cdot d\omega \\
+&amp;=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(j\omega)\cdot
+H(j\omega;t)\cdot e^{j\omega t}\cdot d\omega
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(H(j\omega;t)\)</span> is
+<strong>time-varying transfer function</strong>, defined as the Fourier
+transform of the time-varying impulse response. <span
+class="math display">\[
+H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau
+\]</span> And it follows that: <span class="math display">\[
+Y(j\omega)=H(j\omega;t)\cdot X(j\omega)
+\]</span> And</p>
+<p><span class="math display">\[\begin{align}
+x(\tau) &amp; \overset{FT}{\longrightarrow} X(j\omega) \\
+h(t,\tau) &amp; \overset{FT}{\longrightarrow} H(j\omega;t)
+\end{align}\]</span></p>
+<p>For linear, periodically time-varying (LPTV) systems, <span
+class="math inline">\(h(t, \tau) = h(t+T, \tau+T)\)</span> and <span
+class="math inline">\(H(j\omega; t) = H(j\omega; t+T)\)</span> where
+<span class="math inline">\(T\)</span> is the period of the time-varying
+dynamics of the system.</p>
+<p>We prove <span class="math inline">\(H(j\omega; t) = H(j\omega;
+t+T)\)</span>:</p>
+<p><span class="math display">\[\begin{align}
+\because H(j\omega;t)&amp;=\int_{-\infty}^{\infty}h(t,\tau)\cdot
+e^{-j\omega(t-\tau)}d\tau \\
+\therefore H(j\omega;t+T) &amp;= \int_{-\infty}^{\infty}h(t+T,\tau)\cdot
+e^{-j\omega(t+T-\tau)}d\tau \\
+&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
+e^{-j\omega(t+T-(\tau+T))}d(\tau+T) \\
+&amp;= \int_{-\infty}^{\infty}h(t+T,\tau+T)\cdot
+e^{-j\omega(t-\tau)}d\tau \\
+&amp;= \int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau
+\\
+&amp;= H(j\omega;t)
+\end{align}\]</span></p>
+<h3 id="characterizing-isf-via-pac">Characterizing ISF via PAC</h3>
+<p>Since <span class="math inline">\(H(j\omega;t)\)</span> is periodic
+in <span class="math inline">\(T\)</span>, The time-varying transfer
+function <span class="math inline">\(H(j\omega;t)\)</span> can be
+expressed in a Fourier series: <span class="math display">\[
+H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c
+t}
+\]</span> where <span class="math inline">\(\omega_c\)</span> is the
+fundamental frequency of the periodic system. <span
+class="math inline">\(H_m(j\omega)\)</span> represent the frequency
+response of the system at the <em>(m-th)</em> harmonic output sideband
+to a unit <span class="math inline">\(j\omega\)</span> sinusoid.</p>
+<blockquote>
+<p>The above equation link time-varying transfer function <span
+class="math inline">\(H(j\omega;t)\)</span> with PAC simulation
+output</p>
+</blockquote>
+<p>The response to a periodic impulse train, that is: <span
+class="math display">\[
+x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
+\]</span> The idea is that if the impulse response of the system settles
+to zero long before the next impulse arrives, then the system response
+to this impulse train would be approximately equal to the periodic
+repetition of the true impulse response, i.e.: <span
+class="math display">\[
+y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
+\]</span> and <span class="math inline">\(y(t)\)</span> would be
+approximately equal to <span class="math inline">\(h(t;\tau)\)</span>
+for <span class="math inline">\(\tau \leq t \le t+kT\)</span></p>
+<p><img src="/2022/06/10/isf-sampler/yt.drawio.svg"
+alt="yt.drawio" /></p>
+<blockquote>
+<p>Without loss of generality and for computation convenience, we set
+<span class="math inline">\(k=1\)</span> thereafter.</p>
+</blockquote>
+<p>The Fourier transform <span class="math inline">\(X(j\omega)\)</span>
+of the <strong>T-periodic</strong> impulse train is: <span
+class="math display">\[
+X(j\omega)=\omega_c\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_c)\cdot
+e^{-j\omega\tau}
+\]</span> Then the response <span class="math inline">\(y(t)\)</span>
+is: <span class="math display">\[
+y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot
+e^{jn\omega_c\cdot(t-\tau)}
+\]</span> The expression for the approximate time-varying impulse
+response: <span class="math display">\[
+h(t,\tau) = \left\{ \begin{array}{cl}
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
+e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} &amp; : \ \tau \leq \tau+T \\
+0 &amp; : \ \text{elsewhere}
+\end{array} \right.
+\]</span> Finally, the ISF <span
+class="math inline">\(\Gamma(\tau)\)</span> is equal to <span
+class="math inline">\(h(t,\tau)\)</span> when <span
+class="math inline">\(t=t_0\)</span> and <span class="math inline">\(t_0
+\gt \tau\)</span> <span class="math display">\[
+\Gamma(\tau)\cong
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot
+e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
+\]</span> In practice, the summations are carried out over finite ranges
+of <strong>n</strong> and <strong>m</strong>, for example, -50~50.</p>
+<p>For each combination of <strong>n</strong> and <strong>m</strong>,
+the PAC analysis needs to be performed to compute <span
+class="math inline">\(H_m(jn\omega_c)\)</span>, the m-th harmonic
+response to the excitation at <span
+class="math inline">\(n\omega_c\)</span></p>
+<p>The detailed procedure for characterizing the ISF of this sampler is
+outlined as follows:</p>
+<ul>
+<li><p>First, apply the proper input voltages that place the sampler in
+a metastable state and perform the periodic steady-state (PSS)
+analysis.</p></li>
+<li><p>Second, perform the PAC analysis.</p></li>
+<li><p>Third, based on the simulated PAC response, pick a time point
+<span class="math inline">\(t_0\)</span> at which the ISF is to be
+computed and derive the ISF</p></li>
+</ul>
+<p>One possible candidate for the ISF measurement point <span
+class="math inline">\(t_0\)</span> is the time at which the output
+voltage is amplified to the largest value. PAC response of the sampler
+to a small signal DC input, that is, the time-varying transfer function
+evaluated at <span class="math inline">\(\omega=0\)</span> <span
+class="math display">\[
+H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
+\]</span> <img src="/2022/06/10/isf-sampler/image-20220614214446328.png"
+alt="image-20220614214446328" /></p>
+<blockquote>
+<p>The total area under the ISF is the sampling gain, which is equal to
+the time-varying gain measured at <span
+class="math inline">\(t_0\)</span></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">time-varying gain at t0 H(0;t0): 19.486305</span><br><span class="line">The total area under the ISF: 19.990230</span><br></pre></td></tr></table></figure>
+<h3 id="align-pss_td.pss-with-isf">Align pss_td.pss with ISF</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">****************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 500 MHz</span><br><span class="line">****************************************************</span><br><span class="line">Trying `homotopy = gmin&#x27; for initial conditions.</span><br><span class="line">DC simulation time: CPU = 4.237 ms, elapsed = 4.27389 ms.</span><br><span class="line"></span><br><span class="line">===============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 102.6 ns)</span><br><span class="line">===============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line">...</span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 102.6 ns</span><br><span class="line">    period = 2 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 102.6 ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><strong>tstab = 102.6 ns</strong> can be observed in pss simulation
+log</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220614214537033.png"
+alt="image-20220614214537033" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tstab = <span class="number">102.6e-9</span>;</span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tc);</span><br><span class="line">tt_shift = tt - tshift;</span><br><span class="line">tt_shift_start_indx = <span class="built_in">find</span>(tt_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">isf_shift = <span class="built_in">circshift</span>(isf_re, -tt_shift_start_indx);</span><br></pre></td></tr></table></figure>
+<h3 id="align-pss_fd.pss-with-isf">Align pss_fd.pss with ISF</h3>
+<p>Since both are frequency originated, time-shift is NOT needed</p>
+<p><img src="/2022/06/10/isf-sampler/image-20220614214613574.png"
+alt="image-20220614214613574" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wv</span> = <span class="title">wv_fd</span><span class="params">(fname,tt)</span></span></span><br><span class="line">fd = csvread(fname, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">DC = fd(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">w = <span class="number">2</span>*<span class="built_in">pi</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">1</span>);</span><br><span class="line">coef = fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">2</span>) + <span class="number">1</span><span class="built_in">i</span>*fd(<span class="number">2</span>:<span class="keyword">end</span>, <span class="number">3</span>);</span><br><span class="line">exp_sup = <span class="number">1</span><span class="built_in">i</span>*w.*tt;</span><br><span class="line">wv = sum(<span class="built_in">real</span>(coef .* <span class="built_in">exp</span>(exp_sup)), <span class="number">1</span>) + DC;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="remarks">Remarks</h3>
+<p><strong>pss pac setup</strong></p>
+<ul>
+<li>clock frequency should be low enough to assure system response
+settle to zero.</li>
+<li>Beat Frequency os PSS should be clock frequency</li>
+<li>For PAC setup,
+<ul>
+<li>the <code>Sweeptype</code> is <code>absolute</code></li>
+<li><code>Input Frequency Sweep Range(Hz)</code> should be large
+enough.</li>
+<li><code>Sweep Type</code> should be <code>Linear</code> and
+<code>Step Size</code> should equal <strong>PSS Beat
+Frequency(Hz)</strong></li>
+<li><code>SideBands</code> should large enough, like 50 (i.e. 50*2 +1,
+positive, negative and 0)</li>
+<li><code>Specialized Analyses</code> should be <code>None</code></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>one example: clock, i.e. beat frequency = 8G PAC: input frequency
+sweep from -400G to 400G and step is 8G, which is beat frequency, here
+K=1 Eq.(9) of paper</p>
+</blockquote>
+<blockquote>
+<p><strong>freqaxis=out</strong>: <code>freqaxis</code> of PAC not only
+affect "Direct Plot"'s output but also simuation data i.e. the phase
+shift(imaginary part).</p>
+</blockquote>
+<p>matlab matrix <strong>nonconjugate transpose</strong>:</p>
+<p><code>transpose</code>, <code>.'</code> cf.
+https://www.mathworks.com/help/matlab/ref/transpose.html</p>
+<h2 id="tstab-in-pss"><code>tstab</code> in PSS</h2>
+<p>Using shooting PSS, the steady waveform starts from
+<code>tstab+n*tperiod</code>.</p>
+<ul>
+<li><strong>pss_td.pss</strong> is one period waveform starting from
+<code>tstab+n*tperiod</code></li>
+<li><strong>pss_fd.pss</strong> is the <em>complex</em> fourier series
+coefficient of expanded to left and right <strong>pss_td.pss</strong>
+waveform (<code>tstab+n*tperiod : tstab+(n+1)*tperiod</code>)</li>
+</ul>
+<blockquote>
+<p>We have to left-shift <code>mod(tstab, tperiod)</code>
+<code>pss_fd.pss</code> in order to align it with of
+<strong>pss_tb.pss</strong></p>
+</blockquote>
+<p><img src="/2022/06/10/isf-sampler/image-20220610222535614.png"
+alt="image-20220610222535614" /></p>
+<h3 id="simulation-log">simulation log</h3>
+<p>The below <code>stop = 1.3 ns</code> is actual <strong>tstab</strong>
+time, though <code>Stop Time(tstab)</code> field of pss form is filled
+with <code>0.3n</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">Periodic Steady-State Analysis `pss&#x27;: fund = 1 GHz</span><br><span class="line">**************************************************</span><br><span class="line">DC simulation time: CPU = 208 us, elapsed = 211.954 us.</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">`pss&#x27;: time = (0 s -&gt; 1.3 ns)</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Opening the PSF file ../psf/pss.tran.pss ...</span><br><span class="line"></span><br><span class="line">Output and IC/nodeset summary:</span><br><span class="line">                 save   1       (current)</span><br><span class="line">                 save   2       (voltage)</span><br><span class="line"></span><br><span class="line">Important parameter values in tstab integration:</span><br><span class="line">    start = 0 s</span><br><span class="line">    outputstart = 0 s</span><br><span class="line">    stop = 1.3 ns</span><br><span class="line">    period = 1 ns</span><br><span class="line">    maxperiods = 20</span><br><span class="line">    step = 1.3 ps</span><br><span class="line">    maxstep = 40 ps</span><br><span class="line">    ic = all</span><br><span class="line">    useprevic = no</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">    pss: time = 64.01 ps    (4.92 %), step = 31.63 ps     (2.43 %)</span><br><span class="line">	...</span><br><span class="line">    pss: time = 1.224 ns    (94.2 %), step = 40 ps        (3.08 %)</span><br><span class="line">    pss: time = 1.3 ns       (100 %), step = 35.99 ps     (2.77 %)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="pss-simulation-result">PSS simulation result</h3>
+<p><img src="/2022/06/10/isf-sampler/image-20220610224100135.png"
+alt="image-20220610224100135" /></p>
+<h3 id="align-pss_tb-and-pss_fd">Align pss_tb and pss_fd</h3>
+<p><img src="/2022/06/10/isf-sampler/image-20220610225310243.png"
+alt="image-20220610225310243" /></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">freq = <span class="number">1e9</span>;</span><br><span class="line">tstab = <span class="number">1.3e-9</span>;</span><br><span class="line">Tp  = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line">load(<span class="string">&#x27;pss_td.matlab&#x27;</span>)</span><br><span class="line">t = pss_td(:, <span class="number">1</span>);</span><br><span class="line">ytd = pss_td(:, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t*<span class="number">1e9</span>, ytd, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="comment">% time domian from pss frequency domain information</span></span><br><span class="line">coff_real = <span class="number">-0.155222</span>;</span><br><span class="line">coff_imag = <span class="number">-0.0247045</span>;</span><br><span class="line">wc = <span class="number">2</span>*<span class="built_in">pi</span>*freq;</span><br><span class="line">tfd = (<span class="number">0</span>:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd = coff_real*<span class="built_in">cos</span>(wc*tfd) - coff_imag*<span class="built_in">sin</span>(wc*tfd);</span><br><span class="line"><span class="built_in">plot</span>(tfd*<span class="number">1e9</span>, yfd, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% actual pss_td.pss one-period waveform</span></span><br><span class="line">tfd_td = (tstab:<span class="number">1e-11</span>:<span class="number">2e-9</span>);</span><br><span class="line">yfd_td = coff_real*<span class="built_in">cos</span>(wc*tfd_td) - coff_imag*<span class="built_in">sin</span>(wc*tfd_td);</span><br><span class="line"><span class="built_in">plot</span>(tfd_td*<span class="number">1e9</span>, yfd_td, <span class="string">&#x27;--b&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% align pss_fd with pss_tb by left shift mod(tstab, Tp) pss_fd</span></span><br><span class="line">tshift = <span class="built_in">mod</span>(tstab, Tp);</span><br><span class="line">tfd_shift = tfd - tshift;</span><br><span class="line">tfd_shift_start_indx = <span class="built_in">find</span>(tfd_shift&gt;=<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">tfd_shift = tfd_shift(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line">yfd_shift = yfd(<span class="number">1</span>, tfd_shift_start_indx:<span class="keyword">end</span>);</span><br><span class="line"><span class="built_in">plot</span>(tfd_shift*<span class="number">1e9</span>, yfd_shift, <span class="string">&#x27;-magenta&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">xlabel(<span class="string">&#x27;t (ps)&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;V(t)&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Using pss\_td&#x27;</span>, <span class="string">&#x27;Using pss\_fd&#x27;</span>, <span class="string">&#x27;pss\_tb one period clip&#x27;</span>, <span class="string">&#x27;Using pss\_fd with time shift&#x27;</span>, <span class="string">&#x27;location&#x27;</span>, <span class="string">&#x27;east&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p>J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity
+function analysis of periodic circuits," 2008 IEEE/ACM International
+Conference on Computer-Aided Design, 2008, pp. 386-391, doi:
+10.1109/ICCAD.2008.4681602.</p>
 ]]></content>
       <categories>
         <category>noise</category>
@@ -11088,6 +11161,39 @@ href="https://pulsic.com/stacked-mosfets-in-analog-layout/">https://pulsic.com/s
       </categories>
   </entry>
   <entry>
+    <title>Layout Tricks Part 2 - matching</title>
+    <url>/2022/11/19/layout-tricks-part2/</url>
+    <content><![CDATA[<ol type="1">
+<li><p>Common Centroid</p>
+<p>The common centroid technique describes that if there are n blocks
+which are to be matched then the blocks are arranged symmetrically
+around the common centre at equal distances from the centre. This
+technique offers best matching for devices as it helps in avoiding
+cross-chip gradients</p>
+<p><img src="/2022/11/19/layout-tricks-part2/figure13.jpeg"
+alt="HTML5 Icon" /></p></li>
+<li><p>Inter-digitation</p>
+<p>Interdigitation reduces the device mismatch as it suffers equally
+from process variations in X dimension. This technique was used to
+layout current mirrors and resistors in PTAT and BGR circuits. In the
+Figure-15 below each brown stick represents a PFET of uniform length.
+This representation is termed as an inter-digitated layout.</p>
+<p><img src="/2022/11/19/layout-tricks-part2/figure14.jpeg"
+alt="HTML5 Icon" /></p></li>
+</ol>
+<h3 id="reference">reference</h3>
+<p>Mikael Sahrling, Layout Techniques for Integrated Circuit Designers
+1st Edition , Artech House 2022</p>
+<p>LAYOUT, <a
+href="http://www.ee.columbia.edu/~kinget/EE6350_S16/">EE6350 VLSI Design
+Lab</a> SMART TEMPERATURE SENSOR URL: <a
+href="https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html">https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html</a></p>
+]]></content>
+      <categories>
+        <category>analog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Low-Dropout Regulator</title>
     <url>/2023/10/21/ldo/</url>
     <content><![CDATA[<h2 id="pmos-ldo">PMOS LDO</h2>
@@ -11242,39 +11348,6 @@ href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20
 <p>Toshiba, Load Transient Response of LDO and Methods to Improve it
 Application Note [<a
 href="https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268">https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268</a>]</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Layout Tricks Part 2 - matching</title>
-    <url>/2022/11/19/layout-tricks-part2/</url>
-    <content><![CDATA[<ol type="1">
-<li><p>Common Centroid</p>
-<p>The common centroid technique describes that if there are n blocks
-which are to be matched then the blocks are arranged symmetrically
-around the common centre at equal distances from the centre. This
-technique offers best matching for devices as it helps in avoiding
-cross-chip gradients</p>
-<p><img src="/2022/11/19/layout-tricks-part2/figure13.jpeg"
-alt="HTML5 Icon" /></p></li>
-<li><p>Inter-digitation</p>
-<p>Interdigitation reduces the device mismatch as it suffers equally
-from process variations in X dimension. This technique was used to
-layout current mirrors and resistors in PTAT and BGR circuits. In the
-Figure-15 below each brown stick represents a PFET of uniform length.
-This representation is termed as an inter-digitated layout.</p>
-<p><img src="/2022/11/19/layout-tricks-part2/figure14.jpeg"
-alt="HTML5 Icon" /></p></li>
-</ol>
-<h3 id="reference">reference</h3>
-<p>Mikael Sahrling, Layout Techniques for Integrated Circuit Designers
-1st Edition , Artech House 2022</p>
-<p>LAYOUT, <a
-href="http://www.ee.columbia.edu/~kinget/EE6350_S16/">EE6350 VLSI Design
-Lab</a> SMART TEMPERATURE SENSOR URL: <a
-href="https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html">https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html</a></p>
 ]]></content>
       <categories>
         <category>analog</category>
@@ -12333,6 +12406,178 @@ href="https://semiengineering.com/the-complex-art-of-handling-s-parameters/">htt
       </categories>
   </entry>
   <entry>
+    <title>Noise Analysis</title>
+    <url>/2024/04/27/noise/</url>
+    <content><![CDATA[<h2 id="sampled-thermal-noise">Sampled Thermal Noise</h2>
+<p>The <strong>aliasing of the noise</strong>, or <strong>noise
+folding</strong>, plays an important role in switched-capacitor as it
+does in all switched-capacitor filters</p>
+<p><img src="/2024/04/27/noise/image-20240425215938141.png"
+alt="image-20240425215938141" /></p>
+<p>Assume for the moment that the switch is <em>always closed</em> (that
+there is no hold phase), the single-sided noise density would be</p>
+<p><img src="/2024/04/27/noise/image-20240428182816109.png"
+alt="image-20240428182816109" /></p>
+<p><img src="/2024/04/27/noise/image-20240428180635082.png"
+alt="image-20240428180635082" /></p>
+<p><span class="math inline">\(v_s[n]\)</span> is the sampled version of
+<span class="math inline">\(v_{RC}(t)\)</span>, i.e. <span
+class="math inline">\(v_s[n]= v_{RC}(nT_C)\)</span> <span
+class="math display">\[
+S_s(e^{j\omega}) = \frac{1}{T_C}
+\sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi
+k}{T_C})) \cdot d\omega
+\]</span> where <span class="math inline">\(\omega \in [-\pi,
+\pi]\)</span>, furthermore <span
+class="math inline">\(\frac{d\omega}{T_C}= d\Omega\)</span> <span
+class="math display">\[
+S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s))
+\cdot d\Omega
+\]</span></p>
+<blockquote>
+<p><img src="/2024/04/27/noise/image-20240428215559780.png"
+alt="image-20240428215559780" /></p>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240425220033340.png"
+alt="image-20240425220033340" /></p>
+<p>The noise in <span class="math inline">\(S_{RC}\)</span> is a
+<em>stationary process</em> and so is <em>uncorrelated</em> over <span
+class="math inline">\(f\)</span> allowing the <span
+class="math inline">\(N\)</span> rectangles to be combined by simply
+summing their noise powers</p>
+<p><img src="/2024/04/27/noise/sample_impulse_hold.drawio.svg"
+alt="image-20240428225949327" /></p>
+<blockquote>
+<p><span class="math display">\[
+X(j\Omega)d\Omega = \frac{1}{T_c}X(e^{j\omega})d\omega  
+\]</span></p>
+<p>ref. <em><a
+href="https://raytroop.github.io/2024/08/30/fourier/#frequency-domain-representation-of-sampling">[Frequency-Domain
+Representation of Sampling]</a></em> of EQ.(31) in the blog</p>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240428225949327.png"
+alt="image-20240428225949327" /></p>
+<p><img src="/2024/04/27/noise/image-20240425220400924.png"
+alt="image-20240425220400924" /></p>
+<p>where <span class="math inline">\(m\)</span> is the duty cycle</p>
+<hr />
+<p><em>Below analysis focus on sampled noise</em></p>
+<p><img src="/2024/04/27/noise/image-20240427183257203.png"
+alt="image-20240427183257203" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183349642.png"
+alt="image-20240427183349642" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183516540.png"
+alt="image-20240427183516540" /></p>
+<p><img src="/2024/04/27/noise/image-20240427183458649.png"
+alt="image-20240427183458649" /></p>
+<blockquote>
+<ul>
+<li>Calculate autocorrelation function of noise at the output of the RC
+filter</li>
+<li>Calculate the spectrum by taking the <strong>discrete</strong> time
+Fourier transform of the autocorrelation function</li>
+</ul>
+</blockquote>
+<p><img src="/2024/04/27/noise/image-20240427183700971.png"
+alt="image-20240427183700971" /></p>
+<blockquote>
+<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
+SpectreRF.</p>
+<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
+Converters, Second Edition" ISBN 978-1-119-25827-8</p>
+<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
+<p>- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 /
+tutorials</p>
+<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
+Modeling URL: <a
+href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
+<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
+Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
+Publishers Inc., San Francisco, CA, USA.</p>
+<p>Bernhard E. Boser . Advanced Analog Integrated Circuits Switched
+Capacitor Gain Stages [<a
+href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf</a>]</p>
+<p>R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for
+Signal Processing. Wiley-Interscience, 1986</p>
+<p>Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits [<a
+href="http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf">http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf</a>]</p>
+</blockquote>
+<h2 id="spectrum-analyzer">spectrum analyzer</h2>
+<p>We tried to plot a <em>power spectral density</em> together with
+something that we want to interpret as a <em>power spectrum</em></p>
+<blockquote>
+<ul>
+<li><em>spectrum</em> of a periodic signal</li>
+<li><em>spectral density</em> of a broadband signal such as noise</li>
+</ul>
+<p>Sine-wave components are located in individual FFT bins, but
+broadband signals like noise have their power spread over all FFT
+bins!</p>
+<p>The <strong>noise floor</strong> depends on the <em>length of the
+FFT</em></p>
+</blockquote>
+<p>[<a
+href="http://individual.utoronto.ca/schreier/lectures/2015/1.pdf">http://individual.utoronto.ca/schreier/lectures/2015/1.pdf</a>]</p>
+<p><img src="/2024/04/27/noise/image-20240522214004545.png"
+alt="image-20240522214004545" /></p>
+<p>signal tone power <span class="math display">\[
+P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
+\]</span></p>
+<p>noise power <span class="math display">\[
+P_n = \frac{X_{w,n}^2}{S_2}
+\]</span></p>
+<p>Then, displayed <strong>SNR</strong> is obtained <span
+class="math display">\[\begin{align}
+\mathrm{SNR} &amp;= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right)
+\\
+&amp;= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) +
+10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
+&amp;= \mathrm{SNR}&#39;-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
+&amp;= \mathrm{SNR}&#39;-10\log_{10}(2\cdot\mathrm{NBW}) \\
+\end{align}\]</span></p>
+<blockquote>
+<p><em>DFT's output</em> <span
+class="math inline">\(\mathrm{SNR}\)</span></p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> N=[<span class="number">2</span>^<span class="number">6</span> <span class="number">2</span>^<span class="number">8</span> <span class="number">2</span>^<span class="number">10</span> <span class="number">2</span>^<span class="number">12</span>]</span><br><span class="line">  wd = rectwin(N);</span><br><span class="line">  nbw = enbw(wd)/N;</span><br><span class="line">  snr_shift = <span class="number">10</span>*<span class="built_in">log10</span>(nbw * <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">disp</span>(snr_shift);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-15.0515</span><br><span class="line"></span><br><span class="line">-21.0721</span><br><span class="line"></span><br><span class="line">-27.0927</span><br><span class="line"></span><br><span class="line">-33.1133</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/04/27/noise/image-20240522214340882.png"
+alt="image-20240522214340882" /></p>
+<blockquote>
+<p>The solution to the scaling problem in the case of a PSD obtained
+from a sine-wave scaled FFT is similarly simple. All we need do is
+provide the value of <strong>NBW</strong></p>
+</blockquote>
+<blockquote>
+<p><em>APPENDIX A - SPECTRAL ESTIMATION - A.2 Scaling and Noise
+Bandwidth</em></p>
+<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
+Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
+</blockquote>
+<ul>
+<li>For a filter with infinitely steep roll-off, the noise bandwidth
+(<strong>NBW</strong>) is equal to the filter's bandwidth,</li>
+<li>while for a filter with a single-pole roll-off, <strong>NBW</strong>
+is 2 times the 3-dB bandwidth</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p>David Herres, The difference between signal under-sampling, aliasing,
+and folding URL: <a
+href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
+<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
+Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
+978-0-12-375079-2. <a
+href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
+7 (Sampling and reconstruction)</a></p>
+<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
+3rd edition</p>
+]]></content>
+      <categories>
+        <category>noise</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Non ideal capacitor and inductor</title>
     <url>/2023/12/24/nonideal-LC/</url>
     <content><![CDATA[<h2 id="conversion-relationships">Conversion Relationships</h2>
@@ -12668,178 +12913,6 @@ href="https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.p
 ]]></content>
       <categories>
         <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Noise Analysis</title>
-    <url>/2024/04/27/noise/</url>
-    <content><![CDATA[<h2 id="sampled-thermal-noise">Sampled Thermal Noise</h2>
-<p>The <strong>aliasing of the noise</strong>, or <strong>noise
-folding</strong>, plays an important role in switched-capacitor as it
-does in all switched-capacitor filters</p>
-<p><img src="/2024/04/27/noise/image-20240425215938141.png"
-alt="image-20240425215938141" /></p>
-<p>Assume for the moment that the switch is <em>always closed</em> (that
-there is no hold phase), the single-sided noise density would be</p>
-<p><img src="/2024/04/27/noise/image-20240428182816109.png"
-alt="image-20240428182816109" /></p>
-<p><img src="/2024/04/27/noise/image-20240428180635082.png"
-alt="image-20240428180635082" /></p>
-<p><span class="math inline">\(v_s[n]\)</span> is the sampled version of
-<span class="math inline">\(v_{RC}(t)\)</span>, i.e. <span
-class="math inline">\(v_s[n]= v_{RC}(nT_C)\)</span> <span
-class="math display">\[
-S_s(e^{j\omega}) = \frac{1}{T_C}
-\sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi
-k}{T_C})) \cdot d\omega
-\]</span> where <span class="math inline">\(\omega \in [-\pi,
-\pi]\)</span>, furthermore <span
-class="math inline">\(\frac{d\omega}{T_C}= d\Omega\)</span> <span
-class="math display">\[
-S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s))
-\cdot d\Omega
-\]</span></p>
-<blockquote>
-<p><img src="/2024/04/27/noise/image-20240428215559780.png"
-alt="image-20240428215559780" /></p>
-</blockquote>
-<p><img src="/2024/04/27/noise/image-20240425220033340.png"
-alt="image-20240425220033340" /></p>
-<p>The noise in <span class="math inline">\(S_{RC}\)</span> is a
-<em>stationary process</em> and so is <em>uncorrelated</em> over <span
-class="math inline">\(f\)</span> allowing the <span
-class="math inline">\(N\)</span> rectangles to be combined by simply
-summing their noise powers</p>
-<p><img src="/2024/04/27/noise/sample_impulse_hold.drawio.svg"
-alt="image-20240428225949327" /></p>
-<blockquote>
-<p><span class="math display">\[
-X(j\Omega)d\Omega = \frac{1}{T_c}X(e^{j\omega})d\omega  
-\]</span></p>
-<p>ref. <em><a
-href="https://raytroop.github.io/2024/08/30/fourier/#frequency-domain-representation-of-sampling">[Frequency-Domain
-Representation of Sampling]</a></em> of EQ.(31) in the blog</p>
-</blockquote>
-<p><img src="/2024/04/27/noise/image-20240428225949327.png"
-alt="image-20240428225949327" /></p>
-<p><img src="/2024/04/27/noise/image-20240425220400924.png"
-alt="image-20240425220400924" /></p>
-<p>where <span class="math inline">\(m\)</span> is the duty cycle</p>
-<hr />
-<p><em>Below analysis focus on sampled noise</em></p>
-<p><img src="/2024/04/27/noise/image-20240427183257203.png"
-alt="image-20240427183257203" /></p>
-<p><img src="/2024/04/27/noise/image-20240427183349642.png"
-alt="image-20240427183349642" /></p>
-<p><img src="/2024/04/27/noise/image-20240427183516540.png"
-alt="image-20240427183516540" /></p>
-<p><img src="/2024/04/27/noise/image-20240427183458649.png"
-alt="image-20240427183458649" /></p>
-<blockquote>
-<ul>
-<li>Calculate autocorrelation function of noise at the output of the RC
-filter</li>
-<li>Calculate the spectrum by taking the <strong>discrete</strong> time
-Fourier transform of the autocorrelation function</li>
-</ul>
-</blockquote>
-<p><img src="/2024/04/27/noise/image-20240427183700971.png"
-alt="image-20240427183700971" /></p>
-<blockquote>
-<p>Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with
-SpectreRF.</p>
-<p>Pavan, Schreier and Temes, "Understanding Delta-Sigma Data
-Converters, Second Edition" ISBN 978-1-119-25827-8</p>
-<p>Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013</p>
-<p>- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 /
-tutorials</p>
-<p>Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and
-Modeling URL: <a
-href="https://www.seas.upenn.edu/~ese568/fall2019/">https://www.seas.upenn.edu/~ese568/fall2019/</a></p>
-<p>Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based
-Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann
-Publishers Inc., San Francisco, CA, USA.</p>
-<p>Bernhard E. Boser . Advanced Analog Integrated Circuits Switched
-Capacitor Gain Stages [<a
-href="https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf">https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf</a>]</p>
-<p>R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for
-Signal Processing. Wiley-Interscience, 1986</p>
-<p>Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits [<a
-href="http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf">http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf</a>]</p>
-</blockquote>
-<h2 id="spectrum-analyzer">spectrum analyzer</h2>
-<p>We tried to plot a <em>power spectral density</em> together with
-something that we want to interpret as a <em>power spectrum</em></p>
-<blockquote>
-<ul>
-<li><em>spectrum</em> of a periodic signal</li>
-<li><em>spectral density</em> of a broadband signal such as noise</li>
-</ul>
-<p>Sine-wave components are located in individual FFT bins, but
-broadband signals like noise have their power spread over all FFT
-bins!</p>
-<p>The <strong>noise floor</strong> depends on the <em>length of the
-FFT</em></p>
-</blockquote>
-<p>[<a
-href="http://individual.utoronto.ca/schreier/lectures/2015/1.pdf">http://individual.utoronto.ca/schreier/lectures/2015/1.pdf</a>]</p>
-<p><img src="/2024/04/27/noise/image-20240522214004545.png"
-alt="image-20240522214004545" /></p>
-<p>signal tone power <span class="math display">\[
-P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
-\]</span></p>
-<p>noise power <span class="math display">\[
-P_n = \frac{X_{w,n}^2}{S_2}
-\]</span></p>
-<p>Then, displayed <strong>SNR</strong> is obtained <span
-class="math display">\[\begin{align}
-\mathrm{SNR} &amp;= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right)
-\\
-&amp;= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) +
-10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
-&amp;= \mathrm{SNR}&#39;-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
-&amp;= \mathrm{SNR}&#39;-10\log_{10}(2\cdot\mathrm{NBW}) \\
-\end{align}\]</span></p>
-<blockquote>
-<p><em>DFT's output</em> <span
-class="math inline">\(\mathrm{SNR}\)</span></p>
-</blockquote>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> N=[<span class="number">2</span>^<span class="number">6</span> <span class="number">2</span>^<span class="number">8</span> <span class="number">2</span>^<span class="number">10</span> <span class="number">2</span>^<span class="number">12</span>]</span><br><span class="line">  wd = rectwin(N);</span><br><span class="line">  nbw = enbw(wd)/N;</span><br><span class="line">  snr_shift = <span class="number">10</span>*<span class="built_in">log10</span>(nbw * <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">disp</span>(snr_shift);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-15.0515</span><br><span class="line"></span><br><span class="line">-21.0721</span><br><span class="line"></span><br><span class="line">-27.0927</span><br><span class="line"></span><br><span class="line">-33.1133</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/04/27/noise/image-20240522214340882.png"
-alt="image-20240522214340882" /></p>
-<blockquote>
-<p>The solution to the scaling problem in the case of a PSD obtained
-from a sine-wave scaled FFT is similarly simple. All we need do is
-provide the value of <strong>NBW</strong></p>
-</blockquote>
-<blockquote>
-<p><em>APPENDIX A - SPECTRAL ESTIMATION - A.2 Scaling and Noise
-Bandwidth</em></p>
-<p>Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016.
-Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.</p>
-</blockquote>
-<ul>
-<li>For a filter with infinitely steep roll-off, the noise bandwidth
-(<strong>NBW</strong>) is equal to the filter's bandwidth,</li>
-<li>while for a filter with a single-pole roll-off, <strong>NBW</strong>
-is 2 times the 3-dB bandwidth</li>
-</ul>
-<h2 id="reference">reference</h2>
-<p>David Herres, The difference between signal under-sampling, aliasing,
-and folding URL: <a
-href="https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/">https://www.testandmeasurementtips.com/the-difference-between-signal-under-sampling-aliasing-and-folding-faq/</a></p>
-<p>Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based
-Rendering: From Theory to Implementation. Morgan Kaufmann. ISBN
-978-0-12-375079-2. <a
-href="https://web.archive.org/web/20131016055332/http://graphics.stanford.edu/~mmp/chapters/pbrt_chapter7.pdf">Chapter
-7 (Sampling and reconstruction)</a></p>
-<p>Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing,
-3rd edition</p>
-]]></content>
-      <categories>
-        <category>noise</category>
       </categories>
   </entry>
   <entry>
@@ -13596,6 +13669,43 @@ href="https://mixsignal.files.wordpress.com/2013/06/t06noiseanalysis_simone-1.pd
       </categories>
   </entry>
   <entry>
+    <title>plusargs in verilog</title>
+    <url>/2022/06/04/plusargs-verilog/</url>
+    <content><![CDATA[<p><strong>plusargs</strong> are command-line switches supported by the
+simulator. As per SystemVerilog LRM arguments beginning with the
+<code>+</code> character will be available using the
+<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
+APIs</strong>.</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
+<h4 id="example">Example</h4>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>compile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
+<li><p>simulate (<em>QuestaSim</em>)</p>
+<ul>
+<li><p>with<strong>out</strong> plusargs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
+<li><p>with plusargs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>+SEED=31 +RUNSIM</code></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h4 id="reference">reference</h4>
+<p>systemverilog-command-line-input URL: <a
+href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
+<p>PLUSARGS IN SYSTEMVERILOG URL:<a
+href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
     <title>import package in SystemVerilog compilation</title>
     <url>/2022/03/24/pkg-import-compile-sv/</url>
     <content><![CDATA[<h3 id="import-and-compile-order">import and compile order</h3>
@@ -13657,43 +13767,6 @@ compiling.</p>
 <p><a
 href="https://verificationacademy.com/forums/systemverilog/class-forward-declaration#answer-41383">class
 forward declaration</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>plusargs in verilog</title>
-    <url>/2022/06/04/plusargs-verilog/</url>
-    <content><![CDATA[<p><strong>plusargs</strong> are command-line switches supported by the
-simulator. As per SystemVerilog LRM arguments beginning with the
-<code>+</code> character will be available using the
-<code>$test$plusargs</code> and <code>$value$plusargs</code> <strong>PLI
-APIs</strong>.</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">$test$plusargs (user_string)</span><br><span class="line"></span><br><span class="line"><span class="built_in">$value$plusargs</span> (user_string, variable)</span><br></pre></td></tr></table></figure>
-<h4 id="example">Example</h4>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// tb.v</span></span><br><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span>($test$plusargs(<span class="string">&quot;RUNSIM&quot;</span>)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is RUNSIM plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $test$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">$value$plusargs</span>(<span class="string">&quot;SEED=%d&quot;</span>,a)) <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;SEED=%d&quot;</span>,a);</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                        <span class="built_in">$display</span>(<span class="string">&quot;There is NO $value$plusargs&quot;</span>);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>compile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vlib work</span><br><span class="line">$ vlog -sv tb.v</span><br></pre></td></tr></table></figure></li>
-<li><p>simulate (<em>QuestaSim</em>)</p>
-<ul>
-<li><p>with<strong>out</strong> plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is NO $test$plusargs</span><br><span class="line"># There is NO $value$plusargs</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-<li><p>with plusargs</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vsim work.tb -c -do &quot;run; exit&quot; +SEED=31 +RUNSIM</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>+SEED=31 +RUNSIM</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># //</span><br><span class="line"># Loading sv_std.std</span><br><span class="line"># Loading work.tb(fast)</span><br><span class="line"># run</span><br><span class="line"># There is RUNSIM plusargs</span><br><span class="line"># SEED=         31</span><br><span class="line">#  exit</span><br><span class="line"># End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01</span><br><span class="line"># Errors: 0, Warnings: 0</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h4 id="reference">reference</h4>
-<p>systemverilog-command-line-input URL: <a
-href="https://www.chipverify.com/systemverilog/systemverilog-command-line-input">https://www.chipverify.com/systemverilog/systemverilog-command-line-input</a></p>
-<p>PLUSARGS IN SYSTEMVERILOG URL:<a
-href="https://www.theartofverification.com/plusargs-in-systemverilog/">https://www.theartofverification.com/plusargs-in-systemverilog/</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
@@ -15528,67 +15601,6 @@ alt="image-20220507122217830" /></p>
       </categories>
   </entry>
   <entry>
-    <title>Comparator Noise</title>
-    <url>/2024/09/02/slicer/</url>
-    <content><![CDATA[<h2 id="noise-analysis">Noise Analysis</h2>
-<p><em>TODO</em> 📅</p>
-<h2 id="noise-simulation">Noise Simulation</h2>
-<p><img src="/2024/09/02/slicer/image-20240825215015322.png"
-alt="image-20240825215015322" /></p>
-<p><img src="/2024/09/02/slicer/image-20240825215134067.png"
-alt="image-20240825215134067" /></p>
-<blockquote>
-<p>SNR during sampling region and decison region increase</p>
-<p>SNR during regeneration region is consant, where noise is
-critical</p>
-</blockquote>
-<p><span class="math display">\[
-\text{SNR} = \frac{V_{o,sig}^2}{V_{o,n}^2} =
-\frac{V_{i,sig}^2}{V_{i,n}^2}
-\]</span></p>
-<p>That is <span class="math display">\[
-V_{i,n}^2 = \frac{V_{i,sig}^2}{V_{o,sig}^2}V_{o,n}^2 =
-\frac{V_{o,n}^2}{A_v^2}
-\]</span> where <span class="math inline">\(V_{i,sig}\)</span> is
-constant signal applied to input of comparator</p>
-<h2 id="offset">offset</h2>
-<p><img src="/2024/09/02/slicer/image-20240825204030645.png"
-alt="image-20240825204030645" /></p>
-<h2 id="reference">reference</h2>
-<p>T. Sepke, P. Holloway, C. G. Sodini and H. -S. Lee, "Noise Analysis
-for Comparator-Based Circuits," in IEEE Transactions on Circuits and
-Systems I: Regular Papers, vol. 56, no. 3, pp. 541-553, March 2009 [<a
-href="https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf">https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf</a>]</p>
-<p>Sepke, Todd. "Comparator design and analysis for comparator-based
-switched-capacitor circuits." (2006). [<a
-href="https://dspace.mit.edu/handle/1721.1/38925">https://dspace.mit.edu/handle/1721.1/38925</a>]</p>
-<p>J. Kim, B. S. Leibowitz, J. Ren and C. J. Madden, "Simulation and
-Analysis of Random Decision Errors in Clocked Comparators," in IEEE
-Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 8,
-pp. 1844-1857, Aug. 2009, doi: 10.1109/TCSI.2009.2028449. URL:<a
-href="https://people.engr.tamu.edu/spalermo/ecen689/simulation_analysis_clocked_comparators_kim_tcas1_2009.pdf">https://people.engr.tamu.edu/spalermo/ecen689/simulation_analysis_clocked_comparators_kim_tcas1_2009.pdf</a></p>
-<p>Jaeha Kim, Lecture 12. Aperture and Noise Analysis of Clocked
-Comparators URL:<a
-href="https://ocw.snu.ac.kr/sites/default/files/NOTE/7038.pdf">https://ocw.snu.ac.kr/sites/default/files/NOTE/7038.pdf</a></p>
-<p>Rabuske, Taimur &amp; Fernandes, Jorge. (2017), Chapter 5 Noise-Aware
-Synthesis and Optimization of Voltage Comparators, "Charge-Sharing SAR
-ADCs for Low-Voltage Low-Power Applications"</p>
-<p>Y. Luo, A. Jain, J. Wagner and M. Ortmanns, "Input Referred
-Comparator Noise in SAR ADCs," in IEEE Transactions on Circuits and
-Systems II: Express Briefs, vol. 66, no. 5, pp. 718-722, May 2019. [<a
-href="https://sci-hub.se/10.1109/TCSII.2019.2909429">https://sci-hub.se/10.1109/TCSII.2019.2909429</a>]</p>
-<p>Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A
-New Methodology for Dynamic Comparator Noise Analysis URL:<a
-href="https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf">https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf</a></p>
-<p>X. Tang et al., "An Energy-Efficient Comparator With Dynamic Floating
-Inverter Amplifier," in IEEE Journal of Solid-State Circuits, vol. 55,
-no. 4, pp. 1011-1022, April 2020</p>
-]]></content>
-      <categories>
-        <category>analog</category>
-      </categories>
-  </entry>
-  <entry>
     <title>DSPF Options</title>
     <url>/2023/04/22/spectre-case/</url>
     <content><![CDATA[<h3 id="case-sensitivity">Case Sensitivity</h3>
@@ -15761,48 +15773,6 @@ href="https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-c
 ]]></content>
       <categories>
         <category>noise</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>How to squash all git commits into one?</title>
-    <url>/2023/08/10/squash-all-commits/</url>
-    <content><![CDATA[<p><a
-href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
-<p>As of <a
-href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
-1.6.2</a>, you can use <code>git rebase --root -i</code></p>
-<p>For each commit except the first, change <code>pick</code> to
-<code>squash</code>.</p>
-<p>this works find, but I had to do a forced push. be careful!
-<code>git push -f</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SystemVerilog iff</title>
-    <url>/2022/06/21/sv-iff/</url>
-    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<p>is equivalent to</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>iff</code> is more efficient than <code>if</code> because the
-expression is recalculated when <code>vld</code> transition rather than
-<code>clk</code>.</p>
-</blockquote>
-<p>One example, detecting the negative edge of
-<code>rtr_io.cb.frameo_n[da]</code></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
-alt="image-20220621182019927" /></p>
-<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
-<p><strong>reference</strong></p>
-<p>system verilog中的iff, URL: <a
-href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
-]]></content>
-      <categories>
-        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -16454,6 +16424,48 @@ href="https://ctms.engin.umich.edu/CTMS/index.php?aux=Extras_PIDbilin">https://c
 ]]></content>
       <categories>
         <category>dsp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>How to squash all git commits into one?</title>
+    <url>/2023/08/10/squash-all-commits/</url>
+    <content><![CDATA[<p><a
+href="https://stackoverflow.com/a/9254257/8037585">https://stackoverflow.com/a/9254257/8037585</a></p>
+<p>As of <a
+href="https://github.com/git/git/blob/master/Documentation/RelNotes/1.6.2.txt#L118">git
+1.6.2</a>, you can use <code>git rebase --root -i</code></p>
+<p>For each commit except the first, change <code>pick</code> to
+<code>squash</code>.</p>
+<p>this works find, but I had to do a forced push. be careful!
+<code>git push -f</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SystemVerilog iff</title>
+    <url>/2022/06/21/sv-iff/</url>
+    <content><![CDATA[<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">@(<span class="keyword">posedge</span> clk <span class="keyword">iff</span>(vld));</span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<p>is equivalent to</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">	@(<span class="keyword">posedge</span> clk);</span><br><span class="line">    <span class="keyword">if</span>(vld) <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">do_something;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>iff</code> is more efficient than <code>if</code> because the
+expression is recalculated when <code>vld</code> transition rather than
+<code>clk</code>.</p>
+</blockquote>
+<p>One example, detecting the negative edge of
+<code>rtr_io.cb.frameo_n[da]</code></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] !== <span class="number">0</span>);</span><br><span class="line">@(rtr_io<span class="variable">.cb</span> <span class="keyword">iff</span>(rtr_io<span class="variable">.cb</span><span class="variable">.frameo_n</span>[da] === <span class="number">0</span> )); </span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge&quot;</span>, <span class="built_in">$realtime</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/06/21/sv-iff/image-20220621182019927.png"
+alt="image-20220621182019927" /></p>
+<p><code>[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge</code></p>
+<p><strong>reference</strong></p>
+<p>system verilog中的iff, URL: <a
+href="https://www.francisz.cn/2019/07/18/sv-iff/">https://www.francisz.cn/2019/07/18/sv-iff/</a></p>
+]]></content>
+      <categories>
+        <category>digital</category>
       </categories>
   </entry>
   <entry>
@@ -19121,22 +19133,6 @@ is the "+:" operator called in Verilog?</a></p>
       </categories>
   </entry>
   <entry>
-    <title>compile vim from source with GUI support</title>
-    <url>/2022/02/02/vim-compile/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
-<h2 id="binkey">binkey</h2>
-<p>Inserting a new line below: <code>o</code></p>
-<p>above: <code>O</code></p>
-<p>To insert before the cursor: <code>i</code></p>
-<p>After: <code>a</code></p>
-<p>Before the line (home): <code>I</code></p>
-<p>Append at the end of line: <code>A</code></p>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>verilog readmemb and readmemh</title>
     <url>/2022/02/12/verilog-readmemb/</url>
     <content><![CDATA[<p><strong><code>$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])</code></strong>
@@ -19174,6 +19170,22 @@ Memory in Verilog</a></p>
 ]]></content>
       <categories>
         <category>digital</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>compile vim from source with GUI support</title>
+    <url>/2022/02/02/vim-compile/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gtk3 in Rocky Linux 8.5</span></span><br><span class="line">./configure --with-features=huge --enable-gui=gtk3 --enable-python3interp --prefix=/usr</span><br><span class="line">make -j`<span class="built_in">nproc</span>`</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
+<h2 id="binkey">binkey</h2>
+<p>Inserting a new line below: <code>o</code></p>
+<p>above: <code>O</code></p>
+<p>To insert before the cursor: <code>i</code></p>
+<p>After: <code>a</code></p>
+<p>Before the line (home): <code>I</code></p>
+<p>Append at the end of line: <code>A</code></p>
+]]></content>
+      <categories>
+        <category>devops</category>
       </categories>
   </entry>
   <entry>
@@ -19415,15 +19427,6 @@ Data Communications</p>
       </categories>
   </entry>
   <entry>
-    <title>Build VMware host modules</title>
-    <url>/2024/01/30/vmware-module/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>devops</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Design Variable in analogLib-vpwlf</title>
     <url>/2022/05/14/vpwlf-designvar/</url>
     <content><![CDATA[<p><code>PWL File as Design Var?</code> parameter in <em>vpwlf</em> cell
@@ -19442,5 +19445,14 @@ alt="image-20220514121150988" /></p>
       <tags>
         <tag>virtuoso</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Build VMware host modules</title>
+    <url>/2024/01/30/vmware-module/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:mkubecek/vmware-host-modules.git</span><br><span class="line">cd vmware-host-modules/</span><br><span class="line">git checkout origin/workstation-17.0.2</span><br><span class="line">make -j`nproc`</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -v vmmon</span><br><span class="line">sudo modprobe -v vmnet</span><br><span class="line">sudo vmware-networks --start</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>devops</category>
+      </categories>
   </entry>
 </search>

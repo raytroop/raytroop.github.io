@@ -13,6 +13,23 @@ Below diagram show the windowing effect and sampling
 
 ![NinDFT.drawio](fourier/NinDFT.drawio.svg)
 
+
+For general window function, we know $W(e^{j\hat{\omega}})=\frac{1}{T_s}W(j\omega)$,
+
+That is $\hat{\omega} = \omega = 0$
+$$
+\sum_{n=-N_w}^{+N_w}x[n] = \frac{1}{T_s} \int_{-T_w}^{+T_w}x(t)dt
+$$
+
+and
+$$\begin{align}
+\frac{W(j\omega|\omega=0)}{T_s} &= T_s\frac{W(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s} \\
+&= \sum_{n=-N_w}^{+N_w}w[n]
+\end{align}$$
+
+e.g. $\frac{W(j\omega|\omega=0)}{T_s} = N$ for Rectangular Window, shown in above figure
+
+
 >  **discrete-time frequency**: $\hat{\omega}=\omega T_s$, units are ***radians per sample***
 
 

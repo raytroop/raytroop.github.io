@@ -9,6 +9,12 @@ mathjax: true
 
 
 
+>  **discrete-time frequency**: $\hat{\omega}=\omega T_s$, units are ***radians per sample***
+
+
+
+---
+
 Below diagram show the windowing effect and sampling
 
 ![NinDFT.drawio](fourier/NinDFT.drawio.svg)
@@ -16,17 +22,12 @@ Below diagram show the windowing effect and sampling
 
 For general window function, we know $W(e^{j\hat{\omega}})=\frac{1}{T_s}W(j\omega)$,
 
-
 and
-$$\begin{align}
-\frac{W(j\omega|\omega=0)}{T_s} &= T_s\frac{W(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s} \\
-&= \sum_{n=-N_w}^{+N_w}w[n]
-\end{align}$$
+$$
+\frac{W(j\omega|\omega=0)}{T_s} = \frac{T_sW(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s} =W(e^{j\hat{\omega}}|\hat{\omega}=0)= \sum_{n=-N_w}^{+N_w}w[n]
+$$
 
-e.g. $\frac{W(j\omega|\omega=0)}{T_s} = N$ for Rectangular Window, shown in above figure
-
-
->  **discrete-time frequency**: $\hat{\omega}=\omega T_s$, units are ***radians per sample***
+e.g. $\frac{W(j\omega|\omega=0)}{T_s} = N$​ for Rectangular Window, shown in above figure
 
 
 
@@ -131,27 +132,40 @@ Part of the proof is given by the following step:
 
 ### impulse train
 
-*CTFT*
+*CTFT*:
 
 ![image-20240830224755336](fourier/image-20240830224755336.png)
+
+![image-20240911221811991](fourier/image-20240911221811991.png)
+
+
 
 > using time-sampling property
 >
 > ![impulse_train.drawio](fourier/impulse_train.drawio.svg)
 
 
-*DTFT*
+
+---
+
+
+
+*DTFT*:
 
 Given $x[n]=\sum_{k=-\infty}^{\infty}\delta(n-k)$
 
 $$\begin{align}
-X(e^{j\hat{\omega}}) &= X(j\frac{\hat{\omega}}{T}) \\
+X(e^{j\hat{\omega}}) &= X_s(j\frac{\hat{\omega}}{T}) \\
 &= \frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\delta(\frac{\hat{\omega}}{T}-\frac{2\pi k}{T}) \\
 &= \frac{2\pi}{T}\sum_{k=-\infty}^{\infty}T\delta(\hat{\omega}-2\pi k) \\
 &= 2\pi\sum_{k=-\infty}^{\infty}\delta(\hat{\omega}-2\pi k)
 \end{align}$$
 
+
+
 > [[http://courses.ece.ubc.ca/359/notes/notes_part1_set4.pdf](http://courses.ece.ubc.ca/359/notes/notes_part1_set4.pdf)]
+
+
 
 ### impulse scaling
 

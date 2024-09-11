@@ -148,6 +148,13 @@ $$
 where $\alpha$ is scaling ratio
 
 
+### impulse train
+
+CTFT, DTFT
+
+*TODO* &#128197;
+
+
 ### impulse invariance
 
 $$

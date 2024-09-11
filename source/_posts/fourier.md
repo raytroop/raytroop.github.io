@@ -435,11 +435,11 @@ x_r[n] &= \frac{1}{2\pi}\int_{2\pi} \frac{1}{T}X_c (\frac{\hat{\omega}}{T} ) e^{
 
 $$\begin{align}
 x_r[n] &= \frac{1}{2\pi} \int_{\infty}X_c(\omega) e^{j\omega T n}d\omega \\
-&= \frac{1}{2\pi} \int_{\infty}X_c(\omega) e^{j\omega t}d\omega \\
-&= x_c(t)
+&= \frac{1}{2\pi} \int_{\infty}X_c(\omega) e^{j\omega t_n}d\omega \\
+&= x_c(t_n)
 \end{align}$$
 
-where $t = T n$, then $x_r[n] = x_c(nT)$
+where $t_n = T n$, then $x_r[n] = x_c(nT)$
 
 ---
 

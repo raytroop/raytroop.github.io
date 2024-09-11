@@ -81,11 +81,13 @@ DTFT and rearranging terms
 
 ### Discrete-Time Fourier Series (DTFS)
 
+*TODO* &#128197;
 
 
+### Discrete Fourier Series (DFS)
 
 
-
+*TODO* &#128197;
 
 
 ### Discrete Fourier Transform (DFT)

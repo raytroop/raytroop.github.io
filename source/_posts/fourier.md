@@ -131,6 +131,8 @@ Part of the proof is given by the following step:
 
 ### impulse train
 
+*CTFT*
+
 ![image-20240830224755336](fourier/image-20240830224755336.png)
 
 > using time-sampling property
@@ -138,6 +140,18 @@ Part of the proof is given by the following step:
 > ![impulse_train.drawio](fourier/impulse_train.drawio.svg)
 
 
+*DTFT*
+
+Given $x[n]=\sum_{k=-\infty}^{\infty}\delta(n-k)$
+
+$$\begin{align}
+X(e^{j\hat{\omega}}) &= X(j\frac{\hat{\omega}}{T}) \\
+&= \frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\delta(\frac{\hat{\omega}}{T}-\frac{2\pi k}{T}) \\
+&= \frac{2\pi}{T}\sum_{k=-\infty}^{\infty}T\delta(\hat{\omega}-2\pi k) \\
+&= 2\pi\sum_{k=-\infty}^{\infty}\delta(\hat{\omega}-2\pi k)
+\end{align}$$
+
+> [[http://courses.ece.ubc.ca/359/notes/notes_part1_set4.pdf](http://courses.ece.ubc.ca/359/notes/notes_part1_set4.pdf)]
 
 ### impulse scaling
 
@@ -147,12 +161,6 @@ $$
 
 where $\alpha$ is scaling ratio
 
-
-### impulse train
-
-CTFT, DTFT
-
-*TODO* &#128197;
 
 
 ### impulse invariance

@@ -16,10 +16,6 @@ Below diagram show the windowing effect and sampling
 
 For general window function, we know $W(e^{j\hat{\omega}})=\frac{1}{T_s}W(j\omega)$,
 
-That is $\hat{\omega} = \omega = 0$
-$$
-\sum_{n=-N_w}^{+N_w}x[n] = \frac{1}{T_s} \int_{-T_w}^{+T_w}x(t)dt
-$$
 
 and
 $$\begin{align}

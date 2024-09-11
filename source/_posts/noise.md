@@ -42,7 +42,7 @@ The noise in $S_{RC}$ is a *stationary process* and so is *uncorrelated* over $f
 > X(j\Omega)d\Omega = \frac{1}{T_c}X(e^{j\omega})d\omega  
 > $$
 >
-> ref. *[[Sampling of Continuous Time Signals]](https://raytroop.github.io/2022/05/01/sampling-dft)* of EQ.(31) in the blog
+> ref. *[[Frequency-Domain Representation of Sampling]](https://raytroop.github.io/2024/08/30/fourier/#frequency-domain-representation-of-sampling)* of EQ.(31) in the blog
 
 
 ![image-20240428225949327](noise/image-20240428225949327.png)

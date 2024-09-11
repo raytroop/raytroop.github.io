@@ -27,7 +27,7 @@ Below diagram show the windowing effect and sampling
 
 
 
-### Fourier Series (FS)
+### Continuous Time Fourier Series (CTFS)
 
 $$\begin{align}
 a_k &= \frac{1}{T}\int_T x(t)e^{-jk(2\pi/T)) t}dt \\
@@ -260,17 +260,15 @@ x[n] &= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left( -kf_s+\Delta f
 
 
 
-
-
-
-## spectral sampling
+### CTFS & CTFT
 
 Fourier transform of a periodic signal with Fourier series coefficients $\{a_k\}$ can be interpreted as a train of *impulses* occurring at the harmonically related frequencies and for which the area of the impulse at the $k$th harmonic frequency $k\omega_0$ is $2\pi$ times the $k$th Fourier series coefficient $a_k$
 
 ![image-20240830225453601](fourier/image-20240830225453601.png)
 
----
 
+
+## spectral sampling
 
 
 ![image-20240831185532202](fourier/image-20240831185532202.png)

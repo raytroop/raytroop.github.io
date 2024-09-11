@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -343,7 +343,7 @@ target="_blank" rel="noopener" href="http://individual.utoronto.ca/trevorcaldwel
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -492,7 +492,7 @@ no. 4, pp. 1011-1022, April 2020</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -581,7 +581,7 @@ alt="image-20240901094536745" /></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -603,23 +603,24 @@ alt="image-20240901094536745" /></p>
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Below diagram show the windowing effect and sampling</p>
-<p><img src="/2024/08/30/fourier/NinDFT.drawio.svg"
-alt="NinDFT.drawio" /></p>
-<p>For general window function, we know <span
-class="math inline">\(W(e^{j\hat{\omega}})=\frac{1}{T_s}W(j\omega)\)</span>,</p>
-<p>and <span class="math display">\[\begin{align}
-\frac{W(j\omega|\omega=0)}{T_s} &amp;=
-T_s\frac{W(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s} \\
-&amp;= \sum_{n=-N_w}^{+N_w}w[n]
-\end{align}\]</span></p>
-<p>e.g. <span class="math inline">\(\frac{W(j\omega|\omega=0)}{T_s} =
-N\)</span> for Rectangular Window, shown in above figure</p>
-<blockquote>
+          <blockquote>
 <p><strong>discrete-time frequency</strong>: <span
 class="math inline">\(\hat{\omega}=\omega T_s\)</span>, units are
 <strong><em>radians per sample</em></strong></p>
 </blockquote>
+<hr />
+<p>Below diagram show the windowing effect and sampling</p>
+<p><img src="/2024/08/30/fourier/NinDFT.drawio.svg"
+alt="NinDFT.drawio" /></p>
+<p>For general window function, we know <span
+class="math inline">\(W(e^{j\hat{\omega}})=\frac{1}{T_s}W(j\omega)\)</span>,</p>
+<p>and <span class="math display">\[
+\frac{W(j\omega|\omega=0)}{T_s} =
+\frac{T_sW(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s}
+=W(e^{j\hat{\omega}}|\hat{\omega}=0)= \sum_{n=-N_w}^{+N_w}w[n]
+\]</span></p>
+<p>e.g. <span class="math inline">\(\frac{W(j\omega|\omega=0)}{T_s} =
+N\)</span>​ for Rectangular Window, shown in above figure</p>
 <h2 id="warmup">warmup</h2>
 <table>
 <colgroup>
@@ -716,19 +717,22 @@ class="math inline">\(X(e^{j\hat{\omega}})\)</span>, where <span
 class="math inline">\(\hat{\omega_k} = \frac{2\pi
 k}{N}\)</span></em></p>
 <h3 id="impulse-train">impulse train</h3>
-<p><em>CTFT</em></p>
+<p><em>CTFT</em>:</p>
 <p><img src="/2024/08/30/fourier/image-20240830224755336.png"
 alt="image-20240830224755336" /></p>
+<p><img src="/2024/08/30/fourier/image-20240911221811991.png"
+alt="image-20240911221811991" /></p>
 <blockquote>
 <p>using time-sampling property</p>
 <p><img src="/2024/08/30/fourier/impulse_train.drawio.svg"
 alt="impulse_train.drawio" /></p>
 </blockquote>
-<p><em>DTFT</em></p>
+<hr />
+<p><em>DTFT</em>:</p>
 <p>Given <span
 class="math inline">\(x[n]=\sum_{k=-\infty}^{\infty}\delta(n-k)\)</span></p>
 <p><span class="math display">\[\begin{align}
-X(e^{j\hat{\omega}}) &amp;= X(j\frac{\hat{\omega}}{T}) \\
+X(e^{j\hat{\omega}}) &amp;= X_s(j\frac{\hat{\omega}}{T}) \\
 &amp;=
 \frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\delta(\frac{\hat{\omega}}{T}-\frac{2\pi
 k}{T}) \\
@@ -1315,7 +1319,7 @@ Series in Electrical and Computer Engineering) 3rd Edition</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1486,7 +1490,7 @@ target="_blank" rel="noopener" href="http://www2.eecs.berkeley.edu/Pubs/TechRpts
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1824,7 +1828,7 @@ target="_blank" rel="noopener" href="https://stacks.stanford.edu/file/druid:xq06
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1918,7 +1922,7 @@ target="_blank" rel="noopener" href="https://gist.github.com/guisehn/5438bbc2213
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2197,7 +2201,7 @@ target="_blank" rel="noopener" href="https://dsp.stackexchange.com/a/38201">http
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2525,7 +2529,7 @@ on Circuits and Systems I: Regular Papers</em>, doi:
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 14:08:56" itemprop="dateModified" datetime="2024-09-11T14:08:56+00:00">2024-09-11</time>
+      <time title="Modified: 2024-09-11 14:19:57" itemprop="dateModified" datetime="2024-09-11T14:19:57+00:00">2024-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

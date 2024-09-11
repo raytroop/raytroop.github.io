@@ -19,9 +19,9 @@ mathjax: true
 
 ## Noise Simulation
 
-![image-20240825215015322](slicer/image-20240825215015322.png)
+![image-20240825215015322](comparator/image-20240825215015322.png)
 
-![image-20240825215134067](slicer/image-20240825215134067.png)
+![image-20240825215134067](comparator/image-20240825215134067.png)
 
 > SNR during sampling region and decison region increase
 >
@@ -42,7 +42,7 @@ where $V_{i,sig}$ is constant signal applied to input of comparator
 
 ## offset
 
-![image-20240825204030645](slicer/image-20240825204030645.png)
+![image-20240825204030645](comparator/image-20240825204030645.png)
 
 
 
@@ -50,9 +50,15 @@ where $V_{i,sig}$ is constant signal applied to input of comparator
 
 ## reference
 
+Xu, H. (2018). Mixed-Signal Circuit Design Driven by Analysis: ADCs, Comparators, and PLLs. *UCLA*. ProQuest ID: Xu_ucla_0031D_17380. Merritt ID: ark:/13030/m5f52m8x. Retrieved from https://escholarship.org/uc/item/88h8b5t3
+
+A. Abidi and H. Xu, ‘Understanding the Regenerative Comparator Circuit,’ Proceedings of the IEEE 2014 Custom Integrated Circuits Conference, San Jose, CA, 2014, pp. 1-8.
+
 T. Sepke, P. Holloway, C. G. Sodini and H. -S. Lee, "Noise Analysis for Comparator-Based Circuits," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 3, pp. 541-553, March 2009 [[https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf)]
 
 Sepke, Todd. "Comparator design and analysis for comparator-based switched-capacitor circuits." (2006). [[https://dspace.mit.edu/handle/1721.1/38925](https://dspace.mit.edu/handle/1721.1/38925)]
+
+P. Nuzzo, F. De Bernardinis, P. Terreni and G. Van der Plas, "Noise Analysis of Regenerative Comparators for Reconfigurable ADC Architectures," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 55, no. 6, pp. 1441-1454, July 2008 [[https://picture.iczhiku.com/resource/eetop/SYirpPPPaAQzsNXn.pdf](https://picture.iczhiku.com/resource/eetop/SYirpPPPaAQzsNXn.pdf)]
 
 J. Kim, B. S. Leibowitz, J. Ren and C. J. Madden, "Simulation and Analysis of Random Decision Errors in Clocked Comparators," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 8, pp. 1844-1857, Aug. 2009, doi: 10.1109/TCSI.2009.2028449. URL:[https://people.engr.tamu.edu/spalermo/ecen689/simulation_analysis_clocked_comparators_kim_tcas1_2009.pdf](https://people.engr.tamu.edu/spalermo/ecen689/simulation_analysis_clocked_comparators_kim_tcas1_2009.pdf)
 

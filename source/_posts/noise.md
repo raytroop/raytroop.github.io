@@ -51,6 +51,11 @@ The noise in $S_{RC}$ is a *stationary process* and so is *uncorrelated* over $f
 
 where $m$ is the duty cycle
 
+---
+
+*Below analysis focus on sampled noise*
+
+
 ![image-20240427183257203](noise/image-20240427183257203.png)
 
 ![image-20240427183349642](noise/image-20240427183349642.png)

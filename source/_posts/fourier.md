@@ -27,7 +27,7 @@ $$
 \frac{W(j\omega|\omega=0)}{T_s} = \frac{T_sW(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s} =W(e^{j\hat{\omega}}|\hat{\omega}=0)= \sum_{n=-N_w}^{+N_w}w[n]
 $$
 
-e.g. $\frac{W(j\omega|\omega=0)}{T_s} = N$​ for Rectangular Window, shown in above figure
+e.g. $\frac{W(j\omega|\omega=0)}{T_s} = N$ for Rectangular Window, shown in above figure
 
 
 

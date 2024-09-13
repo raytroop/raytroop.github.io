@@ -1,5 +1,5 @@
 ---
-title: Spur & Spread Spectrum Clocking (SSC)
+title: Spurs
 date: 2024-07-14 09:17:11
 tags:
 categories:

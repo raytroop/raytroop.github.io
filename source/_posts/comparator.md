@@ -25,17 +25,19 @@ mathjax: true
 
 > SNR during sampling region and decison region increase
 >
-> SNR during regeneration region is consant, where noise is critical 
+> SNR during regeneration region is *constant*, where noise is critical 
 
 $$
 \text{SNR} = \frac{V_{o,sig}^2}{V_{o,n}^2} = \frac{V_{i,sig}^2}{V_{i,n}^2}
 $$
 
+we can get $V_{i,n}^2 = \frac{V_{i,sig}^2}{\text{SNR}}$, which is constant also
+
 That is 
 $$
 V_{i,n}^2 = \frac{V_{i,sig}^2}{V_{o,sig}^2}V_{o,n}^2 = \frac{V_{o,n}^2}{A_v^2}
 $$
-where $V_{i,sig}$ is constant signal applied to input of comparator
+where $V_{i,sig}$ is constant signal is applied to input of comparator
 
 
 

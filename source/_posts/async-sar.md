@@ -83,7 +83,15 @@ The *overlapped search range* compensates for wrong decisions made in earlier st
 
 
 
-### Bottom Plate Sampling vs. Top Plate Sampling
+### Double-array Cap
+
+> *Split* capacitor
+>
+> attenuation capacitance $C_a$
+
+![image-20240917192957721](async-sar/image-20240917192957721.png)
+
+
 
 
 

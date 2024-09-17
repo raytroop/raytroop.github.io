@@ -32,9 +32,25 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 
 ##  LTI Systems on WSS Processes
 
+### mean
+
+
+
+![image-20240917104857284](random/image-20240917104857284.png)
+
+![image-20240917104916086](random/image-20240917104916086.png)
+
+
+
+
+
+---
+
+
+
 ![image-20240827221945277](random/image-20240827221945277.png)
 
-### output autocorrelation
+### autocorrelation
 
 **deterministic autocorrelation function**
 
@@ -59,7 +75,7 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 
 
 
-### output PSD
+### PSD
 
 ![image-20240827222224395](random/image-20240827222224395.png)
 

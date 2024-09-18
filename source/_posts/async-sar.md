@@ -83,16 +83,22 @@ The *overlapped search range* compensates for wrong decisions made in earlier st
 
 
 
-### Double-array Cap
+### Split Arrary CDAC
 
-> *Split* capacitor
+> *Split* capacitor, double-array cap
 >
 > attenuation capacitance $C_a$
 
 ![image-20240917192957721](async-sar/image-20240917192957721.png)
 
+![image-20240918213856504](async-sar/image-20240918213856504.png)
 
+![splitArray.drawio](async-sar/splitArray.drawio.svg)
 
+$$\begin{align}
+\Delta V_{dac} &= \frac{1}{2}b_3+\frac{1}{4}b_2+\frac{1}{4}\left(\frac{1}{2}b_1+\frac{1}{4}b_0 \right) \\
+&= \frac{1}{2}b_3+\frac{1}{4}b_2 + \frac{1}{8}b_1+\frac{1}{16}b_0
+\end{align}$$
 
 
 
@@ -120,3 +126,4 @@ Shuo-Wei Chen, Power Efficient System and A/D Converter Design for Ultra-Wideban
 
 Andrea Baschirotto, "T6: SAR ADCs" ISSCC2009
 
+Pieter Harpe, ISSCC 2016 Tutorial: "Basics of SAR ADCs Circuits & Architectures"

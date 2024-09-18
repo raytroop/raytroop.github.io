@@ -144,7 +144,13 @@ $V_x(t)$ and $V_y(t)$ prove that the settling time is *same*
 
 > $\tau = R\frac{C_1C_2}{C_1+C_2}$, which means usually worst for MSB capacitor (largest)
 
+
+
 ## CDAC power
+
+*TODO* &#128197;
+
+
 
 
 

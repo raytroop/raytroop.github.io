@@ -22,7 +22,7 @@ kick-back increases CDAC settling time
 
 
 
-> A. Abo et al., “A 1.5-V, 10-bit, 14.3-MS/s CMOS Pipeline Analog-toDigital Converter,” IEEE J. Solid-State Circuits, pp. 599, May 1999
+> A. Abo et al., "A 1.5-V, 10-bit, 14.3-MS/s CMOS Pipeline Analog-toDigital Converter," IEEE J. Solid-State Circuits, pp. 599, May 1999
 >
 > Dessouky and Kaiser, "Input switch configuration suitable for rail-to-rail operation of switched opamp circuits," Electronics Letters, Jan. 1999.
 
@@ -140,6 +140,11 @@ V_y(s) &= V_x\frac{C_1}{C_1+C_2} \\
 inverse Laplace Transform is $V_y(t) = \frac{C_1}{C_1+C_2}\left(1 - e^{-t/\tau}\right)$
 
 $V_x(t)$ and $V_y(t)$ prove that the settling time is *same*
+
+
+
+## CDAC power
+
 
 
 

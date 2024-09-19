@@ -125,6 +125,34 @@ $$
 ---
 
 
+## PSRR @Vgate
+
+![psrr_vgate.drawio](ldo/psrr_vgate.drawio.svg)
+
+KCL at output node
+
+$$
+g_m(-V_o\beta A_{E}) + \frac{V_i - V_o}{r_o} = \frac{V_o}{R_1+R_2}
+$$
+
+Hence
+$$
+\frac{V_o}{V_i} = \frac{1}{A_E\beta g_mr_o+g_mr_o +\frac{r_o}{R_1+R_2}+1} \approx \frac{1}{A_E\beta g_m r_o}
+$$
+
+Through feedback loop, we derive
+$$
+V_g = V_o \beta (-A_E) \approx \frac{V_i}{A_E\beta g_m r_o} \beta (-A_E) = -\frac{V_i}{g_mr_o}
+$$
+
+That is
+$$
+\frac{V_g}{V_i} \approx  -\frac{1}{g_mr_o}
+$$
+
+> Due to closed loop, $V_g$ and $V_o$ is source follower
+
+
 
 ## High frequency PSRR
 

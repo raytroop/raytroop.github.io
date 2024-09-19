@@ -132,7 +132,7 @@ $$
 KCL at output node
 
 $$
-g_m(-V_o\beta A_{E}) + \frac{V_i - V_o}{r_o} = \frac{V_o}{R_1+R_2}
+g_m(-V_o\beta A_{E} - V_o) + \frac{V_i - V_o}{r_o} = \frac{V_o}{R_1+R_2}
 $$
 
 Hence

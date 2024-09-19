@@ -150,7 +150,7 @@ $$
 \frac{V_g}{V_i} \approx  -\frac{1}{g_mr_o}
 $$
 
-> Due to closed loop, $V_g$ and $V_o$ is source follower
+> Due to closed loop, $V_g$ and $V_o$ is **not** source follower
 
 
 

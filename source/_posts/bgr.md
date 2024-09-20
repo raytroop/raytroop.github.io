@@ -68,7 +68,7 @@ V_{bg} &= \frac{\Delta V_{be}+V_{os}}{R_2}(R_1+R_2) + V_{be2} \\
 
 We omit the last part
 $$\begin{align}
-V_{bg} &= \alpha \Delta V_{be0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}}) \\
+V_{bg} &\approx \alpha \Delta V_{be0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}}) \\
 &= \alpha \Delta V_{be0} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}}) + \alpha \left(V_{os} + \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}})\right) \\
 &= V_{bg,0} + \alpha \left(V_{os} + \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}})\right)
 \end{align}$$

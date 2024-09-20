@@ -40,8 +40,10 @@ $$
 
 
 
+## OTA offset affect
 
 
+![bg_ota_vos.drawio](bgr/bg_ota_vos.drawio.svg)
 
 
 

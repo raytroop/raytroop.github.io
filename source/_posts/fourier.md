@@ -213,6 +213,24 @@ $$
 
 
 
+### Duality
+
+![image-20240921181908992](fourier/image-20240921181908992.png)
+
+![image-20240921182105935](fourier/image-20240921182105935.png)
+
+
+
+
+
+### Conjugate Symmetry
+
+![image-20240921181015717](fourier/image-20240921181015717.png)
+
+![image-20240921181258063](fourier/image-20240921181258063.png)
+
+
+
 ### Parseval's Relation
 
 *CTFT*:

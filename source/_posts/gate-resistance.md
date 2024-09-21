@@ -175,7 +175,7 @@ leakage current is determined by $R_s + R_p$, and $R_p \gg R_s$
 - low freq: $Z=R_s + R_p$
 - high freq: $Z=R_s$
 
-> An example: $R_s=200 \ohm$, $R_p = 8 M\ohm$ and $C_\text{gate}=10fF$
+> An example: $R_s=200\space \Omega$, $R_p = 8 \space M\Omega$ and $C_\text{gate}=10\space fF$
 
 ![image-20240729205410196](gate-resistance/image-20240729205410196.png)
 

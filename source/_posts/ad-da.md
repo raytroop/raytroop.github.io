@@ -146,9 +146,15 @@ $V_x(t)$ and $V_y(t)$ prove that the settling time is *same*
 
 
 
-## CDAC power
+## CDAC Energy Consumption
 
 *TODO* &#128197;
+
+
+
+
+
+
 
 
 

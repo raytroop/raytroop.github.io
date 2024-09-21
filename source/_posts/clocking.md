@@ -216,6 +216,13 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 
 
+## Why Type 2 PLL ?
+
+1. That is, to have a wide bandwidth, a high loop gain is required
+2. More importantly, the type 1 PLL has the problem of a static phase error for the change of an input frequency
+
+
+
 
 
 ## AC-coupled buffer 

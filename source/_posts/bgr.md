@@ -46,7 +46,7 @@ $$
 
 
 
-## OTA offset affect
+## OTA offset effect
 
 
 ![bg_ota_vos.drawio](bgr/bg_ota_vos.drawio.svg)
@@ -65,23 +65,23 @@ Hence,
 $$\begin{align}
 \Delta V_{be} &= \frac{kT}{q}\ln(n\frac{I_{e1}}{I_{e2}}) \\
 &= \frac{kT}{q}\ln(n) + \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) \\
-&= \Delta V_{be0} + \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}})
+&= \Delta V_{be,0} + \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}})
 \end{align}$$
 
 Therefore,
 
 $$\begin{align}
 V_{bg} &= \frac{\Delta V_{be}+V_{os}}{R_2}(R_1+R_2) + V_{be2} \\
-&= \alpha \Delta V_{be0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2}}{nI_{ss}}) \\
-&= \alpha \Delta V_{be0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}})+\frac{kT}{q}\ln(\frac{I_{e2}}{I_{e2,0}})
+&= \alpha \Delta V_{be,0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2}}{nI_{ss}}) \\
+&= \alpha \Delta V_{be,0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}})+\frac{kT}{q}\ln(\frac{I_{e2}}{I_{e2,0}})
 \end{align}$$
 
 
 
 We omit the last part
 $$\begin{align}
-V_{bg} &\approx \alpha \Delta V_{be0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}}) \\
-&= \alpha \Delta V_{be0} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}}) + \alpha \left(V_{os} + \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}})\right) \\
+V_{bg} &\approx \alpha \Delta V_{be,0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}}) \\
+&= \alpha \Delta V_{be,0} + V_{be2,0} + \alpha \left(V_{os} + \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}})\right) \\
 &= V_{bg,0} + \alpha \left(V_{os} + \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}})\right)
 \end{align}$$
 

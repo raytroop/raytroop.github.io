@@ -381,12 +381,6 @@ The autocorrelation of $y(t)$ is
 $$\begin{align}
 R(\tau) &= E(y(t)y(t+\tau))\\
 &= E([A_0\sin(2\pi f_0 t + \phi_0)+A_0\phi(t)\cos(2\pi f_0 t+\phi _0)]\\
-&\cdot [A_0\sin(2\pi f_0 t + \phi_0+2\pi f_0\tau)+A_0\phi(t+\tau )\cos(2\pi f_0 t+\phi _0+2\pi f_0\tau)]) \\
-&=A_0^2 E( \alpha_t^2\cos(2\pi f_0 \tau) + \alpha_t\beta_t\sin(2\pi f_0\tau)+ \phi(t+\tau)[\alpha_t \beta_t \cos(2\pi f_0 \tau) - \alpha_t^2\sin(2\pi f_0 \tau)] \\
-&+ \phi(t)[\alpha_t \beta_t \cos(2\pi f_0\tau) + \beta_t^2 \sin(2\pi f_0 \tau)] \\
-&+ \phi(t)\phi(t+\tau)[\beta_t^2 \cos(2\pi f_0 \tau)-\alpha_t\beta_t \sin(2\pi f_0 \tau)]) \\
-&= A_0^2E(\alpha_t^2 \cos(2\pi f_0 \tau) + \phi(t)\phi(t+\tau)\beta_t^2\cos(2\pi f_0 \tau)) \\
-&= \frac{1}{2}A_0^2 \cos(2\pi f_0 \tau)(1+E(\phi(t)\phi(t+\tau))) \\
 &= \frac{1}{2}A_0^2 \cos(2\pi f_0 \tau)(1+R_{\phi}(\tau))
 \end{align}$$
 
@@ -424,15 +418,15 @@ Limitation:
 
 ## Lorentzian Spectrum
 
-> phase noise spectrum is different from **voltage spectrum**, which is called **Lorentzian spectrum**
->
-> ![image-20240720134811859](clocking/image-20240720134811859.png)
+![image-20240720134811859](clocking/image-20240720134811859.png)
+
+We typically use the two spectra, $S_{\phi n}(f)$ and $S_{out}(f)$, interchangeably, but we must resolve these inconsistencies. **voltage spectrum**  is called **Lorentzian spectrum**
 
 
 
-The spectrum of a free-running oscillator does indeed have a Lorentzian profile
+---
 
-- it is flat for frequencies below a given corner frequency and rolls off as $1/f^2$ above it
+
 
 The periodic signal $x(t)$ can be expanded in Fourier series as:
 

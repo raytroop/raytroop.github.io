@@ -24,11 +24,11 @@ seen at a port, thereby improving the *speed*
 
 ![image-20240922174319496](afe/image-20240922174319496.png)
 $$
-I_{NIC} =\frac{V_{im} - V_{ip}}{\frac{2}{gm}+\frac{1}{sC_c}} = \frac{-2V_{ip}}{\frac{2}{gm}+\frac{1}{sC_c}}
+I_{NIC} =\frac{V_{im} - V_{ip}}{\frac{2}{g_m}+\frac{1}{sC_c}} = \frac{-2V_{ip}}{\frac{2}{g_m}+\frac{1}{sC_c}}
 $$
 Therefore
 $$
-Z_{NIC} = \frac{V_{ip} - V_{im}}{I_{NIC}}=\frac{2V_{ip}}{I_{NIC}} =- \frac{2}{gm}-\frac{1}{sC_c}
+Z_{NIC} = \frac{V_{ip} - V_{im}}{I_{NIC}}=\frac{2V_{ip}}{I_{NIC}} =- \frac{2}{g_m}-\frac{1}{sC_c}
 $$
 ***half-circuit***
 

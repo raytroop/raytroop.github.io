@@ -7,6 +7,16 @@ categories:
 mathjax: true
 ---
 
+
+
+## overlapped tuning range
+
+*TODO* &#128197;
+
+
+
+
+
 ## Least-Mean-Square (LMS) 
 
 > minimum mean square error (MMSE) 

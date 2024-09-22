@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+## Temperature compensation for VCO
+
+*Temperature compensation for the VCO oscillation frequency* is a critical issue
+
+*TODO* &#128197;
+
+
+
 
 
 ## charge pump with amplifier

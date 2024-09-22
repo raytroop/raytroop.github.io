@@ -61,7 +61,9 @@ A:  *TODO* &#128197;
 
 
 
-## Clock Edges on PI
+## Phase Interpolator (PI)
+
+!!! Clock Edges
 
 And for a phase interpolator, you need those reference clocks to be completely the opposite. Ideally they would be **triangular** shaped
 

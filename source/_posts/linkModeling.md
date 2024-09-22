@@ -130,6 +130,24 @@ TX FFE suffers from the peak power constraint, which in effect attenuates the av
 
 
 
+
+## Eye-Opening Monitor (EOM)
+
+An architecture that evaluates the received signal quality
+
+
+
+> data slicers, phase slicers, error slicers, scope slicers
+
+![image-20240922143125270](linkModeling/image-20240922143125270.png)
+
+![image-20240922144605196](linkModeling/image-20240922144605196.png)
+
+> Analui, Behnam & Rylyakov, Alexander & Rylov, Sergey & Meghelli, Mounir & Hajimiri, Ali. (2006). A 10-Gb/s two-dimensional eye-opening monitor in 0.13-??m standard CMOS. Solid-State Circuits, IEEE Journal of. 40. 2689 - 2699, [[https://chic.caltech.edu/wp-content/uploads/2013/05/B-Analui_JSSC_10-Gbs_05.pdf](https://chic.caltech.edu/wp-content/uploads/2013/05/B-Analui_JSSC_10-Gbs_05.pdf)]
+
+
+
+
 ## reference
 
 Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne (EPFL). [Pattern generator model for jitter-tolerance simulation](https://designers-guide.org/modeling/JTOL_rev1.0.pdf); [VHDL-AMS models](https://designers-guide.org/modeling/fc_jtol_src_ns.vhd)

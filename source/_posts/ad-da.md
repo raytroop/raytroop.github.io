@@ -148,14 +148,67 @@ $V_x(t)$ and $V_y(t)$ prove that the settling time is *same*
 
 ## CDAC Energy Consumption
 
-*TODO* &#128197;
+
+$$
+E_{Vref} = \int P(t)dt = \int V_{ref} I(t) dt = V_{ref}\int I(t)dt = V_{ref}\cdot \Delta Q
+$$
+
+
+![image-20240922093524720](ad-da/image-20240922093524720.png)
+
+Given $V_{c,0}=\frac{1}{2}V_{ref}-V_{in}$ and $V_{c,1}=\frac{3}{4}V_{ref}-V_{in}$
+$$\begin{align}
+Q_{b0,0} &= \left(V_{ref} - V_{c,0} \right)\cdot 2C = \left(\frac{1}{2}V_{ref}+V_{in} \right)\cdot 2C \\
+Q_{b1,0} &= (0 - V_{c,0})\cdot C = \left(-\frac{1}{2}V_{ref}+V_{in} \right)\cdot C \\
+Q_{b0,1} &= \left(V_{ref} - V_{c,1} \right)\cdot 2C = \left(\frac{1}{4}V_{ref}+V_{in} \right)\cdot 2C \\
+Q_{b1,1} &= \left(V_{ref} - V_{c,1} \right)\cdot C = \left(\frac{1}{4}V_{ref}+V_{in} \right)\cdot C
+\end{align}$$
+
+Therefore
+$$
+E_{Vref} = V_{ref}\cdot (Q_{b0,1}+Q_{b1,1} - Q_{b0,0}-Q_{b1,0}) = \frac{1}{4}C V_{ref}^2
+$$
+
+
+---
+
+CDAC total energy change
+$$\begin{align}
+\Delta E_{tot} &= \frac{1}{2}\cdot 2C \cdot (U_{2c,1}^2  - U_{2c,0}^2) + \frac{1}{2}\cdot C \cdot (U_{c,1}^2  - U_{c,0}^2) + \frac{1}{2}\cdot C \cdot (U_{c1,1}^2  - U_{c1,0}^2) \\
+&= \left(-\frac{3}{16}V_{ref}^2 - \frac{1}{2}V_{ref}V_{in} - \frac{3}{32}V_{ref}^2+\frac{3}{4}V_{ref}V_{vin} + \frac{5}{32}V_{ref}^2-\frac{1}{4}V_{ref}V_{in}\right)C \\
+&= -\frac{1}{8}CV_{ref}^2
+\end{align}$$
 
 
 
+***alternative method***
+
+![CapEnergy.drawio](ad-da/CapEnergy.drawio.svg)
+$$
+\Delta E_{tot} = \frac{1}{2}\cdot\frac{3}{4}C\cdot V_{ref}^2  -  \frac{1}{2}\cdot C\cdot V_{ref}^2 = -\frac{1}{8}CV_{ref}^2
+$$
+
+
+> The total energy decreases by $-\frac{1}{8}CV_{ref}^2$, though $V_{ref}$ provides $\frac{1}{4}C V_{ref}^2$
 
 
 
+---
 
+The charge redistribution change the CDAC energy
+
+![cap_redis_energy.drawio](ad-da/cap_redis_energy.drawio.svg)
+
+
+$$
+E_{c,0} = \frac{1}{2}CV^2
+$$
+After charge redistribution
+$$
+E_{c,1} = \frac{1}{2}\cdot 2C\cdot \left(\frac{1}{2}\right)^2 = \frac{1}{2}CV^2
+$$
+
+> That make sense, charge redistribution consume energy
 
 
 

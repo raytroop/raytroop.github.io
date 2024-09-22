@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-## Rd & Rs Tradeoff
+## MOS Rd & Rs Tradeoff
 
 *TODO* &#128197;
 

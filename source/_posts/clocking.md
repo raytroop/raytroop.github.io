@@ -93,8 +93,9 @@ And for a phase interpolator, you need those reference clocks to be completely t
 > B. Razavi, **"The Design of a Phase Interpolator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 4, pp. 6-10, Fall 2023.([https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf))
 
 
+## DIV 1.5
 
-
+*TODO* &#128197;
 
 
 

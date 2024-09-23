@@ -200,19 +200,6 @@ $$
 
 
 
-## Flipped Voltage Follower (FVF)
-
-![image-20240921110019881](ldo/image-20240921110019881.png)
-
-![image-20240921113630249](ldo/image-20240921113630249.png)
-
-> [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop)]
-
-
-
-
-
-
 ## reference
 
 Hinojo, J.M., Martinez, C.I., & Torralba, A.J. (2018). Internally Compensated LDO Regulators for Modern System-on-Chip Design.

@@ -89,9 +89,6 @@ $$\begin{align}
 
 
 
-
-
-
 ###  Non-Binary Successive Approximation
 
 *TODO* &#128197;
@@ -102,7 +99,7 @@ The *overlapped search range* compensates for wrong decisions made in earlier st
 
 
 
-> Kuttner, Franz. “A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS.” *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1.
+> Kuttner, Franz. "A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS." *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1.
 
 
 
@@ -112,7 +109,9 @@ The *overlapped search range* compensates for wrong decisions made in earlier st
 
 *TODO* &#128197;
 
+The same numerical value in the decimal representation cannot be uniquely determined in a number system with radix smaller than 2
 
+($(100010)_{1.75} \approx (011111)_{1.75} \approx 0.72$)
 
 
 

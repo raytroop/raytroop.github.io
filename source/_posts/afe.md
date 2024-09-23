@@ -54,10 +54,22 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 
 **T&H buffer in ADC**
 
+![image-20240923200147070](afe/image-20240923200147070.png)
+
 
 > [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop)]
 >
 > Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118, doi: 10.1109/ISSCC42614.2022.9731650.
+
+
+
+## Linearity
+
+> THD spec
+
+
+
+
 
 
 

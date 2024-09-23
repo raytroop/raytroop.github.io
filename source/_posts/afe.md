@@ -63,14 +63,6 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 
 
 
-## Linearity
-
-> THD spec
-
-
-
-
-
 
 
 

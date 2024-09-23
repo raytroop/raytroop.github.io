@@ -23,6 +23,38 @@ ENOB - Not sufficient & not accurate enough
 
 
 
+## AFE Nonlinearity
+
+> ***"total harmonic distortion" (THD)*** in AFE
+
+Relative to NRZ-based systems, PAM4 transceivers require more stringent circuit linearity, equalizers which can implement multi-level inter-symbol interference (ISI) cancellation, and improved sensitivity
+
+![image-20240923204055369](linkModeling/image-20240923204055369.png)
+
+
+
+Because if it compresses, it turns out you have to use a much more complicated feedback filter. As long as *it behaves linearly*, the feedback filter itself can remain *a linear FIR*
+
+
+
+![image-20240923211841053](linkModeling/image-20240923211841053.png)
+
+Linearity can actually be a critical constraint in these signal paths, and you really want to stay as linear as you can all the way up until the point where you've canceled all of the ISI
+
+![image-20240923222650556](linkModeling/image-20240923222650556.png)
+
+
+
+> A. Roshan-Zamir, O. Elhadidy, H. -W. Yang and S. Palermo, "A Reconfigurable 16/32 Gb/s Dual-Mode NRZ/PAM4 SerDes in 65-nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 52, no. 9, pp. 2430-2447, Sept. 2017  [[https://people.engr.tamu.edu/spalermo/ecen689/2017_reconfigurable_16_32Gbps_NRZ_PAM4_SERDES_roshanzamir_jssc.pdf](https://people.engr.tamu.edu/spalermo/ecen689/2017_reconfigurable_16_32Gbps_NRZ_PAM4_SERDES_roshanzamir_jssc.pdf)]
+>
+> Hongtao Zhang, designcon2016. "PAM4 Signaling for 56G Serial Link Applications − A Tutorial"[[https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf](https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf)]
+>
+> Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers"
+
+
+
+
+
 ## CML vs. SST based driver
 
 ![image-20240825194548697](linkModeling/image-20240825194548697.png)
@@ -160,3 +192,4 @@ Anritsu Company, "Measuring Channel Operating Margin," 2016. [[https://dl.cdn-an
 
 JLSD - Julia SerDe [[https://github.com/kevjzheng/JLSD](https://github.com/kevjzheng/JLSD)]
 
+Kiran Gunnam, Selected Topics in RF, Analog and Mixed Signal Circuits and Systems

@@ -205,10 +205,10 @@ E_{c,0} = \frac{1}{2}CV^2
 $$
 After charge redistribution
 $$
-E_{c,1} = \frac{1}{2}\cdot 2C\cdot \left(\frac{1}{2}\right)^2 = \frac{1}{2}CV^2
+E_{c,1} = \frac{1}{2}\cdot 2C\cdot \left(\frac{1}{2}\right)^2 = \frac{1}{4}CV^2
 $$
 
-> That make sense, charge redistribution consume energy
+> That make sense, **charge redistribution consume energy**
 
 
 

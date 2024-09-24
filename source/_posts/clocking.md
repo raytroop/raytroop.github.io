@@ -93,11 +93,18 @@ And for a phase interpolator, you need those reference clocks to be completely t
 > B. Razavi, **"The Design of a Phase Interpolator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 4, pp. 6-10, Fall 2023.([https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf))
 
 
+
+
+
 ## DIV 1.5
 
 *TODO* &#128197;
 
 > Xu, Haojie & Luo, Bao & Jin, Gaofeng & Feng, Fei & Guo, Huanan & Gao, Xiang & Deo, Anupama. (2022). A Flexible 0.73-15.5 GHz Single LC VCO Clock Generator in 12 nm CMOS. IEEE Transactions on Circuits and Systems II: Express Briefs. 69. 4238 - 4242. [[https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS](https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS)]
+
+
+
+
 
 ## False locking
 
@@ -125,60 +132,12 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-## limit cycle & hunting jitter 
-
->  *hunting jitter* is also called as **dithering jitter**
-
-
-
-## CDR Loop Latency 
-
-Denoting the CDR loop latency by $\Delta T$ , we note that the loop transmission is multiplied by $exp(-s\Delta T)\simeq 1-s\Delta T$.The resulting right-half-plane zero, $f_z$ degrades the phase margin and must remain about **one decade beyond the BW**
-$$
-f_z\simeq \frac{1}{2\pi \Delta T}
-$$
-
-
-> This assumption is true in practice since the bandwidth of the CDR (few mega Hertz) is much smaller than the data rate (multi giga bits/second).
-
-> [Fernando , Marvell Italy."Considerations for CDR
-Bandwidth Proposal" [https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf](https://www.ieee802.org/3/bs/public/16_03/debernardinis_3bs_01_0316.pdf)]
->
->
-
-
-
-
-
-## Loop Bandwidth
-
-> The *closed-loop −3-dB bandwidth* is sometimes called the **“loop bandwidth”**
-
-
-
-
-
-## Continuous-Time Approximation Limitations 
-
-A rule of thumb often used to ensure slow changes in the loop is to select the *loop bandwidth* approximately equal to **one-tenth** of the *input frequency*. 
-
-![image-20240806230158367](clocking/image-20240806230158367.png)
-
-
-
-
-
-> Gardner, F.M. (1980). Charge-Pump Phase-Lock Loops. *IEEE Trans. Commun., 28*, 1849-1858.
->
-> Homayoun, Aliakbar and Behzad Razavi. “On the Stability of Charge-Pump Phase-Locked Loops.” *IEEE Transactions on Circuits and Systems I: Regular Papers* 63 (2016): 741-750.
->
-> N. Kuznetsov, A. Matveev, M. Yuldashev and R. Yuldashev, "Nonlinear Analysis of Charge-Pump Phase-Locked Loop: The Hold-In and Pull-In Ranges," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 68, no. 10, pp. 4049-4061, Oct. 2021
->
-> 
 
 
 
 ## clock distribution
+
+*TODO* &#128197;
 
 
 
@@ -252,6 +211,8 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 > Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
 >
 > Casper B, O’Mahony F. Clocking analysis, implementation and measurement techniques for high-speed data links: A tutorial. IEEE Transactions on Circuits and Systems I: Regular Papers. 2009;56(1):17–39
+
+
 
 ## Clock Division with Jitter and Phase Noise
 

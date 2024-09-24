@@ -9,9 +9,11 @@ mathjax: true
 
 
 
-## MOS Rd & Rs Tradeoff
+## MOS parasitic Rd&Rs, Cd&Cs
 
-*TODO* &#128197;
+Decrease  the parasitic R&C
+
+priority: $R_s \gt R_d$, $C_s \gt C_d$
 
 
 

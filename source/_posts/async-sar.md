@@ -89,7 +89,7 @@ $$\begin{align}
 
 
 
-### Non-Binary Successive Approximation & Redundancy
+### Redundancy (radix < 2)
 
 *TODO* &#128197;
 

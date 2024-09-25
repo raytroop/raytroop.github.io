@@ -38,6 +38,10 @@ kick-back increases CDAC settling time
 >
 > This error can be considered a quantization noise with **RMS**
 
+![image-20240925235213137](ad-da/image-20240925235213137.png)
+
+
+
 
 
 

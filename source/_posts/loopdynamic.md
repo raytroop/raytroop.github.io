@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-## dithering jitter
+## Dithering Jitter in Bang-bang PLL
 
 >  *hunting jitter* is also called as **dithering jitter**
 >

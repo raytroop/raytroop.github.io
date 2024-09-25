@@ -8,6 +8,19 @@ mathjax: true
 ---
 
 
+## VCO model
+
+*TODO* &#128197;
+
+> respone to vctrl
+> focus on phase
+
+
+
+
+> [[https://designers-guide.org/verilog-ams/functional-blocks/vco/vco.va](https://designers-guide.org/verilog-ams/functional-blocks/vco/vco.va)]
+
+
 
 ## ADC requirement
 

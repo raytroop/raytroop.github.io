@@ -520,6 +520,11 @@ V_{\text{t,lin}} &= V_G \mid _{I_D=I_{\text{thx}}\cdot \frac{W}{L}@\{V_D=0.05V\}
 > $I_{\text{thx}}$ could be different for technologies. (For N16, $I_{\text{thx}}=10$nA)
 
 
+---
+
+gm-Maximum Method
+
+*TODO* &#128197;
 
 ## Demystifying stb and pstb in Spectre
 

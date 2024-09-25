@@ -8,6 +8,12 @@ mathjax: true
 ---
 
 
+## VCO model
+
+> respone to vctrl
+
+
+
 
 ## Dithering Jitter in Bang-bang PLL
 

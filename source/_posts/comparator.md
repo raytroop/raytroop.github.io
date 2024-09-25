@@ -1,5 +1,5 @@
 ---
-title: Comparator Noise
+title: Comparator
 date: 2024-09-02 21:52:39
 tags:
 categories:
@@ -48,6 +48,14 @@ where $V_{i,sig}$ is constant signal is applied to input of comparator
 
 
 
+##  Common-Mode (Vcmi) Variation Effects
+
+![image-20240925225059596](comparator/image-20240925225059596.png)
+
+![image-20240925225823184](comparator/image-20240925225823184.png)
+
+
+
 
 
 ## reference
@@ -72,4 +80,6 @@ Y. Luo, A. Jain, J. Wagner and M. Ortmanns, "Input Referred Comparator Noise in 
 
 Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A New Methodology for Dynamic Comparator Noise Analysis URL:[https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf](https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf)
 
-X. Tang et al., "An Energy-Efficient Comparator With Dynamic Floating Inverter Amplifier," in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1011-1022, April 2020
+X. Tang et al., "An Energy-Efficient Comparator With Dynamic Floating Inverter Amplifier," in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1011-1022, April 2020 [[https://sci-hub.se/10.1109/JSSC.2019.2960485](https://sci-hub.se/10.1109/JSSC.2019.2960485)]
+
+Chen, Long & Sanyal, Arindam & Ma, Ji & Xiyuan, Tang & Sun, Nan. (2016). Comparator Common-Mode Variation Effects Analysis and its Application in SAR ADCs. 10.1109/ISCAS.2016.7538972. [[https://labs.engineering.asu.edu/mixedsignals/wp-content/uploads/sites/58/2017/08/ISCAS_comp_long_2016.pdf](https://labs.engineering.asu.edu/mixedsignals/wp-content/uploads/sites/58/2017/08/ISCAS_comp_long_2016.pdf)]

@@ -110,6 +110,10 @@ The total capacitance value does not change, but the required number of cycles i
 
 
 
+
+
+
+
 ## Asynchronous processing
 
 ![image-20240821230528349](async-sar/image-20240821230528349.png)

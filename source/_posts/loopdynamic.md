@@ -41,11 +41,13 @@ where the proportional gain ($K_P$)
 
 ---
 
-![image-20240924235318701](loopdynamic/image-20240924235318701.png)
-
-![image-20240924235353075](loopdynamic/image-20240924235353075.png)
 
 
+![ditheringjitter.drawio](loopdynamic/ditheringjitter.drawio.svg)
+
+
+
+> ![image-20240925213924764](loopdynamic/image-20240925213924764.png)
 
 
 

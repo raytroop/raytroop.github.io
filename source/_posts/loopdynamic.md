@@ -1,5 +1,5 @@
 ---
-title: Loop Dynamics Analysis
+title: Loop Dynamics
 date: 2024-09-24 22:49:34
 tags:
 categories:

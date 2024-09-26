@@ -18,7 +18,7 @@ mathjax: true
 
 ![image-20240924225542342](loopdynamic/image-20240924225542342.png)
 
-where the proportional gain ($K_P$), *heavily damped systems* means that $K_I \gg K_P$
+where the proportional gain ($K_P$), *heavily damped systems* means that $K_P \gg K_I$
 
 
 

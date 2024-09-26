@@ -11,6 +11,7 @@ mathjax: true
 ## Dithering Jitter in Bang-bang PLL
 
 >  *hunting jitter* is also called as **dithering jitter**
+> the time error between *data clock* and input data
 >
 >  - proportional gain 
 >  - loop latency 

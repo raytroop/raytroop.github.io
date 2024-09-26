@@ -435,7 +435,7 @@ PWSTRAP = {PP & OD} not NW
 
 
 
-## RC charge and discharge
+## RC charge & discharge
 
 - charge:
   $$
@@ -456,7 +456,7 @@ PWSTRAP = {PP & OD} not NW
 
 
 
-### AC coupling
+## AC coupling
 
 $V_m=\frac{1}{4},\space \frac{3}{4}$ and its common voltage $\frac{1}{2}$
 
@@ -482,6 +482,8 @@ high level envelope:
 
 
 ![image-20231121230225895](insight/image-20231121230225895.png)
+
+
 
 ## switched-capacitor resistor
 

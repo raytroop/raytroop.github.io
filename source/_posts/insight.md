@@ -458,6 +458,11 @@ PWSTRAP = {PP & OD} not NW
 
 ### AC coupling
 
+$V_m=\frac{1}{4},\space \frac{3}{4}$ and its common voltage $\frac{1}{2}$
+
+$V_o=-\frac{1}{4},\space \frac{1}{4}$ and its common voltage $0$
+
+
 ![image-20231121224940814](insight/image-20231121224940814.png)
 
 ![image-20231121225358509](insight/image-20231121225358509.png)

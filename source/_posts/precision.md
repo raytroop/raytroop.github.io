@@ -99,13 +99,20 @@ $$\begin{align}
 
 
 
-## Dynamic Element Matching (DEM)
+## Ripple Cancellation after Chopping
+
+> On-chip analog filter is not good enough due to limited cutoff frequency
+
 
 *TODO* &#128197;
 
 
 
 
+
+## Dynamic Element Matching (DEM)
+
+*TODO* &#128197;
 
 
 
@@ -120,3 +127,7 @@ Qinwen Fan, Evolution of precision amplifiers
 Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in CMOS [[https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf](https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf)]
 
 Kofi Makinwa. Precision Analog Circuit Design: Coping with Variability, [[https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d](https://youtu.be/nA_DZtRqrTQ?si=6uyOpJhdnYm3iG9d)] [[https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob](https://youtu.be/uwRpP20Lprc?si=SGPta86jRCdECSob)]
+
+ Chung-chun Chen, Why Design Challenge in Chopping Offset & Flicker Noise? [[https://youtu.be/ydjca2KrXgc?si=2raCIB99vXriMPsq](https://youtu.be/ydjca2KrXgc?si=2raCIB99vXriMPsq)]
+
+-, Why Needs A Low Ripple after Chopping Amplifier for A Very Low DC Offset & Flicker Noise? [[https://youtu.be/y7TzJtHE7IA?si=kUeP_ESofVxp3IT_](https://youtu.be/y7TzJtHE7IA?si=kUeP_ESofVxp3IT_)]

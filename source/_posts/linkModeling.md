@@ -22,6 +22,25 @@ mathjax: true
 
 
 
+
+
+## Digital to Phase Converter (DPC) 
+
+Converts *digital code* from the phase integrator into an edge location with respect to the local
+reference clock
+
+- Phase Interpolator (PI), phase rotator, DLL, etc
+
+> Phase interpolators realize digital-to-phase conversion (DPC)
+
+
+
+
+
+> P. Palestri *et al*., "Analytical Modeling of Jitter in Bang-Bang CDR Circuits Featuring Phase Interpolation," in *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 29, no. 7, pp. 1392-1401, July 2021 [[https://sci-hub.se/10.1109/TVLSI.2021.3068450](https://sci-hub.se/10.1109/TVLSI.2021.3068450)]
+
+
+
 ## ADC requirement
 
 *TODO* &#128197;

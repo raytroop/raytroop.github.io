@@ -12,6 +12,10 @@ mathjax: true
 *TODO* &#128197;
 
 
+
+
+
+
 ## charge pump
 
 *TODO* &#128197;
@@ -1121,7 +1125,9 @@ Diode helps dissipate charges accumulated on metal. Diode should be placed as ne
 
 
 
-## Metastability and Synchronizer
+## Metastability & Synchronizer
+
+> *Clock Domain Crossing (CDC)*
 
 When a flip-flop samples an input that is changing during its aperture, the output Q may momentarily take on a voltage between 0 and VDD that is in the forbidden zone. This is called a metastable state. Eventually, the flip-flop will resolve the output to a stable state of either 0 or 1. However, the resolution time required to reach the stable state is *unbounded*
 
@@ -1129,11 +1135,27 @@ When a flip-flop samples an input that is changing during its aperture, the outp
 
 ![image-20240803075025846](insight/image-20240803075025846.png)
 
+
+
+
+
+### Mean Time Between Failure (MTBF)
+
+*TODO* &#128197;
+
+
+
+
+
+
+
 > Steve Golson. Synchronization and Metastability [[https://trilobyte.com/pdf/golson_snug14.pdf](https://trilobyte.com/pdf/golson_snug14.pdf)]
 >
 > R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011, doi: 10.1109/MDT.2011.113. [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
 >
 > Kinniment, D. J. Synchronization and arbitration in digital systems. John Wiley & Sons Ltd (2007).
+>
+> Amr Adel Mohammady, Clock Domain Crossing. [[https://media.licdn.com/dms/document/media/D4E1FAQFGmDwVxj-A3Q/feedshare-document-pdf-analyzed/0/1727431256521?e=1728518400&v=beta&t=aY8BaqSPrHuQCesh_1hEPs-wYHQAF9XMI4eRfMij7zI](https://media.licdn.com/dms/document/media/D4E1FAQFGmDwVxj-A3Q/feedshare-document-pdf-analyzed/0/1727431256521?e=1728518400&v=beta&t=aY8BaqSPrHuQCesh_1hEPs-wYHQAF9XMI4eRfMij7zI)]
 
 
 

@@ -67,6 +67,20 @@ A:  *TODO* &#128197;
 
 
 
+## SSC intuition
+
+Due to $f= K_{vco}V_{ctrl}$, its derivate to $t$ is
+
+$$
+\frac{df}{dt} = K_{vco}\frac{dV_{ctrl}}{dt}
+$$
+
+For chargepump PLL, $dV_{ctrl} = \frac{\phi_e I_{cp}}{2\pi C}dt$, that is
+$$
+\frac{df}{dt} = K_{vco}  \frac{\phi_e I_{cp}}{2\pi C}
+$$
+
+
 
 
 ## Injection Lock

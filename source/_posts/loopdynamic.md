@@ -85,7 +85,7 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 ![image-20240806230158367](loopdynamic/image-20240806230158367.png)
 
-
+![image-20240928095850580](loopdynamic/image-20240928095850580.png)
 
 
 
@@ -95,6 +95,7 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 >
 > N. Kuznetsov, A. Matveev, M. Yuldashev and R. Yuldashev, "Nonlinear Analysis of Charge-Pump Phase-Locked Loop: The Hold-In and Pull-In Ranges," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 68, no. 10, pp. 4049-4061, Oct. 2021
 >
+> Deog-Kyoon Jeong, Topics in IC Design - 2.1 Introduction to Phase-Locked Loop [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%202%20-%20Charge-Pump%20PLL%2C%20Freuqency%20Synthesizers%2C%20and%20SSCG.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%202%20-%20Charge-Pump%20PLL%2C%20Freuqency%20Synthesizers%2C%20and%20SSCG.pdf)]
 
 
 

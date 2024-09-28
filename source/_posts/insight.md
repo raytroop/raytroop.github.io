@@ -285,6 +285,20 @@ noting $\omega_{p1}\lt \omega_z \lt \omega_{p2}$
 
 
 
+## Recognize "Zero" by Inspection
+
+> a method to predict the existence of "zero" by inspection, based on the concept of *"Analog Phase Interpolation"*
+
+
+
+*TODO* &#128197;
+
+
+
+> Debashis Dhar, How to Recognize "Zero" by Inspection (Utilizing Analog Phase Interpolation) [[https://www.linkedin.com/posts/debashis-dhar-12487024_how-to-recognize-zero-by-inspection-activity-7163364364329160704-9qOq?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/debashis-dhar-12487024_how-to-recognize-zero-by-inspection-activity-7163364364329160704-9qOq?utm_source=share&utm_medium=member_desktop)]
+
+
+
 ## Random offset
 
 The dependence of offset voltage and current mismatches upon the overdrive voltage is similar to our

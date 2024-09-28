@@ -64,11 +64,17 @@ This reduces the charge sharing effect, when the switch is turned on.
 
 ![image-20240928004308700](clocking/image-20240928004308700.png)
 
-
-
-
-
 > Michael H. Perrott, PLL Design Using the PLL Design Assistant Program. [[https://designers-guide.org/forum/Attachments/pll_manual.pdf](https://designers-guide.org/forum/Attachments/pll_manual.pdf)]
+
+
+
+---
+
+$\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
+
+![image-20240928203714450](clocking/image-20240928203714450.png)
+
+
 
 
 

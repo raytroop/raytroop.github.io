@@ -278,7 +278,7 @@ D_n(kT) = (G_n R(kT) V(kT) + O_n)R(kT)= C_n V(kT) + R(kT)O_n
 $$
 
 
-> > John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"
+> John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"
 
 
 

@@ -218,7 +218,7 @@ $$
 
 
 
-## Comparator input capacitance effect
+## Comparator input cap impact
 
 ![image-20240907194621524](ad-da/image-20240907194621524.png)
 $$
@@ -235,7 +235,10 @@ V_c &= -\frac{2^N C}{2^N C + C_p}V_{in} +V_{ref}\sum_{n=0}^{N-1} \frac{b_n\cdot2
 That is, it does not change the sign
 
 
+
 ## Summing Interleaved Alias
+
+![image-20240929215841300](ad-da/image-20240929215841300.png)
 
 The sampling function - impulse train is
 $$
@@ -270,12 +273,18 @@ Alias has same frequency for each slice but **different phase**: Alias terms sum
 > John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"
 
 
+
 ## Random Chopping in TI-ADC
+
+![image-20240929215927957](ad-da/image-20240929215927957.png)
+
 
 
 $$
 D_n(kT) = (G_n R(kT) V(kT) + O_n)R(kT)= C_n V(kT) + R(kT)O_n
 $$
+
+
 
 
 > John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"

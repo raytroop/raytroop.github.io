@@ -270,6 +270,19 @@ Alias has same frequency for each slice but **different phase**: Alias terms sum
 > John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"
 
 
+## Random Chopping in TI-ADC
+
+
+$$
+D_n(kT) = (G_n R(kT) V(kT) + O_n)R(kT)= C_n V(kT) + R(kT)O_n
+$$
+
+
+> > John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"
+
+
+
+
 ## SNR of an ADC Due to Clock Jitter
 
 *TODO* &#128197;

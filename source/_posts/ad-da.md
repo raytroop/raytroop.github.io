@@ -218,7 +218,7 @@ $$
 
 
 
-## Comparator input capacitance
+## Comparator input capacitance effect
 
 ![image-20240907194621524](ad-da/image-20240907194621524.png)
 $$
@@ -234,6 +234,40 @@ V_c &= -\frac{2^N C}{2^N C + C_p}V_{in} +V_{ref}\sum_{n=0}^{N-1} \frac{b_n\cdot2
 
 That is, it does not change the sign
 
+
+## Summing Interleaved Alias
+
+The sampling function - impulse train is
+$$
+s(t) = \sum_{n=-\infty}^{\infty}\left[ \delta(t-n4T_s) + \delta(t-n4T_s-T_s) + \delta(t-n4T_s-2T_s) + \delta(t-n4T_s-3T_s)\right]
+$$
+
+Its Fourier transform is
+$$\begin{align}
+S(f) &= \frac{2\pi}{4T}\sum_{k=-\infty}^{\infty}\left[\delta(f-k\frac{f_s}{4}) + e^{-j2\pi f\cdot T_s}\delta(f-k\frac{f_s}{4}) + e^{-j2\pi f\cdot 2T_s}\delta(f-k\frac{f_s}{4}) + e^{-j2\pi f\cdot 3T_s}\delta(f-k\frac{f_s}{4})  \right] \\
+&= \frac{2\pi}{4T}\sum_{k=-\infty}^{\infty}\left(1+e^{-j2\pi\frac{f}{f_s}} + e^{-j4\pi\frac{f}{f_s}} + e^{-j6\pi\frac{f}{f_s}}  \right) \delta(f-k\frac{f_s}{4}) \\
+&= \frac{2\pi}{4T}\sum_{k=-\infty}^{\infty}\left(1+e^{-jk\frac{\pi}{2}} + e^{-jk\pi} + e^{-jk\frac{3\pi}{2}}  \right) \delta(f-k\frac{f_s}{4})
+\end{align}$$
+
+We define $M[k] = 1+e^{-jk\frac{\pi}{2}} + e^{-jk\pi} + e^{-jk\frac{3\pi}{2}}$, which is periodic, i.e. $M[k]=M[k+4]$
+$$
+M[k]=\left\{ \begin{array}{cl}
+4 & : \ k = 4m \\
+0 & : \ k=4m+1 \\
+0 & : \ k=4m+2 \\
+0 & : \ k=4m+3 \\
+\end{array} \right.
+$$
+
+That is
+$$
+S(f) = \frac{2\pi}{T}\sum_{k=-\infty}^{\infty} \delta(f-kf_s)
+$$
+
+Alias terms sum to zero if all slices match exactly
+
+
+> John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"
 
 
 ## SNR of an ADC Due to Clock Jitter

@@ -264,7 +264,7 @@ $$
 S(f) = \frac{2\pi}{T}\sum_{k=-\infty}^{\infty} \delta(f-kf_s)
 $$
 
-Alias terms sum to zero if all slices match exactly
+Alias has same frequency for each slice but **different phase**: Alias terms sum to **zero** if all slices match exactly
 
 
 > John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"

@@ -20,14 +20,14 @@ Below diagram show the windowing effect and sampling
 ![NinDFT.drawio](fourier/NinDFT.drawio.svg)
 
 
-For general window function, we know $W(e^{j\hat{\omega}})=\frac{1}{T_s}W(j\omega)$,
+For general window function, we know $W(e^{j\hat{\omega}})=\frac{1}{T_s}W_c(j\omega)$,
 
 and
 $$
-\frac{W(j\omega|\omega=0)}{T_s} = \frac{T_sW(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s} =W(e^{j\hat{\omega}}|\hat{\omega}=0)= \sum_{n=-N_w}^{+N_w}w[n]
+\frac{W_c(j\omega|\omega=0)}{T_s} = \frac{T_sW(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s} =W(e^{j\hat{\omega}}|\hat{\omega}=0)= \sum_{n=-N_w}^{+N_w}w[n]
 $$
 
-e.g. $\frac{W(j\omega|\omega=0)}{T_s} = N$ for Rectangular Window, shown in above figure
+e.g. $\frac{W_c(j\omega|\omega=0)}{T_s} = N$ for Rectangular Window, shown in above figure
 
 
 
@@ -562,91 +562,6 @@ We should keep in mind that even if the fence were transparent, we would see a r
 Zero padding only allows us to look at more samples of that imperfect reality
 
 
-
-
-
-## Transfer function
-
-### sampled impulse response
-
-The below equation demonstrates how to obtain **continuous Fourier Transform** from **DTFT** .
-$$
-X_c(\omega) = T \cdot X(\omega)
-$$
-
-> $T$ is sample period, follow previous equation
-
-### useful functions
-
-- using `fft`
-
-  The outputs of the DFT are **samples** of the DTFT
-
-- using `freqz`
-
-  modeling as **FIR filter**, and the impulse response sequence of an FIR filter is the same as the sequence of filter coefficients, we can express the frequency response in terms of either the filter coefficients or the impulse response
-
-  > `fft` is used in `freqz` internally
-
-
-### Example
-
-**Question**:
-
-How to obtain continuous system transfer function from sampled impulse
-
-**Answer**:
-
-using above mentioned functions
-
----
-
-> First order lowpass filter with 3-dB frequency **1Hz**
-
-![image-20220501020004068](fourier/image-20220501020004068.png)
-
-```matlab
-clear all;
-clc;
-
-%% continuous system
-s = tf('s');
-h = 2*pi/(2*pi+s);
-[mag, phs, wout] = bode(h);
-fct = wout(:)/2/pi;
-Hct_dB = 20*log10(mag(:));
-
-
-fstep = 0.01;           % freq resolution
-fnyqst = 100;
-Ts = 1/(2*fnyqst);
-Fs = 1/Ts;              % sampling freq
-Ns = ceil(Fs/fstep);    % samping points
-fstep = Fs/Ns;          % update fstep
-t = (0:Ns-1)*Ts;        % sampling time points
-
-y = impulse(h, t);      % impulse resp
-
-%% modelling as discrete system
-Y = fft(y);                 % dft
-Hfft = Y * Ts;              % !!! multiply Ts
-Hfft_dB = 20*log10(abs(Hfft(1:Ns/2+1)));
-ffft = (1:Ns/2+1)*fstep - fstep;
-
-
-[Hfir, ffir] = freqz(y, 1, [], 1/Ts);   % modelling as FIR
-Hfir = Hfir * Ts;           % !!! multiply Ts
-Hfir_dB = 20*log10(abs(Hfir));
-
-%% plot
-semilogx(fct, Hct_dB, 'k', ffft, Hfft_dB, 'r.-', ffir, Hfir_dB, 'b--');
-legend('bode(s)', 'fft', 'FIR model')
-xlabel('Freq(Hz)');
-ylabel('dB');
-xlim([1e-2 1e2]);
-grid on;
-title('frequency response of different methods');
-```
 
 
 

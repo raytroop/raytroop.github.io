@@ -177,21 +177,6 @@ where $\alpha$ is scaling ratio
 
 
 
-### impulse invariance
-
-$$
-h[n] = Th_c(nT)
-$$
-
-When $h[n]$ and $h_c(t)$ are related through the above equation, i.e., the impulse response of the discrete-time  system is a *scaled*, *sampled* version of $h_c(t)$, the ***discrete-time system*** is said to be an **impulse-invariant** version of the ***continuous-time system***
-
-we have
-$$
-H(e^{j\hat{\omega}}) = H_c\left(j\frac{\hat{\omega}}{T}\right)
-$$
-
-
-
 ### Multiplication
 
 > aka *Modulation or Windowing Theorem*

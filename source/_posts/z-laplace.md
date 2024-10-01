@@ -18,19 +18,84 @@ mathjax: true
 
 
 
-![image-20241001074829167](z-laplace/image-20241001074829167.png)
+## Laplace Transform
 
-![image-20241001074843343](z-laplace/image-20241001074843343.png)
-
-
-
-## warmup
+To specify the Laplace transform of a signal, both the **algebraic expression** and the **ROC** are required. The *ROC* is the range of values of $s$ for the integral of $t$ converges
 
 
 
-![image-20240928174948401](z-laplace/image-20240928174948401.png)
+> ***bilateral*** Laplace transform
 
 
+![image-20241001140721422](z-laplace/image-20241001140721422.png)
+
+where $s$ in the ROC and $\mathfrak{Re}\{s\}=\sigma$
+
+> The formal evaluation of the integral for a general $X(s)$ requires the use of **contour integration** in the complex plane. However, for the class of *rational transforms*, the inverse Laplace transform can be determined without directly evaluating eq. (9.56) by using the technique of **partial fraction expansion** 
+
+
+
+
+### Region of Convergence (ROC)
+
+The range of values of s for which the integral in converges is referred to as the **region of convergence** (which we abbreviate as **ROC**) of the Laplace transform
+
+![image-20241001133645466](z-laplace/image-20241001133645466.png)
+
+![image-20241001152307222](z-laplace/image-20241001152307222.png)
+
+![image-20241001153011746](z-laplace/image-20241001153011746.png)
+
+> i.e. **no** pole in RHP for stable LTI sytem
+
+
+
+### System Causality
+
+For a causal LTI system, the impulse response is zero for $t \lt 0$ and thus is ***right sided***
+
+![image-20241001164006698](z-laplace/image-20241001164006698.png)
+
+> causality implies that the ROC is to the right of the rightmost pole, but the converse is not in general true, unless the system function is rational
+
+
+
+### System Stability
+
+> *system function,* *transfer function*: $H(s)$
+>
+> *frequency response*: $H(j\omega)$, if the ROC of $H(s)$ includes the imaginary axis, i.e.$s=j\omega \in \text{ROC}$
+
+![image-20241001162235027](z-laplace/image-20241001162235027.png)
+
+![image-20241001163547031](z-laplace/image-20241001163547031.png)
+
+> all of the poles have ***negative*** real parts
+
+
+
+## Unilateral Laplace transform
+
+> analyzing ***causal*** systems and, particularly, systems specified by linear constant-coefficient differential equations with ***nonzero initial conditions*** (i.e., systems that are not initially at rest)
+
+![image-20241001180202348](z-laplace/image-20241001180202348.png)
+
+
+
+A particularly important difference between the properties of the unilateral and bilateral transforms is the **differentiation property** $\frac{d}{dt}x(t)$
+
+|                                  | Laplace Transform |
+| -------------------------------- | ----------------- |
+| **Bilateral Laplace Transform**  | $sX(s)$           |
+| **Unilateral Laplace Transform** | $sX(s)-x(0^-)$    |
+
+![image-20241001183543726](z-laplace/image-20241001183543726.png)
+
+> 分部积分公式
+>
+> ![image-20241001184124032](z-laplace/image-20241001184124032.png)
+
+> In fact, the ***initial- and final-value theorems*** are basically ***unilateral transform properties***, as they apply only to signals $x(t)$ that are identically $0$ for $t \lt 0$.
 
 
 
@@ -43,6 +108,8 @@ mathjax: true
 > S. Boyd EE102 Table of Laplace Transforms [[https://web.stanford.edu/~boyd/ee102/laplace-table.pdf](https://web.stanford.edu/~boyd/ee102/laplace-table.pdf)]
 >
 > Gabriel Nagy, Ordinary Differential Equations [[https://users.math.msu.edu/users/gnagy/teaching/ode.pdf](https://users.math.msu.edu/users/gnagy/teaching/ode.pdf)]
+
+
 
 
 
@@ -66,11 +133,26 @@ mathjax: true
 
 
 
+## impulse invariance
+
+$$
+h[n] = Th_c(nT)
+$$
+
+When $h[n]$ and $h_c(t)$ are related through the above equation, i.e., the impulse response of the discrete-time  system is a *scaled*, *sampled* version of $h_c(t)$, the ***discrete-time system*** is said to be an **impulse-invariant** version of the ***continuous-time system***
+
+we have
+$$
+H(e^{j\hat{\omega}}) = H_c\left(j\frac{\hat{\omega}}{T}\right)
+$$
 
 
 
 
-## Transfer function from sampled impulse response
+
+
+
+## Transfer function & sampled impulse response
 
 > continuous-time filter designs to discrete-time designs through techniques such as ***impulse invariance***
 
@@ -146,6 +228,12 @@ title('frequency response of different methods');
 ## Bilinear Transformation
 
 *TODO* &#128197;
+
+
+
+## Butterworth Filters
+
+
 
 
 
@@ -253,6 +341,12 @@ $$
 
 
 ## reference
+
+Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.)
+
+Alan V Oppenheim, Ronald W. Schafer. 2010. Discrete-Time Signal Processing, 3rd edition
+
+B.P. Lathi, Roger Green. Linear Systems and Signals (The Oxford Series in Electrical and Computer Engineering) 3rd Edition
 
 [Sam Palermo, ECEN720,  Lecture 7: Equalization Introduction & TX FIR Eq](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)
 

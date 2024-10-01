@@ -1,5 +1,5 @@
 ---
-title: Linear Circuits Analysis - Transfer Function & Frequency Response 
+title: Linear Circuits Analysis
 date: 2023-12-23 14:58:39
 tags:
 categories:

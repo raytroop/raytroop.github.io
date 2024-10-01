@@ -9,6 +9,17 @@ mathjax: true
 
 
 
+## Summation & Integration 
+
+|             | impulse response | Transform            | ROC                       |
+| ----------- | ---------------- | -------------------- | ------------------------- |
+| Summation   | $u(t)$           | $\frac{1}{s}$        | $\mathfrak{Re}\{s\}\gt 0$ |
+| Integration | $u[n]$           | $\frac{1}{1-z^{-1}}$ | $|z| \gt 1$               |
+
+> both are **NOT** stable
+
+
+
 ## sinc filter
 
 ![image-20240903223100157](ss-insight/image-20240903223100157.png)

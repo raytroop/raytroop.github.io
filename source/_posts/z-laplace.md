@@ -1,5 +1,5 @@
 ---
-title: z-Transform & Laplace Transform in System Analysis
+title: z-Transform & Laplace Transform for System Analysis
 date: 2022-03-22 09:31:24
 tags:
 categories:
@@ -15,6 +15,12 @@ mathjax: true
 - z-transforms
   - a generalization of the *discrete*-time Fourier transform
   - converts *difference equations* into *algebraic equations*
+
+
+
+> *system function,* *transfer function*: $H(s)$
+>
+> *frequency response*: $H(j\omega)$, if the ROC of $H(s)$ includes the imaginary axis, i.e.$s=j\omega \in \text{ROC}$
 
 
 
@@ -36,7 +42,7 @@ where $s$ in the ROC and $\mathfrak{Re}\{s\}=\sigma$
 
 
 
-### Region of Convergence (ROC)
+### ROC Property
 
 The range of values of s for which the integral in converges is referred to as the **region of convergence** (which we abbreviate as **ROC**) of the Laplace transform
 
@@ -62,11 +68,10 @@ For a causal LTI system, the impulse response is zero for $t \lt 0$ and thus is 
 
 ### System Stability
 
-> *system function,* *transfer function*: $H(s)$
->
-> *frequency response*: $H(j\omega)$, if the ROC of $H(s)$ includes the imaginary axis, i.e.$s=j\omega \in \text{ROC}$
+> The system is **stable**, or equivalently, that $h(t)$ is **absolutely integrable** and therefore has a Fourier
+> transform,  then the ROC must include the **entire $j\omega$-axis**
 
-![image-20241001162235027](z-laplace/image-20241001162235027.png)
+![image-20241001223128791](z-laplace/image-20241001223128791.png)
 
 ![image-20241001163547031](z-laplace/image-20241001163547031.png)
 
@@ -91,31 +96,72 @@ A particularly important difference between the properties of the unilateral and
 
 ![image-20241001183543726](z-laplace/image-20241001183543726.png)
 
-> 分部积分公式
+> *Integration by parts* for unilateral Laplace transform
 >
 > ![image-20241001184124032](z-laplace/image-20241001184124032.png)
+
+> in *Bilateral Laplace Transform*
+>
+> ![image-20241001231719320](z-laplace/image-20241001231719320.png)
+
+
 
 > In fact, the ***initial- and final-value theorems*** are basically ***unilateral transform properties***, as they apply only to signals $x(t)$ that are identically $0$ for $t \lt 0$.
 
 
 
-### derivative formula t=0
+## $z$-Transform
 
-![image-20241001101315532](z-laplace/image-20241001101315532.png)
+The $z$-transform for discrete-time signals is the counterpart of the Laplace transform for continuous-time signals
+
+![image-20241001204402907](z-laplace/image-20241001204402907.png)
+
+where $z=re^{j\omega}$
+
+![image-20241001204810918](z-laplace/image-20241001204810918.png)
+
+> The $z$-transform evaluated on the *unit circle* corresponds to the *Fourier transform*
+
+![image-20241001223944822](z-laplace/image-20241001223944822.png)
 
 
 
-> S. Boyd EE102 Table of Laplace Transforms [[https://web.stanford.edu/~boyd/ee102/laplace-table.pdf](https://web.stanford.edu/~boyd/ee102/laplace-table.pdf)]
+
+
+### ROC Property
+
+![image-20241001222148012](z-laplace/image-20241001222148012.png)
+
+
+
+### system stability
+
+The system is **stable**, or equivalently, that $h[n]$ is **absolutely summable** and therefore has a Fourier
+transform,  then the ROC must include the **unit circle**
+
+
+
+## Unilateral $z$-Transform
+
+![image-20241001225603923](z-laplace/image-20241001225603923.png)
+
+
+
+The **time shifting** property is different in the unilateral case because the lower limit in the unilateral transform definition is fixed at zero, $x[n-n_0]$
+
+
+
+> *bilateral $z$-transform*
 >
-> Gabriel Nagy, Ordinary Differential Equations [[https://users.math.msu.edu/users/gnagy/teaching/ode.pdf](https://users.math.msu.edu/users/gnagy/teaching/ode.pdf)]
+> ![image-20241001232749554](z-laplace/image-20241001232749554.png)
 
+> *unilateral $z$-transform*
+>
+> ![image-20241001233014484](z-laplace/image-20241001233014484.png)
 
-
-
-
-## Multirate Signal Processing
-
-*TODO* &#128197;
+> *Initial rest condition*
+>
+> ![image-20241001233548788](z-laplace/image-20241001233548788.png)
 
 
 
@@ -222,6 +268,16 @@ xlim([1e-2 1e2]);
 grid on;
 title('frequency response of different methods');
 ```
+
+
+
+
+
+## Multirate Signal Processing
+
+*TODO* &#128197;
+
+
 
 
 

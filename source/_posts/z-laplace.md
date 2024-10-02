@@ -224,7 +224,7 @@ $$
 H(e^{j\hat{\omega}}) = H_c\left(j\frac{\hat{\omega}}{T}\right),\space\space |\hat{\omega}| \lt \pi
 $$
 
-> Note $T$ shall be chosen such that $H_c(j\omega)=0, \space\space |\hat{\omega}| \ge \frac{\pi}{T} $
+> Note $T$ shall be chosen such that $H_c(j\omega)=0, \space\space |\hat{\omega}| \ge \frac{\pi}{T}$
 
 
 

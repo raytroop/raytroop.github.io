@@ -22,7 +22,15 @@ mathjax: true
 
 ## sinc filter
 
-![image-20240903223100157](ss-insight/image-20240903223100157.png)
+![image-20241002143413907](ss-insight/image-20241002143413907.png)
+
+where $W$ is sampling frequency in Hz
+
+![sinc.drawio](ss-insight/sinc.drawio.svg)
+
+
+
+> ![image-20241002143219224](ss-insight/image-20241002143219224.png)
 
 
 

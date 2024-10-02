@@ -210,6 +210,9 @@ Note that the transformation $z = e^{sT}$ transforms the imaginary axis in the $
 
 ## impulse invariance criterion
 
+![image-20241002133303153](z-laplace/image-20241002133303153.png)
+
+
 $$
 h[n] = Th_c(nT)
 $$

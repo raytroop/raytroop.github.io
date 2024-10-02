@@ -208,54 +208,54 @@ Note that the transformation $z = e^{sT}$ transforms the imaginary axis in the $
 
 
 
-## **impulse invariance criterion**
+## impulse invariance criterion
 
 $$
 h[n] = Th_c(nT)
 $$
 
-**When $h[n]$ and $h_c(t)$ are related through the above equation, i.e., the impulse response of the discrete-time  system is a *scaled*, *sampled* version of $h_c(t)$, the *discrete-time system* is said to be an impulse-invariant version of the *continuous-time system***
+When $h[n]$ and $h_c(t)$ are related through the above equation, i.e., the impulse response of the discrete-time  system is a *scaled*, *sampled* version of $h_c(t)$, the *discrete-time system* is said to be an impulse-invariant version of the *continuous-time system*
 
-**we have**
+we have
 $$
 H(e^{j\hat{\omega}}) = H_c\left(j\frac{\hat{\omega}}{T}\right)
 $$
 
 
 
-## **Bilinear Transformation**
+## Bilinear Transformation
 
-***TODO* &#128197;**
-
-
+*TODO* &#128197;
 
 
 
-## **Transfer function & sampled impulse response**
-
-> **continuous-time filter designs to discrete-time designs through techniques such as *impulse invariance***
 
 
+## Transfer function & sampled impulse response
 
-**useful functions**
+> continuous-time filter designs to discrete-time designs through techniques such as ***impulse invariance***
 
-- **using `fft`**
 
-  **The outputs of the DFT are samples of the DTFT**
 
-- **using `freqz`**
+useful functions
 
-  **modeling as FIR filter, and the impulse response sequence of an FIR filter is the same as the sequence of filter coefficients, we can express the frequency response in terms of either the filter coefficients or the impulse response**
+- using `fft`
 
-  > **`fft` is used in `freqz` internally**
+  The outputs of the DFT are samples of the DTFT
 
-**Question:**
+- using `freqz`
 
-**How to obtain continuous system transfer function from sampled impulse**
+  modeling as FIR filter, and the impulse response sequence of an FIR filter is the same as the sequence of filter coefficients, we can express the frequency response in terms of either the filter coefficients or the impulse response
+
+  > `fft` is used in `freqz` internally
+
+Question:
+
+How to obtain continuous system transfer function from sampled impulse
 
 ---
 
-> **First order lowpass filter with 3-dB frequency 1Hz**
+> First order lowpass filter with 3-dB frequency 1Hz
 
 **![image-20241002082937903](z-laplace/image-20241002082937903.png)**
 
@@ -306,26 +306,26 @@ title('frequency response of different methods');
 
 
 
-## **Multirate Signal Processing**
+## Multirate Signal Processing
 
-***TODO* &#128197;**
-
-
+*TODO* &#128197;
 
 
 
-## **FIR Equalization**
 
-### **Frequency Response**
+
+## FIR Equalization
+
+### Frequency Response
 
 **![image-20220322093428287](z-laplace/image-20220322093428287.png)**
 $$
 z = e^{j\omega T_s}
 $$
 
-### **Unit impulse**
+### Unit impulse
 
-**filter coefficients are [-0.131, 0.595, -0.274] and sampling period is 100ps**
+filter coefficients are [-0.131, 0.595, -0.274] and sampling period is 100ps
 
 **![image-20220428125454912](z-laplace/image-20220428125454912.png)**
 
@@ -353,23 +353,23 @@ xlabel('Time(\times 100ps)');
 ylabel('mag');
 ```
 
-> **`impulse`:**
+> `impulse`:
 >
-> **For discrete-time systems, the impulse response is the response to a unit area pulse of length `Ts` and height `1/Ts`, where `Ts` is the sample time of the system. (This pulse approaches $\delta(t)$ as `Ts` approaches zero.)**
+> For discrete-time systems, the impulse response is the response to a unit area pulse of length `Ts` and height `1/Ts`, where `Ts` is the sample time of the system. (This pulse approaches $\delta(t)$ as `Ts` approaches zero.)
 >
 > 
 >
-> **Scale output:**
+> Scale output:
 >
-> **Multiply `impulse` output with sample period `Ts` in order to correct `1/Ts` height of `impulse` function.**
+> Multiply `impulse` output with sample period `Ts` in order to correct `1/Ts` height of `impulse` function.
 
 
 
-### **PSD transformation** 
+### PSD transformation 
 
-**If we have power spectrum or power spectrum density of both edge's absolute jitter ($x(n)$) , $P_{\text{xx}}$**
+If we have power spectrum or power spectrum density of both edge's absolute jitter ($x(n)$) , $P_{\text{xx}}$
 
-**Then 1UI jitter is $x_{\text{1UI}}(n)=x(n)-x(n-1)$, and Period jitter is $x_{\text{Period}}(n)=x(n)-x(n-2)$, which can be modeled as FIR filter, $H(\omega) = 1-z^{-k}$, i.e. $k=1$ for 1UI jitter and $k=2$ Period jitter**
+Then 1UI jitter is $x_{\text{1UI}}(n)=x(n)-x(n-1)$, and Period jitter is $x_{\text{Period}}(n)=x(n)-x(n-2)$, which can be modeled as FIR filter, $H(\omega) = 1-z^{-k}$, i.e. $k=1$ for 1UI jitter and $k=2$ Period jitter
 **$$\begin{align}
 P_{\text{xx}}'(\omega) &= P_{\text{xx}}(\omega) \cdot \left| 1-z^{-k}  \right|^2 \\
 &= P_{\text{xx}}(\omega) \cdot \left| 1-(e^{j\omega T_s})^{-k}  \right|^2 \\
@@ -417,24 +417,24 @@ $$
 
 
 
-## **reference**
+## reference
 
-**Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.)**
+Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.)
 
-**Alan V Oppenheim, Ronald W. Schafer. 2010. Discrete-Time Signal Processing, 3rd edition**
+Alan V Oppenheim, Ronald W. Schafer. 2010. Discrete-Time Signal Processing, 3rd edition
 
-**B.P. Lathi, Roger Green. Linear Systems and Signals (The Oxford Series in Electrical and Computer Engineering) 3rd Edition**
+B.P. Lathi, Roger Green. Linear Systems and Signals (The Oxford Series in Electrical and Computer Engineering) 3rd Edition
 
-**[Sam Palermo, ECEN720,  Lecture 7: Equalization Introduction & TX FIR Eq](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)**
+[Sam Palermo, ECEN720,  Lecture 7: Equalization Introduction & TX FIR Eq](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)
 
-**[Sam Palermo, ECEN720, Lab5 –Equalization Circuits ](https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab5_2021.pdf)**
+[Sam Palermo, ECEN720, Lab5 –Equalization Circuits ](https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab5_2021.pdf)
 
-**B. Razavi, "The z-Transform for Analog Designers [The Analog Mind\]," IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14, Summer 2020. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2020.pdf)]**
+B. Razavi, "The z-Transform for Analog Designers [The Analog Mind\]," IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14, Summer 2020. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2020.pdf)]
 
-**Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications** 
+Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications 
 
-**Mathuranathan. Digital filter design – Introduction [[https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/](https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/)]**
+Mathuranathan. Digital filter design – Introduction [[https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/](https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/)]
 
-**Daniel Boschen, "Fast Track to Designing FIR Filters with Python" [[https://events.gnuradio.org/event/24/contributions/598/attachments/186/485/Boschen%20FIR%20Filter%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/598/attachments/186/485/Boschen%20FIR%20Filter%20Presentation.pdf)]**
+Daniel Boschen, "Fast Track to Designing FIR Filters with Python" [[https://events.gnuradio.org/event/24/contributions/598/attachments/186/485/Boschen%20FIR%20Filter%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/598/attachments/186/485/Boschen%20FIR%20Filter%20Presentation.pdf)]
 
-**Daniel Boschen, "Quick Start on Control Loops with Python" [[https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf)]**
+Daniel Boschen, "Quick Start on Control Loops with Python" [[https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf)]

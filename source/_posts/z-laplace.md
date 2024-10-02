@@ -208,7 +208,7 @@ Note that the transformation $z = e^{sT}$ transforms the imaginary axis in the $
 
 
 
-## impulse invariance criterion
+## impulse invariance
 
 ![image-20241002133303153](z-laplace/image-20241002133303153.png)
 
@@ -221,8 +221,10 @@ When $h[n]$ and $h_c(t)$ are related through the above equation, i.e., the impul
 
 we have
 $$
-H(e^{j\hat{\omega}}) = H_c\left(j\frac{\hat{\omega}}{T}\right)
+H(e^{j\hat{\omega}}) = H_c\left(j\frac{\hat{\omega}}{T}\right),\space\space |\hat{\omega}| \lt \pi
 $$
+
+> Note $T$ shall be chosen such that $H_c(j\omega)=0, \space\space |\hat{\omega}| \ge \frac{\pi}{T} $
 
 
 

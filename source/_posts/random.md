@@ -30,11 +30,11 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 
 
 
-##  LTI Systems on WSS Processes
+##  LTI Filtering of WSS process
+
+
 
 ### mean
-
-
 
 ![image-20240917104857284](random/image-20240917104857284.png)
 
@@ -89,6 +89,7 @@ The most important statistical properties of a random process $x(t)$ are obtaine
 >
 > Alan V. Oppenheim, Introduction To Communication, Control, And Signal Processing [[https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf](https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf)]
 >
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: LTI Systems and Random Signals  [[https://ece-research.unm.edu/bsanthan/ece541/LTI.pdf](https://ece-research.unm.edu/bsanthan/ece541/LTI.pdf)]
 
 
 
@@ -104,6 +105,46 @@ $$
 $$
 X(-j\omega) = X^*(j\omega)
 $$
+
+
+
+## Modulation of WSS process
+
+
+
+![image-20241002231615792](random/image-20241002231615792.png)
+
+![image-20241002231639299](random/image-20241002231639299.png)
+
+
+
+---
+
+Though, $V_0\phi _n \sin(\omega_0 t)$ is **not** WSS, because its autocorrelation function (ACF) depend time.  It is ***second-order cyclostationary*** with parameter $T_0$. We can then evaluate the *time-averaged ACF*
+
+![image-20241003000802844](random/image-20241003000802844.png)
+
+
+
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: Modulation of Random Processes [[https://ece-research.unm.edu/bsanthan/ece541/mod.pdf](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)]
+
+---
+
+![image-20241003001204803](random/image-20241003001204803.png)
+
+> Hayder Radha, ECE 458 Communications Systems Laboratory Spring 2008: Lecture 7 - EE 179: Introduction to Communications - Winter 2006–2007 Energy and Power Spectral Density and Autocorrelation [[https://www.egr.msu.edu/classes/ece458/radha/ss07Keyur/Lab-Handouts/PSDESDetc.pdf](https://www.egr.msu.edu/classes/ece458/radha/ss07Keyur/Lab-Handouts/PSDESDetc.pdf)]
+
+
+
+---
+
+![image-20241003001859871](random/image-20241003001859871.png)
+
+> (a): second-order cyclostationary
+>
+> (b): WSS
+
+
 
 
 
@@ -264,3 +305,5 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013
 
 Alan V Oppenheim, George C. Verghese, Signals, Systems and Inference, 1st edition
+
+R. Ziemer and W. Tranter, Principles of Communications, Seventh Edition, 2013

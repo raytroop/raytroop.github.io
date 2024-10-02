@@ -319,6 +319,8 @@ title('frequency response of different methods');
 
 
 
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: Random Signals & Multirate Systems [[https://ece-research.unm.edu/bsanthan/ece541/rand.pdf](https://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
+
 ## FIR Equalization
 
 ### Frequency Response

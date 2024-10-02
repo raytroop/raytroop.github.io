@@ -25,15 +25,44 @@ mathjax: true
 
 
 
+
+## multi-modulus divider
+
+*TODO* &#128197;
+
+
+
+
+
+
+
+## dBc
+
+*TODO* &#128197;
+
+
+
+
+
+
+
+
+
 ## charge pump with amplifier
 
-This reduces the charge sharing effect, when the switch is turned on. 
+![image-20241002211524347](clocking/image-20241002211524347.png)
 
-![image-20240909221145643](clocking/image-20240909221145643.png)
+
+
+
 
 > Young, I.A., Greason, J.K., Wong, K.L.: A PLL Clock Generator with 5 to 110MHz of Lock Range for Microprocessors. IEEE Journal of Solid-State Circuits 27(11), 1599– 1607 (1992)  [[https://people.engr.tamu.edu/spalermo/ecen620/pll_intel_young_jssc_1992.pdf](https://people.engr.tamu.edu/spalermo/ecen620/pll_intel_young_jssc_1992.pdf)]
 >
 > Johnson, M., Hudson, E.: A variable delay line PLL for CPU-coprocessor synchronization. IEEE Journal of Solid-State Circuits 23(10), 1218–1223 (1988)  [[https://sci-hub.se/10.1109/4.5947](https://sci-hub.se/10.1109/4.5947)]
+>
+> Sam Palermo, Lecture 5: Charge Pump Circuits, ECEN620: Network Theory Broadband Circuit Design Fall 2024 [[https://people.engr.tamu.edu/spalermo/ecen620/lecture05_ee620_charge_pumps.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture05_ee620_charge_pumps.pdf)]
+
+
 
 
 
@@ -78,7 +107,7 @@ $\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
 
 
 
-## Impact of Charge Pump Current 
+## Charge Pump Current noise
 
 > consider only *thermal noise* in the analysis that follows
 
@@ -196,7 +225,7 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-## different frequency clock impact on edge
+## clock edge impact
 
 ![clock2clock.drawio](clocking/clock2clock.drawio.svg)
 
@@ -527,4 +556,10 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 *TODO* &#128197;
 
 
+
+
+
+## reference
+
+Dennis Fischette, Frequently Asked PLL Questions [[https://www.delroy.com/PLL_dir/FAQ/FAQ.htm](https://www.delroy.com/PLL_dir/FAQ/FAQ.htm)]
 

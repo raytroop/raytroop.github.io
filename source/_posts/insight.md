@@ -13,6 +13,18 @@ mathjax: true
 
 
 
+
+
+## Level Shifter
+
+![image-20241003224949171](insight/image-20241003224949171.png)
+
+
+
+
+
+
+
 ## TIA
 
 ![image-20240824111517140](insight/image-20240824111517140.png)
@@ -40,14 +52,6 @@ V_i &= \frac{I_{in}}{g_m}
 ??? Quantitative analysis
 
 
-
-## charge pump
-
-*TODO* &#128197;
-
-Charge pumps are capacitive DC-DC converters
-
-The two most common switched capacitor voltage converters are the **voltage inverter** and the **voltage doubler** circuit
 
 
 

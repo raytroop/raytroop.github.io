@@ -208,6 +208,18 @@ Note that the transformation $z = e^{sT}$ transforms the imaginary axis in the $
 
 
 
+> Note: $\bar{h}(t)$ is the impulse sampled version of $h(t)$
+
+---
+
+Note $\bar{h}(t)$ is impulse sampled signal, whose CTFT is scaled by $\frac{1}{T}$ of continuous signal $h(t)$, $\overline{H}[e^{sT}]=\overline{H}(e^{sT})$ is the approximation of continuous time system response, for example summation $\frac{1}{1-z^{-1}}$
+$$
+\frac{1}{1-z^{-1}} = \frac{1}{1-e^{-sT}} \approx \frac{1}{j\omega \cdot T}
+$$
+And we know transform of integral $u(t)$ is $\frac{1}{s}$, as expected there is ratio $T$
+
+
+
 ## impulse invariance
 
 ![image-20241002133303153](z-laplace/image-20241002133303153.png)
@@ -254,15 +266,15 @@ useful functions
 
   > `fft` is used in `freqz` internally
 
-Question:
 
-How to obtain continuous system transfer function from sampled impulse
+
+> `freqz` method is straightforward, which apply impulse invariance criteria. Though `fft` is used for signal processing mostly, 
 
 ---
 
-> First order lowpass filter with 3-dB frequency 1Hz
 
-**![image-20241002082937903](z-laplace/image-20241002082937903.png)**
+
+![image-20241002082937903](z-laplace/image-20241002082937903.png)
 
 ```matlab
 clear all;
@@ -270,7 +282,7 @@ clc;
 
 %% continuous system
 s = tf('s');
-h = 2*pi/(2*pi+s);
+h = 2*pi/(2*pi+s); 	% First order lowpass filter with 3-dB frequency 1Hz
 [mag, phs, wout] = bode(h);
 fct = wout(:)/2/pi;
 Hct_dB = 20*log10(mag(:));
@@ -325,7 +337,7 @@ title('frequency response of different methods');
 
 ### Frequency Response
 
-**![image-20220322093428287](z-laplace/image-20220322093428287.png)**
+![image-20220322093428287](z-laplace/image-20220322093428287.png)
 $$
 z = e^{j\omega T_s}
 $$
@@ -334,7 +346,7 @@ $$
 
 filter coefficients are [-0.131, 0.595, -0.274] and sampling period is 100ps
 
-**![image-20220428125454912](z-laplace/image-20220428125454912.png)**
+![image-20220428125454912](z-laplace/image-20220428125454912.png)
 
 ```matlab
 %% Frequency response
@@ -383,7 +395,7 @@ P_{\text{xx}}'(\omega) &= P_{\text{xx}}(\omega) \cdot \left| 1-z^{-k}  \right|^2
 &= P_{\text{xx}}(\omega) \cdot \left| 1-e^{-j\omega T_s k}  \right|^2
 \end{align}$$**
 
-**![image-20220519172239916](z-laplace/image-20220519172239916.png)**
+![image-20220519172239916](z-laplace/image-20220519172239916.png)
 
 ```matlab
 clear all
@@ -414,7 +426,7 @@ title('Weight for Period jitter');
 
 
 
-**![image-20220709104127384](z-laplace/image-20220709104127384.png)**
+![image-20220709104127384](z-laplace/image-20220709104127384.png)
 $$
 x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
 $$

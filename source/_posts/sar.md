@@ -1,5 +1,5 @@
 ---
-title: Asynchronous SAR ADC
+title: SAR ADC
 date: 2024-08-20 21:06:29
 tags:
 categories:
@@ -7,35 +7,33 @@ categories:
 mathjax: true
 ---
 
->assign the amount of time based on the time needed for each step
+
+
+![image-20241003132122679](sar/image-20241003132122679.png)
+
+---
 
 
 
 
 ## pipeline ADC
 
+![image-20241003160538582](sar/image-20241003160538582.png)
 
 
-![image-20240821212812683](async-sar/image-20240821212812683.png)
 
-![pipelineADC.drawio](async-sar/pipelineADC.drawio.svg)
+![pipelineADC.drawio](sar/pipelineADC.drawio.svg)
 
+residual error
 $$
-V_{N-1} = \sum_{i=0}^{N-2} B[i]\frac{1}{2^{N-i}}+ B[N-1]\frac{1}{2}
+V_{r,n} = (V_{r,n-1}-\frac{1}{2}b_{n})\cdot 2
 $$
-Compare with $\frac{1}{2}$, and determine $B[N-1]$
-$$\begin{align}
-V_{N-2}  &= \left(V_{N-1} - B[N-1]\frac{1}{2}\right)\cdot 2 \\
-&= \left(\sum_{i=0}^{N-1} B[i]\frac{1}{2^{N-i}} - B[N-1]\frac{1}{2}\right) \cdot 2 \\
-&= \sum_{i=0}^{N-2} B[i]\frac{1}{2^{N-i}} \cdot 2 \\
-&= \sum_{i=0}^{N-3} B[i]\frac{1}{2^{N-i}}\cdot 2 + B[N-2]\frac{1}{2}
-\end{align}$$
+and $V_{r,-1}=V_i$
+$$
+V_{r,n-1} = 2^{n}V_i -\sum_{k=0}^{n-1}2^{n-k-1}b_k = 2^{n}\left(V_i - \sum_{k=0}^{n-1}\frac{b_k}{2^{k+1}}\right)
+$$
 
-On your intuition, input can be expressed as below
-$$\begin{align}
-V_{N-1} &= \sum_{i=0}^{N-1} B[i] \frac{1}{2}\cdot 2^{i-N+1} \\
-&= B[N-1]\frac{1}{2} + B[N-2]\frac{1}{2}\cdot 2^{-1} + B[N-3]\frac{1}{2}\cdot 2^{-2 }...
-\end{align}$$
+here, $b_0$ is first stage and MSB
 
 It divides the process into several comparison stages, the number of which is proportional to the number of bits
 
@@ -53,11 +51,13 @@ It divides the process into several comparison stages, the number of which is pr
 
 ## Synchronous SAR ADC
 
+
+
 It also divides a full conversion into several comparison stages in a way similar to the *pipeline ADC*, except the algorithm is executed **sequentially** rather than in *parallel* as in the pipeline case.
 
 However, the sequential operation of the SA algorithm has traditionally been a *limitation in achieving high-speed operation*
 
-![image-20240821215815566](async-sar/image-20240821215815566.png)
+![image-20240821215815566](sar/image-20240821215815566.png)
 
 
 
@@ -75,11 +75,11 @@ However, the sequential operation of the SA algorithm has traditionally been a *
 >
 > attenuation capacitance $C_a$
 
-![image-20240917192957721](async-sar/image-20240917192957721.png)
+![image-20240917192957721](sar/image-20240917192957721.png)
 
-![image-20240918213856504](async-sar/image-20240918213856504.png)
+![image-20240918213856504](sar/image-20240918213856504.png)
 
-![splitArray.drawio](async-sar/splitArray.drawio.svg)
+![splitArray.drawio](sar/splitArray.drawio.svg)
 
 $$\begin{align}
 \Delta V_{dac} &= \frac{1}{2}b_3+\frac{1}{4}b_2+\frac{1}{4}\left(\frac{1}{2}b_1+\frac{1}{4}b_0 \right) \\
@@ -116,7 +116,7 @@ The total capacitance value does not change, but the required number of cycles i
 
 ## Asynchronous processing
 
-![image-20240821230528349](async-sar/image-20240821230528349.png)
+![image-20240821230528349](sar/image-20240821230528349.png)
 
 a global clock running at the sample rate is still used for an **uniform sampling**
 

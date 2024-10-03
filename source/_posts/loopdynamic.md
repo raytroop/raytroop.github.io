@@ -99,3 +99,16 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 
 
+
+
+## Limit Cycle Oscillation
+
+> limit cycles imply self-sustained oscillators due *nonlinear nature*
+
+
+
+
+
+
+
+> Ouzounov, S., Hegt, H., Van Roermund, A. (2007). SUB-HARMONIC LIMIT-CYCLE SIGMA-DELTA MODULATION, APPLIED TO AD CONVERSION. In: Van Roermund, A.H., Casier, H., Steyaert, M. (eds) Analog Circuit Design. Springer, Dordrecht. [[https://sci-hub.se/10.1007/1-4020-5186-7_6](https://sci-hub.se/10.1007/1-4020-5186-7_6)]

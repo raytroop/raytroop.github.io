@@ -105,6 +105,20 @@ $\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
 
 
 
+##  Fractional-N
+
+1. ***Dither Feedback Divider Ratio by a delta-sigma modulator***
+
+![image-20241003105023092](clocking/image-20241003105023092.png)
+
+2. ***Frequency Accumulation***
+
+![image-20241003105059989](clocking/image-20241003105059989.png)
+
+
+
+
+
 
 
 ## Charge Pump Current noise

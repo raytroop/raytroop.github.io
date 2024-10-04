@@ -229,7 +229,7 @@ $$
 h[n] = Th_c(nT)
 $$
 
-and $T$ is chosen such that 
+and $T$ is chosen such that
 
 $$
 H_c(j\omega)=0, \space\space |\hat{\omega}| \ge \frac{\pi}{T}

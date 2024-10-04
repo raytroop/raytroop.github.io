@@ -509,19 +509,6 @@ high level envelope:
 
 
 
-## switched-capacitor resistor
-
-![image-20231104212333555](insight/image-20231104212333555.png)
-
-![image-20231104212343670](insight/image-20231104212343670.png)
-
-> Switching the capacitor moves a charge proportional to the voltage difference. The resistor achieves the same function only in a continuous manner. 
->
-> Using a water analogy, we can imagine a couple of scenarios: 
->
-> 1) a steady water flow, 
-> 2) or 2) the same water delivered rapidly in buckets. Both create the same flow of water - **on average!**
-
 
 
 ## Current mirror with source degeneration 

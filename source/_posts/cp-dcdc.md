@@ -7,13 +7,38 @@ categories:
 mathjax: true
 ---
 
-> Charge pumps are capacitive DC-DC converters. The two most common switched capacitor voltage converters are the **voltage inverter** and the **voltage doubler** circuit
+![image-20241004163356709](cp-dcdc/image-20241004163356709.png)
+
+> ***charge pumps*** are ***capacitive DC-DC converters***. The two most common switched capacitor voltage converters are the **voltage inverter** and the **voltage doubler** circuit
+
+---
+
+
+
+## Buck Converter
+
+![image-20241004174249432](cp-dcdc/image-20241004174249432.png)
+
+> regulate the output voltage by the *duty cycle of the switch*
+
+
+
+- reduce inductor size a little bit by increasing the switching frequency
+- the efficiency goes down with switching frequency increasing
+
+
+
+## SC Step-Down Converter
+
+*TODO* &#128197;
 
 
 
 
 
+## voltage doubler
 
+*TODO* &#128197;
 
 
 

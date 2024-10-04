@@ -9,6 +9,20 @@ mathjax: true
 
 
 
+## Nyquist rate & Nyquist frequency
+
+- **Nyquist rate**
+
+  The Nyquist rate is the minimum sample rate required to accurately measure a signal's highest frequency. It's equal to ***twice*** the highest frequency of the signal
+
+- **Nyquist frequency**
+
+  The Nyquist frequency is the highest frequency that can be represented without aliasing in a discrete signal. It's equal to ***half*** the sampling frequency
+
+
+
+
+
 ## Summation & Integration 
 
 |             | impulse response | Transform            | ROC                       |

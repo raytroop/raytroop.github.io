@@ -264,8 +264,6 @@ $$
 
 
 
-
-
 ## Transfer function & sampled impulse response
 
 > continuous-time filter designs to discrete-time designs through techniques such as ***impulse invariance***
@@ -343,13 +341,47 @@ title('frequency response of different methods');
 
 ## Multirate Signal Processing
 
+
+
+### downsampling
+
+![image-20241004151215993](z-laplace/image-20241004151215993.png)
+
+![image-20241004151308422](z-laplace/image-20241004151308422.png)
+
+![image-20241004151434477](z-laplace/image-20241004151434477.png)
+
+- Eqs. (4.72)
+
+  the superposition of an infinite set of amplitude-scaled copies of $X_c(j\Omega)$, frequency scaled through $\omega = \Omega T_d$ and shifted by integer multiples of $2\pi$
+
+- Eq. (4.77)
+
+  the superposition of $M$ amplitude-scaled copies of the periodic Fourier transform $X (e^{j\omega})$, frequency scaled by $M$ and shifted by integer multiples of $2\pi$ 
+
+
+
+
+
+---
+
+downsampled by a factor of $M = 2$
+
+![image-20241004161805974](z-laplace/image-20241004161805974.png)
+
+
+
+
+
+### upsampling
+
 *TODO* &#128197;
 
 
 
-
-
 > Balu Santhanam, Probability Theory & Stochastic Process 2020: Random Signals & Multirate Systems [[https://ece-research.unm.edu/bsanthan/ece541/rand.pdf](https://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
+
+
 
 ## FIR Equalization
 

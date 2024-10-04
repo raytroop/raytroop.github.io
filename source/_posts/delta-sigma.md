@@ -12,10 +12,19 @@ mathjax: true
 ## Delta Modulator
 
 ![image-20240908173930949](delta-sigma/image-20240908173930949.png)
+
+$$\begin{align}
+(V_{in} - V_F) &= D_{out} \\
+D_{out} &= s V_F
+\end{align}$$
+
+Therefore $V_{in} - \frac{D_{out}}{s} = D_{out}$
 $$
-D_{out} = s V_F
+D_{out} = \frac{s}{s+1} V_{in}
 $$
-attenuates the low-frequency content of the signal, and amplifies high-frequency noise.
+
+
+> attenuates the low-frequency content of the signal, and amplifies high-frequency noise.
 
 
 ## Delta-Sigma Modulator
@@ -55,3 +64,5 @@ David A. Johns. ECE1371H - Advanced Analog Circuits - 2014 [[https://www.eecg.to
 Richard E. Schreier, ECE 1371 Advanced Analog Circuits - 2015 [[http://individual.utoronto.ca/schreier/ece1371-2015.html](http://individual.utoronto.ca/schreier/ece1371-2015.html)]
 
 Trevor Caldwell. ECE 1371S Advanced Analog Circuits  - 2020 [[http://individual.utoronto.ca/trevorcaldwell/ece1371.html](http://individual.utoronto.ca/trevorcaldwell/ece1371.html)]
+
+Bruce A. Wooley , 2012, "The Evolution of Oversampling Analog-to-Digital Converters" [[https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2012/06/Oversampling-Wooley_SCV-ver2.pdf](https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2012/06/Oversampling-Wooley_SCV-ver2.pdf)]

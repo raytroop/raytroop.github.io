@@ -229,6 +229,12 @@ $$
 h[n] = Th_c(nT)
 $$
 
+and $T$ is chosen such that 
+
+$$
+H_c(j\omega)=0, \space\space |\hat{\omega}| \ge \frac{\pi}{T}
+$$
+
 When $h[n]$ and $h_c(t)$ are related through the above equation, i.e., the impulse response of the discrete-time  system is a *scaled*, *sampled* version of $h_c(t)$, the *discrete-time system* is said to be an impulse-invariant version of the *continuous-time system*
 
 we have
@@ -236,7 +242,19 @@ $$
 H(e^{j\hat{\omega}}) = H_c\left(j\frac{\hat{\omega}}{T}\right),\space\space |\hat{\omega}| \lt \pi
 $$
 
-> Note $T$ shall be chosen such that $H_c(j\omega)=0, \space\space |\hat{\omega}| \ge \frac{\pi}{T}$
+
+
+- $h[n] = Th_c(nT)$ & $T$ is small enough
+
+  only guarantees the output equivalence ***only at the sampling instants***, that is, $y_c(nT) = y_r(nT)$
+
+- Provided $H_c(j\Omega)$ is bandlimited & $T \lt 1/2f_h$
+
+  guarantees $y_c(t) = y_r(t)$
+
+
+
+> The scaling of $T$ can alternatively be thought of as a normalization of the time domain, that is average impulse response shall be same i.e., $h[n]\times 1 = h(nT)\times T$
 
 
 

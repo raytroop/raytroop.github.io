@@ -14,14 +14,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
-      - name: Restore last modified time
-        run: |
-          pwd
-          ls
-          cd source
-          git ls-files -z | while read -d '' path; do touch -d \"$(git log -- -1 --format=\"@%ct\" \"$path\")\" \"$path\"; done
-          cd ..
-          pwd
       - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:

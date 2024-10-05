@@ -341,6 +341,24 @@ title('frequency response of different methods');
 
 ## Multirate Signal Processing
 
+alternative view of sampling, assuming DC value is $A$
+
+![sampling-c2d-d2d.drawio](z-laplace/sampling-c2d-d2d.drawio.svg)
+
+- $x_c(t)$ and $x_s(t)$
+
+$\overline{x_c} = A$; $\overline{x_s}=\frac{A}{T}$: therefore $X_s(j0) = \frac{1}{T}X_c(j0)$
+
+
+
+- $x[n]$ and $x_d[n]$
+
+$\overline{x} = A$; $\overline{x_d}=\frac{A}{2}$: therefore $X_d(e^{j0}) = \frac{1}{2}X(e^{j0})$
+
+
+
+---
+
 
 
 ### downsampling
@@ -370,6 +388,12 @@ downsampled by a factor of $M = 2$
 ![image-20241004161805974](z-laplace/image-20241004161805974.png)
 
 
+
+---
+
+![image-20241005073349726](z-laplace/image-20241005073349726.png)
+
+![image-20241005073534041](z-laplace/image-20241005073534041.png)
 
 
 

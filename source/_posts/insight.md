@@ -215,6 +215,10 @@ pay attention to Miller effect of Cgd during *layout*
 
 ![image-20240804173949430](insight/image-20240804173949430.png)
 
+> $$
+> \cos^3\omega t = \frac{3\cos \omega t + \cos(3\omega t)}{4}
+> $$
+
 > ![image-20240804174042088](insight/image-20240804174042088.png)
 
 

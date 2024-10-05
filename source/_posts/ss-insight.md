@@ -9,6 +9,22 @@ mathjax: true
 
 
 
+
+
+## dBc
+
+*TODO* &#128197;
+
+
+
+
+
+## dBFS
+
+*TODO* &#128197;
+
+
+
 ## Nyquist rate & Nyquist frequency
 
 - **Nyquist rate**

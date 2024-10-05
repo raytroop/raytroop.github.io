@@ -34,13 +34,11 @@ mathjax: true
 
 
 
+## Auto-tracking high-Q BPF  
 
+> The PLL is the only device that performs auto-tracking band-pass filtering with high-quality factor Q and wide tunability  
 
-## dBc
-
-*TODO* &#128197;
-
-
+![image-20241005215648042](clocking/image-20241005215648042.png)
 
 
 

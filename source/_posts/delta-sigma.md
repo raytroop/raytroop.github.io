@@ -57,7 +57,7 @@ That is
 $$
 v[n] = nu - \sum_{k=1}^{n-1}v[k] + e[n]
 $$
-hence, with $v[n-1] = (n-1)u - \sum_{k=1}^{n-2}v[k] + e[n-1]$
+Therefore, $v[n-1] = (n-1)u - \sum_{k=1}^{n-2}v[k] + e[n-1]$
 $$\begin{align}
 v[n] &= nu - \sum_{k=1}^{n-1}v[k] + e[n] \\
 &= u + \left[(n-1)u - \sum_{k=1}^{n-2}v[k]\right] - v[n-1] + e[n] \\

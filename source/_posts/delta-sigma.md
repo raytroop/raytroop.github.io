@@ -43,6 +43,30 @@ $$
 
 
 
+---
+
+![image-20241005202024498](delta-sigma/image-20241005202024498.png)
+$$\begin{align}
+v[1] &= u  - (0) + e[1] \\
+v[2] &= 2u - (v[1]) + e[2] \\
+v[3] &= 3u - (v[1]+v[2]) + e[3] \\
+v[4] &= 4u - (v[1]+v[2]+v[3]) + e[4]
+\end{align}$$
+
+That is
+$$
+v[n] = nu - \sum_{k=1}^{n-1}v[k] + e[n]
+$$
+hence, with $v[n-1] = (n-1)u - \sum_{k=1}^{n-2}v[k] + e[n-1]$
+$$\begin{align}
+v[n] &= nu - \sum_{k=1}^{n-1}v[k] + e[n] \\
+&= u + \left[(n-1)u - \sum_{k=1}^{n-2}v[k]\right] - v[n-1] + e[n] \\
+&= u + v[n-1] - e[n-1]  -v[n-1] + e[n] \\
+&= u + e[n] - e[n-1]
+\end{align}$$
+
+
+
 ## MOD2
 
 ![image-20241005160203074](delta-sigma/image-20241005160203074.png)

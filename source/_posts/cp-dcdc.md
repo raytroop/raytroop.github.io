@@ -1,5 +1,5 @@
 ---
-title: "Charge pumps & capacitive DC-DC converters"
+title: Charge pumps & capacitive DC-DC converters
 date: 2024-10-03 22:23:57
 tags:
 categories:
@@ -46,6 +46,9 @@ mathjax: true
 
 Wicht, B., "Design of Power Management Integrated Circuits". 2024 Wiley-IEEE Press
 
-Wicht, B.,  ISSCC2020 tutorial: Analog Building Blocks of DC-DC Converters
+Wicht, B.,  ISSCC2020 T2: Analog Building Blocks of DC-DC Converters [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T2Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T2Visuals.pdf)]
 
-Anton Bakker,Tim Piessens.,  ISSCC2014 tutorial: Charge Pump and Capacitive DCDC Converter Design
+Hoi Lee, ISSCC2018 T8: Fundamentals of Switched-Mode Power Converter Design [[slides](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Visuals.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Transcription.txt)]
+
+Anton Bakker,Tim Piessens.,  ISSCC2014 T9: Charge Pump and Capacitive DC-DC Converter Design
+

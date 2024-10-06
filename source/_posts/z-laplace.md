@@ -347,13 +347,29 @@ alternative view of sampling, assuming DC value is $A$
 
 - $x_c(t)$ and $x_s(t)$
 
-$\overline{x_c} = A$; $\overline{x_s}=\frac{A}{T}$: therefore $X_s(j0) = \frac{1}{T}X_c(j0)$
+  $\overline{x_c} = A$; $\overline{x_s}=\frac{A}{T}$: therefore $X_s(j0) = \frac{1}{T}X_c(j0)$
 
 
 
 - $x[n]$ and $x_d[n]$
 
-$\overline{x} = A$; $\overline{x_d}=\frac{A}{2}$: therefore $X_d(e^{j0}) = \frac{1}{2}X(e^{j0})$
+  $\overline{x} = A$; $\overline{x_d}=\frac{A}{2}$: therefore $X_d(e^{j0}) = \frac{1}{2}X(e^{j0})$
+
+
+
+***expander***
+
+![sampling-expander.drawio](z-laplace/sampling-expander.drawio.svg)
+
+
+
+- $x[n]$ and $x_e[n]$
+
+  $\overline{x} = A$; $\overline{x_e}=A$: therefore $X_e(e^{j0}) = X(e^{j0})$
+
+  > Fourier transform of the output of the expander is a frequency-scaled version of the Fourier transform of the input
+
+
 
 
 
@@ -399,7 +415,27 @@ downsampled by a factor of $M = 2$
 
 ### upsampling
 
-*TODO* &#128197;
+![image-20241006074604512](z-laplace/image-20241006074604512.png)
+
+![image-20241006072426572](z-laplace/image-20241006072426572.png)
+
+
+
+> ***sampling rate expander***
+>
+> ![image-20241006074425704](z-laplace/image-20241006074425704.png)
+>
+> ![image-20241006075854246](z-laplace/image-20241006075854246.png)
+
+
+
+
+
+
+
+
+
+
 
 
 

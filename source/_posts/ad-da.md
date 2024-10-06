@@ -54,9 +54,39 @@ kick-back increases CDAC settling time
 
 ![image-20240925235213137](ad-da/image-20240925235213137.png)
 
+## Quantization is NOT Noise
+
+![image-20241006152621688](ad-da/image-20241006152621688.png)
 
 
 
+
+
+## ADC INL Testing
+
+![image-20241006211529077](ad-da/image-20241006211529077.png)
+
+![image-20241006195931838](ad-da/image-20241006195931838.png)
+
+
+
+
+
+## ADC DNL Testing
+
+
+
+
+
+
+
+## DAC DNL Testing
+
+One difference between ADC and DAC is that DAC DNL can be less than -1 LSB
+
+> In a DAC, **DNL < -1LSB** implies **non-monotinicity**
+
+![image-20241006215420568](ad-da/image-20241006215420568.png)
 
 
 
@@ -301,19 +331,14 @@ $$
 
 
 
-> John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs"
-
-
-
-
 ## SNR of an ADC Due to Clock Jitter
 
 *TODO* &#128197;
 
 
 
-> Chembiyan T, "SNR of an ADC in the presence of clock jitter"[[https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop)]
->
+
+
 > K. Tyagi and B. Razavi, "Performance Bounds of ADC-Based Receivers Due to Clock Jitter," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 70, no. 5, pp. 1749-1753, May 2023 [[https://www.seas.ucla.edu/brweb/papers/Journals/KT_TCAS_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/KT_TCAS_2023.pdf)]
 >
 > N. Da Dalt, M. Harteneck, C. Sandner and A. Wiesbauer, "On the jitter requirements of the sampling clock for analog-to-digital converters," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 49, no. 9, pp. 1354-1360, Sept. 2002 [[https://sci-hub.se/10.1109/TCSI.2002.802353](https://sci-hub.se/10.1109/TCSI.2002.802353)]
@@ -322,8 +347,15 @@ $$
 
 
 
-
 ## reference
+
+Aaron Buchwald, ISSCC2010 T1: "Specifying & Testing ADCs" [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Tutorials/T1.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Tutorials/T1.pdf)]
+
+John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs" [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf)]
+
+Chembiyan T, "SNR of an ADC in the presence of clock jitter" [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop)]
+
+---
 
 everynanocounts. Memos on FFT With Windowing. URL: [https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/](https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/)
 
@@ -372,3 +404,4 @@ ADC Input Noise: The Good, The Bad, and The Ugly. Is No Noise Good Noise? [[http
 Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR = 6.02N + 1.76dB," and Why You Should Care [[https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf)]
 
 Dan Boschen, "How to choose FFT depth for ADC performance analysis (SINAD, ENOB)", [[https://dsp.stackexchange.com/a/38201](https://dsp.stackexchange.com/a/38201)]
+

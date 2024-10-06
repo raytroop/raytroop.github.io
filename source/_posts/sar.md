@@ -15,10 +15,11 @@ mathjax: true
 
 
 
-
 ## pipeline ADC
 
-![image-20241003160538582](sar/image-20241003160538582.png)
+![image-20241006174924686](sar/image-20241006174924686.png)
+
+> CMP reference voltage is 0.5vref, DAC output is 0.5vref or 0
 
 
 

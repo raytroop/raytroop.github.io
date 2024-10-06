@@ -204,10 +204,6 @@ $$
 
 Hinojo, J.M., Martinez, C.I., & Torralba, A.J. (2018). Internally Compensated LDO Regulators for Modern System-on-Chip Design.
 
-Mingoo Seok. ISSCC 2020 tutorial "Basics of Digital Low-Dropout (LDO) Integrated Voltage Regulator"
-
-Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators"
-
 Chen, K. (2016). Power Management Techniques for Integrated Circuit Design.
 
 Morita, B.G. (2014). Understand Low-Dropout Regulator ( LDO ) Concepts to Achieve Optimal Designs.
@@ -220,5 +216,8 @@ Operational Transconductance Amplifier II Multi-Stage Designs [[https://people.e
 
 Toshiba, Load Transient Response of LDO and Methods to Improve it Application Note [[https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268](https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268)]
 
+Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators"
 
+Mingoo Seok. ISSCC 2020 T7: "Basics of Digital Low-Dropout (LDO) Integrated Voltage Regulator" [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T7Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T7Visuals.pdf)]
 
+Yan Lu, ISSCC2021 T10: "Fundamentals of Fully Integrated Voltage Regulators" [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf)]

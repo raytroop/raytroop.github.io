@@ -431,15 +431,49 @@ downsampled by a factor of $M = 2$
 
 
 
-
-
-
-
-
-
-
-
 > Balu Santhanam, Probability Theory & Stochastic Process 2020: Random Signals & Multirate Systems [[https://ece-research.unm.edu/bsanthan/ece541/rand.pdf](https://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
+
+
+
+### sampling identities
+
+![sampling-ID.drawio](z-laplace/sampling-ID.drawio.svg)
+
+
+
+---
+
+
+
+***downsampling identities***
+
+![image-20241007085509889](z-laplace/image-20241007085509889.png)
+
+
+
+
+
+
+
+> ![image-20241007090624888](z-laplace/image-20241007090624888.png)
+
+
+
+---
+
+
+
+***upsampling identities***
+
+![image-20241007085527233](z-laplace/image-20241007085527233.png)
+
+
+
+
+
+> ![image-20241007090939701](z-laplace/image-20241007090939701.png)
+
+
 
 
 

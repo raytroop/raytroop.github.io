@@ -309,6 +309,21 @@ And for a phase interpolator, you need those reference clocks to be completely t
 1. That is, to have a wide bandwidth, a high loop gain is required
 2. More importantly, the type 1 PLL has the problem of a static phase error for the change of an input frequency
 
+---
+
+*Type 1 PLL with input phase step* $\Delta \phi \cdot u(t)$
+$$\begin{align}
+\Delta \phi\cdot u(t) - K\int_0^{t}\phi _e (\tau)d\tau &= \phi _e (t) \\
+\phi _e (0) &= \Delta \phi
+\end{align}$$
+
+we obtain $\phi _e (t) = \Delta \phi \cdot e^{-Kt}\cdot u(t)$
+
+and $\phi _e(\infty) = 0$
+
+---
+
+
 
 
 

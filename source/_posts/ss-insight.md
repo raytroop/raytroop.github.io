@@ -411,15 +411,6 @@ $$\begin{align}
 where we define $K_n(0) = K_n$
 
 
-## PID
-
-*TODO* &#128197;
-
-- a Proportional term to close the feedback loop
-- an Integral term to assure zero error to constant reference and disturbance inputs
-- a Derivative term to improve (or realize!) stability and good dynamic response
-
-
 
 ## Nyquist's Stability Criterion
 

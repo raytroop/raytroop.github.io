@@ -1,5 +1,5 @@
 ---
-title: z-Transform & Laplace Transform for System Analysis
+title: z-Transform & Laplace Transform
 date: 2022-03-22 09:31:24
 tags:
 categories:
@@ -194,15 +194,21 @@ A continuous-time system with transfer function $H(s)$ that is *identical in str
 
 
 
-|                  | $z$-transform                                                |                                                  | Laplace transform                                            |
-| ---------------- | ------------------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------ |
-| **$x[n]$**       | $X[z]=\sum_{n=0}^{\infty}x[n]z^{-n}$                         | $\bar{x}(t)=\sum_{n=0}^{\infty}x[n]\delta(t-nT)$ | $\overline{X}(s)=\sum_{n=0}^{\infty}x[n]e^{-snt}$            |
-| **$y[n]$**       | $Y[z]=\sum_{n=0}^{\infty}y[n]z^{-n}$                         | $\bar{y}(t)=\sum_{n=0}^{\infty}y[n]\delta(t-nT)$ | $\overline{Y}(s)=\sum_{n=0}^{\infty}y[n]e^{-snt}$            |
-| $h[n]$           | $H[z]=\sum_{n=0}^{\infty}h[n]z^{-n}$                         | $\bar{h}(t)=\sum_{n=0}^{\infty}h[n]\delta(t-nT)$ | $\overline{H}(s)=\sum_{n=0}^{\infty}h[n]e^{-snt}$            |
-| $y[n]=x[n]*h[n]$ | $Y[z]=X[z]H[z]$                                              | $\bar{y}(t)=\bar{x}(t)*\bar{h}(t)$               | $\overline{Y}(s)=\overline{X}(s)\overline{H}(s)$             |
-|                  | $\sum_{n=0}^{\infty}y[n]z^{-n}=\sum_{n=0}^{\infty}x[n]z^{-n}\cdot\sum_{n=0}^{\infty}h[n]z^{-n}$ |                                                  | $\sum_{n=0}^{\infty}y[n]e^{-snt}=\sum_{n=0}^{\infty}x[n]e^{-snt}\cdot \sum_{n=0}^{\infty}h[n]e^{-snt}$ |
+|                  | $z$-transform                        |                                                  | Laplace transform                                 |
+| ---------------- | ------------------------------------ | ------------------------------------------------ | ------------------------------------------------- |
+| **$x[n]$**       | $X[z]=\sum_{n=0}^{\infty}x[n]z^{-n}$ | $\bar{x}(t)=\sum_{n=0}^{\infty}x[n]\delta(t-nT)$ | $\overline{X}(s)=\sum_{n=0}^{\infty}x[n]e^{-snT}$ |
+| **$y[n]$**       | $Y[z]=\sum_{n=0}^{\infty}y[n]z^{-n}$ | $\bar{y}(t)=\sum_{n=0}^{\infty}y[n]\delta(t-nT)$ | $\overline{Y}(s)=\sum_{n=0}^{\infty}y[n]e^{-snT}$ |
+| $h[n]$           | $H[z]=\sum_{n=0}^{\infty}h[n]z^{-n}$ | $\bar{h}(t)=\sum_{n=0}^{\infty}h[n]\delta(t-nT)$ | $\overline{H}(s)=\sum_{n=0}^{\infty}h[n]e^{-snT}$ |
+| $y[n]=x[n]*h[n]$ | $Y[z]=X[z]H[z]$                      | $\bar{y}(t)=\bar{x}(t)*\bar{h}(t)$               | $\overline{Y}(s)=\overline{X}(s)\overline{H}(s)$  |
 
-It is clear from this discussion that the $z$-transform can be considered to be the Laplace transform with a change of variable $z = e^{sT}$ or $s = \frac{1}{T}\ln z$
+Therefore, we obtain
+
+$$\begin{align}
+\sum_{n=0}^{\infty}y[n]z^{-n} &=\sum_{n=0}^{\infty}x[n]z^{-n}\cdot\sum_{n=0}^{\infty}h[n]z^{-n} \\
+\sum_{n=0}^{\infty}y[n]e^{-snT} &=\sum_{n=0}^{\infty}x[n]e^{-snT}\cdot \sum_{n=0}^{\infty}h[n]e^{-snT}
+\end{align}$$
+
+The *$z$-transform of a sequence*  can be considered to be the *Laplace transform of  impulses sampled train* with a change of variable $z = e^{sT}$ or $s = \frac{1}{T}\ln z$
 
 Note that the transformation $z = e^{sT}$ transforms the imaginary axis in the $s$ plane ($s = j\omega$) into a unit circle in the $z$ plane ($z = e^{sT} = e^{j\omega T}$, or $|z| = 1$)
 

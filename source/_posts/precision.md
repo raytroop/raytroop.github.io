@@ -63,6 +63,26 @@ $$
 
 ![sq_mod.drawio](precision/sq_mod.drawio.svg)
 
+---
+
+The Fourier Series of squarewave with amplitudes $\pm 1$, period $T_0$
+
+$$
+C_n = \left\{ \begin{array}{cl}
+0 &\space \ n=0 \\
+0 &\space \ n=\text{even} \\
+|\frac{2}{n\pi}| &\space n=\pm 1,\pm 5,\pm9, ... \\
+-|\frac{2}{n\pi}| &\space n=\pm 3,\pm 7,\pm11, ...
+\end{array} \right.
+$$
+
+
+
+
+> *EXAMPLE 2.7* in R. E. Ziemer and W. H. Tranter, Principles of Communications, 7th ed., Wiley, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]
+>
+> Prove that $\pi^2/8 = 1 + 1/3^2 + 1/5^2 + 1/7^2 + \cdots$ [[https://math.stackexchange.com/a/2348996](https://math.stackexchange.com/a/2348996)]
+
 
 
 ### Bandwidth & Gain Accuracy

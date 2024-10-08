@@ -65,7 +65,7 @@ $$
 
 ---
 
-The Fourier Series of squarewave with amplitudes $\pm 1$, period $T_0$
+The Fourier Series of squarewave $x(t)$ with amplitudes $\pm 1$, period $T_0$
 
 $$
 C_n = \left\{ \begin{array}{cl}
@@ -76,7 +76,24 @@ C_n = \left\{ \begin{array}{cl}
 \end{array} \right.
 $$
 
+The Fourier transform of $s(t)=x(t)x(t)$, and we know
+$$\begin{align}
+S(j2n\omega_0) &= \frac{1}{2\pi}\int X(j(2n\omega_0 -\omega))X(j\omega) d\omega\\
+&= \frac{1}{2\pi}\int X(j(\omega-2n\omega_0))X(j\omega) d\omega
+\end{align}$$
 
+Therefore
+$$
+S(j0) = \frac{1}{2\pi} (2\pi)^2\cdot \frac{4}{\pi ^2}2\sum_{n=0}^{+\infty}\frac{1}{(2n+1)^2} \delta(\omega) = 2\pi \delta(\omega)
+$$
+
+$$\begin{align}
+S(j2\omega_0) &= \frac{1}{2\pi} (2\pi)^2\cdot \frac{4}{\pi ^2}\left(1 - 2\sum_{n=0}^{+\infty}\frac{1}{(2n+1)(2n+3)} \right) \\
+&=  \frac{1}{2\pi} (2\pi)^2\cdot \frac{4}{\pi ^2}\left(1 - 2\sum_{n=0}^{+\infty}\frac{1}{2}\left[\frac{1}{2n+1}- \frac{1}{2n+3}\right] \right) \\
+&= 0
+\end{align}$$
+
+That is, chopping, squarewave modulation don't change input signal
 
 
 > *EXAMPLE 2.7* in R. E. Ziemer and W. H. Tranter, Principles of Communications, 7th ed., Wiley, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]

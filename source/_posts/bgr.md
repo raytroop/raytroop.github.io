@@ -98,6 +98,48 @@ $$
 
 ​	$I_{e1} \lt I_{e2}$: $\Delta V_{bg} \lt \alpha V_{os}$
 
+
+## OTA with chopper
+
+here $V_{im}=V_{be1}$ and $V_{ip}=V_{be2}+ I_{e2}R_1$
+
+![bg_chop_shift.drawio](bgr/bg_chop_shift.drawio.svg)
+
+> $I_{e1}$, $I_{e2}$
+
+
+$$\begin{align}
+V_{ip} &= V_{im} + V_{os} \\
+\frac{V_{bg}-V_{ip}}{R_2} &= I_{e2} \\
+\frac{V_{bg}-V_{im}}{R_2} &= I_{e1} \\
+V_{ip} &= I_{e2}R_1 + V_T\frac{I_{e2}}{nI_S} \\
+V_{im} &= V_T\frac{I_{e1}}{I_S}
+\end{align}$$
+where $V_T = \frac{kT}{q}$
+
+we obtain
+$$
+I_{e1} = \frac{V_T\ln n}{R_1} + V_{os}\left(\frac{1}{R_1} + \frac{1}{R_2} \right) - \frac{1}{R_1}\cdot V_T\ln\left(1- \frac{V_{os}}{R_2I_{e1}} \right)
+$$
+
+we omit the last part
+$$\begin{align}
+I_{e1} &= I_{e0} + V_{os}\left(\frac{1}{R_1} + \frac{1}{R_2} \right) \\
+I_{e2} &= I_{e1} - \frac{V_{os}}{R_2} = I_{e0} + \frac{V_{os}}{R_1}
+\end{align}$$
+where $I_{e0} = \frac{\Delta V_{be}}{R_1}$, $\Delta V_{be}=V_T\ln n$
+
+That is, both $I_{e1}$ and $I_{e2}$ are propational to $V_{os}$
+
+$$\begin{align}
+V_{bg} &= V_T \ln \frac{I_{e1}}{I_s} + I_{e1}R_2 \\
+&= V_T \ln \frac{I_{e0} + V_{os}\left(\frac{1}{R_1} + \frac{1}{R_2} \right)}{I_s} + I_{e1}R_2 \\
+&= V_T \ln \frac{I_{e0} + V_{os}\left(\frac{1}{R_1} + \frac{1}{R_2} \right)}{I_s} + I_{e0}R_2 + V_{os}\frac{R_1+R_2}{R_1} \\
+&= I_{e0}R_2 + V_T \ln \frac{I_{e0}}{I_s} + V_T\ln\left(1+\frac{V_{os}\left(\frac{1}{R_1} + \frac{1}{R_2} \right)}{I_{e0}}  \right) + V_{os}\frac{R_1+R_2}{R_1} \\
+&= V_{bg0} +  V_T\ln\left(1+\frac{V_{os}\left(\frac{1}{R_1} + \frac{1}{R_2} \right)}{I_{e0}}  \right) + V_{os}\frac{R_1+R_2}{R_1}
+\end{align}$$
+
+
 ## reference
 
 ECEN 607 (ESS) Bandgap Reference: Basics URL:[https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf](https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf)

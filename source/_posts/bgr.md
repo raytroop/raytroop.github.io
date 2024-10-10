@@ -101,7 +101,7 @@ $$
 
 ## OTA with chopper
 
-here $V_{im}=V_{be1}$ and $V_{ip}=V_{be2}+ I_{e2}R_1$
+![bg_chop.drawio](bgr/bg_chop.drawio.svg)
 
 ![bg_chop_shift.drawio](bgr/bg_chop_shift.drawio.svg)
 
@@ -129,7 +129,7 @@ I_{e2} &= I_{e1} - \frac{V_{os}}{R_2} = I_{e0} + \frac{V_{os}}{R_1}
 \end{align}$$
 where $I_{e0} = \frac{\Delta V_{be}}{R_1}$, $\Delta V_{be}=V_T\ln n$
 
-> That is, both $I_{e1}$ and $I_{e2}$ are propational to $V_{os}$
+> That is, both $I_{e1}$ and $I_{e2}$ are proportional to $V_{os}$
 
 $I_{e1}$ and $I_{e2}$ can be expressed as
 $$\begin{align}

@@ -149,6 +149,59 @@ V_{bg} &= V_T \ln \frac{I_{e1}}{I_s} + I_{e1}R_2 \\
 \end{align}$$
 
 
+
+## ripple cancellation
+
+![rippleCancel.drawio](bgr/rippleCancel.drawio.svg)
+
+
+
+***phase 0:***
+
+$$\begin{align}
+V_{os}[n] &= V_{os}[n-1] - \frac{I_1[n]-I_2[n-1]}{g_m} \\
+V_{os}[n]  &=  I_\Delta[n] R_E \\
+\beta I_\Delta &= I_1[n] + I_2[n-1]
+\end{align}$$
+
+where $I_\Delta$ is the variation of $I_{e1}+I_{e2}$ and $R_E=\frac{R_1R_2}{R_1+2R_2}$
+
+obtain
+$$\begin{align}
+I_1[n] &= G\cdot V_{os}[n-1] - A\cdot I_2[n-1] \\
+V_{os}[n] &= B\cdot V_{os}[n-1] + R\cdot I_2[n-1]
+\end{align}$$
+
+where $A=\frac{g_m R_E - \beta}{g_m R_E + \beta}$, $B=\frac{g_m R_E}{g_m R_E + \beta}$, $G=g_m\frac{\beta}{g_m R_E + \beta}$, $R=R_E\frac{2}{g_m R_E + \beta}$
+
+
+
+***phase 1:***
+
+$$\begin{align}
+V_{os}[n] &= V_{os}[n-1] - \frac{I_1[n-1]-I_2[n]}{g_m} \\
+V_{os}[n]  &=  -I_\Delta[n] R_E \\
+\beta I_\Delta &= I_1[n-1] + I_2[n]
+\end{align}$$
+
+obtain
+
+$$\begin{align}
+I_2[n] &= -G\cdot V_{os}[n-1] - A\cdot I_1[n-1] \\
+V_{os}[n] &= B\cdot V_{os}[n-1] - R\cdot I_1[n-1]
+\end{align}$$
+
+
+
+---
+
+![image-20241010235947074](bgr/image-20241010235947074.png)
+
+![image-20241010235952855](bgr/image-20241010235952855.png)
+
+
+
+
 ## reference
 
 ECEN 607 (ESS) Bandgap Reference: Basics URL:[https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf](https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf)

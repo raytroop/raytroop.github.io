@@ -134,7 +134,7 @@ where $I_{e0} = \frac{\Delta V_{be}}{R_1}$, $\Delta V_{be}=V_T\ln n$
 $I_{e1}$ and $I_{e2}$ can be expressed as
 $$\begin{align}
 I_{e1} &= I_{e0} + V_{os}\left(\frac{1}{R_1} + \frac{1}{2R_2} \right) + \frac{V_{os}}{2R_2} \\
-I_{e2} &= I_{e1} + V_{os}\left(\frac{1}{R_1} + \frac{1}{2R_2} \right) - \frac{V_{os}}{2R_2}
+I_{e2} &= I_{e0} + V_{os}\left(\frac{1}{R_1} + \frac{1}{2R_2} \right) - \frac{V_{os}}{2R_2}
 \end{align}$$
 i.e., $\Delta I_{e,cm} = V_{os}\left(\frac{1}{R_1} + \frac{1}{2R_2} \right)$ and $\Delta I_{e,dif} =\frac{V_{os}}{2R_2}$
 

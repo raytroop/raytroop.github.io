@@ -200,6 +200,40 @@ V_{os}[n] &= B\cdot V_{os}[n-1] - R\cdot I_1[n-1]
 ![image-20241010235952855](bgr/image-20241010235952855.png)
 
 
+---
+***phase 0:***
+
+$$\begin{align}
+V_{os}[n] &= V_{os}[n-1] - \frac{\Delta I_1}{g_m} \\
+V_{os}[n]  &=  I_\Delta[n] R_E \\
+\beta I_\Delta &= I_1[n] + I_2[n-1]
+\end{align}$$
+
+obtain
+$$\begin{align}
+\Delta I_1 &= G\cdot V_{os}[n-1] - K\cdot I_1[n-1] - K\cdot I_2[n-1] \\
+I_1[n] &= G\cdot V_{os}[n-1] + (1-K)\cdot I_1[n-1] - K\cdot I_2[n-1] \\
+V_{os}[n] &= K\cdot V_{os}[n-1] + R\cdot I_1[n-1] + R\cdot I_2[n-1]\\
+\end{align}$$
+
+where $G=g_m\frac{\beta}{g_m R_E + \beta}$, $R=R\frac{1}{g_m R_E + \beta}$ and $K=\frac{g_mR_E}{g_m R_E + \beta}$
+
+
+***phase 1:***
+
+$$\begin{align}
+V_{os}[n] &= V_{os}[n-1] - \frac{-\Delta I_2}{g_m} \\
+V_{os}[n]  &=  -I_\Delta[n] R_E \\
+\beta I_\Delta &= I_1[n] + I_2[n-1]
+\end{align}$$
+
+obtain
+$$\begin{align}
+\Delta I_2 &= -G\cdot V_{os}[n-1] - K\cdot I_1[n-1] - K\cdot I_2[n-1] \\
+I_1[n] &= -G\cdot V_{os}[n-1] -K\cdot I_1[n-1] + (1-K)\cdot I_2[n-1] \\
+V_{os}[n] &= K\cdot V_{os}[n-1] - R\cdot I_1[n-1] - R\cdot I_2[n-1]\\
+\end{align}$$
+
 
 
 ## reference

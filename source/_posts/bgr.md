@@ -171,6 +171,10 @@ V_{os}[n] &= K\cdot V_{os}[n-1] + R\cdot I_1[n-1] + R\cdot I_2[n-1]\\
 
 where $G=g_m\frac{\beta}{g_m R_E + \beta}$, $R=R\frac{1}{g_m R_E + \beta}$ and $K=\frac{g_mR_E}{g_m R_E + \beta}$
 
+and
+$$
+V_{os}[n] = (2K-1)\cdot V_{os}[n-1]
+$$
 
 ***phase 1:***
 
@@ -187,7 +191,10 @@ I_1[n] &= -G\cdot V_{os}[n-1] -K\cdot I_1[n-1] + (1-K)\cdot I_2[n-1] \\
 V_{os}[n] &= K\cdot V_{os}[n-1] - R\cdot I_1[n-1] - R\cdot I_2[n-1]\\
 \end{align}$$
 
-
+similaly
+$$
+V_{os}[n] = (2K-1)\cdot V_{os}[n-1]
+$$
 
 ## reference
 

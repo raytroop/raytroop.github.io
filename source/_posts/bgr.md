@@ -196,6 +196,13 @@ $$
 V_{os}[n] = (1-\frac{2\beta}{g_mR+\beta})\cdot V_{os}[n-1]
 $$
 
+
+That is, for either phase
+$$
+V_{os}[n] = (1-\frac{2\beta}{g_mR+\beta})\cdot V_{os}[n-1]
+$$
+
+
 ## reference
 
 ECEN 607 (ESS) Bandgap Reference: Basics URL:[https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf](https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf)

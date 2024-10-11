@@ -73,7 +73,7 @@ where $m$ is the duty cycle
 
 
 
-> Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF.
+> Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]
 >
 > Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
 >

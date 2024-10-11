@@ -173,7 +173,7 @@ where $G=g_m\frac{\beta}{g_m R_E + \beta}$, $R=R\frac{1}{g_m R_E + \beta}$ and $
 
 and
 $$
-V_{os}[n] = (2K-1)\cdot V_{os}[n-1]
+V_{os}[n] = (2K-1)\cdot V_{os}[n-1] = (1-\frac{2\beta}{g_mR+\beta})\cdot V_{os}[n-1]
 $$
 
 ***phase 1:***
@@ -193,7 +193,7 @@ V_{os}[n] &= K\cdot V_{os}[n-1] - R\cdot I_1[n-1] - R\cdot I_2[n-1]\\
 
 similaly
 $$
-V_{os}[n] = (2K-1)\cdot V_{os}[n-1]
+V_{os}[n] = (1-\frac{2\beta}{g_mR+\beta})\cdot V_{os}[n-1]
 $$
 
 ## reference

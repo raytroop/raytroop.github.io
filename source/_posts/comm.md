@@ -52,7 +52,7 @@ x(t) &=  \cos\omega_0 t - \frac{P_m}{2}\cos(\omega_0 - \omega_{pm})t + \frac{P_m
 \end{align}$$
 
 
-
+Therefore, sideband is asymmetric if $\omega_{pm} = \omega_{am}$
 
 
 > Ken Kundert, Measuring AM, PM & FM Conversion with SpectreRF [[https://designers-guide.org/analysis/am-pm-conv.pdf](https://designers-guide.org/analysis/am-pm-conv.pdf)]

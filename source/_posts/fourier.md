@@ -167,6 +167,18 @@ X(e^{j\hat{\omega}}) &= X_s(j\frac{\hat{\omega}}{T}) \\
 
 
 
+### Dirac delta function
+
+![image-20241013174738030](fourier/image-20241013174738030.png)
+
+![image-20241013174801954](fourier/image-20241013174801954.png)
+
+> [[https://bingweb.binghamton.edu/~suzuki/Math-Physics/LN-7_Dirac_delta_function.pdf](https://bingweb.binghamton.edu/~suzuki/Math-Physics/LN-7_Dirac_delta_function.pdf)]
+
+
+
+
+
 ### impulse scaling
 
 $$
@@ -312,6 +324,19 @@ x[n] &= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left( -kf_s+\Delta f
 Fourier transform of a periodic signal with Fourier series coefficients $\{a_k\}$ can be interpreted as a train of *impulses* occurring at the harmonically related frequencies and for which the area of the impulse at the $k$th harmonic frequency $k\omega_0$ is $2\pi$ times the $k$th Fourier series coefficient $a_k$
 
 ![image-20240830225453601](fourier/image-20240830225453601.png)
+
+
+
+### inverse CTFT & inverse DTFT
+
+|                  | time domain | frequency domain |
+| ---------------- | ----------- | ---------------- |
+| **inverse CTFT** | $\delta(t)$ | $\int_{\infty}$  |
+| **inverse DTFT** | $\delta[n]$ | $\int_{2\pi}$    |
+
+
+
+inverse CTFT shall integral from $-\infty$ to $+\infty$ to obtain $\delta(t)$ in time domain, e.g.,  $x_s(t)$ impulse train
 
 
 

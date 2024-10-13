@@ -15,9 +15,9 @@ mathjax: true
 
 ![image-20241012001704081](comm/image-20241012001704081.png)
 
-> The spectrum of the narrowband FM signal is very similar to that of an amplitude modulation (AM) signal but has the phase reversal for the other sideband component
+> The spectrum of the narrowband FM signal is very similar to that of an amplitude modulation (AM) signal but has the **phase reversal** for the other sideband component
 
-Assume the modulation frequcy of PM and AM are same, $\omega_m$
+Assume the modulation frequency of PM and AM are same, $\omega_m$
 
 $$\begin{align}
 x(t) &= (1+A_m\cos{\omega_m t})\cos(\omega_0 t + P_m \sin\omega_m t) \\

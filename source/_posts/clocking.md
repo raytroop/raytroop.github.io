@@ -347,7 +347,9 @@ and $\phi _e(\infty) = 0$
 
 
 
-## Clock Division with Jitter and Phase Noise
+## Clock Divider phase noise & jitter
+
+![image-20241013212542173](clocking/image-20241013212542173.png)
 
 - Multiplying the frequency of a signal by a factor of N using an **ideal** frequency multiplier increases the phase noise of the multiplied signal by $20\log(N)$ dB. 
 - Similarly dividing a signal frequency by N reduces the phase noise of the output signal by $20\log(N)$  dB

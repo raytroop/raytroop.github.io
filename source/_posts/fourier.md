@@ -329,10 +329,10 @@ Fourier transform of a periodic signal with Fourier series coefficients $\{a_k\}
 
 ### inverse CTFT & inverse DTFT
 
-|                  | time domain | frequency domain |
-| ---------------- | ----------- | ---------------- |
-| **inverse CTFT** | $\delta(t)$ | $\int_{\infty}$  |
-| **inverse DTFT** | $\delta[n]$ | $\int_{2\pi}$    |
+|                  | time domain | frequency domain           |
+| ---------------- | ----------- | -------------------------- |
+| **inverse CTFT** | $\delta(t)$ | $\int_{\infty}d\omega$     |
+| **inverse DTFT** | $\delta[n]$ | $\int_{2\pi}d\hat{\omega}$ |
 
 
 

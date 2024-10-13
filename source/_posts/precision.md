@@ -107,9 +107,7 @@ $$\begin{align}
 
 
 
-
-
-That is, chopping or squarewave modulation don't change input signal
+That is, the input signal **remains the same** after chopping or squarewave up/down modulation
 
 
 > *EXAMPLE 2.7* in R. E. Ziemer and W. H. Tranter, Principles of Communications, 7th ed., Wiley, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]

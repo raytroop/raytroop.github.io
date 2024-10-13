@@ -43,16 +43,15 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-  deploy:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    # Deploy hexo blog website.
+    - name: Deploy
+      id: deploy
+      uses: sma11black/hexo-action@v1.0.4
+      with:
+        deploy_key: ${{ secrets.HEXO_DEPLOY_PRI }}
+        user_name: raytroop
+        user_email: raytroop@gmail.com
+        commit_msg: ${{ github.event.head_commit.message }}ion)
+    - name: Get the output
+      run: |
+        echo "${{ steps.deploy.outputs.notify }}"            

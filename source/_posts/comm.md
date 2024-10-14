@@ -7,9 +7,6 @@ categories:
 mathjax: true
 ---
 
-*TODO* &#128197;
-
-
 
 ## AM & PM
 

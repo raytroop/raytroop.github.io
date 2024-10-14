@@ -46,7 +46,7 @@ To achieve a stable DC output voltage
 
 ### output voltage droop
 $$
-\delta V_{out,p2p} = \frac{I_{load}}{f_{sw}C_p}
+\Delta V_{out} = \frac{I_{load}}{f_{sw}C_p}
 $$
 
 
@@ -54,7 +54,7 @@ $$
 ### output voltage ripple
 peak-to-peak ripple
 $$
-\delta V_{out,p2p} = \frac{I_{load}}{f_{sw}C_o}
+\Delta V_{out,p2p} = \frac{I_{load}}{f_{sw}C_o}
 $$
 
 

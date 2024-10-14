@@ -40,6 +40,12 @@ mathjax: true
 
 *TODO* &#128197;
 
+### output buffer capacitor
+
+To achieve a stable DC output voltage
+
+
+
 
 
 ## reference
@@ -50,5 +56,5 @@ Wicht, B.,  ISSCC2020 T2: Analog Building Blocks of DC-DC Converters [[https://w
 
 Hoi Lee, ISSCC2018 T8: Fundamentals of Switched-Mode Power Converter Design [[slides](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Visuals.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Transcription.txt)]
 
-Anton Bakker,Tim Piessens.,  ISSCC2014 T9: Charge Pump and Capacitive DC-DC Converter Design
+Anton Bakker,Tim Piessens., ISSCC2014 T9: Charge Pump and Capacitive DC-DC Converter Design
 

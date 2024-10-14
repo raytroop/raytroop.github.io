@@ -80,9 +80,12 @@ $$
 \Delta V_{out} = \frac{I_{load}}{f_{sw}C_p}
 $$
 
+The charge pump can be modeled as a voltage source with a **source resistance** $R_\text{out}$. Therefore, $\Delta V_{out}$ can be seen as the voltage drop across $R_\text{out}$ due to the load current:
 
-
-
+$$
+R_{out} = \frac{\Delta V_{out}}{I_{load}} = \frac{1}{f_{sw}C_p}
+$$
+![image-20241015072846141](cp-dcdc/image-20241015072846141.png)
 
 
 ### capacitive charging loss

@@ -44,6 +44,12 @@ mathjax: true
 
 To achieve a stable DC output voltage
 
+### voltage droop
+
+
+### capacitive charging loss
+
+increase with switching frequency
 
 
 
@@ -52,9 +58,10 @@ To achieve a stable DC output voltage
 
 Wicht, B., "Design of Power Management Integrated Circuits". 2024 Wiley-IEEE Press
 
-Wicht, B.,  ISSCC2020 T2: Analog Building Blocks of DC-DC Converters [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T2Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T2Visuals.pdf)]
-
-Hoi Lee, ISSCC2018 T8: Fundamentals of Switched-Mode Power Converter Design [[slides](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Visuals.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Transcription.txt)]
+Breussegem, T. v., & Steyaert, M. (2013). CMOS integrated capacitive DC-DC converters. Springer
 
 Anton Bakker,Tim Piessens., ISSCC2014 T9: Charge Pump and Capacitive DC-DC Converter Design
 
+Wicht, B., ISSCC2020 T2: Analog Building Blocks of DC-DC Converters [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T2Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T2Visuals.pdf)]
+
+Hoi Lee, ISSCC2018 T8: Fundamentals of Switched-Mode Power Converter Design [[slides](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Visuals.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Transcription.txt)]

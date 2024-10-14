@@ -50,7 +50,7 @@ $$
 
 $$\begin{align}
 (V_t - V_h)(C_p + C_o) &= \frac{I_{load}}{2f_{sw}} \\
-(V_h - V_b) &= \frac{I_{load}}{2f_{sw}}
+(V_h - V_b)C_o &= \frac{I_{load}}{2f_{sw}}
 \end{align}$$
 
 we obtain

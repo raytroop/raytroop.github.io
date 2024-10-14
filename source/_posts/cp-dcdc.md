@@ -44,7 +44,18 @@ mathjax: true
 
 To achieve a stable DC output voltage
 
-### voltage droop
+### output voltage droop
+$$
+\delta V_{out,p2p} = \frac{I_{load}}{f_{sw}C_p}
+$$
+
+
+
+### output voltage ripple
+peak-to-peak ripple
+$$
+\delta V_{out,p2p} = \frac{I_{load}}{f_{sw}C_o}
+$$
 
 
 ### capacitive charging loss

@@ -7,10 +7,18 @@ categories:
 mathjax: true
 ---
 
-*TODO* &#128197;
 
+- proportional term (P) depends on the present error
+- integral term (I) depends on past errors
+- derivative term (D) depends on anticipated future errors 
 
-
+> **PID** controller makes use of linear extrapolation of the measured output
+>
+> **PI** controller does not make use of any prediction of the future state of the system
+>
+> The prediction by linear extrapolation (D) can generate large undesired control signals because measurement noise is amplified, that's why **D** is not used widely
+>
+---
 
 
 ## reference

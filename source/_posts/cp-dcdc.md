@@ -57,9 +57,9 @@ we obtain
 $$
 V_t - V_b = \frac{I_{load}}{f_{sw}C_o}\left(1 - \frac{C_p}{2(C_p + C_o)}\right)
 $$
-That is, **peak-to-peak ripple** if $C_o \gg C_p$
+That is, **peak-to-peak ripple**
 $$
-\Delta V_{out,p2p} \approx \frac{I_{load}}{f_{sw}C_o}
+\Delta V_{out,p2p} \approx \frac{I_{load}}{f_{sw}C_o} \space\space\space\space \text{if}\space\space C_o \gg C_p
 $$
 
 

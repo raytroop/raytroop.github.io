@@ -483,6 +483,22 @@ downsampled by a factor of $M = 2$
 
 
 
+## Moving Average and CIC Filters
+
+> **cascade-integrator-comb (CIC)** decimator
+
+*TODO* &#128197;
+
+
+
+
+
+> An Intuitive Look at Moving Average and CIC Filters [[web](https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html), [code](https://github.com/tomverbeure/pdm/tree/master/modeling/cic_filters)]
+>
+> A Beginner's Guide To Cascaded Integrator-Comb (CIC) Filters [[https://www.dsprelated.com/showarticle/1337.php](https://www.dsprelated.com/showarticle/1337.php)]
+
+
+
 ## FIR Equalization
 
 ### Frequency Response

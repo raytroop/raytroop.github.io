@@ -60,7 +60,7 @@ $$
 Therefore, $v[n-1] = (n-1)u - \sum_{k=1}^{n-2}v[k] + e[n-1]$
 $$\begin{align}
 v[n] &= nu - \sum_{k=1}^{n-1}v[k] + e[n] \\
-&= u + \left[(n-1)u - \sum_{k=1}^{n-2}v[k]\right] - v[n-1] + e[n] \\
+&= u + \left((n-1)u - \sum_{k=1}^{n-2}v[k]\right) - v[n-1] + e[n] \\
 &= u + v[n-1] - e[n-1]  -v[n-1] + e[n] \\
 &= u + e[n] - e[n-1]
 \end{align}$$
@@ -99,11 +99,41 @@ v[n] &= nu - \sum_{k=1}^{n-1}v[k] + e[n] \\
 
 The combination of the the *digital post-filter* and *downsampler* is called the **decimation filter** or **decimator**
 
-![image-20241005190053391](delta-sigma/image-20241005190053391.png)
+![image-20241015220921002](delta-sigma/image-20241015220921002.png)
 
-![image-20241005190126691](delta-sigma/image-20241005190126691.png)
+###  $\text{sinc}$ filter
 
+
+
+![image-20241015215159577](delta-sigma/image-20241015215159577.png)
+
+![image-20241015215227042](delta-sigma/image-20241015215227042.png)
+
+> ![image-20241015225859710](delta-sigma/image-20241015225859710.png)
+
+
+
+![image-20241015215111430](delta-sigma/image-20241015215111430.png)
+
+
+
+### $\text{sinc}^2$ filter
+
+![image-20241015220030204](delta-sigma/image-20241015220030204.png)
+
+
+
+> [https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/First-Order_D-S_ADC_Scan2.pdf](https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/First-Order_D-S_ADC_Scan2.pdf)
+>
 > [https://classes.engr.oregonstate.edu/eecs/spring2017/ece627/Lecture%20Notes/First-Order%20D-S%20ADC.pdf](https://classes.engr.oregonstate.edu/eecs/spring2017/ece627/Lecture%20Notes/First-Order%20D-S%20ADC.pdf)
+
+
+
+### Accumulate-and-dump (AAD) decimator
+
+accumulating the input for $N$ cycles and then latching the result and resetting the integrator
+
+![image-20241015222205883](delta-sigma/image-20241015222205883.png)
 
 
 

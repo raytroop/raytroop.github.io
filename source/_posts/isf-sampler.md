@@ -217,7 +217,7 @@ matlab matrix **nonconjugate transpose**:
 
 `transpose`, `.'`  cf. https://www.mathworks.com/help/matlab/ref/transpose.html
 
-## `tstab` in PSS
+### `tstab` in PSS
 
 Using shooting PSS, the steady waveform starts from `tstab+n*tperiod`.
 
@@ -228,7 +228,7 @@ Using shooting PSS, the steady waveform starts from `tstab+n*tperiod`.
 
 ![image-20220610222535614](isf-sampler/image-20220610222535614.png)
 
-### simulation log
+#### simulation log
 
 The below `stop = 1.3 ns` is actual **tstab** time, though `Stop Time(tstab)` field of pss form is filled with `0.3n`
 
@@ -267,11 +267,11 @@ Important parameter values in tstab integration:
 ...
 ```
 
-### PSS simulation result
+#### PSS simulation result
 
 ![image-20220610224100135](isf-sampler/image-20220610224100135.png)
 
-### Align pss_tb and pss_fd
+#### Align pss_tb and pss_fd
 
 ![image-20220610225310243](isf-sampler/image-20220610225310243.png)
 

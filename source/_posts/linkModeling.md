@@ -11,9 +11,9 @@ mathjax: true
 ## Decimation
 
 - Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
-
 - Decimation is basically, widen the data and slowing it down
 - Decimating by $L$ means frequency register only added once every $L$ UI, thus *integral path gain* reduced by $L$ in linear model
+- *proportional path gain* is unchanged
 
 ![intg_path_decim.drawio](linkModeling/intg_path_decim.drawio.svg)
 
@@ -27,10 +27,6 @@ mathjax: true
 - Decimation via boxcar filter produces a DC gain, $K_b$, corresponding to the *decimation factor*. 
 
 
-
-> loop gain of *proportional path* is unchanged
->
-> Note: update every $L$ cycles
 
 ### Decimation by Voting
 > equivalent $\sum d_n \lt 0 \to -1$, $\sum d_n = 0 \to 0$ and $\sum d_n\gt 0 \to 1$

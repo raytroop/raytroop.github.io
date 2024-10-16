@@ -193,9 +193,7 @@ wv = sum(real(coef .* exp(exp_sup)), 1) + DC;
 end
 ```
 
-### Remarks
-
-**pss pac setup**
+### PSS + PAC Setup
 
 - clock frequency should be low enough to assure system response settle to zero.
 - Beat Frequency os PSS should be clock frequency

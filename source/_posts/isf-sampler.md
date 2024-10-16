@@ -9,7 +9,7 @@ mathjax: true
 
 An efficient method to measure the ISFs of periodic circuits via periodic AC (PAC) analysis, which is available from RF circuit simulators such as SpectreRF and ADS
 
-## PSS + PAC Method
+## PAC Method
 
 ### Linear Time-varying System Theory
 

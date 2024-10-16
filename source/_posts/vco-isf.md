@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-## PSS + PXF Method
+## PXF Method
 
 *TODO* &#128197;
 

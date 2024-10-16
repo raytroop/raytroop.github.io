@@ -1,6 +1,6 @@
 ---
 title: DPLL Based Clock and Data Recovery
-date: 2024-09-16 21:04:41
+date: 2024-09-23 21:04:41
 tags:
 categories:
 - analog

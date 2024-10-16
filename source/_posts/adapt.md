@@ -1,5 +1,5 @@
 ---
-title: adaptation in wireline
+title: Adaptation Algorithms of Wireline Transceivers
 date: 2024-08-11 11:07:31
 tags:
 categories:

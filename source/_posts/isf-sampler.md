@@ -106,7 +106,7 @@ $$
 The expression for the approximate time-varying impulse response:
 $$
 h(t,\tau) = \left\{ \begin{array}{cl}
-\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} & : \ \tau \leq \tau+T \\
+\frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} & : \ \tau \leq t \lt \tau+T \\
 0 & : \ \text{elsewhere}
 \end{array} \right.
 $$

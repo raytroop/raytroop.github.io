@@ -8,6 +8,7 @@ mathjax: true
 ---
 
 
+> To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
 
 ## reference
 

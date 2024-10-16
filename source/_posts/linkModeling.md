@@ -8,6 +8,62 @@ mathjax: true
 ---
 
 
+## Decimation
+
+- Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
+
+- Decimation is basically, widen the data and slowing it down
+- Decimating by $L$ means frequency register only added once every $L$ UI, thus *integral path gain* reduced by $L$ in linear model
+
+![intg_path_decim.drawio](linkModeling/intg_path_decim.drawio.svg)
+
+
+### Decimation by Summing
+
+> In DSP this is called *boxcar filter*
+>
+> $\sum d_n$, where $d_n \in \{-1, 0, 1\}$
+
+- Decimation via boxcar filter produces a DC gain, $K_b$, corresponding to the *decimation factor*. 
+
+
+
+> loop gain of *proportional path* is unchanged
+>
+> Note: update every $L$ cycles
+
+### Decimation by Voting
+> equivalent $\sum d_n \lt 0 \to -1$, $\sum d_n = 0 \to 0$ and $\sum d_n\gt 0 \to 1$
+>
+> Compared to the boxcar filter, voting is able to reduce the loop delay and lower the output noise of the MMPD
+
+- Decimation via voting has a reduced gain, $K_V$, which can be determined through simulation
+
+
+---
+
+![image-20240813223338067](linkModeling/image-20240813223338067.png)
+
+
+
+> P. K. Hanumolu, M. G. Kim, G. -y. Wei and U. -k. Moon, "A 1.6Gbps Digital Clock and Data Recovery Circuit," *IEEE Custom Integrated Circuits Conference 2006*, San Jose, CA, USA, 2006, pp. 603-606
+>
+> J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006
+>
+> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery" [[https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)]
+>
+> Pavan Hanumolu, ISSCC 2015 tutorial. "Clock and Data Recovery Architectures & Circuits" 
+>
+> Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits" *Electronics* 10, no. 16: 1888. https://doi.org/10.3390/electronics10161888
+>
+> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. 10.21203/rs.3.rs-1817774/v1. 
+>
+> H. Kang et al., "A 42.7Gb/s Optical Receiver With Digital Clock and Data Recovery in 28nm CMOS," in IEEE Access, vol. 12, pp. 109900-109911, 2024 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10630516](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10630516)]
+
+
+
+
+
 ## VCO model
 
 *TODO* &#128197;
@@ -20,17 +76,6 @@ mathjax: true
 
 > [[https://designers-guide.org/verilog-ams/functional-blocks/vco/vco.va](https://designers-guide.org/verilog-ams/functional-blocks/vco/vco.va)]
 
-
-
-## majority voting
-
-*TODO* &#128197;
-
-
-
-
-
-> H. Kang et al., "A 42.7Gb/s Optical Receiver With Digital Clock and Data Recovery in 28nm CMOS," in IEEE Access, vol. 12, pp. 109900-109911, 2024 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10630516](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10630516)]
 
 
 
@@ -104,58 +149,6 @@ Linearity can actually be a critical constraint in these signal paths, and you r
 ![image-20240825194548697](linkModeling/image-20240825194548697.png)
 
 > Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
-
-
-
-## Decimation
-
-- Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
-
-- Decimation is basically, widen the data and slowing it down
-- Decimating by $L$ means frequency register only added once every $L$ UI, thus *integral path gain* reduced by $L$ in linear model
-
-![intg_path_decim.drawio](linkModeling/intg_path_decim.drawio.svg)
-
-
-### Decimation by Summing
-
-> In DSP this is called *boxcar filter*
->
-> $\sum d_n$, where $d_n \in \{-1, 0, 1\}$
-
-- Decimation via boxcar filter produces a DC gain, $K_b$, corresponding to the *decimation factor*. 
-
-![image-20240813222409404](linkModeling/image-20240813222409404.png)
-
-
-
-Loop gain of *proportional path* is unchanged
-
-### Decimation by Voting
-> equivalent $\sum d_n \lt 0 \to -1$, $\sum d_n = 0 \to 0$ and $\sum d_n\gt 0 \to 1$
->
-> Compared to the boxcar filter, voting is able to reduce the loop delay and lower the output noise of the MMPD
-
-- Decimation via voting has a reduced gain, $K_V$, which can be determined through simulation
-
-
-
-![image-20240813223338067](linkModeling/image-20240813223338067.png)
-
-
-
-> P. K. Hanumolu, M. G. Kim, G. -y. Wei and U. -k. Moon, "A 1.6Gbps Digital Clock and Data Recovery Circuit," *IEEE Custom Integrated Circuits Conference 2006*, San Jose, CA, USA, 2006, pp. 603-606
->
-> J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006
->
-> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery" [[https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)]
->
-> Pavan Hanumolu, ISSCC 2015 tutorial. "Clock and Data Recovery Architectures & Circuits" 
->
-> Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits" *Electronics* 10, no. 16: 1888. https://doi.org/10.3390/electronics10161888
->
-> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. 10.21203/rs.3.rs-1817774/v1. 
-
 
 
 

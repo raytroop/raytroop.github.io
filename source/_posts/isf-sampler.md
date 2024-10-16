@@ -9,7 +9,7 @@ mathjax: true
 
 An efficient method to measure the ISFs of periodic circuits via periodic AC (PAC) analysis, which is available from RF circuit simulators such as SpectreRF and ADS
 
-## ISF
+## PSS + PAC Method
 
 ### Linear Time-varying System Theory
 
@@ -317,7 +317,16 @@ legend('Using pss\_td', 'Using pss\_fd', 'pss\_tb one period clip', 'Using pss\_
 ```
 
 
+## Transient Method
+
+*TODO* &#128197;
+
+
 
 ## reference
 
 J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity function analysis of periodic circuits," 2008 IEEE/ACM International Conference on Computer-Aided Design, 2008, pp. 386-391, doi: 10.1109/ICCAD.2008.4681602. [[https://websrv.cecs.uci.edu/~papers/iccad08/PDFs/Papers/05C.2.pdf](https://websrv.cecs.uci.edu/~papers/iccad08/PDFs/Papers/05C.2.pdf)]
+
+M. Jeeradit et al., "Characterizing sampling aperture of clocked comparators," 2008 IEEE Symposium on VLSI Circuits, Honolulu, HI, USA, 2008, pp. 68-69 [[https://people.engr.tamu.edu/spalermo/ecen689/sampling_aperature_comparators_vlsi_2008.pdf](https://people.engr.tamu.edu/spalermo/ecen689/sampling_aperature_comparators_vlsi_2008.pdf)]
+
+T. Toifl et al., "A 22-gb/s PAM-4 receiver in 90-nm CMOS SOI technology," in IEEE Journal of Solid-State Circuits, vol. 41, no. 4, pp. 954-965, April 2006 [[https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=4d1f0442be77425ed34b9dcfd48fbfff954a707b](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=4d1f0442be77425ed34b9dcfd48fbfff954a707b)]

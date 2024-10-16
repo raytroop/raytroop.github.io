@@ -330,3 +330,5 @@ J. Kim, B. S. Leibowitz and M. Jeeradit, "Impulse sensitivity function analysis 
 M. Jeeradit et al., "Characterizing sampling aperture of clocked comparators," 2008 IEEE Symposium on VLSI Circuits, Honolulu, HI, USA, 2008, pp. 68-69 [[https://people.engr.tamu.edu/spalermo/ecen689/sampling_aperature_comparators_vlsi_2008.pdf](https://people.engr.tamu.edu/spalermo/ecen689/sampling_aperature_comparators_vlsi_2008.pdf)]
 
 T. Toifl et al., "A 22-gb/s PAM-4 receiver in 90-nm CMOS SOI technology," in IEEE Journal of Solid-State Circuits, vol. 41, no. 4, pp. 954-965, April 2006 [[https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=4d1f0442be77425ed34b9dcfd48fbfff954a707b](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=4d1f0442be77425ed34b9dcfd48fbfff954a707b)]
+
+Sam Palermo, ECEN 720 High-Speed Links: Circuits and Systems [[Lecture 6: RX Circuits](https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee720_rx_circuits.pdf)], [[Lab4 - Receiver Circuits](https://people.engr.tamu.edu/spalermo/ecen689/ECEN720_lab4_2023.pdf)]

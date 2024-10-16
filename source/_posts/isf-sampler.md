@@ -9,9 +9,9 @@ mathjax: true
 
 An efficient method to measure the ISFs of periodic circuits via periodic AC (PAC) analysis, which is available from RF circuit simulators such as SpectreRF and ADS
 
-## PAC Method
 
-### Linear Time-varying System Theory
+
+## Linear Time-varying System Theory
 
 We define the ISF of the sampler as the sensitivity of its final output voltage to the impulse arriving at its input at different times, the ISF essentially describes the aperture of the sampler. 
 
@@ -71,7 +71,7 @@ $$\begin{align}
 &= H(j\omega;t)
 \end{align}$$
 
-### Characterizing ISF via PAC
+## PAC Method
 
 Since $H(j\omega;t)$  is periodic in $T$, The time-varying transfer function $H(j\omega;t)$ can be expressed in a Fourier series:
 $$

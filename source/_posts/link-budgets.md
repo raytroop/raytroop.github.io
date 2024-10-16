@@ -45,7 +45,7 @@ ENOB - Not sufficient & not accurate enough
 
 Relative to NRZ-based systems, PAM4 transceivers require more stringent circuit linearity, equalizers which can implement multi-level inter-symbol interference (ISI) cancellation, and improved sensitivity
 
-![image-20240923204055369](linkModeling/image-20240923204055369.png)
+![image-20240923204055369](link-budgets/image-20240923204055369.png)
 
 
 
@@ -53,11 +53,11 @@ Because if it compresses, it turns out you have to use a much more complicated f
 
 
 
-![image-20240923211841053](linkModeling/image-20240923211841053.png)
+![image-20240923211841053](link-budgets/image-20240923211841053.png)
 
 Linearity can actually be a critical constraint in these signal paths, and you really want to stay as linear as you can all the way up until the point where you've canceled all of the ISI
 
-![image-20240923222650556](linkModeling/image-20240923222650556.png)
+![image-20240923222650556](link-budgets/image-20240923222650556.png)
 
 
 
@@ -74,7 +74,7 @@ Linearity can actually be a critical constraint in these signal paths, and you r
 
 ## BER with Quantization Noise
 
-![image-20240804110522955](linkModeling/image-20240804110522955.png)
+![image-20240804110522955](link-budgets/image-20240804110522955.png)
 
 
 
@@ -82,15 +82,15 @@ Linearity can actually be a critical constraint in these signal paths, and you r
 > $$
 > \text{Var}(X) = E[X^2] - E[X]^2
 > $$
-> ![image-20240804110235178](linkModeling/image-20240804110235178.png)
+> ![image-20240804110235178](link-budgets/image-20240804110235178.png)
 
 
 
 ## Impulse Response or Pulse Response
 
-![image-20240807221637401](linkModeling/image-20240807221637401.png)
+![image-20240807221637401](link-budgets/image-20240807221637401.png)
 
-![image-20240807224407213](linkModeling/image-20240807224407213.png)![image-20240807224505987](linkModeling/image-20240807224505987.png)
+![image-20240807224407213](link-budgets/image-20240807224407213.png)![image-20240807224505987](link-budgets/image-20240807224505987.png)
 
 
 
@@ -99,7 +99,7 @@ Linearity can actually be a critical constraint in these signal paths, and you r
 
 TX FFE suffers from the peak power constraint, which in effect attenuates the average power of the outgoing signal -  the low-frequency signal content has been attenuated down to the high-frequency level
 
-![image-20240727225120002](linkModeling/image-20240727225120002.png)
+![image-20240727225120002](link-budgets/image-20240727225120002.png)
 
 > [[https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems](https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems)]
 >
@@ -115,9 +115,9 @@ An architecture that evaluates the received signal quality
 
 > data slicers, phase slicers, error slicers, scope slicers
 
-![image-20240922143125270](linkModeling/image-20240922143125270.png)
+![image-20240922143125270](link-budgets/image-20240922143125270.png)
 
-![image-20240922144605196](linkModeling/image-20240922144605196.png)
+![image-20240922144605196](link-budgets/image-20240922144605196.png)
 
 > Analui, Behnam & Rylyakov, Alexander & Rylov, Sergey & Meghelli, Mounir & Hajimiri, Ali. (2006). A 10-Gb/s two-dimensional eye-opening monitor in 0.13-??m standard CMOS. Solid-State Circuits, IEEE Journal of. 40. 2689 - 2699, [[https://chic.caltech.edu/wp-content/uploads/2013/05/B-Analui_JSSC_10-Gbs_05.pdf](https://chic.caltech.edu/wp-content/uploads/2013/05/B-Analui_JSSC_10-Gbs_05.pdf)]
 
@@ -127,9 +127,9 @@ An architecture that evaluates the received signal quality
 
 ## reference
 
-Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne (EPFL). [Pattern generator model for jitter-tolerance simulation](https://designers-guide.org/modeling/JTOL_rev1.0.pdf); [VHDL-AMS models](https://designers-guide.org/modeling/fc_jtol_src_ns.vhd)
+G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link Foundations Standards, Link Budgets & Models," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-95 [[https://youtu.be/OABG3u2H2J4?si=CxryBSGbxrUpZNBT](https://youtu.be/OABG3u2H2J4?si=CxryBSGbxrUpZNBT)]
 
-G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link Foundations Standards, Link Budgets & Models," 2019 IEEE Custom Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-95, doi: 10.1109/CICC.2019.8780223.
+Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne (EPFL). [Pattern generator model for jitter-tolerance simulation](https://designers-guide.org/modeling/JTOL_rev1.0.pdf); [VHDL-AMS models](https://designers-guide.org/modeling/fc_jtol_src_ns.vhd)
 
 Savo Bajic, ECE1392, Integrated Circuits for Digital Communications: **StatOpt in Python** [[https://savobajic.ca/projects/academic/statopt](https://savobajic.ca/projects/academic/statopt/)]
 
@@ -145,3 +145,6 @@ H. Shakiba, D. Tonietto and A. Sheikholeslami, "High-Speed Wireline Links-Part I
 
 
 G. Souliotis, A. Tsimpos and S. Vlassis, "Phase Interpolator-Based Clock and Data Recovery With Jitter Optimization," in IEEE Open Journal of Circuits and Systems, vol. 4, pp. 203-217, 2023 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10184121](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10184121)]
+
+
+

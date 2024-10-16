@@ -7,6 +7,16 @@ categories:
 mathjax: true
 ---
 
+
+
+## CML vs. SST based driver
+
+![image-20240825194548697](vm-drv-eq/image-20240825194548697.png)
+
+> Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
+
+
+
 ## SST Driver
 
 ### sharing termination in SST transmitter
@@ -236,3 +246,5 @@ Same with differential ended termination driver.
 J. F. Bulzacchelli et al., "A 28-Gb/s 4-Tap FFE/15-Tap DFE Serial Link Transceiver in 32-nm SOI CMOS Technology," in IEEE Journal of Solid-State Circuits, vol. 47, no. 12, pp. 3232-3248, Dec. 2012, doi: 10.1109/JSSC.2012.2216414.
 
 Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications 
+
+Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]

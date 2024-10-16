@@ -15,7 +15,13 @@ mathjax: true
 
 ## Transient Method
 
-*TODO* &#128197;
+![image-20241016211020230](vco-isf/image-20241016211020230.png)
+
+![image-20241016211101204](vco-isf/image-20241016211101204.png)
+
+![image-20241016211115630](vco-isf/image-20241016211115630.png)
+
+
 
 > To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
 

@@ -626,9 +626,19 @@ s &= \frac{g_2}{C_{12}}
 
 
 
-## Non Overlapping Clock
+## Nonoverlapping clock
 
-{% pdf /pdfs/nonoverlapping_clocks.pdf %}
+**Classical**
+
+![image-20241016212042812](insight/image-20241016212042812.png)
+
+
+
+**DWC**
+
+> **C2PHIa** is important to ensure nonoverlapping and DelayA2B is due to level shifter
+
+![image-20241016212100040](insight/image-20241016212100040.png)
 
 
 

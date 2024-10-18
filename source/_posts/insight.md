@@ -548,12 +548,12 @@ gm-Maximum Method
 
 *TODO* &#128197;
 
-## stb and pstb in Spectre
+## STB and PSTB in Spectre/RF
 
 All credits to my colleague, Zhang Wenpian.
 > F. Wiedmann, "Loop gain simulation," Online:[[https://sites.google.com/site/frankwiedmann/loopgain](https://sites.google.com/site/frankwiedmann/loopgain)]
 
-### Spectre's stb analysis
+### STB analysis
 
 Spectre **stb**'s "loopgain" is negative of "T" in paper<sup>[1]</sup>
 $$
@@ -572,7 +572,7 @@ AC simulation testbench, shown as below,
 
    A = if, C = ve
 
-### Spectre's pstb analysis
+### PSTB analysis
 
 Spectre **pstb** is similar to stb, just set **pac** as **1** instead of  **ac** in current source and voltage source.
 

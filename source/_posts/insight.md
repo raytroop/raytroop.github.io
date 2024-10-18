@@ -548,9 +548,10 @@ gm-Maximum Method
 
 *TODO* &#128197;
 
-## Demystifying stb and pstb in Spectre
+## stb and pstb in Spectre
 
 All credits to my colleague, Zhang Wenpian.
+> F. Wiedmann, "Loop gain simulation," Online:[[https://sites.google.com/site/frankwiedmann/loopgain](https://sites.google.com/site/frankwiedmann/loopgain)]
 
 ### Spectre's stb analysis
 

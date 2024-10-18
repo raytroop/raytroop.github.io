@@ -387,31 +387,6 @@ We prefer to employ Time Domain Approaches
 
 ![image-20231105221411598](periodic/image-20231105221411598.png)
 
-### Reciprocity
-
-![image-20231105223906470](periodic/image-20231105223906470.png)
-
-> Does not work with *controlled sources*
-
-![image-20231105224203744](periodic/image-20231105224203744.png)
-
-
-
-### Interreciprocity
-
-> Handle *controlled sources*
-
-![image-20231105225346724](periodic/image-20231105225346724.png)
-
-![image-20231105225359292](periodic/image-20231105225359292.png)
-
-| origin | transformer |
-| ------ | ----------- |
-| VCVS   | CCCS        |
-| CCCS   | VCVS        |
-| VCCS   | VCCS        |
-| CCVS   | CCVS        |
-
 
 
 # reference

@@ -26,6 +26,8 @@ mathjax: true
 
 
 
+> Bob Lefferts, Navraj Nandra. SNUG Israel 2007 [[https://picture.iczhiku.com/resource/eetop/whKYwQorwYoPUVbm.pdf](https://picture.iczhiku.com/resource/eetop/whKYwQorwYoPUVbm.pdf)]
+
 ## multi-modulus divider
 
 *TODO* &#128197;

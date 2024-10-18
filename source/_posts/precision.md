@@ -130,6 +130,11 @@ That is, the input signal **remains the same** after chopping or squarewave up/d
 
 > REF. [[https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge](https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge)]
 
+
+![chopping_OTA_limitedBW.drawio](precision/chopping_OTA_limitedBW.drawio.svg)
+
+
+
 ### Residual Offset of Chopping
 
 ![image-20240903222425730](precision/image-20240903222425730.png)

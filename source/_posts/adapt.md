@@ -1,9 +1,9 @@
 ---
-title: Adaptation Algorithms of Wireline Transceivers
-date: 2024-08-11 11:07:31
+title: Adaptation Algorithms
+date: 2024-09-03 11:07:31
 tags:
 categories:
-- analog
+- dsp
 mathjax: true
 ---
 
@@ -12,6 +12,22 @@ mathjax: true
 ## overlapped tuning range
 
 *TODO* &#128197;
+
+
+
+
+
+## Mueller-Muller PD
+
+Mueller-Muller **type A** timing function
+
+![image-20241019163636292](adapt/image-20241019163636292.png)
+
+
+
+Mueller-Muller **type B** timing function
+
+![image-20241019163813449](adapt/image-20241019163813449.png)
 
 
 

@@ -129,11 +129,9 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 
 
-### Accumulate-and-dump (AAD) decimator
+## $\Delta\Sigma$ Truncate
 
-accumulating the input for $N$ cycles and then latching the result and resetting the integrator
-
-![image-20241015222205883](delta-sigma/image-20241015222205883.png)
+![image-20241019220819728](delta-sigma/image-20241019220819728.png)
 
 
 

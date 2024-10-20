@@ -11,6 +11,166 @@ mathjax: true
 
 
 
+## Multirate Signal Processing
+
+alternative view of sampling, assuming DC value is $A$
+
+![sampling-c2d-d2d.drawio](multirate/sampling-c2d-d2d.drawio.svg)
+
+- $x_c(t)$ and $x_s(t)$
+
+  $\overline{x_c} = A$; $\overline{x_s}=\frac{A}{T}$: therefore $X_s(j0) = \frac{1}{T}X_c(j0)$
+
+
+
+- $x[n]$ and $x_d[n]$
+
+  $\overline{x} = A$; $\overline{x_d}=\frac{A}{2}$: therefore $X_d(e^{j0}) = \frac{1}{2}X(e^{j0})$
+
+
+
+***expander***
+
+![sampling-expander.drawio](multirate/sampling-expander.drawio.svg)
+
+
+
+- $x[n]$ and $x_e[n]$
+
+  $\overline{x} = A$; $\overline{x_e}=A$: therefore $X_e(e^{j0}) = X(e^{j0})$
+
+  > Fourier transform of the output of the expander is a frequency-scaled version of the Fourier transform of the input
+
+
+
+
+
+---
+
+
+
+### downsampling
+
+![image-20241004151215993](multirate/image-20241004151215993.png)
+
+![image-20241004151308422](multirate/image-20241004151308422.png)
+
+![image-20241004151434477](multirate/image-20241004151434477.png)
+
+- Eqs. (4.72)
+
+  the superposition of an infinite set of amplitude-scaled copies of $X_c(j\Omega)$, frequency scaled through $\omega = \Omega T_d$ and shifted by integer multiples of $2\pi$
+
+- Eq. (4.77)
+
+  the superposition of $M$ amplitude-scaled copies of the periodic Fourier transform $X (e^{j\omega})$, frequency scaled by $M$ and shifted by integer multiples of $2\pi$ 
+
+
+
+
+
+---
+
+downsampled by a factor of $M = 2$
+
+![image-20241004161805974](multirate/image-20241004161805974.png)
+
+
+
+---
+
+![image-20241005073349726](multirate/image-20241005073349726.png)
+
+![image-20241005073534041](multirate/image-20241005073534041.png)
+
+
+
+### upsampling
+
+![image-20241006074604512](multirate/image-20241006074604512.png)
+
+![image-20241006072426572](multirate/image-20241006072426572.png)
+
+
+
+> ***sampling rate expander***
+>
+> ![image-20241006074425704](multirate/image-20241006074425704.png)
+>
+> ![image-20241006075854246](multirate/image-20241006075854246.png)
+
+
+
+
+
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: Random Signals & Multirate Systems [[https://ece-research.unm.edu/bsanthan/ece541/rand.pdf](https://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
+
+
+
+### sampling identities
+
+![sampling-ID.drawio](multirate/sampling-ID.drawio.svg)
+
+
+
+---
+
+
+
+#### downsampling identity 
+
+![image-20241007085509889](multirate/image-20241007085509889.png)
+
+
+
+
+
+
+
+> ![image-20241007090624888](multirate/image-20241007090624888.png)
+
+
+
+---
+
+
+
+#### upsampling identity
+
+![image-20241007085527233](multirate/image-20241007085527233.png)
+
+
+
+
+
+> ![image-20241007090939701](multirate/image-20241007090939701.png)
+
+
+
+### Polyphase Decomposition
+
+![image-20241020122709610](multirate/image-20241020122709610.png)
+
+![image-20241020122726153](multirate/image-20241020122726153.png)
+
+where $e_k[n]=h[nM+k]$
+
+---
+
+***Polyphase Implementation of Decimation Filters & Interpolation Filters***
+
+|                       | Decimation system                                            | Interpolation system                                         |
+| --------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|                       | ![image-20241020123035001](multirate/image-20241020123035001.png) | ![image-20241020123043829](multirate/image-20241020123043829.png) |
+|                       | ![image-20241020123027067](multirate/image-20241020123027067.png) | ![image-20241020123101780](multirate/image-20241020123101780.png) |
+| **sampling identity** | ![image-20241020123345371](multirate/image-20241020123345371.png) | ![image-20241020123355113](multirate/image-20241020123355113.png) |
+
+
+
+
+
+
+
 ## Accumulate-and-dump (AAD) decimator
 
 accumulating the input for $N$ cycles and then latching the result and resetting the integrator
@@ -79,6 +239,8 @@ Note that **deserialization** is inherent to both **MV** and **boxcar** filterin
 
 ## reference
 
-R. E. Crochiere and L. R. Rabiner, "Multirate Digital Signal Processing", Prentice Hall, Englewood Cliffs, NJ, 1983.
+R. E. Crochiere and L. R. Rabiner, "Multirate Digital Signal Processing", Prentice Hall, 1983.
 
 F. M. Gardner, “Phaselock Techniques”, 3rd Edition, Wiley Interscience, Hoboken, NJ, 2005
+
+Alan V Oppenheim, Ronald W. Schafer. 2010. Discrete-Time Signal Processing, 3rd edition

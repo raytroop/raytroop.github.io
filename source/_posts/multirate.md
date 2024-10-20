@@ -165,23 +165,13 @@ where $e_k[n]=h[nM+k]$
 
 
 
-
-
-
-
-## Accumulate-and-dump (AAD) decimator
-
-accumulating the input for $N$ cycles and then latching the result and resetting the integrator
-
-![image-20241015222205883](multirate/image-20241015222205883.png)
-
-
-
 ## Decimation
+
+![image-20241020140430663](multirate/image-20241020140430663.png)
 
 DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation is typically performed by realizing either **majority voting (MV)** or **boxcar filtering**.
 
-Note that **deserialization** is inherent to both **MV** and **boxcar** filtering. 
+> Note that **deserialization** is inherent to both **MV** and **boxcar** filtering
 
 ![image-20241019225016868](multirate/image-20241019225016868.png)
 
@@ -213,6 +203,12 @@ Note that **deserialization** is inherent to both **MV** and **boxcar** filterin
 
 
 
+
+## Accumulate-and-dump (AAD) decimator
+
+accumulating the input for $N$ cycles and then latching the result and resetting the integrator
+
+![image-20241015222205883](multirate/image-20241015222205883.png)
 
 
 

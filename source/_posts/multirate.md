@@ -218,6 +218,8 @@ accumulating the input for $N$ cycles and then latching the result and resetting
 
 ![image-20241015222205883](multirate/image-20241015222205883.png)
 
+> It adds up $N$ succeeding input samples at rate $1/T$ and delivers their sum in a *single* sample at the output. Therefore, the process comprises a **filter (in the accumulation)** and a **down-sampler (in the dump)**
+
 
 
 

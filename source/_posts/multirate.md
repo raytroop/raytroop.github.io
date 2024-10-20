@@ -165,6 +165,14 @@ where $e_k[n]=h[nM+k]$
 
 
 
+### LPTV Implementation
+
+*TODO* &#128197;
+
+
+
+> Dr. Deepa Kundur, Multirate Digital Signal Processing: Part I [[pdf](https://www.comm.utoronto.ca/dkundur/course_info/discrete-time-systems/notes/Kundur_DTS_Chap11a.pdf), [https://www.comm.utoronto.ca/dkundur/course/discrete-time-systems/](https://www.comm.utoronto.ca/dkundur/course/discrete-time-systems/)]
+
 ## Decimation
 
 ![image-20241020140430663](multirate/image-20241020140430663.png)
@@ -233,8 +241,14 @@ accumulating the input for $N$ cycles and then latching the result and resetting
 
 ## reference
 
+Alan V Oppenheim, Ronald W. Schafer. 2010. Discrete-Time Signal Processing, 3rd edition
+
 R. E. Crochiere and L. R. Rabiner, "Multirate Digital Signal Processing", Prentice Hall, 1983.
 
-F. M. Gardner, “Phaselock Techniques”, 3rd Edition, Wiley Interscience, Hoboken, NJ, 2005
+John G. Proakis and Dimitris G. Manolakis, Digital Signal Processing: Principles, Algorithms, and Applications, 4th edition, 2007.
 
-Alan V Oppenheim, Ronald W. Schafer. 2010. Discrete-Time Signal Processing, 3rd edition
+D. Sundararajan. 2024. Digital Signal Processing: An Introduction 2nd Edition
+
+F. M. Gardner, "Phaselock Techniques", 3rd Edition, Wiley Interscience, Hoboken, NJ, 2005 [[https://picture.iczhiku.com/resource/eetop/WyIgwGtkDSWGSxnm.pdf](https://picture.iczhiku.com/resource/eetop/WyIgwGtkDSWGSxnm.pdf)]
+
+Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology

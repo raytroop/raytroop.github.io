@@ -1,5 +1,5 @@
 ---
-title: DPLL Based Clock and Data Recovery
+title: Digital Clock and Data Recovery
 date: 2024-09-23 21:04:41
 tags:
 categories:
@@ -13,7 +13,7 @@ mathjax: true
 
 ## Quantization noise
 
-![image-20241019200102827](dpll-cdr/image-20241019200102827.png)
+![image-20241019200102827](dcdr/image-20241019200102827.png)
 
 Here, $\alpha_T$ is data transition density
 

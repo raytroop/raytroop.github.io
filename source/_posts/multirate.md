@@ -126,8 +126,7 @@ downsampled by a factor of $M = 2$
 
 
 
-
-> ![image-20241007090624888](multirate/image-20241007090624888.png)
+![image-20241007090624888](multirate/image-20241007090624888.png)
 
 
 
@@ -142,8 +141,7 @@ downsampled by a factor of $M = 2$
 
 
 
-
-> ![image-20241007090939701](multirate/image-20241007090939701.png)
+![image-20241007090939701](multirate/image-20241007090939701.png)
 
 
 

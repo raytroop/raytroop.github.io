@@ -90,7 +90,7 @@ $$\begin{align}
 
 
 
-### Redundancy (radix < 2)
+## Redundancy in SAR ADCs
 
 *TODO* &#128197;
 

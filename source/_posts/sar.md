@@ -99,6 +99,7 @@ $$\begin{align}
 
 
 > Chang, Albert Hsu Ting. "Low-power high-performance SAR ADC with redundancy and digital background calibration." (2013). [[https://dspace.mit.edu/bitstream/handle/1721.1/82177/861702792-MIT.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/82177/861702792-MIT.pdf)]
+>
 > Kuttner, Franz. "A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS." *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1.
 >
 > Ogawa, Tomohiko, Haruo Kobayashi, Yosuke Takahashi, Nobukazu Takai, Masao Hotta, Hao San, Tatsuji Matsuura, Akira Abe, Katsuyoshi Yagi and Toshihiko Mori. "SAR ADC Algorithm with Redundancy and Digital Error Correction." IEICE Trans. Fundam. Electron. Commun. Comput. Sci. 93-A (2010): 415-423. [[paper](https://kobaweb.ei.st.gunma-u.ac.jp/news/pdf/p66_Ba1-1-2.pdf), [slides](https://pdfs.semanticscholar.org/9745/3f1a69d43414c123965280cd6fc45274f296.pdf)]

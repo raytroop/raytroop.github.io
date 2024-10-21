@@ -15,7 +15,7 @@ mathjax: true
 
 
 
-## pipeline ADC
+## Pipeline ADC
 
 ![image-20241006174924686](sar/image-20241006174924686.png)
 
@@ -50,6 +50,8 @@ It divides the process into several comparison stages, the number of which is pr
 >
 > Bibhu Datta Sahoo, Associate Professor, IIT, Kharagpur, [[https://youtu.be/HiIWEBAYRJY?si=pjQnIdi03i5N7805](https://youtu.be/HiIWEBAYRJY?si=pjQnIdi03i5N7805)]
 
+
+
 ## Synchronous SAR ADC
 
 
@@ -58,7 +60,7 @@ It also divides a full conversion into several comparison stages in a way simila
 
 However, the sequential operation of the SA algorithm has traditionally been a *limitation in achieving high-speed operation*
 
-![image-20240821215815566](sar/image-20240821215815566.png)
+![image-20241021214958488](sar/image-20241021214958488.png)
 
 
 
@@ -90,19 +92,49 @@ $$\begin{align}
 
 
 
-## Redundancy in SAR ADCs
+## Redundancy
 
-*TODO* &#128197;
+For overlapped search ranges, a less than ***radix-2 (sub-binary)*** search is needed. Essentially, a sub-binary search takes ***more than $N$ steps*** to convert an analog input into a ***$N$-bit digital output***
 
 
+
+![image-20241021215658138](sar/image-20241021215658138.png)
+
+**Binary search algorithm(4-bit 4-step):**
+
+$$\begin{align}
+D_\text{out} &= d_1 \cdot 2^3 + d_2 \cdot 2^2 + d_3 \cdot 2^1 + d_4 \cdot 2^0 \\
+&= \frac{2d_1-1}{2} \cdot 2^3 + \frac{2d_2-1}{2} \cdot 2^2 + \frac{2d_3-1}{2} \cdot 2^1 + \frac{2d_4-1}{2} \cdot 2^0 +\frac{1}{2}\sum_{k=0}^3 2^k \\
+&= D_1 \cdot 2^2 + D_2\cdot 2 + D_3 \cdot 1 + D_4 \cdot 0.5 + 2^3-0.5
+\end{align}$$
+
+where $d_k \in \{0, 1\}$ and $D_k=2d_k-1$, $D_k\in\{+1,-1\}$
+
+![image-20241021225142502](sar/image-20241021225142502.png)
+
+---
+
+![image-20241022002512514](sar/image-20241022002512514.png)
+
+![image-20241022002448778](sar/image-20241022002448778.png)
+
+###  max recoverable error
+
+![image-20241021213926581](sar/image-20241021213926581.png)
+
+![image-20241021213940203](sar/image-20241021213940203.png)
 
 
 
 > Chang, Albert Hsu Ting. "Low-power high-performance SAR ADC with redundancy and digital background calibration." (2013). [[https://dspace.mit.edu/bitstream/handle/1721.1/82177/861702792-MIT.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/82177/861702792-MIT.pdf)]
 >
-> Kuttner, Franz. "A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS." *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1.
+> Kuttner, Franz. "A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS." *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1. [[https://sci-hub.se/10.1109/ISSCC.2002.992993](https://sci-hub.se/10.1109/ISSCC.2002.992993)]
 >
-> Ogawa, Tomohiko, Haruo Kobayashi, Yosuke Takahashi, Nobukazu Takai, Masao Hotta, Hao San, Tatsuji Matsuura, Akira Abe, Katsuyoshi Yagi and Toshihiko Mori. "SAR ADC Algorithm with Redundancy and Digital Error Correction." IEICE Trans. Fundam. Electron. Commun. Comput. Sci. 93-A (2010): 415-423. [[paper](https://kobaweb.ei.st.gunma-u.ac.jp/news/pdf/p66_Ba1-1-2.pdf), [slides](https://pdfs.semanticscholar.org/9745/3f1a69d43414c123965280cd6fc45274f296.pdf)]
+> T. Ogawa, H. Kobayashi, et. al., "SAR ADC Algorithm with Redundancy and Digital Error Correction." IEICE Trans. Fundam. Electron. Commun. Comput. Sci. 93-A (2010): 415-423. [[paper](https://sci-hub.se/https://doi.org/10.1587/transfun.E93.A.415), [slides](https://pdfs.semanticscholar.org/9745/3f1a69d43414c123965280cd6fc45274f296.pdf)]
+>
+> B. Murmann, “On the use of redundancy in successive approximation A/D converters,” International Conference on Sampling Theory and Applications (SampTA), Bremen, Germany, July 2013.  [[https://www.eurasip.org/Proceedings/Ext/SampTA2013/papers/p556-murmann.pdf](https://www.eurasip.org/Proceedings/Ext/SampTA2013/papers/p556-murmann.pdf)]
+>
+> Krämer, M. et al. (2015) *High-resolution SAR A/D converters with loop-embedded input buffer*. dissertation. Available at: [[http://purl.stanford.edu/fc450zc8031](http://purl.stanford.edu/fc450zc8031)].
 
 
 
@@ -113,7 +145,7 @@ $$\begin{align}
 
 ## Asynchronous processing
 
-![image-20240821230528349](sar/image-20240821230528349.png)
+![image-20241021214922564](sar/image-20241021214922564.png)
 
 a global clock running at the sample rate is still used for an **uniform sampling**
 

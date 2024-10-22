@@ -92,9 +92,9 @@ downsampled by a factor of $M = 2$
 ![image-20241006072426572](multirate/image-20241006072426572.png)
 
 
-[image-20241006074425704](multirate/image-20241006074425704.png)
+![image-20241006074425704](multirate/image-20241006074425704.png)
 
-[image-20241006075854246](multirate/image-20241006075854246.png)
+![image-20241006075854246](multirate/image-20241006075854246.png)
 
 
 

@@ -75,36 +75,6 @@ mathjax: true
 
 
 
-
-
-
-
-## $\Delta\Sigma$ Fractional-N frequency synthesizer
-
-> *TODO* &#128197;
->
-> Tristate: $\alpha=1$
->
-> XOR: $\alpha=1$
->
-> $\frac{1}{T}$ in Divider
-
-![image-20240928004526381](clocking/image-20240928004526381.png)
-
-![image-20240928004308700](clocking/image-20240928004308700.png)
-
-> Michael H. Perrott, PLL Design Using the PLL Design Assistant Program. [[https://designers-guide.org/forum/Attachments/pll_manual.pdf](https://designers-guide.org/forum/Attachments/pll_manual.pdf)]
-
-
-
----
-
-$\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
-
-![image-20240928203714450](clocking/image-20240928203714450.png)
-
-
-
 ##  Fractional-N
 
 1. ***Dither Feedback Divider Ratio by a delta-sigma modulator***

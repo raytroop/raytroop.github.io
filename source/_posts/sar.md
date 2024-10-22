@@ -124,6 +124,8 @@ D_\text{out} = \sum_{i=1}^{M-1}b[i]\cdot 2s(i) +b[0]+S(M)-\sum_{i=1}^{M-1}s(i)-1
 $$
 which is valid in binary weighted search, obviously.
 
+> note $s[?]$ is not cap weight in non-binary search 
+
 
 ###  max recoverable error
 

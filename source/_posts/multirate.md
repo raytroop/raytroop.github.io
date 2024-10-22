@@ -85,6 +85,10 @@ downsampled by a factor of $M = 2$
 
 
 
+---
+
+
+
 ### upsampling
 
 ![image-20241006074604512](multirate/image-20241006074604512.png)
@@ -164,6 +168,9 @@ where $e_k[n]=h[nM+k]$
 
 *TODO* &#128197;
 
+The **interpolation filter** following an up-sampler generally is **time varying** and cannot be represented
+by a simple transfer function. The equivalent filter in a **zero-order hold** is an exception, perhaps unique, that can be represented with a time-invariant transfer function
+
 
 
 > Dr. Deepa Kundur, Multirate Digital Signal Processing: Part I [[pdf](https://www.comm.utoronto.ca/dkundur/course_info/discrete-time-systems/notes/Kundur_DTS_Chap11a.pdf), [https://www.comm.utoronto.ca/dkundur/course/discrete-time-systems/](https://www.comm.utoronto.ca/dkundur/course/discrete-time-systems/)]
@@ -203,34 +210,6 @@ DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation i
 > Compared to the boxcar filter, voting is able to reduce the loop delay and lower the output noise of the MMPD
 
 - Decimation via voting has a reduced gain, $K_V$, which can be determined through simulation
-
-
-
-
-## Accumulate-and-dump (AAD) decimator
-
-accumulating the input for $N$ cycles and then latching the result and resetting the integrator
-
-![image-20241015222205883](multirate/image-20241015222205883.png)
-
-> It adds up $N$ succeeding input samples at rate $1/T$ and delivers their sum in a *single* sample at the output. Therefore, the process comprises a **filter (in the accumulation)** and a **down-sampler (in the dump)**
-
-
-
-
-## Moving Average and CIC Filters
-
-> **cascade-integrator-comb (CIC)** decimator
-
-*TODO* &#128197;
-
-
-
-
-
-> An Intuitive Look at Moving Average and CIC Filters [[web](https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html), [code](https://github.com/tomverbeure/pdm/tree/master/modeling/cic_filters)]
->
-> A Beginner's Guide To Cascaded Integrator-Comb (CIC) Filters [[https://www.dsprelated.com/showarticle/1337.php](https://www.dsprelated.com/showarticle/1337.php)]
 
 
 

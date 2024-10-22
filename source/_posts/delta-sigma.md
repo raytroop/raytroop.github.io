@@ -75,26 +75,6 @@ v[n] &= nu - \sum_{k=1}^{n-1}v[k] + e[n] \\
 
 
 
-
-
-## Delta-Sigma Modulator
-
-*TODO* &#128197;
-
-
-
-## integrator
-
-*TODO* &#128197;
-
-
-
-### opamp bandwidth & slewing
-
-*TODO* &#128197;
-
-
-
 ## decimation filter
 
 The combination of the the *digital post-filter* and *downsampler* is called the **decimation filter** or **decimator**
@@ -129,12 +109,42 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 
 
-## $\Delta\Sigma$ Truncate
+## Truncation DAC
+
+![image-20241022204239594](delta-sigma/image-20241022204239594.png)
+
+---
+
+
 
 ![image-20241019220819728](delta-sigma/image-20241019220819728.png)
 
+An implementation of a **high-resolution integral path** using a *digital delta-sigma modulator*, *low-resolution Nyquist DAC*, and *a lowpass filter*
+
+- $\Delta \Sigma$ truncates $n$-bit accumulator output to $m$-bits with $m\le n$
+- A $m$-bit Nyquist DAC outputs current, which is fed into a low pass filter that suppresses $\Delta \Sigma$'s quantization noise
 
 
+
+
+
+---
+
+![image-20241022233749243](delta-sigma/image-20241022233749243.png)
+
+
+
+The remaining *11 bits are truncated to 3-levels* using a second-order delta-sigma modulator (DSM), thus, obviating the need for a high resolution DAC
+
+
+
+> Hanumolu, Pavan Kumar. "Design techniques for clocking high performance signaling systems" [[https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/1v53k219r](https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/1v53k219r)]
+
+
+
+## Mismatch-Shaping
+
+TODO &#128197;
 
 
 

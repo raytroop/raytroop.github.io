@@ -118,6 +118,13 @@ where $d_k \in \{0, 1\}$ and $D_k=2d_k-1$, $D_k\in\{+1,-1\}$
 
 ![image-20241022002448778](sar/image-20241022002448778.png)
 
+That is
+$$
+D_\text{out} = \sum_{i=1}^{M-1}b[i]\cdot 2s(i) +b[0]+S(M)-\sum_{i=1}^{M-1}s(i)-1
+$$
+which is valid in binary weighted search, obviously.
+
+
 ###  max recoverable error
 
 ![image-20241021213926581](sar/image-20241021213926581.png)

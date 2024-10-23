@@ -80,6 +80,33 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 
 
 
+
+## Double differential Pair
+
+$V_\text{ip}$ and $V_\text{im}$ are input, $V_\text{rp}$ and $V_\text{rm}$ are reference voltage
+$$
+V_o = A_v((V_\text{ip} - V_\text{im}) - (V_\text{rp} - V_\text{rm}))
+$$
+
+
+![2diffpair.drawio](afe/2diffpair.drawio.svg)
+
+In differential comparison mode, the feedback loop ensure $V_\text{ip} = V_\text{rp}$, $V_\text{im} = V_\text{rm}$ in the end 
+
+> assume input and reference common voltage are **same**
+
+Pros of *(b)*
+
+- larger input range i.e.,  $\gt \pm \sqrt{2}V_\text{ov}$ of *(a)*, it works even one differential is off due to lower voltage
+- larger $g_m$ (differential pair yields maximum equivalent $G_m$ in the equilibrium condition)
+
+Cons of *(b)*
+
+- sensitive to the difference of common voltage between $V_\text{ip}$,  $V_\text{im}$ and  $V_\text{rp}$,  $V_\text{rm}$
+
+
+
+
 ## reference
 
 Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers"

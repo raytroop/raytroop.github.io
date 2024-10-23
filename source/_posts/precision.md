@@ -15,6 +15,12 @@ mathjax: true
 
 
 
+###  low gain comparator
+
+![image-20241023224809158](precision/image-20241023224809158.png)
+
+
+
 ### Residual Noise of Auto-zeroing
 
 ![image-20240826212343905](precision/image-20240826212343905.png)
@@ -129,6 +135,10 @@ That is, the input signal **remains the same** after chopping or squarewave up/d
 
 
 > REF. [[https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge](https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge)]
+
+---
+
+
 
 
 ![chopping_OTA_limitedBW.drawio](precision/chopping_OTA_limitedBW.drawio.svg)

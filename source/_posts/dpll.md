@@ -13,7 +13,7 @@ mathjax: true
 
 ## Quantization noise
 
-![image-20241019200102827](dcdr/image-20241019200102827.png)
+![image-20241019200102827](dpll/image-20241019200102827.png)
 
 Here, $\alpha_T$ is data transition density
 
@@ -35,7 +35,7 @@ DAC quantization noise
 
 accumulating the input for $N$ cycles and then latching the result and resetting the integrator
 
-![image-20241015222205883](dcdr/image-20241015222205883.png)
+![image-20241015222205883](dpll/image-20241015222205883.png)
 
 > It adds up $N$ succeeding input samples at rate $1/T$ and delivers their sum in a *single* sample at the output. Therefore, the process comprises a **filter (in the accumulation)** and a **down-sampler (in the dump)**
 
@@ -72,9 +72,9 @@ accumulating the input for $N$ cycles and then latching the result and resetting
 >
 > $\frac{1}{T}$ in Divider
 
-![image-20240928004526381](dcdr/image-20240928004526381.png)
+![image-20240928004526381](dpll/image-20240928004526381.png)
 
-![image-20240928004308700](dcdr/image-20240928004308700.png)
+![image-20240928004308700](dpll/image-20240928004308700.png)
 
 > Michael H. Perrott, PLL Design Using the PLL Design Assistant Program. [[https://designers-guide.org/forum/Attachments/pll_manual.pdf](https://designers-guide.org/forum/Attachments/pll_manual.pdf)]
 
@@ -84,7 +84,7 @@ accumulating the input for $N$ cycles and then latching the result and resetting
 
 $\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
 
-![image-20240928203714450](dcdr/image-20240928203714450.png)
+![image-20240928203714450](dpll/image-20240928203714450.png)
 
 > H. Kang *et al*., "A 42.7Gb/s Optical Receiver With Digital Clock and Data Recovery in 28nm CMOS," in *IEEE Access*, vol. 12, pp. 109900-109911, 2024  [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10630516](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10630516)]
 

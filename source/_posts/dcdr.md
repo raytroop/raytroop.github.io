@@ -7,8 +7,8 @@ categories:
 mathjax: true
 ---
 
-*TODO* &#128197;
-
+- inherently nonlinear
+- quantization effects
 
 
 ## Quantization noise

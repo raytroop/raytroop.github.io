@@ -98,7 +98,7 @@ In differential comparison mode, the feedback loop ensure $V_\text{ip} = V_\text
 Pros of *(b)*
 
 - larger input range i.e.,  $\gt \pm \sqrt{2}V_\text{ov}$ of *(a)*, it works even one differential is off due to lower voltage
-- larger $g_m$ (differential pair yields maximum equivalent $G_m$ in the equilibrium condition)
+- larger $g_m$ (smaller input difference of pair)
 
 Cons of *(b)*
 

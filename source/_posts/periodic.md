@@ -41,7 +41,7 @@ where $k=0, 1, 2,...,K$
 
 The elements of the Jacobian are the derivatives
 $$
-\frac{\partial F_{\text{n,k}}}{\partial _{\text{m,l}}}
+\frac{\partial F_{\text{n,k}}}{\partial _{V_\text{m,l}}}
 $$
 where $n$ and $m$ are the port indices $(1,N)$, and $k$ and $l$ are the harmonic indices $(0,...,K)$
 

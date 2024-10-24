@@ -1,5 +1,5 @@
 ---
-title: DPLL and DPLL Based CDR
+title: DPLL and digital CDR
 date: 2024-09-23 21:04:41
 tags:
 categories:
@@ -9,6 +9,32 @@ mathjax: true
 
 - inherently nonlinear
 - quantization effects
+
+
+
+## Digital CDR Category
+
+![image-20241024221619909](dpll/image-20241024221619909.png)
+
+- DCO part is *analogous* so that it *cannot be perfectly modeled*
+- Digital-to-phase converter is well-defined phase output, thus, very good to model real situation
+
+
+
+> High-speed Serial Interface Lect. 16 – Clock and Data Recovery 3 [[http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf](http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf)]
+
+
+
+## DCO quantization error
+
+![image-20241024224439299](dpll/image-20241024224439299.png)
+
+
+
+![image-20241024224500048](dpll/image-20241024224500048.png)
+
+![image-20241024224603927](dpll/image-20241024224603927.png)
+
 
 
 ## Quantization noise
@@ -28,6 +54,40 @@ DAC quantization noise
 
 
 ##  Digital to Phase Converter (DPC)
+
+
+
+
+
+## IIR low pass filter
+
+![image-20241024232055792](dpll/image-20241024232055792.png)
+
+![image-20241024232111368](dpll/image-20241024232111368.png)
+
+
+
+> Deog-Kyoon Jeong Topics in IC(Wireline Transceiver Design) - 3.1. Introduction to AllDigital PLL[[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
+>
+> Deog-Kyoon Jeong Topics in IC(Wireline Transceiver Design) - 6.1 Introduction to Clock and Data Recovery [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
+
+
+
+## Low Jitter DCO Using $\Delta\Sigma$-Modulator
+
+![image-20241024232248575](dpll/image-20241024232248575.png)
+
+
+
+## Peak-to-peak jitter in ADPLL with BBPD
+
+![image-20241025001015194](dpll/image-20241025001015194.png)
+
+
+
+> Deog-Kyoon Jeong 3.1. Introduction to All Digital PLL [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
+
+
 
 
 
@@ -112,9 +172,24 @@ $\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
 
 
 
+## FAQ
+
+### PLL vs. CDR
+
+| PLL                                  | CDR                                                          |
+| ------------------------------------ | ------------------------------------------------------------ |
+| Clock edge periodic                  | Data edge random                                             |
+| Phase & Frequency detecting possible | Phase detecting possible , <br />Frequency detecting impossible |
+
+
+
+> PLL or FD(Frequency Detector) for frequency detecting in CDR
+
+
+
 ## reference
 
-J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006 
+J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006  [[https://www.researchgate.net/publication/2983206_A_Digital_Clock_and_Data_Recovery_Architecture_for_Multi-Gigabits_Binary_Links](https://www.researchgate.net/publication/2983206_A_Digital_Clock_and_Data_Recovery_Architecture_for_Multi-Gigabits_Binary_Links)]
 
 Sonntag, Jeff & Stonick, J.. (2005). A digital clock and data recovery architecture for multi-gigabit/s binary links. 2005. 537 - 544. 10.1109/CICC.2005.1568725. 
 
@@ -143,3 +218,9 @@ F. M. Gardner, "Phaselock Techniques", 3rd Edition, Wiley Interscience, Hoboken,
 Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology
 
 M.H. Perrott, Y. Huang, R.T. Baird, B.W. Garlepp, D. Pastorello, E.T. King, Q. Yu, D.B. Kasha, P. Steiner, L. Zhang, J. Hein, B. Del Signore, "A 2.5 Gb/s Multi-Rate 0.25μm CMOS Clock and Data Recovery Circuit Utilizing a Hybrid Analog/Digital Loop Filter and All-Digital Referenceless Frequency Acquisition," IEEE J. Solid-State Circuits, vol. 41, Dec. 2006, pp. 2930-2944 [[https://cppsim.com/Publications/JNL/perrott_jssc06.pdf](https://cppsim.com/Publications/JNL/perrott_jssc06.pdf)]
+
+M.H. Perrott. CICC 2009 "Tutorial on Digital Phase-Locked Loops" [[https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf](https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf)]
+
+-, Short Course On Phase-Locked Loops and Their Applications Day 4, PM Lecture "Examples of Leveraging Digital Techniques in PLLs" [[https://www.cppsim.com/PLL_Lectures/day4_pm.pdf](https://www.cppsim.com/PLL_Lectures/day4_pm.pdf)]
+
+-, Short Course On Phase-Locked Loops IEEE Circuit and System Society, San Diego, CA "Digital Frequency Synthesizers" [[https://www.cppsim.com/PLL_Lectures/digital_pll.pdf](https://www.cppsim.com/PLL_Lectures/digital_pll.pdf)]

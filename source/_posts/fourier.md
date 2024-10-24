@@ -561,7 +561,7 @@ where $\hat{\omega}_0 = \omega_0 T$
 
 
 
-
+![image-20241024220244992](fourier/image-20241024220244992.png)
 
 ##  zero padding
 

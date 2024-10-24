@@ -471,24 +471,6 @@ $$
 
 ![image-20231104135855739](ss-insight/image-20231104135855739.png)
 
-## Initial Value Theorem & Final Value Theorem
-
-Two valuable *Laplace transform* theorem
-
-- Initial Value Theorem, which states that it is always possible to determine the **initial value** of the time function $f(t)$ from its Laplace transform
-  $$
-  \lim _{s\to \infty}sF(s) = f(0^+)
-  $$
-
-- Final Value Theorem allows us to compute the **constant steady-state value** of a time function given its Laplace transform
-  $$
-  \lim _{s\to 0}sF(s) = f(\infty)
-  $$
-
-  > If $f(t)$ is step response, then $f(0^+) = H(\infty)$ and $f(\infty) = H(0)$, where $H(s)$ is transfer function
-
-
-
 
 
 ## Different Variants of the PSD Definition

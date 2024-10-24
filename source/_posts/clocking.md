@@ -238,14 +238,6 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-## PFD
-
-![image-20240824220600632](clocking/image-20240824220600632.png)
-
-> symmetric???
-
-
-
 ## Feedback Dividers
 
 ![image-20240803225130324](clocking/image-20240803225130324.png)
@@ -550,11 +542,6 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 > - With phase noise, the impulse functions spread, becoming fatter and shorter but retaining the *same total power*
 
 
-
-
-## AM-PM conversion
-
-*TODO* &#128197;
 
 
 

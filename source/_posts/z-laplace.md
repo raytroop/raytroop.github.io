@@ -165,6 +165,41 @@ The **time shifting** property is different in the unilateral case because the l
 
 
 
+## Initial Value Theorem & Final Value Theorem
+
+### Laplace Transform
+
+Two valuable *Laplace transform* theorem
+
+- Initial Value Theorem, which states that it is always possible to determine the **initial value** of the time function $f(t)$ from its Laplace transform
+  $$
+  \lim _{s\to \infty}sF(s) = f(0^+)
+  $$
+
+- Final Value Theorem allows us to compute the **constant steady-state value** of a time function given its Laplace transform
+  $$
+  \lim _{s\to 0}sF(s) = f(\infty)
+  $$
+
+  > If $f(t)$ is step response, then $f(0^+) = H(\infty)$ and $f(\infty) = H(0)$, where $H(s)$ is transfer function
+
+
+
+### Z-transform
+
+
+
+Initial Value Theorem
+$$
+f[0]=\lim_{z\to\infty}F(z)
+$$
+final value theorem
+$$
+\lim_{n\to\infty}f[n]=\lim_{z\to1}(z-1)F(z)
+$$
+
+> Coert Vonk. Initial/final value proofs [[https://coertvonk.com/physics/lfz-transforms/z/initial-final-value-proofs-31543](https://coertvonk.com/physics/lfz-transforms/z/initial-final-value-proofs-31543)]
+
 
 
 
@@ -442,6 +477,16 @@ title('Weight for Period jitter');
 $$
 x(t-\Delta T)\overset{FT}{\longrightarrow} X(s)e^{-\Delta T \cdot s}
 $$
+
+
+
+
+
+## Bilinear-z transformation
+
+![image-20241024230308374](z-laplace/image-20241024230308374.png)
+
+
 
 
 

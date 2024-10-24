@@ -157,7 +157,7 @@ where $g(t)=\frac{d}{dV}f(V)|_{V=V_L(t)}$
 > $$
 > where $r(t) = \frac{d}{dI}f_R(I)|_{I=I_L(t)}$
 
-A **nonlinear element** excited by *two tones* supports currents and voltages at mixing frequencies $m\omega_1+n\omega_w$, where $m$ and $n$ are integers. If one of those tones, $\omega_1$ has such a **low level** that it does not generate harmonics and the other is a large-signal sinusoid at $\omega_p$, then the mixing frequencies are $\omega=\pm\omega_1+n\omega_p$, which shown in below figure
+A **nonlinear element** excited by *two tones* supports currents and voltages at mixing frequencies $m\omega_1+n\omega_2$, where $m$ and $n$ are integers. If one of those tones, $\omega_1$ has such a **low level** that it does not generate harmonics and the other is a large-signal sinusoid at $\omega_p$, then the mixing frequencies are $\omega=\pm\omega_1+n\omega_p$, which shown in below figure
 
 ![image-20231108223600922](periodic/image-20231108223600922.png)
 

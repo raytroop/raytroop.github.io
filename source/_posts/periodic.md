@@ -61,6 +61,7 @@ One important property of Newton's method is that its speed and reliability of c
 
 # Shooting Newton
 
+*TODO* &#128197;
 
 
 # Nonlinearity & Linear Time-Varying  Nature

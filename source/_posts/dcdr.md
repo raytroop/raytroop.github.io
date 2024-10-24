@@ -1,5 +1,5 @@
 ---
-title: Digital Clock and Data Recovery
+title: DPLL and DPLL Based CDR
 date: 2024-09-23 21:04:41
 tags:
 categories:

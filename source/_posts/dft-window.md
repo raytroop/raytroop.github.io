@@ -428,6 +428,6 @@ enbw function in MATLAB URL:[https://www.mathworks.com/help/signal/ref/enbw.html
 
 Window function – figure of merits URL:[https://www.gaussianwaves.com/2020/09/window-function-figure-of-merits/](https://www.gaussianwaves.com/2020/09/window-function-figure-of-merits/)
 
-Memos on FFT With Windowing URL:[https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/](https://everynanocounts.com/2018/02/01/memos-on-fft-with-windowing/)
+Memos on FFT With Windowing URL:[https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing/](https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing/)
 
 Jens Ahrens, "Some Notes on Windows in Spectral Analysis," Tech. Report, Chalmers Univeristy of Technology, 2020. URL:[https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_windows/](https://appliedacousticschalmers.github.io/scaling-of-the-dft/notes_on_windows/)

@@ -1,5 +1,5 @@
 ---
-title: clocking
+title: Clocking
 date: 2024-05-11 09:36:14
 tags:
 categories:
@@ -311,7 +311,7 @@ and $\phi _e(\infty) = 0$
 
 
 
-## Clock Divider phase noise & jitter
+## Divider phase noise & jitter
 
 ![image-20241013212542173](clocking/image-20241013212542173.png)
 
@@ -349,52 +349,6 @@ Therefore, phase noise curves, related by 20log(N), with the same phase noise sh
 > [[How division impacts spurs, phase noise, and phase]](https://www.planetanalog.com/how-division-impacts-spurs-phase-noise-and-phase/)
 >
 > [[Phase Noise Theory: Ideal Frequency Multipliers and Dividers]](http://www.ko4bb.com/~bruce/IdealFreqMultDiv.html)
-
-
-
-## Bang-Bang Phase Detector
-
-> It's **ternary**, because *early*, *late* and *no transition*
-
-
-### Linearing BB-PD
-
-BB Gain is the slope of average BB output $\mu$, versus phase offset $\phi$, i.e. $\frac {\partial \mu}{\partial \phi}$,
-
-BB only produces output for a transition and this de-rates the gain. Transition density = *0.5* for random data
-
-$$
-K_{BB} = \frac{1}{2}\frac {\partial \mu}{\partial \phi}
-$$
-
-where $\mu = (1)\times \mathrm{P}(\text{late}|\phi) + (-1)\times \mathrm{P}(\text{early}|\phi)$
-
-![bb-PDF.drawio](clocking/bb-PDF.drawio.svg)
-
-
-> Both jitter and amplitude noise distribution are same, just scaled by slope 
-
-
-### Self-Noise Term
-
-One price we pay for *BB PD* versus *linear PD* is the self-noise term. For small phase errors BB output noise is the full
-magnitude of the sliced data.
-
-> BB-PD don't have any measure as to how early or how late and the way that tell loop is locked, is over a long time average, BB-PD have an equal number of earlies and lates 
-
-$$\begin{align}
-\sigma_{BB} &= [E(X^2) - E(X)^2] \cdot \mathrm{P}(\text{trans}) \\
-&= [1 - 0]\cdot 0.5 \\
-&= 0.5
-\end{align}$$
-
-
-
-> John T. Stonick, ISSCC 2011 TUTORIALS *T5: DPLL-Based Clock and Data Recovery*
->
-> Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data Recovery in Serial Data Transmission Systems.  [[pdf](https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf)]
->
-> \- Clock and Data Recovery for Serial Data Communications, focusing on bang-bang CDR design methodology, ISSCC Short Course, February 2002. [[slides](https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf)]
 
 
 

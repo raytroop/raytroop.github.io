@@ -207,5 +207,5 @@ H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for Two-Stage Cascode
 
 H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode compensation over Miller compensation in two-stage operational amplifiers," Proceeding of the 13th international symposium on Low power electronics and design (ISLPED '08), Bangalore, India, 2008, pp. 283-288, doi: 10.1145/1393921.1393995.
 
-Stabilizing a 2-Stage Amplifier URL:[https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/](https://everynanocounts.com/2016/11/10/stabilizing-a-2-stage-amplifier/)
+Stabilizing a 2-Stage Amplifier URL:[https://a2d2ic.wordpress.com/2016/11/10/stabilizing-a-2-stage-amplifier/](https://a2d2ic.wordpress.com/2016/11/10/stabilizing-a-2-stage-amplifier/)
 

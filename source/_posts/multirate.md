@@ -7,11 +7,7 @@ categories:
 mathjax: true
 ---
 
-![image-20241019142915175](multirate/image-20241019142915175.png)
 
-
-
-## Multirate Signal Processing
 
 alternative view of sampling, assuming DC value is $A$
 
@@ -49,7 +45,7 @@ alternative view of sampling, assuming DC value is $A$
 
 
 
-### downsampling
+## downsampling
 
 ![image-20241004151215993](multirate/image-20241004151215993.png)
 
@@ -89,7 +85,7 @@ downsampled by a factor of $M = 2$
 
 
 
-### upsampling
+## upsampling
 
 ![image-20241006074604512](multirate/image-20241006074604512.png)
 
@@ -106,7 +102,7 @@ downsampled by a factor of $M = 2$
 
 
 
-### sampling identities
+## sampling identities
 
 ![sampling-ID.drawio](multirate/sampling-ID.drawio.svg)
 
@@ -116,7 +112,7 @@ downsampled by a factor of $M = 2$
 
 
 
-#### downsampling identity 
+**downsampling identity** 
 
 ![image-20241007085509889](multirate/image-20241007085509889.png)
 
@@ -133,7 +129,7 @@ downsampled by a factor of $M = 2$
 
 
 
-#### upsampling identity
+**upsampling identity**
 
 ![image-20241007085527233](multirate/image-20241007085527233.png)
 
@@ -144,7 +140,7 @@ downsampled by a factor of $M = 2$
 
 
 
-### Polyphase Decomposition
+## Polyphase Decomposition
 
 ![image-20241020122709610](multirate/image-20241020122709610.png)
 
@@ -164,7 +160,7 @@ where $e_k[n]=h[nM+k]$
 
 
 
-### LPTV Implementation
+## LPTV Implementation
 
 *TODO* &#128197;
 
@@ -175,45 +171,11 @@ by a simple transfer function. The equivalent filter in a **zero-order hold** is
 
 > Dr. Deepa Kundur, Multirate Digital Signal Processing: Part I [[pdf](https://www.comm.utoronto.ca/dkundur/course_info/discrete-time-systems/notes/Kundur_DTS_Chap11a.pdf), [https://www.comm.utoronto.ca/dkundur/course/discrete-time-systems/](https://www.comm.utoronto.ca/dkundur/course/discrete-time-systems/)]
 
-## Decimation
-
-![image-20241020140430663](multirate/image-20241020140430663.png)
-
-DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation is typically performed by realizing either **majority voting (MV)** or **boxcar filtering**.
-
-> Note that **deserialization** is inherent to both **MV** and **boxcar** filtering
-
-![image-20241019225016868](multirate/image-20241019225016868.png)
-
-- Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
-- Decimation is basically, widen the data and slowing it down
-- Decimating by $L$ means frequency register only added once every $L$ UI, thus *integral path gain* reduced by $L$ in linear model
-- *proportional path gain* is unchanged
-
-![intg_path_decim.drawio](multirate/intg_path_decim.drawio.svg)
 
 
-### Decimation by Summing
+## ZOH interpolator
 
-> In DSP this is called *boxcar filter*
->
-> $\sum d_n$, where $d_n \in \{-1, 0, 1\}$
-
-- Decimation via boxcar filter produces a DC gain, $K_b$, corresponding to the *decimation factor*. 
-
-
-
-### Decimation by Voting
-
-> equivalent $\sum d_n \lt 0 \to -1$, $\sum d_n = 0 \to 0$ and $\sum d_n\gt 0 \to 1$
->
-> Compared to the boxcar filter, voting is able to reduce the loop delay and lower the output noise of the MMPD
-
-- Decimation via voting has a reduced gain, $K_V$, which can be determined through simulation
-
-
-
-## Zero-Order Hold (ZOH) interpolator
+> **Zero-Order Hold (ZOH)**
 
 ![zoh.drawio](multirate/zoh.drawio.svg)
 $$
@@ -233,6 +195,12 @@ F_2(z) &= Y(z^M)\cdot\frac{1-z^{-M}}{1-z^{-1}} \\
 \end{align}$$
 
 That is $F_1(z)=F_2(z)$, i.e. they are equivalent
+
+
+
+---
+
+![image-20241103180315919](multirate/image-20241103180315919.png)
 
 
 

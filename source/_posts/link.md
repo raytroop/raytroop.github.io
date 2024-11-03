@@ -7,6 +7,10 @@ categories:
 mathjax: true
 ---
 
+![image-20241019142915175](link/image-20241019142915175.png)
+
+---
+
 
 
 ## CDR Loop Latency
@@ -24,6 +28,70 @@ loop latency is represented as $e^{-sD}$ in linear model
 ![image-20241103000223470](link/image-20241103000223470.png)
 
 ![image-20241103000653906](link/image-20241103000653906.png)
+
+
+
+## Sensitivity to Loop Latency
+
+![image-20241103142137640](link/image-20241103142137640.png)
+
+---
+
+![image-20241103142656134](link/image-20241103142656134.png)
+
+![image-20241103142531277](link/image-20241103142531277.png)
+
+![image-20241103142938907](link/image-20241103142938907.png)
+
+
+
+## Enhancing Resolution with a $\Delta \Sigma$ Modulator
+
+> **Sub-Resolution Time Averaging**
+
+![image-20241103160332995](link/image-20241103160332995.png)
+
+$\Delta \Sigma$ modulator effectively **dithers** the **LSB** bit between *zero and one*, such that you can get the effective resolution of a much higher resolution DAC in the number of bits
+
+
+
+## Decimation
+
+![image-20241020140430663](link/image-20241020140430663.png)
+
+DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation is typically performed by realizing either **majority voting (MV)** or **boxcar filtering**.
+
+> Note that **deserialization** is inherent to both **MV** and **boxcar** filtering
+
+![image-20241019225016868](link/image-20241019225016868.png)
+
+- Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
+- Decimation is basically, widen the data and slowing it down
+- Decimating by $L$ means frequency register only added once every $L$ UI, thus *integral path gain* reduced by $L$ in linear model
+- *proportional path gain* is unchanged
+
+![intg_path_decim.drawio](link/intg_path_decim.drawio.svg)
+
+
+### Decimation by Summing
+
+> In DSP this is called *boxcar filter*
+>
+> $\sum d_n$, where $d_n \in \{-1, 0, 1\}$
+
+- Decimation via boxcar filter produces a DC gain, $K_b$, corresponding to the *decimation factor*. 
+
+
+
+### Decimation by Voting
+
+> equivalent $\sum d_n \lt 0 \to -1$, $\sum d_n = 0 \to 0$ and $\sum d_n\gt 0 \to 1$
+>
+> Compared to the boxcar filter, voting is able to reduce the loop delay and lower the output noise of the MMPD
+
+- Decimation via voting has a reduced gain, $K_V$, which can be determined through simulation
+
+
 
 
 
@@ -488,7 +556,7 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 
 
-## Bang-Bang Phase Detector
+## BB PD
 
 > It's **ternary**, because *early*, *late* and *no transition*
 
@@ -534,6 +602,209 @@ $$\begin{align}
 
 
 
+## Digital CDR Category
+
+![image-20241024221619909](link/image-20241024221619909.png)
+
+- DCO part is *analogous* so that it *cannot be perfectly modeled*
+- Digital-to-phase converter is well-defined phase output, thus, very good to model real situation
+
+
+
+## DCO
+
+![image-20241024224500048](link/image-20241024224500048.png)
+
+![image-20241024224603927](link/image-20241024224603927.png)
+
+
+
+### limit cycle
+
+![image-20241026230332655](link/image-20241026230332655.png)
+
+
+
+### Z-domain modeling
+
+![image-20241027001226490](link/image-20241027001226490.png)
+
+
+
+
+
+The difference equation is
+$$
+\phi[n] = \phi[n-1] + K_{DCO}V_C[n]\cdot T\cdot2\pi
+$$
+z-transform is
+$$
+\frac{\Phi(z)}{V_C(z)}=\frac{2\pi K_{DCO}T}{1-z^{-1}}
+$$
+
+
+where $K_{DCO}$ : $\Delta f$ (Hz/bit)
+
+
+
+## $\Delta \Sigma$-dithering in DCO
+
+
+
+
+
+
+
+
+
+## Quantization noise
+
+![image-20241019200102827](link/image-20241019200102827.png)
+
+Here, $\alpha_T$ is data transition density
+
+BBPD quantization noise
+
+DAC quantization noise
+
+
+> M. -J. Park and J. Kim, "Pseudo-Linear Analysis of Bang-Bang Controlled Timing Circuits," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 60, no. 6, pp. 1381-1394, June 2013  [[https://sci-hub.st/10.1109/TCSI.2012.2220502](https://sci-hub.st/10.1109/TCSI.2012.2220502)]
+
+## Time to Digital Converter (TDC)
+
+
+
+##  Digital to Phase Converter (DPC)
+
+
+
+
+
+## IIR low pass filter
+
+![image-20241024232055792](link/image-20241024232055792.png)
+
+simple approximation:
+$$
+z = 1 + sT
+$$
+bilinear-z transform
+$$
+z =\frac{}{}
+$$
+
+
+
+
+![image-20241024232111368](link/image-20241024232111368.png)
+
+
+
+
+## Peak-to-peak jitter in ADPLL with BBPD
+
+![image-20241025001015194](link/image-20241025001015194.png)
+
+
+
+
+
+
+
+## Accumulate-and-dump (AAD) decimator
+
+accumulating the input for $N$ cycles and then latching the result and resetting the integrator
+
+![image-20241015222205883](link/image-20241015222205883.png)
+
+> It adds up $N$ succeeding input samples at rate $1/T$ and delivers their sum in a *single* sample at the output. Therefore, the process comprises a **filter (in the accumulation)** and a **down-sampler (in the dump)**
+
+
+
+
+## Moving Average and CIC Filters
+
+> **cascade-integrator-comb (CIC)** decimator
+
+*TODO* &#128197;
+
+
+
+
+
+> An Intuitive Look at Moving Average and CIC Filters [[web](https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html), [code](https://github.com/tomverbeure/pdm/tree/master/modeling/cic_filters)]
+>
+> A Beginner's Guide To Cascaded Integrator-Comb (CIC) Filters [[https://www.dsprelated.com/showarticle/1337.php](https://www.dsprelated.com/showarticle/1337.php)]
+
+
+
+
+
+## Linearized Model
+
+
+
+> *TODO* &#128197;
+>
+> Tristate: $\alpha=1$
+>
+> XOR: $\alpha=1$
+>
+> $\frac{1}{T}$ in Divider
+
+![image-20240928004526381](link/image-20240928004526381.png)
+
+![image-20240928004308700](link/image-20240928004308700.png)
+
+> Michael H. Perrott, PLL Design Using the PLL Design Assistant Program. [[https://designers-guide.org/forum/Attachments/pll_manual.pdf](https://designers-guide.org/forum/Attachments/pll_manual.pdf)]
+
+
+
+---
+
+$\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
+
+![image-20240928203714450](link/image-20240928203714450.png)
+
+> H. Kang *et al*., "A 42.7Gb/s Optical Receiver With Digital Clock and Data Recovery in 28nm CMOS," in *IEEE Access*, vol. 12, pp. 109900-109911, 2024  [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10630516](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10630516)]
+
+
+
+
+
+## Majority Voter (MV)
+
+
+
+
+
+> Y. Xia *et al*., "A 10-GHz Low-Power Serial Digital Majority Voter Based on Moving Accumulative Sign Filter in a PS-/PI-Based CDR," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 68, no. 12 [[https://sci-hub.se/10.1109/TMTT.2020.3029188](https://sci-hub.se/10.1109/TMTT.2020.3029188)]
+>
+> J. Liang, A. Sheikholeslami, "On-Chip Jitter Measurement and Mitigation Techniques for Clock and Data Recovery Circuits" [[https://tspace.library.utoronto.ca/bitstream/1807/91138/3/Liang_Joshua_201706_PhD_thesis.pdf](https://tspace.library.utoronto.ca/bitstream/1807/91138/3/Liang_Joshua_201706_PhD_thesis.pdf)]
+>
+> J. Liang, A. Sheikholeslami. ISSCC2017. "A 28Gbps Digital CDR with Adaptive Loop Gain for Optimum Jitter Tolerance" [[slides](https://picture.iczhiku.com/resource/eetop/whiGpozAyuTUAnmb.pdf),[paper](https://www.eecg.utoronto.ca/~ali/papers/isscc2017-josh.pdf)]
+>
+> J. Liang, A. Sheikholeslami,, "Loop Gain Adaptation for Optimum Jitter Tolerance in Digital CDRs," in *IEEE Journal of Solid-State Circuits* [[https://sci-hub.se/10.1109/JSSC.2018.2839038](https://sci-hub.se/10.1109/JSSC.2018.2839038)]
+>
+> M. M. Khanghah, K. D. Sadeghipour, D. Kelly, C. Antony, P. Ossieur and P. D. Townsend, "A 7-Bit 7-GHz Multiphase Interpolator-Based DPC for CDR Applications," in *IEEE Transactions on Circuits and Systems I: Regular Papers* [[https://cora.ucc.ie/bitstreams/7ae5bfaa-8dd9-45a7-8276-99676b7b6078/download](https://cora.ucc.ie/bitstreams/7ae5bfaa-8dd9-45a7-8276-99676b7b6078/download)]
+
+
+
+
+
+## FAQ
+
+### PLL vs. CDR
+
+| PLL                                  | CDR                                                          |
+| ------------------------------------ | ------------------------------------------------------------ |
+| Clock edge periodic                  | Data edge random                                             |
+| Phase & Frequency detecting possible | Phase detecting possible , <br />Frequency detecting impossible |
+
+
+
+> PLL or FD(Frequency Detector) for frequency detecting in CDR
+
 
 
 ## reference
@@ -544,5 +815,44 @@ P. Hanumolu. ISSCC 2015 "Clock and Data Recovery Architectures and Circuits" [[s
 
 Amir Amirkhany. ISSCC 2019 "Basics of Clock and Data Recovery Circuits" 
 
-M. Perrott. 6.976 High Speed Communication Circuits and Systems (lecture 21). Spring 2003. Massachusetts Institute of Technology: MIT OpenCourseWare, [[https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/b396ec97fe1fc0eb7e39e88bf86c2979_lec21.pdf](https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/b396ec97fe1fc0eb7e39e88bf86c2979_lec21.pdf)]
+Fulvio Spagna. INTEL, CICC2018, "Clock and Data Recovery Systems" [[slides](https://picture.iczhiku.com/resource/eetop/WhiTfzdJZSZyDcBM.pdf)]
 
+M. Perrott. 6.976 High Speed Communication Circuits and Systems (lecture 21). Spring 2003. Massachusetts Institute of Technology: MIT OpenCourseWare, [[lec21.pdf](https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/b396ec97fe1fc0eb7e39e88bf86c2979_lec21.pdf)]
+
+Akihide Sai. ISSCC 2023, T5 "All Digital Plls From Fundamental Concepts To Future Trends" [[T5.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T5.pdf)]
+
+J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006  [[https://sci-hub.se/10.1109/JSSC.2006.875292](https://sci-hub.se/10.1109/JSSC.2006.875292)]
+
+J. Sonntag and J. Stonick, "A digital clock and data recovery architecture for multi-gigabit/s binary links," *Proceedings of the IEEE 2005 Custom Integrated Circuits Conference, 2005.*. [[https://sci-hub.se/10.1109/CICC.2005.1568725](https://sci-hub.se/10.1109/CICC.2005.1568725)]
+
+---
+
+Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits" *Electronics* 10, no. 16: 1888. https://doi.org/10.3390/electronics10161888
+
+Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. 10.21203/rs.3.rs-1817774/v1. [[https://assets-eu.researchsquare.com/files/rs-1817774/v1_covered.pdf?c=1664188179](https://assets-eu.researchsquare.com/files/rs-1817774/v1_covered.pdf?c=1664188179)]
+
+H. Kang et al., "A 42.7Gb/s Optical Receiver With Digital Clock and Data Recovery in 28nm CMOS," in IEEE Access, vol. 12, pp. 109900-109911, 2024 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10630516](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10630516)]
+
+Marinaci, Stefano. "Study of a Phase Locked Loop based Clock and Data Recovery Circuit for 2.5 Gbps data-rate" [[https://cds.cern.ch/record/2870334/files/CERN-THESIS-2023-147.pdf](https://cds.cern.ch/record/2870334/files/CERN-THESIS-2023-147.pdf)]
+
+P. Palestri *et al*., "Analytical Modeling of Jitter in Bang-Bang CDR Circuits Featuring Phase Interpolation," in *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 29, no. 7, pp. 1392-1401, July 2021 [[https://sci-hub.se/10.1109/TVLSI.2021.3068450](https://sci-hub.se/10.1109/TVLSI.2021.3068450)]
+
+F. M. Gardner, "Phaselock Techniques", 3rd Edition, Wiley Interscience, Hoboken, NJ, 2005 [[https://picture.iczhiku.com/resource/eetop/WyIgwGtkDSWGSxnm.pdf](https://picture.iczhiku.com/resource/eetop/WyIgwGtkDSWGSxnm.pdf)]
+
+Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology
+
+M.H. Perrott, Y. Huang, R.T. Baird, B.W. Garlepp, D. Pastorello, E.T. King, Q. Yu, D.B. Kasha, P. Steiner, L. Zhang, J. Hein, B. Del Signore, "A 2.5 Gb/s Multi-Rate 0.25μm CMOS Clock and Data Recovery Circuit Utilizing a Hybrid Analog/Digital Loop Filter and All-Digital Referenceless Frequency Acquisition," IEEE J. Solid-State Circuits, vol. 41, Dec. 2006, pp. 2930-2944 [[https://cppsim.com/Publications/JNL/perrott_jssc06.pdf](https://cppsim.com/Publications/JNL/perrott_jssc06.pdf)]
+
+M.H. Perrott. CICC 2009 "Tutorial on Digital Phase-Locked Loops" [[https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf](https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf)]
+
+-, Short Course On Phase-Locked Loops and Their Applications Day 4, PM Lecture "Examples of Leveraging Digital Techniques in PLLs" [[https://www.cppsim.com/PLL_Lectures/day4_pm.pdf](https://www.cppsim.com/PLL_Lectures/day4_pm.pdf)]
+
+-, Short Course On Phase-Locked Loops IEEE Circuit and System Society, San Diego, CA "Digital Frequency Synthesizers" [[https://www.cppsim.com/PLL_Lectures/digital_pll.pdf](https://www.cppsim.com/PLL_Lectures/digital_pll.pdf)]
+
+---
+
+Deog-Kyoon Jeong Topics in IC(Wireline Transceiver Design) - 3.1. Introduction to All Digital PLL [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
+
+Deog-Kyoon Jeong Topics in IC(Wireline Transceiver Design) - 6.1 Introduction to Clock and Data Recovery [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
+
+High-speed Serial Interface Lect. 16 – Clock and Data Recovery 3 [[http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf](http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf)]

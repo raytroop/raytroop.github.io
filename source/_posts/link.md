@@ -85,6 +85,7 @@ DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation i
 
 ---
 The loop gain of a proportional path is unchanged
+
 ![phug_loop.drawio](link/phug_loop.drawio.svg)
 
 In *(a)*, the loop gain is $\frac{\phi_o(z)}{\phi_e(z)}$, which is

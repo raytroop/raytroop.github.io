@@ -75,17 +75,8 @@ DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation i
 
 ### Decimation by Summing
 
-> In DSP this is called *boxcar filter*
->
-> $\sum d_n$, where $d_n \in \{-1, 0, 1\}$
 
-- Decimation via boxcar filter produces a DC gain, $K_b$, corresponding to the *decimation factor*. 
-
-
-
----
-
-The loop gain of a proportional path is unchanged
+> The loop gain of a **proportional path** is **unchanged**
 
 ![phug_loop.drawio](link/phug_loop.drawio.svg)
 
@@ -121,6 +112,33 @@ $$
 \frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx \frac{1}{1-z^{-1}}
 $$
 
+---
+
+> **integral path gain reduced by $L$**
+
+![frug_loop.drawio](link/frug_loop.drawio.svg)
+
+In *(a)*, $\phi_o(z)=\frac{1}{(1-z^{-1})^2}$, i.e.
+$$
+LG_a(z) = \frac{1}{(1-z^{-1})^2}
+$$
+
+In (b), after Accumulate-and-dump (AAD), $\phi_(\eta)$ is
+$$
+\phi_m(\eta) = \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}
+$$
+
+After frequency integrator and phase integrator
+$$\begin{align}
+\phi_o(\eta) &= \phi_m(\eta) \cdot \frac{1}{(1-\eta^{-1})^2} \\
+&= \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L} \cdot  \frac{1}{(1-\eta^{-1})^2}
+\end{align}$$
+Then $\phi_f(z)$ is shown as below
+$$\begin{align}
+\phi_f(z) &= \phi_o(z^L)\cdot \frac{1-z^{-L}}{1-z^{-1}} \\
+&= \frac{1-z^{-L}}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1}{(1-z^{-L})^2}\cdot \frac{1-z^{-L}}{1-z^{-1}} \\
+&= \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2}
+\end{align}$$
 
 
 ### Decimation by Voting

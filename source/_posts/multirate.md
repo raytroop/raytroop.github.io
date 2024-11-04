@@ -175,7 +175,13 @@ by a simple transfer function. The equivalent filter in a **zero-order hold** is
 
 ## ZOH interpolator
 
-> **Zero-Order Hold (ZOH)**
+The interpolation filter following an up-sampler generally is *time varying* and *cannot* be represented by a simple transfer function. The equivalent filter in a **Zero-Order Hold** is an exception, perhaps unique, that can be represented with a *time-invariant transfer function* 
+
+
+
+---
+
+
 
 ![zoh.drawio](multirate/zoh.drawio.svg)
 $$

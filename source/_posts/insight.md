@@ -1430,8 +1430,8 @@ Continuous-time transfer function.
 ![pi_Cap.drawio](insight/pi_Cap.drawio.svg)
 
 $$\begin{align}
-(V_a-V_{a0})C_0 + [(V_a - V_b) - (V_{a0} - V_{b0})]C_1 &= \Delta Q_a \\
-(V_b-V_{b0})C_0 + [(V_b - V_a) - (V_{b0} - V_{a0})]C_1 &= \Delta Q_b
+(V_a-V_{a0})C_0 + (\overline{V_a - V_b} - \overline{V_{a0} - V_{b0}})C_1 &= \Delta Q_a \\
+(V_b-V_{b0})C_0 + (\overline{V_b - V_a} - \overline{V_{b0} - V_{a0}})C_1 &= \Delta Q_b
 \end{align}$$
 
 therefore we obtain

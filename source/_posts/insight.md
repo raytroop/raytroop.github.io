@@ -1453,6 +1453,7 @@ $$
 
 ### Case 1
 > $\Delta Q_a = \Delta Q_b$, i.e., $I_a = I_b$, but $C_0 \neq C_1$
+
 $$\begin{align}
 V_a &= \frac{I}{C_0}t + V_{a0} \\
 V_b &= \frac{I}{C_0}t + V_{b0}
@@ -1466,6 +1467,7 @@ $$
 
 ### Case 2
 > $\Delta Q_a \neq \Delta Q_b$, i.e., $I_a \neq I_b$, but $C_0 = C_1$
+
 $$\begin{align}
 V_a &= \frac{2\Delta Q_a + \Delta Q_b}{3C} + V_{a0} \\
 V_b &= \frac{\Delta Q_a + 2\Delta Q_b}{3C} + V_{b0}

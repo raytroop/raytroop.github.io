@@ -1445,12 +1445,10 @@ V_a &= \frac{\Delta Q_a(C_0+C_1)+\Delta Q_b C_1}{C_0(C_0+2C_1)} + V_{a0} \\
 V_b &= \frac{\Delta Q_aC_1+\Delta Q_b (C_0+C_1)}{C_0(C_0+2C_1)} + V_{b0}
 \end{align}$$
 
-### Case 0
-> $\Delta Q_a = \Delta Q_b$, i.e., $I_a=I_b$ and $C_0 = C_1$
-$$\begin{align}
-V_a &= \frac{\Delta Q}{C} + V_{a0} = \frac{I}{C}t + V_{a0} \\
-V_b &= \frac{\Delta Q}{C} + V_{b0} = \frac{I}{C}t + V_{b0}
-\end{align}$$
+The difference between $V_a$  and $V_b$
+$$
+V_a - V_b = \frac{I_a-I_b}{C_0+2C_1}t + V_{a0} - V_{b0}
+$$
 
 
 ### Case 1
@@ -1460,6 +1458,10 @@ V_a &= \frac{I}{C_0}t + V_{a0} \\
 V_b &= \frac{I}{C_0}t + V_{b0}
 \end{align}$$
 
+and
+$$
+V_a - V_b = V_{a0} - V_{b0}
+$$
 
 
 ### Case 2
@@ -1471,7 +1473,7 @@ V_b &= \frac{\Delta Q_a + 2\Delta Q_b}{3C} + V_{b0}
 
 and
 $$
-V_a - V_b = \frac{\Delta Q_a - \Delta Q_b}{3C} + V_{a0} - V_{b0}
+V_a - V_b = \frac{I_a-I_b}{3C}t + V_{a0} - V_{b0}
 $$
 
 ### Case 3
@@ -1487,7 +1489,7 @@ V_b &= \frac{\Delta Q_b}{C_0} + V_{b0}
 \end{align}$$
 and
 $$
-V_a - V_b = \frac{\Delta Q_a - \Delta Q_b}{C} + V_{a0} - V_{b0}
+V_a - V_b = \frac{\Delta Q_a - \Delta Q_b}{C_0} + V_{a0} - V_{b0}
 $$
 
 compare $V_a - V_b$ in  **Case 2** and **Case 3**, $C_1$ save total capacitor area while obtaining same $V_a - V_b$ due to $\Delta Q_{a,b}$

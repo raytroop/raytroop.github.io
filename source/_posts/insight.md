@@ -1450,8 +1450,11 @@ $$
 V_a - V_b = \frac{I_a-I_b}{C_0+2C_1}t + V_{a0} - V_{b0}
 $$
 
+> $C_1$ save total capacitor area while obtaining same $V_a - V_b$ due to $\Delta I_{a,b}$ corresponding to $C_0$
 
-### Case 1
+---
+
+To evaluate the slope of $V_a$ and $V_b$
 > $\Delta Q_a = \Delta Q_b$, i.e., $I_a = I_b$, but $C_0 \neq C_1$
 
 $$\begin{align}
@@ -1459,42 +1462,7 @@ V_a &= \frac{I}{C_0}t + V_{a0} \\
 V_b &= \frac{I}{C_0}t + V_{b0}
 \end{align}$$
 
-and
-$$
-V_a - V_b = V_{a0} - V_{b0}
-$$
 
-
-### Case 2
-> $\Delta Q_a \neq \Delta Q_b$, i.e., $I_a \neq I_b$, but $C_0 = C_1$
-
-$$\begin{align}
-V_a &= \frac{2\Delta Q_a + \Delta Q_b}{3C} + V_{a0} \\
-V_b &= \frac{\Delta Q_a + 2\Delta Q_b}{3C} + V_{b0}
-\end{align}$$
-
-and
-$$
-V_a - V_b = \frac{I_a-I_b}{3C}t + V_{a0} - V_{b0}
-$$
-
-### Case 3
-
-> Why do we need $C_1$ ?
-
-
-we set $C_1 = 0$
-
-$$\begin{align}
-V_a &= \frac{\Delta Q_a}{C_0} + V_{a0} \\
-V_b &= \frac{\Delta Q_b}{C_0} + V_{b0}
-\end{align}$$
-and
-$$
-V_a - V_b = \frac{\Delta Q_a - \Delta Q_b}{C_0} + V_{a0} - V_{b0}
-$$
-
-compare $V_a - V_b$ in  **Case 2** and **Case 3**, $C_1$ save total capacitor area while obtaining same $V_a - V_b$ due to $\Delta Q_{a,b}$
 
 
 

@@ -140,6 +140,11 @@ $$\begin{align}
 &= \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2}
 \end{align}$$
 
+That is,
+$$
+LG_b(z) = \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2} = \frac{1}{L}\cdot LG_a(z)
+$$
+
 
 ### Decimation by Voting
 

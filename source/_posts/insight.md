@@ -1455,6 +1455,7 @@ $$
 ---
 
 To evaluate the slope of $V_a$ and $V_b$
+
 > $\Delta Q_a = \Delta Q_b$, i.e., $I_a = I_b$, but $C_0 \neq C_1$
 
 $$\begin{align}

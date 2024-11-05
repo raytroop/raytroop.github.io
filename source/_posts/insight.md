@@ -1445,12 +1445,22 @@ V_a &= \frac{\Delta Q_a(C_0+C_1)+\Delta Q_b C_1}{C_0(C_0+2C_1)} + V_{a0} \\
 V_b &= \frac{\Delta Q_aC_1+\Delta Q_b (C_0+C_1)}{C_0(C_0+2C_1)} + V_{b0}
 \end{align}$$
 
-### Case 1
+### Case 0
 > $\Delta Q_a = \Delta Q_b$, i.e., $I_a=I_b$ and $C_0 = C_1$
 $$\begin{align}
 V_a &= \frac{\Delta Q}{C} + V_{a0} = \frac{I}{C}t + V_{a0} \\
 V_b &= \frac{\Delta Q}{C} + V_{b0} = \frac{I}{C}t + V_{b0}
 \end{align}$$
+
+
+### Case 1
+> $\Delta Q_a = \Delta Q_b$, i.e., $I_a = I_b$, but $C_0 \neq C_1$
+$$\begin{align}
+V_a &= \frac{I}{C_0}t + V_{a0} \\
+V_b &= \frac{I}{C_0}t + V_{b0}
+\end{align}$$
+
+
 
 ### Case 2
 > $\Delta Q_a \neq \Delta Q_b$, i.e., $I_a \neq I_b$, but $C_0 = C_1$

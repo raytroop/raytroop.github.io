@@ -1462,7 +1462,9 @@ V_a &= \frac{I}{C_0}t + V_{a0} \\
 V_b &= \frac{I}{C_0}t + V_{b0}
 \end{align}$$
 
+- $C_0$ is used to decrease the variation of $V_a$, $V_b$
 
+- $C_1$ is used to decrease the variation of $V_a - V_b$
 
 
 

@@ -1445,27 +1445,18 @@ V_a &= \frac{\Delta Q_a(C_0+C_1)+\Delta Q_b C_1}{C_0(C_0+2C_1)} + V_{a0} \\
 V_b &= \frac{\Delta Q_aC_1+\Delta Q_b (C_0+C_1)}{C_0(C_0+2C_1)} + V_{b0}
 \end{align}$$
 
+rearrange the above equation
+$$\begin{align}
+V_a &= \frac{\Delta Q_a}{C_0} + \frac{Q_b-Q_a}{C_0(\frac{C_0}{C_1}+2)} +  V_{a0} \\
+V_b &= \frac{\Delta Q_b}{C_0} + \frac{Q_a-Q_b}{C_0(\frac{C_0}{C_1}+2)} + V_{b0}
+\end{align}$$
+
 The difference between $V_a$  and $V_b$
 $$
 V_a - V_b = \frac{I_a-I_b}{C_0+2C_1}t + V_{a0} - V_{b0}
 $$
 
 > $C_1$ save total capacitor area while obtaining same $V_a - V_b$ due to $\Delta I_{a,b}$ corresponding to $C_0$
-
----
-
-To evaluate the slope of $V_a$ and $V_b$
-
-> $\Delta Q_a = \Delta Q_b$, i.e., $I_a = I_b$, but $C_0 \neq C_1$
-
-$$\begin{align}
-V_a &= \frac{I}{C_0}t + V_{a0} \\
-V_b &= \frac{I}{C_0}t + V_{b0}
-\end{align}$$
-
-- $C_0$ is used to decrease the variation of $V_a$, $V_b$
-
-- $C_1$ is used to decrease the variation of $V_a - V_b$
 
 
 

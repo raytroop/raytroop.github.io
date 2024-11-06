@@ -178,7 +178,7 @@ Though, $V_0\phi _n \sin(\omega_0 t)$ is **not** WSS, because its autocorrelatio
 
 
 
-## The Periodogram
+## Periodogram
 
 The periodogram is in fact the Fourier transform of the aperiodic correlation of the windowed data sequence
 

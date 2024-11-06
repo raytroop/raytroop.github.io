@@ -167,6 +167,14 @@ X(e^{j\hat{\omega}}) &= X_s(j\frac{\hat{\omega}}{T}) \\
 
 
 
+---
+
+**Fourier series of impulse train**
+
+![image-20241106232432131](fourier/image-20241106232432131.png)
+
+
+
 ### Dirac delta function
 
 ![image-20241013174738030](fourier/image-20241013174738030.png)

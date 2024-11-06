@@ -7,6 +7,8 @@ categories:
 mathjax: true
 ---
 
+![image-20241106231114717](random/image-20241106231114717.png)
+
 
 
 ## Ergodicity & autocorrelation
@@ -105,76 +107,6 @@ $$
 $$
 X(-j\omega) = X^*(j\omega)
 $$
-
-
-
-## Modulation of WSS process
-
-
-
-![image-20241002231615792](random/image-20241002231615792.png)
-
-![image-20241002231639299](random/image-20241002231639299.png)
-
-
-
----
-
-Though, $V_0\phi _n \sin(\omega_0 t)$ is **not** WSS, because its autocorrelation function (ACF) depend time.  It is ***second-order cyclostationary*** with parameter $T_0$. We can then evaluate the *time-averaged ACF*
-
-![image-20241003000802844](random/image-20241003000802844.png)
-
-
-
-> Balu Santhanam, Probability Theory & Stochastic Process 2020: Modulation of Random Processes [[https://ece-research.unm.edu/bsanthan/ece541/mod.pdf](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)]
-
----
-
-![image-20241003001204803](random/image-20241003001204803.png)
-
-> Hayder Radha, ECE 458 Communications Systems Laboratory Spring 2008: Lecture 7 - EE 179: Introduction to Communications - Winter 2006–2007 Energy and Power Spectral Density and Autocorrelation [[https://www.egr.msu.edu/classes/ece458/radha/ss07Keyur/Lab-Handouts/PSDESDetc.pdf](https://www.egr.msu.edu/classes/ece458/radha/ss07Keyur/Lab-Handouts/PSDESDetc.pdf)]
-
-
-
----
-
-![image-20241003001859871](random/image-20241003001859871.png)
-
-> (a): second-order cyclostationary
->
-> (b): WSS
-
-
-
-
-
-## Random Signals Sampling
-
-> sampling autocorrelation sequence
-
-![image-20240428162643394](random/image-20240428162643394.png)
-
-![image-20240428162655969](random/image-20240428162655969.png)
-
-![image-20240907220050543](random/image-20240907220050543.png)
-
-
-
-> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
-
-
-
----
-
-> ![image-20240428161506523](random/image-20240428161506523.png)
->
-> [[https://dsp.stackexchange.com/a/17348/59253](https://dsp.stackexchange.com/a/17348/59253)]
-
-
-
-### Noise Aliasing
-
-*apply foregoing observation*
 
 
 

@@ -58,6 +58,77 @@ Therefore, sideband is asymmetric if $\omega_{pm} = \omega_{am}$
 
 
 
+
+
+## Modulation of WSS process
+
+![image-20241002231615792](comm/image-20241002231615792.png)
+
+![image-20241002231639299](comm/image-20241002231639299.png)
+
+
+
+---
+
+Though, $V_0\phi _n \sin(\omega_0 t)$ is **not** WSS, because its autocorrelation function (ACF) depend time.  It is ***second-order cyclostationary*** with parameter $T_0$. We can then evaluate the *time-averaged ACF*
+
+![image-20241003000802844](comm/image-20241003000802844.png)
+
+
+
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)
+
+---
+
+![image-20241003001204803](comm/image-20241003001204803.png)
+
+> Hayder Radha, ECE 458 Communications Systems Laboratory Spring 2008: Lecture 7 - EE 179: Introduction to Communications - Winter 2006–2007 [Energy and Power Spectral Density and Autocorrelation](https://www.egr.msu.edu/classes/ece458/radha/ss07Keyur/Lab-Handouts/PSDESDetc.pdf)
+
+
+
+---
+
+![image-20241003001859871](comm/image-20241003001859871.png)
+
+> (a): second-order cyclostationary
+>
+> (b): WSS
+
+
+
+
+
+## Sampling of WSS process
+
+### DT sequence $x[n]$
+![image-20240428162643394](comm/image-20240428162643394.png)
+
+![image-20240428162655969](comm/image-20240428162655969.png)
+
+![image-20240907220050543](comm/image-20240907220050543.png)
+
+> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
+
+---
+
+### impulse train $x_s(t)$
+
+![image-20241106222744962](comm/image-20241106222744962.png)
+
+![image-20241106222817998](comm/image-20241106222817998.png)
+
+
+
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Impulse sampling of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/impulse_sampling_of_random_signals.pdf)
+
+### Noise Aliasing
+
+*apply foregoing observation*
+
+
+
+
+
 ## reference
 
 R. E. Ziemer and W. H. Tranter, Principles of Communications, 7th ed., Wiley, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]

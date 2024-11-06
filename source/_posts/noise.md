@@ -36,15 +36,6 @@ $$
 The noise in $S_{RC}$ is a *stationary process* and so is *uncorrelated* over $f$ allowing the $N$ rectangles to be combined by simply summing their noise powers
 
 
-![image-20240428225949327](noise/sample_impulse_hold.drawio.svg)
-
-> $$
-> X(j\Omega)d\Omega = \frac{1}{T_c}X(e^{j\omega})d\omega  
-> $$
->
-> ref. *[[Frequency-Domain Representation of Sampling]](https://raytroop.github.io/2024/08/30/fourier/#frequency-domain-representation-of-sampling)* of EQ.(31) in the blog
-
-
 ![image-20240428225949327](noise/image-20240428225949327.png)
 
 ![image-20240425220400924](noise/image-20240425220400924.png)
@@ -90,6 +81,8 @@ where $m$ is the duty cycle
 > R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986
 >
 > Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
+>
+>  Christian-Charles Enz. High precision CMOS micropower amplifiers [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
 
 
 

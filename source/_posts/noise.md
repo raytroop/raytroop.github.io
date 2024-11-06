@@ -79,7 +79,7 @@ where $m$ is the duty cycle
 >
 > Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013
 >
-> \- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 / tutorials
+> \- Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 / tutorials [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T8.pdf), [transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T9.pdf)]
 >
 > Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and Modeling URL: [https://www.seas.upenn.edu/~ese568/fall2019/](https://www.seas.upenn.edu/~ese568/fall2019/)
 >

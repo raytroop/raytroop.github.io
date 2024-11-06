@@ -1447,8 +1447,8 @@ V_b &= \frac{\Delta Q_aC_1+\Delta Q_b (C_0+C_1)}{C_0(C_0+2C_1)} + V_{b0}
 
 rearrange the above equation
 $$\begin{align}
-V_a &= \frac{\Delta Q_a}{C_0} + \frac{Q_b-Q_a}{C_0(\frac{C_0}{C_1}+2)} +  V_{a0} \\
-V_b &= \frac{\Delta Q_b}{C_0} + \frac{Q_a-Q_b}{C_0(\frac{C_0}{C_1}+2)} + V_{b0}
+V_a &= \frac{\Delta Q_a}{C_0} - \frac{\Delta Q_a-\Delta Q_b}{C_0(\frac{C_0}{C_1}+2)} +  V_{a0} \\
+V_b &= \frac{\Delta Q_b}{C_0} - \frac{\Delta Q_b-\Delta Q_a}{C_0(\frac{C_0}{C_1}+2)} + V_{b0}
 \end{align}$$
 
 The difference between $V_a$  and $V_b$

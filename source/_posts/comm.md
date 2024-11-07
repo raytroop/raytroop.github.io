@@ -8,7 +8,8 @@ mathjax: true
 ---
 
 
-## AM & PM
+
+## asymmetric sideband
 
 ![image-20241012001704081](comm/image-20241012001704081.png)
 
@@ -50,13 +51,12 @@ x(t) &=  \cos\omega_0 t - \frac{P_m}{2}\cos(\omega_0 - \omega_{pm})t + \frac{P_m
 &\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space + \frac{A_mP_m}{4}\cos(\omega_0 + \omega_{pm}-\omega_{am})t - \frac{A_mP_m}{4}\cos(\omega_0 - \omega_{pm}+\omega_{am})t
 \end{align}$$
 
-
 Therefore, sideband is asymmetric if $\omega_{pm} = \omega_{am}$
 
 
+
+
 > Ken Kundert, Measuring AM, PM & FM Conversion with SpectreRF [[https://designers-guide.org/analysis/am-pm-conv.pdf](https://designers-guide.org/analysis/am-pm-conv.pdf)]
-
-
 
 
 
@@ -64,24 +64,17 @@ Therefore, sideband is asymmetric if $\omega_{pm} = \omega_{am}$
 
 > Balu Santhanam, Probability Theory & Stochastic Process 2020: [Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)
 
+
+
 ### modulated with a random cosine
+
+![image-20241107202647998](comm/image-20241107202647998.png)
 
 
 
 ### modulated with a deterministic cosine
 
-
-![image-20241002231615792](comm/image-20241002231615792.png)
-
-![image-20241002231639299](comm/image-20241002231639299.png)
-
-
-
----
-
-Though, $V_0\phi _n(t) \sin(\omega_0 t)$ is **not** WSS, because its autocorrelation function (ACF) depend time.  It is ***second-order cyclostationary*** with parameter $T_0$. We can then evaluate the *time-averaged ACF*
-
-![image-20241003000802844](comm/image-20241003000802844.png)
+![image-20241107202947949](comm/image-20241107202947949.png)
 
 
 ---
@@ -94,13 +87,9 @@ Though, $V_0\phi _n(t) \sin(\omega_0 t)$ is **not** WSS, because its autocorrela
 
 ---
 
-![image-20241003001859871](comm/image-20241003001859871.png)
+![image-20241002231615792](comm/image-20241002231615792.png)
 
-> (a): second-order cyclostationary
->
-> (b): WSS
-
-
+![image-20241002231639299](comm/image-20241002231639299.png)
 
 
 
@@ -111,6 +100,7 @@ Though, $V_0\phi _n(t) \sin(\omega_0 t)$ is **not** WSS, because its autocorrela
 
 
 ### DT sequence $x[n]$
+
 ![image-20240428162643394](comm/image-20240428162643394.png)
 
 ![image-20240428162655969](comm/image-20240428162655969.png)
@@ -147,3 +137,5 @@ Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd editio
 R. E. Ziemer and W. H. Tranter, Principles of Communications, 7th ed., Wiley, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]
 
 John G. Proakis and Masoud Salehi, Fundamentals of communication systems 2nd ed [[pdf](http://www.pce-fet.com/common/library/books/51/9492_[John_G._Proakis,_Masoud_Salehi]_Fundamentals_of_C(b-ok.org).pdf)]
+
+Rhee, W. and Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons

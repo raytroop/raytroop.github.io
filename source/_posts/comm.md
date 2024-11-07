@@ -70,7 +70,7 @@ Therefore, sideband is asymmetric if $\omega_{pm} = \omega_{am}$
 
 ---
 
-Though, $V_0\phi _n \sin(\omega_0 t)$ is **not** WSS, because its autocorrelation function (ACF) depend time.  It is ***second-order cyclostationary*** with parameter $T_0$. We can then evaluate the *time-averaged ACF*
+Though, $V_0\phi _n(t) \sin(\omega_0 t)$ is **not** WSS, because its autocorrelation function (ACF) depend time.  It is ***second-order cyclostationary*** with parameter $T_0$. We can then evaluate the *time-averaged ACF*
 
 ![image-20241003000802844](comm/image-20241003000802844.png)
 

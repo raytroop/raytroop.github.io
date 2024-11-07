@@ -121,6 +121,13 @@ Though, $V_0\phi _n \sin(\omega_0 t)$ is **not** WSS, because its autocorrelatio
 
 > Balu Santhanam, Probability Theory & Stochastic Process 2020: [Impulse sampling of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/impulse_sampling_of_random_signals.pdf)
 
+
+That is
+$$
+P_{x_s x_s} (f)= \frac{1}{T_s^2}P_{xx}(f)
+$$
+where $x[n]$ is sampled discrete-time sequence, $x_s(t)$ is sampled impulse train
+
 ### Noise Aliasing
 
 *apply foregoing observation*

@@ -62,6 +62,15 @@ Therefore, sideband is asymmetric if $\omega_{pm} = \omega_{am}$
 
 ## Modulation of WSS process
 
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)
+
+### modulated with a random cosine
+
+
+
+### modulated with a deterministic cosine
+
+
 ![image-20241002231615792](comm/image-20241002231615792.png)
 
 ![image-20241002231639299](comm/image-20241002231639299.png)
@@ -74,9 +83,6 @@ Though, $V_0\phi _n(t) \sin(\omega_0 t)$ is **not** WSS, because its autocorrela
 
 ![image-20241003000802844](comm/image-20241003000802844.png)
 
-
-
-> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)
 
 ---
 
@@ -100,6 +106,10 @@ Though, $V_0\phi _n(t) \sin(\omega_0 t)$ is **not** WSS, because its autocorrela
 
 ## Sampling of WSS process
 
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Impulse sampling of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/impulse_sampling_of_random_signals.pdf)
+
+
+
 ### DT sequence $x[n]$
 ![image-20240428162643394](comm/image-20240428162643394.png)
 
@@ -107,7 +117,7 @@ Though, $V_0\phi _n(t) \sin(\omega_0 t)$ is **not** WSS, because its autocorrela
 
 ![image-20240907220050543](comm/image-20240907220050543.png)
 
-> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
+
 
 ---
 
@@ -116,10 +126,6 @@ Though, $V_0\phi _n(t) \sin(\omega_0 t)$ is **not** WSS, because its autocorrela
 ![image-20241106222744962](comm/image-20241106222744962.png)
 
 ![image-20241106222817998](comm/image-20241106222817998.png)
-
-
-
-> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Impulse sampling of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/impulse_sampling_of_random_signals.pdf)
 
 
 That is
@@ -134,9 +140,9 @@ where $x[n]$ is sampled discrete-time sequence, $x_s(t)$ is sampled impulse trai
 
 
 
-
-
 ## reference
+
+Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition [[pdf](https://file.fouladi.ir/courses/dsp/books/%28Prentice-Hall%20Signal%20Processing%20Series%29%20Alan%20V.%20Oppenheim%2C%20Ronald%20W.%20Schafer-Discrete-Time%20Signal%20Processing-Prentice%20Hall%20%282009%29.pdf)]
 
 R. E. Ziemer and W. H. Tranter, Principles of Communications, 7th ed., Wiley, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]
 

@@ -1,5 +1,5 @@
 ---
-title: Comparator
+title: Clocked Comparators
 date: 2024-09-02 21:52:39
 tags:
 categories:
@@ -41,13 +41,6 @@ where $V_{i,sig}$ is constant signal is applied to input of comparator
 
 
 
-
-## offset
-
-![image-20240825204030645](comparator/image-20240825204030645.png)
-
-
-
 ##  Common-Mode (Vcmi) Variation Effects
 
 ![image-20240925225059596](comparator/image-20240925225059596.png)
@@ -56,10 +49,57 @@ where $V_{i,sig}$ is constant signal is applied to input of comparator
 
 
 
-## hysteresis
+
+
+## offset simulation
+
+*TODO* &#128197;
+
+
+
+> T. Caldwell. ECE 1371S Advanced Analog Circuits [[http://individual.utoronto.ca/trevorcaldwell/course/comparators.pdf](http://individual.utoronto.ca/trevorcaldwell/course/comparators.pdf)]
+>
+> Eric Chang. EECS240-s18 Discussion 9  
+>
+> Graupner, Achim & Sobe, Udo. (2007). Offset-Simulation of Comparators. [[https://designers-guide.org/analysis/comparator.pdf](https://designers-guide.org/analysis/comparator.pdf), [[https://designers-guide.org/analysis/comparator.pdf](https://designers-guide.org/analysis/comparator.pdf)]]
+>
+> 
+
+
+
+> Comment on "Offset-Simulation of Comparators"
+>
+> If the input referred offset follows a normal distribution than it is sufficient to apply a single offset voltage to calculate the offset voltage.
+> See details in Razavi, B., The StrongARM Latch [A Circuit for All Seasons], IEEE Solid-State Circuits Magazine, Volume:7, Issue: 2, Spring 2015 
+
+
+
+## Hysteresis  
 
 
 > P. Bruschi: Notes on Mixed Signal Design [http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Optional_notes/Chap_3_4_Comparators.pdf](http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Optional_notes/Chap_3_4_Comparators.pdf)
+
+*TODO* &#128197;
+
+
+
+## Kickback  
+
+kick-back increases CDAC settling time
+
+> *add pre-amp (more power)*
+
+*TODO* &#128197;
+
+
+
+> Lei, Ka Meng & Mak, Pui-In & Martins, R.P.. (2013). Systematic analysis and cancellation of kickback noise in a dynamic latched comparator. Analog Integrated Circuits and Signal Processing. 77. 277-284. 10.1007/s10470-013-0156-1. [[https://rto.um.edu.mo/wp-content/uploads/docs/ruimartins_cv/publications/journalpapers/57.pdf](https://rto.um.edu.mo/wp-content/uploads/docs/ruimartins_cv/publications/journalpapers/57.pdf)]
+>
+> Figueiredo, Pedro & Vital, João. (2006). Kickback noise reduction techniques for CMOS latched comparators. Circuits and Systems II: Express Briefs, IEEE Transactions on. 53. 541 - 545. 10.1109/TCSII.2006.875308. [[https://sci-hub.se/10.1109/TCSII.2006.875308](https://sci-hub.se/10.1109/TCSII.2006.875308)]
+>
+> P. M. Figueiredo and J. C. Vital, "Low kickback noise techniques for CMOS latched comparators," 2004 IEEE International Symposium on Circuits and Systems (ISCAS), Vancouver, BC, Canada, 2004, pp. I-537 [[https://sci-hub.se/10.1109/ISCAS.2004.1328250](https://sci-hub.se/10.1109/ISCAS.2004.1328250)]
+
+
 
 
 
@@ -92,3 +132,7 @@ Chen, Long & Sanyal, Arindam & Ma, Ji & Xiyuan, Tang & Sun, Nan. (2016). Compara
 V. Stojanovic, and V. G. Oklobdzija, "Comparative Analysis of Master–Slave Latches and Flip-Flops for High-Performance and Low-Power Systems," IEEE J. Solid-State Circuits, vol. 34, pp. 536–548, April 1999. [[https://www.ece.ucdavis.edu/~vojin/CLASSES/EEC280/Web-page/papers/Clocking/Vlada-Latches-JoSSC-Apr-1999.pdf](https://www.ece.ucdavis.edu/~vojin/CLASSES/EEC280/Web-page/papers/Clocking/Vlada-Latches-JoSSC-Apr-1999.pdf)]
 
 C. Mangelsdorf, "Metastability: Deeply misunderstood [Shop Talk: What You Didn’t Learn in School]," in IEEE Solid-State Circuits Magazine, vol. 16, no. 2, pp. 8-15, Spring 2024
+
+B. Razavi, **"The Design of a Comparator [The Analog Mind\],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020.](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)
+
+B. Razavi, **"The StrongARM Latch [A Circuit for All Seasons\],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015.](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)

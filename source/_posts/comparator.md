@@ -67,7 +67,7 @@ Thus, if $V_S$ is chosen so as to reduce the probability of zeros to 16%, then $
 
 ### Comparison of two methods
 
-
+It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the factor $\sqrt{2}$ is implicitly in formula in ADC Rak of Cadence
 
 
 
@@ -100,7 +100,6 @@ Thus, if $V_S$ is chosen so as to reduce the probability of zeros to 16%, then $
 > T. Caldwell. ECE 1371S Advanced Analog Circuits [[http://individual.utoronto.ca/trevorcaldwell/course/comparators.pdf](http://individual.utoronto.ca/trevorcaldwell/course/comparators.pdf)]
 >
 > Eric Chang. EECS240-s18 Discussion 9 
->
 
 
 

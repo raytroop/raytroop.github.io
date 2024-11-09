@@ -95,8 +95,6 @@ $$
 
 # Periodic small signal analyses
 
-![image-20231108231145369](periodic/image-20231108231145369.png)
-
 ## Analysis in Simulator
 
 1.  LPV analyses start by performing a periodic analysis to compute the **periodic operating point** with only the **large clock signal** applied (the LO, the clock, the carrier, etc.). 
@@ -109,13 +107,19 @@ $$
 >
 > PXF is best at predicting the input images for a particular output
 
+![image-20241109110936909](periodic/image-20241109110936909.png)
+
+![image-20241109110958641](periodic/image-20241109110958641.png)
+
+
+
 ## Conversion Matrix Analysis
 
 **Large-signal/small-signal analysis**, or **conversion matrix analysis**, is useful for a large class of problems wherein a **nonlinear device** is driven, or "pumped" by a **single large sinusoidal signal**; another signal, much smaller, is applied; and we seek only the **linear response to the small signal**.
 
 > The most common application of this technique is in the design of mixers and in nonlinear noise analysis
 
-1. First, analyzing the **nonlinear device** under large-signal excitatin only, where the harmonic-balance method can be applied
+1. First, analyzing the **nonlinear device** under large-signal excitation only, where the harmonic-balance method can be applied
 2. Then, the **nonlinear elements** in the device's equivalent circuit are then **linearized** to create **small-signal, linear, time-varying elements**
 3. Finally, a **small-signal analysis** is performed  
 
@@ -125,7 +129,7 @@ Below shows a **nonlinear resistive element**, which has the $I/V$ relationship 
 
 ![image-20220511203515431](periodic/image-20220511203515431.png)
 
-Assuming that $V$ consists of the sum of a large-signal component $V_0$ and a small-signal component $v$, with Taylor series
+Assuming that $V$ consists of the sum of a large-signal component $V_0$ and a small-signal component $v$, with *Taylor series*
 $$
 f(V_0+v) = f(V_0)+\frac{d}{dV}f(V)|_{V=V_0}\cdot v+\frac{1}{2}\frac{d^2}{dV^2}f(V)|_{V=V_0}\cdot v^2+...
 $$
@@ -138,12 +142,9 @@ $$
 i(v) = \frac{d}{dV}f(V)|_{V=V_0}\cdot v
 $$
 
-> **linearized about this time-varying operating point:**
->
-> **expand about the periodic equilibrium point with a Taylor series and discard all but the first-order term**
 
-$V_0$ need not be a DC quantity; it can be a **time-varying large-signal voltage** $V_L(t)$ and that $v=v(t)$, a function of time. Then
 
+$V_0$ need not be a *DC* quantity; it can be a **time-varying large-signal voltage** $V_L(t)$ and that $v=v(t)$, a function of time. Then
 $$
 i(t)=g(t)v(t)
 $$
@@ -175,9 +176,9 @@ which includes only half of the mixing frequencies:
 > For real signal, positive- and negative-frequency components are complex conjugate pairs
 
 
-### Conversion Mattrix as Bridge
+### Conversion Matrix as Bridge
 
-The **frequency-domain** currents and voltages in a **time-varying** circuit element are related by a **conversion matrix**
+The **frequency-domain** currents and voltages in a *time-varying circuit element* are related by a **conversion matrix**
 
 The *small-signal* voltage and current can be expressed in the frequency notation as
 $$
@@ -187,7 +188,7 @@ and
 $$
 i'(t) = \sum_{n=-\infty}^{\infty}I_ne^{j\omega_nt}
 $$
-where $v'(t)$ and $i'(t)$  are **not** Fourier series, which includes only half of the mixing frequencies
+where $v'(t)$ and $i'(t)$ are **not** Fourier series due to $\omega_n=\omega_0+n\omega_p$
 
 The conductance waveform $g(t)$ can be expressed by its **Fourier series**
 $$
@@ -298,95 +299,6 @@ The response of a relaxed LTV system at a time $t$ due to an impulse applied at 
 > $$
 
 
-
-## LTI and LTV
-
-![image-20231104145535168](periodic/image-20231104145535168.png)
-
-## Linear and Periodically Time Varying
-
-> Gain varies periodically with time
-
-![image-20231104150000310](periodic/image-20231104150000310.png)
-
-Owing to $H(j\omega, t) = H(j\omega, t+T_s)$, $H(j\omega,t)$ can be expanded in a **Fourier Series**
-$$
-H(j\omega,t) = \sum_k H_k(j\omega)e^{jk\omega _s t}
-$$
-![](periodic/image-20231104152637888.png)
-
-### Response of an LPTV System
-
-![image-20231104153142972](periodic/image-20231104153142972.png)
-
-![image-20231104153625881](periodic/image-20231104153625881.png)
-
-### Harmonic Transfer Functions
-
-![image-20231104155412790](periodic/image-20231104155412790.png)
-
-![image-20231104155447057](periodic/image-20231104155447057.png)
-
-> Harmonic Transfer Functions can be found using *PAC* analysis
-
-### Summary
-
-![image-20231104155732917](periodic/image-20231104155732917.png)
-
-![image-20231104155942718](periodic/image-20231104155942718.png)
-
-## Sampled LPTV
-
-![image-20231105175749755](periodic/image-20231105175749755.png)
-
-
-
-Move sampler before summation
-
-![image-20231105174949907](periodic/image-20231105174949907.png)
-
-> Owing to
-> $$
-> k\omega_sT_sn=kn\cdot2\pi
-> $$
-> We get
-> $$
-> e^{jk\omega_s T_s n} = e^{jkn\cdot 2\pi} = 1
-> $$
-
-
-
-![image-20231105172503777](periodic/image-20231105172503777.png)
-
-> LPTV system sampled at $T_s$ is equivalent to LTI system sampled at $T_s$
-
-![image-20231105172615426](periodic/image-20231105172615426.png)
-
-![image-20231105173646462](periodic/image-20231105173646462.png)
-
-> $$
-> H_{\text{eq}}(j\omega) = \sum_k H_k(j\omega)
-> $$
->
-> The result derived above makes intuitive sense due to the following. 
->
-> When an **LPTV** system is excited by a tone at $f$ , the output comprises of tones at frequencies $f + k f_s$, where $k$ is an integer. When sampled at $f_s$, frequency components higher than $f_s$ are aliased to $f$ . Thus, if one is only interested in the samples of the system's output, they could as well be produced by a properly chosen **LTI** filter acting on an input tone at a frequency $f$ .
->
-> Note that the equivalence holds only for samples, and not for the waveforms.  $y(nT_s) = \hat{y}(nT_s)$, but $y(t)$ need not equal $\hat{y}(t)$
-
-![image-20231105173847572](periodic/image-20231105173847572.png)
-
-
-
-## Finding the Equivalent Filter
-
-> Frequency Domain Approach $H_{eq}(j\omega)=\sum_k H_k(j\omega)$
->
-> Wasted effort in computing all $H_k$ first and then adding them up.
-
-We prefer to employ Time Domain Approaches
-
-![image-20231105221411598](periodic/image-20231105221411598.png)
 
 
 

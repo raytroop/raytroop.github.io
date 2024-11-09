@@ -45,7 +45,7 @@ alternative view of sampling, assuming DC value is $A$
 
 
 
-## downsampling
+## Subsampling or Downsampling
 
 ![image-20241004151215993](multirate/image-20241004151215993.png)
 
@@ -81,13 +81,9 @@ downsampled by a factor of $M = 2$
 
 
 
----
 
 
-
-## upsampling
-
-![image-20241006074604512](multirate/image-20241006074604512.png)
+## Upsampling or Zero Insertion
 
 ![image-20241006072426572](multirate/image-20241006072426572.png)
 
@@ -98,7 +94,9 @@ downsampled by a factor of $M = 2$
 
 
 
-> Balu Santhanam, Probability Theory & Stochastic Process 2020: Random Signals & Multirate Systems [[https://ece-research.unm.edu/bsanthan/ece541/rand.pdf](https://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
+---
+
+![image-20241006074604512](multirate/image-20241006074604512.png)
 
 
 
@@ -207,6 +205,16 @@ That is $F_1(z)=F_2(z)$, i.e. they are equivalent
 ---
 
 ![image-20241103180315919](multirate/image-20241103180315919.png)
+
+
+
+## Random Signals & Multirate Systems
+
+
+
+
+
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: Random Signals & Multirate Systems [[https://ece-research.unm.edu/bsanthan/ece541/rand.pdf](https://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
 
 
 

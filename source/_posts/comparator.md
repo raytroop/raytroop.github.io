@@ -19,11 +19,11 @@ mathjax: true
 
 ## Noise Simulation
 
-![image-20240825215015322](comparator/image-20240825215015322.png)
 
-![image-20240825215134067](comparator/image-20240825215134067.png)
 
-> SNR during sampling region and decison region increase
+
+
+> SNR during sampling region and decision region increase
 >
 > SNR during regeneration region is *constant*, where noise is critical 
 
@@ -59,18 +59,31 @@ where $V_{i,sig}$ is constant signal is applied to input of comparator
 
 > T. Caldwell. ECE 1371S Advanced Analog Circuits [[http://individual.utoronto.ca/trevorcaldwell/course/comparators.pdf](http://individual.utoronto.ca/trevorcaldwell/course/comparators.pdf)]
 >
-> Eric Chang. EECS240-s18 Discussion 9  
+> Eric Chang. EECS240-s18 Discussion 9 
 >
-> Graupner, Achim & Sobe, Udo. (2007). Offset-Simulation of Comparators. [[https://designers-guide.org/analysis/comparator.pdf](https://designers-guide.org/analysis/comparator.pdf), [[https://designers-guide.org/analysis/comparator.pdf](https://designers-guide.org/analysis/comparator.pdf)]]
+
+
+
+---
+
+![image-20241109092310123](comparator/image-20241109092310123.png)
+
+> Graupner, Achim & Sobe, Udo. (2007). Offset-Simulation of Comparators. [[https://designers-guide.org/analysis/comparator.pdf](https://designers-guide.org/analysis/comparator.pdf)]
 >
-> 
-
-
-
+> ```
 > Comment on "Offset-Simulation of Comparators"
->
+> 
 > If the input referred offset follows a normal distribution than it is sufficient to apply a single offset voltage to calculate the offset voltage.
-> See details in Razavi, B., The StrongARM Latch [A Circuit for All Seasons], IEEE Solid-State Circuits Magazine, Volume:7, Issue: 2, Spring 2015 
+> See details in Razavi, B., The StrongARM Latch [A Circuit for All Seasons], IEEE Solid-State Circuits Magazine, Volume:7, Issue: 2, Spring 2015
+> ```
+
+
+
+---
+
+> Omran, Hesham. (2019). Fast and accurate technique for comparator offset voltage simulation. Microelectronics Journal. 89. 10.1016/j.mejo.2019.05.004. 
+>
+> Matthews, Thomas W. and Perry L. Heedley. “A simulation method for accurately determining DC and dynamic offsets in comparators.” *48th Midwest Symposium on Circuits and Systems, 2005.* (2005): 1815-1818 Vol. 2. [[https://athena.ecs.csus.edu/~pheedley/MSDL/MSDL_DOTB_cmp_test_bench_MWSCAS05.pdf](https://athena.ecs.csus.edu/~pheedley/MSDL/MSDL_DOTB_cmp_test_bench_MWSCAS05.pdf)]
 
 
 

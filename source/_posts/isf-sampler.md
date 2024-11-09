@@ -134,9 +134,12 @@ $$
 
 ---
 
-
-
 The total area under the ISF is the sampling gain, which is equal to the time-varying gain measured at $t_0$ to a small signal DC input ($\omega=0$)
+
+Because we have $H(j\omega;t)=\int_{-\infty}^{\infty}h(t,\tau)\cdot e^{-j\omega(t-\tau)}d\tau$, i.e. Fourier transform
+$$
+H(0;t)=\int_{-\infty}^{\infty}h(t,\tau)d\tau = \int_{-\infty}^{\infty}\Gamma(\tau)d\tau
+$$
 
 ```
 time-varying gain at t0 H(0;t0): 19.486305

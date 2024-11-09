@@ -19,7 +19,7 @@ mathjax: true
 
 ## Noise Simulation
 
-
+### PSS + Pnoise Method
 
 
 
@@ -38,6 +38,46 @@ $$
 V_{i,n}^2 = \frac{V_{i,sig}^2}{V_{o,sig}^2}V_{o,n}^2 = \frac{V_{o,n}^2}{A_v^2}
 $$
 where $V_{i,sig}$ is constant signal is applied to input of comparator
+
+
+
+---
+
+![image-20241109163928889](comparator/image-20241109163928889.png)
+
+
+
+### Transient Noise Method
+
+> Noise **Fmax** sets the bandwidth of the random noise sources that are injected at each time point in the transient analysis
+
+---
+
+![image-20241109154528160](comparator/image-20241109154528160.png)
+
+![image-20241109154249513](comparator/image-20241109154249513.png)
+
+> We can identify the RMS noise value easily by looking at 15.9% or 84.1% of CDF ($1\sigma$), the input-referred noise in the RMS is 0.9mV 
+
+![image-20241109160311684](comparator/image-20241109160311684.png)
+
+Thus, if $V_S$ is chosen so as to reduce the probability of zeros to 16%, then $V_S = 1\sigma$, which is also the total **root-mean square (rms)** noise referred to the input.
+
+
+
+### Comparison of two methods
+
+
+
+
+
+> E. Gillen, G. Panchanan, B. Lawton and D. O'Hare, "Comparison of transient and PNOISE simulation techniques for the design of a dynamic comparator," 2022 33rd Irish Signals and Systems Conference (ISSC), Cork, Ireland, 2022, pp. 1-5
+>
+> Chenguang Yang, "Comparator Design for High Speed ADC" [[https://lup.lub.lu.se/luur/download?func=downloadFile&recordOId=9164380&fileOId=9164388](https://lup.lub.lu.se/luur/download?func=downloadFile&recordOId=9164380&fileOId=9164388)]
+>
+> J. Conrad, J. Kauffman, S. Wilhelmstatter, R. Asthana, V. Belagiannis and M. Ortmanns, "Confidence Estimation and Boosting for Dynamic-Comparator Transient-Noise Analysis," *2024 22nd IEEE Interregional NEWCAS Conference (NEWCAS)*, Sherbrooke, QC, Canada, 2024, pp. 1-5
+
+
 
 
 
@@ -116,6 +156,40 @@ kick-back increases CDAC settling time
 
 
 
+## Math Background
+
+### Relating $\Phi$ and erf
+
+ **Error Function** (**Erf**) of the standard Normal distribution
+$$
+\text{Erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2} \mathrm{d}t.
+$$
+ **Cumulative Distribution Function** (**CDF**) of the standard Normal distribution
+$$
+\Phi(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x e^{-z^2/2} \mathrm{d}z.
+$$
+
+
+![Figure](comparator/O6mNn.png)
+
+$$\begin{align}
+\Phi(x) &= \frac{\text{Erf}(x/\sqrt{2})+1}{2}. \\
+\Phi(x\sqrt{2}) &= \frac{\text{Erf}(x) + 1}{2}
+\end{align}$$
+
+Considering the mean and standard deviation
+$$
+\Phi(x,\mu,\sigma)=\frac{1}{2}\left( 1+\text{Erf} \left( \frac{x-\mu}{\sigma\sqrt{2}} \right)\right)
+$$
+
+---
+
+![image-20241109135425126](comparator/image-20241109135425126.png)
+
+> John D. Cook. Relating Î¦ and erf [[https://www.johndcook.com/erf_and_normal_cdf.pdf](https://www.johndcook.com/erf_and_normal_cdf.pdf)]
+
+
+
 ## reference
 
 Xu, H. (2018). Mixed-Signal Circuit Design Driven by Analysis: ADCs, Comparators, and PLLs. *UCLA*. ProQuest ID: Xu_ucla_0031D_17380. Merritt ID: ark:/13030/m5f52m8x. Retrieved from [[https://escholarship.org/uc/item/88h8b5t3](https://escholarship.org/uc/item/88h8b5t3)]
@@ -149,3 +223,11 @@ C. Mangelsdorf, "Metastability: Deeply misunderstood [Shop Talk: What You Didnâ€
 B. Razavi, **"The Design of a Comparator [The Analog Mind\],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020.](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)
 
 B. Razavi, **"The StrongARM Latch [A Circuit for All Seasons\],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015.](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)
+
+CHUNG-CHUN (CC) CHEN. Why Transient Noise (Trannoise) Analysis for A Strong-arm Latch / Comparator? [[https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_](https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_)]
+
+CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Comparator?  [[https://youtu.be/S5GnvFxuxUA?si=w38iLvzjr0azhu43](https://youtu.be/S5GnvFxuxUA?si=w38iLvzjr0azhu43)]
+
+Rabuske, Taimur & Fernandes, Jorge. (2014). Noise-aware simulation-based sizing and optimization of clocked comparators. Analog Integr. Circuits Signal Process.. 81. 723-728. 10.1007/s10470-014-0428-4. [[https://sci-hub.se/10.1007/s10470-014-0428-4](https://sci-hub.se/10.1007/s10470-014-0428-4)]
+
+Rabuske, Taimur & Fernandes, Jorge. (2016). Charge-Sharing SAR ADCs for Low-Voltage Low-Power Applications. 10.1007/978-3-319-39624-8. 

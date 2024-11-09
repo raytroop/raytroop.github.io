@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-An efficient method to measure the ISFs of periodic circuits via periodic AC (PAC) analysis, which is available from RF circuit simulators such as SpectreRF and ADS
+![image-20241109171759694](isf-sampler/image-20241109171759694.png)
 
 
 
@@ -126,18 +126,24 @@ The detailed procedure for characterizing the ISF of this sampler is outlined as
 
 - Third, based on the simulated PAC response, pick a time point $t_0$ at which the ISF is to be computed and derive the ISF
 
-One possible candidate for the ISF measurement point $t_0$ is the time at which the  output voltage is amplified to the largest value.  PAC response of the sampler to a small signal DC input, that is, the time-varying transfer function evaluated at $\omega=0$
+One possible candidate for the ISF measurement point $t_0$ is the time at which the  output voltage is amplified to the largest value. PAC response of the sampler to a *small signal DC input*, that is, the time-varying transfer function evaluated at $\omega=0$
 $$
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
+H(0;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
 $$
 ![image-20220614214446328](isf-sampler/image-20220614214446328.png)
 
-> The total area under the ISF is the sampling gain, which is equal to the time-varying gain measured at $t_0$
+---
+
+
+
+The total area under the ISF is the sampling gain, which is equal to the time-varying gain measured at $t_0$ to a small signal DC input ($\omega=0$)
 
 ```
 time-varying gain at t0 H(0;t0): 19.486305
 The total area under the ISF: 19.990230
 ```
+
+
 
 ### Align pss_td.pss with ISF
 

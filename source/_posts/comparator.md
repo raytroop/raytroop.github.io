@@ -13,7 +13,7 @@ mathjax: true
 
 *TODO* &#128197;
 
-
+The StrongARM latch completes switching actions and noise injections *even before the output begins to change*
 
 
 
@@ -136,21 +136,38 @@ Thus, if $V_S$ is chosen so as to reduce the probability of zeros to 16%, then $
 
 
 
-## Kickback  
+## Kickback Noise
 
 kick-back increases CDAC settling time
 
 > *add pre-amp (more power)*
+>
+> Kickback noise trades with the *dimensions of the input transistors* and hence with the *offset voltage*
 
 *TODO* &#128197;
 
+-  affects the comparator's own decision
+-  corrupts the input voltage while it is sensed by other circuits
 
 
-> Lei, Ka Meng & Mak, Pui-In & Martins, R.P.. (2013). Systematic analysis and cancellation of kickback noise in a dynamic latched comparator. Analog Integrated Circuits and Signal Processing. 77. 277-284. 10.1007/s10470-013-0156-1. [[https://rto.um.edu.mo/wp-content/uploads/docs/ruimartins_cv/publications/journalpapers/57.pdf](https://rto.um.edu.mo/wp-content/uploads/docs/ruimartins_cv/publications/journalpapers/57.pdf)]
->
+
+
+
 > Figueiredo, Pedro & Vital, João. (2006). Kickback noise reduction techniques for CMOS latched comparators. Circuits and Systems II: Express Briefs, IEEE Transactions on. 53. 541 - 545. 10.1109/TCSII.2006.875308. [[https://sci-hub.se/10.1109/TCSII.2006.875308](https://sci-hub.se/10.1109/TCSII.2006.875308)]
 >
 > P. M. Figueiredo and J. C. Vital, "Low kickback noise techniques for CMOS latched comparators," 2004 IEEE International Symposium on Circuits and Systems (ISCAS), Vancouver, BC, Canada, 2004, pp. I-537 [[https://sci-hub.se/10.1109/ISCAS.2004.1328250](https://sci-hub.se/10.1109/ISCAS.2004.1328250)]
+>
+> Lei, Ka Meng & Mak, Pui-In & Martins, R.P.. (2013). Systematic analysis and cancellation of kickback noise in a dynamic latched comparator. Analog Integrated Circuits and Signal Processing. 77. 277-284. 10.1007/s10470-013-0156-1. [[https://rto.um.edu.mo/wp-content/uploads/docs/ruimartins_cv/publications/journalpapers/57.pdf](https://rto.um.edu.mo/wp-content/uploads/docs/ruimartins_cv/publications/journalpapers/57.pdf)]
+
+
+
+## Metastability
+
+*TODO* &#128197;
+
+If the comparator can not generate a well-defined logical output in half of the clock period, we say the circuit is "**metastable**"
+
+
 
 
 
@@ -220,9 +237,9 @@ V. Stojanovic, and V. G. Oklobdzija, "Comparative Analysis of Master–Slave Lat
 
 C. Mangelsdorf, "Metastability: Deeply misunderstood [Shop Talk: What You Didn’t Learn in School]," in IEEE Solid-State Circuits Magazine, vol. 16, no. 2, pp. 8-15, Spring 2024
 
-B. Razavi, **"The Design of a Comparator [The Analog Mind\],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020.](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)
+B. Razavi, **"The Design of a Comparator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020. [https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)
 
-B. Razavi, **"The StrongARM Latch [A Circuit for All Seasons\],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015.](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)
+B. Razavi, **"The StrongARM Latch [A Circuit for All Seasons],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015. [https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)
 
 CHUNG-CHUN (CC) CHEN. Why Transient Noise (Trannoise) Analysis for A Strong-arm Latch / Comparator? [[https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_](https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_)]
 

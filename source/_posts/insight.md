@@ -105,51 +105,6 @@ $$
 
 
 
-
-## DIBL & GIDL
-
-### drain-induced barrier lowering (DIBL)
-
-***impact on the threshold voltage***
-
-![image-20240901231532412](insight/image-20240901231532412.png)
-
-***impact on output impedance***
-
-In short-channel devices, as $V_{DS}$ increases further, drain-induced barrier lowering becomes significant, reducing the threshold voltage and increasing the drain current
-
-![image-20240901232709711](insight/image-20240901232709711.png)
-
-### Gate induced drain leakage (GIDL)
-
-![image-20240902000820459](insight/image-20240902000820459.png)
-
-
-
-> Chauhan, Yogesh Singh, et al. *FinFET modeling for IC simulation and design: using the BSIM-CMG standard*. Academic Press, 2015.
-
----
-
-
-
-![image-20240901225754731](insight/image-20240901225754731.png)
-
-
-$$
-\frac{g_m}{I_D} = \frac{2}{V_{GS}-V_{TH}}
-$$
-Decrease of gm/Id results from decrease in VT.  
-
-GIDL (**Gate induced drain leakage**) as at weak inversion may results in a weak lateral electric field causing leakage current between drain and bulk, which degrade the efficiency of the transistor (gm/ID).
-
-
-
-> [[https://www.linkedin.com/posts/master-micro_mastermicro-mastermicro-adt-activity-7214549962833989632-ZoV_?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/master-micro_mastermicro-mastermicro-adt-activity-7214549962833989632-ZoV_?utm_source=share&utm_medium=member_desktop)]
-
-
-
-
-
 ## Early Voltage indicator
 
 $$
@@ -959,15 +914,73 @@ Conversely, a positive $\Delta V_\text{GS}$ produces a positive $\Delta I_D$, as
 
 ## Leakage in MOS
 
-![image-20230812104737404](insight/image-20230812104737404.png)
+![image-20241109195527005](insight/image-20241109195527005.png)
 
-### reference
+- Subthreshold leakage
+  - Drain-Induced Barrier Lowering (**DIBL**)
+- Reverse-bias Source/Drain junction leakages
+- Gate leakage
+- two other leakage mechanisms
+  - Gate Induced Drain Leakage (**GIDL**)
+  - Punchthrough
 
-W. M. Elgharbawy and M. A. Bayoumi, "Leakage sources and possible solutions in nanometer CMOS technologies," in IEEE Circuits and Systems Magazine, vol. 5, no. 4, pp. 6-17, Fourth Quarter 2005, doi: 10.1109/MCAS.2005.1550165.
 
-X. Qi et al., "Efficient subthreshold leakage current optimization - Leakage current optimization and layout migration for 90- and 65- nm ASIC libraries," in IEEE Circuits and Devices Magazine, vol. 22, no. 5, pp. 39-47, Sept.-Oct. 2006, doi: 10.1109/MCD.2006.272999.
 
-P. Monsurró, S. Pennisi, G. Scotti and A. Trifiletti, "Exploiting the Body of MOS Devices for High Performance Analog Design," in IEEE Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter 2011, doi: 10.1109/MCAS.2011.942751.
+> W. M. Elgharbawy and M. A. Bayoumi, "Leakage sources and possible solutions in nanometer CMOS technologies," in IEEE Circuits and Systems Magazine, vol. 5, no. 4, pp. 6-17, Fourth Quarter 2005, doi: 10.1109/MCAS.2005.1550165.
+>
+> X. Qi et al., "Efficient subthreshold leakage current optimization - Leakage current optimization and layout migration for 90- and 65- nm ASIC libraries," in IEEE Circuits and Devices Magazine, vol. 22, no. 5, pp. 39-47, Sept.-Oct. 2006, doi: 10.1109/MCD.2006.272999.
+>
+> P. Monsurró, S. Pennisi, G. Scotti and A. Trifiletti, "Exploiting the Body of MOS Devices for High Performance Analog Design," in IEEE Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter 2011, doi: 10.1109/MCAS.2011.942751.
+
+
+### drain-induced barrier lowering (DIBL)
+
+As a result of DIBL, **threshold voltage is reduced** with shorter channel lengths and, consequently, the subthreshold leakage current is increased
+
+![image-20240901231532412](insight/image-20240901231532412.png)
+
+***impact on output impedance***
+
+In short-channel devices, as $V_{DS}$ increases further, drain-induced barrier lowering becomes significant, reducing the threshold voltage and increasing the drain current
+
+![image-20240901232709711](insight/image-20240901232709711.png)
+
+
+
+### Gate induced drain leakage (GIDL)
+
+![Figure 4.3](insight/3-s2.0-B9780323856775000081-f04-03-9780323856775.jpg)
+
+ The large current flows from the *drain to bulk* and  this drain leakage current is named **gate-induced drain leakage (GIDL)** since it is due to *a gate-induced high electric field present in the gate-to-drain overlap region*
+
+> gate-induced drain leakage (GIDL) increases exponentially due to the reduced gate oxide thickness
+
+
+
+![image-20240902000820459](insight/image-20240902000820459.png)
+
+
+
+> Chauhan, Yogesh Singh, et al. *FinFET modeling for IC simulation and design: using the BSIM-CMG standard*. Academic Press, 2015.
+
+---
+
+
+
+![image-20240901225754731](insight/image-20240901225754731.png)
+
+
+$$
+\frac{g_m}{I_D} = \frac{2}{V_{GS}-V_{TH}}
+$$
+Decrease of gm/Id results from decrease in VT.  
+
+GIDL (**Gate induced drain leakage**) as at weak inversion may results in a weak lateral electric field causing leakage current between drain and bulk, which degrade the efficiency of the transistor (gm/ID).
+
+
+
+> [[https://www.linkedin.com/posts/master-micro_mastermicro-mastermicro-adt-activity-7214549962833989632-ZoV_?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/master-micro_mastermicro-mastermicro-adt-activity-7214549962833989632-ZoV_?utm_source=share&utm_medium=member_desktop)]
+
 
 
 

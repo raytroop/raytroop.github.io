@@ -511,6 +511,8 @@ high level envelope:
 
 ## Monitored Analog Critical Parameters
 
+
+
 ![monitor_parameters.drawio](insight/monitor_parameters.drawio.svg)
 
 Parameter Definition:
@@ -526,9 +528,17 @@ V_{\text{t,lin}} &= V_G \mid _{I_D=I_{\text{thx}}\cdot \frac{W}{L}@\{V_D=0.05V\}
 
 ---
 
-gm-Maximum Method
+**Constant Current Threshold Voltage**
 
-*TODO* &#128197;
+![Extraction of constant current threshold voltage](insight/ins_ex_vti.png)
+
+**gm-Maximum Method**
+
+![Extraction of threshold voltage](insight/ins_ex_vtgm.png)
+
+> [[Inspect 4. Extracting Standard Parameters](https://kolegite.com/EE_library/books_and_lectures/%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BD%D0%B0%20%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%B0%D0%BD%D0%B5%D1%82%D0%BE%20%D0%B2%20%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0%D1%82%D0%B0/Sentaurus_Training/insp/insp_4.html)]
+
+
 
 ## STB and PSTB in Spectre/RF
 
@@ -926,11 +936,19 @@ Conversely, a positive $\Delta V_\text{GS}$ produces a positive $\Delta I_D$, as
 
 
 
+![image-20241110001311117](insight/image-20241110001311117.png)
+
 > W. M. Elgharbawy and M. A. Bayoumi, "Leakage sources and possible solutions in nanometer CMOS technologies," in IEEE Circuits and Systems Magazine, vol. 5, no. 4, pp. 6-17, Fourth Quarter 2005, doi: 10.1109/MCAS.2005.1550165.
 >
 > X. Qi et al., "Efficient subthreshold leakage current optimization - Leakage current optimization and layout migration for 90- and 65- nm ASIC libraries," in IEEE Circuits and Devices Magazine, vol. 22, no. 5, pp. 39-47, Sept.-Oct. 2006, doi: 10.1109/MCD.2006.272999.
 >
 > P. Monsurró, S. Pennisi, G. Scotti and A. Trifiletti, "Exploiting the Body of MOS Devices for High Performance Analog Design," in IEEE Circuits and Systems Magazine, vol. 11, no. 4, pp. 8-23, Fourthquarter 2011, doi: 10.1109/MCAS.2011.942751.
+>
+> Andrea Baschirotto, ISSCC2015 "ADC Design in Scaled Technologies"
+>
+> Joachim Assenmacher Infineon Technologies, "BSIM4 Modeling and Parameter Extraction" [[https://ewh.ieee.org/r5/denver/sscs/References/2003_03_Assenmacher.pdf](https://ewh.ieee.org/r5/denver/sscs/References/2003_03_Assenmacher.pdf)]
+
+
 
 
 ### drain-induced barrier lowering (DIBL)
@@ -948,6 +966,8 @@ In short-channel devices, as $V_{DS}$ increases further, drain-induced barrier l
 
 
 ### Gate induced drain leakage (GIDL)
+
+![image-20241110001118250](insight/image-20241110001118250.png)
 
 ![Figure 4.3](insight/3-s2.0-B9780323856775000081-f04-03-9780323856775.jpg)
 

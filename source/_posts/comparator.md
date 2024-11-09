@@ -143,18 +143,12 @@ It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the fact
 
 ## Kickback Noise
 
-kick-back increases CDAC settling time
-
-> *add pre-amp (more power)*
->
 > Kickback noise trades with the *dimensions of the input transistors* and hence with the *offset voltage*
-
-*TODO* &#128197;
 
 -  affects the comparator's own decision
 -  corrupts the input voltage while it is sensed by other circuits
 
-
+![image-20241110004944542](comparator/image-20241110004944542.png)
 
 
 

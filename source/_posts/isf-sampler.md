@@ -71,7 +71,7 @@ $$\begin{align}
 &= H(j\omega;t)
 \end{align}$$
 
-## PAC Method
+## PSS + PAC Method
 
 Since $H(j\omega;t)$  is periodic in $T$, The time-varying transfer function $H(j\omega;t)$ can be expressed in a Fourier series:
 $$

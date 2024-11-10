@@ -17,6 +17,14 @@ The StrongARM latch completes switching actions and noise injections *even befor
 
 
 
+---
+
+**slower** rise time improve input-referred noise
+
+![image-20241109222805267](comparator/image-20241109222805267.png)
+
+
+
 ## Noise Simulation
 
 ### PSS + Pnoise Method
@@ -87,12 +95,6 @@ It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the fact
 
 ![image-20240925225823184](comparator/image-20240925225823184.png)
 
----
-
-**slower** rise time improve input-referred noise
-
-![image-20241109222805267](comparator/image-20241109222805267.png)
-
 
 
 
@@ -157,6 +159,8 @@ It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the fact
 > P. M. Figueiredo and J. C. Vital, "Low kickback noise techniques for CMOS latched comparators," 2004 IEEE International Symposium on Circuits and Systems (ISCAS), Vancouver, BC, Canada, 2004, pp. I-537 [[https://sci-hub.se/10.1109/ISCAS.2004.1328250](https://sci-hub.se/10.1109/ISCAS.2004.1328250)]
 >
 > Lei, Ka Meng & Mak, Pui-In & Martins, R.P.. (2013). Systematic analysis and cancellation of kickback noise in a dynamic latched comparator. Analog Integrated Circuits and Signal Processing. 77. 277-284. 10.1007/s10470-013-0156-1. [[https://rto.um.edu.mo/wp-content/uploads/docs/ruimartins_cv/publications/journalpapers/57.pdf](https://rto.um.edu.mo/wp-content/uploads/docs/ruimartins_cv/publications/journalpapers/57.pdf)]
+>
+> O. M. Ívarsson, "Comparator Kickback Reduction Techniques for High-Speed ADCs," Dissertation, 2024.  [[https://liu.diva-portal.org/smash/get/diva2:1872476/FULLTEXT01.pdf](https://liu.diva-portal.org/smash/get/diva2:1872476/FULLTEXT01.pdf)]
 
 
 
@@ -202,7 +206,7 @@ $$
 
 ![image-20241109135425126](comparator/image-20241109135425126.png)
 
-> John D. Cook. Relating Φ and erf [[https://www.johndcook.com/erf_and_normal_cdf.pdf](https://www.johndcook.com/erf_and_normal_cdf.pdf)]
+> John D. Cook. **Relating Φ and erf** [[https://www.johndcook.com/erf_and_normal_cdf.pdf](https://www.johndcook.com/erf_and_normal_cdf.pdf)]
 
 
 

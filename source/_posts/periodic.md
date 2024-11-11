@@ -8,7 +8,7 @@ mathjax: true
 ---
 
 
-# PSS and HB Overview
+## PSS and HB Overview
 
 The steady-state response is the response that results after any transient effects have dissipated. 
 
@@ -19,7 +19,7 @@ The steady-state response is the response that results after any transient effec
 ![image-20231028163033255](periodic/image-20231028163033255.png)
 
 
-# Harmonic Balance Analysis
+## Harmonic Balance Analysis
 
 The idea of harmonic balance is to find a set of port voltage waveforms (or, alternatively, the harmonic voltage components) that give the same currents in both the *linear-network equations* and *nonlinear-network equations*
 
@@ -33,9 +33,9 @@ where $k=0, 1, 2,...,K$
 
 > Note that each $f_k$ is implicitly a function of all voltage components $V(k\omega)$
 
-## Newton Solution of the Harmonic-Balance Equation
+### Newton Solution of the Harmonic-Balance Equation
 
-### Iterative Process and Jacobian Formulation
+#### Iterative Process and Jacobian Formulation
 
 ![image-20231108222451147](periodic/image-20231108222451147.png)
 
@@ -47,26 +47,26 @@ where $n$ and $m$ are the port indices $(1,N)$, and $k$ and $l$ are the harmonic
 
 
 
-### Selecting the Number of Harmonics and Time Samples
+#### Selecting the Number of Harmonics and Time Samples
 
 In theory, the waveforms generated in nonlinear analysis have an infinite number of harmonics, so a complete
 description of the operation of a **nonlinear** circuit would appear to require current and voltage vectors of *infinite* dimension.
 
 Fortunately, the magnitudes of frequency components invariably decrease with frequency; otherwise the time wavefroms would represent infinite power.
 
-### Initial Estimate
+#### Initial Estimate
 
 One important property of Newton's method is that its speed and reliability of convergence depend strongly upon the initial estimate of the solution vector.
 
 
-# Shooting Newton
+## Shooting Newton
 
 *TODO* &#128197;
 
 
-# Nonlinearity & Linear Time-Varying  Nature
+## Nonlinearity & Linear Time-Varying  Nature
 
-## Nonlinearity Nature
+### Nonlinearity Nature
 
 The nonlinearity causes the signal to be replicated at multiples of the carrier, an effect referred to as **harmonic distortion**, and adds a skirt to the signal that increases its bandwidth, an effect referred to as **intermodulation distortion**
 
@@ -74,7 +74,7 @@ The nonlinearity causes the signal to be replicated at multiples of the carrier,
 
 > It is possible to eliminate the effect of *harmonic distortion* with a bandpass filter, however the frequency of the *intermodulation distortion* products overlaps the frequency of the desired signal, and so cannot be completely removed with filtering.
 
-## Time-Varying Linear Nature
+### Time-Varying Linear Nature
 
 ![image-20231029101042671](periodic/image-20231029101042671.png)
 
@@ -93,9 +93,9 @@ $$
 
 
 
-# Periodic small signal analyses
+## Periodic small signal analyses
 
-## Analysis in Simulator
+### Analysis in Simulator
 
 1.  LPV analyses start by performing a periodic analysis to compute the **periodic operating point** with only the **large clock signal** applied (the LO, the clock, the carrier, etc.). 
 2. The circuit is then **linearized about this time-varying operating point** (expand about the periodic equilibrium point with a Taylor series and discard all but the first-order term)
@@ -113,7 +113,7 @@ $$
 
 
 
-## Conversion Matrix Analysis
+### Conversion Matrix Analysis
 
 **Large-signal/small-signal analysis**, or **conversion matrix analysis**, is useful for a large class of problems wherein a **nonlinear device** is driven, or "pumped" by a **single large sinusoidal signal**; another signal, much smaller, is applied; and we seek only the **linear response to the small signal**.
 
@@ -123,7 +123,7 @@ $$
 2. Then, the **nonlinear elements** in the device's equivalent circuit are then **linearized** to create **small-signal, linear, time-varying elements**
 3. Finally, a **small-signal analysis** is performed  
 
-### Element Linearized
+#### Element Linearized
 
 Below shows a **nonlinear resistive element**, which has the $I/V$ relationship $I=f(V)$. It is driven by a *large-signal voltage*
 
@@ -176,7 +176,7 @@ which includes only half of the mixing frequencies:
 > For real signal, positive- and negative-frequency components are complex conjugate pairs
 
 
-### Conversion Matrix as Bridge
+#### Conversion Matrix as Bridge
 
 The **frequency-domain** currents and voltages in a *time-varying circuit element* are related by a **conversion matrix**
 
@@ -209,57 +209,7 @@ $$
 
 
 
-# Cyclostationary Noise Analysis
-
-> which is referred to as a "periodic noise" or PNoise analysis
-
-
-
-## White Noise
-
-> completely **uncorrelated** versus time
->
-> 
-> For white noise the PSD is a constant and the autocorrelation function is an impulse centered at $0$, $R_n(t,\tau)=R(t)\delta(\tau)$
->
-> 
-> The energy-storage elements cause the noise spectrum to be shaped and the noise to be time-correlated.
->
-> This is a general property. It the noise has shape in the frequency domain then the noise is correlated in time, and vice versa.
-
-
-
-## PNOISE
-
-- In LPTV analysis, noise may *up-convert* or *down-convert* by $N\cdot f_c$ (**noise folding**)
-
-- PNOISE output is **cyclostationary noise**
-
-  Described by a collection of PSDs at various sidebands: 0 PSDs at various sidebands: $0, \pm f_c, \pm2f_c, \pm3f_c$, …
-
->$f_c$: fundamental frequency of PSS
-
-
-
-### Simulation of switched-capacitor noise
-
-> Periodic steady-state analysis is originally intended to analyze a continuous-time circuit with periodic input signals or excitations.
-
-To simulate a switched-capacitor circuit appropriately, one needs to recognize that the **output of a switched capacitor circuit is a discrete-time** rather than a continuous-time signal. This discrete-time signal should be treated as the output of the circuit sampled after it has settled to the final value for each sampling period.
-
-There are two techniques that one can use to force the simulator to evaluate the output signal correctly in the manner described
-
-- First, in more recent versions of SpectreRF, PNOISE analysis provides a specialized time-domain analysis method
-
-  By enabling this option, the simulator would analyze noise only **at particular time instants**
-
-- Second, on older versions of spectreRF, **an explicit (ideal) sample-and-hold** block can be used similarly to force the simulator to evaluate only the output of the circuit at the **correct time instants**.
-
-  > Recall that a sample-and-hold would impose a *zero-order hold* on a discrete-time signal; thus, the resulting sinc-shaped response in the frequency domain has to be compensated for
-
-
-
-# Linear Time Varying
+## Linear Time Varying
 
 The response of a relaxed LTV system at a time $t$ due to an impulse applied at a time $t − \tau$ is denoted by $h(t, \tau)$
 
@@ -302,13 +252,11 @@ The response of a relaxed LTV system at a time $t$ due to an impulse applied at 
 
 
 
-# reference
+## reference
 
 K. S. Kundert, "Introduction to RF simulation and its application," in IEEE Journal of Solid-State Circuits, vol. 34, no. 9, pp. 1298-1319, Sept. 1999, doi: 10.1109/4.782091. [[pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
 
 Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition , Artech, 2003.
-
-Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." *Proceedings of the IEEE 2000 Custom Integrated Circuits Conference (Cat. No.00CH37044)* (2000): 431-438. [[pdf](https://designers-guide.org/theory/cyclo-preso.pdf)]
 
 Karti Mayaram. ECE 521 Fall 2016 Analog Circuit Simulation: Simulation of Radio Frequency Integrated Circuits [[pdf1](https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_16.pdf), [pdf2](https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_23.pdf)]
 

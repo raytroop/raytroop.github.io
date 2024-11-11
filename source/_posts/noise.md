@@ -42,7 +42,7 @@ mathjax: true
 
 > Periodic steady-state analysis is originally intended to analyze a continuous-time circuit with periodic input signals or excitations.
 
-To simulate a switched-capacitor circuit appropriately, one needs to recognize that the **output of a switched capacitor circuit is a discrete-time** rather than a continuous-time signal. This discrete-time signal should be treated as the output of the circuit sampled after it has settled to the final value for each sampling period.
+To simulate a switched-capacitor circuit appropriately, one needs to recognize that the output of a switched capacitor circuit is a **discrete-time rather than a continuous-time signal**. This discrete-time signal should be treated as the output of the circuit sampled after it has settled to the final value for each sampling period.
 
 There are two techniques that one can use to force the simulator to evaluate the output signal correctly in the manner described
 

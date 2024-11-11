@@ -1004,6 +1004,20 @@ GIDL (**Gate induced drain leakage**) as at weak inversion may results in a weak
 
 
 
+### Voltage Dependence
+
+![image-20241111224955193](insight/image-20241111224955193.png)
+
+### Temperature Dependence
+
+![image-20241111225025277](insight/image-20241111225025277.png)
+
+---
+
+In advanced node, gate leakage is also a strong function of temperature
+
+![image-20241111230519009](insight/image-20241111230519009.png)
+
 
 ## signal detection circuit
 

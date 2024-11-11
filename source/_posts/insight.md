@@ -947,7 +947,8 @@ Conversely, a positive $\Delta V_\text{GS}$ produces a positive $\Delta I_D$, as
 > Andrea Baschirotto, ISSCC2015 "ADC Design in Scaled Technologies"
 >
 > Joachim Assenmacher Infineon Technologies, "BSIM4 Modeling and Parameter Extraction" [[https://ewh.ieee.org/r5/denver/sscs/References/2003_03_Assenmacher.pdf](https://ewh.ieee.org/r5/denver/sscs/References/2003_03_Assenmacher.pdf)]
-
+>
+> Stefan Rusu, Intel ISSCC 2008 Tutorial: "Leakage Reduction Techniques" [[https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T06_Pres.pdf](https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T06_Pres.pdf)]
 
 
 

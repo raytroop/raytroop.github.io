@@ -6,6 +6,60 @@ categories: noise
 mathjax: true
 ---
 
+## Cyclostationary Noise
+
+> which is referred to as a "periodic noise" or PNoise analysis
+
+
+
+### White Noise
+
+> completely **uncorrelated** versus time
+>
+> 
+> For white noise the PSD is a constant and the autocorrelation function is an impulse centered at $0$, $R_n(t,\tau)=R(t)\delta(\tau)$
+>
+> 
+> The energy-storage elements cause the noise spectrum to be shaped and the noise to be time-correlated.
+>
+> This is a general property. It the noise has shape in the frequency domain then the noise is correlated in time, and vice versa.
+
+
+
+### PNOISE evolution
+
+- In LPTV analysis, noise may *up-convert* or *down-convert* by $N\cdot f_c$ (**noise folding**)
+
+- PNOISE output is **cyclostationary noise**
+
+  Described by a collection of PSDs at various sidebands: 0 PSDs at various sidebands: $0, \pm f_c, \pm2f_c, \pm3f_c$, …
+
+> Periodic steady-state analysis is originally intended to analyze a continuous-time circuit with periodic input signals or excitations.
+
+
+
+#### How Sampled Pnoise?
+
+To simulate a switched-capacitor circuit appropriately, one needs to recognize that the output of a switched capacitor circuit is a **discrete-time rather than a continuous-time signal**. This discrete-time signal should be treated as the output of the circuit sampled after it has settled to the final value for each sampling period.
+
+There are two techniques that one can use to force the simulator to evaluate the output signal correctly in the manner described
+
+- in more recent versions of SpectreRF, PNOISE analysis provides a specialized time-domain analysis method
+
+  By enabling this option, the simulator would analyze noise only **at particular time instants**
+
+- on older versions of spectreRF, **an explicit (ideal) sample-and-hold** block can be used similarly to force the simulator to evaluate only the output of the circuit at the **correct time instants**.
+
+  > Recall that a sample-and-**hold** would impose a *zero-order **hold*** on a discrete-time signal; thus, the resulting ***sinc**-shaped* response in the frequency domain has to be *compensated for*
+
+---
+
+
+
+> Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." *Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-preso.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
+>
+> STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf](https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf)]
+
 
 
 ##  Sampled Thermal Noise

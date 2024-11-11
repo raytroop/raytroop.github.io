@@ -21,7 +21,8 @@ soft failure current: Isoft
 hard failure current: **It2**
 
 
-What makes **TLP** different than **ESD** ?
+
+### TLP vs ESD
 
 - **ESD** tests simulate real world events (HBM, MM, CDM)
 - **TLP** does not simulate any real-world event

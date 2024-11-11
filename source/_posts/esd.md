@@ -5,10 +5,12 @@ tags:
 categories:
 - analog
 ---
-The **ESD design window** is defined as the difference between the breakdown voltage of the functional circuit (red line) and the maximum signal voltage (blue line)
-![esddesignwindow-evolution](esd/esddesignwindow-evolution.jpg)
 
 ## TLP
+
+> TRANSMISSION LINE PULSE TESTING: THE INDISPENSABLE TOOL FOR ESD CHARACTERIZATION OF DEVICES, CIRCUITS AND SYSTEMS [[https://www.esda.org/assets/News/1708-ESD-firstDraft.pdf](https://www.esda.org/assets/News/1708-ESD-firstDraft.pdf)]
+
+![Example TLP characteristics using TLP](esd/TLP-characteristics-using-TLP.PNG)
 
 What makes **TLP** different than **ESD** ?
 
@@ -50,13 +52,25 @@ Answer:
 
 VF-TLP can be a guide to CDM failure levels, and provide a lot of understanding of a circuit's operation during CDM stressing, but simple correlations between VF-TLP failure current level and CDM withstand voltage levels are difficult to establish.
 
+## I.V and Leakage Evolution Plots
 
+DC leakage current data combined with the I-V data provides electrical indications of where damage begins, and how rapidly it can evolve from soft to hard failures
+
+
+
+> Henry, Leo & Barth, Jon & Richner, John & Verhaege, Koen. (2000). Transmission Line Pulse Testing of the ESD Protection Structures in ICs - A Failure Analyst's Perspective. 203-213. 10.31399/asm.cp.istfa2000p0203. [[https://barthelectronics.com/pdf_files/2000%20ISTFA%20TLP%20Testing%20of%20the%20ESD%20Protection%20Structure.pdf](https://barthelectronics.com/pdf_files/2000%20ISTFA%20TLP%20Testing%20of%20the%20ESD%20Protection%20Structure.pdf)]
+>
+> Henry, L.G. & Barth, Jon & Verhaege, K. & Richner, J.. (2001). Transmission-line pulse ESD testing of ICs: A new beginning. Compliance Engineering. 18. 46+53. [[https://barthelectronics.com/pdf_files/CE%20TLP%20Article%20March-April%202001.pdf](https://barthelectronics.com/pdf_files/CE%20TLP%20Article%20March-April%202001.pdf)]
 
 ## snapback device
 
 Unfortunately, this protection concept is not effective anymore in advanced FinFET technology.
 Our analysis showed that both core and IO transistors are damaged at the onset of snapback in several FinFET processes.
 ![snapback](esd/snapback.PNG)
+
+
+
+> Introduction of Transmission Line Pulse (TLP) Testing for ESD Analysis - Device Level [[https://www.esdemc.com/public/docs/TechnicalSlides/ESDEMC_TS001.pdf](https://www.esdemc.com/public/docs/TechnicalSlides/ESDEMC_TS001.pdf)]
 
 ## power clamp
 Thanks to the device scaling the area is actually reasonable. However, the leakage becomes the main bottleneck.

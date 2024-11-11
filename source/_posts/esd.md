@@ -12,6 +12,15 @@ categories:
 
 ![Example TLP characteristics using TLP](esd/TLP-characteristics-using-TLP.PNG)
 
+Vt1: trigger voltage
+
+Vhold: holding voltage
+
+soft failure current: Isoft
+
+hard failure current: **It2**
+
+
 What makes **TLP** different than **ESD** ?
 
 - **ESD** tests simulate real world events (HBM, MM, CDM)

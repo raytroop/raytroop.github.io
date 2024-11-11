@@ -26,7 +26,7 @@ mathjax: true
 
 
 
-### PNOISE
+### PNOISE evolution
 
 - In LPTV analysis, noise may *up-convert* or *down-convert* by $N\cdot f_c$ (**noise folding**)
 
@@ -34,19 +34,15 @@ mathjax: true
 
   Described by a collection of PSDs at various sidebands: 0 PSDs at various sidebands: $0, \pm f_c, \pm2f_c, \pm3f_c$, …
 
->$f_c$: fundamental frequency of PSS
-
-
-
-#### Simulation of switched-capacitor noise
-
 > Periodic steady-state analysis is originally intended to analyze a continuous-time circuit with periodic input signals or excitations.
+
+#### How Sampled Pnoise?
 
 To simulate a switched-capacitor circuit appropriately, one needs to recognize that the output of a switched capacitor circuit is a **discrete-time rather than a continuous-time signal**. This discrete-time signal should be treated as the output of the circuit sampled after it has settled to the final value for each sampling period.
 
 There are two techniques that one can use to force the simulator to evaluate the output signal correctly in the manner described
 
--in more recent versions of SpectreRF, PNOISE analysis provides a specialized time-domain analysis method
+- in more recent versions of SpectreRF, PNOISE analysis provides a specialized time-domain analysis method
 
   By enabling this option, the simulator would analyze noise only **at particular time instants**
 
@@ -54,6 +50,7 @@ There are two techniques that one can use to force the simulator to evaluate the
 
   > Recall that a sample-and-hold would impose a *zero-order hold* on a discrete-time signal; thus, the resulting *sinc-shaped* response in the frequency domain has to be *compensated for*
 
+---
 
 > Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." *Proceedings of the IEEE 2000 Custom Integrated Circuits Conference (Cat. No.00CH37044)* (2000): 431-438. [[pdf](https://designers-guide.org/theory/cyclo-preso.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
 >

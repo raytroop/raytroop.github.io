@@ -8,6 +8,11 @@ mathjax: true
 ---
 
 
+## Voltage scattering
+
+
+*TODO* &#128197;
+
 
 ## characteristic impedance ($Z_0$)
 

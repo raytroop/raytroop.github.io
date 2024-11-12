@@ -119,9 +119,9 @@ MOS working in the **weak inversion region** (**"subthreshold conduction"**) hav
 
 
 
-## Why MOSFETs in saturation?
+## Why MOS in saturation ?
 
-### gm, gds at fixed VGS
+### $g_m$, $g_\text{ds}$ at fixed $V_\text{GS}$
 
 ![image-20231125224714658](biasing/image-20231125224714658.png)
 
@@ -146,7 +146,7 @@ $$
 
 
 
-### gm, gds at fixed Id, VG
+### $g_m$, $g_\text{ds}$ at fixed $I_d$, $V_G$
 
 **In triode region**
 $$

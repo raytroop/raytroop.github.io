@@ -10,8 +10,9 @@ mathjax: true
 
 ## Voltage scattering
 
+![image-20241112201300108](scattering/image-20241112201300108.png)
 
-*TODO* &#128197;
+
 
 
 ## characteristic impedance ($Z_0$)

@@ -56,7 +56,7 @@ MOS working in the **weak inversion region** (**"subthreshold conduction"**) hav
 
 
 
-> Hongprasit, Saweth, Worawat Sa-ngiamvibool and Apinan Aurasopon. “Design of Bandgap Core and Startup Circuits for All CMOS Bandgap Voltage Reference.” *Przegląd Elektrotechniczny* (2012): 277-280.
+> Hongprasit, Saweth, Worawat Sa-ngiamvibool and Apinan Aurasopon. "Design of Bandgap Core and Startup Circuits for All CMOS Bandgap Voltage Reference." *Przegląd Elektrotechniczny* (2012): 277-280.
 
 
 
@@ -70,7 +70,7 @@ MOS working in the **weak inversion region** (**"subthreshold conduction"**) hav
 
 
 
-> $\frac{kT}{q}$​ is approximately 26mV, at room temperature 300K
+> $\frac{kT}{q}$ is approximately 26mV, at room temperature 300K
 >
 > In advanced node, N4P, $V_{BE}$ is about -1.45mV/K
 
@@ -119,7 +119,7 @@ MOS working in the **weak inversion region** (**"subthreshold conduction"**) hav
 
 
 
-## Why employ MOSFETs in saturation?
+## Why MOSFETs in saturation?
 
 ### gm, gds at fixed VGS
 

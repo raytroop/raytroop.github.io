@@ -180,7 +180,15 @@ $$\begin{align}
 
 *TODO* &#128197;
 
+![image-20241112214430191](precision/image-20241112214430191.png)
 
+
+
+
+
+
+
+> Galton, Ian. (2010). Why dynamic-element-matching DACs work. Circuits and Systems II: Express Briefs, IEEE Transactions on. 57. 69 - 74. 10.1109/TCSII.2010.2042131. [[https://sci-hub.se/10.1109/TCSII.2010.2042131](https://sci-hub.se/10.1109/TCSII.2010.2042131)]
 
 
 

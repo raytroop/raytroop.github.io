@@ -142,9 +142,40 @@ The remaining *11 bits are truncated to 3-levels* using a second-order delta-sig
 
 
 
-## Mismatch-Shaping
+## Mismatch Shaping
 
-TODO &#128197;
+![image-20241112220458335](delta-sigma/image-20241112220458335.png)
+
+
+
+### Data-Weighted Averaging (DWA)
+
+![image-20241113000942025](delta-sigma/image-20241113000942025.png)
+$$\begin{align}
+nV + e[n] &= y[n] \\
+(n-1)V + e[n-1] &= y[n-1]
+\end{align}$$
+
+and we have $w[n] = y[n] - y[n-1]$, then
+$$
+w[n] = V + e[n] - e[n-1]
+$$
+i.e.
+$$
+W = V + (1-z^{-1})e_\text{DAC}
+$$
+
+
+
+
+
+**Element Rotation:**
+
+![image-20241112233059745](delta-sigma/image-20241112233059745.png)
+
+
+
+> [[http://individual.utoronto.ca/schreier/lectures/12-2.pdf](http://individual.utoronto.ca/schreier/lectures/12-2.pdf)], [[http://individual.utoronto.ca/trevorcaldwell/course/Mismatch.pdf](http://individual.utoronto.ca/trevorcaldwell/course/Mismatch.pdf)]
 
 
 

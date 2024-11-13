@@ -38,25 +38,21 @@ mathjax: true
 
 
 
-#### How Sampled Pnoise?
+#### How Sampled PNOISE?
 
-To simulate a switched-capacitor circuit appropriately, one needs to recognize that the output of a switched capacitor circuit is a **discrete-time rather than a continuous-time signal**. This discrete-time signal should be treated as the output of the circuit sampled after it has settled to the final value for each sampling period.
+To simulate a switched-capacitor circuit appropriately, one needs to recognize that the output of a switched capacitor circuit is a **discrete-time** rather than a **continuous-time** signal
 
-There are two techniques that one can use to force the simulator to evaluate the output signal correctly in the manner described
+![image-20241113212004313](noise/image-20241113212004313.png)
 
-- in more recent versions of SpectreRF, PNOISE analysis provides a specialized time-domain analysis method
 
-  By enabling this option, the simulator would analyze noise only **at particular time instants**
 
-- on older versions of spectreRF, **an explicit (ideal) sample-and-hold** block can be used similarly to force the simulator to evaluate only the output of the circuit at the **correct time instants**.
-
-  > Recall that a sample-and-**hold** would impose a *zero-order **hold*** on a discrete-time signal; thus, the resulting ***sinc**-shaped* response in the frequency domain has to be *compensated for*
+> Winoto, Renaldi. “Downconverting Sigma-Delta A/D Converter for a Reconfigurable RF Receiver.” (2009).  [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-81.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-81.pdf)]
 
 ---
 
 
 
-> Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." *Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-preso.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
+> Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-preso.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
 >
 > STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf](https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf)]
 

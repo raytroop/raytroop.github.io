@@ -1508,6 +1508,40 @@ $$
 
 
 
+---
+
+at autozero phase
+$$\begin{align}
+I_{a0} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{a0} - V_{TH})^2 \\
+I_{Rb} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{b0} - V_{TH})^2
+\end{align}$$
+
+then
+$$
+\Delta I_0 = \frac{1}{2}(V_{a0} - V_{b0})(g_{m,a0}+g_{m,b0})
+$$
+where $g_{m,a0}+g_{m,b0} = \mu C_{OX}\frac{W}{L}(V_{a0}+V_{b0} - 2V_{TH})$
+
+
+
+at comparison phase
+$$\begin{align}
+I_{a1} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{a1} - V_{TH})^2 \\
+I_{b1} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{b1} - V_{TH})^2
+\end{align}$$
+
+then
+$$
+\Delta I_1 = \frac{1}{2}(V_{a1} - V_{b1})(g_{m,a1}+g_{m,b1})
+$$
+That is, $g_{m,a1}+g_{m,b1} = \mu C_{OX}\frac{W}{L}(V_{a1}+V_{b1} - 2V_{TH})$
+
+
+
+To minimize the difference between $\Delta I_1$ and $\Delta I_0$, the drift of  both differential and common mode between $V_a$ and $V_b$ shall be alleviated
+
+
+
 ## reference
 
 M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17, no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.

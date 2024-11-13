@@ -189,7 +189,8 @@ $$\begin{align}
 
 
 > Galton, Ian. (2010). Why dynamic-element-matching DACs work. Circuits and Systems II: Express Briefs, IEEE Transactions on. 57. 69 - 74. 10.1109/TCSII.2010.2042131. [[https://sci-hub.se/10.1109/TCSII.2010.2042131](https://sci-hub.se/10.1109/TCSII.2010.2042131)]
-
+>
+> KHIEM NGUYEN. Analog Devices Inc, "Practical Dynamic Element Matching Techniques for 3-level Unit Elements" [[https://picture.iczhiku.com/resource/eetop/shihEDaaoJjFdCVc.pdf](https://picture.iczhiku.com/resource/eetop/shihEDaaoJjFdCVc.pdf)]
 
 
 ## reference

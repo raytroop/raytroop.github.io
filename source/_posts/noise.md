@@ -52,9 +52,19 @@ To simulate a switched-capacitor circuit appropriately, one needs to recognize t
 
 
 
-> Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-preso.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
+> Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-paper.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
 >
 > STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf](https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf)]
+
+
+
+## ISF for Oscillators
+
+*TODO* &#128197;
+
+![image-20241113232703941](noise/image-20241113232703941.png)
+
+
 
 
 

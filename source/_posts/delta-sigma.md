@@ -152,13 +152,13 @@ The remaining *11 bits are truncated to 3-levels* using a second-order delta-sig
 
 ![image-20241113000942025](delta-sigma/image-20241113000942025.png)
 $$\begin{align}
-nV + e_\text{DAC}[n] &= y[n] \\
-(n-1)V + e_\text{DAC}[n-1] &= y[n-1]
+\sum_{i=0}^{n}v[i] + e_\text{DAC}[n] &= y[n] \\
+\sum_{i=0}^{n-1}v[i] + e_\text{DAC}[n-1] &= y[n-1]
 \end{align}$$
 
 and we have $w[n] = y[n] - y[n-1]$, then
 $$
-w[n] = V + e_\text{DAC}[n] - e_\text{DAC}[n-1]
+w[n] = v[n] + e_\text{DAC}[n] - e_\text{DAC}[n-1]
 $$
 i.e.
 $$

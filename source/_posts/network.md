@@ -1,5 +1,5 @@
 ---
-title: Network Analysis
+title: Network Analysis and Scattering parameters
 date: 2023-09-29 15:57:01
 tags:
 categories:
@@ -10,6 +10,43 @@ mathjax: true
 
 
 ![image-20240704212740246](network/image-20240704212740246.png)
+
+---
+
+
+
+
+
+## Voltage scattering
+
+![image-20241112201300108](network/image-20241112201300108.png)
+
+
+
+
+## characteristic impedance ($Z_0$)
+
+*TODO* &#128197;
+
+
+
+
+
+## Voltage Transfer Function
+
+![image-20241030220203806](network/image-20241030220203806.png)
+
+![image-20241030220131714](network/image-20241030220131714.png)
+
+> ![image-20241030222403947](network/image-20241030222403947.png)
+
+
+
+### Reflection Coefficients
+
+![image-20241030222906229](network/image-20241030222906229.png)
+
+![image-20241030222923491](network/image-20241030222923491.png)
 
 
 
@@ -94,3 +131,7 @@ Coelho, C. P., Phillips, J. R., & Silveira, L. M. (n.d.). Robust rational functi
 Cadence IEEE IMS 2023, Introducing the Spectre S-Parameter Quality Checker and Rational Fit Model Generator [[https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009lplhEAA)]
 
 The Complex Art Of Handling S-Parameters: The importance of extraction and fitting to circuit simulation involving S-parameters  [[https://semiengineering.com/the-complex-art-of-handling-s-parameters](https://semiengineering.com/the-complex-art-of-handling-s-parameters/)]
+
+Dr. John Choma. EE 541, Fall 2006: Course Notes #2 Scattering Parameters: Concept, Theory, and Applications [[https://www.ieee.li/pdf/essay/scattering_parameters_concept_theory_applications.pdf](https://www.ieee.li/pdf/essay/scattering_parameters_concept_theory_applications.pdf)]
+
+Dr. Ray Kwok . Network Techniques: Conversion between Filter Transfer Function and Filter Scattering (SMatrix) Parameters [[https://www.sjsu.edu/people/raymond.kwok/docs/project172/FTF%20to%20S-Matrix%20Spring%202011.pdf](https://www.sjsu.edu/people/raymond.kwok/docs/project172/FTF%20to%20S-Matrix%20Spring%202011.pdf)]

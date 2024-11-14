@@ -158,7 +158,7 @@ V_{in}^+ -V_{in}^-  &= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
 
 
 
-## pair mismatch
+### pair mismatch
 
 ![diff_mismatch_connect.drawio](afe/diff_mismatch_connect.drawio.svg)
 

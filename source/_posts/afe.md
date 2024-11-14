@@ -113,7 +113,7 @@ Cons of *(b)*
 > How to generate **complex poles without inductor**? [[https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/](https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/)]
 
 
-## mismatch of pair add & subtract
+## pair mismatch
 
 ![diff_mismatch_connect.drawio](afe/diff_mismatch_connect.drawio.svg)
 

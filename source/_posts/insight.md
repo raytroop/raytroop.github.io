@@ -139,49 +139,6 @@ $g_m r_o $ is the indicator of $V_A$, if $\frac{g_m}{I_D}$ is same
 
 
 
-## Input Diff-Pair
-
-
-
-### DM Distortion
-
-![image-20241027095213326](insight/image-20241027095213326.png)
-
-### CM Distortion
-
-![image-20241027095248946](insight/image-20241027095248946.png)
-
-
-
-### Resistive Degeneration
-
-*Resistive degeneration* in differential pairs serves as one major technique for linear amplifier
-
-![image-20240824132739726](insight/image-20240824132739726.png)
-
-The linear region for CMOS differential pair would be extended by $±I_{SS}R/2$ as all of $I_{SS}/2$ flows
-through $R$. 
-$$\begin{align}
-V_{in}^+ -V_{in}^-  &= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
-&= \sqrt{\frac{2I_{SS}}{\mu_nC_{OX}\frac{W}{L}}} + \frac{I_{SS}R}{2}
-\end{align}$$
-
-
-
-
-> Jri Lee, "Communication Integrated Circuits." [https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf](https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf)
->
-> Figure 14.12, Design of Analog CMOS Integrated Circuits, Second Edition [[https://electrovolt.ir/wp-content/uploads/2014/08/Design-of-Analog-CMOS-Integrated-Circuit-2nd-Edition-ElectroVolt.ir_.pdf](https://electrovolt.ir/wp-content/uploads/2014/08/Design-of-Analog-CMOS-Integrated-Circuit-2nd-Edition-ElectroVolt.ir_.pdf)]
->
-
-
-
-### Biasing Tradeoffs in Resistive-Degenerated Diff Pair
-
-![image-20241027095520556](insight/image-20241027095520556.png)
-
-> Todd Brooks, Broadcom "Input Programmable Gain Amplifier (PGA) Design for ADC Signal Conditioning" [[https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt](https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt)]
-
 
 
 

@@ -393,6 +393,74 @@ $$\begin{align}
 ![v2i.drawio](biasing/v2i.drawio.svg)
 
 
+## cap network
+
+![pi_Cap.drawio](biasing/pi_Cap.drawio.svg)
+
+$$\begin{align}
+(V_a-V_{a0})C_0 + (\overline{V_a - V_b} - \overline{V_{a0} - V_{b0}})C_1 &= \Delta Q_a \\
+(V_b-V_{b0})C_0 + (\overline{V_b - V_a} - \overline{V_{b0} - V_{a0}})C_1 &= \Delta Q_b
+\end{align}$$
+
+therefore we obtain
+$$\begin{align}
+V_a + V_b &= \frac{\Delta Q_a + \Delta Q_b}{C_0} + V_{a0} + V_{b0} \\
+V_a - V_b &= \frac{\Delta Q_a - \Delta Q_b}{C_0+2C_1} + V_{a0} - V_{b0}
+\end{align}$$
+Then
+$$\begin{align}
+V_a &= \frac{\Delta Q_a(C_0+C_1)+\Delta Q_b C_1}{C_0(C_0+2C_1)} + V_{a0} \\
+V_b &= \frac{\Delta Q_aC_1+\Delta Q_b (C_0+C_1)}{C_0(C_0+2C_1)} + V_{b0}
+\end{align}$$
+
+rearrange the above equation
+$$\begin{align}
+V_a &= \frac{\Delta Q_a}{C_0} + \frac{\Delta Q_b-\Delta Q_a}{C_0(\frac{C_0}{C_1}+2)} +  V_{a0} \\
+V_b &= \frac{\Delta Q_b}{C_0} + \frac{\Delta Q_a-\Delta Q_b}{C_0(\frac{C_0}{C_1}+2)} + V_{b0}
+\end{align}$$
+
+The difference between $V_a$  and $V_b$
+$$
+V_a - V_b = \frac{I_a-I_b}{C_0+2C_1}t + V_{a0} - V_{b0}
+$$
+
+> $C_1$ save total capacitor area while obtaining same $V_a - V_b$ due to $\Delta I_{a,b}$ corresponding to $C_0$
+
+
+
+---
+
+at autozero phase
+$$\begin{align}
+I_{a0} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{a0} - V_{TH})^2 \\
+I_{Rb} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{b0} - V_{TH})^2
+\end{align}$$
+
+then
+$$
+\Delta I_0 = \frac{1}{2}(V_{a0} - V_{b0})(g_{m,a0}+g_{m,b0})
+$$
+where $g_{m,a0}+g_{m,b0} = \mu C_{OX}\frac{W}{L}(V_{a0}+V_{b0} - 2V_{TH})$
+
+
+
+at comparison phase
+$$\begin{align}
+I_{a1} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{a1} - V_{TH})^2 \\
+I_{b1} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{b1} - V_{TH})^2
+\end{align}$$
+
+then
+$$
+\Delta I_1 = \frac{1}{2}(V_{a1} - V_{b1})(g_{m,a1}+g_{m,b1})
+$$
+That is, $g_{m,a1}+g_{m,b1} = \mu C_{OX}\frac{W}{L}(V_{a1}+V_{b1} - 2V_{TH})$
+
+
+
+To minimize the difference between $\Delta I_1$ and $\Delta I_0$, the drift of  both differential and common mode between $V_a$ and $V_b$ shall be alleviated
+
+
 
 ## reference
 

@@ -106,15 +106,39 @@ Cons of *(b)*
 
 
 
-
-
 ## peaking without inductor
+
+*TODO* &#128197;
 
 > How to generate **complex poles without inductor**? [[https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/](https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/)]
 
 
+## mismatch of pair add & subtract
+
+![diff_mismatch_connect.drawio](afe/diff_mismatch_connect.drawio.svg)
 
 
+$$\begin{align}
+I_{add} &= g_m(\sigma_{vth,0} + \sigma_{vth,1}) \\
+I_{sub} &= g_m(\sigma_{vth,0} - \sigma_{vth,1})
+\end{align}$$
+
+The input equivalient offset voltage
+$$\begin{align}
+V_{os,add} &= \frac{I_{add}}{2g_m} = \frac{\sigma_{vth,0} + \sigma_{vth,1}}{2} \\
+V_{os,sub} &= \frac{I_{sub}}{g_m} = \sigma_{vth,0} - \sigma_{vth,1}
+\end{align}$$
+
+Then
+$$\begin{align}
+\sigma_{vos,add} &= \sqrt{\frac{2\sigma_{vth}^2}{4}} = \frac{\sigma_{vth}}{\sqrt{2}} \\
+\sigma_{vos,sub} &= 2\sigma_{vth}^2 = \sqrt{2}\sigma_{vth}
+\end{align}$$
+
+We obtain
+$$
+\sigma_{vos,sub} = 2\sigma_{vos,add}
+$$
 
 
 ## reference

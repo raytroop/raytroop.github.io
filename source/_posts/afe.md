@@ -119,25 +119,25 @@ Cons of *(b)*
 
 
 $$\begin{align}
-I_{add} &= g_m(\sigma_{vth,0} + \sigma_{vth,1}) \\
-I_{sub} &= g_m(\sigma_{vth,0} - \sigma_{vth,1})
+I_{SE} &= g_m(\sigma_{vth,0} + \sigma_{vth,1}) \\
+I_{DE} &= g_m(\sigma_{vth,0} + \sigma_{vth,1})
 \end{align}$$
 
 The input equivalient offset voltage
 $$\begin{align}
-V_{os,add} &= \frac{I_{add}}{2g_m} = \frac{\sigma_{vth,0} + \sigma_{vth,1}}{2} \\
-V_{os,sub} &= \frac{I_{sub}}{g_m} = \sigma_{vth,0} - \sigma_{vth,1}
+V_{os,SE} &= \frac{I_{SE}}{2g_m} = \frac{\sigma_{vth,0} + \sigma_{vth,1}}{2} \\
+V_{os,DE} &= \frac{I_{DE}}{g_m} = \sigma_{vth,0} + \sigma_{vth,1}
 \end{align}$$
 
 Then
 $$\begin{align}
-\sigma_{vos,add} &= \sqrt{\frac{2\sigma_{vth}^2}{4}} = \frac{\sigma_{vth}}{\sqrt{2}} \\
-\sigma_{vos,sub} &= \sqrt{2\sigma_{vth}^2} = \sqrt{2}\sigma_{vth}
+\sigma_{vos,SE} &= \sqrt{\frac{2\sigma_{vth}^2}{4}} = \frac{\sigma_{vth}}{\sqrt{2}} \\
+\sigma_{vos,DE} &= \sqrt{2\sigma_{vth}^2} = \sqrt{2}\sigma_{vth}
 \end{align}$$
 
 We obtain
 $$
-\sigma_{vos,sub} = 2\sigma_{vos,add}
+\sigma_{vos,DE} = 2\sigma_{vos,SE}
 $$
 
 

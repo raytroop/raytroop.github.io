@@ -1,5 +1,5 @@
 ---
-title: Analog Front-End Design & Equalization Techniques
+title: Analog Front-End (AFE) Design & Equalization Techniques
 date: 2024-09-21 21:08:12
 tags:
 categories:

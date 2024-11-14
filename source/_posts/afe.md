@@ -132,7 +132,7 @@ V_{os,sub} &= \frac{I_{sub}}{g_m} = \sigma_{vth,0} - \sigma_{vth,1}
 Then
 $$\begin{align}
 \sigma_{vos,add} &= \sqrt{\frac{2\sigma_{vth}^2}{4}} = \frac{\sigma_{vth}}{\sqrt{2}} \\
-\sigma_{vos,sub} &= 2\sigma_{vth}^2 = \sqrt{2}\sigma_{vth}
+\sigma_{vos,sub} &= \sqrt{2\sigma_{vth}^2} = \sqrt{2}\sigma_{vth}
 \end{align}$$
 
 We obtain

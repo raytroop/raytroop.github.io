@@ -105,6 +105,32 @@ Cons of *(b)*
 - sensitive to the difference of common voltage between $V_\text{ip}$,  $V_\text{im}$ and  $V_\text{rp}$,  $V_\text{rm}$
 
 
+### common mode difference issue
+
+![doublepair_cm.drawio](afe/doublepair_cm.drawio.svg)
+
+copy aforementioned formula here for convenience 
+$$
+V_o = A_v(\overline{V_\text{ip} - V_\text{im}} - \overline{V_\text{rp} - V_\text{rm}})
+$$
+
+at sample phase,
+$V_\text{ip}= V_\text{im}= V_\text{cmi}$ and $V_\text{rp}= V_\text{rm}= V_\text{cmr}$, and
+
+- $I_\text{ip0}= I_\text{im0} = I_\text{i0}$
+- $I_\text{rp0}= I_\text{rm0} = I_\text{r0}$
+
+i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} = 0$
+
+at compare start
+- $V_\text{ip}= V_\text{im}= V_\text{cmi}$ and $V_\text{rp}= V_\text{cmr}+\Delta$, $V_\text{rp}= V_\text{cmr}-\Delta$, 
+- $I_\text{ip}\lt I_\text{ip0}$, $I_\text{rp} \gt I_\text{rp0}$
+- $I_\text{im}\gt I_\text{im0}$, $I_\text{rm} \lt I_\text{rm0}$
+
+i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} \lt 0$
+
+we need to 
+
 
 ## peaking without inductor
 

@@ -105,7 +105,7 @@ Cons of *(b)*
 - sensitive to the difference of common voltage between $V_\text{ip}$,  $V_\text{im}$ and  $V_\text{rp}$,  $V_\text{rm}$
 
 
-### common mode difference issue
+### common-mode input voltage difference
 
 ![doublepair_cm.drawio](afe/doublepair_cm.drawio.svg)
 
@@ -114,22 +114,92 @@ $$
 V_o = A_v(\overline{V_\text{ip} - V_\text{im}} - \overline{V_\text{rp} - V_\text{rm}})
 $$
 
-at sample phase,
-$V_\text{ip}= V_\text{im}= V_\text{cmi}$ and $V_\text{rp}= V_\text{rm}= V_\text{cmr}$, and
+*at sample phase*
+$V_\text{ip}= V_\text{im}= V_\text{cmi}$ and $V_\text{rp}= V_\text{rm}= V_\text{cmr}$
 
 - $I_\text{ip0}= I_\text{im0} = I_\text{i0}$
 - $I_\text{rp0}= I_\text{rm0} = I_\text{r0}$
 
 i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} = 0$
 
-at compare start
-- $V_\text{ip}= V_\text{im}= V_\text{cmi}$ and $V_\text{rp}= V_\text{cmr}+\Delta$, $V_\text{rp}= V_\text{cmr}-\Delta$, 
+
+
+*at compare start*
+
+- $V_\text{ip}= V_\text{im}= V_\text{cmi}$ and $V_\text{rp}= V_\text{cmr}+\Delta$, $V_\text{rp}= V_\text{cmr}-\Delta$
 - $I_\text{ip}\lt I_\text{ip0}$, $I_\text{rp} \gt I_\text{rp0}$
+
 - $I_\text{im}\gt I_\text{im0}$, $I_\text{rm} \lt I_\text{rm0}$
 
-i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} \lt 0$
+i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} \lt 0$, we need to increase $V_\text{ip}$ and decrease $V_\text{im}$.
 
-we need to 
+
+
+*at the compare finish*
+
+$$\begin{align}
+V_\text{ip}= V_\text{cmi} + \Delta \\
+V_\text{im}= V_\text{cmi} - \Delta
+\end{align}$$
+
+and $I_\text{ip0}= I_\text{im0} = I_\text{i0}$, $I_\text{rp0}= I_\text{rm0} = I_\text{r0}$
+
+i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} = 0$
+
+
+
+---
+
+If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV}$, one transistor carries the entire tail current
+
+- $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$  all the time
+
+at end of comparison, $V_\text{im} = V_\text{cmi} - \Delta$
+
+
+
+---
+
+If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV} + \Delta$
+
+- $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$;  $I_\text{im} =0$ and $I_\text{rm} = I_{SS}$ all the time
+
+
+
+> **Therefore, $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV} + \Delta$ for normal work of comparator**
+>
+> **further more,  the difference between $V_\text{cmr}$ and $V_\text{cmi}$ shall be minimized due to limited impedance of current source**
+
+
+
+### pair mismatch
+
+![diff_mismatch_connect.drawio](afe/diff_mismatch_connect.drawio.svg)
+
+$$\begin{align}
+I_{SE} &= g_m(\sigma_{vth,0} + \sigma_{vth,1}) \\
+I_{DE} &= g_m(\sigma_{vth,0} + \sigma_{vth,1})
+\end{align}$$
+
+The input equivalient offset voltage
+$$\begin{align}
+V_{os,SE} &= \frac{I_{SE}}{2g_m} = \frac{\sigma_{vth,0} + \sigma_{vth,1}}{2} \\
+V_{os,DE} &= \frac{I_{DE}}{g_m} = \sigma_{vth,0} + \sigma_{vth,1}
+\end{align}$$
+
+Then
+$$\begin{align}
+\sigma_{vos,SE} &= \sqrt{\frac{2\sigma_{vth}^2}{4}} = \frac{\sigma_{vth}}{\sqrt{2}} \\
+\sigma_{vos,DE} &= \sqrt{2\sigma_{vth}^2} = \sqrt{2}\sigma_{vth}
+\end{align}$$
+
+We obtain
+$$
+\sigma_{vos,DE} = 2\sigma_{vos,SE}
+$$
+
+
+
 
 
 ## peaking without inductor
@@ -182,33 +252,6 @@ V_{in}^+ -V_{in}^-  &= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
 
 > Todd Brooks, Broadcom "Input Programmable Gain Amplifier (PGA) Design for ADC Signal Conditioning" [[https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt](https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt)]
 
-
-
-### pair mismatch
-
-![diff_mismatch_connect.drawio](afe/diff_mismatch_connect.drawio.svg)
-
-$$\begin{align}
-I_{SE} &= g_m(\sigma_{vth,0} + \sigma_{vth,1}) \\
-I_{DE} &= g_m(\sigma_{vth,0} + \sigma_{vth,1})
-\end{align}$$
-
-The input equivalient offset voltage
-$$\begin{align}
-V_{os,SE} &= \frac{I_{SE}}{2g_m} = \frac{\sigma_{vth,0} + \sigma_{vth,1}}{2} \\
-V_{os,DE} &= \frac{I_{DE}}{g_m} = \sigma_{vth,0} + \sigma_{vth,1}
-\end{align}$$
-
-Then
-$$\begin{align}
-\sigma_{vos,SE} &= \sqrt{\frac{2\sigma_{vth}^2}{4}} = \frac{\sigma_{vth}}{\sqrt{2}} \\
-\sigma_{vos,DE} &= \sqrt{2\sigma_{vth}^2} = \sqrt{2}\sigma_{vth}
-\end{align}$$
-
-We obtain
-$$
-\sigma_{vos,DE} = 2\sigma_{vos,SE}
-$$
 
 
 

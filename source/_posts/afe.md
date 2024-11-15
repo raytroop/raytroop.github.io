@@ -105,7 +105,7 @@ Cons of *(b)*
 - sensitive to the difference of common voltage between $V_\text{ip}$,  $V_\text{im}$ and  $V_\text{rp}$,  $V_\text{rm}$
 
 
-### common-mode input voltage difference
+### common-mode voltage difference
 
 ![doublepair_cm.drawio](afe/doublepair_cm.drawio.svg)
 

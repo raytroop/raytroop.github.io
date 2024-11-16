@@ -14,6 +14,6 @@ mathjax:
 
 
 
-## 悬挂 (vehicle suspension )
+## 悬挂 (vehicle suspension)
 
 ![image-20241116194036720](auto/image-20241116194036720.png)

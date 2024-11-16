@@ -6,56 +6,6 @@ categories: noise
 mathjax: true
 ---
 
-## Cyclostationary Noise
-
-> which is referred to as a "periodic noise" or PNoise analysis
-
-
-
-### White Noise
-
-> completely **uncorrelated** versus time
->
-> 
-> For white noise the PSD is a constant and the autocorrelation function is an impulse centered at $0$, $R_n(t,\tau)=R(t)\delta(\tau)$
->
-> 
-> The energy-storage elements cause the noise spectrum to be shaped and the noise to be time-correlated.
->
-> This is a general property. It the noise has shape in the frequency domain then the noise is correlated in time, and vice versa.
-
-
-
-### PNOISE evolution
-
-- In LPTV analysis, noise may *up-convert* or *down-convert* by $N\cdot f_c$ (**noise folding**)
-
-- PNOISE output is **cyclostationary noise**
-
-  Described by a collection of PSDs at various sidebands: 0 PSDs at various sidebands: $0, \pm f_c, \pm2f_c, \pm3f_c$, …
-
-> Periodic steady-state analysis is originally intended to analyze a continuous-time circuit with periodic input signals or excitations.
-
-
-
-#### How Sampled PNOISE?
-
-To simulate a switched-capacitor circuit appropriately, one needs to recognize that the output of a switched capacitor circuit is a **discrete-time** rather than a **continuous-time** signal
-
-![image-20241113212004313](noise/image-20241113212004313.png)
-
-
-
-> Winoto, Renaldi. “Downconverting Sigma-Delta A/D Converter for a Reconfigurable RF Receiver.” (2009).  [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-81.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-81.pdf)]
-
----
-
-
-
-> Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-paper.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
->
-> STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf](https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf)]
-
 
 
 ## ISF for Oscillators
@@ -63,8 +13,6 @@ To simulate a switched-capacitor circuit appropriately, one needs to recognize t
 *TODO* &#128197;
 
 ![image-20241113232703941](noise/image-20241113232703941.png)
-
-
 
 
 
@@ -78,7 +26,11 @@ Assume for the moment that the switch is *always closed* (that there is no hold 
 
 ![image-20240428182816109](noise/image-20240428182816109.png)
 
+---
+
 ![image-20240428180635082](noise/image-20240428180635082.png)
+
+
 
 $v_s[n]$ is the sampled version of $v_{RC}(t)$, i.e. $v_s[n]= v_{RC}(nT_C)$
 $$
@@ -143,6 +95,10 @@ where $m$ is the duty cycle
 > Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
 >
 >  Christian-Charles Enz. High precision CMOS micropower amplifiers [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
+
+
+
+
 
 
 

@@ -130,6 +130,55 @@ where $x[n]$ is sampled discrete-time sequence, $x_s(t)$ is sampled impulse trai
 
 
 
+
+
+## Cyclostationary Noise (Modulated Noise)
+
+
+
+### track signal noise
+
+![image-20241116165354175](comm/image-20241116165354175.png)
+
+#### White Noise
+
+> Noisy Resistor & Clocked Switch
+
+The track signal ($v_t$), which is cyclostationary, with period $T$
+$$
+R_{t}(t,\tau) = \left\{ \begin{array}{cl}
+A\cdot\delta(\tau) &  \ 0 \leq t \leq mT  \\
+0 &  \ mT \lt t \lt T
+\end{array} \right.
+$$
+Then the time-averaged ACF denoted $\tilde{R}_t(\tau)$ via:
+$$
+\tilde{R}_{t}(\tau) = m\cdot A\cdot\delta(\tau)
+$$
+That is,
+$$
+S_t(f) = mS_{A}(f)
+$$
+![image-20241116170450589](comm/image-20241116170450589.png)
+
+
+
+#### Colored Noise
+
+> Noisy Resistor +  & Switched-Capacitor
+
+*TODO* &#128197;
+
+![image-20241116165632847](comm/image-20241116165632847.png)
+
+
+
+
+
+
+
+
+
 ## reference
 
 Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition [[pdf](https://file.fouladi.ir/courses/dsp/books/%28Prentice-Hall%20Signal%20Processing%20Series%29%20Alan%20V.%20Oppenheim%2C%20Ronald%20W.%20Schafer-Discrete-Time%20Signal%20Processing-Prentice%20Hall%20%282009%29.pdf)]
@@ -139,3 +188,7 @@ R. E. Ziemer and W. H. Tranter, Principles of Communications, 7th ed., Wiley, 20
 John G. Proakis and Masoud Salehi, Fundamentals of communication systems 2nd ed [[pdf](http://www.pce-fet.com/common/library/books/51/9492_[John_G._Proakis,_Masoud_Salehi]_Fundamentals_of_C(b-ok.org).pdf)]
 
 Rhee, W. and Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons
+
+Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-paper.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
+
+STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf](https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf)]

@@ -11,22 +11,32 @@ mathjax: true
 
 
 
-## Ergodicity & autocorrelation
+## autocorrelation, Stationarity & Ergodicity
 
-The most important statistical properties of a random process $x(t)$ are obtained by applying the *expectation operator* to some functions of the process itself
+![image-20241116113758119](random/image-20241116113758119.png)
 
-- The **expectation** returns the probability-weighted average of the specific function at that specific time
-  over all possible realizations of the process
+### autocorrelation
 
-> In many real practical cases, though, data from many realizations of the process are not available. On the contrary, often only data from one of them are known
+![image-20241116112504606](random/image-20241116112504606.png)
+
+> The **expectation** returns the probability-weighted average of the specific function at that specific time
+> over all possible realizations of the process
 
 
+
+### Stationarity
+
+![image-20240720140527704](random/image-20240720140527704.png)
+
+
+
+### Ergodicity
 
 ***ensemble autocorrelation*** and ***temporal autocorrelation (time autocorrelation)*** 
 
 ![image-20240719230346944](random/image-20240719230346944.png)
 
-> ![image-20240719210621021](random/image-20240719210621021.png)![image-20240720140527704](random/image-20240720140527704.png)
+![image-20240719210621021](random/image-20240719210621021.png)
 
 
 

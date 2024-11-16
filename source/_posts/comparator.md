@@ -145,7 +145,7 @@ It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the fact
 
 ## Kickback Noise
 
-> Kickback noise trades with the *dimensions of the input transistors* and hence with the *offset voltage*
+> *Kickback noise* trades with the *dimensions of the input transistors* and hence with the *offset voltage*
 
 -  affects the comparator's own decision
 -  corrupts the input voltage while it is sensed by other circuits
@@ -154,6 +154,8 @@ It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the fact
 
 
 
+> Tetsuya Iizuka,VLSI2021_Workshop3 "Nyquist A/D Converter Design in Four Days"
+>
 > Figueiredo, Pedro & Vital, João. (2006). Kickback noise reduction techniques for CMOS latched comparators. Circuits and Systems II: Express Briefs, IEEE Transactions on. 53. 541 - 545. 10.1109/TCSII.2006.875308. [[https://sci-hub.se/10.1109/TCSII.2006.875308](https://sci-hub.se/10.1109/TCSII.2006.875308)]
 >
 > P. M. Figueiredo and J. C. Vital, "Low kickback noise techniques for CMOS latched comparators," 2004 IEEE International Symposium on Circuits and Systems (ISCAS), Vancouver, BC, Canada, 2004, pp. I-537 [[https://sci-hub.se/10.1109/ISCAS.2004.1328250](https://sci-hub.se/10.1109/ISCAS.2004.1328250)]

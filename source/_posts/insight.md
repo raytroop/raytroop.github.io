@@ -105,6 +105,36 @@ $$
 
 
 
+## Channel-Length Modulation & Pinched off
+
+- $\lambda \propto \frac{1}{L_g}$
+- $\lambda \propto \frac{1}{V_{DS}}$
+
+![image-20241116080122184](insight/image-20241116080122184.png)
+
+- If $V_{DS}$ is *slightly* greater than $V_{GS} - V_{TH}$, then the *inversion layer* stops at $x \leq L$, and we say the channel is "**pinched off**"
+- Upon passing the pinchoff point, the electrons simply shoot through the depletion region near the drain junction and arrive at the drain terminal
+
+> $L^{'}$ is the function of $V_{DS}$
+
+with $\frac{1}{L^{'}} = \frac{1}{L-\Delta L}=\frac{L+\Delta L}{L^2-\Delta L^2}\approx \frac{1}{L}\left(1+\frac{\Delta L}{L}\right)$, we have
+$$
+I_D \approx \frac{1}{2}\mu_n C_{ox}\frac{W}{L}\left(1+\frac{\Delta L}{L}\right)(V_{GS}-V_{TH})^2 = \frac{1}{2}\mu_n C_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2 (1+\lambda V_{DS})
+$$
+assuming  $\frac{\Delta L}{L} = \lambda V_{DS}$
+
+> $\lambda$ represents the *relative* variation in length for a given increment in $V_{DS}$. Thus, for longer channels, $\lambda$ is smaller
+
+
+
+---
+
+In reality, however, $r_O$ varies with $V_{DS}$. As $V_{DS}$ *increases* and the pinch-off point moves toward the source, the *rate* at which the depletion region around the source becomes wider *decreases*, resulting in a *higher* incremental output impedance.
+
+![image-20241116084353713](insight/image-20241116084353713.png)
+
+
+
 ## Early Voltage indicator
 
 $$
@@ -909,7 +939,7 @@ Conversely, a positive $\Delta V_\text{GS}$ produces a positive $\Delta I_D$, as
 
 
 
-### drain-induced barrier lowering (DIBL)
+### Drain-Induced Barrier Lowering (DIBL)
 
 As a result of DIBL, **threshold voltage is reduced** with shorter channel lengths and, consequently, the subthreshold leakage current is increased
 
@@ -917,9 +947,13 @@ As a result of DIBL, **threshold voltage is reduced** with shorter channel lengt
 
 ***impact on output impedance***
 
-In short-channel devices, as $V_{DS}$ increases further, drain-induced barrier lowering becomes significant, reducing the threshold voltage and increasing the drain current
+The principal impact of DIBL on circuit design is the degraded output impedance.
+
+> In short-channel devices, as $V_{DS}$ increases further, drain-induced barrier lowering becomes significant, *reducing the threshold voltage* and increasing the drain current
 
 ![image-20240901232709711](insight/image-20240901232709711.png)
+
+> Impact Ionization and GIDL are *different*, however both *increase* drain current, which flowing from the drain into the substrate
 
 
 

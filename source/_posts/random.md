@@ -11,9 +11,28 @@ mathjax: true
 
 
 
-## autocorrelation, Stationarity & Ergodicity
+##  Ensemble average
+
+> [[https://ece-research.unm.edu/bsanthan/ece541/stat.pdf](https://ece-research.unm.edu/bsanthan/ece541/stat.pdf)]
+>
+> [[https://www.nii.ac.jp/qis/first-quantum/e/forStudents/lecture/pdf/noise/chapter1.pdf](https://www.nii.ac.jp/qis/first-quantum/e/forStudents/lecture/pdf/noise/chapter1.pdf)]
+
+- **Time average**: time-averaged quantities for the $i$-th member of the ensemble
+- **Ensemble average**: ensemble-averaged quantities for all members of the ensemble at *a certain time*
 
 ![image-20241116113758119](random/image-20241116113758119.png)
+
+![image-20241116215119239](random/image-20241116215119239.png)
+
+
+
+> ![image-20241116215140298](random/image-20241116215140298.png)
+>
+> where $\theta$ is one member of the ensemble; $p(x)dx$ is the probability that $x$ is found among $[x, x + dx]$
+
+
+
+## autocorrelation, Stationarity & Ergodicity
 
 ### autocorrelation
 
@@ -40,11 +59,7 @@ mathjax: true
 
 
 
-
-
 ##  LTI Filtering of WSS process
-
-
 
 ### mean
 
@@ -54,11 +69,7 @@ mathjax: true
 
 
 
-
-
 ---
-
-
 
 ![image-20240827221945277](random/image-20240827221945277.png)
 

@@ -167,7 +167,29 @@ $$
 
 > Noisy Resistor +  & Switched-Capacitor
 
-*TODO* &#128197;
+$$
+v_t (t) = v_i(t)\cdot m_t(t)
+$$
+where  $v_i(t)$ is input colored noise, $m_t(t)$ is periodically operating switch, then autocorrelation of $v_t(t)$
+$$\begin{align}
+R_t (t_1, t_2) &= E[v_t(t_1)\cdot v_t(t_2)] \\
+&= R_i(t_1, t_2)\cdot  m_t(t_1)m_t(t_2)
+\end{align}$$
+
+Then
+$$
+R_t(t, t-\tau) = R_i(\tau)\cdot m_t(t)m_t(t-\tau)
+$$
+Because $m_t(t)=m_t(t+T)$, $R_t(t, t-\tau)$ is is periodic in the variable $t$ with period $T$
+
+The time-averaged ACF is denoted as $\tilde{R_t}(\tau)$
+
+
+
+
+
+---
+
 
 ![image-20241116165632847](comm/image-20241116165632847.png)
 

@@ -182,10 +182,19 @@ R_t(t, t-\tau) = R_i(\tau)\cdot m_t(t)m_t(t-\tau)
 $$
 Because $m_t(t)=m_t(t+T)$, $R_t(t, t-\tau)$ is is periodic in the variable $t$ with period $T$
 
+rearrange the above equation, 
+
+$$\begin{align}
+R_t(t, t-\tau) &= R_i(\tau)\cdot m_t(t)[m_t(t-\tau)+m_t(t)-m_t(t)] \\
+&= R_i(\tau)\cdot [m_t^2(t) + m_t(t)(m_t(t-\tau)-m_t(t))] \\
+&= R_i(\tau)\cdot [m_t(t) + m_t(t)(m_t(t-\tau)-m_t(t))] 
+\end{align}$$
+
 The time-averaged ACF is denoted as $\tilde{R_t}(\tau)$
 
-
-
+$$
+\tilde{R_t}(\tau) = \frac{1}{T}\int_{-T/2}^{T/2}R_i(\tau)\cdot m_t(t)dt + \frac{1}{T}\int_{-T/2}^{T/2}R_i(\tau)\cdot m_t(t)(m_t(t-\tau)-m_t(t))dt = m\cdot R_i(\tau)
+$$
 
 
 ---

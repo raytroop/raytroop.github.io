@@ -196,6 +196,9 @@ $$
 \tilde{R_t}(\tau) = \frac{1}{T}\int_{-T/2}^{T/2}R_i(\tau)\cdot m_t(t)dt + \frac{1}{T}\int_{-T/2}^{T/2}R_i(\tau)\cdot m_t(t)(m_t(t-\tau)-m_t(t))dt = m\cdot R_i(\tau)
 $$
 
+That is $S_t(f) = m\cdot S_i(f)$
+
+
 
 ---
 

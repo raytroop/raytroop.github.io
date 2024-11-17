@@ -182,32 +182,37 @@ R_t(t, t-\tau) = R_i(\tau)\cdot m_t(t)m_t(t-\tau)
 $$
 Because $m_t(t)=m_t(t+T)$, $R_t(t, t-\tau)$ is is periodic in the variable $t$ with period $T$
 
-rearrange the above equation, 
-
-$$\begin{align}
-R_t(t, t-\tau) &= R_i(\tau)\cdot m_t(t)[m_t(t-\tau)+m_t(t)-m_t(t)] \\
-&= R_i(\tau)\cdot [m_t^2(t) + m_t(t)(m_t(t-\tau)-m_t(t))] \\
-&= R_i(\tau)\cdot [m_t(t) + m_t(t)(m_t(t-\tau)-m_t(t))] 
-\end{align}$$
+![tavg_factor.drawio](comm/tavg_factor.drawio.svg)
 
 The time-averaged ACF is denoted as $\tilde{R_t}(\tau)$
-
 $$
-\tilde{R_t}(\tau) = \frac{1}{T}\int_{-T/2}^{T/2}R_i(\tau)\cdot m_t(t)dt + \frac{1}{T}\int_{-T/2}^{T/2}R_i(\tau)\cdot m_t(t)(m_t(t-\tau)-m_t(t))dt = m\cdot R_i(\tau)
+\tilde{R_t}(\tau) = R_i(\tau)\cdot \overline{m_t(t)m_t(t-\tau)} = R_i(\tau)\cdot \overline{m_{tac}}(\tau)
 $$
-
-That is $S_t(f) = m\cdot S_i(f)$
-
-
+with PSD $\tilde{S_t}(f)$
+$$
+\tilde{R_t}(\tau) = R_i(\tau)\cdot \overline{m_{tac}}(\tau) = \int \tilde{S_t}(f) e^{j2\pi f\tau} df
+$$
+That is
+$$
+mR_i(0) = \int \tilde{S_t}(f)df
+$$
+Since $R_i(0) = \int S_i(f)df$, the total power are scaled by the duty cycle $m$
 
 ---
+
+![image-20241117205422217](comm/image-20241117205422217.png)
+
 
 
 ![image-20241116165632847](comm/image-20241116165632847.png)
 
 
 
+The below simulation result **don't** support above equation (4) 
 
+![image-20241117211541531](comm/image-20241117211541531.png)
+
+![image-20241117211722883](comm/image-20241117211722883.png)
 
 
 
@@ -225,4 +230,8 @@ Rhee, W. and Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit 
 
 Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-paper.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
 
+Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF.  URL:[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)
+
 STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf](https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf)]
+
+Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]

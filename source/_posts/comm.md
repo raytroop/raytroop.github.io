@@ -180,14 +180,14 @@ $$
 ![tavg_factor.drawio](comm/tavg_factor.drawio.svg)
 
 $$
-\tilde{R_t}(\tau) = R_i(\tau)\cdot m_{tac}(\tau) = \int \tilde{S_t}(f) e^{j2\pi f\tau} df
-$$
-That is
-$$
-\tilde{R_t}(0) = mR_i(0) = m\int {S_i}(f)df
+\tilde{R_t}(\tau) = R_i(\tau)\cdot m_{tac}(\tau)
 $$
 
-Therefore, the total power are scaled by the duty cycle $m$
+where $m_t(t)m_t(t-\tau)$ averaged on $t$  is denoted as $m_{tac}(\tau)$ or $\overline{m_t(t)m_t(t-\tau)}$
+
+The DC value of $m_{tac}(\tau)$, either $m\lt0.5$ or $m \gt 0.5$ is $m^2$
+
+Therefore, time-average power spectral density and total power are *scaled by $m^2$ in fundamental frequency*
 
 
 >![image-20241117205422217](comm/image-20241117205422217.png)

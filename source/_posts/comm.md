@@ -136,11 +136,7 @@ where $x[n]$ is sampled discrete-time sequence, $x_s(t)$ is sampled impulse trai
 
 
 
-### track signal noise
-
-![image-20241116165354175](comm/image-20241116165354175.png)
-
-#### White Noise
+### White Noise Modulation
 
 > Noisy Resistor & Clocked Switch
 
@@ -170,15 +166,21 @@ That is,
 $$
 S_t(f) = m\cdot S_{A}(f)
 $$
-![image-20241116170450589](comm/image-20241116170450589.png)
+
+
+---
+
+![image-20241118212505205](comm/image-20241118212505205.png)
+
+![image-20241118212242823](comm/image-20241118212242823.png)
+
+> ![image-20241116170450589](comm/image-20241116170450589.png)
 
 
 
-#### Colored Noise
+### Colored Noise Modulation
 
-> Noisy Resistor +  & Switched-Capacitor
 ![tavg_factor.drawio](comm/tavg_factor.drawio.svg)
-
 $$
 \tilde{R_t}(\tau) = R_i(\tau)\cdot m_{tac}(\tau)
 $$
@@ -187,15 +189,78 @@ where $m_t(t)m_t(t-\tau)$ averaged on $t$  is denoted as $m_{tac}(\tau)$ or $\ov
 
 The DC value of $m_{tac}(\tau)$, either $m\lt0.5$ or $m \gt 0.5$ is $m^2$
 
-Therefore, time-average power spectral density and total power are *scaled by $m^2$ in fundamental frequency*
+1. for $m\le 0.5$, the DC value of $m_{tac}(\tau)$
+   $$
+   \frac{m\cdot mT}{T} = m^2
+   $$
+
+2. for $m\gt 0.5$, the DC value of $m_{tac}(\tau)$
+   $$
+   \frac{(m+2m-1)(1-m)T + (2m-1)\{mT -(1-m)T\}}{T} = m^2
+   $$
+   
+
+Therefore, time-average power spectral density and total power are *scaled by $m^2$ in fundamental frequency sideband*
+
+
+
+---
+
+![image-20241118213007400](comm/image-20241118213007400.png)
+
+![image-20241118215846751](comm/image-20241118215846751.png)
+
+
 
 
 >![image-20241117205422217](comm/image-20241117205422217.png)
 
 ---
-Thermal noise of R is *first modulated*, *then filtered* by RC filter.
+
+
+### Switched-Capacitor Track signal
+
+![image-20241118213830893](comm/image-20241118213830893.png)
 
 ![image-20241116165632847](comm/image-20241116165632847.png)
+
+
+
+#### track signal pnoise (sc)
+
+![image-20241118220145885](comm/image-20241118220145885.png)
+
+![image-20241118215956843](comm/image-20241118215956843.png)
+
+
+
+zoom in first harmonic by linear step of pnoise
+
+![image-20241118220904802](comm/image-20241118220904802.png)
+
+
+
+#### equivalent circuit for pnoise (eq)
+
+1. thermal noise of R is *modulated at first*
+2. *then filtered* by RC filter
+
+![image-20241118214320950](comm/image-20241118214320950.png)
+
+![image-20241118220027598](comm/image-20241118220027598.png)
+
+
+
+---
+
+#### sc vs eq
+
+![image-20241118222730383](comm/image-20241118222730383.png)
+
+
+
+- sc: harmonic distortion
+- eq: no harmonic distortion
 
 
 

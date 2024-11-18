@@ -163,7 +163,7 @@ Because $m_t(t)=m_t(t+T)$, $R_t(t, t-\tau)$ is is periodic in the variable $t$ w
 
 The time-averaged ACF is denoted as $\tilde{R_t}(\tau)$
 $$
-\tilde{R_t}(\tau) = R_i(\tau)\cdot \overline{m_t(t)m_t(t-\tau)} = R_i(\tau)\cdot \overline{m_{tac}}(\tau)
+\tilde{R_t}(\tau) = R_i(\tau)\cdot \overline{m_t(t)m_t(t-\tau)} = R_i(\tau)\cdot m_{tac}(\tau)
 $$
 
 with $R_i(\tau) = A\delta(\tau)$, the time-averaged ACF denoted $\tilde{R}_t(\tau)$ via:
@@ -183,7 +183,7 @@ $$
 > Noisy Resistor +  & Switched-Capacitor
 
 $$
-\tilde{R_t}(\tau) = R_i(\tau)\cdot \overline{m_{tac}}(\tau) = \int \tilde{S_t}(f) e^{j2\pi f\tau} df
+\tilde{R_t}(\tau) = R_i(\tau)\cdot m_{tac}(\tau) = \int \tilde{S_t}(f) e^{j2\pi f\tau} df
 $$
 That is
 $$

@@ -147,7 +147,7 @@ where $x[n]$ is sampled discrete-time sequence, $x_s(t)$ is sampled impulse trai
 $$
 v_t (t) = v_i(t)\cdot m_t(t)
 $$
-where  $v_i(t)$ is input colored noise, $m_t(t)$ is periodically operating switch, then autocorrelation of $v_t(t)$
+where  $v_i(t)$ is input *white* noise, $m_t(t)$ is periodically operating switch, then autocorrelation of $v_t(t)$
 $$\begin{align}
 R_t (t_1, t_2) &= E[v_t(t_1)\cdot v_t(t_2)] \\
 &= R_i(t_1, t_2)\cdot  m_t(t_1)m_t(t_2)

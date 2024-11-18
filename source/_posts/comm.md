@@ -198,21 +198,13 @@ mR_i(0) = \int \tilde{S_t}(f)df
 $$
 Since $R_i(0) = \int S_i(f)df$, the total power are scaled by the duty cycle $m$
 
+
+>![image-20241117205422217](comm/image-20241117205422217.png)
+
 ---
-
-![image-20241117205422217](comm/image-20241117205422217.png)
-
-
 
 ![image-20241116165632847](comm/image-20241116165632847.png)
 
-
-
-The below simulation result **don't** support above equation (4) 
-
-![image-20241117211541531](comm/image-20241117211541531.png)
-
-![image-20241117211722883](comm/image-20241117211722883.png)
 
 
 

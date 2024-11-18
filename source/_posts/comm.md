@@ -193,6 +193,7 @@ Therefore, time-average power spectral density and total power are *scaled by $m
 >![image-20241117205422217](comm/image-20241117205422217.png)
 
 ---
+Thermal noise of R is *first modulated*, *then filtered* by RC filter.
 
 ![image-20241116165632847](comm/image-20241116165632847.png)
 

@@ -144,29 +144,6 @@ where $x[n]$ is sampled discrete-time sequence, $x_s(t)$ is sampled impulse trai
 
 > Noisy Resistor & Clocked Switch
 
-The track signal ($v_t$), which is cyclostationary, with period $T$
-$$
-R_{t}(t,\tau) = \left\{ \begin{array}{cl}
-A\cdot\delta(\tau) &  \ 0 \leq t \leq mT  \\
-0 &  \ mT \lt t \lt T
-\end{array} \right.
-$$
-Then the time-averaged ACF denoted $\tilde{R}_t(\tau)$ via:
-$$
-\tilde{R}_{t}(\tau) = m\cdot A\cdot\delta(\tau)
-$$
-That is,
-$$
-S_t(f) = mS_{A}(f)
-$$
-![image-20241116170450589](comm/image-20241116170450589.png)
-
-
-
-#### Colored Noise
-
-> Noisy Resistor +  & Switched-Capacitor
-
 $$
 v_t (t) = v_i(t)\cdot m_t(t)
 $$
@@ -188,15 +165,32 @@ The time-averaged ACF is denoted as $\tilde{R_t}(\tau)$
 $$
 \tilde{R_t}(\tau) = R_i(\tau)\cdot \overline{m_t(t)m_t(t-\tau)} = R_i(\tau)\cdot \overline{m_{tac}}(\tau)
 $$
-with PSD $\tilde{S_t}(f)$
+
+with $R_i(\tau) = A\delta(\tau)$, the time-averaged ACF denoted $\tilde{R}_t(\tau)$ via:
+$$
+\tilde{R}_{t}(\tau) = m\cdot A\delta(\tau)
+$$
+That is,
+$$
+S_t(f) = m\cdot S_{A}(f)
+$$
+![image-20241116170450589](comm/image-20241116170450589.png)
+
+
+
+#### Colored Noise
+
+> Noisy Resistor +  & Switched-Capacitor
+
 $$
 \tilde{R_t}(\tau) = R_i(\tau)\cdot \overline{m_{tac}}(\tau) = \int \tilde{S_t}(f) e^{j2\pi f\tau} df
 $$
 That is
 $$
-mR_i(0) = \int \tilde{S_t}(f)df
+\tilde{R_t}(0) = mR_i(0) = m\int {S_i}(f)df
 $$
-Since $R_i(0) = \int S_i(f)df$, the total power are scaled by the duty cycle $m$
+
+Therefore, the total power are scaled by the duty cycle $m$
 
 
 >![image-20241117205422217](comm/image-20241117205422217.png)
@@ -204,8 +198,6 @@ Since $R_i(0) = \int S_i(f)df$, the total power are scaled by the duty cycle $m$
 ---
 
 ![image-20241116165632847](comm/image-20241116165632847.png)
-
-
 
 
 

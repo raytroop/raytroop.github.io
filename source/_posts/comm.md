@@ -187,7 +187,7 @@ $$
 
 where $m_t(t)m_t(t-\tau)$ averaged on $t$  is denoted as $m_{tac}(\tau)$ or $\overline{m_t(t)m_t(t-\tau)}$
 
-The DC value of $m_{tac}(\tau)$, either $m\lt0.5$ or $m \gt 0.5$ is $m^2$
+The DC value of $m_{tac}(\tau)$ can be calculated as below
 
 1. for $m\le 0.5$, the DC value of $m_{tac}(\tau)$
    $$

@@ -147,26 +147,22 @@ where $x[n]$ is sampled discrete-time sequence, $x_s(t)$ is sampled impulse trai
 $$
 v_t (t) = v_i(t)\cdot m_t(t)
 $$
-where  $v_i(t)$ is input *white* noise, $m_t(t)$ is periodically operating switch, then autocorrelation of $v_t(t)$
+where  $v_i(t)$ is input *white* noise, whose autocorrelation is $A\delta(\tau)$, and $m_t(t)$ is periodically operating switch, then autocorrelation of $v_t(t)$
 $$\begin{align}
 R_t (t_1, t_2) &= E[v_t(t_1)\cdot v_t(t_2)] \\
 &= R_i(t_1, t_2)\cdot  m_t(t_1)m_t(t_2)
 \end{align}$$
 
 Then
-$$
-R_t(t, t-\tau) = R_i(\tau)\cdot m_t(t)m_t(t-\tau)
-$$
+$$\begin{align}
+R_t(t, t-\tau) &= R_i(\tau)\cdot m_t(t)m_t(t-\tau) \\
+& = A\delta(\tau) \cdot m_t(t)m_t(t-\tau) \\
+& = A\delta(\tau) \cdot m_t(t)
+\end{align}$$
 Because $m_t(t)=m_t(t+T)$, $R_t(t, t-\tau)$ is is periodic in the variable $t$ with period $T$
 
-![tavg_factor.drawio](comm/tavg_factor.drawio.svg)
-
 The time-averaged ACF is denoted as $\tilde{R_t}(\tau)$
-$$
-\tilde{R_t}(\tau) = R_i(\tau)\cdot \overline{m_t(t)m_t(t-\tau)} = R_i(\tau)\cdot m_{tac}(\tau)
-$$
 
-with $R_i(\tau) = A\delta(\tau)$, the time-averaged ACF denoted $\tilde{R}_t(\tau)$ via:
 $$
 \tilde{R}_{t}(\tau) = m\cdot A\delta(\tau)
 $$
@@ -181,6 +177,7 @@ $$
 #### Colored Noise
 
 > Noisy Resistor +  & Switched-Capacitor
+![tavg_factor.drawio](comm/tavg_factor.drawio.svg)
 
 $$
 \tilde{R_t}(\tau) = R_i(\tau)\cdot m_{tac}(\tau) = \int \tilde{S_t}(f) e^{j2\pi f\tau} df

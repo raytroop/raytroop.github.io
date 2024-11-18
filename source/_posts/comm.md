@@ -243,7 +243,7 @@ zoom in first harmonic by linear step of pnoise
 #### equivalent circuit for pnoise (eq)
 
 1. thermal noise of R is *modulated at first*
-2. *then filtered* by RC filter
+2. *then filtered* by ideal filter
 
 ![image-20241118214320950](comm/image-20241118214320950.png)
 

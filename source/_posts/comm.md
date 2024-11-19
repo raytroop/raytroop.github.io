@@ -238,7 +238,7 @@ zoom in first harmonic by linear step of pnoise
 
 ![image-20241118220904802](comm/image-20241118220904802.png)
 
-
+> decreasing the rising/falling time of clock, the harmonics still retain
 
 #### equivalent circuit for pnoise (eq)
 

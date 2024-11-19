@@ -37,3 +37,17 @@ mathjax:
 # 阿克曼转向几何 (Ackerman steering geometry)
 
 ![image-20241117112328574](fiscal/image-20241117112328574.png)
+
+
+
+## 缸内直喷 (direct injection)
+
+- 歧管喷油
+- 缸内直喷
+  - 省油
+  - 动力更强
+  - 喷油时间自由度大
+
+
+
+![image-20241119205154609](fiscal/image-20241119205154609.png)

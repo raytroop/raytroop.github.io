@@ -15,6 +15,14 @@ The average output of DSM tracks the input signal
 
 
 
+## linear settling & GBW of amplifier
+
+*TODO* &#128197;
+
+Switched capacitor has been the common realization technique of *discrete-time (DT) modulators*, and in order to achieve a **linear settling**, the *sampling frequency* used in these converters needs to be *significantly lower than the gain bandwidth product (GBW) o*f the amplifiers. 
+
+
+
 ## Delta Modulator
 
 ![image-20240908173930949](delta-sigma/image-20240908173930949.png)

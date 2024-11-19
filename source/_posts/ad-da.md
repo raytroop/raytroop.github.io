@@ -24,7 +24,7 @@ mathjax: true
 
 
 
-## Quantization Noise
+## Quantization Noise & its Spectrum
 
 ![image-20240825221754959](ad-da/image-20240825221754959.png)
 
@@ -33,6 +33,30 @@ mathjax: true
 > This error can be considered a quantization noise with **RMS**
 
 ![image-20240925235213137](ad-da/image-20240925235213137.png)
+
+## ENOB & SQNR
+
+The quantization noise power $P_Q$ for a uniform quantizer with step size $\Delta$ is given by
+$$
+P_Q = \frac{\Delta ^2}{12}
+$$
+For a full-scale sinusoidal input signal with an amplitude equal to $V_{FS}/2$, the input signal is given by $x(t) = \frac{V_{FS}}{2}\sin(\omega t)$
+
+Then input signal power $P_s$ is
+$$
+P_s = \frac{V_{FS}^2}{8}
+$$
+Therefore, the **signal-to-quantization noise ratio (SQNR)** is given by
+$$
+\text{SQNR} = \frac{P_s}{P_Q} = \frac{V_{FS}^2/8}{\Delta^2/12}=\frac{V_{FS}^2/8}{V_{FS}^2/(12\times 2^{2N})} = \frac{3\times 2^{2N}}{2}
+$$
+where $N$ is the number of quantization bits
+
+When represented in dBs
+$$
+\text{SQNR(dB)} = 10\log(\frac{P_s}{P_Q}) = 10\log(\frac{3\times 2^{2N}}{2})= 20N\log(2) + 10\log(\frac{3}{2})= 6.02N + 1.76
+$$
+
 
 ## Quantization is NOT Noise
 
@@ -393,3 +417,4 @@ Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR = 6.02N + 1.76
 
 Dan Boschen, "How to choose FFT depth for ADC performance analysis (SINAD, ENOB)", [[https://dsp.stackexchange.com/a/38201](https://dsp.stackexchange.com/a/38201)]
 
+Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]

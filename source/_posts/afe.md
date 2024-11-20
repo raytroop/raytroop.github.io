@@ -157,7 +157,7 @@ At the end, $V_\text{im} = V_\text{cmi} - (\Delta - \delta)$, the error is $\del
 
 In closing, $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV}$ for normal work
 
-> Furthermore, the difference between $V_\text{cmr}$ and $V_\text{cmi}$ should be minimized due to limited impedance of current source
+Furthermore, the difference between $V_\text{cmr}$ and $V_\text{cmi}$ should be minimized due to **limited impedance of current source** and **input pair offset**
 
 
 

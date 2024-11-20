@@ -7,6 +7,10 @@ categories:
 mathjax: true
 ---
 
+![image-20241120201536599](MOS-Cap/image-20241120201536599.png)
+
+---
+
 
 
 ## MOS capacitances
@@ -33,9 +37,27 @@ classification with **Intrinsic** and **Extrinsic** MOS capacitor
 [[Circuit Insights - 11-CI: Fundamentals 4 Tsinghua Nan Sun](https://youtu.be/sAQqkdpvsZA?si=oTnYVNmPY7yMhBPt)]
 
 
+
+![image-20241120201251573](MOS-Cap/image-20241120201251573.png)
+
+![image-20241120201118276](MOS-Cap/image-20241120201118276.png)
+
+![image-20241120201127218](MOS-Cap/image-20241120201127218.png)
+
+![image-20241120201309635](MOS-Cap/image-20241120201309635.png)
+
+![image-20241120201339074](MOS-Cap/image-20241120201339074.png)
+
+![image-20241120201603222](MOS-Cap/image-20241120201603222.png)
+
+
+
+
 ## FinFET Parasitic Fringing Capacitance
 
+![image-20241120201725441](MOS-Cap/image-20241120201725441.png)
 
+![image-20241120201739690](MOS-Cap/image-20241120201739690.png)
 
 
 

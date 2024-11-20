@@ -229,6 +229,9 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 
 
+## Gated diode & STI diode
+
+
 
 
 ## Reference

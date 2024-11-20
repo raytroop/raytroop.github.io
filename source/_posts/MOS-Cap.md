@@ -33,6 +33,8 @@ classification with **Intrinsic** and **Extrinsic** MOS capacitor
 [[Circuit Insights - 11-CI: Fundamentals 4 Tsinghua Nan Sun](https://youtu.be/sAQqkdpvsZA?si=oTnYVNmPY7yMhBPt)]
 
 
+## FinFET Parasitic Fringing Capacitance
+
 
 
 
@@ -144,3 +146,4 @@ R. Jacob Baker, 6.1 MOSFET Capacitance Overview/Review, CMOS Circuit Design, Lay
 
 B. Razavi, Design of Analog CMOS Integrated Circuits 2nd
 
+Bing Sheu, TSMC. "Circuit Design using FinFETs" [[https://www.nishanchettri.com/isscc-slides/2013%20ISSCC/TUTORIALS/ISSCC2013Visuals-T4.pdf](https://www.nishanchettri.com/isscc-slides/2013%20ISSCC/TUTORIALS/ISSCC2013Visuals-T4.pdf)]

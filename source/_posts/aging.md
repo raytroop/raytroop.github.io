@@ -231,6 +231,20 @@ BTI recovery effect **NOT** included for N7
 
 ![image-20231106230226203](aging/image-20231106230226203.png)
 
+## Heat transfer, thermal resistance
+
+![image-20241120222920258](aging/image-20241120222920258.png)
+
+---
+
+
+
+![image-20241120221254833](aging/image-20241120221254833.png)
+
+![image-20241120221405337](aging/image-20241120221405337.png)
+
+![image-20241120223053280](aging/image-20241120223053280.png)
+
 
 
 ## reference

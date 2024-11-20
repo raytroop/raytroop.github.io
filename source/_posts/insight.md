@@ -956,6 +956,10 @@ The principal impact of DIBL on circuit design is the degraded output impedance.
 
 
 
+![image-20241120210915254](insight/image-20241120210915254.png)
+
+
+
 ### Gate induced drain leakage (GIDL)
 
 ![image-20241110001118250](insight/image-20241110001118250.png)

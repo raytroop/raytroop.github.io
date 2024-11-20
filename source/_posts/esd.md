@@ -6,7 +6,31 @@ categories:
 - analog
 ---
 
-## TLP
+
+
+## Gated diode & STI diode
+
+*TODO* &#128197;
+
+![image-20241120212904118](esd/image-20241120212904118.png)
+
+![image-20241120213020790](esd/image-20241120213020790.png)
+
+
+
+> M. Simicic, G. Hellings, S. -H. Chen, N. Horiguchi and D. Linten, "ESD diodes with Si/SiGe superlattice I/O finFET architecture in a vertically stacked horizontal nanowire technology," 2018 48th European Solid-State Device Research Conference (ESSDERC), Dresden, Germany, 2018
+
+---
+
+
+
+![image-20241120211301296](esd/image-20241120211301296.png)
+
+![image-20241120211426247](esd/image-20241120211426247.png)
+
+
+
+## TLP 
 
 > TRANSMISSION LINE PULSE TESTING: THE INDISPENSABLE TOOL FOR ESD CHARACTERIZATION OF DEVICES, CIRCUITS AND SYSTEMS [[https://www.esda.org/assets/News/1708-ESD-firstDraft.pdf](https://www.esda.org/assets/News/1708-ESD-firstDraft.pdf)]
 
@@ -72,7 +96,9 @@ DC leakage current data combined with the I-V data provides electrical indicatio
 >
 > Henry, L.G. & Barth, Jon & Verhaege, K. & Richner, J.. (2001). Transmission-line pulse ESD testing of ICs: A new beginning. Compliance Engineering. 18. 46+53. [[https://barthelectronics.com/pdf_files/CE%20TLP%20Article%20March-April%202001.pdf](https://barthelectronics.com/pdf_files/CE%20TLP%20Article%20March-April%202001.pdf)]
 
-## snapback device
+
+
+## Snapback
 
 Unfortunately, this protection concept is not effective anymore in advanced FinFET technology.
 Our analysis showed that both core and IO transistors are damaged at the onset of snapback in several FinFET processes.
@@ -82,7 +108,16 @@ Our analysis showed that both core and IO transistors are damaged at the onset o
 
 > Introduction of Transmission Line Pulse (TLP) Testing for ESD Analysis - Device Level [[https://www.esdemc.com/public/docs/TechnicalSlides/ESDEMC_TS001.pdf](https://www.esdemc.com/public/docs/TechnicalSlides/ESDEMC_TS001.pdf)]
 
+
+
+## Safe operating area (SOA)
+
+![image-20241120210746211](esd/image-20241120210746211.png)
+
+
+
 ## power clamp
+
 Thanks to the device scaling the area is actually reasonable. However, the leakage becomes the main bottleneck.
 ![bigfet-concept](esd/bigfet-concept.jpg)
 
@@ -214,7 +249,7 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 1. **DB** junction is reverse-biased all the way to its breakdown.
 2. Avalance multiplication takes place and generates electron-hole pairs
-3. Hole current flows into the ground via the *B-region** and build up a potential, VR, across the lateral parasitic resistance R
+3. Hole current flows into the ground via the **B-region** and build up a potential, VR, across the lateral parasitic resistance R
 4. As VR increases, the **BS** junction turns on, eventually triggers the parasitic lateral NPN transistor Q (**DBS**)
 
 ### Negative ESD transient at I/O pad
@@ -228,8 +263,6 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 > These GPIO is self-protective thanks to the ggNMOS.
 
 
-
-## Gated diode & STI diode
 
 
 

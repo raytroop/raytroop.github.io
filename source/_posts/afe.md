@@ -150,26 +150,15 @@ i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}
 
 ---
 
-If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV}$, one transistor carries the entire tail current
+If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV} + \delta$, and $\delta \gt 0$. one transistor carries the entire tail current
 
-- $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$  all the time
+- $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$,  all the time
 
-At end of comparison, $V_\text{im} = V_\text{cmi} - \Delta$
+At the end, $V_\text{im} = V_\text{cmi} - (\Delta - \delta)$, the error is $\delta$
 
+In closing, $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV}$ for normal work
 
-
----
-
-If $V_\text{cmr} - V_\text{cmi} \gt \sqrt{2}V_{OV} + \Delta$
-
-- $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$;  $I_\text{im} =0$ and $I_\text{rm} = I_{SS}$ all the time
-
-The comparator **don't** work
----
-
-Therefore, we ensure $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV}$, the compare range is $0 \to \infty$
-
-Furthermore, the difference between $V_\text{cmr}$ and $V_\text{cmi}$ should be minimized due to limited impedance of current source
+> Furthermore, the difference between $V_\text{cmr}$ and $V_\text{cmi}$ should be minimized due to limited impedance of current source
 
 
 

@@ -154,21 +154,22 @@ If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV}$, one transistor carries the en
 
 - $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$  all the time
 
-at end of comparison, $V_\text{im} = V_\text{cmi} - \Delta$
+At end of comparison, $V_\text{im} = V_\text{cmi} - \Delta$
 
 
 
 ---
 
-If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV} + \Delta$
+If $V_\text{cmr} - V_\text{cmi} \gt \sqrt{2}V_{OV} + \Delta$
 
 - $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$;  $I_\text{im} =0$ and $I_\text{rm} = I_{SS}$ all the time
 
+The comparator **don't** work
+---
 
+Therefore, we ensure $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV}$, the compare range is $0 \to \infty$
 
-> **Therefore, $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV} + \Delta$ for normal work of comparator**
->
-> **further more,  the difference between $V_\text{cmr}$ and $V_\text{cmi}$ shall be minimized due to limited impedance of current source**
+Furthermore, the difference between $V_\text{cmr}$ and $V_\text{cmi}$ should be minimized due to limited impedance of current source
 
 
 

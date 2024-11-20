@@ -299,12 +299,6 @@ $$
 
 
 
-## Bilinear Transformation
-
-*TODO* &#128197;
-
-
-
 ## Transfer function & sampled impulse response
 
 > continuous-time filter designs to discrete-time designs through techniques such as ***impulse invariance***

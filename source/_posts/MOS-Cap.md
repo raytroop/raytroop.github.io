@@ -11,9 +11,11 @@ mathjax: true
 
 ## MOS capacitances
 
-- **oxide capacitance** between the gate and the channel $C_1=WLC_{ox}$
-- **depletion capacitance** between the channel and the substrate
-- **junction capacitance** between the source/drain areas and the *substrate*
+- **oxide capacitance** (aka **gate-channel capacitance**) between the *gate* and the *channel* $C_1=WLC_{ox}$
+  - divided between $C_{GS}$ and $C_{GD}$
+- **depletion capacitance** between the *channel* and the *substrate* $C_2$
+- **overlap capacitance**: direct overlap and fringing field
+- **junction capacitance** between the *source/drain* areas and the *substrate*
   - The value of $C_{SB}$ and $C_{DB}$ is a function of the source and drain voltages with respect to the substrate
 
 ![image-20240727134110758](MOS-Cap/image-20240727134110758.png)
@@ -23,6 +25,12 @@ mathjax: true
 
 
 > The **gate-bulk capacitance** is usually neglected in the triode and saturation regions because the inversion layer acts as a "shield" between the gate and the bulk.
+
+---
+classification with **Intrinsic** and **Extrinsic** MOS capacitor
+
+[[Circuit Insights - 11-CI: Fundamentals 4 Tsinghua Nan Sun](https://youtu.be/sAQqkdpvsZA?si=oTnYVNmPY7yMhBPt)]
+
 
 
 

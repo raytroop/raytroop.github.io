@@ -18,15 +18,14 @@ mathjax: true
 *TODO* &#128197;
 
 
+## Zero-Value Time Constant Analysis
+
+*TODO* &#128197;
+
 
 ## Level Shifter
 
 ![image-20241003224949171](insight/image-20241003224949171.png)
-
-
-
-
-
 
 
 ## TIA

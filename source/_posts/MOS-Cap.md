@@ -27,6 +27,7 @@ mathjax: true
 > The **gate-bulk capacitance** is usually neglected in the triode and saturation regions because the inversion layer acts as a "shield" between the gate and the bulk.
 
 ---
+
 classification with **Intrinsic** and **Extrinsic** MOS capacitor
 
 [[Circuit Insights - 11-CI: Fundamentals 4 Tsinghua Nan Sun](https://youtu.be/sAQqkdpvsZA?si=oTnYVNmPY7yMhBPt)]

@@ -147,7 +147,6 @@ and $I_\text{ip0}= I_\text{im0} = I_\text{i0}$, $I_\text{rp0}= I_\text{rm0} = I_
 i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} = 0$
 
 
-
 ---
 
 If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV} + \delta$, and $\delta \gt 0$. one transistor carries the entire tail current

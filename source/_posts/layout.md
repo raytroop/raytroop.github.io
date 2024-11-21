@@ -1,12 +1,23 @@
 ---
-title: "Layout - The Other Half of Analog Design"
+title: Layout and DFM
 date: 2022-11-19 12:52:45
 tags:
 categories:
 - analog
 ---
 
+
+
+## Shallow Trench Isolation (STI)
+
+![image-20241121211242335](layout/image-20241121211242335.png)
+
+![image-20241121211348053](layout/image-20241121211348053.png)
+
+
+
 ## drain and source sharing
+
 ### Planar process vs. FinFet process
 
 ![local_Interconnect.drawio](layout/local_Interconnect.drawio.svg)

@@ -159,7 +159,12 @@ In closing, $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV}$ for normal work
 
 Furthermore, the difference between $V_\text{cmr}$ and $V_\text{cmi}$ should be minimized due to **limited impedance of current source** and **input pair offset**
 
+In the end
+$$
+V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV} - V_{OS}
+$$
 
+Under the condition, every transistor of pairs are on in equilibrium
 
 ### pair mismatch
 

@@ -182,6 +182,8 @@ X(e^{j\hat{\omega}}) &= X_s(j\frac{\hat{\omega}}{T}) \\
 ![image-20241013174801954](fourier/image-20241013174801954.png)
 
 > [[https://bingweb.binghamton.edu/~suzuki/Math-Physics/LN-7_Dirac_delta_function.pdf](https://bingweb.binghamton.edu/~suzuki/Math-Physics/LN-7_Dirac_delta_function.pdf)]
+>
+> Topic 3 The $\delta$-function & convolution. Impulse response & Transfer function [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-N3.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-N3.pdf)]
 
 
 

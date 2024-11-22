@@ -266,7 +266,15 @@ zoom in first harmonic by linear step of pnoise
 
 ## Non-Stationary Processes
 
+### WSS Time-domain Analysis
 
+For a WSS white noise input $x(t)$, $R_{xx}(\tau)=S_{xx}(0)\delta(\tau)$. The output $y(t)$ of a linear time-invariant (LTI) system $h(t)$ 
+$$\begin{align}
+R_{yy}(\tau) &= R_{xx}(\tau)*[h(\tau)*h(-\tau)] \\
+&= S_{xx}(0)\delta(\tau) * \int_v h(v)h(-(\tau-v))dv \\
+&= S_{xx}(0) \int_v h(v)\{\delta(\tau) *h(v-\tau)\}dv \\
+&= S_{xx}(0) \int_v |h(v)|^2dv
+\end{align}$$
 
 
 

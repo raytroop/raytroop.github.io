@@ -266,15 +266,41 @@ zoom in first harmonic by linear step of pnoise
 
 ## Non-Stationary Processes
 
-### WSS Time-domain Analysis
+### Wide-Sense-Stationary Noise
 
-For a WSS white noise input $x(t)$, $R_{xx}(\tau)=S_{xx}(0)\delta(\tau)$. The output $y(t)$ of a linear time-invariant (LTI) system $h(t)$ 
+Much like sinusoidal-steady-state signal analysis, **steady-state noise** analysis methods assume an input x(t) of **infinite duration**, which is a **Wide-Sense Stationary (WSS) random process**
+
+#### Frequency-domain Analysis
+
+![image-20241122233117654](comm/image-20241122233117654.png)
+
+#### Time-domain Analysis
+
+The output $y(t)$ of a linear time-invariant (LTI) system $h(t)$ 
 $$\begin{align}
 R_{yy}(\tau) &= R_{xx}(\tau)*[h(\tau)*h(-\tau)] \\
-&= S_{xx}(0)\delta(\tau) * \int_v h(v)h(-(\tau-v))dv \\
-&= S_{xx}(0) \int_v h(v)\{\delta(\tau) *h(v-\tau)\}dv \\
-&= S_{xx}(0) \int_v |h(v)|^2dv
+&= S_{xx}(0)\delta(\tau) * [h(\tau)*h(-\tau)] \\
+&= S_{xx}(0)[h(\tau)*h(-\tau)] \\
+&= S_{xx}(0) \int_v h(\alpha)h(\alpha-\tau)d\alpha
 \end{align}$$
+
+with WSS white noise input $x(t)$, $R_{xx}(\tau)=S_{xx}(0)\delta(\tau)$, therefore
+
+![image-20241122232641188](comm/image-20241122232641188.png)
+
+### Non-stationary Noise
+
+Assuming the noise applied duration is much less than the time constant, the output voltage does not reach steady-state and WSS noise analysis does not apply
+
+> In order to determine the response of an LTI system to a **step noise input**, the problem is *more conveniently solved in the time-domain*
+
+#### Time-domain Analysis
+
+
+
+
+
+
 
 
 

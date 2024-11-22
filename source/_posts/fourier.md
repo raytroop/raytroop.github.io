@@ -185,7 +185,7 @@ X(e^{j\hat{\omega}}) &= X_s(j\frac{\hat{\omega}}{T}) \\
 >
 > Topic 3 The $\delta$-function & convolution. Impulse response & Transfer function [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-N3.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-N3.pdf)]
 
-
+![image-20241122231208806](fourier/image-20241122231208806.png)
 
 
 

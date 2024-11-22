@@ -264,6 +264,11 @@ zoom in first harmonic by linear step of pnoise
 
 
 
+## Non-Stationary Processes
+
+
+
+
 
 ## reference
 

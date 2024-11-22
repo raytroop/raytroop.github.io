@@ -81,6 +81,10 @@ mathjax: true
 
 ![image-20240427170024123](random/image-20240427170024123.png)
 
+$$
+R_{yy}(\tau) = h(\tau)*R_{xx}(\tau)*h(-\tau) =R_{xx}(\tau)*h(\tau)*h(-\tau)
+$$
+
 ![image-20240907211343832](random/image-20240907211343832.png)
 
 

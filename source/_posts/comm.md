@@ -296,11 +296,47 @@ Assuming the noise applied duration is much less than the time constant, the out
 
 #### Time-domain Analysis
 
+![image-20241123005612107](comm/image-20241123005612107.png)
+
+The step noise input $x(t) = \nu(t)u(t)$
+$$
+R_{xx}(t_1,t_2) = E[x(t_1)x(t_2)] = R_{\nu\nu}(t_1, t_2)u(t_1)u(t_2)=R_{\nu\nu}(t_1, t_2)
+$$
+convolving the input autocorrelation function with the impulse response once for each time index
+
+![image-20241123005644828](comm/image-20241123005644828.png)
+
+>$$
+>R_{xy}(t_1, t_2) = E[x(t_1)y(t_2)] = E[x(t_1)(x(t_2)*h(t_2))] = E(x(t_1)x(t_2))*h(t_2) = R_{xx}(t_1,t_2)*h(t_2)
+>$$
+>
+>$$
+>R_{yy}(t_1,t_2) = E[y(t_1)y(t_2)] = E[(x(t_1)*h(t_1))y(t_2)] = E[x(t_1)y(t_2)]*h(t_1)=R_{xy}(t_1,t_2)*h(t_1)
+>$$
+
+![image-20241123011304449](comm/image-20241123011304449.png)
+
+> the absolute value of each time index is important for a non-stationary signal, and only the time
+> difference was important for WSS signals.
+
+ 
+
+$$\begin{align}
+R_{yy}(t_1,t_2) &= h(t_1)*R_{\nu\nu}(t_1, t_2)*h(t_2) \\
+&= h(t_1)*S_{xx}(0)\delta(t_2-t_1)*h(t_2) \\
+&=S_{xx}(0) h(t_1)*(\delta(t_2-t_1)*h(t_2)) \\
+&= S_{xx}(0)h(t_1)*h(t_2-t_1) \\
+&= S_{xx}(0)\int_\tau h(\tau)h(t_2-t_1+\tau))d\tau
+\end{align}$$
+
+That is
+$$
+\sigma^2_y = R_{yy}(t_1,t_2)|_{t_1=t_2=t}=S_{xx}(0)\int_{-\infty}^t |h(\tau)|^2d\tau
+$$
 
 
 
-
-
+> Because stable systems have impulse responses that decay to zero as time goes to infinity, **the output noise variance approaches the WSS result as time approaches infinity**  
 
 
 

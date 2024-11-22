@@ -57,6 +57,10 @@ mathjax: true
 
 ![image-20240719210621021](random/image-20240719210621021.png)
 
+---
+
+![image-20241123004051314](random/image-20241123004051314.png)
+
 
 
 ##  LTI Filtering of WSS process

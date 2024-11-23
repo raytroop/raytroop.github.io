@@ -45,7 +45,11 @@ mathjax: true
 
 ### Stationarity
 
-![image-20240720140527704](random/image-20240720140527704.png)
+[[https://ece-research.unm.edu/bsanthan/ece541/station.pdf](https://ece-research.unm.edu/bsanthan/ece541/station.pdf)]
+
+![image-20241123221623537](random/image-20241123221623537.png)
+
+> ![image-20240720140527704](random/image-20240720140527704.png)
 
 
 

@@ -294,6 +294,10 @@ Assuming the noise applied duration is much less than the time constant, the out
 
 > In order to determine the response of an LTI system to a **step noise input**, the problem is *more conveniently solved in the time-domain*
 
+input signal: step ramp input
+
+noise current: step
+
 #### Time-domain Analysis
 
 ![image-20241123005612107](comm/image-20241123005612107.png)
@@ -345,7 +349,29 @@ Because the definition of the PSD assumes that the variance of the noise process
 
 #### Input Referred Noise  
 
+![image-20241123094924184](comm/image-20241123094924184.png)
 
+***Noise Voltage to Timing Jitter Conversion & noise gain***
+
+![image-20241123100031499](comm/image-20241123100031499.png)
+
+with a step ramp input  $v_X(t) = Mtu(t)$
+
+The noise gain is
+$$
+|A_N(t_i)| = A_0 (1-e^{t_i/\tau_o})u(t)
+$$
+where $t_i$ is crossing time of ideal threshold comparator  
+$$\begin{align}
+\overline{v_n^2} &= \frac{\overline{v_{on}^2}}{|A_N|^2} \\
+&= \frac{G_n}{G_m}\frac{kT}{C}\frac{1}{A_0}\frac{1+e^{-t_i/\tau_o}}{1-e^{-t_i/\tau_o}} \\
+&=4kT\frac{G_n}{G_m^2}\frac{1}{4R_oC} \coth(\frac{t_i}{2\tau_o}) \\
+&= 4kTR_n\frac{1}{4\tau_o} \coth(\frac{t_i}{2\tau_o})
+\end{align}$$
+
+where $R_n = \frac{G_n}{G_m^2}$, the equivalent thermal noise resistance
+
+> ![image-20241123111642852](comm/image-20241123111642852.png)
 
 
 

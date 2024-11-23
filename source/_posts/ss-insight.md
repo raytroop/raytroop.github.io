@@ -37,7 +37,7 @@ mathjax: true
 
 ![https://upload.wikimedia.org/wikipedia/commons/d/d8/Nyquist_frequency_%26_rate.svg](ss-insight/Nyquist_frequency_&_rate.svg)
 
-
+> **Oversampling Ratio (OSR)** is defined as the ratio of the *Nyquist frequency* $f_s/2$ to the *signal bandwidth* $B$ given by $\text{OSR}=f_s/2B$
 
 ## Summation & Integration 
 

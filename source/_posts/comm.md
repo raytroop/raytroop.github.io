@@ -281,7 +281,7 @@ $$\begin{align}
 R_{yy}(\tau) &= R_{xx}(\tau)*[h(\tau)*h(-\tau)] \\
 &= S_{xx}(0)\delta(\tau) * [h(\tau)*h(-\tau)] \\
 &= S_{xx}(0)[h(\tau)*h(-\tau)] \\
-&= S_{xx}(0) \int_v h(\alpha)h(\alpha-\tau)d\alpha
+&= S_{xx}(0) \int_\alpha h(\alpha)h(\alpha-\tau)d\alpha
 \end{align}$$
 
 with WSS white noise input $x(t)$, $R_{xx}(\tau)=S_{xx}(0)\delta(\tau)$, therefore
@@ -302,8 +302,6 @@ The step noise input $x(t) = \nu(t)u(t)$
 $$
 R_{xx}(t_1,t_2) = E[x(t_1)x(t_2)] = R_{\nu\nu}(t_1, t_2)u(t_1)u(t_2)=R_{\nu\nu}(t_1, t_2)
 $$
-convolving the input autocorrelation function with the impulse response once for each time index
-
 ![image-20241123005644828](comm/image-20241123005644828.png)
 
 >$$
@@ -316,12 +314,9 @@ convolving the input autocorrelation function with the impulse response once for
 
 ![image-20241123011304449](comm/image-20241123011304449.png)
 
-> the absolute value of each time index is important for a non-stationary signal, and only the time
-> difference was important for WSS signals.
+> the absolute value of each time index is important for a non-stationary signal, and only the time difference was important for WSS signals
 
- 
-
-$$\begin{align}
+ $$\begin{align}
 R_{yy}(t_1,t_2) &= h(t_1)*R_{\nu\nu}(t_1, t_2)*h(t_2) \\
 &= h(t_1)*S_{xx}(0)\delta(t_2-t_1)*h(t_2) \\
 &=S_{xx}(0) h(t_1)*(\delta(t_2-t_1)*h(t_2)) \\
@@ -331,12 +326,26 @@ R_{yy}(t_1,t_2) &= h(t_1)*R_{\nu\nu}(t_1, t_2)*h(t_2) \\
 
 That is
 $$
-\sigma^2_y = R_{yy}(t_1,t_2)|_{t_1=t_2=t}=S_{xx}(0)\int_{-\infty}^t |h(\tau)|^2d\tau
+\sigma^2_y (t)= R_{yy}(t_1,t_2)|_{t_1=t_2=t}=S_{xx}(0)\int_{-\infty}^t |h(\tau)|^2d\tau
 $$
 
+> $t$, the upper limit of integration is just intuitive,  which lacks strict derivation
+>
+> Because stable systems have impulse responses that decay to *zero* as time goes to *infinity*, **the output noise variance approaches the WSS result as time approaches infinity**  
+
+![image-20241123074316370](comm/image-20241123074316370.png)
+
+#### Frequency-domain Analysis  
+
+Because the definition of the PSD assumes that the variance of the noise process is independent of time, the PSD of a non-stationary process is not very meaningful
+
+![image-20241123084051824](comm/image-20241123084051824.png)
+
+![image-20241123084118787](comm/image-20241123084118787.png)
+
+#### Input Referred Noise  
 
 
-> Because stable systems have impulse responses that decay to zero as time goes to infinity, **the output noise variance approaches the WSS result as time approaches infinity**  
 
 
 
@@ -357,3 +366,7 @@ Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF.  URL
 STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf](https://ris.utwente.nl/ws/portalfiles/portal/6038220/thesis-Kolhatkar.pdf)]
 
 Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
+
+T. Sepke, P. Holloway, C. G. Sodini and H. -S. Lee, "Noise Analysis for Comparator-Based Circuits," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 3, pp. 541-553, March 2009 [[https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf)]
+
+Sepke, Todd. "Comparator design and analysis for comparator-based switched-capacitor circuits." (2006). [[https://dspace.mit.edu/handle/1721.1/38925](https://dspace.mit.edu/handle/1721.1/38925)]

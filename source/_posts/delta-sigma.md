@@ -11,6 +11,8 @@ mathjax: true
 
 The average output of DSM tracks the input signal
 
+$\Delta\Sigma$ modulators are **nonlinear systems** since a **quantizer** is implemented in the $\Delta\Sigma$-loop
+
 ---
 
 ![image-20241123140116340](delta-sigma/image-20241123140116340.png)

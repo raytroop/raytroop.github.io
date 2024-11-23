@@ -13,6 +13,8 @@ The average output of DSM tracks the input signal
 
 ---
 
+![image-20241123140116340](delta-sigma/image-20241123140116340.png)
+
 
 
 ## linear settling & GBW of amplifier

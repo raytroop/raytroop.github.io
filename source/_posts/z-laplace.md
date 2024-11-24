@@ -185,7 +185,7 @@ Two valuable *Laplace transform* theorem
 
 
 
-### Z-transform
+### $z$-transform
 
 
 
@@ -478,7 +478,9 @@ $$
 
 ## Bilinear transformation
 
-![image-20241024230308374](z-laplace/image-20241024230308374.png)
+> [[https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html](https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html)]
+
+an algebraic transformation between the variables $s$ and $z$ that maps the entire **imaginary**  $j\Omega$-**axis** in the $s$-plane to one revolution of the **unit circle** in the $z$-plane 
 
 $$\begin{align}
 z &= \frac{1+s\frac{T_s}{2}}{1-s\frac{T_s}{2}} \\
@@ -486,6 +488,28 @@ s &= \frac{2}{T_s}\cdot \frac{1-z^{-1}}{1+z^{-1}}
 \end{align}$$
 
 where $T_s$ is the sampling period
+
+![image-20241125001024136](z-laplace/image-20241125001024136.png)
+
+**frequency warping:**
+
+![image-20241125002523844](z-laplace/image-20241125002523844.png)
+
+
+
+- The bilinear transformation avoids the problem of **aliasing** encountered with the use of *impulse invariance*, because it maps the entire imaginary axis of the $s$-plane onto the unit circle in the $z$-plane  
+
+- *impulse invariance* **cannot** be used to map **highpass** continuous-time designs to high pass discrete-time designs, since highpass continuous-time filters are **not bandlimited**
+
+- Due to nonlinear warping of the frequency axis introduced by the bilinear transformation,  bilinear transformation applied to a continuous-time differentiator **will not** result in a discrete-time differentiator. However, impulse invariance can be applied to **bandlimited continuous-time differentiator**
+
+  > The feature of the frequency response of *discrete-time differentiators* is that it is *linear with frequency*  
+
+
+
+---
+
+![image-20241024230308374](z-laplace/image-20241024230308374.png)
 
 ![image-20241026230904395](z-laplace/image-20241026230904395.png)
 

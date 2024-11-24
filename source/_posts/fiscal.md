@@ -8,6 +8,14 @@ mathjax:
 
 
 
+## 活塞环(Piston Ring)
+
+![image-20241124132957086](fiscal/image-20241124132957086.png)
+
+
+
+
+
 ## 马力 vs 扭矩
 
 ![image-20241116193639833](fiscal/image-20241116193639833.png)

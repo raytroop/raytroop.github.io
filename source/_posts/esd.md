@@ -8,9 +8,45 @@ categories:
 
 
 
-## Gated diode & STI diode
+## Silicon Controlled Rectifiers (SCR)
 
 *TODO* &#128197;
+
+
+
+## ESD design window
+
+> [[https://monthly-pulse.com/2021/06/02/the-esd-design-window-concept/](https://monthly-pulse.com/2021/06/02/the-esd-design-window-concept/)]
+
+
+
+
+
+
+
+## Secondary protection
+
+![img](esd/esd2ndprotect.png.jpg)
+
+1. Adding a (small) clamp behind the isolation resistance can extend the ESD design window, e.g. enabling dual diode protection for thin oxide transistors.
+2. ESD current through this clamp will build-up voltage across the isolation resistance, while protecting the circuit. 
+3. The higher voltage at the IN pad will then trigger the primary protection (red current path)
+
+
+
+---
+
+Adding a (small) clamp behind the isolation resistance can extend the **ESD design window**, e.g. enabling dual diode protection for thin oxide transistors
+
+![img](esd/secondaryprotection-window.png)
+
+Extended ESD design window example. The failure voltage of a thin gate oxide in advanced CMOS is about 4V. The primary ESD solution (red IV curve) introduces too much voltage. Thanks to an isolation resistance between primary and secondary local clamp device (green IV curve) additional margin is created.
+
+
+
+> [[https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/](https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/)]
+
+## Gated diode & STI diode
 
 ![image-20241120212904118](esd/image-20241120212904118.png)
 
@@ -33,6 +69,8 @@ categories:
 ## TLP 
 
 > TRANSMISSION LINE PULSE TESTING: THE INDISPENSABLE TOOL FOR ESD CHARACTERIZATION OF DEVICES, CIRCUITS AND SYSTEMS [[https://www.esda.org/assets/News/1708-ESD-firstDraft.pdf](https://www.esda.org/assets/News/1708-ESD-firstDraft.pdf)]
+>
+> [[https://monthly-pulse.com/2021/06/08/transmission-line-pulse-tlp-test-system/](https://monthly-pulse.com/2021/06/08/transmission-line-pulse-tlp-test-system/)]
 
 ![Example TLP characteristics using TLP](esd/TLP-characteristics-using-TLP.PNG)
 
@@ -86,7 +124,7 @@ Answer:
 
 VF-TLP can be a guide to CDM failure levels, and provide a lot of understanding of a circuit's operation during CDM stressing, but simple correlations between VF-TLP failure current level and CDM withstand voltage levels are difficult to establish.
 
-## I.V and Leakage Evolution Plots
+### I.V and Leakage Evolution Plots
 
 DC leakage current data combined with the I-V data provides electrical indications of where damage begins, and how rapidly it can evolve from soft to hard failures
 

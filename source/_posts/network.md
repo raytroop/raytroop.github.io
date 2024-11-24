@@ -7,6 +7,8 @@ categories:
 mathjax: true
 ---
 
+![image-20241124184248887](network/image-20241124184248887.png)
+
 
 
 ![image-20240704212740246](network/image-20240704212740246.png)

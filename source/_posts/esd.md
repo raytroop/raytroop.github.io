@@ -1,10 +1,16 @@
 ---
-title: ESD
+title: ESD & Latchup
 date: 2022-06-09 23:13:59
 tags:
 categories:
 - analog
 ---
+
+
+
+## Latchup
+
+*TODO* &#128197;
 
 
 
@@ -17,10 +23,18 @@ categories:
 ## ESD design window
 
 > [[https://monthly-pulse.com/2021/06/02/the-esd-design-window-concept/](https://monthly-pulse.com/2021/06/02/the-esd-design-window-concept/)]
+>
+> [[https://www.researching.cn/ArticlePdf/m00098/2020/41/12/122403.pdf](https://www.researching.cn/ArticlePdf/m00098/2020/41/12/122403.pdf)]
 
+![image-20241124163116072](esd/image-20241124163116072.png)
 
-
-
+- **Transparency**
+  - Trigger voltage **Vt1**
+  - Holding/clamping voltage **Vh**
+- **Robustness**
+  -  failure current level **It2**
+- **Effectiveness**
+  - maximum voltage of the clamp device: **Vmax**
 
 
 
@@ -66,11 +80,17 @@ Extended ESD design window example. The failure voltage of a thin gate oxide in 
 
 
 
-## TLP 
+## TLP/vf-TLP
 
 > TRANSMISSION LINE PULSE TESTING: THE INDISPENSABLE TOOL FOR ESD CHARACTERIZATION OF DEVICES, CIRCUITS AND SYSTEMS [[https://www.esda.org/assets/News/1708-ESD-firstDraft.pdf](https://www.esda.org/assets/News/1708-ESD-firstDraft.pdf)]
 >
 > [[https://monthly-pulse.com/2021/06/08/transmission-line-pulse-tlp-test-system/](https://monthly-pulse.com/2021/06/08/transmission-line-pulse-tlp-test-system/)]
+>
+> Jon Barth "TLP and VFTLP Testing of Integrated Circuit ESD Protection" [[https://barthelectronics.com/wp-content/uploads/2016/09/TLP-and-VFTLP-Test-of-Integrated-Circuit-ESD-Protection.pdf](https://barthelectronics.com/wp-content/uploads/2016/09/TLP-and-VFTLP-Test-of-Integrated-Circuit-ESD-Protection.pdf)]
+>
+> Horst A. Gieser(IZM), "ESD- Testing: HBM to very fast TLP" [[https://www.thierry-lequeu.fr/data/ESREF/2004/Tut5.pdf](https://www.thierry-lequeu.fr/data/ESREF/2004/Tut5.pdf)]
+
+![image-20241124184848034](esd/image-20241124184848034.png)
 
 ![Example TLP characteristics using TLP](esd/TLP-characteristics-using-TLP.PNG)
 
@@ -161,7 +181,7 @@ Thanks to the device scaling the area is actually reasonable. However, the leaka
 
 
 
-## ESD diode
+## high current diode
 
 ![image-20220618123654830](esd/image-20220618123654830.png)
 
@@ -265,7 +285,29 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 
 
-## ggNMOS (grounded-gate NMOS)
+## Gate grounded N-MOS (ggNMOS)
+
+> [[https://monthly-pulse.com/2022/02/02/time-to-say-farewell-to-the-snapback-ggnmos-for-esd-protection/](https://monthly-pulse.com/2022/02/02/time-to-say-farewell-to-the-snapback-ggnmos-for-esd-protection/)]
+>
+> [[https://monthly-pulse.com/2023/01/26/ggnmos-grounded-gated-nmos/](https://monthly-pulse.com/2023/01/26/ggnmos-grounded-gated-nmos/)]
+
+![img](esd/rise-time-influence.png)
+
+> Influence of the pulse rise time on ggNMOS. (left side) A fast ESD pulse can couple the bulk of the NMOS to a higher potential for a short period, reducing the trigger voltage. (right side) A clear Vt1 reduction is visible, while the remaining part of the IV curve remains the same.
+
+
+
+![image-20241124161901252](esd/image-20241124161901252.png)
+
+
+
+> resistance between gate and source that designers typically use to reduce the Vt1 trigger voltage of a ggNMOS ESD protection
+
+
+
+---
+
+
 
 ![image-20220623231619052](esd/image-20220623231619052.png)
 
@@ -279,7 +321,7 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 ![image-20240723213214708](esd/image-20240723213214708.png)
 
-> [[https://monthly-pulse.com/wp-content/uploads/2021/11/2021-11-sofics_presentation_ieee_final.pdf](https://monthly-pulse.com/wp-content/uploads/2021/11/2021-11-sofics_presentation_ieee_final.pdf)]
+
 
 ### Positive ESD transient at I/O pad
 
@@ -305,6 +347,8 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 
 
+
+
 ## Reference
 
 Introduction to Transmission Line Pulse (TLP), URL: [https://tools.thermofisher.com/content/sfs/brochures/TLP%20Presentation%20May%202009.pdf](https://tools.thermofisher.com/content/sfs/brochures/TLP%20Presentation%20May%202009.pdf)
@@ -315,9 +359,18 @@ ESD-Testing: HBM to very fast TLP URL: [https://www.thierry-lequeu.fr/data/ESREF
 
 S. Kim et al., "Technology Scaling of ESD Devices in State of the Art FinFET Technologies," 2020 IEEE Custom Integrated Circuits Conference (CICC), 2020, pp. 1-6, doi: 10.1109/CICC48029.2020.9075899.
 
-Barth, Jon. "TLP and VFTLP Testing of Integrated Circuit ESD Protection." (2015).
-ESD protection for FinFET processes URL: [https://monthly-pulse.com/2021/01/19/esd-protection-for-finfet-processes/](https://monthly-pulse.com/2021/01/19/esd-protection-for-finfet-processes/)
+KOEN DECOCK IEEE-SSCSLEUVEN "ON-CHIP ESD PROTECTION: BASIC CONCEPTS AND ADVANCED APPLICATIONS" [[https://monthly-pulse.com/wp-content/uploads/2021/11/2021-11-sofics_presentation_ieee_final.pdf](https://monthly-pulse.com/wp-content/uploads/2021/11/2021-11-sofics_presentation_ieee_final.pdf)]
 
 Yuanzhong Zhou, D. Connerney, R. Carroll and T. Luk, "Modeling MOS snapback for circuit-level ESD simulation using BSIM3 and VBIC models," Sixth international symposium on quality electronic design (isqed'05), 2005, pp. 476-481, doi: 10.1109/ISQED.2005.81.
 
 Charged Device Model (CDM) Qualification Issues - Expanded [[https://www.jedec.org/sites/default/files/IndustryCouncil_CDM_October2021_JEDECversion_September2022_rev1.pdf](https://www.jedec.org/sites/default/files/IndustryCouncil_CDM_October2021_JEDECversion_September2022_rev1.pdf)]
+
+---
+
+Wang, Albert ZH. *On-chip ESD protection for integrated circuits: an IC design perspective*. Vol. 663. Springer Science & Business Media, 2002.
+
+Wang, Albert. *Practical ESD Protection Design*. John Wiley & Sons, 2021.
+
+Ker, Ming-Dou, and Sheng-Fu Hsu. *Transient-induced latchup in CMOS integrated circuits*. John Wiley & Sons, 2009.
+
+Milin Zhang, "Low Power Circuit Design Using Advanced CMOS Technology" River Publishers 2018

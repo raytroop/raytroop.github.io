@@ -11,11 +11,11 @@ mathjax: true
 
 ## Mid-Rise & Mid-Tread Quantizer
 
-![image-20241124213801286](ad-da/image-20241124213801286.png)
+![image-20241124225350563](ad-da/image-20241124225350563.png)
 
-![image-20241124213840289](ad-da/image-20241124213840289.png)
+![image-20241124230219164](ad-da/image-20241124230219164.png)
 
-
+> The difference between the lowest and highest *levels* is called the **full-scale (FS)** of the quantizer  
 
 ## Bootstrapped Switch
 ![image-20240825222432796](ad-da/image-20240825222432796.png)

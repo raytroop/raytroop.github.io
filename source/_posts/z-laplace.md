@@ -476,7 +476,7 @@ $$
 
 
 
-## Bilinear transformation
+## Bilinear Transform
 
 > [[https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html](https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html)]
 
@@ -508,6 +508,10 @@ where $T_s$ is the sampling period
 
 
 ---
+
+The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***impulse invariance*** essentially
+
+
 
 ![image-20241024230308374](z-laplace/image-20241024230308374.png)
 

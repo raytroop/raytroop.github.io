@@ -263,6 +263,9 @@ And we know transform of integral $u(t)$ is $\frac{1}{s}$, as expected there is 
 
 ## impulse invariance
 
+> A straightforward and useful relationship between the *continuous-time impulse response* $h_c(t)$ and the *discrete-time impulse response* $h[n]$ 
+
+
 ![image-20241002133303153](z-laplace/image-20241002133303153.png)
 
 

@@ -1,5 +1,5 @@
 ---
-title: Wireline Link Budgeting and Modeling
+title: Link Budgets & Models
 date: 2024-11-02 12:34:55
 tags:
 categories:
@@ -71,90 +71,6 @@ DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation i
 - *proportional path gain* is unchanged
 
 ![intg_path_decim.drawio](link/intg_path_decim.drawio.svg)
-
-
-### Decimation by Summing
-
-
-> The loop gain of a **proportional path** is **unchanged**
-
-![phug_loop.drawio](link/phug_loop.drawio.svg)
-
-In *(a)*, the loop gain is $\frac{\phi_o(z)}{\phi_e(z)}$, which is
-$$
-LG_a(z)=\frac{\phi_o(z)}{\phi_e(z)} = \frac{1}{1-z^{-1}}
-$$
-
-In *(b)*, Accumulate-and-dump (AAD) is $\frac{1-z^{-L}}{1-z^{-1}}$, then $\phi_m(\eta)$ can be expressed as
-$$
-\phi_m(\eta) = \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}
-$$
-Hence
-$$\begin{align}
-\phi_o(\eta) &= \phi_m(\eta) \frac{1}{1-\eta^{-1}} \\
-&= \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}\cdot \frac{1}{1-\eta^{-1}} \\
-&= \frac{1}{1-\eta^{-1/L}}\cdot \frac{1}{L}
-\end{align}$$
-
-After *zero-order hold process*, we obtain $\phi_f(z)$, which is
-$$\begin{align}
-\phi_f(z) &= \phi_o(z^L) \cdot \frac{1-z^{-L}}{1-z^{-1}} \\
-&=\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
-\end{align}$$
-That is,
-$$
-LG_b(z) = \frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
-$$
-
-while bandwidth is less than sampling rate (data rate), $\frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx 1$, i.e. $LG_a(z)\approx LG_b(z)$. with
-
-$$
-\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx \frac{1}{1-z^{-1}}
-$$
-
----
-
-> **integral path gain reduced by $L$**
-
-![frug_loop.drawio](link/frug_loop.drawio.svg)
-
-In *(a)*, $\phi_o(z)=\frac{1}{(1-z^{-1})^2}$, i.e.
-$$
-LG_a(z) = \frac{1}{(1-z^{-1})^2}
-$$
-
-In (b), after Accumulate-and-dump (AAD), $\phi_(\eta)$ is
-$$
-\phi_m(\eta) = \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}
-$$
-
-After frequency integrator and phase integrator
-$$\begin{align}
-\phi_o(\eta) &= \phi_m(\eta) \cdot \frac{1}{(1-\eta^{-1})^2} \\
-&= \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L} \cdot  \frac{1}{(1-\eta^{-1})^2}
-\end{align}$$
-Then $\phi_f(z)$ is shown as below
-$$\begin{align}
-\phi_f(z) &= \phi_o(z^L)\cdot \frac{1-z^{-L}}{1-z^{-1}} \\
-&= \frac{1-z^{-L}}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1}{(1-z^{-L})^2}\cdot \frac{1-z^{-L}}{1-z^{-1}} \\
-&= \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2}
-\end{align}$$
-
-That is,
-$$
-LG_b(z) = \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2} = \frac{1}{L}\cdot LG_a(z)
-$$
-
-
-### Decimation by Voting
-
-> equivalent $\sum d_n \lt 0 \to -1$, $\sum d_n = 0 \to 0$ and $\sum d_n\gt 0 \to 1$
->
-> Compared to the boxcar filter, voting is able to reduce the loop delay and lower the output noise of the MMPD
-
-- Decimation via voting has a reduced gain, $K_V$, which can be determined through simulation
-
-
 
 
 

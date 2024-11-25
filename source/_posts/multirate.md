@@ -219,6 +219,91 @@ That is $F_1(z)=F_2(z)$, i.e. they are equivalent
 
 
 
+
+## Decimation by Summing
+
+### proportional path
+
+> The loop gain of a **proportional path** is **unchanged**
+
+![phug_loop.drawio](multirate/phug_loop.drawio.svg)
+
+In *(a)*, the loop gain is $\frac{\phi_o(z)}{\phi_e(z)}$, which is
+$$
+LG_a(z)=\frac{\phi_o(z)}{\phi_e(z)} = \frac{1}{1-z^{-1}}
+$$
+
+In *(b)*, Accumulate-and-dump (AAD) is $\frac{1-z^{-L}}{1-z^{-1}}$, then $\phi_m(\eta)$ can be expressed as
+$$
+\phi_m(\eta) = \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}
+$$
+Hence
+$$\begin{align}
+\phi_o(\eta) &= \phi_m(\eta) \frac{1}{1-\eta^{-1}} \\
+&= \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}\cdot \frac{1}{1-\eta^{-1}} \\
+&= \frac{1}{1-\eta^{-1/L}}\cdot \frac{1}{L}
+\end{align}$$
+
+After *zero-order hold process*, we obtain $\phi_f(z)$, which is
+$$\begin{align}
+\phi_f(z) &= \phi_o(z^L) \cdot \frac{1-z^{-L}}{1-z^{-1}} \\
+&=\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
+\end{align}$$
+That is,
+$$
+LG_b(z) = \frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
+$$
+
+while bandwidth is less than sampling rate (data rate), $\frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx 1$, i.e. $LG_a(z)\approx LG_b(z)$. with
+
+$$
+\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx \frac{1}{1-z^{-1}}
+$$
+
+### integral path
+
+> **integral path gain reduced by $L$**
+
+![frug_loop.drawio](multirate/frug_loop.drawio.svg)
+
+In *(a)*, $\phi_o(z)=\frac{1}{(1-z^{-1})^2}$, i.e.
+$$
+LG_a(z) = \frac{1}{(1-z^{-1})^2}
+$$
+
+In (b), after Accumulate-and-dump (AAD), $\phi_(\eta)$ is
+$$
+\phi_m(\eta) = \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}
+$$
+
+After frequency integrator and phase integrator
+$$\begin{align}
+\phi_o(\eta) &= \phi_m(\eta) \cdot \frac{1}{(1-\eta^{-1})^2} \\
+&= \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L} \cdot  \frac{1}{(1-\eta^{-1})^2}
+\end{align}$$
+Then $\phi_f(z)$ is shown as below
+$$\begin{align}
+\phi_f(z) &= \phi_o(z^L)\cdot \frac{1-z^{-L}}{1-z^{-1}} \\
+&= \frac{1-z^{-L}}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1}{(1-z^{-L})^2}\cdot \frac{1-z^{-L}}{1-z^{-1}} \\
+&= \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2}
+\end{align}$$
+
+That is,
+$$
+LG_b(z) = \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2} = \frac{1}{L}\cdot LG_a(z)
+$$
+
+
+
+## Decimation by Voting
+
+*TODO* &#128197;
+
+
+
+
+
+
 ## reference
 
 Alan V Oppenheim, Ronald W. Schafer. 2010. Discrete-Time Signal Processing, 3rd edition

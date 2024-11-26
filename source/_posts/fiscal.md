@@ -1,6 +1,6 @@
 ---
 title: Common Knowledge
-date: 2024-11-16 19:35:36
+date: 2024-02-14 19:35:36
 tags:
 categories:
 mathjax:

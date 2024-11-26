@@ -340,7 +340,7 @@ If the loop gain evaluated at an operating point is **less than one**, that oper
 
 With $m_{1\to 2} = 1$
 $$
-\text{Loop Gain} \simeq \frac{V_{BN}-V_{T2}}{V_{BN}-V_{T2} + V_R} \tag{LG\_0}
+\text{Loop Gain} \simeq \frac{V_{BN}-V_{T2}}{V_{BN}-V_{T2} + V_R} \tag{$LG_0$}
 $$
 Assuming all MOS in strong inv operation, $I$, $V_{BN}$ and $V_R$ is obtain
 $$\begin{align}
@@ -349,10 +349,10 @@ V_{BN} &= V_{T2} + \frac{2}{R\beta _2}(1- \sqrt{\frac{\beta _2}{\beta _1}}) \\
 IR &= \frac{2}{R}\left( \frac{1}{\sqrt{\beta_2}} -  \frac{1}{\sqrt{\beta_1}} \right)
 \end{align}$$
 
-Substitute $V_{BN}$ and $V_R$ of $(LG\_0)$
+Substitute $V_{BN}$ and $V_R$ of $LG_0$
 $$\begin{align}
 \text{Loop Gain} & \simeq \frac{1-\sqrt{\frac{\beta_2}{\beta_1}}}{\frac{\beta_2}{\beta_1} - 3\sqrt{\frac{\beta_2}{\beta_1}}+2} \\
-&= \frac{1}{2-\sqrt{\frac{\beta_2}{\beta_1}}} \tag{LG\_1}
+&= \frac{1}{2-\sqrt{\frac{\beta_2}{\beta_1}}} \tag{$LG_1$}
 \end{align}$$
 
 

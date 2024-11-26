@@ -249,16 +249,29 @@ $$\begin{align}
 \phi_f(z) &= \phi_o(z^L) \cdot \frac{1-z^{-L}}{1-z^{-1}} \\
 &=\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
 \end{align}$$
-That is,
+i.e.,
 $$
 LG_b(z) = \frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
 $$
 
-while bandwidth is less than sampling rate (data rate), $\frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx 1$, i.e. $LG_a(z)\approx LG_b(z)$. with
+When bandwidth is much less than sampling rate (data rate),  $\frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx 1$
 
+Therefore
 $$
-\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx \frac{1}{1-z^{-1}}
+LG_b(z) \approx  \frac{1}{1-z^{-1}}
 $$
+
+In the end
+$$
+LG_a(z) \approx LG_b(z)
+$$
+
+---
+
+Assume PD output is constant
+
+![phug_seq.drawio](multirate/phug_seq.drawio.svg)
+
 
 ### integral path
 
@@ -293,17 +306,39 @@ $$
 LG_b(z) = \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2} = \frac{1}{L}\cdot LG_a(z)
 $$
 
+---
+
+Assume PD output is constant
+
+![frug_seq.drawio](multirate/frug_seq.drawio.svg)
+
+$$
+\lim_{n\to +\infty} \frac{\Delta P_1}{\Delta P_0} = \lim_{n\to +\infty}\frac{n+2L}{nL+\alpha L+\beta L^2} = \frac{1}{L}
+$$
+
 
 
 ## Decimation by Voting
 
-*TODO* &#128197;
+![image-20241126211307012](multirate/image-20241126211307012.png)
+
+---
+
+
+
+
+
+
 
 
 
 
 
 > J. Stonick. ISSCC 2011 "DPLL-Based Clock and Data Recovery" [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T5.pdf)]
+>
+> J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006  [[https://sci-hub.se/10.1109/JSSC.2006.875292](https://sci-hub.se/10.1109/JSSC.2006.875292)]
+>
+> J. Sonntag and J. Stonick, "A digital clock and data recovery architecture for multi-gigabit/s binary links," *Proceedings of the IEEE 2005 Custom Integrated Circuits Conference, 2005.*. [[https://sci-hub.se/10.1109/CICC.2005.1568725](https://sci-hub.se/10.1109/CICC.2005.1568725)]
 >
 > Y. Xia *et al*., "A 10-GHz Low-Power Serial Digital Majority Voter Based on Moving Accumulative Sign Filter in a PS-/PI-Based CDR," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 68, no. 12 [[https://sci-hub.se/10.1109/TMTT.2020.3029188](https://sci-hub.se/10.1109/TMTT.2020.3029188)]
 >

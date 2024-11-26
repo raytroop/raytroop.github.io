@@ -57,6 +57,8 @@ $\Delta \Sigma$ modulator effectively **dithers** the **LSB** bit between *zero 
 
 ## Decimation
 
+> how they affect sampling phase
+
 ![image-20241020140430663](link/image-20241020140430663.png)
 
 DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation is typically performed by realizing either **majority voting (MV)** or **boxcar filtering**.

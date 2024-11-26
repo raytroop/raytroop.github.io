@@ -8,6 +8,15 @@ mathjax: true
 ---
 
 
+## nodeset & initial condition
+
+
+ - A nodeset steers the convergence in a particular direction - useful to speed up DC convergence
+
+ - An initial condition is useful when you want to force the circuit to start a transient in a particular condition
+
+
+[[https://community.cadence.com/cadence_technology_forums/f/rf-design/29843/ade--difference-between-node-set-and-initial-condition/1335460](https://community.cadence.com/cadence_technology_forums/f/rf-design/29843/ade--difference-between-node-set-and-initial-condition/1335460)]
 
 ## Remove prefix from multiple files in Linux console
 

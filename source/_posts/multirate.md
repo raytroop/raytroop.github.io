@@ -249,15 +249,21 @@ $$\begin{align}
 \phi_f(z) &= \phi_o(z^L) \cdot \frac{1-z^{-L}}{1-z^{-1}} \\
 &=\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
 \end{align}$$
-That is,
+i.e.,
 $$
 LG_b(z) = \frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
 $$
 
-while bandwidth is less than sampling rate (data rate), $\frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx 1$, i.e. $LG_a(z)\approx LG_b(z)$. with
+When bandwidth is much less than sampling rate (data rate),  $\frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx 1$
 
+Therefore
 $$
-\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}} \approx \frac{1}{1-z^{-1}}
+LG_b(z) \approx  \frac{1}{1-z^{-1}}
+$$
+
+In the end
+$$
+LG_a(z) \approx LG_b(z)
 $$
 
 ### integral path

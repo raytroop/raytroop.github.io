@@ -313,7 +313,7 @@ Assume PD output is constant
 ![frug_seq.drawio](multirate/frug_seq.drawio.svg)
 
 $$
-\lim_{n\to +\infty} \frac{\Delta_{p1}}{\Delta_{p0}} = \lim_{n\to +\infty}\frac{n+2L}{nL+\alpha L+\beta L^2} = \frac{1}{L}
+\lim_{n\to +\infty} \frac{\Delta P_1}{\Delta P_0} = \lim_{n\to +\infty}\frac{n+2L}{nL+\alpha L+\beta L^2} = \frac{1}{L}
 $$
 
 

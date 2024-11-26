@@ -317,9 +317,18 @@ $$
 $$
 
 
+
 ## Decimation by Voting
 
-*TODO* &#128197;
+![image-20241126211307012](multirate/image-20241126211307012.png)
+
+---
+
+
+
+
+
+
 
 
 

@@ -314,7 +314,7 @@ For **global variation**, *all device have same variation*, mirror help reduce v
 
 
 
-## Operating points & Small gain theorem
+## Small gain theorem
 
 > Dr. Degang Chen, **EE 501:** **CMOS Analog Integrated Circuit Design** [[https://class.ece.iastate.edu/djchen/ee501/2020/References.ppt](https://class.ece.iastate.edu/djchen/ee501/2020/References.ppt)]
 

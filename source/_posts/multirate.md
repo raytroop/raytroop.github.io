@@ -266,6 +266,13 @@ $$
 LG_a(z) \approx LG_b(z)
 $$
 
+---
+
+Assume PD output is constant
+
+![phug_seq.drawio](multirate/phug_seq.drawio.svg)
+
+
 ### integral path
 
 > **integral path gain reduced by $L$**
@@ -299,6 +306,15 @@ $$
 LG_b(z) = \frac{1}{L} \cdot \frac{1}{(1-z^{-1})^2} = \frac{1}{L}\cdot LG_a(z)
 $$
 
+---
+
+Assume PD output is constant
+
+![frug_seq.drawio](multirate/frug_seq.drawio.svg)
+
+$$
+\lim_{n\to \infty} \frac{\Delta_{p1}}{\Delta_{p0}} = \lim_{n\to \infty}\frac{n+2L}{nL+\alpha L+\beta L^2} = \frac{1}{L}
+$$
 
 
 ## Decimation by Voting

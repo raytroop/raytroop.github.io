@@ -349,6 +349,8 @@ $$
 > J. Liang, A. Sheikholeslami,, "Loop Gain Adaptation for Optimum Jitter Tolerance in Digital CDRs," in *IEEE Journal of Solid-State Circuits* [[https://sci-hub.se/10.1109/JSSC.2018.2839038](https://sci-hub.se/10.1109/JSSC.2018.2839038)]
 >
 > M. M. Khanghah, K. D. Sadeghipour, D. Kelly, C. Antony, P. Ossieur and P. D. Townsend, "A 7-Bit 7-GHz Multiphase Interpolator-Based DPC for CDR Applications," in *IEEE Transactions on Circuits and Systems I: Regular Papers* [[https://cora.ucc.ie/bitstreams/7ae5bfaa-8dd9-45a7-8276-99676b7b6078/download](https://cora.ucc.ie/bitstreams/7ae5bfaa-8dd9-45a7-8276-99676b7b6078/download)]
+>
+> [[CDR CIRCUIT-BLOCKS: DESIGN AND VERIFICATION USING VERILOG - 2.6. DECIMATOR](https://noesis.uis.edu.co/server/api/core/bitstreams/106aa2f9-e227-4059-8bfc-03bcce4ecea5/content)]
 
 
 

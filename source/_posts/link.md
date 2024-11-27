@@ -562,16 +562,19 @@ where $\mu = (1)\times \mathrm{P}(\text{late}|\phi) + (-1)\times \mathrm{P}(\tex
 
 ### Self-Noise Term
 
-One price we pay for *BB PD* versus *linear PD* is the self-noise term. For small phase errors BB output noise is the full
-magnitude of the sliced data.
+One price we pay for ***BB PD*** versus ***linear PD*** is the self-noise term. **For** **small phase errors** BB output noise is the **full magnitude** of the sliced data
 
-> BB-PD don't have any measure as to how early or how late and the way that tell loop is locked, is over a long time average, BB-PD have an equal number of earlies and lates 
+> The PD output should be almost **0** for small phase errors. i.e. ideal PD output noise should be **0**
 
-$$\begin{align}
-\sigma_{BB} &= [E(X^2) - E(X)^2] \cdot \mathrm{P}(\text{trans}) \\
-&= [1 - 0]\cdot 0.5 \\
-&= 0.5
-\end{align}$$
+$$
+\sigma_{BB}^2 = 1^2 \cdot \mathrm{P}(\text{trans}) + 0^2\cdot (1-\mathrm{P}(\text{trans})) = 0.5
+$$
+
+![image-20241127215947017](link/image-20241127215947017.png)
+
+**Input referred jitter** from BB PD is **proportional to incoming jitter**
+
+![image-20241127220933103](link/image-20241127220933103.png)
 
 
 

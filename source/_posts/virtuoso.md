@@ -7,6 +7,21 @@ categories:
 mathjax: true
 ---
 
+## PEX LAYER_MAP
+
+```
+// *LAYER_MAP
+// *1 POLY
+// *2 CONT
+// *3 M1
+...
+*RES
+8 ENL:30 ENL:34 0.525075 // $lvl=3
+9 ENL ENL:30 0.07 // $lvl=3
+```
+
+[[https://picture.iczhiku.com/resource/eetop/wYItYWLPleWrpvNV.pdf](https://picture.iczhiku.com/resource/eetop/wYItYWLPleWrpvNV.pdf)]
+
 
 ## nodeset & initial condition
 

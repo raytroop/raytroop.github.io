@@ -351,8 +351,38 @@ $$
 > M. M. Khanghah, K. D. Sadeghipour, D. Kelly, C. Antony, P. Ossieur and P. D. Townsend, "A 7-Bit 7-GHz Multiphase Interpolator-Based DPC for CDR Applications," in *IEEE Transactions on Circuits and Systems I: Regular Papers* [[https://cora.ucc.ie/bitstreams/7ae5bfaa-8dd9-45a7-8276-99676b7b6078/download](https://cora.ucc.ie/bitstreams/7ae5bfaa-8dd9-45a7-8276-99676b7b6078/download)]
 >
 > [[CDR CIRCUIT-BLOCKS: DESIGN AND VERIFICATION USING VERILOG - 2.6. DECIMATOR](https://noesis.uis.edu.co/server/api/core/bitstreams/106aa2f9-e227-4059-8bfc-03bcce4ecea5/content)]
+>
+> Michael H. Perrott, Tutorial on Digital Phase-Locked Loops, CICC 2009, San Jose, CA, Sept. 13, 2009 [[https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf](https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf)]
+>
+> Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits" *Electronics* 10, no. 16: 1888. https://doi.org/10.3390/electronics10161888
+>
+> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. 10.21203/rs.3.rs-1817774/v1. [[https://assets-eu.researchsquare.com/files/rs-1817774/v1_covered.pdf?c=1664188179](https://assets-eu.researchsquare.com/files/rs-1817774/v1_covered.pdf?c=1664188179)]
 
 
+
+> *TODO* &#128197;
+>
+> Tristate: $\alpha=1$
+>
+> XOR: $\alpha=1$
+>
+> $\frac{1}{T}$ in Divider
+
+![image-20240928004526381](multirate/image-20240928004526381.png)
+
+![image-20240928004308700](multirate/image-20240928004308700.png)
+
+> Michael H. Perrott, PLL Design Using the PLL Design Assistant Program. [[https://designers-guide.org/forum/Attachments/pll_manual.pdf](https://designers-guide.org/forum/Attachments/pll_manual.pdf)]
+
+
+
+---
+
+$\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
+
+![image-20240928203714450](multirate/image-20240928203714450.png)
+
+> H. Kang *et al*., "A 42.7Gb/s Optical Receiver With Digital Clock and Data Recovery in 28nm CMOS," in *IEEE Access*, vol. 12, pp. 109900-109911, 2024  [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10630516](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10630516)]
 
 
 

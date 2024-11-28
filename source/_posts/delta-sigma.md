@@ -19,6 +19,20 @@ $\Delta\Sigma$ modulators are **nonlinear systems** since a **quantizer** is imp
 
 
 
+## No delay-free loops
+
+![image-20241128232040924](delta-sigma/image-20241128232040924.png)
+
+> Both integrator and quantizer are delay free  
+
+NTF realizability criterion: No delay-free loops in the modulator
+
+
+
+> ![image-20241128233022231](delta-sigma/image-20241128233022231.png)
+
+
+
 ## linear settling & GBW of amplifier
 
 *TODO* &#128197;

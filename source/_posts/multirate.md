@@ -392,7 +392,7 @@ $\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
 
 ![image-20241129222258061](multirate/image-20241129222258061.png)
 
-![image-20241129223036965](multirate/image-20241129223036965.png)
+![image-20241129223706720](multirate/image-20241129223706720.png)
 
 ```matlab
 clear;
@@ -432,7 +432,7 @@ L = Kpd*Kv*Kdpc/(1-z^-1)*(phug + frug/(1-z^-1))*z^-Nel;
 TF = L/(1+L);
 bodemag(TF,options);
 
-legend('frug=2^-12','frug=2^-11', 'frug=2^-10', 'FontSize',10)
+legend('frug=2^{-12}','frug=2^{-11}', 'frug=2^{-10}', 'FontSize',10)
 grid on;
 title('phase transfer function', 'FontSize', 12)
 xlabel('frequency', 'FontSize',10)
@@ -444,7 +444,7 @@ ylabel('frequency response', 'FontSize',10)
 
 > **Full View**
 >
-> ![image-20241129223109316](multirate/image-20241129223109316.png)
+> ![image-20241129223734870](multirate/image-20241129223734870.png)
 
 
 

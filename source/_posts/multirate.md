@@ -401,7 +401,7 @@ clc;
 
 
 Tb = 200e-12;
-Ts = Tb*8;
+Ts = Tb*8;			% the decimation factor was 8
 z = tf('z', Ts);
 
 Kdpc = 1/2^9;

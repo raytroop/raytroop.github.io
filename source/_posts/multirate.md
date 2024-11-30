@@ -354,9 +354,15 @@ $$
 >
 > Michael H. Perrott, Tutorial on Digital Phase-Locked Loops, CICC 2009, San Jose, CA, Sept. 13, 2009 [[https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf](https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf)]
 >
-> Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits" *Electronics* 10, no. 16: 1888. https://doi.org/10.3390/electronics10161888
+> Liu, Tao, Tiejun Li, Fangxu Lv, Bin Liang, Xuqiang Zheng, Heming Wang, Miaomiao Wu, Dechao Lu, and Feng Zhao. 2021. "Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits" *Electronics* 10 [[https://www.mdpi.com/2079-9292/10/16/1888/pdf?version=1628492599](https://www.mdpi.com/2079-9292/10/16/1888/pdf?version=1628492599)]
 >
 > Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. 10.21203/rs.3.rs-1817774/v1. [[https://assets-eu.researchsquare.com/files/rs-1817774/v1_covered.pdf?c=1664188179](https://assets-eu.researchsquare.com/files/rs-1817774/v1_covered.pdf?c=1664188179)]
+>
+> Chen, Junkun, Youzhi Gu, Xinjie Feng, Runze Chi, Jiangfeng Wu, and Yongzhen Chen. 2024. "Analysis of Mueller–Muller Clock and Data Recovery Circuits with a Linearized Model" *Electronics* [[https://mdpi-res.com/electronics/electronics-13-04218/article_deploy/electronics-13-04218-v2.pdf?version=1730106095](https://mdpi-res.com/electronics/electronics-13-04218/article_deploy/electronics-13-04218-v2.pdf?version=1730106095)]
+>
+> K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of PAM-4 Mueller–Muller Clock and Data Recovery System," in *IEEE Open Journal of Circuits and Systems* [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9910561](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9910561)]
+>
+> 
 
 
 
@@ -388,7 +394,7 @@ $\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
 
 
 
-### Sonntag JSSC 2006
+## Sonntag JSSC 2006
 
 ![image-20241129222258061](multirate/image-20241129222258061.png)
 
@@ -445,6 +451,112 @@ ylabel('frequency response', 'FontSize',10)
 > **Full View**
 >
 > ![image-20241129223734870](multirate/image-20241129223734870.png)
+
+
+
+### Kpd, Kb, Kv
+
+> Both decimation factor and factor for voting are 4
+
+![image-20241130162850467](multirate/image-20241130162850467.png)
+
+- Kpd formula: 12.467; Kpd_bb_0 12.465
+- Kpd_Kb: 49.860; Kpd_Kv 27.265
+- Kb: 4.00; Kv 2.19
+
+That is
+
+1. **gain of BoxCar is the decimation factor**
+2. **Voting across 4 inputs had a 54% reduced gain relative to boxcar filter**
+
+
+
+```python
+import numpy as np
+from scipy.stats import norm
+import itertools
+from collections import defaultdict
+import matplotlib.pyplot as plt
+
+sigmai = 0.032  #UI, input jitter
+Ptrans = 0.5    # Transition density
+deci_factor = 4
+
+phase_error = np.linspace(-0.1, 0.1, 201)     #UI, phase offset
+pd_late = norm.cdf(phase_error/sigmai)
+pd_early = 1.0 - pd_late
+pd_avg = pd_late*1.0 - 1.0*pd_early
+
+Kpd_bb = (pd_avg[1:] - pd_avg[:-1])/(phase_error[1:] - phase_error[:-1])*Ptrans
+Kpd_bb_0 = np.max(Kpd_bb)
+
+## by formula
+Kpd_calc = 1.0/(sigmai*np.sqrt(2*np.pi))
+
+print(f'Kpd formula: {Kpd_calc:.3f}; Kpd_bb_0 {Kpd_bb_0:.3f}')  # Kpd formula: 12.467; Kpd_bb_0 12.465
+
+plt.figure()
+plt.plot(phase_error, pd_avg, color='r', linewidth=3)
+plt.title('!! PD average output vs timing offset(UI)')
+plt.grid()
+plt.show()
+
+
+prob = np.zeros((phase_error.shape[0],3))
+prob[:,0] = pd_early*0.5    # -1
+prob[:,1] = 0.5             # 0
+prob[:,2] = pd_late*0.5     # 1
+
+pd_out = np.array([-1.0,0.0,1.0])
+idxs = list([[0,1,2] for _ in range(deci_factor)])
+boxcar_avg = []
+voting_avg = []
+for i in range(phase_error.shape[0]):
+    prob_i = prob[i,:]
+    boxcar_tmp = 0.0
+    voting_tmp = 0.0
+    for idxs_tmp in itertools.product(*idxs):
+        pd_list = pd_out[[idxs_tmp]]
+        prob_list = prob_i[[idxs_tmp]]
+        pd_sum = np.sum(pd_list)
+        pd_vote = 1.0 if pd_sum > 0.0 else -1.0 if pd_sum <0.0 else 0.0
+        prob_prod = np.prod(prob_list)
+        boxcar_tmp += pd_sum*prob_prod
+        voting_tmp += pd_vote*prob_prod
+    boxcar_avg.append(boxcar_tmp)
+    voting_avg.append(voting_tmp)
+
+boxcar_avg = np.array(boxcar_avg)
+voting_avg = np.array(voting_avg)
+
+plt.figure()
+plt.plot(phase_error,boxcar_avg, label='FIR BoxCar', color='r', linewidth=3)
+plt.plot(phase_error,voting_avg, label='Voting', color='b', linewidth=3, linestyle='--')
+plt.legend()
+plt.title('!!PD+BoxCar / !!PD+Voting vs timing offset(UI)')
+plt.grid()
+plt.show()
+
+
+Kpd_Kb = (boxcar_avg[1:] - boxcar_avg[:-1])/(phase_error[1:] - phase_error[:-1])
+Kpd_Kv = (voting_avg[1:] - voting_avg[:-1])/(phase_error[1:] - phase_error[:-1])
+Kpd_kb_0 = np.max(Kpd_Kb)
+Kpd_kv_0 = np.max(Kpd_Kv)
+print(f'Kpd_Kb: {Kpd_kb_0:.3f}; Kpd_Kv {Kpd_kv_0:.3f}')     # Kpd_Kb: 49.860; Kpd_Kv 27.265
+
+plt.figure()
+plt.plot(phase_error[:-1], Kpd_Kb, color='r', linewidth=3)
+plt.plot(phase_error[:-1], Kpd_Kv, color='b', linewidth=3, linestyle='--')
+plt.legend(['Kpd_Kb', 'Kpd_Kv'])
+plt.title('Kpd*Kb / Kpd*Kv vs timing offset(UI)')
+plt.grid()
+plt.show()
+
+Kb = Kpd_kb_0 / Kpd_bb_0
+Kv = Kpd_kv_0 / Kpd_bb_0
+print(f'Kb: {Kb:.2f}; Kv {Kv:.2f}')     # Kb: 4.00; Kv 2.19
+
+```
 
 
 

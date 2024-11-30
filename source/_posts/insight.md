@@ -18,9 +18,25 @@ mathjax: true
 *TODO* &#128197;
 
 
+
+
 ## Zero-Value Time Constant Analysis
 
 *TODO* &#128197;
+
+
+
+
+
+## Shot Noise
+
+Any dc **current flowing through a diode** generates the so-called "*shot noise*" due to the random nature of the hole and electron transitions across the **pn junction**
+
+
+
+> Shot noise is **not relevant in CMOS devices** since it is only present in bipolar transistors and junction diodes
+
+
 
 
 ## Level Shifter

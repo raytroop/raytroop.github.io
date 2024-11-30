@@ -7,6 +7,184 @@ categories:
 mathjax: true
 ---
 
+
+
+## Loockup Table vs Equations Model in Verilog-A
+
+> Solar Cell Verilog Model for Cadence [[https://miscircuitos.com/solar-cell-verilog-model-for-cadence/](https://miscircuitos.com/solar-cell-verilog-model-for-cadence/)]
+>
+> How to Create a new Cell in Cadence with a Loockup Table Model in Verilog-A [[https://miscircuitos.com/how-to-create-a-model-in-verilog-a-with-a-lockup-table/](https://miscircuitos.com/how-to-create-a-model-in-verilog-a-with-a-lockup-table/)]
+
+
+
+---
+
+
+
+**with Equation**
+
+![img](virtuoso/ecuation-solar-cell-model.png)
+
+```verilog
+/////////////////////////////////////////////////////////////////////////////
+//
+// Engineer: Alberto Lopez
+//
+// Description: Verilog model of the solar cell IXYS
+//
+// Change history: 1/7/2018
+//
+/////////////////////////////////////////////////////////////////////////////
+`include "constants.vams"
+`include "disciplines.vams"
+
+module SolarCell( EN, Vsolar, GND);
+
+input EN;
+electrical EN;
+
+output Vsolar;
+electrical Vsolar;
+output GND;
+electrical GND;
+
+parameter real vdd = 1.2;
+parameter real vthreshold = 0.6;
+parameter real fc = 10M;
+parameter real light = 6;
+
+//Curve parameters
+real gm;
+real A;
+real factor;
+real Vop;
+real vcp;
+
+integer light_i;
+integer en;
+analog begin
+
+    @(initial_step)    begin 
+        en = 0;
+        A = 1;    
+        Vop = 1;
+        factor = 10;
+    end
+//Enable digitalization
+    @(cross(V(EN)-vthreshold,1)) begin
+        if(V(EN)&gt;=vthreshold) en = 1;
+        else en = 0;
+    end
+        
+    case(light):
+            0: begin A = 0; Vop = 0; end
+            1: begin A = -1.2; Vop = 1.71; end
+            2: begin A = -0.8; Vop = 1.64; end
+            3: begin A = -0.4; Vop = 1.50; end
+            4: begin A = 0.1; Vop = 1.43; end
+            5: begin A = 0.7; Vop = 1.36; end
+            6: begin A = 1.1; Vop = 1.22; end
+            default: begin A = -1.2; Vop = 1.71; end
+        endcase
+
+    //gm = A + atan(factor*(Vop-V(Vsolar))); //Transconductance
+
+    vcp=laplace_nd(V(Vsolar,GND),{1},{1,1/(6.28*fc)});
+
+    I(Vsolar,GND) &lt;+  (A + atan(factor*(vcp -Vop)))/1000;
+
+end //analog
+endmodule
+```
+
+
+
+![V-I-simulation-for-solare-cell](virtuoso/V-I-simulation-for-solare-cell.png)
+
+
+
+---
+
+
+
+
+
+**with lookup table**
+
+![image-20241130182754455](virtuoso/image-20241130182754455.png)
+
+```verilog
+///////////////////////////////////////////////////////////////////////////
+// Engineer: Alberto Lopez
+//
+// Description: Verilog model of the solar cell photodiode
+//
+// Change history: 11/Sept/2019
+//
+/////////////////////////////////////////////////////////////////////////////
+`include "constants.vams"
+`include "disciplines.vams"
+ 
+module SolarCell_Table( EN, Vsolar, GND);
+ 
+input EN;
+electrical EN;
+ 
+output Vsolar;
+electrical Vsolar;
+output GND;
+electrical GND;
+
+ 
+//Curve parameters
+parameter real light =1;
+parameter real vthreshold = 0.6;
+
+real Vcp;
+real iout, itemp;
+real i1,i2, i3, i4, i5;
+integer en;
+analog begin
+ 
+    @(initial_step)    begin 
+        en = 0;
+    end
+
+//Enable function
+    @(cross(V(EN) -vthreshold,1)) begin
+        if(V(EN)>=vthreshold) en = 1;
+        else en = 0;
+    end
+
+    Vcp = V(Vsolar,GND)*1000;
+
+    i1 =  -$table_model (Vcp, "ph4_1.tbl", "1C")/1000000;
+    i2 =  -$table_model (Vcp, "ph4_2.tbl", "1C")/1000000;
+    i3 =  -$table_model (Vcp, "ph4_3.tbl", "1C")/1000000;
+    i4 =  -$table_model (Vcp, "ph4_4.tbl", "1C")/1000000;
+    i5 =  -$table_model (Vcp, "ph4_5.tbl", "1C")/1000000;
+
+//    if(itemp <0 ) iout = itemp;
+//    else iout = 0;
+    case (light)
+        1: iout = i1;
+        2: iout = i2;
+        3: iout = i3;
+        4: iout = i4;
+        5: iout = i5;
+        default: iout = 0;
+    endcase
+    
+    if(en== 0) iout = 0;
+
+    I(Vsolar,GND) <+  iout;
+ 
+end //analog
+endmodule
+```
+
+
+
 ## PEX LAYER_MAP
 
 ```

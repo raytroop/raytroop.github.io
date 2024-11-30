@@ -240,14 +240,13 @@ $$
 Hence
 $$\begin{align}
 \phi_o(\eta) &= \phi_m(\eta) \frac{1}{1-\eta^{-1}} \\
-&= \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}\cdot \frac{1}{1-\eta^{-1}} \\
-&= \frac{1}{1-\eta^{-1/L}}\cdot \frac{1}{L}
+&= \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}\cdot \frac{1}{1-\eta^{-1}}
 \end{align}$$
 
 After *zero-order hold process*, we obtain $\phi_f(z)$, which is
 $$\begin{align}
 \phi_f(z) &= \phi_o(z^L) \cdot \frac{1-z^{-L}}{1-z^{-1}} \\
-&=\frac{1}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1-z^{-L}}{1-z^{-1}}
+&=\frac{1-z^{-L}}{1-z^{-1}}\cdot \frac{1}{L}\cdot \frac{1}{1-z^{-L}}\cdot \frac{1-z^{-L}}{1-z^{-1}}
 \end{align}$$
 i.e.,
 $$
@@ -324,12 +323,33 @@ $$
 
 ---
 
+> In above screenshot
+>
+> 1. $K_D$ is just relative value
+> 2. frug shall **not** be scaled by decimator factor
+>
+> proved as below
+
+DC gain $K_B$ of summing (boxcar filter) is *decimation factor* $M$ , voting gain $K_V$ is about $0.54K_b=0.54M$
+
+1. downsampling $\frac{1}{M}$ and ZOH $\frac{1-z^{-M}}{1-z^{-1}}$ can be can be cancelled out at low frequency
+2. decimation gain: accumulator $\frac{1-z^{-M}}{1-z^{-1}}$ replaced with linearizing gain $K_B$ and majority voting replaced with $K_V$
+
+**proportional path:**
+$$\begin{align}
+LG_{ph} &= K_{BB}\cdot \frac{1-z^{-M}}{1-z^{-1}}\cdot \frac{1}{M}\cdot \frac{1}{1-z^{-M}}\cdot \frac{1-z^{-M}}{1-z^{-1}} \\
+&\approx K_{BB}\cdot \frac{1-z^{-M}}{1-z^{-1}}\cdot \frac{1}{1-z^{-M}} \\
+&= K_{BB}\cdot K_D\cdot \frac{1}{1-z^{-M}}
+\end{align}$$
 
 
 
-
-
-
+**integral path:**
+$$\begin{align}
+LG_{fr} &= K_{BB}\cdot \frac{1-z^{-M}}{1-z^{-1}}\cdot \frac{1}{M}\cdot \frac{1}{(1-z^{-M})^2}\cdot \frac{1-z^{-M}}{1-z^{-1}} \\
+&\approx K_{BB}\cdot \frac{1-z^{-M}}{1-z^{-1}}\cdot \frac{1}{(1-z^{-M})^2} \\
+&= K_{BB}\cdot K_D\cdot  \frac{1}{(1-z^{-M})^2}
+\end{align}$$
 
 
 

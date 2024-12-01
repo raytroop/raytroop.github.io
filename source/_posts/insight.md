@@ -22,6 +22,14 @@ mathjax: true
 
 
 
+## common gate amplifiers
+
+![No alt text provided for this image](insight/1699196508319.jpeg)
+
+
+
+> [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_analog-analogdesign-rfdesign-activity-7126946716938878976-GeW6?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_analog-analogdesign-rfdesign-activity-7126946716938878976-GeW6?utm_source=share&utm_medium=member_desktop)]
+
 
 
 ## Shot Noise

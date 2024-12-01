@@ -150,7 +150,7 @@ Y. Duan and D. Chen, "Fast and Accurate Decomposition of Deterministic Jitter Co
 
 Sharma, Vijender Kumar and Sujay Deb. "Analysis and Estimation of Jitter Sub-Components." (2014).
 
-Qingqi Dou and J. A. Abraham, "Jitter decomposition in ring oscillators," Asia and South Pacific Conference on Design Automation, 2006., 2006, pp. 6 pp.-, doi: 10.1109/ASPDAC.2006.1594696.
+Qingqi Dou and J. A. Abraham, "Jitter decomposition in ring oscillators," Asia and South Pacific Conference on Design Automation, 2006
 
 E. Balestrieri, L. De Vito, F. Lamonaca, F. Picariello, S. Rapuano and I. Tudosa, "The jitter measurement ways: The jitter decomposition," in IEEE Instrumentation & Measurement Magazine, vol. 23, no. 7, pp. 3-12, Oct. 2020, doi: 10.1109/MIM.2020.9234759.
 

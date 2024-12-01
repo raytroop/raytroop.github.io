@@ -39,6 +39,10 @@ mathjax: true
 
 > **Oversampling Ratio (OSR)** is defined as the ratio of the *Nyquist frequency* $f_s/2$ to the *signal bandwidth* $B$ given by $\text{OSR}=f_s/2B$
 
+
+
+
+
 ## Summation & Integration 
 
 |             | impulse response | Transform            | ROC                       |
@@ -50,7 +54,7 @@ mathjax: true
 
 
 
-## sinc filter
+##  sinc function
 
 ![image-20241002143413907](ss-insight/image-20241002143413907.png)
 
@@ -61,6 +65,12 @@ where $W$ is sampling frequency in Hz
 
 
 > ![image-20241002143219224](ss-insight/image-20241002143219224.png)
+
+---
+
+ sinc function is *square integrable* but **not** *absolutely integrable*
+
+
 
 
 

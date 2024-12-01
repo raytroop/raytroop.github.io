@@ -8,6 +8,44 @@ mathjax: true
 
 
 
+## noise power at filter output
+
+> Chembiyan T, "Comparison Of Noise Power At Lowpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_noise-power-at-filter-output-activity-7006486487093456896-W0Rt?utm_source=share&utm_medium=member_desktop)]
+>
+> —, "On Noise Power At The Bandpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_bandpass-noise-activity-7008896204507922432-ZRXF?utm_source=share&utm_medium=member_desktop)]
+>
+> —, "Integrated Power of Thermal and Flicker Noise" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_flicker-and-thermal-noise-power-on-a-log-activity-7003063399781711872-62nh?utm_source=share&utm_medium=member_desktop)]
+
+*TODO* &#128197;
+
+
+
+
+
+## Pulsed Noise Signals
+
+> Chembiyan T, "Power Spectral Density of Pulsed Noise Signals" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_psd-of-pulsed-noise-signal-activity-6992527460886040577-a0im?utm_source=share&utm_medium=member_desktop)]
+
+*TODO* &#128197;
+
+
+
+
+
+## Sampling Noise
+
+> Chembiyan T, "Noise, Sampling and Zeta Functions" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_sampling-noise-signals-activity-7018929654627520512-QYr0?utm_source=share&utm_medium=member_desktop)]
+
+A random signal $v_n(t)$ is sampled using an ideal impulse sampler
+
+![image-20241201165157743](noise/image-20241201165157743.png)
+
+*TODO* &#128197;
+
+
+
+
+
 ## ADC SNR with Clock Jitter
 
 > Chembiyan T "SNR of an ADC in the presence of clock jitter" [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop)]

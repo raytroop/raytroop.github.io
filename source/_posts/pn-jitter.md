@@ -9,14 +9,6 @@ mathjax: true
 
 
 
-## Integration Limits
-
-> Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
-
-*TODO* &#128197;
-
-
-
 ## VCO Phase Noise
 
 ### pnoise - timeaverage

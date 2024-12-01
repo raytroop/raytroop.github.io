@@ -190,7 +190,7 @@ SAGCs require the source/drain contacts to be capped with an insulator that is d
 
 > Wider Contacted-Poly-Pitch allows wider MD and VD size, which help reduce MEOL IRdrop
 
-![Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP).](https://www.imec-int.com/_next/image?url=%2Fsites%2Fdefault%2Ffiles%2F2022-02%2FFigure%25201%2520-%2520Logic%2520standard%2520cell%2520scaling.JPG&w=3840&q=75)
+![Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP).](layout/imageurl=%252Fsites%252Fdefault%252Ffiles%252F2022-02%252FFigure%201%20-%20Logic%20standard%20cell%20scaling.jpeg)
 
 *Naoto Horiguchi. Entering the Nanosheet Transistor Era  [[link](https://www.imec-int.com/en/articles/entering-nanosheet-transistor-era-0)]*
 
@@ -207,6 +207,138 @@ SAGCs require the source/drain contacts to be capped with an insulator that is d
 ![image-20230709003917922](layout/image-20230709003917922.png)
 
 
+
+## Native NMOS Blocked Implant (NT_N)
+
+> Principles of VLSI Design CMOS Processing CMPE 413 [[https://redirect.cs.umbc.edu/~cpatel2/links/315/lectures/chap3_lect09_processing2.pdf](https://redirect.cs.umbc.edu/~cpatel2/links/315/lectures/chap3_lect09_processing2.pdf)]
+>
+> CMOS processing [[http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf](http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf)]
+>
+> The Fabrication Process of CMOS Transistor [[https://www.elprocus.com/the-fabrication-process-of-cmos-transistor/#:~:text=latch%2Dup%20susceptibility.-,N%2D%20well%2F%20P%2D%20well%20Technology,well%20it%20is%20vice%2D%20verse.](https://www.elprocus.com/the-fabrication-process-of-cmos-transistor/#:~:text=latch%2Dup%20susceptibility.-,N%2D%20well%2F%20P%2D%20well%20Technology,well%20it%20is%20vice%2D%20verse.)]
+>
+> CMOS Processing Technology [[link1](http://ece-research.unm.edu/jimp/vlsi/slides/chap3_1.html), [link2](http://ece-research.unm.edu/jimp/vlsi/slides/chap3_2.html)]
+
+
+
+A **native layer (NT_N)** is usually added under inductors or transformers in the nanoscale CMOS to define the non-doped high-resistance region of substrate, which decreases eddy currents in the substrate thus maintaining high Q of the coils.
+
+> For T* PDK offered inductor, a native substrate region is created under the inductor coil to minimize *eddy currents* 
+
+![image-20230810000702597](layout/image-20230810000702597.png)
+
+
+
+> OD inside NT_N only can be used for NT_N potential pickup purpose, such as the guarding-ring of MOM and inductor
+
+
+
+### Derived Geometries
+
+| Term   | Definition           |
+| ------ | -------------------- |
+| PW     | {NOT NW}             |
+| N+OD   | {NP AND OD}          |
+| P+OD   | {PP AND OD}          |
+| GATE   | {PO AND OD}          |
+| TrGATE | {GATE NOT PODE_GATE} |
+
+
+NP: N+ Source/Drain Ion Implantation
+
+PP: P+ Source/Drain Ion Implantation
+
+OD: Gate Oxide and Diffustion
+
+NW: N-WELL
+
+PW: P-WELL
+
+
+
+### CMOS Processing Technology
+
+*Four main CMOS technologies:*
+
+- *n-well process*
+- *p-well process*
+- *twin-tub process*
+- *silicon on insulator*
+
+
+
+
+
+Triple well, Deep N-Well (optional):
+
+- NWell:  NMOS svt, lvt, ulvt ...
+- PWell: PMOS svt, lvt, ulvt ...
+- DNW:  For isolating P-Well from the substrate
+
+> The NT_N drawn layer adds **no** process cost and **no** extra mask
+>
+> The N-well / P-well technology, where n-type diffusion is done over a p-type substrate or p-type diffusion is done over n-type substrate respectively.
+>
+> The **Twin well technology**, where **NMOS and PMOS transistor** are developed over the wafer by simultaneous diffusion over an epitaxial growth base, rather than a substrate.
+
+
+
+
+
+## Deep N-well
+
+> Chew, K.W., Zhang, J., Shao, K., Loh, W., & Chu, S.F. (2002). Impact of Deep N-well Implantation on Substrate Noise Coupling and RF Transistor Performance for Systems-on-a-Chip Integration. 32nd European Solid-State Device Research Conference, 251-254. URL:[[slides](http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf), [paper](http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf)]
+>
+> Mark Waller, [Analog layout: Why wells, taps, and guard rings are crucial](https://www.planetanalog.com/analog-layout-why-wells-taps-and-guard-rings-are-crucial/)
+>
+> KEITH SABINE [Using Deep N Wells in Analog Design](https://www.planetanalog.com/using-deep-n-wells-in-analog-design/)
+>
+> Faricelli, J. (2010). Layout-dependent proximity effects in deep nanoscale CMOS. IEEE Custom Integrated Circuits Conference 2010, 1-8.
+>
+> cmos_processing, URL:[http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf](http://users.ece.utexas.edu/~athomsen/cmos_processing.pdf)
+>
+> Kuo-Tsai LiPaul ChangAndy Chang, TSMC, US20120053923A1, "Methods of designing integrated circuits and systems thereof"
+
+
+
+### Substrate noise
+
+A variety of techniques can be used to minimize this noise, for example by keeping analog devices surrounded by guard rings, or using a separate supply for the substrate/well taps. 
+
+However *guard rings alone cannot prevent noise coupling deep in the substrate, only surface currents*.
+
+> PMOS are less noisy than NMOS since PMOS has its nwell which isolates the substrate noise, but such is not valid for NMOS .
+
+
+
+### DNW
+
+The N-channel devices built directly into the P-type substrate are not as effectively isolated as P-channel devices in their N-wells. This is because despite creating a P+ guard ring around the devices, there remains an electrical path below the guard ring for charge to flow. 
+
+To overcome this issue, a *deep N-well* can be used to more effectively isolate these N-channel devices.
+
+![image-20230529001556060](layout/image-20230529001556060.png)
+
+![image-20230529010836003](layout/image-20230529010836003.png)
+
+![BM_SS_Together at Last_Fig1](layout/BM_SS_Fig1-520x288.jpg)
+
+> pwdnw: PW/DNW diode
+>
+> dnwpsub: DNW/PSUB diode
+>
+> [Together At Last – Combining Netlist and Layout Data for Power-Aware Verification](https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/)
+
+![image-20240708221831791](layout/image-20240708221831791.png)
+
+![image-20240708222327376](layout/image-20240708222327376.png)
+
+
+
+![image-20230529002733114](layout/image-20230529002733114.png)
+
+- the P-well is separated, allowing the voltage to be controlled
+- because the circuit within the deep N-well is separated from the p-substrate in this structure,
+  there is the benefit that this circuitry is less susceptible to noise that propagates through the p-substrate.
 
 
 

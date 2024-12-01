@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+## current mirror with source follower
+
+![icurrent_sf.drawio](biasing/icurrent_sf.drawio.svg)
+
+source follower alleviate *gate leakage* impact on reference current 
+
+
+
 ## Curvature compensation
 
 ![image-20240903234720200](biasing/image-20240903234720200.png)

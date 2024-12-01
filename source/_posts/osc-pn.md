@@ -17,6 +17,132 @@ mathjax: true
 
 
 
+## narrowband approximation & limitation
+
+A sine wave with phase modulation is expressed as
+$$
+y(t) = A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t))
+$$
+where $\phi (t)$ is a time-varying phase modulation function
+
+
+
+Assuming a *narrowband phase modulation (PM)*, that is, the absolute amount of modulated phase is small enough
+
+> *otherwise the modulation becomes frequency modulation (FM) and its analysis becomes more complex*
+
+$$
+y(t) \simeq A_0 \sin(2\pi f_0 t +\phi _0) + A_0 \phi (t)\cos(2\pi f_0 t + \phi _0)
+$$
+
+> Because $\cos \phi(t)$ and $\sin \phi(t)$ are approximated to $1$ and $\phi (t)$, respectively
+
+
+
+The Fourier transform of $y(t)$ is
+$$
+Y(f) = \frac{1}{2}A_0 e^{j\phi _0}\delta(f-f_0) -\frac{1}{2}A_0e^{-j\phi_0}\delta(f+f_0)+\frac{1}{2}A_0e^{j\phi_0}\Phi(f-f_0)-\frac{1}{2}A_0e^{-j\phi_0}\Phi(f+f_0)
+$$
+
+> where $\Phi(f)$ is the Fourier transform pair of $\phi(t)$
+
+
+
+The autocorrelation of $y(t)$ is
+
+$$\begin{align}
+R(\tau) &= E(y(t)y(t+\tau))\\
+&= E([A_0\sin(2\pi f_0 t + \phi_0)+A_0\phi(t)\cos(2\pi f_0 t+\phi _0)]\\
+&= \frac{1}{2}A_0^2 \cos(2\pi f_0 \tau)(1+R_{\phi}(\tau))
+\end{align}$$
+
+Fourier transform of $R(\tau)$ is
+$$
+S_y(f) = \frac{1}{4}A_0^2 \delta (f-f_0) + \frac{1}{4}A_0\delta(f+f_0) + \frac{1}{4}A_0^2S_\phi (f-f_0)+\frac{1}{4}A_0^2S_\phi (f+f_0)
+$$
+![image-20240511221119938](osc-pn/image-20240511221119938.png)
+
+
+
+> Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
+
+
+
+---
+
+
+
+**approximation limitation**
+
+**Don't** retain the same total power
+
+![image-20240720101133749](osc-pn/image-20240720101133749.png)
+
+
+
+## Leeson's model
+
+Leeson's equation is an *empirical* expression that describes an oscillator's phase noise spectrum
+
+![image-20240718230819186](osc-pn/image-20240718230819186.png)
+
+Limitation:
+
+​	that the PSD diverges to *infinity* for very low values of the frequency offset $f$​
+
+
+
+## Lorentzian Spectrum
+
+![image-20240720134811859](osc-pn/image-20240720134811859.png)
+
+We typically use the two spectra, $S_{\phi n}(f)$ and $S_{out}(f)$, interchangeably, but we must resolve these inconsistencies. **voltage spectrum**  is called **Lorentzian spectrum**
+
+
+
+---
+
+
+
+The periodic signal $x(t)$ can be expanded in Fourier series as:
+
+![image-20240720141514040](osc-pn/image-20240720141514040.png)
+
+Assume that the signal is subject to excess phase noise, which is modeled by adding a time-dependent noise component $\alpha(t)$. The noisy signal can be written $x(t+\alpha(t))$, the added excess phase $\phi(t)= \frac{\alpha(t)}{\omega_0}$
+
+The autocorrelation of the noisy signal is by definition:
+
+![image-20240720141525576](osc-pn/image-20240720141525576.png)
+
+The *autocorrelation averaged over time* results in:
+
+![image-20240720141659415](osc-pn/image-20240720141659415.png)
+
+By taking the Fourier transform of the autocorrelation, the spectrum of the signal $x(t + \alpha(t))$​ can be expressed as
+
+![image-20240720141813256](osc-pn/image-20240720141813256.png)
+
+It is also interesting to note how the integral in Equation 9.80 around each harmonic is equal to the power of the harmonic itself $|X_n|^2$
+
+The integral $S_x(f)$ around harmonic is
+$$\begin{align}
+P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\omega_0^4n^4c^2+(\omega +n\omega_0)^2}df \\
+&= |X_n|^2\int_{\Delta f=-\infty}^{\infty}\frac{2\beta}{\beta^2+(2\pi\cdot\Delta f)^2}d\Delta f \\
+&= |X_n|^2\frac{1}{\pi}\arctan(\frac{2\pi \Delta f}{\beta})|_{-\infty}^{\infty} \\
+&= |X_n|^2
+\end{align}$$
+
+
+
+> The phase noise does not affect the total power in the signal, it only affects its distribution. 
+>
+> - Without phase noise, $S_v(f)$ is a series of impulse functions at the harmonics of $f_o$. 
+> - With phase noise, the impulse functions spread, becoming fatter and shorter but retaining the *same total power*
+
+
+
+
+
 
 
 ## VCO ISF Simulation

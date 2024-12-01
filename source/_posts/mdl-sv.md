@@ -1,13 +1,11 @@
 ---
-title: Modeling and Simulation in SystemVerilog
-date: 2024-08-18 18:27:17
+title: Modeling in SystemVerilog
+date: 2024-12-01 23:13:53
 tags:
 categories:
-- analog
+- dsp
 mathjax: true
 ---
-
-
 
 
 
@@ -228,12 +226,6 @@ initial #0.1 forever begin
     #0.1;
 end
 ```
-
-
-
-> **Acknowledgement**
->
-> My colleague, Zhang Wenpian help me a lot in understanding this modeling method. Lots of content here are copied from Zhang's note.
 
 
 

@@ -134,12 +134,10 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 
 
-> The phase noise does not affect the total power in the signal, it only affects its distribution. 
->
-> - Without phase noise, $S_v(f)$ is a series of impulse functions at the harmonics of $f_o$. 
-> - With phase noise, the impulse functions spread, becoming fatter and shorter but retaining the *same total power*
+***The phase noise does not affect the total power in the signal, it only affects its distribution***
 
-
+- Without phase noise, $S_v(f)$ is a series of impulse functions at the harmonics of $f_o$. 
+- With phase noise, the impulse functions spread, becoming fatter and shorter but retaining the *same total power*
 
 
 

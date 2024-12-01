@@ -1,5 +1,5 @@
 ---
-title: Jitters Simulation
+title: Jitters Simulation for Driven Circuit
 date: 2022-05-16 00:39:22
 tags:
 categories:
@@ -7,17 +7,17 @@ categories:
 mathjax: true
 ---
 
-![image-20220516004008878](dj-rj/image-20220516004008878.png)
+![image-20220516004008878](jitter-drivencir/image-20220516004008878.png)
 
 ## Deterministic Jitter
 
-![image-20220516004058916](dj-rj/image-20220516004058916.png)
+![image-20220516004058916](jitter-drivencir/image-20220516004058916.png)
 
-![image-20220516004206118](dj-rj/image-20220516004206118.png)
+![image-20220516004206118](jitter-drivencir/image-20220516004206118.png)
 
 `j_Djpp` can be calculated by PSD,too
 
-![image-20220516004615033](dj-rj/image-20220516004615033.png)
+![image-20220516004615033](jitter-drivencir/image-20220516004615033.png)
 
 ```matlab
 fck = 38.4e6;
@@ -88,11 +88,11 @@ BER =
 
 
 
-![image-20220516160050961](dj-rj/image-20220516160050961.png)
+![image-20220516160050961](jitter-drivencir/image-20220516160050961.png)
 
 
 
-![image-20220516193125490](dj-rj/image-20220516193125490.png)
+![image-20220516193125490](jitter-drivencir/image-20220516193125490.png)
 
 ## Total Jitter
 
@@ -100,11 +100,11 @@ $$
 \text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} + \text{RJ}_{\text{p-p}}(\text{BER})
 $$
 
-![tj.drawio](dj-rj/tj.drawio.svg)
+![tj.drawio](jitter-drivencir/tj.drawio.svg)
 
-![image-20220516160006909](dj-rj/image-20220516160006909.png)
+![image-20220516160006909](jitter-drivencir/image-20220516160006909.png)
 
-![image-20220516012200383](dj-rj/image-20220516012200383.png)
+![image-20220516012200383](jitter-drivencir/image-20220516012200383.png)
 
 > In the psd of TJ, the spur is DJ and floor is RJ
 
@@ -156,7 +156,7 @@ The above equation has been verified for *sampled pnoise*, i.e.  *J<sub>ee</sub>
 
 One example, integrate to $\frac{f_{osc}}{2}$ and $f_{osc} = 16GHz$
 
-![image-20220415100034220](dj-rj/image-20220415100034220.png)
+![image-20220415100034220](jitter-drivencir/image-20220415100034220.png)
 
 
 

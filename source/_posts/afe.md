@@ -9,6 +9,18 @@ mathjax: true
 
 
 
+## Push-Pull
+
+*TODO* &#128197;
+
+
+
+
+
+> Rinaldo Castello, "LINEARIZATION TECHNIQUES FOR PUSH-PULL AMPLIFIERS" [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/AMPLIFIERS_Stanf_Tor_2016_Last.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/AMPLIFIERS_Stanf_Tor_2016_Last.pdf)]
+
+
+
 ## MOS parasitic Rd&Rs, Cd&Cs
 
 Decrease  the parasitic R&C

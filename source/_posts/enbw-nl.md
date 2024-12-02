@@ -201,6 +201,10 @@ Adiff: 7.276e-12
 
 ## Noise Floor
 
+> [[http://individual.utoronto.ca/schreier/lectures/2015/1.pdf](http://individual.utoronto.ca/schreier/lectures/2015/1.pdf)]
+
+![image-20241202212412428](enbw-nl/image-20241202212412428.png)
+
 
 ### General Formula
 
@@ -209,21 +213,28 @@ $$
 P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
 $$
 
-noise power
+noise power 
 $$
-P_n = \frac{X_{w,n}^2}{S_2}
+P_n = \frac{X_{w,n}^2}{N\cdot S_2}N=\frac{X_{w,n}^2}{S_2}
 $$
 
-Then, displayed **SNR** is obtained
+where white noise,  $X_n(i) = X_n(j)$ for any $i \neq j$
+
+
+
+Therefore, displayed **SNR** is obtained
 $$\begin{align}
 \mathrm{SNR} &= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right) \\
 &= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) + 10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
 &= \mathrm{SNR}'-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
+&= \mathrm{SNR}'-10\log_{10}(2\cdot\mathrm{NBW}) 
 \end{align}$$
 
 > *DFT's output* $\mathrm{SNR}$
 
-### Rect Window
+
+
+### Rectangular Window
 
 DFT bin's output *noise* standard deviation (*rms*) value is proportional to $\sqrt{N}$, and the DFT's output magnitude for the bin containing the *signal tone* is proportional to $N$
 
@@ -232,30 +243,57 @@ $$
 P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{N^2}
 $$
 
-> +/- frequency spectrum and apply Parseval's theorem 
-
 noise power
-$$\begin{align}
-P_n &= \sum_{k=0}^{N-1}{\frac{(X_{w,n}(k))^2}{N^2}}  \\
-&= \frac{X_{w,n}^2}{N^2}\cdot N \\
-&= \frac{X_{w,n}^2}{N}
-\end{align}$$
-
-> note white noise, that is $X_n(i) = X_n(j)$ for any $i \neq j$
+$$
+P_n = \frac{X_{w,n}^2}{N}
+$$
 
 
-displayed **SNR**
-$$\begin{align}
-\mathrm{SNR} &= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right) \\
-&= 10\log_{10}\left(\frac{P_{\text{sig}}N^2}{P_n2N}\right) \\
-&= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) + 10\log_{10}\left(\frac{N}{2}\right) \\
-&= \mathrm{SNR}' - 10\log_{10}(2/N)
-\end{align}$$
-
+The displayed **SNR**
+$$
+\mathrm{SNR} = \mathrm{SNR}' - 10\log_{10}(2/N)
+$$
 If we increase a DFT's size from $N$ to $2N$, the DFT's output SNR increased by 3dB. So we say that a DFT's **processing gain** increases by 3dB whenever $N$ is doubled.
 
 
-> [[http://individual.utoronto.ca/schreier/lectures/2015/1.pdf](http://individual.utoronto.ca/schreier/lectures/2015/1.pdf)]
+
+---
+
+```matlab
+for N=[2^6 2^8 2^10 2^12]
+  wd = rectwin(N);
+  nbw = enbw(wd)/N;
+  snr_shift = 10*log10(nbw * 2);
+  disp(snr_shift);
+end
+```
+
+output:
+
+```
+-15.0515
+
+-21.0721
+
+-27.0927
+
+-33.1133
+```
+
+![image-20241202212221239](enbw-nl/image-20241202212221239.png)
+
+![image-20241202213152360](enbw-nl/image-20241202213152360.png)
+
+### How spectrum analyzer work?
+
+We tried to plot a *power spectral density* together with something that we want to interpret as a *power spectrum*
+
+- *spectrum* of a periodic signal
+- *spectral density* of a broadband signal such as noise
+
+Sine-wave components are located in individual FFT bins, but broadband signals like noise have their power spread over all FFT bins!
+
+> The **noise floor** depends on the *length of the FFT*
 
 
 

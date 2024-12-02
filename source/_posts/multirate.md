@@ -523,9 +523,9 @@ plt.show()
 
 
 prob = np.zeros((phase_error.shape[0],3))
-prob[:,0] = pd_early*0.5    # -1
-prob[:,1] = 0.5             # 0
-prob[:,2] = pd_late*0.5     # 1
+prob[:,0] = pd_early*Ptrans     # -1
+prob[:,1] = 1.0 - Ptrans        # 0
+prob[:,2] = pd_late*Ptrans      # 1
 
 pd_out = np.array([-1.0,0.0,1.0])
 idxs = list([[0,1,2] for _ in range(deci_factor)])

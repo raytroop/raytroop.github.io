@@ -231,18 +231,33 @@ end
 
 ## Reference
 
-B. C. Lim and M. Horowitz, "Error Control and Limit Cycle Elimination in Event-Driven Piecewise Linear Analog Functional Models," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 63, no. 1, pp. 23-33, Jan. 2016, doi: 10.1109/TCSI.2015.2512699.
-
-S. Liao and M. Horowitz, "A Verilog piecewise-linear analog behavior model for mixed-signal validation," Proceedings of the IEEE 2013 Custom Integrated Circuits Conference, 2013, pp. 1-5, doi: 10.1109/CICC.2013.6658461.
-
 DaVE - tools regarding on analog modeling,validation, and generation, https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)
+
+---
+
+Lim, Byong Chan,Ph.D. Dissertation 2012. "Model validation of mixed-signal systems" [[https://stacks.stanford.edu/file/druid:xq068rv3398/bclim-thesis-submission-augmented.pdf](https://stacks.stanford.edu/file/druid:xq068rv3398/bclim-thesis-submission-augmented.pdf)]
+
+Ji Eun Jang, Myeong-Jae Park, Dongyun Lee and Jaeha Kim. "True event-driven simulation of analog/mixed-signal behaviors in SystemVerilog: A decision-feedback equalizing (DFE) receiver example." *Proceedings of the IEEE 2012 Custom Integrated Circuits Conference* (2012) [[https://sci-hub.se/10.1109/CICC.2012.6330558](https://sci-hub.se/10.1109/CICC.2012.6330558)]
+
+S. Liao and M. Horowitz, "A Verilog piecewise-linear analog behavior model for mixed-signal validation," Proceedings of the IEEE 2013 Custom Integrated Circuits Conference, 2013 [[https://sci-hub.se/10.1109/CICC.2013.6658461](https://sci-hub.se/10.1109/CICC.2013.6658461)]
+
+Liao Sabrina, Ph.D. Dissertation 2014. "Verilog piecewise linear behavioral modeling for mixed-signal validation" [[https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf](https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf)]
 
 B. C. Lim, J. -E. Jang, J. Mao, J. Kim and M. Horowitz, "Digital Analog Design: Enabling Mixed-Signal System Validation," in *IEEE Design & Test*, vol. 32, no. 1, pp. 44-52, Feb. 2015 [[http://iot.stanford.edu/pubs/lim-mixed-design15.pdf](http://iot.stanford.edu/pubs/lim-mixed-design15.pdf)]
 
-Liao Sabrina, Verilog piecewise linear behavioral modeling for mixed-signal validation [[https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf](https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf)]
+Ji Eun Jang, Ph.D. Dissertation from SNU 2015, "Event-Driven Simulation Methodology for Analog/Mixed-Signal Systems" [[https://s-space.snu.ac.kr/bitstream/10371/119088/1/000000028723.pdf](https://s-space.snu.ac.kr/bitstream/10371/119088/1/000000028723.pdf)]
 
-Lim, Byong Chan. Model validation of mixed-signal systems [[https://stacks.stanford.edu/file/druid:xq068rv3398/bclim-thesis-submission-augmented.pdf](https://stacks.stanford.edu/file/druid:xq068rv3398/bclim-thesis-submission-augmented.pdf)]
+Lim, Byong & Mao, James & Horowitz, Mark & Jang, Ji-Eun & Kim, Jaeha. (2015). Digital Analog Design: Enabling Mixed-Signal System Validation. Design & Test, IEEE. 32. 44-52. [[https://iot.stanford.edu/pubs/lim-mixed-design15.pdf](https://iot.stanford.edu/pubs/lim-mixed-design15.pdf)]
 
-Ben Yochret Sabrine, "BEHAVIORAL MODELING WITH SYSTEMVERILOG FOR MIXED-SIGNAL VALIDATION" [[https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf](https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf)]
+B. C. Lim and M. Horowitz, "Error Control and Limit Cycle Elimination in Event-Driven Piecewise Linear Analog Functional Models," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 63, no. 1, pp. 23-33, Jan. 2016 [[https://sci-hub.se/10.1109/TCSI.2015.2512699](https://sci-hub.se/10.1109/TCSI.2015.2512699)]
+
+---
+
+Ben Yochret Sabrine, 2020, "BEHAVIORAL MODELING WITH SYSTEMVERILOG FOR MIXED-SIGNAL VALIDATION" [[https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf](https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf)]
 
 "Creating Analog Behavioral Models VERILOG-AMS ANALOG MODELING" [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/CDN_Creating_Analog_Behavioral_Models.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/CDN_Creating_Analog_Behavioral_Models.pdf)]
+
+Rainer Findenig, Infineon Technologies. "Behavioral Modeling for SoC Simulation Bridging Analog and Firmware Demands" [[https://www.coseda-tech.com/files/Files/Dokumente/Behavioral_Modeling_for_SoC_Simulation_COSEDA_UGM_2018.pdf](https://www.coseda-tech.com/files/Files/Dokumente/Behavioral_Modeling_for_SoC_Simulation_COSEDA_UGM_2018.pdf)]
+
+Jaeha Kim, Frontiers in Analog CAD (FAC 2014). "An Event-Driven Simulation of Analog/Mixed-Signal Systems and Its Implications to Property Assertions" [[https://www.em.informatik.uni-frankfurt.de/FAC14/slides/FAC14_JaehaKim.pdf](https://www.em.informatik.uni-frankfurt.de/FAC14/slides/FAC14_JaehaKim.pdf)]
+

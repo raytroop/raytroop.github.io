@@ -24,6 +24,8 @@ $$
 
 The NMOS LDO has a faster response to line transients than the PMOS LDO since it has better (smaller) PSRR
 
+![image-20241202230138520](ldo/image-20241202230138520.png)
+
 A good PSRR is important when an LDO is used as a sub-regulator in cascade with a switching regulator. The LDO would need to have a sufficiently high rejection at the switching frequency of the switching converter to filter out the ripples at that frequency
 
 

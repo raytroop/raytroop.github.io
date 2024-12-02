@@ -251,6 +251,12 @@ DJpp = kvco*deltaI*ton^2/(2*C2)*(deltaI_Icp + 1)*Tosc
 
 
 
+## Wandering Spurs
+
+Fractional-N frequency synthesizers exhibit strange moving spurs and pulsating spectra. These are manifestations of a phenomenon called "wandering spurs."
+
+*TODO* &#128197;
+
 
 
 

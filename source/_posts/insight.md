@@ -390,67 +390,6 @@ That is $\Delta V_R = \frac{I_D}{ g_m} \cdot \frac{\Delta R}{R}$
 
 
 
-## PERC
-
-- CD: current density checks
-
-- P2P: point to point resistance checks
-
-- LDL: logic driven layout checks, latch up related
-
-- TOPO: topology, circuit connection and device size checks
-
-> database
->
-> - CD, P2P, LDL : dfmdb
->
-> - TOPO: svdb
-
-
-
-> Frank Feng. New Approach For Full Chip Electrical Reliability Verification [[pdf](https://cse.nsysu.edu.tw/app/index.php?Action=downloadfile&file=WVhSMFlXTm9MelV3TDNCMFlWOHhOamN6TnpWZk5qYzFNVGd6TjE4NE5ESXlOQzV3WkdZPQ==&fname=1454FCFGGCPO45YTNOJCJGJGMKPKHC3534FG35YSA1GDXWFC34QOA0OOQOOKZWCDSSPOGDMP20NO4124YWB4B4LKYSMOQL0400YT34PKUWNK20FG00POUSXXYWXWOO15JCLKSWXWDCOKHG2050JCQKHCXTNPNOVSUSB4JCVW20HGJGTTWW40ZXIH5004A4GDMKJG5020OPMOJDLOML51NOFCSWROB454DGKKFCSTGCDCTXNPA4TWRKGDWW30CGKKDGB0YWLKIH05ML44WSFGQOTWOOECYWGHRKCCDD15A4XSFC14FCJGOO25WXROQLNK00JD31PKWSEC50A4SSOKHHTT)]
-
-
-
-## STRAP
-
-A "strap" refers to a low-impedance connection
-
-![image-20230518001007350](insight/image-20230518001007350.png)
-
-NWDMY = NWDMY1, NWDMY2
-
-
-
-STRAP = NWSTRAP or PWSTRAP
-
-NWSTRAP = {NP & OD} & {NW not {NW INTERACT NWDMY}}
-
-PWSTRAP = {PP & OD} not NW
-
-| cell \ pin  | PLUS    | MINUS   |
-| ----------- | ------- | ------- |
-| **N diode** | PWSTRAP | \       |
-| **P diode** | \       | NWSTRAP |
-
-
-
-### Calibre Rule::NOT
-
-![image-20230518005758993](insight/image-20230518005758993.png)
-
-
-
-### Calibre Rule::INTERACT
-
-![image-20230518010124496](insight/image-20230518010124496.png)
-
-![image-20230518010758342](insight/image-20230518010758342.png)
-
-
-
-
-
 ## RC charge & discharge
 
 - charge:
@@ -1179,60 +1118,6 @@ foreach net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical
 	dbSet [dbGetNetByName $net].dontTouch true
 }
 ```
-
-
-
-## Antenna Effect
-
-The **antenna effect** is a common name for the effects of *charge accumulation* in *isolated nodes* of an integrated circuit *during its processing*.
-
-> This effect is also sometimes called "Plasma Induced Damage", "Process Induced Damage" (PID) or "charging effect".
-
-
-
-### antenna ratio
-
-The antenna rule specifies the maximum tolerance for the ratio of a metal line area to the area of connected gates.
-
-
-### metal jumping
-
-Long metal can be taken to *higher metal* routing layer. This is known as **metal jumping**. 
-
-> This metal jumping will break the long interconnect and hence the charge collected on the long interconnect will not discharge through gate oxide because the higher metal layer is not yet fabricated. 
-
-> so, if the gate immediately connects to the highest level by jump-up metals, large amount of charges can not be collected, while the poly finally connected to the diffusion part by highest level, thus no antenna violation will normally occure.
-
-### Diode Insertion
-
-Diode helps dissipate charges accumulated on metal. Diode should be placed as near as possible to the gate of device on low level of metal.
-
-> Diode should always be connected in *reverse bias*, with cathode connected to gate electrode and anode connected to ground potential.
->
-> During processing, even if the diodes are reversely biased, because of the elevated wafer temperature (200 o C plus) it will provide a much conductive path
->
-> In the reverse bias region, the reverse saturation current of Si and Ge diodes doubles for every 10° C rise in temperature
-
-![main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq](insight/main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq.jpg)
-
-> Tuvia Liran, Antenna effect (PID): Do the design rules really protect us? [[link](https://www.eetimes.com/antenna-effect-do-the-design-rules-really-protect-us/)]
->
-> Upma Pawan Kumar, Sunandan Chaubey, Antenna Effect in 16nm Technology Node [[link](https://www.design-reuse.com/articles/48227/antenna-effect-in-16nm-technology-node.html)]
->
-> pulsic.com, Analog layout – Stop the antenna effect from destroying your circuit [[link](https://pulsic.com/analog-layout-stop-the-antenna-effect-from-destroying-your-circuit/)]
->
-> BuBuChen, 積體電路的天線效應 (Antenna Effect in IC) [[link](https://www.bubuchen.com/2020/04/Antenna-Effect.html)]
->
-> EDN, Antenna violations resolved using new method [[link](https://www.edn.com/antenna-violations-resolved-using-new-method/)]
->
-> edaboard.com, why jump up metal can solve the antenna effect? [[link](https://www.edaboard.com/threads/why-jump-up-metal-can-solve-the-antenna-effect.177890/post-745696)]
->
-> siliconvlsi.com, Antenna effect [[link](https://siliconvlsi.com/antenna-effect/)]
->
-> Prof. Adam Teman, Digital VLSI Design. Lecture-10-The-Manufacturing-Process [[pdf](https://www.eng.biu.ac.il/temanad/files/2017/02/Lecture-10-The-Manufacturing-Process.pdf)]
->
->
-> Zongjian Chen, Processing and Reliability Issues That Impact Design Practice. [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/Old/lect_15_2up.pdf)]
 
 
 

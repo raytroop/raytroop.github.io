@@ -7,6 +7,9 @@ categories:
 mathjax: true
 ---
 
+![image-20241019142915175](multirate/image-20241019142915175.png)
+
+---
 
 
 alternative view of sampling, assuming DC value is $A$

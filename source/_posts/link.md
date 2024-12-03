@@ -7,11 +7,6 @@ categories:
 mathjax: true
 ---
 
-![image-20241019142915175](link/image-20241019142915175.png)
-
----
-
-
 
 ## CDR Loop Latency
 

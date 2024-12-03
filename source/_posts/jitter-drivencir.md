@@ -168,7 +168,7 @@ J_{ee,rms} = \frac {V_{out,rms}}{slope}
 $$
 
 
-## pulse width variation
+## Pulse Width Jitter (PWJ)
 
 > [[Spectre Tech Tips: Measuring Noise in Digital Circuits](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)]
 

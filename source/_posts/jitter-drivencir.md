@@ -168,6 +168,13 @@ J_{ee,rms} = \frac {V_{out,rms}}{slope}
 $$
 
 
+## pulse width variation
+
+> [[Spectre Tech Tips: Measuring Noise in Digital Circuits](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)]
+
+**Pnoise sampled: Edge Delay mode** measures the noise defined by two edges. Both edges are defined by a threshold voltage and rising or falling edges, which measures the noise of the pulse itself and direct plot calculate the variation of the **pulse width**
+
+
 
 
 

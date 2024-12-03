@@ -297,7 +297,9 @@ Sine-wave components are located in individual FFT bins, but broadband signals l
 
 
 
-## No. of nonzero FFT bins
+## Nonzero FFT bins
+
+> everynanocounts. Memos on FFT With Windowing. [[https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing](https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing)]
 
 The problem with sine-wave scaling is that the noise power is, on average, *evenly distributed over all FFT bins*, whereas the sine-wave power is concentrated in *only a few bins*. With sine-wave scaling, the power of individual sine-wave components can be read directly from the spectral plot, but in order to determine the noise power, the powers of all the noise bins must be added together.
 

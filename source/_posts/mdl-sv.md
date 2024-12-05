@@ -229,6 +229,14 @@ end
 
 
 
+## Complete Response used in single-pole filter
+
+{% pdf /pdfs/completeResponse.pdf %}
+
+
+
+
+
 ## Reference
 
 DaVE - tools regarding on analog modeling,validation, and generation, https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)

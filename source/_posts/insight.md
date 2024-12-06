@@ -21,6 +21,14 @@ mathjax: true
 *TODO* &#128197;
 
 
+## Transmission Gate
+
+**Equivalent Resistance** is defined by **large signal**
+
+
+
+> [[https://www.ece.ucdavis.edu/~ramirtha/EEC116/F11/TGlecture.pdf](https://www.ece.ucdavis.edu/~ramirtha/EEC116/F11/TGlecture.pdf)]
+
 
 ## common gate amplifiers
 

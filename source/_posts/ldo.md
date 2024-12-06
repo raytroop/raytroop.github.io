@@ -8,6 +8,23 @@ mathjax: true
 ---
 
 
+
+## PSRR (Power Supply Rejection Ratio)
+
+A good PSRR is important when an LDO is used as a sub-regulator in cascade with a switching regulator
+
+![image-20241206225227534](ldo/image-20241206225227534.png)
+
+![image-20241206225557514](ldo/image-20241206225557514.png)
+
+
+
+
+
+> The LDO would need to have a sufficiently high rejection at the switching frequency of the switching converter to filter out the ripples at that frequency
+
+
+
 ## PMOS LDO
 
 A large output capacitor solves the sudden load change problem, but the stability decreases because the large output capacitor forces the output pole toward the origin with the role of dominant pole
@@ -16,17 +33,17 @@ A large output capacitor solves the sudden load change problem, but the stabilit
 
 ## DC output impedance 
 
+The output impedance of the LDO at DC is known as its **load regulation**
+
 DC output impedance of NMOS and PMOS LDO is the ***same*** for the same error amplifier gain
 
 $$
 R_{\text{out}} = \frac{1}{\beta A_{o1} g_{m2}}
 $$
 
-The NMOS LDO has a faster response to line transients than the PMOS LDO since it has better (smaller) PSRR
-
 ![image-20241202230138520](ldo/image-20241202230138520.png)
 
-A good PSRR is important when an LDO is used as a sub-regulator in cascade with a switching regulator. The LDO would need to have a sufficiently high rejection at the switching frequency of the switching converter to filter out the ripples at that frequency
+> The NMOS LDO has a faster response to line transients than the PMOS LDO since it has better (smaller) PSRR
 
 
 
@@ -175,11 +192,11 @@ I_\text{t} &= \frac{V_\text{ref} - v_\text{n2}}{R_\text{2}} \\
 V_\text{o} &= V_\text{ref} +v_\text{n1} + I_\text{t}R_\text{1} \\
 \end{align}$$
 
-Then,
+Then
 $$
 V_\text{o} = \frac{R_1+R_2}{R_2}V_\text{ref} + v_\text{n1} - \frac{R_1}{R_2}v_\text{n2}
 $$
-that is,
+that is
 
 $$
 v_\text{no}^2 = v_\text{n1}^2 + \left(\frac{R_1}{R_2}\right)^2 v_\text{n2}^2
@@ -206,7 +223,7 @@ $$
 
 Hinojo, J.M., Martinez, C.I., & Torralba, A.J. (2018). Internally Compensated LDO Regulators for Modern System-on-Chip Design.
 
-Chen, K. (2016). Power Management Techniques for Integrated Circuit Design.
+Chen, K.-H. (2016). *Power Management Techniques for Integrated Circuit Design*. Wiley-IEEE Press.
 
 Morita, B.G. (2014). Understand Low-Dropout Regulator ( LDO ) Concepts to Achieve Optimal Designs.
 
@@ -218,8 +235,14 @@ Operational Transconductance Amplifier II Multi-Stage Designs [[https://people.e
 
 Toshiba, Load Transient Response of LDO and Methods to Improve it Application Note [[https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268](https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268)]
 
-Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators"
+---
+
+Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators" [[https://uofi.app.box.com/v/CICC15-LDO](https://uofi.app.box.com/v/CICC15-LDO)]
 
 Mingoo Seok. ISSCC 2020 T7: "Basics of Digital Low-Dropout (LDO) Integrated Voltage Regulator" [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T7Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T7Visuals.pdf)]
 
 Yan Lu, ISSCC2021 T10: "Fundamentals of Fully Integrated Voltage Regulators" [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf)]
+
+Hyun-Sik Kim, Low-Dropout (LDO) Voltage Regulators – From Basics to Recent Design Trends (presented in A-SSCC 2022) [[https://www.theise.org/wp-content/uploads/2023/10/Analog_4_%EA%B9%80%ED%98%84%EC%8B%9D%EA%B5%90%EC%88%98%EB%8B%98_KAIST_LectureNote-%EB%B0%B0%ED%8F%AC%EC%9A%A9-Min-Jae-Seo.pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_4_%EA%B9%80%ED%98%84%EC%8B%9D%EA%B5%90%EC%88%98%EB%8B%98_KAIST_LectureNote-%EB%B0%B0%ED%8F%AC%EC%9A%A9-Min-Jae-Seo.pdf)]
+
+Carusone, Tony Chan, David Johns, and Kenneth Martin. *Analog integrated circuit design*. John wiley & sons, 2011. [[https://mrce.in/ebooks/Analog%20Integrated%20Circuit%20Design%202nd%20Ed.pdf](https://mrce.in/ebooks/Analog%20Integrated%20Circuit%20Design%202nd%20Ed.pdf)]

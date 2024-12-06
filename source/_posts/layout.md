@@ -4,6 +4,7 @@ date: 2022-11-19 12:52:45
 tags:
 categories:
 - analog
+mathjax: true
 ---
 
 

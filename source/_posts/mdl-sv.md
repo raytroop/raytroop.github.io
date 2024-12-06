@@ -239,7 +239,7 @@ end
 
 ## Reference
 
-DaVE - tools regarding on analog modeling,validation, and generation, https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)
+DaVE - tools regarding on analog modeling,validation, and generation, [[https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)]
 
 ---
 

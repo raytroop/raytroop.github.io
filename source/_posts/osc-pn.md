@@ -261,6 +261,81 @@ Fractional-N frequency synthesizers exhibit strange moving spurs and pulsating s
 
 
 
+## Phase perturbed by a stationary white noise process
+
+
+
+![image-20241207091104944](osc-pn/image-20241207091104944.png)
+
+Assuming that the delay line is *noiseless*
+
+![image-20241207100921644](osc-pn/image-20241207100921644.png)
+
+---
+
+![image-20241207091457850](osc-pn/image-20241207091457850.png)
+
+Expanding the cosine function we get
+$$\begin{align}
+R_y(t,\tau) &= \frac{A^2}{2}\left\{\cos(2\pi f_0\tau)E[\cos(\phi(t)-\phi(t-\tau))] - \sin(2\pi f_0\tau)E[\sin(\phi(t)-\phi(t-\tau))]\right\} \\
+&+ \frac{A^2}{2}\left\{\cos(4\pi f_0(t+\tau/2-T_D))E[\cos(\phi(t)+\phi(t-\tau))] - \sin(4\pi f_0(t+\tau/2-T_D))E[\sin(\phi(t)+\phi(t-\tau))] \right\}
+\end{align}$$
+
+where, both the process $\phi(t)-\phi(t-\tau)$ and $\phi(t)+\phi(t-\tau)$ are independent of time $t$, i.e. $E[\cos(\phi(t)+\phi(t-\tau))] = m_{\cos+}(\tau)$, $E[\cos(\phi(t)-\phi(t-\tau))] = m_{\cos-}(\tau)$,  $E[\sin(\phi(t)+\phi(t-\tau))] = m_{\sin+}(\tau)$ and  $E[\sin(\phi(t)-\phi(t-\tau))] = m_{\sin-}(\tau)$
+
+we obtain
+$$\begin{align}
+R_y(t,\tau) &= \frac{A^2}{2}\left\{\cos(2\pi f_0\tau)m_{\cos-}(\tau) - \sin(2\pi f_0\tau)m_{\sin-}(\tau)\right\} \\
+&+ \frac{A^2}{2}\left\{\cos(4\pi f_0(t+\tau/2-T_D))m_{\cos+}(\tau) - \sin(4\pi f_0(t+\tau/2-T_D))m_{\sin+}(\tau) \right\}
+\end{align}$$
+
+The second term in the above expression is periodic in $t$ and to estimate its PSD, we compute the ***time-averaged* autocorrelation function**
+$$
+R_y(\tau) = \frac{A^2}{2}\left\{\cos(2\pi f_0\tau)m_{\cos-}(\tau) - \sin(2\pi f_0\tau)m_{\sin-}(\tau)\right\}
+$$
+![image-20241207095906575](osc-pn/image-20241207095906575.png)
+
+After nontrivial derivation
+
+![image-20241207104018395](osc-pn/image-20241207104018395.png)
+
+
+
+> ![image-20241207103912086](osc-pn/image-20241207103912086.png)
+
+
+
+## Phase perturbed by a Weiner process
+
+![image-20241207103414365](osc-pn/image-20241207103414365.png)
+
+![image-20241207105127885](osc-pn/image-20241207105127885.png)
+
+The phase process $\phi(t)$ is also gaussian but with *an increasing **variance** which grows **linearly** with time* $t$
+
+![image-20241207110524419](osc-pn/image-20241207110524419.png)
+
+$$\begin{align}
+R_y(t,\tau) &= \frac{A^2}{2}\left\{\cos(2\pi f_0\tau)E[\cos(\phi(t)-\phi(t-\tau))] - \sin(2\pi f_0\tau)E[\sin(\phi(t)-\phi(t-\tau))]\right\} \\
+&+ \frac{A^2}{2}\left\{\cos(4\pi f_0(t+\tau/2-T_D)E[\cos(\phi(t)+\phi(t-\tau))] - \sin(4\pi f_0(t+\tau/2-T_D)E[\sin(\phi(t)+\phi(t-\tau))] \right\}
+\end{align}$$
+
+
+
+The spectrum of $y(t)$ is determined by the asymptotic behavior of $R_y(t,\tau)$ as $t\to \infty$, and expected value of second term equal to ***zero***
+
+![image-20241207114053083](osc-pn/image-20241207114053083.png)
+
+![image-20241207114805792](osc-pn/image-20241207114805792.png)
+
+
+
+---
+
+![image-20241207174403033](osc-pn/image-20241207174403033.png)
+
+![image-20241207181038749](osc-pn/image-20241207181038749.png)
+
 ## reference
 
 A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[paper](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)], [[slides](http://www-smirc.stanford.edu/papers/Orals98s-ali.pdf)]
@@ -274,6 +349,10 @@ Carlo Samori, "Phase Noise in LC Oscillators: From Basic Concepts to Advanced To
 —, "Understanding Phase Noise in LC VCOs: A Key Problem in RF Integrated Circuits," in *IEEE Solid-State Circuits Magazine*, vol. 8, no. 4, pp. 81-91, Fall 2016 [[https://picture.iczhiku.com/resource/eetop/whIgTikLswaaTVBv.pdf](https://picture.iczhiku.com/resource/eetop/whIgTikLswaaTVBv.pdf)]
 
 —, ISSCC2016, "Understanding Phase Noise in LC VCOs"
+
+A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in oscillators: a unifying theory and numerical methods for characterization," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 47, no. 5, pp. 655-674, May 2000 [[https://sci-hub.se/10.1109/81.847872](https://sci-hub.se/10.1109/81.847872)]
+
+Dalt, Nicola Da and Ali Sheikholeslami. "Understanding Jitter and Phase Noise: A Circuits and Systems Perspective." (2018) [[https://picture.iczhiku.com/resource/eetop/WykRGJJoHQLaSCMv.pdf](https://picture.iczhiku.com/resource/eetop/WykRGJJoHQLaSCMv.pdf)]
 
 F. L. Traversa, M. Bonnin and F. Bonani, "The Complex World of Oscillator Noise: Modern Approaches to Oscillator (Phase and Amplitude) Noise Analysis," in *IEEE Microwave Magazine*, vol. 22, no. 7, pp. 24-32, July 2021 [[https://iris.polito.it/retrieve/handle/11583/2903596/e384c433-b8f5-d4b2-e053-9f05fe0a1d67/MM%20noise%20-%20v5.pdf](https://iris.polito.it/retrieve/handle/11583/2903596/e384c433-b8f5-d4b2-e053-9f05fe0a1d67/MM%20noise%20-%20v5.pdf)]
 

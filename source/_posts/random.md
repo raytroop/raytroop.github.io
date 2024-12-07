@@ -263,17 +263,15 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 
 
-## Brownian Motion
+## Wiener Process (Brownian Motion)
 
 > *Dennis Sun*, Introduction to Probability: Lesson 49 Brownian Motion [[https://dlsun.github.io/probability/brownian-motion.html](https://dlsun.github.io/probability/brownian-motion.html)]
+
+*Wiener process (also called Brownian motion*) 
 
 ![unnamed-chunk-178-1](random/unnamed-chunk-178-1.png)
 
 ![image-20241202001449997](random/image-20241202001449997.png)
-
-
-
-
 
 
 

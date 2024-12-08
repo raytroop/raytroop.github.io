@@ -8,6 +8,12 @@ mathjax: true
 
 
 
+![image-20241208103218870](noise/image-20241208103218870.png)
+
+---
+
+
+
 ## noise power at filter output
 
 > Chembian Thambidurai, "Comparison Of Noise Power At Lowpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_noise-power-at-filter-output-activity-7006486487093456896-W0Rt?utm_source=share&utm_medium=member_desktop)]
@@ -41,11 +47,39 @@ As rule of thumb, the spectrum of such a pulsed noise signal
 
 where $D$ is the duty cycle of the pulse signal
 
-It is shown that *aliasing* is present in both cases. But the aliasing components (there are *infinite* such terms) always add up to a *finite* value
+
+
+![image-20241208111744647](noise/image-20241208111744647.png)
+
+---
+
+### banlimited input
+
+![image-20241208113904927](noise/image-20241208113904927.png)
 
 
 
+###  wideband white noise input
 
+![image-20241208114442705](noise/image-20241208114442705.png)
+
+### flicker noise input
+
+with $S_x(f)=\frac{K_f}{f}$
+
+![image-20241208121027250](noise/image-20241208121027250.png)
+
+![image-20241208121402724](noise/image-20241208121402724.png)
+
+Assuming $\Delta f \ll f_0$
+
+![image-20241208121645637](noise/image-20241208121645637.png)
+
+
+
+---
+
+![image-20241208111506517](noise/image-20241208111506517.png)
 
 ## Sampling Noise
 

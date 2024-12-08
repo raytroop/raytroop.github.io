@@ -322,7 +322,21 @@ R_y(t,\tau) &= \frac{A^2}{2}\left\{\cos(2\pi f_0\tau)E[\cos(\phi(t)-\phi(t-\tau)
 
 
 
-The spectrum of $y(t)$ is determined by the asymptotic behavior of $R_y(t,\tau)$ as $t\to \infty$, and expected value of second term equal to ***zero***
+The spectrum of $y(t)$ is determined by the asymptotic behavior of $R_y(t,\tau)$ as $t\to \infty$
+
+We define $\zeta(t, \tau)=\phi(t)+\phi(t-\tau) = \phi(t)-\phi(t-\tau) + 2\phi(t-\tau)$, the expected value of $\zeta(t,\tau)$ is 0, the variance is $\sigma_{\zeta}^2=(k\sigma)^2(\tau + 4(t-\tau))=(k\sigma)^2(4t-3\tau)$
+$$
+E[\cos(\zeta(t,\tau))]=\frac{1}{\sqrt{2\pi \sigma_{\zeta}^2}}\int_{-\infty}^{\infty}e^{-\zeta^2/2\sigma_{\zeta}^2}\cos(\zeta)d\zeta = e^{-\sigma_{\zeta}^2/2}=e^{-(k\sigma)^2(4t-\tau)}
+$$
+i.e., $\lim _{t\to \infty} E[\cos(\zeta(t,\tau))] = \lim_{t\to \infty}e^{-(k\sigma)^2(4t-\tau)} = 0$
+
+For $E[\sin(\zeta(t,\tau))]$, we have
+$$
+E[\sin(\zeta(t,\tau))] = \frac{1}{\sqrt{2\pi \sigma_{\zeta}^2}}\int_{-\infty}^{\infty}e^{-\zeta^2/2\sigma_{\zeta}^2}\sin(\zeta)d\zeta
+$$
+i.e., $E[\sin(\zeta(t,\tau))]$ is *odd function*, therefore $E[\sin(\zeta(t,\tau))]=0$
+
+Finally, we obtain
 
 ![image-20241207114053083](osc-pn/image-20241207114053083.png)
 
@@ -335,6 +349,10 @@ The spectrum of $y(t)$ is determined by the asymptotic behavior of $R_y(t,\tau)$
 ![image-20241207174403033](osc-pn/image-20241207174403033.png)
 
 ![image-20241207181038749](osc-pn/image-20241207181038749.png)
+
+![image-20241208100556466](osc-pn/image-20241208100556466.png)
+
+
 
 ## reference
 

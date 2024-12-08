@@ -10,7 +10,7 @@ mathjax: true
 
 ## noise power at filter output
 
-> Chembiyan T, "Comparison Of Noise Power At Lowpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_noise-power-at-filter-output-activity-7006486487093456896-W0Rt?utm_source=share&utm_medium=member_desktop)]
+> Chembian Thambidurai, "Comparison Of Noise Power At Lowpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_noise-power-at-filter-output-activity-7006486487093456896-W0Rt?utm_source=share&utm_medium=member_desktop)]
 >
 > —, "On Noise Power At The Bandpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_bandpass-noise-activity-7008896204507922432-ZRXF?utm_source=share&utm_medium=member_desktop)]
 >
@@ -24,9 +24,24 @@ mathjax: true
 
 ## Pulsed Noise Signals
 
-> Chembiyan T, "Power Spectral Density of Pulsed Noise Signals" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_psd-of-pulsed-noise-signal-activity-6992527460886040577-a0im?utm_source=share&utm_medium=member_desktop)]
+> Chembian Thambidurai, "Power Spectral Density of Pulsed Noise Signals" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_psd-of-pulsed-noise-signal-activity-6992527460886040577-a0im?utm_source=share&utm_medium=member_desktop)]
 
-*TODO* &#128197;
+![image-20241208075822212](noise/image-20241208075822212.png)
+
+> Above,  the output of the multiplier be $y(t)$ is passed through a ideal brick wall low pass filter with a bandwidth of $f_0/2$
+
+When a random signal is multiplied by a *pulse function*, the resulting signal becomes a *cyclo-stationary random process*. 
+
+As rule of thumb, the spectrum of such a pulsed noise signal  
+
+- *thermal noise* is multiplied by $D$
+
+-  *flicker noise* is multiplied by $D^2$, 
+
+
+where $D$ is the duty cycle of the pulse signal
+
+It is shown that *aliasing* is present in both cases. But the aliasing components (there are *infinite* such terms) always add up to a *finite* value
 
 
 
@@ -34,7 +49,7 @@ mathjax: true
 
 ## Sampling Noise
 
-> Chembiyan T, "Noise, Sampling and Zeta Functions" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_sampling-noise-signals-activity-7018929654627520512-QYr0?utm_source=share&utm_medium=member_desktop)]
+> Chembian Thambidurai, "Noise, Sampling and Zeta Functions" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_sampling-noise-signals-activity-7018929654627520512-QYr0?utm_source=share&utm_medium=member_desktop)]
 
 A random signal $v_n(t)$ is sampled using an ideal impulse sampler
 
@@ -48,7 +63,7 @@ A random signal $v_n(t)$ is sampled using an ideal impulse sampler
 
 ## ADC SNR with Clock Jitter
 
-> Chembiyan T "SNR of an ADC in the presence of clock jitter" [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop)]
+> Chembian Thambidurai, "SNR of an ADC in the presence of clock jitter" [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop)]
 
 Unlike the quantization noise and the thermal noise, the impact of the clock jitter on the ADC performance depends on the input signal properties like its PSD
 

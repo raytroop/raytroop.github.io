@@ -212,6 +212,16 @@ $$
 
 
 
+## CMOS Latch
+
+*TODO* &#128197;
+
+
+
+> Asad Abidi, ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q?si=Pl75jWiA0kNPOlOs](https://youtu.be/sVe3VUTNb4Q?si=Pl75jWiA0kNPOlOs)]
+
+
+
 ## reference
 
 Xu, H. (2018). Mixed-Signal Circuit Design Driven by Analysis: ADCs, Comparators, and PLLs. *UCLA*. ProQuest ID: Xu_ucla_0031D_17380. Merritt ID: ark:/13030/m5f52m8x. Retrieved from [[https://escholarship.org/uc/item/88h8b5t3](https://escholarship.org/uc/item/88h8b5t3)]

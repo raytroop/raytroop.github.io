@@ -118,7 +118,7 @@ Reducing the number of switching
 
 > The way that Gray coding combines the MSB (most significant bit) and LSB (least significant bit) in each PAM4 symbol assures that **symbol errors** caused by **amplitude noise** are more likely to cause **one bit error than two**. On the other hand, jitter is more likely to cause two bit errors per symbol error. 
 
-# PAM4 TX equalization
+## PAM4 TX equalization
 
 ![image-20220717010007963](pam4/image-20220717010007963.png)
 

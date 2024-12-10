@@ -112,6 +112,51 @@ The error between *the ideal sampled signal* and *the sampling with clock jitter
 > K. Tyagi and B. Razavi, "Performance Bounds of ADC-Based Receivers Due to Clock Jitter," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 70, no. 5, pp. 1749-1753, May 2023 [[https://www.seas.ucla.edu/brweb/papers/Journals/KT_TCAS_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/KT_TCAS_2023.pdf)]
 >
 > N. Da Dalt, M. Harteneck, C. Sandner and A. Wiesbauer, "On the jitter requirements of the sampling clock for analog-to-digital converters," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 49, no. 9, pp. 1354-1360, Sept. 2002 [[https://sci-hub.se/10.1109/TCSI.2002.802353](https://sci-hub.se/10.1109/TCSI.2002.802353)]
+>
+> M. Shinagawa, Y. Akazawa and T. Wakimoto, "Jitter analysis of high-speed sampling systems," in IEEE Journal of Solid-State Circuits, vol. 25, no. 1, pp. 220-224, Feb. 1990 [[https://sci-hub.se/10.1109/4.50307](https://sci-hub.se/10.1109/4.50307)]
+
+---
+
+![image-20241210231549062](noise/image-20241210231549062.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+ENOB = 8
+fin = np.logspace(8, 11, 60)
+
+# quantization noise: SNR = 6.02*ENOB + 1.76 dB
+Ps_PnQ = 10**((6.02*ENOB + 1.76)/10)
+PnQ = 1/Ps_PnQ
+
+# jitter noise: SNR = 6 - 20log10(2*pi*fin*Jrms) dB @ref. Chembiyan T
+Jrms_list = [25e-15, 50e-15, 100e-15, 250e-15, 500e-15, 1000e-15]
+for Jrms in Jrms_list:
+    #Ps_PnJ_lcl = 10**((6-20*np.log10(2*np.pi*fin*Jrms))/10)     # ref. Chembiyan T
+    Ps_PnJ_lcl = 10**((0 - 20 * np.log10(2 * np.pi * fin * Jrms)) / 10)  # ref. Ayça Akkaya
+    PnJ_lcl = 1/Ps_PnJ_lcl
+    SNR_lcl = 10*np.log10(1/(PnQ+PnJ_lcl))
+    plt.plot(fin, SNR_lcl, label=r'$\sigma_{jitter}$'+'='+str(int(Jrms*1e15))+'fs')
+
+plt.xscale('log')
+plt.xlabel(r'$f_{in}$ [Hz]')
+plt.ylabel(r'SNR [dB]')
+plt.grid(which='both')
+# plt.title(r'ref. Chembiyan T')
+plt.title(r'ref. Ayça Akkaya')
+plt.legend()
+plt.show()
+
+```
+
+> ![image-20241210232016640](noise/image-20241210232016640.png)
+>
+> i.e. N. Da Dalt's
+>
+> ![image-20241210232716862](noise/image-20241210232716862.png)
+>
+> Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
 
 
 

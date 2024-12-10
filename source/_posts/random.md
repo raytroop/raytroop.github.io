@@ -142,7 +142,7 @@ X(-j\omega) = X^*(j\omega)
 $$
 
 
-## Derivatives of Random Processes
+### Derivatives of Random Processes
 since $x(t)$ is stationary process, and $y(t) = \frac{dx(t)}{dt}$
 
 Using $R_{yy}(\tau) = h(\tau)*R_{xx}(\tau)*h(-\tau)$

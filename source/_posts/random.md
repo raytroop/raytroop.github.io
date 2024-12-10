@@ -142,6 +142,26 @@ X(-j\omega) = X^*(j\omega)
 $$
 
 
+## Derivatives of Random Processes
+since $x(t)$ is stationary process, and $y(t) = \frac{dx(t)}{dt}$
+
+Using $R_{yy}(\tau) = h(\tau)*R_{xx}(\tau)*h(-\tau)$
+
+$$\begin{align}
+R_{yy}(\tau) &= \mathcal{F}^{-1}[H(j\omega)\Phi_{xx}(j\omega)H(-j\omega)] \\
+&= \mathcal{F}^{-1}[-(j\omega)^2\Phi_{xx}(j\omega)]
+\end{align}$$
+
+we obtain the autocorrelation function of the output process as
+$$
+R_{yy}(\tau) = -\frac{d^2}{d\tau^2}R_{xx}(\tau)
+$$
+
+
+> Liu Congfeng, Xidian University. *Random Signal Processing: Chapter 5 Linear System: Random Process* [[https://web.xidian.edu.cn/cfliu/files/20121125_153218.pdf](https://web.xidian.edu.cn/cfliu/files/20121125_153218.pdf)]
+>
+> [[https://sharif.ir/~bahram/sp4cl/PapoulisLectureSlides/lectr14.pdf](https://sharif.ir/~bahram/sp4cl/PapoulisLectureSlides/lectr14.pdf)]
+
 
 ## Periodogram
 

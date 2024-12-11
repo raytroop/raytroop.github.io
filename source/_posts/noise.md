@@ -123,7 +123,7 @@ The error between *the ideal sampled signal* and *the sampling with clock jitter
 
 ---
 
-![image-20241210231549062](noise/image-20241210231549062.png)
+![image-20241211200720078](noise/image-20241211200720078.png)
 
 ```python
 import numpy as np
@@ -139,13 +139,14 @@ PnQ = 1/Ps_PnQ
 # jitter noise: SNR = 6 - 20log10(2*pi*fin*Jrms) dB @ref. Chembiyan T
 Jrms_list = [25e-15, 50e-15, 100e-15, 250e-15, 500e-15, 1000e-15]
 for Jrms in Jrms_list:
-    #Ps_PnJ_lcl = 10**((6-20*np.log10(2*np.pi*fin*Jrms))/10)     # ref. Chembiyan T
+    # Ps_PnJ_lcl = 10**((6-20*np.log10(2*np.pi*fin*Jrms))/10)     # ref. Chembiyan T
     Ps_PnJ_lcl = 10**((0 - 20 * np.log10(2 * np.pi * fin * Jrms)) / 10)  # ref. Ayça Akkaya
     PnJ_lcl = 1/Ps_PnJ_lcl
     SNR_lcl = 10*np.log10(1/(PnQ+PnJ_lcl))
     plt.plot(fin, SNR_lcl, label=r'$\sigma_{jitter}$'+'='+str(int(Jrms*1e15))+'fs')
 
 plt.xscale('log')
+plt.ylim([0, 55])
 plt.xlabel(r'$f_{in}$ [Hz]')
 plt.ylabel(r'SNR [dB]')
 plt.grid(which='both')

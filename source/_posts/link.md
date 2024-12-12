@@ -175,13 +175,7 @@ JTOL(f) = \left\{ \begin{array}{cl}
 \end{array} \right.
 $$
 
-- the jitter tolerance at very **high jitter frequencies** is limited to **1UIpp**
-  - This is consistent with that the recovered clock does not track the high-frequency jitter, limiting the maximum peak-to-peak deviation of the data edge from its nominal position to 1UI
-  - The circumstance, (b) jittery data with ideal clock
-- the jitter tolerance is increased at 40dB/decade for jitter frequencies below $f_c$
-  - This is consistent with our obervation earlier that the recovered clock better tracks data jitter at lower jitter frequencies
-  - Equivalently, the data edge and the clock edge move together in the **same direction**. As a result, the relative jitter between the data and the clock remains small, i.e., below 1UI peak-to-peak
-  - The circumstance, (c) jittery data and jittery clock
+> the jitter tolerance at very **high jitter frequencies** is limited to **1UIpp**
 
 ### OJTF
 

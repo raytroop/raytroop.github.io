@@ -11,6 +11,18 @@ mathjax: true
 
 
 
+## Linear phase
+
+![image-20241213232002042](adaptive-filters/image-20241213232002042.png)
+
+---
+
+![image-20241213233748837](adaptive-filters/image-20241213233748837.png)
+
+![image-20241213233917966](adaptive-filters/image-20241213233917966.png)
+
+> [[https://web.ece.ucsb.edu/~yoga/courses/DSP/P10_Linear_phase_FIR.pdf](https://web.ece.ucsb.edu/~yoga/courses/DSP/P10_Linear_phase_FIR.pdf)]
+
 
 
 ## reference

@@ -159,3 +159,5 @@ McClure, Mark Scott. "Digital jitter measurement and separation." PhD diss., 200
 Ren, Nan, Zaiming Fu, Shengcu Lei, Hanglin Liu, and Shulin Tian. "Jitter generation model based on timing modulation and cross point calibration for jitter decomposition." Metrology and Measurement Systems 28, no. 1 (2021).
 
 M. P. Li, J. Wilstrup, R. Jessen and D. Petrich, "A new method for jitter decomposition through its distribution tail fitting," International Test Conference 1999. Proceedings (IEEE Cat. No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.
+
+K. Bidaj, J. -B. Begueret and J. Deroo, "RJ/DJ jitter decomposition technique for high speed links," *2016 IEEE International Conference on Electronics, Circuits and Systems (ICECS)*  [[https://sci-hub.se/10.1109/ICECS.2016.7841269](https://sci-hub.se/10.1109/ICECS.2016.7841269)]

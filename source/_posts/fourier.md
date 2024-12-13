@@ -248,23 +248,23 @@ $$
 
 ### Parseval's Relation
 
-*CTFT*:
+***CTFT***:
 
 ![image-20240830230835764](fourier/image-20240830230835764.png)
 
 ---
 
-*DTFT*:
+***DTFT***:
 
 ![image-20230516022936168](fourier/image-20230516022936168.png)
 
 ---
 
-*DFT*:
+***DFT***:
 
-![image-20240907224043641](fourier/image-20240907224043641.png)
+![image-20241214002405992](fourier/image-20241214002405992.png)
 
-
+![image-20241214002606672](fourier/image-20241214002606672.png)
 
 
 

@@ -468,8 +468,34 @@ Mean_noise=mean(noise);
 
 
 
-
 ## reference
+
+`enbw` Matlab URL:[https://www.mathworks.com/help/signal/ref/enbw.html](https://www.mathworks.com/help/signal/ref/enbw.html)
+
+```matlab
+N = 256;
+wn = hanning(N);
+s1 = sum(wn)^2;
+s2 = sum(wn.^2);
+
+(N*s2)/s1
+enbw(wn)
+```
+
+```
+ans =
+
+    1.4942
+
+
+ans =
+
+    1.4942
+```
+
+
+
+---
 
 Schmid, H. (2012). How to use the FFT and Matlab's pwelch function for signal and noise simulations and measurements. URL:[http://www.schmid-werren.ch/hanspeter/publications/2012fftnoise.pdf](http://www.schmid-werren.ch/hanspeter/publications/2012fftnoise.pdf)
 
@@ -480,8 +506,6 @@ FFT analysis: SNR and Noise level vary with FFT Window size URL:[https://www.vir
 Lyons, R. G. (2011). Understanding digital signal processing (3rd ed.). Prentice Hall
 
 Stefan Scholl, "Exact Signal Measurements using FFT Analysis",Microelectronic Systems Design Research Group, TU Kaiserslautern, Germany. [[pdf](https://kluedo.ub.rptu.de/frontdoor/deliver/index/docId/4293/file/exact_fft_measurements.pdf)]
-
-enbw Matlab URL:[https://www.mathworks.com/help/signal/ref/enbw.html](https://www.mathworks.com/help/signal/ref/enbw.html)
 
 Aaron Scher. PSD, Autocorrelation, and Noise in MATLAB  [[pdf](https://aaronscher.com/Course_materials/Communication_Systems/documents/PSD_Autocorrelation_Noise.pdf)]
 

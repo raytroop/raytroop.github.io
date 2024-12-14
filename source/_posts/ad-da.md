@@ -18,6 +18,12 @@ mathjax: true
 
 
 
+### Code Density Test
+
+> Apply a linear ramp to ADC input
+
+![image-20241214100849243](ad-da/image-20241214100849243.png)
+
 
 
 
@@ -344,11 +350,81 @@ $$
 
 
 
+## coherent sampling
+
+- integer # of cycles  or Windowing  
+  - avoid spectral leakage
+
+- $f_\text{in}$ and $f_s$ are co-prime  
+  - avoid periodic quantization errors, manifested as harmonic distortions
+
+
+---
+
+To avoid **spectral leakage** completely, the method of **coherent sampling** is recommended. Coherent sampling requires that the input- and clock-frequency generators are **phase locked**, and that the input frequency be chosen based on the following relationship:
+$$
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
+$$
+
+where:
+
+- $f_{\text{in}}$ = the desired input frequency
+- $f_s$ = the clock frequency of the data converter under test
+- $M_C$ = the number of cycles in the data window (to make all samples unique, choose odd or prime numbers)
+- $N_R$ = the data record length (for an 8192-point FFT, the data record is 8192s long)
+
+
+
+$$\begin{align}
+f_{\text{in}} &=\frac{f_s}{N_R}\cdot M_C \\
+&= f_{\text{res}}\cdot M_C
+\end{align}$$
+
+---
+
+**irreducible ratio**
+
+An **irreducible ratio** ensures identical code sequences not to be repeated multiple times. Unnecessary repetition of the same code is not desirable as it increases ADC test time.
+
+> Given that $\frac{M_C}{N_R}$ is irreducible, and $N_R$ is a power of 2, an **odd number** for $M_C$ will always produce an **irreducible ratio**
+
+Assuming there is a common factor $k$ between $M_C$ and $N_R$, i.e. $\frac{M_C}{N_R}=\frac{k M_C'}{k N_R'}$
+
+The samples  ($n\in[1, N_R]$)
+
+$$
+y[n] = \sin\left( \omega_{\text{in}} \cdot t_n \right) = \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  = \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+$$
+
+Then
+
+$$
+y[n+N_R'] = \sin\left( 2\pi (n+N_R')\frac{M_C}{N_R} \right) = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{M_C}{N_R}\right) = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{kM_C'}{kN_R'} \right) = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
+$$
+
+
+
+So,  the samples is repeated $y[n] = y[n+N_R']$.  Usually, no additional information is gained by repeating with the same sampling points.
+
+---
+
+
+
+![image-20241214111956329](ad-da/image-20241214111956329.png)
+
+---
+
+
+
+
+
 ## reference
 
 Aaron Buchwald, ISSCC2010 T1: "Specifying & Testing ADCs" [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Tutorials/T1.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Tutorials/T1.pdf)]
 
 John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs" [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf)]
+
+Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf)]
 
 ---
 

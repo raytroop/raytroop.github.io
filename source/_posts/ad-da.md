@@ -7,6 +7,19 @@ categories:
 mathjax: true
 ---
 
+## ADC INL/DNL
+
+- `Endpoint` method
+- `BestFit` method
+
+![image-20241006211529077](ad-da/image-20241006211529077.png)
+
+![image-20241006195931838](ad-da/image-20241006195931838.png)
+
+
+
+
+
 
 
 ## Mid-Rise & Mid-Tread Quantizer
@@ -73,32 +86,11 @@ $$
 ![image-20241006152621688](ad-da/image-20241006152621688.png)
 
 
+## DAC DNL
 
+One difference between ADC and DAC is that *DAC DNL can be less than -1 LSB*
 
-
-## ADC INL Testing
-
-![image-20241006211529077](ad-da/image-20241006211529077.png)
-
-![image-20241006195931838](ad-da/image-20241006195931838.png)
-
-
-
-
-
-## ADC DNL Testing
-
-
-
-
-
-
-
-## DAC DNL Testing
-
-One difference between ADC and DAC is that DAC DNL can be less than -1 LSB
-
-> In a DAC, **DNL < -1LSB** implies **non-monotinicity**
+> In a DAC, **DNL < -1LSB** implies **non-monotonicity**
 
 ![image-20241006215420568](ad-da/image-20241006215420568.png)
 

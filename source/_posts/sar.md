@@ -15,54 +15,15 @@ mathjax: true
 
 
 
-## Pipeline ADC
-
-![image-20241006174924686](sar/image-20241006174924686.png)
-
-> CMP reference voltage is 0.5vref, DAC output is 0.5vref or 0
-
-
-
-![pipelineADC.drawio](sar/pipelineADC.drawio.svg)
-
-residual error
-$$
-V_{r,n} = (V_{r,n-1}-\frac{1}{2}b_{n})\cdot 2
-$$
-and $V_{r,-1}=V_i$
-$$
-V_{r,n-1} = 2^{n}V_i -\sum_{k=0}^{n-1}2^{n-k-1}b_k = 2^{n}\left(V_i - \sum_{k=0}^{n-1}\frac{b_k}{2^{k+1}}\right)
-$$
-
-here, $b_0$ is first stage and MSB
-
-It divides the process into several comparison stages, the number of which is proportional to the number of bits
-
-> Due to the pipeline structure of both analog and digital signal path, inter-stage **residue amplification** is needed which consumes considerable power and limits high speed operation
-
-
-
-
-
-> Vishal Saxena, "Pipelined ADC Design - A Tutorial"[[https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20NonIdealities%20Slides%20v1_0.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20NonIdealities%20Slides%20v1_0.pdf)] [[https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20Slides%20v1_2.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20Slides%20v1_2.pdf)]
->
-> Bibhu Datta Sahoo, Analog-to-Digital Converter Design From System Architecture to Transistor-level [[http://smdpc2sd.gov.in/downloads/IGF/IGF%201/Analog%20to%20Digital%20Converter%20Design.pdf](http://smdpc2sd.gov.in/downloads/IGF/IGF%201/Analog%20to%20Digital%20Converter%20Design.pdf)] 
->
-> Bibhu Datta Sahoo, Associate Professor, IIT, Kharagpur, [[https://youtu.be/HiIWEBAYRJY?si=pjQnIdi03i5N7805](https://youtu.be/HiIWEBAYRJY?si=pjQnIdi03i5N7805)]
-
 
 
 ## Synchronous SAR ADC
-
-
 
 It also divides a full conversion into several comparison stages in a way similar to the *pipeline ADC*, except the algorithm is executed **sequentially** rather than in *parallel* as in the pipeline case.
 
 However, the sequential operation of the SA algorithm has traditionally been a *limitation in achieving high-speed operation*
 
 ![image-20241021214958488](sar/image-20241021214958488.png)
-
-
 
 - a clock running at least $(N + 1) \cdot F_s$ is required for an $N$-bit converter with conversion rate of $F_s$
 - every clock cycle has to tolerate the worst case comparison time

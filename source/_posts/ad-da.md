@@ -408,13 +408,115 @@ So,  the samples is repeated $y[n] = y[n+N_R']$.  Usually, no additional informa
 
 ---
 
+![image-20241214135150786](ad-da/image-20241214135150786.png)
+
+> samples of every input cycle are the same - *periodic*
 
 
-![image-20241214111956329](ad-da/image-20241214111956329.png)
+
+## Thermometer to Binary encoder
+
+![image-20241214152349217](ad-da/image-20241214152349217.png)
+
+
+
+## Algorithmic (Cyclic) ADC
+
+
+
+
+
+
+
+## Pipeline ADC
+
+![image-20241006174924686](ad-da/image-20241006174924686.png)
+
+> CMP reference voltage is 0.5vref, DAC output is 0.5vref or 0
+
+
+
+![pipelineADC.drawio](ad-da/pipelineADC.drawio.svg)
+
+residual error
+$$
+V_{r,n} = (V_{r,n-1}-\frac{1}{2}b_{n})\cdot 2
+$$
+and $V_{r,-1}=V_i$
+$$
+V_{r,n-1} = 2^{n}V_i -\sum_{k=0}^{n-1}2^{n-k-1}b_k = 2^{n}\left(V_i - \sum_{k=0}^{n-1}\frac{b_k}{2^{k+1}}\right)
+$$
+
+here, $b_0$ is first stage and MSB
+
+It divides the process into several comparison stages, the number of which is proportional to the number of bits
+
+> Due to the pipeline structure of both analog and digital signal path, inter-stage **residue amplification** is needed which consumes considerable power and limits high speed operation
+
+
+
+
+
+> Vishal Saxena, "Pipelined ADC Design - A Tutorial"[[https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20NonIdealities%20Slides%20v1_0.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20NonIdealities%20Slides%20v1_0.pdf)] [[https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20Slides%20v1_2.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20Slides%20v1_2.pdf)]
+>
+> Bibhu Datta Sahoo, Analog-to-Digital Converter Design From System Architecture to Transistor-level [[http://smdpc2sd.gov.in/downloads/IGF/IGF%201/Analog%20to%20Digital%20Converter%20Design.pdf](http://smdpc2sd.gov.in/downloads/IGF/IGF%201/Analog%20to%20Digital%20Converter%20Design.pdf)] 
+>
+> Bibhu Datta Sahoo, Associate Professor, IIT, Kharagpur, [[https://youtu.be/HiIWEBAYRJY?si=pjQnIdi03i5N7805](https://youtu.be/HiIWEBAYRJY?si=pjQnIdi03i5N7805)]
+
+
+
+---
+
+![image-20241214164740706](ad-da/image-20241214164740706.png)
+
+
+
+
+
+## R-2R & C-2C
+
+*TODO* &#128197;
+
+Conceptually, area goes up *linearly* with number of bit slices
+
+ drawback of the R-2R DAC 
+
+
+
+---
+
+$N_b$ bit binary + $N_t$ bit thermometer DAC
+
+![R-2R.drawio](ad-da/R-2R.drawio.svg)
+
+$N_b$ bit binary can be simplified with Thevenin Equivalent
+$$
+V_B = \sum_{n=0}^{N_b-1} \frac{B_n}{2^{N_b-n}}
+$$
+with thermometer code
+
+$$\begin{align}
+V_o &= V_B\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R}+\sum_{n=0}^{2^{N_t}-2}T_n\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R} \\
+&= \frac{V_B}{2^{N_t}} + \frac{\sum_{n=0}^{2^{N_t}-2}T_n}{2^{N_t}} \\
+&= \sum_{n=0}^{N_b-1} \frac{B_n}{2^{N_t+N_b-n}} + \frac{\sum_{n=0}^{2^{N_t}-2}T_n}{2^{N_t}}
+\end{align}$$
+
+
+
+
+> B. Razavi, "The R-2R and C-2C Ladders [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 11, no. 3, pp. 10-15, Summer 2019 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf)]
+
+
 
 ---
 
 
+
+4bit binary R2R DAC with Ru=1kOhm
+
+RVB equivalent R
+
+![image-20241214190045688](ad-da/image-20241214190045688.png)
 
 
 

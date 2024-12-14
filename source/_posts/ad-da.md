@@ -420,14 +420,6 @@ So,  the samples is repeated $y[n] = y[n+N_R']$.  Usually, no additional informa
 
 
 
-## Algorithmic (Cyclic) ADC
-
-
-
-
-
-
-
 ## Pipeline ADC
 
 ![image-20241006174924686](ad-da/image-20241006174924686.png)
@@ -517,6 +509,36 @@ V_o &= V_B\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R}+\sum_{n=0}^{2^{N
 RVB equivalent R
 
 ![image-20241214190045688](ad-da/image-20241214190045688.png)
+
+
+
+## Binary-Weighted (BW) DAC
+
+![image-20241214205439139](ad-da/image-20241214205439139.png)
+
+During $\Phi_1$, all capacitor are shorted, the net charge at $V_x$ is 0
+
+During $\Phi_2$, the charge at bottom plate of CDAC
+$$
+Q_{DAC,btm} = \sum_{i=0}^{N-1}(b_i\cdot V_R - V_x)\cdot 2^{i}C_u = C_uV_R\sum_{i=0}^{N-1}b_i2^i - (2^N-1)C_uV_x
+$$
+the charge at the internal plate of integrator
+$$
+Q_{intg} = V_x C_p + (V_x - V_o)2^NC_u
+$$
+and we know $-V_x A = V_o$ and $Q_{DAC,btm} = Q_{intg}$
+$$
+C_uV_R\sum_{i=0}^{N-1}b_i2^i - (2^N-1)C_uV_x = V_x C_p + (V_x - V_o)2^NC_u
+$$
+i.e.
+$$
+C_uV_R\sum_{i=0}^{N-1}b_i2^i = (2^N-1)C_uV_x + V_x C_p + (V_x - V_o)2^NC_u
+$$
+therefore
+$$
+-V_o = \frac{2^N C_u}{\frac{(2^{N+1}-1)C_u+C_p}{A}+2^NC_u}\sum_{i=0}^{N-1}b_i\left(2^i\frac{V_R}{2^N}\right)\approx \sum_{i=0}^{N-1}b_i\left(2^i\frac{V_R}{2^N}\right)
+$$
+
 
 
 

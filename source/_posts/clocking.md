@@ -36,6 +36,20 @@ mathjax: true
 
 
 
+## Duty-cycle correction circuit 
+
+The amount of correction can be set by intentional injection of an *offset current* into the summing input node of INV, ***threshold-adjustable inverter***
+
+> Note that the change to the threshold is ***opposite in direction*** to the change to INV  
+
+![image-20241215233057176](clocking/image-20241215233057176.png)
+
+
+
+> C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)* [[https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205](https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205)]
+
+
+
 ## Auto-tracking high-Q BPF  
 
 > The PLL is the only device that performs auto-tracking band-pass filtering with high-quality factor Q and wide tunability  

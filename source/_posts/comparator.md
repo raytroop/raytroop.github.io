@@ -187,7 +187,7 @@ $$
 
 therefore
 $$
-V_o(t) = \frac{g_mV_i}{C_L}e^{\frac{g_m}{C_L}t} = V_o(t=0)e^{\frac{g_m}{C_L}t}
+V_o(t) = \frac{g_mV_i}{C_L}\cdot\exp\left({\frac{g_m}{C_L}t}\right) = V_o(t=0)\cdot\exp\left({\frac{g_m}{C_L}t}\right)
 $$
 ![image-20241215173645188](comparator/image-20241215173645188.png)
 

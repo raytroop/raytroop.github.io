@@ -177,13 +177,21 @@ $$
 
 We have
 $$
-A(s)\cdot (V_{o,0} + V_o) = V_o
+A(s)\cdot (V_{i} + V_o) = V_o
 $$
 
 that is
 $$
-V_o = \frac{A(s)}{1-A(s)}V_{o,0} = \frac{g_m/C_L}{s - g_m/C_L}V_{o,0}
+V_o = \frac{A(s)}{1-A(s)}V_{i} = \frac{1}{s - g_m/C_L}\cdot \frac{g_mV_i}{C_L}
 $$
+
+therefore
+$$
+V_o(t) = \frac{g_mV_i}{C_L}e^{\frac{g_m}{C_L}t} = V_o(t=0)e^{\frac{g_m}{C_L}t}
+$$
+![image-20241215173645188](comparator/image-20241215173645188.png)
+
+
 
 
 > Asad Abidi, ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q?si=Pl75jWiA0kNPOlOs](https://youtu.be/sVe3VUTNb4Q?si=Pl75jWiA0kNPOlOs)]

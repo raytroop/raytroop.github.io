@@ -166,15 +166,39 @@ It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the fact
 
 
 
+## CMOS Latch
+
+*TODO* &#128197;
+
+![image-20241215162321832](comparator/image-20241215162321832.png)
+$$
+V_{o,fb}^+ - V_{o,fb}^- = \frac{g_m}{sC_L}(V_o^+ - V_o^-) = A(s)\cdot(V_o^+ - V_o^-)
+$$
+
+We have
+$$
+A(s)\cdot (V_{o,0} + V_o) = V_o
+$$
+
+that is
+$$
+V_o = \frac{A(s)}{1-A(s)}V_{o,0} = \frac{g_m/C_L}{s - g_m/C_L}V_{o,0}
+$$
+
+
+> Asad Abidi, ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q?si=Pl75jWiA0kNPOlOs](https://youtu.be/sVe3VUTNb4Q?si=Pl75jWiA0kNPOlOs)]
+
+
+
+
+
 ## Metastability
 
 *TODO* &#128197;
 
 If the comparator can not generate a well-defined logical output in half of the clock period, we say the circuit is "**metastable**"
 
-
-
-
+![image-20241215162430509](comparator/image-20241215162430509.png)
 
 
 
@@ -209,16 +233,6 @@ $$
 ![image-20241109135425126](comparator/image-20241109135425126.png)
 
 > John D. Cook. **Relating Φ and erf** [[https://www.johndcook.com/erf_and_normal_cdf.pdf](https://www.johndcook.com/erf_and_normal_cdf.pdf)]
-
-
-
-## CMOS Latch
-
-*TODO* &#128197;
-
-
-
-> Asad Abidi, ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q?si=Pl75jWiA0kNPOlOs](https://youtu.be/sVe3VUTNb4Q?si=Pl75jWiA0kNPOlOs)]
 
 
 

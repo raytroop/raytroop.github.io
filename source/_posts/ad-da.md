@@ -543,13 +543,56 @@ $$
 
 ---
 
-> *Midscale (MSB Transition)* often is the *largest DNL error*  
+> *Midscale (MSB Transition)* often is the *largest DNL error*
 
 ![image-20241215090447383](ad-da/image-20241215090447383.png)
 
 > $C_4$ and $C_1+C_2+C_3$ are independent (can't cancel out) and their variance is two largest ($16\sigma_u^2$, $15\sigma_u^2$, ), the total standard deviation is $\sqrt{16\sigma_u^2+15\sigma_u^2}=\sqrt{31}\sigma_u$
 
 
+
+## INL of DAC
+
+![image-20241215101400962](ad-da/image-20241215101400962.png)
+
+> The worst INL of three DAC Architecture is same
+
+![image-20241215110708021](ad-da/image-20241215110708021.png)
+
+- $A = \sum_{j=1}^k I_j$, $B=\sum_{j=k+1}^N I_j$
+- A and B are independent with $\sigma_A^2 = k\sigma_u^2$ and $\sigma_B^2=(N-k)\sigma_u^2$
+
+Therefore
+$$
+\mathrm{Var}\left(\frac{X}{Y}\right)\simeq \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{\mathrm{cov}(X,Y)}{kNI_u^2}\right)
+$$
+and
+$$\begin{align}
+\mathrm{cov}(X,Y) &= E[XY] - E[X]E[Y] = E[A(A+B)] - kNI_u^2 \\
+&= E[A^2]+E[A]E[B] - kNI_u^2= \sigma_A^2+E[A]^2 + k(N-k)I_u^2 - kNI_u^2\\
+&= k\sigma_i^2 + k^2I_u^2+ k(N-k)I_u^2 - kNI_u^2 \\
+&= k\sigma_i^2
+\end{align}$$
+
+Finally,
+$$
+\mathrm{Var}\left(\frac{X}{Y}\right)\simeq \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{k\sigma_i^2}{kNI_u^2}\right) = \frac{k^2}{N^2}\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2
+$$
+i.e.
+$$
+\mathrm{Var(INL(k))} = k^2\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2 = k\left(1- \frac{k}{N}\right)\sigma_u^2
+$$
+
+
+**Standard deviation of INL is maximum at mid-scale (k=N/2)**
+
+>  ![image-20241215114755896](ad-da/image-20241215114755896.png)
+
+
+
+---
+
+![image-20241215101727644](ad-da/image-20241215101727644.png)
 
 
 ## reference

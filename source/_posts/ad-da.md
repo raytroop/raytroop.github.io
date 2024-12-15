@@ -9,6 +9,8 @@ mathjax: true
 
 ## ADC INL/DNL
 
+*TODO* &#128197;
+
 - `Endpoint` method
 - `BestFit` method
 
@@ -514,7 +516,7 @@ RVB equivalent R
 
 ## Binary-Weighted (BW) DAC
 
-![image-20241214205439139](ad-da/image-20241214205439139.png)
+![image-20241215094852761](ad-da/image-20241215094852761.png)
 
 During $\Phi_1$, all capacitor are shorted, the net charge at $V_x$ is 0
 
@@ -539,6 +541,14 @@ $$
 -V_o = \frac{2^N C_u}{\frac{(2^{N+1}-1)C_u+C_p}{A}+2^NC_u}\sum_{i=0}^{N-1}b_i\left(2^i\frac{V_R}{2^N}\right)\approx \sum_{i=0}^{N-1}b_i\left(2^i\frac{V_R}{2^N}\right)
 $$
 
+---
+
+> *Midscale (MSB Transition)* often is the *largest DNL error*  
+
+![image-20241215090447383](ad-da/image-20241215090447383.png)
+
+> $C_4$ and $C_1+C_2+C_3$ are independent (can't cancel out) and their variance is two largest ($16\sigma_u^2$, $15\sigma_u^2$, ), the total standard deviation is $\sqrt{16\sigma_u^2+15\sigma_u^2}=\sqrt{31}\sigma_u$
+
 
 
 
@@ -549,6 +559,8 @@ Aaron Buchwald, ISSCC2010 T1: "Specifying & Testing ADCs" [[https://www.nishanch
 John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs" [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf)]
 
 Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf)]
+
+Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
 
 ---
 
@@ -600,4 +612,3 @@ Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR = 6.02N + 1.76
 
 Dan Boschen, "How to choose FFT depth for ADC performance analysis (SINAD, ENOB)", [[https://dsp.stackexchange.com/a/38201](https://dsp.stackexchange.com/a/38201)]
 
-Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]

@@ -40,7 +40,9 @@ mathjax: true
 
 The amount of correction can be set by intentional injection of an *offset current* into the summing input node of INV, ***threshold-adjustable inverter***
 
-> Note that the change to the threshold is ***opposite in direction*** to the change to INV  
+> Note that the change to the threshold is ***opposite in direction*** to the change to INV
+>
+> increasing DC of input signal is equivalent to lower down the threshold of INV
 
 ![image-20241215233057176](clocking/image-20241215233057176.png)
 

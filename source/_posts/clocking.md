@@ -47,6 +47,11 @@ The amount of correction can be set by intentional injection of an *offset curre
 ![image-20241215233057176](clocking/image-20241215233057176.png)
 
 
+
+---
+
+![image-20241216205525818](clocking/image-20241216205525818.png)
+
 voltage at *INV1* will increased by:
 $$
 \frac{\Delta V_{DAC} - \Delta {INV1}}{R_{DAC}} = \frac{\Delta {INV1} +A_0 \Delta {INV1}}{R_{F}}

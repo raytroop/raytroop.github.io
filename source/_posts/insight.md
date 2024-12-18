@@ -1158,7 +1158,9 @@ Avoid *zero current* in cascodes
 
 
 
-## Step Response of higher order system
+## higher order system transient response
+
+### high frequency pass
 
 ![image-20240112002314153](insight/image-20240112002314153.png)
 
@@ -1340,6 +1342,97 @@ Continuous-time transfer function.
 
 
 ![image-20240112002155622](insight/image-20240112002155622.png)
+
+
+
+### low frequency pass
+
+$$
+\left\{ \begin{array}{cl}
+\frac{V_i - V_m}{R_0} &= C_0\frac{dV_m}{dt} + C_1\frac{dV_o}{dt} \\
+\frac{V_m - V_o}{R_1} &= C_1\frac{dV_o}{dt} \\
+V_m(t=0) &= 1 \\
+V_o(t=0) &= 0
+\end{array} \right.
+$$
+
+Take into initial condition account
+$$
+V_M(s) = sV_M - V_{m0}
+$$
+where $V_{m0} = 1$
+
+
+
+$$\begin{align}
+V_O(s) &= \frac{V_I}{s^2R_0C_0R_1C_1+s(R_0C_0+R_1C_1+R_0C_1)+1} + \frac{V_{m0}R_0C_0}{s^2R_0C_0R_1C_1+s(R_0C_0+R_1C_1+R_0C_1)+1} \\
+&\approx \frac{V_I}{s^2R_0C_0R_1C_1+sR_0(C_0+C_1)+1} + \frac{V_{m0}R_0C_0}{s^2R_0C_0R_1C_1+sR_0(C_0+C_1)+1} \\
+&= \frac{V_I}{R_0(C_0+C_1)}\left(\frac{R_0(C_0+C_1)}{sR_0(C_0+C_1)+1} - \frac{R_1\frac{C_0C_1}{C_0+C_1}}{sR_1\frac{C_0C_1}{C_0+C_1}+1}\right) \\
+&+  \frac{C_0}{C_0+C_1}\left(\frac{R_0(C_0+C_1)}{sR_0(C_0+C_1)+1} - \frac{R_1\frac{C_0C_1}{C_0+C_1}}{sR_1\frac{C_0C_1}{C_0+C_1}+1}\right)
+\end{align}$$
+
+
+
+with $V_I = \frac{1}{s}$, using inverse Laplace transform
+$$\begin{align}
+V_o(t) &= 1 - \frac{C_1}{C_0+C_1}e^{-t/\tau_0}-\frac{C_0}{C_0+C_1}e^{-t/\tau_1} - \frac{R_1C_0C_1}{R_0(C_0+C_1)^2} \tag{Eq.0} \\
+&= 1 - \frac{C_1}{C_0+C_1}e^{-t/\tau_0}-\frac{C_0}{C_0+C_1}e^{-t/\tau_1} \tag{Eq.1} 
+\end{align}$$
+
+
+
+where
+
+$$\begin{align}
+\tau_0 &= R_0(C_0+C_1) \\
+\tau_1 &= R_1\frac{C_0C_1}{C_0+C_1}
+\end{align}$$
+
+
+
+
+---
+
+![image-20241218231322792](insight/image-20241218231322792.png)
+
+![image-20241218230713148](insight/image-20241218230713148.png)
+
+![image-20241218231130166](insight/image-20241218231130166.png)
+
+```matlab
+R0 = 100e3;
+C0 = 200e-15;
+R1 = 10e3;
+C1 = 100e-15;
+
+s = tf('s');
+
+VI = 1/s;
+Vm0 = 1;
+
+deno = (s^2*R0*C0*R1*C1 + s*(R0*C0 + R1*C1 + R0*C1) + 1);
+VO = VI/deno + (Vm0*R0*C0)/deno;
+VM = (1+s*R1*C1)*VO;
+
+t = linspace(0,40,1e3);  % ns
+[vot, ~] = impulse(VO, t*1e-9);
+[vmt, ~] = impulse(VM, t*1e-9);
+
+tau0 = R0*(C0+C1)*1e9; %ns
+tau1 = R1*C0*C1/(C0+C1)*1e9; %ns
+y0 = 1 - C1/(C0+C1)*exp(-t/tau0) - C0/(C0+C1)*exp(-t/tau1) - R1*C0*C1/R0/(C0+C1)^2;
+y1 = 1 - C1/(C0+C1)*exp(-t/tau0) - C0/(C0+C1)*exp(-t/tau1);
+
+plot(t, vot, t, vmt,LineWidth=2);
+hold on
+plot(t,y0, t,y1, LineWidth=2, LineStyle="--" );
+xlim([-10, 40])
+legend('V_o(t)', 'V_m(t)','y_0(t)', 'y_1(t)', fontsize=12)
+xlabel('t (ns)')
+ylabel('mag (V)')
+grid on;
+
+```
 
 
 

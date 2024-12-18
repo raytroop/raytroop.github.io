@@ -209,6 +209,14 @@ If the comparator can not generate a well-defined logical output in half of the 
 ![image-20241215162430509](comparator/image-20241215162430509.png)
 
 
+## Pre-amp (preamplifier)
+
+![preampSong202412181018](comparator/preampSong202412181018.PNG)
+
+
+> Vishal Saxena "CMOS Comparator Design Extra Slides" [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Comparator%20Slides.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Comparator%20Slides.pdf)]
+
+
 
 ## Math Background
 

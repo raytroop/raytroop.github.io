@@ -42,3 +42,5 @@ A. Chan Carusone and D. A. Johns, "Analog Filter Adaptation Using a Dithered Lin
 —, "Analog Adaptive Filters," tutorial at the *IEEE Int. Symp. Circuits and Syst.*, Bangkok, Thailand, May 2003. [[http://www.eecg.utoronto.ca/~tcc/iscas03_tutorial.pdf](http://www.eecg.utoronto.ca/~tcc/iscas03_tutorial.pdf)]
 
 David Johns, "Integrated Circuits for Digital Communications" [[https://www.eecg.toronto.edu/~johns/nobots/courses/ece1392/slides.pdf](https://www.eecg.toronto.edu/~johns/nobots/courses/ece1392/slides.pdf)]
+
+Tai-Haur Kuo "Advanced Analog IC Design for Communications" [[http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html](http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html)]

@@ -158,7 +158,7 @@ $$
 
 
 
-## RC ladder
+## 2 Stage RC filter
 
 ### high frequency pass
 
@@ -385,7 +385,7 @@ where
 
 $$\begin{align}
 \tau_0 &= R_0(C_0+C_1) \\
-\tau_1 &= R_1\frac{C_0C_1}{C_0+C_1}
+\tau_1 &= R_1C_1\cdot \frac{C_0}{C_0+C_1}
 \end{align}$$
 
 

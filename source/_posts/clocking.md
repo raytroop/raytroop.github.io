@@ -7,7 +7,14 @@ categories:
 mathjax: true
 ---
 
+## Injection Locking
 
+*TODO* &#128197;
+
+
+> "Topics in IC(Wireline Transceiver Design): Lec 4 - Injection Locked Oscillators" [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf)]
+>
+> Cowan, Glenn. (2024). Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations. 10.1017/9781108779791. 
 
 ## Temperature compensation for VCO
 

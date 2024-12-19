@@ -254,7 +254,7 @@ noting $\omega_{p1}\lt \omega_z \lt \omega_{p2}$
 
 
 
-## Recognize "Zero" by Inspection
+## "Zero" by Inspection
 
 > a method to predict the existence of "zero" by inspection, based on the concept of *"Analog Phase Interpolation"*
 

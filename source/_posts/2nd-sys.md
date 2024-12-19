@@ -347,6 +347,8 @@ Continuous-time transfer function.
 
 ### low frequency pass
 
+![image-20241218231322792](2nd-sys/image-20241218231322792.png)
+
 $$
 \left\{ \begin{array}{cl}
 \frac{V_i - V_m}{R_0} &= C_0\frac{dV_m}{dt} + C_1\frac{dV_o}{dt} \\
@@ -392,8 +394,6 @@ $$\begin{align}
 and $\tau_0 \gg \tau_1$
 
 ---
-
-![image-20241218231322792](2nd-sys/image-20241218231322792.png)
 
 ![image-20241218230713148](2nd-sys/image-20241218230713148.png)
 

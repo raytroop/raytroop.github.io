@@ -360,7 +360,7 @@ $$
 
 Take into initial condition account
 $$
-V_M(s) = sV_M - V_{m0}
+\frac{dV_m}{dt}  \overset{\mathcal{L}}{\longrightarrow} sV_M-V_{m0}
 $$
 where $V_{m0} = 1$
 

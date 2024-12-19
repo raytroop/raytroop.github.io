@@ -420,8 +420,8 @@ t = linspace(0,40,1e3);  % ns
 
 tau0 = R0*(C0+C1)*1e9; %ns
 tau1 = R1*C0*C1/(C0+C1)*1e9; %ns
-y0 = 1 - C1/(C0+C1)*exp(-t/tau0) - C0/(C0+C1)*exp(-t/tau1) - R1*C0*C1/R0/(C0+C1)^2;
-y1 = 1 - C1/(C0+C1)*exp(-t/tau0) - C0/(C0+C1)*exp(-t/tau1);
+y0 = 1 - C1/(C0+C1)*exp(-t/tau0) - C0/(C0+C1)*exp(-t/tau1) - R1*C0*C1/R0/(C0+C1)^2;  % Eq.0
+y1 = 1 - C1/(C0+C1)*exp(-t/tau0) - C0/(C0+C1)*exp(-t/tau1);  % Eq.1
 
 plot(t, vot, t, vmt,LineWidth=2);
 hold on

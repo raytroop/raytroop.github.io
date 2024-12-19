@@ -615,6 +615,8 @@ Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhik
 
 ---
 
+M. Gu, Y. Tao, Y. Zhong, L. Jie and N. Sun, "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in IEEE Open Journal of the Solid-State Circuits Society [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
+
 everynanocounts. Memos on FFT With Windowing. URL: [https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing/](https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing/)
 
 How to choose FFT depth for ADC performance analysis (SINAD, ENOB). URL:[https://dsp.stackexchange.com/a/38201](https://dsp.stackexchange.com/a/38201)

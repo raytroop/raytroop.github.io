@@ -9,19 +9,9 @@ mathjax: true
 
 
 
+## RMS for non-sinusoidal periodic function
 
-
-## dBc
-
-*TODO* &#128197;
-
-
-
-
-
-## dBFS
-
-*TODO* &#128197;
+![image-20241220213943650](ss-insight/image-20241220213943650.png)
 
 
 

@@ -11,7 +11,7 @@ mathjax: true
 
 ## RMS for non-sinusoidal periodic function
 
-![image-20241220213943650](ss-insight/image-20241220213943650.png)
+![image-20241220214234185](ss-insight/image-20241220214234185.png)
 
 
 

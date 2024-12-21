@@ -30,7 +30,21 @@ mathjax: true
 
 *TODO* &#128197;
 
+---
 
+> Remember, S-parameters **don't mean much** unless you know the value of the **reference impedance **(it's frequently called Z0).
+
+
+
+simulator will read sp file's **Z0** parameter
+
+![image-20220430214052538](network/image-20220430214052538.png)
+
+![image-20220430214136970](network/image-20220430214136970.png)
+
+![image-20220430214419283](network/image-20220430214419283.png)
+
+> The default **Z0** exported by EMX is **50**
 
 
 
@@ -105,20 +119,7 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
-## Z0 
-> Remember, S-parameters **don't mean much** unless you know the value of the **reference impedance **(it's frequently called Z0).
 
-
-
-simulator will read sp file's **Z0** parameter
-
-![image-20220430214052538](network/image-20220430214052538.png)
-
-![image-20220430214136970](network/image-20220430214136970.png)
-
-![image-20220430214419283](network/image-20220430214419283.png)
-
-> The default **Z0** exported by EMX is **50**
 
 
 

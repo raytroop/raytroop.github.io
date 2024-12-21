@@ -1,11 +1,59 @@
 ---
-title: T-coil
+title: High Frequency Passive Devices
 date: 2022-03-17 14:30:39
 tags:
 categories:
 - analog
 mathjax: true
 ---
+
+
+
+## Matching network
+
+*TODO* &#128197;
+
+
+
+
+
+## Q factor
+
+*TODO* &#128197;
+
+
+
+
+
+
+
+## Self-Resonant Frequency
+
+![image-20240802210109935](passives/image-20240802210109935.png)
+
+
+$$
+f_\text{SRF} = \frac{1}{2\pi \sqrt{LC}}
+$$
+The SRF of an inductor is the frequency at which the parasitic capacitance of the inductor resonates with the ideal inductance of the inductor, resulting in an extremely high impedance. The inductance only acts like an inductor below its SRF
+
+![image-20241221092745311](passives/image-20241221092745311.png)
+
+- For **choking** applications, chose an inductor whose SRF is at or near the frequency to be attenuated
+
+- For other applications, the SRF should be at least **10** times higher than the operating frequency
+
+  it is more important to have a *relatively flat inductance curve* (constant inductance vs. frequency) near the required frequency
+
+
+
+> [Understanding RF Inductor Specifications, [https://www.ece.uprm.edu/~rafaelr/inel5325/SupportDocuments/doc671_Selecting_RF_Inductors.pdf](https://www.ece.uprm.edu/~rafaelr/inel5325/SupportDocuments/doc671_Selecting_RF_Inductors.pdf)]
+>
+> [RFIC-GPT Wiki, [https://wiki.icprophet.net/](https://wiki.icprophet.net/)]
+
+
+
+## T-coil
 
 - Broaden the bandwidth
 - Create a constant, resistive input impedance in the presence of a heavy load capacitance (ESD protection circuit)
@@ -17,15 +65,15 @@ The use of T-coils can dramatically increase the **bandwidth** and improve the *
 
 
 
-![image-20240712234028634](tcoil/image-20240712234028634.png)
+![image-20240712234028634](passives/image-20240712234028634.png)
 
 > *equivalent circuit*
 >
-> ![image-20240713001415948](tcoil/image-20240713001415948.png)
+> ![image-20240713001415948](passives/image-20240713001415948.png)
 >
-> ![image-20240713011127116](tcoil/image-20240713011127116.png)
+> ![image-20240713011127116](passives/image-20240713011127116.png)
 >
-> ![image-20240713011152541](tcoil/image-20240713011152541.png)
+> ![image-20240713011152541](passives/image-20240713011152541.png)
 >
 > Note the negative sign of $L_M$, which is a consequence of magnetic coupling; owing to this, the driving impedance at the center tap *as seen by $C$* is **lower than without the coupling**.
 >
@@ -38,7 +86,7 @@ Z_{noc} &= sL/2
 
 
 
-## Bridged T-Coil
+### Bridged T-Coil
 
 > The vertical stacking of the inductor halves causes a significant bridging capacitance $C_B$​ between them. 
 >
@@ -50,25 +98,25 @@ Z_{noc} &= sL/2
 
 
 
-## Tcoil in RX
+### Tcoil in RX
 
-![image-20220502201254057](tcoil/image-20220502201254057.png)
+![image-20220502201254057](passives/image-20220502201254057.png)
 
 > **ppwl**: Independent Piece-Wise Linear Resistive Source
 
-![image-20220502201321341](tcoil/image-20220502201321341.png)
+![image-20220502201321341](passives/image-20220502201321341.png)
 
-## simple model
+### simple model
 
 > L1, L2, Km, Cb
 
-![image-20220502215310947](tcoil/image-20220502215310947.png)
+![image-20220502215310947](passives/image-20220502215310947.png)
 
-![image-20220622224842237](tcoil/image-20220622224842237.png)
+![image-20220622224842237](passives/image-20220622224842237.png)
 
-![image-20220622225709712](tcoil/image-20220622225709712.png)
+![image-20220622225709712](passives/image-20220622225709712.png)
 
-## lumped model
+### lumped model
 
 ```
 simulator lang=spectre
@@ -103,11 +151,13 @@ port3 (p_3 0) port
 S sp start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08 ports=[ port1 port2 port3]
 ```
 
-![image-20220503005728763](tcoil/image-20220503005728763.png)
+![image-20220503005728763](passives/image-20220503005728763.png)
 
-![image-20220503005903105](tcoil/image-20220503005903105.png)
+![image-20220503005903105](passives/image-20220503005903105.png)
 
-### `EMX_plot_tcoil` in `emxform.ils`
+---
+
+**`EMX_plot_tcoil` in `emxform.ils`**
 
 ```
 (define (EMX_plot_tcoil bgui wid what)
@@ -188,7 +238,9 @@ S sp start=1.000000e+08 stop=2.000000e+10 step=1.000000e+08 ports=[ port1 port2 
 		'(("L1" "L2") ("Q1" "Q2") ("k")))))
 ```
 
-## Tcoil vs tapped inductor
+
+
+### Tcoil vs tapped inductor
 
 tcoil and tapped inductor share same EM simulation result, and use modelgen with different model formula.
 
@@ -207,9 +259,9 @@ where $L1_{\text{sim}}$, $L2_{\text{sim}}$ and $k_{\text{sim}}$ come from tcoil 
 >
 > So, the $k_{\text{sim}}$ is negative if routing coil in same direction
 
-![image-20220623013225554](tcoil/image-20220623013225554.png)
+![image-20220623013225554](passives/image-20220623013225554.png)
 
-![image-20220623013923263](tcoil/image-20220623013923263.png)
+![image-20220623013923263](passives/image-20220623013923263.png)
 
 ```matlab
 % EMX - shield tcoil model
@@ -266,17 +318,17 @@ $$
 $$
 
 
-![image-20240713131201618](tcoil/image-20240713131201618.png)
+![image-20240713131201618](passives/image-20240713131201618.png)
 
 
 
-![image-20240713145315890](tcoil/image-20240713145315890.png)
+![image-20240713145315890](passives/image-20240713145315890.png)
 
-![image-20240713145343423](tcoil/image-20240713145343423.png)
+![image-20240713145343423](passives/image-20240713145343423.png)
 
-![image-20240713145005306](tcoil/image-20240713145005306.png)
+![image-20240713145005306](passives/image-20240713145005306.png)
 
-![image-20240713145212327](tcoil/image-20240713145212327.png)
+![image-20240713145212327](passives/image-20240713145212327.png)
 
 
 
@@ -284,19 +336,19 @@ $$
 
 ---
 
-![image-20240713140911612](tcoil/image-20240713140911612.png)
+![image-20240713140911612](passives/image-20240713140911612.png)
 
-![image-20240713135148710](tcoil/image-20240713135148710.png)
+![image-20240713135148710](passives/image-20240713135148710.png)
 
-![image-20240713135236291](tcoil/image-20240713135236291.png)
+![image-20240713135236291](passives/image-20240713135236291.png)
 
 > **同名端**：当两个*电流*分别从两个线圈的对应端子流入 ，其所 产生的磁场相互加强时，则这两个对应端子称为同名端。
 
-![image-20240713142238398](tcoil/image-20240713142238398.png)
+![image-20240713142238398](passives/image-20240713142238398.png)
 
-![image-20240713142249362](tcoil/image-20240713142249362.png)
+![image-20240713142249362](passives/image-20240713142249362.png)
 
-![image-20240713142506673](tcoil/image-20240713142506673.png)
+![image-20240713142506673](passives/image-20240713142506673.png)
 
 
 
@@ -327,3 +379,5 @@ S. Lin, D. Huang and S. Wong, "Pi Coil: A New Element for Bandwidth Extension," 
 Starič, Peter and Erik Margan. “Wideband amplifiers.” (2006).
 
  Kosnac, Stefan (2021) *Analysis* of On-*Chip Inductors* and *Arithmetic Circuits* in the *Context* of *High Performance Computing* [[https://archiv.ub.uni-heidelberg.de/volltextserver/30559/1/Dissertation_Stefan_Kosnac.pdf](https://archiv.ub.uni-heidelberg.de/volltextserver/30559/1/Dissertation_Stefan_Kosnac.pdf)]
+
+Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]

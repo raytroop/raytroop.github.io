@@ -15,6 +15,162 @@ mathjax: true
 
 
 
+## CDAC intuition
+
+The *charge redistribution capacitor network* is used to sample the input signal and serves as a
+digital-to-analog converter (DAC) for creating and subtracting reference voltages
+
+sampling charge
+$$
+Q = V_{in} C_{tot}
+$$
+conversion charge
+$$
+Q = -C_{tot}V_c + V_{ref}C_\Delta
+$$
+That is
+$$
+V_c = \frac{C_\Delta}{C_{tot}}V_{ref} - V_{in}
+$$
+
+---
+
+CDAC is actually working as a **capacitive divider** during *conversion phase*, the charge of internal node retain (*charge conservation law*)
+
+assuming $\Delta V_i$ is applied to series capacitor $C_1$ and $C_2$
+
+![cap_divider.drawio](sar/cap_divider.drawio.svg)
+$$
+(\Delta V_i - \Delta V_x) C_1 = \Delta V_x \cdot C_2
+$$
+Then
+$$
+\Delta V_x = \frac{C_1}{C_1+C_2}\Delta V_i
+$$
+
+> $V_x= V_{x,0} + \Delta V_x$
+
+
+
+## CDAC settling time
+
+![cdac-tau.drawio](sar/cdac-tau.drawio.svg)
+$$\begin{align}
+V_x(s) &= \frac{C_1+C_2}{RC_1C_2}\cdot \frac{1}{s+\frac{C_1+C_2}{RC_1C_2}}\cdot V_i(s) \\
+&= \frac{1}{\tau}\cdot \frac{1}{s+\frac{1}{\tau}}\cdot \frac{1}{s}\\
+&=  \frac{1}{\tau}\cdot \tau(\frac{1}{s} - \frac{1}{s+\frac{1}{\tau}})=\frac{1}{s} - \frac{1}{s+\frac{1}{\tau}}
+\end{align}$$
+
+inverse Laplace Transform is $V_x(t) = 1 - e^{-t/\tau}$
+
+$$\begin{align}
+V_y(s) &= V_x\frac{C_1}{C_1+C_2} \\
+&= \frac{C_1}{C_1+C_2} \left(\frac{1}{s} - \frac{1}{s+\frac{1}{\tau}}\right)\\
+\end{align}$$
+
+inverse Laplace Transform is $V_y(t) = \frac{C_1}{C_1+C_2}\left(1 - e^{-t/\tau}\right)$
+
+$V_x(t)$ and $V_y(t)$ prove that the settling time is *same*
+
+
+> $\tau = R\frac{C_1C_2}{C_1+C_2}$, which means usually worst for MSB capacitor (largest)
+
+
+
+## CDAC Energy Consumption
+
+
+$$
+E_{Vref} = \int P(t)dt = \int V_{ref} I(t) dt = V_{ref}\int I(t)dt = V_{ref}\cdot \Delta Q
+$$
+
+
+![image-20240922093524720](sar/image-20240922093524720.png)
+
+Given $V_{c,0}=\frac{1}{2}V_{ref}-V_{in}$ and $V_{c,1}=\frac{3}{4}V_{ref}-V_{in}$
+$$\begin{align}
+Q_{b0,0} &= \left(V_{ref} - V_{c,0} \right)\cdot 2C = \left(\frac{1}{2}V_{ref}+V_{in} \right)\cdot 2C \\
+Q_{b1,0} &= (0 - V_{c,0})\cdot C = \left(-\frac{1}{2}V_{ref}+V_{in} \right)\cdot C \\
+Q_{b0,1} &= \left(V_{ref} - V_{c,1} \right)\cdot 2C = \left(\frac{1}{4}V_{ref}+V_{in} \right)\cdot 2C \\
+Q_{b1,1} &= \left(V_{ref} - V_{c,1} \right)\cdot C = \left(\frac{1}{4}V_{ref}+V_{in} \right)\cdot C
+\end{align}$$
+
+Therefore
+$$
+E_{Vref} = V_{ref}\cdot (Q_{b0,1}+Q_{b1,1} - Q_{b0,0}-Q_{b1,0}) = \frac{1}{4}C V_{ref}^2
+$$
+
+
+---
+
+CDAC total energy change
+$$\begin{align}
+\Delta E_{tot} &= \frac{1}{2}\cdot 2C \cdot (U_{2c,1}^2  - U_{2c,0}^2) + \frac{1}{2}\cdot C \cdot (U_{c,1}^2  - U_{c,0}^2) + \frac{1}{2}\cdot C \cdot (U_{c1,1}^2  - U_{c1,0}^2) \\
+&= \left(-\frac{3}{16}V_{ref}^2 - \frac{1}{2}V_{ref}V_{in} - \frac{3}{32}V_{ref}^2+\frac{3}{4}V_{ref}V_{vin} + \frac{5}{32}V_{ref}^2-\frac{1}{4}V_{ref}V_{in}\right)C \\
+&= -\frac{1}{8}CV_{ref}^2
+\end{align}$$
+
+
+
+***alternative method***
+
+![CapEnergy.drawio](sar/CapEnergy.drawio.svg)
+$$
+\Delta E_{tot} = \frac{1}{2}\cdot\frac{3}{4}C\cdot V_{ref}^2  -  \frac{1}{2}\cdot C\cdot V_{ref}^2 = -\frac{1}{8}CV_{ref}^2
+$$
+
+
+> The total energy decreases by $-\frac{1}{8}CV_{ref}^2$, though $V_{ref}$ provides $\frac{1}{4}C V_{ref}^2$
+
+
+
+---
+
+The charge redistribution change the CDAC energy
+
+![cap_redis_energy.drawio](sar/cap_redis_energy.drawio.svg)
+
+
+$$
+E_{c,0} = \frac{1}{2}CV^2
+$$
+After charge redistribution
+$$
+E_{c,1} = \frac{1}{2}\cdot 2C\cdot \left(\frac{1}{2}V\right)^2 = \frac{1}{4}CV^2
+$$
+
+> That make sense, **charge redistribution consume energy**
+
+
+
+
+
+## Comparator input cap effect
+
+![image-20240907194621524](sar/image-20240907194621524.png)
+$$
+-V_{in}\cdot 2^N C = V_c (2^N C + C_p)
+$$
+Then $V_c = -\frac{2^N C}{2^N C + C_p}V_{in}$, i.e. this capacitance reduce the voltage amplitude by the factor
+
+During conversion
+$$\begin{align}
+V_c &= -\frac{2^N C}{2^N C + C_p}V_{in} +V_{ref}\sum_{n=0}^{N-1} \frac{b_n\cdot2^n C}{2^N C + C_p} \\
+&= \frac{2^N C}{2^N C + C_p}\left(-V_{in} + V_{ref}\sum_{n=0}^{N-1}\frac{b_n }{2^{N-n}}  \right)
+\end{align}$$
+
+That is, it does not change the sign
+
+
+
+## Comparator offset effect
+
+![image-20240825204030645](sar/image-20240825204030645.png)
+
+
+
+
+
 
 
 ## Synchronous SAR ADC
@@ -49,66 +205,6 @@ $$\begin{align}
 \Delta V_{dac} &= \frac{1}{2}b_3+\frac{1}{4}b_2+\frac{1}{4}\left(\frac{1}{2}b_1+\frac{1}{4}b_0 \right) \\
 &= \frac{1}{2}b_3+\frac{1}{4}b_2 + \frac{1}{8}b_1+\frac{1}{16}b_0
 \end{align}$$
-
-
-
-
-## Redundancy
-
-For overlapped search ranges, a less than ***radix-2 (sub-binary)*** search is needed. Essentially, a sub-binary search takes ***more than $N$ steps*** to convert an analog input into a ***$N$-bit digital output***
-
-
-
-![image-20241021215658138](sar/image-20241021215658138.png)
-
-**Binary search algorithm(4-bit 4-step):**
-
-$$\begin{align}
-D_\text{out} &= d_1 \cdot 2^3 + d_2 \cdot 2^2 + d_3 \cdot 2^1 + d_4 \cdot 2^0 \\
-&= \frac{2d_1-1}{2} \cdot 2^3 + \frac{2d_2-1}{2} \cdot 2^2 + \frac{2d_3-1}{2} \cdot 2^1 + \frac{2d_4-1}{2} \cdot 2^0 +\frac{1}{2}\sum_{k=0}^3 2^k \\
-&= D_1 \cdot 2^2 + D_2\cdot 2 + D_3 \cdot 1 + D_4 \cdot 0.5 + 2^3-0.5
-\end{align}$$
-
-where $d_k \in \{0, 1\}$ and $D_k=2d_k-1$, $D_k\in\{+1,-1\}$
-
-![image-20241021225142502](sar/image-20241021225142502.png)
-
----
-
-![image-20241022002512514](sar/image-20241022002512514.png)
-
-![image-20241022002448778](sar/image-20241022002448778.png)
-
-That is
-$$
-D_\text{out} = \sum_{i=1}^{M-1}b[i]\cdot 2s(i) +b[0]+S(M)-\sum_{i=1}^{M-1}s(i)-1
-$$
-which is valid in binary weighted search, obviously.
-
-> note $s[?]$ is not cap weight in non-binary search 
-
-
-###  max recoverable error
-
-![image-20241021213926581](sar/image-20241021213926581.png)
-
-![image-20241021213940203](sar/image-20241021213940203.png)
-
-
-
-> Chang, Albert Hsu Ting. "Low-power high-performance SAR ADC with redundancy and digital background calibration." (2013). [[https://dspace.mit.edu/bitstream/handle/1721.1/82177/861702792-MIT.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/82177/861702792-MIT.pdf)]
->
-> Kuttner, Franz. "A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS." *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1. [[https://sci-hub.se/10.1109/ISSCC.2002.992993](https://sci-hub.se/10.1109/ISSCC.2002.992993)]
->
-> T. Ogawa, H. Kobayashi, et. al., "SAR ADC Algorithm with Redundancy and Digital Error Correction." IEICE Trans. Fundam. Electron. Commun. Comput. Sci. 93-A (2010): 415-423. [[paper](https://sci-hub.se/https://doi.org/10.1587/transfun.E93.A.415), [slides](https://pdfs.semanticscholar.org/9745/3f1a69d43414c123965280cd6fc45274f296.pdf)]
->
-> B. Murmann, “On the use of redundancy in successive approximation A/D converters,” International Conference on Sampling Theory and Applications (SampTA), Bremen, Germany, July 2013.  [[https://www.eurasip.org/Proceedings/Ext/SampTA2013/papers/p556-murmann.pdf](https://www.eurasip.org/Proceedings/Ext/SampTA2013/papers/p556-murmann.pdf)]
->
-> Krämer, M. et al. (2015) *High-resolution SAR A/D converters with loop-embedded input buffer*. dissertation. Available at: [[http://purl.stanford.edu/fc450zc8031](http://purl.stanford.edu/fc450zc8031)].
-
-
-
-
 
 
 

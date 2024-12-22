@@ -9,6 +9,30 @@ mathjax: true
 
 
 
+## delay in loop transmission  
+
+*TODO* &#128197;
+
+
+
+
+
+> Dawson, Joel L. *A Guide to Feedback Theory*. Cambridge: Cambridge University Press, 2021.
+
+
+
+## Nyquist's Stability Criterion
+
+*TODO* &#128197;
+
+
+
+
+
+> [[Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
+
+
+
 ## RMS for non-sinusoidal periodic function
 
 ![image-20241220214234185](ss-insight/image-20241220214234185.png)
@@ -338,18 +362,6 @@ $$\begin{align}
   - $e_{ss} = \frac{1}{K_n}$ if $n=k \neq 0$​
 
 where we define $K_n(0) = K_n$
-
-
-
-## Nyquist's Stability Criterion
-
-*TODO* &#128197;
-
-
-
-
-
-[[Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
 
 
 

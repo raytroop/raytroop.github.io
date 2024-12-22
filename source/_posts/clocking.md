@@ -9,6 +9,57 @@ mathjax: true
 
 
 
+## Non-ideal Effects in Charge Pump
+
+The ***periodic*** signal on VCTRL modulates the VCO, giving rise to ***deterministic*** jitter
+
+---
+
+- Timing Offsets Between Up and Dn Pulses
+- Mismatch Between Charge-Pump Current Sources
+- Incomplete Settling of Charge-Pump Currents
+- Finite Output Resistance of the Charge Pump
+
+
+
+### Up/Dn Timing Offset
+
+![image-20241222171705612](clocking/image-20241222171705612.png)
+
+If Dn pulse arrives $\Delta T$ after the Up pulse, the steady-state VCTRL will be slightly **lower** than it would be without the $\Delta T$ mismatch so as to return the VCO's phase to match the reference clocks.
+
+Vice versa, if If Up pulse arrives $\Delta T$ after the Dn pulse, the steady-state VCTRL will be slightly **higher** than without $\Delta T$ mismatch
+
+
+
+### Current Sources Mismatch
+
+![image-20241222174620713](clocking/image-20241222174620713.png)
+
+![image-20241222174718564](clocking/image-20241222174718564.png)
+
+### Incomplete Settling
+
+
+
+
+
+> W. Rhee, "Design of high-performance CMOS charge pumps in phase-locked loops," *1999 IEEE International Symposium on Circuits and Systems (ISCAS)*, Orlando, FL, USA, 1999, pp. 545-548 vol.2 [[pdf](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3006edc15fdef2e71674d4170c10c62fd69f96a3)]
+>
+> Cowan G. *Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations*. Cambridge University Press; 2024
+
+
+
+
+
+## cycle slip
+
+*TODO* &#128197;
+
+
+
+
+
 ##  frequency divider & phase margin
 
  **type-I PLLs**
@@ -42,11 +93,15 @@ mathjax: true
 
 
 
-## reset delay on PFD
+## PFD Deadzone
+
+PFD Operation **w/ Reset Delay**
 
 ![image-20241222144143760](clocking/image-20241222144143760.png)
 
 
+
+> Sam Palermo, "Lecture 4: Phase Detector Circuit" [[https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf)]
 
 
 

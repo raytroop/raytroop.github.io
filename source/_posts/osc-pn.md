@@ -11,16 +11,6 @@ mathjax: true
 
 ## Reference Spur
 
-***Sources of Spurs:***
-
-- External (coupling from other noisy block)
-  Supply, substrate, bond wires, etc.
-- Internal (int-N/fractional-N operation)
-  - **Frac spur**: Fractional divider (multi-modulus and frequency accumulation)
-  - **Ref. spur**: PFD/charge pump/analog loop filter non-idealities, clock coupling
-
-![chart](osc-pn/1695498362810.gif)
-
 **spurs** are carrier or clock frequency spectral imperfections measured in the frequency domain just like phase noise. However, unlike phase noise they are *discrete* frequency components.
 
 - Spurs are deterministic
@@ -31,37 +21,51 @@ mathjax: true
 
 
 
+***Sources of Spurs:***
+
+- External (coupling from other noisy block)
+  Supply, substrate, bond wires, etc.
+- Internal (int-N/fractional-N operation)
+  - **Frac spur**: Fractional divider (multi-modulus and frequency accumulation)
+  - **Ref. spur**: PFD/charge pump/analog loop filter non-idealities, clock coupling
+
+
+
+### LPF gate leakage
+
+![image-20241222192007824](osc-pn/image-20241222192007824.png)
+
+
+
+For the sake of simplicity, $V_{ctr}$ looks like a rectangular pulse with an amplitude of $I_{CP}R_1$ and a duty ratio of ($I_{leak}/I_{CP}$), whose first coefficient of Fourier series is
+
+![image-20241222200514941](osc-pn/image-20241222200514941.png)
+
+where $I_\text{leak} \ll I_{CP}$ is assumed
+
+Then, the *peak* frequency deviation $\Delta f$
+$$
+\Delta f = a_1 \cdot K_v = 2I_\text{leak}R_1 K_v
+$$
+using narrowband FM approximation, we have 
+$$
+P_\text{spur} = 20\log\left(\frac{\Delta f}{2f_\text{ref}}\right) = 20\log\left(\frac{I_\text{leak}R_1 K_v}{f_\text{ref}}\right)
+$$
 
 
 
 
-Matching of the CP currents is also a critical part of PLL design. Leakage and mismatch in the CP will lead to *deterministic jitter* on the PLL output
-
-Any difference between the charging and discharging currents can cause static phase offset as well as *dynamic jitter*, known as **reference spur**
-
-
-
-
+> W. Rhee, "Design of high-performance CMOS charge pumps in phase-locked loops," *1999 IEEE International Symposium on Circuits and Systems (ISCAS)*, Orlando, FL, USA, 1999, pp. 545-548 vol.2 [[pdf](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3006edc15fdef2e71674d4170c10c62fd69f96a3)]
+>
+> —. Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons
 
 
 
 ---
 
+![image-20241222200158107](osc-pn/image-20241222200158107.png)
 
-
-> W. Rhee, "Design of high-performance CMOS charge pumps in phase-locked loops," *1999 IEEE International Symposium on Circuits and Systems (ISCAS)*, Orlando, FL, USA, 1999, pp. 545-548 vol.2 [[https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3006edc15fdef2e71674d4170c10c62fd69f96a3](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3006edc15fdef2e71674d4170c10c62fd69f96a3)]
->
-> Rhee, W. and Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons.
->
-> H. -G. Ko, W. Bae, G. -S. Jeong and D. -K. Jeong, "Reference Spur Reduction Techniques for a Phase-Locked Loop," in *IEEE Access*, vol. 7, pp. 38035-38043, 2019 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8671476](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8671476)]
->
-> Saurabh Saxena, Problems in Charge Pump PLL - Reference Spur [[https://youtu.be/IcJOZAh9a1w?si=ehJ3ox90wN46_KMb](https://youtu.be/IcJOZAh9a1w?si=ehJ3ox90wN46_KMb)]
->
-> Chembiyan T, PLLs and reference spurs. [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_pll-rfdesign-circuits-activity-7111435571448713216-9jng?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_pll-rfdesign-circuits-activity-7111435571448713216-9jng?utm_source=share&utm_medium=member_desktop)]
->
-> Timing 101 #6: The Case of the Spurious Phase Noise, Silicon Labs,  [[Part I](https://community.silabs.com/s/share/a5U1M000000knzQUAQ/timing-101-6-the-case-of-the-spurious-phase-noise-part-i)], [[Part II](https://community.silabs.com/s/share/a5U1M000000ko4DUAQ/timing-201-2-the-case-of-the-phase-noise-that-wasnt-part-2?language=en_US)]
-
-
+> [[https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html](https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html)]
 
 
 

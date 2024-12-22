@@ -95,9 +95,11 @@ Vice versa, if If Up pulse arrives $\Delta T$ after the Dn pulse, the steady-sta
 
 ## PFD Deadzone
 
-PFD Operation **w/ Reset Delay**
+Dead zone induced by *incomplete settling* of charge-pump currents
 
-![image-20241222144143760](clocking/image-20241222144143760.png)
+> This situation can be avoided by adding *additional delay to the AND gate* in the PFD
+
+![image-20241222190011244](clocking/image-20241222190011244.png)
 
 
 

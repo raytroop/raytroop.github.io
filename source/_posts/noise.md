@@ -95,7 +95,7 @@ A random signal $v_n(t)$ is sampled using an ideal impulse sampler
 
 
 
-## ADC SNR with Clock Jitter
+## Aperture Jitter & ADC SNR
 
 > Chembian Thambidurai, "SNR of an ADC in the presence of clock jitter" [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop)]
 
@@ -123,7 +123,7 @@ The error between *the ideal sampled signal* and *the sampling with clock jitter
 
 ---
 
-![image-20241211200720078](noise/image-20241211200720078.png)
+![image-20241222140258960](noise/image-20241222140258960.png)
 
 ```python
 import numpy as np
@@ -140,7 +140,7 @@ PnQ = 1/Ps_PnQ
 Jrms_list = [25e-15, 50e-15, 100e-15, 250e-15, 500e-15, 1000e-15]
 for Jrms in Jrms_list:
     # Ps_PnJ_lcl = 10**((6-20*np.log10(2*np.pi*fin*Jrms))/10)     # ref. Chembiyan T
-    Ps_PnJ_lcl = 10**((0 - 20 * np.log10(2 * np.pi * fin * Jrms)) / 10)  # ref. Ayça Akkaya
+    Ps_PnJ_lcl = 10**((0 - 20 * np.log10(2 * np.pi * fin * Jrms)) / 10)  # ref. Nicola Da Dalt
     PnJ_lcl = 1/Ps_PnJ_lcl
     SNR_lcl = 10*np.log10(1/(PnQ+PnJ_lcl))
     plt.plot(fin, SNR_lcl, label=r'$\sigma_{jitter}$'+'='+str(int(Jrms*1e15))+'fs')
@@ -151,7 +151,7 @@ plt.xlabel(r'$f_{in}$ [Hz]')
 plt.ylabel(r'SNR [dB]')
 plt.grid(which='both')
 # plt.title(r'ref. Chembiyan T')
-plt.title(r'ref. Ayça Akkaya')
+plt.title(r'ref. Nicola Da Dalt')
 plt.legend()
 plt.show()
 
@@ -164,6 +164,12 @@ plt.show()
 > ![image-20241210232716862](noise/image-20241210232716862.png)
 >
 > Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
+
+
+
+---
+
+![image-20241222135948195](noise/image-20241222135948195.png)
 
 
 

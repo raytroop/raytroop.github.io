@@ -7,6 +7,30 @@ categories:
 mathjax: true
 ---
 
+
+
+##  frequency divider & phase margin
+
+ **type-I PLLs**
+
+![image-20241222152826102](clocking/image-20241222152826102.png)
+
+![image-20241222152916367](clocking/image-20241222152916367.png)
+
+ frequency divider weakens the feedback and ***increases** the phase margin*
+
+
+
+---
+
+**type-II PLLs**
+
+![image-20241222153430163](clocking/image-20241222153430163.png)
+
+ frequency divider weakens the feedback and ***decrease** the phase margin*
+
+
+
 ## Injection Locking
 
 *TODO* &#128197;
@@ -15,6 +39,16 @@ mathjax: true
 > "Topics in IC(Wireline Transceiver Design): Lec 4 - Injection Locked Oscillators" [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf)]
 >
 > Cowan, Glenn. (2024). Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations. 10.1017/9781108779791. 
+
+
+
+## reset delay on PFD
+
+![image-20241222144143760](clocking/image-20241222144143760.png)
+
+
+
+
 
 ## Temperature compensation for VCO
 
@@ -191,12 +225,6 @@ $$
 $$
 
 
-
-
-
-## Injection Lock
-
-*TODO* &#128197;
 
 
 

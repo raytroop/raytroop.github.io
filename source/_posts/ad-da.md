@@ -540,6 +540,8 @@ John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs" [[https://
 
 Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf)]
 
+—， "Design and Calibration Techniques for SAR and Pipeline ADCs"
+
 Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
 
 ---

@@ -22,46 +22,33 @@ i.e. complementary analog and digital errors cancel each other, $V_o +\Delta V_{
 
 
 
-
-
-For overlapped search ranges, a less than ***radix-2 (sub-binary)*** search is needed. Essentially, a sub-binary search takes ***more than $N$ steps*** to convert an analog input into a ***$N$-bit digital output***
-
-
-
-![image-20241021215658138](ad-da/image-20241021215658138.png)
-
-**Binary search algorithm(4-bit 4-step):**
-
 $$\begin{align}
-D_\text{out} &= d_1 \cdot 2^3 + d_2 \cdot 2^2 + d_3 \cdot 2^1 + d_4 \cdot 2^0 \\
-&= \frac{2d_1-1}{2} \cdot 2^3 + \frac{2d_2-1}{2} \cdot 2^2 + \frac{2d_3-1}{2} \cdot 2^1 + \frac{2d_4-1}{2} \cdot 2^0 +\frac{1}{2}\sum_{k=0}^3 2^k \\
-&= D_1 \cdot 2^2 + D_2\cdot 2 + D_3 \cdot 1 + D_4 \cdot 0.5 + 2^3-0.5
+V_{in,j} &= (b_j + \Delta b_j)\cdot \frac{V_{FS}}{2} + \frac{V_{out,j}+\Delta V_{out,j}}{2} \\
+V_{in,{j+1}} &= (b_{j+1} + \Delta b_{j+1})\cdot \frac{V_{FS}}{2} + \frac{V_{out,j+1}+\Delta V_{out,j+1}}{2}
 \end{align}$$
 
-where $d_k \in \{0, 1\}$ and $D_k=2d_k-1$, $D_k\in\{+1,-1\}$
+with $V_{in,j+1} = V_{out,j}+\Delta V_{out,j}$
 
-![image-20241021225142502](ad-da/image-20241021225142502.png)
+$$\begin{align}
+V_{in,j} &= (b_j + \Delta b_j)\cdot \frac{V_{FS}}{2} + \frac{1}{2} \left\{ (b_{j+1} + \Delta b_{j+1})\cdot \frac{V_{FS}}{2} + \frac{V_{out,j+1}+\Delta V_{out,j+1}}{2} \right\} \\
+&= (b_j + \Delta b_j)\cdot \frac{V_{FS}}{2} + \frac{1}{2}(b_{j+1} + \Delta b_{j+1})\cdot \frac{V_{FS}}{2}+ \frac{1}{2}\frac{V_{in,j+2}}{2} \\
+&=\tilde{b_j} \cdot \frac{V_{FS}}{2}+ \tilde{b_{j+1}}\cdot \frac{V_{FS}}{4}+ \frac{1}{4}V_{in,j+2}
+\end{align}$$
+
+where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundant bits*
+
+![image-20241222115022613](ad-da/image-20241222115022613.png)
+
 
 ---
 
-![image-20241022002512514](ad-da/image-20241022002512514.png)
+**Uniform Sub-Radix-2 SAR ADC**
 
-![image-20241022002448778](ad-da/image-20241022002448778.png)
+![image-20241222130625469](ad-da/image-20241222130625469.png)
 
-That is
-$$
-D_\text{out} = \sum_{i=1}^{M-1}b[i]\cdot 2s(i) +b[0]+S(M)-\sum_{i=1}^{M-1}s(i)-1
-$$
-which is valid in binary weighted search, obviously.
-
-> note $s[?]$ is not cap weight in non-binary search 
+> Minimal analog complexity, *no additional decoding effort*
 
 
-###  max recoverable error
-
-![image-20241021213926581](ad-da/image-20241021213926581.png)
-
-![image-20241021213940203](ad-da/image-20241021213940203.png)
 
 
 

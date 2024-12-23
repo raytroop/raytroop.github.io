@@ -128,9 +128,24 @@ That is, the input signal **remains the same** after chopping or squarewave up/d
 
 - *lower effective gain*: DC level at the output of the amplifiers is a bit less than what it should be
 
-
-
 - chopping artifacts at the *even harmonics*:  frequency of output is $2f_{ch}$
+
+
+
+Below we justify $A_\text{eff} = A(1-4\tau/T_\text{ch})$
+$$\begin{align}
+V_o(t) &= A + (V_0-A)e^{-t/\tau} \\
+V_o(T/2) &= -V_0
+\end{align}$$
+
+then
+$$
+V_0 = -A\frac{1-e^{-T/2\tau}}{1+e^{-T/2\tau}}
+$$
+Then DC level is
+$$
+A_\text{eff} = \frac{1}{T/2}\int_0^{T/2} V_o(t)dt = A\left(1-\frac{4\tau}{T}\cdot \frac{1-e^{-T/2\tau}}{1+e^{-T/2\tau}}\right)\approx A\left(1-\frac{4\tau}{T}\right)
+$$
 
 
 

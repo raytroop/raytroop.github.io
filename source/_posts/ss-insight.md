@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-## delay in loop transmission  
+## The Problem of "Sinusoids Running Around Loops"
 
 *TODO* &#128197;
 

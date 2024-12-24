@@ -92,11 +92,11 @@ $$
 
 - $V_{os} \gt 0$
 
-​	$I_{e1} \gt I_{e2}$: $\Delta V_{bg} \gt \alpha V_{os}$
+    ​	$I_{e1} \gt I_{e2}$: $\Delta V_{bg} \gt \alpha V_{os}$
 
 - $V_{os} \lt 0$
 
-​	$I_{e1} \lt I_{e2}$: $\Delta V_{bg} \lt \alpha V_{os}$
+    ​	$I_{e1} \lt I_{e2}$: $\Delta V_{bg} \lt \alpha V_{os}$
 
 
 ## OTA with chopper
@@ -148,7 +148,13 @@ V_{bg} &= V_T \ln \frac{I_{e1}}{I_s} + I_{e1}R_2 \\
 &= V_{bg0} +  V_T\ln\left(1+\frac{V_{os}\left(\frac{1}{R_1} + \frac{1}{R_2} \right)}{I_{e0}}  \right) + V_{os}\frac{R_1+R_2}{R_1}
 \end{align}$$
 
+Therefore, the averaged output of bandgap
 
+$$
+V_{bg,avg} = V_{bg0} +\frac{1}{2}V_T\ln\left(1-\frac{V_{os}^2\left(\frac{1}{R_1} + \frac{1}{R_2} \right)^2}{I_{e0}^2}  \right) \lt V_{bg0}
+$$
+
+$V_{bg,avg} \lt V_{bg0}$ due to nonlinearity of BJT
 
 ## ripple cancellation
 

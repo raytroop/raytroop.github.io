@@ -186,7 +186,9 @@ leakage current is determined by $R_s + R_p$, and $R_p \gg R_s$
 &#11088; B. Razavi, Y. Ran, and K. F. Lee, “Impact of Distributed Gate Resistance on the Performance of MOS Devices,”
 IEEE Trans. Circuits and Systems, Part I, pp. 750–754, Nov. 1994.
 
-&#11088; Maxim Ershov, Diakopto. "Gate Resistance in IC design flow", [[link](https://www.linkedin.com/pulse/gate-resistance-ic-design-flow-maxim-ershov), [pdf](https://diakopto.com/wp-content/uploads/Gate-Resistance-in-IC-design-flow.pdf)]
+&#11088; Maxim Ershov, Diakopto. "Gate Resistance in IC design flow", [[link](https://www.linkedin.com/pulse/gate-resistance-ic-design-flow-maxim-ershov), [pdf](https://diakopto.marsdm.com/wp-content/uploads/Gate-Resistance-in-IC-design-flow.pdf)]
+
+A.J.Sholten et al., "FinFET compact modelling for analogue and RF applications", IEDM'2010 [[https://sci-hub.se/10.1109/IEDM.2010.5703322](https://sci-hub.se/10.1109/IEDM.2010.5703322)]
 
 Saha, Samar K.. “FinFET Devices for VLSI Circuits and Systems.” (2020).
 

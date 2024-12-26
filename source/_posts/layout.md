@@ -9,6 +9,22 @@ mathjax: true
 
 
 
+## Why Your Symmetric Layouts Are Showing Mismatches in SPICE Simulations
+
+> [[https://www.ansys.com/blog/symmetric-layouts-showing-mismatches-spice-simulations](https://www.ansys.com/blog/symmetric-layouts-showing-mismatches-spice-simulations)]
+
+
+
+![figure-2](layout/figure-2-18wid=609&fmt=png-alpha&op_usm=0.9,1.png)
+
+The root cause of the delay mismatch is related to *how parasitic extraction tools distribute coupling capacitances over the nodes of the resistive networks*
+
+> The most likely reason for such asymmetry is the anisotropy of computational geometry algorithms used by extraction tools.
+
+![figure-4](layout/figure-4-13wid=609&fmt=png-alpha&op_usm=0.9,1.png)
+
+
+
 ## PERC
 
 - CD: current density checks

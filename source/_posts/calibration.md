@@ -33,6 +33,8 @@ Simon O. Haykin (2014), "Adaptive Filter Theory" Prentice-Hall, Inc. 5rd edition
 
 Diniz, P. S. R. (2020). *Adaptive Filtering: Algorithms and Practical Implementation* (5th ed.). Springer International Publishing
 
+Jiang X, ed. *Digitally-Assisted Analog and Analog-Assisted Digital IC Design*. Cambridge University Press; 2015.
+
 ---
 
 A. Chan Carusone and D. A. Johns, "Analog Filter Adaptation Using a Dithered Linear Search Algorithm," *IEEE Int. Symp. Circuits and Syst.*, May 2002. [[PDF](http://www.eecg.utoronto.ca/~tcc/iscas_02a.pdf)], [[Slides]](http://www.eecg.utoronto.ca/~tcc/iscas_02a_slides.pdf)

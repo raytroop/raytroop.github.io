@@ -11,10 +11,12 @@ mathjax: true
 
 ## The Problem of "Sinusoids Running Around Loops"
 
-*TODO* &#128197;
+The representative of Fourier transform $\frac{1}{j\omega+j\omega_0}$ back in the time domain $e^{-j\omega_0 t}$ is **infinite extent in time**
+
+> Running around a loop, chasing one's tail — these are thought pictures that only work in a discretized, time-sequenced conceptual framework that has a beginning and an end
 
 
-
+***Fix in your mind that oscillations are a type of resonance***
 
 
 > Dawson, Joel L. *A Guide to Feedback Theory*. Cambridge: Cambridge University Press, 2021.

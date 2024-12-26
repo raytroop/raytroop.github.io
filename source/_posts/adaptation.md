@@ -21,13 +21,13 @@ mathjax: true
 
 Mueller-Muller **type A** timing function
 
-![image-20241019163636292](adapt/image-20241019163636292.png)
+![image-20241019163636292](adaptation/image-20241019163636292.png)
 
 
 
 Mueller-Muller **type B** timing function
 
-![image-20241019163813449](adapt/image-20241019163813449.png)
+![image-20241019163813449](adaptation/image-20241019163813449.png)
 
 
 
@@ -95,11 +95,11 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 
 
-![image-20240807233152154](adapt/image-20240807233152154.png)
+![image-20240807233152154](adaptation/image-20240807233152154.png)
 
-![image-20240812205534753](adapt/image-20240812205534753.png)
+![image-20240812205534753](adaptation/image-20240812205534753.png)
 
-![image-20240812205613467](adapt/image-20240812205613467.png)
+![image-20240812205613467](adaptation/image-20240812205613467.png)
 
 > [IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes Beyond 100 Gb/s [https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf](https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf)]
 >
@@ -122,19 +122,19 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 
 
 
-![image-20240824193839108](adapt/image-20240824193839108.png)
+![image-20240824193839108](adaptation/image-20240824193839108.png)
 
 
 
 ## Mueller-Muller CDR
 
-![image-20240812222307061](adapt/image-20240812222307061.png)
+![image-20240812222307061](adaptation/image-20240812222307061.png)
 
 
 
 MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
 
-![image-20240807230029591](adapt/image-20240807230029591.png)
+![image-20240807230029591](adaptation/image-20240807230029591.png)
 
 
 
@@ -156,23 +156,23 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 >
 > Jaeduk Han, "Design and Automatic Generation of 60Gb/s Wireline Transceivers" [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf)]
 
-![image-20240810095006113](adapt/image-20240810095006113.png)
+![image-20240810095006113](adaptation/image-20240810095006113.png)
 
-![image-20240808001201612](adapt/image-20240808001201612.png)
-
-
-![image-20240808001256515](adapt/image-20240808001256515.png)
+![image-20240808001201612](adaptation/image-20240808001201612.png)
 
 
-![image-20240808001449664](adapt/image-20240808001449664.png)
+![image-20240808001256515](adaptation/image-20240808001256515.png)
 
-![image-20240808001501485](adapt/image-20240808001501485.png)
+
+![image-20240808001449664](adaptation/image-20240808001449664.png)
+
+![image-20240808001501485](adaptation/image-20240808001501485.png)
 
 
 
 ## SS-MM CDR
 
-![image-20240807232814202](adapt/image-20240807232814202.png)
+![image-20240807232814202](adaptation/image-20240807232814202.png)
 
 
 
@@ -188,7 +188,7 @@ $h_1$ is **necessary**
 
   Consequently, it suffers from a severe *multiple-locking problem with an adaptive DFE*
 
-![image-20240812232618238](adapt/image-20240812232618238.png)
+![image-20240812232618238](adaptation/image-20240812232618238.png)
 
 
 

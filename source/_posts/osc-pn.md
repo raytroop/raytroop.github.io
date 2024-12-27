@@ -253,7 +253,19 @@ Fractional-N frequency synthesizers exhibit strange moving spurs and pulsating s
 
 ![image-20241227233228376](osc-pn/image-20241227233228376.png)
 
-![image-20241227233207383](osc-pn/image-20241227233207383.png)
+![image-20241228022311313](osc-pn/image-20241228022311313.png)
+
+---
+
+If keep $\phi_{rms}$ in $R_x(\tau)$, i.e.
+$$
+R_x(\tau)=\frac{A^2}{2}e^{-\phi_{rms}^2}\cos(2\pi f_0 \tau)e^{R_\phi(\tau)}\approx \frac{A^2}{2}e^{-\phi_{rms}^2}\cos(2\pi f_0 \tau)(1+R_\phi(\tau))
+$$
+The PSD of the signal is
+$$
+S_x(f) = \mathcal{F} \{ R_x(\tau) \} = \frac{P_c}{2}e^{-\phi_{rms}^2}\left[S_\phi(f+f_0)+S_\phi(f-f_0)\right] + \frac{P_c}{2}e^{-\phi_{rms}^2}\left[\delta(f+f_0)+\delta(f-f_0)\right]
+$$
+above Eq cannot handle stationary white noise process - following section
 
 
 

@@ -70,6 +70,20 @@ Therefore, sideband is asymmetric if $\omega_{pm} = \omega_{am}$
 
 ![image-20241107202647998](comm/image-20241107202647998.png)
 
+---
+
+***Proof of the PSD of Narrow band FM signal***  
+
+![image-20241228020953646](comm/image-20241228020953646.png)
+$$
+R_x(\tau) = \frac{A^2}{2}\cos(2\pi f_0\tau) +  \frac{A^2}{2}R_\phi(\tau)\cos(2\pi f_0\tau)
+$$
+The PSD of the signal x(t) is given by
+$$
+S_x(f) = \mathcal{F}\{R_x(\tau)\} = \frac{P_c}{2}\left[\delta(f+f_0)+\delta(f-f_0)\right]+\frac{P_c}{2}\left[S_\phi(f+f_0)+S_\phi(f-f_0)\right]
+$$
+where $P_c = A^2/2$ is the carrier power of the signal
+
 
 
 ### modulated with a deterministic cosine

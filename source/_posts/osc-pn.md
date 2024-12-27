@@ -289,7 +289,13 @@ After nontrivial derivation
 
 ![image-20241207104018395](osc-pn/image-20241207104018395.png)
 
+![image-20241227205459845](osc-pn/image-20241227205459845.png)
 
+
+
+
+
+---
 
 > ![image-20241207103912086](osc-pn/image-20241207103912086.png)
 
@@ -333,6 +339,8 @@ i.e., $E[\sin(\zeta(t,\tau))]$ is *odd function*, therefore $E[\sin(\zeta(t,\tau
 Finally, we obtain
 
 ![image-20241207114053083](osc-pn/image-20241207114053083.png)
+
+![image-20241227210018613](osc-pn/image-20241227210018613.png)
 
 ![image-20241207114805792](osc-pn/image-20241207114805792.png)
 

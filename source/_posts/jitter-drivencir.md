@@ -39,7 +39,7 @@ Jpp =
 
 For DJ, we usually use peak to peak value
 
-> BTW, the psd value at half of fundamental frequency ($f_s/2$) is duty cycle distortion due to the NMOS/PMOS imbalance
+> BTW, the psd value at half of fundamental frequency ($f_s/2$) is ~~duty cycle distortion due to the NMOS/PMOS imbalance~~, *because of rising only data*
 
 
 

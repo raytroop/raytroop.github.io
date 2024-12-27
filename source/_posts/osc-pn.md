@@ -1,5 +1,5 @@
 ---
-title: Jitter and Phase Noise in Oscillators
+title: Phase Noise in Oscillators
 date: 2024-10-16 12:16:48
 tags:
 categories:

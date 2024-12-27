@@ -249,9 +249,15 @@ Fractional-N frequency synthesizers exhibit strange moving spurs and pulsating s
 
 
 
+## Phase perturbed by a stationary noise with Gaussian PDF
+
+![image-20241227233228376](osc-pn/image-20241227233228376.png)
+
+![image-20241227233207383](osc-pn/image-20241227233207383.png)
 
 
-## Phase perturbed by a stationary white noise process
+
+## Phase perturbed by a stationary WHITE noise process
 
 
 
@@ -387,4 +393,6 @@ Chembiyan T, "Brownian Motion And The Oscillator Phase Noise" [[link](https://ww
 —, "Jitter and Phase Noise in Phase Locked Loops" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_jitter-and-phase-noise-activity-7031985595304345600-uSx3?utm_source=share&utm_medium=member_desktop)]
 
 —, "PLLs and reference spurs" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_pll-rfdesign-circuits-activity-7111435571448713216-9jng?utm_source=share&utm_medium=member_desktop)]
+
+Godone, A. & Micalizio, Salvatore & Levi, Filippo. (2008). RF spectrum of a carrier with a random phase modulation of arbitrary slope. [[https://sci-hub.se/10.1088/0026-1394/45/3/008](https://sci-hub.se/10.1088/0026-1394/45/3/008)]
 

@@ -39,7 +39,7 @@ Jpp =
 
 For DJ, we usually use peak to peak value
 
-> BTW, the psd value at half of fundamental frequency ($f_s/2$) is misleading and ambiguity, we won't use this value
+> BTW, the psd value at half of fundamental frequency ($f_s/2$) is duty cycle distortion due to the NMOS/PMOS imbalance
 
 
 
@@ -183,3 +183,9 @@ $$
 Article (20500632) Title: How to simulate Random and Deterministic Jitters URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI
 
 Spectre Tech Tips: Measuring Noise in Digital Circuits - Analog/Custom Design - Cadence Blogs - Cadence Community [https://community.cadence.com/cadence_blogs_8/b/cic/posts/s . . .](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)
+
+
+
+J. Kim et al., "A 112 Gb/s PAM-4 56 Gb/s NRZ Reconfigurable Transmitter With Three-Tap FFE in 10-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 54, no. 1, pp. 29-42, Jan. 2019, doi: 10.1109/JSSC.2018.2874040
+
+— et al., "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 57, no. 1, pp. 6-20, Jan. 2022, doi: 10.1109/JSSC.2021.3108969

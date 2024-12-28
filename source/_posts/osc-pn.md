@@ -85,69 +85,6 @@ $$
 
 
 
-## narrowband approximation & limitation
-
-A sine wave with phase modulation is expressed as
-$$
-y(t) = A_0 \sin(2\pi f_0 t + \phi _0 +\phi (t))
-$$
-where $\phi (t)$ is a time-varying phase modulation function
-
-
-
-Assuming a *narrowband phase modulation (PM)*, that is, the absolute amount of modulated phase is small enough
-
-> *otherwise the modulation becomes frequency modulation (FM) and its analysis becomes more complex*
-
-$$
-y(t) \simeq A_0 \sin(2\pi f_0 t +\phi _0) + A_0 \phi (t)\cos(2\pi f_0 t + \phi _0)
-$$
-
-> Because $\cos \phi(t)$ and $\sin \phi(t)$ are approximated to $1$ and $\phi (t)$, respectively
-
-
-
-The Fourier transform of $y(t)$ is
-$$
-Y(f) = \frac{1}{2}A_0 e^{j\phi _0}\delta(f-f_0) -\frac{1}{2}A_0e^{-j\phi_0}\delta(f+f_0)+\frac{1}{2}A_0e^{j\phi_0}\Phi(f-f_0)-\frac{1}{2}A_0e^{-j\phi_0}\Phi(f+f_0)
-$$
-
-> where $\Phi(f)$ is the Fourier transform pair of $\phi(t)$
-
-
-
-The autocorrelation of $y(t)$ is
-
-$$\begin{align}
-R(\tau) &= E(y(t)y(t+\tau))\\
-&= E([A_0\sin(2\pi f_0 t + \phi_0)+A_0\phi(t)\cos(2\pi f_0 t+\phi _0)]\\
-&= \frac{1}{2}A_0^2 \cos(2\pi f_0 \tau)(1+R_{\phi}(\tau))
-\end{align}$$
-
-Fourier transform of $R(\tau)$ is
-$$
-S_y(f) = \frac{1}{4}A_0^2 \delta (f-f_0) + \frac{1}{4}A_0\delta(f+f_0) + \frac{1}{4}A_0^2S_\phi (f-f_0)+\frac{1}{4}A_0^2S_\phi (f+f_0)
-$$
-![image-20240511221119938](osc-pn/image-20240511221119938.png)
-
-
-
-> Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
-
-
-
----
-
-
-
-**approximation limitation**
-
-**Don't** retain the same total power
-
-![image-20240720101133749](osc-pn/image-20240720101133749.png)
-
-
-
 ## Leeson's model
 
 Leeson's equation is an *empirical* expression that describes an oscillator's phase noise spectrum
@@ -408,3 +345,4 @@ Chembiyan T, "Brownian Motion And The Oscillator Phase Noise" [[link](https://ww
 
 Godone, A. & Micalizio, Salvatore & Levi, Filippo. (2008). RF spectrum of a carrier with a random phase modulation of arbitrary slope. [[https://sci-hub.se/10.1088/0026-1394/45/3/008](https://sci-hub.se/10.1088/0026-1394/45/3/008)]
 
+Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)

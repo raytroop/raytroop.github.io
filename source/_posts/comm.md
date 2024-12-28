@@ -60,19 +60,12 @@ Therefore, sideband is asymmetric if $\omega_{pm} = \omega_{am}$
 
 
 
-## Modulation of WSS process
+## Narrowband FM Approximation
 
-> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)
+$$
+y(t) = A\cos(2\pi f_0t+\phi_n(t)) \approx A \cos(2\pi f_0 t) - A \phi_n (t)\sin(2\pi f_0 t)
+$$
 
-
-
-### modulated with a random cosine
-
-![image-20241107202647998](comm/image-20241107202647998.png)
-
----
-
-***Proof of the PSD of Narrow band FM signal***  
 
 ![image-20241228020953646](comm/image-20241228020953646.png)
 $$
@@ -84,6 +77,19 @@ S_x(f) = \mathcal{F}\{R_x(\tau)\} = \frac{P_c}{2}\left[\delta(f+f_0)+\delta(f-f_
 $$
 where $P_c = A^2/2$ is the carrier power of the signal
 
+
+
+
+
+## Modulation of WSS process
+
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)
+
+
+
+### modulated with a random cosine
+
+![image-20241107202647998](comm/image-20241107202647998.png)
 
 
 ### modulated with a deterministic cosine

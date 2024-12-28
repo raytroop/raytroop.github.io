@@ -31,9 +31,17 @@ B. Farhang-Boroujeny (2013), *Adaptive Filters: Theory and Applications* (2nd ed
 
 Simon O. Haykin (2014), "Adaptive Filter Theory" Prentice-Hall, Inc. 5rd edition
 
-Diniz, P. S. R. (2020). *Adaptive Filtering: Algorithms and Practical Implementation* (5th ed.). Springer International Publishing
+Diniz, P. S. R. (2020). *Adaptive Filtering: Algorithms and Practical Implementation* (5th ed.). Springer
 
 Jiang X, ed. *Digitally-Assisted Analog and Analog-Assisted Digital IC Design*. Cambridge University Press; 2015.
+
+Albert Jerng. ISSCC2012 T7: *Digital Calibration for RF Transceivers* [[pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T7.pdf)]
+
+Ahmed M. A. Ali. ISSCC2021 T5: *Calibration Techniques in ADCs* [[pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
+
+Salvatore Levantino. ISSCC2024 T5: *Calibration Techniques in PLLs* [[pdf](https://www.nishanchettri.com/isscc-slides/2024%20ISSCC/TUTORIALS/T5.pdf)]
+
+
 
 ---
 

@@ -265,7 +265,7 @@ The PSD of the signal is
 $$
 S_x(f) = \mathcal{F} \{ R_x(\tau) \} = \frac{P_c}{2}e^{-\phi_{rms}^2}\left[S_\phi(f+f_0)+S_\phi(f-f_0)\right] + \frac{P_c}{2}e^{-\phi_{rms}^2}\left[\delta(f+f_0)+\delta(f-f_0)\right]
 $$
-above Eq cannot handle stationary white noise process - following section
+&#10071;&#10071;above Eq **isn't** consistent with stationary white noise process - the following section
 
 
 

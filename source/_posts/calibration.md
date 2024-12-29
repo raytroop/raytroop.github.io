@@ -25,6 +25,22 @@ mathjax: true
 
 
 
+
+
+## Digital DC Offset Correction
+
+![image-20241229122711845](calibration/image-20241229122711845.png)
+$$
+X- Y\cdot \beta z^{-1}\cdot \frac{1}{1-z^{-1}} = Y
+$$
+therefore
+$$
+\frac{Y}{X} = \frac{1-z^{-1}}{1-(1-\beta)z^{-1}}
+$$
+
+
+
+
 ## reference
 
 B. Farhang-Boroujeny (2013), *Adaptive Filters: Theory and Applications* (2nd ed.). John Wiley & Sons, Inc.
@@ -40,8 +56,6 @@ Albert Jerng. ISSCC2012 T7: *Digital Calibration for RF Transceivers* [[pdf](htt
 Ahmed M. A. Ali. ISSCC2021 T5: *Calibration Techniques in ADCs* [[pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
 
 Salvatore Levantino. ISSCC2024 T5: *Calibration Techniques in PLLs* [[pdf](https://www.nishanchettri.com/isscc-slides/2024%20ISSCC/TUTORIALS/T5.pdf)]
-
-
 
 ---
 

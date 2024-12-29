@@ -103,7 +103,7 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 
 > A. Sheikholeslami, "Voltage Follower, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
 >
-> Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing.
+> Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiYDzqDOfoPaMVM.pdf)]
 
 
 

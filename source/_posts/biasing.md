@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+## replica biasing
+
+*TODO* &#128197;
+
+
+
+
+
 ## current mirror with source follower
 
 ![icurrent_sf.drawio](biasing/icurrent_sf.drawio.svg)

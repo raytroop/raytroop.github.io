@@ -105,10 +105,12 @@ Eric Chang, Prof. Elad Alon EE240B HW3 [https://inst.eecs.berkeley.edu/~ee240b/s
 
 Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ), Operational Amplifiers [http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf](http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf)
 
-B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between frequency response and settling time of operational amplifiers," in IEEE Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974, doi: 10.1109/JSSC.1974.1050527.
-
-B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between frequency response and settling time of operational amplifiers," in IEEE Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974, doi: 10.1109/JSSC.1974.1050527.
-
-P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17, no. 6, pp. 969-982, Dec. 1982, doi: 10.1109/JSSC.1982.1051851.
-
 SERGIO FRANCO, Demystifying pole-zero doublets URL:[https://www.edn.com/demystifying-pole-zero-doublets/](https://www.edn.com/demystifying-pole-zero-doublets/)
+
+---
+
+B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between frequency response and settling time of operational amplifiers," in IEEE Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974, [[https://sci-hub.se/10.1109/JSSC.1974.1050527](https://sci-hub.se/10.1109/JSSC.1974.1050527)]
+
+P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17, no. 6, pp. 969-982, Dec. 1982, [[https://sci-hub.se/10.1109/JSSC.1982.1051851](https://sci-hub.se/10.1109/JSSC.1982.1051851)]
+
+—. 2024. Analysis and Design of Analog Integrated Circuits, 6th Edition. Wiley Publishing

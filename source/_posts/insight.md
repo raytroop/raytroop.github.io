@@ -21,6 +21,8 @@ mathjax: true
 *TODO* &#128197;
 
 
+
+
 ## Transmission Gate
 
 **Equivalent Resistance** is defined by **large signal**

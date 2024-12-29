@@ -235,6 +235,8 @@ Operational Transconductance Amplifier II Multi-Stage Designs [[https://people.e
 
 Toshiba, Load Transient Response of LDO and Methods to Improve it Application Note [[https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268](https://toshiba.semicon-storage.com/info/application_note_en_20210326_AKX00312.pdf?did=66268)]
 
+Carusone, Tony Chan, David Johns, and Kenneth Martin. *Analog integrated circuit design*. John wiley & sons, 2011. [[https://mrce.in/ebooks/Analog%20Integrated%20Circuit%20Design%202nd%20Ed.pdf](https://mrce.in/ebooks/Analog%20Integrated%20Circuit%20Design%202nd%20Ed.pdf)]
+
 ---
 
 Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators" [[https://uofi.app.box.com/v/CICC15-LDO](https://uofi.app.box.com/v/CICC15-LDO)]
@@ -243,6 +245,6 @@ Mingoo Seok. ISSCC 2020 T7: "Basics of Digital Low-Dropout (LDO) Integrated Volt
 
 Yan Lu, ISSCC2021 T10: "Fundamentals of Fully Integrated Voltage Regulators" [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf)]
 
-Hyun-Sik Kim, Low-Dropout (LDO) Voltage Regulators – From Basics to Recent Design Trends (presented in A-SSCC 2022) [[https://www.theise.org/wp-content/uploads/2023/10/Analog_4_%EA%B9%80%ED%98%84%EC%8B%9D%EA%B5%90%EC%88%98%EB%8B%98_KAIST_LectureNote-%EB%B0%B0%ED%8F%AC%EC%9A%A9-Min-Jae-Seo.pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_4_%EA%B9%80%ED%98%84%EC%8B%9D%EA%B5%90%EC%88%98%EB%8B%98_KAIST_LectureNote-%EB%B0%B0%ED%8F%AC%EC%9A%A9-Min-Jae-Seo.pdf)]
+Hyun-Sik Kim, Low-Dropout (LDO) Voltage Regulators – From Basics to Recent Design Trends (presented in A-SSCC 2022) [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_4_%EA%B9%80%ED%98%84%EC%8B%9D%EA%B5%90%EC%88%98%EB%8B%98_KAIST_LectureNote-%EB%B0%B0%ED%8F%AC%EC%9A%A9-Min-Jae-Seo.pdf)]
 
-Carusone, Tony Chan, David Johns, and Kenneth Martin. *Analog integrated circuit design*. John wiley & sons, 2011. [[https://mrce.in/ebooks/Analog%20Integrated%20Circuit%20Design%202nd%20Ed.pdf](https://mrce.in/ebooks/Analog%20Integrated%20Circuit%20Design%202nd%20Ed.pdf)]
+A. Raychowdhury. ISSCC 2024 T2: Fundamentals of Digital and Digitally-Assisted Linear Voltage Regulators

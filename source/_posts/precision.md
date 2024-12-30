@@ -147,7 +147,7 @@ $$
 A_\text{eff} = \frac{1}{T/2}\int_0^{T/2} V_o(t)dt = A\left(1-\frac{4\tau}{T}\cdot \frac{1-e^{-T/2\tau}}{1+e^{-T/2\tau}}\right)\approx A\left(1-\frac{4\tau}{T}\right)
 $$
 
-
+where assuming $\tau \ll T$
 
 > REF. [[https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge](https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge)]
 

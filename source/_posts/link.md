@@ -7,6 +7,16 @@ categories:
 mathjax: true
 ---
 
+## Modulation and SNR
+
+Data and noise mutually **uncorrelated**
+
+$$
+x_{RX,n}[p] = d[p]h_{RX}[0] +\sum \text{ISI} + n[p]
+$$
+
+
+
 
 ## CDR Loop Latency
 
@@ -745,6 +755,8 @@ Akihide Sai. ISSCC 2023, T5 "All Digital Plls From Fundamental Concepts To Futur
 J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006  [[https://sci-hub.se/10.1109/JSSC.2006.875292](https://sci-hub.se/10.1109/JSSC.2006.875292)]
 
 —, "A digital clock and data recovery architecture for multi-gigabit/s binary links," *Proceedings of the IEEE 2005 Custom Integrated Circuits Conference, 2005.*. [[https://sci-hub.se/10.1109/CICC.2005.1568725](https://sci-hub.se/10.1109/CICC.2005.1568725)]
+
+Fernando De Bernardinis, eSilicon. "Introduction to DSP Based Serial Links" [[https://www.corsi.univr.it/documenti/OccorrenzaIns/matdid/matdid835215.pdf](https://www.corsi.univr.it/documenti/OccorrenzaIns/matdid/matdid835215.pdf)]
 
 ---
 

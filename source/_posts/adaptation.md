@@ -91,7 +91,7 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 
 
-## Maximum Likelihood Sequence Estimation (MLSE)
+## Maximum Likelihood Sequence Estimator (MLSE)
 
 
 

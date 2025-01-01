@@ -32,6 +32,13 @@ mathjax: true
 > [[https://www.ece.ucdavis.edu/~ramirtha/EEC116/F11/TGlecture.pdf](https://www.ece.ucdavis.edu/~ramirtha/EEC116/F11/TGlecture.pdf)]
 
 
+
+## Device Current Components
+
+![image-20250101101419687](insight/image-20250101101419687.png)
+
+
+
 ## common gate amplifiers
 
 ![No alt text provided for this image](insight/1699196508319.jpeg)

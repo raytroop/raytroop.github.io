@@ -7,6 +7,8 @@ categories:
 mathjax: true
 ---
 
+
+
 ## Modulation and SNR
 
 Data and noise mutually **uncorrelated**
@@ -14,6 +16,10 @@ Data and noise mutually **uncorrelated**
 $$
 x_{RX,n}[p] = d[p]h_{RX}[0] +\sum \text{ISI} + n[p]
 $$
+
+![image-20250101105936807](link/image-20250101105936807.png)
+
+![image-20250101110902006](link/image-20250101110902006.png)
 
 
 
@@ -785,3 +791,7 @@ Deog-Kyoon Jeong Topics in IC(Wireline Transceiver Design) - 3.1. Introduction t
 —, Topics in IC(Wireline Transceiver Design) - 6.1 Introduction to Clock and Data Recovery [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
 
 High-speed Serial Interface Lect. 16 – Clock and Data Recovery 3 [[http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf](http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf)]
+
+Shiva Kiran. Phd thesis 2018. Modeling and Design of Architectures for High-Speed ADC-Based Serial Links [[https://hdl.handle.net/1969.1/192031](https://hdl.handle.net/1969.1/192031)]
+
+—, *et al*., "Modeling of ADC-Based Serial Link Receivers With Embedded and Digital Equalization," in *IEEE Transactions on Components, Packaging and Manufacturing Technology*, vol. 9, no. 3, pp. 536-548, March 2019 [[https://sci-hub.se/10.1109/TCPMT.2018.2853080](https://sci-hub.se/10.1109/TCPMT.2018.2853080)]

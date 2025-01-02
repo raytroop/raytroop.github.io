@@ -7,6 +7,14 @@ categories:
 mathjax: true
 ---
 
+## Trellis Coding
+
+*TODO* &#128197;
+
+
+## Convolutional Code
+
+*TODO* &#128197;
 
 
 ## Modulation and SNR
@@ -22,6 +30,7 @@ $$
 ![image-20250101110902006](link/image-20250101110902006.png)
 
 
+> "ISI cancellation" based equalization is conceptually more straightforward but suffers from SNR penalty or error propagation
 
 
 ## CDR Loop Latency
@@ -795,3 +804,11 @@ High-speed Serial Interface Lect. 16 – Clock and Data Recovery 3 [[http://tera
 Shiva Kiran. Phd thesis 2018. Modeling and Design of Architectures for High-Speed ADC-Based Serial Links [[https://hdl.handle.net/1969.1/192031](https://hdl.handle.net/1969.1/192031)]
 
 —, *et al*., "Modeling of ADC-Based Serial Link Receivers With Embedded and Digital Equalization," in *IEEE Transactions on Components, Packaging and Manufacturing Technology*, vol. 9, no. 3, pp. 536-548, March 2019 [[https://sci-hub.se/10.1109/TCPMT.2018.2853080](https://sci-hub.se/10.1109/TCPMT.2018.2853080)]
+
+John M. Cioffi. "Decoding Methods" [[https://cioffi-group.stanford.edu/doc/book/chap7.pdf](https://cioffi-group.stanford.edu/doc/book/chap7.pdf)]
+
+—. "Equalization" [[https://cioffi-group.stanford.edu/doc/book/chap3.pdf](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)]
+
+Iain. [[https://youtu.be/rnjy4_gXLAg?si=PC3aowaon-e_mhXX](https://youtu.be/rnjy4_gXLAg?si=PC3aowaon-e_mhXX)]
+
+—. [[https://youtu.be/IJE94FhyygM?si=BMMQ-GmirBWNf4ep](https://youtu.be/IJE94FhyygM?si=BMMQ-GmirBWNf4ep)]

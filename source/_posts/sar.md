@@ -216,12 +216,16 @@ $$\begin{align}
 
 ![image-20241021214922564](sar/image-20241021214922564.png)
 
-a global clock running at the sample rate is still used for an **uniform sampling**
+![image-20250102225355547](sar/image-20250102225355547.png)
 
-> The concept of asynchronous processing is to trigger the internal comparison from MSB to LSB like
-> *dominoes*. 
+![image-20250102225426799](sar/image-20250102225426799.png)
 
-The maximum resolving time reduction between synchronous and asynchronous case is ***two fold***  
+
+
+The maximum resolving time reduction between synchronous and asynchronous case is ***two fold***
+
+
+
 
 
 

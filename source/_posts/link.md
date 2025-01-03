@@ -33,6 +33,15 @@ $$
 > "ISI cancellation" based equalization is conceptually more straightforward but suffers from SNR penalty or error propagation
 
 
+
+## Jitter Amplification by Passive Channels
+
+
+
+![image-20250103215417021](link/image-20250103215417021.png)
+
+
+
 ## CDR Loop Latency
 
 ![image-20241102235118149](link/image-20241102235118149.png)

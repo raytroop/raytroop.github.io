@@ -7,9 +7,100 @@ categories:
 mathjax: true
 ---
 
-## Free-running Oscillator
+
+
+## Definition of Phase Noise
+
+![image-20250103220312991](osc-pn/image-20250103220312991.png)
+
+
+
+> Eq. (3.25) is widely adopted by industry and academia
+>
+> *using the narrow angle assumption*, the two definitions above are equivalent
+>
+> If the *narrow angle* condition is not satisfied, however, the two definitions differ
+
+
+
+## Phase Noise Profile
+
+- $1/f^2$ Phase Noise Profile
+
+  white noise
+
+- $1/f^3$ Phase Noise Profile
+
+  the low frequency behavior of a free-running oscillator with **internal flicker noise sources** 
+
+
+
+## Free-running Oscillator & Lorentzian
+
+
 
 *TODO* &#128197;
+
+![image-20250103224818171](osc-pn/image-20250103224818171.png)
+
+> Note that $f_{min}$ is related to the observation time. The longer we observe the device under test, the smaller $f_{min}$ must be
+
+
+
+---
+
+![image-20240720134811859](osc-pn/image-20240720134811859.png)
+
+We typically use the two spectra, $S_{\phi n}(f)$ and $S_{out}(f)$, interchangeably, but we must resolve these inconsistencies. **voltage spectrum**  is called **Lorentzian spectrum**
+
+
+
+---
+
+
+
+The periodic signal $x(t)$ can be expanded in Fourier series as:
+
+![image-20240720141514040](osc-pn/image-20240720141514040.png)
+
+Assume that the signal is subject to *excess phase noise*, which is modeled by adding a **time-dependent** noise component $\alpha(t)$. The noisy signal can be written $x(t+\alpha(t))$, the added excess phase $\phi(t)= \frac{\alpha(t)}{\omega_0}$
+
+
+
+> ![image-20250103211650043](osc-pn/image-20250103211650043.png)
+
+
+
+The autocorrelation of the noisy signal is by definition:
+
+![image-20240720141525576](osc-pn/image-20240720141525576.png)
+
+The *autocorrelation averaged over time* results in:
+
+![image-20240720141659415](osc-pn/image-20240720141659415.png)
+
+By taking the Fourier transform of the autocorrelation, the spectrum of the signal $x(t + \alpha(t))$​ can be expressed as
+
+![image-20240720141813256](osc-pn/image-20240720141813256.png)
+
+It is also interesting to note how the integral in Equation 9.80 around each harmonic is equal to the power of the harmonic itself $|X_n|^2$
+
+The integral $S_x(f)$ around harmonic is
+$$\begin{align}
+P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\omega_0^4n^4c^2+(\omega +n\omega_0)^2}df \\
+&= |X_n|^2\int_{\Delta f=-\infty}^{\infty}\frac{2\beta}{\beta^2+(2\pi\cdot\Delta f)^2}d\Delta f \\
+&= |X_n|^2\frac{1}{\pi}\arctan(\frac{2\pi \Delta f}{\beta})|_{-\infty}^{\infty} \\
+&= |X_n|^2
+\end{align}$$
+
+
+
+***The phase noise does not affect the total power in the signal, it only affects its distribution***
+
+- Without phase noise, $S_v(f)$ is a series of impulse functions at the harmonics of $f_o$. 
+- With phase noise, the impulse functions spread, becoming fatter and shorter but retaining the *same total power*
+
+
 
 
 ## Reference Spur
@@ -86,68 +177,6 @@ $$
 
 *TODO* &#128197;
 
-
-
-## Leeson's model
-
-Leeson's equation is an *empirical* expression that describes an oscillator's phase noise spectrum
-
-![image-20240718230819186](osc-pn/image-20240718230819186.png)
-
-Limitation:
-
-​	that the PSD diverges to *infinity* for very low values of the frequency offset $f$​
-
-
-
-## Lorentzian Spectrum
-
-![image-20240720134811859](osc-pn/image-20240720134811859.png)
-
-We typically use the two spectra, $S_{\phi n}(f)$ and $S_{out}(f)$, interchangeably, but we must resolve these inconsistencies. **voltage spectrum**  is called **Lorentzian spectrum**
-
-
-
----
-
-
-
-The periodic signal $x(t)$ can be expanded in Fourier series as:
-
-![image-20240720141514040](osc-pn/image-20240720141514040.png)
-
-Assume that the signal is subject to *excess phase noise*, which is modeled by adding a **time-dependent** noise component $\alpha(t)$. The noisy signal can be written $x(t+\alpha(t))$, the added excess phase $\phi(t)= \frac{\alpha(t)}{\omega_0}$
-
-> The key observation is that the excess phase of a free-runing oscillator is produced by the steady accumulation of uncorrelated circuit noise over cycles
-
-The autocorrelation of the noisy signal is by definition:
-
-![image-20240720141525576](osc-pn/image-20240720141525576.png)
-
-The *autocorrelation averaged over time* results in:
-
-![image-20240720141659415](osc-pn/image-20240720141659415.png)
-
-By taking the Fourier transform of the autocorrelation, the spectrum of the signal $x(t + \alpha(t))$​ can be expressed as
-
-![image-20240720141813256](osc-pn/image-20240720141813256.png)
-
-It is also interesting to note how the integral in Equation 9.80 around each harmonic is equal to the power of the harmonic itself $|X_n|^2$
-
-The integral $S_x(f)$ around harmonic is
-$$\begin{align}
-P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\omega_0^4n^4c^2+(\omega +n\omega_0)^2}df \\
-&= |X_n|^2\int_{\Delta f=-\infty}^{\infty}\frac{2\beta}{\beta^2+(2\pi\cdot\Delta f)^2}d\Delta f \\
-&= |X_n|^2\frac{1}{\pi}\arctan(\frac{2\pi \Delta f}{\beta})|_{-\infty}^{\infty} \\
-&= |X_n|^2
-\end{align}$$
-
-
-
-***The phase noise does not affect the total power in the signal, it only affects its distribution***
-
-- Without phase noise, $S_v(f)$ is a series of impulse functions at the harmonics of $f_o$. 
-- With phase noise, the impulse functions spread, becoming fatter and shorter but retaining the *same total power*
 
 
 
@@ -351,3 +380,6 @@ Chembiyan T, "Brownian Motion And The Oscillator Phase Noise" [[link](https://ww
 Godone, A. & Micalizio, Salvatore & Levi, Filippo. (2008). RF spectrum of a carrier with a random phase modulation of arbitrary slope. [[https://sci-hub.se/10.1088/0026-1394/45/3/008](https://sci-hub.se/10.1088/0026-1394/45/3/008)]
 
 Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
+
+Akihide Sai, Toshiba. ISSCC 2023 T5: All-digital PLLs From Fundamental Concepts to Future Trends [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T5.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T5.pdf)]
+

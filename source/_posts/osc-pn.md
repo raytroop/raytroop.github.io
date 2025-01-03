@@ -113,7 +113,9 @@ The periodic signal $x(t)$ can be expanded in Fourier series as:
 
 ![image-20240720141514040](osc-pn/image-20240720141514040.png)
 
-Assume that the signal is subject to excess phase noise, which is modeled by adding a time-dependent noise component $\alpha(t)$. The noisy signal can be written $x(t+\alpha(t))$, the added excess phase $\phi(t)= \frac{\alpha(t)}{\omega_0}$
+Assume that the signal is subject to *excess phase noise*, which is modeled by adding a **time-dependent** noise component $\alpha(t)$. The noisy signal can be written $x(t+\alpha(t))$, the added excess phase $\phi(t)= \frac{\alpha(t)}{\omega_0}$
+
+> The key observation is that the excess phase of a free-runing oscillator is produced by the steady accumulation of uncorrelated circuit noise over cycles
 
 The autocorrelation of the noisy signal is by definition:
 

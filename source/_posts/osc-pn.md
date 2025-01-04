@@ -81,6 +81,10 @@ $$
 
 ![image-20250104091109521](osc-pn/image-20250104091109521.png)
 
+---
+
+![image-20250104111025626](osc-pn/image-20250104111025626.png)
+
 
 
 ## Lorentzian spectrum 
@@ -133,121 +137,13 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 
 
-## Reference Spur
 
-**spurs** are carrier or clock frequency spectral imperfections measured in the frequency domain just like phase noise. However, unlike phase noise they are *discrete* frequency components.
-
-- Spurs are deterministic
-
-- Spur power is independent of bandwidth
-
-- Spurs contribute bounded peak jitter in the time domain
-
-
-
-***Sources of Spurs:***
-
-- External (coupling from other noisy block)
-  Supply, substrate, bond wires, etc.
-- Internal (int-N/fractional-N operation)
-  - **Frac spur**: Fractional divider (multi-modulus and frequency accumulation)
-  - **Ref. spur**: PFD/charge pump/analog loop filter non-idealities, clock coupling
-
-
-
-### LPF gate leakage
-
-![image-20241222192007824](osc-pn/image-20241222192007824.png)
-
-
-
-For the sake of simplicity, $V_{ctr}$ looks like a rectangular pulse with an amplitude of $I_{CP}R_1$ and a duty ratio of ($I_{leak}/I_{CP}$), whose first coefficient of Fourier series is
-
-![image-20241222200514941](osc-pn/image-20241222200514941.png)
-
-where $I_\text{leak} \ll I_{CP}$ is assumed
-
-Then, the *peak* frequency deviation $\Delta f$
-$$
-\Delta f = a_1 \cdot K_v = 2I_\text{leak}R_1 K_v
-$$
-using narrowband FM approximation, we have 
-$$
-P_\text{spur} = 20\log\left(\frac{\Delta f}{2f_\text{ref}}\right) = 20\log\left(\frac{I_\text{leak}R_1 K_v}{f_\text{ref}}\right)
-$$
-
-
-
-
-> W. Rhee, "Design of high-performance CMOS charge pumps in phase-locked loops," *1999 IEEE International Symposium on Circuits and Systems (ISCAS)*, Orlando, FL, USA, 1999, pp. 545-548 vol.2 [[pdf](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3006edc15fdef2e71674d4170c10c62fd69f96a3)]
->
-> —. Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons
-
-
-
----
-
-![image-20241222200158107](osc-pn/image-20241222200158107.png)
-
-> [[https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html](https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html)]
-
-
-
-## Fractional Spur
-
-*TODO* &#128197;
-
-
-
-
-
->>>>>>> a847a7a86b (Phase Noise Profile)
 ## Integration Limits
 
 > Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
 
 *TODO* &#128197;
 
-
-
-
-
-
-## VCO ISF Simulation
-
-### PSS + PXF Method
-
-> Yizhe Hu, "A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF)" [[https://bbs.eetop.cn/thread-869343-1-1.html](https://bbs.eetop.cn/thread-869343-1-1.html)]
-
-
-
-*TODO* &#128197;
-
-
-
-### Transient Method
-
-> David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
-
-
-
-![image-20241016211020230](osc-pn/image-20241016211020230.png)
-
-![image-20241016211101204](osc-pn/image-20241016211101204.png)
-
-![image-20241016211115630](osc-pn/image-20241016211115630.png)
-
-
-
-> To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
-
-
-
-## Wandering Spurs
-
-Fractional-N frequency synthesizers exhibit strange moving spurs and pulsating spectra. These are manifestations of a phenomenon called "wandering spurs."
-
-*TODO* &#128197;
 
 
 
@@ -373,6 +269,36 @@ Finally, we obtain
 ![image-20241207181038749](osc-pn/image-20241207181038749.png)
 
 ![image-20241208100556466](osc-pn/image-20241208100556466.png)
+
+
+## VCO ISF Simulation
+
+### PSS + PXF Method
+
+> Yizhe Hu, "A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF)" [[https://bbs.eetop.cn/thread-869343-1-1.html](https://bbs.eetop.cn/thread-869343-1-1.html)]
+
+
+
+*TODO* &#128197;
+
+
+
+### Transient Method
+
+> David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
+
+
+
+![image-20241016211020230](osc-pn/image-20241016211020230.png)
+
+![image-20241016211101204](osc-pn/image-20241016211101204.png)
+
+![image-20241016211115630](osc-pn/image-20241016211115630.png)
+
+
+
+> To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
+
 
 
 

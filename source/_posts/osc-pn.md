@@ -132,11 +132,6 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 
 
-<<<<<<< HEAD
-=======
-
-
-
 
 ## Reference Spur
 

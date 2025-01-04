@@ -11,12 +11,14 @@ mathjax: true
 
 ## Definition of Phase Noise
 
-![image-20250103220312991](osc-pn/image-20250103220312991.png)
-
-
+![image-20250104080553842](osc-pn/image-20250104080553842.png)
 
 > Eq. (3.25) is widely adopted by industry and academia
->
+
+
+
+![image-20250104080619943](osc-pn/image-20250104080619943.png)
+
 > *using the narrow angle assumption*, the two definitions above are equivalent
 >
 > If the *narrow angle* condition is not satisfied, however, the two definitions differ
@@ -25,47 +27,75 @@ mathjax: true
 
 ## Phase Noise Profile
 
-- $1/f^2$ Phase Noise Profile
-
-  white noise
-
-- $1/f^3$ Phase Noise Profile
-
-  the low frequency behavior of a free-running oscillator with **internal flicker noise sources** 
+> Power Spectral Density of Brownian Motion despite non-stationary [[https://dsp.stackexchange.com/a/75043/59253](https://dsp.stackexchange.com/a/75043/59253)]
 
 
 
-## Free-running Oscillator & Lorentzian
+### white noise
+
+$1/f^2$ Phase Noise Profile
+
+![image-20250104084510063](osc-pn/image-20250104084510063.png)
+
+![image-20250104084814395](osc-pn/image-20250104084814395.png)
 
 
 
-*TODO* &#128197;
+> ![image-20250104085222610](osc-pn/image-20250104085222610.png)
+
+
+
+![image-20250104084925644](osc-pn/image-20250104084925644.png)
+
+![image-20250104085722649](osc-pn/image-20250104085722649.png)
+
+
+
+### flicker noise
+
+$1/f^3$ Phase Noise Profile
+
+$$
+S_{\phi n} = \frac{K}{f}\left(\frac{K_{VCO}}{2\pi f}\right)^2 \propto \frac{1}{f^3}
+$$
+
+
+
+---
+
+
+
+![image-20250104092711462](osc-pn/image-20250104092711462.png)
+
+
+
+> [[https://dsp.stackexchange.com/a/75152/59253](https://dsp.stackexchange.com/a/75152/59253)]
+
+
+
+## Free-running Oscillator
 
 ![image-20250103224818171](osc-pn/image-20250103224818171.png)
 
 > Note that $f_{min}$ is related to the observation time. The longer we observe the device under test, the smaller $f_{min}$ must be
 
+![image-20250104091109521](osc-pn/image-20250104091109521.png)
 
 
----
+
+## Lorentzian spectrum 
 
 ![image-20240720134811859](osc-pn/image-20240720134811859.png)
 
 We typically use the two spectra, $S_{\phi n}(f)$ and $S_{out}(f)$, interchangeably, but we must resolve these inconsistencies. **voltage spectrum**  is called **Lorentzian spectrum**
 
-
-
 ---
-
-
 
 The periodic signal $x(t)$ can be expanded in Fourier series as:
 
 ![image-20240720141514040](osc-pn/image-20240720141514040.png)
 
 Assume that the signal is subject to *excess phase noise*, which is modeled by adding a **time-dependent** noise component $\alpha(t)$. The noisy signal can be written $x(t+\alpha(t))$, the added excess phase $\phi(t)= \frac{\alpha(t)}{\omega_0}$
-
-
 
 > ![image-20250103211650043](osc-pn/image-20250103211650043.png)
 
@@ -83,7 +113,7 @@ By taking the Fourier transform of the autocorrelation, the spectrum of the sign
 
 ![image-20240720141813256](osc-pn/image-20240720141813256.png)
 
-It is also interesting to note how the integral in Equation 9.80 around each harmonic is equal to the power of the harmonic itself $|X_n|^2$
+It is also interesting to note how the integral in *Equation 9.80* around each harmonic is equal to the power of the harmonic itself $|X_n|^2$
 
 The integral $S_x(f)$ around harmonic is
 $$\begin{align}
@@ -102,6 +132,81 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+## Reference Spur
+
+**spurs** are carrier or clock frequency spectral imperfections measured in the frequency domain just like phase noise. However, unlike phase noise they are *discrete* frequency components.
+
+- Spurs are deterministic
+
+- Spur power is independent of bandwidth
+
+- Spurs contribute bounded peak jitter in the time domain
+
+
+
+***Sources of Spurs:***
+
+- External (coupling from other noisy block)
+  Supply, substrate, bond wires, etc.
+- Internal (int-N/fractional-N operation)
+  - **Frac spur**: Fractional divider (multi-modulus and frequency accumulation)
+  - **Ref. spur**: PFD/charge pump/analog loop filter non-idealities, clock coupling
+
+
+
+### LPF gate leakage
+
+![image-20241222192007824](osc-pn/image-20241222192007824.png)
+
+
+
+For the sake of simplicity, $V_{ctr}$ looks like a rectangular pulse with an amplitude of $I_{CP}R_1$ and a duty ratio of ($I_{leak}/I_{CP}$), whose first coefficient of Fourier series is
+
+![image-20241222200514941](osc-pn/image-20241222200514941.png)
+
+where $I_\text{leak} \ll I_{CP}$ is assumed
+
+Then, the *peak* frequency deviation $\Delta f$
+$$
+\Delta f = a_1 \cdot K_v = 2I_\text{leak}R_1 K_v
+$$
+using narrowband FM approximation, we have 
+$$
+P_\text{spur} = 20\log\left(\frac{\Delta f}{2f_\text{ref}}\right) = 20\log\left(\frac{I_\text{leak}R_1 K_v}{f_\text{ref}}\right)
+$$
+
+
+
+
+> W. Rhee, "Design of high-performance CMOS charge pumps in phase-locked loops," *1999 IEEE International Symposium on Circuits and Systems (ISCAS)*, Orlando, FL, USA, 1999, pp. 545-548 vol.2 [[pdf](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3006edc15fdef2e71674d4170c10c62fd69f96a3)]
+>
+> —. Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons
+
+
+
+---
+
+![image-20241222200158107](osc-pn/image-20241222200158107.png)
+
+> [[https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html](https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html)]
+
+
+
+## Fractional Spur
+
+*TODO* &#128197;
+
+
+
+
+
+>>>>>>> a847a7a86b (Phase Noise Profile)
 ## Integration Limits
 
 > Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]

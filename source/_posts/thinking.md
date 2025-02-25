@@ -109,6 +109,12 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 ```
 
 
+```
+May Your Choices Reflect Your Hopes, Not Your Fears
+
+- Nelson Mandela
+```
+
 
 ```
 人生不能像做菜，把所有的料都準備好了才下鍋。

@@ -38,17 +38,26 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 
 
 
-
-
-## 认识世界
-
-经济学的思维方式 - 托马斯·索维尔
+---
 
 
 
+缺爱的人，是不是得不到真正的爱？ - 知乎
+[[https://www.zhihu.com/question/345084237]()]
 
 
-## 悟
+
+```
+学会接纳自己，满足自己，爱自己。
+
+先自爱，然后才能爱人，才能得到他人真正的爱。
+而不是先得到他人的爱，然后才能觉得自己值得被爱。
+只有内在充盈的人，笃定地相信自己值得被爱的人，才不会因为贪婪而掉进“虚情假爱”的陷阱，才不会因为害怕、恐慌而控制爱人，才有机会拥有自己的一生所爱”。
+```
+
+
+
+---
 
 
 
@@ -102,6 +111,21 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 
 
 
+## 认识世界
+
+经济学的思维方式 - 托马斯·索维尔
+
+
+
+
+
+## 悟
+
+
+
+
+
+
 ```
 当你喜欢你自己的时候，你才会由内而外散发出一种自信，散发出一种自由。
 
@@ -123,8 +147,6 @@ May Your Choices Reflect Your Hopes, Not Your Fears
 
 勇敢
 ```
-
-
 
 
 

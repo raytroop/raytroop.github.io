@@ -384,6 +384,12 @@ https://www.zhihu.com/question/367736654/answer/3338250117
 
 
 
+```
+All our life, we are about to get rid of the expectations of others to find the true self. 
+
+- Celeste Ng "everything I never told you"
+```
+
 
 
 ```

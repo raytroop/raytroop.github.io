@@ -9,6 +9,24 @@ mathjax: true
 
 
 
+## TDC noise
+
+![image-20250512230604969](clocking/image-20250512230604969.png)
+
+---
+
+[[Sampling of WSS process of Systems, Modulation and Noise](https://raytroop.github.io/2024/05/25/comm/#sampling-of-wss-process)]
+
+![image-20250512231512930](clocking/image-20250512231512930.png)
+
+That is
+$$
+P_{x_s x_s} (f)= \frac{1}{T_s}P_{xx}(f)
+$$
+In going from *discrete* time to *continuous* time,  we must add a scale factor $1/T$, the sample period
+
+
+
 ## Reference Spur
 
 **spurs** are carrier or clock frequency spectral imperfections measured in the frequency domain just like phase noise. However, unlike phase noise they are *discrete* frequency components.

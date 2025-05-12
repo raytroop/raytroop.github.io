@@ -17,7 +17,7 @@ mathjax: true
 
 [[Sampling of WSS process of Systems, Modulation and Noise](https://raytroop.github.io/2024/05/25/comm/#sampling-of-wss-process)]
 
-![image-20250512231512930](clocking/image-20250512231512930.png)
+![image-20250512233058520](clocking/image-20250512233058520.png)
 
 That is
 $$

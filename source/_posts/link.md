@@ -7,6 +7,25 @@ categories:
 mathjax: true
 ---
 
+
+
+## Peak power constraint of TX FIR
+
+![image-20250514215647905](link/image-20250514215647905.png)
+
+Due to circuit limitation, circuit cannot have arbitrarily large voltage on the output, i.e. a *limited maximum swing*. In order to create the high frequency shape, the best we can do is *lower DC gain*
+
+- FIR is not increasing the amplitude on the edges
+- FIR is reducing the inner eye diagram
+
+The maximum swing stays the same, $\sum_i |c_i|=1$
+
+
+
+> Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M?si=2a8FdfGNP6yBgIW8&t=829](https://youtu.be/8NZl81Dj45M?si=2a8FdfGNP6yBgIW8&t=829)]
+
+
+
 ## Trellis Coding
 
 *TODO* &#128197;

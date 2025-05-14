@@ -1,5 +1,5 @@
 ---
-title: ahuja frequency compensation
+title: ahuja compensation
 date: 2024-01-16 23:37:59
 tags:
 categories:
@@ -32,7 +32,9 @@ The benefits of *Ahuja* compensation over Miller compensation are severa
 
 ## Miller's approximation
 
-![image-20240130224043511](ahuja/image-20240130224043511.png)
+![image-20250514201620152](ahuja/image-20250514201620152.png)
+
+
 
 ### Right-Half-Plane Zero
 

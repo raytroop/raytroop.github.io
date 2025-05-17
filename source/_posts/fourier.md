@@ -20,12 +20,12 @@ Below diagram show the windowing effect and sampling
 ![NinDFT.drawio](fourier/NinDFT.drawio.svg)
 
 
-For general window function, we know $W(e^{j\hat{\omega}})=\frac{1}{T_s}W_c(j\omega)$,
+For general window function, we know $W(e^{j\hat{\omega}})=\frac{1}{T_s}W_c(j\frac{\hat\omega}{T_s})$,
 
-and
 $$
-\frac{W_c(j\omega|\omega=0)}{T_s} = \frac{T_sW(e^{j\hat{\omega}}|\hat{\omega}=0)}{T_s} =W(e^{j\hat{\omega}}|\hat{\omega}=0)= \sum_{n=-N_w}^{+N_w}w[n]
+\frac{W_c(j\frac{\hat{\omega}}{T_s})X_c(j\frac{\hat{\omega}}{T_s})}{T_s}\cdot \frac{1}{2\pi} = \frac{T_sW(e^{j\hat{\omega}})X_c(j\frac{\hat\omega}{T_s})}{T_s}\cdot \frac{1}{2\pi}=W(e^{j\hat{\omega}})X_c(j\frac{\hat\omega}{T_s})\cdot \frac{1}{2\pi} \overset{\hat{\omega}=0}{\Longrightarrow} \sum_{n=-N_w}^{+N_w}w[n] \cdot X_c(j\omega)\cdot \frac{1}{2\pi}
 $$
+
 
 e.g. $\frac{W_c(j\omega|\omega=0)}{T_s} = N$ for Rectangular Window, shown in above figure
 

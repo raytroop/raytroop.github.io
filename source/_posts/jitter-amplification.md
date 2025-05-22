@@ -55,6 +55,8 @@ plot(abs(Y(1:N/2)));
 
 ![image-20220322124932584](jitter-amplification/image-20220322124932584.png)
 
+> both input and output are discrete time signal, i.e. no sampling in the input, that's why ratio $1/T_s$ is not in the jtf
+
 #### High Pass Filter
 
 ![image-20220327010223664](jitter-amplification/image-20220327010223664.png)

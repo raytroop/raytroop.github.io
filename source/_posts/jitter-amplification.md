@@ -4,6 +4,7 @@ date: 2022-03-13 23:02:11
 tags:
 categories:
 - noise
+mathjax: true
 ---
 
 ## transient noise and rms_jitter function

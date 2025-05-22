@@ -76,6 +76,8 @@ That sort of ambiguity is the reason for the **strict inequality** of the sampli
 
 ### Duty Cycle Distortion
 
+> [[https://www.youtube.com/watch?v=LMT-T41Y64U&lc=UgxiDRT5WB3Ej8IfaEF4AaABAg.9TpSIyAQQ9j9TvCho3IhbS](https://www.youtube.com/watch?v=LMT-T41Y64U&lc=UgxiDRT5WB3Ej8IfaEF4AaABAg.9TpSIyAQQ9j9TvCho3IhbS)]
+
 **Both edges** is used for clock waveform to evaluate the duty cycle distortion,
 
 Assuming TIE is `[0 0.2 0 0.2 0 0.2 ...]`, then subtract DC offset, we get `[-0.1 0.1 -0.1 0.1 ...]`, shown as below

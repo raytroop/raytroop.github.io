@@ -122,3 +122,5 @@ Phase-Locked Frequency Generation and Clocking : Architectures and Circuits for 
 Mathuranathan Viswanathan, Digital Modulations using Matlab : Build Simulation Models from Scratch
 
 Tony Chan Carusone, University of Toronto, Canada, 2022 CICC Educational Sessions "Architectural Considerations in 100+ Gbps Wireline Transceivers"
+
+X. Mo, J. Wu, N. Wary and T. Chan Carusone, "Design Methodologies for Low-Jitter CMOS Clock Distribution," in IEEE Open Journal of the Solid-State Circuits Society, 2021 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395)]

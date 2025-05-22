@@ -172,6 +172,16 @@ Cadence Spectre's `PN` function may call `abs_jitter` and `psd` function under t
 
 
 
+## Jitter and Edge phase noise
+
+[[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation/1388888](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation/1388888)]
+
+![ ](pn-jitter/jitter.edgePhase.Noise.png)
+
+![ ](pn-jitter/sampledNoise-2.png)
+
+
+
 ## reference
 
 Article (11514536) Title: How to obtain a phase noise plot from a transient noise analysis

@@ -7,6 +7,10 @@ categories:
 mathjax: true
 ---
 
+**Jitter amplification** arises from the *transfer characteristic of the clock path*, without considering other jitter sources, such as supply noise or thermal noise of the buffer
+
+
+
 ## transient noise and rms_jitter function
 
 ![image-20220608233610066](jitter-amplification/image-20220608233610066.png)
@@ -25,15 +29,23 @@ Directly compare the input phase noise and output phase noise, the input wavefor
 
 
 
-## Jitter Impulse Response(JIR) & Jitter Impulse Response(JIR)
+## Jitter Impulse Response & Jitter Transfer Function
 
 > assuming *linear, time-invariant phase response*
+>
+> ![image-20250522223530464](jitter-amplification/image-20250522223530464.png)
+>
+> n =5 buffers, fclk = 10GHz
+>
+> [[Alphawave’s CTO, Tony Chan Carusone, High Speed Communications Part 8 – On Die CMOS Clock Distribution ](https://youtu.be/nx5CiHcwrF0?si=QhOJmsW5IozRnF4F)]
+
+
 
 ![image-20220313231013645](jitter-amplification/image-20220313231013645.png)
 
 ![image-20220313231027512](jitter-amplification/image-20220313231027512.png)
 
-![image-20220313231038542](jitter-amplification/image-20220313231038542.png)
+
 
 ### Example
 #### Low Pass Filter
@@ -111,6 +123,26 @@ title('JTF of inverter chain');
 
 ![image-20220608233303576](jitter-amplification/image-20220608233303576.png)
 
+
+
+## Phase Noise Integration Limits
+
+> ![image-20250522225506217](jitter-amplification/image-20250522225506217.png)
+>
+> [[Alphawave’s CTO, Tony Chan Carusone, High Speed Communications Part 8 – On Die CMOS Clock Distribution ](https://youtu.be/nx5CiHcwrF0?si=QhOJmsW5IozRnF4F)]
+
+> ![image-20250522234522208](jitter-amplification/image-20250522234522208.png)
+>
+> Four major noise sources are included in the modeling: Input noise, DAC quantization noise (DAC QN), DCO random noise (DCO RN), and delay line random noise (DL RN).
+>
+> H. Kang *et al*., "A 42.7Gb/s Optical Receiver with Digital CDR in 28nm CMOS," *2023 IEEE Radio Frequency Integrated Circuits Symposium (RFIC)*, San Diego, CA, USA, 2023 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10630516](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10630516)]
+
+
+
+
+
+
+
 ## Reference
 
 [Sam Palermo, ECEN 720, Lecture 13 - Forwarded Clock Deskew Circuits](https://people.engr.tamu.edu/spalermo/ecen689/lecture13_ee720_fwd_clk_deskew.pdf)
@@ -124,3 +156,7 @@ Mathuranathan Viswanathan, Digital Modulations using Matlab : Build Simulation M
 Tony Chan Carusone, University of Toronto, Canada, 2022 CICC Educational Sessions "Architectural Considerations in 100+ Gbps Wireline Transceivers"
 
 X. Mo, J. Wu, N. Wary and T. Chan Carusone, "Design Methodologies for Low-Jitter CMOS Clock Distribution," in IEEE Open Journal of the Solid-State Circuits Society, 2021 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395)]
+
+Modeling Oscillators with Arbitrary Phase Noise Profiles [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles](https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles)]
+
+Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation," *2022 IEEE International Symposium on Circuits and Systems (ISCAS)*, Austin, TX, USA, 2022 [[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]

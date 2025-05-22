@@ -27,6 +27,8 @@ Directly compare the input phase noise and output phase noise, the input wavefor
 
 ## Jitter Impulse Response(JIR) & Jitter Impulse Response(JIR)
 
+> assuming *linear, time-invariant phase response*
+
 ![image-20220313231013645](jitter-amplification/image-20220313231013645.png)
 
 ![image-20220313231027512](jitter-amplification/image-20220313231027512.png)
@@ -56,6 +58,8 @@ plot(abs(Y(1:N/2)));
 
 ![image-20220322124932584](jitter-amplification/image-20220322124932584.png)
 
+> discrete time jitter impulse response
+> 
 > both input and output are discrete time signal, i.e. no sampling in the input, that's why ratio $1/T_s$ is not in the jtf
 
 #### High Pass Filter

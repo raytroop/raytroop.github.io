@@ -7,18 +7,26 @@ categories:
 mathjax: true
 ---
 
+
+
 ## excess phase around n-th harmonic
 
-*TODO* &#128197;
+![image-20250523222041505](clocking/image-20250523222041505.png)
 
 
 > $\Delta t$ is same for any n-th harmonic
 
+
+
 ## Spurious Tones
 
-*TODO* &#128197;
+![image-20250523222846691](clocking/image-20250523222846691.png)
+
+
 
 > Nicola Da Dalt, ISSCC 2012: Jitter Basic and Advanced Concepts, Statistics and Applications [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf)]
+
+
 
 ## Reference Spur
 

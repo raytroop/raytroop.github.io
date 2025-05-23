@@ -7,7 +7,11 @@ categories:
 mathjax: true
 ---
 
+## Spurious Tones
 
+*TODO* &#128197;
+
+> Nicola Da Dalt, ISSCC 2012: Jitter Basic and Advanced Concepts, Statistics and Applications [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf)]
 
 ## Reference Spur
 

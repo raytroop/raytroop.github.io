@@ -7,6 +7,13 @@ categories:
 mathjax: true
 ---
 
+## excess phase around n-th harmonic
+
+*TODO* &#128197;
+
+
+> $\Delta t$ is same for any n-th harmonic
+
 ## Spurious Tones
 
 *TODO* &#128197;

@@ -138,7 +138,11 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 
 
-## Integration Limits
+## Phase Noise Aliasing & Integration Limits
+
+These two types of measurements deliver the **same rms jitter** of $f_{CK}$
+- both rising and falling:  integrated from $-f_{CK}$ to $+f_{CK}$
+- only the rising (or falling) edges: integrated from $-f_{CK}/2$ to $+f_{CK}/2$
 
 > Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
 

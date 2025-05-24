@@ -79,11 +79,17 @@ $$
 
 > Note that $f_{min}$ is related to the observation time. The longer we observe the device under test, the smaller $f_{min}$ must be
 
-![image-20250104091109521](osc-pn/image-20250104091109521.png)
+![image-20250524081737793](osc-pn/image-20250524081737793.png)
 
 ---
 
 ![image-20250104111025626](osc-pn/image-20250104111025626.png)
+
+---
+
+![image-20250524082246710](osc-pn/image-20250524082246710.png)
+
+> Ali Sheikholeslami ISSCC 2008 T5: Basics of Chip-to-Chip and Backplane Signaling [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf)]
 
 
 
@@ -144,7 +150,7 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 - both rising and falling:  integrated from $-f_{CK}$ to $+f_{CK}$
 - only the rising (or falling) edges: integrated from $-f_{CK}/2$ to $+f_{CK}/2$
 
-![image-20250523215712857](osc-pn/image-20250523215712857.png)
+![image-20250524074831161](osc-pn/image-20250524074831161.png)
 
 ![image-20250523221143537](osc-pn/image-20250523221143537.png)
 

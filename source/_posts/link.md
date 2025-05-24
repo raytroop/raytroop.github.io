@@ -9,11 +9,31 @@ mathjax: true
 
 
 
+## PAM4 DFE
+
+*TODO* &#128197;
+
+
+
+
+
+## challenges in DSP-based SerDes
+
+![image-20250524224829419](link/image-20250524224829419.png)
+
+![image-20250524235031104](link/image-20250524235031104.png)
+
+
+
+> Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI?si=lFiu1Kl4AKsg3O9f](https://youtu.be/puEP0DlVZGI?si=lFiu1Kl4AKsg3O9f)]
+
+
+
 ## Peak power constraint of TX FIR
 
 ![image-20250514215647905](link/image-20250514215647905.png)
 
-Due to circuit limitation, circuit cannot have arbitrarily large voltage on the output, i.e. a *limited maximum swing*. In order to create the high frequency shape, the best we can do is *lower DC gain*
+Due to circuit limitation, circuit cannot have arbitrarily large voltage on the output, i.e. a *limited maximum swing*. In order to create the high frequency shape, the best we can do is *lower DC gain* (low frequency gain < 1)
 
 - FIR is not increasing the amplitude on the edges
 - FIR is reducing the inner eye diagram

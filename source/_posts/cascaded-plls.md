@@ -6,7 +6,7 @@ categories: analog
 mathjax: true
 ---
 
-> Application of the theory of cascaded PLLs to wireline transceivers:  TX PLL & RX CDR
+> To understand the impact of the clock jitter on the performance of a wireline system, *the transfer functions of the PLL in the transmitter side* and *the CDR loop in the receiver* should be taken into consideration
 >
 > ![image-20250524111908032](cascaded-plls/image-20250524111908032.png)
 

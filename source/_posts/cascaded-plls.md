@@ -14,9 +14,14 @@ mathjax: true
 
 ![image-20250524091655525](cascaded-plls/image-20250524091655525.png)
 
+![image-20250524131517606](cascaded-plls/image-20250524131517606.png)
 
 
 
+> *the **minimum** jitter* occurs at the point where the *transmit PLL UGB is **minimum*** and *the CDR UGB is **maximized***
+
+- the net rms jitter that impacts the performance of a wireline transceiver is much lower than the rms jitter of the transmit PLL
+- the jitter requirements of the transmit PLL on the wireline system is much more relaxed compared to the wireless transceiver  
 
 ## reference
 

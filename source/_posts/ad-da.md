@@ -8,6 +8,15 @@ mathjax: true
 ---
 
 
+
+## Relationship Between SFDR and INL
+
+![image-20250524172307785](ad-da/image-20250524172307785.png)
+
+> Beware, this is of course only true under the same conditions at which the INL was taken, i.e. typically *low input signal frequency*
+
+
+
 ## Track Time
 
 *TODO* &#128197;
@@ -630,4 +639,6 @@ Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR = 6.02N + 1.76
 Dan Boschen, "How to choose FFT depth for ADC performance analysis (SINAD, ENOB)", [[https://dsp.stackexchange.com/a/38201](https://dsp.stackexchange.com/a/38201)]
 
 B. Razavi, **"A Tale of Two ADCs - Pipelined Versus SAR"** IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 30, pp. 38-46, Summer 2015 [[https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15ADC.pdf)](https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15ADC.pdf))]
+
+Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[link](【SC1.Introduction.to.ADCs.DACs.Metrics.Topologies.Trade.Space.and.Applications】 https://www.bilibili.com/video/BV1ENxxedEio/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 

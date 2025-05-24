@@ -63,6 +63,10 @@ $$
 ## MOD1
 
 ![image-20241005120659945](delta-sigma/image-20241005120659945.png)
+$$
+V(z) = U(z) +(1-z^{-1})E(z)
+$$
+
 
 - A binary DAC (and hence a binary modulator) is inherently linear
 - With a CT loop filter, MOD1 has inherent anti-alising
@@ -90,6 +94,14 @@ v[n] &= nu - \sum_{k=1}^{n-1}v[k] + e[n] \\
 &= u + v[n-1] - e[n-1]  -v[n-1] + e[n] \\
 &= u + e[n] - e[n-1]
 \end{align}$$
+
+
+
+---
+
+![image-20250524215712688](delta-sigma/image-20250524215712688.png)
+
+Dout, the low frequency component of ADC out is same with Vin
 
 
 
@@ -223,3 +235,4 @@ Richard E. Schreier, ECE 1371 Advanced Analog Circuits - 2015 [[http://individua
 
 Gabor C. Temes. ECE 627-Oversampled Delta-Sigma Data Converters [[https://classes.engr.oregonstate.edu/eecs/spring2017/ece627/lecturenotes.html](https://classes.engr.oregonstate.edu/eecs/spring2017/ece627/lecturenotes.html)]
 
+Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[link](【SC1.Introduction.to.ADCs.DACs.Metrics.Topologies.Trade.Space.and.Applications】 https://www.bilibili.com/video/BV1ENxxedEio/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]

@@ -18,6 +18,14 @@ mathjax: true
 
 
 
+***Pnoise sampled(jitter) with Sampled Phase***
+
+![image-20250524234154262](virtuoso/image-20250524234154262.png)
+
+vsource output is applied with noise *all the time*
+
+
+
 ## Loockup Table vs Equations Model in Verilog-A
 
 > Solar Cell Verilog Model for Cadence [[https://miscircuitos.com/solar-cell-verilog-model-for-cadence/](https://miscircuitos.com/solar-cell-verilog-model-for-cadence/)]

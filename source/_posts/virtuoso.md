@@ -9,6 +9,15 @@ mathjax: true
 
 
 
+## vsource with noisefile
+
+1. both rise/fall edge are added the noisefile
+2. noise between rise and fall edge are partially correlated
+
+![image-20250524114121720](virtuoso/image-20250524114121720.png)
+
+
+
 ## Loockup Table vs Equations Model in Verilog-A
 
 > Solar Cell Verilog Model for Cadence [[https://miscircuitos.com/solar-cell-verilog-model-for-cadence/](https://miscircuitos.com/solar-cell-verilog-model-for-cadence/)]

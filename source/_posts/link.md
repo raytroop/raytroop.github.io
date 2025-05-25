@@ -49,7 +49,7 @@ mathjax: true
 
 ![image-20250525151918214](link/image-20250525151918214.png)
 
-
+To further *relax the timing constraint of a feedback loop involving multiplexers*, the *lookahead multiplexing technique* has been developed
 
 
 

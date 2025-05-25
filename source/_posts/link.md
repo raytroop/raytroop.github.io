@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-## PAM4 DFE
+## PAM4 FFE & DFE
 
 *TODO* &#128197;
 

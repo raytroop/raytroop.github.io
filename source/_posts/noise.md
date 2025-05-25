@@ -95,7 +95,7 @@ A random signal $v_n(t)$ is sampled using an ideal impulse sampler
 
 
 
-## Aperture Jitter & ADC SNR
+## ADC SNR & clock jitter
 
 > Chembian Thambidurai, "SNR of an ADC in the presence of clock jitter" [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd?utm_source=share&utm_medium=member_desktop)]
 
@@ -157,7 +157,7 @@ plt.show()
 
 ```
 
-> ![image-20241210232016640](noise/image-20241210232016640.png)
+> 
 >
 > i.e. N. Da Dalt's
 >
@@ -170,6 +170,29 @@ plt.show()
 ---
 
 ![image-20241222135948195](noise/image-20241222135948195.png)
+
+
+
+---
+
+![image-20250525134220901](noise/image-20250525134220901.png)
+
+![image-20250525135503671](noise/image-20250525135503671.png)
+
+$$\begin{align}
+\text{SNR}_\text{ADC}[\text{dB}] &= -20\cdot \log \sqrt{\left(10^{-\frac{\text{SNR}_\text{Quantization Noise}}{20}}\right)^2 + \left(10^{-\frac{\text{SNR}_\text{Jitter}}{20}}\right)^2} \\
+&= -10\cdot \log \left(\left(10^{-\frac{\text{SNR}_\text{Quantization Noise}}{20}}\right)^2 + \left(10^{-\frac{\text{SNR}_\text{Jitter}}{20}}\right)^2\right) \\
+&= -10\cdot \log \left(\left(10^{-\frac{10\log(\frac{3\times2^{2N}}{2})}{20}}\right)^2 + \left(10^{-\frac{-20\log{(2\pi f_\text{in}\sigma_\text{jitter})}}{20}}\right)^2\right) \\
+&= -10\cdot \log \left( \frac{2}{3\times 2^{2N}} + (2\pi f_\text{in}\sigma_\text{jitter})^2 \right)
+\end{align}$$
+
+
+
+> Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
+>
+> CC Chen, Why Absolute Jitter Matters for ADCs & DACs? [[https://youtu.be/jBgDDFFDq30?si=XFyTEfApN86Ef-RG](https://youtu.be/jBgDDFFDq30?si=XFyTEfApN86Ef-RG)]
+>
+> Thomas Neu, TIPL 4704. Jitter vs SNR for ADCs [[https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf](https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf)]
 
 
 

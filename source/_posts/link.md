@@ -15,6 +15,14 @@ mathjax: true
 
 
 
+## JTOL btw DSP-based vs Analog PAM4 RX
+
+![image-20250525110540570](link/image-20250525110540570.png)
+
+
+
+> CC Chen, Why Analog PAM4 Receiver? [[https://youtu.be/J2ojSMYiuBs?si=7y41W91ciIw_hme2](https://youtu.be/J2ojSMYiuBs?si=7y41W91ciIw_hme2)]
+
 
 
 ## challenges in DSP-based SerDes
@@ -22,6 +30,16 @@ mathjax: true
 ![image-20250524224829419](link/image-20250524224829419.png)
 
 ![image-20250524235031104](link/image-20250524235031104.png)
+
+
+
+![image-20250525101922485](link/image-20250525101922485.png)
+
+
+
+![image-20250525105017605](link/image-20250525105017605.png)
+
+
 
 
 

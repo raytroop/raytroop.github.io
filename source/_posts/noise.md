@@ -194,6 +194,39 @@ $$\begin{align}
 >
 > Thomas Neu, TIPL 4704. Jitter vs SNR for ADCs [[https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf](https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf)]
 
+![image-20250525141523199](noise/image-20250525141523199.png)
+
+![image-20250525143507747](noise/image-20250525143507747.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+N = 12  # ADC bit
+fin = 100e6 # the frequency of the sinusoidal input signal
+jrms = np.linspace(0, 10, 1000)*1e-12 #ps
+
+# ADC (SNR) with Quantization Noise & Jitter degradation
+SNR_ADC = -10 * np.log10(10**(-np.log10(3*2**(2*N)/2)) + (2*np.pi*fin*jrms)**2)
+ENOB = (SNR_ADC - 1.76) / 6.02
+
+plt.plot(jrms*1e12, ENOB, label='100 MHZ input')
+plt.plot([0, 10], [12, 12], '--', label='12-bit limit')
+plt.plot([0, 10], [6, 6], '--', label='6-bit limit')
+
+plt.xscale('linear')
+plt.xlim([0, 10])
+plt.ylim([5, 15])
+plt.xlabel('RMS Jitter (ps)')
+plt.ylabel('Effective Number of Bits (ENOB')
+plt.grid(which='both')
+plt.title('ENOB vs. RMS Clock Jitter (100 MHz)')
+plt.legend()
+plt.show()
+```
+
+
+
 
 
 ## ISF for Oscillators

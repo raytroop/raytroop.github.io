@@ -29,6 +29,8 @@ mathjax: true
 
 ![image-20250524224829419](link/image-20250524224829419.png)
 
+**Parallel implementation**
+
 ![image-20250524235031104](link/image-20250524235031104.png)
 
 
@@ -37,13 +39,23 @@ mathjax: true
 
 
 
+**Loop-Unrolling DFE**
+
 ![image-20250525105017605](link/image-20250525105017605.png)
+
+
+
+**Look-Ahead Multiplexing DFE**
+
+![image-20250525151918214](link/image-20250525151918214.png)
 
 
 
 
 
 > Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI?si=lFiu1Kl4AKsg3O9f](https://youtu.be/puEP0DlVZGI?si=lFiu1Kl4AKsg3O9f)]
+>
+> Chen, Kuan-Chang (2022) *Energy-Efficient Receiver Design for High-Speed Interconnects.* Dissertation (Ph.D.), California Institute of Technology. [[https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf](https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf)]
 
 
 

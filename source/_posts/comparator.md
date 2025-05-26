@@ -11,17 +11,19 @@ mathjax: true
 
 ## Noise Analysis
 
-*TODO* &#128197;
-
-The StrongARM latch completes switching actions and noise injections *even before the output begins to change*
-
-
+![image-20250526201936387](comparator/image-20250526201936387.png)
 
 ---
 
-**slower** rise time improve input-referred noise
+![image-20250526195323660](comparator/image-20250526195323660.png)
 
-![image-20241109222805267](comparator/image-20241109222805267.png)
+
+
+### sampling (amplification) phase
+
+![image-20250526195656447](comparator/image-20250526195656447.png)
+
+
 
 
 
@@ -29,27 +31,13 @@ The StrongARM latch completes switching actions and noise injections *even befor
 
 ### PSS + Pnoise Method
 
-
-
 > Comparator Output SNR during sampling region and decision region go up
 >
 > Comparator Output SNR during regeneration region is *constant*, where noise is critical 
 
-$$
-\text{SNR} = \frac{V_{o,sig}^2}{V_{o,n}^2} = \frac{V_{i,sig}^2}{V_{i,n}^2}
-$$
-
-we can get $V_{i,n}^2 = \frac{V_{i,sig}^2}{\text{SNR}}$, which is constant also
-
-That is 
-$$
-V_{i,n}^2 = \frac{V_{i,sig}^2}{V_{o,sig}^2}V_{o,n}^2 = \frac{V_{o,n}^2}{A_v^2}
-$$
-where $V_{i,sig}$ is constant signal is applied to input of comparator
+![image-20250526221529514](comparator/image-20250526221529514.png)
 
 
-
----
 
 ![image-20241109163928889](comparator/image-20241109163928889.png)
 
@@ -60,8 +48,6 @@ where $V_{i,sig}$ is constant signal is applied to input of comparator
 > Noise **Fmax** sets the bandwidth of the random noise sources that are injected at each time point in the transient analysis
 
 ---
-
-![image-20241109154528160](comparator/image-20241109154528160.png)
 
 ![image-20241109154249513](comparator/image-20241109154249513.png)
 
@@ -75,7 +61,11 @@ Thus, if $V_S$ is chosen so as to reduce the probability of zeros to 16%, then $
 
 ### Comparison of two methods
 
-It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the factor $\sqrt{2}$ is implicitly in formula in ADC Rak of Cadence
+![image-20250526225952590](comparator/image-20250526225952590.png)
+
+![image-20250526230126010](comparator/image-20250526230126010.png)
+
+
 
 
 
@@ -86,6 +76,11 @@ It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the fact
 > J. Conrad, J. Kauffman, S. Wilhelmstatter, R. Asthana, V. Belagiannis and M. Ortmanns, "Confidence Estimation and Boosting for Dynamic-Comparator Transient-Noise Analysis," *2024 22nd IEEE Interregional NEWCAS Conference (NEWCAS)*, Sherbrooke, QC, Canada, 2024, pp. 1-5
 
 
+
+> There are some ambiguity in formula in ADC Verification Rapid Adoption Kit (RAK)(Product Version: IC 6.1.8, SPECTRE 18.1 March, 2019)
+>
+> - Transient Noise Analysis: $\sqrt{2}\sigma$, why ratio $\sqrt{2}$ ???
+> - PSS+Pnoise: why two fundamental tones fclk/2 ??? 
 
 
 
@@ -100,10 +95,6 @@ It seems that $\sigma_\text{pnoise} = \sqrt{2}\sigma_\text{trannoise}$, the fact
 
 
 ## offset simulation
-
-*TODO* &#128197;
-
-
 
 > T. Caldwell. ECE 1371S Advanced Analog Circuits [[http://individual.utoronto.ca/trevorcaldwell/course/comparators.pdf](http://individual.utoronto.ca/trevorcaldwell/course/comparators.pdf)]
 >
@@ -278,8 +269,6 @@ Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2023 Lecture 
 
 Y. Luo, A. Jain, J. Wagner and M. Ortmanns, "Input Referred Comparator Noise in SAR ADCs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 5, pp. 718-722, May 2019. [[https://sci-hub.se/10.1109/TCSII.2019.2909429](https://sci-hub.se/10.1109/TCSII.2019.2909429)]
 
-Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A New Methodology for Dynamic Comparator Noise Analysis URL:[https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf](https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf)
-
 X. Tang et al., "An Energy-Efficient Comparator With Dynamic Floating Inverter Amplifier," in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1011-1022, April 2020 [[https://sci-hub.se/10.1109/JSSC.2019.2960485](https://sci-hub.se/10.1109/JSSC.2019.2960485)]
 
 Chen, Long & Sanyal, Arindam & Ma, Ji & Xiyuan, Tang & Sun, Nan. (2016). Comparator Common-Mode Variation Effects Analysis and its Application in SAR ADCs. 10.1109/ISCAS.2016.7538972. [[https://labs.engineering.asu.edu/mixedsignals/wp-content/uploads/sites/58/2017/08/ISCAS_comp_long_2016.pdf](https://labs.engineering.asu.edu/mixedsignals/wp-content/uploads/sites/58/2017/08/ISCAS_comp_long_2016.pdf)]
@@ -288,14 +277,24 @@ V. Stojanovic, and V. G. Oklobdzija, "Comparative Analysis of Master–Slave Lat
 
 C. Mangelsdorf, "Metastability: Deeply misunderstood [Shop Talk: What You Didn’t Learn in School]," in IEEE Solid-State Circuits Magazine, vol. 16, no. 2, pp. 8-15, Spring 2024
 
+Rabuske, Taimur & Fernandes, Jorge. (2014). Noise-aware simulation-based sizing and optimization of clocked comparators. Analog Integr. Circuits Signal Process.. 81. 723-728. 10.1007/s10470-014-0428-4. [[https://sci-hub.se/10.1007/s10470-014-0428-4](https://sci-hub.se/10.1007/s10470-014-0428-4)]
+
+Rabuske, Taimur & Fernandes, Jorge. (2016). Charge-Sharing SAR ADCs for Low-Voltage Low-Power Applications. 10.1007/978-3-319-39624-8. 
+
+---
+
+Masaya Miyahara, Yusuke Asada, Daehwa Paik and Akira Matsuzawa, "A low-noise self-calibrating dynamic comparator for high-speed ADCs," *2008 IEEE Asian Solid-State Circuits Conference*, Fukuoka, Japan, 2008 [[slides](https://www.ssc.p.isct.ac.jp/private/publications/2008/ASSCC/9-2_Miyahara_3.pdf), [paper](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=df819f2b8bbbd278e8d1e754d17c1ce7eb19b448)]
+
+Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A New Methodology for Dynamic Comparator Noise Analysis URL:[https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf](https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf)
+
+---
+
 B. Razavi, **"The Design of a Comparator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020. [https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)
 
 B. Razavi, **"The StrongARM Latch [A Circuit for All Seasons],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015. [https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)
 
-CHUNG-CHUN (CC) CHEN. Why Transient Noise (Trannoise) Analysis for A Strong-arm Latch / Comparator? [[https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_](https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_)]
+CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Comparator?  [[https://youtu.be/S5GnvFxuxUA?si=w38iLvzjr0azhu43](https://youtu.be/S5GnvFxuxUA?si=w38iLvzjr0azhu43)] 
 
-CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Comparator?  [[https://youtu.be/S5GnvFxuxUA?si=w38iLvzjr0azhu43](https://youtu.be/S5GnvFxuxUA?si=w38iLvzjr0azhu43)]
+-. Why Transient Noise (Trannoise) Analysis for A Strong-arm Latch / Comparator? [[https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_](https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_)]
 
-Rabuske, Taimur & Fernandes, Jorge. (2014). Noise-aware simulation-based sizing and optimization of clocked comparators. Analog Integr. Circuits Signal Process.. 81. 723-728. 10.1007/s10470-014-0428-4. [[https://sci-hub.se/10.1007/s10470-014-0428-4](https://sci-hub.se/10.1007/s10470-014-0428-4)]
-
-Rabuske, Taimur & Fernandes, Jorge. (2016). Charge-Sharing SAR ADCs for Low-Voltage Low-Power Applications. 10.1007/978-3-319-39624-8. 
+-. Why A Periodic Steady-State (PSS), Periodic Noise (Pnoise), and Hand Calculation for A Sampler? [[https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV](https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV)]

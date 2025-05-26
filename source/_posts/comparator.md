@@ -31,9 +31,9 @@ The StrongARM latch completes switching actions and noise injections *even befor
 
 
 
-> SNR during sampling region and decision region increase
+> Comparator Output SNR during sampling region and decision region go up
 >
-> SNR during regeneration region is *constant*, where noise is critical 
+> Comparator Output SNR during regeneration region is *constant*, where noise is critical 
 
 $$
 \text{SNR} = \frac{V_{o,sig}^2}{V_{o,n}^2} = \frac{V_{i,sig}^2}{V_{i,n}^2}

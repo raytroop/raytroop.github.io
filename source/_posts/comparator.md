@@ -92,6 +92,10 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 
 ![image-20240925225823184](comparator/image-20240925225823184.png)
 
+---
+
+![image-20250527202331008](comparator/image-20250527202331008.png)
+
 
 
 

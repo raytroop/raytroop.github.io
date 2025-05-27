@@ -63,6 +63,8 @@ Thus, if $V_S$ is chosen so as to reduce the probability of zeros to 16%, then $
 
 ![image-20250526225952590](comparator/image-20250526225952590.png)
 
+here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
+
 ![image-20250526230126010](comparator/image-20250526230126010.png)
 
 

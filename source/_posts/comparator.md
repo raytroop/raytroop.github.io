@@ -304,3 +304,6 @@ CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Co
 -. Why Transient Noise (Trannoise) Analysis for A Strong-arm Latch / Comparator? [[https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_](https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_)]
 
 -. Why A Periodic Steady-State (PSS), Periodic Noise (Pnoise), and Hand Calculation for A Sampler? [[https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV](https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV)]
+
+Tony Chan Carusone,. 28 Comparator Specs and Characterization [[https://youtu.be/mRfWM1bpr3k?si=WJXz0r3MJ7WvZ6h2](https://youtu.be/mRfWM1bpr3k?si=WJXz0r3MJ7WvZ6h2)]
+

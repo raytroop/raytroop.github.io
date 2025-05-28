@@ -122,6 +122,26 @@ The maximum swing stays the same, $\sum_i |c_i|=1$
 *TODO* &#128197;
 
 
+
+
+
+## Forward Error Correction (FEC)
+
+It is called "**forward**" error correction because it can correct errors even in the common situations where there is no backward channel
+
+![image-20250527212624165](link/image-20250527212624165.png)
+
+
+
+> Keysight Technologies. Tutorial – Why Use Forward Error Correction (FEC) [[https://youtu.be/56nF4c61KR0?si=jYJSH50q9M3pIvQt](https://youtu.be/56nF4c61KR0?si=jYJSH50q9M3pIvQt)]
+>
+> Paul McLellan, What the FEC is Forward Error Correction? [[https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/fec](https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/fec)]
+
+
+
+
+
+
 ## Baseline Wander
 
 *TODO* &#128197;

@@ -6,6 +6,14 @@ categories:
 - devops
 ---
 
+## Restart Xfce panel
+
+```bash
+xfce4-panel -r
+```
+
+> [[https://askubuntu.com/a/891209](https://askubuntu.com/a/891209)]
+
 ## Rocky Linux 8 rpm for cadence binary and cdnshelp
 
 **qt5 and openssl**

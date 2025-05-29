@@ -1,5 +1,5 @@
 ---
-title: Delta-Sigma Data Converters
+title: Delta-Sigma Modulator
 date: 2024-09-08 16:48:32
 tags:
 categories:

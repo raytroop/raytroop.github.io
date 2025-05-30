@@ -218,13 +218,14 @@ $$
 
 ## idle tone & dithering
 
-**ditherin** break *periodicity* and convert them to noise while input is *constant*
+**dithering** break *periodicity* and convert them to *noise* while input is *constant*
+
+
 
 
 ## Fractional-N PLL
 
-page13
-
+![image-20250530190858386](delta-sigma/image-20250530190858386.png)
 $$
 \tau[n-1] + (N+y[n])T_{PLL} - (N+\alpha)T_{PLL} = \tau[n]
 $$
@@ -234,7 +235,13 @@ $$
 \tau[n] = \tau[n-1] + (y[n] - \alpha)T_{PLL}
 $$
 
-where $\tau[n] = t_{vdiv} -  t_{vdiv, desired}$ 
+where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$ 
+
+![image-20250530192215258](delta-sigma/image-20250530192215258.png)
+
+
+
+
 
 
 

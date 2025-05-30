@@ -216,6 +216,27 @@ $$
 > [[http://individual.utoronto.ca/schreier/lectures/12-2.pdf](http://individual.utoronto.ca/schreier/lectures/12-2.pdf)], [[http://individual.utoronto.ca/trevorcaldwell/course/Mismatch.pdf](http://individual.utoronto.ca/trevorcaldwell/course/Mismatch.pdf)]
 
 
+## idle tone & dithering
+
+**ditherin** break *periodicity* and convert them to noise while input is *constant*
+
+
+## Fractional-N PLL
+
+page13
+
+$$
+\tau[n-1] + (N+y[n])T_{PLL} - (N+\alpha)T_{PLL} = \tau[n]
+$$
+
+i.e.
+$$
+\tau[n] = \tau[n-1] + (y[n] - \alpha)T_{PLL}
+$$
+
+where $\tau[n] = t_{vdiv} -  t_{vdiv, desired}$ 
+
+
 
 ## reference
 

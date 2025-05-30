@@ -9,6 +9,63 @@ mathjax: true
 
 
 
+## Jitter and Edge phase noise
+
+[[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation/1388888](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation/1388888)]
+
+![ ](pn-jitter/jitter.edgePhase.Noise.png)
+
+![ ](pn-jitter/sampledNoise-2.png)
+
+
+
+
+
+## Phase Noise Aliasing & Integration Limits
+
+These two types of measurements deliver the **same rms jitter** of $f_{CK}$
+
+- both rising and falling:  integrated from $-f_{CK}$ to $+f_{CK}$
+- only the rising (or falling) edges: integrated from $-f_{CK}/2$ to $+f_{CK}/2$
+
+![image-20250524074831161](pn-jitter/image-20250524074831161.png)
+
+![image-20250523221143537](pn-jitter/image-20250523221143537.png)
+
+*temporal autocorrelation* and *Wiener-Khinchin theorem* is more appropriate to arise *rms value* 
+
+> Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
+
+
+
+## time-average noise (phase-noise) & sampled noise (edge-phase noise or jitter) spectrum
+
+![image-20250530203348622](pn-jitter/image-20250530203348622.png)
+
+### Time-average noise analysis
+
+![image-20250530203720538](pn-jitter/image-20250530203720538.png)![image-20250530204820891](pn-jitter/image-20250530204820891.png)
+
+> $S_{\Delta f}(f)$ between $[\Delta f, F_0/2]$ may be *less than* that of other harmonic window
+
+
+
+### Sampled noise analysis
+
+![image-20250530204030405](pn-jitter/image-20250530204030405.png)
+
+![image-20250530204222221](pn-jitter/image-20250530204222221.png)
+
+### correlation
+
+![image-20250530205849830](pn-jitter/image-20250530205849830.png)
+
+![image-20250530205919247](pn-jitter/image-20250530205919247.png)
+
+![image-20250530210543667](pn-jitter/image-20250530210543667.png)
+
+
+
 ## VCO Phase Noise
 
 ### pnoise - timeaverage
@@ -172,19 +229,6 @@ Cadence Spectre's `PN` function may call `abs_jitter` and `psd` function under t
 
 
 
-## Jitter and Edge phase noise
-
-[[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation/1388888](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation/1388888)]
-
-![ ](pn-jitter/jitter.edgePhase.Noise.png)
-
-![ ](pn-jitter/sampledNoise-2.png)
-
-
-## time-average noise (phase-noise) & sampled noise (edge-phase noise or jitter) spectrum
-
-*TODO* &#128197;
-
 
 ## reference
 
@@ -193,5 +237,7 @@ URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1
 
 Article (20500632) Title: How to simulate Random and Deterministic Jitters
 URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI)
+
+Cadence, Application Note: Understanding the relations between time-average noise (phase-noise) and sampled noise (edge-phase noise or jitter) in Pnoise analysis
 
 Tutorial on Scaling of the Discrete Fourier Transform and the Implied Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl Andersson, Patrik Höstmad, Wolfgang Kropp URL: [https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/](https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/)

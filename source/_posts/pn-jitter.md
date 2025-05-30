@@ -181,6 +181,10 @@ Cadence Spectre's `PN` function may call `abs_jitter` and `psd` function under t
 ![ ](pn-jitter/sampledNoise-2.png)
 
 
+## time-average noise (phase-noise) & sampled noise (edge-phase noise or jitter) spectrum
+
+*TODO* &#128197;
+
 
 ## reference
 

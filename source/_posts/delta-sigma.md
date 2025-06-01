@@ -216,10 +216,16 @@ $$
 > [[http://individual.utoronto.ca/schreier/lectures/12-2.pdf](http://individual.utoronto.ca/schreier/lectures/12-2.pdf)], [[http://individual.utoronto.ca/trevorcaldwell/course/Mismatch.pdf](http://individual.utoronto.ca/trevorcaldwell/course/Mismatch.pdf)]
 
 
-## idle tone & dithering
+
+## LSB Dither
 
 **dithering** break *periodicity* and convert them to *noise* while input is *constant*
 
+![image-20250601103141963](delta-sigma/image-20250601103141963.png)
+
+![image-20250601105409348](delta-sigma/image-20250601105409348.png)
+
+![image-20250601203932511](delta-sigma/image-20250601203932511.png)
 
 
 
@@ -238,6 +244,27 @@ $$
 where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$ 
 
 ![image-20250530192215258](delta-sigma/image-20250530192215258.png)
+
+
+
+![image-20250601170123635](delta-sigma/image-20250601170123635.png)
+
+In $z$-domain
+$$
+\left\{(\Alpha + D - Y)\frac{z^{-1}}{1-z^{-1}} - 2Y \right\}\frac{z^{-1}}{1-z^{-1}} + Q = Y
+$$
+That is
+$$
+Y = Az^{-2} + Dz^{-2} + Q(1-z^{-1})^2
+$$
+In time domain
+$$\begin{align}
+y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
+&= \alpha + d[n-2] + q[n]-2q[n-1]+q[n-2]
+\end{align}$$
+
+![image-20250601201952868](delta-sigma/image-20250601201952868.png)
+
 
 
 
@@ -267,7 +294,7 @@ Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Tr
 
 Ian Galton. Delta-Sigma Fractional-N Phase-Locked Loops [[https://ispg.ucsd.edu/wordpress/wp-content/uploads/2022/10/fnpll_ieee_tutorial_2003_corrected.pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2022/10/fnpll_ieee_tutorial_2003_corrected.pdf)]
 
-Sudhakar Pamarti. CICC 2020: Basics of Closed- and Open-Loop Fractional Frequency Synthesis [[https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx](https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx)]
+Sudhakar Pamarti. CICC 2020 ES2-2: Basics of Closed- and Open-Loop Fractional Frequency Synthesis [[https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx](https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx)]
 
 Joshua Reiss. Understanding sigma delta modulation: the solved and unsolved issues
 

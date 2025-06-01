@@ -49,6 +49,12 @@ $1/f^2$ Phase Noise Profile
 
 ![image-20250104085722649](osc-pn/image-20250104085722649.png)
 
+---
+
+![image-20250601101355166](osc-pn/image-20250601101355166.png)
+
+> Sudhakar Pamarti. CICC 2020 ES2-2: Basics of Closed- and Open-Loop Fractional Frequency Synthesis [[https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx](https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx)]
+
 
 
 ### flicker noise

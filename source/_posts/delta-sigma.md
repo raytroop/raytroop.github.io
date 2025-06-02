@@ -236,6 +236,26 @@ $$
 
 
 
+## drawback of Integer-N PLL
+
+**integer-N PLL frequency synthesizers**
+
+- the *frequency resolution*, is equal to the *reference frequency*, meaning that *only integer multiples of the reference frequency can be synthesized*
+
+- if *fine tuning* is required, only choice in an integer-N PLL is to *decrease the reference frequency*
+
+- *Stability requirements* limit the loop bandwidth to about *one tenth of the reference frequency*; therefore, decreasing the reference frequency increases the settling time as the loop bandwidth also has to be decreased
+
+- Another drawback of the integer-N PLL is the *trade-off between phase noise and settling time* when the *divider ratio becomes large* (The contributions to the output phase noise of almost all PLL building blocks, except the VCO, are **multiplied by the division ratio**)
+
+  > [[https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf)]
+  >
+  > ![image-20250602100424369](delta-sigma/image-20250602100424369.png)
+
+- if a small reference frequency is chosen, t*he reference spur in the output phase noise is located at a smaller offset frequency*
+
+
+
 ## Fractional-N PLL
 
 ![image-20250530190858386](delta-sigma/image-20250530190858386.png)
@@ -318,3 +338,4 @@ S. Pamarti and I. Galton, "LSB Dithering in MASH Delta–Sigma D/A Converters," 
 Michael Peter Kennedy. An Introduction to Digital Delta-Sigma Modulators [[https://site.ieee.org/scv-cas/files/2014/07/2014Kennedy.pdf](https://site.ieee.org/scv-cas/files/2014/07/2014Kennedy.pdf)]
 
 Kaveh Hosseini , Michael Peter Kennedy. Springer 2011. Minimizing Spurious Tones in Digital Delta-Sigma Modulators
+

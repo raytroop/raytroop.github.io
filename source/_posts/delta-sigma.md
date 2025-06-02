@@ -294,6 +294,12 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 
 
+## quantizer overload
+
+*TODO* &#128197;
+
+
+
 
 
 

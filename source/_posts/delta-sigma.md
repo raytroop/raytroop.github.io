@@ -187,6 +187,12 @@ The remaining *11 bits are truncated to 3-levels* using a second-order delta-sig
 
 
 
+## 1st order DDSM
+
+![image-20250604000323199](delta-sigma/image-20250604000323199.png)
+
+
+
 ## Mismatch Shaping
 
 ![image-20241112220458335](delta-sigma/image-20241112220458335.png)

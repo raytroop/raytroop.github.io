@@ -97,6 +97,7 @@ $$
 ![tau_1pole.drawio](2nd-sys/tau_1pole.drawio.svg)
 
 
+
 ### two poles
 
 #### Rise Time
@@ -155,6 +156,10 @@ $$
 
 
 > Above equation is valid only for **underdamped**, $\zeta=\frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}\lt 1$, that is $\omega_2\lt 4\omega_u$
+
+
+
+> C. T. Chuang, "Analysis of the settling behavior of an operational amplifier," in *IEEE Journal of Solid-State Circuits*, vol. 17, no. 1, pp. 74-80, Feb. 1982 [[https://sci-hub.se/10.1109/JSSC.1982.1051689](https://sci-hub.se/10.1109/JSSC.1982.1051689)]
 
 
 

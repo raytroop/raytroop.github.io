@@ -158,6 +158,21 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 ![image-20241022204239594](delta-sigma/image-20241022204239594.png)
 
+modulator output is $v$ and $y+e = v$, i.e. the *quantization* or *truncation error* is $v-y$
+
+$$
+ \left\{ \begin{array}{cl}
+Y  + E &= V   \\
+U - E z^{-1} &= Y  
+\end{array} \right.
+$$
+
+The STF and NTF is shown as below
+$$
+V = U + (1-z^{-1})E
+$$
+
+
 ---
 
 

@@ -193,13 +193,12 @@ for _ in range(Niter):
     vcur = int(ycur_bin[:-2]+'00', 2)
     vlist.append(vcur)
 
-# print(ylist)
-# print(vlist)
+print(ylist)
+print(vlist)
 print(sum(vlist)/len(vlist))
-
 ```
 
-`0.9990243902439024`
+![image-20250607161739820](delta-sigma/image-20250607161739820.png)
 
 
 

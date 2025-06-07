@@ -11,9 +11,9 @@ mathjax: true
 
 ## Switched Capacitor Circuits
 
-*TODO* &#128197;
+![image-20250607160642574](afe/image-20250607160642574.png)
 
-
+![image-20250607171740269](afe/image-20250607171740269.png)
 
 
 

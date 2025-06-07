@@ -7,6 +7,34 @@ categories:
 mathjax: true
 ---
 
+
+
+## DFE architecture
+
+![image-20250607235201147](rx/image-20250607235201147.png)
+
+Extensive work on DFEs has produced a multitude of architectures, which can be broadly categorized as "**direct**"" or "**unrolled**" (**speculative**) DFEs with "**full-rate**" or "**half-rate**" clocking
+
+
+
+![image-20250608000306928](rx/image-20250608000306928.png)
+
+![image-20250608000338808](rx/image-20250608000338808.png)
+
+![image-20250608000357010](rx/image-20250608000357010.png)
+
+
+
+
+
+> S. Ibrahim and B. Razavi, "Low-Power CMOS Equalizer Design for 20-Gb/s Systems," in *IEEE Journal of Solid-State Circuits*, vol. 46, no. 6, pp. 1321-1336, June 2011 [[https://sci-hub.se/10.1109/JSSC.2011.2134450](https://sci-hub.se/10.1109/JSSC.2011.2134450)]
+>
+> S. Ibrahim and B. Razavi, *Low-Power DFE Design* [[https://picture.iczhiku.com/resource/eetop/wykflwIuIQDzYNcB.PDF](https://picture.iczhiku.com/resource/eetop/wykflwIuIQDzYNcB.PDF)]
+
+
+
+
+
 ## PAM4 DFE
 
 ![image-20250525202236767](rx/image-20250525202236767.png)

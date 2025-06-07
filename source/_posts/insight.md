@@ -1148,7 +1148,9 @@ When a flip-flop samples an input that is changing during its aperture, the outp
 >
 > Kinniment, D. J. Synchronization and arbitration in digital systems. John Wiley & Sons Ltd (2007).
 >
-> Amr Adel Mohammady, Clock Domain Crossing. [[https://media.licdn.com/dms/document/media/D4E1FAQFGmDwVxj-A3Q/feedshare-document-pdf-analyzed/0/1727431256521?e=1728518400&v=beta&t=aY8BaqSPrHuQCesh_1hEPs-wYHQAF9XMI4eRfMij7zI](https://media.licdn.com/dms/document/media/D4E1FAQFGmDwVxj-A3Q/feedshare-document-pdf-analyzed/0/1727431256521?e=1728518400&v=beta&t=aY8BaqSPrHuQCesh_1hEPs-wYHQAF9XMI4eRfMij7zI)]
+> Amr Adel Mohammady, Clock Domain Crossing [[https://fpga-systems.ru/library/cdc/cdc_all_patrs.pdf](https://fpga-systems.ru/library/cdc/cdc_all_patrs.pdf)]
+>
+> Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
 
 
 

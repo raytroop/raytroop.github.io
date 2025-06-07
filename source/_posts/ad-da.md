@@ -576,15 +576,21 @@ John P. Keane, ISSCC2020, T5: "Fundamentals of Time-Interleaved ADCs" [[https://
 
 Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf)]
 
-—， "Design and Calibration Techniques for SAR and Pipeline ADCs"
+—， "Design and Calibration Techniques for SAR and Pipeline ADCs" [[http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf](http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf)]
 
-Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
+Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[link](【SC1.Introduction.to.ADCs.DACs.Metrics.Topologies.Trade.Space.and.Applications】 https://www.bilibili.com/video/BV1ENxxedEio/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 
-Aaron Buchwald, ISSCC 2008 T2 Pipelined A/D Converters:The Basics [[pdf](https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T02_Pres.pdf)]
+Aaron Buchwald, ISSCC 2008 T2 Pipelined A/D Converters: The Basics [[pdf](https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T02_Pres.pdf)]
 
 Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
 
 Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis [[https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T10/T10Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T10/T10Visuals.pdf)]
+
+Ahmed M. A. Ali. ISSCC2021 T5: Calibration Techniques in ADCs [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
+
+Jan Mulder Broadcom. ISSCC2015 T5: High-Speed Current-Steering DACs [[https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T5.pdf)]
+
+Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
 
 ---
 
@@ -640,5 +646,5 @@ Dan Boschen, "How to choose FFT depth for ADC performance analysis (SINAD, ENOB)
 
 B. Razavi, **"A Tale of Two ADCs - Pipelined Versus SAR"** IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 30, pp. 38-46, Summer 2015 [[https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15ADC.pdf)](https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15ADC.pdf))]
 
-Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[link](【SC1.Introduction.to.ADCs.DACs.Metrics.Topologies.Trade.Space.and.Applications】 https://www.bilibili.com/video/BV1ENxxedEio/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
 

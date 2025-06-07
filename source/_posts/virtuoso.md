@@ -9,6 +9,18 @@ mathjax: true
 
 
 
+## noiseon & noiseoff
+
+Options -> Analog...
+
+![image-20250607115137576](virtuoso/image-20250607115137576.png)
+
+
+
+> only work in presimu simulation (*excluding lpe.spi)*
+
+
+
 ## vsource with noisefile
 
 1. both rise/fall edge are added the noisefile

@@ -99,6 +99,14 @@ $$
 
 
 
+---
+
+![image-20250606204607565](osc-pn/image-20250606204607565.png)
+
+> B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and Measurement Techniques for High-Speed Data Links-A Tutorial," in IEEE Transactions on Circuits and Systems I. [[https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf](https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf)]
+
+
+
 ## Lorentzian spectrum 
 
 ![image-20240720134811859](osc-pn/image-20240720134811859.png)

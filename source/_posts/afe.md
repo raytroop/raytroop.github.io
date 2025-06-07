@@ -9,6 +9,18 @@ mathjax: true
 
 
 
+## Switched Capacitor Circuits
+
+*TODO* &#128197;
+
+
+
+
+
+> Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://www.youtube.com/watch?v=SL3-9ZMwdJQ](https://www.youtube.com/watch?v=SL3-9ZMwdJQ)]
+
+
+
 ## Integrator
 
 *TODO* &#128197;

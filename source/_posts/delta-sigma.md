@@ -158,7 +158,7 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 ![image-20241022204239594](delta-sigma/image-20241022204239594.png)
 
-modulator output is $v$ and $y+e = v$, i.e. the *quantization* or *truncation error* is $v-y$
+modulator output is $v$ and $y+e = v$, i.e. the *quantization* or *truncation error* $e = v-y$
 
 $$
  \left\{ \begin{array}{cl}
@@ -167,13 +167,45 @@ U - E z^{-1} &= Y
 \end{array} \right.
 $$
 
-The STF and NTF is shown as below
+The STF & NTF is shown as below
 $$
 V = U + (1-z^{-1})E
 $$
 
+```python
+m1 = 4  # MSBs
+m2 = 2  # LSBs
+Vmax = 2**(m1 + m2) - 1
+
+u = 1
+
+ylist = [0]
+vlist = [0]
+elist = []
+
+Niter = 2**10
+for _ in range(Niter):
+    ecur = vlist[-1] - ylist[-1]
+    elist.append(ecur)
+    ycur = (u - ecur) % Vmax	# overflow
+    ylist.append(ycur)
+    ycur_bin = format(ycur, '06b')
+    vcur = int(ycur_bin[:-2]+'00', 2)
+    vlist.append(vcur)
+
+# print(ylist)
+# print(vlist)
+print(sum(vlist)/len(vlist))
+
+```
+
+`0.9990243902439024`
+
+
 
 ---
+
+
 
 
 

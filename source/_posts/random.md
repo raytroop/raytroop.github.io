@@ -295,6 +295,36 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 
 
+## NRZ PSD
+
+![image-20231111100420675](random/image-20231111100420675.png)
+
+![image-20231111101322771](random/image-20231111101322771.png)
+
+![image-20231110224237933](random/image-20231110224237933.png)
+
+
+
+> Lecture 26 Autocorrelation Functions of Random Binary Processes [[https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf](https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf)]
+>
+> Lecture 32 Correlation Functions & Power Density Spectrum, Cross-spectral Density [[https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf](https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf)]
+
+
+
+---
+
+> ***Normal Distribution and Input-Referred Noise*** [[https://a2d2ic.wordpress.com/2013/06/05/normal-distribution-and-input-referred-noise/](https://a2d2ic.wordpress.com/2013/06/05/normal-distribution-and-input-referred-noise/)]
+
+
+
+![Fig.1 PDF for sum of a large number of random variables](random/normal1.jpg)
+
+
+
+![Fig.2 The noise signal, its auto correlation function, and spectral density [2]](random/trnoise.jpg)
+
+
+
 ## reference
 
 L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013

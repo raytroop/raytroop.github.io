@@ -29,5 +29,5 @@ Yohan Frans CICC2019 ES3-3: "ADC-based Wireline Transceiver" [[https://ieeexplor
 
 Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
 
-S. Jang, J. Lee, Y. Choi, D. Kim, and **G. Kim**, "[Recent advances in ultra-high-speed wireline receivers with ADC-DSP-based equalizers](https://ieeexplore.ieee.org/document/10767763)," *IEEE* *Open Journal of the Solid-State Circuits Society* *(***OJ-SSCS***),* vol. 4, pp. 290-304, Nov. 2024*.*
+S. Jang, J. Lee, Y. Choi, D. Kim, and **G. Kim**, "[Recent advances in ultra-high-speed wireline receivers with ADC-DSP-based equalizers](https://ieeexplore.ieee.org/document/10767763)," *IEEE* *Open Journal of the Solid-State Circuits Society* (OJ-SSCS), vol. 4, pp. 290-304, Nov. 2024.
 

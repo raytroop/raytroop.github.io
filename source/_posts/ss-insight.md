@@ -369,23 +369,6 @@ where we define $K_n(0) = K_n$
 
 
 
-
-## Spectral content of NRZ
-
-![image-20231111100420675](ss-insight/image-20231111100420675.png)
-
-![image-20231111101322771](ss-insight/image-20231111101322771.png)
-
-![image-20231110224237933](ss-insight/image-20231110224237933.png)
-
-
-
-> Lecture 26 Autocorrelation Functions of Random Binary Processes [[https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf](https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf)]
->
-> Lecture 32 Correlation Functions & Power Density Spectrum, Cross-spectral Density [[https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf](https://bpb-us-w2.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf)]
-
-
-
 ## sinusoidal steady-state and frequency response
 
 ![image-20231104104933781](ss-insight/image-20231104104933781.png)

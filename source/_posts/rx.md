@@ -9,7 +9,31 @@ mathjax: true
 
 
 
+## DFE Error Propagation
+
+*TODO* &#128197;
+
+![image-20250609201647012](rx/image-20250609201647012.png)
+
+
+
+
+
+> Geoff Zhang. Preliminary Studies on DFE Error Propagation, Precoding, and their Impact on KP4 FEC Performance for PAM4 Signaling Systems [[https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf](https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf)]
+
+
+
+## CTLE transfer function
+
+![image-20250609201257138](rx/image-20250609201257138.png)
+
+> Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M?si=J11oGnXnkJYPUi2n&t=1045](https://youtu.be/8NZl81Dj45M?si=J11oGnXnkJYPUi2n&t=1045)]
+
+
+
 ## DFE architecture
+
+![image-20250609201522455](rx/image-20250609201522455.png)
 
 ![image-20250607235201147](rx/image-20250607235201147.png)
 

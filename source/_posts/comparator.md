@@ -98,6 +98,12 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 
 
 
+---
+
+![image-20250609224554118](comparator/image-20250609224554118.png)
+
+> Zhaokai Liu. Time-interleaved SAR ADC Design Using Berkeley Analog Generator [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2020/EECS-2020-109.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2020/EECS-2020-109.pdf)]
+
 
 
 ## offset simulation
@@ -306,4 +312,3 @@ CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Co
 -. Why A Periodic Steady-State (PSS), Periodic Noise (Pnoise), and Hand Calculation for A Sampler? [[https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV](https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV)]
 
 Tony Chan Carusone,. 28 Comparator Specs and Characterization [[https://youtu.be/mRfWM1bpr3k?si=WJXz0r3MJ7WvZ6h2](https://youtu.be/mRfWM1bpr3k?si=WJXz0r3MJ7WvZ6h2)]
-

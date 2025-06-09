@@ -32,6 +32,10 @@ mathjax: true
 
 
 
+> P.E. Allen - 2003 ECE 6440 - Frequency Synthesizers: Lecture 150 – Phase Noise-I [[https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L150-PhaseNoise-I(2UP).pdf](https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L150-PhaseNoise-I(2UP).pdf)]
+
+
+
 ## Reference Spur
 
 **spurs** are carrier or clock frequency spectral imperfections measured in the frequency domain just like phase noise. However, unlike phase noise they are *discrete* frequency components.

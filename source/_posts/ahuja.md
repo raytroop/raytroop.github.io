@@ -193,13 +193,19 @@ a much greater magnitude than $g_\text{m9}/C_C$
 
 
 
+## Ahuja variations
+
+![image-20250609210452373](ahuja/image-20250609210452373.png)
+
+
+
 
 
 ## reference
 
-B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6, pp. 629-633, Dec. 1983.
+B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6, pp. 629-633, Dec. 1983. [[https://sci-hub.se/10.1109/JSSC.1983.1052012](https://sci-hub.se/10.1109/JSSC.1983.1052012)]
 
-U. Dasgupta, "Issues in "Ahuja" frequency compensation technique", IEEE International Symposium on Radio-Frequency Integration Technology, 2009.
+U. Dasgupta, "Issues in "Ahuja" frequency compensation technique", IEEE International Symposium on Radio-Frequency Integration Technology, 2009. [[https://sci-hub.se/10.1109/RFIT.2009.5383679](https://sci-hub.se/10.1109/RFIT.2009.5383679)]
 
 R. 1. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage CMOS amplifier," IEEE 1. Solid-State Circuits, vol. 30, no. 5, pp. 591- 594, May 1995. 
 

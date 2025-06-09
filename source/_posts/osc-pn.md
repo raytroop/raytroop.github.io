@@ -297,8 +297,6 @@ Finally, we obtain
 
 > David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
 
-
-
 ![image-20241016211020230](osc-pn/image-20241016211020230.png)
 
 ![image-20241016211101204](osc-pn/image-20241016211101204.png)
@@ -308,6 +306,18 @@ Finally, we obtain
 
 
 > To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
+
+
+
+## Amplitude Noise
+
+![image-20250609213352109](osc-pn/image-20250609213352109.png)
+
+![image-20250609213403991](osc-pn/image-20250609213403991.png)
+
+
+
+>  P.E. Allen - 2003. ECE 6440 - Frequency Synthesizers: Lecture 160 – Phase Noise - II [[https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L160-PhNoII(2UP).pdf](https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L160-PhNoII(2UP).pdf)]
 
 
 

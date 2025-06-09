@@ -35,14 +35,6 @@ mathjax: true
 
 
 
-## DFE Error Propagation
-
-*TODO* &#128197;
-
-
-
-> Geoff Zhang. Preliminary Studies on DFE Error Propagation, Precoding, and their Impact on KP4 FEC Performance for PAM4 Signaling Systems [[https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf](https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf)]
-
 
 
 ## JTOL btw DSP-based vs Analog PAM4 RX
@@ -92,23 +84,6 @@ The look-ahead multiplexing technique brings the key benefit that the timing con
 > Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI?si=lFiu1Kl4AKsg3O9f](https://youtu.be/puEP0DlVZGI?si=lFiu1Kl4AKsg3O9f)]
 >
 > Chen, Kuan-Chang (2022) *Energy-Efficient Receiver Design for High-Speed Interconnects.* Dissertation (Ph.D.), California Institute of Technology. [[https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf](https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf)]
-
-
-
-## Peak power constraint of TX FIR
-
-![image-20250514215647905](link/image-20250514215647905.png)
-
-Due to circuit limitation, circuit cannot have arbitrarily large voltage on the output, i.e. a *limited maximum swing*. In order to create the high frequency shape, the best we can do is *lower DC gain* (low frequency gain < 1)
-
-- FIR is not increasing the amplitude on the edges
-- FIR is reducing the inner eye diagram
-
-The maximum swing stays the same, $\sum_i |c_i|=1$
-
-
-
-> Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M?si=2a8FdfGNP6yBgIW8&t=829](https://youtu.be/8NZl81Dj45M?si=2a8FdfGNP6yBgIW8&t=829)]
 
 
 

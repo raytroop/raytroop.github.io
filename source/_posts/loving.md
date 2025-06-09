@@ -1897,6 +1897,27 @@ https://www.bilibili.com/video/BV1wQ4y1E7SW/?share_source=copy_web&vd_source=5a0
 
 
 ```
+Accept reality as it is and to try not to regret the past and try to improve the situation.
+
+It's so easy to spend so much time thinking like bad past decision or bad stroke of luck, something happened, something is unfair
+
+While it's just so much better and more productive to say, okay, things are the way they are. what's the next best step?
+
+And I find that whenever I do this myself, everything works out so much better. But it's hard. It's hard. It's a constant struggle with one's emotion.
+
+
+---
+Ilya Sutskever, U of T honorary degree recipient, June 6, 2025
+https://youtu.be/zuZ2zaotrJs?si=Ta-hpVJ56WwZ5CUX
+```
+
+
+
+
+
+
+
+```
 The two most important days in your life are the day you are born and the day you find out why.
 
 – Mark Twain

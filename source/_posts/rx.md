@@ -7,7 +7,12 @@ categories:
 mathjax: true
 ---
 
+## CTLE Linearity
 
+*TODO* &#128197;
+![202506101021_ctle_linearityl](rx/202506101021_ctle_linearityl.PNG)
+
+![202506101002_ctle_goal](rx/202506101002_ctle_goal.PNG)
 
 ## DFE Error Propagation
 
@@ -80,3 +85,11 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 > K. -C. Chen, W. W. -T. Kuo and A. Emami, "A 60-Gb/s PAM4 Wireline Receiver With 2-Tap Direct Decision Feedback Equalization Employing Track-and-Regenerate Slicers in 28-nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 3, pp. 750-762, March 2021 [[https://www.mics.caltech.edu/wp-content/uploads/2021/02/JSSC-2020-Xavier-PAM4-Receiver.pdf](https://www.mics.caltech.edu/wp-content/uploads/2021/02/JSSC-2020-Xavier-PAM4-Receiver.pdf)]
 >
 > Hongtao Zhang, DesignCon 2016. PAM4 Signaling for 56G Serial Link Applications − A Tutorial [[https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf](https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf)]
+
+
+## reference
+
+Miguel Gandara, MediaTek. CICC 2025 Circuit Insights: Basics of Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg?si=Or-rIUZ-nnygRbQv](https://youtu.be/X4JTuh2Gdzg?si=Or-rIUZ-nnygRbQv)]
+
+H. Park et al., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," 2025 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2025
+

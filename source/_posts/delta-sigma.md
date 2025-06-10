@@ -24,6 +24,8 @@ mathjax: true
 
 ![image-20241123140116340](delta-sigma/image-20241123140116340.png)
 
+![image-20250610223809074](delta-sigma/image-20250610223809074.png)
+
 
 
 ## No delay-free loops
@@ -156,20 +158,24 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 ## Truncation DAC
 
+> ![truncator_1bit.drawio](delta-sigma/truncator_1bit.drawio.svg)
+
+
+
 ![image-20241022204239594](delta-sigma/image-20241022204239594.png)
 
-modulator output is $v$ and $y+e = v$, i.e. the *quantization* or *truncation error* $e = v-y$
+with $\frac{y}{2^{m_2}} + q= v$,  where $v = \lfloor\frac{y}{2^{m_2}}\rfloor$
 
 $$
- \left\{ \begin{array}{cl}
-Y  + E &= V   \\
-U - E z^{-1} &= Y  
+\left\{ \begin{array}{cl}
+Y + 2^{m_2} Q &= 2^{m_2}V   \\
+U - z^{-1}2^{m_2}Q &= Y  
 \end{array} \right.
 $$
 
 The STF & NTF is shown as below
 $$
-V = U + (1-z^{-1})E
+V = \frac{1}{2^{m_2}}U + (1-z^{-1})Q
 $$
 
 ```python
@@ -389,8 +395,6 @@ Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Tr
 
 Ian Galton. Delta-Sigma Fractional-N Phase-Locked Loops [[https://ispg.ucsd.edu/wordpress/wp-content/uploads/2022/10/fnpll_ieee_tutorial_2003_corrected.pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2022/10/fnpll_ieee_tutorial_2003_corrected.pdf)]
 
-Sudhakar Pamarti. CICC 2020 ES2-2: Basics of Closed- and Open-Loop Fractional Frequency Synthesis [[https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx](https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx)]
-
 Joshua Reiss. Understanding sigma delta modulation: the solved and unsolved issues
 
  [[https://www.eecs.qmul.ac.uk/~josh/documents/2008/Reiss-JAES-UnderstandingSigmaDeltaModulation-SolvedandUnsolvedIssues.pdf](https://www.eecs.qmul.ac.uk/~josh/documents/2008/Reiss-JAES-UnderstandingSigmaDeltaModulation-SolvedandUnsolvedIssues.pdf)]
@@ -398,6 +402,8 @@ Joshua Reiss. Understanding sigma delta modulation: the solved and unsolved issu
 Ian Galton  ISSCC 2010 SC3: Fractional-N PLLs [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf)]
 
 ---
+
+Sudhakar Pamarti. CICC 2020 ES2-2: Basics of Closed- and Open-Loop Fractional Frequency Synthesis [[https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx](https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx)]
 
 S. Pamarti, J. Welz and I. Galton, "Statistics of the Quantization Noise in 1-Bit Dithered Single-Quantizer Digital Delta–Sigma Modulators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 54, no. 3, pp. 492-503, March 2007 [[https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf)]
 
@@ -407,3 +413,4 @@ Michael Peter Kennedy. An Introduction to Digital Delta-Sigma Modulators [[https
 
 Kaveh Hosseini , Michael Peter Kennedy. Springer 2011. Minimizing Spurious Tones in Digital Delta-Sigma Modulators
 
+P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]

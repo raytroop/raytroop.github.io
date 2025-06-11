@@ -168,7 +168,9 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 The noise-shaping loop output must contain a faithful *reproduction* of the input signal $u_0[n]$ in the *baseband*,
 
-But it will also include the *filtered truncation noise* caused by the *reduction of the word length* in the loop.
+but it will also include the *filtered truncation noise* caused by the *reduction of the word length* in the loop.
+
+Idealy, the ***DA***C will reproduce its *input **d**igital signal* in an ***a**nalog form* without any distortion
 
 ---
 

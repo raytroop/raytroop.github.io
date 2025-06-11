@@ -15,6 +15,16 @@ mathjax: true
 
 
 
+## Reference Buffer
+
+*TODO* &#128197;
+
+
+
+> C-H Chan (U. of Macau) "Extreme SAR ADCs - Exploring New Frontiers" Online Course (2024) : Reference Buffer in SAR ADC [[https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn](https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn)]
+
+
+
 ## CDAC intuition
 
 The *charge redistribution capacitor network* is used to sample the input signal and serves as a
@@ -212,8 +222,9 @@ $$\begin{align}
 
 
 
+## Asynchronous SAR ADC
 
-## Asynchronous processing
+The comparator itself trigger the next bit-conversion cycle as soon as the present bit decision has been taken
 
 ![image-20241021214922564](sar/image-20241021214922564.png)
 

@@ -312,3 +312,5 @@ CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Co
 -. Why A Periodic Steady-State (PSS), Periodic Noise (Pnoise), and Hand Calculation for A Sampler? [[https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV](https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV)]
 
 Tony Chan Carusone,. 28 Comparator Specs and Characterization [[https://youtu.be/mRfWM1bpr3k?si=WJXz0r3MJ7WvZ6h2](https://youtu.be/mRfWM1bpr3k?si=WJXz0r3MJ7WvZ6h2)]
+
+Prof. Seung-Tak Ryu (KAIST) "Advanced ADC Design Techniques" Online Course (2022) : Dynamic Latch  [[https://youtu.be/zE1ZdG_XzWk?si=rk-DGUqMnQyjDiuU](https://youtu.be/zE1ZdG_XzWk?si=rk-DGUqMnQyjDiuU)]

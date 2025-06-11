@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+![image-20250611074830238](delta-sigma/image-20250611074830238.png)
+
+> *"**Quantizers**" and "**truncators**", and "**integrators**" and "**accumulators**" are used in **delta-sigma ADCs** and **DACs**, respectively*
+
+---
+
+
+
 **Analog Delta Sigma Modulators (ADSM)**  are used in the context of *analog-to-digital conversion*
 
 - In a CT delta-sigma ADC, there is no need for an anti-aliasing filter or a front-end sampler

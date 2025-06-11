@@ -166,6 +166,12 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 ## Truncation DAC
 
+The noise-shaping loop output must contain a faithful *reproduction* of the input signal $u_0[n]$ in the *baseband*,
+
+But it will also include the *filtered truncation noise* caused by the *reduction of the word length* in the loop.
+
+---
+
 > ![truncator_1bit.drawio](delta-sigma/truncator_1bit.drawio.svg)
 
 

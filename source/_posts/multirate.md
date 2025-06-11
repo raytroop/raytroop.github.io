@@ -97,9 +97,15 @@ downsampled by a factor of $M = 2$
 
 
 
----
+### Interpolation filter
 
-![image-20241006074604512](multirate/image-20241006074604512.png)
+![image-20250611204944271](multirate/image-20250611204944271.png)
+
+
+
+![image-20250611205725078](multirate/image-20250611205725078.png)
+
+> *Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition"* 
 
 
 

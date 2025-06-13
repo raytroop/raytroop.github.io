@@ -72,13 +72,6 @@ mathjax: true
 
 
 
-## AC-coupling vs DC-coupling
-
-*TODO* &#128197;
-
-
-
-
 
 ## DFE architecture
 

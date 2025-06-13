@@ -412,6 +412,13 @@ ParaView
 - If check ParaView related options when ParaView is not setup properly, EMX simulation stop at  *Creating mesh...* without waring or errors (version 6.2).
 
 
+## pad & bump
+
+EMX process file contain *M0* up to *RDL-AP*
+
+PM, CB2_FC, UBM is in the chip package
+
+
 
 ## reference
 
@@ -420,3 +427,5 @@ URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AD4uE
 
 Using 'Cadence pins' as ports with access direction in EMX simulations [[link](Article (20496398) Title: Using 'Cadence pins' as ports with access direction in EMX simulations
 URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w00000AH2OfEAL)]
+
+EMX miscellaneous features [[https://picture.iczhiku.com/resource/eetop/WyIFKleSLTRIuvCb.pdf](https://picture.iczhiku.com/resource/eetop/WyIFKleSLTRIuvCb.pdf)]

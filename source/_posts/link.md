@@ -8,6 +8,32 @@ mathjax: true
 ---
 
 
+## AC-coupling vs DC-coupling
+
+*TODO* &#128197;
+
+
+## Linearity & Even-Order Distortion
+
+*TODO* &#128197;
+
+> Effect of Mismatch
+
+Odd order distortion: symmetry
+
+Even-Order Distortion: non-symmetry
+
+
+> S. Stegemann, W. Mathis. MOS-AK 2012: Interference and Distortion Analysis for Nonlinear Analog Circuits [[https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf](https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf)]
+>
+> [[http://cc.ee.ntu.edu.tw/~ecl/Courses/105AIC/lock/Analog_Chapter_09_Nonlinearity%20and%20Mismatch.pdf](http://cc.ee.ntu.edu.tw/~ecl/Courses/105AIC/lock/Analog_Chapter_09_Nonlinearity%20and%20Mismatch.pdf)]
+>
+> [[https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf](https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf)]
+>
+> Ali Sheikholeslami. A-SSCC 2024 insight: Noise and Distortion,  [[https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4](https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4)]
+>
+> B. Razavi, "Design considerations for direct-conversion receivers," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 44, no. 6, pp. 428-435, June 1997 [[http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf)]
+
 
 ## PAM4
 

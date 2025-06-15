@@ -1896,6 +1896,19 @@ https://www.bilibili.com/video/BV1wQ4y1E7SW/?share_source=copy_web&vd_source=5a0
 
 
 
+
+
+```
+Until you make the unconscious conscious, it will direct your life and you will call it fate. 
+潜意识如果没有进入意识，就会引导你的人生而成为你的命运。
+
+- Carl Jung
+```
+
+
+
+
+
 ```
 Accept reality as it is and to try not to regret the past and try to improve the situation.
 

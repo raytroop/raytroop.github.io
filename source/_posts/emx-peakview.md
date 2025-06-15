@@ -412,11 +412,14 @@ ParaView
 - If check ParaView related options when ParaView is not setup properly, EMX simulation stop at  *Creating mesh...* without waring or errors (version 6.2).
 
 
+
 ## pad & bump
 
 EMX process file contain *M0* up to *RDL-AP*
 
 PM, CB2_FC, UBM is in the chip package
+
+![image-20250613235639258](emx-peakview/image-20250613235639258.png)
 
 
 

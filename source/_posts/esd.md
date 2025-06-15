@@ -28,15 +28,93 @@ categories:
 >
 > Calibre PERC Catalog Test-Cases & Common Examples Version 2.0
 
+
+
 ## Latchup
 
-*TODO* &#128197;
+![image-20250615105811120](esd/image-20250615105811120.png)
+
+![image-20250615090308047](esd/image-20250615090308047.png)
+
+> This can happen when a ***parasitic thyristor***, which is essentially ***a pair of interconnected transistors***, is triggered into a latched state, leading to sustained current flow and potential device failure.
+
+![image-20250615111234769](esd/image-20250615111234769.png)
+
+
+
+### latchup-prevention technique
+
+![image-20250615073909333](esd/image-20250615073909333.png)
+
+![image-20250615085647213](esd/image-20250615085647213.png)
+
+
+
+
+
+> Technical Paper Ensuring latch-up guard rings ESDA rules using Calibre PERC [[https://resources.sw.siemens.com/en-US/technical-paper-ensuring-latch-up-guard-rings-esda-rules-using-calibre-perc/ ](https://resources.sw.siemens.com/en-US/technical-paper-ensuring-latch-up-guard-rings-esda-rules-using-calibre-perc/ )]
+
+
+
+#### Guard Rings
+
+One important technique is the use of ***guard rings***, the *heavily doped regions surrounding sensitive components* on the IC to *divert excess current away* from vulnerable areas, thereby reducing the likelihood of latch-up occurrence
+
+These guard rings not only function as *barriers against parasitic <u>thyristor</u> formation* but also serve
+to *isolate different regions* of the IC, minimizing unwanted electrical interactions and maintaining pathway integrity
+
+![image-20250615085930327](esd/image-20250615085930327.png)
+
+
+
+![image-20250615115154079](esd/image-20250615115154079.png)
+
+![image-20250615115306640](esd/image-20250615115306640.png)
+
+
+
+> P.E. Allen - 2016. CMOS Analog Circuit Design: Lecture 08 – Latchup and ESD (4/25/16) [[https://aicdesign.org/wp-content/uploads/2018/08/lecture08-160425.pdf](https://aicdesign.org/wp-content/uploads/2018/08/lecture08-160425.pdf)]
+
+
+
+
+### Transient-Induced Latchup
+
+![image-20250615101046612](esd/image-20250615101046612.png)
+
+![image-20250615103508641](esd/image-20250615103508641.png)
+
+![image-20250615105240076](esd/image-20250615105240076.png)
+
+![image-20250615105309789](esd/image-20250615105309789.png)
+
+
+
+*OD injector*
+
+![image-20250615104009056](esd/image-20250615104009056.png)
+
+
 
 
 
 ## Silicon Controlled Rectifiers (SCR)
 
-*TODO* &#128197;
+A **thyristor** (also known as a <u>**S**ilicon Controlled **R**ectifier</u> or **SCR**) is a three-terminal semiconductor device used as an *electronic switch* or *rectifier*
+
+![thyristor_construction-1](esd/thyristor_construction-1-e1698588829692-qekufkq0nir5v96shm0vdvjuhfcqrxvujeno0l2y8i.png)
+
+
+
+To turn the thyristor on, a positive voltage pulse is applied to the gate (G) terminal. This voltage pulse needs to be of sufficient magnitude to trigger the device. When the gate is triggered, it allows a small current to flow into the base of the *P-N-P* transistor within the thyristor structure
+
+![image-20250615102217116](esd/image-20250615102217116.png)
+
+> [[https://ec2-44-207-46-173.compute-1.amazonaws.com/thyristor/](https://ec2-44-207-46-173.compute-1.amazonaws.com/thyristor/)]
+
+
+
+![image-20250615111100951](esd/image-20250615111100951.png)
 
 
 
@@ -392,6 +470,10 @@ Wang, Albert ZH. *On-chip ESD protection for integrated circuits: an IC design p
 
 Wang, Albert. *Practical ESD Protection Design*. John Wiley & Sons, 2021.
 
-Ker, Ming-Dou, and Sheng-Fu Hsu. *Transient-induced latchup in CMOS integrated circuits*. John Wiley & Sons, 2009.
+Ker, Ming-Dou, and Sheng-Fu Hsu. *Transient-induced latchup in CMOS integrated circuits*. John Wiley & Sons, 2009.  [[https://picture.iczhiku.com/resource/eetop/wyiGjQaHOgrYFcxB.pdf](https://picture.iczhiku.com/resource/eetop/wyiGjQaHOgrYFcxB.pdf)]
 
 Milin Zhang, "Low Power Circuit Design Using Advanced CMOS Technology" River Publishers 2018
+
+Barry Fernelius,  Evans Analytical Group. Latch-up Testing [[https://site.ieee.org/ocs-cpmt/files/2013/06/Latch-up_at_EAG_IEEE_September_2013.pdf](https://site.ieee.org/ocs-cpmt/files/2013/06/Latch-up_at_EAG_IEEE_September_2013.pdf)]
+
+M. -D. Ker and Z. -H. Jiang, "Overview on Latch-Up Prevention in CMOS Integrated Circuits by Circuit Solutions," in *IEEE Journal of the Electron Devices Society*, vol. 11, pp. 141-152, 2023 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9998049](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9998049)]

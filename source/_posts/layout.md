@@ -9,6 +9,24 @@ mathjax: true
 
 
 
+## Copper Pillar Bump vs Solder bump
+
+Cu-pillar bumping is a next-generation flip chip interconnection between chip & packages, especially for fine pitch applications
+
+![img](layout/pic_Cu-pillarBumping_01.svg)
+
+![img](layout/pic_Cu-pillarBumping_02.svg)
+
+- On the wafer end, comparing to solder bump, cu-pillar bump provides the advantage of fine pitch; the die size can be reduced about 5~10%. 
+
+- On the package end, the substrate layer can be reduced from 6 layers to 4 layers by fine pitch and bump on trace process and using simplified substrate process. 
+
+
+
+![image-20250613233806417](layout/image-20250613233806417.png)
+
+
+
 ## Why Your Symmetric Layouts Are Showing Mismatches in SPICE Simulations
 
 > [[https://www.ansys.com/blog/symmetric-layouts-showing-mismatches-spice-simulations](https://www.ansys.com/blog/symmetric-layouts-showing-mismatches-spice-simulations)]

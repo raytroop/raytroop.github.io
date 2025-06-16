@@ -13,6 +13,15 @@ mathjax: true
 
 > *"**Quantizers**" and "**truncators**", and "**integrators**" and "**accumulators**" are used in **delta-sigma ADCs** and **DACs**, respectively*
 
+
+
+---
+
+![image-20250616223003455](delta-sigma/image-20250616223003455.png)
+
+- a delta–sigma **ADC** consists of **an analog modulator** followed by **a digital filter**
+- a delta–sigma **DAC** consists of **a digital modulator** followed by **an analog filter**
+
 ---
 
 
@@ -36,7 +45,19 @@ mathjax: true
 
 
 
+## Oversampling Advantage
+
+![image-20250611232612319](delta-sigma/image-20250611232612319.png)
+
+
+
+> [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
+
+
+
 ## Time and Frequency Domain
+
+### ADC
 
 ![image-20250611234653738](delta-sigma/image-20250611234653738.png)
 
@@ -44,7 +65,9 @@ mathjax: true
 
 > hackaday. Tearing Into Delta Sigma ADC’s [[https://hackaday.com/2016/07/07/tearing-into-delta-sigma-adcs-part-1/ ](https://hackaday.com/2016/07/07/tearing-into-delta-sigma-adcs-part-1/ )]
 
----
+
+
+### DAC
 
  an ***interpolation filter*** effectively ***up-samples its low-rate input*** and ***lowpass-filters the resulting high-rate data*** to produce a high-rate output <u>*devoid of images*</u>
 
@@ -58,13 +81,14 @@ mathjax: true
 
 
 
-## Oversampling Advantage
+## interpolation filter
 
-![image-20250611232612319](delta-sigma/image-20250611232612319.png)
+*Notice that the requirements of the **first** stage are very **demanding***
+
+![image-20250617001439043](delta-sigma/image-20250617001439043.png)
 
 
 
-> [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
 
 
 
@@ -199,6 +223,14 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 
 ![image-20241015215159577](delta-sigma/image-20241015215159577.png)
+
+Provided that $T=1$
+$$
+H_1(e^{j2\pi f}) = \frac{\text{sinc}(Nf)}{\text{sinc}(f)} = \frac{1}{N}\frac{\sin(\pi Nf)}{\sin(\pi f)}
+$$
+that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}, n\in \mathbb{Z}$
+
+
 
 ![image-20241015215227042](delta-sigma/image-20241015215227042.png)
 
@@ -458,6 +490,8 @@ Bruce A. Wooley , 2012, "The Evolution of Oversampling Analog-to-Digital Convert
 B. Razavi, "The Delta-Sigma Modulator [A Circuit for All Seasons]," IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 20, pp. 10-15, Spring 2016. [[http://www.seas.ucla.edu/brweb/papers/Journals/BRSpring16DeltaSigma.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/BRSpring16DeltaSigma.pdf)]
 
 Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016. Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.
+
+Horowitz, P., & Hill, W. (2015). *The art of electronics* (3rd ed.). Cambridge University Press. [[pdf](https://kolegite.com/EE_library/books_and_lectures/%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0/_The%20Art%20of%20Electronics%203rd%20ed%20%5B2015%5D.pdf)]
 
 ---
 

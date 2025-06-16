@@ -88,18 +88,31 @@ downsampled by a factor of $M = 2$
 
 ## Upsampling or Zero Insertion
 
-![image-20241006072426572](multirate/image-20241006072426572.png)
+![image-20250616214650347](multirate/image-20250616214650347.png)
 
+![image-20250616212057960](multirate/image-20250616212057960.png)
 
-![image-20241006074425704](multirate/image-20241006074425704.png)
+---
 
-![image-20241006075854246](multirate/image-20241006075854246.png)
+![image-20250616215844032](multirate/image-20250616215844032.png)
+
+Assuming $X(e^{j\omega_1}) = U_f(e^{j\omega_1})$ with $\omega_1 = \Omega T_1$, upsampled by ratio $L$, then obtain
+
+$$
+Y(e^{j\omega_2})=X(e^{j\omega_2 L})  = U_f(e^{j\omega_2 L})
+$$
+
+with $\omega_2 = \Omega T_2$ by EQ. (4.85), *i.e. substitute $\omega_1$ with $\omega_2 L$*, and $T_2 L = T_1$
+
+Provided that $\xi = e^{j\omega_1}$ and $z = e^{j\omega_2}$, we have $U_f(\xi)$ upsampled to $U_f(z^L)$
 
 
 
 ### Interpolation filter
 
-![image-20250611204944271](multirate/image-20250611204944271.png)
+![image-20250616214711197](multirate/image-20250616214711197.png)
+
+---
 
 
 

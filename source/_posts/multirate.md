@@ -102,7 +102,7 @@ $$
 Y(e^{j\omega_2})=X(e^{j\omega_2 L})  = U_f(e^{j\omega_2 L})
 $$
 
-with $\omega_2 = \Omega T_2$ by EQ. (4.85), *i.e. substitute $\omega_1$ with $\omega_2 L$*, and $T_2 L = T_1$
+by EQ. (4.85), *i.e. substitute $\omega_1$ with $\omega_2 L$*, where with $\omega_2 = \Omega T_2$ and $T_2 L = T_1$
 
 Provided that $\xi = e^{j\omega_1}$ and $z = e^{j\omega_2}$, we have $U_f(\xi)$ upsampled to $U_f(z^L)$
 

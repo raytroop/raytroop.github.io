@@ -12,6 +12,8 @@ mathjax: true
 ![image-20250611074830238](delta-sigma/image-20250611074830238.png)
 
 > *"**Quantizers**" and "**truncators**", and "**integrators**" and "**accumulators**" are used in **delta-sigma ADCs** and **DACs**, respectively*
+>
+> P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]
 
 
 
@@ -51,7 +53,32 @@ mathjax: true
 
 
 
-> [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
+> David Johns and Ken Martin. Oversampling Converters [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
+
+
+
+## *output* vs. *error*-feedback
+
+The ***error-feedback architecture*** is problematic for **analog** implementation, since it is sensitive to variations of its parameters (subtractor realization)
+
+- The error-feedback structure is thus of limited utility in $\Delta \Sigma$ **ADCs**
+- The error-feedback structure is very useful and applied in ***digital*** loops required in $\Delta \Sigma$ **DACs**
+
+
+
+### ADC
+
+![image-20250618010214097](delta-sigma/image-20250618010214097.png)
+
+
+
+###  DAC
+
+![image-20250617223537672](delta-sigma/image-20250617223537672.png)
+
+
+
+> P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]
 
 
 
@@ -67,6 +94,12 @@ mathjax: true
 
 
 
+---
+
+![image-20250617234727838](delta-sigma/image-20250617234727838.png)
+
+
+
 ### DAC
 
  an ***interpolation filter*** effectively ***up-samples its low-rate input*** and ***lowpass-filters the resulting high-rate data*** to produce a high-rate output <u>*devoid of images*</u>
@@ -76,6 +109,14 @@ mathjax: true
 > P.E. Allen -CMOS Analog Circuit Design: Lecture 39 – Oversampling ADCs – Part I (6/26/14)  [[https://aicdesign.org/wp-content/uploads/2018/08/lecture39-140626.pdf](https://aicdesign.org/wp-content/uploads/2018/08/lecture39-140626.pdf)]
 >
 > P.E. Allen -CMOS Analog Circuit Design: Lecture 40 – Oversampling ADCs – Part II (7/17/15) [[https://aicdesign.org/wp-content/uploads/2018/08/lecture40-150717.pdf](https://aicdesign.org/wp-content/uploads/2018/08/lecture40-150717.pdf)]
+
+
+
+---
+
+![image-20250617233904732](delta-sigma/image-20250617233904732.png)
+
+> David Johns and Ken Martin. Oversampling Converters [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
 
 
 
@@ -120,6 +161,16 @@ Sigma-delta digital-to-analog converters (SD DAC’s) are often used for *discre
 
 ## No delay-free loops
 
+Any such **physically feasible device** will take **a finite time** to operate – in other words, the *quantized output* will only be available a *small time* after the quantizer has "looked" at the input - *insert a one-sample delay*
+
+![image-20250617231014547](delta-sigma/image-20250617231014547.png)
+
+> there **cannot** be a *"delay free loop"* is a common idea in sequential digital state machine design
+
+
+
+---
+
 ![image-20241128232040924](delta-sigma/image-20241128232040924.png)
 
 > Both integrator and quantizer are delay free  
@@ -140,26 +191,17 @@ Switched capacitor has been the common realization technique of *discrete-time (
 
 
 
-## Delta Modulator
-
-![image-20240908173930949](delta-sigma/image-20240908173930949.png)
-
-$$\begin{align}
-(V_{in} - V_F) &= D_{out} \\
-D_{out} &= s V_F
-\end{align}$$
-
-Therefore $V_{in} - \frac{D_{out}}{s} = D_{out}$
-$$
-D_{out} = \frac{s}{s+1} V_{in}
-$$
 
 
-> attenuates the low-frequency content of the signal, and amplifies high-frequency noise.
+## MOD1 & MOD2
+
+***MOD1***: *first*-order noise-shaped converter ($\Delta\Sigma$ modulator)
+
+***MOD2***: *second*-order noise-shaped converter ($\Delta\Sigma$ modulator)
 
 
 
-## MOD1
+### MOD1
 
 ![image-20241005120659945](delta-sigma/image-20241005120659945.png)
 $$
@@ -204,9 +246,15 @@ Dout, the low frequency component of ADC out is same with Vin
 
 
 
-## MOD2
+### MOD2
 
 ![image-20241005160203074](delta-sigma/image-20241005160203074.png)
+
+
+
+### MOD1 with DC Excitation
+
+*TODO* &#128197;
 
 
 
@@ -321,6 +369,12 @@ print(sum(vlist)/len(vlist))
 | 62   | ![image-20250609233903431](delta-sigma/image-20250609233903431.png) | **1111**_**1**0 |
 
 !!! The $u$ is limited between *0* and *60* (MSBs_LSBs - LSBs)
+
+---
+
+> Tuan Minh Vo, S. Levantino and C. Samori, "Analysis of fractional-n bang-bang digital PLLs using phase switching technique," *2016 12th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME)*, Lisbon, Portugal, [[https://sci-hub.se/10.1109/PRIME.2016.7519545](https://sci-hub.se/10.1109/PRIME.2016.7519545)]
+
+![image-20250618001200589](delta-sigma/image-20250618001200589.png)
 
 
 
@@ -521,5 +575,5 @@ Michael Peter Kennedy. An Introduction to Digital Delta-Sigma Modulators [[https
 
 Kaveh Hosseini , Michael Peter Kennedy. Springer 2011. Minimizing Spurious Tones in Digital Delta-Sigma Modulators
 
-P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]
+
 

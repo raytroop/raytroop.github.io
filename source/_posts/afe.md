@@ -87,8 +87,22 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 > S. Galal and B. Razavi, "10-Gb/s Limiting Amplifier and Laser/Modulator Driver in 0.18um CMOS Technology,” IEEE Journal of Solid-State Circuits, vol. 38, pp. 2138-2146, Dec. 2003.  [[https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_2.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_2.pdf)]
 
 
+## source follower
 
-## Flipped Voltage Follower (FVF)
+### Super-source follower (SSF)
+
+![image-20240924213742877](afe/image-20240924213742877.png)
+
+![image-20240924213845608](afe/image-20240924213845608.png)
+
+![image-20240924213853954](afe/image-20240924213853954.png)
+
+> A. Sheikholeslami, "Voltage Follower, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
+>
+> Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiYDzqDOfoPaMVM.pdf)]
+
+
+### Flipped Voltage Follower (FVF)
 
 ![image-20240921110019881](afe/image-20240921110019881.png)
 
@@ -102,21 +116,6 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 > [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop)]
 >
 > Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118, doi: 10.1109/ISSCC42614.2022.9731650.
-
-
-
-## Super-source follower (SSF)
-
-![image-20240924213742877](afe/image-20240924213742877.png)
-
-![image-20240924213845608](afe/image-20240924213845608.png)
-
-![image-20240924213853954](afe/image-20240924213853954.png)
-
-> A. Sheikholeslami, "Voltage Follower, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
->
-> Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiYDzqDOfoPaMVM.pdf)]
-
 
 
 

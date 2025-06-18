@@ -33,7 +33,7 @@ mathjax: true
 
 
 
-> charging parasitic from CTLE + CTLE is signal processing,  bypass the capacitor is not acceptable
+> charging parasitic from CTLE + CTLE is signal processing,  bypass the capacitor is not feasiable
 
 ![image-20250611080134737](rx/image-20250611080134737.png)
 
@@ -42,6 +42,13 @@ mathjax: true
 ![image-20250611080709544](rx/image-20250611080709544.png)
 
 
+## Inductive Peaking
+*TODO* &#128197;
+
+**series peaking**: *capacitive splitting* - *split* the load capacitance between the amplifier drain capacitance and the next stage gate capacitance
+
+
+> S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension Techniques for CMOS Amplifiers," in IEEE Journal of Solid-State Circuits, vol. 41, no. 11, pp. 2424-2439, Nov. 2006 [[https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf](https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf)]
 
 ## CTLE Linearity
 

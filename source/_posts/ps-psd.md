@@ -482,6 +482,8 @@ Rapuano, Sergio, and Harris, Fred J., An Introduction to FFT and Time Domain Win
 
 [Neil Robertson, Evaluate Window Functions for the Discrete Fourier Transform](https://www.dsprelated.com/showarticle/1211.php)
 
+Neil Robertson. Add a Power Marker to a Power Spectral Density (PSD) Plot [[https://www.dsprelated.com/showarticle/1387.php](https://www.dsprelated.com/showarticle/1387.php)]
+
 [Mathuranathan Viswanathan, Interpret FFT, complex DFT, frequency bins & FFTShift](https://www.gaussianwaves.com/2015/11/interpreting-fft-results-complex-dft-frequency-bins-and-fftshift/)
 
 [robert bristow-johnson, Does windowing affect Parseval's theorem?](https://dsp.stackexchange.com/a/47603/59253)

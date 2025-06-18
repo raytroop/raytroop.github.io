@@ -86,8 +86,17 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 >
 > S. Galal and B. Razavi, "10-Gb/s Limiting Amplifier and Laser/Modulator Driver in 0.18um CMOS Technology,” IEEE Journal of Solid-State Circuits, vol. 38, pp. 2138-2146, Dec. 2003.  [[https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_2.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_2.pdf)]
 
-
 ## source follower
+
+> A. Sheikholeslami, "Voltage Follower, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
+>
+> —, ESSCIRC2023 Circuit Insights [[https://youtu.be/2xFIZM5_FPw?si=536cMdIXyIny27Uk](https://youtu.be/2xFIZM5_FPw?si=536cMdIXyIny27Uk)]
+>
+> —, CICC2025 Circuit Insights:  From Simple to Super Source Follower [[https://youtu.be/CWfMKltPIQ8?si=s0npv2GSQKYBv513](https://youtu.be/CWfMKltPIQ8?si=s0npv2GSQKYBv513)]
+>
+> Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiYDzqDOfoPaMVM.pdf)]
+
+
 
 ### Super-source follower (SSF)
 
@@ -96,10 +105,6 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 ![image-20240924213845608](afe/image-20240924213845608.png)
 
 ![image-20240924213853954](afe/image-20240924213853954.png)
-
-> A. Sheikholeslami, "Voltage Follower, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
->
-> Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiYDzqDOfoPaMVM.pdf)]
 
 
 ### Flipped Voltage Follower (FVF)

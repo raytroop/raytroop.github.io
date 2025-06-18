@@ -68,7 +68,9 @@ The ***error-feedback architecture*** is problematic for **analog** implementati
 
 ### ADC
 
-![202506181250_ADC_EFM](delta-sigma/202506181250_ADC_EFM.PNG)
+![image-20250618203604863](delta-sigma/image-20250618203604863.png)
+
+![image-20250618203636417](delta-sigma/image-20250618203636417.png)
 
 ###  DAC
 

@@ -122,6 +122,14 @@ Provided that $\xi = e^{j\omega_1}$ and $z = e^{j\omega_2}$, we have $U_f(\xi)$ 
 
 
 
+---
+
+![image-20250618225150839](multirate/image-20250618225150839.png)
+
+> Markus Nentwig. Polyphase filter / Farrows interpolation [[https://www.dsprelated.com/showarticle/22.php](https://www.dsprelated.com/showarticle/22.php)]
+
+
+
 ## sampling identities
 
 ![sampling-ID.drawio](multirate/sampling-ID.drawio.svg)

@@ -170,12 +170,19 @@ $$
 
 ## Pulse Width Jitter (PWJ)
 
+*TODO* &#128197;
+
+
 > [[Spectre Tech Tips: Measuring Noise in Digital Circuits](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)]
 
 **Pnoise sampled: Edge Delay mode** measures the noise defined by two edges. Both edges are defined by a threshold voltage and rising or falling edges, which measures the noise of the pulse itself and direct plot calculate the variation of the **pulse width**
 
 
+## Power supply induced jitter (PSIJ)
 
+A **sampled pxf** analysis can be used to simulate the *deterministic jitter* of a circuit due to *power supply ripple*
+
+*TODO* &#128197;
 
 
 ## reference
@@ -184,8 +191,29 @@ Article (20500632) Title: How to simulate Random and Deterministic Jitters URL: 
 
 Spectre Tech Tips: Measuring Noise in Digital Circuits - Analog/Custom Design - Cadence Blogs - Cadence Community [https://community.cadence.com/cadence_blogs_8/b/cic/posts/s . . .](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)
 
+Cadence RAK: Deterministic Jitter Measurement using SpectreRF
 
+Frank Wiedmann. Using sampled pxf analysis to simulate deterministic jitter [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/51605/using-sampled-pxf-analysis-to-simulate-deterministic-jitter](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/51605/using-sampled-pxf-analysis-to-simulate-deterministic-jitter)]
+
+supply noise sensitivity: PSS+PAC or PSS+PX [[https://designers-guide.org/forum/YaBB.pl?num=1376500816](https://designers-guide.org/forum/YaBB.pl?num=1376500816)]
+
+---
 
 J. Kim et al., "A 112 Gb/s PAM-4 56 Gb/s NRZ Reconfigurable Transmitter With Three-Tap FFE in 10-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 54, no. 1, pp. 29-42, Jan. 2019, doi: 10.1109/JSSC.2018.2874040
 
 — et al., "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 57, no. 1, pp. 6-20, Jan. 2022, doi: 10.1109/JSSC.2021.3108969
+
+---
+
+J. N. Tripathi, V. K. Sharma and H. Shrimali, "A Review on Power Supply Induced Jitter," in IEEE Transactions on Components, Packaging and Manufacturing Technology, vol. 9, no. 3, pp. 511-524, March 2019 [[https://sci-hub.st/10.1109/TCPMT.2018.2872608](https://sci-hub.st/10.1109/TCPMT.2018.2872608)]
+
+H. Kim, J. Fan and C. Hwang, "Modeling of power supply induced jitter (PSIJ) transfer function at inverter chains," 2017 IEEE International Symposium on Electromagnetic Compatibility & Signal/Power Integrity (EMCSI), Washington, DC, USA, 2017 [[https://sci-hub.st/10.1109/ISEMC.2017.8077937](https://sci-hub.st/10.1109/ISEMC.2017.8077937)]
+
+Yin Sun, Chulsoon Hwang EMC Laboratory. Improving Power Supply Induced Jitter Simulation Accuracy for IBIS Model [[https://ibis.org/summits/aug20/sun.pdf](https://ibis.org/summits/aug20/sun.pdf)]
+
+High Speed Communications Part 8 – On Die CMOS Clock Distribution. [[https://youtu.be/nx5CiHcwrF0?si=-eSO-LaaaFrVuIA1](https://youtu.be/nx5CiHcwrF0?si=-eSO-LaaaFrVuIA1)]
+
+Low-Jitter CMOS Clock Distribution [[https://youtu.be/LMT-T41Y64U?si=y8IpWCtU90zpe4Ob](https://youtu.be/LMT-T41Y64U?si=y8IpWCtU90zpe4Ob)]
+
+Mo, Xunjun & Wu, Jiaqi & Wary, Nijwm & Carusone, Tony. (2021). Design Methodologies for Low-Jitter CMOS Clock Distribution. IEEE Open Journal of the Solid-State Circuits Society. 1. 94-103. 10.1109/OJSSCS.2021.3117930. [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395)]
+

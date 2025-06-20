@@ -1,5 +1,5 @@
 ---
-title: Paper reading
+title: paper reading
 date: 2046-10-23 02:09:00
 tags:
 categories:

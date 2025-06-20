@@ -1,5 +1,5 @@
 ---
-title: Jitters Simulation for Driven Circuit
+title: Clock Distribution Techniques
 date: 2022-05-16 00:39:22
 tags:
 categories:
@@ -7,17 +7,17 @@ categories:
 mathjax: true
 ---
 
-![image-20220516004008878](jitter-drivencir/image-20220516004008878.png)
+![image-20220516004008878](clk_distribution/image-20220516004008878.png)
 
 ## Deterministic Jitter
 
-![image-20220516004058916](jitter-drivencir/image-20220516004058916.png)
+![image-20220516004058916](clk_distribution/image-20220516004058916.png)
 
-![image-20220516004206118](jitter-drivencir/image-20220516004206118.png)
+![image-20220516004206118](clk_distribution/image-20220516004206118.png)
 
 `j_Djpp` can be calculated by PSD,too
 
-![image-20220516004615033](jitter-drivencir/image-20220516004615033.png)
+![image-20220516004615033](clk_distribution/image-20220516004615033.png)
 
 ```matlab
 fck = 38.4e6;
@@ -88,11 +88,11 @@ BER =
 
 
 
-![image-20220516160050961](jitter-drivencir/image-20220516160050961.png)
+![image-20220516160050961](clk_distribution/image-20220516160050961.png)
 
 
 
-![image-20220516193125490](jitter-drivencir/image-20220516193125490.png)
+![image-20220516193125490](clk_distribution/image-20220516193125490.png)
 
 ## Total Jitter
 
@@ -100,11 +100,11 @@ $$
 \text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} + \text{RJ}_{\text{p-p}}(\text{BER})
 $$
 
-![tj.drawio](jitter-drivencir/tj.drawio.svg)
+![tj.drawio](clk_distribution/tj.drawio.svg)
 
-![image-20220516160006909](jitter-drivencir/image-20220516160006909.png)
+![image-20220516160006909](clk_distribution/image-20220516160006909.png)
 
-![image-20220516012200383](jitter-drivencir/image-20220516012200383.png)
+![image-20220516012200383](clk_distribution/image-20220516012200383.png)
 
 > In the psd of TJ, the spur is DJ and floor is RJ
 
@@ -156,7 +156,7 @@ The above equation has been verified for *sampled pnoise*, i.e.  *J<sub>ee</sub>
 
 One example, integrate to $\frac{f_{osc}}{2}$ and $f_{osc} = 16GHz$
 
-![image-20220415100034220](jitter-drivencir/image-20220415100034220.png)
+![image-20220415100034220](clk_distribution/image-20220415100034220.png)
 
 
 
@@ -178,11 +178,15 @@ $$
 **Pnoise sampled: Edge Delay mode** measures the noise defined by two edges. Both edges are defined by a threshold voltage and rising or falling edges, which measures the noise of the pulse itself and direct plot calculate the variation of the **pulse width**
 
 
+
 ## Power supply induced jitter (PSIJ)
 
 A **sampled pxf** analysis can be used to simulate the *deterministic jitter* of a circuit due to *power supply ripple*
 
 *TODO* &#128197;
+
+
+
 
 
 ## reference
@@ -216,4 +220,12 @@ High Speed Communications Part 8 – On Die CMOS Clock Distribution. [[https://y
 Low-Jitter CMOS Clock Distribution [[https://youtu.be/LMT-T41Y64U?si=y8IpWCtU90zpe4Ob](https://youtu.be/LMT-T41Y64U?si=y8IpWCtU90zpe4Ob)]
 
 Mo, Xunjun & Wu, Jiaqi & Wary, Nijwm & Carusone, Tony. (2021). Design Methodologies for Low-Jitter CMOS Clock Distribution. IEEE Open Journal of the Solid-State Circuits Society. 1. 94-103. 10.1109/OJSSCS.2021.3117930. [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395)]
+
+---
+
+Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems [[[Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems](https://www.nishanchettri.com/isscc-slides/2021 ISSCC/SHORT COURSE/ISSCC2021-SC3.pdf)]([Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems](https://www.nishanchettri.com/isscc-slides/2021 ISSCC/SHORT COURSE/ISSCC2021-SC3.pdf))]
+
+Phillip Restle. ISSCC2021 SC4: Processor Clock Generation, Distribution, and Clock Sensor/Management Loops [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC4.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC4.pdf)]
+
+Sam Palermo. Spring 2025 ECEN720 : High-Speed Links Circuits and Systems [[Lecture 14: Clock Distribution Techniques](https://people.engr.tamu.edu/spalermo/ecen689/lecture14_ee720_clk_distribution.pdf)]
 

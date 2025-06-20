@@ -1,5 +1,5 @@
 ---
-title: Phase Noise in Oscillators
+title: Oscillators Phase Noise
 date: 2024-10-16 12:16:48
 tags:
 categories:
@@ -281,33 +281,6 @@ Finally, we obtain
 ![image-20241208100556466](osc-pn/image-20241208100556466.png)
 
 
-## VCO ISF Simulation
-
-### PSS + PXF Method
-
-> Yizhe Hu, "A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF)" [[https://bbs.eetop.cn/thread-869343-1-1.html](https://bbs.eetop.cn/thread-869343-1-1.html)]
-
-
-
-*TODO* &#128197;
-
-
-
-### Transient Method
-
-> David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
-
-![image-20241016211020230](osc-pn/image-20241016211020230.png)
-
-![image-20241016211101204](osc-pn/image-20241016211101204.png)
-
-![image-20241016211115630](osc-pn/image-20241016211115630.png)
-
-
-
-> To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
-
-
 
 ## Amplitude Noise
 
@@ -358,12 +331,4 @@ Godone, A. & Micalizio, Salvatore & Levi, Filippo. (2008). RF spectrum of a carr
 
 Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
 
-Akihide Sai, Toshiba. ISSCC 2023 T5: All-digital PLLs From Fundamental Concepts to Future Trends [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T5.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T5.pdf)]
 
-E. Hegazi, H. Sjoland and A. A. Abidi, "A filtering technique to lower LC oscillator phase noise," in IEEE Journal of Solid-State Circuits, vol. 36, no. 12, pp. 1921-1930, Dec. 2001 [[https://sci-hub.st/10.1109/4.972142](https://sci-hub.st/10.1109/4.972142)]
-
-D. Murphy, H. Darabi and H. Wu, "Implicit Common-Mode Resonance in LC Oscillators," in IEEE Journal of Solid-State Circuits, vol. 52, no. 3, pp. 812-821, March 2017, [[https://sci-hub.st/10.1109/JSSC.2016.2642207](https://sci-hub.st/10.1109/JSSC.2016.2642207)]
-
-D. Murphy, H. Darabi and H. Wu, "25.3 A VCO with implicit common-mode resonance," 2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers, San Francisco, CA, USA, 2015 [[https://sci-hub.st/10.1109/ISSCC.2015.7063116](https://sci-hub.st/10.1109/ISSCC.2015.7063116)]
-
-A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]

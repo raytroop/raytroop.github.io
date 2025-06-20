@@ -237,6 +237,25 @@ $$
 
 
 
+### Group Delay vs . Phase Delay
+
+The effectiveness of the group delay analysis on evaluating a *wideband* circuit is *questionable*
+
+***differentiating operation:***
+
+-  group delay provides a good insight on the delay variation at a *vicinity of a certain frequency*
+- group delay makes a constant term be disappeared and distorts the weight of each polynomial term
+
+
+
+
+
+> CC Chen. Why Group Delay Optimization? [[https://youtu.be/Lv7yO_LkKng?si=yg-vyUPyredA_dER](https://youtu.be/Lv7yO_LkKng?si=yg-vyUPyredA_dER)]
+>
+> W. Bae, B. Nikolić and D. -K. Jeong, "Use of Phase Delay Analysis for Evaluating Wideband Circuits: An Alternative to Group Delay Analysis," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 25, no. 12, pp. 3543-3547, Dec. 2017, [[https://sci-hub.se/10.1109/TVLSI.2017.2747157](https://sci-hub.se/10.1109/TVLSI.2017.2747157)]
+
+
+
 
 
 ## Feedback Rearrange

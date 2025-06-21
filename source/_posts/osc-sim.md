@@ -11,6 +11,10 @@ mathjax: true
 
 ## ISF Simulation
 
+![image-20241113232703941](osc-sim/image-20241113232703941.png)
+
+
+
 ### PSS + PXF Method
 
 > Yizhe Hu, "A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF)" [[https://bbs.eetop.cn/thread-869343-1-1.html](https://bbs.eetop.cn/thread-869343-1-1.html)]

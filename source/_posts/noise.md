@@ -229,14 +229,6 @@ plt.show()
 
 
 
-## ISF for Oscillators
-
-*TODO* &#128197;
-
-![image-20241113232703941](noise/image-20241113232703941.png)
-
-
-
 ##  Sampled Thermal Noise
 
 The **aliasing of the noise**, or **noise folding**, plays an important role in switched-capacitor as it does in all switched-capacitor filters

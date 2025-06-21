@@ -211,55 +211,12 @@ Dead zone induced by *incomplete settling* of charge-pump currents
 
 
 
-## DCC & IQ Calibration 
-
-*TODO* &#128197;
-
-
-
-
-
-> Bob Lefferts, Navraj Nandra. SNUG Israel 2007 [[https://picture.iczhiku.com/resource/eetop/whKYwQorwYoPUVbm.pdf](https://picture.iczhiku.com/resource/eetop/whKYwQorwYoPUVbm.pdf)]
 
 ## multi-modulus divider
 
 *TODO* &#128197;
 
 
-
-
-
-## Duty-cycle correction circuit 
-
-The amount of correction can be set by intentional injection of an *offset current* into the summing input node of INV, ***threshold-adjustable inverter***
-
-> Note that the change to the threshold is ***opposite in direction*** to the change to INV
->
-> increasing DC of input signal is equivalent to lower down the threshold of INV
-
-![image-20241215233057176](clocking/image-20241215233057176.png)
-
-
-
----
-
-![image-20241216205525818](clocking/image-20241216205525818.png)
-
-voltage at *INV1* will increased by:
-$$
-\frac{\Delta V_{DAC} - \Delta {INV1}}{R_{DAC}} = \frac{\Delta {INV1} +A_0 \Delta {INV1}}{R_{F}}
-$$
-therefore
-$$
-\Delta {INV1} = \Delta V_{DAC} \cdot \frac{R_F}{R_F+(A_0+1)R_{DAC}} \approx  \Delta V_{DAC} \cdot \frac{R_F}{A_0R_{DAC}}
-$$
-
-If $R_{DAC} = R_F$
-$$
-\Delta {INV1}\approx \frac{\Delta V_{DAC}}{A_0}
-$$
-
-> C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)* [[https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205](https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205)]
 
 
 
@@ -439,21 +396,6 @@ And for a phase interpolator, you need those reference clocks to be completely t
 - edge of ck0 is affected differently by ck1
 
 - edge of ck1 is affected equally by ck0
-
-
-
-
-
-
-
-## clock distribution
-
-*TODO* &#128197;
-
-
-
-> X. Mo, J. Wu, N. Wary and T. C. Carusone, "Design Methodologies for Low-Jitter CMOS Clock Distribution," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 1, pp. 94-103, 2021
->
 
 
 

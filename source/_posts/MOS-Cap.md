@@ -46,7 +46,11 @@ classification with **Intrinsic** and **Extrinsic** MOS capacitor
 
 ![image-20241120201309635](MOS-Cap/image-20241120201309635.png)
 
-![image-20241120201339074](MOS-Cap/image-20241120201339074.png)
+
+
+![image-20250621113254648](MOS-Cap/image-20250621113254648.png)
+
+> ![image-20250621122921814](MOS-Cap/image-20250621122921814.png)
 
 ![image-20241120201603222](MOS-Cap/image-20241120201603222.png)
 

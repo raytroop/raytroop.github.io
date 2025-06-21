@@ -49,6 +49,8 @@ mathjax: true
 
 ### Interleaver Model
 
+![image-20250621112657111](ti-adc/image-20250621112657111.png)
+
 
 
 

@@ -288,17 +288,27 @@ $$
 
 
 
-- $h[n] = Th_c(nT)$ & $T$ is small enough
+- $h[n] = Th_c(nT)$ and $T\to 0$ 
 
-  only guarantees the output equivalence ***only at the sampling instants***, that is, $y_c(nT) = y_r(nT)$
+  guarantees $y_c(nT) = y_r(nT)$, i.e. *output equivalence* ***only at the sampling instants***
 
-- Provided $H_c(j\Omega)$ is bandlimited & $T \lt 1/2f_h$
+- $H_c(j\Omega)$ is *bandlimited* and $T \lt 1/2f_h$
 
   guarantees $y_c(t) = y_r(t)$
 
 
 
 > The scaling of $T$ can alternatively be thought of as a normalization of the time domain, that is average impulse response shall be same i.e., $h[n]\times 1 = h(nT)\times T$
+
+
+
+---
+
+![image-20250621214228274](z-laplace/image-20250621214228274.png)
+
+---
+
+![image-20250621214307332](z-laplace/image-20250621214307332.png)
 
 
 
@@ -382,6 +392,22 @@ title('frequency response of different methods');
 ![image-20250517083748566](z-laplace/image-20250517083748566.png)
 
 
+
+
+
+## Modeling a Continuous-Time System with Matlab
+
+*TODO* &#128197;
+
+
+
+
+
+
+
+> Neil Robertson. Modeling a Continuous-Time System with Matlab [[https://www.dsprelated.com/showarticle/1055.php](https://www.dsprelated.com/showarticle/1055.php)]
+>
+> Neil Robertson. Modeling Anti-Alias Filters [[https://www.dsprelated.com/showarticle/1418.php](https://www.dsprelated.com/showarticle/1418.php)]
 
 
 

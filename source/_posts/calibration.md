@@ -78,3 +78,5 @@ A. Chan Carusone and D. A. Johns, "Analog Filter Adaptation Using a Dithered Lin
 David Johns, "Integrated Circuits for Digital Communications" [[https://www.eecg.toronto.edu/~johns/nobots/courses/ece1392/slides.pdf](https://www.eecg.toronto.edu/~johns/nobots/courses/ece1392/slides.pdf)]
 
 Tai-Haur Kuo "Advanced Analog IC Design for Communications" [[http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html](http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html)]
+
+Chadi Jabbour, Telecom Paristech. ISCAS 2019 T12: Digitally Enhanced Mixed Signal Systems [[https://www.youtube.com/watch?v=rACuCSDm5jQ](https://www.youtube.com/watch?v=rACuCSDm5jQ)]

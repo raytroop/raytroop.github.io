@@ -114,7 +114,7 @@ The ***error-feedback architecture*** is problematic for **analog** implementati
 
 ---
 
-![image-20250617233904732](delta-sigma/image-20250617233904732.png)
+![image-20250621181615703](delta-sigma/image-20250621181615703.png)
 
 > David Johns and Ken Martin. Oversampling Converters [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
 
@@ -127,35 +127,6 @@ The ***error-feedback architecture*** is problematic for **analog** implementati
 *Notice that the requirements of the **first** stage are very **demanding***
 
 ![image-20250617001439043](delta-sigma/image-20250617001439043.png)
-
-
-
-
-
-
-## Sigma-Delta DAC
-
-*TODO* &#128197;
-
-Sigma-delta digital-to-analog converters (SD DAC’s) are often used for *discrete-time signals* with *sample rate much higher than their bandwidth*
-
-- Because of the high sample rate relative to signal bandwidth, ***a very simple DAC reconstruction filter* (*Analog lowpass filter*)** suffices, often just a *one-pole RC lowpass*
-
-![image-20250616000829208](delta-sigma/image-20250616000829208.png)
-
-
-
-
-
-> Dan Boschen. sigma delta modulator for DAC [[https://dsp.stackexchange.com/a/88357/59253](https://dsp.stackexchange.com/a/88357/59253)]
->
-> Neil Robertson. Model a Sigma-Delta DAC Plus RC Filter [[https://www.dsprelated.com/showarticle/1642.php](https://www.dsprelated.com/showarticle/1642.php)]
->
-> Jason Sachs. Return of the Delta-Sigma Modulators, Part 1: Modulation [[https://www.dsprelated.com/showarticle/1517/return-of-the-delta-sigma-modulators-part-1-modulation](https://www.dsprelated.com/showarticle/1517/return-of-the-delta-sigma-modulators-part-1-modulation)]
->
-> Robertson, Neil, “A Simplified Matlab Function for Power Spectral Density”, DSPRelated.com, March, 2020, [[https://www.dsprelated.com/showarticle/1333.php](https://www.dsprelated.com/showarticle/1333.php)]
-
-
 
 
 

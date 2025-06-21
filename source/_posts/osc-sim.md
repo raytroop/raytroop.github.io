@@ -91,7 +91,11 @@ Akihide Sai, Toshiba. ISSCC 2023 T5: All-digital PLLs From Fundamental Concepts 
 
 Pietro Andreani. ISSCC 2011 T1: Integrated LC oscillators [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T1.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T1.pdf)]
 
-Pietro Andreani. ISSCC 2017 F2: Integrated Harmonic Oscillators
+—. ISSCC 2017 F2: Integrated Harmonic Oscillators
+
+—. SSCS Distinguished Lecture: RF Harmonic Oscillators Integrated in Silicon Technologies [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-Toronto.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-Toronto.pdf)]
+
+—. ESSCIRC 2019 Tutorials: RF Harmonic Oscillators Integrated in Silicon Technologies [[https://youtu.be/k1I9nP9eEHE?si=fns9mf3aHjMJobPH](https://youtu.be/k1I9nP9eEHE?si=fns9mf3aHjMJobPH)]
 
 Jun Yin. ISSCC 2025  T10:  mm-Wave Oscillator Design
 

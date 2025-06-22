@@ -65,7 +65,7 @@ classification with **Intrinsic** and **Extrinsic** MOS capacitor
 
 
 
-### Temperature Dependence of Junction Diode CV
+## Temperature Dependence of Junction Diode CV
 
 ![image-20240901234200243](MOS-Cap/image-20240901234200243.png)
 
@@ -85,27 +85,39 @@ where *TCJ* and *TCJSW* are positive
 
 
 
+## varactor
 
-
-## D=S=B varactor
+### D=S=B varactor
 
 ![image-20220924003223575](MOS-Cap/image-20220924003223575.png)
 
----
 
 
 
-##  Inversion-mode (I-MOS)
+
+![image-20250622205317309](MOS-Cap/image-20250622205317309.png)
+
+
+
+###  Inversion-mode (I-MOS)
 
 ![image-20220924003314979](MOS-Cap/image-20220924003314979.png)
 
 ---
 
+![image-20250622211213169](MOS-Cap/image-20250622211213169.png)
 
 
 
+### Accumulation-mode (A-MOS)
 
-## Accumulation-mode (A-MOS)
+![image-20250622211513994](MOS-Cap/image-20250622211513994.png)
+
+
+
+![image-20250622212138953](MOS-Cap/image-20250622212138953.png)
+
+
 
 > NMOS in NWELL, aka **NMOS in N-Well varactor**
 >
@@ -163,6 +175,8 @@ where *TCJ* and *TCJSW* are positive
 
 
 ## reference
+
+Aditya Varma Muppala. MOS Varactors | Oscillators 15 | MMIC 27 [[https://youtu.be/LYCLZPQvIz0?si=yoSBZSD2j_wEx0zZ](https://youtu.be/LYCLZPQvIz0?si=yoSBZSD2j_wEx0zZ)]
 
 R. L. Bunch and S. Raman, "Large-signal analysis of MOS varactors in CMOS -G/sub m/ LC VCOs," in IEEE Journal of Solid-State Circuits, vol. 38, no. 8, pp. 1325-1332, Aug. 2003, doi: 10.1109/JSSC.2003.814416.
 

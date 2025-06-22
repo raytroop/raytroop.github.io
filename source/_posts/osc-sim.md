@@ -13,7 +13,7 @@ mathjax: true
 
 > ***Nonlinear*** Dynamics
 
- 
+ ![image-20250622202023590](osc-sim/image-20250622202023590.png)
 
 
 

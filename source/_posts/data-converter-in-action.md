@@ -41,6 +41,44 @@ plot(t, y_filt); title('y_{filt}'); xlabel('t(ms)'); grid on
 
 
 
+## Appendix
+
+```matlab
+% https://www.dsprelated.com/showarticle/1642.php
+% Neil Robertson, Model a Sigma-Delta DAC Plus RC Filter
+
+% function [y,y_filt] = sd_dacRC(x,R,C,fs)  2/5/24 Neil Robertson
+% 1-bit sigma-delta DAC with RC filter
+% Model does not include a zero-order hold.
+%
+% x = input signal vector, 0 <= x < 1
+% R = series resistor value, Ohms.  Normally R > 1000 for 3.3 V logic.
+% C = shunt capacitor value, Farads
+% fs = sample frequency, Hz
+% y = DAC output signal vector, y(n) = 0 or 1
+% y_filt = RC filter output signal vector
+%
+function [y,y_filt] = sd_dacRC(x,R,C,fs)
+N= length(x);
+x= fix(x*2^16)/2^16;        % quantize x to 16 bits
+%I 1-bit Sigma-delta DAC
+s= [x(1) zeros(1,N-1)];
+for n= 2:N
+    u= x(n) + s(n-1);
+    s(n)= mod(u,1);        % sum
+    y(n)= fix(u);          % carry
+end
+%II One-pole RC filter model
+Ts= 1/fs;
+Wc= 1/(R*C);               % rad -3 dB frequency
+fc= Wc/(2*pi);             % Hz -3 dB frequency
+a1= -exp(-Wc*Ts);
+b0= 1 + a1;                % numerator coefficient
+a= [1 a1];                 % denominator coeffs
+y_filt= filter(b0,a,y);    % filter the DAC's output signal y
+
+```
+
 
 
 ## reference

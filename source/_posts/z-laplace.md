@@ -141,6 +141,14 @@ transform,  then the ROC must include the **unit circle**
 
 
 
+### $z$-Transform Table
+
+![image-20250622105429578](z-laplace/image-20250622105429578.png)
+
+
+
+> [[http://www.ws.binghamton.edu/Fowler/fowler%20personal%20page/EE301_files/ZT%20Tables_rev2.pdf](http://www.ws.binghamton.edu/Fowler/fowler%20personal%20page/EE301_files/ZT%20Tables_rev2.pdf)]
+
 ## Unilateral $z$-Transform
 
 ![image-20241001225603923](z-laplace/image-20241001225603923.png)
@@ -304,11 +312,20 @@ $$
 
 ---
 
+> note that the *impulse-invariant transform* is ***not*** appropriate for ***high-pass responses***, because of ***aliasing errors***
+>
+> ![image-20250622082500575](z-laplace/image-20250622082500575.png)
+
+
+
+&#11088; *bandlimited*
+
 ![image-20250621214228274](z-laplace/image-20250621214228274.png)
 
----
+&#11088; *bandlimited*
 
 ![image-20250621214307332](z-laplace/image-20250621214307332.png)
+
 
 
 
@@ -394,20 +411,6 @@ title('frequency response of different methods');
 
 
 
-
-## Modeling a Continuous-Time System with Matlab
-
-*TODO* &#128197;
-
-
-
-
-
-
-
-> Neil Robertson. Modeling a Continuous-Time System with Matlab [[https://www.dsprelated.com/showarticle/1055.php](https://www.dsprelated.com/showarticle/1055.php)]
->
-> Neil Robertson. Modeling Anti-Alias Filters [[https://www.dsprelated.com/showarticle/1418.php](https://www.dsprelated.com/showarticle/1418.php)]
 
 
 
@@ -553,6 +556,113 @@ The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***i
 ![image-20241024230308374](z-laplace/image-20241024230308374.png)
 
 ![image-20241026230904395](z-laplace/image-20241026230904395.png)
+
+
+
+## Modeling a Continuous-Time System with Matlab
+
+> Neil Robertson. Modeling a Continuous-Time System with Matlab [[https://www.dsprelated.com/showarticle/1055.php](https://www.dsprelated.com/showarticle/1055.php)]
+>
+> —. Modeling Anti-Alias Filters [[https://www.dsprelated.com/showarticle/1418.php](https://www.dsprelated.com/showarticle/1418.php)]
+>
+> `impinvar` [[https://www.mathworks.com/help/signal/ref/impinvar.html](https://www.mathworks.com/help/signal/ref/impinvar.html)]
+>
+> `bilinear` [[https://www.mathworks.com/help/signal/ref/bilinear.html](https://www.mathworks.com/help/signal/ref/bilinear.html)]
+>
+> `filte` [[https://www.mathworks.com/help/matlab/ref/filter.html](https://www.mathworks.com/help/matlab/ref/filter.html)]
+
+
+
+### Impulse Invariance (`impinvar`)
+
+-  To extend the accurate frequency range, we would need to ***increase the sample rate***
+-  impulse-invariant transform is not appropriate for *high-pass responses*, because of ***aliasing errors***
+
+
+
+Note $h[n] = Th_c(nT)$, Multiply the analog ***impulse response*** by this gain to enable meaningful comparison (*other response, like step, the amplitude correction is not needed*)
+
+
+
+![image-20250622091049131](z-laplace/image-20250622091049131.png)
+
+---
+
+
+
+![image-20250622095817885](z-laplace/image-20250622095817885.png)
+
+```matlab
+% https://www.dsprelated.com/showarticle/1055.php
+% modified by hguo, Sun Jun 22 09:21:48 AM CST 2025
+
+% butter_3rd_order.m      6/4/17 nr
+% Starting with the butterworth transfer function in s,
+% Create discrete-time filter using the impulse invariance xform and compare
+% its time and frequency responses to those of the continuous time filter.
+% Filter fc = 1 rad/s = 0.159 Hz
+
+
+% I.  Given H(s), find H(z) using the impulse-invariant transform
+fs= 4;            % Hz  sample frequency
+% 3rd order butterworth polynomial
+num= 1;
+den= [1 2 2 1];
+[b,a]= impinvar(num,den,fs);         % coeffs of H(z)
+%[b,a]= bilinear(num,den,fs)
+
+% II.  Impulse Response and Step Response
+% find discrete-time impulse response
+Ts= 1/fs;
+N= 16*fs;
+n= 0:N-1;
+t= n*Ts;
+x= [1, zeros(1,N-1)];   % impulse
+x= fs*x;              % make impulse response amplitude independent of fs
+y= filter(b,a,x);    % filter the impulse  
+subplot(2,2,1),plot(t,y,'.'),grid,
+xlabel('seconds')
+
+% Continuous-time Impulse response from inverse Laplace transform
+% Blinchikoff and Zverev, p116
+h= exp(-t) - 2/sqrt(3)*exp(-t/2).*cos(sqrt(3)/2*t + pi/6); 
+subplot(2,2,2),plot(t,y,'.',t,h),grid
+title('Impulse Response'),legend('discrete-time filter response', 'continuous-time filter response'),xlabel('seconds')
+
+% find discrete-time step response
+x= ones(1,N);         % step
+y= filter(b,a,x);    % filter the step         
+% Continuous-time step response. Blinchikoff and Zverev, p116
+t= t+Ts/2;                 % offset t to to align step responses
+h= 1 - exp(-t) - 2/sqrt(3)*exp(-t/2).*sin(sqrt(3)/2*t); 
+e= h-y;                    % error of discrete-time response
+subplot(2,2,3),plot(t,y,'.',t,h),grid
+title('Step Response'),legend('discrete-time filter response', 'continuous-time filter response'),xlabel('seconds')
+% discrete-time response error
+subplot(2,2,4),plot(t,e),grid
+title('Error of discrete-time step response'),xlabel('seconds')
+```
+
+![image-20250622093151404](z-laplace/image-20250622093151404.png)
+
+
+
+---
+
+- To use the `filter` function with the `b` coefficients from an FIR filter, use `y = filter(b,1,x)`.
+
+
+
+---
+
+![image-20250622110340687](z-laplace/image-20250622110340687.png)
+
+
+
+### Bilinear Transformation (`bilinear`)
+
+*TODO* &#128197;
+
 
 
 

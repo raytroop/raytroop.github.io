@@ -9,6 +9,18 @@ mathjax: true
 
 
 
+## Limit Cycles
+
+> ***Nonlinear*** Dynamics
+
+ 
+
+
+
+> [[https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf)]
+
+
+
 ## ISF Simulation
 
 ![image-20241113232703941](osc-sim/image-20241113232703941.png)

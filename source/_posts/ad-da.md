@@ -7,6 +7,53 @@ categories:
 mathjax: true
 ---
 
+## Top-Plate vs Bottom-Plate Sampling
+
+> [[https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf](https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf)]
+
+###  Bottom-Plate Sampling
+
+> Sample signal at the *"grounded"* side of the capacitor to achieve ***signal independent sampling***
+
+![image-20240825231816582](ad-da/image-20240825231816582.png)
+
+![image-20240825232007848](ad-da/image-20240825232007848.png)
+
+![image-20240825232717342](ad-da/image-20240825232717342.png)
+
+![image-20240825233801855](ad-da/image-20240825233801855.png)
+
+![image-20240825233821389](ad-da/image-20240825233821389.png)
+
+---
+
+![image-20240825233859540](ad-da/image-20240825233859540.png)
+
+> [[https://indico.cern.ch/event/1064521/contributions/4475393/attachments/2355793/4078773/esi_sampling_and_converters2022.pdf](https://indico.cern.ch/event/1064521/contributions/4475393/attachments/2355793/4078773/esi_sampling_and_converters2022.pdf)]
+
+
+
+> EE 435 Spring 2024 Analog VLSI Circuit Design - Switched-Capacitor Amplifiers Other Integrated Filters, [https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf](https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf)
+
+### Top-Plate Sampling
+
+*TODO* &#128197;
+
+![image-20250622235355760](ad-da/image-20250622235355760.png)
+
+
+
+> Maintain constant common-mode during conversion
+
+
+
+> D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024 [[https://iccircle.com/static/upload/img20240529101747.pdf](https://iccircle.com/static/upload/img20240529101747.pdf)]
+>
+> —, "A 224Gb/s 3pJ/bit 42dB Insertion Loss Post-FEC Error Free Transceiver in 3-nm FinFET CMOS (Invited)," *2025 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2025, pp. 1-8, doi: 10.1109/CICC63670.2025.10983461.
+>
+> E. Swindlehurst et al., "An 8-bit 10-GHz 21-mW Time-Interleaved SAR ADC With Grouped DAC Capacitors and Dual-Path Bootstrapped Switch," IEEE Journal of Solid-State Circuits, vol. 56, no. 8, pp. 2347-2359, 2021, [[https://sci-hub.se/10.1109/JSSC.2021.3057372](https://sci-hub.se/10.1109/JSSC.2021.3057372)]
+
+
 
 
 ## Relationship Between SFDR and INL
@@ -47,11 +94,6 @@ long-term average of *absolute values* of all 32 sub-ADC samples should be equal
 > Jiang, Xicheng, ed. *Digitally-Assisted Analog and Analog-Assisted Digital IC Design*. Cambridge: Cambridge University Press, 2015.
 
 
-## Differential top-plate sampling
-
-*TODO* &#128197;
-
-> Maintain constant common-mode during conversion
 
 
 
@@ -275,30 +317,6 @@ $$
 ![image-20241215101727644](ad-da/image-20241215101727644.png)
 
 
-
-## Bottom plate sampling
-
-> Sample signal at the *"grounded"* side of the capacitor to achieve ***signal independent sampling***
-
-![image-20240825231816582](ad-da/image-20240825231816582.png)
-
-![image-20240825232007848](ad-da/image-20240825232007848.png)
-
-![image-20240825232717342](ad-da/image-20240825232717342.png)
-
-![image-20240825233801855](ad-da/image-20240825233801855.png)
-
-![image-20240825233821389](ad-da/image-20240825233821389.png)
-
----
-
-![image-20240825233859540](ad-da/image-20240825233859540.png)
-
-> [[https://indico.cern.ch/event/1064521/contributions/4475393/attachments/2355793/4078773/esi_sampling_and_converters2022.pdf](https://indico.cern.ch/event/1064521/contributions/4475393/attachments/2355793/4078773/esi_sampling_and_converters2022.pdf)]
-
-
-
-> EE 435 Spring 2024 Analog VLSI Circuit Design - Switched-Capacitor Amplifiers Other Integrated Filters, [https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf](https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf)
 
 
 

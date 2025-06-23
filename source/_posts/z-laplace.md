@@ -569,7 +569,7 @@ The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***i
 >
 > `bilinear` [[https://www.mathworks.com/help/signal/ref/bilinear.html](https://www.mathworks.com/help/signal/ref/bilinear.html)]
 >
-> `filte` [[https://www.mathworks.com/help/matlab/ref/filter.html](https://www.mathworks.com/help/matlab/ref/filter.html)]
+> `filter` [[https://www.mathworks.com/help/matlab/ref/filter.html](https://www.mathworks.com/help/matlab/ref/filter.html)]
 
 
 

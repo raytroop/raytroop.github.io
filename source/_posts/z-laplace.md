@@ -573,6 +573,28 @@ The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***i
 
 
 
+### Approximation of Derivatives
+
+$$
+s \to \frac{1-z^{-1}}{T}
+$$
+
+
+### Matched z-Transform (Root Matching)
+
+$$
+z = e^{sT}
+$$
+
+> The design of IIR filters [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/14f29be83ac38f11eb1a1bd5fdb6f5ea_lecture_18.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/14f29be83ac38f11eb1a1bd5fdb6f5ea_lecture_18.pdf)]
+>
+> The design of IIR filters (cont.) [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf)]
+>
+> Lecture 19: Design of IIR Filters [[http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf](http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf)]
+
+---
+
+
 ### Impulse Invariance (`impinvar`)
 
 -  To extend the accurate frequency range, we would need to ***increase the sample rate***

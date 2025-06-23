@@ -559,7 +559,13 @@ The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***i
 
 
 
-## Modeling a Continuous-Time System with Matlab
+## Design of IIR Filters From Analog Filters
+
+> Modeling a Continuous-Time System with Matlab
+
+![image-20250623205733778](z-laplace/image-20250623205733778.png)
+
+
 
 > Neil Robertson. Modeling a Continuous-Time System with Matlab [[https://www.dsprelated.com/showarticle/1055.php](https://www.dsprelated.com/showarticle/1055.php)]
 >
@@ -570,14 +576,22 @@ The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***i
 > `bilinear` [[https://www.mathworks.com/help/signal/ref/bilinear.html](https://www.mathworks.com/help/signal/ref/bilinear.html)]
 >
 > `filter` [[https://www.mathworks.com/help/matlab/ref/filter.html](https://www.mathworks.com/help/matlab/ref/filter.html)]
+>
+> ---
+>
+> The design of IIR filters [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/14f29be83ac38f11eb1a1bd5fdb6f5ea_lecture_18.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/14f29be83ac38f11eb1a1bd5fdb6f5ea_lecture_18.pdf)]
+>
+> The design of IIR filters (cont.) [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf)]
+>
+> Lecture 19: Design of IIR Filters [[http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf](http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf)]
 
 
 
 ### Approximation of Derivatives
 
-$$
-s \to \frac{1-z^{-1}}{T}
-$$
+![image-20250623205828010](z-laplace/image-20250623205828010.png)
+
+
 
 
 ### Matched z-Transform (Root Matching)
@@ -588,13 +602,29 @@ $$
 z = e^{sT}
 $$
 
-> The design of IIR filters [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/14f29be83ac38f11eb1a1bd5fdb6f5ea_lecture_18.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/14f29be83ac38f11eb1a1bd5fdb6f5ea_lecture_18.pdf)]
->
-> The design of IIR filters (cont.) [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf)]
->
-> Lecture 19: Design of IIR Filters [[http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf](http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf)]
+![image-20250623213116836](z-laplace/image-20250623213116836.png)
+
+![image-20250623214002049](z-laplace/image-20250623214002049.png)
 
 ---
+
+![image-20250623220318339](z-laplace/image-20250623220318339.png)
+
+```matlab
+% https://www.dsprelated.com/showarticle/1642.php
+
+%II One-pole RC filter model
+Ts= 1/fs;
+Wc= 1/(R*C);               % rad -3 dB frequency
+fc= Wc/(2*pi);             % Hz -3 dB frequency
+a1= -exp(-Wc*Ts);
+b0= 1 + a1;                % numerator coefficient
+a= [1 a1];                 % denominator coeffs
+y_filt= filter(b0,a,y);    % filter the DAC's output signal y
+```
+
+
+
 
 
 ### Impulse Invariance (`impinvar`)

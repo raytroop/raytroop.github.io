@@ -68,7 +68,9 @@ for n= 2:N
     s(n)= mod(u,1);        % sum
     y(n)= fix(u);          % carry
 end
+
 %II One-pole RC filter model
+% Matched z-Transform https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf
 Ts= 1/fs;
 Wc= 1/(R*C);               % rad -3 dB frequency
 fc= Wc/(2*pi);             % Hz -3 dB frequency

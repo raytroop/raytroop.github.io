@@ -582,6 +582,8 @@ $$
 
 ### Matched z-Transform (Root Matching)
 
+The *matched Z-transform method*, also called the *pole-zero mapping* or *pole-zero matching method*, and abbreviated **MPZ** or **MZT**
+
 $$
 z = e^{sT}
 $$

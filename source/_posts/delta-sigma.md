@@ -55,7 +55,11 @@ mathjax: true
 
 > David Johns and Ken Martin. Oversampling Converters [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
 
+---
 
+![Over Sampling](delta-sigma/tmx9o.png)
+
+[[https://dsp.stackexchange.com/a/40261/59253](https://dsp.stackexchange.com/a/40261/59253)]
 
 ## *output* vs. *error*-feedback
 

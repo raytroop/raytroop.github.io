@@ -34,7 +34,7 @@ dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N x_n'\cdot \fra
 $$
 &#11088; where $x_n'= S_{x_n}^T T$ is the contribution of $x_n$ in $T$
 
-&#11088; For parallel or series resistors, it can prove $\sum_{n=1}^N S_{x_n}^T = 1$ and $ \sum_{n=1}^N x_n'=T$
+&#11088; For parallel or series resistors, it can prove $\sum_{n=1}^N S_{x_n}^T = 1$ and $\sum_{n=1}^N x_n'=T$
 
 ---
 
@@ -56,7 +56,10 @@ R_1'  &= S_{R_1}^T  T | _{R_1=8000, R_2=2000} = 320 \\
 R_2'  &= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
 \end{align}$$
 
-## scholar
+
+
+---
+
 **Normalized sensitivity** captures **relative sensitivity**
 
 >  change in objective per change in design variable

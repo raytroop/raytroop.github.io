@@ -205,7 +205,9 @@ by a simple transfer function. The equivalent filter in a **zero-order hold** is
 
 The interpolation filter following an up-sampler generally is *time varying* and *cannot* be represented by a simple transfer function. The equivalent filter in a **Zero-Order Hold** is an exception, perhaps unique, that can be represented with a *time-invariant transfer function* 
 
+![image-20250627173816810](multirate/image-20250627173816810.png)
 
+![image-20250627173926092](multirate/image-20250627173926092.png)
 
 ---
 
@@ -362,7 +364,7 @@ $$
 
 DC gain $K_B$ of summing (boxcar filter) is *decimation factor* $M$ , voting gain $K_V$ is about $0.54K_b=0.54M$
 
-1. downsampling $\frac{1}{M}$ and ZOH $\frac{1-z^{-M}}{1-z^{-1}}$ can be can be cancelled out at low frequency
+1. downsampling $\frac{1}{M}$ and ZOH $\frac{1-z^{-M}}{1-z^{-1}}$ can be canceled out at low frequency
 2. decimation gain: accumulator $\frac{1-z^{-M}}{1-z^{-1}}$ replaced with linearizing gain $K_B$ and majority voting replaced with $K_V$
 
 **proportional path:**

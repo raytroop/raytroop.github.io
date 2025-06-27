@@ -338,17 +338,17 @@ We can deal only with the jitter's amplitude and frequency instead of the PSD of
 $$
 JTOL(f) = \left | \varphi_{in}(f)  \right |_{\text{pp-max}} \quad \text{for a fixed BER}
 $$
-Where the subscript $\text{pp-max}$ indicates the maximum peak-to-peak amplitude. We can further expand this equation as follows
+Where the subscript **$\text{pp-max}$** indicates the maximum **peak-to-peak amplitude**. We can further expand this equation as follows
 $$
-JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right| \cdot |\varphi_e(f)|_{pp-max}
+JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right| \cdot |\varphi_e(f)|_\text{pp-max}
 $$
-![image-20220504114650749](link/image-20220504114650749.png)
+![image-20250627204121289](link/image-20250627204121289.png)
 
 > Relative jitter, $\varphi_e$ must be less than 1UIpp for error-free operation
 
 
 
-In an ideal CDR, the **maximum peak-to-peak amplitude** of $|\varphi_e(f)|$ is **1UI**, i.e.,$|\varphi_e(f)|_{pp-max}=1UI$
+In an ideal CDR, the **maximum peak-to-peak amplitude** of $|\varphi_e(f)|$ is **1UI**, i.e.,$|\varphi_e(f)|_\text{pp-max}=1UI$
 
 Accordingly, jitter tolerance can be expressed in terms of the number of UIs as
 $$
@@ -362,8 +362,6 @@ Expand $H_{LF}(f)$ for the CDR, we can write
 $$
 JTOL(f)=\left| 1-2\xi j \left(\frac{f_n}{f}\right) - \left(\frac{f_n}{f}\right)^2 \right|\quad \text{[UI]}
 $$
-![image-20220504120538534](link/image-20220504120538534.png)
-
 At frequencies far below and above the natural frequency, the jitter tolerance can be approximated by the following
 $$
 JTOL(f) = \left\{ \begin{array}{cl}
@@ -373,6 +371,39 @@ JTOL(f) = \left\{ \begin{array}{cl}
 $$
 
 > the jitter tolerance at very **high jitter frequencies** is limited to **1UIpp**
+
+
+
+![image-20250627212710868](link/image-20250627212710868.png)
+
+```matlab
+clc;
+clear all;
+
+f_fn = logspace(-1, 2, 60);
+for xi = [2, 1, 0.5, 0.2]
+    jtol = abs(1- 1i*2*xi.*(1./f_fn)- (1./f_fn).^2);
+    loglog(f_fn, jtol,LineWidth=2)
+    disp(["min(JTpp)=", min(jtol),"@\xi=",xi])
+    hold on
+end    
+grid on;
+xlabel("f/f_n")
+ylabel('JT_{pp}')
+legend('\xi=2', '\xi=1', '\xi=0.5', '\xi=0.2')
+```
+
+
+
+---
+
+![image-20250627202659095](link/image-20250627202659095.png)
+
+![image-20250627203101366](link/image-20250627203101366.png)
+
+![image-20250627203654688](link/image-20250627203654688.png)
+
+
 
 ### OJTF
 

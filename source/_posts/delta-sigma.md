@@ -59,7 +59,13 @@ mathjax: true
 
 ![Over Sampling](delta-sigma/tmx9o.png)
 
-[[https://dsp.stackexchange.com/a/40261/59253](https://dsp.stackexchange.com/a/40261/59253)]
+Nyquist sampling theorem @signal: no aliasing, signal remain the same
+
+noise folding @noise: *same* total noise power spread over a wider frequency
+
+
+
+> [[https://dsp.stackexchange.com/a/40261/59253](https://dsp.stackexchange.com/a/40261/59253)]
 
 ## *output* vs. *error*-feedback
 

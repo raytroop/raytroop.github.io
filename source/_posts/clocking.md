@@ -415,36 +415,6 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-## VCO varactor
-
-> Two methods: 1. pss + pac; 2. pss+psp
-
-### PSS + PAC
-
-![image-20220510192206354](clocking/image-20220510192206354.png)
-
-pss time domain
-
-![image-20220510192351590](clocking/image-20220510192351590.png)
-
-using the **0-harmonic**
-
-![image-20220510192447040](clocking/image-20220510192447040.png)
-
-### PSS + PSP
-
-![image-20220510192753324](clocking/image-20220510192753324.png)
-
-using **Y11** of `psp`
-
-![image-20220510192639080](clocking/image-20220510192639080.png)
-
-### results
-
-![image-20220510193036717](clocking/image-20220510193036717.png)
-
-> which are same
-
 
 
 ## clock gating

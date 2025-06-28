@@ -119,7 +119,13 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
+## Using S Parameters to Estimate Q
 
+*TODO* &#128197;
+
+
+
+> Jeff Walling. ECE 5984 Using S Parameters to Estimate Q [[https://youtu.be/PXgM6pGIRvk?si=YDeh-COQEBXKUiw-](https://youtu.be/PXgM6pGIRvk?si=YDeh-COQEBXKUiw-)]
 
 
 

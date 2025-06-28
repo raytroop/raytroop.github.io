@@ -170,6 +170,8 @@ Provided that $\xi = e^{j\omega_1}$ and $z = e^{j\omega_2}$, we have $U_f(\xi)$ 
 
 ## Polyphase Decomposition
 
+Polyphase decomposition is *a powerful technique used in digital signal processing* to efficiently implement multirate systems.
+
 ![image-20241020122709610](multirate/image-20241020122709610.png)
 
 ![image-20241020122726153](multirate/image-20241020122726153.png)

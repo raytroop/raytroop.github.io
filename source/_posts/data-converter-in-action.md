@@ -83,6 +83,16 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 
 
+## DAC ZOH
+
+![image-20250628204404959](data-converter-in-action/image-20250628204404959.png)
+
+> The last D2C is in human vision, which connect discrete time $y(m)$ with line, implicitly
+
+![image-20250628203216965](data-converter-in-action/image-20250628203216965.png)
+
+
+
 ## Noise-Shaping SAR ADCs
 
 

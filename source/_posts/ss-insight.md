@@ -74,6 +74,8 @@ The representative of Fourier transform $\frac{1}{j\omega+j\omega_0}$ back in th
 
 ![image-20241002143413907](ss-insight/image-20241002143413907.png)
 
+![image-20250628181534951](ss-insight/image-20250628181534951.png)
+
 where $W$ is sampling frequency in Hz
 
 ![sinc.drawio](ss-insight/sinc.drawio.svg)
@@ -85,8 +87,6 @@ where $W$ is sampling frequency in Hz
 ---
 
  sinc function is *square integrable* but **not** *absolutely integrable*
-
-
 
 
 

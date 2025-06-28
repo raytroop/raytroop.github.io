@@ -41,7 +41,7 @@ plot(t, y_filt); title('y_{filt}'); xlabel('t(ms)'); grid on
 
 
 
-## Appendix
+### Appendix
 
 ```matlab
 % https://www.dsprelated.com/showarticle/1642.php
@@ -83,6 +83,12 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 
 
+## Noise-Shaping SAR ADCs
+
+
+
+
+
 ## reference
 
 Dan Boschen. sigma delta modulator for DAC [[https://dsp.stackexchange.com/a/88357/59253](https://dsp.stackexchange.com/a/88357/59253)]
@@ -103,4 +109,13 @@ Woogeun Rhee. ISCAS 2019 Mini Tutorials: Single-Bit Delta-Sigma Modulation Techn
 
 ---
 
+Venkatesh Srinivasan, ISSCC 2019 T5: Noise Shaping in Data Converters
+
 Nan Sun,IEEE CAS 2020: Break the kT/C Noise Limit [[https://www.facebook.com/ieeecas/videos/break-the-ktc-noise-limit/322899188976197/](https://www.facebook.com/ieeecas/videos/break-the-ktc-noise-limit/322899188976197/)]
+
+Yun-Shiang Shu, ISSCC 2022 T3: Noise-Shaping SAR ADCs
+
+Xiyuan Tang, CICC 2025 ES2-1: Noise-Shaping SAR ADCs - From Fundamentals to Recent Advances
+
+---
+

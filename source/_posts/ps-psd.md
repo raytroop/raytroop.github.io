@@ -77,6 +77,8 @@ where `xsq_sum_avg` is same with `specsq_sum_avg`
 | power spectrum density | V^2/Hz |
 
 > [Tutorial on Scaling of the Discrete Fourier Transform and the Implied Physical Units of the Spectra of Time-Discrete Signals *Jens Ahrens, Carl Andersson, Patrik Höstmad, Wolfgang Kropp*](https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/)
+>
+> [[https://github.com/AppliedAcousticsChalmers/scaling-of-the-dft](https://github.com/AppliedAcousticsChalmers/scaling-of-the-dft)]
 
 Different scaling is needed to apply for amplitude spectrum, power spectrum and power spectrum density, which shown as below
 

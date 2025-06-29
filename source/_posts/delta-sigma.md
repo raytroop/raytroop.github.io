@@ -77,6 +77,32 @@ noise folding @noise: *same* total noise power spread over a wider frequency
 
 
 
+## Noise Shaping
+
+![image-20250629232343017](delta-sigma/image-20250629232343017.png)
+
+
+
+![image-20250629232453811](delta-sigma/image-20250629232453811.png)
+
+```matlab
+[h1, w1] = freqz([1 -1], 1);
+[h2, w2] = freqz([1 -2 1], 1);
+
+plot(w1/2/pi, abs(h1), LineWidth=3)
+hold on
+plot(w2/2/pi, abs(h2), LineWidth=3)
+grid on
+legend('MOD1', 'MOD2')
+xlabel('fs')
+ylabel('mag')
+title('NTF of MOD1 & MOD2')
+```
+
+
+
+
+
 ## *output* vs. *error*-feedback
 
 The ***error-feedback architecture*** is problematic for **analog** implementation, since it is sensitive to variations of its parameters (subtractor realization)
@@ -584,3 +610,4 @@ Michael Peter Kennedy. An Introduction to Digital Delta-Sigma Modulators [[https
 
 Kaveh Hosseini , Michael Peter Kennedy. Springer 2011. Minimizing Spurious Tones in Digital Delta-Sigma Modulators
 
+Venkatesh Srinivasan, ISSCC 2019 T5: Noise Shaping in Data Converters

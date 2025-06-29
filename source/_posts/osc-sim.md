@@ -84,6 +84,10 @@ $$
 
 ![image-20250629104527666](osc-sim/image-20250629104527666.png)
 
+> ![image-20250629081831223](osc-sim/image-20250629081831223.png)
+
+
+
 Given $i(t) = I_m \cos[(m\omega_0 - \Delta \omega)t]$ and $m \ge 1$
 
 $$\begin{align}
@@ -169,12 +173,6 @@ $$\begin{align}
 *TODO* &#128197;
 
 
-
-
-
-## math backup
-
-![image-20250629081831223](osc-sim/image-20250629081831223.png)
 
 
 

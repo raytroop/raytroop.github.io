@@ -67,6 +67,16 @@ noise folding @noise: *same* total noise power spread over a wider frequency
 
 > [[https://dsp.stackexchange.com/a/40261/59253](https://dsp.stackexchange.com/a/40261/59253)]
 
+
+
+---
+
+![image-20250629215715378](delta-sigma/image-20250629215715378.png)
+
+![image-20250629215830077](delta-sigma/image-20250629215830077.png)
+
+
+
 ## *output* vs. *error*-feedback
 
 The ***error-feedback architecture*** is problematic for **analog** implementation, since it is sensitive to variations of its parameters (subtractor realization)

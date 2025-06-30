@@ -88,7 +88,7 @@ downsampled by a factor of $M = 2$
 
 ## Upsampling or Zero Insertion
 
-![image-20250616214650347](multirate/image-20250616214650347.png)
+![image-20250701070658641](multirate/image-20250701070658641.png)
 
 ![image-20250616212057960](multirate/image-20250616212057960.png)
 
@@ -127,6 +127,10 @@ Provided that $\xi = e^{j\omega_1}$ and $z = e^{j\omega_2}$, we have $U_f(\xi)$ 
 ![image-20250618225150839](multirate/image-20250618225150839.png)
 
 > Markus Nentwig. Polyphase filter / Farrows interpolation [[https://www.dsprelated.com/showarticle/22.php](https://www.dsprelated.com/showarticle/22.php)]
+
+---
+
+![image-20250630230658621](multirate/image-20250630230658621.png)
 
 
 

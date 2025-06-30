@@ -627,7 +627,7 @@ And we can do this just the same with cascaded sections (*without downsampler or
 
 
 
-## DC Gain of Interpolation Filtering
+## DC Gain in Interpolation Filtering
 
 > [[https://raytroop.github.io/2025/06/21/data-converter-in-action/#dac-zoh](https://raytroop.github.io/2025/06/21/data-converter-in-action/#dac-zoh)]
 
@@ -652,7 +652,7 @@ That is, $\sum_{n=-\infty}^{+\infty}x[n] = \sum_{n=-\infty}^{+\infty}x_e[n]$, so
 $$
 \overline{x_e[n]} = \frac{1}{L} \overline{x[n]}
 $$
-It also indicate gain $L$ of LPF filter
+It also indicate gain $L$ of upsampling is $1/L$
 
 
 

@@ -93,6 +93,18 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 
 
+## CIC filter
+
+> Cascaded Integrator-Comb (CIC) Filters
+
+*TODO* &#128197;
+
+
+> An Intuitive Look at Moving Average and CIC Filters [[https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html](https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html)]
+>
+> Arash Loloee, Ph.D. Exploring Decimation Filters [[https://www.highfrequencyelectronics.com/Archives/Nov13/1311_HFE_decimationFilters.pdf](https://www.highfrequencyelectronics.com/Archives/Nov13/1311_HFE_decimationFilters.pdf)]
+
+
 ## Noise-Shaping SAR ADCs
 
 *TODO* &#128197;

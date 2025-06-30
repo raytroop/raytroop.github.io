@@ -611,3 +611,7 @@ Michael Peter Kennedy. An Introduction to Digital Delta-Sigma Modulators [[https
 Kaveh Hosseini , Michael Peter Kennedy. Springer 2011. Minimizing Spurious Tones in Digital Delta-Sigma Modulators
 
 Venkatesh Srinivasan, ISSCC 2019 T5: Noise Shaping in Data Converters
+
+---
+
+Arash Loloee, Ph.D. Exploring Decimation Filters [[https://www.highfrequencyelectronics.com/Archives/Nov13/1311_HFE_decimationFilters.pdf](https://www.highfrequencyelectronics.com/Archives/Nov13/1311_HFE_decimationFilters.pdf)]

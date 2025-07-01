@@ -589,9 +589,21 @@ The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***i
 
 ### Approximation of Derivatives
 
+> Perhaps the simplest method for low-order systems is to use *backward-difference approximation* to *continuous domain derivatives*
+
 ![image-20250623205828010](z-laplace/image-20250623205828010.png)
 
+---
 
+$$
+1- z^{-1} = 1-e^{j\Omega T} = 1-\cos(\omega T) + j\sin(\Omega T) \approx 1-1+j\Omega T = s T
+$$
+
+That is
+
+$$
+s \approx \frac{1-z^{-1}}{T}
+$$
 
 
 ### Matched z-Transform (Root Matching)

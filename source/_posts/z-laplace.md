@@ -562,6 +562,8 @@ The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***i
 ## Design of IIR Filters From Analog Filters
 
 > Modeling a Continuous-Time System with Matlab
+>
+> Because the mapping between the continuous ($s$-plane) and discrete domains ($z$-plane) *cannot be done exactly*, the various design methods are *at best approximations*
 
 ![image-20250623205733778](z-laplace/image-20250623205733778.png)
 

@@ -688,6 +688,7 @@ Defined as the frequency at which the **small-signal current gain** of a device 
 ![image-20240116233951006](insight/image-20240116233951006.png)
 
 
+> Aditya Varma Muppala. MMIC 08: High Frequency Device Characterization in Cadence - Fmax, Ft, NFmin vs Jd [[https://youtu.be/kgEypIA8eus?si=sd4581x2hOuhsJ3P](https://youtu.be/kgEypIA8eus?si=sd4581x2hOuhsJ3P)]
 
 
 

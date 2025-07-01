@@ -230,13 +230,21 @@ The comparator itself trigger the next bit-conversion cycle as soon as the prese
 
 ![image-20250102225355547](sar/image-20250102225355547.png)
 
-![image-20250102225426799](sar/image-20250102225426799.png)
-
-
-
 The maximum resolving time reduction between synchronous and asynchronous case is ***two fold***
 
 
+### comparator metastable state
+
+> when the *input is sufficiently small*. The time needed for the comparator outputs to fully resolve may take *arbitrarily long*
+>
+> In this case, the *ready signal generator should still set the flag* and the decision result is simply taken from the previous value stored in the SR latch
+
+![image-20250102225426799](sar/image-20250102225426799.png)
+
+both outputs ($Q_p$ and $Q_n$) will drop together, NAND is **inverter** actually
+
+The transition point of this NAND gate is **skewed** to eliminate *metastability issues arising when the input differential
+voltage level is small (comparator)*
 
 
 

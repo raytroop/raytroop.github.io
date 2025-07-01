@@ -168,6 +168,14 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 > O. M. Ívarsson, "Comparator Kickback Reduction Techniques for High-Speed ADCs," Dissertation, 2024.  [[https://liu.diva-portal.org/smash/get/diva2:1872476/FULLTEXT01.pdf](https://liu.diva-portal.org/smash/get/diva2:1872476/FULLTEXT01.pdf)]
 
 
+---
+
+**Current mirrors** are used between stages to reduce charge **kick back** from the *logic level swing of the latch* onto the *small comparator input capacitors*
+
+
+> Mike Shuo-Wei Chen and R. W. Brodersen, "A 6-bit 600-MS/s 5.3-mW Asynchronous ADC in 0.13-μm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2669-2680, Dec. 2006 [[pdf](https://engineering.purdue.edu/oxidemems/conferences/isscc2006/files/D31_05.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2006/files/V31_05.pdf)]
+>
+> K. Bult and A. Buchwald, "An embedded 240-mW 10-b 50-MS/s CMOS ADC in 1-mm/sup 2/," in IEEE Journal of Solid-State Circuits, vol. 32, no. 12, pp. 1887-1895, Dec. 1997 [[https://sci-hub.st/10.1109/4.643647](https://sci-hub.st/10.1109/4.643647)]
 
 ## CMOS Latch
 

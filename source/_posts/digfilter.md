@@ -1,5 +1,5 @@
 ---
-title: Adaptive Filtering & Calibration
+title: Digital Filters
 date: 2024-12-08 15:45:16
 tags:
 categories:
@@ -13,13 +13,13 @@ mathjax: true
 
 ## Linear phase
 
-![image-20241213232002042](calibration/image-20241213232002042.png)
+![image-20241213232002042](digfilter/image-20241213232002042.png)
 
 ---
 
-![image-20241213233748837](calibration/image-20241213233748837.png)
+![image-20241213233748837](digfilter/image-20241213233748837.png)
 
-![image-20241213233917966](calibration/image-20241213233917966.png)
+![image-20241213233917966](digfilter/image-20241213233917966.png)
 
 > [[https://web.ece.ucsb.edu/~yoga/courses/DSP/P10_Linear_phase_FIR.pdf](https://web.ece.ucsb.edu/~yoga/courses/DSP/P10_Linear_phase_FIR.pdf)]
 
@@ -29,7 +29,7 @@ mathjax: true
 
 ## Digital DC Offset Correction
 
-![image-20241229122711845](calibration/image-20241229122711845.png)
+![image-20241229122711845](digfilter/image-20241229122711845.png)
 $$
 X- Y\cdot \beta z^{-1}\cdot \frac{1}{1-z^{-1}} = Y
 $$
@@ -42,9 +42,15 @@ $$
 
 ## VDD Droop Mitigation
 
-![image-20250105134745277](calibration/image-20250105134745277.png)
+![image-20250105134745277](digfilter/image-20250105134745277.png)
 
 speed of voltage monitor does matter
+
+
+
+## Fixed-point arithmetic
+
+*TODO* &#128197;
 
 
 

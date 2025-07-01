@@ -652,7 +652,7 @@ That is, $\sum_{n=-\infty}^{+\infty}x[n] = \sum_{n=-\infty}^{+\infty}x_e[n]$, so
 $$
 \overline{x_e[n]} = \frac{1}{L} \overline{x[n]}
 $$
-It also indicate gain $L$ of upsampling is $1/L$
+It also indicate that dc gain of upsampling is $1/L$
 
 
 

@@ -239,12 +239,11 @@ The maximum resolving time reduction between synchronous and asynchronous case i
 >
 > In this case, the *ready signal generator should still set the flag* and the decision result is simply taken from the previous value stored in the SR latch
 
-![image-20250102225426799](sar/image-20250102225426799.png)
+![image-20250701231051158](sar/image-20250701231051158.png)
 
-both outputs ($Q_p$ and $Q_n$) will drop together, NAND is **inverter** actually
+both outputs ($Q_p$ and $Q_n$) will drop *together*, NAND is **inverter** actually
 
-The transition point of this NAND gate is **skewed** to eliminate *metastability issues arising when the input differential
-voltage level is small (comparator)*
+The transition point of this NAND gate is **skewed** to eliminate *metastability issues arising when the input differential voltage level is small (comparator)*
 
 
 

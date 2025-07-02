@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-![image-20250602155255711](inductance/image-20250602155255711.png)
+![image-20250602155255711](ind-PI/image-20250602155255711.png)
 
 |                               | currents in OPPOSITE direction | currents in SAME direction |
 | ----------------------------- | ------------------------------ | -------------------------- |
@@ -20,11 +20,11 @@ mathjax: true
 
 
 
-![image-20250602150334930](inductance/image-20250602150334930.png)
+![image-20250602150334930](ind-PI/image-20250602150334930.png)
 
-![image-20250602152515494](inductance/image-20250602152515494.png)
+![image-20250602152515494](ind-PI/image-20250602152515494.png)
 
-![image-20250602152930491](inductance/image-20250602152930491.png)
+![image-20250602152930491](ind-PI/image-20250602152930491.png)
 
 
 
@@ -34,7 +34,7 @@ mathjax: true
 
 
 
-![img](inductance/30_Par03.jpg)
+![img](ind-PI/30_Par03.jpg)
 
 
 
@@ -42,11 +42,11 @@ mathjax: true
 
 > The first problem with using *loop inductance* to model the conductors of a loop is that at different frequencies, the return path
 
-![image-20250602105455013](inductance/image-20250602105455013.png)
+![image-20250602105455013](ind-PI/image-20250602105455013.png)
 
-![image-20250602112336956](inductance/image-20250602112336956.png)
+![image-20250602112336956](ind-PI/image-20250602112336956.png)
 
-![image-20250602120913866](inductance/image-20250602120913866.png)
+![image-20250602120913866](ind-PI/image-20250602120913866.png)
 
 
 

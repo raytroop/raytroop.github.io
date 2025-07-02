@@ -558,6 +558,9 @@ The simple approximation $z=e^{sT}\approx1+sT$, ~~the *first equal* come from **
 ![image-20241026230904395](z-laplace/image-20241026230904395.png)
 
 
+---
+
+> Stephen Roberts. Lecture 3 - Design of Digital Filters [[https://www.robots.ox.ac.uk/~sjrob/Teaching/B14_SP/b14_sp_lect3.pdf](https://www.robots.ox.ac.uk/~sjrob/Teaching/B14_SP/b14_sp_lect3.pdf)]
 
 ## Design of IIR Filters From Analog Filters
 

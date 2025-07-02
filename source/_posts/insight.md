@@ -152,6 +152,7 @@ $$
 ![image-20240905202145206](insight/image-20240905202145206.png)
 
 
+> [[https://youtu.be/SL3-9ZMwdJQ?si=m_FSjnFQH4wjbZKH&t=1339](https://youtu.be/SL3-9ZMwdJQ?si=m_FSjnFQH4wjbZKH&t=1339)]
 
 ## Channel-Length Modulation & Pinched off
 

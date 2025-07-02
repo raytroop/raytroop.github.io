@@ -20,6 +20,10 @@ mathjax: true
 > Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://www.youtube.com/watch?v=SL3-9ZMwdJQ](https://www.youtube.com/watch?v=SL3-9ZMwdJQ)]
 
 
+### Clock Feedthrough or LO leakage
+
+*TODO* &#128197;
+
 
 ## Integrator
 

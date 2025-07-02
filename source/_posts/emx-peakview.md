@@ -422,6 +422,7 @@ PM, CB2_FC, UBM is in the chip package
 ![image-20250613235639258](emx-peakview/image-20250613235639258.png)
 
 
+> PEX extract up to *RDL-AP* as expected
 
 ## reference
 

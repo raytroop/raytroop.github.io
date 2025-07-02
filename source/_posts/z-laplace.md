@@ -549,7 +549,7 @@ where $T_s$ is the sampling period
 
 ---
 
-The simple approximation $z=e^{sT}\approx1+sT$, the *first equal* come from ***impulse invariance*** essentially
+The simple approximation $z=e^{sT}\approx1+sT$, ~~the *first equal* come from ***impulse invariance*** essentially~~
 
 
 

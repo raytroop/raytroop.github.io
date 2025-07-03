@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+![image-20250703212349339](rx/image-20250703212349339.png)
+
+***speculative DFE i***s also known as ***loop unrolled DFE***, which solve the critical timing on first tap
+
+---
+
+
+
 ![image-20250611075531827](rx/image-20250611075531827.png)
 
 *VGA/attenuator: ensure a constant swing at the slicer input regardless of the channel variation*
@@ -131,9 +139,11 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 > Hongtao Zhang, DesignCon 2016. PAM4 Signaling for 56G Serial Link Applications − A Tutorial [[https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf](https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf)]
 
 
+
 ## reference
 
 Miguel Gandara, MediaTek. CICC 2025 Circuit Insights: Basics of Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg?si=Or-rIUZ-nnygRbQv](https://youtu.be/X4JTuh2Gdzg?si=Or-rIUZ-nnygRbQv)]
 
 H. Park et al., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," 2025 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2025
 
+Noman Hai, Synopsys, Canada CASS Talks 2025 - May 2, 2025: High-speed Wireline Interconnects: Design Challenges and Innovations in 224G SerDes [[https://www.youtube.com/live/wHNOlxHFTzY?si=179HZozbtW59H8Lm](https://www.youtube.com/live/wHNOlxHFTzY?si=179HZozbtW59H8Lm)]

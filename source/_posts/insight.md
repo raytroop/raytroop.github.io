@@ -1232,3 +1232,7 @@ chembiyan T. OC Lecture 10: A very basic introduction to switched capacitor circ
 Robert Bogdan Staszewski, Poras T. Balsara. "All‐Digital Frequency Synthesizer in Deep‐Submicron CMOS"
 
 Mayank Parasrampuria, Sandeep Jain, Burn-in 101 [[link](https://www.edn.com/burn-in-101/)]
+
+---
+
+Kevin Zheng. Circuit Artists [[https://circuit-artists.com/posts/](https://circuit-artists.com/posts/)]

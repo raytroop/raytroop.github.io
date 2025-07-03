@@ -9,6 +9,16 @@ mathjax: true
 
 
 
+## Interconnect Resistance Evolution
+
+![image-20250703232709089](layout/image-20250703232709089.png)
+
+
+
+> White Paper: Microelectronics/Semiconductor Research Community Virtual Workshop  2022 [[https://nnci.net/sites/default/files/inline-files/Microelectronics%202022%20Workshop%20Report%20with%20Slides.pdf](https://nnci.net/sites/default/files/inline-files/Microelectronics%202022%20Workshop%20Report%20with%20Slides.pdf)]
+
+
+
 ## Copper Pillar Bump vs Solder bump
 
 Cu-pillar bumping is a next-generation flip chip interconnection between chip & packages, especially for fine pitch applications

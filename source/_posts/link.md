@@ -1023,3 +1023,5 @@ John M. Cioffi. "Decoding Methods" [[https://cioffi-group.stanford.edu/doc/book/
 Iain. [[https://youtu.be/rnjy4_gXLAg?si=PC3aowaon-e_mhXX](https://youtu.be/rnjy4_gXLAg?si=PC3aowaon-e_mhXX)]
 
 —. [[https://youtu.be/IJE94FhyygM?si=BMMQ-GmirBWNf4ep](https://youtu.be/IJE94FhyygM?si=BMMQ-GmirBWNf4ep)]
+
+Noman Hai, Synopsys, Canada CASS Talks 2025 - May 2, 2025: High-speed Wireline Interconnects: Design Challenges and Innovations in 224G SerDes [[https://www.youtube.com/live/wHNOlxHFTzY?si=179HZozbtW59H8Lm](https://www.youtube.com/live/wHNOlxHFTzY?si=179HZozbtW59H8Lm)]

@@ -11,7 +11,7 @@ mathjax: true
 
 ![image-20250703212349339](rx/image-20250703212349339.png)
 
-***speculative DFE i***s also known as ***loop unrolled DFE***, which solve the critical timing on first tap
+***speculative DFE*** is also known as ***loop unrolled DFE***, which solve the critical timing on first tap
 
 ---
 

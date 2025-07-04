@@ -669,3 +669,7 @@ Walt Kester, Taking the Mystery out of the Infamous Formula, "SNR = 6.02N + 1.76
 Dan Boschen, "How to choose FFT depth for ADC performance analysis (SINAD, ENOB)", [[https://dsp.stackexchange.com/a/38201](https://dsp.stackexchange.com/a/38201)]
 
 B. Razavi, **"A Tale of Two ADCs - Pipelined Versus SAR"** IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 30, pp. 38-46, Summer 2015 [[https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15ADC.pdf)](https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15ADC.pdf)]
+
+---
+
+Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.

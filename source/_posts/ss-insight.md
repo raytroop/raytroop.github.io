@@ -158,13 +158,6 @@ $$
 
 
 
-## channel loss
-
-- skin effect loss
-- dielectric loss
-
-![image-20240810102618245](ss-insight/image-20240810102618245.png)
-
 
 
 ## phase delay & group delay

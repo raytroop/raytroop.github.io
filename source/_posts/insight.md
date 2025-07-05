@@ -43,6 +43,16 @@ mathjax: true
 
 
 
+## Why Fifty Ohms?
+
+*TODO* &#128197;
+
+
+
+> [[https://www.microwaves101.com/encyclopedias/why-fifty-ohms](https://www.microwaves101.com/encyclopedias/why-fifty-ohms)]
+
+
+
 ## Response Speed in Analog Circuits
 
 > Hyun-Sik Kim, KAIST, A-SSCC 2024 Circuit Insights: **FT3 Accelerating Response Speed in Analog Circuits** [[link](https://youtu.be/Td0aacHQTFo?si=UxgGB49SsZ2uPiVK)]

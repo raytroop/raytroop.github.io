@@ -9,38 +9,6 @@ mathjax: true
 
 
 
-## Switched Capacitor Circuits
-
-![image-20250607160642574](afe/image-20250607160642574.png)
-
-![image-20250607171740269](afe/image-20250607171740269.png)
-
-
-
-> Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://www.youtube.com/watch?v=SL3-9ZMwdJQ](https://www.youtube.com/watch?v=SL3-9ZMwdJQ)]
-
-
-### Clock Feedthrough or LO leakage
-
-*TODO* &#128197;
-
-
-## Integrator
-
-*TODO* &#128197;
-
-
-
-
-
-> [[https://www.eecg.utoronto.ca/~johns/ece1371/slides/10_switched_capacitor.pdf](https://www.eecg.utoronto.ca/~johns/ece1371/slides/10_switched_capacitor.pdf)]
->
-> [[https://www.seas.ucla.edu/brweb/papers/Journals/BRWinter17SwCap.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BRWinter17SwCap.pdf)]
->
-> [[https://class.ece.iastate.edu/ee508/lectures/EE%20508%20Lect%2029%20Fall%202016.pdf](https://class.ece.iastate.edu/ee508/lectures/EE%20508%20Lect%2029%20Fall%202016.pdf)]
-
-
-
 ## Push-Pull
 
 *TODO* &#128197;

@@ -94,11 +94,21 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ***EMX simulation***
 
-*TODO* &#128197;
+**setup:**
+
+![image-20250706004037966](inductance/image-20250706004037966.png)
 
 
 
+**frequency sweep:**
 
+![image-20250706010045328](inductance/image-20250706010045328.png)
+
+
+
+> Cadence October 2020, *Analysis of a Figure-Eight Inductor with EMX RAK*
+>
+> ![image-20250706010216105](inductance/image-20250706010216105.png)
 
 ## proximity effect & skin effect 
 
@@ -126,6 +136,25 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 ***Eddy current***
 
 By [Lenz's law](https://en.wikipedia.org/wiki/Lenz's_law), an eddy current creates a magnetic field that ***opposes*** the change in the magnetic field that created it, and thus eddy currents ***react back*** on the source of the magnetic field
+
+
+
+## Electromagnetic coupling
+
+**Electric field coupling** (also called **capacitive coupling**) occurs when energy is coupled from one circuit to another through an **electric field**
+
+![Two circuits above a signal return plane.](inductance/Fig01.png)
+
+**Magnetic field coupling** (also called **inductive coupling**) occurs when energy is coupled from one circuit to another through a **magnetic field**
+
+![Two circuits above a signal return plane](inductance/Fig01-1751718884303-3.png)
+
+---
+
+For instance
+
+- magnetic coupling between multiple inductors
+- capacitive coupling between multiple transmission lines
 
 
 

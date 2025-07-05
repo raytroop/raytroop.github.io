@@ -424,6 +424,28 @@ PM, CB2_FC, UBM is in the chip package
 
 > PEX extract up to *RDL-AP* as expected
 
+
+
+## DC model
+
+> quick evaluate routing resistance
+
+![image-20250705231456546](emx-peakview/image-20250705231456546.png)
+
+![image-20250705231907284](emx-peakview/image-20250705231907284.png)
+
+
+
+> GPDK045 metal resistor model is **not** consistent with its process file on sheet resistance
+>
+> ![image-20250705233530802](emx-peakview/image-20250705233530802.png)
+
+
+
+
+
+
+
 ## reference
 
 Tips on Specifying Ports in EMX [[link](Article (20493671) Title: Tips on Specifying Ports in EMX

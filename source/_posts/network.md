@@ -129,6 +129,14 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
+
+
+## Simulating S-parameters in a time domain
+
+![image-20250705210519145](network/image-20250705210519145.png)
+
+
+
 ## reference
 
 [microwaves101, S-parameters (https://www.microwaves101.com/encyclopedias/s-parameters)](https://www.microwaves101.com/encyclopedias/s-parameters)

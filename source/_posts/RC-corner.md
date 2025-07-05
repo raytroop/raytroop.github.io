@@ -11,7 +11,13 @@ mathjax: true
 
 ### Traditional RC Corners
 
+Metal width variation ($\Delta W$), Metal thickness variation ($\Delta T$), IMD thickness variation ($\Delta H$)
+
 ![image-20230511232521956](RC-corner/image-20230511232521956.png)
+
+*Capacitance* Dominant: C-best, C-worst
+
+*Resistance* Dominant: RC-best, RC-worst
 
 
 
@@ -68,7 +74,7 @@ The recommended RC corner:
 
 The others are for *pre-color* RC calculation purpose
 
-**_T** stands for **"Tighten DPT corner"**; these are less pessimistic **1.5 sigma** corners
+**\_T** stands for **"Tighten DPT corner"**; these are less pessimistic **1.5 sigma** corners
 
 ![image-20230513001426737](RC-corner/image-20230513001426737.png)
 

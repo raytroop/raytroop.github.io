@@ -102,7 +102,7 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 **frequency sweep:**
 
-![image-20250706010045328](inductance/image-20250706010045328.png)
+![image-20250706010943996](inductance/image-20250706010943996.png)
 
 
 

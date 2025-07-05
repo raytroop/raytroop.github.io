@@ -257,6 +257,17 @@ $$
 \text{SQNR(dB)} = 10\log(\frac{P_s}{P_Q}) = 10\log(\frac{3\times 2^{2N}}{2})= 20N\log(2) + 10\log(\frac{3}{2})= 6.02N + 1.76
 $$
 
+---
+
+![image-20250705100706289](ad-da/image-20250705100706289.png)
+
+![image-20250705101619687](ad-da/image-20250705101619687.png)
+
+![image-20250705101635533](ad-da/image-20250705101635533.png)
+
+
+
+
 
 ## Quantization is NOT Noise
 
@@ -385,43 +396,29 @@ $$
 
 
 
-## coherent sampling
+## Coherent Sampling
 
-- integer # of cycles  or Windowing  
-  - avoid spectral leakage
-
-- $f_\text{in}$ and $f_s$ are co-prime  
-  - avoid periodic quantization errors, manifested as harmonic distortions
-
+![image-20250705085139758](ad-da/image-20250705085139758.png)
 
 ---
 
-To avoid **spectral leakage** completely, the method of **coherent sampling** is recommended. Coherent sampling requires that the input- and clock-frequency generators are **phase locked**, and that the input frequency be chosen based on the following relationship:
 $$
 \frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
 $$
 
-where:
+- $f_\text{in}$ and $f_s$ must be ***incommensurate*** ($f_s/f_{in}$ is *irrational number*. btw, *co-prime is sufficient but not necessary*)
 
-- $f_{\text{in}}$ = the desired input frequency
-- $f_s$ = the clock frequency of the data converter under test
-- $M_C$ = the number of cycles in the data window (to make all samples unique, choose odd or prime numbers)
-- $N_R$ = the data record length (for an 8192-point FFT, the data record is 8192s long)
+- $M_C$ and $N_R$ must be ***co-prime***
 
+- Samples must include ***integer #*** of cycles of input signal
 
 
-$$\begin{align}
-f_{\text{in}} &=\frac{f_s}{N_R}\cdot M_C \\
-&= f_{\text{res}}\cdot M_C
-\end{align}$$
 
 ---
 
-**irreducible ratio**
+An **irreducible ratio** ensures identical code sequences not to be repeated multiple times.
 
-An **irreducible ratio** ensures identical code sequences not to be repeated multiple times. Unnecessary repetition of the same code is not desirable as it increases ADC test time.
-
-> Given that $\frac{M_C}{N_R}$ is irreducible, and $N_R$ is a power of 2, an **odd number** for $M_C$ will always produce an **irreducible ratio**
+> Given that $\frac{M_C}{N_R}$ is *irreducible*, and $N_R$ is a *power of 2*, an **odd number** for $M_C$ will always produce an **irreducible ratio**
 
 Assuming there is a common factor $k$ between $M_C$ and $N_R$, i.e. $\frac{M_C}{N_R}=\frac{k M_C'}{k N_R'}$
 
@@ -439,13 +436,34 @@ $$
 
 
 
-So,  the samples is repeated $y[n] = y[n+N_R']$.  Usually, no additional information is gained by repeating with the same sampling points.
+So,  the samples is repeated $y[n] = y[n+N_R']$
 
 ---
 
-![image-20241214135150786](ad-da/image-20241214135150786.png)
+$N_R$ & $M_C$ **irreducible ratio** (*mutually prime*)
 
-> samples of every input cycle are the same - *periodic*
+- *Periodic sampling points* result in *periodic quantization errors*
+- Periodic quantization errors result in *harmonic distortion*
+
+
+
+![image-20250705091742434](ad-da/image-20250705091742434.png)  
+
+> Choosing M/N non-prime repeats the signal quantization periodically and fewer quantization steps are measured. *The quantization repeats periodically and creates a line spectrum that can obscure real frequency lines* (e.g. the red lines in the images below, created by non-linearities of the ADC).
+>
+> [[https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple](https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple)]
+
+
+
+---
+
+
+
+![image-20250705092503925](ad-da/image-20250705092503925.png)
+
+---
+
+![image-20250705103213974](ad-da/image-20250705103213974.png)
 
 
 

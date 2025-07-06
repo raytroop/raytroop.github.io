@@ -207,6 +207,12 @@ $$
 
 ## CDR Loop Latency
 
+> 
+
+![image-20250706121529451](link/image-20250706121529451.png)
+
+---
+
 ![image-20241102235118149](link/image-20241102235118149.png)
 
 ![image-20241102235145417](link/image-20241102235145417.png)
@@ -234,6 +240,16 @@ loop latency is represented as $e^{-sD}$ in linear model
 ![image-20241103142531277](link/image-20241103142531277.png)
 
 ![image-20241103142938907](link/image-20241103142938907.png)
+
+
+
+## Optimizing Loop Latency for CDR
+
+*TODO* &#128197;
+
+
+
+> CC Chen. Circuit Image: Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8?si=uY2HUV8mERLterwH](https://youtu.be/Jyy18865jv8?si=uY2HUV8mERLterwH)]
 
 
 

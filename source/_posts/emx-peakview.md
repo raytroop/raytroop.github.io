@@ -428,7 +428,7 @@ PM, CB2_FC, UBM is in the chip package
 
 ## DC model
 
-> quick evaluate routing resistance
+> quick find routing resistance
 
 ![image-20250705231456546](emx-peakview/image-20250705231456546.png)
 

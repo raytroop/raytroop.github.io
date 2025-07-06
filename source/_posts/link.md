@@ -207,7 +207,13 @@ $$
 
 ## CDR Loop Latency
 
-> 
+> CC Chen. Why A Low Loop Latency in A CDR Design? [[https://youtu.be/io9WZbhlahU?si=IjQ5haXWZ-MV4Ncb](https://youtu.be/io9WZbhlahU?si=IjQ5haXWZ-MV4Ncb)]
+>
+> —. Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8?si=rpiyuR_5WekHwc1Y](https://youtu.be/Jyy18865jv8?si=rpiyuR_5WekHwc1Y)]
+
+![image-20250706173343946](link/image-20250706173343946.png)
+
+---
 
 ![image-20250706121529451](link/image-20250706121529451.png)
 
@@ -412,6 +418,10 @@ legend('\xi=2', '\xi=1', '\xi=0.5', '\xi=0.2')
 
 
 ---
+
+CC Chen, Circuit Images: Why JTOL in a CDR? [[https://youtu.be/kZExm9wy0G8?si=5ULT0t_oHNkp7c2v](https://youtu.be/kZExm9wy0G8?si=5ULT0t_oHNkp7c2v)]
+
+—. Why Pseudo-JTOL in a CDR Design or Verification? [[https://youtu.be/DZyzLhk59aY?si=xMcN2Xo3hnCeL3RX](https://youtu.be/DZyzLhk59aY?si=xMcN2Xo3hnCeL3RX)]
 
 ![image-20250627202659095](link/image-20250627202659095.png)
 

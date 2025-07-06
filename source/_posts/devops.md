@@ -6,6 +6,16 @@ categories:
 - devops
 ---
 
+## Google search tips
+
+> [[https://static.googleusercontent.com/media/www.google.com/en//educators/downloads/Tips_Tricks_17x22.pdf](https://static.googleusercontent.com/media/www.google.com/en//educators/downloads/Tips_Tricks_17x22.pdf)]
+
+![image-20250706091436326](devops/image-20250706091436326.png)
+
+![image-20250706091838077](devops/image-20250706091838077.png)
+
+
+
 ## Restart Xfce panel
 
 ```bash

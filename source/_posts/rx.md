@@ -25,7 +25,11 @@ mathjax: true
 
 
 
-## Input network
+## input network
+
+![image-20250706110415914](rx/image-20250706110415914.png)
+
+---
 
 ![image-20250611075951974](rx/image-20250611075951974.png)
 
@@ -143,6 +147,8 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 ## reference
 
 Miguel Gandara, MediaTek. CICC 2025 Circuit Insights: Basics of Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg?si=Or-rIUZ-nnygRbQv](https://youtu.be/X4JTuh2Gdzg?si=Or-rIUZ-nnygRbQv)]
+
+Tony Chan Carusone, Alphawave Semi. VLSI2025 SC2: Connectivity Technologies to Accelerate AI
 
 H. Park et al., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," 2025 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2025
 

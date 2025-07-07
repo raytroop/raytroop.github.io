@@ -255,9 +255,7 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 
 
-### Layout Consideration
-
-#### PODE & CPODE
+### PODE & CPODE
 
 > The PODE devices is extracted as parasitic devices in post-layout netlist
 
@@ -273,6 +271,14 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 >
 > CPODE is used to connect two PODE cells together. It will isolate OD to save 1 poly pitch, via STI; Additional mask (12N) is required for manufacture
 
+|                 | PODE                                   | CPODE                                    |
+| --------------- | -------------------------------------- | ---------------------------------------- |
+| **Pro's**       | simple                                 | density                                  |
+| **Con's**       | density                                | LDE                                      |
+| **edge device** | **one** dummy gate at both edges of OD | **half** dummy gate aft both edges of OD |
+
+
+
 
 
 ![image-20221210145232826](layout/image-20221210145232826.png)
@@ -281,15 +287,53 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 ![image-20240509205506112](layout/image-20240509205506112.png)
 
+
+
+
+
 ---
 
 > Leading Edge Logic Comparison March 9, 2018 [[https://semiwiki.com/wp-content/uploads/2018/03/Leading-Edge-Logic.pdf](https://semiwiki.com/wp-content/uploads/2018/03/Leading-Edge-Logic.pdf)]
 >
 > What is CPODE, and why do we use it in VLSI layout? [[https://semiconwiki.com/what-is-cpode-and-why-do-we-use-it-in-vlsi-layout/](https://semiconwiki.com/what-is-cpode-and-why-do-we-use-it-in-vlsi-layout/)]
 
-#### SAC & SAGC
 
-##### self-aligned diffusion contacts (SACs)
+
+### CNOD
+
+Continuous Diffusion (**CNOD**)
+
+![img](layout/https%253A%252F%252Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%252Fpublic%252Fimages%252F924b683b-c079-4050-ae33-577e29202814_571x411.png)
+
+In CNOD, the diffusion is not broken at all. The fabrication process continues normally, but when standard cells need to be separated, 
+the gate between them is designated as a dummy gate. This dummy gate is then connected to a *Gate Tie-Down Via to the power rail*
+
+This dummy gate tie-down method of CNOD achieves the same horizontal width savings as *SDB*, 
+and has *the advantage of keeping the transistor diffusion unbroken and thus can achieve more uniform strain and performance characteristics*
+
+
+> The TRUTH of TSMC 5nm [[https://www.angstronomics.com/p/the-truth-of-tsmc-5nm](https://www.angstronomics.com/p/the-truth-of-tsmc-5nm)]
+>
+> S. Badel et al., "Chip Variability Mitigation through Continuous Diffusion Enabled by EUV and Self-Aligned Gate Contact," 2018 14th IEEE International Conference on Solid-State and Integrated Circuit Technology (ICSICT), Qingdao, China, 2018 [[https://sci-hub.st/10.1109/ICSICT.2018.8565694](https://sci-hub.st/10.1109/ICSICT.2018.8565694)]
+
+---
+
+![image-20250707210444362](layout/image-20250707210444362.png)
+
+
+
+
+### Contacted-Poly-Pitch (CPP)
+
+> Wider Contacted-Poly-Pitch allows wider MD and VD size, which help reduce MEOL IRdrop
+
+![Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP).](layout/imageurl=%252Fsites%252Fdefault%252Ffiles%252F2022-02%252FFigure%201%20-%20Logic%20standard%20cell%20scaling.jpeg)
+
+*Naoto Horiguchi. Entering the Nanosheet Transistor Era  [[link](https://www.imec-int.com/en/articles/entering-nanosheet-transistor-era-0)]*
+
+### SAC & SAGC
+
+#### self-aligned diffusion contacts (SACs)
 
 As shown in Fig. 35 in older planar technology nodes, gate pitch is so relaxed such that S/D contacts and gate contacts can easily be placed next to each other without causing any shorting risk (see Fig. 35(a)).
 
@@ -315,7 +359,7 @@ As shown in Fig. 35(b), *the gate metal is fully encapsulated by a dielectric sp
 
 
 
-##### self-aligned gate contacts (SAGCs)
+#### self-aligned gate contacts (SAGCs)
 
 **Self-aligned gate contacts (SAGCs)** have also been implemented and Denser standard cells can be achieved by eliminating the need to land contacts on the gate outside the active area.
 
@@ -332,35 +376,7 @@ SAGCs require the source/drain contacts to be capped with an insulator that is d
 > According to the DRC of T foundary, poly extension > 0 um and space between MP and OD > 0 um., which demonstrate self-aligned gate contact is **not** introduced.
 
 
-#### CNOD
-
-Continuous Diffusion (**CNOD**)
-
-In CNOD, the diffusion is not broken at all. The fabrication process continues normally, but when standard cells need to be separated, 
-the gate between them is designated as a dummy gate. This dummy gate is then connected to a *Gate Tie-Down Via to the power rail*
-
-This dummy gate tie-down method of CNOD achieves the same horizontal width savings as *SDB*, 
-and has *the advantage of keeping the transistor diffusion unbroken and thus can achieve more uniform strain and performance characteristics*
-
-
-> The TRUTH of TSMC 5nm [[https://www.angstronomics.com/p/the-truth-of-tsmc-5nm](https://www.angstronomics.com/p/the-truth-of-tsmc-5nm)]
->
-> S. Badel et al., "Chip Variability Mitigation through Continuous Diffusion Enabled by EUV and Self-Aligned Gate Contact," 2018 14th IEEE International Conference on Solid-State and Integrated Circuit Technology (ICSICT), Qingdao, China, 2018 [[https://sci-hub.st/10.1109/ICSICT.2018.8565694](https://sci-hub.st/10.1109/ICSICT.2018.8565694)]
-
-
-
-
-#### Contacted-Poly-Pitch (CPP)
-
-> Wider Contacted-Poly-Pitch allows wider MD and VD size, which help reduce MEOL IRdrop
-
-![Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP).](layout/imageurl=%252Fsites%252Fdefault%252Ffiles%252F2022-02%252FFigure%201%20-%20Logic%20standard%20cell%20scaling.jpeg)
-
-*Naoto Horiguchi. Entering the Nanosheet Transistor Era  [[link](https://www.imec-int.com/en/articles/entering-nanosheet-transistor-era-0)]*
-
-
-
-#### Gate Resistance
+### Gate Resistance
 
 ![image-20230709000326683](layout/image-20230709000326683.png)
 

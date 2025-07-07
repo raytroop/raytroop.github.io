@@ -271,11 +271,11 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 >
 > CPODE is used to connect two PODE cells together. It will isolate OD to save 1 poly pitch, via STI; Additional mask (12N) is required for manufacture
 
-|                 | PODE                                   | CPODE                                    |
-| --------------- | -------------------------------------- | ---------------------------------------- |
-| **Pro's**       | simple                                 | density                                  |
-| **Con's**       | density                                | LDE                                      |
-| **edge device** | **one** dummy gate at both edges of OD | **half** dummy gate aft both edges of OD |
+|                 | PODE                                                         | CPODE                                                        |
+| --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **Pro's**       | simple                                                       | density                                                      |
+| **Con's**       | density                                                      | LDE (LOD/OSE)                                                |
+| **edge device** | 3T PODE(with single side OD): NO ERC<br />4T M-PODE (with S/D): ERC (gate tied to power/ground) | won't form device; <br />NO ERC; <br />OD under CPODE is cut off |
 
 
 
@@ -299,9 +299,21 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 
 
+---
+
+**3T PODE device**
+
+![image-20250708001318109](layout/image-20250708001318109.png)
+
+> US9053283B2: Methods for layout verification for polysilicon cell edge structures in finFET standard cells using filters [[https://patentimages.storage.googleapis.com/36/2c/ff/ad3d4c232ecc8d/US9053283.pdf](https://patentimages.storage.googleapis.com/36/2c/ff/ad3d4c232ecc8d/US9053283.pdf)]
+>
+> US8943455B2: Methods for layout verification for polysilicon cell edge structures in FinFET standard cells [[https://patentimages.storage.googleapis.com/19/12/64/f2badfdc09a4a4/US8943455.pdf](https://patentimages.storage.googleapis.com/19/12/64/f2badfdc09a4a4/US8943455.pdf)]
+
+
+
 ### CNOD
 
-Continuous Diffusion (**CNOD**)
+continuous oxide diffusion (**CNOD**) design
 
 ![img](layout/https%253A%252F%252Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%252Fpublic%252Fimages%252F924b683b-c079-4050-ae33-577e29202814_571x411.png)
 
@@ -319,6 +331,14 @@ and has *the advantage of keeping the transistor diffusion unbroken and thus can
 ---
 
 ![image-20250707210444362](layout/image-20250707210444362.png)
+
+---
+
+**4T MPODE (with source/drain)** may be formed in **CNOD design layout**
+
+potential leakage: **channel leakage (S to D)**; **junction leakage (S/D to bulk)**
+
+![image-20250708001207301](layout/image-20250708001207301.png)
 
 
 

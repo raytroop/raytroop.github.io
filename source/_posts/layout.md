@@ -267,7 +267,7 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 **DDB** is the **PODE** (Poly on OD/Diffusion Edge) in TSMC 16FFC process.
 
-**SDB** is the **CPODE** (Connected PODE) in TSMC 16FFC process.
+**SDB** is the **CPODE** (Common Poly on Diffusion Edge) in TSMC 16FFC process.
 
 > PO on OD edge (PODE) is a must and to define GATE that abuts OD vertical edge
 >
@@ -280,6 +280,12 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 ![image-20221210150847737](layout/image-20221210150847737.png)
 
 ![image-20240509205506112](layout/image-20240509205506112.png)
+
+---
+
+> Leading Edge Logic Comparison March 9, 2018 [[https://semiwiki.com/wp-content/uploads/2018/03/Leading-Edge-Logic.pdf](https://semiwiki.com/wp-content/uploads/2018/03/Leading-Edge-Logic.pdf)]
+>
+> What is CPODE, and why do we use it in VLSI layout? [[https://semiconwiki.com/what-is-cpode-and-why-do-we-use-it-in-vlsi-layout/](https://semiconwiki.com/what-is-cpode-and-why-do-we-use-it-in-vlsi-layout/)]
 
 #### SAC & SAGC
 
@@ -326,10 +332,25 @@ SAGCs require the source/drain contacts to be capped with an insulator that is d
 > According to the DRC of T foundary, poly extension > 0 um and space between MP and OD > 0 um., which demonstrate self-aligned gate contact is **not** introduced.
 
 
+#### CNOD
+
+Continuous Diffusion (**CNOD**)
+
+In CNOD, the diffusion is not broken at all. The fabrication process continues normally, but when standard cells need to be separated, 
+the gate between them is designated as a dummy gate. This dummy gate is then connected to a *Gate Tie-Down Via to the power rail*
+
+This dummy gate tie-down method of CNOD achieves the same horizontal width savings as *SDB*, 
+and has *the advantage of keeping the transistor diffusion unbroken and thus can achieve more uniform strain and performance characteristics*
+
+
+> The TRUTH of TSMC 5nm [[https://www.angstronomics.com/p/the-truth-of-tsmc-5nm](https://www.angstronomics.com/p/the-truth-of-tsmc-5nm)]
+>
+> S. Badel et al., "Chip Variability Mitigation through Continuous Diffusion Enabled by EUV and Self-Aligned Gate Contact," 2018 14th IEEE International Conference on Solid-State and Integrated Circuit Technology (ICSICT), Qingdao, China, 2018 [[https://sci-hub.st/10.1109/ICSICT.2018.8565694](https://sci-hub.st/10.1109/ICSICT.2018.8565694)]
 
 
 
-##### Contacted-Poly-Pitch (CPP)
+
+#### Contacted-Poly-Pitch (CPP)
 
 > Wider Contacted-Poly-Pitch allows wider MD and VD size, which help reduce MEOL IRdrop
 

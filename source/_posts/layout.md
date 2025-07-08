@@ -226,6 +226,7 @@ off transistor split diffusion
 ![image-20221210165916985](layout/image-20221210165916985.png)
 
 
+> Mark Williams. Stacked MOSFETs in Analog Layout [[https://community.cadence.com/cadence_blogs_8/b/cic/posts/stacked-mosfets-in-analog-layout](https://community.cadence.com/cadence_blogs_8/b/cic/posts/stacked-mosfets-in-analog-layout)]
 
 ### Modeling Consideration
 

@@ -7,72 +7,61 @@ categories:
 mathjax: true
 ---
 
-The concept of **partial inductance** is extensively used in the book for modeling interconnects and discontinuities (self and mutual ***loop*** inductances  ->  ***partial*** inductance)
-
-![image-20250602155255711](Partial-Inductance/image-20250602155255711.png)
-
-|                               | currents in OPPOSITE direction | currents in SAME direction |
-| ----------------------------- | ------------------------------ | -------------------------- |
-| **self partial inductance**   | **+**                          |                            |
-| **mutual partial inductance** | **-**                          | **+**                      |
-
-
+**Loop Inductance** is the sum of **partial self-inductance** and **partial-mutual inductance**
 
 ---
 
 
 
-![image-20250602150334930](Partial-Inductance/image-20250602150334930.png)
+##  magnetic vector potential
 
-![image-20250602152515494](Partial-Inductance/image-20250602152515494.png)
+> Youjin Deng. 5-3 静磁场的基本规律 [[http://staff.ustc.edu.cn/~yjdeng/EM2022/pdf/5-2(2022).pdf](http://staff.ustc.edu.cn/~yjdeng/EM2022/pdf/5-2(2022).pdf)]
 
-![image-20250602152930491](Partial-Inductance/image-20250602152930491.png)
+![image-20250708231209472](Partial-Inductance/image-20250708231209472.png)
 
-
-
-## loop inductance
-
-> 由法拉第定律所導出的total loop inductance是迴路整體的效應，沒辦法區分出電源與地路徑上各別的電感，即難以分析 電感對power bounce或ground bounce分別的影響，所以有了partial inductance的定義
+> ![image-20250708231733006](Partial-Inductance/image-20250708231733006.png)
+>
+> ![image-20250708231541352](Partial-Inductance/image-20250708231541352.png)
 
 
 
-![img](Partial-Inductance/30_Par03.jpg)
+![image-20250708231822291](Partial-Inductance/image-20250708231822291.png)
 
 
 
-## partial inductance
+## Partial Inductance
 
-> The first problem with using *loop inductance* to model the conductors of a loop is that at different frequencies, the return path
+![image-20250708230643776](Partial-Inductance/image-20250708230643776.png)
 
-![image-20250602105455013](Partial-Inductance/image-20250602105455013.png)
+### self partial inductance
 
-![image-20250602112336956](Partial-Inductance/image-20250602112336956.png)
+![image-20250708233924675](Partial-Inductance/image-20250708233924675.png)
 
-![image-20250602120913866](Partial-Inductance/image-20250602120913866.png)
+### mutual partial inductance
 
-
-
-
-
-
-## grounding
-
-*TODO* &#128197;
-
-
-> Chapter 11 Layout and grounding [[http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf](http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf)]
+![image-20250708234512418](Partial-Inductance/image-20250708234512418.png)
 
 
 
-## Decoupling Capacitor
+### Ex. two-wire
 
-![image-20250705175343498](Partial-Inductance/image-20250705175343498.png)
+![image-20250709001127400](Partial-Inductance/image-20250709001127400.png)
+
+
+
+
+
+---
+
+![image-20250602120913866](Partial-Inductance/image-20250602120913866-1751987296814-45.png)
+
+
 
 
 
 ##   Current Return Path
 
-![image-20250705171613361](Partial-Inductance/image-20250705171613361.png)
+![image-20250705171613361](Partial-Inductance/image-20250705171613361-1751987296815-47.png)
 
 Current return paths are frequency dependent $Z = R +j\omega L$
 
@@ -84,11 +73,11 @@ Current return paths are frequency dependent $Z = R +j\omega L$
   - The current would be confined to the *nearest* possible return only at ultra-high frequencies (skin effect)
   
 
-![image-20250705170949035](Partial-Inductance/image-20250705170949035.png)
+![image-20250705170949035](Partial-Inductance/image-20250705170949035-1751987296815-48.png)
 
 ---
 
-![image-20250705170028485](Partial-Inductance/image-20250705170028485.png)
+![image-20250705170028485](Partial-Inductance/image-20250705170028485-1751987296816-49.png)
 
 ---
 
@@ -96,19 +85,19 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 **setup:**
 
-![image-20250706004037966](Partial-Inductance/image-20250706004037966.png)
+![image-20250706004037966](Partial-Inductance/image-20250706004037966-1751987296816-50.png)
 
 
 
 **frequency sweep:**
 
-![image-20250706010943996](Partial-Inductance/image-20250706010943996.png)
+![image-20250706010943996](Partial-Inductance/image-20250706010943996-1751987296816-51.png)
 
 
 
 > Cadence October 2020, *Analysis of a Figure-Eight Inductor with EMX RAK*
 >
-> ![image-20250706010216105](Partial-Inductance/image-20250706010216105.png)
+> ![image-20250706010216105](Partial-Inductance/image-20250706010216105-1751987296817-52.png)
 
 ## proximity effect & skin effect 
 
@@ -119,13 +108,13 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ***proximity effect*** is a *redistribution of electric current* occurring in ***nearby parallel electrical conductors*** carrying *alternating current (AC)*, caused by ***magnetic effects*** (eddy currents)
 
-![image-20250705163405433](Partial-Inductance/image-20250705163405433.png)
+![image-20250705163405433](Partial-Inductance/image-20250705163405433-1751987296817-53.png)
 
 ---
 
 ***skin effect*** is the tendency of ***AC current*** flow near the surface (or "skin") of a conductor, rather than throughout its cross-section, due to the ***magnetic field generated by the current itself***
 
-![image-20250705165353751](Partial-Inductance/image-20250705165353751.png)
+![image-20250705165353751](Partial-Inductance/image-20250705165353751-1751987296818-54.png)
 
 > ***Cause of skin effect***
 >
@@ -143,11 +132,11 @@ By [Lenz's law](https://en.wikipedia.org/wiki/Lenz's_law), an eddy current creat
 
 **Electric field coupling** (also called **capacitive coupling**) occurs when energy is coupled from one circuit to another through an **electric field**
 
-![Two circuits above a signal return plane.](Partial-Inductance/Fig01.png)
+![Two circuits above a signal return plane.](Partial-Inductance/Fig01-1751987296818-55.png)
 
 **Magnetic field coupling** (also called **inductive coupling**) occurs when energy is coupled from one circuit to another through a **magnetic field**
 
-![Two circuits above a signal return plane](Partial-Inductance/Fig01-1751718884303-3.png)
+![Two circuits above a signal return plane](Partial-Inductance/Fig01-1751718884303-3-1751987296819-56.png)
 
 ---
 
@@ -156,6 +145,18 @@ For instance
 - magnetic coupling between multiple inductors
 - capacitive coupling between multiple transmission lines
 
+## Grounding
+
+*TODO* &#128197;
+
+
+> Chapter 11 Layout and grounding [[http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf](http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf)]
+
+
+
+## Decoupling Capacitor
+
+![image-20250705175343498](Partial-Inductance/image-20250705175343498-1751987296814-46.png)
 
 
 ## reference
@@ -193,3 +194,4 @@ How Much Transmission-Line Loss is Too Much? [[http://blog.teledynelecroy.com/20
 
 Raymond Y. Chen, Raymond Y. Chen. Fundamentals of S Fundamentals of S-Parameter Parameter Modeling for Power Distribution Modeling for Power Distribution System (PDS) and SSO Analysis System (PDS) and SSO Analysis [[https://ibis.org/summits/jun05/chen.pdf](https://ibis.org/summits/jun05/chen.pdf)]
 
+![image-20250602155255711](Partial-Inductance/image-20250602155255711-1751987296819-57.png)

@@ -179,7 +179,13 @@ The Unified Compiler Flow (UFE) uses VCS with the `-kdb` option and the generate
 
 > For 2 and 3, use the `-dbdir` option to load *simv.dadir* if you have move it to somewhere else
 
+---
 
+`module load vcs`
+
+`module load verdi`
+
+> both vcs and verdi are needed for design import
 
 ## Reference Design and FSDB on the Command Line
 

@@ -19,15 +19,14 @@ mathjax: true
 
 磁场不能用标量势描述
 
-![202507090100](Partial-Inductance/202507090100.PNG)
+![image-20250709195107708](Partial-Inductance/image-20250709195107708.png)
 
-![image-20250708231209472](Partial-Inductance/image-20250708231209472.png)
+![image-20250709195217587](Partial-Inductance/image-20250709195217587.png)
 
-
-
-> ![image-20250708231733006](Partial-Inductance/image-20250708231733006.png)
+> ![image-20250709200229266](Partial-Inductance/image-20250709200229266.png)
 >
-> ![image-20250708231541352](Partial-Inductance/image-20250708231541352.png)
+
+---
 
 
 

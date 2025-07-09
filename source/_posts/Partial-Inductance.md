@@ -13,11 +13,17 @@ mathjax: true
 
 
 
-##  magnetic vector potential
+## Magnetic Vector Potential (磁矢势)
 
 > Youjin Deng. 5-3 静磁场的基本规律 [[http://staff.ustc.edu.cn/~yjdeng/EM2022/pdf/5-2(2022).pdf](http://staff.ustc.edu.cn/~yjdeng/EM2022/pdf/5-2(2022).pdf)]
 
+磁场不能用标量势描述
+
+![202507090100](Partial-Inductance/202507090100.PNG)
+
 ![image-20250708231209472](Partial-Inductance/image-20250708231209472.png)
+
+
 
 > ![image-20250708231733006](Partial-Inductance/image-20250708231733006.png)
 >

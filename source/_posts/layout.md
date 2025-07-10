@@ -542,8 +542,21 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
   there is the benefit that this circuitry is less susceptible to noise that propagates through the p-substrate.
 
 
+## Decap
+*TODO* &#128197;
 
 
+> Kevin Zheng. The Unsung Heroes – Dummies, Decaps, and More [[https://circuit-artists.com/the-unsung-heroes-dummies-decaps-and-more/](https://circuit-artists.com/the-unsung-heroes-dummies-decaps-and-more/)]
+>
+> The Difference Between MOM, MIM, and MOS Capacitors [[https://www.ansys.com/blog/difference-between-mom-mim-mos-capacitor](https://www.ansys.com/blog/difference-between-mom-mim-mos-capacitor)]
+>
+> MIM/MOM capacitor extraction boosts analog and RF designs [[https://www.eeworldonline.com/mim-mom-capacitor-extraction-boosts-analog-and-rf-designs/](https://www.eeworldonline.com/mim-mom-capacitor-extraction-boosts-analog-and-rf-designs/)]
+
+
+## Metal Resistors In Wire Management
+*TODO* &#128197;
+
+> Kevin Zheng. Metal Resistors – Your Unexpected Friend In Wire Management [[https://circuit-artists.com/metal-resistors-your-unexpected-friend-in-wire-management/](https://circuit-artists.com/metal-resistors-your-unexpected-friend-in-wire-management/)]
 
 ## reference
 

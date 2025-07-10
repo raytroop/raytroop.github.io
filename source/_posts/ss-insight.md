@@ -7,7 +7,15 @@ categories:
 mathjax: true
 ---
 
+## white noise
 
+white noise doesn't mean it has a Gaussian/normal distribution 
+
+The only criteria for a (discrete) signal to be **"white"** is for **each sample to be independently taken from the same probability distribution**
+
+By understanding input signal's statistical nature, we can gather more insights about certain requirements for our circuits than just from frequency domain
+
+> 
 
 ## The Problem of "Sinusoids Running Around Loops"
 

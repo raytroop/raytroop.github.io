@@ -13,7 +13,7 @@ mathjax: true
 
 Options -> Analog...
 
-![image-20250607115137576](virtuoso/image-20250607115137576.png)
+![image-20250607115137576](ade/image-20250607115137576.png)
 
 
 
@@ -26,13 +26,13 @@ Options -> Analog...
 1. both rise/fall edge are added the noisefile
 2. noise between rise and fall edge are partially correlated
 
-![image-20250524114121720](virtuoso/image-20250524114121720.png)
+![image-20250524114121720](ade/image-20250524114121720.png)
 
 
 
 ***Pnoise sampled(jitter) with Sampled Phase***
 
-![image-20250524234154262](virtuoso/image-20250524234154262.png)
+![image-20250524234154262](ade/image-20250524234154262.png)
 
 vsource output is applied with noise *all the time*
 
@@ -52,7 +52,7 @@ vsource output is applied with noise *all the time*
 
 **with Equation**
 
-![img](virtuoso/ecuation-solar-cell-model.png)
+![img](ade/ecuation-solar-cell-model.png)
 
 ```verilog
 /////////////////////////////////////////////////////////////////////////////
@@ -128,7 +128,7 @@ endmodule
 
 
 
-![V-I-simulation-for-solare-cell](virtuoso/V-I-simulation-for-solare-cell.png)
+![V-I-simulation-for-solare-cell](ade/V-I-simulation-for-solare-cell.png)
 
 
 
@@ -140,7 +140,7 @@ endmodule
 
 **with lookup table**
 
-![image-20241130182754455](virtuoso/image-20241130182754455.png)
+![image-20241130182754455](ade/image-20241130182754455.png)
 
 ```verilog
 ///////////////////////////////////////////////////////////////////////////
@@ -343,11 +343,11 @@ unalias bk
 
 `PWL File as Design Var?` parameter in *vpwlf* cell is convenient for sweep simulation or corner simulation, wherein there are multiple pwl files .
 
-![image-20220514121048124](virtuoso/image-20220514121048124.png)
+![image-20220514121048124](ade/image-20220514121048124.png)
 
 The file path should be surrounded with **double-quotes** to be protected from evaluation.
 
-![image-20220514121150988](virtuoso/image-20220514121150988.png)
+![image-20220514121150988](ade/image-20220514121150988.png)
 
 
 
@@ -423,23 +423,23 @@ use **SpiceIn** GUI feature to map MOS parameter correctly in generated schemati
 
 ### Input
 
-![image-20221022224745955](virtuoso/image-20221022224745955.png)
+![image-20221022224745955](ade/image-20221022224745955.png)
 
 > The mos's total width (parameter name "w") value will update during **SpiceIn** trigger CDF callback automatically
 
 ### Output
 
-![image-20221022225143844](virtuoso/image-20221022225143844.png)
+![image-20221022225143844](ade/image-20221022225143844.png)
 
 ### Device Map
 
-![image-20221022225224751](virtuoso/image-20221022225224751.png)
+![image-20221022225224751](ade/image-20221022225224751.png)
 
 > **User Prop Mapping** is significant setup, both *xxx.spi* and *Edit CDF* provide the essential information.
 >
 > The map syntax is *spice_para0 cdf_para0 spice_para1 cdf_para01 ... spice_paraN cdf_paraN*
 
-![image-20221022225742497](virtuoso/image-20221022225742497.png)
+![image-20221022225742497](ade/image-20221022225742497.png)
 
 
 
@@ -471,7 +471,7 @@ envSetVal("spectre.envOpts" "modelFiles" 'string "moreModels;ff mymodels;tt")
 
 
 
-![image-20230114220458438](virtuoso/image-20230114220458438.png)
+![image-20230114220458438](ade/image-20230114220458438.png)
 
 
 
@@ -508,7 +508,7 @@ endlibrary dspf_files_corners
 
 Add the file created above ‘*myDSPF_File.scs*’  in ‘*Add/Edit Model Files*’ of Corners setup form
 
-![image-20230129223248655](virtuoso/image-20230129223248655.png)
+![image-20230129223248655](ade/image-20230129223248655.png)
 
 
 
@@ -520,23 +520,23 @@ Add the file created above ‘*myDSPF_File.scs*’  in ‘*Add/Edit Model Files*
 
 multiple label and rectangle  in vssa net
 
-![image-20230405003705354](virtuoso/image-20230405003705354.png)
+![image-20230405003705354](ade/image-20230405003705354.png)
 
 - general dspf
 
   `SHORT_PINS: YES`
 
-  ![image-20230405002824842](virtuoso/image-20230405002824842.png)
+  ![image-20230405002824842](ade/image-20230405002824842.png)
 
   > other pin are short together
 
 - dspf for emir analysis
 
-![image-20230405000013461](virtuoso/image-20230405000013461.png)
+![image-20230405000013461](ade/image-20230405000013461.png)
 
-![image-20230405001944418](virtuoso/image-20230405001944418.png)
+![image-20230405001944418](ade/image-20230405001944418.png)
 
-![image-20230405230611522](virtuoso/image-20230405230611522.png)
+![image-20230405230611522](ade/image-20230405230611522.png)
 
 
 
@@ -561,7 +561,7 @@ multiple label and rectangle  in vssa net
 
 
 
-![image-20230405005151550](virtuoso/image-20230405005151550.png)
+![image-20230405005151550](ade/image-20230405005151550.png)
 
 ### DSPF Syntax
 
@@ -616,7 +616,7 @@ Pay attention to *VerilogIn* block, which may contain upper case / lower case ne
 
 The extracted DSPF using extraction tool also contain NET1 and net1, which **shall not** be shorted together.
 
-![image-20230422225227022](virtuoso/image-20230422225227022.png)
+![image-20230422225227022](ade/image-20230422225227022.png)
 
 
 
@@ -642,7 +642,7 @@ output netlist.
 
 **CDF termOrder**
 
-![image-20230423005204734](virtuoso/image-20230423005204734.png)
+![image-20230423005204734](ade/image-20230423005204734.png)
 
 
 
@@ -650,13 +650,13 @@ output netlist.
 
 **DSPF**
 
-![image-20230423005700599](virtuoso/image-20230423005700599.png)
+![image-20230423005700599](ade/image-20230423005700599.png)
 
 **input.scs**
 
-![image-20230423005754571](virtuoso/image-20230423005754571.png)
+![image-20230423005754571](ade/image-20230423005754571.png)
 
-![image-20230423010050512](virtuoso/image-20230423010050512.png)
+![image-20230423010050512](ade/image-20230423010050512.png)
 
 
 
@@ -664,13 +664,13 @@ output netlist.
 
 manual change DSPF's pin order shown as below
 
-![image-20230423010229253](virtuoso/image-20230423010229253.png)
+![image-20230423010229253](ade/image-20230423010229253.png)
 
 #### port_order=sch
 
 *dspf port is mapping to schematic by name*, and the simulation result is right
 
-![image-20230423011926424](virtuoso/image-20230423011926424.png)
+![image-20230423011926424](ade/image-20230423011926424.png)
 
 ##### port_order=spf
 
@@ -678,7 +678,7 @@ dspf pin order is retained, and **no mapping** between spectre netlist and dspf.
 
 The simulation result is wrong
 
-![image-20230423012443314](virtuoso/image-20230423012443314.png)
+![image-20230423012443314](ade/image-20230423012443314.png)
 
 
 
@@ -722,7 +722,7 @@ Next, the extractor forms a virtual connection between any two labels that have 
 
 Colons can appear anywhere in the name with the exception that a colon at the beginning of a name is treated as a regular character (that is, it has no special effect).
 
-![image-20230511211343788](virtuoso/image-20230511211343788.png)
+![image-20230511211343788](ade/image-20230511211343788.png)
 
 > *up to the first colon character* encountered
 >
@@ -730,7 +730,7 @@ Colons can appear anywhere in the name with the exception that a colon at the be
 
 
 
-![image-20230511211607588](virtuoso/image-20230511211607588.png)
+![image-20230511211607588](ade/image-20230511211607588.png)
 
 
 
@@ -742,7 +742,7 @@ Each name is a net name and can be optionally enclosed in quotes.
 
 The connectivity extractor forms a virtual connection between any two labels having the same name such that the label name appears in a **Virtual Connect Name** specification statement in the rule file.
 
-![image-20230511211209469](virtuoso/image-20230511211209469.png)
+![image-20230511211209469](ade/image-20230511211209469.png)
 
 > `VIRTUAL CONNECT NAME ?` == Connect all nets by name
 
@@ -751,7 +751,7 @@ The connectivity extractor forms a virtual connection between any two labels hav
 Note that if **Virtual Connect Colon YES** is also specified, then **Virtual Connect Name** operates on names
 *after all colon suffixes have been stripped off*.
 
-![image-20230511211651448](virtuoso/image-20230511211651448.png)
+![image-20230511211651448](ade/image-20230511211651448.png)
 
 
 
@@ -813,7 +813,7 @@ Calibre Verification User’s Manual
 
 > `swpuseprevic`
 
-![image-20240901094536745](virtuoso/image-20240901094536745.png)
+![image-20240901094536745](ade/image-20240901094536745.png)
 
 
 
@@ -826,11 +826,11 @@ Calibre Verification User’s Manual
 
 
 
-![image-20231005190644654](virtuoso/image-20231005190644654.png)
+![image-20231005190644654](ade/image-20231005190644654.png)
 
-![image-20231005190712057](virtuoso/image-20231005190712057.png)
+![image-20231005190712057](ade/image-20231005190712057.png)
 
-![image-20231005190724560](virtuoso/image-20231005190724560.png)
+![image-20231005190724560](ade/image-20231005190724560.png)
 
 
 
@@ -867,7 +867,7 @@ Spectre Circuit Simulator Reference
 
 
 
-![image-20231006110801078](virtuoso/image-20231006110801078.png)
+![image-20231006110801078](ade/image-20231006110801078.png)
 
 
 
@@ -875,19 +875,19 @@ Spectre Circuit Simulator Reference
 
 #### setup
 
-![image-20231006103506475](virtuoso/image-20231006103506475.png)
+![image-20231006103506475](ade/image-20231006103506475.png)
 
 #### access 1
 
 **right-click** $\to$ **Annotate**  $\to$ **Transient Operating Points**
 
-![image-20231006104317496](virtuoso/image-20231006104317496.png)
+![image-20231006104317496](ade/image-20231006104317496.png)
 
 #### access 2
 
 **tranOpTimed**
 
-![image-20231006105236323](virtuoso/image-20231006105236323.png)
+![image-20231006105236323](ade/image-20231006105236323.png)
 
 
 
@@ -899,7 +899,7 @@ save M0:oppoint
 
 
 
-![image-20231006110506245](virtuoso/image-20231006110506245.png)
+![image-20231006110506245](ade/image-20231006110506245.png)
 
 
 
@@ -1035,7 +1035,7 @@ This option maps the bus delimiter between schematic netlist and parasitic file 
 
 > !!! follow the name  of net section in DSPF - prepend to top-level devices in the schematic with `X`
 
-![hierbench.drawio](virtuoso/hierbench.drawio.svg)
+![hierbench.drawio](ade/hierbench.drawio.svg)
 
 Assume node n1...n4  are named as below in DSPF file (prefix `X`)
 
@@ -1125,9 +1125,9 @@ save Xvco.XXXsupply\/MM4:d
 
 > `<instName>` in `*|I <instPinName> <instName> <pinName> <pinType><pinCap> {<coord>?}` which has prefix `X` corresponding to schematic is **NOT ** the instance name in DSPF. The instance name is in **instance section** and has prefix `XX`
 
-![image-20220417010807592](virtuoso/image-20220417010807592.png)
+![image-20220417010807592](ade/image-20220417010807592.png)
 
-![image-20220417010919588](virtuoso/image-20220417010919588.png)
+![image-20220417010919588](ade/image-20220417010919588.png)
 
 > !!! Only work for MOS terminal current. Fail to apply to block pin
 
@@ -1145,7 +1145,7 @@ save Xvco.XXXsupply\/MM4:d
 
 ### Differences Between DSPF and Schematic Names
 
-![image-20220416201019986](virtuoso/image-20220416201019986.png)
+![image-20220416201019986](ade/image-20220416201019986.png)
 
 > - MOS Terminal Mismatch ( ‘s’ vs ‘1’)
 >   - Schematic: number '1' ,'2', '3','4'
@@ -1189,7 +1189,7 @@ dspfFileEnvOptions = '(
 
 > `spfFileDevicePrefixForTermCurrent` and `spfFileDevicePrefixForOppoints` are applicable to MOS devices only.
 
-![image-20220418113416484](virtuoso/image-20220418113416484.png)
+![image-20220418113416484](ade/image-20220418113416484.png)
 
 >  Both  `@` and `__` have been observed  as Finger Delimiter in single DSPF . wired...
 
@@ -1246,15 +1246,15 @@ Available options are **current**, **voltage**, **both** or **prompt** and the d
 
 > NOTE: Starting with IC 6.1.8 ISR5, you can now set this from Options->Plotting/Printing
 
-![image-20220415204157341](virtuoso/image-20220415204157341.png)
+![image-20220415204157341](ade/image-20220415204157341.png)
 
 ### Interpreting _noxref Entries
 
 > You enable gate recognition in the Calibre nmLVS-H tool. Normally, the **\_noxref** names are internal to the gate
 
-![image-20220416125348491](virtuoso/image-20220416125348491.png)
+![image-20220416125348491](ade/image-20220416125348491.png)
 
-![image-20220416125416504](virtuoso/image-20220416125416504.png)
+![image-20220416125416504](ade/image-20220416125416504.png)
 
 
 
@@ -1325,11 +1325,11 @@ Now, run the simulation and the issue will be resolved.
 
 **rcc**
 
-![image-20220618131626913](virtuoso/image-20220618131626913.png)
+![image-20220618131626913](ade/image-20220618131626913.png)
 
 **c**
 
-![image-20220618131649065](virtuoso/image-20220618131649065.png)
+![image-20220618131649065](ade/image-20220618131649065.png)
 
 only **c** dspf give the **lumped capacitance**
 
@@ -1388,13 +1388,13 @@ or
 $$
 r=\frac{I_{\text{AbsAvg}}}{I_{\text{peak}}}
 $$
-![image-20220729023550943](virtuoso/image-20220729023550943.png)
+![image-20220729023550943](ade/image-20220729023550943.png)
 
 where the drawn width is 1um, r is 0.1
 
-![image-20220729023722754](virtuoso/image-20220729023722754.png)
+![image-20220729023722754](ade/image-20220729023722754.png)
 
-![image-20220729023319156](virtuoso/image-20220729023319156.png)
+![image-20220729023319156](ade/image-20220729023319156.png)
 $$
 9.37*(1-0.004)/\sqrt0.1 = 29.512
 $$
@@ -1405,7 +1405,7 @@ It's same with **max** EM Current Analysis in Voltus-Fi
 
 #### dynamicACPeak
 
-![image-20220729023154009](virtuoso/image-20220729023154009.png)
+![image-20220729023154009](ade/image-20220729023154009.png)
 
 This option affect how duty ratio r is computed in `max` and `acpeak/pwc` EM current Analysis
 
@@ -1420,7 +1420,7 @@ $$
 
 > Pulse-Wise Constant EM current calculation (IPWC)
 
-![image-20220729032235649](virtuoso/image-20220729032235649.png)
+![image-20220729032235649](ade/image-20220729032235649.png)
 
 where **Tau** is $T_d$ in above formula
 
@@ -1477,13 +1477,13 @@ Run `emirreport` on the command line using the **emirdatabase** (emir\*.bin) and
 
 For example
 
-![image-20220421203011393](virtuoso/image-20220421203011393.png)
+![image-20220421203011393](ade/image-20220421203011393.png)
 
 Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their reports respectly
 
-![image-20220421203657123](virtuoso/image-20220421203657123.png)
+![image-20220421203657123](ade/image-20220421203657123.png)
 
-![image-20220421203554147](virtuoso/image-20220421203554147.png)
+![image-20220421203554147](ade/image-20220421203554147.png)
 
 
 
@@ -1511,7 +1511,7 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
 
 
-![image-20220503205418275](virtuoso/image-20220503205418275.png)
+![image-20220503205418275](ade/image-20220503205418275.png)
 
 
 
@@ -1532,7 +1532,7 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
    > By the way, `Design Variables` - *temperature*  will override the temperature in *Setup toolbar* which is gray in ADE Explorer
 
-   ![image-20220421184141363](virtuoso/image-20220421184141363.png)
+   ![image-20220421184141363](ade/image-20220421184141363.png)
 
 4. AC Peak EM analysis - Voltus-Fi
 
@@ -1560,7 +1560,7 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
    `emir.conf` file is generated automaticaly after configure *EM/IR Analysis* in ADE, which is in *netlist* directory.
 
-   ![image-20220421182327011](virtuoso/image-20220421182327011.png)
+   ![image-20220421182327011](ade/image-20220421182327011.png)
 
 7. Setting default path for EM rules file in APS EMIR analysis
 
@@ -1594,7 +1594,7 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
      Once these are enabled, you will have the **Length**, **Node_1**, and **Node_2** columns printed in the EM report file, as shown below:
 
-     ![servlet](virtuoso/servlet.jpeg)
+     ![servlet](ade/servlet.jpeg)
 
 9. Is it possible to run RMS IR Drop analysis using Voltus-Fi?
 
@@ -1640,7 +1640,7 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
       - After the longest path in shape has been determined the tool applies the same blech length to all the resistor falling on that shape.
       - This resistor length is **NOT** used in EM analysis because EM rules consider Blech length of the resistor.
 
-      ![image-20220421001806689](virtuoso/image-20220421001806689.png)
+      ![image-20220421001806689](ade/image-20220421001806689.png)
 
       > where W is the wire width and L is the Blech length.
 
@@ -1648,7 +1648,7 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
         Bl = $l(R1) + $l(R2) + $l(R3) + $l(R4) + $l(R5) + $l(R6) + $l(R7) + $l(R8)
 
-        ![servlet](virtuoso/servlet-16504730496591.jpeg)
+        ![servlet](ade/servlet-16504730496591.jpeg)
 
 13. How to enable EMIR analysis in PSS simualtion ?
 
@@ -1662,9 +1662,9 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
 starRC: **NETLIST_CONNECT_OPENS**
 
-![image-20250711214404600](virtuoso/image-20250711214404600.png)
+![image-20250711214404600](ade/image-20250711214404600.png)
 
-![image-20250711220501284](virtuoso/image-20250711220501284.png)
+![image-20250711220501284](ade/image-20250711220501284.png)
 
 
 

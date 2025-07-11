@@ -9,13 +9,21 @@ mathjax: true
 
 ## white noise
 
-white noise doesn't mean it has a Gaussian/normal distribution 
+***white noise*** doesn't mean it has a *Gaussian/normal distribution*
 
 The only criteria for a (discrete) signal to be **"white"** is for **each sample to be independently taken from the same probability distribution**
 
+![img](ss-insight/distributions.png)
+
 By understanding input signal's statistical nature, we can gather more insights about certain requirements for our circuits than just from frequency domain
 
-> 
+![img](ss-insight/nonlin-pdf-1.png)
+
+
+
+> Kevin Zheng. The Frequency Domain Trap – Beware of Your AC Analysis [[https://circuit-artists.com/the-frequency-domain-trap-beware-of-your-ac-analysis/](https://circuit-artists.com/the-frequency-domain-trap-beware-of-your-ac-analysis/)]
+
+
 
 ## The Problem of "Sinusoids Running Around Loops"
 

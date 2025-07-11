@@ -296,9 +296,13 @@ zoom in first harmonic by linear step of pnoise
 
 ## Non-Stationary Processes
 
+> T. Sepke, P. Holloway, C. G. Sodini and H. -S. Lee, "Noise Analysis for Comparator-Based Circuits," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 3, pp. 541-553, March 2009 [[https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf)]
+>
+> Sepke, Todd. "Comparator design and analysis for comparator-based switched-capacitor circuits." (2006). [[https://dspace.mit.edu/handle/1721.1/38925](https://dspace.mit.edu/handle/1721.1/38925)]
+
 ### Wide-Sense-Stationary Noise
 
-Much like sinusoidal-steady-state signal analysis, **steady-state noise** analysis methods assume an input x(t) of **infinite duration**, which is a **Wide-Sense Stationary (WSS) random process**
+Much like sinusoidal-steady-state signal analysis, **steady-state noise** analysis methods assume an input $x(t)$ of **infinite duration**, which is a **Wide-Sense Stationary (WSS) random process**
 
 #### Frequency-domain Analysis
 
@@ -320,7 +324,7 @@ with WSS white noise input $x(t)$, $R_{xx}(\tau)=S_{xx}(0)\delta(\tau)$, therefo
 
 ### Non-stationary Noise
 
-Assuming the noise applied duration is much less than the time constant, the output voltage does not reach steady-state and WSS noise analysis does not apply
+Assuming the noise applied duration is much less than the time constant, the *output voltage does not reach steady-state and WSS noise analysis does not apply*
 
 > In order to determine the response of an LTI system to a **step noise input**, the problem is *more conveniently solved in the time-domain*
 
@@ -377,6 +381,17 @@ Because the definition of the PSD assumes that the variance of the noise process
 
 ![image-20241123084118787](comm/image-20241123084118787.png)
 
+> Richard Schreier. ECE1371 Advanced Analog Circuits Lecture 8 - COMPARATOR & FLASH ADC DESIGN [[http://individual.utoronto.ca/schreier/lectures/2015/8-6.pdf](http://individual.utoronto.ca/schreier/lectures/2015/8-6.pdf)]
+>
+> ![image-20250710221018596](comm/image-20250710221018596.png)
+>
+> 
+> $$
+> R_{yy}(0) = \frac{1}{2\pi}\int_{-\infty}^{\infty}|H(\omega)|^2S_{xx}(\omega)d\omega = S \cdot \frac{1}{2\pi}\int_{-\infty}^{\infty}|H(\omega)|^2d\omega \overset{\text{Parseval's Relation}}{=} S\cdot \int_{-\infty}^{\infty}|h(t)|^2dt
+> $$
+
+
+
 #### Input Referred Noise  
 
 ![image-20241123094924184](comm/image-20241123094924184.png)
@@ -387,7 +402,7 @@ Because the definition of the PSD assumes that the variance of the noise process
 
 with a step ramp input  $v_X(t) = Mtu(t)$
 
-The noise gain is
+The **noise gain** is
 $$
 |A_N(t_i)| = A_0 (1-e^{t_i/\tau_o})u(t)
 $$
@@ -402,6 +417,8 @@ $$\begin{align}
 where $R_n = \frac{G_n}{G_m^2}$, the equivalent thermal noise resistance
 
 > ![image-20241123111642852](comm/image-20241123111642852.png)
+
+
 
 
 
@@ -425,6 +442,3 @@ STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/
 
 Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
 
-T. Sepke, P. Holloway, C. G. Sodini and H. -S. Lee, "Noise Analysis for Comparator-Based Circuits," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 3, pp. 541-553, March 2009 [[https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf)]
-
-Sepke, Todd. "Comparator design and analysis for comparator-based switched-capacitor circuits." (2006). [[https://dspace.mit.edu/handle/1721.1/38925](https://dspace.mit.edu/handle/1721.1/38925)]

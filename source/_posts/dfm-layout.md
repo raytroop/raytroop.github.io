@@ -11,7 +11,7 @@ mathjax: true
 
 ## Interconnect Resistance Evolution
 
-![image-20250703232709089](layout/image-20250703232709089.png)
+![image-20250703232709089](dfm-layout/image-20250703232709089.png)
 
 
 
@@ -23,9 +23,9 @@ mathjax: true
 
 Cu-pillar bumping is a next-generation flip chip interconnection between chip & packages, especially for fine pitch applications
 
-![img](layout/pic_Cu-pillarBumping_01.svg)
+![img](dfm-layout/pic_Cu-pillarBumping_01.svg)
 
-![img](layout/pic_Cu-pillarBumping_02.svg)
+![img](dfm-layout/pic_Cu-pillarBumping_02.svg)
 
 - On the wafer end, comparing to solder bump, cu-pillar bump provides the advantage of fine pitch; the die size can be reduced about 5~10%. 
 
@@ -33,7 +33,7 @@ Cu-pillar bumping is a next-generation flip chip interconnection between chip & 
 
 
 
-![image-20250613233806417](layout/image-20250613233806417.png)
+![image-20250613233806417](dfm-layout/image-20250613233806417.png)
 
 
 
@@ -43,13 +43,13 @@ Cu-pillar bumping is a next-generation flip chip interconnection between chip & 
 
 
 
-![figure-2](layout/figure-2-18wid=609&fmt=png-alpha&op_usm=0.9,1.png)
+![figure-2](dfm-layout/figure-2-18wid=609&fmt=png-alpha&op_usm=0.9,1.png)
 
 The root cause of the delay mismatch is related to *how parasitic extraction tools distribute coupling capacitances over the nodes of the resistive networks*
 
 > The most likely reason for such asymmetry is the anisotropy of computational geometry algorithms used by extraction tools.
 
-![figure-4](layout/figure-4-13wid=609&fmt=png-alpha&op_usm=0.9,1.png)
+![figure-4](dfm-layout/figure-4-13wid=609&fmt=png-alpha&op_usm=0.9,1.png)
 
 
 
@@ -60,7 +60,7 @@ The root cause of the delay mismatch is related to *how parasitic extraction too
 
 A "strap" refers to a low-impedance connection
 
-![image-20230518001007350](layout/image-20230518001007350.png)
+![image-20230518001007350](dfm-layout/image-20230518001007350.png)
 
 NWDMY = NWDMY1, NWDMY2
 
@@ -81,15 +81,15 @@ PWSTRAP = {PP & OD} not NW
 
 ### Calibre Rule::NOT
 
-![image-20230518005758993](layout/image-20230518005758993.png)
+![image-20230518005758993](dfm-layout/image-20230518005758993.png)
 
 
 
 ### Calibre Rule::INTERACT
 
-![image-20230518010124496](layout/image-20230518010124496.png)
+![image-20230518010124496](dfm-layout/image-20230518010124496.png)
 
-![image-20230518010758342](layout/image-20230518010758342.png)
+![image-20230518010758342](dfm-layout/image-20230518010758342.png)
 
 
 
@@ -126,7 +126,7 @@ Diode helps dissipate charges accumulated on metal. Diode should be placed as ne
 >
 > In the reverse bias region, the reverse saturation current of Si and Ge diodes doubles for every $10 ^oC$ rise in temperature
 
-![main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq](layout/main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq.jpg)
+![main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq](dfm-layout/main-qimg-c3fe57dfac5fd5e5b5616ddf4f89f08a-pjlq.jpg)
 
 > Tuvia Liran, Antenna effect (PID): Do the design rules really protect us? [[link](https://www.eetimes.com/antenna-effect-do-the-design-rules-really-protect-us/)]
 >
@@ -153,9 +153,9 @@ Diode helps dissipate charges accumulated on metal. Diode should be placed as ne
 
 ## Shallow Trench Isolation (STI)
 
-![image-20241121211242335](layout/image-20241121211242335.png)
+![image-20241121211242335](dfm-layout/image-20241121211242335.png)
 
-![image-20241121211348053](layout/image-20241121211348053.png)
+![image-20241121211348053](dfm-layout/image-20241121211348053.png)
 
 
 
@@ -163,38 +163,38 @@ Diode helps dissipate charges accumulated on metal. Diode should be placed as ne
 
 ### Planar process vs. FinFet process
 
-![local_Interconnect.drawio](layout/local_Interconnect.drawio.svg)
+![local_Interconnect.drawio](dfm-layout/local_Interconnect.drawio.svg)
 
 ### Standard Cell  Tapcell
-![tapcell.drawio](layout/tapcell.drawio.svg)
+![tapcell.drawio](dfm-layout/tapcell.drawio.svg)
 
 ### Guard Ring in Custom block
 
 Place well tie and substrate tie where they are needed. Redundant guard ring consume area and increase the routing of critical signal net.
 
-![guardring_stypes.drawio](layout/guardring_stypes.drawio.svg)
+![guardring_stypes.drawio](dfm-layout/guardring_stypes.drawio.svg)
 
 ### Continuous OD
 
 #### Performance & Matching
 
-![image-20220219223723289](layout/image-20220219223723289.png)
+![image-20220219223723289](dfm-layout/image-20220219223723289.png)
 
 #### current mirror
 
 split diffusion with dummy transistors
 
-![mirror_continuous_OD_split_with_dummy.drawio](layout/mirror_continuous_OD_split_with_dummy.drawio.svg)
+![mirror_continuous_OD_split_with_dummy.drawio](dfm-layout/mirror_continuous_OD_split_with_dummy.drawio.svg)
 
 #### cascode structure
 
 off transistor split diffusion
 
-![cascode_continuous_OD_split_with_dummy.drawio](layout/cascode_continuous_OD_split_with_dummy.drawio.svg)
+![cascode_continuous_OD_split_with_dummy.drawio](dfm-layout/cascode_continuous_OD_split_with_dummy.drawio.svg)
 
 #### sharing source & drain
 
-![sharing_SD.drawio](layout/sharing_SD.drawio.svg)
+![sharing_SD.drawio](dfm-layout/sharing_SD.drawio.svg)
 
 
 
@@ -207,36 +207,36 @@ off transistor split diffusion
 
    The common centroid technique describes that if there are n blocks which are to be matched then the blocks are arranged symmetrically around the common centre at equal distances from the centre. This technique offers best matching for devices as it helps in avoiding cross-chip gradients
 
-   ![HTML5 Icon](layout/figure13.jpeg)
+   ![HTML5 Icon](dfm-layout/figure13.jpeg)
 
 2. Inter-digitation
 
    Interdigitation reduces the device mismatch as it suffers equally from process variations in X dimension. This technique was used to layout current mirrors and resistors in PTAT and BGR circuits. In the Figure-15 below each brown stick represents a PFET of uniform length. This representation is termed as an inter-digitated layout.
 
-   ![HTML5 Icon](layout/figure14.jpeg)
+   ![HTML5 Icon](dfm-layout/figure14.jpeg)
 
 
 
 ## Design with FinFETs
 
-![image-20221210165644336](layout/image-20221210165644336.png)
+![image-20221210165644336](dfm-layout/image-20221210165644336.png)
 
 
 
-![image-20221210165916985](layout/image-20221210165916985.png)
+![image-20221210165916985](dfm-layout/image-20221210165916985.png)
 
 
 > Mark Williams. Stacked MOSFETs in Analog Layout [[https://community.cadence.com/cadence_blogs_8/b/cic/posts/stacked-mosfets-in-analog-layout](https://community.cadence.com/cadence_blogs_8/b/cic/posts/stacked-mosfets-in-analog-layout)]
 
 ### Modeling Consideration
 
-![image-20221217152830191](layout/image-20221217152830191.png)
+![image-20221217152830191](dfm-layout/image-20221217152830191.png)
 
-![image-20221210170042233](layout/image-20221210170042233.png)
+![image-20221210170042233](dfm-layout/image-20221210170042233.png)
 
 
 
-![mos_pro](layout/mos_pro.drawio.svg)
+![mos_pro](dfm-layout/mos_pro.drawio.svg)
 $$\begin{align}
 R_{d1} &\propto \frac{1}{N_{fins}} \\
 R_{s1} &\propto \frac{1}{N_{fins}} \\
@@ -252,7 +252,7 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 
 
-![image-20230708221056420](layout/image-20230708221056420.png)
+![image-20230708221056420](dfm-layout/image-20230708221056420.png)
 
 
 
@@ -260,7 +260,7 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 > The PODE devices is extracted as parasitic devices in post-layout netlist
 
-![image-20220213172653116](layout/image-20220213172653116.png)
+![image-20220213172653116](dfm-layout/image-20220213172653116.png)
 
 
 
@@ -282,11 +282,11 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 
 
-![image-20221210145232826](layout/image-20221210145232826.png)
+![image-20221210145232826](dfm-layout/image-20221210145232826.png)
 
-![image-20221210150847737](layout/image-20221210150847737.png)
+![image-20221210150847737](dfm-layout/image-20221210150847737.png)
 
-![image-20240509205506112](layout/image-20240509205506112.png)
+![image-20240509205506112](dfm-layout/image-20240509205506112.png)
 
 
 
@@ -304,7 +304,7 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 **3T PODE device**
 
-![image-20250708001318109](layout/image-20250708001318109.png)
+![image-20250708001318109](dfm-layout/image-20250708001318109.png)
 
 > US9053283B2: Methods for layout verification for polysilicon cell edge structures in finFET standard cells using filters [[https://patentimages.storage.googleapis.com/36/2c/ff/ad3d4c232ecc8d/US9053283.pdf](https://patentimages.storage.googleapis.com/36/2c/ff/ad3d4c232ecc8d/US9053283.pdf)]
 >
@@ -316,7 +316,7 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 continuous oxide diffusion (**CNOD**) design
 
-![img](layout/https%253A%252F%252Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%252Fpublic%252Fimages%252F924b683b-c079-4050-ae33-577e29202814_571x411.png)
+![img](dfm-layout/https%253A%252F%252Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%252Fpublic%252Fimages%252F924b683b-c079-4050-ae33-577e29202814_571x411.png)
 
 In CNOD, the diffusion is not broken at all. The fabrication process continues normally, but when standard cells need to be separated, 
 the gate between them is designated as a dummy gate. This dummy gate is then connected to a *Gate Tie-Down Via to the power rail*
@@ -331,7 +331,7 @@ and has *the advantage of keeping the transistor diffusion unbroken and thus can
 
 ---
 
-![image-20250707210444362](layout/image-20250707210444362.png)
+![image-20250707210444362](dfm-layout/image-20250707210444362.png)
 
 ---
 
@@ -339,7 +339,7 @@ and has *the advantage of keeping the transistor diffusion unbroken and thus can
 
 potential leakage: **channel leakage (S to D)**; **junction leakage (S/D to bulk)**
 
-![image-20250708001207301](layout/image-20250708001207301.png)
+![image-20250708001207301](dfm-layout/image-20250708001207301.png)
 
 
 
@@ -348,7 +348,7 @@ potential leakage: **channel leakage (S to D)**; **junction leakage (S/D to bulk
 
 > Wider Contacted-Poly-Pitch allows wider MD and VD size, which help reduce MEOL IRdrop
 
-![Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP).](layout/imageurl=%252Fsites%252Fdefault%252Ffiles%252F2022-02%252FFigure%201%20-%20Logic%20standard%20cell%20scaling.jpeg)
+![Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP).](dfm-layout/imageurl=%252Fsites%252Fdefault%252Ffiles%252F2022-02%252FFigure%201%20-%20Logic%20standard%20cell%20scaling.jpeg)
 
 *Naoto Horiguchi. Entering the Nanosheet Transistor Era  [[link](https://www.imec-int.com/en/articles/entering-nanosheet-transistor-era-0)]*
 
@@ -360,7 +360,7 @@ As shown in Fig. 35 in older planar technology nodes, gate pitch is so relaxed s
 
 **As the gate pitch scales, there’s no room to put gate contacts next to S/D contacts, and gatecontacts have been pushed away from the active region and are only placed on the STI region.**
 
-![image-20230708221916716](layout/image-20230708221916716.png)
+![image-20230708221916716](dfm-layout/image-20230708221916716.png)
 
 In addition, at tight gate pitch, even forming *S/D contact* without shorting to *gate metal* becomes very challenging.
 
@@ -368,7 +368,7 @@ The idea of **self-aligned contacts (SAC)** has been introduced to mitigate the 
 
 As shown in Fig. 35(b), *the gate metal is fully encapsulated by a dielectric spacer and gate cap*, which protects the gate from shorting to the S/D contact.
 
-![image-20230708230238362](layout/image-20230708230238362.png)
+![image-20230708230238362](dfm-layout/image-20230708230238362.png)
 
 
 
@@ -376,7 +376,7 @@ As shown in Fig. 35(b), *the gate metal is fully encapsulated by a dielectric sp
 >
 >  **MD** layer represent SACs in PDK
 
-![image-20230709005334372](layout/image-20230709005334372.png)
+![image-20230709005334372](dfm-layout/image-20230709005334372.png)
 
 
 
@@ -388,24 +388,24 @@ SAGCs require the source/drain contacts to be capped with an insulator that is d
 
 
 
-![image-20230708233009568](layout/image-20230708233009568.png)
+![image-20230708233009568](dfm-layout/image-20230708233009568.png)
 
 
 
-![image-20230708232429240](layout/image-20230708232429240.png)
+![image-20230708232429240](dfm-layout/image-20230708232429240.png)
 
 > According to the DRC of T foundary, poly extension > 0 um and space between MP and OD > 0 um., which demonstrate self-aligned gate contact is **not** introduced.
 
 
 ### Gate Resistance
 
-![image-20230709000326683](layout/image-20230709000326683.png)
+![image-20230709000326683](dfm-layout/image-20230709000326683.png)
 
-![image-20230709004432013](layout/image-20230709004432013.png)
+![image-20230709004432013](dfm-layout/image-20230709004432013.png)
 
-![image-20230709000637817](layout/image-20230709000637817.png)
+![image-20230709000637817](dfm-layout/image-20230709000637817.png)
 
-![image-20230709003917922](layout/image-20230709003917922.png)
+![image-20230709003917922](dfm-layout/image-20230709003917922.png)
 
 
 
@@ -425,7 +425,7 @@ A **native layer (NT_N)** is usually added under inductors or transformers in th
 
 > For T* PDK offered inductor, a native substrate region is created under the inductor coil to minimize *eddy currents* 
 
-![image-20230810000702597](layout/image-20230810000702597.png)
+![image-20230810000702597](dfm-layout/image-20230810000702597.png)
 
 
 
@@ -517,11 +517,11 @@ The N-channel devices built directly into the P-type substrate are not as effect
 
 To overcome this issue, a *deep N-well* can be used to more effectively isolate these N-channel devices.
 
-![image-20230529001556060](layout/image-20230529001556060.png)
+![image-20230529001556060](dfm-layout/image-20230529001556060.png)
 
-![image-20230529010836003](layout/image-20230529010836003.png)
+![image-20230529010836003](dfm-layout/image-20230529010836003.png)
 
-![BM_SS_Together at Last_Fig1](layout/BM_SS_Fig1-520x288.jpg)
+![BM_SS_Together at Last_Fig1](dfm-layout/BM_SS_Fig1-520x288.jpg)
 
 > pwdnw: PW/DNW diode
 >
@@ -529,21 +529,29 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 >
 > [Together At Last – Combining Netlist and Layout Data for Power-Aware Verification](https://blogs.sw.siemens.com/calibre/2015/11/03/together-at-last-combining-netlist-and-layout-data-for-power-aware-verification/)
 
-![image-20240708221831791](layout/image-20240708221831791.png)
+![image-20240708221831791](dfm-layout/image-20240708221831791.png)
 
-![image-20240708222327376](layout/image-20240708222327376.png)
+![image-20240708222327376](dfm-layout/image-20240708222327376.png)
 
 
 
-![image-20230529002733114](layout/image-20230529002733114.png)
+![image-20230529002733114](dfm-layout/image-20230529002733114.png)
 
 - the P-well is separated, allowing the voltage to be controlled
 - because the circuit within the deep N-well is separated from the p-substrate in this structure,
   there is the benefit that this circuitry is less susceptible to noise that propagates through the p-substrate.
 
-
 ## Decap
-*TODO* &#128197;
+
+![img](dfm-layout/real-caps.png)
+
+---
+
+
+
+![img](dfm-layout/decouple_vbias_comp-1.png)
+
+
 
 
 > Kevin Zheng. The Unsung Heroes – Dummies, Decaps, and More [[https://circuit-artists.com/the-unsung-heroes-dummies-decaps-and-more/](https://circuit-artists.com/the-unsung-heroes-dummies-decaps-and-more/)]
@@ -553,10 +561,20 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 > MIM/MOM capacitor extraction boosts analog and RF designs [[https://www.eeworldonline.com/mim-mom-capacitor-extraction-boosts-analog-and-rf-designs/](https://www.eeworldonline.com/mim-mom-capacitor-extraction-boosts-analog-and-rf-designs/)]
 
 
+
 ## Metal Resistors In Wire Management
-*TODO* &#128197;
+
+
+
+![img](dfm-layout/metresclk.png)
+
+![img](dfm-layout/clk-route-sch.png)
+
+
 
 > Kevin Zheng. Metal Resistors – Your Unexpected Friend In Wire Management [[https://circuit-artists.com/metal-resistors-your-unexpected-friend-in-wire-management/](https://circuit-artists.com/metal-resistors-your-unexpected-friend-in-wire-management/)]
+
+
 
 ## reference
 

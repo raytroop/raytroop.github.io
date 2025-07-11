@@ -546,18 +546,18 @@ multiple label and rectangle  in vssa net
 
 
 
-| setup            |                  |                   | spectre result |
-| ---------------- | ---------------- | ----------------- | -------------- |
-| **netlist type** | **dspf option**  | **emir analysis** |                |
-| dspf             | /                | disable           | &check;        |
-| dspf_emir        | /                | disable           | &cross;        |
-| dspf_emir        | =shortPins=”yes” | disable           | &check;        |
-| dspf_emir        | =shortPins=”no”  | disable           | &cross;        |
-| dspf_emir        | /                | enable            | &check;        |
-| dspf_emir        | =shortPins=”yes” | enable            | &check;        |
-| dspf_emir        | =shortPins=”no”  | enable            | &check;        |
+| setup            |                 |                   | spectre result |
+| ---------------- | --------------- | ----------------- | -------------- |
+| **netlist type** | **dspf option** | **emir analysis** |                |
+| dspf             | /               | disable           | &check;        |
+| dspf_emir        | /               | disable           | &cross;        |
+| dspf_emir        | shortPins="yes" | disable           | &check;        |
+| dspf_emir        | shortPins="no"  | disable           | &cross;        |
+| dspf_emir        | /               | enable            | &check;        |
+| dspf_emir        | shortPins="yes" | enable            | &check;        |
+| dspf_emir        | shortPins=”no”  | enable            | &check;        |
 
-> **shortPins=”yes”** is preferred default option for dspf_emir, which has **split pins**
+> **shortPins="yes"** is preferred default option for dspf_emir, which has **split pins**
 
 
 
@@ -1658,7 +1658,17 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
 
 
-### reference
+## NETLIST_CONNECT_OPENS
+
+starRC: **NETLIST_CONNECT_OPENS**
+
+![image-20250711214404600](virtuoso/image-20250711214404600.png)
+
+![image-20250711220501284](virtuoso/image-20250711220501284.png)
+
+
+
+## reference
 
 AC Peak Analysis Using IPWC Rapid Adoption Kit (RAK)  Product Version: IC6.1.8 ISR10, SPECTRE19.1 ISR5 April 2020
 

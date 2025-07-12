@@ -7,6 +7,12 @@ categories:
 mathjax: true
 ---
 
+## Current Density (EM)
+
+![image-20250712144939547](dfm-layout/image-20250712144939547.png)
+
+![image-20250712145414052](dfm-layout/image-20250712145414052.png)
+
 
 
 ## Interconnect Resistance Evolution

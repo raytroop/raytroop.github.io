@@ -543,6 +543,10 @@ multiple label and rectangle  in vssa net
 > It seems that dspf_emir **don't** contain the *rectangle pin* information.
 >
 > only **label** is necessary
+>
+> ![image-20250712124337948](ade/image-20250712124337948.png)
+>
+> ![image-20250712124358305](ade/image-20250712124358305.png)
 
 
 
@@ -711,6 +715,12 @@ Normally, if the layout connectivity extractor finds disjoint, unconnected geome
 
 
 
+> *Virtual connectivity* is of primary interest in **LVS** applications
+>
+> `connect all nets by name`: `VIRTUAL CONNECT NAME "?"`
+
+
+
 ### VIRTUAL CONNECT COLON
 
 **Virtual Connect Colon** is used to virtually connect nets that *share a common prefix before a colon*, like VDD**:**1, VDD**:**2, and so forth.
@@ -740,7 +750,7 @@ Colons can appear anywhere in the name with the exception that a colon at the be
 
 Each name is a net name and can be optionally enclosed in quotes.
 
-The connectivity extractor forms a virtual connection between any two labels having the same name such that the label name appears in a **Virtual Connect Name** specification statement in the rule file.
+The connectivity extractor forms a virtual connection between ***any two labels having the same name*** such that the label name appears in a **Virtual Connect Name** specification statement in the rule file.
 
 ![image-20230511211209469](ade/image-20230511211209469.png)
 
@@ -753,13 +763,29 @@ Note that if **Virtual Connect Colon YES** is also specified, then **Virtual Con
 
 ![image-20230511211651448](ade/image-20230511211651448.png)
 
+---
+
+![image-20250712121539123](ade/image-20250712121539123.png)
 
 
-### reference
 
-Calibre Fundamentals: Performing DRC/LVS Student Workbook
+---
 
-Calibre Verification User’s Manual Software Version 2019.3 Document Revision 7
+![image-20250712122857456](ade/image-20250712122857456.png)
+
+![image-20250712122926673](ade/image-20250712122926673.png)
+
+
+
+
+
+
+
+> Calibre Fundamentals: Performing DRC/LVS Student Workbook
+>
+> Calibre Verification User’s Manual Software Version 2019.3 Document Revision 7
+>
+> Y.Liu. PDK Training - Calibre user guide [[https://picture.iczhiku.com/resource/eetop/SyKTloquGiZeHMbx.pdf](https://picture.iczhiku.com/resource/eetop/SyKTloquGiZeHMbx.pdf)]
 
 
 
@@ -1656,15 +1682,21 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
     (given ICADVM 18.1 ISR11, Spectre 19.1 ISR6)
 
+## StarRC
 
-
-## NETLIST_CONNECT_OPENS
-
-starRC: **NETLIST_CONNECT_OPENS**
+### NETLIST_CONNECT_OPENS
 
 ![image-20250711214404600](ade/image-20250711214404600.png)
 
 ![image-20250711220501284](ade/image-20250711220501284.png)
+
+
+
+### TRANSLATE_RETAIN_BULK_LAYERS
+
+![image-20250712131714180](ade/image-20250712131714180.png)
+
+
 
 
 

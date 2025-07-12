@@ -32,21 +32,21 @@ categories:
 
 ## Latchup
 
-![image-20250615105811120](esd/image-20250615105811120.png)
+![image-20250615105811120](esd-latchup/image-20250615105811120.png)
 
-![image-20250615090308047](esd/image-20250615090308047.png)
+![image-20250615090308047](esd-latchup/image-20250615090308047.png)
 
 > This can happen when a ***parasitic thyristor***, which is essentially ***a pair of interconnected transistors***, is triggered into a latched state, leading to sustained current flow and potential device failure.
 
-![image-20250615111234769](esd/image-20250615111234769.png)
+![image-20250615111234769](esd-latchup/image-20250615111234769.png)
 
 
 
 ### latchup-prevention technique
 
-![image-20250615073909333](esd/image-20250615073909333.png)
+![image-20250615073909333](esd-latchup/image-20250615073909333.png)
 
-![image-20250615085647213](esd/image-20250615085647213.png)
+![image-20250615085647213](esd-latchup/image-20250615085647213.png)
 
 
 
@@ -63,13 +63,13 @@ One important technique is the use of ***guard rings***, the *heavily doped regi
 These guard rings not only function as *barriers against parasitic <u>thyristor</u> formation* but also serve
 to *isolate different regions* of the IC, minimizing unwanted electrical interactions and maintaining pathway integrity
 
-![image-20250615085930327](esd/image-20250615085930327.png)
+![image-20250615085930327](esd-latchup/image-20250615085930327.png)
 
 
 
-![image-20250615115154079](esd/image-20250615115154079.png)
+![image-20250615115154079](esd-latchup/image-20250615115154079.png)
 
-![image-20250615115306640](esd/image-20250615115306640.png)
+![image-20250615115306640](esd-latchup/image-20250615115306640.png)
 
 
 
@@ -80,19 +80,19 @@ to *isolate different regions* of the IC, minimizing unwanted electrical interac
 
 ### Transient-Induced Latchup
 
-![image-20250615101046612](esd/image-20250615101046612.png)
+![image-20250615101046612](esd-latchup/image-20250615101046612.png)
 
-![image-20250615103508641](esd/image-20250615103508641.png)
+![image-20250615103508641](esd-latchup/image-20250615103508641.png)
 
-![image-20250615105240076](esd/image-20250615105240076.png)
+![image-20250615105240076](esd-latchup/image-20250615105240076.png)
 
-![image-20250615105309789](esd/image-20250615105309789.png)
+![image-20250615105309789](esd-latchup/image-20250615105309789.png)
 
 
 
 *OD injector*
 
-![image-20250615104009056](esd/image-20250615104009056.png)
+![image-20250615104009056](esd-latchup/image-20250615104009056.png)
 
 
 
@@ -102,19 +102,19 @@ to *isolate different regions* of the IC, minimizing unwanted electrical interac
 
 A **thyristor** (also known as a <u>**S**ilicon Controlled **R**ectifier</u> or **SCR**) is a three-terminal semiconductor device used as an *electronic switch* or *rectifier*
 
-![thyristor_construction-1](esd/thyristor_construction-1-e1698588829692-qekufkq0nir5v96shm0vdvjuhfcqrxvujeno0l2y8i.png)
+![thyristor_construction-1](esd-latchup/thyristor_construction-1-e1698588829692-qekufkq0nir5v96shm0vdvjuhfcqrxvujeno0l2y8i.png)
 
 
 
 To turn the thyristor on, a positive voltage pulse is applied to the gate (G) terminal. This voltage pulse needs to be of sufficient magnitude to trigger the device. When the gate is triggered, it allows a small current to flow into the base of the *P-N-P* transistor within the thyristor structure
 
-![image-20250615102217116](esd/image-20250615102217116.png)
+![image-20250615102217116](esd-latchup/image-20250615102217116.png)
 
 > [[https://ec2-44-207-46-173.compute-1.amazonaws.com/thyristor/](https://ec2-44-207-46-173.compute-1.amazonaws.com/thyristor/)]
 
 
 
-![image-20250615111100951](esd/image-20250615111100951.png)
+![image-20250615111100951](esd-latchup/image-20250615111100951.png)
 
 
 
@@ -124,7 +124,7 @@ To turn the thyristor on, a positive voltage pulse is applied to the gate (G) te
 >
 > [[https://www.researching.cn/ArticlePdf/m00098/2020/41/12/122403.pdf](https://www.researching.cn/ArticlePdf/m00098/2020/41/12/122403.pdf)]
 
-![image-20241124163116072](esd/image-20241124163116072.png)
+![image-20241124163116072](esd-latchup/image-20241124163116072.png)
 
 - **Transparency**
   - Trigger voltage **Vt1**
@@ -138,7 +138,7 @@ To turn the thyristor on, a positive voltage pulse is applied to the gate (G) te
 
 ## Secondary protection
 
-![img](esd/esd2ndprotect.png.jpg)
+![img](esd-latchup/esd2ndprotect.png.jpg)
 
 1. Adding a (small) clamp behind the isolation resistance can extend the ESD design window, e.g. enabling dual diode protection for thin oxide transistors.
 2. ESD current through this clamp will build-up voltage across the isolation resistance, while protecting the circuit. 
@@ -150,7 +150,7 @@ To turn the thyristor on, a positive voltage pulse is applied to the gate (G) te
 
 Adding a (small) clamp behind the isolation resistance can extend the **ESD design window**, e.g. enabling dual diode protection for thin oxide transistors
 
-![img](esd/secondaryprotection-window.png)
+![img](esd-latchup/secondaryprotection-window.png)
 
 Extended ESD design window example. The failure voltage of a thin gate oxide in advanced CMOS is about 4V. The primary ESD solution (red IV curve) introduces too much voltage. Thanks to an isolation resistance between primary and secondary local clamp device (green IV curve) additional margin is created.
 
@@ -158,23 +158,37 @@ Extended ESD design window example. The failure voltage of a thin gate oxide in 
 
 > [[https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/](https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/)]
 
+
+
+---
+
+![image-20250712100248384](esd-latchup/image-20250712100248384.png)
+
+
+
+> Okushima, M. and Tsuruta, J., "Secondary ESD clamp circuit for CDM protection of over 6Gbit/s SerDes application in 40nm CMOS", <i>Microelectronics Reliability</i>, vol. 53, no. 2, pp. 215–220, 2013 [[https://sci-hub.se/https://doi.org/10.1016/j.microrel.2012.04.010](https://sci-hub.se/https://doi.org/10.1016/j.microrel.2012.04.010)]
+
 ## Gated diode & STI diode
 
-![image-20241120212904118](esd/image-20241120212904118.png)
+"gated diode" aka. "poly bound" diode
 
-![image-20241120213020790](esd/image-20241120213020790.png)
+![image-20241120212904118](esd-latchup/image-20241120212904118.png)
 
+![image-20250712085956491](esd-latchup/image-20250712085956491.png)
 
+STI bound diodes typically have *lower* capacitance 
 
 > M. Simicic, G. Hellings, S. -H. Chen, N. Horiguchi and D. Linten, "ESD diodes with Si/SiGe superlattice I/O finFET architecture in a vertically stacked horizontal nanowire technology," 2018 48th European Solid-State Device Research Conference (ESSDERC), Dresden, Germany, 2018
+>
+> US9653448B2. Electrostatic Discharge (ESD) Diode in FinFET Technology
 
 ---
 
 
 
-![image-20241120211301296](esd/image-20241120211301296.png)
+![image-20241120211301296](esd-latchup/image-20241120211301296.png)
 
-![image-20241120211426247](esd/image-20241120211426247.png)
+![image-20241120211426247](esd-latchup/image-20241120211426247.png)
 
 
 
@@ -188,9 +202,9 @@ Extended ESD design window example. The failure voltage of a thin gate oxide in 
 >
 > Horst A. Gieser(IZM), "ESD- Testing: HBM to very fast TLP" [[https://www.thierry-lequeu.fr/data/ESREF/2004/Tut5.pdf](https://www.thierry-lequeu.fr/data/ESREF/2004/Tut5.pdf)]
 
-![image-20241124184848034](esd/image-20241124184848034.png)
+![image-20241124184848034](esd-latchup/image-20241124184848034.png)
 
-![Example TLP characteristics using TLP](esd/TLP-characteristics-using-TLP.PNG)
+![Example TLP characteristics using TLP](esd-latchup/TLP-characteristics-using-TLP.PNG)
 
 Vt1: trigger voltage
 
@@ -213,7 +227,7 @@ hard failure current: **It2**
 >
 > Unlike ESD waveforms, TLP does not mimic any real world event
 
-![image-20220609234548431](esd/image-20220609234548431.png)
+![image-20220609234548431](esd-latchup/image-20220609234548431.png)
 
 ### TLP  and Curve Tracing
 
@@ -222,7 +236,7 @@ hard failure current: **It2**
   - Controlled Impedance - Allows device behavior to be observed
 - Both measure resistance of device with increasing voltage
 
-![image-20220609235252444](esd/image-20220609235252444.png)
+![image-20220609235252444](esd-latchup/image-20220609235252444.png)
 
 ### Device Characterization with TLP
 
@@ -230,7 +244,7 @@ hard failure current: **It2**
 - Snapback voltage
 - Performance changes with rise time
 
-![image-20220609235427204](esd/image-20220609235427204.png)
+![image-20220609235427204](esd-latchup/image-20220609235427204.png)
 
 ### VF-TLP and CDM differences
 
@@ -254,39 +268,110 @@ DC leakage current data combined with the I-V data provides electrical indicatio
 
 
 
-## Snapback
-
-Unfortunately, this protection concept is not effective anymore in advanced FinFET technology.
-Our analysis showed that both core and IO transistors are damaged at the onset of snapback in several FinFET processes.
-![snapback](esd/snapback.PNG)
-
+## Snapback devices
 
 > Lesson 2 - ESD Clamps [[https://aicdesign.org/wp-content/uploads/2021/05/Lesson02_ESD_Clamps210315.pdf](https://aicdesign.org/wp-content/uploads/2021/05/Lesson02_ESD_Clamps210315.pdf)]
 >
 > Introduction of Transmission Line Pulse (TLP) Testing for ESD Analysis - Device Level [[https://www.esdemc.com/public/docs/TechnicalSlides/ESDEMC_TS001.pdf](https://www.esdemc.com/public/docs/TechnicalSlides/ESDEMC_TS001.pdf)]
 
+![snapback](esd-latchup/snapback.PNG)
+
+![img](esd-latchup/tlp-blog8.png)
+
+
+
+### GGNMOS
+
+> [[https://monthly-pulse.com/2022/02/02/time-to-say-farewell-to-the-snapback-ggnmos-for-esd-protection/](https://monthly-pulse.com/2022/02/02/time-to-say-farewell-to-the-snapback-ggnmos-for-esd-protection/)]
+>
+> [[https://monthly-pulse.com/2023/01/26/ggnmos-grounded-gated-nmos/](https://monthly-pulse.com/2023/01/26/ggnmos-grounded-gated-nmos/)]
+
+**snapback ggNMOS** for ESD protection
+
+![img](esd-latchup/rise-time-influence.png)
+
+> Influence of the pulse rise time on ggNMOS. (left side) A fast ESD pulse can couple the bulk of the NMOS to a higher potential for a short period, reducing the trigger voltage. (right side) A clear Vt1 reduction is visible, while the remaining part of the IV curve remains the same.
+
+
+
+![image-20241124161901252](esd-latchup/image-20241124161901252.png)
+
+
+
+> resistance between gate and source that designers typically use to reduce the Vt1 trigger voltage of a ggNMOS ESD protection
+
+
+
+---
+
+
+
+![image-20220623231619052](esd-latchup/image-20220623231619052.png)
+
+> The drain (D) is connected to an I/O pad and the gate (G) is grounded.
+>
+> To ensure “zero” leakage of the ESD protection structure under normal operations.
+>
+> To to protect gate of core device, tie-high and tie-low shall be used when used as secondary ESD protection.
+
+
+
+![image-20240723213214708](esd-latchup/image-20240723213214708.png)
+
+
+
+#### Positive ESD transient at I/O pad
+
+![image-20220623233019912](esd-latchup/image-20220623233019912.png)
+
+1. **DB** junction is reverse-biased all the way to its breakdown.
+2. Avalance multiplication takes place and generates electron-hole pairs
+3. Hole current flows into the ground via the **B-region** and build up a potential, VR, across the lateral parasitic resistance R
+4. As VR increases, the **BS** junction turns on, eventually triggers the parasitic lateral NPN transistor Q (**DBS**)
+
+#### Negative ESD transient at I/O pad
+
+![image-20220623233634452](esd-latchup/image-20220623233634452.png)
+
+ The forward-biased parasitic diode, **BD**, will shunt the transient
+
+> ggNMOS is commonly used in the GPIO provided by foundry, which alleviate the ESD design burden of customer.
+>
+> These GPIO is self-protective thanks to the ggNMOS.
+
+
+
+### GCNMOS
+
+
+
+### SCR
+
+
+
+
 
 
 ## Safe operating area (SOA)
 
-![image-20241120210746211](esd/image-20241120210746211.png)
+![image-20241120210746211](esd-latchup/image-20241120210746211.png)
 
 
 
 ## power clamp
 
 Thanks to the device scaling the area is actually reasonable. However, the leakage becomes the main bottleneck.
-![bigfet-concept](esd/bigfet-concept.jpg)
+![bigfet-concept](esd-latchup/bigfet-concept.jpg)
 
 
 
 ## high current diode
 
-![image-20220618123654830](esd/image-20220618123654830.png)
+![image-20220618123654830](esd-latchup/image-20220618123654830.png)
 
-![image-20220618123821117](esd/image-20220618123821117.png)
+![image-20220618123821117](esd-latchup/image-20220618123821117.png)
 
-![image-20220618124644879](esd/image-20220618124644879.png)
+![image-20220618124644879](esd-latchup/image-20220618124644879.png)
 
 > both diode are reverse-biased in normal operation, the PN Junction capacitance is proportional to forward-bias voltage
 
@@ -309,11 +394,11 @@ Thanks to the device scaling the area is actually reasonable. However, the leaka
 
 
 
-![image-20220618191312489](esd/image-20220618191312489.png)
+![image-20220618191312489](esd-latchup/image-20220618191312489.png)
 
-![image-20220618183241535](esd/image-20220618183241535.png)
+![image-20220618183241535](esd-latchup/image-20220618183241535.png)
 
-![image-20220618191405428](esd/image-20220618191405428.png)
+![image-20220618191405428](esd-latchup/image-20220618191405428.png)
 
 | width (W)                    | 2.020E-07   |
 | ---------------------------- | ----------- |
@@ -330,13 +415,19 @@ Thanks to the device scaling the area is actually reasonable. However, the leaka
 
 <sup>U</sup>: the rule is not checked by the DRC
 
+### I-V curve
+
+![image-20250712134532834](esd-latchup/image-20250712134532834.png)
+
+
+
 ### MOS
 
-![image-20220618191906210](esd/image-20220618191906210.png)
+![image-20220618191906210](esd-latchup/image-20220618191906210.png)
 
-![image-20220618192253726](esd/image-20220618192253726.png)
+![image-20220618192253726](esd-latchup/image-20220618192253726.png)
 
-![image-20220618192325486](esd/image-20220618192325486.png)
+![image-20220618192325486](esd-latchup/image-20220618192325486.png)
 
 > `l` in netlist has different definition for MOS and diode.
 >
@@ -350,7 +441,7 @@ Thanks to the device scaling the area is actually reasonable. However, the leaka
 
 
 
-![image-20230517233753530](esd/image-20230517233753530.png)
+![image-20230517233753530](esd-latchup/image-20230517233753530.png)
 
 > *HIA* = High Amp
 >
@@ -362,7 +453,7 @@ Thanks to the device scaling the area is actually reasonable. However, the leaka
 
 ## Dual Stacked Diodes
 
-![image-20230518012456390](esd/image-20230518012456390.png)
+![image-20230518012456390](esd-latchup/image-20230518012456390.png)
 
 
 
@@ -380,66 +471,8 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 ### PMOS power clamp
 
-![power_clamp_pmos.drawio](esd/power_clamp_pmos.drawio.svg)
+![power_clamp_pmos.drawio](esd-latchup/power_clamp_pmos.drawio.svg)
 
-
-
-## Gate grounded N-MOS (ggNMOS)
-
-> [[https://monthly-pulse.com/2022/02/02/time-to-say-farewell-to-the-snapback-ggnmos-for-esd-protection/](https://monthly-pulse.com/2022/02/02/time-to-say-farewell-to-the-snapback-ggnmos-for-esd-protection/)]
->
-> [[https://monthly-pulse.com/2023/01/26/ggnmos-grounded-gated-nmos/](https://monthly-pulse.com/2023/01/26/ggnmos-grounded-gated-nmos/)]
-
-![img](esd/rise-time-influence.png)
-
-> Influence of the pulse rise time on ggNMOS. (left side) A fast ESD pulse can couple the bulk of the NMOS to a higher potential for a short period, reducing the trigger voltage. (right side) A clear Vt1 reduction is visible, while the remaining part of the IV curve remains the same.
-
-
-
-![image-20241124161901252](esd/image-20241124161901252.png)
-
-
-
-> resistance between gate and source that designers typically use to reduce the Vt1 trigger voltage of a ggNMOS ESD protection
-
-
-
----
-
-
-
-![image-20220623231619052](esd/image-20220623231619052.png)
-
-> The drain (D) is connected to an I/O pad and the gate (G) is grounded.
->
-> To ensure “zero” leakage of the ESD protection structure under normal operations.
->
-> To to protect gate of core device, tie-high and tie-low shall be used when used as secondary ESD protection.
-
-
-
-![image-20240723213214708](esd/image-20240723213214708.png)
-
-
-
-### Positive ESD transient at I/O pad
-
-![image-20220623233019912](esd/image-20220623233019912.png)
-
-1. **DB** junction is reverse-biased all the way to its breakdown.
-2. Avalance multiplication takes place and generates electron-hole pairs
-3. Hole current flows into the ground via the **B-region** and build up a potential, VR, across the lateral parasitic resistance R
-4. As VR increases, the **BS** junction turns on, eventually triggers the parasitic lateral NPN transistor Q (**DBS**)
-
-### Negative ESD transient at I/O pad
-
-![image-20220623233634452](esd/image-20220623233634452.png)
-
- The forward-biased parasitic diode, **BD**, will shunt the transient
-
-> ggNMOS is commonly used in the GPIO provided by foundry, which alleviate the ESD design burden of customer.
->
-> These GPIO is self-protective thanks to the ggNMOS.
 
 
 

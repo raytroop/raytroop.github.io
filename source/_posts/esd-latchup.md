@@ -134,7 +134,13 @@ To turn the thyristor on, a positive voltage pulse is applied to the gate (G) te
 - **Effectiveness**
   - maximum voltage of the clamp device: **Vmax**
 
+---
 
+![image-20250712182622220](esd-latchup/image-20250712182622220.png)
+
+![image-20250712182907493](esd-latchup/image-20250712182907493.png)
+
+> You Li. CICC2020: ESD Protection Design Overview in Advanced SOI and Bulk FinFET Technologies
 
 ## Secondary protection
 
@@ -189,6 +195,24 @@ STI bound diodes typically have *lower* capacitance
 ![image-20241120211301296](esd-latchup/image-20241120211301296.png)
 
 ![image-20241120211426247](esd-latchup/image-20241120211426247.png)
+
+---
+
+![image-20250712181904914](esd-latchup/image-20250712181904914.png)
+
+> ?? **Rotated STI Diode**
+
+
+
+![image-20250712183318811](esd-latchup/image-20250712183318811.png)
+
+![image-20250712183347973](esd-latchup/image-20250712183347973.png)
+
+
+
+> Loke, Alvin & Yang, (2018). Analog/mixed-signal design challenges in 7-nm CMOS and beyond. 10.1109/CICC.2018.8357060. 
+>
+> Shih-Hung Chen. CICC 2019: Designing Diode Based ESD Protection in Advanced State of the Art Technologies
 
 
 

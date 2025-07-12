@@ -1690,7 +1690,17 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
 ![image-20250711220501284](ade/image-20250711220501284.png)
 
+---
 
+***Connector resistors***  - *non-physical resistors* (well or substrate layer, that is not extracted for resistance)
+
+
+
+![image-20250712151519073](ade/image-20250712151519073.png)
+
+![image-20250712151722729](ade/image-20250712151722729.png)
+
+> Maxim Ershov, Diakopto. Bizarre results for P2P resistance and current density (100x off) in on-chip ESD network simulations – why? [[https://diakopto.marsdm.com/wp-content/uploads/Bizarre_results_for_P2P_resistance_and_current_density.pdf](https://diakopto.marsdm.com/wp-content/uploads/Bizarre_results_for_P2P_resistance_and_current_density.pdf)]
 
 ### TRANSLATE_RETAIN_BULK_LAYERS
 

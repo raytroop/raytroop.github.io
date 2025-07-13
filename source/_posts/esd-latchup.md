@@ -32,6 +32,10 @@ categories:
 
 ## Latchup
 
+> Latch-up in CMOS circuits: threat or opportunity (part 1)  [[https://monthly-pulse.com/2021/01/05/latch-up-in-cmos-circuits-threat-or-opportunity-part-1/](https://monthly-pulse.com/2021/01/05/latch-up-in-cmos-circuits-threat-or-opportunity-part-1/)]
+>
+> Latch-up in CMOS circuits: threat or opportunity (part 2)  [[Latch-up in CMOS circuits: threat or opportunity (part 2)](Latch-up in CMOS circuits: threat or opportunity (part 2))]
+
 ![image-20250615105811120](esd-latchup/image-20250615105811120.png)
 
 ![image-20250615090308047](esd-latchup/image-20250615090308047.png)
@@ -60,7 +64,7 @@ categories:
 
 One important technique is the use of ***guard rings***, the *heavily doped regions surrounding sensitive components* on the IC to *divert excess current away* from vulnerable areas, thereby reducing the likelihood of latch-up occurrence
 
-These guard rings not only function as *barriers against parasitic <u>thyristor</u> formation* but also serve
+These guard rings not only function as *barriers against parasitic <u>thyristor</u>  (SCR) formation* but also serve
 to *isolate different regions* of the IC, minimizing unwanted electrical interactions and maintaining pathway integrity
 
 ![image-20250615085930327](esd-latchup/image-20250615085930327.png)

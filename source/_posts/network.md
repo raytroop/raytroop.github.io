@@ -11,24 +11,45 @@ mathjax: true
 
 
 
-![image-20240704212740246](network/image-20240704212740246.png)
-
 ---
 
+## Missing Term in KVL
+
+> Prof. Kolb/Whites. EE 382 Applied Electromagnetics Lecture 8: Maxwell's Equations and Electrical CIrcuits [[http://montoya.sdsmt.edu/ee382/lectures/382Lecture8.pdf](http://montoya.sdsmt.edu/ee382/lectures/382Lecture8.pdf)]
+
+![image-20250713101205684](network/image-20250713101205684.png)
 
 
 
-
-## Voltage scattering
-
-![image-20241112201300108](network/image-20241112201300108.png)
+## Transmission-line
 
 
 
+### Telegrapher’s equations
 
-## characteristic impedance ($Z_0$)
+> EECS 723- Microwave Engineering Spring 2009. 2.1 -The Lumped Element Circuit Model for Transmission Lines [[https://www.ittc.ku.edu/~jstiles/723/handouts/2_1_Lumped_Element_Circuit_Model_package.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/2_1_Lumped_Element_Circuit_Model_package.pdf)]
+>
+> [[https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_package.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_package.pdf)]
+>
+> [[https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_present.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_present.pdf)]
 
-*TODO* &#128197;
+![image-20250713102519144](network/image-20250713102519144.png)
+
+![image-20250713102641016](network/image-20250713102641016.png)
+
+### Transmission Line Wave Equation
+
+![image-20250713104729920](network/image-20250713104729920.png)
+
+![image-20250713113518021](network/image-20250713113518021.png)
+
+###  Characteristic Impedance ($Z_0$)
+
+![image-20250713112912199](network/image-20250713112912199.png)
+
+![image-20250713113651799](network/image-20250713113651799.png)
+
+
 
 ---
 
@@ -45,6 +66,88 @@ simulator will read sp file's **Z0** parameter
 ![image-20220430214419283](network/image-20220430214419283.png)
 
 > The default **Z0** exported by EMX is **50**
+
+
+
+
+
+
+###  Input impedance (Line Impedance)
+
+![image-20250713114733683](network/image-20250713114733683.png)
+
+
+
+### Reflection Coefficient
+
+*TODO* &#128197;
+
+
+
+### Steady -State Solution (DC voltage division)
+
+> Sam Palermo. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee689_tlines.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee689_tlines.pdf)]
+>
+> Kyoung-Jae Chung. Special Topics in Radiation Engineering (High-voltage pulsed power engineering) [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lecture_03_Transmission%20line%20theory.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lecture_03_Transmission%20line%20theory.pdf)]
+>
+> David R. Jackson. [[https://courses.egr.uh.edu/ECE/ECE3317/SectionJackson/Class%20Notes/Notes%208%203317%20Transmission%20Lines%20(Bounce%20Diagram).pdf](https://courses.egr.uh.edu/ECE/ECE3317/SectionJackson/Class%20Notes/Notes%208%203317%20Transmission%20Lines%20(Bounce%20Diagram).pdf)]
+>
+> Shouri Chatterjee [[https://web.iitd.ac.in/~shouri/ell112/material/txline.pdf](https://web.iitd.ac.in/~shouri/ell112/material/txline.pdf)]
+>
+> How can I go from transmission line model to lumped elements model? [[https://physics.stackexchange.com/a/386603](https://physics.stackexchange.com/a/386603)]
+
+![image-20250713090925198](network/image-20250713090925198.png)
+
+
+
+![image-20250713084136902](network/image-20250713084136902.png)
+
+![image-20250713091613844](network/image-20250713091613844.png)
+
+
+
+### Input impedance
+
+
+
+
+
+
+
+
+
+
+---
+
+
+> E157 Introduction to Radio Frequency Circuit Design [[https://pages.hmc.edu/mspencer/e157/fa24/](https://pages.hmc.edu/mspencer/e157/fa24/)]
+>
+> Eric Bogatin. Pop Quiz: When is an Interconnect Not a Transmission Line? [[https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line](https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line)]
+>
+> Shen Lin. On-Chip Inductance and Coupling Effects [[http://eda.ee.ucla.edu/pub/asic.pdf](http://eda.ee.ucla.edu/pub/asic.pdf)]
+>
+> A. Deutsch *et al*., "When are transmission-line effects important for on-chip interconnections?," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 45, no. 10, pp. 1836-1846, Oct. 1997
+>
+> Ho, Ron. “Chip Wires: Scaling and Efficiency.” (2003). [[https://www-vlsi.stanford.edu/people/alum/pdf/0303_Ho_Wires.pdf](https://www-vlsi.stanford.edu/people/alum/pdf/0303_Ho_Wires.pdf)]
+>
+> —. ISSCC 2007 T3: Dealing with Issues in VLSI Interconnect Scaling, by Ron Ho
+>
+> Tony Chan Carusone. ISSCC 2017 T6: Signal Integrity Analysis for Gb/s Links
+>
+> Byungsub Kim ISSCC 2022 T11: "Basics of Equalization Techniques: Channels, Equalization, and Circuits"
+
+
+
+
+## Voltage scattering
+
+![image-20241112201300108](network/image-20241112201300108.png)
+
+**transmitted voltage**
+$$
+V= \frac{2Z_l}{Z_l+R_0}\frac{V_s}{2}= \frac{Z_l}{Z_l+R_0}\cdot V_s
+$$
+
 
 
 
@@ -137,25 +240,6 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
-## Transmission-line effects
-*TODO* &#128197;
-
-
-> E157 Introduction to Radio Frequency Circuit Design [[https://pages.hmc.edu/mspencer/e157/fa24/](https://pages.hmc.edu/mspencer/e157/fa24/)]
->
-> Eric Bogatin. Pop Quiz: When is an Interconnect Not a Transmission Line? [[https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line](https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line)]
->
-> Shen Lin. On-Chip Inductance and Coupling Effects [[http://eda.ee.ucla.edu/pub/asic.pdf](http://eda.ee.ucla.edu/pub/asic.pdf)]
->
-> A. Deutsch *et al*., "When are transmission-line effects important for on-chip interconnections?," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 45, no. 10, pp. 1836-1846, Oct. 1997
->
-> Ho, Ron. “Chip Wires: Scaling and Efficiency.” (2003). [[https://www-vlsi.stanford.edu/people/alum/pdf/0303_Ho_Wires.pdf](https://www-vlsi.stanford.edu/people/alum/pdf/0303_Ho_Wires.pdf)]
->
-> —. ISSCC 2007 T3: Dealing with Issues in VLSI Interconnect Scaling, by Ron Ho
->
-> Tony Chan Carusone. ISSCC 2017 T6: Signal Integrity Analysis for Gb/s Links
->
-> Byungsub Kim ISSCC 2022 T11: "Basics of Equalization Techniques: Channels, Equalization, and Circuits"
 
 
 

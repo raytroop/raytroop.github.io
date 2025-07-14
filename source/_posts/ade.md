@@ -1706,7 +1706,7 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
 ![image-20250712131714180](ade/image-20250712131714180.png)
 
-
+![image-20250714201854291](ade/image-20250714201854291.png)
 
 
 

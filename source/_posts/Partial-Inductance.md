@@ -60,7 +60,9 @@ mathjax: true
 
 ![image-20250602120913866](Partial-Inductance/image-20250602120913866-1751987296814-45.png)
 
+![img](Partial-Inductance/30_Par03-1752499681539-2.jpg)
 
+> [[https://www.oldfriend.url.tw/Q3D/ansys_ch_Partial_Loop_Inductance.html](https://www.oldfriend.url.tw/Q3D/ansys_ch_Partial_Loop_Inductance.html)]
 
 
 

@@ -35,6 +35,18 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 *temporal autocorrelation* and *Wiener-Khinchin theorem* is more appropriate to arise *rms value* 
 
 > Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
+>
+> *G. Giust, “Phase Noise Aliases as TIE Jitter,” Signal Integrity Journal, July 23, 2018* [[https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter](https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter)]
+
+
+
+## Reference-Clock Phase Noise in PLL
+
+*TODO* &#128197;
+
+
+
+> Gary Giust. How to Evaluate Reference-Clock Phase Noise in High-Speed Serial Links [[https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links](https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links)]
 
 
 

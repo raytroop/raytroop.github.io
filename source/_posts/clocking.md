@@ -7,8 +7,6 @@ categories:
 mathjax: true
 ---
 
-
-
 ## excess phase around n-th harmonic
 
 ![image-20250523222041505](clocking/image-20250523222041505.png)

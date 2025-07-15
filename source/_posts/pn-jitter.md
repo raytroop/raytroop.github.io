@@ -46,7 +46,7 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 
 
 
-> Gary Giust. How to Evaluate Reference-Clock Phase Noise in High-Speed Serial Links [[https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links](https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links)]
+> Gary Giust. How to Evaluate Reference-Clock Phase Noise in High-Speed Serial Links [[https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links](https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links)], [[https://www.sitime.com/support/resource-library/how-evaluate-reference-clock-phase-noise-high-speed-serial-links](https://www.sitime.com/support/resource-library/how-evaluate-reference-clock-phase-noise-high-speed-serial-links)]
 
 
 

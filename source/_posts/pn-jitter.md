@@ -44,9 +44,11 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 
 *TODO* &#128197;
 
+phase noise in a *100 MHz* input clock signal gets filtered by an example PLL with a closed-loop bandwidth of *1 MHz*
 
+![image-20250715234525739](pn-jitter/image-20250715234525739.png)
 
-> Gary Giust. How to Evaluate Reference-Clock Phase Noise in High-Speed Serial Links [[https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links](https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links)], [[https://www.sitime.com/support/resource-library/how-evaluate-reference-clock-phase-noise-high-speed-serial-links](https://www.sitime.com/support/resource-library/how-evaluate-reference-clock-phase-noise-high-speed-serial-links)]
+> Gary Giust. How to Evaluate Reference-Clock Phase Noise in High-Speed Serial Links [[expanded version](https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links)], [[compact version](https://www.sitime.com/support/resource-library/how-evaluate-reference-clock-phase-noise-high-speed-serial-links)]
 
 
 

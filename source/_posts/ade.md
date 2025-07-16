@@ -7,6 +7,9 @@ categories:
 mathjax: true
 ---
 
+## Layout XL pointing to new schematic
+
+Connectivity(Menu in Layout View) ---> Update ---> Connectivity Reference
 
 
 ## noiseon & noiseoff

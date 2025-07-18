@@ -1705,11 +1705,17 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
 > Maxim Ershov, Diakopto. Bizarre results for P2P resistance and current density (100x off) in on-chip ESD network simulations – why? [[https://diakopto.marsdm.com/wp-content/uploads/Bizarre_results_for_P2P_resistance_and_current_density.pdf](https://diakopto.marsdm.com/wp-content/uploads/Bizarre_results_for_P2P_resistance_and_current_density.pdf)]
 
+
+
 ### TRANSLATE_RETAIN_BULK_LAYERS
 
 ![image-20250712131714180](ade/image-20250712131714180.png)
 
-![image-20250714201854291](ade/image-20250714201854291.png)
+![image-20250718205803013](ade/image-20250718205803013.png)
+
+
+
+
 
 
 

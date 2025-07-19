@@ -278,3 +278,5 @@ The Complex Art Of Handling S-Parameters: The importance of extraction and fitti
 Dr. John Choma. EE 541, Fall 2006: Course Notes #2 Scattering Parameters: Concept, Theory, and Applications [[https://www.ieee.li/pdf/essay/scattering_parameters_concept_theory_applications.pdf](https://www.ieee.li/pdf/essay/scattering_parameters_concept_theory_applications.pdf)]
 
 Dr. Ray Kwok . Network Techniques: Conversion between Filter Transfer Function and Filter Scattering (SMatrix) Parameters [[https://www.sjsu.edu/people/raymond.kwok/docs/project172/FTF%20to%20S-Matrix%20Spring%202011.pdf](https://www.sjsu.edu/people/raymond.kwok/docs/project172/FTF%20to%20S-Matrix%20Spring%202011.pdf)]
+
+田庆诚教授 台湾中华大学 射频电路基础（公司培训）[[https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249](https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]

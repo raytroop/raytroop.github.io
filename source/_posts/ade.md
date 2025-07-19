@@ -7,6 +7,14 @@ categories:
 mathjax: true
 ---
 
+
+
+## Hide Color
+
+![image-20250719231256086](ade/image-20250719231256086.png)
+
+
+
 ## Layout XL pointing to new schematic
 
 Connectivity(Menu in Layout View) ---> Update ---> Connectivity Reference

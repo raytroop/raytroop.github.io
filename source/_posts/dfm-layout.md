@@ -7,6 +7,32 @@ categories:
 mathjax: true
 ---
 
+## Short Lg Stackgate
+
+> TSMC. VLSI2025 JFS2-1: Analog Cells DTCO (**D**esign and **T**echnology **C**o-**O**ptimization) and Their Impact on Advanced Node CMOS Analog/MixedSignal Circuits
+
+![image-20250719221634273](dfm-layout/image-20250719221634273.png)
+
+> smaller **W\*L\*M,** **X\*Y** for same mismatch with short Lg stackgate
+
+---
+
+![image-20250719221918689](dfm-layout/image-20250719221918689.png)
+
+>  N7/N5 ***4-fin Grid Rule***
+>
+>  *Same **Fin1/Fin3** or **Fin2/Fin4** Fin Position*
+
+---
+
+![image-20250719222047276](dfm-layout/image-20250719222047276.png)
+
+![image-20250719222146669](dfm-layout/image-20250719222146669.png)
+
+note W/L is different $12/(135*2) \lt 6/(8*8)$
+
+
+
 ## Current Density (EM)
 
 ![image-20250712144939547](dfm-layout/image-20250712144939547.png)

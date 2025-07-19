@@ -36,21 +36,28 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 
 > Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
 >
-> *G. Giust, “Phase Noise Aliases as TIE Jitter,” Signal Integrity Journal, July 23, 2018* [[https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter](https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter)]
+> *G. Giust, "Phase Noise Aliases as TIE Jitter," Signal Integrity Journal, July 23, 2018* [[https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter](https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter)]
 
 
 
 ## Reference-Clock Phase Noise in PLL
 
-*TODO* &#128197;
-
-phase noise in a *100 MHz* input clock signal gets filtered by an example PLL with a closed-loop bandwidth of *1 MHz*
-
-![image-20250715234525739](pn-jitter/image-20250715234525739.png)
-
 > Gary Giust. How to Evaluate Reference-Clock Phase Noise in High-Speed Serial Links [[expanded version](https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links)], [[compact version](https://www.sitime.com/support/resource-library/how-evaluate-reference-clock-phase-noise-high-speed-serial-links)]
->
-> ![image-20250715235818316](pn-jitter/image-20250715235818316.png)
+
+Knowing how ***input phase noise aliases*** when ***sampled*** by a PLL
+
+![image-20250719113300286](pn-jitter/image-20250719113300286.png)
+
+---
+
+An alternate view of **phase noise aliasing during the sampling process**
+
+- Instead of **mirroring the jitter-transfer function** located below $F_S/2$ across spectral boundaries located at integer multiples of $F_S/2$ (i.e. 50 MHz) as shown in Figure 2 (a)
+- we could alternatively **fold the portion of the Raw Data curve** located above $F_S/2$ across these spectrum boundaries to appear below $F_S/2$ as shown in Figure 2 (b)
+
+![image-20250719120321878](pn-jitter/image-20250719120321878.png)
+
+*Integrating the combined area* under each Filtered Data curve shown in Figure 2 (b) is *mathematically equivalent* to integrating the entire Filtered Data curve shown in Figure 2 (a)
 
 
 

@@ -7,6 +7,77 @@ categories:
 mathjax: true
 ---
 
+## Refclk Specifications
+
+> PCI Express Base Specification Revision *3.0*
+>
+> Jeff Morriss, Intel Gerry Talbot, AMD. PCI-SIG Devcon 2006. Jitter Budgeting for Clock Architecture
+
+
+
+### *Common Refclk Rx Architecture*
+
+Common Refclk Rx architectures are characterized by the Tx and Rx sharing the same Refclk source
+
+Most of the SSC jitter sourced by the Refclk is propagated equally through Tx and Rx PLLs, and so intrinsically tracks ***LF jitter***
+
+The amount of jitter appearing at the CDR is then defined by the difference function between the Tx and Rx PLLs multiplied by the ***CDR highpass characteristic***
+
+![image-20250719172803394](link/image-20250719172803394.png)
+$$
+H(s)= H_1(s)e^{-sT} -  \left[H_1(s)e^{-sT}(1-H_3(s)) + H_2(s)H_3(s) \right] = [H_1(s)e^{-sT} -H_2(s)]H_3(s)
+$$
+where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
+
+
+
+> ![image-20250719181032685](link/image-20250719181032685.png)
+
+
+
+### *Data Clocked Refclk Rx Architecture*
+
+A data clocked Rx architecture is characterized by requiring the *receiver's CDR to track the entirety of the low frequency jitter, including SSC*
+
+![image-20250719183101724](link/image-20250719183101724.png)
+
+
+
+### *Separate Refclk Architecture*
+
+> TITLE: Separate Refclk Independent SSC Architecture (SRIS)
+> DATE: Updated 10 January 2013
+> AFFECTED DOCUMENT: PCI Express Base Spec. Rev. 3.0
+> SPONSOR: Intel, HP, AMD
+
+![image-20250719183242222](link/image-20250719183242222.png)
+$$\begin{align}
+X_{LATCH}(s) &= X_1(s)H_1(s) -  \left[X_1(s)H_1(s)(1-H_3(s)) + X_2(s)H_2(s)H_3(s) \right] \\
+& = \left[X_1(s)H_1(s) -X_2(s)H_2(s)\right]H_3(s)
+\end{align}$$
+where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
+
+![image-20250719182447193](link/image-20250719182447193.png)
+
+![image-20250719182517511](link/image-20250719182517511.png)
+
+
+
+> ![image-20250719182123550](link/image-20250719182123550.png)
+>
+> ![image-20250719181221513](link/image-20250719181221513.png)
+
+---
+
+![image-20250719152821655](link/image-20250719152821655.png)
+
+**S**eparate **R**eference Clocks with **I**ndependent **S**SC - **SRIS**
+
+**S**eparate **R**eference Clocks With **N**o **S**SC - **SRNS**
+
+
+
+
 
 ## AC-coupling vs DC-coupling
 
@@ -304,7 +375,7 @@ S_{out}(f)=|H_T(f)|^2S_{in}(f)+|H_G(f)|^2S_{VCO}(f)
 $$
 Here, we assume $\varphi_{in}$ and $\varphi_{VCO}$ are uncorrelated as they come from independent sources.
 
-### Jitter Transfer
+### Jitter Transfer Function (JTF)
 
 $$
 H_T(s) = \frac{\varphi_{out}(s)}{\varphi_{in}(s)}|_{\varphi_{vco}=0}=\frac{K_{PD}K_{VCO}R_s+\frac{K_{PD}K_{VCO}}{C}}{s^2+K_{PD}K_{VCO}R_s+\frac{K_{PD}K_{VCO}}{C}}
@@ -350,7 +421,7 @@ Jitter generation is **high-pass filter** with two zeros, at zero frequency, and
 
 ![image-20220504110737718](link/image-20220504110737718.png)
 
-### Jitter Tolerance
+### Jitter Tolerance (JTOL)
 
 To quantify jitter tolerance, we often apply a sinusoidal jitter of a fixed frequency to the CDR input data and observe the BER of the CDR
 

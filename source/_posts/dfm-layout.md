@@ -151,6 +151,8 @@ Diode helps dissipate charges accumulated on metal. Diode should be placed as ne
 
 > In the reverse bias region, the reverse saturation current of Si and Ge diodes doubles for every $10 ^oC$ rise in temperature
 
+![image-20250719083520735](dfm-layout/image-20250719083520735.png)
+
 
 
 ---

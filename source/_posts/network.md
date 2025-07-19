@@ -23,15 +23,17 @@ mathjax: true
 
 ## Transmission-line
 
-
+![image-20250718223340699](network/image-20250718223340699.png)
 
 ### Telegrapher’s equations
 
-> EECS 723- Microwave Engineering Spring 2009. 2.1 -The Lumped Element Circuit Model for Transmission Lines [[https://www.ittc.ku.edu/~jstiles/723/handouts/2_1_Lumped_Element_Circuit_Model_package.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/2_1_Lumped_Element_Circuit_Model_package.pdf)]
+> EECS 723- Microwave Engineering Spring 2.1 -The Lumped Element Circuit Model for Transmission Lines 
 >
-> [[https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_package.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_package.pdf)]
+> 1/20/2005  [[https://www.ittc.ku.edu/~jstiles/723/handouts/2_1_Lumped_Element_Circuit_Model_package.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/2_1_Lumped_Element_Circuit_Model_package.pdf)]
 >
-> [[https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_present.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_present.pdf)]
+> note [[https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_package.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_package.pdf)]
+>
+> present [[https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_present.pdf](https://www.ittc.ku.edu/~jstiles/723/handouts/section_2_1_The_Lumped_Element_Circuit_Model_present.pdf)]
 
 ![image-20250713102519144](network/image-20250713102519144.png)
 
@@ -39,9 +41,13 @@ mathjax: true
 
 ### Transmission Line Wave Equation
 
+![image-20250718220504696](network/image-20250718220504696.png)
+
 ![image-20250713104729920](network/image-20250713104729920.png)
 
-![image-20250713113518021](network/image-20250713113518021.png)
+> ![image-20250718224751665](network/image-20250718224751665.png)
+
+
 
 ###  Characteristic Impedance ($Z_0$)
 
@@ -69,12 +75,18 @@ simulator will read sp file's **Z0** parameter
 
 
 
+### Complex Propagation Constant $\gamma$
+
+*TODO* &#128197;
+
+
+
 
 
 
 ###  Input impedance (Line Impedance)
 
-![image-20250713114733683](network/image-20250713114733683.png)
+![image-20250718231905402](network/image-20250718231905402.png)
 
 
 
@@ -82,9 +94,11 @@ simulator will read sp file's **Z0** parameter
 
 *TODO* &#128197;
 
+![image-20250719081121034](network/image-20250719081121034.png)
 
 
-### Steady -State Solution (DC voltage division)
+
+### Steady-State Solution (DC voltage division)
 
 > Sam Palermo. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee689_tlines.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee689_tlines.pdf)]
 >
@@ -103,16 +117,6 @@ simulator will read sp file's **Z0** parameter
 ![image-20250713084136902](network/image-20250713084136902.png)
 
 ![image-20250713091613844](network/image-20250713091613844.png)
-
-
-
-### Input impedance
-
-
-
-
-
-
 
 
 
@@ -138,8 +142,9 @@ simulator will read sp file's **Z0** parameter
 
 
 
-
 ## Voltage scattering
+
+![image-20250719072111526](network/image-20250719072111526.png)
 
 ![image-20241112201300108](network/image-20241112201300108.png)
 
@@ -148,6 +153,21 @@ $$
 V= \frac{2Z_l}{Z_l+R_0}\frac{V_s}{2}= \frac{Z_l}{Z_l+R_0}\cdot V_s
 $$
 
+
+
+---
+
+![image-20250719010415229](network/image-20250719010415229.png)
+
+![image-20250719081657119](network/image-20250719081657119.png)
+
+> ![image-20250719081836680](network/image-20250719081836680.png)
+
+
+
+> CHAPTER 6 Transmission-Line Essentials for Digital Electronics [[https://ws.engr.illinois.edu/sitemanager/getfile.asp?id=178](https://ws.engr.illinois.edu/sitemanager/getfile.asp?id=178)]
+>
+> CHAPTER 7 Transmission-Line Analysis [[https://ws.engr.illinois.edu/sitemanager/getfile.asp?id=199](https://ws.engr.illinois.edu/sitemanager/getfile.asp?id=199)]
 
 
 

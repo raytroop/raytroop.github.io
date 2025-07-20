@@ -66,9 +66,15 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 > Emad Hegazi , Jacob Rael , Asad Abidi, 2005. The Designer's Guide to High-Purity Oscillators [[https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf](https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf)]
 
----
 
-### Amplitude & phase noise processes
+
+## AN-PN Conversion
+
+> G. Giust, Influence of Noise Processes on Jitter and Phase Noise Measurements [[https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements](https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements)]
+>
+> —. "Methodologies for PCIe5 Refclk Jitter Analysis," G. Giust, PCI-SIG Electrical Workgroup Meeting (Jan. 19, 2018)
+
+
 
 ![image-20250719122931298](comm/image-20250719122931298.png)
 
@@ -76,11 +82,9 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 ![Figure 8 thumb_rev](comm/Figure8_REV.jpg)
 
+### phase noise analyzer vs spectrum analyzer
 
-
-> G. Giust, Influence of Noise Processes on Jitter and Phase Noise Measurements [[https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements](https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements)]
->
-> —. "Methodologies for PCIe5 Refclk Jitter Analysis," G. Giust, PCI-SIG Electrical Workgroup Meeting (Jan. 19, 2018),
+*TODO* &#128197;
 
 
 

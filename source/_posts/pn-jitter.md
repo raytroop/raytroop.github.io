@@ -43,6 +43,8 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 ## Reference-Clock Phase Noise in PLL
 
 > Gary Giust. How to Evaluate Reference-Clock Phase Noise in High-Speed Serial Links [[expanded version](https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links)], [[compact version](https://www.sitime.com/support/resource-library/how-evaluate-reference-clock-phase-noise-high-speed-serial-links)]
+>
+> G. Richmond, "Refclk Fanout Best Practices for 8GT/s and 16GT/s Systems," PCI-SIG Developers Conference, June 7, 2017
 
 Knowing how ***input phase noise aliases*** when ***sampled*** by a PLL
 
@@ -58,6 +60,24 @@ An alternate view of **phase noise aliasing during the sampling process**
 ![image-20250719120321878](pn-jitter/image-20250719120321878.png)
 
 *Integrating the combined area* under each Filtered Data curve shown in Figure 2 (b) is *mathematically equivalent* to integrating the entire Filtered Data curve shown in Figure 2 (a)
+
+---
+
+
+
+![image-20250720075655909](pn-jitter/image-20250720075655909.png)
+
+---
+
+***Phase Noise Analyzer* vs *TIE jitter using Real-time Oscilloscope***
+
+![image-20250720083138045](pn-jitter/image-20250720083138045.png)
+
+> Since an **oscilloscope observes jitter similar to a real system,** we regard its result as the **gold** standard against which other methods may be judged
+
+**Flat Phase Noise Extension** to twice the clock frequency
+
+![image-20250720090755239](pn-jitter/image-20250720090755239.png)
 
 
 

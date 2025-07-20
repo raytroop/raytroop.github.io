@@ -1,5 +1,5 @@
 ---
-title: Device Aging
+title: Device Aging & Reliability
 date: 2022-12-11 20:54:29
 tags:
 categories:
@@ -256,6 +256,8 @@ BTI recovery effect **NOT** included for N7
 
 
 ## reference
+
+Tanya Nigam and Andreas Kerber. Global Foundaries. CICC2014 Session 15 - Challenges for Analog Nanoscale Technologies: *Reliability challenges and modeling of HK MG Technologies*
 
 Spectre Tech Tips: Device Aging? Yes, even Silicon wears out - Analog/Custom Design (Analog/Custom design) - Cadence Blogs - Cadence Community [https://shar.es/afd31p](https://shar.es/afd31p)
 

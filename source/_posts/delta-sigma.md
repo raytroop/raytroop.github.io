@@ -234,7 +234,7 @@ endmodule
 
 ---
 
-![image-20250621181615703](delta-sigma/image-20250621181615703.png)
+![image-20250720201944707](delta-sigma/image-20250720201944707.png)
 
 > David Johns and Ken Martin. Oversampling Converters [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
 

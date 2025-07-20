@@ -7,6 +7,170 @@ categories:
 mathjax: true
 ---
 
+## Hunting Jitter
+
+ ***Hunting jitter*** is often referred to as ***dithering jitter***, the time error between *data clock* and input data
+
+![image-20250720205107639](dpll/image-20250720205107639.png)
+
+![image-20250720210744215](dpll/image-20250720210744215.png)
+
+
+
+---
+
+![image-20240924225542342](dpll/image-20240924225542342.png)
+
+where the proportional gain ($K_P$), *heavily damped systems* means that $K_P \gg K_I$
+
+![image-20250720164006027](dpll/image-20250720164006027.png)
+
+
+
+
+
+
+
+> Deog-Kyoon Jeong. Topics in IC (Wireline Transceiver Design). Lec 6 - Clock and Data Recovery [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
+>
+> Hae-Chang Lee, "An Estimation Approach To Clock And Data Recovery" [[https://www-vlsi.stanford.edu/people/alum/pdf/0611_HaechangLee_Phase_Estimation.pdf](https://www-vlsi.stanford.edu/people/alum/pdf/0611_HaechangLee_Phase_Estimation.pdf)]
+>
+> CC Chen. Why Hunting Jitter Happens in CDR: The Role of Input Jitter and Latency? [[https://youtu.be/hPDielPsFgY](https://youtu.be/hPDielPsFgY)]
+>
+> P. K. Hanumolu, M. G. Kim, G. -y. Wei and U. -k. Moon, "A 1.6Gbps Digital Clock and Data Recovery Circuit," *IEEE Custom Integrated Circuits Conference 2006* [[https://sci-hub.se/10.1109/CICC.2006.320829](https://sci-hub.se/10.1109/CICC.2006.320829)]
+>
+> Hanumolu, Pavan Kumar. 2006. *Design Techniques for Clocking High Performance Signaling Systems.* : Oregon State University. [https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/1v53k219r](https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/1v53k219r)]
+>
+> Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data Recovery in Serial Data Transmission Systems. [[paper](https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf),[slides](https://www.omnisterra.com/walker/pdfs.talks/bctm2.maker.pdf)]
+
+
+
+## limit-cycle
+
+***limit cycle***, ***cycle slip*** 
+
+![image-20250720182126141](dpll/image-20250720182126141.png)
+
+> ![image-20250720203817785](dpll/image-20250720203817785.png)
+
+
+
+![image-20250720175406733](dpll/image-20250720175406733.png)
+
+
+
+> Deog-Kyoon Jeong. Topics in IC (Wireline Transceiver Design). Lec 3 - All-Digital PLL [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
+>
+> N. Da Dalt, "A design-oriented study of the nonlinear dynamics of digital bang-bang PLLs," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 52, no. 1, pp. 21-31, Jan. 2005 [[https://sci-hub.se/10.1109/TCSI.2004.840089](https://sci-hub.se/10.1109/TCSI.2004.840089)]
+>
+> High-Speed Circuits and Systems Lab. Yonsei University. High-speed Serial Interface ***2013***. ***Lect. 16 – Clock and Data Recovery 3***
+
+
+
+## BB PD
+
+> It's **ternary**, because *early*, *late* and *no transition*
+
+
+### Linearing BB-PD
+
+BB Gain is the slope of average BB output $\mu$, versus phase offset $\phi$, i.e. $\frac {\partial \mu}{\partial \phi}$,
+
+BB only produces output for a transition and this de-rates the gain. Transition density = *0.5* for random data
+
+$$
+K_{BB} = \frac{1}{2}\frac {\partial \mu}{\partial \phi}
+$$
+
+where $\mu = (1)\times \mathrm{P}(\text{late}|\phi) + (-1)\times \mathrm{P}(\text{early}|\phi)$
+
+![bb-PDF.drawio](dpll/bb-PDF.drawio.svg)
+
+
+> Both jitter and amplitude noise distribution are same, just scaled by slope 
+
+
+### Self-Noise Term
+
+One price we pay for ***BB PD*** versus ***linear PD*** is the self-noise term. **For** **small phase errors** BB output noise is the **full magnitude** of the sliced data
+
+> The PD output should be almost **0** for small phase errors. i.e. ideal PD output noise should be **0**
+
+$$
+\sigma_{BB}^2 = 1^2 \cdot \mathrm{P}(\text{trans}) + 0^2\cdot (1-\mathrm{P}(\text{trans})) = 0.5
+$$
+
+![image-20241127215947017](dpll/image-20241127215947017.png)
+
+**Input referred jitter** from BB PD is **proportional to incoming jitter**
+
+![image-20241127220933103](dpll/image-20241127220933103.png)
+
+
+
+> John T. Stonick, ISSCC 2011 TUTORIALS *T5: DPLL-Based Clock and Data Recovery*
+>
+> Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data Recovery in Serial Data Transmission Systems.  [[pdf](https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf)]
+>
+> \- Clock and Data Recovery for Serial Data Communications, focusing on bang-bang CDR design methodology, ISSCC Short Course, February 2002. [[slides](https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf)]
+
+
+
+## CDR Loop Latency
+
+> Amir Amirkhany. ISSCC 2019 "Basics of Clock and Data Recovery Circuits"
+>
+> CC Chen. Why A Low Loop Latency in A CDR Design? [[https://youtu.be/io9WZbhlahU](https://youtu.be/io9WZbhlahU)]
+>
+> —. Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8](https://youtu.be/Jyy18865jv8)]
+
+![image-20250706173343946](dpll/image-20250706173343946.png)
+
+---
+
+![image-20250706121529451](dpll/image-20250706121529451.png)
+
+---
+
+![image-20241102235118149](dpll/image-20241102235118149.png)
+
+![image-20241102235145417](dpll/image-20241102235145417.png)
+
+loop latency is represented as $e^{-sD}$ in linear model
+
+---
+
+![image-20241102235736432](dpll/image-20241102235736432.png)
+
+![image-20241103000223470](dpll/image-20241103000223470.png)
+
+![image-20241103000653906](dpll/image-20241103000653906.png)
+
+
+
+### Sensitivity to Loop Latency
+
+![image-20241103142137640](dpll/image-20241103142137640.png)
+
+---
+
+![image-20241103142656134](dpll/image-20241103142656134.png)
+
+![image-20241103142531277](dpll/image-20241103142531277.png)
+
+![image-20241103142938907](dpll/image-20241103142938907.png)
+
+
+
+### Optimizing Loop Latency
+
+*TODO* &#128197;
+
+
+
+> CC Chen. Circuit Image: Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8?si=uY2HUV8mERLterwH](https://youtu.be/Jyy18865jv8?si=uY2HUV8mERLterwH)]
+
+
 
 ## DT & CT Spectral Density
 

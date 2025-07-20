@@ -276,58 +276,6 @@ $$
 
 
 
-## CDR Loop Latency
-
-> CC Chen. Why A Low Loop Latency in A CDR Design? [[https://youtu.be/io9WZbhlahU?si=IjQ5haXWZ-MV4Ncb](https://youtu.be/io9WZbhlahU?si=IjQ5haXWZ-MV4Ncb)]
->
-> —. Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8?si=rpiyuR_5WekHwc1Y](https://youtu.be/Jyy18865jv8?si=rpiyuR_5WekHwc1Y)]
-
-![image-20250706173343946](link/image-20250706173343946.png)
-
----
-
-![image-20250706121529451](link/image-20250706121529451.png)
-
----
-
-![image-20241102235118149](link/image-20241102235118149.png)
-
-![image-20241102235145417](link/image-20241102235145417.png)
-
-loop latency is represented as $e^{-sD}$ in linear model
-
----
-
-![image-20241102235736432](link/image-20241102235736432.png)
-
-![image-20241103000223470](link/image-20241103000223470.png)
-
-![image-20241103000653906](link/image-20241103000653906.png)
-
-
-
-## Sensitivity to Loop Latency
-
-![image-20241103142137640](link/image-20241103142137640.png)
-
----
-
-![image-20241103142656134](link/image-20241103142656134.png)
-
-![image-20241103142531277](link/image-20241103142531277.png)
-
-![image-20241103142938907](link/image-20241103142938907.png)
-
-
-
-## Optimizing Loop Latency for CDR
-
-*TODO* &#128197;
-
-
-
-> CC Chen. Circuit Image: Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8?si=uY2HUV8mERLterwH](https://youtu.be/Jyy18865jv8?si=uY2HUV8mERLterwH)]
-
 
 
 ## Enhancing Resolution with a $\Delta \Sigma$ Modulator
@@ -747,21 +695,7 @@ G. Souliotis, A. Tsimpos and S. Vlassis, "Phase Interpolator-Based Clock and Dat
 
 ## loop dynamic
 
-### Dithering Jitter in Bang-bang PLL
 
->  *hunting jitter* is also called as **dithering jitter**
->  the time error between *data clock* and input data
->
->  - proportional gain 
->  - loop latency 
-
-![image-20240924225542342](link/image-20240924225542342.png)
-
-where the proportional gain ($K_P$), *heavily damped systems* means that $K_P \gg K_I$
-
-
-
-![image-20240924234154476](link/image-20240924234154476.png)
 
 
 
@@ -777,7 +711,7 @@ where the proportional gain ($K_P$), *heavily damped systems* means that $K_P \g
 >
 > Da Dalt N. A design-oriented study of the nonlinear dynamics of digital bang-bang PLLs. IEEE Transactions on Circuits and Systems I: Regular Papers. 2005;52(1):21–31. [[https://sci-hub.se/10.1109/TCSI.2004.840089](https://sci-hub.se/10.1109/TCSI.2004.840089)]
 >
-> Jang S, Kim S, Chu SH, Jeong GS, Kim Y, Jeong DK. An optimum loop gain tracking all-digital PLL using autocorrelation of bang–bang phasefrequency detection. IEEE Transactions on Circuits and Systems II: Express Briefs. 2015;62(9):836–840. [[https://sci-hub.se/10.1109/TCSII.2015.2435691](https://sci-hub.se/10.1109/TCSII.2015.2435691)]
+> Jang S, Kim S, Chu SH, Jeong GS, Kim Y, Jeong DK. An optimum loop gain tracking all-digital PLL using autocorrelation of bang–bang phase frequency detection. IEEE Transactions on Circuits and Systems II: Express Briefs. 2015;62(9):836–840. [[https://sci-hub.se/10.1109/TCSII.2015.2435691](https://sci-hub.se/10.1109/TCSII.2015.2435691)]
 
 ---
 
@@ -851,75 +785,12 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 
 
-## BB PD
-
-> It's **ternary**, because *early*, *late* and *no transition*
-
-
-### Linearing BB-PD
-
-BB Gain is the slope of average BB output $\mu$, versus phase offset $\phi$, i.e. $\frac {\partial \mu}{\partial \phi}$,
-
-BB only produces output for a transition and this de-rates the gain. Transition density = *0.5* for random data
-
-$$
-K_{BB} = \frac{1}{2}\frac {\partial \mu}{\partial \phi}
-$$
-
-where $\mu = (1)\times \mathrm{P}(\text{late}|\phi) + (-1)\times \mathrm{P}(\text{early}|\phi)$
-
-![bb-PDF.drawio](link/bb-PDF.drawio.svg)
-
-
-> Both jitter and amplitude noise distribution are same, just scaled by slope 
-
-
-### Self-Noise Term
-
-One price we pay for ***BB PD*** versus ***linear PD*** is the self-noise term. **For** **small phase errors** BB output noise is the **full magnitude** of the sliced data
-
-> The PD output should be almost **0** for small phase errors. i.e. ideal PD output noise should be **0**
-
-$$
-\sigma_{BB}^2 = 1^2 \cdot \mathrm{P}(\text{trans}) + 0^2\cdot (1-\mathrm{P}(\text{trans})) = 0.5
-$$
-
-![image-20241127215947017](link/image-20241127215947017.png)
-
-**Input referred jitter** from BB PD is **proportional to incoming jitter**
-
-![image-20241127220933103](link/image-20241127220933103.png)
-
-
-
-> John T. Stonick, ISSCC 2011 TUTORIALS *T5: DPLL-Based Clock and Data Recovery*
->
-> Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data Recovery in Serial Data Transmission Systems.  [[pdf](https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf)]
->
-> \- Clock and Data Recovery for Serial Data Communications, focusing on bang-bang CDR design methodology, ISSCC Short Course, February 2002. [[slides](https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf)]
-
-
-
 ## Digital CDR Category
 
 ![image-20241024221619909](link/image-20241024221619909.png)
 
 - DCO part is *analogous* so that it *cannot be perfectly modeled*
 - Digital-to-phase converter is well-defined phase output, thus, very good to model real situation
-
-
-
-## DCO
-
-![image-20241024224500048](link/image-20241024224500048.png)
-
-![image-20241024224603927](link/image-20241024224603927.png)
-
-
-
-### limit cycle
-
-![image-20241026230332655](link/image-20241026230332655.png)
 
 
 
@@ -995,15 +866,6 @@ $$
 
 
 ![image-20241024232111368](link/image-20241024232111368.png)
-
-
-
-
-## Peak-to-peak jitter in ADPLL with BBPD
-
-![image-20241025001015194](link/image-20241025001015194.png)
-
-
 
 
 

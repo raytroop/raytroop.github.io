@@ -7,6 +7,22 @@ categories:
 mathjax: true
 ---
 
+## 1-bit DAC
+
+*TODO* &#128197;
+
+$\Delta \Sigma$ ADC: Linearity
+
+!!PD: Non-linear
+
+
+
+
+
+> Dan Boschen Why use a 1-bit ADC in a Sigma Delta Modulator?. [[https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063](https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063)]
+
+
+
 ## Top-Plate vs Bottom-Plate Sampling
 
 > [[https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf](https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf)]

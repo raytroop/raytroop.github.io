@@ -7,6 +7,24 @@ categories:
 mathjax: true
 ---
 
+
+
+##  Inspection of Phase Noise
+
+ a ***−10 dB/decade reference line*** can be used to pinpoint the location in a phase noise curve that dominates its integral
+
+![image-20250720154715877](ss-insight/image-20250720154715877.png)
+
+![image-20250720155328050](ss-insight/image-20250720155328050.png)
+
+
+
+> How to Identify the Source of Phase Jitter through Phase Noise Plots [[https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots](https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots)]
+>
+> AN10072 Determine the Dominant Source of Phase Noise, by Inspection [[https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection](https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection)]
+>
+> 4-minute Clinic: Determine the Dominant Source of Jitter by Inspection of Phase Noise Plot [[https://youtu.be/2elHk3v45Pk](https://youtu.be/2elHk3v45Pk)]
+
 ## white noise
 
 ***white noise*** doesn't mean it has a *Gaussian/normal distribution*

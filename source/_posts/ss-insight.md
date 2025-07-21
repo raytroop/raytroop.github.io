@@ -7,11 +7,15 @@ categories:
 mathjax: true
 ---
 
+## modulation depth
+
+The ***modulation index*** (or ***modulation depth***) of a modulation scheme describes
+by how much the modulated variable of the carrier signal varies around its unmodulated level
 
 
 ##  Inspection of Phase Noise
 
- a ***−10 dB/decade reference line*** can be used to pinpoint the location in a phase noise curve that dominates its integral
+ a ***-10 dB/decade reference line*** can be used to pinpoint the location in a phase noise curve that dominates its integral
 
 ![image-20250720154715877](ss-insight/image-20250720154715877.png)
 

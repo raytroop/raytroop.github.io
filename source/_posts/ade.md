@@ -9,15 +9,20 @@ mathjax: true
 
 
 
+## Layout XL pointing to new schematic
+
+`Connectivity(Menu in Layout View) ---> Update ---> Connectivity Reference`
+
+![image-20250722230255490](ade/image-20250722230255490.png)
+
+
+
 ## Hide Color
 
 ![image-20250719231256086](ade/image-20250719231256086.png)
 
 
 
-## Layout XL pointing to new schematic
-
-Connectivity(Menu in Layout View) ---> Update ---> Connectivity Reference
 
 
 ## noiseon & noiseoff

@@ -319,6 +319,8 @@ Carlo Samori, "Phase Noise in LC Oscillators: From Basic Concepts to Advanced To
 
 —, ISSCC2016, "Understanding Phase Noise in LC VCOs"
 
+Antonio Liscidini, ESSCIRC 2019 Tutorials: Phase Noise in Wireless Applications [[https://youtu.be/nGmQ0JdoSE4](https://youtu.be/nGmQ0JdoSE4)]
+
 A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in oscillators: a unifying theory and numerical methods for characterization," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 47, no. 5, pp. 655-674, May 2000 [[https://sci-hub.se/10.1109/81.847872](https://sci-hub.se/10.1109/81.847872)]
 
 Dalt, Nicola Da and Ali Sheikholeslami. "Understanding Jitter and Phase Noise: A Circuits and Systems Perspective." (2018) [[https://picture.iczhiku.com/resource/eetop/WykRGJJoHQLaSCMv.pdf](https://picture.iczhiku.com/resource/eetop/WykRGJJoHQLaSCMv.pdf)]

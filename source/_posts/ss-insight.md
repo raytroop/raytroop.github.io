@@ -12,6 +12,11 @@ mathjax: true
 The ***modulation index*** (or ***modulation depth***) of a modulation scheme describes
 by how much the modulated variable of the carrier signal varies around its unmodulated level
 
+## Image frequency
+
+
+> Antonio Liscidini, ESSCIRC 2019 Tutorials: Ultra Low Power Receivers [[https://youtu.be/OJRB8g4vUZw](https://youtu.be/OJRB8g4vUZw)]
+
 
 ##  Inspection of Phase Noise
 

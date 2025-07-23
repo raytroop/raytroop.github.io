@@ -233,3 +233,7 @@ Neil Robertson. Digital PLL's -- Part 1 [[https://www.dsprelated.com/showarticle
 Neil Robertson. Digital PLL's -- Part 2 [[https://www.dsprelated.com/showarticle/973.php](https://www.dsprelated.com/showarticle/973.php)]
 
 Neil Robertson. Digital PLL's -- Part 3 [[https://www.dsprelated.com/showarticle/1177.php](https://www.dsprelated.com/showarticle/1177.php)]
+
+---
+
+Da Dalt, Nicola. (2009). Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation. Circuits and Systems I: Regular Papers, IEEE Transactions on. 55. 3663 - 3675. [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]

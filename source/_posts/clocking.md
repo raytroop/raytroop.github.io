@@ -175,17 +175,6 @@ Vice versa, if If Up pulse arrives $\Delta T$ after the Dn pulse, the steady-sta
 
 
 
-## Injection Locking
-
-*TODO* &#128197;
-
-
-> "Topics in IC(Wireline Transceiver Design): Lec 4 - Injection Locked Oscillators" [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf)]
->
-> Cowan, Glenn. (2024). Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations. 10.1017/9781108779791. 
-
-
-
 ## PFD Deadzone
 
 Dead zone induced by *incomplete settling* of charge-pump currents
@@ -451,26 +440,6 @@ and $\phi _e(\infty) = 0$
 ---
 
 
-
-
-
-
-## AC-coupled buffer 
-
-![image-20240720073616597](clocking/image-20240720073616597.png)
-
-> Since duty-cycle error is *high frequency* component, the high-pass filter suppresses the duty-cycle error propagating to the output
-
-![image-20240720005226736](clocking/image-20240720005226736.png)
-
-- The AC-coupling capacitor blocks the low-frequency component of the input
-- The feedback resistor sets common mode voltage to the crossover voltage
-
-
-
-> Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
->
-> Casper B, O'Mahony F. Clocking analysis, implementation and measurement techniques for high-speed data links: A tutorial. IEEE Transactions on Circuits and Systems I: Regular Papers. 2009;56(1):17-39
 
 
 

@@ -7,17 +7,17 @@ categories:
 mathjax: true
 ---
 
-![image-20220516004008878](clk_distribution/image-20220516004008878.png)
+![image-20220516004008878](clock-dist/image-20220516004008878.png)
 
 ## Deterministic Jitter
 
-![image-20220516004058916](clk_distribution/image-20220516004058916.png)
+![image-20220516004058916](clock-dist/image-20220516004058916.png)
 
-![image-20220516004206118](clk_distribution/image-20220516004206118.png)
+![image-20220516004206118](clock-dist/image-20220516004206118.png)
 
 `j_Djpp` can be calculated by PSD,too
 
-![image-20220516004615033](clk_distribution/image-20220516004615033.png)
+![image-20220516004615033](clock-dist/image-20220516004615033.png)
 
 ```matlab
 fck = 38.4e6;
@@ -88,11 +88,11 @@ BER =
 
 
 
-![image-20220516160050961](clk_distribution/image-20220516160050961.png)
+![image-20220516160050961](clock-dist/image-20220516160050961.png)
 
 
 
-![image-20220516193125490](clk_distribution/image-20220516193125490.png)
+![image-20220516193125490](clock-dist/image-20220516193125490.png)
 
 ## Total Jitter
 
@@ -100,11 +100,11 @@ $$
 \text{TJ}_{\text{p-p}}\equiv \text{DJ}_{\text{p-p}} + \text{RJ}_{\text{p-p}}(\text{BER})
 $$
 
-![tj.drawio](clk_distribution/tj.drawio.svg)
+![tj.drawio](clock-dist/tj.drawio.svg)
 
-![image-20220516160006909](clk_distribution/image-20220516160006909.png)
+![image-20220516160006909](clock-dist/image-20220516160006909.png)
 
-![image-20220516012200383](clk_distribution/image-20220516012200383.png)
+![image-20220516012200383](clock-dist/image-20220516012200383.png)
 
 > In the psd of TJ, the spur is DJ and floor is RJ
 
@@ -156,7 +156,7 @@ The above equation has been verified for *sampled pnoise*, i.e.  *J<sub>ee</sub>
 
 One example, integrate to $\frac{f_{osc}}{2}$ and $f_{osc} = 16GHz$
 
-![image-20220415100034220](clk_distribution/image-20220415100034220.png)
+![image-20220415100034220](clock-dist/image-20220415100034220.png)
 
 
 
@@ -187,7 +187,7 @@ A **sampled pxf** analysis can be used to simulate the *deterministic jitter* of
 
 
 
-## DCC Correction
+## DCC & AC-coupled buffer
 
 The amount of correction can be set by intentional injection of an *offset current* into the summing input node of INV, ***threshold-adjustable inverter***
 
@@ -195,13 +195,13 @@ The amount of correction can be set by intentional injection of an *offset curre
 >
 > increasing DC of input signal is equivalent to lower down the threshold of INV
 
-![image-20241215233057176](clk_distribution/image-20241215233057176.png)
+![image-20241215233057176](clock-dist/image-20241215233057176.png)
 
 
 
 ---
 
-![image-20241216205525818](clk_distribution/image-20241216205525818.png)
+![image-20241216205525818](clock-dist/image-20241216205525818.png)
 
 voltage at *INV1* will increased by:
 $$
@@ -217,11 +217,27 @@ $$
 \Delta {INV1}\approx \frac{\Delta V_{DAC}}{A_0}
 $$
 
-> C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)* [[https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205](https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205)]
+> C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)* [[https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205](https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205)],[[visual](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf)]
 >
 > Bob Lefferts, Navraj Nandra. SNUG Israel 2007 [[https://picture.iczhiku.com/resource/eetop/whKYwQorwYoPUVbm.pdf](https://picture.iczhiku.com/resource/eetop/whKYwQorwYoPUVbm.pdf)]
 >
-> C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018 [[https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf)]
+
+---
+
+![image-20240720073616597](clock-dist/image-20240720073616597.png)
+
+> Since duty-cycle error is *high frequency* component, the high-pass filter suppresses the duty-cycle error propagating to the output
+
+![image-20240720005226736](clock-dist/image-20240720005226736.png)
+
+- The AC-coupling capacitor blocks the low-frequency component of the input
+- The feedback resistor sets common mode voltage to the crossover voltage
+
+
+
+> Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
+>
+> Casper B, O'Mahony F. Clocking analysis, implementation and measurement techniques for high-speed data links: A tutorial. IEEE Transactions on Circuits and Systems I: Regular Papers. 2009;56(1):17-39
 
 
 
@@ -261,7 +277,7 @@ Mo, Xunjun & Wu, Jiaqi & Wary, Nijwm & Carusone, Tony. (2021). Design Methodolog
 
 ---
 
-Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems [[[Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems](https://www.nishanchettri.com/isscc-slides/2021 ISSCC/SHORT COURSE/ISSCC2021-SC3.pdf)]([Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems](https://www.nishanchettri.com/isscc-slides/2021 ISSCC/SHORT COURSE/ISSCC2021-SC3.pdf))]
+Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC3.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC3.pdf)]
 
 Phillip Restle. ISSCC2021 SC4: Processor Clock Generation, Distribution, and Clock Sensor/Management Loops [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC4.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC4.pdf)]
 

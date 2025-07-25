@@ -1,5 +1,5 @@
 ---
-title: cascaded PLLs & wireline transceiver
+title: Cascaded PLLs
 date: 2025-05-24 07:32:02
 tags:
 categories: analog

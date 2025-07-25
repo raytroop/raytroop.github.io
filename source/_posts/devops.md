@@ -6,6 +6,32 @@ categories:
 - devops
 ---
 
+
+
+## OBS 无声录制带有声音的视频
+
+> 录制视频时，想要 obs 能录制声音，但是不想人耳听到。
+
+`pactl load-module module-virtual-sink sink_name=VAC`
+
+> unfortunately, Virtual audio sinks & settings gone after reboot
+
+![image-20250726071525899](devops/image-20250726071525899.png)
+
+
+
+![image-20250726071325895](devops/image-20250726071325895.png)
+
+---
+
+obs 无声录制带有声音的视频 [[https://www.cnblogs.com/wztshine/p/17764073.html](https://www.cnblogs.com/wztshine/p/17764073.html)]
+
+Virtual Audio Cable For Ubuntu [[https://askubuntu.com/a/1268269/845522](https://askubuntu.com/a/1268269/845522)]
+
+能不能设置个定时器，让录像自动停？ [[https://www.reddit.com/r/obs/comments/j5j1qa/comment/g7sk588/](https://www.reddit.com/r/obs/comments/j5j1qa/comment/g7sk588/)]
+
+
+
 ## Google search tips
 
 > [[https://static.googleusercontent.com/media/www.google.com/en//educators/downloads/Tips_Tricks_17x22.pdf](https://static.googleusercontent.com/media/www.google.com/en//educators/downloads/Tips_Tricks_17x22.pdf)]

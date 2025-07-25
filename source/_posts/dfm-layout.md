@@ -381,6 +381,12 @@ potential leakage: **channel leakage (S to D)**; **junction leakage (S/D to bulk
 
 ![image-20250708001207301](dfm-layout/image-20250708001207301.png)
 
+---
+
+**CNOD** (**MPODE**) is same with primitive MOS model; **PODE** is the primitive MOS, just S/D shorted together
+
+![image-20250725215821959](dfm-layout/image-20250725215821959.png)
+
 
 
 

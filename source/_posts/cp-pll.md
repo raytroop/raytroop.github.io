@@ -32,6 +32,24 @@ real-time digital oscilloscope: measure sampled jitter directly
 
 
 
+## Charge Pump Noise
+
+> A. L. Lacaita, S. Levantino, and C. Samori, *Integrated Frequency Synthesizers for Wireless Systems*. Cambridge: Cambridge University Press, 2007.
+>
+> [https://raytroop.github.io/2024/05/25/comm/#cyclostationary-noise-modulated-noise](https://raytroop.github.io/2024/05/25/comm/#cyclostationary-noise-modulated-noise)
+
+![image-20250726174414209](cp-pll/image-20250726174414209.png)
+
+---
+
+Saurabh Saxena,Phase Locked Loops: Noise Simulations for CP-PLL Blocks [[https://youtu.be/Q1libz-XqRw](https://youtu.be/Q1libz-XqRw)]
+
+![image-20250726183455160](cp-pll/image-20250726183455160.png)
+
+
+
+
+
 
 ## reference
 

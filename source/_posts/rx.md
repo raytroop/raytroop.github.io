@@ -60,12 +60,28 @@ mathjax: true
 
 > S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension Techniques for CMOS Amplifiers," in IEEE Journal of Solid-State Circuits, vol. 41, no. 11, pp. 2424-2439, Nov. 2006 [[https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf](https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf)]
 
+
+
 ## CTLE Linearity
 
 *TODO* &#128197;
-![202506101021_ctle_linearityl](rx/202506101021_ctle_linearityl.PNG)
+![image-20250726180642570](rx/image-20250726180642570.png)
 
-![202506101002_ctle_goal](rx/202506101002_ctle_goal.PNG)
+
+
+
+
+## Front-End Noise
+
+> [https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee720_rx_circuits.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee720_rx_circuits.pdf)
+
+![image-20250726180326659](rx/image-20250726180326659.png)
+
+> ![image-20250726181859362](rx/image-20250726181859362.png)
+
+
+
+
 
 ## DFE Error Propagation
 

@@ -1,5 +1,5 @@
 ---
-title: Equalization & Timing Recovery
+title: Digital Equalization & Timing Recovery
 date: 2024-09-03 11:07:31
 tags:
 categories:

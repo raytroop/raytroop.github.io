@@ -306,7 +306,11 @@ DC leakage current data combined with the I-V data provides electrical indicatio
 
 ![img](esd-latchup/tlp-blog8.png)
 
+###  BJT of common-base mode
 
+![image-20250726102945232](esd-latchup/image-20250726102945232.png)
+
+![image-20250726103744211](esd-latchup/image-20250726103744211.png)
 
 ### GGNMOS
 
@@ -318,29 +322,9 @@ DC leakage current data combined with the I-V data provides electrical indicatio
 
 ![img](esd-latchup/rise-time-influence.png)
 
-> Influence of the pulse rise time on ggNMOS. (left side) A fast ESD pulse can couple the bulk of the NMOS to a higher potential for a short period, reducing the trigger voltage. (right side) A clear Vt1 reduction is visible, while the remaining part of the IV curve remains the same.
+Influence of the pulse rise time on ggNMOS. (left side) A fast ESD pulse can couple the bulk of the NMOS to a higher potential for a short period, reducing the trigger voltage. (right side) A clear Vt1 reduction is visible, while the remaining part of the IV curve remains the same.
 
 
-
-![image-20241124161901252](esd-latchup/image-20241124161901252.png)
-
-
-
-> resistance between gate and source that designers typically use to reduce the Vt1 trigger voltage of a ggNMOS ESD protection
-
-
-
----
-
-
-
-![image-20220623231619052](esd-latchup/image-20220623231619052.png)
-
-> The drain (D) is connected to an I/O pad and the gate (G) is grounded.
->
-> To ensure “zero” leakage of the ESD protection structure under normal operations.
->
-> To to protect gate of core device, tie-high and tie-low shall be used when used as secondary ESD protection.
 
 
 
@@ -348,35 +332,35 @@ DC leakage current data combined with the I-V data provides electrical indicatio
 
 
 
-#### Positive ESD transient at I/O pad
-
-![image-20220623233019912](esd-latchup/image-20220623233019912.png)
-
-1. **DB** junction is reverse-biased all the way to its breakdown.
-2. Avalance multiplication takes place and generates electron-hole pairs
-3. Hole current flows into the ground via the **B-region** and build up a potential, VR, across the lateral parasitic resistance R
-4. As VR increases, the **BS** junction turns on, eventually triggers the parasitic lateral NPN transistor Q (**DBS**)
-
-#### Negative ESD transient at I/O pad
-
-![image-20220623233634452](esd-latchup/image-20220623233634452.png)
-
- The forward-biased parasitic diode, **BD**, will shunt the transient
-
-> ggNMOS is commonly used in the GPIO provided by foundry, which alleviate the ESD design burden of customer.
->
-> These GPIO is self-protective thanks to the ggNMOS.
-
-
-
 ### GCNMOS
 
+> Ming-Dou Ker, Chung-Yu Wu, Tao Cheng and Hun-Hsien Chang, "Capacitor-couple ESD protection circuit for deep-submicron low-voltage CMOS ASIC," in *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 4, no. 3, pp. 307-321, Sept. 1996 [[https://ir.lib.nycu.edu.tw/bitstream/11536/1053/1/A1996VE01800002.pdf](https://ir.lib.nycu.edu.tw/bitstream/11536/1053/1/A1996VE01800002.pdf)]
+
+![image-20250726111621772](esd-latchup/image-20250726111621772.png)
+
+![image-20250726112517289](esd-latchup/image-20250726112517289.png)
+
+> [[https://bbs.eetop.cn/forum.php?mod=redirect&goto=findpost&ptid=353178&pid=7305079](https://bbs.eetop.cn/forum.php?mod=redirect&goto=findpost&ptid=353178&pid=7305079)]
+
+---
+
+![image-20241124161901252](esd-latchup/image-20241124161901252.png)
+
+> resistance between gate and source that designers typically use to reduce the Vt1 trigger voltage of a ggNMOS ESD protection
 
 
-### SCR
 
 
 
+### SCR (thyristor)
+
+> Guang Chen, Haigang Feng and A. Wang, "A systematic study of ESD protection structures for RF ICs," *IEEE Radio Frequency Integrated Circuits (RFIC) Symposium, 2003*, Philadelphia, PA, USA, 2003 [[https://sci-hub.se/10.1109/RFIC.2003.1213959](https://sci-hub.se/10.1109/RFIC.2003.1213959)]
+
+![image-20250726111753314](esd-latchup/image-20250726111753314.png)
+
+![image-20250726104632417](esd-latchup/image-20250726104632417.png)
+
+> [[https://www.sharecourse.net/sharecourse/upload/course/180/c574580760de44d2c6fb66d8be4c6d4a.pdf](https://www.sharecourse.net/sharecourse/upload/course/180/c574580760de44d2c6fb66d8be4c6d4a.pdf)]
 
 
 

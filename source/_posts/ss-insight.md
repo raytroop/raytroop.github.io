@@ -52,24 +52,25 @@ By understanding input signal's statistical nature, we can gather more insights 
 
 ---
 
-![image-20250727110129688](ss-insight/image-20250727110129688.png)
+![image-20250727111432313](ss-insight/image-20250727111432313.png)
 
 ```matlab
 fs = 1;
 N = 2^20;
 Nhist = 100;
+segmentLength = 512;
 
 x_norm = randn(1, N,1); % Generate random data (e.g., Gaussian white noise)
-[pxx_norm, f] = pwelch(x_norm, [], [], [], fs);
+[pxx_norm, f] = pwelch(x_norm, segmentLength, [], [], fs);
 
 x_uniform = 2*rand(N,1) - 1; % uniform random -1 ~ 1;
-[pxx_uniform, ~] = pwelch(x_uniform, [], [], [], fs);
+[pxx_uniform, ~] = pwelch(x_uniform, segmentLength, [], [], fs);
 
 x_sin = sin(2*pi*(rand(N,1) - 0.5)); % sinusoidal-like
-[pxx_sin, ~] = pwelch(x_sin, [], [], [], fs);
+[pxx_sin, ~] = pwelch(x_sin, segmentLength, [], [], fs);
 
 x_bin = 2*randi(2,N,1) -3; % binomial distribution, -1, 1
-[pxx_bin, ~] = pwelch(x_bin, [], [], [], fs);
+[pxx_bin, ~] = pwelch(x_bin, segmentLength, [], [], fs);
 
 subplot(2, 4, 1)
 histogram(x_norm, Nhist);
@@ -81,7 +82,7 @@ xlabel('Frequency (Hz)');
 ylabel('dB');
 title('PSD of normal distribution')
 
-%%
+%% 
 subplot(2, 4, 2)
 histogram(x_uniform, Nhist);
 title('uniform distribution')
@@ -92,7 +93,7 @@ xlabel('Frequency (Hz)');
 ylabel('dB');
 title('PSD of uniform distribution')
 
-%%
+%% 
 subplot(2, 4, 3)
 histogram(x_sin, Nhist);
 title('sinusoidal-like distribution')

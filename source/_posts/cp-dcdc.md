@@ -33,7 +33,6 @@ To achieve a stable DC output voltage
 
 ### Step-Wise Ramp-Up
 
-> **without** load
 
 $$
 V_{in} C_p + V_{out,n-1}C_o = (V_{out,n}-V_{in})C_p + V_{out,n}C_o

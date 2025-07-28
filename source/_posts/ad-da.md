@@ -82,7 +82,13 @@ $\Delta \Sigma$ ADC: Linearity
 
 ## Track Time
 
-*TODO* &#128197;
+![image-20250729005114037](ad-da/image-20250729005114037.png)
+
+---
+
+![image-20250729005852740](ad-da/image-20250729005852740.png)
+
+
 
 ## ADC Calibration
 

@@ -381,23 +381,6 @@ That is $\Delta V_R = \frac{I_D}{ g_m} \cdot \frac{\Delta R}{R}$
 
 
 
-## Burn-in & High-temperature operating life (HTOL) 
-
-- **HTOL**: 
-  - characterization test 
-  - characterize the life expectancy
-- **Burn-in**:
-  - production test
-  - weed out defective products
-
-> HTOL and Burn-in Testing capture the two ends of the reliability characterization graph known as the "bathtub curve" 
-
-![importance-of-htol-figure-1](insight/importance-of-htol-figure-1.png)
-
-> [[https://arworld.us/the-importance-of-htol-and-burn-in-testing-methods/](https://arworld.us/the-importance-of-htol-and-burn-in-testing-methods/)]
-
-
-
 ## RC charge & discharge
 
 - charge:

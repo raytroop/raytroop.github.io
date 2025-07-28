@@ -253,6 +253,21 @@ BTI recovery effect **NOT** included for N7
 
 ![image-20241120223053280](aging/image-20241120223053280.png)
 
+## Burn-in & High-temperature operating life (HTOL) 
+
+- **HTOL**: 
+  - characterization test 
+  - characterize the life expectancy
+- **Burn-in**:
+  - production test
+  - weed out defective products
+
+> HTOL and Burn-in Testing capture the two ends of the reliability characterization graph known as the "bathtub curve" 
+
+![importance-of-htol-figure-1](aging/importance-of-htol-figure-1.png)
+
+> [[https://arworld.us/the-importance-of-htol-and-burn-in-testing-methods/](https://arworld.us/the-importance-of-htol-and-burn-in-testing-methods/)]
+
 
 
 ## reference

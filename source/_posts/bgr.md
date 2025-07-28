@@ -7,6 +7,95 @@ categories:
 mathjax: true
 ---
 
+![image-20250729004456566](bgr/image-20250729004456566.png)
+
+---
+
+
+
+## Subthreshold Conduction
+
+By square-law, the Eq $g_m = \sqrt{2\mu C_{ox}\frac{W}{L}I_D}$, it is possible to obtain a *higer* transconductance by increasing $W$ while maintaining $I_D$ constant. However, if $W$ increases while $I_D$ remains constant, then $V_{GS} \to V_{TH}$ and device enters the subthreshold region.
+$$
+I_D = I_0\exp \frac{V_{GS}}{\xi V_T}
+$$
+
+where $I_0$ is proportional to $W/L$, $\xi \gt 1$ is a nonideality factor, and $V_T = kT/q$
+
+As a result, the transconductance in subthreshold region is
+$$
+g_m = \frac{I_D}{\xi V_T}
+$$
+
+which is $g_m \propto I_D$
+
+![image-20240627230726326](bgr/image-20240627230726326.png)
+
+![image-20240627230744044](bgr/image-20240627230744044.png)
+
+
+
+
+
+
+### PTAT with subthreshold MOS
+
+MOS working in the **weak inversion region** (**"subthreshold conduction"**) have the similar characteristics to BJTs and diodes, since the effect of diffusion current becomes more significant than that of drift current
+
+![image-20240803193343915](bgr/image-20240803193343915.png)
+
+![image-20240803195500321](bgr/image-20240803195500321.png)
+
+![image-20240803200129592](bgr/image-20240803200129592.png)
+
+> Hongprasit, Saweth, Worawat Sa-ngiamvibool and Apinan Aurasopon. "Design of Bandgap Core and Startup Circuits for All CMOS Bandgap Voltage Reference." *Przegląd Elektrotechniczny* (2012): 277-280.
+
+
+
+
+
+
+
+## Curvature Compensation
+
+### VBE
+
+![image-20250728233542026](bgr/image-20250728233542026.png)
+
+> In advanced node, N4P, $V_{BE}$ is about -1.45mV/K
+
+Assuming $I_C$ is ***constant***
+
+![image-20250728233112550](bgr/image-20250728233112550.png)
+
+![image-20250728233350355](bgr/image-20250728233350355.png)
+
+> ![image-20250728233839563](bgr/image-20250728233839563.png)
+
+Assuming $I_C$ is ***PTAT***, $I_C = (V_T \ln n) / R_3$
+
+![image-20250728233317599](bgr/image-20250728233317599.png)
+
+![image-20250729002704253](bgr/image-20250729002704253.png)
+
+The **first-order *linear*** temperature dependence term of $V_{BE}$ can be eliminated with **IPTAT**.  $V_T(\eta - \theta)\ln)T/T_r$ is the high-order nonlinear temperature-dependent term of $V_{BE}$, which requires **high-order curvature compensation**
+
+> G. Zhu, Y. Yang and Q. Zhang, "A 4.6-ppm/°C High-Order Curvature Compensated Bandgap Reference for BMIC," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 66, no. 9, pp. 1492-1496, Sept. 2019 [[https://sci-hub.se/10.1109/TCSII.2018.2889808](https://sci-hub.se/10.1109/TCSII.2018.2889808)]
+>
+> X. Fu, D. M. Colombo, Y. Yin and K. El-Sankary, "Low Noise, High PSRR, High-Order Piecewise Curvature Compensated CMOS Bandgap Reference," in *IEEE Access*, vol. 10, pp. 110970-110982, 2022 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9923910](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9923910)]
+
+---
+
+![image-20240903234720200](bgr/image-20240903234720200.png)
+
+---
+
+![image-20250728225624247](bgr/image-20250728225624247.png)
+
+
+
+> Tutorials | 08012023 | 1.2.1 Bandgap Voltage Regular [[https://youtu.be/dz067SOX0XQ&t=6362](https://youtu.be/dz067SOX0XQ&t=6362)]
+
 
 
 ## temperature coefficient
@@ -214,3 +303,9 @@ $$
 ## reference
 
 ECEN 607 (ESS) Bandgap Reference: Basics URL:[https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf](https://people.engr.tamu.edu/s-sanchez/607%20Lect%204%20Bandgap-2009.pdf)
+
+CICC 2023 Session 12: Forum: Recent Progress in LDOs and Voltage, Current, and Timing References
+
+- Jae-Yoon Sim,  POSTECH. 12-2: Design of Ultra-low-power Bandgap Reference Circuits
+- Inhee Lee, University of Pittsburgh. 12-3: Sub-μW Non-Bandgap Voltage References
+

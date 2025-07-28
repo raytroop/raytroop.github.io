@@ -248,3 +248,6 @@ Yan Lu, ISSCC2021 T10: "Fundamentals of Fully Integrated Voltage Regulators" [[h
 Hyun-Sik Kim, Low-Dropout (LDO) Voltage Regulators – From Basics to Recent Design Trends (presented in A-SSCC 2022) [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_4_%EA%B9%80%ED%98%84%EC%8B%9D%EA%B5%90%EC%88%98%EB%8B%98_KAIST_LectureNote-%EB%B0%B0%ED%8F%AC%EC%9A%A9-Min-Jae-Seo.pdf)]
 
 A. Raychowdhury. ISSCC 2024 T2: Fundamentals of Digital and Digitally-Assisted Linear Voltage Regulators
+
+Yan Lu (Tsinghua U.) Preview - “Precision Low-Dropout Regulators” Online Course (2025) [[https://youtu.be/IgWTou7Ikbs](https://youtu.be/IgWTou7Ikbs)]
+

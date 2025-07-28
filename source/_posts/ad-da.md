@@ -422,7 +422,7 @@ $$
 \frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
 $$
 
-- $f_\text{in}$ and $f_s$ must be ***incommensurate*** ($f_s/f_{in}$ is *irrational number*. btw, *co-prime is sufficient but not necessary*)
+- $f_\text{in}$ and $f_s$ must be ***incommensurate*** ($f_s/f_\text{in}$ is *irrational number*. btw, *co-prime is sufficient but not necessary*)
 
 - $M_C$ and $N_R$ must be ***co-prime***
 

@@ -146,6 +146,22 @@ To turn the thyristor on, a positive voltage pulse is applied to the gate (G) te
 
 > You Li. CICC2020: ESD Protection Design Overview in Advanced SOI and Bulk FinFET Technologies
 
+
+
+---
+
+> [[https://picture.iczhiku.com/weixin/message1640668908028.html](https://picture.iczhiku.com/weixin/message1640668908028.html)]
+
+![图片](esd-latchup/weixin16406689080286.png)
+
+**ESD工作区**称为“**设计窗口**”
+
+保护设备的触发电压(V t1)定义了它设计为导通的电平; 触发后的保持电压(V Hold)是指应高于施加电压的钳位电平。最后，I t2是指ESD故障电流水平。
+
+如蓝色曲线(1A或1B)所示，NMOS晶体管在触发点V t1处进入双极击穿(npn)，并迅速恢复为称为V Hold的保持电压，并保护高达故障电流I ESD对应于ESD目标水平。(I t2，V t2)是指保护设备可能烧坏的散热点，因此该I t2必须大于I ESD目标电流水平(例如，目标1.5 kV HBM的电流为1 Amp)。如果保护设备的导通电阻(R on)太高，则V t2也可能达到可靠性电压极限。钳位电路必须有效触发，以使其电压累积不超过栅极氧化层击穿电压(BV ox)或晶体管击穿电压。晶体管的V Hold经过设计，使其具有一定的工作电压裕度，如曲线1A所示。相反，在具有V Hold的快速恢复装置小于工作电压(曲线1B)的情况下，存在EOS损坏的风险。
+
+
+
 ## Secondary protection
 
 ![img](esd-latchup/esd2ndprotect.png.jpg)
@@ -186,7 +202,7 @@ Extended ESD design window example. The failure voltage of a thin gate oxide in 
 
 ![image-20250712085956491](esd-latchup/image-20250712085956491.png)
 
-STI bound diodes typically have *lower* capacitance 
+STI bound diodes typically have ***lower** capacitance* 
 
 > M. Simicic, G. Hellings, S. -H. Chen, N. Horiguchi and D. Linten, "ESD diodes with Si/SiGe superlattice I/O finFET architecture in a vertically stacked horizontal nanowire technology," 2018 48th European Solid-State Device Research Conference (ESSDERC), Dresden, Germany, 2018
 >
@@ -306,11 +322,21 @@ DC leakage current data combined with the I-V data provides electrical indicatio
 
 ![img](esd-latchup/tlp-blog8.png)
 
-###  BJT of common-base mode
+###  BJT
 
 ![image-20250726102945232](esd-latchup/image-20250726102945232.png)
 
 ![image-20250726103744211](esd-latchup/image-20250726103744211.png)
+
+---
+
+![image-20250729215703772](esd-latchup/image-20250729215703772.png)
+
+![image-20250729220237239](esd-latchup/image-20250729220237239.png)
+
+
+
+
 
 ### GGNMOS
 
@@ -330,7 +356,25 @@ Influence of the pulse rise time on ggNMOS. (left side) A fast ESD pulse can cou
 
 ![image-20240723213214708](esd-latchup/image-20240723213214708.png)
 
+---
 
+![image-20250729230619882](esd-latchup/image-20250729230619882.png)
+
+![image-20250729230837254](esd-latchup/image-20250729230837254.png)
+
+---
+
+> [[https://picture.iczhiku.com/weixin/message1588643699565.html](https://picture.iczhiku.com/weixin/message1588643699565.html)]
+
+一般都是把Gate/Source/Bulk短接在一起，把Drain结在I/O端承受ESD的浪涌(surge)电压，NMOS称之为GGNMOS (Gate-Grounded NMOS)PMOS称之为GDPMOS (Gate-to-Drain PMOS)。以NMOS为例，原理都是Gate关闭状态，Source/Bulk的PN结本来是短接0偏的，当I/O端有大电压时，则Drain/Bulk PN结雪崩击穿，瞬间bulk有大电流与衬底电阻形成压差导致Bulk/Source的PN正偏，所以这个MOS的寄生横向NPN管进入放大区(发射结正偏,集电结反偏)，所以呈现特性，起到保护作用。PMOS同理推导。 
+
+![img](esd-latchup/weixin158864369956512.png)
+
+Trigger电压/Hold电压: Trigger电压当然就是之前将的的第一个拐点(Knee-point)，寄生BJT的击穿电压，而且要介于BVCEO与BVCBO之间。而Hold电压就是要维持持续ON，但是又不能进入栅锁(Latch-up)状态，否则就进入二次击穿(热击穿)而损坏了。还有个概念就是二次击穿电流，就是进入Latch-up之后I^2*R热量骤增导致硅融化了，而这个就是要限流，可以通过控制W/L，或者增加一个限流高阻， 最简单最常用的方法是拉大Drain的距离/拉大SAB的距离(ESD rule的普遍做法)。
+
+
+
+> PN结的击穿分两种，分别是**电击穿**和**热击穿**，**电击穿**指的是**雪崩击穿, Avalanche Breakdown (低浓度)**和**齐纳击穿(高浓度)**，而这个电击穿主要是载流子碰撞电离产生新的电子-空穴对(electron-hole)，所以它是可**恢复**的。但是**热击穿**是**不可恢复**的，因为热量聚集导致硅(Si)被熔融烧毁了。所以我们需要控制在导通的瞬间控制电流，一般会在保护二极管再串联一个高电阻，
 
 ### GCNMOS
 
@@ -487,9 +531,15 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 
 
+## EOS
+
+> [[https://picture.iczhiku.com/weixin/message1640668908028.html](https://picture.iczhiku.com/weixin/message1640668908028.html)]
+
+![图片](esd-latchup/weixin16406689080288.png)
 
 
 
+尽管通常ESD保护的设计并非旨在防止EOS事件，但根据特定的应用和操作，上述器件的ESD保护的IC 设计风格确实可以影响EOS损坏导致的故障率。环境。图2说明了两个不同的骤回设备，其中设备1与设备2的设计相比相对安全。设备2的EOS风险增加是由于V Hold参数低于最大允许VDD。
 
 
 

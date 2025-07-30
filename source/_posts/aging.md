@@ -176,7 +176,7 @@ HCI model can reproduce the saturation effect if stress time is long enough
 
 ## TDDB
 
-TDDB effect is also related to oxide traps. In general, TDDB refers to the loss of isolating properties of a dielectric layer. If this dielectric layer is the gate oxide, TDDB will initially lead to an increase in the gate tunnelling current.
+Time-Dependent Dielectric Breakdown (**TDDB**) effect is also related to oxide traps. In general, TDDB refers to the loss of isolating properties of a dielectric layer. If this dielectric layer is the gate oxide, TDDB will initially lead to an increase in the gate tunnelling current.
 
 This soft breakdown can already lead to a parametric degradation. After a long accumulation period, TDDB leads to a catastrophic reduction of the channel to gate insulation and thus a functional failure of the transistor.
 
@@ -191,6 +191,9 @@ This soft breakdown can already lead to a parametric degradation. After a long a
 ![img](aging/slide_34.jpg)
 
 
+> M. A. Alam, ECE 695A Reliability Physics of Nanotransistors [[link](https://nanohub.org/groups/ece695alam)], [[https://nanohub.org/resources/17208/download/2013.03.01-ECE695A-L21.pdf](https://nanohub.org/resources/17208/download/2013.03.01-ECE695A-L21.pdf)]
+>
+> K. Yang, R. Zhang, T. Liu, D. -H. Kim and L. Milor, "Optimal Accelerated Test Regions for Time- Dependent Dielectric Breakdown Lifetime Parameters Estimation in FinFET Technology," 2018 Conference on Design of Circuits and Integrated Systems (DCIS), Lyon, France, 2018 [[https://par.nsf.gov/servlets/purl/10104486](https://par.nsf.gov/servlets/purl/10104486)]
 
 ## waveform-dependent nature  
 
@@ -320,3 +323,5 @@ Karimi, Naghmeh, Thorben Moos and Amir Moradi. “Exploring the Effect of Device
 Self-Heating Issues Spread [https://semiengineering.com/self-heating-issues-spread/](https://semiengineering.com/self-heating-issues-spread/)
 
 Y. Zhao and Y. Qu, "Impact of Self-Heating Effect on Transistor Characterization and Reliability Issues in Sub-10 nm Technology Nodes," in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836, 2019, doi: 10.1109/JEDS.2019.2911085.
+
+Phillip Allen. Reliability of Analog Circuits [[https://aicdesign.org/wp-content/uploads/2021/04/Reliability_Theory210224-1.pdf](https://aicdesign.org/wp-content/uploads/2021/04/Reliability_Theory210224-1.pdf)]

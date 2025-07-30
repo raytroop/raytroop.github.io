@@ -604,3 +604,5 @@ Shih-Hung Chen. CICC 2019. ES2-4 "ESD Challenges in Advanced FinFET & GAA Nanowi
 Y. Li, M. Miao and R. Gauthier, "ESD Protection Design Overview in Advanced SOI and Bulk FinFET Technologies," *2020 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2020
 
 S. Kim *et al*., "Technology Scaling of ESD Devices in State of the Art FinFET Technologies," *2020 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2020
+
+Jordan Davis, Samsung Electronics. Full-Chip CDM Analysis: Is Static Simulation Enough? [[https://www.synopsys.com/content/dam/synopsys/implementation&signoff/electrical-layout-verification-documents/esd-workshop-2021-pres.pdf](https://www.synopsys.com/content/dam/synopsys/implementation&signoff/electrical-layout-verification-documents/esd-workshop-2021-pres.pdf)]

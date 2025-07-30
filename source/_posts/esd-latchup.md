@@ -4,8 +4,19 @@ date: 2022-06-09 23:13:59
 tags:
 categories:
 - analog
-mathjax: true
 ---
+
+## Charged Device Model (CDM)
+
+
+
+*TODO* &#128197;
+
+
+
+> Jordan Davis, Samsung Electronics. Full-Chip CDM Analysis: Is Static Simulation Enough? [[https://www.synopsys.com/content/dam/synopsys/implementation&signoff/electrical-layout-verification-documents/esd-workshop-2021-pres.pdf](https://www.synopsys.com/content/dam/synopsys/implementation&signoff/electrical-layout-verification-documents/esd-workshop-2021-pres.pdf)]
+
+
 
 ## PERC
 
@@ -363,7 +374,7 @@ DC leakage current data combined with the I-V data provides electrical indicatio
 
 
 
-### GGNMOS
+### Grounded-gate NMOS (ggNMOS)
 
 > [[https://monthly-pulse.com/2022/02/02/time-to-say-farewell-to-the-snapback-ggnmos-for-esd-protection/](https://monthly-pulse.com/2022/02/02/time-to-say-farewell-to-the-snapback-ggnmos-for-esd-protection/)]
 >
@@ -401,9 +412,11 @@ Trigger电压/Hold电压: Trigger电压当然就是之前将的的第一个拐�
 
 > PN结的击穿分两种，分别是**电击穿**和**热击穿**，**电击穿**指的是**雪崩击穿, Avalanche Breakdown (低浓度)**和**齐纳击穿(高浓度)**，而这个电击穿主要是载流子碰撞电离产生新的电子-空穴对(electron-hole)，所以它是可**恢复**的。但是**热击穿**是**不可恢复**的，因为热量聚集导致硅(Si)被熔融烧毁了。所以我们需要控制在导通的瞬间控制电流，一般会在保护二极管再串联一个高电阻，
 
-### GCNMOS
+### Gate-coupled MOSFET (gcMOS) 
 
 > Ming-Dou Ker, Chung-Yu Wu, Tao Cheng and Hun-Hsien Chang, "Capacitor-couple ESD protection circuit for deep-submicron low-voltage CMOS ASIC," in *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 4, no. 3, pp. 307-321, Sept. 1996 [[https://ir.lib.nycu.edu.tw/bitstream/11536/1053/1/A1996VE01800002.pdf](https://ir.lib.nycu.edu.tw/bitstream/11536/1053/1/A1996VE01800002.pdf)]
+
+Gate-coupled MOSFET (**gcMOS**) was proposed to effectively ***reduce*** the $V_\text{t1}$
 
 ![image-20250726111621772](esd-latchup/image-20250726111621772.png)
 
@@ -415,9 +428,11 @@ Trigger电压/Hold电压: Trigger电压当然就是之前将的的第一个拐�
 
 ![image-20241124161901252](esd-latchup/image-20241124161901252.png)
 
-> resistance between gate and source that designers typically use to reduce the Vt1 trigger voltage of a ggNMOS ESD protection
 
 
+---
+
+![image-20250730194612367](esd-latchup/image-20250730194612367.png)
 
 
 
@@ -606,4 +621,3 @@ Y. Li, M. Miao and R. Gauthier, "ESD Protection Design Overview in Advanced SOI 
 
 S. Kim *et al*., "Technology Scaling of ESD Devices in State of the Art FinFET Technologies," *2020 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2020
 
-Jordan Davis, Samsung Electronics. Full-Chip CDM Analysis: Is Static Simulation Enough? [[https://www.synopsys.com/content/dam/synopsys/implementation&signoff/electrical-layout-verification-documents/esd-workshop-2021-pres.pdf](https://www.synopsys.com/content/dam/synopsys/implementation&signoff/electrical-layout-verification-documents/esd-workshop-2021-pres.pdf)]

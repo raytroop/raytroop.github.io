@@ -99,8 +99,13 @@ to *isolate different regions* of the IC, minimizing unwanted electrical interac
 ![image-20250615104009056](esd-latchup/image-20250615104009056.png)
 
 
+## Diode in ESD Protection
 
+A diode can operate in both forward and reverse modes for ESD protection.
 
+$R_{ON}$ for a *forward-biased diode* is ***lower*** than that for a *reverse-biased diode*
+
+One major disadvantage of a forward diode-string for ESD protection is that the leakage current (Ileak) may be enlarged due to the Darlington effect in the diode-string
 
 ## Silicon Controlled Rectifiers (SCR)
 
@@ -162,7 +167,26 @@ To turn the thyristor on, a positive voltage pulse is applied to the gate (G) te
 
 
 
-## Secondary protection
+## Two-Stage ESD Protection
+
+two-stage primary–secondary ESD protection
+
+a primary ESD protection structure (ESD1), a secondary ESD protection unit (ESD2), and an isolation resistor ($R$)
+
+> The desired specs for **ESD2** is **low $V_\text{t1}$** and **short $t_1$**, while that for **ESD1** include **low $R_{ON}$**, **low $V_\text{h}$** and **high $I_\text{t2}$**
+
+- The primary ESD1 structure is typically optimized for high ESD protection level, which however may feature a high ESD $V_\text{t1}$, not suitable for low-voltage (LV) ICs
+
+- The secondary ESD2 unit serves as a trigger-assisting device that features a lower ESD $V_\text{t1}$ and fast ESD triggering, which is typically weak in handling large ESD discharge currents
+
+> The isolation $R$ has another role, which is to prevent an ESD pulse from getting into IC core (i.e., stressing the input device) directly, hence
+avoid possible *CMOS gate breakdown*
+>
+> $R$ involves a design trade-off too: large enough for fast voltage build up, but not too large to avoid adverse impact on signal propagation
+
+The two-stage ESD protection method is re-gaining attention for *CDM ESD* protection because it can **handle large ESD surges without overheating**, while preventing CMOS gate breakdown due to the isolation R (i.e., no direct zapping
+on the input gate)
+
 
 ![img](esd-latchup/esd2ndprotect.png.jpg)
 

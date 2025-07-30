@@ -15,13 +15,15 @@ mathjax: true
 
 
 
-## Reference Buffer
+## Reference Ripple
 
 *TODO* &#128197;
 
 
 
 > C-H Chan (U. of Macau) "Extreme SAR ADCs - Exploring New Frontiers" Online Course (2024) : Reference Buffer in SAR ADC [[https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn](https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn)]
+>
+> C. Li, C. -H. Chan, Y. Zhu and R. P. Martins, "Analysis of Reference Error in High-Speed SAR ADCs With Capacitive DAC," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 66, no. 1, pp. 82-93, Jan. 2019 [[https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf)]
 
 
 

@@ -4,6 +4,7 @@ date: 2022-06-09 23:13:59
 tags:
 categories:
 - analog
+mathjax: true
 ---
 
 ## PERC

@@ -9,12 +9,6 @@ mathjax: true
 
 
 
-![image-20241003132122679](sar/image-20241003132122679.png)
-
----
-
-
-
 ## Reference Ripple
 
 *TODO* &#128197;

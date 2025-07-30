@@ -7,6 +7,10 @@ categories:
 mathjax: true
 ---
 
+![image-20250730172648857](aging/image-20250730172648857.png)
+
+---
+
 
 
 ![image-20231106232135180](aging/image-20231106232135180.png)
@@ -117,11 +121,19 @@ During recovery phase where the gate voltage of pMOS is high and stress is remov
 
 ![image-20230513104654501](aging/image-20230513104654501.png)
 
-![image-20230513105016631](aging/image-20230513105016631.png)
+### PBTI
 
-![image-20230513105100239](aging/image-20230513105100239.png)
+![image-20250730180359480](aging/image-20250730180359480.png)
 
-## HCI
+
+
+
+
+> ![image-20250730180302668](aging/image-20250730180302668.png)
+
+
+
+## Hot Carrier Degradation (HCI)
 
 Short-channel MOSFETs may exprience **high lateral electric fields** if the drain-source voltage is large. while the average velocity of carriers saturate at high fields, the instantaneous velocity and hence the kinetic energy of the carriers continue to increase, especially as they accelerate toward the drain. These are called **hot** carriers.
 
@@ -174,19 +186,29 @@ HCI model can reproduce the saturation effect if stress time is long enough
 
 
 
-## TDDB
+## Gate Oxide Integrity (GOI)
 
-Time-Dependent Dielectric Breakdown (**TDDB**) effect is also related to oxide traps. In general, TDDB refers to the loss of isolating properties of a dielectric layer. If this dielectric layer is the gate oxide, TDDB will initially lead to an increase in the gate tunnelling current.
-
-This soft breakdown can already lead to a parametric degradation. After a long accumulation period, TDDB leads to a catastrophic reduction of the channel to gate insulation and thus a functional failure of the transistor.
+![image-20250730180005931](aging/image-20250730180005931.png)
 
 
 
-![image-20230513105908505](aging/image-20230513105908505.png)
+
+
+## Time dependent dielectric breakdown (TDDB)
+
+![image-20250730175415143](aging/image-20250730175415143.png)
 
 > Scaling drive more concerns in TDDB
 
-![img](aging/slide_33.jpg)
+
+
+
+
+![image-20250730175201502](aging/image-20250730175201502.png)
+
+
+
+---
 
 ![img](aging/slide_34.jpg)
 
@@ -194,6 +216,8 @@ This soft breakdown can already lead to a parametric degradation. After a long a
 > M. A. Alam, ECE 695A Reliability Physics of Nanotransistors [[link](https://nanohub.org/groups/ece695alam)], [[https://nanohub.org/resources/17208/download/2013.03.01-ECE695A-L21.pdf](https://nanohub.org/resources/17208/download/2013.03.01-ECE695A-L21.pdf)]
 >
 > K. Yang, R. Zhang, T. Liu, D. -H. Kim and L. Milor, "Optimal Accelerated Test Regions for Time- Dependent Dielectric Breakdown Lifetime Parameters Estimation in FinFET Technology," 2018 Conference on Design of Circuits and Integrated Systems (DCIS), Lyon, France, 2018 [[https://par.nsf.gov/servlets/purl/10104486](https://par.nsf.gov/servlets/purl/10104486)]
+
+
 
 ## waveform-dependent nature  
 
@@ -275,6 +299,12 @@ BTI recovery effect **NOT** included for N7
 
 ## reference
 
+Phillip Allen. Reliability of Analog Circuits [[https://aicdesign.org/wp-content/uploads/2021/04/Reliability_Theory210224-1.pdf](https://aicdesign.org/wp-content/uploads/2021/04/Reliability_Theory210224-1.pdf)]
+
+M. A. Alam. ECE 695A Reliability Physics of Nanotransistors [[https://nanohub.org/groups/ece695alam](https://nanohub.org/groups/ece695alam)]
+
+---
+
 Tanya Nigam and Andreas Kerber. Global Foundaries. CICC2014 Session 15 - Challenges for Analog Nanoscale Technologies: *Reliability challenges and modeling of HK MG Technologies*
 
 Spectre Tech Tips: Device Aging? Yes, even Silicon wears out - Analog/Custom Design (Analog/Custom design) - Cadence Blogs - Cadence Community [https://shar.es/afd31p](https://shar.es/afd31p)
@@ -324,4 +354,3 @@ Self-Heating Issues Spread [https://semiengineering.com/self-heating-issues-spre
 
 Y. Zhao and Y. Qu, "Impact of Self-Heating Effect on Transistor Characterization and Reliability Issues in Sub-10 nm Technology Nodes," in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836, 2019, doi: 10.1109/JEDS.2019.2911085.
 
-Phillip Allen. Reliability of Analog Circuits [[https://aicdesign.org/wp-content/uploads/2021/04/Reliability_Theory210224-1.pdf](https://aicdesign.org/wp-content/uploads/2021/04/Reliability_Theory210224-1.pdf)]

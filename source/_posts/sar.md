@@ -13,6 +13,11 @@ mathjax: true
 
 *TODO* &#128197;
 
+### sample-by-sample ripple
+
+> 3rd harmonic
+
+![sample2sample-gain-distortion.drawio](sar/sample2sample-gain-distortion.drawio.svg)
 
 
 > C-H Chan (U. of Macau) "Extreme SAR ADCs - Exploring New Frontiers" Online Course (2024) : Reference Buffer in SAR ADC [[https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn](https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn)]

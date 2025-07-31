@@ -585,6 +585,8 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 ## Reference
 
+温德通. CMOS集成电路闩锁效应. 机械工业出版社, 2020
+
 Introduction to Transmission Line Pulse (TLP), URL: [https://tools.thermofisher.com/content/sfs/brochures/TLP%20Presentation%20May%202009.pdf](https://tools.thermofisher.com/content/sfs/brochures/TLP%20Presentation%20May%202009.pdf)
 
 VF-TLP and CDM differences, URL: [https://www.grundtech.com/app-note-vf-tlp-cdm-differences](https://www.grundtech.com/app-note-vf-tlp-cdm-differences)

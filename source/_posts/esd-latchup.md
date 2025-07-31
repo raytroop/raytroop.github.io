@@ -585,7 +585,11 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 ## Reference
 
+Wang, Albert. *Practical ESD Protection Design*. John Wiley & Sons, 2021.
+
 温德通. CMOS集成电路闩锁效应. 机械工业出版社, 2020
+
+---
 
 Introduction to Transmission Line Pulse (TLP), URL: [https://tools.thermofisher.com/content/sfs/brochures/TLP%20Presentation%20May%202009.pdf](https://tools.thermofisher.com/content/sfs/brochures/TLP%20Presentation%20May%202009.pdf)
 
@@ -604,8 +608,6 @@ Charged Device Model (CDM) Qualification Issues - Expanded [[https://www.jedec.o
 ---
 
 Wang, Albert ZH. *On-chip ESD protection for integrated circuits: an IC design perspective*. Vol. 663. Springer Science & Business Media, 2002.
-
-Wang, Albert. *Practical ESD Protection Design*. John Wiley & Sons, 2021.
 
 Ker, Ming-Dou, and Sheng-Fu Hsu. *Transient-induced latchup in CMOS integrated circuits*. John Wiley & Sons, 2009.  [[https://picture.iczhiku.com/resource/eetop/wyiGjQaHOgrYFcxB.pdf](https://picture.iczhiku.com/resource/eetop/wyiGjQaHOgrYFcxB.pdf)]
 

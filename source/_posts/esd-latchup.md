@@ -583,6 +583,23 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 
 
+
+
+## CMOS集成电路闩锁效应 - 摘录
+
+闩锁效应是以体CMOS工艺为基础的集成电路特有的现象，无论是一般的常规体CMOS工艺集成电路，还是从CMOS工艺衍生出来的BiCMO、BCD和HV-CMOS等，都会发生闩锁效应。
+
+![image-20250731221753812](esd-latchup/image-20250731221753812.png)
+
+
+
+![image-20250731222149977](esd-latchup/image-20250731222149977.png)
+
+- 降低寄生BJT的放大系数
+- 降低衬底等效电阻
+
+
+
 ## Reference
 
 Wang, Albert. *Practical ESD Protection Design*. John Wiley & Sons, 2021.

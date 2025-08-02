@@ -39,6 +39,78 @@ mathjax: true
 
 
 
+### $\Pi$-Capacitor
+
+
+
+![pi_Cap.drawio](precision/pi_Cap.drawio.svg)
+
+$$\begin{align}
+(V_a-V_{a0})C_0 + (\overline{V_a - V_b} - \overline{V_{a0} - V_{b0}})C_1 &= \Delta Q_a \\
+(V_b-V_{b0})C_0 + (\overline{V_b - V_a} - \overline{V_{b0} - V_{a0}})C_1 &= \Delta Q_b
+\end{align}$$
+
+therefore we obtain
+$$\begin{align}
+V_a + V_b &= \frac{\Delta Q_a + \Delta Q_b}{C_0} + V_{a0} + V_{b0} \\
+V_a - V_b &= \frac{\Delta Q_a - \Delta Q_b}{C_0+2C_1} + V_{a0} - V_{b0}
+\end{align}$$
+Then
+$$\begin{align}
+V_a &= \frac{\Delta Q_a(C_0+C_1)+\Delta Q_b C_1}{C_0(C_0+2C_1)} + V_{a0} \\
+V_b &= \frac{\Delta Q_aC_1+\Delta Q_b (C_0+C_1)}{C_0(C_0+2C_1)} + V_{b0}
+\end{align}$$
+
+rearrange the above equation
+$$\begin{align}
+V_a &= \frac{\Delta Q_a}{C_0} + \frac{\Delta Q_b-\Delta Q_a}{C_0(\frac{C_0}{C_1}+2)} +  V_{a0} \\
+V_b &= \frac{\Delta Q_b}{C_0} + \frac{\Delta Q_a-\Delta Q_b}{C_0(\frac{C_0}{C_1}+2)} + V_{b0}
+\end{align}$$
+
+The difference between $V_a$  and $V_b$
+$$
+V_a - V_b = \frac{I_a-I_b}{C_0+2C_1}t + V_{a0} - V_{b0}
+$$
+
+> $C_1$ **save total capacitor area** while retaining the same $V_a - V_b$ due to $\Delta I_{a,b}$, in comparison to $C_0$
+
+
+
+---
+
+![image-20250802170659120](precision/image-20250802170659120.png)
+
+at autozero phase
+$$\begin{align}
+I_{a0} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{a0} - V_{TH})^2 \\
+I_{Rb} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{b0} - V_{TH})^2
+\end{align}$$
+
+then
+$$
+\Delta I_0 = \frac{1}{2}(V_{a0} - V_{b0})(g_{m,a0}+g_{m,b0})
+$$
+where $g_{m,a0}+g_{m,b0} = \mu C_{OX}\frac{W}{L}(V_{a0}+V_{b0} - 2V_{TH})$
+
+
+
+at comparison phase
+$$\begin{align}
+I_{a1} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{a1} - V_{TH})^2 \\
+I_{b1} &= \frac{1}{2}\mu C_{OX}\frac{W}{L}(V_{b1} - V_{TH})^2
+\end{align}$$
+
+then
+$$
+\Delta I_1 = \frac{1}{2}(V_{a1} - V_{b1})(g_{m,a1}+g_{m,b1})
+$$
+That is, $g_{m,a1}+g_{m,b1} = \mu C_{OX}\frac{W}{L}(V_{a1}+V_{b1} - 2V_{TH})$
+
+
+
+To minimize the difference between $\Delta I_1$ and $\Delta I_0$, the drift of  both differential and common mode between $V_a$ and $V_b$ shall be alleviated
+
+
 
 ## Chopping
 
@@ -184,10 +256,57 @@ $$\begin{align}
 
 > On-chip analog filter is not good enough due to limited cutoff frequency
 
+![rippleCancel.drawio](precision/rippleCancel.drawio.svg)
 
-*TODO* &#128197;
+***phase 0:***
+
+$$\begin{align}
+V_{os}[n] &= V_{os}[n-1] - \frac{\Delta I_1}{g_m} \\
+V_{os}[n]  &=  I_\Delta[n] R_E \\
+\beta I_\Delta &= I_1[n] + I_2[n-1]
+\end{align}$$
+where $I_\Delta$ is the variation of $I_{e1}+I_{e2}$ due to $V_{os}$ and $R_E = \frac{R_1R_2}{R_1+2R_2}$
 
 
+obtain
+$$\begin{align}
+\Delta I_1 &= G\cdot V_{os}[n-1] - K\cdot I_1[n-1] - K\cdot I_2[n-1] \\
+I_1[n] &= G\cdot V_{os}[n-1] + (1-K)\cdot I_1[n-1] - K\cdot I_2[n-1] \\
+V_{os}[n] &= K\cdot V_{os}[n-1] + R\cdot I_1[n-1] + R\cdot I_2[n-1]\\
+\end{align}$$
+
+where $G=g_m\frac{\beta}{g_m R_E + \beta}$, $R=R_E\frac{1}{g_m R_E + \beta}$ and $K=\frac{g_mR_E}{g_m R_E + \beta}$
+
+and
+$$
+V_{os}[n] = (2K-1)\cdot V_{os}[n-1] = (1-\frac{2\beta}{g_mR_E+\beta})\cdot V_{os}[n-1]
+$$
+
+***phase 1:***
+
+$$\begin{align}
+V_{os}[n] &= V_{os}[n-1] - \frac{-\Delta I_2}{g_m} \\
+V_{os}[n]  &=  -I_\Delta[n] R_E \\
+\beta I_\Delta &= I_1[n] + I_2[n-1]
+\end{align}$$
+
+obtain
+$$\begin{align}
+\Delta I_2 &= -G\cdot V_{os}[n-1] - K\cdot I_1[n-1] - K\cdot I_2[n-1] \\
+I_1[n] &= -G\cdot V_{os}[n-1] -K\cdot I_1[n-1] + (1-K)\cdot I_2[n-1] \\
+V_{os}[n] &= K\cdot V_{os}[n-1] - R\cdot I_1[n-1] - R\cdot I_2[n-1]\\
+\end{align}$$
+
+similaly
+$$
+V_{os}[n] = (1-\frac{2\beta}{g_mR_E+\beta})\cdot V_{os}[n-1]
+$$
+
+
+That is, for either phase
+$$
+V_{os}[n] = (1-\frac{2\beta}{g_mR_E+\beta})\cdot V_{os}[n-1]
+$$
 
 
 
@@ -227,4 +346,15 @@ Qinwen Fan, Evolution of precision amplifiers
 
 Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in CMOS [[https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf](https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf)]
 
-Axel Thomsen, Silicon Laboratories  ISSCC2012Visuals-T8: "Managing Offset and Flicker Noise" [[slides](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T8.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/T8%20Transcription.pdf)]
+Axel Thomsen, Silicon Laboratories  ISSCC2012 T8: "Managing Offset and Flicker Noise" [[slides](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T8.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/T8%20Transcription.pdf)]
+
+---
+
+CC Chen. Why Dynamic Offset or Mismatch Cancellation with Auto-zeroing Technique? [[https://youtu.be/PQJwzd1tyO0](https://youtu.be/PQJwzd1tyO0)]
+
+—. Why Dynamic Offset or Mismatch Cancellation with Chopping Technique? [[https://youtu.be/x5FS8jEKu_g](https://youtu.be/x5FS8jEKu_g)]
+
+—. Why Design Challenge in Chopping Offset & Flicker Noise? [[https://youtu.be/ydjca2KrXgc](https://youtu.be/ydjca2KrXgc)]
+
+—. Why Needs A Low Ripple after Chopping Amplifier for A Very Low DC Offset & Flicker Noise? [[https://youtu.be/y7TzJtHE7IA](https://youtu.be/y7TzJtHE7IA)]
+

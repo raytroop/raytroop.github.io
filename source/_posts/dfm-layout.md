@@ -7,6 +7,26 @@ categories:
 mathjax: true
 ---
 
+
+
+## Wafer Acceptance Test (WAT)
+
+**Wafer acceptance testing (WAT)** also known as **Process Control Monitoring (PCM)**
+
+![image-20250802091601281](dfm-layout/image-20250802091601281.png)
+
+---
+
+![image-20250802101539555](dfm-layout/image-20250802101539555.png)
+
+
+
+
+
+> 温德通. 集成电路制造工艺与工程应用. 机械工业出版社 2018
+
+
+
 ## Short Lg Stackgate
 
 > TSMC. VLSI2025 JFS2-1: Analog Cells DTCO (**D**esign and **T**echnology **C**o-**O**ptimization) and Their Impact on Advanced Node CMOS Analog/MixedSignal Circuits

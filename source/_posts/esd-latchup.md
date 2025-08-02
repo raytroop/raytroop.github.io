@@ -4,6 +4,7 @@ date: 2022-06-09 23:13:59
 tags:
 categories:
 - analog
+mathjax: true
 ---
 
 ## Charged Device Model (CDM)
@@ -54,7 +55,17 @@ categories:
 
 > This can happen when a ***parasitic thyristor***, which is essentially ***a pair of interconnected transistors***, is triggered into a latched state, leading to sustained current flow and potential device failure.
 
+### Necessary Conditions
+
 ![image-20250615111234769](esd-latchup/image-20250615111234769.png)
+
+![image-20250802083418387](esd-latchup/image-20250802083418387.png)
+
+
+
+### Trigger Modes
+
+![image-20250802083545596](esd-latchup/image-20250802083545596.png)
 
 
 
@@ -412,11 +423,19 @@ Trigger电压/Hold电压: Trigger电压当然就是之前将的的第一个拐�
 
 > PN结的击穿分两种，分别是**电击穿**和**热击穿**，**电击穿**指的是**雪崩击穿, Avalanche Breakdown (低浓度)**和**齐纳击穿(高浓度)**，而这个电击穿主要是载流子碰撞电离产生新的电子-空穴对(electron-hole)，所以它是可**恢复**的。但是**热击穿**是**不可恢复**的，因为热量聚集导致硅(Si)被熔融烧毁了。所以我们需要控制在导通的瞬间控制电流，一般会在保护二极管再串联一个高电阻，
 
-### Gate-coupled MOSFET (gcMOS) 
+
+
+---
+
+![img](esd-latchup/2995c1dfc64547cc8da40956a27a7abd.jpg)
+
+
+
+### Gate-coupled NMOS (gcNMOS) 
 
 > Ming-Dou Ker, Chung-Yu Wu, Tao Cheng and Hun-Hsien Chang, "Capacitor-couple ESD protection circuit for deep-submicron low-voltage CMOS ASIC," in *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 4, no. 3, pp. 307-321, Sept. 1996 [[https://ir.lib.nycu.edu.tw/bitstream/11536/1053/1/A1996VE01800002.pdf](https://ir.lib.nycu.edu.tw/bitstream/11536/1053/1/A1996VE01800002.pdf)]
 
-Gate-coupled MOSFET (**gcMOS**) was proposed to effectively ***reduce*** the $V_\text{t1}$
+Gate-coupled NMOS (**gcNMOS**) was proposed to effectively ***reduce*** the $V_\text{t1}$
 
 ![image-20250726111621772](esd-latchup/image-20250726111621772.png)
 
@@ -445,6 +464,10 @@ Gate-coupled MOSFET (**gcMOS**) was proposed to effectively ***reduce*** the $V_
 ![image-20250726104632417](esd-latchup/image-20250726104632417.png)
 
 > [[https://www.sharecourse.net/sharecourse/upload/course/180/c574580760de44d2c6fb66d8be4c6d4a.pdf](https://www.sharecourse.net/sharecourse/upload/course/180/c574580760de44d2c6fb66d8be4c6d4a.pdf)]
+
+---
+
+![img](esd-latchup/bb2057e71e5442fe840b78d660ceeaf2.jpg)
 
 
 
@@ -587,6 +610,8 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 ## CMOS集成电路闩锁效应 - 摘录
 
+### CMOS闩锁效应的发展
+
 闩锁效应是以体CMOS工艺为基础的集成电路特有的现象，无论是一般的常规体CMOS工艺集成电路，还是从CMOS工艺衍生出来的BiCMO、BCD和HV-CMOS等，都会发生闩锁效应。
 
 ![image-20250731221753812](esd-latchup/image-20250731221753812.png)
@@ -597,6 +622,40 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 - 降低寄生BJT的放大系数
 - 降低衬底等效电阻
+
+
+
+### 双极型晶体管
+
+双极型晶体管的四种工作模式下集电结和发射结外加偏置电压
+
+![image-20250802080156521](esd-latchup/image-20250802080156521.png)
+
+1）正向有源：双极型晶体管的发射结正偏和集电结反偏。工作在正向有源区的双极型晶体管具有电流放大功能，它的放大系数是$\beta$，$\beta$是集电极电流与基极电流的比，$\beta$是一个非常关键的参数，通常双极型晶体管设计和制造工艺参数的变动都是为了获得足够大的$\beta$。正向有源是一种常用的工作区
+
+2）饱和：双极型晶体管的发射结和集电结都正偏，它相当于两个并联的二极管。
+
+3）倒置：双极型晶体管发射结反偏和集电结正偏。与正向有源相比，它们的角色倒置了。工作在倒置区的双极型晶体管也具有电流放大功能，不过其放大系数会比正向有源小几倍。实际应用中也很少会把双极型晶体管偏置在倒置区。
+
+4）截止：双极型晶体管的发射结和集电结都反偏，其漏电流非常微弱，就像开路的开关
+
+
+
+根据双极型晶体管的电极被输入和输出共用的情况，可以把双极型晶体管分为三种电路连接方式
+
+![image-20250802080348332](esd-latchup/image-20250802080348332.png)
+
+### 双极型晶体管的击穿电压
+
+双极型晶体管两个PN结的***反向击穿电压***有以下三种：
+
+第一种是发射极*开路*时的**BVCBO**； 第二种是集电极*开路*时的**BVEBO**； 第三种是基极*开路*时的**BVCEO**。
+
+![image-20250802081425147](esd-latchup/image-20250802081425147.png)
+
+这三个击穿电压的关系如下：BVCBO＞BVCEO＞BVEBO
+
+
 
 
 

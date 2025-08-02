@@ -657,6 +657,17 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 
 
+### NPN闩锁效应
+
+在CMOS集成电路中，不仅寄生的PNPN结构会发生闩锁效应，单个NMOS自身寄生NPN也会发生闩锁效应
+
+![image-20250802110535053](esd-latchup/image-20250802110535053.png)
+
+与PNPN类似，从寄生NPN I-V曲线可以看出，有两种方式可以使寄生NPN工作状态进入BC段的闩锁态：
+
+- 第一种是出现瞬态激励电压大于等于Vt1，从而产生雪崩击穿电流，使寄生NPN进入闩锁态，这种方式称为电压触发；
+- 第二种是出现瞬态激励电流，该电流大于等于B点对应的电流Ih，使寄生NPN进入闩锁态，这种方式称为电流触发。
+
 
 
 ## Reference

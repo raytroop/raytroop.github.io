@@ -258,55 +258,132 @@ $$\begin{align}
 
 ![rippleCancel.drawio](precision/rippleCancel.drawio.svg)
 
-***phase 0:***
-
-$$\begin{align}
-V_{os}[n] &= V_{os}[n-1] - \frac{\Delta I_1}{g_m} \\
-V_{os}[n]  &=  I_\Delta[n] R_E \\
-\beta I_\Delta &= I_1[n] + I_2[n-1]
-\end{align}$$
-where $I_\Delta$ is the variation of $I_{e1}+I_{e2}$ due to $V_{os}$ and $R_E = \frac{R_1R_2}{R_1+2R_2}$
-
-
-obtain
-$$\begin{align}
-\Delta I_1 &= G\cdot V_{os}[n-1] - K\cdot I_1[n-1] - K\cdot I_2[n-1] \\
-I_1[n] &= G\cdot V_{os}[n-1] + (1-K)\cdot I_1[n-1] - K\cdot I_2[n-1] \\
-V_{os}[n] &= K\cdot V_{os}[n-1] + R\cdot I_1[n-1] + R\cdot I_2[n-1]\\
-\end{align}$$
-
-where $G=g_m\frac{\beta}{g_m R_E + \beta}$, $R=R_E\frac{1}{g_m R_E + \beta}$ and $K=\frac{g_mR_E}{g_m R_E + \beta}$
-
-and
+**at $\Phi_+$ phase**
 $$
-V_{os}[n] = (2K-1)\cdot V_{os}[n-1] = (1-\frac{2\beta}{g_mR_E+\beta})\cdot V_{os}[n-1]
+\left\{ \begin{array}{cl}
+\Delta V_\text{os}[n] &= \frac{I_l[n]-I_r[n-1]}{G_m}   \\
+\left(I_0+\frac{V_\text{os0}-\Delta V_\text{os}[n]}{R_E}\right)\beta &= I_l[n]+I_r[n-1] 
+\end{array} \right.
+$$
+Then
+$$
+\left\{ \begin{array}{cl}
+I_r[n-1] &= \frac{-G_mR_E-\beta}{2R_E}\cdot \Delta V_\text{os}[n] + \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0   \\
+I_l[n] &= \frac{G_mR_E-\beta}{2R_E}\cdot \Delta V_\text{os}[n] + \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0  
+\end{array} \right.
+$$
+**at $\Phi_-$ phase**
+$$
+\left\{ \begin{array}{cl}
+\Delta V_\text{os}[n] &= \frac{I_l[n-1]-I_r[n]}{G_m}   \\
+\left(I_0+\frac{-V_\text{os0}+\Delta V_\text{os}[n]}{R_E}\right)\beta &= I_l[n-1]+I_r[n] 
+\end{array} \right.
+$$
+Then
+$$
+\left\{ \begin{array}{cl}
+I_r[n] &= \frac{-G_mR_E+\beta}{2R_E}\cdot \Delta V_\text{os}[n] - \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0   \\
+I_l[n-1] &= \frac{G_mR_E+\beta}{2R_E}\cdot \Delta V_\text{os}[n] - \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0  
+\end{array} \right.
+$$
+$\Phi_+ \to \Phi_-$ **state transformation**
+$$
+\left\{ \begin{array}{cl}
+I_r[n-1] &= \frac{-G_mR_E-\beta}{2R_E}\cdot \Delta V_\text{os}[n] + \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0   \\
+I_l[n] &= \frac{G_mR_E-\beta}{2R_E}\cdot \Delta V_\text{os}[n] + \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0 
+\end{array} \right. \to 
+\left\{ \begin{array}{cl}
+I_r[n+1] &= \frac{-G_mR_E+\beta}{2R_E}\cdot \Delta V_\text{os}[n+1] - \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0   \\
+I_l[n] &= \frac{G_mR_E+\beta}{2R_E}\cdot \Delta V_\text{os}[n+1] - \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0  
+\end{array} \right.
+$$
+Two $I_l[n]$ shall be equal, that is
+$$
+\frac{G_mR_E-\beta}{2R_E}\cdot \Delta V_\text{os}[n] + \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0  = \frac{G_mR_E+\beta}{2R_E}\cdot \Delta V_\text{os}[n+1] - \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0
+$$
+Rearrange the above equation
+$$
+\Delta V_\text{os}[n+1] = \frac{G_mR_E-\beta}{G_mR_E+\beta}\Delta V_\text{os}[n] + \frac{2\beta}{G_mR_E+\beta}V_\text{os0}
+$$
+$\Phi_- \to \Phi_+$ **state transformation**
+$$
+\left\{ \begin{array}{cl}
+I_r[n] &= \frac{-G_mR_E+\beta}{2R_E}\cdot \Delta V_\text{os}[n] - \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0   \\
+I_l[n-1] &= \frac{G_mR_E+\beta}{2R_E}\cdot \Delta V_\text{os}[n] - \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0  
+\end{array} \right. \to
+\left\{ \begin{array}{cl}
+I_r[n] &= \frac{-G_mR_E-\beta}{2R_E}\cdot \Delta V_\text{os}[n+1] + \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0   \\
+I_l[n+1] &= \frac{G_mR_E-\beta}{2R_E}\cdot \Delta V_\text{os}[n+1] + \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0  
+\end{array} \right.
+$$
+Two $I_r[n]$ shall be equal, that is
+$$
+\frac{-G_mR_E+\beta}{2R_E}\cdot \Delta V_\text{os}[n] - \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0 = \frac{-G_mR_E-\beta}{2R_E}\cdot \Delta V_\text{os}[n+1] + \frac{\beta}{2R_E}V_\text{os0}+\frac{\beta}{2}I_0 
+$$
+Rearrange the above equation
+$$
+\Delta V_\text{os}[n+1] = \frac{G_mR_E-\beta}{G_mR_E+\beta}\Delta V_\text{os}[n] + \frac{2\beta}{G_mR_E+\beta}V_\text{os0}
 $$
 
-***phase 1:***
 
-$$\begin{align}
-V_{os}[n] &= V_{os}[n-1] - \frac{-\Delta I_2}{g_m} \\
-V_{os}[n]  &=  -I_\Delta[n] R_E \\
-\beta I_\Delta &= I_1[n] + I_2[n-1]
-\end{align}$$
-
-obtain
-$$\begin{align}
-\Delta I_2 &= -G\cdot V_{os}[n-1] - K\cdot I_1[n-1] - K\cdot I_2[n-1] \\
-I_1[n] &= -G\cdot V_{os}[n-1] -K\cdot I_1[n-1] + (1-K)\cdot I_2[n-1] \\
-V_{os}[n] &= K\cdot V_{os}[n-1] - R\cdot I_1[n-1] - R\cdot I_2[n-1]\\
-\end{align}$$
-
-similaly
+***Both State-transition equations are same***
 $$
-V_{os}[n] = (1-\frac{2\beta}{g_mR_E+\beta})\cdot V_{os}[n-1]
+\Delta V_\text{os}[n+1] = \frac{G_mR_E-\beta}{G_mR_E+\beta}\Delta V_\text{os}[n] + \frac{2\beta}{G_mR_E+\beta}V_\text{os0}
+$$
+With geometric progression sum formula
+$$
+\Delta V_\text{os}[n] = \left(\frac{G_mR_E-\beta}{G_mR_E+\beta}\right)^n\cdot \Delta V_\text{os}[0] + \left[1-\left(\frac{G_mR_E-\beta}{G_mR_E+\beta}\right)^n\right]\cdot V_\text{os0}
+$$
+during $n \to \infty$
+$$
+\lim_{n\to \infty} \Delta V_\text{os}[n] = V_\text{os0}
+$$
+As expected
+$$
+\lim_{n\to \infty} V_\text{os}[n] =\lim_{n\to \infty} V_\text{os0}-\Delta V_\text{os}[n] = 0
 $$
 
+---
 
-That is, for either phase
+Assuming that begainning from $\Phi_+$ phase
 $$
-V_{os}[n] = (1-\frac{2\beta}{g_mR_E+\beta})\cdot V_{os}[n-1]
+\left\{ \begin{array}{cl}
+\Delta V_\text{os}[0] &= \frac{I_l[0]-I_r[-1]}{G_m}   \\
+\left(I_0+\frac{V_\text{os0}-\Delta V_\text{os}[0]}{R_E}\right)\beta &= I_l[0]+I_r[-1] 
+\end{array} \right. \overset{\mathcal{I_r[-1]=0}}{\Longrightarrow}  \Delta V_\text{os}[0]=\frac{(I_0R_E+V_\text{os0})\beta}{G_mR_E+\beta}
 $$
+With $I_0=10\mu A$, $R_E=5k \Omega$, $V_\text{os0}=20mV$, $G_m=500\mu S$, $\beta=0.5$
+$$
+\left\{ \begin{array}{cl}
+\Delta V_\text{os}[0] &= 167mV   \\
+\frac{G_mR_E-\beta}{G_mR_E+\beta} &= 0.667
+\end{array} \right.
+$$
+
+
+![image-20250803231213438](precision/image-20250803231213438.png)
+
+```matlab
+DVos0 = 167;  % mV
+Vos0 = 20; % mV
+Rr = 0.667;
+
+n = 1:1:50;
+DVosn_DVos0 = Rr.^n*DVos0;
+DVosn_Vos0 = (1-Rr.^n)*Vos0;
+DVosn = DVosn_DVos0 + DVosn_Vos0;
+
+plot(n, DVosn_DVos0,'--r', LineWidth=2);
+hold on
+plot(n, DVosn_Vos0, '--g', LineWidth=2);
+plot(n, DVosn, 'b', LineWidth=3);
+plot(-5:1:55, ones(1,61)*Vos0, '--k', LineWidth=2)
+
+grid on;
+xlim([-5, 55]);ylim([-5, 120]);
+xlabel('n', FontSize=16); ylabel('mV', FontSize=16);
+legend('$\Delta V_{os}[0]$ decaying','$V_{os0}$ decaying','$\Delta V_{os}[n]$', '$V_{os0}$', 'Interpreter','latex', fontsize=16)
+```
 
 
 

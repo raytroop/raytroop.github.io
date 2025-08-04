@@ -100,9 +100,3 @@ David Johns, "Integrated Circuits for Digital Communications" [[https://www.eecg
 Tai-Haur Kuo "Advanced Analog IC Design for Communications" [[http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html](http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html)]
 
 Chadi Jabbour, Telecom Paristech. ISCAS 2019 T12: Digitally Enhanced Mixed Signal Systems [[https://www.youtube.com/watch?v=rACuCSDm5jQ](https://www.youtube.com/watch?v=rACuCSDm5jQ)]
-
----
-
-Keshab K. Parhi [[http://www.ece.umn.edu/users/parhi/](http://www.ece.umn.edu/users/parhi/)]
-
-Tinoosh Mohsenin. CMPE 691: Digital Signal Processing Hardware Implementation [[https://userpages.cs.umbc.edu/tinoosh/cmpe691/](https://userpages.cs.umbc.edu/tinoosh/cmpe691/)]

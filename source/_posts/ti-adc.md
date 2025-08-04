@@ -7,6 +7,11 @@ categories:
 mathjax: true
 ---
 
+## Multiple Phase Clocking Generation
+
+*TODO* &#128197;
+
+
 ![image-20250611222614434](ti-adc/image-20250611222614434.png)
 
 ## Interleaver

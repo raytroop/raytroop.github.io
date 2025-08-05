@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-## Multiple Phase Clocking Generation
+## Multi-Phase Clock Generation (MPCG)
 
 *TODO* &#128197;
 

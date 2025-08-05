@@ -7,6 +7,32 @@ categories:
 mathjax: true
 ---
 
+## Layout XL
+
+IC61电路新添加器件XL更新（两种方法）
+
+①　重新Layout XL后→Connectivity→Generate→Selected From Source（先去原理图选择新器件再操作）
+
+②　重新Layout XL后→Connectivity→update→Components And Nets→OK
+
+IC61 Net飞线关系
+
+Connectivity→Nets→Show/Hide All Incomplete Nets
+
+IC61加线名
+
+Connectivity→Nets→Assign→F3
+
+Layout XL里面的黄色框框
+已有 1109 次阅读| 2021-9-7 17:25 |系统分类:芯片设计
+
+在使用layout XL的时候，有些器件的连线没有按照生成的对应关系连线，当update connectivity information when design is modifed ON，就会出现很多黄色的框框，在菜单栏里点击Verify->Markers->Delete All即可一键删除。
+
+> [[https://blog.eetop.cn/home.php?mod=space&uid=1542900&do=blog&id=6947553](https://blog.eetop.cn/home.php?mod=space&uid=1542900&do=blog&id=6947553)]
+>
+> [[https://blog.eetop.cn/blog-1768341-6947567.html](https://blog.eetop.cn/blog-1768341-6947567.html)]
+
+
 ## svcvs
 
 *TODO* &#128197;

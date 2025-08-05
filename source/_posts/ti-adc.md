@@ -7,6 +7,26 @@ categories:
 mathjax: true
 ---
 
+## Timing Mismatch Error Calibration
+
+*TODO* &#128197;
+
+
+
+> S. Chen, L. Wang, H. Zhang, R. Murugesu, D. Dunwell, A. Chan Carusone, “All-Digital Calibration of Timing Mismatch Error in Time-Interleaved Analog-to-Digital Converters,” *IEEE Transactions on VLSI Systems*, Sept. 2017. [[PDF](https://www.eecg.utoronto.ca/~tcc/Chen_TVLSI17.pdf), [slides](https://www.eecg.utoronto.ca/~tcc/Wang_ISCAS_SLIDES_2018.pdf)]
+>
+> M. Gu, Y. Tao, Y. Zhong, L. Jie and N. Sun, "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1-10, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
+
+
+
+## Retimer (alignment)
+
+*TODO* &#128197;
+
+
+
+
+
 ## Multi-Phase Clock Generation (MPCG)
 
 *TODO* &#128197;

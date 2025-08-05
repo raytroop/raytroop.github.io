@@ -254,6 +254,8 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 ![image-20240910003805151](random/image-20240910003805151.png)
 
 > [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf)]
+>
+> Frank R. Kschischang. The Wiener-Khinchin Theorem [[https://www.comm.utoronto.ca/~frank/notes/wk.pdf](https://www.comm.utoronto.ca/~frank/notes/wk.pdf)]
 
 ---
 

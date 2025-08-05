@@ -7,6 +7,15 @@ categories:
 mathjax: true
 ---
 
+## ViVA Marker Table
+
+`Window->Assistants->Vert Marker Table`
+
+`Window->Assistants->Horiz Marker Table`
+
+> [[https://community.cadence.com/cadence_blogs_8/b/cic/posts/things-you-didn-t-know-about-virtuoso-delta-markers-in-viva](https://community.cadence.com/cadence_blogs_8/b/cic/posts/things-you-didn-t-know-about-virtuoso-delta-markers-in-viva)]
+
+
 ## Layout XL
 
 IC61电路新添加器件XL更新（两种方法）

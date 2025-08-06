@@ -6,6 +6,12 @@ categories:
 mathjax: true
 ---
 
+Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022
+
+![8way-interleaving-Marvell-ISSCC2022.drawio](paper-reading/8way-interleaving-Marvell-ISSCC2022.drawio.svg)
+
+
+---
 
 
 ISSCC.2024 7.3 A 224Gbs 3pJb 40dB Insertion Loss Transceiver in 3nm FinFET CMOS

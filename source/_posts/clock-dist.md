@@ -9,6 +9,20 @@ mathjax: true
 
 ![image-20220516004008878](clock-dist/image-20220516004008878.png)
 
+## divide-by-1.5 circuit
+
+*TODO* &#128197;
+
+
+## Phase Interpolator
+
+A **phase interpolator (PI)** is normally used as a **phase shifter** (or **phase rotator**) to generate an output clock whose phase is precisely controlled
+
+*TODO* &#128197;
+
+> B. Razavi, "The Design of a Phase Interpolator [The Analog Mind]," IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 4, pp. 6-10, Fall 2023. [[http://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf)]
+
+
 ## Deterministic Jitter
 
 ![image-20220516004058916](clock-dist/image-20220516004058916.png)

@@ -9,6 +9,10 @@ mathjax: true
 
 *TODO* &#128197;
 
+![image-20250807000316790](modeling/image-20250807000316790.png)
+
+---
+
 
 
 

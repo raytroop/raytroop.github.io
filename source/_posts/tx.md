@@ -9,12 +9,14 @@ mathjax: true
 
 ![image-20250607092632549](tx/image-20250607092632549.png)
 
-## 1UI Data Staggering Circuit
+## 1UI Data Staggering
 
 *TODO* &#128197;
 
 
-## 1UI Pulse Generation Circuit
+## 1UI Pulse Generator
+
+> **duty correction** & **delay adjustment** 
 
 *TODO* &#128197;
 

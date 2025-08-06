@@ -7,9 +7,21 @@ categories:
 mathjax: true
 ---
 
-## acmatch
+## ACMatch
 
-*TODO* &#128197;
+ACMatch analysis linearizes the circuit about the DC operating point and computes the ***variations of AC responses*** due to statistical parameters defined in statistics blocks. 
+
+Only mismatch parameters are considered. The analysis skips the process parameters.
+
+![image-20250807005052781](ade/image-20250807005052781.png)
+
+Imag 1-Sigma
+$$
+\sqrt{50.2^2 + 57.9^2} = 76.6
+$$
+
+
+![image-20250807003742519](ade/image-20250807003742519.png)
 
 
 ## ViVA Marker Table
@@ -924,12 +936,11 @@ Calibre Verification User’s Manual
 
 
 
-### reference
 
-Article (20498356) Title: How to vary design variables with statistical distribution to be used with Monte Carlo analysis
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009ErHHEA0)
 
-Spectre Circuit Simulator Reference
+> Article (20498356) Title: How to vary design variables with statistical distribution to be used with Monte Carlo analysis
+>
+> Spectre Circuit Simulator Reference
 
 
 

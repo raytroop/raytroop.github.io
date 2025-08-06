@@ -20,6 +20,15 @@ mathjax: true
 
 *TODO* &#128197;
 
+## DAC Driver SNDR
+
+*TODO* &#128197;
+
+## Eye Linearity vs. RLM
+
+*TODO* &#128197;
+
+> Chaowaroj (Max) Wanotayaroj. Introduction to PAM4 [[https://indico.cern.ch/event/979659/contributions/4127016/attachments/2159338/3642883/PAM4Eval%20-%20Dec2020%20Seminar.pdf](https://indico.cern.ch/event/979659/contributions/4127016/attachments/2159338/3642883/PAM4Eval%20-%20Dec2020%20Seminar.pdf)]
 
 ## CML vs. SST based driver
 

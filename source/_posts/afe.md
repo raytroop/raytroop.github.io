@@ -21,6 +21,55 @@ mathjax: true
 
 
 
+## Noise and Distortion
+
+*TODO* &#128197;
+
+
+
+> Ali Sheikholeslami, University of Toronto,  A-SSCC 2024 Circuit Insights:**FT1 Noise and Distortion** [[link](https://youtu.be/bvsJgHJ19jI?si=4uY_eYLkJ_zvOgz3)]
+
+
+
+## Response Speed in Analog Circuits
+
+> Hyun-Sik Kim, KAIST, A-SSCC 2024 Circuit Insights: **FT3 Accelerating Response Speed in Analog Circuits** [[link](https://youtu.be/Td0aacHQTFo?si=UxgGB49SsZ2uPiVK)]
+
+![image-20250105085449759](afe/image-20250105085449759.png)
+
+---
+
+![image-20250105072433452](afe/image-20250105072433452.png)
+
+### Bandwidth limitation
+
+![image-20250105072748483](afe/image-20250105072748483.png)
+
+![image-20250105073322162](afe/image-20250105073322162.png)
+
+![image-20250105090203938](afe/image-20250105090203938.png)![image-20250105090204188](afe/image-20250105090204188.png)
+
+### slew rate limitation
+
+![image-20250105083039901](afe/image-20250105083039901.png)
+
+Assuming ***linear response***
+$$
+V_o(t) = 1 - e^{-\omega_T t}
+$$
+
+$$
+\frac{dV_o}{dt} = \omega_Te^{-\omega_T t} = \frac{g_m}{C_L}e^{-\omega_T t} = \frac{g_m}{I_B}\cdot \frac{I_B}{C_L}\cdot e^{-\omega_T t} \gt \frac{I_B}{C_L}
+$$
+
+where $\frac{g_m}{I_B} e^{-\omega_T t} \gt 1$ at initial response
+
+Therefore,  initial response speed is dominated by ***SR***, rather than *$G_m$* (or *bandwidth*)
+
+![image-20250105090105095](afe/image-20250105090105095.png)
+
+
+
 ## MOS parasitic Rd&Rs, Cd&Cs
 
 Decrease  the parasitic R&C

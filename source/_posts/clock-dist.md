@@ -7,8 +7,6 @@ categories:
 mathjax: true
 ---
 
-![image-20220516004008878](clock-dist/image-20220516004008878.png)
-
 ## divide-by-1.5 circuit
 
 *TODO* &#128197;
@@ -24,6 +22,10 @@ A **phase interpolator (PI)** is normally used as a **phase shifter** (or **phas
 
 
 ## Deterministic Jitter
+
+![image-20220516004008878](clock-dist/image-20220516004008878.png)
+
+---
 
 ![image-20220516004058916](clock-dist/image-20220516004058916.png)
 

@@ -47,9 +47,13 @@ Layout XL里面的黄色框框
 > [[https://blog.eetop.cn/blog-1768341-6947567.html](https://blog.eetop.cn/blog-1768341-6947567.html)]
 
 
-## svcvs
+## s-Domain Controlled Source
 
-*TODO* &#128197;
+![image-20250806234417728](ade/image-20250806234417728.png)
+
+![image-20250806235058423](ade/image-20250806235058423.png)
+
+
 
 ## Layout XL pointing to new schematic
 

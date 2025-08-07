@@ -56,90 +56,11 @@ mathjax: true
 
 
 
-### LPF gate leakage
-
-![image-20241222192007824](clocking/image-20241222192007824.png)
-
-
-
-For the sake of simplicity, $V_{ctr}$ looks like a rectangular pulse with an amplitude of $I_{CP}R_1$ and a duty ratio of ($I_{leak}/I_{CP}$), whose first coefficient of Fourier series is
-
-![image-20241222200514941](clocking/image-20241222200514941.png)
-
-where $I_\text{leak} \ll I_{CP}$ is assumed
-
-Then, the *peak* frequency deviation $\Delta f$
-$$
-\Delta f = a_1 \cdot K_v = 2I_\text{leak}R_1 K_v
-$$
-using narrowband FM approximation, we have 
-$$
-P_\text{spur} = 20\log\left(\frac{\Delta f}{2f_\text{ref}}\right) = 20\log\left(\frac{I_\text{leak}R_1 K_v}{f_\text{ref}}\right)
-$$
-
-
-
-
-> W. Rhee, "Design of high-performance CMOS charge pumps in phase-locked loops," *1999 IEEE International Symposium on Circuits and Systems (ISCAS)*, Orlando, FL, USA, 1999, pp. 545-548 vol.2 [[pdf](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3006edc15fdef2e71674d4170c10c62fd69f96a3)]
->
-> —. Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons
-
-
-
----
-
-![image-20241222200158107](clocking/image-20241222200158107.png)
-
-> [[https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html](https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html)]
-
 
 
 ## Fractional Spur
 
 *TODO* &#128197;
-
-
-
-
-
-## Non-ideal Effects in Charge Pump
-
-The ***periodic*** signal on VCTRL modulates the VCO, giving rise to ***deterministic*** jitter
-
----
-
-- Timing Offsets Between Up and Dn Pulses
-- Mismatch Between Charge-Pump Current Sources
-- Incomplete Settling of Charge-Pump Currents
-- Finite Output Resistance of the Charge Pump
-
-
-
-### Up/Dn Timing Offset
-
-![image-20241222171705612](clocking/image-20241222171705612.png)
-
-If Dn pulse arrives $\Delta T$ after the Up pulse, the steady-state VCTRL will be slightly **lower** than it would be without the $\Delta T$ mismatch so as to return the VCO's phase to match the reference clocks.
-
-Vice versa, if If Up pulse arrives $\Delta T$ after the Dn pulse, the steady-state VCTRL will be slightly **higher** than without $\Delta T$ mismatch
-
-
-
-### Current Sources Mismatch
-
-![image-20241222174620713](clocking/image-20241222174620713.png)
-
-![image-20241222174718564](clocking/image-20241222174718564.png)
-
-### Incomplete Settling
-
-
-
-
-
-> W. Rhee, "Design of high-performance CMOS charge pumps in phase-locked loops," *1999 IEEE International Symposium on Circuits and Systems (ISCAS)*, Orlando, FL, USA, 1999, pp. 545-548 vol.2 [[pdf](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3006edc15fdef2e71674d4170c10c62fd69f96a3)]
->
-> Cowan G. *Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations*. Cambridge University Press; 2024
 
 
 
@@ -175,74 +96,11 @@ Vice versa, if If Up pulse arrives $\Delta T$ after the Dn pulse, the steady-sta
 
 
 
-## PFD Deadzone
-
-Dead zone induced by *incomplete settling* of charge-pump currents
-
-> This situation can be avoided by adding *additional delay to the AND gate* in the PFD
-
-![image-20241222190011244](clocking/image-20241222190011244.png)
-
-
-
-> Sam Palermo, "Lecture 4: Phase Detector Circuit" [[https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf)]
-
-
-
-## Temperature compensation for VCO
-
-*Temperature compensation for the VCO oscillation frequency* is a critical issue
-
-*TODO* &#128197;
-
-
-
-
-
 ## multi-modulus divider
 
 *TODO* &#128197;
 
 
-
-
-
-## Auto-tracking high-Q BPF  
-
-> The PLL is the only device that performs auto-tracking band-pass filtering with high-quality factor Q and wide tunability  
-
-![image-20241005215648042](clocking/image-20241005215648042.png)
-
-
-
-
-
-
-
-## charge pump with amplifier
-
-![image-20241002211524347](clocking/image-20241002211524347.png)
-
-
-
-
-
-> Young, I.A., Greason, J.K., Wong, K.L.: A PLL Clock Generator with 5 to 110MHz of Lock Range for Microprocessors. IEEE Journal of Solid-State Circuits 27(11), 1599– 1607 (1992)  [[https://people.engr.tamu.edu/spalermo/ecen620/pll_intel_young_jssc_1992.pdf](https://people.engr.tamu.edu/spalermo/ecen620/pll_intel_young_jssc_1992.pdf)]
->
-> Johnson, M., Hudson, E.: A variable delay line PLL for CPU-coprocessor synchronization. IEEE Journal of Solid-State Circuits 23(10), 1218–1223 (1988)  [[https://sci-hub.se/10.1109/4.5947](https://sci-hub.se/10.1109/4.5947)]
->
-> Sam Palermo, Lecture 5: Charge Pump Circuits, ECEN620: Network Theory Broadband Circuit Design Fall 2024 [[https://people.engr.tamu.edu/spalermo/ecen620/lecture05_ee620_charge_pumps.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture05_ee620_charge_pumps.pdf)]
-
-
-
-
-
-
-## "gain" of the PFD
-
-
-
-![image-20240928010554282](clocking/image-20240928010554282.png)
 
 
 
@@ -255,37 +113,6 @@ Dead zone induced by *incomplete settling* of charge-pump currents
 2. ***Frequency Accumulation***
 
 ![image-20241003105059989](clocking/image-20241003105059989.png)
-
-
-
-
-
-
-
-## Charge Pump Current noise
-
-> consider only *thermal noise* in the analysis that follows
-
-![image-20240928013058435](clocking/image-20240928013058435.png)
-
-
-
-> Michael H. Perrott, PLL Design Using the PLL Design Assistant Program. [[https://designers-guide.org/forum/Attachments/pll_manual.pdf](https://designers-guide.org/forum/Attachments/pll_manual.pdf)]
->
-> M.H. Perrott, M.D. Trott, C.G. Sodini, "A Modeling Approach for Sigma-Delta Fractional-N Frequency Synthesizers Allowing Straightforward Noise Analysis", JSSC, vol 38, no 8, pp 1028-1038, Aug 2002. [[https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf](https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf)]
-
-
-
-
-## why 2nd loop filter ?
-
-> PI (proportional - integral) Loop Filter
-
-![image-20240907123938255](clocking/image-20240907123938255.png)
-
-![image-20240907124029346](clocking/image-20240907124029346.png)
-
-![image-20240907124018476](clocking/image-20240907124018476.png)
 
 
 
@@ -410,20 +237,20 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-## PLL Type & Order
-
-**Type**: # of integrators within the loop
-
-**Order**: # of poles in the *closed-loop* transfer function 
-
-> *Type $\leq$ Order*
-
 
 
 ## Why Type 2 PLL ?
 
+> **Type**: # of integrators within the loop
+>
+> **Order**: # of poles in the *closed-loop* transfer function 
+>
+> *Type $\leq$ Order*
+
+
+
 1. That is, to have a wide bandwidth, a high loop gain is required
-2. More importantly, the type 1 PLL has the problem of a static phase error for the change of an input frequency
+2. More importantly, the type 1 PLL has the problem of a ***static phase error*** for the change of an input frequency
 
 ---
 

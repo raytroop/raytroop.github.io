@@ -44,7 +44,7 @@ Mueller-Muller **type B** timing function
 
 
 
-## Least-Mean-Square (LMS) 
+## LMS (Least-Mean-Square)
 
 > minimum mean square error (MMSE) 
 
@@ -102,9 +102,9 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 
 
-## Maximum Likelihood Sequence Estimator (MLSE)
+## MLSD (Maximum Likelihood Sequence Detection)
 
-
+The process is also referred to as **Maximum Likelihood Sequence Estimator (MLSE)**
 
 ![image-20240807233152154](digital-EQ/image-20240807233152154.png)
 
@@ -130,6 +130,10 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 
 
 > [Evolution Of Equalization Techniques In High-Speed SerDes For Extended Reaches. [https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/](https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/)]
+>
+> S. Song, K. D. Choo, T. Chen, S. Jang, M. P. Flynn and Z. Zhang, "A Maximum-Likelihood Sequence Detection Powered ADC-Based Serial Link," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 65, no. 7, pp. 2269-2278, July 2018
+>
+> [[http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf](http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf)]
 
 
 

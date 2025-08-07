@@ -18,6 +18,10 @@ Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50d
 
 ---
 
+Hassan, Amr. (2025). A 128Gb/s ADC/DAC Based PAM-4 Transceiver with >45dB Reach in 3nm FinFET. 10.23919/VLSITechnologyandCir65189.2025.11074819. 
+
+---
+
 
 ISSCC.2024 7.3 A 224Gbs 3pJb 40dB Insertion Loss Transceiver in 3nm FinFET CMOS
 

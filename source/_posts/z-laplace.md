@@ -212,19 +212,9 @@ $$
 
 
 
-## $s$- and $z$-Domains Conversion 
+## $s$- and $z$-Domains Connection 
 
-![image-20240429220303281](z-laplace/image-20240429220303281.png)
-
-![image-20240429215455332](z-laplace/image-20240429215455332.png)
-
-> Staszewski, Robert Bogdan, and Poras T. Balsara. All-digital frequency synthesizer in deep-submicron CMOS. John Wiley & Sons, 2006.
-
-
-
----
-
-Connection between the ***Laplace transform*** and the ***$z$-transform***
+discrete-time systems also can be analyzed by means of the Laplace transform — the $z$-transform is the Laplace transform in disguise and that discrete-time systems can be analyzed as if they were continuous-time systems.
 
 ![image-20241002112611432](z-laplace/image-20241002112611432.png)
 
@@ -267,6 +257,12 @@ $$
 $$
 And we know transform of integral $u(t)$ is $\frac{1}{s}$, as expected there is ratio $T$
 
+---
+
+![image-20250807205854057](z-laplace/image-20250807205854057.png)
+
+> Staszewski, Robert Bogdan, and Poras T. Balsara. All-digital frequency synthesizer in deep-submicron CMOS. John Wiley & Sons, 2006.
+
 
 
 ## impulse invariance
@@ -308,6 +304,8 @@ $$
 
 > The scaling of $T$ can alternatively be thought of as a normalization of the time domain, that is average impulse response shall be same i.e., $h[n]\times 1 = h(nT)\times T$
 
+![image-20250807202725879](z-laplace/image-20250807202725879.png)
+
 
 
 ---
@@ -326,7 +324,9 @@ $$
 
 ![image-20250621214307332](z-laplace/image-20250621214307332.png)
 
+---
 
+![image-20250807205156790](z-laplace/image-20250807205156790.png)
 
 
 ## Transfer function & sampled impulse response

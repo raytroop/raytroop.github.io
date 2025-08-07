@@ -84,6 +84,8 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ---
 
+**skin effect** & **Dielectric loss**
+
 ![image-20250705170028485](Partial-Inductance/image-20250705170028485-1751987296816-49.png)
 
 ---

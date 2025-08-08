@@ -23,33 +23,7 @@ mathjax: true
 
 
 
-## input network
 
-![image-20250706110415914](rx/image-20250706110415914.png)
-
----
-
-![image-20250611075951974](rx/image-20250611075951974.png)
-
-> ```
-> >> 10e6/2/pi/400/50
-> 
-> ans =
-> 
->    79.5775
-> ```
-
-![image-20250611080033319](rx/image-20250611080033319.png)
-
-
-
-> charging parasitic from CTLE + CTLE is signal processing,  bypass the capacitor is not feasiable
-
-![image-20250611080134737](rx/image-20250611080134737.png)
-
-![image-20250611080647262](rx/image-20250611080647262.png)
-
-![image-20250611080709544](rx/image-20250611080709544.png)
 
 
 ## Inductive Peaking
@@ -62,12 +36,7 @@ mathjax: true
 
 
 
-## Asymmetric T-Coil
 
-*TODO* &#128197;
-
-
-> Deog-Kyoon Jeong. Topics in IC Design: T-Coil [[pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%2010%20-%20Bandwidth%20Extension%20Techniques.pdf)]
 
 ## CTLE Linearity
 

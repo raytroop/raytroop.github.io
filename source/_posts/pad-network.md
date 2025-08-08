@@ -1,13 +1,53 @@
 ---
 title: Input/Output Network
-date: 2025-06-07 08:33:38
+date: 2025-06-06 23:10:37
 tags:
 categories:
 - analog
 mathjax: true
 ---
 
+
+
+## input network
+
+![image-20250706110415914](pad-network/image-20250706110415914.png)
+
+---
+
+![image-20250611075951974](pad-network/image-20250611075951974.png)
+
+> ```
+> >> 10e6/2/pi/400/50
+> 
+> ans =
+> 
+> 79.5775
+> ```
+
+![image-20250611080033319](pad-network/image-20250611080033319.png)
+
+
+
+> charging parasitic from CTLE is signal processing,  bypassing the capacitor is not feasible
+
+![image-20250611080134737](pad-network/image-20250611080134737.png)
+
+![image-20250611080647262](pad-network/image-20250611080647262.png)
+
+![image-20250611080709544](pad-network/image-20250611080709544.png)
+
+
+
+## Asymmetric T-Coil
+
 *TODO* &#128197;
+
+
+> Deog-Kyoon Jeong. Topics in IC Design: T-Coil [[pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%2010%20-%20Bandwidth%20Extension%20Techniques.pdf)]
+>
+> Razavi, Behzad, "The bridged T-coil [a circuit for all seasons]." IEEE Solid-State Circuits Magazine 7.4 (2015): 9-13. [[https://www.seas.ucla.edu/brweb/papers/Journals/BRFall15TCoil.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BRFall15TCoil.pdf)]
+
 
 
 ## reference

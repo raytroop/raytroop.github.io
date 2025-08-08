@@ -7,15 +7,19 @@ categories:
 mathjax: true
 ---
 
-## Timing Mismatch Error Calibration
+## Skew (Timing Mismatch) Calibration
 
 *TODO* &#128197;
 
 
 
+
+
+> M. Gu, Y. Tao, Y. Zhong, L. Jie and N. Sun, "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1-10, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
+>
 > S. Chen, L. Wang, H. Zhang, R. Murugesu, D. Dunwell, A. Chan Carusone, “All-Digital Calibration of Timing Mismatch Error in Time-Interleaved Analog-to-Digital Converters,” *IEEE Transactions on VLSI Systems*, Sept. 2017. [[PDF](https://www.eecg.utoronto.ca/~tcc/Chen_TVLSI17.pdf), [slides](https://www.eecg.utoronto.ca/~tcc/Wang_ISCAS_SLIDES_2018.pdf)]
 >
-> M. Gu, Y. Tao, Y. Zhong, L. Jie and N. Sun, "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1-10, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
+> B. Razavi, "Problem of timing mismatch in interleaved ADCs," *Proceedings of the IEEE 2012 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2012 [[https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf)]
 
 
 
@@ -162,21 +166,23 @@ Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis [[ht
 
 ISSCC2015 F1: High-Speed Interleaved ADCs [[https://picture.iczhiku.com/resource/eetop/wykrheUfrWasiMVX.pdf](https://picture.iczhiku.com/resource/eetop/wykrheUfrWasiMVX.pdf)]
 
-Poulton, Ken. ISSCC2015 "Interleaved ADCs Through the Ages", [(slides)](http://poulton.net/papers.public/2015isscc_interleaved.forum.pdf)
-
-Poulton, Ken. CICC2010 "GHz ADCs: From Exotic to Mainstream", tutorial session, [(slides)](http://poulton.net/papers.public/2010_cicc_GHz_ADCs.pdf)
-
 Poulton, Ken. ISSCC2009  "Time-Interleaved ADCs, Past and Future" [(slides)](http://poulton.net/papers.public/2009_isscc_se0604_interleaving.pdf)
+
+—. CICC2010 "GHz ADCs: From Exotic to Mainstream", tutorial session, [(slides)](http://poulton.net/papers.public/2010_cicc_GHz_ADCs.pdf)
+
+—. ISSCC2015 "Interleaved ADCs Through the Ages", [(slides)](http://poulton.net/papers.public/2015isscc_interleaved.forum.pdf)
+
+Ewout Martens. ESSCIRC 2019 Tutorials: Advanced Techniques for ADCs for 5G Massive MIMO [[https://youtu.be/7hYichGGU6k](https://youtu.be/7hYichGGU6k)]
 
 Athanasios Ramkaj. January 26, 2022, IEEE SSCS Santa Clara Valley Section Technical Talk: Design Considerations Towards Optimal High-Resolution Wide-Bandwidth Time-Interleaved ADCs [[https://youtu.be/k3jY9NtfYlY?si=K9AdT9QzGxOnI5WG](https://youtu.be/k3jY9NtfYlY?si=K9AdT9QzGxOnI5WG)]
 
-Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
+---
 
-Ewout Martens. ESSCIRC 2019 Tutorials: Advanced Techniques for ADCs for 5G Massive MIMO [[https://youtu.be/7hYichGGU6k](https://youtu.be/7hYichGGU6k)]
+Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
 
 S. Jang, J. Lee, Y. Choi, D. Kim, and G. Kim, "[Recent advances in ultra-high-speed wireline receivers with ADC-DSP-based equalizers](https://ieeexplore.ieee.org/document/10767763)," *IEEE* *Open Journal of the Solid-State Circuits Society* (OJ-SSCS), vol. 4, pp. 290-304, Nov. 2024.
 
 Yida Duan. Design Techniques for Ultra-High-Speed Time-Interleaved Analog-to-Digital Converters (ADCs) [[http://www2.eecs.berkeley.edu/Pubs/TechRpts/2017/EECS-2017-10.pdf](http://www2.eecs.berkeley.edu/Pubs/TechRpts/2017/EECS-2017-10.pdf)]
 
-Preview Lecture #1 - "Extreme SAR ADCs" Online Course (2024) - Prof. Chi-Hang Chan (U. of Macau) [[https://youtu.be/rgMRL4QZ-wA?si=gvJGFrcsrHS8b_mN](https://youtu.be/rgMRL4QZ-wA?si=gvJGFrcsrHS8b_mN)]
+Preview Lecture #1 - "Extreme SAR ADCs" Online Course (2024) - Prof. Chi-Hang Chan (U. of Macau) [[https://youtu.be/rgMRL4QZ-wA](https://youtu.be/rgMRL4QZ-wA)]
 

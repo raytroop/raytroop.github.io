@@ -62,6 +62,13 @@ mathjax: true
 
 
 
+## Asymmetric T-Coil
+
+*TODO* &#128197;
+
+
+> Deog-Kyoon Jeong. Topics in IC Design: T-Coil [[pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%2010%20-%20Bandwidth%20Extension%20Techniques.pdf)]
+
 ## CTLE Linearity
 
 *TODO* &#128197;

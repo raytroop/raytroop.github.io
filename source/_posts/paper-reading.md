@@ -8,9 +8,9 @@ mathjax: true
 
 Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022
 
-![8way-interleaving-Marvell-ISSCC2022.drawio](paper-reading/8way-interleaving-Marvell-ISSCC2022.drawio.svg)
-
 ![image-20250806224145281](paper-reading/image-20250806224145281.png)
+
+![8way-interleaving-Marvell-ISSCC2022.drawio](paper-reading/8way-interleaving-Marvell-ISSCC2022.drawio.svg)
 
 
 
@@ -20,7 +20,13 @@ Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50d
 
 P. Liu et al., "A 128Gb/s ADC/DAC Based PAM-4 Transceiver with >45dB Reach in 3nm FinFET," 2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits), Kyoto, Japan, 2025
 
+![image-20250808220954208](paper-reading/image-20250808220954208.png)
+
+![image-20250808221134749](paper-reading/image-20250808221134749.png)
+
 ![RX-Clocking-Marvell-VLSI2025.drawio](paper-reading/RX-Clocking-Marvell-VLSI2025.drawio.svg)
+
+
 
 
 ---

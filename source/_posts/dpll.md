@@ -66,6 +66,9 @@ where the proportional gain ($K_P$), *heavily damped systems* means that $K_P \g
 >
 > High-Speed Circuits and Systems Lab. Yonsei University. High-speed Serial Interface ***2013***. ***Lect. 16 – Clock and Data Recovery 3***
 
+## TDC (Time-to-Digital Converter)
+
+*TODO* &#128197;
 
 
 ## BB PD

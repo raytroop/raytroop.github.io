@@ -18,7 +18,10 @@ Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50d
 
 ---
 
-Hassan, Amr. (2025). A 128Gb/s ADC/DAC Based PAM-4 Transceiver with >45dB Reach in 3nm FinFET. 10.23919/VLSITechnologyandCir65189.2025.11074819. 
+P. Liu et al., "A 128Gb/s ADC/DAC Based PAM-4 Transceiver with >45dB Reach in 3nm FinFET," 2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits), Kyoto, Japan, 2025
+
+![RX-Clocking-Marvell-VLSI2025.drawio](paper-reading/RX-Clocking-Marvell-VLSI2025.drawio.svg)
+
 
 ---
 

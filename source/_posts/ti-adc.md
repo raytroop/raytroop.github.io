@@ -23,7 +23,7 @@ mathjax: true
 
 
 
-## Retimer (alignment)
+## resync (alignment)
 
 *TODO* &#128197;
 

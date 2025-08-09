@@ -326,7 +326,7 @@ $$
 
 ---
 
-![image-20250807205156790](z-laplace/image-20250807205156790.png)
+![image-20250809112858954](z-laplace/image-20250809112858954.png)
 
 
 ## Transfer function & sampled impulse response
@@ -594,9 +594,11 @@ The simple approximation $z=e^{sT}\approx1+sT$, ~~the *first equal* come from **
 
 ### Approximation of Derivatives
 
-> Perhaps the simplest method for low-order systems is to use *backward-difference approximation* to *continuous domain derivatives*
+> Perhaps the simplest method for ***low-order systems*** is to use *backward-difference approximation* to *continuous domain derivatives*
 
 ![image-20250623205828010](z-laplace/image-20250623205828010.png)
+
+> Note this approximation is ***not same*** with *impulse invariance*, e.g. $\frac{1}{s^3} \to \frac{T^3z(z+1)}{2(-1)^3}$ employing impulse invariance
 
 ---
 

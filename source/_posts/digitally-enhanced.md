@@ -65,6 +65,8 @@ Chadi Jabbour, ed, Digitally Enhanced Mixed Signal Systems. IET 2019
 
 Jiang X, ed. *Digitally-Assisted Analog and Analog-Assisted Digital IC Design*. Cambridge University Press; 2015.
 
+Ping-Hsuan Hsieh. SSCS Events: *Digitally-Enhanced Clock Generation and Distribution*; 20 August 2025.
+
 ISSCC 2024 FORUM 3: Digitally Enhanced Analog Circuits: Trends & State-of-the-art Designs
 
 Albert Jerng. ISSCC2012 T7: *Digital Calibration for RF Transceivers* [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T7.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T7.pdf)]

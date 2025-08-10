@@ -45,7 +45,9 @@ mathjax: true
 
 ### Stationarity
 
-[[https://ece-research.unm.edu/bsanthan/ece541/station.pdf](https://ece-research.unm.edu/bsanthan/ece541/station.pdf)]
+> [[https://ece-research.unm.edu/bsanthan/ece541/station.pdf](https://ece-research.unm.edu/bsanthan/ece541/station.pdf)]
+>
+> ***Strict Sense Stationary (SSS)***, ***Wide Sense Stationary (WSS)***
 
 ![image-20241123221623537](random/image-20241123221623537.png)
 
@@ -327,10 +329,23 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 
 
+## Periodic and Cyclostationary Processes
+
+![image-20250809234136591](random/image-20250809234136591.png)
+
+> ![image-20250809234318422](random/image-20250809234318422.png)
+
+
+
+
+
 ## reference
 
-L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013
+L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013 [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
 
-Alan V Oppenheim, George C. Verghese, Signals, Systems and Inference, 1st edition
+Alan V Oppenheim, George C. Verghese, Signals, Systems and Inference, 1st edition [[pdf](https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf)]
 
-R. Ziemer and W. Tranter, Principles of Communications, Seventh Edition, 2013
+R. Ziemer and W. Tranter, Principles of Communications, Seventh Edition, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]
+
+Stark H, Woods JW. *Probability, Statistics, and Random Processes for Engineers*, 4th ed. 2012 [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgHqkPkiWRYmVN.pdf)]
+

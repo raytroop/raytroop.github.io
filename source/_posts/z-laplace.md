@@ -259,9 +259,17 @@ And we know transform of integral $u(t)$ is $\frac{1}{s}$, as expected there is 
 
 ---
 
+> Staszewski, Robert Bogdan, and Poras T. Balsara. *All-digital frequency synthesizer in deep-submicron CMOS.* John Wiley & Sons, 2006
+
 ![image-20250807205854057](z-laplace/image-20250807205854057.png)
 
-> Staszewski, Robert Bogdan, and Poras T. Balsara. All-digital frequency synthesizer in deep-submicron CMOS. John Wiley & Sons, 2006.
+
+
+---
+
+> D. Sundararajan. *Signals and Systems A Practical Approach Second Edition*, 2023
+
+![image-20250809233806280](z-laplace/image-20250809233806280.png)
 
 
 

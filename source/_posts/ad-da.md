@@ -23,6 +23,25 @@ $\Delta \Sigma$ ADC: Linearity
 
 
 
+## Sampling Jitter Effects for DAC
+
+Sampling Jitter Effects for *ADC/DAC*
+
+- In both DAC or ADC cases, doubling the timing jitter doubles the noise level
+- Also, doubling the frequency or amplitude doubles the jitter induced noise - ***SNR is not improved***
+
+![image-20250809235703216](ad-da/image-20250809235703216.png)
+
+
+
+
+
+## Midrise and Midtread Quantizers
+
+![image-20250809170637486](ad-da/image-20250809170637486.png)
+
+
+
 ## Top-Plate vs Bottom-Plate Sampling
 
 > [[https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf](https://class.ece.iastate.edu/ee435/lectures/EE%20435%20Lect%2044%20Spring%202008.pdf)]
@@ -713,3 +732,7 @@ B. Razavi, **"A Tale of Two ADCs - Pipelined Versus SAR"** IEEE Solid-State Circ
 ---
 
 Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
+
+---
+
+Dr. Tai-Haur Kuo ( 郭泰豪 教授 ) Analog IC Design ( 類比積體電路設計 ) [[http://msic.ee.ncku.edu.tw/course/aic/aic.html](http://msic.ee.ncku.edu.tw/course/aic/aic.html)]

@@ -32,6 +32,27 @@ Virtual Audio Cable For Ubuntu [[https://askubuntu.com/a/1268269/845522](https:/
 
 
 
+## wget fetch a directory
+
+```bash
+$ wget -r -np -R "index.html*" http://example.com/configs/.vim/
+```
+
+
+
+> Using wget to recursively fetch a directory with arbitrary files in it [[https://stackoverflow.com/a/273776/8037585](https://stackoverflow.com/a/273776/8037585)]
+
+
+
+## mount/umount ISO
+
+```bash
+$ sudo mount -t auto -o loop /path/to/matlab.iso /mnt/matlab
+$ umount /mnt/iso
+```
+
+
+
 ## Google search tips
 
 > [[https://static.googleusercontent.com/media/www.google.com/en//educators/downloads/Tips_Tricks_17x22.pdf](https://static.googleusercontent.com/media/www.google.com/en//educators/downloads/Tips_Tricks_17x22.pdf)]

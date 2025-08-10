@@ -202,7 +202,13 @@ endmodule
 >
 > [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/Intro_to_Delta_Sigma_Data_Converters.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/Intro_to_Delta_Sigma_Data_Converters.pdf)]
 
+---
 
+> Chun-Hsien Su ( 蘇純賢). Fundamentals of Sigma-Delta Data Converters,July, 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/sHkHraReEayHQvCx.pdf)]
+
+![image-20250809235244362](delta-sigma/image-20250809235244362.png)
+
+![image-20250809235311542](delta-sigma/image-20250809235311542.png)
 
 ### ADC
 

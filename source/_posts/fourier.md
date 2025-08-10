@@ -583,13 +583,15 @@ where $\hat{\omega}_0 = \omega_0 T$
 
 ##  zero padding
 
-This option increases $N_0$, the number of samples of $x(t)$, by adding dummy samples of 0 value. This addition of dummy samples is known as zero padding.
+This option increases $N_0$, the number of samples of $x(t)$, by adding dummy samples of **0** value. This addition of dummy samples is known as ***zero padding***
 
-We should keep in mind that even if the fence were transparent, we would see a reality distorted by **aliasing**. 
+We should keep in mind that even if the fence were transparent, we would see a reality distorted by **aliasing**.
 
-Zero padding only allows us to look at more samples of that imperfect reality
+Zero padding only allows us to look at *more samples of that imperfect reality*
 
 
+
+> Balu Santhanam. ECE-539: Digital Signal Processing: Zero padding and Resolution [[http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf](http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf)]
 
 
 

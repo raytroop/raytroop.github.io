@@ -17,8 +17,8 @@ mathjax: true
 >
 > [[https://www.nii.ac.jp/qis/first-quantum/e/forStudents/lecture/pdf/noise/chapter1.pdf](https://www.nii.ac.jp/qis/first-quantum/e/forStudents/lecture/pdf/noise/chapter1.pdf)]
 
-- **Time average**: time-averaged quantities for the $i$-th member of the ensemble
-- **Ensemble average**: ensemble-averaged quantities for all members of the ensemble at *a certain time*
+- **time average**: time-averaged quantities for the $i$-th member of the ensemble
+- **ensemble average**: ensemble-averaged quantities for all members of the ensemble at *a certain time*
 
 ![image-20241116113758119](random/image-20241116113758119.png)
 
@@ -285,6 +285,56 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 ![image-20240910004448439](random/image-20240910004448439.png)
 
+### Discrete time
+
+> SIMG-713 Noise and Random Processes Spring 2002 . Lecture 15 Power Spectrum Estimation [[https://www.cis.rit.edu/class/simg713/Lectures/Lecture713-15-4.pdf](https://www.cis.rit.edu/class/simg713/Lectures/Lecture713-15-4.pdf)]
+>
+> Properties of the Fourier Transform for Discrete-Time Signals [[https://www.comm.utoronto.ca/dkundur/course_info/362/EmanHammadDTFT2.pdf](https://www.comm.utoronto.ca/dkundur/course_info/362/EmanHammadDTFT2.pdf)]
+
+![image-20250810165917800](random/image-20250810165917800.png)
+$$
+\frac{1}{2\pi}F^{-1}\{R_{xx}\}d\omega = \frac{1}{2\pi}F^{-1}\{R_{xx}\}d(2\pi f T)=T\cdot F^{-1}\{R_{xx}\}df = P_{xx}(f)df
+$$
+power spectral density of a *discrete*-time *random* process $\{x(n)\}$ is given by
+$$
+P_{xx}(f) =T\cdot F^{-1}\{R_{xx}\}
+$$
+
+
+## Periodic and Cyclostationary Processes
+
+![image-20250809234136591](random/image-20250809234136591.png)
+
+> ![image-20250809234318422](random/image-20250809234318422.png)
+
+
+## decimation & interpolation to WSS
+
+> Balu Santhanam. ece541 Probability Theory & Stochastic Process: Random Signals and Multirate Systems [[http://ece-research.unm.edu/bsanthan/ece541/rand.pdf](http://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
+
+### decimation
+
+![image-20250810194206762](random/image-20250810194206762.png)
+
+### interpolation
+
+The *resulting expanded random sequence* is clearly ***nonstationary***, *because of the **zero insertions***.
+
+![image-20250810194541608](random/image-20250810194541608.png)
+
+ This random sequences and processes is classified as being ***cyclostationary*** 
+
+![image-20250810204047368](random/image-20250810204047368.png)
+
+$$
+S_{YY}(\omega) = \left\{ \begin{array}{cl}
+L \cdot S_{XX}(L\omega)), &\ |\omega|\leq \pi/L  \\
+0, &\ \pi/L \lt |\omega| \leq \pi
+\end{array} \right.
+$$
+where $L$ is upsampling factor
+
+
 
 
 ## Wiener Process (Brownian Motion)
@@ -329,11 +379,7 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 
 
 
-## Periodic and Cyclostationary Processes
 
-![image-20250809234136591](random/image-20250809234136591.png)
-
-> ![image-20250809234318422](random/image-20250809234318422.png)
 
 
 

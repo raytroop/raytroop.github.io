@@ -326,6 +326,9 @@ The *resulting expanded random sequence* is clearly ***nonstationary***, *becaus
 
 ![image-20250810204047368](random/image-20250810204047368.png)
 
+where an ideal lowpass filter with bandwidth $[-\pi/2 , +\pi/2]$ and gain of $2$ or $L$
+
+
 $$
 S_{YY}(\omega) = \left\{ \begin{array}{cl}
 L \cdot S_{XX}(L\omega)), &\ |\omega|\leq \pi/L  \\

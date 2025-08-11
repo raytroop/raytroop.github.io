@@ -7,6 +7,36 @@ categories:
 mathjax: true
 ---
 
+
+
+## Correlated Double Sampling (CDS)
+
+*TODO* &#128197;
+
+
+
+## Dynamic Element Matching (DEM)
+
+*TODO* &#128197;
+
+![image-20241112214430191](precision/image-20241112214430191.png)
+
+
+
+
+
+
+
+> Galton, Ian. (2010). Why dynamic-element-matching DACs work. Circuits and Systems II: Express Briefs, IEEE Transactions on. 57. 69 - 74. 10.1109/TCSII.2010.2042131. [[https://sci-hub.se/10.1109/TCSII.2010.2042131](https://sci-hub.se/10.1109/TCSII.2010.2042131)]
+>
+> KHIEM NGUYEN. Analog Devices Inc, "Practical Dynamic Element Matching Techniques for 3-level Unit Elements" [[https://picture.iczhiku.com/resource/eetop/shihEDaaoJjFdCVc.pdf](https://picture.iczhiku.com/resource/eetop/shihEDaaoJjFdCVc.pdf)]
+>
+> E. Alvarez-Fontecilla, P. S. Wilkins and S. C. Rose, "Understanding High-Resolution Dynamic Element Matching DACs [Feature]," in *IEEE Circuits and Systems Magazine*, vol. 23, no. 4, pp. 34-43, Fourthquarter 2023
+>
+> E. Alvarez-Fontecilla and P. S. Wilkins, "Linearity Through Democracy [Feature]," in *IEEE Circuits and Systems Magazine*, vol. 25, no. 1, pp. 58-69, Firstquarter 2025
+
+
+
 ## Autozeroing
 
 > offset is **sampled** and then subtracted from the input
@@ -386,26 +416,6 @@ legend('$\Delta V_{os}[0]$ decaying','$V_{os0}$ decaying','$\Delta V_{os}[n]$', 
 ```
 
 
-
-## Dynamic Element Matching (DEM)
-
-*TODO* &#128197;
-
-![image-20241112214430191](precision/image-20241112214430191.png)
-
-
-
-
-
-
-
-> Galton, Ian. (2010). Why dynamic-element-matching DACs work. Circuits and Systems II: Express Briefs, IEEE Transactions on. 57. 69 - 74. 10.1109/TCSII.2010.2042131. [[https://sci-hub.se/10.1109/TCSII.2010.2042131](https://sci-hub.se/10.1109/TCSII.2010.2042131)]
->
-> KHIEM NGUYEN. Analog Devices Inc, "Practical Dynamic Element Matching Techniques for 3-level Unit Elements" [[https://picture.iczhiku.com/resource/eetop/shihEDaaoJjFdCVc.pdf](https://picture.iczhiku.com/resource/eetop/shihEDaaoJjFdCVc.pdf)]
->
-> E. Alvarez-Fontecilla, P. S. Wilkins and S. C. Rose, "Understanding High-Resolution Dynamic Element Matching DACs [Feature]," in *IEEE Circuits and Systems Magazine*, vol. 23, no. 4, pp. 34-43, Fourthquarter 2023
->
-> E. Alvarez-Fontecilla and P. S. Wilkins, "Linearity Through Democracy [Feature]," in *IEEE Circuits and Systems Magazine*, vol. 25, no. 1, pp. 58-69, Firstquarter 2025
 
 
 

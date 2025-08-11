@@ -723,3 +723,8 @@ Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 
 ---
 
 Dr. Tai-Haur Kuo ( 郭泰豪 教授 ) Analog IC Design ( 類比積體電路設計 ) [[http://msic.ee.ncku.edu.tw/course/aic/aic.html](http://msic.ee.ncku.edu.tw/course/aic/aic.html)]
+
+---
+
+Converter Passion for data-converter professionals sharing thoughts on ADCs and DACs [[https://converterpassion.wordpress.com/](https://converterpassion.wordpress.com/)]
+

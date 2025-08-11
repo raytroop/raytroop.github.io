@@ -23,29 +23,6 @@ $\Delta \Sigma$ ADC: Linearity
 
 
 
-## Sampling Jitter Effects for DAC
-
-Sampling Jitter Effects for *ADC/DAC*
-
-- In both DAC or ADC cases, doubling the timing jitter doubles the noise level
-- Also, doubling the frequency or amplitude doubles the jitter induced noise - ***SNR is not improved***
-
-![image-20250810213544751](ad-da/image-20250810213544751.png)
-
-![image-20250810213615814](ad-da/image-20250810213615814.png)
-
-
-
-> Boris Murmann ISSCC 2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
->
-> S. Kim, K. -Y. Lee and M. Lee, "Modeling Random Clock Jitter Effect of High-Speed Current-Steering NRZ and RZ DAC," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 65, no. 9, pp. 2832-2841, Sept. 2018 [[https://sci-hub.se/10.1109/TCSI.2018.2821198](https://sci-hub.se/10.1109/TCSI.2018.2821198)]
->
-> Martin Clara. High-Performance D/A-Converters - Application to Digital Transceivers, 2013  [[pdf](https://picture.iczhiku.com/resource/eetop/SYIrysQLKgUtfxbB.pdf)]
->
-> Chun-Hsien Su (蘇純賢). Design of Oversampled Sigma-Delta Data Converters. July, 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIHwgULoQJZLNCV.pdf)]
-
-
-
 ## Midrise and Midtread Quantizers
 
 ![image-20250809170637486](ad-da/image-20250809170637486.png)

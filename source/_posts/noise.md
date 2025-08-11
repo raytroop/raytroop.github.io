@@ -221,6 +221,35 @@ plt.show()
 >
 > Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
 
+---
+
+> 待学芯. ADC量化结果反推采样时钟抖动（Jitter） [[https://mp.weixin.qq.com/s/55xfVQMe_N8zUGpI8ZvmsQ](https://mp.weixin.qq.com/s/55xfVQMe_N8zUGpI8ZvmsQ)]
+>
+> —. 关于时钟抖动(Jitter)与ADC的一些讨论 [[https://mp.weixin.qq.com/s/GW1keHhfq7zrd036lyG0CQ](https://mp.weixin.qq.com/s/GW1keHhfq7zrd036lyG0CQ)]
+
+![image-20250811210300829](noise/image-20250811210300829.png)
+
+## DAC SNR & clock jitter
+
+ampling Jitter Effects for *ADC/DAC*
+
+- In both DAC or ADC cases, doubling the timing jitter doubles the noise level
+- Also, doubling the frequency or amplitude doubles the jitter induced noise - ***SNR is not improved***
+
+![image-20250810213544751](noise/image-20250810213544751.png)
+
+![image-20250810213615814](noise/image-20250810213615814.png)
+
+
+
+> Boris Murmann ISSCC 2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
+>
+> S. Kim, K. -Y. Lee and M. Lee, "Modeling Random Clock Jitter Effect of High-Speed Current-Steering NRZ and RZ DAC," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 65, no. 9, pp. 2832-2841, Sept. 2018 [[https://sci-hub.se/10.1109/TCSI.2018.2821198](https://sci-hub.se/10.1109/TCSI.2018.2821198)]
+>
+> Martin Clara. High-Performance D/A-Converters - Application to Digital Transceivers, 2013  [[pdf](https://picture.iczhiku.com/resource/eetop/SYIrysQLKgUtfxbB.pdf)]
+>
+> Chun-Hsien Su (蘇純賢). Design of Oversampled Sigma-Delta Data Converters. July, 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIHwgULoQJZLNCV.pdf)]
+
 
 
 ##  Sampled Thermal Noise

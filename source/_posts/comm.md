@@ -172,11 +172,11 @@ where $P_c = A^2/2$ is the carrier power of the signal
 
 ![image-20240428162655969](comm/image-20240428162655969.png)
 
-![image-20240907220050543](comm/image-20240907220050543.png)
 
 
+![image-20250812194041059](comm/image-20250812194041059.png)
 
----
+Owing to $\phi[0] = \phi_c(0)$,  the average power of the sampled version $x[n]$ is the ***same*** as its input $x_c(t)$
 
 ### impulse train $x_s(t)$
 

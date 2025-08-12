@@ -104,8 +104,8 @@ $$
 > $$\begin{align}
 >\overline{R}_{hh}(\tau) &= h(\tau)*h(-\tau) \\
 > &= \int_{-\infty}^{\infty}h(x)h(-(\tau - x))dx \\
-> &= \int_{-\infty}^{\infty}h(x)h(-\tau + x))dx \\
-> &=\int_{-\infty}^{\infty}h(x+\tau)h(x))dx
+> &= \int_{-\infty}^{\infty}h(x)h(-\tau + x)dx \\
+> &=\int_{-\infty}^{\infty}h(x+\tau)h(x)dx
 > \end{align}$$
 
 ---

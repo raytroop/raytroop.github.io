@@ -95,6 +95,42 @@ $\Delta \Sigma$ ADC: Linearity
 ![image-20250729005852740](ad-da/image-20250729005852740.png)
 
 
+---
+
+Finite Acquisition Time - Consider a sinusoidal input
+
+> utilizing Laplace transform pair
+
+$$\begin{align}
+V_\text{in}(t)=\cos{\omega t+\theta} & \overset{\mathcal{L}}{\Rightarrow} \frac{s\cos \theta-\omega \sin \theta}{s^2+\omega^2} \\
+h(t) & \overset{\mathcal{L}}{\Rightarrow} \frac{\frac{1}{\tau}}{s+\frac{1}{\tau}}
+\end{align}$$
+
+Then,
+
+$$\begin{align}
+V_\text{out}(s) &= V_\text{in}(s)\cdot H(s) \\
+&= \frac{s\cos \theta-\omega \sin \theta}{s^2+\omega^2} \cdot \frac{\frac{1}{\tau}}{s+\frac{1}{\tau}} \\
+&= \frac{A}{s+\frac{1}{\tau}} + \frac{Bs+C}{s^2+\omega^2}
+\end{align}$$
+
+Obtain,
+
+$$\begin{align}
+A &= -\frac{\cos(\theta - \phi)}{\sqrt{\tau ^2 \omega^2 +1}} \\
+B & = -A \\
+C &= -\frac{\omega \sin(\theta - \phi)}{\sqrt{\tau ^2 \omega^2 +1}}
+\end{align}$$
+
+That is
+$$
+V_\text{out}(s) = -\frac{\cos(\theta - \phi)}{\sqrt{\tau ^2 \omega^2 +1}} \frac{1}{s+\frac{1}{\tau}} + \frac{1}{\sqrt{\tau ^2 \omega^2 +1}}\frac{s\cos(\theta - \phi) - \omega \sin(\theta - phi)}{s^2+\omega^2}
+$$
+
+where $\phi = \arctan(\omega \tau)$
+
+> Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
+
 
 ## ADC Calibration
 

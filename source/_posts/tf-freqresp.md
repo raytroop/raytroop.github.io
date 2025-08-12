@@ -301,7 +301,7 @@ where $M = |H(j\omega|$ and $\phi = \angle H(j\omega)$
 
 
 
-### Laplace transform & Fourier transform
+## Laplace transform vs. Fourier transform
 
 - Laplace transforms such as $Y(s)=H(s)U(s)$ can be used to study the **complete response characteristics** of systems, including the *transient response*—that is, the time response to *an initial condition* or *suddenly applied signal* 
 - This is in contrast to the use of *Fourier transforms*, which **only take into account the steady-state response**
@@ -312,7 +312,17 @@ Given a general linear system with transfer function $H(s)$ and an input signal 
 
 ![image-20240106224403401](tf-freqresp/image-20240106224403401.png)
 
+## Laplace derivative formula at $t = 0$
 
+
+
+> S. Boyd EE102 Table of Laplace Transforms. [[https://web.stanford.edu/~boyd/ee102/laplace-table.pdf](https://web.stanford.edu/~boyd/ee102/laplace-table.pdf)]
+
+
+## One-Sided (unilateral) and Two-Sided (bilateral) Laplace Transforms
+
+
+> [[https://sps.ewi.tudelft.nl/Education/courses/ee2s11/slides/3_laplace_P.pdf](https://sps.ewi.tudelft.nl/Education/courses/ee2s11/slides/3_laplace_P.pdf)]
 
 ## reference
 

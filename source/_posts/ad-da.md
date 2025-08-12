@@ -22,6 +22,11 @@ $\Delta \Sigma$ ADC: Linearity
 > Dan Boschen Why use a 1-bit ADC in a Sigma Delta Modulator?. [[https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063](https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063)]
 
 
+## Charge Injection and Clock Feedthrough
+
+> *Slow Gating*, *Fast Gating*
+
+*TODO* &#128197;
 
 ## Midrise and Midtread Quantizers
 

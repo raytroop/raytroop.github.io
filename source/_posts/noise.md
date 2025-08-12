@@ -294,8 +294,6 @@ where $m$ is the duty cycle
 >
 > Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
 >
-> Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
->
 > Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and Modeling URL: [https://www.seas.upenn.edu/~ese568/fall2019/](https://www.seas.upenn.edu/~ese568/fall2019/)
 >
 > Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
@@ -311,6 +309,10 @@ where $m$ is the duty cycle
 *Below analysis focusing on sampled noise*
 
 > Boris Murmann. Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 / tutorials [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T8.pdf), [transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T9.pdf)]
+>
+> —. EE315A VLSI Signal Conditioning Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SyIgQJfyzyuDhBXc.pdf)]
+>
+> —. EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
 
 ![image-20250810085721440](noise/image-20250810085721440.png)
 

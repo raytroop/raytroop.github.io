@@ -228,6 +228,83 @@ Aditya Varma Muppala. Oscillator Theory - Injection Locking [[note](https://adit
 
 
 
+## capacitance simulation
+
+
+
+### VCO varactor
+
+> Two methods: 1. pss + pac; 2. pss+psp
+
+#### PSS + PAC
+
+![image-20220510192206354](osc-sim/image-20220510192206354.png)
+
+pss time domain
+
+![image-20220510192351590](osc-sim/image-20220510192351590.png)
+
+using the **0-harmonic**
+
+![image-20220510192447040](osc-sim/image-20220510192447040.png)
+
+#### PSS + PSP
+
+![image-20220510192753324](osc-sim/image-20220510192753324.png)
+
+using **Y11** of `psp`
+
+![image-20220510192639080](osc-sim/image-20220510192639080.png)
+
+#### comparison
+
+![image-20220510193036717](osc-sim/image-20220510193036717.png)
+
+> which are same
+
+### inverter input
+
+R-C, ***series*** equivalent circuit
+
+![invCap](osc-sim/invCap.png)
+
+
+### inverter output
+
+R-C, ***parallel*** equivalent circuit
+
+
+
+---
+
+#### AC simulation
+
+![image-20250628112910588](osc-sim/image-20250628112910588.png)
+
+@vi = 0
+
+![image-20250628104042741](osc-sim/image-20250628104042741.png)
+
+sweep vi from 0 to 800mV (vdd)
+
+![image-20250628105510374](osc-sim/image-20250628105510374.png)
+
+
+
+---
+
+#### SP simulation
+
+![image-20250628112857124](osc-sim/image-20250628112857124.png)
+
+![image-20250628112620876](osc-sim/image-20250628112620876.png)
+
+
+
+> EEStream. Cadence - How to find device capacitance - DC simulation, SP simulation and Large-signal SP simulation [[https://www.youtube.com/watch?v=M3zP6eJnONk](https://www.youtube.com/watch?v=M3zP6eJnONk)]
+>
+> ![image-20250628114414562](osc-sim/image-20250628114414562.png)
+
 
 
 ## reference

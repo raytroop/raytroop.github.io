@@ -1078,42 +1078,6 @@ foreach net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical
 
 
 
-## Metastability & Synchronizer
-
-> *Clock Domain Crossing (CDC)*
-
-When a flip-flop samples an input that is changing during its aperture, the output Q may momentarily take on a voltage between 0 and VDD that is in the forbidden zone. This is called a metastable state. Eventually, the flip-flop will resolve the output to a stable state of either 0 or 1. However, the resolution time required to reach the stable state is *unbounded*
-
-
-
-![image-20240803075025846](insight/image-20240803075025846.png)
-
-
-
-
-
-### Mean Time Between Failure (MTBF)
-
-*TODO* &#128197;
-
-
-
-
-
-
-
-> Steve Golson. Synchronization and Metastability [[https://trilobyte.com/pdf/golson_snug14.pdf](https://trilobyte.com/pdf/golson_snug14.pdf)]
->
-> R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011, doi: 10.1109/MDT.2011.113. [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
->
-> Kinniment, D. J. Synchronization and arbitration in digital systems. John Wiley & Sons Ltd (2007).
->
-> Amr Adel Mohammady, Clock Domain Crossing [[https://fpga-systems.ru/library/cdc/cdc_all_patrs.pdf](https://fpga-systems.ru/library/cdc/cdc_all_patrs.pdf)]
->
-> Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
-
-
-
 ## Slewing of Folded-Cascode Op Amps
 
 

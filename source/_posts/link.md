@@ -7,15 +7,17 @@ categories:
 mathjax: true
 ---
 
-## Refclk Specifications
+## Refclk Specifications & Clocking Architectures
 
 > PCI Express Base Specification Revision *3.0*
 >
 > Jeff Morriss, Intel Gerry Talbot, AMD. PCI-SIG Devcon 2006. Jitter Budgeting for Clock Architecture
+>
+> Verification of SRIS/SRNS Clocking [[https://www.esaindia.com/emailer/download/sria-srns-white-paper-final-v3.pdf](https://www.esaindia.com/emailer/download/sria-srns-white-paper-final-v3.pdf)]
 
 
 
-### *Common Refclk Rx Architecture*
+### Common Reference Clock (CC)
 
 Common Refclk Rx architectures are characterized by the Tx and Rx sharing the same Refclk source
 
@@ -35,7 +37,11 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 
 
-### *Data Clocked Refclk Rx Architecture*
+---
+
+![image-20250814011504270](link/image-20250814011504270.png)
+
+### Data Clocked Refclk Rx Architecture
 
 A data clocked Rx architecture is characterized by requiring the *receiver's CDR to track the entirety of the low frequency jitter, including SSC*
 
@@ -43,7 +49,7 @@ A data clocked Rx architecture is characterized by requiring the *receiver's CDR
 
 
 
-### *Separate Refclk Architecture*
+### Separate Reference Clocks with SSC (SRIS) 
 
 > TITLE: Separate Refclk Independent SSC Architecture (SRIS)
 > DATE: Updated 10 January 2013
@@ -71,11 +77,19 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 ![image-20250719152821655](link/image-20250719152821655.png)
 
-**S**eparate **R**eference Clocks with **I**ndependent **S**SC - **SRIS**
+---
 
-**S**eparate **R**eference Clocks With **N**o **S**SC - **SRNS**
+![image-20250814011411755](link/image-20250814011411755.png)
+
+### Separate Reference Clocks with No SSC (SRNS) 
+
+![image-20250814011354803](link/image-20250814011354803.png)
 
 
+
+##  Low-Latency PCIe
+
+*TODO* &#128197;
 
 
 

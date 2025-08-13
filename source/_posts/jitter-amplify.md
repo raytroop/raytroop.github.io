@@ -222,9 +222,7 @@ The calculated JTF  from JIR is *too **small*** compared with Pnoise simualtion
 
 B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and Measurement Techniques for High-Speed Data Links-A Tutorial," in IEEE Transactions on Circuits and Systems I. [[https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf](https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf)]
 
-Phase-Locked Frequency Generation and Clocking : Architectures and Circuits for Modern Wireless and Wireline Systems by Woogeun Rhee (2020, Hardcover) 
-
-Mathuranathan Viswanathan, Digital Modulations using Matlab : Build Simulation Models from Scratch
+Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and TechnologyMathuranathan Viswanathan, Digital Modulations using Matlab : Build Simulation Models from Scratch
 
 Tony Chan Carusone, University of Toronto, Canada, 2022 CICC Educational Sessions "Architectural Considerations in 100+ Gbps Wireline Transceivers"
 
@@ -233,8 +231,6 @@ X. Mo, J. Wu, N. Wary and T. Chan Carusone, "Design Methodologies for Low-Jitter
 Modeling Oscillators with Arbitrary Phase Noise Profiles [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles](https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles)]
 
 Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation," *2022 IEEE International Symposium on Circuits and Systems (ISCAS)*, Austin, TX, USA, 2022 [[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
-
-Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology
 
 Thomas Toifl. TWEPP 2012. Low-power High-Speed CMOS I/Os: Design Challenges and Solutions [[https://indico.cern.ch/event/170595/contributions/266344/attachments/212179/297391/twepp_sept2012_final_v2.pdf](https://indico.cern.ch/event/170595/contributions/266344/attachments/212179/297391/twepp_sept2012_final_v2.pdf)]
 

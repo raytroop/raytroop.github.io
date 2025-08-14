@@ -7,6 +7,14 @@ categories:
 mathjax: true
 ---
 
+
+## Energy/bit (pJ/b)
+
+1mW/Gbps = 1pJ/bit
+
+> **Joules** are a unit of work or *energy*. **Watts** are a unit of *power* which is the rate at which energy is generated or consumed.
+
+
 ## modulation depth
 
 The ***modulation index*** (or ***modulation depth***) of a modulation scheme describes

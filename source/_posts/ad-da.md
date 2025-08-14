@@ -722,3 +722,7 @@ Dr. Tai-Haur Kuo (郭泰豪 教授) Analog IC Design (類比積體電路設計) 
 Converter Passion for data-converter professionals sharing thoughts on ADCs and DACs [[https://converterpassion.wordpress.com/](https://converterpassion.wordpress.com/)]
 
 Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
+
+---
+
+MPScholar Analog-to-Digital Converters (ADCs) [[https://www.monolithicpower.com/en/learning/mpscholar/analog-to-digital-converters](https://www.monolithicpower.com/en/learning/mpscholar/analog-to-digital-converters)]

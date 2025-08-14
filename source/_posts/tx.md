@@ -406,25 +406,29 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 
 
-## Synchronization and Metastability
+## metastability & Synchronization Failure
 
-> *Clock Domain Crossing (CDC)*
+> **Metastability** is an **undesirable non-equilibrium** electronic state that can persist for a long period of time
+>
+> ![image-20250814202050937](tx/image-20250814202050937.png)
 
-When a flip-flop samples an input that is changing during its aperture, the output Q may momentarily take on a voltage between 0 and VDD that is in the forbidden zone. This is called a metastable state. Eventually, the flip-flop will resolve the output to a stable state of either 0 or 1. However, the resolution time required to reach the stable state is *unbounded*
-
-
-
-![image-20240803075025846](tx/image-20240803075025846.png)
+![image-20250814200158666](tx/image-20250814200158666.png)
 
 
 
+![image-20250814185129279](tx/image-20250814185129279.png)
 
 
-### Mean Time Between Failure (MTBF)
 
-*TODO* &#128197;
+![image-20250814191408558](tx/image-20250814191408558.png)
 
 
+
+*Poisson stochastic process*
+
+![image-20250814190822871](tx/image-20250814190822871.png)
+
+![image-20250814201827266](tx/image-20250814201827266.png)
 
 
 
@@ -432,23 +436,26 @@ When a flip-flop samples an input that is changing during its aperture, the outp
 
 > Amr Adel Mohammady. Clock Domain Crossing [[linkedin](https://www.linkedin.com/posts/amradelm_clock-domain-crossing-all-parts-activity-7245373317526818816-tiO8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 >
-> Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
->
 > Steve Golson. Synchronization and Metastability [[https://trilobyte.com/pdf/golson_snug14.pdf](https://trilobyte.com/pdf/golson_snug14.pdf)]
 >
 > R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011, doi: 10.1109/MDT.2011.113. [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
 >
 > Kinniment, D. J. Synchronization and arbitration in digital systems. John Wiley & Sons Ltd (2007).
 >
-> Amr Adel Mohammady, Clock Domain Crossing [[https://fpga-systems.ru/library/cdc/cdc_all_patrs.pdf](https://fpga-systems.ru/library/cdc/cdc_all_patrs.pdf)]
->
 > Synchronizers And Data FlipFlops are Different [[pdf](https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf)]
 >
 > S. Beer, R. Ginosar, M. Priel, R. Dobkin and A. Kolodny, "The Devolution of Synchronizers," *2010 IEEE Symposium on Asynchronous Circuits and Systems*, Grenoble, France, 2010 [[pdf](https://kolodny.net.technion.ac.il/files/2016/07/The-devolution-of-synchronizers-ASYNC-2010.pdf)]
 >
-> IN3160 IN4160 Metastability and Clock domain crossing [[pdf](https://www.uio.no/studier/emner/matnat/ifi/IN3160/v22/forelesningsfoiler/in3160-clock-domains.pdf)]
->
-> 
+
+
+
+---
+
+***Synchronizer effect – latency uncertainty***
+
+![image-20250814202542548](tx/image-20250814202542548.png)
+
+> 赵启林 klin, Metastability [[https://picture.iczhiku.com/resource/eetop/SHKSFADwZerLPBXN.pdf](https://picture.iczhiku.com/resource/eetop/SHKSFADwZerLPBXN.pdf)]
 
 
 
@@ -456,11 +463,15 @@ When a flip-flop samples an input that is changing during its aperture, the outp
 
 Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter Circuits [[https://youtu.be/oofViBGlrjM?si=WZnOqtDVG3iDnBHI](https://youtu.be/oofViBGlrjM?si=WZnOqtDVG3iDnBHI)]
 
-Noman Hai, Synopsys. Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
+—, Synopsys. Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
 
 Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications 
 
 Friedel Gerfers, ISSCC2021 T6: Basics of DAC-based Wireline Transmitters [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T6.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T6.pdf)]
+
+Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
+
+Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC3.pdf](https://www.nishanchettri.com/isscc-slides/2021 ISSCC/SHORT COURSE/ISSCC2021-SC3.pdf)]
 
 Tod Dickson, IBM. High-Speed CMOS Serial Transmitters for 56-112Gb/s Electrical Interconnects [[https://www.youtube.com/watch?v=g1pcZabsRNc&t=13s](https://www.youtube.com/watch?v=g1pcZabsRNc&t=13s)]
 

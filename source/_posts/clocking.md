@@ -231,7 +231,11 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-## clock gating
+## Tri-gate Clock MUX vs Pass-gate Clock MUX
+
+
+*TODO* &#128197;
+
 
 ![clk_mux.drawio](clocking/clk_mux.drawio.svg)
 

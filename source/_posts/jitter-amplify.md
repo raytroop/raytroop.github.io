@@ -51,6 +51,9 @@ Directly compare the input phase noise and output phase noise, the input wavefor
 >
 > [[Alphawave’s CTO, Tony Chan Carusone, High Speed Communications Part 8 – On Die CMOS Clock Distribution ](https://youtu.be/nx5CiHcwrF0?si=QhOJmsW5IozRnF4F)]
 
+Theoretically, the DC gain of JTF of low pass filter shall be ***1***. 
+Unfortunately, the gain *less than 1* due to numerical error or nonlinearity
+
 ![image-20220313231027512](jitter-amplify/image-20220313231027512.png)
 
 

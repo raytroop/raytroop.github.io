@@ -19,6 +19,11 @@ mathjax: true
 
 
 
+## Diode capacitance vs. Vpn
+
+
+*TODO* &#128197;
+
 ## PERC
 
 - CD: current density checks

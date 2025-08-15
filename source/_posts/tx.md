@@ -24,7 +24,7 @@ mathjax: true
 
 *TODO* &#128197;
 
-## Eye Linearity vs. RLM
+## Eye Linearity vs. RLM (Relative Level Mismatch)
 
 *TODO* &#128197;
 

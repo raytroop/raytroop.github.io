@@ -43,17 +43,36 @@ mathjax: true
 
 ![image-20250815012602436](resync/image-20250815012602436.png)
 
+The typical flip-flops comprise master and slave latches and decoupling inverters.
+
+In metastability, the voltage levels of nodes A and B of the *master latch* are roughly midway between logic 1 (VDD) and 0 (GND)
+
+> *master latch* enter metastability
+
+
+In fact, one popular definition says that if the output of a *flip-flop* changes later than the nominal clock-to-Q propagation delay, then the flip-flop must have been metastable
+
+
+---
+
 ***sweep*** $\Delta t_{D \to \space \text{CK}}$
 
 ![image-20250815012324689](resync/image-20250815012324689.png)
 
 
+---
 
 ***transient noise analysis*** @ $\Delta t_{D \to \space \text{CK}} = -3.444525p$
 
 ![image-20250815065000958](resync/image-20250815065000958.png)
 
 > ![image-20250815065259004](resync/image-20250815065259004.png)
+
+---
+
+$\Delta t_{D \to \space \text{CK}}$ vs. CK-Q delay
+
+
 
 ---
 

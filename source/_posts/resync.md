@@ -43,13 +43,13 @@ mathjax: true
 
 ![image-20250815012602436](resync/image-20250815012602436.png)
 
-***sweep*** $\Delta _{t_D \to \space \text{CK}}$
+***sweep*** $\Delta t_{D \to \space \text{CK}}$
 
 ![image-20250815012324689](resync/image-20250815012324689.png)
 
 
 
-***transient noise analysis*** @ $\Delta _{t_D \to \space \text{CK}} = -3.444525p$
+***transient noise analysis*** @ $\Delta t_{D \to \space \text{CK}} = -3.444525p$
 
 ![image-20250815065000958](resync/image-20250815065000958.png)
 
@@ -67,11 +67,11 @@ mathjax: true
 
 Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
 
+R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011, doi: 10.1109/MDT.2011.113. [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
+
 Amr Adel Mohammady. Clock Domain Crossing [[linkedin](https://www.linkedin.com/posts/amradelm_clock-domain-crossing-all-parts-activity-7245373317526818816-tiO8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 
 Steve Golson. Synchronization and Metastability [[https://trilobyte.com/pdf/golson_snug14.pdf](https://trilobyte.com/pdf/golson_snug14.pdf)]
-
-R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011, doi: 10.1109/MDT.2011.113. [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
 
 Kinniment, D. J. Synchronization and arbitration in digital systems. John Wiley & Sons Ltd (2007).
 

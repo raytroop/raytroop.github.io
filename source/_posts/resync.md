@@ -57,30 +57,28 @@ In fact, one popular definition says that if the output of a *flip-flop* changes
 
 ***sweep*** $\Delta t_{D \to \space \text{CK}}$
 
-![image-20250815012324689](resync/image-20250815012324689.png)
+![image-20250815181257083](resync/image-20250815181257083.png)
 
 
 ---
 
 ***transient noise analysis*** @ $\Delta t_{D \to \space \text{CK}} = -3.444525p$
 
-![image-20250815065000958](resync/image-20250815065000958.png)
+![image-20250815190341687](resync/image-20250815190341687.png)
 
-> ![image-20250815065259004](resync/image-20250815065259004.png)
-
----
-
-$\Delta t_{D \to \space \text{CK}}$ vs. CK-Q delay
-
-
+> ![image-20250815190431960](resync/image-20250815190431960.png)
 
 ---
+
+
 
 ![image-20250815011210280](resync/image-20250815011210280.png)
 
 
 
-> *Noise Seed—*Seed for the random number generator (used by the simulator to vary the noise sources internally). Specifying the *same seed* allows you to *reproduce* a previous experiment. The default value is `1`.
+> `Noise Seed`—Seed for the random number generator (used by the simulator to vary the noise sources internally). Specifying the *same seed* allows you to *reproduce* a previous experiment. The default value is `1`.
+
+
 
 ## reference
 

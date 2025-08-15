@@ -489,7 +489,13 @@ Thanks to the device scaling the area is actually reasonable. However, the leaka
 
 
 
-## high current diode
+## high current diode (HIA)
+
+![image-20250815202404198](esd-latchup/image-20250815202404198.png)
+
+both diode are reverse-biased in normal operation, the PN Junction capacitance is proportional to forward-bias voltage
+
+---
 
 ![image-20220618123654830](esd-latchup/image-20220618123654830.png)
 
@@ -497,7 +503,7 @@ Thanks to the device scaling the area is actually reasonable. However, the leaka
 
 ![image-20220618124644879](esd-latchup/image-20220618124644879.png)
 
-> both diode are reverse-biased in normal operation, the PN Junction capacitance is proportional to forward-bias voltage
+
 
 | Device           |                           |
 | ---------------- | ------------------------- |

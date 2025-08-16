@@ -406,12 +406,6 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 
 
-## Single-Ended & Differential Signaling
-
-
-
-
-
 
 ## reference
 

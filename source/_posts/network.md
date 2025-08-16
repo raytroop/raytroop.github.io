@@ -260,6 +260,16 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
+## Spar in AC simulation
+
+![image-20250816221249094](network/image-20250816221249094.png)
+
+![image-20250816221939979](network/image-20250816221939979.png)
+
+
+
+> ![image-20250816222126241](network/image-20250816222126241.png)
+
 
 
 

@@ -151,33 +151,6 @@ $$
 
 
 
-## Phase Interpolator (PI)
-
-!!! Clock Edges
-
-And for a phase interpolator, you need those reference clocks to be completely the opposite. Ideally they would be **triangular** shaped
-
-![image-20240821203756602](clocking/image-20240821203756602.png)
-
-> *four input clocks given by the cyan, black, magenta, red* 
-
-
-
-
-> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery" [[https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)]
-
-
-
-***kink problem***
-
-![image-20240919223032380](clocking/image-20240919223032380.png)
-
-> B. Razavi, **"The Design of a Phase Interpolator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 4, pp. 6-10, Fall 2023.([https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf))
-
-
-
-
-
 ## DIV 1.5
 
 *TODO* &#128197;

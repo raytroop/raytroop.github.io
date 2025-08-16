@@ -162,6 +162,12 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 
 
+---
+
+![image-20250815232359572](osc-pn/image-20250815232359572.png)
+
+![image-20250815234653864](osc-pn/image-20250815234653864.png)
+
 
 
 

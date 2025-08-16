@@ -7,6 +7,111 @@ categories:
 mathjax: true
 ---
 
+![image-20250816004521416](jitter/image-20250816004521416.png)
+
+
+
+![image-20250816003816639](jitter/image-20250816003816639.png)
+
+
+
+## Even-odd Jitter (EOJ)
+
+| Jitter measurement | Description                                                  |
+| :----------------- | :----------------------------------------------------------- |
+| F/2                | F/2 is the peak-to-peak amplitude of the periodic jitter occurring at 1/2 of the data rate. |
+
+**Even-odd jitter**, also known as **F/2 jitter**, arises from a clock signal's duty cycle not being perfectly 50%
+
+![image-20250816130508935](jitter/image-20250816130508935.png)
+
+> ***Even-odd jitter*** has been referred to as ***duty cycle distortion*** by other Physical Layer specifications for operation over electrical backplane or twinaxial copper cable assemblies
+
+
+
+![image-20250816130650378](jitter/image-20250816130650378.png)
+
+---
+
+![image-20250816181004878](jitter/image-20250816181004878.png)
+
+> Comparing DCD and F/2 Jitter Using a BERTScope® Bit Error Rate Testing Application Note [[https://download.tek.com/document/65W_26040_0_Letter.pdf](https://download.tek.com/document/65W_26040_0_Letter.pdf)]
+
+## Pulse Width Jitter (PWJ)
+
+![image-20250816125512147](jitter/image-20250816125512147.png)
+
+![image-20250816125533070](jitter/image-20250816125533070.png)
+
+> Jeff Morriss Updated 10/25/07. Analysis of 8G PCIe Pulse Width Jitter (*UI to UI Jitter_10_25.ppt*)
+
+
+
+---
+
+![image-20250816132730999](jitter/image-20250816132730999.png)
+
+
+
+## Duty Cycle Distortion – DCD
+
+| Jitter measurement | Description                                                  |
+| :----------------- | :----------------------------------------------------------- |
+| DCD                | Duty Cycle Distortion is the peak-to-peak amplitude of the component of the deterministic jitter correlated with the signal polarity. |
+
+![image-20250816081711834](jitter/image-20250816081711834.png)
+
+![image-20250816081808897](jitter/image-20250816081808897.png)
+
+---
+
+> Jitter fundamental & How Isolating Root Causes of Jitter [[https://picture.iczhiku.com/resource/eetop/ShKgzTEiUfdFOcvn.pdf](https://picture.iczhiku.com/resource/eetop/ShKgzTEiUfdFOcvn.pdf)]
+
+There are two primary causes of DCD jitter which are usually generated within a transmitter
+
+-  If the data input to a transmitter is theoretically perfect, but if the ***transmitter sampling threshold*** is offset from its ideal level, then the output of transmitter will have duty cycle distortion as ***a function of the slew rate of the data signal*** 
+- Another cause of duty cycle distortion can be a ***mismatch/asymmetry in rising and falling edge speeds***
+
+![image-20250816085315710](jitter/image-20250816085315710.png)
+
+---
+
+Unfortunately, other sources such as ISI almost always exist making it sometimes difficult to isolate the DCD component. One technique to test for DCD is to stimulate your system/components with ***a repeating `1-0-1-0…` data pattern.*** This technique will eliminate inter-symbol interference (ISI) jitter and make viewing the DCD within the spectrum display much easier
+
+> Why clock pattern? That's because all symbols experience ***same*** inter-symbol interference, which are canceled out
+
+---
+
+![image-20250816103444976](jitter/image-20250816103444976.png)
+
+---
+
+![image-20250816180338475](jitter/image-20250816180338475.png)
+
+> [[https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/dl_application/application_notes/1td03/1TD03_2e_RTO_Jitter_Analysis.pdf](https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/dl_application/application_notes/1td03/1TD03_2e_RTO_Jitter_Analysis.pdf)]
+
+## Correlated  vs. Uncorrelated
+
+If the PDF of one jitter source changes when the PDF of another source is changed, then those two sources are ***dependent*** or ***correlated***
+
+![image-20250816080432083](jitter/image-20250816080432083.png)
+
+
+
+
+
+## Inter-Symbol Interference  (ISI)
+
+The primary cause of Data Dependent Jitter
+
+![image-20250816090326309](jitter/image-20250816090326309.png)
+
+![image-20250816090430513](jitter/image-20250816090430513.png)
+
+---
+
+
+
 Jitter measurements can be classified into three categories: *cycle-to-cycle jitter*, *period jitter*, and *long-term jitter*
 
 Jitter is a key performance parameter. Need to know what matters in each case: 
@@ -99,20 +204,6 @@ $$
 
 
 
-## Cadence Sampled Phase Noise
-
-![ ](jitter/jitter.edgePhase.Noise.png)
-
-![ ](jitter/sampledNoise-2.png)
-
-
-
-> How to derive edge phase noise from Output Noise in sampled Pnoise simulation, [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/56929/how-to-derive-edge-phase-noise-from-output-noise-in-sampled-pnoise-simulation)]
->
-> [[Shawn Logan, Summary of Study of Cadence Sampled Phase Noise and Jitter Definitions with a Comparison to Conventional Time Interval Error (TIE) for a Driven Circuit](www.dropbox.com/s/3m531dl4fl7bwbr/jee_computation_example_sml_032823v1p0.pdf)]
-
-
-
 ##  General relationships between variance of jitter and phase noise
 
 ![image-20240718225039432](jitter/image-20240718225039432.png)
@@ -134,3 +225,8 @@ One-size-fits-all PLLs for Advanced Samsung Foundry Processes, Silicon Creations
 Circuit Design and Verification of 7nm LowPower, Low-Jitter PLLs, Silicon Creations, [[pdf](https://www.siliconcr.com/sc-cms/uploads/u2u-2018-sicr-plls-v3-180509.pdf)]
 
 Lecture 10: Jitter, ECEN720: High-Speed Links Circuits and Systems Spring 2023 [[pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture10_ee720_jitter.pdf)]
+
+Jitter 360° Knowledge Series  [[pdf](https://ransomsnotes.com/index_htm_files/RansomStephensAndTektronixJitter360.pdf), [slides](https://picture.iczhiku.com/resource/eetop/WyiGPhKZaiWfoXxM.pdf)]
+
+N. Da Dalt, "Tutorial: Jitter: Basic and Advanced Concepts, Statistics, and Applications," *2012 IEEE International Solid-State Circuits Conference*, San Francisco, CA, USA, 2012 [[slides](https://picture.iczhiku.com/resource/eetop/WhiryqaaRpqYeCxx.pdf), [transcript](https://picture.iczhiku.com/resource/eetop/WYifhqAAZphyFNcn.pdf) ]
+

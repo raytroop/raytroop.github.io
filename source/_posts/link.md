@@ -7,6 +7,18 @@ categories:
 mathjax: true
 ---
 
+
+
+## Clocking Structures
+
+Synchronous, Mesochronous, Plesiochronous
+
+![image-20250815221238051](link/image-20250815221238051.png)
+
+
+
+
+
 ## Refclk Specifications & Clocking Architectures
 
 > PCI Express Base Specification Revision *3.0*

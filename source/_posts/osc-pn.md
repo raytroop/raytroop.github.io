@@ -25,6 +25,20 @@ mathjax: true
 
 
 
+## PM vs. FM jitter
+
+> Deog-Kyoon Jeong. Topics in IC Design: 1.1 Introduction to Jitter [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf)]
+
+![image-20250816235853433](osc-pn/image-20250816235853433.png)
+
+![image-20250816235928360](osc-pn/image-20250816235928360.png)
+
+
+
+
+
+
+
 ## Phase Noise Profile
 
 > Power Spectral Density of Brownian Motion despite non-stationary [[https://dsp.stackexchange.com/a/75043/59253](https://dsp.stackexchange.com/a/75043/59253)]

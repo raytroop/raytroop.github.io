@@ -66,6 +66,8 @@ In fact, one popular definition says that if the output of a *flip-flop* changes
 
 ![image-20250815190341687](resync/image-20250815190341687.png)
 
+> zoom out
+>
 > ![image-20250815190431960](resync/image-20250815190431960.png)
 
 ---
@@ -84,7 +86,7 @@ In fact, one popular definition says that if the output of a *flip-flop* changes
 
 Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
 
-R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011, doi: 10.1109/MDT.2011.113. [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
+R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011 [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
 
 Amr Adel Mohammady. Clock Domain Crossing [[linkedin](https://www.linkedin.com/posts/amradelm_clock-domain-crossing-all-parts-activity-7245373317526818816-tiO8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 
@@ -97,3 +99,6 @@ Synchronizers And Data FlipFlops are Different [[pdf](https://ee.usc.edu/async20
 S. Beer, R. Ginosar, M. Priel, R. Dobkin and A. Kolodny, "The Devolution of Synchronizers," *2010 IEEE Symposium on Asynchronous Circuits and Systems*, Grenoble, France, 2010 [[pdf](https://kolodny.net.technion.ac.il/files/2016/07/The-devolution-of-synchronizers-ASYNC-2010.pdf)]
 
 赵启林 klin, Metastability [[https://picture.iczhiku.com/resource/eetop/SHKSFADwZerLPBXN.pdf](https://picture.iczhiku.com/resource/eetop/SHKSFADwZerLPBXN.pdf)]
+
+Asad Abidi. ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q&t=681](https://youtu.be/sVe3VUTNb4Q&t=681)]
+

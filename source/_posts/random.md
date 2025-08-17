@@ -398,3 +398,6 @@ R. Ziemer and W. Tranter, Principles of Communications, Seventh Edition, 2013 [[
 
 Stark H, Woods JW. *Probability, Statistics, and Random Processes for Engineers*, 4th ed. 2012 [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgHqkPkiWRYmVN.pdf)]
 
+---
+
+Balu Santhanam. Fall 2020 ECE541 Probability Theory & Stochastic Process [[https://ece-research.unm.edu/bsanthan/ece541/](https://ece-research.unm.edu/bsanthan/ece541/)]

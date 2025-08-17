@@ -303,5 +303,7 @@ Aleksey Tyshchenko, SeriaLink Systems Clinton Walker, Alphawave IP. DesignCon 20
 
 **Ali Sheikholeslami** Electronics Group, University of Toronto [[https://www.eecg.utoronto.ca/~ali/](https://www.eecg.utoronto.ca/~ali/)]
 
+---
 
+Barry, John R., Edward A. Lee, and David G. Messerschmitt. *Digital communication*. Springer, 2003.
 

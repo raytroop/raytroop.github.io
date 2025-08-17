@@ -3,17 +3,23 @@ title: DSP Implementation & Fixed-Point Arithmetic
 date: 2025-08-17 07:29:09
 tags:
 categories:
-- dsp
+- link
 mathjax: true
 ---
 
 *TODO* &#128197;
+
+
 
 ## reference
 
 Jabbour, Chadi, etc.. "Digitally enhanced mixed signal systems." *IEEE International Symposium on Circuits and Systems (ISCAS)*. 2019.
 
 Sen M. Kuo. Real-Time Digital Signal Processing: Fundamentals, Implementations and Applications, 3rd Edition. John Wiley & Sons 2013
+
+Taylor, Fred. *Digital filters: principles and applications with MATLAB*. John Wiley & Sons, 2011
+
+Kuo, Sen-Maw. (2013) Real-Time Digital Signal Processing: Implementations and Applications 3rd [[pdf](https://students.aiu.edu/submissions/profiles/resources/onlineBook/H7Y7t7_Real-Time_Digital_Signal_Processing_Applications-_3rd.pdf)]
 
 ---
 

@@ -1,11 +1,17 @@
 ---
-title: Jitter amplification
+title: Jitter Amplification
 date: 2022-03-13 23:02:11
 tags:
 categories:
 - noise
 mathjax: true
 ---
+
+![image-20250817101208717](jitter-amplify/image-20250817101208717.png)
+
+---
+
+
 
 ![image-20250606203026237](jitter-amplify/image-20250606203026237.png)
 
@@ -219,6 +225,8 @@ The calculated JTF  from JIR is *too **small*** compared with Pnoise simualtion
 
 
 
+
+
 ## Reference
 
 [Sam Palermo, ECEN 720, Lecture 13 - Forwarded Clock Deskew Circuits](https://people.engr.tamu.edu/spalermo/ecen689/lecture13_ee720_fwd_clk_deskew.pdf)
@@ -240,3 +248,5 @@ Thomas Toifl. TWEPP 2012. Low-power High-Speed CMOS I/Os: Design Challenges and 
 Ganesh Balamurugan and Naresh Shanbhag, "Modeling and mitigation of jitter in multiGbps source-synchronous I/O links," *Proceedings 21st International Conference on Computer Design*, San Jose, CA, USA, 2003, pp. 254-260, doi: 10.1109/ICCD.2003 [[https://shanbhag.ece.illinois.edu/publications/ganesh-ICCD2203.pdf](https://shanbhag.ece.illinois.edu/publications/ganesh-ICCD2203.pdf)]
 
 Balamurugan, G. & Casper, Bryan & Jaussi, James & Mansuri, Mozhgan & O'Mahony, Frank & Kennedy, Joseph. (2009). Modeling and Analysis of High-Speed I/O Links. Advanced Packaging, IEEE Transactions on. [[https://sci-hub.se/10.1109/TADVP.2008.2011366](https://sci-hub.se/10.1109/TADVP.2008.2011366)]
+
+Jihwan Kim,, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter

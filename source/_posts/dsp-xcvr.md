@@ -3,7 +3,7 @@ title: DSP-Based SerDes
 date: 2025-07-06 09:55:48
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 

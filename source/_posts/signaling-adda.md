@@ -1,5 +1,5 @@
 ---
-title: Data Converter in Action
+title: Signaling for Data Converter
 date: 2025-06-21 18:54:55
 tags:
 categories:
@@ -13,7 +13,7 @@ Sigma-delta digital-to-analog converters (SD DAC’s) are often used for *discre
 
 - Because of the high sample rate relative to signal bandwidth, ***a very simple DAC reconstruction filter* (*Analog lowpass filter*)** suffices, often just a *one-pole RC lowpass*
 
-![image-20250616000829208](data-converter-in-action/image-20250616000829208.png)
+![image-20250616000829208](signaling-adda/image-20250616000829208.png)
 
 
 
@@ -37,7 +37,7 @@ subplot(3,1,3)
 plot(t, y_filt); title('y_{filt}'); xlabel('t(ms)'); grid on
 ```
 
-![image-20250621223451691](data-converter-in-action/image-20250621223451691.png)
+![image-20250621223451691](signaling-adda/image-20250621223451691.png)
 
 
 
@@ -85,11 +85,11 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 ## DAC ZOH
 
-![image-20250628204404959](data-converter-in-action/image-20250628204404959.png)
+![image-20250628204404959](signaling-adda/image-20250628204404959.png)
 
 > The last D2C is in human vision, which connect discrete time $y(m)$ with line, implicitly
 
-![image-20250628203216965](data-converter-in-action/image-20250628203216965.png)
+![image-20250628203216965](signaling-adda/image-20250628203216965.png)
 
 
 

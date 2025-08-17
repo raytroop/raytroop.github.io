@@ -3,7 +3,7 @@ title: PI-based CDR
 date: 2025-08-15 22:14:29
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: Time-Domain Channel Simulation
+title: Single-Bit Response (SBR) & Double-Edge Response (DER)
 date: 2023-09-23 11:09:07
 tags:
 categories:
-- dsp
+- link
 mathjax: true
 ---
 

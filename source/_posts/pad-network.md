@@ -3,7 +3,7 @@ title: Input/Output Network
 date: 2025-06-06 23:10:37
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 

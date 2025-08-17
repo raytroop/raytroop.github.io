@@ -3,7 +3,7 @@ title: Wireline Transmitter
 date: 2025-06-07 08:33:38
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 
@@ -413,7 +413,9 @@ Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter 
 
 —, Synopsys. Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
 
-Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications 
+Jihwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications 
+
+—, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
 
 Friedel Gerfers, ISSCC2021 T6: Basics of DAC-based Wireline Transmitters [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T6.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T6.pdf)]
 

@@ -1,23 +1,66 @@
 ---
-title: Link Budgets & Models
+title: Link Budget
 date: 2024-11-02 12:34:55
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 
 ## Single-Ended & Differential Signaling
 
+> [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf)]
 
+![image-20250817110423246](link-budget/image-20250817110423246.png)
+
+![image-20250817111312267](link-budget/image-20250817111312267.png)
+
+![image-20250817111157827](link-budget/image-20250817111157827.png)
+
+
+
+---
+
+> [[https://www.allaboutcircuits.com/technical-articles/the-why-and-how-of-differential-signaling/](https://www.allaboutcircuits.com/technical-articles/the-why-and-how-of-differential-signaling/)]
+
+![image-20250817110059363](link-budget/image-20250817110059363.png)
+
+***Since we have (ideally) no return current, the ground reference becomes less important.*** The ground potential can even be different at the sender and receiver or moving around within a certain acceptable range. However, you need to be careful because DC-coupled differential signaling (such as USB, RS-485, CAN) generally requires a shared ground potential to ensure that the signals stay within the interface's maximum and minimum allowable common-mode voltage.
 
 
 
 ## Clocking Structures
 
-Synchronous, Mesochronous, Plesiochronous
+***Synchronous***, ***Mesochronous***, ***Plesiochronous***
 
-![image-20250815221238051](link/image-20250815221238051.png)
+![image-20250815221238051](link-budget/image-20250815221238051.png)
+
+
+
+## Cascaded PLLs
+
+> Chembiyan T, A General Theory of Cascaded PLL Design [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_theory-of-cascaded-pll-activity-7331339385952448512-ZwxN?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
+>
+> Nicola Da Dalt, ISSCC 2012 T5: JITTER basic and advanced concepts, statistics and applications [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf)]
+>
+> —. ESSCIRC 2019 Tutorials: Jitter in Wireline and Data Converter Applications [[https://youtu.be/aapkfCeHTrQ](https://youtu.be/aapkfCeHTrQ)]
+
+To understand the impact of the clock jitter on the performance of a wireline system, *the transfer functions of the PLL in the transmitter side* and *the CDR loop in the receiver* should be taken into consideration
+
+![image-20250524111908032](link-budget/image-20250524111908032.png)
+
+
+
+![image-20250524091655525](link-budget/image-20250524091655525.png)
+
+![image-20250524222625524](link-budget/image-20250524222625524.png)
+
+
+
+> *the **minimum** jitter* occurs at the point where the *transmit PLL UGB is **minimum*** and the *CDR UGB is **maximized***
+
+- the net rms jitter that impacts the performance of a wireline transceiver is much lower than the rms jitter of the transmit PLL
+- the jitter requirements of the transmit PLL on the wireline system is much more relaxed compared to the wireless transceiver  
 
 
 
@@ -41,7 +84,7 @@ Most of the SSC jitter sourced by the Refclk is propagated equally through Tx an
 
 The amount of jitter appearing at the CDR is then defined by the difference function between the Tx and Rx PLLs multiplied by the ***CDR highpass characteristic***
 
-![image-20250719172803394](link/image-20250719172803394.png)
+![image-20250719172803394](link-budget/image-20250719172803394.png)
 $$
 H(s)= H_1(s)e^{-sT} -  \left[H_1(s)e^{-sT}(1-H_3(s)) + H_2(s)H_3(s) \right] = [H_1(s)e^{-sT} -H_2(s)]H_3(s)
 $$
@@ -49,19 +92,19 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 
 
-> ![image-20250719181032685](link/image-20250719181032685.png)
+> ![image-20250719181032685](link-budget/image-20250719181032685.png)
 
 
 
 ---
 
-![image-20250814011504270](link/image-20250814011504270.png)
+![image-20250814011504270](link-budget/image-20250814011504270.png)
 
 ### Data Clocked Refclk Rx Architecture
 
 A data clocked Rx architecture is characterized by requiring the *receiver's CDR to track the entirety of the low frequency jitter, including SSC*
 
-![image-20250719183101724](link/image-20250719183101724.png)
+![image-20250719183101724](link-budget/image-20250719183101724.png)
 
 
 
@@ -72,34 +115,34 @@ A data clocked Rx architecture is characterized by requiring the *receiver's CDR
 > AFFECTED DOCUMENT: PCI Express Base Spec. Rev. 3.0
 > SPONSOR: Intel, HP, AMD
 
-![image-20250719183242222](link/image-20250719183242222.png)
+![image-20250719183242222](link-budget/image-20250719183242222.png)
 $$\begin{align}
 X_{LATCH}(s) &= X_1(s)H_1(s) -  \left[X_1(s)H_1(s)(1-H_3(s)) + X_2(s)H_2(s)H_3(s) \right] \\
 & = \left[X_1(s)H_1(s) -X_2(s)H_2(s)\right]H_3(s)
 \end{align}$$
 where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
-![image-20250719182447193](link/image-20250719182447193.png)
+![image-20250719182447193](link-budget/image-20250719182447193.png)
 
-![image-20250719182517511](link/image-20250719182517511.png)
+![image-20250719182517511](link-budget/image-20250719182517511.png)
 
 
 
-> ![image-20250719182123550](link/image-20250719182123550.png)
+> ![image-20250719182123550](link-budget/image-20250719182123550.png)
 >
-> ![image-20250719181221513](link/image-20250719181221513.png)
+> ![image-20250719181221513](link-budget/image-20250719181221513.png)
 
 ---
 
-![image-20250719152821655](link/image-20250719152821655.png)
+![image-20250719152821655](link-budget/image-20250719152821655.png)
 
 ---
 
-![image-20250814011411755](link/image-20250814011411755.png)
+![image-20250814011411755](link-budget/image-20250814011411755.png)
 
 ### Separate Reference Clocks with No SSC (SRNS) 
 
-![image-20250814011354803](link/image-20250814011354803.png)
+![image-20250814011354803](link-budget/image-20250814011354803.png)
 
 
 
@@ -122,7 +165,7 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 **Even**-Order Distortion: **non-symmetry**  (*Effect of Mismatch*)
 
-![image-20250613235048524](link/image-20250613235048524.png)
+![image-20250613235048524](link-budget/image-20250613235048524.png)
 
 
 
@@ -137,20 +180,20 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 > [[http://cc.ee.ntu.edu.tw/~ecl/Courses/105AIC/lock/Analog_Chapter_09_Nonlinearity%20and%20Mismatch.pdf](http://cc.ee.ntu.edu.tw/~ecl/Courses/105AIC/lock/Analog_Chapter_09_Nonlinearity%20and%20Mismatch.pdf)]
 >
-> ![image-20250613235212237](link/image-20250613235212237.png)
+> ![image-20250613235212237](link-budget/image-20250613235212237.png)
 
 
 
 
 ## PAM4
 
-![image-20250607083851955](link/image-20250607083851955.png)
+![image-20250607083851955](link-budget/image-20250607083851955.png)
 
 
 
-![image-20240808205451067](link/image-20240808205451067.png)
+![image-20240808205451067](link-budget/image-20240808205451067.png)
 
-![image-20240808205635598](link/image-20240808205635598.png)
+![image-20240808205635598](link-budget/image-20240808205635598.png)
 
 
 
@@ -158,9 +201,9 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 ## Eye-Diagram and Bit-Error-Ratio (BER)
 
-![image-20250607082220455](link/image-20250607082220455.png)
+![image-20250607082220455](link-budget/image-20250607082220455.png)
 
-![image-20250607082510464](link/image-20250607082510464.png)
+![image-20250607082510464](link-budget/image-20250607082510464.png)
 
 
 
@@ -172,7 +215,7 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 ## JTOL btw DSP-based vs Analog PAM4 RX
 
-![image-20250525110540570](link/image-20250525110540570.png)
+![image-20250525110540570](link-budget/image-20250525110540570.png)
 
 
 
@@ -182,23 +225,23 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 ## challenges in DSP-based SerDes
 
-![image-20250524224829419](link/image-20250524224829419.png)
+![image-20250524224829419](link-budget/image-20250524224829419.png)
 
 ### Parallel implementation
 
-![image-20250524235031104](link/image-20250524235031104.png)
+![image-20250524235031104](link-budget/image-20250524235031104.png)
 
 
 
-![image-20250525101922485](link/image-20250525101922485.png)
+![image-20250525101922485](link-budget/image-20250525101922485.png)
 
 
 
 ### Loop-Unrolling DFE
 
-![image-20250525105017605](link/image-20250525105017605.png)
+![image-20250525105017605](link-budget/image-20250525105017605.png)
 
-![image-20250525191101301](link/image-20250525191101301.png)
+![image-20250525191101301](link-budget/image-20250525191101301.png)
 
 Corresponding to the three distinct voltage thresholds in the *PAM4* systems, it would need *12 slicers, 3 multiplexers*, and *one thermometer-to-binary decoder* in each deserialized data path, even if only one tap of the DFE is unrolled
 
@@ -206,11 +249,11 @@ Corresponding to the three distinct voltage thresholds in the *PAM4* systems, it
 
 ### Look-Ahead Multiplexing DFE
 
-![image-20250525151918214](link/image-20250525151918214.png)
+![image-20250525151918214](link-budget/image-20250525151918214.png)
 
 The look-ahead multiplexing technique brings the key benefit that the timing constraint can be significantly relaxed, as the iteration bound is ***doubled*** at the expense of extra hardware
 
-![image-20250525192228275](link/image-20250525192228275.png)
+![image-20250525192228275](link-budget/image-20250525192228275.png)
 
 
 
@@ -239,7 +282,7 @@ The look-ahead multiplexing technique brings the key benefit that the timing con
 
 It is called "**forward**" error correction because it can correct errors even in the common situations where there is no backward channel
 
-![image-20250527212624165](link/image-20250527212624165.png)
+![image-20250527212624165](link-budget/image-20250527212624165.png)
 
 
 
@@ -268,7 +311,7 @@ It is called "**forward**" error correction because it can correct errors even i
 
 
 
-![image-20250107234500537](link/image-20250107234500537.png)
+![image-20250107234500537](link-budget/image-20250107234500537.png)
 
 sweep the setup time between ideal pulse input and clock, sample the output of SFE at falling edge
 
@@ -276,7 +319,7 @@ sweep the setup time between ideal pulse input and clock, sample the output of S
 
 ## ISI & DDJ filtering
 
-![image-20250104183820308](link/image-20250104183820308.png)
+![image-20250104183820308](link-budget/image-20250104183820308.png)
 
 
 
@@ -289,9 +332,9 @@ $$
 x_{RX,n}[p] = d[p]h_{RX}[0] +\sum \text{ISI} + n[p]
 $$
 
-![image-20250101105936807](link/image-20250101105936807.png)
+![image-20250101105936807](link-budget/image-20250101105936807.png)
 
-![image-20250101110902006](link/image-20250101110902006.png)
+![image-20250101110902006](link-budget/image-20250101110902006.png)
 
 
 > "ISI cancellation" based equalization is conceptually more straightforward but suffers from SNR penalty or error propagation
@@ -302,7 +345,7 @@ $$
 
 
 
-![image-20250103215417021](link/image-20250103215417021.png)
+![image-20250103215417021](link-budget/image-20250103215417021.png)
 
 
 
@@ -312,7 +355,7 @@ $$
 
 > **Sub-Resolution Time Averaging**
 
-![image-20241103160332995](link/image-20241103160332995.png)
+![image-20241103160332995](link-budget/image-20241103160332995.png)
 
 $\Delta \Sigma$ modulator effectively **dithers** the **LSB** bit between *zero and one*, such that you can get the effective resolution of a much higher resolution DAC in the number of bits
 
@@ -322,26 +365,26 @@ $\Delta \Sigma$ modulator effectively **dithers** the **LSB** bit between *zero 
 
 > how they affect sampling phase
 
-![image-20241020140430663](link/image-20241020140430663.png)
+![image-20241020140430663](link-budget/image-20241020140430663.png)
 
 DLF's input bit-width can be reduced by *decimating* BBPD's output. Decimation is typically performed by realizing either **majority voting (MV)** or **boxcar filtering**.
 
 > Note that **deserialization** is inherent to both **MV** and **boxcar** filtering
 
-![image-20241019225016868](link/image-20241019225016868.png)
+![image-20241019225016868](link-budget/image-20241019225016868.png)
 
 - Decimation is commonly employed to alleviate the high-speed requirement. However, decimation increases loop-latency which causes excessive dither jitter.
 - Decimation is basically, widen the data and slowing it down
 - Decimating by $L$ means frequency register only added once every $L$ UI, thus *integral path gain* reduced by $L$ in linear model
 - *proportional path gain* is unchanged
 
-![intg_path_decim.drawio](link/intg_path_decim.drawio.svg)
+![intg_path_decim.drawio](link-budget/intg_path_decim.drawio.svg)
 
 
 
 ## CDR Linear Model
 
-![image-20220504101924272](link/image-20220504101924272.png)
+![image-20220504101924272](link-budget/image-20220504101924272.png)
 
 > condition:
 >
@@ -372,7 +415,7 @@ $$
 
 > The jitter transfer represents a **low-pass filter** whose magnitude is around 1 (0 dB) for low jitter frequencies and drops at 20 dB/decade for frequencies above $\omega_n$
 
-![image-20220504104202197](link/image-20220504104202197.png)
+![image-20220504104202197](link-budget/image-20220504104202197.png)
 
 - the recovered clock **track** the *low-frequency jitter* of the input data
 - the recovered clock **DONT** track the *high-frequency jitter* of the input data
@@ -387,7 +430,7 @@ The peak, slightly larger than 1 (0dB) implies that jitter will be **amplified**
 
 This is certainly undesirable, especially in applications such as repeaters.
 
-![image-20220504110722442](link/image-20220504110722442.png)
+![image-20220504110722442](link-budget/image-20220504110722442.png)
 
 ### Jitter Generation
 
@@ -397,7 +440,7 @@ H_G(s)=\frac{\varphi_{out}}{\varphi_{VCO}}|_{\varphi_{in}=0}=\frac{s^2}{s^2+2\xi
 $$
 Jitter generation is **high-pass filter** with two zeros, at zero frequency, and two poles identical to those of the jitter transfer function
 
-![image-20220504110737718](link/image-20220504110737718.png)
+![image-20220504110737718](link-budget/image-20220504110737718.png)
 
 ### Jitter Tolerance (JTOL)
 
@@ -413,7 +456,7 @@ Where the subscript **$\text{pp-max}$** indicates the maximum **peak-to-peak amp
 $$
 JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right| \cdot |\varphi_e(f)|_\text{pp-max}
 $$
-![image-20250627204121289](link/image-20250627204121289.png)
+![image-20250627204121289](link-budget/image-20250627204121289.png)
 
 > Relative jitter, $\varphi_e$ must be less than 1UIpp for error-free operation
 
@@ -445,7 +488,7 @@ $$
 
 
 
-![image-20250627212710868](link/image-20250627212710868.png)
+![image-20250627212710868](link-budget/image-20250627212710868.png)
 
 ```matlab
 clc;
@@ -472,11 +515,11 @@ CC Chen, Circuit Images: Why JTOL in a CDR? [[https://youtu.be/kZExm9wy0G8?si=5U
 
 —. Why Pseudo-JTOL in a CDR Design or Verification? [[https://youtu.be/DZyzLhk59aY?si=xMcN2Xo3hnCeL3RX](https://youtu.be/DZyzLhk59aY?si=xMcN2Xo3hnCeL3RX)]
 
-![image-20250627202659095](link/image-20250627202659095.png)
+![image-20250627202659095](link-budget/image-20250627202659095.png)
 
-![image-20250627203101366](link/image-20250627203101366.png)
+![image-20250627203101366](link-budget/image-20250627203101366.png)
 
-![image-20250627203654688](link/image-20250627203654688.png)
+![image-20250627203654688](link-budget/image-20250627203654688.png)
 
 
 
@@ -485,7 +528,7 @@ CC Chen, Circuit Images: Why JTOL in a CDR? [[https://youtu.be/kZExm9wy0G8?si=5U
 #### Concepts of JTF and OJTF
 
 Simplified Block Diagram of a Clock-Recovery PLL
-![pll_block_diagram](link/pll_block_diagram.gif)
+![pll_block_diagram](link-budget/pll_block_diagram.gif)
 
 **Jitter Transfer Function (JTF)**
 
@@ -503,16 +546,16 @@ Simplified Block Diagram of a Clock-Recovery PLL
 
 JTF and OJTF for 1st Order PLLs
 
-![jsa_1st_order_graph](link/jsa_1st_order_graph.png)
+![jsa_1st_order_graph](link-budget/jsa_1st_order_graph.png)
 
-![neuhelium-jtf-ojtf](link/neuhelium-jtf-ojtf.png)
+![neuhelium-jtf-ojtf](link-budget/neuhelium-jtf-ojtf.png)
 
 > The observed jitter is a complement to the PLL jitter transfer response OJTF=1-JTF **(Phase matters!)**
 >
 > OTJF gives the amount of jitter which is tracked and therefore not observed at the output of the CDR as a function of the jitter rate applied to the input.
 
 
-![A-jtf-ojtf](link/A-jtf-ojtf.png)
+![A-jtf-ojtf](link-budget/A-jtf-ojtf.png)
 
 #### Jitter Measurement
 
@@ -522,7 +565,7 @@ $$
 
 The combination of the OJTF of a jitter measurement device and the JTF of the clock generator under test gives the measured jitter as a function of frequency.
 
-![image-20220716094732273](link/image-20220716094732273.png)
+![image-20220716094732273](link-budget/image-20220716094732273.png)
 
 For example, a clock generator with a type 1, 1st order PLL measured with a jitter measurement device employing a golden PLL is
 $$
@@ -535,7 +578,7 @@ The overall response is a band pass filter because the clock JTF is low pass and
 
 The compensation for the instrument OJTF is performed by measuring the jitter of the reference clock at each jitter rate being tested and comparing the **reference jitter** with the **jitter measured at the output of the DUT**.
 
-![jtf-ojtf](link/jit_resp.png)
+![jtf-ojtf](link-budget/jit_resp.png)
 
 The lower the cutoff frequency of the jitter measurement device the better the accuracy of the measurement will be.
 
@@ -620,7 +663,7 @@ ENOB - Not sufficient & not accurate enough
 
 Relative to NRZ-based systems, PAM4 transceivers require more stringent circuit linearity, equalizers which can implement multi-level inter-symbol interference (ISI) cancellation, and improved sensitivity
 
-![image-20240923204055369](link/image-20240923204055369.png)
+![image-20240923204055369](link-budget/image-20240923204055369.png)
 
 
 
@@ -628,11 +671,11 @@ Because if it compresses, it turns out you have to use a much more complicated f
 
 
 
-![image-20240923211841053](link/image-20240923211841053.png)
+![image-20240923211841053](link-budget/image-20240923211841053.png)
 
 Linearity can actually be a critical constraint in these signal paths, and you really want to stay as linear as you can all the way up until the point where you've canceled all of the ISI
 
-![image-20240923222650556](link/image-20240923222650556.png)
+![image-20240923222650556](link-budget/image-20240923222650556.png)
 
 
 
@@ -649,7 +692,7 @@ Linearity can actually be a critical constraint in these signal paths, and you r
 
 ### BER with Quantization Noise
 
-![image-20240804110522955](link/image-20240804110522955.png)
+![image-20240804110522955](link-budget/image-20240804110522955.png)
 
 
 
@@ -658,15 +701,15 @@ Linearity can actually be a critical constraint in these signal paths, and you r
 > \text{Var}(X) = E[X^2] - E[X]^2
 > $$
 >
-> ![image-20240804110235178](link/image-20240804110235178.png)
+> ![image-20240804110235178](link-budget/image-20240804110235178.png)
 
 
 
 ### Impulse Response or Pulse Response
 
-![image-20240807221637401](link/image-20240807221637401.png)
+![image-20240807221637401](link-budget/image-20240807221637401.png)
 
-![image-20240807224407213](link/image-20240807224407213.png)![image-20240807224505987](link/image-20240807224505987.png)
+![image-20240807224407213](link-budget/image-20240807224407213.png)![image-20240807224505987](link-budget/image-20240807224505987.png)
 
 
 
@@ -675,7 +718,7 @@ Linearity can actually be a critical constraint in these signal paths, and you r
 
 TX FFE suffers from the peak power constraint, which in effect attenuates the average power of the outgoing signal -  the low-frequency signal content has been attenuated down to the high-frequency level
 
-![image-20240727225120002](link/image-20240727225120002.png)
+![image-20240727225120002](link-budget/image-20240727225120002.png)
 
 > [[https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems](https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems)]
 >
@@ -691,9 +734,9 @@ An architecture that evaluates the received signal quality
 
 > data slicers, phase slicers, error slicers, scope slicers
 
-![image-20240922143125270](link/image-20240922143125270.png)
+![image-20240922143125270](link-budget/image-20240922143125270.png)
 
-![image-20240922144605196](link/image-20240922144605196.png)
+![image-20240922144605196](link-budget/image-20240922144605196.png)
 
 > Analui, Behnam & Rylyakov, Alexander & Rylov, Sergey & Meghelli, Mounir & Hajimiri, Ali. (2006). A 10-Gb/s two-dimensional eye-opening monitor in 0.13-??m standard CMOS. Solid-State Circuits, IEEE Journal of. 40. 2689 - 2699, [[https://chic.caltech.edu/wp-content/uploads/2013/05/B-Analui_JSSC_10-Gbs_05.pdf](https://chic.caltech.edu/wp-content/uploads/2013/05/B-Analui_JSSC_10-Gbs_05.pdf)]
 
@@ -743,11 +786,11 @@ G. Souliotis, A. Tsimpos and S. Vlassis, "Phase Interpolator-Based Clock and Dat
 
 
 
-![ditheringjitter.drawio](link/ditheringjitter.drawio.svg)
+![ditheringjitter.drawio](link-budget/ditheringjitter.drawio.svg)
 
 
 
-> ![image-20240925213924764](link/image-20240925213924764.png)
+> ![image-20240925213924764](link-budget/image-20240925213924764.png)
 
 
 
@@ -779,9 +822,9 @@ $$
 
 A rule of thumb often used to ensure slow changes in the loop is to select the *loop bandwidth* approximately equal to **one-tenth** of the *input frequency*. 
 
-![image-20240806230158367](link/image-20240806230158367.png)
+![image-20240806230158367](link-budget/image-20240806230158367.png)
 
-![image-20240928095850580](link/image-20240928095850580.png)
+![image-20240928095850580](link-budget/image-20240928095850580.png)
 
 
 
@@ -813,7 +856,7 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 ## Digital CDR Category
 
-![image-20241024221619909](link/image-20241024221619909.png)
+![image-20241024221619909](link-budget/image-20241024221619909.png)
 
 - DCO part is *analogous* so that it *cannot be perfectly modeled*
 - Digital-to-phase converter is well-defined phase output, thus, very good to model real situation
@@ -822,7 +865,7 @@ A rule of thumb often used to ensure slow changes in the loop is to select the *
 
 ### Z-domain modeling
 
-![image-20241027001226490](link/image-20241027001226490.png)
+![image-20241027001226490](link-budget/image-20241027001226490.png)
 
 
 
@@ -854,7 +897,7 @@ where $K_{DCO}$ : $\Delta f$ (Hz/bit)
 
 ## Quantization noise
 
-![image-20241019200102827](link/image-20241019200102827.png)
+![image-20241019200102827](link-budget/image-20241019200102827.png)
 
 Here, $\alpha_T$ is data transition density
 
@@ -877,7 +920,7 @@ DAC quantization noise
 
 ## IIR low pass filter
 
-![image-20241024232055792](link/image-20241024232055792.png)
+![image-20241024232055792](link-budget/image-20241024232055792.png)
 
 simple approximation:
 $$
@@ -891,7 +934,7 @@ $$
 
 
 
-![image-20241024232111368](link/image-20241024232111368.png)
+![image-20241024232111368](link-budget/image-20241024232111368.png)
 
 
 
@@ -901,7 +944,7 @@ $$
 
 accumulating the input for $N$ cycles and then latching the result and resetting the integrator
 
-![image-20241015222205883](link/image-20241015222205883.png)
+![image-20241015222205883](link-budget/image-20241015222205883.png)
 
 > It adds up $N$ succeeding input samples at rate $1/T$ and delivers their sum in a *single* sample at the output. Therefore, the process comprises a **filter (in the accumulation)** and a **down-sampler (in the dump)**
 

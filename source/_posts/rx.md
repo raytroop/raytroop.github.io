@@ -3,7 +3,7 @@ title: Wireline Receiver
 date: 2025-06-07 10:31:43
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 

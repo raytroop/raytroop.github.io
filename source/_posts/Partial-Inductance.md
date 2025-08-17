@@ -167,6 +167,17 @@ For instance
 
 ![image-20250705175343498](Partial-Inductance/image-20250705175343498-1751987296814-46.png)
 
+## RLC network
+
+> [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf)]
+
+![image-20250817105056325](Partial-Inductance/image-20250817105056325.png)
+
+![image-20250817105203031](Partial-Inductance/image-20250817105203031.png)![image-20250817105308602](Partial-Inductance/image-20250817105308602.png)
+
+
+
+
 
 ## reference
 

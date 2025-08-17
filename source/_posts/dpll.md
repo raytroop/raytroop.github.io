@@ -3,7 +3,7 @@ title: Digital Phase-Locked Loops
 date: 2025-05-13 17:30:16
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 

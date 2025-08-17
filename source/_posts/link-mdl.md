@@ -1,15 +1,15 @@
 ---
-title: Mixed-Signal Systems Modeling
+title: Link Modeling
 date: 2024-12-01 23:13:53
 tags:
 categories:
-- dsp
+- link
 mathjax: true
 ---
 
 *TODO* &#128197;
 
-![image-20250807000316790](modeling/image-20250807000316790.png)
+![image-20250807000316790](link-mdl/image-20250807000316790.png)
 
 ---
 

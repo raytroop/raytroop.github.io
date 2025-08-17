@@ -3,7 +3,7 @@ title: Time-Interleaved ADCs
 date: 2025-06-07 23:17:25
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 

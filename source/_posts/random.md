@@ -330,7 +330,7 @@ $$
 
 ![image-20250818205138125](random/image-20250818205138125.png)
 
-> ***Equation 8.4-4***, which is permissible for ***cyclostationary*** waveforms
+> ***Equation 8.4-4*** is permissible for ***cyclostationary*** waveforms
 
 ### decimation
 
@@ -384,7 +384,7 @@ $$
 
 > [[https://www.scribd.com/document/353335818/Stark-Woods-3th-Ed-Manual#page=212](https://www.scribd.com/document/353335818/Stark-Woods-3th-Ed-Manual#page=212)]
 
-![image-20250818201239876](random/image-20250818201239876.png)
+![image-20250818222910938](random/image-20250818222910938.png)
 
 ---
 

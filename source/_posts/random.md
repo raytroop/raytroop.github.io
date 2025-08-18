@@ -316,6 +316,14 @@ $$
 
 ![image-20250810194206762](random/image-20250810194206762.png)
 
+$$
+\frac{1}{M}\int_{-Mx_0}^{Mx_0}f(\frac{x}{M})dx  = \int_{-Mx_0}^{Mx_0}f(\frac{x}{M}) d\frac{x}{M} = \int_{-x_0}^{x_0} f(\acute{x}) d\acute{x}
+$$
+
+where $\acute{x} = \frac{x}{M}$
+
+![randSeq-decimation.drawio](random/randSeq-decimation.drawio.svg)
+
 ### interpolation
 
 The *resulting expanded random sequence* is clearly ***nonstationary***, *because of the **zero insertions***.

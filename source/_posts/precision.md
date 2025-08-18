@@ -445,3 +445,4 @@ CC Chen. Why Dynamic Offset or Mismatch Cancellation with Auto-zeroing Technique
 
 —. Why Needs A Low Ripple after Chopping Amplifier for A Very Low DC Offset & Flicker Noise? [[https://youtu.be/y7TzJtHE7IA](https://youtu.be/y7TzJtHE7IA)]
 
+Qinwen Fan, Kofi Makinwa. IEEE Sensors 2018: Capacitively-Coupled Chopper Instrumentation Amplifiers : an Overview [[https://youtu.be/NoGHJfCFCks](https://youtu.be/NoGHJfCFCks)]

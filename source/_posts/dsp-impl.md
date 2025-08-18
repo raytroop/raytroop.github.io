@@ -27,6 +27,6 @@ Mark Horowitz. EE371: Advanced VLSI Circuit Design Spring 2006-2007 [[https://we
 
 謝秉璇. 2019 積體電路設計導論 [[link](https://nthuee.org/archive//%E7%A9%8D%E9%AB%94%E9%9B%BB%E8%B7%AF%E8%A8%AD%E8%A8%88%E5%B0%8E%E8%AB%96/2019%E8%AC%9D%E7%A7%89%E7%92%87/)]
 
-Tinoosh Mohsenin. CMPE 691: Digital Signal Processing Hardware Implementation [https://userpages.cs.umbc.edu/tinoosh/cmpe691/]
+Tinoosh Mohsenin. CMPE 691: Digital Signal Processing Hardware Implementation [[https://userpages.cs.umbc.edu/tinoosh/cmpe691/](https://userpages.cs.umbc.edu/tinoosh/cmpe691/)]
 
-Keshab K. Parhi [http://www.ece.umn.edu/users/parhi/]
+Keshab K. Parhi [[http://www.ece.umn.edu/users/parhi/](http://www.ece.umn.edu/users/parhi/)]

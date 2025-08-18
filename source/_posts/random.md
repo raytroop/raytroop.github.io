@@ -450,7 +450,7 @@ Alan V Oppenheim, George C. Verghese, Signals, Systems and Inference, 1st editio
 
 R. Ziemer and W. Tranter, Principles of Communications, Seventh Edition, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]
 
-, Woods JW. *Probability, Statistics, and Random Processes for Engineers*, 4th ed. 2012 [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgHqkPkiWRYmVN.pdf)]
+Stark H, Woods JW. *Probability, Statistics, and Random Processes for Engineers*, 4th ed. 2012 [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgHqkPkiWRYmVN.pdf)]
 
 Kuchler, Ryan J. *Theory of multirate statistical signal processing and applications*. Monterey, California.: Naval Postgraduate School, 2005. [[pdf](https://apps.dtic.mil/sti/pdfs/ADA439362.pdf)]
 

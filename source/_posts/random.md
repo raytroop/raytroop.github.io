@@ -330,7 +330,15 @@ The *resulting expanded random sequence* is clearly ***nonstationary***, *becaus
 
 ![image-20250810194541608](random/image-20250810194541608.png)
 
- This random sequences and processes is classified as being ***cyclostationary*** 
+This random sequences and processes is classified as being ***cyclostationary***
+
+psd of $X_e[n]$, the ***expansion*** or the ***upsampled*** version of $X[n]$
+
+$$
+S_{X_eX_e}(\omega) = \frac{1}{L}S_{XX}(L\omega)
+$$
+
+where $L$ is upsampling factor
 
 ![image-20250810204047368](random/image-20250810204047368.png)
 
@@ -343,7 +351,7 @@ L \cdot S_{XX}(L\omega)), &\ |\omega|\leq \pi/L  \\
 0, &\ \pi/L \lt |\omega| \leq \pi
 \end{array} \right.
 $$
-where $L$ is upsampling factor
+
 
 
 

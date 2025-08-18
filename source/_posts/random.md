@@ -308,7 +308,7 @@ $$
 > ![image-20250809234318422](random/image-20250809234318422.png)
 
 
-## Random Signals & Multirate Systems
+## Random Sequences & Multirate Systems
 
 > Balu Santhanam. ece541 Probability Theory & Stochastic Process: Random Signals and Multirate Systems [[http://ece-research.unm.edu/bsanthan/ece541/rand.pdf](http://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
 

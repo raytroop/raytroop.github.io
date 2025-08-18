@@ -254,7 +254,7 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
-## Simulating S-parameters in a time domain
+## Spar in Tran simulation
 
 ![image-20250705210519145](network/image-20250705210519145.png)
 

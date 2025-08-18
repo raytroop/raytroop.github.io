@@ -249,4 +249,4 @@ Ganesh Balamurugan and Naresh Shanbhag, "Modeling and mitigation of jitter in mu
 
 Balamurugan, G. & Casper, Bryan & Jaussi, James & Mansuri, Mozhgan & O'Mahony, Frank & Kennedy, Joseph. (2009). Modeling and Analysis of High-Speed I/O Links. Advanced Packaging, IEEE Transactions on. [[https://sci-hub.se/10.1109/TADVP.2008.2011366](https://sci-hub.se/10.1109/TADVP.2008.2011366)]
 
-Jihwan Kim,, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
+Jihwan Kim, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter

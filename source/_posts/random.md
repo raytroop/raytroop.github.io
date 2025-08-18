@@ -312,6 +312,26 @@ $$
 
 > Balu Santhanam. ece541 Probability Theory & Stochastic Process: Random Signals and Multirate Systems [[http://ece-research.unm.edu/bsanthan/ece541/rand.pdf](http://ece-research.unm.edu/bsanthan/ece541/rand.pdf)]
 
+### WSS Random Sequences
+
+***autocorrelation function of WSS random sequences***
+
+![image-20250818202413226](random/image-20250818202413226.png)
+
+---
+
+***psd of WSS of WSS random sequences*** 
+
+![image-20250818202138087](random/image-20250818202138087.png)
+
+---
+
+***Interpretation of the psd***
+
+![image-20250818205138125](random/image-20250818205138125.png)
+
+> ***Equation 8.4-4***, which is permissible for ***cyclostationary*** waveforms
+
 ### decimation
 
 ![image-20250810194206762](random/image-20250810194206762.png)
@@ -323,6 +343,12 @@ $$
 where $\acute{x} = \frac{x}{M}$
 
 ![randSeq-decimation.drawio](random/randSeq-decimation.drawio.svg)
+
+---
+
+![image-20250818195951584](random/image-20250818195951584.png)
+
+![image-20250818205826429](random/image-20250818205826429.png)
 
 ### interpolation
 
@@ -353,6 +379,18 @@ L \cdot S_{XX}(L\omega)), &\ |\omega|\leq \pi/L  \\
 $$
 
 
+
+---
+
+> [[https://www.scribd.com/document/353335818/Stark-Woods-3th-Ed-Manual#page=212](https://www.scribd.com/document/353335818/Stark-Woods-3th-Ed-Manual#page=212)]
+
+![image-20250818201239876](random/image-20250818201239876.png)
+
+---
+
+![image-20250818211010290](random/image-20250818211010290.png)
+
+![image-20250818205936474](random/image-20250818205936474.png)
 
 
 
@@ -412,7 +450,9 @@ Alan V Oppenheim, George C. Verghese, Signals, Systems and Inference, 1st editio
 
 R. Ziemer and W. Tranter, Principles of Communications, Seventh Edition, 2013 [[pdf](https://physicaeducator.wordpress.com/wp-content/uploads/2018/03/principles-of-communications-7th-edition-ziemer.pdf)]
 
-Stark H, Woods JW. *Probability, Statistics, and Random Processes for Engineers*, 4th ed. 2012 [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgHqkPkiWRYmVN.pdf)]
+, Woods JW. *Probability, Statistics, and Random Processes for Engineers*, 4th ed. 2012 [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgHqkPkiWRYmVN.pdf)]
+
+Kuchler, Ryan J. *Theory of multirate statistical signal processing and applications*. Monterey, California.: Naval Postgraduate School, 2005. [[pdf](https://apps.dtic.mil/sti/pdfs/ADA439362.pdf)]
 
 ---
 

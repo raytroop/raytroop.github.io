@@ -251,7 +251,7 @@ $$
 
 where assuming $\tau \ll T$
 
-> REF. [[https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge](https://raytroop.github.io/2023/01/01/insight/#rc-charge-and-discharge)]
+> REF. [[https://raytroop.github.io/2023/01/01/insight/#rc-charge-discharge](https://raytroop.github.io/2023/01/01/insight/#rc-charge-discharge)]
 
 ---
 

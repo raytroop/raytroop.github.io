@@ -41,7 +41,7 @@ plot(t, y_filt); title('y_{filt}'); xlabel('t(ms)'); grid on
 
 
 
-### Appendix
+---
 
 ```matlab
 % https://www.dsprelated.com/showarticle/1642.php

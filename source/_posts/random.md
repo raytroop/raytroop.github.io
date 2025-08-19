@@ -401,7 +401,7 @@ $$\begin{align}
 
 Then
 $$\begin{align}
-&\lim_{N\to \infty}\frac{1}{2N+1}\cdot \mathrm{E}\{|\sum_{n=-N}^N X_e[n]e^{-j\omega n}|^2\} \\
+S_{X_eX_e}(\omega) &= \lim_{N\to \infty}\frac{1}{2N+1}\cdot \mathrm{E}\{|\sum_{n=-N}^N X_e[n]e^{-j\omega n}|^2\} \\
 &= \frac{1}{L}\sum_{i=-\infty}^{\infty}R_{XX}[i]\cdot e^{-jL\omega i}\\
 &= \frac{1}{L}S_{XX}(L\omega)
 \end{align}$$

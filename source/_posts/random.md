@@ -388,7 +388,7 @@ $$
 ![image-20250818222910938](random/image-20250818222910938.png)
 
 
-General case with upsampling factor $L$
+***General case with upsampling factor $L$***
 
 $$\begin{align}
 &\mathrm{E}\{|\sum_{n=-N}^N X_e[n]e^{-j\omega n}|^2\}\\

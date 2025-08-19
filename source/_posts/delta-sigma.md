@@ -351,6 +351,8 @@ Dout, the low frequency component of ADC out is same with Vin
 
 ### MOD2
 
+> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/2nd_Higher_Order.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/2nd_Higher_Order.pdf)]
+
 ![image-20241005160203074](delta-sigma/image-20241005160203074.png)
 
 
@@ -360,7 +362,9 @@ Dout, the low frequency component of ADC out is same with Vin
 *TODO* &#128197;
 
 
+## Dynamic Range ofthe Modulators & quantizer overloading
 
+*TODO* &#128197;
 
 
 ## decimation filter
@@ -756,6 +760,19 @@ Pulse Code Modulation (PCM) is a method for digitally representing analog signal
 *TODO* &#128197;
 
 
+
+## leakage in the integrator
+
+When the integrator includes leakage ($\alpha$)
+
+$$
+x[n-1] + \alpha y[n-1] = y[n]
+$$
+
+then,
+$$
+\frac{Y}{X} = \frac{z^{_1}}{1-\alpha z^{-1}}
+$$
 
 
 

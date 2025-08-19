@@ -352,6 +352,8 @@ where $\acute{x} = \frac{x}{M}$
 
 ### interpolation
 
+![image-20250819182525306](random/image-20250819182525306.png)
+
 The *resulting expanded random sequence* is clearly ***nonstationary***, *because of the **zero insertions***.
 
 ![image-20250810194541608](random/image-20250810194541608.png)

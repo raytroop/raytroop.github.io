@@ -382,7 +382,8 @@ $$
 
 ---
 
-> [[https://www.scribd.com/document/353335818/Stark-Woods-3th-Ed-Manual#page=212](https://www.scribd.com/document/353335818/Stark-Woods-3th-Ed-Manual#page=212)]
+> Stark Woods 3th Ed Manual [[https://www.scribd.com/document/353335818/Stark-Woods-3th-Ed-Manual#page=212](https://www.scribd.com/document/353335818/Stark-Woods-3th-Ed-Manual#page=212)]
+> Stark Probability, Statistics, and Random Processes for Engineers, 3rd [[pdf](https://dl.icdst.org/pdfs/files3/3d400cb31c820c223d570eae9f595080.pdf)]
 
 ![image-20250818222910938](random/image-20250818222910938.png)
 

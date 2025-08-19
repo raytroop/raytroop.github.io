@@ -29,6 +29,16 @@ mathjax: true
 
 
 
+## Coupling noise & Crosstalk
+
+> High-speed Serial Interface Lect. 9 – Noise [[http://tera.yonsei.ac.kr/class/2017_2_2/lecture/Lect%209%20Noise.pdf](http://tera.yonsei.ac.kr/class/2017_2_2/lecture/Lect%209%20Noise.pdf)]
+
+
+
+*TODO* &#128197;
+
+
+
 ## Clocking Structures
 
 ***Synchronous***, ***Mesochronous***, ***Plesiochronous***

@@ -861,7 +861,11 @@ grid on;
 
 
 
+## Stability check in z-domain
 
+> Unit circle criterion; Jury’s stability criterion
+
+![image-20250819213545563](z-laplace/image-20250819213545563.png)
 
 
 

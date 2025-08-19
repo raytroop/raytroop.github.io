@@ -386,6 +386,26 @@ $$
 
 ![image-20250818222910938](random/image-20250818222910938.png)
 
+
+General case with upsampling factor $L$
+
+$$\begin{align}
+&\mathrm{E}\{|\sum_{n=-N}^N X_e[n]e^{-j\omega n}|^2\}\\
+&= \sum_{n=-N}^N\sum_{l=-N}^NX_e[n]\cdot X_e^*[l]\cdot e^{-j\omega(n-l)}\\
+&= \sum_{n=-N}^N\sum_{l=-N}^NX[\frac{n}{L}]\cdot X^*[\frac{l}{L}]\cdot e^{-j\omega(n-l)}\\
+&= \sum_{k=-N/L}^{N/L}\sum_{m=-N/L}^{N/L}X[k]\cdot X^*[m]\cdot e^{-jL\omega (k-m)}\\
+&= \sum_{k=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}R_{XX}[k-m]\cdot e^{-j\omega L(k-m)}\cdot \mathcal{rect}[\frac{k}{2N/L}]\cdot \mathcal{rect}[\frac{m}{2N/L}]\\
+&= \sum_{i=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}R_{XX}[i]\cdot e^{-jL\omega i}\cdot \mathcal{rect}[\frac{i+m}{2N/L}]\cdot \mathcal{rect}[\frac{m}{2N/L}]\\
+&= \sum_{i=-\infty}^{\infty}R_{XX}[i]\cdot e^{-jL\omega i} \cdot \frac{2N}{L}\left[1 -\frac{|i|}{2N/L} \right]
+\end{align}$$
+
+Then
+$$\begin{align}
+&\lim_{N\to \infty}\frac{1}{2N+1}\cdot \mathrm{E}\{|\sum_{n=-N}^N X_e[n]e^{-j\omega n}|^2\} \\
+&= \frac{1}{L}\sum_{i=-\infty}^{\infty}R_{XX}[i]\cdot e^{-jL\omega i}\\
+&= \frac{1}{L}S_{XX}(L\omega)
+\end{align}$$
+
 ---
 
 ![image-20250818211010290](random/image-20250818211010290.png)

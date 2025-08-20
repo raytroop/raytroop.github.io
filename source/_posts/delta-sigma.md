@@ -100,6 +100,14 @@ title('NTF of MOD1 & MOD2')
 ```
 
 
+## $\Delta \Sigma$ vs. $\Delta$ modulation
+
+- $\Delta \Sigma$ modulators, and other *noise-shaping* modulators, change the spectrum of the noise but leave the signal unchanged
+
+- $\Delta$ modulators and other *signal-predicting* modulators shape the
+spectrum of the modulated signal but leave the quantization noise unchanged at the receiver
+
+
 
 
 

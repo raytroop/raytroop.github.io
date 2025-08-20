@@ -765,9 +765,7 @@ It also indicate that dc gain of upsampling is $1/L$
 
 Pulse Code Modulation (PCM) is a method for digitally representing analog signals by sampling their amplitude at regular intervals and then encoding these samples into binary numbers
 
-*TODO* &#128197;
-
-
+![image-20250820222558595](delta-sigma/image-20250820222558595.png)
 
 ## leakage in the integrator
 

@@ -1,5 +1,5 @@
 ---
-title: DSP Implementation & Fixed-Point Arithmetic
+title: VLSI Digital Signal Processing 
 date: 2025-08-17 07:29:09
 tags:
 categories:
@@ -21,6 +21,8 @@ Taylor, Fred. *Digital filters: principles and applications with MATLAB*. John W
 
 Kuo, Sen-Maw. (2013) Real-Time Digital Signal Processing: Implementations and Applications 3rd [[pdf](https://students.aiu.edu/submissions/profiles/resources/onlineBook/H7Y7t7_Real-Time_Digital_Signal_Processing_Applications-_3rd.pdf)]
 
+D. Markovic and R. W. Brodersen, DSP Architecture Design Essentials, Springer, 2012.
+
 ---
 
 Mark Horowitz. EE371: Advanced VLSI Circuit Design Spring 2006-2007 [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/)]
@@ -30,3 +32,5 @@ Mark Horowitz. EE371: Advanced VLSI Circuit Design Spring 2006-2007 [[https://we
 Tinoosh Mohsenin. CMPE 691: Digital Signal Processing Hardware Implementation [[https://userpages.cs.umbc.edu/tinoosh/cmpe691/](https://userpages.cs.umbc.edu/tinoosh/cmpe691/)]
 
 Keshab K. Parhi [[http://www.ece.umn.edu/users/parhi/](http://www.ece.umn.edu/users/parhi/)]
+
+Bevan Baas, EEC281 VLSI Digital Signal Processing,  [[https://www.ece.ucdavis.edu/~bbaas/281/](https://www.ece.ucdavis.edu/~bbaas/281/)]

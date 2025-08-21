@@ -91,6 +91,8 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 > Deog-Kyoon Jeong. Topics in IC Design: 1.1 Introduction to Jitter [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf)]
 
+![image-20250821202257578](comm/image-20250821202257578.png)
+
 with $x(t) = A_0\sin (2\pi f_0 t +\phi _0)$, then $y(t) = x(t) + n_v(t)$
 
 $$\begin{align}
@@ -99,6 +101,7 @@ R_y(\tau) &= \mathrm{E}[y(t)y(t+\tau)] \\
 &= \mathrm{E}[x(t)x(t+\tau)] + \mathrm{E}[n_v(t)n_v(t+\tau)] \\
 &= R_x(\tau) + R_{n_v}(\tau)
 \end{align}$$
+
 
 
 ### phase noise analyzer vs spectrum analyzer

@@ -30,6 +30,8 @@ $\Delta \Sigma$ ADC: Linearity
 
 ## Midrise and Midtread Quantizers
 
+$\Gamma_x$ is  ***no-overload range***
+
 ![image-20250809170637486](ad-da/image-20250809170637486.png)
 
 

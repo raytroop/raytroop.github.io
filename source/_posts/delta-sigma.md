@@ -47,7 +47,7 @@ mathjax: true
 
 
 
-## Oversampling Advantage
+## Oversampling
 
 ![image-20250611232612319](delta-sigma/image-20250611232612319.png)
 

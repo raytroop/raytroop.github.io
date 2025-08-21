@@ -275,6 +275,19 @@ R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 > \cos(2\pi f_0t) \overset{\mathcal{F}}{\longrightarrow} \frac{1}{2}[\delta(f -f_0)+\delta(f+f_0)]
 > $$
 
+---
+
+![image-20250821200319537](random/image-20250821200319537.png)
+
+---
+
+| $x(t)$                        | $R(\tau)$                            |
+| ----------------------------- | ------------------------------------ |
+| $A_0 \sin(\omega_0 t+\phi_0)$ | $\frac{A_0^2}{2}\cos(\omega_0 \tau)$ |
+| $A_0 \cos(\omega_0 t+\phi_0)$ | $\frac{A_0^2}{2}\cos(\omega_0 \tau)$ |
+
+due to $\cos(\omega_0 t +\phi_0) = \sin(\omega_0 t +\phi_0 + \frac{\pi}{2})$
+
 
 
 ### Energy Signal

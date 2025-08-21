@@ -35,13 +35,19 @@ mathjax: true
 
 
 
-## Why Fifty Ohms?
+## Why 50-ohm?
 
-*TODO* &#128197;
-
-
-
+> Why is 50-ohm characteristic impedance standardized in RF and Microwave systems? [[link](https://community.cadence.com/cadence_technology_forums/f/awr-design-environment/62213/why-is-50-ohm-characteristic-impedance-standardized-in-rf-and-microwave-systems#:~:text=A%20loss%20vs.,all%20RF%20and%20Microwave%20systems)]
+>
 > [[https://www.microwaves101.com/encyclopedias/why-fifty-ohms](https://www.microwaves101.com/encyclopedias/why-fifty-ohms)]
+
+
+
+ It was a compromise made and a tradeoff between ***power handling*** (red curve) and ***losses*** (blue curve)
+
+![ ](insight/pastedimage1722329653499v1.png)
+
+
 
 
 

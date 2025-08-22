@@ -45,7 +45,9 @@ mathjax: true
 
 ![image-20250610223809074](delta-sigma/image-20250610223809074.png)
 
+## Classification of $\Delta\Sigma$ Modulators
 
+*TODO* &#128197;
 
 ## Oversampling
 

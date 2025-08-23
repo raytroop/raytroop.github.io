@@ -336,6 +336,11 @@ $$
 
 ![image-20250809112858954](z-laplace/image-20250809112858954.png)
 
+---
+
+
+
+![impulse_Ts.drawio](z-laplace/impulse_Ts.drawio.svg)
 
 ## Transfer function & sampled impulse response
 

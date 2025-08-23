@@ -102,3 +102,4 @@ S. Beer, R. Ginosar, M. Priel, R. Dobkin and A. Kolodny, "The Devolution of Sync
 
 Asad Abidi. ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q&t=681](https://youtu.be/sVe3VUTNb4Q&t=681)]
 
+Matt Venn. Interactive flip flop simulation [[https://github.com/mattvenn/flipflop_demo](https://github.com/mattvenn/flipflop_demo)]

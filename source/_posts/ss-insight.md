@@ -8,6 +8,37 @@ mathjax: true
 ---
 
 
+
+## Additive White Gaussian Noise (AWGN)
+
+> Qasim Chaudhari. Additive White Gaussian Noise (AWGN) [[https://wirelesspi.com/additive-white-gaussian-noise-awgn/](https://wirelesspi.com/additive-white-gaussian-noise-awgn/)]
+
+*TODO* &#128197;
+
+
+
+## Pulse Amplitude Modulation (PAM)
+
+> Qasim Chaudhari. Pulse Amplitude Modulation (PAM) [[https://wirelesspi.com/pulse-amplitude-modulation-pam/](https://wirelesspi.com/pulse-amplitude-modulation-pam/)]
+
+*TODO* &#128197;
+
+
+
+## Nyquist's Stability Criterion
+
+*TODO* &#128197;
+
+
+
+
+
+> [[Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
+
+
+
+
+
 ## Energy/bit (pJ/b)
 
 1mW/Gbps = 1pJ/bit
@@ -126,8 +157,6 @@ title('PSD of binomial distribution')
 
 
 
-
-
 ## The Problem of "Sinusoids Running Around Loops"
 
 The representative of Fourier transform $\frac{1}{j\omega+j\omega_0}$ back in the time domain $e^{-j\omega_0 t}$ is **infinite extent in time**
@@ -141,16 +170,6 @@ The representative of Fourier transform $\frac{1}{j\omega+j\omega_0}$ back in th
 > Dawson, Joel L. *A Guide to Feedback Theory*. Cambridge: Cambridge University Press, 2021.
 
 
-
-## Nyquist's Stability Criterion
-
-*TODO* &#128197;
-
-
-
-
-
-> [[Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
 
 
 

@@ -950,33 +950,6 @@ $$
 
 
 
-## Accumulate-and-dump (AAD) decimator
-
-accumulating the input for $N$ cycles and then latching the result and resetting the integrator
-
-![image-20241015222205883](link-budget/image-20241015222205883.png)
-
-> It adds up $N$ succeeding input samples at rate $1/T$ and delivers their sum in a *single* sample at the output. Therefore, the process comprises a **filter (in the accumulation)** and a **down-sampler (in the dump)**
-
-
-
-
-## Moving Average and CIC Filters
-
-> **cascade-integrator-comb (CIC)** decimator
-
-*TODO* &#128197;
-
-
-
-
-
-> An Intuitive Look at Moving Average and CIC Filters [[web](https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html), [code](https://github.com/tomverbeure/pdm/tree/master/modeling/cic_filters)]
->
-> A Beginner's Guide To Cascaded Integrator-Comb (CIC) Filters [[https://www.dsprelated.com/showarticle/1337.php](https://www.dsprelated.com/showarticle/1337.php)]
-
-
-
 
 
 ## FAQ

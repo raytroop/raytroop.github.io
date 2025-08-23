@@ -7,6 +7,18 @@ categories:
 mathjax: true
 ---
 
+
+
+## Cycle Slips and Hangup
+
+> Qasim Chaudhari. What are Cycle Slips and Hangup in Phase Locked Loops?  [[https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/](https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/)]
+
+*TODO* &#128197;
+
+
+
+
+
 ## excess phase around n-th harmonic
 
 ![image-20250523222041505](clocking/image-20250523222041505.png)
@@ -61,16 +73,6 @@ mathjax: true
 ## Fractional Spur
 
 *TODO* &#128197;
-
-
-
-
-
-## cycle slip
-
-*TODO* &#128197;
-
-
 
 
 

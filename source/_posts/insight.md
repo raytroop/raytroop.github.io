@@ -659,6 +659,8 @@ Defined as the frequency at which the **small-signal current gain** of a device 
 
 ## MOSFET ZTC Condition Analysis
 
+>  M. Coelho *et al*., "Is There a ZTC Biasing Point in the Leading-Edge FET Intrinsic Gain gmrDS?," *2025 9th International Young Engineers Forum on Electrical and Computer Engineering (YEF-ECE)*, Caparica / Lisbon, Portugal, 2025
+>
 >  zero temperature coefficient (ZTC)
 
 ![image-20231212195536754](insight/image-20231212195536754.png)

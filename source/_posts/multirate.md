@@ -634,3 +634,7 @@ D. Sundararajan. 2024. Digital Signal Processing: An Introduction 2nd Edition
 F. M. Gardner, "Phaselock Techniques", 3rd Edition, Wiley Interscience, Hoboken, NJ, 2005 [[https://picture.iczhiku.com/resource/eetop/WyIgwGtkDSWGSxnm.pdf](https://picture.iczhiku.com/resource/eetop/WyIgwGtkDSWGSxnm.pdf)]
 
 Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology
+
+---
+
+Qasim Chaudhari. Sample Rate Conversion [[https://wirelesspi.com/sample-rate-conversion/](https://wirelesspi.com/sample-rate-conversion/)]

@@ -101,16 +101,9 @@ D_\text{out} \frac{V_\text{ref}}{2^N} &= V_\text{in} - \frac{V}{2^N}
 
 
 
-## Discrete-Time Integrators
-
-Delaying Integrator
-
-Delay-free Integrator
-
-![image-20250615124417691](im-adc/image-20250615124417691.png)
-
 
 
 ## reference
 
 David Johns (University of Toronto) "Oversampled Data Converters" Course (2019) [[https://youtu.be/qIJ2LORYmyA?si=_pGb18rhsMUZ-lAf](https://youtu.be/qIJ2LORYmyA?si=_pGb18rhsMUZ-lAf)]
+

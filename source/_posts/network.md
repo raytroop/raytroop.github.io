@@ -189,13 +189,17 @@ $$
 
 
 
+## Impulse Response From Sparameters
+
+> David Banas. *A comparison of different techniques (i.e. - windowing, vector fitting, etc.) for extracting the impulse response from S-parameters.* [[https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main](https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main)]
+
+*TODO* &#128197;
+
+### Rational Fit
 
 
-## Rational Fit
 
-
-
-### Matlab/rationalfit
+#### Matlab/rationalfit
 
 To resolve the convergence problem of s-parameter in Spectre simulator - `rationalfit` and write Verilog-A 
 

@@ -233,7 +233,7 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 
 ![image-20250824221530772](delta-sigma/image-20250824221530772.png)
 $$
-\tau[n-1] + (N+y[n])T_{PLL} - (N+\alpha)T_{PLL} = \tau[n]
+(N+\alpha)T_{PLL}  - \tau[n-1] +\tau[n] =  (N+y[n])T_{PLL}
 $$
 
 i.e.

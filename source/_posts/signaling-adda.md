@@ -99,6 +99,56 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 *TODO* &#128197;
 
+## decimation filter
+
+The combination of the the *digital post-filter* and *downsampler* is called the **decimation filter** or **decimator**
+
+![image-20241015220921002](signaling-adda/image-20241015220921002.png)
+
+###  $\text{sinc}$ filter
+
+
+
+![image-20241015215159577](signaling-adda/image-20241015215159577.png)
+
+Provided that $T=1$
+$$
+H_1(e^{j2\pi f}) = \frac{\text{sinc}(Nf)}{\text{sinc}(f)} = \frac{1}{N}\frac{\sin(\pi Nf)}{\sin(\pi f)}
+$$
+that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}, n\in \mathbb{Z}$
+
+
+
+![image-20241015215227042](signaling-adda/image-20241015215227042.png)
+
+> ![image-20241015225859710](signaling-adda/image-20241015225859710.png)
+
+
+
+![image-20241015215111430](signaling-adda/image-20241015215111430.png)
+
+
+
+### $\text{sinc}^2$ filter
+
+![image-20241015220030204](signaling-adda/image-20241015220030204.png)
+
+
+
+> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan1.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan1.pdf)]
+>
+> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan2.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan2.pdf)]
+
+
+
+## interpolation filter
+
+*Notice that the requirements of the **first** stage are very **demanding***
+
+![image-20250617001439043](signaling-adda/image-20250617001439043.png)
+
+
+
 
 
 ## DC Gain in Interpolation Filtering

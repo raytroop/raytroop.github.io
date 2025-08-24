@@ -75,6 +75,33 @@ For the three stages of the MASH 1-1-1 DDSM
 
 ![image-20250823232212295](delta-sigma/image-20250823232212295.png)
 
+---
+
+***1st order DDSM (digital accumulator)***
+
+![image-20250604000323199](delta-sigma/image-20250604000323199.png)
+
+
+
+***2nd order DDSM***
+
+![image-20250601170123635](delta-sigma/image-20250601170123635.png)
+
+In $z$-domain
+$$
+\left\{(A + D - Y)\frac{z^{-1}}{1-z^{-1}} - 2Y \right\}\frac{z^{-1}}{1-z^{-1}} + Q = Y
+$$
+That is
+$$
+Y = A z^{-2} + Dz^{-2} + Q(1-z^{-1})^2
+$$
+In time domain
+$$\begin{align}
+y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
+&= \alpha + d[n-2] + q[n]-2q[n-1]+q[n-2]
+\end{align}$$
+
+
 
 ## Oversampling
 
@@ -192,6 +219,42 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 ![image-20250824081318669](delta-sigma/image-20250824081318669.png)
 
 
+
+## Fractional-N PLL
+
+![image-20250824103717743](delta-sigma/image-20250824103717743.png)
+
+![image-20250824103933652](delta-sigma/image-20250824103933652.png)
+
+
+
+
+###  Frequency Dividers
+
+![image-20250824221530772](delta-sigma/image-20250824221530772.png)
+$$
+\tau[n-1] + (N+y[n])T_{PLL} - (N+\alpha)T_{PLL} = \tau[n]
+$$
+
+i.e.
+$$
+\tau[n] = \tau[n-1] + (y[n] - \alpha)T_{PLL}
+$$
+
+where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$ 
+
+![image-20250824221741018](delta-sigma/image-20250824221741018.png)
+
+
+
+
+### $\Delta\Sigma$ noise in PLL
+
+![image-20250824162417584](delta-sigma/image-20250824162417584.png)
+
+![image-20250824183123922](delta-sigma/image-20250824183123922.png)
+
+![image-20250824210526248](delta-sigma/image-20250824210526248.png)
 
 
 
@@ -358,12 +421,6 @@ endmodule
 
 
 
-## interpolation filter
-
-*Notice that the requirements of the **first** stage are very **demanding***
-
-![image-20250617001439043](delta-sigma/image-20250617001439043.png)
-
 
 
 ## No delay-free loops
@@ -471,45 +528,6 @@ Dout, the low frequency component of ADC out is same with Vin
 *TODO* &#128197;
 
 
-## decimation filter
-
-The combination of the the *digital post-filter* and *downsampler* is called the **decimation filter** or **decimator**
-
-![image-20241015220921002](delta-sigma/image-20241015220921002.png)
-
-###  $\text{sinc}$ filter
-
-
-
-![image-20241015215159577](delta-sigma/image-20241015215159577.png)
-
-Provided that $T=1$
-$$
-H_1(e^{j2\pi f}) = \frac{\text{sinc}(Nf)}{\text{sinc}(f)} = \frac{1}{N}\frac{\sin(\pi Nf)}{\sin(\pi f)}
-$$
-that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}, n\in \mathbb{Z}$
-
-
-
-![image-20241015215227042](delta-sigma/image-20241015215227042.png)
-
-> ![image-20241015225859710](delta-sigma/image-20241015225859710.png)
-
-
-
-![image-20241015215111430](delta-sigma/image-20241015215111430.png)
-
-
-
-### $\text{sinc}^2$ filter
-
-![image-20241015220030204](delta-sigma/image-20241015220030204.png)
-
-
-
-> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan1.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan1.pdf)]
->
-> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan2.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan2.pdf)]
 
 
 
@@ -673,78 +691,7 @@ $$
 
 
 
-## digital accumulator
 
-***1st order DDSM***
-
-![image-20250604000323199](delta-sigma/image-20250604000323199.png)
-
-
-
-## Fractional-N PLL
-
-![image-20250824103717743](delta-sigma/image-20250824103717743.png)
-
-![image-20250824103933652](delta-sigma/image-20250824103933652.png)
-
-
-
-
-
----
-
-
-
-
-
-
-![image-20250530190858386](delta-sigma/image-20250530190858386.png)
-$$
-\tau[n-1] + (N+y[n])T_{PLL} - (N+\alpha)T_{PLL} = \tau[n]
-$$
-
-i.e.
-$$
-\tau[n] = \tau[n-1] + (y[n] - \alpha)T_{PLL}
-$$
-
-where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$ 
-
-![image-20250530192215258](delta-sigma/image-20250530192215258.png)
-
-
-
-![image-20250601170123635](delta-sigma/image-20250601170123635.png)
-
-In $z$-domain
-$$
-\left\{(A + D - Y)\frac{z^{-1}}{1-z^{-1}} - 2Y \right\}\frac{z^{-1}}{1-z^{-1}} + Q = Y
-$$
-That is
-$$
-Y = A z^{-2} + Dz^{-2} + Q(1-z^{-1})^2
-$$
-In time domain
-$$\begin{align}
-y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
-&= \alpha + d[n-2] + q[n]-2q[n-1]+q[n-2]
-\end{align}$$
-
-![image-20250601201952868](delta-sigma/image-20250601201952868.png)
-
-
-
----
-
-![image-20250824162417584](delta-sigma/image-20250824162417584.png)
-
-
-
-## $\Delta\Sigma$ noise in PLL
-
-![image-20250824183123922](delta-sigma/image-20250824183123922.png)
-
-![image-20250824210244328](delta-sigma/image-20250824210244328.png)
 
 
 

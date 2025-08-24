@@ -101,6 +101,52 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 
 
+## DC Gain in Interpolation Filtering
+
+> [[https://raytroop.github.io/2025/06/21/data-converter-in-action/#dac-zoh](https://raytroop.github.io/2025/06/21/data-converter-in-action/#dac-zoh)]
+
+DC gain is used to compensate the ratio of sampling rate before and after upsample
+
+![image-20250701070539064](signaling-adda/image-20250701070539064.png)
+
+Given
+$$
+X_e = X =  \propto \frac{1}{T} = \frac{1}{L\cdot T_i}
+$$
+Then, the lowpass filter (ZOH, FOH .etc) gain shall be $L$
+
+---
+
+Employ definition of DTFT,  $X(e^{j\hat{\omega}})
+=\sum_{n=-\infty}^{+\infty}x[n]e^{-j\hat{\omega} n}$, and set $\hat{\omega} = 0$
+$$
+X(e^{j0}) = \sum_{n=-\infty}^{+\infty}x[n]
+$$
+That is, $\sum_{n=-\infty}^{+\infty}x[n] = \sum_{n=-\infty}^{+\infty}x_e[n]$, so
+$$
+\overline{x_e[n]} = \frac{1}{L} \overline{x[n]}
+$$
+It also indicate that dc gain of upsampling is $1/L$
+
+
+
+
+### ZOH
+
+> Zero-Order Hold (ZOH)
+
+![image-20250630235534325](signaling-adda/image-20250630235534325.png)
+
+> dc gain = $N$
+
+### FOH
+
+> First-Order Hold (FOH) 
+
+![image-20250630235714996](signaling-adda/image-20250630235714996.png)
+
+> dc gain = $N$
+
 
 
 

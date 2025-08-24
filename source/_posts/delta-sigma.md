@@ -7,17 +7,9 @@ categories:
 mathjax: true
 ---
 
+![image-20250823214818800](delta-sigma/image-20250823214818800.png)
 
 
-![image-20250611074830238](delta-sigma/image-20250611074830238.png)
-
-> *"**Quantizers**" and "**truncators**", and "**integrators**" and "**accumulators**" are used in **delta-sigma ADCs** and **DACs**, respectively*
->
-> P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]
-
-
-
----
 
 ![image-20250616223003455](delta-sigma/image-20250616223003455.png)
 
@@ -45,9 +37,44 @@ mathjax: true
 
 ![image-20250610223809074](delta-sigma/image-20250610223809074.png)
 
-## Classification of $\Delta\Sigma$ Modulators
+## $\Delta\Sigma$ Classification
 
-*TODO* &#128197;
+- Continuous-Time (CT) Analog Modulator
+  - Sampled Quantizer: Synchronous Modulator
+  - Unsampled Quantizer: Asynchronous Modulator
+- Discrete-Time (DT) Analog Modulator
+-  Discrete-Time Digital Modulators (DDSM)
+  - Single Quantizer DDSMs - output feedback
+  - Error feedback modulators (EFM) - error feedback
+  - **M**ulti st**A**ge noise **SH**aping (**MASH**)
+  
+
+![image-20250823230207418](delta-sigma/image-20250823230207418.png)
+
+![image-20250611074830238](delta-sigma/image-20250611074830238.png)
+
+
+
+
+
+> *"**Quantizers**" and "**truncators**", and "**integrators**" and "**accumulators**" are used in **delta-sigma ADCs** and **DACs**, respectively*
+>
+> P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]
+
+---
+
+![image-20250824092757793](delta-sigma/image-20250824092757793.png)
+$$\begin{align}
+v[n] = \{0,1,2,...,M-1\} &\space\Rightarrow\space  y[n] = 0 \space\Rightarrow\space  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\} \\
+v[n] = \{M,M+1,M2,...,2M-1\} &\space\Rightarrow\space  y[n] = 1 \space\Rightarrow\space  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\}
+\end{align}$$
+
+> ![image-20250823232924985](delta-sigma/image-20250823232924985.png)
+
+For the three stages of the MASH 1-1-1 DDSM
+
+![image-20250823232212295](delta-sigma/image-20250823232212295.png)
+
 
 ## Oversampling
 
@@ -100,6 +127,73 @@ xlabel('fs')
 ylabel('mag')
 title('NTF of MOD1 & MOD2')
 ```
+
+---
+
+![image-20250824151828263](delta-sigma/image-20250824151828263.png)
+
+
+
+## SQNR
+
+> In general, for an $l$th order modulator with $\text{NTF}(z) = (1 − z^{−1})^l$, the SQNR increases by $(6l + 3)$ dB for every doubling of the OSR
+
+***without the delta-sigma loop***
+
+![image-20250823220900699](delta-sigma/image-20250823220900699.png)
+
+> $10\log (2) \approx 3$dB
+
+
+
+***first order delta-sigma modulator***
+
+![image-20250823220842529](delta-sigma/image-20250823220842529.png)
+
+> $30\log (2) \approx 9$dB
+
+
+
+***second order delta-sigma modulator***
+
+![image-20250823220922480](delta-sigma/image-20250823220922480.png)
+
+> $50\log (2) \approx 15$dB
+
+
+
+---
+
+![image-20250823224500839](delta-sigma/image-20250823224500839.png)
+
+```matlab
+OSR= linspace(1,16,16);
+
+SQNR_ovonly_delta = 10*log10(OSR);
+SQNR_1st_delta = -10*log10(pi^2/3) + 30*log10(OSR);
+SQNR_2st_delta = -10*log10(pi^4/5) + 50*log10(OSR);
+
+plot(OSR, SQNR_ovonly_delta,'ro-', LineWidth=4);
+hold on
+plot(OSR, SQNR_1st_delta,'bo-', LineWidth=4);
+plot(OSR, SQNR_2st_delta,'mo-', LineWidth=4);
+grid on; grid minor;
+xlim([1 16]); ylim([-20 50]);
+xlabel('OSR', FontSize=16); ylabel('\DeltaSQNR (dB)', FontSize=16);
+legend('Oversampling Only', '1st \Delta\Sigma', '2nd \Delta\Sigma', fontsize=16)
+```
+
+
+
+## quantizer levels
+
+The *greater* the number of quantizer levels, the *smaller* quantization error
+
+![image-20250824081318669](delta-sigma/image-20250824081318669.png)
+
+
+
+
 
 
 ## $\Delta \Sigma$ vs. $\Delta$ modulation
@@ -526,9 +620,7 @@ The remaining *11 bits are truncated to 3-levels* using a second-order delta-sig
 
 
 
-## 1st order DDSM
 
-![image-20250604000323199](delta-sigma/image-20250604000323199.png)
 
 
 
@@ -581,27 +673,30 @@ $$
 
 
 
-## drawback of Integer-N PLL
+## digital accumulator
 
-**integer-N PLL frequency synthesizers**
+***1st order DDSM***
 
-- the *frequency resolution*, is equal to the *reference frequency*, meaning that *only integer multiples of the reference frequency can be synthesized*
-
-- if *fine tuning* is required, only choice in an integer-N PLL is to *decrease the reference frequency*
-
-- *Stability requirements* limit the loop bandwidth to about *one tenth of the reference frequency*; therefore, decreasing the reference frequency increases the settling time as the loop bandwidth also has to be decreased
-
-- Another drawback of the integer-N PLL is the *trade-off between phase noise and settling time* when the *divider ratio becomes large* (The contributions to the output phase noise of almost all PLL building blocks, except the VCO, are **multiplied by the division ratio**)
-
-  > [[https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf)]
-  >
-  > ![image-20250602100424369](delta-sigma/image-20250602100424369.png)
-
-- if a small reference frequency is chosen, t*he reference spur in the output phase noise is located at a smaller offset frequency*
+![image-20250604000323199](delta-sigma/image-20250604000323199.png)
 
 
 
 ## Fractional-N PLL
+
+![image-20250824103717743](delta-sigma/image-20250824103717743.png)
+
+![image-20250824103933652](delta-sigma/image-20250824103933652.png)
+
+
+
+
+
+---
+
+
+
+
+
 
 ![image-20250530190858386](delta-sigma/image-20250530190858386.png)
 $$
@@ -639,135 +734,27 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 
 
+---
+
+![image-20250824162417584](delta-sigma/image-20250824162417584.png)
+
+
+
+## $\Delta\Sigma$ noise in PLL
+
+![image-20250824183123922](delta-sigma/image-20250824183123922.png)
+
+![image-20250824184322955](delta-sigma/image-20250824184322955.png)
+
+
+
 ## quantizer overload
 
 *TODO* &#128197;
 
 
 
-## CIC filter
 
-> **<u>C</u>**ascaded **<u>I</u>**ntegrator-**<u>C</u>**omb (**CIC**) Filters
-
-Let’s focus on decimation: if we decimate by a factor 4, we simply retain one output sample out of every 4 input samples.
-
-In the example below, the downsampler at the right drops those 3 samples out of 4, and the output rate, $y^\prime(n)$, is one fourth of the input rate $x(n)$:
-
-![moving_average_filters-decimation_trivial](delta-sigma/moving_average_filters-decimation_trivial.svg)
-$$\begin{align}
-Y(z) &= X(z)\frac{1-z^{-4}}{1-z^{-1}} \\
-Y^\prime(\xi) &= \frac{1}{4}Y(\xi^{1/4}) = \frac{1}{4}X(\xi^{1/4})\frac{1-\xi^{-1}}{1-\xi^{-1/4}}
-\end{align}$$
-
-with $z=e^{j\Omega/f_s}$ and $\xi =z^4$, we have
-$$
-Y^\prime(z) = \frac{1}{4}X(z)\frac{1-z^{-4}}{1-z^{-1}}
-$$
-
-But if we're going to be throwing away 75% of the calculated values, can't we just move the downsampler from the end of the pipeline to somewhere in the middle? Right between the integrator stage and the comb stage? That answer is yes, but to keep the math working, ***we also need to divide the number of delay elements in the comb stage by the decimation rate***:
-
-![moving_average_filters-decimation_smart](delta-sigma/moving_average_filters-decimation_smart.svg)
-
-$$\begin{align}
-A(z) &= X(z)\frac{1}{1-z^{-1}} \\
-A^\prime(\xi) &= \frac{1}{4}A(\xi^{1/4}) = \frac{1}{4}X(\xi^{1/4})\frac{1}{1-\xi^{-1/4}} \\
-Y^\prime(\xi) &= A^\prime(\xi) (1-\xi^{-1}) =  \frac{1}{4}X(\xi^{1/4})\frac{1-\xi^{-1}}{1-\xi^{-1/4}}
-\end{align}$$
-
-with $z=e^{j\Omega/f_s}$ and $\xi =z^4$, we have
-$$
-Y^\prime(z) = \frac{1}{4}X(z)\frac{1-z^{-4}}{1-z^{-1}}
-$$
-
----
-
-And we can do this just the same with cascaded sections (*without downsampler or updampler*) where *integrators and combs have been grouped*
-
-- for **decimation**, the *integrators come first* and the *combs second* with the downsampler in between
-- For **interpolation**, the reverse is true
-  - the incoming sample rate is fraction of the outgoing sample rate, the combs must come first and the interpolators second
-
-![moving_average_filters-integrator_comb_decimated](delta-sigma/moving_average_filters-integrator_comb_decimated.svg)
-
-
-
-
-
-![moving_average_filters-comb_integrator_interpolated](delta-sigma/moving_average_filters-comb_integrator_interpolated.svg)
-
-
-
-
-
-
-
-> Tom Verbeure. An Intuitive Look at Moving Average and CIC Filters [[https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html](https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html)]
->
-> —. Half-Band Filters, a Workhorse of Decimation Filters [[https://tomverbeure.github.io/2020/12/15/Half-Band-Filters-A-Workhorse-of-Decimation-Filters.html](https://tomverbeure.github.io/2020/12/15/Half-Band-Filters-A-Workhorse-of-Decimation-Filters.html)]
->
-> —. Design of a Multi-Stage PDM to PCM Decimation Pipeline [[https://tomverbeure.github.io/2020/12/20/Design-of-a-Multi-Stage-PDM-to-PCM-Decimation-Pipeline.html](https://tomverbeure.github.io/2020/12/20/Design-of-a-Multi-Stage-PDM-to-PCM-Decimation-Pipeline.html)]
->
-> Arash Loloee, Ph.D. Exploring Decimation Filters [[https://www.highfrequencyelectronics.com/Archives/Nov13/1311_HFE_decimationFilters.pdf](https://www.highfrequencyelectronics.com/Archives/Nov13/1311_HFE_decimationFilters.pdf)]
->
-> Rick Lyons. A Beginner's Guide To Cascaded Integrator-Comb (CIC) Filters [[https://www.dsprelated.com/showarticle/1337.php](https://www.dsprelated.com/showarticle/1337.php)]
-
-
-
-## DC Gain in Interpolation Filtering
-
-> [[https://raytroop.github.io/2025/06/21/data-converter-in-action/#dac-zoh](https://raytroop.github.io/2025/06/21/data-converter-in-action/#dac-zoh)]
-
-DC gain is used to compensate the ratio of sampling rate before and after upsample
-
-![image-20250701070539064](delta-sigma/image-20250701070539064.png)
-
-Given
-$$
-X_e = X =  \propto \frac{1}{T} = \frac{1}{L\cdot T_i}
-$$
-Then, the lowpass filter (ZOH, FOH .etc) gain shall be $L$
-
----
-
-Employ definition of DTFT,  $X(e^{j\hat{\omega}})
-=\sum_{n=-\infty}^{+\infty}x[n]e^{-j\hat{\omega} n}$, and set $\hat{\omega} = 0$
-$$
-X(e^{j0}) = \sum_{n=-\infty}^{+\infty}x[n]
-$$
-That is, $\sum_{n=-\infty}^{+\infty}x[n] = \sum_{n=-\infty}^{+\infty}x_e[n]$, so
-$$
-\overline{x_e[n]} = \frac{1}{L} \overline{x[n]}
-$$
-It also indicate that dc gain of upsampling is $1/L$
-
-
-
-
-### ZOH
-
-> Zero-Order Hold (ZOH)
-
-![image-20250630235534325](delta-sigma/image-20250630235534325.png)
-
-> dc gain = $N$
-
-### FOH
-
-> First-Order Hold (FOH) 
-
-![image-20250630235714996](delta-sigma/image-20250630235714996.png)
-
-> dc gain = $N$
-
-
-
-## Pulse Code Modulation (PCM)
-
-> John M Pauly. Lecture 13: Pulse Code Modulation [[https://web.stanford.edu/class/ee179/lectures/notes13.pdf](https://web.stanford.edu/class/ee179/lectures/notes13.pdf)]
-
-Pulse Code Modulation (PCM) is a method for digitally representing analog signals by sampling their amplitude at regular intervals and then encoding these samples into binary numbers
-
-![image-20250820222558595](delta-sigma/image-20250820222558595.png)
 
 ## leakage in the integrator
 
@@ -804,6 +791,18 @@ Shanthi Pavan, ISSCC2013 T5: Simulation Techniques in Data Converter Design [[ht
 
 Bruce A. Wooley , 2012, "The Evolution of Oversampling Analog-to-Digital Converters" [[https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2012/06/Oversampling-Wooley_SCV-ver2.pdf](https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2012/06/Oversampling-Wooley_SCV-ver2.pdf)]
 
+Ian Galton, ISSCC 2010 SC3: Fractional-N PLLs [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf)]
+
+—. “Delta-Sigma Fractional-N Phase-Locked Loops.” (2003).
+
+Mike Shuo-Wei Chen, ISSCC 2020 T6: Digital Fractional-N Phase Locked Loop Design [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T6Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T6Visuals.pdf)]
+
+Sudhakar Pamarti. CICC 2020 ES2-2: Basics of Closed- and Open-Loop Fractional Frequency Synthesis [[https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx](https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx)]
+
+Michael Peter Kennedy. An Introduction to Digital Delta-Sigma Modulators [[https://site.ieee.org/scv-cas/files/2014/07/2014Kennedy.pdf](https://site.ieee.org/scv-cas/files/2014/07/2014Kennedy.pdf)]
+
+Venkatesh Srinivasan, ISSCC 2019 T5: Noise Shaping in Data Converters
+
 B. Razavi, "The Delta-Sigma Modulator [A Circuit for All Seasons]," IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 20, pp. 10-15, Spring 2016. [[http://www.seas.ucla.edu/brweb/papers/Journals/BRSpring16DeltaSigma.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/BRSpring16DeltaSigma.pdf)]
 
 P. M. Aziz, H. V. Sorensen and J. vn der Spiegel, "An overview of sigma-delta converters," in IEEE Signal Processing Magazine, vol. 13, no. 1, pp. 61-84, Jan. 1996 [[https://sci-hub.st/10.1109/79.482138](https://sci-hub.st/10.1109/79.482138)]
@@ -820,21 +819,11 @@ Joshua Reiss. Understanding sigma delta modulation: the solved and unsolved issu
 
  [[https://www.eecs.qmul.ac.uk/~josh/documents/2008/Reiss-JAES-UnderstandingSigmaDeltaModulation-SolvedandUnsolvedIssues.pdf](https://www.eecs.qmul.ac.uk/~josh/documents/2008/Reiss-JAES-UnderstandingSigmaDeltaModulation-SolvedandUnsolvedIssues.pdf)]
 
-Ian Galton  ISSCC 2010 SC3: Fractional-N PLLs [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf)]
-
 V. Medina, P. Rombouts and L. Hernandez-Corporales, "A Different View of Sigma-Delta Modulators Under the Lens of Pulse Frequency Modulation [Feature]," in *IEEE Circuits and Systems Magazine*, vol. 24, no. 2, pp. 80-97, Secondquarter 2024
-
----
-
-Sudhakar Pamarti. CICC 2020 ES2-2: Basics of Closed- and Open-Loop Fractional Frequency Synthesis [[https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx](https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx)]
 
 S. Pamarti, J. Welz and I. Galton, "Statistics of the Quantization Noise in 1-Bit Dithered Single-Quantizer Digital Delta–Sigma Modulators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 54, no. 3, pp. 492-503, March 2007 [[https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf)]
 
 S. Pamarti and I. Galton, "LSB Dithering in MASH Delta–Sigma D/A Converters," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 54, no. 4, pp. 779-790, April 2007 [[https://sci-hub.se/10.1109/TCSI.2006.888780](https://sci-hub.se/10.1109/TCSI.2006.888780)]
-
-Michael Peter Kennedy. An Introduction to Digital Delta-Sigma Modulators [[https://site.ieee.org/scv-cas/files/2014/07/2014Kennedy.pdf](https://site.ieee.org/scv-cas/files/2014/07/2014Kennedy.pdf)]
-
-Venkatesh Srinivasan, ISSCC 2019 T5: Noise Shaping in Data Converters
 
 ---
 

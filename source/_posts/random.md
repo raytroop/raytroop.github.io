@@ -383,12 +383,12 @@ where $L$ is upsampling factor
 
 ![image-20250810204047368](random/image-20250810204047368.png)
 
-where an ideal lowpass filter with bandwidth $[-\pi/2 , +\pi/2]$ and gain of $2$ or $L$
+apply $X_e[n]$ to  *an ideal lowpass filter* with bandwidth $[-\pi/2 , +\pi/2]$ and gain of $2$ or $L$
 
 
 $$
 S_{YY}(\omega) = \left\{ \begin{array}{cl}
-L \cdot S_{XX}(L\omega)), &\ |\omega|\leq \pi/L  \\
+L \cdot S_{XX}(L\omega), &\ |\omega|\leq \pi/L  \\
 0, &\ \pi/L \lt |\omega| \leq \pi
 \end{array} \right.
 $$

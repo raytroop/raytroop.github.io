@@ -37,7 +37,13 @@ mathjax: true
 
 
 
+## Pulse Code Modulation (PCM)
 
+> John M Pauly. Lecture 13: Pulse Code Modulation [[https://web.stanford.edu/class/ee179/lectures/notes13.pdf](https://web.stanford.edu/class/ee179/lectures/notes13.pdf)]
+
+Pulse Code Modulation (PCM) is a method for digitally representing analog signals by sampling their amplitude at regular intervals and then encoding these samples into binary numbers
+
+![image-20250820222558595](ss-insight/image-20250820222558595.png)
 
 ## Energy/bit (pJ/b)
 

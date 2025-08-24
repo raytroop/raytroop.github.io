@@ -104,6 +104,25 @@ mathjax: true
 
 
 
+## Integer-N PLL
+
+**integer-N PLL frequency synthesizers**
+
+- the *frequency resolution*, is equal to the *reference frequency*, meaning that *only integer multiples of the reference frequency can be synthesized*
+
+- *Stability requirements* limit the loop bandwidth to about *one tenth of the reference frequency*; therefore
+
+  - decreasing the reference frequency increases the settling time as the loop bandwidth also has to be decreased
+  - a reduced loop bandwidth allows less suppression of the VCO’s inherent phase noise
+
+- Another drawback of the integer-N PLL is the *trade-off between phase noise and settling time* when the *divider ratio becomes large* (The contributions to the output phase noise of almost all PLL building blocks, except the VCO, are **multiplied by the division ratio**)
+
+  > [[https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf)]
+  >
+  > ![image-20250602100424369](clocking/image-20250602100424369.png)
+
+- if a small reference frequency is chosen, t*he reference spur in the output phase noise is located at a smaller offset frequency*
+
 
 
 ##  Fractional-N

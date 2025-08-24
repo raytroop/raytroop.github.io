@@ -744,7 +744,7 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 ![image-20250824183123922](delta-sigma/image-20250824183123922.png)
 
-![image-20250824184322955](delta-sigma/image-20250824184322955.png)
+![image-20250824210244328](delta-sigma/image-20250824210244328.png)
 
 
 

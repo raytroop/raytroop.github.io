@@ -52,4 +52,4 @@ Boris Murmann. EE315A VLSI Signal Conditioning Circuits
 
 ---
 
-Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://www.youtube.com/watch?v=SL3-9ZMwdJQ](https://www.youtube.com/watch?v=SL3-9ZMwdJQ)]
+Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://youtu.be/SL3-9ZMwdJQ](https://youtu.be/SL3-9ZMwdJQ)]

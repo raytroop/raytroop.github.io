@@ -9,9 +9,36 @@ mathjax: true
 
 *TODO* &#128197;
 
-## Fixed Point Arithmetic
+
+
+## ADC Calibration
+
+> Ahmed Ali, ISSCC 2021 T5: Calibration Techniques in ADCs [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
+>
+> Jiang, Xicheng, ed. *Digitally-Assisted Analog and Analog-Assisted Digital IC Design*. Cambridge: Cambridge University Press, 2015.
+
+
+
+### Offset Calibration
+
+long-term average of all 32 sub-ADC samples = 0
+
+
+
+
+### Gain Calibration
+
+long-term average of *absolute values* of all 32 sub-ADC samples should be equal
+
+
+
+### Background vs. foreground
 
 *TODO* &#128197;
+
+
+
+
 
 
 

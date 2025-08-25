@@ -449,12 +449,31 @@ After `fftshift`
 ![FFTshift_Matlab_index_resolved](ps-psd/FFTshift_Matlab_index_resolved.png)
 
 ```matlab
->> fftshift([1 2 3 4 5 6])
+>> fftshift([0 1 2 3 4 5 6 7])
 
 ans =
 
-     4     5     6     1     2     3
+     4     5     6     7     0     1     2     3
 ```
+
+
+
+---
+
+![image-20250825230510355](ps-psd/image-20250825230510355.png)
+
+```matlab
+clear;
+N = 100;
+fs = 1000;
+fx = 100;
+x = cos(2*pi*fx/fs*[0:1:N-1]);
+s = abs(fftshift(fft(x)))/N;
+fx = linspace(0,N-1,N)*fs/N -fs/2;
+plot(fx, s, 'o-', 'linewidth', 2);
+grid on; grid minor;
+```
+
 
 
 ## `dft` and `psd`  function in virtuoso

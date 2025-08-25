@@ -232,6 +232,90 @@ $$\begin{align}
 
 > *DFT's output* $\mathrm{SNR}$
 
+---
+
+$$
+\text{PS(k)} = \text{PSD(k)} \cdot \text{ENBW}
+$$
+
+where **Effective Noise BandWidth** $\text{ENBW} =f_{\text{res}} \cdot \frac{N S_2}{S_1^2}$
+
+yield
+$$
+\text{PS(k)} = \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N S_2}{S_1^2} = \left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} \cdot \frac{S_2}{S_1^2}
+$$
+where $ \left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} =\text{const}$, i.e. $x_\text{n,rms}$
+
+![image-20250826003933143](enbw-nl/image-20250826003933143.png)
+
+```matlab
+ratio_list = [];
+for len = 6:12
+ wnd = hanning(2^len);
+ S2 = sum(wnd.^2);
+ S1 = sum(wnd);
+ ratio = S2./S1.^2;
+ ratio_list(end+1) = ratio;
+end
+
+ratio_db = 10*log10(ratio_list);
+plot(2.^[6:1:12], ratio_db, 'ro-', LineWidth=4)
+grid on; grid minor;
+
+xlabel('N'); ylabel("$10\log(S_2/S_1^2)$",'Interpreter', 'latex')
+```
+
+
+
+### FFT Noise Floor
+
+![image-20250826010627757](enbw-nl/image-20250826010627757.png)
+
+![image-20250826013036595](enbw-nl/image-20250826013036595.png)
+
+
+
+```matlab
+N = 2048;
+cycles = 67;
+fs = 1000;
+fx = fs*cycles/N;
+LSB = 2/2^10;
+%generate signal, quantize (mid-tread) and take FFT
+x = cos(2*pi*fx/fs*[0:N-1]);
+x = round(x/LSB)*LSB;
+s = abs(fft(x));
+s = s(1:end/2)/N*2;
+% calculate SNR
+sigbin = 1 + cycles;
+noise = [s(1:sigbin-1), s(sigbin+1:end)];
+snr = 10*log10( s(sigbin)^2/sum(noise.^2) );
+
+sdb = 20*log10(s);
+
+% How to plot a series of numbers which some of them are inf?
+% https://www.mathworks.com/matlabcentral/answers/476643-how-to-plot-a-series-of-numbers-which-some-of-them-are-inf
+plot([0:N/2-1]/N, max(sdb, -120), LineWidth=4)
+hold on;
+plot([0 0.5], [-61.9 -61.9], 'r--', LineWidth=2)
+plot([0 0.5], [-92 -92], 'm--', LineWidth=2)
+grid on; grid minor;
+ylim([-120 0]); xlim([0 0.5]);
+xlabel('Frequency [f/fs]'), ylabel('DFT Magnitude [dBFS]');
+title('2048 point FFT, SNR=61.90dB')
+
+```
+
+
+
+
+
+### Noise Spectral Density (NSD)
+
+> Understanding Key Parameters for RF-Sampling Data Converters White Paper (WP509) [[https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters](https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters)]
+
+![image-20250826005956497](enbw-nl/image-20250826005956497.png)
+
 
 
 ### Rectangular Window

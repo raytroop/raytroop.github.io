@@ -54,11 +54,19 @@ When performing a Fourier Transform on measurement data, a window affects period
 
 When a measurement signal is captured in a periodic manner, the Fourier Transform of the captured signal will have **no leakage** in the frequency domain. 
 
-A window is not recommended for a periodic signal as it will distort the signal in an unnecessary manner, and actually creates spectral leakage.
+A window is not recommended for a periodic signal as it will distort the signal in an unnecessary manner, and actually creates ***spectral leakage***.
 
 ![captured-periodic](dft-window/captured-periodic.png)
 
 
+
+---
+
+> Maloberti, F. *Data Converters*. Dordrecht, Netherlands: Springer, 2007.
+
+![image-20250825231711883](dft-window/image-20250825231711883.png)
+
+![image-20250825232155617](dft-window/image-20250825232155617.png)
 
 ### Non-periodic
 

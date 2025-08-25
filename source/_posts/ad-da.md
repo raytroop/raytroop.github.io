@@ -22,11 +22,46 @@ $\Delta \Sigma$ ADC: Linearity
 > Dan Boschen Why use a 1-bit ADC in a Sigma Delta Modulator?. [[https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063](https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063)]
 
 
+
+## Dynamic Range
+
+![image-20250825215211670](ad-da/image-20250825215211670.png)
+
+---
+
+![image-20250825220134900](ad-da/image-20250825220134900.png)
+
+![image-20250825220536821](ad-da/image-20250825220536821.png)
+
+
+
+## FoMs
+
+> B. Murmann, "ADC Performance Survey 1997-2022," [Online]. Available: [[https://github.com/bmurmann/ADC-survey](https://github.com/bmurmann/ADC-survey)]
+
+
+
+![image-20250825173843550](ad-da/image-20250825173843550.png)
+
+
+
+
+
+## Offset & Gain Error
+
+![image-20250825151821455](ad-da/image-20250825151821455.png)
+
+![image-20250825152414651](ad-da/image-20250825152414651.png)
+
+
+
 ## Charge Injection and Clock Feedthrough
 
 > *Slow Gating*, *Fast Gating*
 
 *TODO* &#128197;
+
+
 
 ## Midrise and Midtread Quantizers
 
@@ -85,7 +120,7 @@ $\Gamma_x$ is  ***no-overload range***
 
 
 
-## Relationship Between SFDR and INL
+## SFDR & INL
 
 ![image-20250524172307785](ad-da/image-20250524172307785.png)
 
@@ -137,34 +172,6 @@ $$
 where $\phi = \arctan(\omega \tau)$
 
 > Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
-
-
-## ADC Calibration
-
-### Offset Calibration
-
-long-term average of all 32 sub-ADC samples = 0
-
-
-### Gain Calibration
-
-long-term average of *absolute values* of all 32 sub-ADC samples should be equal
-
-
-
-## Background vs. foreground calibration  
-
-*TODO* &#128197;
-
-
-
-
-
-> Ahmed Ali, ISSCC 2021 T5: Calibration Techniques in ADCs [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
->
-> Jiang, Xicheng, ed. *Digitally-Assisted Analog and Analog-Assisted Digital IC Design*. Cambridge: Cambridge University Press, 2015.
-
-
 
 
 
@@ -629,6 +636,14 @@ $$
 
 ## reference
 
+Maloberti, F. *Data Converters*. Dordrecht, Netherlands: Springer, 2007.
+
+Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
+
+Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
+
+---
+
 Aaron Buchwald, ISSCC2010 T1: "Specifying & Testing ADCs" [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Tutorials/T1.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Tutorials/T1.pdf)]
 
 Ahmed M. A. Ali. CICC 2018: High Speed Pipelined ADCs: Fundamentals and Variants [[https://picture.iczhiku.com/resource/eetop/SyIGzGRYsHFehcnX.pdf](https://picture.iczhiku.com/resource/eetop/SyIGzGRYsHFehcnX.pdf)]
@@ -654,8 +669,6 @@ Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis [[ht
 Ahmed M. A. Ali. ISSCC2021 T5: Calibration Techniques in ADCs [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
 
 Jan Mulder Broadcom. ISSCC2015 T5: High-Speed Current-Steering DACs [[https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T5.pdf)]
-
-Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
 
 ---
 
@@ -713,10 +726,6 @@ B. Razavi, **"A Tale of Two ADCs - Pipelined Versus SAR"** IEEE Solid-State Circ
 
 ---
 
-Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
-
----
-
 Dr. Tai-Haur Kuo (郭泰豪 教授) Analog IC Design (類比積體電路設計) [[http://msic.ee.ncku.edu.tw/course/aic/aic.html](http://msic.ee.ncku.edu.tw/course/aic/aic.html)]
 
 ---
@@ -728,3 +737,6 @@ Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://
 ---
 
 MPScholar Analog-to-Digital Converters (ADCs) [[https://www.monolithicpower.com/en/learning/mpscholar/analog-to-digital-converters](https://www.monolithicpower.com/en/learning/mpscholar/analog-to-digital-converters)]
+
+tomverbeure. List of Analog Devices Tutorials [[https://tomverbeure.github.io/2021/02/15/Analog-Devices-Tutorials.html](https://tomverbeure.github.io/2021/02/15/Analog-Devices-Tutorials.html)]
+

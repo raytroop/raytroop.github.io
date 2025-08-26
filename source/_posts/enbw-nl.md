@@ -244,7 +244,7 @@ yield
 $$
 \text{PS(k)} = \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N S_2}{S_1^2} = \left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} \cdot \frac{S_2}{S_1^2}
 $$
-where $ \left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} =\text{const}$, i.e. $x_\text{n,rms}$
+where $\left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} =\text{const}$, i.e. $x_\text{n,rms}$
 
 ![image-20250826003933143](enbw-nl/image-20250826003933143.png)
 

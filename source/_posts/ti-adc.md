@@ -7,6 +7,12 @@ categories:
 mathjax: true
 ---
 
+## Frequency Domain Model
+
+*TODO* &#128197;
+
+
+
 ## Skew (Timing Mismatch) Calibration
 
 *TODO* &#128197;

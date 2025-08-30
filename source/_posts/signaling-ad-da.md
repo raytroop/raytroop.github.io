@@ -7,13 +7,25 @@ categories:
 mathjax: true
 ---
 
+
+
+## ADC ENOB
+
+> Dan Boschen, GRCon25: Quantifying Signal Quality: Practical Tools for High-Fidelity Waveform Analysis
+>
+> [[linkedin](https://www.linkedin.com/posts/danboschen_determining-the-effective-number-of-bits-activity-7367534634886246400-tfzu) [GRCon25](https://events.gnuradio.org/event/26/contributions/761/)]
+
+![img](signaling-ad-da/1756557137977.jpeg)
+
+
+
 ## Sigma-Delta DAC
 
 Sigma-delta digital-to-analog converters (SD DAC’s) are often used for *discrete-time signals* with *sample rate much higher than their bandwidth*
 
 - Because of the high sample rate relative to signal bandwidth, ***a very simple DAC reconstruction filter* (*Analog lowpass filter*)** suffices, often just a *one-pole RC lowpass*
 
-![image-20250616000829208](signaling-adda/image-20250616000829208.png)
+![image-20250616000829208](signaling-ad-da/image-20250616000829208.png)
 
 
 
@@ -37,7 +49,7 @@ subplot(3,1,3)
 plot(t, y_filt); title('y_{filt}'); xlabel('t(ms)'); grid on
 ```
 
-![image-20250621223451691](signaling-adda/image-20250621223451691.png)
+![image-20250621223451691](signaling-ad-da/image-20250621223451691.png)
 
 
 
@@ -85,11 +97,11 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 ## DAC ZOH
 
-![image-20250628204404959](signaling-adda/image-20250628204404959.png)
+![image-20250628204404959](signaling-ad-da/image-20250628204404959.png)
 
 > The last D2C is in human vision, which connect discrete time $y(m)$ with line, implicitly
 
-![image-20250628203216965](signaling-adda/image-20250628203216965.png)
+![image-20250628203216965](signaling-ad-da/image-20250628203216965.png)
 
 
 
@@ -103,13 +115,13 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 The combination of the the *digital post-filter* and *downsampler* is called the **decimation filter** or **decimator**
 
-![image-20241015220921002](signaling-adda/image-20241015220921002.png)
+![image-20241015220921002](signaling-ad-da/image-20241015220921002.png)
 
 ###  $\text{sinc}$ filter
 
 
 
-![image-20241015215159577](signaling-adda/image-20241015215159577.png)
+![image-20241015215159577](signaling-ad-da/image-20241015215159577.png)
 
 Provided that $T=1$
 $$
@@ -119,19 +131,19 @@ that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}
 
 
 
-![image-20241015215227042](signaling-adda/image-20241015215227042.png)
+![image-20241015215227042](signaling-ad-da/image-20241015215227042.png)
 
-> ![image-20241015225859710](signaling-adda/image-20241015225859710.png)
+> ![image-20241015225859710](signaling-ad-da/image-20241015225859710.png)
 
 
 
-![image-20241015215111430](signaling-adda/image-20241015215111430.png)
+![image-20241015215111430](signaling-ad-da/image-20241015215111430.png)
 
 
 
 ### $\text{sinc}^2$ filter
 
-![image-20241015220030204](signaling-adda/image-20241015220030204.png)
+![image-20241015220030204](signaling-ad-da/image-20241015220030204.png)
 
 
 
@@ -145,7 +157,7 @@ that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}
 
 *Notice that the requirements of the **first** stage are very **demanding***
 
-![image-20250617001439043](signaling-adda/image-20250617001439043.png)
+![image-20250617001439043](signaling-ad-da/image-20250617001439043.png)
 
 
 
@@ -157,7 +169,7 @@ that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}
 
 DC gain is used to compensate the ratio of sampling rate before and after upsample
 
-![image-20250701070539064](signaling-adda/image-20250701070539064.png)
+![image-20250701070539064](signaling-ad-da/image-20250701070539064.png)
 
 Given
 $$
@@ -185,7 +197,7 @@ It also indicate that dc gain of upsampling is $1/L$
 
 > Zero-Order Hold (ZOH)
 
-![image-20250630235534325](signaling-adda/image-20250630235534325.png)
+![image-20250630235534325](signaling-ad-da/image-20250630235534325.png)
 
 > dc gain = $N$
 
@@ -193,7 +205,7 @@ It also indicate that dc gain of upsampling is $1/L$
 
 > First-Order Hold (FOH) 
 
-![image-20250630235714996](signaling-adda/image-20250630235714996.png)
+![image-20250630235714996](signaling-ad-da/image-20250630235714996.png)
 
 > dc gain = $N$
 

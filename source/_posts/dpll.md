@@ -186,6 +186,8 @@ Neil Robertson. Digital PLL's -- Part 2 [[https://www.dsprelated.com/showarticle
 
 Neil Robertson. Digital PLL's -- Part 3 [[https://www.dsprelated.com/showarticle/1177.php](https://www.dsprelated.com/showarticle/1177.php)]
 
+Daniel Boschen. GRCon24 - Quick Start on Control Loops with Python Workshop [[videos](https://youtu.be/RxQWk1PjJLQ), [slides](https://events.gnuradio.org/event/24/contributions/599/)]
+
 ---
 
 

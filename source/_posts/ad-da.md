@@ -33,6 +33,9 @@ $\Delta \Sigma$ ADC: Linearity
 
 ![image-20250825220536821](ad-da/image-20250825220536821.png)
 
+$$
+\text{SNR} = 10\log\left(\frac{V_\text{in}^2/2}{\Delta^2/12}\right)
+$$
 
 
 ## FoMs

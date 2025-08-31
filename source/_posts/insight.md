@@ -655,7 +655,9 @@ Defined as the frequency at which the **small-signal current gain** of a device 
 
 > Aditya Varma Muppala. MMIC 08: High Frequency Device Characterization in Cadence - Fmax, Ft, NFmin vs Jd [[https://youtu.be/kgEypIA8eus?si=sd4581x2hOuhsJ3P](https://youtu.be/kgEypIA8eus?si=sd4581x2hOuhsJ3P)]
 
+---
 
+![image-20250831165407595](insight/image-20250831165407595.png)
 
 ## MOSFET ZTC Condition Analysis
 

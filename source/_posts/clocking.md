@@ -264,9 +264,13 @@ and $\phi _e(\infty) = 0$
 
 ---
 
+> Daniel Boschen. GRCon24 - Quick Start on Control Loops with Python Workshop [[https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf)]
 
+![image-20250831230607689](clocking/image-20250831230607689.png)
 
+![image-20250831230637667](clocking/image-20250831230637667.png)
 
+![image-20250831230937353](clocking/image-20250831230937353.png)
 
 ## Divider phase noise & jitter
 

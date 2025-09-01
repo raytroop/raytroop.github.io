@@ -313,6 +313,8 @@ title('2048 point FFT, SNR=61.90dB')
 ### Noise Spectral Density (NSD)
 
 > Understanding Key Parameters for RF-Sampling Data Converters White Paper (WP509) [[https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters](https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters)]
+>
+> Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
 
 ![image-20250826005956497](enbw-nl/image-20250826005956497.png)
 

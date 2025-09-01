@@ -41,6 +41,8 @@ $$
 ## FoMs
 
 > B. Murmann, "ADC Performance Survey 1997-2022," [Online]. Available: [[https://github.com/bmurmann/ADC-survey](https://github.com/bmurmann/ADC-survey)]
+>
+> Carsten Wulff, "Advanced Integrated Circuits 2025" [[http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom](http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom)]
 
 
 
@@ -661,7 +663,11 @@ Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://www.nishanch
 
 —， Recent Advances in Multistep Nyquist ADC's [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf)]
 
-Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[link]([SC1.Introduction.to.ADCs.DACs.Metrics.Topologies.Trade.Space.and.Applications] https://www.bilibili.com/video/BV1ENxxedEio/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
+
+—， ISSCC2012 SC3: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/SHORT%20COURSE/SC3Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/SHORT%20COURSE/SC3Visuals.pdf)]
+
+—， A/D Converter Figures of Merit and Performance Trends [[https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/CIRCUIT%20INSIGHTS/Murmann.pdf](https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/CIRCUIT%20INSIGHTS/Murmann.pdf)]
 
 Aaron Buchwald, ISSCC 2008 T2 Pipelined A/D Converters: The Basics [[pdf](https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T02_Pres.pdf)]
 

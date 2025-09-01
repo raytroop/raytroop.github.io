@@ -229,7 +229,7 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 
 
 
-###  Frequency Dividers
+### Fractional-N Divider Model
 
 ![image-20250824221530772](delta-sigma/image-20250824221530772.png)
 $$

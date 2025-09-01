@@ -354,6 +354,12 @@ $$
 
 ## Quantization is NOT Noise
 
+> [[https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization](https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization)]
+>
+> N. Blachman, "The intermodulation and distortion due to quantization of sinusoids," in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 33, no. 6, pp. 1417-1426, December 1985 [[https://sci-hub.st/10.1109/TASSP.1985.1164729](https://sci-hub.st/10.1109/TASSP.1985.1164729)]
+
+
+
 ![image-20241006152621688](ad-da/image-20241006152621688.png)
 
 

@@ -13,6 +13,11 @@ mathjax: true
 
 ![image-20250816003816639](jitter/image-20250816003816639.png)
 
+## General relationships between variance of jitter and phase noise
+
+![image-20240718225039432](jitter/image-20240718225039432.png)
+
+> *Understanding jitter and phase noise : a circuits and systems perspective*
 
 
 ## Even-odd Jitter (EOJ)
@@ -166,9 +171,9 @@ Jitter is a key performance parameter. Need to know what matters in each case:
 - **Cycle-to-cycle jitter** - The *short-term* variation in clock period between *adjacent* clock cycles. This jitter measure, abbreviated here as $J_{CC}$, may be specified as either an RMS or peak-to-peak quantity.
 - **Period jitter** - The *short-term* variation in clock period over *all* measured clock cycles, compared to the average clock period. This jitter measure, abbreviated here as $J_{PER}$, may be specified as either an RMS or peak-to-peak quantity.
 
-Let the variable below represent the variance of a single edge’s timing jitter, i.e. the difference in time of a jittery edge versus an ideal edge, $\sigma^2_j$
+Let the variable below represent the variance of a single edge's timing jitter, i.e. the difference in time of a jittery edge versus an ideal edge, $\sigma^2_j$
 
-If each edge’s jitter is *independent* then the variance of the period jitter can be written as
+If each edge's jitter is *independent* then the variance of the period jitter can be written as
 $$\begin{align}
 \sigma^2_\text{jper} &= (\sigma_\text{j(n+1)}-\sigma_\text{j(n)})^2 \\
 &= \sigma_\text{j(n+1)}^2-2\sigma_\text{j(n+1)}\sigma_\text{j(n)})+\sigma_\text{j(n)})^2\\
@@ -201,14 +206,6 @@ $$
 $$
 
 > [[Timing 101 #8: The Case of the Cycle-to-Cycle Jitter Rule of Thumb, Silicon Labs](https://community.silabs.com/s/share/a5U1M000000knzoUAA/timing-101-8-the-case-of-the-cycletocycle-jitter-rule-of-thumb?language=en_US)]
-
-
-
-##  General relationships between variance of jitter and phase noise
-
-![image-20240718225039432](jitter/image-20240718225039432.png)
-
-> *Understanding jitter and phase noise : a circuits and systems perspective*
 
 
 

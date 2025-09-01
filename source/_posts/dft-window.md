@@ -242,7 +242,7 @@ a(f) = \frac{\sqrt{a_r^2+a_i^2}}{S_1}
 $$
 where $S_1 = \sum _{k=0}^{N-1}w_k$
 
-### rectangle window example
+### Rectangular window example
 
 > aka. Uniform window, "Rectangular" window, "no window"
 >

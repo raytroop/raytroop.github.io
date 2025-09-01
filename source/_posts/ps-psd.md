@@ -486,8 +486,9 @@ To compensate windowing effect, $W(n)$, the `dft` output should be multiplied by
 
 - `psd` function has taken into account $K_e$,   postprocessing is **not** needed
 
-
 ## reference
+
+Heinzel, Gerhard, A. O. Rüdiger and Roland Schilling. "Spectrum and spectral density estimation by the Discrete Fourier transform (DFT), including a comprehensive list of window functions and some new at-top windows." (2002). URL: [https://holometer.fnal.gov/GH_FFT.pdf](https://holometer.fnal.gov/GH_FFT.pdf)
 
 [Demonstration-DFT-PS-PSD](https://github.com/liangsizhuang/Demonstration-DFT-PS-PSD)
 
@@ -499,17 +500,15 @@ Rapuano, Sergio, and Harris, Fred J., An Introduction to FFT and Time Domain Win
 
 [Neil Robertson, The Power Spectrum](https://www.dsprelated.com/showarticle/1004.php)
 
-[Neil Robertson, Use Matlab Function pwelch to Find Power Spectral Density – or Do It Yourself](https://www.dsprelated.com/showarticle/1221.php)
+[—, Use Matlab Function pwelch to Find Power Spectral Density – or Do It Yourself](https://www.dsprelated.com/showarticle/1221.php)
 
-[Neil Robertson, Evaluate Window Functions for the Discrete Fourier Transform](https://www.dsprelated.com/showarticle/1211.php)
+[—, Evaluate Window Functions for the Discrete Fourier Transform](https://www.dsprelated.com/showarticle/1211.php)
 
-Neil Robertson. Add a Power Marker to a Power Spectral Density (PSD) Plot [[https://www.dsprelated.com/showarticle/1387.php](https://www.dsprelated.com/showarticle/1387.php)]
+—. Add a Power Marker to a Power Spectral Density (PSD) Plot [[https://www.dsprelated.com/showarticle/1387.php](https://www.dsprelated.com/showarticle/1387.php)]
 
 [Mathuranathan Viswanathan, Interpret FFT, complex DFT, frequency bins & FFTShift](https://www.gaussianwaves.com/2015/11/interpreting-fft-results-complex-dft-frequency-bins-and-fftshift/)
 
 [robert bristow-johnson, Does windowing affect Parseval's theorem?](https://dsp.stackexchange.com/a/47603/59253)
-
-Heinzel, Gerhard, A. O. Rüdiger and Roland Schilling. "Spectrum and spectral density estimation by the Discrete Fourier transform (DFT), including a comprehensive list of window functions and some new at-top windows." (2002). URL: [https://holometer.fnal.gov/GH_FFT.pdf](https://holometer.fnal.gov/GH_FFT.pdf)
 
 Window Correction Factors URL: [https://community.sw.siemens.com/s/article/window-correction-factors](https://community.sw.siemens.com/s/article/window-correction-factors)
 

@@ -30,6 +30,8 @@ mathjax: true
 
 ## Spurious Tones
 
+***S**pur-to-**C**arrier **R**atio* (**SCR**)
+
 ![image-20250523222846691](clocking/image-20250523222846691.png)
 
 

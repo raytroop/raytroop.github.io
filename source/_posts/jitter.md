@@ -13,11 +13,31 @@ mathjax: true
 
 ![image-20250816003816639](jitter/image-20250816003816639.png)
 
-## variance of jitter vs. phase noise
+## jitter variance vs. phase noise
 
-![image-20240718225039432](jitter/image-20240718225039432.png)
+> Note that $L(f )$ is defined over positive frequencies only $(f \ge 0)$
 
-> *Understanding jitter and phase noise : a circuits and systems perspective*
+![image-20250901212043295](jitter/image-20250901212043295.png)
+
+---
+
+![image-20250901224816795](jitter/image-20250901224816795.png)
+$$\begin{align}
+S_{jACC(N)}(f) &= |1-z^{-N}|^2\cdot S_{jABS}(f) \\
+&= |1-\cos\theta +j\sin\theta|^2\cdot S_{jABS}(f) = ((1-\cos\theta)^2 + \sin^2\theta)\cdot S_{jABS}(f) \\
+&= 2(1-\cos\theta)\cdot S_{jABS}(f) = 4\sin^2(\theta/2)\cdot S_{jABS}(f)
+\end{align}$$
+
+where $\theta = 2\pi f N/f_0$
+
+![image-20250901233055582](jitter/image-20250901233055582.png)
+
+---
+
+![image-20250901233626772](jitter/image-20250901233626772.png)
+
+![image-20250901233756765](jitter/image-20250901233756765.png)
+
 
 
 ## Even-odd Jitter (EOJ)

@@ -197,6 +197,14 @@ Adiff: 7.276e-12
 
 ![image-20230530230434715](enbw-nl/image-20230530230434715.png)
 
+---
+
+> Unpingco, José. *Python for Signal Processing: Featuring IPython Notebooks*. Cham: Springer, 2013. [[pdf](https://electrovolt.ir/wp-content/uploads/2017/07/Python_For_Signal_Processing_ElectroVolt.ir_.pdf)]
+>
+> [[https://github.com/unpingco/Python-for-Signal-Processing/blob/master/Windowing_Part2.ipynb](https://github.com/unpingco/Python-for-Signal-Processing/blob/master/Windowing_Part2.ipynb)]
+
+![image-20250902002913214](enbw-nl/image-20250902002913214.png)
+
 
 
 ## Noise Floor
@@ -318,7 +326,9 @@ title('2048 point FFT, SNR=61.90dB')
 
 ![image-20250826005956497](enbw-nl/image-20250826005956497.png)
 
+---
 
+![image-20250902010512726](enbw-nl/image-20250902010512726.png)
 
 ### Rectangular Window
 

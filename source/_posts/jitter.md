@@ -13,7 +13,7 @@ mathjax: true
 
 ![image-20250816003816639](jitter/image-20250816003816639.png)
 
-## General relationships between variance of jitter and phase noise
+## variance of jitter vs. phase noise
 
 ![image-20240718225039432](jitter/image-20240718225039432.png)
 

@@ -17,7 +17,9 @@ mathjax: true
 
 > Note that $L(f )$ is defined over positive frequencies only $(f \ge 0)$
 
-![image-20250901212043295](jitter/image-20250901212043295.png)
+![image-20250902231037546](jitter/image-20250902231037546.png)
+
+
 
 ---
 
@@ -34,18 +36,37 @@ where $\theta = 2\pi f N/f_0$
 
 ---
 
+***Simplified PLL Phase Noise Profile***
+
+
+
+***Absolute Jitter***
+
+*TODO* &#128197;
+
+
+
+ ***Period Jitter***
+
+![image-20250902233638588](jitter/image-20250902233638588.png)
+
+---
+
 ![image-20250901233626772](jitter/image-20250901233626772.png)
 
 ![image-20250901233756765](jitter/image-20250901233756765.png)
 
 ---
 
-**random-walk DCO - $1/f^2$ Phase Noise Profile**
+**a random-walk DCO - $1/f^2$ Phase Noise Profile**
 
 > L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
 
+![image-20250902232230515](jitter/image-20250902232230515.png)
 
-*TODO* &#128197;
+> ![image-20250902231843251](jitter/image-20250902231843251.png)
+
+
 
 
 ## Even-odd Jitter (EOJ)

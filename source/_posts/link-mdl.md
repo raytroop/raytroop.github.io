@@ -39,6 +39,12 @@ Lim, Byong Chan,Ph.D. Dissertation 2012. "Model validation of mixed-signal syste
 
 —, M. Horowitz, "Error Control and Limit Cycle Elimination in Event-Driven Piecewise Linear Analog Functional Models," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 63, no. 1, pp. 23-33, Jan. 2016 [[https://sci-hub.se/10.1109/TCSI.2015.2512699](https://sci-hub.se/10.1109/TCSI.2015.2512699)]
 
+S. Liao and M. Horowitz, "A Verilog piecewise-linear analog behavior model for mixed-signal validation," *Proceedings of the IEEE 2013 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2013 [[https://sci-hub.se/10.1109/CICC.2013.6658461](https://sci-hub.se/10.1109/CICC.2013.6658461)]
+
+—, M. Horowitz, "A Verilog Piecewise-Linear Analog Behavior Model for Mixed-Signal Validation," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 61, no. 8, pp. 2229-2235, Aug. 2014 [[https://sci-hub.se/10.1109/TCSI.2014.2332265](https://sci-hub.se/10.1109/TCSI.2014.2332265)]
+
+—,Ph.D. Dissertation 2012. Verilog Piecewise Linear Behavioral Modeling For Mixed-Signal Validation [[https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf](https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf)]
+
 ---
 
 Ben Yochret Sabrine, 2020, "BEHAVIORAL MODELING WITH SYSTEMVERILOG FOR MIXED-SIGNAL VALIDATION" [[https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf](https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf)]
@@ -51,3 +57,10 @@ Rainer Findenig, Infineon Technologies. "Behavioral Modeling for SoC Simulation 
 
 CC Chen. Why Efficient SPICE Simulation Techniques for BB CDR Verification? [[https://youtu.be/Z54MV9nuGUI](https://youtu.be/Z54MV9nuGUI)]
 
+---
+
+T. Wen and T. Kwasniewski, "Phase Noise Simulation and Modeling of ADPLL by SystemVerilog," *2008 IEEE International Behavioral Modeling and Simulation Workshop*, San Jose, CA, USA, 2008 [[slides](https://bmas.designers-guide.org/2008/2-1_Presentation.pdf), [paper](https://bmas.designers-guide.org/2008/2-1_Paper.pdf)]
+
+---
+
+Jaeha Kim,Scientific Analog. UCIe PHY Modeling and Simulation with XMODEL [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Tutorial1-1_%EA%B9%80%EC%9E%AC%ED%95%98%EA%B5%90%EC%88%98%EB%8B%98_%EC%84%9C%EC%9A%B8%EB%8C%80%ED%95%99%EA%B5%90.pdf)]

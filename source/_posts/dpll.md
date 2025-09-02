@@ -7,9 +7,7 @@ categories:
 mathjax: true
 ---
 
-## DPLL time-domain model
 
-*TODO* &#128197;
 
 ## Hunting Jitter
 
@@ -33,8 +31,9 @@ mathjax: true
 >
 > —, Clock and Data Recovery for Serial Data Communications, focusing on bang-bang CDR design methodology, ISSCC Short Course, February 2002. [[slides](https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf)]
 
-
 It's **ternary**, because *early*, *late* and *no transition*
+
+notice the ***transition density = 1*** in digital PLL
 
 ### Linearing BB-PD
 
@@ -43,7 +42,7 @@ The effective PD gain is a function of the **input jitter pdf**, it enables one 
 
 BB Gain is the slope of average BB output $\mu$, versus phase offset $\phi$, i.e. $\frac {\partial \mu}{\partial \phi}$,
 
-BB only produces output for a transition and this de-rates the gain. Transition density = *0.5* for random data
+BB only produces output for a transition and this de-rates the gain. ***Transition density = 0.5*** for ***random*** data
 
 $$
 K_{BB} = \frac{1}{2}\frac {\partial \mu}{\partial \phi}
@@ -81,14 +80,67 @@ $$
 >
 > T. -K. Kuan and S. -I. Liu, "A Bang Bang Phase-Locked Loop Using Automatic Loop Gain Control and Loop Latency Reduction Techniques," in IEEE Journal of Solid-State Circuits, vol. 51, no. 4, pp. 821-831, April 2016 [[https://sci-hub.st/10.1109/JSSC.2016.2519391](https://sci-hub.st/10.1109/JSSC.2016.2519391)]
 
+![image-20250902215541227](dpll/image-20250902215541227.png)
+
+![image-20250902230109407](dpll/image-20250902230109407.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+N = 2**10
+sigma = 0.1
+dt = np.random.normal(sigma,size=N)
+et = np.sign(dt)
+
+# Eq-(2)
+coef_form = np.mean(np.abs(dt)) / np.mean(np.power(dt, 2))
+print(f'coef_form: {coef_form}')
+
+# Eq-(9)
+coef_gauss = (2/np.pi)**0.5/sigma
+print(f'coef_gauss: {coef_gauss}')
+
+coef_fit = np.polyfit(dt, et, 1)
+print(f'coef_fit: {coef_fit}')
+
+x = np.linspace(-4, 4, 1000)
+y = coef_fit[0]*x + coef_fit[1]
+
+plt.plot(dt, et, 'o')
+plt.plot(x, y, linewidth=2, linestyle='--')
+plt.hist(dt, bins=100)
+plt.xlabel(r'$\Delta t$')
+plt.grid(True)
+plt.legend([r'$\Delta t \sim \varepsilon $', r'$x_{fit} \sim y_{fit}$', r'$ \text{hist}_{\Delta t}$'])
+plt.show()
+
+
+# coef_form: 0.7613779338981724
+# coef_gauss: 7.978845608028654
+# coef_fit: [ 0.76635875 -0.04693194]
+```
 
 
 
+---
 
+> Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016). Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.  - *2.2.1 Quantizer Modeling*
+
+![image-20250902212931083](dpll/image-20250902212931083.png)
+$$
+\frac{d\sigma_e^2}{dk} =0\space\space\Rightarrow\space\space k=\frac{\left\langle  v,y\right\rangle}{\left\langle y,y \right\rangle}
+$$
+
+![image-20250902231449843](dpll/image-20250902231449843.png)
 
 ## DCO Quantization Noise
 
 *TODO* &#128197;
+
+
+
+
 
 ## TDC Quantization Noise
 

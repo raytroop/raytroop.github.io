@@ -325,7 +325,7 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 > N. Blachman, "The intermodulation and distortion due to quantization of sinusoids," in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 33, no. 6, pp. 1417-1426, December 1985 [[https://sci-hub.st/10.1109/TASSP.1985.1164729](https://sci-hub.st/10.1109/TASSP.1985.1164729)]
 
 
-![image-20241006152621688](ad-da/image-20241006152621688.png)
+![image-20250902203709226](ad-da/image-20250902203709226.png)
 
 ---
 
@@ -333,7 +333,13 @@ The quantization noise is ***an infinite sum of input signal odd harmonics***, w
 
 **"Quantization noise is white"**, because for a high number of bits, it looks white in the FFT
 
-*TODO* &#128197;
+
+
+![image-20250902203921651](ad-da/image-20250902203921651.png)
+
+
+
+
 
 
 ## ENOB & SQNR

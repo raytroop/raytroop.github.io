@@ -38,6 +38,14 @@ where $\theta = 2\pi f N/f_0$
 
 ![image-20250901233756765](jitter/image-20250901233756765.png)
 
+---
+
+**random-walk DCO - $1/f^2$ Phase Noise Profile**
+
+> L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
+
+
+*TODO* &#128197;
 
 
 ## Even-odd Jitter (EOJ)

@@ -7,6 +7,10 @@ categories:
 mathjax: true
 ---
 
+## DPLL time-domain model
+
+*TODO* &#128197;
+
 ## Hunting Jitter
 
 ***Hunting jitter*** is often referred to as ***dithering jitter***, the *periodic* time error between *data clock* and input data, which exhibits a ***limit-cycle*** behavior
@@ -25,6 +29,12 @@ mathjax: true
 
 
 ### Linearing BB-PD
+
+> Youngdon Choi, Deog-Kyoon Jeong and W. Kim, "Jitter transfer analysis of tracked oversampling techniques for multigigabit clock and data recovery," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 50, no. 11, pp. 775-783, Nov. 2003 [[https://sci-hub.st/10.1109/TCSII.2003.819070](https://sci-hub.st/10.1109/TCSII.2003.819070)]
+
+
+The effective PD gain is a function of the **input jitter pdf**, it enables one to anticipate the effects of input jitter on loop characteristics
+
 
 BB Gain is the slope of average BB output $\mu$, versus phase offset $\phi$, i.e. $\frac {\partial \mu}{\partial \phi}$,
 
@@ -66,6 +76,16 @@ $$
 >
 > \- Clock and Data Recovery for Serial Data Communications, focusing on bang-bang CDR design methodology, ISSCC Short Course, February 2002. [[slides](https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf)]
 
+
+## DCO Quantization Noise
+
+*TODO* &#128197;
+
+## TDC Quantization Noise
+
+*TODO* &#128197;
+
+![image-20250601122145164](dpll/image-20250601122145164.png)
 
 
 ## CDR Loop Latency
@@ -146,9 +166,7 @@ In going from *discrete* time to *continuous* time,  we must add a scale factor 
 
 ![image-20250513211531981](dpll/image-20250513211531981.png)
 
-## TDC quantization noise
 
-![image-20250601122145164](dpll/image-20250601122145164.png)
 
 
 

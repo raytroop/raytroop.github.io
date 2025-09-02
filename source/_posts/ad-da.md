@@ -327,6 +327,14 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 
 ![image-20241006152621688](ad-da/image-20241006152621688.png)
 
+---
+
+The quantization noise is ***an infinite sum of input signal odd harmonics***, where the amplitude of the harmonics is determined by a sum of a *Bessel function*
+
+**"Quantization noise is white"**, because for a high number of bits, it looks white in the FFT
+
+*TODO* &#128197;
+
 
 ## ENOB & SQNR
 

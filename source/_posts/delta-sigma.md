@@ -51,7 +51,11 @@ mathjax: true
   - **M**ulti st**A**ge noise **SH**aping (**MASH**)
 
 
-![image-20250823230207418](delta-sigma/image-20250823230207418.png)
+![image-20250903210531360](delta-sigma/image-20250903210531360.png)
+
+---
+
+
 
 ![image-20250611074830238](delta-sigma/image-20250611074830238.png)
 

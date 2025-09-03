@@ -11,7 +11,11 @@ mathjax: true
 
 *TODO* &#128197;
 
+![f-mdl.drawio](ti-adc/f-mdl.drawio.svg)
 
+
+
+![image-20250903212048962](ti-adc/image-20250903212048962.png)
 
 ## Skew (Timing Mismatch) Calibration
 

@@ -43,11 +43,13 @@ mathjax: true
   - Sampled Quantizer: Synchronous Modulator
   - Unsampled Quantizer: Asynchronous Modulator
 - Discrete-Time (DT) Analog Modulator
--  Discrete-Time Digital Modulators (DDSM)
+  - The main application is in $\Delta\Sigma$ ADCs
+
+- Discrete-Time Digital Modulators (DDSM)
   - Single Quantizer DDSMs - output feedback
   - Error feedback modulators (EFM) - error feedback
   - **M**ulti st**A**ge noise **SH**aping (**MASH**)
-  
+
 
 ![image-20250823230207418](delta-sigma/image-20250823230207418.png)
 

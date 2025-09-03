@@ -51,6 +51,10 @@ R_{\varphi}(NT_0) &= \int_{-\infty}^{+\infty} S_{\varphi} (f)   e^{j2\pi f NT_0}
 
 Thus, yield EQ(3.48)
 
+![image-20250903184827248](jitter/image-20250903184827248.png)
+
+
+
 ---
 
 ***Simplified PLL Phase Noise Profile***

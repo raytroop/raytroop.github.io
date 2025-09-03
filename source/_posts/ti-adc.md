@@ -9,8 +9,6 @@ mathjax: true
 
 ## Frequency Domain Model
 
-*TODO* &#128197;
-
 ![f-mdl.drawio](ti-adc/f-mdl.drawio.svg)
 
 

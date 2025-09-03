@@ -82,7 +82,7 @@ $$
 
 ![image-20250902215541227](dpll/image-20250902215541227.png)
 
-![image-20250902230109407](dpll/image-20250902230109407.png)
+![image-20250903190920929](dpll/image-20250903190920929.png)
 
 ```python
 import matplotlib.pyplot as plt
@@ -104,21 +104,29 @@ print(f'coef_gauss: {coef_gauss}')
 coef_fit = np.polyfit(dt, et, 1)
 print(f'coef_fit: {coef_fit}')
 
-x = np.linspace(-4, 4, 1000)
+x = np.linspace(-3.5, 3.5, 1000)
 y = coef_fit[0]*x + coef_fit[1]
 
 plt.plot(dt, et, 'o')
 plt.plot(x, y, linewidth=2, linestyle='--')
-plt.hist(dt, bins=100)
+
+# Calculate histogram counts and bin edges
+counts, bin_edges = np.histogram(dt, bins=100)
+# Find the maximum count
+max_count = counts.max()
+# Create weights to normalize the maximum height to 1
+weights = np.ones_like(dt) / max_count
+plt.hist(dt, bins=100, weights=weights)
+
 plt.xlabel(r'$\Delta t$')
 plt.grid(True)
 plt.legend([r'$\Delta t \sim \varepsilon $', r'$x_{fit} \sim y_{fit}$', r'$ \text{hist}_{\Delta t}$'])
 plt.show()
 
 
-# coef_form: 0.7613779338981724
+# coef_form: 0.7910794009505085
 # coef_gauss: 7.978845608028654
-# coef_fit: [ 0.76635875 -0.04693194]
+# coef_fit: [0.79013999 0.0204332 ]
 ```
 
 

@@ -34,6 +34,23 @@ where $\theta = 2\pi f N/f_0$
 
 ![image-20250901233055582](jitter/image-20250901233055582.png)
 
+
+As EQ(3.44), EQ(3.45)
+
+the autocorrelation is the inverse Fouer transform of the PSD
+
+$$
+R_{\varphi}(t) = \int_{-\infty}^{+\infty} S_{\varphi} (f) e^{j2\pi f t} df
+$$
+
+Then,
+$$\begin{align}
+R_{\varphi}(0) &= \int_{-\infty}^{+\infty} S_{\varphi} (f)  df \\
+R_{\varphi}(NT_0) &= \int_{-\infty}^{+\infty} S_{\varphi} (f)   e^{j2\pi f NT_0} df
+\end{align}$$
+
+Thus, yield EQ(3.48)
+
 ---
 
 ***Simplified PLL Phase Noise Profile***

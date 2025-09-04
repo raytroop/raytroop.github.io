@@ -7,6 +7,16 @@ categories:
 mathjax: true
 ---
 
+## Common Mode and Differential Mode interference (CMI &DMI)
+
+> Patrick Kennedy, Impact of Noise Coupler on 128 GT/s Rx Calibration and DUT Testing
+
+*CMI is injected at 120MHz* and *DMI is injected at 2.1GHz*
+
+*TODO* &#128197;
+
+
+
 ## Single-Ended & Differential Signaling
 
 > [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf)]

@@ -225,6 +225,10 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 ![image-20250824081318669](delta-sigma/image-20250824081318669.png)
 
 
+## modulator wordlength & quantizer step size
+
+*TODO* &#128197;
+
 
 ## Fractional-N PLL
 

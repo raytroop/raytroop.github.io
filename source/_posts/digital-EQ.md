@@ -7,9 +7,13 @@ categories:
 mathjax: true
 ---
 
-## RX FFE
+## FIR Coefficient Selection
 
 *TODO* &#128197;
+
+
+
+
 
 
 ## Multipliers

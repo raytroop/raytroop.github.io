@@ -7,15 +7,27 @@ categories:
 mathjax: true
 ---
 
-## Common Mode and Differential Mode interference (CMI &DMI)
 
+
+## CMI & DMI
+
+> Ahmed Sada Staff Silicon Validation Engineer, Synopsys. Don't Be Intimidated: Manual Calibration for Stressed Eye Testing
+>
 > Patrick Kennedy, Impact of Noise Coupler on 128 GT/s Rx Calibration and DUT Testing
+>
+> Anritsu White paper: PCIe® 6.0: Testing for a New Generation [[link](https://img.datacenterfrontier.com/files/base/ebm/datacenterfrontier/document/2022/09/1663627621780-pcie60testingforanewgenerationnewlogo.pdf?dl=1663627621780-pcie60testingforanewgenerationnewlogo.pdf)]
 
-*CMI is injected at 120MHz* and *DMI is injected at 2.1GHz*
+***sinusoidal*** differential mode interference (**DMI**), and common mode interference (**CMI**)
 
-*TODO* &#128197;
+![image-20250904225444111](link-budget/image-20250904225444111.png)
+
+![image-20250904223855075](link-budget/image-20250904223855075.png)
 
 
+
+---
+
+![image-20250904204007383](link-budget/image-20250904204007383.png)
 
 ## Single-Ended & Differential Signaling
 

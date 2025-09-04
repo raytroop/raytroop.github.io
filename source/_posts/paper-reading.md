@@ -51,3 +51,10 @@ ISSCC.2018 6.4 A Fully Adaptive 19-to-56Gb/s PAM-4 Wireline Transceiver with a C
 ---
 
 M. S. Jalali, A. Sheikholeslami, M. Kibune and H. Tamura, "A Reference-Less Single-Loop Half-Rate Binary CDR," in *IEEE Journal of Solid-State Circuits*, vol. 50, no. 9, pp. 2037-2047, Sept. 2015 [[https://www.eecg.utoronto.ca/~ali/papers/jssc2015-09.pdf](https://www.eecg.utoronto.ca/~ali/papers/jssc2015-09.pdf)]
+
+
+
+---
+
+Pisati, et.al., "Sub-250mW 1-to-56Gb/s Continuous-Range PAM-4 42.5dB IL ADC/DAC- Based Transceiver in 7nm FinFET," 2019 IEEE International Solid-State Circuits Conference (ISSCC), 2019 [[https://sci-hub.se/10.1109/ISSCC.2019.8662428](https://sci-hub.se/10.1109/ISSCC.2019.8662428)]
+

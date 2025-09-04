@@ -225,9 +225,32 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 ![image-20250824081318669](delta-sigma/image-20250824081318669.png)
 
 
+
+## quantizer overload
+
+![image-20250905062939783](delta-sigma/image-20250905062939783.png)
+
+
+
+
+
 ## modulator wordlength & quantizer step size
 
 *TODO* &#128197;
+
+![image-20250905064118796](delta-sigma/image-20250905064118796.png)
+
+![image-20250905064139686](delta-sigma/image-20250905064139686.png)
+
+
+
+---
+
+![image-20250905065402176](delta-sigma/image-20250905065402176.png)
+
+
+
+
 
 
 ## Fractional-N PLL
@@ -533,11 +556,6 @@ Dout, the low frequency component of ADC out is same with Vin
 *TODO* &#128197;
 
 
-## Dynamic Range ofthe Modulators & quantizer overloading
-
-*TODO* &#128197;
-
-
 
 
 
@@ -689,31 +707,7 @@ $$
 
 
 
-## LSB Dither
-
-**dithering** break *periodicity* and convert them to *noise* while input is *constant*
-
-![image-20250601103141963](delta-sigma/image-20250601103141963.png)
-
-![image-20250601105409348](delta-sigma/image-20250601105409348.png)
-
-![image-20250601203932511](delta-sigma/image-20250601203932511.png)
-
-
-
-
-
-
-
-## quantizer overload
-
-*TODO* &#128197;
-
-
-
-
-
-## leakage in the integrator
+## integrator leakage
 
 When the integrator includes leakage ($\alpha$)
 

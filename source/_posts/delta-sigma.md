@@ -234,9 +234,7 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 
 
 
-## modulator wordlength & quantizer step size
-
-*TODO* &#128197;
+## LSB Dither - modulator wordlength & quantizer step size
 
 ![image-20250905064118796](delta-sigma/image-20250905064118796.png)
 
@@ -248,7 +246,9 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 
 ![image-20250905065402176](delta-sigma/image-20250905065402176.png)
 
+??  ***integer valued impulse responses***
 
+> S. Pamarti, J. Welz and I. Galton, "Statistics of the Quantization Noise in 1-Bit Dithered Single-Quantizer Digital Delta–Sigma Modulators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 54, no. 3, pp. 492-503, March 2007 [[pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf)]
 
 
 

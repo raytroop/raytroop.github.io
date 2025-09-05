@@ -11,33 +11,7 @@ mathjax: true
 
 
 
-![image-20250616223003455](delta-sigma/image-20250616223003455.png)
-
-- a delta–sigma **ADC** consists of **an analog modulator** followed by **a digital filter**
-- a delta–sigma **DAC** consists of **a digital modulator** followed by **an analog filter**
-
----
-
-
-
-**Analog Delta Sigma Modulators (ADSM)**  are used in the context of *analog-to-digital conversion*
-
-- In a CT delta-sigma ADC, there is no need for an anti-aliasing filter or a front-end sampler
-
-**Digital Delta Sigma Modulators (DDSM)** are commonly used in *digital to-analog conversion* and *fractional-N frequency synthesis*
-
-- In a DDSM, the *input is digital* and the *filters are implemented digitally* 
-- the input to the DDSM is often a *constant digital word*, this covers delta-sigma fractional-N synthesizers in the frequency generation application
-
-
-
----
-
-![image-20241123140116340](delta-sigma/image-20241123140116340.png)
-
-![image-20250610223809074](delta-sigma/image-20250610223809074.png)
-
-## $\Delta\Sigma$ Classification
+## Classification
 
 - Continuous-Time (CT) Analog Modulator
   - Sampled Quantizer: Synchronous Modulator
@@ -67,45 +41,6 @@ mathjax: true
 >
 > P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]
 
----
-
-![image-20250824092757793](delta-sigma/image-20250824092757793.png)
-$$\begin{align}
-v[n] = \{0,1,2,...,M-1\} &\space\Rightarrow\space  y[n] = 0 \space\Rightarrow\space  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\} \\
-v[n] = \{M,M+1,M2,...,2M-1\} &\space\Rightarrow\space  y[n] = 1 \space\Rightarrow\space  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\}
-\end{align}$$
-
-> ![image-20250823232924985](delta-sigma/image-20250823232924985.png)
-
-For the three stages of the MASH 1-1-1 DDSM
-
-![image-20250823232212295](delta-sigma/image-20250823232212295.png)
-
----
-
-***1st order DDSM (digital accumulator)***
-
-![image-20250604000323199](delta-sigma/image-20250604000323199.png)
-
-
-
-***2nd order DDSM***
-
-![image-20250601170123635](delta-sigma/image-20250601170123635.png)
-
-In $z$-domain
-$$
-\left\{(A + D - Y)\frac{z^{-1}}{1-z^{-1}} - 2Y \right\}\frac{z^{-1}}{1-z^{-1}} + Q = Y
-$$
-That is
-$$
-Y = A z^{-2} + Dz^{-2} + Q(1-z^{-1})^2
-$$
-In time domain
-$$\begin{align}
-y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
-&= \alpha + d[n-2] + q[n]-2q[n-1]+q[n-2]
-\end{align}$$
 
 
 
@@ -167,7 +102,7 @@ title('NTF of MOD1 & MOD2')
 
 
 
-## SQNR
+## SQNR improvement
 
 > In general, for an $l$th order modulator with $\text{NTF}(z) = (1 − z^{−1})^l$, the SQNR increases by $(6l + 3)$ dB for every doubling of the OSR
 
@@ -229,65 +164,6 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 ## quantizer overload
 
 ![image-20250905062939783](delta-sigma/image-20250905062939783.png)
-
-
-
-
-
-## LSB Dither - modulator wordlength & quantizer step size
-
-![image-20250905064118796](delta-sigma/image-20250905064118796.png)
-
-![image-20250905064139686](delta-sigma/image-20250905064139686.png)
-
-
-
----
-
-![image-20250905065402176](delta-sigma/image-20250905065402176.png)
-
-??  ***integer valued impulse responses***
-
-> S. Pamarti, J. Welz and I. Galton, "Statistics of the Quantization Noise in 1-Bit Dithered Single-Quantizer Digital Delta–Sigma Modulators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 54, no. 3, pp. 492-503, March 2007 [[pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf)]
-
-
-
-
-## Fractional-N PLL
-
-![image-20250824103717743](delta-sigma/image-20250824103717743.png)
-
-![image-20250824103933652](delta-sigma/image-20250824103933652.png)
-
-
-
-
-### Fractional-N Divider Model
-
-![image-20250824221530772](delta-sigma/image-20250824221530772.png)
-$$
-(N+\alpha)T_{PLL}  - \tau[n-1] +\tau[n] =  (N+y[n])T_{PLL}
-$$
-
-i.e.
-$$
-\tau[n] = \tau[n-1] + (y[n] - \alpha)T_{PLL}
-$$
-
-where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$ 
-
-![image-20250824221741018](delta-sigma/image-20250824221741018.png)
-
-
-
-
-### $\Delta\Sigma$ noise in PLL
-
-![image-20250824162417584](delta-sigma/image-20250824162417584.png)
-
-![image-20250824183123922](delta-sigma/image-20250824183123922.png)
-
-![image-20250824210526248](delta-sigma/image-20250824210526248.png)
 
 
 

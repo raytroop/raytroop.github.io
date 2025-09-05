@@ -31,7 +31,7 @@ mathjax: true
 
 ![image-20250904235434247](rx-fe/image-20250904235434247.png)
 
-
+Assuming $\mathrm{SNR} = \frac{S_x(f)}{S_n(f)}$
 
 ## input network
 

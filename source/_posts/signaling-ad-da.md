@@ -146,6 +146,8 @@ Neil Robertson, Model a Sigma-Delta DAC Plus RC Filter [[https://www.dsprelated.
 
 —, “A Simplified Matlab Function for Power Spectral Density”, DSPRelated.com, March, 2020, [[https://www.dsprelated.com/showarticle/1333.php](https://www.dsprelated.com/showarticle/1333.php)]
 
+Arash Loloee, Ph.D. Exploring Decimation Filters [[https://www.highfrequencyelectronics.com/Archives/Nov13/1311_HFE_decimationFilters.pdf](https://www.highfrequencyelectronics.com/Archives/Nov13/1311_HFE_decimationFilters.pdf)]
+
 ---
 
 Venkatesh Srinivasan, ISSCC 2019 T5: Noise Shaping in Data Converters

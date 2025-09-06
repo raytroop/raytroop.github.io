@@ -1,19 +1,17 @@
 ---
 title: Digital Delta-Sigma Modulators (DDSM)
-date: 2025-06-21 18:54:55
+date: 2024-09-09 18:54:55
 tags:
 categories:
 - analog
 mathjax: true
 ---
 
-![image-20250905205117680](ddsm/image-20250905205117680.png)
+![image-20250906072230725](ddsm/image-20250906072230725.png)
 
-- The oversampled output has almost the same S/N ratio as the input but much fewer bits (e.g. 16 reduced to 1)
-- Fewer bits means it’s easier to implement the digital to analog conversion further along the signal processing path
-- 
+![image-20250906072050727](ddsm/image-20250906072050727.png)
 
-
+![image-20250906171710938](ddsm/image-20250906171710938.png)
 
 ## linearized model
 
@@ -34,6 +32,21 @@ For the three stages of the MASH 1-1-1 DDSM
 ***1st order DDSM (digital accumulator)***
 
 ![image-20250604000323199](ddsm/image-20250604000323199.png)
+
+assuming $n_0=2$
+
+| $x[n]+s[n]$ | $v$   | $e[n]$ | $c[n]$, y |
+| ----------- | ----- | ------ | --------- |
+| 0\|00       | 0     | 0      | 0         |
+| 0\|01       | 1     | 1      | 0         |
+| 0\|10       | 2     | 2      | 0         |
+| 0\|11       | 3     | 3      | 0         |
+| 1\|00       | **4** | 0      | 1         |
+| 1\|01       | 5     | 1      | 1         |
+| 1\|10       | 6     | 2      | 1         |
+| 1\|11       | 7     | 3      | 1         |
+
+yield $M=2^{n_0}=4$
 
 
 
@@ -60,7 +73,7 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 
 
-## LSB Dither - wordlength & quantizer step size
+## LSB Dither
 
 ![image-20250905064118796](ddsm/image-20250905064118796.png)
 
@@ -76,6 +89,15 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 > S. Pamarti, J. Welz and I. Galton, "Statistics of the Quantization Noise in 1-Bit Dithered Single-Quantizer Digital Delta–Sigma Modulators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 54, no. 3, pp. 492-503, March 2007 [[pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf)]
 
+
+
+## wordlength of accumulator
+
+> Z. Ye and M. P. Kennedy, "Hardware Reduction in Digital Delta–Sigma Modulators Via Error Masking—Part II: SQ-DDSM," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 56, no. 2, pp. 112-116, Feb. 2009 [[https://sci-hub.se/10.1109/TCSII.2008.2010188](https://sci-hub.se/10.1109/TCSII.2008.2010188)]
+>
+> —, "Hardware Reduction in Digital Delta-Sigma Modulators Via Error Masking - Part I: MASH DDSM," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 56, no. 4, pp. 714-726, April 2009 [[https://sci-hub.se/10.1109/TCSI.2008.2003383](https://sci-hub.se/10.1109/TCSI.2008.2003383)]
+
+![image-20250906134655253](ddsm/image-20250906134655253.png)
 
 
 
@@ -118,6 +140,14 @@ where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$
 
 
 ## Sigma-Delta DAC
+
+The spectrum of the high resolution digital signal $u_1$ contains the ***original baseband portion*** and its replicas located at integer multiples of $f_{s1}$, plus ***a small amount of quantization noise*** shown as a solid line 
+
+![image-20250906170436567](ddsm/image-20250906170436567.png)
+
+---
+
+
 
 Sigma-delta digital-to-analog converters (SD DAC’s) are often used for *discrete-time signals* with *sample rate much higher than their bandwidth*
 
@@ -202,9 +232,156 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 ![image-20250628203216965](ddsm/image-20250628203216965.png)
 
 
+
+## Truncation DAC
+
+The noise-shaping loop output must contain a faithful *reproduction* of the input signal $u_0[n]$ in the *baseband*,
+
+but it will also include the *filtered truncation noise* caused by the *reduction of the word length* in the loop.
+
+Idealy, the ***DA***C will reproduce its *input **d**igital signal* in an ***a**nalog form* without any distortion
+
+---
+
+> ![truncator_1bit.drawio](ddsm/truncator_1bit.drawio.svg)
+
+
+
+![image-20241022204239594](ddsm/image-20241022204239594.png)
+
+with $\frac{y}{2^{m_2}} + q= v$,  where $v = \lfloor\frac{y}{2^{m_2}}\rfloor$
+
+$$
+\left\{ \begin{array}{cl}
+Y + 2^{m_2} Q &= 2^{m_2}V   \\
+U - z^{-1}2^{m_2}Q &= Y  
+\end{array} \right.
+$$
+
+The STF & NTF is shown as below
+$$
+V = \frac{1}{2^{m_2}}U + (1-z^{-1})Q
+$$
+
+```python
+m1 = 4  # MSBs
+m2 = 2  # LSBs
+Vmax = 2**(m1 + m2) - 1
+
+u = 1
+
+ylist = [0]
+vlist = [0]
+elist = []
+
+Niter = 2**10
+for _ in range(Niter):
+    ecur = vlist[-1] - ylist[-1]
+    elist.append(ecur)
+    ycur = (u - ecur) % Vmax	# overflow
+    ylist.append(ycur)
+    ycur_bin = format(ycur, '06b')
+    vcur = int(ycur_bin[:-2]+'00', 2)
+    vlist.append(vcur)
+
+print(ylist)
+print(vlist)
+print(sum(vlist)/len(vlist))
+```
+
+![image-20250607161739820](ddsm/image-20250607161739820.png)
+
+| u    | v_avg                                                        |                 |
+| ---- | ------------------------------------------------------------ | --------------- |
+| 0    | ![image-20250609233713939](ddsm/image-20250609233713939.png) | 0000_00         |
+| 1    | ![image-20250609233741985](ddsm/image-20250609233741985.png) | 0000_01         |
+| *60* | ![image-20250609233808262](ddsm/image-20250609233808262.png) | **1111**_00     |
+| 61   | ![image-20250609233837090](ddsm/image-20250609233837090.png) | **1111**_0**1** |
+| 62   | ![image-20250609233903431](ddsm/image-20250609233903431.png) | **1111**_**1**0 |
+
+!!! The $u$ is limited between *0* and *60* (MSBs_LSBs - LSBs)
+
+---
+
+> Tuan Minh Vo, S. Levantino and C. Samori, "Analysis of fractional-n bang-bang digital PLLs using phase switching technique," *2016 12th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME)*, Lisbon, Portugal, [[https://sci-hub.se/10.1109/PRIME.2016.7519545](https://sci-hub.se/10.1109/PRIME.2016.7519545)]
+
+![image-20250618001200589](ddsm/image-20250618001200589.png)
+
+
+
+---
+
+
+
+
+
+![image-20241019220819728](ddsm/image-20241019220819728.png)
+
+An implementation of a **high-resolution integral path** using a *digital delta-sigma modulator*, *low-resolution Nyquist DAC*, and *a lowpass filter*
+
+- $\Delta \Sigma$ truncates $n$-bit accumulator output to $m$-bits with $m\le n$
+- A $m$-bit Nyquist DAC outputs current, which is fed into a low pass filter that suppresses $\Delta \Sigma$'s quantization noise
+
+
+
+
+
+---
+
+![image-20241022233749243](ddsm/image-20241022233749243.png)
+
+
+
+The remaining *11 bits are truncated to 3-levels* using a second-order delta-sigma modulator (DSM), thus, obviating the need for a high resolution DAC
+
+
+
+> Hanumolu, Pavan Kumar. "Design techniques for clocking high performance signaling systems" [[https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/1v53k219r](https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/1v53k219r)]
+
+
+
+## oversampling & noise shaping
+
+***maximum output signal 22kHz***
+
+![image-20250906195627446](ddsm/image-20250906195627446.png)
+
+$$SNR = 16\times 6.02 + 1.76 =  98.08$$
+
+![image-20250906200230380](ddsm/image-20250906200230380.png)
+
+---
+
+![image-20250906205517957](ddsm/image-20250906205517957.png)
+
+```matlab
+OSR = 5.65e6/(2*22e3);
+Nin = 16;
+Nout = 1;
+
+SNR_in = 6.02*Nin + 1.76;
+
+SNR_ds = 6.02*Nout + 1.76 - 10*log10(pi^4/5) + 50*log10(OSR);
+
+QN_in = 1/10^(SNR_in/10);
+QN_ds = 1/10^(SNR_ds/10);
+
+SNR_out = 10*log10(1/(QN_in + QN_ds));
+```
+
+![image-20250906205622949](ddsm/image-20250906205622949.png)
+
+
+
+
+
 ## reference
 
 Michael Peter Kennedy. scv-cas 2014: Digital Delta-Sigma Modulators [[pdf](http://site.ieee.org/scv-cas/files/2014/07/2014Kennedy.pdf),[recording](http://www.youtube.com/watch?v=BwoY_OzCMbo&feature=youtu.be)]
+
+—, Recent advances in the analysis, design and optimization of Digital Delta-Sigma Modulators [[pdf](https://www.jstage.jst.go.jp/article/nolta/3/3/3_258/_pdf/-char/en)]
+
+Kaveh Hosseini and Peter Kennedy. 2006 Hardware Efficient Maximum Sequence Length Digital MASH Delta Sigma Modulator [[pdf](https://picture.iczhiku.com/resource/eetop/wYIFpwTduPQeJvmx.pdf)]
 
 Jason Sachs. Return of the Delta-Sigma Modulators, Part 1: Modulation [[https://www.dsprelated.com/showarticle/1517/return-of-the-delta-sigma-modulators-part-1-modulation](https://www.dsprelated.com/showarticle/1517/return-of-the-delta-sigma-modulators-part-1-modulation)]
 
@@ -222,8 +399,28 @@ Dan Boschen. sigma delta modulator for DAC [[https://dsp.stackexchange.com/a/883
 
 Woogeun Rhee. ISCAS 2019 Mini Tutorials: Single-Bit Delta-Sigma Modulation Techniques for Robust Wireless Systems [[https://youtu.be/OEyTM4-_OyA?si=vllJ5Pe8I3lqb_Vl](https://youtu.be/OEyTM4-_OyA?si=vllJ5Pe8I3lqb_Vl)]
 
+—, 2001 Phd Thesis: Multi-Bit Delta -Sigma Modulation Technique for Fractional-N Frequency Synthesizers [[https://www.ime.tsinghua.edu.cn/Thesis_rhee.pdf](https://www.ime.tsinghua.edu.cn/Thesis_rhee.pdf)]
+
+---
+
+S. Pamarti, J. Welz and I. Galton, "Statistics of the Quantization Noise in 1-Bit Dithered Single-Quantizer Digital Delta–Sigma Modulators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 54, no. 3, pp. 492-503, March 2007 [[https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2017/05/2007-TCASI-S.-Pamarti-Statistics-of-the-Quantization-Noise-in-1-Bit-Dithered-Single-Quantizer-Digital-Delta-Sigma-Modulators.pdf)]
+
+—. "LSB Dithering in MASH Delta–Sigma D/A Converters," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 54, no. 4, pp. 779-790, April 2007 [[https://sci-hub.se/10.1109/TCSI.2006.888780](https://sci-hub.se/10.1109/TCSI.2006.888780)]
+
+—. CICC 2020 ES2-2: Basics of Closed- and Open-Loop Fractional Frequency Synthesis [[https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx](https://youtu.be/t1TY-D95CY8?si=tbav3J2yag38HyZx)]
+
+Ian Galton. Delta-Sigma Fractional-N Phase-Locked Loops [[https://ispg.ucsd.edu/wordpress/wp-content/uploads/2022/10/fnpll_ieee_tutorial_2003_corrected.pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2022/10/fnpll_ieee_tutorial_2003_corrected.pdf)]
+
+—. ISSCC 2010 SC3: Fractional-N PLLs [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf)]
+
+—. “Delta-Sigma Fractional-N Phase-Locked Loops.” (2003).
+
+Mike Shuo-Wei Chen, ISSCC 2020 T6: Digital Fractional-N Phase Locked Loop Design [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T6Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T6Visuals.pdf)]
+
 ---
 
 Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016. Understanding Delta-Sigma Data Converters. 2nd ed. Wiley. 
 
 Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology
+
+Kaveh Hosseini, Michael Peter Kennedy. Springer 2011. Minimizing Spurious Tones in Digital Delta-Sigma Modulators

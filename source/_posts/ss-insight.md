@@ -37,6 +37,61 @@ mathjax: true
 
 
 
+## fft vs. ifft
+
+> Jason Sachs, Ten Little Algorithms, Part 2: The Single-Pole Low-Pass Filter [[https://www.embeddedrelated.com/showarticle/779.php](https://www.embeddedrelated.com/showarticle/779.php)]
+
+![image-20250907005625071](ss-insight/image-20250907005625071.png)
+
+![image-20250907005201992](ss-insight/image-20250907005201992.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+np.random.seed(123456789)   # repeatable results
+
+f0 = 4
+t = np.arange(0,1.0,1.0/65536)
+mysignal = (np.mod(f0*t,1) < 0.5)*2.0-1
+mynoise = 1.0*np.random.randn(*mysignal.shape)
+
+plt.figure(figsize=(8,6))
+plt.plot(t, mysignal+mynoise, 'gray',
+         t, mysignal,         'black');
+
+
+def spectrum_fftovN(x):
+    return np.abs(np.fft.fft(x))/len(x)
+
+def spectrum_ifft(x):
+    return np.abs(np.fft.ifft(x))
+
+
+mysignal_spectrum_fftovN = spectrum_fftovN(mysignal)
+mynoise_spectrum_fftovN  = spectrum_fftovN(mynoise)
+mysignal_spectrum_ifft= spectrum_ifft(mysignal)
+mynoise_spectrum_ifft = spectrum_ifft(mynoise)
+
+N1 = 500
+f = np.arange(N1)
+plt.figure(figsize=(16,12))
+plt.subplot(2,1,1)
+plt.plot(f,mysignal_spectrum_fftovN[:N1], 'b-',
+         f,mysignal_spectrum_ifft[:N1], 'r--', linewidth=3)
+plt.legend(('fftovN','ifft'), fontsize=16, loc='upper right')
+plt.title('signal', fontsize=24); plt.xlim(0,N1); plt.xlabel('frequency'); plt.ylabel('amplitude')
+
+plt.subplot(2,1,2)
+plt.plot(f,mynoise_spectrum_fftovN[:N1], 'b-',
+         f,mynoise_spectrum_ifft[:N1], 'r--', linewidth=3)
+plt.legend(('fftovN','ifft'), fontsize=16, loc='upper right')
+plt.title('noise', fontsize=24); plt.xlim(0,N1); plt.xlabel('frequency'); plt.ylabel('amplitude')
+
+plt.show()
+```
+
+
+
 ## Pulse Code Modulation (PCM)
 
 > John M Pauly. Lecture 13: Pulse Code Modulation [[https://web.stanford.edu/class/ee179/lectures/notes13.pdf](https://web.stanford.edu/class/ee179/lectures/notes13.pdf)]

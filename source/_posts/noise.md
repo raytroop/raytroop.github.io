@@ -14,6 +14,8 @@ mathjax: true
 
 
 
+
+
 ## noise power at filter output
 
 > Chembian Thambidurai, "Comparison Of Noise Power At Lowpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_noise-power-at-filter-output-activity-7006486487093456896-W0Rt?utm_source=share&utm_medium=member_desktop)]
@@ -35,6 +37,18 @@ A random signal $v_n(t)$ is sampled using an ***ideal impulse sampler***
 ![image-20241201165157743](noise/image-20241201165157743.png)
 
 *TODO* &#128197;
+
+
+
+## 1/f Noise - Fourier Transform
+
+> Steve Smith. An Interesting Fourier Transform - 1/f Noise [[https://www.dsprelated.com/showarticle/40.php](https://www.dsprelated.com/showarticle/40.php)]
+
+*TODO* &#128197;
+
+
+
+
 
 
 

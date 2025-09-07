@@ -7,9 +7,25 @@ categories:
 mathjax: true
 ---
 
-## FIR Coefficient Selection
+## FFE Coeff. Selection
+
+> Jose E. Schutt-Aine, Spring 2024 ECE 546 Lecture - 27 Equalization [[http://emlab.uiuc.edu/ece546/Lect_27.pdf](http://emlab.uiuc.edu/ece546/Lect_27.pdf)]
+>
+> Sam Palermo. Lecture 7 - Equalization Intro & TX FIR EQ [[https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)]
+>
+> David Johns. ECE1392H - Integrated Circuits for Digital Communications - Fall 2001: Equalization [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf)]
 
 *TODO* &#128197;
+
+### TX FIR
+
+
+
+### RX FIR
+
+
+
+
 
 
 

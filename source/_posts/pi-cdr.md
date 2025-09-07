@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-## PI-based vs. PLL-based CDR
+## PI vs. PLL based CDR
 
 ![image-20250816121744921](pi-cdr/image-20250816121744921.png)
 
@@ -42,3 +42,8 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
+## reference
+
+Cortiula A, Menin D, Bandiziol A, Driussi F, Palestri P. Modeling of Phase-Interpolator-Based Clock and Data Recovery for High-Speed PAM-4 Serial Interfaces. *Electronics*. 2025; [[https://www.mdpi.com/2079-9292/14/10/1979](https://www.mdpi.com/2079-9292/14/10/1979)]
+
+G. Souliotis, A. Tsimpos and S. Vlassis, "Phase Interpolator-Based Clock and Data Recovery With Jitter Optimization," in *IEEE Open Journal of Circuits and Systems*, vol. 4, pp. 203-217, 2023 [[https://ieeexplore.ieee.org/document/10184121](https://ieeexplore.ieee.org/document/10184121)]

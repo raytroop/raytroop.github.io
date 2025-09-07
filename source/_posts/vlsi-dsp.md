@@ -28,7 +28,7 @@ mathjax: true
   $$
   H_p(z)=\frac{1-e^{-T_s/\tau}}{1-e^{-T_s/\tau}z^{-1}}\tag{EQ-2}
   $$
-  EQ-2 is connected with EQ-1 with $1 - e^{-\Delta t/\tau} \approx \frac{\Delta t}{\tau}$
+  EQ-2 is connected with EQ-1 by $1 - e^{-\Delta t/\tau} \approx \frac{\Delta t}{\tau}$
 
 ![image-20250907163030510](vlsi-dsp/image-20250907163030510.png)
 

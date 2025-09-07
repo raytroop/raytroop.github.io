@@ -74,6 +74,10 @@ $\Gamma_x$ is  ***no-overload range***
 
 ![image-20250809170637486](ad-da/image-20250809170637486.png)
 
+---
+
+![image-20250907071636266](ad-da/image-20250907071636266.png)
+
 
 
 ## Top-Plate vs Bottom-Plate Sampling
@@ -280,17 +284,8 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 
 
 
-
-
-## Mid-Rise & Mid-Tread Quantizer
-
-![image-20241124225350563](ad-da/image-20241124225350563.png)
-
-![image-20241124230219164](ad-da/image-20241124230219164.png)
-
-> The difference between the lowest and highest *levels* is called the **full-scale (FS)** of the quantizer  
-
 ## Bootstrapped Switch
+
 ![image-20240825222432796](ad-da/image-20240825222432796.png)
 
 

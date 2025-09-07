@@ -218,7 +218,7 @@ discrete-time systems also can be analyzed by means of the Laplace transform —
 
 ![image-20241002112611432](z-laplace/image-20241002112611432.png)
 
-A continuous-time system with transfer function $H(s)$ that is *identical in structure* to the discrete-time system $H[z]$ except that the delays in $H[z]$ are replaced by elements that delay continuous-time signals. 
+A continuous-time system with transfer function $H(s)$ that is *identical in structure* to the discrete-time system $H[z]$ except that the **delays** in $H[z]$ are replaced by elements that **delay continuous-time signals**
 
 > | delay element         | Time domain   | Transform |
 > | --------------------- | ------------- | --------- |
@@ -271,7 +271,13 @@ And we know transform of integral $u(t)$ is $\frac{1}{s}$, as expected there is 
 
 ![image-20250809233806280](z-laplace/image-20250809233806280.png)
 
+## Frequency Response of Discrete-Time LTI Systems
 
+> Eugenio Schuster, Lehigh University, Discrete-Time Signal Analysis in the Frequency-Domain [[https://www.lehigh.edu/~eus204/teaching/ME450_SIRC/notes/DTS_Tutorial.pdf](https://www.lehigh.edu/~eus204/teaching/ME450_SIRC/notes/DTS_Tutorial.pdf)]
+
+![image-20250907091547262](z-laplace/image-20250907091547262.png)
+
+![image-20250907091735655](z-laplace/image-20250907091735655.png)
 
 ## impulse invariance
 
@@ -425,6 +431,20 @@ title('frequency response of different methods');
 
 
 
+---
+
+> Neil Robertson. The Discrete Fourier Transform as a Frequency Response [[https://www.dsprelated.com/showarticle/1498.php](https://www.dsprelated.com/showarticle/1498.php)]
+
+
+
+***H(k) by using complex exponentials*** is indeed **identical** to the ***DFT of h(n)***
+
+> H(f) by ***DFT*** -> `fft`
+>
+> *H(k)* by using ***complex exponential*** -> `freqz`
+
+![image-20250907105453920](z-laplace/image-20250907105453920.png)
+
 
 
 ## FIR Equalization
@@ -531,6 +551,14 @@ $$
 
 ## Bilinear Transform
 
+> The design of IIR filters (cont.) [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf)]
+
+![image-20250907112138651](z-laplace/image-20250907112138651.png)
+
+![image-20250907112553846](z-laplace/image-20250907112553846.png)
+
+---
+
 > [[https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html](https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html)]
 
 an algebraic transformation between the variables $s$ and $z$ that maps the entire **imaginary**  $j\Omega$-**axis** in the $s$-plane to one revolution of the **unit circle** in the $z$-plane 
@@ -605,7 +633,7 @@ The simple approximation $z=e^{sT}\approx1+sT$, ~~the *first equal* come from **
 
 
 
-### Approximation of Derivatives
+### Derivatives Approximation
 
 > Perhaps the simplest method for ***low-order systems*** is to use *backward-difference approximation* to *continuous domain derivatives*
 
@@ -616,7 +644,7 @@ The simple approximation $z=e^{sT}\approx1+sT$, ~~the *first equal* come from **
 ---
 
 $$
-1- z^{-1} = 1-e^{j\Omega T} = 1-\cos(\omega T) + j\sin(\Omega T) \approx 1-1+j\Omega T = s T
+1- z^{-1} = 1-e^{-j\Omega T} = 1-\cos(\omega T) + j\sin(\Omega T) \approx 1-1+j\Omega T = s T
 $$
 
 That is
@@ -624,6 +652,71 @@ That is
 $$
 s \approx \frac{1-z^{-1}}{T}
 $$
+
+---
+
+![image-20250907140610175](z-laplace/image-20250907140610175.png)
+
+---
+
+Suppose we wish to make a discrete-time filter based on a prototype first-order low-pass filter
+$$
+H_p(s) = \frac{1}{s\tau +  1}
+$$
+The differential equation describing this filter is
+$$
+\tau\frac{dy}{dt} + y = x
+$$
+then differential equation gives
+
+
+$$
+\tau\frac{y_n-y_{n-1}}{T} + y_n=x_n
+$$
+or
+$$
+(\frac{\tau}{T}+1)y_n - \frac{\tau}{T}y_{n-1} = x_n
+$$
+The transfer function is
+$$
+H(z) = \frac{\frac{T}{T+\tau}}{1-\frac{\tau}{T+\tau}z^{-1}}
+$$
+
+
+or substitute $s$ with $\frac{1-z^{-1}}{T}$ into $H_p(s)$
+$$
+H_p(z) = \frac{1}{\tau\frac{1-z^{-1}}{T} + 1} = \frac{\frac{T}{T+\tau}}{1-\frac{\tau}{T+\tau}z^{-1}}= \frac{\alpha}{1 +(\alpha -1)z^{-1}}
+$$
+where $\alpha = \frac{T}{\tau+T}$
+
+Under the assumption, time constants much longer than the timestep $\tau \gg T$
+$$\begin{align}
+\frac{T}{T+\tau}& = \frac{T}{\tau}\cdot \frac{\tau}{T+\tau}\approx \frac{T}{\tau} \\
+\frac{\tau}{T+\tau} &= \frac{\tau - T}{\tau}\cdot\frac{\tau^2}{\tau^2-T^2} \approx \frac{\tau - T}{\tau} = 1- \frac{T}{\tau} 
+\end{align}$$
+
+Then the first-order low pass fiter
+$$
+H_p(z) \approx \frac{\alpha}{1 +(\alpha -1)z^{-1}}
+$$
+where $\alpha = \frac{T}{\tau}$
+
+```python
+# https://www.dsprelated.com/showarticle/1517/return-of-the-delta-sigma-modulators-part-1-modulation
+# https://www.embeddedrelated.com/showarticle/779.php
+def show_dsmod_samplewave(t,x,dsmod,args=(1,),tau=0.05, R=1, fig=None,
+                          return_handles=False, filter_dsmod=False):
+    dt = t[1]-t[0]
+    if filter_dsmod:
+        x1 = dsmod(x, *args,R=R, modulate=False)
+    else:
+        x1 = x
+    y = dsmod(x,*args,R=R)
+    a = dt/tau
+    yfilt = scipy.signal.lfilter([a],[1,a-1],y)
+    xfilt = scipy.signal.lfilter([a],[1,a-1],x1)
+```
+
 
 
 ### Matched z-Transform (Root Matching)
@@ -641,6 +734,7 @@ $$
 ---
 
 ![image-20250623220318339](z-laplace/image-20250623220318339.png)
+
 
 ```matlab
 % https://www.dsprelated.com/showarticle/1642.php

@@ -9,6 +9,66 @@ mathjax: true
 
 
 
+## Single-Pole LPF Algorithms
+
+> Neil Robertson, Model a Sigma-Delta DAC Plus RC Filter [[https://www.dsprelated.com/showarticle/1642.php](https://www.dsprelated.com/showarticle/1642.php)]
+>
+> Jason Sachs, Ten Little Algorithms, Part 2: The Single-Pole Low-Pass Filter [[https://www.embeddedrelated.com/showarticle/779.php](https://www.embeddedrelated.com/showarticle/779.php)]
+>
+> —. Ten Little Algorithms, Part 2: The Single-Pole Low-Pass Filter [[https://www.embeddedrelated.com/showarticle/779.php](https://www.embeddedrelated.com/showarticle/779.php)]
+
+- ***Derivatives Approximation*** ($H_p(s)=\frac{1}{s\tau +1}$)
+
+  $$\begin{align}
+  H_p(z)&=\frac{\frac{T_s}{T_s+\tau}}{1+(\frac{T_s}{T_s+\tau}-1)z^{-1}}\tag{EQ-0}\\
+  H_p(z)&=\frac{\frac{T_s}{\tau}}{1+(\frac{T_s}{\tau}-1)z^{-1}}\tag{EQ-1}
+  \end{align}$$
+  
+- ***Matched z-Transform (Root Matching)***
+  $$
+  H_p(z)=\frac{1-e^{-T_s/\tau}}{1-e^{-T_s/\tau}z^{-1}}\tag{EQ-2}
+  $$
+  EQ-2 is connected with EQ-1 with $1 - e^{-\Delta t/\tau} \approx \frac{\Delta t}{\tau}$
+
+![image-20250907163030510](vlsi-dsp/image-20250907163030510.png)
+
+```python  
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.signal
+
+
+dt=0.002; tau=0.05
+
+T=1
+t = np.arange(0,T+1e-5,dt)
+x = 1-np.abs(4*t-1)
+x[4*t>2] = 0.95; x[t>0.75] = 0.02
+
+alpha_derv = dt / (dt + tau)
+alpha_derv_approx = dt / tau
+
+yfilt_derv = scipy.signal.lfilter([alpha_derv], [1, alpha_derv - 1], x)
+yfilt_derv_approx = scipy.signal.lfilter([alpha_derv_approx], [1, alpha_derv_approx - 1], x)
+
+a1 = -np.exp(-dt/tau)
+b0 = [1 + a1]
+a = [1, a1]
+y_filt_match = scipy.signal.lfilter(b0, a, x)
+
+plt.figure(figsize=(20,10))
+plt.plot(t, x, color='k', linewidth=3, label='x')
+plt.plot(t, yfilt_derv, color='red', linewidth=3, label=r'$H_p(z)=\frac{\frac{T_s}{T_s+\tau}}{1+(\frac{T_s}{T_s+\tau}-1)z^{-1}}$')
+plt.plot(t, yfilt_derv_approx, color='green', marker='D', linestyle='dashed',markersize=4, linewidth=3, label=r'$H_p(z)=\frac{\frac{T_s}{\tau}}{1+(\frac{T_s}{\tau}-1)z^{-1}}$')
+plt.plot(t, y_filt_match, color='m', marker='x', linestyle='dashed',markersize=4, linewidth=3, label=r'$H_p(z)=\frac{1-e^{-T_s/\tau}}{1-e^{-T_s/\tau}z^{-1}}$')
+
+plt.legend(loc='upper right', fontsize=20)
+plt.grid(which='both');plt.xlabel('Time (s)');plt.show()
+```
+
+
+
+
 ## Discrete-Time Integrators
 
 > Qasim Chaudhari. Discrete-Time Integrators [[https://wirelesspi.com/discrete-time-integrators/](https://wirelesspi.com/discrete-time-integrators/)]
@@ -154,3 +214,14 @@ Qasim Chaudhari. FIR vs IIR Filters – A Practical Comparison [[https://wireles
 —. Moving Average Filter [[https://wirelesspi.com/moving-average-filter/](https://wirelesspi.com/moving-average-filter/)]
 
 —. Cascaded Integrator Comb (CIC) Filters – A Staircase of DSP. [[https://wirelesspi.com/cascaded-integrator-comb-cic-filters-a-staircase-of-dsp/](https://wirelesspi.com/cascaded-integrator-comb-cic-filters-a-staircase-of-dsp/)]
+
+---
+
+Jason Sachs. Understanding and Preventing Overflow (I Had Too Much to Add Last Night) [[https://www.embeddedrelated.com/showarticle/532.php](https://www.embeddedrelated.com/showarticle/532.php)]
+
+—. Round Round Get Around: Why Fixed-Point Right-Shifts Are Just Fine [[https://www.embeddedrelated.com/showarticle/1015.php](https://www.embeddedrelated.com/showarticle/1015.php)]
+
+—. How to Build a Fixed-Point PI Controller That Just Works: Part I [[https://www.embeddedrelated.com/showarticle/121.php](https://www.embeddedrelated.com/showarticle/121.php)]
+
+—. How to Build a Fixed-Point PI Controller That Just Works: Part II [[https://www.embeddedrelated.com/showarticle/123.php](https://www.embeddedrelated.com/showarticle/123.php)]
+

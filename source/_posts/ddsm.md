@@ -101,6 +101,14 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 
 
+##  stability of DSM 
+
+![image-20250908213730155](ddsm/image-20250908213730155.png)
+
+![image-20250908213849546](ddsm/image-20250908213849546.png)
+
+![img](ddsm/Digital-MASH-61-modulator.png)
+
 ## Fractional-N PLL
 
 ![image-20250824103717743](ddsm/image-20250824103717743.png)

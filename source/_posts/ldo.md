@@ -114,11 +114,9 @@ $$\begin{align}
 
 $$\begin{align}
 \frac{V_g}{V_i} &=\frac{R||\frac{1}{s(C_g+C_{gs})}}{R||\frac{1}{s(C_g+C_{gs})}+\frac{1}{sC_{gd}}} \\
-&= \frac{sRC_{gd}}{sR(C+C_{gd}+C_{gs})+1}
+&= \frac{sRC_{gd}}{sR(C+C_{gd}+C_{gs})+1} \\
+\frac{V_g}{V_i} &= -\frac{sC_{ds}+g_{ds}}{sC_{gs}+g_m}
 \end{align}$$
-$$
-\frac{V_g}{V_i} = -\frac{sC_{ds}+g_{ds}}{sC_{gs}+g_m}
-$$
 
 That is,
 $$

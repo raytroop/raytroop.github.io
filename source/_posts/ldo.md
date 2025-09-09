@@ -123,7 +123,7 @@ $$
 \omega_{z,d} \approx \frac{1}{R(\frac{g_m}{g_{ds}}C_{gd}+C)}
 $$
 
-To calculate PSRR pole is similar with PSRR zero method, just $V_o/V_i=0$, i.e. set $V_0$ *0* potential
+To calculate PSRR pole is similar with above PSRR zero, just $V_o/V_i=0$, i.e. set $V_0$ *0* potential
 $$
 \omega_{p,d} \approx \frac{1}{R(\frac{C_s}{g_mR}+C)}
 $$

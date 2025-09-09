@@ -20,20 +20,132 @@ mathjax: true
 ![sample2sample-gain-distortion.drawio](sar/sample2sample-gain-distortion.drawio.svg)
 
 
-> C-H Chan (U. of Macau) "Extreme SAR ADCs - Exploring New Frontiers" Online Course (2024) : Reference Buffer in SAR ADC [[https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn](https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn)]
->
-> C. Li, C. -H. Chan, Y. Zhu and R. P. Martins, "Analysis of Reference Error in High-Speed SAR ADCs With Capacitive DAC," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 66, no. 1, pp. 82-93, Jan. 2019 [[https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf)]
->
-> J. Zhong, Y. Zhu, S. -W. Sin, S. -P. U and R. P. Martins, "Thermal and Reference Noise Analysis of Time-Interleaving SAR and Partial-Interleaving Pipelined-SAR ADCs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 62, no. 9, pp. 2196-2206, Sept. 2015 [[https://sci-hub.st/10.1109/TCSI.2015.2452331](https://sci-hub.st/10.1109/TCSI.2015.2452331)]
->
-> C. -H. Chan et al., "60-dB SNDR 100-MS/s SAR ADCs With Threshold Reconfigurable Reference Error Calibration," in IEEE Journal of Solid-State Circuits, vol. 52, no. 10, pp. 2576-2588, Oct. 2017 [[https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf)]
 
 ### bit-by-bit
 
 The amplitude of the reference ripple is code-dependent as it is correlated with switching energy in each bit cycling
 
 
-## CDAC intuition
+
+## Redundancy
+
+### decision level
+
+final digital output for an $N$-bit $M$-step ADC can be calculated
+$$
+D_{out} = s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1)\cdot s(1)
+$$
+
+| i    | M    | M-1          | M-2          | ...       | 2          | 1          | 0    |
+| ---- | ---- | ------------ | ------------ | --------- | ---------- | ---------- | ---- |
+| b[i] |      | ***b[M-1]*** | ***b[M-2]*** | ***...*** | ***b[2]*** | ***b[1]*** | b[0] |
+| s[i] | s(M) | ***s(M-1)*** | ***s(M-2)*** | ***...*** | ***s(2)*** | ***s(1)*** |      |
+
+![image-20250909211030234](sar/image-20250909211030234.png)
+
+> ***track the decision level***
+
+
+
+For $N$-bit *binary weighted algorithm*,$N=M$ and $s(i)=2^{i-1}$, where $i\in \{N, N-1,...,2,1  \}$
+
+$$\begin{align}
+D_{out} &= s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1) \\
+&= 2^{N-1} + \sum_{i=1}^{N-1}2^i\cdot b[i] - \sum_{i=0}^{N-2}2^{i} + (b[0] -1) \\
+&= \sum_{i=1}^{N} b[i] \cdot 2^i
+\end{align}$$
+
+
+### Error Tolerance Window
+
+$$
+\varepsilon_t(n) = \sum_{i=1}^{n-2} s(i) - s(n-1)
+$$
+
+where $n\in [1, N]$, and $N$-bit SAR
+
+![etw.drawio](sar/etw.drawio.svg)
+
+For the $n$th output bit, once a decision is made, the next decision level will either move up or down by the step size of $s(n − 1)$
+
+If this decision is erroneous, then the sum of the follow-on step sizes, $s(n − 2)$, $s(n − 3)$, ..., $s(1)$, must be large enough and exceed the value of the current step size to counteract this mistake
+
+The exceeded amount is the tolerance window for that decision level
+
+### sub-binary search
+
+![image-20250909222730303](sar/image-20250909222730303.png)
+
+![image-20250909222310476](sar/image-20250909222310476.png)
+
+![image-20250909231804142](sar/image-20250909231804142.png)
+
+> Notice $e_q\in (0, \Delta)$ and its average is $\Delta/2$. To calculate SNDR, *DC component shall be excluded*
+>
+> Don't confuse **resolution** $\Delta$ with **Bounded Quantization error** $-\Delta/2 \sim  \Delta/2$
+>
+> ![image-20250909233010702](sar/image-20250909233010702.png)
+
+![image-20250909222622340](sar/image-20250909222622340.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def sar(xi, ss):
+    M = ss.size
+    th = ss[0]
+    oob = []
+    for i in range(M):
+        ocur = 1 if xi >= th else 0
+        oob.append(ocur)
+        if i + 1 < M:
+            th += (2 * ocur - 1) * ss[i + 1]
+        else:
+            break
+
+    binstr = ''.join([str(s) for s in oob])
+    decval = int(binstr, 2)
+    return binstr, decval
+
+
+def sar_plot(ss, Npts=10000):
+    ss = np.asarray(ss)
+    ssum = np.sum(ss)
+    xilist = np.linspace(0, ssum + 1, Npts)
+    outlist = []
+    for i in range(Npts):
+        _, decval = sar(xilist[i], ss)
+        outlist.append(decval)
+    outmax = np.max(outlist)
+    plt.figure(figsize=(16,8))
+    plt.plot(xilist, outlist, '-', linewidth=4)
+    plt.xticks(range(0, ssum + 2))
+    plt.yticks(range(0, outmax + 2, 2))
+    plt.title('search step: {}'.format(ss), fontsize=20)
+    plt.xlabel('analog out', fontsize=20); plt.ylabel('digital out', fontsize=20)
+
+    plt.grid(True)
+
+ss = [8, 4, 2, 1]
+sar_plot(ss)
+
+ss = [8, 2, 2, 2, 1]
+sar_plot(ss)
+
+plt.show()
+```
+
+
+
+### Speed Benefit
+
+
+
+
+
+## CDAC how
 
 The *charge redistribution capacitor network* is used to sample the input signal and serves as a
 digital-to-analog converter (DAC) for creating and subtracting reference voltages
@@ -254,39 +366,6 @@ both outputs ($Q_p$ and $Q_n$) will drop *together*, NAND is **inverter** actual
 The transition point of this NAND gate is **skewed** to eliminate *metastability issues arising when the input differential voltage level is small (comparator)*
 
 
-## Redundancy
-
-### decision level
-
-final digital output for an $N$-bit $M$-step ADC can be calculated
-$$
-D_{out} = s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1)\cdot s(1)
-$$
-
-> track the decision level
-
-For $N$-bit *binary weighted algorithm*,$N=M$ and $s(i)=2^{i-1}$, which $i\in \{N, N-1,...,2,1  \}$
-
-$$\begin{align}
-D_{out} &= s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1) \\
-&= 2^{N-1} + \sum_{i=1}^{N-1}2^i\cdot b[i] - \sum_{i=0}^{N-2}2^{i} + (b[0] -1) \\
-&= \sum_{i=1}^{N} b[i] \cdot 2^i
-\end{align}$$
-
-
-### Error Tolerance Windows
-
-$$
-\varepsilon_t(n) = \sum_{i=1}^{n-2} s(i) - s(n-1)
-$$
-
-where $n\in [1, N]$, and $N$-bit SAR
-
-For the $n$th output bit, once a decision is made, the next decision level will either move up or down by the step size of $s(n − 1)$
-
-If this decision is erroneous, then the sum of the follow-on step sizes, $s(n − 2)$, $s(n − 3)$, ..., $s(1)$, must be large enough and exceed the value of the current step size to counteract this mistake
-
-The exceeded amount is the tolerance window for that decision leve
 
 
 ## reference
@@ -308,3 +387,13 @@ C. -C. Liu, S. -J. Chang, G. -Y. Huang and Y. -Z. Lin, "A 10-bit 50-MS/s SAR ADC
 L. Jie et al., "An Overview of Noise-Shaping SAR ADC: From Fundamentals to the Frontier," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 149-161, 2021 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9569768)]
 
 W. Liu, P. Huang and Y. Chiu, "A 12-bit, 45-MS/s, 3-mW Redundant Successive-Approximation-Register Analog-to-Digital Converter With Digital Calibration," in IEEE Journal of Solid-State Circuits, vol. 46, no. 11, pp. 2661-2672, Nov. 2011 [[https://sci-hub.st/10.1109/JSSC.2011.2163556](https://sci-hub.st/10.1109/JSSC.2011.2163556)]
+
+---
+
+C-H Chan (U. of Macau) "Extreme SAR ADCs - Exploring New Frontiers" Online Course (2024) : Reference Buffer in SAR ADC [[https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn](https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn)]
+
+C. Li, C. -H. Chan, Y. Zhu and R. P. Martins, "Analysis of Reference Error in High-Speed SAR ADCs With Capacitive DAC," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 66, no. 1, pp. 82-93, Jan. 2019 [[https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf)]
+
+J. Zhong, Y. Zhu, S. -W. Sin, S. -P. U and R. P. Martins, "Thermal and Reference Noise Analysis of Time-Interleaving SAR and Partial-Interleaving Pipelined-SAR ADCs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 62, no. 9, pp. 2196-2206, Sept. 2015 [[https://sci-hub.st/10.1109/TCSI.2015.2452331](https://sci-hub.st/10.1109/TCSI.2015.2452331)]
+
+C. -H. Chan et al., "60-dB SNDR 100-MS/s SAR ADCs With Threshold Reconfigurable Reference Error Calibration," in IEEE Journal of Solid-State Circuits, vol. 52, no. 10, pp. 2576-2588, Oct. 2017 [[https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf)]

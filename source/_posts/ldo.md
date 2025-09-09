@@ -120,12 +120,12 @@ $$\begin{align}
 
 That is,
 $$
-\omega_{z,d} \simeq \frac{1}{R(\frac{g_m}{g_{ds}}C_{gd}+C)}
+\omega_{z,d} \approx \frac{1}{R(\frac{g_m}{g_{ds}}C_{gd}+C)}
 $$
 
-The calculating PSRR pole approach similar with zero, just $V_o$ to $V_i$ zero
+The calculating PSRR pole method is similar with zero, just $V_o$ to $V_i$ zero
 $$
-\omega_{p,d} \simeq \frac{1}{R(\frac{C_s}{g_mR}+C)}
+\omega_{p,d} \approx \frac{1}{R(\frac{C_s}{g_mR}+C)}
 $$
 
 DC PSRR

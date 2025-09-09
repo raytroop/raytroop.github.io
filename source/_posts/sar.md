@@ -13,7 +13,7 @@ mathjax: true
 
 *TODO* &#128197;
 
-### sample-by-sample ripple
+### sample-by-sample
 
 > 3rd harmonic
 
@@ -28,6 +28,9 @@ mathjax: true
 >
 > C. -H. Chan et al., "60-dB SNDR 100-MS/s SAR ADCs With Threshold Reconfigurable Reference Error Calibration," in IEEE Journal of Solid-State Circuits, vol. 52, no. 10, pp. 2576-2588, Oct. 2017 [[https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf)]
 
+### bit-by-bit
+
+The amplitude of the reference ripple is code-dependent as it is correlated with switching energy in each bit cycling
 
 
 ## CDAC intuition
@@ -251,6 +254,39 @@ both outputs ($Q_p$ and $Q_n$) will drop *together*, NAND is **inverter** actual
 The transition point of this NAND gate is **skewed** to eliminate *metastability issues arising when the input differential voltage level is small (comparator)*
 
 
+## Redundancy
+
+### decision level
+
+final digital output for an $N$-bit $M$-step ADC can be calculated
+$$
+D_{out} = s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1)\cdot s(1)
+$$
+
+> track the decision level
+
+For $N$-bit *binary weighted algorithm*,$N=M$ and $s(i)=2^{i-1}$, which $i\in \{N, N-1,...,2,1  \}$
+
+$$\begin{align}
+D_{out} &= s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1) \\
+&= 2^{N-1} + \sum_{i=1}^{N-1}2^i\cdot b[i] - \sum_{i=0}^{N-2}2^{i} + (b[0] -1) \\
+&= \sum_{i=1}^{N} b[i] \cdot 2^i
+\end{align}$$
+
+
+### Error Tolerance Windows
+
+$$
+\varepsilon_t(n) = \sum_{i=1}^{n-2} s(i) - s(n-1)
+$$
+
+where $n\in [1, N]$, and $N$-bit SAR
+
+For the $n$th output bit, once a decision is made, the next decision level will either move up or down by the step size of $s(n − 1)$
+
+If this decision is erroneous, then the sum of the follow-on step sizes, $s(n − 2)$, $s(n − 3)$, ..., $s(1)$, must be large enough and exceed the value of the current step size to counteract this mistake
+
+The exceeded amount is the tolerance window for that decision leve
 
 
 ## reference

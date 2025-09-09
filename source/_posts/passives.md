@@ -352,6 +352,42 @@ $$
 
 
 
+## Non ideal capacitor and inductor
+
+> Tank Circuits/Impedances [[https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf](https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf)]
+>
+> Resonant Circuits  [[https://web.ece.ucsb.edu/~long/ece145b/Resonators.pdf](https://web.ece.ucsb.edu/~long/ece145b/Resonators.pdf)]
+>
+> Series & Parallel Impedance Parameters and Equivalent Circuits [[https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf](https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf)]
+>
+> ES Lecture 35: Non ideal capacitor, Capacitor Q and series RC to parallel RC conversion [[https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo](https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo)]
+
+
+
+### Capacitor
+
+![image-20231224163730529](passives/image-20231224163730529.png)
+
+---
+
+![image-20240119000951498](passives/image-20240119000951498.png)
+
+![image-20240119001025892](passives/image-20240119001025892.png)
+
+![image-20240119001309410](passives/image-20240119001309410.png)
+
+
+
+### Inductor
+
+![image-20231224163740411](passives/image-20231224163740411.png)
+
+---
+
+![image-20231224163905233](passives/image-20231224163905233.png)
+
+![image-20231224163916109](passives/image-20231224163916109.png)
+
 
 
 ## reference

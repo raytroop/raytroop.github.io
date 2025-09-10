@@ -593,6 +593,52 @@ Zero padding only allows us to look at *more samples of that imperfect reality*
 
 > Balu Santhanam. ECE-539: Digital Signal Processing: Zero padding and Resolution [[http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf](http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf)]
 
+## impulse train sampling & impulse sequence
+
+EQ 4.6
+
+EQ 4.20
+
+
+if $x_c(t) = e^{j\Omega_0t}$, thus $X_c (j\Omega) =  A\delta(\Omega - \Omega_0)$
+
+Then
+$$
+X_s (j\Omega) = \frac{A}{T_s}\sum_k \delta(\Omega -\Omega_0 - k\Omega_s)
+$$
+
+and $x[n]$
+$$\begin{align}
+X(e^{j\omega}) &= \frac{1}{T_s} \sum_k X_c\left[j(\frac{\omega}{T_s}- \Omega_0-\frac{2\pi k}{T_s})\right] \\
+&= \frac{A}{T_s} \sum_k  \delta(\frac{\omega}{T_s} -\Omega_0- \frac{2\pi k}{T_s}) \\
+&= A \sum_k  \delta(\omega -\omega_0 - 2\pi k)
+\end{align}$$
+
+yield
+$$
+x[n] = A e^{j\omega_0 n} = A e^{j\Omega_0 nT_s}
+$$
+
+```python
+import numpy as np
+x = np.linspace(0,1,10000)
+y = np.cos(2*np.pi*1*x)
+rms = np.sqrt(np.power(y, 2).sum()/x.size)
+print(rms)
+print(1/2**0.5)
+
+# 0.7071421356417675
+# 0.7071067811865475
+```
+
+
+---
+
+Example 4.1 impulse scaling $\delta(\omega/T)=T\delta(\omega)$
+
+$$
+\int \delta(\frac{\omega}{T})d\omega = \int T \delta(\omega)d\omega = \int T\delta(\frac{\omega}{T})d\frac{\omega}{T} = T
+$$
 
 
 ## Gotcha

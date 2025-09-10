@@ -346,7 +346,7 @@ That is $\Delta V_R = \frac{I_D}{ g_m} \cdot \frac{\Delta R}{R}$
 
 - charge:
   $$
-  V_o(t) = V_{X}(1-e^{-\frac{t}{\tau}}) + V_{o,0}\cdot e^{-\frac{-t}{\tau}}
+  V_o(t) = V_{X}(1-e^{-\frac{t}{\tau}}) + V_{o,0}\cdot e^{\frac{-t}{\tau}}
   $$
 
 - discharge:

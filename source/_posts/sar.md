@@ -146,6 +146,8 @@ $$
 s_{tot} = \sum_{k=0}^{M-1} s_0 \alpha^k = s_0\frac{1-\alpha^M}{1-\alpha}
 $$
 
+where $s(i)$ is step size and $i \in [0, 1, 2, M-1]$
+
 The effective number of bits, $N$, can be calculated
 $$
 N \leq \log 2\left(\frac{s_{tot} + s_0}{s_0}\right) = \frac{2-\alpha-\alpha^M}{1-\alpha}

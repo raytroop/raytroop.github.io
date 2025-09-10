@@ -607,7 +607,7 @@ $$
 X_s (j\Omega) = \frac{A}{T_s}\sum_k \delta(\Omega -\Omega_0 - k\Omega_s)
 $$
 
-and $x[n]$
+and DTFT of $x[n]$
 $$\begin{align}
 X(e^{j\omega}) &= \frac{1}{T_s} \sum_k X_c\left[j(\frac{\omega}{T_s}- \Omega_0-\frac{2\pi k}{T_s})\right] \\
 &= \frac{A}{T_s} \sum_k  \delta(\frac{\omega}{T_s} -\Omega_0- \frac{2\pi k}{T_s}) \\

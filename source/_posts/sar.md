@@ -143,14 +143,14 @@ When the ADC is designed with a fixed radix, $\alpha$ and the required number of
 
 the sum of all the step sizes $s_{tot}$
 $$
-s_{tot} = \sum_{k=0}^{M-1} s_0 \alpha^k = s_0\frac{1-\alpha^M}{1-\alpha}
+s_{tot} = \sum_{k=0}^{M-1} s_0 \alpha^k = s_0\frac{\alpha^M-1}{\alpha-1}
 $$
 
 where $s(i)$ is step size and $i \in [0, 1, 2, M-1]$
 
 The effective number of bits, $N$, can be calculated
 $$
-N \leq \log 2\left(\frac{s_{tot} + s_0}{s_0}\right) = \frac{2-\alpha-\alpha^M}{1-\alpha}
+N \leq \log 2\left(\frac{s_{tot} + s_0}{s_0}\right) = \frac{\alpha^M+\alpha-2}{\alpha-1}
 $$
 
 

@@ -13,6 +13,8 @@ mathjax: true
 
 *TODO* &#128197;
 
+
+
 ### sample-by-sample
 
 > 3rd harmonic
@@ -24,6 +26,24 @@ mathjax: true
 ### bit-by-bit
 
 The amplitude of the reference ripple is code-dependent as it is correlated with switching energy in each bit cycling
+
+
+
+## quantization error & quantization noise
+
+![image-20250910210909363](sar/image-20250910210909363.png)
+
+![image-20250910211207655](sar/image-20250910211207655.png)
+
+![image-20250910211034914](sar/image-20250910211034914.png)
+
+---
+
+Notice $e_q\in (0, \Delta)$ and its average is $\Delta/2$. To calculate SNDR, *DC component shall be excluded*
+
+Don't confuse **resolution** $\Delta$ with **Bounded Quantization Noise** $-\Delta/2 \sim  \Delta/2$
+
+![image-20250909233010702](sar/image-20250909233010702.png)
 
 
 
@@ -79,12 +99,6 @@ The exceeded amount is the tolerance window for that decision level
 ![image-20250909222310476](sar/image-20250909222310476.png)
 
 ![image-20250909231804142](sar/image-20250909231804142.png)
-
-> Notice $e_q\in (0, \Delta)$ and its average is $\Delta/2$. To calculate SNDR, *DC component shall be excluded*
->
-> Don't confuse **resolution** $\Delta$ with **Bounded Quantization error** $-\Delta/2 \sim  \Delta/2$
->
-> ![image-20250909233010702](sar/image-20250909233010702.png)
 
 ![image-20250909222622340](sar/image-20250909222622340.png)
 

@@ -489,7 +489,7 @@ $X(e^{j\hat{\omega}})$ is a frequency-scaled version of $X_s(j\omega)$ with the 
 
 
 
-The factor $\frac{1}{T}$ in $X(e^{j\hat{\omega}})$ is **misleading**,  actually $x[n]$ is not scaled by $\frac{1}{T}$ when taking $\hat{\omega}$ variable of integration into account
+The factor $\frac{1}{T}$ in $X(e^{j\hat{\omega}})$ is **misleading**,  actually $x[n]$ is not scaled by $\frac{1}{T}$ once taking $\hat{\omega}$ variable of integration into account
 $$\begin{align}
 x_r[n] &= \frac{1}{2\pi} \int_{2\pi}X(e^{j\hat{\omega}})e^{j\hat{\omega} n}d\hat{\omega} \\
 &= \frac{1}{2\pi}\int_{2\pi}\frac{1}{T}\sum_{k=-\infty}^{+\infty}X_c \left[ j\left(\frac{\hat{\omega}}{T} - \frac{2\pi k}{T}\right)\right] e^{j\hat{\omega} n}d\hat{\omega} \\
@@ -567,38 +567,11 @@ where $\hat{\omega}_0 = \omega_0 T$
 
 
 
+### impulse train sampling & impulse sequence
 
+![image-20250910204320327](fourier/image-20250910204320327.png)
 
-## D/C
-
-![image-20240831161852787](fourier/image-20240831161852787.png)
-
-![image-20240831162625943](fourier/image-20240831162625943.png)
-
-![image-20240831162559492](fourier/image-20240831162559492.png)
-
-
-
-![image-20241024220244992](fourier/image-20241024220244992.png)
-
-##  zero padding
-
-This option increases $N_0$, the number of samples of $x(t)$, by adding dummy samples of **0** value. This addition of dummy samples is known as ***zero padding***
-
-We should keep in mind that even if the fence were transparent, we would see a reality distorted by **aliasing**.
-
-Zero padding only allows us to look at *more samples of that imperfect reality*
-
-
-
-> Balu Santhanam. ECE-539: Digital Signal Processing: Zero padding and Resolution [[http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf](http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf)]
-
-## impulse train sampling & impulse sequence
-
-EQ 4.6
-
-EQ 4.20
-
+![image-20250910204428950](fourier/image-20250910204428950.png)
 
 if $x_c(t) = e^{j\Omega_0t}$, thus $X_c (j\Omega) =  A\delta(\Omega - \Omega_0)$
 
@@ -607,9 +580,9 @@ $$
 X_s (j\Omega) = \frac{A}{T_s}\sum_k \delta(\Omega -\Omega_0 - k\Omega_s)
 $$
 
-and DTFT of $x[n]$
+DTFT of $x[n]$
 $$\begin{align}
-X(e^{j\omega}) &= \frac{1}{T_s} \sum_k X_c\left[j(\frac{\omega}{T_s}- \Omega_0-\frac{2\pi k}{T_s})\right] \\
+X(e^{j\omega}) &= \frac{1}{T_s} \sum_k X_c\left[j(\frac{\omega}{T_s}-\frac{2\pi k}{T_s})\right] \\
 &= \frac{A}{T_s} \sum_k  \delta(\frac{\omega}{T_s} -\Omega_0- \frac{2\pi k}{T_s}) \\
 &= A \sum_k  \delta(\omega -\omega_0 - 2\pi k)
 \end{align}$$
@@ -639,6 +612,33 @@ Example 4.1 impulse scaling $\delta(\omega/T)=T\delta(\omega)$
 $$
 \int \delta(\frac{\omega}{T})d\omega = \int T \delta(\omega)d\omega = \int T\delta(\frac{\omega}{T})d\frac{\omega}{T} = T
 $$
+
+
+
+## D/C
+
+![image-20240831161852787](fourier/image-20240831161852787.png)
+
+![image-20240831162625943](fourier/image-20240831162625943.png)
+
+![image-20240831162559492](fourier/image-20240831162559492.png)
+
+
+
+![image-20241024220244992](fourier/image-20241024220244992.png)
+
+##  zero padding
+
+This option increases $N_0$, the number of samples of $x(t)$, by adding dummy samples of **0** value. This addition of dummy samples is known as ***zero padding***
+
+We should keep in mind that even if the fence were transparent, we would see a reality distorted by **aliasing**.
+
+Zero padding only allows us to look at *more samples of that imperfect reality*
+
+
+
+> Balu Santhanam. ECE-539: Digital Signal Processing: Zero padding and Resolution [[http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf](http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf)]
+
 
 
 ## Gotcha

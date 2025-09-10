@@ -11,6 +11,16 @@ mathjax: true
 
 ## Reference Ripple
 
+> C-H Chan (U. of Macau) "Extreme SAR ADCs - Exploring New Frontiers" Online Course (2024) : Reference Buffer in SAR ADC [[https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn](https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn)]
+>
+> C. Li, C. -H. Chan, Y. Zhu and R. P. Martins, "Analysis of Reference Error in High-Speed SAR ADCs With Capacitive DAC," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 66, no. 1, pp. 82-93, Jan. 2019 [[https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf)]
+>
+> J. Zhong, Y. Zhu, S. -W. Sin, S. -P. U and R. P. Martins, "Thermal and Reference Noise Analysis of Time-Interleaving SAR and Partial-Interleaving Pipelined-SAR ADCs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 62, no. 9, pp. 2196-2206, Sept. 2015 [[https://sci-hub.st/10.1109/TCSI.2015.2452331](https://sci-hub.st/10.1109/TCSI.2015.2452331)]
+>
+> C. -H. Chan et al., "60-dB SNDR 100-MS/s SAR ADCs With Threshold Reconfigurable Reference Error Calibration," in IEEE Journal of Solid-State Circuits, vol. 52, no. 10, pp. 2576-2588, Oct. 2017 [[https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf)]
+
+
+
 *TODO* &#128197;
 
 
@@ -72,7 +82,7 @@ For $N$-bit *binary weighted algorithm*,$N=M$ and $s(i)=2^{i-1}$, where $i\in \{
 $$\begin{align}
 D_{out} &= s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1) \\
 &= 2^{N-1} + \sum_{i=1}^{N-1}2^i\cdot b[i] - \sum_{i=0}^{N-2}2^{i} + (b[0] -1) \\
-&= \sum_{i=1}^{N} b[i] \cdot 2^i
+&= \sum_{i=0}^{N-1} b[i] \cdot 2^i
 \end{align}$$
 
 
@@ -170,11 +180,11 @@ $$
 
 ### Speed Benefit
 
+*TODO* &#128197;
 
 
 
-
-## CDAC how
+## CDAC
 
 The *charge redistribution capacitor network* is used to sample the input signal and serves as a
 digital-to-analog converter (DAC) for creating and subtracting reference voltages
@@ -211,7 +221,7 @@ $$
 
 
 
-## CDAC settling accuracy
+### CDAC settling accuracy
 
 ![cdac-tau.drawio](sar/cdac-tau.drawio.svg)
 $$\begin{align}
@@ -240,7 +250,7 @@ $\tau = R\frac{C_1C_2}{C_1+C_2}$, which means usually worst for MSB capacitor (l
 A popular way to improve the settling behavior, again, is to employ unit-element DACs that statistically reduce the switching activities, which, unfortunately, exhibits unnecessary complications to the power, area and speed tradeoffs of the design
 
 
-## CDAC Energy Consumption
+### CDAC Energy Consumption
 
 
 $$
@@ -306,9 +316,9 @@ $$
 
 
 
+## Comparator
 
-
-## Comparator input cap effect
+### Comparator input cap effect
 
 ![image-20240907194621524](sar/image-20240907194621524.png)
 $$
@@ -326,7 +336,7 @@ That is, it does not change the sign
 
 
 
-## Comparator offset effect
+### Comparator offset effect
 
 ![image-20240825204030645](sar/image-20240825204030645.png)
 
@@ -417,12 +427,3 @@ L. Jie et al., "An Overview of Noise-Shaping SAR ADC: From Fundamentals to the F
 
 W. Liu, P. Huang and Y. Chiu, "A 12-bit, 45-MS/s, 3-mW Redundant Successive-Approximation-Register Analog-to-Digital Converter With Digital Calibration," in IEEE Journal of Solid-State Circuits, vol. 46, no. 11, pp. 2661-2672, Nov. 2011 [[https://sci-hub.st/10.1109/JSSC.2011.2163556](https://sci-hub.st/10.1109/JSSC.2011.2163556)]
 
----
-
-C-H Chan (U. of Macau) "Extreme SAR ADCs - Exploring New Frontiers" Online Course (2024) : Reference Buffer in SAR ADC [[https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn](https://youtu.be/vj98B7AaC9E?si=hMt0PM07CdkHN5Qn)]
-
-C. Li, C. -H. Chan, Y. Zhu and R. P. Martins, "Analysis of Reference Error in High-Speed SAR ADCs With Capacitive DAC," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 66, no. 1, pp. 82-93, Jan. 2019 [[https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/961546494e705f6fd16b9f785a121030.pdf)]
-
-J. Zhong, Y. Zhu, S. -W. Sin, S. -P. U and R. P. Martins, "Thermal and Reference Noise Analysis of Time-Interleaving SAR and Partial-Interleaving Pipelined-SAR ADCs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 62, no. 9, pp. 2196-2206, Sept. 2015 [[https://sci-hub.st/10.1109/TCSI.2015.2452331](https://sci-hub.st/10.1109/TCSI.2015.2452331)]
-
-C. -H. Chan et al., "60-dB SNDR 100-MS/s SAR ADCs With Threshold Reconfigurable Reference Error Calibration," in IEEE Journal of Solid-State Circuits, vol. 52, no. 10, pp. 2576-2588, Oct. 2017 [[https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf](https://ime.um.edu.mo/wp-content/uploads/magazines/407e580ac0218605bcf9b9bbd0ea1109.pdf)]

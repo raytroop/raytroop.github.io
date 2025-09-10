@@ -137,6 +137,19 @@ sar_plot(ss)
 plt.show()
 ```
 
+### ENOB vs. fixed radix
+
+When the ADC is designed with a fixed radix, $\alpha$ and the required number of conversion steps, $M$
+
+the sum of all the step sizes $s_{tot}$
+$$
+s_{tot} = \sum_{k=0}^{M-1} s_0 \alpha^k = s_0\frac{1-\alpha^M}{1-\alpha}
+$$
+
+The effective number of bits, $N$, can be calculated
+$$
+N \leq \log 2\left(\frac{s_{tot} + s_0}{s_0}\right) = \frac{2-\alpha-\alpha^M}{1-\alpha}
+$$
 
 
 ### Speed Benefit

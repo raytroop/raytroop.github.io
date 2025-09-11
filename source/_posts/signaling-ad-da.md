@@ -51,6 +51,8 @@ that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}
 
 ![image-20241015215227042](signaling-ad-da/image-20241015215227042.png)
 
+> A Beginner's Guide To Cascaded Integrator-Comb (CIC) Filters [[https://www.dsprelated.com/showarticle/1337.php](https://www.dsprelated.com/showarticle/1337.php)]
+>
 > ![image-20241015225859710](signaling-ad-da/image-20241015225859710.png)
 
 

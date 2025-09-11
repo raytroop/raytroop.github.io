@@ -41,7 +41,7 @@ The combination of the the *digital post-filter* and *downsampler* is called the
 
 ![image-20241015215159577](signaling-ad-da/image-20241015215159577.png)
 
-Provided that $T=1$
+Suppose $T=1$
 $$
 H_1(e^{j2\pi f}) = \frac{\text{sinc}(Nf)}{\text{sinc}(f)} = \frac{1}{N}\frac{\sin(\pi Nf)}{\sin(\pi f)}
 $$

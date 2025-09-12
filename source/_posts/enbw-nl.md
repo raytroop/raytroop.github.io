@@ -28,8 +28,51 @@ $$\begin{align}
 &= \frac{\sum_\text{nb} X_\text{w,sig}^2}{N X_\text{w,n}^2}
 \end{align}$$
 
-> The number of nonzero signal bins for the Hann window is $\mathrm{nb} = 3$
->
+where $\text{nb}$ is number of non-zero FFT bins
+
+![image-20250912224950616](enbw-nl/image-20250912224950616.png)
+
+```matlab
+subplot(2,1,1);
+for N = [16 256 1024]
+    wrect = rectwin(N);
+    Wrect = fft(wrect);
+    Wrect_mag = abs(Wrect)/sum(wrect);
+    nb_rect = sum(Wrect_mag > 0.1);
+    fprintf('Number of nonzero FFT bin(rect window N=%d): %d\n', N, nb_rect);
+    stem(1:N, Wrect_mag, LineWidth=2)
+    hold on
+end
+grid on
+legend('16', '256', '1024')
+title('rect window')
+
+subplot(2,1,2);
+for N = [16 256 1024]
+    whann = hann(N);
+    Whann = fft(whann);
+    Whann_mag = abs(Whann)/sum(whann);
+    nb_hann = sum(Whann_mag > 0.1);
+    fprintf('Number of nonzero FFT bin(hann window N=%d): %d\n', N, nb_hann);
+    stem(1:N, Whann_mag, LineWidth=2)
+    hold on
+end
+grid on
+legend('16', '256', '1024')
+title('Hanning window')
+
+% Number of nonzero FFT bin(rect window N=16): 1
+% Number of nonzero FFT bin(rect window N=256): 1
+% Number of nonzero FFT bin(rect window N=1024): 1
+% Number of nonzero FFT bin(hann window N=16): 3
+% Number of nonzero FFT bin(hann window N=256): 3
+% Number of nonzero FFT bin(hann window N=1024): 3
+```
+
+
+
+---
+
 > ![image-20240522213736493](enbw-nl/image-20240522213736493.png)
 >
 > where $\mathrm{NBW} = \frac{\sum_{n}|w[n]|^2}{ \left| \sum_{n} w[n] \right|^2}$
@@ -404,7 +447,7 @@ where $B_{enbw} = N \frac{\sum_{n}|w[n]|^2}{ \left| \sum_{n} w[n] \right|^2}$ an
 
 
 
-### code example
+### example
 
 ```matlab
 lw = 128;

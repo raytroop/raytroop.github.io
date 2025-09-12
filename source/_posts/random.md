@@ -9,9 +9,39 @@ mathjax: true
 
 ![image-20241106231114717](random/image-20241106231114717.png)
 
+---
 
 
-##  Ensemble average
+
+## autocorrelation
+
+![image-20241116112504606](random/image-20241116112504606.png)
+
+> The **expectation** returns the probability-weighted average of the specific function at that specific time
+> over all possible realizations of the process
+
+
+
+
+
+## Ergodicity
+
+***ensemble autocorrelation*** and ***temporal autocorrelation (time autocorrelation)*** 
+
+![image-20240719230346944](random/image-20240719230346944.png)
+
+![image-20240719210621021](random/image-20240719210621021.png)
+
+---
+
+![image-20241123004051314](random/image-20241123004051314.png)
+
+---
+
+> ECE438 - Laboratory 7: Discrete-Time Random Processes (Week 2) October 6, 2010 [[https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf](https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf)]
+
+
+###  Ensemble Averages and Time Averages
 
 > [[https://ece-research.unm.edu/bsanthan/ece541/stat.pdf](https://ece-research.unm.edu/bsanthan/ece541/stat.pdf)]
 >
@@ -32,22 +62,35 @@ mathjax: true
 
 
 
-## autocorrelation, Stationarity & Ergodicity
+### sample autocorrelation
 
-### autocorrelation
+> [[https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf](https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf)]
 
-![image-20241116112504606](random/image-20241116112504606.png)
+![image-20250912203526260](random/image-20250912203526260.png)
 
-> The **expectation** returns the probability-weighted average of the specific function at that specific time
-> over all possible realizations of the process
+---
 
+> [[http://www.signal.uu.se/Courses/CourseDirs/SignalbehandlingIT/forelas02.pdf](http://www.signal.uu.se/Courses/CourseDirs/SignalbehandlingIT/forelas02.pdf)]
 
+![image-20250912205534933](random/image-20250912205534933.png)
 
-### Stationarity
+### ergodic vs. stationary
+
+> [[https://bookdown.org/kevin_davisross/stat350-handouts/stationary.html](https://bookdown.org/kevin_davisross/stat350-handouts/stationary.html)]
+
+![image-20250912211619068](random/image-20250912211619068.png)
+
+---
+
+![image-20250912211353183](random/image-20250912211353183.png)
+
+## Strict Sense Stationary (SSS) & Wide Sense Stationary (WSS)
 
 > [[https://ece-research.unm.edu/bsanthan/ece541/station.pdf](https://ece-research.unm.edu/bsanthan/ece541/station.pdf)]
->
-> ***Strict Sense Stationary (SSS)***, ***Wide Sense Stationary (WSS)***
+
+![image-20250912210738010](random/image-20250912210738010.png)
+
+---
 
 ![image-20241123221623537](random/image-20241123221623537.png)
 
@@ -55,25 +98,7 @@ mathjax: true
 
 
 
-### Ergodicity
 
-***ensemble autocorrelation*** and ***temporal autocorrelation (time autocorrelation)*** 
-
-![image-20240719230346944](random/image-20240719230346944.png)
-
-![image-20240719210621021](random/image-20240719210621021.png)
-
----
-
-![image-20241123004051314](random/image-20241123004051314.png)
-
----
-
-> ECE438 - Laboratory 7: Discrete-Time Random Processes (Week 2) October 6, 2010 [[https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf](https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf)]
-
-***sample autocorrelation*** & ***sample cross-correlation***
-
-EQ (13)
 
 
 ##  LTI Filtering of WSS process

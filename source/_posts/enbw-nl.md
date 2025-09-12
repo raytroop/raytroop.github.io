@@ -7,6 +7,253 @@ categories:
 mathjax: true
 ---
 
+## Nonzero FFT bins
+
+> everynanocounts. Memos on FFT With Windowing. [[https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing](https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing)]
+
+The problem with sine-wave scaling is that the noise power is, on average, *evenly distributed over all FFT bins*, whereas the sine-wave power is concentrated in *only a few bins*. With sine-wave scaling, the power of individual sine-wave components can be read directly from the spectral plot, but in order to determine the noise power, the powers of all the noise bins must be added together.
+
+
+![snr_final.drawio](enbw-nl/snr_final.drawio.svg)
+
+> We **can't** use *Fourier transform of random signal*
+>
+> [[https://raytroop.github.io/2023/11/10/random/#lti-systems-on-wss-processes](https://raytroop.github.io/2023/11/10/random/#lti-systems-on-wss-processes)]
+
+
+
+$$\begin{align}
+\mathrm{SNR} &= \frac{X_\text{sig}^2}{X_\text{n}^2N} \\
+&= \frac{X_\text{sig}^2\cdot \sum_k W_k^2}{X_\text{n}^2N\cdot \sum_k W_k^2} \\
+&= \frac{\sum_\text{nb} X_\text{w,sig}^2}{N X_\text{w,n}^2}
+\end{align}$$
+
+> The number of nonzero signal bins for the Hann window is $\mathrm{nb} = 3$
+>
+> ![image-20240522213736493](enbw-nl/image-20240522213736493.png)
+>
+> where $\mathrm{NBW} = \frac{\sum_{n}|w[n]|^2}{ \left| \sum_{n} w[n] \right|^2}$
+
+
+```matlab
+% excerpt of A.4 An Example in Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
+%
+% Compute modulator output and actual NTF
+%
+OSR = 32;
+ntf0 = synthesizeNTF(5,OSR,1);
+N = 64*OSR;
+fbin = 11;
+u = 1/2*sin(2*pi*fbin/N*[0:N-1]);
+[v tmp1 tmp2 y] = simulateDSM(u,ntf0);
+k = mean(abs(y)/mean(y.^2))
+ntf = ntf0 / (k + (1-k)*ntf0);
+%
+% Compute windowed FFT and NBW
+%
+w = hann(N); % or ones(1,N) or hann(N).^2
+nb = 3; % 1 for Rect; 5 for Hann^2
+w1 = norm(w,1);
+w2 = norm(w,2);
+NBW = (w2/w1)^2
+V = fft(w.*v)/(w1/2);
+%
+% Compute SNR
+%
+signal_bins = fbin + [-(nb-1)/2:(nb-1)/2];
+inband_bins = 0:N/(2*OSR);
+noise_bins = setdiff(inband_bins,signal_bins);
+snr = dbp(sum(abs(V(signal_bins+1)).^2)/sum(abs(V(noise_bins+1)).^2))
+```
+
+
+## Noise Floor
+
+> [[http://individual.utoronto.ca/schreier/lectures/2015/1.pdf](http://individual.utoronto.ca/schreier/lectures/2015/1.pdf)]
+
+![image-20241202212412428](enbw-nl/image-20241202212412428.png)
+
+
+### General Formula
+
+signal tone power
+$$
+P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
+$$
+
+noise power 
+$$
+P_n = \frac{X_{w,n}^2}{N\cdot S_2}N=\frac{X_{w,n}^2}{S_2}
+$$
+
+where white noise,  $X_n(i) = X_n(j)$ for any $i \neq j$
+
+
+
+Therefore, displayed **SNR** is obtained
+$$\begin{align}
+\mathrm{SNR} &= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right) \\
+&= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) + 10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
+&= \mathrm{SNR}'-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
+&= \mathrm{SNR}'-10\log_{10}(2\cdot\mathrm{NBW}) 
+\end{align}$$
+
+> *DFT's output* $\mathrm{SNR}$
+
+---
+
+$$
+\text{PS(k)} = \text{PSD(k)} \cdot \text{ENBW}
+$$
+
+where **Effective Noise BandWidth** $\text{ENBW} =f_{\text{res}} \cdot \frac{N S_2}{S_1^2}$
+
+yield
+$$
+\text{PS(k)} = \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N S_2}{S_1^2} = \left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} \cdot \frac{S_2}{S_1^2}
+$$
+where $\left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} =\text{const}$, i.e. $x_\text{n,rms}$
+
+![image-20250826003933143](enbw-nl/image-20250826003933143.png)
+
+```matlab
+ratio_list = [];
+for len = 6:12
+ wnd = hanning(2^len);
+ S2 = sum(wnd.^2);
+ S1 = sum(wnd);
+ ratio = S2./S1.^2;
+ ratio_list(end+1) = ratio;
+end
+
+ratio_db = 10*log10(ratio_list);
+plot(2.^[6:1:12], ratio_db, 'ro-', LineWidth=4)
+grid on; grid minor;
+
+xlabel('N'); ylabel("$10\log(S_2/S_1^2)$",'Interpreter', 'latex')
+```
+
+
+
+### FFT Noise Floor
+
+![image-20250826010627757](enbw-nl/image-20250826010627757.png)
+
+![image-20250826013036595](enbw-nl/image-20250826013036595.png)
+
+
+
+```matlab
+N = 2048;
+cycles = 67;
+fs = 1000;
+fx = fs*cycles/N;
+LSB = 2/2^10;
+%generate signal, quantize (mid-tread) and take FFT
+x = cos(2*pi*fx/fs*[0:N-1]);
+x = round(x/LSB)*LSB;
+s = abs(fft(x));
+s = s(1:end/2)/N*2;
+% calculate SNR
+sigbin = 1 + cycles;
+noise = [s(1:sigbin-1), s(sigbin+1:end)];
+snr = 10*log10( s(sigbin)^2/sum(noise.^2) );
+
+sdb = 20*log10(s);
+
+% How to plot a series of numbers which some of them are inf?
+% https://www.mathworks.com/matlabcentral/answers/476643-how-to-plot-a-series-of-numbers-which-some-of-them-are-inf
+plot([0:N/2-1]/N, max(sdb, -120), LineWidth=4)
+hold on;
+plot([0 0.5], [-61.9 -61.9], 'r--', LineWidth=2)
+plot([0 0.5], [-92 -92], 'm--', LineWidth=2)
+grid on; grid minor;
+ylim([-120 0]); xlim([0 0.5]);
+xlabel('Frequency [f/fs]'), ylabel('DFT Magnitude [dBFS]');
+title('2048 point FFT, SNR=61.90dB')
+
+```
+
+
+
+
+
+### Noise Spectral Density (NSD)
+
+> Understanding Key Parameters for RF-Sampling Data Converters White Paper (WP509) [[https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters](https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters)]
+>
+> Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
+
+![image-20250826005956497](enbw-nl/image-20250826005956497.png)
+
+---
+
+![image-20250902010512726](enbw-nl/image-20250902010512726.png)
+
+### Rectangular Window
+
+DFT bin's output *noise* standard deviation (*rms*) value is proportional to $\sqrt{N}$, and the DFT's output magnitude for the bin containing the *signal tone* is proportional to $N$
+
+signal tone power
+$$
+P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{N^2}
+$$
+
+noise power
+$$
+P_n = \frac{X_{w,n}^2}{N}
+$$
+
+
+The displayed **SNR**
+$$
+\mathrm{SNR} = \mathrm{SNR}' - 10\log_{10}(2/N)
+$$
+If we increase a DFT's size from $N$ to $2N$, the DFT's output SNR increased by 3dB. So we say that a DFT's **processing gain** increases by 3dB whenever $N$ is doubled.
+
+
+
+---
+
+```matlab
+for N=[2^6 2^8 2^10 2^12]
+  wd = rectwin(N);
+  nbw = enbw(wd)/N;
+  snr_shift = 10*log10(nbw * 2);
+  disp(snr_shift);
+end
+```
+
+output:
+
+```
+-15.0515
+
+-21.0721
+
+-27.0927
+
+-33.1133
+```
+
+![image-20241202212221239](enbw-nl/image-20241202212221239.png)
+
+![image-20241202213152360](enbw-nl/image-20241202213152360.png)
+
+### How spectrum analyzer work?
+
+We tried to plot a *power spectral density* together with something that we want to interpret as a *power spectrum*
+
+- *spectrum* of a periodic signal
+- *spectral density* of a broadband signal such as noise
+
+Sine-wave components are located in individual FFT bins, but broadband signals like noise have their power spread over all FFT bins!
+
+> The **noise floor** depends on the *length of the FFT*
+
+
+
+
 ## PS and PSD
 
 The spectral density format is appropriate for random or noise signals but inappropriate for discrete frequency components because the latter theoretically have zero bandwidth
@@ -204,253 +451,6 @@ Adiff: 7.276e-12
 > [[https://github.com/unpingco/Python-for-Signal-Processing/blob/master/Windowing_Part2.ipynb](https://github.com/unpingco/Python-for-Signal-Processing/blob/master/Windowing_Part2.ipynb)]
 
 ![image-20250902002913214](enbw-nl/image-20250902002913214.png)
-
-
-
-## Noise Floor
-
-> [[http://individual.utoronto.ca/schreier/lectures/2015/1.pdf](http://individual.utoronto.ca/schreier/lectures/2015/1.pdf)]
-
-![image-20241202212412428](enbw-nl/image-20241202212412428.png)
-
-
-### General Formula
-
-signal tone power
-$$
-P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{S_1^2}
-$$
-
-noise power 
-$$
-P_n = \frac{X_{w,n}^2}{N\cdot S_2}N=\frac{X_{w,n}^2}{S_2}
-$$
-
-where white noise,  $X_n(i) = X_n(j)$ for any $i \neq j$
-
-
-
-Therefore, displayed **SNR** is obtained
-$$\begin{align}
-\mathrm{SNR} &= 10\log10\left(\frac{X_{w,sig}^2}{X_{w,n}^2}\right) \\
-&= 10\log_{10}\left(\frac{P_{\text{sig}}}{P_n}\right) + 10\log_{10}\left(\frac{S_1^2}{2S_2}\right) \\
-&= \mathrm{SNR}'-10\log_{10}\left(\frac{2S_2}{S_1^2}\right) \\
-&= \mathrm{SNR}'-10\log_{10}(2\cdot\mathrm{NBW}) 
-\end{align}$$
-
-> *DFT's output* $\mathrm{SNR}$
-
----
-
-$$
-\text{PS(k)} = \text{PSD(k)} \cdot \text{ENBW}
-$$
-
-where **Effective Noise BandWidth** $\text{ENBW} =f_{\text{res}} \cdot \frac{N S_2}{S_1^2}$
-
-yield
-$$
-\text{PS(k)} = \text{PSD(k)} \cdot f_{\text{res}} \cdot \frac{N S_2}{S_1^2} = \left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} \cdot \frac{S_2}{S_1^2}
-$$
-where $\left\{\text{PSD(k)} \cdot f_{\text{s}} \right\} =\text{const}$, i.e. $x_\text{n,rms}$
-
-![image-20250826003933143](enbw-nl/image-20250826003933143.png)
-
-```matlab
-ratio_list = [];
-for len = 6:12
- wnd = hanning(2^len);
- S2 = sum(wnd.^2);
- S1 = sum(wnd);
- ratio = S2./S1.^2;
- ratio_list(end+1) = ratio;
-end
-
-ratio_db = 10*log10(ratio_list);
-plot(2.^[6:1:12], ratio_db, 'ro-', LineWidth=4)
-grid on; grid minor;
-
-xlabel('N'); ylabel("$10\log(S_2/S_1^2)$",'Interpreter', 'latex')
-```
-
-
-
-### FFT Noise Floor
-
-![image-20250826010627757](enbw-nl/image-20250826010627757.png)
-
-![image-20250826013036595](enbw-nl/image-20250826013036595.png)
-
-
-
-```matlab
-N = 2048;
-cycles = 67;
-fs = 1000;
-fx = fs*cycles/N;
-LSB = 2/2^10;
-%generate signal, quantize (mid-tread) and take FFT
-x = cos(2*pi*fx/fs*[0:N-1]);
-x = round(x/LSB)*LSB;
-s = abs(fft(x));
-s = s(1:end/2)/N*2;
-% calculate SNR
-sigbin = 1 + cycles;
-noise = [s(1:sigbin-1), s(sigbin+1:end)];
-snr = 10*log10( s(sigbin)^2/sum(noise.^2) );
-
-sdb = 20*log10(s);
-
-% How to plot a series of numbers which some of them are inf?
-% https://www.mathworks.com/matlabcentral/answers/476643-how-to-plot-a-series-of-numbers-which-some-of-them-are-inf
-plot([0:N/2-1]/N, max(sdb, -120), LineWidth=4)
-hold on;
-plot([0 0.5], [-61.9 -61.9], 'r--', LineWidth=2)
-plot([0 0.5], [-92 -92], 'm--', LineWidth=2)
-grid on; grid minor;
-ylim([-120 0]); xlim([0 0.5]);
-xlabel('Frequency [f/fs]'), ylabel('DFT Magnitude [dBFS]');
-title('2048 point FFT, SNR=61.90dB')
-
-```
-
-
-
-
-
-### Noise Spectral Density (NSD)
-
-> Understanding Key Parameters for RF-Sampling Data Converters White Paper (WP509) [[https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters](https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters)]
->
-> Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
-
-![image-20250826005956497](enbw-nl/image-20250826005956497.png)
-
----
-
-![image-20250902010512726](enbw-nl/image-20250902010512726.png)
-
-### Rectangular Window
-
-DFT bin's output *noise* standard deviation (*rms*) value is proportional to $\sqrt{N}$, and the DFT's output magnitude for the bin containing the *signal tone* is proportional to $N$
-
-signal tone power
-$$
-P_{\text{sig}} = 2 \frac{X_{w,sig}^2}{N^2}
-$$
-
-noise power
-$$
-P_n = \frac{X_{w,n}^2}{N}
-$$
-
-
-The displayed **SNR**
-$$
-\mathrm{SNR} = \mathrm{SNR}' - 10\log_{10}(2/N)
-$$
-If we increase a DFT's size from $N$ to $2N$, the DFT's output SNR increased by 3dB. So we say that a DFT's **processing gain** increases by 3dB whenever $N$ is doubled.
-
-
-
----
-
-```matlab
-for N=[2^6 2^8 2^10 2^12]
-  wd = rectwin(N);
-  nbw = enbw(wd)/N;
-  snr_shift = 10*log10(nbw * 2);
-  disp(snr_shift);
-end
-```
-
-output:
-
-```
--15.0515
-
--21.0721
-
--27.0927
-
--33.1133
-```
-
-![image-20241202212221239](enbw-nl/image-20241202212221239.png)
-
-![image-20241202213152360](enbw-nl/image-20241202213152360.png)
-
-### How spectrum analyzer work?
-
-We tried to plot a *power spectral density* together with something that we want to interpret as a *power spectrum*
-
-- *spectrum* of a periodic signal
-- *spectral density* of a broadband signal such as noise
-
-Sine-wave components are located in individual FFT bins, but broadband signals like noise have their power spread over all FFT bins!
-
-> The **noise floor** depends on the *length of the FFT*
-
-
-
-## Nonzero FFT bins
-
-> everynanocounts. Memos on FFT With Windowing. [[https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing](https://a2d2ic.wordpress.com/2018/02/01/memos-on-fft-with-windowing)]
-
-The problem with sine-wave scaling is that the noise power is, on average, *evenly distributed over all FFT bins*, whereas the sine-wave power is concentrated in *only a few bins*. With sine-wave scaling, the power of individual sine-wave components can be read directly from the spectral plot, but in order to determine the noise power, the powers of all the noise bins must be added together.
-
-
-![snr_final.drawio](enbw-nl/snr_final.drawio.svg)
-
-> We **can't** use *Fourier transform of random signal*
->
-> [[https://raytroop.github.io/2023/11/10/random/#lti-systems-on-wss-processes](https://raytroop.github.io/2023/11/10/random/#lti-systems-on-wss-processes)]
-
-
-
-$$\begin{align}
-\mathrm{SNR} &= \frac{X_\text{sig}^2}{X_\text{n}^2N} \\
-&= \frac{X_\text{sig}^2\cdot \sum_k W_k^2}{X_\text{n}^2N\cdot \sum_k W_k^2} \\
-&= \frac{\sum_\text{nb} X_\text{w,sig}^2}{N X_\text{w,n}^2}
-\end{align}$$
-
-> The number of nonzero signal bins for the Hann window is $\mathrm{nb} = 3$
->
-> ![image-20240522213736493](enbw-nl/image-20240522213736493.png)
->
-> where $\mathrm{NBW} = \frac{\sum_{n}|w[n]|^2}{ \left| \sum_{n} w[n] \right|^2}$
-
-
-```matlab
-% excerpt of A.4 An Example in Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
-%
-% Compute modulator output and actual NTF
-%
-OSR = 32;
-ntf0 = synthesizeNTF(5,OSR,1);
-N = 64*OSR;
-fbin = 11;
-u = 1/2*sin(2*pi*fbin/N*[0:N-1]);
-[v tmp1 tmp2 y] = simulateDSM(u,ntf0);
-k = mean(abs(y)/mean(y.^2))
-ntf = ntf0 / (k + (1-k)*ntf0);
-%
-% Compute windowed FFT and NBW
-%
-w = hann(N); % or ones(1,N) or hann(N).^2
-nb = 3; % 1 for Rect; 5 for Hann^2
-w1 = norm(w,1);
-w2 = norm(w,2);
-NBW = (w2/w1)^2
-V = fft(w.*v)/(w1/2);
-%
-% Compute SNR
-%
-signal_bins = fbin + [-(nb-1)/2:(nb-1)/2];
-inband_bins = 0:N/(2*OSR);
-noise_bins = setdiff(inband_bins,signal_bins);
-snr = dbp(sum(abs(V(signal_bins+1)).^2)/sum(abs(V(noise_bins+1)).^2))
-```
 
 
 

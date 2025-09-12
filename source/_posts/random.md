@@ -67,6 +67,13 @@ mathjax: true
 
 ![image-20241123004051314](random/image-20241123004051314.png)
 
+---
+
+> ECE438 - Laboratory 7: Discrete-Time Random Processes (Week 2) October 6, 2010 [[https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf](https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf)]
+
+***sample autocorrelation*** & ***sample cross-correlation***
+
+EQ (13)
 
 
 ##  LTI Filtering of WSS process

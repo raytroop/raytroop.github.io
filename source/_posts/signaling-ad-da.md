@@ -19,17 +19,11 @@ mathjax: true
 
 
 
-
-
-## Noise-Shaping SAR ADCs
-
-*TODO* &#128197;
-
-
-
-
-
 ## decimation filter
+
+> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan1.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan1.pdf)]
+>
+> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan2.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan2.pdf)]
 
 The combination of the the *digital post-filter* and *downsampler* is called the **decimation filter** or **decimator**
 
@@ -59,6 +53,28 @@ that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}
 
 ![image-20241015215111430](signaling-ad-da/image-20241015215111430.png)
 
+
+$$
+|H_1(\omega)|^2 = \left|\frac{1}{N}(1-e^{-j\omega N}) \right| = \frac{2}{N^2}(1-\cos (\omega N))
+$$
+Total noise after $H_1$
+$$
+\sigma_{q_1}^2 = 2\int_0^\pi \frac{e^2_{rms}}{2\pi}\cdot |H_1(\omega)|^2d\omega = \frac{2e^2_{rms}}{N^2}
+$$
+inband noise before $H_1$, i.e. ***ideal LPF*** with cutoff frequency $\frac{\pi}{N}$
+$$
+\sigma_{q_0}^2 = 2\int_0^{\pi/N}\frac{e_{rms}^2}{2\pi}|1-e^{-j\omega}|^2d\omega = \frac{2e_{rms}^2}{\pi}\left(\frac{\pi}{N}-\sin\frac{\pi}{N}\right)
+$$
+with Taylor series $\sin\frac{\pi}{N}\approx \frac{\pi}{N}-\frac{1}{6}\frac{\pi^3}{N^3}$
+$$
+\sigma_{q_0}^2 \approx \frac{\pi^2}{3N^3}e_{rms}^2
+$$
+
+
+> Taylor’s Series of sin x [[pdf](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/242ad6a22b86b20799afc7f207cd4271_MIT18_01SCF10_Ses99c.pdf)]
+>
+> ![image-20250913093652192](signaling-ad-da/image-20250913093652192.png)
+
 ---
 
 > [[https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#python-oversample](https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#python-oversample)]
@@ -67,12 +83,6 @@ that is $\lim_{f\to 0^+}H_1(e^{j2\pi f}) = 1$  and $H_1 = 0$ when $f=\frac{n}{N}
 ### $\text{sinc}^2$ filter
 
 ![image-20241015220030204](signaling-ad-da/image-20241015220030204.png)
-
-
-
-> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan1.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan1.pdf)]
->
-> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan2.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/First_Order_DS_ADC_scan2.pdf)]
 
 
 

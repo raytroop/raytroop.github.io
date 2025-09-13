@@ -91,13 +91,7 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 
 
-## wordlength of accumulator
 
-> Z. Ye and M. P. Kennedy, "Hardware Reduction in Digital Delta–Sigma Modulators Via Error Masking—Part II: SQ-DDSM," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 56, no. 2, pp. 112-116, Feb. 2009 [[https://sci-hub.se/10.1109/TCSII.2008.2010188](https://sci-hub.se/10.1109/TCSII.2008.2010188)]
->
-> —, "Hardware Reduction in Digital Delta-Sigma Modulators Via Error Masking - Part I: MASH DDSM," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 56, no. 4, pp. 714-726, April 2009 [[https://sci-hub.se/10.1109/TCSI.2008.2003383](https://sci-hub.se/10.1109/TCSI.2008.2003383)]
-
-![image-20250906134655253](ddsm/image-20250906134655253.png)
 
 
 
@@ -107,7 +101,73 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 ![image-20250908213849546](ddsm/image-20250908213849546.png)
 
-![img](ddsm/Digital-MASH-61-modulator.png)
+![image-20250913161933338](ddsm/image-20250913161933338.png)
+
+### accumulator wordlength 
+
+> Z. Ye and M. P. Kennedy, "Hardware Reduction in Digital Delta–Sigma Modulators Via Error Masking—Part II: SQ-DDSM," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 56, no. 2, pp. 112-116, Feb. 2009 [[https://sci-hub.se/10.1109/TCSII.2008.2010188](https://sci-hub.se/10.1109/TCSII.2008.2010188)]
+>
+> —, "Hardware Reduction in Digital Delta-Sigma Modulators Via Error Masking - Part I: MASH DDSM," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 56, no. 4, pp. 714-726, April 2009 [[https://sci-hub.se/10.1109/TCSI.2008.2003383](https://sci-hub.se/10.1109/TCSI.2008.2003383)]
+
+![image-20250906134655253](ddsm/image-20250906134655253.png)
+
+### Truncation DAC
+
+> ***accumulator is implicit quantizer***
+
+![image-20241022204239594](ddsm/image-20241022204239594.png)
+
+with $\frac{y}{2^{m_2}} + q= v$,  where $v = \lfloor\frac{y}{2^{m_2}}\rfloor$
+
+$$
+\left\{ \begin{array}{cl}
+Y + 2^{m_2} Q &= 2^{m_2}V   \\
+U - z^{-1}2^{m_2}Q &= Y  
+\end{array} \right.
+$$
+
+The STF & NTF is shown as below
+$$
+V = \frac{1}{2^{m_2}}U + (1-z^{-1})Q
+$$
+
+To avoid accumulator overflow, ***stable input range is only of a fraction of the full scale*** ( $2^{m_1+m_2}-1$)
+$$
+u \leq = 2^{m_1+m_2} - 2^{m_2}
+$$
+
+```python
+m1 = 2  # MSBs
+m2 = 4  # LSBs
+
+ymax = 2**(m1 + m2)
+umax = 2**(m1 + m2) - 2**m2     # int(m1*'1'+m2*'0', 2)
+# format(48, '06b')
+# Out[4]: '110000'
+
+u = 48
+assert u <= umax
+
+ylist = [0]; vlist = [0]
+elist = []; outlist = []
+
+Niter = 2**10
+for _ in range(Niter):
+    ecur = vlist[-1] - ylist[-1]
+    elist.append(ecur)
+    ycur = (u - ecur)
+    assert ycur < ymax, print(ycur)
+    ylist.append(ycur)
+    ycur_bin = format(ycur, f'0{m1+m2}b')
+    vcur = int(ycur_bin[:-m2]+'0'*m2, 2)
+    vlist.append(vcur)
+    outlist.append(int(ycur_bin[:-m2], 2))
+
+print(vlist); print(ylist)
+print(sum(vlist)/len(vlist)); print(sum(outlist)/len(outlist)*2**m2)
+```
+
+
 
 ## Fractional-N PLL
 
@@ -144,6 +204,20 @@ where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$
 ![image-20250824183123922](ddsm/image-20250824183123922.png)
 
 ![image-20250824210526248](ddsm/image-20250824210526248.png)
+
+
+
+## Impulse Train Modulator (ITM)
+
+> M. H. Perrott, M. D. Trott and C. G. Sodini, "A modeling approach for /spl Sigma/-/spl Delta/ fractional-N frequency synthesizers allowing straightforward noise analysis," in *IEEE Journal of Solid-State Circuits*, vol. 37, no. 8, pp. 1028-1038, Aug. 2002 [[https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf](https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf)]
+
+![image-20250913130430564](ddsm/image-20250913130430564.png)
+
+---
+
+![image-20250913130708018](ddsm/image-20250913130708018.png)
+
+![image-20250913130847600](ddsm/image-20250913130847600.png)
 
 
 
@@ -241,110 +315,6 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 
 
-## Truncation DAC
-
-The noise-shaping loop output must contain a faithful *reproduction* of the input signal $u_0[n]$ in the *baseband*,
-
-but it will also include the *filtered truncation noise* caused by the *reduction of the word length* in the loop.
-
-Idealy, the ***DA***C will reproduce its *input **d**igital signal* in an ***a**nalog form* without any distortion
-
----
-
-> ![truncator_1bit.drawio](ddsm/truncator_1bit.drawio.svg)
-
-
-
-![image-20241022204239594](ddsm/image-20241022204239594.png)
-
-with $\frac{y}{2^{m_2}} + q= v$,  where $v = \lfloor\frac{y}{2^{m_2}}\rfloor$
-
-$$
-\left\{ \begin{array}{cl}
-Y + 2^{m_2} Q &= 2^{m_2}V   \\
-U - z^{-1}2^{m_2}Q &= Y  
-\end{array} \right.
-$$
-
-The STF & NTF is shown as below
-$$
-V = \frac{1}{2^{m_2}}U + (1-z^{-1})Q
-$$
-
-```python
-m1 = 4  # MSBs
-m2 = 2  # LSBs
-Vmax = 2**(m1 + m2) - 1
-
-u = 1
-
-ylist = [0]
-vlist = [0]
-elist = []
-
-Niter = 2**10
-for _ in range(Niter):
-    ecur = vlist[-1] - ylist[-1]
-    elist.append(ecur)
-    ycur = (u - ecur) % Vmax	# overflow
-    ylist.append(ycur)
-    ycur_bin = format(ycur, '06b')
-    vcur = int(ycur_bin[:-2]+'00', 2)
-    vlist.append(vcur)
-
-print(ylist)
-print(vlist)
-print(sum(vlist)/len(vlist))
-```
-
-![image-20250607161739820](ddsm/image-20250607161739820.png)
-
-| u    | v_avg                                                        |                 |
-| ---- | ------------------------------------------------------------ | --------------- |
-| 0    | ![image-20250609233713939](ddsm/image-20250609233713939.png) | 0000_00         |
-| 1    | ![image-20250609233741985](ddsm/image-20250609233741985.png) | 0000_01         |
-| *60* | ![image-20250609233808262](ddsm/image-20250609233808262.png) | **1111**_00     |
-| 61   | ![image-20250609233837090](ddsm/image-20250609233837090.png) | **1111**_0**1** |
-| 62   | ![image-20250609233903431](ddsm/image-20250609233903431.png) | **1111**_**1**0 |
-
-!!! The $u$ is limited between *0* and *60* (MSBs_LSBs - LSBs)
-
----
-
-> Tuan Minh Vo, S. Levantino and C. Samori, "Analysis of fractional-n bang-bang digital PLLs using phase switching technique," *2016 12th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME)*, Lisbon, Portugal, [[https://sci-hub.se/10.1109/PRIME.2016.7519545](https://sci-hub.se/10.1109/PRIME.2016.7519545)]
-
-![image-20250618001200589](ddsm/image-20250618001200589.png)
-
-
-
----
-
-
-
-
-
-![image-20241019220819728](ddsm/image-20241019220819728.png)
-
-An implementation of a **high-resolution integral path** using a *digital delta-sigma modulator*, *low-resolution Nyquist DAC*, and *a lowpass filter*
-
-- $\Delta \Sigma$ truncates $n$-bit accumulator output to $m$-bits with $m\le n$
-- A $m$-bit Nyquist DAC outputs current, which is fed into a low pass filter that suppresses $\Delta \Sigma$'s quantization noise
-
-
-
-
-
----
-
-![image-20241022233749243](ddsm/image-20241022233749243.png)
-
-
-
-The remaining *11 bits are truncated to 3-levels* using a second-order delta-sigma modulator (DSM), thus, obviating the need for a high resolution DAC
-
-
-
-> Hanumolu, Pavan Kumar. "Design techniques for clocking high performance signaling systems" [[https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/1v53k219r](https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/1v53k219r)]
 
 
 

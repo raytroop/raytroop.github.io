@@ -7,6 +7,20 @@ categories:
 mathjax: true
 ---
 
+***spread spectrum clock generation (SSCG)*** — an advanced clock generation solution for ***electromagnetic interference (EMI)***
+
+![image-20250913195157852](sscg/image-20250913195157852.png)
+
+![image-20250913192850807](sscg/image-20250913192850807.png)
+
+![image-20250913192820120](sscg/image-20250913192820120.png)
+
+## SSC modulation profile
+
+![image-20250913194151764](sscg/image-20250913194151764.png)
+
+---
+
 
 
 ##  SSCG Architectures
@@ -110,3 +124,7 @@ Raymond L. Pickholtz, Donald L. Schilling, Laurence B. Milstein, [*Theory of Spr
 Kadeem Samuel. Application Note Clocking for PCIe Applications [[https://www.ti.com/lit/an/snaa386/snaa386.pdf?ts=1756864837383](https://www.ti.com/lit/an/snaa386/snaa386.pdf?ts=1756864837383)]
 
 K. -H. Cheng, C. -L. Hung, C. -H. Chang, Y. -L. Lo, W. -B. Yang and J. -W. Miaw, "A Spread-Spectrum Clock Generator Using Fractional-N PLL Controlled Delta-Sigma Modulator for Serial-ATA III," *2008 11th IEEE Workshop on Design and Diagnostics of Electronic Circuits and Systems*, Bratislava, Slovakia, 2008 [[https://sci-hub.se/10.1109/DDECS.2008.4538758](https://sci-hub.se/10.1109/DDECS.2008.4538758)]
+
+---
+
+Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology

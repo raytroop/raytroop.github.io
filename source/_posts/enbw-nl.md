@@ -30,10 +30,10 @@ $$\begin{align}
 
 where $\text{nb}$ is number of non-zero FFT bins
 
-![image-20250912224950616](enbw-nl/image-20250912224950616.png)
+![image-20250913174711880](enbw-nl/image-20250913174711880.png)
 
 ```matlab
-subplot(2,1,1);
+subplot(3,1,1);
 for N = [16 256 1024]
     wrect = rectwin(N);
     Wrect = fft(wrect);
@@ -47,7 +47,7 @@ grid on
 legend('16', '256', '1024')
 title('rect window')
 
-subplot(2,1,2);
+subplot(3,1,2);
 for N = [16 256 1024]
     whann = hann(N);
     Whann = fft(whann);
@@ -61,19 +61,37 @@ grid on
 legend('16', '256', '1024')
 title('Hanning window')
 
+subplot(3,1,3);
+for N = [16 256 1024]
+    whann2 = (1-cos(2*pi*(0:N-1)/N)).^2/2^2;
+    Whann2 = fft(whann2);
+    Whann2_mag = abs(Whann2)/sum(whann2);
+    nb_hann2 = sum(Whann2_mag > 0.1);
+    fprintf('Number of nonzero FFT bin(hann2 window N=%d): %d\n', N, nb_hann2);
+    stem(1:N, Whann2_mag, LineWidth=2)
+    hold on
+end
+grid on
+legend('16', '256', '1024')
+title('Hann2 window')
+
+
 % Number of nonzero FFT bin(rect window N=16): 1
 % Number of nonzero FFT bin(rect window N=256): 1
 % Number of nonzero FFT bin(rect window N=1024): 1
 % Number of nonzero FFT bin(hann window N=16): 3
 % Number of nonzero FFT bin(hann window N=256): 3
 % Number of nonzero FFT bin(hann window N=1024): 3
+% Number of nonzero FFT bin(hann2 window N=16): 5
+% Number of nonzero FFT bin(hann2 window N=256): 5
+% Number of nonzero FFT bin(hann2 window N=1024): 5
 ```
 
 
 
----
-
-> ![image-20240522213736493](enbw-nl/image-20240522213736493.png)
+> [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/FFT_for_delta_sigma_spectrum_estimation.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/FFT_for_delta_sigma_spectrum_estimation.pdf)]
+>
+> ![image-20250913174821087](enbw-nl/image-20250913174821087.png)
 >
 > where $\mathrm{NBW} = \frac{\sum_{n}|w[n]|^2}{ \left| \sum_{n} w[n] \right|^2}$
 

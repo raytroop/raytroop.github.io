@@ -35,7 +35,7 @@ It's **ternary**, because *early*, *late* and *no transition*
 
 notice the ***transition density = 1*** in digital PLL
 
-### Linearing BB-PD
+### Linearization
 
 The effective PD gain is a function of the **input jitter pdf**, it enables one to anticipate the effects of input jitter on loop characteristics
 
@@ -74,7 +74,7 @@ $$
 
 
 
-### BBPD gain simulation
+### gain simulation
 
 > L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
 >
@@ -82,7 +82,7 @@ $$
 
 ![image-20250902215541227](dpll/image-20250902215541227.png)
 
-![image-20250903190920929](dpll/image-20250903190920929.png)
+![image-20250913192552933](dpll/image-20250913192552933.png)
 
 ```python
 import matplotlib.pyplot as plt
@@ -101,12 +101,14 @@ print(f'coef_form: {coef_form}')
 coef_gauss = (2/np.pi)**0.5/sigma
 print(f'coef_gauss: {coef_gauss}')
 
+# polyfit
 coef_fit = np.polyfit(dt, et, 1)
 print(f'coef_fit: {coef_fit}')
 
 x = np.linspace(-3.5, 3.5, 1000)
 y = coef_fit[0]*x + coef_fit[1]
 
+plt.figure(figsize=(12,6))
 plt.plot(dt, et, 'o')
 plt.plot(x, y, linewidth=2, linestyle='--')
 

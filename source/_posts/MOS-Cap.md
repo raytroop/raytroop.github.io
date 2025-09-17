@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-![image-20241120201536599](MOS-Cap/image-20241120201536599.png)
+![image-20250917184927874](MOS-Cap/image-20250917184927874.png)
 
 ---
 
@@ -38,13 +38,13 @@ classification with **Intrinsic** and **Extrinsic** MOS capacitor
 
 
 
-![image-20241120201251573](MOS-Cap/image-20241120201251573.png)
+![image-20250917185006503](MOS-Cap/image-20250917185006503.png)
 
-![image-20241120201118276](MOS-Cap/image-20241120201118276.png)
+![image-20250917185041255](MOS-Cap/image-20250917185041255.png)
 
-![image-20241120201127218](MOS-Cap/image-20241120201127218.png)
+![image-20250917185106474](MOS-Cap/image-20250917185106474.png)
 
-![image-20241120201309635](MOS-Cap/image-20241120201309635.png)
+![image-20250917185146601](MOS-Cap/image-20250917185146601.png)
 
 
 
@@ -52,9 +52,7 @@ classification with **Intrinsic** and **Extrinsic** MOS capacitor
 
 > ![image-20250621122921814](MOS-Cap/image-20250621122921814.png)
 
-![image-20241120201603222](MOS-Cap/image-20241120201603222.png)
-
-
+![image-20250917185223939](MOS-Cap/image-20250917185223939.png)
 
 
 ## FinFET Parasitic Fringing Capacitance
@@ -129,6 +127,10 @@ where *TCJ* and *TCJSW* are positive
 
 ![image-20220924004206116](MOS-Cap/image-20220924004206116.png)
 
+### I-MOS vs . A-MOS
+
+![image-20250917193743547](MOS-Cap/image-20250917193743547.png)
+
 
 
 ### PDK varactor
@@ -139,6 +141,10 @@ where *TCJ* and *TCJSW* are positive
 
 > - Base Band MOSCAP model (nmoscap) is built without effective series resistance (ESR) and effective series inductance (ESL) calibrations, which is for capacitance simulation only
 > - LC-Tank MOSCAP model (moscap_rf) is for frequency-dependent Q factor and capacitance simulations
+
+
+
+
 
 
 

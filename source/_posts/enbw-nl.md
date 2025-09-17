@@ -30,13 +30,13 @@ $$\begin{align}
 
 where $\text{nb}$ is number of non-zero FFT bins
 
-![image-20250913174711880](enbw-nl/image-20250913174711880.png)
+![image-20250917184729018](enbw-nl/image-20250917184729018.png)
 
 ```matlab
 subplot(3,1,1);
 for N = [16 256 1024]
     wrect = rectwin(N);
-    Wrect = fft(wrect);
+    Wrect = fftshift(fft(wrect));
     Wrect_mag = abs(Wrect)/sum(wrect);
     nb_rect = sum(Wrect_mag > 0.1);
     fprintf('Number of nonzero FFT bin(rect window N=%d): %d\n', N, nb_rect);
@@ -50,7 +50,7 @@ title('rect window')
 subplot(3,1,2);
 for N = [16 256 1024]
     whann = hann(N);
-    Whann = fft(whann);
+    Whann = fftshift(fft(whann));
     Whann_mag = abs(Whann)/sum(whann);
     nb_hann = sum(Whann_mag > 0.1);
     fprintf('Number of nonzero FFT bin(hann window N=%d): %d\n', N, nb_hann);
@@ -64,7 +64,7 @@ title('Hanning window')
 subplot(3,1,3);
 for N = [16 256 1024]
     whann2 = (1-cos(2*pi*(0:N-1)/N)).^2/2^2;
-    Whann2 = fft(whann2);
+    Whann2 = fftshift(fft(whann2));
     Whann2_mag = abs(Whann2)/sum(whann2);
     nb_hann2 = sum(Whann2_mag > 0.1);
     fprintf('Number of nonzero FFT bin(hann2 window N=%d): %d\n', N, nb_hann2);

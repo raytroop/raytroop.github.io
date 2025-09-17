@@ -53,6 +53,15 @@ S. Liao and M. Horowitz, "A Verilog piecewise-linear analog behavior model for m
 
 —,Ph.D. Dissertation 2012. Verilog Piecewise Linear Behavioral Modeling For Mixed-Signal Validation [[https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf](https://stacks.stanford.edu/file/druid:pb381vh2919/Thesis_submission-augmented.pdf)]
 
+Ji-Eun Jang et al. “True event-driven simulation of analog/mixed-signal behaviors in SystemVerilog: A decision-feedback equalizing (DFE) receiver example”. In: Proceedings of the
+IEEE 2012 Custom Integrated Circuits Conference. 2012 [[https://sci-hub.se/10.1109/CICC.2012.6330558](https://sci-hub.se/10.1109/CICC.2012.6330558)]
+
+—, Si-Jung Yang, and Jaeha Kim. “Event-driven simulation of Volterra series models
+in SystemVerilog”. In: Proceedings of the IEEE 2013 Custom Integrated Circuits Conference.
+2013 [[https://sci-hub.se/10.1109/CICC.2013.6658460](https://sci-hub.se/10.1109/CICC.2013.6658460)]
+
+—, Ph.D. Dissertation 2015. Event-Driven Simulation Methodology for Analog/Mixed-Signal Systems [[file:///home/anon/Downloads/000000028723.pdf](file:///home/anon/Downloads/000000028723.pdf)]
+
 ---
 
 "Creating Analog Behavioral Models VERILOG-AMS ANALOG MODELING" [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/CDN_Creating_Analog_Behavioral_Models.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/CDN_Creating_Analog_Behavioral_Models.pdf)]

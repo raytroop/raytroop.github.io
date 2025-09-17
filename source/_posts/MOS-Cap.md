@@ -129,6 +129,8 @@ where *TCJ* and *TCJSW* are positive
 
 ### I-MOS vs . A-MOS
 
+> P. Andreani and S. Mattisson, "On the use of MOS varactors in RF VCOs," in *IEEE Journal of Solid-State Circuits*, vol. 35, no. 6, pp. 905-910, June 2000 [[https://sci-hub.se/10.1109/4.845194](https://sci-hub.se/10.1109/4.845194)]
+
 ![image-20250917193743547](MOS-Cap/image-20250917193743547.png)
 
 

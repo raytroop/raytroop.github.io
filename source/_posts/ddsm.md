@@ -189,6 +189,8 @@ $$
 
 which is same with $u \leq 2^{m_1+m_2} - 2^{m_2}$
 
+Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$ 
+
 ## Fractional-N PLL
 
 ![image-20250824103717743](ddsm/image-20250824103717743.png)

@@ -179,17 +179,17 @@ $$
 
 Thus
 $$
-k \leq N + \log_2(1 - \frac{1}{2^m})
+N \ge k - \log_2(1 - \frac{1}{2^m}) = k+m -\log_2(2^m-1)
 $$
 
-In above example, $N = m_1+m_2$ and $m=m_1$, we have
-$$
-2^k \leq 2^{m_1+m_2}\cdot (1-\frac{1}{2^{m_1}}) = 2^{m_1+m_2} - 2^{m_2}
-$$
-
-which is same with $u \leq 2^{m_1+m_2} - 2^{m_2}$
+> In the above Temes's sides, $N = m_1+m_2$ and $m=m_1$, we have
+> $$
+> 2^k \leq 2^{m_1+m_2}\cdot (1-\frac{1}{2^{m_1}}) = 2^{m_1+m_2} - 2^{m_2}
+> $$
 
 Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$ 
+
+
 
 ## Fractional-N PLL
 

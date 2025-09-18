@@ -7,6 +7,8 @@ categories:
 mathjax: true
 ---
 
+
+
 ![image-20250906072230725](ddsm/image-20250906072230725.png)
 
 ![image-20250906072050727](ddsm/image-20250906072050727.png)
@@ -182,6 +184,12 @@ $$
 N \ge k - \log_2(1 - \frac{1}{2^m}) = k+m -\log_2(2^m-1)
 $$
 
+suppose $m\in [1,+\infty)$
+$$
+k < k - \log_2(1 - \frac{1}{2^m}) \leq k + 1
+$$
+$N = k +1$ is sufficient for any $k$
+
 > In the above Temes's sides, $N = m_1+m_2$ and $m=m_1$, we have
 > $$
 > 2^k \leq 2^{m_1+m_2}\cdot (1-\frac{1}{2^{m_1}}) = 2^{m_1+m_2} - 2^{m_2}
@@ -248,6 +256,10 @@ where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$
 The spectrum of the high resolution digital signal $u_1$ contains the ***original baseband portion*** and its replicas located at integer multiples of $f_{s1}$, plus ***a small amount of quantization noise*** shown as a solid line 
 
 ![image-20250906170436567](ddsm/image-20250906170436567.png)
+
+
+
+![image-20250918220425431](ddsm/image-20250918220425431.png)
 
 ---
 
@@ -423,6 +435,8 @@ Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016. Understanding De
 
 ---
 
+John Rogers, Calvin Plett, and Foster Dai. 2006. Integrated Circuit Design for High-Speed Frequency Synthesis (Artech House Microwave Library). Artech House, Inc., USA. [[pdf](https://picture.iczhiku.com/resource/eetop/WYifyQGopsQZevmN.pdf)]
+
 Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology
 
 K. Hosseini and M. P. Kennedy, Minimizing Spurious Tones in Digital Delta-Sigma Modulators (Analog Circuits and Signal Processing). New York, NY, USA: Springer, 2011.
@@ -431,4 +445,3 @@ Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures
 
 Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007.
 
-John Rogers, Calvin Plett, and Foster Dai. 2006. Integrated Circuit Design for High-Speed Frequency Synthesis (Artech House Microwave Library). Artech House, Inc., USA. [[pdf](https://picture.iczhiku.com/resource/eetop/WYifyQGopsQZevmN.pdf)]

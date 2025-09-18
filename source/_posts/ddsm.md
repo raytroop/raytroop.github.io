@@ -167,7 +167,27 @@ print(vlist); print(ylist)
 print(sum(vlist)/len(vlist)); print(sum(outlist)/len(outlist)*2**m2)
 ```
 
+---
 
+![acc-wordlength.drawio](ddsm/acc-wordlength.drawio.svg)
+
+To avoid overflow
+
+$$
+\log_2(2^k + 2^{N-m}) \leq N
+$$
+
+Thus
+$$
+k \leq N + \log_2(1 - \frac{1}{2^m})
+$$
+
+In above example, $N = m_1+m_2$ and $m=m_1$, we have
+$$
+2^k \leq 2^{m_1+m_2}\cdot (1-\frac{1}{2^{m_1}}) = 2^{m_1+m_2} - 2^{m_2}
+$$
+
+which is same with $u \leq = 2^{m_1+m_2} - 2^{m_2}$
 
 ## Fractional-N PLL
 

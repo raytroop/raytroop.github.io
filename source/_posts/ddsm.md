@@ -187,7 +187,7 @@ $$
 > 2^k \leq 2^{m_1+m_2}\cdot (1-\frac{1}{2^{m_1}}) = 2^{m_1+m_2} - 2^{m_2}
 > $$
 
-Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$ 
+Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$, especially $N_{min} = k+1$ if *single-bit quantizer* $m=1$
 
 
 

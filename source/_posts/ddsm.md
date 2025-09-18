@@ -133,7 +133,7 @@ $$
 
 To avoid accumulator overflow, ***stable input range is only of a fraction of the full scale*** ( $2^{m_1+m_2}-1$)
 $$
-u \leq = 2^{m_1+m_2} - 2^{m_2}
+u \leq 2^{m_1+m_2} - 2^{m_2}
 $$
 
 ```python
@@ -187,7 +187,7 @@ $$
 2^k \leq 2^{m_1+m_2}\cdot (1-\frac{1}{2^{m_1}}) = 2^{m_1+m_2} - 2^{m_2}
 $$
 
-which is same with $u \leq = 2^{m_1+m_2} - 2^{m_2}$
+which is same with $u \leq 2^{m_1+m_2} - 2^{m_2}$
 
 ## Fractional-N PLL
 

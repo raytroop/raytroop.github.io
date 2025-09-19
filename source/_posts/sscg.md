@@ -17,9 +17,15 @@ mathjax: true
 
 ## SSC modulation profile
 
-![image-20250913194151764](sscg/image-20250913194151764.png)
+> [[https://www.synopsys.com/blogs/chip-design/understanding-pcie-spread-spectrum-clocking.html](https://www.synopsys.com/blogs/chip-design/understanding-pcie-spread-spectrum-clocking.html)]
 
----
+The most common modulation techniques are down-spread and center-spread:
+
+- Down-spread: Carrier is modulated to lower than nominal frequency by specified percentage, and not higher
+
+- Center-spread: Carrier is modulated both higher and lower than nominal frequency by specified percentage
+
+![image-20250913194151764](sscg/image-20250913194151764.png)
 
 
 

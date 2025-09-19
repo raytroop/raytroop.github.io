@@ -15,7 +15,11 @@ mathjax: true
 
 
 
+## Capacitor Bank
 
+> B. Sadhu and R. Harjani, "Capacitor bank design for wide tuning range LC VCOs: 850MHz-7.1GHz (157%)," Proceedings of 2010 IEEE International Symposium on Circuits and Systems, Paris, France, 2010 [[https://sci-hub.st/10.1109/ISCAS.2010.5537040](https://sci-hub.st/10.1109/ISCAS.2010.5537040)]
+
+*TODO* &#128197;
 
 ## Perturbation Projection Vector (PPV)
 

@@ -161,7 +161,9 @@ where $N$ is the number of bits in the output, $M$ is known as the over-sampling
 
 
 
-## quantizer levels
+## Quantizer bits
+
+*TODO* &#128197;
 
 The *greater* the number of quantizer levels, the *smaller* quantization error
 
@@ -169,7 +171,7 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 
 
 
-## quantizer overload
+## Quantizer overload
 
 ![image-20250905062939783](delta-sigma/image-20250905062939783.png)
 

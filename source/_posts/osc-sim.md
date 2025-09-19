@@ -360,5 +360,7 @@ Pietro Andreani. ISSCC 2011 T1: Integrated LC oscillators [[slides](https://www.
 
 —. ESSCIRC 2019 Tutorials: RF Harmonic Oscillators Integrated in Silicon Technologies [[https://youtu.be/k1I9nP9eEHE?si=fns9mf3aHjMJobPH](https://youtu.be/k1I9nP9eEHE?si=fns9mf3aHjMJobPH)]
 
+—. "Harmonic Oscillators in CMOS—A Tutorial Overview," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 2-17, 2021 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
+
 Jun Yin. ISSCC 2025  T10:  mm-Wave Oscillator Design
 

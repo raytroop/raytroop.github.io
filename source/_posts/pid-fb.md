@@ -1,5 +1,5 @@
 ---
-title: PID Control
+title: PID & Feedback
 date: 2024-10-07 14:10:40
 tags:
 categories:
@@ -22,9 +22,30 @@ mathjax: true
 
 
 
+## rearrangement
+
+![loop-refactor.drawio](pid-fb/loop-refactor.drawio.svg)
+
+The closed loop transfer function of $Y/X$ and $Y_1/X_1$ are almost same, except sign
+
+$$\begin{align}
+\frac{Y}{X} &= +\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)} \\
+\frac{Y_1}{X_1} &= -\frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
+\end{align}$$
+
+![loop-refactor-partion.drawio](pid-fb/loop-refactor-partion.drawio.svg)
+
+define $-Y_1=Y_n$, then
+$$
+\frac{Y_n}{X_1} = \frac{H_1(s)H_2(s)}{1+H_1(s)H_2(s)}
+$$
+![loop-refactor-partion-general.drawio](pid-fb/loop-refactor-partion-general.drawio.svg)
+
+> ![image-20240805231921946](pid-fb/image-20240805231921946.png)
+>
+> Saurabh Saxena, IIT Madras. CICC2022 Clocking for Serial Links - Frequency and Jitter Requirements, Phase-Locked Loops, Clock and Data Recovery
 
 
-*TODO* &#128197;
 
 
 
@@ -37,4 +58,6 @@ Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. Feedback Control of D
 Dawson, J. L. (2021). *A guide to feedback theory*. Cambridge University Press.
 
 Yan Lu, ISSCC2021 T10: Fundamentals of Fully Integrated Voltage Regulators [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf)]
+
+Jens Anders (University of Stuttgart, DE). ESSERC2025 Circuits Insights: The Magic of Feedback in Analog Circuit Design [[https://youtu.be/NyXuA6WZ8Hg](https://youtu.be/NyXuA6WZ8Hg)]
 

@@ -253,18 +253,6 @@ where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$
 
 ## Sigma-Delta DAC
 
-The spectrum of the high resolution digital signal $u_1$ contains the ***original baseband portion*** and its replicas located at integer multiples of $f_{s1}$, plus ***a small amount of quantization noise*** shown as a solid line 
-
-![image-20250906170436567](ddsm/image-20250906170436567.png)
-
-
-
-![image-20250918220425431](ddsm/image-20250918220425431.png)
-
----
-
-
-
 Sigma-delta digital-to-analog converters (SD DAC’s) are often used for *discrete-time signals* with *sample rate much higher than their bandwidth*
 
 - Because of the high sample rate relative to signal bandwidth, ***a very simple DAC reconstruction filter* (*Analog lowpass filter*)** suffices, often just a *one-pole RC lowpass*

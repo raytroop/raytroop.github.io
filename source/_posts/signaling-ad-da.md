@@ -94,6 +94,36 @@ $$
 
 
 
+### replicas suppression
+
+The spectrum of the high resolution digital signal $u_1$ contains the ***original baseband portion*** and its replicas located at integer multiples of $f_{s1}$, plus ***a small amount of quantization noise*** shown as a solid line 
+
+![image-20250906170436567](signaling-ad-da/image-20250906170436567.png)
+
+![image-20250918220425431](signaling-ad-da/image-20250918220425431.png)
+
+---
+
+> Nigel Redmon [[https://dsp.stackexchange.com/a/63438/59253](https://dsp.stackexchange.com/a/63438/59253)]
+
+***Inserting zeros changes nothing except what we consider the sample rate***
+
+![image-20250920072501245](signaling-ad-da/image-20250920072501245.png)
+
+![image-20250920074337023](signaling-ad-da/image-20250920074337023.png)
+
+---
+
+> Dan Boschen [[https://dsp.stackexchange.com/a/32130/59253](https://dsp.stackexchange.com/a/32130/59253)]
+
+![image-20250920075212621](signaling-ad-da/image-20250920075212621.png)
+
+---
+
+> Bourdopoulos, G. I. (2003). *Delta-Sigma modulators : modeling, design and applications*. Imperial College Press. [[pdf](https://picture.iczhiku.com/resource/eetop/shkgQaSQSIzkhbmc.pdf)]
+
+![image-20250920080910057](signaling-ad-da/image-20250920080910057.png)
+
 
 
 ## DC Gain in Interpolation Filtering

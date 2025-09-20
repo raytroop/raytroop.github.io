@@ -251,7 +251,13 @@ where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$
 
 
 
-## Sigma-Delta DAC
+## $\Delta\Sigma$ DAC
+
+### LPF (RC Filter)
+
+> Neil Robertson, Model a Sigma-Delta DAC Plus RC Filter [[https://www.dsprelated.com/showarticle/1642.php](https://www.dsprelated.com/showarticle/1642.php)]
+
+
 
 Sigma-delta digital-to-analog converters (SD DAC’s) are often used for *discrete-time signals* with *sample rate much higher than their bandwidth*
 
@@ -327,7 +333,11 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 
 
-## DAC ZOH
+### ZOH (Zero-Order Hold Models)
+
+> Neil Robertson, DAC Zero-Order Hold Models [[https://www.dsprelated.com/showarticle/1627.php](https://www.dsprelated.com/showarticle/1627.php)]
+
+
 
 ![image-20250628204404959](ddsm/image-20250628204404959.png)
 
@@ -335,12 +345,22 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 ![image-20250628203216965](ddsm/image-20250628203216965.png)
 
+### Sinc Corrector
+
+> Neil Robertson, Design a DAC sinx/x Corrector [[https://www.dsprelated.com/showarticle/1191.php](https://www.dsprelated.com/showarticle/1191.php)]
+>
+> Dan Boschen. Core Building Blocks for Software Defined Radio (SDR): DDC, DUC, NCO) [[https://lnkd.in/p/e2MtC9QK](https://lnkd.in/p/e2MtC9QK)]
+
+aka. ***Inverse Sinc Compensation***
+
+*TODO* &#128197;
 
 
 
 
 
-## oversampling & noise shaping
+
+### OSR & NS
 
 ***maximum output signal 22kHz***
 
@@ -373,6 +393,12 @@ SNR_out = 10*log10(1/(QN_in + QN_ds));
 
 
 
+## MASH implementaion
+
+> J. W. M. Rogers, F. F. Dai, M. S. Cavin and D. G. Rahn, "A multiband /spl Delta//spl Sigma/ fractional-N frequency synthesizer for a MIMO WLAN transceiver RFIC," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 3, pp. 678-689, March 2005 [[https://sci-hub.se/10.1109/JSSC.2005.843604](https://sci-hub.se/10.1109/JSSC.2005.843604)]
+
+*TODO* &#128197;
+
 
 
 ## reference
@@ -387,13 +413,11 @@ Jason Sachs. Return of the Delta-Sigma Modulators, Part 1: Modulation [[https://
 
 ---
 
-Neil Robertson, Model a Sigma-Delta DAC Plus RC Filter [[https://www.dsprelated.com/showarticle/1642.php](https://www.dsprelated.com/showarticle/1642.php)]
-
-—, Modeling a Continuous-Time System with Matlab [[https://www.dsprelated.com/showarticle/1055.php](https://www.dsprelated.com/showarticle/1055.php)]
-
-—, DAC Zero-Order Hold Models [[https://www.dsprelated.com/showarticle/1627.php](https://www.dsprelated.com/showarticle/1627.php)]
+Neil Robertson, Modeling a Continuous-Time System with Matlab [[https://www.dsprelated.com/showarticle/1055.php](https://www.dsprelated.com/showarticle/1055.php)]
 
 —, “A Simplified Matlab Function for Power Spectral Density”, DSPRelated.com, March, 2020, [[https://www.dsprelated.com/showarticle/1333.php](https://www.dsprelated.com/showarticle/1333.php)]
+
+Rick Lyons. How Discrete Signal Interpolation Improves D/A Conversion [[https://www.dsprelated.com/showarticle/167.php](https://www.dsprelated.com/showarticle/167.php)]
 
 Dan Boschen. sigma delta modulator for DAC [[https://dsp.stackexchange.com/a/88357/59253](https://dsp.stackexchange.com/a/88357/59253)]
 

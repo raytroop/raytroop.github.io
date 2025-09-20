@@ -94,6 +94,12 @@ downsampled by a factor of $M = 2$
 
 ---
 
+> Rouphael, Tony. (2009). RF and Digital Signal Processing for Software-Defined Radio. [[pdf](https://picture.iczhiku.com/resource/eetop/wYKdfwwLOSUsyVxX.pdf)]
+
+![image-20250921001932934](multirate/image-20250921001932934.png)
+
+---
+
 ![image-20250616215844032](multirate/image-20250616215844032.png)
 
 Assuming $X(e^{j\omega_1}) = U_f(e^{j\omega_1})$ with $\omega_1 = \Omega T_1$, upsampled by ratio $L$, then obtain

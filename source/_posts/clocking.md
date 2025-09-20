@@ -9,6 +9,12 @@ mathjax: true
 
 
 
+## MMD (Multimodulus Divider)
+
+*TODO* &#128197;
+
+
+
 ## Cycle Slips and Hangup
 
 > Qasim Chaudhari. What are Cycle Slips and Hangup in Phase Locked Loops?  [[https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/](https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/)]
@@ -97,12 +103,6 @@ mathjax: true
 ![image-20241222153430163](clocking/image-20241222153430163.png)
 
  frequency divider weakens the feedback and ***decrease** the phase margin*
-
-
-
-## multi-modulus divider
-
-*TODO* &#128197;
 
 
 

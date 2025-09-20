@@ -163,7 +163,7 @@ where $N$ is the number of bits in the output, $M$ is known as the over-sampling
 
 ## Quantizer bits
 
-*TODO* &#128197;
+
 
 The *greater* the number of quantizer levels, the *smaller* quantization error
 

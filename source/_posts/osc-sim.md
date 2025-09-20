@@ -21,31 +21,78 @@ mathjax: true
 
 *TODO* &#128197;
 
-## Perturbation Projection Vector (PPV)
-
-*TODO* &#128197;
 
 
+## Leeson Model
 
+> M.H. Perrott [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
+>
+> —. [[https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/ceb3d539691d5393a29af71ae98afb62_lec12.pdf](https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/ceb3d539691d5393a29af71ae98afb62_lec12.pdf)]
+
+Leeson's model is outcome of ***linearized*** VCO noise analysis
+
+![image-20250920125120068](osc-sim/image-20250920125120068.png)
+
+
+
+![image-20250920170108939](osc-sim/image-20250920170108939.png)
+
+> $$
+> Q = R_p\omega_0 C_p = \frac{R_p}{\omega_0 L}
+> $$
+>
+> where $\omega_0 = \frac{1}{\sqrt{L_pC_p}}$
+>
+> ![image-20250920170331118](osc-sim/image-20250920170331118.png)
+>
+> [[https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf](https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf)]
+
+![image-20250920171147163](osc-sim/image-20250920171147163.png)
+
+![image-20250920171411886](osc-sim/image-20250920171411886.png)
+
+
+
+## LTV Models
+
+![image-20250629065454831](osc-sim/image-20250629065454831.png)
+
+![image-20250629073305626](osc-sim/image-20250629073305626.png)
+
+
+
+> Carlo Samori, Phase Noise in LC Oscillators: From Basic Concepts to Advanced Topologies [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
+
+
+## PPV (Perturbation Projection Vector)
+
+> A. Demir and J. Roychowdhury, "A reliable and efficient procedure for oscillator PPV computation, with phase noise macromodeling applications," in *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*, vol. 22, no. 2, pp. 188-197, Feb. 2003  [[https://sci-hub.se/10.1109/TCAD.2002.806599](https://sci-hub.se/10.1109/TCAD.2002.806599)]
+>
 > Helene Thibieroz, Customer Support CIC. Using Spectre RF Noise-Aware PLL Methodology to Predict PLL Behavior Accurately  [[https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3056e59ea76165373f90152f915a829d25dabebc](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3056e59ea76165373f90152f915a829d25dabebc)]
 >
-> Aditya Varma Muppala. Perturbation Projection Vector (PPV) Theory | Oscillators 11 | MMIC 16 [[https://youtu.be/rbbHfZGT6Jo](https://youtu.be/rbbHfZGT6Jo)]
+> Aditya Varma Muppala. Perturbation Projection Vector (PPV) Theory | Oscillators 11 | MMIC 16 [[youtu.be](https://youtu.be/rbbHfZGT6Jo), [notes](https://adityamuppala.github.io/assets/Notes_YouTube/PPV_Theory_Notes.pdf)]
+
+![image-20250920101142887](osc-sim/image-20250920101142887.png)
+
+
 
 
 
 ## Limit Cycles
 
+> [[https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf)]
+
 > ***Nonlinear*** Dynamics
 
  ![image-20250622202023590](osc-sim/image-20250622202023590.png)
 
-
-
-> [[https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf)]
+![image-20250920101927173](osc-sim/image-20250920101927173.png)
 
 
 
-## ISF assumption
+## ISF model
+
+### assumption
 
 ![image-20250626210829173](osc-sim/image-20250626210829173.png)
 
@@ -59,7 +106,7 @@ mathjax: true
 
 
 
-## Periodic ISF: Noise Folding
+### Periodic ISF: Noise Folding
 
 ![image-20250629080632902](osc-sim/image-20250629080632902.png)
 
@@ -98,9 +145,9 @@ $$
 >
 > ![image-20250629102112814](osc-sim/image-20250629102112814.png)
 
+---
 
-
-### Corrections to "A General Theory of Phase Noise in Electrical Oscillators"
+***Corrections to "A General Theory of Phase Noise in Electrical Oscillators"***
 
 >  A. Hajimiri and T. H. Lee, "Corrections to "A General Theory of Phase Noise in Electrical Oscillators"," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 6, pp. 928-928, June 1998 [[https://sci-hub.se/10.1109/4.678662](https://sci-hub.se/10.1109/4.678662)]
 >
@@ -142,17 +189,7 @@ $$\begin{align}
 \end{align}$$
 
 
-
-
-![image-20250629065454831](osc-sim/image-20250629065454831.png)
-
-![image-20250629073305626](osc-sim/image-20250629073305626.png)
-
-
-
-> Carlo Samori, Phase Noise in LC Oscillators: From Basic Concepts to Advanced Topologies [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
-
-## ISF & $1/f$-noise up-conversion
+### ISF & $1/f$-noise up-conversion
 
 *TODO* &#128197;
 

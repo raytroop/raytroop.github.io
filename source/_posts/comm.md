@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-## AM, PM (asymmetric sideband)
+## AM & PM Noise
 
 ![image-20241012001704081](comm/image-20241012001704081.png)
 
@@ -60,11 +60,21 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 ---
 
-![image-20250714231239222](comm/image-20250714231239222.png)
+![image-20250920181201309](comm/image-20250920181201309.png)
 
 
 
 > Emad Hegazi , Jacob Rael , Asad Abidi, 2005. The Designer's Guide to High-Purity Oscillators [[https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf](https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf)]
+
+### Equipartition theorem
+
+> [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
+
+![image-20250920191150741](comm/image-20250920191150741.png)
+
+---
+
+![image-20250920191942665](comm/image-20250920191942665.png)
 
 
 
@@ -239,6 +249,8 @@ R. E. Ziemer and W. H. Tranter, Principles of Communications, 7th ed., Wiley, 20
 John G. Proakis and Masoud Salehi, Fundamentals of communication systems 2nd ed [[pdf](http://www.pce-fet.com/common/library/books/51/9492_[John_G._Proakis,_Masoud_Salehi]_Fundamentals_of_C(b-ok.org).pdf)]
 
 Rhee, W. and Yu, Z., 2024. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons
+
+Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007
 
 Phillips, Joel R. and Kenneth S. Kundert. "Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise." Proceedings of the IEEE 2000 Custom Integrated Circuits Conference. [[pdf](https://designers-guide.org/theory/cyclo-paper.pdf), [slides](https://designers-guide.org/theory/cyclo-preso.pdf)]
 

@@ -159,11 +159,33 @@ where $N$ is the number of bits in the output, $M$ is known as the over-sampling
 
 
 
+## Quantizer Bits & ENOB
+
+***without the delta-sigma loop***
+
+![image-20250921132712308](delta-sigma/image-20250921132712308.png)
+
+> ![image-20250921102250022](delta-sigma/image-20250921102250022.png)
+>
+> ![image-20250921124756085](delta-sigma/image-20250921124756085.png)
 
 
-## Quantizer bits
+
+***High-Order $\Delta\Sigma$ Modulators***
+
+![image-20250921133840404](delta-sigma/image-20250921133840404.png)
+
+![image-20250921134001793](delta-sigma/image-20250921134001793.png)
+
+![image-20250921134051906](delta-sigma/image-20250921134051906.png)
+
+> ![image-20250921134312753](delta-sigma/image-20250921134312753.png)
 
 
+
+
+
+---
 
 The *greater* the number of quantizer levels, the *smaller* quantization error
 
@@ -506,6 +528,8 @@ Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016). Understanding Delta-S
 Norsworthy, Steven R., Richard Schreier, Gábor C. Temes and Ieee Circuits. “Delta-sigma data converters : theory, design, and simulation.” (1997).
 
 Horowitz, P., & Hill, W. (2015). *The art of electronics* (3rd ed.). Cambridge University Press. [[pdf](https://kolegite.com/EE_library/books_and_lectures/%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0/_The%20Art%20of%20Electronics%203rd%20ed%20%5B2015%5D.pdf)]
+
+John Rogers, Calvin Plett, and Foster Dai. 2006. Integrated Circuit Design for High-Speed Frequency Synthesis (Artech House Microwave Library). Artech House, Inc., USA. [[pdf](https://picture.iczhiku.com/resource/eetop/WYifyQGopsQZevmN.pdf)]
 
 ---
 

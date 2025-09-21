@@ -349,13 +349,17 @@ y_filt= filter(b0,a,y);    % filter the DAC's output signal y
 
 > Neil Robertson, Design a DAC sinx/x Corrector [[https://www.dsprelated.com/showarticle/1191.php](https://www.dsprelated.com/showarticle/1191.php)]
 >
-> Dan Boschen. Core Building Blocks for Software Defined Radio (SDR): DDC, DUC, NCO) [[https://lnkd.in/p/e2MtC9QK](https://lnkd.in/p/e2MtC9QK)]
+> Dan Boschen. how to make CIC compensation filter [[https://dsp.stackexchange.com/a/31596/59253](https://dsp.stackexchange.com/a/31596/59253)]
+>
+> —. Core Building Blocks for Software Defined Radio (SDR): DDC, DUC, NCO) [[https://lnkd.in/p/e2MtC9QK](https://lnkd.in/p/e2MtC9QK)]
+>
+> Equalizing Techniques Flatten DAC Frequency Response [[https://www.analog.com/en/resources/technical-articles/equalizing-techniques-flatten-dac-frequency-response.html](https://www.analog.com/en/resources/technical-articles/equalizing-techniques-flatten-dac-frequency-response.html)]
 
 aka. ***Inverse Sinc Compensation***
 
 *TODO* &#128197;
 
-
+![img](ddsm/figure%202_13891.png)
 
 
 

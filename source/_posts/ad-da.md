@@ -23,6 +23,14 @@ $\Delta \Sigma$ ADC: Linearity
 
 
 
+## Evaluating DAC
+
+> Walt Kester. Evaluating High Speed DAC Performance [[https://www.analog.com/media/en/training-seminars/tutorials/mt-013.pdf](https://www.analog.com/media/en/training-seminars/tutorials/mt-013.pdf)]
+
+![image-20250921140917517](ad-da/image-20250921140917517.png)
+
+
+
 ## Dynamic Range
 
 ![image-20250825215211670](ad-da/image-20250825215211670.png)

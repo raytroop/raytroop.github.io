@@ -399,6 +399,8 @@ SNR_out = 10*log10(1/(QN_in + QN_ds));
 
 > Y. Liu, J. Gao and X. Yang, "24-bit low-power low-cost digital audio sigma-delta DAC," in Tsinghua Science and Technology, vol. 16, no. 1, pp. 74-82, Feb. 2011 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6077939](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6077939)]
 
+![image-20250922224650348](ddsm/image-20250922224650348.png)
+
 
 ```matlab
 snr_if = 144;
@@ -409,8 +411,12 @@ n_if = 1/10^(snr_if/10);
 n_ds = 1/10^(snr_ds/10);
 n_ana = 1/10^(snr_ana/10);
 
-snr_tot = 10*log10(1/(n_if + n_ds + n_ana)) % 95
+snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
+% 
+% snr_tot =
+% 
+%    94.9995
 ```
 
 

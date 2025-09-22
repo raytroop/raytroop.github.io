@@ -43,6 +43,9 @@ mathjax: true
 
 ![image-20250907005625071](ss-insight/image-20250907005625071.png)
 
+$$
+\mathcal{ifft} = \frac{\mathcal{fft}}{N}
+$$
 ![image-20250907005201992](ss-insight/image-20250907005201992.png)
 
 ```python
@@ -107,15 +110,23 @@ Pulse Code Modulation (PCM) is a method for digitally representing analog signal
 > **Joules** are a unit of work or *energy*. **Watts** are a unit of *power* which is the rate at which energy is generated or consumed.
 
 
+
 ## modulation depth
 
 The ***modulation index*** (or ***modulation depth***) of a modulation scheme describes
 by how much the modulated variable of the carrier signal varies around its unmodulated level
 
+*TODO* &#128197;
+
+
+
 ## Image frequency
 
 
 > Antonio Liscidini, ESSCIRC 2019 Tutorials: Ultra Low Power Receivers [[https://youtu.be/OJRB8g4vUZw](https://youtu.be/OJRB8g4vUZw)]
+
+*TODO* &#128197;
+
 
 
 ##  Inspection of Phase Noise
@@ -214,6 +225,28 @@ plot(f, 10*log10(pxx_bin));
 xlabel('Frequency (Hz)');
 ylabel('dB');
 title('PSD of binomial distribution')
+```
+
+---
+
+![image-20250922225811644](ss-insight/image-20250922225811644.png)
+
+```matlab
+val = randn(1, 2^20,1);
+val_abs = abs(val);
+val_abs_avg = mean(val_abs);
+subplot(2,2,1)
+histogram(val);
+title('x_{norm} distribution'); grid on
+
+subplot(2,2,2)
+histogram(val_abs);
+title('|x_{norm}| distribution')
+
+subplot(2,2,[3 4])
+[pxx, f] = pwelch(val_abs - val_abs_avg, 512, [], [], 1);
+plot(f, 10*log10(pxx), LineWidth=4); grid on
+title('psd (dB)')
 ```
 
 

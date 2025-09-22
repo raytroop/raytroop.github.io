@@ -20,6 +20,14 @@ mathjax: true
 > Rinaldo Castello, "LINEARIZATION TECHNIQUES FOR PUSH-PULL AMPLIFIERS" [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/AMPLIFIERS_Stanf_Tor_2016_Last.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/AMPLIFIERS_Stanf_Tor_2016_Last.pdf)]
 
 
+## Rail-to-Rail Op amp
+
+> [[https://mixsignal.wordpress.com/wp-content/uploads/2013/03/689-604rail2rail.pdf](https://mixsignal.wordpress.com/wp-content/uploads/2013/03/689-604rail2rail.pdf)]
+>
+> [[https://toshiba.semicon-storage.com/ap-en/semiconductor/knowledge/faq/linear_opamp/what-does-rail-to-rail-mean.html](https://toshiba.semicon-storage.com/ap-en/semiconductor/knowledge/faq/linear_opamp/what-does-rail-to-rail-mean.html)]
+
+
+*TODO* &#128197;
 
 ## Noise and Distortion
 

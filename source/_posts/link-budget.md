@@ -111,7 +111,9 @@ To understand the impact of the clock jitter on the performance of a wireline sy
 
 
 
-## Linearity & Even-Order Distortion
+## Nonlinear & Intermodulations
+
+> ***Even-Order Distortion***
 
 **Odd**-order distortion: **symmetry**
 
@@ -128,7 +130,7 @@ To understand the impact of the clock jitter on the performance of a wireline sy
 >
 > B. Razavi, "Design considerations for direct-conversion receivers," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 44, no. 6, pp. 428-435, June 1997 [[http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf)]
 
-
+---
 
 > [[http://cc.ee.ntu.edu.tw/~ecl/Courses/105AIC/lock/Analog_Chapter_09_Nonlinearity%20and%20Mismatch.pdf](http://cc.ee.ntu.edu.tw/~ecl/Courses/105AIC/lock/Analog_Chapter_09_Nonlinearity%20and%20Mismatch.pdf)]
 >

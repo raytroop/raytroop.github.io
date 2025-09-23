@@ -35,6 +35,8 @@ $\Delta \Sigma$ ADC: Linearity
 
 Harmonics can appear at "arbitrary" frequencies due to **aliasing**
 
+![image-20250924003112739](ad-da/image-20250924003112739.png)
+
 
 
 
@@ -254,6 +256,10 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 > Krämer, M. et al. (2015) *High-resolution SAR A/D converters with loop-embedded input buffer*. dissertation. Available at: [[http://purl.stanford.edu/fc450zc8031](http://purl.stanford.edu/fc450zc8031)].
 >
 > sarthak, "Visualising redundancy in a 1.5 bit pipeline ADC“ [[https://electronics.stackexchange.com/a/523489/233816](https://electronics.stackexchange.com/a/523489/233816)]
+
+---
+
+
 
 
 

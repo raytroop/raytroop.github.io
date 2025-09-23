@@ -110,10 +110,21 @@ To understand the impact of the clock jitter on the performance of a wireline sy
 
 
 
-
 ## Nonlinear & Intermodulations
 
-> ***Even-Order Distortion***
+> S. Stegemann, W. Mathis. MOS-AK 2012: Interference and Distortion Analysis for Nonlinear Analog Circuits [[https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf](https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf)]
+>
+> Ali Sheikholeslami. A-SSCC 2024 insight: Noise and Distortion,  [[https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4](https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4)]
+>
+> B. Razavi, "Design considerations for direct-conversion receivers," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 44, no. 6, pp. 428-435, June 1997 [[http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf)]
+
+![image-20250924003304052](link-budget/image-20250924003304052.png)
+
+![image-20250924003422546](link-budget/image-20250924003422546.png)
+
+
+
+### Even-Order Distortion
 
 **Odd**-order distortion: **symmetry**
 
@@ -122,13 +133,6 @@ To understand the impact of the clock jitter on the performance of a wireline sy
 ![image-20250613235048524](link-budget/image-20250613235048524.png)
 
 
-
-
-> S. Stegemann, W. Mathis. MOS-AK 2012: Interference and Distortion Analysis for Nonlinear Analog Circuits [[https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf](https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf)]
->
-> Ali Sheikholeslami. A-SSCC 2024 insight: Noise and Distortion,  [[https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4](https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4)]
->
-> B. Razavi, "Design considerations for direct-conversion receivers," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 44, no. 6, pp. 428-435, June 1997 [[http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf)]
 
 ---
 

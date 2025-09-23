@@ -184,6 +184,12 @@ $$
 
 
 
+### MSB with noise simualtion
+
+![image-20250924004048876](sar/image-20250924004048876.png)
+
+
+
 ## CDAC
 
 The *charge redistribution capacitor network* is used to sample the input signal and serves as a

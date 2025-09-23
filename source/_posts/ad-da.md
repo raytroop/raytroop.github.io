@@ -29,6 +29,13 @@ $\Delta \Sigma$ ADC: Linearity
 
 ![image-20250921140917517](ad-da/image-20250921140917517.png)
 
+## THD
+
+> EE315B VLSI Data Conversion Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SHKTshjlyaJEWCVx.pdf)]
+
+Harmonics can appear at "arbitrary" frequencies due to **aliasing**
+
+
 
 
 ## Dynamic Range

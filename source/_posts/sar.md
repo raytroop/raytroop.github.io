@@ -322,6 +322,14 @@ $$
 
 
 
+### CDAC structure
+
+CDAC with constant common-mode voltage
+
+![cdac_vcm_retain.drawio](sar/cdac_vcm_retain.drawio.svg)
+
+
+
 ## Comparator
 
 ### Comparator input cap effect

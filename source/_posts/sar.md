@@ -66,10 +66,10 @@ $$
 D_{out} = s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1)\cdot s(1)
 $$
 
-| i    | M    | M-1          | M-2          | ...       | 2          | 1          | 0    |
-| ---- | ---- | ------------ | ------------ | --------- | ---------- | ---------- | ---- |
-| b[i] |      | ***b[M-1]*** | ***b[M-2]*** | ***...*** | ***b[2]*** | ***b[1]*** | b[0] |
-| s[i] | s(M) | ***s(M-1)*** | ***s(M-2)*** | ***...*** | ***s(2)*** | ***s(1)*** |      |
+| i        | M      | M-1          | M-2          | ...       | 2          | 1          | 0      |
+| -------- | ------ | ------------ | ------------ | --------- | ---------- | ---------- | ------ |
+| **b[i]** |        | ***b[M-1]*** | ***b[M-2]*** | ***...*** | ***b[2]*** | ***b[1]*** | *b[0]* |
+| **s[i]** | *s(M)* | ***s(M-1)*** | ***s(M-2)*** | ***...*** | ***s(2)*** | ***s(1)*** |        |
 
 ![image-20250909211030234](sar/image-20250909211030234.png)
 
@@ -84,6 +84,28 @@ D_{out} &= s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1) \\
 &= 2^{N-1} + \sum_{i=1}^{N-1}2^i\cdot b[i] - \sum_{i=0}^{N-2}2^{i} + (b[0] -1) \\
 &= \sum_{i=0}^{N-1} b[i] \cdot 2^i
 \end{align}$$
+
+
+
+---
+
+alternative method for d2a & CDAC equivalent weight
+
+| i        | M-1       | M-2       | ...       | 2       | 1       | 0      |
+| -------- | --------- | --------- | --------- | ------- | ------- | ------ |
+| **b[i]** | *b[M-1]*  | *b[M-2]*  | ***...*** | *b[2]*  | *b[1]*  | *b[0]* |
+| **w[i]** | *w[M-1]*  | *w[M-2]*  | ***...*** | *w[2]*  | *w[1]*  |        |
+| **W[i]** | *2w[M-1]* | *2w[M-2]* | ***...*** | 2*w[2]* | *2w[1]* | *w[1]* |
+
+$$\begin{align}
+D_{out} &= \sum_{i=1}^{M-1}(2b_i -1)w_i + (b_0-1)w_1 \\
+&= \sum_{i=1}^{M-1}b_i\cdot 2w_i + b_0\cdot w_1 -\sum_{i=1}^{M-1}w_i -w_1 \\
+&= \left[\sum_{i=1}^{M-1}b_i\cdot 2w_i + b_0\cdot w_1\right] - \frac{1}{2}\left[\sum_{i=1}^{M-1}2w_i +w_1 + w_1\right] \\
+&= \sum_{i=0}^{M-1}b_i\cdot W_i  - \frac{1}{2}\left[\sum_{i=0}^{M-1}W_i + W_0\right]
+\end{align}$$
+
+where $W_i = 2w_i$ for $i\in [1,M-1]$ and $W_0 = w_1$
+
 
 
 ### Error Tolerance Window
@@ -324,11 +346,11 @@ $$
 
 ### CDAC structure
 
-CDAC with constant common-mode voltage
+***CDAC with constant common-mode voltage***
 
 ![cdac_vcm_retain.drawio](sar/cdac_vcm_retain.drawio.svg)
 
-
+![image-20250924221209720](sar/image-20250924221209720.png)
 
 ## Comparator
 

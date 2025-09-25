@@ -94,17 +94,17 @@ alternative method for d2a & CDAC equivalent weight
 | i        | M-1       | M-2       | ...       | 2       | 1       | 0      |
 | -------- | --------- | --------- | --------- | ------- | ------- | ------ |
 | **b[i]** | *b[M-1]*  | *b[M-2]*  | ***...*** | *b[2]*  | *b[1]*  | *b[0]* |
-| **w[i]** | *w[M-1]*  | *w[M-2]*  | ***...*** | *w[2]*  | *w[1]*  |        |
-| **W[i]** | *2w[M-1]* | *2w[M-2]* | ***...*** | 2*w[2]* | *2w[1]* | *w[1]* |
+| **w[i]** |           | *w[M-2]*  | ***...*** | *w[2]*  | *w[1]*  | *w[0]* |
+| **W[i]** | *2w[M-2]* | *2w[M-1]* | ***...*** | 2*w[1]* | *2w[0]* | *w[0]* |
 
 $$\begin{align}
-D_{out} &= \sum_{i=1}^{M-1}(2b_i -1)w_i + (b_0-1)w_1 \\
-&= \sum_{i=1}^{M-1}b_i\cdot 2w_i + b_0\cdot w_1 -\sum_{i=1}^{M-1}w_i -w_1 \\
-&= \left[\sum_{i=1}^{M-1}b_i\cdot 2w_i + b_0\cdot w_1\right] - \frac{1}{2}\left[\sum_{i=1}^{M-1}2w_i +w_1 + w_1\right] \\
+D_{out} &= \sum_{i=1}^{M-1}(2b_i -1)w_{i-1} + (b_0-1)w_0 \\
+&= \sum_{i=1}^{M-1}b_i\cdot 2w_{i-1} + b_0\cdot w_0 -\sum_{i=1}^{M-1}w_{i-1} -w_0 \\
+&= \left[\sum_{i=1}^{M-1}b_i\cdot 2w_{i-1} + b_0\cdot w_0\right] - \frac{1}{2}\left[\sum_{i=1}^{M-1}2w_{i-1} +w_0 + w_0\right] \\
 &= \sum_{i=0}^{M-1}b_i\cdot W_i  - \frac{1}{2}\left[\sum_{i=0}^{M-1}W_i + W_0\right]
 \end{align}$$
 
-where $W_i = 2w_i$ for $i\in [1,M-1]$ and $W_0 = w_1$
+where $W_i = 2w_{i-1}$ for $i\in [M-1,1]$ and $W_0 = w_0$
 
 
 

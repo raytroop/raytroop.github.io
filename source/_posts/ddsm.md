@@ -427,6 +427,10 @@ snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
 ![image-20250926204309028](ddsm/image-20250926204309028.png)
 
+---
+
+***(a) a fractional accumulator, and (b) a triple-loop $\Delta\Sigma$ accumulator for $N(z) = 100 + 1/32$***
+
 > $n=5$
 
 ![image-20250926204339385](ddsm/image-20250926204339385.png)

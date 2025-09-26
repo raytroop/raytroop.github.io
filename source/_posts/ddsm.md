@@ -421,11 +421,93 @@ snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
 
 
-## MASH implementaion
+## MASH 1-1-1  implementaion
 
 > J. W. M. Rogers, F. F. Dai, M. S. Cavin and D. G. Rahn, "A multiband /spl Delta//spl Sigma/ fractional-N frequency synthesizer for a MIMO WLAN transceiver RFIC," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 3, pp. 678-689, March 2005 [[https://sci-hub.se/10.1109/JSSC.2005.843604](https://sci-hub.se/10.1109/JSSC.2005.843604)]
 
-*TODO* &#128197;
+![image-20250926204309028](ddsm/image-20250926204309028.png)
+
+> $n=5$
+
+![image-20250926204339385](ddsm/image-20250926204339385.png)
+
+![image-20250926205608397](ddsm/image-20250926205608397.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.fft as fft
+import scipy.signal.windows as windows
+
+def acc_nbit(din, nbit=5, ncycles=2**10):
+    mod = 2**nbit
+    acc = 0
+    eq = 0
+    colist = []
+    eqlist = []
+    for i in range(ncycles):
+        acc = din[i] + eq
+        eq = acc % mod	# n+1 accumulator
+        #print(acc, eq)
+        co_tmp = int(acc >= mod)
+        colist.append(co_tmp)
+        eqlist.append(eq)
+    return colist, eqlist
+
+Ncyl = 2**16
+cin1 = [1]*Ncyl
+
+c1,eq1 = acc_nbit(cin1, ncycles=Ncyl)
+cin2 = [0,*eq1[:-1]]
+#cin2 = eq1
+
+c2,eq2 = acc_nbit(cin2, ncycles=Ncyl)
+cin3 = [0,*eq2[:-1]]
+#cin3 =  eq2
+
+c3,eq3 = acc_nbit(cin3, ncycles=Ncyl)
+
+ctot = []
+
+for i in range(2, Ncyl):
+    # C1(z) + (1 − z^−1)C2(z) + (1 − z^−1)^2 C3(z)
+    ctot_cur = c1[i] + c2[i]-c2[i-1] + c3[i]-2*c3[i-1] + c3[i-2]
+    ctot.append(ctot_cur)
+
+print(sum(c1)/len(c1))      # 0.03125
+print(sum(ctot)/len(ctot))  # 0.03128147221289712
+
+plt.figure(figsize=(20,8))
+plt.subplot(1,2,1)
+plt.plot(c1[:200], 'o-', label='c1')
+plt.legend(loc='upper left')
+plt.subplot(1,2,2)
+plt.plot(ctot[:200], 'o-', label='ctot')
+plt.legend(loc='upper left')
+
+
+Ntot = int(2**np.floor(np.log2(len(ctot))))
+c1_4fft = np.array(c1[:Ntot])
+ctot_4fft = np.array(ctot[:Ntot])
+whann = windows.hann(Ntot)
+Y_c1 = abs(fft.rfft(c1_4fft*whann))/sum(whann)
+Y_ctot = abs(fft.rfft(ctot_4fft*whann))/sum(whann)
+
+print(Y_c1[0])      # 0.031250000002717625
+print(Y_ctot[0])    # 0.031249999999526525
+
+plt.figure(figsize=(20,8))
+plt.subplot(2, 1, 1)
+_, stemlines, _ = plt.stem(Y_c1, markerfmt=" ", label='c1')
+plt.setp(stemlines, 'linewidth', 4)
+plt.ylim([0,0.04]); plt.grid(True); plt.legend(loc='upper left')
+plt.subplot(2, 1, 2)
+_, stemlines, _ = plt.stem(Y_ctot, markerfmt=" ", label='ctot')
+plt.setp(stemlines, 'linewidth', 4)
+plt.ylim([0,0.04]); plt.grid(True); plt.legend(loc='upper left')
+
+plt.show()
+```
 
 
 

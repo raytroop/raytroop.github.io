@@ -9,9 +9,7 @@ mathjax: true
 
 
 
-## MMD (Multimodulus Divider)
 
-*TODO* &#128197;
 
 
 
@@ -20,6 +18,93 @@ mathjax: true
 > Qasim Chaudhari. What are Cycle Slips and Hangup in Phase Locked Loops?  [[https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/](https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/)]
 
 *TODO* &#128197;
+
+
+
+## Frequency Divider
+
+> Gunnman, Kiran, and Mohammad Vahidfar. *Selected Topics in RF, Analog and Mixed Signal Circuits and Systems*. Aalborg: River Publishers, 2017
+
+![image-20240803225130324](clocking/image-20240803225130324.png)
+
+> Large values of N lowers the loop BW which is bad for jitter
+
+---
+
+### MMD (Multimodulus Divider)
+
+*TODO* &#128197;
+
+
+
+### phase margin impact
+
+ **type-I PLLs**
+
+![image-20241222152826102](clocking/image-20241222152826102.png)
+
+![image-20241222152916367](clocking/image-20241222152916367.png)
+
+ frequency divider weakens the feedback and ***increases** the phase margin*
+
+
+
+---
+
+**type-II PLLs**
+
+![image-20241222153430163](clocking/image-20241222153430163.png)
+
+ frequency divider weakens the feedback and ***decrease** the phase margin*
+
+### DIV 1.5
+
+> Xu, Haojie & Luo, Bao & Jin, Gaofeng & Feng, Fei & Guo, Huanan & Gao, Xiang & Deo, Anupama. (2022). A Flexible 0.73-15.5 GHz Single LC VCO Clock Generator in 12 nm CMOS. IEEE Transactions on Circuits and Systems II: Express Briefs. 69. 4238 - 4242. [[https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS](https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS)]
+
+*TODO* &#128197;
+
+
+
+### phase noise & jitter
+
+> [[Timing 101: The Case of the Jitterier Divided-Down Clock, Silicon Labs]](https://community.silabs.com/s/share/a5U1M000000knweUAA/timing-101-the-case-of-the-jitterier-divideddown-clock?language=en_US)
+>
+> [[How division impacts spurs, phase noise, and phase]](https://www.planetanalog.com/how-division-impacts-spurs-phase-noise-and-phase/)
+>
+> [[Phase Noise Theory: Ideal Frequency Multipliers and Dividers]](http://www.ko4bb.com/~bruce/IdealFreqMultDiv.html)
+
+![image-20241013212542173](clocking/image-20241013212542173.png)
+
+- Multiplying the frequency of a signal by a factor of N using an **ideal** frequency multiplier increases the phase noise of the multiplied signal by $20\log(N)$ dB. 
+- Similarly dividing a signal frequency by $N$ reduces the phase noise of the output signal by $20\log(N)$  dB
+
+> The sideband offset from the carrier in the frequency multiplied/divided signal is the same as for the original signal.
+
+
+
+#### $20\log (N)$ Rule
+
+If the carrier frequency of a clock is divided down by a factor of $N$ then we expect the phase noise to decrease by $20\log(N)$.The primary assumption here is a *noiseless* conventional digital divider.
+
+> The $20\log(N)$ rule only applies to *phase noise* and *not integrated phase noise or phase jitter*. Phase jitter should generally measure about the **same**.
+
+
+
+![20log(N).png](clocking/rtaImage-1720945161770-5.png)
+
+#### What About Phase Jitter?
+
+We integrate *SSB* phase noise *L*(f) [dBc/Hz] to obtain rms phase jitter in seconds as follows for “brick wall” integration from f1 to f2 offset frequencies in Hz and where f0 is the carrier or clock frequency.
+
+![phase jitter.png](clocking/rtaImage.png)
+
+Note that the rms phase jitter in seconds is inversely proportional to f0. When frequency is divided down, the phase noise, *L*(f), goes down by a factor of 20log(N). However, since the frequency goes down by N also, the phase jitter expressed in units of time is constant. 
+
+Therefore, phase noise curves, related by 20log(N), with the same phase noise shape over the *jitter bandwidth*, are expected to yield the same phase jitter in seconds.
+
+
+
+
 
 
 
@@ -84,25 +169,7 @@ mathjax: true
 
 
 
-##  frequency divider & phase margin
 
- **type-I PLLs**
-
-![image-20241222152826102](clocking/image-20241222152826102.png)
-
-![image-20241222152916367](clocking/image-20241222152916367.png)
-
- frequency divider weakens the feedback and ***increases** the phase margin*
-
-
-
----
-
-**type-II PLLs**
-
-![image-20241222153430163](clocking/image-20241222153430163.png)
-
- frequency divider weakens the feedback and ***decrease** the phase margin*
 
 
 
@@ -157,31 +224,6 @@ A:  *TODO* &#128197;
 
 
 
-## SSC intuition
-
-Due to $f= K_{vco}V_{ctrl}$, its derivate to $t$ is
-
-$$
-\frac{df}{dt} = K_{vco}\frac{dV_{ctrl}}{dt}
-$$
-
-For chargepump PLL, $dV_{ctrl} = \frac{\phi_e I_{cp}}{2\pi C}dt$, that is
-$$
-\frac{df}{dt} = K_{vco}  \frac{\phi_e I_{cp}}{2\pi C}
-$$
-
-
-
-
-
-## DIV 1.5
-
-*TODO* &#128197;
-
-> Xu, Haojie & Luo, Bao & Jin, Gaofeng & Feng, Fei & Guo, Huanan & Gao, Xiang & Deo, Anupama. (2022). A Flexible 0.73-15.5 GHz Single LC VCO Clock Generator in 12 nm CMOS. IEEE Transactions on Circuits and Systems II: Express Briefs. 69. 4238 - 4242. [[https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS](https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS)]
-
-
-
 
 
 ## False locking
@@ -206,24 +248,6 @@ $$
 - edge of ck0 is affected differently by ck1
 
 - edge of ck1 is affected equally by ck0
-
-
-
-
-
-## Feedback Dividers
-
-![image-20240803225130324](clocking/image-20240803225130324.png)
-
-- Large values of N lowers the loop BW which is bad for jitter
-
-
-
-
-
-> Gunnman, Kiran, and Mohammad Vahidfar. *Selected Topics in RF, Analog and Mixed Signal Circuits and Systems*. Aalborg: River Publishers, 2017.
-
-
 
 
 
@@ -274,44 +298,6 @@ and $\phi _e(\infty) = 0$
 
 ![image-20250831230937353](clocking/image-20250831230937353.png)
 
-## Divider phase noise & jitter
-
-![image-20241013212542173](clocking/image-20241013212542173.png)
-
-- Multiplying the frequency of a signal by a factor of N using an **ideal** frequency multiplier increases the phase noise of the multiplied signal by $20\log(N)$ dB. 
-- Similarly dividing a signal frequency by N reduces the phase noise of the output signal by $20\log(N)$  dB
-
-> The sideband offset from the carrier in the frequency multiplied/divided signal is the same as for the original signal.
-
-
-
-### The 20log(N) Rule
-
-If the carrier frequency of a clock is divided down by a factor of $N$ then we expect the phase noise to decrease by $20\log(N)$.The primary assumption here is a *noiseless* conventional digital divider.
-
-> The $20\log(N)$ rule only applies to *phase noise* and *not integrated phase noise or phase jitter*. Phase jitter should generally measure about the **same**.
-
-
-
-![20log(N).png](clocking/rtaImage-1720945161770-5.png)
-
-### What About Phase Jitter?
-
-We integrate *SSB* phase noise *L*(f) [dBc/Hz] to obtain rms phase jitter in seconds as follows for “brick wall” integration from f1 to f2 offset frequencies in Hz and where f0 is the carrier or clock frequency.
-
-![phase jitter.png](clocking/rtaImage.png)
-
-Note that the rms phase jitter in seconds is inversely proportional to f0. When frequency is divided down, the phase noise, *L*(f), goes down by a factor of 20log(N). However, since the frequency goes down by N also, the phase jitter expressed in units of time is constant. 
-
-Therefore, phase noise curves, related by 20log(N), with the same phase noise shape over the *jitter bandwidth*, are expected to yield the same phase jitter in seconds.
-
-
-
-> [[Timing 101: The Case of the Jitterier Divided-Down Clock, Silicon Labs]](https://community.silabs.com/s/share/a5U1M000000knweUAA/timing-101-the-case-of-the-jitterier-divideddown-clock?language=en_US)
->
-> [[How division impacts spurs, phase noise, and phase]](https://www.planetanalog.com/how-division-impacts-spurs-phase-noise-and-phase/)
->
-> [[Phase Noise Theory: Ideal Frequency Multipliers and Dividers]](http://www.ko4bb.com/~bruce/IdealFreqMultDiv.html)
 
 
 

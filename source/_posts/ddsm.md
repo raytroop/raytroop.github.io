@@ -433,7 +433,7 @@ snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
 > $n=5$
 
-![image-20250926204339385](ddsm/image-20250926204339385.png)
+![image-20250927091310965](ddsm/image-20250927091310965.png)
 
 ![image-20250926205608397](ddsm/image-20250926205608397.png)
 
@@ -451,7 +451,7 @@ def acc_nbit(din, nbit=5, ncycles=2**10):
     eqlist = []
     for i in range(ncycles):
         acc = din[i] + eq
-        eq = acc % mod	# n+1 accumulator
+        eq = acc % mod
         #print(acc, eq)
         co_tmp = int(acc >= mod)
         colist.append(co_tmp)
@@ -484,10 +484,10 @@ print(sum(ctot)/len(ctot))  # 0.03128147221289712
 plt.figure(figsize=(20,8))
 plt.subplot(1,2,1)
 plt.plot(c1[:200], 'o-', label='c1')
-plt.legend(loc='upper left')
+plt.legend(loc='upper left'); plt.grid(True)
 plt.subplot(1,2,2)
 plt.plot(ctot[:200], 'o-', label='ctot')
-plt.legend(loc='upper left')
+plt.legend(loc='upper left'); plt.grid(True)
 
 
 Ntot = int(2**np.floor(np.log2(len(ctot))))

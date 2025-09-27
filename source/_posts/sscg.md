@@ -15,6 +15,10 @@ mathjax: true
 
 ![image-20250913192820120](sscg/image-20250913192820120.png)
 
+---
+
+
+
 ## SSC modulation profile
 
 > [[https://www.synopsys.com/blogs/chip-design/understanding-pcie-spread-spectrum-clocking.html](https://www.synopsys.com/blogs/chip-design/understanding-pcie-spread-spectrum-clocking.html)]
@@ -36,6 +40,18 @@ The most common modulation techniques are down-spread and center-spread:
 ![image-20250903230209570](sscg/image-20250903230209570.png)
 
 
+
+---
+
+Due to $f= K_{vco}V_{ctrl}$, its derivate to $t$ is
+$$
+\frac{df}{dt} = K_{vco}\frac{dV_{ctrl}}{dt}
+$$
+
+For chargepump PLL, $dV_{ctrl} = \frac{\phi_e I_{cp}}{2\pi C}dt$, that is
+$$
+\frac{df}{dt} = K_{vco}  \frac{\phi_e I_{cp}}{2\pi C}
+$$
 
 
 
@@ -116,6 +132,105 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 ### Separate Reference Clocks with No SSC (SRNS) 
 
 ![image-20250814011354803](sscg/image-20250814011354803.png)
+
+
+
+## SSC on digital CDR
+
+> Gerry Talbot, "Impact of SSC on CDR" , April 12th, 2012,  PCI Express EWG
+
+![image-20250927094630403](sscg/image-20250927094630403.png)
+
+![ssc-cdr.drawio](sscg/ssc-cdr.drawio.svg)
+
+| n     | 0    | 1                    | 2                     | 3                     | ...  |
+| ----- | ---- | -------------------- | --------------------- | --------------------- | ---- |
+| $A_0$ | $0$  | $k_0\cdot \Delta$    | $k_0\cdot 2\Delta$    | $k_0\cdot 3\Delta$    |      |
+| $A_1$ | $0$  | $k_1k_0\cdot \Delta$ | $k_1k_0\cdot 3\Delta$ | $k_1k_0\cdot 6\Delta$ |      |
+
+$$\begin{align}
+f[n] &= \frac{A_1[n]-A_1[n-1]}{T} = \frac{k_1\cdot A_0[n]}{T} \\
+\Delta f [n] & = \frac{f[n] -f[n-1]}{T} = \frac{k_0k_1\cdot \Delta}{T^2}
+\end{align}$$
+
+> the `polyfit` of $f[n]$ is consistent with $\Delta f [n]$
+
+![image-20250927172529324](sscg/image-20250927172529324.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+f0 = 1
+fa = f0/16
+fs = 32*f0
+
+Mc = 1000
+t = np.arange(0, 1/f0*Mc, 1/fs)
+phi_raw = 2*np.pi*f0*t
+y = np.sin(phi_raw)
+
+plt.figure(figsize=(24,12))
+plt.subplot(3, 1, 1)
+plt.plot(t, y); plt.title(r'$\sin(\omega_0 t)$', fontsize='xx-large')
+
+k0 = 0.25
+k1 = 0.36
+
+A0 = [0]
+A1 = [0]
+N = int(Mc*fa/f0)
+delta = 0.1
+dlsb = delta * 2*np.pi
+
+f_deriv_formula = k0*k1*delta*fa**2
+print(f'freq derivation by formula = {f_deriv_formula:.3e}')
+
+for i in range(N):
+    A1.append(A1[-1] + k1*A0[-1])
+    A0.append(A0[-1] + k0*dlsb)
+
+
+phi_A1 = np.ones((len(A1), int(fs/fa)))
+A1_arr  = np.array(A1).reshape((len(A1), 1))
+phi_A1 = phi_A1 * A1_arr
+phi_A1 = phi_A1.flatten()
+
+t_phi = np.arange(phi_A1.shape[0])*1/fs
+
+plt.subplot(3, 1, 2)
+plt.plot(t_phi, phi_A1); plt.title(r'$\Delta \Phi(t)$', fontsize='xx-large')
+
+Ntot = min(t.shape[0], t_phi.shape[0])
+t_tot = t_phi[:Ntot]
+phi_tot = phi_raw[:Ntot] + phi_A1[:Ntot]
+y_tot = np.sin(phi_tot)
+
+phi_tot_deriv1 = (phi_tot[1:] - phi_tot[:-1])*fs/2/np.pi
+phi_tot_deriv2 = (phi_tot_deriv1[1:] - phi_tot_deriv1[:-1])*fs
+
+f_deriv_polyfit, _ = np.polyfit(np.arange(phi_tot_deriv1.shape[0])*1/fs, phi_tot_deriv1, 1)
+print(f'freq derivation by polyfit = {f_deriv_polyfit:.3e}')
+
+plt.subplot(3, 1, 3)
+plt.plot(t_tot, y_tot); plt.xlabel(r'$t$', fontsize=24); plt.title(r'$\sin(\omega_0 t+\Delta \Phi(t))$', fontsize='xx-large')
+plt.show()
+
+y_raw_export = np.zeros((t.shape[0], 2))
+y_raw_export[:,0] = t
+y_raw_export[:,1] = y
+
+y_tot_export = np.zeros((t.shape[0], 2))
+y_tot_export[:,0] = t_tot
+y_tot_export[:,1] = y_tot
+
+np.savetxt('y_raw.csv', y_raw_export, delimiter=',')
+np.savetxt('y_tot.csv', y_tot_export, delimiter=',')
+
+# freq derivation by formula = 3.516e-05
+# freq derivation by polyfit = 3.513e-05
+```
 
 
 

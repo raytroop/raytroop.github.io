@@ -71,7 +71,7 @@ $$
 $$
 
 
-> Taylor’s Series of sin x [[pdf](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/242ad6a22b86b20799afc7f207cd4271_MIT18_01SCF10_Ses99c.pdf)]
+> Taylor’s Series of $\sin x$ [[pdf](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/242ad6a22b86b20799afc7f207cd4271_MIT18_01SCF10_Ses99c.pdf)]
 >
 > ![image-20250913093652192](signaling-ad-da/image-20250913093652192.png)
 

@@ -7,6 +7,18 @@ categories:
 mathjax: true
 ---
 
+
+
+## `strobeperiod`
+
+> ADC Verification Rapid Adoption Kit (RAK)
+
+![image-20250928201210762](ade/image-20250928201210762.png)
+
+![image-20250928194734935](ade/image-20250928194734935.png)
+
+
+
 ## changing Library Reference
 
 

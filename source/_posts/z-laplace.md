@@ -841,7 +841,63 @@ title('Error of discrete-time step response'),xlabel('seconds')
 
 ### Bilinear Transformation (`bilinear`)
 
-*TODO* &#128197;
+> The Filter Wizard Substack: "Countdown to s-to-z…" [[https://filterwizard.substack.com/p/countdown-to-s-to-z](https://filterwizard.substack.com/p/countdown-to-s-to-z)]
+
+![image-20250928210313814](z-laplace/image-20250928210313814.png)
+
+![image-20250928222031796](z-laplace/image-20250928222031796.png)
+
+```matlab
+a2 = 9.751405; a1 = 11.5677; a0 = 1.290113;
+b2 = 0.118385; b1 = 30.27418; b0 = 0.502194;
+
+fs = 1e3; % sampling rate 1KHz
+
+num0 = (4*fs^2*a2 + 2*fs*a1 + a0)/(4*fs^2*b2 + 2*fs*b1 + b0);
+num1 = (-8*fs^2*a2 + 2*a0)/(4*fs^2*b2 + 2*fs*b1 + b0);
+num2 = (4*fs^2*a2 - 2*fs*a1 + a0)/(4*fs^2*b2 + 2*fs*b1 + b0);
+den1 = (-8*fs^2*b2 + 2*b0)/(4*fs^2*b2 + 2*fs*b1 + b0);
+den2 = (4*fs^2*b2 - 2*fs*b1 + b0)/(4*fs^2*b2 + 2*fs*b1 + b0);
+
+s = tf('s');
+H1_s = (a2*s^2 + a1*s + a0) / (b2*s^2 + b1*s + b0);
+
+z = tf('z', 1/fs);
+H1_z = (num0 + num1*z^(-1) + num2*z^(-2))/(1 + den1*z^(-1) + den2*z^(-2));
+
+%% visualization
+options = bodeoptions;
+options.FreqUnits = 'Hz';
+
+freq_range = logspace(log10(1e-3), log10(500), 1000);
+
+[mag_s,phase_s,fout_s] = bode(H1_s, freq_range);
+[mag_z,phase_z,fout_z] = bode(H1_z, freq_range);
+
+subplot(2,1,1)
+plot(fout_s(:), mag_s(:), 'r', LineWidth=4)
+hold on
+plot(fout_z(:), mag_z(:), 'b--', LineWidth=3)
+title('Magnitude $H_1(s)$ \& $H_1(z)$ with $f_s=1$KHz',Interpreter='latex', FontSize=16)
+legend('$|H_1(s)|$', '|$H_1(z)|$', fontsize=14, Location='southeast',Interpreter='latex')
+xlabel('Hz', FontSize=12); ylabel('mag', FontSize=12); grid on;
+
+subplot(2,1,2)
+plot(fout_s(:), phase_s(:), 'r', LineWidth=4)
+hold on
+plot(fout_z(:), phase_z(:), 'b--', LineWidth=3)
+title('Phase $H_1(s)$ \& $H_1(z)$ with $f_s=1$KHz',Interpreter='latex', FontSize=16)
+legend('$\angle H_1(s)$', '$\angle H_1(z)$', fontsize=14, Location='southeast',Interpreter='latex')
+xlabel('Hz', FontSize=12); ylabel('phase', FontSize=12); grid on;
+
+disp(mag_s(1,1:10))
+disp(mag_z(1,1:10))
+%{
+    2.5644    2.5643    2.5641    2.5640    2.5639    2.5637    2.5636    2.5635    2.5633    2.5632
+
+    2.5644    2.5643    2.5641    2.5640    2.5639    2.5637    2.5636    2.5635    2.5633    2.5632
+%}
+```
 
 
 

@@ -7,21 +7,34 @@ categories:
 mathjax: true
 ---
 
-## FFE Coeff. Selection
+## Feedforward Equalizer
 
 > Jose E. Schutt-Aine, Spring 2024 ECE 546 Lecture - 27 Equalization [[http://emlab.uiuc.edu/ece546/Lect_27.pdf](http://emlab.uiuc.edu/ece546/Lect_27.pdf)]
 >
 > Sam Palermo. Lecture 7 - Equalization Intro & TX FIR EQ [[https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)]
 >
 > David Johns. ECE1392H - Integrated Circuits for Digital Communications - Fall 2001: Equalization [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf)]
+>
+> Kevin Zheng, Boris Murmann, Hongtao Zhang, and Geoff Zhang. Feedforward Equalizer Location Study for High-Speed Serial Systems [[https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems](https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems)]
+>
+> —, “System-Driven Circuit Design for ADC-Based Wireline Data Links”, Ph.D. Dissertation,
+> Stanford University, 2018 [[https://purl.stanford.edu/hw458fp0168](https://purl.stanford.edu/hw458fp0168)]
+>
+> Hanumolu, P. K., Wei, G. Y., & Moon, Y. K. (2005). Equalizers for high-speed serial links. *International Journal of High Speed Electronics and Systems* [[https://people.engr.tamu.edu/spalermo/ecen689/hslink_eq_overview_hanumolu_jhses05.pdf](https://people.engr.tamu.edu/spalermo/ecen689/hslink_eq_overview_hanumolu_jhses05.pdf)]
+>
+> Gain Kim. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
+
+![image-20250928235645823](digital-EQ/image-20250928235645823.png)
+
+
+
+### TX-FFE
 
 *TODO* &#128197;
 
-### TX FIR
+### RX-FFE
 
-
-
-### RX FIR
+*TODO* &#128197;
 
 
 
@@ -63,13 +76,19 @@ Mueller-Muller **type B** timing function
 
 ![image-20241019163813449](digital-EQ/image-20241019163813449.png)
 
+##  MMSE-based algorithms
 
+> ***m**inimum **m**ean **s**quared **e**rror (**MMSE**)*
+
+There are three major ***MMSE***-based algorithms: 
+
+- least mean square (***LMS***),
+- normalized least mean square (**NLMS**)
+- recursive least square (**RLS**)
 
 
 
 ## LMS (Least-Mean-Square)
-
-> minimum mean square error (MMSE) 
 
 This simplified version of LMS algorithm is identical to the *zero-forcing* algorithm which minimizes the ISI at data samples
 

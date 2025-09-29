@@ -15,6 +15,8 @@ mathjax: true
 >
 > David Johns. ECE1392H - Integrated Circuits for Digital Communications - Fall 2001: Equalization [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf)]
 >
+> Vivek Telang, Equalization for High-Speed Serdes: System-level Comparison of Analog and Digital Techniques 2012 [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_08_Telang.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_08_Telang.pdf)]
+>
 > Kevin Zheng, Boris Murmann, Hongtao Zhang, and Geoff Zhang. Feedforward Equalizer Location Study for High-Speed Serial Systems [[https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems](https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems)]
 >
 > —, “System-Driven Circuit Design for ADC-Based Wireline Data Links”, Ph.D. Dissertation,

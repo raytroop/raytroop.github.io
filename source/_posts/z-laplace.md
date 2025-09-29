@@ -344,14 +344,11 @@ $$
 
 ---
 
-
+**Scale the Result** if impulse not multiplied with $T_s$
 
 ![impulse_Ts.drawio](z-laplace/impulse_Ts.drawio.svg)
 
 
----
-
-**Scale the Result**
 > [[https://www.mathworks.com/matlabcentral/answers/1582704-how-to-convolve-signal-and-transfer-function#comment_1825159](https://www.mathworks.com/matlabcentral/answers/1582704-how-to-convolve-signal-and-transfer-function#comment_1825159)]
 >
 > [[https://www.google.com.hk/search?q=matlab+continuous+transfer+function+in+time+domain+convolution](https://www.google.com.hk/search?q=matlab+continuous+transfer+function+in+time+domain+convolution)]

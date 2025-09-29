@@ -287,7 +287,13 @@ First export `Output Noise` and `Edge Phase Noise`， then select `noiseModelTyp
 
 The result demonstrate that ***`Edge Phase Noise(dBc)` maintain jitter or phase noise by tweaking voltage noise at edge***, however ***`Noise Voltage(V^2/Hz)` maintain voltage noise***
 
-> In the conclusion, `Edge Phase Noise(dBc)` is preferred for phase noise evaluation
+In the conclusion, *`Edge Phase Noise(dBc)` is preferred for phase noise evaluation*
+
+> notice:
+>
+> `@(#)$CDS: spectre  version 21.1.0 64bit 12/01/2023 07:24 (csvcm36c-1) $`
+>
+> `@(#)$CDS: virtuoso version ICADVM20.1-64b 10/11/2023 09:26 (cpgbld01) $`
 
 
 

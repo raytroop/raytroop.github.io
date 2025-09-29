@@ -348,6 +348,28 @@ $$
 
 ![impulse_Ts.drawio](z-laplace/impulse_Ts.drawio.svg)
 
+
+---
+
+**Scale the Result**
+> [[https://www.mathworks.com/matlabcentral/answers/1582704-how-to-convolve-signal-and-transfer-function#comment_1825159](https://www.mathworks.com/matlabcentral/answers/1582704-how-to-convolve-signal-and-transfer-function#comment_1825159)]
+>
+> [[https://www.google.com.hk/search?q=matlab+continuous+transfer+function+in+time+domain+convolution](https://www.google.com.hk/search?q=matlab+continuous+transfer+function+in+time+domain+convolution)]
+
+```matlab
+t = linspace(0, 10);
+dt = t(2) - t(1);
+%u = @(t) heaviside(t); % by default, heavside(0) = 1/2, but at t = 0, we should have u(0) = 1 by definition of unit step
+u = @(t) (t>=0);
+Vin = @(t) u(t)-u(t-3);
+h = @(t) ( exp(-2*t)/6 ) + ( 3/16*exp(-t) ) - ( exp(-5*t)/48 );
+y = conv(Vin(t), h(t))*dt;  % must scale by dt
+plot(t,y(1:numel(t)),'-x')
+legend('wt - Laplace','wt - convolution integral','wt - convolution sum')
+```
+
+
+
 ## Transfer function & sampled impulse response
 
 > continuous-time filter designs to discrete-time designs through techniques such as ***impulse invariance***

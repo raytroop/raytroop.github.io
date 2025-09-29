@@ -243,8 +243,6 @@ Tony Chan Carusone, University of Toronto, Canada, 2022 CICC Educational Session
 
 X. Mo, J. Wu, N. Wary and T. Chan Carusone, "Design Methodologies for Low-Jitter CMOS Clock Distribution," in IEEE Open Journal of the Solid-State Circuits Society, 2021 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395)]
 
-Modeling Oscillators with Arbitrary Phase Noise Profiles [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles](https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles)]
-
 Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation," *2022 IEEE International Symposium on Circuits and Systems (ISCAS)*, Austin, TX, USA, 2022 [[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
 
 Thomas Toifl. TWEPP 2012. Low-power High-Speed CMOS I/Os: Design Challenges and Solutions [[https://indico.cern.ch/event/170595/contributions/266344/attachments/212179/297391/twepp_sept2012_final_v2.pdf](https://indico.cern.ch/event/170595/contributions/266344/attachments/212179/297391/twepp_sept2012_final_v2.pdf)]

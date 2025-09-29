@@ -271,6 +271,26 @@ Cadence Spectre's `PN` function may call `abs_jitter` and `psd` function under t
 
 
 
+## Phase Noise in vsource 
+
+Suppose pnoise result of one block is shown as below, we 
+
+![image-20250929215408888](pn-jitter/image-20250929215408888.png)
+
+![image-20250929215620135](pn-jitter/image-20250929215620135.png)
+
+First export `Output Noise` and `Edge Phase Noise`， then select `noiseModelType` and `noisefile` respectively
+
+![image-20250929224438491](pn-jitter/image-20250929224438491.png)
+
+![image-20250929221228963](pn-jitter/image-20250929221228963.png)
+
+The result demonstrate that ***`Edge Phase Noise(dBc)` maintain jitter or phase noise by tweaking voltage noise at edge***, however ***`Noise Voltage(V^2/Hz)` maintain voltage noise***
+
+> In the conclusion, `Edge Phase Noise(dBc)` is preferred for phase noise evaluation
+
+
+
 
 ## reference
 
@@ -283,3 +303,7 @@ URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiX
 Cadence, Application Note: Understanding the relations between time-average noise (phase-noise) and sampled noise (edge-phase noise or jitter) in Pnoise analysis
 
 Tutorial on Scaling of the Discrete Fourier Transform and the Implied Physical Units of the Spectra of Time-Discrete Signals Jens Ahrens, Carl Andersson, Patrik Höstmad, Wolfgang Kropp URL: [https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/](https://appliedacousticschalmers.github.io/scaling-of-the-dft/AES2020_eBrief/)
+
+Tawna, "Modeling Oscillators with Arbitrary Phase Noise Profiles"[[https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles](https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles)]
+
+—, "How to Specify Phase Noise as an Instance Parameter in Spectre Sources (e.g. vsource, isource, Port)" [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port](https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port)]

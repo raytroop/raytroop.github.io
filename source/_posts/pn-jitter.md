@@ -273,7 +273,7 @@ Cadence Spectre's `PN` function may call `abs_jitter` and `psd` function under t
 
 ## Phase Noise in vsource 
 
-Suppose pnoise result of one block is shown as below, we 
+Suppose pnoise result of one block is shown as below, and the result is stimulus of following block 
 
 ![image-20250929215408888](pn-jitter/image-20250929215408888.png)
 

@@ -17,6 +17,8 @@ Three fast time-domain system simulation techniques:
 
 ## Single-Bit Response (SBR) Method
 
+![img](sbr-der/Single+Pulse.gif)
+
 Overlapping portions of a pulse response from neighboring bits are referred to as intersymbol interference (ISI). A received waveform is formed by *superimposing*, in time, the pulse responses of each bit in the sequence, as illustrated in Figure 9, *assuming **symmetric** positive and negative pulses* are transmitted for 1s and 0s
 
 ![image-20240824193208821](sbr-der/image-20240824193208821.png)
@@ -110,6 +112,12 @@ stem(out)
 ![143512636-0878e0fd-fe87-414c-9c73-52577eeb7593](sbr-der/143512636-0878e0fd-fe87-414c-9c73-52577eeb7593.jpg)
 
 ![143512677-ccefdf22-4e30-4e72-9220-bbe667671e79](sbr-der/143512677-ccefdf22-4e30-4e72-9220-bbe667671e79.png)
+
+## S-Parameter to Single Bit Response (SBR)
+
+> Mike Li, "S-Parameter to Single Bit Response (SBR) Transformation and Convergence Study" [[https://ieee802.org/3/bj/public/may12/li_01_0512.pdf](https://ieee802.org/3/bj/public/may12/li_01_0512.pdf)]
+
+*TODO* &#128197;
 
 
 

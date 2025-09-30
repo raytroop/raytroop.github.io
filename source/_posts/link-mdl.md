@@ -24,11 +24,9 @@ mathjax: true
 
 ![image-20250914115332274](link-mdl/image-20250914115332274.png)
 
-## S-Parameter to Single Bit Response (SBR)
 
-> Mike Li, "S-Parameter to Single Bit Response (SBR) Transformation and Convergence Study" [[https://ieee802.org/3/bj/public/may12/li_01_0512.pdf](https://ieee802.org/3/bj/public/may12/li_01_0512.pdf)]
 
-*TODO* &#128197;
+
 
 
 ## Reference

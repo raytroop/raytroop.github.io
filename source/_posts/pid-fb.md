@@ -20,6 +20,17 @@ mathjax: true
 >
 ---
 
+## The Problem of "Sinusoids Running Around Loops"
+
+The representative of Fourier transform $\frac{1}{j\omega+j\omega_0}$ back in the time domain $e^{-j\omega_0 t}$ is **infinite extent in time**
+
+> Running around a loop, chasing one's tail — these are thought pictures that only work in a discretized, time-sequenced conceptual framework that has a beginning and an end
+
+
+***Fix in your mind that oscillations are a type of resonance***
+
+
+
 
 
 ## rearrangement
@@ -55,7 +66,7 @@ Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. Feedback Control of D
 
 Åström, K.J. & Murray, Richard. (2021). Feedback Systems: An Introduction for Scientists and Engineers Second Edition [[pdf](https://www.cds.caltech.edu/~murray/books/AM08/pdf/fbs-public_24Jul2020.pdf)]
 
-Dawson, J. L. (2021). *A guide to feedback theory*. Cambridge University Press.
+Dawson, Joel L. *A Guide to Feedback Theory*. Cambridge: Cambridge University Press, 2021.
 
 Yan Lu, ISSCC2021 T10: Fundamentals of Fully Integrated Voltage Regulators [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf)]
 

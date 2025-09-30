@@ -129,22 +129,6 @@ by how much the modulated variable of the carrier signal varies around its unmod
 
 
 
-##  Inspection of Phase Noise
-
- a ***-10 dB/decade reference line*** can be used to pinpoint the location in a phase noise curve that dominates its integral
-
-![image-20250720154715877](ss-insight/image-20250720154715877.png)
-
-![image-20250720155328050](ss-insight/image-20250720155328050.png)
-
-
-
-> How to Identify the Source of Phase Jitter through Phase Noise Plots [[https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots](https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots)]
->
-> AN10072 Determine the Dominant Source of Phase Noise, by Inspection [[https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection](https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection)]
->
-> 4-minute Clinic: Determine the Dominant Source of Jitter by Inspection of Phase Noise Plot [[https://youtu.be/2elHk3v45Pk](https://youtu.be/2elHk3v45Pk)]
-
 ## white noise
 
 ***white noise*** doesn't mean it has a *Gaussian/normal distribution*
@@ -248,20 +232,6 @@ subplot(2,2,[3 4])
 plot(f, 10*log10(pxx), LineWidth=4); grid on
 title('psd (dB)')
 ```
-
-
-
-## The Problem of "Sinusoids Running Around Loops"
-
-The representative of Fourier transform $\frac{1}{j\omega+j\omega_0}$ back in the time domain $e^{-j\omega_0 t}$ is **infinite extent in time**
-
-> Running around a loop, chasing one's tail — these are thought pictures that only work in a discretized, time-sequenced conceptual framework that has a beginning and an end
-
-
-***Fix in your mind that oscillations are a type of resonance***
-
-
-> Dawson, Joel L. *A Guide to Feedback Theory*. Cambridge: Cambridge University Press, 2021.
 
 
 
@@ -508,26 +478,6 @@ Barkhausen criteria are *necessary* but **not sufficient conditions** for sustai
 ![image-20240720090654883](ss-insight/image-20240720090654883.png)
 
 it simply *"latches up"* rather than oscillates
-
-
-
-## NRZ Bandwidth
-
-![image-20240607221359970](ss-insight/image-20240607221359970.png)
-
-> Maxim Integrated,NRZ Bandwidth - HF Cutoff vs. SNR [[https://pdfserv.maximintegrated.com/en/an/AN870.pdf](https://pdfserv.maximintegrated.com/en/an/AN870.pdf)]
-
-
-
-## $0.35/T_r$
-
-![image-20240607222440796](ss-insight/image-20240607222440796.png)
-
-
-
-## $0.5/T_r$
-
-*TODO* &#128197;
 
 
 

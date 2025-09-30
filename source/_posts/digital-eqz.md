@@ -7,6 +7,14 @@ categories:
 mathjax: true
 ---
 
+
+
+![image-20250930160758085](digital-eqz/image-20250930160758085.png)
+
+> 32 to 56 Gbps Serial Link Analysis and Optimization Methods for Pathological Channels [[https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf](https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf)]
+
+
+
 ## Feedforward Equalizer
 
 > Jose E. Schutt-Aine, Spring 2024 ECE 546 Lecture - 27 Equalization [[http://emlab.uiuc.edu/ece546/Lect_27.pdf](http://emlab.uiuc.edu/ece546/Lect_27.pdf)]
@@ -26,7 +34,7 @@ mathjax: true
 >
 > Gain Kim. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 
-![image-20250928235645823](digital-EQ/image-20250928235645823.png)
+![image-20250928235645823](digital-eqz/image-20250928235645823.png)
 
 
 
@@ -44,20 +52,6 @@ mathjax: true
 
 
 
-
-
-
-## Multipliers
-
-*TODO* &#128197;
-
-
-## Adders
-
-*TODO* &#128197;
-
-
-
 ## overlapped tuning range
 
 *TODO* &#128197;
@@ -70,13 +64,13 @@ mathjax: true
 
 Mueller-Muller **type A** timing function
 
-![image-20241019163636292](digital-EQ/image-20241019163636292.png)
+![image-20241019163636292](digital-eqz/image-20241019163636292.png)
 
 
 
 Mueller-Muller **type B** timing function
 
-![image-20241019163813449](digital-EQ/image-20241019163813449.png)
+![image-20241019163813449](digital-eqz/image-20241019163813449.png)
 
 ##  MMSE-based algorithms
 
@@ -150,11 +144,11 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 The process is also referred to as **Maximum Likelihood Sequence Estimator (MLSE)**
 
-![image-20240807233152154](digital-EQ/image-20240807233152154.png)
+![image-20240807233152154](digital-eqz/image-20240807233152154.png)
 
-![image-20240812205534753](digital-EQ/image-20240812205534753.png)
+![image-20240812205534753](digital-eqz/image-20240812205534753.png)
 
-![image-20240812205613467](digital-EQ/image-20240812205613467.png)
+![image-20240812205613467](digital-eqz/image-20240812205613467.png)
 
 > [IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes Beyond 100 Gb/s [https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf](https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf)]
 >
@@ -181,19 +175,19 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 
 
 
-![image-20240824193839108](digital-EQ/image-20240824193839108.png)
+![image-20240824193839108](digital-eqz/image-20240824193839108.png)
 
 
 
 ## Mueller-Muller CDR
 
-![image-20240812222307061](digital-EQ/image-20240812222307061.png)
+![image-20240812222307061](digital-eqz/image-20240812222307061.png)
 
 
 
 MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
 
-![image-20240807230029591](digital-EQ/image-20240807230029591.png)
+![image-20240807230029591](digital-eqz/image-20240807230029591.png)
 
 
 
@@ -215,23 +209,23 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 >
 > Jaeduk Han, "Design and Automatic Generation of 60Gb/s Wireline Transceivers" [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf)]
 
-![image-20240810095006113](digital-EQ/image-20240810095006113.png)
+![image-20240810095006113](digital-eqz/image-20240810095006113.png)
 
-![image-20240808001201612](digital-EQ/image-20240808001201612.png)
-
-
-![image-20240808001256515](digital-EQ/image-20240808001256515.png)
+![image-20240808001201612](digital-eqz/image-20240808001201612.png)
 
 
-![image-20240808001449664](digital-EQ/image-20240808001449664.png)
+![image-20240808001256515](digital-eqz/image-20240808001256515.png)
 
-![image-20240808001501485](digital-EQ/image-20240808001501485.png)
+
+![image-20240808001449664](digital-eqz/image-20240808001449664.png)
+
+![image-20240808001501485](digital-eqz/image-20240808001501485.png)
 
 
 
 ## SS-MM CDR
 
-![image-20240807232814202](digital-EQ/image-20240807232814202.png)
+![image-20240807232814202](digital-eqz/image-20240807232814202.png)
 
 
 
@@ -247,7 +241,7 @@ $h_1$ is **necessary**
 
   Consequently, it suffers from a severe *multiple-locking problem with an adaptive DFE*
 
-![image-20240812232618238](digital-EQ/image-20240812232618238.png)
+![image-20240812232618238](digital-eqz/image-20240812232618238.png)
 
 
 
@@ -381,3 +375,4 @@ Qasim Chaudhari. Maximum Likelihood Estimation of Clock Offset [[https://wireles
 
 ---
 
+Hongtao Zhang, DesignCon 2016. PAM4 Signaling for 56G Serial Link Applications − A Tutorial [[https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf](https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf)]

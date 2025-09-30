@@ -9,6 +9,65 @@ mathjax: true
 
 
 
+## bandwidth - Rules of Thumb
+
+### NRZ Bandwidth
+> Maxim Integrated,NRZ Bandwidth - HF Cutoff vs. SNR [[https://pdfserv.maximintegrated.com/en/an/AN870.pdf](https://pdfserv.maximintegrated.com/en/an/AN870.pdf)]
+
+![image-20240607221359970](link-budget/image-20240607221359970.png)
+
+### $0.35/T_r$
+
+![image-20250930165629384](link-budget/image-20250930165629384.png)
+
+---
+
+> 32 to 56 Gbps Serial Link Analysis and Optimization Methods for Pathological Channels [[https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf](https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf)]
+
+![image-20250930165251231](link-budget/image-20250930165251231.png)
+
+***Rise Time Sine Wave***
+$$\begin{align}
+\sin 2\pi f t_{20} &= -1+2\times 0.2 = -0.6 \\
+\sin 2\pi f t_{80} &= -1+2\times 0.8 = 0.6
+\end{align}$$
+$$
+f = \frac{\arcsin(0.6) - \arcsin(-0.6)}{2\pi (t_{80} - t_{20})} = \frac{0.2}{T_r}
+$$
+
+
+
+***Step Response RC Tank***
+
+$$\begin{align}
+0.8 &= 1- e^{-\frac{t_{80}}{\tau_{RC}}} \to t_{80} = -\ln0.2 \cdot \tau_{RC} \\
+0.2 &= 1- e^{-\frac{t_{80}}{\tau_{RC}}} \to t_{20} = -\ln0.8 \cdot \tau_{RC}
+\end{align}$$
+
+Then rise time of 20% to 80% is
+$$
+T_{r} = \tau_{RC}\cdot \ln\frac{0.8}{0.2} = 1.3863 \cdot \tau_{RC}
+$$
+we have
+$$
+f_{3dB} = \frac{1}{2\pi}\frac{1}{\tau_{RC}} = \frac{1}{2\pi}\frac{ 1.3863}{T_r} = \frac{0.22}{T_r}
+$$
+
+
+
+
+
+
+
+### $0.5/T_r$
+
+*TODO* &#128197;
+
+
+
+
+
+
 ## CMI & DMI
 
 > Ahmed Sada Staff Silicon Validation Engineer, Synopsys. Don't Be Intimidated: Manual Calibration for Stressed Eye Testing
@@ -264,6 +323,8 @@ It is called "**forward**" error correction because it can correct errors even i
 > Pavel Zivny, Tektronix. Baseline Wander: Systematic Approach to Rapid Simulation and Measurement  [[pdf](https://swb.skku.edu/emc/infromation.do?mode=download&articleNo=21945&attachNo=19834)]
 >
 > Update on Performance Studies of 100 Gigabit Ethernet Enabled by Advanced Modulation Formats [[https://www.ieee802.org/3/bm/public/sep12/wei_01_0912_optx.pdf](https://www.ieee802.org/3/bm/public/sep12/wei_01_0912_optx.pdf)]
+
+
 
 ## Sampling Front-End (SFE) Pulse Response
 

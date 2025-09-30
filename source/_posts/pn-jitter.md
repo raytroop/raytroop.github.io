@@ -7,6 +7,24 @@ categories:
 mathjax: true
 ---
 
+
+
+##  Inspection of Phase Noise
+
+> How to Identify the Source of Phase Jitter through Phase Noise Plots [[https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots](https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots)]
+>
+> AN10072 Determine the Dominant Source of Phase Noise, by Inspection [[https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection](https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection)]
+>
+> 4-minute Clinic: Determine the Dominant Source of Jitter by Inspection of Phase Noise Plot [[https://youtu.be/2elHk3v45Pk](https://youtu.be/2elHk3v45Pk)]
+
+ a ***-10 dB/decade reference line*** can be used to pinpoint the location in a phase noise curve that dominates its integral
+
+![image-20250720154715877](pn-jitter/image-20250720154715877.png)
+
+![image-20250720155328050](pn-jitter/image-20250720155328050.png)
+
+
+
 ## Reference-Clock Phase Noise in PLL
 
 > Gary Giust. How to Evaluate Reference-Clock Phase Noise in High-Speed Serial Links [[expanded version](https://www.signalintegrityjournal.com/articles/1216-methodology-for-analyzing-reference-clock-phase-noise-in-high-speed-serial-links)], [[compact version](https://www.sitime.com/support/resource-library/how-evaluate-reference-clock-phase-noise-high-speed-serial-links)]
@@ -80,7 +98,7 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 
 
 
-## time-average noise (phase-noise) & sampled noise (edge-phase noise or jitter) spectrum
+## timeaverage noise (phase-noise) & sampled noise (edge-phase noise or jitter) spectrum
 
 ![image-20250530203348622](pn-jitter/image-20250530203348622.png)
 
@@ -295,13 +313,23 @@ In the conclusion, *`Edge Phase Noise(dBc)` is preferred for phase noise evaluat
 >
 > `@(#)$CDS: virtuoso version ICADVM20.1-64b 10/11/2023 09:26 (cpgbld01) $`
 
+---
+
+***SSB Phase Noise (dBc)***
+
+![image-20250930185936617](pn-jitter/image-20250930185936617.png)
+
+![image-20250930190216011](pn-jitter/image-20250930190216011.png)
+
+![image-20250930190841282](pn-jitter/image-20250930190841282.png)
+
 
 
 ## Divider PN simulation
 
-*TODO* &#128197;
+> Cadence Support. "How to set up pss/pnoise when simulating a driven circuit or a VCO, both containing dividers"
 
-
+![image-20250930200829603](pn-jitter/image-20250930200829603.png)
 
 
 

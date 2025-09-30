@@ -406,6 +406,16 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 
 
+## Test Challenges
+
+> PAM4 Transmitter Test Challenges [[https://harrisburg.psu.edu/files/pdf/16861/2019/05/06/tektronix_penn_state_si_april_12_2019.pdf](https://harrisburg.psu.edu/files/pdf/16861/2019/05/06/tektronix_penn_state_si_april_12_2019.pdf)]
+>
+> PAM4 Signaling in High Speed Serial Technology: Test, Analysis, and Debug [[https://download.tek.com/document/55W_60273_1_HR_Letter.pdf](https://download.tek.com/document/55W_60273_1_HR_Letter.pdf)]
+
+*TODO* &#128197;
+
+
+
 
 ## reference
 

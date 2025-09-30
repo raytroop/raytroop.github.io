@@ -271,7 +271,7 @@ Cadence Spectre's `PN` function may call `abs_jitter` and `psd` function under t
 
 
 
-## Phase Noise in vsource 
+## Phase Noise in `vsource` 
 
 Suppose pnoise result of one block is shown as below, and the result is stimulus of following block 
 
@@ -285,7 +285,7 @@ First export `Output Noise` and `Edge Phase Noise`， then select `noiseModelTyp
 
 ![image-20250929221228963](pn-jitter/image-20250929221228963.png)
 
-Under `vsource` pulse with different amplitude & rising/falling time, simulation result demonstrate that ***`Edge Phase Noise(dBc)` maintain jitter or phase noise by tweaking voltage noise at edge***, however ***`Noise Voltage(V^2/Hz)` maintain voltage noise***
+Under `vsource` pulse with different amplitude & rising/falling time, simulation result demonstrate that ***`Edge Phase Noise(dBc)` maintain jitter or phase noise by tweaking voltage noise at edge*** under the hoods, however ***`Noise Voltage(V^2/Hz)` maintain voltage noise***
 
 In the conclusion, *`Edge Phase Noise(dBc)` is preferred for phase noise evaluation*
 

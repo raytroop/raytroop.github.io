@@ -116,7 +116,16 @@ R_y(\tau) &= \mathrm{E}[y(t)y(t+\tau)] \\
 
 ### phase noise analyzer vs spectrum analyzer
 
-*TODO* &#128197;
+> Phase Noise Measurement Solutions [[https://www.keysight.com/vn/en/assets/7018-02528/technical-overviews/5990-5729.pdf](https://www.keysight.com/vn/en/assets/7018-02528/technical-overviews/5990-5729.pdf)]
+
+
+The three most widely adopted techniques are **direct spectrum**, **phase detector**, and **two-channel cross-correlation**. 
+
+While the direct spectrum technique measures phase noise with the existence of the carrier signal, the other two remove the carrier (demodulation) before phase noise is measured.
+
+Though *direct spectrum technique method* may not be useful for measuring *very close-in phase noise* to a drifting carrier, it is convenient for qualitative quick evaluation on sources with relatively high noise
+
+
 
 
 

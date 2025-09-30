@@ -285,7 +285,7 @@ First export `Output Noise` and `Edge Phase Noise`， then select `noiseModelTyp
 
 ![image-20250929221228963](pn-jitter/image-20250929221228963.png)
 
-Under `vsource` pulse with different amplitude & rising/falling time, simulation result demonstrate that ***`Edge Phase Noise(dBc)` maintain jitter or phase noise by tweaking voltage noise at edge*** under the hoods, however ***`Noise Voltage(V^2/Hz)` maintain voltage noise***
+Under `vsource` (`Source type: pulse`) with different amplitude & rising/falling time, simulation result demonstrate that ***`Edge Phase Noise(dBc)` maintain jitter or phase noise by tweaking voltage noise at edge*** under the hoods, however ***`Noise Voltage(V^2/Hz)` maintain voltage noise***
 
 In the conclusion, *`Edge Phase Noise(dBc)` is preferred for phase noise evaluation*
 

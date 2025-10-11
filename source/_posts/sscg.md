@@ -31,6 +31,12 @@ The most common modulation techniques are down-spread and center-spread:
 
 ![image-20250913194151764](sscg/image-20250913194151764.png)
 
+---
+
+> Steve Glaser, NVidia Corporation. *Clocking Mode Terminology-2018-03-01*. Workgroup: PCI Express - Protocol
+
+![image-20251011213209060](sscg/image-20251011213209060.png)
+
 
 
 ##  SSCG Architectures

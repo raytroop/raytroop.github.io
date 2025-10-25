@@ -7,56 +7,100 @@ categories:
 mathjax: true
 ---
 
-![image-20240721172721884](2nd-sys/image-20240721172721884.png)
+![image-20251025022548719](2nd-sys/image-20251025022548719.png)
 
-![image-20240629140001275](2nd-sys/image-20240629140001275.png)
+> show qualitatively how changing pole locations in the s-plane affect impulse responses
+>
+> ![image-20251025091424995](2nd-sys/image-20251025091424995.png)
+
+![image-20251025093453473](2nd-sys/image-20251025093453473.png)
 
 > $\omega_d$ called *damped natural frequency*
+> $$
+> \omega_n^2 = \sigma^2 + \omega_d^2
+> $$
+> ![image-20251025093918419](2nd-sys/image-20251025093918419.png)
+
+![image-20251025094454542](2nd-sys/image-20251025094454542.png)
+
+## Resonant Frequency
+
+![image-20251025112923346](2nd-sys/image-20251025112923346.png)
 
 
 
+## Phase Margin & Damping Factor
 
+- Phase Margin is defined for *open loop* system
 
-## closed loop frequency response
+- Damping Factor ($\zeta$) is defined for *close loop* system
 
-![image-20240629134127219](2nd-sys/image-20240629134127219.png)
-$$\begin{align}
-A &= \frac{\frac{A_0}{(1+s/\omega_1)(1+s/\omega_2)}}{1+\beta \frac{A_0} {(1+s/\omega_1)(1+s/\omega_2)}} \\
-&= \frac{A_0}{1+A_0 \beta}\frac{1}{\frac{s^2}{\omega_1\omega_2(1+A_0\beta)}+\frac{1/\omega_1+1/\omega_2}{1+A_0\beta}s+1} \\
-&\simeq \frac{A_0}{1+A_0 \beta}\frac{1}{\frac{s^2}{\omega_u\omega_2}+\frac{1}{\omega_u}s+1} \\
-&= \frac{A_0}{1+A_0 \beta}\frac{\omega_u\omega_2}{s^2+\omega_2s+\omega_u\omega_2}
-\end{align}$$
+![image-20251025101546484](2nd-sys/image-20251025101546484.png)
 
-That is $\omega_n = \sqrt{\omega_u\omega_2}$ and $\zeta = \frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}$
-
-where $\omega_u$ is the unity gain bandwidth
-
-
-![image-20240629112429803](2nd-sys/image-20240629112429803.png)
-
-where $f_r$ is *resonant frequency*, $\zeta$ is *damping ratio*, $P_f$ *maximum peaking*,  $P_t$ is the peak of the first overshoot (step response)
-
-![image-20240629142324982](2nd-sys/image-20240629142324982.png)
-
-
-
-## damping factor & phase margin
-
-- phase margin is defined for *open loop* system
-
-- damping factor ($\zeta$) is defined for *close loop* system
-
-The roughly 90 to 100 times of damping factor ($\zeta$​) is phase margin
-$$
-\mathrm{PM} = 90\zeta \sim 100\zeta
-$$
-In order to have a good stable system, we want $\zeta > 0.5$ or phase margin more than $45^o$
+> ![image-20251025101113687](2nd-sys/image-20251025101113687.png)
 
 We can analyze open loop system in a better perspective because it is simpler. So, we always use the loop gain analysis to find the phase margin and see whether the system is stable or not.
 
+![image-20251025101756106](2nd-sys/image-20251025101756106.png)
+
+---
+
+![image-20251025143935862](2nd-sys/image-20251025143935862.png)
+
+```matlab
+zta = 0:.001:1;
+PM = atan(2*zta ./ sqrt(sqrt(1+4*zta.^4) - 2*zta.^2))/pi*180;
+
+[~, idx45] = min(abs(PM - 45));
+[~, idx60] = min(abs(PM - 60));
+[~, idx70] = min(abs(PM - 70));
+
+plot(PM, zta, 'b',  LineWidth=3);
+hold on
+plot(PM(idx45), zta(idx45), 'ro', MarkerFaceColor='r', LineWidth=3, MarkerSize=8)
+text(PM(idx45)+2, zta(idx45), ['\zeta=' num2str(zta(idx45)) ' @PM=45^o'])
+plot(PM(idx60), zta(idx60), 'ro', MarkerFaceColor='r', LineWidth=3, MarkerSize=8)
+text(PM(idx60)+2, zta(idx60), ['\zeta=' num2str(zta(idx60)) ' @PM=460^o'])
+plot(PM(idx70), zta(idx70), 'ro', MarkerFaceColor='r', LineWidth=3, MarkerSize=8)
+text(PM(idx70)-13, zta(idx70), ['\zeta=' num2str(zta(idx70)) ' @PM=70^o'])
+grid on; xlabel('Phase Margin, ^o'); ylabel('Damping ratio, \zeta')
+```
 
 
-## additional Zero
+
+# Zeros & Non-Minimum Phase Zeros
+
+> Influence of Zeros and Non-Minimum Phase Zeros of Transfer Functions on Dynamical System Behavior [[https://aleksandarhaber.com/effect-of-zeros-of-transfer-functions-on-dynamical-system-behavior/](https://aleksandarhaber.com/effect-of-zeros-of-transfer-functions-on-dynamical-system-behavior/)]
+>
+> The *zeros in the right half of the complex plane* are called ***nonminimum phase zeros***. Systems with nonminimum phase zeros are called ***nonminimum phase systems***
+
+***Zero close to the real pole attenuates the effect of that pole on the system response***
+
+
+
+---
+
+***Zeros Tend to Increase the Overshoot of the System***
+
+![image-20251025161530090](2nd-sys/image-20251025161530090.png)
+
+![image-20251025162936453](2nd-sys/image-20251025162936453.png)
+
+![image-20251025163805090](2nd-sys/image-20251025163805090.png)
+
+
+
+---
+
+***Nonminimum Phase Zeros – Effect on the Transient Response***
+
+![image-20251025164001079](2nd-sys/image-20251025164001079.png)
+
+![image-20251025164027378](2nd-sys/image-20251025164027378.png)
+
+
+
+---
 
 $$\begin{align}
 TF &= \frac{s +\omega_z}{s^2+2\zeta \omega_ns+\omega_n^2} \\
@@ -78,53 +122,67 @@ $$
 
 ## Settling Time
 
-### single-pole
+### One Pole
 
-![image-20240725204501781](2nd-sys/image-20240725204501781.png)
+![image-20251025110452834](2nd-sys/image-20251025110452834.png)
 
-
-
-![image-20240725204527121](2nd-sys/image-20240725204527121.png)
+we have
 $$
-\tau \simeq \frac{1}{\beta \omega_\text{ugb}}
+\tau \approx \left(1 + \frac{R_1}{R_2}\right)\frac{1}{A_0\omega_0}= \frac{1}{\beta \omega_\text{ugb}}
 $$
 
-
-![tau_1pole.drawio](2nd-sys/tau_1pole.drawio.svg)
-
-
-
-### two poles
-
-#### Rise Time
-
-> Katsuhiko Ogata, Modern Control Engineering Fifth Edition
-
-![image-20240721180718116](2nd-sys/image-20240721180718116.png)
+> ![image-20251025110745442](2nd-sys/image-20251025110745442.png)
 
 
 
-> For *underdamped* second order systems, the *0% to 100% rise time* is normally used
+### Two Poles
 
-For $\text{PM}=70^o$
+with *open-loop* transfer function $A_{OL}=\frac{A_0}{(1+s/\omega_1)(1+s/\omega_2)}$ and assuming $\omega_1$ is dominant pole,  then yield *closed-loop* transfer function
 
--  $\omega_2=3\omega_u$, that is $\omega_n = 1.7\omega_u$. 
--  $\zeta = 0.87$
+$$\begin{align}
+A_{CL}(s) &= \frac{\frac{A_0}{(1+s/\omega_1)(1+s/\omega_2)}}{1+\beta \frac{A_0} {(1+s/\omega_1)(1+s/\omega_2)}} \\
+&= \frac{A_0}{1+A_0 \beta}\frac{1}{\frac{s^2}{\omega_1\omega_2(1+A_0\beta)}+\frac{1/\omega_1+1/\omega_2}{1+A_0\beta}s+1} \\
+&\approx \frac{A_0}{1+A_0 \beta}\frac{1}{\frac{s^2}{\omega_u\omega_2}+\frac{1}{\omega_u}s+1} \\
+&= \frac{A_0}{1+A_0 \beta}\frac{\omega_u\omega_2}{s^2+\omega_2s+\omega_u\omega_2}
+\end{align}$$
 
-Then
+That is $\omega_n = \sqrt{\omega_u\omega_2}$, $\zeta = \frac{1}{2}\sqrt{\frac{\omega_2}{\omega_u}}$ , where $\omega_u\approx \beta A_0 \omega_1$ is the *unity gain bandwidth*
+
+> ![image-20251025120830411](2nd-sys/image-20251025120830411.png)
+
+---
+
+![image-20251025122148288](2nd-sys/image-20251025122148288.png)
+
+***Rise Time*** (***0%*** to ***100%*** )
+
+![image-20251025131719553](2nd-sys/image-20251025131719553.png)
+
 $$
-t_r = \frac{3.1}{\omega_u}
+t_r = \frac{\pi - \beta}{\omega_d}=\frac{\pi - \arctan\frac{\omega_n\sqrt{1-\zeta^2}}{\zeta\omega_n}}{\omega_n\sqrt{1-\zeta^2}}\approx\frac{\pi - \arctan\frac{\sqrt{1-\zeta^2}}{\zeta}}{\sqrt{\omega_u\omega_2}\sqrt{1-\zeta^2}}=\frac{\pi - \arctan\frac{\sqrt{1-\zeta^2}}{\zeta}}{\omega_u\sqrt{k(1-\zeta^2)}}
 $$
+where $k = \frac{\omega_2}{\omega_u}$, is the function of PM
+
+| PM          | $45^o$                 | $60^o$                  | $70^o$                  |
+| ----------- | ---------------------- | ----------------------- | ----------------------- |
+| **$k$**     | 1                      | 1.73                    | 2.75                    |
+| **$\zeta$** | 0.42                   | 0.61                    | 0.80                    |
+| **$t_r$**   | $\frac{2.2}{\omega_u}$ | $\frac{2.14}{\omega_u}$ | $\frac{2.53}{\omega_u}$ |
+
+```matlab
+PM = 70;
+ztap = 0.80;
+k = 1/tan((90-PM)/180*pi)
+tr = (pi - atan(sqrt(1-ztap^2)/ztap))/sqrt(k*(1-ztap^2))
+```
 
 
 
-#### Settling Time
+***Settling Time***
 
 >   Gene F. Franklin, Feedback Control of Dynamic Systems, 8th Edition
 
-![image-20240721181956221](2nd-sys/image-20240721181956221.png)
-
-![image-20240721182025547](2nd-sys/image-20240721182025547.png)
+![image-20251025150948717](2nd-sys/image-20251025150948717.png)
 
 
 As we know
@@ -137,16 +195,16 @@ $$
 t_s = \frac{9.2}{\omega_2}
 $$
 
-For $\text{PM}=70^o$, $\omega_2 = 3\omega_u$, that is
+For $\text{PM}=70^o$, $\omega_2 = 2.75\omega_u$, that is
 $$
-t_s \simeq \frac{3}{\omega_u} \space\space \text{, for PM}=70^o
+t_s \approx \frac{3.35}{\omega_u} \space\space \text{, for PM}=70^o
 $$
 
 
 
 For $\text{PM}=45^o$, $\omega_2 = \omega_u$, that is
 $$
-t_s \simeq \frac{9.2}{\omega_u} \space\space \text{, for PM}=45^o
+t_s \approx \frac{9.2}{\omega_u} \space\space \text{, for PM}=45^o
 $$
 
 
@@ -155,19 +213,15 @@ $$
 
 
 
-> C. T. Chuang, "Analysis of the settling behavior of an operational amplifier," in *IEEE Journal of Solid-State Circuits*, vol. 17, no. 1, pp. 74-80, Feb. 1982 [[https://sci-hub.se/10.1109/JSSC.1982.1051689](https://sci-hub.se/10.1109/JSSC.1982.1051689)]
-
-
-
 ## 2 Stage RC filter
 
-### high frequency pass
+### High Pass Filter
 
-![image-20240112002314153](2nd-sys/image-20240112002314153.png)
+![image-20251025021242772](2nd-sys/image-20251025021242772.png)
 
 Since $1/sC_1+R_1 \gg R_0$
 $$
-\frac{V_m}{V_i}(s) \simeq \frac{R_0}{R_0 + 1/sC_0} = \frac{sR_0C_0}{1+sR_0C_0}
+\frac{V_m}{V_i}(s) \approx \frac{R_0}{R_0 + 1/sC_0} = \frac{sR_0C_0}{1+sR_0C_0}
 $$
 *step response* of $V_m$
 $$
@@ -179,7 +233,7 @@ where $\tau = R_0C_0$
 
 And $V_o(s)$ can be expressed as
 $$\begin{align}
-\frac{V_o}{V_i}(s)  & \simeq \frac{sR_0C_0}{1+sR_0C_0} \cdot \frac{sR_1C_1}{1+sR_1C_1} \\
+\frac{V_o}{V_i}(s)  & \approx \frac{sR_0C_0}{1+sR_0C_0} \cdot \frac{sR_1C_1}{1+sR_1C_1} \\
 &= \frac{sR_0C_0R_1C_1}{R_0C_0-R_1C_1}\left(\frac{1}{1+sR_1C_1} - \frac{1}{1+sR_0C_0}\right)
 \end{align}$$
 
@@ -192,9 +246,9 @@ Vo(t) &= \frac{R_0C_0R_1C_1}{R_0C_0-R_1C_1} \left(\frac{1}{R_1C_1}e^{-t/R_1C_1} 
 
 where $\tau=R_1C_1$
 
+---
 
-
-#### Partial-fraction Expansion
+***Partial-fraction Expansion***
 
 ```matlab
 syms C0
@@ -228,7 +282,7 @@ V_m(s) &= 1 - \frac{s(C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+
 V_o(s) &= 1 - \frac{s(C_0R_0+C_1R_0+C_1R_1)+1}{C_0C_1R_0R_1s^2+(C_0R_0+C_1R_0+C_1R_1)s+1}
 \end{align}$$
 
-
+---
 
 ```matlab
 C0 = 200e-9;
@@ -287,15 +341,15 @@ grid on;
 legend()
 ```
 
-![image-20240113181003272](2nd-sys/image-20240113181003272.png)
+![image-20251025021442878](2nd-sys/image-20251025021442878.png)
 
-![image-20240113181032379](2nd-sys/image-20240113181032379.png)
-
-
+![image-20251025021458532](2nd-sys/image-20251025021458532.png)
 
 ---
 
-spectre simulation vs matlab
+*spectre* vs *matlab*
+
+![image-20251025020526197](2nd-sys/image-20251025020526197.png)
 
 
 ```matlab
@@ -342,13 +396,9 @@ Continuous-time transfer function.
 
 
 
-![image-20240112002155622](2nd-sys/image-20240112002155622.png)
+### Low Pass Filter
 
-
-
-### low frequency pass
-
-![image-20241218231322792](2nd-sys/image-20241218231322792.png)
+![image-20251025014308419](2nd-sys/image-20251025014308419.png)
 
 $$
 \left\{ \begin{array}{cl}
@@ -396,9 +446,7 @@ and $\tau_0 \gg \tau_1$
 
 ---
 
-![image-20241218230713148](2nd-sys/image-20241218230713148.png)
-
-![image-20241218231130166](2nd-sys/image-20241218231130166.png)
+![image-20251025022237093](2nd-sys/image-20251025022237093.png)
 
 ```matlab
 R0 = 100e3;
@@ -432,7 +480,6 @@ legend('V_o(t)', 'V_m(t)','y_0(t)', 'y_1(t)', fontsize=12)
 xlabel('t (ns)')
 ylabel('mag (V)')
 grid on;
-
 ```
 
 
@@ -440,6 +487,8 @@ grid on;
 
 ## reference
 
-*Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018. Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.*
+*Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018. Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson.* [[pdf](https://mrce.in/ebooks/Feedback%20Control%20of%20Dynamic%20Systems%208th%20Ed.pdf)]
 
 Katsuhiko Ogata, Modern Control Engineering, 5th edition [[pdf](https://mechfamily-ju.com/storage/images/files/file_17314308026pQTy.pdf)]
+
+C. T. Chuang, "Analysis of the settling behavior of an operational amplifier," in *IEEE Journal of Solid-State Circuits*, vol. 17, no. 1, pp. 74-80, Feb. 1982 [[https://sci-hub.se/10.1109/JSSC.1982.1051689](https://sci-hub.se/10.1109/JSSC.1982.1051689)]

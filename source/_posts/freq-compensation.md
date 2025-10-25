@@ -461,9 +461,9 @@ a much greater magnitude than $g_\text{m9}/C_C$
 
 
 
-## Parallel Compensation
+## Pole-Zero Compensation
 
-> ***Parallel Compensation*** is also known as ***Lead Compensation***, ***Pole-Zero Compensation***
+> ***Pole-Zero Compensation*** is also known as ***Lead Compensation***, ***Parallel Compensation***
 
 ![image-20220307234938855](freq-compensation/image-20220307234938855.png)
 
@@ -568,7 +568,15 @@ Cc = (ri*Adc*C/fnd/2/pi/R)^0.5; % compensation capacitor
 wzc = 1/2/pi/Rc/Cc; % zero frequency
 ```
 
+---
 
+> ECEN 457 (ESS). Op-Amps Stability and Frequency Compensation Techniques
+
+![image-20251025011022249](freq-compensation/image-20251025011022249.png)
+
+![image-20251025011047343](freq-compensation/image-20251025011047343.png)
+
+![image-20251025011056582](freq-compensation/image-20251025011056582.png)
 
 ## Pole-Zero Doublet
 
@@ -576,7 +584,7 @@ wzc = 1/2/pi/Rc/Cc; % zero frequency
 
 ---
 
-Mismatch between the pole and zero frequencies leads to the **“doublet problem”**. If the pole and the zero do not exactly coincide, we say that they constitute a **doublet**
+Mismatch between the *pole* and *zero* frequencies leads to the **"doublet problem"**. If the pole and the zero do not exactly coincide, we say that they constitute a ***doublet***
 
 > Problem 10.19 in Razavi 2nd book
 

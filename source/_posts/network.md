@@ -13,6 +13,40 @@ mathjax: true
 
 ---
 
+## Mixed-Mode S-parameter
+
+> 12 May 2021 Introduction to Mixed-Mode S-parameters [[https://blog.teledynelecroy.com/2021/05/introduction-to-mixed-mode-s-parameters.html](https://blog.teledynelecroy.com/2021/05/introduction-to-mixed-mode-s-parameters.html)]
+
+![image-20251025193029645](network/image-20251025193029645.png)
+
+![image-20251025193127266](network/image-20251025193127266.png)
+
+---
+
+> Bert Simonovich. A Guide for Single-Ended to Mixed-Mode S-parameter Conversions [[https://www.signalintegrityjournal.com/articles/1832-a-guide-for-singleended-to-mixedmode-s-parameter-conversions](https://www.signalintegrityjournal.com/articles/1832-a-guide-for-singleended-to-mixedmode-s-parameter-conversions)]
+
+![img](network/720M30Fig1.jpg)
+
+***single-ended S-parameters***
+
+![image-20251025193503968](network/image-20251025193503968.png)
+
+***Mixed-mode S-parameters***
+
+![img](network/fig5.jpg)
+
+![img](network/fig6.jpg)
+
+![image-20251025193746446](network/image-20251025193746446.png)
+
+---
+
+![image-20251025204726806](network/image-20251025204726806.png)
+
+![image-20251025203655730](network/image-20251025203655730.png)
+
+
+
 ## Missing Term in KVL
 
 > Prof. Kolb/Whites. EE 382 Applied Electromagnetics Lecture 8: Maxwell's Equations and Electrical CIrcuits [[http://montoya.sdsmt.edu/ee382/lectures/382Lecture8.pdf](http://montoya.sdsmt.edu/ee382/lectures/382Lecture8.pdf)]

@@ -33,6 +33,51 @@ mathjax: true
 
 
 
+## inverter capacitance simulation
+
+### inverter input
+
+R-C, ***series*** equivalent circuit
+
+![invCap](insight/invCap.png)
+
+
+### inverter output
+
+R-C, ***parallel*** equivalent circuit
+
+
+
+---
+
+#### AC simulation
+
+![image-20250628112910588](insight/image-20250628112910588.png)
+
+@vi = 0
+
+![image-20250628104042741](insight/image-20250628104042741.png)
+
+sweep vi from 0 to 800mV (vdd)
+
+![image-20250628105510374](insight/image-20250628105510374.png)
+
+
+
+---
+
+#### SP simulation
+
+![image-20250628112857124](insight/image-20250628112857124.png)
+
+![image-20250628112620876](insight/image-20250628112620876.png)
+
+
+
+> EEStream. Cadence - How to find device capacitance - DC simulation, SP simulation and Large-signal SP simulation [[https://www.youtube.com/watch?v=M3zP6eJnONk](https://www.youtube.com/watch?v=M3zP6eJnONk)]
+>
+> ![image-20250628114414562](insight/image-20250628114414562.png)
+
 
 
 ## Why 50-ohm?

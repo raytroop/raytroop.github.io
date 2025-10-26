@@ -232,57 +232,30 @@ $$\begin{align}
 
 
 
+## varactor simulation of VCO
 
-## Injection Locking
+Three methods:
 
-*TODO* &#128197;
+- PSS +PSP (*pay attention to port termination and voltage amplitude*)
+- PSS +PAC
+- PSS Only
+
+![image-20251026155903015](osc-run/image-20251026155903015.png)
+
+![image-20251026160758494](osc-run/image-20251026160758494.png)
+
+![image-20251026160408516](osc-run/image-20251026160408516.png)
 
 
 
 ---
 
-"Topics in IC (Wireline Transceiver Design): Lec 4 - Injection Locked Oscillators" [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf)]
+`rms` only scale magnitude $1/\sqrt{2}$ but retain phase for complex number, like harmonic
 
-Cowan, Glenn. (2024). Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations
+- `mag(vh('pss "/P5"))` = `mag(rms(vh('pss "/P5"))) * (2**0.5)` 
+- `phaseDegUnwrapped(vh('pss "/P5"))` = `phaseDegUnwrapped(rms(vh('pss "/P5")))`
 
-Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC3.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC3.pdf)]
-
-Aditya Varma Muppala. Oscillator Theory - Injection Locking [[note](https://adityamuppala.github.io/assets/Notes_YouTube/Injection_Locking_YouTube.pdf), [video1](https://youtu.be/uelsciruAXw), [video2](https://youtu.be/kUsH4WhEybI)]
-
-Min-Seong Choo. Review of Injection-Locked Oscillators [[https://journal.theise.org/jse/wp-content/uploads/sites/2/2020/09/JSE-2020-0001.pdf](https://journal.theise.org/jse/wp-content/uploads/sites/2/2020/09/JSE-2020-0001.pdf)]
-
-
-
-
-## VCO varactor simulation
-
-> Two methods: 1. pss + pac; 2. pss+psp
-
-### PSS + PAC
-
-![image-20220510192206354](osc-run/image-20220510192206354.png)
-
-pss time domain
-
-![image-20220510192351590](osc-run/image-20220510192351590.png)
-
-using the **0-harmonic**
-
-![image-20220510192447040](osc-run/image-20220510192447040.png)
-
-### PSS + PSP
-
-![image-20220510192753324](osc-run/image-20220510192753324.png)
-
-using **Y11** of `psp`
-
-![image-20220510192639080](osc-run/image-20220510192639080.png)
-
-### comparison
-
-![image-20220510193036717](osc-run/image-20220510193036717.png)
-
-> which are same
+![image-20251026155120102](osc-run/image-20251026155120102.png)
 
 
 

@@ -7,6 +7,27 @@ categories:
 mathjax: true
 ---
 
+
+
+## Capacitor Bank
+
+> B. Sadhu and R. Harjani, "Capacitor bank design for wide tuning range LC VCOs: 850MHz-7.1GHz (157%)," Proceedings of 2010 IEEE International Symposium on Circuits and Systems, Paris, France, 2010 [[https://sci-hub.st/10.1109/ISCAS.2010.5537040](https://sci-hub.st/10.1109/ISCAS.2010.5537040)]
+
+*TODO* &#128197;
+
+![image-20251025222240141](lc-osc/image-20251025222240141.png)
+
+>  large value KVCO is not favorable due to noise and possibly spurs at the control voltage
+
+
+
+![image-20251026003354263](lc-osc/image-20251026003354263.png)
+
+![image-20251026003228152](lc-osc/image-20251026003228152.png)
+
+
+
+
 ## LC Tank
 
 ![image-20251010004537960](lc-osc/image-20251010004537960.png)
@@ -65,13 +86,72 @@ $$
 
 
 
-## Capacitor Bank
 
-> B. Sadhu and R. Harjani, "Capacitor bank design for wide tuning range LC VCOs: 850MHz-7.1GHz (157%)," Proceedings of 2010 IEEE International Symposium on Circuits and Systems, Paris, France, 2010 [[https://sci-hub.st/10.1109/ISCAS.2010.5537040](https://sci-hub.st/10.1109/ISCAS.2010.5537040)]
+## Current Limited Output Swing
+
+> Edgar Sanchez-Sinencio. ECEN 665, OSCILLATORS [[https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf](https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf)]
+
+***NMOS Realization***
+
+![image-20251026105512862](lc-osc/image-20251026105512862.png)
+
+![image-20251026121057564](lc-osc/image-20251026121057564.png)
+
+```matlab
+L0 = 1e-9 * 2;
+RL0 = 0.25133 * 2;
+C0 = 6.333e-12 / 2;
+RC0 = 0.50264 * 2;
+
+w0 = 1/sqrt(L0*C0);   % 12.566 Grad/s
+
+QL = w0*L0/RL0;       % 50
+QC = 1/(w0*C0)/RC0;   % 25
+
+RLp0 = QL^2 * RL0;
+RCp0 = QC^2 * RC0;
+Rp = RLp0 * RCp0 / (RLp0 + RCp0);  % 418.8576 Ohm
+Qtot_by_L = Rp/(w0*L0);    % 16.6664
+Qtot_by_C = Rp*(w0*C0);    % 16.6664
+
+I0 = 0.5e-3;
+vp_p = 2/pi * I0 * Rp/2;     % 66.6633 mV
+
+%%%% compute Qtot from simulation waveform
+vp_p2p_sim = 132.8e-3;
+Qtot_calc_L0 = vp_p2p_sim*pi/2/I0/(w0*L0);   % 16.6006
+Qtot_calc_C0 = vp_p2p_sim*pi/2/I0*(w0*C0);   % 16.6006
+```
+
+---
+
+***CMOS Realization***
 
 *TODO* &#128197;
 
+![image-20251026122550988](lc-osc/image-20251026122550988.png)
 
+
+
+---
+
+***current limited*** vs ***voltage limited***
+
+![image-20251026121829983](lc-osc/image-20251026121829983.png)
+
+---
+
+![image-20251026120405401](lc-osc/image-20251026120405401.png)
+
+---
+
+>  ***cross-coupled pair — NMOS (or PMOS) Realization***
+>
+> ![image-20251026122015538](lc-osc/image-20251026122015538.png)
+>
+> ***cross-coupled pair — CMOS Realization***
+>
+> ![image-20251026122231321](lc-osc/image-20251026122231321.png)
 
 
 
@@ -165,8 +245,6 @@ L_p &\approx L_s
 
 
 ## reference
-
-P. Andreani and A. Bevilacqua, "Harmonic Oscillators in CMOS—A Tutorial Overview," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 1, pp. 2-17, 2021 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
 
 A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
 

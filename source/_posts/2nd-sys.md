@@ -45,7 +45,7 @@ We can analyze open loop system in a better perspective because it is simpler. S
 
 ---
 
-![image-20251025143935862](2nd-sys/image-20251025143935862.png)
+![image-20251025215110687](2nd-sys/image-20251025215110687.png)
 
 ```matlab
 zta = 0:.001:1;
@@ -60,9 +60,9 @@ hold on
 plot(PM(idx45), zta(idx45), 'ro', MarkerFaceColor='r', LineWidth=3, MarkerSize=8)
 text(PM(idx45)+2, zta(idx45), ['\zeta=' num2str(zta(idx45)) ' @PM=45^o'])
 plot(PM(idx60), zta(idx60), 'ro', MarkerFaceColor='r', LineWidth=3, MarkerSize=8)
-text(PM(idx60)+2, zta(idx60), ['\zeta=' num2str(zta(idx60)) ' @PM=460^o'])
+text(PM(idx60)+2, zta(idx60), ['\zeta=' num2str(zta(idx60)) ' @PM=60^o'])
 plot(PM(idx70), zta(idx70), 'ro', MarkerFaceColor='r', LineWidth=3, MarkerSize=8)
-text(PM(idx70)-13, zta(idx70), ['\zeta=' num2str(zta(idx70)) ' @PM=70^o'])
+text(PM(idx70)-10, zta(idx70), ['\zeta=' num2str(zta(idx70)) ' @PM=70^o'])
 grid on; xlabel('Phase Margin, ^o'); ylabel('Damping ratio, \zeta')
 ```
 

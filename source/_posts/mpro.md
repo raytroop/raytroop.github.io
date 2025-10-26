@@ -1,6 +1,6 @@
 ---
 title: multipath ring oscillator (MPRO)
-date: 2022-03-06 16:20:13
+date: 2024-12-16 16:20:13
 tags:
 categories:
 - analog
@@ -156,4 +156,4 @@ Step 4/4: Reporting Verification Results and Statistics
 
 
 
-> T. Kim, D. -G. Song, S. Youn, J. Park, H. Park and J. Kim, "Verifying start-up failures in coupled ring oscillators in presence of variability using predictive global optimization," 2013 IEEE/ACM International Conference on Computer-Aided Design (ICCAD), 2013, pp. 486-493, doi: 10.1109/ICCAD.2013.6691161.[GCHECK: Global Convergence Checker for Oscillators](https://mics.snu.ac.kr/wiki/GCHECK)
+> T. Kim, D. -G. Song, S. Youn, J. Park, H. Park and J. Kim, "Verifying start-up failures in coupled ring oscillators in presence of variability using predictive global optimization," 2013 IEEE/ACM International Conference on Computer-Aided Design (ICCAD), 2013, pp. 486-493 GCHECK: Global Convergence Checker for Oscillators](https://mics.snu.ac.kr/wiki/GCHECK)

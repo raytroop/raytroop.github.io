@@ -232,7 +232,7 @@ $$\begin{align}
 
 
 
-## varactor simulation of VCO
+## varactor simulation
 
 Three methods:
 

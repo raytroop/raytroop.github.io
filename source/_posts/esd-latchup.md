@@ -28,6 +28,14 @@ mathjax: true
 
 ![image-20251023234029891](esd-latchup/image-20251023234029891.png)
 
+> ![image-20251026210502523](esd-latchup/image-20251026210502523.png)
+
+![image-20251026205645844](esd-latchup/image-20251026205645844.png)
+
+***NMOS capacitor with DNW*** owing to the ***parasitic junction that formed between P-substrate and the DNW*** to reduce the probability of ESD damage on the ***thin gate oxide*** layer of NMOS capacitor. 
+
+Therefore, it results in higher CDM ESD robustness than that of the other two designs with decoupling capacitors realized by of ***varactor*** and ***NMOS capacitor***
+
 
 
 ### Circuit-Level CDM Model

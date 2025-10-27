@@ -33,6 +33,36 @@ mathjax: true
 
 
 
+## MOSFET Thermal Noise
+
+> K. Ohmori and S. Amakawa, "Direct White Noise Characterization of Short-Channel MOSFETs," in *IEEE Transactions on Electron Devices*, vol. 68, no. 4, pp. 1478-1482, April 2021 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9366960), [slides](https://www.mos-ak.org/asia_pacific_2021/presentations/Ohmori_MOS-AK_ASP_2021.pdf)]
+
+![image-20251028005749046](insight/image-20251028005749046.png)
+$$
+\overline{i^2_d} \propto V_{DS}
+$$
+![image-20251028014235780](insight/image-20251028014235780.png)
+
+---
+
+![image-20251028010509047](insight/image-20251028010509047.png)
+$$
+\overline{i^2_d} \propto \gamma \propto  \eta \propto \frac{1}{V_{DS}}
+$$
+
+
+---
+
+> [[https://www.eecg.toronto.edu/~johns/ece512/lecture_notes/04_noise_2_per_page.pdf](https://www.eecg.toronto.edu/~johns/ece512/lecture_notes/04_noise_2_per_page.pdf)]
+
+![image-20251027234644231](insight/image-20251027234644231.png)
+
+---
+
+> [[https://people.engr.tamu.edu/spalermo/ecen474/lecture12_ee474_noise.pdf](https://people.engr.tamu.edu/spalermo/ecen474/lecture12_ee474_noise.pdf)]
+
+![image-20251027235211591](insight/image-20251027235211591.png)
+
 ## inverter capacitance simulation
 
 ### inverter input
@@ -268,32 +298,6 @@ g_m r_o = \frac{g_m}{I_D}I_D \cdot \frac{V_A}{I_D} =  \frac{g_m}{I_D} \cdot V_A
 $$
 
 $g_m r_o $ is the indicator of $V_A$, if $\frac{g_m}{I_D}$ is same
-
-
-
-## Resonator
-
-![image-20240826223955851](insight/image-20240826223955851.png)
-
-
-
-![image-20240826224132736](insight/image-20240826224132736.png)
-
-![image-20240826224317197](insight/image-20240826224317197.png)
-
----
-
-![image-20240826224651954](insight/image-20240826224651954.png)
-
-![image-20240826224823886](insight/image-20240826224823886.png)
-
-*bandpass filter*
-
-
-
-> Hossein Hashemi, RF Circuits, [[https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN](https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN)]
-
-
 
 
 

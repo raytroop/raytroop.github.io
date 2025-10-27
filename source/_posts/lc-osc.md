@@ -87,13 +87,25 @@ $$
 
 
 
-## Current Limited Output Swing
+## Output Amplitude
 
 > Edgar Sanchez-Sinencio. ECEN 665, OSCILLATORS [[https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf](https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf)]
 
-***NMOS Realization***
+![image-20251026120405401](lc-osc/image-20251026120405401.png)
+
+### NMOS Realization
+
+![image-20251027223026549](lc-osc/image-20251027223026549.png)
+
+---
 
 ![image-20251026105512862](lc-osc/image-20251026105512862.png)
+
+> ![image-20251026122015538](lc-osc/image-20251026122015538.png)
+
+---
+
+
 
 ![image-20251026121057564](lc-osc/image-20251026121057564.png)
 
@@ -123,94 +135,37 @@ Qtot_calc_L0 = vp_p2p_sim*pi/2/I0/(w0*L0);   % 16.6006
 Qtot_calc_C0 = vp_p2p_sim*pi/2/I0*(w0*C0);   % 16.6006
 ```
 
+
+
+### CMOS Realization
+
+![image-20251027223323689](lc-osc/image-20251027223323689.png)
+
 ---
-
-***CMOS Realization***
-
-*TODO* &#128197;
 
 ![image-20251026122550988](lc-osc/image-20251026122550988.png)
 
 
 
----
+> ![image-20251026122231321](lc-osc/image-20251026122231321.png)
 
-***current limited*** vs ***voltage limited***
+### current limited vs voltage limited
+
+![image-20251027215143039](lc-osc/image-20251027215143039.png)
+
+![image-20251027215225227](lc-osc/image-20251027215225227.png)
 
 ![image-20251026121829983](lc-osc/image-20251026121829983.png)
 
----
+## Cross-coupled Differential-pair
 
-![image-20251026120405401](lc-osc/image-20251026120405401.png)
-
----
-
->  ***cross-coupled pair — NMOS (or PMOS) Realization***
->
-> ![image-20251026122015538](lc-osc/image-20251026122015538.png)
->
-> ***cross-coupled pair — CMOS Realization***
->
-> ![image-20251026122231321](lc-osc/image-20251026122231321.png)
+![image-20251027224751015](lc-osc/image-20251027224751015.png)
 
 
 
-## Non ideal capacitor & inductor
-
-> Tank Circuits/Impedances [[https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf](https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf)]
->
-> Resonant Circuits  [[https://web.ece.ucsb.edu/~long/ece145b/Resonators.pdf](https://web.ece.ucsb.edu/~long/ece145b/Resonators.pdf)]
->
-> Series & Parallel Impedance Parameters and Equivalent Circuits [[https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf](https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf)]
->
-> ES Lecture 35: Non ideal capacitor, Capacitor Q and series RC to parallel RC conversion [[https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo](https://youtu.be/CJ_2U5pEB4o?si=4j4CWsLSapeu-hBo)]
+?? Triode MOS noise
 
 
-
-### Capacitor
-
-![image-20231224163730529](lc-osc/image-20231224163730529.png)
-
----
-
-![image-20251009211423154](lc-osc/image-20251009211423154.png)
-
-> ![image-20251009211708604](lc-osc/image-20251009211708604.png)
-
-$$
-Q_s = \frac{X_s}{R_s} = X_p\frac{Q_p^2}{Q_p^2+1}\cdot \frac{Q_p^2+1}{R_p} =\frac{Q_p^2}{R_p/X_p}=Q_p
-$$
-
-
-So long as $Q_s\gg 1$
-$$\begin{align}
-R_p &\approx Q_s^2R_s \\
-C_p &\approx C_s
-\end{align}$$
-
-
----
-
-
-
-![image-20251011224853381](lc-osc/image-20251011224853381.png)
-
-![image-20240119001309410](lc-osc/image-20240119001309410.png)
-
-
-
-
-
-
-### Inductor
-
-![image-20231224163740411](lc-osc/image-20231224163740411.png)
-
-So long as $Q_s\gg 1$
-$$\begin{align}
-R_p &\approx Q_s^2R_s \\
-L_p &\approx L_s
-\end{align}$$
 
 
 
@@ -269,3 +224,6 @@ Jun Yin. ISSCC 2025  T10:  mm-Wave Oscillator Design
 ---
 
 Razavi, Behzad. RF Microelectronics. 2nd ed. Prentice Hall, 2012. [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgsQqKzSDpFmbM.pdf)]
+
+Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007
+

@@ -19,6 +19,73 @@ mathjax: true
 
 
 
+## Active Inductor
+
+![activeInd](bw-extension/activeInd.svg)
+
+$$\begin{align}
+A &= \frac{g_mR_L}{1+(g_{\text{m}_{\text{dio}}}+ g_{\text{ds}_\text{tot}})R_L}\cdot \frac{1+R_pC_Ps}{1+\frac{(1+g_{\text{ds}_{\text{tot}}}R_L)R_PC_P+C_PR_L+R_LC_L}{1+(g_{\text{m}_{\text{dio}}}+g_{\text{ds}_\text{tot}})R_L}s + \frac{R_LC_LR_PC_P}{1+(g_{\text{m}_\text{dio}}+g_{\text{ds}_{\text{tot}}})R_L}s^2} \\
+&= \frac{g_mR_L}{1+(g_{\text{m}_{\text{dio}}}+ g_{\text{ds}_{\text{tot}}})R_L}\cdot \frac{R_PC_P}{ \frac{R_LC_LR_PC_P}{1+(g_{\text{m}_{\text{dio}}}+g_{\text{ds}_{\text{tot}}})R_L}}\cdot \frac{1/(R_PC_P)+s}{s^2 + \frac{(1+g_{\text{ds}_{\text{tot}}}R_L)R_PC_P+C_PR_L+R_LC_L}{R_PC_P}s + \frac{1+(g_{\text{m}_{\text{dio}}}+g_{\text{ds}_\text{tot}})R_L}{R_LC_LR_PC_P}} \\
+&= A_0 \cdot A(s)
+\end{align}$$
+
+That is
+
+$$\begin{align}
+\omega_z &= \frac{1}{R_PC_P} \tag{1} \\ 
+\omega_n &= \sqrt{\frac{1+(g_{\text{m}_{\text{dio}}}+ g_{\text{ds}_\text{tot}})R_L}{R_LC_LR_PC_P}} = \sqrt{\omega_{p0}\omega_z} \\
+\zeta & = \frac{(1+g_{\text{ds}_\text{tot}}R_L)R_PC_P+C_PR_L+R_LC_L}{R_PC_P} \frac{1}{2 \omega_n}
+\end{align}$$
+
+Where
+$$\begin{align}
+\omega_{p0} &= \frac{1}{(R_L||\frac{1}{g_{\text{m}_{\text{dio}}}}||\frac{1}{g_{\text{m}_{\text{tot}}}})C_L}  \tag{2}
+\end{align}$$
+
+Here, relate $\omega_{p0}$ and $\omega_z$ by coefficient $\alpha$
+$$
+\omega_{p0} = \alpha \cdot  \omega_z \tag{3}
+$$
+This way
+$$
+\omega_n= \sqrt{\alpha}\cdot \omega_z
+$$
+
+$$
+\zeta = \frac{1}{2}(K\sqrt{\alpha}+\frac{1+C_P/C_L}{\sqrt{\alpha}}) \tag{4}
+$$
+
+where
+$$
+K = \frac{R_L||\frac{1}{g_{\text{m}_{\text{dio}}}}||\frac{1}{g_{\text{m}_{\text{tot}}}}}{R_L||g_\text{ds\_tot}}
+$$
+
+
+
+
+And $A(s)$ can be expressed as
+$$
+A(s) = \frac{\frac{s}{\omega_z}+1}{\frac{s^2}{\omega_n^2}+2\frac{\zeta}{\omega_n}s+1}
+$$
+It magnitude in dB
+$$
+A_\text{dB} = 10\log\frac{1+(\omega/\omega_z)^2}{1+(\omega/\omega_n)^4+2\omega^2(2\zeta^2-1)/\omega_n^2}
+$$
+Substitute $\omega_n$ with Eq (2), followed is obtained
+$$
+A_\text{dB} = 10\log{\frac{\alpha^2(\omega_z^4 + \omega_z^2\omega^2)}{\alpha^2\omega_z^4+\omega^4+2\alpha\omega_z^2(2\zeta^2-1)\omega^2}}
+$$
+peaking frequency
+$$
+\omega_\text{peak} = \omega_z\cdot \sqrt{\sqrt{(\alpha+1)^2 - 4\alpha \zeta^2}-1}
+$$
+If $\zeta=1$
+$$\begin{align}
+\omega_{A_\text{dB = 0dB} }&= \sqrt{1-2/\alpha}\cdot \omega_{p0} \\
+\omega_\text{peak} &= \omega_z\sqrt{\alpha-2} \\
+A_\text{dB,peak} &= 10\log\frac{\alpha^2}{4(\alpha-1)}
+\end{align}$$
+
 
 
 ## Transformer
@@ -76,31 +143,6 @@ $$
 ![image-20240713142506673](bw-extension/image-20240713142506673.png)
 
 
-## SRF (Self-Resonant Frequency)
-
-![image-20240802210109935](bw-extension/image-20240802210109935.png)
-
-
-$$
-f_\text{SRF} = \frac{1}{2\pi \sqrt{LC}}
-$$
-The SRF of an inductor is the frequency at which the parasitic capacitance of the inductor resonates with the ideal inductance of the inductor, resulting in an extremely high impedance. The inductance only acts like an inductor below its SRF
-
-![image-20241221092745311](bw-extension/image-20241221092745311.png)
-
-- For **choking** applications, chose an inductor whose SRF is at or near the frequency to be attenuated
-
-- For other applications, the SRF should be at least **10** times higher than the operating frequency
-
-  it is more important to have a *relatively flat inductance curve* (constant inductance vs. frequency) near the required frequency
-
-
-
-> [Understanding RF Inductor Specifications, [https://www.ece.uprm.edu/~rafaelr/inel5325/SupportDocuments/doc671_Selecting_RF_Inductors.pdf](https://www.ece.uprm.edu/~rafaelr/inel5325/SupportDocuments/doc671_Selecting_RF_Inductors.pdf)]
->
-> [RFIC-GPT Wiki, [https://wiki.icprophet.net/](https://wiki.icprophet.net/)]
-
-
 
 
 ## reference
@@ -128,6 +170,10 @@ Bob Ross. IBIS Summit [[T-Coils and Bridged-T Networks](https://ibis.org/summits
 A. A. Abidi, "The T-Coil Circuit Demystified," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 72, no. 9, pp. 4469-4480, Sept. 2025
 
 S. Lin, D. Huang and S. Wong, "Pi Coil: A New Element for Bandwidth Extension," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 56, no. 6, pp. 454-458, June 2009
+
+---
+
+B. Razavi, "The Active Inductor [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 2, pp. 7-11, Spring 2020 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2020.pdf)]
 
 ---
 

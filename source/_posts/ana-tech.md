@@ -77,73 +77,6 @@ mathjax: true
 
 
 
-## Active Inductor
-
-![activeInd](ana-tech/activeInd.svg)
-
-$$\begin{align}
-A &= \frac{g_mR_L}{1+(g_{\text{m}_{\text{dio}}}+ g_{\text{ds}_\text{tot}})R_L}\cdot \frac{1+R_pC_Ps}{1+\frac{(1+g_{\text{ds}_{\text{tot}}}R_L)R_PC_P+C_PR_L+R_LC_L}{1+(g_{\text{m}_{\text{dio}}}+g_{\text{ds}_\text{tot}})R_L}s + \frac{R_LC_LR_PC_P}{1+(g_{\text{m}_\text{dio}}+g_{\text{ds}_{\text{tot}}})R_L}s^2} \\
-&= \frac{g_mR_L}{1+(g_{\text{m}_{\text{dio}}}+ g_{\text{ds}_{\text{tot}}})R_L}\cdot \frac{R_PC_P}{ \frac{R_LC_LR_PC_P}{1+(g_{\text{m}_{\text{dio}}}+g_{\text{ds}_{\text{tot}}})R_L}}\cdot \frac{1/(R_PC_P)+s}{s^2 + \frac{(1+g_{\text{ds}_{\text{tot}}}R_L)R_PC_P+C_PR_L+R_LC_L}{R_PC_P}s + \frac{1+(g_{\text{m}_{\text{dio}}}+g_{\text{ds}_\text{tot}})R_L}{R_LC_LR_PC_P}} \\
-&= A_0 \cdot A(s)
-\end{align}$$
-
-That is
-
-$$\begin{align}
-\omega_z &= \frac{1}{R_PC_P} \tag{1} \\ 
-\omega_n &= \sqrt{\frac{1+(g_{\text{m}_{\text{dio}}}+ g_{\text{ds}_\text{tot}})R_L}{R_LC_LR_PC_P}} = \sqrt{\omega_{p0}\omega_z} \\
-\zeta & = \frac{(1+g_{\text{ds}_\text{tot}}R_L)R_PC_P+C_PR_L+R_LC_L}{R_PC_P} \frac{1}{2 \omega_n}
-\end{align}$$
-
-Where
-$$\begin{align}
-\omega_{p0} &= \frac{1}{(R_L||\frac{1}{g_{\text{m}_{\text{dio}}}}||\frac{1}{g_{\text{m}_{\text{tot}}}})C_L}  \tag{2}
-\end{align}$$
-
-Here, relate $\omega_{p0}$ and $\omega_z$ by coefficient $\alpha$
-$$
-\omega_{p0} = \alpha \cdot  \omega_z \tag{3}
-$$
-This way
-$$
-\omega_n= \sqrt{\alpha}\cdot \omega_z
-$$
-
-$$
-\zeta = \frac{1}{2}(K\sqrt{\alpha}+\frac{1+C_P/C_L}{\sqrt{\alpha}}) \tag{4}
-$$
-
-where
-$$
-K = \frac{R_L||\frac{1}{g_{\text{m}_{\text{dio}}}}||\frac{1}{g_{\text{m}_{\text{tot}}}}}{R_L||g_\text{ds\_tot}}
-$$
-
-
-
-
-And $A(s)$ can be expressed as
-$$
-A(s) = \frac{\frac{s}{\omega_z}+1}{\frac{s^2}{\omega_n^2}+2\frac{\zeta}{\omega_n}s+1}
-$$
-It magnitude in dB
-$$
-A_\text{dB} = 10\log\frac{1+(\omega/\omega_z)^2}{1+(\omega/\omega_n)^4+2\omega^2(2\zeta^2-1)/\omega_n^2}
-$$
-Substitute $\omega_n$ with Eq (2), followed is obtained
-$$
-A_\text{dB} = 10\log{\frac{\alpha^2(\omega_z^4 + \omega_z^2\omega^2)}{\alpha^2\omega_z^4+\omega^4+2\alpha\omega_z^2(2\zeta^2-1)\omega^2}}
-$$
-peaking frequency
-$$
-\omega_\text{peak} = \omega_z\cdot \sqrt{\sqrt{(\alpha+1)^2 - 4\alpha \zeta^2}-1}
-$$
-If $\zeta=1$
-$$\begin{align}
-\omega_{A_\text{dB = 0dB} }&= \sqrt{1-2/\alpha}\cdot \omega_{p0} \\
-\omega_\text{peak} &= \omega_z\sqrt{\alpha-2} \\
-A_\text{dB,peak} &= 10\log\frac{\alpha^2}{4(\alpha-1)}
-\end{align}$$
-
 
 
 ## Response Speed in Analog Circuits
@@ -371,16 +304,6 @@ We obtain
 $$
 \sigma_{vos,DE} = 2\sigma_{vos,SE}
 $$
-
-
-
-
-
-## peaking without inductor
-
-*TODO* &#128197;
-
-> How to generate **complex poles without inductor**? [[https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/](https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/)]
 
 
 

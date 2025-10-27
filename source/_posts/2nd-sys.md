@@ -68,7 +68,7 @@ grid on; xlabel('Phase Margin, ^o'); ylabel('Damping ratio, \zeta')
 
 
 
-# Zeros & Non-Minimum Phase Zeros
+## Zeros & Non-Minimum Phase Zeros
 
 > Influence of Zeros and Non-Minimum Phase Zeros of Transfer Functions on Dynamical System Behavior [[https://aleksandarhaber.com/effect-of-zeros-of-transfer-functions-on-dynamical-system-behavior/](https://aleksandarhaber.com/effect-of-zeros-of-transfer-functions-on-dynamical-system-behavior/)]
 >
@@ -197,14 +197,14 @@ $$
 
 For $\text{PM}=70^o$, $\omega_2 = 2.75\omega_u$, that is
 $$
-t_s \approx \frac{3.35}{\omega_u} \space\space \text{, for PM}=70^o
+t_s \approx \frac{3.35}{\omega_u}
 $$
 
 
 
 For $\text{PM}=45^o$, $\omega_2 = \omega_u$, that is
 $$
-t_s \approx \frac{9.2}{\omega_u} \space\space \text{, for PM}=45^o
+t_s \approx \frac{9.2}{\omega_u}
 $$
 
 

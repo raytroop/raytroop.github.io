@@ -37,7 +37,7 @@ mathjax: true
 
 
 
-### Long-Channel
+### Legacy Long-Channel Model
 
 ![image-20251028010509047](insight/image-20251028010509047.png)
 $$
@@ -60,20 +60,26 @@ $$
 
 ### Short-Channel Effects
 
-> K. Ohmori and S. Amakawa, "Direct White Noise Characterization of Short-Channel MOSFETs," in *IEEE Transactions on Electron Devices*, vol. 68, no. 4, pp. 1478-1482, April 2021 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9366960), [slides](https://www.mos-ak.org/asia_pacific_2021/presentations/Ohmori_MOS-AK_ASP_2021.pdf)]
->
 > Gildenblat, G. S. (2010). Compact modeling : principles, techniques and applications. Springer.
 >
 
-VDS Effect On Channel Noise
+***VDS Effect On Channel Noise***
 
-![image-20251028005749046](insight/image-20251028005749046.png)
+![image-20251028193945932](insight/image-20251028193945932.png)
+
+
 $$
 \overline{i^2_d} \propto V_{DS}
 $$
-![image-20251028014235780](insight/image-20251028014235780.png)
+![image-20251028194509372](insight/image-20251028194509372.png)
 
 
+
+---
+
+> K. Ohmori and S. Amakawa, "Direct White Noise Characterization of Short-Channel MOSFETs," in *IEEE Transactions on Electron Devices*, vol. 68, no. 4, pp. 1478-1482, April 2021 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9366960), [slides](https://www.mos-ak.org/asia_pacific_2021/presentations/Ohmori_MOS-AK_ASP_2021.pdf)]
+
+![image-20251028005749046](insight/image-20251028005749046.png)
 
 ## inverter capacitance simulation
 

@@ -91,11 +91,13 @@ $$
 
 > Edgar Sanchez-Sinencio. ECEN 665, OSCILLATORS [[https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf](https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf)]
 
-![image-20251026120405401](lc-osc/image-20251026120405401.png)
+
 
 ### NMOS Realization
 
 ![image-20251027223026549](lc-osc/image-20251027223026549.png)
+
+*common mode current don't contribute to output amplitude*
 
 ---
 
@@ -135,11 +137,17 @@ Qtot_calc_L0 = vp_p2p_sim*pi/2/I0/(w0*L0);   % 16.6006
 Qtot_calc_C0 = vp_p2p_sim*pi/2/I0*(w0*C0);   % 16.6006
 ```
 
+---
 
+![image-20251028210311777](lc-osc/image-20251028210311777.png)
 
 ### CMOS Realization
 
 ![image-20251027223323689](lc-osc/image-20251027223323689.png)
+
+Owing to switch-off PMOS eliminating common mode current, all $I_T$ is differentially flowing in the tank.
+
+![image-20251028211854604](lc-osc/image-20251028211854604.png)
 
 ---
 

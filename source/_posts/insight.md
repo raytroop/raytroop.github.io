@@ -35,8 +35,6 @@ mathjax: true
 
 ## MOSFET Thermal Noise
 
-
-
 ### Legacy Long-Channel Model
 
 ![image-20251028010509047](insight/image-20251028010509047.png)
@@ -44,6 +42,7 @@ $$
 \overline{i^2_d} \propto \gamma \propto  \eta \propto \frac{1}{V_{DS}}
 $$
 
+> ![image-20251028194916465](insight/image-20251028194916465.png)
 
 ---
 

@@ -11,6 +11,20 @@ mathjax: true
 
 ## Load-Transient Response  
 
+*TODO* &#128197;
+
+
+
+
+
+## Kelvin connection
+
+> Kelvin connection in IC design [[https://analoghub.ie/category/Circuits/article/kelvinConnection](https://analoghub.ie/category/Circuits/article/kelvinConnection)]
+
+The entire idea behind **Kelvin connection** is to *separate* ***the nodes that are carrying high currents*** *from* ***the sensing nodes to the feedback***
+
+![image-20251028195823568](ldo/image-20251028195823568.png)
+
 
 
 ## Error Amplifier

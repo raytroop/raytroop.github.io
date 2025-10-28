@@ -43,7 +43,7 @@ where $A_{gd}\lt 0$
 
 For ***differential mode input***, *effective input capacitance*
 $$
-C_{in} = C_{gs1} +(1+|A_{gd}|) C_{gd1}+\color{red}(1-|A_{gd})C_n
+C_{in} = C_{gs1} +(1+|A_{gd}|) C_{gd1}+\color{red}(1-|A_{gd}|)C_n
 $$
 and *effective output capacitance*
 $$

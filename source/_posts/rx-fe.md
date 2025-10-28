@@ -29,7 +29,7 @@ mathjax: true
 
 > S. Gondi and B. Razavi, "Equalization and Clock and Data Recovery Techniques for 10-Gb/s CMOS Serial-Link Receivers," in *IEEE Journal of Solid-State Circuits*, vol. 42, no. 9, pp. 1999-2011 [[pdf](https://www.seas.ucla.edu/brweb/papers/Journals/GBRSep07.pdf)]
 >
-> [[https://people.engr.tamu.edu/spalermo/ecen620/lecture14_ee620_limiting_amps.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture14_ee620_limiting_amps.pdf)]
+> Sam Palermo. ECEN620 Lecture 14: Limiting Amplifiers (LAs) [[https://people.engr.tamu.edu/spalermo/ecen620/lecture14_ee620_limiting_amps.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture14_ee620_limiting_amps.pdf)]
 
 ![image-20251028221403199](rx-fe/image-20251028221403199.png)
 

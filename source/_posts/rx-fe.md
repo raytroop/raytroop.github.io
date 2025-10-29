@@ -61,6 +61,12 @@ C_{d1} = C_{dd1} + (1+\frac{1}{|A_{gd}|})C_{gd1}+\color{red} (1+\frac{1}{|A_{gd}
 $$
 i.e., $C_n$ deteriorate both effective input capacitance and effective output capacitance, unfortunately
 
+---
+
+effective input capacitance $\Pi$ model, which is appropriate for both differential input and common mode input
+
+![nmc_pi_in.drawio](rx-fe/nmc_pi_in.drawio.svg)
+
 
 
 ### XCP with Capacitor

@@ -23,6 +23,46 @@ mathjax: true
 
 
 
+## Distortion & Nonlinearity
+
+> S. Stegemann, W. Mathis. MOS-AK 2012: Interference and Distortion Analysis for Nonlinear Analog Circuits [[https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf](https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf)]
+>
+> Ali Sheikholeslami. A-SSCC 2024 insight: Noise and Distortion,  [[https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4](https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4)]
+>
+> B. Razavi, "Design considerations for direct-conversion receivers," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 44, no. 6, pp. 428-435, June 1997 [[http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf)]
+>
+> Two-Tone Intermodulation [[https://www.ittc.ku.edu/~jstiles/622/handouts/Two-Tone%20Intermodulation.pdf](https://www.ittc.ku.edu/~jstiles/622/handouts/Two-Tone%20Intermodulation.pdf)]
+>
+> Intermodulation Distortion [[https://www.ittc.ku.edu/~jstiles/622/handouts/Intermodulation%20Distortion.pdf](https://www.ittc.ku.edu/~jstiles/622/handouts/Intermodulation%20Distortion.pdf)]
+>
+> A. Sheikholeslami, "“Noise and Distortion, Part II” [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 16, no. 4, pp. 8-11, Fall 2024 
+>
+> A. Sheikholeslami, "Noise and Distortion, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 17, no. 1, pp. 8-11, winter 2025
+
+![image-20250924003304052](rx-fe/image-20250924003304052.png)
+
+![image-20250924003422546](rx-fe/image-20250924003422546.png)
+
+
+
+### Even-Order Distortion
+
+**Odd**-order distortion: **symmetry**
+
+**Even**-Order Distortion: **non-symmetry**  (*Effect of Mismatch*)
+
+![image-20250613235048524](rx-fe/image-20250613235048524.png)
+
+
+
+---
+
+> [[http://cc.ee.ntu.edu.tw/~ecl/Courses/105AIC/lock/Analog_Chapter_09_Nonlinearity%20and%20Mismatch.pdf](http://cc.ee.ntu.edu.tw/~ecl/Courses/105AIC/lock/Analog_Chapter_09_Nonlinearity%20and%20Mismatch.pdf)]
+>
+> ![image-20250613235212237](rx-fe/image-20250613235212237.png)
+
+
+
 ## Negative Capacitance Circuit
 
 ### Negative Miller Capacitance
@@ -43,21 +83,21 @@ where $A_{gd}\lt 0$
 
 For ***differential mode input***, *effective input capacitance*
 $$
-C_{in} = C_{gs1} +(1+|A_{gd}|) C_{gd1}+\color{red}(1-|A_{gd}|)C_n
+C_{in} = C_{gs} +(1+A_{dm}) C_{gd}+\color{red}(1-A_{dm})C_n
 $$
 and *effective output capacitance*
 $$
-C_{out} = C_{dd1} + (1+\frac{1}{|A_{gd}|})C_{gd1}+\color{red} (1-\frac{1}{|A_{gd}|})C_n
+C_{out} = C_{dd} + (1+\frac{1}{A_{dm}})C_{gd}+\color{red} (1-\frac{1}{A_{dm}})C_n
 $$
 That is $C_n$ deteriorate the effective output capacitance 
 
 For ***common mode input***, *effective input capacitance*
 $$
-C_{in} = C_{gs1} + (1+|A_{gd}|) C_{gd1}+ \color{red}(1+|A_{gd}|)C_n
+C_{in} = C_{gs} + (1+A_{cm}) C_{gd}+ \color{red}(1+A_{cm})C_n
 $$
 and *effective output capacitance*
 $$
-C_{d1} = C_{dd1} + (1+\frac{1}{|A_{gd}|})C_{gd1}+\color{red} (1+\frac{1}{|A_{gd}|})C_n
+C_{d1} = C_{dd} + (1+\frac{1}{A_{cm}})C_{gd}+\color{red} (1+\frac{1}{A_{cm}})C_n
 $$
 i.e., $C_n$ deteriorate both effective input capacitance and effective output capacitance, unfortunately
 
@@ -66,6 +106,8 @@ i.e., $C_n$ deteriorate both effective input capacitance and effective output ca
 effective input capacitance $\Pi$ model, which is appropriate for both differential input and common mode input
 
 ![nmc_pi_in.drawio](rx-fe/nmc_pi_in.drawio.svg)
+
+Suppose $C_n=C_{gd}$,  effective *differential* input capacitance is *same* with effective *common-mode* input capacitance ($C_n=\frac{A_{dm}-A_{cm}}{A_{dm}+A_{cm}}C_{gd}$)
 
 
 

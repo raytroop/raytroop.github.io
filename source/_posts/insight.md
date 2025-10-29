@@ -33,6 +33,16 @@ mathjax: true
 
 
 
+## CMRR (Common-Mode Properties)
+
+![image-20251029215920630](insight/image-20251029215920630.png)
+
+---
+
+![image-20251029215548157](insight/image-20251029215548157.png)
+
+
+
 ## MOSFET Thermal Noise
 
 ### Legacy Long-Channel Model
@@ -127,7 +137,7 @@ sweep vi from 0 to 800mV (vdd)
 
 
 
-## Why 50-ohm?
+## 50-ohm?
 
 > Why is 50-ohm characteristic impedance standardized in RF and Microwave systems? [[link](https://community.cadence.com/cadence_technology_forums/f/awr-design-environment/62213/why-is-50-ohm-characteristic-impedance-standardized-in-rf-and-microwave-systems#:~:text=A%20loss%20vs.,all%20RF%20and%20Microwave%20systems)]
 >
@@ -138,6 +148,13 @@ sweep vi from 0 to 800mV (vdd)
  It was a compromise made and a tradeoff between ***power handling*** (red curve) and ***losses*** (blue curve)
 
 ![ ](insight/pastedimage1722329653499v1.png)
+
+## Gm Rout Lemma
+$$
+A_V = -G_m R_{out}
+$$
+
+![image-20231021092407849](insight/image-20231021092407849.png)
 
 
 
@@ -611,16 +628,6 @@ This analysis just use **harmonic 0** transfer function in pac analysis, which h
 ### 诺顿定理
 
 ![image-20231021090448282](insight/image-20231021090448282.png)
-
-#### Lemma of Razavi
-
-$$
-A_V = -G_m R_{out}
-$$
-
-![image-20231021092407849](insight/image-20231021092407849.png)
-
-> *Design of Analog CMOS Integrated Circuits, Second Edition - Behzad Razavi*
 
 
 

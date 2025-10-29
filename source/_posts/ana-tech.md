@@ -37,6 +37,28 @@ mathjax: true
 
 > Ali Sheikholeslami, University of Toronto,  A-SSCC 2024 Circuit Insights:**FT1 Noise and Distortion** [[link](https://youtu.be/bvsJgHJ19jI?si=4uY_eYLkJ_zvOgz3)]
 
+
+
+## self-biased active loading
+
+![image-20251029213156015](ana-tech/image-20251029213156015.png)
+
+---
+
+> Vishal Saxena "CMOS Comparator Design Extra Slides" [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Comparator%20Slides.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Comparator%20Slides.pdf)]
+
+![preampSong202412181018](ana-tech/preampSong202412181018.PNG)
+
+
+
+---
+
+> W. Liu, P. Huang and Y. Chiu, "A 12b 22.5/45MS/s 3.0mW 0.059mm2 CMOS SAR ADC achieving over 90dB SFDR," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010 [[https://sci-hub.se/10.1109/ISSCC.2010.5433830](https://sci-hub.se/10.1109/ISSCC.2010.5433830)]
+
+![image-20250805230555464](ana-tech/image-20250805230555464.png)
+
+
+
 ## Slewing in Folded-Cascode Op Amps
 
 

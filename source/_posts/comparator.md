@@ -220,22 +220,6 @@ If the comparator can not generate a well-defined logical output in half of the 
 ![image-20241215162430509](comparator/image-20241215162430509.png)
 
 
-## Pre-amp (preamplifier)
-
-![preampSong202412181018](comparator/preampSong202412181018.PNG)
-
-
-> Vishal Saxena "CMOS Comparator Design Extra Slides" [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Comparator%20Slides.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Comparator%20Slides.pdf)]
-
----
-
-
-
-![image-20250805230555464](comparator/image-20250805230555464.png)
-
-> W. Liu, P. Huang and Y. Chiu, "A 12b 22.5/45MS/s 3.0mW 0.059mm2 CMOS SAR ADC achieving over 90dB SFDR," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010 [[https://sci-hub.se/10.1109/ISSCC.2010.5433830](https://sci-hub.se/10.1109/ISSCC.2010.5433830)]
-
-
 
 ## Math Background
 

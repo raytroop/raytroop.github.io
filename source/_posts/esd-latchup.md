@@ -58,11 +58,15 @@ The circuit model is divided into three parts:
 
 ![image-20251023224827861](esd-latchup/image-20251023224827861.png)
 
-> all charges are considered be distributed to the ***surface*** of an IC die, i.e., Si substrate
+> all charges are considered be distributed to the ***surface*** of an IC die, i.e., ***Si substrate***
 >
-> The ***surface-stored charges*** are modeled using the capacitors at the surfaces of the IC substrate
+> The ***surface-stored charges*** are modeled using the capacitors at ***the surfaces of the IC substrate***
+>
+> ![image-20251030233044387](esd-latchup/image-20251030233044387.png)
+>
+> ![image-20251030233715548](esd-latchup/image-20251030233715548.png)
 
-![image-20251023222905619](esd-latchup/image-20251023222905619.png)
+![image-20251030232957818](esd-latchup/image-20251030232957818.png)
 
 ---
 
@@ -153,34 +157,6 @@ induced electrostatic charges are randomly distributed throughout a ***bare die*
 
 
 
-###  single & dual discharge method
-
-***single discharge procedure***:
-
-​	*single* positive **or** *single* negative CDM ESD pulse is applied to DUT for *individual* CDM discharge 
-
-![image-20251018171927965](esd-latchup/image-20251018171927965.png)
-
-> the single discharge procedure involves ***only one*** CDM discharge to stress the DUT device
-
----
-
-***dual discharge procedure***:
-
-*single* positive **and** *single* negative CDM ESD pulses are applied to produce *one pair* of alternating polarity CDM discharges to zap the DUT
-
-![image-20251018171825654](esd-latchup/image-20251018171825654.png)
-
-
-
-### Static Induction
-
-> ESD Static Induction & Double Jeopardy Demonstration [[https://youtu.be/RGN-PvAE-OI](https://youtu.be/RGN-PvAE-OI)]
-
-![image-20251018164948453](esd-latchup/image-20251018164948453.png)
-
-
-
 ### Field Induced CDM (FICDM)
 
 > Field Induced CDM Explained [[https://certus-semi.com/field-induced-cdm-explained/](https://certus-semi.com/field-induced-cdm-explained/)]
@@ -199,17 +175,17 @@ induced electrostatic charges are randomly distributed throughout a ***bare die*
 >
 > $C_{DF}\gg C_{DG}$ — the separation of the DUT from the field plate is always much less than the separation of the DUT from the ground plane
 
-Assuming no initial charge on the DUT, with the switch S open the DC voltage between the DUT and the Field Plate is
+Assuming ***no initial charge on the DUT***, with the switch S open the DC voltage between the DUT and the Field Plate is
 $$
 V_{DF} = \frac{C_{DG}}{C_{DG} + C_{DF}}\cdot V_{HV} \approx 0
 $$
 
-- DUT potential will therefore closely track the power supply voltage
-- The potential of the DUT relative to the ground plane can therefore be controlled without actually putting any net charge on the DUT
+- ***DUT potential*** will therefore closely track the ***power supply voltage***
+- The *potential of the DUT relative to the ground plane* can therefore be controlled *without actually putting any net charge on the DUT*
 
 
 
-### CDM Test Sequence
+#### CDM Test Sequence
 
 1. With the *field plate at zero volts* an *uncharged DUT* is placed on the field plate in the dead bug position and the ground plane is positioned with the pogo pin above the pin to be tested
 
@@ -230,6 +206,53 @@ $$
    *During this redistribution of charge, which usually lasts under 2 ns, the high voltage power supply and the high value resistor can be ignored because of their slow response time*
 
 5. After the initial redistribution of charge the field plate will slowly return to the voltage on the high voltage power supply, ***while the DUT remains at zero potential, but in a charged state***
+
+6. With the pogo pin still touching the DUT pin the HV power supply voltage is set to zero. The field plate will slowly return to zero volts and the ***charge on the DUT will slowly bleed off through the pogo pin***.
+
+
+
+
+####  single & dual discharge method
+
+***single discharge procedure***:
+
+*single* positive **or** *single* negative CDM ESD pulse is applied to DUT for *individual* CDM discharge 
+
+![image-20251018171927965](esd-latchup/image-20251018171927965.png)
+
+> the single discharge procedure involves ***only one*** CDM discharge to stress the DUT device
+
+---
+
+***dual discharge procedure***:
+
+*single* positive **and** *single* negative CDM ESD pulses are applied to produce *one pair* of alternating polarity CDM discharges to zap the DUT
+
+![image-20251018171825654](esd-latchup/image-20251018171825654.png)
+
+
+
+#### Static Induction
+
+> ESD Static Induction & Double Jeopardy Demonstration [[https://youtu.be/RGN-PvAE-OI](https://youtu.be/RGN-PvAE-OI)]
+
+![image-20251018164948453](esd-latchup/image-20251018164948453.png)
+
+
+
+#### Electrostatic Equilibrium State
+
+![image-20251031003543399](esd-latchup/image-20251031003543399.png)
+
+![image-20251031002004910](esd-latchup/image-20251031002004910.png)
+
+### Simulating CDM Using Spice
+
+> *Robert Ashton*. Simulating Small Device CDM Using Spice [[https://incompliancemag.com/simulating-small-device-cdm-using-spice/](https://incompliancemag.com/simulating-small-device-cdm-using-spice/)]
+>
+> Challenges of CDM Modeling for High-Speed Interface Devices [[https://incompliancemag.com/challenges-of-cdm-modeling-for-high-speed-interface-devices/](https://incompliancemag.com/challenges-of-cdm-modeling-for-high-speed-interface-devices/)]
+
+*TODO* &#128197;
 
 
 

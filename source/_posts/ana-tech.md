@@ -29,14 +29,6 @@ mathjax: true
 
 *TODO* &#128197;
 
-## Noise and Distortion
-
-*TODO* &#128197;
-
-
-
-> Ali Sheikholeslami, University of Toronto,  A-SSCC 2024 Circuit Insights:**FT1 Noise and Distortion** [[link](https://youtu.be/bvsJgHJ19jI?si=4uY_eYLkJ_zvOgz3)]
-
 
 
 ## self-biased active loading

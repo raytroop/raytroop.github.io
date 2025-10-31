@@ -254,6 +254,7 @@ $$
 
 *TODO* &#128197;
 
+The value of CFG is also based on a parallel plate capacitor model with a peripheral capacitance term **minus a capacitance representing a shielding of the Field Plate to ground plane capacitance due to the size of the device under test**
 
 
 ## Diode capacitance vs. Vpn

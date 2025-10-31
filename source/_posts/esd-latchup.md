@@ -246,15 +246,45 @@ $$
 
 ![image-20251031002004910](esd-latchup/image-20251031002004910.png)
 
-### Simulating CDM Using Spice
+### CDM Tester Model Using Spice
 
 > *Robert Ashton*. Simulating Small Device CDM Using Spice [[https://incompliancemag.com/simulating-small-device-cdm-using-spice/](https://incompliancemag.com/simulating-small-device-cdm-using-spice/)]
->
-> Challenges of CDM Modeling for High-Speed Interface Devices [[https://incompliancemag.com/challenges-of-cdm-modeling-for-high-speed-interface-devices/](https://incompliancemag.com/challenges-of-cdm-modeling-for-high-speed-interface-devices/)]
 
 *TODO* &#128197;
 
 The value of CFG is also based on a parallel plate capacitor model with a peripheral capacitance term **minus a capacitance representing a shielding of the Field Plate to ground plane capacitance due to the size of the device under test**
+
+![image-20251101000506994](esd-latchup/image-20251101000506994.png)
+
+
+
+![image-20251101003112971](esd-latchup/image-20251101003112971.png)
+
+
+
+---
+
+> Challenges of CDM Modeling for High-Speed Interface Devices [[https://incompliancemag.com/challenges-of-cdm-modeling-for-high-speed-interface-devices/](https://incompliancemag.com/challenges-of-cdm-modeling-for-high-speed-interface-devices/)]
+
+![image-20251031225516239](esd-latchup/image-20251031225516239.png)
+
+***Problem Statement of a lumped capacitor CDUT***
+
+![image-20251031225558484](esd-latchup/image-20251031225558484.png)
+
+***Distributed DUT model***
+
+To assess the design solutions, a ***distributed DUT model***, as presented in Figure 3, can be plugged into the CDM tester model, replacing the *lumped DUT capacitor*
+
+- The maximum voltage difference between Vdut and Vss (Vdd) should not exceed the breakdown voltage of the gates.
+- ***On-die parasitics of Vss and Vdd nets*** strongly influence the actual voltage waveform at the *input gate oxide*. In particular, oscillations and spikes in the voltage waveform are sensed by the gate oxide and can lead to damage
+
+![image-20251031232430782](esd-latchup/image-20251031232430782.png)
+
+> ![image-20251031231621824](esd-latchup/image-20251031231621824.png)
+
+![ficdm.drawio](esd-latchup/ficdm.drawio.svg)
+
 
 
 ## Diode capacitance vs. Vpn

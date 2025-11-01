@@ -9,6 +9,16 @@ mathjax: true
 
 
 
+## differential R/C simulation
+
+![image-20251101193603045](ade/image-20251101193603045.png)
+
+The right testbench have AC common voltage, which is undesired. that's why the left testbench is better choice for differential R/C extraction
+
+![image-20251101192827303](ade/image-20251101192827303.png)
+
+
+
 ## `strobeperiod`
 
 > ADC Verification Rapid Adoption Kit (RAK)

@@ -429,6 +429,8 @@ $$
 > Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.). Prentice-Hall, Inc., USA.
 >
 > Phase delay vs group delay: Common misconceptions. [[https://audiosciencereview.com/forum/index.php?threads/phase-delay-vs-group-delay-common-misconceptions.39591/](https://audiosciencereview.com/forum/index.php?threads/phase-delay-vs-group-delay-common-misconceptions.39591/)]
+>
+> Dan Boschen. Why do we care about "Linear Phase Filters"? [[link](https://www.linkedin.com/posts/danboschen_why-do-we-care-about-linear-phase-filters-activity-7384371590643326977-NMEt?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 
 
 

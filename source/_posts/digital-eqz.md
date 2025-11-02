@@ -38,7 +38,9 @@ mathjax: true
 
 
 
-### TX-FFE
+### TX FIR Coefficient Selection with MMSE
+
+> Lecture 7: Equalization Introduction & TX FIR Eq [[https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)]
 
 ![image-20251102114741833](digital-eqz/image-20251102114741833.png)
 

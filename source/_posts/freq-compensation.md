@@ -584,60 +584,38 @@ wzc = 1/2/pi/Rc/Cc; % zero frequency
 
 ---
 
-Mismatch between the *pole* and *zero* frequencies leads to the **"doublet problem"**. If the pole and the zero do not exactly coincide, we say that they constitute a ***doublet***
-
-> Problem 10.19 in Razavi 2nd book
-
-Suppose the open-loop transfer function of a two-stage op amp is expressed as
-$$
-H_{open}(s)=\frac{A_0(1+\frac{s}{\omega_z})}{\left( 1+ \frac{s}{\omega_{p1}}\right)\left( 1+ \frac{s}{\omega_{p2}}\right)}
-$$
-Ideally, $\omega_z=\omega_2$ and the feedback circuit exhibits a first-order behavior, i.e., its step response contains a single time constant and no overshoot.
-
-Then the transfer function of the amplifier in a *unity-gain feedback loop* is given by
-$$\begin{align}
-H_{closed}(s) &=\frac{A_0\left(1+\frac{s}{\omega_z}\right)}{\frac{s^2}{\omega_{p1}\omega_{p2}}+\left( \frac{1}{\omega_{p1}} + \frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1} \\
-&=\frac{\frac{A_0}{A_0+1}(1+\frac{s}{\omega_z})}{\frac{s^2}{\omega_{p1}\omega_{p2}(A_0+1)}+\left( \frac{1}{\omega_{p1}} + \frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)\frac{s}{A_0+1}+1}
-\end{align}$$
-
----
+![image-20251102164516063](freq-compensation/image-20251102164516063.png)
 
 The denominator part of $H_{closed}(s)$ is
 $$
-D(s) = \frac{s^2}{\omega_{p1}\omega_{p2}}+\left( \frac{1}{\omega_{p1}} + \frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}\right)s+A_0+1
+D(s) = \frac{s^2}{(A_0+1)\omega_{p1}\omega_{p2}}+\frac{\frac{1}{\omega_{p1}} + \frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}}{A_0+1}s+1
 $$
 
-Assuming  two poles ($\omega_{pA} \ll\omega_{pB}$) of $H_{closed}(s)$ are widely spaced,
-$$\begin{align}
-D(s) &= \left( 1+ \frac{s}{\omega_{pA}}\right)\left( 1+ \frac{s}{\omega_{pB}}\right)\\
-&\cong \frac{s^2}{\omega_{pA}\omega_{pB}}+\frac{s}{\omega_{pA}} + 1
-\end{align}$$
+![image-20251102165416360](freq-compensation/image-20251102165416360.png)
+
+suppose $\omega_{pA} \ll\omega_{pB}$, then
+$$
+D(s) = \left( 1+ \frac{s}{\omega_{pA}}\right)\left( 1+ \frac{s}{\omega_{pB}}\right)\approx \frac{s^2}{\omega_{pA}\omega_{pB}}+\frac{s}{\omega_{pA}} + 1
+$$
 
 Thus, the two poles of the closed-loop transfer function of system are
 $$\begin{align}
-\omega_{pA} &= \frac{A_0+1}{\frac{1}{\omega_{p1}} + \frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}} \\
-&=  \frac{(A_0+1)\omega_{p1} \omega_{p2}}{\omega_{p1} + \omega_{p2} + \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}} \\
+\omega_{pA} &= \frac{A_0+1}{\frac{1}{\omega_{p1}} + \frac{1}{\omega_{p2}}+\frac{A_0}{\omega_{z}}} =  \frac{(A_0+1)\omega_{p1} \omega_{p2}}{\omega_{p1} + \omega_{p2} + \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}}\\
 \omega_{pB} &= \omega_{p1} + \omega_{p2} + \frac{A_0}{\omega_z}\omega_{p1} \omega_{p2}
 \end{align}$$
 
----
+![image-20251102170244359](freq-compensation/image-20251102170244359.png)
 
-**Assuming** $\omega_z \simeq  \omega_{p2}$ and $\omega_{p2}\ll (1+A_0)\omega_{p1}$
-$$
-\omega_{pA} = \omega_{p2}
-$$
-and
-$$
-\omega_{pB} = (1+A_0)\omega_{p1}
-$$
-The closed-loop transfer function is
-$$
-H_{closed}(s) = \frac{\frac{A_0}{A_0+1}\left(1+\frac{s}{\omega_z}\right)}{\left(1+\frac{s}{(1+A_0)\omega_{p1}}\right)\left( 1+\frac{s}{\omega_{p2}} \right)}
-$$
+> ***non-dominant pole $\omega_{p2}$ and zero $\omega_z$  are in UGB***
 
----
-
-The step response of the closed-loop amplifier
+$$\begin{align}
+\omega_{pA} &\approx \omega_{p2}\\
+\omega_{pB} &\approx (1+A_0)\omega_{p1}
+\end{align}$$
+Then, closed-loop transfer function is
+$$
+H_{closed}(s) \approx \frac{\frac{A_0}{A_0+1}\left(1+\frac{s}{\omega_z}\right)}{\left(1+\frac{s}{(1+A_0)\omega_{p1}}\right)\left( 1+\frac{s}{\omega_{p2}} \right)}
+$$
 
 Consider the Laplace transform function of step response, $X(s)=\frac{1}{s}$
 $$
@@ -647,18 +625,83 @@ Thus, the **small-signal step response** of the closed-loop amplifier is
 $$
 y(t)=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t} \right]u(t)
 $$
-Since, $\omega_{p2}\ll (1+A_0)\omega_{p1}$. Therefore, rewrite the $y(t)$
+Since, $\omega_{p2}\ll (1+A_0)\omega_{p1}$. rewrite the $y(t)$
 $$
-y(t)\cong \frac{A_0}{A_0+1}\left[1-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t} \right]u(t)
+y(t)\approx \frac{A_0}{A_0+1}\left[1-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t} \right]u(t)
 $$
-The step response contains an exponential term of the form $\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t}$. This is an important result, indicating that if the zero does not exactly cancel the pole, the step response exhibits an exponential with an amplitude proportional to $\left(1-\frac{\omega_{p2}}{\omega_z}\right)$, which depends on the mismatch between $\omega_z$ and $\omega_{p2}$ and a time constant $\tau$ of $\frac{1}{\omega_{p2}}$ or $\frac{1}{\omega_{z}}$
+![image-20251102173521194](freq-compensation/image-20251102173521194.png)
 
-### perfect pole-zero cancellation
+***perfect pole-zero cancellation*** with $\omega_{p2}=\omega_z$
+$$
+y(t) \approx \frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}\right]u(t) \approx \frac{A_0}{A_0+1}u(t)
+$$
 
-$$\begin{align}
-y(t) &=\frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}-\left(1-\frac{\omega_{p2}}{\omega_z}\right)e^{-\omega_{p2}t} \right]u(t) \\
-&= \frac{A_0}{A_0+1}\left[1-e^{-(A_0+1)\omega_{p1}t}\right]u(t)
-\end{align}$$
+![image-20251102194445318](freq-compensation/image-20251102194445318.png)
+
+```matlab
+clear
+clc
+
+A0 = 1e6;
+wp1= 2*pi*1;   % 1Hz
+wpz = 2*pi*2e4; % 20KHz
+
+s=tf('s');
+
+wp2 =0.5*wpz;
+wz =2*wpz;
+Ho = A0*(1+s/wz)/(1+s/wp1)/(1+s/wp2);
+Hc = Ho/(1+Ho);
+
+
+wi = logspace(-3, 7, 100000)*2*pi;
+ti = linspace(0, 100,100000)*1e-6;
+
+[mag_0p1, phase_0p1, wout_0p1] = bode(Ho, wi);
+[vo_0p1, to_0p1] = step(Hc, ti);
+
+
+wp2 =1*wpz;
+wz =1*wpz;
+Ho = A0*(1+s/wz)/(1+s/wp1)/(1+s/wp2);
+Hc = Ho/(1+Ho);
+[mag_1p0, phase_1p0, wout_1p0] = bode(Ho, wi);
+[vo_1p0, to_1p0] = step(Hc, ti);
+
+
+wp2 =2*wpz;
+wz =0.5*wpz;
+Ho = A0*(1+s/wz)/(1+s/wp1)/(1+s/wp2);
+Hc = Ho/(1+Ho);
+[mag_10p0, phase_10p0, wout_10p0] = bode(Ho, wi);
+[vo_10p0, to_10p0] = step(Hc, ti);
+
+subplot(2,2,1)
+semilogx(wout_0p1(:)/2/pi, 20*log10(mag_0p1(:)),'b-',LineWidth=2);
+hold on
+semilogx(wout_1p0(:)/2/pi, 20*log10(mag_1p0(:)),'r-',LineWidth=2);
+semilogx(wout_10p0(:)/2/pi, 20*log10(mag_10p0(:)),'g-',LineWidth=2);
+grid on; xlabel('Hz'); ylabel('Mag (dB)');
+legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{z}')
+
+subplot(2,2,3)
+semilogx(wout_0p1(:)/2/pi, phase_0p1(:),'b-',LineWidth=2);
+hold on
+semilogx(wout_1p0(:)/2/pi, phase_1p0(:),'r-',LineWidth=2);
+semilogx(wout_10p0(:)/2/pi, phase_10p0(:),'g-',LineWidth=2);
+grid on; xlabel('Hz'); ylabel('Phase')
+legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{z}')
+
+subplot(2,2,[2 4])
+plot(to_0p1(:), vo_0p1(:),'b-',LineWidth=2);
+hold on
+plot(to_1p0(:), vo_1p0(:),'r-',LineWidth=2);
+plot(to_10p0(:), vo_10p0(:),'g-',LineWidth=2);
+grid on; xlabel('time'); ylabel('V')
+legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{z}')
+```
+
+
 
 ---
 

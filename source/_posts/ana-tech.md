@@ -179,7 +179,7 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 
 
 
-## Double differential Pair
+## Double Differential pair
 
 $V_\text{ip}$ and $V_\text{im}$ are input, $V_\text{rp}$ and $V_\text{rm}$ are reference voltage
 $$
@@ -292,9 +292,9 @@ $$
 
 
 
-## Input Diff-Pair
+## Input Differential pair
 
-
+> Todd Brooks, Broadcom "Input Programmable Gain Amplifier (PGA) Design for ADC Signal Conditioning" [[https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt](https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt)]
 
 ### DM Distortion
 
@@ -332,25 +332,7 @@ V_{in}^+ -V_{in}^-  &= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
 
 ![image-20241027095520556](ana-tech/image-20241027095520556.png)
 
-> Todd Brooks, Broadcom "Input Programmable Gain Amplifier (PGA) Design for ADC Signal Conditioning" [[https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt](https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt)]
-
-
-
-## Source-Degenerated Differential Pairs
-
-*TODO* &#128197;
 
 
 
 
-
-
-## reference
-
-Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers" [[https://picture.iczhiku.com/resource/eetop/wHKfZPYpAleAKXBV.pdf](https://picture.iczhiku.com/resource/eetop/wHKfZPYpAleAKXBV.pdf)]
-
-Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
-
-Minsoo Choi et al., "An Approximate Closed-Form Channel Model for Diverse Interconnect Applications," IEEE Transactions on Circuits and Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct. 2014.
-
-K. Yadav, P. -H. Hsieh and A. Chan Carusone, "Linearity Analysis of Source-Degenerated Differential Pairs for Wireline Applications," in IEEE Open Journal of Circuits and Systems [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10769573](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10769573)]

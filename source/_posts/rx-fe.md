@@ -27,7 +27,7 @@ mathjax: true
 
 > S. Stegemann, W. Mathis. MOS-AK 2012: Interference and Distortion Analysis for Nonlinear Analog Circuits [[https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf](https://www.mos-ak.org/dresden_2012/publications/T8_Stegemann_MOS-AK_Desden_12.pdf)]
 >
-> Ali Sheikholeslami. A-SSCC 2024 insight: Noise and Distortion,  [[https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4](https://youtu.be/bvsJgHJ19jI?si=1CKDJvTy5EQdPLB4)]
+> Ali Sheikholeslami. A-SSCC 2024 insight: Noise and Distortion,  [[https://youtu.be/bvsJgHJ19jI](https://youtu.be/bvsJgHJ19jI)]
 >
 > B. Razavi, "Design considerations for direct-conversion receivers," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 44, no. 6, pp. 428-435, June 1997 [[http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf)]
 >
@@ -341,6 +341,8 @@ A. A. Abidi, "The T-Coil Circuit Demystified," in IEEE Transactions on Circuits 
 
 S. Lin, D. Huang and S. Wong, "Pi Coil: A New Element for Bandwidth Extension," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 56, no. 6, pp. 454-458, June 2009
 
+M. Kossel *et al*., "A T-Coil-Enhanced 8.5 Gb/s High-Swing SST Transmitter in 65 nm Bulk CMOS With <−16 dB Return Loss Over 10 GHz Bandwidth," in *IEEE Journal of Solid-State Circuits*, vol. 43, no. 12, pp. 2905-2920, Dec. 2008 [[https://web.mit.edu/magic/Public/papers/04684644.pdf](https://web.mit.edu/magic/Public/papers/04684644.pdf)]
+
 ---
 
 S. Galal and B. Razavi, "Broadband ESD protection circuits in CMOS technology," in IEEE Journal of Solid-State Circuits, vol. 38, no. 12, pp. 2334-2340, Dec. 2003, doi: 10.1109/JSSC.2003.818568.
@@ -352,3 +354,14 @@ M. Ker, C. Lin and Y. Hsiao, "Overview on ESD Protection Designs of Low-Parasiti
 Kosnac, Stefan (2021) *Analysis* of On-*Chip Inductors* and *Arithmetic Circuits* in the *Context* of *High Performance Computing* [[https://archiv.ub.uni-heidelberg.de/volltextserver/30559/1/Dissertation_Stefan_Kosnac.pdf](https://archiv.ub.uni-heidelberg.de/volltextserver/30559/1/Dissertation_Stefan_Kosnac.pdf)]
 
 Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
+
+---
+
+Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers" [[pdf](https://picture.iczhiku.com/resource/eetop/wHKfZPYpAleAKXBV.pdf)]
+
+Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
+
+K. Yadav, P. -H. Hsieh and A. Chan Carusone, "Linearity Analysis of Source-Degenerated Differential Pairs for Wireline Applications," in IEEE Open Journal of Circuits and Systems [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10769573](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10769573)]
+
+Minsoo Choi et al., "An Approximate Closed-Form Channel Model for Diverse Interconnect Applications," IEEE Transactions on Circuits and Systems-I: Regular Papers, vol. 61, no. 10, pp. 3034-3043, Oct. 2014.
+

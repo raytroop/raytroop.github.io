@@ -40,7 +40,92 @@ mathjax: true
 
 ### TX-FFE
 
-*TODO* &#128197;
+![image-20251102114741833](digital-eqz/image-20251102114741833.png)
+
+![tx-ffe-coef-conv.drawio](digital-eqz/tx-ffe-coef-conv.drawio.svg)
+
+---
+
+***Lone-Pulse Equalization***
+
+![image-20251102133644396](digital-eqz/image-20251102133644396.png)
+
+![tx-ffe-coef-sel.drawio](digital-eqz/tx-ffe-coef-sel.drawio.svg)
+
+![image-20251102133850375](digital-eqz/image-20251102133850375.png)
+
+```matlab
+h=[0.004, 0.0010, 0.0023, 0.0052, 0.0812, 0.3437, 0.1775, 0.0917, 0.0526,...
+    0.0360, 0.0224, 0.0162, 0.0152, 0.0097, 0.0090, 0.0067];
+k = length(h);
+n = 3;
+l = 1;
+m2 = 5;
+m1 = 1;
+
+H = zeros([k+n+l-2, n+l-1]);
+H(1:end-2,1) = h;
+H(2:end-1,2) = h;
+H(3:end,3) = h;
+
+Ydes = zeros([k+n+l-2, 1]);
+Ydes(m1+m2+1,1) = 1;
+
+HT = transpose(H);
+
+Wls = inv(HT*H)*HT*Ydes;
+
+% Wls =
+% 
+%    -0.8177
+%     3.7239
+%    -1.7181
+
+Wlsnorm = Wls/sum(norm(Wls,1));
+
+% Wlsnorm =
+% 
+%    -0.1306
+%     0.5949
+%    -0.2745
+```
+
+---
+
+![image-20251102154213244](digital-eqz/image-20251102154213244.png)
+
+![image-20251102154455603](digital-eqz/image-20251102154455603.png)
+
+```matlab
+fcsvf = readtable("hsample_pre10post20.csv");
+h= fcsvf.hsample_Design_Point_1_Y;
+k = length(h);
+n = 8;
+l = 1;
+m2 = 10;  % channel pre-cursor sample#
+m1 = 1;
+
+H = zeros([k+n+l-2, n+l-1]);
+for i =1:n
+    H(i:i+k-1,i) = h;
+end
+
+Ydes = zeros([k+n+l-2, 1]);
+Ydes(m1+m2+1,1) = 1;
+
+HT = transpose(H);
+Wls = inv(HT*H)*HT*Ydes;
+
+
+Wlsnorm = Wls/sum(norm(Wls,1));
+% Wlsnorm =
+% 
+%    -0.0926
+%     0.6383
+%    -0.2691
+```
+
+
 
 ### RX-FFE
 

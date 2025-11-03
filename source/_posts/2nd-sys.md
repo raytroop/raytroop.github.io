@@ -88,6 +88,24 @@ grid on; xlabel('Phase Margin, ^o'); ylabel('Damping ratio, \zeta')
 
 ![image-20251025163805090](2nd-sys/image-20251025163805090.png)
 
+```matlab
+zeta=0.4
+omega_n=3
+k=1
+s=tf('s')
+ 
+W1=1/(s^2+2*zeta*s+1)
+W2=(1/(k*zeta))*s*W1
+W3=W1+W2
+ 
+figure(1)
+hold on
+step(W1,'r')
+step(W2,'k')
+step(W3,'b')
+grid
+```
+
 
 
 ---
@@ -97,6 +115,22 @@ grid on; xlabel('Phase Margin, ^o'); ylabel('Damping ratio, \zeta')
 ![image-20251025164001079](2nd-sys/image-20251025164001079.png)
 
 ![image-20251025164027378](2nd-sys/image-20251025164027378.png)
+
+```matlab
+zeta=0.4
+omega_n=3
+k=1
+s=tf('s')
+S1=1/(s^2+2*zeta*s+1)
+S2=(1/(k*zeta))*s*S1
+S=S1-S2
+figure(1)
+hold on
+step(S1,'r')
+step(-S2,'k')
+step(S,'b')
+grid
+```
 
 
 

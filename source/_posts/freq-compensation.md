@@ -580,7 +580,7 @@ wzc = 1/2/pi/Rc/Cc; % zero frequency
 
 ## Pole-Zero Doublet
 
-![image-20251024221520760](freq-compensation/image-20251024221520760.png)
+![image-20251103210637155](freq-compensation/image-20251103210637155.png)
 
 ---
 
@@ -713,7 +713,74 @@ legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{
 >
 > Thanks to unity gain buffer, zero is alleviated for $C_c$
 
+![image-20251103220259992](freq-compensation/image-20251103220259992.png)
 
+```matlab
+A0 = 1e6;
+wp1= 2*pi*1;   % 1Hz
+wpz = 2*pi*2e4; % 20KHz
+wp2 = 5*A0*wp1;
+
+s=tf('s');
+
+rio = 0.8;
+wpx =rio*wpz;
+wzx =wpz/rio;
+wp1x = 1.5*wp1;   % keep UGB constant by changing dominant pole wp1x
+Ho = A0*(1+s/wzx)/(1+s/wp1x)/(1+s/wp2)/(1+s/wpx);  % 2 poles + pole-zero doublet pair
+Hc = Ho/(1+Ho);
+
+
+wi = logspace(-3, 7, 100000)*2*pi;
+ti = linspace(0, 100,100000)*1e-6;
+
+[mag_0p1, phase_0p1, wout_0p1] = bode(Ho, wi);
+[vo_0p1, to_0p1] = step(Hc, ti);
+
+
+rio = 1;
+wpx =rio*wpz;
+wzx =wpz/rio;
+wp1x = 1*wp1;
+Ho = A0*(1+s/wzx)/(1+s/wp1x)/(1+s/wp2)/(1+s/wpx);
+Hc = Ho/(1+Ho);
+[mag_1p0, phase_1p0, wout_1p0] = bode(Ho, wi);
+[vo_1p0, to_1p0] = step(Hc, ti);
+
+
+rio = 1.25;
+wpx =rio*wpz;
+wzx =wpz/rio;
+wp1x = 0.65*wp1;
+Ho = A0*(1+s/wzx)/(1+s/wp1x)/(1+s/wp2)/(1+s/wpx);
+Hc = Ho/(1+Ho);
+[mag_10p0, phase_10p0, wout_10p0] = bode(Ho, wi);
+[vo_10p0, to_10p0] = step(Hc, ti);
+
+subplot(2,2,1)
+semilogx(wout_0p1(:)/2/pi, 20*log10(mag_0p1(:)),'b-',LineWidth=2);
+hold on
+semilogx(wout_1p0(:)/2/pi, 20*log10(mag_1p0(:)),'r-',LineWidth=2);
+semilogx(wout_10p0(:)/2/pi, 20*log10(mag_10p0(:)),'g-',LineWidth=2);
+grid on; xlabel('Hz'); ylabel('Mag (dB)');
+legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{z}')
+
+subplot(2,2,3)
+semilogx(wout_0p1(:)/2/pi, phase_0p1(:),'b-',LineWidth=2);
+hold on
+semilogx(wout_1p0(:)/2/pi, phase_1p0(:),'r-',LineWidth=2);
+semilogx(wout_10p0(:)/2/pi, phase_10p0(:),'g-',LineWidth=2);
+grid on; xlabel('Hz'); ylabel('Phase')
+legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{z}')
+
+subplot(2,2,[2 4])
+plot(to_0p1(:), vo_0p1(:),'b-',LineWidth=2);
+hold on
+plot(to_1p0(:), vo_1p0(:),'r-',LineWidth=2);
+plot(to_10p0(:), vo_10p0(:),'g-',LineWidth=2);
+grid on; xlabel('time'); ylabel('V')
+legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{z}')
+```
 
 
 
@@ -728,6 +795,8 @@ J. H. Huijsing, "Operational Amplifiers, Theory and Design, 3rd ed. New York: Sp
 Razavi, Behzad. Design of Analog CMOS Integrated Circuits. India: McGraw-Hill, 2017. [[pdf](https://picture.iczhiku.com/resource/eetop/shkFghTKAoYQtXXX.pdf)]
 
 Sansen, Willy M. Analog Design Essentials. Germany: Springer US, 2006.
+
+Gray, P. R., Hurst, P. J., Lewis, S. H., & Meyer, R. G. (2024). *Analysis and design of analog integrated circuits* (Sixth edition.). John Wiley & Sons, Inc..
 
 ---
 

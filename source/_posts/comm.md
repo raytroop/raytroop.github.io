@@ -72,7 +72,39 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 ![image-20251010233230845](comm/image-20251010233230845.png)
 
+---
 
+Stationary noise can also be decomposed into AM and PM components, but there will always be ***equal amounts of both***.
+
+> Ken Kundert. Re: Question about phase noise simulation result [[https://designers-guide.org/forum/YaBB.pl?num=1309258199/15#15](https://designers-guide.org/forum/YaBB.pl?num=1309258199/15#15)]
+
+![image-20251104004721935](comm/image-20251104004721935.png)
+
+---
+
+> Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise [[https://designers-guide.org/theory/cyclo-preso.pdf](https://designers-guide.org/theory/cyclo-preso.pdf)]
+>
+> [[https://designers-guide.org/theory/cyclo-paper.pdf](https://designers-guide.org/theory/cyclo-paper.pdf)]
+
+![image-20251104010641470](comm/image-20251104010641470.png)
+
+
+
+### Single Sideband Modulation (SSB)
+
+![image-20251104003558243](comm/image-20251104003558243.png)
+
+![image-20251104003840236](comm/image-20251104003840236.png)
+
+![image-20251104003852067](comm/image-20251104003852067.png)
+
+---
+
+> 肥肥牛是只虎. PSS+Pnoise仿真：基本设置 [[https://mp.weixin.qq.com/s/etyQ2UkfisPkvbc44XFw4w](https://mp.weixin.qq.com/s/etyQ2UkfisPkvbc44XFw4w)]
+
+![image-20251104004017859](comm/image-20251104004017859.png)
+
+![image-20251104010500397](comm/image-20251104010500397.png)
 
 ### AM & PM in Phasor
 
@@ -84,6 +116,20 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 ![image-20251011000448718](comm/image-20251011000448718.png)
 
+---
+
+![img](comm/rtaImage.png)
+
+
+
+> Timing 201 #1: The Case of the Phase Noise That Wasn't - Part 1 [[https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?](https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?)]
+
+
+
+![img](comm/EN_Mod_T_2_4_S1.png)
+
+> [[https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation](https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation)]
+
 ### AM-PM conversion in asymmetrical linear system
 
 > Golara, S. (2015). Identifying Mechanisms of AM-PM Distortion in Large Signal Amplifiers. UCLA [[https://escholarship.org/uc/item/4jp786z8](https://escholarship.org/uc/item/4jp786z8)]
@@ -92,9 +138,13 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 ![image-20251010234110656](comm/image-20251010234110656.png)
 
+---
 
+> Bob Nelson. Phase Noise 101: Basics, Applications and Measurements [[https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf])https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf]
 
-## AN-PN Conversion
+![image-20251104003200956](comm/image-20251104003200956.png)
+
+### AN-PN Conversion
 
 > G. Giust, Influence of Noise Processes on Jitter and Phase Noise Measurements [[https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements](https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements)]
 >
@@ -116,6 +166,16 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 
 ![Figure 8 thumb_rev](comm/Figure8_REV.jpg)
+
+---
+
+> 
+
+![image-20251104010027135](comm/image-20251104010027135.png)
+
+![image-20251104010925436](comm/image-20251104010925436.png)
+
+
 
 ### Amplitude Noise
 
@@ -147,21 +207,6 @@ Though *direct spectrum technique method* may not be useful for measuring *very 
 
 
 
-
-
-### Phasor representation
-
-![img](comm/rtaImage.png)
-
-
-
-> Timing 201 #1: The Case of the Phase Noise That Wasn't - Part 1 [[https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?](https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?)]
-
-
-
-![img](comm/EN_Mod_T_2_4_S1.png)
-
-> [[https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation](https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation)]
 
 ## Narrowband FM Approximation
 

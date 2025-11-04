@@ -1041,3 +1041,8 @@ Y. Li, M. Miao and R. Gauthier, "ESD Protection Design Overview in Advanced SOI 
 
 S. Kim *et al*., "Technology Scaling of ESD Devices in State of the Art FinFET Technologies," *2020 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2020
 
+---
+
+藍色天空. 版图Latch up DRC规则解读 [[https://www.kaixinspace.com/latch-up-rule/](https://www.kaixinspace.com/latch-up-rule/)]
+
+—. 一文搞懂闩锁效应（Latch up）[[https://www.kaixinspace.com/latch-up/](https://www.kaixinspace.com/latch-up/)]

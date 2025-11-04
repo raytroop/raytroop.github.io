@@ -72,6 +72,8 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 ![image-20251010233230845](comm/image-20251010233230845.png)
 
+![image-20251104233701576](comm/image-20251104233701576.png)
+
 ---
 
 Stationary noise can also be decomposed into AM and PM components, but there will always be ***equal amounts of both***.
@@ -106,7 +108,9 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 ![image-20251104010500397](comm/image-20251104010500397.png)
 
-### AM & PM in Phasor
+### Phasor Diagram
+
+> Dan Boschen. Creating uneven sidebands with AM + PM modulation? [[https://dsp.stackexchange.com/a/61670/59253](https://dsp.stackexchange.com/a/61670/59253)]
 
 ![image-20251010232416816](comm/image-20251010232416816.png)
 
@@ -130,7 +134,7 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 > [[https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation](https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation)]
 
-### AM-PM conversion in asymmetrical linear system
+### Asymmetrical Linear System
 
 > Golara, S. (2015). Identifying Mechanisms of AM-PM Distortion in Large Signal Amplifiers. UCLA [[https://escholarship.org/uc/item/4jp786z8](https://escholarship.org/uc/item/4jp786z8)]
 
@@ -154,7 +158,6 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 >
 > AN10072 Determine the Dominant Source of Phase Noise, by Inspection [[https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection](https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection)]
 >
-> Enrico Rubiola, February 7, 2025. Phase Noise - Art, Science and Experimental Methods [[https://rubiola.org/pdf-lectures/Scient-Instrum-Files/!-Phase-noise.pdf](https://rubiola.org/pdf-lectures/Scient-Instrum-Files/!-Phase-noise.pdf)]
 
 - AM alone doesn't introduce jitter (e.g., doesn't change zero-crossings) nor impact phase
 
@@ -169,13 +172,21 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 ---
 
-> 
+> Enrico Rubiola. The Measurement of AM-PM Noise, and the Origin of Noise in Oscillators [[https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf](https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf)]
+>
+> Enrico Rubiola, February 7, 2025. Phase Noise - Art, Science and Experimental Methods [[https://rubiola.org/pdf-lectures/Scient-Instrum-Files/!-Phase-noise.pdf](https://rubiola.org/pdf-lectures/Scient-Instrum-Files/!-Phase-noise.pdf)]
+
+![image-20251105002120460](comm/image-20251105002120460.png)
 
 ![image-20251104010027135](comm/image-20251104010027135.png)
 
+> ![image-20251105002402811](comm/image-20251105002402811.png)
+
 ![image-20251104010925436](comm/image-20251104010925436.png)
 
+---
 
+![image-20251105002517286](comm/image-20251105002517286.png)
 
 ### Amplitude Noise
 
@@ -194,9 +205,11 @@ R_y(\tau) &= \mathrm{E}[y(t)y(t+\tau)] \\
 
 
 
-### phase noise analyzer vs spectrum analyzer
+### Phase Noise Measurement 
 
 > Phase Noise Measurement Solutions [[https://www.keysight.com/vn/en/assets/7018-02528/technical-overviews/5990-5729.pdf](https://www.keysight.com/vn/en/assets/7018-02528/technical-overviews/5990-5729.pdf)]
+>
+> Greg Bonaguide. Advances in Phase Noise Measurement Techniques [[https://ieee.li/pdf/viewgraphs/advances_in_phase_noise_measurement_techniques.pdf](https://ieee.li/pdf/viewgraphs/advances_in_phase_noise_measurement_techniques.pdf)]
 
 
 The three most widely adopted techniques are **direct spectrum**, **phase detector**, and **two-channel cross-correlation**. 
@@ -204,6 +217,20 @@ The three most widely adopted techniques are **direct spectrum**, **phase detect
 While the direct spectrum technique measures phase noise with the existence of the carrier signal, the other two remove the carrier (demodulation) before phase noise is measured.
 
 Though *direct spectrum technique method* may not be useful for measuring *very close-in phase noise* to a drifting carrier, it is convenient for qualitative quick evaluation on sources with relatively high noise
+
+![image-20251105003812138](comm/image-20251105003812138.png)
+
+```python
+import numpy as np
+
+# at 5KHz
+n_pm = -140     # dBc
+n_am = -142     # dBc
+
+# calculate the total noise by PM + AM
+n_tot = 10*np.log10(10**(n_pm / 10) + 10**(n_am / 10))
+print(n_tot)    # -137.8755739720566
+```
 
 
 
@@ -227,7 +254,13 @@ where $P_c = A^2/2$ is the carrier power of the signal
 
 
 
+## PM & FM
 
+> Dan Boschen What is the difference between phase noise and frequency noise? [[https://dsp.stackexchange.com/a/38230/59253](https://dsp.stackexchange.com/a/38230/59253)]
+
+Phase Noise and Frequency Noise are not two different noise sources, they are artifacts of the same noise, it is just a matter of what units you want to use
+
+![enter image description here](https://i.sstatic.net/4Fbt1.png)
 
 ## Modulation of WSS process
 

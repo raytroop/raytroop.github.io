@@ -840,3 +840,5 @@ A. L. S. Loke, C. K. Lee and B. M. Leary, "Nanoscale CMOS Implications on Analog
 A. L. S. Loke, Migrating Analog/Mixed-Signal Designs to FinFET Alvin Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits
 
 Lattice Semiconductor, 16FFC Process Technology Introduction December 9th, 2021[[pdf](https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/HR1000000009.pdf)]
+
+藍色天空. 匹配那些事儿… [[https://www.kaixinspace.com/matching/](https://www.kaixinspace.com/matching/)]

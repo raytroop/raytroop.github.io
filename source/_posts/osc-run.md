@@ -43,7 +43,11 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 
 ![image-20250920171411886](osc-run/image-20250920171411886.png)
 
+---
 
+> Carlo Samori ISSCC2016 T1: Understanding Phase Noise in LC VCOs
+
+![image-20251104233318469](osc-run/image-20251104233318469.png)
 
 ## LTV Models
 

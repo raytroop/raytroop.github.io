@@ -94,6 +94,12 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 ### Single Sideband Modulation (SSB)
 
+> [[https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation](https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation)]
+
+
+![img](comm/EN_Mod_T_2_4_S1.png)
+
+
 ![image-20251104003558243](comm/image-20251104003558243.png)
 
 ![image-20251104003840236](comm/image-20251104003840236.png)
@@ -111,6 +117,21 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 ### Phasor Diagram
 
 > Dan Boschen. Creating uneven sidebands with AM + PM modulation? [[https://dsp.stackexchange.com/a/61670/59253](https://dsp.stackexchange.com/a/61670/59253)]
+>
+> Timing 201 #1: The Case of the Phase Noise That Wasn't - Part 1 [[https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?](https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?)]
+
+
+![img](comm/rtaImage.png)
+
+
+
+- phasor rotating counter-clockwise represents the upper sideband
+
+- phase rotating clockwise represents the lower sideband
+
+- relative magnitudes of the phasors to the fixed carrier is the relative magnitude for each of those sidebands
+
+
 
 ![image-20251010232416816](comm/image-20251010232416816.png)
 
@@ -120,19 +141,9 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 ![image-20251011000448718](comm/image-20251011000448718.png)
 
----
-
-![img](comm/rtaImage.png)
 
 
 
-> Timing 201 #1: The Case of the Phase Noise That Wasn't - Part 1 [[https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?](https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?)]
-
-
-
-![img](comm/EN_Mod_T_2_4_S1.png)
-
-> [[https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation](https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation)]
 
 ### Asymmetrical Linear System
 

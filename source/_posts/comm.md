@@ -299,6 +299,12 @@ Phase Noise and Frequency Noise are not two different noise sources, they are ar
 
 ![enter image description here](https://i.sstatic.net/4Fbt1.png)
 
+---
+
+![image-20251106001007275](comm/image-20251106001007275.png)
+
+
+
 ## Modulation of WSS process
 
 > Balu Santhanam, Probability Theory & Stochastic Process 2020: [Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)

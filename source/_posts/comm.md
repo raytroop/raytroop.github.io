@@ -11,6 +11,9 @@ mathjax: true
 
 ## AM & PM Noise
 
+> Ken Kundert, Measuring AM, PM & FM Conversion with SpectreRF [[https://designers-guide.org/analysis/am-pm-conv.pdf](https://designers-guide.org/analysis/am-pm-conv.pdf)]
+
+
 ![image-20241012001704081](comm/image-20241012001704081.png)
 
 > The spectrum of the narrowband FM signal is very similar to that of an amplitude modulation (AM) signal but has the **phase reversal** for the other sideband component
@@ -23,11 +26,11 @@ x(t) &= (1+A_m\cos{\omega_m t})\cos(\omega_0 t + P_m \sin\omega_m t) \\
 &= X_{pm}(t) + X_{apm}(t)
 \end{align}$$
 
-$X_{pm}(t)$, **PM only** part
+$X_{pm}(t)$, **PM Only**
 $$
 X_{pm}(t) = \cos\omega_0 t - \frac{P_m}{2}\cos(\omega_0 - \omega_m)t + \frac{P_m}{2}\cos(\omega_0 + \omega_m)t
 $$
-$X_{apm}(t)$, **AM & PM part**
+$X_{apm}(t)$, **AM & PM**
 $$\begin{align}
 X_{apm}(t) &= A_m \cos{\omega_m t} (\cos\omega_0 t-P_m\sin\omega_m t\sin\omega_0 t) \\
 &= \frac{A_m}{2}[\cos(\omega_0 + \omega_m)t + \cos(\omega_0 -\omega_m)t] - \frac{A_mP_m}{2}\sin(2\omega_m t)\sin(\omega_0 t) \\
@@ -55,16 +58,64 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 
 
+---
 
-> Ken Kundert, Measuring AM, PM & FM Conversion with SpectreRF [[https://designers-guide.org/analysis/am-pm-conv.pdf](https://designers-guide.org/analysis/am-pm-conv.pdf)]
+> Emad Hegazi , Jacob Rael , Asad Abidi, 2005. The Designer's Guide to High-Purity Oscillators [[https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf](https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf)]
+
+![image-20251105231301581](comm/image-20251105231301581.png)
+
+
+
+### Phasor Diagram
+
+> Dan Boschen. Creating uneven sidebands with AM + PM modulation? [[https://dsp.stackexchange.com/a/61670/59253](https://dsp.stackexchange.com/a/61670/59253)]
+>
+> —. Creating uneven sidebands with AM + PM modulation? [[https://dsp.stackexchange.com/a/61670/59253](https://dsp.stackexchange.com/a/61670/59253)]
+>
+> —. Qualitative Explanation of Fourier Transform [[https://dsp.stackexchange.com/a/78911/59253](https://dsp.stackexchange.com/a/78911/59253)]
+>
+> Timing 201 #1: The Case of the Phase Noise That Wasn't - Part 1 [[https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?](https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?)]
+
+![image-20251105222421572](comm/image-20251105222421572.png)
+
+> "I" is the in-phase or real axis and "Q" is the quadrature or imaginary axis
+
+- phasor rotating *counter-clockwise* represents the *upper sideband* (*USB*) $e^{j(\omega_o+\omega_m )t} = e^{j\omega_o t}\color{red}e^{j\omega_m t}$
+
+- phasor rotating *clockwise* represents the *lower sideband* (*LSB*) $e^{j(\omega_o-\omega_m )t} = e^{j\omega_o t}\color{red}e^{-j\omega_m t}$
+
+***AM modulation***
+
+![image-20251105224322467](comm/image-20251105224322467.png)
+$$\begin{align}
+x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
+& = \cos(\omega_0 t) + 2k \cos(\omega_m t) \cos(\omega_0 t) \\
+&=\mathcal{Re}\{e^{j\omega_0t}+k(e^{j\omega_0t}e^{j\omega_mt}+e^{j\omega_0t}e^{-j\omega_mt})\}\\
+&=\mathcal{Re}\{e^{j\omega_0t}(\color{red}1+k(e^{j\omega_mt}+e^{-j\omega_mt})\color{black})\}
+\end{align}$$
+
+![image-20251105230141244](comm/image-20251105230141244.png)
+
+***PM modulation***  with *incidental AM*
+
+![image-20251105235120886](comm/image-20251105235120886.png)
+
+![image-20251106000733364](comm/image-20251106000733364.png)
+
+
 
 ---
 
-![image-20250920181201309](comm/image-20250920181201309.png)
+> ![image-20251105225355996](comm/image-20251105225355996.png)
+
+---
+
+> A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 45-59, 2025, doi: 10.1109/OJSSCS.2024 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10818782)]
+
+![image-20251011000448718](comm/image-20251011000448718.png)
 
 
 
-> Emad Hegazi , Jacob Rael , Asad Abidi, 2005. The Designer's Guide to High-Purity Oscillators [[https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf](https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf)]
 
 ### Equipartition theorem
 
@@ -90,21 +141,26 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 ![image-20251104010641470](comm/image-20251104010641470.png)
 
+---
+
+> Enrico Rubiola. The Measurement of AM-PM Noise, and the Origin of Noise in Oscillators [[https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf](https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf)]
+
+![image-20251105231715117](comm/image-20251105231715117.png)
+
+---
+
+![image-20251105233926270](comm/image-20251105233926270.png)
+
 
 
 ### Single Sideband Modulation (SSB)
-
-> [[https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation](https://en.lntwww.de/Modulation_Methods/Single-Sideband_Modulation)]
-
-
-![img](comm/EN_Mod_T_2_4_S1.png)
 
 
 ![image-20251104003558243](comm/image-20251104003558243.png)
 
 ![image-20251104003840236](comm/image-20251104003840236.png)
 
-![image-20251104003852067](comm/image-20251104003852067.png)
+
 
 ---
 
@@ -113,35 +169,6 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 ![image-20251104004017859](comm/image-20251104004017859.png)
 
 ![image-20251104010500397](comm/image-20251104010500397.png)
-
-### Phasor Diagram
-
-> Dan Boschen. Creating uneven sidebands with AM + PM modulation? [[https://dsp.stackexchange.com/a/61670/59253](https://dsp.stackexchange.com/a/61670/59253)]
->
-> Timing 201 #1: The Case of the Phase Noise That Wasn't - Part 1 [[https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?](https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?)]
-
-
-![img](comm/rtaImage.png)
-
-
-
-- phasor rotating counter-clockwise represents the upper sideband
-
-- phase rotating clockwise represents the lower sideband
-
-- relative magnitudes of the phasors to the fixed carrier is the relative magnitude for each of those sidebands
-
-
-
-![image-20251010232416816](comm/image-20251010232416816.png)
-
----
-
-> A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 45-59, 2025, doi: 10.1109/OJSSCS.2024 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10818782)]
-
-![image-20251011000448718](comm/image-20251011000448718.png)
-
-
 
 
 
@@ -158,6 +185,23 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 > Bob Nelson. Phase Noise 101: Basics, Applications and Measurements [[https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf])https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf]
 
 ![image-20251104003200956](comm/image-20251104003200956.png)
+
+### Amplitude Noise
+
+> Deog-Kyoon Jeong. Topics in IC Design: 1.1 Introduction to Jitter [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf)]
+
+![image-20250821202257578](comm/image-20250821202257578.png)
+
+with $x(t) = A_0\sin (2\pi f_0 t +\phi _0)$, then $y(t) = x(t) + n_v(t)$
+
+$$\begin{align}
+R_y(\tau) &= \mathrm{E}[y(t)y(t+\tau)] \\
+&= \mathrm{E}[x(t)x(t+\tau)] + \mathrm{E}[x(t)]\mathrm{E}[n_v(t+\tau)] + \mathrm{E}[x(t+\tau)]\mathrm{E}[n_v(t)] + \mathrm{E}[n_v(t)n_v(t+\tau)]\\
+&= \mathrm{E}[x(t)x(t+\tau)] + \mathrm{E}[n_v(t)n_v(t+\tau)] \\
+&= R_x(\tau) + R_{n_v}(\tau)
+\end{align}$$
+
+
 
 ### AN-PN Conversion
 
@@ -195,24 +239,6 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 ![image-20251104010925436](comm/image-20251104010925436.png)
 
----
-
-![image-20251105002517286](comm/image-20251105002517286.png)
-
-### Amplitude Noise
-
-> Deog-Kyoon Jeong. Topics in IC Design: 1.1 Introduction to Jitter [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf)]
-
-![image-20250821202257578](comm/image-20250821202257578.png)
-
-with $x(t) = A_0\sin (2\pi f_0 t +\phi _0)$, then $y(t) = x(t) + n_v(t)$
-
-$$\begin{align}
-R_y(\tau) &= \mathrm{E}[y(t)y(t+\tau)] \\
-&= \mathrm{E}[x(t)x(t+\tau)] + \mathrm{E}[x(t)]\mathrm{E}[n_v(t+\tau)] + \mathrm{E}[x(t+\tau)]\mathrm{E}[n_v(t)] + \mathrm{E}[n_v(t)n_v(t+\tau)]\\
-&= \mathrm{E}[x(t)x(t+\tau)] + \mathrm{E}[n_v(t)n_v(t+\tau)] \\
-&= R_x(\tau) + R_{n_v}(\tau)
-\end{align}$$
 
 
 
@@ -380,3 +406,4 @@ STEADY-STATE AND CYCLO-STATIONARY RTS NOISE IN MOSFETS [[https://ris.utwente.nl/
 
 Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
 
+L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013.

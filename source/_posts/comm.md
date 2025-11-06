@@ -98,7 +98,7 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 ***PM modulation***  with *incidental AM*
 
-![image-20251105235120886](comm/image-20251105235120886.png)
+![image-20251106215603538](comm/image-20251106215603538.png)
 
 ![image-20251106000733364](comm/image-20251106000733364.png)
 
@@ -121,7 +121,7 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 > [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
 
-![image-20251010233230845](comm/image-20251010233230845.png)
+![image-20251106214759580](comm/image-20251106214759580.png)
 
 ![image-20251104233701576](comm/image-20251104233701576.png)
 
@@ -297,7 +297,9 @@ where $P_c = A^2/2$ is the carrier power of the signal
 
 Phase Noise and Frequency Noise are not two different noise sources, they are artifacts of the same noise, it is just a matter of what units you want to use
 
-![enter image description here](https://i.sstatic.net/4Fbt1.png)
+![image-20251106205014601](comm/image-20251106205014601.png)
+
+
 
 ---
 

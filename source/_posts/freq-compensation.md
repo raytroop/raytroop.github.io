@@ -570,7 +570,7 @@ wzc = 1/2/pi/Rc/Cc; % zero frequency
 
 ---
 
-> ECEN 457 (ESS). Op-Amps Stability and Frequency Compensation Techniques
+> ECEN 457 (ESS). Op-Amps Stability and Frequency Compensation Techniques [[https://people.engr.tamu.edu/s-sanchez/457%20Stability%20Final.pdf](https://people.engr.tamu.edu/s-sanchez/457%20Stability%20Final.pdf)]
 
 ![image-20251025011022249](freq-compensation/image-20251025011022249.png)
 

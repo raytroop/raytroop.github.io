@@ -327,6 +327,8 @@ B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE Solid-State Ci
 
 Deog-Kyoon Jeong. Topics in IC Design: T-Coil [[pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%2010%20-%20Bandwidth%20Extension%20Techniques.pdf)]
 
+P. Heydari and M. Safiallah, "Evolution of Broadband Amplifier Design: From Single-Stage to Distributed Topology," in IEEE Microwave Magazine, vol. 24, no. 9, pp. 18-29, Sept. 2023 
+
 Cowan G. *Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations*. Cambridge University Press; 2024
 
 J. Paramesh and D. J. Allstot, "Analysis of the Bridged T-Coil Circuit Using the Extra-Element Theorem," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 53, no. 12, pp. 1408-1412, Dec. 2006 [[https://sci-hub.st/10.1109/TCSII.2006.885971](https://sci-hub.st/10.1109/TCSII.2006.885971)]

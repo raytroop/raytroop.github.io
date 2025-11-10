@@ -145,7 +145,7 @@ $$
 
 ![image-20250629100444702](osc-run/image-20250629100444702.png)
 
-> A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 
+> A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[pdf](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)]
 >
 > ![image-20250629102112814](osc-run/image-20250629102112814.png)
 

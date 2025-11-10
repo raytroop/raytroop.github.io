@@ -118,6 +118,8 @@ Suppose $C_n=C_{gd}$,  effective *differential* input capacitance is *same* with
 > B. Razavi, "The Cross-Coupled Pair - Part III [A Circuit for All Seasons]," IEEE Solid-State Circuits Magazine, Issue. 1, pp. 10-13, Winter 2015. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine3.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine3.pdf)]
 >
 > S. Galal and B. Razavi, "10-Gb/s Limiting Amplifier and Laser/Modulator Driver in 0.18um CMOS Technology,” IEEE Journal of Solid-State Circuits, vol. 38, pp. 2138-2146, Dec. 2003.[[https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_2.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_2.pdf)]
+>
+> A. Sheikholeslami, "Bandwidth Extension [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 7, no. 2, pp. 8-11, Spring 2015 [[https://www.eecg.utoronto.ca/~ali/papers/mag-spr-15-bandwidth-extention.pdf](https://www.eecg.utoronto.ca/~ali/papers/mag-spr-15-bandwidth-extention.pdf)]
 
 The **Cross-Coupled Pair (XCP)** can operate as an **impedance negator** [a.k.a. a **negative impedance converter** (**NIC**)] 
 

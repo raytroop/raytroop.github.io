@@ -90,6 +90,11 @@ $$
 
 ![image-20251028005749046](insight/image-20251028005749046.png)
 
+
+### NF50
+
+*TODO* &#128197;
+
 ## inverter capacitance simulation
 
 ### inverter input

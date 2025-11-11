@@ -183,8 +183,8 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 | noise profile       | sidebands    | contribution       |
 | ------------------- | ------------ | ------------------ |
-| **stationary**      | uncorrelated | AM = PM            |
-| **cyclostationary** | correlated   | AM > PM or AM < PM |
+| **stationary**      | uncorrelated | $S_{AM} = S_{PM}$  |
+| **cyclostationary** | correlated   | $S_{AM} \gt S_{PM}$ or $S_{AM} \lt S_{PM}$ |
 
 ![image-20251104010641470](am-pm/image-20251104010641470.png)
 

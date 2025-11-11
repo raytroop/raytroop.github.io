@@ -186,6 +186,20 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 | **stationary**      | uncorrelated | $S_{AM} = S_{PM}$  |
 | **cyclostationary** | correlated   | $S_{AM} \gt S_{PM}$ or $S_{AM} \lt S_{PM}$ |
 
+***sine wave + white noise***
+
+![image-20251111231609124](am-pm/image-20251111231609124.png)
+
+> equal amounts of AM and PM noise in both USB and LSB
+
+***sine wave + AM***
+
+
+
+![image-20251112002405912](am-pm/image-20251112002405912.png)
+
+
+
 ![image-20251104010641470](am-pm/image-20251104010641470.png)
 
 ---
@@ -303,6 +317,12 @@ print(n_tot)    # -137.8755739720566
 ```
 
 ![image-20251105233926270](am-pm/image-20251105233926270.png)
+
+
+
+## Modulation index in Virtuoso
+
+![image-20251111225036664](am-pm/image-20251111225036664.png)
 
 
 

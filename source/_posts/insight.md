@@ -95,6 +95,26 @@ $$
 
 *TODO* &#128197;
 
+
+
+### $\gamma$ vs VDS, VGS in simulation
+
+> *N28*
+
+![image-20251111220816282](insight/image-20251111220816282.png)
+
+***fix VDS, sweep VGS***
+
+![image-20251111220404158](insight/image-20251111220404158.png)
+
+
+
+***fix VGS, sweep VDS***
+
+![image-20251111221923708](insight/image-20251111221923708.png)
+
+
+
 ## inverter capacitance simulation
 
 ### inverter input

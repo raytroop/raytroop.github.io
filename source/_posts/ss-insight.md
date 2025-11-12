@@ -378,8 +378,8 @@ $$
 ![image-20240808212730768](ss-insight/image-20240808212730768.png)
 
 
-> If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency
-> components late in the step response. This causes ***ringing***. 
+> ~~If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency
+> components late in the step response. This causes ***ringing***~~
 
 
 

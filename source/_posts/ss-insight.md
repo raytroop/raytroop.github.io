@@ -350,106 +350,13 @@ $$
 
 ## modulation & demodulation
 
+> Hossein Hashemi, RF Circuits, [[https://youtu.be/0f3yZMvD2Jg](https://youtu.be/0f3yZMvD2Jg)]
+
 ![image-20240826221237312](ss-insight/image-20240826221237312.png)
 
 ![image-20240826221251379](ss-insight/image-20240826221251379.png)
 
 
-
-> Hossein Hashemi, RF Circuits, [[https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN](https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN)]
-
-
-
-
-
-## phase delay & group delay
-
-![image-20240810094519487](ss-insight/image-20240810094519487.png)
-
-
-
-- Phase delay directly measures the device or system time delay of *individual sinusoidal frequency components* in the **steady-state conditions**.
-- In the ideal case the envelope delay is equal to the phase delay
-- envelope delay is a more sensitive measure of aberrations than phase delay
-
-
-### phase delay
-
-![image-20240808212730768](ss-insight/image-20240808212730768.png)
-
-
-> ~~If the phase delay peaks (exceeds the low-frequency value) you can expect to see high-frequency
-> components late in the step response. This causes ***ringing***~~
-
-
-
-### group delay
-
-![image-20240808213806803](ss-insight/image-20240808213806803.png)
-
-
-
-
-
-![image-20240808220657443](ss-insight/image-20240808220657443.png)
-
-![image-20240808220740349](ss-insight/image-20240808220740349.png)
-
-
-
----
-
-steady-state at this frequency is a polarity flip; a 180 degrees phase shift; which is a transfer function of H(s)=-1. 
-$$
-H(s) = e^{j\pi}
-$$
-That is $\phi(\omega) = \pi$
-$$
-\tau_p = \frac{\pi}{\omega}
-$$
-and
-$$
-\tau_g = \frac{\partial \pi}{\partial \omega}=0
-$$
-
-
-
-
----
-
-
-> Hollister, Allen L. *Wideband Amplifier Design*. Raleigh, NC: SciTech Pub., 2007.
->
-> Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data Transmission and Testing.  [[https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf](https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf)]
->
-> [Pupalaikis et al., “Eye Patterns in Scopes”, DesignCon, Santa Clara CA, 2005[https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf](https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf)]
->
-> Starič, P. & Margan, E.. (2006). Wideband Amplifiers. 10.1007/978-0-387-28341-8. 
->
-> Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.). Prentice-Hall, Inc., USA.
->
-> Phase delay vs group delay: Common misconceptions. [[https://audiosciencereview.com/forum/index.php?threads/phase-delay-vs-group-delay-common-misconceptions.39591/](https://audiosciencereview.com/forum/index.php?threads/phase-delay-vs-group-delay-common-misconceptions.39591/)]
->
-> Dan Boschen. Why do we care about "Linear Phase Filters"? [[link](https://www.linkedin.com/posts/danboschen_why-do-we-care-about-linear-phase-filters-activity-7384371590643326977-NMEt?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
-
-
-
-### Group Delay vs . Phase Delay
-
-The effectiveness of the group delay analysis on evaluating a *wideband* circuit is *questionable*
-
-***differentiating operation:***
-
--  group delay provides a good insight on the delay variation at a *vicinity of a certain frequency*
-- group delay makes a constant term be disappeared and distorts the weight of each polynomial term
-
-
-
-
-
-> CC Chen. Why Group Delay Optimization? [[https://youtu.be/Lv7yO_LkKng?si=yg-vyUPyredA_dER](https://youtu.be/Lv7yO_LkKng?si=yg-vyUPyredA_dER)]
->
-> W. Bae, B. Nikolić and D. -K. Jeong, "Use of Phase Delay Analysis for Evaluating Wideband Circuits: An Alternative to Group Delay Analysis," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 25, no. 12, pp. 3543-3547, Dec. 2017, [[https://sci-hub.se/10.1109/TVLSI.2017.2747157](https://sci-hub.se/10.1109/TVLSI.2017.2747157)]
 
 
 

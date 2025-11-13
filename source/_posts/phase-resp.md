@@ -31,7 +31,7 @@ mathjax: true
 
 ---
 
-
+![image-20251113235639210](phase-resp/image-20251113235639210.png)
 
 
 
@@ -58,9 +58,9 @@ Haykin, Simon. *Digital Communication Systems*. 1st edition. Wiley, 2013. [[pdf]
 
 Carlson, A. Bruce, and Paul B. Crilly. *Communication Systems: An Introduction to Signals and Noise in Electrical Communication*. 5th ed. Boston: McGraw-Hill Higher Education, 2010. [[pdf](https://eedmd.weebly.com/uploads/9/6/6/9/96692532/carlson.pdf)]
 
-Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data Transmission and Testing.  [[https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf](https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf)]
+Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data Transmission and Testing. [[https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf](https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf)]
 
-[Pupalaikis et al., “Eye Patterns in Scopes”, DesignCon, Santa Clara CA, 2005[https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf](https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf)]
+Pupalaikis, Peter & Yudin, Eric. (2005). Eye Patterns in Scopes. [[https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf](https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf)]
 
 Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.). Prentice-Hall, Inc., USA.
 

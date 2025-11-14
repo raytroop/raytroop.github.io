@@ -129,6 +129,12 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 
 
+### TX FIR Coefficient Selection with Zero-Forcing
+
+*TODO* &#128197;
+
+
+
 ### RX-FFE
 
 *TODO* &#128197;

@@ -55,9 +55,13 @@ legend('ref', 'Low frequency attenuated', 'high frequency attenuated')
 
 ![image-20251113005845859](distortion/image-20251113005845859.png)
 
-![image-20251113235639210](distortion/image-20251113235639210.png)
+![image-20251115165601773](distortion/image-20251115165601773.png)
 
+---
 
+![image-20251115105458404](distortion/image-20251115105458404.png)
+
+![image-20251115174216490](distortion/image-20251115174216490.png)
 
 
 
@@ -157,7 +161,7 @@ Pupalaikis, Peter & Yudin, Eric. (2005). Eye Patterns in Scopes. [[https://cdn.t
 
 Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.). Prentice-Hall, Inc., USA.
 
-W. Bae, B. Nikolić and D. -K. Jeong, "Use of Phase Delay Analysis for Evaluating Wideband Circuits: An Alternative to Group Delay Analysis," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 25, no. 12, pp. 3543-3547, Dec. 2017, [[https://sci-hub.se/10.1109/TVLSI.2017.2747157](https://sci-hub.se/10.1109/TVLSI.2017.2747157)]
+W. Bae, B. Nikolić and D. -K. Jeong, "Use of Phase Delay Analysis for Evaluating Wideband Circuits: An Alternative to Group Delay Analysis," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 25, no. 12, pp. 3543-3547, Dec. 2017, [[https://people.eecs.berkeley.edu/~bora/Journals/2017/TVLSI17.pdf](https://people.eecs.berkeley.edu/~bora/Journals/2017/TVLSI17.pdf)]
 
 ---
 

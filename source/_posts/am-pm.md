@@ -47,10 +47,36 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 ![image-20251011000448718](am-pm/image-20251011000448718.png)
 
+
+
+## Real & Complex Modulation
+
+> Matt Guibord. TIPL 4: Real and Complex Modulation [[https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5576277660001.mp4/subassets/TIPL4708-Real-and-Complex-Modulation.pdf](https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5576277660001.mp4/subassets/TIPL4708-Real-and-Complex-Modulation.pdf)]
+
+![image-20251116225706934](am-pm/image-20251116225706934.png)
+$$\begin{align}
+X_{bb,AM,USB}(t) &= e^{j\omega_m t} = \cos(\omega_m t) + j\sin(\omega_m t)\\
+X_{bb,AM,LSB}(t) &= e^{-j\omega_m t} = \cos(\omega_m t) - j\sin(\omega_m t)
+\end{align}$$
+
+where $X_{I,AM,USB}(t)=\cos(\omega_m t)$ and $X_{Q,AM,USB}(t)=\sin(\omega_m t)$;  $X_{I,AM,USB}(t)=\cos(\omega_m t)$ and $X_{Q,AM,USB}(t)=-\sin(\omega_m t)$;
+
+> $X_{I,AM,USB} = X_{I,AM,LSB}$ and $X_{Q,AM,USB} = -X_{Q,AM,LSB}$
+
+$$\begin{align}
+X_{bb,PM,USB}(t) &= e^{j\omega_m t} = \cos(\omega_m t) + j\sin(\omega_m t)\\
+X_{bb,PM,LSB}(t) &= -e^{-j\omega_m t} = -\cos(\omega_m t) + j\sin(\omega_m t)
+\end{align}$$
+
+where $X_{I,PM,USB}(t)=\cos(\omega_m t)$ and $X_{Q,PM,USB}(t)=\sin(\omega_m t)$;  $X_{I,PM,USB}(t)=-\cos(\omega_m t)$ and $X_{Q,PM,USB}(t)=\sin(\omega_m t)$;
+
+> $X_{I,PM,USB} = -X_{I,PM,LSB}$ and $X_{Q,PM,USB} = X_{Q,PM,LSB}$
+
+![image-20251116232032760](am-pm/image-20251116232032760.png)
+
 ---
 
 ![image-20251116190237879](am-pm/image-20251116190237879.png)
-
 
 
 

@@ -1,5 +1,5 @@
 ---
-title: Linear & Nonlinear Distortion
+title: Distortion in Baseband Pulses
 date: 2025-06-05 21:09:14
 tags:
 categories:
@@ -55,7 +55,9 @@ legend('ref', 'Low frequency attenuated', 'high frequency attenuated')
 
 ![image-20251113005845859](distortion/image-20251113005845859.png)
 
-![image-20251115165601773](distortion/image-20251115165601773.png)
+![image-20251116114752468](distortion/image-20251116114752468.png)
+
+> ![image-20251116114930844](distortion/image-20251116114930844.png)
 
 ---
 
@@ -65,15 +67,19 @@ legend('ref', 'Low frequency attenuated', 'high frequency attenuated')
 
 
 
-## Group Delay vs Phase Delay
+## Phase Delay & Group Delay 
 
 ![image-20251112233232069](distortion/image-20251112233232069.png)
 
 ![image-20251114224910179](distortion/image-20251114224910179.png)
 
-## Hilbert Envelope
+---
 
-*TODO* &#128197; 
+> W. Bae, B. Nikolić and D. -K. Jeong, "Use of Phase Delay Analysis for Evaluating Wideband Circuits: An Alternative to Group Delay Analysis," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 25, no. 12, pp. 3543-3547, Dec. 2017, [[https://people.eecs.berkeley.edu/~bora/Journals/2017/TVLSI17.pdf](https://people.eecs.berkeley.edu/~bora/Journals/2017/TVLSI17.pdf)]
+
+![image-20251116123359592](distortion/image-20251116123359592.png)
+
+![image-20251116123442274](distortion/image-20251116123442274.png)
 
 
 
@@ -151,17 +157,15 @@ Hollister, Allen L. *Wideband Amplifier Design*. Raleigh, NC: SciTech Pub., 2007
 
 Starič, P. & Margan, E.. (2006). Wideband Amplifiers. 10.1007/978-0-387-28341-8. [[pdf](https://www-f9.ijs.si/~margan/WBA3_4web/Wideband_Amplifiers_FPRL.pdf)]
 
-Haykin, Simon. *Digital Communication Systems*. 1st edition. Wiley, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-Communication-Systems-Simon-S.-Haykin.pdf)]
+Haykin, Simon S., and Michael Moher. *Communication Systems*. 5th ed. John Wiley & Sons, 2009.
+
+—. *Digital Communication Systems*. 1st edition. Wiley, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-Communication-Systems-Simon-S.-Haykin.pdf)]
 
 Carlson, A. Bruce, and Paul B. Crilly. *Communication Systems: An Introduction to Signals and Noise in Electrical Communication*. 5th ed. Boston: McGraw-Hill Higher Education, 2010. [[pdf](https://eedmd.weebly.com/uploads/9/6/6/9/96692532/carlson.pdf)]
 
 Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data Transmission and Testing. [[https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf](https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf)]
 
 Pupalaikis, Peter & Yudin, Eric. (2005). Eye Patterns in Scopes. [[https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf](https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf)]
-
-Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. 1996. Signals & systems (2nd ed.). Prentice-Hall, Inc., USA.
-
-W. Bae, B. Nikolić and D. -K. Jeong, "Use of Phase Delay Analysis for Evaluating Wideband Circuits: An Alternative to Group Delay Analysis," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 25, no. 12, pp. 3543-3547, Dec. 2017, [[https://people.eecs.berkeley.edu/~bora/Journals/2017/TVLSI17.pdf](https://people.eecs.berkeley.edu/~bora/Journals/2017/TVLSI17.pdf)]
 
 ---
 

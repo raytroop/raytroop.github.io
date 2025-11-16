@@ -17,6 +17,11 @@ mathjax: true
 
 ![image-20241107202647998](comm/image-20241107202647998.png)
 
+---
+
+> Haykin, Simon S., and Michael Moher. *Communication Systems*. 5th ed. John Wiley & Sons, 2009. - *Mixing of a Random Process with a Sinusoidal Process*
+
+![image-20251116154457428](comm/image-20251116154457428.png)
 
 ### modulated with a deterministic cosine
 
@@ -37,13 +42,19 @@ mathjax: true
 
 ![image-20241002231639299](comm/image-20241002231639299.png)
 
+### Quadrature-Modulated Processes
+
+> Haykin, Simon S., and Michael Moher. *Communication Systems*. 5th ed. John Wiley & Sons, 2009.
+
+![image-20251116160857679](comm/image-20251116160857679.png)
+
+
+
 
 
 ## Sampling of WSS process
 
 > Balu Santhanam, Probability Theory & Stochastic Process 2020: [Impulse sampling of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/impulse_sampling_of_random_signals.pdf)
-
-
 
 ### DT sequence $x[n]$
 

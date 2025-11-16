@@ -11,7 +11,7 @@ mathjax: true
 
 ![image-20251105222421572](am-pm/image-20251105222421572.png)
 
-> "I" is the in-phase or real axis and "Q" is the quadrature or imaginary axis
+> "**I**" is the in-phase or real axis and "**Q**" is the quadrature or imaginary axis
 
 - phasor rotating *counter-clockwise* represents the *upper sideband* (*USB*) $e^{j(\omega_o+\omega_m )t} = e^{j\omega_o t}\color{red}e^{j\omega_m t}$
 
@@ -47,24 +47,6 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 ![image-20251011000448718](am-pm/image-20251011000448718.png)
 
-## PSD of Narrowband FM Signal
-
-> Chembiyan T. Jitter and Phase Noise in Phase Locked Loops [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_jitter-and-phase-noise-activity-7031985595304345600-uSx3)]
-
-$$
-y(t) = A\cos(2\pi f_0t+\phi_n(t)) \approx A \cos(2\pi f_0 t) - A \phi_n (t)\sin(2\pi f_0 t)
-$$
-
-
-![image-20241228020953646](am-pm/image-20241228020953646.png)
-$$
-R_x(\tau) = \frac{A^2}{2}\cos(2\pi f_0\tau) +  \frac{A^2}{2}R_\phi(\tau)\cos(2\pi f_0\tau)
-$$
-The PSD of the signal $x(t)$ is given by
-$$
-S_x(f) = \mathcal{F}\{R_x(\tau)\} = \frac{P_c}{2}\left[\delta(f+f_0)+\delta(f-f_0)\right]+\frac{P_c}{2}\left[S_\phi(f+f_0)+S_\phi(f-f_0)\right]
-$$
-where $P_c = A^2/2$ is the carrier power of the signal
 
 
 
@@ -139,6 +121,26 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 ![image-20251105231301581](am-pm/image-20251105231301581.png)
 
 
+## PSD of Narrowband FM Signal
+
+> Chembiyan T. Jitter and Phase Noise in Phase Locked Loops [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_jitter-and-phase-noise-activity-7031985595304345600-uSx3)]
+
+$$
+y(t) = A\cos(2\pi f_0t+\phi_n(t)) \approx A \cos(2\pi f_0 t) - A \phi_n (t)\sin(2\pi f_0 t)
+$$
+
+
+![image-20241228020953646](am-pm/image-20241228020953646.png)
+$$
+R_x(\tau) = \frac{A^2}{2}\cos(2\pi f_0\tau) +  \frac{A^2}{2}R_\phi(\tau)\cos(2\pi f_0\tau)
+$$
+The PSD of the signal $x(t)$ is given by
+$$
+S_x(f) = \mathcal{F}\{R_x(\tau)\} = \frac{P_c}{2}\left[\delta(f+f_0)+\delta(f-f_0)\right]+\frac{P_c}{2}\left[S_\phi(f+f_0)+S_\phi(f-f_0)\right]
+$$
+where $P_c = A^2/2$ is the carrier power of the signal
+
+
 
 ## PM & FM
 
@@ -166,6 +168,47 @@ Phase Noise and Frequency Noise are not two different noise sources, they are ar
 ![image-20251104233701576](am-pm/image-20251104233701576.png)
 
 Stationary noise can also be decomposed into AM and PM components, but there will always be ***equal amounts of both***.
+
+
+
+## Narrowband Noise
+
+![image-20251116151034742](am-pm/image-20251116151034742.png)
+
+### in-phase & quadrature component
+
+![image-20251116151212165](am-pm/image-20251116151212165.png)
+
+![image-20251116150946685](am-pm/image-20251116150946685.png)
+
+$$\begin{align}
+n(t)\cdot 2\cos(\omega_c t) &= n_I(t) + n_I(t)\cos(2\omega_c t) - n_Q(t)\sin(2\omega_c t) \\
+n(t)\cdot -2\sin(\omega_c t) &= n_Q(t) - n_I(t)\sin(2\omega_c t) - n_Q(t)\cos(2\omega_c t) 
+\end{align}$$
+
+![image-20251116152134926](am-pm/image-20251116152134926.png)
+
+![nI_nQ.drawio](am-pm/nI_nQ.drawio.svg)
+
+---
+
+> [[https://arnabiitk.wordpress.com/wp-content/uploads/2013/02/solution-manual-for-communication-systems-haykin.pdf](https://arnabiitk.wordpress.com/wp-content/uploads/2013/02/solution-manual-for-communication-systems-haykin.pdf)]
+
+![image-20251116154806955](am-pm/image-20251116154806955.png)
+
+![image-20251116161009110](am-pm/image-20251116161009110.png)
+
+If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (t )$ is **symmetric** about the mid-band frequency $f_c$, then the *in-phase component* $n_I(t)$ and *quadrature component* $n_Q(t)$ are statistically ***independent***
+
+![image-20251116170549277](am-pm/image-20251116170549277.png)
+
+> ![image-20251116171255430](am-pm/image-20251116171255430.png)
+
+### envelope and phase components
+
+![image-20251116174252304](am-pm/image-20251116174252304.png)
+
+
 
 
 
@@ -344,3 +387,4 @@ Timing 201 #1: The Case of the Phase Noise That Wasn't - Part 1 [[https://commun
 
 Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise [[https://designers-guide.org/theory/cyclo-preso.pdf](https://designers-guide.org/theory/cyclo-preso.pdf)], [[https://designers-guide.org/theory/cyclo-paper.pdf](https://designers-guide.org/theory/cyclo-paper.pdf)]
 
+Haykin, Simon S., and Michael Moher. *Communication Systems*. 5th ed. John Wiley & Sons, 2009.

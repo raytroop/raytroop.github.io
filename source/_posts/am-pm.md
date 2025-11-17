@@ -284,7 +284,7 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 ![image-20251104010500397](am-pm/image-20251104010500397.png)
 
----
+### AM & PM Noise
 
 > Ken Kundert. Introduction to RF Simulation and its Application [[https://designers-guide.org/analysis/rf-sim.pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
 

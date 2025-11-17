@@ -273,8 +273,6 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 
 
-![image-20251104010641470](am-pm/image-20251104010641470.png)
-
 ---
 
 
@@ -285,6 +283,18 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 ---
 
 ![image-20251104010500397](am-pm/image-20251104010500397.png)
+
+---
+
+> Ken Kundert. Introduction to RF Simulation and its Application [[https://designers-guide.org/analysis/rf-sim.pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
+
+![image-20251117235457764](am-pm/image-20251117235457764.png)
+
+![image-20251118000021345](am-pm/image-20251118000021345.png)
+
+> [[https://designers-guide.org/analysis/am-pm-conv.pdf](https://designers-guide.org/analysis/am-pm-conv.pdf)]
+>
+> ![image-20251117233740882](am-pm/image-20251117233740882.png)
 
 
 

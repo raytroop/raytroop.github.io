@@ -284,7 +284,7 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 ![image-20251104010500397](am-pm/image-20251104010500397.png)
 
-### AM & PM Noise
+### AM & PM Noise Separation
 
 > Ken Kundert. Introduction to RF Simulation and its Application [[https://designers-guide.org/analysis/rf-sim.pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
 
@@ -296,7 +296,17 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 >
 > ![image-20251117233740882](am-pm/image-20251117233740882.png)
 
+---
 
+![image-20251118213331072](am-pm/image-20251118213331072.png)
+
+![image-20251118213700865](am-pm/image-20251118213700865.png)
+
+
+
+![image-20251118223254553](am-pm/image-20251118223254553.png)
+
+![Separation.drawio](am-pm/Separation.drawio.svg)
 
 ## Single Sideband Modulation (SSB)
 

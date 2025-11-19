@@ -17,7 +17,7 @@ mathjax: true
 
 ![image-20251119223127763](gate-resistance/image-20251119223127763.png)
 
-> $Y_{11},Y_{12},Y_{21},Y_{22}$ is same with four AC simulation, but more elegant and concise
+> $Y_{11},Y_{12},Y_{21},Y_{22}$ are same with four AC simulation, but more elegant and concise
 
 ![image-20251119223813730](gate-resistance/image-20251119223813730.png)
 

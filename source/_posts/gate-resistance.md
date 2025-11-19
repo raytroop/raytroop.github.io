@@ -13,11 +13,13 @@ mathjax: true
 
 
 
-## Transit frequency $f_T$
+## Two-port parameters of MOS
 
-> aka **cut-off frequency**
+![image-20251119223127763](gate-resistance/image-20251119223127763.png)
 
+> $Y_{11},Y_{12},Y_{21},Y_{22}$ is same with four AC simulation, but more elegant and concise
 
+![image-20251119223813730](gate-resistance/image-20251119223813730.png)
 
 
 

@@ -288,6 +288,8 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 > Ken Kundert. Introduction to RF Simulation and its Application [[https://designers-guide.org/analysis/rf-sim.pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
 
+![Separation.drawio](am-pm/Separation.drawio.svg)
+
 ![image-20251117235457764](am-pm/image-20251117235457764.png)
 
 ![image-20251118000021345](am-pm/image-20251118000021345.png)
@@ -306,7 +308,7 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 ![image-20251118223254553](am-pm/image-20251118223254553.png)
 
-![Separation.drawio](am-pm/Separation.drawio.svg)
+
 
 ## Single Sideband Modulation (SSB)
 

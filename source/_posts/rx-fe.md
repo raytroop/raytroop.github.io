@@ -303,6 +303,8 @@ Starič, Peter and Erik Margan. “Wideband amplifiers.” (2006) [[pdf](https:/
 
 Bob Ross. IBIS Summit [[T-Coils and Bridged-T Networks](https://ibis.org/summits/may11/ross2.pdf)], [[T-Coil Topics](https://ibis.org/summits/feb11/ross.pdf)]
 
+Walling, Jeffrey & Shekhar, Sudip & Allstot, David. (2008). Wideband CMOS Amplifier Design: Time-Domain Considerations. Circuits and Systems I: Regular Papers, IEEE Transactions on. 55. 1781 - 1793.  [[pdf](https://sudip.sites.olt.ubc.ca/files/2022/10/6.pdf)]
+
 A. A. Abidi, "The T-Coil Circuit Demystified," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 72, no. 9, pp. 4469-4480, Sept. 2025
 
 S. Lin, D. Huang and S. Wong, "Pi Coil: A New Element for Bandwidth Extension," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 56, no. 6, pp. 454-458, June 2009

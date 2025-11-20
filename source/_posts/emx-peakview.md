@@ -114,7 +114,27 @@ plt.show()
 > 		'(("L1" "L2") ("Q1" "Q2") ("k")))))
 > ```
 
+---
 
+Notice ***Coupling coefficient*** is caculated  by ***differential impedance*** rather than $Z_{12}$ or $Z_{21}$
+
+![image-20251120210358252](emx-peakview/image-20251120210358252.png)
+
+### $C_B$ from Nport
+
+> Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
+
+![image-20251121000517142](emx-peakview/image-20251121000517142.png)
+
+---
+
+> Min-Sun Keel. Design of reliable and energy-efficient high-speed interface circuits. University of Illinois Urbana-Champaign, USA, 2015 [[https://files.core.ac.uk/download/pdf/158312105.pdf](https://files.core.ac.uk/download/pdf/158312105.pdf)]
+>
+> Measuring Self Resonant Frequency [[https://www.coilcraft.com/getmedia/8ef1bd18-d092-40e8-a3c8-929bec6adfc9/doc363_measuringsrf.pdf?srsltid=AfmBOoqdBJ_CTB-N_wOVp2_7zIDXPEwOYLm7S4RLuws1CEcEWZUijblK](https://www.coilcraft.com/getmedia/8ef1bd18-d092-40e8-a3c8-929bec6adfc9/doc363_measuringsrf.pdf?srsltid=AfmBOoqdBJ_CTB-N_wOVp2_7zIDXPEwOYLm7S4RLuws1CEcEWZUijblK)]
+
+![image-20251121002136639](emx-peakview/image-20251121002136639.png)
+
+![image-20251121002228554](emx-peakview/image-20251121002228554.png)
 
 ### T-coil vs tapped inductor
 
@@ -165,6 +185,14 @@ xlabel('Freq (GHz)');
 ylabel('Inductance (nH)');
 legend('Tapped inductor model', 'tcoil model calc');
 ```
+
+
+
+## differential & single-ended excitation
+
+> Min-Sun Keel. Design of reliable and energy-efficient high-speed interface circuits. University of Illinois Urbana-Champaign, USA, 2015 [[https://files.core.ac.uk/download/pdf/158312105.pdf](https://files.core.ac.uk/download/pdf/158312105.pdf)]
+
+![image-20251120230342210](emx-peakview/image-20251120230342210.png)
 
 
 
@@ -306,6 +334,18 @@ $$
 
 ![image-20220330234833756](emx-peakview/image-20220330234833756.png)
 
+```bash
+  (define (EMX_differential y11 y12 y21 y22)
+    (letseq ((det y11*y22-y12*y21)
+         (z11 y22/det)
+         (z12 -y12/det)
+         (z21 -y21/det)
+         (z22 y11/det))
+        z11+z22-z12-z21))
+```
+
+
+
 
 > similarly, Z parameters to Y parameters
 > $$
@@ -407,6 +447,8 @@ $$\begin{align}
 Z_1 &= \frac {1}{Y_{11}}\\
 Z_2 &= \frac {1}{Y_{22}}
 \end{align}$$
+
+> Caution above $\color{red}z_1 \neq Z_{11}$, but $z_1=\frac{1}{Y_{11}}$
 
 Then single-ended cap and Q
 $$\begin{align}
@@ -554,7 +596,9 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
 
 
-## Foundary model
+## Model parameter extraction
+
+> Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
 
 ![image-20221217141519947](emx-peakview/image-20221217141519947.png)
 
@@ -567,6 +611,12 @@ Q_1 &= -\frac{Im(Z_1)}{Re(Z_1)} \\
 \end{align}$$
 
 So, the EMX model and foundary model is consistent.
+
+---
+
+> O. Hanay, J. Hulsman and R. Negra, "Three-Port S-Parameter based characterization of integrated bridged-T-Coils," *2019 12th German Microwave Conference (GeMiC)*, Stuttgart, Germany, 2019, pp. 268-271 [[https://sci-hub.se/10.23919/GEMIC.2019.8698123](https://sci-hub.se/10.23919/GEMIC.2019.8698123)]
+
+![image-20251121002530468](emx-peakview/image-20251121002530468.png)
 
 
 

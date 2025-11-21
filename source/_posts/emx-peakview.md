@@ -188,13 +188,69 @@ legend('Tapped inductor model', 'tcoil model calc');
 
 
 
-## differential & single-ended excitation
+## differential & single-ended
+
+### DE & SE excitation
 
 > Min-Sun Keel. Design of reliable and energy-efficient high-speed interface circuits. University of Illinois Urbana-Champaign, USA, 2015 [[https://files.core.ac.uk/download/pdf/158312105.pdf](https://files.core.ac.uk/download/pdf/158312105.pdf)]
 
 ![image-20251120230342210](emx-peakview/image-20251120230342210.png)
 
 
+### differential impedance
+
+Y parameters to Z parameters
+
+$$\begin{align}
+|Y| &= Y_{11}*Y_{22} - Y_{12}*Y_{22} \\
+\begin{bmatrix}
+Z_{11} & Z_{12}\\ 
+Z_{21} & Z_{22}
+\end{bmatrix}
+&=
+\begin{bmatrix}
+\frac{Y_{22}}{|Y|} & \frac{-Y_{12}}{|Y|}\\ 
+\frac{-Y_{21}}{|Y|} & \frac{Y_{11}}{|Y|}
+\end{bmatrix} 
+\end{align}$$
+
+Then **differential impedance** is 
+$$
+Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}
+$$
+
+![image-20220330234833756](emx-peakview/image-20220330234833756.png)
+
+```bash
+  (define (EMX_differential y11 y12 y21 y22)
+    (letseq ((det y11*y22-y12*y21)
+         (z11 y22/det)
+         (z12 -y12/det)
+         (z21 -y21/det)
+         (z22 y11/det))
+        z11+z22-z12-z21))
+```
+
+
+
+
+> similarly, Z parameters to Y parameters
+> $$
+> \begin{bmatrix}
+> Y_{11} & Y_{12}\\ 
+> Y_{21} & Y_{22}
+> \end{bmatrix}
+> =
+> \begin{bmatrix}
+> \frac{Z_{22}}{|Z|} & \frac{-Z_{12}}{|Z|}\\ 
+> \frac{-Z_{21}}{|Z|} & \frac{Z_{11}}{|Z|}
+> \end{bmatrix}
+> $$
+> where
+> $$
+> |Z| = Z_{11}Z_{22} - Z_{12}Z_{21}
+> $$
+>
 
 
 
@@ -310,61 +366,7 @@ Q2 &= \frac{Im(Z_2)}{Re(Z_2)}
 
 
 
-### differential impedance
 
-Y parameters to Z parameters
-
-$$\begin{align}
-|Y| &= Y_{11}*Y_{22} - Y_{12}*Y_{22} \\
-\begin{bmatrix}
-Z_{11} & Z_{12}\\ 
-Z_{21} & Z_{22}
-\end{bmatrix}
-&=
-\begin{bmatrix}
-\frac{Y_{22}}{|Y|} & \frac{-Y_{12}}{|Y|}\\ 
-\frac{-Y_{21}}{|Y|} & \frac{Y_{11}}{|Y|}
-\end{bmatrix} 
-\end{align}$$
-
-Then **differential impedance** is 
-$$
-Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}
-$$
-
-![image-20220330234833756](emx-peakview/image-20220330234833756.png)
-
-```bash
-  (define (EMX_differential y11 y12 y21 y22)
-    (letseq ((det y11*y22-y12*y21)
-         (z11 y22/det)
-         (z12 -y12/det)
-         (z21 -y21/det)
-         (z22 y11/det))
-        z11+z22-z12-z21))
-```
-
-
-
-
-> similarly, Z parameters to Y parameters
-> $$
-> \begin{bmatrix}
-> Y_{11} & Y_{12}\\ 
-> Y_{21} & Y_{22}
-> \end{bmatrix}
-> =
-> \begin{bmatrix}
-> \frac{Z_{22}}{|Z|} & \frac{-Z_{12}}{|Z|}\\ 
-> \frac{-Z_{21}}{|Z|} & \frac{Z_{11}}{|Z|}
-> \end{bmatrix}
-> $$
-> where
-> $$
-> |Z| = Z_{11}Z_{22} - Z_{12}Z_{21}
-> $$
->
-> 
 
 ### Differential inductor
 

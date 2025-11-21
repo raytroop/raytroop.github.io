@@ -144,6 +144,14 @@ $$
 
 ![image-20220521212142719](jitter-decomposition/image-20220521212142719.png)
 
+## DJ/RJ
+
+> K. Bidaj, J. -B. Begueret, N. Houdali, J. Deroo and S. Rieubon, "Time-domain PLL modeling and RJ/DJ jitter decomposition," 2016 IEEE International Symposium on Circuits and Systems (ISCAS), Montreal, QC, Canada, 2016 [[https://sci-hub.se/10.1109/ISCAS.2016.7527201](https://sci-hub.se/10.1109/ISCAS.2016.7527201)]
+
+![image-20251121235231154](jitter-decomposition/image-20251121235231154.png)
+
+
+
 ## Reference
 
 Mike Li. 2007. Jitter, noise, and signal integrity at high-speed (First. ed.). Prentice Hall Press, USA.

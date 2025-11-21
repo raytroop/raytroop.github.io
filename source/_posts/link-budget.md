@@ -1012,8 +1012,8 @@ John M. Cioffi. "Decoding Methods" [[https://cioffi-group.stanford.edu/doc/book/
 
 —. "Equalization" [[https://cioffi-group.stanford.edu/doc/book/chap3.pdf](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)]
 
-Iain. [[https://youtu.be/rnjy4_gXLAg?si=PC3aowaon-e_mhXX](https://youtu.be/rnjy4_gXLAg?si=PC3aowaon-e_mhXX)]
+Iain. What is Trellis Coding? [[https://youtu.be/rnjy4_gXLAg](https://youtu.be/rnjy4_gXLAg)]
 
-—. [[https://youtu.be/IJE94FhyygM?si=BMMQ-GmirBWNf4ep](https://youtu.be/IJE94FhyygM?si=BMMQ-GmirBWNf4ep)]
+—. Decoding Convolutional Codes: The Viterbi Algorithm Explained [[https://youtu.be/IJE94FhyygM](https://youtu.be/IJE94FhyygM)]
 
-Noman Hai, Synopsys, Canada CASS Talks 2025 - May 2, 2025: High-speed Wireline Interconnects: Design Challenges and Innovations in 224G SerDes [[https://www.youtube.com/live/wHNOlxHFTzY?si=179HZozbtW59H8Lm](https://www.youtube.com/live/wHNOlxHFTzY?si=179HZozbtW59H8Lm)]
+Noman Hai, Synopsys, Canada CASS Talks 2025 - May 2, 2025: High-speed Wireline Interconnects: Design Challenges and Innovations in 224G SerDes [[https://www.youtube.com/live/wHNOlxHFTzY](https://www.youtube.com/live/wHNOlxHFTzY)]

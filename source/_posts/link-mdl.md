@@ -323,3 +323,8 @@ T. Wen and T. Kwasniewski, "Phase Noise Simulation and Modeling of ADPLL by Syst
 ---
 
 Jaeha Kim,Scientific Analog. UCIe PHY Modeling and Simulation with XMODEL [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Tutorial1-1_%EA%B9%80%EC%9E%AC%ED%95%98%EA%B5%90%EC%88%98%EB%8B%98_%EC%84%9C%EC%9A%B8%EB%8C%80%ED%95%99%EA%B5%90.pdf)]
+
+---
+
+S. Katare, "Novel Framework for Modelling High Speed Interface Using Python for Architecture Evaluation," *2020 IEEE REGION 10 CONFERENCE (TENCON)*, Osaka, Japan, 2020 [[https://sci-hub.se/10.1109/TENCON50793.2020.9293846](https://sci-hub.se/10.1109/TENCON50793.2020.9293846)]
+

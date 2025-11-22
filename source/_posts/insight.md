@@ -608,12 +608,19 @@ V_{\text{t,lin}} &= V_G \mid _{I_D=I_{\text{thx}}\cdot \frac{W}{L}@\{V_D=0.05V\}
 
 ## STB and PSTB in Spectre/RF
 
-All credits to my colleague, Zhang Wenpian.
-> F. Wiedmann, "Loop gain simulation," Online:[[https://sites.google.com/site/frankwiedmann/loopgain](https://sites.google.com/site/frankwiedmann/loopgain)]
+> F. Wiedmann, "Loop gain simulation, [[https://sites.google.com/site/frankwiedmann/loopgain](https://sites.google.com/site/frankwiedmann/loopgain)]
+>
+> M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17, no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.
+>
+> Open loop gain analysis and "STB" method  [[https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux](https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux )]
+>
+> 刘堃. Middlebrook环路测量方法讨论，STB原理 [[https://bbs.eetop.cn/thread-985438-1-1.html](https://bbs.eetop.cn/thread-985438-1-1.html)]
+
+![image-20251122095447868](insight/image-20251122095447868.png)
 
 ### STB analysis
 
-Spectre **stb**'s "loopgain" is negative of "T" in paper<sup>[1]</sup>
+Spectre **stb**'s "loopgain" is negative of "T" in paper
 $$
 T = \frac{2(AD-BC) - A + D}{2(AD-BC)-A+D-1}
 $$
@@ -1183,10 +1190,6 @@ foreach net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical
 
 
 ## reference
-
-M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17, no. 1, pp. 31-41, Jan. 2001, doi: 10.1109/101.900125.
-
-Open loop gain analysis and "STB" method  [[https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux](https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux )]
 
 The Analog Designer's Toolbox (ADT) | Invited Talk by IEEE Santa Clara Valley Section CAS Society, [https://youtu.be/FT6kKC5OdE0](https://youtu.be/FT6kKC5OdE0)
 

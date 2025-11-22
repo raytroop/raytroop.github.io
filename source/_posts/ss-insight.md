@@ -25,15 +25,17 @@ mathjax: true
 
 
 
-## Nyquist's Stability Criterion
+## Nyquist Stability Criterion
+
+> Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers[[https://www.cppsim.com/CommCircuitLectures/lec15.pdf](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
 
 *TODO* &#128197;
 
+![image-20251122095944300](ss-insight/image-20251122095944300.png)
+
+![image-20251122095709631](ss-insight/image-20251122095709631.png)
 
 
-
-
-> [[Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
 
 
 

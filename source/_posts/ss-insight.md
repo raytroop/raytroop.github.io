@@ -37,6 +37,14 @@ mathjax: true
 
 
 
+## pulse averaging
+
+The average value of output pulse are same because of **same DC gain (0dB)**
+
+![image-20251122195302536](ss-insight/image-20251122195302536.png)
+
+![image-20251122195751984](ss-insight/image-20251122195751984.png)
+
 
 
 ## fft vs. ifft

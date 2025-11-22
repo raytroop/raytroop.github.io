@@ -9,6 +9,24 @@ mathjax: true
 
 
 
+## noise analysis
+
+note `result browser` show noise contribution, which is same with `noise summary`
+
+![image-20251122221347841](ade/image-20251122221347841.png)
+
+
+
+## res isnoisy
+
+![image-20251122233106948](ade/image-20251122233106948.png)
+
+![image-20251122232744311](ade/image-20251122232744311.png)
+
+
+
+
+
 ## differential R/C simulation
 
 ![image-20251101193603045](ade/image-20251101193603045.png)

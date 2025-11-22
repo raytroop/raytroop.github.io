@@ -124,6 +124,64 @@ $$
 
 
 
+## MOS Flicker Noise
+
+![image-20251123003843500](insight/image-20251123003843500.png)
+
+
+
+![image-20251123004058989](insight/image-20251123004058989.png)
+
+
+
+![image-20251123004154634](insight/image-20251123004154634.png)
+
+| Noise analysis ON,IN cfg                                     | input noise, noise gain, output noise                        |                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------- |
+| ![image-20251123010320155](insight/image-20251123010320155.png) | ![image-20251123010847729](insight/image-20251123010847729.png) | i: Id<br />o: Vg |
+| ![image-20251123011546709](insight/image-20251123011546709.png) | ![image-20251123011438115](insight/image-20251123011438115.png) | i: V5<br />o: Id |
+| ![image-20251123011906858](insight/image-20251123011906858.png) | ![image-20251123012105326](insight/image-20251123012105326.png) | i: V1<br />o: Id |
+
+Above simulation demonstrate that flicker noise  is ***represented by a drain-source current*** in BSIM model, however *modeled as a voltage source in series with the gate is just for calculating convenience*
+
+
+
+---
+
+![image-20251122212731639](insight/image-20251122212731639.png)
+
+![image-20251122211205426](insight/image-20251122211205426.png)
+
+> Notice, input referred noise unit follow output noise's unit
+
+
+
+---
+
+> 陈铖颖，杨丽琼，王统. CMOS模拟集成电路设计与仿真实例：基于CadenceADE. 电子工业出版社，2013![image-20251122213305339](insight/image-20251122213305339.png)
+
+
+
+
+
+
+
+## MOS Shot Noise
+
+![image-20251122114237398](insight/image-20251122114237398.png)
+
+
+
+## Gate-Referred Noise Lemma
+
+![image-20251122235114046](insight/image-20251122235114046.png)
+
+
+
+
+
+
+
 ## inverter capacitance simulation
 
 ### inverter input
@@ -272,10 +330,6 @@ R_2'  &= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
 > [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_analog-analogdesign-rfdesign-activity-7126946716938878976-GeW6?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_analog-analogdesign-rfdesign-activity-7126946716938878976-GeW6?utm_source=share&utm_medium=member_desktop)]
 
 
-
-## Shot Noise
-
-![image-20251122114237398](insight/image-20251122114237398.png)
 
 
 ## Level Shifter

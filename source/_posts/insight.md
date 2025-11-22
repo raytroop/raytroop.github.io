@@ -266,13 +266,7 @@ R_2'  &= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
 
 ## Shot Noise
 
-Any dc **current flowing through a diode** generates the so-called "*shot noise*" due to the random nature of the hole and electron transitions across the **pn junction**
-
-
-
-> Shot noise is **not relevant in CMOS devices** since it is only present in bipolar transistors and junction diodes
-
-
+![image-20251122114237398](insight/image-20251122114237398.png)
 
 
 ## Level Shifter

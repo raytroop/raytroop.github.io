@@ -43,7 +43,11 @@ mathjax: true
 
 
 
-## MOSFET Thermal Noise
+## MOS Thermal Noise
+
+> Michael H. Perrott. Analysis and Design of Analog Integrated Circuits Lecture 14 Noise Spectral Analysis for Circuit Elements [[https://www.cppsim.com/CircuitLectures/Lecture14.pdf](https://www.cppsim.com/CircuitLectures/Lecture14.pdf)]
+
+![image-20251122135331760](insight/image-20251122135331760.png)
 
 ### Legacy Long-Channel Model
 
@@ -90,6 +94,11 @@ $$
 
 ![image-20251028005749046](insight/image-20251028005749046.png)
 
+---
+
+> X. Ding, G. Niu, A. Zhang, W. Cai and K. Imura, "Experimental Extraction of Thermal Noise γ Factors in a 14-nm RF FinFET technology," *2021 IEEE 20th Topical Meeting on Silicon Monolithic Integrated Circuits in RF Systems (SiRF)*, San Diego, CA, USA, 2021[[https://sci-hub.se/10.1109/SiRF51851.2021.9383331](https://sci-hub.se/10.1109/SiRF51851.2021.9383331)]
+
+![image-20251122145714011](insight/image-20251122145714011.png)
 
 ### NF50
 
@@ -566,39 +575,6 @@ high level envelope:
 ![degeneration](insight/current_mirror_with_res_degeneration.jpg)
 
 > Razavi 2nd, problem 14.15
-
-
-
-## Monitored Analog Critical Parameters
-
-
-
-![monitor_parameters.drawio](insight/monitor_parameters.drawio.svg)
-
-Parameter Definition:
-
-$$\begin{align}
-I_{\text{D,lin}} &= I_D \mid _{V_G=V_{DD},V_D=0.05V} \\
-I_{\text{D,sat}} &= I_D \mid _{V_G=V_D=V_{DD}} \\
-V_{\text{t,lin}} &= V_G \mid _{I_D=I_{\text{thx}}\cdot \frac{W}{L}@\{V_D=0.05V\}}
-\end{align}$$
-
-> $I_{\text{thx}}$ could be different for technologies. (For N16, $I_{\text{thx}}=10$nA)
-
-
----
-
-**Constant Current Threshold Voltage**
-
-![Extraction of constant current threshold voltage](insight/ins_ex_vti.png)
-
-**gm-Maximum Method**
-
-![Extraction of threshold voltage](insight/ins_ex_vtgm.png)
-
-> [[Inspect 4. Extracting Standard Parameters](https://kolegite.com/EE_library/books_and_lectures/%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BD%D0%B0%20%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%B0%D0%BD%D0%B5%D1%82%D0%BE%20%D0%B2%20%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0%D1%82%D0%B0/Sentaurus_Training/insp/insp_4.html)]
-
-
 
 ## STB and PSTB in Spectre/RF
 

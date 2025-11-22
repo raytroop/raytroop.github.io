@@ -17,10 +17,44 @@ mathjax: true
 
 ![image-20250802091601281](dfm-layout/image-20250802091601281.png)
 
----
+
+
+## Vtgm & Vtlin
 
 ![image-20250802101539555](dfm-layout/image-20250802101539555.png)
 
+
+
+---
+
+
+
+![monitor_parameters.drawio](dfm-layout/monitor_parameters.drawio.svg)
+
+Parameter Definition:
+
+$$\begin{align}
+I_{\text{D,lin}} &= I_D \mid _{V_G=V_{DD},V_D=0.05V} \\
+I_{\text{D,sat}} &= I_D \mid _{V_G=V_D=V_{DD}} \\
+V_{\text{t,lin}} &= V_G \mid _{I_D=I_{\text{thx}}\cdot \frac{W}{L}@\{V_D=0.05V\}}
+\end{align}$$
+
+> $I_{\text{thx}}$ could be different for technologies. (For N16, $I_{\text{thx}}=10$nA)
+
+
+---
+
+> [[Inspect 4. Extracting Standard Parameters](https://kolegite.com/EE_library/books_and_lectures/%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BD%D0%B0%20%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%B0%D0%BD%D0%B5%D1%82%D0%BE%20%D0%B2%20%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0%D1%82%D0%B0/Sentaurus_Training/insp/insp_4.html)]
+
+| Constant Current Threshold Voltage                           | gm-Maximum Method                                            |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Extraction of constant current threshold voltage](dfm-layout/ins_ex_vti.png) | ![Extraction of threshold voltage](dfm-layout/ins_ex_vtgm.png) |
+
+---
+
+> IC-CAP 2011.01 - Target Modeling [[https://edadownload.software.keysight.com/eedl/iccap/2011_01/pdf/target.pdf](https://edadownload.software.keysight.com/eedl/iccap/2011_01/pdf/target.pdf)]
+
+![image-20251122133018845](dfm-layout/image-20251122133018845.png)
 
 
 

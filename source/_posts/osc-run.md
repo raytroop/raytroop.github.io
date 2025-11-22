@@ -7,15 +7,7 @@ categories:
 mathjax: true
 ---
 
-## Temperature compensation for VCO
-
-*Temperature compensation for the VCO oscillation frequency* is a critical issue
-
-*TODO* &#128197;
-
-
-
-## Leeson Model
+## Leeson's Model - LTI
 
 > M.H. Perrott [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
 >
@@ -49,42 +41,23 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 
 ![image-20251104233318469](osc-run/image-20251104233318469.png)
 
-## LTV Models
+### Leeson's limitations
+
+![image-20251122144811362](osc-run/image-20251122144811362.png)
+
+
+
+## Hajimiri's  Model- LTV ISF
+
+![image-20251122143723827](osc-run/image-20251122143723827.png)
+
+---
 
 ![image-20250629065454831](osc-run/image-20250629065454831.png)
 
 ![image-20250629073305626](osc-run/image-20250629073305626.png)
 
-
-
-
-## PPV (Perturbation Projection Vector)
-
-> A. Demir and J. Roychowdhury, "A reliable and efficient procedure for oscillator PPV computation, with phase noise macromodeling applications," in *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*, vol. 22, no. 2, pp. 188-197, Feb. 2003  [[https://sci-hub.se/10.1109/TCAD.2002.806599](https://sci-hub.se/10.1109/TCAD.2002.806599)]
->
-> Helene Thibieroz, Customer Support CIC. Using Spectre RF Noise-Aware PLL Methodology to Predict PLL Behavior Accurately  [[https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3056e59ea76165373f90152f915a829d25dabebc](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3056e59ea76165373f90152f915a829d25dabebc)]
->
-> Aditya Varma Muppala. Perturbation Projection Vector (PPV) Theory | Oscillators 11 | MMIC 16 [[youtu.be](https://youtu.be/rbbHfZGT6Jo), [notes](https://adityamuppala.github.io/assets/Notes_YouTube/PPV_Theory_Notes.pdf)]
-
-![image-20250920101142887](osc-run/image-20250920101142887.png)
-
-
-
-
-
-## Limit Cycles
-
-> [[https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf)]
-
-> ***Nonlinear*** Dynamics
-
- ![image-20250622202023590](osc-run/image-20250622202023590.png)
-
-![image-20250920101927173](osc-run/image-20250920101927173.png)
-
-
-
-## ISF model
+### ISF model
 
 ![image-20251008184336891](osc-run/image-20251008184336891.png)
 
@@ -110,7 +83,7 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 
 
 
-### Periodic ISF: Noise Folding
+#### Periodic ISF: Noise Folding
 
 ![image-20250629080632902](osc-run/image-20250629080632902.png)
 
@@ -193,7 +166,7 @@ $$\begin{align}
 \end{align}$$
 
 
-### ISF & $1/f$-noise up-conversion
+#### ISF & $1/f$-noise up-conversion
 
 *TODO* &#128197;
 
@@ -201,13 +174,13 @@ $$\begin{align}
 
 
 
-## ISF Simulation
+### ISF Simulation
 
 ![image-20241113232703941](osc-run/image-20241113232703941.png)
 
 
 
-### PSS + PXF Method
+#### PSS + PXF Method
 
 > Yizhe Hu, "A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF)" [[https://bbs.eetop.cn/thread-869343-1-1.html](https://bbs.eetop.cn/thread-869343-1-1.html)]
 
@@ -217,7 +190,7 @@ $$\begin{align}
 
 
 
-### Transient Method
+#### Transient Method
 
 > David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
 
@@ -231,6 +204,37 @@ $$\begin{align}
 
 > To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
 
+
+
+
+
+## Demir's Model - NLTV PPV
+
+![image-20251122143914081](osc-run/image-20251122143914081.png)
+
+![image-20250920101142887](osc-run/image-20250920101142887.png)
+
+### PPV (Perturbation Projection Vector)
+
+> A. Demir and J. Roychowdhury, "A reliable and efficient procedure for oscillator PPV computation, with phase noise macromodeling applications," in *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*, vol. 22, no. 2, pp. 188-197, Feb. 2003  [[https://sci-hub.se/10.1109/TCAD.2002.806599](https://sci-hub.se/10.1109/TCAD.2002.806599)]
+>
+> Helene Thibieroz, Customer Support CIC. Using Spectre RF Noise-Aware PLL Methodology to Predict PLL Behavior Accurately  [[https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3056e59ea76165373f90152f915a829d25dabebc](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3056e59ea76165373f90152f915a829d25dabebc)]
+>
+> Aditya Varma Muppala. Perturbation Projection Vector (PPV) Theory | Oscillators 11 | MMIC 16 [[youtu.be](https://youtu.be/rbbHfZGT6Jo), [notes](https://adityamuppala.github.io/assets/Notes_YouTube/PPV_Theory_Notes.pdf)]
+
+
+
+
+
+### Limit Cycles
+
+> [[https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf)]
+
+> ***Nonlinear*** Dynamics
+
+ ![image-20250622202023590](osc-run/image-20250622202023590.png)
+
+![image-20250920101927173](osc-run/image-20250920101927173.png)
 
 
 
@@ -260,6 +264,14 @@ Three methods:
 - `phaseDegUnwrapped(vh('pss "/P5"))` = `phaseDegUnwrapped(rms(vh('pss "/P5")))`
 
 ![image-20251026155120102](osc-run/image-20251026155120102.png)
+
+
+
+## Temperature compensation
+
+*Temperature compensation for the VCO oscillation frequency* is a critical issue
+
+*TODO* &#128197;
 
 
 
@@ -321,3 +333,6 @@ C. Samori, "Tutorial: Understanding Phase Noise in LC VCOs," *2016 IEEE Internat
 
 Jun Yin. ISSCC 2025  T10:  mm-Wave Oscillator Design
 
+---
+
+Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. *The Designer's Guide to High-Purity Oscillators* [[pdf](https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf)]

@@ -147,7 +147,11 @@ grid on; legend('Post Tap FFE', 'Pre Tap FFE'); title('FFE Group Delay')
 >
 > ![image-20250613235212237](distortion/image-20250613235212237.png)
 
+## Volterra Series
 
+> Heng Zhang. ECEN 665 (ESS) : RF Communication Circuits and Systems Volterra Series: Introduction & Application [[https://people.engr.tamu.edu/s-sanchez/665_Volterra_2008.pdf](https://people.engr.tamu.edu/s-sanchez/665_Volterra_2008.pdf)]
+
+![image-20251123105813049](distortion/image-20251123105813049.png)
 
 
 

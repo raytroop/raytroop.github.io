@@ -100,8 +100,27 @@ $$
 
 
 
+## Gate Res noise contribution
 
-## Gate resistance handling by parasitic extraction tools
+![gate_Rn.drawio](gate-resistance/gate_Rn.drawio.svg)
+
+> $R_s$: previous stage output impedance
+>
+> $R_G$, $I_n$: gate resistance and its noise current
+>
+> $R_L$: next stage input impedance
+
+with $R_SI_o + (I_o - I_n)R_G + I_oR_L=0$, we have $I_o=I_n\frac{R_G}{R_S+R_G+R_L}$, then
+$$\begin{align}
+V_S &= -I_n\frac{R_GR_S}{R_S+R_G+R_L} \overset{R_L\to \infty}{\longrightarrow} 0\\
+V_G &= I_n\frac{R_GR_L}{R_S+R_G+R_L} \overset{R_L\to \infty}{\longrightarrow} I_nR_G
+\end{align}$$
+
+The above equation show that gate resistance noise don't contribute to previous stage output noise, however contribute to next stage 
+
+
+
+## Gate resistance in PEX
 
 They fracture the poly line at the intersection with the active (diffusion) layer, breaking it into **"gate poly"(poly over active)** and **"field poly" (poly outside active)**
 

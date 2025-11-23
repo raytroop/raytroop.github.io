@@ -51,6 +51,24 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 ## Real & Complex Modulation
 
+![image-20251123230309624](am-pm/image-20251123230309624.png)
+
+![image-20251123230332297](am-pm/image-20251123230332297.png)
+
+![image-20251123230424242](am-pm/image-20251123230424242.png)
+
+| signal                                                       | Spectra                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| $x_{bb}(t) = x_I(t)+jx_Q(t)$                                 | $X_{I}(\omega)+jX_Q(\omega)$                                 |
+| $x(t)=\color{red}x_I(t)\cdot\cos(\omega_c t)\color{blue}-x_Q(t)\cdot\sin(\omega_c t)$ | $\color{red}\frac{1}{2}X_{I}(\omega+\omega_c)+\color{blue}\frac{1}{2}jX_{Q}(\omega+\omega_c)+\color{red}\frac{1}{2}X_{I}(\omega-\omega_c)+\color{blue}\frac{1}{2}jX_{Q}(\omega-\omega_c)$ |
+| $x_A=x_{bb}(t)\cdot e^{j\omega_c t}$                         | $X_{I}(\omega-\omega_c)+jX_Q(\omega-\omega_c)$               |
+
+![image-20251123230522862](am-pm/image-20251123230522862.png)
+
+
+
+---
+
 > Matt Guibord. TIPL 4: Real and Complex Modulation [[https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5576277660001.mp4/subassets/TIPL4708-Real-and-Complex-Modulation.pdf](https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5576277660001.mp4/subassets/TIPL4708-Real-and-Complex-Modulation.pdf)]
 
 ![image-20251116225706934](am-pm/image-20251116225706934.png)

@@ -27,6 +27,10 @@ where $Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}$
 
 ![image-20251023214042381](emx-peakview/image-20251023214042381.png)
 
+> Min-Sun Keel. Design of reliable and energy-efficient high-speed interface circuits. University of Illinois Urbana-Champaign, USA, 2015 [[https://files.core.ac.uk/download/pdf/158312105.pdf](https://files.core.ac.uk/download/pdf/158312105.pdf)]
+>
+> ![image-20251124205353311](emx-peakview/image-20251124205353311.png)
+
 ```python
 import numpy as np
 import pandas as pd
@@ -119,6 +123,10 @@ plt.show()
 Notice ***Coupling coefficient*** is caculated  by ***differential impedance*** rather than $Z_{12}$ or $Z_{21}$
 
 ![image-20251120210358252](emx-peakview/image-20251120210358252.png)
+
+
+
+
 
 ### $C_B$ from Nport
 

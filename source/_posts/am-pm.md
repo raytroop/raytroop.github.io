@@ -51,6 +51,8 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 ## Real & Complex Modulation
 
+> J OHN M. C IOFFI. Complex AWGN and Other Channels [[https://cioffi-group.stanford.edu/ee379a/Lectures/L4.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L4.pdf)]
+
 ![image-20251123230309624](am-pm/image-20251123230309624.png)
 
 ![image-20251123230332297](am-pm/image-20251123230332297.png)

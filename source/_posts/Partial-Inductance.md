@@ -177,6 +177,62 @@ For instance
 
 
 
+## Transformer
+
+任何封闭电路中感应电动势大小，等于穿过这一电路磁通量的变化率。
+$$
+\epsilon = -\frac{d\Phi_B}{dt}
+$$
+其中 $\epsilon$是电动势，单位为伏特
+
+$\Phi_B$是通过电路的磁通量，单位为韦伯
+
+电动势的方向（公式中的负号）由楞次定律决定
+
+> **楞次定律**: 由于磁通量的改变而产生的感应电流，其方向为抗拒磁通量改变的方向。
+
+> 在回路中产生感应电动势的原因是由于通过回路平面的磁通量的**变化**，而不是磁通量本身，即使通过回路的磁通量很大，但只要它不随时间变化，回路中依然不会产生感应电动势。
+
+
+
+### 自感电动势
+
+当电流$I$随时间变化时，在线圈中产生的自感电动势为
+$$
+\epsilon = -L\frac{dI}{dt}
+$$
+
+
+![image-20240713131201618](Partial-Inductance/image-20240713131201618.png)
+
+![image-20251022234419312](Partial-Inductance/image-20251022234419312.png)
+
+![image-20240713145005306](Partial-Inductance/image-20240713145005306.png)
+
+![image-20240713145212327](Partial-Inductance/image-20240713145212327.png)
+
+
+
+
+
+---
+
+![image-20240713140911612](Partial-Inductance/image-20240713140911612.png)
+
+![image-20240713135148710](Partial-Inductance/image-20240713135148710.png)
+
+![image-20240713135236291](Partial-Inductance/image-20240713135236291.png)
+
+> **同名端**：当两个*电流*分别从两个线圈的对应端子流入 ，其所 产生的磁场相互加强时，则这两个对应端子称为同名端。
+
+![image-20240713142238398](Partial-Inductance/image-20240713142238398.png)
+
+![image-20240713142249362](Partial-Inductance/image-20240713142249362.png)
+
+![image-20240713142506673](Partial-Inductance/image-20240713142506673.png)
+
+
+
 
 
 ## reference

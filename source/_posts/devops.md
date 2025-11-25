@@ -8,6 +8,18 @@ categories:
 
 
 
+## miniconda3/envs/myenv/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.32' not found
+
+> [[https://stackoverflow.com/a/73101774/8037585](https://stackoverflow.com/a/73101774/8037585)]
+
+This is because you have some old versions not cleaned up while upgrading gcc.
+
+First of all, make sure that you have the latest lib with `conda install -c conda-forge libstdcxx-ng`
+
+
+
+
+
 ## OBS 无声录制带有声音的视频
 
 > 录制视频时，想要 obs 能录制声音，但是不想人耳听到。

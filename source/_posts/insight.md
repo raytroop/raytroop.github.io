@@ -126,6 +126,9 @@ $$
 
 ## MOS Flicker Noise
 
+> T. Noulis, "CMOS process transient noise simulation analysis and benchmarking," 2016 26th International Workshop on Power and Timing Modeling, Optimization and Simulation (PATMOS), Bremen, Germany, 2016 [[https://sci-hub.ru/10.1109/PATMOS.2016.7833428](https://sci-hub.ru/10.1109/PATMOS.2016.7833428)]
+> Dr. Thomas Gneiting, AdMOS GmbH. Flicker Noise Extraction for Scalable MOS Simulation Models [[https://www.mos-ak.org/premstaetten/papers/MOS-AK_T.Gneiting.pdf](https://www.mos-ak.org/premstaetten/papers/MOS-AK_T.Gneiting.pdf)]
+
 ![image-20251123003843500](insight/image-20251123003843500.png)
 
 

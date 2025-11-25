@@ -318,7 +318,7 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 > $$
 > where $A_+=j$
 >
-> Then the complex exponentials with frequency $-\omega_m$ can be represented as
+> Then, the complex exponentials with frequency $-\omega_m$ shall be
 > $$
 > \alpha_-(t) = [\alpha_+(t)]^* = -je^{-j\omega_m t} = e^{-j(\omega_mt+\pi/2)}
 > $$

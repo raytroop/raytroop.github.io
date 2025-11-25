@@ -328,7 +328,7 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 ![image-20251118223254553](am-pm/image-20251118223254553.png)
 
-
+> $\phi_c=0$ in above simulation
 
 ## Single Sideband Modulation (SSB)
 

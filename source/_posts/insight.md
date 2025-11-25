@@ -127,7 +127,6 @@ $$
 ## MOS Flicker Noise
 
 > T. Noulis, "CMOS process transient noise simulation analysis and benchmarking," 2016 26th International Workshop on Power and Timing Modeling, Optimization and Simulation (PATMOS), Bremen, Germany, 2016 [[https://sci-hub.ru/10.1109/PATMOS.2016.7833428](https://sci-hub.ru/10.1109/PATMOS.2016.7833428)]
-> Dr. Thomas Gneiting, AdMOS GmbH. Flicker Noise Extraction for Scalable MOS Simulation Models [[https://www.mos-ak.org/premstaetten/papers/MOS-AK_T.Gneiting.pdf](https://www.mos-ak.org/premstaetten/papers/MOS-AK_T.Gneiting.pdf)]
 
 ![image-20251123003843500](insight/image-20251123003843500.png)
 
@@ -135,7 +134,9 @@ $$
 
 ![image-20251123004058989](insight/image-20251123004058989.png)
 
-
+> Dr. Thomas Gneiting, AdMOS GmbH. Flicker Noise Extraction for Scalable MOS Simulation Models [[https://www.mos-ak.org/premstaetten/papers/MOS-AK_T.Gneiting.pdf](https://www.mos-ak.org/premstaetten/papers/MOS-AK_T.Gneiting.pdf)]
+>
+> ![image-20251125201927820](insight/image-20251125201927820.png)
 
 ![image-20251123004154634](insight/image-20251123004154634.png)
 
@@ -151,7 +152,7 @@ Above simulation demonstrate that flicker noise  is ***represented by a drain-so
 
 > Sam Palermo. Lecture 12: Noise. ECEN474: (Analog) VLSI Circuit Design Fall 2012 [[https://people.engr.tamu.edu/spalermo/ecen474/lecture12_ee474_noise.pdf](https://people.engr.tamu.edu/spalermo/ecen474/lecture12_ee474_noise.pdf)]
 >
-> p23 *TODO* &#128197;
+> ![image-20251125193604694](insight/image-20251125193604694.png)
 
 
 ---

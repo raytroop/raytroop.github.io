@@ -308,9 +308,23 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 > Ken Kundert. Introduction to RF Simulation and its Application [[https://designers-guide.org/analysis/rf-sim.pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
 
+![image-20251117235457764](am-pm/image-20251117235457764.png)
+
 ![Separation.drawio](am-pm/Separation.drawio.svg)
 
-![image-20251117235457764](am-pm/image-20251117235457764.png)
+> For AM & ***pacphase=90deg***, complex exponentials with frequency $\omega_m$
+> $$
+> \alpha_+(t) = je^{j\omega_m t} = e^{j(\omega_mt+\pi/2)}
+> $$
+> where $A_+=j$
+>
+> Then the complex exponentials with frequency $-\omega_m$ can be represented as
+> $$
+> \alpha_-(t) = [\alpha_+(t)]^* = -je^{-j\omega_m t} = e^{-j(\omega_mt+\pi/2)}
+> $$
+> where $A_-=A_+^* =-j$
+>
+> ![image-20251125214622501](am-pm/image-20251125214622501.png)
 
 ![image-20251118000021345](am-pm/image-20251118000021345.png)
 
@@ -329,6 +343,8 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 ![image-20251118223254553](am-pm/image-20251118223254553.png)
 
 > $\phi_c=0$ in above simulation
+
+
 
 ## Single Sideband Modulation (SSB)
 

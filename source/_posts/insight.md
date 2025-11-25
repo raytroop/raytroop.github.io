@@ -149,6 +149,9 @@ $$
 
 Above simulation demonstrate that flicker noise  is ***represented by a drain-source current*** in BSIM model, however *modeled as a voltage source in series with the gate is just for calculating convenience*
 
+> Sam Palermo. Lecture 12: Noise. ECEN474: (Analog) VLSI Circuit Design Fall 2012 [[https://people.engr.tamu.edu/spalermo/ecen474/lecture12_ee474_noise.pdf](https://people.engr.tamu.edu/spalermo/ecen474/lecture12_ee474_noise.pdf)]
+>
+> p23 *TODO* &#128197;
 
 
 ---

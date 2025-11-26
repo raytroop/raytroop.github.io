@@ -138,11 +138,32 @@ Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
 
 ## T-Coil Peaking
 
-***Capacitor Splitting*** + ***Magnetic Coupling***
+***Capacitor Splitting*** + ***Magnetic Coupling of a transformer***
 
 ![image-20251022234854155](rx-fe/image-20251022234854155.png)
 
-> ![image-20251022235133839](rx-fe/image-20251022235133839.png)
+![image-20251022235133839](rx-fe/image-20251022235133839.png)
+
+![tcoil-tran.drawio](rx-fe/tcoil-tran.drawio.svg)
+
+### 3 uncoupled inductors model
+
+![image-20251126173130097](rx-fe/image-20251126173130097.png)
+
+![tcoil-Y.drawio](rx-fe/tcoil-Y.drawio.svg)
+$$\begin{align}
+V_{P13} &= I_1\cdot sL_1 + I_2\cdot sM = I_1\cdot s(L_1+M) + (I_1-I_2)\cdot s(-M) \\
+V_{P23} &= -I_2\cdot sL_2 - I_1\cdot sM = -I_2\cdot s(L_2 + M) + (I_1-I_2)\cdot s(-M)
+\end{align}$$
+
+
+
+The negative inductor $-M$ can be seen as capacitor
+$$
+-j\omega M = \frac{1}{j}\omega M = \frac{1}{j\omega \frac{1}{\omega^2 M}}
+$$
+That is $C_{-M}  = \frac{1}{\omega^2 M} \ll C_E$
+
 
 
 
@@ -229,6 +250,10 @@ S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension Techniques for
 
 David J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2007_08_Allstot.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2007_08_Allstot.pdf)]
 
+J. Paramesh and D. J. Allstot, "Analysis of the Bridged T-Coil Circuit Using the Extra-Element Theorem," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 53, no. 12, pp. 1408-1412, Dec. 2006 [[https://sci-hub.st/10.1109/TCSII.2006.885971](https://sci-hub.st/10.1109/TCSII.2006.885971)]
+
+S. C. D. Roy, "Comments on "Analysis of the Bridged T-coil Circuit Using the Extra-Element Theorem," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 54, no. 8, pp. 673-674, Aug. 2007 [[https://sci-hub.st/10.1109/TCSII.2007.899834](https://sci-hub.st/10.1109/TCSII.2007.899834)]
+
 B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 40, pp. 10-13, Fall 2015 [[https://www.seas.ucla.edu/brweb/papers/Journals/BRFall15TCoil.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BRFall15TCoil.pdf)]
 
 —, "The Design of Broadband I/O Circuits [The Analog Mind]," IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2, pp. 6-15, Spring 2021 [[http://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)]
@@ -238,10 +263,6 @@ Deog-Kyoon Jeong. Topics in IC Design: T-Coil [[pdf](https://ocw.snu.ac.kr/sites
 P. Heydari and M. Safiallah, "Evolution of Broadband Amplifier Design: From Single-Stage to Distributed Topology," in IEEE Microwave Magazine, vol. 24, no. 9, pp. 18-29, Sept. 2023 
 
 Cowan G. *Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations*. Cambridge University Press; 2024
-
-J. Paramesh and D. J. Allstot, "Analysis of the Bridged T-Coil Circuit Using the Extra-Element Theorem," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 53, no. 12, pp. 1408-1412, Dec. 2006 [[https://sci-hub.st/10.1109/TCSII.2006.885971](https://sci-hub.st/10.1109/TCSII.2006.885971)]
-
-S. C. D. Roy, "Comments on "Analysis of the Bridged T-coil Circuit Using the Extra-Element Theorem," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 54, no. 8, pp. 673-674, Aug. 2007 [[https://sci-hub.st/10.1109/TCSII.2007.899834](https://sci-hub.st/10.1109/TCSII.2007.899834)]
 
 Starič, Peter and Erik Margan. “Wideband amplifiers.” (2006) [[pdf](https://www-f9.ijs.si/~margan/WBA3_4web/Wideband_Amplifiers_FPRL.pdf)]
 

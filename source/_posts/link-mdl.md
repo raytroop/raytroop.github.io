@@ -18,6 +18,8 @@ While many different analysis methods exist, including frequency and statistical
 ### serdespy
 
 > Richard Barrie. serdespy — A python library for system-level SerDes modelling and simulation [[https://github.com/richard259/serdespy](https://github.com/richard259/serdespy)]
+>
+> python 3.10, samplerate
 
 
 

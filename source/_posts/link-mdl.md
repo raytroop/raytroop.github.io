@@ -19,7 +19,73 @@ While many different analysis methods exist, including frequency and statistical
 
 > Richard Barrie. serdespy — A python library for system-level SerDes modelling and simulation [[https://github.com/richard259/serdespy](https://github.com/richard259/serdespy)]
 >
-> python 3.10, samplerate
+> `python 3.10, samplerate`
+
+
+
+***ifft of sampling continuous-time transfer function***
+
+![freq2impulse.drawio](link-mdl/freq2impulse.drawio.svg)
+
+```python
+def freq2impulse(H, f):
+    #Returns the impulse response, h, and (optionally) the step response,
+    #hstep, for a system with complex frequency response stored in the array H
+    #and corresponding frequency vector f.  The time array is
+    #returned in t.  The frequency array must be linearly spaced.
+
+        Hd = np.concatenate((H,np.conj(np.flip(H[1:H.size-1]))))
+        h = np.real(np.fft.ifft(Hd))
+        #hstep = sp.convolve(h,np.ones(h.size))
+        #hstep = hstep[0:h.size]
+        t= np.linspace(0,1/f[1],h.size+1)
+        t = t[0:-1]
+        
+        return h,t
+```
+
+Maybe, the more straightforward method is sampling impulse response of continuous-time transfer function directly
+
+![image-20251127200007941](link-mdl/image-20251127200007941.png)
+
+```python
+import numpy as np
+from scipy import signal
+import matplotlib.pyplot as plt
+
+fbw = 20e9
+wbw = fbw * 2 * np.pi
+samples_per_symbol = 64
+UI = 1/50e9
+Ts = UI/samples_per_symbol
+fs = 1/Ts
+ws = fs * 2 * np.pi
+ttot = 4/fbw # heuristic
+N = int(0.5 * fs * ttot)+1
+w, H = signal.freqs([1], [1/wbw, 1], np.linspace(0, 0.5*ws, N))
+
+## freq2impulse(H, f), ifft - using sample of continuous-time tranfer function
+f = w/(2*np.pi)
+Hd = np.concatenate((H,np.conj(np.flip(H[1:H.size-1]))))
+hd = np.real(np.fft.ifft(Hd))
+t= np.linspace(0,1/f[1],hd.size+1)
+t = t[0:-1]
+
+## continuous-time transfer function - impulse
+t, hc = signal.impulse(([1], [1/wbw, 1]), T = t)
+
+## hd(kTs) = Ts*hc(kTs)
+plt.figure(figsize = (14,10))
+plt.plot(t, hc, t, hd/Ts, '--r', linewidth=3)
+plt.grid(); plt.legend(['impulse response by continuous-time transfer function','impulse response/Ts by ifft of sampling transfer function'])
+plt.ylabel('Mag'); plt.xlabel('time (s)'); plt.show()
+```
+
+
+
+
+
+
 
 
 
@@ -274,6 +340,8 @@ function ber_check_prbs(rcvd_bits; poly, inv, seed, lock_status, lock_cnt, lock_
 	return seed, lock_status, lock_cnt, ber_err_cnt, ber_tot_cnt
 end
 ```
+
+
 
 
 

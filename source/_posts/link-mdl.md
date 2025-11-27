@@ -34,14 +34,14 @@ def freq2impulse(H, f):
     #and corresponding frequency vector f.  The time array is
     #returned in t.  The frequency array must be linearly spaced.
 
-        Hd = np.concatenate((H,np.conj(np.flip(H[1:H.size-1]))))
-        h = np.real(np.fft.ifft(Hd))
-        #hstep = sp.convolve(h,np.ones(h.size))
-        #hstep = hstep[0:h.size]
-        t= np.linspace(0,1/f[1],h.size+1)
-        t = t[0:-1]
-        
-        return h,t
+    Hd = np.concatenate((H,np.conj(np.flip(H[1:H.size-1]))))
+    h = np.real(np.fft.ifft(Hd))
+    #hstep = sp.convolve(h,np.ones(h.size))
+    #hstep = hstep[0:h.size]
+    t= np.linspace(0,1/f[1],h.size+1)
+    t = t[0:-1]
+
+    return h,t
 ```
 
 Maybe, the more straightforward method is sampling impulse response of continuous-time transfer function directly

@@ -187,7 +187,7 @@ Sen M. Kuo. Real-Time Digital Signal Processing: Fundamentals, Implementations a
 
 Taylor, Fred. *Digital filters: principles and applications with MATLAB*. John Wiley & Sons, 2011
 
-Kuo, Sen-Maw. (2013) Real-Time Digital Signal Processing: Implementations and Applications 3rd [[pdf](https://students.aiu.edu/submissions/profiles/resources/onlineBook/H7Y7t7_Real-Time_Digital_Signal_Processing_Applications-_3rd.pdf)]
+Kuo, Sen-Maw. (2013) Real-Time Digital Signal Processing: Implementations and Applications 3rd [[pdf](http://dl.icdst.org/pdfs/files/e51100ce301ad56951e4511a9a1c66aa.pdf)]
 
 D. Markovic and R. W. Brodersen, DSP Architecture Design Essentials, Springer, 2012.
 

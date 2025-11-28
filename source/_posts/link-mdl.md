@@ -1,6 +1,6 @@
 ---
 title: Link Modeling
-date: 2024-12-01 23:13:53
+date: 2025-11-29 00:24:56
 tags:
 categories:
 - link

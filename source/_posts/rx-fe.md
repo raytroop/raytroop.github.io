@@ -162,7 +162,7 @@ The negative inductor $-M$ can be seen as capacitor
 $$
 -j\omega M = \frac{1}{j}\omega M = \frac{1}{j\omega \frac{1}{\omega^2 M}}
 $$
-That is $\sout{C_{-M}  = \frac{1}{\omega^2 M} \ll C_E}$
+That is $C_{-M}  = \frac{1}{\omega^2 M} \approx 10 \times C_E$
 
 
 

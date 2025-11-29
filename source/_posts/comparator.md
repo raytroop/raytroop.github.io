@@ -301,16 +301,22 @@ Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A New Methodolo
 
 ---
 
-B. Razavi, **"The Design of a Comparator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020. [https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)
+B. Razavi, **"The Design of a Comparator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)]
 
-B. Razavi, **"The StrongARM Latch [A Circuit for All Seasons],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015. [https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)
+—, **"The StrongARM Latch [A Circuit for All Seasons],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)]
 
-CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Comparator?  [[https://youtu.be/S5GnvFxuxUA?si=w38iLvzjr0azhu43](https://youtu.be/S5GnvFxuxUA?si=w38iLvzjr0azhu43)] 
+B. Murmann. ISSCC 2011 Tutorial: Noise Analysis in Switched Capacitor Circuits [[slides](https://picture.iczhiku.com/resource/eetop/ShiFTilZDiTktncN.pdf), [transcription](https://picture.iczhiku.com/resource/eetop/SykTRQoPgiEGRBvV.pdf)]
 
-—. Why Transient Noise (Trannoise) Analysis for A Strong-arm Latch / Comparator? [[https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_](https://youtu.be/gpQggSM9_PE?si=apMd6yWVO1JHOHm_)]
+—, "Thermal Noise in Track-and-Hold Circuits: Analysis and Simulation Techniques," IEEE Solid-State Circuits Magazine, vol. 4, no. 2, pp. 46-54, June 2012 [[https://sci-hub.se/10.1109/MSSC.2012.2192190](https://sci-hub.se/10.1109/MSSC.2012.2192190)]
 
-—. Why A Periodic Steady-State (PSS), Periodic Noise (Pnoise), and Hand Calculation for A Sampler? [[https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV](https://youtu.be/lGqCfg5R-rY?si=nQ8QBwW2x8QUMryV)]
+X. Huang. Thermal noise analysis of switched-capacitor amplifier [[theory](https://youtu.be/SyQMpNORVCo), [simulation](https://youtu.be/kv_s2N0o428)]
 
-Tony Chan Carusone,. 28 Comparator Specs and Characterization [[https://youtu.be/mRfWM1bpr3k?si=WJXz0r3MJ7WvZ6h2](https://youtu.be/mRfWM1bpr3k?si=WJXz0r3MJ7WvZ6h2)]
+CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Comparator?  [[https://youtu.be/S5GnvFxuxUA](https://youtu.be/S5GnvFxuxUA)] 
 
-Prof. Seung-Tak Ryu (KAIST) "Advanced ADC Design Techniques" Online Course (2022) : Dynamic Latch  [[https://youtu.be/zE1ZdG_XzWk?si=rk-DGUqMnQyjDiuU](https://youtu.be/zE1ZdG_XzWk?si=rk-DGUqMnQyjDiuU)]
+—. Why Transient Noise (Trannoise) Analysis for A Strong-arm Latch / Comparator? [[https://youtu.be/gpQggSM9_PE](https://youtu.be/gpQggSM9_PE)]
+
+—. Why A Periodic Steady-State (PSS), Periodic Noise (Pnoise), and Hand Calculation for A Sampler? [[https://youtu.be/lGqCfg5R-rY](https://youtu.be/lGqCfg5R-rY)]
+
+Tony Chan Carusone,. 28 Comparator Specs and Characterization [[https://youtu.be/mRfWM1bpr3k](https://youtu.be/mRfWM1bpr3k)]
+
+Prof. Seung-Tak Ryu (KAIST) "Advanced ADC Design Techniques" Online Course (2022) : Dynamic Latch  [[https://youtu.be/zE1ZdG_XzWk](https://youtu.be/zE1ZdG_XzWk)]

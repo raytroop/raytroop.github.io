@@ -8,7 +8,35 @@ categories:
 
 ## Julia
 
-*TODO* &#128197;
+`parentmodule`:  determine the package a function in Julia originates from
+
+`names`: Get a vector of the public names of a Module, excluding deprecated names
+
+`undef`: undef is a special marker used when constructing arrays (including vectors) to indicate that the elements of the array should not be initialized to any specific value.
+
+`collect`: return an Array of all items in a collection or iterator, `collect(2:5)`, `collect('B':'D')`, `collect("HELLO")`
+
+`!`: a function naming convention to indicate that a function mutates its arguments in place, meaning the changes will be visible outside the function. When a function is designed to modify its arguments, it is good practice to append a `!` (exclamation mark) to its name
+
+`eltype`: To find the type of the elements that are iterated over in a collection
+
+`typeof`: To determine the specific type of any given value
+
+```julia
+pizza_tuple = ("hawaiian", 'S', 10.5)
+typeof(pizza_tuple) # Tuple{String, Char, Float64}
+eltype(pizza_tuple)	# Any
+
+arr = [1,2,3]
+typeof(arr)		# Vector{Int64} (alias for Array{Int64, 1})
+eltype(arr)		# Int64
+```
+
+`Any`: It is used to construct a heterogeneous array that can hold elements of any type, like `Any[1, "hello", 3.14]`
+
+
+
+
 
 ---
 

@@ -36,17 +36,24 @@ eltype(arr)		# Int64
 
 
 
-
-
 ---
 
-***UnitRange to Array***
+***create a new project***
 
-a `UnitRange` is a specific type of range that represents a sequence of integers with a step of 1
+```bash
+$ mkdir MyNewProj
+$ cd MyNewProj
+```
 
-`UnitRange` objects are "lazy" and efficient. They do not allocate memory for all elements in the range until explicitly converted to a concrete array (e.g., using `collect()`)
+```julia
+$julia
+(MyNewProj) pkg> activate .
+(MyNewProj) pkg> add smtdep
+```
 
-![image-20251012081440009](coding/image-20251012081440009.png)
+
+
+
 
 ---
 

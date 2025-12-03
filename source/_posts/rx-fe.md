@@ -33,6 +33,36 @@ mathjax: true
 
 
 
+
+
+## Equalization Shaping
+
+> PCIe Gen6 Channel and Reference Package S4P Models for Rx Stressed Eye Calibration
+
+![image-20251204005909804](rx-fe/image-20251204005909804.png)
+
+Above curve demonstrate that only zero is not enough to compensate channel+pkg loss (>20 dB/decade), peaking or *Complex*-*Conjugate Poles* is necessary
+
+![image-20251204005738743](rx-fe/image-20251204005738743.png)
+
+
+
+---
+
+> S. Shahramian *et al*., "30.5 A 1.41pJ/b 56Gb/s PAM-4 Wireline Receiver Employing Enhanced Pattern Utilization CDR and Genetic Adaptation Algorithms in 7nm CMOS," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019 [[pdf](https://sci-hub.se/10.1109/ISSCC.2019.8662421)]
+
+![image-20251203231733124](rx-fe/image-20251203231733124.png)
+
+---
+
+> P. A. Francese *et al*., "10.6 continuous-time linear equalization with programmable active-peaking transistor arrays in a 14nm FinFET 2mW/Gb/s 16Gb/s 2-Tap speculative DFE receiver," *2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers*, San Francisco, CA, USA, 2015 [[pdf](https://sci-hub.se/10.1109/ISSCC.2015.7062988)]
+
+![image-20251203232523501](rx-fe/image-20251203232523501.png)
+
+
+
+
+
 ## Negative Capacitance Circuit
 
 ### Negative Miller Capacitance
@@ -143,6 +173,8 @@ Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
 
 
 ## T-Coil Peaking
+
+> Jri Lee. ISSCC 2009 Tutorial. CMOS Circuit Techniques for High Speed Wireline Transceivers [[http://cc.ee.ntu.edu.tw/~jrilee/course/2009_Tutorial_10.pdf](http://cc.ee.ntu.edu.tw/~jrilee/course/2009_Tutorial_10.pdf)]
 
 ***Capacitor Splitting*** + ***Magnetic Coupling of a transformer***
 

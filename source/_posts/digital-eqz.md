@@ -135,6 +135,16 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 
 
+## TX FIR Adaptation Algorithm
+
+> Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 8: RX FIR, CTLE, DFE, & Adaptive Eq. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf)]
+
+*TODO* &#128197;
+
+***sign-sign LMS algorithm***
+
+
+
 ### RX-FFE
 
 *TODO* &#128197;

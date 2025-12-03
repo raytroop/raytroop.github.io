@@ -29,6 +29,18 @@ mathjax: true
 
 
 
+## Complex-Conjugate Poles/Zeros
+
+> Section 6 Frequency Response Analysis [[https://web.engr.oregonstate.edu/~webbky/ENGR203_files/Section%206%20Frequency%20Response%20Analysis.pdf](https://web.engr.oregonstate.edu/~webbky/ENGR203_files/Section%206%20Frequency%20Response%20Analysis.pdf)]
+
+![image-20251204011548754](2nd-sys/image-20251204011548754.png)
+
+![image-20251204011441374](2nd-sys/image-20251204011441374.png)
+
+***maximally-flat or Butterworth response***
+
+![image-20251204011707190](2nd-sys/image-20251204011707190.png)
+
 ## Phase Margin & Damping Factor
 
 - Phase Margin is defined for *open loop* system

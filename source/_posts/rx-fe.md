@@ -140,6 +140,10 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 
 
 
+---
+
+![image-20251204223338959](rx-fe/image-20251204223338959.png)
+
 
 
 ## Equalization Noise Enhancement

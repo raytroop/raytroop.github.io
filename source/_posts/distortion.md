@@ -77,7 +77,9 @@ legend('ref', 'Low frequency attenuated', 'high frequency attenuated')
 
 ---
 
-![image-20251115105458404](distortion/image-20251115105458404.png)
+> Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data Transmission and Testing. [[https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf](https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf)]
+
+![image-20251204220951563](distortion/image-20251204220951563.png)
 
 ![image-20251115174216490](distortion/image-20251115174216490.png)
 
@@ -182,8 +184,6 @@ Haykin, Simon S., and Michael Moher. *Communication Systems*. 5th ed. John Wiley
 —. *Digital Communication Systems*. 1st edition. Wiley, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-Communication-Systems-Simon-S.-Haykin.pdf)]
 
 Carlson, A. Bruce, and Paul B. Crilly. *Communication Systems: An Introduction to Signals and Noise in Electrical Communication*. 5th ed. Boston: McGraw-Hill Higher Education, 2010. [[pdf](https://eedmd.weebly.com/uploads/9/6/6/9/96692532/carlson.pdf)]
-
-Pupalaikis, Peter. (2006). Group Delay and its Impact on Serial Data Transmission and Testing. [[https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf](https://cdn.teledynelecroy.com/files/whitepapers/group_delay-designcon2006.pdf)]
 
 Pupalaikis, Peter & Yudin, Eric. (2005). Eye Patterns in Scopes. [[https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf](https://cdn.teledynelecroy.com/files/whitepapers/eye_patterns_in_scopes-designcon_2005.pdf)]
 

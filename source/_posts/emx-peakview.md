@@ -195,7 +195,7 @@ legend('Tapped inductor model', 'tcoil model calc');
 ```
 
 
-### Transformer
+## Transformer
 
 ```
 	   (get_k

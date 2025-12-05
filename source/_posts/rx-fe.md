@@ -217,6 +217,11 @@ That is $C_{-M}  = \frac{1}{\omega^2 M} \approx 10 \times C_E$
 
 
 
+## Triple-Resonance
+
+*TODO* &#128197;
+
+
 ## Active Inductor
 
 > B. Razavi, "The Active Inductor [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 2, pp. 7-11, Spring 2020 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2020.pdf)]

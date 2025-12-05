@@ -195,6 +195,56 @@ legend('Tapped inductor model', 'tcoil model calc');
 ```
 
 
+### Transformer
+
+```
+	   (get_k
+	    (lambda (l12 l1122)
+	      (letseq ((xvec (drGetWaveformXVec l12))
+		       (n (drVectorLength xvec))
+		       (l12v (drGetWaveformYVec l12))
+		       (l1122v (drGetWaveformYVec l1122))
+		       (resultv (drCreateVec 'double n)))
+		(do ((i 0 i+1))
+		    ((i >= n))
+		  (letseq ((l12i (drGetElem l12v i))
+			   (l1122i (drGetElem l1122v i))
+			   (kk (if (l1122i > 0.0)
+				   l12i/(sqrt l1122i)
+				   0.0))
+			   (k (if ((abs kk) < 2.0) kk 0.0)))
+		    (drSetElem resultv i k)))
+		(drCreateWaveform xvec resultv)))))
+  (EMX_plot_aux bgui wid what num_ports
+		'("Inductance" "Q" "k")
+		'("Henry" "" "")
+		(lambda (ys)
+		  (letseq ((zs (reduce ys))
+			   (z11 (nth 0 zs))
+			   (z12 (nth 1 zs))
+			   (z22 (nth 2 zs))
+			   (pi 3.14159265358979)
+			   (f (xval z11))
+			   (l11 (imag z11)/(2*pi*f))
+			   (q11 (imag z11)/(real z11))
+			   (l12 (imag z12)/(2*pi*f))
+			   (l22 (imag z22)/(2*pi*f))
+			   (q22 (imag z22)/(real z22))
+			   (k (get_k l12 l11*l22)))
+		    `((,l11 ,l22) (,q11 ,q22) (,k))))
+		'(("L1" "L2") ("Q1" "Q2") ("k")))))
+```
+
+---
+
+![image-20231015002344332](emx-peakview/image-20231015002344332.png)
+
+![image-20231015002403566](emx-peakview/image-20231015002403566.png)
+
+> [[IC Prophet GDSII 文件使用和仿真测试说明](https://icprophet-web.oss-cn-hangzhou.aliyuncs.com/helpdoc/helpdoc-cadenceonly-cn_V230905_3.pdf)]
+
+
+
 
 ## differential & single-ended
 
@@ -539,54 +589,6 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 ![image-20220630215630849](emx-peakview/image-20220630215630849.png)
 
 
-
-### Transformer
-
-```
-	   (get_k
-	    (lambda (l12 l1122)
-	      (letseq ((xvec (drGetWaveformXVec l12))
-		       (n (drVectorLength xvec))
-		       (l12v (drGetWaveformYVec l12))
-		       (l1122v (drGetWaveformYVec l1122))
-		       (resultv (drCreateVec 'double n)))
-		(do ((i 0 i+1))
-		    ((i >= n))
-		  (letseq ((l12i (drGetElem l12v i))
-			   (l1122i (drGetElem l1122v i))
-			   (kk (if (l1122i > 0.0)
-				   l12i/(sqrt l1122i)
-				   0.0))
-			   (k (if ((abs kk) < 2.0) kk 0.0)))
-		    (drSetElem resultv i k)))
-		(drCreateWaveform xvec resultv)))))
-  (EMX_plot_aux bgui wid what num_ports
-		'("Inductance" "Q" "k")
-		'("Henry" "" "")
-		(lambda (ys)
-		  (letseq ((zs (reduce ys))
-			   (z11 (nth 0 zs))
-			   (z12 (nth 1 zs))
-			   (z22 (nth 2 zs))
-			   (pi 3.14159265358979)
-			   (f (xval z11))
-			   (l11 (imag z11)/(2*pi*f))
-			   (q11 (imag z11)/(real z11))
-			   (l12 (imag z12)/(2*pi*f))
-			   (l22 (imag z22)/(2*pi*f))
-			   (q22 (imag z22)/(real z22))
-			   (k (get_k l12 l11*l22)))
-		    `((,l11 ,l22) (,q11 ,q22) (,k))))
-		'(("L1" "L2") ("Q1" "Q2") ("k")))))
-```
-
----
-
-![image-20231015002344332](emx-peakview/image-20231015002344332.png)
-
-![image-20231015002403566](emx-peakview/image-20231015002403566.png)
-
-> [[IC Prophet GDSII 文件使用和仿真测试说明](https://icprophet-web.oss-cn-hangzhou.aliyuncs.com/helpdoc/helpdoc-cadenceonly-cn_V230905_3.pdf)]
 
 
 

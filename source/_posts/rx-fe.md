@@ -310,7 +310,9 @@ B. Razavi, "The Bridged T-Coil [A Circuit for All Seasons]," IEEE Solid-State Ci
 
 Deog-Kyoon Jeong. Topics in IC Design: T-Coil [[pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%2010%20-%20Bandwidth%20Extension%20Techniques.pdf)]
 
-P. Heydari and M. Safiallah, "Evolution of Broadband Amplifier Design: From Single-Stage to Distributed Topology," in IEEE Microwave Magazine, vol. 24, no. 9, pp. 18-29, Sept. 2023 
+P. Heydari, "Neutralization Techniques for High-Frequency Amplifiers: An Overview," in IEEE Solid-State Circuits Magazine, vol. 9, no. 4, pp. 82-89, Fall 2017 [[https://sci-hub.ru/10.1109/MSSC.2017.2745858](https://sci-hub.ru/10.1109/MSSC.2017.2745858)]
+
+—, "Evolution of Broadband Amplifier Design: From Single-Stage to Distributed Topology," in IEEE Microwave Magazine, vol. 24, no. 9, pp. 18-29, Sept. 2023 
 
 Cowan G. *Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations*. Cambridge University Press; 2024
 

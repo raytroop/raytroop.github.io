@@ -1836,6 +1836,16 @@ Two results are generated `input.emir0_bin` and `input_dcOp.emir0_bin` and their
 
 ![image-20251009224541770](ade/image-20251009224541770.png)
 
+## LSF (Platform Load Sharing Facility)
+
+`bjobs`: Displaying Job Status
+
+`bkill`: cancels pending batch jobs and sends signals to running jobs
+
+`bhosts`: displays hosts and their static and dynamic resources
+
+`busers`: displays information about the user who runs the command
+
 
 
 ## reference

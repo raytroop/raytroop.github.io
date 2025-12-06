@@ -120,11 +120,18 @@ plt.show()
 
 ---
 
-Notice ***Coupling coefficient*** is caculated  by ***differential impedance*** rather than $Z_{12}$ or $Z_{21}$
+> [[https://wiki.icprophet.com/doku.php?id=wiki#t-coil](https://wiki.icprophet.com/doku.php?id=wiki#t-coil)]
 
-![image-20251120210358252](emx-peakview/image-20251120210358252.png)
+![image-20251206101447859](emx-peakview/image-20251206101447859.png)
 
-
+$$
+k = \frac{L_{tot}-L_1-L_2}{2M} = \frac{\text{im}[Z_{diff}]/2\pi f - \text{im}[Z_{11}]/2\pi f-\text{im}[Z_{22}]/2\pi f}{2\sqrt{\text{im}[Z_{11}]/2\pi f\times \text{im}[Z_{22}]/2\pi f}} = \frac{- \text{im}[Z_{12}] - \text{im}[Z_{21}]}{2\sqrt{\text{im}[Z_{11}]\times \text{im}[Z_{22}]}}
+$$
+if $\text{im}[Z_{12}] = \text{im}[Z_{21}]$, then
+$$
+\color{red}k =- \frac{\text{im}[Z_{21}]}{\sqrt{\text{im}[Z_{11}]\times \text{im}[Z_{22}]}}
+$$
+![image-20251206101226005](emx-peakview/image-20251206101226005.png)
 
 
 
@@ -195,54 +202,58 @@ legend('Tapped inductor model', 'tcoil model calc');
 ```
 
 
+
 ## Transformer
 
-```
-	   (get_k
-	    (lambda (l12 l1122)
-	      (letseq ((xvec (drGetWaveformXVec l12))
-		       (n (drVectorLength xvec))
-		       (l12v (drGetWaveformYVec l12))
-		       (l1122v (drGetWaveformYVec l1122))
-		       (resultv (drCreateVec 'double n)))
-		(do ((i 0 i+1))
-		    ((i >= n))
-		  (letseq ((l12i (drGetElem l12v i))
-			   (l1122i (drGetElem l1122v i))
-			   (kk (if (l1122i > 0.0)
-				   l12i/(sqrt l1122i)
-				   0.0))
-			   (k (if ((abs kk) < 2.0) kk 0.0)))
-		    (drSetElem resultv i k)))
-		(drCreateWaveform xvec resultv)))))
-  (EMX_plot_aux bgui wid what num_ports
-		'("Inductance" "Q" "k")
-		'("Henry" "" "")
-		(lambda (ys)
-		  (letseq ((zs (reduce ys))
-			   (z11 (nth 0 zs))
-			   (z12 (nth 1 zs))
-			   (z22 (nth 2 zs))
-			   (pi 3.14159265358979)
-			   (f (xval z11))
-			   (l11 (imag z11)/(2*pi*f))
-			   (q11 (imag z11)/(real z11))
-			   (l12 (imag z12)/(2*pi*f))
-			   (l22 (imag z22)/(2*pi*f))
-			   (q22 (imag z22)/(real z22))
-			   (k (get_k l12 l11*l22)))
-		    `((,l11 ,l22) (,q11 ,q22) (,k))))
-		'(("L1" "L2") ("Q1" "Q2") ("k")))))
-```
+> J. R. Long, "On-chip transformer design and application to RF and mm-wave front-ends," 2017 IEEE Custom Integrated Circuits Conference (CICC), Austin, TX, USA, 2017 [[pdf](https://picture.iczhiku.com/resource/eetop/sYIYDwZKiKUOecXc.pdf)]
+>
+> A. Bevilacqua, "Tutorial: Fundamentals of Integrated Transformers: from Principles to Applications," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020 [[pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T1Visuals.pdf)]
+>
+> —, "Fundamentals of Integrated Transformers: From Principles to Applications," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 4, pp. 86-100, Fall 2020 
+
+![image-20251206083550560](emx-peakview/image-20251206083550560.png)
+
+![image-20251206090819816](emx-peakview/image-20251206090819816.png)
 
 ---
 
-![image-20231015002344332](emx-peakview/image-20231015002344332.png)
+> [[https://wiki.icprophet.com/doku.php?id=wiki#%E5%8F%98%E5%8E%8B%E5%99%A8](https://wiki.icprophet.com/doku.php?id=wiki#%E5%8F%98%E5%8E%8B%E5%99%A8)]
 
-![image-20231015002403566](emx-peakview/image-20231015002403566.png)
+| 变压器差分输入、差分输出     | ![image-20251206101920561](emx-peakview/image-20251206101920561.png) |
+| ---------------------------- | ------------------------------------------------------------ |
+| **变压器单端输入、差分输出** | ![image-20251206102009723](emx-peakview/image-20251206102009723.png) |
+| **变压器差分输入、单端输出** | ![image-20251206102047381](emx-peakview/image-20251206102047381.png) |
+| **变压器单端输入、单端输出** | ![image-20251206102150510](emx-peakview/image-20251206102150510.png) |
 
-> [[IC Prophet GDSII 文件使用和仿真测试说明](https://icprophet-web.oss-cn-hangzhou.aliyuncs.com/helpdoc/helpdoc-cadenceonly-cn_V230905_3.pdf)]
+![image-20251206102240524](emx-peakview/image-20251206102240524.png)
 
+> the formula is same with T-coil's
+
+
+
+
+
+### PGS (Patterned ground Shields)
+
+*Ring Pattern*, *Star Pattern*
+
+![image-20251206005014571](emx-peakview/image-20251206005014571.png)
+
+
+
+### Common-Mode Rejection
+
+*TODO* &#128197;
+
+![image-20251206005603725](emx-peakview/image-20251206005603725.png)
+
+
+
+### Transmission Zero
+
+![image-20251206103623404](emx-peakview/image-20251206103623404.png)
+
+like shunt-peaking, the impedance of $C_o/n$, $L_s$, $r_s$ have resonant peak at resonant frequency, which block signal transmission to **S**
 
 
 

@@ -176,6 +176,14 @@ Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
 
 
 
+## shunt peaking
+
+![image-20251205235851272](rx-fe/image-20251205235851272.png)
+
+![image-20251206000303668](rx-fe/image-20251206000303668.png)
+
+
+
 ## T-Coil Peaking
 
 > Jri Lee. ISSCC 2009 Tutorial. CMOS Circuit Techniques for High Speed Wireline Transceivers [[http://cc.ee.ntu.edu.tw/~jrilee/course/2009_Tutorial_10.pdf](http://cc.ee.ntu.edu.tw/~jrilee/course/2009_Tutorial_10.pdf)]
@@ -194,9 +202,9 @@ Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
 
 ![tcoil-tran-3L.drawio](rx-fe/tcoil-tran-3L.drawio.svg)
 
+---
 
-
-### 3 uncoupled inductors model
+***Three uncoupled inductors model***
 
 ![image-20251126173130097](rx-fe/image-20251126173130097.png)
 
@@ -217,9 +225,16 @@ That is $C_{-M}  = \frac{1}{\omega^2 M} \approx 10 \times C_E$
 
 
 
-## Triple-Resonance
+## Triple Resonance
 
 *TODO* &#128197;
+
+![image-20251206000718234](rx-fe/image-20251206000718234.png)
+
+
+
+
+
 
 
 ## Active Inductor

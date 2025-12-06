@@ -13,21 +13,33 @@ mathjax: true
 >
 > ![image-20251025091424995](2nd-sys/image-20251025091424995.png)
 
+
+
+## natural frequency ($\omega_n$, $\omega_d$)
+
 ![image-20251025093453473](2nd-sys/image-20251025093453473.png)
 
-> $\omega_d$ called *damped natural frequency*
+> $\omega_d$ called **damped natural frequency**
 > $$
 > \omega_n^2 = \sigma^2 + \omega_d^2
 > $$
 > ![image-20251025093918419](2nd-sys/image-20251025093918419.png)
 
-![image-20251025094454542](2nd-sys/image-20251025094454542.png)
-
-## Resonant Frequency
-
-![image-20251025112923346](2nd-sys/image-20251025112923346.png)
 
 
+***Underdamped step response*** ($0<\zeta < 1$)
+
+![image-20251205222727026](2nd-sys/image-20251205222727026.png)
+
+***Critically damped step response*** ($\zeta =1$)
+
+![image-20251205222820163](2nd-sys/image-20251205222820163.png)
+
+***Overdamped step response*** ($\zeta >1$)
+
+![image-20251205223020191](2nd-sys/image-20251205223020191.png)
+
+![image-20251205223346802](2nd-sys/image-20251205223346802.png)
 
 ## Complex-Conjugate Poles/Zeros
 

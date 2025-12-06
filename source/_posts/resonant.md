@@ -18,6 +18,44 @@ In a series resonant circuit, the impedance of the circuit reaches its minimum v
 
 ![image-20251027213420942](resonant/image-20251027213420942.png)
 
+## Resonant Frequency
+
+> $\zeta \lt 1$: ***Complex-Conjugate Poles***, but not *resonant peak*
+>
+> $\zeta \lt \sqrt{2}/2$: ***resonant peak***
+
+![image-20251205220247644](resonant/image-20251205220247644.png)
+
+
+
+> [[https://lpsa.swarthmore.edu/Bode/underdamped/underdampedApprox.html](https://lpsa.swarthmore.edu/Bode/underdamped/underdampedApprox.html)]
+>
+> ![image-20251205233053573](resonant/image-20251205233053573.png)
+
+
+
+---
+
+> Prof. M. Green / U.C. Irvine EECS 270C / Winter 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/WhKTaAlgfKwzLxXM.pdf)]
+
+![image-20251205232150381](resonant/image-20251205232150381.png)
+$$
+s^2 + \frac{R}{L}s + \frac{1}{LC_L} = s^2 + 2\zeta \omega_n s + \omega_n^2
+$$
+where $\omega_n = \frac{1}{\sqrt{LC_L}}$ and $\zeta=\frac{R}{2}\sqrt{\frac{C_L}{L}}$
+
+Resonant frequency is
+$$
+\omega_r = \omega_n \sqrt{1-2\zeta^2} = \frac{1}{\sqrt{LC_L}}\left(1-\frac{C_LR^2}{2L}\right)
+$$
+To have no resonant $\zeta^2 >\frac{1}{2}$, i.e
+$$
+\frac{L}{C_LR^2} < \frac{1}{2}
+$$
+
+
+
+
 
 
 ## LC Resonator

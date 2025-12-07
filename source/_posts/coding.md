@@ -38,6 +38,15 @@ eltype(arr)		# Int64
 
 `parse`:  convert a text string to anything else. `parse(Int, "42")`, `parse(Float64, "42")`
 
+String `*` : concatenate strings, `"The " * engine *`
+
+String `$`:   string interpolation,  use `$(variable)` instead of `$variable` when there
+is no whitespace that can clearly distinguish the variable name from the surrounding text
+
+`vec`: Reshape the array as a *one-dimensional column vector*
+
+
+
 ---
 
 ***Instantiate the project***
@@ -108,7 +117,19 @@ pizza = (name = "hawaiian", size = 'S', price = 10.5)
 
 A named tuple only allows you to use *symbols* as keys
 
-All types of tuples are immutable, meaning you cannot change them
+All types of tuples are *immutable*, meaning you cannot change them
+
+
+
+implicit naming from identifiers
+
+```julia
+x = 0
+t = (; x) # t is (x = 0,)
+u = (; t.x) # u is (x = 0,)
+```
+
+
 
 ---
 
@@ -122,16 +143,6 @@ struct Archer
     health::Int
     arrows::Int
 end
-```
-
-----
-
-***anonymous function***
-
-Argument-type declarations for anonymous functions work as for named functions, for example `x::Integer->2x`. The return type of an anonymous function cannot be specified
-
-```julia
-map(x -> x^2 + 2x - 1, [1, 3, -1])
 ```
 
 
@@ -216,9 +227,57 @@ size(a)	# (5)
 
 ***element-wise operations***
 
-**Dot syntax for operators:** For binary operators like `+`, `-`, `*`, `/`, `^`
+*Dot syntax for operators*: For binary operators like `+`, `-`, `*`, `/`, `^`
 
-**Dot syntax for functions**: For functions, the dot is placed after the function name.
+*Dot syntax for functions*: For functions, the dot is placed after the function name.
+
+---
+
+***Property destructuring*** 
+
+```julia
+julia> (; b, a) = (a=1, b=2, c=3)
+(a = 1, b = 2, c = 3)
+
+julia> a
+1
+
+julia> b
+2
+```
+
+
+
+---
+
+***One-line functions***
+
+"*one-line function*" also known as the compact "*assignment form*"
+
+```julia
+function_name(parameters) = expression
+```
+
+---
+
+***Anonymous Functions (Lambda Functions)***
+
+functions without a name `(parameters) -> expression`, often defined inline for use with higher-order functions like `map`, `filter`, or `reduce`
+
+```julia
+numbers = [1, 2, 3]
+doubled_numbers = map(x -> 2 * x, numbers) # doubled_numbers will be [2, 4, 6]
+```
+
+
+
+---
+
+***`using` vs `import`***
+
+that’s the difference between using and import - the former brings all exported names into scope, while the latter only brings NiceStuff (the module identifier) into scope.
+
+> [[https://discourse.julialang.org/t/difference-between-include-use-and-import/65918/5](https://discourse.julialang.org/t/difference-between-include-use-and-import/65918/5)]
 
 
 

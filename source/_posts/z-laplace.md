@@ -649,12 +649,14 @@ The simple approximation $z=e^{sT}\approx1+sT$, ~~the *first equal* come from **
 > The design of IIR filters (cont.) [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/cc00ac6d468dc9dcf2238fc1d1a194d4_lecture_19.pdf)]
 >
 > Lecture 19: Design of IIR Filters [[http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf](http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf)]
+>
+> 
 
 
 
 ### Derivatives Approximation
 
-> Perhaps the simplest method for ***low-order systems*** is to use *backward-difference approximation* to *continuous domain derivatives*
+> Perhaps the simplest method for *low-order systems* is to use ***backward-difference approximation*** to *continuous domain derivatives*
 
 ![image-20250623205828010](z-laplace/image-20250623205828010.png)
 
@@ -708,17 +710,17 @@ H_p(z) = \frac{1}{\tau\frac{1-z^{-1}}{T} + 1} = \frac{\frac{T}{T+\tau}}{1-\frac{
 $$
 where $\alpha = \frac{T}{\tau+T}$
 
-Under the assumption, time constants much longer than the timestep $\tau \gg T$
+Further, if time constants much longer than the time step $\tau \gg T$
 $$\begin{align}
 \frac{T}{T+\tau}& = \frac{T}{\tau}\cdot \frac{\tau}{T+\tau}\approx \frac{T}{\tau} \\
 \frac{\tau}{T+\tau} &= \frac{\tau - T}{\tau}\cdot\frac{\tau^2}{\tau^2-T^2} \approx \frac{\tau - T}{\tau} = 1- \frac{T}{\tau} 
 \end{align}$$
 
-Then the first-order low pass fiter
+Then the first-order low pass filter 
 $$
-H_p(z) \approx \frac{\alpha}{1 +(\alpha -1)z^{-1}}
+H_p(z) \approx \frac{ \frac{T}{\tau}}{1 +( \frac{T}{\tau} -1)z^{-1}} = \frac{\beta}{1 +(\beta -1)z^{-1}}
 $$
-where $\alpha = \frac{T}{\tau}$
+where $\beta = \frac{T}{\tau}$
 
 ```python
 # https://www.dsprelated.com/showarticle/1517/return-of-the-delta-sigma-modulators-part-1-modulation
@@ -735,6 +737,16 @@ def show_dsmod_samplewave(t,x,dsmod,args=(1,),tau=0.05, R=1, fig=None,
     yfilt = scipy.signal.lfilter([a],[1,a-1],y)
     xfilt = scipy.signal.lfilter([a],[1,a-1],x1)
 ```
+
+---
+
+---
+
+***forward-difference approximation***
+
+> 模集王小桃. 连续时间滤波器到离散时间滤波器的映射 Mapping Continuous-Time Filters to Discrete-Time Filters [[https://zhuanlan.zhihu.com/p/1961811157099746349](https://zhuanlan.zhihu.com/p/1961811157099746349)]
+
+![image-20251207221104376](z-laplace/image-20251207221104376.png)
 
 
 

@@ -224,13 +224,13 @@ The idea is that sample waveform with ideal clock, subtract DC offset, then fft(
 
 In below discussion, we only think about the `absolute jitter method`
 
-### PSD and Phase Noise
+### PSD & Phase Noise
 
 > - phase noise is single-sideband
 > - psd is double-sideband
 > - Then the  ratio is **2**
 
-#### By PSS_Pnoise
+***By PSS_Pnoise***
 
 `jee`
 
@@ -240,7 +240,9 @@ rfEdgePhaseNoise(?result "pnoise_sample_pm0" ?eventList 'nil) + 10 * log10(2)
 
 > convert **single-sideband** phase noise to psd by multiplying 2 or `10 * log10(2)`
 
-#### By trannoise `PN` function
+---
+
+***By trannoise `PN` function***
 
 ```
 PN(clip(VT("/Out1") 2.60417e-08 0.000400052) "rising" 1.65 ?Tnom (1 / 3.84e+07) ?windowName "Rectangular" ?smooth 1 ?windowSize 15000 ?detrending "None" ?cohGain 1 ?methodType "absJitter")
@@ -248,7 +250,9 @@ PN(clip(VT("/Out1") 2.60417e-08 0.000400052) "rising" 1.65 ?Tnom (1 / 3.84e+07) 
 
 > double-sideband psd
 
-#### By trannoise `psd` and `abs_jitter` function
+---
+
+***By trannoise `psd` and `abs_jitter` function***
 
 ```
 dB10(psd(abs_jitter(clip(VT("/Out1") 2.60417e-08 0.000400052) "rising" 1.65 ?Tnom (1 / 3.84e+07)) 2.60417e-08 0.000400052 15360 ?windowName "Rectangular" ?smooth 1 ?windowSize 15000 ?detrending "None" ?cohGain 1))
@@ -258,7 +262,9 @@ dB10(psd(abs_jitter(clip(VT("/Out1") 2.60417e-08 0.000400052) "rising" 1.65 ?Tno
 >
 > `abs_jitter` *Y-Unit* default is `rad`
 
-#### Comparison
+---
+
+***Comparison***
 
 ![image-20220506225324377](pn-jitter/image-20220506225324377.png)
 
@@ -282,8 +288,7 @@ $$
 x_{\text{RMS}}=\sqrt{\frac{1}{N^2}\sum_{n=0}^{N-1}|X(k)|^2}
 $$
 
-
-### Remarks
+---
 
 Cadence Spectre's `PN` function may call `abs_jitter` and `psd` function under the hood.
 
@@ -330,6 +335,14 @@ In the conclusion, *`Edge Phase Noise(dBc)` is preferred for phase noise evaluat
 > Cadence Support. "How to set up pss/pnoise when simulating a driven circuit or a VCO, both containing dividers"
 
 ![image-20250930200829603](pn-jitter/image-20250930200829603.png)
+
+
+
+## Modeling Oscillators with Arbitrary Phase Noise Profiles
+
+*TODO* &#128197;
+
+
 
 
 

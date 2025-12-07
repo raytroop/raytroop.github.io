@@ -266,7 +266,40 @@ ampling Jitter Effects for *ADC/DAC*
 
 
 
-##  Sampled Thermal Noise
+## Sampled White Noise
+
+> Does PSD (dBm/Hz) of white noise depend on sampling rate?. Does PSD (dBm/Hz) of white noise depend on sampling rate? [[https://dsp.stackexchange.com/a/87654/59253](https://dsp.stackexchange.com/a/87654/59253)]
+>
+> 
+
+![image-20251208011528326](noise/image-20251208011528326.png)
+
+
+
+---
+
+> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)]
+
+![image-20251208012147012](noise/image-20251208012147012.png)
+$$
+\text{PSD}_s =  \frac{\sigma^2}{f_s} \space\space \text{for two-sided PSD} \space\space\space \text{or}\space\space\space =\frac{\sigma^2}{f_s/2}\space\space \text{for one-sided PSD} 
+$$
+
+```matlab
+# Generate Gaussian white noise in the time domain
+sigma = 1 / np.sqrt(2.0 * dt)
+x_t = rng.normal(0.0, sigma, n)
+```
+
+
+
+> How to generate white noise signal from a given PSD? [[https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849](https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849)]
+>
+> ![image-20251208012745236](noise/image-20251208012745236.png)
+
+
+
+##  Sampled bandlimited white noise
 
 The **aliasing of the noise**, or **noise folding**, plays an important role in switched-capacitor as it does in all switched-capacitor filters
 

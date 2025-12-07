@@ -92,6 +92,8 @@ plt.ylabel('Mag'); plt.xlabel('time (s)'); plt.show()
 ### JLSD
 
 > Kevin Zheng. JLSD — Julia SerDes [[https://github.com/kevjzheng/JLSD](https://github.com/kevjzheng/JLSD)]
+>
+> *boundary conditions internally*, *remembering states from the previous (sub-)block*
 
 ---
 
@@ -225,6 +227,10 @@ end
 
 > DaVE — tools regarding on analog modeling, validation, and generation, [[https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)]
 
+*TODO* &#128197;
+
+
+
 
 
 ## Statistical Eye
@@ -245,6 +251,64 @@ end
 
 > Savo Bajic, ECE1392, Integrated Circuits for Digital Communications: **StatOpt in Python** [[https://savobajic.ca/projects/academic/statopt](https://savobajic.ca/projects/academic/statopt/)] [[https://www.eecg.utoronto.ca/~ali/statopt/main.html](https://www.eecg.utoronto.ca/~ali/statopt/main.html)]
 
+*TODO* &#128197;
+
+
+
+### pystateye
+
+> Chris Li. pystateye - A Python Implementation of Statistical Eye Analysis and Visualization [[https://github.com/ChrisZonghaoLi/pystateye](https://github.com/ChrisZonghaoLi/pystateye)]
+
+*TODO* &#128197;
+
+
+
+
+
+
+## noise generator
+
+### White Noise + Digital Low-Pass filter
+
+> Alessandro Cudazzo. noise generator developed in C99 (white, brown) [[https://github.com/alessandrocuda/noise_generator](https://github.com/alessandrocuda/noise_generator)]
+
+with *Derivatives approximation*, $H_p(s) = \frac{1}{s\tau +  1} \to H_p(z)=\frac{\alpha}{1 +(\alpha -1)z^{-1}}$, where $\alpha = \frac{T}{\tau+T}$
+
+![image-20251207222557118](link-mdl/image-20251207222557118.png)
+
+
+
+### Colouring Noise
+
+> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)]
+
+![A dark plot with 5 data series on it for violet, blue, white, pink and brownian noise, each coloured in their respective colours.](link-mdl/psd-of-coloured-noise.png)
+
+**White**, **Pink** $1/f$, **Brownian** $1/f^2$, **Blue** $f$, **Violet** $f^2$
+
+The process of generating coloured noise is relatively simple:
+
+1. Start with a representation of white noise signal in the frequency domain
+2. Shape the signal in the frequency domain according to the PSD you'd like to achieve
+3. Take the inverse Fourier transform of the shaped signal
+
+
+
+
+
+
+
+## helper function
+
+### int2bits
+
+> [[https://github.com/kevjzheng/JLSD/blob/4ac92476b67ce78e01820502eb3b4afb6d31bcd7/src/blks/BlkBIST.jl#L126-L128](https://github.com/kevjzheng/JLSD/blob/4ac92476b67ce78e01820502eb3b4afb6d31bcd7/src/blks/BlkBIST.jl#L126-L128)]
+
+```julia
+function int2bits(num, nbit)
+	return [Bool((num>>k)%2) for k in nbit-1:-1:0]
+end
+```
 
 
 
@@ -258,7 +322,6 @@ end
 
 ![image-20250914115332274](link-mdl/image-20250914115332274.png)
 
-## PRBS Generator & Checker
 
 ### PRBS Generator
 
@@ -309,55 +372,15 @@ end
 
 ### PRBS Checker
 
+> [[https://github.com/kevjzheng/JLSD/blob/4ac92476b67ce78e01820502eb3b4afb6d31bcd7/Pluto%20Notebooks/jl/JLSD_pt2_framework.jl#L198-L235](https://github.com/kevjzheng/JLSD/blob/4ac92476b67ce78e01820502eb3b4afb6d31bcd7/Pluto%20Notebooks/jl/JLSD_pt2_framework.jl#L198-L235)]
+
 previous bit determine current bit
 
 ![bert.drawio](link-mdl/bert.drawio.svg)
 
-```julia
-function ber_check_prbs(rcvd_bits; poly, inv, seed, lock_status, lock_cnt, lock_threshold, ber_err_cnt, ber_tot_cnt)
-	
-	nbits_rcvd = lastindex(rcvd_bits)
-	
-    if lock_status #if prbs already locked, use prbs_gen for reference bits
-        ref_bits, seed = bist_prbs_gen(poly=poly, inv=inv,
-										Nsym=nbits_rcvd, seed=seed)
-        ber_err_cnt += sum(rcvd_bits .⊻ ref_bits)
-		ber_tot_cnt += nbits_rcvd
-
-    else # if not locked yet, use received bits as seed
-        for n = 1:nbits_rcvd
-            brcv = rcvd_bits[n]
-            btst = inv
-			for p in poly
-            	btst ⊻= seed[p]
-			end
-            seed .= [brcv; seed[1:end-1]]
-
-			#need consecutive non-error for lock. reset when error happens
-            lock_cnt = (btst == brcv) ? lock_cnt+1 : 0
-
-            if lock_cnt == lock_threshold
-                lock_status = true
-                println("prbs locked")
-				#run prbs till end
-                ref_bits, seed = bist_prbs_gen(poly=poly, inv=inv,
-										Nsym=nbits_rcvd-n, seed=seed)
-				ber_err_cnt += sum(rcvd_bits[n+1:end] .⊻ ref_bits)
-				ber_tot_cnt += nbits_rcvd - n
-
-                break
-            end
-        end
-    end
-
-	return seed, lock_status, lock_cnt, ber_err_cnt, ber_tot_cnt
-end
-```
-
-
-
-
-
+1. current LSFR generate `btst`
+2. compare `bst` with current `brcv`
+3. push current `brcv` into LSFR
 
 
 ## Reference

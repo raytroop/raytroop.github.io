@@ -39,7 +39,7 @@ mathjax: true
 
 ![image-20250814202542548](resync/image-20250814202542548.png)
 
-## simulation of DFF
+## DFF Simulation
 
 ![image-20250815012602436](resync/image-20250815012602436.png)
 
@@ -82,6 +82,24 @@ In fact, one popular definition says that if the output of a *flip-flop* changes
 
 
 
+## Synchronizer Characterization
+
+> I. W. Jones, S. Yang and M. Greenstreet, "Synchronizer Behavior and Analysis," 2009 15th IEEE Symposium on Asynchronous Circuits and Systems, Chapel Hill, NC, USA, 2009 [[https://sci-hub.ru/10.1109/ASYNC.2009.8](https://sci-hub.ru/10.1109/ASYNC.2009.8)]
+>
+> Xprova. bisect-tau - EDA tool for characterizing the metastability resolution time constant (Tau) of bistable circuits [[https://github.com/xprova/bisect-tau](https://github.com/xprova/bisect-tau)]
+>
+> For *GNU Octave, version 8.4.0*, *ngspice-42 : Circuit level simulation program* @Ubuntu 24.04.3 LTS x86_64
+>
+> [[https://github.com/raytroop/bisect-tau](https://github.com/raytroop/bisect-tau)]
+
+*TODO* &#128197;
+
+
+
+
+
+
+
 ## reference
 
 Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
@@ -104,7 +122,5 @@ Asad Abidi. ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe
 
 Matt Venn. Interactive flip flop simulation [[https://github.com/mattvenn/flipflop_demo](https://github.com/mattvenn/flipflop_demo)]
 
-I. W. Jones, S. Yang and M. Greenstreet, "Synchronizer Behavior and Analysis," 2009 15th IEEE Symposium on Asynchronous Circuits and Systems, Chapel Hill, NC, USA, 2009 [[https://sci-hub.ru/10.1109/ASYNC.2009.8](https://sci-hub.ru/10.1109/ASYNC.2009.8)]
 
-Xprova. bisect-tau - EDA tool for characterizing the metastability resolution time constant (Tau) of bistable circuits [[https://github.com/xprova/bisect-tau](https://github.com/xprova/bisect-tau)]
 

@@ -103,3 +103,8 @@ S. Beer, R. Ginosar, M. Priel, R. Dobkin and A. Kolodny, "The Devolution of Sync
 Asad Abidi. ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q&t=681](https://youtu.be/sVe3VUTNb4Q&t=681)]
 
 Matt Venn. Interactive flip flop simulation [[https://github.com/mattvenn/flipflop_demo](https://github.com/mattvenn/flipflop_demo)]
+
+I. W. Jones, S. Yang and M. Greenstreet, "Synchronizer Behavior and Analysis," 2009 15th IEEE Symposium on Asynchronous Circuits and Systems, Chapel Hill, NC, USA, 2009 [[https://sci-hub.ru/10.1109/ASYNC.2009.8](https://sci-hub.ru/10.1109/ASYNC.2009.8)]
+
+Xprova. bisect-tau - EDA tool for characterizing the metastability resolution time constant (Tau) of bistable circuits [[https://github.com/xprova/bisect-tau](https://github.com/xprova/bisect-tau)]
+

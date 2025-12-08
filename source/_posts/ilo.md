@@ -22,3 +22,5 @@ Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Manageme
 Aditya Varma Muppala. Oscillator Theory - Injection Locking [[note](https://adityamuppala.github.io/assets/Notes_YouTube/Injection_Locking_YouTube.pdf), [video1](https://youtu.be/uelsciruAXw), [video2](https://youtu.be/kUsH4WhEybI)]
 
 Min-Seong Choo. Review of Injection-Locked Oscillators [[https://journal.theise.org/jse/wp-content/uploads/sites/2/2020/09/JSE-2020-0001.pdf](https://journal.theise.org/jse/wp-content/uploads/sites/2/2020/09/JSE-2020-0001.pdf)]
+
+Ali M. Niknejad. EECS 242 Lecture 26 Injection Locking [[https://rfic.eecs.berkeley.edu/courses/ee242/pdf/eecs242_lect26_injectionlocking.pdf](https://rfic.eecs.berkeley.edu/courses/ee242/pdf/eecs242_lect26_injectionlocking.pdf)]

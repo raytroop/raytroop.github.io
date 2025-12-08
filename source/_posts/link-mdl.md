@@ -280,7 +280,7 @@ with *Derivatives approximation*, $H_p(s) = \frac{1}{s\tau +  1} \to H_p(z)=\fra
 
 ### Colouring Noise
 
-> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)]
+> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)] [[https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0](https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0)]
 
 ![A dark plot with 5 data series on it for violet, blue, white, pink and brownian noise, each coloured in their respective colours.](link-mdl/psd-of-coloured-noise.png)
 
@@ -289,11 +289,11 @@ with *Derivatives approximation*, $H_p(s) = \frac{1}{s\tau +  1} \to H_p(z)=\fra
 The process of generating coloured noise is relatively simple:
 
 1. Start with a representation of white noise signal in the frequency domain
-2. Shape the signal in the frequency domain according to the PSD you'd like to achieve
+2. **Shape the signal in the frequency domain** according to the PSD you'd like to achieve
 3. Take the inverse Fourier transform of the shaped signal
 
 
-
+> sampling shaping transfer function without scale $1/T_s$, which make sense in time domain convolution between sampled noise with sampled impulse response of filter
 
 
 

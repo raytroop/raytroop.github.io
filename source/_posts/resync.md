@@ -29,9 +29,35 @@ mathjax: true
 
 ![image-20250814190822871](resync/image-20250814190822871.png)
 
----
+
+
+## MTBF Calculation
 
 ![image-20250814201827266](resync/image-20250814201827266.png)
+
+> Beer, Salomon & Priel, Michael & Dobkin, Rostislav & Kolodny, Avinoam. (2010). The Devolution of Synchronizers. Proceedings - International Symposium on Asynchronous Circuits and Systems. [[pdf](https://kolodny.net.technion.ac.il/files/2016/07/The-devolution-of-synchronizers-ASYNC-2010.pdf)]
+>
+> $T_W$, metastability window is defined differently among published paper
+>
+> ![image-20251209232205525](resync/image-20251209232205525.png)
+>
+> Some PDK provide $T_0$ and $\tau$ for the corresponding cascaded flip flop synchronizer stdcells
+> $$
+> \text{MTBF} = \frac{1}{T_W\times f_C\times f_D}\space \space \text{,where}\space\space T_W = T_0 e^{-T_r/\tau}
+> $$
+> and $T_r = T_C - T_{DLY} - T_{SU}$
+
+
+
+---
+
+> Amr Adel Mohammady. Clock Domain Crossing [[linkedin](https://www.linkedin.com/posts/amradelm_clock-domain-crossing-all-parts-activity-7245373317526818816-tiO8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
+
+![image-20251210002855471](resync/image-20251210002855471.png)
+$$
+\text{MTBF}_{n+1} = \text{MTBF}_n \cdot \frac{1}{f_C\cdot T_0e^{-T_C/\tau}}
+$$
+
 
 
 
@@ -105,8 +131,6 @@ In fact, one popular definition says that if the output of a *flip-flop* changes
 Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
 
 R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011 [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
-
-Amr Adel Mohammady. Clock Domain Crossing [[linkedin](https://www.linkedin.com/posts/amradelm_clock-domain-crossing-all-parts-activity-7245373317526818816-tiO8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 
 Steve Golson. Synchronization and Metastability [[https://trilobyte.com/pdf/golson_snug14.pdf](https://trilobyte.com/pdf/golson_snug14.pdf)]
 

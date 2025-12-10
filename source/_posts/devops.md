@@ -8,6 +8,12 @@ categories:
 
 
 
+## MATLAB Win10 Unable to open the requested feature. Error code: -202
+
+clear `AppData\Roaming\MathWorks\MATLAB`
+
+
+
 ## miniconda3/envs/myenv/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.32' not found
 
 > [[https://stackoverflow.com/a/73101774/8037585](https://stackoverflow.com/a/73101774/8037585)]

@@ -7,11 +7,7 @@ categories:
 mathjax: true
 ---
 
-**Metastability** is an **undesirable non-equilibrium** electronic state that can persist for a long period of time
 
-![image-20250814202050937](resync/image-20250814202050937.png)
-
----
 
 ![image-20250814200158666](resync/image-20250814200158666.png)
 
@@ -33,7 +29,17 @@ mathjax: true
 
 ## MTBF Calculation
 
-![image-20250814201827266](resync/image-20250814201827266.png)
+![image-20251210215011221](resync/image-20251210215011221.png)
+
+![cassync_tr.drawio](resync/cassync_tr.drawio.svg)
+
+> ![image-20251210213433116](resync/image-20251210213433116.png)
+
+
+
+
+
+---
 
 > Beer, Salomon & Priel, Michael & Dobkin, Rostislav & Kolodny, Avinoam. (2010). The Devolution of Synchronizers. Proceedings - International Symposium on Asynchronous Circuits and Systems. [[pdf](https://kolodny.net.technion.ac.il/files/2016/07/The-devolution-of-synchronizers-ASYNC-2010.pdf)]
 >
@@ -46,17 +52,6 @@ mathjax: true
 > \text{MTBF} = \frac{1}{T_W\times f_C\times f_D}\space \space \text{,where}\space\space T_W = T_0 e^{-T_r/\tau}
 > $$
 > and $T_r = T_C - T_{DLY} - T_{SU}$
-
-
-
----
-
-> Amr Adel Mohammady. Clock Domain Crossing [[linkedin](https://www.linkedin.com/posts/amradelm_clock-domain-crossing-all-parts-activity-7245373317526818816-tiO8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
-
-![image-20251210002855471](resync/image-20251210002855471.png)
-$$
-\text{MTBF}_{n+1} = \text{MTBF}_n \cdot \frac{1}{f_C\cdot T_0e^{-T_C/\tau}}
-$$
 
 
 
@@ -146,5 +141,5 @@ Asad Abidi. ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe
 
 Matt Venn. Interactive flip flop simulation [[https://github.com/mattvenn/flipflop_demo](https://github.com/mattvenn/flipflop_demo)]
 
-
+Amr Adel Mohammady. Clock Domain Crossing [[linkedin](https://www.linkedin.com/posts/amradelm_clock-domain-crossing-all-parts-activity-7245373317526818816-tiO8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 

@@ -292,8 +292,7 @@ The process of generating coloured noise is relatively simple:
 2. **Shape the signal in the frequency domain** according to the PSD you'd like to achieve
 3. Take the inverse Fourier transform of the shaped signal
 
-
-> sampling shaping transfer function without scale $1/T_s$, which make sense in time domain convolution between sampled noise with sampled impulse response of filter
+sampling shaping transfer function (not scaled by $1/T_s$), which make sense in time domain convolution between sampled noise with sampled impulse response of filter
 
 
 

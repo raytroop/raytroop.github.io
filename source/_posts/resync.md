@@ -17,13 +17,9 @@ mathjax: true
 
 
 
-![image-20250814191408558](resync/image-20250814191408558.png)
+![image-20251211223949724](resync/image-20251211223949724.png)
 
-
-
-*Poisson stochastic process*
-
-![image-20250814190822871](resync/image-20250814190822871.png)
+> ![image-20251211224346954](resync/image-20251211224346954.png)
 
 
 
@@ -55,10 +51,24 @@ mathjax: true
 
 
 
+## Synchronizer Characterization
 
-## Synchronizer effect – latency uncertainty
+> I. W. Jones, S. Yang and M. Greenstreet, "Synchronizer Behavior and Analysis," 2009 15th IEEE Symposium on Asynchronous Circuits and Systems, Chapel Hill, NC, USA, 2009 [[https://sci-hub.ru/10.1109/ASYNC.2009.8](https://sci-hub.ru/10.1109/ASYNC.2009.8)]
+>
+> Xprova. bisect-tau - EDA tool for characterizing the metastability resolution time constant (Tau) of bistable circuits [[https://github.com/xprova/bisect-tau](https://github.com/xprova/bisect-tau)]
+>
+> For *GNU Octave, version 8.4.0*, *ngspice-42 : Circuit level simulation program* @Ubuntu 24.04.3 LTS x86_64
+>
+> [[https://github.com/raytroop/bisect-tau](https://github.com/raytroop/bisect-tau)]
 
-![image-20250814202542548](resync/image-20250814202542548.png)
+*TODO* &#128197;
+
+![image-20251211232230119](resync/image-20251211232230119.png)
+
+
+
+
+
 
 ## DFF Simulation
 
@@ -103,29 +113,17 @@ In fact, one popular definition says that if the output of a *flip-flop* changes
 
 
 
-## Synchronizer Characterization
 
-> I. W. Jones, S. Yang and M. Greenstreet, "Synchronizer Behavior and Analysis," 2009 15th IEEE Symposium on Asynchronous Circuits and Systems, Chapel Hill, NC, USA, 2009 [[https://sci-hub.ru/10.1109/ASYNC.2009.8](https://sci-hub.ru/10.1109/ASYNC.2009.8)]
->
-> Xprova. bisect-tau - EDA tool for characterizing the metastability resolution time constant (Tau) of bistable circuits [[https://github.com/xprova/bisect-tau](https://github.com/xprova/bisect-tau)]
->
-> For *GNU Octave, version 8.4.0*, *ngspice-42 : Circuit level simulation program* @Ubuntu 24.04.3 LTS x86_64
->
-> [[https://github.com/raytroop/bisect-tau](https://github.com/raytroop/bisect-tau)]
+## Synchronizer effect – latency uncertainty
 
-*TODO* &#128197;
-
-
-
-
-
+![image-20250814202542548](resync/image-20250814202542548.png)
 
 
 ## reference
 
 Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
 
-R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011 [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)]
+R. Ginosar, "Metastability and Synchronizers: A Tutorial," in IEEE Design & Test of Computers, vol. 28, no. 5, pp. 23-35, Sept.-Oct. 2011 [[https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf](https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf)] [[color](https://webee.technion.ac.il/~ran/papers/MetastabilitySynchronizersTutorialIEEEDT2011.pdf)]
 
 Steve Golson. Synchronization and Metastability [[https://trilobyte.com/pdf/golson_snug14.pdf](https://trilobyte.com/pdf/golson_snug14.pdf)]
 

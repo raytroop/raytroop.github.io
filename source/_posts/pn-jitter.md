@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-##  Inspection of Phase Noise
+## Phase Noise on $log$ scale
 
 > How to Identify the Source of Phase Jitter through Phase Noise Plots [[https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots](https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots)]
 >

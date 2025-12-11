@@ -16,6 +16,8 @@ mathjax: true
 > AN10072 Determine the Dominant Source of Phase Noise, by Inspection [[https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection](https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection)]
 >
 > 4-minute Clinic: Determine the Dominant Source of Jitter by Inspection of Phase Noise Plot [[https://youtu.be/2elHk3v45Pk](https://youtu.be/2elHk3v45Pk)]
+>
+> Chembian Thambidurai, "Integrated Power of Thermal and Flicker Noise" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_flicker-and-thermal-noise-power-on-a-log-activity-7003063399781711872-62nh?utm_source=share&utm_medium=member_desktop)]
 
  a ***-10 dB/decade reference line*** can be used to pinpoint the location in a phase noise curve that dominates its integral
 

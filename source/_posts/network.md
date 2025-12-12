@@ -21,6 +21,10 @@ mathjax: true
 
 ![image-20251025193127266](network/image-20251025193127266.png)
 
+> ![image-20251213004150339](network/image-20251213004150339.png)
+>
+> ![image-20251213010754956](network/image-20251213010754956.png)
+
 ---
 
 > Bert Simonovich. A Guide for Single-Ended to Mixed-Mode S-parameter Conversions [[https://www.signalintegrityjournal.com/articles/1832-a-guide-for-singleended-to-mixedmode-s-parameter-conversions](https://www.signalintegrityjournal.com/articles/1832-a-guide-for-singleended-to-mixedmode-s-parameter-conversions)]
@@ -213,7 +217,11 @@ $$
 
 > ![image-20241030222403947](network/image-20241030222403947.png)
 
+---
 
+![image-20251213004052771](network/image-20251213004052771.png)
+
+![image-20251213010211715](network/image-20251213010211715.png)
 
 ### Reflection Coefficients
 
@@ -300,8 +308,16 @@ writeva(hfit, 'channel_32poles.va');
 >
 > You Measured What? Four Must-Know Checks Before Trusting Your Trace S-Parameters [[https://www.signalintegrityjournal.com/articles/4083-you-measured-what-four-must-know-checks-before-trusting-your-trace-s-parameters](https://www.signalintegrityjournal.com/articles/4083-you-measured-what-four-must-know-checks-before-trusting-your-trace-s-parameters)]
 
+*TODO* &#128197;
+
+
+
+## S11 vs TDR
+
+> [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_04_Quach.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_04_Quach.pdf)]
 
 *TODO* &#128197;
+
 
 
 ## Spar in Tran simulation
@@ -340,3 +356,6 @@ Dr. John Choma. EE 541, Fall 2006: Course Notes #2 Scattering Parameters: Concep
 Dr. Ray Kwok . Network Techniques: Conversion between Filter Transfer Function and Filter Scattering (SMatrix) Parameters [[https://www.sjsu.edu/people/raymond.kwok/docs/project172/FTF%20to%20S-Matrix%20Spring%202011.pdf](https://www.sjsu.edu/people/raymond.kwok/docs/project172/FTF%20to%20S-Matrix%20Spring%202011.pdf)]
 
 田庆诚教授 台湾中华大学 射频电路基础（公司培训）[[https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249](https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
+Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
+

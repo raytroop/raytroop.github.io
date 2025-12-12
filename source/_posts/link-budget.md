@@ -57,15 +57,11 @@ $$
 
 
 
+## Bandwidth Selection
 
+![image-20251213013257369](link-budget/image-20251213013257369.png)
 
-### $0.5/T_r$
-
-*TODO* &#128197;
-
-
-
-
+![image-20251213013352969](link-budget/image-20251213013352969.png)
 
 
 ## CMI & DMI

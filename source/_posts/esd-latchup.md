@@ -287,6 +287,14 @@ To assess the design solutions, a ***distributed DUT model***, as presented in F
 
 
 
+---
+
+> Can Mechanical Movements on FI‑CDM Tester Cause Additional Zap During CDM Stress? [[https://incompliancemag.com/additional-zap-during-cdm-stress/](https://incompliancemag.com/additional-zap-during-cdm-stress/)]
+
+![Figure 3](https://assets.incompliancemag.com/2025/11/2512-C2-fig3.png)
+
+
+
 ## Diode capacitance vs. Vpn
 
 *TODO* &#128197;

@@ -184,3 +184,5 @@ Resonant Circuits: Resonant Frequency and Q Factor [[https://techweb.rohm.com/pr
 J. Nako, G. Tsirimokou, C. Psychalinos and A. S. Elwakil, "Approximation of First–Order Complex Resonators in the Frequency–Domain," in *IEEE Access*, vol. 13, pp. 54494-54503, 2025 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10937072)]
 
 How to generate **complex poles without inductor**? [[https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/](https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/)]
+
+Visvesh Sathe. Resonant Clock Design for a Power-efficient, High-volume x86 -64 Microprocessor [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_05_Sathe.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_05_Sathe.pdf)]

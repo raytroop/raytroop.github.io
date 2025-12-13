@@ -45,7 +45,9 @@ is no whitespace that can clearly distinguish the variable name from the surroun
 
 `vec`: Reshape the array as a *one-dimensional column vector*
 
+`pkg> dev|develop`: add a local package
 
+`using .MyModule`: use `MyModule` within this same file
 
 ---
 

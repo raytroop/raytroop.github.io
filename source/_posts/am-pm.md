@@ -49,6 +49,18 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 
 
+## Analytic Signal & Hilbert Transform
+
+> Mathuranathan. *Understanding Analytic Signal and Hilbert Transform* [[https://www.gaussianwaves.com/2017/04/analytic-signal-hilbert-transform-and-fft/](https://www.gaussianwaves.com/2017/04/analytic-signal-hilbert-transform-and-fft/)]
+>
+> Dan Boschen. *What information does the Hilbert transform give?* [[https://dsp.stackexchange.com/a/88292/59253](https://dsp.stackexchange.com/a/88292/59253)]
+>
+> Frank R. Kschischang. *The Hilbert Transform* [[https://www.comm.utoronto.ca/frank/notes/hilbert.pdf](https://www.comm.utoronto.ca/frank/notes/hilbert.pdf)]
+
+![image-20251213091900382](am-pm/image-20251213091900382.png)
+
+![image-20251213091009754](am-pm/image-20251213091009754.png)
+
 ## Real & Complex Modulation
 
 > J OHN M. C IOFFI. Complex AWGN and Other Channels [[https://cioffi-group.stanford.edu/ee379a/Lectures/L4.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L4.pdf)]

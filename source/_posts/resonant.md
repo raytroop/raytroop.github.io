@@ -84,6 +84,62 @@ $$
 
 
 
+## Frequency selectivity
+
+> EEE 211 ANALOG ELECTRONICS [[https://www.ee.bilkent.edu.tr/~eee211/LectureNotes/Chapter%20-%2004.pdf](https://www.ee.bilkent.edu.tr/~eee211/LectureNotes/Chapter%20-%2004.pdf)]
+
+###  Parallel resonance
+
+![image-20251213165220671](resonant/image-20251213165220671.png)
+
+
+
+assuming $i(t) = I_p\cos\omega_0 t$, where $\omega_0 =1/\sqrt{LC}$ , suppose all current flow into $R$
+$$
+V(t) = I_pR\cdot \cos\omega_0 t
+$$
+$I_C$, the current flow through $C$
+$$
+\color{red}I_C(t)=C\frac{dV(t)}{dt}=-C\omega_0\cdot I_pR\cdot \sin\omega_0 t
+$$
+Then, we have voltage between $L$, given $I_L = -I_C$
+$$
+V_L(t) = L\frac{dI_L(t)}{dt} = LC\omega_0^2\cdot I_pR\cdot \cos\omega_0 t = I_pR\cdot \cos\omega_0 t
+$$
+
+
+### Series resonance
+
+![image-20251213165337258](resonant/image-20251213165337258.png)
+
+assuming $V(t)=V_s\cos\omega_0t$, where $\omega_0 =1/\sqrt{LC}$ , suppose all current flow into $V_C+V_L=0$
+$$
+V_R(t) = V(t) = V_s\cos\omega_0t
+$$
+then
+$$
+I_s(t) = \frac{V_s}{R}\cos\omega_0 t
+$$
+$V_L(t)$ is obtained
+$$
+V_L(t) = L\frac{dI_s(t)}{dt} = -L\omega_0\cdot \frac{V_s}{R}\sin\omega_0 t
+$$
+Then
+$$
+V_C(t) = V(t) - (V_L(t) + V_R(t)) = -V_L(t)
+$$
+Therefore,  $I_C$ current flow through $C$
+$$
+I_C(t) = C\frac{dV_C(t)}{dt}= LC\omega_0^2\cdot \frac{V_s}{R}\cos\omega_0 t= \frac{V_s}{R}\cos\omega_0 t
+$$
+voltage potential between $L$ and $C$
+$$
+\color{red}V_m(t) = V_R(t) + V_L(t) = V_s\cos\omega_0t -L\omega_0\cdot \frac{V_s}{R}\sin\omega_0 t = V_s\sqrt{1+L/R^2C}\cos(\omega_0t+\phi)
+$$
+![image-20251213180419366](resonant/image-20251213180419366.png)
+
+
+
 ## Non ideal capacitor & inductor
 
 > Tank Circuits/Impedances [[https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf](https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf)]
@@ -96,7 +152,7 @@ $$
 
 
 
-### Capacitor
+### Non ideal Capacitor
 
 ![image-20231224163730529](resonant/image-20231224163730529.png)
 
@@ -131,7 +187,7 @@ C_p &\approx C_s
 
 
 
-### Inductor
+### Non ideal Inductor
 
 ![image-20231224163740411](resonant/image-20231224163740411.png)
 

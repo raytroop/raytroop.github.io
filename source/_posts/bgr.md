@@ -11,6 +11,14 @@ mathjax: true
 
 ---
 
+## MOS VT vs. Temperature
+
+> [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_12_Loke.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_12_Loke.pdf)]
+
+![image-20251213112935217](bgr/image-20251213112935217.png)
+
+
+
 
 
 ## Subthreshold Conduction

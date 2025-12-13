@@ -11,7 +11,9 @@ mathjax: true
 
 ![image-20220302000743092](corners/image-20220302000743092.png)
 
-
+> [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_12_Loke.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_12_Loke.pdf)]
+>
+> ![image-20251213113351611](corners/image-20251213113351611.png)
 
 ### Global/Local Variation
 

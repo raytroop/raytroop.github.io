@@ -69,6 +69,8 @@ legend('ref', 'Low frequency attenuated', 'high frequency attenuated')
 
 ## group delay
 
+> Andor Bariska. Negative Group Delay [[https://www.dsprelated.com/blogimages/AndorBariska/NGD/ngdblog.pdf](https://www.dsprelated.com/blogimages/AndorBariska/NGD/ngdblog.pdf)]
+
 ![image-20251113005845859](distortion/image-20251113005845859.png)
 
 ![image-20251116114752468](distortion/image-20251116114752468.png)

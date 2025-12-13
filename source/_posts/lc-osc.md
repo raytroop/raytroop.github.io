@@ -84,6 +84,12 @@ $$
 
 *TODO* &#128197;
 
+---
+
+> EEE 211 ANALOG ELECTRONICS [[https://www.ee.bilkent.edu.tr/~eee211/LectureNotes/Chapter%20-%2004.pdf](https://www.ee.bilkent.edu.tr/~eee211/LectureNotes/Chapter%20-%2004.pdf)]
+
+![image-20251213164211248](lc-osc/image-20251213164211248.png)
+
 
 
 

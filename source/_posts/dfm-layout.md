@@ -19,7 +19,11 @@ mathjax: true
 
 
 
-## Vtgm & Vtlin
+## VT Measurement Methods
+
+> A. L. S. Loke, *"Constant-Current Threshold Voltage Extraction in HSPICE for Nanoscake CMOS Analog Design,"* in Synopsys Users Group (SNUG) 2010 Conference (San Jose, CA), Mar. 2010. (copyright by AMD) [[slides](https://ewh.ieee.org/r5/denver/sscs/Presentations/2010_06_Loke.pdf), [paper](https://ewh.ieee.org/r5/denver/sscs/References/2010_03_Loke.pdf)]
+>
+> ![image-20251213101528870](dfm-layout/image-20251213101528870.png)
 
 ![image-20250802101539555](dfm-layout/image-20250802101539555.png)
 
@@ -55,6 +59,10 @@ V_{\text{t,lin}} &= V_G \mid _{I_D=I_{\text{thx}}\cdot \frac{W}{L}@\{V_D=0.05V\}
 > IC-CAP 2011.01 - Target Modeling [[https://edadownload.software.keysight.com/eedl/iccap/2011_01/pdf/target.pdf](https://edadownload.software.keysight.com/eedl/iccap/2011_01/pdf/target.pdf)]
 
 ![image-20251122133018845](dfm-layout/image-20251122133018845.png)
+
+
+
+
 
 
 
@@ -402,6 +410,10 @@ LOD effect can be prevented by distancing devices away from the WELL edge (guard
 
 ![image-20251009235236169](dfm-layout/image-20251009235236169.png)
 
+---
+
+![image-20251213104328303](dfm-layout/image-20251213104328303.png)
+
 ### Well Proximity Effect (WPE)
 
 Since the well implant dopant (acceptor or donor) is the same type as the channel implant dopant, the ***additional doping increases the absolute value of the threshold voltage (VT) of both NMOS and PMOS devices***
@@ -409,6 +421,12 @@ Since the well implant dopant (acceptor or donor) is the same type as the channe
 ![image-20251009234116191](dfm-layout/image-20251009234116191.png)
 
 ![img](dfm-layout/1-Figure1-1.png)
+
+---
+
+> Alvin L.S. Loke. 2004. Introduction to Deep Submicron CMOS Device Technology & Its Impact on Circuit Design [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_12_Loke.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_12_Loke.pdf)]
+
+![image-20251213103458642](dfm-layout/image-20251213103458642.png)
 
 
 
@@ -433,6 +451,16 @@ Gate = (ALD MG stack to set $\Phi_M$)+(metal fill to reduce RG)
 > ![image-20251010202132434](dfm-layout/image-20251010202132434.png)
 
 
+
+### SCE (Short-Channel Effect)
+
+![image-20251213103805786](dfm-layout/image-20251213103805786.png)
+
+### NCE & RNCE
+
+![image-20251213104022586](dfm-layout/image-20251213104022586.png)
+
+![image-20251213104103450](dfm-layout/image-20251213104103450.png)
 
 ## Matching
 

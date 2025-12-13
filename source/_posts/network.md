@@ -21,6 +21,8 @@ mathjax: true
 
 ![image-20251025193127266](network/image-20251025193127266.png)
 
+> Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
+>
 > ![image-20251213004150339](network/image-20251213004150339.png)
 >
 > ![image-20251213010754956](network/image-20251213010754956.png)
@@ -215,35 +217,43 @@ $$
 
 ![image-20241030220131714](network/image-20241030220131714.png)
 
-> ![image-20241030222403947](network/image-20241030222403947.png)
+> ![image-20251213132448216](network/image-20251213132448216.png)
 
 ---
 
+> Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
+
 ![image-20251213004052771](network/image-20251213004052771.png)
 
-![image-20251213010211715](network/image-20251213010211715.png)
+![image-20251213132227663](network/image-20251213132227663.png)
 
-### Reflection Coefficients
+---
 
-![image-20241030222906229](network/image-20241030222906229.png)
-
-![image-20241030222923491](network/image-20241030222923491.png)
+![image-20251213132705917](network/image-20251213132705917.png)
 
 
 
-## Impulse Response From S-Parameters
+## Impulse Response From S-Parameters (channel)
 
 > David Banas. *A comparison of different techniques (i.e. - windowing, vector fitting, etc.) for extracting the impulse response from S-parameters.* [[https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main](https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main)]
 >
-> Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 - Lecture 3: Time-Domain Reflectometry & S-Parameter Channel Models[[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf)]
+> Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 - Lecture 3: Time-Domain Reflectometry & S-Parameter Channel Models [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf)]
+>
+> Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
 
 *TODO* &#128197;
 
-### Rational Fit
 
 
+![image-20251213095227619](network/image-20251213095227619.png)
 
-#### Matlab/rationalfit
+![image-20251213095316546](network/image-20251213095316546.png)
+
+> ![image-20251213095709187](network/image-20251213095709187.png)
+
+---
+
+***Rational Fit***
 
 To resolve the convergence problem of s-parameter in Spectre simulator - `rationalfit` and write Verilog-A 
 
@@ -357,5 +367,5 @@ Dr. Ray Kwok . Network Techniques: Conversion between Filter Transfer Function a
 
 田庆诚教授 台湾中华大学 射频电路基础（公司培训）[[https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249](https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 
-Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
+
 

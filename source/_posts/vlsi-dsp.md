@@ -68,6 +68,16 @@ plt.grid(which='both');plt.xlabel('Time (s)');plt.show()
 
 
 
+## Fixed point vs Floating point number
+
+> Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
+
+*TODO* &#128197;
+
+
+
+
+
 
 ## Discrete-Time Integrators
 

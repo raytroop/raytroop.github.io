@@ -131,7 +131,11 @@ During recovery phase where the gate voltage of pMOS is high and stress is remov
 
 > ![image-20250730180302668](aging/image-20250730180302668.png)
 
+---
 
+> Dieter K. Schroder. *Negative Bias Temperature Instability (NBTI) Physics, Materials, Process, and Circuit Issues* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2005_08_Schroder.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2005_08_Schroder.pdf)]
+
+![image-20251213180649808](aging/image-20251213180649808.png)
 
 ## Hot Carrier Degradation (HCI)
 
@@ -172,8 +176,9 @@ The hot-carrier induced damage in nMOS transistors has been found to result in e
 
 The damage caused by hot-carrier injection affects the transistor characteristics by causing a degradation in transconductance, a shift in the threshold voltage, and a general decrease in the drain current capability.
 
-> HCI seems to have just a **weak** temperature dependency.
-> Unlike BTI, it seems to be no or just little recovery.
+> HCI seems to have just a **weak** temperature dependency
+>
+> ![image-20251213114401907](aging/image-20251213114401907.png)Unlike BTI, it seems to be no or just little recovery.
 > As holes are much "cooler" (i.e. heavier) than electrons, the channel hot carrier effect in nMOS devices is shown to be more significant than in pMOS devices.
 
 ![image-20231106224938502](aging/image-20231106224938502.png)
@@ -196,6 +201,12 @@ HCI model can reproduce the saturation effect if stress time is long enough
 
 ## Time dependent dielectric breakdown (TDDB)
 
+> M. A. Alam, ECE 695A Reliability Physics of Nanotransistors [[link](https://nanohub.org/groups/ece695alam)], [[https://nanohub.org/resources/17208/download/2013.03.01-ECE695A-L21.pdf](https://nanohub.org/resources/17208/download/2013.03.01-ECE695A-L21.pdf)]
+>
+> K. Yang, R. Zhang, T. Liu, D. -H. Kim and L. Milor, "Optimal Accelerated Test Regions for Time- Dependent Dielectric Breakdown Lifetime Parameters Estimation in FinFET Technology," 2018 Conference on Design of Circuits and Integrated Systems (DCIS), Lyon, France, 2018 [[https://par.nsf.gov/servlets/purl/10104486](https://par.nsf.gov/servlets/purl/10104486)]
+
+
+
 ![image-20250730175415143](aging/image-20250730175415143.png)
 
 > Scaling drive more concerns in TDDB
@@ -212,10 +223,9 @@ HCI model can reproduce the saturation effect if stress time is long enough
 
 ![img](aging/slide_34.jpg)
 
+---
 
-> M. A. Alam, ECE 695A Reliability Physics of Nanotransistors [[link](https://nanohub.org/groups/ece695alam)], [[https://nanohub.org/resources/17208/download/2013.03.01-ECE695A-L21.pdf](https://nanohub.org/resources/17208/download/2013.03.01-ECE695A-L21.pdf)]
->
-> K. Yang, R. Zhang, T. Liu, D. -H. Kim and L. Milor, "Optimal Accelerated Test Regions for Time- Dependent Dielectric Breakdown Lifetime Parameters Estimation in FinFET Technology," 2018 Conference on Design of Circuits and Integrated Systems (DCIS), Lyon, France, 2018 [[https://par.nsf.gov/servlets/purl/10104486](https://par.nsf.gov/servlets/purl/10104486)]
+![image-20251213114719498](aging/image-20251213114719498.png)
 
 
 
@@ -297,11 +307,21 @@ BTI recovery effect **NOT** included for N7
 
 
 
+## Iddq Testing
+
+> Jeff Rearick. Analog Adventures in Digital Chip Testing [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2005_04_Rearick.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2005_04_Rearick.pdf)]
+
+![image-20251213180949136](aging/image-20251213180949136.png)
+
+
+
 ## reference
 
 Phillip Allen. Reliability of Analog Circuits [[https://aicdesign.org/wp-content/uploads/2021/04/Reliability_Theory210224-1.pdf](https://aicdesign.org/wp-content/uploads/2021/04/Reliability_Theory210224-1.pdf)]
 
 M. A. Alam. ECE 695A Reliability Physics of Nanotransistors [[https://nanohub.org/groups/ece695alam](https://nanohub.org/groups/ece695alam)]
+
+Dennis Eaton Agilent Technologies 2005. *Integrated Circuit Intrinsic Reliability* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2005_02_Eaton.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2005_02_Eaton.pdf)]
 
 ---
 

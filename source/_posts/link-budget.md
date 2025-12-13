@@ -57,11 +57,16 @@ $$
 
 
 
-## Bandwidth Selection
+### Measurements Bandwidth
+
+> Minh Quach. 4/30/2004 *Signal Integrity Consideration and Analysis -Frequency & Time Domain Measurements/Analysis* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_04_Quach.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_04_Quach.pdf)]
 
 ![image-20251213013257369](link-budget/image-20251213013257369.png)
 
 ![image-20251213013352969](link-budget/image-20251213013352969.png)
+
+> ![image-20251213094209563](link-budget/image-20251213094209563.png)
+
 
 
 ## CMI & DMI

@@ -216,7 +216,7 @@ R-C, ***parallel*** equivalent circuit
 
 ---
 
-#### AC simulation
+***AC simulation***
 
 ![image-20250628112910588](insight/image-20250628112910588.png)
 
@@ -232,7 +232,7 @@ sweep vi from 0 to 800mV (vdd)
 
 ---
 
-#### SP simulation
+***SP simulation***
 
 ![image-20250628112857124](insight/image-20250628112857124.png)
 
@@ -375,7 +375,7 @@ V_o &= \frac{I_{in}}{g_m}(1-g_mR_F) \\
 V_i &= \frac{I_{in}}{g_m} 
 \end{align}$$
 
-### linearity
+***linearity***
 > TIA stage allows for improved gain with **better linearity**, as mostly signal current passes through $R_F$
 *TODO* &#128197;
 ??? Quantitative analysis
@@ -977,6 +977,8 @@ Conversely, a positive $\Delta V_\text{GS}$ produces a positive $\Delta I_D$, as
 
 ## Leakage in MOS
 
+> Alvin L.S. Loke. 2004. Introduction to Deep Submicron CMOS Device Technology & Its Impact on Circuit Design [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_12_Loke.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_12_Loke.pdf)]
+
 ![image-20241109195527005](insight/image-20241109195527005.png)
 
 - Subthreshold leakage
@@ -989,7 +991,7 @@ Conversely, a positive $\Delta V_\text{GS}$ produces a positive $\Delta I_D$, as
 
 
 
-![image-20241110001311117](insight/image-20241110001311117.png)
+![image-20251213105246782](insight/image-20251213105246782.png)
 
 > W. M. Elgharbawy and M. A. Bayoumi, "Leakage sources and possible solutions in nanometer CMOS technologies," in IEEE Circuits and Systems Magazine, vol. 5, no. 4, pp. 6-17, Fourth Quarter 2005, doi: 10.1109/MCAS.2005.1550165.
 >
@@ -1006,6 +1008,8 @@ Conversely, a positive $\Delta V_\text{GS}$ produces a positive $\Delta I_D$, as
 
 
 ### Drain-Induced Barrier Lowering (DIBL)
+
+![image-20251213104939367](insight/image-20251213104939367.png)
 
 As a result of DIBL, **threshold voltage is reduced** with shorter channel lengths and, consequently, the subthreshold leakage current is increased
 
@@ -1028,6 +1032,8 @@ The principal impact of DIBL on circuit design is the degraded output impedance.
 
 
 ### Gate induced drain leakage (GIDL)
+
+![image-20251213105152249](insight/image-20251213105152249.png)
 
 ![image-20241110001118250](insight/image-20241110001118250.png)
 

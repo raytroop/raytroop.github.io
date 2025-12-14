@@ -45,9 +45,9 @@ is no whitespace that can clearly distinguish the variable name from the surroun
 
 `vec`: Reshape the array as a *one-dimensional column vector*
 
-`pkg> dev|develop`: add a local package
+`pkg> dev|develop`: add a local package, which not initialized by git
 
-`using .MyModule`: use `MyModule` within this same file
+`using|import .MyModule`:  relative import following`include("path/to/MyModule.jl")` custom module
 
 ---
 

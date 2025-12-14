@@ -14,16 +14,216 @@ mathjax: true
 
 
 
+## noise generator
 
-
-## noise power at filter output
-
+> Allen B. Downey. *Think DSP - Digital Signal Processing in Python* [[book](http://greenteapress.com/thinkdsp/thinkdsp.pdf) [repo](https://github.com/AllenDowney/ThinkDSP)]
+>
 > Chembian Thambidurai, "Comparison Of Noise Power At Lowpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_noise-power-at-filter-output-activity-7006486487093456896-W0Rt?utm_source=share&utm_medium=member_desktop)]
 >
 > —, "On Noise Power At The Bandpass Filter Output" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_bandpass-noise-activity-7008896204507922432-ZRXF?utm_source=share&utm_medium=member_desktop)]
+>
+> Steve Smith. An Interesting Fourier Transform - 1/f Noise [[https://www.dsprelated.com/showarticle/40.php](https://www.dsprelated.com/showarticle/40.php)]
+>
 
 
-*TODO* &#128197;
+
+![Wiener Khinchin Theorem](noise/Wiener-Khinchin-Theorem.png)
+
+
+
+
+
+### Filtered White Noise
+
+> Julius Orion Smith III. Spectral Audio Signal Processing [[https://www.dsprelated.com/freebooks/sasp/Filtered_White_Noise.html](https://www.dsprelated.com/freebooks/sasp/Filtered_White_Noise.html)]
+
+Example: Synthesis of 1/F Noise (Pink Noise)
+
+```matlab
+Nx = 2^16;  % number of samples to synthesize
+B = [0.049922035 -0.095993537 0.050612699 -0.004408786];
+A = [1 -2.494956002   2.017265875  -0.522189400];
+nT60 = round(log(1000)/(1-max(abs(roots(A))))); % T60 est.
+v = randn(1,Nx+nT60); % Gaussian white noise: N(0,1)
+x = filter(B,A,v);    % Apply 1/F roll-off to PSD
+x = x(nT60+1:end);    % Skip transient response
+
+%{
+octave:1> sum(B)/sum(A)
+ans = 1.0991
+%}
+```
+
+
+
+
+### White Noise + Digital Low-Pass filter
+
+> Alessandro Cudazzo. noise generator developed in C99 (white, brown) [[https://github.com/alessandrocuda/noise_generator](https://github.com/alessandrocuda/noise_generator)]
+
+with *Derivatives approximation*, $H_p(s) = \frac{1}{s\tau +  1} \to H_p(z)=\frac{\alpha}{1 +(\alpha -1)z^{-1}}$, where $\alpha = \frac{T}{\tau+T}$
+
+![image-20251207222557118](noise/image-20251207222557118.png)
+
+
+
+### Colouring Noise
+
+> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)] [[https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0](https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0)]
+
+![A dark plot with 5 data series on it for violet, blue, white, pink and brownian noise, each coloured in their respective colours.](noise/psd-of-coloured-noise.png)
+
+**White**, **Pink** $1/f$, **Brownian** $1/f^2$, **Blue** $f$, **Violet** $f^2$
+
+The process of generating coloured noise is relatively simple:
+
+1. Start with a representation of white noise signal in the frequency domain
+2. **Shape the signal in the frequency domain** according to the PSD you'd like to achieve
+3. Take the inverse Fourier transform of the shaped signal
+
+sampling shaping transfer function (not scaled by $1/T_s$), which make sense in time domain convolution between sampled noise with sampled impulse response of filter
+
+
+
+### White noise in CONTINUOUS-time blocks
+
+> MathWorks Support Team. [[https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112](https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112)]
+
+![image-20251214164635467](noise/image-20251214164635467.png)
+
+
+
+## White noise
+
+> David Murray. Topic 6: Random Processes and Signals [[slides](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/L6.pdf) [notes](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf)]
+
+![image-20251214183435273](noise/image-20251214183435273.png)
+
+---
+
+
+
+> Julius Orion Smith III. Why an Impulse is Not White [[https://www.dsprelated.com/freebooks/sasp/Why_Impulse_Not_White.html](https://www.dsprelated.com/freebooks/sasp/Why_Impulse_Not_White.html)]
+>
+> ![image-20251214183726713](noise/image-20251214183726713.png)
+
+
+
+### AWGN (Additive White Gaussian Noise )
+
+> Mathuranathan. Simulate additive white Gaussian noise (AWGN) channel [[https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/](https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/)]
+
+![image-20251214161342050](noise/image-20251214161342050.png)
+
+
+### White Noise by i.i.d Random Variable
+
+`Independent and Identically Distributed`
+
+> Kevin Zheng. The Frequency Domain Trap – Beware of Your AC Analysis [[https://circuit-artists.com/the-frequency-domain-trap-beware-of-your-ac-analysis/](https://circuit-artists.com/the-frequency-domain-trap-beware-of-your-ac-analysis/)]
+>
+> Mathuranathan. White Noise : Simulation and Analysis using Matlab [[https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/](https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/)]
+
+***white noise*** doesn't mean it has a *Gaussian/normal distribution*
+
+The only criteria for a (discrete) signal to be **"white"** is for **each sample to be independently taken from the same probability distribution**
+
+![img](noise/distributions.png)
+
+By understanding input signal's statistical nature, we can gather more insights about certain requirements for our circuits than just from frequency domain
+
+![img](noise/nonlin-pdf-1.png)
+
+
+
+---
+
+![image-20250727111432313](noise/image-20250727111432313.png)
+
+```matlab
+fs = 1;
+N = 2^20;
+Nhist = 100;
+segmentLength = 512;
+
+x_norm = randn(1, N,1); % Generate random data (e.g., Gaussian white noise)
+[pxx_norm, f] = pwelch(x_norm, segmentLength, [], [], fs);
+
+x_uniform = 2*rand(N,1) - 1; % uniform random -1 ~ 1;
+[pxx_uniform, ~] = pwelch(x_uniform, segmentLength, [], [], fs);
+
+x_sin = sin(2*pi*(rand(N,1) - 0.5)); % sinusoidal-like
+[pxx_sin, ~] = pwelch(x_sin, segmentLength, [], [], fs);
+
+x_bin = 2*randi(2,N,1) -3; % binomial distribution, -1, 1
+[pxx_bin, ~] = pwelch(x_bin, segmentLength, [], [], fs);
+
+subplot(2, 4, 1)
+histogram(x_norm, Nhist);
+title('normal distribution')
+
+subplot(2, 4, 5)
+plot(f, 10*log10(pxx_norm));
+xlabel('Frequency (Hz)');
+ylabel('dB');
+title('PSD of normal distribution')
+
+%% 
+subplot(2, 4, 2)
+histogram(x_uniform, Nhist);
+title('uniform distribution')
+
+subplot(2, 4, 6)
+plot(f, 10*log10(pxx_uniform));
+xlabel('Frequency (Hz)');
+ylabel('dB');
+title('PSD of uniform distribution')
+
+%% 
+subplot(2, 4, 3)
+histogram(x_sin, Nhist);
+title('sinusoidal-like distribution')
+
+subplot(2, 4, 7)
+plot(f, 10*log10(pxx_sin));
+xlabel('Frequency (Hz)');
+ylabel('dB');
+title('PSD of sinusoidal-like distribution')
+
+%%
+subplot(2, 4, 4)
+histogram(x_bin, Nhist);
+title('binomial distribution')
+
+subplot(2, 4, 8)
+plot(f, 10*log10(pxx_bin));
+xlabel('Frequency (Hz)');
+ylabel('dB');
+title('PSD of binomial distribution')
+```
+
+---
+
+![image-20250922225811644](noise/image-20250922225811644.png)
+
+```matlab
+val = randn(1, 2^20,1);
+val_abs = abs(val);
+val_abs_avg = mean(val_abs);
+subplot(2,2,1)
+histogram(val);
+title('x_{norm} distribution'); grid on
+
+subplot(2,2,2)
+histogram(val_abs);
+title('|x_{norm}| distribution')
+
+subplot(2,2,[3 4])
+[pxx, f] = pwelch(val_abs - val_abs_avg, 512, [], [], 1);
+plot(f, 10*log10(pxx), LineWidth=4); grid on
+title('psd (dB)')
+```
+
 
 
 
@@ -37,16 +237,114 @@ A random signal $v_n(t)$ is sampled using an ***ideal impulse sampler***
 
 *TODO* &#128197;
 
+### White Noise
 
-
-## 1/f Noise - Fourier Transform
-
-> Steve Smith. An Interesting Fourier Transform - 1/f Noise [[https://www.dsprelated.com/showarticle/40.php](https://www.dsprelated.com/showarticle/40.php)]
-
-*TODO* &#128197;
+> Does PSD (dBm/Hz) of white noise depend on sampling rate?. Does PSD (dBm/Hz) of white noise depend on sampling rate? [[https://dsp.stackexchange.com/a/87654/59253](https://dsp.stackexchange.com/a/87654/59253)]
+>
 
 
 
+![image-20251208011528326](noise/image-20251208011528326.png)
+
+
+
+---
+
+> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)]
+
+![image-20251208012147012](noise/image-20251208012147012.png)
+$$
+\text{PSD}_s =  \frac{\sigma^2}{f_s} \space\space \text{for two-sided PSD} \space\space\space \text{or}\space\space\space =\frac{\sigma^2}{f_s/2}\space\space \text{for one-sided PSD} 
+$$
+
+```matlab
+# Generate Gaussian white noise in the time domain
+sigma = 1 / np.sqrt(2.0 * dt)
+x_t = rng.normal(0.0, sigma, n)
+```
+
+
+
+> How to generate white noise signal from a given PSD? [[https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849](https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849)]
+>
+> ![image-20251208012745236](noise/image-20251208012745236.png)
+
+
+
+###  bandlimited white noise
+
+The **aliasing of the noise**, or **noise folding**, plays an important role in switched-capacitor as it does in all switched-capacitor filters
+
+![image-20240425215938141](noise/image-20240425215938141.png)
+
+Assume for the moment that the switch is *always closed* (that there is no hold phase), the single-sided noise density would be
+
+![image-20240428182816109](noise/image-20240428182816109.png)
+
+---
+
+![image-20240428180635082](noise/image-20240428180635082.png)
+
+
+
+$v_s[n]$ is the sampled version of $v_{RC}(t)$, i.e. $v_s[n]= v_{RC}(nT_C)$
+$$
+S_s(e^{j\omega}) = \frac{1}{T_C} \sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi k}{T_C})) \cdot d\omega
+$$
+where $\omega \in [-\pi, \pi]$,  furthermore $\frac{d\omega}{T_C}= d\Omega$
+$$
+S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s)) \cdot d\Omega
+$$
+
+> ![image-20240428215559780](noise/image-20240428215559780.png)
+
+![image-20240425220033340](noise/image-20240425220033340.png)
+
+The noise in $S_{RC}$ is a *stationary process* and so is *uncorrelated* over $f$ allowing the $N$ rectangles to be combined by simply summing their noise powers
+
+
+![image-20240428225949327](noise/image-20240428225949327.png)
+
+![image-20240425220400924](noise/image-20240425220400924.png)
+
+where $m$ is the duty cycle
+
+> Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]
+>
+> Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
+>
+> Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and Modeling URL: [https://www.seas.upenn.edu/~ese568/fall2019/](https://www.seas.upenn.edu/~ese568/fall2019/)
+>
+> Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
+>
+> R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986
+>
+> Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
+>
+> Christian-Charles Enz. High precision CMOS micropower amplifiers [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
+
+---
+
+*Below analysis focusing on sampled noise*
+
+> Boris Murmann. Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 / tutorials [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T8.pdf), [transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T9.pdf)]
+>
+> —. EE315A VLSI Signal Conditioning Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SyIgQJfyzyuDhBXc.pdf)]
+>
+> —. EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
+
+![image-20250810085721440](noise/image-20250810085721440.png)
+
+
+
+> - Calculate autocorrelation function of noise at the output of the RC filter
+> - Calculate the spectrum by taking the **discrete** time Fourier transform of the autocorrelation function
+
+---
+
+> Bernhard E. Boser . Advanced Analog Integrated Circuits Switched Capacitor Gain Stages [[https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf](https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf)]
+
+![image-20240427183700971](noise/image-20240427183700971.png)
 
 
 
@@ -262,116 +560,6 @@ ampling Jitter Effects for *ADC/DAC*
 > Martin Clara. High-Performance D/A-Converters - Application to Digital Transceivers, 2013  [[pdf](https://picture.iczhiku.com/resource/eetop/SYIrysQLKgUtfxbB.pdf)]
 >
 > Chun-Hsien Su (蘇純賢). Design of Oversampled Sigma-Delta Data Converters. July, 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIHwgULoQJZLNCV.pdf)]
-
-
-
-## Sampled White Noise
-
-> Does PSD (dBm/Hz) of white noise depend on sampling rate?. Does PSD (dBm/Hz) of white noise depend on sampling rate? [[https://dsp.stackexchange.com/a/87654/59253](https://dsp.stackexchange.com/a/87654/59253)]
->
-> 
-
-![image-20251208011528326](noise/image-20251208011528326.png)
-
-
-
----
-
-> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)]
-
-![image-20251208012147012](noise/image-20251208012147012.png)
-$$
-\text{PSD}_s =  \frac{\sigma^2}{f_s} \space\space \text{for two-sided PSD} \space\space\space \text{or}\space\space\space =\frac{\sigma^2}{f_s/2}\space\space \text{for one-sided PSD} 
-$$
-
-```matlab
-# Generate Gaussian white noise in the time domain
-sigma = 1 / np.sqrt(2.0 * dt)
-x_t = rng.normal(0.0, sigma, n)
-```
-
-
-
-> How to generate white noise signal from a given PSD? [[https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849](https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849)]
->
-> ![image-20251208012745236](noise/image-20251208012745236.png)
-
-
-
-##  Sampled bandlimited white noise
-
-The **aliasing of the noise**, or **noise folding**, plays an important role in switched-capacitor as it does in all switched-capacitor filters
-
-![image-20240425215938141](noise/image-20240425215938141.png)
-
-Assume for the moment that the switch is *always closed* (that there is no hold phase), the single-sided noise density would be
-
-![image-20240428182816109](noise/image-20240428182816109.png)
-
----
-
-![image-20240428180635082](noise/image-20240428180635082.png)
-
-
-
-$v_s[n]$ is the sampled version of $v_{RC}(t)$, i.e. $v_s[n]= v_{RC}(nT_C)$
-$$
-S_s(e^{j\omega}) = \frac{1}{T_C} \sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi k}{T_C})) \cdot d\omega
-$$
-where $\omega \in [-\pi, \pi]$,  furthermore $\frac{d\omega}{T_C}= d\Omega$
-$$
-S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s)) \cdot d\Omega
-$$
-
-> ![image-20240428215559780](noise/image-20240428215559780.png)
-
-![image-20240425220033340](noise/image-20240425220033340.png)
-
-The noise in $S_{RC}$ is a *stationary process* and so is *uncorrelated* over $f$ allowing the $N$ rectangles to be combined by simply summing their noise powers
-
-
-![image-20240428225949327](noise/image-20240428225949327.png)
-
-![image-20240425220400924](noise/image-20240425220400924.png)
-
-where $m$ is the duty cycle
-
-> Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]
->
-> Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
->
-> Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and Modeling URL: [https://www.seas.upenn.edu/~ese568/fall2019/](https://www.seas.upenn.edu/~ese568/fall2019/)
->
-> Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
->
-> R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986
->
-> Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
->
-> Christian-Charles Enz. High precision CMOS micropower amplifiers [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
-
----
-
-*Below analysis focusing on sampled noise*
-
-> Boris Murmann. Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 / tutorials [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T8.pdf), [transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T9.pdf)]
->
-> —. EE315A VLSI Signal Conditioning Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SyIgQJfyzyuDhBXc.pdf)]
->
-> —. EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
-
-![image-20250810085721440](noise/image-20250810085721440.png)
-
-
-
-> - Calculate autocorrelation function of noise at the output of the RC filter
-> - Calculate the spectrum by taking the **discrete** time Fourier transform of the autocorrelation function
-
----
-
-> Bernhard E. Boser . Advanced Analog Integrated Circuits Switched Capacitor Gain Stages [[https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf](https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf)]
-
-![image-20240427183700971](noise/image-20240427183700971.png)
 
 
 
@@ -709,3 +897,4 @@ Pharr, Matt; Humphreys, Greg. (28 June 2010). Physically Based Rendering: From T
 
 Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
 
+Mathuranathan Viswanathan. Digital Modulations using Matlab: Build Simulation Models from Scratch

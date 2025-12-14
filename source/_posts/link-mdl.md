@@ -1,5 +1,5 @@
 ---
-title: Link Modeling
+title: Link Budgets & Models
 date: 2025-11-29 00:24:56
 tags:
 categories:
@@ -264,39 +264,6 @@ end
 
 
 
-
-
-## noise generator
-
-### White Noise + Digital Low-Pass filter
-
-> Alessandro Cudazzo. noise generator developed in C99 (white, brown) [[https://github.com/alessandrocuda/noise_generator](https://github.com/alessandrocuda/noise_generator)]
-
-with *Derivatives approximation*, $H_p(s) = \frac{1}{s\tau +  1} \to H_p(z)=\frac{\alpha}{1 +(\alpha -1)z^{-1}}$, where $\alpha = \frac{T}{\tau+T}$
-
-![image-20251207222557118](link-mdl/image-20251207222557118.png)
-
-
-
-### Colouring Noise
-
-> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)] [[https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0](https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0)]
-
-![A dark plot with 5 data series on it for violet, blue, white, pink and brownian noise, each coloured in their respective colours.](link-mdl/psd-of-coloured-noise.png)
-
-**White**, **Pink** $1/f$, **Brownian** $1/f^2$, **Blue** $f$, **Violet** $f^2$
-
-The process of generating coloured noise is relatively simple:
-
-1. Start with a representation of white noise signal in the frequency domain
-2. **Shape the signal in the frequency domain** according to the PSD you'd like to achieve
-3. Take the inverse Fourier transform of the shaped signal
-
-sampling shaping transfer function (not scaled by $1/T_s$), which make sense in time domain convolution between sampled noise with sampled impulse response of filter
-
-
-
-
 ## helper function
 
 ### int2bits
@@ -433,3 +400,8 @@ Jaeha Kim,Scientific Analog. UCIe PHY Modeling and Simulation with XMODEL [[pdf]
 
 S. Katare, "Novel Framework for Modelling High Speed Interface Using Python for Architecture Evaluation," *2020 IEEE REGION 10 CONFERENCE (TENCON)*, Osaka, Japan, 2020 [[https://sci-hub.se/10.1109/TENCON50793.2020.9293846](https://sci-hub.se/10.1109/TENCON50793.2020.9293846)]
 
+---
+
+G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link Foundations Standards, Link Budgets & Models," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-95 [https://youtu.be/OABG3u2H2J4] [https://picture.iczhiku.com/resource/ieee/SHKhwYfGotkIymBx.pdf]
+
+Mathuranathan Viswanathan. Digital Modulations using Matlab: Build Simulation Models from Scratch

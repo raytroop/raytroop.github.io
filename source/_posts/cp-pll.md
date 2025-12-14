@@ -9,6 +9,10 @@ mathjax: true
 
 
 
+![image-20251214093632951](cp-pll/image-20251214093632951.png)
+
+> Mehmet Soyuer. *Monolithic Phase-Locked Loops for Clocking* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf)]
+
 ## PFD/CP Modelling
 
 ![image-20250807225013850](cp-pll/image-20250807225013850.png)

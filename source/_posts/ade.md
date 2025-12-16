@@ -49,6 +49,21 @@ The left testbench is better choice for differential R/C extraction.  because th
 
 ## changing Library Reference
 
+*TODO* &#128197;
+
+
+
+## Net Tracer
+
+> Virtuoso(Layout XL)高亮神器 Net Tracer功能介绍及使用方法 [[https://www.kaixinspace.com/virtuosolayout-xl-net-tracer-highlight/#:~:text=1.%20%E8%83%8C%E6%99%AF%E8%AF%B4%E6%98%8E,IC%20Virtuoso](https://www.kaixinspace.com/virtuosolayout-xl-net-tracer-highlight/#:~:text=1.%20%E8%83%8C%E6%99%AF%E8%AF%B4%E6%98%8E,IC%20Virtuoso)]
+>
+> Virtuoso Studio IC 23.1: Using Net Tracer for Design Review [[https://community.cadence.com/cadence_blogs_8/b/cic/posts/virtuoso-studio-using-net-tracer-for-design-review-](https://community.cadence.com/cadence_blogs_8/b/cic/posts/virtuoso-studio-using-net-tracer-for-design-review-)]
+
+![image-20251216213052462](ade/image-20251216213052462.png)
+
+
+
+
 
 ## ACMatch
 
@@ -960,7 +975,11 @@ Calibre Verification User’s Manual
 
 ![image-20240901094536745](ade/image-20240901094536745.png)
 
+---
 
+`swpuseprevic` shall be `yes` when `Hysteresis Sweep`
+
+![image-20251216210847718](ade/image-20251216210847718.png)
 
 ## variables with statistical distribution
 

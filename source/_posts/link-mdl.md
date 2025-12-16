@@ -221,6 +221,48 @@ end
 
 
 
+![img](link-mdl/vo_views.png)
+
+![image-20251216231344142](link-mdl/image-20251216231344142.png)
+
+
+
+![image-20251216230945058](link-mdl/image-20251216230945058.png)
+
+```matlab
+si = [1,0.3,0.5];
+vi = kron(si, ones(1,3));
+xi = 0:1:(length(vi)-1);
+
+
+subplot(6,1,1)
+stem(xi, vi, "filled", 'r', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+
+ir = [0.1, 0.2, 0.3, 0.6, 1];
+xir = -length(ir)+1:1:0;
+
+subplot(8,1,2)
+stem(xir, ir, "filled", 'b', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+
+subplot(8,1,3)
+stem(xir+1, ir, "filled", 'b', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+
+subplot(8,1,4)
+stem(xir+8, ir, "filled", 'b', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+
+subplot(8,1,5)
+stem(xir+9, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+
+subplot(8,1,6)
+stem(xir+10, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+
+subplot(8,1,7)
+stem(xir+11, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+
+subplot(8,1,8)
+stem(xir+12, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+```
+
 
 
 ### DaVE

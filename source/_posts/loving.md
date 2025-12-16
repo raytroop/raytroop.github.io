@@ -710,6 +710,14 @@ CPTSD幸存者成年并离开创伤性家庭后往往没有意识到自己的思
 
 
 ```
+The curious paradox is that when I accept myself just as I am, then I can change.
+
+— Carl Rogers
+```
+
+
+
+```
 容易想太多的人，其实是缺乏安全感
 
 弹一场恋爱🎹:

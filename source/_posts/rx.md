@@ -61,6 +61,10 @@ mathjax: true
 
 ## DFE Error Propagation
 
+> Geoff Zhang. Preliminary Studies on DFE Error Propagation, Precoding, and their Impact on KP4 FEC Performance for PAM4 Signaling Systems [[https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf](https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf)]
+>
+> Z. Wu and J. -R. Guo, "Analysis of UCIe 48/64 GT/s Electrical Links," in *IEEE Open Journal of the Solid-State Circuits Society* [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11150380)]
+
 *TODO* &#128197;
 
 ![image-20250609201647012](rx/image-20250609201647012.png)
@@ -68,8 +72,6 @@ mathjax: true
 
 
 
-
-> Geoff Zhang. Preliminary Studies on DFE Error Propagation, Precoding, and their Impact on KP4 FEC Performance for PAM4 Signaling Systems [[https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf](https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf)]
 
 
 

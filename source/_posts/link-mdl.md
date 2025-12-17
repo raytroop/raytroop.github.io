@@ -1,5 +1,5 @@
 ---
-title: Link Budgets & Models
+title: Link Models & Budgets
 date: 2025-11-29 00:24:56
 tags:
 categories:

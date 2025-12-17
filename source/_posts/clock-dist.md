@@ -17,6 +17,24 @@ mathjax: true
 
 
 
+## Standing Wave Based Clock Distribution Technique
+
+> G. Li, W. Lee, D. Cui, B. Zhang, A. Momtaz and J. Cao, "Standing wave based clock distribution technique with application to a 10 × 11 Gbps transceiver in 28 nm CMOS," *2015 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Xiamen, China, 2015, pp. 1-4 [[https://sci-hub.se/10.1109/ASSCC.2015.7387451](https://sci-hub.se/10.1109/ASSCC.2015.7387451)]
+>
+> T. Ali *et al*., "6.4 A 180mW 56Gb/s DSP-Based Transceiver for High Density IOs in Data Center Switches in 7nm FinFET Technology," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 118-120 [[https://sci-hub.se/10.1109/ISSCC.2019.8662523](https://sci-hub.se/10.1109/ISSCC.2019.8662523)]
+
+*TODO* &#128197;
+
+![image-20251217232140562](clock-dist/image-20251217232140562.png)
+
+
+
+## Inductive-Loaded Clock Distribution Technique
+
+> T. Shibasaki *et al*., "3.5 A 56Gb/s NRZ-electrical 247mW/lane serial-link transceiver in 28nm CMOS," *2016 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2016, pp. 64-65 [[https://sci-hub.se/10.1109/ISSCC.2016.7417908](https://sci-hub.se/10.1109/ISSCC.2016.7417908)]
+
+*TODO* &#128197;
+
 
 
 ## AC-coupled buffer & DCC

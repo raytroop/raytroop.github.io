@@ -9,12 +9,8 @@ mathjax: true
 
 ## Gm-TIA CTLE
 
-*CTLE, with Gm + TIA structure*
-
-![image-20250904202636824](rx-fe/image-20250904202636824.png)
-
-
-
+> H. Kimura *et al*., "A 28 Gb/s 560 mW Multi-Standard SerDes With Single-Stage Analog Front-End and 14-Tap Decision Feedback Equalizer in 28 nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 12, pp. 3091-3103, Dec. 2014 [[https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf](https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf)]
+>
 > Pisati, et.al., "Sub-250mW 1-to-56Gb/s Continuous-Range PAM-4 42.5dB IL ADC/DAC- Based Transceiver in 7nm FinFET," 2019 IEEE International Solid-State Circuits Conference (ISSCC), 2019 [[https://sci-hub.se/10.1109/ISSCC.2019.8662428](https://sci-hub.se/10.1109/ISSCC.2019.8662428)]
 >
 > Z. Li, M. Tang, T. Fan and Q. Pan, "A 56-Gb/s PAM4 Receiver Analog Front-End With Fixed Peaking Frequency and Bandwidth in 40-nm CMOS," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 9, pp. 3058-3062, Sept. 2021 [[slides](https://confcats-event-sessions.s3.amazonaws.com/isicas21/slides/9402.pdf)] [[paper](https://sci-hub.se/10.1109/TCSII.2021.3074384)]
@@ -22,6 +18,14 @@ mathjax: true
 > K. Kwon *et al*., "A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025
 >
 > Bae, W. (2019). CMOS Inverter as Analog Circuit: An Overview. *Journal of Low Power Electronics and Applications*. [[pdf](https://pdfs.semanticscholar.org/6494/3a15452b12c89d31cdcedb22d605c42ed8bd.pdf)]
+
+*CTLE, with Gm + TIA structure*
+
+![image-20250904202636824](rx-fe/image-20250904202636824.png)
+
+
+
+
 
 ---
 
@@ -59,9 +63,29 @@ Above curve demonstrate that only zero is not enough to compensate channel+pkg l
 
 ![image-20251203232523501](rx-fe/image-20251203232523501.png)
 
+---
+
+> Z. Li, M. Tang, T. Fan and Q. Pan, "A 56-Gb/s PAM4 Receiver Analog Front-End With Fixed Peaking Frequency and Bandwidth in 40-nm CMOS," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 9, pp. 3058-3062, Sept. 2021 [[slides](https://confcats-event-sessions.s3.amazonaws.com/isicas21/slides/9402.pdf)] [[paper](https://sci-hub.se/10.1109/TCSII.2021.3074384)]
+
+In the active copper cable (ACC) application, it is necessary to give different equalizations at the same frequency according to different cable lengths, Therefore, the AFE with ***fixed peaking frequency*** and ***constant bandwidth*** is desirable for these applications
+
+![image-20251217224711701](rx-fe/image-20251217224711701.png)
 
 
 
+##  Low-Frequency CTLE (LF-CTLE)
+
+> S. Parikh *et al*., "A 32Gb/s wireline receiver with a low-frequency equalizer, CTLE and 2-tap DFE in 28nm CMOS," *2013 IEEE International Solid-State Circuits Conference Digest of Technical Papers*, San Francisco, CA, USA, 2013 [[https://sci-hub.se/10.1109/ISSCC.2013.6487622](https://sci-hub.se/10.1109/ISSCC.2013.6487622)]
+>
+> T. Shibasaki *et al*., "A 56-Gb/s receiver front-end with a CTLE and 1-tap DFE in 20-nm CMOS," *2014 Symposium on VLSI Circuits Digest of Technical Papers*, Honolulu, HI, USA, 2014, pp. 1-2
+>
+> Yasuo Hidaka  Comment #146, #174: Low-Frequency CTLE to support 3m cable w/o FEC [[https://www.ieee802.org/3/by/public/Sept15/hidaka_3by_01_0915.pdf](https://www.ieee802.org/3/by/public/Sept15/hidaka_3by_01_0915.pdf)]
+
+![image-20251217233444843](rx-fe/image-20251217233444843.png)
+
+![image-20251217234434659](rx-fe/image-20251217234434659.png)
+
+![image-20251217234637716](rx-fe/image-20251217234637716.png)
 
 ## Negative Capacitance Circuit
 

@@ -65,6 +65,14 @@ The maximum swing stays the same, $\sum_i |c_i|=1$
 
 
 
+## Active Peaking CMOS Pre-Driver
+
+> C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 104-106 [[slides](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf) [paper](https://sci-hub.se/10.1109/ISSCC.2018.8310205)]
+
+![image-20251217231605595](tx/image-20251217231605595.png)
+
+> ![image-20251217231902887](tx/image-20251217231902887.png)
+
 
 
 ## SST Driver

@@ -13,11 +13,21 @@ mathjax: true
 
 ![image-20250816003816639](jitter/image-20250816003816639.png)
 
-## jitter variance vs. phase noise
+## Phase Noise to Jitter
 
 > Note that $L(f )$ is defined over positive frequencies only $(f \ge 0)$
 
 ![image-20250902231037546](jitter/image-20250902231037546.png)
+
+> for simple PLL
+>
+> For small $N$: $\sigma_{p(N)}^2 \approx \frac{\mathcal{L}_0 f_{3dB}}{2\pi f_0^2} \cdot \frac{2\pi f_{3dB}N}{f_0}=\frac{\mathcal{L}_0f_{3dB}^2}{f_0^3}=\sigma_{PER}^2$
+>
+> For large $N$:  $\sigma_{p(N)}^2 \approx \frac{\mathcal{L}_0f_{3dB}^2}{f_0^3} \cdot \frac{f_0}{2\pi f_{3dB}}=\sigma_{PER}^2\cdot \frac{f_0}{2\pi f_{3dB}}$
+>
+> | Free Running  OSC                                      | OSC in  simple PLL                                           |
+> | ------------------------------------------------------ | ------------------------------------------------------------ |
+> | $\mathcal{L}(f) = \frac{\mathcal{L}_0 f_{3dB}^2}{f^2}$ | $\mathcal{L}(f) = \frac{\mathcal{L}_0 f_{3dB}^2}{f^2 + f_{3dB}^2}$ |
 
 
 
@@ -69,7 +79,7 @@ Thus, yield EQ(3.48)
 
  ***Period Jitter***
 
-![image-20250902233638588](jitter/image-20250902233638588.png)
+![image-20251218232426501](jitter/image-20251218232426501.png)
 
 ---
 
@@ -86,6 +96,14 @@ Thus, yield EQ(3.48)
 ![image-20250902232230515](jitter/image-20250902232230515.png)
 
 > ![image-20250902231843251](jitter/image-20250902231843251.png)
+
+---
+
+> Mozhgan Mansuri “Low-Power Low-Jitter On-Chip Clock Generation” thesis UCLA [[https://people.engr.tamu.edu/spalermo/ecen689/pll_thesis_mansuri_ucla_2003.pdf](https://people.engr.tamu.edu/spalermo/ecen689/pll_thesis_mansuri_ucla_2003.pdf)]
+>
+> [[https://people.engr.tamu.edu/spalermo/ecen689/PRBS_&_PLL_model.pdf](https://people.engr.tamu.edu/spalermo/ecen689/PRBS_&_PLL_model.pdf)]
+
+![image-20251218222327126](jitter/image-20251218222327126.png)
 
 
 
@@ -220,13 +238,19 @@ Jitter is a key performance parameter. Need to know what matters in each case:
 
 ## Long Term Jitter (LTJ)
 
+> [[https://people.engr.tamu.edu/spalermo/ecen689/PRBS_&_PLL_model.pdf](https://people.engr.tamu.edu/spalermo/ecen689/PRBS_&_PLL_model.pdf)]
+>
+> ***absolute jitter*** is also known as ***long-term jitter***
+>
+> ![image-20251218214812202](jitter/image-20251218214812202.png)
+
 ![image-20230916235647723](jitter/image-20230916235647723.png)
 
 ![image-20230916235709504](jitter/image-20230916235709504.png)
 
+---
 
-
-### measuring LTJ
+***measuring LTJ***
 
 ![image-20230916235033464](jitter/image-20230916235033464.png)
 

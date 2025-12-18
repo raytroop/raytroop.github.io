@@ -367,7 +367,7 @@ legend('wt - Laplace','wt - convolution integral','wt - convolution sum')
 
 
 
-## Transfer function & sampled impulse response
+## Transfer function from sampled impulse response
 
 > continuous-time filter designs to discrete-time designs through techniques such as ***impulse invariance***
 

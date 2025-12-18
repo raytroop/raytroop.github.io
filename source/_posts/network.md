@@ -233,17 +233,13 @@ $$
 
 
 
-## Impulse Response From S-Parameters (channel)
+## Impulse Response from S-Parameters (channel)
 
 > David Banas. *A comparison of different techniques (i.e. - windowing, vector fitting, etc.) for extracting the impulse response from S-parameters.* [[https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main](https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main)]
 >
 > Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 - Lecture 3: Time-Domain Reflectometry & S-Parameter Channel Models [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf)]
 >
 > Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
-
-*TODO* &#128197;
-
-
 
 ![image-20251213095227619](network/image-20251213095227619.png)
 

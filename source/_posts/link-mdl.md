@@ -273,6 +273,93 @@ stem(xir+12, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
 
 
 
+### spalermo's
+
+`repmat`
+
+```matlab
+>> repmat([1,2,3], 3, 1)
+
+ans =
+
+     1     2     3
+     1     2     3
+     1     2     3
+```
+
+
+
+```matlab
+>> reshape(repmat([1,2,3], 3, 1), 1, 3*3)
+
+ans =
+
+     1     1     1     2     2     2     3     3     3
+```
+
+
+
+***Generating an Impulse Response from S-Parameters***
+
+![image-20251219003532513](link-mdl/image-20251219003532513.png)
+
+*impulse response from ifft of interpolated frequency response*
+
+```matlab
+% Generate Random Data
+nt=1e3;         %number of bits
+m=rand(1,nt+1);     %random numbers between 1 and zero, will be quantized later
+m=-1*sign(m-0.5).^2+sign(m-0.5)+1;
+
+
+% TX FIR Equalization Taps
+eq_taps=[1];
+m_fir=filter(eq_taps,1,m);
+
+
+%m_dr=reshape(repmat(m,bit_period,1),1,bit_period*size(m,2));
+m_dr=reshape(repmat(m_fir,bit_period,1),1,bit_period*size(m_fir,2));
+
+data_channel=0.5*conv(sig_ir(:,1),m_dr(1:nt*bit_period));
+```
+
+
+
+![image-20251219010707990](link-mdl/image-20251219010707990.png)
+
+```matlab
+subplot(3,1,1)
+
+FileName = './peters_01_0605_B12_thru.s4p';
+SingleEndedData = read(rfdata.data, FileName);
+Freq = SingleEndedData.Freq;
+DifferentialSparams = s2sdd(SingleEndedData.S_Parameters);
+rfdata.network('Data', DifferentialSparams, 'Freq', Freq);
+H21 = DifferentialSparams(2,1,:);
+
+plot(Freq'*1e-9, abs(H21(:)),'-r', LineWidth=2);
+xlabel('GHz'); ylabel('Mag(H21)'); grid on;
+
+
+subplot(3,1,2)
+load './ir_B12.mat';
+tsample=1e-12;  % Impluse response has 1ps time step
+sample_num=size(ir,1);  
+sig_ir=ir(:,1); 
+
+time=(1:size(sig_ir,1))*1e-12;
+
+plot(time, sig_ir, '-b', LineWidth=2);
+title('Channel Impulse Response (sig_ir)'); grid on;
+
+
+subplot(3,1,3)
+step_resp = cumsum(sig_ir);
+plot(time, step_resp, '-m', LineWidth=2);
+title('Channel Step Response (cumsum(sig_ir)'); grid on;
+
+```
+
 
 
 ## Statistical Eye

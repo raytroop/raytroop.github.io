@@ -361,6 +361,24 @@ title('Channel Step Response (cumsum(sig_ir)'); grid on;
 
 
 
+***plot eye diagram***
+
+![image-20251220001630173](link-mdl/image-20251220001630173.png)
+
+```matlab
+data_channel=0.5*conv(sig_ir(:,1),m_dr(1:nt*bit_period));
+
+j=1;
+offset=144;
+
+for ( i=55:floor(size(data_channel,2) / bit_period)-500)
+    eye_data(:,j) = 2*data_channel(floor((bit_period*(i-1)))+offset: floor((bit_period*(i+1)))+offset);
+    j=j+1;
+end
+```
+
+
+
 ## Statistical Eye
 
 > Sanders, Anthony, Michael Resso and John D'Ambrosia. “Channel Compliance Testing Utilizing Novel Statistical Eye Methodology.” (2004).

@@ -354,10 +354,9 @@ title('Channel Impulse Response (sig_ir)'); grid on;
 
 
 subplot(3,1,3)
-step_resp = cumsum(sig_ir);
+step_resp = cumsum(sig_ir); % Ts factor embedded in sig_ir
 plot(time, step_resp, '-m', LineWidth=2);
 title('Channel Step Response (cumsum(sig_ir)'); grid on;
-
 ```
 
 

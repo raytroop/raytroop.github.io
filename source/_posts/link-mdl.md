@@ -375,7 +375,12 @@ for ( i=55:floor(size(data_channel,2) / bit_period)-500)
     eye_data(:,j) = 2*data_channel(floor((bit_period*(i-1)))+offset: floor((bit_period*(i+1)))+offset);
     j=j+1;
 end
+
+time=0:2*bit_period;
+plot(time,eye_data);
 ```
+
+> If your 2D array represents multiple data series (e.g.*, each column is a separate line series* *sharing the same x-axis values*), the `plot()` function is the most straightforward method.
 
 
 

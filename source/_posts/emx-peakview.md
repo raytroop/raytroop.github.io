@@ -257,123 +257,6 @@ like shunt-peaking, the impedance of $C_o/n$, $L_s$, $r_s$ have resonant peak at
 
 
 
-## differential & single-ended
-
-### DE & SE excitation
-
-> Min-Sun Keel. Design of reliable and energy-efficient high-speed interface circuits. University of Illinois Urbana-Champaign, USA, 2015 [[https://files.core.ac.uk/download/pdf/158312105.pdf](https://files.core.ac.uk/download/pdf/158312105.pdf)]
-
-![image-20251120230342210](emx-peakview/image-20251120230342210.png)
-
-
-### differential impedance
-
-Y parameters to Z parameters
-
-$$\begin{align}
-|Y| &= Y_{11}*Y_{22} - Y_{12}*Y_{22} \\
-\begin{bmatrix}
-Z_{11} & Z_{12}\\ 
-Z_{21} & Z_{22}
-\end{bmatrix}
-&=
-\begin{bmatrix}
-\frac{Y_{22}}{|Y|} & \frac{-Y_{12}}{|Y|}\\ 
-\frac{-Y_{21}}{|Y|} & \frac{Y_{11}}{|Y|}
-\end{bmatrix} 
-\end{align}$$
-
-Then **differential impedance** is 
-$$
-Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}
-$$
-
-![image-20220330234833756](emx-peakview/image-20220330234833756.png)
-
-```bash
-  (define (EMX_differential y11 y12 y21 y22)
-    (letseq ((det y11*y22-y12*y21)
-         (z11 y22/det)
-         (z12 -y12/det)
-         (z21 -y21/det)
-         (z22 y11/det))
-        z11+z22-z12-z21))
-```
-
-
-
-
-> similarly, Z parameters to Y parameters
-> $$
-> \begin{bmatrix}
-> Y_{11} & Y_{12}\\ 
-> Y_{21} & Y_{22}
-> \end{bmatrix}
-> =
-> \begin{bmatrix}
-> \frac{Z_{22}}{|Z|} & \frac{-Z_{12}}{|Z|}\\ 
-> \frac{-Z_{21}}{|Z|} & \frac{Z_{11}}{|Z|}
-> \end{bmatrix}
-> $$
-> where
-> $$
-> |Z| = Z_{11}Z_{22} - Z_{12}Z_{21}
-> $$
->
-
-
-
----
-
-> Inductor EM simulation: 1-port or 2-port? [[https://muehlhaus.com/support/ads-application-notes/inductor-em-ports](https://muehlhaus.com/support/ads-application-notes/inductor-em-ports)]
-
-![image-20251220084731053](emx-peakview/image-20251220084731053.png)
-
-![image-20251220083030590](emx-peakview/image-20251220083030590.png)
-
-![image-20251220084025043](emx-peakview/image-20251220084025043.png)
-
-![image-20251220085006044](emx-peakview/image-20251220085006044.png)
-
-> ![image-20251220084559347](emx-peakview/image-20251220084559347.png)
-
-
-
-## Ports & Ground Reference
-
-> The ground pin confusion in EM transmission line models [[https://muehlhaus.com/support/ads-application-notes/em_line_ground](https://muehlhaus.com/support/ads-application-notes/em_line_ground)]
->
-> Momentum port: global ground or differential? [[https://muehlhaus.com/support/ads-application-notes/momentum-port-global-ground-or-differential](https://muehlhaus.com/support/ads-application-notes/momentum-port-global-ground-or-differential)]
->
-> Effect of ground cutout size on RFIC inductor performance [[https://muehlhaus.com/support/rfic-em-appnotes/inductor-ground-cutout](https://muehlhaus.com/support/rfic-em-appnotes/inductor-ground-cutout)]
->
-> 
-
-
-
-![img](emx-peakview/simple_msl_sub-e1564585450781.jpg)
-
-![image-20251220090704827](emx-peakview/image-20251220090704827.png)
-
-
-
-## dummy metal fill
-
-> 60 GHz on-chip balun transformer: effect of dummy metal fill [[https://muehlhaus.com/support/rfic-em-appnotes/60-ghz-balun-filler-effect](https://muehlhaus.com/support/rfic-em-appnotes/60-ghz-balun-filler-effect)]
-
-*TODO* &#128197;
-
-
-
-
-
-## LVS check
-
-LVS issue for circuits with customized devices
-
-- auCdl: Analog and Microwave CDL, is a netlister used for creating CDL netlist for analog circuits
-
-- auLVS: Analog and Microwave LVS, is used for analog circuit LVS
 
 ## EMX ports
 ### plain labels
@@ -715,10 +598,143 @@ PM, CB2_FC, UBM is in the chip package
 > ![image-20250705233530802](emx-peakview/image-20250705233530802.png)
 
 
+## differential & single-ended
 
-## Tips
+### DE & SE excitation
 
-### Process file
+> Min-Sun Keel. Design of reliable and energy-efficient high-speed interface circuits. University of Illinois Urbana-Champaign, USA, 2015 [[https://files.core.ac.uk/download/pdf/158312105.pdf](https://files.core.ac.uk/download/pdf/158312105.pdf)]
+
+![image-20251120230342210](emx-peakview/image-20251120230342210.png)
+
+
+### differential impedance
+
+Y parameters to Z parameters
+
+$$\begin{align}
+|Y| &= Y_{11}*Y_{22} - Y_{12}*Y_{22} \\
+\begin{bmatrix}
+Z_{11} & Z_{12}\\ 
+Z_{21} & Z_{22}
+\end{bmatrix}
+&=
+\begin{bmatrix}
+\frac{Y_{22}}{|Y|} & \frac{-Y_{12}}{|Y|}\\ 
+\frac{-Y_{21}}{|Y|} & \frac{Y_{11}}{|Y|}
+\end{bmatrix} 
+\end{align}$$
+
+Then **differential impedance** is 
+$$
+Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}
+$$
+
+![image-20220330234833756](emx-peakview/image-20220330234833756.png)
+
+```bash
+  (define (EMX_differential y11 y12 y21 y22)
+    (letseq ((det y11*y22-y12*y21)
+         (z11 y22/det)
+         (z12 -y12/det)
+         (z21 -y21/det)
+         (z22 y11/det))
+        z11+z22-z12-z21))
+```
+
+
+
+
+> similarly, Z parameters to Y parameters
+> $$
+> \begin{bmatrix}
+> Y_{11} & Y_{12}\\ 
+> Y_{21} & Y_{22}
+> \end{bmatrix}
+> =
+> \begin{bmatrix}
+> \frac{Z_{22}}{|Z|} & \frac{-Z_{12}}{|Z|}\\ 
+> \frac{-Z_{21}}{|Z|} & \frac{Z_{11}}{|Z|}
+> \end{bmatrix}
+> $$
+> where
+> $$
+> |Z| = Z_{11}Z_{22} - Z_{12}Z_{21}
+> $$
+>
+
+
+
+---
+
+> Inductor EM simulation: 1-port or 2-port? [[https://muehlhaus.com/support/ads-application-notes/inductor-em-ports](https://muehlhaus.com/support/ads-application-notes/inductor-em-ports)]
+
+![image-20251220084731053](emx-peakview/image-20251220084731053.png)
+
+![image-20251220083030590](emx-peakview/image-20251220083030590.png)
+
+![image-20251220084025043](emx-peakview/image-20251220084025043.png)
+
+![image-20251220085006044](emx-peakview/image-20251220085006044.png)
+
+> ![image-20251220084559347](emx-peakview/image-20251220084559347.png)
+
+
+
+## Ports & Ground Reference
+
+> The ground pin confusion in EM transmission line models [[https://muehlhaus.com/support/ads-application-notes/em_line_ground](https://muehlhaus.com/support/ads-application-notes/em_line_ground)]
+>
+> Momentum port: global ground or differential? [[https://muehlhaus.com/support/ads-application-notes/momentum-port-global-ground-or-differential](https://muehlhaus.com/support/ads-application-notes/momentum-port-global-ground-or-differential)]
+>
+> Effect of ground cutout size on RFIC inductor performance [[https://muehlhaus.com/support/rfic-em-appnotes/inductor-ground-cutout](https://muehlhaus.com/support/rfic-em-appnotes/inductor-ground-cutout)]
+
+
+
+![img](emx-peakview/simple_msl_sub-e1564585450781.jpg)
+
+![image-20251220090704827](emx-peakview/image-20251220090704827.png)
+
+
+
+## dummy metal fill
+
+> 60 GHz on-chip balun transformer: effect of dummy metal fill [[https://muehlhaus.com/support/rfic-em-appnotes/60-ghz-balun-filler-effect](https://muehlhaus.com/support/rfic-em-appnotes/60-ghz-balun-filler-effect)]
+
+*TODO* &#128197;
+
+
+
+## Edge/Area pins in Momentum
+
+> Edge/Area pins in Momentum EM simulation [[https://muehlhaus.com/support/ads-application-notes/edge-area-pins](https://muehlhaus.com/support/ads-application-notes/edge-area-pins)]
+
+For accurate results from EM, the **current** in the model needs to flow in the **physically** correct way, similar to the hardware. With edge/area pins, we can help Momentum to create the physically correct current flow in complex port configurations.
+
+***Edge port with user defined location and size***
+
+![img](emx-peakview/create_edge_pin.png)
+
+
+
+***Area pins with user defined location and size***
+
+> If we manually control the area pin size, Momentum will equally distribute the injected current across that area
+
+![img](emx-peakview/areapin.png)
+
+
+
+## same Pin names in EMX
+
+It remains shrouded in myth
+
+![image-20251220123154767](emx-peakview/image-20251220123154767.png)
+
+
+
+## Setup Tricks
+
+**Process file***
 
 Process file encryption mostly for advanced nodes, like TSMC 16nm Finfet, whose process file is  encrypted.
 
@@ -726,7 +742,7 @@ Process file encryption mostly for advanced nodes, like TSMC 16nm Finfet, whose 
 
 
 
-### GDSviewer has two options
+***GDSviewer has two options***
 
 - EMX: shows the final gds sent to EMX for simulation after it has been processed by EMX
 - Raw: shows the raw gds
@@ -735,7 +751,7 @@ Process file encryption mostly for advanced nodes, like TSMC 16nm Finfet, whose 
 
 
 
-### EMX Accuracy
+***EMX Accuracy***
 
 - Edge mesh: controls layout discretization in the X-Y plane
 
@@ -755,7 +771,7 @@ Ports entered in `Grounds` will cause these nets to be grounded; these ports wil
 
 
 
-### Setup Temperature
+***Setup Temperature***
 
 - EMX: `--temperature=100`
 
@@ -766,11 +782,18 @@ ParaView
 
 
 
-### Paraview & stimulus
+***Paraview & stimulus***
 
 ![image-20251023000524293](emx-peakview/image-20251023000524293.png)
 
+***LVS check***
 
+LVS issue for circuits with customized devices
+
+- auCdl: Analog and Microwave CDL, is a netlister used for creating CDL netlist for analog circuits
+
+- auLVS: Analog and Microwave LVS, is used for analog circuit LVS
+- 
 
 ## reference
 

@@ -1,5 +1,5 @@
 ---
-title: EMX & PeakView
+title: EMX & Momentum
 date: 2022-03-15 00:06:21
 tags:
 categories:
@@ -320,6 +320,50 @@ $$
 > |Z| = Z_{11}Z_{22} - Z_{12}Z_{21}
 > $$
 >
+
+
+
+---
+
+> Inductor EM simulation: 1-port or 2-port? [[https://muehlhaus.com/support/ads-application-notes/inductor-em-ports](https://muehlhaus.com/support/ads-application-notes/inductor-em-ports)]
+
+![image-20251220084731053](emx-peakview/image-20251220084731053.png)
+
+![image-20251220083030590](emx-peakview/image-20251220083030590.png)
+
+![image-20251220084025043](emx-peakview/image-20251220084025043.png)
+
+![image-20251220085006044](emx-peakview/image-20251220085006044.png)
+
+> ![image-20251220084559347](emx-peakview/image-20251220084559347.png)
+
+
+
+## Ports & Ground Reference
+
+> The ground pin confusion in EM transmission line models [[https://muehlhaus.com/support/ads-application-notes/em_line_ground](https://muehlhaus.com/support/ads-application-notes/em_line_ground)]
+>
+> Momentum port: global ground or differential? [[https://muehlhaus.com/support/ads-application-notes/momentum-port-global-ground-or-differential](https://muehlhaus.com/support/ads-application-notes/momentum-port-global-ground-or-differential)]
+>
+> Effect of ground cutout size on RFIC inductor performance [[https://muehlhaus.com/support/rfic-em-appnotes/inductor-ground-cutout](https://muehlhaus.com/support/rfic-em-appnotes/inductor-ground-cutout)]
+>
+> 
+
+
+
+![img](emx-peakview/simple_msl_sub-e1564585450781.jpg)
+
+![image-20251220090704827](emx-peakview/image-20251220090704827.png)
+
+
+
+## dummy metal fill
+
+> 60 GHz on-chip balun transformer: effect of dummy metal fill [[https://muehlhaus.com/support/rfic-em-appnotes/60-ghz-balun-filler-effect](https://muehlhaus.com/support/rfic-em-appnotes/60-ghz-balun-filler-effect)]
+
+*TODO* &#128197;
+
+
 
 
 

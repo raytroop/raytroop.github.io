@@ -273,7 +273,15 @@ stem(xir+12, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
 
 
 
-### spalermo's
+### Sam Palermo's
+
+continuous time filter (channel, ctle); impulse response
+
+digital filter (FFE, DFE): `repmat` by samples per UI 
+
+---
+
+> Sam Palermo. ECEN 720: High-Speed Links Circuits and Systems [[https://people.engr.tamu.edu/spalermo/ecen720.html](https://people.engr.tamu.edu/spalermo/ecen720.html)]
 
 `repmat`
 
@@ -301,7 +309,26 @@ ans =
 
 ***Generating an Impulse Response from S-Parameters***
 
+> ECEN720: High-Speed Links Circuits and Systems Spring 2025 [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf)]
+
 ![image-20251219003532513](link-mdl/image-20251219003532513.png)
+
+> `spline`: Cubic spline data interpolation
+>
+> ![image-20251220171206092](link-mdl/image-20251220171206092.png)
+>
+> ```matlab
+> Hm_ds_interp=spline(fds_m,Hm_ds,f_ds_interp); % Interpolate for FFT point number
+> figure(Name='spline function')
+> plot(fds_m, Hm_ds, '-rs', LineWidth=2)
+> hold on
+> plot(f_ds_interp, Hm_ds_interp, '--bo', LineWidth=2)
+> legend('org', 'interpolated'); grid on
+> ```
+
+
+
+
 
 *impulse response from ifft of interpolated frequency response*
 
@@ -317,7 +344,6 @@ eq_taps=[1];
 m_fir=filter(eq_taps,1,m);
 
 
-%m_dr=reshape(repmat(m,bit_period,1),1,bit_period*size(m,2));
 m_dr=reshape(repmat(m_fir,bit_period,1),1,bit_period*size(m_fir,2));
 
 data_channel=0.5*conv(sig_ir(:,1),m_dr(1:nt*bit_period));
@@ -361,6 +387,15 @@ title('Channel Step Response (cumsum(sig_ir)'); grid on;
 
 
 
+> ```matlab
+> plot(ch1_freqs,20*log10(abs(ch1)),'-b',Freq'*1e-9,20*log10(abs(H21)),'-r');
+> legend('From Impulse Response','Measured');
+> ```
+>
+> ![image-20251220171711739](link-mdl/image-20251220171711739.png)
+
+
+
 ***plot eye diagram***
 
 ![image-20251220001630173](link-mdl/image-20251220001630173.png)
@@ -384,11 +419,108 @@ plot(time,eye_data);
 
 
 
+---
+
+> [[https://people.engr.tamu.edu/spalermo/ecen689/lecture4_ee720_channel_pulse_model.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture4_ee720_channel_pulse_model.pdf)]
+
+![image-20251220204006939](link-mdl/image-20251220204006939.png)
+
+```matlab
+% Construct H matrix
+H(:,1)=sample_values';
+H(size(sample_values,1)+1:size(sample_values,1)+eq_tap_number-1,1)=0;
+for i=2:eq_tap_number
+    H(1:i-1,i)=0;
+    H(i:size(sample_values,1)+i-1,i)=sample_values';
+    H(size(sample_values,1)+i:size(sample_values,1)+eq_tap_number-1,1)=0;
+end;
+
+
+% Construct Y matrix
+Ydes(1:precursor_samples+precursor_number,1)=0;
+Ydes(precursor_samples+precursor_number+1,1)=1;
+Ydes(precursor_samples+precursor_number+2:size(H,1),1)=0;
+
+W=(H'*H)^(-1)*H'*Ydes
+
+Itot=1;
+taps=Itot*W/sum(abs(W));
+```
+
+
+
+***TX FIR Tap Resolution***
+
+![image-20251220205819019](link-mdl/image-20251220205819019.png)
+
+```matlab
+taps_abs=abs(taps);
+taps_sign=sign(taps);
+
+partition=[1/(2*(2^num_bits-1)):1/(2^num_bits-1):1-1/(2*(2^num_bits-1))];
+codebook=[0:1/(2^num_bits-1):1];
+[index,abs_taps_quan]=quantiz(abs(taps),partition,codebook);
+taps_quan=taps_sign'.*abs_taps_quan;
+taps_quan(precursor_number+1)=sign(taps_quan(precursor_number+1))*(1-(sum(abs(taps_quan))-abs(taps_quan(precursor_number+1))));
+```
+
+---
+
+***CTLE impulse response***
+
+Given $h_0(t)*h_1(t) = h_{tot}(t)$, we have
+$$
+T_s h_0(kT_s) * T_sh_1(nT_s) = T_s h_{tot}(kT_s)
+$$
+
+> To use the `filter` function with the `b` coefficients from an FIR filter, use `y = filter(b,1,x)`
+
+
+
+*CTLE response from AC response*
+
+```matlab
+Hk_ext = [Hk conj(Hk(end-1:-1:2))] ;
+
+hn_ext_ifft = real(ifft(Hk_ext, 'symmetric'));
+hn_ext_ifft(1) = (2 * hn_ext_ifft(1));
+%interpolate ifft
+N = length(ctle.f_arr);
+Ts = (1 / (2*fmax));
+t_arr = ((0 : (N-1)) * Ts); Tmax = t_arr(end); %10e-9; 
+treqd = (0 : time_step : Tmax);
+%interpolate step response instead of impulse response
+sr_ifft = cumsum(hn_ext_ifft(1:length(t_arr))); sr_ifft_t = t_arr;
+sr_interp = interp1(sr_ifft_t, sr_ifft, treqd, 'spline');
+ir_interp = diff(sr_interp);
+ir_ctle = ir_interp; clear ir_interp;
+
+%scale by gain adjustment factor
+ir_ctle = (ir_ctle * ctle.gain_adjust_fac);
+ir_out = filter(ir_ctle, 1, ir_in);
+```
+
+
+
+*CTLE response from pole/zero by `tf` & `impulse`*
+
+
+
+
+
+*CTLE response from pole/zero* by digital filter
+
+
+
+
+
+
+
 ## Statistical Eye
 
-> Sanders, Anthony, Michael Resso and John D'Ambrosia. “Channel Compliance Testing Utilizing Novel Statistical Eye Methodology.” (2004).
+> Sanders, Anthony, Michael Resso and John D'Ambrosia. “Channel Compliance Testing Utilizing Novel Statistical Eye Methodology.” (2004) [[https://people.engr.tamu.edu/spalermo/ecen689/stateye_theory_sanders_designcon_2004.pdf](https://people.engr.tamu.edu/spalermo/ecen689/stateye_theory_sanders_designcon_2004.pdf)]
 >
-> X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 29, no. 7, pp. 1370-1378, July 2021, doi: 10.1109/TVLSI.2021.3082208.
+> X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 29, no. 7, pp. 1370-1378, July 2021 [[https://sci-hub.se/10.1109/TVLSI.2021.3082208](https://sci-hub.se/10.1109/TVLSI.2021.3082208)]
 >
 > HSPICE® User Guide: Signal Integrity Modeling and Analysis, Version Q-2020.03, March 2020
 >

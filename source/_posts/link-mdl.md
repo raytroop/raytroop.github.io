@@ -388,7 +388,7 @@ title('Channel Step Response (cumsum(sig_ir)'); grid on;
 >
 > ![image-20251220171711739](link-mdl/image-20251220171711739.png)
 
-
+---
 
 ***plot eye diagram***
 
@@ -423,6 +423,12 @@ plot(time,eye_data);
 
 ```matlab
 % https://people.engr.tamu.edu/spalermo/ecen689/tx_eq.m
+
+precursor_samples=10;
+pulse_response=conv(ir_process,ones(1,bit_period));
+[max_pulse_value,max_pulse_time]=max(pulse_response);
+sample_times=[max_pulse_time-1*precursor_samples*bit_period:bit_period:max_pulse_time+30*bit_period];
+sample_values=pulse_response(sample_times);
 
 % Construct H matrix
 H(:,1)=sample_values';
@@ -557,6 +563,56 @@ A_filt=A_filt/A_filt(1);
 
 ir_out=filter(B_filt,A_filt,ir_in);
 ```
+
+---
+
+***rx dfe***
+
+pseudo linear equalizer
+
+```matlab
+% https://people.engr.tamu.edu/spalermo/ecen689/channel_data_pulse_pda_dfe.m
+
+% Take 10 pre-cursor, cursor, and 90 post-cursor samples
+sample_offset=opt_sample*bit_period;
+for i=1:101
+sample_points(i)=max_data_ch_idx+sample_offset+(i-11)*bit_period;
+end
+sample_values=data_channel(sample_points);
+sample_points=(sample_points-max_data_ch_idx)./bit_period;
+
+channel_delay=max_data_ch_idx-(20*bit_period+1);  % !! 20*bit_period = 2000
+
+% Include DFE Equalization
+dfe_tap_num=2;
+dfe_taps(1:dfe_tap_num)=sample_values(12:12+dfe_tap_num-1);  % h1, h2...
+
+% Note this isn't a strtict DFE implementation - as I am not making a
+% decision on the incoming data.  Rather, I am just using the known data
+% that I transmitted, delay matching this with the channel data, and using 
+% it to subtract the ISI after weighting with the tap values.  But, I think 
+% it is good enough for these simulations.
+m_dfe=filter(dfe_taps,1,m);
+m_dfe_dr=reshape(repmat(m_dfe,bit_period,1),1,bit_period*size(m_dfe,2));
+
+data_channel=data_channel';
+dfe_fb_offset=floor(bit_period/2); % Point at which the DFE taps are subtracted - can be anything from 0 to UI-1*time_step
+data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_offset+size(m_dfe_dr,2)-1)-m_dfe_dr;
+```
+
+
+
+> ![image-20251221152624033](link-mdl/image-20251221152624033.png)
+>
+> ```matlab
+> plot(m_dr, '--', LineWidth=2); hold on
+> plot(data_channel(channel_delay:end), '--', LineWidth=2)
+> hold on
+> plot(data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_offset+size(m_dfe_dr,2)-1), '--', LineWidth=2)
+> plot(m_dfe_dr, LineWidth=2); plot(data_channel_dfe, LineWidth=2)
+> xlim([1000, 3000]); ylim([-0.05, 0.3]); xlabel('samples'); grid on
+> legend('lshift channel\_delay', 'lshift channel\_delay + 1/2UI', 'dfe filter', 'after dfe')
+> ```
 
 
 

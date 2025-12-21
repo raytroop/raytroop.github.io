@@ -333,6 +333,8 @@ ans =
 *impulse response from ifft of interpolated frequency response*
 
 ```matlab
+% https://people.engr.tamu.edu/spalermo/ecen689/xfr_fn_to_imp.m
+
 % Generate Random Data
 nt=1e3;         %number of bits
 m=rand(1,nt+1);     %random numbers between 1 and zero, will be quantized later
@@ -401,6 +403,8 @@ title('Channel Step Response (cumsum(sig_ir)'); grid on;
 ![image-20251220001630173](link-mdl/image-20251220001630173.png)
 
 ```matlab
+% https://people.engr.tamu.edu/spalermo/ecen689/channel_data.m
+
 data_channel=0.5*conv(sig_ir(:,1),m_dr(1:nt*bit_period));
 
 j=1;
@@ -426,6 +430,8 @@ plot(time,eye_data);
 ![image-20251220204006939](link-mdl/image-20251220204006939.png)
 
 ```matlab
+% https://people.engr.tamu.edu/spalermo/ecen689/tx_eq.m
+
 % Construct H matrix
 H(:,1)=sample_values';
 H(size(sample_values,1)+1:size(sample_values,1)+eq_tap_number-1,1)=0;
@@ -454,6 +460,8 @@ taps=Itot*W/sum(abs(W));
 ![image-20251220205819019](link-mdl/image-20251220205819019.png)
 
 ```matlab
+% https://people.engr.tamu.edu/spalermo/ecen689/tx_eq.m
+
 taps_abs=abs(taps);
 taps_sign=sign(taps);
 
@@ -466,7 +474,7 @@ taps_quan(precursor_number+1)=sign(taps_quan(precursor_number+1))*(1-(sum(abs(ta
 
 ---
 
-***CTLE impulse response***
+***CTLE modeling by impulse response***
 
 Given two impulse response $h_0(t)$, $h_1(t)$ and $h_0(t)*h_1(t) = h_{tot}(t)$, we have
 $$
@@ -479,7 +487,11 @@ $$
 
 ***CTLE response from frequency response using*** `ifft`
 
+> data-driven frequency table
+
 ```matlab
+% https://people.engr.tamu.edu/spalermo/ecen689/gen_ctle.m
+
 Hk_ext = [Hk conj(Hk(end-1:-1:2))] ;
 
 hn_ext_ifft = real(ifft(Hk_ext, 'symmetric'));
@@ -512,11 +524,47 @@ ir = Ts*impulse(H21, tsamples)  % scaling by Ts is necessary
 
 
 
-***CTLE response from pole/zero using digital filter***
+***CTLE response from pole/zero using*** `bilinear` ***discretization***
+
+> analytical pole/zero transfer function, [[Google AI Mode](https://share.google/aimode/J1uwT2df4YZxwk2f9)]
+
+![image-20251221091355318](link-mdl/image-20251221091355318.png)
+
+![image-20251221093230806](link-mdl/image-20251221093230806.png)
+
+```matlab
+% https://people.engr.tamu.edu/spalermo/ecen689/gen_ctle.m
+
+A_dc=max(A_dc,1e-3);
+zeq=max(zeq,1);
+peq=max(peq,1);
+
+gbw_rad=gbw*2*pi;
+zeq_rad=zeq*2*pi;
+peq_rad=peq*2*pi;
+
+ppar=(gbw_rad*zeq_rad)/(A_dc*peq_rad);
+
+a_tf=A_dc*peq_rad*ppar;
+b_tf=A_dc*peq_rad*ppar*zeq_rad;
+c_tf=zeq_rad;
+d_tf=(peq_rad+ppar)*zeq_rad;
+e_tf=peq_rad*ppar*zeq_rad;
 
 
+B_filt=[2*a_tf/time_step+b_tf;
+    2*b_tf;
+    b_tf-2*a_tf/time_step]';
 
+A_filt=[4*c_tf/time_step^2+2*d_tf/time_step+e_tf;
+    2*e_tf-8*c_tf/time_step^2;
+    4*c_tf/time_step^2-2*d_tf/time_step+e_tf]';
 
+B_filt=B_filt/A_filt(1);
+A_filt=A_filt/A_filt(1);
+
+ir_out=filter(B_filt,A_filt,ir_in);
+```
 
 
 

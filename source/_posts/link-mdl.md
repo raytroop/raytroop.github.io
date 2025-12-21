@@ -470,7 +470,7 @@ taps_quan(precursor_number+1)=sign(taps_quan(precursor_number+1))*(1-(sum(abs(ta
 
 Given $h_0(t)*h_1(t) = h_{tot}(t)$, we have
 $$
-T_s h_0(kT_s) * T_sh_1(nT_s) = T_s h_{tot}(kT_s)
+T_s h_0(kT_s) * T_sh_1(kT_s) = T_s h_{tot}(kT_s)
 $$
 
 > To use the `filter` function with the `b` coefficients from an FIR filter, use `y = filter(b,1,x)`

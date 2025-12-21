@@ -468,7 +468,7 @@ taps_quan(precursor_number+1)=sign(taps_quan(precursor_number+1))*(1-(sum(abs(ta
 
 ***CTLE impulse response***
 
-Given $h_0(t)*h_1(t) = h_{tot}(t)$, we have
+Given two impulse response $h_0(t)$, $h_1(t)$ and $h_0(t)*h_1(t) = h_{tot}(t)$, we have
 $$
 T_s h_0(kT_s) * T_sh_1(kT_s) = T_s h_{tot}(kT_s)
 $$
@@ -477,7 +477,7 @@ $$
 
 
 
-*CTLE response from AC response*
+***CTLE response from frequency response using*** `ifft`
 
 ```matlab
 Hk_ext = [Hk conj(Hk(end-1:-1:2))] ;
@@ -502,13 +502,17 @@ ir_out = filter(ir_ctle, 1, ir_in);
 
 
 
-*CTLE response from pole/zero by `tf` & `impulse`*
+***CTLE response from pole/zero using** `tf` & `impulse`*
+
+```matlab
+H21 = tf();
+tsamples = 0:Ts:nUI
+ir = Ts*impulse(H21, tsamples)  % scaling by Ts is necessary
+```
 
 
 
-
-
-*CTLE response from pole/zero* by digital filter
+***CTLE response from pole/zero using digital filter***
 
 
 

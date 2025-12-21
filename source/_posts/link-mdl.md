@@ -265,14 +265,6 @@ stem(xir+12, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
 
 
 
-### DaVE
-
-> DaVE — tools regarding on analog modeling, validation, and generation, [[https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)]
-
-*TODO* &#128197;
-
-
-
 ### Sam Palermo's
 
 continuous time filter (channel, ctle); impulse response
@@ -565,6 +557,14 @@ A_filt=A_filt/A_filt(1);
 
 ir_out=filter(B_filt,A_filt,ir_in);
 ```
+
+
+
+### DaVE
+
+> DaVE — tools regarding on analog modeling, validation, and generation, [[https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)]
+
+*TODO* &#128197;
 
 
 

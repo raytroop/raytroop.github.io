@@ -1008,3 +1008,5 @@ Iain. What is Trellis Coding? [[https://youtu.be/rnjy4_gXLAg](https://youtu.be/r
 —. Decoding Convolutional Codes: The Viterbi Algorithm Explained [[https://youtu.be/IJE94FhyygM](https://youtu.be/IJE94FhyygM)]
 
 Noman Hai, Synopsys, Canada CASS Talks 2025 - May 2, 2025: High-speed Wireline Interconnects: Design Challenges and Innovations in 224G SerDes [[https://www.youtube.com/live/wHNOlxHFTzY](https://www.youtube.com/live/wHNOlxHFTzY)]
+
+T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits* [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11311714)]

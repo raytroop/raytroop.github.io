@@ -704,6 +704,16 @@ CPTSD幸存者成年并离开创伤性家庭后往往没有意识到自己的思
 
 
 ```
+But you have to have absolute confidence. Keep right on going, and nothing will happen. 
+
+— Richard Feynman
+```
+
+
+
+
+
+```
 "Self-belief does not necessarily ensure success, but self-disbelief assuredly spawns failure." - Albert Bandura
 ```
 
@@ -729,6 +739,21 @@ kiki的魔法扫把:
 ---
 63 【总是想太多该怎么办？ - 武志红心理学 | 小红书 - 你的生活指南】 😆 hzQhpUlSu6Jj0wI 😆 https://www.xiaohongshu.com/discovery/item/68231bee0000000023000721?source=webshare&xhsshare=pc_web&xsec_token=CB2RaEb07PC6ahhMcvuaEYsE-RXYf4Krc4g73Tum0TQKk=&xsec_source=pc_share
 ```
+
+
+
+```
+放弃追求安全感。
+
+我们穷人家的孩子，成长太艰难，成长的过程中丢失了很多很多的安全感，以至于后来穷尽一生想要去治愈那些。
+恰恰缺的是接受它空的能力，错过了那个机缘，其实再多也填不上了，不如就让它空着，让风吹过，让阳光照进来
+
+---
+穷人家的子女最缺什么? - 猛虎蔷薇的回答 - 知乎
+https://www.zhihu.com/question/624647932/answer/1972274098236294614
+```
+
+
 
 
 

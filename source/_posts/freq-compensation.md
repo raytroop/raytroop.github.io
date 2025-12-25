@@ -52,7 +52,7 @@ I_\text{c,out}  &= (v_o - v_i)sC_c \\
 & = v_o s (1+\frac{1}{A_v})C_c
 \end{align}$$
 
-we get $C_\text{out,eq}= (1+\frac{1}{A_v})C_c\simeq C_c$
+we get $C_\text{out,eq}= (1+\frac{1}{A_v})C_c\approx C_c$
 
 
 
@@ -64,7 +64,7 @@ In addition to *lowering* the required capacitor value, Miller compensation enta
 
 ![image-20230103223438823](freq-compensation/image-20230103223438823.png)
 
-The 1st stage is replaced with Thevenin equivalent circuit , $V_i \cong V_i \cdot g_{m1}R_{o1}$
+The 1st stage is replaced with Thevenin equivalent circuit , $V_i \approx V_i \cdot g_{m1}R_{o1}$
 
 $$\begin{align}
 \frac{V_i-V_{o1}}{R_{o1}} &= V_{o1}\cdot sC_{o1}+(V_{o1}-V_o)\cdot sC_c \\
@@ -216,12 +216,12 @@ The poles can be deduced
 $$\begin{align}
 \omega_1 &= \frac{1}{R_{o1}\cdot g_{m2}R_{o2}C_c} \\
 \omega_2 &= \frac{1}{1+g_{m2}R_{sw}}\cdot \frac{g_{m2}}{C_L} \\
-&= \frac{1}{(gm_2^{-1}+R_{sw})C_L}
+&= \frac{1}{(g_{m2}^{-1}+R_{sw})C_L}
 \end{align}$$
 
-The pole $\omega_2=\frac{1}{gm_2^{-1}C_L}$ is changed to $\omega_2=\frac{1}{(gm_2^{-1}+R_{sw})C_L}$
+The pole $\omega_2=\frac{1}{g_{m2}^{-1}C_L}$ is changed to $\omega_2=\frac{1}{(g_{m2}^{-1}+R_{sw})C_L}$
 
-> In order to cancell $\omega_2$ with $\omega_z$, $R_c$ shall be increased
+> In order to cancel $\omega_2$ with $\omega_z$, $R_c$ shall be increased
 
 $$
 R_{eq}=g_{m2}^{-1}+R_{sw}
@@ -319,7 +319,7 @@ $$\begin{align}
 
 ### Exercise of 2-stage opamp
 
-![image-20230105001747174](freq-compensation/image-20230105001747174.png)
+![image-20251225214656154](freq-compensation/image-20251225214656154.png)
 
 ![image-20230105001758050](freq-compensation/image-20230105001758050.png)
 

@@ -25,7 +25,7 @@ A **bleeding resistor** (or a dedicated bleeding current source) is typically us
 
 **resistor**: affect both *DC* and *AC (small signal)*
 
-**current source**: affect *DC* bias only (assuming infinite output impedance of current source)
+**current source**: affect *DC* bias only (*assuming infinite output impedance of current source*)
 
 
 

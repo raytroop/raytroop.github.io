@@ -17,6 +17,18 @@ mathjax: true
 
 
 
+## bleeding current
+
+A **bleeding resistor** (or a dedicated bleeding current source) is typically used in a Low Dropout (LDO) voltage regulator or a power supply circuit to ensure **stability** and proper operation under **light load** or no-load conditions [[Google AI Mode](https://share.google/aimode/ZDx9KGSLxmKukXDEK)]
+
+![image-20251226233527086](ldo/image-20251226233527086.png)
+
+**resistor**: affect both *DC* and *AC (small signal)*
+
+**current source**: affect *DC* bias only (assuming infinite output impedance of current source)
+
+
+
 ## Kelvin connection
 
 > Kelvin connection in IC design [[https://analoghub.ie/category/Circuits/article/kelvinConnection](https://analoghub.ie/category/Circuits/article/kelvinConnection)]

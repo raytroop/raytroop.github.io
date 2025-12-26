@@ -616,9 +616,27 @@ data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_o
 
 
 
+### pyBERT
+
+> David Banas. pyBERT: Free software for signal-integrity analysis [[https://github.com/capn-freako/PyBERT](https://github.com/capn-freako/PyBERT)], [[intro](https://youtu.be/OOl5SCQZY8I?)]
+>
+> —. Free yourself from IBIS-AMI models with PyBERT [[https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/](https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/)]
+
+*TODO* &#128197;
+
+
+
+### PyChOpMarg
+
+> David Banas. Python implementation of COM, as per IEEE 802.3-22 Annex 93A. [[https://github.com/capn-freako/PyChOpMarg](https://github.com/capn-freako/PyChOpMarg)] 
+
+*TODO* &#128197;
+
+
+
 ### DaVE
 
-> DaVE — tools regarding on analog modeling, validation, and generation, [[https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)]
+> Byongchan Lim. DaVE — tools regarding on analog modeling, validation, and generation, [[https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)]
 
 *TODO* &#128197;
 

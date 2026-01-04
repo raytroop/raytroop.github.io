@@ -308,11 +308,11 @@ which can be reduced as below
 
 $$\begin{align}
 \omega_2 &= \frac{R_{o1}C_c\cdot g_{m2}R_{o2}+R_{o2}(C_c+C_L)+R_{o1}(C_{o1}+C_c)}{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)} \\
-&= \frac{R_{o1}C_c\cdot g_{m2}R_{o2}}{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)} \\
-&= \frac{C_c\cdot g_{m2}}{C_cC_{o1}+C_LC_{o1}+C_LC_c} \\
-&= \frac{g_{m2}}{C_{o1}+C_L\frac{C_{o1}}{C_c}+C_L} \\
-&= \frac{g_{m2}}{C_L\frac{C_{o1}}{C_c}+C_L} \\
-&= \frac{g_{m2}}{C_L} \cdot \frac{1}{1+\frac{C_{o1}}{C_c}}
+&= \frac{R_{o1}C_c\cdot g_{m2}R_{o2}}{R_{o1}R_{o2}(C_cC_{o1}+C_LC_{o1}+C_LC_c)}
+= \frac{C_c\cdot g_{m2}}{C_cC_{o1}+C_LC_{o1}+C_LC_c} \\
+&= \frac{g_{m2}}{C_{o1}+C_L\frac{C_{o1}}{C_c}+C_L}
+= \frac{g_{m2}}{C_L\frac{C_{o1}}{C_c}+C_L}
+= \frac{g_{m2}}{C_L} \cdot \frac{1}{1+\frac{C_{o1}}{C_c}}
 \end{align}$$
 
 ![image-20230129221424763](freq-compensation/image-20230129221424763.png)
@@ -343,9 +343,9 @@ $$\begin{align}
 
 
 
-## Cascode Compensation
+## Ahuja Compensation
 
-This ***cascode compensation*** topology is popularly known as ***ahuja compensation***
+This ***Ahuja compensation*** topology is popularly known as ***cascode compensation***
 
 The cause of the positive zero is the *feedforward current through $C_m$*.
 
@@ -355,7 +355,17 @@ To abolish this zero, we have to cut the feedforward path and create a unidirect
 
 2. Another approach uses a current buffer cascode to pass the small-signal feedback current but cut the feedforward current
 
-> People name this approach after the author *Ahuja*
+> [[https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf](https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf)]
+>
+> ![image-20260105010247599](freq-compensation/image-20260105010247599.png)
+>
+> 王小桃带你读文献. Cascode补偿前传—Ahuja补偿 Ahuja Compensation [[https://zhuanlan.zhihu.com/p/1904126782900245880](https://zhuanlan.zhihu.com/p/1904126782900245880)]
+>
+> —. 两级运放的米勒补偿与Cascode米勒补偿  [[https://zhuanlan.zhihu.com/p/10217022358](https://zhuanlan.zhihu.com/p/10217022358)]
+>
+> ![image-20260105010531273](freq-compensation/image-20260105010531273.png)
+
+
 
 
 The benefits of *Ahuja* compensation over Miller compensation are severa

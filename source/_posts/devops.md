@@ -6,6 +6,32 @@ categories:
 - devops
 ---
 
+## LSF (Platform Load Sharing Facility)
+
+`bjobs`: Displaying Job Status
+
+`bkill`: cancels pending batch jobs and sends signals to running jobs
+
+`bhosts`: displays hosts and their static and dynamic resources
+
+`busers`: displays information about the user who runs the command
+
+
+
+## Module System
+
+`module avail`: Lists the modules currently available to load on the system
+
+`module list`: Lists the modules currently loaded in the user environment.
+
+`module load|add`: This **loads** the requested module into the active environment
+
+`module purge`: To clear **all** modules
+
+`module rm|unload`: To unload **a** module
+
+`module switch|swap`: To change the version of a loaded software module
+
 
 
 ## MATLAB Win10 Unable to open the requested feature. Error code: -202

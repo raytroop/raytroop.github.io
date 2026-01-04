@@ -211,6 +211,8 @@ Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
 ## T-Coil Peaking
 
 > Jri Lee. ISSCC 2009 Tutorial. CMOS Circuit Techniques for High Speed Wireline Transceivers [[http://cc.ee.ntu.edu.tw/~jrilee/course/2009_Tutorial_10.pdf](http://cc.ee.ntu.edu.tw/~jrilee/course/2009_Tutorial_10.pdf)]
+>
+> CC Chen. Why SerDes Needs a Rule of Thumb for T-Coil Design? [[https://youtu.be/RIQLYQG2u0A](https://youtu.be/RIQLYQG2u0A)]
 
 ***Capacitor Splitting*** + ***Magnetic Coupling of a transformer***
 

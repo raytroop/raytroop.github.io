@@ -375,9 +375,9 @@ To assess the design solutions, a ***distributed DUT model***, as presented in F
 >
 > Protect against ESD by ensuring latch-up guard rings [[https://semiwiki.com/eda/362551-protect-against-esd-by-ensuring-latch-up-guard-rings/](https://semiwiki.com/eda/362551-protect-against-esd-by-ensuring-latch-up-guard-rings/)]
 
+---
 
-
-#### Guard Rings
+***Guard Rings***
 
 One important technique is the use of ***guard rings***, the *heavily doped regions surrounding sensitive components* on the IC to *divert excess current away* from vulnerable areas, thereby reducing the likelihood of latch-up occurrence
 
@@ -441,6 +441,33 @@ to *isolate different regions* of the IC, minimizing unwanted electrical interac
 *OD injector*
 
 ![image-20250615104009056](esd-latchup/image-20250615104009056.png)
+
+
+
+## Latch up DRC
+
+> 藍色天空. 版图Latch up DRC规则解读 [[https://www.kaixinspace.com/latch-up-rule/](https://www.kaixinspace.com/latch-up-rule/)]
+>
+> —. 一文搞懂闩锁效应（Latch up）[[https://www.kaixinspace.com/latch-up/](https://www.kaixinspace.com/latch-up/)]
+
+### RES200
+
+![img](esd-latchup/LP05.jpg)
+
+![image-20260105213709019](esd-latchup/image-20260105213709019.png)
+
+### LUP.1
+
+**检查对象**：被视为OD injector的部分。
+
+**检查内容**：
+
+（1）任何的N+ OD都必须被P+ guardring围绕；或者任何P+ OD都必须被N+ guardring围绕；
+
+（2）额外再增加N+ STRAP 和 P+ STRAP（如下图所示），作为更进一步预防。（DRC推荐做法）（LUP.9g）
+
+![image-20260105215712573](esd-latchup/image-20260105215712573.png)
+
 
 
 ## Diode in ESD Protection
@@ -1051,8 +1078,3 @@ Y. Li, M. Miao and R. Gauthier, "ESD Protection Design Overview in Advanced SOI 
 
 S. Kim *et al*., "Technology Scaling of ESD Devices in State of the Art FinFET Technologies," *2020 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2020
 
----
-
-藍色天空. 版图Latch up DRC规则解读 [[https://www.kaixinspace.com/latch-up-rule/](https://www.kaixinspace.com/latch-up-rule/)]
-
-—. 一文搞懂闩锁效应（Latch up）[[https://www.kaixinspace.com/latch-up/](https://www.kaixinspace.com/latch-up/)]

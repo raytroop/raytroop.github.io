@@ -34,6 +34,23 @@ categories:
 
 
 
+## unlock "secured" (read-protected) PDF
+
+```python
+# Source - https://stackoverflow.com/a/63422342
+# Posted by Satish Dubey, modified by community. See post 'Timeline' for change history
+# Retrieved 2026-01-05, License - CC BY-SA 4.0
+
+import pikepdf
+
+pdf = pikepdf.open('filepath', allow_overwriting_input=True)
+pdf.save('filepath')
+```
+
+
+
+
+
 ## MATLAB Win10 Unable to open the requested feature. Error code: -202
 
 clear `AppData\Roaming\MathWorks\MATLAB`

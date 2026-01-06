@@ -316,8 +316,16 @@ To assess the design solutions, a ***distributed DUT model***, as presented in F
 > Calibre PERC Catalog Test-Cases & Common Examples Version 2.0
 >
 > K. -H. Meng, M. Khazhinsky and J. C. Smith, "Effective ESD Design Through PERC Programming," *2023 45th Annual EOS/ESD Symposium (EOS/ESD)*, Riverside, CA, USA, 2023
+>
+> What is Programmable Electrical Rules Checking? [[https://www.synopsys.com/glossary/what-is-programmable-electrical-rules-checking.html](https://www.synopsys.com/glossary/what-is-programmable-electrical-rules-checking.html)]
+>
+> Dina Medhat. Programmable Electrical Rule Checking (PERC) [[pdf](https://site.eet-china.com/webinar/pdf/Mentor0523_Programmable%20Electrical%20Rule%20Checking%20(PERC).pdf)]
 
+Programmable Electrical Rules Checking (PERC) is a method for checking reliability issues of integrated circuit (IC) designs that cannot be checked with design rule checking (DRC) or layout versus schematic (LVS).
 
+![image-20260106222314563](esd-latchup/image-20260106222314563.png)
+
+![image-20260106222459171](esd-latchup/image-20260106222459171.png)
 
 - CD: current density checks
 
@@ -326,12 +334,6 @@ To assess the design solutions, a ***distributed DUT model***, as presented in F
 - LDL: logic driven layout checks, latch up related
 
 - TOPO: topology, circuit connection and device size checks
-
-> database
->
-> - CD, P2P, LDL : dfmdb
->
-> - TOPO: svdb
 
 
 

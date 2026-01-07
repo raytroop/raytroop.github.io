@@ -598,7 +598,9 @@ PM, CB2_FC, UBM is in the chip package
 > ![image-20250705233530802](emx-peakview/image-20250705233530802.png)
 
 
-## differential & single-ended
+## Mixed-Mode Z/Y-Parameters
+
+> Mixed-Mode Y/Z-Parameters [[http://zeptoblog.com/2024/03/09/mixed-mode-yz-parameters.html](http://zeptoblog.com/2024/03/09/mixed-mode-yz-parameters.html)]
 
 ### DE & SE excitation
 

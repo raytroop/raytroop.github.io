@@ -63,7 +63,7 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 
 
-## open-loop PSRR analysis method
+## Open-Loop PSRR
 
 > Chen, Feng & Lu, Yasu & Mok, Philip. (2022). Transfer Function Analysis of the Power Supply Rejection Ratio of Low-Dropout Regulators and the Feed-Forward Ripple Cancellation Scheme. IEEE Transactions on Circuits and Systems I: Regular Papers. [[https://sci-hub.se/10.1109/TCSI.2022.3167860](https://sci-hub.se/10.1109/TCSI.2022.3167860)]
 
@@ -84,6 +84,8 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 
 ---
+
+> HW #3 - "Precision Low-Dropout Regulators" Online Course (2025) - Prof. Yan Lu (Tsinghua University) [[https://youtu.be/LXX1Xuhv2kI](https://youtu.be/LXX1Xuhv2kI)]
 
 ![image-20251005093247027](ldo/image-20251005093247027.png)
 

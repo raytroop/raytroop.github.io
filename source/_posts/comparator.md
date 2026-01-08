@@ -19,7 +19,9 @@ mathjax: true
 
 
 
-### sampling (amplification) phase
+---
+
+***sampling (amplification) phase***
 
 ![image-20250526195656447](comparator/image-20250526195656447.png)
 
@@ -320,3 +322,5 @@ CHUNG-CHUN (CC) CHEN. Why A Dedicated Noise Analysis for A Strong-arm Latch / Co
 Tony Chan Carusone,. 28 Comparator Specs and Characterization [[https://youtu.be/mRfWM1bpr3k](https://youtu.be/mRfWM1bpr3k)]
 
 Prof. Seung-Tak Ryu (KAIST) "Advanced ADC Design Techniques" Online Course (2022) : Dynamic Latch  [[https://youtu.be/zE1ZdG_XzWk](https://youtu.be/zE1ZdG_XzWk)]
+
+IC宇宙成长记. 动态比较器噪声仿真 [[link](https://mp.weixin.qq.com/s?__biz=MzI5NDcwMzExOA==&mid=2247483704&idx=1&sn=4ae760052a00dc34c47b9aa11f325079&chksm=ec5f9859db28114f0888c416d9174fb729e3cb2cb66fc6d46a6a1e1f2917e987d9ef236fae19&sessionid=1605488655&scene=126&clicktime=1605488677&enterid=1605488677&ascene=3&devicetype=android-28&version=2700143b&nettype=ctnet&abtest_cookie=AAACAA%3D%3D&lang=zh_CN&exportkey=A1ESsvtPcAUs1em6eJwWw3k%3D&pass_ticket=6Hg0VqBa8ZQix3Q%2FJBEk%2Br30Z7W8kuukON27r53GR%2FjyafkmzjqtGXloaB%2FNRIAt&wx_header=1&poc_token=HMm3X2mjIAgmEtMvZ7HEV4uF-pE-TOamUZZV66Kl)]

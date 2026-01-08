@@ -47,6 +47,9 @@ Using type B amplifier to drive the NMOS power stage will enhance the NMOS’s P
 
 
 
+
+
+
 ## PSRR (Power Supply Rejection Ratio)
 
 A good PSRR is important when an LDO is used as a sub-regulator in cascade with a switching regulator
@@ -57,9 +60,20 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 
 
-
-
 > The LDO would need to have a sufficiently high rejection at the switching frequency of the switching converter to filter out the ripples at that frequency
+
+
+
+## Mid-Frequency PSRR
+
+![image-20260108214706998](ldo/image-20260108214706998.png)
+
+![image-20260108215117646](ldo/image-20260108215117646.png)
+
+## High frequency PSRR
+
+![high-psrr.drawio](ldo/high-psrr.drawio.svg)
+
 
 
 
@@ -199,7 +213,6 @@ $$
 
 ![image-20240726205738664](ldo/image-20240726205738664.png)
 
----
 
 
 ## PSRR @Vgate
@@ -228,12 +241,6 @@ $$
 $$
 
 > Due to closed loop, $V_g$ and $V_o$ is **not** source follower
-
-
-
-## High frequency PSRR
-
-![high-psrr.drawio](ldo/high-psrr.drawio.svg)
 
 
 

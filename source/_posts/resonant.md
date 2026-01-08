@@ -18,6 +18,16 @@ In a series resonant circuit, the impedance of the circuit reaches its minimum v
 
 ![image-20251027213420942](resonant/image-20251027213420942.png)
 
+---
+
+![image-20260108233832631](resonant/image-20260108233832631.png)
+
+> ***antiresonance***
+>
+> ![image-20260108234008061](resonant/image-20260108234008061.png)
+
+
+
 ## Resonant Frequency
 
 > $\zeta \lt 1$: ***Complex-Conjugate Poles***, but not *resonant peak*
@@ -225,12 +235,6 @@ The SRF of an inductor is the frequency at which the parasitic capacitance of th
 
 
 
-## antiresonance
-
-*TODO* &#128197;
-
-
-
 ## reference
 
 Hossein Hashemi, RF Circuits, [[https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN](https://youtu.be/0f3yZMvD2Jg?si=2c1Q4y6WJq8Jj8oN)]
@@ -242,3 +246,5 @@ J. Nako, G. Tsirimokou, C. Psychalinos and A. S. Elwakil, "Approximation of Firs
 How to generate **complex poles without inductor**? [[https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/](https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/)]
 
 Visvesh Sathe. Resonant Clock Design for a Power-efficient, High-volume x86 -64 Microprocessor [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_05_Sathe.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_05_Sathe.pdf)]
+
+Pozar, David M. *Microwave Engineering*. 4th ed. Wiley, 2012. [[pdf](https://hajaress.wordpress.com/wp-content/uploads/2019/09/microwave_engineering_david_m_pozar_4ed_wiley_2012.pdf)]

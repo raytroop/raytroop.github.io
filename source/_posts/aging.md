@@ -250,13 +250,15 @@ The figure below illustrates the waveform-dependent nature of these mechanisms �
 
 
 
-## MOSRA
+## aging model
+
+### MOSRA
 
 MOSRA is a 2-step simulation: 1) Age computation, 2) Post-age analysis
 
 
 
-## TMI
+### TMI
 
 BTI recovery effect **NOT** included for N7
 
@@ -366,11 +368,10 @@ W. -K. Lee et al., "Unifying self-heating and aging simulations with TMI2," 2014
 Aging and Self-Heating in FinFETs - Breakfast Bytes - Cadence Blogs - Cadence Community [https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/aging-and-self-heating](https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/aging-and-self-heating)
 
 Article (20482350) Title: Measure the Impact of Aging in Spectre Technology
-URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009ESBFUA4
 
 Karimi, Naghmeh, Thorben Moos and Amir Moradi. “Exploring the Effect of Device Aging on Static Power Analysis Attacks.” IACR Trans. Cryptogr. Hardw. Embed. Syst. 2019 (2019): 233-256.[[link](https://pdfs.semanticscholar.org/b0f8/720a2b51a479f4a711bec4b47fdd50f29e2d.pdf)]
 
 Self-Heating Issues Spread [https://semiengineering.com/self-heating-issues-spread/](https://semiengineering.com/self-heating-issues-spread/)
 
-Y. Zhao and Y. Qu, "Impact of Self-Heating Effect on Transistor Characterization and Reliability Issues in Sub-10 nm Technology Nodes," in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836, 2019, doi: 10.1109/JEDS.2019.2911085.
+Y. Zhao and Y. Qu, "Impact of Self-Heating Effect on Transistor Characterization and Reliability Issues in Sub-10 nm Technology Nodes," in IEEE Journal of the Electron Devices Society, vol. 7, pp. 829-836, 2019 [[https://sci-hub.se/10.1109/JEDS.2019.2911085](https://sci-hub.se/10.1109/JEDS.2019.2911085)]
 

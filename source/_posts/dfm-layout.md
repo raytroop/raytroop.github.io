@@ -128,6 +128,14 @@ Cu-pillar bumping is a next-generation flip chip interconnection between chip & 
 
 
 
+## VDR (via rail)
+
+> TSMC Ltd.  US12199034B2 Via rail structure [[https://patents.google.com/patent/US12199034B2](https://patents.google.com/patent/US12199034B2)]
+
+*TODO* &#128197;
+
+
+
 ## Why Your Symmetric Layouts Are Showing Mismatches in SPICE Simulations
 
 > [[https://www.ansys.com/blog/symmetric-layouts-showing-mismatches-spice-simulations](https://www.ansys.com/blog/symmetric-layouts-showing-mismatches-spice-simulations)]

@@ -44,33 +44,55 @@ The most accurate method to calculate the degradation of transistors is the SPIC
 
 
 
-## Aging & SHE in FinFET
+## Self-Heating Effect (SHE)
+
+***Self-heating effect (SHE)*** is composed of ***FEOL self-heat*** and ***BEOL self-heat***, both contribute to the $\Delta T$
+
+![image-20260110001356287](aging/image-20260110001356287.png)
+
+
+
+![image-20260110004407012](aging/image-20260110004407012.png)
+
+### aging w/i SHE
 
 ![image-20230513215602865](aging/image-20230513215602865.png)
 
 
 
-## SHE
-
-![image-20221214001912093](aging/image-20221214001912093.png)
-
-
-
-![image-20230513110032603](aging/image-20230513110032603.png)
-
-
-
-![image-20221214001940656](aging/image-20221214001940656.png)
-
-
-
-### Self-Heating & EM
+### EM w/i SHE
 
 ![image-20230513220047241](aging/image-20230513220047241.png)
 
+![image-20260110001259826](aging/image-20260110001259826.png)
 
 
-### Heat Sink (HS)
+
+---
+
+> Junjie Chen, Keqing Ouyang ZTE SANECHIPS. Challenges and Solutions of PI Signoff for Next Generation Large Scale Chips with TSMC 7nm Process Technology [[pdf](https://hmediastorageansi.blob.core.chinacloudapi.cn/t-1-resource/9230e645-080d-d0f2-3656-b1a47ffed08f.pdf)]
+
+![image-20260110010115827](aging/image-20260110010115827.png)
+
+---
+
+
+
+###  Thermal coupling
+
+> Jae-Gyung Ahn Oct 3rd 2019 Xlinx. Design For Thermal Reliability in 7nm [[https://www.ieee-edps.com/archives/2019/c/0300ahn.pdf](https://www.ieee-edps.com/archives/2019/c/0300ahn.pdf)]
+>
+> M. Lofrano *et al*., "Towards accurate temperature prediction in BEOL for reliability assessment (Invited)," *2023 IEEE International Reliability Physics Symposium (IRPS)*, Monterey, CA, USA, 2023, pp. 1-7, doi: 10.1109/IRPS48203.2023.10117701
+
+![image-20260110011047983](aging/image-20260110011047983.png)
+
+
+
+### Mitigating Self-Heating
+
+> A. Loke, "Short Course: Device and Physical Design Considerations for Circuits in FinFET Technology," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020 [[pdf](https://www.researchgate.net/profile/Alvin-Loke-2/publication/366594532_Device_and_physical_design_considerations_for_circuits_in_finFET_technology_invited_short_course/links/63a9c9f203aad5368e41c907/Device-and-physical-design-considerations-for-circuits-in-finFET-technology-invited-short-course.pdf)]
+>
+> J. E. Proesel, "Short Course: High-Speed and Mixed-Signal Circuit Design Techniques in FinFET Technology for Wireline and Optical Interface Applications," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020
 
 1. guard ring
 
@@ -80,7 +102,13 @@ The most accurate method to calculate the degradation of transistors is the SPIC
 
 3. source/drain metal stack
 
+![image-20260110001759525](aging/image-20260110001759525.png)
 
+---
+
+![image-20260110005051752](aging/image-20260110005051752.png)
+
+> M. Erett *et al*., "A 0.5â€“16.3 Gbps Multi-Standard Serial Transceiver With 219 mW/Channel in 16-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 52, no. 7, pp. 1783-1797, July 2017 [[https://sci-hub.se/10.1109/JSSC.2017.2702711](https://sci-hub.se/10.1109/JSSC.2017.2702711)]![image-20260110004934602](aging/image-20260110004934602.png)
 
 
 
@@ -252,13 +280,17 @@ The figure below illustrates the waveform-dependent nature of these mechanisms â
 
 ## aging model
 
-### MOSRA
+***MOSRA***
 
 MOSRA is a 2-step simulation: 1) Age computation, 2) Post-age analysis
 
 
 
-### TMI
+---
+
+
+
+***TMI***
 
 BTI recovery effect **NOT** included for N7
 

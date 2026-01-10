@@ -39,6 +39,12 @@ The most common modulation techniques are down-spread and center-spread:
 
 
 
+---
+
+> Mike Hertz. Configuring the SSCTrack operator for Spread Spectrum Clock Demodulation of Serial Data [[https://cdn.teledynelecroy.com/files/appnotes/ssctrack_appnote.pdf](https://cdn.teledynelecroy.com/files/appnotes/ssctrack_appnote.pdf)]
+
+![image-20260110130021422](sscg/image-20260110130021422.png)
+
 ##  SSCG Architectures
 
 > K. -H. Cheng, C. -L. Hung, C. -H. Chang, Y. -L. Lo, W. -B. Yang and J. -W. Miaw, "A Spread-Spectrum Clock Generator Using Fractional-N PLL Controlled Delta-Sigma Modulator for Serial-ATA III," *2008 11th IEEE Workshop on Design and Diagnostics of Electronic Circuits and Systems*, Bratislava, Slovakia, 2008 [[https://sci-hub.se/10.1109/DDECS.2008.4538758](https://sci-hub.se/10.1109/DDECS.2008.4538758)]

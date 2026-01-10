@@ -316,6 +316,12 @@ writeva(hfit, 'channel_32poles.va');
 
 *TODO* &#128197;
 
+### Ripple in an S Parameters
+
+![image-20260110134112029](network/image-20260110134112029.png)
+
+![image-20260110134010253](network/image-20260110134010253.png)
+
 
 
 ## S11 vs TDR
@@ -363,5 +369,5 @@ Dr. Ray Kwok . Network Techniques: Conversion between Filter Transfer Function a
 
 田庆诚教授 台湾中华大学 射频电路基础（公司培训）[[https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249](https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 
-
+Bogatin, E. (2018). *Signal and power integrity, simplified*. Prentice Hall. [[pdf](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20Simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)]
 

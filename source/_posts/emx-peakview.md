@@ -3,7 +3,7 @@ title: EMX & Momentum
 date: 2022-03-15 00:06:21
 tags:
 categories:
-- cad
+- sipi
 mathjax: true
 ---
 

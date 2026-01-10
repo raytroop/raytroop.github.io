@@ -3,7 +3,7 @@ title: Network Analysis and Scattering parameters
 date: 2023-09-29 15:57:01
 tags:
 categories:
-- dsp
+- sipi
 mathjax: true
 ---
 

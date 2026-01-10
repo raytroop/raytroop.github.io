@@ -111,6 +111,19 @@ The most accurate method to calculate the degradation of transistors is the SPIC
 > M. Erett *et al*., "A 0.5–16.3 Gbps Multi-Standard Serial Transceiver With 219 mW/Channel in 16-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 52, no. 7, pp. 1783-1797, July 2017 [[https://sci-hub.se/10.1109/JSSC.2017.2702711](https://sci-hub.se/10.1109/JSSC.2017.2702711)]![image-20260110004934602](aging/image-20260110004934602.png)
 
 
+### Heat transfer, thermal resistance
+
+![image-20241120222920258](aging/image-20241120222920258.png)
+
+---
+
+
+
+![image-20241120221254833](aging/image-20241120221254833.png)
+
+![image-20241120221405337](aging/image-20241120221405337.png)
+
+![image-20241120223053280](aging/image-20241120223053280.png)
 
 ## Bias Temperature Instability (BTI)
 
@@ -310,19 +323,7 @@ BTI recovery effect **NOT** included for N7
 
 ![image-20231106230226203](aging/image-20231106230226203.png)
 
-## Heat transfer, thermal resistance
 
-![image-20241120222920258](aging/image-20241120222920258.png)
-
----
-
-
-
-![image-20241120221254833](aging/image-20241120221254833.png)
-
-![image-20241120221405337](aging/image-20241120221405337.png)
-
-![image-20241120223053280](aging/image-20241120223053280.png)
 
 ## Burn-in & High-temperature operating life (HTOL) 
 

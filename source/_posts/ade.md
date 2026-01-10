@@ -3,7 +3,7 @@ title: analog design environment
 date: 2024-05-24 22:16:05
 tags:
 categories:
-- cad
+- devops
 mathjax: true
 ---
 

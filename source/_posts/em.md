@@ -15,8 +15,6 @@ mathjax: true
 
 Griffiths, David J. *Introduction to Electrodynamics*. Fifth edition. Cambridge University Press, 2024. [[pdf](https://nucleares.unam.mx/~martinel/griffiths_4ed.pdf)]
 
-Sadiku, Matthew N. O. *Elements of Electromagnetics*. Seventh edition. Oxford University Press, 2018. 
-
-Matsushita, Teruo. (2021). Electricity and Magnetism: New Formulation by Introduction of Superconductivity.
-
 谢处方、饶克谨、杨显清等.《电磁场与电磁波》（第五版），高等教育出. 版社，2019.
+
+邓友金. 电磁学 2022春 [[http://staff.ustc.edu.cn/~yjdeng/EM2022/EM2022.html](http://staff.ustc.edu.cn/~yjdeng/EM2022/EM2022.html)]

@@ -1,5 +1,5 @@
 ---
-title: Partial Inductance & Electromagnetic field
+title: Partial Inductance
 date: 2023-07-26 23:05:31
 tags:
 categories:

@@ -89,9 +89,9 @@ sampling shaping transfer function (not scaled by $1/T_s$), which make sense in 
 
 > MathWorks Support Team. [[https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112](https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112)]
 
-![image-20251214164635467](noise/image-20251214164635467.png)
+![white_noise_sampling.drawio](noise/white_noise_sampling.drawio.svg)
 
-
+![image-20260111215146609](noise/image-20260111215146609.png)
 
 ## White noise
 

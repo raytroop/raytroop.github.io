@@ -627,17 +627,19 @@ $$
 
 ![image-20241024220244992](fourier/image-20241024220244992.png)
 
-##  zero padding
-
-This option increases $N_0$, the number of samples of $x(t)$, by adding dummy samples of **0** value. This addition of dummy samples is known as ***zero padding***
-
-We should keep in mind that even if the fence were transparent, we would see a reality distorted by **aliasing**.
-
-Zero padding only allows us to look at *more samples of that imperfect reality*
-
-
+##  Zero Padding 
 
 > Balu Santhanam. ECE-539: Digital Signal Processing: Zero padding and Resolution [[http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf](http://ece-research.unm.edu/bsanthan/ece539/zero_pad.pdf)]
+>
+> David Castro PiñolDavid Castro Piñol. 𝗭𝗲𝗿𝗼 𝗣𝗮𝗱𝗱𝗶𝗻𝗴 𝗗𝗼𝗲𝘀𝗻’𝘁 𝗜𝗺𝗽𝗿𝗼𝘃𝗲 𝗦𝗽𝗲𝗰𝘁𝗿𝗮𝗹 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻 [[link](https://www.linkedin.com/posts/signal-processing-castro-pinyol_signalprocessing-dsp-fft-activity-7416358321533861890-yakP?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
+
+***Zero padding improves frequency grid resolution, not spectral resolution***
+
+A smoother spectrum is not more information — it is better interpolation of the same information.
+
+To truly improve spectral resolution, you must observe the signal longer (increase N).
+
+![chart, histogram](fourier/1768069743453.jpeg)
 
 
 

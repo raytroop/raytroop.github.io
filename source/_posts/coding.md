@@ -283,7 +283,7 @@ that’s the difference between using and import - the former brings all exporte
 
 
 
-## Conditional Compilation In C++
+## C++ Conditional Compilation
 
 ### Using g++ only
 

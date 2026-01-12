@@ -15,7 +15,7 @@ mathjax: true
 
 
 
-## Feedforward Equalizer
+## TX FFE
 
 > Jose E. Schutt-Aine, Spring 2024 ECE 546 Lecture - 27 Equalization [[http://emlab.uiuc.edu/ece546/Lect_27.pdf](http://emlab.uiuc.edu/ece546/Lect_27.pdf)]
 >
@@ -135,7 +135,7 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 
 
-## TX FIR Adaptation Algorithm
+### TX FIR Adaptation Algorithm
 
 > Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 8: RX FIR, CTLE, DFE, & Adaptive Eq. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf)]
 
@@ -145,7 +145,7 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 
 
-### RX-FFE
+## RX FFE
 
 *TODO* &#128197;
 
@@ -155,25 +155,8 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 
 
-## overlapped tuning range
-
-*TODO* &#128197;
 
 
-
-
-
-## Mueller-Muller PD
-
-Mueller-Muller **type A** timing function
-
-![image-20241019163636292](digital-eqz/image-20241019163636292.png)
-
-
-
-Mueller-Muller **type B** timing function
-
-![image-20241019163813449](digital-eqz/image-20241019163813449.png)
 
 ##  MMSE-based algorithms
 
@@ -281,16 +264,34 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 ![image-20240824193839108](digital-eqz/image-20240824193839108.png)
 
 
+## Bang-Bang CDR
+
+> alexander PD or !!PD
+
+The alexander PD locks that edge clock (clkedge) is located at zero crossings of the data. The $h_{-0.5}$ and $h_{0.5}$ are **equal** at the *lock point,* where the  $h_{-0.5}$ and $h_{0.5}$ are the cursors located at -0.5 UI and 0.5 UI. 
+
+
+
+> Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector" [[https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
+>
+> Shahramian, Shayan, "Adaptive Decision Feedback Equalization With Continuous-time Infinite Impulse Response Filters" [[https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf](https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf)]
+>
+> MENIN, DAVIDE, "Modelling and Design of High-Speed Wireline Transceivers with Fully-Adaptive Equalization" [[https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf](https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf)]
+
+
+
 
 ## Mueller-Muller CDR
 
 ![image-20240812222307061](digital-eqz/image-20240812222307061.png)
 
-
-
+Suppose 1-precursor, 1-postcursor — $y_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$
+$$
+\color{magenta}E[y_k\cdot d_{k-1}] - E[y_k\cdot d_{d+1}] = E[|d_{k-1}|^2h_{1}] - E[|d_{k+1}|^2h_{-1}] =h_1-h_{-1}
+$$
 MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
 
-![image-20240807230029591](digital-eqz/image-20240807230029591.png)
+![image-20260112220639499](digital-eqz/image-20260112220639499.png)
 
 
 
@@ -306,27 +307,38 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 >
 > Baud-Rate CDRs [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
 >
-> F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, doi: 10.1109/ISSCC.2010.5433823.
+> F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, [[https://sci-hub.ru/10.1109/ISSCC.2010.5433823](https://sci-hub.ru/10.1109/ISSCC.2010.5433823)]
 >
 > K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of PAM-4 Mueller–Muller Clock and Data Recovery System," in *IEEE Open Journal of Circuits and Systems*, vol. 3, pp. 216-227, 2022 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9910561](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9910561)]
 >
 > Jaeduk Han, "Design and Automatic Generation of 60Gb/s Wireline Transceivers" [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf)]
 
-![image-20240810095006113](digital-eqz/image-20240810095006113.png)
+![image-20260112225032307](digital-eqz/image-20260112225032307.png)
 
-![image-20240808001201612](digital-eqz/image-20240808001201612.png)
-
-
-![image-20240808001256515](digital-eqz/image-20240808001256515.png)
-
-
+Suppose $x_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$ and $x_{k-1} = d_{k-2}h_1 + d_{k-1} h_0 + d_{k}h_{-1}$
+$$
+\color{magenta}E\{z_k\} = \frac{1}{2} E\{|d_{k-1}|^2h_1\} - \frac{1}{2} E\{|d_{k}|^2h_{-1}\} = \frac{1}{2}(h_1 - h_{-1})
+$$
 ![image-20240808001449664](digital-eqz/image-20240808001449664.png)
+
+> ![image-20260112221328785](digital-eqz/image-20260112221328785.png)
 
 ![image-20240808001501485](digital-eqz/image-20240808001501485.png)
 
+### Mueller-Muller PD
+
+Mueller-Muller **type A** timing function
+
+![image-20241019163636292](digital-eqz/image-20241019163636292.png)
 
 
-## SS-MM CDR
+
+Mueller-Muller **type B** timing function
+
+![image-20241019163813449](digital-eqz/image-20241019163813449.png)
+
+
+### SS-MM CDR
 
 ![image-20240807232814202](digital-eqz/image-20240807232814202.png)
 
@@ -352,7 +364,7 @@ $h_1$ is **necessary**
 
 
 
-### Pattern filter
+***Pattern filter***
 
 | pattern | main cursor               |
 | ------- | ------------------------- |
@@ -369,20 +381,6 @@ During adapting,  we make
 Then, $h_{-1}$ and $h_1$ are same, which is desired
 
 
-
-## Bang-Bang CDR
-
-> alexander PD or !!PD
-
-The alexander PD locks that edge clock (clkedge) is located at zero crossings of the data. The $h_{-0.5}$ and $h_{0.5}$ are **equal** at the *lock point,* where the  $h_{-0.5}$ and $h_{0.5}$ are the cursors located at -0.5 UI and 0.5 UI. 
-
-
-
-> Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector" [[https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
->
-> Shahramian, Shayan, "Adaptive Decision Feedback Equalization With Continuous-time Infinite Impulse Response Filters" [[https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf](https://tspace.library.utoronto.ca/bitstream/1807/77861/3/Shahramian_Shayan_201606_PhD_thesis.pdf)]
->
-> MENIN, DAVIDE, "Modelling and Design of High-Speed Wireline Transceivers with Fully-Adaptive Equalization" [[https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf](https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf)]
 
 
 

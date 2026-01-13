@@ -283,18 +283,6 @@ The alexander PD locks that edge clock (clkedge) is located at zero crossings of
 
 ## Mueller-Muller CDR
 
-![image-20240812222307061](digital-eqz/image-20240812222307061.png)
-
-Suppose 1-precursor, 1-postcursor — $y_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$
-$$
-\color{magenta}E[y_k\cdot d_{k-1}] - E[y_k\cdot d_{d+1}] = E[|d_{k-1}|^2h_{1}] - E[|d_{k+1}|^2h_{-1}] =h_1-h_{-1}
-$$
-MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
-
-![image-20260112220639499](digital-eqz/image-20260112220639499.png)
-
-
-
 > Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [[https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf](https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf)]
 >
 > Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS" [[https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf](https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf)]
@@ -312,6 +300,20 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 > K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of PAM-4 Mueller–Muller Clock and Data Recovery System," in *IEEE Open Journal of Circuits and Systems*, vol. 3, pp. 216-227, 2022 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9910561](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9910561)]
 >
 > Jaeduk Han, "Design and Automatic Generation of 60Gb/s Wireline Transceivers" [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf)]
+>
+> Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025. Lecture 12: CDRs [[https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf)]
+
+![image-20240812222307061](digital-eqz/image-20240812222307061.png)
+
+Suppose 1-precursor, 1-postcursor — $y_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$
+$$
+\color{magenta}E[y_k\cdot d_{k-1}] - E[y_k\cdot d_{d+1}] = E[|d_{k-1}|^2h_{1}] - E[|d_{k+1}|^2h_{-1}] =h_1-h_{-1}
+$$
+MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
+
+![image-20260112220639499](digital-eqz/image-20260112220639499.png)
+
+
 
 ![image-20260112225032307](digital-eqz/image-20260112225032307.png)
 

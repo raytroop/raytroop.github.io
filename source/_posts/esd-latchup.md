@@ -293,19 +293,46 @@ To assess the design solutions, a ***distributed DUT model***, as presented in F
 
 ![Figure 3](https://assets.incompliancemag.com/2025/11/2512-C2-fig3.png)
 
+## Power Clamp
+
+Thanks to the device scaling the area is actually reasonable. However, the leakage becomes the main bottleneck.
+![bigfet-concept](esd-latchup/bigfet-concept.jpg)
+
+### Dual Stacked Diodes
+
+![image-20230518012456390](esd-latchup/image-20230518012456390.png)
 
 
-## Diode capacitance vs. Vpn
 
-*TODO* &#128197;
+> PS:  I/O to GND positively
+>
+> NS: I/O to GND negatively
+>
+> PD: I/O to VDD positively
+>
+> ND: I/O to VDD negatively
+
+Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 
 
-## anti-parallel ESD diode
+### PMOS power clamp
+
+![power_clamp_pmos.drawio](esd-latchup/power_clamp_pmos.drawio.svg)
+
+
+
+
+
+## B2B Diode
 
 > M. Etherton *et al*., "A new full-chip verification methodology to prevent CDM oxide failures," *2015 37th Electrical Overstress/Electrostatic Discharge Symposium (EOS/ESD)*, Reno, NV, USA, 2015 [[https://www.synopsys.com/content/dam/synopsys/implementation&signoff/electrical-layout-verification-documents/cdm-esd-paper.pdf](https://www.synopsys.com/content/dam/synopsys/implementation&signoff/electrical-layout-verification-documents/cdm-esd-paper.pdf)]
 
+also known as ***anti-parallel ESD diode***
+
 ![image-20251022220718331](esd-latchup/image-20251022220718331.png)
+
+> *pdiode* is usually employed as B2B diode
 
 
 
@@ -827,11 +854,6 @@ Gate-coupled NMOS (**gcNMOS**) was proposed to effectively ***reduce*** the $V_\
 
 
 
-## power clamp
-
-Thanks to the device scaling the area is actually reasonable. However, the leakage becomes the main bottleneck.
-![bigfet-concept](esd-latchup/bigfet-concept.jpg)
-
 
 
 ## high current diode (HIA)
@@ -926,27 +948,6 @@ both diode are reverse-biased in normal operation, the PN Junction capacitance i
 
 
 
-## Dual Stacked Diodes
-
-![image-20230518012456390](esd-latchup/image-20230518012456390.png)
-
-
-
-> PS:  I/O to GND positively
->
-> NS: I/O to GND negatively
->
-> PD: I/O to VDD positively
->
-> ND: I/O to VDD negatively
-
-Dual diode should be used with **power clamp** for **PS** and **ND** path
-
-
-
-### PMOS power clamp
-
-![power_clamp_pmos.drawio](esd-latchup/power_clamp_pmos.drawio.svg)
 
 
 

@@ -426,9 +426,8 @@ LG_{fr} &= K_{BB}\cdot \frac{1-z^{-M}}{1-z^{-1}}\cdot \frac{1}{M}\cdot \frac{1}{
 >
 > K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of PAM-4 Mueller–Muller Clock and Data Recovery System," in *IEEE Open Journal of Circuits and Systems* [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9910561](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9910561)]
 >
-> 
 
-
+---
 
 > *TODO* &#128197;
 >
@@ -520,7 +519,7 @@ ylabel('frequency response', 'FontSize',10)
 
 ### Kpd, Kb, Kv
 
-> Both decimation factor and factor for voting are 4
+> ![image-20260113223907845](multirate/image-20260113223907845.png)
 
 ![image-20241130162850467](multirate/image-20241130162850467.png)
 

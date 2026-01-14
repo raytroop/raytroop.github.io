@@ -538,7 +538,7 @@ That is
 import numpy as np
 from scipy.stats import norm
 import itertools
-from collections import defaultdict
+from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 sigmai = 0.032  #UI, input jitter
@@ -574,7 +574,7 @@ pd_out = np.array([-1.0,0.0,1.0])
 idxs = list([[0,1,2] for _ in range(deci_factor)])
 boxcar_avg = []
 voting_avg = []
-for i in range(phase_error.shape[0]):
+for i in tqdm(range(phase_error.shape[0])):
     prob_i = prob[i,:]
     boxcar_tmp = 0.0
     voting_tmp = 0.0

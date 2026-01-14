@@ -866,11 +866,15 @@ Defined as the frequency at which the **small-signal current gain** of a device 
 
 ![image-20250831165407595](insight/image-20250831165407595.png)
 
-## MOSFET ZTC Condition Analysis
+##  ZTC Bias Points
 
 >  M. Coelho *et al*., "Is There a ZTC Biasing Point in the Leading-Edge FET Intrinsic Gain gmrDS?," *2025 9th International Young Engineers Forum on Electrical and Computer Engineering (YEF-ECE)*, Caparica / Lisbon, Portugal, 2025
 >
->  zero temperature coefficient (ZTC)
+>  M. Coelho *et al*., "Analysis of the ZTC Bias Points in the FinFET Gate Capacitance and Transition Frequency," *2025 37th International Conference on Microelectronics (ICM)*, Cairo, Egypt, 2025, pp. 1-6, doi: 10.1109/ICM66518.2025.11322461
+
+there's a specific bias point where the MOSFET transition frequency (fT) becomes almost temperature‑independent
+
+
 
 ![image-20231212195536754](insight/image-20231212195536754.png)
 

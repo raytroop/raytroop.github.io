@@ -295,8 +295,12 @@ To assess the design solutions, a ***distributed DUT model***, as presented in F
 
 ## Power Clamp
 
+> Ein.019, RCCLAMP个人理解 [[https://blog.eetop.cn/blog-1779684-6962653.html](https://blog.eetop.cn/blog-1779684-6962653.html)]
+
 Thanks to the device scaling the area is actually reasonable. However, the leakage becomes the main bottleneck.
 ![bigfet-concept](esd-latchup/bigfet-concept.jpg)
+
+> ![image-20260115211251351](esd-latchup/image-20260115211251351.png)
 
 ### Dual Stacked Diodes
 

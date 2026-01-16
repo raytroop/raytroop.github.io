@@ -327,7 +327,7 @@ $$
 LG_a(z) = \frac{1}{(1-z^{-1})^2}
 $$
 
-In (b), after Accumulate-and-dump (AAD), $\phi_(\eta)$ is
+In (b), after **<u>A</u>**ccumulate-**<u>A</u>**nd-**<u>D</u>**ump (**AAD**), $\phi(\eta)$ is
 $$
 \phi_m(\eta) = \frac{1-\eta^{-1}}{1-\eta^{-1/L}}\cdot \frac{1}{L}
 $$

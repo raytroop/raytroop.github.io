@@ -33,6 +33,14 @@ mathjax: true
 
 
 
+## latch borrowed time
+
+> Kunal Saraswat [[link](https://www.linkedin.com/posts/kunalsaraswat_working-on-pd-timing-every-day-one-thing-activity-7417260020163166208-vnVd?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
+
+![img](https://media.licdn.com/dms/image/v2/D5622AQHgceq2OcIxow/feedshare-shrink_2048_1536/B56Zu9mruXGcAk-/0/1768412593651?e=1770249600&v=beta&t=22OHPAOgzUQ-i5acOyrwnmnDJhc2xusuBxdMPS4zFD4)
+
+
+
 ## CMRR (Common-Mode Properties)
 
 ![image-20251029215920630](insight/image-20251029215920630.png)

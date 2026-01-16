@@ -54,7 +54,7 @@ mathjax: true
 
 ![tx-ffe-coef-sel.drawio](digital-eqz/tx-ffe-coef-sel.drawio.svg)
 
-![image-20251102133850375](digital-eqz/image-20251102133850375.png)
+![image-20260116224051584](digital-eqz/image-20260116224051584.png)
 
 ```matlab
 h=[0.004, 0.0010, 0.0023, 0.0052, 0.0812, 0.3437, 0.1775, 0.0917, 0.0526,...
@@ -258,6 +258,8 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 > S. Song, K. D. Choo, T. Chen, S. Jang, M. P. Flynn and Z. Zhang, "A Maximum-Likelihood Sequence Detection Powered ADC-Based Serial Link," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 65, no. 7, pp. 2269-2278, July 2018
 >
 > [[http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf](http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf)]
+>
+> David Johns. Partial Response and Viterbi Detecti [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf)]
 
 
 
@@ -388,9 +390,19 @@ Then, $h_{-1}$ and $h_1$ are same, which is desired
 
 ## reference
 
-Stojanovic, Vladimir & Ho, A. & Garlepp, B. & Chen, Fred & Wei, J. & Alon, Elad & Werner, C. & Zerbe, J. & Horowitz, M.A.. (2004). Adaptive equalization and data recovery in a dual-mode (PAM2/4) serial link transceiver. IEEE Symposium on VLSI Circuits, Digest of Technical Papers. 348 - 351. 10.1109/VLSIC.2004.1346611. 
+Barry, John R., Edward A. Lee, and David G. Messerschmitt. *Digital communication*. Springer, 2003.
 
-A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design Optimization for Wireline SerDes Applications," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, doi: 10.1109/TCSI.2023.3328807.
+Hall, Stephen H., and Howard L. Heck. *Advanced Signal Integrity for High-speed Digital Designs*. Wiley : IEEE, 2009 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIFhWWoIkGkuXXv.pdf)]
+
+Oh, Kyung, and Xing Yuan. *High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting*. 1st edition. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
+
+John M. Cioffi, Chapter 3 - Equalization [[https://cioffi-group.stanford.edu/doc/book/chap3.pdf](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)]
+
+---
+
+Stojanovic, Vladimir & Ho, A. & Garlepp, B. & Chen, Fred & Wei, J. & Alon, Elad & Werner, C. & Zerbe, J. & Horowitz, M.A.. (2004). Adaptive equalization and data recovery in a dual-mode (PAM2/4) serial link transceiver. IEEE Symposium on VLSI Circuits, Digest of Technical Papers. 348 - 351. [[https://sci-hub.ru/10.1109/VLSIC.2004.1346611](https://sci-hub.ru/10.1109/VLSIC.2004.1346611)]
+
+A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design Optimization for Wireline SerDes Applications," in *IEEE Transactions on Circuits and Systems I: Regular Papers* [[https://www.eecg.utoronto.ca/~johns/nobots/papers/pdf/2024_bazaragani.pdf](https://www.eecg.utoronto.ca/~johns/nobots/papers/pdf/2024_bazaragani.pdf)]
 
 Masum Hossain, ISSCC2023 T11: "Digital Equalization and Timing Recovery Techniques for ADC-DSP-based Highspeed Links" [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T11.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T11.pdf)]
 
@@ -402,7 +414,7 @@ Tony Chan Carusone. High Speed Communications Part 11 – SerDes DSP Interaction
 
 —, 2022 Optimization Tools for Future Wireline Transceivers [[https://www.ieeetoronto.ca/wp-content/uploads/2022/12/UofT-Future-of-Wireline-Workshop-2022.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2022/12/UofT-Future-of-Wireline-Workshop-2022.pdf)]
 
-Alphawave IP CEO. How DSP is Killing the Analog in SerDes [[https://youtu.be/OY2Dn4EDPiA?si=czIYfFrHpY4F-lKK](https://youtu.be/OY2Dn4EDPiA?si=czIYfFrHpY4F-lKK)]
+Alphawave IP CEO. How DSP is Killing the Analog in SerDes [[https://youtu.be/OY2Dn4EDPiA](https://youtu.be/OY2Dn4EDPiA)]
 
 ---
 
@@ -415,12 +427,6 @@ T. Toifl *et al*., "A 3.5pJ/bit 8-tap-feed-forward 8-tap-decision feedback digit
 ---
 
 Daniel Friedman, 2018 Considerations and Implementations for High data Rate Serial Link Design [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-Toronto-Nov-2018.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-Toronto-Nov-2018.pdf)]
-
----
-
-Keshab K. Parhi [[http://www.ece.umn.edu/users/parhi/](http://www.ece.umn.edu/users/parhi/)]
-
-Tinoosh Mohsenin. CMPE 691: Digital Signal Processing Hardware Implementation [[https://userpages.cs.umbc.edu/tinoosh/cmpe691/](https://userpages.cs.umbc.edu/tinoosh/cmpe691/)]
 
 ---
 
@@ -446,7 +452,9 @@ Aleksey Tyshchenko, SeriaLink Systems Clinton Walker, Alphawave IP. DesignCon 20
 
 ---
 
-Barry, John R., Edward A. Lee, and David G. Messerschmitt. *Digital communication*. Springer, 2003.
+Keshab K. Parhi [[http://www.ece.umn.edu/users/parhi/](http://www.ece.umn.edu/users/parhi/)]
+
+Tinoosh Mohsenin. CMPE 691: Digital Signal Processing Hardware Implementation [[https://userpages.cs.umbc.edu/tinoosh/cmpe691/](https://userpages.cs.umbc.edu/tinoosh/cmpe691/)]
 
 ---
 

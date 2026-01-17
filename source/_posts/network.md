@@ -264,7 +264,7 @@ $$
 
 ![image-20260117135705430](network/image-20260117135705430.png)
 
-$H_e(f) = \mathcal{Re}\{H(f)\}$ and $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$
+$H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enclose{circle}{1}$ , $\enclose{circle}{2}$ 
 
 
 

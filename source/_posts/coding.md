@@ -47,7 +47,47 @@ is no whitespace that can clearly distinguish the variable name from the surroun
 
 `pkg> dev|develop`: add a local package, which not initialized by git
 
-`using|import .MyModule`:  relative import following`include("path/to/MyModule.jl")` custom module
+load custom module:
+
+```julia
+include("path/to/MyModule.jl")
+
+struct0 = MyModule.Mystruct()
+```
+
+
+
+```julia
+include("path/to/MyModule.jl")
+import .MyModule:Mystruct
+
+struct0 = Mystruct()
+```
+
+
+
+```julia
+include("path/to/MyModule.jl")
+using .MyModule		# !!! don't work in Pluto
+
+struct0 = Mystruct()
+```
+
+
+
+---
+
+activate a Julia environment and execute a file using the **command line**
+
+```bash
+julia --project=. your_script.jl
+```
+
+The `--project=.` argument tells Julia to look for a `Project.toml` and `Manifest.toml` file in the current directory (indicated by `.`)
+
+
+
+
 
 ---
 

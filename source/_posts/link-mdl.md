@@ -687,19 +687,6 @@ function int2bits(num, nbit)
 end
 ```
 
-
-
-## Analog Signals Representation
-
-> Ben Yochret Sabrine, 2020, "BEHAVIORAL MODELING WITH SYSTEMVERILOG FOR MIXED-SIGNAL VALIDATION" [[https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf](https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf)]
-
-![image-20250913234701819](link-mdl/image-20250913234701819.png)
-
----
-
-![image-20250914115332274](link-mdl/image-20250914115332274.png)
-
-
 ### PRBS Generator
 
 ![image-20251008232419923](link-mdl/image-20251008232419923.png)
@@ -758,6 +745,21 @@ previous bit determine current bit
 1. current LSFR generate `btst`
 2. compare `bst` with current `brcv`
 3. push current `brcv` into LSFR
+
+
+
+
+## Analog Signals Representation
+
+> Ben Yochret Sabrine, 2020, "BEHAVIORAL MODELING WITH SYSTEMVERILOG FOR MIXED-SIGNAL VALIDATION" [[https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf](https://di.uqo.ca/id/eprint/1224/1/Ben-Yochret_Sabrine_2020_memoire.pdf)]
+
+![image-20250913234701819](link-mdl/image-20250913234701819.png)
+
+---
+
+![image-20250914115332274](link-mdl/image-20250914115332274.png)
+
+
 
 
 ## Reference

@@ -41,6 +41,16 @@ For instance
 
 
 
+
+
+##  displacement current
+
+> A. Sheikholeslami, "Current Without Electrons [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 17, no. 4, pp. 8-10, Fall 2025
+
+![image-20260117094529390](xtalk/image-20260117094529390.png)
+
+
+
 ## reference
 
 信号完整性揭秘:于博士SI设计手记

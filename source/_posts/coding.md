@@ -323,6 +323,14 @@ that’s the difference between using and import - the former brings all exporte
 
 
 
+---
+
+***PlutoUI.Slider***
+
+![image-20260118010932797](coding/image-20260118010932797.png)
+
+
+
 ## C++ Conditional Compilation
 
 ### Using g++ only

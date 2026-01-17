@@ -147,6 +147,10 @@ function gen_ir_rc(dt,bw,t_len)
 end
 ```
 
+> `sum(ir)*dt = 1`, i.e. the step response `1`
+
+
+
 
 
 ```julia
@@ -261,6 +265,74 @@ stem(xir+11, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
 
 subplot(8,1,8)
 stem(xir+12, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+```
+
+---
+
+***eye diagram*** based on `heatmap`
+
+```julia
+function w_gen_eye_simple_test(input,x_npts_ui, x_npts, y_range, y_npts; osr, x_ofst=0)
+    heatmap = zeros(x_npts, y_npts)
+
+    input_x = 0:1/osr:(lastindex(input)-1)/osr
+    itp_resample = linear_interpolation(input_x, input) # interpolation object
+    idx_itp = 0:1/x_npts_ui:input_x[end]
+    input_itp = itp_resample.(idx_itp)
+
+    for n = 1:x_npts
+        heatmap[n,:] = u_hist(input_itp[n:x_npts:end], -y_range/2, y_range/2, y_npts)
+    end
+   
+    return circshift(heatmap, (Int(x_ofst), 0))
+end
+```
+
+
+
+![eyebin.drawio](link-mdl/eyebin.drawio.svg)
+
+```julia
+function u_hist(samples, minval, maxval, nbin)
+    weights = zeros(Float64, nbin)
+    bin_size = (maxval-minval)/nbin
+
+    for s in samples
+        idx = Int(floor((s-minval)/bin_size))+1
+        idx = idx < 1 ? 1 : idx > nbin ? nbin : idx
+        weights[idx] += 1.0
+    end
+    return weights
+end
+
+
+feye = Figure()
+heatmap!(Axis(feye[1,1]), x_grid, y_grid, eye_tx, 
+            colormap=:turbo, #try :inferno, :hot, :viridis
+        )
+feye
+```
+
+---
+
+FIR filter typically is much shorter (<10 taps) than the symbol vector, using *FFT convolution might be an overkill*. For optimization, a simple ***shift-and-add filter*** function can be written   
+
+![image-20260118013730655](link-mdl/image-20260118013730655.png)
+
+```julia
+function u_filt(So_conv, input, fir; Si_mem=Float64[])
+    sconv = zeros(length(input) + length(fir) - 1)
+
+    s_in = lastindex(input)
+    
+    for n=eachindex(fir)
+        sconv[n:s_in+n-1] .+= fir[n] .* input
+    end
+
+    sconv[eachindex(Si_mem)] .+= Si_mem
+
+    return sconv
+end
 ```
 
 
@@ -675,7 +747,7 @@ data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_o
 
 
 
-## helper function
+## Helper Functions
 
 ### int2bits
 

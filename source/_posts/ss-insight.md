@@ -51,7 +51,13 @@ The average value of output pulse are same because of **same DC gain (0dB)**
 
 ![image-20251122095709631](ss-insight/image-20251122095709631.png)
 
+## Incrementally linear system
 
+![image-20260117124857712](ss-insight/image-20260117124857712.png)
+
+---
+
+![image-20260117124750446](ss-insight/image-20260117124750446.png)
 
 
 

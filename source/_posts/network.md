@@ -239,17 +239,38 @@ $$
 >
 > Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
 
-![image-20251213095227619](network/image-20251213095227619.png)
+![image-20260117130948681](network/image-20260117130948681.png)
 
-![image-20251213095316546](network/image-20251213095316546.png)
 
-> ![image-20251213095709187](network/image-20251213095709187.png)
+### Causality
 
----
+![image-20260117121900710](network/image-20260117121900710.png)
 
-***Rational Fit***
+![image-20260117122328655](network/image-20260117122328655.png)
 
-To resolve the convergence problem of s-parameter in Spectre simulator - `rationalfit` and write Verilog-A 
+![image-20260117123153607](network/image-20260117123153607.png)
+
+### causality-passivity correction
+
+> P. Triverio, S. Grivet-Talocia, M. S. Nakhla, F. G. Canavero and R. Achar, "Stability, Causality, and Passivity in Electrical Interconnect Models," in *IEEE Transactions on Advanced Packaging*, vol. 30, no. 4, pp. 795-808, Nov. 2007 [[https://sci-hub.ru/10.1109/TADVP.2007.901567](https://sci-hub.ru/10.1109/TADVP.2007.901567)]
+>
+> S. Sercu, C. Kocuba, J. Nadolny, "Causality Demystified", in DesignCon 2015, Jan. 2015 [[pdf](https://suddendocs.samtec.com/notesandwhitepapers/14-th1paper_causalitydemystified.pdf)] 
+>
+> Vinod Arjun Huddar. Causality Problems in Power Delivery Networks [[https://www.signalintegrityjournal.com/articles/1217-causality-in-power-delivery-network-in-package-board](https://www.signalintegrityjournal.com/articles/1217-causality-in-power-delivery-network-in-package-board)]
+>
+> Tyler Huddleston, Signal Edge Solutions. Causality in Practice: How Frequency Sampling and Bandwidth Shape Time-Domain Fidelity [[https://www.signalintegrityjournal.com/articles/4061-causality-in-practice-how-frequency-sampling-and-bandwidth-shape-time-domain-fidelity ](https://www.signalintegrityjournal.com/articles/4061-causality-in-practice-how-frequency-sampling-and-bandwidth-shape-time-domain-fidelity )]
+
+![image-20260117135845061](network/image-20260117135845061.png)
+
+![image-20260117135705430](network/image-20260117135705430.png)
+
+$H_e(f) = \mathcal{Re}\{H(f)\}$ and $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$
+
+
+
+### Rational Fit
+
+Use the [`rational`](https://www.mathworks.com/help/rf/ref/rational.html) function to fit data defined in the frequency domain with an equivalent Laplace transfer function. Using rational function fitting you can create simple models for a required accuracy, model order reduction, zero phase on extrapolation to DC, and **causal** modeling system among other advantages
 
 ![image-20220630224525565](network/image-20220630224525565.png)
 
@@ -294,9 +315,9 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
-## Causality
 
-*TODO* &#128197;
+
+
 
 
 

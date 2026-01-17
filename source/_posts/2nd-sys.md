@@ -176,7 +176,13 @@ $$
 
 
 
+## minimum-phase system vs Non-minimum phase system
 
+- a linear, time-invariant system is said to be minimum-phase if the system and its *inverse* are **causal** and ***stable***
+
+- Systems that are causal and stable whose *inverses* are **causal** and ***unstable*** are known as ***non-minimum-phase* systems**
+
+![image-20260117110617261](2nd-sys/image-20260117110617261.png)
 
 ## Settling Time
 

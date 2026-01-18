@@ -124,7 +124,9 @@ function gen_wvfm(bits; tui, osr)
 end
 ```
 
----
+![osr.drawio](link-mdl/osr.drawio.svg)
+
+
 
 ***normalized to the time step***
 $$
@@ -335,7 +337,42 @@ function u_filt(So_conv, input, fir; Si_mem=Float64[])
 end
 ```
 
+---
 
+***model jitter*** with ***fixed simulation time step***
+
+**warp** or **remap** a *"jittery time grid"* onto our *"uniform time grid"*
+
+![image-20260118180411601](link-mdl/image-20260118180411601.png)
+
+```julia
+prev_nui = 4
+Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
+V_prev_nui = @views Vext[end-prev_nui*param.osr+1:end]  # prev_nui*osr
+tt_Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
+Δtt_ext = zeros(param.blk_size+prev_nui+1)  # blk_size + prev_nui + 1
+Δtt = zeros(param.blk_size)
+Δtt_prev_nui = @views Δtt_ext[end-prev_nui:end]  # prev_nui +  1
+tt_uniform::Vector = (0:param.blk_size_osr-1) .+ prev_nui/2*param.osr
+```
+
+![deltatt.drawio](link-mdl/deltatt.drawio.svg)
+
+```julia
+drv.Δtt_ext[eachindex(drv.Δtt_prev_nui)] .= drv.Δtt_prev_nui  # 1
+drv.Δtt_ext[lastindex(drv.Δtt_prev_nui)+1:end] .= Δtt  # 2
+```
+
+![vext.drawio](link-mdl/vext.drawio.svg)
+
+```julia
+drv.Vext[eachindex(drv.V_prev_nui)] .= drv.V_prev_nui
+drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr
+```
+
+
+
+![dcd.drawio](link-mdl/dcd.drawio.svg)
 
 ### Sam Palermo's
 
@@ -688,26 +725,6 @@ data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_o
 
 
 
-### pyBERT
-
-> David Banas. pyBERT: Free software for signal-integrity analysis [[https://github.com/capn-freako/PyBERT](https://github.com/capn-freako/PyBERT)], [[intro](https://youtu.be/OOl5SCQZY8I?)]
->
-> —. Free yourself from IBIS-AMI models with PyBERT [[https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/](https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/)]
-
-*TODO* &#128197;
-
-
-
-### PyChOpMarg
-
-> David Banas. Python implementation of COM, as per IEEE 802.3-22 Annex 93A. [[https://github.com/capn-freako/PyChOpMarg](https://github.com/capn-freako/PyChOpMarg)]
->
-> CC Chen. Why Channel Operating Margin? [[https://youtu.be/mrXur-WbrR8](https://youtu.be/mrXur-WbrR8)] 
-
-*TODO* &#128197;
-
-
-
 ### DaVE
 
 > Byongchan Lim. DaVE — tools regarding on analog modeling, validation, and generation, [[https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)]
@@ -743,6 +760,42 @@ data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_o
 > Chris Li. pystateye - A Python Implementation of Statistical Eye Analysis and Visualization [[https://github.com/ChrisZonghaoLi/pystateye](https://github.com/ChrisZonghaoLi/pystateye)]
 
 *TODO* &#128197;
+
+
+
+## other framework
+
+### pyBERT
+
+> David Banas. pyBERT: Free software for signal-integrity analysis [[https://github.com/capn-freako/PyBERT](https://github.com/capn-freako/PyBERT)], [[intro](https://youtu.be/OOl5SCQZY8I?)]
+>
+> —. Free yourself from IBIS-AMI models with PyBERT [[https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/](https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/)]
+
+*TODO* &#128197;
+
+
+
+### PyChOpMarg
+
+> David Banas. Python implementation of COM, as per IEEE 802.3-22 Annex 93A. [[https://github.com/capn-freako/PyChOpMarg](https://github.com/capn-freako/PyChOpMarg)]
+>
+> CC Chen. Why Channel Operating Margin? [[https://youtu.be/mrXur-WbrR8](https://youtu.be/mrXur-WbrR8)] 
+
+*TODO* &#128197;
+
+
+
+### mmse_dfe
+
+> Chris Li, jointly optimizing feed-forward equalizer (FFE) and decision-feedback equalizer (DFE) tap weights [[https://github.com/ChrisZonghaoLi/mmse_dfe](https://github.com/ChrisZonghaoLi/mmse_dfe)]
+>
+> John M. Cioffi, Chapter 3 - Equalization [[https://cioffi-group.stanford.edu/doc/book/chap3.pdf](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)]
+
+*TODO* &#128197;
+
+
+
+
 
 
 

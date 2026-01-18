@@ -258,6 +258,8 @@ Kadeem Samuel. Application Note Clocking for PCIe Applications [[https://www.ti.
 
 K. -H. Cheng, C. -L. Hung, C. -H. Chang, Y. -L. Lo, W. -B. Yang and J. -W. Miaw, "A Spread-Spectrum Clock Generator Using Fractional-N PLL Controlled Delta-Sigma Modulator for Serial-ATA III," *2008 11th IEEE Workshop on Design and Diagnostics of Electronic Circuits and Systems*, Bratislava, Slovakia, 2008 [[https://sci-hub.se/10.1109/DDECS.2008.4538758](https://sci-hub.se/10.1109/DDECS.2008.4538758)]
 
+CHUNG-CHUN (CC) CHEN. Why Spread Spectrum Clocking? [[https://youtu.be/_PvwTqaWPo8](https://youtu.be/_PvwTqaWPo8)]
+
 ---
 
 Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology

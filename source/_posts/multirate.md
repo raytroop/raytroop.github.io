@@ -621,7 +621,25 @@ print(f'Kb: {Kb:.2f}; Kv {Kv:.2f}')     # Kb: 4.00; Kv 2.19
 
 ```
 
+---
 
+with `deci_factor = 8`
+
+```
+Kpd formula: 12.467; Kpd_bb_0 12.465
+Kpd_Kb: 99.719; Kpd_Kv 39.155
+Kb: 8.00; Kv 3.14
+```
+
+
+
+with `deci_factor = 16`
+
+```
+Kpd formula: 12.467; Kpd_bb_0 12.465
+Kpd_Kb: 199.439; Kpd_Kv 55.784
+Kb: 16.00; Kv 4.48
+```
 
 
 

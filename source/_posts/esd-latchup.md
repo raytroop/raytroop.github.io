@@ -489,17 +489,41 @@ to *isolate different regions* of the IC, minimizing unwanted electrical interac
 
 ![image-20260105213709019](esd-latchup/image-20260105213709019.png)
 
+> If the reistance of RESD is less than 200ohm and covered by RES200, it will be flagged by warning
+
+
+
 ### LUP.1
 
 **检查对象**：被视为OD injector的部分。
 
 **检查内容**：
 
-（1）任何的N+ OD都必须被P+ guardring围绕；或者任何P+ OD都必须被N+ guardring围绕；
+任何的N+ OD都必须被*P+ guardring*围绕；或者任何P+ OD都必须被*N+ guardring*围绕；
 
-（2）额外再增加N+ STRAP 和 P+ STRAP（如下图所示），作为更进一步预防。（DRC推荐做法）（LUP.9g）
+
 
 ![image-20260105215712573](esd-latchup/image-20260105215712573.png)
+
+![image-20260119224011845](esd-latchup/image-20260119224011845.png)
+
+### LUP.2
+
+**检查对象**：对距离OD injector区域15um范围内的MOS OD
+
+![img](esd-latchup/LP08.jpg)
+
+对上述检查对象进行***LUP.1***检查
+
+
+
+### LUP.4
+
+**检查对象及内容**：*OD injector区域*以及距离此区域15um以内的guardring或STRAP中的OD宽度***B***都要大于等于一定值。
+
+![img](esd-latchup/LP12.jpg)
+
+![image-20260119225110783](esd-latchup/image-20260119225110783.png)
 
 
 

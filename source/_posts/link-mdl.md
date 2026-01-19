@@ -290,7 +290,7 @@ function w_gen_eye_simple_test(input,x_npts_ui, x_npts, y_range, y_npts; osr, x_
 end
 ```
 
-
+> Julia's interpolation return a *function object* that can operate on any values you throw at it
 
 ![eyebin.drawio](link-mdl/eyebin.drawio.svg)
 
@@ -343,8 +343,6 @@ end
 
 **warp** or **remap** a *"jittery time grid"* onto our *"uniform time grid"*
 
-![image-20260118180411601](link-mdl/image-20260118180411601.png)
-
 ```julia
 prev_nui = 4
 Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
@@ -366,13 +364,23 @@ drv.Δtt_ext[lastindex(drv.Δtt_prev_nui)+1:end] .= Δtt  # 2
 ![vext.drawio](link-mdl/vext.drawio.svg)
 
 ```julia
-drv.Vext[eachindex(drv.V_prev_nui)] .= drv.V_prev_nui
-drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr
+drv.Vext[eachindex(drv.V_prev_nui)] .= drv.V_prev_nui  # 1
+drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr  # 2
+```
+
+![image-20260118180411601](link-mdl/image-20260118180411601.png)
+
+```julia
+function drv_jitter_tvec!(tt_Vext, Δtt_ext, osr)
+    for n = 1:lastindex(Δtt_ext)-1
+        tt_Vext[(n-1)*osr+1:n*osr] .= LinRange((n-1)*osr+Δtt_ext[n], n*osr+Δtt_ext[n+1], osr+1)[1:end-1]
+    end
+
+    return nothing
+end
 ```
 
 
-
-![dcd.drawio](link-mdl/dcd.drawio.svg)
 
 ### Sam Palermo's
 

@@ -148,6 +148,8 @@ Thus, yield EQ(3.48)
 
 ## Duty Cycle Distortion – DCD
 
+![dcd.drawio](jitter/dcd.drawio.svg)
+
 | Jitter measurement | Description                                                  |
 | :----------------- | :----------------------------------------------------------- |
 | DCD                | Duty Cycle Distortion is the peak-to-peak amplitude of the component of the deterministic jitter correlated with the signal polarity. |

@@ -231,6 +231,12 @@ end
 
 ![image-20251216231344142](link-mdl/image-20251216231344142.png)
 
+```julia
+Vo_conv::Vector = zeros(param.blk_size_osr+lastindex(ir)-1) 
+Vo = @views Vo_conv[1:param.blk_size_osr] 
+Vo_mem = @views Vo_conv[param.blk_size_osr+1:end]
+```
+
 
 
 ![image-20251216230945058](link-mdl/image-20251216230945058.png)

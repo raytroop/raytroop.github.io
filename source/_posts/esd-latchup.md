@@ -579,6 +579,117 @@ $R_{ON}$ for a *forward-biased diode* is ***lower*** than that for a *reverse-bi
 
 One major disadvantage of a forward diode-string for ESD protection is that the leakage current (Ileak) may be enlarged due to the Darlington effect in the diode-string
 
+### Gated diode & STI diode
+
+"gated diode" aka. "poly bound" diode
+
+![image-20241120212904118](esd-latchup/image-20241120212904118.png)
+
+![image-20250712085956491](esd-latchup/image-20250712085956491.png)
+
+STI bound diodes typically have ***lower** capacitance* 
+
+> M. Simicic, G. Hellings, S. -H. Chen, N. Horiguchi and D. Linten, "ESD diodes with Si/SiGe superlattice I/O finFET architecture in a vertically stacked horizontal nanowire technology," 2018 48th European Solid-State Device Research Conference (ESSDERC), Dresden, Germany, 2018
+>
+> US9653448B2. Electrostatic Discharge (ESD) Diode in FinFET Technology
+
+---
+
+
+
+![image-20241120211301296](esd-latchup/image-20241120211301296.png)
+
+![image-20241120211426247](esd-latchup/image-20241120211426247.png)
+
+---
+
+![image-20250712181904914](esd-latchup/image-20250712181904914.png)
+
+> ?? **Rotated STI Diode**
+
+
+
+![image-20250712183318811](esd-latchup/image-20250712183318811.png)
+
+![image-20250712183347973](esd-latchup/image-20250712183347973.png)
+
+
+
+> Loke, Alvin & Yang, (2018). Analog/mixed-signal design challenges in 7-nm CMOS and beyond. 10.1109/CICC.2018.8357060. 
+>
+> Shih-Hung Chen. CICC 2019: Designing Diode Based ESD Protection in Advanced State of the Art Technologies
+
+
+
+
+### Two-Stage ESD Protection
+
+two-stage primary–secondary ESD protection
+
+a primary ESD protection structure (ESD1), a secondary ESD protection unit (ESD2), and an isolation resistor ($R$)
+
+> The desired specs for **ESD2** is **low $V_\text{t1}$** and **short $t_1$**, while that for **ESD1** include **low $R_{ON}$**, **low $V_\text{h}$** and **high $I_\text{t2}$**
+
+- The primary ESD1 structure is typically optimized for high ESD protection level, which however may feature a high ESD $V_\text{t1}$, not suitable for low-voltage (LV) ICs
+
+- The secondary ESD2 unit serves as a trigger-assisting device that features a lower ESD $V_\text{t1}$ and fast ESD triggering, which is typically weak in handling large ESD discharge currents
+
+> The isolation $R$ has another role, which is to prevent an ESD pulse from getting into IC core (i.e., stressing the input device) directly, hence
+avoid possible *CMOS gate breakdown*
+>
+> $R$ involves a design trade-off too: large enough for fast voltage build up, but not too large to avoid adverse impact on signal propagation
+
+The two-stage ESD protection method is re-gaining attention for *CDM ESD* protection because it can **handle large ESD surges without overheating**, while preventing CMOS gate breakdown due to the isolation R (i.e., no direct zapping
+on the input gate)
+
+
+![img](esd-latchup/esd2ndprotect.png.jpg)
+
+1. Adding a (small) clamp behind the isolation resistance can extend the ESD design window, e.g. enabling dual diode protection for thin oxide transistors.
+2. ESD current through this clamp will build-up voltage across the isolation resistance, while protecting the circuit. 
+3. The higher voltage at the IN pad will then trigger the primary protection (red current path)
+
+
+
+---
+
+Adding a (small) clamp behind the isolation resistance can extend the **ESD design window**, e.g. enabling dual diode protection for thin oxide transistors
+
+![img](esd-latchup/secondaryprotection-window.png)
+
+Extended ESD design window example. The failure voltage of a thin gate oxide in advanced CMOS is about 4V. The primary ESD solution (red IV curve) introduces too much voltage. Thanks to an isolation resistance between primary and secondary local clamp device (green IV curve) additional margin is created.
+
+
+
+> [[https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/](https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/)]
+
+
+
+---
+
+![image-20250712100248384](esd-latchup/image-20250712100248384.png)
+
+
+
+> Okushima, M. and Tsuruta, J., "Secondary ESD clamp circuit for CDM protection of over 6Gbit/s SerDes application in 40nm CMOS", <i>Microelectronics Reliability</i>, vol. 53, no. 2, pp. 215–220, 2013 [[https://sci-hub.se/https://doi.org/10.1016/j.microrel.2012.04.010](https://sci-hub.se/https://doi.org/10.1016/j.microrel.2012.04.010)]
+
+
+
+---
+
+> Peter de Jong. ESD Co-Design for High-Speed SerDes in FinFET Technologies [[https://incompliancemag.com/esd-co-design-for-high-speed-serdes-in-finfet-technologies/](https://incompliancemag.com/esd-co-design-for-high-speed-serdes-in-finfet-technologies/)]
+
+***Enhanced ESD Protection for Output Driver***
+
+![image-20260124104055528](esd-latchup/image-20260124104055528.png)
+
+***Intrinsic Robust Output Driver***
+
+![image-20260124104225655](esd-latchup/image-20260124104225655.png)
+
+
+
+
 ## Silicon Controlled Rectifiers (SCR)
 
 A **thyristor** (also known as a <u>**S**ilicon Controlled **R**ectifier</u> or **SCR**) is a three-terminal semiconductor device used as an *electronic switch* or *rectifier*
@@ -639,96 +750,6 @@ To turn the thyristor on, a positive voltage pulse is applied to the gate (G) te
 
 
 
-## Two-Stage ESD Protection
-
-two-stage primary–secondary ESD protection
-
-a primary ESD protection structure (ESD1), a secondary ESD protection unit (ESD2), and an isolation resistor ($R$)
-
-> The desired specs for **ESD2** is **low $V_\text{t1}$** and **short $t_1$**, while that for **ESD1** include **low $R_{ON}$**, **low $V_\text{h}$** and **high $I_\text{t2}$**
-
-- The primary ESD1 structure is typically optimized for high ESD protection level, which however may feature a high ESD $V_\text{t1}$, not suitable for low-voltage (LV) ICs
-
-- The secondary ESD2 unit serves as a trigger-assisting device that features a lower ESD $V_\text{t1}$ and fast ESD triggering, which is typically weak in handling large ESD discharge currents
-
-> The isolation $R$ has another role, which is to prevent an ESD pulse from getting into IC core (i.e., stressing the input device) directly, hence
-avoid possible *CMOS gate breakdown*
->
-> $R$ involves a design trade-off too: large enough for fast voltage build up, but not too large to avoid adverse impact on signal propagation
-
-The two-stage ESD protection method is re-gaining attention for *CDM ESD* protection because it can **handle large ESD surges without overheating**, while preventing CMOS gate breakdown due to the isolation R (i.e., no direct zapping
-on the input gate)
-
-
-![img](esd-latchup/esd2ndprotect.png.jpg)
-
-1. Adding a (small) clamp behind the isolation resistance can extend the ESD design window, e.g. enabling dual diode protection for thin oxide transistors.
-2. ESD current through this clamp will build-up voltage across the isolation resistance, while protecting the circuit. 
-3. The higher voltage at the IN pad will then trigger the primary protection (red current path)
-
-
-
----
-
-Adding a (small) clamp behind the isolation resistance can extend the **ESD design window**, e.g. enabling dual diode protection for thin oxide transistors
-
-![img](esd-latchup/secondaryprotection-window.png)
-
-Extended ESD design window example. The failure voltage of a thin gate oxide in advanced CMOS is about 4V. The primary ESD solution (red IV curve) introduces too much voltage. Thanks to an isolation resistance between primary and secondary local clamp device (green IV curve) additional margin is created.
-
-
-
-> [[https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/](https://monthly-pulse.com/2022/03/29/introduction-esd-protection-concepts-for-i-os/)]
-
-
-
----
-
-![image-20250712100248384](esd-latchup/image-20250712100248384.png)
-
-
-
-> Okushima, M. and Tsuruta, J., "Secondary ESD clamp circuit for CDM protection of over 6Gbit/s SerDes application in 40nm CMOS", <i>Microelectronics Reliability</i>, vol. 53, no. 2, pp. 215–220, 2013 [[https://sci-hub.se/https://doi.org/10.1016/j.microrel.2012.04.010](https://sci-hub.se/https://doi.org/10.1016/j.microrel.2012.04.010)]
-
-## Gated diode & STI diode
-
-"gated diode" aka. "poly bound" diode
-
-![image-20241120212904118](esd-latchup/image-20241120212904118.png)
-
-![image-20250712085956491](esd-latchup/image-20250712085956491.png)
-
-STI bound diodes typically have ***lower** capacitance* 
-
-> M. Simicic, G. Hellings, S. -H. Chen, N. Horiguchi and D. Linten, "ESD diodes with Si/SiGe superlattice I/O finFET architecture in a vertically stacked horizontal nanowire technology," 2018 48th European Solid-State Device Research Conference (ESSDERC), Dresden, Germany, 2018
->
-> US9653448B2. Electrostatic Discharge (ESD) Diode in FinFET Technology
-
----
-
-
-
-![image-20241120211301296](esd-latchup/image-20241120211301296.png)
-
-![image-20241120211426247](esd-latchup/image-20241120211426247.png)
-
----
-
-![image-20250712181904914](esd-latchup/image-20250712181904914.png)
-
-> ?? **Rotated STI Diode**
-
-
-
-![image-20250712183318811](esd-latchup/image-20250712183318811.png)
-
-![image-20250712183347973](esd-latchup/image-20250712183347973.png)
-
-
-
-> Loke, Alvin & Yang, (2018). Analog/mixed-signal design challenges in 7-nm CMOS and beyond. 10.1109/CICC.2018.8357060. 
->
-> Shih-Hung Chen. CICC 2019: Designing Diode Based ESD Protection in Advanced State of the Art Technologies
 
 
 

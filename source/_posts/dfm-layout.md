@@ -389,6 +389,10 @@ off transistor split diffusion
 
 ![image-20251009231152210](dfm-layout/image-20251009231152210.png)
 
+![description.PNG](dfm-layout/134953qrjlql2pu2pdjx48.png)
+
+![MOS example.PNG](dfm-layout/134959r9vto990c0c590z5.png)
+
 ### Length of Diffusion (LOD)
 
 > ***Shallow Trench Isolation Stress***

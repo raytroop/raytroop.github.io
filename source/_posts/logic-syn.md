@@ -229,6 +229,18 @@ To set this global variable, use the `set_global` command.
 
 ![image-20221210143256639](logic-syn/image-20221210143256639.png)
 
+---
+
+> Sulege Vivek [[link](https://www.linkedin.com/posts/sulege-vivek-398a65237_vlsi-asic-sta-activity-7420445942685917185-rrxG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
+
+![img](logic-syn/1768986953690.jpeg)
+
+![img](logic-syn/1769172176834.jpeg)
+
+
+
+
+
 ## preserve hand-instantiated cells
 
 To preserve the hand-instantiated cells

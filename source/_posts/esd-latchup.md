@@ -302,6 +302,24 @@ Thanks to the device scaling the area is actually reasonable. However, the leaka
 
 > ![image-20260115211251351](esd-latchup/image-20260115211251351.png)
 
+![image-20260123235033316](esd-latchup/image-20260123235033316.png)
+
+![image-20260124100722316](esd-latchup/image-20260124100722316.png)
+
+![image-20260124100747589](esd-latchup/image-20260124100747589.png)
+
+---
+
+> Y. -C. Huang and M. -D. Ker, "Investigation of CDM ESD Protection Capability Among Power-Rail ESD Clamp Circuits in CMOS ICs With Decoupling Capacitors," in *IEEE Journal of the Electron Devices Society*, vol. 11, pp. 84-94, 2023 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9983812)]
+
+![image-20260123234624720](esd-latchup/image-20260123234624720.png)
+
+---
+
+
+
+
+
 ### Dual Stacked Diodes
 
 ![image-20230518012456390](esd-latchup/image-20230518012456390.png)
@@ -358,13 +376,33 @@ Programmable Electrical Rules Checking (PERC) is a method for checking reliabili
 
 ![image-20260106222459171](esd-latchup/image-20260106222459171.png)
 
-- CD: current density checks
+| Topology (Circuit Connection and Device Size) | Check ESD protection scheme                     |
+| --------------------------------------------- | ----------------------------------------------- |
+| **LDL (Logic-Driven-Layout DRC)**             | **Check Latch-up rules**                        |
+| **CD (Current Density)**                      | **Check primary, secondary ESD discharge path** |
+| **P2P (Point-to-Point Resistance)**           | **Check I/O to power-clamp path**               |
 
-- P2P: point to point resistance checks
 
-- LDL: logic driven layout checks, latch up related
 
-- TOPO: topology, circuit connection and device size checks
+---
+
+***pad_info***
+
+```
+// Define PAD Voltage
+// VARIABLE "pad-text-name" pad-voltage
+VARIABLE "DVDD" 0.75
+VARIABLE "DVSS" 0.75
+
+// Define PAD Text
+// LAYOUT TEXT "pad-text-name" x-coor y-coor pin-text-layer
+
+LAYOUT TEXT "DVDD" x0-coor y0-coor pin-text-layer
+LAYOUT TEXT "DVDD" x1-coor y1-coor pin-text-layer
+LAYOUT TEXT "DVSS" x2-coor y2-coor pin-text-layer
+```
+
+> above \<x0-coor y0-coor\> and \<x1-coor y1-coor\> are shorted together, in this way the two bump can share power clamp
 
 
 
@@ -465,15 +503,21 @@ to *isolate different regions* of the IC, minimizing unwanted electrical interac
 
 ![image-20250615103508641](esd-latchup/image-20250615103508641.png)
 
-![image-20250615105240076](esd-latchup/image-20250615105240076.png)
-
-![image-20250615105309789](esd-latchup/image-20250615105309789.png)
+![image-20260124095638685](esd-latchup/image-20260124095638685.png)
 
 
 
-*OD injector*
 
-![image-20250615104009056](esd-latchup/image-20250615104009056.png)
+
+
+
+### OD injector with different noise level
+
+> JEDEC STANDARD IC Latch-Up Test JESD78F.01 (Revision of JESD78F dated January 2022 [[https://www.jedec.org/sites/default/files/docs/JESD78D.pdf](https://www.jedec.org/sites/default/files/docs/JESD78D.pdf)]
+
+![image-20260124100257880](esd-latchup/image-20260124100257880.png)
+
+
 
 
 

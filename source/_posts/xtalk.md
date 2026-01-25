@@ -1,6 +1,6 @@
 ---
 title: Crosstalk in VLSI Interconnects
-date: 2026-01-10 08:53:10
+date: 2025-01-24 14:27:52
 tags:
 categories:
 - sipi
@@ -23,23 +23,6 @@ For instance
 
 - magnetic coupling between multiple inductors
 - capacitive coupling between multiple transmission lines
-
-
-
-
-
-## Decoupling Capacitor
-
-![image-20250705175343498](xtalk/image-20250705175343498-1751987296814-46.png)
-
-## Grounding
-
-*TODO* &#128197;
-
-
-> Chapter 11 Layout and grounding [[http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf](http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf)]
-
-
 
 
 

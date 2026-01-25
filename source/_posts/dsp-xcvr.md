@@ -63,13 +63,13 @@ Tony Chan Carusone, Alphawave Semi. VLSI2025 SC2: Connectivity Technologies to A
 
 ---
 
-Tony Pialis, Alphawave Semi. How DSP is Killing the Analog in SerDes [[https://youtu.be/OY2Dn4EDPiA?si=q2Qy_avTIxJjDdOf](https://youtu.be/OY2Dn4EDPiA?si=q2Qy_avTIxJjDdOf)]
+Tony Pialis, Alphawave Semi. How DSP is Killing the Analog in SerDes [[https://youtu.be/OY2Dn4EDPiA](https://youtu.be/OY2Dn4EDPiA)]
 
-Tony Chan Carusone, Alphawave Semi. High Speed Communications Part 3 – Equalization & MLSD [[https://youtu.be/KqwZ23vNqYg?si=pqMFWVVUOrAVhkeU](https://youtu.be/KqwZ23vNqYg?si=pqMFWVVUOrAVhkeU)]
+Tony Chan Carusone, Alphawave Semi. High Speed Communications Part 3 – Equalization & MLSD [[https://youtu.be/KqwZ23vNqYg](https://youtu.be/KqwZ23vNqYg)]
 
-—. High Speed Communications Part 9 – Anatomy of a Modern SerDes [[https://youtu.be/tlc68UTn6iQ?si=ZkqAy3INlA3Vr8Y7](https://youtu.be/tlc68UTn6iQ?si=ZkqAy3INlA3Vr8Y7)]
+—. High Speed Communications Part 9 – Anatomy of a Modern SerDes [[https://youtu.be/tlc68UTn6iQ](https://youtu.be/tlc68UTn6iQ)]
 
-—. High Speed Communications Part 10 – 224Gbps Link Impairments [[https://youtu.be/m-Msp_2WGAg?si=n5lgrxiz24K7x66a](https://youtu.be/m-Msp_2WGAg?si=n5lgrxiz24K7x66a)]
+—. High Speed Communications Part 10 – 224Gbps Link Impairments [[https://youtu.be/m-Msp_2WGAg](https://youtu.be/m-Msp_2WGAg)]
 
-—. High Speed Communications Part 11 – SerDes DSP Interactions [[https://youtu.be/YIAwLskuVPc?si=1HWB0yA2u2jiixNZ](https://youtu.be/YIAwLskuVPc?si=1HWB0yA2u2jiixNZ)]
+—. High Speed Communications Part 11 – SerDes DSP Interactions [[https://youtu.be/YIAwLskuVPc](https://youtu.be/YIAwLskuVPc)]
 

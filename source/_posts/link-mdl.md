@@ -11,9 +11,7 @@ mathjax: true
 
 While many different analysis methods exist, including frequency and statistical analysis, *time domain results* remain the final *sign-off*
 
-![image-20250824223103058](link-mdl/image-20250824223103058.png)
-
-![image-20250807000316790](link-mdl/image-20250807000316790.png)
+![image-20260127221606934](link-mdl/image-20260127221606934.png)
 
 ### serdespy
 
@@ -106,6 +104,25 @@ lines(tt, out[1:length(vbits)])
 
 
 
+```julia
+#call our convolution function; let's keep the input memory zero for now
+#change the drv parameters in the struct definition to see the waveform/eye change
+u_conv!(drv.Vo_conv, Vosr, drv.ir, Vi_mem=zeros(1), gain = drv.swing * param.dt);
+
+
+#we will also create a non-mutating u_conv function for other uses
+function u_conv(input, ir; Vi_mem = zeros(1), gain = 1)
+    vconv = gain .* conv(ir, input)
+    vconv[eachindex(Vi_mem)] += Vi_mem
+
+    return vconv
+end
+```
+
+![image-20260127222632389](link-mdl/image-20260127222632389.png)
+
+
+
 ---
 
 
@@ -186,14 +203,6 @@ gui(p)
 ```
 
 ![image-20251008131325508](link-mdl/image-20251008131325508.png)
-
----
-
-***Elastic Buffer***
-
-the elastic buffer approach would be the most general for modeling say frequency offsets between TX and RX (will be addressed in future development)
-
-![An_example_of_elastic_buffer](link-mdl/An_example_of_elastic_buffer.svg)
 
 
 ---

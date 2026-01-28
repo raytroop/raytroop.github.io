@@ -9,7 +9,7 @@ mathjax: true
 
 
 
-## bandwidth - Rules of Thumb
+## Bandwidth of Digital Waveforms
 
 ### NRZ Bandwidth
 > Maxim Integrated,NRZ Bandwidth - HF Cutoff vs. SNR [[https://pdfserv.maximintegrated.com/en/an/AN870.pdf](https://pdfserv.maximintegrated.com/en/an/AN870.pdf)]

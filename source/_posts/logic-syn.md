@@ -6,6 +6,24 @@ categories:
 - digital
 ---
 
+
+
+## IJTAG
+
+While JTAG connects chips externally, ***IJTAG*** extends it inside the chip — linking embedded instruments (MBIST, sensors, monitors, etc.) through a reconfigurable network.
+
+
+
+***Pin-Mux Logic***
+Pins are precious in SoC design! 
+
+- Pin-Mux Logic lets functional and test signals share the same pins depending on the mode.
+- During test mode, JTAG/IJTAG signals are routed internally via multiplexers — saving pins and silicon area.
+
+![diagram](logic-syn/1762490941551.jpeg)
+
+
+
 ## Digital Delay Model
 
 > Akio Kitagawa, Analog layout design [https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf](https://mixsignal.files.wordpress.com/2013/03/analog-layout.pdf)

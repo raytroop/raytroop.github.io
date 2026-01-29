@@ -234,6 +234,29 @@ end
 
 ![tx blk diagram](link-mdl/tx_blk_diagram.png)
 
+```julia
+function drv_top!(drv, input)
+	@unpack all parameters and vectors
+
+    apply_fir_filter!(Sfir, input, fir, kwargs...)
+
+	oversample!(Vfir,Sfir)
+
+	if jitter_en
+        # !!! jitter gen before impulse response convolution
+        # !!! jitter information at each edge location
+		add_jitter!(drv, Vfir)
+	end
+	
+    # impulse response of the driver (and subsequent channel, RX front end, etc.) plays a crucial role 
+    # in low-pass filtering the jittered waveform to give it a "smoother look"
+	convolve!(Vo_conv, Vfir, ir, kwargs...)
+
+end
+```
+
+
+
 
 
 ![img](link-mdl/vo_views.png)
@@ -332,7 +355,7 @@ feye
 
 ---
 
-FIR filter typically is much shorter (<10 taps) than the symbol vector, using *FFT convolution might be an overkill*. For optimization, a simple ***shift-and-add filter*** function can be written   
+FIR filter typically is much shorter (<10 taps) than the symbol vector, using *FFT convolution might be an overkill*. For optimization, a simple ***shift-and-add filter*** function can be written
 
 ![image-20260118013730655](link-mdl/image-20260118013730655.png)
 
@@ -369,6 +392,14 @@ tt_Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
 tt_uniform::Vector = (0:param.blk_size_osr-1) .+ prev_nui/2*param.osr
 ```
 
+`prev_nui` denotes the number of previous symbols to be stitched to the current block's signal to *prevent overflow/underflow when jitter is introduced*
+
+`Δtt*` vectors store the jitter information *at each edge location*
+
+`tt_Vext` vector is the jittered time grid vector
+
+`tt_uniform` is the convience vector to remap the jittered waveform back to our simulation grid
+
 ![deltatt.drawio](link-mdl/deltatt.drawio.svg)
 
 ```julia
@@ -392,6 +423,19 @@ function drv_jitter_tvec!(tt_Vext, Δtt_ext, osr)
     end
 
     return nothing
+end
+```
+
+
+
+run simulation by **recursion** 
+
+```julia
+function run_blk_iter(trx, idx, n_tot_blk, blk_func::Function)
+    if idx < n_tot_blk
+        blk_func(trx, idx+1)
+        run_blk_iter(trx, idx+1, n_tot_blk, blk_func)
+    end
 end
 ```
 

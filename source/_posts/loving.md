@@ -11,7 +11,7 @@ tags:
 
 > ***热爱生活，拥抱不确定性***
 >
-> ***loving life, embracing uncertainty***
+> ***loving life & embracing uncertainty***
 
 
 

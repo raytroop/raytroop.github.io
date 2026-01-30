@@ -9,14 +9,6 @@ mathjax: true
 
 
 
-## Additive White Gaussian Noise (AWGN)
-
-> Qasim Chaudhari. Additive White Gaussian Noise (AWGN) [[https://wirelesspi.com/additive-white-gaussian-noise-awgn/](https://wirelesspi.com/additive-white-gaussian-noise-awgn/)]
-
-*TODO* &#128197;
-
-
-
 ## Pulse Amplitude Modulation (PAM)
 
 > Qasim Chaudhari. Pulse Amplitude Modulation (PAM) [[https://wirelesspi.com/pulse-amplitude-modulation-pam/](https://wirelesspi.com/pulse-amplitude-modulation-pam/)]
@@ -41,9 +33,21 @@ The average value of output pulse are same because of **same DC gain (0dB)**
 
 
 
-## Nyquist Stability Criterion
+## Stability Criterion
+
+### Barkhausen criteria
+
+Barkhausen criteria are *necessary* but **not sufficient conditions** for sustainable **oscillations**
+
+![image-20240720090654883](ss-insight/image-20240720090654883.png)
+
+it simply *"latches up"* rather than oscillates
+
+### Nyquist Stability Criterion
 
 > Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers[[https://www.cppsim.com/CommCircuitLectures/lec15.pdf](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
+>
+> *Zoran Gajic*. Nyquist Stability Criterion [[https://eceweb1.rutgers.edu/~gajic/psfiles/nyquist.pdf](https://eceweb1.rutgers.edu/~gajic/psfiles/nyquist.pdf)]
 
 *TODO* &#128197;
 
@@ -298,13 +302,7 @@ When limited to a *finite bandwidth* and viewed in the time domain, thermal nois
 
 
 
-## Barkhausen criteria
 
-Barkhausen criteria are *necessary* but **not sufficient conditions** for sustainable **oscillations**
-
-![image-20240720090654883](ss-insight/image-20240720090654883.png)
-
-it simply *"latches up"* rather than oscillates
 
 
 

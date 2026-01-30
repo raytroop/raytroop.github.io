@@ -10,7 +10,124 @@ mathjax: true
 
 ![image-20241208103218870](noise/image-20241208103218870.png)
 
+
+
+## White noise
+
+> David Murray. Topic 6: Random Processes and Signals [[slides](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/L6.pdf) [notes](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf)]
+>
+> Mathuranathan. White Noise : Simulation and Analysis using Matlab [[https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/](https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/)]
+
+![Wiener Khinchin Theorem](noise/Wiener-Khinchin-Theorem.png)
+
+![image-20251214183435273](noise/image-20251214183435273.png)
+
 ---
+
+> Julius Orion Smith III. Why an Impulse is Not White [[https://www.dsprelated.com/freebooks/sasp/Why_Impulse_Not_White.html](https://www.dsprelated.com/freebooks/sasp/Why_Impulse_Not_White.html)]
+
+![image-20251214183726713](noise/image-20251214183726713.png)
+
+---
+
+***I.I.D. Noise***
+
+`Independent and Identically Distributed`
+
+> Kevin Zheng. The Frequency Domain Trap – Beware of Your AC Analysis [[https://circuit-artists.com/the-frequency-domain-trap-beware-of-your-ac-analysis/](https://circuit-artists.com/the-frequency-domain-trap-beware-of-your-ac-analysis/)]
+>
+> Mathuranathan. White Noise : Simulation and Analysis using Matlab [[https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/](https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/)]
+
+***white noise*** doesn't mean it has a *Gaussian/normal distribution*
+
+The only criteria for a (discrete) signal to be **"white"** is for **each sample to be independently taken from the same probability distribution**
+
+![img](noise/distributions.png)
+
+By understanding input signal's statistical nature, we can gather more insights about certain requirements for our circuits than just from frequency domain
+
+![img](noise/nonlin-pdf-1.png)
+
+
+
+---
+
+![image-20250727111432313](noise/image-20250727111432313.png)
+
+```matlab
+fs = 1;
+N = 2^20;
+Nhist = 100;
+segmentLength = 512;
+
+x_norm = randn(1, N,1); % Generate random data (e.g., Gaussian white noise)
+[pxx_norm, f] = pwelch(x_norm, segmentLength, [], [], fs);
+
+x_uniform = 2*rand(N,1) - 1; % uniform random -1 ~ 1;
+[pxx_uniform, ~] = pwelch(x_uniform, segmentLength, [], [], fs);
+
+x_sin = sin(2*pi*(rand(N,1) - 0.5)); % sinusoidal-like
+[pxx_sin, ~] = pwelch(x_sin, segmentLength, [], [], fs);
+
+x_bin = 2*randi(2,N,1) -3; % binomial distribution, -1, 1
+[pxx_bin, ~] = pwelch(x_bin, segmentLength, [], [], fs);
+```
+
+---
+
+![image-20250922225811644](noise/image-20250922225811644.png)
+
+```matlab
+val = randn(1, 2^20,1);
+val_abs = abs(val);
+val_abs_avg = mean(val_abs);
+subplot(2,2,1)
+histogram(val);
+title('x_{norm} distribution'); grid on
+
+subplot(2,2,2)
+histogram(val_abs);
+title('|x_{norm}| distribution')
+
+subplot(2,2,[3 4])
+[pxx, f] = pwelch(val_abs - val_abs_avg, 512, [], [], 1);
+plot(f, 10*log10(pxx), LineWidth=4); grid on
+title('psd (dB)')
+```
+
+
+
+## Additive White Gaussian Noise (AWGN)
+
+> Qasim Chaudhari. Additive White Gaussian Noise (AWGN) [[https://wirelesspi.com/additive-white-gaussian-noise-awgn/](https://wirelesspi.com/additive-white-gaussian-noise-awgn/)]
+>
+> Mathuranathan. Simulate additive white Gaussian noise (AWGN) channel [[https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/](https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/)]
+>
+> Chapter 2 Discrete-time and continuous-time AWGN channels [[https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/7cb3929341f072786598cd05c69a3f5c_chap_2.pdf](https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/7cb3929341f072786598cd05c69a3f5c_chap_2.pdf)]
+
+![image-20251214161342050](noise/image-20251214161342050.png)
+
+---
+
+> Does PSD (dBm/Hz) of white noise depend on sampling rate?. Does PSD (dBm/Hz) of white noise depend on sampling rate? [https://dsp.stackexchange.com/a/87654/59253]
+>
+> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [https://blog.ioces.com/matt/posts/colouring-noise/]
+>
+> How to generate white noise signal from a given PSD? [https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849]
+
+$$
+\text{PSD}_s =  \frac{\sigma^2}{f_s} \space\space \text{for two-sided PSD} \space\space\space \text{or}\space\space\space
+=\frac{\sigma^2}{f_s/2}\space\space \text{for one-sided PSD}
+$$
+
+
+
+![image-20251208011528326](noise/image-20251208011528326-1769785341250-1.png)
+
+![image-20251208012745236](noise/image-20251208012745236-1769785341251-5.png)
+
+
+
 
 
 
@@ -24,12 +141,6 @@ mathjax: true
 >
 > Steve Smith. An Interesting Fourier Transform - 1/f Noise [[https://www.dsprelated.com/showarticle/40.php](https://www.dsprelated.com/showarticle/40.php)]
 >
-
-
-
-![Wiener Khinchin Theorem](noise/Wiener-Khinchin-Theorem.png)
-
-
 
 
 
@@ -81,6 +192,8 @@ The process of generating coloured noise is relatively simple:
 2. **Shape the signal in the frequency domain** according to the PSD you'd like to achieve
 3. Take the inverse Fourier transform of the shaped signal
 
+
+
 sampling shaping transfer function (not scaled by $1/T_s$), which make sense in time domain convolution between sampled noise with sampled impulse response of filter
 
 
@@ -91,187 +204,13 @@ sampling shaping transfer function (not scaled by $1/T_s$), which make sense in 
 
 ![white_noise_sampling.drawio](noise/white_noise_sampling.drawio.svg)
 
+---
+
 ![image-20260111215146609](noise/image-20260111215146609.png)
 
-## White noise
 
-> David Murray. Topic 6: Random Processes and Signals [[slides](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/L6.pdf) [notes](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf)]
 
-![image-20251214183435273](noise/image-20251214183435273.png)
-
----
-
-
-
-> Julius Orion Smith III. Why an Impulse is Not White [[https://www.dsprelated.com/freebooks/sasp/Why_Impulse_Not_White.html](https://www.dsprelated.com/freebooks/sasp/Why_Impulse_Not_White.html)]
->
-> ![image-20251214183726713](noise/image-20251214183726713.png)
-
-
-
-### AWGN (Additive White Gaussian Noise )
-
-> Mathuranathan. Simulate additive white Gaussian noise (AWGN) channel [[https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/](https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/)]
-
-![image-20251214161342050](noise/image-20251214161342050.png)
-
-
-### White Noise by i.i.d Random Variable
-
-`Independent and Identically Distributed`
-
-> Kevin Zheng. The Frequency Domain Trap – Beware of Your AC Analysis [[https://circuit-artists.com/the-frequency-domain-trap-beware-of-your-ac-analysis/](https://circuit-artists.com/the-frequency-domain-trap-beware-of-your-ac-analysis/)]
->
-> Mathuranathan. White Noise : Simulation and Analysis using Matlab [[https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/](https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/)]
-
-***white noise*** doesn't mean it has a *Gaussian/normal distribution*
-
-The only criteria for a (discrete) signal to be **"white"** is for **each sample to be independently taken from the same probability distribution**
-
-![img](noise/distributions.png)
-
-By understanding input signal's statistical nature, we can gather more insights about certain requirements for our circuits than just from frequency domain
-
-![img](noise/nonlin-pdf-1.png)
-
-
-
----
-
-![image-20250727111432313](noise/image-20250727111432313.png)
-
-```matlab
-fs = 1;
-N = 2^20;
-Nhist = 100;
-segmentLength = 512;
-
-x_norm = randn(1, N,1); % Generate random data (e.g., Gaussian white noise)
-[pxx_norm, f] = pwelch(x_norm, segmentLength, [], [], fs);
-
-x_uniform = 2*rand(N,1) - 1; % uniform random -1 ~ 1;
-[pxx_uniform, ~] = pwelch(x_uniform, segmentLength, [], [], fs);
-
-x_sin = sin(2*pi*(rand(N,1) - 0.5)); % sinusoidal-like
-[pxx_sin, ~] = pwelch(x_sin, segmentLength, [], [], fs);
-
-x_bin = 2*randi(2,N,1) -3; % binomial distribution, -1, 1
-[pxx_bin, ~] = pwelch(x_bin, segmentLength, [], [], fs);
-
-subplot(2, 4, 1)
-histogram(x_norm, Nhist);
-title('normal distribution')
-
-subplot(2, 4, 5)
-plot(f, 10*log10(pxx_norm));
-xlabel('Frequency (Hz)');
-ylabel('dB');
-title('PSD of normal distribution')
-
-%% 
-subplot(2, 4, 2)
-histogram(x_uniform, Nhist);
-title('uniform distribution')
-
-subplot(2, 4, 6)
-plot(f, 10*log10(pxx_uniform));
-xlabel('Frequency (Hz)');
-ylabel('dB');
-title('PSD of uniform distribution')
-
-%% 
-subplot(2, 4, 3)
-histogram(x_sin, Nhist);
-title('sinusoidal-like distribution')
-
-subplot(2, 4, 7)
-plot(f, 10*log10(pxx_sin));
-xlabel('Frequency (Hz)');
-ylabel('dB');
-title('PSD of sinusoidal-like distribution')
-
-%%
-subplot(2, 4, 4)
-histogram(x_bin, Nhist);
-title('binomial distribution')
-
-subplot(2, 4, 8)
-plot(f, 10*log10(pxx_bin));
-xlabel('Frequency (Hz)');
-ylabel('dB');
-title('PSD of binomial distribution')
-```
-
----
-
-![image-20250922225811644](noise/image-20250922225811644.png)
-
-```matlab
-val = randn(1, 2^20,1);
-val_abs = abs(val);
-val_abs_avg = mean(val_abs);
-subplot(2,2,1)
-histogram(val);
-title('x_{norm} distribution'); grid on
-
-subplot(2,2,2)
-histogram(val_abs);
-title('|x_{norm}| distribution')
-
-subplot(2,2,[3 4])
-[pxx, f] = pwelch(val_abs - val_abs_avg, 512, [], [], 1);
-plot(f, 10*log10(pxx), LineWidth=4); grid on
-title('psd (dB)')
-```
-
-
-
-
-## Sampling Noise
-
-> Chembian Thambidurai, "Noise, Sampling and Zeta Functions" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_sampling-noise-signals-activity-7018929654627520512-QYr0)]
-
-A random signal $v_n(t)$ is sampled using an ***ideal impulse sampler***
-
-![image-20241201165157743](noise/image-20241201165157743.png)
-
-*TODO* &#128197;
-
-### White Noise
-
-> Does PSD (dBm/Hz) of white noise depend on sampling rate?. Does PSD (dBm/Hz) of white noise depend on sampling rate? [[https://dsp.stackexchange.com/a/87654/59253](https://dsp.stackexchange.com/a/87654/59253)]
->
-
-
-
-![image-20251208011528326](noise/image-20251208011528326.png)
-
-
-
----
-
-> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)]
-
-![image-20251208012147012](noise/image-20251208012147012.png)
-$$
-\text{PSD}_s =  \frac{\sigma^2}{f_s} \space\space \text{for two-sided PSD} \space\space\space \text{or}\space\space\space =\frac{\sigma^2}{f_s/2}\space\space \text{for one-sided PSD} 
-$$
-
-```matlab
-# Generate Gaussian white noise in the time domain
-sigma = 1 / np.sqrt(2.0 * dt)
-x_t = rng.normal(0.0, sigma, n)
-```
-
-
-
-> How to generate white noise signal from a given PSD? [[https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849](https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849)]
->
-> ![image-20251208012745236](noise/image-20251208012745236.png)
-
-
-
-###  bandlimited white noise
+## sampling bandlimited white noise
 
 The **aliasing of the noise**, or **noise folding**, plays an important role in switched-capacitor as it does in all switched-capacitor filters
 
@@ -348,59 +287,15 @@ where $m$ is the duty cycle
 
 
 
+## impulse sampling noise
 
-## Pulsed Noise Signals
+> Chembian Thambidurai, "Noise, Sampling and Zeta Functions" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_sampling-noise-signals-activity-7018929654627520512-QYr0)]
 
-> Chembian Thambidurai, "Power Spectral Density of Pulsed Noise Signals" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_psd-of-pulsed-noise-signal-activity-6992527460886040577-a0im?utm_source=share&utm_medium=member_desktop)]
+A random signal $v_n(t)$ is sampled using an ***ideal impulse sampler***
 
-![image-20241208075822212](noise/image-20241208075822212.png)
+![image-20241201165157743](noise/image-20241201165157743.png)
 
-> Above,  the output of the multiplier be $y(t)$ is passed through a ideal brick wall low pass filter with a bandwidth of $f_0/2$
-
-When a random signal is multiplied by a *pulse function*, the resulting signal becomes a *cyclo-stationary random process*. 
-
-As rule of thumb, the spectrum of such a pulsed noise signal  
-
-- *thermal noise* is multiplied by $D$
-
--  *flicker noise* is multiplied by $D^2$, 
-
-
-where $D$ is the duty cycle of the pulse signal
-
-
-
-![image-20241208111744647](noise/image-20241208111744647.png)
-
-### banlimited input
-
-![image-20241208113904927](noise/image-20241208113904927.png)
-
-
-
-###  wideband white noise input
-
-![image-20241208114442705](noise/image-20241208114442705.png)
-
-### flicker noise input
-
-with $S_x(f)=\frac{K_f}{f}$
-
-![image-20241208121027250](noise/image-20241208121027250.png)
-
-![image-20241208121402724](noise/image-20241208121402724.png)
-
-Assuming $\Delta f \ll f_0$
-
-![image-20241208121645637](noise/image-20241208121645637.png)
-
-
-
----
-
-![image-20241208111506517](noise/image-20241208111506517.png)
-
-
+*TODO* &#128197;
 
 
 
@@ -667,9 +562,9 @@ Therefore, time-average power spectral density and total power are *scaled by $m
 
 ![image-20241116165632847](noise/image-20241116165632847.png)
 
+---
 
-
-#### track signal pnoise (sc)
+***track signal pnoise (sc)***
 
 ![image-20241118220145885](noise/image-20241118220145885.png)
 
@@ -683,7 +578,11 @@ zoom in first harmonic by linear step of pnoise
 
 > decreasing the rising/falling time of clock, the harmonics still retain
 
-#### equivalent circuit for pnoise (eq)
+
+
+---
+
+***equivalent circuit for pnoise (eq)***
 
 1. thermal noise of R is *modulated at first*
 2. *then filtered* by ideal filter
@@ -696,7 +595,7 @@ zoom in first harmonic by linear step of pnoise
 
 ---
 
-#### sc vs eq
+***sc vs eq***
 
 ![image-20241118222730383](noise/image-20241118222730383.png)
 

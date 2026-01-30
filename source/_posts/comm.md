@@ -87,9 +87,60 @@ where $x[n]$ is sampled discrete-time sequence, $x_s(t)$ is sampled impulse trai
 
 
 
+## Pulsed Noise Signals
+
+> Chembian Thambidurai, "Power Spectral Density of Pulsed Noise Signals" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_psd-of-pulsed-noise-signal-activity-6992527460886040577-a0im?utm_source=share&utm_medium=member_desktop)]
+
+![image-20241208075822212](comm/image-20241208075822212.png)
+
+> Above,  the output of the multiplier be $y(t)$ is passed through a ideal brick wall low pass filter with a bandwidth of $f_0/2$
+
+When a random signal is multiplied by a *pulse function*, the resulting signal becomes a *cyclo-stationary random process*. 
+
+As rule of thumb, the spectrum of such a pulsed noise signal  
+
+- ***thermal noise*** is multiplied by $\color{red}D$
+
+- ***flicker noise*** is multiplied by $\color{red}D^2$, 
 
 
-## Rectangular Pulse Sampling
+where $D$ is the duty cycle of the pulse signal
+
+
+
+![image-20241208111744647](comm/image-20241208111744647.png)
+
+### banlimited input (no aliasing)
+
+![image-20241208113904927](comm/image-20241208113904927.png)
+
+
+
+###  wideband white noise input
+
+![image-20241208114442705](comm/image-20241208114442705.png)
+
+### flicker noise input
+
+with $S_x(f)=\frac{K_f}{f}$
+
+![image-20241208121027250](comm/image-20241208121027250.png)
+
+![image-20241208121402724](comm/image-20241208121402724.png)
+
+Assuming $\Delta f \ll f_0$
+
+![image-20241208121645637](comm/image-20241208121645637.png)
+
+
+
+---
+
+![image-20241208111506517](comm/image-20241208111506517.png)
+
+---
+
+***Rectangular Pulse Sampling***
 
 > Balu Santhanam. ece439 Introduction to Digital Signal Processing. Example: Rectangular Pulse Sampling [[http://ece-research.unm.edu/bsanthan/ece439/recsamp.pdf](http://ece-research.unm.edu/bsanthan/ece439/recsamp.pdf)]
 

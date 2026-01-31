@@ -392,29 +392,33 @@ tt_Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
 tt_uniform::Vector = (0:param.blk_size_osr-1) .+ prev_nui/2*param.osr
 ```
 
-`prev_nui` denotes the number of previous symbols to be stitched to the current block's signal to *prevent overflow/underflow when jitter is introduced*
-
 `Δtt*` vectors store the jitter information *at each edge location*
 
 `tt_Vext` vector is the jittered time grid vector
 
 `tt_uniform` is the convience vector to remap the jittered waveform back to our simulation grid
 
-![deltatt.drawio](link-mdl/deltatt.drawio.svg)
-
 ```julia
 drv.Δtt_ext[eachindex(drv.Δtt_prev_nui)] .= drv.Δtt_prev_nui  # 1
 drv.Δtt_ext[lastindex(drv.Δtt_prev_nui)+1:end] .= Δtt  # 2
 ```
 
-![vext.drawio](link-mdl/vext.drawio.svg)
+
+
+![deltatt.drawio](link-mdl/deltatt.drawio.svg)
 
 ```julia
 drv.Vext[eachindex(drv.V_prev_nui)] .= drv.V_prev_nui  # 1
 drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr  # 2
 ```
 
-![image-20260118180411601](link-mdl/image-20260118180411601.png)
+
+
+![vext.drawio](link-mdl/vext.drawio.svg)
+
+
+
+
 
 ```julia
 function drv_jitter_tvec!(tt_Vext, Δtt_ext, osr)
@@ -424,7 +428,56 @@ function drv_jitter_tvec!(tt_Vext, Δtt_ext, osr)
 
     return nothing
 end
+
+drv_jitter_tvec!(drv.tt_Vext, drv.Δtt_ext, param.osr);
+
+itp = linear_interpolation(drv.tt_Vext, drv.Vext); #itp is a function object
+
+#note here tt_uniform is shifted by prev_nui/2 to give wiggle room for sampling "before" and "after" the current block. This is necessary for sinusoidal jitter
+tt_uniform = (0:param.blk_size_osr-1) .+ drv.prev_nui/2*param.osr;
+
+#To interpolate, use the itp object like a function and broadcast to a vector
+Vosr_jittered = itp.(tt_uniform); 
+
+# `interp_linear_extrap = linear_interpolation(xs, A, extrapolation_bc=Line())` create #linear interpolation object **with extrapolation**
 ```
+
+![image-20260118180411601](link-mdl/image-20260118180411601.png)
+
+`itp = linear_interpolation(drv.tt_Vext, drv.Vext)` create linear interpolation object **without extrapolation**
+
+extrapolation shall **not** be used to avoid introducing any error
+
+- `prev_nui` denotes the number of previous symbols to be stitched to the current block's signal to *prevent overflow/underflow when jitter is introduced*
+
+- `tt_uniform` is shifted by `prev_nui/2` to give wiggle room for sampling "before" and "after" the current block. This is necessary for sinusoidal jitter
+
+![itp.drawio](link-mdl/itp.drawio.svg)
+
+
+
+> a specialized interpolation function to optimize for performance, which support interpolation only
+>
+> ```julia
+> function drv_interp_jitter!(vo, tt_jitter, vi, tt_uniform)
+>     last_idx = 1
+>     for n = eachindex(tt_uniform)
+>         t = tt_uniform[n]
+>         for m = last_idx:lastindex(tt_jitter)-1
+>             if (t >= tt_jitter[m]) && (t < tt_jitter[m+1])
+>                 k = (vi[m+1]-vi[m])/(tt_jitter[m+1]-tt_jitter[m])
+>                 vo[n] = vi[m] + k*(t-tt_jitter[m])
+>                 last_idx = m
+>                 break
+>             end
+>         end
+>     end
+> 
+>     return nothing
+> end
+> ```
+
+![tt_uniform.drawio](link-mdl/tt_uniform.drawio.svg)
 
 
 

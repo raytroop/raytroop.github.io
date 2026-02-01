@@ -477,6 +477,14 @@ extrapolation shall **not** be used to avoid introducing any error
 > end
 > ```
 
+```julia
+drv.Δtt_ext[eachindex(drv.Δtt_prev_nui)] .= drv.Δtt_prev_nui
+drv.Δtt_ext[lastindex(drv.Δtt_prev_nui)+1:end] .= Δtt
+
+drv.Vext[eachindex(drv.V_prev_nui)] .= drv.V_prev_nui
+drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr
+```
+
 ![tt_uniform.drawio](link-mdl/tt_uniform.drawio.svg)
 
 

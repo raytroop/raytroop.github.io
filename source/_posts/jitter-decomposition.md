@@ -39,6 +39,12 @@ Jitter separation lets you learn if the components of jitter are random or deter
 
 > Jitter Analysis: The Dual-Dirac Model, RJ/DJ, and Q-scale [[https://people.engr.tamu.edu/spalermo/ecen689/jitter_dual_dirac_agilent.pdf](https://people.engr.tamu.edu/spalermo/ecen689/jitter_dual_dirac_agilent.pdf)]
 
+### Q-scale
+
+*TODO* &#128197;
+
+
+
 ## Spectral method
 
 >  power spectral density (PSD) represents jitter spectrum and peaks in the spectrum can be interpreted as PJ or DDJ, while the average noise floor is the power of RJ

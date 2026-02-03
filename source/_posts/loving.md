@@ -2100,6 +2100,19 @@ https://www.zhihu.com/question/31280604/answer/52029636
 
 
 ```
+你的内心有一个小孩。从前你还是个真正的小孩的时候，生活中的权威（通常是父母）总是拿优秀的他人或理想中完美的你来要求你。
+如果你没有达到这种要求，他们会失望。你害怕他们失望，因为你还是个小孩啊，如果你的父母疏远你了，你该如何生存呢？
+往大了说，这是个“生死存亡”的问题。这种深切的恐惧来源于人类最基本的本能。
+
+
+---
+为什么在和比自己优秀的人交往时，会变得怯懦而自卑？ - 刘虓震的回答 - 知乎
+https://www.zhihu.com/question/20433424/answer/15251763
+```
+
+
+
+```
 穷人家的孩子往往缺乏安全感，惶惶不可终日，担心焦虑占据了他们很多的精力和时间，间接让他们没法专注思考和
 全力为自己打拼。
 缺爱就容易性格缺陷和恋爱脑，导致走很多弯路。
@@ -2576,7 +2589,7 @@ The secret to coping with any failure is to recognize that each decision you've 
 
 **【圆桌派 第三季】EP24 | 失恋: 失恋是一种病**
 
-> [[https://youtu.be/ofMDWwS2X38?si=u7SCPsyFBomgPgrh](https://youtu.be/ofMDWwS2X38?si=u7SCPsyFBomgPgrh)]
+> [[https://youtu.be/ofMDWwS2X38](https://youtu.be/ofMDWwS2X38)]
 
 
 
@@ -2603,7 +2616,7 @@ The secret to coping with any failure is to recognize that each decision you've 
 
 **【圆桌派 第四季】EP27 | 分手:拒绝的理由**
 
-> [[https://youtu.be/ovZQxSBsCMs?si=ELqoeSawVY06pHSs](https://youtu.be/ovZQxSBsCMs?si=ELqoeSawVY06pHSs)]
+> [[https://youtu.be/ovZQxSBsCMs](https://youtu.be/ovZQxSBsCMs)]
 
 ```
 成熟的人，处事不会用人情来胁迫人家。预留人家say no 的权利，也是對别人的尊重。
@@ -2617,7 +2630,7 @@ The secret to coping with any failure is to recognize that each decision you've 
 
 **【圆桌派 第六季】 EP8 挑战：“兴致勃勃地去失败”**
 
-> [[https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9](https://youtu.be/qjkrngJPAVQ?si=pSFjmeOhKCtx7rq9)]
+> [[https://youtu.be/qjkrngJPAVQ](https://youtu.be/qjkrngJPAVQ)]
 
 ```g
 爱是无条件的，怎么爱是有方法的。

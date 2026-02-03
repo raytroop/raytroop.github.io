@@ -559,7 +559,7 @@ ans =
 
 
 
-*impulse response from ifft of interpolated frequency response*
+***impulse response from ifft of interpolated frequency response***
 
 ```matlab
 % https://people.engr.tamu.edu/spalermo/ecen689/xfr_fn_to_imp.m

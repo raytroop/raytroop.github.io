@@ -279,22 +279,36 @@ $$
 
 ## Pulse Width Jitter (PWJ)
 
-*TODO* &#128197;
-
 
 > [[Spectre Tech Tips: Measuring Noise in Digital Circuits](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)]
 
 **Pnoise sampled: Edge Delay mode** measures the noise defined by two edges. Both edges are defined by a threshold voltage and rising or falling edges, which measures the noise of the pulse itself and direct plot calculate the variation of the **pulse width**
 
+*TODO* &#128197;
+
+
+
 
 
 ## Power supply induced jitter (PSIJ)
 
+> Chulsoon Hwang. New Way to Improve Power Supply Induced Jitter Simulation Accuracy for IBIS Model [[https://ibis.org/summits/aug21b/ding.pdf](https://ibis.org/summits/aug21b/ding.pdf)]
+>
+> —, "A Generalized Power Supply Induced Jitter Model Based on Power Supply Rejection Ratio Response," in *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 29, no. 6, pp. 1052-1060, June 2021
+>
+> —, DesignCon 2021. A Generalized Power Supply Induced Jitter Model Based on Power Supply Rejection Ratio Response [[paper](https://par.nsf.gov/servlets/purl/10314293)]
+>
+> X. Mo, J. Wu, N. Wary and T. C. Carusone, "Design Methodologies for Low-Jitter CMOS Clock Distribution," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 1, pp. 94-103, 2021. [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395)]
+
 A **sampled pxf** analysis can be used to simulate the *deterministic jitter* of a circuit due to *power supply ripple*
 
+
+
+![image-20260203230643833](clock-dist/image-20260203230643833.png)
+
+
+
 *TODO* &#128197;
-
-
 
 
 
@@ -322,13 +336,9 @@ J. N. Tripathi, V. K. Sharma and H. Shrimali, "A Review on Power Supply Induced 
 
 H. Kim, J. Fan and C. Hwang, "Modeling of power supply induced jitter (PSIJ) transfer function at inverter chains," 2017 IEEE International Symposium on Electromagnetic Compatibility & Signal/Power Integrity (EMCSI), Washington, DC, USA, 2017 [[https://sci-hub.st/10.1109/ISEMC.2017.8077937](https://sci-hub.st/10.1109/ISEMC.2017.8077937)]
 
-Yin Sun, Chulsoon Hwang EMC Laboratory. Improving Power Supply Induced Jitter Simulation Accuracy for IBIS Model [[https://ibis.org/summits/aug20/sun.pdf](https://ibis.org/summits/aug20/sun.pdf)]
+High Speed Communications Part 8 – On Die CMOS Clock Distribution. [[https://youtu.be/nx5CiHcwrF0](https://youtu.be/nx5CiHcwrF0)]
 
-High Speed Communications Part 8 – On Die CMOS Clock Distribution. [[https://youtu.be/nx5CiHcwrF0?si=-eSO-LaaaFrVuIA1](https://youtu.be/nx5CiHcwrF0?si=-eSO-LaaaFrVuIA1)]
-
-Low-Jitter CMOS Clock Distribution [[https://youtu.be/LMT-T41Y64U?si=y8IpWCtU90zpe4Ob](https://youtu.be/LMT-T41Y64U?si=y8IpWCtU90zpe4Ob)]
-
-Mo, Xunjun & Wu, Jiaqi & Wary, Nijwm & Carusone, Tony. (2021). Design Methodologies for Low-Jitter CMOS Clock Distribution. IEEE Open Journal of the Solid-State Circuits Society. 1. 94-103. 10.1109/OJSSCS.2021.3117930. [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395)]
+Low-Jitter CMOS Clock Distribution [[https://youtu.be/LMT-T41Y64U](https://youtu.be/LMT-T41Y64U)]
 
 ---
 
@@ -339,3 +349,5 @@ Phillip Restle. ISSCC2021 SC4: Processor Clock Generation, Distribution, and Clo
 Sam Palermo. Spring 2025 ECEN720 : High-Speed Links Circuits and Systems [[Lecture 14: Clock Distribution Techniques](https://people.engr.tamu.edu/spalermo/ecen689/lecture14_ee720_clk_distribution.pdf)]
 
 Muhammad Aldacher. Analog Design of Clock Distribution Network using Standing-Waves [[https://github.com/muhammadaldacher/Analog-Design-of-Clock-Distribution-Network-using-Standing-Waves](https://github.com/muhammadaldacher/Analog-Design-of-Clock-Distribution-Network-using-Standing-Waves)]
+
+Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology

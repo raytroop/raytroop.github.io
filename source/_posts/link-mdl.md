@@ -488,6 +488,40 @@ drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr
 ![tt_uniform.drawio](link-mdl/tt_uniform.drawio.svg)
 
 
+---
+
+***channel***
+
+```julia
+noise_Z::Float64 = 50  # termination impedance with thermal noise
+noise_dbm_hz::Float64 = -174
+noise_rms::Float64 = sqrt(0.5/param.dt*10^((noise_dbm_hz-30.0)/10)*noise_Z)
+
+
+ch.Vch .+= noise_rms .* randn(blk_size_osr)
+```
+
+$$
+P_\text{n,dBm/Hz} = 10*\log (k_B T / 1e-3) = -174 - 30
+$$
+
+where $T=293 K$
+
+Then,
+$$
+k_B T = 10^{\frac{-174 - 30}{10}}
+$$
+
+we have
+
+$$
+\sigma_n^2 = 4\cdot k_B T \cdot R \cdot \frac{f_s}{2} =  k_B T \cdot R \cdot 2f_s= \frac{2}{T_s} \cdot 10^{\frac{-174 - 30}{10}} \cdot R
+$$
+
+> `noise_rms::Float64 = sqrt(2/param.dt*10^((noise_dbm_hz-30.0)/10)` rather than ~~`sqrt(0.5/param.dt*10^((noise_dbm_hz-30.0)/10)`~~
+
+---
+
 
 run simulation by **recursion** 
 

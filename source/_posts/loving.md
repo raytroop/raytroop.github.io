@@ -1517,6 +1517,82 @@ https://www.zhihu.com/question/305533266/answer/573216399
 
 
 
+```
+缺爱的家庭往往没有安全感，孩子小心翼翼长大，从小就能读懂别人的情绪，并根据对方的情绪修正自己说的话做的事，以此来避免冲突。
+
+最后他发现被爱不是必需品，爱自己才是。
+
+---
+过客匆匆
+    为了避免结束和伤害，避免了一切开始
+
+---
+艺蕃
+    缺爱的孩子没有安全感，别人稍微对她好一点，她就受不了
+    
+---
+释怀倾听-咨询
+    缺爱的孩子，仅一个缺乏安全感，就足以影响他的一生啊
+
+---
+缺爱的家庭会培养出什么样的孩子？ - 小小龙的回答 - 知乎
+https://www.zhihu.com/question/305533266/answer/1936156372380133001
+```
+
+
+
+```
+在充满爱的家庭里长大的孩子，他们身上的那种强大的自信和安全感是我这一辈子都模仿不来的。
+
+
+---
+缺爱的家庭会培养出什么样的孩子？ - 咪咕咪咕的回答 - 知乎
+https://www.zhihu.com/question/305533266/answer/561663879
+```
+
+
+
+```
+这个声音怎么来的呢？一个缺爱的孩子，在认知局限的基础上，他不会认为这是父母的原因，他会把问题归咎于自己。
+
+一定是我不够好，一定是我不够可爱，所以父母不爱我。我多做一点，我变得再优秀一点父母就会爱我！
+
+这种思维模式不断重复与循环，最终形成低自尊信念，造成社交恋爱学习工作问题。
+
+这种低自尊会限制你，怕动怕西，不能在社交中表达需求，不敢追喜欢的人，不敢冒险开创事业。
+
+低自尊的修复是个科学而长期的过程，希望每一个低自尊的人能不断暗示自我:
+我这个人不需要为别人做什么，不需要得到拥有什么。我本身就足够好，就值得被爱，就值得别人的尊重与喜欢。
+
+
+---
+缺爱的家庭会培养出什么样的孩子？ - 松心疗愈的回答 - 知乎
+https://www.zhihu.com/question/305533266/answer/573216399
+```
+
+
+
+```
+缺乏自信。这个都能想得到。但是还有更深层一点的影响，就是缺乏自我认同。
+自信可以不断建立，但是缺爱导致的自我认同的偏差，则难以修复。
+
+人前很风光，独处是则苦闷不堪，内心的不快排解不了，而因为敏感，不快的事情还很多；
+没有人认同自己；和他人的沟通不顺畅，别人总是无法理解自己，自己却不敢表达真实想法；
+害怕任何错误；害怕任何的嘲笑，害怕任何的批评，惧怕失败；
+以一种过度谦虚来压低自己，压低别人对自己的期望进而获得安全感；
+害怕任何的争执，尤其在亲密关系中，因为害怕失去，潜意识里总是想要息事宁人；
+不会爱别人，也不知道如何接受别人的爱。
+
+
+---
+缺爱的家庭会培养出什么样的孩子？ - 迷途末夏的回答 - 知乎
+https://www.zhihu.com/question/305533266/answer/573302270
+```
+
+
+
+
+
 
 ```
 愤怒是我们的思维方式造成的。 它的核心是尚未满足的需要。 
@@ -2200,6 +2276,29 @@ https://www.zhihu.com/question/263676326/answer/3630995819
 
 
 ```
+这种极端压抑的自卑伴随着很多人的一生，也毁了很多人本可以幸福的一生。
+平凡才是众生常态，可东大很多人就是不能接受自己的平凡
+
+
+---
+你觉得中国孩子最缺的是什么? - 枂枃棿櫗的回答 - 知乎
+https://www.zhihu.com/question/610021061/answer/3613977568
+```
+
+
+
+```
+我知道我最缺少的是什么？
+是一种我一直追求，且求而不得，可能一生都无法得到的松弛感
+
+---
+你觉得中国孩子最缺的是什么? - 此人没留下名字的回答 - 知乎
+https://www.zhihu.com/question/610021061/answer/3281049643
+```
+
+
+
+```
 很多父母在孩子童年时对他最大的要求是”听话“ ，为讨父母的欢心而活着，这让多少人成年后 永远活在别人的眼光里和世俗的标准里。
 
 很多父母在孩子做完任何事后都缺乏正面反馈，这让多少人成年后永远对自己不满意，而又永远相信自己无法做到满意，从而变成了没有执行力的人。
@@ -2287,7 +2386,7 @@ All our life, we are about to get rid of the expectations of others to find the 
 ```
 别人眼中的你，不是真的你。你眼中的自己，也不是真的你。你眼中的别人，才是真正的你
 
-- 黑塞《悉达多》
+— 黑塞《悉达多》
 ```
 
 
@@ -2320,7 +2419,7 @@ https://www.bilibili.com/video/BV1wQ4y1E7SW/?share_source=copy_web&vd_source=5a0
 ```
 病态自卑者难以停止内心挣扎的原因有两点：一是难以放弃对理想化自我的追求；二是无法接受真实的自己。
 
-- 走出抑郁症
+— 走出抑郁症
 ```
 
 
@@ -2344,7 +2443,7 @@ https://www.bilibili.com/video/BV1wQ4y1E7SW/?share_source=copy_web&vd_source=5a0
 当我们一直被爱所伤，被爱所困， 首先要搞清楚我们为何不爱自己， 又是怎么把自己弄丢的。找到真爱的关键在于找回并接纳你自己， 而不是依赖别人， 并幻想被爱拯救。
 
 
-- 王宇：社交恐惧症
+— 王宇：社交恐惧症
 ```
 
 
@@ -2355,7 +2454,7 @@ https://www.bilibili.com/video/BV1wQ4y1E7SW/?share_source=copy_web&vd_source=5a0
 Until you make the unconscious conscious, it will direct your life and you will call it fate. 
 潜意识如果没有进入意识，就会引导你的人生而成为你的命运。
 
-- Carl Jung
+— Carl Jung
 ```
 
 
@@ -2386,7 +2485,7 @@ https://youtu.be/zuZ2zaotrJs?si=Ta-hpVJ56WwZ5CUX
 ```
 The two most important days in your life are the day you are born and the day you find out why.
 
-– Mark Twain
+— Mark Twain
 ```
 
 
@@ -2394,7 +2493,7 @@ The two most important days in your life are the day you are born and the day yo
 ```
 We have to dare to be ourselves, however frightening or strange that self may prove to be. 
 
-- May Sarton
+— May Sarton
 ```
 
 
@@ -2402,7 +2501,7 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 ```
 Fear can hold you prisoner. Hope can set you free
 
-- The Shawshank Redemption
+— The Shawshank Redemption
 ```
 
 
@@ -2410,7 +2509,7 @@ Fear can hold you prisoner. Hope can set you free
 ```
 May Your Choices Reflect Your Hopes, Not Your Fears
 
-- Nelson Mandela
+— Nelson Mandela
 ```
 
 
@@ -2487,7 +2586,7 @@ Self-pity gets pretty close to paranoia and paranoia is one of the very hardest 
 It's a ridiculous way to behave and when you avoid it you get a great advantage over everybody else, almost everybody else, 
 because self-pity is a standard condition and yet you can train yourself out of it.
 
-- Charlie Munger
+— Charlie Munger
 
 
 过度自怜可以让人近乎偏执。 偏执是最难逆转的东西之一。
@@ -2501,7 +2600,7 @@ because self-pity is a standard condition and yet you can train yourself out of 
 Envy is a really stupid sin because it's the only one you could never possibly have any fun at. There's a lot of pain and no fun. 
 Why would you want to get on that trolley?
 
-- Charlie Munger
+— Charlie Munger
 ```
 
 
@@ -2510,7 +2609,7 @@ Why would you want to get on that trolley?
 Every mischance in life was an opportunity to learn something and your duty was not to be submerged in self-pity, 
 but to utilize the terrible blow in a constructive fashion. 
 
-- Charlie Munger
+— Charlie Munger
 ```
 
 
@@ -2547,7 +2646,7 @@ and that the wildest and most tenacious love was an ephemeral truth in the end.
 ```
 Life can only be understood backwards; but it must be lived forwards.
 
-- Soren Kierkegaard
+— Soren Kierkegaard
 ```
 
 
@@ -2557,7 +2656,7 @@ Life can only be understood backwards; but it must be lived forwards.
 
 I have a philosophy that it doesn't do any good to go and make regrets about what you did before but to try to remember how you made the decision at the time.
 
-- Richard P. Feynman, Perfectly Reasonable Deviations from the Beaten Track, p. 421
+— Richard P. Feynman, Perfectly Reasonable Deviations from the Beaten Track, p. 421
 ```
 
 
@@ -2571,7 +2670,7 @@ In chapter 10, on handling mistakes, you will explore one of the fundamental law
 
 The secret to coping with any failure is to recognize that each decision you've made was the very best one available under the circumstances.
 
-- Self-Esteem Fourth edition
+— Self-Esteem Fourth edition
 ```
 
 
@@ -2580,14 +2679,14 @@ The secret to coping with any failure is to recognize that each decision you've 
 一、来做什么？
 二、要做什么样的人？
 
-- 竺可桢
+— 竺可桢
 ```
 
 
 
 
 
-**【圆桌派 第三季】EP24 | 失恋: 失恋是一种病**
+***【圆桌派 第三季】EP24 | 失恋: 失恋是一种病***
 
 > [[https://youtu.be/ofMDWwS2X38](https://youtu.be/ofMDWwS2X38)]
 
@@ -2614,7 +2713,7 @@ The secret to coping with any failure is to recognize that each decision you've 
 
 
 
-**【圆桌派 第四季】EP27 | 分手:拒绝的理由**
+***【圆桌派 第四季】EP27 | 分手:拒绝的理由***
 
 > [[https://youtu.be/ovZQxSBsCMs](https://youtu.be/ovZQxSBsCMs)]
 
@@ -2628,7 +2727,7 @@ The secret to coping with any failure is to recognize that each decision you've 
 
 
 
-**【圆桌派 第六季】 EP8 挑战：“兴致勃勃地去失败”**
+***【圆桌派 第六季】 EP8 挑战：“兴致勃勃地去失败”***
 
 > [[https://youtu.be/qjkrngJPAVQ](https://youtu.be/qjkrngJPAVQ)]
 
@@ -2637,6 +2736,36 @@ The secret to coping with any failure is to recognize that each decision you've 
 
 - richcrop3950
 ```
+
+
+
+***為什麼不該追求愛情 Why shouldn't we "pursue" love? | 國洋 張 | TEDxFJU***
+
+> [[https://youtu.be/O2ucDApdbvs](https://youtu.be/O2ucDApdbvs)]
+
+```
+@yuhan1434
+    「要想得到一個東西最好的方法，就是讓你自己配得上他」
+
+@kevinwu0988
+    其實愛情沒什麼道理，
+    有時如果緣分是你的，不請還自來，
+    如果緣分不是你的，怎麼追也追不到！
+
+@dendichiu9370
+    商业只是个比喻，张先生让我最大的启发是不去妩媚讨好他人，不去担忧未来，而是好好经营当下，让自己成为一个值得被爱的人，一个有自己向往和内涵的人。
+    真正的行动不在于讨好他人或是尝试去感动他人，而是先学着尊重自己内心的意愿，并去传达，去吸引对的人或事到我们这里。
+
+
+@billkaku1283
+    對自己有信心,先愛/尊重自己, 再去愛別人.
+    
+
+```
+
+
+
+
 
 ## 阅读
 

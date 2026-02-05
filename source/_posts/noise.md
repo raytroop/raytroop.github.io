@@ -200,9 +200,9 @@ title('psd (dB)')
 >
 > Mathuranathan. Simulate additive white Gaussian noise (AWGN) channel [[https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/](https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/)]
 >
-> Does PSD (dBm/Hz) of white noise depend on sampling rate?. Does PSD (dBm/Hz) of white noise depend on sampling rate? [https://dsp.stackexchange.com/a/87654/59253]
+> Does PSD (dBm/Hz) of white noise depend on sampling rate?. Does PSD (dBm/Hz) of white noise depend on sampling rate? [[https://dsp.stackexchange.com/a/87654/59253](https://dsp.stackexchange.com/a/87654/59253)]
 >
-> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [https://blog.ioces.com/matt/posts/colouring-noise/]
+> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)]
 >
 
 $$

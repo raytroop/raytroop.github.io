@@ -16,11 +16,108 @@ mathjax: true
 
 > David Murray. Topic 6: Random Processes and Signals [[slides](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/L6.pdf) [notes](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf)]
 >
+
+
+
+![image-20251214183435273](noise/image-20251214183435273.png)
+
+---
+
 > Mathuranathan. White Noise : Simulation and Analysis using Matlab [[https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/](https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/)]
 
 ![Wiener Khinchin Theorem](noise/Wiener-Khinchin-Theorem.png)
 
-![image-20251214183435273](noise/image-20251214183435273.png)
+![image-20260205202253286](noise/image-20260205202253286.png)
+
+```matlab
+clear all; clc; close all;
+L=2^20; %Sample length for the random signal
+mu=0;
+sigma=2;
+X=sigma*randn(L,1)+mu;
+
+figure();
+subplot(5,1,1)
+plot(X);
+title(['White noise : \mu_x=',num2str(mu),' \sigma^2=',num2str(sigma^2)])
+xlabel('Samples')
+ylabel('Sample Values')
+grid on
+
+subplot(5,1,2)
+n=100; %number of Histrogram bins
+[f,x]=hist(X,n);
+bar(x,f/trapz(x,f)); hold on;
+%Theoretical PDF of Gaussian Random Variable
+g=(1/(sqrt(2*pi)*sigma))*exp(-((x-mu).^2)/(2*sigma^2));
+plot(x,g, LineWidth=3);hold off; grid on;
+title('Theoretical PDF and Simulated Histogram of White Gaussian Noise');
+legend('Histogram','Theoretical PDF');
+xlabel('Bins');
+ylabel('PDF f_x(x)');
+
+
+subplot(5,1,3)
+Rxx=1/L*conv(flipud(X),X);
+lags=(-L+1):1:(L-1);
+
+%Alternative method
+%[Rxx,lags] =xcorr(X,'biased'); 
+%The argument 'biased' is used for proper scaling by 1/L
+%Normalize auto-correlation with sample length for proper scaling
+
+plot(lags,Rxx, LineWidth=4); 
+title('Auto-correlation Function of white noise');
+xlabel('Lags')
+ylabel('Correlation')
+grid on; hold on;
+
+ss = X.^2;
+ssm = sum(ss)/L; % 4.0
+stem([0], [ssm], '--o', LineWidth=2)
+
+
+subplot(5,1,4)
+[pxx_norm, f] = pwelch(X, 1024,[],[],1, 'centered');
+plot(f, 10*log10(pxx_norm))
+axis([-0.5 0.5 0 10]); grid on;
+ylabel('PSD (dB/Hz)');
+xlabel('Normalized Frequency');
+title('Power spectral density of white noise with inbuilt pwelch');
+
+subplot(5,1,5)
+%Verifying the constant PSD of White Gaussian Noise Process
+%with arbitrary mean and standard deviation sigma
+
+mu=0; %Mean of each realization of Noise Process
+sigma=2; %Sigma of each realization of Noise Process
+
+L = 1000; %Number of Random Signal realizations to average
+N = 1024; %Sample length for each realization set as power of 2 for FFT
+
+%Generating the Random Process - White Gaussian Noise process
+MU=mu*ones(1,N); %Vector of mean for all realizations
+Cxx=(sigma^2)*diag(ones(N,1)); %Covariance Matrix for the Random Process
+R = chol(Cxx); %Cholesky of Covariance Matrix
+%Generating a Multivariate Gaussian Distribution with given mean vector and
+%Covariance Matrix Cxx
+z = repmat(MU,L,1) + randn(L,N)*R;
+%By default, FFT is done across each column - Normal command fft(z)
+%Finding the FFT of the Multivariate Distribution across each row
+%Command - fft(z,[],2)
+Z = 1/sqrt(N)*fft(z,[],2);  % Scaling by sqrt(N);
+Pzavg = mean(Z.*conj(Z));   % Computing the **mean power** from fft
+
+normFreq= [-N/2:N/2-1]/N;
+Pzavg=fftshift(Pzavg); %Shift zero-frequency component to center of spectrum
+plot(normFreq,10*log10(Pzavg),'r');
+axis([-0.5 0.5 0 10]); grid on;
+ylabel('PSD (dB/Hz)');
+xlabel('Normalized Frequency');
+title('Power spectral density of white noise');
+```
+
+
 
 ---
 
@@ -103,32 +200,31 @@ title('psd (dB)')
 >
 > Mathuranathan. Simulate additive white Gaussian noise (AWGN) channel [[https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/](https://www.gaussianwaves.com/2015/06/how-to-generate-awgn-noise-in-matlaboctave-without-using-in-built-awgn-function/)]
 >
-> Chapter 2 Discrete-time and continuous-time AWGN channels [[https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/7cb3929341f072786598cd05c69a3f5c_chap_2.pdf](https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/7cb3929341f072786598cd05c69a3f5c_chap_2.pdf)]
-
-![image-20251214161342050](noise/image-20251214161342050.png)
-
----
-
 > Does PSD (dBm/Hz) of white noise depend on sampling rate?. Does PSD (dBm/Hz) of white noise depend on sampling rate? [https://dsp.stackexchange.com/a/87654/59253]
 >
 > Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [https://blog.ioces.com/matt/posts/colouring-noise/]
 >
-> How to generate white noise signal from a given PSD? [https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849]
 
 $$
 \text{PSD}_s =  \frac{\sigma^2}{f_s} \space\space \text{for two-sided PSD} \space\space\space \text{or}\space\space\space
 =\frac{\sigma^2}{f_s/2}\space\space \text{for one-sided PSD}
 $$
 
-
-
 ![image-20251208011528326](noise/image-20251208011528326-1769785341250-1.png)
+
+that total power will always be the ***same*** for ***any sampling rate*** used (as long as the histogram of those samples is still $\sigma_x$). Thus the power spectral density will be $\sigma_x^2/f_s$.
+
+![dt_wn.drawio](noise/dt_wn.drawio.svg)
+
+---
+
+> How to generate white noise signal from a given PSD? [https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849]
 
 ![image-20251208012745236](noise/image-20251208012745236-1769785341251-5.png)
 
 
 
-
+![image-20260205181758905](noise/image-20260205181758905.png)
 
 
 ## noise generator

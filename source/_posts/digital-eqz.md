@@ -265,6 +265,11 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 
 ![image-20240824193839108](digital-eqz/image-20240824193839108.png)
 
+---
+
+> Leslie Rusch. [[https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf](https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf)]
+
+
 
 ## Bang-Bang CDR
 

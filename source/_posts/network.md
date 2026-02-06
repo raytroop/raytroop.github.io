@@ -266,7 +266,9 @@ $$
 
 $H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enclose{circle}{1}$ , $\enclose{circle}{2}$ 
 
+---
 
+![image-20260202230631326](network/image-20260202230631326.png)
 
 ### Rational Fit
 

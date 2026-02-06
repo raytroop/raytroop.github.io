@@ -9,6 +9,16 @@ mathjax: true
 
 
 
+## PRQS (pseudo random quaternary sequence)
+
+> Ilya Lyubomirsky, Finisar. PRQS Test Patterns for PAM4 [[https://www.ieee802.org/3/bs/public/15_09/lyubomirsky_3bs_01_0915.pdf](https://www.ieee802.org/3/bs/public/15_09/lyubomirsky_3bs_01_0915.pdf)]
+
+*TODO* &#128197;
+
+
+
+
+
 ## Bandwidth of Digital Waveforms
 
 ### NRZ Bandwidth
@@ -111,13 +121,7 @@ $$
 
 
 
-## Coupling noise & Crosstalk
 
-> High-speed Serial Interface Lect. 9 – Noise [[http://tera.yonsei.ac.kr/class/2017_2_2/lecture/Lect%209%20Noise.pdf](http://tera.yonsei.ac.kr/class/2017_2_2/lecture/Lect%209%20Noise.pdf)]
-
-
-
-*TODO* &#128197;
 
 
 

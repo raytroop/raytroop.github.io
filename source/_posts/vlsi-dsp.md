@@ -68,13 +68,13 @@ plt.grid(which='both');plt.xlabel('Time (s)');plt.show()
 
 
 
-## Fixed point vs Floating point number
+## Fixed Point vs. Floating Point
 
 > Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
 
 *TODO* &#128197;
 
-
+![image-20260206230528138](vlsi-dsp/image-20260206230528138.png)
 
 
 

@@ -887,6 +887,13 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
 
 
+## Inductor shorting check
+
+cover inductor routing with **metal res** to avoid unintended shorting by via with the help of LVS
+
+Its length/resistance backannotated to schematic wrt. LVS value
+
+
 ## reference
 
 Mikael Sahrling, Layout Techniques for Integrated Circuit Designers 1st Edition , Artech House 2022

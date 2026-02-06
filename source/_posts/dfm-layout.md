@@ -882,6 +882,10 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 > Kevin Zheng. Metal Resistors – Your Unexpected Friend In Wire Management [[https://circuit-artists.com/metal-resistors-your-unexpected-friend-in-wire-management/](https://circuit-artists.com/metal-resistors-your-unexpected-friend-in-wire-management/)]
 
 
+## MIMCAP dummy
+
+add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
+
 
 ## reference
 

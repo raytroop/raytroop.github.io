@@ -406,6 +406,31 @@ LAYOUT TEXT "DVSS" x2-coor y2-coor pin-text-layer
 
 
 
+---
+
+![image-20260206193530901](esd-latchup/image-20260206193530901.png)
+
+![image-20260206193843443](esd-latchup/image-20260206193843443.png)
+
+![image-20260206202224492](esd-latchup/image-20260206202224492.png)
+
+![image-20260206203801071](esd-latchup/image-20260206203801071.png)
+
+![image-20260206204149005](esd-latchup/image-20260206204149005.png)
+
+> in TSMC
+>
+> | Topology (Circuit Connection and Device Size) | Check ESD protection scheme                     |
+> | --------------------------------------------- | ----------------------------------------------- |
+> | **LDL (Logic-Driven-Layout DRC)**             | **Check Latch-up rules**                        |
+> | **CD (Current Density)**                      | **Check primary, secondary ESD discharge path** |
+> | **P2P (Point-to-Point Resistance)**           | **Check I/O to power-clamp path**               |
+>
+
+![image-20260206210251640](esd-latchup/image-20260206210251640.png)
+
+
+
 ## Latchup
 
 > Latch-up in CMOS circuits: threat or opportunity (part 1)  [[https://monthly-pulse.com/2021/01/05/latch-up-in-cmos-circuits-threat-or-opportunity-part-1/](https://monthly-pulse.com/2021/01/05/latch-up-in-cmos-circuits-threat-or-opportunity-part-1/)]

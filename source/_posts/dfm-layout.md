@@ -891,7 +891,10 @@ add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
 
 LVS can help checking unintended shorting upper/lower curls by via, covering inductor routing with **metal res**
 
-Its length/resistance backannotated to schematic wrt. LVS value
+> Its length/resistance backannotated to schematic wrt. LVS value
+
+![image-20260206184240621](dfm-layout/image-20260206184240621.png)
+
 
 
 ## reference

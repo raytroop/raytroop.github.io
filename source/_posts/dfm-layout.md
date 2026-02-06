@@ -889,7 +889,7 @@ add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
 
 ## Inductor shorting check
 
-cover inductor routing with **metal res** to avoid unintended shorting by via with the help of LVS
+LVS can help checking unintended shorting upper/lower curls by via, covering inductor routing with **metal res**
 
 Its length/resistance backannotated to schematic wrt. LVS value
 

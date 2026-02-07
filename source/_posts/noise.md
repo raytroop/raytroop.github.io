@@ -337,7 +337,7 @@ The process of generating coloured noise is relatively simple:
 
 Sampling *shaping transfer function* (not scaled by $1/T_s$) make sense in time domain convolution between sampled noise and sampled impulse response of filter
 
-### AR(N) model method
+### AR(N) Model Method
 
 > Generate color noise using Auto-Regressive (AR) model [[https://www.gaussianwaves.com/2019/12/color-noise-generation-using-auto-regressive-ar-model-power-law-noises/](https://www.gaussianwaves.com/2019/12/color-noise-generation-using-auto-regressive-ar-model-power-law-noises/)]
 >

@@ -26,18 +26,6 @@ For instance
 
 
 
-##  displacement current
-
-> A. Sheikholeslami, "Current Without Electrons [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 17, no. 4, pp. 8-10, Fall 2025
-
-![image-20260117100449115](xtalk/image-20260117100449115.png)
-
-
-
- ***displacement current*** & ***conduction current***
-
-
-
 ##   Return Path
 
 ![image-20250705171613361](xtalk/image-20250705171613361-1751987296815-47.png)

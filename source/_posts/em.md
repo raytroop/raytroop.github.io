@@ -11,6 +11,18 @@ mathjax: true
 
 
 
+##  Displacement Current
+
+> A. Sheikholeslami, "Current Without Electrons [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 17, no. 4, pp. 8-10, Fall 2025
+>
+> —, "Current Without Electric Field [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 18, no. 1, pp. 8-12, winter 2026
+
+![image-20260117100449115](em/image-20260117100449115.png)
+
+energy and information are carried by electric and magnetic fields ($E$ and $H$) rather than by electron drift
+
+
+
 ## proximity effect & skin effect 
 
 - *Skin effect* concentrates current near the ***surface*** of a single conductor, while *proximity effect* concentrates current in ***specific regions*** of multiple conductors due to their interaction
@@ -105,3 +117,5 @@ Griffiths, David J. *Introduction to Electrodynamics*. Fifth edition. Cambridge 
 谢处方、饶克谨、杨显清等.《电磁场与电磁波》（第五版），高等教育出. 版社，2019.
 
 邓友金. 电磁学 2022春 [[http://staff.ustc.edu.cn/~yjdeng/EM2022/EM2022.html](http://staff.ustc.edu.cn/~yjdeng/EM2022/EM2022.html)]
+
+Scott Hughes. Spring 2005 8.022: Electricity & Magnetism [[https://web.mit.edu/sahughes/www/8.022/](https://web.mit.edu/sahughes/www/8.022/)]

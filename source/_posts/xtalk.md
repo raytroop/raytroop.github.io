@@ -1,5 +1,5 @@
 ---
-title: Cross Talk in Transmission Lines
+title: Crosstalk in Transmission Lines
 date: 2025-01-24 14:27:52
 tags:
 categories:
